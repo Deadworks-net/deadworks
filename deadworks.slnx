@@ -10,7 +10,6 @@
   <Folder Name="/Plugins/">
     <Project Path="managed\plugins\DeathmatchPlugin\DeathmatchPlugin.csproj" />
     <Project Path="managed\plugins\DumperPlugin\DumperPlugin.csproj" />
-    <Project Path="managed\plugins\ExampleCheckpoint\ExampleCheckpoint.csproj" />
     <Project Path="managed\plugins\ExampleTimerPlugin\ExampleTimerPlugin.csproj" />
     <Project Path="managed\plugins\ItemRotationPlugin\ItemRotationPlugin.csproj" />
     <Project Path="managed\plugins\ItemTestPlugin\ItemTestPlugin.csproj" />
