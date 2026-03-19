@@ -139,10 +139,7 @@
     <PostBuildEvent>
       <Command>if exist "$(TargetDir)managed" rmdir /s /q "$(TargetDir)managed"
 dotnet publish "$(ProjectDir)..\managed\DeadworksManaged.csproj" -c Release -o "$(TargetDir)managed" --no-self-contained
-dotnet publish "$(ProjectDir)..\managed\plugins\DeathmatchPlugin\DeathmatchPlugin.csproj" -c Release -o "$(TargetDir)managed\plugins" --no-self-contained
-dotnet publish "$(ProjectDir)..\managed\plugins\ScourgePlugin\ScourgePlugin.csproj" -c Release -o "$(TargetDir)managed\plugins" --no-self-contained
-dotnet publish "$(ProjectDir)..\managed\plugins\RollTheDicePlugin\RollTheDicePlugin.csproj" -c Release -o "$(TargetDir)managed\plugins" --no-self-contained
-dotnet publish "$(ProjectDir)..\managed\plugins\ExampleTimerPlugin\ExampleTimerPlugin.csproj" -c Release -o "$(TargetDir)managed\plugins" --no-self-contained
+dotnet publish "$(ProjectDir)..\managed\plugins\AdminTools\AdminTools.csproj" -c Release -o "$(TargetDir)managed\plugins" --no-self-contained
 if "$(DeadlockDir)"=="" goto :eof
 xcopy "$(TargetPath)" "$(DeadlockDir)\" /Y /I
 if exist "$(DeadlockDir)\managed" rmdir /s /q "$(DeadlockDir)\managed"
