@@ -73,6 +73,14 @@ public sealed unsafe class CCitadelPlayerController : CBasePlayerController {
 		foreach (var player in Players.GetAll())
 			player.PrintToConsole(message);
 	}
+
+	/// <summary>Executes a client concommand directly on the server for this controller (synchronous, bypasses client).</summary>
+	public void ServerCommand(string command) {
+		Span<byte> utf8 = Utf8.Encode(command, stackalloc byte[Utf8.Size(command)]);
+		fixed (byte* ptr = utf8) {
+			NativeInterop.ServerControllerCommand((void*)Handle, ptr);
+		}
+	}
 }
 
 /// <summary>Base player pawn entity. Provides access to the owning controller.</summary>
@@ -316,11 +324,12 @@ public sealed unsafe class CCitadelPlayerPawn : CBasePlayerPawn {
 		}
 	}
 
-	/// <summary>Adds an ability to this pawn by internal ability name into the given slot. Returns the new ability entity, or null on failure.</summary>
-	public CBaseEntity? AddAbility(string abilityName, ushort slot) {
+	/// <summary>Adds an ability to this pawn by internal ability name into the given slot. Returns the new ability entity, or null on failure.
+	/// <param name="upgradeLevel">Upgrade level: -1 = locked (needs unlock channel), 0+ = unlocked at that upgrade tier.</param></summary>
+	public CBaseEntity? AddAbility(string abilityName, ushort slot, int upgradeLevel = 0) {
 		Span<byte> utf8 = Utf8.Encode(abilityName, stackalloc byte[Utf8.Size(abilityName)]);
 		fixed (byte* ptr = utf8) {
-			void* result = NativeInterop.AddAbility((void*)Handle, ptr, slot);
+			void* result = NativeInterop.AddAbility((void*)Handle, ptr, slot, upgradeLevel);
 			return result != null ? new CBaseEntity((nint)result) : null;
 		}
 	}
@@ -472,4 +481,8 @@ public unsafe class PlayerDataGlobal : NativeEntity {
 
 	private static readonly SchemaAccessor<int> _iObjectiveDamage = new(Class, "m_iObjectiveDamage"u8);
 	public int ObjectiveDamage => _iObjectiveDamage.Get(Handle);
+
+	private static readonly SchemaAccessor<bool> _bUltimateTrained = new(Class, "m_bUltimateTrained"u8);
+	/// <summary>Whether the player's ultimate (sig4) has been trained/unlocked.</summary>
+	public bool UltimateTrained { get => _bUltimateTrained.Get(Handle); set => _bUltimateTrained.Set(Handle, value); }
 }

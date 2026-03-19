@@ -81,7 +81,6 @@ internal struct NativeCallbacks
 	public nint DestroyDamageInfo;
 	public nint TakeDamage;
 	public nint PrecacheHero;
-	public nint PrecacheAllHeroes;
 	public nint RegisterConCommand;
 	public nint UnregisterConCommand;
 	public nint CreateConVar;
@@ -96,4 +95,6 @@ internal struct NativeCallbacks
 	public nint ExecuteAbility;
 	public nint GetAbilityBySlot;
 	public nint ToggleActivate;
+	public nint ServerControllerCommand;
+	public nint SetEngineLogCallback;
 }

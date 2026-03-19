@@ -83,7 +83,7 @@ struct NativeCallbacks {
     int32_t(__cdecl *GetUtlVectorSize)(void *vec);
     void *(__cdecl *GetUtlVectorData)(void *vec);
     uint8_t(__cdecl *RemoveAbility)(void *pawn, const char *abilityName);
-    void *(__cdecl *AddAbility)(void *pawn, const char *abilityName, uint16_t slot);
+    void *(__cdecl *AddAbility)(void *pawn, const char *abilityName, uint16_t slot, int32_t upgradeLevel);
     void *(__cdecl *AddItem)(void *pawn, const char *itemName, int32_t upgradeTier);
     uint8_t(__cdecl *SellItem)(void *pawn, const char *itemName, uint8_t bFullRefund, uint8_t bForceSellPrice);
     void(__cdecl *HurtEntity)(void *victim, void *attacker, void *inflictor, void *ability, float damage, int32_t damageType);
@@ -105,6 +105,8 @@ struct NativeCallbacks {
     int32_t(__cdecl *ExecuteAbility)(void *abilityComponent, void *ability, uint8_t altCast, uint8_t flags);
     void *(__cdecl *GetAbilityBySlot)(void *abilityComponent, int16_t slot);
     void(__cdecl *ToggleActivate)(void *ability, uint8_t activate);
+    void(__cdecl *ServerControllerCommand)(void *controller, const char *command);
+    void(__cdecl *SetEngineLogCallback)(void(__cdecl *callback)(const char *message));
 };
 
 void PopulateNativeCallbacks(NativeCallbacks &callbacks);

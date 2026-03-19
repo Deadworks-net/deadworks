@@ -77,6 +77,29 @@ public static unsafe class Server {
 		return list;
 	}
 
+	/// <summary>Delegate type for engine log callbacks.</summary>
+	public delegate void EngineLogHandler(string message);
+
+	private static EngineLogHandler? _engineLogHandler;
+
+	[UnmanagedCallersOnly(CallConvs = [typeof(System.Runtime.CompilerServices.CallConvCdecl)])]
+	private static void EngineLogTrampoline(byte* message) {
+		if (_engineLogHandler != null && message != null) {
+			string msg = Marshal.PtrToStringUTF8((nint)message) ?? "";
+			if (!string.IsNullOrEmpty(msg))
+				_engineLogHandler(msg);
+		}
+	}
+
+	/// <summary>Registers a callback to receive all engine logging output. Pass null to unregister.</summary>
+	public static void SetEngineLogCallback(EngineLogHandler? handler) {
+		_engineLogHandler = handler;
+		nint fnPtr = handler != null
+			? (nint)(delegate* unmanaged[Cdecl]<byte*, void>)&EngineLogTrampoline
+			: 0;
+		NativeInterop.SetEngineLogCallback(fnPtr);
+	}
+
 	private static string Utf8Str(byte* ptr) =>
 		ptr != null ? Marshal.PtrToStringUTF8((nint)ptr) ?? "" : "";
 }

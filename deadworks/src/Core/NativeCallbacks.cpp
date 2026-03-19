@@ -18,6 +18,7 @@
 #include "../SDK/Core.hpp"
 #include "../SDK/Util.hpp"
 
+#include <tier0/logging.h>
 #include <tier1/convar.h>
 #include <igameevents.h>
 #include <igameeventsystem.h>
@@ -327,6 +328,31 @@ static void __cdecl NativeExecuteServerCommand(const char *command) {
     if (!g_pEngineServer || !command)
         return;
     g_pEngineServer->ServerCommand(command);
+}
+
+// --- Engine log forwarding to managed code ---
+static void(__cdecl *g_ManagedLogCallback)(const char *message) = nullptr;
+
+class ManagedLoggingListener : public ILoggingListener {
+public:
+    void Log(const LoggingContext_t *pContext, const tchar *pMessage) override {
+        if (g_ManagedLogCallback && pMessage)
+            g_ManagedLogCallback(pMessage);
+    }
+};
+
+static ManagedLoggingListener g_ManagedLoggingListener;
+static bool g_ManagedListenerRegistered = false;
+
+static void __cdecl NativeSetEngineLogCallback(void(__cdecl *callback)(const char *message)) {
+    g_ManagedLogCallback = callback;
+    if (callback && !g_ManagedListenerRegistered) {
+        LoggingSystem_RegisterLoggingListener(&g_ManagedLoggingListener);
+        g_ManagedListenerRegistered = true;
+    } else if (!callback && g_ManagedListenerRegistered) {
+        LoggingSystem_UnregisterLoggingListener(&g_ManagedLoggingListener);
+        g_ManagedListenerRegistered = false;
+    }
 }
 
 static void __cdecl NativeSetModel(void *entity, const char *modelName) {
@@ -798,4 +824,7 @@ void deadworks::PopulateNativeCallbacks(NativeCallbacks &callbacks) {
     // CVar / ConCommand index-based access
     callbacks.GetConVarAt = reinterpret_cast<decltype(callbacks.GetConVarAt)>(&NativeGetConVarAt);
     callbacks.GetConCommandAt = reinterpret_cast<decltype(callbacks.GetConCommandAt)>(&NativeGetConCommandAt);
+
+    // Engine log forwarding
+    callbacks.SetEngineLogCallback = &NativeSetEngineLogCallback;
 }

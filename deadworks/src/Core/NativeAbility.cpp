@@ -17,10 +17,13 @@
 
 #include <tier0/utlstring.h>
 #include <tier0/utlstringtoken.h>
+#include <tier1/convar.h>
 #include <tier1/keyvalues3.h>
 #include <tier1/utlvector.h>
 #include <safetyhook.hpp>
 #include <cstring>
+
+#include "Hooks/CCitadelPlayerController.hpp"
 
 #include <tier0/memdbgon.h>
 
@@ -296,7 +299,7 @@ static uint8_t __cdecl NativeRemoveAbility(void *pawn, const char *abilityName) 
     return 1;
 }
 
-static void *__cdecl NativeAddAbility(void *pawn, const char *abilityName, uint16_t slot) {
+static void *__cdecl NativeAddAbility(void *pawn, const char *abilityName, uint16_t slot, int32_t upgradeLevel) {
     if (!pawn || !abilityName)
         return nullptr;
 
@@ -313,7 +316,7 @@ static void *__cdecl NativeAddAbility(void *pawn, const char *abilityName, uint1
         return nullptr;
     }
 
-    return comp->CreateAndRegisterAbility(def, slot);
+    return comp->CreateAndRegisterAbility(def, slot, 0, upgradeLevel);
 }
 
 static void *__cdecl NativeAddItem(void *pawn, const char *itemName, int32_t upgradeTier) {
@@ -420,6 +423,13 @@ static void __cdecl NativeToggleActivate(void *ability, uint8_t activate) {
     static_cast<CCitadelBaseAbility *>(ability)->ToggleActivate(activate);
 }
 
+static void __cdecl NativeServerControllerCommand(void *controller, const char *command) {
+    if (!controller || !command) return;
+    CCommand cmd;
+    cmd.Tokenize(CUtlString(command));
+    hooks::g_CCitadelPlayerController_ClientConCommand.thiscall<char>(controller, &cmd);
+}
+
 // ---------------------------------------------------------------------------
 // Populate
 // ---------------------------------------------------------------------------
@@ -435,6 +445,7 @@ void deadworks::PopulateAbilityNatives(NativeCallbacks &cb) {
     cb.ExecuteAbility = &NativeExecuteAbility;
     cb.GetAbilityBySlot = &NativeGetAbilityBySlot;
     cb.ToggleActivate = &NativeToggleActivate;
+    cb.ServerControllerCommand = &NativeServerControllerCommand;
 
     // Install hooks for modifier ability value overrides (optional)
     auto opt = MemoryDataLoader::Get().GetOffset("CCitadelModifier::AutoRegisterAbilityValues");

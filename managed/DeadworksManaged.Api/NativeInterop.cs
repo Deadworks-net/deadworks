@@ -73,7 +73,7 @@ internal static unsafe class NativeInterop
 	public static delegate* unmanaged[Cdecl]<void*, int> GetUtlVectorSize => (delegate* unmanaged[Cdecl]<void*, int>)_cb.GetUtlVectorSize;
 	public static delegate* unmanaged[Cdecl]<void*, void*> GetUtlVectorData => (delegate* unmanaged[Cdecl]<void*, void*>)_cb.GetUtlVectorData;
 	public static delegate* unmanaged[Cdecl]<void*, byte*, byte> RemoveAbility => (delegate* unmanaged[Cdecl]<void*, byte*, byte>)_cb.RemoveAbility;
-	public static delegate* unmanaged[Cdecl]<void*, byte*, ushort, void*> AddAbility => (delegate* unmanaged[Cdecl]<void*, byte*, ushort, void*>)_cb.AddAbility;
+	public static delegate* unmanaged[Cdecl]<void*, byte*, ushort, int, void*> AddAbility => (delegate* unmanaged[Cdecl]<void*, byte*, ushort, int, void*>)_cb.AddAbility;
 	public static delegate* unmanaged[Cdecl]<void*, byte*, int, void*> AddItem => (delegate* unmanaged[Cdecl]<void*, byte*, int, void*>)_cb.AddItem;
 	public static delegate* unmanaged[Cdecl]<void*, byte*, byte, byte, byte> SellItem => (delegate* unmanaged[Cdecl]<void*, byte*, byte, byte, byte>)_cb.SellItem;
 	public static delegate* unmanaged[Cdecl]<void*, void*, void*, void*, float, int, void> HurtEntity => (delegate* unmanaged[Cdecl]<void*, void*, void*, void*, float, int, void>)_cb.HurtEntity;
@@ -95,4 +95,6 @@ internal static unsafe class NativeInterop
 	public static delegate* unmanaged[Cdecl]<void*, void*, byte, byte, int> ExecuteAbility => (delegate* unmanaged[Cdecl]<void*, void*, byte, byte, int>)_cb.ExecuteAbility;
 	public static delegate* unmanaged[Cdecl]<void*, short, void*> GetAbilityBySlot => (delegate* unmanaged[Cdecl]<void*, short, void*>)_cb.GetAbilityBySlot;
 	public static delegate* unmanaged[Cdecl]<void*, byte, void> ToggleActivate => (delegate* unmanaged[Cdecl]<void*, byte, void>)_cb.ToggleActivate;
+	public static delegate* unmanaged[Cdecl]<void*, byte*, void> ServerControllerCommand => (delegate* unmanaged[Cdecl]<void*, byte*, void>)_cb.ServerControllerCommand;
+	public static delegate* unmanaged[Cdecl]<nint, void> SetEngineLogCallback => (delegate* unmanaged[Cdecl]<nint, void>)_cb.SetEngineLogCallback;
 }
