@@ -330,6 +330,31 @@ static void __cdecl NativeExecuteServerCommand(const char *command) {
     g_pEngineServer->ServerCommand(command);
 }
 
+// --- Engine log forwarding to managed code ---
+static void(__cdecl *g_ManagedLogCallback)(const char *message) = nullptr;
+
+class ManagedLoggingListener : public ILoggingListener {
+public:
+    void Log(const LoggingContext_t *pContext, const tchar *pMessage) override {
+        if (g_ManagedLogCallback && pMessage)
+            g_ManagedLogCallback(pMessage);
+    }
+};
+
+static ManagedLoggingListener g_ManagedLoggingListener;
+static bool g_ManagedListenerRegistered = false;
+
+static void __cdecl NativeSetEngineLogCallback(void(__cdecl *callback)(const char *message)) {
+    g_ManagedLogCallback = callback;
+    if (callback && !g_ManagedListenerRegistered) {
+        LoggingSystem_RegisterLoggingListener(&g_ManagedLoggingListener);
+        g_ManagedListenerRegistered = true;
+    } else if (!callback && g_ManagedListenerRegistered) {
+        LoggingSystem_UnregisterLoggingListener(&g_ManagedLoggingListener);
+        g_ManagedListenerRegistered = false;
+    }
+}
+
 static void __cdecl NativeSetModel(void *entity, const char *modelName) {
     if (!entity || !modelName)
         return;
@@ -828,4 +853,7 @@ void deadworks::PopulateNativeCallbacks(NativeCallbacks &callbacks) {
 
     // Global vars
     callbacks.GetGlobalVars = &NativeGetGlobalVars;
+
+    // Engine log forwarding
+    callbacks.SetEngineLogCallback = &NativeSetEngineLogCallback;
 }

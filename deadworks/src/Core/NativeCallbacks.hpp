@@ -108,6 +108,7 @@ struct NativeCallbacks {
     int32_t(__cdecl *GetMaxHealth)(void *entity);
     int32_t(__cdecl *Heal)(void *entity, float amount);
     void *(__cdecl *GetGlobalVars)();
+    void(__cdecl *SetEngineLogCallback)(void(__cdecl *callback)(const char *message));
 };
 
 void PopulateNativeCallbacks(NativeCallbacks &callbacks);

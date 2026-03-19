@@ -98,4 +98,5 @@ internal static unsafe class NativeInterop
 	public static delegate* unmanaged[Cdecl]<void*, int> GetMaxHealth => (delegate* unmanaged[Cdecl]<void*, int>)_cb.GetMaxHealth;
 	public static delegate* unmanaged[Cdecl]<void*, float, int> Heal => (delegate* unmanaged[Cdecl]<void*, float, int>)_cb.Heal;
 	public static delegate* unmanaged[Cdecl]<void*> GetGlobalVars => (delegate* unmanaged[Cdecl]<void*>)_cb.GetGlobalVars;
+	public static delegate* unmanaged[Cdecl]<nint, void> SetEngineLogCallback => (delegate* unmanaged[Cdecl]<nint, void>)_cb.SetEngineLogCallback;
 }

@@ -98,4 +98,5 @@ internal struct NativeCallbacks
 	public nint GetMaxHealth;
 	public nint Heal;
 	public nint GetGlobalVars;
+	public nint SetEngineLogCallback;
 }
