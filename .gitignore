@@ -1,6 +1,8 @@
 *.vcxproj.user
 .vs/
 .claude/
+.cursor/
+.vscode/
 x64/
 ~AutoRecover.*
 local.props
