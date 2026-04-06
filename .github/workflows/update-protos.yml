@@ -1,0 +1,40 @@
+name: Update Protobufs
+
+on:
+  schedule:
+    - cron: "0 6 * * *" # Daily at 06:00 UTC
+  workflow_dispatch:
+
+permissions:
+  contents: write
+  pull-requests: write
+
+jobs:
+  update-protos:
+    runs-on: ubuntu-latest
+
+    steps:
+      - uses: actions/checkout@v6
+        with:
+          submodules: recursive
+
+      - name: Set up Python
+        uses: actions/setup-python@v6
+        with:
+          python-version: "3.12"
+
+      - name: Run update script
+        run: python scripts/update-protos.py
+
+      - name: Create Pull Request
+        uses: peter-evans/create-pull-request@v8
+        with:
+          commit-message: "chore: update protobuf definitions from upstream"
+          title: "chore: update protobuf definitions from upstream"
+          body: |
+            Automated update of protobuf definitions from
+            [GameTracking-Deadlock](https://github.com/SteamTracking/GameTracking-Deadlock).
+
+            Review the diff to verify the changes are expected.
+          branch: chore/update-protos
+          delete-branch: true

@@ -1,0 +1,38 @@
+name: Update Game Exported
+
+on:
+  schedule:
+    - cron: "0 6 * * *" # Daily at 06:00 UTC
+  workflow_dispatch:
+
+permissions:
+  contents: write
+  pull-requests: write
+
+jobs:
+  update-game-exported:
+    runs-on: ubuntu-latest
+
+    steps:
+      - uses: actions/checkout@v6
+
+      - name: Set up Python
+        uses: actions/setup-python@v6
+        with:
+          python-version: "3.12"
+
+      - name: Run update script
+        run: python scripts/update-game-exported.py
+
+      - name: Create Pull Request
+        uses: peter-evans/create-pull-request@v8
+        with:
+          commit-message: "chore: update game exported files from upstream"
+          title: "chore: update game exported files from upstream"
+          body: |
+            Automated update of game exported files from
+            [GameTracking-Deadlock](https://github.com/SteamTracking/GameTracking-Deadlock).
+
+            Review the diff to verify the changes are expected.
+          branch: chore/update-game-exported
+          delete-branch: true
