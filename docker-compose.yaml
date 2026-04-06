@@ -3,6 +3,9 @@ services:
     build:
       context: .
       dockerfile: docker/Dockerfile
+      # Uncomment to include plugin sources from outside the repo:
+      # additional_contexts:
+      #   extra-plugins: ../my-deadworks-plugins
     ports:
       - "${SERVER_PORT:-27015}:${SERVER_PORT:-27015}/udp"
       - "${SERVER_PORT:-27015}:${SERVER_PORT:-27015}/tcp"

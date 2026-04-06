@@ -67,12 +67,12 @@ RUN cmake -G Ninja \
 
 # Copy project source
 WORKDIR /build
-COPY deadworks deadworks
-COPY protobuf protobuf
 COPY sourcesdk sourcesdk
 COPY vendor vendor
+COPY protobuf protobuf
 COPY config config
 COPY docker/build-native.sh docker/build-native.sh
+COPY deadworks deadworks
 
 RUN chmod +x docker/build-native.sh && \
     ./docker/build-native.sh
@@ -80,20 +80,30 @@ RUN chmod +x docker/build-native.sh && \
 # =============================================================================
 # Stage 2: Build .NET managed layer
 # =============================================================================
+
+# Empty default for extra plugins — override with:
+#   docker build --build-context extra-plugins=../my-plugins .
+FROM busybox AS extra-plugins
+WORKDIR /extra
+
 FROM mcr.microsoft.com/dotnet/sdk:10.0 AS managed-builder
 
 WORKDIR /build
 COPY managed managed
 COPY game_exported game_exported
 
+# Merge extra plugin sources into managed/plugins/.
+# Each subdirectory should contain a .csproj referencing DeadworksManaged.Api.
+RUN --mount=from=extra-plugins,target=/extra \
+    cp -r /extra/. managed/plugins/ 2>/dev/null || true
+
 RUN dotnet publish managed/DeadworksManaged.csproj \
     -c Release -o /artifacts/managed --no-self-contained
 
-# Publish plugins (matching the vcxproj post-build selection)
-RUN dotnet publish managed/plugins/DeathmatchPlugin/DeathmatchPlugin.csproj -c Release -o /artifacts/managed/plugins --no-self-contained && \
-    dotnet publish managed/plugins/ScourgePlugin/ScourgePlugin.csproj -c Release -o /artifacts/managed/plugins --no-self-contained && \
-    dotnet publish managed/plugins/RollTheDicePlugin/RollTheDicePlugin.csproj -c Release -o /artifacts/managed/plugins --no-self-contained && \
-    dotnet publish managed/plugins/ExampleTimerPlugin/ExampleTimerPlugin.csproj -c Release -o /artifacts/managed/plugins --no-self-contained
+# Auto-discover and publish all plugins under managed/plugins/
+RUN mkdir -p /artifacts/managed/plugins && \
+    find managed/plugins -name '*.csproj' -print0 | \
+    xargs -0 -r -I {} dotnet publish {} -c Release -o /artifacts/managed/plugins --no-self-contained
 
 # =============================================================================
 # Stage 3: Runtime image with Proton/Wine + SteamCMD

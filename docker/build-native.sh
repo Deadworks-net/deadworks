@@ -112,10 +112,7 @@ echo "  Zydis.c"
 clang-cl "${C_FLAGS[@]}" /c vendor/Zydis.c "/Fo${OBJ}/Zydis.obj"
 
 echo "=== Compiling Source SDK sources ==="
-# Source SDK doesn't need C++23; compile with standard clang-cl /std:c++17
-# __restrict mismatch between declaration/definition in bitbuf.h is a hard error.
-# Patch: redefine __restrict as empty via forced include (before platform.h sets it).
-printf '#pragma clang attribute push(__attribute__((annotate("no_restrict"))), apply_to=any)\n' > /tmp/norestrict.h || true
+# Source SDK uses C++17; __restrict mismatch in bitbuf.h requires /D__restrict=
 SDK_FLAGS=(
     $TARGET /EHsc /std:c++17 /MT /O2
     /D__restrict=
