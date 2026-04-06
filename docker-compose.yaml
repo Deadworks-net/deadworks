@@ -18,8 +18,48 @@ services:
       - dotnet-cache:/opt/dotnet-cache
     restart: unless-stopped
 
+  hltv-relay:
+    profiles: ["tv"]
+    image: ghcr.io/deadlock-api/hltv-relay:latest
+    ports:
+      - "8080:3000"
+    environment:
+      HLTV_RELAY_PORT: 3000
+      HLTV_RELAY_AUTH_MODE: key
+      HLTV_RELAY_AUTH_KEY: "${TV_BROADCAST_AUTH}"
+      HLTV_RELAY_STORAGE: "redis"
+      HLTV_RELAY_REDIS_URL: "redis://redis:6379"
+    logging:
+      driver: json-file
+      options:
+        max-size: "10m"
+        max-file: "3"
+    healthcheck:
+      test: [ "CMD", "curl", "-f", "http://localhost:3000/health" ]
+      interval: 30s
+      timeout: 5s
+      start_period: 5s
+      retries: 3
+    depends_on:
+      redis:
+        condition: service_healthy
+
+  redis:
+    profiles: ["tv"]
+    image: redis:8-alpine
+    restart: unless-stopped
+    healthcheck:
+      test: [ "CMD", "redis-cli", "ping" ]
+      interval: 30s
+      timeout: 5s
+      start_period: 5s
+      retries: 3
+    volumes:
+      - redis:/data
+
 volumes:
   proton:
   gamedata:
   compatdata:
   dotnet-cache:
+  redis:

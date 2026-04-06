@@ -11,6 +11,10 @@ SERVER_PORT="${SERVER_PORT:-27015}"
 SERVER_MAP="${SERVER_MAP:-dl_midtown}"
 SERVER_PASSWORD="${SERVER_PASSWORD:-}"
 RCON_PASSWORD="${RCON_PASSWORD:-}"
+TV_ENABLE="${TV_ENABLE:-0}"
+TV_DELAY="${TV_DELAY:-0}"
+TV_BROADCAST_URL="${TV_BROADCAST_URL:-http://hltv-relay:3000/publish}"
+TV_BROADCAST_AUTH="${TV_BROADCAST_AUTH:-}"
 PROTON_VERSION="${PROTON_VERSION:-GE-Proton10-33}"
 DOTNET_VERSION="${DOTNET_VERSION:-10.0.0}"
 DEADWORKS_ARGS="${DEADWORKS_ARGS:-}"
@@ -180,8 +184,18 @@ ls -la "${WIN64_DIR}/managed/"
 
 # Build server arguments (matches startup.cpp defaults but allows override)
 SERVER_ARGS="-dedicated -console -dev -insecure -allow_no_lobby_connect"
-SERVER_ARGS="${SERVER_ARGS} +tv_citadel_auto_record 0 +spec_replay_enable 0 +tv_enable 0 +citadel_upload_replay_enabled 0"
 SERVER_ARGS="${SERVER_ARGS} +hostport ${SERVER_PORT} +map ${SERVER_MAP}"
+
+if [ "$TV_ENABLE" = "1" ]; then
+    SERVER_ARGS="${SERVER_ARGS} +tv_enable 1 +tv_broadcast 1 +tv_maxclients 0 +tv_delay ${TV_DELAY}"
+    SERVER_ARGS="${SERVER_ARGS} +tv_broadcast_url ${TV_BROADCAST_URL}"
+    if [ -n "$TV_BROADCAST_AUTH" ]; then
+        SERVER_ARGS="${SERVER_ARGS} +tv_broadcast_origin_auth ${TV_BROADCAST_AUTH}"
+    fi
+else
+    SERVER_ARGS="${SERVER_ARGS} +tv_enable 0"
+fi
+SERVER_ARGS="${SERVER_ARGS} +tv_citadel_auto_record 0 +spec_replay_enable 0 +citadel_upload_replay_enabled 0"
 
 if [ -n "$SERVER_PASSWORD" ]; then
     SERVER_ARGS="${SERVER_ARGS} +sv_password ${SERVER_PASSWORD}"
