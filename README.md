@@ -65,3 +65,84 @@ The path will look like: `C:\Program Files (x86)\Steam\steamapps\common\Deadlock
 4. Run the built `deadworks.exe` from `<Deadlock>/game/bin/win64/` to start the Deadworks server.
 
 5. Open your game and connect via console `connect localhost:27067`
+
+## Hosting with Docker (Linux)
+
+You can run a Deadworks server on Linux using the pre-built Docker image — no Windows machine or build toolchain required.
+
+### Requirements
+
+- Docker and Docker Compose
+- A Steam account that owns [Deadlock](https://store.steampowered.com/app/1422450/Deadlock/) (used to download server files on first start)
+
+### Quick start
+
+1. Create a directory for your server and add a `docker-compose.yaml`:
+   ```yaml
+   services:
+     deadworks:
+       image: ghcr.io/deadworks-net/deadworks:latest
+       ports:
+         - "27015:27015/udp"
+         - "27015:27015/tcp"
+       env_file: .env
+       volumes:
+         - /etc/machine-id:/etc/machine-id:ro
+         - proton:/opt/proton
+         - gamedata:/home/steam/server
+         - compatdata:/home/steam/.steam/steam/steamapps/compatdata
+         - dotnet-cache:/opt/dotnet-cache
+       restart: unless-stopped
+
+   volumes:
+     proton:
+     gamedata:
+     compatdata:
+     dotnet-cache:
+   ```
+
+2. Create a `.env` file with your configuration:
+   ```
+   STEAM_LOGIN=your_username
+   STEAM_PASSWORD=your_password
+
+   SERVER_PORT=27015
+   SERVER_MAP=dl_midtown
+   SERVER_PASSWORD=
+   RCON_PASSWORD=
+   PROTON_VERSION=GE-Proton10-33
+   DOTNET_VERSION=10.0.0
+   DEADWORKS_ARGS=
+   ```
+
+   `STEAM_LOGIN` and `STEAM_PASSWORD` are required. The rest have sensible defaults.
+
+3. Start the server:
+   ```
+   docker compose up -d
+   ```
+
+   On first launch the container will download GE-Proton, the Deadlock game files via SteamCMD, and the .NET Windows runtime. These are cached in named volumes so subsequent starts are fast.
+
+4. View logs:
+   ```
+   docker compose logs -f
+   ```
+
+5. Connect from your game: `connect <your-server-ip>:27015`
+
+### Including custom plugins
+
+To include plugins built from source outside the repo, use `additional_contexts` in your compose file and build locally:
+
+```yaml
+services:
+  deadworks:
+    build:
+      context: .
+      dockerfile: docker/Dockerfile
+      additional_contexts:
+        extra-plugins: ../my-deadworks-plugins
+```
+
+Each subdirectory under the extra-plugins path should contain a `.csproj` that references `DeadworksManaged.Api`.
