@@ -12,21 +12,21 @@ jobs:
     runs-on: windows-latest
 
     steps:
-      - uses: actions/checkout@v4
+      - uses: actions/checkout@v6
         with:
           submodules: recursive
 
       - name: Setup .NET 10
-        uses: actions/setup-dotnet@v4
+        uses: actions/setup-dotnet@v5
         with:
           dotnet-version: "10.0.x"
 
       - name: Add MSBuild to PATH
-        uses: microsoft/setup-msbuild@v2
+        uses: microsoft/setup-msbuild@v3
 
       - name: Cache protobuf
         id: cache-protobuf
-        uses: actions/cache@v4
+        uses: actions/cache@v5
         with:
           path: protobuf-3.21.8
           key: protobuf-3.21.8-msvc-static-mt-v2
@@ -86,7 +86,7 @@ jobs:
           Copy-Item "config/deadworks_mem.jsonc" "$out/game/citadel/cfg/"
 
       - name: Upload build artifacts
-        uses: actions/upload-artifact@v4
+        uses: actions/upload-artifact@v7
         with:
           name: deadworks-x64-release
           path: artifact/
@@ -100,7 +100,7 @@ jobs:
 
     steps:
       - name: Download build artifacts
-        uses: actions/download-artifact@v4
+        uses: actions/download-artifact@v8
         with:
           name: deadworks-x64-release
           path: deadworks-x64-release
