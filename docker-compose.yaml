@@ -1,0 +1,22 @@
+services:
+  deadworks:
+    build:
+      context: .
+      dockerfile: docker/Dockerfile
+    ports:
+      - "${SERVER_PORT:-27015}:${SERVER_PORT:-27015}/udp"
+      - "${SERVER_PORT:-27015}:${SERVER_PORT:-27015}/tcp"
+    env_file: .env
+    volumes:
+      - /etc/machine-id:/etc/machine-id:ro
+      - proton:/opt/proton
+      - gamedata:/home/steam/server
+      - compatdata:/home/steam/.steam/steam/steamapps/compatdata
+      - dotnet-cache:/opt/dotnet-cache
+    restart: unless-stopped
+
+volumes:
+  proton:
+  gamedata:
+  compatdata:
+  dotnet-cache:
