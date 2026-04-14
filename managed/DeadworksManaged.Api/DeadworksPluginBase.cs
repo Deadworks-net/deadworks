@@ -1,3 +1,5 @@
+using Microsoft.Extensions.Logging;
+
 namespace DeadworksManaged.Api;
 
 /// <summary>
@@ -11,6 +13,9 @@ public abstract class DeadworksPluginBase : IDeadworksPlugin {
 
 	/// <summary>Per-plugin timer service.</summary>
 	protected ITimer Timer => TimerResolver.Get(this);
+
+	/// <summary>Per-plugin logger. Uses the plugin's <see cref="Name"/> as the log category.</summary>
+	protected ILogger Logger => LogResolver.Get(this);
 
 	public virtual void OnPrecacheResources() { }
 	public virtual void OnStartupServer() { }

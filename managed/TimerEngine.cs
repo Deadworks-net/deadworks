@@ -1,6 +1,8 @@
 using System.Collections.Concurrent;
 using System.Diagnostics;
+using Microsoft.Extensions.Logging;
 using DeadworksManaged.Api;
+using DeadworksManaged.Telemetry;
 
 namespace DeadworksManaged;
 
@@ -10,6 +12,9 @@ namespace DeadworksManaged;
 /// </summary>
 internal static class TimerEngine
 {
+    private static ILogger? _logger;
+    private static ILogger Logger => _logger ??= DeadworksTelemetry.CreateLogger("TimerEngine");
+
     private static long _currentTick;
     private static long _currentMs;
     private static readonly Stopwatch _stopwatch = new();
@@ -51,7 +56,8 @@ internal static class TimerEngine
             }
             catch (Exception ex)
             {
-                Console.WriteLine($"[TimerEngine] NextTick callback threw: {ex.Message}");
+                Logger.LogError(ex, "NextTick callback threw");
+                DeadworksMetrics.TimerErrors.Add(1);
             }
             nextTickCount++;
         }
@@ -87,6 +93,9 @@ internal static class TimerEngine
             taskCount++;
             ExecuteTask(task);
         }
+
+        if (taskCount > 0)
+            DeadworksMetrics.TimerTasksPerFrame.Record(taskCount);
     }
 
     private static void ExecuteTask(ScheduledTask task)
@@ -103,7 +112,8 @@ internal static class TimerEngine
         }
         catch (Exception ex)
         {
-            Console.WriteLine($"[TimerEngine] Timer callback threw: {ex.Message}");
+            Logger.LogError(ex, "Timer callback threw");
+            DeadworksMetrics.TimerErrors.Add(1);
         }
 
         if (task.Repeating && !task.Cancelled)
@@ -128,7 +138,8 @@ internal static class TimerEngine
         }
         catch (Exception ex)
         {
-            Console.WriteLine($"[TimerEngine] Sequence callback threw: {ex.Message}");
+            Logger.LogError(ex, "Sequence callback threw");
+            DeadworksMetrics.TimerErrors.Add(1);
             FinishTask(task);
             return;
         }

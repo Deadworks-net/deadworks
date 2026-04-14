@@ -1,9 +1,12 @@
 using System.Text.Json;
+using Microsoft.Extensions.Logging;
+using DeadworksManaged.Telemetry;
 
 namespace DeadworksManaged;
 
 internal static class PluginStateManager
 {
+    private static ILogger _logger = null!;
     private static string _filePath = "";
     private static Dictionary<string, bool> _states = new(StringComparer.OrdinalIgnoreCase);
 
@@ -15,6 +18,7 @@ internal static class PluginStateManager
 
     public static void Initialize()
     {
+        _logger = DeadworksTelemetry.CreateLogger("PluginStateManager");
         var managedDir = Path.GetDirectoryName(typeof(PluginStateManager).Assembly.Location);
         var configsDir = Path.GetFullPath(Path.Combine(managedDir!, "..", "configs"));
         _filePath = Path.Combine(configsDir, "plugins.jsonc");
@@ -45,7 +49,7 @@ internal static class PluginStateManager
         }
         catch (Exception ex)
         {
-            Console.WriteLine($"[PluginStateManager] Failed to load {_filePath}: {ex.Message}");
+            _logger.LogError(ex, "Failed to load plugin state from {FilePath}", _filePath);
         }
     }
 
@@ -65,7 +69,7 @@ internal static class PluginStateManager
         }
         catch (Exception ex)
         {
-            Console.WriteLine($"[PluginStateManager] Failed to save {_filePath}: {ex.Message}");
+            _logger.LogError(ex, "Failed to save plugin state to {FilePath}", _filePath);
         }
     }
 }

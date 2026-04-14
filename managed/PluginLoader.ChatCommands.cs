@@ -1,5 +1,7 @@
 using System.Reflection;
+using Microsoft.Extensions.Logging;
 using DeadworksManaged.Api;
+using DeadworksManaged.Telemetry;
 
 namespace DeadworksManaged;
 
@@ -9,6 +11,7 @@ internal static partial class PluginLoader
 
     public static HookResult DispatchChatMessage(ChatMessage message)
     {
+        DeadworksMetrics.ChatMessagesProcessed.Add(1);
         var result = HookResult.Continue;
 
         var text = message.ChatText.Trim();
@@ -37,7 +40,7 @@ internal static partial class PluginLoader
                     }
                     catch (Exception ex)
                     {
-                        Console.WriteLine($"[PluginLoader] Chat command handler for '/{commandName}' threw: {ex.Message}");
+                        _logger.LogError(ex, "Chat command handler for /{CommandName} threw", commandName);
                     }
                 }
 
@@ -71,7 +74,7 @@ internal static partial class PluginLoader
 
                     _chatCommandRegistry.AddForPlugin(normalizedPath, attr.Command, del);
                     PluginRegistrationTracker.Add(normalizedPath, "chat", $"/{attr.Command}");
-                    Console.WriteLine($"[PluginLoader] Registered chat command: {plugin.Name} -> /{attr.Command}");
+                    _logger.LogDebug("Registered chat command: {PluginName} -> /{CommandName}", plugin.Name, attr.Command);
                 }
             }
         }

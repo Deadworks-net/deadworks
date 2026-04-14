@@ -1,6 +1,7 @@
 using System.Runtime.InteropServices;
 using System.Text;
 using DeadworksManaged.Api;
+using DeadworksManaged.Telemetry;
 using Google.Protobuf;
 
 namespace DeadworksManaged;
@@ -12,8 +13,14 @@ public static class EntryPoint
     {
         var callbacks = (NativeCallbacks*)callbacksPtr;
 
-        Console.SetOut(new NativeLogWriter((delegate* unmanaged[Cdecl]<char*, void>)callbacks->Log));
+        var logCallback = (delegate* unmanaged[Cdecl]<char*, void>)callbacks->Log;
+
+        // Keep Console.SetOut for backward compatibility (stray Console.WriteLines)
+        Console.SetOut(new NativeLogWriter(logCallback));
         Console.WriteLine("Hello from .NET 10!");
+
+        // Store native log callback for the telemetry system's NativeEngineLoggerProvider
+        NativeLogCallback.Set(logCallback);
 
         NativeInterop.Bind(callbacks);
         CheatCommandGate.ApplyCheatFlag();

@@ -1,3 +1,5 @@
+using Microsoft.Extensions.Logging;
+
 namespace DeadworksManaged.Api;
 
 /// <summary>
@@ -16,6 +18,11 @@ public interface IDeadworksPlugin {
 	/// Per-plugin timer service. Use to schedule delayed or repeating actions.
 	/// </summary>
 	ITimer Timer => TimerResolver.Get(this);
+
+	/// <summary>
+	/// Per-plugin logger instance. Uses the plugin's <see cref="Name"/> as the log category.
+	/// </summary>
+	ILogger Logger => LogResolver.Get(this);
 
 	/// <summary>
 	/// Called during map load to precache resources (particles, models, etc).

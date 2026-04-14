@@ -3,6 +3,36 @@ using System.Text.Json.Serialization;
 
 namespace DeadworksManaged;
 
+internal class TelemetryConfig
+{
+    [JsonPropertyName("enabled")]
+    public bool Enabled { get; set; } = false;
+
+    [JsonPropertyName("otlp_endpoint")]
+    public string OtlpEndpoint { get; set; } = "http://localhost:4317";
+
+    [JsonPropertyName("otlp_protocol")]
+    public string OtlpProtocol { get; set; } = "grpc";
+
+    [JsonPropertyName("export_interval_ms")]
+    public int ExportIntervalMs { get; set; } = 15000;
+
+    [JsonPropertyName("service_name")]
+    public string ServiceName { get; set; } = "deadworks-server";
+
+    [JsonPropertyName("log_level")]
+    public string LogLevel { get; set; } = "Information";
+
+    [JsonPropertyName("enable_traces")]
+    public bool EnableTraces { get; set; } = true;
+
+    [JsonPropertyName("enable_metrics")]
+    public bool EnableMetrics { get; set; } = true;
+
+    [JsonPropertyName("trace_sampling_ratio")]
+    public double TraceSamplingRatio { get; set; } = 1.0;
+}
+
 internal class ServerBrowserConfig
 {
     [JsonPropertyName("api_url")]
@@ -25,6 +55,9 @@ internal class DeadworksConfigRoot
 {
     [JsonPropertyName("serverbrowser")]
     public ServerBrowserConfig ServerBrowser { get; set; } = new();
+
+    [JsonPropertyName("telemetry")]
+    public TelemetryConfig Telemetry { get; set; } = new();
 }
 
 internal static class DeadworksConfig
@@ -40,6 +73,7 @@ internal static class DeadworksConfig
     private static string _configPath = "";
 
     public static ServerBrowserConfig ServerBrowser => _root.ServerBrowser;
+    public static TelemetryConfig Telemetry => _root.Telemetry;
 
     public static void Initialize()
     {

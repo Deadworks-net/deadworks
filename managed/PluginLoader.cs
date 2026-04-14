@@ -1,7 +1,10 @@
+using System.Diagnostics;
 using System.Reflection;
 using System.Runtime.Loader;
 using Google.Protobuf;
+using Microsoft.Extensions.Logging;
 using DeadworksManaged.Api;
+using DeadworksManaged.Telemetry;
 
 namespace DeadworksManaged;
 
@@ -81,13 +84,23 @@ internal static partial class PluginLoader
         var protobufAsm = typeof(IMessage).Assembly;
         map[protobufAsm.GetName().Name!] = protobufAsm;
 
+        // Microsoft.Extensions.Logging.Abstractions - shared so plugins use the same ILogger type
+        var loggingAsm = typeof(ILogger).Assembly;
+        map[loggingAsm.GetName().Name!] = loggingAsm;
+
         return map;
     }
 
+    private static ILogger _logger = null!;
+
     public static void LoadAll()
     {
-        TimerRegistry.Initialize();
         DeadworksConfig.Initialize();
+        DeadworksTelemetry.Initialize();
+        PluginLoggerRegistry.Initialize();
+        _logger = DeadworksTelemetry.CreateLogger("PluginLoader");
+
+        TimerRegistry.Initialize();
         ConfigManager.Initialize();
         ConCommandManager.Initialize();
         ServerBrowser.Initialize();
@@ -112,19 +125,19 @@ internal static partial class PluginLoader
         _pluginsDir = Path.Combine(baseDir, "plugins");
         if (!Directory.Exists(_pluginsDir))
         {
-            Console.WriteLine($"[PluginLoader] No plugins directory found at: {_pluginsDir}");
+            _logger.LogWarning("No plugins directory found at {PluginsDir}", _pluginsDir);
             return;
         }
 
         var dlls = Directory.GetFiles(_pluginsDir, "*.dll");
-        Console.WriteLine($"[PluginLoader] Scanning {_pluginsDir} ({dlls.Length} DLLs found)");
+        _logger.LogInformation("Scanning {PluginsDir} ({DllCount} DLLs found)", _pluginsDir, dlls.Length);
 
         foreach (var dll in dlls)
         {
             var dllName = Path.GetFileNameWithoutExtension(dll);
             if (!PluginStateManager.IsEnabled(dllName))
             {
-                Console.WriteLine($"[PluginLoader] Skipping disabled plugin: {dllName}");
+                _logger.LogDebug("Skipping disabled plugin {PluginName}", dllName);
                 continue;
             }
 
@@ -134,9 +147,21 @@ internal static partial class PluginLoader
             }
             catch (Exception ex)
             {
-                Console.WriteLine($"[PluginLoader] Failed to load {Path.GetFileName(dll)}: {ex.Message}");
+                _logger.LogError(ex, "Failed to load plugin {DllName}", Path.GetFileName(dll));
+                DeadworksMetrics.PluginLoadErrors.Add(1);
             }
         }
+
+        // Register observable gauges now that plugin loading is complete
+        DeadworksMetrics.RegisterObservableGauges(
+            () => _pluginSnapshot.Length,
+            () =>
+            {
+                int count = 0;
+                for (int i = 0; i < Players.MaxSlot; i++)
+                    if (Players.IsConnected(i)) count++;
+                return count;
+            });
 
         StartWatching(_pluginsDir);
     }
@@ -165,7 +190,7 @@ internal static partial class PluginLoader
         var dllPath = Path.Combine(_pluginsDir, dllName + ".dll");
         if (!File.Exists(dllPath))
         {
-            Console.WriteLine($"[PluginLoader] Cannot enable '{dllName}': DLL not found in plugins directory");
+            _logger.LogWarning("Cannot enable plugin {PluginName}: DLL not found in plugins directory", dllName);
             return;
         }
 
@@ -174,7 +199,7 @@ internal static partial class PluginLoader
         {
             if (_loaded.ContainsKey(normalizedPath))
             {
-                Console.WriteLine($"[PluginLoader] Plugin '{dllName}' is already loaded");
+                _logger.LogInformation("Plugin {PluginName} is already loaded", dllName);
                 return;
             }
         }
@@ -185,7 +210,7 @@ internal static partial class PluginLoader
         }
         catch (Exception ex)
         {
-            Console.WriteLine($"[PluginLoader] Failed to enable '{dllName}': {ex.Message}");
+            _logger.LogError(ex, "Failed to enable plugin {PluginName}", dllName);
         }
     }
 
@@ -201,6 +226,13 @@ internal static partial class PluginLoader
     private static void LoadPlugin(string dllPath, bool isReload)
     {
         var normalizedPath = Path.GetFullPath(dllPath);
+        var pluginFileName = Path.GetFileNameWithoutExtension(dllPath);
+
+        using var activity = DeadworksTracing.Source.StartActivity("plugin.load");
+        activity?.SetTag("plugin.name", pluginFileName);
+        activity?.SetTag("is_reload", isReload);
+
+        var sw = Stopwatch.StartNew();
         var context = new PluginLoadContext(normalizedPath, SharedAssemblies);
 
         // Load DLL from memory so the file isn't locked by the runtime.
@@ -227,14 +259,15 @@ internal static partial class PluginLoader
         {
             if (Activator.CreateInstance(type) is IDeadworksPlugin plugin)
             {
-                // Create and register timer service before OnLoad so it's available immediately
+                // Create and register services before OnLoad so they're available immediately
                 var timerService = new TimerService();
                 TimerRegistry.Register(plugin, timerService);
+                PluginLoggerRegistry.Register(plugin);
 
                 ConfigManager.LoadConfig(plugin);
                 plugin.OnLoad(isReload);
                 plugins.Add(plugin);
-                Console.WriteLine($"[PluginLoader] Loaded plugin: {plugin.Name}{(isReload ? " (reloaded)" : "")}");
+                _logger.LogInformation("Loaded plugin {PluginName} (reload: {IsReload})", plugin.Name, isReload);
             }
         }
 
@@ -249,10 +282,19 @@ internal static partial class PluginLoader
             ConCommandManager.RegisterPlugin(normalizedPath, plugins);
             Commands.CommandRegistration.RegisterPluginCommands(normalizedPath, plugins, _chatCommandRegistry);
         }
+
+        sw.Stop();
+        DeadworksMetrics.PluginLoadDuration.Record(sw.Elapsed.TotalMilliseconds,
+            new KeyValuePair<string, object?>("plugin.name", pluginFileName));
+        DeadworksMetrics.PluginsLoaded.Add(1,
+            new KeyValuePair<string, object?>("plugin.name", pluginFileName));
     }
 
     private static void UnloadPlugin(string normalizedPath)
     {
+        using var activity = DeadworksTracing.Source.StartActivity("plugin.unload");
+        activity?.SetTag("plugin.name", Path.GetFileNameWithoutExtension(normalizedPath));
+
         PluginEntry? entry;
         lock (_lock)
         {
@@ -276,15 +318,17 @@ internal static partial class PluginLoader
                 TimerRegistry.Unregister(plugin);
 
                 plugin.OnUnload();
-                Console.WriteLine($"[PluginLoader] Unloaded plugin: {plugin.Name}");
+                PluginLoggerRegistry.Unregister(plugin);
+                _logger.LogInformation("Unloaded plugin {PluginName}", plugin.Name);
             }
             catch (Exception ex)
             {
-                Console.WriteLine($"[PluginLoader] Error unloading {plugin.Name}: {ex.Message}");
+                _logger.LogError(ex, "Error unloading plugin {PluginName}", plugin.Name);
             }
         }
 
         entry.Context.Unload();
+        DeadworksMetrics.PluginsUnloaded.Add(1);
     }
 
     // --- File watcher ---
@@ -302,7 +346,7 @@ internal static partial class PluginLoader
         _watcher.Changed += OnDllChanged;
         _watcher.Created += OnDllChanged;
 
-        Console.WriteLine($"[PluginLoader] Watching for plugin changes in: {pluginsDir}");
+        _logger.LogInformation("Watching for plugin changes in {PluginsDir}", pluginsDir);
     }
 
     private static void OnDllChanged(object sender, FileSystemEventArgs e)
@@ -329,19 +373,20 @@ internal static partial class PluginLoader
             var dllName = Path.GetFileNameWithoutExtension(dllPath);
             if (!PluginStateManager.IsEnabled(dllName))
             {
-                Console.WriteLine($"[PluginLoader] Skipping reload of disabled plugin: {dllName}");
+                _logger.LogDebug("Skipping reload of disabled plugin {PluginName}", dllName);
                 continue;
             }
 
             try
             {
-                Console.WriteLine($"[PluginLoader] Detected change: {Path.GetFileName(dllPath)}");
+                _logger.LogInformation("Detected change for {DllName}, reloading", Path.GetFileName(dllPath));
                 UnloadPlugin(dllPath);
                 LoadPlugin(dllPath, isReload: true);
             }
             catch (Exception ex)
             {
-                Console.WriteLine($"[PluginLoader] Failed to reload {Path.GetFileName(dllPath)}: {ex.Message}");
+                _logger.LogError(ex, "Failed to reload plugin {DllName}", Path.GetFileName(dllPath));
+                DeadworksMetrics.PluginLoadErrors.Add(1);
             }
         }
     }
@@ -365,7 +410,9 @@ internal static partial class PluginLoader
             }
             catch (Exception ex)
             {
-                Console.WriteLine($"[PluginLoader] {plugin.Name}.{methodName} threw: {ex.Message}");
+                _logger.LogError(ex, "Plugin {PluginName}.{MethodName} threw", plugin.Name, methodName);
+                DeadworksMetrics.EventHandlerErrors.Add(1,
+                    new KeyValuePair<string, object?>("plugin.name", plugin.Name));
             }
         }
     }
@@ -383,7 +430,9 @@ internal static partial class PluginLoader
             }
             catch (Exception ex)
             {
-                Console.WriteLine($"[PluginLoader] {plugin.Name}.{methodName} threw: {ex.Message}");
+                _logger.LogError(ex, "Plugin {PluginName}.{MethodName} threw", plugin.Name, methodName);
+                DeadworksMetrics.EventHandlerErrors.Add(1,
+                    new KeyValuePair<string, object?>("plugin.name", plugin.Name));
             }
         }
         return result;
@@ -396,19 +445,41 @@ internal static partial class PluginLoader
 
     public static void DispatchStartupServer()
     {
+        using var activity = DeadworksTracing.Source.StartActivity("server.startup");
+        activity?.SetTag("map.name", Server.MapName);
+
         TimerRegistry.CancelAllMapChangeTimers();
         ServerBrowser.OnStartupServer();
         DispatchToPlugins(p => p.OnStartupServer(), nameof(IDeadworksPlugin.OnStartupServer));
+        _logger.LogInformation("Server started on map {MapName}", Server.MapName);
     }
+
+    private static readonly Stopwatch _frameStopwatch = new();
+    private static int _frameCounter;
 
     public static void DispatchGameFrame(bool simulating, bool firstTick, bool lastTick)
     {
+        _frameStopwatch.Restart();
         TimerEngine.OnTick();
         DispatchToPlugins(p => p.OnGameFrame(simulating, firstTick, lastTick), nameof(IDeadworksPlugin.OnGameFrame));
+        _frameStopwatch.Stop();
+
+        // Sample every 64th frame to avoid histogram overhead at ~64Hz
+        if (++_frameCounter >= 64)
+        {
+            _frameCounter = 0;
+            DeadworksMetrics.GameFrameDuration.Record(_frameStopwatch.Elapsed.TotalMilliseconds);
+        }
     }
 
     public static bool DispatchClientConnect(ClientConnectEvent args)
     {
+        using var activity = DeadworksTracing.Source.StartActivity("client.connect");
+        activity?.SetTag("player.slot", args.Slot);
+        activity?.SetTag("player.steamid", args.SteamId);
+
+        DeadworksMetrics.PlayerConnections.Add(1);
+
         var snapshot = _pluginSnapshot;
         bool allowed = true;
         foreach (var plugin in snapshot)
@@ -420,9 +491,22 @@ internal static partial class PluginLoader
             }
             catch (Exception ex)
             {
-                Console.WriteLine($"[PluginLoader] {plugin.Name}.OnClientConnect threw: {ex.Message}");
+                _logger.LogError(ex, "Plugin {PluginName}.OnClientConnect threw", plugin.Name);
+                DeadworksMetrics.EventHandlerErrors.Add(1,
+                    new KeyValuePair<string, object?>("plugin.name", plugin.Name));
             }
         }
+
+        if (!allowed)
+        {
+            DeadworksMetrics.PlayerConnectionsRejected.Add(1);
+            _logger.LogInformation("Client connection rejected (slot={Slot}, steamid={SteamId})", args.Slot, args.SteamId);
+        }
+        else
+        {
+            _logger.LogInformation("Client connected (slot={Slot}, steamid={SteamId}, name={Name})", args.Slot, args.SteamId, args.Name);
+        }
+
         return allowed;
     }
 
@@ -433,7 +517,16 @@ internal static partial class PluginLoader
         => DispatchToPlugins(p => p.OnClientFullConnect(args), nameof(IDeadworksPlugin.OnClientFullConnect));
 
     public static void DispatchClientDisconnect(ClientDisconnectedEvent args)
-        => DispatchToPlugins(p => p.OnClientDisconnect(args), nameof(IDeadworksPlugin.OnClientDisconnect));
+    {
+        using var activity = DeadworksTracing.Source.StartActivity("client.disconnect");
+        activity?.SetTag("player.slot", args.Slot);
+        activity?.SetTag("disconnect.reason", args.Reason);
+
+        DeadworksMetrics.PlayerDisconnections.Add(1);
+        _logger.LogInformation("Client disconnected (slot={Slot}, reason={Reason})", args.Slot, args.Reason);
+
+        DispatchToPlugins(p => p.OnClientDisconnect(args), nameof(IDeadworksPlugin.OnClientDisconnect));
+    }
 
     public static void DispatchEntityCreated(EntityCreatedEvent args)
         => DispatchToPlugins(p => p.OnEntityCreated(args), nameof(IDeadworksPlugin.OnEntityCreated));
@@ -521,15 +614,18 @@ internal static partial class PluginLoader
                 try
                 {
                     plugin.OnUnload();
-                    Console.WriteLine($"[PluginLoader] Unloaded plugin: {plugin.Name}");
+                    _logger.LogInformation("Unloaded plugin {PluginName}", plugin.Name);
                 }
                 catch (Exception ex)
                 {
-                    Console.WriteLine($"[PluginLoader] Error unloading {plugin.Name}: {ex.Message}");
+                    _logger.LogError(ex, "Error unloading plugin {PluginName}", plugin.Name);
                 }
             }
 
             entry.Context.Unload();
         }
+
+        PluginLoggerRegistry.Clear();
+        DeadworksTelemetry.Shutdown();
     }
 }

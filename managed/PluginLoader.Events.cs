@@ -1,5 +1,7 @@
 using System.Reflection;
+using Microsoft.Extensions.Logging;
 using DeadworksManaged.Api;
+using DeadworksManaged.Telemetry;
 
 namespace DeadworksManaged;
 
@@ -53,7 +55,7 @@ internal static partial class PluginLoader
                         RegisterEventWithNative(attr.EventName);
 
                     PluginRegistrationTracker.Add(normalizedPath, "event", attr.EventName);
-                    Console.WriteLine($"[PluginLoader] Registered game event handler: {plugin.Name} -> {attr.EventName}");
+                    _logger.LogDebug("Registered game event handler: {PluginName} -> {EventName}", plugin.Name, attr.EventName);
                 }
             }
         }
@@ -95,6 +97,8 @@ internal static partial class PluginLoader
         if (handlers == null)
             return HookResult.Continue;
 
+        DeadworksMetrics.EventsDispatched.Add(1);
+
         var result = HookResult.Continue;
         foreach (var handler in handlers)
         {
@@ -105,7 +109,8 @@ internal static partial class PluginLoader
             }
             catch (Exception ex)
             {
-                Console.WriteLine($"[PluginLoader] Game event handler for '{name}' threw: {ex.Message}");
+                _logger.LogError(ex, "Game event handler for {EventName} threw", name);
+                DeadworksMetrics.EventHandlerErrors.Add(1);
             }
         }
 

@@ -1,6 +1,8 @@
 using System.Reflection;
 using Google.Protobuf;
+using Microsoft.Extensions.Logging;
 using DeadworksManaged.Api;
+using DeadworksManaged.Telemetry;
 
 namespace DeadworksManaged;
 
@@ -95,7 +97,7 @@ internal static partial class PluginLoader
                 int msgId = NetMessageRegistry.GetMessageId(protoType);
                 if (msgId < 0)
                 {
-                    Console.WriteLine($"[PluginLoader] Warning: no message ID found for {protoType.Name} in {plugin.Name}.{method.Name}, skipping");
+                    _logger.LogWarning("No message ID found for {ProtoType} in {PluginName}.{MethodName}, skipping", protoType.Name, plugin.Name, method.Name);
                     continue;
                 }
 
@@ -112,7 +114,7 @@ internal static partial class PluginLoader
                     dict[msgId] = list;
                 }
                 list.Add(del);
-                Console.WriteLine($"[PluginLoader] Registered net message handler: {plugin.Name}.{method.Name} -> {protoType.Name} msgId={msgId} ({direction})");
+                _logger.LogDebug("Registered net message handler: {PluginName}.{MethodName} -> {ProtoType} msgId={MsgId} ({Direction})", plugin.Name, method.Name, protoType.Name, msgId, direction);
             }
         }
 
@@ -177,7 +179,7 @@ internal static partial class PluginLoader
             }
             catch (Exception ex)
             {
-                Console.WriteLine($"[PluginLoader] Net message outgoing handler for msgId={msgId} threw: {ex.Message}");
+                _logger.LogError(ex, "Net message outgoing handler for msgId={MsgId} threw", msgId);
             }
         }
 
@@ -225,7 +227,7 @@ internal static partial class PluginLoader
             }
             catch (Exception ex)
             {
-                Console.WriteLine($"[PluginLoader] Net message incoming handler for msgId={msgId} threw: {ex.Message}");
+                _logger.LogError(ex, "Net message incoming handler for msgId={MsgId} threw", msgId);
             }
         }
 
