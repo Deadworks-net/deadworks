@@ -2,7 +2,10 @@
 #include "Memory/MemoryDataLoader.hpp"
 #include "Memory/Scanner.hpp"
 #include "Logging/ConsoleLogger.hpp"
+#include "Logging/LogOptions.hpp"
 #include "Core/Hooks/CoreHooks.hpp"
+
+#include <vector>
 
 using namespace std::literals;
 
@@ -62,11 +65,45 @@ int main(int argc, char **argv) {
 
     constexpr auto DEFAULT_CMD_LINE = "-dedicated -console -dev -insecure -allow_no_lobby_connect +tv_citadel_auto_record 0 +spec_replay_enable 0 +tv_enable 0 +citadel_upload_replay_enabled 0 +hostport 27015 +map dl_midtown"sv;
 
+    constexpr std::string_view kLogLevelFlag = "-dw_loglevel";
+
+    std::vector<std::string> passedArgs;
+    for (int i = 1; i < argc; i++) {
+        std::string_view arg = argv[i];
+
+        if (arg == kLogLevelFlag) {
+            if (i + 1 >= argc) {
+                log.Warning("{} requires a value (verbose|debug|info|warning|error|critical)", kLogLevelFlag);
+                continue;
+            }
+            if (auto v = deadworks::ParseVerbosity(argv[i + 1])) {
+                deadworks::g_FileLogLevel = *v;
+                log.Info("Log level set to {}", argv[i + 1]);
+            } else {
+                log.Warning("Unknown log level '{}', keeping default", argv[i + 1]);
+            }
+            ++i;
+            continue;
+        }
+        if (arg.starts_with(std::string(kLogLevelFlag) + "=")) {
+            auto value = arg.substr(kLogLevelFlag.size() + 1);
+            if (auto v = deadworks::ParseVerbosity(value)) {
+                deadworks::g_FileLogLevel = *v;
+                log.Info("Log level set to {}", value);
+            } else {
+                log.Warning("Unknown log level '{}', keeping default", value);
+            }
+            continue;
+        }
+
+        passedArgs.emplace_back(arg);
+    }
+
     std::string cmdLine;
-    if (argc > 1) {
-        for (int i = 1; i < argc; i++) {
-            if (i > 1) cmdLine += ' ';
-            cmdLine += argv[i];
+    if (!passedArgs.empty()) {
+        for (size_t i = 0; i < passedArgs.size(); i++) {
+            if (i > 0) cmdLine += ' ';
+            cmdLine += passedArgs[i];
         }
     } else {
         cmdLine = DEFAULT_CMD_LINE;

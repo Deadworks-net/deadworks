@@ -3,7 +3,24 @@
 #include "Deadworks.hpp"
 #include "../Hosting/DotNetHost.hpp"
 
+#include <cstdlib>
+
 using namespace deadworks;
+
+[[noreturn]] static void FatalDotNetInitFailure(const std::filesystem::path &runtimeConfig, const DotNetInitError &err) {
+    g_Log->Critical(
+        "Failed to initialize .NET scripting runtime. "
+        "stage={} rc={} (0x{:08X}) runtimeConfig={}. "
+        "This almost always means the required .NET runtime version is not installed, "
+        "or does not match the TargetFramework in the runtime config. "
+        "Install the matching .NET runtime and try again.",
+        err.StageName(),
+        err.rc,
+        static_cast<unsigned int>(err.rc),
+        runtimeConfig.string());
+
+    std::_Exit(1);
+}
 
 // ConCommand dispatch fn pointer defined in NativeCallbacks.cpp
 using ManagedConCommandDispatchFn = void(CORECLR_DELEGATE_CALLTYPE *)(int playerSlot, const char *command, int argc, const char **argv);
@@ -28,8 +45,8 @@ void deadworks::InitializeManagedCallbacks(DotNetHost &host, ManagedCallbacks &m
     auto assemblyPath = managedDir / "DeadworksManaged.dll";
 
     if (!host.Initialize(runtimeConfig)) {
-        g_Log->Error("Failed to initialize .NET runtime");
-        return;
+        auto err = host.LastError().value_or(DotNetInitError{});
+        FatalDotNetInitFailure(runtimeConfig, err);
     }
 
     g_Log->Info(".NET runtime initialized");
@@ -39,8 +56,7 @@ void deadworks::InitializeManagedCallbacks(DotNetHost &host, ManagedCallbacks &m
         assemblyPath, kManagedTypeName, L"Initialize");
 
     if (!initialize) {
-        g_Log->Error("Failed to get managed EntryPoint.Initialize");
-        return;
+        FatalDotNetInitFailure(runtimeConfig, DotNetInitError{DotNetInitError::Stage::LoadManagedEntryPoint, 0});
     }
 
     NativeCallbacks callbacks{};

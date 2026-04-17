@@ -3,6 +3,8 @@
 #include <iappsystem.h>
 
 #include "../Logging/S2Logger.hpp"
+#include "../Logging/TeeLogger.hpp"
+#include "../Logging/LogOptions.hpp"
 #include "../Lib/Module.hpp"
 #include "../Hosting/DotNetHost.hpp"
 

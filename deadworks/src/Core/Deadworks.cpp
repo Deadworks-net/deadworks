@@ -76,8 +76,9 @@ void Deadworks::InitFromAppSystem(CAppSystemDict *pAppSystem) {
     Module server("../../citadel/bin/win64/server.dll");
     GetInterfaceFactories();
 
-    g_Log = std::make_unique<S2Logger>("deadworks");
-    g_Log->Info("Log Startup");
+    auto logPath = std::filesystem::current_path() / "deadworks.log";
+    g_Log = std::make_unique<TeeLogger>(std::make_unique<S2Logger>("deadworks"), logPath, g_FileLogLevel);
+    g_Log->Info("Log Startup (log level: {})", GetVerbosityName(g_FileLogLevel));
     g_Log->Info("InitFromAppSystem");
 
     hooks::g_ServerCreateInterface = safetyhook::create_inline(InterfaceFactories.server, hooks::Hook_ServerCreateInterface);
