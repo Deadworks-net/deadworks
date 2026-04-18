@@ -22,6 +22,62 @@ using namespace deadworks;
     std::_Exit(1);
 }
 
+namespace {
+
+// CLR surfaces unhandled managed exceptions to native [UnmanagedCallersOnly] callers
+// as SEH with this exception code. ExceptionInformation[0] holds the HResult.
+constexpr DWORD kClrExceptionCode = 0xE0434352;
+
+struct ManagedInvokeFailure {
+    DWORD exceptionCode = 0;
+    ULONG_PTR hresult = 0;
+};
+
+DWORD CaptureManagedException(EXCEPTION_POINTERS *ep, ManagedInvokeFailure *out) {
+    out->exceptionCode = ep->ExceptionRecord->ExceptionCode;
+    if (ep->ExceptionRecord->NumberParameters > 0)
+        out->hresult = ep->ExceptionRecord->ExceptionInformation[0];
+    return EXCEPTION_EXECUTE_HANDLER;
+}
+
+using ManagedInitializeFn = void(CORECLR_DELEGATE_CALLTYPE *)(NativeCallbacks *);
+
+// Isolated from callers with C++ objects because __try/__except forbids
+// destructor unwinding through the guarded region.
+bool InvokeManagedInitialize(ManagedInitializeFn fn, NativeCallbacks *callbacks,
+                             ManagedInvokeFailure &failure) {
+    __try {
+        fn(callbacks);
+        return true;
+    } __except (CaptureManagedException(GetExceptionInformation(), &failure)) {
+        return false;
+    }
+}
+
+} // namespace
+
+[[noreturn]] static void FatalManagedInvokeFailure(const std::filesystem::path &managedDir,
+                                                   const ManagedInvokeFailure &failure) {
+    if (failure.exceptionCode == kClrExceptionCode) {
+        g_Log->Critical(
+            "Managed EntryPoint.Initialize threw an unhandled exception "
+            "(HResult=0x{:08X}). This almost always means DeadworksManaged.dll "
+            "could not load one of its dependencies. Verify every DLL listed in "
+            "DeadworksManaged.deps.json (e.g. Google.Protobuf.dll) is present "
+            "alongside DeadworksManaged.dll in {}.",
+            static_cast<unsigned int>(failure.hresult),
+            managedDir.string());
+    } else {
+        g_Log->Critical(
+            "Managed EntryPoint.Initialize crashed with native exception code "
+            "0x{:08X} (param0=0x{:016X}).",
+            static_cast<unsigned int>(failure.exceptionCode),
+            static_cast<uint64_t>(failure.hresult));
+    }
+
+    std::_Exit(1);
+}
+
 // ConCommand dispatch fn pointer defined in NativeCallbacks.cpp
 using ManagedConCommandDispatchFn = void(CORECLR_DELEGATE_CALLTYPE *)(int playerSlot, const char *command, int argc, const char **argv);
 extern ManagedConCommandDispatchFn g_ManagedConCommandDispatch;
@@ -61,7 +117,12 @@ void deadworks::InitializeManagedCallbacks(DotNetHost &host, ManagedCallbacks &m
 
     NativeCallbacks callbacks{};
     PopulateNativeCallbacks(callbacks);
-    initialize(&callbacks);
+
+    ManagedInvokeFailure failure{};
+    if (!InvokeManagedInitialize(initialize, &callbacks, failure)) {
+        FatalManagedInvokeFailure(managedDir, failure);
+    }
+
     g_Log->Info(".NET managed code invoked successfully");
 
     BindCallback(host, assemblyPath, managed.onStartupServer, L"OnStartupServer");
