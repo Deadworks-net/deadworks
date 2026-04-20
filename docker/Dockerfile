@@ -90,19 +90,20 @@ FROM mcr.microsoft.com/dotnet/sdk:10.0 AS managed-builder
 
 WORKDIR /build
 COPY managed managed
+COPY examples examples
 COPY game_exported game_exported
 
-# Merge extra plugin sources into managed/plugins/.
+# Merge extra plugin sources into examples/plugins/.
 # Each subdirectory should contain a .csproj referencing DeadworksManaged.Api.
 RUN --mount=from=extra-plugins,target=/extra \
-    cp -r /extra/. managed/plugins/ 2>/dev/null || true
+    cp -r /extra/. examples/plugins/ 2>/dev/null || true
 
 RUN dotnet publish managed/DeadworksManaged.csproj \
     -c Release -o /artifacts/managed --no-self-contained
 
-# Auto-discover and publish all plugins under managed/plugins/
+# Auto-discover and publish all plugins under examples/plugins/
 RUN mkdir -p /artifacts/managed/plugins && \
-    find managed/plugins -name '*.csproj' -print0 | \
+    find examples/plugins -name '*.csproj' -print0 | \
     xargs -0 -r -I {} dotnet publish {} -c Release -o /artifacts/managed/plugins --no-self-contained
 
 # =============================================================================

@@ -156,6 +156,9 @@ for f in \
     ${SRC}/Core/Hooks/AbilityThink.cpp \
     ${SRC}/Core/Hooks/AddModifier.cpp \
     ${SRC}/Core/Hooks/BuildGameSessionManifest.cpp \
+    ${SRC}/Core/Hooks/ReplyConnection.cpp \
+    ${SRC}/Core/Hooks/CheckTransmit.cpp \
+    ${SRC}/Core/A2SPatch.cpp \
     ${SRC}/Core/Deadworks.cpp \
     ${SRC}/Core/NativeCallbacks.cpp \
     ${SRC}/Core/NativeAbility.cpp \
