@@ -1,14 +1,14 @@
 namespace DeadworksManaged.Api;
 
 /// <summary>
-/// Context passed to custom event handlers. Carries the event name, the publisher's payload,
-/// and the name of the plugin (or <see cref="HostSenderName"/>) that published the event.
+/// Context passed to event subscribers on <see cref="PluginBus"/>. Carries the event name, the
+/// publisher's payload, and the name of the plugin (or <see cref="HostSenderName"/>) that published.
 /// </summary>
-public sealed class CustomEventContext {
+public sealed class EventContext {
 	/// <summary><see cref="SenderPluginName"/> value used when an event is published from host code, not from a plugin.</summary>
 	public const string HostSenderName = "<host>";
 
-	/// <summary>The event name as given to <see cref="CustomEvents.Publish(string, object?)"/>.</summary>
+	/// <summary>The event name as given to <see cref="PluginBus.Publish(string, object?)"/>.</summary>
 	public string Name { get; }
 
 	/// <summary>The payload supplied by the publisher, or <c>null</c> if none was provided.</summary>
@@ -17,7 +17,7 @@ public sealed class CustomEventContext {
 	/// <summary>Name of the plugin that published the event, or <see cref="HostSenderName"/> when published from host code.</summary>
 	public string SenderPluginName { get; }
 
-	internal CustomEventContext(string name, object? payload, string senderPluginName) {
+	internal EventContext(string name, object? payload, string senderPluginName) {
 		Name = name;
 		Payload = payload;
 		SenderPluginName = senderPluginName;
