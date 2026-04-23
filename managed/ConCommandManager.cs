@@ -19,6 +19,7 @@ internal static class ConCommandManager
         RegisterBuiltInCommand("dw_reloadconfig", "Reload plugin configs. Usage: dw_reloadconfig [PluginName]", true, OnReloadConfig);
         RegisterBuiltInCommand("dw_plugin", "Manage plugins. Usage: dw_plugin <list|enable|disable|commands> [PluginName]", true, OnPluginCommand);
         RegisterBuiltInCommand("dw_help", "List all available commands.", false, OnHelp);
+        RegisterBuiltInCommand("dw_customevents", "List custom event subscriptions and recently-published events.", true, OnCustomEventsCommand);
     }
 
     private static void OnReloadConfig(ConCommandContext ctx)
@@ -102,6 +103,69 @@ internal static class ConCommandManager
             Console.WriteLine("Usage: dw_plugin <list|enable|disable|commands> [PluginName]");
         }
     }
+
+    private static void OnCustomEventsCommand(ConCommandContext ctx)
+    {
+        var subscriptions = PluginLoader.GetCustomEventSubscriptions();
+        var recent = PluginLoader.GetRecentPublishes(TimeSpan.FromSeconds(60));
+
+        var activeNames = new HashSet<string>(subscriptions.Select(s => s.Name), StringComparer.Ordinal);
+
+        Console.WriteLine("[CustomEvents] Active subscriptions:");
+        if (subscriptions.Count == 0)
+        {
+            Console.WriteLine("  (none)");
+        }
+        else
+        {
+            var nameWidth = Math.Max(28, subscriptions.Max(s => s.Name.Length));
+            Console.WriteLine($"  {"Event name".PadRight(nameWidth)}  Subs  Plugin(s)");
+            foreach (var (name, count, plugins) in subscriptions)
+            {
+                var pluginList = plugins.Count == 0 ? "(host)" : string.Join(", ", plugins);
+                Console.WriteLine($"  {name.PadRight(nameWidth)}  {count,4}  {pluginList}");
+            }
+        }
+
+        if (recent.Count > 0)
+        {
+            Console.WriteLine("[CustomEvents] Recently published (last 60s):");
+            var grouped = recent
+                .GroupBy(p => p.Name, StringComparer.Ordinal)
+                .Select(g => (Name: g.Key, Count: g.Count(), LastSubs: g.Last().SubscriberCount))
+                .OrderBy(g => g.Name, StringComparer.Ordinal);
+
+            var nameWidth = Math.Max(28, grouped.Max(g => g.Name.Length));
+            foreach (var (name, count, lastSubs) in grouped)
+            {
+                var hint = "";
+                if (lastSubs == 0 && !activeNames.Contains(name))
+                {
+                    var suggestion = FindCloseSubscription(name, activeNames);
+                    if (suggestion != null)
+                        hint = $"  ← no subscribers — did you mean '{suggestion}'?";
+                    else
+                        hint = "  ← no subscribers";
+                }
+                Console.WriteLine($"  {name.PadRight(nameWidth)}  x{count}  (subs: {lastSubs}){hint}");
+            }
+        }
+    }
+
+    private static string? FindCloseSubscription(string published, HashSet<string> active)
+    {
+        foreach (var candidate in active)
+        {
+            if (string.Equals(candidate, published, StringComparison.OrdinalIgnoreCase))
+                return candidate;
+            if (NormalizeSeparators(candidate) == NormalizeSeparators(published))
+                return candidate;
+        }
+        return null;
+    }
+
+    private static string NormalizeSeparators(string s)
+        => s.Replace('-', '_').Replace('.', '_').Replace(':', '_').ToLowerInvariant();
 
     private static void OnHelp(ConCommandContext ctx)
     {
