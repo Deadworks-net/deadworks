@@ -1,6 +1,7 @@
 use std::fs;
 use std::path::PathBuf;
 use std::sync::Mutex;
+use std::env;
 
 const DEADLOCK_APP_ID: &str = "1422450";
 
@@ -30,6 +31,14 @@ fn find_steam_path() -> Result<PathBuf, String> {
         .map_err(|e| format!("Failed to read Steam InstallPath: {}", e))?;
     Ok(PathBuf::from(install_path))
 }
+#[cfg(target_os = "linux")]
+fn find_steam_path() -> Result<PathBuf, String> {
+    match env::home_dir() {
+        Some(path) => Ok(path.join(".steam").join("steam")),
+        None => Err("Didn't found the home directory".into()),
+    }
+}
+
 
 /// Parse libraryfolders.vdf and return the library path whose `apps` block
 /// lists `app_id`. Returns an error if no library claims that app.
@@ -135,7 +144,6 @@ fn unescape_vdf(s: &str) -> String {
 
 /// Find Deadlock's `game` directory (parent of `citadel/`) in the Steam library
 /// that owns the app. Callers append whatever subpath they need.
-#[cfg(windows)]
 pub(crate) fn find_deadlock_game_dir() -> Result<PathBuf, String> {
     let steam_path = find_steam_path()?;
     let library = find_library_for_app(&steam_path, DEADLOCK_APP_ID)?;
@@ -153,7 +161,7 @@ pub(crate) fn find_deadlock_game_dir() -> Result<PathBuf, String> {
     Ok(game_dir)
 }
 
-#[cfg(not(windows))]
+#[cfg(target_os = "macos")]
 pub(crate) fn find_deadlock_game_dir() -> Result<PathBuf, String> {
     Err("Deadlock detection is only supported on Windows".into())
 }
