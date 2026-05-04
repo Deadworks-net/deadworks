@@ -7,6 +7,9 @@ public sealed class CommandAttribute : Attribute
     public string[] Names { get; }
     public string Description { get; set; } = "";
 
+    /// <summary>Permission required for player callers. Server console callers bypass this check.</summary>
+    public string Permission { get; set; } = "";
+
     /// <summary>Refuses execution from any player caller.</summary>
     public bool ServerOnly { get; set; }
 

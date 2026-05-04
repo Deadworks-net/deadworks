@@ -92,6 +92,8 @@ internal static partial class PluginLoader
         TimerRegistry.Initialize();
         DeadworksConfig.Initialize();
         ConfigManager.Initialize();
+        Commands.PluginCommandManifestManager.Initialize();
+        Permissions.PermissionManager.Initialize();
         ConCommandManager.Initialize();
         ServerBrowser.Initialize();
         PluginStateManager.Initialize();

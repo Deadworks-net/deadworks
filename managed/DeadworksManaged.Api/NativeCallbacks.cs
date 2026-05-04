@@ -118,4 +118,5 @@ internal struct NativeCallbacks
 	public nint ObserverServicesSetTarget;
 	public nint ObserverServicesSetMode;
 	public nint TakeSoundEventGuid;
+	public nint KickPlayer;
 }

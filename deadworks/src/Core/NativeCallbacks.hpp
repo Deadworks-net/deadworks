@@ -128,6 +128,7 @@ struct NativeCallbacks {
     uint8_t(__cdecl *ObserverServicesSetTarget)(void *observerServices, void *target);
     void(__cdecl *ObserverServicesSetMode)(void *observerServices, int32_t mode);
     uint32_t(__cdecl *TakeSoundEventGuid)();
+    uint8_t(__cdecl *KickPlayer)(int32_t slot, const char *reason);
 };
 
 void PopulateNativeCallbacks(NativeCallbacks &callbacks);

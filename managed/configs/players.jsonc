@@ -1,0 +1,21 @@
+{
+  // Player keys can use any common Steam ID format. Deadworks normalizes
+  // each valid key to SteamID64 internally; use one key per player.
+  //
+  // These examples all identify the same player:
+  //
+  // SteamID64:
+  // "76561197960287930": {
+  //   "roles": ["admin"]
+  // },
+  //
+  // Steam2:
+  // "STEAM_0:0:11101": {
+  //   "roles": ["admin"]
+  // },
+  //
+  // Steam3:
+  // "[U:1:22202]": {
+  //   "roles": ["admin"]
+  // }
+}

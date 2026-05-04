@@ -36,6 +36,7 @@
 #include <server_class.h>
 #include <icvar.h>
 #include <tier0/icommandline.h>
+#include <serversideclient.h>
 
 using namespace deadworks;
 
@@ -390,6 +391,22 @@ static void __cdecl NativeExecuteServerCommand(const char *command) {
     if (!g_pEngineServer || !command)
         return;
     g_pEngineServer->ServerCommand(command);
+}
+
+static uint8_t __cdecl NativeKickPlayer(int32_t slot, const char *reason) {
+    if (!g_pNetworkServerService)
+        return 0;
+
+    auto *server = g_pNetworkServerService->GetIGameServer();
+    if (!server)
+        return 0;
+
+    auto *client = server->GetClientBySlot(CPlayerSlot(slot));
+    if (!client)
+        return 0;
+
+    client->Disconnect(NETWORK_DISCONNECT_KICKED, reason && reason[0] ? reason : "Kicked by admin");
+    return 1;
 }
 
 // --- Engine log forwarding to managed code ---
@@ -1032,6 +1049,7 @@ void deadworks::PopulateNativeCallbacks(NativeCallbacks &callbacks) {
 
     // Server command execution
     callbacks.ExecuteServerCommand = &NativeExecuteServerCommand;
+    callbacks.KickPlayer = &NativeKickPlayer;
 
     // SetModel
     callbacks.SetModel = &NativeSetModel;

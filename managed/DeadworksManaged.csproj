@@ -21,6 +21,15 @@
 
   <ItemGroup>
     <ProjectReference Include="DeadworksManaged.Api\DeadworksManaged.Api.csproj" />
+    <ProjectReference Include="plugins\AdminPlugin\AdminPlugin.csproj"
+                      SetTargetFramework="TargetFramework=$(TargetFramework)"
+                      ReferenceOutputAssembly="false"
+                      Private="false" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <PermissionDefaultFiles Include="configs\roles.jsonc;configs\players.jsonc" />
+    <FirstPartyPluginOutputFiles Include="plugins\AdminPlugin\bin\$(Configuration)\$(TargetFramework)\AdminPlugin.dll;plugins\AdminPlugin\bin\$(Configuration)\$(TargetFramework)\AdminPlugin.pdb;plugins\AdminPlugin\bin\$(Configuration)\$(TargetFramework)\AdminPlugin.deps.json;plugins\AdminPlugin\bin\$(Configuration)\$(TargetFramework)\AdminPlugin.runtimeconfig.json" />
   </ItemGroup>
 
   <Target Name="DeployToGame" AfterTargets="Build">
@@ -28,6 +37,20 @@
       <DeployFiles Include="$(OutputPath)DeadworksManaged.dll;$(OutputPath)DeadworksManaged.pdb;$(OutputPath)DeadworksManaged.deps.json;$(OutputPath)DeadworksManaged.runtimeconfig.json;$(OutputPath)DeadworksManaged.Api.dll;$(OutputPath)DeadworksManaged.Api.pdb" />
     </ItemGroup>
     <Copy SourceFiles="@(DeployFiles)" DestinationFolder="$(DeadlockManagedDir)" SkipUnchangedFiles="false" Retries="0" ContinueOnError="WarnAndContinue" />
+    <ItemGroup>
+      <PermissionDefaultFilesToDeploy Include="@(PermissionDefaultFiles)"
+                                      Condition="'$(DeadlockManagedDir)' != '' and !Exists('$(DeadlockManagedDir)\..\%(Identity)')" />
+    </ItemGroup>
+    <Copy SourceFiles="@(PermissionDefaultFilesToDeploy)"
+          DestinationFiles="@(PermissionDefaultFilesToDeploy->'$(DeadlockManagedDir)\..\%(Identity)')"
+          SkipUnchangedFiles="true"
+          Retries="0"
+          ContinueOnError="WarnAndContinue" />
+    <Copy SourceFiles="@(FirstPartyPluginOutputFiles)"
+          DestinationFolder="$(OutputPath)plugins"
+          SkipUnchangedFiles="false"
+          Retries="0"
+          ContinueOnError="WarnAndContinue" />
   </Target>
 
 </Project>
