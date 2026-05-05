@@ -31,11 +31,26 @@ fn find_steam_path() -> Result<PathBuf, String> {
         .map_err(|e| format!("Failed to read Steam InstallPath: {}", e))?;
     Ok(PathBuf::from(install_path))
 }
+
 #[cfg(target_os = "linux")]
 fn find_steam_path() -> Result<PathBuf, String> {
     match env::home_dir() {
-        Some(path) => Ok(path.join(".steam").join("steam")),
-        None => Err("Didn't found the home directory".into()),
+        Some(path) => {
+            let native_path = path.join(".steam").join("steam");
+            let flatpak_path = path
+                .join(".var")
+                .join("app")
+                .join("com.valvesoftware.Steam")
+                .join("data")
+                .join("Steam");
+            if native_path.exists() {
+                return Ok(native_path)
+            } else if flatpak_path.exists() {
+                return Ok(flatpak_path)
+            }
+            Err("Failed to find Steam directory".into())
+        },
+        None => Err("Failed to find the home directory".into()),
     }
 }
 
@@ -144,6 +159,7 @@ fn unescape_vdf(s: &str) -> String {
 
 /// Find Deadlock's `game` directory (parent of `citadel/`) in the Steam library
 /// that owns the app. Callers append whatever subpath they need.
+#[cfg(any(windows, target_os = "linux"))]
 pub(crate) fn find_deadlock_game_dir() -> Result<PathBuf, String> {
     let steam_path = find_steam_path()?;
     let library = find_library_for_app(&steam_path, DEADLOCK_APP_ID)?;
@@ -163,7 +179,7 @@ pub(crate) fn find_deadlock_game_dir() -> Result<PathBuf, String> {
 
 #[cfg(target_os = "macos")]
 pub(crate) fn find_deadlock_game_dir() -> Result<PathBuf, String> {
-    Err("Deadlock detection is only supported on Windows".into())
+    Err("Deadlock detection is only supported on Windows and Linux".into())
 }
 
 #[derive(serde::Serialize)]
