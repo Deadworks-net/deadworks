@@ -118,4 +118,5 @@ internal static unsafe class NativeInterop
 	public static delegate* unmanaged[Cdecl]<void*, void*, byte> ObserverServicesSetTarget => (delegate* unmanaged[Cdecl]<void*, void*, byte>)_cb.ObserverServicesSetTarget;
 	public static delegate* unmanaged[Cdecl]<void*, int, void> ObserverServicesSetMode => (delegate* unmanaged[Cdecl]<void*, int, void>)_cb.ObserverServicesSetMode;
 	public static delegate* unmanaged[Cdecl]<uint> TakeSoundEventGuid => (delegate* unmanaged[Cdecl]<uint>)_cb.TakeSoundEventGuid;
+	public static delegate* unmanaged[Cdecl]<int, byte*, byte> KickPlayer => (delegate* unmanaged[Cdecl]<int, byte*, byte>)_cb.KickPlayer;
 }

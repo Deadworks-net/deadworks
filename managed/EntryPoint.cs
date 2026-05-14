@@ -150,6 +150,7 @@ public static class EntryPoint
                 var message = new ChatMessage
                 {
                     SenderSlot = senderSlot,
+                    SenderSteamId64 = TryGetSteamId64(senderSlot),
                     ChatText = chatMsg.ChatText,
                     AllChat = chatMsg.HasAllChat && chatMsg.AllChat,
                     LaneColor = chatMsg.HasLaneColor ? (LaneColor)(int)chatMsg.LaneColor : LaneColor.Invalid
@@ -161,6 +162,17 @@ public static class EntryPoint
         }
 
         return (int)result;
+    }
+
+    private static unsafe ulong? TryGetSteamId64(int slot)
+    {
+        if (NativeInterop.GetPlayerController == null)
+            return null;
+
+        var ptr = NativeInterop.GetPlayerController(slot);
+        return ptr != null
+            ? new CCitadelPlayerController((nint)ptr).PlayerSteamId
+            : null;
     }
 
     [UnmanagedCallersOnly]

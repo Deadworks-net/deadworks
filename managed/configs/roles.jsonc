@@ -1,0 +1,13 @@
+{
+  "admin": {
+    "permissions": ["*"]
+  },
+  "moderator": {
+    "permissions": [
+      "admin.changemap",
+      "admin.kick",
+      "admin.generic",
+      "admin.chat"
+    ]
+  }
+}

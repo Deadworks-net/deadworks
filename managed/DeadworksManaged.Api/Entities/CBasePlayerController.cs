@@ -17,6 +17,9 @@ public unsafe class CBasePlayerController : CBaseEntity {
 	public uint PlaySound(string name, float volume = 1f, float pitch = 1f)
 		=> Sounds.Sounds.Play(name, Recipients, volume, pitch);
 
+	/// <summary>Kicks this player from the server with an optional reason.</summary>
+	public bool Kick(string reason = "Kicked by admin") => Server.KickPlayer(Slot, reason);
+
 	private static readonly SchemaAccessor<byte> _playerName = new("CBasePlayerController"u8, "m_iszPlayerName"u8);
 
 	/// <summary>The player's display name (char[128] inline buffer).</summary>

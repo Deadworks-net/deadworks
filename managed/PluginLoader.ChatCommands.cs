@@ -46,8 +46,45 @@ internal static partial class PluginLoader
             }
         }
 
+        if (TryGetSenderSteamId64(message, out var steamId64) && ChatMutes.TryGetMute(steamId64, out var mute))
+        {
+            var controller = message.Controller;
+            if (controller != null)
+                Chat.PrintToChat(controller, BuildChatMuteMessage(mute));
+
+            return HookResult.Stop;
+        }
+
         // Fall through to plugin OnChatMessage
         return DispatchToPluginsWithResult(p => p.OnChatMessage(message), nameof(IDeadworksPlugin.OnChatMessage));
+    }
+
+    private static bool TryGetSenderSteamId64(ChatMessage message, out ulong steamId64)
+    {
+        if (message.SenderSteamId64 is { } fromMessage)
+        {
+            steamId64 = fromMessage;
+            return true;
+        }
+
+        var controller = message.Controller;
+        if (controller != null)
+        {
+            steamId64 = controller.PlayerSteamId;
+            return true;
+        }
+
+        steamId64 = 0;
+        return false;
+    }
+
+    private static string BuildChatMuteMessage(ChatMuteInfo mute)
+    {
+        var duration = mute.ExpiresAtUtc == null
+            ? "permanently"
+            : $"until {mute.ExpiresAtUtc:yyyy-MM-dd HH:mm} UTC";
+
+        return $"You are chat muted {duration}: {mute.Reason}";
     }
 
     // --- Chat command registration ---

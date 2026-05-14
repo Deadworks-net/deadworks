@@ -1,11 +1,21 @@
 using System.Reflection;
 using System.Runtime.ExceptionServices;
 using DeadworksManaged.Api;
+using DeadworksManaged.Permissions;
 
 namespace DeadworksManaged.Commands;
 
 internal static class CommandRegistration
 {
+    private sealed class SourceCommandRegistration
+    {
+        public required IDeadworksPlugin Plugin { get; init; }
+        public required MethodInfo Method { get; init; }
+        public required CommandAttribute Attribute { get; init; }
+        public required CommandBinder.Plan Plan { get; init; }
+        public required PluginCommandManifestSource ManifestSource { get; init; }
+    }
+
     public static void RegisterPluginCommands(
         string normalizedPath,
         List<IDeadworksPlugin> plugins,
@@ -13,6 +23,7 @@ internal static class CommandRegistration
     {
         foreach (var plugin in plugins)
         {
+            var sourceCommands = new List<SourceCommandRegistration>();
             var methods = plugin.GetType().GetMethods(
                 BindingFlags.Instance | BindingFlags.Public | BindingFlags.NonPublic);
 
@@ -24,14 +35,15 @@ internal static class CommandRegistration
                     if (attr.ChatOnly && attr.ConsoleOnly)
                     {
                         Console.WriteLine(
-                            $"[CommandRegistration] {plugin.Name}.{method.Name}: ChatOnly and ConsoleOnly both set — skipping");
+                            $"[CommandRegistration] {plugin.Name}.{method.Name}: ChatOnly and ConsoleOnly both set - skipping");
                         continue;
                     }
 
+                    var sourceName = attr.Names[0];
                     CommandBinder.Plan plan;
                     try
                     {
-                        plan = CommandBinder.Build(method, attr.Names[0]);
+                        plan = CommandBinder.Build(method, sourceName);
                     }
                     catch (Exception ex)
                     {
@@ -39,14 +51,51 @@ internal static class CommandRegistration
                         continue;
                     }
 
-                    foreach (var name in new HashSet<string>(attr.Names, StringComparer.OrdinalIgnoreCase))
-                    {
-                        if (!attr.ConsoleOnly)
-                            RegisterChat(normalizedPath, plugin, method, plan, name, attr, chatRegistry);
+                    var aliases = attr.Names
+                        .Skip(1)
+                        .Where(a => !string.IsNullOrWhiteSpace(a))
+                        .Distinct(StringComparer.OrdinalIgnoreCase)
+                        .ToArray();
 
-                        if (!attr.ChatOnly)
-                            RegisterConsole(normalizedPath, plugin, method, plan, name, attr);
-                    }
+                    sourceCommands.Add(new SourceCommandRegistration
+                    {
+                        Plugin = plugin,
+                        Method = method,
+                        Attribute = attr,
+                        Plan = plan,
+                        ManifestSource = new PluginCommandManifestSource
+                        {
+                            Id = PluginCommandManifestManager.GetCommandId(plugin.Name, sourceName),
+                            Name = sourceName,
+                            Aliases = aliases,
+                            Description = attr.Description,
+                            Permission = attr.Permission
+                        }
+                    });
+                }
+            }
+
+            var effectiveCommands = PluginCommandManifestManager.LoadOrCreate(
+                plugin.GetType().Name,
+                plugin.Name,
+                sourceCommands.Select(c => c.ManifestSource).ToArray());
+
+            foreach (var source in sourceCommands)
+            {
+                if (!effectiveCommands.TryGetValue(source.ManifestSource.Id, out var command))
+                    continue;
+
+                var commandNames = new[] { command.Name ?? source.ManifestSource.Name }
+                    .Concat(command.Aliases ?? [])
+                    .Distinct(StringComparer.OrdinalIgnoreCase);
+
+                foreach (var name in commandNames)
+                {
+                    if (!source.Attribute.ConsoleOnly)
+                        RegisterChat(normalizedPath, source, command, name, chatRegistry);
+
+                    if (!source.Attribute.ChatOnly)
+                        RegisterConsole(normalizedPath, source, command, name);
                 }
             }
         }
@@ -54,19 +103,18 @@ internal static class CommandRegistration
 
     private static void RegisterChat(
         string normalizedPath,
-        IDeadworksPlugin plugin,
-        MethodInfo method,
-        CommandBinder.Plan plan,
+        SourceCommandRegistration source,
+        PluginCommandManifestEntry command,
         string name,
-        CommandAttribute attr,
         HandlerRegistry<string, Func<ChatCommandContext, HookResult>> chatRegistry)
     {
-        var namedPlan = name == plan.Name ? plan : new CommandBinder.Plan
+        var attr = source.Attribute;
+        var namedPlan = name == source.Plan.Name ? source.Plan : new CommandBinder.Plan
         {
             Name = name,
-            Slots = plan.Slots,
-            HasCaller = plan.HasCaller,
-            CallerNullable = plan.CallerNullable
+            Slots = source.Plan.Slots,
+            HasCaller = source.Plan.HasCaller,
+            CallerNullable = source.Plan.CallerNullable
         };
 
         Func<ChatCommandContext, HookResult> handler = ctx =>
@@ -80,6 +128,12 @@ internal static class CommandRegistration
 
             void reply(string msg) => ReplyViaChat(ctx.Controller, msg);
 
+            if (!CanRunPlayerCommand(ctx.Controller, command.Permission ?? ""))
+            {
+                reply("You do not have permission to use this command.");
+                return HookResult.Handled;
+            }
+
             var argString = ctx.Args.Length > 0 ? string.Join(" ", ctx.Args) : "";
             var tokens = CommandTokenizer.Tokenize(argString);
 
@@ -92,30 +146,29 @@ internal static class CommandRegistration
                 return resultOnSuccess;
             }
 
-            Invoke(plugin, method, boundArgs, reply);
+            Invoke(source.Plugin, source.Method, boundArgs, reply);
             return resultOnSuccess;
         };
 
         chatRegistry.AddForPlugin(normalizedPath, name, handler);
-        PluginRegistrationTracker.Add(normalizedPath, "chat", $"/{name}", attr.Description, attr.Hidden);
-        Console.WriteLine($"[CommandRegistration] Registered chat command: {plugin.Name} -> /{name}");
+        PluginRegistrationTracker.Add(normalizedPath, "chat", $"/{name}", command.Description ?? "", attr.Hidden);
+        Console.WriteLine($"[CommandRegistration] Registered chat command: {source.Plugin.Name} -> /{name}");
     }
 
     private static void RegisterConsole(
         string normalizedPath,
-        IDeadworksPlugin plugin,
-        MethodInfo method,
-        CommandBinder.Plan plan,
-        string name,
-        CommandAttribute attr)
+        SourceCommandRegistration source,
+        PluginCommandManifestEntry command,
+        string name)
     {
+        var attr = source.Attribute;
         var conName = "dw_" + name;
-        var namedPlan = conName == plan.Name ? plan : new CommandBinder.Plan
+        var namedPlan = conName == source.Plan.Name ? source.Plan : new CommandBinder.Plan
         {
             Name = conName,
-            Slots = plan.Slots,
-            HasCaller = plan.HasCaller,
-            CallerNullable = plan.CallerNullable
+            Slots = source.Plan.Slots,
+            HasCaller = source.Plan.HasCaller,
+            CallerNullable = source.Plan.CallerNullable
         };
 
         Action<ConCommandContext> handler = ctx =>
@@ -124,6 +177,12 @@ internal static class CommandRegistration
                 return;
 
             void reply(string msg) => ReplyViaConsole(ctx.Controller, msg);
+
+            if (!ctx.IsServerCommand && !CanRunPlayerCommand(ctx.Controller, command.Permission ?? ""))
+            {
+                reply("You do not have permission to use this command.");
+                return;
+            }
 
             var argString = ctx.Args.Length > 1
                 ? string.Join(" ", ctx.Args, 1, ctx.Args.Length - 1)
@@ -139,11 +198,22 @@ internal static class CommandRegistration
                 return;
             }
 
-            Invoke(plugin, method, boundArgs, reply);
+            Invoke(source.Plugin, source.Method, boundArgs, reply);
         };
 
-        ConCommandManager.RegisterExternal(normalizedPath, conName, attr.Description, serverOnly: false, handler, attr.Hidden);
-        Console.WriteLine($"[CommandRegistration] Registered console command: {plugin.Name} -> {conName}{(attr.ServerOnly ? " (server-only)" : "")}");
+        ConCommandManager.RegisterExternal(normalizedPath, conName, command.Description ?? "", serverOnly: false, handler, attr.Hidden);
+        Console.WriteLine($"[CommandRegistration] Registered console command: {source.Plugin.Name} -> {conName}{(attr.ServerOnly ? " (server-only)" : "")}");
+    }
+
+    private static bool CanRunPlayerCommand(CCitadelPlayerController? controller, string permission)
+    {
+        if (string.IsNullOrWhiteSpace(permission))
+            return true;
+
+        if (controller == null)
+            return false;
+
+        return PermissionManager.HasPermission(controller.PlayerSteamId, permission);
     }
 
     private static void Invoke(

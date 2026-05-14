@@ -1,5 +1,6 @@
 using System.Reflection;
 using DeadworksManaged.Api;
+using DeadworksManaged.Permissions;
 
 namespace DeadworksManaged;
 
@@ -17,8 +18,16 @@ internal static class ConCommandManager
     public static void Initialize()
     {
         RegisterBuiltInCommand("dw_reloadconfig", "Reload plugin configs. Usage: dw_reloadconfig [PluginName]", true, OnReloadConfig);
+        RegisterBuiltInCommand("dw_permissions_reload", "Reload permission roles and players.", true, OnPermissionsReload);
         RegisterBuiltInCommand("dw_plugin", "Manage plugins. Usage: dw_plugin <list|enable|disable|commands> [PluginName]", true, OnPluginCommand);
         RegisterBuiltInCommand("dw_help", "List all available commands.", false, OnHelp);
+    }
+
+    private static void OnPermissionsReload(ConCommandContext ctx)
+    {
+        Console.WriteLine(PermissionManager.Reload()
+            ? "[PermissionManager] Reloaded permissions"
+            : "[PermissionManager] Failed to reload permissions");
     }
 
     private static void OnReloadConfig(ConCommandContext ctx)

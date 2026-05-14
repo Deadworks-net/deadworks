@@ -24,6 +24,14 @@ public static unsafe class Server {
 		}
 	}
 
+	/// <summary>Kicks the player in the given slot with an optional reason.</summary>
+	public static bool KickPlayer(int slot, string reason = "Kicked by admin") {
+		Span<byte> utf8 = Utf8.Encode(reason, stackalloc byte[Utf8.Size(reason)]);
+		fixed (byte* ptr = utf8) {
+			return NativeInterop.KickPlayer(slot, ptr) != 0;
+		}
+	}
+
 	/// <summary>Sets the server's addons string. Clients receive this in SignonState/connection messages.</summary>
 	public static void SetAddons(string addons) {
 		Span<byte> utf8 = Utf8.Encode(addons, stackalloc byte[Utf8.Size(addons)]);
