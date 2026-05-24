@@ -28,7 +28,20 @@ struct ManagedCallbacks {
     using OnPrecacheResourcesFn = void(CORECLR_DELEGATE_CALLTYPE *)();
     using OnEntityStartTouchFn = void(CORECLR_DELEGATE_CALLTYPE *)(void *entity, void *other);
     using OnEntityEndTouchFn = void(CORECLR_DELEGATE_CALLTYPE *)(void *entity, void *other);
-    using OnEntityAcceptInputFn = void(CORECLR_DELEGATE_CALLTYPE *)(void *entity, void *activator, void *caller, const char *inputName, const char *value);
+    // Entity input (CEntityInstance::AcceptInput) — Pre returns HookResult int (0=Continue, 1=Stop, 2=Handled).
+    using OnEntityAcceptInputFn = int(CORECLR_DELEGATE_CALLTYPE *)(const char *className, const char *inputName,
+                                                                    void *entity, void *activator, void *caller,
+                                                                    void *variantValue);
+    using OnEntityAcceptInputPostFn = void(CORECLR_DELEGATE_CALLTYPE *)(const char *className, const char *inputName,
+                                                                        void *entity, void *activator, void *caller,
+                                                                        void *variantValue);
+    // Entity output (CEntityIOOutput::FireOutputInternal) — Pre returns HookResult int.
+    using OnEntityFireOutputFn = int(CORECLR_DELEGATE_CALLTYPE *)(const char *callerClass, const char *outputName,
+                                                                   void *activator, void *caller,
+                                                                   const void *variantValue, float delay);
+    using OnEntityFireOutputPostFn = void(CORECLR_DELEGATE_CALLTYPE *)(const char *callerClass, const char *outputName,
+                                                                       void *activator, void *caller,
+                                                                       const void *variantValue, float delay);
     using OnProcessUsercmdsFn = void(CORECLR_DELEGATE_CALLTYPE *)(int playerSlot, const uint8_t *batchBytes, int batchLen, int numCmds, uint8_t paused, float margin, uint8_t *outBatchBytes, int *outBatchLen);
     using OnAbilityAttemptFn = uint64_t(CORECLR_DELEGATE_CALLTYPE *)(int playerSlot, void *pawnEntity, uint64_t heldButtons, uint64_t changedButtons, uint64_t scrollButtons, uint64_t *outForcedButtons);
     using OnAddModifierFn = int(CORECLR_DELEGATE_CALLTYPE *)(void *modifierProp, void **pCaster, uint32_t *pHAbility, int32_t *pITeam, void *vdata, void *params, void *kv);
@@ -56,6 +69,9 @@ struct ManagedCallbacks {
     OnEntityEndTouchFn onEntityEndTouch = nullptr;
     OnDoModifierEventFn onDoModifierEvent = nullptr;
     OnEntityAcceptInputFn onEntityAcceptInput = nullptr;
+    OnEntityAcceptInputPostFn onEntityAcceptInputPost = nullptr;
+    OnEntityFireOutputFn onEntityFireOutput = nullptr;
+    OnEntityFireOutputPostFn onEntityFireOutputPost = nullptr;
     OnProcessUsercmdsFn onProcessUsercmds = nullptr;
     OnAbilityAttemptFn onAbilityAttempt = nullptr;
     OnAddModifierFn onAddModifier = nullptr;

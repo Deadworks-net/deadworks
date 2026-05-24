@@ -28,9 +28,6 @@ fn patch_gameinfo_on_startup() {
 
 #[cfg_attr(mobile, tauri::mobile_entry_point)]
 pub fn run() {
-    // Try to patch gameinfo.gi early — will fail silently if game is running
-    patch_gameinfo_on_startup();
-
     tauri::Builder::default()
         .plugin(tauri_plugin_single_instance::init(|app, args, _cwd| {
             for arg in &args {
@@ -81,14 +78,19 @@ pub fn run() {
                 deep_link::surface_main_window(&handle);
             });
 
-            // Restore game directory override from persisted settings
+            // Restore game directory override from persisted settings BEFORE
+            // attempting the gameinfo.gi patch — otherwise users with a legacy
+            // Project8Staging install (or any custom location) would have the
+            // patch silently skipped and hit "addonroot missing" on connect.
+            if let Ok(store) = tauri_plugin_store::StoreBuilder::new(app.handle(), "settings.json").build() {
+                if let Some(path) = store.get("game_dir_override").and_then(|v| v.as_str().map(String::from)) {
+                    connect::set_game_dir_override(Some(std::path::PathBuf::from(path)));
+                }
+            }
+            patch_gameinfo_on_startup();
+
             let app_handle = app.handle().clone();
             tauri::async_runtime::spawn(async move {
-                if let Ok(store) = tauri_plugin_store::StoreBuilder::new(&app_handle, "settings.json").build() {
-                    if let Some(path) = store.get("game_dir_override").and_then(|v| v.as_str().map(String::from)) {
-                        connect::set_game_dir_override(Some(std::path::PathBuf::from(path)));
-                    }
-                }
                 telemetry::maybe_send_install(&app_handle);
                 telemetry::maybe_send_heartbeat(&app_handle);
             });

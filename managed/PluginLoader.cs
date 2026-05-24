@@ -54,9 +54,6 @@ internal static partial class PluginLoader
     private static readonly Dictionary<int, List<Delegate>> _incomingNetMsgHandlers = new();
     private static readonly Dictionary<string, List<(int msgId, NetMessageDirection dir, Delegate handler)>> _pluginNetMsgHandlers = new(StringComparer.OrdinalIgnoreCase);
 
-    // Entity IO hooks: "designerName:inputName" -> list of input handlers
-    private static readonly Dictionary<string, List<Action<EntityInputEvent>>> _inputHooks = new(StringComparer.Ordinal);
-
     private static string _pluginsDir = "";
     public static string PluginsDir => _pluginsDir;
 
@@ -105,7 +102,8 @@ internal static partial class PluginLoader
         NetMessages.OnHookAdd = OnNetMessageHookAddWithHandle;
         NetMessages.OnHookRemove = OnNetMessageHookRemove;
 
-        EntityIO.OnHookInput = OnEntityIOHookInput;
+        EntityIO.OnHookInput = OnEntityIOHookInputProgrammatic;
+        EntityIO.OnHookOutput = OnEntityIOHookOutputProgrammatic;
 
         var baseDir = Path.GetDirectoryName(typeof(PluginLoader).Assembly.Location);
         if (baseDir is null)
@@ -246,6 +244,7 @@ internal static partial class PluginLoader
             RebuildSnapshot();
             RegisterPluginEventHandlers(normalizedPath, plugins);
             RegisterPluginNetMessageHandlers(normalizedPath, plugins);
+            RegisterPluginEntityIOHooks(normalizedPath, plugins);
             RegisterPluginChatCommands(normalizedPath, plugins);
             ConCommandManager.RegisterPlugin(normalizedPath, plugins);
             Commands.CommandRegistration.RegisterPluginCommands(normalizedPath, plugins, _chatCommandRegistry);
@@ -262,6 +261,7 @@ internal static partial class PluginLoader
             RebuildSnapshot();
             _eventRegistry.UnregisterPlugin(normalizedPath);
             UnregisterPluginNetMessageHandlers(normalizedPath);
+            UnregisterPluginEntityIOHooks(normalizedPath);
             _chatCommandRegistry.UnregisterPlugin(normalizedPath);
             ConCommandManager.UnregisterPlugin(normalizedPath);
             PluginRegistrationTracker.Remove(normalizedPath);
@@ -505,7 +505,9 @@ internal static partial class PluginLoader
             _outgoingNetMsgHandlers.Clear();
             _incomingNetMsgHandlers.Clear();
             _pluginNetMsgHandlers.Clear();
-            _inputHooks.Clear();
+            _entityInputHooks.Clear();
+            _entityOutputHooks.Clear();
+            _pluginEntityIOHandlers.Clear();
         }
 
         ConCommandManager.Clear();

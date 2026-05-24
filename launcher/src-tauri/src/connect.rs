@@ -163,18 +163,18 @@ fn unescape_vdf(s: &str) -> String {
 pub(crate) fn find_deadlock_game_dir() -> Result<PathBuf, String> {
     let steam_path = find_steam_path()?;
     let library = find_library_for_app(&steam_path, DEADLOCK_APP_ID)?;
-    let game_dir = library
-        .join("steamapps")
-        .join("common")
-        .join("Deadlock")
-        .join("game");
-    if !game_dir.join("citadel").exists() {
-        return Err(format!(
-            "Deadlock game directory not found at {}",
-            game_dir.display()
-        ));
+    let common = library.join("steamapps").join("common");
+    // Legacy installs used "Project8Staging" before the public rename to "Deadlock".
+    for dir_name in ["Deadlock", "Project8Staging"] {
+        let game_dir = common.join(dir_name).join("game");
+        if game_dir.join("citadel").exists() {
+            return Ok(game_dir);
+        }
     }
-    Ok(game_dir)
+    Err(format!(
+        "Deadlock game directory not found at {} (checked Deadlock/ and Project8Staging/)",
+        common.display()
+    ))
 }
 
 #[cfg(target_os = "macos")]

@@ -75,8 +75,15 @@ public:
     void OnEndTouch(CBaseEntity *entity, CBaseEntity *other);
     // Modifier Events
     void OnDoModifierEvent(EModifierEvent event, CBaseEntity *caster, CBaseEntity *opt_cast_target, CBaseEntity *opt_cast_ent, void *event_data);
-    // Entity I/O
-    void OnEntityAcceptInput(void *entity, void *activator, void *caller, const char *inputName, const char *value);
+    // Entity I/O — Pre returns HookResult int (0=Continue, 1=Stop, 2=Handled); Post returns void.
+    int OnEntityAcceptInputPre(const char *className, const char *inputName,
+                                void *entity, void *activator, void *caller, void *variantValue);
+    void OnEntityAcceptInputPost(const char *className, const char *inputName,
+                                  void *entity, void *activator, void *caller, void *variantValue);
+    int OnEntityFireOutputPre(const char *callerClass, const char *outputName,
+                               void *activator, void *caller, const void *variantValue, float delay);
+    void OnEntityFireOutputPost(const char *callerClass, const char *outputName,
+                                 void *activator, void *caller, const void *variantValue, float delay);
     // Usercmds
     void OnPre_ProcessUsercmds(int playerSlot, const uint8_t *batchBytes, int batchLen, int numCmds, bool paused, float margin, uint8_t *outBytes, int *outLen);
     // Ability think - returns bitmask of buttons to block, outForcedButtons receives bits to force

@@ -118,4 +118,13 @@ internal struct NativeCallbacks
 	public nint ObserverServicesSetTarget;
 	public nint ObserverServicesSetMode;
 	public nint TakeSoundEventGuid;
+	public nint VariantGetType;
+	public nint VariantToCString;
+	public nint VariantToInt64;
+	public nint VariantToFloat64;
+	public nint VariantToBool;
+	public nint VariantToEHandle;
+	public nint VariantToVector;
+	public nint VariantToColor;
+	public nint AddConCommandFlags;
 }

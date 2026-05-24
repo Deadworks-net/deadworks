@@ -128,6 +128,16 @@ struct NativeCallbacks {
     uint8_t(__cdecl *ObserverServicesSetTarget)(void *observerServices, void *target);
     void(__cdecl *ObserverServicesSetMode)(void *observerServices, int32_t mode);
     uint32_t(__cdecl *TakeSoundEventGuid)();
+    // Variant accessors — used by EntityIOValue for entity I/O hooks.
+    uint8_t(__cdecl *VariantGetType)(const void *variantPtr);
+    const char *(__cdecl *VariantToCString)(const void *variantPtr);
+    int64_t(__cdecl *VariantToInt64)(const void *variantPtr);
+    double(__cdecl *VariantToFloat64)(const void *variantPtr);
+    uint8_t(__cdecl *VariantToBool)(const void *variantPtr);
+    uint32_t(__cdecl *VariantToEHandle)(const void *variantPtr);
+    void(__cdecl *VariantToVector)(const void *variantPtr, float *outXYZW);  // populates 4 floats; zero-pads unused components
+    uint32_t(__cdecl *VariantToColor)(const void *variantPtr);  // packed RGBA (R in low byte)
+    uint8_t(__cdecl *AddConCommandFlags)(const char *name, uint64_t flags);
 };
 
 void PopulateNativeCallbacks(NativeCallbacks &callbacks);

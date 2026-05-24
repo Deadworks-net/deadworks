@@ -118,4 +118,15 @@ internal static unsafe class NativeInterop
 	public static delegate* unmanaged[Cdecl]<void*, void*, byte> ObserverServicesSetTarget => (delegate* unmanaged[Cdecl]<void*, void*, byte>)_cb.ObserverServicesSetTarget;
 	public static delegate* unmanaged[Cdecl]<void*, int, void> ObserverServicesSetMode => (delegate* unmanaged[Cdecl]<void*, int, void>)_cb.ObserverServicesSetMode;
 	public static delegate* unmanaged[Cdecl]<uint> TakeSoundEventGuid => (delegate* unmanaged[Cdecl]<uint>)_cb.TakeSoundEventGuid;
+
+	// Variant accessors (used by EntityIOValue)
+	public static delegate* unmanaged[Cdecl]<void*, byte> VariantGetType => (delegate* unmanaged[Cdecl]<void*, byte>)_cb.VariantGetType;
+	public static delegate* unmanaged[Cdecl]<void*, byte*> VariantToCString => (delegate* unmanaged[Cdecl]<void*, byte*>)_cb.VariantToCString;
+	public static delegate* unmanaged[Cdecl]<void*, long> VariantToInt64 => (delegate* unmanaged[Cdecl]<void*, long>)_cb.VariantToInt64;
+	public static delegate* unmanaged[Cdecl]<void*, double> VariantToFloat64 => (delegate* unmanaged[Cdecl]<void*, double>)_cb.VariantToFloat64;
+	public static delegate* unmanaged[Cdecl]<void*, byte> VariantToBool => (delegate* unmanaged[Cdecl]<void*, byte>)_cb.VariantToBool;
+	public static delegate* unmanaged[Cdecl]<void*, uint> VariantToEHandle => (delegate* unmanaged[Cdecl]<void*, uint>)_cb.VariantToEHandle;
+	public static delegate* unmanaged[Cdecl]<void*, float*, void> VariantToVector => (delegate* unmanaged[Cdecl]<void*, float*, void>)_cb.VariantToVector;
+	public static delegate* unmanaged[Cdecl]<void*, uint> VariantToColor => (delegate* unmanaged[Cdecl]<void*, uint>)_cb.VariantToColor;
+	public static delegate* unmanaged[Cdecl]<byte*, ulong, byte> AddConCommandFlags => (delegate* unmanaged[Cdecl]<byte*, ulong, byte>)_cb.AddConCommandFlags;
 }

@@ -16,6 +16,7 @@ public static class EntryPoint
         Console.WriteLine("Hello from .NET 10!");
 
         NativeInterop.Bind(callbacks);
+        CheatCommandGate.ApplyCheatFlag();
         PluginLoader.LoadAll();
     }
 
@@ -274,21 +275,77 @@ public static class EntryPoint
     }
 
     [UnmanagedCallersOnly]
-    public static unsafe void OnEntityAcceptInput(void* entity, void* activator, void* caller, byte* inputNameUtf8, byte* valueUtf8)
+    public static unsafe int OnEntityAcceptInput(byte* classNameUtf8, byte* inputNameUtf8,
+                                                  void* entity, void* activator, void* caller, void* variantValue)
     {
-        if (entity == null) return;
+        if (entity == null) return (int)HookResult.Continue;
+        var className = Marshal.PtrToStringUTF8((nint)classNameUtf8) ?? "";
         var inputName = Marshal.PtrToStringUTF8((nint)inputNameUtf8) ?? "";
-        var value = valueUtf8 != null ? Marshal.PtrToStringUTF8((nint)valueUtf8) : null;
-        var ent = new CBaseEntity((nint)entity);
         var evt = new EntityInputEvent
         {
-            Entity = ent,
+            Entity = new CBaseEntity((nint)entity),
+            ClassName = className,
+            InputName = inputName,
             Activator = activator != null ? new CBaseEntity((nint)activator) : null,
             Caller = caller != null ? new CBaseEntity((nint)caller) : null,
-            InputName = inputName,
-            Value = value
+            Value = new EntityIOValue((nint)variantValue),
         };
-        PluginLoader.DispatchEntityAcceptInput(ent.DesignerName, evt);
+        return PluginLoader.DispatchEntityAcceptInputPre(className, evt);
+    }
+
+    [UnmanagedCallersOnly]
+    public static unsafe void OnEntityAcceptInputPost(byte* classNameUtf8, byte* inputNameUtf8,
+                                                       void* entity, void* activator, void* caller, void* variantValue)
+    {
+        if (entity == null) return;
+        var className = Marshal.PtrToStringUTF8((nint)classNameUtf8) ?? "";
+        var inputName = Marshal.PtrToStringUTF8((nint)inputNameUtf8) ?? "";
+        var evt = new EntityInputEvent
+        {
+            Entity = new CBaseEntity((nint)entity),
+            ClassName = className,
+            InputName = inputName,
+            Activator = activator != null ? new CBaseEntity((nint)activator) : null,
+            Caller = caller != null ? new CBaseEntity((nint)caller) : null,
+            Value = new EntityIOValue((nint)variantValue),
+        };
+        PluginLoader.DispatchEntityAcceptInputPost(className, evt);
+    }
+
+    [UnmanagedCallersOnly]
+    public static unsafe int OnEntityFireOutput(byte* callerClassUtf8, byte* outputNameUtf8,
+                                                 void* activator, void* caller, void* variantValue, float delay)
+    {
+        var callerClass = Marshal.PtrToStringUTF8((nint)callerClassUtf8) ?? "";
+        var outputName = Marshal.PtrToStringUTF8((nint)outputNameUtf8) ?? "";
+        var evt = new EntityOutputEvent
+        {
+            CallerClass = callerClass,
+            OutputName = outputName,
+            Activator = activator != null ? new CBaseEntity((nint)activator) : null,
+            Caller = caller != null ? new CBaseEntity((nint)caller) : null,
+            Value = new EntityIOValue((nint)variantValue),
+            Delay = delay,
+        };
+        return PluginLoader.DispatchEntityFireOutputPre(callerClass, evt);
+    }
+
+    [UnmanagedCallersOnly]
+    public static unsafe void OnEntityFireOutputPost(byte* callerClassUtf8, byte* outputNameUtf8,
+                                                      void* activator, void* caller, void* variantValue, float delay)
+    {
+        var callerClass = Marshal.PtrToStringUTF8((nint)callerClassUtf8) ?? "";
+        var outputName = Marshal.PtrToStringUTF8((nint)outputNameUtf8) ?? "";
+        var evt = new EntityOutputEvent
+        {
+            CallerClass = callerClass,
+            OutputName = outputName,
+            Activator = activator != null ? new CBaseEntity((nint)activator) : null,
+            Caller = caller != null ? new CBaseEntity((nint)caller) : null,
+            Value = new EntityIOValue((nint)variantValue),
+            Delay = delay,
+        };
+        PluginLoader.DispatchEntityFireOutputPost(callerClass, evt);
     }
     [UnmanagedCallersOnly]
     public static unsafe ulong OnAbilityAttempt(int playerSlot, void* pawnEntity, ulong heldButtons, ulong changedButtons, ulong scrollButtons, ulong* outForcedButtons)
