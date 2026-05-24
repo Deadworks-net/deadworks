@@ -1,6 +1,6 @@
 [package]
 name = "deadworks-launcher"
-version = "0.3.1"
+version = "0.3.3"
 description = "Deadworks Launcher"
 authors = ["Deadworks"]
 edition = "2021"

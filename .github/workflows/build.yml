@@ -29,13 +29,13 @@ jobs:
         uses: actions/cache@v5
         with:
           path: protobuf-3.21.8
-          key: protobuf-3.21.8-msvc-static-mt-v2
+          key: protobuf-3.21.8-msvc-static-mt-v143-v3
 
       - name: Build protobuf 3.21.8
         if: steps.cache-protobuf.outputs.cache-hit != 'true'
         run: |
           git clone --branch v3.21.8 --depth 1 https://github.com/protocolbuffers/protobuf.git protobuf-3.21.8
-          cmake -S protobuf-3.21.8/cmake -B protobuf-3.21.8/build -A x64 -Dprotobuf_BUILD_TESTS=OFF -Dprotobuf_MSVC_STATIC_RUNTIME=ON -DCMAKE_POLICY_DEFAULT_CMP0091=NEW -DCMAKE_MSVC_RUNTIME_LIBRARY=MultiThreaded
+          cmake -S protobuf-3.21.8/cmake -B protobuf-3.21.8/build -A x64 -T v143 -Dprotobuf_BUILD_TESTS=OFF -Dprotobuf_MSVC_STATIC_RUNTIME=ON -DCMAKE_POLICY_DEFAULT_CMP0091=NEW -DCMAKE_MSVC_RUNTIME_LIBRARY=MultiThreaded
           cmake --build protobuf-3.21.8/build --config Release
 
       - name: Find nethost path
