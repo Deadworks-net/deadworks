@@ -22,6 +22,7 @@
 #include "Hooks/ReplyConnection.hpp"
 #include "Hooks/CheckTransmit.hpp"
 #include "Hooks/InitializeHeroOnPawn.hpp"
+#include "Hooks/DoModifierEvent.hpp"
 #include "A2SPatch.hpp"
 
 #include "../Memory/MemoryDataLoader.hpp"
@@ -105,8 +106,8 @@ void Deadworks::PostInit() {
     g_pSoundSystem = reinterpret_cast<ISoundSystem *>(InterfaceFactories.soundsystem(SOUNDSYSTEM_INTERFACE_VERSION, nullptr));
 
     if (!g_pSoundSystem) {
-		g_Log->Error("Failed to load ISoundSystem. Abandoning ship!");
-		return;
+        g_Log->Error("Failed to load ISoundSystem. Abandoning ship!");
+        return;
     }
 
     if (!g_pSource2Server) {
@@ -144,10 +145,10 @@ void Deadworks::PostInit() {
         return;
     }
 
-	if (!g_pFullFileSystem) {
-		g_Log->Error("Failed to load IFileSystem. Abandoning ship!");
-		return;
-	}
+    if (!g_pFullFileSystem) {
+        g_Log->Error("Failed to load IFileSystem. Abandoning ship!");
+        return;
+    }
 
     ConVar_Register(FCVAR_RELEASE | FCVAR_CLIENT_CAN_EXECUTE | FCVAR_GAMEDLL);
 
@@ -248,6 +249,9 @@ void Deadworks::PostInit() {
     HookInline(hooks::g_InitializeHeroOnPawn,
                "CCitadelPlayerPawn::InitializeHeroOnPawn",
                &hooks::Hook_InitializeHeroOnPawn);
+    HookInline(hooks::g_DoModifierEvent,
+               "DoModifierEvent",
+               &hooks::Hook_DoModifierEvent);
 
     // Enable A2S_INFO responses on community servers
     A2SPatch::Apply();
@@ -548,6 +552,11 @@ void Deadworks::OnStartTouch(CBaseEntity *entity, CBaseEntity *other) {
 void Deadworks::OnEndTouch(CBaseEntity *entity, CBaseEntity *other) {
     if (m_managed.onEntityEndTouch && entity && other)
         m_managed.onEntityEndTouch(entity, other);
+}
+
+void Deadworks::OnDoModifierEvent(EModifierEvent event, CBaseEntity *caster, CBaseEntity *opt_cast_target, CBaseEntity *opt_cast_ent, void *event_data) {
+    if (m_managed.onDoModifierEvent && caster && event_data)
+        m_managed.onDoModifierEvent(event, caster, opt_cast_target, opt_cast_ent, event_data);
 }
 
 void Deadworks::OnEntityAcceptInput(void *entity, void *activator, void *caller, const char *inputName, const char *value) {

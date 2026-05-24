@@ -11,8 +11,8 @@ struct ManagedCallbacks {
     using OnStartupServerFn = void(CORECLR_DELEGATE_CALLTYPE *)(const char *mapName);
     using OnTakeDamageOldFn = bool(CORECLR_DELEGATE_CALLTYPE *)(void *entity, void *info, void *result);
     using OnModifyCurrencyFn = bool(CORECLR_DELEGATE_CALLTYPE *)(void *pawn, uint32_t nCurrencyType, int32_t nAmount,
-                                                                   uint32_t nSource, uint8_t bSilent, uint8_t bForceGain,
-                                                                   uint8_t bSpendOnly, void *pSourceAbility, void *pSourceEntity);
+                                                                 uint32_t nSource, uint8_t bSilent, uint8_t bForceGain,
+                                                                 uint8_t bSpendOnly, void *pSourceAbility, void *pSourceEntity);
     using OnGameEventFn = int(CORECLR_DELEGATE_CALLTYPE *)(const char *eventName, void *eventPtr);
     using OnGameFrameFn = void(CORECLR_DELEGATE_CALLTYPE *)(uint8_t simulating, uint8_t firstTick, uint8_t lastTick);
     using OnNetMessageOutgoingFn = int(CORECLR_DELEGATE_CALLTYPE *)(int msgId, const uint8_t *protoBytes, int protoLen, uint64_t recipientMask, uint8_t *outBytes, int *outLen, uint64_t *outRecipientMask);
@@ -34,6 +34,7 @@ struct ManagedCallbacks {
     using OnAddModifierFn = int(CORECLR_DELEGATE_CALLTYPE *)(void *modifierProp, void **pCaster, uint32_t *pHAbility, int32_t *pITeam, void *vdata, void *params, void *kv);
     using OnCheckTransmitFn = void(CORECLR_DELEGATE_CALLTYPE *)(int playerSlot, void *transmitBits);
     using OnPawnHeroInitializedFn = void(CORECLR_DELEGATE_CALLTYPE *)(void *pawn);
+    using OnDoModifierEventFn = void(CORECLR_DELEGATE_CALLTYPE *)(unsigned int event, void *caster, void *opt_cast_target, void *opt_cast_ent, void *event_data);
 
     OnStartupServerFn onStartupServer = nullptr;
     OnTakeDamageOldFn onTakeDamageOld = nullptr;
@@ -53,6 +54,7 @@ struct ManagedCallbacks {
     OnPrecacheResourcesFn onPrecacheResources = nullptr;
     OnEntityStartTouchFn onEntityStartTouch = nullptr;
     OnEntityEndTouchFn onEntityEndTouch = nullptr;
+    OnDoModifierEventFn onDoModifierEvent = nullptr;
     OnEntityAcceptInputFn onEntityAcceptInput = nullptr;
     OnProcessUsercmdsFn onProcessUsercmds = nullptr;
     OnAbilityAttemptFn onAbilityAttempt = nullptr;

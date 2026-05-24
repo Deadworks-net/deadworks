@@ -259,6 +259,21 @@ public static class EntryPoint
     }
 
     [UnmanagedCallersOnly]
+    public static unsafe void OnDoModifierEvent(EModifierEvent modifierEvent, void* caster, void* optCastTarget, void* optCastEnt, void* eventData)
+    {
+        var args = new DoModifierEvent
+        {
+            Event = modifierEvent,
+            Caster = new CBaseEntity((nint)caster),
+            OptCastTarget = optCastTarget != null ? new CBaseEntity((nint)optCastTarget) : null,
+            OptCastEntity = optCastEnt != null ? new CBaseEntity((nint)optCastEnt) : null,
+            EventData = (nint)eventData
+        };
+
+        PluginLoader.DispatchDoModifierEvent(args);
+    }
+
+    [UnmanagedCallersOnly]
     public static unsafe void OnEntityAcceptInput(void* entity, void* activator, void* caller, byte* inputNameUtf8, byte* valueUtf8)
     {
         if (entity == null) return;
