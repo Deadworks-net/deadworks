@@ -1,6 +1,6 @@
 namespace DeadworksManaged.Api;
 
-/// <summary>Enum of all Deadlock hero identities. Values match game hero IDs. Use <see cref="HeroTypeExtensions"/> to convert to/from hero name strings.</summary>
+/// <summary>Enum of all Deadlock Modifier Events</summary>
 public enum EModifierEvent : uint
 {
     MODIFIER_EVENT_PRE_DAMAGE_TAKEN_BROADCAST = 0x0, // 0
