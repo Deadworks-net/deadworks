@@ -73,6 +73,7 @@ void deadworks::InitializeManagedCallbacks(DotNetHost &host, ManagedCallbacks &m
     BindCallback(host, assemblyPath, managed.onProcessUsercmds, L"OnProcessUsercmds");
     BindCallback(host, assemblyPath, managed.onFastProcessUsercmds, L"OnFastProcessUsercmds");
     BindCallback(host, assemblyPath, managed.onUsercmdTrigger, L"OnUsercmdTrigger");
+    BindCallback(host, assemblyPath, managed.onFastNetMessage, L"OnFastNetMessage");
     BindCallback(host, assemblyPath, managed.onAbilityAttempt, L"OnAbilityAttempt");
     BindCallback(host, assemblyPath, g_ManagedConCommandDispatch, L"OnConCommandDispatch");
     BindCallback(host, assemblyPath, managed.onAddModifier, L"OnAddModifier");

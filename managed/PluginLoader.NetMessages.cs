@@ -27,6 +27,7 @@ internal static partial class PluginLoader
                 dict[msgId] = list;
             }
             list.Add(handler);
+            NetMessages.AddSerializedInterest(direction, msgId);
         }
 
         return new CallbackHandle(() =>
@@ -36,9 +37,11 @@ internal static partial class PluginLoader
                 var dict = direction == NetMessageDirection.Outgoing ? _outgoingNetMsgHandlers : _incomingNetMsgHandlers;
                 if (dict.TryGetValue(msgId, out var list))
                 {
-                    list.Remove(handler);
+                    bool removed = list.Remove(handler);
                     if (list.Count == 0)
                         dict.Remove(msgId);
+                    if (removed)
+                        NetMessages.RemoveSerializedInterest(direction, msgId);
                 }
             }
         });
@@ -51,9 +54,11 @@ internal static partial class PluginLoader
             var dict = direction == NetMessageDirection.Outgoing ? _outgoingNetMsgHandlers : _incomingNetMsgHandlers;
             if (dict.TryGetValue(msgId, out var list))
             {
-                list.Remove(handler);
+                bool removed = list.Remove(handler);
                 if (list.Count == 0)
                     dict.Remove(msgId);
+                if (removed)
+                    NetMessages.RemoveSerializedInterest(direction, msgId);
             }
         }
     }
@@ -112,6 +117,7 @@ internal static partial class PluginLoader
                     dict[msgId] = list;
                 }
                 list.Add(del);
+                NetMessages.AddSerializedInterest(direction, msgId);
                 Console.WriteLine($"[PluginLoader] Registered net message handler: {plugin.Name}.{method.Name} -> {protoType.Name} msgId={msgId} ({direction})");
             }
         }
@@ -129,9 +135,11 @@ internal static partial class PluginLoader
             var dict = dir == NetMessageDirection.Outgoing ? _outgoingNetMsgHandlers : _incomingNetMsgHandlers;
             if (dict.TryGetValue(msgId, out var list))
             {
-                list.Remove(handler);
+                bool removed = list.Remove(handler);
                 if (list.Count == 0)
                     dict.Remove(msgId);
+                if (removed)
+                    NetMessages.RemoveSerializedInterest(dir, msgId);
             }
         }
     }
@@ -163,9 +171,6 @@ internal static partial class PluginLoader
             return HookResult.Continue;
         }
 
-        // Snapshot original bytes for comparison after handlers run
-        var originalBytes = protoBytes.ToArray();
-
         var result = HookResult.Continue;
         var currentRecipientMask = recipientMask;
         foreach (var handler in handlers)
@@ -185,7 +190,7 @@ internal static partial class PluginLoader
 
         // Re-serialize if any handler may have modified the message
         var newBytes = message.ToByteArray();
-        if (!newBytes.AsSpan().SequenceEqual(originalBytes))
+        if (!newBytes.AsSpan().SequenceEqual(protoBytes))
             modifiedBytes = newBytes;
 
         return result;

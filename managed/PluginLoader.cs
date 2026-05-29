@@ -54,6 +54,8 @@ internal static partial class PluginLoader
     private static readonly Dictionary<int, List<Delegate>> _incomingNetMsgHandlers = new();
     private static readonly Dictionary<string, List<(int msgId, NetMessageDirection dir, Delegate handler)>> _pluginNetMsgHandlers = new(StringComparer.OrdinalIgnoreCase);
 
+    private const int CitadelChatMessageId = (int)ECitadelClientMessages.CitadelCmChatMsg;
+
     private static string _pluginsDir = "";
     public static string PluginsDir => _pluginsDir;
 
@@ -61,6 +63,7 @@ internal static partial class PluginLoader
     private static Timer? _debounceTimer;
     private static readonly HashSet<string> _pendingReloads = new(StringComparer.OrdinalIgnoreCase);
     private static UsercmdMount? _startupUsercmdMountMask;
+    private static bool _chatNetMessageInterestMounted;
 
     // Assemblies that plugins may reference from the host. Resolved once at startup
     // so every PluginLoadContext returns the same instance (preserving type identity).
@@ -249,6 +252,7 @@ internal static partial class PluginLoader
             RegisterPluginChatCommands(normalizedPath, plugins);
             ConCommandManager.RegisterPlugin(normalizedPath, plugins);
             Commands.CommandRegistration.RegisterPluginCommands(normalizedPath, plugins, _chatCommandRegistry);
+            ReconcileChatNetMessageInterest();
         }
     }
 
@@ -266,6 +270,7 @@ internal static partial class PluginLoader
             _chatCommandRegistry.UnregisterPlugin(normalizedPath);
             ConCommandManager.UnregisterPlugin(normalizedPath);
             PluginRegistrationTracker.Remove(normalizedPath);
+            ReconcileChatNetMessageInterest();
         }
 
         foreach (var plugin in entry.Plugins)
@@ -352,6 +357,30 @@ internal static partial class PluginLoader
     {
         _pluginSnapshot = _loaded.Values.SelectMany(e => e.Plugins).ToArray();
         ReconcileUsercmdMounts();
+    }
+
+    private static void ReconcileChatNetMessageInterest()
+    {
+        bool wantsChat = _chatCommandRegistry.HasAny;
+        foreach (var plugin in _pluginSnapshot)
+        {
+            if (OverridesPluginMethod(plugin.GetType(), nameof(IDeadworksPlugin.OnChatMessage), typeof(ChatMessage)))
+            {
+                wantsChat = true;
+                break;
+            }
+        }
+
+        if (wantsChat && !_chatNetMessageInterestMounted)
+        {
+            NetMessages.AddSerializedInterest(NetMessageDirection.Incoming, CitadelChatMessageId);
+            _chatNetMessageInterestMounted = true;
+        }
+        else if (!wantsChat && _chatNetMessageInterestMounted)
+        {
+            NetMessages.RemoveSerializedInterest(NetMessageDirection.Incoming, CitadelChatMessageId);
+            _chatNetMessageInterestMounted = false;
+        }
     }
 
     private static void ReconcileUsercmdMounts()
@@ -517,6 +546,9 @@ internal static partial class PluginLoader
 
     public static void DispatchUsercmdTrigger(UsercmdTriggerEvent args)
         => DispatchToPlugins(p => p.OnUsercmdTrigger(args), nameof(IDeadworksPlugin.OnUsercmdTrigger));
+
+    public static void DispatchFastNetMessage(FastNetMessageEvent args)
+        => DispatchToPlugins(p => p.OnFastNetMessage(args), nameof(IDeadworksPlugin.OnFastNetMessage));
 
     public static HookResult DispatchAddModifier(AddModifierEvent args)
         => DispatchToPluginsWithResult(p => p.OnAddModifier(args), nameof(IDeadworksPlugin.OnAddModifier));

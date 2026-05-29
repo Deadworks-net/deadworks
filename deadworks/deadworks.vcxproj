@@ -207,6 +207,7 @@ if not "$(DeadlockDir)"=="" if exist "$(TargetDir)$(TargetName).pdb" copy /Y "$(
     <ClCompile Include="src\Core\Hooks\InitializeHeroOnPawn.cpp" />
     <ClCompile Include="src\Core\A2SPatch.cpp" />
     <ClCompile Include="src\Core\UsercmdVisitorRuntime.cpp" />
+    <ClCompile Include="src\Core\NetMessageVisitorRuntime.cpp" />
     <ClCompile Include="src\Core\Deadworks.cpp" />
     <ClCompile Include="src\Core\NativeCallbacks.cpp" />
     <ClCompile Include="src\Core\NativeAbility.cpp" />
@@ -257,6 +258,7 @@ if not "$(DeadlockDir)"=="" if exist "$(TargetDir)$(TargetName).pdb" copy /Y "$(
     <ClInclude Include="src\Core\Hooks\BuildGameSessionManifest.hpp" />
     <ClInclude Include="src\Core\A2SPatch.hpp" />
     <ClInclude Include="src\Core\UsercmdVisitorRuntime.hpp" />
+    <ClInclude Include="src\Core\NetMessageVisitorRuntime.hpp" />
     <ClInclude Include="src\Core\Deadworks.hpp" />
     <ClInclude Include="src\Core\NativeCallbacks.hpp" />
     <ClInclude Include="src\Core\NativeOffsets.hpp" />

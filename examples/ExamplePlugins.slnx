@@ -2,6 +2,7 @@
   <Project Path="plugins/AutoRestartPlugin/AutoRestartPlugin.csproj" />
   <Project Path="plugins/ChatRelayPlugin/ChatRelayPlugin.csproj" />
   <Project Path="plugins/DeathmatchPlugin/DeathmatchPlugin.csproj" />
+  <Project Path="plugins/DiagnosticsPlugin/DiagnosticsPlugin.csproj" />
   <Project Path="plugins/DumperPlugin/DumperPlugin.csproj" />
   <Project Path="plugins/ExampleTimerPlugin/ExampleTimerPlugin.csproj" />
   <Project Path="plugins/ItemRotationPlugin/ItemRotationPlugin.csproj" />

@@ -120,15 +120,20 @@ public static class EntryPoint
 
         *outRecipientMask = modifiedRecipientMask;
 
-        if (modifiedBytes != null)
+        if (modifiedBytes != null && modifiedBytes.Length <= 65536)
         {
-            var outSpan = new Span<byte>(outBytes, 65536);
-            modifiedBytes.AsSpan().CopyTo(outSpan);
+            if (modifiedBytes.Length > 0)
+            {
+                var outSpan = new Span<byte>(outBytes, 65536);
+                modifiedBytes.AsSpan().CopyTo(outSpan);
+            }
             *outLen = modifiedBytes.Length;
         }
         else
         {
-            *outLen = 0;
+            if (modifiedBytes != null)
+                Console.WriteLine($"[PluginLoader] Modified net message {msgId} exceeded 64KiB; leaving original payload unchanged");
+            *outLen = -1;
         }
 
         return (int)result;
@@ -366,9 +371,6 @@ public static class EntryPoint
         int offset = 0;
         var span = new ReadOnlySpan<byte>(batchBytes, batchLen);
 
-        // Snapshot original bytes for modification detection
-        var originalBytes = span.ToArray();
-
         for (int i = 0; i < numCmds && offset + 4 <= batchLen; i++)
         {
             int len = BitConverter.ToInt32(span.Slice(offset, 4));
@@ -416,7 +418,7 @@ public static class EntryPoint
         }
 
         // Only signal modification if the serialized output differs from the original
-        if (writeOffset > 0 && !outSpan.Slice(0, writeOffset).SequenceEqual(originalBytes.AsSpan()))
+        if (writeOffset > 0 && !outSpan.Slice(0, writeOffset).SequenceEqual(span))
         {
             *outBatchLen = writeOffset;
         }
@@ -459,6 +461,30 @@ public static class EntryPoint
         };
 
         PluginLoader.DispatchUsercmdTrigger(args);
+    }
+
+    [UnmanagedCallersOnly]
+    public static void OnFastNetMessage(int direction, int endpointSlot, int msgId, ulong recipientMask,
+        int userMessageType, byte hasUserMessageType,
+        int pauseType, int pauseGroup, byte hasPauseRequest,
+        byte paused, byte hasPauseState)
+    {
+        var args = new FastNetMessageEvent
+        {
+            Direction = direction == 0 ? NetMessageDirection.Incoming : NetMessageDirection.Outgoing,
+            EndpointSlot = endpointSlot,
+            MessageId = msgId,
+            RecipientMask = recipientMask,
+            UserMessageType = userMessageType,
+            HasUserMessageType = hasUserMessageType != 0,
+            PauseType = pauseType,
+            PauseGroup = pauseGroup,
+            HasPauseRequest = hasPauseRequest != 0,
+            Paused = paused != 0,
+            HasPauseState = hasPauseState != 0,
+        };
+
+        PluginLoader.DispatchFastNetMessage(args);
     }
 
     [UnmanagedCallersOnly]

@@ -141,4 +141,12 @@ internal static unsafe class NativeInterop
 	public static delegate* unmanaged[Cdecl]<ulong> GetUsercmdButtonTriggerMask => (delegate* unmanaged[Cdecl]<ulong>)_cb.GetUsercmdButtonTriggerMask;
 	public static delegate* unmanaged[Cdecl]<uint, void> SetUsercmdFieldMask => (delegate* unmanaged[Cdecl]<uint, void>)_cb.SetUsercmdFieldMask;
 	public static delegate* unmanaged[Cdecl]<uint> GetUsercmdFieldMask => (delegate* unmanaged[Cdecl]<uint>)_cb.GetUsercmdFieldMask;
+	public static delegate* unmanaged[Cdecl]<int, int, byte, void> SetNetMessageSerializedInterest => (delegate* unmanaged[Cdecl]<int, int, byte, void>)_cb.SetNetMessageSerializedInterest;
+	public static delegate* unmanaged[Cdecl]<int, int, byte> HasNetMessageSerializedInterest => (delegate* unmanaged[Cdecl]<int, int, byte>)_cb.HasNetMessageSerializedInterest;
+	public static delegate* unmanaged[Cdecl]<int, int, byte, void> SetNetMessageFastInterest => (delegate* unmanaged[Cdecl]<int, int, byte, void>)_cb.SetNetMessageFastInterest;
+	public static delegate* unmanaged[Cdecl]<int, int, byte> HasNetMessageFastInterest => (delegate* unmanaged[Cdecl]<int, int, byte>)_cb.HasNetMessageFastInterest;
+	public static delegate* unmanaged[Cdecl]<int, byte, void> SetUserMessageFastInterest => (delegate* unmanaged[Cdecl]<int, byte, void>)_cb.SetUserMessageFastInterest;
+	public static delegate* unmanaged[Cdecl]<int, byte> HasUserMessageFastInterest => (delegate* unmanaged[Cdecl]<int, byte>)_cb.HasUserMessageFastInterest;
+	public static delegate* unmanaged[Cdecl]<int, byte, void> SetUserMessageSerializedInterest => (delegate* unmanaged[Cdecl]<int, byte, void>)_cb.SetUserMessageSerializedInterest;
+	public static delegate* unmanaged[Cdecl]<int, byte> HasUserMessageSerializedInterest => (delegate* unmanaged[Cdecl]<int, byte>)_cb.HasUserMessageSerializedInterest;
 }

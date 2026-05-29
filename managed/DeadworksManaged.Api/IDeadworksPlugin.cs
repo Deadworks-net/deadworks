@@ -114,6 +114,9 @@ public interface IDeadworksPlugin {
 	/// <summary>Called when a mounted native usercmd trigger matches, such as a watched button edge.</summary>
 	void OnUsercmdTrigger(UsercmdTriggerEvent args) { }
 
+	/// <summary>Called with compact native-extracted net message fields for mounted net message visitors.</summary>
+	void OnFastNetMessage(FastNetMessageEvent args) { }
+
 	/// <summary>Called after the plugin's config has been reloaded via <c>dw_reloadconfig</c>.</summary>
 	void OnConfigReloaded() { }
 

@@ -75,6 +75,8 @@ internal sealed class HandlerRegistry<TKey, THandler> where TKey : notnull
         return _handlers.TryGetValue(key, out var list) ? [.. list] : null;
     }
 
+    public bool HasAny => _handlers.Count > 0;
+
     public void Clear()
     {
         _handlers.Clear();

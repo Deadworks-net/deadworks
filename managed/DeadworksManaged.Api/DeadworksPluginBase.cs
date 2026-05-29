@@ -32,6 +32,7 @@ public abstract class DeadworksPluginBase : IDeadworksPlugin {
 	public virtual void OnProcessUsercmds(ProcessUsercmdsEvent args) { }
 	public virtual void OnFastProcessUsercmds(FastProcessUsercmdsEvent args) { }
 	public virtual void OnUsercmdTrigger(UsercmdTriggerEvent args) { }
+	public virtual void OnFastNetMessage(FastNetMessageEvent args) { }
 	public virtual HookResult OnAddModifier(AddModifierEvent args) => HookResult.Continue;
 	public virtual void OnConfigReloaded() { }
 	public virtual void OnCheckTransmit(CheckTransmitEvent args) { }

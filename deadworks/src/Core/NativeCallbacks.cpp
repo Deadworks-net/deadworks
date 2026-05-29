@@ -5,6 +5,7 @@
 #include "NativeHero.hpp"
 #include "Deadworks.hpp"
 #include "UsercmdVisitorRuntime.hpp"
+#include "NetMessageVisitorRuntime.hpp"
 
 #include "Hooks/CCitadelPlayerPawn.hpp"
 #include "Hooks/CBaseEntity.hpp"
@@ -1026,7 +1027,7 @@ static uint32_t __cdecl NativeTakeSoundEventGuid() {
 // ---------------------------------------------------------------------------
 
 static uint32_t __cdecl NativeGetNativeApiVersion() {
-    return 1;
+    return 2;
 }
 
 static uint8_t __cdecl NativeHasNativeCapability(const char *capability) {
@@ -1039,6 +1040,10 @@ static uint8_t __cdecl NativeHasNativeCapability(const char *capability) {
         "usercmd.full_protobuf_mount",
         "usercmd.fast_read",
         "usercmd.button_triggers",
+        "netmsg.interest_gates",
+        "netmsg.fast_read",
+        "netmsg.user_message_interest_gates",
+        "netmsg.user_message_fast_read",
     };
 
     for (const char *known : kCapabilities) {
@@ -1078,6 +1083,42 @@ static void __cdecl NativeSetUsercmdFieldMask(uint32_t mask) {
 
 static uint32_t __cdecl NativeGetUsercmdFieldMask() {
     return hooks::GetUsercmdFieldMask();
+}
+
+static NetMessageDirection ToNetMessageDirection(int32_t direction) {
+    return direction == 0 ? NetMessageDirection::Incoming : NetMessageDirection::Outgoing;
+}
+
+static void __cdecl NativeSetNetMessageSerializedInterest(int32_t direction, int32_t msgId, uint8_t enabled) {
+    SetNetMessageSerializedInterest(ToNetMessageDirection(direction), msgId, enabled != 0);
+}
+
+static uint8_t __cdecl NativeHasNetMessageSerializedInterest(int32_t direction, int32_t msgId) {
+    return HasNetMessageSerializedInterest(ToNetMessageDirection(direction), msgId) ? 1 : 0;
+}
+
+static void __cdecl NativeSetNetMessageFastInterest(int32_t direction, int32_t msgId, uint8_t enabled) {
+    SetNetMessageFastInterest(ToNetMessageDirection(direction), msgId, enabled != 0);
+}
+
+static uint8_t __cdecl NativeHasNetMessageFastInterest(int32_t direction, int32_t msgId) {
+    return HasNetMessageFastInterest(ToNetMessageDirection(direction), msgId) ? 1 : 0;
+}
+
+static void __cdecl NativeSetUserMessageFastInterest(int32_t userMessageType, uint8_t enabled) {
+    SetUserMessageFastInterest(userMessageType, enabled != 0);
+}
+
+static uint8_t __cdecl NativeHasUserMessageFastInterest(int32_t userMessageType) {
+    return HasUserMessageFastInterest(userMessageType) ? 1 : 0;
+}
+
+static void __cdecl NativeSetUserMessageSerializedInterest(int32_t userMessageType, uint8_t enabled) {
+    SetUserMessageSerializedInterest(userMessageType, enabled != 0);
+}
+
+static uint8_t __cdecl NativeHasUserMessageSerializedInterest(int32_t userMessageType) {
+    return HasUserMessageSerializedInterest(userMessageType) ? 1 : 0;
 }
 
 // ---------------------------------------------------------------------------
@@ -1256,4 +1297,12 @@ void deadworks::PopulateNativeCallbacks(NativeCallbacks &callbacks) {
     callbacks.GetUsercmdButtonTriggerMask = &NativeGetUsercmdButtonTriggerMask;
     callbacks.SetUsercmdFieldMask = &NativeSetUsercmdFieldMask;
     callbacks.GetUsercmdFieldMask = &NativeGetUsercmdFieldMask;
+    callbacks.SetNetMessageSerializedInterest = &NativeSetNetMessageSerializedInterest;
+    callbacks.HasNetMessageSerializedInterest = &NativeHasNetMessageSerializedInterest;
+    callbacks.SetNetMessageFastInterest = &NativeSetNetMessageFastInterest;
+    callbacks.HasNetMessageFastInterest = &NativeHasNetMessageFastInterest;
+    callbacks.SetUserMessageFastInterest = &NativeSetUserMessageFastInterest;
+    callbacks.HasUserMessageFastInterest = &NativeHasUserMessageFastInterest;
+    callbacks.SetUserMessageSerializedInterest = &NativeSetUserMessageSerializedInterest;
+    callbacks.HasUserMessageSerializedInterest = &NativeHasUserMessageSerializedInterest;
 }

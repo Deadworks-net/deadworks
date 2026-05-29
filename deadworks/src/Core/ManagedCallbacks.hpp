@@ -60,6 +60,10 @@ struct ManagedCallbacks {
     using OnProcessUsercmdsFn = void(CORECLR_DELEGATE_CALLTYPE *)(int playerSlot, const uint8_t *batchBytes, int batchLen, int numCmds, uint8_t paused, float margin, uint8_t *outBatchBytes, int *outBatchLen);
     using OnFastProcessUsercmdsFn = void(CORECLR_DELEGATE_CALLTYPE *)(int playerSlot, const FastUsercmdNative *cmds, int numCmds, uint8_t paused, float margin);
     using OnUsercmdTriggerFn = void(CORECLR_DELEGATE_CALLTYPE *)(int playerSlot, const FastUsercmdNative *cmd, uint64_t pressedButtons, uint64_t triggerButtons, uint8_t paused, float margin);
+    using OnFastNetMessageFn = void(CORECLR_DELEGATE_CALLTYPE *)(int32_t direction, int32_t endpointSlot, int32_t msgId, uint64_t recipientMask,
+                                                                 int32_t userMessageType, uint8_t hasUserMessageType,
+                                                                 int32_t pauseType, int32_t pauseGroup, uint8_t hasPauseRequest,
+                                                                 uint8_t paused, uint8_t hasPauseState);
     using OnAbilityAttemptFn = uint64_t(CORECLR_DELEGATE_CALLTYPE *)(int playerSlot, void *pawnEntity, uint64_t heldButtons, uint64_t changedButtons, uint64_t scrollButtons, uint64_t *outForcedButtons);
     using OnAddModifierFn = int(CORECLR_DELEGATE_CALLTYPE *)(void *modifierProp, void **pCaster, uint32_t *pHAbility, int32_t *pITeam, void *vdata, void *params, void *kv);
     using OnCheckTransmitFn = void(CORECLR_DELEGATE_CALLTYPE *)(int playerSlot, void *transmitBits);
@@ -90,6 +94,7 @@ struct ManagedCallbacks {
     OnProcessUsercmdsFn onProcessUsercmds = nullptr;
     OnFastProcessUsercmdsFn onFastProcessUsercmds = nullptr;
     OnUsercmdTriggerFn onUsercmdTrigger = nullptr;
+    OnFastNetMessageFn onFastNetMessage = nullptr;
     OnAbilityAttemptFn onAbilityAttempt = nullptr;
     OnAddModifierFn onAddModifier = nullptr;
     OnCheckTransmitFn onCheckTransmit = nullptr;

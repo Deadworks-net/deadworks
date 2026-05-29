@@ -4,16 +4,19 @@ A server-side modding framework for [Deadlock](https://store.steampowered.com/ap
 
 > **Early development** — APIs are not finalized and will change without notice. We are not distributing prebuilt binaries at this time. Early users and contributors should build from source.
 
-## Visitor/usercmd additions
+## Visitor additions
 
 This branch adds packaged Deadworks visitor controls on top of Deadworks' native hook chassis:
 
 - mounted usercmd policy (`off`, `count`, `direct`, `fast`, `serialize`, `mounted`);
 - read-only compact `FastUsercmd` callbacks for buttons/view/movement without full protobuf parsing;
 - native button edge triggers;
-- capability discovery via `NativeFeatures`.
+- net-message interest gates so full protobuf serialization only happens for mounted handlers;
+- read-only compact `FastNetMessageEvent` callbacks for selected pause/user-message fields;
+- capability discovery via `NativeFeatures`;
+- `examples/plugins/DiagnosticsPlugin` for local visitor/command smoke testing.
 
-See [`docs/usercmd-visitors.md`](docs/usercmd-visitors.md) and [`config/deadworks_usercmd_visitors.env.example`](config/deadworks_usercmd_visitors.env.example).
+See [`docs/usercmd-visitors.md`](docs/usercmd-visitors.md), [`docs/net-message-visitors.md`](docs/net-message-visitors.md), [`config/deadworks_usercmd_visitors.env.example`](config/deadworks_usercmd_visitors.env.example), and [`config/deadworks_net_visitors.env.example`](config/deadworks_net_visitors.env.example).
 
 ## Prerequisites
 

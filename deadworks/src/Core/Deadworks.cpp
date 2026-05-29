@@ -2,6 +2,7 @@
 #include "NativeCallbacks.hpp"
 #include "NativeHero.hpp"
 #include "ManagedCallbacks.hpp"
+#include "NetMessageVisitorRuntime.hpp"
 
 #include "Hooks/CoreHooks.hpp"
 #include "Hooks/Source2GameClients.hpp"
@@ -34,6 +35,7 @@
 #include <tier1/convar.h>
 
 #include <netmessages.h>
+#include <netmessages.pb.h>
 #include <serversideclient.h>
 #include <irecipientfilter.h>
 #include <igameevents.h>
@@ -351,7 +353,40 @@ int Deadworks::OnPre_GameEvent(const char *eventName, void *eventPtr) {
 }
 
 bool Deadworks::OnPre_PostEventAbstract(int msgId, const CNetMessage *pData, uint64 *clientsMask) {
-    if (!m_managed.onNetMessageOutgoing || !pData)
+    if (!pData)
+        return false;
+
+    ProcessFastNetMessage(NetMessageDirection::Outgoing, -1, msgId, pData, clientsMask ? *clientsMask : 0);
+    LogNetMessageVisitorStatsIfDue();
+
+    if (!m_managed.onNetMessageOutgoing || !clientsMask)
+        return false;
+
+    static thread_local uint8_t outBuf[65536];
+
+    if (msgId == svc_UserMessage && HasAnyUserMessageSerializedInterest()) {
+        auto *pb = pData->AsMessageLite();
+        auto *user = pb ? static_cast<const CSVCMsg_UserMessage *>(pb) : nullptr;
+        if (user && user->has_msg_type() && HasUserMessageSerializedInterest(user->msg_type())) {
+            const std::string &payload = user->msg_data();
+            int outLen = -1;
+            uint64 outRecipientMask = *clientsMask;
+            int result = m_managed.onNetMessageOutgoing(
+                user->msg_type(), reinterpret_cast<const uint8_t *>(payload.data()), static_cast<int>(payload.size()),
+                *clientsMask, outBuf, &outLen, &outRecipientMask);
+
+            *clientsMask = outRecipientMask;
+            if (outLen >= 0)
+                const_cast<CSVCMsg_UserMessage *>(user)->set_msg_data(outBuf, outLen);
+
+            if (result >= 1)
+                return true;
+            if (!HasNetMessageSerializedInterest(NetMessageDirection::Outgoing, msgId))
+                return false;
+        }
+    }
+
+    if (!HasNetMessageSerializedInterest(NetMessageDirection::Outgoing, msgId))
         return false;
 
     auto *pb = pData->AsMessageLite();
@@ -366,15 +401,14 @@ bool Deadworks::OnPre_PostEventAbstract(int msgId, const CNetMessage *pData, uin
     if (!pb->SerializeToArray(buf.data(), size))
         return false;
 
-    static thread_local uint8_t outBuf[65536];
-    int outLen = 0;
+    int outLen = -1;
     uint64 outRecipientMask = *clientsMask;
 
     int result = m_managed.onNetMessageOutgoing(msgId, buf.data(), size, *clientsMask, outBuf, &outLen, &outRecipientMask);
 
     *clientsMask = outRecipientMask;
 
-    if (outLen > 0) {
+    if (outLen >= 0) {
         auto *mutablePb = const_cast<google::protobuf::MessageLite *>(pb);
         mutablePb->ParseFromArray(outBuf, outLen);
     }
@@ -519,20 +553,32 @@ void Deadworks::On_ISource2GameClients_ClientDisconnect(CPlayerSlot slot, ENetwo
 }
 
 std::optional<bool> Deadworks::OnPre_CServerSideClientBase_FilterMessage(INetworkMessageProcessingPreFilter *thisptr, const CNetMessage *pData) {
-    auto *client = static_cast<CServerSideClientBase *>(thisptr);
-    auto *info = pData->GetSerializerPB()->GetNetMessageInfo();
+    if (!pData)
+        return std::nullopt;
 
-    // Forward all incoming messages to managed for generic hook dispatch
-    if (m_managed.onNetMessageIncoming) {
-        int msgId = info->m_MessageId;
+    auto *client = static_cast<CServerSideClientBase *>(thisptr);
+    auto *serializer = pData->GetSerializerPB();
+    if (!serializer)
+        return std::nullopt;
+
+    auto *info = serializer->GetNetMessageInfo();
+    if (!info)
+        return std::nullopt;
+
+    int msgId = info->m_MessageId;
+    int senderSlot = client ? client->GetPlayerSlot().Get() : -1;
+
+    ProcessFastNetMessage(NetMessageDirection::Incoming, senderSlot, msgId, pData, 0);
+    LogNetMessageVisitorStatsIfDue();
+
+    if (m_managed.onNetMessageIncoming && HasNetMessageSerializedInterest(NetMessageDirection::Incoming, msgId)) {
         auto *pb = pData->AsMessageLite();
         if (pb) {
             int size = static_cast<int>(pb->ByteSizeLong());
             if (size > 0) {
                 std::vector<uint8_t> buf(size);
                 if (pb->SerializeToArray(buf.data(), size)) {
-                    int result = m_managed.onNetMessageIncoming(
-                        client->GetPlayerSlot().Get(), msgId, buf.data(), size);
+                    int result = m_managed.onNetMessageIncoming(senderSlot, msgId, buf.data(), size);
                     if (result >= 1) // Stop/block
                         return true;
                 }
@@ -596,6 +642,22 @@ void Deadworks::OnFast_ProcessUsercmds(int playerSlot, const FastUsercmdNative *
 void Deadworks::OnUsercmdTrigger(int playerSlot, const FastUsercmdNative *cmd, uint64_t pressedButtons, uint64_t triggerButtons, bool paused, float margin) {
     if (m_managed.onUsercmdTrigger)
         m_managed.onUsercmdTrigger(playerSlot, cmd, pressedButtons, triggerButtons, paused ? 1 : 0, margin);
+}
+
+bool Deadworks::HasFastNetMessageCallback() const {
+    return m_managed.onFastNetMessage != nullptr;
+}
+
+void Deadworks::OnFastNetMessage(int32_t direction, int32_t endpointSlot, int32_t msgId, uint64_t recipientMask,
+                                 int32_t userMessageType, uint8_t hasUserMessageType,
+                                 int32_t pauseType, int32_t pauseGroup, uint8_t hasPauseRequest,
+                                 uint8_t paused, uint8_t hasPauseState) {
+    if (m_managed.onFastNetMessage) {
+        m_managed.onFastNetMessage(direction, endpointSlot, msgId, recipientMask,
+                                   userMessageType, hasUserMessageType,
+                                   pauseType, pauseGroup, hasPauseRequest,
+                                   paused, hasPauseState);
+    }
 }
 
 uint64_t Deadworks::OnPre_AbilityThink(int playerSlot, void *pawnEntity, uint64_t heldButtons, uint64_t changedButtons, uint64_t scrollButtons, uint64_t *outForcedButtons) {

@@ -12,6 +12,7 @@ public static class NetMessageRegistry
 {
 	private static readonly Dictionary<Type, int> s_typeToId = new();
 	private static readonly Dictionary<int, MessageParser> s_idToParser = new();
+	private static readonly HashSet<int> s_userMessageIds = new();
 	private static bool s_initialized;
 
 	internal static void EnsureInitialized()
@@ -42,6 +43,12 @@ public static class NetMessageRegistry
 	{
 		EnsureInitialized();
 		return s_idToParser.TryGetValue(messageId, out var parser) ? parser : null;
+	}
+
+	internal static bool IsUserMessageId(int messageId)
+	{
+		EnsureInitialized();
+		return s_userMessageIds.Contains(messageId);
 	}
 
 	private static void BuildRegistry()
@@ -115,8 +122,13 @@ public static class NetMessageRegistry
 
 		if (mapper == null) return;
 
+		bool isUserMessageEnum = enumDesc.Name is "CitadelUserMessageIds" or "EBaseUserMessages";
+
 		foreach (var value in enumDesc.Values)
 		{
+			if (isUserMessageEnum)
+				s_userMessageIds.Add(value.Number);
+
 			var className = mapper(value.Name);
 			if (className == null) continue;
 

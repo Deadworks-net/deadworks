@@ -137,4 +137,12 @@ internal struct NativeCallbacks
 	public nint GetUsercmdButtonTriggerMask;
 	public nint SetUsercmdFieldMask;
 	public nint GetUsercmdFieldMask;
+	public nint SetNetMessageSerializedInterest;
+	public nint HasNetMessageSerializedInterest;
+	public nint SetNetMessageFastInterest;
+	public nint HasNetMessageFastInterest;
+	public nint SetUserMessageFastInterest;
+	public nint HasUserMessageFastInterest;
+	public nint SetUserMessageSerializedInterest;
+	public nint HasUserMessageSerializedInterest;
 }

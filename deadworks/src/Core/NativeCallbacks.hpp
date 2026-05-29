@@ -151,6 +151,14 @@ struct NativeCallbacks {
     uint64_t(__cdecl *GetUsercmdButtonTriggerMask)();
     void(__cdecl *SetUsercmdFieldMask)(uint32_t mask);
     uint32_t(__cdecl *GetUsercmdFieldMask)();
+    void(__cdecl *SetNetMessageSerializedInterest)(int32_t direction, int32_t msgId, uint8_t enabled);
+    uint8_t(__cdecl *HasNetMessageSerializedInterest)(int32_t direction, int32_t msgId);
+    void(__cdecl *SetNetMessageFastInterest)(int32_t direction, int32_t msgId, uint8_t enabled);
+    uint8_t(__cdecl *HasNetMessageFastInterest)(int32_t direction, int32_t msgId);
+    void(__cdecl *SetUserMessageFastInterest)(int32_t userMessageType, uint8_t enabled);
+    uint8_t(__cdecl *HasUserMessageFastInterest)(int32_t userMessageType);
+    void(__cdecl *SetUserMessageSerializedInterest)(int32_t userMessageType, uint8_t enabled);
+    uint8_t(__cdecl *HasUserMessageSerializedInterest)(int32_t userMessageType);
 };
 
 void PopulateNativeCallbacks(NativeCallbacks &callbacks);
