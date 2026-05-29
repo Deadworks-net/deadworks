@@ -34,13 +34,28 @@ function SettingRow({
 }
 
 export default function SettingsWindow() {
-  const { apiEndpoint, setApiEndpoint, telemetryEnabled, setTelemetryEnabled } = useSettings();
+  const {
+    apiEndpoint,
+    setApiEndpoint,
+    telemetryEnabled,
+    setTelemetryEnabled,
+    launcherBackgroundPath,
+    setLauncherBackgroundPath,
+    launcherBackgroundZoom,
+    setLauncherBackgroundZoom,
+    launcherBackgroundPositionX,
+    setLauncherBackgroundPositionX,
+    launcherBackgroundPositionY,
+    setLauncherBackgroundPositionY,
+    resetLauncherBackgroundLayout,
+  } = useSettings();
   const [activeSection, setActiveSection] = useState("general");
   const [autostart, setAutostart] = useState(false);
   const [detectedPath, setDetectedPath] = useState<string | null>(null);
   const [currentPath, setCurrentPath] = useState<string | null>(null);
   const [isOverridden, setIsOverridden] = useState(false);
   const [gameDirError, setGameDirError] = useState<string | null>(null);
+  const [backgroundError, setBackgroundError] = useState<string | null>(null);
   const win = getCurrentWindow();
 
   useEffect(() => {
@@ -90,6 +105,24 @@ export default function SettingsWindow() {
     setCurrentPath(detectedPath);
     setIsOverridden(false);
     setGameDirError(null);
+  };
+
+  const handleBrowseBackground = async () => {
+    const selected = await open({
+      title: "Select launcher background image",
+      filters: [
+        { name: "Images", extensions: ["png", "jpg", "jpeg", "webp", "gif"] },
+      ],
+    });
+    const path = Array.isArray(selected) ? selected[0] : selected;
+    if (!path) return;
+    try {
+      await invoke("validate_launcher_background", { path });
+      await setLauncherBackgroundPath(path);
+      setBackgroundError(null);
+    } catch (e) {
+      setBackgroundError(typeof e === "string" ? e : String(e));
+    }
   };
 
   const toggleAutostart = async (enabled: boolean) => {
@@ -172,6 +205,86 @@ export default function SettingsWindow() {
                   </button>
                 }
               />
+
+              <div className={styles.sectionSubtitle}>Appearance</div>
+
+              <div className={styles.settingRow}>
+                <div className={styles.settingInfo}>
+                  <div className={styles.settingLabel}>Launcher Background</div>
+                  <div className={styles.settingDesc}>
+                    Choose a local image to display behind the launcher
+                  </div>
+                  <div className={styles.pathDisplay}>
+                    {launcherBackgroundPath || "Default gradient"}
+                  </div>
+                </div>
+                <div className={styles.pathButtons}>
+                  <button className={styles.devBtn} onClick={handleBrowseBackground}>
+                    Browse
+                  </button>
+                  {launcherBackgroundPath && (
+                    <button className={styles.devBtn} onClick={() => setLauncherBackgroundPath(null)}>
+                      Reset
+                    </button>
+                  )}
+                </div>
+              </div>
+              {backgroundError && (
+                <div className={styles.inlineError}>{backgroundError}</div>
+              )}
+
+              {launcherBackgroundPath && (
+                <div className={styles.backgroundLayoutControls}>
+                  <div className={styles.sliderRow}>
+                    <label className={styles.sliderLabel} htmlFor="background-zoom">
+                      Zoom <span>{launcherBackgroundZoom}%</span>
+                    </label>
+                    <input
+                      id="background-zoom"
+                      className={styles.slider}
+                      type="range"
+                      min="100"
+                      max="250"
+                      step="1"
+                      value={launcherBackgroundZoom}
+                      onChange={(e) => setLauncherBackgroundZoom(Number(e.target.value))}
+                    />
+                  </div>
+                  <div className={styles.sliderRow}>
+                    <label className={styles.sliderLabel} htmlFor="background-position-x">
+                      Horizontal <span>{launcherBackgroundPositionX}%</span>
+                    </label>
+                    <input
+                      id="background-position-x"
+                      className={styles.slider}
+                      type="range"
+                      min="0"
+                      max="100"
+                      step="1"
+                      value={launcherBackgroundPositionX}
+                      onChange={(e) => setLauncherBackgroundPositionX(Number(e.target.value))}
+                    />
+                  </div>
+                  <div className={styles.sliderRow}>
+                    <label className={styles.sliderLabel} htmlFor="background-position-y">
+                      Vertical <span>{launcherBackgroundPositionY}%</span>
+                    </label>
+                    <input
+                      id="background-position-y"
+                      className={styles.slider}
+                      type="range"
+                      min="0"
+                      max="100"
+                      step="1"
+                      value={launcherBackgroundPositionY}
+                      onChange={(e) => setLauncherBackgroundPositionY(Number(e.target.value))}
+                    />
+                  </div>
+                  <button className={styles.devBtn} onClick={resetLauncherBackgroundLayout}>
+                    Reset Position
+                  </button>
+                </div>
+              )}
 
               <div className={styles.sectionSubtitle}>Game Location</div>
 

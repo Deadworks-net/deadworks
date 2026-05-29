@@ -30,6 +30,7 @@ tokio = { version = "1", features = ["fs", "io-util"] }
 futures-util = "0.3"
 bzip2 = "0.5"
 uuid = { version = "1", features = ["v4"] }
+base64 = "0.22"
 
 [target.'cfg(windows)'.dependencies]
 winreg = "0.55"

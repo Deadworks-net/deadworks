@@ -1,4 +1,5 @@
 mod addons;
+mod backgrounds;
 mod connect;
 mod deep_link;
 mod gameinfo;
@@ -55,6 +56,8 @@ pub fn run() {
             connect::set_game_dir,
             connect::reset_game_dir,
             addons::prepare_and_connect,
+            backgrounds::validate_launcher_background,
+            backgrounds::get_launcher_background_data_url,
             ping::ping_server,
             deep_link::deep_link_ready,
         ])
