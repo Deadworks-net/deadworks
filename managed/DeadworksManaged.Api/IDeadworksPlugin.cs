@@ -105,8 +105,14 @@ public interface IDeadworksPlugin {
 	/// </summary>
 	void OnAbilityAttempt(AbilityAttemptEvent args) { }
 
-	/// <summary>Called when a player's usercmds are being processed.</summary>
+	/// <summary>Called when a player's usercmds are being processed through the full protobuf mutation/debug path.</summary>
 	void OnProcessUsercmds(ProcessUsercmdsEvent args) { }
+
+	/// <summary>Called with compact native-extracted usercmd fields. Read-only and cheaper than full protobuf parsing.</summary>
+	void OnFastProcessUsercmds(FastProcessUsercmdsEvent args) { }
+
+	/// <summary>Called when a mounted native usercmd trigger matches, such as a watched button edge.</summary>
+	void OnUsercmdTrigger(UsercmdTriggerEvent args) { }
 
 	/// <summary>Called after the plugin's config has been reloaded via <c>dw_reloadconfig</c>.</summary>
 	void OnConfigReloaded() { }

@@ -30,6 +30,8 @@ public abstract class DeadworksPluginBase : IDeadworksPlugin {
 	public virtual void OnEntityEndTouch(EntityTouchEvent args) { }
 	public virtual void OnAbilityAttempt(AbilityAttemptEvent args) { }
 	public virtual void OnProcessUsercmds(ProcessUsercmdsEvent args) { }
+	public virtual void OnFastProcessUsercmds(FastProcessUsercmdsEvent args) { }
+	public virtual void OnUsercmdTrigger(UsercmdTriggerEvent args) { }
 	public virtual HookResult OnAddModifier(AddModifierEvent args) => HookResult.Continue;
 	public virtual void OnConfigReloaded() { }
 	public virtual void OnCheckTransmit(CheckTransmitEvent args) { }

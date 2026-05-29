@@ -60,6 +60,7 @@ internal static partial class PluginLoader
     private static FileSystemWatcher? _watcher;
     private static Timer? _debounceTimer;
     private static readonly HashSet<string> _pendingReloads = new(StringComparer.OrdinalIgnoreCase);
+    private static UsercmdMount? _startupUsercmdMountMask;
 
     // Assemblies that plugins may reference from the host. Resolved once at startup
     // so every PluginLoadContext returns the same instance (preserving type identity).
@@ -350,6 +351,44 @@ internal static partial class PluginLoader
     private static void RebuildSnapshot()
     {
         _pluginSnapshot = _loaded.Values.SelectMany(e => e.Plugins).ToArray();
+        ReconcileUsercmdMounts();
+    }
+
+    private static void ReconcileUsercmdMounts()
+    {
+        UsercmdMount mount = UsercmdMount.None;
+        foreach (var plugin in _pluginSnapshot)
+        {
+            var type = plugin.GetType();
+            if (OverridesPluginMethod(type, nameof(IDeadworksPlugin.OnProcessUsercmds), typeof(ProcessUsercmdsEvent)))
+                mount |= UsercmdMount.FullProtobuf;
+            if (OverridesPluginMethod(type, nameof(IDeadworksPlugin.OnFastProcessUsercmds), typeof(FastProcessUsercmdsEvent)))
+                mount |= UsercmdMount.FastRead;
+            if (OverridesPluginMethod(type, nameof(IDeadworksPlugin.OnUsercmdTrigger), typeof(UsercmdTriggerEvent)))
+                mount |= UsercmdMount.ButtonTriggers;
+        }
+
+        try
+        {
+            _startupUsercmdMountMask ??= Usercmds.GetMountMask();
+            Usercmds.SetMountMask(mount | _startupUsercmdMountMask.Value);
+            if (string.IsNullOrWhiteSpace(Environment.GetEnvironmentVariable("DEADWORKS_USERCMD_NATIVE_MODE")))
+                Usercmds.SetNativeMode(UsercmdNativeMode.MountedPolicy);
+            if (mount != UsercmdMount.None)
+                Console.WriteLine($"[PluginLoader] Mounted native usercmd features: {mount}");
+        }
+        catch (NotSupportedException)
+        {
+            // Older native Deadworks build; leave legacy behavior in place.
+        }
+    }
+
+    private static bool OverridesPluginMethod(Type type, string methodName, params Type[] argTypes)
+    {
+        var method = type.GetMethod(methodName, BindingFlags.Instance | BindingFlags.Public, binder: null, types: argTypes, modifiers: null);
+        if (method == null)
+            return false;
+        return method.DeclaringType != typeof(DeadworksPluginBase) && method.DeclaringType != typeof(IDeadworksPlugin);
     }
 
     // --- Dispatch helpers ---
@@ -472,6 +511,12 @@ internal static partial class PluginLoader
 
     public static void DispatchProcessUsercmds(ProcessUsercmdsEvent args)
         => DispatchToPlugins(p => p.OnProcessUsercmds(args), nameof(IDeadworksPlugin.OnProcessUsercmds));
+
+    public static void DispatchFastProcessUsercmds(FastProcessUsercmdsEvent args)
+        => DispatchToPlugins(p => p.OnFastProcessUsercmds(args), nameof(IDeadworksPlugin.OnFastProcessUsercmds));
+
+    public static void DispatchUsercmdTrigger(UsercmdTriggerEvent args)
+        => DispatchToPlugins(p => p.OnUsercmdTrigger(args), nameof(IDeadworksPlugin.OnUsercmdTrigger));
 
     public static HookResult DispatchAddModifier(AddModifierEvent args)
         => DispatchToPluginsWithResult(p => p.OnAddModifier(args), nameof(IDeadworksPlugin.OnAddModifier));

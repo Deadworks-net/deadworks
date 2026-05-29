@@ -84,6 +84,8 @@ public:
                                  void *activator, void *caller, const void *variantValue, float delay);
     // Usercmds
     void OnPre_ProcessUsercmds(int playerSlot, const uint8_t *batchBytes, int batchLen, int numCmds, bool paused, float margin, uint8_t *outBytes, int *outLen);
+    void OnFast_ProcessUsercmds(int playerSlot, const FastUsercmdNative *cmds, int numCmds, bool paused, float margin);
+    void OnUsercmdTrigger(int playerSlot, const FastUsercmdNative *cmd, uint64_t pressedButtons, uint64_t triggerButtons, bool paused, float margin);
     // Ability think - returns bitmask of buttons to block, outForcedButtons receives bits to force
     uint64_t OnPre_AbilityThink(int playerSlot, void *pawnEntity, uint64_t heldButtons, uint64_t changedButtons, uint64_t scrollButtons, uint64_t *outForcedButtons);
     // AddModifier

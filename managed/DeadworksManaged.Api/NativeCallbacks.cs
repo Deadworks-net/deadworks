@@ -127,4 +127,14 @@ internal struct NativeCallbacks
 	public nint VariantToVector;
 	public nint VariantToColor;
 	public nint AddConCommandFlags;
+	public nint GetNativeApiVersion;
+	public nint HasNativeCapability;
+	public nint SetUsercmdNativeMode;
+	public nint GetUsercmdNativeMode;
+	public nint SetUsercmdMountMask;
+	public nint GetUsercmdMountMask;
+	public nint SetUsercmdButtonTriggerMask;
+	public nint GetUsercmdButtonTriggerMask;
+	public nint SetUsercmdFieldMask;
+	public nint GetUsercmdFieldMask;
 }

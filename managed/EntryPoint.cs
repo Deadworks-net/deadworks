@@ -354,6 +354,11 @@ public static class EntryPoint
     {
         *outBatchLen = 0;
 
+        // Safety valve for mixed deployments. Native code checks this before
+        // serialization; this keeps older binaries from parsing in managed code.
+        if (Environment.GetEnvironmentVariable("DEADWORKS_DISABLE_USERCMDS") == "1")
+            return;
+
         if (batchLen <= 0 || numCmds <= 0)
             return;
 
@@ -415,6 +420,45 @@ public static class EntryPoint
         {
             *outBatchLen = writeOffset;
         }
+    }
+
+    [UnmanagedCallersOnly]
+    public static unsafe void OnFastProcessUsercmds(int playerSlot, FastUsercmd* cmds, int numCmds, byte paused, float margin)
+    {
+        if (cmds == null || numCmds <= 0)
+            return;
+
+        var managedCmds = new FastUsercmd[numCmds];
+        new ReadOnlySpan<FastUsercmd>(cmds, numCmds).CopyTo(managedCmds);
+
+        var args = new FastProcessUsercmdsEvent
+        {
+            PlayerSlot = playerSlot,
+            Usercmds = managedCmds,
+            Paused = paused != 0,
+            Margin = margin
+        };
+
+        PluginLoader.DispatchFastProcessUsercmds(args);
+    }
+
+    [UnmanagedCallersOnly]
+    public static unsafe void OnUsercmdTrigger(int playerSlot, FastUsercmd* cmd, ulong pressedButtons, ulong triggerButtons, byte paused, float margin)
+    {
+        if (cmd == null)
+            return;
+
+        var args = new UsercmdTriggerEvent
+        {
+            PlayerSlot = playerSlot,
+            Usercmd = *cmd,
+            PressedButtons = (InputButton)pressedButtons,
+            TriggerButtons = (InputButton)triggerButtons,
+            Paused = paused != 0,
+            Margin = margin
+        };
+
+        PluginLoader.DispatchUsercmdTrigger(args);
     }
 
     [UnmanagedCallersOnly]

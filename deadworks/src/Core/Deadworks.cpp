@@ -588,6 +588,16 @@ void Deadworks::OnPre_ProcessUsercmds(int playerSlot, const uint8_t *batchBytes,
         m_managed.onProcessUsercmds(playerSlot, batchBytes, batchLen, numCmds, paused ? 1 : 0, margin, outBytes, outLen);
 }
 
+void Deadworks::OnFast_ProcessUsercmds(int playerSlot, const FastUsercmdNative *cmds, int numCmds, bool paused, float margin) {
+    if (m_managed.onFastProcessUsercmds)
+        m_managed.onFastProcessUsercmds(playerSlot, cmds, numCmds, paused ? 1 : 0, margin);
+}
+
+void Deadworks::OnUsercmdTrigger(int playerSlot, const FastUsercmdNative *cmd, uint64_t pressedButtons, uint64_t triggerButtons, bool paused, float margin) {
+    if (m_managed.onUsercmdTrigger)
+        m_managed.onUsercmdTrigger(playerSlot, cmd, pressedButtons, triggerButtons, paused ? 1 : 0, margin);
+}
+
 uint64_t Deadworks::OnPre_AbilityThink(int playerSlot, void *pawnEntity, uint64_t heldButtons, uint64_t changedButtons, uint64_t scrollButtons, uint64_t *outForcedButtons) {
     if (m_managed.onAbilityAttempt)
         return m_managed.onAbilityAttempt(playerSlot, pawnEntity, heldButtons, changedButtons, scrollButtons, outForcedButtons);

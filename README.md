@@ -4,6 +4,17 @@ A server-side modding framework for [Deadlock](https://store.steampowered.com/ap
 
 > **Early development** — APIs are not finalized and will change without notice. We are not distributing prebuilt binaries at this time. Early users and contributors should build from source.
 
+## Visitor/usercmd additions
+
+This branch adds packaged Deadworks visitor controls on top of Deadworks' native hook chassis:
+
+- mounted usercmd policy (`off`, `count`, `direct`, `fast`, `serialize`, `mounted`);
+- read-only compact `FastUsercmd` callbacks for buttons/view/movement without full protobuf parsing;
+- native button edge triggers;
+- capability discovery via `NativeFeatures`.
+
+See [`docs/usercmd-visitors.md`](docs/usercmd-visitors.md) and [`config/deadworks_usercmd_visitors.env.example`](config/deadworks_usercmd_visitors.env.example).
+
 ## Prerequisites
 
 ### Visual Studio

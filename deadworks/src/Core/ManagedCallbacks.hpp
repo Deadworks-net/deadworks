@@ -7,6 +7,21 @@ namespace deadworks {
 
 class DotNetHost;
 
+struct FastUsercmdNative {
+    int32_t commandIndex;
+    int32_t clientTick;
+    uint64_t buttons;
+    float pitch;
+    float yaw;
+    float roll;
+    float forwardMove;
+    float leftMove;
+    int32_t hasBase;
+    int32_t hasButtons;
+    int32_t hasViewAngles;
+};
+static_assert(sizeof(FastUsercmdNative) == 48, "FastUsercmdNative ABI must match managed FastUsercmd");
+
 struct ManagedCallbacks {
     using OnStartupServerFn = void(CORECLR_DELEGATE_CALLTYPE *)(const char *mapName);
     using OnTakeDamageOldFn = bool(CORECLR_DELEGATE_CALLTYPE *)(void *entity, void *info, void *result);
@@ -43,6 +58,8 @@ struct ManagedCallbacks {
                                                                        void *activator, void *caller,
                                                                        const void *variantValue, float delay);
     using OnProcessUsercmdsFn = void(CORECLR_DELEGATE_CALLTYPE *)(int playerSlot, const uint8_t *batchBytes, int batchLen, int numCmds, uint8_t paused, float margin, uint8_t *outBatchBytes, int *outBatchLen);
+    using OnFastProcessUsercmdsFn = void(CORECLR_DELEGATE_CALLTYPE *)(int playerSlot, const FastUsercmdNative *cmds, int numCmds, uint8_t paused, float margin);
+    using OnUsercmdTriggerFn = void(CORECLR_DELEGATE_CALLTYPE *)(int playerSlot, const FastUsercmdNative *cmd, uint64_t pressedButtons, uint64_t triggerButtons, uint8_t paused, float margin);
     using OnAbilityAttemptFn = uint64_t(CORECLR_DELEGATE_CALLTYPE *)(int playerSlot, void *pawnEntity, uint64_t heldButtons, uint64_t changedButtons, uint64_t scrollButtons, uint64_t *outForcedButtons);
     using OnAddModifierFn = int(CORECLR_DELEGATE_CALLTYPE *)(void *modifierProp, void **pCaster, uint32_t *pHAbility, int32_t *pITeam, void *vdata, void *params, void *kv);
     using OnCheckTransmitFn = void(CORECLR_DELEGATE_CALLTYPE *)(int playerSlot, void *transmitBits);
@@ -71,6 +88,8 @@ struct ManagedCallbacks {
     OnEntityFireOutputFn onEntityFireOutput = nullptr;
     OnEntityFireOutputPostFn onEntityFireOutputPost = nullptr;
     OnProcessUsercmdsFn onProcessUsercmds = nullptr;
+    OnFastProcessUsercmdsFn onFastProcessUsercmds = nullptr;
+    OnUsercmdTriggerFn onUsercmdTrigger = nullptr;
     OnAbilityAttemptFn onAbilityAttempt = nullptr;
     OnAddModifierFn onAddModifier = nullptr;
     OnCheckTransmitFn onCheckTransmit = nullptr;

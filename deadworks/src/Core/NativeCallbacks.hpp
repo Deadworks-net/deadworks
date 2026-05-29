@@ -138,6 +138,19 @@ struct NativeCallbacks {
     void(__cdecl *VariantToVector)(const void *variantPtr, float *outXYZW);  // populates 4 floats; zero-pads unused components
     uint32_t(__cdecl *VariantToColor)(const void *variantPtr);  // packed RGBA (R in low byte)
     uint8_t(__cdecl *AddConCommandFlags)(const char *name, uint64_t flags);
+
+    // Optional visitor API. Keep new entries appended to preserve the existing
+    // callback layout for plugins that only use the older Deadworks surface.
+    uint32_t(__cdecl *GetNativeApiVersion)();
+    uint8_t(__cdecl *HasNativeCapability)(const char *capabilityName);
+    void(__cdecl *SetUsercmdNativeMode)(int32_t mode);
+    int32_t(__cdecl *GetUsercmdNativeMode)();
+    void(__cdecl *SetUsercmdMountMask)(uint32_t mask);
+    uint32_t(__cdecl *GetUsercmdMountMask)();
+    void(__cdecl *SetUsercmdButtonTriggerMask)(uint64_t mask);
+    uint64_t(__cdecl *GetUsercmdButtonTriggerMask)();
+    void(__cdecl *SetUsercmdFieldMask)(uint32_t mask);
+    uint32_t(__cdecl *GetUsercmdFieldMask)();
 };
 
 void PopulateNativeCallbacks(NativeCallbacks &callbacks);

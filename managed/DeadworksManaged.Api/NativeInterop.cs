@@ -129,4 +129,16 @@ internal static unsafe class NativeInterop
 	public static delegate* unmanaged[Cdecl]<void*, float*, void> VariantToVector => (delegate* unmanaged[Cdecl]<void*, float*, void>)_cb.VariantToVector;
 	public static delegate* unmanaged[Cdecl]<void*, uint> VariantToColor => (delegate* unmanaged[Cdecl]<void*, uint>)_cb.VariantToColor;
 	public static delegate* unmanaged[Cdecl]<byte*, ulong, byte> AddConCommandFlags => (delegate* unmanaged[Cdecl]<byte*, ulong, byte>)_cb.AddConCommandFlags;
+
+	// Deadworks visitor API
+	public static delegate* unmanaged[Cdecl]<uint> GetNativeApiVersion => (delegate* unmanaged[Cdecl]<uint>)_cb.GetNativeApiVersion;
+	public static delegate* unmanaged[Cdecl]<byte*, byte> HasNativeCapability => (delegate* unmanaged[Cdecl]<byte*, byte>)_cb.HasNativeCapability;
+	public static delegate* unmanaged[Cdecl]<int, void> SetUsercmdNativeMode => (delegate* unmanaged[Cdecl]<int, void>)_cb.SetUsercmdNativeMode;
+	public static delegate* unmanaged[Cdecl]<int> GetUsercmdNativeMode => (delegate* unmanaged[Cdecl]<int>)_cb.GetUsercmdNativeMode;
+	public static delegate* unmanaged[Cdecl]<uint, void> SetUsercmdMountMask => (delegate* unmanaged[Cdecl]<uint, void>)_cb.SetUsercmdMountMask;
+	public static delegate* unmanaged[Cdecl]<uint> GetUsercmdMountMask => (delegate* unmanaged[Cdecl]<uint>)_cb.GetUsercmdMountMask;
+	public static delegate* unmanaged[Cdecl]<ulong, void> SetUsercmdButtonTriggerMask => (delegate* unmanaged[Cdecl]<ulong, void>)_cb.SetUsercmdButtonTriggerMask;
+	public static delegate* unmanaged[Cdecl]<ulong> GetUsercmdButtonTriggerMask => (delegate* unmanaged[Cdecl]<ulong>)_cb.GetUsercmdButtonTriggerMask;
+	public static delegate* unmanaged[Cdecl]<uint, void> SetUsercmdFieldMask => (delegate* unmanaged[Cdecl]<uint, void>)_cb.SetUsercmdFieldMask;
+	public static delegate* unmanaged[Cdecl]<uint> GetUsercmdFieldMask => (delegate* unmanaged[Cdecl]<uint>)_cb.GetUsercmdFieldMask;
 }

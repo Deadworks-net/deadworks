@@ -4,6 +4,7 @@
 #include "NativeDamage.hpp"
 #include "NativeHero.hpp"
 #include "Deadworks.hpp"
+#include "UsercmdVisitorRuntime.hpp"
 
 #include "Hooks/CCitadelPlayerPawn.hpp"
 #include "Hooks/CBaseEntity.hpp"
@@ -1021,6 +1022,65 @@ static uint32_t __cdecl NativeTakeSoundEventGuid() {
 }
 
 // ---------------------------------------------------------------------------
+// Deadworks visitor API
+// ---------------------------------------------------------------------------
+
+static uint32_t __cdecl NativeGetNativeApiVersion() {
+    return 1;
+}
+
+static uint8_t __cdecl NativeHasNativeCapability(const char *capability) {
+    if (!capability || !*capability)
+        return 0;
+
+    static constexpr const char *kCapabilities[] = {
+        "deadworks.visitors.v1",
+        "usercmd.mounted_policy",
+        "usercmd.full_protobuf_mount",
+        "usercmd.fast_read",
+        "usercmd.button_triggers",
+    };
+
+    for (const char *known : kCapabilities) {
+        if (std::strcmp(capability, known) == 0)
+            return 1;
+    }
+    return 0;
+}
+
+static void __cdecl NativeSetUsercmdNativeMode(int32_t mode) {
+    hooks::SetUsercmdNativeMode(mode);
+}
+
+static int32_t __cdecl NativeGetUsercmdNativeMode() {
+    return hooks::GetUsercmdNativeMode();
+}
+
+static void __cdecl NativeSetUsercmdMountMask(uint32_t mask) {
+    hooks::SetUsercmdMountMask(mask);
+}
+
+static uint32_t __cdecl NativeGetUsercmdMountMask() {
+    return hooks::GetUsercmdMountMask();
+}
+
+static void __cdecl NativeSetUsercmdButtonTriggerMask(uint64_t mask) {
+    hooks::SetUsercmdButtonTriggerMask(mask);
+}
+
+static uint64_t __cdecl NativeGetUsercmdButtonTriggerMask() {
+    return hooks::GetUsercmdButtonTriggerMask();
+}
+
+static void __cdecl NativeSetUsercmdFieldMask(uint32_t mask) {
+    hooks::SetUsercmdFieldMask(mask);
+}
+
+static uint32_t __cdecl NativeGetUsercmdFieldMask() {
+    return hooks::GetUsercmdFieldMask();
+}
+
+// ---------------------------------------------------------------------------
 // Resolve statics that PostInit needs
 // ---------------------------------------------------------------------------
 
@@ -1184,4 +1244,16 @@ void deadworks::PopulateNativeCallbacks(NativeCallbacks &callbacks) {
 
     // ConCommand flag mutation
     callbacks.AddConCommandFlags = &NativeAddConCommandFlags;
+
+    // Deadworks visitor API
+    callbacks.GetNativeApiVersion = &NativeGetNativeApiVersion;
+    callbacks.HasNativeCapability = &NativeHasNativeCapability;
+    callbacks.SetUsercmdNativeMode = &NativeSetUsercmdNativeMode;
+    callbacks.GetUsercmdNativeMode = &NativeGetUsercmdNativeMode;
+    callbacks.SetUsercmdMountMask = &NativeSetUsercmdMountMask;
+    callbacks.GetUsercmdMountMask = &NativeGetUsercmdMountMask;
+    callbacks.SetUsercmdButtonTriggerMask = &NativeSetUsercmdButtonTriggerMask;
+    callbacks.GetUsercmdButtonTriggerMask = &NativeGetUsercmdButtonTriggerMask;
+    callbacks.SetUsercmdFieldMask = &NativeSetUsercmdFieldMask;
+    callbacks.GetUsercmdFieldMask = &NativeGetUsercmdFieldMask;
 }

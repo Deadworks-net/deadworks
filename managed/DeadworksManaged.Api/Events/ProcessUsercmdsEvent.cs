@@ -1,6 +1,6 @@
 namespace DeadworksManaged.Api;
 
-/// <summary>Event data passed to <see cref="IDeadworksPlugin.OnProcessUsercmds"/>. Contains the player slot, parsed usercmd protobuf messages, and timing info.</summary>
+/// <summary>Event data passed to <see cref="IDeadworksPlugin.OnProcessUsercmds"/>. This is the full protobuf mutation/debug path; use <see cref="FastProcessUsercmdsEvent"/> for cheap read-only telemetry.</summary>
 public sealed class ProcessUsercmdsEvent {
 	/// <summary>Player slot (0-63).</summary>
 	public required int PlayerSlot { get; init; }
