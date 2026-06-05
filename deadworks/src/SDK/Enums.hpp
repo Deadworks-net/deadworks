@@ -141,29 +141,30 @@ enum EModifierEvent : uint32_t {
     MODIFIER_EVENT_CHECK_FOR_PARRY = 0x4A,                                     // 74
     MODIFIER_EVENT_PARRY_SUCCESS = 0x4B,                                       // 75
     MODIFIER_EVENT_HERO_LEVEL_CHANGED = 0x4C,                                  // 76
-    MODIFIER_EVENT_PRE_FATAL_DAMAGE = 0x4D,                                    // 77
-    MODIFIER_EVENT_OVERRIDE_SHOT_PARAMS = 0x4E,                                // 78
-    MODIFIER_EVENT_ABILITY_TRIGGER_ACTIVATED = 0x4F,                           // 79
-    MODIFIER_EVENT_VISCOUS_CUBE_DESTROYED = 0x50,                              // 80
-    MODIFIER_EVENT_ABILITY_DASHCAST_HIT = 0x51,                                // 81
-    MODIFIER_EVENT_ABILITY_DASHCAST_MISS = 0x52,                               // 82
-    MODIFIER_EVENT_PRE_BULLET_FIRED = 0x53,                                    // 83
-    MODIFIER_EVENT_BULLET_EVADED = 0x54,                                       // 84
-    MODIFIER_EVENT_MELEE_ATTACK = 0x55,                                        // 85
-    MODIFIER_EVENT_MELEE_ATTACK_STARTED = 0x56,                                // 86
-    MODIFIER_EVENT_PLAYER_MOVE_COLLIDE = 0x57,                                 // 87
-    MODIFIER_EVENT_ORB_CLAIMED = 0x58,                                         // 88
-    MODIFIER_EVENT_MODIFIER_REFRESHED = 0x59,                                  // 89
-    MODIFIER_EVENT_MODIFIER_SHOULD_CREATE = 0x5A,                              // 90
-    MODIFIER_EVENT_MODIFIER_CREATED = 0x5B,                                    // 91
-    MODIFIER_EVENT_MODIFIER_CREATION_PREVENTED = 0x5C,                         // 92
-    MODIFIER_EVENT_CANCEL_ROPE_CLIMB = 0x5D,                                   // 93
-    MODIFIER_EVENT_PORTALLED = 0x5E,                                           // 94
-    MODIFIER_EVENT_TELEPORTED = 0x5F,                                          // 95
-    MODIFIER_EVENT_BARRIER_ADDED = 0x60,                                       // 96
-    MODIFIER_EVENT_REPLICATED_HEAL = 0x61,                                     // 97
-    MODIFIER_EVENT_STAMINA_USED = 0x62,                                        // 98
-    MODIFIER_EVENT_TELEPORTED_INTO_PLAYSPACE = 0x63,                           // 99
-    MODIFIER_EVENT_COUNT = 0x64,                                               // 100
-    MODIFIER_EVENT_INVALID = 0xFF,                                             // 255
-}; 
+    MODIFIER_EVENT_OVERRIDE_SHOT_PARAMS = 0x4D,                                // 77
+    MODIFIER_EVENT_ABILITY_TRIGGER_ACTIVATED = 0x4E,                           // 78
+    MODIFIER_EVENT_VISCOUS_CUBE_DESTROYED = 0x4F,                              // 79
+    MODIFIER_EVENT_ABILITY_DASHCAST_HIT = 0x50,                                // 80
+    MODIFIER_EVENT_ABILITY_DASHCAST_MISS = 0x51,                               // 81
+    MODIFIER_EVENT_PRE_BULLET_FIRED = 0x52,                                    // 82
+    MODIFIER_EVENT_BULLET_EVADED = 0x53,                                       // 83
+    MODIFIER_EVENT_MELEE_ATTACK = 0x54,                                        // 84
+    MODIFIER_EVENT_MELEE_ATTACK_STARTED = 0x55,                                // 85
+    MODIFIER_EVENT_PLAYER_MOVE_COLLIDE = 0x56,                                 // 86
+    MODIFIER_EVENT_ORB_CLAIMED = 0x57,                                         // 87
+    MODIFIER_EVENT_MODIFIER_REFRESHED = 0x58,                                  // 88
+    MODIFIER_EVENT_MODIFIER_SHOULD_CREATE = 0x59,                              // 89
+    MODIFIER_EVENT_MODIFIER_CREATED = 0x5A,                                    // 90
+    MODIFIER_EVENT_MODIFIER_CREATION_PREVENTED = 0x5B,                         // 91
+    MODIFIER_EVENT_CANCEL_ROPE_CLIMB = 0x5C,                                   // 92
+    MODIFIER_EVENT_PORTALLED = 0x5D,                                           // 93
+    MODIFIER_EVENT_TELEPORTED = 0x5E,                                          // 94
+    MODIFIER_EVENT_BARRIER_ADDED = 0x5F,                                       // 95
+    MODIFIER_EVENT_REPLICATED_HEAL = 0x60,                                     // 96
+    MODIFIER_EVENT_STAMINA_USED = 0x61,                                        // 97
+    MODIFIER_EVENT_TELEPORTED_INTO_PLAYSPACE = 0x62,                           // 98
+    // MPropertySuppressEnumerator
+    MODIFIER_EVENT_COUNT = 0x63, // 99
+    // MPropertySuppressEnumerator
+    MODIFIER_EVENT_INVALID = 0xFF, // 255
+}; // 0x4
