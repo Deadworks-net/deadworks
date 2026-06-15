@@ -158,6 +158,7 @@ for f in \
     ${SRC}/Core/Hooks/BuildGameSessionManifest.cpp \
     ${SRC}/Core/Hooks/ReplyConnection.cpp \
     ${SRC}/Core/Hooks/CheckTransmit.cpp \
+    ${SRC}/Core/Hooks/InitializeHeroOnPawn.cpp \
     ${SRC}/Core/A2SPatch.cpp \
     ${SRC}/Core/Deadworks.cpp \
     ${SRC}/Core/NativeCallbacks.cpp \
