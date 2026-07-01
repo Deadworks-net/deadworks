@@ -77,6 +77,7 @@ enum ChatMsgPingMarkerInfo {
 	k_EPingMarkerInfo_OnlyShowMarker = 3 [(schema_friendly_name) = "Only Show Ping Indicator at Ping Location (no ping sound)"];
 	k_EPingMarkerInfo_OnlyPlaySound = 4 [(schema_friendly_name) = "Only Play Ping Sound (and VO)"];
 	k_EPingMarkerInfo_OnlyMiniMap = 5 [(schema_friendly_name) = "Only show on Minimap, no world, no sound"];
+	k_EPingMarkerInfo_NoMarkerYesSoundMiniMap = 6 [(schema_friendly_name) = "No World, Just Minimap and sound"];
 }
 
 enum CameraOperation {
