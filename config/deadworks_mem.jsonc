@@ -26,7 +26,7 @@
 		},
 		"CGCClientSystem::OnServerVersionCheck": {
 			"library": "server.dll",
-			"windows": " 48 89 5C 24 ?? 57 48 83 EC ?? 48 8B 05 ?? ?? ?? ?? 8B FA"
+			"windows": "48 89 5C 24 ?? 57 48 83 EC ?? 48 8B 05 ?? ?? ?? ?? 8B FA"
 		},
 		"CCitadelPlayerPawn::ModifyCurrency": {
 			"library": "server.dll",
