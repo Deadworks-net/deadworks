@@ -49,7 +49,7 @@ The path will look like: `C:\Program Files (x86)\Steam\steamapps\common\Deadlock
 
 ## Building
 
-1. Clone with submodules:
+1. Clone with submodules into (``C:\Program Files (x86)\Steam\steamapps\common\Deadlock``) : 
    ```
    git clone --recurse-submodules https://github.com/Deadworks-net/deadworks.git
    ```
