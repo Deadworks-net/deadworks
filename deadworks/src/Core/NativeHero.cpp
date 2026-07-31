@@ -21,23 +21,27 @@ using GetHeroTableFn = void *(__fastcall *)();
 using HeroPrecacheFn = void(__fastcall *)(void *globalSet, const char *heroName, void *resourceCtx);
 using GetHeroDataManagerFn = void *(*)();
 using HeroNameToIdFn = int *(*)(void *manager, int *outId, const char *heroName);
+using GetHeroByIdFn = void *(*)(void *manager, unsigned int heroId);
 using CreateHeroPawnFn = void *(*)(void *controller, int teamNum);
-using SelectHeroInternalFn = void (*)(void *pawn, const char *heroName);
+using SelectHeroInternalFn = void (*)(void *pawn, void *heroDef);
 using TeleportFn = void (*)(CBaseEntity *entity, const Vector *position, const QAngle *angles, const Vector *velocity);
 
 // --- Resolved wrappers ---
 
-static void SelectHeroInternal(void *pawn, const char *heroName) {
+// Since the July 2026 patch this takes a CHeroDefinition* rather than a hero
+// name - the name->definition wrapper was inlined into ClientConCommand, so we
+// resolve the name ourselves via the CHeroDefinitionManager helpers below.
+static void SelectHeroInternal(void *pawn, void *heroDef) {
     static const auto fn = reinterpret_cast<SelectHeroInternalFn>(
         MemoryDataLoader::Get().GetOffset("CCitadelPlayerPawn::SelectHeroInternal").value());
-    fn(pawn, heroName);
+    fn(pawn, heroDef);
 }
 
 static void *GetHeroDataManager() {
-    static const auto selectHeroAddr =
-        MemoryDataLoader::Get().GetOffset("CCitadelPlayerPawn::SelectHeroInternal").value();
+    static const auto anchorAddr =
+        MemoryDataLoader::Get().GetOffset("CHeroDefinitionManager::GetManagerAnchor").value();
     static const auto fn = reinterpret_cast<GetHeroDataManagerFn>(
-        ResolveE8Call(selectHeroAddr + kSelectHero_GetManagerCall));
+        ResolveE8Call(anchorAddr + kHeroDefMgrAnchor_GetManagerCall));
     return fn();
 }
 
@@ -47,6 +51,12 @@ static int HeroNameToId(void *manager, const char *heroName) {
     int outId = 0;
     fn(manager, &outId, heroName);
     return outId;
+}
+
+static void *GetHeroById(void *manager, int heroId) {
+    static const auto fn = reinterpret_cast<GetHeroByIdFn>(
+        MemoryDataLoader::Get().GetOffset("CHeroDefinitionManager::GetHeroById").value());
+    return fn(manager, static_cast<unsigned int>(heroId));
 }
 
 // --- Static function pointers ---
@@ -86,15 +96,11 @@ static void *__cdecl NativeGetHeroData(const char *heroName) {
         return nullptr;
 
     int heroId = HeroNameToId(manager, heroName);
-    if (!heroId)
+    if (heroId <= 0)
         return nullptr;
 
-    int count = *reinterpret_cast<int *>(manager);
-    if (heroId <= 0 || static_cast<unsigned int>(heroId) >= static_cast<unsigned int>(count))
-        return nullptr;
-
-    void **array = *reinterpret_cast<void ***>(reinterpret_cast<uintptr_t>(manager) + 8);
-    void *data = array[heroId];
+    // GetHeroById does its own bounds check against the manager's hero count.
+    void *data = GetHeroById(manager, heroId);
     g_Log->Debug("GetHeroData({}): id={} ptr={}", heroName, heroId, data ? "found" : "null");
     return data;
 }
@@ -110,6 +116,12 @@ static void __cdecl NativeSelectHero(void *controller, const char *heroName) {
     if (!controller || !heroName)
         return;
 
+    // Resolve the hero definition first, matching the game's own ordering in
+    // ClientConCommand - an unknown hero name must not spawn a pawn.
+    void *heroDef = NativeGetHeroData(heroName);
+    if (!heroDef)
+        return;
+
     auto *pawn = static_cast<CCitadelPlayerController *>(controller)->GetHeroPawn();
     if (!pawn) {
         static const auto createPawn = reinterpret_cast<CreateHeroPawnFn>(
@@ -120,7 +132,7 @@ static void __cdecl NativeSelectHero(void *controller, const char *heroName) {
     if (!pawn)
         return;
 
-    SelectHeroInternal(pawn, heroName);
+    SelectHeroInternal(pawn, heroDef);
 }
 
 static void __cdecl NativePrecacheResource(const char *path) {
