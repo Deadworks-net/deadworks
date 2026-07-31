@@ -10,6 +10,8 @@
 #include "Hooks/GameEvents.hpp"
 #include "Hooks/PostEventAbstract.hpp"
 #include "Hooks/BuildGameSessionManifest.hpp"
+#include "Hooks/ChangeGameState.hpp"
+#include "Hooks/WaitingForPlayersRoster.hpp"
 
 #include "Hooks/TraceShape.hpp"
 #include "../Memory/MemoryDataLoader.hpp"
@@ -897,6 +899,19 @@ static uint8_t __cdecl NativeAddConCommandFlags(const char *name, uint64_t flags
     return 1;
 }
 
+static void __cdecl NativeChangeGameState(void *gameRules, int32_t newState) {
+    if (!gameRules)
+        return;
+    // .call() on the InlineHook always invokes the trampoline (original, unhooked code) and
+    // never re-enters Hook_ChangeGameState, so this is safe from recursion while still running
+    // every bit of the engine's real transition logic (timer setup, per-state setup, jump table).
+    hooks::g_ChangeGameState.call<void>(gameRules, newState);
+}
+
+static void __cdecl NativeSetWaitingForPlayersRequiredCount(uint32_t count) {
+    hooks::g_WaitingForPlayersRequiredCount = count;
+}
+
 // ---------------------------------------------------------------------------
 // Entity virtual function wrappers
 // ---------------------------------------------------------------------------
@@ -1184,4 +1199,7 @@ void deadworks::PopulateNativeCallbacks(NativeCallbacks &callbacks) {
 
     // ConCommand flag mutation
     callbacks.AddConCommandFlags = &NativeAddConCommandFlags;
+
+    callbacks.ChangeGameState = &NativeChangeGameState;
+    callbacks.SetWaitingForPlayersRequiredCount = &NativeSetWaitingForPlayersRequiredCount;
 }

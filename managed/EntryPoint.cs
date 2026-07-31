@@ -434,6 +434,19 @@ public static class EntryPoint
     }
 
     [UnmanagedCallersOnly]
+    public static unsafe void OnGameStateChanged(void* gameRules, int newState)
+    {
+        PluginLoader.DispatchGameStateChanged((EGameState)newState);
+    }
+
+    [UnmanagedCallersOnly]
+    public static unsafe byte ShouldAllowGameStateChange(void* gameRules, int currentState, int newState)
+    {
+        var allow = PluginLoader.DispatchShouldAllowGameStateChange((EGameState)currentState, (EGameState)newState);
+        return (byte)(allow ? 1 : 0);
+    }
+
+    [UnmanagedCallersOnly]
     public static unsafe int OnAddModifier(void* modifierProp, void** pCaster, uint* pHAbility, int* pITeam, void* vdata, void* modifierParams, void* kv)
     {
         if (modifierProp == null || vdata == null)

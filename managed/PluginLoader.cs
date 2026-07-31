@@ -482,6 +482,29 @@ internal static partial class PluginLoader
     public static void DispatchPawnHeroInitialized(CCitadelPlayerPawn pawn)
         => DispatchToPlugins(p => p.OnPawnHeroInitialized(pawn), nameof(IDeadworksPlugin.OnPawnHeroInitialized));
 
+    public static void DispatchGameStateChanged(EGameState newState)
+        => DispatchToPlugins(p => p.OnGameStateChanged(newState), nameof(IDeadworksPlugin.OnGameStateChanged));
+
+    /// <summary>Any plugin returning false vetoes the transition. Not a HookResult-style max, a plain AND.</summary>
+    public static bool DispatchShouldAllowGameStateChange(EGameState currentState, EGameState newState)
+    {
+        var snapshot = _pluginSnapshot;
+        var allow = true;
+        foreach (var plugin in snapshot)
+        {
+            try
+            {
+                if (!plugin.OnGameStateChanging(currentState, newState))
+                    allow = false;
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine($"[PluginLoader] {plugin.Name}.{nameof(IDeadworksPlugin.OnGameStateChanging)} threw: {ex.Message}");
+            }
+        }
+        return allow;
+    }
+
     public static void UnloadAll()
     {
         ServerBrowser.Shutdown();

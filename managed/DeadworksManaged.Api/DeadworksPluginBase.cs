@@ -33,4 +33,6 @@ public abstract class DeadworksPluginBase : IDeadworksPlugin {
 	public virtual HookResult OnAddModifier(AddModifierEvent args) => HookResult.Continue;
 	public virtual void OnConfigReloaded() { }
 	public virtual void OnCheckTransmit(CheckTransmitEvent args) { }
+	public virtual void OnGameStateChanged(EGameState newState) { }
+	public virtual bool OnGameStateChanging(EGameState currentState, EGameState newState) => true;
 }

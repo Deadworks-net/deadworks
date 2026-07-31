@@ -58,6 +58,46 @@ public static unsafe class GameRules
 	public static ulong MatchID => _gameRulesPtr != 0 ? _matchID.Get(_gameRulesPtr) : 0;
 	public static bool ServerPaused => _gameRulesPtr != 0 && _serverPaused.Get(_gameRulesPtr) != 0;
 
+	/// <summary>Calls the real CCitadelGameRules::ChangeGameState, running the engine's normal transition logic.</summary>
+	public static void ChangeGameState(EGameState state)
+	{
+		if (_gameRulesPtr != 0)
+			NativeInterop.ChangeGameState((void*)_gameRulesPtr, (int)state);
+	}
+
+	/// <summary>
+	/// Overrides the target used by the engine's internal WaitingForPlayersToJoin roster check.
+	/// The engine's own roster is populated by matchmaking/party data, which is always empty on a
+	/// direct-connect dedicated server, so the check (and the total it caches into the
+	/// client-networked HUD field) reflects a real target instead of always reading empty/zero.
+	/// Pass 0 to disable the override and restore the engine's native behavior.
+	/// </summary>
+	public static void SetWaitingForPlayersRequiredCount(uint count) => NativeInterop.SetWaitingForPlayersRequiredCount(count);
+
+	/// <summary>
+	/// Sets m_flGameStartTime, which the match clock (<see cref="GameClock"/> and the client's HUD
+	/// timer) is computed relative to. On a server without real matchmaking, this field is never
+	/// reset once the pregame flow actually reaches GameInProgress, so the clock counts from map
+	/// load instead of from when the match really starts.
+	/// </summary>
+	public static void SetGameStartTime(float time)
+	{
+		if (_gameRulesPtr != 0)
+			_gameStartTime.Set(_gameRulesPtr, time);
+	}
+
+	/// <summary>
+	/// Sets m_flGameStateEndTime, which drives the client's countdown display for states that show
+	/// one (e.g. PreGameWait's "Game starting..."). The engine's own ChangeGameState only writes a
+	/// real value here when an internal eligibility check passes; on servers where that check never
+	/// passes, the field is left at a sentinel and the client shows no countdown number.
+	/// </summary>
+	public static void SetGameStateEndTime(float time)
+	{
+		if (_gameRulesPtr != 0)
+			_gameStateEndTime.Set(_gameRulesPtr, time);
+	}
+
 	// CGameRules
 
 	public static bool GamePaused => _gameRulesPtr != 0 && _gamePaused.Get(_gameRulesPtr) != 0;

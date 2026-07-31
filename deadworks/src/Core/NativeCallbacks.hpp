@@ -138,6 +138,13 @@ struct NativeCallbacks {
     void(__cdecl *VariantToVector)(const void *variantPtr, float *outXYZW);  // populates 4 floats; zero-pads unused components
     uint32_t(__cdecl *VariantToColor)(const void *variantPtr);  // packed RGBA (R in low byte)
     uint8_t(__cdecl *AddConCommandFlags)(const char *name, uint64_t flags);
+    // Calls the real CCitadelGameRules::ChangeGameState(this, newState) instead of raw-writing
+    // m_eGameState, so the engine's actual transition logic (timers, per-state setup) runs and
+    // the change isn't just silently overwritten on the next legitimate transition.
+    void(__cdecl *ChangeGameState)(void *gameRules, int32_t newState);
+    // Overrides the target used by CCitadelGameRules's WaitingForPlayersToJoin roster/readiness
+    // check (see Hooks/WaitingForPlayersRoster.hpp). 0 disables the override.
+    void(__cdecl *SetWaitingForPlayersRequiredCount)(uint32_t count);
 };
 
 void PopulateNativeCallbacks(NativeCallbacks &callbacks);

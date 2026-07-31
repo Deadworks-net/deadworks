@@ -129,4 +129,6 @@ internal static unsafe class NativeInterop
 	public static delegate* unmanaged[Cdecl]<void*, float*, void> VariantToVector => (delegate* unmanaged[Cdecl]<void*, float*, void>)_cb.VariantToVector;
 	public static delegate* unmanaged[Cdecl]<void*, uint> VariantToColor => (delegate* unmanaged[Cdecl]<void*, uint>)_cb.VariantToColor;
 	public static delegate* unmanaged[Cdecl]<byte*, ulong, byte> AddConCommandFlags => (delegate* unmanaged[Cdecl]<byte*, ulong, byte>)_cb.AddConCommandFlags;
+	public static delegate* unmanaged[Cdecl]<void*, int, void> ChangeGameState => (delegate* unmanaged[Cdecl]<void*, int, void>)_cb.ChangeGameState;
+	public static delegate* unmanaged[Cdecl]<uint, void> SetWaitingForPlayersRequiredCount => (delegate* unmanaged[Cdecl]<uint, void>)_cb.SetWaitingForPlayersRequiredCount;
 }

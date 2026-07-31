@@ -127,4 +127,14 @@ public interface IDeadworksPlugin {
 	/// Called whenever a pawn's hero abilities and modifiers have just been (re)populated server-side.
 	/// </summary>
 	void OnPawnHeroInitialized(CCitadelPlayerPawn pawn) { }
+
+	/// <summary>Called after a real engine-driven CCitadelGameRules::ChangeGameState transition completes.</summary>
+	void OnGameStateChanged(EGameState newState) { }
+
+	/// <summary>
+	/// Called before a real CCitadelGameRules::ChangeGameState transition is allowed to proceed.
+	/// Return false to veto it. If multiple plugins implement this, any plugin returning false
+	/// vetoes the transition. Default: allow.
+	/// </summary>
+	bool OnGameStateChanging(EGameState currentState, EGameState newState) => true;
 }

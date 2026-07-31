@@ -127,4 +127,6 @@ internal struct NativeCallbacks
 	public nint VariantToVector;
 	public nint VariantToColor;
 	public nint AddConCommandFlags;
+	public nint ChangeGameState;
+	public nint SetWaitingForPlayersRequiredCount;
 }

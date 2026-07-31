@@ -13,6 +13,8 @@
 #include "Hooks/PostEventAbstract.hpp"
 #include "Hooks/CCitadelPlayerPawn.hpp"
 #include "Hooks/BuildGameSessionManifest.hpp"
+#include "Hooks/ChangeGameState.hpp"
+#include "Hooks/WaitingForPlayersRoster.hpp"
 #include "Hooks/CCitadelPlayerController.hpp"
 #include "Hooks/EntityIO.hpp"
 #include "Hooks/TraceShape.hpp"
@@ -226,6 +228,12 @@ void Deadworks::PostInit() {
     HookInline(hooks::g_BuildGameSessionManifest,
                "CCitadelGameRules::BuildGameSessionManifest",
                &hooks::Hook_BuildGameSessionManifest);
+    HookInline(hooks::g_ChangeGameState,
+               "CCitadelGameRules::ChangeGameState",
+               &hooks::Hook_ChangeGameState);
+    HookInline(hooks::g_WaitingForPlayersRoster,
+               "CCitadelGameRules::GetWaitingForPlayersRoster",
+               &hooks::Hook_WaitingForPlayersRoster);
     HookInline(hooks::g_TraceShape,
                "TraceShape",
                &hooks::Hook_TraceShape);
@@ -444,6 +452,18 @@ void Deadworks::OnBuildGameSessionManifest(void *manifest) {
     g_pCurrentManifest = manifest;
     m_managed.onPrecacheResources();
     g_pCurrentManifest = nullptr;
+}
+
+void Deadworks::OnGameStateChanged(void *gameRules, int newState) {
+    if (m_managed.onGameStateChanged)
+        m_managed.onGameStateChanged(gameRules, newState);
+}
+
+bool Deadworks::ShouldAllowGameStateChange(void *gameRules, int currentState, int newState) {
+    // Default allow if no plugin cares, matching existing behavior for anyone not using this hook.
+    if (!m_managed.shouldAllowGameStateChange)
+        return true;
+    return m_managed.shouldAllowGameStateChange(gameRules, currentState, newState) != 0;
 }
 
 void Deadworks::On_ISource2Server_GameFrame(bool simulating, bool bFirstTick, bool bLastTick) {
