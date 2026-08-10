@@ -6,7 +6,7 @@
 		},
 		"CServerSideClientBase::FilterMessage": {
 			"library": "engine2.dll",
-			"windows": "40 53 48 83 EC 30 48 8B 02 48 8B D9"
+			"windows": "40 53 48 83 EC 30 48 8B 02 48 8B D9 48 8B CA FF 50 18 48 3B 05"
 		},
 		"CServerSideClientBase::IsReservedSlot": {
 			"library": "engine2.dll",
@@ -46,7 +46,15 @@
 		},
 		"CCitadelPlayerPawn::SelectHeroInternal": {
 			"library": "server.dll",
-			"windows": "48 89 5C 24 ?? 48 89 74 24 ?? 57 48 83 EC ?? 48 8B DA 48 8B F1 E8 ?? ?? ?? ?? 48 8B F8 E8"
+			"windows": "40 55 41 54 41 55 41 56 48 8D 6C 24 88 48 81 EC 78 01 00 00 4C 8B E1 4C 8B EA"
+		},
+		"CHeroDefinitionManager::GetHeroById": {
+			"library": "server.dll",
+			"windows": "48 8B C1 85 D2 74 04 3B 11 72 03 33 C0 C3 48 8B 40 08 48 63 CA 48 8B 04 C8 C3"
+		},
+		"CHeroDefinitionManager::GetManagerAnchor": {
+			"library": "server.dll",
+			"windows": "40 53 56 41 55 48 83 EC 30 8B DA 48 8B F1 E8"
 		},
 		"CCitadelPlayerController::CreateHeroPawn": {
 			"library": "server.dll",
@@ -110,7 +118,7 @@
 		},
 		"CCitadelPlayerPawn::InitializeHeroOnPawn": {
 			"library": "server.dll",
-			"windows": "4C 8B DC 56 41 57 48 83 EC 58 0F B6 81 ?? ?? ?? ?? 44 0F B6 FA 83 C0 FE 48 8B F1"
+			"windows": "4C 8B DC 41 55 41 57 48 83 EC 58 0F B6 81 ?? ?? ?? ?? 44 0F B6 FA 83 C0 FE 4C 8B E9"
 		},
 		"CCitadelAbilityComponent::FindAbilityByName": {
 			"library": "server.dll",
@@ -214,7 +222,6 @@
 		"IGameEventManager2::FireEvent": 7,
 		"IGameEventSystem::PostEventAbstract": 16,
 		"CBaseEntity::StartTouch": 148,
-		"CBaseEntity::Touch": 149,
 		"CBaseEntity::EndTouch": 150,
 		"ISource2GameEntities::CheckTransmit": 12,
 		"CSoundSystem::TakeGuid": 77,
