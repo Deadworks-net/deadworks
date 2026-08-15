@@ -1,5 +1,6 @@
 using System.Reflection;
 using DeadworksManaged.Api;
+using DeadworksManaged.Telemetry;
 
 namespace DeadworksManaged;
 

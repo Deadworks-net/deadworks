@@ -1,7 +1,10 @@
+using System.Diagnostics;
 using System.Net.Http.Json;
 using System.Text.Json;
 using System.Text.Json.Serialization;
+using Microsoft.Extensions.Logging;
 using DeadworksManaged.Api;
+using DeadworksManaged.Telemetry;
 
 namespace DeadworksManaged;
 
@@ -24,6 +27,7 @@ internal static class ServerBrowser
         PropertyNameCaseInsensitive = true
     };
 
+    private static ILogger _logger = null!;
     private static ServerBrowserConfig _config = null!;
     private static ServerCredentials? _credentials;
     private static Timer? _heartbeatTimer;
@@ -33,13 +37,15 @@ internal static class ServerBrowser
 
     public static void Initialize()
     {
+        _logger = DeadworksTelemetry.CreateLogger("ServerBrowser");
+
         var managedDir = Path.GetDirectoryName(typeof(ServerBrowser).Assembly.Location);
         _credentialsDir = Path.GetFullPath(Path.Combine(managedDir!, "..", "configs", "ServerBrowser"));
         _config = DeadworksConfig.ServerBrowser;
 
         if (_config.Unlisted || Server.HasCommandLineParm("-nomaster"))
         {
-            Console.WriteLine("[ServerBrowser] Server is unlisted - heartbeat disabled.");
+            _logger.LogInformation("Server is unlisted - heartbeat disabled");
             return;
         }
 
@@ -78,11 +84,11 @@ internal static class ServerBrowser
                 if (!string.IsNullOrEmpty(name)) _serverName = name;
             }
 
-            Console.WriteLine($"[ServerBrowser] Port: {_gamePort}, name: {_serverName}");
+            _logger.LogInformation("Resolved server config (port={Port}, name={ServerName})", _gamePort, _serverName);
         }
         catch (Exception ex)
         {
-            Console.WriteLine($"[ServerBrowser] Failed to resolve convars: {ex.Message}");
+            _logger.LogError(ex, "Failed to resolve convars");
         }
     }
 
@@ -99,14 +105,14 @@ internal static class ServerBrowser
                 _credentials = JsonSerializer.Deserialize<ServerCredentials>(json, JsonOptions);
                 if (_credentials != null && !string.IsNullOrEmpty(_credentials.ServerId) && !string.IsNullOrEmpty(_credentials.ServerToken))
                 {
-                    Console.WriteLine($"[ServerBrowser] Loaded credentials (id: {_credentials.ServerId})");
+                    _logger.LogInformation("Loaded credentials (serverId={ServerId})", _credentials.ServerId);
                     StartHeartbeat();
                     return;
                 }
             }
             catch (Exception ex)
             {
-                Console.WriteLine($"[ServerBrowser] Failed to read credentials: {ex.Message}");
+                _logger.LogError(ex, "Failed to read credentials");
             }
         }
 
@@ -123,13 +129,15 @@ internal static class ServerBrowser
         else
         {
             // Registration failed - start the heartbeat timer anyway so it retries
-            Console.WriteLine("[ServerBrowser] Will retry registration on next heartbeat tick.");
+            _logger.LogWarning("Will retry registration on next heartbeat tick");
             StartHeartbeat();
         }
     }
 
     private static async Task<bool> TryRegister(string credPath)
     {
+        using var activity = DeadworksTracing.Source.StartActivity("heartbeat.register");
+
         try
         {
             var url = $"{_config.ApiUrl.TrimEnd('/')}/api/servers/register";
@@ -143,7 +151,8 @@ internal static class ServerBrowser
             var response = await Http.PostAsJsonAsync(url, payload);
             if (!response.IsSuccessStatusCode)
             {
-                Console.WriteLine($"[ServerBrowser] Auto-registration failed: HTTP {(int)response.StatusCode}");
+                _logger.LogWarning("Auto-registration failed: HTTP {StatusCode}", (int)response.StatusCode);
+                activity?.SetStatus(ActivityStatusCode.Error, $"HTTP {(int)response.StatusCode}");
                 return false;
             }
 
@@ -153,12 +162,13 @@ internal static class ServerBrowser
 
             _credentials = new ServerCredentials { ServerId = id, ServerToken = token };
             SaveCredentials(credPath);
-            Console.WriteLine($"[ServerBrowser] Auto-registered with API (id: {id})");
+            _logger.LogInformation("Auto-registered with API (serverId={ServerId})", id);
             return true;
         }
         catch (Exception ex)
         {
-            Console.WriteLine($"[ServerBrowser] Auto-registration error: {ex.Message}");
+            _logger.LogError(ex, "Auto-registration error");
+            activity?.SetStatus(ActivityStatusCode.Error, ex.Message);
             return false;
         }
     }
@@ -173,7 +183,7 @@ internal static class ServerBrowser
         }
         catch (Exception ex)
         {
-            Console.WriteLine($"[ServerBrowser] Failed to save credentials: {ex.Message}");
+            _logger.LogError(ex, "Failed to save credentials");
         }
     }
 
@@ -200,6 +210,12 @@ internal static class ServerBrowser
             return;
         }
 
+        using var activity = DeadworksTracing.Source.StartActivity("heartbeat.send");
+        activity?.SetTag("server.id", _credentials.ServerId);
+
+        var sw = Stopwatch.StartNew();
+        DeadworksMetrics.HeartbeatsSent.Add(1);
+
         try
         {
             var payload = BuildPayload();
@@ -210,14 +226,23 @@ internal static class ServerBrowser
             request.Content = JsonContent.Create(payload);
 
             var response = await Http.SendAsync(request);
+
             if (!response.IsSuccessStatusCode)
             {
-                Console.WriteLine($"[ServerBrowser] Heartbeat failed: HTTP {(int)response.StatusCode}");
+                _logger.LogWarning("Heartbeat failed: HTTP {StatusCode}", (int)response.StatusCode);
+                DeadworksMetrics.HeartbeatsFailed.Add(1);
+                activity?.SetStatus(ActivityStatusCode.Error, $"HTTP {(int)response.StatusCode}");
             }
         }
         catch (Exception ex)
         {
-            Console.WriteLine($"[ServerBrowser] Heartbeat error: {ex.Message}");
+            DeadworksMetrics.HeartbeatsFailed.Add(1);
+            _logger.LogError(ex, "Heartbeat error");
+            activity?.SetStatus(ActivityStatusCode.Error, ex.Message);
+        }
+        finally
+        {
+            DeadworksMetrics.HeartbeatDuration.Record(sw.Elapsed.TotalMilliseconds);
         }
     }
 
@@ -227,15 +252,15 @@ internal static class ServerBrowser
 
         var addons = string.Join(",", _config.ContentAddons);
         Server.SetAddons(addons);
-        Console.WriteLine($"[ServerBrowser] Server addons set to '{addons}'");
+        _logger.LogInformation("Server addons set to {Addons}", addons);
 
         foreach (var addon in _config.ContentAddons)
         {
             var vpkPath = $"deadworks_mods/vpks/{addon}.vpk";
             if (Server.AddSearchPath(vpkPath))
-                Console.WriteLine($"[ServerBrowser] Mounted server addon: {vpkPath}");
+                _logger.LogDebug("Mounted server addon: {VpkPath}", vpkPath);
             else
-                Console.WriteLine($"[ServerBrowser] Failed to mount: {vpkPath}");
+                _logger.LogWarning("Failed to mount addon: {VpkPath}", vpkPath);
         }
     }
 

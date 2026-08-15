@@ -1,11 +1,14 @@
 using System.Reflection;
 using System.Text.Json;
+using Microsoft.Extensions.Logging;
 using DeadworksManaged.Api;
+using DeadworksManaged.Telemetry;
 
 namespace DeadworksManaged;
 
 internal static class ConfigManager
 {
+	private static ILogger _logger = null!;
 	private static string _configsDir = "";
 
 	private static readonly JsonSerializerOptions JsonOptions = new()
@@ -17,6 +20,8 @@ internal static class ConfigManager
 
 	public static void Initialize()
 	{
+		_logger = DeadworksTelemetry.CreateLogger("ConfigManager");
+
 		// Configs live as a sibling of managed/ (e.g. game/bin/win64/configs/)
 		// so they survive the post-build rmdir of managed/.
 		var managedDir = Path.GetDirectoryName(typeof(ConfigManager).Assembly.Location);
@@ -50,7 +55,7 @@ internal static class ConfigManager
 		}
 		catch (Exception ex)
 		{
-			Console.WriteLine($"[ConfigManager] {plugin.Name}.OnConfigReloaded() threw: {ex.Message}");
+			_logger.LogError(ex, "{PluginName}.OnConfigReloaded() threw", plugin.Name);
 		}
 
 		return true;
@@ -82,11 +87,11 @@ internal static class ConfigManager
 				Directory.CreateDirectory(dir);
 				var json = JsonSerializer.Serialize(config, configType, JsonOptions);
 				File.WriteAllText(filePath, $"// Configuration for {plugin.Name}\n{json}\n");
-				Console.WriteLine($"[ConfigManager] Created default config for {plugin.Name}: {filePath}");
+				_logger.LogInformation("Created default config for {PluginName}: {ConfigPath}", plugin.Name, filePath);
 			}
 			catch (Exception ex)
 			{
-				Console.WriteLine($"[ConfigManager] Failed to write default config for {plugin.Name}: {ex.Message}");
+				_logger.LogError(ex, "Failed to write default config for {PluginName}", plugin.Name);
 			}
 		}
 		else
@@ -99,7 +104,7 @@ internal static class ConfigManager
 			}
 			catch (Exception ex)
 			{
-				Console.WriteLine($"[ConfigManager] Failed to parse config for {plugin.Name}: {ex.Message}");
+				_logger.LogError(ex, "Failed to parse config for {PluginName}", plugin.Name);
 				if (isReload)
 					return false;
 				config = Activator.CreateInstance(configType);
@@ -114,7 +119,7 @@ internal static class ConfigManager
 			}
 			catch (Exception ex)
 			{
-				Console.WriteLine($"[ConfigManager] {plugin.Name} config Validate() threw: {ex.Message}");
+				_logger.LogError(ex, "{PluginName} config Validate() threw", plugin.Name);
 				if (isReload)
 					return false;
 				config = Activator.CreateInstance(configType);
