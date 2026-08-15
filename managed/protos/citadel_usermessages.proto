@@ -56,7 +56,6 @@ enum CitadelUserMessageIds {
 	k_EUserMsg_MeleeHit = 355;
 	k_EUserMsg_FlexSlotUnlocked = 356;
 	k_EUserMsg_SeasonalKill = 357;
-	k_EUserMsg_MusicQueue = 358;
 	k_EUserMsg_AG2ParamTrigger = 359;
 	k_EUserMsg_ItemPurchaseNotification = 360;
 	k_EUserMsg_EntityPortalled = 361;
@@ -65,6 +64,7 @@ enum CitadelUserMessageIds {
 	k_EUserMsg_ItemDraftReaction = 364;
 	k_EUserMsg_ImportantAbilityUsed = 365;
 	k_EUserMsg_BannedHeroes = 366;
+	k_EUserMsg_ChangeHeroStatus = 370;
 }
 
 enum CitadelEntityMessageIds {
@@ -78,6 +78,7 @@ enum ChatMsgPingMarkerInfo {
 	k_EPingMarkerInfo_OnlyShowMarker = 3 [(schema_friendly_name) = "Only Show Ping Indicator at Ping Location (no ping sound)"];
 	k_EPingMarkerInfo_OnlyPlaySound = 4 [(schema_friendly_name) = "Only Play Ping Sound (and VO)"];
 	k_EPingMarkerInfo_OnlyMiniMap = 5 [(schema_friendly_name) = "Only show on Minimap, no world, no sound"];
+	k_EPingMarkerInfo_NoMarkerYesSoundMiniMap = 6 [(schema_friendly_name) = "No World, Just Minimap and sound"];
 }
 
 enum CameraOperation {
@@ -510,6 +511,7 @@ message CCitadelUserMsg_StaminaConsumed {
 	optional bool drained = 5;
 	optional float stamina_max = 6;
 	optional float gametime = 7;
+	optional bool play_sound = 8;
 }
 
 message CCitadelUserMessage_AbilityNotify {
@@ -647,11 +649,6 @@ message CCitadelUserMsg_SeasonalKill {
 	optional uint32 victim = 2 [default = 16777215];
 }
 
-message CCitadelUserMsg_MusicQueue {
-	optional int32 music_state = 1;
-	optional bool override = 2;
-}
-
 message CCitadelUserMsg_AG2ParamTrigger {
 	optional string param_id = 1;
 	optional string param_value = 2;
@@ -685,4 +682,11 @@ message CCitadelUserMessage_ImportantAbilityUsed {
 
 message CCitadelUserMsg_BannedHeroes {
 	repeated uint32 banned_hero_ids = 1;
+}
+
+message CCitadelUserMsg_ChangeHeroStatus {
+	optional bool success = 1;
+	optional bool is_hero_locked = 2;
+	repeated uint32 lock_hero_ids = 3;
+	repeated uint32 unlock_hero_ids = 4;
 }

@@ -19,14 +19,18 @@ class CitadelAbilityPropertyAccessor {
     }
 };
 
-// Fixed-size wrapper so CUtlOrderedMap node indexing works correctly.
+// Fixed-size stand-in for the engine's CitadelAbilityProperty_t (schema size 0xc8 as of
+// build 6416+). Used only as a blob for reinterpret_cast + As(); the ACTUAL element stride
+// used to walk the ability property map is resolved from the schema at runtime via
+// schema::GetClassSize("CitadelAbilityProperty_t"), because this size grows across game
+// updates. Keep this value current as the runtime fallback, but it is no longer load-bearing.
 // Access fields via As().m_strValue, As().GetParsedFloats(), etc.
 struct CitadelAbilityProperty_t {
-    uint8_t _data[0xb0];
+    uint8_t _data[0xc8];
 
     CitadelAbilityPropertyAccessor &As() {
         return *reinterpret_cast<CitadelAbilityPropertyAccessor *>(this);
     }
 };
-static_assert(sizeof(CitadelAbilityProperty_t) == 0xb0);
+static_assert(sizeof(CitadelAbilityProperty_t) == 0xc8);
 

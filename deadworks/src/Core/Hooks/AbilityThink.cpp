@@ -1,17 +1,29 @@
 #include "AbilityThink.hpp"
 
 #include "../Deadworks.hpp"
+#include "../../SDK/Schema/Schema.hpp"
 
 namespace deadworks {
 namespace hooks {
 
-// Offsets into game structures (from IDA analysis)
-static constexpr size_t kPawn_hController = 0x3DC;       // CBasePlayerPawn::m_hController (CHandle)
-static constexpr size_t kPawn_pMovementServices = 0xBD0; // CBasePlayerPawn::m_pMovementServices
-static constexpr size_t kMoveSvc_nButtons = 0x50;         // CPlayer_MovementServices::m_nButtons (CInButtonState)
-static constexpr size_t kButtonState_States = 0x08;       // CInButtonState::m_pButtonStates[3] (3x uint64)
-
 void __fastcall Hook_AbilityThink(void *pPawn) {
+    static const int kPawn_hController = schema::GetOffset(
+                                             "CBasePlayerPawn", hash_32_fnv1a_const("CBasePlayerPawn"),
+                                             "m_hController", hash_32_fnv1a_const("m_hController"))
+                                             .Offset;
+    static const int kPawn_pMovementServices = schema::GetOffset(
+                                                   "CBasePlayerPawn", hash_32_fnv1a_const("CBasePlayerPawn"),
+                                                   "m_pMovementServices", hash_32_fnv1a_const("m_pMovementServices"))
+                                                   .Offset;
+    static const int kMoveSvc_nButtons = schema::GetOffset(
+                                             "CPlayer_MovementServices", hash_32_fnv1a_const("CPlayer_MovementServices"),
+                                             "m_nButtons", hash_32_fnv1a_const("m_nButtons"))
+                                             .Offset;
+    static const int kButtonState_States = schema::GetOffset(
+                                               "CInButtonState", hash_32_fnv1a_const("CInButtonState"),
+                                               "m_pButtonStates", hash_32_fnv1a_const("m_pButtonStates"))
+                                               .Offset;
+
     auto *pawn = reinterpret_cast<char *>(pPawn);
 
     // Only process player pawns (they have a valid controller handle)

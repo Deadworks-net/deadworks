@@ -107,11 +107,12 @@ enum ESource2PlayStatsFieldType : int {
   Source2PlayStats_Bool = 11,
   Source2PlayStats_String = 12,
   Source2PlayStats_LowCardinalityString = 13,
-  Source2PlayStats_UTCDateTime = 14
+  Source2PlayStats_UTCDateTime = 14,
+  Source2PlayStats_SteamIDTrustBucket = 15
 };
 bool ESource2PlayStatsFieldType_IsValid(int value);
 constexpr ESource2PlayStatsFieldType ESource2PlayStatsFieldType_MIN = Source2PlayStats_Invalid;
-constexpr ESource2PlayStatsFieldType ESource2PlayStatsFieldType_MAX = Source2PlayStats_UTCDateTime;
+constexpr ESource2PlayStatsFieldType ESource2PlayStatsFieldType_MAX = Source2PlayStats_SteamIDTrustBucket;
 constexpr int ESource2PlayStatsFieldType_ARRAYSIZE = ESource2PlayStatsFieldType_MAX + 1;
 
 const ::PROTOBUF_NAMESPACE_ID::EnumDescriptor* ESource2PlayStatsFieldType_descriptor();
@@ -130,7 +131,7 @@ inline bool ESource2PlayStatsFieldType_Parse(
 }
 // ===================================================================
 
-class CMsgSource2SystemSpecs /*final*/ :
+class CMsgSource2SystemSpecs :
     public ::PROTOBUF_NAMESPACE_ID::Message /* @@protoc_insertion_point(class_definition:CMsgSource2SystemSpecs) */ {
  public:
   inline CMsgSource2SystemSpecs() : CMsgSource2SystemSpecs(nullptr) {}
@@ -211,7 +212,7 @@ class CMsgSource2SystemSpecs /*final*/ :
 
   // implements Message ----------------------------------------------
 
-  CMsgSource2SystemSpecs* New(::PROTOBUF_NAMESPACE_ID::Arena* arena = nullptr) const /*final*/ {
+  CMsgSource2SystemSpecs* New(::PROTOBUF_NAMESPACE_ID::Arena* arena = nullptr) const final {
     return CreateMaybeMessage<CMsgSource2SystemSpecs>(arena);
   }
   using ::PROTOBUF_NAMESPACE_ID::Message::CopyFrom;
@@ -223,19 +224,19 @@ class CMsgSource2SystemSpecs /*final*/ :
   private:
   static void MergeImpl(::PROTOBUF_NAMESPACE_ID::Message& to_msg, const ::PROTOBUF_NAMESPACE_ID::Message& from_msg);
   public:
-  PROTOBUF_ATTRIBUTE_REINITIALIZES void Clear() /*final*/;
-  bool IsInitialized() const /*final*/;
+  PROTOBUF_ATTRIBUTE_REINITIALIZES void Clear() final;
+  bool IsInitialized() const final;
 
-  size_t ByteSizeLong() const /*final*/;
-  const char* _InternalParse(const char* ptr, ::PROTOBUF_NAMESPACE_ID::internal::ParseContext* ctx) /*final*/;
+  size_t ByteSizeLong() const final;
+  const char* _InternalParse(const char* ptr, ::PROTOBUF_NAMESPACE_ID::internal::ParseContext* ctx) final;
   uint8_t* _InternalSerialize(
-      uint8_t* target, ::PROTOBUF_NAMESPACE_ID::io::EpsCopyOutputStream* stream) const /*final*/;
-  int GetCachedSize() const /*final*/ { return _impl_._cached_size_.Get(); }
+      uint8_t* target, ::PROTOBUF_NAMESPACE_ID::io::EpsCopyOutputStream* stream) const final;
+  int GetCachedSize() const final { return _impl_._cached_size_.Get(); }
 
   private:
   void SharedCtor(::PROTOBUF_NAMESPACE_ID::Arena* arena, bool is_message_owned);
   void SharedDtor();
-  void SetCachedSize(int size) const /*final*/;
+  void SetCachedSize(int size) const final;
   void InternalSwap(CMsgSource2SystemSpecs* other);
 
   private:
@@ -249,9 +250,9 @@ class CMsgSource2SystemSpecs /*final*/ :
   public:
 
   static const ClassData _class_data_;
-  const ::PROTOBUF_NAMESPACE_ID::Message::ClassData*GetClassData() const /*final*/;
+  const ::PROTOBUF_NAMESPACE_ID::Message::ClassData*GetClassData() const final;
 
-  ::PROTOBUF_NAMESPACE_ID::Metadata GetMetadata() const /*final*/;
+  ::PROTOBUF_NAMESPACE_ID::Metadata GetMetadata() const final;
 
   // nested types ----------------------------------------------------
 
@@ -505,7 +506,7 @@ class CMsgSource2SystemSpecs /*final*/ :
 };
 // -------------------------------------------------------------------
 
-class CMsgSource2VProfLiteReportItem /*final*/ :
+class CMsgSource2VProfLiteReportItem :
     public ::PROTOBUF_NAMESPACE_ID::Message /* @@protoc_insertion_point(class_definition:CMsgSource2VProfLiteReportItem) */ {
  public:
   inline CMsgSource2VProfLiteReportItem() : CMsgSource2VProfLiteReportItem(nullptr) {}
@@ -586,7 +587,7 @@ class CMsgSource2VProfLiteReportItem /*final*/ :
 
   // implements Message ----------------------------------------------
 
-  CMsgSource2VProfLiteReportItem* New(::PROTOBUF_NAMESPACE_ID::Arena* arena = nullptr) const /*final*/ {
+  CMsgSource2VProfLiteReportItem* New(::PROTOBUF_NAMESPACE_ID::Arena* arena = nullptr) const final {
     return CreateMaybeMessage<CMsgSource2VProfLiteReportItem>(arena);
   }
   using ::PROTOBUF_NAMESPACE_ID::Message::CopyFrom;
@@ -598,19 +599,19 @@ class CMsgSource2VProfLiteReportItem /*final*/ :
   private:
   static void MergeImpl(::PROTOBUF_NAMESPACE_ID::Message& to_msg, const ::PROTOBUF_NAMESPACE_ID::Message& from_msg);
   public:
-  PROTOBUF_ATTRIBUTE_REINITIALIZES void Clear() /*final*/;
-  bool IsInitialized() const /*final*/;
+  PROTOBUF_ATTRIBUTE_REINITIALIZES void Clear() final;
+  bool IsInitialized() const final;
 
-  size_t ByteSizeLong() const /*final*/;
-  const char* _InternalParse(const char* ptr, ::PROTOBUF_NAMESPACE_ID::internal::ParseContext* ctx) /*final*/;
+  size_t ByteSizeLong() const final;
+  const char* _InternalParse(const char* ptr, ::PROTOBUF_NAMESPACE_ID::internal::ParseContext* ctx) final;
   uint8_t* _InternalSerialize(
-      uint8_t* target, ::PROTOBUF_NAMESPACE_ID::io::EpsCopyOutputStream* stream) const /*final*/;
-  int GetCachedSize() const /*final*/ { return _impl_._cached_size_.Get(); }
+      uint8_t* target, ::PROTOBUF_NAMESPACE_ID::io::EpsCopyOutputStream* stream) const final;
+  int GetCachedSize() const final { return _impl_._cached_size_.Get(); }
 
   private:
   void SharedCtor(::PROTOBUF_NAMESPACE_ID::Arena* arena, bool is_message_owned);
   void SharedDtor();
-  void SetCachedSize(int size) const /*final*/;
+  void SetCachedSize(int size) const final;
   void InternalSwap(CMsgSource2VProfLiteReportItem* other);
 
   private:
@@ -624,9 +625,9 @@ class CMsgSource2VProfLiteReportItem /*final*/ :
   public:
 
   static const ClassData _class_data_;
-  const ::PROTOBUF_NAMESPACE_ID::Message::ClassData*GetClassData() const /*final*/;
+  const ::PROTOBUF_NAMESPACE_ID::Message::ClassData*GetClassData() const final;
 
-  ::PROTOBUF_NAMESPACE_ID::Metadata GetMetadata() const /*final*/;
+  ::PROTOBUF_NAMESPACE_ID::Metadata GetMetadata() const final;
 
   // nested types ----------------------------------------------------
 
@@ -925,7 +926,7 @@ class CMsgSource2VProfLiteReportItem /*final*/ :
 };
 // -------------------------------------------------------------------
 
-class CMsgSource2VProfLiteReport /*final*/ :
+class CMsgSource2VProfLiteReport :
     public ::PROTOBUF_NAMESPACE_ID::Message /* @@protoc_insertion_point(class_definition:CMsgSource2VProfLiteReport) */ {
  public:
   inline CMsgSource2VProfLiteReport() : CMsgSource2VProfLiteReport(nullptr) {}
@@ -1006,7 +1007,7 @@ class CMsgSource2VProfLiteReport /*final*/ :
 
   // implements Message ----------------------------------------------
 
-  CMsgSource2VProfLiteReport* New(::PROTOBUF_NAMESPACE_ID::Arena* arena = nullptr) const /*final*/ {
+  CMsgSource2VProfLiteReport* New(::PROTOBUF_NAMESPACE_ID::Arena* arena = nullptr) const final {
     return CreateMaybeMessage<CMsgSource2VProfLiteReport>(arena);
   }
   using ::PROTOBUF_NAMESPACE_ID::Message::CopyFrom;
@@ -1018,19 +1019,19 @@ class CMsgSource2VProfLiteReport /*final*/ :
   private:
   static void MergeImpl(::PROTOBUF_NAMESPACE_ID::Message& to_msg, const ::PROTOBUF_NAMESPACE_ID::Message& from_msg);
   public:
-  PROTOBUF_ATTRIBUTE_REINITIALIZES void Clear() /*final*/;
-  bool IsInitialized() const /*final*/;
+  PROTOBUF_ATTRIBUTE_REINITIALIZES void Clear() final;
+  bool IsInitialized() const final;
 
-  size_t ByteSizeLong() const /*final*/;
-  const char* _InternalParse(const char* ptr, ::PROTOBUF_NAMESPACE_ID::internal::ParseContext* ctx) /*final*/;
+  size_t ByteSizeLong() const final;
+  const char* _InternalParse(const char* ptr, ::PROTOBUF_NAMESPACE_ID::internal::ParseContext* ctx) final;
   uint8_t* _InternalSerialize(
-      uint8_t* target, ::PROTOBUF_NAMESPACE_ID::io::EpsCopyOutputStream* stream) const /*final*/;
-  int GetCachedSize() const /*final*/ { return _impl_._cached_size_.Get(); }
+      uint8_t* target, ::PROTOBUF_NAMESPACE_ID::io::EpsCopyOutputStream* stream) const final;
+  int GetCachedSize() const final { return _impl_._cached_size_.Get(); }
 
   private:
   void SharedCtor(::PROTOBUF_NAMESPACE_ID::Arena* arena, bool is_message_owned);
   void SharedDtor();
-  void SetCachedSize(int size) const /*final*/;
+  void SetCachedSize(int size) const final;
   void InternalSwap(CMsgSource2VProfLiteReport* other);
 
   private:
@@ -1044,9 +1045,9 @@ class CMsgSource2VProfLiteReport /*final*/ :
   public:
 
   static const ClassData _class_data_;
-  const ::PROTOBUF_NAMESPACE_ID::Message::ClassData*GetClassData() const /*final*/;
+  const ::PROTOBUF_NAMESPACE_ID::Message::ClassData*GetClassData() const final;
 
-  ::PROTOBUF_NAMESPACE_ID::Metadata GetMetadata() const /*final*/;
+  ::PROTOBUF_NAMESPACE_ID::Metadata GetMetadata() const final;
 
   // nested types ----------------------------------------------------
 
@@ -1125,7 +1126,7 @@ class CMsgSource2VProfLiteReport /*final*/ :
 };
 // -------------------------------------------------------------------
 
-class CMsgSource2NetworkFlowQuality /*final*/ :
+class CMsgSource2NetworkFlowQuality :
     public ::PROTOBUF_NAMESPACE_ID::Message /* @@protoc_insertion_point(class_definition:CMsgSource2NetworkFlowQuality) */ {
  public:
   inline CMsgSource2NetworkFlowQuality() : CMsgSource2NetworkFlowQuality(nullptr) {}
@@ -1206,7 +1207,7 @@ class CMsgSource2NetworkFlowQuality /*final*/ :
 
   // implements Message ----------------------------------------------
 
-  CMsgSource2NetworkFlowQuality* New(::PROTOBUF_NAMESPACE_ID::Arena* arena = nullptr) const /*final*/ {
+  CMsgSource2NetworkFlowQuality* New(::PROTOBUF_NAMESPACE_ID::Arena* arena = nullptr) const final {
     return CreateMaybeMessage<CMsgSource2NetworkFlowQuality>(arena);
   }
   using ::PROTOBUF_NAMESPACE_ID::Message::CopyFrom;
@@ -1218,19 +1219,19 @@ class CMsgSource2NetworkFlowQuality /*final*/ :
   private:
   static void MergeImpl(::PROTOBUF_NAMESPACE_ID::Message& to_msg, const ::PROTOBUF_NAMESPACE_ID::Message& from_msg);
   public:
-  PROTOBUF_ATTRIBUTE_REINITIALIZES void Clear() /*final*/;
-  bool IsInitialized() const /*final*/;
+  PROTOBUF_ATTRIBUTE_REINITIALIZES void Clear() final;
+  bool IsInitialized() const final;
 
-  size_t ByteSizeLong() const /*final*/;
-  const char* _InternalParse(const char* ptr, ::PROTOBUF_NAMESPACE_ID::internal::ParseContext* ctx) /*final*/;
+  size_t ByteSizeLong() const final;
+  const char* _InternalParse(const char* ptr, ::PROTOBUF_NAMESPACE_ID::internal::ParseContext* ctx) final;
   uint8_t* _InternalSerialize(
-      uint8_t* target, ::PROTOBUF_NAMESPACE_ID::io::EpsCopyOutputStream* stream) const /*final*/;
-  int GetCachedSize() const /*final*/ { return _impl_._cached_size_.Get(); }
+      uint8_t* target, ::PROTOBUF_NAMESPACE_ID::io::EpsCopyOutputStream* stream) const final;
+  int GetCachedSize() const final { return _impl_._cached_size_.Get(); }
 
   private:
   void SharedCtor(::PROTOBUF_NAMESPACE_ID::Arena* arena, bool is_message_owned);
   void SharedDtor();
-  void SetCachedSize(int size) const /*final*/;
+  void SetCachedSize(int size) const final;
   void InternalSwap(CMsgSource2NetworkFlowQuality* other);
 
   private:
@@ -1244,9 +1245,9 @@ class CMsgSource2NetworkFlowQuality /*final*/ :
   public:
 
   static const ClassData _class_data_;
-  const ::PROTOBUF_NAMESPACE_ID::Message::ClassData*GetClassData() const /*final*/;
+  const ::PROTOBUF_NAMESPACE_ID::Message::ClassData*GetClassData() const final;
 
-  ::PROTOBUF_NAMESPACE_ID::Metadata GetMetadata() const /*final*/;
+  ::PROTOBUF_NAMESPACE_ID::Metadata GetMetadata() const final;
 
   // nested types ----------------------------------------------------
 
@@ -1930,7 +1931,7 @@ class CMsgSource2NetworkFlowQuality /*final*/ :
 };
 // -------------------------------------------------------------------
 
-class CMsgSource2PerfIntervalSample_Tag /*final*/ :
+class CMsgSource2PerfIntervalSample_Tag :
     public ::PROTOBUF_NAMESPACE_ID::Message /* @@protoc_insertion_point(class_definition:CMsgSource2PerfIntervalSample.Tag) */ {
  public:
   inline CMsgSource2PerfIntervalSample_Tag() : CMsgSource2PerfIntervalSample_Tag(nullptr) {}
@@ -2011,7 +2012,7 @@ class CMsgSource2PerfIntervalSample_Tag /*final*/ :
 
   // implements Message ----------------------------------------------
 
-  CMsgSource2PerfIntervalSample_Tag* New(::PROTOBUF_NAMESPACE_ID::Arena* arena = nullptr) const /*final*/ {
+  CMsgSource2PerfIntervalSample_Tag* New(::PROTOBUF_NAMESPACE_ID::Arena* arena = nullptr) const final {
     return CreateMaybeMessage<CMsgSource2PerfIntervalSample_Tag>(arena);
   }
   using ::PROTOBUF_NAMESPACE_ID::Message::CopyFrom;
@@ -2023,19 +2024,19 @@ class CMsgSource2PerfIntervalSample_Tag /*final*/ :
   private:
   static void MergeImpl(::PROTOBUF_NAMESPACE_ID::Message& to_msg, const ::PROTOBUF_NAMESPACE_ID::Message& from_msg);
   public:
-  PROTOBUF_ATTRIBUTE_REINITIALIZES void Clear() /*final*/;
-  bool IsInitialized() const /*final*/;
+  PROTOBUF_ATTRIBUTE_REINITIALIZES void Clear() final;
+  bool IsInitialized() const final;
 
-  size_t ByteSizeLong() const /*final*/;
-  const char* _InternalParse(const char* ptr, ::PROTOBUF_NAMESPACE_ID::internal::ParseContext* ctx) /*final*/;
+  size_t ByteSizeLong() const final;
+  const char* _InternalParse(const char* ptr, ::PROTOBUF_NAMESPACE_ID::internal::ParseContext* ctx) final;
   uint8_t* _InternalSerialize(
-      uint8_t* target, ::PROTOBUF_NAMESPACE_ID::io::EpsCopyOutputStream* stream) const /*final*/;
-  int GetCachedSize() const /*final*/ { return _impl_._cached_size_.Get(); }
+      uint8_t* target, ::PROTOBUF_NAMESPACE_ID::io::EpsCopyOutputStream* stream) const final;
+  int GetCachedSize() const final { return _impl_._cached_size_.Get(); }
 
   private:
   void SharedCtor(::PROTOBUF_NAMESPACE_ID::Arena* arena, bool is_message_owned);
   void SharedDtor();
-  void SetCachedSize(int size) const /*final*/;
+  void SetCachedSize(int size) const final;
   void InternalSwap(CMsgSource2PerfIntervalSample_Tag* other);
 
   private:
@@ -2049,9 +2050,9 @@ class CMsgSource2PerfIntervalSample_Tag /*final*/ :
   public:
 
   static const ClassData _class_data_;
-  const ::PROTOBUF_NAMESPACE_ID::Message::ClassData*GetClassData() const /*final*/;
+  const ::PROTOBUF_NAMESPACE_ID::Message::ClassData*GetClassData() const final;
 
-  ::PROTOBUF_NAMESPACE_ID::Metadata GetMetadata() const /*final*/;
+  ::PROTOBUF_NAMESPACE_ID::Metadata GetMetadata() const final;
 
   // nested types ----------------------------------------------------
 
@@ -2110,7 +2111,7 @@ class CMsgSource2PerfIntervalSample_Tag /*final*/ :
 };
 // -------------------------------------------------------------------
 
-class CMsgSource2PerfIntervalSample /*final*/ :
+class CMsgSource2PerfIntervalSample :
     public ::PROTOBUF_NAMESPACE_ID::Message /* @@protoc_insertion_point(class_definition:CMsgSource2PerfIntervalSample) */ {
  public:
   inline CMsgSource2PerfIntervalSample() : CMsgSource2PerfIntervalSample(nullptr) {}
@@ -2191,7 +2192,7 @@ class CMsgSource2PerfIntervalSample /*final*/ :
 
   // implements Message ----------------------------------------------
 
-  CMsgSource2PerfIntervalSample* New(::PROTOBUF_NAMESPACE_ID::Arena* arena = nullptr) const /*final*/ {
+  CMsgSource2PerfIntervalSample* New(::PROTOBUF_NAMESPACE_ID::Arena* arena = nullptr) const final {
     return CreateMaybeMessage<CMsgSource2PerfIntervalSample>(arena);
   }
   using ::PROTOBUF_NAMESPACE_ID::Message::CopyFrom;
@@ -2203,19 +2204,19 @@ class CMsgSource2PerfIntervalSample /*final*/ :
   private:
   static void MergeImpl(::PROTOBUF_NAMESPACE_ID::Message& to_msg, const ::PROTOBUF_NAMESPACE_ID::Message& from_msg);
   public:
-  PROTOBUF_ATTRIBUTE_REINITIALIZES void Clear() /*final*/;
-  bool IsInitialized() const /*final*/;
+  PROTOBUF_ATTRIBUTE_REINITIALIZES void Clear() final;
+  bool IsInitialized() const final;
 
-  size_t ByteSizeLong() const /*final*/;
-  const char* _InternalParse(const char* ptr, ::PROTOBUF_NAMESPACE_ID::internal::ParseContext* ctx) /*final*/;
+  size_t ByteSizeLong() const final;
+  const char* _InternalParse(const char* ptr, ::PROTOBUF_NAMESPACE_ID::internal::ParseContext* ctx) final;
   uint8_t* _InternalSerialize(
-      uint8_t* target, ::PROTOBUF_NAMESPACE_ID::io::EpsCopyOutputStream* stream) const /*final*/;
-  int GetCachedSize() const /*final*/ { return _impl_._cached_size_.Get(); }
+      uint8_t* target, ::PROTOBUF_NAMESPACE_ID::io::EpsCopyOutputStream* stream) const final;
+  int GetCachedSize() const final { return _impl_._cached_size_.Get(); }
 
   private:
   void SharedCtor(::PROTOBUF_NAMESPACE_ID::Arena* arena, bool is_message_owned);
   void SharedDtor();
-  void SetCachedSize(int size) const /*final*/;
+  void SetCachedSize(int size) const final;
   void InternalSwap(CMsgSource2PerfIntervalSample* other);
 
   private:
@@ -2229,9 +2230,9 @@ class CMsgSource2PerfIntervalSample /*final*/ :
   public:
 
   static const ClassData _class_data_;
-  const ::PROTOBUF_NAMESPACE_ID::Message::ClassData*GetClassData() const /*final*/;
+  const ::PROTOBUF_NAMESPACE_ID::Message::ClassData*GetClassData() const final;
 
-  ::PROTOBUF_NAMESPACE_ID::Metadata GetMetadata() const /*final*/;
+  ::PROTOBUF_NAMESPACE_ID::Metadata GetMetadata() const final;
 
   // nested types ----------------------------------------------------
 
@@ -2352,7 +2353,7 @@ class CMsgSource2PerfIntervalSample /*final*/ :
 };
 // -------------------------------------------------------------------
 
-class CSource2Metrics_MatchPerfSummary_Notification_Client /*final*/ :
+class CSource2Metrics_MatchPerfSummary_Notification_Client :
     public ::PROTOBUF_NAMESPACE_ID::Message /* @@protoc_insertion_point(class_definition:CSource2Metrics_MatchPerfSummary_Notification.Client) */ {
  public:
   inline CSource2Metrics_MatchPerfSummary_Notification_Client() : CSource2Metrics_MatchPerfSummary_Notification_Client(nullptr) {}
@@ -2433,7 +2434,7 @@ class CSource2Metrics_MatchPerfSummary_Notification_Client /*final*/ :
 
   // implements Message ----------------------------------------------
 
-  CSource2Metrics_MatchPerfSummary_Notification_Client* New(::PROTOBUF_NAMESPACE_ID::Arena* arena = nullptr) const /*final*/ {
+  CSource2Metrics_MatchPerfSummary_Notification_Client* New(::PROTOBUF_NAMESPACE_ID::Arena* arena = nullptr) const final {
     return CreateMaybeMessage<CSource2Metrics_MatchPerfSummary_Notification_Client>(arena);
   }
   using ::PROTOBUF_NAMESPACE_ID::Message::CopyFrom;
@@ -2445,19 +2446,19 @@ class CSource2Metrics_MatchPerfSummary_Notification_Client /*final*/ :
   private:
   static void MergeImpl(::PROTOBUF_NAMESPACE_ID::Message& to_msg, const ::PROTOBUF_NAMESPACE_ID::Message& from_msg);
   public:
-  PROTOBUF_ATTRIBUTE_REINITIALIZES void Clear() /*final*/;
-  bool IsInitialized() const /*final*/;
+  PROTOBUF_ATTRIBUTE_REINITIALIZES void Clear() final;
+  bool IsInitialized() const final;
 
-  size_t ByteSizeLong() const /*final*/;
-  const char* _InternalParse(const char* ptr, ::PROTOBUF_NAMESPACE_ID::internal::ParseContext* ctx) /*final*/;
+  size_t ByteSizeLong() const final;
+  const char* _InternalParse(const char* ptr, ::PROTOBUF_NAMESPACE_ID::internal::ParseContext* ctx) final;
   uint8_t* _InternalSerialize(
-      uint8_t* target, ::PROTOBUF_NAMESPACE_ID::io::EpsCopyOutputStream* stream) const /*final*/;
-  int GetCachedSize() const /*final*/ { return _impl_._cached_size_.Get(); }
+      uint8_t* target, ::PROTOBUF_NAMESPACE_ID::io::EpsCopyOutputStream* stream) const final;
+  int GetCachedSize() const final { return _impl_._cached_size_.Get(); }
 
   private:
   void SharedCtor(::PROTOBUF_NAMESPACE_ID::Arena* arena, bool is_message_owned);
   void SharedDtor();
-  void SetCachedSize(int size) const /*final*/;
+  void SetCachedSize(int size) const final;
   void InternalSwap(CSource2Metrics_MatchPerfSummary_Notification_Client* other);
 
   private:
@@ -2471,9 +2472,9 @@ class CSource2Metrics_MatchPerfSummary_Notification_Client /*final*/ :
   public:
 
   static const ClassData _class_data_;
-  const ::PROTOBUF_NAMESPACE_ID::Message::ClassData*GetClassData() const /*final*/;
+  const ::PROTOBUF_NAMESPACE_ID::Message::ClassData*GetClassData() const final;
 
-  ::PROTOBUF_NAMESPACE_ID::Metadata GetMetadata() const /*final*/;
+  ::PROTOBUF_NAMESPACE_ID::Metadata GetMetadata() const final;
 
   // nested types ----------------------------------------------------
 
@@ -2627,7 +2628,7 @@ class CSource2Metrics_MatchPerfSummary_Notification_Client /*final*/ :
 };
 // -------------------------------------------------------------------
 
-class CSource2Metrics_MatchPerfSummary_Notification /*final*/ :
+class CSource2Metrics_MatchPerfSummary_Notification :
     public ::PROTOBUF_NAMESPACE_ID::Message /* @@protoc_insertion_point(class_definition:CSource2Metrics_MatchPerfSummary_Notification) */ {
  public:
   inline CSource2Metrics_MatchPerfSummary_Notification() : CSource2Metrics_MatchPerfSummary_Notification(nullptr) {}
@@ -2708,7 +2709,7 @@ class CSource2Metrics_MatchPerfSummary_Notification /*final*/ :
 
   // implements Message ----------------------------------------------
 
-  CSource2Metrics_MatchPerfSummary_Notification* New(::PROTOBUF_NAMESPACE_ID::Arena* arena = nullptr) const /*final*/ {
+  CSource2Metrics_MatchPerfSummary_Notification* New(::PROTOBUF_NAMESPACE_ID::Arena* arena = nullptr) const final {
     return CreateMaybeMessage<CSource2Metrics_MatchPerfSummary_Notification>(arena);
   }
   using ::PROTOBUF_NAMESPACE_ID::Message::CopyFrom;
@@ -2720,19 +2721,19 @@ class CSource2Metrics_MatchPerfSummary_Notification /*final*/ :
   private:
   static void MergeImpl(::PROTOBUF_NAMESPACE_ID::Message& to_msg, const ::PROTOBUF_NAMESPACE_ID::Message& from_msg);
   public:
-  PROTOBUF_ATTRIBUTE_REINITIALIZES void Clear() /*final*/;
-  bool IsInitialized() const /*final*/;
+  PROTOBUF_ATTRIBUTE_REINITIALIZES void Clear() final;
+  bool IsInitialized() const final;
 
-  size_t ByteSizeLong() const /*final*/;
-  const char* _InternalParse(const char* ptr, ::PROTOBUF_NAMESPACE_ID::internal::ParseContext* ctx) /*final*/;
+  size_t ByteSizeLong() const final;
+  const char* _InternalParse(const char* ptr, ::PROTOBUF_NAMESPACE_ID::internal::ParseContext* ctx) final;
   uint8_t* _InternalSerialize(
-      uint8_t* target, ::PROTOBUF_NAMESPACE_ID::io::EpsCopyOutputStream* stream) const /*final*/;
-  int GetCachedSize() const /*final*/ { return _impl_._cached_size_.Get(); }
+      uint8_t* target, ::PROTOBUF_NAMESPACE_ID::io::EpsCopyOutputStream* stream) const final;
+  int GetCachedSize() const final { return _impl_._cached_size_.Get(); }
 
   private:
   void SharedCtor(::PROTOBUF_NAMESPACE_ID::Arena* arena, bool is_message_owned);
   void SharedDtor();
-  void SetCachedSize(int size) const /*final*/;
+  void SetCachedSize(int size) const final;
   void InternalSwap(CSource2Metrics_MatchPerfSummary_Notification* other);
 
   private:
@@ -2746,9 +2747,9 @@ class CSource2Metrics_MatchPerfSummary_Notification /*final*/ :
   public:
 
   static const ClassData _class_data_;
-  const ::PROTOBUF_NAMESPACE_ID::Message::ClassData*GetClassData() const /*final*/;
+  const ::PROTOBUF_NAMESPACE_ID::Message::ClassData*GetClassData() const final;
 
-  ::PROTOBUF_NAMESPACE_ID::Metadata GetMetadata() const /*final*/;
+  ::PROTOBUF_NAMESPACE_ID::Metadata GetMetadata() const final;
 
   // nested types ----------------------------------------------------
 
@@ -2899,7 +2900,7 @@ class CSource2Metrics_MatchPerfSummary_Notification /*final*/ :
 };
 // -------------------------------------------------------------------
 
-class CMsgSource2PlayStatsPackedRecordList_FieldDef /*final*/ :
+class CMsgSource2PlayStatsPackedRecordList_FieldDef :
     public ::PROTOBUF_NAMESPACE_ID::Message /* @@protoc_insertion_point(class_definition:CMsgSource2PlayStatsPackedRecordList.FieldDef) */ {
  public:
   inline CMsgSource2PlayStatsPackedRecordList_FieldDef() : CMsgSource2PlayStatsPackedRecordList_FieldDef(nullptr) {}
@@ -2980,7 +2981,7 @@ class CMsgSource2PlayStatsPackedRecordList_FieldDef /*final*/ :
 
   // implements Message ----------------------------------------------
 
-  CMsgSource2PlayStatsPackedRecordList_FieldDef* New(::PROTOBUF_NAMESPACE_ID::Arena* arena = nullptr) const /*final*/ {
+  CMsgSource2PlayStatsPackedRecordList_FieldDef* New(::PROTOBUF_NAMESPACE_ID::Arena* arena = nullptr) const final {
     return CreateMaybeMessage<CMsgSource2PlayStatsPackedRecordList_FieldDef>(arena);
   }
   using ::PROTOBUF_NAMESPACE_ID::Message::CopyFrom;
@@ -2992,19 +2993,19 @@ class CMsgSource2PlayStatsPackedRecordList_FieldDef /*final*/ :
   private:
   static void MergeImpl(::PROTOBUF_NAMESPACE_ID::Message& to_msg, const ::PROTOBUF_NAMESPACE_ID::Message& from_msg);
   public:
-  PROTOBUF_ATTRIBUTE_REINITIALIZES void Clear() /*final*/;
-  bool IsInitialized() const /*final*/;
+  PROTOBUF_ATTRIBUTE_REINITIALIZES void Clear() final;
+  bool IsInitialized() const final;
 
-  size_t ByteSizeLong() const /*final*/;
-  const char* _InternalParse(const char* ptr, ::PROTOBUF_NAMESPACE_ID::internal::ParseContext* ctx) /*final*/;
+  size_t ByteSizeLong() const final;
+  const char* _InternalParse(const char* ptr, ::PROTOBUF_NAMESPACE_ID::internal::ParseContext* ctx) final;
   uint8_t* _InternalSerialize(
-      uint8_t* target, ::PROTOBUF_NAMESPACE_ID::io::EpsCopyOutputStream* stream) const /*final*/;
-  int GetCachedSize() const /*final*/ { return _impl_._cached_size_.Get(); }
+      uint8_t* target, ::PROTOBUF_NAMESPACE_ID::io::EpsCopyOutputStream* stream) const final;
+  int GetCachedSize() const final { return _impl_._cached_size_.Get(); }
 
   private:
   void SharedCtor(::PROTOBUF_NAMESPACE_ID::Arena* arena, bool is_message_owned);
   void SharedDtor();
-  void SetCachedSize(int size) const /*final*/;
+  void SetCachedSize(int size) const final;
   void InternalSwap(CMsgSource2PlayStatsPackedRecordList_FieldDef* other);
 
   private:
@@ -3018,9 +3019,9 @@ class CMsgSource2PlayStatsPackedRecordList_FieldDef /*final*/ :
   public:
 
   static const ClassData _class_data_;
-  const ::PROTOBUF_NAMESPACE_ID::Message::ClassData*GetClassData() const /*final*/;
+  const ::PROTOBUF_NAMESPACE_ID::Message::ClassData*GetClassData() const final;
 
-  ::PROTOBUF_NAMESPACE_ID::Metadata GetMetadata() const /*final*/;
+  ::PROTOBUF_NAMESPACE_ID::Metadata GetMetadata() const final;
 
   // nested types ----------------------------------------------------
 
@@ -3079,7 +3080,7 @@ class CMsgSource2PlayStatsPackedRecordList_FieldDef /*final*/ :
 };
 // -------------------------------------------------------------------
 
-class CMsgSource2PlayStatsPackedRecordList /*final*/ :
+class CMsgSource2PlayStatsPackedRecordList :
     public ::PROTOBUF_NAMESPACE_ID::Message /* @@protoc_insertion_point(class_definition:CMsgSource2PlayStatsPackedRecordList) */ {
  public:
   inline CMsgSource2PlayStatsPackedRecordList() : CMsgSource2PlayStatsPackedRecordList(nullptr) {}
@@ -3160,7 +3161,7 @@ class CMsgSource2PlayStatsPackedRecordList /*final*/ :
 
   // implements Message ----------------------------------------------
 
-  CMsgSource2PlayStatsPackedRecordList* New(::PROTOBUF_NAMESPACE_ID::Arena* arena = nullptr) const /*final*/ {
+  CMsgSource2PlayStatsPackedRecordList* New(::PROTOBUF_NAMESPACE_ID::Arena* arena = nullptr) const final {
     return CreateMaybeMessage<CMsgSource2PlayStatsPackedRecordList>(arena);
   }
   using ::PROTOBUF_NAMESPACE_ID::Message::CopyFrom;
@@ -3172,19 +3173,19 @@ class CMsgSource2PlayStatsPackedRecordList /*final*/ :
   private:
   static void MergeImpl(::PROTOBUF_NAMESPACE_ID::Message& to_msg, const ::PROTOBUF_NAMESPACE_ID::Message& from_msg);
   public:
-  PROTOBUF_ATTRIBUTE_REINITIALIZES void Clear() /*final*/;
-  bool IsInitialized() const /*final*/;
+  PROTOBUF_ATTRIBUTE_REINITIALIZES void Clear() final;
+  bool IsInitialized() const final;
 
-  size_t ByteSizeLong() const /*final*/;
-  const char* _InternalParse(const char* ptr, ::PROTOBUF_NAMESPACE_ID::internal::ParseContext* ctx) /*final*/;
+  size_t ByteSizeLong() const final;
+  const char* _InternalParse(const char* ptr, ::PROTOBUF_NAMESPACE_ID::internal::ParseContext* ctx) final;
   uint8_t* _InternalSerialize(
-      uint8_t* target, ::PROTOBUF_NAMESPACE_ID::io::EpsCopyOutputStream* stream) const /*final*/;
-  int GetCachedSize() const /*final*/ { return _impl_._cached_size_.Get(); }
+      uint8_t* target, ::PROTOBUF_NAMESPACE_ID::io::EpsCopyOutputStream* stream) const final;
+  int GetCachedSize() const final { return _impl_._cached_size_.Get(); }
 
   private:
   void SharedCtor(::PROTOBUF_NAMESPACE_ID::Arena* arena, bool is_message_owned);
   void SharedDtor();
-  void SetCachedSize(int size) const /*final*/;
+  void SetCachedSize(int size) const final;
   void InternalSwap(CMsgSource2PlayStatsPackedRecordList* other);
 
   private:
@@ -3198,9 +3199,9 @@ class CMsgSource2PlayStatsPackedRecordList /*final*/ :
   public:
 
   static const ClassData _class_data_;
-  const ::PROTOBUF_NAMESPACE_ID::Message::ClassData*GetClassData() const /*final*/;
+  const ::PROTOBUF_NAMESPACE_ID::Message::ClassData*GetClassData() const final;
 
-  ::PROTOBUF_NAMESPACE_ID::Metadata GetMetadata() const /*final*/;
+  ::PROTOBUF_NAMESPACE_ID::Metadata GetMetadata() const final;
 
   // nested types ----------------------------------------------------
 
@@ -3224,6 +3225,7 @@ class CMsgSource2PlayStatsPackedRecordList /*final*/ :
     kStringValsFieldNumber = 15,
     kLowCardinalityStringValsFieldNumber = 16,
     kUtcdatetimeValsFieldNumber = 17,
+    kSteamidtrustbucketValsFieldNumber = 18,
     kRecordNameFieldNumber = 1,
     kRecordCountFieldNumber = 3,
   };
@@ -3557,6 +3559,28 @@ class CMsgSource2PlayStatsPackedRecordList /*final*/ :
   ::PROTOBUF_NAMESPACE_ID::RepeatedField< uint32_t >*
       mutable_utcdatetime_vals();
 
+  // repeated fixed64 steamidtrustbucket_vals = 18 [packed = true];
+  int steamidtrustbucket_vals_size() const;
+  private:
+  int _internal_steamidtrustbucket_vals_size() const;
+  public:
+  void clear_steamidtrustbucket_vals();
+  private:
+  uint64_t _internal_steamidtrustbucket_vals(int index) const;
+  const ::PROTOBUF_NAMESPACE_ID::RepeatedField< uint64_t >&
+      _internal_steamidtrustbucket_vals() const;
+  void _internal_add_steamidtrustbucket_vals(uint64_t value);
+  ::PROTOBUF_NAMESPACE_ID::RepeatedField< uint64_t >*
+      _internal_mutable_steamidtrustbucket_vals();
+  public:
+  uint64_t steamidtrustbucket_vals(int index) const;
+  void set_steamidtrustbucket_vals(int index, uint64_t value);
+  void add_steamidtrustbucket_vals(uint64_t value);
+  const ::PROTOBUF_NAMESPACE_ID::RepeatedField< uint64_t >&
+      steamidtrustbucket_vals() const;
+  ::PROTOBUF_NAMESPACE_ID::RepeatedField< uint64_t >*
+      mutable_steamidtrustbucket_vals();
+
   // optional string record_name = 1;
   bool has_record_name() const;
   private:
@@ -3621,6 +3645,7 @@ class CMsgSource2PlayStatsPackedRecordList /*final*/ :
     ::PROTOBUF_NAMESPACE_ID::RepeatedPtrField<std::string> string_vals_;
     ::PROTOBUF_NAMESPACE_ID::RepeatedPtrField<std::string> low_cardinality_string_vals_;
     ::PROTOBUF_NAMESPACE_ID::RepeatedField< uint32_t > utcdatetime_vals_;
+    ::PROTOBUF_NAMESPACE_ID::RepeatedField< uint64_t > steamidtrustbucket_vals_;
     ::PROTOBUF_NAMESPACE_ID::internal::ArenaStringPtr record_name_;
     uint32_t record_count_;
   };
@@ -3629,7 +3654,7 @@ class CMsgSource2PlayStatsPackedRecordList /*final*/ :
 };
 // -------------------------------------------------------------------
 
-class CSource2Metrics_RecordPlayStats_Notification /*final*/ :
+class CSource2Metrics_RecordPlayStats_Notification :
     public ::PROTOBUF_NAMESPACE_ID::Message /* @@protoc_insertion_point(class_definition:CSource2Metrics_RecordPlayStats_Notification) */ {
  public:
   inline CSource2Metrics_RecordPlayStats_Notification() : CSource2Metrics_RecordPlayStats_Notification(nullptr) {}
@@ -3710,7 +3735,7 @@ class CSource2Metrics_RecordPlayStats_Notification /*final*/ :
 
   // implements Message ----------------------------------------------
 
-  CSource2Metrics_RecordPlayStats_Notification* New(::PROTOBUF_NAMESPACE_ID::Arena* arena = nullptr) const /*final*/ {
+  CSource2Metrics_RecordPlayStats_Notification* New(::PROTOBUF_NAMESPACE_ID::Arena* arena = nullptr) const final {
     return CreateMaybeMessage<CSource2Metrics_RecordPlayStats_Notification>(arena);
   }
   using ::PROTOBUF_NAMESPACE_ID::Message::CopyFrom;
@@ -3722,19 +3747,19 @@ class CSource2Metrics_RecordPlayStats_Notification /*final*/ :
   private:
   static void MergeImpl(::PROTOBUF_NAMESPACE_ID::Message& to_msg, const ::PROTOBUF_NAMESPACE_ID::Message& from_msg);
   public:
-  PROTOBUF_ATTRIBUTE_REINITIALIZES void Clear() /*final*/;
-  bool IsInitialized() const /*final*/;
+  PROTOBUF_ATTRIBUTE_REINITIALIZES void Clear() final;
+  bool IsInitialized() const final;
 
-  size_t ByteSizeLong() const /*final*/;
-  const char* _InternalParse(const char* ptr, ::PROTOBUF_NAMESPACE_ID::internal::ParseContext* ctx) /*final*/;
+  size_t ByteSizeLong() const final;
+  const char* _InternalParse(const char* ptr, ::PROTOBUF_NAMESPACE_ID::internal::ParseContext* ctx) final;
   uint8_t* _InternalSerialize(
-      uint8_t* target, ::PROTOBUF_NAMESPACE_ID::io::EpsCopyOutputStream* stream) const /*final*/;
-  int GetCachedSize() const /*final*/ { return _impl_._cached_size_.Get(); }
+      uint8_t* target, ::PROTOBUF_NAMESPACE_ID::io::EpsCopyOutputStream* stream) const final;
+  int GetCachedSize() const final { return _impl_._cached_size_.Get(); }
 
   private:
   void SharedCtor(::PROTOBUF_NAMESPACE_ID::Arena* arena, bool is_message_owned);
   void SharedDtor();
-  void SetCachedSize(int size) const /*final*/;
+  void SetCachedSize(int size) const final;
   void InternalSwap(CSource2Metrics_RecordPlayStats_Notification* other);
 
   private:
@@ -3748,9 +3773,9 @@ class CSource2Metrics_RecordPlayStats_Notification /*final*/ :
   public:
 
   static const ClassData _class_data_;
-  const ::PROTOBUF_NAMESPACE_ID::Message::ClassData*GetClassData() const /*final*/;
+  const ::PROTOBUF_NAMESPACE_ID::Message::ClassData*GetClassData() const final;
 
-  ::PROTOBUF_NAMESPACE_ID::Metadata GetMetadata() const /*final*/;
+  ::PROTOBUF_NAMESPACE_ID::Metadata GetMetadata() const final;
 
   // nested types ----------------------------------------------------
 
@@ -8367,6 +8392,53 @@ inline ::PROTOBUF_NAMESPACE_ID::RepeatedField< uint32_t >*
 CMsgSource2PlayStatsPackedRecordList::mutable_utcdatetime_vals() {
   // @@protoc_insertion_point(field_mutable_list:CMsgSource2PlayStatsPackedRecordList.utcdatetime_vals)
   return _internal_mutable_utcdatetime_vals();
+}
+
+// repeated fixed64 steamidtrustbucket_vals = 18 [packed = true];
+inline int CMsgSource2PlayStatsPackedRecordList::_internal_steamidtrustbucket_vals_size() const {
+  return _impl_.steamidtrustbucket_vals_.size();
+}
+inline int CMsgSource2PlayStatsPackedRecordList::steamidtrustbucket_vals_size() const {
+  return _internal_steamidtrustbucket_vals_size();
+}
+inline void CMsgSource2PlayStatsPackedRecordList::clear_steamidtrustbucket_vals() {
+  _impl_.steamidtrustbucket_vals_.Clear();
+}
+inline uint64_t CMsgSource2PlayStatsPackedRecordList::_internal_steamidtrustbucket_vals(int index) const {
+  return _impl_.steamidtrustbucket_vals_.Get(index);
+}
+inline uint64_t CMsgSource2PlayStatsPackedRecordList::steamidtrustbucket_vals(int index) const {
+  // @@protoc_insertion_point(field_get:CMsgSource2PlayStatsPackedRecordList.steamidtrustbucket_vals)
+  return _internal_steamidtrustbucket_vals(index);
+}
+inline void CMsgSource2PlayStatsPackedRecordList::set_steamidtrustbucket_vals(int index, uint64_t value) {
+  _impl_.steamidtrustbucket_vals_.Set(index, value);
+  // @@protoc_insertion_point(field_set:CMsgSource2PlayStatsPackedRecordList.steamidtrustbucket_vals)
+}
+inline void CMsgSource2PlayStatsPackedRecordList::_internal_add_steamidtrustbucket_vals(uint64_t value) {
+  _impl_.steamidtrustbucket_vals_.Add(value);
+}
+inline void CMsgSource2PlayStatsPackedRecordList::add_steamidtrustbucket_vals(uint64_t value) {
+  _internal_add_steamidtrustbucket_vals(value);
+  // @@protoc_insertion_point(field_add:CMsgSource2PlayStatsPackedRecordList.steamidtrustbucket_vals)
+}
+inline const ::PROTOBUF_NAMESPACE_ID::RepeatedField< uint64_t >&
+CMsgSource2PlayStatsPackedRecordList::_internal_steamidtrustbucket_vals() const {
+  return _impl_.steamidtrustbucket_vals_;
+}
+inline const ::PROTOBUF_NAMESPACE_ID::RepeatedField< uint64_t >&
+CMsgSource2PlayStatsPackedRecordList::steamidtrustbucket_vals() const {
+  // @@protoc_insertion_point(field_list:CMsgSource2PlayStatsPackedRecordList.steamidtrustbucket_vals)
+  return _internal_steamidtrustbucket_vals();
+}
+inline ::PROTOBUF_NAMESPACE_ID::RepeatedField< uint64_t >*
+CMsgSource2PlayStatsPackedRecordList::_internal_mutable_steamidtrustbucket_vals() {
+  return &_impl_.steamidtrustbucket_vals_;
+}
+inline ::PROTOBUF_NAMESPACE_ID::RepeatedField< uint64_t >*
+CMsgSource2PlayStatsPackedRecordList::mutable_steamidtrustbucket_vals() {
+  // @@protoc_insertion_point(field_mutable_list:CMsgSource2PlayStatsPackedRecordList.steamidtrustbucket_vals)
+  return _internal_mutable_steamidtrustbucket_vals();
 }
 
 // -------------------------------------------------------------------

@@ -23,6 +23,7 @@ enum ECitadelClientMessages {
 	CITADEL_CM_HideoutMatchmakingState = 1020;
 	CITADEL_CM_PlayerStatsUpdated = 1021;
 	CITADEL_CM_HideoutUpdateHeroReleaseVoteTally = 1022;
+	CITADEL_CM_ExecuteMapPositionAbility = 1023;
 }
 
 message CCitadelClientMsg_Pause {
@@ -158,6 +159,8 @@ message CCitadelClientMsg_HideoutSpawn {
 
 message CCitadelClientMsg_HideoutMatchmakingState {
 	optional bool is_matchmaking = 1;
+	optional .ECitadelMatchMode match_mode = 2 [default = k_ECitadelMatchMode_Invalid];
+	optional .ECitadelGameMode game_mode = 3 [default = k_ECitadelGameMode_Invalid];
 }
 
 message CCitadelClientMsg_PlayerStatsUpdated {
@@ -170,4 +173,11 @@ message CCitadelClientMsg_HideoutUpdateHeroReleaseVoteTally {
 	}
 
 	repeated .CCitadelClientMsg_HideoutUpdateHeroReleaseVoteTally.VoteRoundToTallyEntry vote_round_to_tally = 1;
+}
+
+message CCitadelClientMsg_ExecuteMapPositionAbility {
+	optional int32 ability_entity_index = 1;
+	optional float pos_x = 2;
+	optional float pos_y = 3;
+	optional float pos_z = 4;
 }
