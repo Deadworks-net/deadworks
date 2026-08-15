@@ -228,6 +228,57 @@
   color: var(--accent);
 }
 
+.devBtn:disabled {
+  color: var(--disabled-text);
+  cursor: default;
+  border-color: var(--border);
+}
+
+.inlineError {
+  margin-top: -6px;
+  margin-bottom: 8px;
+  font-size: 0.75rem;
+  color: var(--ping-bad);
+}
+
+.backgroundLayoutControls {
+  display: grid;
+  grid-template-columns: 1fr auto;
+  gap: 10px 16px;
+  align-items: end;
+  padding: 12px 0 4px;
+  border-bottom: 1px solid var(--separator);
+}
+
+.sliderRow {
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
+}
+
+.sliderLabel {
+  display: flex;
+  justify-content: space-between;
+  font-size: 0.76rem;
+  color: var(--text-muted);
+}
+
+.sliderLabel span {
+  color: var(--text-secondary);
+  font-variant-numeric: tabular-nums;
+}
+
+.slider {
+  width: 100%;
+  accent-color: var(--accent);
+}
+
+.backgroundLayoutControls .devBtn {
+  grid-row: 1 / span 3;
+  grid-column: 2;
+  align-self: center;
+}
+
 /* Toggle switch */
 .toggle {
   position: relative;
