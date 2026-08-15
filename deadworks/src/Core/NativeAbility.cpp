@@ -127,29 +127,53 @@ static uint32_t CloneAbilityVDataWithOverrides(
         return 0;
     }
 
-    // The map's internal CUtlRBTree node array: count at map+0x08, data ptr at map+0x10.
+    // The ability property map is a CUtlOrderedMap<CUtlString, CitadelAbilityProperty_t> whose
+    // elements live in a flat CUtlRBTree node array: element count at map+0x08, node-array
+    // pointer at map+0x10. Each node is laid out as
+    //     [ UtlRBTreeLinks_t<int> (16) | CUtlString key (8) | CitadelAbilityProperty_t elem ]
+    // The elem size (and therefore the node stride) grows across game updates, so it must be
+    // read from the schema at runtime. Trusting sizeof(CitadelAbilityProperty_t) here is what
+    // made this path crash after an update: the stale compile-time stride walked the array with
+    // the wrong pitch and dereferenced garbage CUtlString keys.
     auto *cloneVData = reinterpret_cast<CitadelAbilityVData *>(clone);
     auto *cloneMapBytes = reinterpret_cast<uint8_t *>(cloneVData->m_mapAbilityProperties.Get());
     int nodeCount = *reinterpret_cast<int *>(cloneMapBytes + 0x08);
     auto *origNodeData = *reinterpret_cast<uint8_t **>(cloneMapBytes + 0x10);
+    if (!origNodeData || nodeCount <= 0) {
+        free(clone);
+        return 0;
+    }
 
-    // Node stride: tree metadata (8 bytes) + CUtlString key + CitadelAbilityProperty_t elem
-    constexpr int kTreeNodeMeta = 8;
-    int nodeStride = kTreeNodeMeta + static_cast<int>(sizeof(CUtlString)) + static_cast<int>(sizeof(CitadelAbilityProperty_t));
+    constexpr int kRBTreeLinksSize = 16;                                        // UtlRBTreeLinks_t<int> = 4 * int
+    constexpr int kKeyOffset = kRBTreeLinksSize;                                // CUtlString key follows the links
+    const int kElemOffset = kKeyOffset + static_cast<int>(sizeof(CUtlString));  // elem follows the key
+
+    int elemSize = schema::GetClassSize("CitadelAbilityProperty_t");
+    if (elemSize <= 0)
+        elemSize = static_cast<int>(sizeof(CitadelAbilityProperty_t));          // fallback to last-known size
+    const int nodeStride = kElemOffset + elemSize;
+
     auto *clonedNodes = static_cast<uint8_t *>(malloc(static_cast<size_t>(nodeCount) * nodeStride));
+    if (!clonedNodes) {
+        free(clone);
+        return 0;
+    }
     memcpy(clonedNodes, origNodeData, static_cast<size_t>(nodeCount) * nodeStride);
     *reinterpret_cast<uint8_t **>(cloneMapBytes + 0x10) = clonedNodes;
 
-    // Iterate original map (SDK API), apply overrides to cloned node array by offset.
-    for (int i = 0; i < origMap->MaxElement(); i++) {
-        if (!origMap->IsValidIndex(i)) continue;
+    // Walk the node array with the runtime stride, overriding matching properties' parsed floats.
+    for (int i = 0; i < nodeCount; i++) {
+        uint8_t *origNode = origNodeData + static_cast<size_t>(i) * nodeStride;
+        // Free-slot guard: a live RB-tree node's left-child link (first int) never equals its own index.
+        if (*reinterpret_cast<int32_t *>(origNode) == i) continue;
 
-        const CUtlString &key = origMap->Key(i);
+        const char *keyStr = *reinterpret_cast<const char *const *>(origNode + kKeyOffset); // CUtlString::m_pString
+        if (!keyStr) continue;
+
         for (int oi = 0; oi < overrideCount; oi++) {
-            if (overrideNames[oi] && _stricmp(key.Get(), overrideNames[oi]) == 0) {
-                auto &origElem = origMap->Element(i);
-                auto offset = reinterpret_cast<uintptr_t>(&origElem) - reinterpret_cast<uintptr_t>(origNodeData);
-                float *parsed = reinterpret_cast<CitadelAbilityProperty_t *>(clonedNodes + offset)->As().GetParsedFloats();
+            if (overrideNames[oi] && _stricmp(keyStr, overrideNames[oi]) == 0) {
+                uint8_t *cloneElem = clonedNodes + static_cast<size_t>(i) * nodeStride + kElemOffset;
+                float *parsed = reinterpret_cast<CitadelAbilityProperty_t *>(cloneElem)->As().GetParsedFloats();
                 g_Log->Info("ModifierOverride: {}={} (was {})", overrideNames[oi], overrideValues[oi], parsed[0]);
                 parsed[0] = overrideValues[oi];
                 parsed[1] = overrideValues[oi];

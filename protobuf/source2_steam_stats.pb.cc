@@ -267,6 +267,7 @@ PROTOBUF_CONSTEXPR CMsgSource2PlayStatsPackedRecordList::CMsgSource2PlayStatsPac
   , /*decltype(_impl_.string_vals_)*/{}
   , /*decltype(_impl_.low_cardinality_string_vals_)*/{}
   , /*decltype(_impl_.utcdatetime_vals_)*/{}
+  , /*decltype(_impl_.steamidtrustbucket_vals_)*/{}
   , /*decltype(_impl_.record_name_)*/{&::_pbi::fixed_address_empty_string, ::_pbi::ConstantInitialized{}}
   , /*decltype(_impl_.record_count_)*/0u} {}
 struct CMsgSource2PlayStatsPackedRecordListDefaultTypeInternal {
@@ -581,9 +582,11 @@ const uint32_t TableStruct_source2_5fsteam_5fstats_2eproto::offsets[] PROTOBUF_S
   PROTOBUF_FIELD_OFFSET(::CMsgSource2PlayStatsPackedRecordList, _impl_.string_vals_),
   PROTOBUF_FIELD_OFFSET(::CMsgSource2PlayStatsPackedRecordList, _impl_.low_cardinality_string_vals_),
   PROTOBUF_FIELD_OFFSET(::CMsgSource2PlayStatsPackedRecordList, _impl_.utcdatetime_vals_),
+  PROTOBUF_FIELD_OFFSET(::CMsgSource2PlayStatsPackedRecordList, _impl_.steamidtrustbucket_vals_),
   0,
   ~0u,
   1,
+  ~0u,
   ~0u,
   ~0u,
   ~0u,
@@ -619,8 +622,8 @@ static const ::_pbi::MigrationSchema schemas[] PROTOBUF_SECTION_VARIABLE(protode
   { 210, 223, -1, sizeof(::CSource2Metrics_MatchPerfSummary_Notification_Client)},
   { 230, 243, -1, sizeof(::CSource2Metrics_MatchPerfSummary_Notification)},
   { 250, 258, -1, sizeof(::CMsgSource2PlayStatsPackedRecordList_FieldDef)},
-  { 260, 283, -1, sizeof(::CMsgSource2PlayStatsPackedRecordList)},
-  { 300, 308, -1, sizeof(::CSource2Metrics_RecordPlayStats_Notification)},
+  { 260, 284, -1, sizeof(::CMsgSource2PlayStatsPackedRecordList)},
+  { 302, 310, -1, sizeof(::CSource2Metrics_RecordPlayStats_Notification)},
 };
 
 static const ::_pb::Message* const file_default_instances[] = {
@@ -717,7 +720,7 @@ const char descriptor_table_protodef_source2_5fsteam_5fstats_2eproto[] PROTOBUF_
   ".CMsgSource2NetworkFlowQuality\0225\n\rupstre"
   "am_flow\030\005 \001(\0132\036.CMsgSource2NetworkFlowQu"
   "ality\022\017\n\007steamid\030\n \001(\006\0224\n\014perf_samples\030\013"
-  " \003(\0132\036.CMsgSource2PerfIntervalSample\"\345\004\n"
+  " \003(\0132\036.CMsgSource2PerfIntervalSample\"\212\005\n"
   "$CMsgSource2PlayStatsPackedRecordList\022\023\n"
   "\013record_name\030\001 \001(\t\022B\n\nfield_defs\030\002 \003(\0132."
   ".CMsgSource2PlayStatsPackedRecordList.Fi"
@@ -730,29 +733,31 @@ const char descriptor_table_protodef_source2_5fsteam_5fstats_2eproto[] PROTOBUF_
   " \003(\001B\002\020\001\022\030\n\014float32_vals\030\r \003(\002B\002\020\001\022\025\n\tbo"
   "ol_vals\030\016 \003(\010B\002\020\001\022\023\n\013string_vals\030\017 \003(\t\022#"
   "\n\033low_cardinality_string_vals\030\020 \003(\t\022\034\n\020u"
-  "tcdatetime_vals\030\021 \003(\007B\002\020\001\032i\n\010FieldDef\022\022\n"
-  "\nfield_name\030\001 \001(\t\022I\n\nfield_type\030\002 \001(\0162\033."
-  "ESource2PlayStatsFieldType:\030Source2PlayS"
-  "tats_Invalid\"z\n,CSource2Metrics_RecordPl"
-  "ayStats_Notification\022;\n\014record_types\030\001 \003"
-  "(\0132%.CMsgSource2PlayStatsPackedRecordLis"
-  "t\022\r\n\005appid\030\002 \001(\r*\335\003\n\032ESource2PlayStatsFi"
-  "eldType\022\034\n\030Source2PlayStats_Invalid\020\000\022\033\n"
-  "\027Source2PlayStats_UInt64\020\001\022\033\n\027Source2Pla"
-  "yStats_UInt32\020\002\022\033\n\027Source2PlayStats_UInt"
-  "16\020\003\022\032\n\026Source2PlayStats_UInt8\020\004\022\032\n\026Sour"
-  "ce2PlayStats_Int64\020\005\022\032\n\026Source2PlayStats"
-  "_Int32\020\006\022\032\n\026Source2PlayStats_Int16\020\007\022\031\n\025"
-  "Source2PlayStats_Int8\020\010\022\034\n\030Source2PlaySt"
-  "ats_Float64\020\t\022\034\n\030Source2PlayStats_Float3"
-  "2\020\n\022\031\n\025Source2PlayStats_Bool\020\013\022\033\n\027Source"
-  "2PlayStats_String\020\014\022)\n%Source2PlayStats_"
-  "LowCardinalityString\020\r\022 \n\034Source2PlaySta"
-  "ts_UTCDateTime\020\016"
+  "tcdatetime_vals\030\021 \003(\007B\002\020\001\022#\n\027steamidtrus"
+  "tbucket_vals\030\022 \003(\006B\002\020\001\032i\n\010FieldDef\022\022\n\nfi"
+  "eld_name\030\001 \001(\t\022I\n\nfield_type\030\002 \001(\0162\033.ESo"
+  "urce2PlayStatsFieldType:\030Source2PlayStat"
+  "s_Invalid\"z\n,CSource2Metrics_RecordPlayS"
+  "tats_Notification\022;\n\014record_types\030\001 \003(\0132"
+  "%.CMsgSource2PlayStatsPackedRecordList\022\r"
+  "\n\005appid\030\002 \001(\r*\206\004\n\032ESource2PlayStatsField"
+  "Type\022\034\n\030Source2PlayStats_Invalid\020\000\022\033\n\027So"
+  "urce2PlayStats_UInt64\020\001\022\033\n\027Source2PlaySt"
+  "ats_UInt32\020\002\022\033\n\027Source2PlayStats_UInt16\020"
+  "\003\022\032\n\026Source2PlayStats_UInt8\020\004\022\032\n\026Source2"
+  "PlayStats_Int64\020\005\022\032\n\026Source2PlayStats_In"
+  "t32\020\006\022\032\n\026Source2PlayStats_Int16\020\007\022\031\n\025Sou"
+  "rce2PlayStats_Int8\020\010\022\034\n\030Source2PlayStats"
+  "_Float64\020\t\022\034\n\030Source2PlayStats_Float32\020\n"
+  "\022\031\n\025Source2PlayStats_Bool\020\013\022\033\n\027Source2Pl"
+  "ayStats_String\020\014\022)\n%Source2PlayStats_Low"
+  "CardinalityString\020\r\022 \n\034Source2PlayStats_"
+  "UTCDateTime\020\016\022\'\n#Source2PlayStats_SteamI"
+  "DTrustBucket\020\017"
   ;
 static ::_pbi::once_flag descriptor_table_source2_5fsteam_5fstats_2eproto_once;
 const ::_pbi::DescriptorTable descriptor_table_source2_5fsteam_5fstats_2eproto = {
-    false, false, 4416, descriptor_table_protodef_source2_5fsteam_5fstats_2eproto,
+    false, false, 4494, descriptor_table_protodef_source2_5fsteam_5fstats_2eproto,
     "source2_steam_stats.proto",
     &descriptor_table_source2_5fsteam_5fstats_2eproto_once, nullptr, 0, 11,
     schemas, file_default_instances, TableStruct_source2_5fsteam_5fstats_2eproto::offsets,
@@ -786,6 +791,7 @@ bool ESource2PlayStatsFieldType_IsValid(int value) {
     case 12:
     case 13:
     case 14:
+    case 15:
       return true;
     default:
       return false;
@@ -5926,6 +5932,7 @@ CMsgSource2PlayStatsPackedRecordList::CMsgSource2PlayStatsPackedRecordList(const
     , decltype(_impl_.string_vals_){from._impl_.string_vals_}
     , decltype(_impl_.low_cardinality_string_vals_){from._impl_.low_cardinality_string_vals_}
     , decltype(_impl_.utcdatetime_vals_){from._impl_.utcdatetime_vals_}
+    , decltype(_impl_.steamidtrustbucket_vals_){from._impl_.steamidtrustbucket_vals_}
     , decltype(_impl_.record_name_){}
     , decltype(_impl_.record_count_){}};
 
@@ -5972,6 +5979,7 @@ inline void CMsgSource2PlayStatsPackedRecordList::SharedCtor(
     , decltype(_impl_.string_vals_){arena}
     , decltype(_impl_.low_cardinality_string_vals_){arena}
     , decltype(_impl_.utcdatetime_vals_){arena}
+    , decltype(_impl_.steamidtrustbucket_vals_){arena}
     , decltype(_impl_.record_name_){}
     , decltype(_impl_.record_count_){0u}
   };
@@ -6007,6 +6015,7 @@ inline void CMsgSource2PlayStatsPackedRecordList::SharedDtor() {
   _impl_.string_vals_.~RepeatedPtrField();
   _impl_.low_cardinality_string_vals_.~RepeatedPtrField();
   _impl_.utcdatetime_vals_.~RepeatedField();
+  _impl_.steamidtrustbucket_vals_.~RepeatedField();
   _impl_.record_name_.Destroy();
 }
 
@@ -6035,6 +6044,7 @@ void CMsgSource2PlayStatsPackedRecordList::Clear() {
   _impl_.string_vals_.Clear();
   _impl_.low_cardinality_string_vals_.Clear();
   _impl_.utcdatetime_vals_.Clear();
+  _impl_.steamidtrustbucket_vals_.Clear();
   cached_has_bits = _impl_._has_bits_[0];
   if (cached_has_bits & 0x00000001u) {
     _impl_.record_name_.ClearNonDefaultToEmpty();
@@ -6251,6 +6261,17 @@ const char* CMsgSource2PlayStatsPackedRecordList::_InternalParse(const char* ptr
         } else
           goto handle_unusual;
         continue;
+      // repeated fixed64 steamidtrustbucket_vals = 18 [packed = true];
+      case 18:
+        if (PROTOBUF_PREDICT_TRUE(static_cast<uint8_t>(tag) == 146)) {
+          ptr = ::PROTOBUF_NAMESPACE_ID::internal::PackedFixed64Parser(_internal_mutable_steamidtrustbucket_vals(), ptr, ctx);
+          CHK_(ptr);
+        } else if (static_cast<uint8_t>(tag) == 145) {
+          _internal_add_steamidtrustbucket_vals(::PROTOBUF_NAMESPACE_ID::internal::UnalignedLoad<uint64_t>(ptr));
+          ptr += sizeof(uint64_t);
+        } else
+          goto handle_unusual;
+        continue;
       default:
         goto handle_unusual;
     }  // switch
@@ -6416,6 +6437,11 @@ uint8_t* CMsgSource2PlayStatsPackedRecordList::_InternalSerialize(
   // repeated fixed32 utcdatetime_vals = 17 [packed = true];
   if (this->_internal_utcdatetime_vals_size() > 0) {
     target = stream->WriteFixedPacked(17, _internal_utcdatetime_vals(), target);
+  }
+
+  // repeated fixed64 steamidtrustbucket_vals = 18 [packed = true];
+  if (this->_internal_steamidtrustbucket_vals_size() > 0) {
+    target = stream->WriteFixedPacked(18, _internal_steamidtrustbucket_vals(), target);
   }
 
   if (PROTOBUF_PREDICT_FALSE(_internal_metadata_.have_unknown_fields())) {
@@ -6613,6 +6639,17 @@ size_t CMsgSource2PlayStatsPackedRecordList::ByteSizeLong() const {
     total_size += data_size;
   }
 
+  // repeated fixed64 steamidtrustbucket_vals = 18 [packed = true];
+  {
+    unsigned int count = static_cast<unsigned int>(this->_internal_steamidtrustbucket_vals_size());
+    size_t data_size = 8UL * count;
+    if (data_size > 0) {
+      total_size += 2 +
+        ::_pbi::WireFormatLite::Int32Size(static_cast<int32_t>(data_size));
+    }
+    total_size += data_size;
+  }
+
   cached_has_bits = _impl_._has_bits_[0];
   if (cached_has_bits & 0x00000003u) {
     // optional string record_name = 1;
@@ -6661,6 +6698,7 @@ void CMsgSource2PlayStatsPackedRecordList::MergeImpl(::PROTOBUF_NAMESPACE_ID::Me
   _this->_impl_.string_vals_.MergeFrom(from._impl_.string_vals_);
   _this->_impl_.low_cardinality_string_vals_.MergeFrom(from._impl_.low_cardinality_string_vals_);
   _this->_impl_.utcdatetime_vals_.MergeFrom(from._impl_.utcdatetime_vals_);
+  _this->_impl_.steamidtrustbucket_vals_.MergeFrom(from._impl_.steamidtrustbucket_vals_);
   cached_has_bits = from._impl_._has_bits_[0];
   if (cached_has_bits & 0x00000003u) {
     if (cached_has_bits & 0x00000001u) {
@@ -6706,6 +6744,7 @@ void CMsgSource2PlayStatsPackedRecordList::InternalSwap(CMsgSource2PlayStatsPack
   _impl_.string_vals_.InternalSwap(&other->_impl_.string_vals_);
   _impl_.low_cardinality_string_vals_.InternalSwap(&other->_impl_.low_cardinality_string_vals_);
   _impl_.utcdatetime_vals_.InternalSwap(&other->_impl_.utcdatetime_vals_);
+  _impl_.steamidtrustbucket_vals_.InternalSwap(&other->_impl_.steamidtrustbucket_vals_);
   ::PROTOBUF_NAMESPACE_ID::internal::ArenaStringPtr::InternalSwap(
       &_impl_.record_name_, lhs_arena,
       &other->_impl_.record_name_, rhs_arena

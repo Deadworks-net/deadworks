@@ -136,6 +136,7 @@ enum ECitadelGameMode {
 	k_ECitadelGameMode_Sandbox = 3;
 	k_ECitadelGameMode_StreetBrawl = 4;
 	k_ECitadelGameMode_ExploreNYC = 5;
+	k_ECitadelGameMode_Internal = 6;
 }
 
 enum ELobbyServerState {
@@ -448,6 +449,7 @@ message CMsgMatchMetaDataContents {
 		optional uint32 sold_time_s = 4;
 		optional uint32 flags = 5;
 		optional uint32 imbued_ability_id = 6;
+		optional uint32 upgrade_info = 7;
 	}
 
 	message Ping {
@@ -566,7 +568,6 @@ message CMsgMatchMetaDataContents {
 		optional uint32 last_hits = 13;
 		optional uint32 denies = 14;
 		optional uint32 ability_points = 15;
-		optional uint32 party = 16;
 		optional uint32 assigned_lane = 17;
 		optional uint32 level = 18;
 		repeated .CMsgMatchMetaDataContents.Ping pings = 19;
@@ -676,6 +677,7 @@ message CMsgMatchMetaDataContents {
 		k_eItemTrophyCollector = 10;
 		k_eItemCultistSacrifice = 11;
 		k_eBreakable = 12;
+		k_eItemGooseEgg = 13;
 	}
 
 	optional .CMsgMatchMetaDataContents.MatchInfo match_info = 2;

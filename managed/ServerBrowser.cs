@@ -180,7 +180,7 @@ internal static class ServerBrowser
 
     private static void StartHeartbeat()
     {
-        var interval = TimeSpan.FromSeconds(Math.Max(_config.HeartbeatIntervalSeconds, 10));
+        var interval = TimeSpan.FromSeconds(Math.Max(_config.HeartbeatIntervalSeconds, 30));
         _heartbeatTimer = new Timer(_ => SendHeartbeat(), null, interval, interval);
     }
 

@@ -565,9 +565,7 @@
 
 	"crate_spawn"
 	{
-		"early"				"bool"
 		"spawn_time"		"float"
-		"spawn_location"	"short"
 	}
 
 	"crate_spawn_notification"
