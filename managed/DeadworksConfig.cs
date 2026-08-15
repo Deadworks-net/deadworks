@@ -9,7 +9,7 @@ internal class ServerBrowserConfig
     public string ApiUrl { get; set; } = "https://api.deadworks.net";
 
     [JsonPropertyName("heartbeat_interval_seconds")]
-    public int HeartbeatIntervalSeconds { get; set; } = 30;
+    public int HeartbeatIntervalSeconds { get; set; } = 90;
 
     [JsonPropertyName("content_addons")]
     public List<string> ContentAddons { get; set; } = [];
