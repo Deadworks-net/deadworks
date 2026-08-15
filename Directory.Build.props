@@ -1,0 +1,9 @@
+<Project>
+  <!-- Make the README-prescribed machine-local settings available to SDK-style managed projects. -->
+  <Import Project="$(MSBuildThisFileDirectory)local.props"
+          Condition="'$(MSBuildProjectExtension)' != '.vcxproj' and Exists('$(MSBuildThisFileDirectory)local.props')" />
+
+  <PropertyGroup>
+    <DeadlockManagedDir Condition="'$(DeadlockManagedDir)' == '' and '$(DeadlockDir)' != ''">$(DeadlockDir)\managed</DeadlockManagedDir>
+  </PropertyGroup>
+</Project>

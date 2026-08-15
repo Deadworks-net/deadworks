@@ -163,8 +163,7 @@ enum EModifierEvent : uint32_t {
     MODIFIER_EVENT_REPLICATED_HEAL = 0x60,                                     // 96
     MODIFIER_EVENT_STAMINA_USED = 0x61,                                        // 97
     MODIFIER_EVENT_TELEPORTED_INTO_PLAYSPACE = 0x62,                           // 98
-    // MPropertySuppressEnumerator
-    MODIFIER_EVENT_COUNT = 0x63, // 99
-    // MPropertySuppressEnumerator
-    MODIFIER_EVENT_INVALID = 0xFF, // 255
+    MODIFIER_EVENT_STUNNED = 0x63,                                             // 99
+    MODIFIER_EVENT_COUNT = 0x64,                                               // 100
+    MODIFIER_EVENT_INVALID = 0xFF,                                             // 255
 }; // 0x4

@@ -120,6 +120,10 @@
 			"library": "server.dll",
 			"windows": "4C 8B DC 41 55 41 57 48 83 EC 58 0F B6 81 ?? ?? ?? ?? 44 0F B6 FA 83 C0 FE 4C 8B E9"
 		},
+		"DoModifierEvent": {
+			"library": "server.dll",
+			"windows": "40 55 56 41 55 48 8D 6C 24 ? 48 81 EC ? ? ? ? 33"
+		},
 		"CCitadelAbilityComponent::FindAbilityByName": {
 			"library": "server.dll",
 			"windows": "40 57 48 83 EC ?? 48 8B F9 B9"
