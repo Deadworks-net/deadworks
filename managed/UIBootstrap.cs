@@ -43,6 +43,27 @@ internal static class UIBootstrap
         var panelId = parts[0];
         var eventName = parts[1];
         var args = parts.Length > 2 ? parts[2..] : Array.Empty<string>();
+
+        // Reserved panel id '~' carries transport-level messages, not plugin
+        // events. Currently just the handshake ack: proof the client's caption
+        // pipeline is live, which opens the send gate in UIChannel.
+        if (panelId == "~")
+        {
+            // args: <token> [, <comma-separated ids the client registered itself>]
+            if (eventName == "ack" && args.Length > 0)
+                UIChannel.Acknowledge(ctx.CallerSlot, args[0], args.Length > 1 ? args[1] : null);
+            // The client's watchdog destroyed its panels and it is asking to be
+            // rebuilt from scratch. Without this the server keeps streaming at a
+            // client that has nothing to apply the updates to.
+            else if (eventName == "resync" && args.Length > 0)
+                UIChannel.RequestResync(ctx.CallerSlot, args[0]);
+            // A runtime addon reporting in: <panelId>, then ok | fail | ready.
+            // Without this a failed load is invisible to the server.
+            else if (eventName == "addon" && args.Length > 1)
+                UIChannel.ReportAddon(ctx.CallerSlot, args[0], args[1]);
+            return;
+        }
+
         UI.Panel(panelId).TryDispatch(new UIEvent(ctx.Controller, panelId, eventName, args));
     }
 }

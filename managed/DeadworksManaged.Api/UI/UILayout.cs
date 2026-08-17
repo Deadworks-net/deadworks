@@ -37,6 +37,16 @@ public sealed class UIButton : UINode {
 	public string Text = "";
 	public string? ClickEvent;
 	public string[] ClickArgs = Array.Empty<string>();
+
+	/// <summary>
+	/// Name the event this button fires, and any arguments to send with it.
+	/// Handle it with <c>UI.Panel(id).On(eventName, ...)</c>.
+	/// </summary>
+	public UIButton OnClick(string eventName, params string[] args) {
+		ClickEvent = eventName;
+		ClickArgs = args;
+		return this;
+	}
 }
 
 public sealed class UIImage : UINode {

@@ -51,6 +51,15 @@ export interface DownloadProgress {
   total_items: number;
 }
 
+export interface BootstrapStatus {
+  installed_version: number;
+  pending_version: number;
+  latest_version: number;
+  min_version: number;
+  /** An update is downloaded and only a game restart is standing in its way. */
+  restart_required: boolean;
+}
+
 export interface ConnectResult {
   success: boolean;
   method: string;

@@ -30,7 +30,8 @@ internal static unsafe class NativeInterop
 	public static delegate* unmanaged[Cdecl]<void*, byte*, void*> GameEventGetPlayerController => (delegate* unmanaged[Cdecl]<void*, byte*, void*>)_cb.GameEventGetPlayerController;
 	public static delegate* unmanaged[Cdecl]<void*, byte*, void*> GameEventGetPlayerPawn => (delegate* unmanaged[Cdecl]<void*, byte*, void*>)_cb.GameEventGetPlayerPawn;
 	public static delegate* unmanaged[Cdecl]<void*, byte*, uint> GameEventGetEHandle => (delegate* unmanaged[Cdecl]<void*, byte*, uint>)_cb.GameEventGetEHandle;
-	public static delegate* unmanaged[Cdecl]<int, byte*, int, ulong, void> SendNetMessage => (delegate* unmanaged[Cdecl]<int, byte*, int, ulong, void>)_cb.SendNetMessage;
+	/// <summary>Last parameter is NetChannelBufType_t: 0 = BUF_UNRELIABLE, 1 = BUF_RELIABLE.</summary>
+	public static delegate* unmanaged[Cdecl]<int, byte*, int, ulong, int, void> SendNetMessage => (delegate* unmanaged[Cdecl]<int, byte*, int, ulong, int, void>)_cb.SendNetMessage;
 	public static delegate* unmanaged[Cdecl]<int, byte*, void> ClientCommand => (delegate* unmanaged[Cdecl]<int, byte*, void>)_cb.ClientCommand;
 	public static delegate* unmanaged[Cdecl]<void*, void> RemoveEntity => (delegate* unmanaged[Cdecl]<void*, void>)_cb.RemoveEntity;
 	public static delegate* unmanaged[Cdecl]<void*, void*, byte, byte, byte, byte, void> SetPawn => (delegate* unmanaged[Cdecl]<void*, void*, byte, byte, byte, byte, void>)_cb.SetPawn;
