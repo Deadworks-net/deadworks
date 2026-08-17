@@ -1,0 +1,1 @@
+LICENSE.txt covers: panorama/scripts/dw_addon.js, panorama/scripts/dw_bootstrap.js

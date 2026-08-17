@@ -7,6 +7,8 @@ use serde::{Deserialize, Serialize};
 use tauri::{Emitter, Manager};
 use tokio::io::AsyncWriteExt;
 
+use crate::gameinfo::is_sharing_violation;
+
 const DEFAULT_API_URL: &str = match std::option_env!("DEADWORKS_API_URL") {
     Some(url) => url,
     None => "https://api.deadworks.net",
@@ -147,21 +149,9 @@ fn verify_vpk_magic(path: &Path) -> Result<(), String> {
     Ok(())
 }
 
-fn is_sharing_violation(err: &std::io::Error) -> bool {
-    #[cfg(windows)]
-    {
-        // ERROR_SHARING_VIOLATION = 32, ERROR_ACCESS_DENIED = 5
-        matches!(err.raw_os_error(), Some(32) | Some(5))
-    }
-    #[cfg(not(windows))]
-    {
-        matches!(err.kind(), std::io::ErrorKind::PermissionDenied)
-    }
-}
-
 /// Resolve the manifest API URL from persisted settings rather than trusting
 /// the webview to supply one. Production builds ignore the `local` endpoint.
-fn resolve_api_url(app: &tauri::AppHandle) -> String {
+pub(crate) fn resolve_api_url(app: &tauri::AppHandle) -> String {
     use tauri_plugin_store::StoreBuilder;
     if cfg!(debug_assertions) {
         if let Ok(store) = StoreBuilder::new(app, "settings.json").build() {
@@ -194,15 +184,24 @@ async fn fetch_manifest(api_url: &str, server_id: &str) -> Result<ContentManifes
 /// Enforces `MAX_VPK_BYTES` during decompression so a malicious manifest cannot
 /// mount a bz2 bomb. Uses a temp `.part` file beside the destination, then
 /// atomic rename.
-async fn download_and_decompress(
+///
+/// `channel` is the Tauri event name progress is emitted on, and `emitter` is
+/// either a `Window` (server content, driven by a visible connect dialog) or an
+/// `AppHandle` (the bootstrap poller, which runs with no window in the tray).
+#[allow(clippy::too_many_arguments)]
+pub(crate) async fn download_and_decompress<E>(
     url: &str,
     dest_vpk: &Path,
     item_name: &str,
     index: usize,
     total: usize,
     expected_uncompressed_hint: u64,
-    window: &tauri::Window,
-) -> Result<(), String> {
+    channel: &str,
+    window: &E,
+) -> Result<(), String>
+where
+    E: Emitter<tauri::Wry> + Clone + Send + Sync + 'static,
+{
     let response = reqwest::get(url)
         .await
         .map_err(|e| format!("Download request failed for {}: {}", item_name, e))?;
@@ -232,7 +231,7 @@ async fn download_and_decompress(
                 .await
                 .map_err(|e| format!("Write error: {}", e))?;
             let _ = window.emit(
-                "download-progress",
+                channel,
                 DownloadProgress {
                     name: item_name.to_string(),
                     status: "downloading".into(),
@@ -252,6 +251,7 @@ async fn download_and_decompress(
     let vpk_tmp_clone = vpk_tmp.clone();
     let name = item_name.to_string();
     let win = window.clone();
+    let chan = channel.to_string();
 
     tokio::task::spawn_blocking(move || -> Result<(), String> {
         let input = std::fs::File::open(&bz2_tmp_clone)
@@ -280,7 +280,7 @@ async fn download_and_decompress(
             std::io::Write::write_all(&mut output, &buf[..n])
                 .map_err(|e| format!("Write error: {}", e))?;
             let _ = win.emit(
-                "download-progress",
+                chan.as_str(),
                 DownloadProgress {
                     name: name.clone(),
                     status: "decompressing".into(),
@@ -345,28 +345,39 @@ pub async fn prepare_and_connect(
         validate_filename(&item.filename)?;
     }
 
-    // If any addons are listed, verify gameinfo.gi is patched.
+    let game_dir = find_game_dir()?;
     let has_addons = manifest.items.iter().any(|i| i.kind == "addon");
-    if has_addons {
-        let game_dir = find_game_dir()?;
-        match crate::gameinfo::has_addonroot(&game_dir) {
-            Ok(true) => {}
-            Ok(false) => {
-                return Err(
-                    "gameinfo.gi is missing the addonroot entry required for content addons. \
-                     Please close Deadlock and restart the launcher to apply the patch."
-                        .into(),
-                );
-            }
-            Err(e) => return Err(format!("Failed to check gameinfo.gi: {}", e)),
+
+    // Re-assert our SearchPaths block before every connect. Deadlock Mod
+    // Manager regenerates the whole block on each of its launches and Steam's
+    // file verification restores the vanilla file, so a patch applied at
+    // startup may already be gone.
+    if let Err(e) = crate::gameinfo::ensure_patched(&game_dir) {
+        // The write failed, but the entries may already be live from an
+        // earlier run — only block the connect if what we need is missing.
+        let usable = crate::gameinfo::status(&game_dir)
+            .map(|s| s.has_mods_search_path && (!has_addons || s.has_addonroot))
+            .unwrap_or(false);
+        if !usable {
+            return Err(format!("Could not prepare gameinfo.gi: {}", e));
         }
+        eprintln!("[connect] gameinfo.gi not rewritten ({e}); existing entries are current");
     }
+
+    // The bootstrap addon has to be on disk before the game starts, so this is
+    // awaited here rather than left to the background poller. `require_present`
+    // is on: joining with no bootstrap at all is a hard failure, unlike joining
+    // with a merely-stale one.
+    let bootstrap_status =
+        crate::bootstrap::ensure(window.app_handle(), &game_dir, true).await?;
+    // Gate on what will actually be mounted, not on what is staged — a
+    // search-path VPK cannot be swapped under a running game.
+    crate::bootstrap::gate(&bootstrap_status)?;
 
     if manifest.items.is_empty() {
         return crate::connect::connect_to_server_inner(&addr);
     }
 
-    let game_dir = find_game_dir()?;
     let addons_dir = game_dir.join("citadel").join("deadworks_addons").join("vpks");
     let maps_dir = game_dir.join("citadel").join("maps");
     ensure_dir(&addons_dir)?;
@@ -428,6 +439,7 @@ pub async fn prepare_and_connect(
             idx,
             total_items,
             item.compressed_size.saturating_mul(3),
+            "download-progress",
             &window,
         )
         .await?;

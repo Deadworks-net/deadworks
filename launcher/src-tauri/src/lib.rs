@@ -1,4 +1,5 @@
 mod addons;
+mod bootstrap;
 mod connect;
 mod deep_link;
 mod gameinfo;
@@ -6,23 +7,33 @@ mod ping;
 mod telemetry;
 
 /// Try to patch gameinfo.gi at startup. If the game is running the file is
-/// locked, so we just log and move on — the user will be told at connect time.
+/// locked; `reassert_quiet` stashes the error and the frontend puts it in a
+/// modal once it mounts, since an unpatched file mounts nothing and says so
+/// nowhere else.
 fn patch_gameinfo_on_startup() {
-    let game_dir_buf;
-    let game_dir: &std::path::Path = if let Some(override_dir) = connect::get_game_dir_override() {
-        game_dir_buf = override_dir;
-        &game_dir_buf
-    } else {
-        game_dir_buf = match connect::find_deadlock_game_dir() {
-            Ok(d) => d,
-            Err(_) => return, // Deadlock not installed, nothing to do
-        };
-        &game_dir_buf
+    // Deadlock not installed (or not detected yet): nothing to patch.
+    let Ok(game_dir) = connect::resolve_game_dir() else {
+        return;
     };
-    match gameinfo::ensure_addonroot(game_dir) {
-        Ok(true) => println!("[startup] Patched gameinfo.gi with addonroot"),
-        Ok(false) => {} // already present
-        Err(e) => println!("[startup] Could not patch gameinfo.gi (game may be running): {}", e),
+    gameinfo::reassert_quiet(&game_dir);
+}
+
+/// Everything that must be true on disk before the game process starts.
+///
+/// Both steps are needed on every launch path: DMM rewrites the whole
+/// SearchPaths block on its own launches, and the bootstrap addon may have a
+/// staged update that only a game restart lets us apply.
+///
+/// This awaits the bootstrap work rather than kicking it off alongside the
+/// launch — `steam://` is fire-and-forget, so anything still running when we
+/// hand off is racing the game's own mount.
+pub(crate) async fn prepare_for_launch(app: &tauri::AppHandle) {
+    let Ok(game_dir) = connect::resolve_game_dir() else {
+        return;
+    };
+    gameinfo::reassert_quiet(&game_dir);
+    if let Err(e) = bootstrap::ensure(app, &game_dir, false).await {
+        println!("[launch] bootstrap check failed: {}", e);
     }
 }
 
@@ -55,6 +66,10 @@ pub fn run() {
             connect::set_game_dir,
             connect::reset_game_dir,
             addons::prepare_and_connect,
+            bootstrap::bootstrap_status,
+            bootstrap::retry_bootstrap_install,
+            gameinfo::gameinfo_error,
+            gameinfo::retry_gameinfo_patch,
             ping::ping_server,
             deep_link::deep_link_ready,
         ])
@@ -88,6 +103,9 @@ pub fn run() {
                 }
             }
             patch_gameinfo_on_startup();
+            // The load-bearing update path: at launcher start the game is
+            // usually not running, so a swap staged last session lands here.
+            bootstrap::spawn_poller(app.handle().clone());
 
             let app_handle = app.handle().clone();
             tauri::async_runtime::spawn(async move {
@@ -128,7 +146,11 @@ pub fn run() {
                         }
                     }
                     "launch" => {
-                        let _ = open::that(format!("steam://run/{}", "1422450"));
+                        let app = app.clone();
+                        tauri::async_runtime::spawn(async move {
+                            prepare_for_launch(&app).await;
+                            let _ = open::that(format!("steam://run/{}", "1422450"));
+                        });
                     }
                     "quit" => {
                         app.exit(0);

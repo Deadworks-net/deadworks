@@ -2,6 +2,7 @@ using System.Reflection;
 using System.Runtime.Loader;
 using Google.Protobuf;
 using DeadworksManaged.Api;
+using DeadworksManaged.Api.UI;
 
 namespace DeadworksManaged;
 
@@ -90,6 +91,7 @@ internal static partial class PluginLoader
         DeadworksConfig.Initialize();
         ConfigManager.Initialize();
         ConCommandManager.Initialize();
+        UIBootstrap.Initialize();
         ServerBrowser.Initialize();
         PluginStateManager.Initialize();
         PluginRegistry.Resolve = () => _pluginSnapshot.Select(p => p.Name).ToArray();
@@ -404,6 +406,7 @@ internal static partial class PluginLoader
     public static void DispatchGameFrame(bool simulating, bool firstTick, bool lastTick)
     {
         TimerEngine.OnTick();
+        UI.Tick();
         DispatchToPlugins(p => p.OnGameFrame(simulating, firstTick, lastTick), nameof(IDeadworksPlugin.OnGameFrame));
     }
 

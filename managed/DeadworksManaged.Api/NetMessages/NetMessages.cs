@@ -8,7 +8,7 @@ namespace DeadworksManaged.Api;
 /// </summary>
 public static class NetMessages
 {
-	internal static Action<int, byte[], ulong>? OnSend;
+	internal static Action<int, byte[], ulong, bool>? OnSend;
 	internal static Func<int, NetMessageDirection, Delegate, IHandle>? OnHookAdd;
 	internal static Action<int, NetMessageDirection, Delegate>? OnHookRemove;
 
@@ -19,14 +19,23 @@ public static class NetMessages
 	/// <param name="message">The message to send.</param>
 	/// <param name="recipients">Which players should receive this message.</param>
 	/// <exception cref="InvalidOperationException">Thrown if <typeparamref name="T"/> has no registered message ID.</exception>
-	public static void Send<T>(T message, RecipientFilter recipients) where T : IMessage<T>
+	/// <param name="reliable">
+	/// Which net-channel buffer to use. Reliable guarantees ordered delivery but
+	/// <b>disconnects</b> the client if the server outruns its acks
+	/// (NETWORK_DISCONNECT_RELIABLEOVERFLOW) — it degrades off a cliff, not
+	/// gracefully. Unreliable simply drops the packet under pressure, which is
+	/// the right trade for latest-wins traffic such as telemetry or HUD state.
+	/// Anything that must not be lost — layout, ordering, handshakes, or one
+	/// fragment of a multi-part message — has to stay reliable.
+	/// </param>
+	public static void Send<T>(T message, RecipientFilter recipients, bool reliable = true) where T : IMessage<T>
 	{
 		int msgId = NetMessageRegistry.GetMessageId<T>();
 		if (msgId < 0)
 			throw new InvalidOperationException($"No message ID registered for {typeof(T).Name}");
 
 		byte[] bytes = message.ToByteArray();
-		OnSend?.Invoke(msgId, bytes, recipients.Mask);
+		OnSend?.Invoke(msgId, bytes, recipients.Mask, reliable);
 	}
 
 	/// <summary>
