@@ -65,6 +65,23 @@
   margin-bottom: 20px;
 }
 
+/* Like .status, but bounded: these carry error text, including filesystem
+   paths long enough to stretch the box past the window. */
+.dialogMessage {
+  font-size: 0.75rem;
+  color: var(--text-muted);
+  margin-bottom: 20px;
+  max-width: 380px;
+  line-height: 1.5;
+  overflow-wrap: anywhere;
+}
+
+.actions {
+  display: flex;
+  gap: 8px;
+  justify-content: center;
+}
+
 .cancelBtn {
   padding: 6px 24px;
   background: transparent;

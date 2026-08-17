@@ -717,7 +717,8 @@ static uint8_t __cdecl NativeAddFileSystemSearchPath(const char *path, const cha
 
 // --- Networking ---
 
-static void __cdecl NativeSendNetMessage(int msgId, const uint8_t *protoBytes, int protoLen, uint64_t recipientMask) {
+static void __cdecl NativeSendNetMessage(int msgId, const uint8_t *protoBytes, int protoLen, uint64_t recipientMask,
+                                         int bufType) {
     if (!g_pNetworkMessages || !protoBytes || protoLen <= 0)
         return;
 
@@ -731,7 +732,7 @@ static void __cdecl NativeSendNetMessage(int msgId, const uint8_t *protoBytes, i
 
     auto *pbMsg = const_cast<google::protobuf::Message *>(msg->AsMessage());
     if (pbMsg && pbMsg->ParseFromArray(protoBytes, protoLen)) {
-        CRecipientFilter filter;
+        CRecipientFilter filter(bufType == static_cast<int>(BUF_UNRELIABLE) ? BUF_UNRELIABLE : BUF_RELIABLE);
         for (int i = 0; i < ABSOLUTE_PLAYER_LIMIT; ++i) {
             if (recipientMask & (1ULL << i))
                 filter.AddRecipient(CPlayerSlot(i));

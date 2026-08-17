@@ -8,11 +8,12 @@ internal static partial class PluginLoader
 {
     // --- Net message infrastructure ---
 
-    private static unsafe void OnNetMessageSend(int msgId, byte[] bytes, ulong recipientMask)
+    private static unsafe void OnNetMessageSend(int msgId, byte[] bytes, ulong recipientMask, bool reliable)
     {
         fixed (byte* ptr = bytes)
         {
-            NativeInterop.SendNetMessage(msgId, ptr, bytes.Length, recipientMask);
+            // NetChannelBufType_t: BUF_UNRELIABLE = 0, BUF_RELIABLE = 1.
+            NativeInterop.SendNetMessage(msgId, ptr, bytes.Length, recipientMask, reliable ? 1 : 0);
         }
     }
 

@@ -39,7 +39,12 @@ struct NativeCallbacks {
     void *(__cdecl *GameEventGetPlayerController)(void *event, const char *key);
     void *(__cdecl *GameEventGetPlayerPawn)(void *event, const char *key);
     uint32_t(__cdecl *GameEventGetEHandle)(void *event, const char *key);
-    void(__cdecl *SendNetMessage)(int msgId, const uint8_t *protoBytes, int protoLen, uint64_t recipientMask);
+    // bufType is NetChannelBufType_t: BUF_UNRELIABLE = 0, BUF_RELIABLE = 1.
+    // Unreliable costs nothing on overflow (the packet is simply dropped),
+    // whereas overflowing the reliable stream disconnects the client with
+    // NETWORK_DISCONNECT_RELIABLEOVERFLOW — so best-effort traffic should not
+    // be sent reliably just because it is convenient.
+    void(__cdecl *SendNetMessage)(int msgId, const uint8_t *protoBytes, int protoLen, uint64_t recipientMask, int bufType);
     void(__cdecl *ClientCommand)(int slot, const char *command);
     void(__cdecl *RemoveEntity)(void *entity);
     void(__cdecl *SetPawn)(void *controller, void *pawn, uint8_t bRetainOldPawnTeam, uint8_t bCopyMovementState, uint8_t bAllowTeamMismatch, uint8_t bPreserveMovementState);

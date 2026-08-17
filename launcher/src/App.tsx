@@ -5,6 +5,8 @@ import ServersPage from "@/components/ServersPage";
 import UpdateManager from "@/components/UpdateManager";
 import ConnectDialog from "@/components/ConnectDialog";
 import DeepLinkErrorDialog from "@/components/DeepLinkErrorDialog";
+import GameinfoErrorDialog from "@/components/GameinfoErrorDialog";
+import BootstrapRestartDialog from "@/components/BootstrapRestartDialog";
 import { useSettings } from "@/hooks/use-settings";
 import { useDeepLink } from "@/hooks/use-deep-link";
 import { getStore } from "@/lib/tauri";
@@ -46,6 +48,10 @@ export default function App() {
           onClose={clear}
         />
       )}
+      {/* Both can be up at once (the game holding files causes either), and the
+          gameinfo failure is the worse one — render it last so it lands on top. */}
+      <BootstrapRestartDialog />
+      <GameinfoErrorDialog />
       <UpdateManager />
     </>
   );
