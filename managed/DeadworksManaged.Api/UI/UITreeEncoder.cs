@@ -1,4 +1,5 @@
-using System.Text;
+﻿using System.Text;
+using System.Linq;
 
 namespace DeadworksManaged.Api.UI;
 
@@ -27,7 +28,7 @@ namespace DeadworksManaged.Api.UI;
 ///   styleCount \x1f style0 \x1f style1 \x1f ... \x1f &lt;node fields...&gt;
 /// </code>
 ///
-/// Per node, six fields in fixed order, then the node's children laid out
+/// Per node, eight fields in fixed order, then the node's children laid out
 /// recursively in the same shape:
 /// <list type="number">
 ///   <item><c>type</c> — single char: <c>p</c> plain, <c>v</c> vertical,
@@ -39,8 +40,15 @@ namespace DeadworksManaged.Api.UI;
 ///   <item><c>text</c> — Label/Button text, or Image src path (or <c>~</c>).</item>
 ///   <item><c>event</c> — Button click spec, <c>event[,arg1,arg2,...]</c>
 ///         (or <c>~</c>).</item>
+///   <item><c>hover</c> — styles applied while the pointer is over the node,
+///         same encoding as <c>style</c> (or <c>~</c>).</item>
+///   <item><c>press</c> — styles applied while the pointer is held down,
+///         same encoding again (or <c>~</c>).</item>
 ///   <item><c>child_count</c> — decimal integer.</item>
 /// </list>
+///
+/// The node arity is fixed, so the encoder and the client bootstrap have to
+/// ship together.
 /// </summary>
 internal static class UITreeEncoder {
 	private const char Sep = '\x1f';
@@ -75,11 +83,15 @@ internal static class UITreeEncoder {
 	}
 
 	private static void CountStyles(UINode node, Dictionary<string, int> counts) {
-		var css = BuildStyleCss(node);
-		if (!string.IsNullOrEmpty(css)) {
-			counts[css] = counts.TryGetValue(css, out var c) ? c + 1 : 1;
-		}
+		Count(BaseStyleCss(node), counts);
+		Count(BuildStyleCss(node.HoverStyles), counts);
+		Count(BuildStyleCss(node.PressStyles), counts);
 		foreach (var child in node.Children) CountStyles(child, counts);
+	}
+
+	private static void Count(string css, Dictionary<string, int> counts) {
+		if (string.IsNullOrEmpty(css)) return;
+		counts[css] = counts.TryGetValue(css, out var c) ? c + 1 : 1;
 	}
 
 	private static void AppendNode(StringBuilder sb, UINode node, ref bool first,
@@ -87,16 +99,7 @@ internal static class UITreeEncoder {
 		AppendField(sb, TypeCode(node), ref first);
 		AppendField(sb, OrPlaceholder(node.Id), ref first);
 
-		var css = BuildStyleCss(node);
-		string styleField;
-		if (string.IsNullOrEmpty(css)) {
-			styleField = EmptyPlaceholder;
-		} else if (styleIndex.TryGetValue(css, out var idx)) {
-			styleField = "@" + idx;
-		} else {
-			styleField = css; // one-off — emit inline
-		}
-		AppendField(sb, styleField, ref first);
+		AppendField(sb, StyleField(BaseStyleCss(node), styleIndex), ref first);
 
 		string text = "";
 		string evt = "";
@@ -114,12 +117,14 @@ internal static class UITreeEncoder {
 				break;
 			case UIImage img:
 				// Image has no text or event of its own; reuse the text slot
-				// for the src path so the wire layout stays at six fields.
+				// for the src path so every node keeps the same arity.
 				text = img.Src ?? "";
 				break;
 		}
 		AppendField(sb, OrPlaceholder(text), ref first);
 		AppendField(sb, OrPlaceholder(evt), ref first);
+		AppendField(sb, StyleField(BuildStyleCss(node.HoverStyles), styleIndex), ref first);
+		AppendField(sb, StyleField(BuildStyleCss(node.PressStyles), styleIndex), ref first);
 		AppendField(sb, node.Children.Count.ToString(), ref first);
 
 		foreach (var child in node.Children) {
@@ -130,12 +135,32 @@ internal static class UITreeEncoder {
 	private static string OrPlaceholder(string? s)
 		=> string.IsNullOrEmpty(s) ? EmptyPlaceholder : s!;
 
-	private static string BuildStyleCss(UINode node) {
-		if (node.Styles.Count == 0) return "";
+	private static string StyleField(string css, Dictionary<string, int> styleIndex) {
+		if (string.IsNullOrEmpty(css)) return EmptyPlaceholder;
+		return styleIndex.TryGetValue(css, out var idx) ? "@" + idx : css;
+	}
+
+	/// <summary>
+	/// A node's own styles plus any transitions it declared, which Panorama
+	/// expresses as three parallel comma-separated lists.
+	/// </summary>
+	private static string BaseStyleCss(UINode node) {
+		if (node.Transitions.Count == 0) return BuildStyleCss(node.Styles);
+
+		var all = new List<(string Name, string Value)>(node.Styles) {
+			("transition-property", string.Join(",", node.Transitions.Select(t => t.Property))),
+			("transition-duration", string.Join(",", node.Transitions.Select(t => t.Duration))),
+			("transition-timing-function", string.Join(",", node.Transitions.Select(t => t.Timing))),
+		};
+		return BuildStyleCss(all);
+	}
+
+	private static string BuildStyleCss(List<(string Name, string Value)> styles) {
+		if (styles.Count == 0) return "";
 		var sb = new StringBuilder();
-		for (int i = 0; i < node.Styles.Count; i++) {
+		for (int i = 0; i < styles.Count; i++) {
 			if (i > 0) sb.Append(';');
-			var (name, value) = node.Styles[i];
+			var (name, value) = styles[i];
 			sb.Append(name).Append(':').Append(value);
 		}
 		return sb.ToString();

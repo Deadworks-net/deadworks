@@ -1,4 +1,4 @@
-using DeadworksManaged.Api;
+﻿using DeadworksManaged.Api;
 using DeadworksManaged.Api.UI;
 
 namespace TicTacToePlugin;
@@ -194,6 +194,14 @@ public class TicTacToePlugin : DeadworksPluginBase {
 		("background-color", "#FFEFD70A"), ("border", "1px solid #FFEFD714"),
 	};
 
+	private static readonly (string, string)[] HoveredCell = {
+		("background-color", $"{Accent}30"), ("border", $"1px solid {Accent}CC"),
+	};
+
+	private static readonly (string, string)[] PressedCell = {
+		("background-color", $"{Accent}66"),
+	};
+
 	private void Redraw() {
 		foreach (int slot in _viewers) DrawFor(slot);
 	}
@@ -249,13 +257,17 @@ public class TicTacToePlugin : DeadworksPluginBase {
 
 	private UINode Cell(int index, char viewer) {
 		char mark = _cells[index];
-		return UI.Button("b" + index, "")
+		var cell = UI.Button("b" + index, mark == None ? "" : mark.ToString())
 			.WithStyles(CellSize)
 			.WithStyles(SkinFor(index, viewer))
+			.WithTransition("background-color", "0.1s")
 			.OnClick("move", index.ToString())
-			.Add(UI.Label("c" + index, mark == None ? "" : mark.ToString())
-				.WithStyles(MarkText)
-				.WithStyle("color", mark == 'X' ? XColour : OColour));
+			.WithTextStyles(MarkText)
+			.WithTextStyle("color", mark == 'X' ? XColour : OColour);
+
+		return CanPlay(viewer, index)
+			? cell.WithHoverStyles(HoveredCell).WithPressStyles(PressedCell)
+			: cell;
 	}
 
 	private (string, string)[] SkinFor(int cell, char viewer) {
@@ -269,16 +281,18 @@ public class TicTacToePlugin : DeadworksPluginBase {
 		.WithStyle("padding", "0px 14px 10px 14px")
 		.Add(
 			Spacer(),
-			UI.Button("restartButton", "")
+			UI.Button("restartButton", "NEW ROUND")
 				.OnClick("restart")
 				.WithStyle("padding", "5px 12px")
 				.WithStyle("border-radius", "2px")
 				.WithStyle("background-color", $"{Accent}1A")
 				.WithStyle("border", $"1px solid {Accent}44")
-				.Add(UI.Label("restartLabel", "NEW ROUND")
-					.WithStyle("font-size", "10px")
-					.WithStyle("letter-spacing", "1px")
-					.WithStyle("color", "#FFD5CE")));
+				.WithTransition("background-color", "0.1s")
+				.WithHoverStyle("background-color", $"{Accent}3A")
+				.WithPressStyle("background-color", $"{Accent}66")
+				.WithTextStyle("font-size", "10px")
+				.WithTextStyle("letter-spacing", "1px")
+				.WithTextStyle("color", "#FFD5CE"));
 
 	private static UINode Spacer() =>
 		UI.Container().WithStyle("width", "fill-parent-flow(1.0)");

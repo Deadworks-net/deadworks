@@ -258,6 +258,7 @@
         entry.host = null;
         entry.wrapper = null;
         entry.findCache = null;
+        entry.styleHooks = null;
         entry.ready = false;
         entry.xmlHost = false;
     }
@@ -533,7 +534,7 @@
         var op = opSepIdx === -1 ? rest : rest.substring(0, opSepIdx);
         var rawAfterOp = opSepIdx === -1 ? "" : rest.substring(opSepIdx + 1);
 
-        if (op !== "s" && op !== "h") {
+        if (op !== "s" && op !== "h" && op !== "y") {
             $.Msg(DW_TAG, " op '", op, "' -> panel '", panelId, "' (", rawAfterOp.length, " chars)");
         }
 
@@ -563,6 +564,10 @@
         }
         if (op === "e") {
             handleErase(panelId, rawAfterOp);
+            return;
+        }
+        if (op === "y") {
+            handleStyle(panelId, decodeBuildPayload(rawAfterOp));
             return;
         }
         if (op === "h") {
@@ -787,18 +792,20 @@
     }
 
     function parseTree(fields, startIdx, styleTable) {
-        if (startIdx + 6 > fields.length) return null;
+        if (startIdx + 8 > fields.length) return null;
         var node = {
             t: fields[startIdx + 0],
             i: unplaceholder(fields[startIdx + 1]),
             s: resolveStyle(fields[startIdx + 2], styleTable),
             x: unplaceholder(fields[startIdx + 3]),
             e: unplaceholder(fields[startIdx + 4]),
+            h: resolveStyle(fields[startIdx + 5], styleTable),
+            p: resolveStyle(fields[startIdx + 6], styleTable),
             c: []
         };
-        var count = parseInt(fields[startIdx + 5], 10);
+        var count = parseInt(fields[startIdx + 7], 10);
         if (isNaN(count) || count < 0) count = 0;
-        var nextIdx = startIdx + 6;
+        var nextIdx = startIdx + 8;
         for (var k = 0; k < count; k++) {
             var sub = parseTree(fields, nextIdx, styleTable);
             if (!sub) return null;
@@ -907,6 +914,8 @@
         var t = node.t;
         var id = node.i || "";
         var hasChildren = Array.isArray(node.c) && node.c.length > 0;
+        var clickable = typeof node.e === "string" && node.e.length > 0;
+        var pressFlash = null;
         switch (t) {
             case "p":
                 elem = $.CreatePanel("Panel", parent, id);
@@ -939,12 +948,13 @@
                     var inner = $.CreatePanel("Label", elem, "");
                     try { inner.text = node.x; } catch (e) {}
                 }
-                if (typeof node.e === "string" && node.e.length > 0) {
+                if (clickable) {
                     var parts = node.e.split(",");
                     var evtName = parts[0];
                     var evtArgs = parts.slice(1);
                     (function (ev, ea) {
                         elem.SetPanelEvent("onactivate", function () {
+                            if (pressFlash) pressFlash();
                             entry.wrapper.send.apply(entry.wrapper, [ev].concat(ea));
                         });
                     })(evtName, evtArgs);
@@ -955,14 +965,19 @@
                 return;
         }
         if (typeof node.s === "string" && node.s.length > 0) applyStyle(elem, node.s);
+        var pointer = bindPointerStyles(elem, node.s, node.h, node.p, clickable);
+        if (pointer) {
+            pressFlash = pointer.flash;
+            if (id) (entry.styleHooks || (entry.styleHooks = {}))[id] = pointer.rebase;
+        }
         if (hasChildren) {
             for (var i = 0; i < node.c.length; i++) buildNode(entry, elem, node.c[i]);
         }
     }
 
-    function applyStyle(panel, styleStr) {
-        if (!panel) return;
-        var parts = styleStr.split(";");
+    function parseStyle(styleStr) {
+        var out = [];
+        var parts = String(styleStr || "").split(";");
         for (var i = 0; i < parts.length; i++) {
             var p = parts[i];
             var idx = p.indexOf(":");
@@ -970,9 +985,88 @@
             var k = p.substring(0, idx).replace(/^\s+|\s+$/g, "");
             var v = p.substring(idx + 1).replace(/^\s+|\s+$/g, "");
             if (!k || !v) continue;
-            var camel = k.replace(/-([a-z])/g, function (_, c) { return c.toUpperCase(); });
-            try { panel.style[camel] = v; } catch (e) {}
+            out.push({
+                name: k,
+                camel: camelise(k),
+                value: v
+            });
         }
+        return out;
+    }
+
+    function camelise(k) {
+        return k.replace(/-([a-z])/g, function (_, c) { return c.toUpperCase(); });
+    }
+
+    function applyStyle(panel, styleStr) {
+        if (!panel) return;
+        var entries = parseStyle(styleStr);
+        for (var i = 0; i < entries.length; i++) {
+            try { panel.style[entries[i].camel] = entries[i].value; } catch (e) {}
+        }
+    }
+
+    var PRESS_FLASH_SEC = 0.12;
+
+    function bindPointerStyles(elem, baseCss, hoverCss, pressCss, clickable) {
+        var hover = parseStyle(hoverCss);
+        var press = parseStyle(pressCss);
+        if (hover.length === 0 && press.length === 0) return null;
+
+        var base = {};
+        var baseEntries = parseStyle(baseCss);
+        for (var b = 0; b < baseEntries.length; b++) base[baseEntries[b].camel] = baseEntries[b];
+
+        var over = false, down = false, applied = {};
+
+        function desired() {
+            var want = {};
+            if (over) for (var i = 0; i < hover.length; i++) want[hover[i].camel] = hover[i];
+            if (down) for (var j = 0; j < press.length; j++) want[press[j].camel] = press[j];
+            return want;
+        }
+
+        function repaint() {
+            var want = desired();
+            for (var camel in applied) {
+                if (want[camel]) continue;
+                try {
+                    if (base[camel]) elem.style[camel] = base[camel].value;
+                    else elem.ClearPropertyFromCode(applied[camel].name);
+                } catch (e) {}
+            }
+            for (var c in want) {
+                try { elem.style[c] = want[c].value; } catch (e) {}
+            }
+            applied = want;
+        }
+
+        try { elem.hittest = true; } catch (e) {}
+
+        try {
+            elem.SetPanelEvent("onmouseover", function () { over = true; repaint(); });
+            elem.SetPanelEvent("onmouseout", function () { over = false; down = false; repaint(); });
+
+            if (press.length > 0 && !clickable) {
+                elem.SetPanelEvent("onmousedown", function () { down = true; repaint(); });
+                elem.SetPanelEvent("onmouseup", function () { down = false; repaint(); });
+            }
+        } catch (e) {
+            $.Msg(DW_TAG, " pointer styles unavailable on '", (elem.id || "?"), "': ", String(e));
+        }
+
+        return {
+            rebase: function (entry) {
+                base[entry.camel] = entry;
+                if (applied[entry.camel]) return false;
+                return true;
+            },
+            flash: press.length === 0 ? null : function () {
+                down = true;
+                repaint();
+                $.Schedule(PRESS_FLASH_SEC, function () { down = false; repaint(); });
+            }
+        };
     }
 
     function handleDestroy(panelId) {
@@ -1085,6 +1179,47 @@
         }
         if (entry.findCache) delete entry.findCache[targetId];
         if (entry.state) delete entry.state[targetId];
+        if (entry.styleHooks) delete entry.styleHooks[targetId];
+    }
+
+    function handleStyle(panelId, args) {
+        var entry = _panels[panelId];
+        if (!entry || !entry.host) {
+            WarnThrottled("nostyle:" + panelId,
+                "style patch for '" + panelId + "' with no host — Build/Show missing?");
+            return;
+        }
+        var ordered = [];
+        for (var t = 0; t + 2 < args.length; t += 3) {
+            if (args[t + 1].indexOf("transition") === 0) ordered.push(t);
+        }
+        for (var u = 0; u + 2 < args.length; u += 3) {
+            if (args[u + 1].indexOf("transition") !== 0) ordered.push(u);
+        }
+
+        for (var n = 0; n < ordered.length; n++) {
+            var i = ordered[n];
+            var nodeId = args[i];
+            var prop = args[i + 1];
+            var value = args[i + 2];
+            if (!nodeId || !prop) continue;
+
+            var elem = lookup(entry, nodeId);
+            if (!elem) {
+                WarnThrottled("stylemiss:" + panelId + ":" + nodeId,
+                    "style patch: node '" + nodeId + "' not found in '" + panelId + "'");
+                continue;
+            }
+
+            var styleEntry = { name: prop, camel: camelise(prop), value: value };
+            var hook = entry.styleHooks && entry.styleHooks[nodeId];
+            var paintNow = hook ? hook(styleEntry) : true;
+            if (paintNow) {
+                try { elem.style[styleEntry.camel] = value; } catch (e) {
+                    $.Msg(DW_TAG, " style '", prop, "' rejected on '", nodeId, "': ", String(e));
+                }
+            }
+        }
     }
 
     function handleLoadXml(panelId, xmlPath) {

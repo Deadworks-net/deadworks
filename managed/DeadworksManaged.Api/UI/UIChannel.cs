@@ -1,4 +1,4 @@
-namespace DeadworksManaged.Api.UI;
+﻿namespace DeadworksManaged.Api.UI;
 
 /// <summary>
 /// Per-recipient queues, token-bucket rate limiter, and drain loop. Receives
@@ -19,8 +19,13 @@ internal static class UIChannel {
 		// Auxiliary string slot. Used by Append to carry the parentId alongside
 		// the compressed subtree in Payload.
 		internal readonly string? Aux;
-		internal OrderedOp(string panelId, OrderedKind kind, string? payload, string? aux = null) {
-			PanelId = panelId; Kind = kind; Payload = payload; Aux = aux;
+		// How many ordered ops had already been queued for this recipient when
+		// this one was. Pending Sets and style patches record the same counter,
+		// which is what lets the drain tell "issued before this op" from
+		// "issued after it".
+		internal readonly long Seq;
+		internal OrderedOp(string panelId, OrderedKind kind, string? payload, string? aux, long seq) {
+			PanelId = panelId; Kind = kind; Payload = payload; Aux = aux; Seq = seq;
 		}
 	}
 
@@ -44,12 +49,22 @@ internal static class UIChannel {
 	}
 
 	private sealed class Slot {
-		internal readonly Dictionary<(string panel, string key), string> Reliable = new();
-		internal readonly Dictionary<(string panel, string key), string> Unreliable = new();
+		internal readonly Dictionary<(string panel, string key), Pending> Reliable = new();
+		internal readonly Dictionary<(string panel, string key), Pending> Unreliable = new();
 		internal readonly Queue<OrderedOp> Ordered = new();
 		internal readonly Queue<Frame> OutFrames = new();
 		internal double Tokens;
 		internal double ByteTokens;
+
+		// Pending style patches, coalesced latest-wins per (panel, node, prop).
+		//
+		// A dictionary and not a queue, deliberately. Structural ops go through
+		// Ordered, which is FIFO with no dedup — a caller driving one 60×/s
+		// enqueues faster than the channel drains and the backlog grows without
+		// bound. Style patches are exactly the op a caller is most likely to
+		// drive per-frame, so they coalesce like Set: offering them faster than
+		// the wire runs costs nothing but the newest value winning.
+		internal readonly Dictionary<(string panel, string node, string prop), Pending> Styles = new();
 
 		// Retained so a torn-down client can be rebuilt without plugin help.
 		// Structure per panel, plus the latest value of every field ever set —
@@ -58,10 +73,16 @@ internal static class UIChannel {
 		internal readonly Dictionary<string, PanelSnapshot> Panels = new();
 		internal readonly Dictionary<(string panel, string key), string> Shadow = new();
 
+		// Same role as Shadow, for style patches: Styles is drained on flush, so
+		// without this a resync would restore the base layout and silently lose
+		// every patch applied since.
+		internal readonly Dictionary<(string panel, string node, string prop), string> StyleShadow = new();
+
 		// Set when a resync has queued structural ops whose field values must
-		// follow them. Not merged into Reliable up front: BuildOrderedFrames
-		// flushes a panel's pending Sets *ahead* of each ordered op, so doing so
-		// would put the values on the wire before the layout that consumes them.
+		// follow them. Not merged into Reliable up front: the replayed ops are
+		// stamped with the sequence numbers they are queued at, so values merged
+		// beforehand would look like they were issued first and go out ahead of
+		// the layout that consumes them.
 		internal bool ShadowReplayPending;
 
 		// Handshake state. Captions emitted between full-connect and the
@@ -86,7 +107,24 @@ internal static class UIChannel {
 		// Wire id only needs to disambiguate concurrent chunked streams to the
 		// SAME recipient, which is rare; cycling 'a'..'z' gives plenty.
 		internal int WireIdCursor;
+
+		// Ordered ops queued so far. Stamped onto both the ops and the pending
+		// updates so their relative order survives coalescing.
+		internal long OrderedSeq;
 	}
+
+	/// <summary>
+	/// A pending value plus the point in the ordered stream at which a plugin
+	/// asked for it.
+	///
+	/// Values coalesce latest-wins, so a plugin's call order cannot be recovered
+	/// from the dictionary itself. Without the stamp the drain has to guess, and
+	/// it guessed wrong in both directions: flushing everything ahead of the next
+	/// ordered op sent values at a tree that <c>BuildLayout</c> had not created
+	/// yet, and flushing everything behind it let a value survive a <c>Clear</c>
+	/// that was issued after it.
+	/// </summary>
+	private readonly record struct Pending(string Value, long Seq);
 
 	private static readonly Slot[] _slots = NewSlots();
 	private static long _lastTickTimestamp = DateTime.UtcNow.Ticks;
@@ -192,6 +230,11 @@ internal static class UIChannel {
 	internal static int BytesPerSecond = 16384;
 	internal static int ByteBurst = 16384;
 
+	private static void PushOrdered(Slot s, string panelId, OrderedKind kind,
+		string? payload, string? aux = null) {
+		s.Ordered.Enqueue(new OrderedOp(panelId, kind, payload, aux, s.OrderedSeq++));
+	}
+
 	private static PanelSnapshot Snapshot(Slot s, string panelId) {
 		if (!s.Panels.TryGetValue(panelId, out var snap)) {
 			snap = new PanelSnapshot();
@@ -203,26 +246,48 @@ internal static class UIChannel {
 	private static void ForgetPanel(Slot s, string panelId) {
 		s.Panels.Remove(panelId);
 		DropShadow(s, panelId);
+		DropPanelStyles(s, panelId);
 	}
 
+	/// <summary>Forget this panel's field values. Styles are not field values.</summary>
 	private static void DropShadow(Slot s, string panelId) {
-		if (s.Shadow.Count == 0) return;
-		List<(string panel, string key)>? doomed = null;
-		foreach (var k in s.Shadow.Keys) {
-			if (k.panel == panelId) (doomed ??= new()).Add(k);
-		}
-		if (doomed is null) return;
-		foreach (var k in doomed) s.Shadow.Remove(k);
+		DropWhere(s.Shadow, k => k.panel == panelId);
+	}
+
+	/// <summary>
+	/// Forget this panel's style patches, pending and retained.
+	///
+	/// Only for ops that replace or remove the tree, where a patch against the
+	/// old nodes is meaningless. Deliberately NOT called for Clear: that resets
+	/// field values on the client and leaves styles alone, so a patch issued
+	/// before it still has a node to land on afterwards.
+	/// </summary>
+	private static void DropPanelStyles(Slot s, string panelId) {
+		DropWhere(s.Styles, k => k.panel == panelId);
+		DropWhere(s.StyleShadow, k => k.panel == panelId);
 	}
 
 	internal static void EnqueueSet(RecipientFilter to, string panelId, string key, string value, bool unreliable) {
 		for (int slot = 0; slot < _slots.Length; slot++) {
 			if (!to.HasRecipient(slot)) continue;
 			var s = _slots[slot];
-			(unreliable ? s.Unreliable : s.Reliable)[(panelId, key)] = value;
+			(unreliable ? s.Unreliable : s.Reliable)[(panelId, key)] = new Pending(value, s.OrderedSeq);
 			// Latest value wins, and it outlives the flush so a rebuilt client
 			// gets the current state rather than waiting for the next update.
 			s.Shadow[(panelId, key)] = value;
+		}
+	}
+
+	internal static void EnqueueStyle(RecipientFilter to, string panelId, string nodeId,
+		IReadOnlyList<(string Name, string Value)> entries) {
+		if (entries.Count == 0) return;
+		for (int slot = 0; slot < _slots.Length; slot++) {
+			if (!to.HasRecipient(slot)) continue;
+			var s = _slots[slot];
+			foreach (var (name, value) in entries) {
+				s.Styles[(panelId, nodeId, name)] = new Pending(value, s.OrderedSeq);
+				s.StyleShadow[(panelId, nodeId, name)] = value;
+			}
 		}
 	}
 
@@ -230,7 +295,7 @@ internal static class UIChannel {
 		for (int slot = 0; slot < _slots.Length; slot++) {
 			if (!to.HasRecipient(slot)) continue;
 			var s = _slots[slot];
-			s.Ordered.Enqueue(new OrderedOp(panelId, OrderedKind.Clear, null));
+			PushOrdered(s, panelId, OrderedKind.Clear, null);
 			DropShadow(s, panelId);
 		}
 	}
@@ -238,7 +303,7 @@ internal static class UIChannel {
 	internal static void EnqueueRaw(RecipientFilter to, string panelId, string text) {
 		for (int slot = 0; slot < _slots.Length; slot++) {
 			if (!to.HasRecipient(slot)) continue;
-			_slots[slot].Ordered.Enqueue(new OrderedOp(panelId, OrderedKind.Raw, text));
+			PushOrdered(_slots[slot], panelId, OrderedKind.Raw, text);
 		}
 	}
 
@@ -246,11 +311,12 @@ internal static class UIChannel {
 		for (int slot = 0; slot < _slots.Length; slot++) {
 			if (!to.HasRecipient(slot)) continue;
 			var s = _slots[slot];
-			s.Ordered.Enqueue(new OrderedOp(panelId, OrderedKind.Build, json));
+			PushOrdered(s, panelId, OrderedKind.Build, json);
 			// Build is precache+show, and the client wipes prior field state.
 			var snap = Snapshot(s, panelId);
 			snap.Layout = json; snap.Shown = true; snap.XmlPath = null; snap.UsedDeltas = false;
 			DropShadow(s, panelId);
+			DropPanelStyles(s, panelId);
 		}
 	}
 
@@ -258,7 +324,7 @@ internal static class UIChannel {
 		for (int slot = 0; slot < _slots.Length; slot++) {
 			if (!to.HasRecipient(slot)) continue;
 			var s = _slots[slot];
-			s.Ordered.Enqueue(new OrderedOp(panelId, OrderedKind.Destroy, null));
+			PushOrdered(s, panelId, OrderedKind.Destroy, null);
 			ForgetPanel(s, panelId);   // nothing to rebuild
 		}
 	}
@@ -267,7 +333,7 @@ internal static class UIChannel {
 		for (int slot = 0; slot < _slots.Length; slot++) {
 			if (!to.HasRecipient(slot)) continue;
 			var s = _slots[slot];
-			s.Ordered.Enqueue(new OrderedOp(panelId, OrderedKind.Precache, compressed));
+			PushOrdered(s, panelId, OrderedKind.Precache, compressed);
 			var snap = Snapshot(s, panelId);
 			snap.Layout = compressed; snap.XmlPath = null; snap.UsedDeltas = false;
 		}
@@ -277,7 +343,7 @@ internal static class UIChannel {
 		for (int slot = 0; slot < _slots.Length; slot++) {
 			if (!to.HasRecipient(slot)) continue;
 			var s = _slots[slot];
-			s.Ordered.Enqueue(new OrderedOp(panelId, OrderedKind.Show, null));
+			PushOrdered(s, panelId, OrderedKind.Show, null);
 			Snapshot(s, panelId).Shown = true;
 		}
 	}
@@ -286,7 +352,7 @@ internal static class UIChannel {
 		for (int slot = 0; slot < _slots.Length; slot++) {
 			if (!to.HasRecipient(slot)) continue;
 			var s = _slots[slot];
-			s.Ordered.Enqueue(new OrderedOp(panelId, OrderedKind.LoadXml, xmlPath));
+			PushOrdered(s, panelId, OrderedKind.LoadXml, xmlPath);
 			var snap = Snapshot(s, panelId);
 			snap.XmlPath = xmlPath; snap.Layout = null; snap.Shown = false; snap.UsedDeltas = false;
 			// Whatever the client last told us is about to be out of date.
@@ -306,7 +372,7 @@ internal static class UIChannel {
 			if (!to.HasRecipient(slot)) continue;
 			var s = _slots[slot];
 			if (!s.Panels.TryGetValue(panelId, out var snap) || snap.XmlPath is null) continue;
-			s.Ordered.Enqueue(new OrderedOp(panelId, OrderedKind.LoadXml, snap.XmlPath));
+			PushOrdered(s, panelId, OrderedKind.LoadXml, snap.XmlPath);
 			s.Addons.Remove(panelId);
 			n++;
 		}
@@ -317,7 +383,7 @@ internal static class UIChannel {
 		for (int slot = 0; slot < _slots.Length; slot++) {
 			if (!to.HasRecipient(slot)) continue;
 			var s = _slots[slot];
-			s.Ordered.Enqueue(new OrderedOp(panelId, OrderedKind.Append, compressedSubtree, parentId));
+			PushOrdered(s, panelId, OrderedKind.Append, compressedSubtree, parentId);
 			Snapshot(s, panelId).UsedDeltas = true;
 		}
 	}
@@ -327,8 +393,27 @@ internal static class UIChannel {
 			if (!to.HasRecipient(slot)) continue;
 			var s = _slots[slot];
 			Snapshot(s, panelId).UsedDeltas = true;
-			s.Ordered.Enqueue(new OrderedOp(panelId, OrderedKind.Erase, targetId));
+			PushOrdered(s, panelId, OrderedKind.Erase, targetId);
+			// The node is going away; its patches would otherwise sit in the
+			// shadow forever and replay at a node that no longer exists.
+			DropNodeStyles(s, panelId, targetId);
 		}
+	}
+
+	private static void DropNodeStyles(Slot s, string panelId, string nodeId) {
+		bool Matches((string panel, string node, string prop) k)
+			=> k.panel == panelId && k.node == nodeId;
+		DropWhere(s.Styles, Matches);
+		DropWhere(s.StyleShadow, Matches);
+	}
+
+	private static void DropWhere<TKey, TValue>(Dictionary<TKey, TValue> map, Func<TKey, bool> pred)
+		where TKey : notnull {
+		if (map.Count == 0) return;
+		List<TKey>? doomed = null;
+		foreach (var k in map.Keys) if (pred(k)) (doomed ??= new()).Add(k);
+		if (doomed is null) return;
+		foreach (var k in doomed) map.Remove(k);
 	}
 
 	/// <summary>Refill tokens, build chunks from pending state, and emit at most one cycle of available chunks.</summary>
@@ -403,7 +488,8 @@ internal static class UIChannel {
 			// queue behind it. Merging earlier would send values for a panel the
 			// client has not rebuilt yet, and they would be dropped.
 			if (s.ShadowReplayPending && s.Ordered.Count == 0) {
-				foreach (var (key, value) in s.Shadow) s.Reliable[key] = value;
+				foreach (var (key, value) in s.Shadow) s.Reliable[key] = new Pending(value, s.OrderedSeq);
+				foreach (var (key, value) in s.StyleShadow) s.Styles[key] = new Pending(value, s.OrderedSeq);
 				s.ShadowReplayPending = false;
 			}
 
@@ -426,10 +512,17 @@ internal static class UIChannel {
 		while (s.Ordered.Count > 0) {
 			var op = s.Ordered.Dequeue();
 
-			// Flush any pending Set fields for this panel BEFORE the ordered op
-			// so client sees: latest sets, then clear/raw — preserving order.
-			FlushPanelSets(s, op.PanelId, fromReliable: true);
-			FlushPanelSets(s, op.PanelId, fromReliable: false);
+			// Emit only the updates a plugin asked for BEFORE this op. Anything
+			// issued after it keeps its place in the queue and goes out once the
+			// ordered stream has drained, from BuildReliableFrames.
+			//
+			// Both halves matter. Flushing everything here sent values at a tree
+			// BuildLayout had not created yet, and they were then wiped by the
+			// build that followed. Flushing nothing here let a value survive a
+			// Clear that was issued after it.
+			FlushPanelSets(s, op.PanelId, op.Seq, fromReliable: true);
+			FlushPanelSets(s, op.PanelId, op.Seq, fromReliable: false);
+			FlushPanelStyles(s, op.PanelId, op.Seq);
 
 			string msg = op.Kind switch {
 				OrderedKind.Clear    => UIWire.EncodeClear(op.PanelId),
@@ -450,7 +543,25 @@ internal static class UIChannel {
 
 	private static void BuildReliableFrames(Slot s) {
 		FlushAllPanelSets(s, fromReliable: true);
+		FlushAllPanelStyles(s);
 	}
+
+	private static void FlushAllPanelStyles(Slot s) {
+		if (s.Styles.Count == 0) return;
+		var byPanel = new Dictionary<string, List<(string, string, string)>>();
+		foreach (var kv in s.Styles) {
+			if (!byPanel.TryGetValue(kv.Key.panel, out var list)) {
+				list = new List<(string, string, string)>();
+				byPanel[kv.Key.panel] = list;
+			}
+			list.Add((kv.Key.node, kv.Key.prop, kv.Value.Value));
+		}
+		s.Styles.Clear();
+		foreach (var (panelId, entries) in byPanel) {
+			EnqueueChunks(s, UIWire.EncodeStyle(panelId, entries));
+		}
+	}
+
 
 	private static void BuildUnreliableFrames(Slot s) {
 		FlushAllPanelSets(s, fromReliable: false);
@@ -467,7 +578,7 @@ internal static class UIChannel {
 				list = new List<KeyValuePair<string, string>>();
 				byPanel[kv.Key.panel] = list;
 			}
-			list.Add(new KeyValuePair<string, string>(kv.Key.key, kv.Value));
+			list.Add(new KeyValuePair<string, string>(kv.Key.key, kv.Value.Value));
 		}
 		dict.Clear();
 
@@ -479,19 +590,39 @@ internal static class UIChannel {
 		}
 	}
 
-	private static void FlushPanelSets(Slot s, string panelId, bool fromReliable) {
+	/// <param name="maxSeq">
+	/// Only emit updates issued before the ordered op at this position. A value
+	/// written after it carries a higher stamp and waits its turn.
+	/// </param>
+	private static void FlushPanelSets(Slot s, string panelId, long maxSeq, bool fromReliable) {
 		var dict = fromReliable ? s.Reliable : s.Unreliable;
 		if (dict.Count == 0) return;
 		List<KeyValuePair<string, string>>? fields = null;
 		var keysToRemove = new List<(string panel, string key)>();
 		foreach (var kv in dict) {
-			if (kv.Key.panel != panelId) continue;
-			(fields ??= new List<KeyValuePair<string, string>>()).Add(new KeyValuePair<string, string>(kv.Key.key, kv.Value));
+			if (kv.Key.panel != panelId || kv.Value.Seq > maxSeq) continue;
+			(fields ??= new List<KeyValuePair<string, string>>())
+				.Add(new KeyValuePair<string, string>(kv.Key.key, kv.Value.Value));
 			keysToRemove.Add(kv.Key);
 		}
 		if (fields == null) return;
 		foreach (var k in keysToRemove) dict.Remove(k);
 		EnqueueChunks(s, UIWire.EncodeSet(panelId, fields));
+	}
+
+	/// <inheritdoc cref="FlushPanelSets"/>
+	private static void FlushPanelStyles(Slot s, string panelId, long maxSeq) {
+		if (s.Styles.Count == 0) return;
+		List<(string, string, string)>? entries = null;
+		var keysToRemove = new List<(string panel, string node, string prop)>();
+		foreach (var kv in s.Styles) {
+			if (kv.Key.panel != panelId || kv.Value.Seq > maxSeq) continue;
+			(entries ??= new()).Add((kv.Key.node, kv.Key.prop, kv.Value.Value));
+			keysToRemove.Add(kv.Key);
+		}
+		if (entries == null) return;
+		foreach (var k in keysToRemove) s.Styles.Remove(k);
+		EnqueueChunks(s, UIWire.EncodeStyle(panelId, entries));
 	}
 
 	/// <param name="reliable">
@@ -669,6 +800,7 @@ internal static class UIChannel {
 		// and replaying it would just reproduce the "no handler" spam.
 		s.Reliable.Clear();
 		s.Unreliable.Clear();
+		s.Styles.Clear();
 		s.Ordered.Clear();
 		s.OutFrames.Clear();
 		s.Tokens = 0;
@@ -699,10 +831,10 @@ internal static class UIChannel {
 	private static int ReplayInto(Slot s) {
 		foreach (var (panelId, snap) in s.Panels) {
 			if (snap.XmlPath is not null) {
-				s.Ordered.Enqueue(new OrderedOp(panelId, OrderedKind.LoadXml, snap.XmlPath));
+				PushOrdered(s, panelId, OrderedKind.LoadXml, snap.XmlPath);
 			} else if (snap.Layout is not null) {
-				s.Ordered.Enqueue(new OrderedOp(panelId, OrderedKind.Precache, snap.Layout));
-				if (snap.Shown) s.Ordered.Enqueue(new OrderedOp(panelId, OrderedKind.Show, null));
+				PushOrdered(s, panelId, OrderedKind.Precache, snap.Layout);
+				if (snap.Shown) PushOrdered(s, panelId, OrderedKind.Show, null);
 			}
 			if (snap.UsedDeltas) {
 				Console.WriteLine($"[UI] panel '{panelId}' uses Append/Erase — resync restores its base layout only");
@@ -714,7 +846,7 @@ internal static class UIChannel {
 		// exist are discarded, and Build explicitly wipes prior field state on
 		// the assumption that a fresh tree is authoritative. Tick merges them
 		// once the structure has been turned into frames.
-		s.ShadowReplayPending = s.Shadow.Count > 0;
+		s.ShadowReplayPending = s.Shadow.Count > 0 || s.StyleShadow.Count > 0;
 
 		return s.Panels.Count;
 	}
@@ -724,10 +856,12 @@ internal static class UIChannel {
 		var s = _slots[slot];
 		s.Reliable.Clear();
 		s.Unreliable.Clear();
+		s.Styles.Clear();
 		s.Ordered.Clear();
 		s.OutFrames.Clear();
 		s.Panels.Clear();
 		s.Shadow.Clear();
+		s.StyleShadow.Clear();
 		s.ClientPanels.Clear();
 		s.Addons.Clear();
 		s.Tokens = 0;

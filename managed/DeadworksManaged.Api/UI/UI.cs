@@ -1,4 +1,4 @@
-namespace DeadworksManaged.Api.UI;
+﻿namespace DeadworksManaged.Api.UI;
 
 /// <summary>
 /// What happened to a runtime addon on one client — see <see cref="UI.Addon"/>.
@@ -250,6 +250,87 @@ public sealed class UIPanel {
 	public void SetUnreliable(RecipientFilter to, string key, object value)
 		=> UIChannel.EnqueueSet(to, Id, key, value?.ToString() ?? "", unreliable: true);
 
+	/// <summary>
+	/// Change one style property on a node already in the panel's tree, without
+	/// rebuilding it.
+	///
+	/// <paramref name="nodeId"/> is the node's <c>Id</c>, resolved client-side.
+	/// Patches coalesce latest-wins per <c>(node, property)</c>, so calling this
+	/// every frame is safe: offering updates faster than the channel drains costs
+	/// nothing but intermediate values. <see cref="BuildLayout"/> has no such
+	/// coalescing — driving <i>it</i> per-frame grows an unbounded backlog and
+	/// the panel falls progressively further behind.
+	///
+	/// For anything whose path is known in advance, prefer one patch plus a CSS
+	/// transition over a stream of them:
+	/// <code>
+	/// UI.Panel("hud").SetStyle(to, "bar", "transition-duration", "30s");
+	/// UI.Panel("hud").SetStyle(to, "bar", "width", "0%");
+	/// </code>
+	/// The client then interpolates at its own framerate, which is smoother than
+	/// this channel could ever be and costs nothing after the first patch.
+	/// </summary>
+	public void SetStyle(RecipientFilter to, string nodeId, string property, string value)
+		=> SetStyles(to, nodeId, (property, value));
+
+	/// <summary>
+	/// Change several style properties on one node at once. Cheaper than separate
+	/// <see cref="SetStyle"/> calls — they share the node id on the wire.
+	/// </summary>
+	public void SetStyles(RecipientFilter to, string nodeId, params (string Name, string Value)[] entries) {
+		WarnIfUnknownNode(nodeId);
+		UIChannel.EnqueueStyle(to, Id, nodeId, entries);
+	}
+
+	// Node ids are plain strings written twice: once in the tree, once in the
+	// patch. A typo is otherwise silent, because the miss happens on the client
+	// where the plugin author is not looking. We know every id we shipped, so
+	// say so here, in the server log, once per bad id.
+	private readonly HashSet<string> _knownNodeIds = new(StringComparer.Ordinal);
+	private readonly HashSet<string> _warnedNodeIds = new(StringComparer.Ordinal);
+	private bool _idsUnknown;
+
+	private void WarnIfUnknownNode(string nodeId) {
+		// An addon supplies its own tree, so we have no idea what is in it.
+		if (_idsUnknown || _knownNodeIds.Count == 0) return;
+		if (_knownNodeIds.Contains(nodeId)) return;
+		if (!_warnedNodeIds.Add(nodeId)) return;
+		Console.WriteLine(
+			$"[UI] panel '{Id}' has no node '{nodeId}' — style patch will not apply. " +
+			$"Known ids: {string.Join(", ", _knownNodeIds)}");
+	}
+
+	private void RecordNodeIds(UINode root, bool replace) {
+		if (replace) { _knownNodeIds.Clear(); _warnedNodeIds.Clear(); _idsUnknown = false; }
+		Collect(root);
+		void Collect(UINode n) {
+			if (!string.IsNullOrEmpty(n.Id)) _knownNodeIds.Add(n.Id!);
+			foreach (var c in n.Children) Collect(c);
+		}
+	}
+
+	/// <summary>
+	/// Change <paramref name="property"/> to <paramref name="value"/> over
+	/// <paramref name="duration"/>, letting the client interpolate.
+	///
+	/// This is the form to reach for whenever the destination is known in
+	/// advance. A thirty-second bar is one call, not one call per frame: the
+	/// client animates at its own rate, the result is smoother than this channel
+	/// could deliver, and it keeps running through a server hitch because the
+	/// server is no longer involved.
+	///
+	/// Equivalent to declaring <see cref="UINodeExtensions.WithTransition"/> on
+	/// the node and then calling <see cref="SetStyle"/>, and safe to call on a
+	/// node that already declares one.
+	/// </summary>
+	public void Animate(RecipientFilter to, string nodeId, string property, string value,
+		string duration, string timing = "linear")
+		=> SetStyles(to, nodeId,
+			("transition-property", property),
+			("transition-duration", duration),
+			("transition-timing-function", timing),
+			(property, value));
+
 	/// <summary>Tells the panel script to clear its state.</summary>
 	public void Clear(RecipientFilter to)
 		=> UIChannel.EnqueueClear(to, Id);
@@ -264,8 +345,10 @@ public sealed class UIPanel {
 	/// and walks the tree calling <c>$.CreatePanel</c> for each node. Subsequent
 	/// <see cref="Set"/> calls on the same panel auto-bind to Labels by id.
 	/// </summary>
-	public void BuildLayout(RecipientFilter to, UINode root)
-		=> UIChannel.EnqueueBuild(to, Id, EncodeBuildPayload(root));
+	public void BuildLayout(RecipientFilter to, UINode root) {
+		RecordNodeIds(root, replace: true);
+		UIChannel.EnqueueBuild(to, Id, EncodeBuildPayload(root));
+	}
 
 	/// <summary>Destroy the panel's host on each recipient and forget its registration.</summary>
 	public void DestroyLayout(RecipientFilter to)
@@ -278,8 +361,10 @@ public sealed class UIPanel {
 	/// instantly. Useful for HUDs whose structure stays fixed and only field
 	/// values change at runtime — precache once, set fields freely.
 	/// </summary>
-	public void Precache(RecipientFilter to, UINode root)
-		=> UIChannel.EnqueuePrecache(to, Id, EncodeBuildPayload(root));
+	public void Precache(RecipientFilter to, UINode root) {
+		RecordNodeIds(root, replace: true);
+		UIChannel.EnqueuePrecache(to, Id, EncodeBuildPayload(root));
+	}
 
 	/// <summary>
 	/// Render a previously-precached panel on each recipient. No-op (and
@@ -297,8 +382,10 @@ public sealed class UIPanel {
 	/// (no <c>DW</c> access from inside). Use <see cref="DestroyLayout"/> to
 	/// tear it down.
 	/// </summary>
-	public void LoadXml(RecipientFilter to, string xmlPath)
-		=> UIChannel.EnqueueLoadXml(to, Id, xmlPath);
+	public void LoadXml(RecipientFilter to, string xmlPath) {
+		_idsUnknown = true;
+		UIChannel.EnqueueLoadXml(to, Id, xmlPath);
+	}
 
 	/// <summary>
 	/// Re-send whatever layout each recipient was last given for this panel,
@@ -319,8 +406,10 @@ public sealed class UIPanel {
 	/// <paramref name="parentId"/> must match a node id inside the existing
 	/// tree (resolved client-side via <c>FindChildTraverse</c>).
 	/// </summary>
-	public void AppendChild(RecipientFilter to, string parentId, UINode child)
-		=> UIChannel.EnqueueAppend(to, Id, parentId, EncodeBuildPayload(child));
+	public void AppendChild(RecipientFilter to, string parentId, UINode child) {
+		RecordNodeIds(child, replace: false);
+		UIChannel.EnqueueAppend(to, Id, parentId, EncodeBuildPayload(child));
+	}
 
 	/// <summary>
 	/// Remove a child node by id from the panel's host. Single-chunk wire op.

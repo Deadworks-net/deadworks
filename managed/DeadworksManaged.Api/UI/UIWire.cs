@@ -126,6 +126,7 @@ internal static class UIWire {
 		Append    = (byte)'a',
 		Erase     = (byte)'e',
 		Heartbeat = (byte)'h',
+		Style     = (byte)'y',
 	}
 
 	/// <summary>
@@ -145,6 +146,29 @@ internal static class UIWire {
 			payload.Append(fields[i].Key).Append(Sep).Append(fields[i].Value);
 		}
 		return panelId + Sep + (char)Op.Set + Sep + UILz77.Compress(payload.ToString());
+	}
+
+	/// <summary>
+	/// Encodes a Style op:
+	/// <c>panel \x1f y \x1f lz77(tokens(node \x1f prop \x1f value \x1f ...))</c>.
+	///
+	/// Token-compressed, unlike <see cref="EncodeSet"/>. Set carries arbitrary
+	/// user data that could legitimately contain a <c>^X</c> sequence and be
+	/// rewritten by the detokenizer; a style payload is CSS property names and
+	/// CSS values, where a caret does not occur. The saving is large precisely
+	/// because the table is CSS properties — <c>background-color</c> is one byte
+	/// plus the escape.
+	/// </summary>
+	internal static string EncodeStyle(string panelId, IReadOnlyList<(string Node, string Prop, string Value)> entries) {
+		var payload = new StringBuilder(entries.Count * 24);
+		for (int i = 0; i < entries.Count; i++) {
+			if (i > 0) payload.Append(Sep);
+			payload.Append(entries[i].Node).Append(Sep)
+			       .Append(entries[i].Prop).Append(Sep)
+			       .Append(entries[i].Value);
+		}
+		return panelId + Sep + (char)Op.Style + Sep
+		     + UILz77.Compress(UIStyleCompressor.Compress(payload.ToString()));
 	}
 
 	/// <summary>Encodes a Clear op: panel \x1f c</summary>

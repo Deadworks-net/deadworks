@@ -10,8 +10,8 @@ public sealed class UIUpdate {
 
 	internal UIUpdate(UIPanel panel) { _panel = panel; }
 
-	private enum StepKind { Set, SetUnreliable, Clear, Raw, BuildLayout, DestroyLayout }
-	private readonly record struct Step(StepKind Kind, string? Key, string? Value);
+	private enum StepKind { Set, SetUnreliable, Clear, Raw, BuildLayout, DestroyLayout, SetStyle }
+	private readonly record struct Step(StepKind Kind, string? Key, string? Value, string? Node = null);
 
 	public UIUpdate Set(string key, object value) {
 		_steps.Add(new Step(StepKind.Set, key, value?.ToString() ?? ""));
@@ -20,6 +20,12 @@ public sealed class UIUpdate {
 
 	public UIUpdate SetUnreliable(string key, object value) {
 		_steps.Add(new Step(StepKind.SetUnreliable, key, value?.ToString() ?? ""));
+		return this;
+	}
+
+	/// <summary>See <see cref="UIPanel.SetStyle"/>.</summary>
+	public UIUpdate SetStyle(string nodeId, string property, string value) {
+		_steps.Add(new Step(StepKind.SetStyle, property, value, nodeId));
 		return this;
 	}
 
@@ -54,6 +60,9 @@ public sealed class UIUpdate {
 					break;
 				case StepKind.SetUnreliable:
 					UIChannel.EnqueueSet(to, _panel.Id, step.Key!, step.Value!, unreliable: true);
+					break;
+				case StepKind.SetStyle:
+					UIChannel.EnqueueStyle(to, _panel.Id, step.Node!, new[] { (step.Key!, step.Value!) });
 					break;
 				case StepKind.Clear:
 					UIChannel.EnqueueClear(to, _panel.Id);
