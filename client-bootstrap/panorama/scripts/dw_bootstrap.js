@@ -2,6 +2,13 @@
 
 (function () {
     var DW_TAG = "[DW_BOOTSTRAP]";
+
+    var DW_VERBOSE = false;
+
+    function Trace() {
+        if (!DW_VERBOSE) return;
+        $.Msg.apply($, arguments);
+    }
     var USER_PREFIX = "u~";
     var SEP = "\x1f";
     var _hudRoot = null;
@@ -368,6 +375,11 @@
             var args = ["[DW_API]"];
             for (var i = 0; i < arguments.length; i++) args.push(arguments[i]);
             $.Msg.apply($, args);
+        },
+        verbose: function (on) {
+            DW_VERBOSE = (on === undefined) ? true : !!on;
+            $.Msg(DW_TAG, " verbose logging ", (DW_VERBOSE ? "on" : "off"));
+            return DW_VERBOSE;
         }
     };
 
@@ -535,7 +547,7 @@
         var rawAfterOp = opSepIdx === -1 ? "" : rest.substring(opSepIdx + 1);
 
         if (op !== "s" && op !== "h" && op !== "y") {
-            $.Msg(DW_TAG, " op '", op, "' -> panel '", panelId, "' (", rawAfterOp.length, " chars)");
+            Trace(DW_TAG, " op '", op, "' -> panel '", panelId, "' (", rawAfterOp.length, " chars)");
         }
 
         if (op === "b") {
@@ -864,7 +876,7 @@
         }
         _cachedTrees[panelId] = parsed.node;
         ensurePanelEntry(panelId);
-        $.Msg(DW_TAG, " precached '", panelId, "' (",
+        Trace(DW_TAG, " precached '", panelId, "' (",
             payload.styleTable.length, " styles, ", payload.fields.length, " fields)");
     }
 
@@ -897,7 +909,7 @@
 
         var built = -1;
         try { built = entry.host.GetChildCount(); } catch (e) {}
-        $.Msg(DW_TAG, " shown '", panelId, "' (root=", tree.t, " children=", built,
+        Trace(DW_TAG, " shown '", panelId, "' (root=", tree.t, " children=", built,
               " replayed=", replayed, ")");
     }
 
