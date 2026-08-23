@@ -51,8 +51,8 @@ public:
     bool OnPre_CBaseEntity_TakeDamageOld(CBaseEntity *entity, CTakeDamageInfo *info, CTakeDamageResult *result);
     // CCitadelPlayerPawn
     bool OnPre_CCitadelPlayerPawn_ModifyCurrency(void *pawn, ECurrencyType nCurrencyType, int32_t nAmount,
-                                                 ECurrencySource nSource, bool bSilent, bool bForceGain, bool bSpendOnly,
-                                                 void *pSourceAbility, void *pSourceEntity);
+                                                  ECurrencySource nSource, bool bSilent, bool bForceGain, bool bSpendOnly,
+                                                  void *pSourceAbility, void *pSourceEntity);
     // Game Events
     int OnPre_GameEvent(const char *eventName, void *eventPtr);
     // Net Messages (outgoing - broadcast via game event system)
@@ -76,8 +76,9 @@ public:
     // Touch events
     void OnStartTouch(CBaseEntity *entity, CBaseEntity *other);
     void OnEndTouch(CBaseEntity *entity, CBaseEntity *other);
-    // Modifier Events
-    void OnDoModifierEvent(EModifierEvent event, CBaseEntity *caster, CBaseEntity *opt_cast_target, CBaseEntity *opt_cast_ent, void *event_data);
+    // Modifier events - dispatched before the native FireModifierEvent runs (observe-only)
+    void OnPre_FireModifierEvent(EModifierEvent event, CBaseEntity *caster, CBaseEntity *target,
+                               CBaseEntity *castEntity, void *eventData);
     // Entity I/O — Pre returns HookResult int (0=Continue, 1=Stop, 2=Handled); Post returns void.
     int OnEntityAcceptInputPre(const char *className, const char *inputName,
                                 void *entity, void *activator, void *caller, void *variantValue);

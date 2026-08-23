@@ -99,14 +99,17 @@ public interface IDeadworksPlugin {
 	/// <summary>Called when an entity stops touching another entity.</summary>
 	void OnEntityEndTouch(EntityTouchEvent args) { }
 
-    /// <summary>Called when a internal modifier event is fired (e.g. broadcast events, modifiers gained/lost, etc).</summary>
-    void OnDoModifierEvent(DoModifierEvent args) { }
+	/// <summary>
+	/// Called for every modifier event (damage taken, ability executed, modifier gained/lost, ...) before the game's modifiers process it.
+	/// Observe-only; see <see cref="ModifierEvent"/>.
+	/// </summary>
+	void OnModifierEvent(ModifierEvent args) { }
 
-    /// <summary>
-    /// Called each think tick before ability execution.
-    /// Set <see cref="AbilityAttemptEvent.BlockedButtons"/> to prevent specific abilities/items from being cast.
-    /// </summary>
-    void OnAbilityAttempt(AbilityAttemptEvent args) { }
+	/// <summary>
+	/// Called each think tick before ability execution.
+	/// Set <see cref="AbilityAttemptEvent.BlockedButtons"/> to prevent specific abilities/items from being cast.
+	/// </summary>
+	void OnAbilityAttempt(AbilityAttemptEvent args) { }
 
 	/// <summary>Called when a player's usercmds are being processed.</summary>
 	void OnProcessUsercmds(ProcessUsercmdsEvent args) { }

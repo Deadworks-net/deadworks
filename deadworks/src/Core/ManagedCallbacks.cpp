@@ -13,7 +13,7 @@ static constexpr const wchar_t *kManagedTypeName = L"DeadworksManaged.EntryPoint
 
 template <typename T>
 static void BindCallback(DotNetHost &host, const std::filesystem::path &assemblyPath,
-                         T &outFn, const wchar_t *methodName) {
+                          T &outFn, const wchar_t *methodName) {
     outFn = host.GetManagedFunction<T>(assemblyPath, kManagedTypeName, methodName);
     if (!outFn) {
         std::string name(methodName, methodName + wcslen(methodName));
@@ -66,7 +66,7 @@ void deadworks::InitializeManagedCallbacks(DotNetHost &host, ManagedCallbacks &m
     BindCallback(host, assemblyPath, managed.onPrecacheResources, L"OnPrecacheResources");
     BindCallback(host, assemblyPath, managed.onEntityStartTouch, L"OnEntityStartTouch");
     BindCallback(host, assemblyPath, managed.onEntityEndTouch, L"OnEntityEndTouch");
-    BindCallback(host, assemblyPath, managed.onDoModifierEvent, L"OnDoModifierEvent");
+    BindCallback(host, assemblyPath, managed.onModifierEvent, L"OnModifierEvent");
     BindCallback(host, assemblyPath, managed.onEntityAcceptInput, L"OnEntityAcceptInput");
     BindCallback(host, assemblyPath, managed.onEntityAcceptInputPost, L"OnEntityAcceptInputPost");
     BindCallback(host, assemblyPath, managed.onEntityFireOutput, L"OnEntityFireOutput");

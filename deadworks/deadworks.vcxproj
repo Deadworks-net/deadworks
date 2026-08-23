@@ -145,7 +145,6 @@ if not "$(DeadlockDir)"=="" if exist "$(TargetDir)$(TargetName).pdb" copy /Y "$(
   </ItemDefinitionGroup>
   <ItemGroup>
     <!-- PCH generator -->
-    <ClCompile Include="src\Core\Hooks\DoModifierEvent.cpp" />
     <ClCompile Include="src\pch.cpp">
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Release|x64'">Create</PrecompiledHeader>
     </ClCompile>
@@ -207,6 +206,7 @@ if not "$(DeadlockDir)"=="" if exist "$(TargetDir)$(TargetName).pdb" copy /Y "$(
     <ClCompile Include="src\Core\Hooks\AddModifier.cpp" />
     <ClCompile Include="src\Core\Hooks\CheckTransmit.cpp" />
     <ClCompile Include="src\Core\Hooks\InitializeHeroOnPawn.cpp" />
+    <ClCompile Include="src\Core\Hooks\FireModifierEvent.cpp" />
     <ClCompile Include="src\Core\A2SPatch.cpp" />
     <ClCompile Include="src\Core\Deadworks.cpp" />
     <ClCompile Include="src\Core\NativeCallbacks.cpp" />
@@ -237,7 +237,6 @@ if not "$(DeadlockDir)"=="" if exist "$(TargetDir)$(TargetName).pdb" copy /Y "$(
     <ClInclude Include="..\protobuf\networkbasetypes.pb.h" />
     <ClInclude Include="..\protobuf\network_connection.pb.h" />
     <ClInclude Include="..\protobuf\source2_steam_stats.pb.h" />
-    <ClInclude Include="src\Core\Hooks\DoModifierEvent.hpp" />
     <ClInclude Include="src\pch.hpp" />
     <ClInclude Include="src\Hosting\DotNetHost.hpp" />
     <ClInclude Include="src\Core\Hooks\CoreHooks.hpp" />
@@ -258,6 +257,7 @@ if not "$(DeadlockDir)"=="" if exist "$(TargetDir)$(TargetName).pdb" copy /Y "$(
     <ClInclude Include="src\Core\Hooks\AddModifier.hpp" />
     <ClInclude Include="src\Core\Hooks\CheckTransmit.hpp" />
     <ClInclude Include="src\Core\Hooks\InitializeHeroOnPawn.hpp" />
+    <ClInclude Include="src\Core\Hooks\FireModifierEvent.hpp" />
     <ClInclude Include="src\Core\Hooks\BuildGameSessionManifest.hpp" />
     <ClInclude Include="src\Core\Hooks\ChangeGameState.hpp" />
     <ClInclude Include="src\Core\Hooks\AreAllLobbyPlayersConnected.hpp" />
