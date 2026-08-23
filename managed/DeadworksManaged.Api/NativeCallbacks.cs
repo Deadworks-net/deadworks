@@ -127,4 +127,9 @@ internal struct NativeCallbacks
 	public nint VariantToVector;
 	public nint VariantToColor;
 	public nint AddConCommandFlags;
+	public nint GetItemImbueEffects;
+	public nint CanImbueAbility;
+	public nint ImbueAbility;
+	public nint ChangeGameState;
+	public nint SetWaitingForPlayersRoster;
 }

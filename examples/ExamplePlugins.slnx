@@ -10,4 +10,5 @@
   <Project Path="plugins/ScourgePlugin/ScourgePlugin.csproj" />
   <Project Path="plugins/SetModelPlugin/SetModelPlugin.csproj" />
   <Project Path="plugins/TagPlugin/TagPlugin.csproj" />
+  <Project Path="plugins/TicTacToePlugin/TicTacToePlugin.csproj" />
 </Solution>

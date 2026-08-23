@@ -18,6 +18,12 @@ class CBaseEntity : public CEntityInstance {
     SCHEMA_FIELD(int32_t, m_iHealth);
     SCHEMA_FIELD(uint8_t, m_iTeamNum);
     SCHEMA_FIELD(CModifierProperty *, m_pModifierProp);
-    // m_pSubclassVData lives right after m_nSubclassID (CUtlStringToken, 4 bytes)
-    SCHEMA_FIELD_OFFSET(CEntitySubclassVDataBase *, m_nSubclassID, 4);
+    SCHEMA_FIELD(uint32_t, m_nSubclassID);
+
+    // m_pSubclassVData is not exposed through the schema - it lives right after
+    // m_nSubclassID (CUtlStringToken, 4 bytes). Null for entities without a subclass.
+    CEntitySubclassVDataBase *GetSubclassVData() {
+        auto fieldAddr = reinterpret_cast<uintptr_t>(&m_nSubclassID.Get());
+        return *reinterpret_cast<CEntitySubclassVDataBase **>(fieldAddr + sizeof(uint32_t));
+    }
 };

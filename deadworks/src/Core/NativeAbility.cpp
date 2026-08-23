@@ -364,6 +364,62 @@ static uint8_t __cdecl NativeSellItem(void *pawn, const char *itemName, uint8_t 
     return static_cast<CCitadelPlayerPawn *>(pawn)->SellItem(itemName, bFullRefund, bForceSellPrice);
 }
 
+// ---------------------------------------------------------------------------
+// Item imbuement
+//
+// An imbuable item ("upgrade_echo_shard", ...) attaches itself to one of the hero's
+// abilities; the engine records that in CCitadelBaseAbility::m_vecImbuedAbilities on the
+// item entity. Only the game's imbue path fills that in, so an item handed out through
+// AddItem alone stays unattached. These three natives are the pieces `giveitem <item>
+// <slot>` uses, exposed separately so the managed side can validate before it grants.
+// ---------------------------------------------------------------------------
+
+static CitadelAbilityVData *LookupItemVData(const char *itemName) {
+    return reinterpret_cast<CitadelAbilityVData *>(
+        LookupSubclassDefinitionByName(EntitySubclassScope_t::SUBCLASS_SCOPE_ABILITIES, itemName));
+}
+
+static CitadelAbilityVData *GetAbilityVData(void *ability) {
+    return reinterpret_cast<CitadelAbilityVData *>(static_cast<CBaseEntity *>(ability)->GetSubclassVData());
+}
+
+// Returns the item's ECitadelTargetAbilityEffects (0 when the item cannot be imbued),
+// or -1 when no ability/item definition by that name exists.
+static int32_t __cdecl NativeGetItemImbueEffects(const char *itemName) {
+    if (!itemName) return -1;
+    auto *vdata = LookupItemVData(itemName);
+    if (!vdata) return -1;
+    return static_cast<int32_t>(vdata->m_TargetAbilityEffectsToApply.Get());
+}
+
+// Whether the item named itemName may be imbued into the given ability entity.
+static uint8_t __cdecl NativeCanImbueAbility(void *targetAbility, const char *itemName) {
+    if (!targetAbility || !itemName) return 0;
+
+    auto *itemVData = LookupItemVData(itemName);
+    if (!itemVData || !itemVData->CanBeImbued()) return 0;
+
+    auto *targetVData = GetAbilityVData(targetAbility);
+    if (!targetVData) return 0;
+
+    return targetVData->CanImbueAbility(itemVData) ? 1 : 0;
+}
+
+// Imbues an already-granted item entity into targetAbility. Returns 0 without touching
+// either entity when the pairing is not allowed.
+static uint8_t __cdecl NativeImbueAbility(void *item, void *targetAbility) {
+    if (!item || !targetAbility) return 0;
+
+    auto *itemVData = GetAbilityVData(item);
+    auto *targetVData = GetAbilityVData(targetAbility);
+    if (!itemVData || !targetVData) return 0;
+    if (!itemVData->CanBeImbued()) return 0;
+    if (!targetVData->CanImbueAbility(itemVData)) return 0;
+
+    static_cast<CCitadelBaseAbility *>(item)->ImbueAbility(targetAbility);
+    return 1;
+}
+
 static void *__cdecl NativeAddModifier(void *entity, const char *modifierName, void *kv3,
                                        void *caster, void *ability, int32_t team,
                                        const char *const *overrideNames, const float *overrideValues, int32_t overrideCount) {
@@ -492,6 +548,9 @@ void deadworks::PopulateAbilityNatives(NativeCallbacks &cb) {
     cb.AddAbility = &NativeAddAbility;
     cb.AddItem = &NativeAddItem;
     cb.SellItem = &NativeSellItem;
+    cb.GetItemImbueEffects = &NativeGetItemImbueEffects;
+    cb.CanImbueAbility = &NativeCanImbueAbility;
+    cb.ImbueAbility = &NativeImbueAbility;
     cb.AddModifier = &NativeAddModifier;
     cb.RemoveModifier = &NativeRemoveModifier;
     cb.ExecuteAbilityBySlot = &NativeExecuteAbilityBySlot;

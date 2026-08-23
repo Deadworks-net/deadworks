@@ -53,9 +53,9 @@ message CMsgFireBullets {
 	optional float max_range = 18;
 	optional uint32 shot_id = 19;
 	optional bool predict_hits_against_units = 20 [default = true];
-	optional float bullet_radius_override = 21 [default = 0];
-	optional float bullet_speed_override = 22 [default = 0];
-	optional float bullet_gravity_override = 23 [default = 0];
+	optional float bullet_radius_override = 21;
+	optional float bullet_speed_override = 22;
+	optional float bullet_gravity_override = 23;
 	optional int32 muzzle_number = 24;
 	optional bool ability_as_bullet = 25;
 }

@@ -3,7 +3,12 @@ import { WebviewWindow } from "@tauri-apps/api/webviewWindow";
 import { invoke } from "@tauri-apps/api/core";
 import { listen, type UnlistenFn } from "@tauri-apps/api/event";
 import { load, type Store } from "@tauri-apps/plugin-store";
-import type { Server, ConnectResult, DownloadProgress } from "./types";
+import type {
+  Server,
+  ConnectResult,
+  DownloadProgress,
+  BootstrapStatus,
+} from "./types";
 
 // ── Window controls ──
 
@@ -140,6 +145,26 @@ export function listenDownloadProgress(
   callback: (progress: DownloadProgress) => void
 ): Promise<UnlistenFn> {
   return listen<DownloadProgress>("download-progress", (event) => {
+    callback(event.payload);
+  });
+}
+
+// ── Bootstrap addon ──
+
+/** On-disk state only; no network call, so this is safe to ask for on mount. */
+export function bootstrapStatus(): Promise<BootstrapStatus> {
+  return invoke<BootstrapStatus>("bootstrap_status");
+}
+
+/** Apply a staged update now. Still `restart_required` means Deadlock has it open. */
+export function retryBootstrapInstall(): Promise<BootstrapStatus> {
+  return invoke<BootstrapStatus>("retry_bootstrap_install");
+}
+
+export function listenBootstrapStatus(
+  callback: (status: BootstrapStatus) => void
+): Promise<UnlistenFn> {
+  return listen<BootstrapStatus>("bootstrap-status", (event) => {
     callback(event.payload);
   });
 }

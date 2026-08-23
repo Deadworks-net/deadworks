@@ -171,20 +171,111 @@ public sealed unsafe class CCitadelPlayerPawn : CBasePlayerPawn {
 
 	/// <summary>
 	/// Gives an item to this pawn by internal item name (e.g. "upgrade_sprint_booster").
+	/// <para>
+	/// Items that have to be imbued (Echo Shard, Mystic Reverb, ...) are granted unattached by
+	/// this overload and do nothing until imbued - use
+	/// <see cref="AddItem(string, EAbilitySlot, bool)"/> for those.
+	/// </para>
 	/// <param name="itemName">Internal item name.</param>
 	/// <param name="enhanced">Should the enhanced version of the item be given</param>
 	/// Returns the new item entity, or null on failure.
 	/// </summary>
-	public CBaseEntity? AddItem(string itemName, bool enhanced = false) {
+	public CCitadelBaseAbility? AddItem(string itemName, bool enhanced = false) {
 		Span<byte> utf8 = Utf8.Encode(itemName, stackalloc byte[Utf8.Size(itemName)]);
 		fixed (byte* ptr = utf8) {
 			var bits = UpgradeFlags.Owned;
 			if (enhanced) bits |= UpgradeFlags.Enhanced;
 			void* result = NativeInterop.AddItem((void*)Handle, ptr, (int)bits);
-			return result != null ? new CBaseEntity((nint)result) : null;
+			return result != null ? new CCitadelBaseAbility((nint)result) : null;
 		}
 	}
 
+	/// <summary>
+	/// Gives an imbuable item to this pawn and imbues it into the ability in
+	/// <paramref name="imbueSlot"/> - the managed equivalent of <c>giveitem &lt;item&gt; &lt;slot&gt;</c>.
+	/// <para>
+	/// Nothing is granted unless the whole operation can succeed, so a rejected pairing never
+	/// leaves the pawn holding an unattached item. Use
+	/// <see cref="TryAddItem(string, EAbilitySlot, out CCitadelBaseAbility, bool)"/> when you
+	/// need to know <em>why</em> it failed.
+	/// </para>
+	/// <param name="itemName">Internal item name, e.g. "upgrade_echo_shard".</param>
+	/// <param name="imbueSlot">
+	/// Ability to imbue into. The four imbuable slots are <see cref="EAbilitySlot.Signature1"/>
+	/// through <see cref="EAbilitySlot.Signature4"/> (indices 0-3).
+	/// </param>
+	/// <param name="enhanced">Should the enhanced version of the item be given</param>
+	/// Returns the new item entity, or null on failure.
+	/// </summary>
+	public CCitadelBaseAbility? AddItem(string itemName, EAbilitySlot imbueSlot, bool enhanced = false) {
+		TryAddItem(itemName, imbueSlot, out var item, enhanced);
+		return item;
+	}
+
+	/// <summary>
+	/// <see cref="AddItem(string, EAbilitySlot, bool)"/> with a reason on failure.
+	/// <paramref name="item"/> is non-null only when the result is <see cref="ImbueResult.Success"/>.
+	/// </summary>
+	public ImbueResult TryAddItem(string itemName, EAbilitySlot imbueSlot, out CCitadelBaseAbility? item, bool enhanced = false) {
+		item = null;
+
+		if (!ItemInfo.CanBeImbued(itemName))
+			return ItemInfo.Exists(itemName) ? ImbueResult.ItemNotImbuable : ImbueResult.UnknownItem;
+
+		var target = AbilityComponent.GetAbilityBySlot(imbueSlot);
+		if (target == null) return ImbueResult.NoAbilityInSlot;
+		if (!target.CanBeImbuedBy(itemName)) return ImbueResult.AbilityRejected;
+
+		// Validated above, so this only fails on grant-side problems (already owned, no slot).
+		var granted = AddItem(itemName, enhanced);
+		if (granted == null) return ImbueResult.GrantFailed;
+
+		if (NativeInterop.ImbueAbility((void*)granted.Handle, (void*)target.Handle) == 0) {
+			// The native runs the same check we already passed, so this is unreachable in
+			// practice - undo the grant anyway so the all-or-nothing contract always holds.
+			RemoveItem(itemName);
+			return ImbueResult.AbilityRejected;
+		}
+
+		item = granted;
+		return ImbueResult.Success;
+	}
+
+	/// <summary>
+	/// Imbues an item this pawn already owns into the ability in <paramref name="slot"/>.
+	/// Imbuing into an ability the item is already imbued into is a no-op that reports
+	/// <see cref="ImbueResult.Success"/>.
+	/// </summary>
+	public ImbueResult ImbueItem(string itemName, EAbilitySlot slot) {
+		var owned = AbilityComponent.FindAbilityByName(itemName);
+		if (owned == null)
+			return ItemInfo.Exists(itemName) ? ImbueResult.ItemNotOwned : ImbueResult.UnknownItem;
+		return ImbueItem(owned, slot);
+	}
+
+	/// <summary>
+	/// Imbues an item entity this pawn already owns into the ability in <paramref name="slot"/>.
+	/// </summary>
+	public ImbueResult ImbueItem(CCitadelBaseAbility item, EAbilitySlot slot) {
+		if (!item.CanBeImbued) return ImbueResult.ItemNotImbuable;
+
+		var target = AbilityComponent.GetAbilityBySlot(slot);
+		if (target == null) return ImbueResult.NoAbilityInSlot;
+
+		return NativeInterop.ImbueAbility((void*)item.Handle, (void*)target.Handle) != 0
+			? ImbueResult.Success
+			: ImbueResult.AbilityRejected;
+	}
+
+	/// <summary>
+	/// True when <paramref name="itemName"/> can be imbued into the ability this pawn has in
+	/// <paramref name="slot"/>. False for non-imbuable items, empty slots and pairings the game
+	/// rejects (an ultimate-restricted item aimed at the ultimate, an active item aimed at a passive).
+	/// </summary>
+	public bool CanImbue(string itemName, EAbilitySlot slot) {
+		var target = AbilityComponent.GetAbilityBySlot(slot);
+		return target != null && target.CanBeImbuedBy(itemName);
+	}
 
 	/// <summary>
 	/// Removes an item from this pawn by name, using the ability removal path.

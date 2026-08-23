@@ -2,6 +2,7 @@
 
 #include <schemasystem/schemasystem.h>
 #include <entity2/entityinstance.h>
+#include <entity2/entitynetwork.h>
 
 #include <map>
 #include <string_view>

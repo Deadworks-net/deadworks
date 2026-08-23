@@ -182,6 +182,15 @@ pub(crate) fn find_deadlock_game_dir() -> Result<PathBuf, String> {
     Err("Deadlock detection is only supported on Windows and Linux".into())
 }
 
+/// The game directory every other module works from: the user's override when
+/// set, otherwise Steam's copy.
+pub(crate) fn resolve_game_dir() -> Result<PathBuf, String> {
+    match get_game_dir_override() {
+        Some(dir) => Ok(dir),
+        None => find_deadlock_game_dir(),
+    }
+}
+
 #[derive(serde::Serialize)]
 pub struct ConnectResult {
     success: bool,
@@ -206,7 +215,9 @@ pub(crate) fn connect_to_server_inner(addr: &str) -> Result<ConnectResult, Strin
 }
 
 #[tauri::command]
-pub fn launch_deadlock() -> Result<(), String> {
+pub async fn launch_deadlock(app: tauri::AppHandle) -> Result<(), String> {
+    // Awaited, not spawned: once Steam has the URL we cannot hold the game back.
+    crate::prepare_for_launch(&app).await;
     let steam_url = format!("steam://run/{}", DEADLOCK_APP_ID);
     open::that(&steam_url).map_err(|e| format!("Failed to launch Deadlock: {}", e))
 }

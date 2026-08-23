@@ -47,7 +47,8 @@ struct ManagedCallbacks {
     using OnAddModifierFn = int(CORECLR_DELEGATE_CALLTYPE *)(void *modifierProp, void **pCaster, uint32_t *pHAbility, int32_t *pITeam, void *vdata, void *params, void *kv);
     using OnCheckTransmitFn = void(CORECLR_DELEGATE_CALLTYPE *)(int playerSlot, void *transmitBits);
     using OnPawnHeroInitializedFn = void(CORECLR_DELEGATE_CALLTYPE *)(void *pawn);
-    using OnDoModifierEventFn = void(CORECLR_DELEGATE_CALLTYPE *)(unsigned int event, void *caster, void *opt_cast_target, void *opt_cast_ent, void *event_data);
+    using OnGameStateChangedFn = void(CORECLR_DELEGATE_CALLTYPE *)(int32_t newState);
+    using ShouldAllowGameStateChangeFn = uint8_t(CORECLR_DELEGATE_CALLTYPE *)(int32_t currentState, int32_t newState);
 
     OnStartupServerFn onStartupServer = nullptr;
     OnTakeDamageOldFn onTakeDamageOld = nullptr;
@@ -77,6 +78,8 @@ struct ManagedCallbacks {
     OnAddModifierFn onAddModifier = nullptr;
     OnCheckTransmitFn onCheckTransmit = nullptr;
     OnPawnHeroInitializedFn onPawnHeroInitialized = nullptr;
+    OnGameStateChangedFn onGameStateChanged = nullptr;
+    ShouldAllowGameStateChangeFn shouldAllowGameStateChange = nullptr;
 };
 
 void InitializeManagedCallbacks(DotNetHost &host, ManagedCallbacks &managed);

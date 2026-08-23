@@ -21,6 +21,59 @@ public class ItemTestPlugin : DeadworksPluginBase
 			: $"Failed to add '{itemName}' (enhanced={enhanced})");
 	}
 
+	[Command("giveimbued", Description = "Give an imbuable item imbued into an ability slot (0-3), like 'giveitem <item> <index>'.")]
+	public void CmdGiveImbued(CCitadelPlayerController caller, string itemName, EAbilitySlot imbueSlot, bool enhanced = false)
+	{
+		var pawn = caller.GetHeroPawn();
+		if (pawn == null) return;
+
+		var result = pawn.TryAddItem(itemName, imbueSlot, out var item, enhanced);
+		Reply(caller, result == ImbueResult.Success
+			? $"Added '{itemName}' (enhanced={enhanced}) imbued into {string.Join(", ", item!.ImbuedAbilities)} -> entity #{item.EntityIndex}"
+			: $"Failed to add '{itemName}' imbued into {imbueSlot}: {result}");
+	}
+
+	[Command("imbue", Description = "Imbue an item you already own into an ability slot (0-3)")]
+	public void CmdImbue(CCitadelPlayerController caller, string itemName, EAbilitySlot slot)
+	{
+		var pawn = caller.GetHeroPawn();
+		if (pawn == null) return;
+
+		var result = pawn.ImbueItem(itemName, slot);
+		Reply(caller, result == ImbueResult.Success
+			? $"Imbued '{itemName}' into {slot}"
+			: $"Failed to imbue '{itemName}' into {slot}: {result}");
+	}
+
+	[Command("iteminfo", Description = "Show whether an item can be imbued, and which of your abilities accept it")]
+	public void CmdItemInfo(CCitadelPlayerController caller, string itemName)
+	{
+		if (!ItemInfo.Exists(itemName))
+		{
+			Reply(caller, $"No item named '{itemName}'");
+			return;
+		}
+
+		var effects = ItemInfo.GetImbueEffects(itemName);
+		if (effects == ImbueEffects.None)
+		{
+			Reply(caller, $"'{itemName}' cannot be imbued");
+			return;
+		}
+
+		Reply(caller, $"'{itemName}' imbue effects: {effects}");
+
+		var pawn = caller.GetHeroPawn();
+		if (pawn == null) return;
+
+		for (var slot = EAbilitySlot.Signature1; slot <= EAbilitySlot.Signature4; slot++)
+		{
+			var ability = pawn.AbilityComponent.GetAbilityBySlot(slot);
+			string name = ability?.AbilityName ?? "<empty>";
+			Reply(caller, $"  {(int)slot} {name}: {(pawn.CanImbue(itemName, slot) ? "ok" : "rejected")}");
+		}
+	}
+
 	[Command("sellitem", Description = "Sell an item. fullRefund=true refunds the full price.")]
 	public void CmdSellItem(CCitadelPlayerController caller, string itemName, bool fullRefund = false)
 	{
@@ -65,7 +118,8 @@ public class ItemTestPlugin : DeadworksPluginBase
 		Reply(caller, $"Pawn has {abilities.Count} abilities/items:");
 		foreach (var ent in abilities)
 		{
-			Reply(caller, $"  #{ent.EntityIndex}: {ent.DesignerName} ({ent.Classname})");
+			string imbued = ent.IsImbued ? $" [imbued into {string.Join(", ", ent.ImbuedAbilities)}]" : "";
+			Reply(caller, $"  #{ent.EntityIndex}: {ent.DesignerName} ({ent.Classname}){imbued}");
 		}
 	}
 

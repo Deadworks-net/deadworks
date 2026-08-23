@@ -206,6 +206,7 @@ public static class EntryPoint
         var args = new ClientDisconnectedEvent { Slot = slot, Reason = reason };
         PluginLoader.DispatchClientDisconnect(args);
         Players.SetConnected(slot, false);
+        DeadworksManaged.Api.UI.UIChannel.OnPlayerDisconnect(slot);
     }
 
     [UnmanagedCallersOnly]
@@ -446,6 +447,19 @@ public static class EntryPoint
         var p = new CCitadelPlayerPawn((nint)pawn);
         CCitadelPlayerPawn.DrainHeroInitializedContinuations(p);
         PluginLoader.DispatchPawnHeroInitialized(p);
+    }
+
+    [UnmanagedCallersOnly]
+    public static void OnGameStateChanged(int newState)
+    {
+        PluginLoader.DispatchGameStateChanged((EGameState)newState);
+    }
+
+    [UnmanagedCallersOnly]
+    public static byte ShouldAllowGameStateChange(int currentState, int newState)
+    {
+        var allow = PluginLoader.DispatchShouldAllowGameStateChange((EGameState)currentState, (EGameState)newState);
+        return (byte)(allow ? 1 : 0);
     }
 
     [UnmanagedCallersOnly]

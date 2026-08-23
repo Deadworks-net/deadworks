@@ -6,8 +6,12 @@ namespace DeadworksManaged.Api;
 /// </summary>
 public abstract class DeadworksPluginBase : IDeadworksPlugin {
 	public abstract string Name { get; }
-	public abstract void OnLoad(bool isReload);
-	public abstract void OnUnload();
+
+	// Virtual, not abstract: a plugin whose work is all attributes and event
+	// hooks has nothing to do here, and should not have to write an empty
+	// method to say so. Name is the only member you must supply.
+	public virtual void OnLoad(bool isReload) { }
+	public virtual void OnUnload() { }
 
 	/// <summary>Per-plugin timer service.</summary>
 	protected ITimer Timer => TimerResolver.Get(this);
@@ -34,4 +38,7 @@ public abstract class DeadworksPluginBase : IDeadworksPlugin {
 	public virtual HookResult OnAddModifier(AddModifierEvent args) => HookResult.Continue;
 	public virtual void OnConfigReloaded() { }
 	public virtual void OnCheckTransmit(CheckTransmitEvent args) { }
+	public virtual void OnPawnHeroInitialized(CCitadelPlayerPawn pawn) { }
+	public virtual void OnGameStateChanged(EGameState newState) { }
+	public virtual bool OnGameStateChanging(EGameState currentState, EGameState newState) => true;
 }

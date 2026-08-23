@@ -70,6 +70,9 @@ public:
     bool OnPre_ClientConCommand(void *controller, void *args);
     // Precache
     void OnBuildGameSessionManifest(void *manifest);
+    // Game state
+    void OnGameStateChanged(int newState);
+    bool ShouldAllowGameStateChange(int currentState, int newState);
     // Touch events
     void OnStartTouch(CBaseEntity *entity, CBaseEntity *other);
     void OnEndTouch(CBaseEntity *entity, CBaseEntity *other);

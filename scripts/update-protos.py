@@ -8,6 +8,7 @@ Requires git and the sourcesdk submodule (for protoc).
 """
 
 import platform
+import re
 import shutil
 import subprocess
 import sys
@@ -73,6 +74,29 @@ def clone_upstream(dest: Path) -> Path:
     return dest / "Protobufs"
 
 
+# Upstream toggles `[default = 0]` on and off between dumps. It is a no-op
+# (0 is already the implicit proto2 default) so strip it to avoid churn.
+_DEFAULT_ZERO_ONLY = re.compile(r"\s*\[\s*default\s*=\s*0\s*\]")
+_DEFAULT_ZERO_IN_LIST = re.compile(r"(\[[^\]]*?)\s*,?\s*default\s*=\s*0\s*(,\s*)?([^\]]*\])")
+
+
+def strip_default_zero(text: str) -> str:
+    text = _DEFAULT_ZERO_ONLY.sub("", text)
+    return _DEFAULT_ZERO_IN_LIST.sub(lambda m: m.group(1) + m.group(3), text)
+
+
+def normalize_protos(proto_dir: Path) -> None:
+    """Normalize inconsequential upstream noise in all .proto files in a directory."""
+    changed = 0
+    for proto in sorted(proto_dir.glob("*.proto")):
+        original = proto.read_text(encoding="utf-8")
+        normalized = strip_default_zero(original)
+        if normalized != original:
+            proto.write_text(normalized, encoding="utf-8")
+            changed += 1
+    print(f"Normalized {changed} .proto files in {proto_dir}")
+
+
 def copy_managed_protos(upstream_dir: Path, managed_dir: Path) -> None:
     """Copy .proto files to managed/protos/, updating only files that already exist."""
     copied = 0
@@ -135,6 +159,7 @@ def main() -> None:
         # Clone upstream
         clone_dir = tmpdir / "upstream"
         upstream_protos = clone_upstream(clone_dir)
+        normalize_protos(upstream_protos)
 
         # Update managed protos
         if managed_protos_dir.exists():

@@ -10,6 +10,8 @@
 #include "Hooks/GameEvents.hpp"
 #include "Hooks/PostEventAbstract.hpp"
 #include "Hooks/BuildGameSessionManifest.hpp"
+#include "Hooks/ChangeGameState.hpp"
+#include "Hooks/AreAllLobbyPlayersConnected.hpp"
 
 #include "Hooks/TraceShape.hpp"
 #include "../Memory/MemoryDataLoader.hpp"
@@ -717,7 +719,8 @@ static uint8_t __cdecl NativeAddFileSystemSearchPath(const char *path, const cha
 
 // --- Networking ---
 
-static void __cdecl NativeSendNetMessage(int msgId, const uint8_t *protoBytes, int protoLen, uint64_t recipientMask) {
+static void __cdecl NativeSendNetMessage(int msgId, const uint8_t *protoBytes, int protoLen, uint64_t recipientMask,
+                                         int bufType) {
     if (!g_pNetworkMessages || !protoBytes || protoLen <= 0)
         return;
 
@@ -731,7 +734,7 @@ static void __cdecl NativeSendNetMessage(int msgId, const uint8_t *protoBytes, i
 
     auto *pbMsg = const_cast<google::protobuf::Message *>(msg->AsMessage());
     if (pbMsg && pbMsg->ParseFromArray(protoBytes, protoLen)) {
-        CRecipientFilter filter;
+        CRecipientFilter filter(bufType == static_cast<int>(BUF_UNRELIABLE) ? BUF_UNRELIABLE : BUF_RELIABLE);
         for (int i = 0; i < ABSOLUTE_PLAYER_LIMIT; ++i) {
             if (recipientMask & (1ULL << i))
                 filter.AddRecipient(CPlayerSlot(i));
@@ -895,6 +898,19 @@ static uint8_t __cdecl NativeAddConCommandFlags(const char *name, uint64_t flags
         return 0;
     cmd.AddFlags(flags);
     return 1;
+}
+
+static void __cdecl NativeChangeGameState(void *gameRules, int32_t newState) {
+    if (!gameRules)
+        return;
+    // Bypasses the veto in Hook_ChangeGameState: a plugin driving the transition itself has
+    // already decided. OnGameStateChanged still fires for everyone.
+    hooks::ChangeGameState(gameRules, newState);
+}
+
+static void __cdecl NativeSetWaitingForPlayersRoster(uint32_t readyCount, uint32_t totalCount) {
+    hooks::g_LobbyPlayersConnectedOverride = readyCount;
+    hooks::g_LobbyPlayersTotalOverride = totalCount;
 }
 
 // ---------------------------------------------------------------------------
@@ -1184,4 +1200,8 @@ void deadworks::PopulateNativeCallbacks(NativeCallbacks &callbacks) {
 
     // ConCommand flag mutation
     callbacks.AddConCommandFlags = &NativeAddConCommandFlags;
+
+    // Game state
+    callbacks.ChangeGameState = &NativeChangeGameState;
+    callbacks.SetWaitingForPlayersRoster = &NativeSetWaitingForPlayersRoster;
 }

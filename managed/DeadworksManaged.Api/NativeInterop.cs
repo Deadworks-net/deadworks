@@ -30,7 +30,8 @@ internal static unsafe class NativeInterop
 	public static delegate* unmanaged[Cdecl]<void*, byte*, void*> GameEventGetPlayerController => (delegate* unmanaged[Cdecl]<void*, byte*, void*>)_cb.GameEventGetPlayerController;
 	public static delegate* unmanaged[Cdecl]<void*, byte*, void*> GameEventGetPlayerPawn => (delegate* unmanaged[Cdecl]<void*, byte*, void*>)_cb.GameEventGetPlayerPawn;
 	public static delegate* unmanaged[Cdecl]<void*, byte*, uint> GameEventGetEHandle => (delegate* unmanaged[Cdecl]<void*, byte*, uint>)_cb.GameEventGetEHandle;
-	public static delegate* unmanaged[Cdecl]<int, byte*, int, ulong, void> SendNetMessage => (delegate* unmanaged[Cdecl]<int, byte*, int, ulong, void>)_cb.SendNetMessage;
+	/// <summary>Last parameter is NetChannelBufType_t: 0 = BUF_UNRELIABLE, 1 = BUF_RELIABLE.</summary>
+	public static delegate* unmanaged[Cdecl]<int, byte*, int, ulong, int, void> SendNetMessage => (delegate* unmanaged[Cdecl]<int, byte*, int, ulong, int, void>)_cb.SendNetMessage;
 	public static delegate* unmanaged[Cdecl]<int, byte*, void> ClientCommand => (delegate* unmanaged[Cdecl]<int, byte*, void>)_cb.ClientCommand;
 	public static delegate* unmanaged[Cdecl]<void*, void> RemoveEntity => (delegate* unmanaged[Cdecl]<void*, void>)_cb.RemoveEntity;
 	public static delegate* unmanaged[Cdecl]<void*, void*, byte, byte, byte, byte, void> SetPawn => (delegate* unmanaged[Cdecl]<void*, void*, byte, byte, byte, byte, void>)_cb.SetPawn;
@@ -129,4 +130,13 @@ internal static unsafe class NativeInterop
 	public static delegate* unmanaged[Cdecl]<void*, float*, void> VariantToVector => (delegate* unmanaged[Cdecl]<void*, float*, void>)_cb.VariantToVector;
 	public static delegate* unmanaged[Cdecl]<void*, uint> VariantToColor => (delegate* unmanaged[Cdecl]<void*, uint>)_cb.VariantToColor;
 	public static delegate* unmanaged[Cdecl]<byte*, ulong, byte> AddConCommandFlags => (delegate* unmanaged[Cdecl]<byte*, ulong, byte>)_cb.AddConCommandFlags;
+
+	// Item imbuement
+	public static delegate* unmanaged[Cdecl]<byte*, int> GetItemImbueEffects => (delegate* unmanaged[Cdecl]<byte*, int>)_cb.GetItemImbueEffects;
+	public static delegate* unmanaged[Cdecl]<void*, byte*, byte> CanImbueAbility => (delegate* unmanaged[Cdecl]<void*, byte*, byte>)_cb.CanImbueAbility;
+	public static delegate* unmanaged[Cdecl]<void*, void*, byte> ImbueAbility => (delegate* unmanaged[Cdecl]<void*, void*, byte>)_cb.ImbueAbility;
+
+	// Game state
+	public static delegate* unmanaged[Cdecl]<void*, int, void> ChangeGameState => (delegate* unmanaged[Cdecl]<void*, int, void>)_cb.ChangeGameState;
+	public static delegate* unmanaged[Cdecl]<uint, uint, void> SetWaitingForPlayersRoster => (delegate* unmanaged[Cdecl]<uint, uint, void>)_cb.SetWaitingForPlayersRoster;
 }
