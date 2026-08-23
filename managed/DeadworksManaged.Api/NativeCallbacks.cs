@@ -130,4 +130,6 @@ internal struct NativeCallbacks
 	public nint GetItemImbueEffects;
 	public nint CanImbueAbility;
 	public nint ImbueAbility;
+	public nint ChangeGameState;
+	public nint SetWaitingForPlayersRoster;
 }

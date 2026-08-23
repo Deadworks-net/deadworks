@@ -76,4 +76,6 @@ void deadworks::InitializeManagedCallbacks(DotNetHost &host, ManagedCallbacks &m
     BindCallback(host, assemblyPath, managed.onAddModifier, L"OnAddModifier");
     BindCallback(host, assemblyPath, managed.onCheckTransmit, L"OnCheckTransmit");
     BindCallback(host, assemblyPath, managed.onPawnHeroInitialized, L"OnPawnHeroInitialized");
+    BindCallback(host, assemblyPath, managed.onGameStateChanged, L"OnGameStateChanged");
+    BindCallback(host, assemblyPath, managed.shouldAllowGameStateChange, L"ShouldAllowGameStateChange");
 }

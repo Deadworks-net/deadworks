@@ -135,4 +135,8 @@ internal static unsafe class NativeInterop
 	public static delegate* unmanaged[Cdecl]<byte*, int> GetItemImbueEffects => (delegate* unmanaged[Cdecl]<byte*, int>)_cb.GetItemImbueEffects;
 	public static delegate* unmanaged[Cdecl]<void*, byte*, byte> CanImbueAbility => (delegate* unmanaged[Cdecl]<void*, byte*, byte>)_cb.CanImbueAbility;
 	public static delegate* unmanaged[Cdecl]<void*, void*, byte> ImbueAbility => (delegate* unmanaged[Cdecl]<void*, void*, byte>)_cb.ImbueAbility;
+
+	// Game state
+	public static delegate* unmanaged[Cdecl]<void*, int, void> ChangeGameState => (delegate* unmanaged[Cdecl]<void*, int, void>)_cb.ChangeGameState;
+	public static delegate* unmanaged[Cdecl]<uint, uint, void> SetWaitingForPlayersRoster => (delegate* unmanaged[Cdecl]<uint, uint, void>)_cb.SetWaitingForPlayersRoster;
 }

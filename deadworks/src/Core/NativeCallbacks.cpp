@@ -10,6 +10,8 @@
 #include "Hooks/GameEvents.hpp"
 #include "Hooks/PostEventAbstract.hpp"
 #include "Hooks/BuildGameSessionManifest.hpp"
+#include "Hooks/ChangeGameState.hpp"
+#include "Hooks/AreAllLobbyPlayersConnected.hpp"
 
 #include "Hooks/TraceShape.hpp"
 #include "../Memory/MemoryDataLoader.hpp"
@@ -898,6 +900,19 @@ static uint8_t __cdecl NativeAddConCommandFlags(const char *name, uint64_t flags
     return 1;
 }
 
+static void __cdecl NativeChangeGameState(void *gameRules, int32_t newState) {
+    if (!gameRules)
+        return;
+    // Bypasses the veto in Hook_ChangeGameState: a plugin driving the transition itself has
+    // already decided. OnGameStateChanged still fires for everyone.
+    hooks::ChangeGameState(gameRules, newState);
+}
+
+static void __cdecl NativeSetWaitingForPlayersRoster(uint32_t readyCount, uint32_t totalCount) {
+    hooks::g_LobbyPlayersConnectedOverride = readyCount;
+    hooks::g_LobbyPlayersTotalOverride = totalCount;
+}
+
 // ---------------------------------------------------------------------------
 // Entity virtual function wrappers
 // ---------------------------------------------------------------------------
@@ -1185,4 +1200,8 @@ void deadworks::PopulateNativeCallbacks(NativeCallbacks &callbacks) {
 
     // ConCommand flag mutation
     callbacks.AddConCommandFlags = &NativeAddConCommandFlags;
+
+    // Game state
+    callbacks.ChangeGameState = &NativeChangeGameState;
+    callbacks.SetWaitingForPlayersRoster = &NativeSetWaitingForPlayersRoster;
 }

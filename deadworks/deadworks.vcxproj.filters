@@ -132,6 +132,12 @@
     <ClCompile Include="src\Core\Hooks\BuildGameSessionManifest.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="src\Core\Hooks\ChangeGameState.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="src\Core\Hooks\AreAllLobbyPlayersConnected.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
     <ClCompile Include="src\Memory\MemoryDataLoader.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
@@ -273,6 +279,12 @@
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="src\Core\Hooks\BuildGameSessionManifest.hpp">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="src\Core\Hooks\ChangeGameState.hpp">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="src\Core\Hooks\AreAllLobbyPlayersConnected.hpp">
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="src\SDK\CEntitySystem.hpp">

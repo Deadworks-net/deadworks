@@ -391,6 +391,26 @@ internal static partial class PluginLoader
         return result;
     }
 
+    /// <summary>Any plugin returning false vetoes. Every plugin is still invoked; not a HookResult-style max, a plain AND.</summary>
+    private static bool DispatchToPluginsAllAllow(Func<IDeadworksPlugin, bool> invoke, string methodName)
+    {
+        var snapshot = _pluginSnapshot;
+        var allow = true;
+        foreach (var plugin in snapshot)
+        {
+            try
+            {
+                if (!invoke(plugin))
+                    allow = false;
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine($"[PluginLoader] {plugin.Name}.{methodName} threw: {ex.Message}");
+            }
+        }
+        return allow;
+    }
+
     // --- Plugin lifecycle dispatchers ---
 
     public static void DispatchPrecacheResources()
@@ -411,23 +431,7 @@ internal static partial class PluginLoader
     }
 
     public static bool DispatchClientConnect(ClientConnectEvent args)
-    {
-        var snapshot = _pluginSnapshot;
-        bool allowed = true;
-        foreach (var plugin in snapshot)
-        {
-            try
-            {
-                if (!plugin.OnClientConnect(args))
-                    allowed = false;
-            }
-            catch (Exception ex)
-            {
-                Console.WriteLine($"[PluginLoader] {plugin.Name}.OnClientConnect threw: {ex.Message}");
-            }
-        }
-        return allowed;
-    }
+        => DispatchToPluginsAllAllow(p => p.OnClientConnect(args), nameof(IDeadworksPlugin.OnClientConnect));
 
     public static void DispatchClientPutInServer(ClientPutInServerEvent args)
         => DispatchToPlugins(p => p.OnClientPutInServer(args), nameof(IDeadworksPlugin.OnClientPutInServer));
@@ -485,6 +489,12 @@ internal static partial class PluginLoader
     public static void DispatchPawnHeroInitialized(CCitadelPlayerPawn pawn)
         => DispatchToPlugins(p => p.OnPawnHeroInitialized(pawn), nameof(IDeadworksPlugin.OnPawnHeroInitialized));
 
+    public static void DispatchGameStateChanged(EGameState newState)
+        => DispatchToPlugins(p => p.OnGameStateChanged(newState), nameof(IDeadworksPlugin.OnGameStateChanged));
+
+    public static bool DispatchShouldAllowGameStateChange(EGameState currentState, EGameState newState)
+        => DispatchToPluginsAllAllow(p => p.OnGameStateChanging(currentState, newState), nameof(IDeadworksPlugin.OnGameStateChanging));
+
     public static void UnloadAll()
     {
         ServerBrowser.Shutdown();
@@ -512,6 +522,7 @@ internal static partial class PluginLoader
 
         ConCommandManager.Clear();
         PluginRegistrationTracker.Clear();
+        GameRules.SetWaitingForPlayersRoster(0, 0);
 
         // Dispose all timer services and reset engine
         TimerRegistry.Clear();

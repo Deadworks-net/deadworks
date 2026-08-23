@@ -147,6 +147,9 @@ struct NativeCallbacks {
     int32_t(__cdecl *GetItemImbueEffects)(const char *itemName);
     uint8_t(__cdecl *CanImbueAbility)(void *targetAbility, const char *itemName);
     uint8_t(__cdecl *ImbueAbility)(void *item, void *targetAbility);
+    // Game state — see Hooks/ChangeGameState.hpp and Hooks/AreAllLobbyPlayersConnected.hpp.
+    void(__cdecl *ChangeGameState)(void *gameRules, int32_t newState);
+    void(__cdecl *SetWaitingForPlayersRoster)(uint32_t readyCount, uint32_t totalCount);
 };
 
 void PopulateNativeCallbacks(NativeCallbacks &callbacks);
