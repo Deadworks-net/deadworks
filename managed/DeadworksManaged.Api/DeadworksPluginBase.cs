@@ -37,4 +37,5 @@ public abstract class DeadworksPluginBase : IDeadworksPlugin {
 	public virtual HookResult OnAddModifier(AddModifierEvent args) => HookResult.Continue;
 	public virtual void OnConfigReloaded() { }
 	public virtual void OnCheckTransmit(CheckTransmitEvent args) { }
+	public virtual void OnPawnHeroInitialized(CCitadelPlayerPawn pawn) { }
 }
