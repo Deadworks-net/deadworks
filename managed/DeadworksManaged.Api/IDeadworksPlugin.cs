@@ -99,6 +99,9 @@ public interface IDeadworksPlugin {
 	/// <summary>Called when an entity stops touching another entity.</summary>
 	void OnEntityEndTouch(EntityTouchEvent args) { }
 
+	/// <summary>Called when a modifier event fires (damage taken, ability cast, modifier gained/lost, ...). Observe-only.</summary>
+	void OnModifierEvent(ModifierEvent args) { }
+
 	/// <summary>
 	/// Called each think tick before ability execution.
 	/// Set <see cref="AbilityAttemptEvent.BlockedButtons"/> to prevent specific abilities/items from being cast.

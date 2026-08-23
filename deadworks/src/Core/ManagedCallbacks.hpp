@@ -47,6 +47,7 @@ struct ManagedCallbacks {
     using OnAddModifierFn = int(CORECLR_DELEGATE_CALLTYPE *)(void *modifierProp, void **pCaster, uint32_t *pHAbility, int32_t *pITeam, void *vdata, void *params, void *kv);
     using OnCheckTransmitFn = void(CORECLR_DELEGATE_CALLTYPE *)(int playerSlot, void *transmitBits);
     using OnPawnHeroInitializedFn = void(CORECLR_DELEGATE_CALLTYPE *)(void *pawn);
+    using OnModifierEventFn = void(CORECLR_DELEGATE_CALLTYPE *)(uint32_t event, void *caster, void *target, void *castEntity, void *eventData);
     using OnGameStateChangedFn = void(CORECLR_DELEGATE_CALLTYPE *)(int32_t newState);
     using ShouldAllowGameStateChangeFn = uint8_t(CORECLR_DELEGATE_CALLTYPE *)(int32_t currentState, int32_t newState);
 
@@ -68,6 +69,7 @@ struct ManagedCallbacks {
     OnPrecacheResourcesFn onPrecacheResources = nullptr;
     OnEntityStartTouchFn onEntityStartTouch = nullptr;
     OnEntityEndTouchFn onEntityEndTouch = nullptr;
+    OnModifierEventFn onModifierEvent = nullptr;
     OnEntityAcceptInputFn onEntityAcceptInput = nullptr;
     OnEntityAcceptInputPostFn onEntityAcceptInputPost = nullptr;
     OnEntityFireOutputFn onEntityFireOutput = nullptr;

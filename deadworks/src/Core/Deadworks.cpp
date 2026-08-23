@@ -24,6 +24,7 @@
 #include "Hooks/ReplyConnection.hpp"
 #include "Hooks/CheckTransmit.hpp"
 #include "Hooks/InitializeHeroOnPawn.hpp"
+#include "Hooks/FireModifierEvent.hpp"
 #include "A2SPatch.hpp"
 
 #include "../Memory/MemoryDataLoader.hpp"
@@ -259,6 +260,9 @@ void Deadworks::PostInit() {
     HookInline(hooks::g_InitializeHeroOnPawn,
                "CCitadelPlayerPawn::InitializeHeroOnPawn",
                &hooks::Hook_InitializeHeroOnPawn);
+    HookInline(hooks::g_FireModifierEvent,
+               "FireModifierEvent",
+               &hooks::Hook_FireModifierEvent);
 
     // Enable A2S_INFO responses on community servers
     A2SPatch::Apply();
@@ -570,6 +574,13 @@ void Deadworks::OnStartTouch(CBaseEntity *entity, CBaseEntity *other) {
 void Deadworks::OnEndTouch(CBaseEntity *entity, CBaseEntity *other) {
     if (m_managed.onEntityEndTouch && entity && other)
         m_managed.onEntityEndTouch(entity, other);
+}
+
+void Deadworks::OnPre_FireModifierEvent(EModifierEvent event, CBaseEntity *caster, CBaseEntity *target,
+                                      CBaseEntity *castEntity, void *eventData) {
+    // All entity arguments may legitimately be null (the native handles a null caster), so forward as-is.
+    if (m_managed.onModifierEvent)
+        m_managed.onModifierEvent(static_cast<uint32_t>(event), caster, target, castEntity, eventData);
 }
 
 int Deadworks::OnEntityAcceptInputPre(const char *className, const char *inputName,

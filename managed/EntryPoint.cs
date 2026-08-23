@@ -7,6 +7,10 @@ namespace DeadworksManaged;
 
 public static class EntryPoint
 {
+    /// <summary>Wraps a native entity pointer, or returns null when the pointer is null.</summary>
+    private static unsafe CBaseEntity? EntityOrNull(void* entity)
+        => entity != null ? new CBaseEntity((nint)entity) : null;
+
     [UnmanagedCallersOnly]
     public static unsafe void Initialize(nint callbacksPtr)
     {
@@ -261,6 +265,20 @@ public static class EntryPoint
     }
 
     [UnmanagedCallersOnly]
+    public static unsafe void OnModifierEvent(uint modifierEvent, void* caster, void* target, void* castEntity, void* eventData)
+    {
+        var args = new ModifierEvent
+        {
+            Event = (EModifierEvent)modifierEvent,
+            Caster = EntityOrNull(caster),
+            Target = EntityOrNull(target),
+            CastEntity = EntityOrNull(castEntity),
+            EventData = (nint)eventData
+        };
+        PluginLoader.DispatchModifierEvent(args);
+    }
+
+    [UnmanagedCallersOnly]
     public static unsafe int OnEntityAcceptInput(byte* classNameUtf8, byte* inputNameUtf8,
                                                   void* entity, void* activator, void* caller, void* variantValue)
     {
@@ -272,8 +290,8 @@ public static class EntryPoint
             Entity = new CBaseEntity((nint)entity),
             ClassName = className,
             InputName = inputName,
-            Activator = activator != null ? new CBaseEntity((nint)activator) : null,
-            Caller = caller != null ? new CBaseEntity((nint)caller) : null,
+            Activator = EntityOrNull(activator),
+            Caller = EntityOrNull(caller),
             Value = new EntityIOValue((nint)variantValue),
         };
         return PluginLoader.DispatchEntityAcceptInputPre(className, evt);
@@ -291,8 +309,8 @@ public static class EntryPoint
             Entity = new CBaseEntity((nint)entity),
             ClassName = className,
             InputName = inputName,
-            Activator = activator != null ? new CBaseEntity((nint)activator) : null,
-            Caller = caller != null ? new CBaseEntity((nint)caller) : null,
+            Activator = EntityOrNull(activator),
+            Caller = EntityOrNull(caller),
             Value = new EntityIOValue((nint)variantValue),
         };
         PluginLoader.DispatchEntityAcceptInputPost(className, evt);
@@ -308,8 +326,8 @@ public static class EntryPoint
         {
             CallerClass = callerClass,
             OutputName = outputName,
-            Activator = activator != null ? new CBaseEntity((nint)activator) : null,
-            Caller = caller != null ? new CBaseEntity((nint)caller) : null,
+            Activator = EntityOrNull(activator),
+            Caller = EntityOrNull(caller),
             Value = new EntityIOValue((nint)variantValue),
             Delay = delay,
         };
@@ -326,8 +344,8 @@ public static class EntryPoint
         {
             CallerClass = callerClass,
             OutputName = outputName,
-            Activator = activator != null ? new CBaseEntity((nint)activator) : null,
-            Caller = caller != null ? new CBaseEntity((nint)caller) : null,
+            Activator = EntityOrNull(activator),
+            Caller = EntityOrNull(caller),
             Value = new EntityIOValue((nint)variantValue),
             Delay = delay,
         };

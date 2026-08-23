@@ -206,6 +206,7 @@ if not "$(DeadlockDir)"=="" if exist "$(TargetDir)$(TargetName).pdb" copy /Y "$(
     <ClCompile Include="src\Core\Hooks\AddModifier.cpp" />
     <ClCompile Include="src\Core\Hooks\CheckTransmit.cpp" />
     <ClCompile Include="src\Core\Hooks\InitializeHeroOnPawn.cpp" />
+    <ClCompile Include="src\Core\Hooks\FireModifierEvent.cpp" />
     <ClCompile Include="src\Core\A2SPatch.cpp" />
     <ClCompile Include="src\Core\Deadworks.cpp" />
     <ClCompile Include="src\Core\NativeCallbacks.cpp" />
@@ -256,6 +257,7 @@ if not "$(DeadlockDir)"=="" if exist "$(TargetDir)$(TargetName).pdb" copy /Y "$(
     <ClInclude Include="src\Core\Hooks\AddModifier.hpp" />
     <ClInclude Include="src\Core\Hooks\CheckTransmit.hpp" />
     <ClInclude Include="src\Core\Hooks\InitializeHeroOnPawn.hpp" />
+    <ClInclude Include="src\Core\Hooks\FireModifierEvent.hpp" />
     <ClInclude Include="src\Core\Hooks\BuildGameSessionManifest.hpp" />
     <ClInclude Include="src\Core\Hooks\ChangeGameState.hpp" />
     <ClInclude Include="src\Core\Hooks\AreAllLobbyPlayersConnected.hpp" />

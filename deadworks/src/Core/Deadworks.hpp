@@ -76,6 +76,9 @@ public:
     // Touch events
     void OnStartTouch(CBaseEntity *entity, CBaseEntity *other);
     void OnEndTouch(CBaseEntity *entity, CBaseEntity *other);
+    // Modifier events - dispatched before the native FireModifierEvent runs (observe-only)
+    void OnPre_FireModifierEvent(EModifierEvent event, CBaseEntity *caster, CBaseEntity *target,
+                               CBaseEntity *castEntity, void *eventData);
     // Entity I/O — Pre returns HookResult int (0=Continue, 1=Stop, 2=Handled); Post returns void.
     int OnEntityAcceptInputPre(const char *className, const char *inputName,
                                 void *entity, void *activator, void *caller, void *variantValue);
