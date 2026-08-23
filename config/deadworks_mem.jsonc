@@ -197,6 +197,14 @@
 			"library": "server.dll",
 			"windows": "48 8B C4 89 50 ?? 55 57 48 8D 68"
 		},
+		"CCitadelBaseAbility::ImbueAbility": {
+			"library": "server.dll",
+			"windows": "48 85 D2 0F 84 ?? ?? ?? ?? 41 56 41 57 48 83 EC ?? 48 8B 82"
+		},
+		"CitadelAbilityVData::CanImbueAbility": {
+			"library": "server.dll",
+			"windows": "48 89 5C 24 ?? 48 89 6C 24 ?? 48 89 74 24 ?? 57 48 83 EC ?? 0F B6 41"
+		},
 		"SubclassRegistry::Lookup": {
 			"library": "server.dll",
 			"windows": "48 89 74 24 ?? 57 48 81 EC ?? ?? ?? ?? 33 C0 8B FA"

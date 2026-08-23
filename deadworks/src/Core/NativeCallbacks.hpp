@@ -143,6 +143,10 @@ struct NativeCallbacks {
     void(__cdecl *VariantToVector)(const void *variantPtr, float *outXYZW);  // populates 4 floats; zero-pads unused components
     uint32_t(__cdecl *VariantToColor)(const void *variantPtr);  // packed RGBA (R in low byte)
     uint8_t(__cdecl *AddConCommandFlags)(const char *name, uint64_t flags);
+    // Item imbuement — see the "Item imbuement" block in NativeAbility.cpp.
+    int32_t(__cdecl *GetItemImbueEffects)(const char *itemName);
+    uint8_t(__cdecl *CanImbueAbility)(void *targetAbility, const char *itemName);
+    uint8_t(__cdecl *ImbueAbility)(void *item, void *targetAbility);
 };
 
 void PopulateNativeCallbacks(NativeCallbacks &callbacks);

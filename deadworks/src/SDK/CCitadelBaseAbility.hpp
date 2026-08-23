@@ -20,4 +20,15 @@ class CCitadelBaseAbility : public CBaseEntity {
             deadworks::MemoryDataLoader::Get().GetOffset("CCitadelBaseAbility::SetUpgradeBits").value());
         fn(this, newBits);
     }
+
+    // Imbues this item into pTargetAbility: appends the target's subclass ID to
+    // m_vecImbuedAbilities, refreshes the item's modifiers and propagates the imbuement to
+    // any ability that links to the target. A no-op when already imbued into that ability.
+    // Callers must validate with CitadelAbilityVData::CanImbueAbility first - the engine
+    // does not re-check here.
+    void ImbueAbility(void *pTargetAbility) {
+        static const auto fn = reinterpret_cast<void(__fastcall *)(void *, void *)>(
+            deadworks::MemoryDataLoader::Get().GetOffset("CCitadelBaseAbility::ImbueAbility").value());
+        fn(this, pTargetAbility);
+    }
 };
