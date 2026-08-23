@@ -342,14 +342,14 @@ message CCitadelUserMsg_GoldHistory {
 
 message CCitadelUserMsg_CameraController {
 	message Maintain {
-		optional float duration = 1 [default = 0];
+		optional float duration = 1;
 	}
 
 	message Approach {
 		optional float speed = 1 [default = 600];
 		optional float default_speed = 2 [default = 600];
 		optional float acceleration = 3 [default = 1000];
-		optional float min_duration = 4 [default = 0];
+		optional float min_duration = 4;
 		optional float approach_float = 5;
 		optional .CMsgVector approach_vector = 6;
 		optional bool chase_default = 7;
@@ -357,8 +357,8 @@ message CCitadelUserMsg_CameraController {
 
 	message Spring {
 		optional float spring_strength = 1 [default = 10];
-		optional float min_speed = 4 [default = 0];
-		optional float max_duration = 5 [default = 0];
+		optional float min_speed = 4;
+		optional float max_duration = 5;
 		optional float target_float = 6;
 		optional .CMsgVector target_vector = 7;
 	}

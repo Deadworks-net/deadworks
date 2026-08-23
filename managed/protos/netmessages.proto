@@ -240,7 +240,7 @@ message CSVCMsg_SetPause {
 message CSVCMsg_VoiceInit {
 	optional int32 quality = 1;
 	optional string codec = 2;
-	optional int32 version = 3 [default = 0];
+	optional int32 version = 3;
 }
 
 message CSVCMsg_Print {
