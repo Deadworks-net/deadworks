@@ -99,10 +99,7 @@ public interface IDeadworksPlugin {
 	/// <summary>Called when an entity stops touching another entity.</summary>
 	void OnEntityEndTouch(EntityTouchEvent args) { }
 
-	/// <summary>
-	/// Called for every modifier event (damage taken, ability executed, modifier gained/lost, ...) before the game's modifiers process it.
-	/// Observe-only; see <see cref="ModifierEvent"/>.
-	/// </summary>
+	/// <summary>Called when a modifier event fires (damage taken, ability cast, modifier gained/lost, ...). Observe-only.</summary>
 	void OnModifierEvent(ModifierEvent args) { }
 
 	/// <summary>

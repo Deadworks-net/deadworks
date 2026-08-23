@@ -1,10 +1,6 @@
 namespace DeadworksManaged.Api;
 
-/// <summary>
-/// Modifier event types dispatched through the native <c>FireModifierEvent</c> path.
-/// Values below <see cref="BroadcastEventCount"/> are broadcast to every modifier in the game;
-/// the rest are delivered only to the modifiers on the caster, target and cast entity.
-/// </summary>
+/// <summary>Modifier event types. <c>*Broadcast</c> values are not delivered to <see cref="IDeadworksPlugin.OnModifierEvent"/>.</summary>
 public enum EModifierEvent : uint {
 	PreDamageTakenBroadcast = 0x0,
 	DamageTakenBroadcast = 0x1,
