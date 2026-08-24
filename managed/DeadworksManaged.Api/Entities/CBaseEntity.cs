@@ -337,7 +337,7 @@ public unsafe class CBaseEntity : NativeEntity, IEquatable<CBaseEntity> {
 	public int Health { get => _health.Get(Handle); set => _health.Set(Handle, value); }
 
 	private static readonly SchemaAccessor<int> _maxHealth = new("CBaseEntity"u8, "m_iMaxHealth"u8);
-	public int MaxHealth { get => _maxHealth.Get(Handle); set => _maxHealth.Set(Handle, value); }
+	public int MaxHealth => _maxHealth.Get(Handle);
 
 	/// <summary>Gets the effective max health through the engine virtual call (accounts for modifiers, abilities, buffs).</summary>
 	public int GetMaxHealth() => NativeInterop.GetMaxHealth((void*)Handle);
