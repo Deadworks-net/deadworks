@@ -44,14 +44,7 @@ internal static class ServerBrowser
         }
 
         ResolveConVars();
-        ApplyServerAddons();
         LoadOrCreateCredentials();
-    }
-
-    public static void OnStartupServer()
-    {
-        if (_config.Unlisted || Server.HasCommandLineParm("-nomaster")) return;
-        ApplyServerAddons();
     }
 
     public static void Shutdown()
@@ -221,24 +214,6 @@ internal static class ServerBrowser
         }
     }
 
-    private static void ApplyServerAddons()
-    {
-        if (_config.ContentAddons.Count == 0) return;
-
-        var addons = string.Join(",", _config.ContentAddons);
-        Server.SetAddons(addons);
-        Console.WriteLine($"[ServerBrowser] Server addons set to '{addons}'");
-
-        foreach (var addon in _config.ContentAddons)
-        {
-            var vpkPath = $"deadworks_mods/vpks/{addon}.vpk";
-            if (Server.AddSearchPath(vpkPath))
-                Console.WriteLine($"[ServerBrowser] Mounted server addon: {vpkPath}");
-            else
-                Console.WriteLine($"[ServerBrowser] Failed to mount: {vpkPath}");
-        }
-    }
-
     private static object BuildPayload()
     {
         var players = new List<object>();
@@ -276,7 +251,7 @@ internal static class ServerBrowser
             mods = PluginRegistry.GetLoadedPluginNames()
                 .Select(n => new { name = n, type = "plugin", version = "1.0.0" })
                 .ToList<object>(),
-            content_addons = _config.ContentAddons,
+            content_addons = ContentAddonManager.Active,
             extra_maps = _config.ExtraMaps,
             name = ConVar.Find("hostname")?.GetString() ?? _serverName,
             version = typeof(ServerBrowser).Assembly.GetName().Version?.ToString() ?? "",

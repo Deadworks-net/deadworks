@@ -18,6 +18,18 @@ public interface IDeadworksPlugin {
 	ITimer Timer => TimerResolver.Get(this);
 
 	/// <summary>
+	/// Content addons this plugin needs connecting clients to download, so they do not have to be listed
+	/// in the server config's <c>serverbrowser.content_addons</c> ahead of time.
+	/// <para>
+	/// Merged with the config list and any other plugin's, advertised to clients on connect, and the
+	/// matching <c>deadworks_mods/vpks/&lt;name&gt;.vpk</c> is mounted server-side. Read whenever the
+	/// plugin loads or unloads; if the list changes while the plugin is running, call
+	/// <see cref="DeadworksManaged.Api.ContentAddons.Refresh"/> to re-apply it.
+	/// </para>
+	/// </summary>
+	IReadOnlyList<string> ContentAddons => [];
+
+	/// <summary>
 	/// Called during map load to precache resources (particles, models, etc).
 	/// Use <see cref="Precache.AddResource"/> to register resources.
 	/// </summary>

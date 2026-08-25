@@ -16,6 +16,9 @@ public abstract class DeadworksPluginBase : IDeadworksPlugin {
 	/// <summary>Per-plugin timer service.</summary>
 	protected ITimer Timer => TimerResolver.Get(this);
 
+	/// <summary>Content addons this plugin needs connecting clients to download.</summary>
+	public virtual IReadOnlyList<string> ContentAddons => [];
+
 	public virtual void OnPrecacheResources() { }
 	public virtual void OnStartupServer() { }
 	public virtual void OnGameFrame(bool simulating, bool firstTick, bool lastTick) { }

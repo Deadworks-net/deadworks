@@ -95,6 +95,7 @@ internal static partial class PluginLoader
         ServerBrowser.Initialize();
         PluginStateManager.Initialize();
         PluginRegistry.Resolve = () => _pluginSnapshot.Select(p => p.Name).ToArray();
+        ContentAddonManager.Initialize(() => _pluginSnapshot);
 
         GameEvents.OnAddListener = OnManualAddListenerWithHandle;
         GameEvents.OnRemoveListener = OnManualRemoveListener;
@@ -251,6 +252,8 @@ internal static partial class PluginLoader
             ConCommandManager.RegisterPlugin(normalizedPath, plugins);
             Commands.CommandRegistration.RegisterPluginCommands(normalizedPath, plugins, _chatCommandRegistry);
         }
+
+        ContentAddonManager.Refresh();
     }
 
     private static void UnloadPlugin(string normalizedPath)
@@ -287,6 +290,8 @@ internal static partial class PluginLoader
         }
 
         entry.Context.Unload();
+
+        ContentAddonManager.Refresh();
     }
 
     // --- File watcher ---
@@ -419,7 +424,7 @@ internal static partial class PluginLoader
     public static void DispatchStartupServer()
     {
         TimerRegistry.CancelAllMapChangeTimers();
-        ServerBrowser.OnStartupServer();
+        ContentAddonManager.OnStartupServer();
         DispatchToPlugins(p => p.OnStartupServer(), nameof(IDeadworksPlugin.OnStartupServer));
     }
 
