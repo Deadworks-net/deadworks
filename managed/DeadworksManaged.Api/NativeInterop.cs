@@ -71,7 +71,7 @@ internal static unsafe class NativeInterop
 	public static delegate* unmanaged[Cdecl]<void*, void> FreeGameEvent => (delegate* unmanaged[Cdecl]<void*, void>)_cb.FreeGameEvent;
 	public static delegate* unmanaged[Cdecl]<void*, byte, void> ResetHero => (delegate* unmanaged[Cdecl]<void*, byte, void>)_cb.ResetHero;
 	public static delegate* unmanaged[Cdecl]<byte*, void*> GetHeroData => (delegate* unmanaged[Cdecl]<byte*, void*>)_cb.GetHeroData;
-	public static delegate* unmanaged[Cdecl]<void*, int, void> ChangeTeam => (delegate* unmanaged[Cdecl]<void*, int, void>)_cb.ChangeTeam;
+	public static delegate* unmanaged[Cdecl]<void*, int, byte, void> ChangeTeam => (delegate* unmanaged[Cdecl]<void*, int, byte, void>)_cb.ChangeTeam;
 	public static delegate* unmanaged[Cdecl]<void*, byte*, void> SelectHero => (delegate* unmanaged[Cdecl]<void*, byte*, void>)_cb.SelectHero;
 	public static delegate* unmanaged[Cdecl]<void*, int> GetUtlVectorSize => (delegate* unmanaged[Cdecl]<void*, int>)_cb.GetUtlVectorSize;
 	public static delegate* unmanaged[Cdecl]<void*, void*> GetUtlVectorData => (delegate* unmanaged[Cdecl]<void*, void*>)_cb.GetUtlVectorData;

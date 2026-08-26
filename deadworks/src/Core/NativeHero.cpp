@@ -2,6 +2,8 @@
 #include "NativeOffsets.hpp"
 #include "Deadworks.hpp"
 
+#include <stdexcept>
+
 #include "../Memory/MemoryDataLoader.hpp"
 #include "../SDK/CBaseEntity.hpp"
 #include "../SDK/CCitadelPlayerController.hpp"
@@ -61,6 +63,11 @@ static void *GetHeroById(void *manager, int heroId) {
 
 // --- Static function pointers ---
 
+// Controller bool gating the hero teardown in CCitadelPlayerPawn::OnTeamChanged.
+// While set (the default), a real team change destroys the pawn's abilities, items
+// and hero. Name is a guess. ResolveHeroStatics throws if it cannot be resolved.
+static uintptr_t g_ResetHeroOnTeamChangeOffset = 0;
+
 static EmitSoundParamsFn g_pEmitSoundParams = nullptr;
 static PawnResetHeroFn g_pPawnResetHero = nullptr;
 static AddResourceFn g_pAddResource = nullptr;
@@ -105,11 +112,25 @@ static void *__cdecl NativeGetHeroData(const char *heroName) {
     return data;
 }
 
-static void __cdecl NativeChangeTeam(void *controller, int32_t teamNum) {
+/// With `bKeepHero` the pawn keeps its hero, abilities and items across the change.
+static void __cdecl NativeChangeTeam(void *controller, int32_t teamNum, uint8_t bKeepHero) {
     if (!controller)
         return;
+
     auto changeTeamFn = GetVFunc<void (*)(void *, int)>(controller, kVtblChangeTeam);
+
+    if (!bKeepHero) {
+        changeTeamFn(controller, teamNum);
+        return;
+    }
+
+    // Restore the previous value rather than hardcoding 1 so nesting is safe.
+    auto *pFlag = reinterpret_cast<uint8_t *>(
+        reinterpret_cast<uintptr_t>(controller) + g_ResetHeroOnTeamChangeOffset);
+    const uint8_t previous = *pFlag;
+    *pFlag = 0;
     changeTeamFn(controller, teamNum);
+    *pFlag = previous;
 }
 
 static void __cdecl NativeSelectHero(void *controller, const char *heroName) {
@@ -172,6 +193,15 @@ void deadworks::ResolveHeroStatics() {
     g_pAddResource = reinterpret_cast<AddResourceFn>(
         MemoryDataLoader::Get().GetOffset("AddResource").value());
     g_Log->Info("Resolved AddResource: {:p}", reinterpret_cast<void *>(g_pAddResource));
+
+    const auto anchor = MemoryDataLoader::Get().GetOffset("CCitadelPlayerController::ChangeTeamKeepHero").value();
+    const int32_t disp = *reinterpret_cast<const int32_t *>(anchor + kChangeTeamKeepHero_FlagDisp);
+    if (disp <= 0 || disp >= kMaxPlayerControllerSize) {
+        g_Log->Critical("m_bResetHeroOnTeamChange displacement out of range ({:#x})", disp);
+        throw std::runtime_error("m_bResetHeroOnTeamChange displacement out of range");
+    }
+    g_ResetHeroOnTeamChangeOffset = static_cast<uintptr_t>(disp);
+    g_Log->Info("Resolved m_bResetHeroOnTeamChange: controller+{:#x}", g_ResetHeroOnTeamChangeOffset);
 }
 
 void deadworks::ResolveHeroPrecacheFns() {
@@ -180,7 +210,7 @@ void deadworks::ResolveHeroPrecacheFns() {
     g_pHeroPrecacheGlobal = reinterpret_cast<void *>(ResolveLea(addr + kBGSM_PrecacheGlobalLea));
     g_pHeroPrecache = reinterpret_cast<HeroPrecacheFn>(ResolveE8Call(addr + kBGSM_PrecacheCall));
     g_Log->Info("HeroPrecache: table={} precache={} global={}",
-        (void *)g_pGetHeroTable, (void *)g_pHeroPrecache, g_pHeroPrecacheGlobal);
+                (void *)g_pGetHeroTable, (void *)g_pHeroPrecache, g_pHeroPrecacheGlobal);
 }
 
 bool deadworks::IsHeroPrecacheResolved() {

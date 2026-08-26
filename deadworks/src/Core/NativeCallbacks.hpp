@@ -85,7 +85,7 @@ struct NativeCallbacks {
     void(__cdecl *FreeGameEvent)(void *event);
     void(__cdecl *ResetHero)(void *pawn, uint8_t bReset);
     void *(__cdecl *GetHeroData)(const char *heroName);
-    void(__cdecl *ChangeTeam)(void *controller, int32_t teamNum);
+    void(__cdecl *ChangeTeam)(void *controller, int32_t teamNum, uint8_t bKeepHero);
     void(__cdecl *SelectHero)(void *controller, const char *heroName);
     int32_t(__cdecl *GetUtlVectorSize)(void *vec);
     void *(__cdecl *GetUtlVectorData)(void *vec);

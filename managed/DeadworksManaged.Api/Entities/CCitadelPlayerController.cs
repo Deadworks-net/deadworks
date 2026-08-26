@@ -14,9 +14,13 @@ public sealed unsafe class CCitadelPlayerController : CBasePlayerController {
 		return ptr != null ? new CCitadelPlayerPawn((nint)ptr) : null;
 	}
 
-	/// <summary>Moves this player to the specified team.</summary>
-	public void ChangeTeam(int teamNum) {
-		NativeInterop.ChangeTeam((void*)Handle, teamNum);
+	/// <summary>
+	/// Moves this player to the specified team, keeping the pawn's hero, abilities and items.
+	/// Pass <paramref name="keepHero"/> false for the server's own behaviour, which destroys
+	/// all three on a real team change and leaves the pawn alive but inert.
+	/// </summary>
+	public void ChangeTeam(int teamNum, bool keepHero = true) {
+		NativeInterop.ChangeTeam((void*)Handle, teamNum, keepHero ? (byte)1 : (byte)0);
 	}
 
 	/// <summary>

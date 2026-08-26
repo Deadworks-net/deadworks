@@ -64,6 +64,10 @@
 			"library": "server.dll",
 			"windows": "48 8B C4 55 53 48 8D 68 ?? 48 81 EC ?? ?? ?? ?? 48 89 78 ?? 4C 89 60"
 		},
+		"CCitadelPlayerController::ChangeTeamKeepHero": {
+			"library": "server.dll",
+			"windows": "40 53 48 83 EC ?? ?? ?? ?? 48 8B D9 C6 81 ?? ?? ?? ?? ?? FF 90 ?? ?? ?? ?? C6 83"
+		},
 		"CModifierProperty::AddModifier": {
 			"library": "server.dll",
 			"windows": "44 89 44 24 ?? 48 89 54 24 ?? 53 55 56 57 41 55"
