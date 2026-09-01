@@ -4651,7 +4651,7 @@ class CSVCMsg_VoiceInit :
   void _internal_set_quality(int32_t value);
   public:
 
-  // optional int32 version = 3 [default = 0];
+  // optional int32 version = 3;
   bool has_version() const;
   private:
   bool _internal_has_version() const;
@@ -19284,7 +19284,7 @@ inline void CSVCMsg_VoiceInit::set_allocated_codec(std::string* codec) {
   // @@protoc_insertion_point(field_set_allocated:CSVCMsg_VoiceInit.codec)
 }
 
-// optional int32 version = 3 [default = 0];
+// optional int32 version = 3;
 inline bool CSVCMsg_VoiceInit::_internal_has_version() const {
   bool value = (_impl_._has_bits_[0] & 0x00000004u) != 0;
   return value;
