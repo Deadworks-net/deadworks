@@ -24,14 +24,25 @@
   font-style: normal;
 }
 
+html {
+  zoom: 1;
+  -webkit-text-size-adjust: 100%;
+}
+
 /* Theme variables */
-:root {
+:root,
+:root[data-theme="dark"] {
+  color-scheme: dark;
   --bg: #000000;
+  --bg-gradient: linear-gradient(135deg, #141414 0%, #000000 100%);
   --bg-panel: #0b0c10;
   --bg-card: #0f1016;
   --accent: #69E899;
+  --accent-text: #000000;
   --accent-dim: rgba(105, 232, 153, 0.15);
   --accent-hover: #7cf0a8;
+  --connect-bg: linear-gradient(90deg, #8cf5b4 0%, #4cbc6e 100%);
+  --connect-hover: linear-gradient(90deg, #a5f8c8 0%, #5ed484 100%);
   --text: #ffffff;
   --text-secondary: #dedede;
   --text-muted: #a0a0a6;
@@ -49,9 +60,61 @@
   --ping-ok: #f0c040;
   --ping-bad: #e05050;
   --scrollbar-hover: #3a3c45;
+  --shadow-md: 0 4px 16px rgba(0, 0, 0, 0.3);
+  --shadow-md-up: 0 -4px 16px rgba(0, 0, 0, 0.3);
+  --shadow-lg: 0 8px 32px rgba(0, 0, 0, 0.5);
   --sidebar-width: 180px;
   --titlebar-height: 30px;
   --font-family: 'Radiance', 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+}
+
+:root[data-theme="light"] {
+  color-scheme: light;
+  --bg: #f5f6f8;
+  --bg-gradient: linear-gradient(135deg, #ffffff 0%, #f0f2f5 100%);
+  --bg-panel: #ffffff;
+  --bg-card: #ffffff;
+  
+  --accent: #22a059; 
+  --accent-text: #ffffff;
+  --accent-dim: rgba(34, 160, 89, 0.15);
+  --accent-hover: #1b8248;
+  
+  --connect-bg: var(--accent);
+  --connect-hover: var(--accent-hover);
+  
+  --text: #111827;
+  --text-secondary: #4b5563;
+  --text-muted: #6b7280;
+  --border: #e5e7eb;
+  
+  --hover: rgba(0, 0, 0, 0.05);
+  --active: rgba(0, 0, 0, 0.10);
+  --hover-strong: rgba(0, 0, 0, 0.08);
+  --separator: rgba(0, 0, 0, 0.06);
+  
+  --overlay: rgba(0, 0, 0, 0.4); 
+  
+  --close-hover: #e81123;
+  --disabled-bg: #e5e7eb;
+  --disabled-text: #9ca3af;
+  --dot-offline: #9ca3af;
+  
+  --ping-good: var(--accent);
+  --ping-ok: #d97706; 
+  --ping-bad: #dc2626; 
+  
+  --scrollbar-hover: #d1d5db;
+  
+  --shadow-md: 0 4px 16px rgba(0, 0, 0, 0.08);
+  --shadow-md-up: 0 -4px 16px rgba(0, 0, 0, 0.08);
+  --shadow-lg: 0 8px 32px rgba(0, 0, 0, 0.12);
+}
+
+body {
+  background-color: var(--bg);
+  color: var(--text);
+  transition: background-color 0.3s ease, color 0.3s ease;
 }
 
 /* Reset & base */
@@ -69,7 +132,7 @@ html, body, #root {
   font-size: 14px;
   line-height: 1.5;
   color: var(--text);
-  background: linear-gradient(135deg, #141414 0%, #000000 100%);
+  background: var(--bg-gradient);
   -webkit-font-smoothing: antialiased;
   user-select: none;
 }

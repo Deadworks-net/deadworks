@@ -2,7 +2,7 @@
   display: flex;
   flex-direction: column;
   height: 100%;
-  background: linear-gradient(135deg, #141414 0%, #000000 100%);
+  background: var(--bg-gradient);
 }
 
 .titlebar {
@@ -30,7 +30,7 @@
 }
 
 .closeBtn:hover {
-  background: #e81123;
+  background: var(--close-hover);
   color: #fff;
 }
 
@@ -187,8 +187,8 @@
   font-size: 0.8rem;
   font-weight: 800;
   letter-spacing: 1.5px;
-  color: #000;
-  background: linear-gradient(90deg, #8cf5b4 0%, #4cbc6e 100%);
+  color: var(--accent-text);
+  background: var(--connect-bg);
   border: none;
   border-radius: 2px;
   cursor: pointer;
@@ -197,15 +197,15 @@
 }
 
 .connectBtn:hover {
-  background: linear-gradient(90deg, #a5f8c8 0%, #5ed484 100%);
+  background: var(--connect-hover);
 }
 
 .connectBtn:disabled {
-  background: #2a2c35;
-  color: var(--text-muted);
+  background: var(--disabled-bg);
+  color: var(--disabled-text);
   cursor: default;
 }
 
 .connectBtn:disabled:hover {
-  background: #2a2c35;
+  background: var(--disabled-bg);
 }
