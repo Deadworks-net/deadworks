@@ -13,5 +13,5 @@ public static class Deadworks {
 	/// Bump this on release; nothing else needs to change — the client shows
 	/// whatever the server it is currently connected to reports.
 	/// </summary>
-	public const string Version = "v0.4.15";
+	public const string Version = "v0.4.16";
 }
