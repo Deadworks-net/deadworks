@@ -1,15 +1,11 @@
 *.vcxproj.user
 .vs/
 .claude/
-.cursor/
-.vscode/
 x64/
 ~AutoRecover.*
 local.props
 managed/**/bin/
 managed/**/obj/
-examples/**/bin/
-examples/**/obj/
 cvarlist.md
 dlw/
 deps/
