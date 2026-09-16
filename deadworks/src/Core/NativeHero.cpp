@@ -9,6 +9,7 @@
 #include "../SDK/CCitadelPlayerController.hpp"
 #include "../SDK/CEntitySystem.hpp"
 #include "../SDK/Core.hpp"
+#include "../SDK/Schema/Schema.hpp"
 #include "../SDK/Util.hpp"
 
 using namespace deadworks;
@@ -88,9 +89,34 @@ static void __cdecl NativeEmitSound(void *entity, const char *soundName, int32_t
     g_pEmitSoundParams(entity, soundName, pitch, volume, delay);
 }
 
+// CCitadelPlayerPawn::ResetHero tail-calls InitializeHeroOnPawn, which resolves the pawn's
+// controller from m_hController and hands it to two controller-side helpers without ever
+// null-checking it - on server.dll 6683 the first of those reads [controller+0x984]. A pawn
+// whose back-reference to its controller is stale (mid hero swap, team change or teardown)
+// therefore takes the whole server down with an access violation, so refuse the call instead.
+// GetHeroPawn() walking controller -> pawn does not imply the pawn points back.
+static bool PawnHasLiveController(void *pawn) {
+    static const int kPawn_hController = schema::GetOffset(
+                                             "CBasePlayerPawn", hash_32_fnv1a_const("CBasePlayerPawn"),
+                                             "m_hController", hash_32_fnv1a_const("m_hController"))
+                                             .Offset;
+    // Schema lookup failed - leave the call alone rather than silently turning it into a no-op.
+    if (kPawn_hController <= 0)
+        return true;
+
+    CEntityHandle handle(*reinterpret_cast<const uint32_t *>(
+        reinterpret_cast<uintptr_t>(pawn) + kPawn_hController));
+    return handle.IsValid() && handle.Get() != nullptr;
+}
+
 static void __cdecl NativeResetHero(void *pawn, uint8_t bReset) {
     if (!pawn || !g_pPawnResetHero)
         return;
+    if (!PawnHasLiveController(pawn)) {
+        g_Log->Warning("ResetHero skipped: pawn {:p} has no live controller (m_hController is stale)",
+                       pawn);
+        return;
+    }
     g_pPawnResetHero(pawn, bReset != 0);
 }
 
