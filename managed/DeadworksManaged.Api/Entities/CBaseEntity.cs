@@ -396,7 +396,17 @@ public unsafe class CBaseEntity : NativeEntity, IEquatable<CBaseEntity> {
 		TakeDamage(info);
 	}
 
-	/// <summary>Applies damage to this entity using an existing <see cref="CTakeDamageInfo"/> struct.</summary>
+	/// <summary>
+	/// Applies damage to this entity through (<c>CBaseEntity::ApplyDamage</c>).
+	/// Unlike <see cref="TakeDamage"/>, this runs the full pre-TakeDamageOld pipeline
+	/// before delegating to <c>TakeDamageOld</c>. The <see cref="IDeadworksPlugin.OnTakeDamage"/> is fired.</summary>
+	public void ApplyDamage(CTakeDamageInfo info) {
+		NativeInterop.ApplyDamage((void*)Handle, (void*)info.Handle);
+	}
+
+	/// <summary>
+	/// Applies damage to this entity through <c>CBaseEntity::TakeDamageOld</c> directly.
+	/// The <see cref="IDeadworksPlugin.OnTakeDamage"/> is not fired.</summary>
 	public void TakeDamage(CTakeDamageInfo info) {
 		NativeInterop.TakeDamage((void*)Handle, (void*)info.Handle);
 	}

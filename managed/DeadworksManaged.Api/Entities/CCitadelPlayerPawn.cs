@@ -89,6 +89,16 @@ public sealed unsafe class CCitadelPlayerPawn : CBasePlayerPawn {
 	}
 
 	/// <summary>
+	/// Respawns this pawn — the same routine the cheat-gated <c>respawn</c> client command runs.
+	/// Clears the ground entity, optionally releases all forced input buttons, then re-spawns
+	/// via the engine's pawn spawn path.
+	/// </summary>
+	public void Respawn(bool releaseButtons = true) {
+		if (NativeInterop.Respawn != null)
+			NativeInterop.Respawn((void*)Handle, releaseButtons ? (byte)1 : (byte)0);
+	}
+
+	/// <summary>
 	/// Ensures this pawn is on <paramref name="hero"/> with a fresh ability loadout.
 	/// Swaps via <see cref="CCitadelPlayerController.SelectHero"/> if currently on a different hero
 	/// (queues the async GC swap), or calls <see cref="ResetHero"/> if already on that hero

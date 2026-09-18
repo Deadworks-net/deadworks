@@ -84,6 +84,7 @@ internal static unsafe class NativeInterop
 	public static delegate* unmanaged[Cdecl]<void*, void*, void*, float, int, void*> CreateDamageInfo => (delegate* unmanaged[Cdecl]<void*, void*, void*, float, int, void*>)_cb.CreateDamageInfo;
 	public static delegate* unmanaged[Cdecl]<void*, void> DestroyDamageInfo => (delegate* unmanaged[Cdecl]<void*, void>)_cb.DestroyDamageInfo;
 	public static delegate* unmanaged[Cdecl]<void*, void*, void> TakeDamage => (delegate* unmanaged[Cdecl]<void*, void*, void>)_cb.TakeDamage;
+	public static delegate* unmanaged[Cdecl]<void*, void*, void> ApplyDamage => (delegate* unmanaged[Cdecl]<void*, void*, void>)_cb.ApplyDamage;
 	public static delegate* unmanaged[Cdecl]<byte*, void> PrecacheHero => (delegate* unmanaged[Cdecl]<byte*, void>)_cb.PrecacheHero;
 	public static delegate* unmanaged[Cdecl]<byte*, byte*, ulong, void> RegisterConCommand => (delegate* unmanaged[Cdecl]<byte*, byte*, ulong, void>)_cb.RegisterConCommand;
 	public static delegate* unmanaged[Cdecl]<byte*, void> UnregisterConCommand => (delegate* unmanaged[Cdecl]<byte*, void>)_cb.UnregisterConCommand;
@@ -139,4 +140,7 @@ internal static unsafe class NativeInterop
 	// Game state
 	public static delegate* unmanaged[Cdecl]<void*, int, void> ChangeGameState => (delegate* unmanaged[Cdecl]<void*, int, void>)_cb.ChangeGameState;
 	public static delegate* unmanaged[Cdecl]<uint, uint, void> SetWaitingForPlayersRoster => (delegate* unmanaged[Cdecl]<uint, uint, void>)_cb.SetWaitingForPlayersRoster;
+
+	// Pawn respawn
+	public static delegate* unmanaged[Cdecl]<void*, byte, void> Respawn => (delegate* unmanaged[Cdecl]<void*, byte, void>)_cb.Respawn;
 }

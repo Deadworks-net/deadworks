@@ -36,6 +36,10 @@
 			"library": "server.dll",
 			"windows": "40 55 41 54 41 55 41 56 41 57 48 81 EC ?? ?? ?? ?? 48 8D 6C 24 ?? 48 89 9D ?? ?? ?? ?? 45 33 ED"
 		},
+		"CBaseEntity::ApplyDamage": {
+			"library": "server.dll",
+			"windows": "48 89 5C 24 08 48 89 74 24 10 57 48 83 EC 40 48 8B 05 ?? ?? ?? ?? 49 8B F0 48 8B DA 48 8B F9 83 78 58 02"
+		},
 		"g_GameEventManager": {
 			"library": "server.dll",
 			"windows": "FF 15 ?? ?? ?? ?? 48 8B 0D ?? ?? ?? ?? E8 ?? ?? ?? ?? E8"
@@ -127,6 +131,10 @@
 		"CCitadelPlayerPawn::ResetHero": {
 			"library": "server.dll",
 			"windows": "48 89 74 24 ?? 57 48 83 EC 20 0F B6 81 ?? ?? ?? ?? 0F B6 F2"
+		},
+		"CCitadelPlayerPawn::Respawn": {
+			"library": "server.dll",
+			"windows": "48 89 5C 24 ?? 57 48 83 EC 20 48 8B D9 0F B6 FA 48 8B 89 A8 0B 00 00"
 		},
 		"CCitadelPlayerPawn::InitializeHeroOnPawn": {
 			"library": "server.dll",

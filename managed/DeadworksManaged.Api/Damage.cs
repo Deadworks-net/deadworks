@@ -80,4 +80,7 @@ public sealed unsafe class CTakeDamageInfo : IDisposable {
 
 	private static readonly SchemaAccessor<ulong> _damageFlags = new("CTakeDamageInfo"u8, "m_nDamageFlags"u8);
 	public TakeDamageFlags DamageFlags { get => (TakeDamageFlags)_damageFlags.Get(Handle); set => _damageFlags.Set(Handle, (ulong)value); }
+
+	private static readonly SchemaAccessor<int> _eCitadelDamageType = new("CTakeDamageInfo"u8, "m_eCitadelDamageType"u8);
+	public ECitadelDamageType CitadelDamageType { get => (ECitadelDamageType)_eCitadelDamageType.Get(Handle); set => _eCitadelDamageType.Set(Handle, (int)value); }
 }
