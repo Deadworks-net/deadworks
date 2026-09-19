@@ -3,6 +3,7 @@ mod bootstrap;
 mod connect;
 mod deep_link;
 mod gameinfo;
+mod local_api;
 mod ping;
 mod telemetry;
 
@@ -106,6 +107,11 @@ pub fn run() {
             // The load-bearing update path: at launcher start the game is
             // usually not running, so a swap staged last session lands here.
             bootstrap::spawn_poller(app.handle().clone());
+
+            // Loopback bridge for the in-game server browser. Panorama can only
+            // load images, so this answers with PNGs whose dimensions encode the
+            // reply. Runs on its own thread; a bind failure is non-fatal.
+            local_api::start(app.handle().clone());
 
             let app_handle = app.handle().clone();
             tauri::async_runtime::spawn(async move {

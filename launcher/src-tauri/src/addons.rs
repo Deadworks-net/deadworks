@@ -1,6 +1,8 @@
 use std::collections::HashMap;
 use std::io::Read as _;
 use std::path::{Path, PathBuf};
+use std::sync::atomic::{AtomicBool, Ordering};
+use std::sync::Arc;
 
 use futures_util::StreamExt;
 use serde::{Deserialize, Serialize};
@@ -44,6 +46,59 @@ struct ManifestItem {
 #[derive(Debug, Deserialize)]
 struct ContentManifest {
     items: Vec<ManifestItem>,
+}
+
+/// `/api/servers/lookup?address=` returns a whole server record with the content
+/// manifest as one field. This is how a caller holding only an `ip:port` — the
+/// in-game browser, which never sees server ids — resolves what to download.
+#[derive(Debug, Deserialize)]
+struct LookupResponse {
+    #[serde(default)]
+    content: Vec<ManifestItem>,
+}
+
+/// Returned when a caller's cancel flag is raised. A plain sentinel string so
+/// the `Result<_, String>` signatures the whole module (and the launcher UI)
+/// already use stay exactly as they are.
+pub(crate) const CANCELLED_MSG: &str = "CANCELLED";
+
+fn cancelled(flag: &Option<Arc<AtomicBool>>) -> bool {
+    flag.as_ref().is_some_and(|f| f.load(Ordering::Relaxed))
+}
+
+/// Classify a failure into the compact code the in-game image channel can
+/// carry. Matching on message text is not pretty, but the alternative would be
+/// rewriting the error strings the launcher UI already shows — including the
+/// `FILE_IN_USE:` sentinel the connect dialog greps for.
+pub(crate) fn error_code(msg: &str) -> u8 {
+    if msg.starts_with("FILE_IN_USE:") {
+        6
+    } else if msg.contains("gameinfo.gi") || msg.contains("bootstrap") {
+        7
+    } else if msg.contains("No online server") || msg.contains("HTTP 404") {
+        1
+    } else if msg.contains("not a valid VPK")
+        || msg.contains("decompression failed")
+        || msg.contains("exceeds maximum size")
+    {
+        4
+    } else if msg.contains("Failed to create")
+        || msg.contains("Write error")
+        || msg.contains("Failed to install")
+        || msg.contains("Failed to write")
+        || msg.contains("filename")
+    {
+        3
+    } else if msg.contains("request failed")
+        || msg.contains("Download error")
+        || msg.contains("Download failed")
+        || msg.contains("API returned")
+        || msg.contains("Failed to parse manifest")
+    {
+        2
+    } else {
+        5
+    }
 }
 
 #[derive(Debug, Default, Serialize, Deserialize, Clone)]
@@ -180,6 +235,26 @@ async fn fetch_manifest(api_url: &str, server_id: &str) -> Result<ContentManifes
         .map_err(|e| format!("Failed to parse manifest: {}", e))
 }
 
+/// Resolve a manifest from a bare `ip:port`, which is all the in-game browser
+/// knows about a server.
+async fn lookup_manifest(api_url: &str, addr: &str) -> Result<ContentManifest, String> {
+    let url = format!("{}/api/servers/lookup?address={}", api_url, addr);
+    let resp = reqwest::get(&url)
+        .await
+        .map_err(|e| format!("API request failed: {}", e))?;
+    if resp.status().as_u16() == 404 {
+        return Err("No online server found at that address (HTTP 404)".into());
+    }
+    if !resp.status().is_success() {
+        return Err(format!("API returned HTTP {}", resp.status()));
+    }
+    let detail = resp
+        .json::<LookupResponse>()
+        .await
+        .map_err(|e| format!("Failed to parse manifest: {}", e))?;
+    Ok(ContentManifest { items: detail.content })
+}
+
 /// Download `.vpk.bz2` from `url` into `dest_vpk` as a fully decompressed `.vpk`.
 /// Enforces `MAX_VPK_BYTES` during decompression so a malicious manifest cannot
 /// mount a bz2 bomb. Uses a temp `.part` file beside the destination, then
@@ -187,7 +262,11 @@ async fn fetch_manifest(api_url: &str, server_id: &str) -> Result<ContentManifes
 ///
 /// `channel` is the Tauri event name progress is emitted on, and `emitter` is
 /// either a `Window` (server content, driven by a visible connect dialog) or an
-/// `AppHandle` (the bootstrap poller, which runs with no window in the tray).
+/// `AppHandle` (the bootstrap poller and the in-game bridge, which run with no
+/// window in the tray).
+///
+/// `cancel`, when supplied, is polled per chunk so a multi-gigabyte download can
+/// actually be abandoned rather than merely hidden.
 #[allow(clippy::too_many_arguments)]
 pub(crate) async fn download_and_decompress<E>(
     url: &str,
@@ -198,6 +277,7 @@ pub(crate) async fn download_and_decompress<E>(
     expected_uncompressed_hint: u64,
     channel: &str,
     window: &E,
+    cancel: Option<Arc<AtomicBool>>,
 ) -> Result<(), String>
 where
     E: Emitter<tauri::Wry> + Clone + Send + Sync + 'static,
@@ -225,6 +305,11 @@ where
         let mut stream = response.bytes_stream();
         let mut downloaded: u64 = 0;
         while let Some(chunk) = stream.next().await {
+            if cancelled(&cancel) {
+                drop(file);
+                let _ = std::fs::remove_file(&bz2_tmp);
+                return Err(CANCELLED_MSG.into());
+            }
             let chunk = chunk.map_err(|e| format!("Download error for {}: {}", item_name, e))?;
             downloaded += chunk.len() as u64;
             file.write_all(&chunk)
@@ -252,6 +337,7 @@ where
     let name = item_name.to_string();
     let win = window.clone();
     let chan = channel.to_string();
+    let cancel_bg = cancel.clone();
 
     tokio::task::spawn_blocking(move || -> Result<(), String> {
         let input = std::fs::File::open(&bz2_tmp_clone)
@@ -269,6 +355,9 @@ where
                 .map_err(|e| format!("bz2 decompression failed for {}: {}", name, e))?;
             if n == 0 {
                 break;
+            }
+            if cancelled(&cancel_bg) {
+                return Err(CANCELLED_MSG.into());
             }
             written += n as u64;
             if written > MAX_VPK_BYTES {
@@ -295,7 +384,14 @@ where
         Ok(())
     })
     .await
-    .map_err(|e| format!("Decompress task failed: {}", e))??;
+    .map_err(|e| format!("Decompress task failed: {}", e))
+    .and_then(|r| r)
+    .inspect_err(|_| {
+        // A cancelled or failed decompress must not leave half a VPK behind for
+        // the next attempt to trip over.
+        let _ = std::fs::remove_file(&bz2_tmp);
+        let _ = std::fs::remove_file(&vpk_tmp);
+    })?;
 
     let _ = std::fs::remove_file(&bz2_tmp);
 
@@ -378,16 +474,71 @@ pub async fn prepare_and_connect(
         return crate::connect::connect_to_server_inner(&addr);
     }
 
+    install_items(&manifest.items, &game_dir, "download-progress", &window, None, None).await?;
+
+    let _ = window.emit(
+        "download-progress",
+        serde_json::json!({ "name": "", "status": "connecting", "bytes_downloaded": 0, "total_bytes": 0, "item_index": 0, "total_items": 0 }),
+    );
+
+    crate::connect::connect_to_server_inner(&addr)
+}
+
+/// Download and install everything in `items` that is missing or out of date.
+///
+/// Shared by the launcher UI and the in-game bridge; the two differ only in
+/// where progress is emitted and in what happens afterwards (the bridge does
+/// not connect — the running game does that itself).
+///
+/// `plan_out`, when supplied, is handed each item's download size (0 for an item
+/// already installed at the right version) before the first byte moves. That
+/// lets a caller weight a single progress bar by bytes instead of item count,
+/// which matters because content items differ in size by orders of magnitude.
+async fn install_items<E>(
+    items: &[ManifestItem],
+    game_dir: &Path,
+    channel: &str,
+    window: &E,
+    cancel: Option<Arc<AtomicBool>>,
+    // Send + Sync because this future is spawned onto the async runtime and the
+    // callback is held across awaits.
+    plan_out: Option<&(dyn Fn(&[u64]) + Send + Sync)>,
+) -> Result<(), String>
+where
+    E: Emitter<tauri::Wry> + Clone + Send + Sync + 'static,
+{
     let addons_dir = game_dir.join("citadel").join("deadworks_addons").join("vpks");
     let maps_dir = game_dir.join("citadel").join("maps");
     ensure_dir(&addons_dir)?;
     ensure_dir(&maps_dir)?;
 
-    let mut state = load_versions(&game_dir);
-    let total_items = manifest.items.len();
+    let mut state = load_versions(game_dir);
+    let total_items = items.len();
 
-    for (idx, item) in manifest.items.iter().enumerate() {
-        let target_dir = target_dir_for(&item.kind, &game_dir)?;
+    // Decide up front what actually needs fetching, so a caller can size its
+    // progress bar before anything is downloaded.
+    let mut sizes: Vec<u64> = Vec::with_capacity(total_items);
+    for item in items {
+        let dest_vpk = target_dir_for(&item.kind, game_dir)?.join(format!("{}.vpk", item.filename));
+        let already_current = dest_vpk.exists()
+            && state
+                .managed
+                .get(&item.filename)
+                .map(|e| e.version == item.version && e.kind == item.kind)
+                .unwrap_or(false);
+        // 0 marks "nothing to do"; anything real counts at least 1 byte so an
+        // item with an unknown compressed_size still advances the bar.
+        sizes.push(if already_current { 0 } else { item.compressed_size.max(1) });
+    }
+    if let Some(f) = plan_out {
+        f(&sizes);
+    }
+
+    for (idx, item) in items.iter().enumerate() {
+        if cancelled(&cancel) {
+            return Err(CANCELLED_MSG.into());
+        }
+        let target_dir = target_dir_for(&item.kind, game_dir)?;
         let vpk_filename = format!("{}.vpk", item.filename);
         let dest_vpk = target_dir.join(&vpk_filename);
 
@@ -397,17 +548,9 @@ pub async fn prepare_and_connect(
             item.filename.clone()
         };
 
-        // Skip if the file already exists and the local version matches.
-        let already_current = dest_vpk.exists()
-            && state
-                .managed
-                .get(&item.filename)
-                .map(|e| e.version == item.version && e.kind == item.kind)
-                .unwrap_or(false);
-
-        if already_current {
+        if sizes[idx] == 0 {
             let _ = window.emit(
-                "download-progress",
+                channel,
                 DownloadProgress {
                     name: display_name.clone(),
                     status: "ready".into(),
@@ -421,7 +564,7 @@ pub async fn prepare_and_connect(
         }
 
         let _ = window.emit(
-            "download-progress",
+            channel,
             DownloadProgress {
                 name: display_name.clone(),
                 status: "checking".into(),
@@ -439,8 +582,9 @@ pub async fn prepare_and_connect(
             idx,
             total_items,
             item.compressed_size.saturating_mul(3),
-            "download-progress",
-            &window,
+            channel,
+            window,
+            cancel.clone(),
         )
         .await?;
 
@@ -451,10 +595,10 @@ pub async fn prepare_and_connect(
                 version: item.version,
             },
         );
-        save_versions(&game_dir, &state)?;
+        save_versions(game_dir, &state)?;
 
         let _ = window.emit(
-            "download-progress",
+            channel,
             DownloadProgress {
                 name: display_name.clone(),
                 status: "ready".into(),
@@ -466,12 +610,60 @@ pub async fn prepare_and_connect(
         );
     }
 
-    let _ = window.emit(
-        "download-progress",
-        serde_json::json!({ "name": "", "status": "connecting", "bytes_downloaded": 0, "total_bytes": 0, "item_index": 0, "total_items": 0 }),
-    );
+    Ok(())
+}
 
-    crate::connect::connect_to_server_inner(&addr)
+/// In-game bridge entry point: prepare a server's content given only its
+/// `ip:port`, and stop there.
+///
+/// Deliberately does NOT connect and does NOT surface a window. The game is
+/// already running and issues its own `connect` once this reports ready — that
+/// is what makes a join from the in-game browser silent, where the launcher's
+/// own path ends in `steam://connect` and hands off to Steam.
+///
+/// The bootstrap gate is skipped on purpose: the addon making this request is,
+/// by definition, a mounted and running bootstrap, and a staged update cannot be
+/// applied to the live game anyway. Version skew is caught by the bridge's own
+/// protocol handshake instead.
+pub(crate) async fn install_for_address(
+    app: &tauri::AppHandle,
+    addr: &str,
+    channel: &str,
+    cancel: Arc<AtomicBool>,
+    plan_out: &(dyn Fn(&[u64]) + Send + Sync),
+) -> Result<(), String> {
+    let api_url = resolve_api_url(app);
+    let manifest = lookup_manifest(&api_url, addr).await?;
+
+    for item in &manifest.items {
+        validate_filename(&item.filename)?;
+    }
+
+    if manifest.items.is_empty() {
+        plan_out(&[]);
+        return Ok(());
+    }
+
+    let game_dir = find_game_dir()?;
+
+    // Addons only mount through the addonroot entry, and the running game read
+    // gameinfo.gi at startup — so if it is missing now, nothing we download can
+    // appear this session. Patch it for next time and say so plainly.
+    if manifest.items.iter().any(|i| i.kind == "addon") {
+        let live_ok = crate::gameinfo::status(&game_dir)
+            .map(|s| s.has_addonroot)
+            .unwrap_or(false);
+        if !live_ok {
+            let _ = crate::gameinfo::ensure_patched(&game_dir);
+            return Err(
+                "gameinfo.gi was missing the addonroot entry. It has been repaired, but \
+                 Deadlock must be restarted before this server's addons can load."
+                    .into(),
+            );
+        }
+    }
+
+    install_items(&manifest.items, &game_dir, channel, app, Some(cancel), Some(plan_out)).await
 }
 
 #[cfg(test)]

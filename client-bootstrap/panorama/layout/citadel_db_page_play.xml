@@ -1,0 +1,245 @@
+<root>
+	<scripts>
+		<include src="file://{resources}/scripts/dw_serverbrowser.js" />
+	</scripts>
+	<styles>
+		<include src="s2r://panorama/styles/citadel_base_styles.vcss_c" />
+		<include src="s2r://panorama/styles/citadel_db_page_shared.vcss_c" />
+		<include src="s2r://panorama/styles/citadel_db_page_play.vcss_c" />
+	</styles>
+	<CitadelPlayPage class="DashboardPage" oncancel="CitadelNavigateBack();" dashboardclass="isShowingPlayPage">
+		<CitadelScenePanel id="HeroScenePanelBacker" map="ui/hero_select_backer/hero_select_backer" camera="hero_select_backer_camera" particleonly="false" />
+		<Panel id="PlayModes">
+			<Label class="PlayTitle" text="#Citadel_Main_PlayMode" />
+			<Panel id="PlayOptions" hittest="false">
+				<Panel id="PrimaryModes">
+					<Button id="Option_EditRoster" class="playoption show_in_queue option1 largeButton" onactivate="CitadelEditMatchmakingRoster()" onmouseover="CitadelMusicQueueArpeggiatorNote()">
+						<Panel class="backgroundImg" />
+						<Panel class="playImage" />
+						<Panel class="TextArea">
+							<Panel class="TitleArea">
+								<Panel class="titleBG" />
+								<Label text="#menu_edit_roster" class="playoptionLabel" />
+							</Panel>
+							<Panel class="DescArea">
+								<Panel class="titleBG" />
+								<Label text="#menu_edit_roster_desc" class="playModeDesc" />
+							</Panel>
+						</Panel>
+					</Button>
+					<Button id="Option_LeaveQueue" class="playoption show_in_queue option1 largeButton" onactivate="CitadelLeaveMatchmaking()" onmouseover="CitadelMusicQueueArpeggiatorNote()">
+						<Panel class="backgroundImg" />
+						<Panel class="playImage" />
+						<Panel class="TextArea">
+							<Panel class="TitleArea">
+								<Panel class="titleBG" />
+								<Label text="#menu_leave_queue" class="playoptionLabel" />
+							</Panel>
+							<Panel class="DescArea">
+								<Panel class="titleBG" />
+								<Label text="#menu_leave_queue_desc" class="playModeDesc" />
+							</Panel>
+						</Panel>
+					</Button>
+					<Button id="Option_StreetBrawl" class="playoption hide_in_queue option1 largeButton" onactivate="CitadelStartUnrankedStreetBrawl()" onmouseover="CitadelMusicQueueArpeggiatorNote()">
+						<Panel class="backgroundImg" />
+						<Panel class="playImage" />
+						<Panel class="TextArea">
+							<Panel class="TitleArea">
+								<Panel class="titleBG" />
+								<Label text="#Citadel_Play_StreetBrawl_Title" class="playoptionLabel" />
+							</Panel>
+							<Panel class="DescArea">
+								<Panel class="titleBG" />
+								<Label id="play_matchmaking_description" text="#Citadel_Play_StreetBrawl_Desc" class="playModeDesc" />
+								<Label html="true" text="#Citadel_PlayMenu_LowPriorityDisable" class="low_priority_label playModeDesc" />
+							</Panel>
+						</Panel>
+					</Button>
+					<Button id="Option_Matchmaking" class="playoption hide_in_queue option1 largeButton" onactivate="CitadelStartUnrankedMatch()" onmouseover="CitadelMusicQueueArpeggiatorNote()">
+						<Panel class="backgroundImg" />
+						<Panel class="playImage" />
+						<Panel class="TextArea">
+							<Panel class="TitleArea">
+								<Panel class="titleBG" />
+								<Label text="#menu_play_unranked" class="playoptionLabel" />
+							</Panel>
+							<Panel class="DescArea">
+								<Panel class="titleBG" />
+								<Label id="play_matchmaking_description" text="#menu_play_matchmaking" class="playModeDesc" />
+								<Label html="true" text="#Citadel_PrivilegedFeatures_LowPriority_Title" class="low_priority_label playModeDesc" />
+							</Panel>
+						</Panel>
+					</Button>
+					<Button id="Option_Ranked" class="playoption hide_in_queue option1 largeButton" onactivate="CitadelStartRankedMatch()" onmouseover="CitadelMusicQueueArpeggiatorNote()">
+						<Panel class="backgroundImg" />
+						<Panel class="playImage" />
+						<Panel class="RankLocked">
+							<Panel id="RankLockedPanel">
+								<Panel class="RankLockedBackground" />
+								<Panel class="RankLockedIcon" />
+								<Label class="RankLockedText" text="#menu_play_ranked_locked" />
+							</Panel>
+							<Label class="RankLockedDetails" text="#menu_play_ranked_locked_details" />
+						</Panel>
+						<Panel class="TextArea">
+							<Panel class="TitleArea">
+								<Panel class="titleBG" />
+								<Label text="#menu_play_ranked" class="playoptionLabel" />
+							</Panel>
+							<Panel class="DescArea">
+								<Panel class="titleBG" />
+								<Label id="play_matchmaking_description" text="#menu_play_ranked_matchmaking" class="playModeDesc" />
+								<Label html="true" text="#Citadel_PlayMenu_LowPriorityDisable" class="low_priority_label playModeDesc" />
+							</Panel>
+							<Panel id="RankedRestrictedReasons" />
+						</Panel>
+					</Button>
+					<Button id="Option_NewPlayerPlacementMatches" class="playoption hide_in_queue option1 largeButton" onactivate="CitadelStartNewPlayerPlacementMatch()" onmouseover="CitadelMusicQueueArpeggiatorNote()">
+						<Panel class="backgroundImg" />
+						<Panel class="playImage" />
+						<Panel class="TextArea">
+							<Panel class="TitleArea">
+								<Panel class="titleBG" />
+								<Label text="#menu_placement_matches" class="playoptionLabel" />
+							</Panel>
+							<Panel class="DescArea">
+								<Label text="#menu_play_placement_matches_desc" class="playModeDesc" />
+							</Panel>
+						</Panel>
+					</Button>
+					<Button id="Option_Tutorial2026" class="playoption largeButton tutorial_button" onactivate="CitadelStartTutorial()" onmouseover="CitadelMusicQueueArpeggiatorNote()">
+						<Panel id="UnavailableOverlay">
+							<Label class="unavailable_queue" text="#menu_play_unavailable_in_queue" />
+						</Panel>
+						<Panel class="backgroundImg" />
+						<Panel class="playImage" />
+						<Panel class="TextArea">
+							<Panel class="RecommendedTag">
+								<Label text="#Tutorial_Recommended" />
+							</Panel>
+							<Panel class="TitleArea">
+								<Panel class="titleBG" />
+								<Label text="#menu_learn" class="playoptionLabel" />
+							</Panel>
+							<Panel class="DescArea">
+								<Panel class="titleBG" />
+								<Label text="#menu_play_learn_to_play_desc" class="playModeDesc" />
+							</Panel>
+						</Panel>
+					</Button>
+					<Button id="Option_Tutorial_BotsBrawl" class="playoption largeButton tutorial_button" onactivate="CitadelStartStreetBrawlBotMatch()" onmouseover="CitadelMusicQueueArpeggiatorNote()">
+						<Panel class="backgroundImg" />
+						<Panel class="playImage" />
+						<Panel class="TextArea">
+							<Panel class="RecommendedTag">
+								<Label text="#Tutorial_Recommended" />
+							</Panel>
+							<Panel class="TitleArea">
+								<Panel class="titleBG" />
+								<Label text="#Tutorial_BrawlBots" class="playoptionLabel" />
+							</Panel>
+							<Panel class="DescArea">
+								<Panel class="titleBG" />
+								<Label text="#Tutorial_BrawlBots_Desc" class="playModeDesc" />
+							</Panel>
+						</Panel>
+					</Button>
+				</Panel>
+				<Panel id="SubModes">
+					<Panel id="SubModesContainerTop">
+						<Button id="Option_PlayersVsBots" class="playoption smallButton dim_in_queue" onactivate="CitadelShowPlayPageBots()" onmouseover="CitadelMusicQueueArpeggiatorNote()">
+							<Panel id="UnavailableOverlay">
+								<Label class="unavailable_queue" text="#menu_play_unavailable_in_queue" />
+							</Panel>
+							<Panel class="backgroundImg" />
+							<Panel class="playImage" />
+							<Panel class="TextArea">
+								<Panel class="TitleArea">
+									<Panel class="titleBG" />
+									<Label text="#menu_botmatchmaking" class="playoptionLabel" />
+								</Panel>
+								<Panel class="DescArea">
+									<Panel class="titleBG" />
+									<Label text="#menu_play_botmatchmaking_desc" class="playModeDesc" />
+								</Panel>
+							</Panel>
+						</Button>
+						<Button id="Option_HeroTesting" class="playoption smallButton" onactivate="CitadelStartHeroTesting(false)" onmouseover="CitadelMusicQueueArpeggiatorNote()">
+							<Panel class="backgroundImg" />
+							<Panel class="playImage" />
+							<Panel class="TextArea">
+								<Panel class="TitleArea">
+									<Panel class="titleBG" />
+									<Label text="#menu_sandbox" class="playoptionLabel" />
+								</Panel>
+								<Panel class="DescArea">
+									<Panel class="titleBG" />
+									<Label text="#menu_play_sandbox_desc" class="playModeDesc" />
+								</Panel>
+							</Panel>
+						</Button>
+						<Button id="Option_ExploreMap" class="playoption smallButton" onactivate="CitadelStartExploreMap()" onmouseover="CitadelMusicQueueArpeggiatorNote()">
+							<Panel class="backgroundImg" />
+							<Panel class="playImage" />
+							<Panel class="TextArea">
+								<Panel class="TitleArea">
+									<Panel class="titleBG" />
+									<Label text="#menu_explore_map" class="playoptionLabel" />
+								</Panel>
+								<Panel class="DescArea">
+									<Panel class="titleBG" />
+									<Label text="#menu_play_explore_map_desc" class="playModeDesc" />
+								</Panel>
+							</Panel>
+						</Button>
+						<Button id="Option_Lobby" class="playoption smallButton dim_in_queue" onactivate="CitadelStartCustomMatch()" onmouseover="CitadelMusicQueueArpeggiatorNote()">
+							<Panel id="UnavailableOverlay">
+								<Label class="unavailable_queue" text="#menu_play_unavailable_in_queue" />
+							</Panel>
+							<Panel id="UnavailableOverlayParty">
+								<Label class="unavailable_party" text="#menu_play_unavailable_in_party" />
+							</Panel>
+							<Panel class="backgroundImg" />
+							<Panel class="playImage" />
+							<Panel class="TextArea">
+								<Panel class="TitleArea">
+									<Panel class="titleBG" />
+									<Label text="#menu_bot_custom" class="playoptionLabel" />
+								</Panel>
+								<Panel class="DescArea">
+									<Panel class="titleBG" />
+									<Label text="#menu_play_custom_game_desc" class="playModeDesc" />
+								</Panel>
+							</Panel>
+						</Button>
+						<Button id="Option_DeadworksServers" class="playoption smallButton" onmouseover="CitadelMusicQueueArpeggiatorNote()">
+							<Panel id="DWB_CardBg" class="backgroundImg" />
+							<Panel id="DWB_CardArt" class="playImage" />
+							<Panel class="TextArea">
+								<Panel class="TitleArea">
+									<Panel class="titleBG" />
+									<Label text="Deadworks" class="playoptionLabel" />
+								</Panel>
+								<Panel class="DescArea">
+									<Panel class="titleBG" />
+									<Label text="Browse community servers" class="playModeDesc" />
+								</Panel>
+							</Panel>
+						</Button>
+					</Panel>
+					<Panel id="SubModesContainerBottom" />
+					<Panel id="SubModesContainerNewPlayer" />
+				</Panel>
+			</Panel>
+		</Panel>
+		<Panel id="LowPriorityWarning">
+			<Panel class="low_prio_title_area">
+				<Label class="low_prio_title" text="#Citadel_PrivilegedFeatures_LowPriority_Title" />
+				<Panel class="icon_info" />
+			</Panel>
+			<Label class="low_prio_games_remaining" text="#menu_play_low_priority_games:f" html="true" />
+			<Label id="play_low_priority_matchmaking_description" html="true" text="#menu_play_low_priority_matchmaking:f" />
+		</Panel>
+	</CitadelPlayPage>
+</root>

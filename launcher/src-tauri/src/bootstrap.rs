@@ -361,6 +361,7 @@ pub async fn ensure(
             manifest.compressed_size.saturating_mul(3),
             PROGRESS_EVENT,
             app,
+            None, // the bootstrap update is small and never user-cancelled
         )
         .await?;
 
