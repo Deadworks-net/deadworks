@@ -54,6 +54,9 @@ public sealed unsafe class CCitadelPlayerController : CBasePlayerController {
 		}, Recipients);
 	}
 
+	/// <summary>Server-driven control over this player's camera (lerps, holds, clears). See <see cref="PlayerCamera"/>.</summary>
+	public PlayerCamera Camera => new(this);
+
 	/// <summary>Sends a message to all connected players' consoles.</summary>
 	public static void PrintToConsoleAll(string message) {
 		foreach (var player in Players.GetAll())
