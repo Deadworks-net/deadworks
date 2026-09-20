@@ -17,6 +17,47 @@ public unsafe class CBasePlayerController : CBaseEntity {
 	public uint PlaySound(string name, float volume = 1f, float pitch = 1f)
 		=> Sounds.Sounds.Play(name, Recipients, volume, pitch);
 
+	/// <summary>
+	/// Sets a console variable on this player's client, as if they had typed it themselves. Only cvars
+	/// the client allows the server to change are honoured; the engine ignores the rest silently.
+	/// Typical uses are steering client-side rendering or HUD cvars for a custom game mode, or
+	/// restoring a value the server changed earlier.
+	/// </summary>
+	/// <param name="name">Cvar name. Must not be empty or contain a NUL character.</param>
+	/// <param name="value">Value to send; sent as an empty string when <see langword="null"/>.</param>
+	/// <returns>False if the name was invalid; true once the message has been queued.</returns>
+	public bool SetClientConVar(string name, string? value) => SetClientConVar(Recipients, name, value);
+
+	/// <summary>
+	/// Sets a console variable on every client in <paramref name="recipients"/>. See <see cref="SetClientConVar(string, string?)"/>.
+	/// </summary>
+	public static bool SetClientConVar(RecipientFilter recipients, string name, string? value) {
+		if (string.IsNullOrWhiteSpace(name)) return false;
+		name = name.Trim();
+		value ??= string.Empty;
+		if (name.Contains('\0') || value.Contains('\0')) return false;
+
+		var msg = new CNETMsg_SetConVar { Convars = new CMsg_CVars() };
+		msg.Convars.Cvars.Add(new CMsg_CVars.Types.CVar { Name = name, Value = value });
+		NetMessages.Send(msg, recipients);
+		return true;
+	}
+
+	/// <summary>
+	/// Sets several console variables on this player's client in a single message.
+	/// </summary>
+	public bool SetClientConVars(IEnumerable<KeyValuePair<string, string>> values) {
+		var msg = new CNETMsg_SetConVar { Convars = new CMsg_CVars() };
+		foreach (var (name, value) in values) {
+			if (string.IsNullOrWhiteSpace(name) || name.Contains('\0') || (value ?? "").Contains('\0'))
+				return false;
+			msg.Convars.Cvars.Add(new CMsg_CVars.Types.CVar { Name = name.Trim(), Value = value ?? string.Empty });
+		}
+		if (msg.Convars.Cvars.Count == 0) return false;
+		NetMessages.Send(msg, Recipients);
+		return true;
+	}
+
 	private static readonly SchemaAccessor<byte> _playerName = new("CBasePlayerController"u8, "m_iszPlayerName"u8);
 
 	/// <summary>The player's display name (char[128] inline buffer).</summary>
