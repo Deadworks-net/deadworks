@@ -18,7 +18,74 @@ internal static class ConCommandManager
     {
         RegisterBuiltInCommand("dw_reloadconfig", "Reload plugin configs. Usage: dw_reloadconfig [PluginName]", true, OnReloadConfig);
         RegisterBuiltInCommand("dw_plugin", "Manage plugins. Usage: dw_plugin <list|enable|disable|commands> [PluginName]", true, OnPluginCommand);
+        RegisterBuiltInCommand("dw_addons", "Manage content addons clients download. Usage: dw_addons <list|add|remove|reload> [AddonName]", true, OnAddonsCommand);
         RegisterBuiltInCommand("dw_help", "List all available commands.", false, OnHelp);
+    }
+
+    private const string AddonsUsage = "Usage: dw_addons <list|add|remove|reload> [AddonName]";
+
+    /// <summary>
+    /// <c>list</c> prints one <c>  name: source (mounted|not mounted)</c> line per active addon, a stable
+    /// shape the hosting portal parses the same way it parses <c>dw_plugin list</c>. <c>add</c> and
+    /// <c>remove</c> edit <c>content_addons</c> in deadworks.jsonc and apply it live; <c>reload</c>
+    /// re-reads the file after it was edited from outside the process.
+    /// </summary>
+    private static void OnAddonsCommand(ConCommandContext ctx)
+    {
+        var sub = ctx.Args.Length > 1 ? ctx.Args[1] : "list";
+
+        if (string.Equals(sub, "list", StringComparison.OrdinalIgnoreCase))
+        {
+            PrintAddonList();
+        }
+        else if (string.Equals(sub, "add", StringComparison.OrdinalIgnoreCase))
+        {
+            if (ctx.Args.Length < 3)
+            {
+                Console.WriteLine("Usage: dw_addons add <AddonName>");
+                return;
+            }
+            Console.WriteLine(ContentAddonManager.AddConfigured(ctx.Args[2], out _));
+        }
+        else if (string.Equals(sub, "remove", StringComparison.OrdinalIgnoreCase))
+        {
+            if (ctx.Args.Length < 3)
+            {
+                Console.WriteLine("Usage: dw_addons remove <AddonName>");
+                return;
+            }
+            Console.WriteLine(ContentAddonManager.RemoveConfigured(ctx.Args[2], out _));
+        }
+        else if (string.Equals(sub, "reload", StringComparison.OrdinalIgnoreCase))
+        {
+            if (ContentAddonManager.Reload())
+            {
+                Console.WriteLine($"[ContentAddons] Reloaded {DeadworksConfig.ConfigPath}");
+                PrintAddonList();
+            }
+            else
+            {
+                Console.WriteLine($"[ContentAddons] Reload failed: {DeadworksConfig.ConfigPath} did not parse. The previous addon list is still active.");
+            }
+        }
+        else
+        {
+            Console.WriteLine(AddonsUsage);
+        }
+    }
+
+    private static void PrintAddonList()
+    {
+        var rows = ContentAddonManager.Describe();
+        if (rows.Count == 0)
+        {
+            Console.WriteLine("[ContentAddons] No content addons registered.");
+            return;
+        }
+
+        Console.WriteLine($"[ContentAddons] Active addons ({rows.Count}):");
+        foreach (var row in rows)
+            Console.WriteLine($"  {row.Name}: {row.Source} ({(row.Mounted ? "mounted" : "not mounted")})");
     }
 
     private static void OnReloadConfig(ConCommandContext ctx)

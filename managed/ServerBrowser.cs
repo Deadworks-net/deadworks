@@ -24,7 +24,8 @@ internal static class ServerBrowser
         PropertyNameCaseInsensitive = true
     };
 
-    private static ServerBrowserConfig _config = null!;
+    // Not cached: DeadworksConfig.Reload() swaps the instance, and the heartbeat should see the new values.
+    private static ServerBrowserConfig Config => DeadworksConfig.ServerBrowser;
     private static ServerCredentials? _credentials;
     private static Timer? _heartbeatTimer;
     private static string _credentialsDir = "";
@@ -35,9 +36,8 @@ internal static class ServerBrowser
     {
         var managedDir = Path.GetDirectoryName(typeof(ServerBrowser).Assembly.Location);
         _credentialsDir = Path.GetFullPath(Path.Combine(managedDir!, "..", "configs", "ServerBrowser"));
-        _config = DeadworksConfig.ServerBrowser;
 
-        if (_config.Unlisted || Server.HasCommandLineParm("-nomaster"))
+        if (Config.Unlisted || Server.HasCommandLineParm("-nomaster"))
         {
             Console.WriteLine("[ServerBrowser] Server is unlisted - heartbeat disabled.");
             return;
@@ -125,7 +125,7 @@ internal static class ServerBrowser
     {
         try
         {
-            var url = $"{_config.ApiUrl.TrimEnd('/')}/api/servers/register";
+            var url = $"{Config.ApiUrl.TrimEnd('/')}/api/servers/register";
             var payload = new
             {
                 name = !string.IsNullOrEmpty(_serverName) ? _serverName : "Deadworks Server",
@@ -173,7 +173,7 @@ internal static class ServerBrowser
 
     private static void StartHeartbeat()
     {
-        var interval = TimeSpan.FromSeconds(Math.Max(_config.HeartbeatIntervalSeconds, 30));
+        var interval = TimeSpan.FromSeconds(Math.Max(Config.HeartbeatIntervalSeconds, 30));
         _heartbeatTimer = new Timer(_ => SendHeartbeat(), null, interval, interval);
     }
 
@@ -196,7 +196,7 @@ internal static class ServerBrowser
         try
         {
             var payload = BuildPayload();
-            var url = $"{_config.ApiUrl.TrimEnd('/')}/api/servers/{_credentials.ServerId}/heartbeat";
+            var url = $"{Config.ApiUrl.TrimEnd('/')}/api/servers/{_credentials.ServerId}/heartbeat";
 
             using var request = new HttpRequestMessage(HttpMethod.Post, url);
             request.Headers.Authorization = new System.Net.Http.Headers.AuthenticationHeaderValue("Bearer", _credentials.ServerToken);
@@ -252,7 +252,7 @@ internal static class ServerBrowser
                 .Select(n => new { name = n, type = "plugin", version = "1.0.0" })
                 .ToList<object>(),
             content_addons = ContentAddonManager.Active,
-            extra_maps = _config.ExtraMaps,
+            extra_maps = Config.ExtraMaps,
             name = ConVar.Find("hostname")?.GetString() ?? _serverName,
             version = typeof(ServerBrowser).Assembly.GetName().Version?.ToString() ?? "",
             port = _gamePort,
