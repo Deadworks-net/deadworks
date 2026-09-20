@@ -45,4 +45,37 @@ public sealed unsafe class ConVar {
 	public void SetInt(int value) => NativeInterop.SetConVarInt(_handle, value);
 	/// <summary>Sets the cvar's value as a float.</summary>
 	public void SetFloat(float value) => NativeInterop.SetConVarFloat(_handle, value);
+	/// <summary>Sets the cvar's value as a bool (1 or 0).</summary>
+	public void SetBool(bool value) => NativeInterop.SetConVarInt(_handle, value ? 1 : 0);
+
+	/// <summary>Gets the cvar's value as a bool (non-zero is true).</summary>
+	public bool GetBool() => NativeInterop.GetConVarInt(_handle) != 0;
+
+	/// <summary>
+	/// Sets the cvar's value from a string. The engine parses the string into the cvar's own type,
+	/// so this works for string cvars as well as numeric ones. Returns false if the value could not be
+	/// parsed for that cvar's type.
+	/// </summary>
+	public bool SetString(string value) {
+		Span<byte> utf8 = Utf8.Encode(value, stackalloc byte[Utf8.Size(value)]);
+		fixed (byte* ptr = utf8) {
+			return NativeInterop.SetConVarString(_handle, ptr) != 0;
+		}
+	}
+
+	/// <summary>
+	/// Sets the cvar from any boxed value, choosing <see cref="SetInt"/>, <see cref="SetFloat"/>,
+	/// <see cref="SetBool"/> or <see cref="SetString"/> by runtime type. Convenient for applying a
+	/// dictionary of startup cvars in one loop.
+	/// </summary>
+	public bool SetValue(object value) {
+		switch (value) {
+			case bool b: SetBool(b); return true;
+			case int i: SetInt(i); return true;
+			case float f: SetFloat(f); return true;
+			case double d: SetFloat((float)d); return true;
+			case string str: return SetString(str);
+			default: return SetString(Convert.ToString(value, System.Globalization.CultureInfo.InvariantCulture) ?? "");
+		}
+	}
 }

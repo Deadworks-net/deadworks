@@ -111,6 +111,7 @@ internal static unsafe class NativeInterop
 	public static delegate* unmanaged[Cdecl]<ulong, int> GetConVarInt => (delegate* unmanaged[Cdecl]<ulong, int>)_cb.GetConVarInt;
 	public static delegate* unmanaged[Cdecl]<ulong, float> GetConVarFloat => (delegate* unmanaged[Cdecl]<ulong, float>)_cb.GetConVarFloat;
 	public static delegate* unmanaged[Cdecl]<ulong, byte*> GetConVarString => (delegate* unmanaged[Cdecl]<ulong, byte*>)_cb.GetConVarString;
+	public static delegate* unmanaged[Cdecl]<ulong, byte*, byte> SetConVarString => (delegate* unmanaged[Cdecl]<ulong, byte*, byte>)_cb.SetConVarString;
 	public static delegate* unmanaged[Cdecl]<byte*, byte> HasCommandLineParm => (delegate* unmanaged[Cdecl]<byte*, byte>)_cb.HasCommandLineParm;
 	public static delegate* unmanaged[Cdecl]<void*, byte*, byte*, void> EKVSetStringToken => (delegate* unmanaged[Cdecl]<void*, byte*, byte*, void>)_cb.EKVSetStringToken;
 	public static delegate* unmanaged[Cdecl]<byte*, uint*, byte*> ResolveDesignerName => (delegate* unmanaged[Cdecl]<byte*, uint*, byte*>)_cb.ResolveDesignerName;

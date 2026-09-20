@@ -150,6 +150,8 @@ struct NativeCallbacks {
     // Game state — see Hooks/ChangeGameState.hpp and Hooks/AreAllLobbyPlayersConnected.hpp.
     void(__cdecl *ChangeGameState)(void *gameRules, int32_t newState);
     void(__cdecl *SetWaitingForPlayersRoster)(uint32_t readyCount, uint32_t totalCount);
+    // ConVar string set. Returns 1 if the engine accepted (parsed) the value.
+    uint8_t(__cdecl *SetConVarString)(uint64_t handle, const char *value);
 };
 
 void PopulateNativeCallbacks(NativeCallbacks &callbacks);

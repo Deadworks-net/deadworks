@@ -132,4 +132,5 @@ internal struct NativeCallbacks
 	public nint ImbueAbility;
 	public nint ChangeGameState;
 	public nint SetWaitingForPlayersRoster;
+	public nint SetConVarString;
 }

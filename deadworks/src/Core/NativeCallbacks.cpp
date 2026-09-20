@@ -279,6 +279,17 @@ static void __cdecl NativeSetConVarFloat(uint64_t handle, float value) {
     cvarAbs.SetAs<float>(value);
 }
 
+static uint8_t __cdecl NativeSetConVarString(uint64_t handle, const char *value) {
+    if (!handle || !value)
+        return 0;
+    ConVarRef ref(handle);
+    ConVarData *data = g_pCVar->GetConVarData(ref);
+    if (!data)
+        return 0;
+    ConVarRefAbstract cvarAbs(ref, data);
+    return cvarAbs.SetString(CUtlString(value)) ? 1 : 0;
+}
+
 static void __cdecl NativeNotifyStateChanged(void *entity, int32_t fieldOffset, int16_t chainOffset, int32_t networkStateChangedOffset) {
     if (!entity)
         return;
@@ -1069,6 +1080,7 @@ void deadworks::PopulateNativeCallbacks(NativeCallbacks &callbacks) {
     callbacks.GetConVarInt = &NativeGetConVarInt;
     callbacks.GetConVarFloat = &NativeGetConVarFloat;
     callbacks.GetConVarString = &NativeGetConVarString;
+    callbacks.SetConVarString = &NativeSetConVarString;
 
     // Entity
     callbacks.GetEntityDesignerName = &NativeGetEntityDesignerName;
