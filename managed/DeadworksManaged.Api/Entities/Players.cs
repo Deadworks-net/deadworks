@@ -14,7 +14,10 @@ public static class Players {
 	}
 
 	/// <summary>Reset all connection state. Called on map change / server startup.</summary>
-	internal static void ResetAll() => Array.Clear(_connected);
+	internal static void ResetAll() {
+		Array.Clear(_connected);
+		PlayerDataRegistry.OnReset();
+	}
 
 	/// <summary>Returns whether the given slot is marked as fully connected.</summary>
 	public static bool IsConnected(int slot) => (uint)slot < MaxSlot && _connected[slot];

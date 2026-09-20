@@ -17,6 +17,15 @@ public unsafe class CBasePlayerController : CBaseEntity {
 	public uint PlaySound(string name, float volume = 1f, float pitch = 1f)
 		=> Sounds.Sounds.Play(name, Recipients, volume, pitch);
 
+	private static readonly SchemaAccessor<bool> _isHLTV = new("CBasePlayerController"u8, "m_bIsHLTV"u8);
+
+	/// <summary>
+	/// True if this controller belongs to the SourceTV / HLTV relay rather than a real player. SourceTV
+	/// occupies a player slot and shows up in <see cref="Players.GetAll"/>, so game logic that counts,
+	/// spawns, teleports or messages players should skip it.
+	/// </summary>
+	public bool IsHLTV => _isHLTV.Get(Handle);
+
 	private static readonly SchemaAccessor<byte> _playerName = new("CBasePlayerController"u8, "m_iszPlayerName"u8);
 
 	/// <summary>The player's display name (char[128] inline buffer).</summary>

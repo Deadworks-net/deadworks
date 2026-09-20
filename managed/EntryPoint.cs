@@ -210,6 +210,7 @@ public static class EntryPoint
         var args = new ClientDisconnectedEvent { Slot = slot, Reason = reason };
         PluginLoader.DispatchClientDisconnect(args);
         Players.SetConnected(slot, false);
+        PlayerDataRegistry.OnDisconnect(slot);
         DeadworksManaged.Api.UI.UIChannel.OnPlayerDisconnect(slot);
     }
 
