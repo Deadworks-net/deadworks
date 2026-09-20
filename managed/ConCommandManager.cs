@@ -17,8 +17,13 @@ internal static class ConCommandManager
     public static void Initialize()
     {
         RegisterBuiltInCommand("dw_reloadconfig", "Reload plugin configs. Usage: dw_reloadconfig [PluginName]", true, OnReloadConfig);
-        RegisterBuiltInCommand("dw_plugin", "Manage plugins. Usage: dw_plugin <list|enable|disable|commands> [PluginName]", true, OnPluginCommand);
-        RegisterBuiltInCommand("dw_addons", "Manage content addons clients download. Usage: dw_addons <list|add|remove|reload> [AddonName]", true, OnAddonsCommand);
+        // Singular and plural are both registered so either spelling works at the console.
+        const string pluginHelp = "Manage plugins. Usage: dw_plugin <list|enable|disable|commands> [PluginName]";
+        RegisterBuiltInCommand("dw_plugin", pluginHelp, true, OnPluginCommand);
+        RegisterBuiltInCommand("dw_plugins", pluginHelp, true, OnPluginCommand);
+        const string addonsHelp = "Manage content addons clients download. Usage: dw_addons <list|add|remove|reload> [AddonName]";
+        RegisterBuiltInCommand("dw_addons", addonsHelp, true, OnAddonsCommand);
+        RegisterBuiltInCommand("dw_addon", addonsHelp, true, OnAddonsCommand);
         RegisterBuiltInCommand("dw_help", "List all available commands.", false, OnHelp);
     }
 
