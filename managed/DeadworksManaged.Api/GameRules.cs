@@ -28,6 +28,13 @@ public static unsafe class GameRules
 	private static readonly SchemaAccessor<float> _matchClockAtLastUpdate = new("CCitadelGameRules"u8, "m_flMatchClockAtLastUpdate"u8);
 	private static readonly SchemaAccessor<ulong> _matchID = new("CCitadelGameRules"u8, "m_unMatchID"u8);
 	private static readonly SchemaAccessor<byte> _serverPaused = new("CCitadelGameRules"u8, "m_bServerPaused"u8);
+	private static readonly SchemaAccessor<bool> _noDeathEnabled = new("CCitadelGameRules"u8, "m_bNoDeathEnabled"u8);
+	private static readonly SchemaAccessor<bool> _matchNotScored = new("CCitadelGameRules"u8, "m_bMatchNotScored"u8);
+	private static readonly SchemaAccessor<bool> _fastCooldownsEnabled = new("CCitadelGameRules"u8, "m_bFastCooldownsEnabled"u8);
+	private static readonly SchemaAccessor<bool> _staminaCooldownsEnabled = new("CCitadelGameRules"u8, "m_bStaminaCooldownsEnabled"u8);
+	private static readonly SchemaAccessor<bool> _unlimitedAmmoEnabled = new("CCitadelGameRules"u8, "m_bUnlimitedAmmoEnabled"u8);
+	private static readonly SchemaAccessor<bool> _infiniteResourcesEnabled = new("CCitadelGameRules"u8, "m_bInfiniteResourcesEnabled"u8);
+	private static readonly SchemaAccessor<bool> _flexSlotsForcedUnlocked = new("CCitadelGameRules"u8, "m_bFlexSlotsForcedUnlocked"u8);
 
 	// CGameRules fields
 	private static readonly SchemaAccessor<byte> _gamePaused = new("CGameRules"u8, "m_bGamePaused"u8);
@@ -57,6 +64,51 @@ public static unsafe class GameRules
 	public static float MatchClockAtLastUpdate => _gameRulesPtr != 0 ? _matchClockAtLastUpdate.Get(_gameRulesPtr) : 0f;
 	public static ulong MatchID => _gameRulesPtr != 0 ? _matchID.Get(_gameRulesPtr) : 0;
 	public static bool ServerPaused => _gameRulesPtr != 0 && _serverPaused.Get(_gameRulesPtr) != 0;
+
+	// Sandbox / practice mode toggles. These are the networked flags the game itself flips for its
+	// sandbox and hero-testing modes; setting them here applies the same behaviour to any mode.
+
+	/// <summary>Players do not die when their health reaches zero (sandbox "no death" rule).</summary>
+	public static bool NoDeathEnabled {
+		get => _gameRulesPtr != 0 && _noDeathEnabled.Get(_gameRulesPtr);
+		set { if (_gameRulesPtr != 0) _noDeathEnabled.Set(_gameRulesPtr, value); }
+	}
+
+	/// <summary>The match does not count towards any scoring or rank; also shown to clients as an unscored match.</summary>
+	public static bool MatchNotScored {
+		get => _gameRulesPtr != 0 && _matchNotScored.Get(_gameRulesPtr);
+		set { if (_gameRulesPtr != 0) _matchNotScored.Set(_gameRulesPtr, value); }
+	}
+
+	/// <summary>Ability cooldowns are drastically shortened, as in the sandbox.</summary>
+	public static bool FastCooldownsEnabled {
+		get => _gameRulesPtr != 0 && _fastCooldownsEnabled.Get(_gameRulesPtr);
+		set { if (_gameRulesPtr != 0) _fastCooldownsEnabled.Set(_gameRulesPtr, value); }
+	}
+
+	/// <summary>Stamina regenerates on the sandbox's accelerated schedule.</summary>
+	public static bool StaminaCooldownsEnabled {
+		get => _gameRulesPtr != 0 && _staminaCooldownsEnabled.Get(_gameRulesPtr);
+		set { if (_gameRulesPtr != 0) _staminaCooldownsEnabled.Set(_gameRulesPtr, value); }
+	}
+
+	/// <summary>Weapons never run out of ammo.</summary>
+	public static bool UnlimitedAmmoEnabled {
+		get => _gameRulesPtr != 0 && _unlimitedAmmoEnabled.Get(_gameRulesPtr);
+		set { if (_gameRulesPtr != 0) _unlimitedAmmoEnabled.Set(_gameRulesPtr, value); }
+	}
+
+	/// <summary>Souls and ability points are unlimited, as in the sandbox shop.</summary>
+	public static bool InfiniteResourcesEnabled {
+		get => _gameRulesPtr != 0 && _infiniteResourcesEnabled.Get(_gameRulesPtr);
+		set { if (_gameRulesPtr != 0) _infiniteResourcesEnabled.Set(_gameRulesPtr, value); }
+	}
+
+	/// <summary>All flex item slots are unlocked regardless of objective progress.</summary>
+	public static bool FlexSlotsForcedUnlocked {
+		get => _gameRulesPtr != 0 && _flexSlotsForcedUnlocked.Get(_gameRulesPtr);
+		set { if (_gameRulesPtr != 0) _flexSlotsForcedUnlocked.Set(_gameRulesPtr, value); }
+	}
 
 	/// <summary>Calls the real CCitadelGameRules::ChangeGameState, running the engine's normal transition logic.</summary>
 	public static void ChangeGameState(EGameState state)
