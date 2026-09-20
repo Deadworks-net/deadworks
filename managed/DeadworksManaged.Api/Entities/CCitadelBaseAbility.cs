@@ -26,6 +26,22 @@ public unsafe class CCitadelBaseAbility : CBaseEntity {
 	public bool ToggleState => _toggleState.Get(Handle);
 	public float CooldownEnd { get => _cooldownEnd.Get(Handle); set => _cooldownEnd.Set(Handle, value); }
 	public float CooldownStart { get => _cooldownStart.Get(Handle); set => _cooldownStart.Set(Handle, value); }
+
+	/// <summary>True while the ability is cooling down.</summary>
+	public bool IsOnCooldown => CooldownEnd > GlobalVars.CurTime;
+
+	/// <summary>
+	/// Clears this ability's cooldown so it can be cast again immediately. Works by moving the cooldown
+	/// window to end a fraction of a second from now, so the client sees a normal cooldown-finished
+	/// transition and refreshes its HUD. For an upgraded signature ability prefer
+	/// <see cref="CCitadelPlayerPawn.ResetAbilityCooldown"/>, which also handles charge-based upgrades
+	/// that do not respond to a cooldown window change alone.
+	/// </summary>
+	public void ResetCooldown() {
+		float now = GlobalVars.CurTime;
+		CooldownStart = now;
+		CooldownEnd = now + 0.1f;
+	}
 	public bool IsUnlocked => (UpgradeBits & 1) != 0;
 
 	public bool IsSignature => AbilitySlot >= EAbilitySlot.Signature1 && AbilitySlot <= EAbilitySlot.Signature4;

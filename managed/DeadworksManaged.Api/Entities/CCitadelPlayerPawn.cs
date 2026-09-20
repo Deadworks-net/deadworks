@@ -147,6 +147,61 @@ public sealed unsafe class CCitadelPlayerPawn : CBasePlayerPawn {
 		_heroInitContinuations.Remove(pawnHandle);
 	}
 
+	/// <summary>
+	/// Resets the cooldown of the ability in <paramref name="slot"/> so it can be cast again immediately.
+	/// Returns false if the slot is empty.
+	/// </summary>
+	/// <remarks>
+	/// An ability with no upgrades only needs its cooldown window moved (<see cref="CCitadelBaseAbility.ResetCooldown"/>).
+	/// Once upgrades are applied some abilities track charges and other per-upgrade state that a window
+	/// change does not touch, so those are removed and re-added into the same slot, which recreates the
+	/// ability in a fresh state, and the upgrade tiers are restored on the new instance.
+	/// </remarks>
+	public bool ResetAbilityCooldown(EAbilitySlot slot) {
+		var ability = AbilityComponent.GetAbilityBySlot(slot);
+		if (ability == null || !ability.IsValid) return false;
+
+		int upgradeBits = ability.UpgradeBits;
+		if (upgradeBits == 0) {
+			ability.ResetCooldown();
+			return true;
+		}
+
+		string name = ability.AbilityName;
+		if (string.IsNullOrEmpty(name)) {
+			ability.ResetCooldown();
+			return true;
+		}
+
+		RemoveAbility(ability);
+		if (AddAbility(name, (ushort)slot) == null)
+			return false;
+
+		var fresh = AbilityComponent.GetAbilityBySlot(slot);
+		if (fresh != null && fresh.IsValid)
+			fresh.UpgradeBits = upgradeBits & 0xF; // keep the unlock and tier bits, drop transient flags
+		return true;
+	}
+
+	/// <summary>
+	/// Resets the cooldown of every ability on this pawn: signature abilities through
+	/// <see cref="ResetAbilityCooldown"/>, everything else (items, innates, weapons) through
+	/// <see cref="CCitadelBaseAbility.ResetCooldown"/>.
+	/// </summary>
+	public void ResetAllAbilityCooldowns() {
+		if (!IsValid) return;
+
+		// Snapshot first: resetting a signature ability replaces the entity and mutates the list.
+		var abilities = new List<CCitadelBaseAbility>(AbilityComponent.Abilities);
+		foreach (var ability in abilities) {
+			if (!ability.IsValid) continue;
+			if (ability.IsSignature)
+				ResetAbilityCooldown(ability.AbilitySlot);
+			else
+				ability.ResetCooldown();
+		}
+	}
+
 	/// <summary>Removes an ability from this pawn by internal ability name. Returns true on success.</summary>
 	public bool RemoveAbility(string abilityName) {
 		Span<byte> utf8 = Utf8.Encode(abilityName, stackalloc byte[Utf8.Size(abilityName)]);
