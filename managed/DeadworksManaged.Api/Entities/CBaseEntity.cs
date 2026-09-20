@@ -1,3 +1,4 @@
+using System.Drawing;
 using System.Numerics;
 
 namespace DeadworksManaged.Api;
@@ -371,6 +372,54 @@ public unsafe class CBaseEntity : NativeEntity, IEquatable<CBaseEntity> {
 
 	private static readonly SchemaAccessor<float> _flFriction = new("CBaseEntity"u8, "m_flFriction"u8);
 	public float Friction { get => _flFriction.Get(Handle); set => _flFriction.Set(Handle, value); }
+
+	private static readonly SchemaAccessor<byte> _moveType = new("CBaseEntity"u8, "m_MoveType"u8);
+	private static readonly SchemaAccessor<byte> _actualMoveType = new("CBaseEntity"u8, "m_nActualMoveType"u8);
+	/// <summary>
+	/// The entity's movement mode. Setting <see cref="Api.MoveType.None"/> freezes a pawn in place without
+	/// touching its abilities or input; <see cref="Api.MoveType.NoClip"/> lets it fly through the world;
+	/// <see cref="Api.MoveType.Walk"/> restores normal movement.
+	/// </summary>
+	/// <remarks>
+	/// The engine keeps two copies of the move type: the requested one (<c>m_MoveType</c>) and the one the
+	/// movement code is currently honouring (<c>m_nActualMoveType</c>). The setter writes both so the change
+	/// takes effect on the next movement tick instead of waiting for the engine to reconcile them.
+	/// </remarks>
+	public MoveType MoveType {
+		get => (MoveType)_actualMoveType.Get(Handle);
+		set {
+			_moveType.Set(Handle, (byte)value);
+			_actualMoveType.Set(Handle, (byte)value);
+		}
+	}
+
+	private static readonly SchemaAccessor<float> _flGravityScale = new("CBaseEntity"u8, "m_flGravityScale"u8);
+	/// <summary>Multiplier applied to gravity for this entity. 1 is normal, 0 disables gravity, values above 1 make it heavier.</summary>
+	public float GravityScale { get => _flGravityScale.Get(Handle); set => _flGravityScale.Set(Handle, value); }
+
+	private static readonly SchemaAccessor<uint> _clrRender = new("CBaseModelEntity"u8, "m_clrRender"u8);
+	/// <summary>
+	/// Render tint and opacity of a model entity (<c>m_clrRender</c>). Only meaningful on entities that
+	/// derive from <c>CBaseModelEntity</c> (props, pawns, beams, world text); the alpha channel is honoured
+	/// only when the entity's render mode allows translucency.
+	/// </summary>
+	public Color RenderColor {
+		get {
+			uint v = _clrRender.Get(Handle);
+			return Color.FromArgb((byte)(v >> 24), (byte)v, (byte)(v >> 8), (byte)(v >> 16));
+		}
+		set => _clrRender.Set(Handle, (uint)(value.R | (value.G << 8) | (value.B << 16) | (value.A << 24)));
+	}
+
+	/// <summary>
+	/// The entity's absolute rotation as (pitch, yaw, roll) in degrees. Reading walks the scene node;
+	/// writing goes through <see cref="Teleport"/> so the engine updates the transform hierarchy.
+	/// For player pawns the view direction is owned by the client and is not affected by this.
+	/// </summary>
+	public Vector3 Rotation {
+		get => BodyComponent?.SceneNode?.AbsRotation ?? Vector3.Zero;
+		set => Teleport(angles: value);
+	}
 
 	private static readonly SchemaAccessor<nint> _modifierProp = new("CBaseEntity"u8, "m_pModifierProp"u8);
 	public CModifierProperty? ModifierProp {
