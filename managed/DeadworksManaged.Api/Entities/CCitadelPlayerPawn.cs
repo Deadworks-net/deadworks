@@ -68,6 +68,56 @@ public sealed unsafe class CCitadelPlayerPawn : CBasePlayerPawn {
 	private static readonly SchemaAccessor<float> _flRespawnTime = new("CCitadelPlayerPawn"u8, "m_flRespawnTime"u8);
 	public float RespawnTime { get => _flRespawnTime.Get(Handle); set => _flRespawnTime.Set(Handle, value); }
 
+	/// <summary>Modifier that pins a pawn in place. Used by <see cref="Freeze"/>.</summary>
+	public const string FreezeModifier = "modifier_bookworm_immobilize";
+
+	/// <summary>Modifier that makes a pawn untargetable and immune to damage, as inside a hideout. Used by <see cref="Freeze"/>.</summary>
+	public const string SafeModifier = "modifier_citadel_in_hideout_zone";
+
+	/// <summary>
+	/// Pins this pawn in place, optionally for a limited time. The player keeps their camera and can
+	/// still open menus; only movement is blocked. With <paramref name="invulnerable"/> the pawn is also
+	/// made untargetable and immune to damage for the same period, which is what countdowns and
+	/// cinematic holds usually want.
+	/// </summary>
+	/// <param name="duration">Seconds to stay frozen, or <see langword="null"/> to stay frozen until <see cref="Unfreeze"/>.</param>
+	/// <param name="invulnerable">Also apply <see cref="SafeModifier"/> so the frozen player cannot be killed.</param>
+	public void Freeze(float? duration = null, bool invulnerable = true) {
+		using var kv = new KeyValues3();
+		if (duration.HasValue)
+			kv.SetFloat("duration", duration.Value);
+
+		AddModifier(FreezeModifier, kv);
+		if (invulnerable)
+			AddModifier(SafeModifier, kv);
+	}
+
+	/// <summary>Removes the modifiers applied by <see cref="Freeze"/>. Safe to call when not frozen.</summary>
+	public void Unfreeze() {
+		RemoveModifier(FreezeModifier);
+		RemoveModifier(SafeModifier);
+	}
+
+	/// <summary>True while the <see cref="Freeze"/> modifier is present.</summary>
+	public bool IsFrozen => ModifierProp?.HasModifier(FreezeModifier) ?? false;
+
+	/// <summary>
+	/// Kills this pawn. With <paramref name="instantRespawn"/> the respawn timer is cleared on the next
+	/// tick so the player comes straight back instead of waiting out the death timer. The timer has to
+	/// be cleared a tick later because the engine assigns it during death processing, after this call
+	/// returns.
+	/// </summary>
+	public void Kill(bool instantRespawn = false) {
+		Hurt(1_000_000f);
+		if (!instantRespawn) return;
+
+		var self = this;
+		TimerResolver.RunNextTick(() => {
+			if (self.IsValid)
+				self.RespawnTime = 0f;
+		});
+	}
+
 	private static readonly SchemaArrayAccessor<int> _currencies = new("CCitadelPlayerPawn"u8, "m_nCurrencies"u8);
 	public int GetCurrency(ECurrencyType type) => _currencies.Get(Handle, (int)type);
 	public void SetCurrency(ECurrencyType type, int value) => _currencies.Set(Handle, (int)type, value);
