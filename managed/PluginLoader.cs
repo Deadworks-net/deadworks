@@ -432,6 +432,8 @@ internal static partial class PluginLoader
     {
         TimerEngine.OnTick();
         UI.Tick();
+        if (simulating)
+            ZoneRegistry.Tick();
         DispatchToPlugins(p => p.OnGameFrame(simulating, firstTick, lastTick), nameof(IDeadworksPlugin.OnGameFrame));
     }
 
@@ -535,6 +537,7 @@ internal static partial class PluginLoader
         // Dispose all timer services and reset engine
         TimerRegistry.Clear();
         TimerEngine.Reset();
+        ZoneRegistry.Clear();
 
         foreach (var entry in entries)
         {
