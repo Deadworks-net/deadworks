@@ -394,6 +394,16 @@ static void __cdecl NativeExecuteServerCommand(const char *command) {
     g_pEngineServer->ServerCommand(command);
 }
 
+// Runs the normal client-connect path for a client that has no netchannel, allocating a player
+// slot and a controller. Returns the slot, or -1 when the engine had none to give - which is the
+// usual answer on a Deadlock server that was never handed a match, since an unreserved server
+// reports "0 max" and keeps no slots around.
+static int32_t __cdecl NativeCreateFakeClient(const char *name) {
+    if (!g_pEngineServer || !name || !*name)
+        return -1;
+    return g_pEngineServer->CreateFakeClient(name).Get();
+}
+
 // --- Engine log forwarding to managed code ---
 static void(__cdecl *g_ManagedLogCallback)(const char *message) = nullptr;
 
@@ -1169,6 +1179,9 @@ void deadworks::PopulateNativeCallbacks(NativeCallbacks &callbacks) {
     // Server addons
     callbacks.SetServerAddons = &NativeSetServerAddons;
     callbacks.AddFileSystemSearchPath = &NativeAddFileSystemSearchPath;
+
+    // Fake clients
+    callbacks.CreateFakeClient = &NativeCreateFakeClient;
 
     // Command line
     callbacks.HasCommandLineParm = &NativeHasCommandLineParm;

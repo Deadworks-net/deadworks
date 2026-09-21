@@ -150,6 +150,8 @@ struct NativeCallbacks {
     // Game state — see Hooks/ChangeGameState.hpp and Hooks/AreAllLobbyPlayersConnected.hpp.
     void(__cdecl *ChangeGameState)(void *gameRules, int32_t newState);
     void(__cdecl *SetWaitingForPlayersRoster)(uint32_t readyCount, uint32_t totalCount);
+    // Fake clients — see NativeCreateFakeClient. Returns the player slot, or -1.
+    int32_t(__cdecl *CreateFakeClient)(const char *name);
 };
 
 void PopulateNativeCallbacks(NativeCallbacks &callbacks);
