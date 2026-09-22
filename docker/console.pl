@@ -46,7 +46,8 @@ if (@ARGV && $ARGV[0] eq '--ping') {
 }
 
 my $addr = listen_addr() or die "console: the server is not up yet\n";
-open my $pw_fh, '<', '/data/rcon_password' or die "console: no /data/rcon_password\n";
+my $pw_file = $ENV{RCON_PASSWORD_FILE} || '/data/rcon_password';
+open my $pw_fh, '<', $pw_file or die "console: no $pw_file\n";
 chomp(my $password = <$pw_fh> // '');
 
 my $sock = IO::Socket::INET->new(PeerAddr => $addr, PeerPort => $port, Proto => 'tcp', Timeout => 5)
