@@ -98,6 +98,7 @@ struct NativeCallbacks {
     void *(__cdecl *CreateDamageInfo)(void *inflictor, void *attacker, void *ability, float damage, int32_t damageType);
     void(__cdecl *DestroyDamageInfo)(void *info);
     void(__cdecl *TakeDamage)(void *victim, void *info);
+    void(__cdecl *ApplyDamage)(void *victim, void *info);
     void(__cdecl *PrecacheHero)(const char *heroName);
     void(__cdecl *RegisterConCommand)(const char *name, const char *description, uint64_t flags);
     void(__cdecl *UnregisterConCommand)(const char *name);
@@ -150,6 +151,8 @@ struct NativeCallbacks {
     // Game state — see Hooks/ChangeGameState.hpp and Hooks/AreAllLobbyPlayersConnected.hpp.
     void(__cdecl *ChangeGameState)(void *gameRules, int32_t newState);
     void(__cdecl *SetWaitingForPlayersRoster)(uint32_t readyCount, uint32_t totalCount);
+    // Pawn force-respawn — see NativeForceRespawn in NativeHero.cpp.
+    void(__cdecl *ForceRespawn)(void *pawn, uint8_t bReleaseButtons);
 };
 
 void PopulateNativeCallbacks(NativeCallbacks &callbacks);
