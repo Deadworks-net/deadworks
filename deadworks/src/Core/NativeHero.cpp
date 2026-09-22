@@ -18,7 +18,7 @@ using namespace deadworks::offsets;
 
 using EmitSoundParamsFn = void(__fastcall *)(void *entity, const char *soundName, int pitch, float volume, float delay);
 using PawnResetHeroFn = __int64(__fastcall *)(void *pawn, bool bReset);
-using PawnRespawnFn = void(__fastcall *)(void *pawn, uint8_t bReleaseButtons);
+using PawnForceRespawnFn = void(__fastcall *)(void *pawn, uint8_t bReleaseButtons);
 using AddResourceFn = void (*)(const char *path, void *manifest);
 using GetHeroTableFn = void *(__fastcall *)();
 using HeroPrecacheFn = void(__fastcall *)(void *globalSet, const char *heroName, void *resourceCtx);
@@ -71,7 +71,7 @@ static uintptr_t g_ResetHeroOnTeamChangeOffset = 0;
 
 static EmitSoundParamsFn g_pEmitSoundParams = nullptr;
 static PawnResetHeroFn g_pPawnResetHero = nullptr;
-static PawnRespawnFn g_pPawnRespawn = nullptr;
+static PawnForceRespawnFn g_pPawnForceRespawn = nullptr;
 static AddResourceFn g_pAddResource = nullptr;
 static GetHeroTableFn g_pGetHeroTable = nullptr;
 static HeroPrecacheFn g_pHeroPrecache = nullptr;
@@ -96,13 +96,14 @@ static void __cdecl NativeResetHero(void *pawn, uint8_t bReset) {
     g_pPawnResetHero(pawn, bReset != 0);
 }
 
-// The same routine the cheat-gated 'respawn' client command runs: clears the
-// pawn's ground entity and releases all forced input buttons before the
-// engine-side re-spawn virtual.
-static void __cdecl NativeRespawn(void *pawn, uint8_t bReleaseButtons) {
-    if (!pawn || !g_pPawnRespawn)
+// CBasePlayerPawn::ForceRespawn (Source 1's CBasePlayer::ForceRespawn on the pawn) - what the
+// cheat-gated 'respawn' client command runs. Strips the pawn's items and weapons, clears its
+// ground entity, releases every held button if bReleaseButtons is set, then calls the pawn's
+// respawn virtual. The game's own death-timer respawn passes false; forced respawns pass true.
+static void __cdecl NativeForceRespawn(void *pawn, uint8_t bReleaseButtons) {
+    if (!pawn || !g_pPawnForceRespawn)
         return;
-    g_pPawnRespawn(pawn, bReleaseButtons);
+    g_pPawnForceRespawn(pawn, bReleaseButtons);
 }
 
 static void *__cdecl NativeGetHeroData(const char *heroName) {
@@ -197,9 +198,9 @@ void deadworks::ResolveHeroStatics() {
     g_pPawnResetHero = reinterpret_cast<PawnResetHeroFn>(
         MemoryDataLoader::Get().GetOffset("CCitadelPlayerPawn::ResetHero").value());
 
-    g_pPawnRespawn = reinterpret_cast<PawnRespawnFn>(
-        MemoryDataLoader::Get().GetOffset("CCitadelPlayerPawn::Respawn").value());
-    g_Log->Info("Resolved CCitadelPlayerPawn::Respawn: {:p}", reinterpret_cast<void *>(g_pPawnRespawn));
+    g_pPawnForceRespawn = reinterpret_cast<PawnForceRespawnFn>(
+        MemoryDataLoader::Get().GetOffset("CBasePlayerPawn::ForceRespawn").value());
+    g_Log->Info("Resolved CBasePlayerPawn::ForceRespawn: {:p}", reinterpret_cast<void *>(g_pPawnForceRespawn));
 
     g_pEmitSoundParams = reinterpret_cast<EmitSoundParamsFn>(
         MemoryDataLoader::Get().GetOffset("CBaseEntity::EmitSoundParams").value());
@@ -239,7 +240,7 @@ bool deadworks::IsHeroPrecacheResolved() {
 void deadworks::PopulateHeroNatives(NativeCallbacks &cb) {
     cb.EmitSound = &NativeEmitSound;
     cb.ResetHero = &NativeResetHero;
-    cb.Respawn = &NativeRespawn;
+    cb.ForceRespawn = &NativeForceRespawn;
     cb.GetHeroData = &NativeGetHeroData;
     cb.ChangeTeam = &NativeChangeTeam;
     cb.SelectHero = &NativeSelectHero;

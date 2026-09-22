@@ -151,8 +151,8 @@ struct NativeCallbacks {
     // Game state — see Hooks/ChangeGameState.hpp and Hooks/AreAllLobbyPlayersConnected.hpp.
     void(__cdecl *ChangeGameState)(void *gameRules, int32_t newState);
     void(__cdecl *SetWaitingForPlayersRoster)(uint32_t readyCount, uint32_t totalCount);
-    // Pawn respawn — see the Respawn block in NativeHero.cpp.
-    void(__cdecl *Respawn)(void *pawn, uint8_t bReleaseButtons);
+    // Pawn force-respawn — see NativeForceRespawn in NativeHero.cpp.
+    void(__cdecl *ForceRespawn)(void *pawn, uint8_t bReleaseButtons);
 };
 
 void PopulateNativeCallbacks(NativeCallbacks &callbacks);
