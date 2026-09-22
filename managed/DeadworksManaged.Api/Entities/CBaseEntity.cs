@@ -396,7 +396,34 @@ public unsafe class CBaseEntity : NativeEntity, IEquatable<CBaseEntity> {
 		TakeDamage(info);
 	}
 
-	/// <summary>Applies damage to this entity using an existing <see cref="CTakeDamageInfo"/> struct.</summary>
+	/// <summary>
+	/// Deals damage to this entity the way the game does, so the target's resistances and other damage modifiers
+	/// apply. <see cref="IDeadworksPlugin.OnTakeDamage"/> is called for it.
+	/// </summary>
+	/// <remarks>
+	/// <para>
+	/// Set <see cref="CTakeDamageInfo.CitadelDamageType"/> to the kind of damage you are dealing (for example
+	/// <see cref="ECitadelDamageType.Bullet"/> or <see cref="ECitadelDamageType.Ability"/>), since it decides which
+	/// modifiers apply. It starts out as <see cref="ECitadelDamageType.None"/>.
+	/// </para>
+	/// <para>
+	/// The final amount is written back into <paramref name="info"/>, so use a new <see cref="CTakeDamageInfo"/> for
+	/// each call. Reusing one, for example for every target of an area attack, applies the modifiers again each time.
+	/// </para>
+	/// <para>
+	/// Calling this from inside an <see cref="IDeadworksPlugin.OnTakeDamage"/> handler triggers that handler again,
+	/// so guard against loops (for example when reflecting damage back at the attacker).
+	/// </para>
+	/// </remarks>
+	public void ApplyDamage(CTakeDamageInfo info) {
+		NativeInterop.ApplyDamage((void*)Handle, (void*)info.Handle);
+	}
+
+	/// <summary>
+	/// Deals exactly the damage in <paramref name="info"/>, ignoring the target's resistances and other damage
+	/// modifiers. <see cref="IDeadworksPlugin.OnTakeDamage"/> is not called. Use <see cref="ApplyDamage"/> for
+	/// damage that should behave like the game's own.
+	/// </summary>
 	public void TakeDamage(CTakeDamageInfo info) {
 		NativeInterop.TakeDamage((void*)Handle, (void*)info.Handle);
 	}
