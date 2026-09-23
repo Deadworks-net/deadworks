@@ -164,6 +164,10 @@ struct NativeCallbacks {
     uint8_t(__cdecl *SetConVarString)(uint64_t handle, const char *value);
     // ConVar bool get, converted from the cvar's own type — see NativeGetConVarBool.
     uint8_t(__cdecl *GetConVarBool)(uint64_t handle);
+    // Ends an ability's cooldown and refills its charges, like the Refresher item.
+    void(__cdecl *ResetAbilityCooldown)(void *ability);
+    // Most charges an ability can hold, 0 if it doesn't use charges.
+    int32_t(__cdecl *GetAbilityMaxCharges)(void *ability);
 };
 
 void PopulateNativeCallbacks(NativeCallbacks &callbacks);

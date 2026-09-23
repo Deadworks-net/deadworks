@@ -165,6 +165,29 @@ public sealed unsafe class CCitadelPlayerPawn : CBasePlayerPawn {
 		_heroInitContinuations.Remove(pawnHandle);
 	}
 
+	/// <summary>
+	/// Makes the ability in <paramref name="slot"/> ready to use again straight away, like
+	/// <see cref="CCitadelBaseAbility.ResetCooldown"/>. Returns false if the slot is empty.
+	/// </summary>
+	public bool ResetAbilityCooldown(EAbilitySlot slot) {
+		var ability = AbilityComponent.GetAbilityBySlot(slot);
+		if (ability == null || !ability.IsValid) return false;
+		ability.ResetCooldown();
+		return true;
+	}
+
+	/// <summary>
+	/// Makes all of this hero's abilities ready to use again straight away, like
+	/// <see cref="CCitadelBaseAbility.ResetCooldown"/>. Unlike the Refresher item, this also covers items,
+	/// innates and weapons, not just the hero's abilities and ultimate.
+	/// </summary>
+	public void ResetAllAbilityCooldowns() {
+		if (!IsValid) return;
+		foreach (var ability in AbilityComponent.Abilities)
+			if (ability.IsValid)
+				ability.ResetCooldown();
+	}
+
 	/// <summary>Removes an ability from this pawn by internal ability name. Returns true on success.</summary>
 	public bool RemoveAbility(string abilityName) {
 		Span<byte> utf8 = Utf8.Encode(abilityName, stackalloc byte[Utf8.Size(abilityName)]);

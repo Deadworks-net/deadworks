@@ -140,4 +140,6 @@ internal struct NativeCallbacks
 	public nint EntityDerivesFrom;
 	public nint SetConVarString;
 	public nint GetConVarBool;
+	public nint ResetAbilityCooldown;
+	public nint GetAbilityMaxCharges;
 }
