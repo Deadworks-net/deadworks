@@ -794,6 +794,14 @@ static void __cdecl NativeSendNetMessage(int msgId, const uint8_t *protoBytes, i
     g_pNetworkMessages->DeallocateNetMessageAbstract(serializer, msg);
 }
 
+static const char *__cdecl NativeGetNetMessageName(int msgId) {
+    if (!g_pNetworkMessages)
+        return nullptr;
+
+    auto *serializer = g_pNetworkMessages->FindNetworkMessageById(static_cast<NetworkMessageId>(msgId));
+    return serializer ? serializer->GetUnscopedName() : nullptr;
+}
+
 // ---------------------------------------------------------------------------
 // ConCommand registration for managed plugins
 // ---------------------------------------------------------------------------
@@ -1199,6 +1207,7 @@ void deadworks::PopulateNativeCallbacks(NativeCallbacks &callbacks) {
 
     // Networking
     callbacks.SendNetMessage = &NativeSendNetMessage;
+    callbacks.GetNetMessageName = &NativeGetNetMessageName;
 
     // KV3
     callbacks.KV3Create = &NativeKV3Create;

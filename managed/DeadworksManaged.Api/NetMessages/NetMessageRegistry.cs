@@ -1,14 +1,15 @@
 using System.Reflection;
+using System.Runtime.InteropServices;
 using Google.Protobuf;
 using Google.Protobuf.Reflection;
 
 namespace DeadworksManaged.Api;
 
 /// <summary>
-/// Maps protobuf message types to their network message IDs by scanning proto enum descriptors at runtime.
+/// Maps protobuf message types to the network message IDs the engine registered them under.
 /// Used internally by the net message send/hook system; also exposes manual registration for custom message types.
 /// </summary>
-public static class NetMessageRegistry
+public static unsafe class NetMessageRegistry
 {
 	private static readonly Dictionary<Type, int> s_typeToId = new();
 	private static readonly Dictionary<int, MessageParser> s_idToParser = new();
@@ -63,6 +64,11 @@ public static class NetMessageRegistry
 			}
 		}
 
+		// The engine knows which message each ID carries, including those whose name does not follow
+		// their ID enum: k_EUserMsg_Damage carries CCitadelUserMessage_Damage and k_EUserMsg_ChatWheel
+		// carries CCitadelUserMsg_PingWheel. Without an engine to ask, guess from the ID enums.
+		if (RegisterEngineMessages(typesByProtoName)) return;
+
 		// Scan all FileDescriptors for enum types that map message IDs to names
 		var visitedFiles = new HashSet<string>();
 		foreach (var type in assembly.GetTypes())
@@ -83,6 +89,30 @@ public static class NetMessageRegistry
 			}
 		}
 
+	}
+
+	private static bool RegisterEngineMessages(Dictionary<string, Type> typesByProtoName)
+	{
+		if (NativeInterop.GetNetMessageName == null) return false;
+
+		bool any = false;
+		for (int id = 0; id <= short.MaxValue; id++)
+		{
+			byte* name = NativeInterop.GetNetMessageName(id);
+			if (name == null) continue;
+			any = true;
+
+			// The engine's name carries the ID: "CCitadelUserMsg_ChatMsg [314]"
+			var protoName = Marshal.PtrToStringUTF8((nint)name) ?? "";
+			int bracket = protoName.IndexOf(" [", StringComparison.Ordinal);
+			if (bracket >= 0) protoName = protoName[..bracket];
+
+			if (typesByProtoName.TryGetValue(protoName, out var type))
+			{
+				Register(type, id);
+			}
+		}
+		return any;
 	}
 
 	private static void ProcessEnumDescriptor(EnumDescriptor enumDesc, Dictionary<string, Type> typesByProtoName)
