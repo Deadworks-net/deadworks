@@ -384,6 +384,8 @@ message CSOCitadelParty {
 	optional bool desires_laning_together = 18;
 	optional .ECitadelMMPreference mm_preference = 19 [default = k_ECitadelMMPreference_Invalid];
 	optional string hideout_search_key = 21;
+	optional .ECitadelRankedType ranked_type = 26 [default = k_eCitadelRankedType_Invalid];
+	optional uint32 rank_interval = 27;
 }
 
 message CMsgMatchPlayerPathsData {
