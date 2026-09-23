@@ -1,3 +1,4 @@
+using System.Drawing;
 using System.Numerics;
 
 namespace DeadworksManaged.Api;
@@ -372,6 +373,89 @@ public unsafe class CBaseEntity : NativeEntity, IEquatable<CBaseEntity> {
 	private static readonly SchemaAccessor<float> _flFriction = new("CBaseEntity"u8, "m_flFriction"u8);
 	public float Friction { get => _flFriction.Get(Handle); set => _flFriction.Set(Handle, value); }
 
+	private static readonly SchemaAccessor<byte> _actualMoveType = new("CBaseEntity"u8, "m_nActualMoveType"u8);
+	/// <summary>How this entity is moving right now. Change it with <see cref="SetMoveType"/>.</summary>
+	/// <remarks>
+	/// This can differ from what you set: the <c>noclip</c> cheat command and abilities or items that change
+	/// movement win while they're active, and an entity attached to another one usually reads
+	/// <see cref="Api.MoveType.None"/>.
+	/// </remarks>
+	public MoveType MoveType => (MoveType)_actualMoveType.Get(Handle);
+
+	/// <summary>
+	/// Changes how this entity moves. Use <see cref="Api.MoveType.None"/> to freeze a hero in place,
+	/// <see cref="Api.MoveType.NoClip"/> to let them fly through walls, and <see cref="Api.MoveType.Walk"/>
+	/// to give them normal movement back. Takes effect straight away.
+	/// </summary>
+	/// <remarks>
+	/// The <c>noclip</c> cheat command and abilities or items that change movement override your value while
+	/// they're active. It applies again once they end.
+	/// </remarks>
+	public void SetMoveType(MoveType moveType) => NativeInterop.SetMoveType((void*)Handle, (byte)moveType);
+
+	private static readonly SchemaAccessor<float> _flGravityScale = new("CBaseEntity"u8, "m_flGravityScale"u8);
+	/// <summary>
+	/// This entity's gravity multiplier: 1 is normal, 0.5 is half gravity, 2 is double and 0 is no gravity.
+	/// Change it with <see cref="SetGravityScale"/>.
+	/// </summary>
+	/// <remarks>
+	/// Abilities and items that change gravity multiply on top of this, so it isn't always the gravity the
+	/// entity actually feels.
+	/// </remarks>
+	public float GravityScale => _flGravityScale.Get(Handle);
+
+	/// <summary>
+	/// Changes this entity's gravity multiplier: 1 is normal, 0.5 is half gravity, 2 is double and 0 turns
+	/// gravity off. Takes effect straight away. Abilities and items that change gravity multiply on top of it.
+	/// </summary>
+	public void SetGravityScale(float scale) => NativeInterop.SetGravityScale((void*)Handle, scale);
+
+	/// <summary>
+	/// True for entities that can have a model, such as heroes, NPCs, props, beams and world text. Only these
+	/// have a <see cref="RenderColor"/>, and only these can use <see cref="SetModel"/> and <see cref="ModelName"/>.
+	/// </summary>
+	public bool IsModelEntity {
+		get {
+			fixed (byte* modelEntity = "CBaseModelEntity\0"u8) {
+				return NativeInterop.EntityDerivesFrom((void*)Handle, modelEntity) != 0;
+			}
+		}
+	}
+
+	private static readonly SchemaAccessor<uint> _clrRender = new("CBaseModelEntity"u8, "m_clrRender"u8);
+	/// <summary>
+	/// Tint and transparency of the entity's model. <see cref="Color.White"/> means no tint. Lowering alpha
+	/// only makes the entity see-through if it renders translucently.
+	/// </summary>
+	/// <remarks>
+	/// Only entities with a model have one (see <see cref="IsModelEntity"/>). On anything else, like a player
+	/// controller, reading or setting it throws.
+	/// </remarks>
+	/// <exception cref="InvalidOperationException">The entity has no model.</exception>
+	public Color RenderColor {
+		get {
+			uint v = _clrRender.Get(RequireModelEntity());
+			return Color.FromArgb((byte)(v >> 24), (byte)v, (byte)(v >> 8), (byte)(v >> 16));
+		}
+		set => _clrRender.Set(RequireModelEntity(), (uint)(value.R | (value.G << 8) | (value.B << 16) | (value.A << 24)));
+	}
+
+	// m_clrRender is a CBaseModelEntity field; any other entity keeps unrelated data at that offset.
+	private nint RequireModelEntity() {
+		if (!IsModelEntity)
+			throw new InvalidOperationException($"'{DesignerName}' has no model, so it has no render color.");
+		return Handle;
+	}
+
+	/// <summary>Which way the entity faces, as (pitch, yaw, roll) in degrees. Change it with <see cref="SetRotation"/>.</summary>
+	public Vector3 Rotation => BodyComponent?.SceneNode?.AbsRotation ?? Vector3.Zero;
+
+	/// <summary>
+	/// Turns the entity to face <paramref name="rotation"/> (pitch, yaw, roll in degrees) without moving it.
+	/// On a hero this doesn't turn the player's view; use <c>CCitadelPlayerController.SetCameraAngles</c> for that.
+	/// </summary>
+	public void SetRotation(Vector3 rotation) => Teleport(angles: rotation);
+
 	private static readonly SchemaAccessor<nint> _modifierProp = new("CBaseEntity"u8, "m_pModifierProp"u8);
 	public CModifierProperty? ModifierProp {
 		get {
@@ -396,7 +480,34 @@ public unsafe class CBaseEntity : NativeEntity, IEquatable<CBaseEntity> {
 		TakeDamage(info);
 	}
 
-	/// <summary>Applies damage to this entity using an existing <see cref="CTakeDamageInfo"/> struct.</summary>
+	/// <summary>
+	/// Deals damage to this entity the way the game does, so the target's resistances and other damage modifiers
+	/// apply. <see cref="IDeadworksPlugin.OnTakeDamage"/> is called for it.
+	/// </summary>
+	/// <remarks>
+	/// <para>
+	/// Set <see cref="CTakeDamageInfo.CitadelDamageType"/> to the kind of damage you are dealing (for example
+	/// <see cref="ECitadelDamageType.Bullet"/> or <see cref="ECitadelDamageType.Ability"/>), since it decides which
+	/// modifiers apply. It starts out as <see cref="ECitadelDamageType.None"/>.
+	/// </para>
+	/// <para>
+	/// The final amount is written back into <paramref name="info"/>, so use a new <see cref="CTakeDamageInfo"/> for
+	/// each call. Reusing one, for example for every target of an area attack, applies the modifiers again each time.
+	/// </para>
+	/// <para>
+	/// Calling this from inside an <see cref="IDeadworksPlugin.OnTakeDamage"/> handler triggers that handler again,
+	/// so guard against loops (for example when reflecting damage back at the attacker).
+	/// </para>
+	/// </remarks>
+	public void ApplyDamage(CTakeDamageInfo info) {
+		NativeInterop.ApplyDamage((void*)Handle, (void*)info.Handle);
+	}
+
+	/// <summary>
+	/// Deals exactly the damage in <paramref name="info"/>, ignoring the target's resistances and other damage
+	/// modifiers. <see cref="IDeadworksPlugin.OnTakeDamage"/> is not called. Use <see cref="ApplyDamage"/> for
+	/// damage that should behave like the game's own.
+	/// </summary>
 	public void TakeDamage(CTakeDamageInfo info) {
 		NativeInterop.TakeDamage((void*)Handle, (void*)info.Handle);
 	}

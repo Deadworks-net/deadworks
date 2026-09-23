@@ -83,6 +83,7 @@ internal struct NativeCallbacks
 	public nint CreateDamageInfo;
 	public nint DestroyDamageInfo;
 	public nint TakeDamage;
+	public nint ApplyDamage;
 	public nint PrecacheHero;
 	public nint RegisterConCommand;
 	public nint UnregisterConCommand;
@@ -132,4 +133,11 @@ internal struct NativeCallbacks
 	public nint ImbueAbility;
 	public nint ChangeGameState;
 	public nint SetWaitingForPlayersRoster;
+	public nint ForceRespawn;
+	public nint CreateFakeClient;
+	public nint SetMoveType;
+	public nint SetGravityScale;
+	public nint EntityDerivesFrom;
+	public nint SetConVarString;
+	public nint GetConVarBool;
 }

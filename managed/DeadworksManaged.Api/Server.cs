@@ -116,6 +116,18 @@ public static unsafe class Server {
 			NativeInterop.SetEngineLogCallback(0);
 	}
 
+	/// <summary>
+	/// Connects a fake client ("bot") that occupies a real player slot but has no netchannel.
+	/// Returns its player slot, or -1 when the engine had no slot free. An unreserved Deadlock
+	/// server keeps no slots at all, so this fails until a match has been set up.
+	/// </summary>
+	public static int CreateFakeClient(string name) {
+		Span<byte> utf8 = Utf8.Encode(name, stackalloc byte[Utf8.Size(name)]);
+		fixed (byte* ptr = utf8) {
+			return NativeInterop.CreateFakeClient(ptr);
+		}
+	}
+
 	/// <summary>Returns true if the given parameter is present on the engine command line (e.g. "-nomaster").</summary>
 	public static bool HasCommandLineParm(string parm) {
 		Span<byte> utf8 = Utf8.Encode(parm, stackalloc byte[Utf8.Size(parm)]);
