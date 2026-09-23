@@ -98,6 +98,7 @@ struct NativeCallbacks {
     void *(__cdecl *CreateDamageInfo)(void *inflictor, void *attacker, void *ability, float damage, int32_t damageType);
     void(__cdecl *DestroyDamageInfo)(void *info);
     void(__cdecl *TakeDamage)(void *victim, void *info);
+    void(__cdecl *ApplyDamage)(void *victim, void *info);
     void(__cdecl *PrecacheHero)(const char *heroName);
     void(__cdecl *RegisterConCommand)(const char *name, const char *description, uint64_t flags);
     void(__cdecl *UnregisterConCommand)(const char *name);
@@ -150,6 +151,15 @@ struct NativeCallbacks {
     // Game state — see Hooks/ChangeGameState.hpp and Hooks/AreAllLobbyPlayersConnected.hpp.
     void(__cdecl *ChangeGameState)(void *gameRules, int32_t newState);
     void(__cdecl *SetWaitingForPlayersRoster)(uint32_t readyCount, uint32_t totalCount);
+    // Pawn force-respawn — see NativeForceRespawn in NativeHero.cpp.
+    void(__cdecl *ForceRespawn)(void *pawn, uint8_t bReleaseButtons);
+    // Fake clients — see NativeCreateFakeClient. Returns the player slot, or -1.
+    int32_t(__cdecl *CreateFakeClient)(const char *name);
+    // Entity movement — see the "Entity movement" block in NativeCallbacks.cpp.
+    void(__cdecl *SetMoveType)(void *entity, uint8_t moveType);
+    void(__cdecl *SetGravityScale)(void *entity, float scale);
+    // 1 when the entity's class is baseClassName or derives from it.
+    uint8_t(__cdecl *EntityDerivesFrom)(void *entity, const char *baseClassName);
     // ConVar string set. Returns 1 if the engine accepted (parsed) the value.
     uint8_t(__cdecl *SetConVarString)(uint64_t handle, const char *value);
 };

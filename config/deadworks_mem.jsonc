@@ -36,6 +36,20 @@
 			"library": "server.dll",
 			"windows": "40 55 41 54 41 55 41 56 41 57 48 81 EC ?? ?? ?? ?? 48 8D 6C 24 ?? 48 89 9D ?? ?? ?? ?? 45 33 ED"
 		},
+		"CBaseEntity::ApplyDamage": {
+			"library": "server.dll",
+			"windows": "48 89 5C 24 ?? 48 89 74 24 ?? 57 48 83 EC ?? 48 8B 05 ?? ?? ?? ?? 49 8B F0"
+		},
+		// (entity, MoveType_t, MoveCollide_t). Writes m_MoveType/m_MoveCollide, then calls the virtual that recomputes m_nActualMoveType.
+		"CBaseEntity::SetMoveType": {
+			"library": "server.dll",
+			"windows": "48 89 5C 24 ?? 48 89 6C 24 ?? 48 89 74 24 ?? 48 89 7C 24 ?? 41 56 48 83 EC ?? 41 0F B6 F0"
+		},
+		// (entity, float). Writes m_flGravityScale, then recomputes m_flActualGravityScale.
+		"CBaseEntity::SetGravityScale": {
+			"library": "server.dll",
+			"windows": "48 89 5C 24 ?? 57 48 83 EC ?? F3 0F 10 81 ?? ?? ?? ?? 48 8B F9 0F 29 74 24 ?? 0F 28 F1 0F 2E C6 7A ?? 74"
+		},
 		"g_GameEventManager": {
 			"library": "server.dll",
 			"windows": "FF 15 ?? ?? ?? ?? 48 8B 0D ?? ?? ?? ?? E8 ?? ?? ?? ?? E8"
@@ -127,6 +141,10 @@
 		"CCitadelPlayerPawn::ResetHero": {
 			"library": "server.dll",
 			"windows": "48 89 74 24 ?? 57 48 83 EC 20 0F B6 81 ?? ?? ?? ?? 0F B6 F2"
+		},
+		"CBasePlayerPawn::ForceRespawn": {
+			"library": "server.dll",
+			"windows": "48 89 5C 24 ?? 57 48 83 EC ?? 48 8B D9 0F B6 FA 48 8B 89 ?? ?? ?? ?? 48 85 C9 74 ?? ?? ?? ?? B2"
 		},
 		"CCitadelPlayerPawn::InitializeHeroOnPawn": {
 			"library": "server.dll",

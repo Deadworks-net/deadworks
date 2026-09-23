@@ -1,0 +1,26 @@
+services:
+  deadworks:
+    image: ghcr.io/deadworks-net/deadworks:latest
+    build: .
+    container_name: deadworks
+    restart: unless-stopped
+    stop_grace_period: 15s
+    env_file: .env
+    ports:
+      - "${SERVER_PORT:-27015}:${SERVER_PORT:-27015}/udp"
+      # RCON, for remote admin tools. `docker compose exec deadworks console` does not need it.
+      # Set RCON_PASSWORD in .env before uncommenting.
+      # - "${SERVER_PORT:-27015}:${SERVER_PORT:-27015}/tcp"
+    volumes:
+      - steam:/steam            # Deadlock install (~35 GB), Steam login token; shareable, see compose.multi.yaml
+      - data:/data              # this server's own state (Wine prefix, links into the install), ~0.8 GB
+      - ./plugins:/plugins      # drop plugin .dlls here; hot-reloaded
+      - ./configs:/configs      # deadworks.jsonc, per-plugin configs, optional server.cfg
+    logging:
+      options:
+        max-size: "20m"
+        max-file: "5"
+
+volumes:
+  steam:
+  data:

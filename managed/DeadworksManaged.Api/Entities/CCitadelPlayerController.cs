@@ -1,3 +1,5 @@
+using System.Numerics;
+
 namespace DeadworksManaged.Api;
 
 /// <summary>Deadlock-specific player controller. Provides access to player data, hero selection, team changes, and console messaging.</summary>
@@ -53,6 +55,26 @@ public sealed unsafe class CCitadelPlayerController : CBasePlayerController {
 			DescriptionLocstring = description
 		}, Recipients);
 	}
+
+	/// <summary>
+	/// Turns this player's camera to face <paramref name="angles"/> (pitch, yaw, roll in degrees).
+	/// </summary>
+	/// <remarks>
+	/// <see cref="CBaseEntity.Teleport"/> can't turn a player's camera (its <c>angles</c> are ignored for players),
+	/// so call this after moving someone to control which way they end up facing, or use
+	/// <see cref="CCitadelPlayerPawn.TeleportWithView"/> to do both at once. To restore a view you saved
+	/// earlier, save <see cref="CCitadelPlayerPawn.CameraAngles"/>. <see cref="CCitadelPlayerPawn.EyeAngles"/>
+	/// is where the crosshair aims, which can be far off from where the camera points.
+	/// </remarks>
+	public void SetCameraAngles(Vector3 angles) {
+		NetMessages.Send(new CCitadelUserMsg_SetClientCameraAngles {
+			PlayerSlot = Slot,
+			CameraAngles = new CMsgQAngle { X = angles.X, Y = angles.Y, Z = angles.Z }
+		}, Recipients);
+	}
+
+	/// <inheritdoc cref="SetCameraAngles(Vector3)"/>
+	public void SetCameraAngles(float pitch, float yaw, float roll = 0f) => SetCameraAngles(new Vector3(pitch, yaw, roll));
 
 	/// <summary>Sends a message to all connected players' consoles.</summary>
 	public static void PrintToConsoleAll(string message) {
