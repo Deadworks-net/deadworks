@@ -155,6 +155,11 @@ struct NativeCallbacks {
     void(__cdecl *ForceRespawn)(void *pawn, uint8_t bReleaseButtons);
     // Fake clients — see NativeCreateFakeClient. Returns the player slot, or -1.
     int32_t(__cdecl *CreateFakeClient)(const char *name);
+    // Entity movement — see the "Entity movement" block in NativeCallbacks.cpp.
+    void(__cdecl *SetMoveType)(void *entity, uint8_t moveType);
+    void(__cdecl *SetGravityScale)(void *entity, float scale);
+    // 1 when the entity's class is baseClassName or derives from it.
+    uint8_t(__cdecl *EntityDerivesFrom)(void *entity, const char *baseClassName);
 };
 
 void PopulateNativeCallbacks(NativeCallbacks &callbacks);

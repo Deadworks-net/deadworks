@@ -135,4 +135,7 @@ internal struct NativeCallbacks
 	public nint SetWaitingForPlayersRoster;
 	public nint ForceRespawn;
 	public nint CreateFakeClient;
+	public nint SetMoveType;
+	public nint SetGravityScale;
+	public nint EntityDerivesFrom;
 }
