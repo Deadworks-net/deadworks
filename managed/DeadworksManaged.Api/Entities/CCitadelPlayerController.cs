@@ -57,6 +57,12 @@ public sealed unsafe class CCitadelPlayerController : CBasePlayerController {
 	}
 
 	/// <summary>
+	/// Moves this player's camera without moving their hero: pull it back, zoom, point it somewhere else and hold it
+	/// there. See <see cref="PlayerCamera"/>.
+	/// </summary>
+	public PlayerCamera Camera => new(this);
+
+	/// <summary>
 	/// Turns this player's camera to face <paramref name="angles"/> (pitch, yaw, roll in degrees).
 	/// </summary>
 	/// <remarks>
