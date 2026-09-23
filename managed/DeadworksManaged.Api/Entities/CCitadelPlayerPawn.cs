@@ -166,58 +166,26 @@ public sealed unsafe class CCitadelPlayerPawn : CBasePlayerPawn {
 	}
 
 	/// <summary>
-	/// Resets the cooldown of the ability in <paramref name="slot"/> so it can be cast again immediately.
-	/// Returns false if the slot is empty.
+	/// Makes the ability in <paramref name="slot"/> ready to use again straight away, like
+	/// <see cref="CCitadelBaseAbility.ResetCooldown"/>. Returns false if the slot is empty.
 	/// </summary>
-	/// <remarks>
-	/// An ability with no upgrades only needs its cooldown window moved (<see cref="CCitadelBaseAbility.ResetCooldown"/>).
-	/// Once upgrades are applied some abilities track charges and other per-upgrade state that a window
-	/// change does not touch, so those are removed and re-added into the same slot, which recreates the
-	/// ability in a fresh state, and the upgrade tiers are restored on the new instance.
-	/// </remarks>
 	public bool ResetAbilityCooldown(EAbilitySlot slot) {
 		var ability = AbilityComponent.GetAbilityBySlot(slot);
 		if (ability == null || !ability.IsValid) return false;
-
-		int upgradeBits = ability.UpgradeBits;
-		if (upgradeBits == 0) {
-			ability.ResetCooldown();
-			return true;
-		}
-
-		string name = ability.AbilityName;
-		if (string.IsNullOrEmpty(name)) {
-			ability.ResetCooldown();
-			return true;
-		}
-
-		RemoveAbility(ability);
-		if (AddAbility(name, (ushort)slot) == null)
-			return false;
-
-		var fresh = AbilityComponent.GetAbilityBySlot(slot);
-		if (fresh != null && fresh.IsValid)
-			fresh.UpgradeBits = upgradeBits & 0xF; // keep the unlock and tier bits, drop transient flags
+		ability.ResetCooldown();
 		return true;
 	}
 
 	/// <summary>
-	/// Resets the cooldown of every ability on this pawn: signature abilities through
-	/// <see cref="ResetAbilityCooldown"/>, everything else (items, innates, weapons) through
-	/// <see cref="CCitadelBaseAbility.ResetCooldown"/>.
+	/// Makes all of this hero's abilities ready to use again straight away, like
+	/// <see cref="CCitadelBaseAbility.ResetCooldown"/>. Unlike the Refresher item, this also covers items,
+	/// innates and weapons, not just the hero's abilities and ultimate.
 	/// </summary>
 	public void ResetAllAbilityCooldowns() {
 		if (!IsValid) return;
-
-		// Snapshot first: resetting a signature ability replaces the entity and mutates the list.
-		var abilities = new List<CCitadelBaseAbility>(AbilityComponent.Abilities);
-		foreach (var ability in abilities) {
-			if (!ability.IsValid) continue;
-			if (ability.IsSignature)
-				ResetAbilityCooldown(ability.AbilitySlot);
-			else
+		foreach (var ability in AbilityComponent.Abilities)
+			if (ability.IsValid)
 				ability.ResetCooldown();
-		}
 	}
 
 	/// <summary>Removes an ability from this pawn by internal ability name. Returns true on success.</summary>

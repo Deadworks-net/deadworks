@@ -12,6 +12,7 @@ public unsafe class CCitadelBaseAbility : CBaseEntity {
 	private static readonly SchemaAccessor<bool> _toggleState = new(Class, "m_bToggleState"u8);
 	private static readonly SchemaAccessor<float> _cooldownEnd = new(Class, "m_flCooldownEnd"u8);
 	private static readonly SchemaAccessor<float> _cooldownStart = new(Class, "m_flCooldownStart"u8);
+	private static readonly SchemaAccessor<int> _remainingCharges = new(Class, "m_iRemainingCharges"u8);
 	private static readonly SchemaAccessor<byte> _vecImbuedAbilities = new(Class, "m_vecImbuedAbilities"u8);
 
 	private static int UpgradeBitsOffset => _abilitySlot.Offset - 0x20;
@@ -24,24 +25,38 @@ public unsafe class CCitadelBaseAbility : CBaseEntity {
 	public bool IsChanneling => _channeling.Get(Handle);
 	public bool CanBeUpgraded { get => _canBeUpgraded.Get(Handle); set => _canBeUpgraded.Set(Handle, value); }
 	public bool ToggleState => _toggleState.Get(Handle);
+	/// <summary>
+	/// When the current cooldown ends, in game time (compare with <see cref="GlobalVars.CurTime"/>). To put the
+	/// ability on cooldown yourself, set <see cref="CooldownStart"/> to now and this to now plus the duration. To
+	/// end a cooldown early, use <see cref="ResetCooldown"/>, which also refills charges.
+	/// </summary>
 	public float CooldownEnd { get => _cooldownEnd.Get(Handle); set => _cooldownEnd.Set(Handle, value); }
+
+	/// <summary>When the current cooldown started, in game time. With <see cref="CooldownEnd"/>, it gives the cooldown's full length.</summary>
 	public float CooldownStart { get => _cooldownStart.Get(Handle); set => _cooldownStart.Set(Handle, value); }
 
-	/// <summary>True while the ability is cooling down.</summary>
+	/// <summary>
+	/// True while the ability's cooldown is running. An ability that uses charges can also be unusable
+	/// because it's out of charges, with no cooldown running; see <see cref="RemainingCharges"/>.
+	/// </summary>
 	public bool IsOnCooldown => CooldownEnd > GlobalVars.CurTime;
 
+	/// <summary>How many charges the ability has left. Only meaningful when <see cref="MaxCharges"/> is above 0.</summary>
+	public int RemainingCharges => _remainingCharges.Get(Handle);
+
 	/// <summary>
-	/// Clears this ability's cooldown so it can be cast again immediately. Works by moving the cooldown
-	/// window to end a fraction of a second from now, so the client sees a normal cooldown-finished
-	/// transition and refreshes its HUD. For an upgraded signature ability prefer
-	/// <see cref="CCitadelPlayerPawn.ResetAbilityCooldown"/>, which also handles charge-based upgrades
-	/// that do not respond to a cooldown window change alone.
+	/// The most charges the ability can hold, including any added by upgrades and items. 0 for abilities
+	/// that don't use charges.
 	/// </summary>
-	public void ResetCooldown() {
-		float now = GlobalVars.CurTime;
-		CooldownStart = now;
-		CooldownEnd = now + 0.1f;
-	}
+	public int MaxCharges => NativeInterop.GetAbilityMaxCharges((void*)Handle);
+
+	/// <summary>
+	/// Makes the ability ready to use again straight away: ends its cooldown and refills its charges, the
+	/// same way the Refresher item does. Everything else about the ability, such as its upgrades, the items
+	/// imbued into it and its stacks, is left alone.
+	/// </summary>
+	public void ResetCooldown() => NativeInterop.ResetAbilityCooldown((void*)Handle);
+
 	public bool IsUnlocked => (UpgradeBits & 1) != 0;
 
 	public bool IsSignature => AbilitySlot >= EAbilitySlot.Signature1 && AbilitySlot <= EAbilitySlot.Signature4;

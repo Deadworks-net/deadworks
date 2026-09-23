@@ -269,6 +269,11 @@
 		"ISource2GameEntities::CheckTransmit": 12,
 		"CSoundSystem::TakeGuid": 77,
 		"CPlayer_ObserverServices::SetObserverTarget": 25,
-		"CPlayer_ObserverServices::SetObserverMode": 28
+		"CPlayer_ObserverServices::SetObserverMode": 28,
+		// The calls the Refresher item makes on each ability (CCitadel_Modifier_HeroRefresh).
+		"CCitadelBaseAbility::EndCooldown": 275,
+		"CCitadelBaseAbility::UsesCharges": 285,
+		"CCitadelBaseAbility::AddCharges": 287,
+		"CCitadelBaseAbility::GetMaxCharges": 311
 	}
 }

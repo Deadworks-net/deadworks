@@ -537,6 +537,22 @@ static void __cdecl NativeSetUpgradeBits(void *ability, int32_t newBits) {
     static_cast<CCitadelBaseAbility *>(ability)->SetUpgradeBits(newBits);
 }
 
+// What the Refresher item does to each ability (CCitadel_Modifier_HeroRefresh): end the cooldown, then
+// refill the charges. Charges matter because the cast check refuses an ability that uses them and has none.
+static void __cdecl NativeResetAbilityCooldown(void *ability) {
+    if (!ability) return;
+    auto *pAbility = static_cast<CCitadelBaseAbility *>(ability);
+    pAbility->EndCooldown();
+    if (pAbility->UsesCharges())
+        pAbility->AddCharges(pAbility->GetMaxCharges());
+}
+
+static int32_t __cdecl NativeGetAbilityMaxCharges(void *ability) {
+    if (!ability) return 0;
+    auto *pAbility = static_cast<CCitadelBaseAbility *>(ability);
+    return pAbility->UsesCharges() ? pAbility->GetMaxCharges() : 0;
+}
+
 // ---------------------------------------------------------------------------
 // Populate
 // ---------------------------------------------------------------------------
@@ -559,6 +575,8 @@ void deadworks::PopulateAbilityNatives(NativeCallbacks &cb) {
     cb.GetAbilityBySlot = &NativeGetAbilityBySlot;
     cb.ToggleActivate = &NativeToggleActivate;
     cb.SetUpgradeBits = &NativeSetUpgradeBits;
+    cb.ResetAbilityCooldown = &NativeResetAbilityCooldown;
+    cb.GetAbilityMaxCharges = &NativeGetAbilityMaxCharges;
 
     g_Hook_AutoRegisterValues = safetyhook::create_inline(
         MemoryDataLoader::Get().GetOffset("CCitadelModifier::AutoRegisterAbilityValues").value(),
