@@ -1,6 +1,7 @@
 using System.Runtime.InteropServices;
 using System.Text;
 using DeadworksManaged.Api;
+using DeadworksManaged.Api.Utils;
 using Google.Protobuf;
 
 namespace DeadworksManaged;
@@ -210,6 +211,7 @@ public static class EntryPoint
         var args = new ClientDisconnectedEvent { Slot = slot, Reason = reason };
         PluginLoader.DispatchClientDisconnect(args);
         Players.SetConnected(slot, false);
+        ZoneRegistry.OnDisconnect(slot);
         DeadworksManaged.Api.UI.UIChannel.OnPlayerDisconnect(slot);
     }
 

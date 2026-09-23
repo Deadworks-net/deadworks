@@ -3,6 +3,7 @@ using System.Runtime.Loader;
 using Google.Protobuf;
 using DeadworksManaged.Api;
 using DeadworksManaged.Api.UI;
+using DeadworksManaged.Api.Utils;
 
 namespace DeadworksManaged;
 
@@ -272,6 +273,9 @@ internal static partial class PluginLoader
             PluginRegistrationTracker.Remove(normalizedPath);
         }
 
+        // Stop the plugin's zones before OnUnload, like its timers below.
+        ZoneRegistry.RemoveOwnedBy(entry.Context);
+
         foreach (var plugin in entry.Plugins)
         {
             try
@@ -432,6 +436,8 @@ internal static partial class PluginLoader
     {
         TimerEngine.OnTick();
         UI.Tick();
+        if (simulating)
+            ZoneRegistry.Tick();
         DispatchToPlugins(p => p.OnGameFrame(simulating, firstTick, lastTick), nameof(IDeadworksPlugin.OnGameFrame));
     }
 
@@ -535,6 +541,7 @@ internal static partial class PluginLoader
         // Dispose all timer services and reset engine
         TimerRegistry.Clear();
         TimerEngine.Reset();
+        ZoneRegistry.Clear();
 
         foreach (var entry in entries)
         {
