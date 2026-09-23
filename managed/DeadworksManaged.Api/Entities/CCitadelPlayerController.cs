@@ -57,14 +57,14 @@ public sealed unsafe class CCitadelPlayerController : CBasePlayerController {
 	}
 
 	/// <summary>
-	/// Forces this player's camera to face <paramref name="angles"/> (pitch, yaw, roll in degrees).
+	/// Turns this player's camera to face <paramref name="angles"/> (pitch, yaw, roll in degrees).
 	/// </summary>
 	/// <remarks>
-	/// The <c>angles</c> argument of <see cref="CBaseEntity.Teleport"/> has no effect on a player pawn's
-	/// view because the client owns its own view angles. The engine only honours a server-driven
-	/// change when it arrives as a <c>CCitadelUserMsg_SetClientCameraAngles</c> message, which is
-	/// what this method sends. Call it after teleporting a player to a checkpoint, spawn point or
-	/// saved location so they end up looking the intended way.
+	/// <see cref="CBaseEntity.Teleport"/> can't turn a player's camera (its <c>angles</c> are ignored for players),
+	/// so call this after moving someone to control which way they end up facing, or use
+	/// <see cref="CCitadelPlayerPawn.TeleportWithView"/> to do both at once. To restore a view you saved
+	/// earlier, save <see cref="CCitadelPlayerPawn.CameraAngles"/>. <see cref="CCitadelPlayerPawn.EyeAngles"/>
+	/// is where the crosshair aims, which can be far off from where the camera points.
 	/// </remarks>
 	public void SetCameraAngles(Vector3 angles) {
 		NetMessages.Send(new CCitadelUserMsg_SetClientCameraAngles {
@@ -75,18 +75,6 @@ public sealed unsafe class CCitadelPlayerController : CBasePlayerController {
 
 	/// <inheritdoc cref="SetCameraAngles(Vector3)"/>
 	public void SetCameraAngles(float pitch, float yaw, float roll = 0f) => SetCameraAngles(new Vector3(pitch, yaw, roll));
-
-	/// <summary>
-	/// Teleports this player's hero pawn to <paramref name="position"/> and points their camera at
-	/// <paramref name="angles"/> in one call. Velocity is zeroed so the player does not carry momentum
-	/// through the teleport. Does nothing if the player has no hero pawn.
-	/// </summary>
-	public void TeleportWithView(Vector3 position, Vector3 angles) {
-		var pawn = GetHeroPawn();
-		if (pawn == null || !pawn.IsValid) return;
-		pawn.Teleport(position, velocity: Vector3.Zero);
-		SetCameraAngles(angles);
-	}
 
 	/// <summary>Sends a message to all connected players' consoles.</summary>
 	public static void PrintToConsoleAll(string message) {
