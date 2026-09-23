@@ -162,6 +162,8 @@ struct NativeCallbacks {
     uint8_t(__cdecl *EntityDerivesFrom)(void *entity, const char *baseClassName);
     // ConVar string set. Returns 1 if the engine accepted (parsed) the value.
     uint8_t(__cdecl *SetConVarString)(uint64_t handle, const char *value);
+    // ConVar bool get, converted from the cvar's own type — see NativeGetConVarBool.
+    uint8_t(__cdecl *GetConVarBool)(uint64_t handle);
 };
 
 void PopulateNativeCallbacks(NativeCallbacks &callbacks);

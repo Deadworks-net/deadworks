@@ -139,4 +139,5 @@ internal struct NativeCallbacks
 	public nint SetGravityScale;
 	public nint EntityDerivesFrom;
 	public nint SetConVarString;
+	public nint GetConVarBool;
 }
