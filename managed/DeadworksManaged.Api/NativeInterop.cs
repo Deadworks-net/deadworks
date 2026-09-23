@@ -84,6 +84,7 @@ internal static unsafe class NativeInterop
 	public static delegate* unmanaged[Cdecl]<void*, void*, void*, float, int, void*> CreateDamageInfo => (delegate* unmanaged[Cdecl]<void*, void*, void*, float, int, void*>)_cb.CreateDamageInfo;
 	public static delegate* unmanaged[Cdecl]<void*, void> DestroyDamageInfo => (delegate* unmanaged[Cdecl]<void*, void>)_cb.DestroyDamageInfo;
 	public static delegate* unmanaged[Cdecl]<void*, void*, void> TakeDamage => (delegate* unmanaged[Cdecl]<void*, void*, void>)_cb.TakeDamage;
+	public static delegate* unmanaged[Cdecl]<void*, void*, void> ApplyDamage => (delegate* unmanaged[Cdecl]<void*, void*, void>)_cb.ApplyDamage;
 	public static delegate* unmanaged[Cdecl]<byte*, void> PrecacheHero => (delegate* unmanaged[Cdecl]<byte*, void>)_cb.PrecacheHero;
 	public static delegate* unmanaged[Cdecl]<byte*, byte*, ulong, void> RegisterConCommand => (delegate* unmanaged[Cdecl]<byte*, byte*, ulong, void>)_cb.RegisterConCommand;
 	public static delegate* unmanaged[Cdecl]<byte*, void> UnregisterConCommand => (delegate* unmanaged[Cdecl]<byte*, void>)_cb.UnregisterConCommand;
@@ -111,6 +112,8 @@ internal static unsafe class NativeInterop
 	public static delegate* unmanaged[Cdecl]<ulong, int> GetConVarInt => (delegate* unmanaged[Cdecl]<ulong, int>)_cb.GetConVarInt;
 	public static delegate* unmanaged[Cdecl]<ulong, float> GetConVarFloat => (delegate* unmanaged[Cdecl]<ulong, float>)_cb.GetConVarFloat;
 	public static delegate* unmanaged[Cdecl]<ulong, byte*> GetConVarString => (delegate* unmanaged[Cdecl]<ulong, byte*>)_cb.GetConVarString;
+	public static delegate* unmanaged[Cdecl]<ulong, byte*, byte> SetConVarString => (delegate* unmanaged[Cdecl]<ulong, byte*, byte>)_cb.SetConVarString;
+	public static delegate* unmanaged[Cdecl]<ulong, byte> GetConVarBool => (delegate* unmanaged[Cdecl]<ulong, byte>)_cb.GetConVarBool;
 	public static delegate* unmanaged[Cdecl]<byte*, byte> HasCommandLineParm => (delegate* unmanaged[Cdecl]<byte*, byte>)_cb.HasCommandLineParm;
 	public static delegate* unmanaged[Cdecl]<void*, byte*, byte*, void> EKVSetStringToken => (delegate* unmanaged[Cdecl]<void*, byte*, byte*, void>)_cb.EKVSetStringToken;
 	public static delegate* unmanaged[Cdecl]<byte*, uint*, byte*> ResolveDesignerName => (delegate* unmanaged[Cdecl]<byte*, uint*, byte*>)_cb.ResolveDesignerName;
@@ -139,4 +142,15 @@ internal static unsafe class NativeInterop
 	// Game state
 	public static delegate* unmanaged[Cdecl]<void*, int, void> ChangeGameState => (delegate* unmanaged[Cdecl]<void*, int, void>)_cb.ChangeGameState;
 	public static delegate* unmanaged[Cdecl]<uint, uint, void> SetWaitingForPlayersRoster => (delegate* unmanaged[Cdecl]<uint, uint, void>)_cb.SetWaitingForPlayersRoster;
+
+	// Pawn force-respawn
+	public static delegate* unmanaged[Cdecl]<void*, byte, void> ForceRespawn => (delegate* unmanaged[Cdecl]<void*, byte, void>)_cb.ForceRespawn;
+
+	// Fake clients
+	public static delegate* unmanaged[Cdecl]<byte*, int> CreateFakeClient => (delegate* unmanaged[Cdecl]<byte*, int>)_cb.CreateFakeClient;
+
+	// Entity movement and class checks
+	public static delegate* unmanaged[Cdecl]<void*, byte, void> SetMoveType => (delegate* unmanaged[Cdecl]<void*, byte, void>)_cb.SetMoveType;
+	public static delegate* unmanaged[Cdecl]<void*, float, void> SetGravityScale => (delegate* unmanaged[Cdecl]<void*, float, void>)_cb.SetGravityScale;
+	public static delegate* unmanaged[Cdecl]<void*, byte*, byte> EntityDerivesFrom => (delegate* unmanaged[Cdecl]<void*, byte*, byte>)_cb.EntityDerivesFrom;
 }
