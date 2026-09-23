@@ -156,6 +156,17 @@ static const char *__cdecl NativeGetEntityClassname(void *entity) {
     return ent->m_pEntity->m_pClass->m_pServerClass->m_pDLLClassName;
 }
 
+// Walks the schema base classes of the entity's DLL class name, so a server-only class (no
+// ServerClass, empty classname) never matches.
+static uint8_t __cdecl NativeEntityDerivesFrom(void *entity, const char *baseClassName) {
+    if (!entity || !baseClassName)
+        return 0;
+    const char *className = NativeGetEntityClassname(entity);
+    if (!*className)
+        return 0;
+    return schema::IsDerivedFrom(className, baseClassName) ? 1 : 0;
+}
+
 static int32_t __cdecl NativeGetUtlVectorSize(void *vec) {
     if (!vec) return 0;
     return reinterpret_cast<CUtlVectorBase<uint8_t> *>(vec)->Count();
@@ -945,6 +956,39 @@ static void __cdecl NativeSetScale(void *entity, float scale) {
     GetVFunc<void(__thiscall *)(void *, float)>(entity, offsets::kVtblSetScale)(entity, scale);
 }
 
+// ---------------------------------------------------------------------------
+// Entity movement
+// ---------------------------------------------------------------------------
+
+using SetMoveTypeFn = void(__fastcall *)(void *entity, uint8_t moveType, uint8_t moveCollide);
+using SetGravityScaleFn = void(__fastcall *)(void *entity, float scale);
+
+static SetMoveTypeFn g_pSetMoveType = nullptr;
+static SetGravityScaleFn g_pSetGravityScale = nullptr;
+
+// CBaseEntity::SetMoveType(MoveType_t, MoveCollide_t) stores the requested type in m_MoveType,
+// then calls the virtual that recomputes m_nActualMoveType, the copy movement code reads. That
+// recompute lets the noclip flag, modifiers and a move parent override the request, and refreshes
+// collision rules and the physics simulation mode; a schema write of either field skips all of it.
+// m_MoveCollide is passed back unchanged.
+static void __cdecl NativeSetMoveType(void *entity, uint8_t moveType) {
+    if (!entity || !g_pSetMoveType)
+        return;
+    const uint8_t moveCollide = static_cast<CBaseEntity *>(entity)->m_MoveCollide.Get();
+    g_pSetMoveType(entity, moveType, moveCollide);
+}
+
+// CBaseEntity::SetGravityScale stores m_flGravityScale, then recomputes m_flActualGravityScale,
+// which is what movement and physics multiply gravity by (the stored scale times any modifier
+// multiplier, or 0 while gravity is disabled). Heroes also recompute it every movement tick, but
+// other entities only do when one of those inputs changes, so a schema write alone leaves them on
+// the old gravity.
+static void __cdecl NativeSetGravityScale(void *entity, float scale) {
+    if (!entity || !g_pSetGravityScale)
+        return;
+    g_pSetGravityScale(entity, scale);
+}
+
 static void *__cdecl NativeGetGlobalVars() {
     if (!g_pEngineServer)
         return nullptr;
@@ -1054,6 +1098,14 @@ void deadworks::ResolveNativeStatics() {
     ResolveDamageStatics();
     ResolveHeroStatics();
     ResolveSubclassStatics();
+
+    g_pSetMoveType = reinterpret_cast<SetMoveTypeFn>(
+        MemoryDataLoader::Get().GetOffset("CBaseEntity::SetMoveType").value());
+    g_Log->Info("Resolved CBaseEntity::SetMoveType: {:p}", reinterpret_cast<void *>(g_pSetMoveType));
+
+    g_pSetGravityScale = reinterpret_cast<SetGravityScaleFn>(
+        MemoryDataLoader::Get().GetOffset("CBaseEntity::SetGravityScale").value());
+    g_Log->Info("Resolved CBaseEntity::SetGravityScale: {:p}", reinterpret_cast<void *>(g_pSetGravityScale));
 }
 
 // ---------------------------------------------------------------------------
@@ -1217,4 +1269,9 @@ void deadworks::PopulateNativeCallbacks(NativeCallbacks &callbacks) {
     // Game state
     callbacks.ChangeGameState = &NativeChangeGameState;
     callbacks.SetWaitingForPlayersRoster = &NativeSetWaitingForPlayersRoster;
+
+    // Entity movement and class checks
+    callbacks.SetMoveType = &NativeSetMoveType;
+    callbacks.SetGravityScale = &NativeSetGravityScale;
+    callbacks.EntityDerivesFrom = &NativeEntityDerivesFrom;
 }

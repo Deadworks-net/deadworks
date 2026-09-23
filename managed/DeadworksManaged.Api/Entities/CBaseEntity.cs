@@ -373,53 +373,88 @@ public unsafe class CBaseEntity : NativeEntity, IEquatable<CBaseEntity> {
 	private static readonly SchemaAccessor<float> _flFriction = new("CBaseEntity"u8, "m_flFriction"u8);
 	public float Friction { get => _flFriction.Get(Handle); set => _flFriction.Set(Handle, value); }
 
-	private static readonly SchemaAccessor<byte> _moveType = new("CBaseEntity"u8, "m_MoveType"u8);
 	private static readonly SchemaAccessor<byte> _actualMoveType = new("CBaseEntity"u8, "m_nActualMoveType"u8);
+	/// <summary>How this entity is moving right now. Change it with <see cref="SetMoveType"/>.</summary>
+	/// <remarks>
+	/// This can differ from what you set: the <c>noclip</c> cheat command and abilities or items that change
+	/// movement win while they're active, and an entity attached to another one usually reads
+	/// <see cref="Api.MoveType.None"/>.
+	/// </remarks>
+	public MoveType MoveType => (MoveType)_actualMoveType.Get(Handle);
+
 	/// <summary>
-	/// The entity's movement mode. Setting <see cref="Api.MoveType.None"/> freezes a pawn in place without
-	/// touching its abilities or input; <see cref="Api.MoveType.NoClip"/> lets it fly through the world;
-	/// <see cref="Api.MoveType.Walk"/> restores normal movement.
+	/// Changes how this entity moves. Use <see cref="Api.MoveType.None"/> to freeze a hero in place,
+	/// <see cref="Api.MoveType.NoClip"/> to let them fly through walls, and <see cref="Api.MoveType.Walk"/>
+	/// to give them normal movement back. Takes effect straight away.
 	/// </summary>
 	/// <remarks>
-	/// The engine keeps two copies of the move type: the requested one (<c>m_MoveType</c>) and the one the
-	/// movement code is currently honouring (<c>m_nActualMoveType</c>). The setter writes both so the change
-	/// takes effect on the next movement tick instead of waiting for the engine to reconcile them.
+	/// The <c>noclip</c> cheat command and abilities or items that change movement override your value while
+	/// they're active. It applies again once they end.
 	/// </remarks>
-	public MoveType MoveType {
-		get => (MoveType)_actualMoveType.Get(Handle);
-		set {
-			_moveType.Set(Handle, (byte)value);
-			_actualMoveType.Set(Handle, (byte)value);
-		}
-	}
+	public void SetMoveType(MoveType moveType) => NativeInterop.SetMoveType((void*)Handle, (byte)moveType);
 
 	private static readonly SchemaAccessor<float> _flGravityScale = new("CBaseEntity"u8, "m_flGravityScale"u8);
-	/// <summary>Multiplier applied to gravity for this entity. 1 is normal, 0 disables gravity, values above 1 make it heavier.</summary>
-	public float GravityScale { get => _flGravityScale.Get(Handle); set => _flGravityScale.Set(Handle, value); }
+	/// <summary>
+	/// This entity's gravity multiplier: 1 is normal, 0.5 is half gravity, 2 is double and 0 is no gravity.
+	/// Change it with <see cref="SetGravityScale"/>.
+	/// </summary>
+	/// <remarks>
+	/// Abilities and items that change gravity multiply on top of this, so it isn't always the gravity the
+	/// entity actually feels.
+	/// </remarks>
+	public float GravityScale => _flGravityScale.Get(Handle);
+
+	/// <summary>
+	/// Changes this entity's gravity multiplier: 1 is normal, 0.5 is half gravity, 2 is double and 0 turns
+	/// gravity off. Takes effect straight away. Abilities and items that change gravity multiply on top of it.
+	/// </summary>
+	public void SetGravityScale(float scale) => NativeInterop.SetGravityScale((void*)Handle, scale);
+
+	/// <summary>
+	/// True for entities that can have a model, such as heroes, NPCs, props, beams and world text. Only these
+	/// have a <see cref="RenderColor"/>, and only these can use <see cref="SetModel"/> and <see cref="ModelName"/>.
+	/// </summary>
+	public bool IsModelEntity {
+		get {
+			fixed (byte* modelEntity = "CBaseModelEntity\0"u8) {
+				return NativeInterop.EntityDerivesFrom((void*)Handle, modelEntity) != 0;
+			}
+		}
+	}
 
 	private static readonly SchemaAccessor<uint> _clrRender = new("CBaseModelEntity"u8, "m_clrRender"u8);
 	/// <summary>
-	/// Render tint and opacity of a model entity (<c>m_clrRender</c>). Only meaningful on entities that
-	/// derive from <c>CBaseModelEntity</c> (props, pawns, beams, world text); the alpha channel is honoured
-	/// only when the entity's render mode allows translucency.
+	/// Tint and transparency of the entity's model. <see cref="Color.White"/> means no tint. Lowering alpha
+	/// only makes the entity see-through if it renders translucently.
 	/// </summary>
+	/// <remarks>
+	/// Only entities with a model have one (see <see cref="IsModelEntity"/>). On anything else, like a player
+	/// controller, reading or setting it throws.
+	/// </remarks>
+	/// <exception cref="InvalidOperationException">The entity has no model.</exception>
 	public Color RenderColor {
 		get {
-			uint v = _clrRender.Get(Handle);
+			uint v = _clrRender.Get(RequireModelEntity());
 			return Color.FromArgb((byte)(v >> 24), (byte)v, (byte)(v >> 8), (byte)(v >> 16));
 		}
-		set => _clrRender.Set(Handle, (uint)(value.R | (value.G << 8) | (value.B << 16) | (value.A << 24)));
+		set => _clrRender.Set(RequireModelEntity(), (uint)(value.R | (value.G << 8) | (value.B << 16) | (value.A << 24)));
 	}
 
-	/// <summary>
-	/// The entity's absolute rotation as (pitch, yaw, roll) in degrees. Reading walks the scene node;
-	/// writing goes through <see cref="Teleport"/> so the engine updates the transform hierarchy.
-	/// For player pawns the view direction is owned by the client and is not affected by this.
-	/// </summary>
-	public Vector3 Rotation {
-		get => BodyComponent?.SceneNode?.AbsRotation ?? Vector3.Zero;
-		set => Teleport(angles: value);
+	// m_clrRender is a CBaseModelEntity field; any other entity keeps unrelated data at that offset.
+	private nint RequireModelEntity() {
+		if (!IsModelEntity)
+			throw new InvalidOperationException($"'{DesignerName}' has no model, so it has no render color.");
+		return Handle;
 	}
+
+	/// <summary>Which way the entity faces, as (pitch, yaw, roll) in degrees. Change it with <see cref="SetRotation"/>.</summary>
+	public Vector3 Rotation => BodyComponent?.SceneNode?.AbsRotation ?? Vector3.Zero;
+
+	/// <summary>
+	/// Turns the entity to face <paramref name="rotation"/> (pitch, yaw, roll in degrees) without moving it.
+	/// On a hero this doesn't turn the player's view; use <c>CCitadelPlayerController.SetCameraAngles</c> for that.
+	/// </summary>
+	public void SetRotation(Vector3 rotation) => Teleport(angles: rotation);
 
 	private static readonly SchemaAccessor<nint> _modifierProp = new("CBaseEntity"u8, "m_pModifierProp"u8);
 	public CModifierProperty? ModifierProp {

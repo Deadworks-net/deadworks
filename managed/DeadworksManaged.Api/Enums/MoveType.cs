@@ -1,26 +1,35 @@
 namespace DeadworksManaged.Api;
 
-/// <summary>Entity movement mode (<c>MoveType_t</c>). Read and written through <see cref="CBaseEntity.MoveType"/>.</summary>
+/// <summary>
+/// How an entity moves. Read it with <see cref="CBaseEntity.MoveType"/> and change it with
+/// <see cref="CBaseEntity.SetMoveType"/>.
+/// </summary>
+/// <remarks>
+/// Heroes can only move under <see cref="Walk"/> and <see cref="NoClip"/>. Any other value leaves a hero frozen in place.
+/// </remarks>
 public enum MoveType : byte {
-	/// <summary>Never moves. Freezes a pawn in place while keeping it fully interactive.</summary>
+	/// <summary>Doesn't move at all. Set this on a hero to freeze them in place.</summary>
 	None = 0,
+	/// <summary>Left over from older versions of the engine. Don't use it.</summary>
 	Obsolete = 1,
-	/// <summary>Normal player movement with gravity and collision.</summary>
+	/// <summary>Normal hero movement: walking and jumping, with gravity and collision.</summary>
 	Walk = 2,
-	/// <summary>Flies without gravity but still collides with the world.</summary>
+	/// <summary>Flying movement without gravity. A hero set to this can't move.</summary>
 	Fly = 3,
-	/// <summary>Flies with gravity applied.</summary>
+	/// <summary>Flying movement with gravity, like a thrown object. A hero set to this can't move.</summary>
 	FlyGravity = 4,
-	/// <summary>Driven by the physics simulation.</summary>
+	/// <summary>Moved by the physics engine, like a prop that can tumble and be knocked around.</summary>
 	VPhysics = 5,
-	/// <summary>Moves along a path, pushing entities it touches (doors, platforms).</summary>
+	/// <summary>Used by doors, elevators and other movers that push whatever is in their way.</summary>
 	Push = 6,
-	/// <summary>Flies through everything, ignoring collision.</summary>
+	/// <summary>Flies freely through walls. This is what the <c>noclip</c> cheat command uses on heroes.</summary>
 	NoClip = 7,
-	/// <summary>Spectator movement.</summary>
+	/// <summary>Used for spectators.</summary>
 	Observer = 8,
-	/// <summary>Custom NPC step movement.</summary>
+	/// <summary>Walking movement used by some NPCs, such as neutral creeps.</summary>
 	Step = 9,
+	/// <summary>Used internally by the game. The game's own tools warn that switching to it behaves strangely.</summary>
 	Sync = 10,
+	/// <summary>Movement handled entirely by the entity's own code. Used internally by the game.</summary>
 	Custom = 11,
 }

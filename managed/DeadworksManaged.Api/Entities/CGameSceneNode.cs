@@ -10,7 +10,7 @@ public unsafe class CGameSceneNode : NativeEntity {
 	public Vector3 AbsOrigin => _vecAbsOrigin.Get(Handle);
 
 	private static readonly SchemaAccessor<Vector3> _angAbsRotation = new("CGameSceneNode"u8, "m_angAbsRotation"u8);
-	/// <summary>Absolute rotation of this node as (pitch, yaw, roll) in degrees.</summary>
+	/// <summary>World rotation of this node as (pitch, yaw, roll) in degrees.</summary>
 	public Vector3 AbsRotation => _angAbsRotation.Get(Handle);
 
 	private static readonly SchemaAccessor<float> _flScale = new("CGameSceneNode"u8, "m_flScale"u8);

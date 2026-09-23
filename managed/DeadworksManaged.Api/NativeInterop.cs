@@ -146,4 +146,9 @@ internal static unsafe class NativeInterop
 
 	// Fake clients
 	public static delegate* unmanaged[Cdecl]<byte*, int> CreateFakeClient => (delegate* unmanaged[Cdecl]<byte*, int>)_cb.CreateFakeClient;
+
+	// Entity movement and class checks
+	public static delegate* unmanaged[Cdecl]<void*, byte, void> SetMoveType => (delegate* unmanaged[Cdecl]<void*, byte, void>)_cb.SetMoveType;
+	public static delegate* unmanaged[Cdecl]<void*, float, void> SetGravityScale => (delegate* unmanaged[Cdecl]<void*, float, void>)_cb.SetGravityScale;
+	public static delegate* unmanaged[Cdecl]<void*, byte*, byte> EntityDerivesFrom => (delegate* unmanaged[Cdecl]<void*, byte*, byte>)_cb.EntityDerivesFrom;
 }
