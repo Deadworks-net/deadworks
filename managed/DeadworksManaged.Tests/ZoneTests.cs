@@ -1,11 +1,15 @@
 using System.Numerics;
-using DeadworksManaged.Api;
+using System.Runtime.CompilerServices;
+using System.Runtime.Loader;
+using DeadworksManaged.Api.Utils;
 using Xunit;
 
 namespace DeadworksManaged.Tests;
 
 public class ZoneTests
 {
+    private static AssemblyLoadContext TestContext => AssemblyLoadContext.GetLoadContext(typeof(ZoneTests).Assembly)!;
+
     [Fact]
     public void Constructor_NormalisesCornerOrder()
     {
@@ -129,5 +133,75 @@ public class ZoneTests
         Assert.False(zone.Enabled);
         Assert.Equal(0, zone.OccupantCount);
         Assert.Equal(ZoneTransition.None, zone.Step(0, new Vector3(1, 1, 1)));
+    }
+
+    [Fact]
+    public void Registry_KeepsZonesNobodyHoldsOnTo()
+    {
+        int before = ZoneRegistry.Count;
+        var zone = CreateWithoutKeeping();
+
+        GC.Collect();
+        GC.WaitForPendingFinalizers();
+        GC.Collect();
+
+        Assert.Equal(before + 1, ZoneRegistry.Count);
+        Assert.True(zone.TryGetTarget(out var alive) && alive.Enabled);
+        alive!.Dispose();
+    }
+
+    // Only a weak reference escapes, so nothing but the registry keeps the zone alive.
+    [MethodImpl(MethodImplOptions.NoInlining)]
+    private static WeakReference<Zone> CreateWithoutKeeping() => new(new Zone(Vector3.Zero, Vector3.One));
+
+    [Fact]
+    public void RemoveOwnedBy_DisposesTheCreatingPluginsZones()
+    {
+        var zone = Zone.FromCenter(Vector3.Zero, Vector3.One);
+        var fromOrigin = Zone.FromOrigin(Vector3.Zero, -Vector3.One, Vector3.One);
+        Assert.Same(TestContext, zone.Owner);
+        Assert.Same(TestContext, fromOrigin.Owner);
+
+        ZoneRegistry.RemoveOwnedBy(TestContext);
+
+        Assert.False(zone.Enabled);
+        Assert.False(fromOrigin.Enabled);
+        Assert.Equal(ZoneTransition.None, zone.Step(0, Vector3.Zero));
+    }
+
+    [Fact]
+    public void RemoveOwnedBy_LeavesOtherPluginsZonesRunning()
+    {
+        using var zone = new Zone(Vector3.Zero, Vector3.One);
+        var other = new AssemblyLoadContext("other plugin", isCollectible: true);
+
+        ZoneRegistry.RemoveOwnedBy(other);
+        other.Unload();
+
+        Assert.True(zone.Enabled);
+        Assert.Equal(ZoneTransition.Entered, zone.Step(0, Vector3.Zero));
+    }
+
+    [Fact]
+    public void OccupantSlots_IsACopy()
+    {
+        using var zone = new Zone(Vector3.Zero, new Vector3(10, 10, 10));
+        zone.Step(1, new Vector3(5, 5, 5));
+        var occupants = zone.OccupantSlots;
+
+        zone.Step(1, new Vector3(50, 5, 5));
+
+        Assert.Contains(1, occupants);
+        Assert.Empty(zone.OccupantSlots);
+    }
+
+    [Fact]
+    public void FromCenter_TakesTheFullSize()
+    {
+        using var zone = Zone.FromCenter(new Vector3(100, 100, 100), new Vector3(20, 40, 60));
+
+        Assert.Equal(new Vector3(20, 40, 60), zone.Size);
+        Assert.Equal(new Vector3(90, 80, 70), zone.Mins);
+        Assert.Equal(new Vector3(100, 100, 100), zone.Center);
     }
 }

@@ -1,6 +1,7 @@
 using System.Runtime.InteropServices;
 using System.Text;
 using DeadworksManaged.Api;
+using DeadworksManaged.Api.Utils;
 using Google.Protobuf;
 
 namespace DeadworksManaged;

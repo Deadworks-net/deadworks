@@ -3,6 +3,7 @@ using System.Runtime.Loader;
 using Google.Protobuf;
 using DeadworksManaged.Api;
 using DeadworksManaged.Api.UI;
+using DeadworksManaged.Api.Utils;
 
 namespace DeadworksManaged;
 
@@ -271,6 +272,9 @@ internal static partial class PluginLoader
             ConCommandManager.UnregisterPlugin(normalizedPath);
             PluginRegistrationTracker.Remove(normalizedPath);
         }
+
+        // Stop the plugin's zones before OnUnload, like its timers below.
+        ZoneRegistry.RemoveOwnedBy(entry.Context);
 
         foreach (var plugin in entry.Plugins)
         {
