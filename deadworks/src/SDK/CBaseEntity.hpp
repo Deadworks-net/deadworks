@@ -19,6 +19,7 @@ class CBaseEntity : public CEntityInstance {
     SCHEMA_FIELD(uint8_t, m_iTeamNum);
     SCHEMA_FIELD(CModifierProperty *, m_pModifierProp);
     SCHEMA_FIELD(uint32_t, m_nSubclassID);
+    SCHEMA_FIELD(uint8_t, m_MoveCollide);
 
     // m_pSubclassVData is not exposed through the schema - it lives right after
     // m_nSubclassID (CUtlStringToken, 4 bytes). Null for entities without a subclass.

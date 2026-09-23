@@ -50,7 +50,7 @@ public sealed unsafe class CCitadelPlayerPawn : CBasePlayerPawn {
 	}
 
 	private static readonly SchemaAccessor<Vector3> _clientCamera = new("CCitadelPlayerPawn"u8, "m_angClientCamera"u8);
-	/// <summary>Client camera angles for SourceTV/spectating.</summary>
+	/// <summary>Which way the player's camera is facing. Save this to restore their view later with <see cref="TeleportWithView"/>.</summary>
 	public Vector3 CameraAngles => _clientCamera.Get(Handle);
 
 	/// <summary>Raw server-side view angles from CUserCmd (v_angle). Full float precision, no quantization.</summary>
@@ -71,6 +71,24 @@ public sealed unsafe class CCitadelPlayerPawn : CBasePlayerPawn {
 	private static readonly SchemaArrayAccessor<int> _currencies = new("CCitadelPlayerPawn"u8, "m_nCurrencies"u8);
 	public int GetCurrency(ECurrencyType type) => _currencies.Get(Handle, (int)type);
 	public void SetCurrency(ECurrencyType type, int value) => _currencies.Set(Handle, (int)type, value);
+
+	/// <summary>
+	/// Moves this hero to <paramref name="position"/> and turns the player's camera to face
+	/// <paramref name="angles"/>. The hero arrives standing still instead of keeping their old speed.
+	/// </summary>
+	/// <example>
+	/// Saving a checkpoint and sending the player back to it later:
+	/// <code>
+	/// var savedPos = pawn.Position;
+	/// var savedView = pawn.CameraAngles;
+	/// // ...
+	/// pawn.TeleportWithView(savedPos, savedView);
+	/// </code>
+	/// </example>
+	public void TeleportWithView(Vector3 position, Vector3 angles) {
+		Teleport(position, velocity: Vector3.Zero);
+		Controller?.SetCameraAngles(angles);
+	}
 
 	/// <summary>Adds or removes currency from this pawn (e.g. gold, ability points). Use negative <paramref name="amount"/> to spend.</summary>
 	public void ModifyCurrency(ECurrencyType type, int amount, ECurrencySource source,
@@ -145,6 +163,29 @@ public sealed unsafe class CCitadelPlayerPawn : CBasePlayerPawn {
 	/// fire against the wrong player.</summary>
 	internal static void OnEntityDeleted(nint pawnHandle) {
 		_heroInitContinuations.Remove(pawnHandle);
+	}
+
+	/// <summary>
+	/// Makes the ability in <paramref name="slot"/> ready to use again straight away, like
+	/// <see cref="CCitadelBaseAbility.ResetCooldown"/>. Returns false if the slot is empty.
+	/// </summary>
+	public bool ResetAbilityCooldown(EAbilitySlot slot) {
+		var ability = AbilityComponent.GetAbilityBySlot(slot);
+		if (ability == null || !ability.IsValid) return false;
+		ability.ResetCooldown();
+		return true;
+	}
+
+	/// <summary>
+	/// Makes all of this hero's abilities ready to use again straight away, like
+	/// <see cref="CCitadelBaseAbility.ResetCooldown"/>. Unlike the Refresher item, this also covers items,
+	/// innates and weapons, not just the hero's abilities and ultimate.
+	/// </summary>
+	public void ResetAllAbilityCooldowns() {
+		if (!IsValid) return;
+		foreach (var ability in AbilityComponent.Abilities)
+			if (ability.IsValid)
+				ability.ResetCooldown();
 	}
 
 	/// <summary>Removes an ability from this pawn by internal ability name. Returns true on success.</summary>

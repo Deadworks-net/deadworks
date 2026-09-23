@@ -32,7 +32,8 @@ std::expected<void, std::string> MemoryDataLoader::Load(std::string_view configP
             if (scanResult.has_value()) {
                 m_resolved[key] = *scanResult;
             } else {
-                return std::unexpected("Failed to find signature " + key);
+                // Keep going: after a game update the whole list is what is wanted, not the first.
+                m_missing.push_back(key);
             }
         }
 
@@ -53,9 +54,18 @@ std::expected<void, std::string> MemoryDataLoader::Load(std::string_view configP
                 if (scanResult.has_value()) {
                     m_patches[key] = *scanResult;
                 } else {
-                    return std::unexpected("Failed to find patch signature " + key);
+                    m_missing.push_back("patch " + key);
                 }
             }
+        }
+
+        if (!m_missing.empty()) {
+            std::string list;
+            for (const auto &key : m_missing) {
+                if (!list.empty()) list += ", ";
+                list += key;
+            }
+            return std::unexpected("Failed to find signatures: " + list);
         }
 
         if (data.contains("virtuals")) {

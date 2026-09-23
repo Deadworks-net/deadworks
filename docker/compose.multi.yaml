@@ -1,0 +1,51 @@
+# Several servers on one host, sharing a single copy of the game.
+#
+#   docker compose -f compose.multi.yaml up -d
+#   docker compose -f compose.multi.yaml exec one console status
+#
+# Everything in .env applies to all of them; what differs goes under `environment`. Each server
+# needs its own port, its own data volume and its own configs directory. To add one, copy a block
+# and change the name and the port.
+
+x-server: &server
+  image: ghcr.io/deadworks-net/deadworks:latest
+  build: .
+  restart: unless-stopped
+  stop_grace_period: 15s
+  env_file: .env
+  logging:
+    options:
+      max-size: "20m"
+      max-file: "5"
+
+services:
+  one:
+    <<: *server
+    environment:
+      SERVER_NAME: "Deadworks #1"
+      SERVER_PORT: 27015
+    ports:
+      - "27015:27015/udp"
+    volumes:
+      - steam:/steam
+      - one:/data
+      - ./one/plugins:/plugins
+      - ./one/configs:/configs
+
+  two:
+    <<: *server
+    environment:
+      SERVER_NAME: "Deadworks #2"
+      SERVER_PORT: 27016
+    ports:
+      - "27016:27016/udp"
+    volumes:
+      - steam:/steam
+      - two:/data
+      - ./two/plugins:/plugins
+      - ./two/configs:/configs
+
+volumes:
+  steam:
+  one:
+  two:
