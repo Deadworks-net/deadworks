@@ -56,7 +56,10 @@ public sealed unsafe class CCitadelPlayerController : CBasePlayerController {
 		}, Recipients);
 	}
 
-	/// <summary>Server-driven control over this player's camera (lerps, holds, clears). See <see cref="PlayerCamera"/>.</summary>
+	/// <summary>
+	/// Moves this player's camera without moving their hero: pull it back, zoom, point it somewhere else and hold it
+	/// there. See <see cref="PlayerCamera"/>.
+	/// </summary>
 	public PlayerCamera Camera => new(this);
 
 	/// <summary>
