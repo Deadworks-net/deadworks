@@ -160,6 +160,10 @@ struct NativeCallbacks {
     void(__cdecl *SetGravityScale)(void *entity, float scale);
     // 1 when the entity's class is baseClassName or derives from it.
     uint8_t(__cdecl *EntityDerivesFrom)(void *entity, const char *baseClassName);
+    // ConVar string set. Returns 1 if the engine accepted (parsed) the value.
+    uint8_t(__cdecl *SetConVarString)(uint64_t handle, const char *value);
+    // ConVar bool get, converted from the cvar's own type — see NativeGetConVarBool.
+    uint8_t(__cdecl *GetConVarBool)(uint64_t handle);
 };
 
 void PopulateNativeCallbacks(NativeCallbacks &callbacks);

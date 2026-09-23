@@ -267,6 +267,20 @@ static float __cdecl NativeGetConVarFloat(uint64_t handle) {
     return cvarAbs.GetAs<float>();
 }
 
+// GetAs<bool> converts from the cvar's own type: a float cvar reads true for any non-zero value
+// and a string cvar is parsed as a bool. Going through GetAs<int> instead truncates 0.5 to 0 and
+// fails to parse "true".
+static uint8_t __cdecl NativeGetConVarBool(uint64_t handle) {
+    if (!handle)
+        return 0;
+    ConVarRef ref(handle);
+    ConVarData *data = g_pCVar->GetConVarData(ref);
+    if (!data)
+        return 0;
+    ConVarRefAbstract cvarAbs(ref, data);
+    return cvarAbs.GetAs<bool>() ? 1 : 0;
+}
+
 static const char *__cdecl NativeGetConVarString(uint64_t handle) {
     if (!handle)
         return "";
@@ -288,6 +302,20 @@ static void __cdecl NativeSetConVarFloat(uint64_t handle, float value) {
         return;
     ConVarRefAbstract cvarAbs(ref, data);
     cvarAbs.SetAs<float>(value);
+}
+
+// ConVarRefAbstract::SetString parses the text into the cvar's own type and returns false only when
+// that fails; the new value is then clamped to the cvar's min/max. Nothing on this path checks
+// FCVAR_CHEAT, so it sets cheat cvars while sv_cheats is off, which the console refuses.
+static uint8_t __cdecl NativeSetConVarString(uint64_t handle, const char *value) {
+    if (!handle || !value)
+        return 0;
+    ConVarRef ref(handle);
+    ConVarData *data = g_pCVar->GetConVarData(ref);
+    if (!data)
+        return 0;
+    ConVarRefAbstract cvarAbs(ref, data);
+    return cvarAbs.SetString(CUtlString(value)) ? 1 : 0;
 }
 
 static void __cdecl NativeNotifyStateChanged(void *entity, int32_t fieldOffset, int16_t chainOffset, int32_t networkStateChangedOffset) {
@@ -1131,6 +1159,8 @@ void deadworks::PopulateNativeCallbacks(NativeCallbacks &callbacks) {
     callbacks.GetConVarInt = &NativeGetConVarInt;
     callbacks.GetConVarFloat = &NativeGetConVarFloat;
     callbacks.GetConVarString = &NativeGetConVarString;
+    callbacks.SetConVarString = &NativeSetConVarString;
+    callbacks.GetConVarBool = &NativeGetConVarBool;
 
     // Entity
     callbacks.GetEntityDesignerName = &NativeGetEntityDesignerName;
