@@ -4,59 +4,63 @@ using System.Numerics;
 namespace DeadworksManaged.Api;
 
 /// <summary>
-/// A world-space line rendered by an <c>env_beam</c> entity. Create one with <see cref="Create"/>, or
-/// several at once with <see cref="CreateBox"/> and <see cref="CreatePolyline"/>. Beams are the simplest
-/// way to draw zone outlines, paths, and debug shapes that every client can see.
+/// A glowing line between two points in the world that every player can see. Create one with <see cref="Create"/>,
+/// or a whole box or path at once with <see cref="CreateBox"/> and <see cref="CreatePolyline"/>.
 /// </summary>
+/// <remarks>
+/// <para>
+/// Beams glow like a laser: they brighten whatever is behind them, so they always look a little see-through, and
+/// the world's lighting shades them. They can't be made solid or fullbright. Black beams are invisible, and lowering
+/// the alpha makes a beam fainter. Change the color at any time with <see cref="CBaseEntity.RenderColor"/>.
+/// </para>
+/// <para>
+/// A beam stays until you remove it (<see cref="CBaseEntity.Remove"/>, or <see cref="RemoveAll"/> for a list) or
+/// the map changes.
+/// </para>
+/// </remarks>
 [NativeClass("CBeam")]
 public sealed unsafe class CBeam : CBaseEntity {
 	internal CBeam(nint handle) : base(handle) { }
 
+	/// <summary>The widest a beam can be. <see cref="Width"/> caps anything wider to this.</summary>
+	public const float MaxWidth = 102.3f;
+
 	private static readonly SchemaAccessor<Vector3> _vecEndPos = new("CBeam"u8, "m_vecEndPos"u8);
 	private static readonly SchemaAccessor<float> _fWidth = new("CBeam"u8, "m_fWidth"u8);
-	private static readonly SchemaAccessor<uint> _clrRender = new("CBaseModelEntity"u8, "m_clrRender"u8);
 
-	/// <summary>World position of the beam's first end. This is the entity's origin.</summary>
-	public Vector3 StartPosition {
-		get => Position;
-		set => Teleport(position: value);
-	}
+	/// <summary>
+	/// Where the beam starts, which is also its <see cref="CBaseEntity.Position"/>. Move it with
+	/// <see cref="SetStartPosition"/> or <see cref="SetEndpoints"/>.
+	/// </summary>
+	public Vector3 StartPosition => Position;
 
-	/// <summary>World position of the beam's second end.</summary>
+	/// <summary>Where the beam ends.</summary>
 	public Vector3 EndPosition {
 		get => _vecEndPos.Get(Handle);
 		set => _vecEndPos.Set(Handle, value);
 	}
 
-	/// <summary>Beam thickness in world units.</summary>
+	/// <summary>How thick the beam is, from 0 up to <see cref="MaxWidth"/>.</summary>
 	public float Width {
 		get => _fWidth.Get(Handle);
-		set => _fWidth.Set(Handle, value);
+		set => _fWidth.Set(Handle, Math.Clamp(value, 0f, MaxWidth));
 	}
 
-	/// <summary>Beam colour and opacity.</summary>
-	public Color Color {
-		get {
-			uint v = _clrRender.Get(Handle);
-			return Color.FromArgb((byte)(v >> 24), (byte)v, (byte)(v >> 8), (byte)(v >> 16));
-		}
-		set => _clrRender.Set(Handle, (uint)(value.R | (value.G << 8) | (value.B << 16) | (value.A << 24)));
-	}
+	/// <summary>Moves the start of the beam, leaving the end where it is.</summary>
+	public void SetStartPosition(Vector3 position) => Teleport(position: position);
 
-	/// <summary>Moves both ends of the beam in one call.</summary>
+	/// <summary>Moves both ends of the beam at once.</summary>
 	public void SetEndpoints(Vector3 start, Vector3 end) {
-		StartPosition = start;
+		SetStartPosition(start);
 		EndPosition = end;
 	}
 
-	/// <summary>
-	/// Spawns a beam from <paramref name="start"/> to <paramref name="end"/>.
-	/// </summary>
-	/// <param name="start">World position of the first end.</param>
-	/// <param name="end">World position of the second end.</param>
-	/// <param name="width">Thickness in world units.</param>
-	/// <param name="color">Colour and opacity. Defaults to opaque white.</param>
-	/// <returns>The spawned beam, or <see langword="null"/> if the entity could not be created.</returns>
+	/// <summary>Spawns a beam from <paramref name="start"/> to <paramref name="end"/>.</summary>
+	/// <param name="start">Where the beam starts.</param>
+	/// <param name="end">Where the beam ends.</param>
+	/// <param name="width">How thick it is, up to <see cref="MaxWidth"/>.</param>
+	/// <param name="color">Its color, white if not given. Black is invisible, and a lower alpha makes it fainter.</param>
+	/// <returns>The new beam, or <see langword="null"/> if the game couldn't create it.</returns>
 	public static CBeam? Create(Vector3 start, Vector3 end, float width = 1f, Color? color = null) {
 		var baseEntity = CreateByName("env_beam");
 		if (baseEntity == null) return null;
@@ -76,9 +80,13 @@ public sealed unsafe class CBeam : CBaseEntity {
 	}
 
 	/// <summary>
-	/// Spawns the twelve edges of the axis-aligned box spanning <paramref name="mins"/> to <paramref name="maxs"/>.
-	/// Useful for showing trigger volumes and zones. Beams that fail to spawn are skipped.
+	/// Outlines a box with a beam along each of its 12 edges, for example to show a zone or trigger area.
 	/// </summary>
+	/// <param name="mins">One corner of the box.</param>
+	/// <param name="maxs">The opposite corner. The two corners can be given in either order.</param>
+	/// <param name="width">How thick each beam is, up to <see cref="MaxWidth"/>.</param>
+	/// <param name="color">Their color, white if not given.</param>
+	/// <returns>The beams, to remove later with <see cref="RemoveAll"/>. Any that failed to spawn are left out.</returns>
 	public static List<CBeam> CreateBox(Vector3 mins, Vector3 maxs, float width = 1f, Color? color = null) {
 		Vector3 lo = Vector3.Min(mins, maxs);
 		Vector3 hi = Vector3.Max(mins, maxs);
@@ -103,10 +111,12 @@ public sealed unsafe class CBeam : CBaseEntity {
 		return beams;
 	}
 
-	/// <summary>
-	/// Spawns one beam between each consecutive pair of <paramref name="points"/>, forming a path.
-	/// Pass <paramref name="closed"/> to also connect the last point back to the first.
-	/// </summary>
+	/// <summary>Draws a path through <paramref name="points"/>, one beam per segment.</summary>
+	/// <param name="points">The points to join, in order. Needs at least two.</param>
+	/// <param name="width">How thick each beam is, up to <see cref="MaxWidth"/>.</param>
+	/// <param name="color">Their color, white if not given.</param>
+	/// <param name="closed">Also joins the last point back to the first, for example to draw a ring.</param>
+	/// <returns>The beams, to remove later with <see cref="RemoveAll"/>. Any that failed to spawn are left out.</returns>
 	public static List<CBeam> CreatePolyline(IReadOnlyList<Vector3> points, float width = 1f, Color? color = null, bool closed = false) {
 		var beams = new List<CBeam>(Math.Max(0, points.Count - 1));
 		for (int i = 1; i < points.Count; i++) {
@@ -120,7 +130,7 @@ public sealed unsafe class CBeam : CBaseEntity {
 		return beams;
 	}
 
-	/// <summary>Removes every beam in <paramref name="beams"/> that still exists and clears the list.</summary>
+	/// <summary>Removes every beam in <paramref name="beams"/> that still exists, then empties the list.</summary>
 	public static void RemoveAll(List<CBeam> beams) {
 		foreach (var beam in beams)
 			if (beam.IsValid) beam.Remove();
