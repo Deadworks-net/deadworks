@@ -100,6 +100,9 @@ public:
     // InitializeHeroOnPawn - dispatched after the pawn's hero abilities/modifiers
     // have been (re)populated server-side, regardless of which path got us here
     void OnPost_InitializeHeroOnPawn(void *pawn);
+    // ItemDraftRollRound - dispatched after a street brawl item draft round (or reroll) has
+    // been written into the pawn's m_ItemDraftRoundState, so plugins can edit the options
+    void OnPost_ItemDraftRollRound(void *pawn);
 
     template <typename T>
     T *GetEntity(CEntityIndex index) {

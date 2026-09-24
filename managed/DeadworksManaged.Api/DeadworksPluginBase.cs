@@ -42,6 +42,7 @@ public abstract class DeadworksPluginBase : IDeadworksPlugin {
 	public virtual void OnConfigReloaded() { }
 	public virtual void OnCheckTransmit(CheckTransmitEvent args) { }
 	public virtual void OnPawnHeroInitialized(CCitadelPlayerPawn pawn) { }
+	public virtual void OnItemDraftRolled(ItemDraftRolledEvent args) { }
 	public virtual void OnGameStateChanged(EGameState newState) { }
 	public virtual bool OnGameStateChanging(EGameState currentState, EGameState newState) => true;
 }
