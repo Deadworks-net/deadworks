@@ -10,6 +10,7 @@ internal static unsafe class NativeInterop
 	public static delegate* unmanaged[Cdecl]<void*, void*> GetHeroPawn => (delegate* unmanaged[Cdecl]<void*, void*>)_cb.GetHeroPawn;
 	public static delegate* unmanaged[Cdecl]<void*, uint, int, uint, byte, byte, byte, void*, void*, void> ModifyCurrency => (delegate* unmanaged[Cdecl]<void*, uint, int, uint, byte, byte, byte, void*, void*, void>)_cb.ModifyCurrency;
 	public static delegate* unmanaged[Cdecl]<byte*, byte*, SchemaFieldResult*, void> GetSchemaField => (delegate* unmanaged[Cdecl]<byte*, byte*, SchemaFieldResult*, void>)_cb.GetSchemaField;
+	public static delegate* unmanaged[Cdecl]<byte*, int> GetSchemaClassSize => (delegate* unmanaged[Cdecl]<byte*, int>)_cb.GetSchemaClassSize;
 	public static delegate* unmanaged[Cdecl]<void*, int, short, int, void> NotifyStateChanged => (delegate* unmanaged[Cdecl]<void*, int, short, int, void>)_cb.NotifyStateChanged;
 	public static delegate* unmanaged[Cdecl]<byte*, ulong> FindConVar => (delegate* unmanaged[Cdecl]<byte*, ulong>)_cb.FindConVar;
 	public static delegate* unmanaged[Cdecl]<ulong, int, void> SetConVarInt => (delegate* unmanaged[Cdecl]<ulong, int, void>)_cb.SetConVarInt;

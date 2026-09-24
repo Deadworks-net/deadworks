@@ -144,6 +144,14 @@ public interface IDeadworksPlugin {
 	void OnPawnHeroInitialized(CCitadelPlayerPawn pawn) { }
 
 	/// <summary>
+	/// Called after a street brawl item draft round has been rolled for a player - both when a new
+	/// draft round starts and when the player rerolls. The options are already on the pawn, so
+	/// edit them through <see cref="ItemDraftRolledEvent.Options"/> and the player sees the edited
+	/// draft. See <see cref="CCitadelPlayerPawn.ItemDraft"/> to edit the draft at any other time.
+	/// </summary>
+	void OnItemDraftRolled(ItemDraftRolledEvent args) { }
+
+	/// <summary>
 	/// Called after a CCitadelGameRules::ChangeGameState transition completes, whether the engine
 	/// or a plugin (via <see cref="GameRules.ChangeGameState"/>) started it.
 	/// </summary>
