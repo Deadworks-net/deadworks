@@ -25,7 +25,7 @@
 
   <Target Name="DeployToGame" AfterTargets="Build">
     <ItemGroup>
-      <DeployFiles Include="$(OutputPath)DeadworksManaged.dll;$(OutputPath)DeadworksManaged.pdb;$(OutputPath)DeadworksManaged.deps.json;$(OutputPath)DeadworksManaged.runtimeconfig.json;$(OutputPath)DeadworksManaged.Api.dll;$(OutputPath)DeadworksManaged.Api.pdb" />
+      <DeployFiles Include="$(OutputPath)DeadworksManaged.dll;$(OutputPath)DeadworksManaged.pdb;$(OutputPath)DeadworksManaged.deps.json;$(OutputPath)DeadworksManaged.runtimeconfig.json;$(OutputPath)DeadworksManaged.Api.dll;$(OutputPath)DeadworksManaged.Api.pdb;$(OutputPath)Google.Protobuf.dll" />
     </ItemGroup>
     <Copy SourceFiles="@(DeployFiles)" DestinationFolder="$(DeadlockManagedDir)" SkipUnchangedFiles="false" Retries="0" ContinueOnError="WarnAndContinue" />
   </Target>
