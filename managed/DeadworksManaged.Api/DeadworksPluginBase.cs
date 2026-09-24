@@ -29,6 +29,7 @@ public abstract class DeadworksPluginBase : IDeadworksPlugin {
 	public virtual bool OnClientConnect(ClientConnectEvent args) => true;
 	public virtual void OnClientPutInServer(ClientPutInServerEvent args) { }
 	public virtual void OnClientFullConnect(ClientFullConnectEvent args) { }
+	public virtual void OnClientDisconnecting(ClientDisconnectedEvent args) { }
 	public virtual void OnClientDisconnect(ClientDisconnectedEvent args) { }
 	public virtual void OnEntityCreated(EntityCreatedEvent args) { }
 	public virtual void OnEntitySpawned(EntitySpawnedEvent args) { }

@@ -206,9 +206,16 @@ public static class EntryPoint
     }
 
     [UnmanagedCallersOnly]
+    public static void OnClientDisconnecting(int slot, int reason)
+    {
+        var args = new ClientDisconnectedEvent { Slot = slot, Reason = (ENetworkDisconnectionReason)reason };
+        PluginLoader.DispatchClientDisconnecting(args);
+    }
+
+    [UnmanagedCallersOnly]
     public static void OnClientDisconnect(int slot, int reason)
     {
-        var args = new ClientDisconnectedEvent { Slot = slot, Reason = reason };
+        var args = new ClientDisconnectedEvent { Slot = slot, Reason = (ENetworkDisconnectionReason)reason };
         PluginLoader.DispatchClientDisconnect(args);
         Players.SetConnected(slot, false);
         ZoneRegistry.OnDisconnect(slot);

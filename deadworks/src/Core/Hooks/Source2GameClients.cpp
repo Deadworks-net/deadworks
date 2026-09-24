@@ -22,6 +22,9 @@ bool Source2GameClientsHook::Hook_ClientConnect(CPlayerSlot slot, const char *ps
 }
 
 void Source2GameClientsHook::Hook_ClientDisconnect(CPlayerSlot slot, ENetworkDisconnectionReason reason, const char *pszName, uint64 xuid, const char *pszNetworkID) {
+    // Before the game's own cleanup, which for a bot deletes its hero pawn.
+    g_Deadworks.OnPre_ISource2GameClients_ClientDisconnect(slot, reason);
+
     g_Source2GameClients_ClientDisconnect.thiscall<void>(this, slot, reason, pszName, xuid, pszNetworkID);
 
     g_Deadworks.On_ISource2GameClients_ClientDisconnect(slot, reason, pszName, xuid, pszNetworkID);

@@ -450,6 +450,9 @@ internal static partial class PluginLoader
     public static void DispatchClientFullConnect(ClientFullConnectEvent args)
         => DispatchToPlugins(p => p.OnClientFullConnect(args), nameof(IDeadworksPlugin.OnClientFullConnect));
 
+    public static void DispatchClientDisconnecting(ClientDisconnectedEvent args)
+        => DispatchToPlugins(p => p.OnClientDisconnecting(args), nameof(IDeadworksPlugin.OnClientDisconnecting));
+
     public static void DispatchClientDisconnect(ClientDisconnectedEvent args)
         => DispatchToPlugins(p => p.OnClientDisconnect(args), nameof(IDeadworksPlugin.OnClientDisconnect));
 

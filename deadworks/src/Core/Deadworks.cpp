@@ -535,6 +535,11 @@ bool Deadworks::On_ISource2GameClients_ClientConnect(CPlayerSlot slot, const cha
     return true;
 }
 
+void Deadworks::OnPre_ISource2GameClients_ClientDisconnect(CPlayerSlot slot, ENetworkDisconnectionReason reason) {
+    if (m_managed.onClientDisconnecting)
+        m_managed.onClientDisconnecting(slot.Get(), static_cast<int>(reason));
+}
+
 void Deadworks::On_ISource2GameClients_ClientDisconnect(CPlayerSlot slot, ENetworkDisconnectionReason reason, const char *pszName, uint64 xuid, const char *pszNetworkID) {
     m_clientFullyConnected[slot.Get()] = false;
     if (m_managed.onClientDisconnect)

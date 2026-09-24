@@ -42,6 +42,7 @@ public:
     // ISource2GameClients
     void On_ISource2GameClients_ClientPutInServer(CPlayerSlot slot, const char *pszName, int type, uint64 xuid);
     bool On_ISource2GameClients_ClientConnect(CPlayerSlot slot, const char *pszName, uint64 xuid, const char *pszNetworkID, bool unk1, CBufferString *pRejectReason);
+    void OnPre_ISource2GameClients_ClientDisconnect(CPlayerSlot slot, ENetworkDisconnectionReason reason);
     void On_ISource2GameClients_ClientDisconnect(CPlayerSlot slot, ENetworkDisconnectionReason reason, const char *pszName, uint64 xuid, const char *pszNetworkID);
     // INetworkServerService
     void On_StartupServer(const char *pszMapName);
