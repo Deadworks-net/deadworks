@@ -455,13 +455,6 @@ public static class EntryPoint
     }
 
     [UnmanagedCallersOnly]
-    public static unsafe void OnItemDraftRolled(void* pawn)
-    {
-        if (pawn == null) return;
-        PluginLoader.DispatchItemDraftRolled(new ItemDraftRolledEvent(new CCitadelPlayerPawn((nint)pawn)));
-    }
-
-    [UnmanagedCallersOnly]
     public static void OnGameStateChanged(int newState)
     {
         PluginLoader.DispatchGameStateChanged((EGameState)newState);

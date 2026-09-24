@@ -170,8 +170,6 @@ struct NativeCallbacks {
     int32_t(__cdecl *GetAbilityMaxCharges)(void *ability);
     // Engine's name for the net message registered under msgId ("CCitadelUserMsg_ChatMsg [314]"), or nullptr.
     const char *(__cdecl *GetNetMessageName)(int msgId);
-    // Size in bytes of a server.dll schema class (e.g. "ItemDraftOption_t"), 0 if unknown.
-    int32_t(__cdecl *GetSchemaClassSize)(const char *className);
 };
 
 void PopulateNativeCallbacks(NativeCallbacks &callbacks);

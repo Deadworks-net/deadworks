@@ -24,7 +24,6 @@
 #include "Hooks/ReplyConnection.hpp"
 #include "Hooks/CheckTransmit.hpp"
 #include "Hooks/InitializeHeroOnPawn.hpp"
-#include "Hooks/ItemDraftRollRound.hpp"
 #include "Hooks/FireModifierEvent.hpp"
 #include "A2SPatch.hpp"
 
@@ -261,9 +260,6 @@ void Deadworks::PostInit() {
     HookInline(hooks::g_InitializeHeroOnPawn,
                "CCitadelPlayerPawn::InitializeHeroOnPawn",
                &hooks::Hook_InitializeHeroOnPawn);
-    HookInline(hooks::g_ItemDraftRollRound,
-               "CCitadelPlayerPawn::ItemDraftRollRound",
-               &hooks::Hook_ItemDraftRollRound);
     HookInline(hooks::g_FireModifierEvent,
                "FireModifierEvent",
                &hooks::Hook_FireModifierEvent);
@@ -656,11 +652,6 @@ void Deadworks::OnPost_CheckTransmit(CCheckTransmitInfo **ppInfoList, int nInfoC
 void Deadworks::OnPost_InitializeHeroOnPawn(void *pawn) {
     if (m_managed.onPawnHeroInitialized && pawn)
         m_managed.onPawnHeroInitialized(pawn);
-}
-
-void Deadworks::OnPost_ItemDraftRollRound(void *pawn) {
-    if (m_managed.onItemDraftRolled && pawn)
-        m_managed.onItemDraftRolled(pawn);
 }
 
 void Deadworks::GetInterfaceFactories() {

@@ -318,12 +318,6 @@ static uint8_t __cdecl NativeSetConVarString(uint64_t handle, const char *value)
     return cvarAbs.SetString(CUtlString(value)) ? 1 : 0;
 }
 
-static int32_t __cdecl NativeGetSchemaClassSize(const char *className) {
-    if (!className)
-        return 0;
-    return schema::GetClassSize(className);
-}
-
 static void __cdecl NativeNotifyStateChanged(void *entity, int32_t fieldOffset, int16_t chainOffset, int32_t networkStateChangedOffset) {
     if (!entity)
         return;
@@ -1163,7 +1157,6 @@ void deadworks::PopulateNativeCallbacks(NativeCallbacks &callbacks) {
 
     // Schema
     callbacks.GetSchemaField = &NativeGetSchemaField;
-    callbacks.GetSchemaClassSize = &NativeGetSchemaClassSize;
     callbacks.NotifyStateChanged = &NativeNotifyStateChanged;
     callbacks.SetSchemaString = &NativeSetSchemaString;
 

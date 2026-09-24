@@ -503,9 +503,6 @@ internal static partial class PluginLoader
     public static void DispatchPawnHeroInitialized(CCitadelPlayerPawn pawn)
         => DispatchToPlugins(p => p.OnPawnHeroInitialized(pawn), nameof(IDeadworksPlugin.OnPawnHeroInitialized));
 
-    public static void DispatchItemDraftRolled(ItemDraftRolledEvent args)
-        => DispatchToPlugins(p => p.OnItemDraftRolled(args), nameof(IDeadworksPlugin.OnItemDraftRolled));
-
     public static void DispatchGameStateChanged(EGameState newState)
         => DispatchToPlugins(p => p.OnGameStateChanged(newState), nameof(IDeadworksPlugin.OnGameStateChanged));
 

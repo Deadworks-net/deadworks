@@ -27,13 +27,6 @@ public sealed unsafe class CCitadelPlayerPawn : CBasePlayerPawn {
 
 	public Heroes HeroID => (Heroes)HeroComponent.SpawnedHero.HeroID;
 
-	private static readonly SchemaAccessor<byte> _itemDraftRoundState = new("CCitadelPlayerPawn"u8, "m_ItemDraftRoundState"u8);
-	/// <summary>
-	/// This player's street brawl item draft: the options they are currently offered and how many
-	/// picks and rounds are left. Edits are networked to the player straight away.
-	/// </summary>
-	public ItemDraftRoundState ItemDraft => new(_itemDraftRoundState.GetAddress(Handle));
-
 	private static readonly SchemaAccessor<bool> _inRegenZone = new("CCitadelPlayerPawn"u8, "m_bInRegenerationZone"u8);
 	public bool InRegenerationZone => _inRegenZone.Get(Handle);
 

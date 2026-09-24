@@ -143,5 +143,4 @@ internal struct NativeCallbacks
 	public nint ResetAbilityCooldown;
 	public nint GetAbilityMaxCharges;
 	public nint GetNetMessageName;
-	public nint GetSchemaClassSize;
 }
