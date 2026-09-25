@@ -40,8 +40,12 @@ public unsafe class CBasePlayerController : CBaseEntity {
 
     private static readonly SchemaAccessor<ulong> _playerSteamId = new("CBasePlayerController"u8, "m_steamID"u8);
 
-    /// <summary>The player's SteamID64</summary>
-    public ulong PlayerSteamId  => _playerSteamId.Get(Handle);
+    /// <summary>
+    /// The player's SteamID64. A player who disconnects leaves their controller (team, hero, stats) in their slot,
+    /// and gets it back if they rejoin into it. To give it to someone else, set this to their SteamID in
+    /// <see cref="IDeadworksPlugin.OnClientConnect"/> as they join into that slot.
+    /// </summary>
+    public ulong PlayerSteamId { get => _playerSteamId.Get(Handle); set => _playerSteamId.Set(Handle, value); }
 
 	private static readonly SchemaAccessor<uint> _hPawn = new("CBasePlayerController"u8, "m_hPawn"u8);
 
@@ -54,6 +58,9 @@ public unsafe class CBasePlayerController : CBaseEntity {
 			return ptr != null ? new CBasePlayerPawn((nint)ptr) : null;
 		}
 	}
+
+	/// <summary>Forgets the pawn handle without telling the pawn, which may already belong to another controller.</summary>
+	internal void ClearPawnHandle() => _hPawn.Set(Handle, 0xFFFFFFFF);
 
 	/// <summary>Assigns a new pawn to this controller, optionally transferring team and movement state.</summary>
 	public void SetPawn(CBasePlayerPawn? pawn, bool retainOldPawnTeam = false, bool copyMovementState = false, bool allowTeamMismatch = false, bool preserveMovementState = false) {

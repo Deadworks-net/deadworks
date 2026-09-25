@@ -8,7 +8,7 @@ public sealed unsafe class CCitadelPlayerController : CBasePlayerController {
 	internal CCitadelPlayerController(nint handle) : base(handle) { }
 
 	private static readonly SchemaAccessor<byte> _playerDataGlobal = new("CCitadelPlayerController"u8, "m_PlayerDataGlobal"u8);
-	public PlayerDataGlobal PlayerDataGlobal => new(_playerDataGlobal.GetAddress(Handle));
+	public PlayerDataGlobal PlayerDataGlobal => new(_playerDataGlobal.GetAddress(Handle), Handle);
 
 	private static readonly SchemaAccessor<sbyte> _assignedLane = new("CCitadelPlayerController"u8, "m_nAssignedLane"u8);
 	/// <summary>
@@ -29,6 +29,35 @@ public sealed unsafe class CCitadelPlayerController : CBasePlayerController {
 	public CCitadelPlayerPawn? GetHeroPawn() {
 		var ptr = NativeInterop.GetHeroPawn((void*)Handle);
 		return ptr != null ? new CCitadelPlayerPawn((nint)ptr) : null;
+	}
+
+	private static readonly SchemaAccessor<uint> _hHeroPawn = new("CCitadelPlayerController"u8, "m_hHeroPawn"u8);
+
+	/// <summary>
+	/// Gives this player <paramref name="from"/>'s hero, as it is: level, souls, items, health and position carry over,
+	/// along with its team and lane. Use it to hand a leaver's hero to someone else. This player's old pawn (usually a
+	/// spectator's) is removed, and <paramref name="from"/> is left without one.
+	/// </summary>
+	/// <returns>False if <paramref name="from"/> has no hero.</returns>
+	public bool TakeOverHero(CCitadelPlayerController from) {
+		if (from == this || from.GetHeroPawn() is not { } hero)
+			return false;
+
+		var previous = Pawn;
+		ChangeTeam(hero.TeamNum);
+		SetPawn(hero);
+		_hHeroPawn.Set(Handle, hero.EntityHandle);
+		if (previous != null && previous.EntityHandle != hero.EntityHandle)
+			previous.Remove();
+
+		// Raw writes on purpose: SetPawn(null) on the old owner would reach into the pawn it just lost.
+		from.ClearPawnHandle();
+		_hHeroPawn.Set(from.Handle, CBaseEntity.InvalidEntityHandle);
+
+		PlayerDataGlobal.HeroID = from.PlayerDataGlobal.HeroID;
+		AssignedLane = from.AssignedLane;
+		OriginalLaneAssignment = from.OriginalLaneAssignment;
+		return true;
 	}
 
 	/// <summary>
