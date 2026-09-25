@@ -15,6 +15,7 @@
 #include "Hooks/BuildGameSessionManifest.hpp"
 #include "Hooks/ChangeGameState.hpp"
 #include "Hooks/AreAllLobbyPlayersConnected.hpp"
+#include "Hooks/GetPlayerStartLane.hpp"
 #include "Hooks/CCitadelPlayerController.hpp"
 #include "Hooks/EntityIO.hpp"
 #include "Hooks/TraceShape.hpp"
@@ -235,6 +236,9 @@ void Deadworks::PostInit() {
     HookInline(hooks::g_AreAllLobbyPlayersConnected,
                "AreAllLobbyPlayersConnected",
                &hooks::Hook_AreAllLobbyPlayersConnected);
+    HookInline(hooks::g_GetPlayerStartLane,
+               "CCitadelGameRules::GetPlayerStartLane",
+               &hooks::Hook_GetPlayerStartLane);
     HookInline(hooks::g_TraceShape,
                "TraceShape",
                &hooks::Hook_TraceShape);

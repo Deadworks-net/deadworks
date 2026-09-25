@@ -126,6 +126,11 @@
 			"library": "server.dll",
 			"windows": "48 8B C4 4C 89 40 ?? 48 89 50 ?? 88 48"
 		},
+		// Guessed name. (gameRules, controller) -> the lane whose zipline the player starts on.
+		"CCitadelGameRules::GetPlayerStartLane": {
+			"library": "server.dll",
+			"windows": "48 89 6C 24 ?? 57 48 83 EC ?? 48 8B EA 48 8B F9 48 85 D2 0F 84 ?? ?? ?? ?? 48 8B 05 ?? ?? ?? ?? 8B 40 ?? 85 C0 0F 85 ?? ?? ?? ?? 0F B6 82"
+		},
 		"AddResource": {
 			"library": "server.dll",
 			"windows": "48 89 5C 24 ?? 57 48 83 EC ?? 48 8B FA 48 8B D9 48 85 C9 74 ?? ?? ?? ?? 74"

@@ -10,6 +10,21 @@ public sealed unsafe class CCitadelPlayerController : CBasePlayerController {
 	private static readonly SchemaAccessor<byte> _playerDataGlobal = new("CCitadelPlayerController"u8, "m_PlayerDataGlobal"u8);
 	public PlayerDataGlobal PlayerDataGlobal => new(_playerDataGlobal.GetAddress(Handle));
 
+	private static readonly SchemaAccessor<sbyte> _assignedLane = new("CCitadelPlayerController"u8, "m_nAssignedLane"u8);
+	/// <summary>
+	/// Which lane's zipline this player rides if the match starts with the zipline launch. Setting it doesn't cause a
+	/// launch, it only picks the lane. <see cref="LaneColor.Invalid"/>, the default, leaves the choice to the game. Not
+	/// every map has every lane; dl_midtown has Yellow, Blue and Purple.
+	/// </summary>
+	public LaneColor AssignedLane { get => (LaneColor)_assignedLane.Get(Handle); set => _assignedLane.Set(Handle, (sbyte)value); }
+
+	private static readonly SchemaAccessor<sbyte> _originalLaneAssignment = new("CCitadelPlayerController"u8, "m_nOriginalLaneAssignment"u8);
+	/// <summary>The lane this player was first assigned, before any lane swap.</summary>
+	public LaneColor OriginalLaneAssignment {
+		get => (LaneColor)_originalLaneAssignment.Get(Handle);
+		set => _originalLaneAssignment.Set(Handle, (sbyte)value);
+	}
+
 	/// <summary>Returns the player's current hero pawn, or null if they have none.</summary>
 	public CCitadelPlayerPawn? GetHeroPawn() {
 		var ptr = NativeInterop.GetHeroPawn((void*)Handle);
