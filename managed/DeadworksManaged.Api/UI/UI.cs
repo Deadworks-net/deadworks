@@ -335,6 +335,18 @@ public sealed class UIPanel {
 	public void Clear(RecipientFilter to)
 		=> UIChannel.EnqueueClear(to, Id);
 
+	/// <summary>
+	/// Frees the mouse cursor for each recipient so they can click this panel's buttons. While it's free they can't
+	/// move, aim or cast. It stays free until <see cref="ReleaseCursor"/> or <see cref="DestroyLayout"/>; when several
+	/// panels ask for it, it stays free until the last one lets go.
+	/// </summary>
+	public void RequestCursor(RecipientFilter to)
+		=> UIChannel.EnqueueCursor(to, Id, free: true);
+
+	/// <summary>Gives back the cursor this panel asked for with <see cref="RequestCursor"/>.</summary>
+	public void ReleaseCursor(RecipientFilter to)
+		=> UIChannel.EnqueueCursor(to, Id, free: false);
+
 	/// <summary>Sends an opaque text payload to the panel script's onRaw handler.</summary>
 	public void SendRaw(RecipientFilter to, string text)
 		=> UIChannel.EnqueueRaw(to, Id, text);

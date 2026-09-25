@@ -7,7 +7,7 @@
 /// frame; plugins don't call this directly.
 /// </summary>
 internal static class UIChannel {
-	internal enum OrderedKind { Clear, Raw, Build, Destroy, Precache, Show, LoadXml, Append, Erase }
+	internal enum OrderedKind { Clear, Raw, Build, Destroy, Precache, Show, LoadXml, Append, Erase, Cursor }
 
 	internal readonly struct OrderedOp {
 		internal readonly string PanelId;
@@ -46,6 +46,7 @@ internal static class UIChannel {
 		internal bool    Shown;     // Show was issued (Build implies it)
 		internal string? XmlPath;   // LoadXml path, mutually exclusive with Layout
 		internal bool    UsedDeltas; // Append/Erase seen — see ReplayInto
+		internal bool    Cursor;     // the panel holds a free-cursor claim
 	}
 
 	private sealed class Slot {
@@ -329,6 +330,15 @@ internal static class UIChannel {
 		}
 	}
 
+	internal static void EnqueueCursor(RecipientFilter to, string panelId, bool free) {
+		for (int slot = 0; slot < _slots.Length; slot++) {
+			if (!to.HasRecipient(slot)) continue;
+			var s = _slots[slot];
+			PushOrdered(s, panelId, OrderedKind.Cursor, free ? "1" : "0");
+			Snapshot(s, panelId).Cursor = free;
+		}
+	}
+
 	internal static void EnqueuePrecache(RecipientFilter to, string panelId, string compressed) {
 		for (int slot = 0; slot < _slots.Length; slot++) {
 			if (!to.HasRecipient(slot)) continue;
@@ -534,6 +544,7 @@ internal static class UIChannel {
 				OrderedKind.LoadXml  => UIWire.EncodeLoadXml(op.PanelId, op.Payload ?? ""),
 				OrderedKind.Append   => UIWire.EncodeAppend(op.PanelId, op.Aux ?? "", op.Payload ?? ""),
 				OrderedKind.Erase    => UIWire.EncodeErase(op.PanelId, op.Payload ?? ""),
+				OrderedKind.Cursor   => UIWire.EncodeCursor(op.PanelId, op.Payload == "1"),
 				_                    => "",
 			};
 			if (msg.Length == 0) continue;
@@ -836,6 +847,8 @@ internal static class UIChannel {
 				PushOrdered(s, panelId, OrderedKind.Precache, snap.Layout);
 				if (snap.Shown) PushOrdered(s, panelId, OrderedKind.Show, null);
 			}
+			// The client dropped its claims along with its panels.
+			if (snap.Cursor) PushOrdered(s, panelId, OrderedKind.Cursor, "1");
 			if (snap.UsedDeltas) {
 				Console.WriteLine($"[UI] panel '{panelId}' uses Append/Erase — resync restores its base layout only");
 			}
