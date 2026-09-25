@@ -17,6 +17,7 @@
 #include "Hooks/AreAllLobbyPlayersConnected.hpp"
 #include "Hooks/GetPlayerStartLane.hpp"
 #include "Hooks/CCitadelPlayerController.hpp"
+#include "Hooks/CBasePlayerController.hpp"
 #include "Hooks/EntityIO.hpp"
 #include "Hooks/TraceShape.hpp"
 #include "Hooks/ProcessUsercmds.hpp"
@@ -192,6 +193,9 @@ void Deadworks::PostInit() {
     HookInline(hooks::g_CCitadelPlayerController_ClientConCommand,
                "CCitadelPlayerController::ClientConCommand",
                &hooks::Hook_CCitadelPlayerController_ClientConCommand);
+    HookInline(hooks::g_CBasePlayerController_SetPawn,
+               "CBasePlayerController::SetPawn",
+               &hooks::Hook_CBasePlayerController_SetPawn);
 
     // Resolve IGameEventManager2 from a known xref
     {

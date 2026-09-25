@@ -192,6 +192,7 @@ if not "$(DeadlockDir)"=="" if exist "$(TargetDir)$(TargetName).pdb" copy /Y "$(
     <ClCompile Include="src\Core\Hooks\CBaseEntity.cpp" />
     <ClCompile Include="src\Core\Hooks\CCitadelPlayerPawn.cpp" />
     <ClCompile Include="src\Core\Hooks\CCitadelPlayerController.cpp" />
+    <ClCompile Include="src\Core\Hooks\CBasePlayerController.cpp" />
     <ClCompile Include="src\Core\Hooks\GameEvents.cpp" />
     <ClCompile Include="src\Core\Hooks\CServerSideClientBase.cpp" />
     <ClCompile Include="src\Core\Hooks\PostEventAbstract.cpp" />
@@ -244,6 +245,7 @@ if not "$(DeadlockDir)"=="" if exist "$(TargetDir)$(TargetName).pdb" copy /Y "$(
     <ClInclude Include="src\Core\Hooks\CBaseEntity.hpp" />
     <ClInclude Include="src\Core\Hooks\CCitadelPlayerPawn.hpp" />
     <ClInclude Include="src\Core\Hooks\CCitadelPlayerController.hpp" />
+    <ClInclude Include="src\Core\Hooks\CBasePlayerController.hpp" />
     <ClInclude Include="src\Core\Hooks\GameEvents.hpp" />
     <ClInclude Include="src\Core\Hooks\CServerSideClientBase.hpp" />
     <ClInclude Include="src\Core\Hooks\PostEventAbstract.hpp" />
