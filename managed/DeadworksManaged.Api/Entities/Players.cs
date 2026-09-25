@@ -16,13 +16,19 @@ public static class Players {
 	/// <summary>Reset all connection state. Called on map change / server startup.</summary>
 	internal static void ResetAll() => Array.Clear(_connected);
 
+	/// <summary>
+	/// Slots this server has, from its player count. Entities past the last slot are ordinary map entities, not
+	/// player controllers, so nothing reads them as one.
+	/// </summary>
+	private static int SlotCount => Math.Clamp(GlobalVars.MaxClients, 0, MaxSlot);
+
 	/// <summary>Returns whether the given slot is marked as fully connected.</summary>
 	public static bool IsConnected(int slot) => (uint)slot < MaxSlot && _connected[slot];
 
 	/// <summary>Returns all player controllers that exist in the entity system.</summary>
 	public static unsafe IEnumerable<CCitadelPlayerController> GetAllControllers() {
 		var list = new List<CCitadelPlayerController>();
-		for (int i = 0; i < MaxSlot; i++) {
+		for (int i = 0; i < SlotCount; i++) {
 			var ptr = NativeInterop.GetPlayerController(i);
 			if (ptr != null)
 				list.Add(new CCitadelPlayerController((nint)ptr));
@@ -33,7 +39,7 @@ public static class Players {
 	/// <summary>Returns all player controllers for fully connected players.</summary>
 	public static unsafe IEnumerable<CCitadelPlayerController> GetAll() {
 		var list = new List<CCitadelPlayerController>();
-		for (int i = 0; i < MaxSlot; i++) {
+		for (int i = 0; i < SlotCount; i++) {
 			if (!_connected[i]) continue;
 			var ptr = NativeInterop.GetPlayerController(i);
 			if (ptr != null)
@@ -45,7 +51,7 @@ public static class Players {
 	/// <summary>Returns the hero pawn for every connected player that has one.</summary>
 	public static unsafe IEnumerable<CCitadelPlayerPawn> GetAllPawns() {
 		var list = new List<CCitadelPlayerPawn>();
-		for (int i = 0; i < MaxSlot; i++) {
+		for (int i = 0; i < SlotCount; i++) {
 			if (!_connected[i]) continue;
 			var ptr = NativeInterop.GetPlayerController(i);
 			if (ptr == null) continue;
@@ -58,7 +64,7 @@ public static class Players {
 
 	/// <summary>Returns the player controller in the given slot, or null if the slot is empty.</summary>
 	public static unsafe CCitadelPlayerController? FromSlot(int slot) {
-		if ((uint)slot >= MaxSlot) return null;
+		if ((uint)slot >= SlotCount) return null;
 		var ptr = NativeInterop.GetPlayerController(slot);
 		return ptr != null ? new CCitadelPlayerController((nint)ptr) : null;
 	}
