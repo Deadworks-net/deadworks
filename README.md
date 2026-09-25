@@ -93,6 +93,7 @@ with `connect <server-ip>:27015`. Only UDP 27015 needs to be open.
 | Name the server, set a password, change map or port | `SERVER_NAME`, `SERVER_PASSWORD`, `SERVER_MAP`, `SERVER_PORT` in `.env`, then `docker compose up -d` |
 | Set cvars | put them in `./configs/server.cfg`; it is exec'd on every start |
 | Install a plugin | drop its `.dll` (and any dependencies) into `./plugins`; it loads immediately, no restart |
+| Add a custom map | drop its `.vpk` into `./maps` and restart (`docker compose restart`); load it with `SERVER_MAP` or `map <name>`. Players need the map too |
 | Configure Deadworks or a plugin | edit the files that appear in `./configs` |
 | Run a console command | `docker compose exec deadworks console status` |
 | Open an interactive console | `docker compose exec deadworks console` (ctrl-d to leave) |
@@ -103,7 +104,7 @@ with `connect <server-ip>:27015`. Only UDP 27015 needs to be open.
 | Use a remote RCON tool | set `RCON_PASSWORD` and uncomment the tcp port in `compose.yaml` |
 | Reuse game files I already have | mount a Windows install of Deadlock at `/steam/game:ro`, leave `STEAM_USERNAME` empty; nothing is written to it |
 | Pin a Deadworks version | `DEADWORKS_VERSION=v0.4.16` in `.env` (`image` for the one baked into the image) |
-| Back up | `./configs` and `./plugins` are everything; the volumes can always be re-created |
+| Back up | `./configs`, `./plugins` and `./maps` are everything; the volumes can always be re-created |
 
 ### Several servers on one host
 
@@ -118,7 +119,7 @@ docker compose up -d
 docker compose exec one console status
 ```
 
-Each server gets its own `./<name>/plugins` and `./<name>/configs`. The game is only updated when
+Each server gets its own `./<name>/plugins` and `./<name>/configs`; `./maps` is shared. The game is only updated when
 no server is using it, so to pick up a game update restart them all together
 (`docker compose restart`); a server restarted on its own keeps running the installed build.
 

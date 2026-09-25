@@ -60,8 +60,8 @@ COPY --from=fetch /out/depotdownloader /opt/depotdownloader
 COPY --chmod=755 entrypoint.sh /usr/local/bin/entrypoint.sh
 COPY --chmod=755 console.pl /usr/local/bin/console
 
-RUN useradd -m -u 1000 -s /bin/bash deadworks && mkdir -p /steam /data /plugins /configs \
-    && chown deadworks:deadworks /steam /data /plugins /configs
+RUN useradd -m -u 1000 -s /bin/bash deadworks && mkdir -p /steam /data /plugins /configs /maps \
+    && chown deadworks:deadworks /steam /data /plugins /configs /maps
 
 ENV WINEPREFIX=/data/wineprefix \
     WINEARCH=win64 \

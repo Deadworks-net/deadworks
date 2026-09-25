@@ -160,7 +160,7 @@ install_steamclient() {
 # file as a plain file. Rebuilt on every start, so files a game update added or removed follow.
 build_tree() {
     mkdir -p "$SERVER_DIR"
-    find "$SERVER_DIR" -type l -lname "$GAME_DIR/*" -delete
+    find "$SERVER_DIR" -type l \( -lname "$GAME_DIR/*" -o -lname "/maps/*" \) -delete
     # The skipped paths are DepotDownloader's bookkeeping and, if the install is a copy somebody
     # already ran Deadworks from, the directories this script owns.
     perl -e '
@@ -180,6 +180,19 @@ build_tree() {
         }
         walk("");
     ' "$GAME_DIR" "$SERVER_DIR" .DepotDownloader .deadworks.lock game/bin/win64/managed game/bin/win64/configs
+    link_maps
+}
+
+# Custom maps go next to the stock ones, so `map <name>` and SERVER_MAP find them. A custom map
+# named like a stock one replaces it for this server only.
+link_maps() {
+    local vpk
+    [ -d /maps ] || return 0
+    for vpk in /maps/*.vpk; do
+        [ -f "$vpk" ] || continue
+        ln -sfn "$vpk" "$SERVER_DIR/game/citadel/maps/${vpk##*/}"
+        log "custom map: $(basename "$vpk" .vpk)"
+    done
 }
 
 # The newest release tag, or nothing if GitHub cannot be reached. The releases/latest redirect

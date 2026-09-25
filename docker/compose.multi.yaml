@@ -5,11 +5,10 @@
 #
 # Everything in .env applies to all of them; what differs goes under `environment`. Each server
 # needs its own port, its own data volume and its own configs directory. To add one, copy a block
-# and change the name and the port.
+# and change the name and the port. ./maps is shared: every server can load the maps in it.
 
 x-server: &server
   image: ghcr.io/deadworks-net/deadworks:latest
-  build: .
   restart: unless-stopped
   stop_grace_period: 15s
   env_file: .env
@@ -31,6 +30,7 @@ services:
       - one:/data
       - ./one/plugins:/plugins
       - ./one/configs:/configs
+      - ./maps:/maps:ro
 
   two:
     <<: *server
@@ -44,6 +44,7 @@ services:
       - two:/data
       - ./two/plugins:/plugins
       - ./two/configs:/configs
+      - ./maps:/maps:ro
 
 volumes:
   steam:

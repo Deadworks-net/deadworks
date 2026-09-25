@@ -1,7 +1,6 @@
 services:
   deadworks:
     image: ghcr.io/deadworks-net/deadworks:latest
-    build: .
     container_name: deadworks
     restart: unless-stopped
     stop_grace_period: 15s
@@ -16,6 +15,7 @@ services:
       - data:/data              # this server's own state (Wine prefix, links into the install), ~0.8 GB
       - ./plugins:/plugins      # drop plugin .dlls here; hot-reloaded
       - ./configs:/configs      # deadworks.jsonc, per-plugin configs, optional server.cfg
+      - ./maps:/maps:ro         # custom map .vpks, loadable by name like the stock ones
     logging:
       options:
         max-size: "20m"
