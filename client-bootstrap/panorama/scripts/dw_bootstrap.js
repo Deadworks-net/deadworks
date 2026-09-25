@@ -1004,7 +1004,8 @@
                     (function (ev, ea) {
                         elem.SetPanelEvent("onactivate", function () {
                             if (pressFlash) pressFlash();
-                            entry.wrapper.send.apply(entry.wrapper, [ev].concat(ea));
+                            if (ev === "~copy") copyToClipboard(elem, ea.join(","));
+                            else entry.wrapper.send.apply(entry.wrapper, [ev].concat(ea));
                         });
                     })(evtName, evtArgs);
                 }
@@ -1025,6 +1026,11 @@
                 try { elem.hittestchildren = false; } catch (e) {}
             }
         }
+    }
+
+    function copyToClipboard(panel, text) {
+        try { $.DispatchEvent("CopyStringToClipboard", panel, text, "Copied to clipboard"); }
+        catch (e) { $.Msg(DW_TAG, " copy to clipboard failed: ", String(e)); }
     }
 
     function parseStyle(styleStr) {

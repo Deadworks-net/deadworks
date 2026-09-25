@@ -100,6 +100,15 @@ public sealed class UIButton : UINode {
 		ClickArgs = args;
 		return this;
 	}
+
+	/// <summary>
+	/// Make clicking this button copy <paramref name="text"/> to the player's clipboard, such as a link to share.
+	/// The copy happens in the player's game: no event reaches the plugin. Replaces any <see cref="OnClick"/> event.
+	/// </summary>
+	public UIButton CopyOnClick(string text) => OnClick(CopyEvent, text);
+
+	/// <summary>The click event the client bootstrap handles itself by copying the button's argument.</summary>
+	internal const string CopyEvent = "~copy";
 }
 
 public sealed class UIImage : UINode {
