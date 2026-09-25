@@ -139,6 +139,14 @@ public static class UI {
 	public static event Action<int>? ClientResync;
 
 	/// <summary>
+	/// Whether the player at <paramref name="slot"/> has the Deadworks client bootstrap, the addon the Deadworks launcher
+	/// installs. Without it they see none of the server's UI. It reports in once their game has loaded the map, usually
+	/// within a few seconds of <see cref="IDeadworksPlugin.OnClientFullConnect"/>, so false straight after joining
+	/// doesn't mean they lack it. It also reads false for a moment while their UI rebuilds after a hitch.
+	/// </summary>
+	public static bool HasClientBootstrap(int slot) => UIChannel.IsAcked(slot);
+
+	/// <summary>
 	/// Panel ids the client at <paramref name="slot"/> supplies its own layout
 	/// for, reported on the handshake. Empty until that client acks.
 	///

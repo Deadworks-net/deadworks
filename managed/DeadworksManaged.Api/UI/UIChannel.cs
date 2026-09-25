@@ -753,6 +753,9 @@ internal static class UIChannel {
 		}
 	}
 
+	/// <summary>Whether the client at <paramref name="slot"/> has answered this session's hello.</summary>
+	internal static bool IsAcked(int slot) => slot >= 0 && slot < _slots.Length && _slots[slot].Acked;
+
 	/// <summary>Panel ids the client at <paramref name="slot"/> supplies its own layout for.</summary>
 	internal static IReadOnlyCollection<string> ClientPanels(int slot)
 		=> (slot < 0 || slot >= _slots.Length) ? Array.Empty<string>() : _slots[slot].ClientPanels;
