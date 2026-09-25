@@ -1021,6 +1021,9 @@
         }
         if (hasChildren) {
             for (var i = 0; i < node.c.length; i++) buildNode(entry, elem, node.c[i]);
+            if (t === "B" && clickable) {
+                try { elem.hittestchildren = false; } catch (e) {}
+            }
         }
     }
 
