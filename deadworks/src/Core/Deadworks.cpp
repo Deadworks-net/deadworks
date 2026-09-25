@@ -283,11 +283,15 @@ void Deadworks::On_ISource2Server_ApplyGameSettings() {
     if (!m_dotnetInitialized) {
         m_dotnetInitialized = true;
         InitializeManagedCallbacks(m_dotnetHost, m_managed);
+        // A map given on the command line starts before this point, so plugins never saw its StartupServer.
+        if (m_startupMap && m_managed.onStartupServer)
+            m_managed.onStartupServer(m_startupMap->c_str());
     }
 }
 
 void Deadworks::On_StartupServer(const char *pszMapName) {
     g_Log->Info("StartupServer (map: {})", pszMapName ? pszMapName : "");
+    m_startupMap = pszMapName ? pszMapName : "";
 
     // Register entity listener
     GameEntitySystem()->AddListenerEntity(&g_EntityListener);

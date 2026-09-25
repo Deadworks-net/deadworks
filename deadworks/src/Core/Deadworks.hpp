@@ -1,6 +1,8 @@
 #pragma once
 
 #include <iappsystem.h>
+#include <optional>
+#include <string>
 
 #include "../Logging/S2Logger.hpp"
 #include "../Lib/Module.hpp"
@@ -131,6 +133,8 @@ private:
     std::string m_desiredServerAddons; // value set by managed plugins via SetServerAddons
     DotNetHost m_dotnetHost;
     bool m_dotnetInitialized = false;
+    // The first map starts before .NET is up; kept so its StartupServer can be replayed to plugins.
+    std::optional<std::string> m_startupMap;
     ManagedCallbacks m_managed{};
 };
 
