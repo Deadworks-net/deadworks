@@ -170,6 +170,8 @@ struct NativeCallbacks {
     int32_t(__cdecl *GetAbilityMaxCharges)(void *ability);
     // Engine's name for the net message registered under msgId ("CCitadelUserMsg_ChatMsg [314]"), or nullptr.
     const char *(__cdecl *GetNetMessageName)(int msgId);
+    // Drops a client. The ENetworkDisconnectionReason reaches the disconnect hooks, not the player.
+    void(__cdecl *DisconnectClient)(int32_t slot, int32_t reason);
 };
 
 void PopulateNativeCallbacks(NativeCallbacks &callbacks);

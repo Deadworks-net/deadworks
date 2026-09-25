@@ -17,6 +17,10 @@ public unsafe class CBasePlayerController : CBaseEntity {
 	public uint PlaySound(string name, float volume = 1f, float pitch = 1f)
 		=> Sounds.Sounds.Play(name, Recipients, volume, pitch);
 
+	/// <summary>Disconnects this player. See <see cref="Server.Kick"/>.</summary>
+	public void Kick(ENetworkDisconnectionReason reason = ENetworkDisconnectionReason.NetworkDisconnectKicked)
+		=> Server.Kick(Slot, reason);
+
 	private static readonly SchemaAccessor<byte> _playerName = new("CBasePlayerController"u8, "m_iszPlayerName"u8);
 
 	/// <summary>The player's display name (char[128] inline buffer).</summary>

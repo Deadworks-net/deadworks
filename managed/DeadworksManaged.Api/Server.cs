@@ -128,6 +128,14 @@ public static unsafe class Server {
 		}
 	}
 
+	/// <summary>
+	/// Disconnects the player in <paramref name="slot"/>. They're sent back to the main menu without being told why, so
+	/// tell them first if they should know. The reason is for plugins: it's what
+	/// <see cref="IDeadworksPlugin.OnClientDisconnecting"/> and <see cref="IDeadworksPlugin.OnClientDisconnect"/> see.
+	/// </summary>
+	public static void Kick(int slot, ENetworkDisconnectionReason reason = ENetworkDisconnectionReason.NetworkDisconnectKicked)
+		=> NativeInterop.DisconnectClient(slot, (int)reason);
+
 	/// <summary>Returns true if the given parameter is present on the engine command line (e.g. "-nomaster").</summary>
 	public static bool HasCommandLineParm(string parm) {
 		Span<byte> utf8 = Utf8.Encode(parm, stackalloc byte[Utf8.Size(parm)]);

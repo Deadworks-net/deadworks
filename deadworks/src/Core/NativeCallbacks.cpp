@@ -443,6 +443,12 @@ static int32_t __cdecl NativeCreateFakeClient(const char *name) {
     return g_pEngineServer->CreateFakeClient(name).Get();
 }
 
+static void __cdecl NativeDisconnectClient(int32_t slot, int32_t reason) {
+    if (!g_pEngineServer || slot < 0)
+        return;
+    g_pEngineServer->DisconnectClient(CPlayerSlot(slot), static_cast<ENetworkDisconnectionReason>(reason));
+}
+
 // --- Engine log forwarding to managed code ---
 static void(__cdecl *g_ManagedLogCallback)(const char *message) = nullptr;
 
@@ -1273,6 +1279,7 @@ void deadworks::PopulateNativeCallbacks(NativeCallbacks &callbacks) {
 
     // Fake clients
     callbacks.CreateFakeClient = &NativeCreateFakeClient;
+    callbacks.DisconnectClient = &NativeDisconnectClient;
 
     // Command line
     callbacks.HasCommandLineParm = &NativeHasCommandLineParm;

@@ -151,6 +151,7 @@ internal static unsafe class NativeInterop
 
 	// Fake clients
 	public static delegate* unmanaged[Cdecl]<byte*, int> CreateFakeClient => (delegate* unmanaged[Cdecl]<byte*, int>)_cb.CreateFakeClient;
+	public static delegate* unmanaged[Cdecl]<int, int, void> DisconnectClient => (delegate* unmanaged[Cdecl]<int, int, void>)_cb.DisconnectClient;
 
 	// Entity movement and class checks
 	public static delegate* unmanaged[Cdecl]<void*, byte, void> SetMoveType => (delegate* unmanaged[Cdecl]<void*, byte, void>)_cb.SetMoveType;
