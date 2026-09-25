@@ -112,6 +112,10 @@ internal static class UIChannel {
 		// Ordered ops queued so far. Stamped onto both the ops and the pending
 		// updates so their relative order survives coalescing.
 		internal long OrderedSeq;
+
+		// Where the idle re-send of Shadow/StyleShadow picks up next, and when it last ran.
+		internal int RefreshCursor;
+		internal long LastRefreshTicks;
 	}
 
 	/// <summary>
@@ -229,6 +233,14 @@ internal static class UIChannel {
 		=> CaptionSlots * CaptionPoolUtilisation
 		   / Math.Max(0.02f, CaptionLengthSeconds + CaptionLingerSeconds);
 	internal static int BytesPerSecond = 16384;
+
+	// Captions carry no acknowledgement and live only a fraction of a second, so one the client doesn't read in time
+	// (a hitch loading a hero model is enough) is gone, and a value that doesn't change again would stay wrong on
+	// screen. While a slot has nothing else to send, its current values and styles are re-sent a few at a time, in
+	// rotation, so anything lost heals within a few seconds. Re-applying a value the client already has changes
+	// nothing.
+	private const int RefreshIntervalMs = 300;
+	private const int RefreshBatch = 12;
 	internal static int ByteBurst = 16384;
 
 	private static void PushOrdered(Slot s, string panelId, OrderedKind kind,
@@ -515,8 +527,41 @@ internal static class UIChannel {
 
 			// 4) Emit whatever fits this tick
 			DrainOutFrames(slot, s);
+
+			// 5) Idle: re-send a slice of the current state, to heal anything the client missed.
+			if (IsIdle(s) && now - s.LastRefreshTicks >= RefreshIntervalMs * TimeSpan.TicksPerMillisecond) {
+				s.LastRefreshTicks = now;
+				RequeueStateSlice(s);
+			}
 		}
 	}
+
+	private static bool IsIdle(Slot s) =>
+		s.Ordered.Count == 0 && s.Reliable.Count == 0 && s.Unreliable.Count == 0 && s.Styles.Count == 0
+		&& s.OutFrames.Count == 0 && !s.ShadowReplayPending && s.Tokens >= 1.0;
+
+	/// <summary>
+	/// Queue the next <see cref="RefreshBatch"/> retained values and styles, round-robin over both, to go out with
+	/// the next tick's reliable flush.
+	/// </summary>
+	private static void RequeueStateSlice(Slot s) {
+		int total = s.Shadow.Count + s.StyleShadow.Count;
+		if (total == 0) return;
+		int start = s.RefreshCursor % total;
+		int take = Math.Min(RefreshBatch, total);
+		int index = 0;
+		foreach (var (key, value) in s.Shadow) {
+			if (InSlice(index++, start, take, total)) s.Reliable[key] = new Pending(value, s.OrderedSeq);
+		}
+		foreach (var (key, value) in s.StyleShadow) {
+			if (InSlice(index++, start, take, total)) s.Styles[key] = new Pending(value, s.OrderedSeq);
+		}
+		s.RefreshCursor = (start + take) % total;
+	}
+
+	/// <summary>Whether <paramref name="index"/> falls in the <paramref name="take"/> entries from <paramref name="start"/>, wrapping at <paramref name="total"/>.</summary>
+	private static bool InSlice(int index, int start, int take, int total) =>
+		((index - start) % total + total) % total < take;
 
 	private static void BuildOrderedFrames(Slot s) {
 		while (s.Ordered.Count > 0) {
