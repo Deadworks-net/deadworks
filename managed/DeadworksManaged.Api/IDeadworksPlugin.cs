@@ -81,7 +81,8 @@ public interface IDeadworksPlugin {
 	void OnClientPutInServer(ClientPutInServerEvent args) { }
 
 	/// <summary>
-	/// Called when a client has fully connected and is in-game.
+	/// Called when a client is fully in game: when they join, and again each time they finish loading into a new map.
+	/// Bots included.
 	/// </summary>
 	void OnClientFullConnect(ClientFullConnectEvent args) { }
 

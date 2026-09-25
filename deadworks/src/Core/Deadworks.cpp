@@ -482,17 +482,20 @@ bool Deadworks::ShouldAllowGameStateChange(int currentState, int newState) {
 }
 
 void Deadworks::On_ISource2Server_GameFrame(bool simulating, bool bFirstTick, bool bLastTick) {
-    // Poll for fully-connected transitions
+    // Poll for fully-connected transitions. A slot re-arms whenever its client isn't in game, so every arrival is
+    // reported however the slot was emptied or filled (map changes, fake clients), not only via ClientConnect.
     if (m_managed.onClientFullConnect) {
         auto *server = g_pNetworkServerService->GetIGameServer();
         for (int i = 0; i < 64; ++i) {
+            auto *client = server->GetClientBySlot(CPlayerSlot(i));
+            if (!client || !client->IsInGame()) {
+                m_clientFullyConnected[i] = false;
+                continue;
+            }
             if (m_clientFullyConnected[i])
                 continue;
-            auto *client = server->GetClientBySlot(CPlayerSlot(i));
-            if (client && client->IsInGame()) {
-                m_clientFullyConnected[i] = true;
-                m_managed.onClientFullConnect(i);
-            }
+            m_clientFullyConnected[i] = true;
+            m_managed.onClientFullConnect(i);
         }
     }
 
