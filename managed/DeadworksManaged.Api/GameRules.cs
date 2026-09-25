@@ -68,6 +68,20 @@ public static unsafe class GameRules
 		set { if (_gameRulesPtr != 0) _winningTeam.Set(_gameRulesPtr, value); }
 	}
 
+	/// <summary>
+	/// Gives every map the match start dl_midtown has: a countdown in base, then everyone launched down their lane's
+	/// zipline (choose lanes with <see cref="CCitadelPlayerController.AssignedLane"/>). Off by default, when only
+	/// dl_midtown starts that way and any other map goes straight into the match with everyone in base.
+	/// </summary>
+	/// <remarks>
+	/// On a server without a matchmaking lobby the countdown also needs <c>citadel_match_intro_force_enabled 1</c>, the
+	/// same as on dl_midtown. The setting lasts across map changes, so turn it off again when your plugin unloads.
+	/// </remarks>
+	public static bool MatchStartOnAnyMap {
+		get => NativeInterop.GetMatchStartOnAnyMap() != 0;
+		set => NativeInterop.SetMatchStartOnAnyMap(value ? (byte)1 : (byte)0);
+	}
+
 	/// <summary>Calls the real CCitadelGameRules::ChangeGameState, running the engine's normal transition logic.</summary>
 	public static void ChangeGameState(EGameState state)
 	{

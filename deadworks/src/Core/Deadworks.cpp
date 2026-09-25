@@ -16,6 +16,7 @@
 #include "Hooks/ChangeGameState.hpp"
 #include "Hooks/AreAllLobbyPlayersConnected.hpp"
 #include "Hooks/GetPlayerStartLane.hpp"
+#include "Hooks/MatchMapOverride.hpp"
 #include "Hooks/CCitadelPlayerController.hpp"
 #include "Hooks/CBasePlayerController.hpp"
 #include "Hooks/EntityIO.hpp"
@@ -243,6 +244,12 @@ void Deadworks::PostInit() {
     HookInline(hooks::g_GetPlayerStartLane,
                "CCitadelGameRules::GetPlayerStartLane",
                &hooks::Hook_GetPlayerStartLane);
+    HookInline(hooks::g_UsesMatchFlow,
+               "CCitadelGameRules::UsesMatchFlow",
+               &hooks::Hook_UsesMatchFlow);
+    HookInline(hooks::g_StartPlayersInLanes,
+               "CCitadelGameRules::StartPlayersInLanes",
+               &hooks::Hook_StartPlayersInLanes);
     HookInline(hooks::g_TraceShape,
                "TraceShape",
                &hooks::Hook_TraceShape);

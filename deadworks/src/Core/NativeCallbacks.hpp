@@ -172,6 +172,9 @@ struct NativeCallbacks {
     const char *(__cdecl *GetNetMessageName)(int msgId);
     // Drops a client. The ENetworkDisconnectionReason reaches the disconnect hooks, not the player.
     void(__cdecl *DisconnectClient)(int32_t slot, int32_t reason);
+    // Run the matchmade start (pre-game countdown, zipline launch) on any map. See Hooks/MatchMapOverride.hpp.
+    void(__cdecl *SetMatchStartOnAnyMap)(uint8_t enabled);
+    uint8_t(__cdecl *GetMatchStartOnAnyMap)();
 };
 
 void PopulateNativeCallbacks(NativeCallbacks &callbacks);

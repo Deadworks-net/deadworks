@@ -12,6 +12,7 @@
 #include "Hooks/BuildGameSessionManifest.hpp"
 #include "Hooks/ChangeGameState.hpp"
 #include "Hooks/AreAllLobbyPlayersConnected.hpp"
+#include "Hooks/MatchMapOverride.hpp"
 
 #include "Hooks/TraceShape.hpp"
 #include "../Memory/MemoryDataLoader.hpp"
@@ -971,6 +972,14 @@ static void __cdecl NativeChangeGameState(void *gameRules, int32_t newState) {
     hooks::ChangeGameState(gameRules, newState);
 }
 
+static void __cdecl NativeSetMatchStartOnAnyMap(uint8_t enabled) {
+    hooks::g_MatchStartOnAnyMap = enabled != 0;
+}
+
+static uint8_t __cdecl NativeGetMatchStartOnAnyMap() {
+    return hooks::g_MatchStartOnAnyMap ? 1 : 0;
+}
+
 static void __cdecl NativeSetWaitingForPlayersRoster(uint32_t readyCount, uint32_t totalCount) {
     hooks::g_LobbyPlayersConnectedOverride = readyCount;
     hooks::g_LobbyPlayersTotalOverride = totalCount;
@@ -1280,6 +1289,8 @@ void deadworks::PopulateNativeCallbacks(NativeCallbacks &callbacks) {
     // Fake clients
     callbacks.CreateFakeClient = &NativeCreateFakeClient;
     callbacks.DisconnectClient = &NativeDisconnectClient;
+    callbacks.SetMatchStartOnAnyMap = &NativeSetMatchStartOnAnyMap;
+    callbacks.GetMatchStartOnAnyMap = &NativeGetMatchStartOnAnyMap;
 
     // Command line
     callbacks.HasCommandLineParm = &NativeHasCommandLineParm;

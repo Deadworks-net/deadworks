@@ -126,6 +126,16 @@
 			"library": "server.dll",
 			"windows": "48 8B C4 4C 89 40 ?? 48 89 50 ?? 88 48"
 		},
+		// Guessed name. (gameRules) -> whether the matchmade flow (pre-game countdown) applies; dl_midtown only.
+		"CCitadelGameRules::UsesMatchFlow": {
+			"library": "server.dll",
+			"windows": "48 89 5C 24 ?? 48 89 6C 24 ?? 48 89 74 24 ?? 48 89 7C 24 ?? 41 56 48 83 EC 20 48 8B 05 ?? ?? ?? ?? 48 8D 2D"
+		},
+		// Guessed name. (gameRules, bForceIntro): puts heroes on their lane's zipline as GameInProgress starts; dl_midtown only.
+		"CCitadelGameRules::StartPlayersInLanes": {
+			"library": "server.dll",
+			"windows": "48 8B C4 48 89 48 ?? 55 53 41 54 48 8D 68"
+		},
 		// Guessed name. (gameRules, controller) -> the lane whose zipline the player starts on.
 		"CCitadelGameRules::GetPlayerStartLane": {
 			"library": "server.dll",

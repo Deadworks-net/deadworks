@@ -144,6 +144,9 @@
     <ClCompile Include="src\Core\Hooks\GetPlayerStartLane.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="src\Core\Hooks\MatchMapOverride.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
     <ClCompile Include="src\Memory\MemoryDataLoader.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
@@ -300,6 +303,9 @@
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="src\Core\Hooks\GetPlayerStartLane.hpp">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="src\Core\Hooks\MatchMapOverride.hpp">
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="src\SDK\CEntitySystem.hpp">

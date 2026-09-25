@@ -219,6 +219,7 @@ if not "$(DeadlockDir)"=="" if exist "$(TargetDir)$(TargetName).pdb" copy /Y "$(
     <ClCompile Include="src\Core\Hooks\ChangeGameState.cpp" />
     <ClCompile Include="src\Core\Hooks\AreAllLobbyPlayersConnected.cpp" />
     <ClCompile Include="src\Core\Hooks\GetPlayerStartLane.cpp" />
+    <ClCompile Include="src\Core\Hooks\MatchMapOverride.cpp" />
     <ClCompile Include="src\Memory\MemoryDataLoader.cpp" />
     <ClCompile Include="src\Memory\Scanner.cpp" />
     <ClCompile Include="src\SDK\Interfaces.cpp" />
@@ -265,6 +266,7 @@ if not "$(DeadlockDir)"=="" if exist "$(TargetDir)$(TargetName).pdb" copy /Y "$(
     <ClInclude Include="src\Core\Hooks\ChangeGameState.hpp" />
     <ClInclude Include="src\Core\Hooks\AreAllLobbyPlayersConnected.hpp" />
     <ClInclude Include="src\Core\Hooks\GetPlayerStartLane.hpp" />
+    <ClInclude Include="src\Core\Hooks\MatchMapOverride.hpp" />
     <ClInclude Include="src\Core\A2SPatch.hpp" />
     <ClInclude Include="src\Core\Deadworks.hpp" />
     <ClInclude Include="src\Core\NativeCallbacks.hpp" />

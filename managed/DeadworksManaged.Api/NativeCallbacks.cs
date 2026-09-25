@@ -144,4 +144,6 @@ internal struct NativeCallbacks
 	public nint GetAbilityMaxCharges;
 	public nint GetNetMessageName;
 	public nint DisconnectClient;
+	public nint SetMatchStartOnAnyMap;
+	public nint GetMatchStartOnAnyMap;
 }
