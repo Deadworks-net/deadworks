@@ -191,7 +191,7 @@ public class TagPlugin : DeadworksPluginBase {
 		return HookResult.Continue;
 	}
 
-	[Command("addspawn", Description = "Record your current position as a spawn point")]
+	[Command("addspawn", Description = "Record your current position as a spawn point", Permission = "tag.spawns.edit")]
 	public void CmdAddSpawn(CCitadelPlayerController caller) {
 		var pawn = caller.GetHeroPawn()?.As<CCitadelPlayerPawn>();
 		if (pawn == null) return;
@@ -214,7 +214,7 @@ public class TagPlugin : DeadworksPluginBase {
 		Console.WriteLine($"[Tag] Spawn #{count} added on {mapName} at ({pos.X:F1}, {pos.Y:F1}, {pos.Z:F1})");
 	}
 
-	[Command("removespawn", Description = "Remove the last spawn point on this map")]
+	[Command("removespawn", Description = "Remove the last spawn point on this map", Permission = "tag.spawns.edit")]
 	public void CmdRemoveSpawn(CCitadelPlayerController caller) {
 		var mapName = Server.MapName;
 		if (!Config.SpawnPoints.TryGetValue(mapName, out var spawns) || spawns.Count == 0) {

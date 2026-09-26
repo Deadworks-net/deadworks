@@ -136,6 +136,99 @@ public static unsafe class Server {
 	public static void Kick(int slot, ENetworkDisconnectionReason reason = ENetworkDisconnectionReason.NetworkDisconnectKicked)
 		=> NativeInterop.DisconnectClient(slot, (int)reason);
 
+	/// <summary>
+	/// Disconnects the player in <paramref name="slot"/> with a message. The message is printed to their chat and
+	/// console first, then passed to the engine as the disconnect reason.
+	/// </summary>
+	public static void Kick(int slot, string message, ENetworkDisconnectionReason reason = ENetworkDisconnectionReason.NetworkDisconnectKicked) {
+		if (string.IsNullOrWhiteSpace(message)) {
+			Kick(slot, reason);
+			return;
+		}
+
+		// The chat and console copies are what a player is sure to see before the client drops.
+		Chat.PrintToChat(slot, message);
+		Players.FromSlot(slot)?.PrintToConsole(message);
+
+		if (NativeInterop.KickClient == null) {
+			Kick(slot, reason);
+			return;
+		}
+		Span<byte> utf8 = Utf8.Encode(message, stackalloc byte[Utf8.Size(message)]);
+		fixed (byte* ptr = utf8) {
+			NativeInterop.KickClient(slot, ptr, (int)reason);
+		}
+	}
+
+	/// <summary>Where the game keeps its maps: <c>game/citadel/maps</c>, found relative to the managed folder.</summary>
+	private static string MapsDir => Path.GetFullPath(Path.Combine(
+		Path.GetDirectoryName(typeof(Server).Assembly.Location) ?? ".", "..", "..", "..", "citadel", "maps"));
+
+	/// <summary>Extra map names from <c>serverbrowser.extra_maps</c> in <c>deadworks.jsonc</c>. Set by the host.</summary>
+	internal static Func<IEnumerable<string>>? ExtraMaps;
+
+	/// <summary>
+	/// Maps the server can change to: the game's own <c>.vpk</c> maps plus <c>extra_maps</c> from <c>deadworks.jsonc</c>,
+	/// sorted by name.
+	/// </summary>
+	public static IReadOnlyList<string> GetMapList() {
+		var maps = new SortedSet<string>(StringComparer.OrdinalIgnoreCase);
+		try {
+			if (Directory.Exists(MapsDir))
+				foreach (var file in Directory.GetFiles(MapsDir, "*.vpk"))
+					maps.Add(Path.GetFileNameWithoutExtension(file));
+		} catch (IOException) { } catch (UnauthorizedAccessException) { }
+
+		foreach (var map in ExtraMaps?.Invoke() ?? [])
+			if (IsMapNameWellFormed(map))
+				maps.Add(map);
+		return [.. maps];
+	}
+
+	/// <summary>
+	/// Whether <paramref name="map"/> can be loaded: the engine knows it, or it's in <see cref="GetMapList"/>.
+	/// Names with spaces, quotes, <c>;</c> or path tricks are always rejected, so a valid name is safe to put in a command.
+	/// </summary>
+	public static bool IsMapValid(string map) {
+		if (!IsMapNameWellFormed(map))
+			return false;
+		if (NativeInterop.IsMapValid != null) {
+			Span<byte> utf8 = Utf8.Encode(map, stackalloc byte[Utf8.Size(map)]);
+			fixed (byte* ptr = utf8) {
+				if (NativeInterop.IsMapValid(ptr) != 0)
+					return true;
+			}
+		}
+		return GetMapList().Contains(map, StringComparer.OrdinalIgnoreCase);
+	}
+
+	internal static bool IsMapNameWellFormed(string map)
+		=> map.Length is > 0 and <= 128
+			&& !map.Contains("..", StringComparison.Ordinal)
+			&& map.All(c => char.IsAsciiLetterOrDigit(c) || c is '_' or '-' or '.' or '/');
+
+	/// <summary>Changes to <paramref name="map"/> if <see cref="IsMapValid"/> accepts it. Returns false otherwise.</summary>
+	public static bool ChangeMap(string map) {
+		if (!IsMapValid(map))
+			return false;
+		ExecuteCommand($"changelevel {map}");
+		return true;
+	}
+
+	/// <summary>Set by the host; runs a command and collects what it prints.</summary>
+	internal static Action<string, Action<string>>? ExecuteWithOutput;
+
+	/// <summary>
+	/// Runs a server console command and passes what it printed to <paramref name="onOutput"/>. Commands run on the
+	/// next frame, so the callback always comes later. Setting a cvar prints nothing, so the output is empty.
+	/// </summary>
+	public static void ExecuteCommand(string command, Action<string> onOutput) {
+		ArgumentNullException.ThrowIfNull(onOutput);
+		if (ExecuteWithOutput == null)
+			throw new InvalidOperationException("Command output capture is not initialized.");
+		ExecuteWithOutput(command, onOutput);
+	}
+
 	/// <summary>Returns true if the given parameter is present on the engine command line (e.g. "-nomaster").</summary>
 	public static bool HasCommandLineParm(string parm) {
 		Span<byte> utf8 = Utf8.Encode(parm, stackalloc byte[Utf8.Size(parm)]);

@@ -1,0 +1,30 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>net10.0</TargetFramework>
+    <ImplicitUsings>enable</ImplicitUsings>
+    <Nullable>enable</Nullable>
+    <EnableDynamicLoading>true</EnableDynamicLoading>
+    <RootNamespace>DeadworksAdmin</RootNamespace>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <InternalsVisibleTo Include="DeadworksManaged.Tests" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\..\DeadworksManaged.Api\DeadworksManaged.Api.csproj">
+      <Private>false</Private>
+      <ExcludeAssets>runtime</ExcludeAssets>
+    </ProjectReference>
+  </ItemGroup>
+
+  <!-- Ships with Deadworks: it goes in managed/builtin, not managed/plugins, so it updates with each release. -->
+  <Target Name="DeployToGame" AfterTargets="Build" Condition="'$(DeadlockManagedDir)' != ''">
+    <ItemGroup>
+      <DeployFiles Include="$(OutputPath)AdminPlugin.dll;$(OutputPath)AdminPlugin.pdb" />
+    </ItemGroup>
+    <Copy SourceFiles="@(DeployFiles)" DestinationFolder="$(DeadlockManagedDir)\builtin" SkipUnchangedFiles="false" Retries="0" ContinueOnError="WarnAndContinue" />
+  </Target>
+
+</Project>

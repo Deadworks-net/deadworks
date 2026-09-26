@@ -7,6 +7,15 @@ public sealed class CommandAttribute : Attribute
     public string[] Names { get; }
     public string Description { get; set; } = "";
 
+    /// <summary>
+    /// Permission a player needs to run this command, e.g. <c>moderation.player.ban</c>. Empty means anyone.
+    /// The server console always may. Server owners can change it in <c>configs/permissions/overrides.jsonc</c>.
+    /// </summary>
+    public string Permission { get; set; } = "";
+
+    /// <summary>Whether <see cref="Target"/> parameters leave out players the caller can't target.</summary>
+    public TargetImmunity TargetImmunity { get; set; } = TargetImmunity.Auto;
+
     /// <summary>Refuses execution from any player caller.</summary>
     public bool ServerOnly { get; set; }
 

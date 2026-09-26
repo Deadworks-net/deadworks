@@ -87,10 +87,18 @@ public sealed unsafe class CCitadelPlayerController : CBasePlayerController {
 		}
 	}
 
-	/// <summary>Sends a message to this player's console via "echo" client command.</summary>
+	/// <summary>Prints a message in this player's console, one <c>echo</c> per line.</summary>
 	public void PrintToConsole(string message) {
-		Server.ClientCommand(Slot, $"echo {message}");
+		foreach (var line in message.ReplaceLineEndings("\n").Split('\n'))
+			Server.ClientCommand(Slot, EchoCommand(line));
 	}
+
+	/// <summary>
+	/// Builds the <c>echo</c> for one line. A <c>;</c> in a player's name or a kick reason would end the echo and run
+	/// the rest on the client as a new command, so it becomes a full-width semicolon, which looks the same. Deadlock's
+	/// echo prints quotes literally, so quoting isn't an option; the console's own UM_TextMsg isn't shown by the client.
+	/// </summary>
+	internal static string EchoCommand(string line) => $"echo {line.Replace(';', '；')}";
 
 	/// <summary>Displays a HUD game announcement banner to this player with the given title and description.</summary>
 	public void HudAnnounce(string title = "", string description = "") {

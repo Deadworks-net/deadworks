@@ -544,14 +544,19 @@ bool Deadworks::On_ISource2GameClients_ClientConnect(CPlayerSlot slot, const cha
         std::wstring wip(ipLen - 1, L'\0');
         MultiByteToWideChar(CP_UTF8, 0, ip.c_str(), -1, wip.data(), ipLen);
 
+        TakeConnectRejectReason(); // drop anything left over from an earlier call
         uint8_t allowed = m_managed.onClientConnect(
             slot.Get(),
             reinterpret_cast<const char16_t *>(wname.c_str()),
             xuid,
             reinterpret_cast<const char16_t *>(wip.c_str()));
 
-        if (!allowed)
+        if (!allowed) {
+            std::string reason = TakeConnectRejectReason();
+            if (!reason.empty() && pRejectReason)
+                pRejectReason->Set(reason.c_str());
             return false;
+        }
     }
 
     return true;

@@ -450,6 +450,36 @@ static void __cdecl NativeDisconnectClient(int32_t slot, int32_t reason) {
     g_pEngineServer->DisconnectClient(CPlayerSlot(slot), static_cast<ENetworkDisconnectionReason>(reason));
 }
 
+static uint8_t __cdecl NativeIsClientAuthenticated(int32_t slot) {
+    if (!g_pEngineServer || slot < 0)
+        return 0;
+    return g_pEngineServer->IsClientFullyAuthenticated(CPlayerSlot(slot)) ? 1 : 0;
+}
+
+static void __cdecl NativeKickClient(int32_t slot, const char *reason, int32_t code) {
+    if (!g_pEngineServer || slot < 0)
+        return;
+    g_pEngineServer->KickClient(CPlayerSlot(slot), reason ? reason : "", static_cast<ENetworkDisconnectionReason>(code));
+}
+
+static uint8_t __cdecl NativeIsMapValid(const char *map) {
+    if (!g_pEngineServer || !map || !map[0])
+        return 0;
+    return g_pEngineServer->IsMapValid(map) != 0 ? 1 : 0;
+}
+
+static std::string g_connectRejectReason;
+
+static void __cdecl NativeSetConnectRejectReason(const char *reason) {
+    g_connectRejectReason = reason ? reason : "";
+}
+
+std::string deadworks::TakeConnectRejectReason() {
+    std::string reason = std::move(g_connectRejectReason);
+    g_connectRejectReason.clear();
+    return reason;
+}
+
 // --- Engine log forwarding to managed code ---
 static void(__cdecl *g_ManagedLogCallback)(const char *message) = nullptr;
 
@@ -822,9 +852,20 @@ static void ConCommandDispatchCallback(const CCommandContext &context, const CCo
         return;
 
     int playerSlot = context.GetPlayerSlot().Get();
-    int argc = args.ArgC();
-    const char *command = argc > 0 ? args[0] : "";
-    const char **argv = args.ArgV();
+
+    // The engine splits on its break characters ({}()':) as well as spaces, so "STEAM_0:1:11101" arrived as five
+    // arguments and "it's" as three. Re-split the raw line on whitespace and quotes only, the way chat commands are.
+    static characterset_t s_noBreaks = [] {
+        characterset_t set;
+        CharacterSetBuild(&set, "");
+        return set;
+    }();
+    CCommand retokenized;
+    const CCommand &source = retokenized.Tokenize(args.GetCommandString(), &s_noBreaks) ? retokenized : args;
+
+    int argc = source.ArgC();
+    const char *command = argc > 0 ? source[0] : "";
+    const char **argv = source.ArgV();
 
     g_ManagedConCommandDispatch(playerSlot, command, argc, argv);
 }
@@ -1291,6 +1332,10 @@ void deadworks::PopulateNativeCallbacks(NativeCallbacks &callbacks) {
     callbacks.DisconnectClient = &NativeDisconnectClient;
     callbacks.SetMatchStartOnAnyMap = &NativeSetMatchStartOnAnyMap;
     callbacks.GetMatchStartOnAnyMap = &NativeGetMatchStartOnAnyMap;
+    callbacks.IsClientAuthenticated = &NativeIsClientAuthenticated;
+    callbacks.KickClient = &NativeKickClient;
+    callbacks.IsMapValid = &NativeIsMapValid;
+    callbacks.SetConnectRejectReason = &NativeSetConnectRejectReason;
 
     // Command line
     callbacks.HasCommandLineParm = &NativeHasCommandLineParm;
