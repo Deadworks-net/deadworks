@@ -180,6 +180,8 @@ public static class EntryPoint
             IpAddress = new string(ipAddress)
         };
 
+        // Record the SteamID the engine connected with before any plugin can see (or rewrite) the controller's.
+        PermissionSystem.PermissionManager.OnClientConnect(slot, xuid);
         return PluginLoader.DispatchClientConnect(args) ? (byte)1 : (byte)0;
     }
 
@@ -193,6 +195,8 @@ public static class EntryPoint
             Xuid = xuid,
             IsBot = isBot != 0
         };
+
+        PermissionSystem.PermissionManager.OnClientPutInServer(slot, args.IsBot);
 
         PluginLoader.DispatchClientPutInServer(args);
     }
@@ -218,6 +222,7 @@ public static class EntryPoint
         var args = new ClientDisconnectedEvent { Slot = slot, Reason = (ENetworkDisconnectionReason)reason };
         PluginLoader.DispatchClientDisconnect(args);
         Players.SetConnected(slot, false);
+        PermissionSystem.PermissionManager.OnClientDisconnect(slot);
         ZoneRegistry.OnDisconnect(slot);
         DeadworksManaged.Api.UI.UIChannel.OnPlayerDisconnect(slot);
     }

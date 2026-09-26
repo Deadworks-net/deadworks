@@ -450,6 +450,12 @@ static void __cdecl NativeDisconnectClient(int32_t slot, int32_t reason) {
     g_pEngineServer->DisconnectClient(CPlayerSlot(slot), static_cast<ENetworkDisconnectionReason>(reason));
 }
 
+static uint8_t __cdecl NativeIsClientAuthenticated(int32_t slot) {
+    if (!g_pEngineServer || slot < 0)
+        return 0;
+    return g_pEngineServer->IsClientFullyAuthenticated(CPlayerSlot(slot)) ? 1 : 0;
+}
+
 // --- Engine log forwarding to managed code ---
 static void(__cdecl *g_ManagedLogCallback)(const char *message) = nullptr;
 
@@ -1291,6 +1297,7 @@ void deadworks::PopulateNativeCallbacks(NativeCallbacks &callbacks) {
     callbacks.DisconnectClient = &NativeDisconnectClient;
     callbacks.SetMatchStartOnAnyMap = &NativeSetMatchStartOnAnyMap;
     callbacks.GetMatchStartOnAnyMap = &NativeGetMatchStartOnAnyMap;
+    callbacks.IsClientAuthenticated = &NativeIsClientAuthenticated;
 
     // Command line
     callbacks.HasCommandLineParm = &NativeHasCommandLineParm;

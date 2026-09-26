@@ -90,7 +90,7 @@ public class ItemRotationPlugin : DeadworksPluginBase
 		}
 	}
 
-	[Command("ir_start", Description = "Start the item-rotation game")]
+	[Command("ir_start", Description = "Start the item-rotation game", Permission = "itemrotation.manage")]
 	public void CmdStart(CCitadelPlayerController? caller)
 	{
 		if (_running)
@@ -125,7 +125,7 @@ public class ItemRotationPlugin : DeadworksPluginBase
 		SendChatAll($"[ItemRotation] Game started! Sets rotate every {Config.SwapIntervalSeconds}s. Mode: {Config.SelectionMode}.");
 	}
 
-	[Command("ir_swap", Description = "Force an immediate item-set rotation")]
+	[Command("ir_swap", Description = "Force an immediate item-set rotation", Permission = "itemrotation.manage")]
 	public void CmdSwap(CCitadelPlayerController? caller)
 	{
 		if (!_running)
@@ -135,7 +135,7 @@ public class ItemRotationPlugin : DeadworksPluginBase
 		Reply(caller, "[ItemRotation] Forced a swap.");
 	}
 
-	[Command("ir_reset", Description = "Stop the item-rotation game and clear all items")]
+	[Command("ir_reset", Description = "Stop the item-rotation game and clear all items", Permission = "itemrotation.manage")]
 	public void CmdReset(CCitadelPlayerController? caller)
 	{
 		if (!_running)

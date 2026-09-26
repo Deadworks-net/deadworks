@@ -21,10 +21,24 @@ internal class ServerBrowserConfig
     public bool Unlisted { get; set; } = false;
 }
 
+internal class PermissionsConfig
+{
+    /// <summary>Which <see cref="DeadworksManaged.Api.IPermissionStore"/> holds roles and players. "json" is configs/permissions/*.jsonc.</summary>
+    [JsonPropertyName("store")]
+    public string Store { get; set; } = "json";
+
+    /// <summary>Only apply grants once Steam has validated the player. Turn off only for LAN or local testing.</summary>
+    [JsonPropertyName("require_steam_auth")]
+    public bool RequireSteamAuth { get; set; } = true;
+}
+
 internal class DeadworksConfigRoot
 {
     [JsonPropertyName("serverbrowser")]
     public ServerBrowserConfig ServerBrowser { get; set; } = new();
+
+    [JsonPropertyName("permissions")]
+    public PermissionsConfig Permissions { get; set; } = new();
 }
 
 internal static class DeadworksConfig
@@ -40,6 +54,7 @@ internal static class DeadworksConfig
     private static string _configPath = "";
 
     public static ServerBrowserConfig ServerBrowser => _root.ServerBrowser;
+    public static PermissionsConfig Permissions => _root.Permissions;
 
     public static void Initialize()
     {
