@@ -89,8 +89,15 @@ public sealed unsafe class CCitadelPlayerController : CBasePlayerController {
 
 	/// <summary>Sends a message to this player's console via "echo" client command.</summary>
 	public void PrintToConsole(string message) {
-		Server.ClientCommand(Slot, $"echo {message}");
+		foreach (var line in message.ReplaceLineEndings("\n").Split('\n'))
+			Server.ClientCommand(Slot, EchoCommand(line));
 	}
+
+	/// <summary>
+	/// Quotes <paramref name="line"/> for <c>echo</c>. Unquoted, a <c>;</c> in a player's name or a kick reason would end
+	/// the echo and run the rest on the client as a new command. A quote can't be escaped, so it becomes an apostrophe.
+	/// </summary>
+	internal static string EchoCommand(string line) => $"echo \"{line.Replace('"', '\'')}\"";
 
 	/// <summary>Displays a HUD game announcement banner to this player with the given title and description.</summary>
 	public void HudAnnounce(string title = "", string description = "") {

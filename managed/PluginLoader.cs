@@ -58,6 +58,7 @@ internal static partial class PluginLoader
 
     private static string _pluginsDir = "";
     public static string PluginsDir => _pluginsDir;
+    private static string _builtinDir = "";
 
     private static FileSystemWatcher? _watcher;
     private static Timer? _debounceTimer;
@@ -93,6 +94,10 @@ internal static partial class PluginLoader
         ConfigManager.Initialize();
         PermissionSystem.PermissionManager.Initialize();
         ConCommandManager.Initialize();
+        AdminSystem.PenaltyManager.Initialize();
+        AdminSystem.AdminActivityService.Initialize();
+        AdminSystem.CommandCapture.Initialize();
+        Server.ExtraMaps = () => DeadworksConfig.ServerBrowser.ExtraMaps;
         UIBootstrap.Initialize();
         ServerBrowser.Initialize();
         PluginStateManager.Initialize();
@@ -117,15 +122,26 @@ internal static partial class PluginLoader
         RegisterCoreCommands();
 
         _pluginsDir = Path.Combine(baseDir, "plugins");
-        if (!Directory.Exists(_pluginsDir))
-        {
-            Console.WriteLine($"[PluginLoader] No plugins directory found at: {_pluginsDir}");
-            PermissionSystem.PermissionManifest.DeleteStale();
-            return;
-        }
+        _builtinDir = Path.Combine(baseDir, "builtin");
 
-        var dlls = Directory.GetFiles(_pluginsDir, "*.dll");
-        Console.WriteLine($"[PluginLoader] Scanning {_pluginsDir} ({dlls.Length} DLLs found)");
+        LoadDirectory(_builtinDir, builtin: true);
+        if (Directory.Exists(_pluginsDir))
+            LoadDirectory(_pluginsDir, builtin: false);
+        else
+            Console.WriteLine($"[PluginLoader] No plugins directory found at: {_pluginsDir}");
+
+        PermissionSystem.PermissionManifest.DeleteStale();
+        if (Directory.Exists(_pluginsDir))
+            StartWatching(_pluginsDir);
+    }
+
+    private static void LoadDirectory(string dir, bool builtin)
+    {
+        if (!Directory.Exists(dir))
+            return;
+
+        var dlls = Directory.GetFiles(dir, "*.dll");
+        Console.WriteLine($"[PluginLoader] Scanning {dir} ({dlls.Length} DLLs found)");
 
         foreach (var dll in dlls)
         {
@@ -133,6 +149,13 @@ internal static partial class PluginLoader
             if (!PluginStateManager.IsEnabled(dllName))
             {
                 Console.WriteLine($"[PluginLoader] Skipping disabled plugin: {dllName}");
+                continue;
+            }
+
+            // A plugin of the same name in plugins/ replaces the one that ships with Deadworks.
+            if (builtin && File.Exists(Path.Combine(_pluginsDir, dllName + ".dll")))
+            {
+                Console.WriteLine($"[PluginLoader] Using plugins/{dllName}.dll instead of the built-in one");
                 continue;
             }
 
@@ -145,9 +168,6 @@ internal static partial class PluginLoader
                 Console.WriteLine($"[PluginLoader] Failed to load {Path.GetFileName(dll)}: {ex.Message}");
             }
         }
-
-        PermissionSystem.PermissionManifest.DeleteStale();
-        StartWatching(_pluginsDir);
     }
 
     private const string CoreCommandsPath = "deadworks://core";
@@ -158,40 +178,60 @@ internal static partial class PluginLoader
         lock (_lock)
         {
             Commands.CommandRegistration.RegisterPluginCommands(
-                CoreCommandsPath, [new PermissionSystem.PermissionCommands()], _chatCommandRegistry,
+                CoreCommandsPath, [new PermissionSystem.PermissionCommands(), new AdminSystem.PenaltyCommands()], _chatCommandRegistry,
                 manifestKey: PermissionSystem.PermissionManifest.CoreFileKey);
         }
     }
 
     public static bool IsPluginLoaded(string dllName)
     {
-        if (_pluginsDir.Length == 0) return false;
-        var normalizedPath = Path.GetFullPath(Path.Combine(_pluginsDir, dllName + ".dll"));
+        var normalizedPath = ResolvePluginPath(dllName);
+        if (normalizedPath == null) return false;
         lock (_lock)
         {
             return _loaded.ContainsKey(normalizedPath);
         }
     }
 
-    /// <summary>Returns the normalized full path for a plugin DLL name, or null if the plugins directory is not set.</summary>
+    /// <summary>Whether <paramref name="dllName"/> is one of the plugins that ship with Deadworks and isn't replaced in plugins/.</summary>
+    public static bool IsBuiltin(string dllName)
+        => _builtinDir.Length > 0
+           && File.Exists(Path.Combine(_builtinDir, dllName + ".dll"))
+           && !File.Exists(Path.Combine(_pluginsDir, dllName + ".dll"));
+
+    /// <summary>
+    /// The full path a plugin DLL name loads from: plugins/ if it's there, otherwise builtin/ if it ships with
+    /// Deadworks, otherwise where it would go in plugins/. Null before loading has started.
+    /// </summary>
     public static string? ResolvePluginPath(string dllName)
     {
         if (_pluginsDir.Length == 0) return null;
-        return Path.GetFullPath(Path.Combine(_pluginsDir, dllName + ".dll"));
+        var dir = IsBuiltin(dllName) ? _builtinDir : _pluginsDir;
+        return Path.GetFullPath(Path.Combine(dir, dllName + ".dll"));
+    }
+
+    /// <summary>Every plugin DLL name found in builtin/ and plugins/.</summary>
+    public static IEnumerable<string> InstalledPluginNames()
+    {
+        var names = new SortedSet<string>(StringComparer.OrdinalIgnoreCase);
+        foreach (var dir in new[] { _builtinDir, _pluginsDir })
+            if (dir.Length > 0 && Directory.Exists(dir))
+                foreach (var dll in Directory.GetFiles(dir, "*.dll"))
+                    names.Add(Path.GetFileNameWithoutExtension(dll));
+        return names;
     }
 
     public static void EnablePlugin(string dllName)
     {
         PluginStateManager.SetEnabled(dllName, true);
 
-        var dllPath = Path.Combine(_pluginsDir, dllName + ".dll");
-        if (!File.Exists(dllPath))
+        var normalizedPath = ResolvePluginPath(dllName);
+        if (normalizedPath == null || !File.Exists(normalizedPath))
         {
-            Console.WriteLine($"[PluginLoader] Cannot enable '{dllName}': DLL not found in plugins directory");
+            Console.WriteLine($"[PluginLoader] Cannot enable '{dllName}': DLL not found in the plugins or builtin directory");
             return;
         }
 
-        var normalizedPath = Path.GetFullPath(dllPath);
         lock (_lock)
         {
             if (_loaded.ContainsKey(normalizedPath))
@@ -215,9 +255,8 @@ internal static partial class PluginLoader
     {
         PluginStateManager.SetEnabled(dllName, false);
 
-        if (_pluginsDir.Length == 0) return;
-        var normalizedPath = Path.GetFullPath(Path.Combine(_pluginsDir, dllName + ".dll"));
-        UnloadPlugin(normalizedPath);
+        if (ResolvePluginPath(dllName) is { } normalizedPath)
+            UnloadPlugin(normalizedPath);
     }
 
     private static void LoadPlugin(string dllPath, bool isReload)
@@ -293,6 +332,7 @@ internal static partial class PluginLoader
         }
 
         PermissionSystem.PermissionManager.UnregisterStoresOwnedBy(entry.Plugins);
+        AdminSystem.PenaltyManager.UnregisterStoresOwnedBy(entry.Plugins);
 
         // Stop the plugin's zones before OnUnload, like its timers below.
         ZoneRegistry.RemoveOwnedBy(entry.Context);
@@ -368,6 +408,8 @@ internal static partial class PluginLoader
             try
             {
                 Console.WriteLine($"[PluginLoader] Detected change: {Path.GetFileName(dllPath)}");
+                if (_builtinDir.Length > 0)
+                    UnloadPlugin(Path.GetFullPath(Path.Combine(_builtinDir, dllName + ".dll")));
                 UnloadPlugin(dllPath);
                 LoadPlugin(dllPath, isReload: true);
             }

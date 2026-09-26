@@ -55,21 +55,21 @@ internal static class ConCommandManager
 
         if (string.Equals(sub, "list", StringComparison.OrdinalIgnoreCase))
         {
-            var dir = PluginLoader.PluginsDir;
-            if (!Directory.Exists(dir))
+            var names = PluginLoader.InstalledPluginNames().ToList();
+            if (names.Count == 0)
             {
-                Reply(ctx.Controller, "[PluginLoader] No plugins directory found");
+                Reply(ctx.Controller, "[PluginLoader] No plugins installed");
                 return;
             }
 
             Reply(ctx.Controller, "[PluginLoader] Installed plugins:");
-            foreach (var dll in Directory.GetFiles(dir, "*.dll").OrderBy(f => f))
+            foreach (var name in names)
             {
-                var name = Path.GetFileNameWithoutExtension(dll);
                 var enabled = PluginStateManager.IsEnabled(name);
                 var loaded = PluginLoader.IsPluginLoaded(name);
                 var status = enabled ? (loaded ? "enabled (loaded)" : "enabled (not loaded)") : "disabled";
-                Reply(ctx.Controller, $"  {name}: {status}");
+                var origin = PluginLoader.IsBuiltin(name) ? " [ships with Deadworks]" : "";
+                Reply(ctx.Controller, $"  {name}: {status}{origin}");
             }
         }
         else if (string.Equals(sub, "enable", StringComparison.OrdinalIgnoreCase))

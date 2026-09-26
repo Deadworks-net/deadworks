@@ -37,6 +37,7 @@ public static class EntryPoint
     public static void OnGameFrame(byte simulating, byte firstTick, byte lastTick)
     {
         PluginLoader.DispatchGameFrame(simulating != 0, firstTick != 0, lastTick != 0);
+        AdminSystem.AdminTick.OnGameFrame();
     }
 
     [UnmanagedCallersOnly]
@@ -182,7 +183,30 @@ public static class EntryPoint
 
         // Record the SteamID the engine connected with before any plugin can see (or rewrite) the controller's.
         PermissionSystem.PermissionManager.OnClientConnect(slot, xuid);
-        return PluginLoader.DispatchClientConnect(args) ? (byte)1 : (byte)0;
+
+        // Bans are core's to enforce, so they apply before any plugin sees the connection.
+        if (AdminSystem.PenaltyManager.ConnectRejection(xuid) is { } banned)
+        {
+            Console.WriteLine($"[Penalties] Rejected banned player {args.Name} ({xuid})");
+            RejectConnection(slot, banned);
+            return 0;
+        }
+
+        if (PluginLoader.DispatchClientConnect(args))
+            return 1;
+        RejectConnection(slot, args.RejectReason);
+        return 0;
+    }
+
+    private static unsafe void RejectConnection(int slot, string? reason)
+    {
+        // A refused client never disconnects, so its slot has to be forgotten here.
+        PermissionSystem.PermissionManager.OnClientDisconnect(slot);
+        if (string.IsNullOrEmpty(reason) || NativeInterop.SetConnectRejectReason == null)
+            return;
+        Span<byte> utf8 = Utf8.Encode(reason, stackalloc byte[Utf8.Size(reason)]);
+        fixed (byte* ptr = utf8)
+            NativeInterop.SetConnectRejectReason(ptr);
     }
 
     [UnmanagedCallersOnly]

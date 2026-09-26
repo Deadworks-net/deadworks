@@ -456,6 +456,30 @@ static uint8_t __cdecl NativeIsClientAuthenticated(int32_t slot) {
     return g_pEngineServer->IsClientFullyAuthenticated(CPlayerSlot(slot)) ? 1 : 0;
 }
 
+static void __cdecl NativeKickClient(int32_t slot, const char *reason, int32_t code) {
+    if (!g_pEngineServer || slot < 0)
+        return;
+    g_pEngineServer->KickClient(CPlayerSlot(slot), reason ? reason : "", static_cast<ENetworkDisconnectionReason>(code));
+}
+
+static uint8_t __cdecl NativeIsMapValid(const char *map) {
+    if (!g_pEngineServer || !map || !map[0])
+        return 0;
+    return g_pEngineServer->IsMapValid(map) != 0 ? 1 : 0;
+}
+
+static std::string g_connectRejectReason;
+
+static void __cdecl NativeSetConnectRejectReason(const char *reason) {
+    g_connectRejectReason = reason ? reason : "";
+}
+
+std::string deadworks::TakeConnectRejectReason() {
+    std::string reason = std::move(g_connectRejectReason);
+    g_connectRejectReason.clear();
+    return reason;
+}
+
 // --- Engine log forwarding to managed code ---
 static void(__cdecl *g_ManagedLogCallback)(const char *message) = nullptr;
 
@@ -1298,6 +1322,9 @@ void deadworks::PopulateNativeCallbacks(NativeCallbacks &callbacks) {
     callbacks.SetMatchStartOnAnyMap = &NativeSetMatchStartOnAnyMap;
     callbacks.GetMatchStartOnAnyMap = &NativeGetMatchStartOnAnyMap;
     callbacks.IsClientAuthenticated = &NativeIsClientAuthenticated;
+    callbacks.KickClient = &NativeKickClient;
+    callbacks.IsMapValid = &NativeIsMapValid;
+    callbacks.SetConnectRejectReason = &NativeSetConnectRejectReason;
 
     // Command line
     callbacks.HasCommandLineParm = &NativeHasCommandLineParm;

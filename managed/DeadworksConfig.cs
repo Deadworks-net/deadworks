@@ -32,6 +32,38 @@ internal class PermissionsConfig
     public bool RequireSteamAuth { get; set; } = true;
 }
 
+internal class ShowActivityConfig
+{
+    /// <summary>What players without deadworks.admin.notify see: "named", "anonymous" or "none".</summary>
+    [JsonPropertyName("players")]
+    public string Players { get; set; } = "anonymous";
+
+    /// <summary>What holders of deadworks.admin.notify see: "named", "anonymous" or "none".</summary>
+    [JsonPropertyName("notified")]
+    public string Notified { get; set; } = "named";
+}
+
+internal class AdminConfig
+{
+    [JsonPropertyName("show_activity")]
+    public ShowActivityConfig ShowActivity { get; set; } = new();
+
+    /// <summary>Folder for the daily admin action logs, relative to the folder that holds configs/.</summary>
+    [JsonPropertyName("log_dir")]
+    public string LogDir { get; set; } = "logs/admin";
+}
+
+internal class PenaltiesConfig
+{
+    /// <summary>Which IPenaltyStore holds bans, gags and mutes. "json" is configs/penalties/penalties.jsonc.</summary>
+    [JsonPropertyName("store")]
+    public string Store { get; set; } = "json";
+
+    /// <summary>How long the JSON store keeps lifted and expired penalties as history.</summary>
+    [JsonPropertyName("history_days")]
+    public int HistoryDays { get; set; } = 90;
+}
+
 internal class DeadworksConfigRoot
 {
     [JsonPropertyName("serverbrowser")]
@@ -39,6 +71,12 @@ internal class DeadworksConfigRoot
 
     [JsonPropertyName("permissions")]
     public PermissionsConfig Permissions { get; set; } = new();
+
+    [JsonPropertyName("admin")]
+    public AdminConfig Admin { get; set; } = new();
+
+    [JsonPropertyName("penalties")]
+    public PenaltiesConfig Penalties { get; set; } = new();
 }
 
 internal static class DeadworksConfig
@@ -55,6 +93,11 @@ internal static class DeadworksConfig
 
     public static ServerBrowserConfig ServerBrowser => _root.ServerBrowser;
     public static PermissionsConfig Permissions => _root.Permissions;
+    public static AdminConfig Admin => _root.Admin;
+    public static PenaltiesConfig Penalties => _root.Penalties;
+
+    /// <summary>The folder that holds configs/ (game/bin/win64), for paths like admin.log_dir.</summary>
+    public static string BaseDir => Path.GetDirectoryName(Path.GetDirectoryName(_configPath) ?? ".") ?? ".";
 
     public static void Initialize()
     {
