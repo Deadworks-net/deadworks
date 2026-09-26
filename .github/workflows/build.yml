@@ -76,6 +76,11 @@ jobs:
       - name: Build managed
         run: dotnet build managed/DeadworksManaged.csproj -c Release -o managed/bin/Release/
 
+      # Plugins that ship with Deadworks. They go in managed/builtin so they update with each release,
+      # while managed/plugins stays the server owner's.
+      - name: Build built-in plugins
+        run: dotnet build managed/plugins/AdminPlugin/AdminPlugin.csproj -c Release -o managed/bin/Release/builtin/
+
       - name: Stage artifact
         shell: pwsh
         run: |
@@ -87,6 +92,8 @@ jobs:
           foreach ($f in $managedFiles) { Copy-Item "managed/bin/Release/$f" "$out/game/bin/win64/managed/" }
           New-Item -ItemType Directory -Path "$out/game/bin/win64/managed/plugins" -Force | Out-Null
           Set-Content -Path "$out/game/bin/win64/managed/plugins/.gitkeep" -Value ""
+          New-Item -ItemType Directory -Path "$out/game/bin/win64/managed/builtin" -Force | Out-Null
+          Copy-Item "managed/bin/Release/builtin/AdminPlugin.dll" "$out/game/bin/win64/managed/builtin/"
           Copy-Item "config/deadworks_mem.jsonc" "$out/game/citadel/cfg/"
 
       - name: Upload build artifacts

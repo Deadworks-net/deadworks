@@ -21,6 +21,7 @@
   <ItemGroup>
     <ProjectReference Include="..\DeadworksManaged.Api\DeadworksManaged.Api.csproj" />
     <ProjectReference Include="..\DeadworksManaged.csproj" />
+    <ProjectReference Include="..\plugins\AdminPlugin\AdminPlugin.csproj" />
   </ItemGroup>
 
 </Project>
