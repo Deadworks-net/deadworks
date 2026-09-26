@@ -72,9 +72,16 @@ public sealed partial class AdminPlugin
     {
         if (!IsSafeConfigName(file))
             throw new CommandException("Give a config file name inside cfg/, like server.cfg or events/lan.cfg.");
+        var name = file.EndsWith(".cfg", StringComparison.OrdinalIgnoreCase) ? file : file + ".cfg";
+        if (!File.Exists(Path.Combine(ConfigDir, name)))
+            throw new CommandException($"There's no cfg/{name}.");
         Server.ExecuteCommand($"exec {file}");
         AdminActivity.Show(caller, $"ran the config {file}");
     }
+
+    /// <summary><c>game/citadel/cfg</c>, found from the managed folder (<c>game/bin/win64/managed</c>).</summary>
+    private static string ConfigDir => Path.GetFullPath(Path.Combine(
+        Path.GetDirectoryName(typeof(Server).Assembly.Location) ?? ".", "..", "..", "..", "citadel", "cfg"));
 
     internal static bool IsSafeConfigName(string file)
         => file.Length is > 0 and <= 128

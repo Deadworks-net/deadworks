@@ -852,9 +852,20 @@ static void ConCommandDispatchCallback(const CCommandContext &context, const CCo
         return;
 
     int playerSlot = context.GetPlayerSlot().Get();
-    int argc = args.ArgC();
-    const char *command = argc > 0 ? args[0] : "";
-    const char **argv = args.ArgV();
+
+    // The engine splits on its break characters ({}()':) as well as spaces, so "STEAM_0:1:11101" arrived as five
+    // arguments and "it's" as three. Re-split the raw line on whitespace and quotes only, the way chat commands are.
+    static characterset_t s_noBreaks = [] {
+        characterset_t set;
+        CharacterSetBuild(&set, "");
+        return set;
+    }();
+    CCommand retokenized;
+    const CCommand &source = retokenized.Tokenize(args.GetCommandString(), &s_noBreaks) ? retokenized : args;
+
+    int argc = source.ArgC();
+    const char *command = argc > 0 ? source[0] : "";
+    const char **argv = source.ArgV();
 
     g_ManagedConCommandDispatch(playerSlot, command, argc, argv);
 }
