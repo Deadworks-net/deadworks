@@ -91,6 +91,7 @@ internal static partial class PluginLoader
         TimerRegistry.Initialize();
         DeadworksConfig.Initialize();
         ConfigManager.Initialize();
+        PermissionSystem.PermissionManager.Initialize();
         ConCommandManager.Initialize();
         UIBootstrap.Initialize();
         ServerBrowser.Initialize();
@@ -113,10 +114,13 @@ internal static partial class PluginLoader
         if (baseDir is null)
             return;
 
+        RegisterCoreCommands();
+
         _pluginsDir = Path.Combine(baseDir, "plugins");
         if (!Directory.Exists(_pluginsDir))
         {
             Console.WriteLine($"[PluginLoader] No plugins directory found at: {_pluginsDir}");
+            PermissionSystem.PermissionManifest.DeleteStale();
             return;
         }
 
@@ -142,7 +146,21 @@ internal static partial class PluginLoader
             }
         }
 
+        PermissionSystem.PermissionManifest.DeleteStale();
         StartWatching(_pluginsDir);
+    }
+
+    private const string CoreCommandsPath = "deadworks://core";
+
+    /// <summary>Built-in commands written as [Command]s, so they get permission checks and a generated listing like any plugin's.</summary>
+    private static void RegisterCoreCommands()
+    {
+        lock (_lock)
+        {
+            Commands.CommandRegistration.RegisterPluginCommands(
+                CoreCommandsPath, [new PermissionSystem.PermissionCommands()], _chatCommandRegistry,
+                manifestKey: PermissionSystem.PermissionManifest.CoreFileKey);
+        }
     }
 
     public static bool IsPluginLoaded(string dllName)
@@ -271,7 +289,10 @@ internal static partial class PluginLoader
             _chatCommandRegistry.UnregisterPlugin(normalizedPath);
             ConCommandManager.UnregisterPlugin(normalizedPath);
             PluginRegistrationTracker.Remove(normalizedPath);
+            PermissionSystem.PermissionManifest.Remove(normalizedPath);
         }
+
+        PermissionSystem.PermissionManager.UnregisterStoresOwnedBy(entry.Plugins);
 
         // Stop the plugin's zones before OnUnload, like its timers below.
         ZoneRegistry.RemoveOwnedBy(entry.Context);

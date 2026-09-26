@@ -123,7 +123,7 @@ public class ItemTestPlugin : DeadworksPluginBase
 		}
 	}
 
-	[Command("rcon", Description = "Execute a server console command", SuppressChat = true)]
+	[Command("rcon", Description = "Execute a server console command", Permission = "itemtest.rcon", SuppressChat = true)]
 	public void CmdRcon(CCitadelPlayerController? caller, params string[] commandParts)
 	{
 		if (commandParts.Length == 0)

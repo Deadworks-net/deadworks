@@ -1,18 +1,43 @@
 using System.Reflection;
 using System.Runtime.ExceptionServices;
 using DeadworksManaged.Api;
+using DeadworksManaged.PermissionSystem;
 
 namespace DeadworksManaged.Commands;
 
 internal static class CommandRegistration
 {
+    internal const string DeniedMessage = "You don't have permission to use this command.";
+
+    /// <summary>A command's permission, looked up on every call so <c>dw_perm_reload</c> applies overrides without re-registering.</summary>
+    private sealed class CommandGate(CommandAttribute attr)
+    {
+        public string Permission => CommandOverrides.Resolve(attr.Names, attr.Permission, out _);
+
+        public bool EnforceImmunity(string permission) => attr.TargetImmunity switch
+        {
+            TargetImmunity.Enforce => true,
+            TargetImmunity.Ignore => false,
+            _ => permission.Length > 0
+        };
+
+        public static bool PlayerMay(CCitadelPlayerController? player, string permission)
+            => permission.Length == 0 || (player != null && PermissionManager.HasForSlot(player.Slot, permission));
+
+        /// <summary>For listings such as <c>dw_help</c>. A null caller is the server console.</summary>
+        public bool CanRun(CCitadelPlayerController? caller)
+            => caller == null || (!attr.ServerOnly && PlayerMay(caller, Permission));
+    }
+
     public static void RegisterPluginCommands(
         string normalizedPath,
         List<IDeadworksPlugin> plugins,
-        HandlerRegistry<string, Func<ChatCommandContext, HookResult>> chatRegistry)
+        HandlerRegistry<string, Func<ChatCommandContext, HookResult>> chatRegistry,
+        string? manifestKey = null)
     {
         foreach (var plugin in plugins)
         {
+            var manifestCommands = new List<PermissionManifest.CommandInfo>();
             var methods = plugin.GetType().GetMethods(
                 BindingFlags.Instance | BindingFlags.Public | BindingFlags.NonPublic);
 
@@ -39,16 +64,23 @@ internal static class CommandRegistration
                         continue;
                     }
 
-                    foreach (var name in new HashSet<string>(attr.Names, StringComparer.OrdinalIgnoreCase))
+                    var gate = new CommandGate(attr);
+                    var names = attr.Names.Distinct(StringComparer.OrdinalIgnoreCase).ToArray();
+                    manifestCommands.Add(new PermissionManifest.CommandInfo(
+                        names, attr.Description, attr.Permission.Trim(), attr.TargetImmunity, attr.ChatOnly, attr.ConsoleOnly, attr.ServerOnly));
+
+                    foreach (var name in names)
                     {
                         if (!attr.ConsoleOnly)
-                            RegisterChat(normalizedPath, plugin, method, plan, name, attr, chatRegistry);
+                            RegisterChat(normalizedPath, plugin, method, plan, name, attr, gate, chatRegistry);
 
                         if (!attr.ChatOnly)
-                            RegisterConsole(normalizedPath, plugin, method, plan, name, attr);
+                            RegisterConsole(normalizedPath, plugin, method, plan, name, attr, gate);
                     }
                 }
             }
+
+            PermissionManifest.Add(normalizedPath, plugin, manifestCommands, manifestKey);
         }
     }
 
@@ -59,6 +91,7 @@ internal static class CommandRegistration
         CommandBinder.Plan plan,
         string name,
         CommandAttribute attr,
+        CommandGate gate,
         HandlerRegistry<string, Func<ChatCommandContext, HookResult>> chatRegistry)
     {
         var namedPlan = name == plan.Name ? plan : new CommandBinder.Plan
@@ -80,7 +113,16 @@ internal static class CommandRegistration
 
             void reply(string msg) => ReplyViaChat(ctx.Controller, msg);
 
-            if (!CommandBinder.TryBind(namedPlan, ctx.Args, ctx.Controller, out var boundArgs, out var error, out var silentSkip))
+            // Denied attempts are never echoed to chat, so they don't advertise themselves.
+            var permission = gate.Permission;
+            if (!CommandGate.PlayerMay(ctx.Controller, permission))
+            {
+                reply(DeniedMessage);
+                return HookResult.Handled;
+            }
+
+            if (!CommandBinder.TryBind(namedPlan, ctx.Args, ctx.Controller, out var boundArgs, out var error, out var silentSkip,
+                    gate.EnforceImmunity(permission)))
             {
                 if (silentSkip)
                     return resultOnSuccess;
@@ -94,7 +136,7 @@ internal static class CommandRegistration
         };
 
         chatRegistry.AddForPlugin(normalizedPath, name, handler);
-        PluginRegistrationTracker.Add(normalizedPath, "chat", $"/{name}", attr.Description, attr.Hidden);
+        PluginRegistrationTracker.Add(normalizedPath, "chat", $"/{name}", attr.Description, attr.Hidden, gate.CanRun);
         Console.WriteLine($"[CommandRegistration] Registered chat command: {plugin.Name} -> /{name}");
     }
 
@@ -104,7 +146,8 @@ internal static class CommandRegistration
         MethodInfo method,
         CommandBinder.Plan plan,
         string name,
-        CommandAttribute attr)
+        CommandAttribute attr,
+        CommandGate gate)
     {
         var conName = "dw_" + name;
         var namedPlan = conName == plan.Name ? plan : new CommandBinder.Plan
@@ -126,7 +169,16 @@ internal static class CommandRegistration
             // re-tokenizing a space-joined copy would split "one two" back into two tokens.
             var tokens = ctx.Args.Length > 1 ? ctx.Args[1..] : [];
 
-            if (!CommandBinder.TryBind(namedPlan, tokens, ctx.Controller, out var boundArgs, out var error, out var silentSkip))
+            var permission = gate.Permission;
+            var caller = ctx.Controller;
+            if (!ctx.IsServerCommand && !CommandGate.PlayerMay(caller, permission))
+            {
+                reply(DeniedMessage);
+                return;
+            }
+
+            if (!CommandBinder.TryBind(namedPlan, tokens, caller, out var boundArgs, out var error, out var silentSkip,
+                    gate.EnforceImmunity(permission)))
             {
                 if (silentSkip)
                     return;
@@ -138,7 +190,7 @@ internal static class CommandRegistration
             Invoke(plugin, method, boundArgs, reply);
         };
 
-        ConCommandManager.RegisterExternal(normalizedPath, conName, attr.Description, serverOnly: false, handler, attr.Hidden);
+        ConCommandManager.RegisterExternal(normalizedPath, conName, attr.Description, serverOnly: false, handler, attr.Hidden, gate.CanRun);
         Console.WriteLine($"[CommandRegistration] Registered console command: {plugin.Name} -> {conName}{(attr.ServerOnly ? " (server-only)" : "")}");
     }
 

@@ -175,6 +175,8 @@ struct NativeCallbacks {
     // Run the matchmade start (pre-game countdown, zipline launch) on any map. See Hooks/MatchMapOverride.hpp.
     void(__cdecl *SetMatchStartOnAnyMap)(uint8_t enabled);
     uint8_t(__cdecl *GetMatchStartOnAnyMap)();
+    // 1 once Steam has validated the client in this slot's ticket, so its SteamID can be trusted.
+    uint8_t(__cdecl *IsClientAuthenticated)(int32_t slot);
 };
 
 void PopulateNativeCallbacks(NativeCallbacks &callbacks);

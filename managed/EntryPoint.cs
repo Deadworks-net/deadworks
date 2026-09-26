@@ -183,6 +183,8 @@ public static class EntryPoint
             IsMapChangeReconnect = Players.OnConnect(slot, xuid)
         };
 
+        // Record the SteamID the engine connected with before any plugin can see (or rewrite) the controller's.
+        PermissionSystem.PermissionManager.OnClientConnect(slot, xuid);
         return PluginLoader.DispatchClientConnect(args) ? (byte)1 : (byte)0;
     }
 
@@ -198,6 +200,8 @@ public static class EntryPoint
             IsBot = isBot != 0,
             IsMapChangeReconnect = Players.IsMapChangeReconnect(slot)
         };
+
+        PermissionSystem.PermissionManager.OnClientPutInServer(slot, args.IsBot);
 
         PluginLoader.DispatchClientPutInServer(args);
     }
@@ -229,6 +233,7 @@ public static class EntryPoint
         // Still connected: they reload into the next map, and Players.OnMapStart counts them as coming back.
         if (!args.IsMapChange)
             Players.OnDisconnect(slot);
+        PermissionSystem.PermissionManager.OnClientDisconnect(slot);
         ZoneRegistry.OnDisconnect(slot);
         DeadworksManaged.Api.UI.UIChannel.OnPlayerDisconnect(slot);
     }

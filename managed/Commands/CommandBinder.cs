@@ -6,7 +6,7 @@ namespace DeadworksManaged.Commands;
 
 internal static class CommandBinder
 {
-    internal enum SlotKind { Caller, RawArgs, Typed, Params }
+    internal enum SlotKind { Caller, RawArgs, Typed, Params, Target }
 
     internal sealed class Slot
     {
@@ -98,6 +98,19 @@ internal static class CommandBinder
                 continue;
             }
 
+            if (pt == typeof(Target))
+            {
+                slots[i] = new Slot
+                {
+                    Kind = SlotKind.Target,
+                    Type = pt,
+                    Name = p.Name ?? $"arg{i}",
+                    HasDefault = p.HasDefaultValue,
+                    DefaultValue = p.HasDefaultValue ? p.DefaultValue : null
+                };
+                continue;
+            }
+
             slots[i] = new Slot
             {
                 Kind = SlotKind.Typed,
@@ -123,7 +136,8 @@ internal static class CommandBinder
         CCitadelPlayerController? caller,
         out object?[] boundArgs,
         out string? error,
-        out bool silentSkip)
+        out bool silentSkip,
+        bool enforceImmunity = false)
     {
         error = null;
         silentSkip = false;
@@ -169,6 +183,26 @@ internal static class CommandBinder
                         error = BuildUsage(plan);
                         return false;
                     }
+                    break;
+
+                case SlotKind.Target:
+                    if (tokenIdx >= tokens.Length)
+                    {
+                        if (slot.HasDefault)
+                        {
+                            boundArgs[i] = slot.DefaultValue;
+                            break;
+                        }
+                        error = BuildUsage(plan);
+                        return false;
+                    }
+                    if (!TargetResolver.TryResolve(tokens[tokenIdx], caller, enforceImmunity, out var target, out var targetError))
+                    {
+                        error = targetError;
+                        return false;
+                    }
+                    boundArgs[i] = target;
+                    tokenIdx++;
                     break;
 
                 case SlotKind.Params:
@@ -275,6 +309,7 @@ internal static class CommandBinder
         if (type == typeof(double)) return "double";
         if (type == typeof(bool)) return "bool";
         if (type == typeof(string)) return "string";
+        if (type == typeof(Target)) return "player";
         return type.Name;
     }
 }
