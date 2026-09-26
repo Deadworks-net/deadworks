@@ -198,8 +198,8 @@ public sealed class PenaltyTests : AdminTestBase
         => Assert.Equal(wellFormed, Server.IsMapNameWellFormed(map));
 
     [Fact]
-    public void Echo_quotes_player_text_so_it_cannot_run_client_commands()
-        => Assert.Equal("echo \"lapka; quit 'hi'\"", CCitadelPlayerController.EchoCommand("lapka; quit \"hi\""));
+    public void Echo_cannot_be_split_into_a_second_client_command()
+        => Assert.Equal("echo lapka； quit", CCitadelPlayerController.EchoCommand("lapka; quit"));
 }
 
 /// <summary>Drives the Admin plugin's commands through real console dispatch, as the server console.</summary>
