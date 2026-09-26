@@ -1,5 +1,6 @@
 using System.Reflection;
 using System.Text;
+using System.Text.Encodings.Web;
 using System.Text.Json;
 using DeadworksManaged.Api;
 
@@ -213,7 +214,10 @@ internal static class PermissionManifest
         }
     }
 
-    private static string Str(string value) => JsonSerializer.Serialize(value);
+    // People read this file, so keep apostrophes and non-ASCII names as typed rather than as \u escapes.
+    private static readonly JsonSerializerOptions StrOptions = new() { Encoder = JavaScriptEncoder.UnsafeRelaxedJsonEscaping };
+
+    private static string Str(string value) => JsonSerializer.Serialize(value, StrOptions);
 
     private static string OneLine(string text) => text.ReplaceLineEndings(" ");
 
