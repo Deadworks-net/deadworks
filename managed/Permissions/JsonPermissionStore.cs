@@ -1,4 +1,4 @@
-using System.Text;
+using System.Text.Encodings.Web;
 using System.Text.Json;
 using System.Text.Json.Serialization;
 using DeadworksManaged.Api;
@@ -21,7 +21,22 @@ internal sealed class JsonPermissionStore : IPermissionStore
     {
         WriteIndented = true,
         PropertyNamingPolicy = JsonNamingPolicy.CamelCase,
-        DefaultIgnoreCondition = JsonIgnoreCondition.WhenWritingNull
+        DefaultIgnoreCondition = JsonIgnoreCondition.WhenWritingNull,
+        Encoder = JavaScriptEncoder.UnsafeRelaxedJsonEscaping
+    };
+
+    // How entries are written: empty lists and unset immunity are left out, so they stay as short as hand-written ones.
+    private sealed record StoredRole(List<string> Permissions, List<string>? Inherits, int? Immunity);
+    private sealed record StoredPlayer(string? Name, List<string>? Roles, List<string>? Permissions, int? Immunity);
+
+    private static StoredRole Trim(RoleDefinition r) => new(r.Permissions, r.Inherits.Count > 0 ? r.Inherits : null, r.Immunity);
+    private static StoredPlayer Trim(PlayerEntry e)
+        => new(e.Name, e.Roles.Count > 0 ? e.Roles : null, e.Permissions.Count > 0 ? e.Permissions : null, e.Immunity);
+
+    private static readonly Dictionary<string, RoleDefinition> DefaultRoles = new()
+    {
+        ["default"] = new RoleDefinition(),
+        ["admin"] = new RoleDefinition { Permissions = ["*"], Immunity = 100 }
     };
 
     private readonly string _dir;
@@ -39,9 +54,9 @@ internal sealed class JsonPermissionStore : IPermissionStore
     {
         Directory.CreateDirectory(_dir);
         if (!File.Exists(RolesPath))
-            File.WriteAllText(RolesPath, DefaultRoles);
+            File.WriteAllText(RolesPath, Render(RolesHeader, DefaultRoles.ToDictionary(kv => kv.Key, kv => Trim(kv.Value))));
         if (!File.Exists(PlayersPath))
-            File.WriteAllText(PlayersPath, PlayersHeader + "{\n" + PlayersExample + "}\n");
+            File.WriteAllText(PlayersPath, Render(PlayersHeader, new Dictionary<string, StoredPlayer>()));
     }
 
     /// <summary>Re-reads both files. Players are read here too, so one reload sees one consistent pair.</summary>
@@ -89,30 +104,12 @@ internal sealed class JsonPermissionStore : IPermissionStore
             snapshot = new(_players);
         }
 
-        var sb = new StringBuilder(PlayersHeader);
-        sb.Append("{\n");
-        var i = 0;
-        foreach (var (id, e) in snapshot)
-        {
-            var body = JsonSerializer.Serialize(Trim(e), WriteOptions).Replace("\n", "\n  ");
-            sb.Append($"  \"{id}\": {body}{(++i < snapshot.Count ? "," : "")}\n");
-        }
-        if (snapshot.Count == 0)
-            sb.Append(PlayersExample);
-        sb.Append("}\n");
-
-        AtomicWrite(PlayersPath, sb.ToString());
+        AtomicWrite(PlayersPath, Render(PlayersHeader, snapshot.ToDictionary(kv => kv.Key.ToString(), kv => Trim(kv.Value))));
         return Task.CompletedTask;
     }
 
-    // Leaves empty lists out of the file so entries stay as short as the ones people write by hand.
-    private static object Trim(PlayerEntry e) => new
-    {
-        e.Name,
-        Roles = e.Roles.Count > 0 ? e.Roles : null,
-        Permissions = e.Permissions.Count > 0 ? e.Permissions : null,
-        e.Immunity
-    };
+    /// <summary>A comment header, then <paramref name="value"/> as JSON.</summary>
+    private static string Render<T>(string header, T value) => header + JsonSerializer.Serialize(value, WriteOptions) + "\n";
 
     private static T? Read<T>(string path) where T : class
     {
@@ -135,7 +132,7 @@ internal sealed class JsonPermissionStore : IPermissionStore
         File.Move(tmp, path, overwrite: true);
     }
 
-    private const string DefaultRoles =
+    private const string RolesHeader =
         """
         // Roles for the Deadworks permission system.
         //
@@ -150,15 +147,6 @@ internal sealed class JsonPermissionStore : IPermissionStore
         //
         // Every plugin's permissions are listed in generated/<Plugin>.jsonc.
         // Run dw_perm_reload after editing.
-        {
-          "default": {
-            "permissions": []
-          },
-          "admin": {
-            "permissions": ["*"],
-            "immunity": 100
-          }
-        }
 
         """;
 
@@ -175,12 +163,6 @@ internal sealed class JsonPermissionStore : IPermissionStore
         //
         // dw_role_grant, dw_role_revoke, dw_perm_grant and dw_perm_revoke rewrite this file,
         // and only this header is kept. Run dw_perm_reload after editing by hand.
-
-        """;
-
-    private const string PlayersExample =
-        """
-          // "76561197960287930": { "roles": ["admin"] }
 
         """;
 }

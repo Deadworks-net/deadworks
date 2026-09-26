@@ -535,7 +535,7 @@ public sealed class PermissionManagerTests : IDisposable
         Assert.StartsWith("// ====", text);
         Assert.Contains("AUTO-GENERATED. DO NOT EDIT", text);
         Assert.Contains("\"Moderation\" plugin", text);
-        Assert.Contains("// !kick / /kick / dw_kick", text);
+        Assert.Contains("/* !kick / /kick / dw_kick */", text);
 
         using var doc = JsonDocument.Parse(text, new JsonDocumentOptions { CommentHandling = JsonCommentHandling.Skip });
         var kick = doc.RootElement.GetProperty("commands").EnumerateArray().Single(c => c.GetProperty("name").GetString() == "kick");
@@ -558,7 +558,7 @@ public sealed class PermissionManagerTests : IDisposable
         Assert.Contains("""
             "description": "Kick someone who's \"afk\"",
             """, text); // readable, but still valid JSON
-        Assert.Contains("// Checked in code. Kick without a message", text);
+        Assert.Contains("/* Checked in code. Kick without a message */", text);
 
         using var doc = JsonDocument.Parse(text, new JsonDocumentOptions { CommentHandling = JsonCommentHandling.Skip });
         var kick = doc.RootElement.GetProperty("commands")[0];
