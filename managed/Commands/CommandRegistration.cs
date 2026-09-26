@@ -135,6 +135,8 @@ internal static class CommandRegistration
             return resultOnSuccess;
         };
 
+        if (chatRegistry.Snapshot(name) is { Count: > 0 })
+            Console.WriteLine($"[CommandRegistration] Warning: another plugin already registered /{name}; both will run. Rename one of them.");
         chatRegistry.AddForPlugin(normalizedPath, name, handler);
         PluginRegistrationTracker.Add(normalizedPath, "chat", $"/{name}", attr.Description, attr.Hidden, gate.CanRun);
         Console.WriteLine($"[CommandRegistration] Registered chat command: {plugin.Name} -> /{name}");
@@ -190,6 +192,8 @@ internal static class CommandRegistration
             Invoke(plugin, method, boundArgs, reply);
         };
 
+        if (ConCommandManager.IsRegistered(conName))
+            Console.WriteLine($"[CommandRegistration] Warning: {conName} is already registered by another plugin; both will run. Rename one of them.");
         ConCommandManager.RegisterExternal(normalizedPath, conName, attr.Description, serverOnly: false, handler, attr.Hidden, gate.CanRun);
         Console.WriteLine($"[CommandRegistration] Registered console command: {plugin.Name} -> {conName}{(attr.ServerOnly ? " (server-only)" : "")}");
     }
