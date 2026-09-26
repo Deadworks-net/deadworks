@@ -548,13 +548,16 @@ public sealed class PermissionManagerTests : IDisposable
     public void Generated_file_shows_overrides()
     {
         var info = new PermissionManifest.PluginInfo("Moderation", "Moderation",
-            [new PermissionManifest.CommandInfo(["kick", "k"], "Kick", "moderation.player.kick", TargetImmunity.Auto, false, false, false)],
+            [new PermissionManifest.CommandInfo(["kick", "k"], "Kick someone who's \"afk\"", "moderation.player.kick", TargetImmunity.Auto, false, false, false)],
             [new DeclarePermissionAttribute("moderation.player.kick.silent") { Description = "Kick without a message" }]);
         CommandOverrides.Set(new() { ["k"] = "custom.kick" });
 
         var text = PermissionManifest.Render(info);
         Assert.Contains("OVERRIDDEN in overrides.jsonc. The plugin asks for \"moderation.player.kick\".", text);
         Assert.Contains("(aliases: k)", text);
+        Assert.Contains("""
+            "description": "Kick someone who's \"afk\"",
+            """, text); // readable, but still valid JSON
         Assert.Contains("// Checked in code. Kick without a message", text);
 
         using var doc = JsonDocument.Parse(text, new JsonDocumentOptions { CommentHandling = JsonCommentHandling.Skip });
