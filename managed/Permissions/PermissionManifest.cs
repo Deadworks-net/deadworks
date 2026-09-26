@@ -38,8 +38,18 @@ internal static class PermissionManifest
         {
             if (!_byPluginPath.TryGetValue(normalizedPath, out var list))
                 _byPluginPath[normalizedPath] = list = [];
-            list.RemoveAll(p => p.FileKey == info.FileKey);
-            list.Add(info);
+            // Several plugin classes can share one file (core's command classes do); list them together.
+            var existing = list.FindIndex(p => p.FileKey == info.FileKey);
+            if (existing >= 0)
+            {
+                var previous = list[existing];
+                info = info with { Commands = [.. previous.Commands, .. info.Commands], Declared = [.. previous.Declared, .. info.Declared] };
+                list[existing] = info;
+            }
+            else
+            {
+                list.Add(info);
+            }
         }
 
         Write(info);

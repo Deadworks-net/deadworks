@@ -11,6 +11,12 @@ internal static partial class PluginLoader
     {
         var result = HookResult.Continue;
 
+        // A gag is core's to enforce: plugin OnChatMessage handlers can't stop each other seeing a message.
+        // A gagged player's chat commands still run, but nothing they type reaches chat or any plugin.
+        var gag = message.SenderSlot >= 0 ? AdminSystem.PenaltyManager.GagForSlot(message.SenderSlot) : null;
+        if (gag != null)
+            result = HookResult.Handled;
+
         if (TryParseChatCommand(message.ChatText, out var prefix, out var commandName, out var args))
         {
             List<Func<ChatCommandContext, HookResult>>? handlers;
@@ -38,6 +44,13 @@ internal static partial class PluginLoader
                 if (result > HookResult.Continue)
                     return result;
             }
+        }
+
+        if (gag != null)
+        {
+            if (message.Controller is { } sender)
+                Chat.PrintToChat(sender, AdminSystem.PenaltyManager.GagMessage(gag));
+            return HookResult.Handled;
         }
 
         // Fall through to plugin OnChatMessage

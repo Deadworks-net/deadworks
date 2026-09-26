@@ -38,6 +38,8 @@ internal static class PermissionManager
     private static int _generation;
 
     private static readonly ulong[] _slotSteamIds = new ulong[Players.MaxSlot];
+    // Whether ClientAuthorized has been raised for the current connection in each slot.
+    private static readonly bool[] _slotAuthorizedRaised = new bool[Players.MaxSlot];
 
     /// <summary>When false, grants apply before Steam has validated the player. Only for LAN or testing.</summary>
     internal static bool RequireSteamAuth { get; set; } = true;
@@ -66,10 +68,12 @@ internal static class PermissionManager
             _registeredStores.Clear();
             _overlays.Clear();
             Array.Clear(_slotSteamIds);
+            Array.Clear(_slotAuthorizedRaised);
         }
 
         PermissionManifest.Initialize(permissionsDir);
         DeadworksManaged.Api.Permissions.Backend = new Backend();
+        Players.AuthenticatedResolver = IsAuthorized;
 
         if (!_storeName.Equals(JsonPermissionStore.StoreName, StringComparison.OrdinalIgnoreCase))
             Console.WriteLine($"[Permissions] Using the JSON store until a plugin registers the '{_storeName}' store");
@@ -315,7 +319,10 @@ internal static class PermissionManager
         if ((uint)slot >= (uint)_slotSteamIds.Length)
             return;
         lock (_lock)
+        {
             _slotSteamIds[slot] = steamId64;
+            _slotAuthorizedRaised[slot] = false;
+        }
         if (steamId64 != 0)
             EnsurePlayerLoaded(steamId64);
     }
@@ -332,7 +339,36 @@ internal static class PermissionManager
         if ((uint)slot >= (uint)_slotSteamIds.Length)
             return;
         lock (_lock)
+        {
             _slotSteamIds[slot] = 0;
+            _slotAuthorizedRaised[slot] = false;
+        }
+    }
+
+    /// <summary>Whether the player in <paramref name="slot"/> has a trustworthy SteamID (see <see cref="Players.IsAuthenticated"/>).</summary>
+    public static bool IsAuthorized(int slot)
+        => GetSlotSteamId(slot) != 0 && (!RequireSteamAuth || IsSlotAuthenticated(slot));
+
+    /// <summary>Slots that became authorized since the last call, each reported once per connection.</summary>
+    public static List<(int Slot, ulong SteamId64)> TakeNewlyAuthorized()
+    {
+        var result = new List<(int, ulong)>();
+        for (int slot = 0; slot < _slotSteamIds.Length; slot++)
+        {
+            ulong id;
+            lock (_lock)
+            {
+                id = _slotSteamIds[slot];
+                if (id == 0 || _slotAuthorizedRaised[slot])
+                    continue;
+            }
+            if (!IsAuthorized(slot))
+                continue;
+            lock (_lock)
+                _slotAuthorizedRaised[slot] = true;
+            result.Add((slot, id));
+        }
+        return result;
     }
 
     public static ulong GetSlotSteamId(int slot)
