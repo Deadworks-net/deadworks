@@ -17,12 +17,18 @@ internal static class CommandOverrides
         ReadCommentHandling = JsonCommentHandling.Skip
     };
 
+    private static readonly JsonSerializerOptions WriteOptions = new()
+    {
+        WriteIndented = true,
+        PropertyNamingPolicy = JsonNamingPolicy.CamelCase
+    };
+
     private static volatile Dictionary<string, string> _commands = new(StringComparer.OrdinalIgnoreCase);
 
     public static void Load(string path)
     {
         if (!File.Exists(path))
-            File.WriteAllText(path, DefaultFile);
+            File.WriteAllText(path, Header + JsonSerializer.Serialize(new OverridesFile(), WriteOptions) + "\n");
 
         try
         {
@@ -68,7 +74,7 @@ internal static class CommandOverrides
         return name;
     }
 
-    private const string DefaultFile =
+    private const string Header =
         """
         // Change the permission a plugin's command requires, without modifying the plugin.
         //
@@ -81,10 +87,6 @@ internal static class CommandOverrides
         // Use the command's name without "!", "/" or "dw_". One entry covers all of the command's aliases.
         // generated/<Plugin>.jsonc lists every command and shows which ones are overridden.
         // Run dw_perm_reload after editing.
-        {
-          "commands": {
-          }
-        }
 
         """;
 }

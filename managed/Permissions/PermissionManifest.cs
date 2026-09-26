@@ -2,6 +2,7 @@ using System.Reflection;
 using System.Text;
 using System.Text.Encodings.Web;
 using System.Text.Json;
+using System.Text.Json.Serialization;
 using DeadworksManaged.Api;
 
 namespace DeadworksManaged.PermissionSystem;
@@ -111,77 +112,111 @@ internal static class PermissionManifest
         }
     }
 
+    // What each list entry serializes to. Nulls are left out, so declaredPermission only appears when overridden.
+    private sealed record CommandEntry(
+        string Name, IReadOnlyList<string> Aliases, string Description, string Permission, string? DeclaredPermission, TargetImmunity TargetImmunity);
+
+    private sealed record PermissionEntry(string Tag, string Description, IReadOnlyList<string> DeclaredBy);
+
+    private static readonly JsonSerializerOptions EntryOptions = new()
+    {
+        PropertyNamingPolicy = JsonNamingPolicy.CamelCase,
+        DefaultIgnoreCondition = JsonIgnoreCondition.WhenWritingNull,
+        Converters = { new JsonStringEnumConverter() }
+    };
+
+    private static readonly JsonWriterOptions WriterOptions = new()
+    {
+        Indented = true,
+        // People read this file, so keep apostrophes and non-ASCII names as typed rather than as \u escapes.
+        Encoder = JavaScriptEncoder.UnsafeRelaxedJsonEscaping
+    };
+
+    private const string DeclaredInCode = "[DeclarePermission]";
+
     internal static string Render(PluginInfo info)
     {
-        var sb = new StringBuilder();
-        sb.Append(Header.Replace("{PLUGIN}", info.PluginName));
-        sb.Append("{\n");
-        sb.Append($"  \"plugin\": {Str(info.PluginName)},\n\n");
-
-        // --- commands ---
-        sb.Append("  \"commands\": [");
-        for (int i = 0; i < info.Commands.Count; i++)
+        using var stream = new MemoryStream();
+        using (var writer = new Utf8JsonWriter(stream, WriterOptions))
         {
-            var c = info.Commands[i];
-            var effective = CommandOverrides.Resolve(c.Names, c.DeclaredPermission, out var overridden);
-            var immunity = c.TargetImmunity == TargetImmunity.Auto
-                ? (effective.Length > 0 ? TargetImmunity.Enforce : TargetImmunity.Ignore)
-                : c.TargetImmunity;
+            writer.WriteStartObject();
+            writer.WriteString("plugin", info.PluginName);
 
-            sb.Append(i == 0 ? "\n" : ",\n");
-            sb.Append($"    // {Invocations(c)}{(c.Description.Length > 0 ? $": {OneLine(c.Description)}" : "")}\n");
-            if (c.ServerOnly)
-                sb.Append("    // Server console only; players can never run it.\n");
-            else if (effective.Length == 0)
-                sb.Append("    // Anyone can run it.\n");
-            if (overridden)
-                sb.Append($"    // OVERRIDDEN in overrides.jsonc. The plugin asks for {(c.DeclaredPermission.Length > 0 ? $"\"{c.DeclaredPermission}\"" : "no permission")}.\n");
+            writer.WriteStartArray("commands");
+            foreach (var c in info.Commands)
+            {
+                var effective = CommandOverrides.Resolve(c.Names, c.DeclaredPermission, out var overridden);
+                var immunity = c.TargetImmunity == TargetImmunity.Auto
+                    ? (effective.Length > 0 ? TargetImmunity.Enforce : TargetImmunity.Ignore)
+                    : c.TargetImmunity;
 
-            sb.Append("    {\n");
-            sb.Append($"      \"name\": {Str(c.Names[0])},\n");
-            sb.Append($"      \"aliases\": [{string.Join(", ", c.Names.Skip(1).Select(Str))}],\n");
-            sb.Append($"      \"description\": {Str(c.Description)},\n");
-            sb.Append($"      \"permission\": {Str(effective)},\n");
-            if (overridden)
-                sb.Append($"      \"declaredPermission\": {Str(c.DeclaredPermission)},\n");
-            sb.Append($"      \"targetImmunity\": {Str(immunity.ToString())}\n");
-            sb.Append("    }");
+                var comments = new List<string> { $"{Invocations(c)}{(c.Description.Length > 0 ? $": {c.Description}" : "")}" };
+                if (c.ServerOnly)
+                    comments.Add("Server console only; players can never run it.");
+                else if (effective.Length == 0)
+                    comments.Add("Anyone can run it.");
+                if (overridden)
+                    comments.Add($"OVERRIDDEN in overrides.jsonc. The plugin asks for {(c.DeclaredPermission.Length > 0 ? $"\"{c.DeclaredPermission}\"" : "no permission")}.");
+
+                WriteEntry(writer, new CommandEntry(
+                    c.Names[0], c.Names.Skip(1).ToList(), c.Description, effective,
+                    overridden ? c.DeclaredPermission : null, immunity), comments);
+            }
+            writer.WriteEndArray();
+
+            writer.WriteStartArray("permissions");
+            foreach (var p in CollectPermissions(info))
+            {
+                var commands = p.DeclaredBy.Where(d => d != DeclaredInCode).ToList();
+                var comment = commands.Count > 0 ? $"Required by: {string.Join(", ", commands)}" : "Checked in code";
+                if (p.Description.Length > 0)
+                    comment += $". {p.Description}";
+                WriteEntry(writer, p, [comment]);
+            }
+            writer.WriteEndArray();
+
+            writer.WriteEndObject();
         }
-        sb.Append(info.Commands.Count > 0 ? "\n  ],\n\n" : "],\n\n");
 
-        // --- permissions ---
-        var permissions = new SortedDictionary<string, (string Description, List<string> DeclaredBy)>(StringComparer.OrdinalIgnoreCase);
+        return Header.Replace("{PLUGIN}", info.PluginName) + Encoding.UTF8.GetString(stream.ToArray()) + "\n";
+    }
+
+    private static List<PermissionEntry> CollectPermissions(PluginInfo info)
+    {
+        var byTag = new SortedDictionary<string, (string Description, List<string> DeclaredBy)>(StringComparer.Ordinal);
         foreach (var c in info.Commands.Where(c => c.DeclaredPermission.Length > 0))
         {
-            var key = PermissionEvaluator.Normalize(c.DeclaredPermission);
-            if (!permissions.TryGetValue(key, out var entry))
-                permissions[key] = entry = ("", []);
+            var tag = PermissionEvaluator.Normalize(c.DeclaredPermission);
+            if (!byTag.TryGetValue(tag, out var entry))
+                byTag[tag] = entry = ("", []);
             entry.DeclaredBy.Add(c.Names[0]);
         }
         foreach (var d in info.Declared)
         {
-            var key = PermissionEvaluator.Normalize(d.Permission);
-            var declaredBy = permissions.TryGetValue(key, out var existing) ? existing.DeclaredBy : [];
-            declaredBy.Add("[DeclarePermission]");
-            permissions[key] = (d.Description, declaredBy);
+            var tag = PermissionEvaluator.Normalize(d.Permission);
+            var declaredBy = byTag.TryGetValue(tag, out var existing) ? existing.DeclaredBy : [];
+            declaredBy.Add(DeclaredInCode);
+            byTag[tag] = (d.Description, declaredBy);
         }
+        return byTag.Select(kv => new PermissionEntry(kv.Key, kv.Value.Description, kv.Value.DeclaredBy)).ToList();
+    }
 
-        sb.Append("  \"permissions\": [");
-        var n = 0;
-        foreach (var (tag, (description, declaredBy)) in permissions)
+    /// <summary>Serializes <paramref name="value"/> as an object whose first lines are <c>/* comment */</c>s.</summary>
+    private static void WriteEntry<T>(Utf8JsonWriter writer, T value, IEnumerable<string> comments)
+    {
+        writer.WriteStartObject();
+        foreach (var comment in comments)
+            // A plugin's description could contain "*/", which would end the comment early.
+            writer.WriteCommentValue($" {comment.ReplaceLineEndings(" ").Replace("*/", "* /")} ");
+        foreach (var (name, node) in JsonSerializer.SerializeToNode(value, EntryOptions)!.AsObject())
         {
-            sb.Append(n++ == 0 ? "\n" : ",\n");
-            var commands = declaredBy.Where(d => d != "[DeclarePermission]").ToList();
-            var parts = new List<string>();
-            if (commands.Count > 0) parts.Add($"Required by: {string.Join(", ", commands)}");
-            if (commands.Count == 0) parts.Add("Checked in code");
-            if (description.Length > 0) parts.Add(OneLine(description));
-            sb.Append($"    // {string.Join(". ", parts)}\n");
-            sb.Append($"    {{ \"tag\": {Str(tag)}, \"description\": {Str(description)}, \"declaredBy\": [{string.Join(", ", declaredBy.Select(Str))}] }}");
+            writer.WritePropertyName(name);
+            if (node == null)
+                writer.WriteNullValue();
+            else
+                node.WriteTo(writer);
         }
-        sb.Append(n > 0 ? "\n  ]\n" : "]\n");
-        sb.Append("}\n");
-        return sb.ToString();
+        writer.WriteEndObject();
     }
 
     private static string Invocations(CommandInfo c)
@@ -213,13 +248,6 @@ internal static class PermissionManifest
                 Console.WriteLine($"[Permissions] {info.PluginName} uses '{tag}'; by convention its permissions start with '{own}.'");
         }
     }
-
-    // People read this file, so keep apostrophes and non-ASCII names as typed rather than as \u escapes.
-    private static readonly JsonSerializerOptions StrOptions = new() { Encoder = JavaScriptEncoder.UnsafeRelaxedJsonEscaping };
-
-    private static string Str(string value) => JsonSerializer.Serialize(value, StrOptions);
-
-    private static string OneLine(string text) => text.ReplaceLineEndings(" ");
 
     private static string MakeSafeFileName(string value)
     {
