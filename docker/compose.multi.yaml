@@ -30,7 +30,7 @@ services:
       - one:/data
       - ./one/plugins:/plugins
       - ./one/configs:/configs
-      - ./maps:/maps:ro
+      - ./maps:/maps
 
   two:
     <<: *server
@@ -44,7 +44,7 @@ services:
       - two:/data
       - ./two/plugins:/plugins
       - ./two/configs:/configs
-      - ./maps:/maps:ro
+      - ./maps:/maps
 
 volumes:
   steam:

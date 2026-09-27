@@ -33,7 +33,7 @@ trap 'log "ERROR: \"$BASH_COMMAND\" failed (entrypoint.sh line $LINENO)" >&2' ER
 # everything after this block runs unprivileged. Wine refuses a prefix it does not own.
 if [ "$(id -u)" = "0" ]; then
     mkdir -p "$GAME_DIR" "$STEAM_DIR/home" "$HOME" "$WINEPREFIX"
-    for d in /data "$STEAM_DIR" "$GAME_DIR" "$STEAM_DIR/home" "$HOME" "$WINEPREFIX" /plugins /configs; do
+    for d in /data "$STEAM_DIR" "$GAME_DIR" "$STEAM_DIR/home" "$HOME" "$WINEPREFIX" /plugins /configs /maps; do
         # An install mounted read-only (somebody's existing copy) is left exactly as it is.
         [ -w "$d" ] || continue
         [ "$(stat -c %u:%g "$d")" = "$PUID:$PGID" ] || chown -R "$PUID:$PGID" "$d"
