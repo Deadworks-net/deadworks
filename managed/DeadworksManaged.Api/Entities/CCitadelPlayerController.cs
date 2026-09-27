@@ -70,6 +70,24 @@ public sealed unsafe class CCitadelPlayerController : CBasePlayerController {
 	}
 
 	/// <summary>
+	/// Removes this player from the game completely: their hero, any other pawn they control (such as a spectator's
+	/// observer pawn), and this controller, together in the same tick.
+	///
+	/// By default a player who leaves keeps their controller and hero, so they can reconnect to them, and their portrait
+	/// stays in the top bar. Call this from <see cref="IDeadworksPlugin.OnClientDisconnect"/> to drop them instead.
+	/// Don't remove the hero or the controller on its own: either one left behind crashes clients or the server. To
+	/// remove a player who is still connected, <see cref="CBasePlayerController.Kick"/> them.
+	/// </summary>
+	public void RemoveWithPawns() {
+		var hero = GetHeroPawn();
+		var pawn = Pawn;
+		hero?.Remove();
+		if (pawn != null && pawn.EntityHandle != hero?.EntityHandle)
+			pawn.Remove();
+		Remove();
+	}
+
+	/// <summary>
 	/// Forcibly removes the player's current pawn, spawns an observer pawn, and attaches it.
 	/// </summary>
 	public void MakeObserver() {
