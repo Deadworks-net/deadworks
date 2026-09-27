@@ -14,5 +14,8 @@ void __fastcall Hook_CCitadelPlayerPawn_ModifyCurrency(CCitadelPlayerPawn *thisp
                                                         ECurrencySource nSource, bool bSilent, bool bForceGain, bool bSpendOnly,
                                                         void *pSourceAbility, void *pSourceEntity);
 
+inline safetyhook::InlineHook g_CCitadelPlayerPawn_SelectHeroInternal;
+void __fastcall Hook_CCitadelPlayerPawn_SelectHeroInternal(CCitadelPlayerPawn *thisptr, void *pHeroDef);
+
 } // namespace hooks
 } // namespace deadworks

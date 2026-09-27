@@ -191,6 +191,9 @@ void Deadworks::PostInit() {
     HookInline(hooks::g_CCitadelPlayerPawn_ModifyCurrency,
                "CCitadelPlayerPawn::ModifyCurrency",
                &hooks::Hook_CCitadelPlayerPawn_ModifyCurrency);
+    HookInline(hooks::g_CCitadelPlayerPawn_SelectHeroInternal,
+               "CCitadelPlayerPawn::SelectHeroInternal",
+               &hooks::Hook_CCitadelPlayerPawn_SelectHeroInternal);
     HookInline(hooks::g_CCitadelPlayerController_ClientConCommand,
                "CCitadelPlayerController::ClientConCommand",
                &hooks::Hook_CCitadelPlayerController_ClientConCommand);
