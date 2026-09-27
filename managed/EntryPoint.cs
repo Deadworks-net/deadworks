@@ -201,6 +201,7 @@ public static class EntryPoint
     public static void OnClientFullConnect(int slot)
     {
         Players.SetConnected(slot, true);
+        HostStatus.OnClientFullConnect(slot);
         var args = new ClientFullConnectEvent { Slot = slot };
         PluginLoader.DispatchClientFullConnect(args);
     }
@@ -218,6 +219,7 @@ public static class EntryPoint
         var args = new ClientDisconnectedEvent { Slot = slot, Reason = (ENetworkDisconnectionReason)reason };
         PluginLoader.DispatchClientDisconnect(args);
         Players.SetConnected(slot, false);
+        HostStatus.OnClientDisconnect(slot);
         ZoneRegistry.OnDisconnect(slot);
         DeadworksManaged.Api.UI.UIChannel.OnPlayerDisconnect(slot);
     }

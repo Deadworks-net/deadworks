@@ -11,6 +11,8 @@ internal static class ConCommandManager
     private static readonly Dictionary<string, List<(string name, Action<ConCommandContext> handler)>> _pluginHandlers = new(StringComparer.OrdinalIgnoreCase);
     // convar name -> (plugin, PropertyInfo) for get/set
     private static readonly Dictionary<string, (IDeadworksPlugin plugin, PropertyInfo prop)> _conVars = new(StringComparer.OrdinalIgnoreCase);
+    // built-in command name -> help metadata (built-ins aren't in PluginRegistrationTracker)
+    private static readonly Dictionary<string, (string description, bool serverOnly, bool hidden)> _builtIns = new(StringComparer.OrdinalIgnoreCase);
 
     private static readonly Lock _lock = new();
 
@@ -19,6 +21,8 @@ internal static class ConCommandManager
         RegisterBuiltInCommand("dw_reloadconfig", "Reload plugin configs. Usage: dw_reloadconfig [PluginName]", true, OnReloadConfig);
         RegisterBuiltInCommand("dw_plugin", "Manage plugins. Usage: dw_plugin <list|enable|disable|commands> [PluginName]", true, OnPluginCommand);
         RegisterBuiltInCommand("dw_help", "List all available commands.", false, OnHelp);
+        RegisterBuiltInCommand("dw_host_status", "Print server, player and plugin status as one DWHOST {json} line for the launcher. Usage: dw_host_status [fromSlot]", true, HostStatus.OnCommand);
+        RegisterBuiltInCommand("dw_kick", "Kick the player in a slot and print one DWKICK ok|error line. The reason is not shown to the player. Usage: dw_kick <slot> [reason]", true, KickCommand.OnCommand);
     }
 
     private static void OnReloadConfig(ConCommandContext ctx)
@@ -105,6 +109,16 @@ internal static class ConCommandManager
 
     private static void OnHelp(ConCommandContext ctx)
     {
+        List<(string name, string description)> builtIns;
+        lock (_lock)
+        {
+            builtIns = _builtIns
+                .Where(kv => !kv.Value.hidden && (ctx.IsServerCommand || !kv.Value.serverOnly))
+                .OrderBy(kv => kv.Key, StringComparer.OrdinalIgnoreCase)
+                .Select(kv => (kv.Key, kv.Value.description))
+                .ToList();
+        }
+
         var entries = PluginRegistrationTracker.GetAllEntries();
 
         var consoleCmds = entries
@@ -118,6 +132,13 @@ internal static class ConCommandManager
 
         var to = ctx.Controller;
         Reply(to, "Available commands:");
+
+        if (builtIns.Count > 0)
+        {
+            Reply(to, "Deadworks:");
+            foreach (var (name, description) in builtIns)
+                Reply(to, $"  {name} - {description}");
+        }
 
         if (consoleCmds.Count > 0)
         {
@@ -139,7 +160,7 @@ internal static class ConCommandManager
             }
         }
 
-        if (consoleCmds.Count == 0 && chatCmds.Count == 0)
+        if (builtIns.Count == 0 && consoleCmds.Count == 0 && chatCmds.Count == 0)
             Reply(to, "  (none)");
     }
 
@@ -175,7 +196,7 @@ internal static class ConCommandManager
         }
     }
 
-    internal static void RegisterBuiltInCommand(string name, string description, bool serverOnly, Action<ConCommandContext> handler)
+    internal static void RegisterBuiltInCommand(string name, string description, bool serverOnly, Action<ConCommandContext> handler, bool hidden = false)
     {
         Action<ConCommandContext> wrapped = serverOnly
             ? ctx =>
@@ -190,6 +211,11 @@ internal static class ConCommandManager
             : handler;
 
         AddHandler(name, wrapped);
+
+        lock (_lock)
+        {
+            _builtIns[name] = (description, serverOnly, hidden);
+        }
 
         NativeRegisterConCommand(name, description, BuildConCommandFlags(serverOnly));
 
@@ -276,6 +302,7 @@ internal static class ConCommandManager
             _handlers.Clear();
             _pluginHandlers.Clear();
             _conVars.Clear();
+            _builtIns.Clear();
         }
 
         // Re-register built-in commands

@@ -1,0 +1,388 @@
+.page {
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+  padding: 0 24px 24px 24px;
+  gap: 12px;
+}
+
+.toolbar {
+  display: flex;
+  align-items: flex-end;
+  justify-content: space-between;
+  gap: 12px;
+  flex-shrink: 0;
+}
+
+.toolbarRight {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  min-width: 0;
+  padding-bottom: 6px;
+}
+
+.body {
+  flex: 1;
+  min-height: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.card {
+  flex: 1;
+  min-height: 0;
+  display: flex;
+  flex-direction: column;
+  background: var(--bg-panel);
+  border: 1px solid var(--border);
+  overflow: hidden;
+}
+
+.scroll {
+  flex: 1;
+  min-height: 0;
+  overflow-y: auto;
+}
+
+/* ── Installed layout: rail + server page ── */
+
+.layout {
+  flex: 1;
+  min-height: 0;
+  display: flex;
+  background: var(--bg-panel);
+  border: 1px solid var(--border);
+  overflow: hidden;
+}
+
+.rail {
+  width: 190px;
+  flex-shrink: 0;
+  display: flex;
+  flex-direction: column;
+  border-right: 1px solid var(--border);
+  background: var(--bg);
+}
+
+.railList {
+  flex: 1;
+  min-height: 0;
+  overflow-y: auto;
+  padding: 6px 0;
+}
+
+.railItem {
+  display: flex;
+  align-items: center;
+  gap: 9px;
+  width: 100%;
+  padding: 9px 12px;
+  text-align: left;
+  font-family: var(--font-family);
+  color: var(--text-muted);
+  background: transparent;
+  border: none;
+  border-left: 2px solid transparent;
+  cursor: pointer;
+  transition: background 0.1s, color 0.1s;
+}
+
+.railItem:hover {
+  background: var(--hover);
+  color: var(--text-secondary);
+}
+
+.railItem:focus-visible {
+  outline: 1px solid var(--accent);
+  outline-offset: -1px;
+}
+
+.railItemActive {
+  background: var(--active);
+  color: var(--text);
+  border-left-color: var(--accent);
+}
+
+.railName {
+  flex: 1;
+  min-width: 0;
+  font-size: 0.85rem;
+  font-weight: 600;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.railPlayers {
+  font-size: 0.72rem;
+  color: var(--text-muted);
+  font-variant-numeric: tabular-nums;
+}
+
+.railFooter {
+  padding: 10px;
+  border-top: 1px solid var(--border);
+}
+
+.railFooter button {
+  width: 100%;
+}
+
+.main {
+  flex: 1;
+  min-width: 0;
+  display: flex;
+  flex-direction: column;
+}
+
+/* ── Welcome ── */
+
+.welcomeTitle {
+  font-size: 1.5rem;
+  font-weight: 700;
+  letter-spacing: 1px;
+}
+
+.welcomeText {
+  font-size: 0.9rem;
+  color: var(--text-muted);
+  max-width: 440px;
+  line-height: 1.5;
+  margin-bottom: 8px;
+}
+
+/* ── Install / create forms ── */
+
+.form {
+  max-width: 640px;
+  margin: 0 auto;
+  padding: 20px 24px 24px;
+}
+
+.formTitle {
+  font-size: 1.15rem;
+  font-weight: 700;
+  letter-spacing: 0.5px;
+  margin-bottom: 4px;
+}
+
+.formSubtitle {
+  font-size: 0.8rem;
+  color: var(--text-muted);
+  margin-bottom: 18px;
+}
+
+.section {
+  margin-bottom: 20px;
+}
+
+.formActions {
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+  gap: 10px;
+  margin-top: 8px;
+}
+
+.formActionsLeft {
+  margin-right: auto;
+}
+
+.disabledReason {
+  font-size: 0.76rem;
+  color: var(--ping-ok);
+  text-align: right;
+}
+
+.detected {
+  font-size: 0.8rem;
+  color: var(--text-secondary);
+  margin-bottom: 8px;
+  overflow-wrap: anywhere;
+}
+
+.detectedPath {
+  font-family: 'Consolas', 'Courier New', monospace;
+  color: var(--text-muted);
+}
+
+/* Free-space bar */
+.spaceBar {
+  display: flex;
+  width: 100%;
+  height: 8px;
+  margin-top: 10px;
+  background: var(--bg);
+  border: 1px solid var(--border);
+  border-radius: 2px;
+  overflow: hidden;
+}
+
+.spaceUsed {
+  background: #3a3c45;
+}
+
+.spaceNeeded {
+  background: var(--accent);
+}
+
+.spaceNeededBad {
+  background: var(--ping-bad);
+}
+
+.spaceLegend {
+  display: flex;
+  justify-content: space-between;
+  margin-top: 5px;
+  font-size: 0.74rem;
+  color: var(--text-muted);
+}
+
+.driveChips {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
+  margin-top: 8px;
+}
+
+.driveChip {
+  padding: 3px 9px;
+  font-family: var(--font-family);
+  font-size: 0.72rem;
+  color: var(--text-muted);
+  background: var(--bg);
+  border: 1px solid var(--border);
+  border-radius: 2px;
+  cursor: pointer;
+}
+
+.driveChip:hover {
+  color: var(--text);
+  border-color: var(--text-muted);
+}
+
+.driveChipActive {
+  color: var(--accent);
+  border-color: var(--accent);
+}
+
+.steamBox {
+  margin-top: 12px;
+  padding: 14px;
+  background: var(--bg-card);
+  border: 1px solid var(--border);
+  border-radius: 2px;
+}
+
+.twoCol {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 10px;
+}
+
+/* ── Task progress ── */
+
+.task {
+  width: 100%;
+  max-width: 520px;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  text-align: left;
+}
+
+.taskTitle {
+  font-size: 1.1rem;
+  font-weight: 700;
+  letter-spacing: 0.5px;
+}
+
+.taskLabel {
+  font-size: 0.88rem;
+  color: var(--text-secondary);
+}
+
+.taskStats {
+  display: flex;
+  justify-content: space-between;
+  font-size: 0.76rem;
+  color: var(--text-muted);
+  font-variant-numeric: tabular-nums;
+}
+
+.taskActions {
+  display: flex;
+  justify-content: flex-end;
+  gap: 8px;
+}
+
+.prompt {
+  padding: 12px;
+  background: var(--bg-card);
+  border: 1px solid var(--accent);
+  border-radius: 2px;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.banner {
+  flex-shrink: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  padding: 10px 14px;
+  background: var(--bg-panel);
+  border: 1px solid var(--border);
+}
+
+.bannerRow {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  font-size: 0.8rem;
+}
+
+.bannerLabel {
+  flex: 1;
+  min-width: 0;
+  color: var(--text-secondary);
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+/* ── Modified client files ── */
+
+.modified {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.modifiedList {
+  list-style: none;
+  max-height: 160px;
+  overflow-y: auto;
+  padding: 8px 10px;
+  background: var(--bg);
+  border: 1px solid var(--border);
+  border-radius: 2px;
+  font-family: 'Consolas', 'Courier New', monospace;
+  font-size: 0.74rem;
+  color: var(--text-secondary);
+  user-select: text;
+}
+
+.modifiedList li {
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.modifiedMore {
+  color: var(--text-muted);
+  font-style: italic;
+}

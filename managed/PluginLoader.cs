@@ -155,6 +155,15 @@ internal static partial class PluginLoader
         }
     }
 
+    /// <summary>File name (without .dll) of every loaded plugin assembly, with how many IDeadworksPlugin types it produced.</summary>
+    public static List<(string DllName, int PluginCount)> GetLoadedAssemblies()
+    {
+        lock (_lock)
+        {
+            return _loaded.Select(kv => (Path.GetFileNameWithoutExtension(kv.Key), kv.Value.Plugins.Count)).ToList();
+        }
+    }
+
     /// <summary>Returns the normalized full path for a plugin DLL name, or null if the plugins directory is not set.</summary>
     public static string? ResolvePluginPath(string dllName)
     {

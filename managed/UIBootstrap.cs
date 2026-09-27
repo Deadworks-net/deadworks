@@ -26,7 +26,8 @@ internal static class UIBootstrap
             name: "dw_ui",
             description: "UI return channel (Panorama → server events). Not for direct use.",
             serverOnly: false,
-            handler: OnDwUi);
+            handler: OnDwUi,
+            hidden: true);
     }
 
     // Wire format (after the command name):
