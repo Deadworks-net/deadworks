@@ -30,13 +30,14 @@ public static class EntryPoint
     {
         Players.ResetAll();
         DeadworksManaged.Api.UI.UIChannel.OnMapStart();
-        Server.MapName = Marshal.PtrToStringUTF8((nint)mapNamePtr) ?? "";
+        Server.OnMapStart(Marshal.PtrToStringUTF8((nint)mapNamePtr) ?? "");
         PluginLoader.DispatchStartupServer();
     }
 
     [UnmanagedCallersOnly]
     public static void OnGameFrame(byte simulating, byte firstTick, byte lastTick)
     {
+        Server.OnGameFrame();
         PluginLoader.DispatchGameFrame(simulating != 0, firstTick != 0, lastTick != 0);
     }
 
