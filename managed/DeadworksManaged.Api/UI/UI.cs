@@ -22,6 +22,11 @@ public enum AddonState {
 /// Entry point for the UI message manager. Use <see cref="Panel"/> to obtain a
 /// handle for a logical UI panel; the panel id binds to the panorama-side panel
 /// script registered with the same id via <c>DW.registerPanel({ id: "..." })</c>.
+///
+/// A panel stays up until you destroy it, the player leaves, or the map changes.
+/// Every panel is gone on a new map, so treat any you were tracking as closed in
+/// <see cref="IDeadworksPlugin.OnStartupServer"/> and show them again as players
+/// arrive.
 /// </summary>
 public static class UI {
 	private static readonly Dictionary<string, UIPanel> _panels = new();

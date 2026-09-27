@@ -141,11 +141,11 @@ internal static class UIChannel {
 	}
 
 	// ─── Session liveness / disconnect detection ───────────────────────────
-	// One token per server process (regenerated on full restart). The client
-	// tears its UI down if heartbeats stop (disconnect) or if the token changes
-	// (it reconnected to a different process). Stable across plugin hot reloads
+	// One token per map. The client tears its UI down if heartbeats stop
+	// (disconnect) or if the token changes, which it does on every map load
+	// (see OnMapStart) and on a full restart. Stable across plugin hot reloads
 	// because this assembly is shared and loaded once.
-	internal static readonly string SessionToken = NewSessionToken();
+	internal static string SessionToken { get; private set; } = NewSessionToken();
 	internal static int HeartbeatIntervalMs = 1000;
 	private static long _lastHeartbeatTicks;
 	private static long _heartbeatSeq;
@@ -914,7 +914,23 @@ internal static class UIChannel {
 
 	internal static void OnPlayerDisconnect(int slot) {
 		if (slot < 0 || slot >= _slots.Length) return;
-		var s = _slots[slot];
+		Reset(_slots[slot]);
+	}
+
+	/// <summary>
+	/// A new map is starting: forget every panel sent on the old one. Players stay
+	/// connected through a map change, so otherwise their game would get the old
+	/// panels back when it rebuilds its UI after the load, with no plugin tracking
+	/// them any more to close them. The new token also clears any client whose UI
+	/// survived the load.
+	/// </summary>
+	internal static void OnMapStart() {
+		SessionToken = NewSessionToken();
+		foreach (var s in _slots)
+			Reset(s);
+	}
+
+	private static void Reset(Slot s) {
 		s.Reliable.Clear();
 		s.Unreliable.Clear();
 		s.Styles.Clear();
@@ -923,6 +939,7 @@ internal static class UIChannel {
 		s.Panels.Clear();
 		s.Shadow.Clear();
 		s.StyleShadow.Clear();
+		s.ShadowReplayPending = false;
 		s.ClientPanels.Clear();
 		s.Addons.Clear();
 		s.Tokens = 0;

@@ -29,6 +29,7 @@ public static class EntryPoint
     public static unsafe void OnStartupServer(byte* mapNamePtr)
     {
         Players.ResetAll();
+        DeadworksManaged.Api.UI.UIChannel.OnMapStart();
         Server.MapName = Marshal.PtrToStringUTF8((nint)mapNamePtr) ?? "";
         PluginLoader.DispatchStartupServer();
     }
