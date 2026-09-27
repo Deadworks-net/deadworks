@@ -11,8 +11,9 @@ public static unsafe class Server {
 	/// <summary>
 	/// True while the map is changing, until the next map's <see cref="IDeadworksPlugin.OnStartupServer"/>. It turns on
 	/// at <see cref="ChangeLevel"/>, or for a change started elsewhere, such as <c>changelevel</c> in the server console,
-	/// once the current map shuts down. Anything done to players, pawns or panels meanwhile is lost with the old map. If
-	/// the change fails, such as for a map that doesn't exist, it turns off again after a few seconds.
+	/// once the current map starts shutting down, which is before every player gets a disconnect event with
+	/// <see cref="ClientDisconnectedEvent.IsMapChange"/>. Anything done to players, pawns or panels meanwhile is lost with
+	/// the old map. If the change fails, such as for a map that doesn't exist, it turns off again after a few seconds.
 	/// </summary>
 	public static bool IsChangingLevel { get; private set; }
 

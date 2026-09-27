@@ -214,6 +214,8 @@ public static class EntryPoint
     public static void OnClientDisconnecting(int slot, int reason)
     {
         var args = new ClientDisconnectedEvent { Slot = slot, Reason = (ENetworkDisconnectionReason)reason };
+        if (args.IsMapChange)
+            Server.OnMapShutdown();
         PluginLoader.DispatchClientDisconnecting(args);
     }
 
@@ -221,8 +223,12 @@ public static class EntryPoint
     public static void OnClientDisconnect(int slot, int reason)
     {
         var args = new ClientDisconnectedEvent { Slot = slot, Reason = (ENetworkDisconnectionReason)reason };
+        if (args.IsMapChange)
+            Server.OnMapShutdown();
         PluginLoader.DispatchClientDisconnect(args);
-        Players.OnDisconnect(slot);
+        // Still connected: they reload into the next map, and Players.OnMapStart counts them as coming back.
+        if (!args.IsMapChange)
+            Players.OnDisconnect(slot);
         ZoneRegistry.OnDisconnect(slot);
         DeadworksManaged.Api.UI.UIChannel.OnPlayerDisconnect(slot);
     }
