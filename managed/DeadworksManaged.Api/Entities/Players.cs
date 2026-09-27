@@ -6,15 +6,59 @@ public static class Players {
 	public const int MaxSlot = 31;
 
 	private static readonly bool[] _connected = new bool[MaxSlot];
+	private static readonly ulong[] _steamIds = new ulong[MaxSlot];
+	private static readonly bool[] _reconnecting = new bool[MaxSlot];
 
-	/// <summary>Mark a slot as fully connected. Called from EntryPoint on ClientFullConnect.</summary>
-	internal static void SetConnected(int slot, bool connected) {
-		if ((uint)slot < MaxSlot)
-			_connected[slot] = connected;
+	// SteamIDs of the players who were in the game when the last map ended and haven't finished loading into this one.
+	private static readonly HashSet<ulong> _expected = new();
+
+	/// <summary>
+	/// A new map is starting. Everyone connected, or still loading back in, reloads into it and connects again.
+	/// </summary>
+	internal static void OnMapStart() {
+		_expected.Clear();
+		for (int i = 0; i < MaxSlot; i++) {
+			if ((_connected[i] || _reconnecting[i]) && _steamIds[i] != 0)
+				_expected.Add(_steamIds[i]);
+		}
+		Array.Clear(_connected);
+		Array.Clear(_steamIds);
+		Array.Clear(_reconnecting);
 	}
 
-	/// <summary>Reset all connection state. Called on map change / server startup.</summary>
-	internal static void ResetAll() => Array.Clear(_connected);
+	/// <summary>A client is connecting to <paramref name="slot"/>. Returns whether they're reloading after a map change.</summary>
+	internal static bool OnConnect(int slot, ulong steamId) {
+		if ((uint)slot >= MaxSlot) return false;
+		_steamIds[slot] = steamId;
+		return _reconnecting[slot] = steamId != 0 && _expected.Contains(steamId);
+	}
+
+	/// <summary>Bots skip <see cref="OnConnect"/>, so this records every player, bots included.</summary>
+	internal static void OnPutInServer(int slot, ulong steamId) {
+		if ((uint)slot >= MaxSlot) return;
+		_steamIds[slot] = steamId;
+		_reconnecting[slot] = steamId != 0 && _expected.Contains(steamId);
+	}
+
+	internal static void OnFullConnect(int slot) {
+		if ((uint)slot >= MaxSlot) return;
+		_connected[slot] = true;
+		_expected.Remove(_steamIds[slot]);
+	}
+
+	internal static void OnDisconnect(int slot) {
+		if ((uint)slot >= MaxSlot) return;
+		_expected.Remove(_steamIds[slot]);
+		_connected[slot] = false;
+		_steamIds[slot] = 0;
+		_reconnecting[slot] = false;
+	}
+
+	/// <summary>
+	/// Whether the player in <paramref name="slot"/> is reloading after a map change, rather than joining. See
+	/// <see cref="ClientConnectEvent.IsMapChangeReconnect"/>.
+	/// </summary>
+	public static bool IsMapChangeReconnect(int slot) => (uint)slot < MaxSlot && _reconnecting[slot];
 
 	/// <summary>
 	/// Slots this server has, from its player count. Entities past the last slot are ordinary map entities, not

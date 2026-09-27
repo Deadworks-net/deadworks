@@ -28,7 +28,7 @@ public static class EntryPoint
     [UnmanagedCallersOnly]
     public static unsafe void OnStartupServer(byte* mapNamePtr)
     {
-        Players.ResetAll();
+        Players.OnMapStart();
         DeadworksManaged.Api.UI.UIChannel.OnMapStart();
         Server.OnMapStart(Marshal.PtrToStringUTF8((nint)mapNamePtr) ?? "");
         PluginLoader.DispatchStartupServer();
@@ -179,7 +179,8 @@ public static class EntryPoint
             Slot = slot,
             Name = new string(name),
             SteamId = xuid,
-            IpAddress = new string(ipAddress)
+            IpAddress = new string(ipAddress),
+            IsMapChangeReconnect = Players.OnConnect(slot, xuid)
         };
 
         return PluginLoader.DispatchClientConnect(args) ? (byte)1 : (byte)0;
@@ -188,12 +189,14 @@ public static class EntryPoint
     [UnmanagedCallersOnly]
     public static unsafe void OnClientPutInServer(int slot, char* name, ulong xuid, byte isBot)
     {
+        Players.OnPutInServer(slot, xuid);
         var args = new ClientPutInServerEvent
         {
             Slot = slot,
             Name = new string(name),
             Xuid = xuid,
-            IsBot = isBot != 0
+            IsBot = isBot != 0,
+            IsMapChangeReconnect = Players.IsMapChangeReconnect(slot)
         };
 
         PluginLoader.DispatchClientPutInServer(args);
@@ -202,8 +205,8 @@ public static class EntryPoint
     [UnmanagedCallersOnly]
     public static void OnClientFullConnect(int slot)
     {
-        Players.SetConnected(slot, true);
-        var args = new ClientFullConnectEvent { Slot = slot };
+        Players.OnFullConnect(slot);
+        var args = new ClientFullConnectEvent { Slot = slot, IsMapChangeReconnect = Players.IsMapChangeReconnect(slot) };
         PluginLoader.DispatchClientFullConnect(args);
     }
 
@@ -219,7 +222,7 @@ public static class EntryPoint
     {
         var args = new ClientDisconnectedEvent { Slot = slot, Reason = (ENetworkDisconnectionReason)reason };
         PluginLoader.DispatchClientDisconnect(args);
-        Players.SetConnected(slot, false);
+        Players.OnDisconnect(slot);
         ZoneRegistry.OnDisconnect(slot);
         DeadworksManaged.Api.UI.UIChannel.OnPlayerDisconnect(slot);
     }
