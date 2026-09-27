@@ -73,7 +73,11 @@ public sealed unsafe class CCitadelPlayerController : CBasePlayerController {
 	/// Forcibly removes the player's current pawn, spawns an observer pawn, and attaches it.
 	/// </summary>
 	public void MakeObserver() {
-		Pawn?.Remove();
+		if (Pawn is { } pawn) {
+			if (_hHeroPawn.Get(Handle) == pawn.EntityHandle)
+				_hHeroPawn.Set(Handle, CBaseEntity.InvalidEntityHandle);
+			pawn.Remove();
+		}
 		SetPawn(null, retainOldPawnTeam: true);
 		NativeInterop.SpawnObserverPawn((void*)Handle);
 	}
