@@ -27,7 +27,7 @@ public sealed partial class AdminPlugin
     internal static string ListNames(IReadOnlyList<string> names) => names.Count switch
     {
         1 => names[0],
-        2 or 3 => $"{string.Join(", ", names.Take(names.Count - 1))} and {names[^1]}",
+        <= 4 => $"{string.Join(", ", names.Take(names.Count - 1))} and {names[^1]}",
         _ => $"{string.Join(", ", names.Take(3))} and {names.Count - 3} others",
     };
 

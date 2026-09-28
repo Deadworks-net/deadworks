@@ -379,6 +379,7 @@ public sealed class AdminPluginTests : AdminTestBase
     [InlineData("lapka", "lapka")]
     [InlineData("lapka,wisp", "lapka and wisp")]
     [InlineData("lapka,wisp,dingus", "lapka, wisp and dingus")]
+    [InlineData("lapka,wisp,dingus,fella", "lapka, wisp, dingus and fella")]
     [InlineData("lapka,wisp,dingus,fella,bot", "lapka, wisp, dingus and 2 others")]
     public void Group_actions_name_their_targets_in_one_line(string names, string expected)
         => Assert.Equal(expected, AdminPlugin.ListNames(names.Split(',')));
