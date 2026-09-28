@@ -160,7 +160,7 @@ internal static class DeadworksConfig
             _root.ServerBrowser.Unlisted = true;
             _root.Permissions.Store = BrokenStoreName;
             _root.Penalties.Store = BrokenStoreName;
-            Console.WriteLine($"[DeadworksConfig] ERROR: failed to parse deadworks.jsonc: {ex.Message.TrimEnd('.')}. Until it's fixed and the "
+            Console.WriteLine($"[DeadworksConfig] ERROR: failed to parse {JsonErrors.Describe("deadworks.jsonc", ex)}. Until it's fixed and the "
                               + "server restarted, nobody has any permissions, new players can't join (the ban list can't be checked) and "
                               + "the server isn't listed. The server console still works.");
         }

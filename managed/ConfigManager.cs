@@ -108,7 +108,7 @@ internal static class ConfigManager
 			}
 			catch (Exception ex)
 			{
-				LastError = $"{Path.GetFileName(filePath)}: {ex.Message.TrimEnd('.')}";
+				LastError = JsonErrors.Describe(Path.GetFileName(filePath), ex);
 				if (isReload)
 				{
 					Console.WriteLine($"[ConfigManager] Failed to reload {LastError}. {plugin.Name} keeps its previous settings.");

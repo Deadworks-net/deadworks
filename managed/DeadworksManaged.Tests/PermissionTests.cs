@@ -522,9 +522,15 @@ public sealed class PermissionManagerTests : IDisposable
     [Fact]
     public void A_failed_reload_keeps_the_previous_roles_and_says_why()
     {
-        File.AppendAllText(Path.Combine(_dir, "players.jsonc"), "oops");
+        var path = Path.Combine(_dir, "players.jsonc");
+        // Counted from 1, as an editor shows them: the junk goes on the end of the last line.
+        var text = File.ReadAllText(path);
+        var junkLine = text.Count(c => c == '\n') + 1;
+        var junkColumn = text.Length - text.LastIndexOf('\n') ;
+        File.AppendAllText(path, "oops");
         Assert.False(PermissionManager.Reload());
-        Assert.StartsWith("players.jsonc:", PermissionManager.LastLoadError);
+        Assert.StartsWith($"players.jsonc line {junkLine}, column {junkColumn}: ", PermissionManager.LastLoadError);
+        Assert.DoesNotContain("Path:", PermissionManager.LastLoadError);
         Assert.True(Permissions.Has(Admin, "server.rcon")); // still the previous settings
 
         File.WriteAllText(Path.Combine(_dir, "players.jsonc"), File.ReadAllText(Path.Combine(_dir, "players.jsonc"))[..^"oops".Length]);

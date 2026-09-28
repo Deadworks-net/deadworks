@@ -182,7 +182,7 @@ internal sealed class JsonPenaltyStore : IPenaltyStore
         }
         catch (Exception ex) when (ex is JsonException or NotSupportedException)
         {
-            throw new InvalidDataException($"{Path.GetFileName(_path)}: {ex.Message}", ex);
+            throw new InvalidDataException(JsonErrors.Describe(Path.GetFileName(_path), ex), ex);
         }
     }
 

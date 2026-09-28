@@ -184,7 +184,7 @@ internal sealed class JsonPermissionStore : IPermissionStore
         }
         catch (Exception ex)
         {
-            throw new InvalidDataException($"{Path.GetFileName(path)}: {ex.Message}", ex);
+            throw new InvalidDataException(JsonErrors.Describe(Path.GetFileName(path), ex), ex);
         }
     }
 

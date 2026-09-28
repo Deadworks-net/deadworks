@@ -62,15 +62,15 @@ internal static class CommandOverrides
         }
         catch (Exception ex)
         {
-            LastError = $"{Path.GetFileName(path)}: {ex.Message}";
+            LastError = JsonErrors.Describe(Path.GetFileName(path), ex);
             if (_loadedOnce)
             {
-                Console.WriteLine($"[Permissions] Failed to parse {Path.GetFileName(path)}, keeping the previous overrides: {ex.Message}");
+                Console.WriteLine($"[Permissions] Failed to parse {LastError}. Keeping the previous overrides.");
             }
             else
             {
                 Unreadable = true;
-                Console.WriteLine($"[Permissions] ERROR: failed to parse {Path.GetFileName(path)}: {ex.Message.TrimEnd('.')}. Players can't run any "
+                Console.WriteLine($"[Permissions] ERROR: failed to parse {LastError}. Players can't run any "
                                   + "commands until it's fixed and dw_perm_reload is run; the server console still can.");
             }
             return false;
