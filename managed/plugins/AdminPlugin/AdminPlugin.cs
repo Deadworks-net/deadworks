@@ -33,9 +33,6 @@ public sealed class AdminPluginConfig : IConfig
 /// (<c>admin.server.*</c>). Penalties, announcements and the admin log are core features; this plugin only
 /// decides who may use them and how.
 /// </summary>
-[DeclarePermission(Perm.BanPermanent, Description = "Ban or gag with no end date (0 minutes, or no time for gag)")]
-[DeclarePermission(Perm.CvarCheats, Description = "Change sv_cheats with cvar")]
-[DeclarePermission(Perm.CvarProtected, Description = "Read or change password cvars such as sv_password")]
 public sealed partial class AdminPlugin : DeadworksPluginBase
 {
     public override string Name => "Admin";
@@ -44,13 +41,14 @@ public sealed partial class AdminPlugin : DeadworksPluginBase
     public AdminPluginConfig Config { get; set; } = new();
 }
 
-/// <summary>Every permission the plugin uses, in one place.</summary>
+/// <summary>
+/// Every permission the plugin uses, in one place. None is also the parent of another: a permission covers everything
+/// its command can do (ban includes permanent and offline bans, cvar includes sv_cheats and password cvars).
+/// </summary>
 internal static class Perm
 {
     public const string Kick = "admin.moderation.kick";
     public const string Ban = "admin.moderation.ban";
-    public const string BanPermanent = "admin.moderation.ban.permanent";
-    public const string BanOffline = "admin.moderation.ban.offline";
     public const string Unban = "admin.moderation.unban";
     public const string Gag = "admin.moderation.gag";
     public const string Slay = "admin.moderation.slay";
@@ -59,7 +57,5 @@ internal static class Perm
     public const string Map = "admin.server.map";
     public const string Rcon = "admin.server.rcon";
     public const string Cvar = "admin.server.cvar";
-    public const string CvarCheats = "admin.server.cvar.cheats";
-    public const string CvarProtected = "admin.server.cvar.protected";
     public const string Config = "admin.server.config";
 }

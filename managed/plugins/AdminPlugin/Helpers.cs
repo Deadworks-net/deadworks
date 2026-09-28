@@ -4,27 +4,13 @@ namespace DeadworksAdmin;
 
 public sealed partial class AdminPlugin
 {
-    /// <summary>A short reply: chat for players, the server console otherwise.</summary>
-    private static void Reply(CCitadelPlayerController? caller, string message)
+    /// <summary>A multi-line reply: the caller's console, with a pointer to it in chat for players.</summary>
+    private static void ReplyLines(Caller caller, IEnumerable<string> lines)
     {
-        if (caller != null)
-            Chat.PrintToChat(caller, message);
-        else
-            Console.WriteLine(message);
-    }
-
-    /// <summary>A multi-line reply: the player's console, with a pointer to it in chat.</summary>
-    private static void ReplyLines(CCitadelPlayerController? caller, IEnumerable<string> lines)
-    {
-        if (caller == null)
-        {
-            foreach (var line in lines)
-                Console.WriteLine(line);
-            return;
-        }
         foreach (var line in lines)
             caller.PrintToConsole(line);
-        Chat.PrintToChat(caller, "See your console for the output.");
+        if (!caller.IsConsole)
+            caller.Reply("See your console for the output.");
     }
 
     /// <summary>The SteamID the player connected with. Bots have none, and can't be penalized.</summary>
@@ -40,18 +26,12 @@ public sealed partial class AdminPlugin
             ? throw new CommandException($"{command} works on one player at a time, not {target.Input}.")
             : target.Single();
 
-    /// <summary>
-    /// Turns a minutes argument into a duration. 0 means permanent, which needs <see cref="Perm.BanPermanent"/>.
-    /// </summary>
-    private static TimeSpan? Duration(CCitadelPlayerController? caller, int minutes)
+    /// <summary>Turns a minutes argument into a duration. 0 means permanent.</summary>
+    private static TimeSpan? Duration(int minutes)
     {
         if (minutes < 0)
             throw new CommandException("The time can't be negative. Use 0 for permanent.");
-        if (minutes > 0)
-            return TimeSpan.FromMinutes(minutes);
-        if (!caller.HasPermission(Perm.BanPermanent))
-            throw new CommandException("You can't give permanent penalties. Give a time in minutes.");
-        return null;
+        return minutes > 0 ? TimeSpan.FromMinutes(minutes) : null;
     }
 
     /// <summary>"permanently", "for 45 minutes", "for 2 hours", "for 3 days", "for 1h 30m".</summary>

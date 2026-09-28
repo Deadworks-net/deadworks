@@ -5,10 +5,17 @@ namespace DeadworksAdmin;
 public sealed partial class AdminPlugin
 {
     [Command("kick", Description = "Kick a player: kick <player> [reason]", Permission = Perm.Kick, SuppressChat = true)]
-    public void CmdKick(CCitadelPlayerController? caller, Target target, params string[] reason)
+    public void CmdKick(Caller caller, Target target, params string[] reason)
     {
         var why = Reason(reason, Config.DefaultKickReason);
-        foreach (var player in target)
+        // @all and @team leave out whoever ran the command.
+        var players = target.IsGroup && caller.Player is { } self
+            ? target.Where(p => p.Slot != self.Slot).ToList()
+            : target.ToList();
+        if (players.Count == 0)
+            throw new CommandException($"'{target.Input}' only matches you.");
+
+        foreach (var player in players)
         {
             var name = player.PlayerName;
             var id = Permissions.GetSteamId(player.Slot);
@@ -18,35 +25,35 @@ public sealed partial class AdminPlugin
     }
 
     [Command("ban", Description = "Ban a player: ban <player> <minutes> [reason], 0 = permanent", Permission = Perm.Ban, SuppressChat = true)]
-    public void CmdBan(CCitadelPlayerController? caller, Target target, int minutes, params string[] reason)
+    public void CmdBan(Caller caller, Target target, int minutes, params string[] reason)
     {
         var player = OnePlayer(target, "ban");
         var id = SteamIdOf(player);
-        var duration = Duration(caller, minutes);
+        var duration = Duration(minutes);
         var why = Reason(reason, Config.DefaultBanReason);
         var name = player.PlayerName;
 
-        // Adding the ban kicks them, so announce first while the name is still on the server.
-        AdminActivity.Show(caller, $"banned {name} {DescribeDuration(duration)}: {why}", details: $"target={id}");
-        Penalties.Add(PenaltyType.Ban, id, duration, why, caller, name);
+        // Adding the ban kicks them, so it goes last; it also refuses players Steam hasn't verified yet.
+        var penalty = Penalties.Add(PenaltyType.Ban, id, duration, why, caller, name);
+        AdminActivity.Show(caller, $"banned {name} {DescribeDuration(duration)}: {why}", details: $"target={id} penalty={penalty.Id}");
     }
 
-    [Command("addban", Description = "Ban a SteamID, online or not: addban <steamid> <minutes> [reason]", Permission = Perm.BanOffline, SuppressChat = true)]
-    public void CmdAddBan(CCitadelPlayerController? caller, string steamId, int minutes, params string[] reason)
+    [Command("addban", Description = "Ban a SteamID, online or not: addban <steamid> <minutes> [reason], 0 = permanent", Permission = Perm.Ban, SuppressChat = true)]
+    public void CmdAddBan(Caller caller, string steamId, int minutes, params string[] reason)
     {
         if (!SteamIds.TryParse(steamId, out var id))
             throw new CommandException($"'{steamId}' isn't a SteamID64, Steam2 or Steam3 ID.");
-        if (caller != null && !Permissions.CanTarget(Permissions.GetSteamId(caller.Slot), id))
+        if (!caller.IsConsole && !Permissions.CanTarget(caller.SteamId64, id))
             throw new CommandException($"You can't ban {id}: their immunity is higher than yours.");
 
-        var duration = Duration(caller, minutes);
+        var duration = Duration(minutes);
         var why = Reason(reason, Config.DefaultBanReason);
-        AdminActivity.Show(caller, $"banned {id} {DescribeDuration(duration)}: {why}", details: $"target={id}");
         Penalties.Add(PenaltyType.Ban, id, duration, why, caller);
+        AdminActivity.Show(caller, $"banned {id} {DescribeDuration(duration)}: {why}", details: $"target={id}");
     }
 
     [Command("unban", Description = "Lift a ban: unban <steamid>", Permission = Perm.Unban, SuppressChat = true)]
-    public void CmdUnban(CCitadelPlayerController? caller, string steamId)
+    public void CmdUnban(Caller caller, string steamId)
     {
         if (!SteamIds.TryParse(steamId, out var id))
             throw new CommandException($"'{steamId}' isn't a SteamID64, Steam2 or Steam3 ID.");
@@ -54,18 +61,18 @@ public sealed partial class AdminPlugin
             throw new CommandException($"{id} isn't banned.");
 
         AdminActivity.Log(caller, $"unbanned {id}", details: $"target={id}");
-        Reply(caller, $"Unbanned {id}.");
+        caller.Reply($"Unbanned {id}.");
     }
 
     [Command("bans", Description = "List active bans", Permission = Perm.Ban, SuppressChat = true)]
-    public void CmdBans(CCitadelPlayerController? caller) => ListActive(caller, PenaltyType.Ban, "bans");
+    public void CmdBans(Caller caller) => ListActive(caller, PenaltyType.Ban, "bans");
 
-    [Command("gag", Description = "Stop a player using chat: gag <player> [minutes] [reason], no time = permanent", Permission = Perm.Gag, SuppressChat = true)]
-    public void CmdGag(CCitadelPlayerController? caller, Target target, int minutes = 0, params string[] reason)
+    [Command("gag", Description = "Stop a player using chat: gag <player> <minutes> [reason], 0 = permanent", Permission = Perm.Gag, SuppressChat = true)]
+    public void CmdGag(Caller caller, Target target, int minutes, params string[] reason)
     {
         var player = OnePlayer(target, "gag");
         var id = SteamIdOf(player);
-        var duration = Duration(caller, minutes);
+        var duration = Duration(minutes);
         var why = Reason(reason, Config.DefaultGagReason);
 
         Penalties.Add(PenaltyType.Gag, id, duration, why, caller, player.PlayerName);
@@ -73,7 +80,7 @@ public sealed partial class AdminPlugin
     }
 
     [Command("ungag", Description = "Let a gagged player use chat again: ungag <player>", Permission = Perm.Gag, SuppressChat = true)]
-    public void CmdUngag(CCitadelPlayerController? caller, Target target)
+    public void CmdUngag(Caller caller, Target target)
     {
         var player = OnePlayer(target, "ungag");
         var id = SteamIdOf(player);
@@ -83,10 +90,10 @@ public sealed partial class AdminPlugin
     }
 
     [Command("gags", Description = "List active gags", Permission = Perm.Gag, SuppressChat = true)]
-    public void CmdGags(CCitadelPlayerController? caller) => ListActive(caller, PenaltyType.Gag, "gags");
+    public void CmdGags(Caller caller) => ListActive(caller, PenaltyType.Gag, "gags");
 
     [Command("slay", Description = "Kill a player's hero: slay <player>", Permission = Perm.Slay, SuppressChat = true)]
-    public void CmdSlay(CCitadelPlayerController? caller, Target target)
+    public void CmdSlay(Caller caller, Target target)
     {
         foreach (var player in target)
         {
@@ -101,7 +108,7 @@ public sealed partial class AdminPlugin
     }
 
     [Command("who", Description = "List players with their SteamID, team, roles and penalties: who [player]", Permission = Perm.Who, SuppressChat = true)]
-    public void CmdWho(CCitadelPlayerController? caller, Target? target = null)
+    public void CmdWho(Caller caller, Target? target = null)
     {
         var players = target?.ToList() ?? Players.GetAll().ToList();
         var lines = new List<string> { $"{players.Count} player(s):" };
@@ -119,7 +126,7 @@ public sealed partial class AdminPlugin
     }
 
     [Command("penalties", Description = "Show your own bans and gags, or another player's: penalties [steamid]", SuppressChat = true)]
-    public void CmdPenalties(CCitadelPlayerController? caller, string steamId = "")
+    public void CmdPenalties(Caller caller, string steamId = "")
     {
         ulong id;
         if (steamId.Length > 0)
@@ -131,27 +138,32 @@ public sealed partial class AdminPlugin
         }
         else
         {
-            id = caller != null ? Permissions.GetSteamId(caller.Slot) : throw new CommandException("Give a SteamID.");
+            id = !caller.IsConsole ? caller.SteamId64 : throw new CommandException("Give a SteamID.");
         }
 
-        var slot = caller?.Slot ?? -1;
+        var slot = caller.Player?.Slot ?? -1;
+        var callerId = caller.SteamId64;
         var history = Penalties.GetHistoryAsync(id);
         if (history.IsCompleted)
-            PrintHistory(slot, id, history);
+            PrintHistory(slot, callerId, id, history);
         else
-            history.ContinueWith(t => Timer.NextTick(() => PrintHistory(slot, id, t)), TaskScheduler.Default);
+            history.ContinueWith(t => Timer.NextTick(() => PrintHistory(slot, callerId, id, t)), TaskScheduler.Default);
     }
 
-    private static void PrintHistory(int slot, ulong id, Task<IReadOnlyList<Penalty>> history)
+    private static void PrintHistory(int slot, ulong callerId, ulong id, Task<IReadOnlyList<Penalty>> history)
     {
         // The command may have come from a player who has since left; don't print to whoever took the slot.
-        var caller = slot < 0 ? null : Players.FromSlot(slot);
-        if (slot >= 0 && caller == null)
+        Caller caller;
+        if (slot < 0)
+            caller = Caller.Console;
+        else if (Players.FromSlot(slot) is { } player && Permissions.GetSteamId(slot) == callerId)
+            caller = Caller.Of(player);
+        else
             return;
 
         if (!history.IsCompletedSuccessfully)
         {
-            Reply(caller, "Couldn't load penalties; the server console has details.");
+            caller.Reply("Couldn't load penalties; the server console has details.");
             return;
         }
 
@@ -167,7 +179,7 @@ public sealed partial class AdminPlugin
         ReplyLines(caller, lines);
     }
 
-    private static void ListActive(CCitadelPlayerController? caller, PenaltyType type, string what)
+    private static void ListActive(Caller caller, PenaltyType type, string what)
     {
         var now = DateTime.UtcNow;
         var active = Penalties.GetActive(type);
