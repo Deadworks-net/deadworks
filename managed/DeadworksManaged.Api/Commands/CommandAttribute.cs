@@ -8,7 +8,7 @@ public sealed class CommandAttribute : Attribute
     public string Description { get; set; } = "";
 
     /// <summary>
-    /// Permission a player needs to run this command, e.g. <c>moderation.player.ban</c>. Empty means anyone.
+    /// Permission a player needs to run this command, e.g. <c>admin.moderation.ban</c>. Empty means anyone.
     /// The server console always may. Server owners can change it in <c>configs/permissions/overrides.jsonc</c>.
     /// </summary>
     public string Permission { get; set; } = "";

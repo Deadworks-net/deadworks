@@ -15,27 +15,49 @@ internal static class PermissionManifest
 {
     internal sealed record CommandInfo(
         IReadOnlyList<string> Names, string Description, string DeclaredPermission, TargetImmunity TargetImmunity,
-        bool ChatOnly, bool ConsoleOnly, bool ServerOnly);
+        bool ChatOnly, bool ConsoleOnly, bool ServerOnly, CommandOverrides.Owner? Owner = null);
 
     internal sealed record PluginInfo(
-        string FileKey, string PluginName, IReadOnlyList<CommandInfo> Commands, IReadOnlyList<DeclarePermissionAttribute> Declared);
+        string FileKey, CommandOverrides.Owner Owner, IReadOnlyList<CommandInfo> Commands, IReadOnlyList<DeclarePermissionAttribute> Declared)
+    {
+        public string PluginName => Owner.PluginName;
+    }
 
     private static readonly Lock _lock = new();
     private static readonly Dictionary<string, List<PluginInfo>> _byPluginPath = new(StringComparer.OrdinalIgnoreCase);
     private static string _dir = "";
+    // Every declared permission, rebuilt when a plugin comes or goes or overrides.jsonc changes.
+    private static (IReadOnlyList<string> Overrides, HashSet<string> Set)? _declared;
 
     public static void Initialize(string permissionsDir) => _dir = Path.Combine(permissionsDir, "generated");
 
     /// <summary>The file name core commands are listed under.</summary>
     public const string CoreFileKey = "deadworks";
 
+    /// <summary>The owner of commands loaded from <paramref name="normalizedPath"/>; core's path has no DLL name.</summary>
+    public static CommandOverrides.Owner OwnerOf(string normalizedPath, IDeadworksPlugin plugin)
+        => new(plugin.Name, normalizedPath.Contains("://") ? "" : Path.GetFileNameWithoutExtension(normalizedPath));
+
+    /// <summary>
+    /// A plugin's file is named after its DLL, which is unique in plugins/; class names aren't (two plugins can both be
+    /// called Plugin). Plugins loaded without a DLL (tests) use the class name. Core's name is reserved.
+    /// </summary>
+    private static string FileKeyFor(string normalizedPath, IDeadworksPlugin plugin)
+    {
+        var key = normalizedPath.Contains("://") ? plugin.GetType().Name : Path.GetFileNameWithoutExtension(normalizedPath);
+        return key.Equals(CoreFileKey, StringComparison.OrdinalIgnoreCase) ? key + "-plugin" : key;
+    }
+
     public static void Add(string normalizedPath, IDeadworksPlugin plugin, IReadOnlyList<CommandInfo> commands, string? fileKey = null)
     {
         var declared = plugin.GetType().GetCustomAttributes<DeclarePermissionAttribute>().ToList();
-        var info = new PluginInfo(fileKey ?? plugin.GetType().Name, plugin.Name, commands, declared);
+        var owner = OwnerOf(normalizedPath, plugin);
+        var info = new PluginInfo(fileKey ?? FileKeyFor(normalizedPath, plugin), owner,
+            commands.Select(c => c with { Owner = c.Owner ?? owner }).ToList(), declared);
 
         lock (_lock)
         {
+            _declared = null;
             if (!_byPluginPath.TryGetValue(normalizedPath, out var list))
                 _byPluginPath[normalizedPath] = list = [];
             // Several plugin classes can share one file (core's command classes do); list them together.
@@ -60,8 +82,48 @@ internal static class PermissionManifest
     public static void Remove(string normalizedPath)
     {
         lock (_lock)
+        {
             _byPluginPath.Remove(normalizedPath);
+            _declared = null;
+        }
     }
+
+    /// <summary>
+    /// Every permission something declares, normalized: on a command (as the plugin asks for it and after overrides),
+    /// in <see cref="DeclarePermissionAttribute"/>, or in overrides.jsonc. Checks outside this set are probably typos.
+    /// </summary>
+    public static IReadOnlySet<string> DeclaredPermissions()
+    {
+        var overrides = CommandOverrides.Permissions;
+        lock (_lock)
+        {
+            if (_declared is { } cached && ReferenceEquals(cached.Overrides, overrides))
+                return cached.Set;
+        }
+
+        var set = new HashSet<string>(StringComparer.Ordinal);
+        foreach (var info in Snapshot())
+        {
+            foreach (var c in info.Commands)
+            {
+                set.Add(PermissionEvaluator.Normalize(c.DeclaredPermission));
+                set.Add(PermissionEvaluator.Normalize(CommandOverrides.Resolve(c.Names, c.DeclaredPermission, c.Owner ?? info.Owner, out _)));
+            }
+            foreach (var d in info.Declared)
+                set.Add(PermissionEvaluator.Normalize(d.Permission));
+        }
+        foreach (var p in overrides)
+            set.Add(PermissionEvaluator.Normalize(p));
+        set.Remove("");
+
+        lock (_lock)
+            _declared = (overrides, set);
+        return set;
+    }
+
+    /// <summary>Every registered command with its owner, for checking overrides.jsonc against.</summary>
+    public static IReadOnlyCollection<(CommandOverrides.Owner Owner, IReadOnlyList<string> Names)> AllCommands()
+        => Snapshot().SelectMany(info => info.Commands.Select(c => (c.Owner ?? info.Owner, c.Names))).ToList();
 
     /// <summary>Rewrites every file, e.g. after overrides.jsonc changed.</summary>
     public static void WriteAll()
@@ -155,7 +217,7 @@ internal static class PermissionManifest
             writer.WriteStartArray("commands");
             foreach (var c in info.Commands)
             {
-                var effective = CommandOverrides.Resolve(c.Names, c.DeclaredPermission, out var overridden);
+                var effective = CommandOverrides.Resolve(c.Names, c.DeclaredPermission, c.Owner ?? info.Owner, out var overridden);
                 var immunity = c.TargetImmunity == TargetImmunity.Auto
                     ? (effective.Length > 0 ? TargetImmunity.Enforce : TargetImmunity.Ignore)
                     : c.TargetImmunity;
@@ -279,22 +341,23 @@ internal static class PermissionManifest
         //
         //    Give a permission to a group of players
         //      -> configs/permissions/roles.jsonc
-        //           "moderator": { "permissions": ["moderation.player.kick"] }
-        //         Wildcards work at dot boundaries: "moderation.player.*" or "*".
+        //           "moderator": { "permissions": ["admin.moderation.kick"] }
+        //         Wildcards work at dot boundaries: "admin.moderation.*" or "*".
         //
         //    Give a role or a single permission to one player
         //      -> configs/permissions/players.jsonc
         //           "76561197960287930": { "roles": ["moderator"],
-        //                                  "permissions": ["moderation.player.ban"] }
+        //                                  "permissions": ["admin.moderation.ban"] }
         //         or in the console: dw_role_grant <player> <role>
         //
-        //    Take a permission away (beats a wildcard)
-        //      -> prefix it with "-" in either file: "-moderation.player.ban"
+        //    Take a permission away from one player
+        //      -> prefix it with "-" in their players.jsonc entry: "-admin.moderation.ban"
+        //         (a deny in a role only limits that role, not the player's other roles)
         //
         //    Change the permission a command requires, or make it public
         //      -> configs/permissions/overrides.jsonc
         //           "commands": { "ban": "my.custom.permission",   // remap
-        //                         "kick": "" }                     // anyone can use it
+        //                         "{PLUGIN}:kick": "" }            // anyone can use this plugin's kick
         //
         //  Then run dw_perm_reload (or restart). Use dw_perm_check <player> <perm>
         //  to see which rule decided a result.

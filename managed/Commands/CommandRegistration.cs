@@ -8,11 +8,12 @@ namespace DeadworksManaged.Commands;
 internal static class CommandRegistration
 {
     internal const string DeniedMessage = "You don't have permission to use this command.";
+    internal const string OverridesBrokenMessage = "Commands are unavailable until the server fixes an error in its permission settings.";
 
     /// <summary>A command's permission, looked up on every call so <c>dw_perm_reload</c> applies overrides without re-registering.</summary>
-    private sealed class CommandGate(CommandAttribute attr)
+    private sealed class CommandGate(CommandAttribute attr, CommandOverrides.Owner owner)
     {
-        public string Permission => CommandOverrides.Resolve(attr.Names, attr.Permission, out _);
+        public string Permission => CommandOverrides.Resolve(attr.Names, attr.Permission, owner, out _);
 
         public bool EnforceImmunity(string permission) => attr.TargetImmunity switch
         {
@@ -21,8 +22,15 @@ internal static class CommandRegistration
             _ => permission.Length > 0
         };
 
+        /// <summary>
+        /// Whether a player may run it. A null player is refused, even for public commands: a player's command whose
+        /// controller can't be found must never be treated as the console.
+        /// </summary>
         public static bool PlayerMay(CCitadelPlayerController? player, string permission)
-            => permission.Length == 0 || (player != null && PermissionManager.HasForSlot(player.Slot, permission));
+            => player != null && !CommandOverrides.Unreadable
+               && (permission.Length == 0 || PermissionManager.HasForSlot(player.Slot, permission));
+
+        public static string Refusal => CommandOverrides.Unreadable ? OverridesBrokenMessage : DeniedMessage;
 
         /// <summary>For listings such as <c>dw_help</c>. A null caller is the server console.</summary>
         public bool CanRun(CCitadelPlayerController? caller)
@@ -37,6 +45,7 @@ internal static class CommandRegistration
     {
         foreach (var plugin in plugins)
         {
+            var owner = PermissionManifest.OwnerOf(normalizedPath, plugin);
             var manifestCommands = new List<PermissionManifest.CommandInfo>();
             var methods = plugin.GetType().GetMethods(
                 BindingFlags.Instance | BindingFlags.Public | BindingFlags.NonPublic);
@@ -64,10 +73,10 @@ internal static class CommandRegistration
                         continue;
                     }
 
-                    var gate = new CommandGate(attr);
+                    var gate = new CommandGate(attr, owner);
                     var names = attr.Names.Distinct(StringComparer.OrdinalIgnoreCase).ToArray();
                     manifestCommands.Add(new PermissionManifest.CommandInfo(
-                        names, attr.Description, attr.Permission.Trim(), attr.TargetImmunity, attr.ChatOnly, attr.ConsoleOnly, attr.ServerOnly));
+                        names, attr.Description, attr.Permission.Trim(), attr.TargetImmunity, attr.ChatOnly, attr.ConsoleOnly, attr.ServerOnly, owner));
 
                     foreach (var name in names)
                     {
@@ -117,7 +126,7 @@ internal static class CommandRegistration
             var permission = gate.Permission;
             if (!CommandGate.PlayerMay(ctx.Controller, permission))
             {
-                reply(DeniedMessage);
+                reply(CommandGate.Refusal);
                 return HookResult.Handled;
             }
 
@@ -175,7 +184,7 @@ internal static class CommandRegistration
             var caller = ctx.Controller;
             if (!ctx.IsServerCommand && !CommandGate.PlayerMay(caller, permission))
             {
-                reply(DeniedMessage);
+                reply(CommandGate.Refusal);
                 return;
             }
 

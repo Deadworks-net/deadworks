@@ -19,6 +19,21 @@ internal static class PermissionManager
 
     private sealed record StoreRegistration(IDeadworksPlugin Owner, string Name, IPermissionStore Store);
 
+    /// <summary>
+    /// Stands in for a configured store no plugin has registered: no roles and no players, so nobody has any
+    /// permission. Falling back to the JSON files instead could hand out access the real store has taken away.
+    /// </summary>
+    private sealed class UnavailableStore(string name) : IPermissionStore
+    {
+        public string Name { get; } = name;
+        public Task<IReadOnlyDictionary<string, RoleDefinition>> LoadRolesAsync(CancellationToken ct)
+            => Task.FromResult<IReadOnlyDictionary<string, RoleDefinition>>(new Dictionary<string, RoleDefinition>());
+        public Task<PlayerEntry?> LoadPlayerAsync(ulong steamId64, CancellationToken ct) => Task.FromResult<PlayerEntry?>(null);
+        public Task SavePlayerAsync(ulong steamId64, PlayerEntry? entry, CancellationToken ct)
+            => Task.FromException(new InvalidOperationException($"the '{Name}' store isn't available"));
+        public event Action<ulong?>? Changed { add { } remove { } }
+    }
+
     private static readonly Lock _lock = new();
 
     private static JsonPermissionStore? _jsonStore;
@@ -31,6 +46,9 @@ internal static class PermissionManager
     // null value = the store has no entry for this player.
     private static readonly Dictionary<ulong, PlayerEntry?> _players = [];
     private static readonly HashSet<ulong> _loading = [];
+    private static readonly HashSet<ulong> _saving = [];
+    // A failed load is retried no sooner than this (Environment.TickCount64), so a broken store isn't hit on every check.
+    private static readonly Dictionary<ulong, long> _retryAfter = [];
     private static readonly Dictionary<ulong, SessionOverlay> _overlays = [];
     private static readonly Dictionary<ulong, CompiledSubject> _compiled = [];
     private static CompiledSubject? _defaultSubject;
@@ -38,14 +56,26 @@ internal static class PermissionManager
     private static int _generation;
 
     private static readonly ulong[] _slotSteamIds = new ulong[Players.MaxSlot];
-    // Whether ClientAuthorized has been raised for the current connection in each slot.
+    // Whether OnClientAuthorized has been dispatched for the current connection in each slot.
     private static readonly bool[] _slotAuthorizedRaised = new bool[Players.MaxSlot];
+
+    // Plugins have loaded, so undeclared permissions can be told apart from ones a plugin hasn't declared yet.
+    private static bool _startupComplete;
+    private static readonly HashSet<string> _warnedUndeclared = new(StringComparer.Ordinal);
+
+    internal const long LoadRetryMs = 30_000;
 
     /// <summary>When false, grants apply before Steam has validated the player. Only for LAN or testing.</summary>
     internal static bool RequireSteamAuth { get; set; } = true;
 
     /// <summary>Overridable so tests can stand in for the engine.</summary>
     internal static Func<int, bool> IsSlotAuthenticated { get; set; } = DefaultIsSlotAuthenticated;
+
+    /// <summary>Whether <c>sv_lan</c> is on, where Steam never validates anyone. Overridable for tests.</summary>
+    internal static Func<bool> IsLanServer { get; set; } = DefaultIsLanServer;
+
+    /// <summary>Raised after a reload or any grant or revoke, with the affected SteamID64 or null for everyone.</summary>
+    internal static event Action<ulong?>? Changed;
 
     public static void Initialize()
     {
@@ -67,25 +97,35 @@ internal static class PermissionManager
         {
             _registeredStores.Clear();
             _overlays.Clear();
+            _retryAfter.Clear();
+            _saving.Clear();
             Array.Clear(_slotSteamIds);
             Array.Clear(_slotAuthorizedRaised);
+            _startupComplete = false;
+            _warnedUndeclared.Clear();
         }
 
         PermissionManifest.Initialize(permissionsDir);
         DeadworksManaged.Api.Permissions.Backend = new Backend();
         Players.AuthenticatedResolver = IsAuthorized;
 
-        if (!_storeName.Equals(JsonPermissionStore.StoreName, StringComparison.OrdinalIgnoreCase))
-            Console.WriteLine($"[Permissions] Using the JSON store until a plugin registers the '{_storeName}' store");
-        SetStore(_jsonStore);
+        SetStore(IsJson(_storeName) ? _jsonStore : new UnavailableStore(_storeName));
     }
+
+    private static bool IsJson(string name) => name.Equals(JsonPermissionStore.StoreName, StringComparison.OrdinalIgnoreCase);
+
+    /// <summary>True while the configured store isn't registered, so nobody has any permission.</summary>
+    public static bool StoreUnavailable => _store is UnavailableStore;
+
+    public static string UnavailableMessage =>
+        $"permissions.store is '{_storeName}', but no plugin has registered that store. Nobody has any permissions until one does; the server console still works.";
 
     // --- Loading ---
 
     /// <summary>Re-reads roles, players and overrides from the active store. Returns false if anything failed to load.</summary>
     public static bool Reload()
     {
-        CommandOverrides.Load(_overridesPath);
+        var overridesOk = CommandOverrides.Load(_overridesPath);
 
         var store = _store;
         if (store == null)
@@ -107,10 +147,10 @@ internal static class PermissionManager
             generation = ++_generation;
 
         if (task.IsCompleted)
-            return ApplyRoles(task, generation);
+            return ApplyRoles(task, generation) && overridesOk;
 
         task.ContinueWith(t => TimerEngine.EnqueueNextTick(() => ApplyRoles(t, generation)), TaskScheduler.Default);
-        return true;
+        return overridesOk;
     }
 
     private static bool ApplyRoles(Task<IReadOnlyDictionary<string, RoleDefinition>> task, int generation)
@@ -121,15 +161,27 @@ internal static class PermissionManager
             return false;
         }
 
+        Dictionary<string, RoleDefinition> roles;
+        try
+        {
+            roles = Normalize(task.Result);
+        }
+        catch (Exception ex)
+        {
+            Console.WriteLine($"[Permissions] Failed to load roles, keeping the previous ones: {ex.Message}");
+            return false;
+        }
+
         ulong[] online;
         lock (_lock)
         {
             if (generation != _generation)
                 return false;
 
-            _roles = new Dictionary<string, RoleDefinition>(task.Result, StringComparer.OrdinalIgnoreCase);
+            _roles = roles;
             _players.Clear();
             _loading.Clear();
+            _retryAfter.Clear();
             InvalidateAll();
             online = _slotSteamIds.Where(id => id != 0).Distinct().ToArray();
         }
@@ -140,10 +192,56 @@ internal static class PermissionManager
         foreach (var id in online)
             EnsurePlayerLoaded(id);
 
-        Console.WriteLine($"[Permissions] Loaded {_roles.Count} roles from the '{_storeName}' store");
+        if (StoreUnavailable)
+            Console.WriteLine($"[Permissions] WARNING: {UnavailableMessage}");
+        else
+            Console.WriteLine($"[Permissions] Loaded {_roles.Count} roles from the '{_storeName}' store");
+
         PermissionManifest.WriteAll();
-        DeadworksManaged.Api.Permissions.RaiseChanged(null);
+        if (_startupComplete)
+            WarnAboutConfig();
+        Changed?.Invoke(null);
         return true;
+    }
+
+    /// <summary>
+    /// A clean copy of what a store returned: names compared ignoring case, and no null lists or entries, which a
+    /// hand-edited <c>"permissions": null</c> or a custom store could otherwise hand us.
+    /// </summary>
+    private static Dictionary<string, RoleDefinition> Normalize(IReadOnlyDictionary<string, RoleDefinition>? source)
+    {
+        var roles = new Dictionary<string, RoleDefinition>(StringComparer.OrdinalIgnoreCase);
+        foreach (var (name, role) in source ?? new Dictionary<string, RoleDefinition>())
+        {
+            if (string.IsNullOrWhiteSpace(name))
+                continue;
+            if (roles.ContainsKey(name))
+                Console.WriteLine($"[Permissions] role '{name}' is defined more than once (role names ignore case); using the last one");
+            roles[name] = new RoleDefinition
+            {
+                Permissions = CleanList(role?.Permissions),
+                Inherits = CleanList(role?.Inherits),
+                Immunity = role?.Immunity
+            };
+        }
+        return roles;
+    }
+
+    private static PlayerEntry? Normalize(PlayerEntry? entry) => entry == null ? null : new PlayerEntry
+    {
+        Name = entry.Name,
+        Roles = CleanList(entry.Roles),
+        Permissions = CleanList(entry.Permissions),
+        Immunity = entry.Immunity
+    };
+
+    private static List<string> CleanList(List<string>? list) => list?.Where(v => !string.IsNullOrWhiteSpace(v)).ToList() ?? [];
+
+    /// <summary>Whether the store's answer for this player has arrived (an entry, or that there is none).</summary>
+    public static bool IsLoaded(ulong steamId64)
+    {
+        lock (_lock)
+            return _players.ContainsKey(steamId64);
     }
 
     /// <summary>Returns the player's stored entry, starting a load if it hasn't been fetched. Null while loading or absent.</summary>
@@ -155,6 +253,8 @@ internal static class PermissionManager
         {
             if (_players.TryGetValue(steamId64, out var cached))
                 return cached;
+            if (_retryAfter.TryGetValue(steamId64, out var retryAt) && Environment.TickCount64 < retryAt)
+                return null;
             if (!_loading.Add(steamId64))
                 return null;
             store = _store;
@@ -185,27 +285,38 @@ internal static class PermissionManager
     {
         PlayerEntry? entry = null;
         if (task.IsCompletedSuccessfully)
-            entry = task.Result;
+            entry = Normalize(task.Result);
         else
-            Console.WriteLine($"[Permissions] Failed to load player {steamId64}: {task.Exception?.GetBaseException().Message}");
+            Console.WriteLine($"[Permissions] Failed to load player {steamId64}, retrying in {LoadRetryMs / 1000}s: {task.Exception?.GetBaseException().Message}");
 
         lock (_lock)
         {
             _loading.Remove(steamId64);
             if (generation != _generation)
                 return null;
-            // A failed load is not cached, so the next check retries.
             if (task.IsCompletedSuccessfully)
+            {
                 _players[steamId64] = entry;
+                _retryAfter.Remove(steamId64);
+            }
+            else
+            {
+                _retryAfter[steamId64] = Environment.TickCount64 + LoadRetryMs;
+            }
             _compiled.Remove(steamId64);
         }
 
         if (entry != null)
+        {
             foreach (var warning in PermissionEvaluator.Validate(steamId64, entry, _roles))
                 Console.WriteLine($"[Permissions] {warning}");
+            if (_startupComplete)
+                foreach (var grant in PermissionEvaluator.UnknownGrants(entry.Permissions, PermissionManifest.DeclaredPermissions()))
+                    Console.WriteLine($"[Permissions] player {steamId64} has '{grant}', which no loaded plugin declares (a typo, or a plugin that isn't installed?)");
+        }
 
         if (raise)
-            DeadworksManaged.Api.Permissions.RaiseChanged(steamId64);
+            Changed?.Invoke(steamId64);
         return entry;
     }
 
@@ -228,8 +339,8 @@ internal static class PermissionManager
         {
             var entry = ApplyOverlay(stored, _overlays.GetValueOrDefault(steamId64));
             var subject = PermissionEvaluator.Compile(_roles, entry);
-            // Don't cache while a load is in flight; the player would be stuck on "default".
-            if (!_loading.Contains(steamId64))
+            // Don't cache while a load is in flight or waiting to be retried; the player would be stuck on "default".
+            if (_players.ContainsKey(steamId64))
                 _compiled[steamId64] = subject;
             return subject;
         }
@@ -245,9 +356,12 @@ internal static class PermissionManager
     private static CompiledSubject GetSlotSubject(int slot, out ulong steamId64, out bool authenticated)
     {
         steamId64 = (uint)slot < (uint)_slotSteamIds.Length ? _slotSteamIds[slot] : 0;
-        authenticated = steamId64 != 0 && (!RequireSteamAuth || IsSlotAuthenticated(slot));
+        authenticated = steamId64 != 0 && IsTrusted(slot);
         return authenticated ? GetSubject(steamId64) : GetDefaultSubject();
     }
+
+    /// <summary>Whether the SteamID in <paramref name="slot"/> may be used for grants: Steam confirmed it, or nothing will.</summary>
+    private static bool IsTrusted(int slot) => !RequireSteamAuth || IsLanServer() || IsSlotAuthenticated(slot);
 
     private static PlayerEntry? ApplyOverlay(PlayerEntry? stored, SessionOverlay? overlay)
     {
@@ -289,12 +403,22 @@ internal static class PermissionManager
         if (callerSlot < 0 || callerSlot == targetSlot)
             return true;
         var caller = GetSlotSubject(callerSlot, out _, out _);
-        var target = GetSlotSubject(targetSlot, out _, out _);
+        var target = GetSlotSubject(targetSlot, out var targetId, out var targetAuthenticated);
+        // Until their entry arrives, a confirmed player's immunity is unknown; treating it as 0 would fail open.
+        if (targetAuthenticated && !IsLoaded(targetId))
+            return false;
         return target.Immunity <= caller.Immunity;
     }
 
     public static bool CanTarget(ulong caller, ulong target)
-        => caller == target || GetSubject(target).Immunity <= GetSubject(caller).Immunity;
+    {
+        if (caller == target)
+            return true;
+        var targetSubject = GetSubject(target);
+        if (target != 0 && !IsLoaded(target))
+            return false;
+        return targetSubject.Immunity <= GetSubject(caller).Immunity;
+    }
 
     public static CompiledSubject Describe(ulong steamId64) => GetSubject(steamId64);
 
@@ -310,6 +434,57 @@ internal static class PermissionManager
     {
         lock (_lock)
             return _overlays.ContainsKey(steamId64);
+    }
+
+    // --- Config warnings ---
+
+    /// <summary>Called once plugins have loaded: from now on, permissions nobody declares are worth a warning.</summary>
+    public static void OnStartupComplete()
+    {
+        _startupComplete = true;
+        WarnAboutConfig();
+    }
+
+    /// <summary>Grants and overrides that match nothing any loaded plugin declares or registers.</summary>
+    private static void WarnAboutConfig()
+    {
+        var declared = PermissionManifest.DeclaredPermissions();
+        foreach (var (name, role) in Roles)
+            foreach (var grant in PermissionEvaluator.UnknownGrants(role.Permissions, declared))
+                Console.WriteLine($"[Permissions] role '{name}' has '{grant}', which no loaded plugin declares (a typo, or a plugin that isn't installed?)");
+
+        List<(ulong Id, PlayerEntry Entry)> players;
+        if (_store is JsonPermissionStore json)
+            players = json.AllPlayers();
+        else
+            lock (_lock)
+                players = _players.Where(kv => kv.Value != null).Select(kv => (kv.Key, kv.Value!)).ToList();
+        foreach (var (id, entry) in players)
+            foreach (var grant in PermissionEvaluator.UnknownGrants(entry.Permissions, declared))
+                Console.WriteLine($"[Permissions] player {id} has '{grant}', which no loaded plugin declares (a typo, or a plugin that isn't installed?)");
+
+        foreach (var key in CommandOverrides.UnknownKeys(PermissionManifest.AllCommands()))
+            Console.WriteLine($"[Permissions] overrides.jsonc: '{key}' doesn't match any command. Check the name in generated/<Plugin>.jsonc.");
+    }
+
+    /// <summary>Warns once when a plugin checks a permission that no loaded plugin declares, which is usually a typo.</summary>
+    private static void NoteChecked(string permission)
+    {
+        if (!_startupComplete)
+            return;
+        var normalized = PermissionEvaluator.Normalize(permission);
+        if (normalized.Length == 0 || PermissionManifest.DeclaredPermissions().Contains(normalized))
+            return;
+        lock (_lock)
+            if (!_warnedUndeclared.Add(normalized))
+                return;
+        // A plugin checking its own permission in OnLoad declares it moments later, when its commands are registered.
+        TimerEngine.EnqueueNextTick(() =>
+        {
+            if (!PermissionManifest.DeclaredPermissions().Contains(normalized))
+                Console.WriteLine($"[Permissions] A plugin checked '{normalized}', which no loaded plugin declares. If it isn't a typo, "
+                                  + "list it with [DeclarePermission] so server owners can find it.");
+        });
     }
 
     // --- Identity ---
@@ -340,14 +515,43 @@ internal static class PermissionManager
             return;
         lock (_lock)
         {
+            var id = _slotSteamIds[slot];
             _slotSteamIds[slot] = 0;
             _slotAuthorizedRaised[slot] = false;
+            // Forget their entry (not their --temp changes) unless they're in another slot or mid-save, so the next
+            // connect reads the store afresh and the cache doesn't grow with everyone who ever joined.
+            if (id != 0 && Array.IndexOf(_slotSteamIds, id) < 0 && !_loading.Contains(id) && !_saving.Contains(id))
+            {
+                _players.Remove(id);
+                _compiled.Remove(id);
+                _retryAfter.Remove(id);
+            }
         }
     }
 
     /// <summary>Whether the player in <paramref name="slot"/> has a trustworthy SteamID (see <see cref="Players.IsAuthenticated"/>).</summary>
-    public static bool IsAuthorized(int slot)
-        => GetSlotSteamId(slot) != 0 && (!RequireSteamAuth || IsSlotAuthenticated(slot));
+    public static bool IsAuthorized(int slot) => GetSlotSteamId(slot) != 0 && IsTrusted(slot);
+
+    /// <summary>
+    /// The slot of the connected player with this SteamID, or -1. If two slots claim it (one of them spoofed), the one
+    /// Steam confirmed wins.
+    /// </summary>
+    public static int FindSlot(ulong steamId64)
+    {
+        if (steamId64 == 0)
+            return -1;
+        var found = -1;
+        for (int slot = 0; slot < _slotSteamIds.Length; slot++)
+        {
+            if (GetSlotSteamId(slot) != steamId64)
+                continue;
+            if (IsAuthorized(slot))
+                return slot;
+            if (found < 0)
+                found = slot;
+        }
+        return found;
+    }
 
     /// <summary>Slots that became authorized since the last call, each reported once per connection.</summary>
     public static List<(int Slot, ulong SteamId64)> TakeNewlyAuthorized()
@@ -376,36 +580,69 @@ internal static class PermissionManager
 
     internal static void SetSlotSteamIdForTests(int slot, ulong steamId64) => _slotSteamIds[slot] = steamId64;
 
+    private static bool _warnedNoAuthHook;
+
     private static unsafe bool DefaultIsSlotAuthenticated(int slot)
     {
-        // Without the native hook (tests, or an older native build) there is nothing to wait for.
+        // A native build without the hook can't say who Steam confirmed, so nobody counts as confirmed.
         if (NativeInterop.IsClientAuthenticated == null)
-            return true;
+        {
+            if (!_warnedNoAuthHook)
+            {
+                _warnedNoAuthHook = true;
+                Console.WriteLine("[Permissions] WARNING: this deadworks native build can't tell when Steam confirms a player, so nobody's "
+                                  + "roles apply. Update Deadworks, or set permissions.require_steam_auth to false on a server nobody untrusted can reach.");
+            }
+            return false;
+        }
         return NativeInterop.IsClientAuthenticated(slot) != 0;
+    }
+
+    private static bool? _svLan;
+
+    private static unsafe bool DefaultIsLanServer()
+    {
+        if (_svLan is { } latched)
+            return latched;
+        if (NativeInterop.FindConVar == null)
+            return false;
+        // Read once, when the first player connects (server.cfg has run by then), and kept until restart: otherwise
+        // anyone allowed to change cvars could turn sv_lan on and have unconfirmed SteamIDs trusted.
+        _svLan = ConVar.Find("sv_lan")?.GetBool() ?? false;
+        if (_svLan.Value)
+            Console.WriteLine("[Permissions] sv_lan is on, so players' roles apply without waiting for Steam. Changing sv_lan needs a restart to take effect here.");
+        return _svLan.Value;
     }
 
     // --- Changes ---
 
     internal enum ChangeKind { GrantRole, RevokeRole, GrantPermission, RevokePermission }
 
-    /// <summary>Applies a management change. Returns an error for the caller, or null on success.</summary>
-    public static string? Change(ulong steamId64, ChangeKind kind, string value, bool temporary, string? nameHint = null)
+    /// <summary>
+    /// Applies a management change. Completes with an error for the caller, or null once the change is saved; the
+    /// change only takes effect after the store accepts it. A store that saves asynchronously completes on a later frame.
+    /// </summary>
+    public static Task<string?> ChangeAsync(ulong steamId64, ChangeKind kind, string value, bool temporary, string? nameHint = null)
     {
         value = value.Trim();
         if (kind is ChangeKind.GrantPermission or ChangeKind.RevokePermission)
         {
             if (!Grant.TryParse(value, out _, out var error))
-                return error;
+                return Task.FromResult<string?>(error);
             value = value.ToLowerInvariant();
         }
-        else if (!_roles.ContainsKey(value))
+        else if (kind == ChangeKind.GrantRole && !Roles.ContainsKey(value))
         {
-            return $"There is no role '{value}'. Roles: {string.Join(", ", _roles.Keys)}";
+            return Task.FromResult<string?>($"There is no role '{value}'. Roles: {string.Join(", ", Roles.Keys)}");
         }
         else if (value.Equals(PermissionEvaluator.DefaultRole, StringComparison.OrdinalIgnoreCase))
         {
-            return "Everyone has the default role already.";
+            return Task.FromResult<string?>("Everyone has the default role already.");
         }
+
+        EnsurePlayerLoaded(steamId64);
+        if (!IsLoaded(steamId64))
+            return Task.FromResult<string?>("That player's permissions are still loading; try again in a moment.");
 
         if (temporary)
         {
@@ -424,23 +661,27 @@ internal static class PermissionManager
                 add.Add(value);
                 _compiled.Remove(steamId64);
             }
-            DeadworksManaged.Api.Permissions.RaiseChanged(steamId64);
-            return null;
+            Changed?.Invoke(steamId64);
+            return Task.FromResult<string?>(null);
         }
 
-        PlayerEntry? stored;
         IPermissionStore? store;
         lock (_lock)
         {
             if (_loading.Contains(steamId64))
-                return "That player's permissions are still loading; try again in a moment.";
+                return Task.FromResult<string?>("That player's permissions are still loading; try again in a moment.");
+            if (_saving.Contains(steamId64))
+                return Task.FromResult<string?>("A change to that player is still being saved; try again in a moment.");
             store = _store;
         }
-        stored = EnsurePlayerLoaded(steamId64);
+        if (store == null || StoreUnavailable)
+            return Task.FromResult<string?>($"Can't save: {UnavailableMessage}");
+
+        var stored = EnsurePlayerLoaded(steamId64);
         lock (_lock)
         {
-            if (_loading.Contains(steamId64))
-                return "That player's permissions are still loading; try again in a moment.";
+            if (!_players.ContainsKey(steamId64))
+                return Task.FromResult<string?>("That player's permissions are still loading; try again in a moment.");
         }
 
         var entry = stored?.Clone() ?? new PlayerEntry();
@@ -451,44 +692,66 @@ internal static class PermissionManager
         if (kind is ChangeKind.GrantRole or ChangeKind.GrantPermission)
         {
             if (existing >= 0)
-                return $"Already has {value}.";
+                return Task.FromResult<string?>($"Already has {value}.");
             list.Add(value);
         }
         else
         {
             if (existing < 0)
-                return $"Doesn't have {value} in the saved config{(IsTemporary(steamId64) ? " (it may be a --temp change; use --temp to revoke it)" : "")}.";
+                return Task.FromResult<string?>($"Doesn't have {value} in the saved config{(IsTemporary(steamId64) ? " (it may be a --temp change; use --temp to revoke it)" : "")}.");
             list.RemoveAt(existing);
         }
 
         var isEmpty = entry.Roles.Count == 0 && entry.Permissions.Count == 0 && entry.Immunity == null;
+        int generation;
+        lock (_lock)
+            generation = _generation;
+
+        Task save;
         try
         {
-            store?.SavePlayerAsync(steamId64, isEmpty ? null : entry, CancellationToken.None)
-                .ContinueWith(t => Console.WriteLine($"[Permissions] Failed to save player {steamId64}: {t.Exception?.GetBaseException().Message}"),
-                    TaskContinuationOptions.OnlyOnFaulted);
+            save = store.SavePlayerAsync(steamId64, isEmpty ? null : entry, CancellationToken.None);
         }
         catch (Exception ex)
         {
-            return $"Failed to save: {ex.Message}";
+            save = Task.FromException(ex);
         }
+
+        string? Finish(Task t)
+        {
+            lock (_lock)
+                _saving.Remove(steamId64);
+            if (!t.IsCompletedSuccessfully)
+                return $"Failed to save, so nothing changed: {t.Exception?.GetBaseException().Message ?? "the save was cancelled"}";
+
+            lock (_lock)
+            {
+                // If the store was reloaded or swapped while this was saving, its data is newer than ours; the next
+                // load of this player picks the change up from the store instead.
+                if (generation == _generation && ReferenceEquals(_store, store))
+                    _players[steamId64] = isEmpty ? null : entry;
+                // A saved change replaces any --temp change to the same value.
+                if (_overlays.TryGetValue(steamId64, out var overlay))
+                {
+                    overlay.AddedRoles.Remove(value);
+                    overlay.RemovedRoles.Remove(value);
+                    overlay.AddedPermissions.Remove(value);
+                    overlay.RemovedPermissions.Remove(value);
+                }
+                _compiled.Remove(steamId64);
+            }
+            Changed?.Invoke(steamId64);
+            return null;
+        }
+
+        if (save.IsCompleted)
+            return Task.FromResult(Finish(save));
 
         lock (_lock)
-        {
-            _players[steamId64] = isEmpty ? null : entry;
-            // A saved change replaces any --temp change to the same value.
-            if (_overlays.TryGetValue(steamId64, out var overlay))
-            {
-                overlay.AddedRoles.Remove(value);
-                overlay.RemovedRoles.Remove(value);
-                overlay.AddedPermissions.Remove(value);
-                overlay.RemovedPermissions.Remove(value);
-            }
-            _compiled.Remove(steamId64);
-        }
-
-        DeadworksManaged.Api.Permissions.RaiseChanged(steamId64);
-        return null;
+            _saving.Add(steamId64);
+        var done = new TaskCompletionSource<string?>();
+        save.ContinueWith(t => TimerEngine.EnqueueNextTick(() => done.SetResult(Finish(t))), TaskScheduler.Default);
+        return done.Task;
     }
 
     // --- Stores ---
@@ -503,10 +766,15 @@ internal static class PermissionManager
 
         Console.WriteLine($"[Permissions] {owner.Name} registered the '{name}' store");
         if (name.Equals(_storeName, StringComparison.OrdinalIgnoreCase))
-            SetStore(store);
+        {
+            // Registration runs in the plugin's OnLoad, which hot reload calls off the game thread; the reload
+            // notifies plugins, so it waits for the next tick. Until then nobody gains anything.
+            SetStore(store, reload: false);
+            TimerEngine.EnqueueNextTick(() => Reload());
+        }
     }
 
-    /// <summary>Drops stores registered by plugins that are unloading, falling back to the JSON store.</summary>
+    /// <summary>Drops stores registered by plugins that are unloading. The active one leaves nobody with permissions until it's back.</summary>
     public static void UnregisterStoresOwnedBy(IReadOnlyCollection<IDeadworksPlugin> plugins)
     {
         bool activeRemoved;
@@ -521,19 +789,32 @@ internal static class PermissionManager
 
         if (activeRemoved)
         {
-            Console.WriteLine($"[Permissions] The '{_storeName}' store was unloaded; falling back to the JSON store");
-            SetStore(_jsonStore!);
+            Console.WriteLine($"[Permissions] The '{_storeName}' store was unloaded");
+            // Unloads can run off the game thread (hot reload): drop everyone's access now, and do the reload, which
+            // notifies plugins, on the next tick.
+            SetStore(new UnavailableStore(_storeName), reload: false);
+            lock (_lock)
+            {
+                _roles = new Dictionary<string, RoleDefinition>(StringComparer.OrdinalIgnoreCase);
+                _players.Clear();
+                _loading.Clear();
+                _retryAfter.Clear();
+                ++_generation;
+                InvalidateAll();
+            }
+            TimerEngine.EnqueueNextTick(() => Reload());
         }
     }
 
-    private static void SetStore(IPermissionStore store)
+    private static void SetStore(IPermissionStore store, bool reload = true)
     {
         var previous = _store;
         if (previous != null)
             previous.Changed -= OnStoreChanged;
         _store = store;
         store.Changed += OnStoreChanged;
-        Reload();
+        if (reload)
+            Reload();
     }
 
     private static void OnStoreChanged(ulong? steamId64)
@@ -548,17 +829,28 @@ internal static class PermissionManager
             lock (_lock)
             {
                 _players.Remove(id);
+                _retryAfter.Remove(id);
                 _compiled.Remove(id);
             }
             EnsurePlayerLoaded(id);
-            DeadworksManaged.Api.Permissions.RaiseChanged(id);
+            Changed?.Invoke(id);
         });
     }
 
     private sealed class Backend : IPermissionBackend
     {
-        public bool Has(ulong steamId64, string permission) => Explain(steamId64, permission).Allowed;
-        public bool HasForSlot(int slot, string permission) => PermissionManager.HasForSlot(slot, permission);
+        public bool Has(ulong steamId64, string permission)
+        {
+            NoteChecked(permission);
+            return Explain(steamId64, permission).Allowed;
+        }
+
+        public bool HasForSlot(int slot, string permission)
+        {
+            NoteChecked(permission);
+            return PermissionManager.HasForSlot(slot, permission);
+        }
+
         public PermissionExplanation Explain(ulong steamId64, string permission) => PermissionManager.Explain(steamId64, permission);
         public bool CanTarget(ulong caller, ulong target) => PermissionManager.CanTarget(caller, target);
         public bool CanTargetSlots(int callerSlot, int targetSlot) => PermissionManager.CanTargetSlots(callerSlot, targetSlot);

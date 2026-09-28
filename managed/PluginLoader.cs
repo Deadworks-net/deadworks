@@ -131,6 +131,7 @@ internal static partial class PluginLoader
             Console.WriteLine($"[PluginLoader] No plugins directory found at: {_pluginsDir}");
 
         PermissionSystem.PermissionManifest.DeleteStale();
+        PermissionSystem.PermissionManager.OnStartupComplete();
         if (Directory.Exists(_pluginsDir))
             StartWatching(_pluginsDir);
     }

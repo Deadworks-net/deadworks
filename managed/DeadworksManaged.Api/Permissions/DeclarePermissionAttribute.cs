@@ -7,7 +7,7 @@ namespace DeadworksManaged.Api;
 [AttributeUsage(AttributeTargets.Class, AllowMultiple = true)]
 public sealed class DeclarePermissionAttribute : Attribute
 {
-    /// <summary>The permission, e.g. <c>moderation.player.ban.permanent</c>.</summary>
+    /// <summary>The permission, e.g. <c>medic.heal.others</c>. Like any permission, it shouldn't also be the parent of another.</summary>
     public string Permission { get; }
     /// <summary>What holding it allows, shown to server owners.</summary>
     public string Description { get; set; } = "";
