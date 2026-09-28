@@ -15,11 +15,13 @@ internal static class CommandRegistration
     {
         public string Permission => CommandOverrides.Resolve(attr.Names, attr.Permission, owner, out _);
 
-        public bool EnforceImmunity(string permission) => attr.TargetImmunity switch
+        // Auto follows the permission the plugin declares, not the overridden one: making a moderation command public
+        // in overrides.jsonc must not let everyone use it on the admins.
+        public bool EnforceImmunity => attr.TargetImmunity switch
         {
             TargetImmunity.Enforce => true,
             TargetImmunity.Ignore => false,
-            _ => permission.Length > 0
+            _ => attr.Permission.Length > 0
         };
 
         /// <summary>
@@ -131,7 +133,7 @@ internal static class CommandRegistration
             }
 
             if (!CommandBinder.TryBind(namedPlan, ctx.Args, ctx.Controller, out var boundArgs, out var error, out var silentSkip,
-                    gate.EnforceImmunity(permission)))
+                    gate.EnforceImmunity))
             {
                 if (silentSkip)
                     return resultOnSuccess;
@@ -189,7 +191,7 @@ internal static class CommandRegistration
             }
 
             if (!CommandBinder.TryBind(namedPlan, tokens, caller, out var boundArgs, out var error, out var silentSkip,
-                    gate.EnforceImmunity(permission)))
+                    gate.EnforceImmunity))
             {
                 if (silentSkip)
                     return;

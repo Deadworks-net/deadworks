@@ -1111,6 +1111,23 @@ public sealed class PermissionManagerTests : IDisposable
     }
 
     [Fact]
+    public void Making_a_moderation_command_public_keeps_immunity()
+    {
+        var info = new PermissionManifest.PluginInfo("Moderation", new CommandOverrides.Owner("Moderation", "Moderation"),
+            [new PermissionManifest.CommandInfo(["slay"], "Kill a hero", "moderation.slay", TargetImmunity.Auto, false, false, false),
+             new PermissionManifest.CommandInfo(["stats"], "Show stats", "", TargetImmunity.Auto, false, false, false)],
+            []);
+        CommandOverrides.Set(new() { ["slay"] = "", ["stats"] = "vip.stats" });
+
+        using var doc = JsonDocument.Parse(PermissionManifest.Render(info), new JsonDocumentOptions { CommentHandling = JsonCommentHandling.Skip });
+        var commands = doc.RootElement.GetProperty("commands");
+        Assert.Equal("", commands[0].GetProperty("permission").GetString());
+        Assert.Equal("Enforce", commands[0].GetProperty("targetImmunity").GetString());
+        Assert.Equal("vip.stats", commands[1].GetProperty("permission").GetString());
+        Assert.Equal("Ignore", commands[1].GetProperty("targetImmunity").GetString());
+    }
+
+    [Fact]
     public void Stale_generated_files_are_deleted()
     {
         var generated = Path.Combine(_dir, "generated");

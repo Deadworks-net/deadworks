@@ -219,7 +219,7 @@ internal static class PermissionManifest
             {
                 var effective = CommandOverrides.Resolve(c.Names, c.DeclaredPermission, c.Owner ?? info.Owner, out var overridden);
                 var immunity = c.TargetImmunity == TargetImmunity.Auto
-                    ? (effective.Length > 0 ? TargetImmunity.Enforce : TargetImmunity.Ignore)
+                    ? (c.DeclaredPermission.Length > 0 ? TargetImmunity.Enforce : TargetImmunity.Ignore)
                     : c.TargetImmunity;
 
                 var comments = new List<string> { $"{Invocations(c)}{(c.Description.Length > 0 ? $": {c.Description}" : "")}" };
