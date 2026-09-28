@@ -38,6 +38,20 @@ public class CommandDispatchTests
             throw new InvalidOperationException("plugin bug after await");
         }
 
+        [Command("threadtestcommand")]
+        public async Task ThreadCheck()
+        {
+            await Task.Delay(10);
+            Received.Add(Environment.CurrentManagedThreadId.ToString());
+        }
+
+        [Command("valuetasktestcommand")]
+        public async ValueTask ValueTaskRefusal()
+        {
+            await Task.Yield();
+            throw new CommandException("Refused after a ValueTask await.");
+        }
+
         [Command("asyncvoidtestcommand")]
         public async void AsyncVoid() => await Task.Yield();
 
@@ -128,6 +142,36 @@ public class CommandDispatchTests
             }
         }));
         Assert.Contains(expected, output);
+    }
+
+    [Fact]
+    public void Code_after_an_await_in_a_command_runs_on_the_game_thread()
+    {
+        var plugin = WithRegisteredPlugin(p =>
+        {
+            ConCommandManager.Dispatch(-1, "dw_threadtestcommand", ["dw_threadtestcommand"]);
+            for (var i = 0; i < 200 && p.Received.Count == 0; i++)
+            {
+                Thread.Sleep(5);
+                TimerEngine.OnTick(); // this thread plays the game thread
+            }
+        });
+        Assert.Equal(Environment.CurrentManagedThreadId.ToString(), Assert.Single(plugin.Received));
+    }
+
+    [Fact]
+    public void A_value_task_command_is_followed_like_a_task()
+    {
+        var output = CaptureConsole(() => WithRegisteredPlugin(_ =>
+        {
+            ConCommandManager.Dispatch(-1, "dw_valuetasktestcommand", ["dw_valuetasktestcommand"]);
+            for (var i = 0; i < 200 && !Console.Out.ToString()!.Contains("Refused after"); i++)
+            {
+                Thread.Sleep(5);
+                TimerEngine.OnTick();
+            }
+        }));
+        Assert.Contains("Refused after a ValueTask await.", output);
     }
 
     [Fact]

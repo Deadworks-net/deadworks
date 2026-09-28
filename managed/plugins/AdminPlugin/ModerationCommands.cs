@@ -134,7 +134,7 @@ public sealed partial class AdminPlugin
     }
 
     [Command("penalties", Description = "Show your own bans, gags and mutes, or another player's: penalties [steamid]", SuppressChat = true)]
-    public void CmdPenalties(Caller caller, string steamId = "")
+    public async Task CmdPenalties(Caller caller, string steamId = "")
     {
         ulong id;
         if (steamId.Length > 0)
@@ -149,40 +149,21 @@ public sealed partial class AdminPlugin
             id = !caller.IsConsole ? caller.SteamId64 : throw new CommandException("Give a SteamID.");
         }
 
-        var slot = caller.Player?.Slot ?? -1;
-        var callerId = caller.SteamId64;
-        var history = Penalties.GetHistoryAsync(id);
-        if (history.IsCompleted)
-            PrintHistory(slot, callerId, id, history);
-        else
-            history.ContinueWith(t => Timer.NextTick(() => PrintHistory(slot, callerId, id, t)), TaskScheduler.Default);
-    }
-
-    private static void PrintHistory(int slot, ulong callerId, ulong id, Task<IReadOnlyList<Penalty>> history)
-    {
-        // The command may have come from a player who has since left; don't print to whoever took the slot.
-        Caller caller;
-        if (slot < 0)
-            caller = Caller.Console;
-        else if (Players.FromSlot(slot) is { } player && Permissions.GetSteamId(slot) == callerId)
-            caller = Caller.Of(player);
-        else
-            return;
-
-        if (!history.IsCompletedSuccessfully)
+        IReadOnlyList<Penalty> history;
+        try
         {
-            caller.Reply("Couldn't load penalties; the server console has details.");
-            return;
+            history = await Penalties.GetHistoryAsync(id); // a database store may take a while; this resumes on the game thread
+        }
+        catch (Exception ex)
+        {
+            throw new CommandException($"Couldn't load penalties: {ex.Message}");
         }
 
+        // Replies to a player who has left go nowhere, not to whoever took their slot.
         var now = DateTime.UtcNow;
         var lines = new List<string> { $"Penalties for {id}:" };
-        foreach (var p in history.Result)
-        {
-            var state = p.IsActiveAt(now) ? "ACTIVE" : p.RemovedUtc != null ? "lifted" : "expired";
-            lines.Add($"  {DescribeHistory(p, now)}");
-        }
-        if (history.Result.Count == 0)
+        lines.AddRange(history.Select(p => $"  {DescribeHistory(p, now)}"));
+        if (history.Count == 0)
             lines.Add("  none");
         ReplyLines(caller, lines);
     }

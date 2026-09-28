@@ -281,7 +281,8 @@ internal static class CommandRegistration
         object? result;
         try
         {
-            result = method.Invoke(plugin, boundArgs);
+            // Awaits inside the command resume on the game thread, not the thread pool.
+            result = GameThreadContext.Run(() => method.Invoke(plugin, boundArgs));
         }
         catch (TargetInvocationException tie) when (tie.InnerException is CommandException cex)
         {
@@ -294,7 +295,7 @@ internal static class CommandRegistration
             return;
         }
 
-        if (result is not Task task || task.IsCompletedSuccessfully)
+        if (AsTask(result) is not { } task || task.IsCompletedSuccessfully)
             return;
 
         // By the time it finishes the player may have left, and someone else may have their slot and controller.
@@ -321,6 +322,16 @@ internal static class CommandRegistration
                 Failed(plugin, name, t.Exception.GetBaseException(), replyIfStillHere);
         }), TaskScheduler.Default);
     }
+
+    /// <summary>A command's Task, ValueTask or ValueTask&lt;T&gt; as a Task to follow, or null for anything else.</summary>
+    private static Task? AsTask(object? result) => result switch
+    {
+        Task task => task,
+        ValueTask valueTask => valueTask.AsTask(),
+        not null when result.GetType() is { IsGenericType: true } type && type.GetGenericTypeDefinition() == typeof(ValueTask<>)
+            => (Task?)type.GetMethod(nameof(ValueTask<int>.AsTask))!.Invoke(result, null),
+        _ => null,
+    };
 
     private static void Failed(IDeadworksPlugin plugin, string name, Exception ex, Action<string> reply)
     {

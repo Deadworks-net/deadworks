@@ -122,8 +122,9 @@ internal sealed class PermissionCommands : DeadworksPluginBase
             throw new CommandException($"Unknown option '{temp}'. The only option is --temp.");
 
         var who = ResolvePlayer(caller, player);
-        if (caller.Player is { } admin)
-            CheckAllowed(admin.Slot, who, kind, value);
+        // Only the console skips the delegation rules; a player caller must still be here to be checked.
+        if (!caller.IsConsole)
+            CheckAllowed((caller.Player ?? throw new CommandException("You're no longer on the server.")).Slot, who, kind, value);
 
         var verb = kind switch
         {
@@ -217,6 +218,8 @@ internal sealed class PermissionCommands : DeadworksPluginBase
             return new ResolvedPlayer(steamId64, slot, slot >= 0 ? NameInSlot(slot) : null);
         }
 
+        if (!caller.IsConsole && caller.Player == null)
+            throw new CommandException("You're no longer on the server.");
         if (!TargetResolver.TryResolve(input, caller.Player, enforceImmunity: false, out var target, out var error))
             throw new CommandException(error ?? $"No player matches '{input}'.");
         if (target!.IsGroup)

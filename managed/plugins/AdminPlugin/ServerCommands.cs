@@ -35,11 +35,13 @@ public sealed partial class AdminPlugin
             : string.Join(' ', command.Select(a => a.Contains(' ') ? $"\"{a}\"" : a));
         AdminActivity.Log(caller, $"ran rcon: {Redact(line)}");
 
-        if (caller.Player is not { } player)
+        if (caller.IsConsole)
         {
             Server.ExecuteCommand(line);
             return;
         }
+        if (caller.Player is not { } player)
+            return;
 
         var slot = player.Slot;
         var id = caller.SteamId64;

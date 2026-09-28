@@ -32,9 +32,14 @@ public sealed class Target : IReadOnlyList<CCitadelPlayerController>
     /// </summary>
     /// <exception cref="CommandException">Nobody matches, or a single-player pattern hits someone the caller can't target.</exception>
     public static Target Resolve(Caller caller, string input, bool enforceImmunity = true)
-        => TargetResolver.TryResolve(input, caller.Player, enforceImmunity, out var target, out var error)
+    {
+        // A player who has left has no controller, and resolving without one would skip their immunity check.
+        if (!caller.IsConsole && caller.Player == null)
+            throw new CommandException("You're no longer on the server.");
+        return TargetResolver.TryResolve(input, caller.Player, enforceImmunity, out var target, out var error)
             ? target!
             : throw new CommandException(error ?? $"No player matches '{input}'.");
+    }
 
     /// <summary>The one player matched, or a <see cref="CommandException"/> telling the caller to be more specific.</summary>
     public CCitadelPlayerController Single()

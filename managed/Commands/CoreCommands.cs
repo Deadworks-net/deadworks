@@ -85,6 +85,8 @@ internal sealed class CoreCommands : DeadworksPluginBase
     [Command("help", Description = "List the commands you can use", ConsoleOnly = true)]
     public void Help(Caller caller)
     {
+        if (!caller.IsConsole && caller.Player == null)
+            return;
         var entries = PluginRegistrationTracker.GetAllEntries()
             .Where(e => !e.Hidden && (e.CanRun == null || e.CanRun(caller.Player)))
             .ToList();
