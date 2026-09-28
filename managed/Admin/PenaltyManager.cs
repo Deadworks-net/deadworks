@@ -166,6 +166,8 @@ internal static class PenaltyManager
             throw new ArgumentOutOfRangeException(nameof(duration), duration, "A penalty needs a positive duration; use null for permanent.");
         if (CantSave() is { } cantSave)
             throw new CommandException(cantSave);
+        // Anything that has run out goes first, as Expired, so it can't be replaced as if it were still in force.
+        Sweep();
 
         // Until Steam confirms a connected player, the SteamID they claim isn't safe to record a penalty against.
         var slot = PermissionManager.FindSlot(steamId64);
@@ -222,6 +224,8 @@ internal static class PenaltyManager
     {
         if (CantSave() is { } cantSave)
             throw new CommandException(cantSave);
+        // A penalty that ran out a moment ago expired; it isn't there to lift.
+        Sweep();
         var adminId = by.SteamId64;
         Penalty? removed = null;
         lock (_lock)

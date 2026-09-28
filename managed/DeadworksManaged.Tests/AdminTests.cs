@@ -228,6 +228,30 @@ public sealed class PenaltyTests : AdminTestBase
     }
 
     [Fact]
+    public void A_penalty_that_has_just_run_out_expired_rather_than_being_lifted_or_replaced()
+    {
+        var removed = new List<Penalty>();
+        PenaltyManager.Removed += removed.Add;
+        try
+        {
+            Penalties.Add(PenaltyType.Gag, Lapka, TimeSpan.FromMinutes(5), "", Caller.Console);
+            Clock = Clock.AddMinutes(10); // ran out, but nothing has swept it yet
+            Assert.False(Penalties.Remove(PenaltyType.Gag, Lapka, Caller.Console));
+            Assert.Equal(PenaltyEnd.Expired, Assert.Single(removed).HowEnded(Clock));
+
+            Penalties.Add(PenaltyType.Mute, Lapka, TimeSpan.FromMinutes(5), "", Caller.Console);
+            Clock = Clock.AddMinutes(10);
+            Assert.Null(Penalties.WouldShorten(PenaltyType.Mute, Lapka, TimeSpan.FromMinutes(1)));
+            Penalties.Add(PenaltyType.Mute, Lapka, TimeSpan.FromMinutes(1), "", Caller.Console);
+            Assert.Equal(PenaltyEnd.Expired, removed[^1].HowEnded(Clock)); // not "Replaced"
+        }
+        finally
+        {
+            PenaltyManager.Removed -= removed.Add;
+        }
+    }
+
+    [Fact]
     public void History_days_of_zero_keeps_history_forever()
     {
         var path = Path.Combine(Dir, "zero", "penalties.jsonc");
@@ -424,7 +448,7 @@ public sealed class AdminPluginTests : AdminTestBase
         Console_("dw_mute", Lapka.ToString(), "0");
 
         var history = Penalties.GetHistoryAsync(Lapka).Result.OrderBy(p => p.CreatedUtc).ToList();
-        Assert.Equal([PenaltyEnd.Replaced, PenaltyEnd.Lifted, PenaltyEnd.Expired, null], history.Select(p => p.EndedAt(Clock)));
+        Assert.Equal([PenaltyEnd.Replaced, PenaltyEnd.Lifted, PenaltyEnd.Expired, null], history.Select(p => p.HowEnded(Clock)));
         Assert.Equal(history[1].Id, history[0].ReplacedBy);
         Assert.Equal("appeal accepted", history[1].RemovalReason);
 

@@ -130,7 +130,7 @@ public sealed partial class AdminPlugin
         var length = p.ExpiresUtc is { } expires ? DescribeDuration(expires - p.CreatedUtc) : "permanently";
         var given = $"{p.CreatedUtc:yyyy-MM-dd} {p.Type.ToString().ToLowerInvariant()} {length} by {p.AdminName ?? "Console"}"
                     + (p.Reason.Length > 0 ? $": {p.Reason}" : "");
-        var ended = p.EndedAt(now) switch
+        var ended = p.HowEnded(now) switch
         {
             PenaltyEnd.Lifted => $"lifted early by {p.RemovedByName ?? "Console"} on {p.RemovedUtc:yyyy-MM-dd}"
                                  + (p.RemovalReason is { Length: > 0 } why ? $": {why}" : ""),

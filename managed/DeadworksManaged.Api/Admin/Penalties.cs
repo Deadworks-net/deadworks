@@ -61,13 +61,14 @@ public sealed record Penalty
     public bool IsPermanent => ExpiresUtc == null;
 
     /// <summary>How it stopped applying by <paramref name="nowUtc"/>, or null if it still applies.</summary>
-    public PenaltyEnd? EndedAt(DateTime nowUtc)
+    public PenaltyEnd? HowEnded(DateTime nowUtc)
     {
+        // Running out comes first: a penalty lifted or replaced after it had already expired simply expired.
+        if (ExpiresUtc is { } expires && expires <= (RemovedUtc ?? nowUtc))
+            return PenaltyEnd.Expired;
         if (ReplacedBy != null)
             return PenaltyEnd.Replaced;
-        if (RemovedUtc != null)
-            return PenaltyEnd.Lifted;
-        return ExpiresUtc <= nowUtc ? PenaltyEnd.Expired : null;
+        return RemovedUtc != null ? PenaltyEnd.Lifted : null;
     }
 
     /// <summary>Whether it applies at <paramref name="nowUtc"/>: not lifted and not expired.</summary>
