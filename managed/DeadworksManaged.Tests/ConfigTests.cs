@@ -72,4 +72,41 @@ public sealed class UnknownJsonKeyTests
     [Fact]
     public void Unrelated_keys_get_no_suggestion()
         => Assert.Equal(["'banana'"], UnknownJsonKeys.Find("""{ "banana": 1 }""", typeof(DeadworksConfigRoot)));
+
+    private sealed class PluginConfig
+    {
+        public int Rounds { get; set; }
+        [System.Text.Json.Serialization.JsonInclude] public string Mode = "";
+        public System.Text.Json.JsonElement Anything { get; set; }
+        public System.Text.Json.Nodes.JsonObject? Extra { get; set; }
+        [System.Text.Json.Serialization.JsonExtensionData] public Dictionary<string, System.Text.Json.JsonElement>? Rest { get; set; }
+    }
+
+    private sealed class StrictConfig
+    {
+        public int Rounds { get; set; }
+    }
+
+    [Fact]
+    public void Plugin_configs_with_free_form_json_or_extension_data_raise_no_false_warnings()
+        => Assert.Empty(UnknownJsonKeys.Find("""
+            { "rounds": 3, "mode": "ffa", "anything": { "x": 1 }, "extra": { "y": 2 }, "somethingElse": true }
+            """, typeof(PluginConfig)));
+
+    [Fact]
+    public void A_plugin_configs_unknown_keys_name_the_plugin()
+    {
+        var original = Console.Out;
+        var writer = new StringWriter();
+        Console.SetOut(writer);
+        try
+        {
+            UnknownJsonKeys.Warn("""{ "rouds": 3 }""", typeof(StrictConfig), "Deathmatch.jsonc", "[ConfigManager] WARNING:", "Deathmatch");
+        }
+        finally
+        {
+            Console.SetOut(original);
+        }
+        Assert.Contains("Deathmatch.jsonc: 'rouds' (did you mean 'rounds'?) isn't a setting Deathmatch knows", writer.ToString());
+    }
 }

@@ -14,19 +14,25 @@ internal sealed class CoreCommands : DeadworksPluginBase
     [Command("reloadconfig", Description = "Reload plugin configs: reloadconfig [plugin]", Permission = "deadworks.config.reload", ConsoleOnly = true)]
     public void ReloadConfig(Caller caller, string plugin = "")
     {
-        AdminActivity.Log(caller, plugin.Length > 0 ? $"reloaded the config of {plugin}" : "reloaded plugin configs");
-        foreach (var p in PluginLoader.PluginSnapshot)
-        {
-            if (plugin.Length > 0
-                && !string.Equals(p.GetType().Name, plugin, StringComparison.OrdinalIgnoreCase)
-                && !string.Equals(p.Name, plugin, StringComparison.OrdinalIgnoreCase))
-                continue;
+        var matching = PluginLoader.PluginSnapshot
+            .Where(p => plugin.Length == 0
+                        || string.Equals(p.GetType().Name, plugin, StringComparison.OrdinalIgnoreCase)
+                        || string.Equals(p.Name, plugin, StringComparison.OrdinalIgnoreCase))
+            .ToList();
+        if (matching.Count == 0)
+            throw new CommandException($"There's no loaded plugin called '{plugin}'. Run dw_plugin list to see them.");
 
+        AdminActivity.Log(caller, plugin.Length > 0 ? $"reloaded the config of {matching[0].Name}" : "reloaded plugin configs");
+        foreach (var p in matching)
+        {
             try
             {
+                // Say what's wrong: whoever edited the file may not be able to see the server console.
                 caller.PrintToConsole(p.ReloadConfig()
                     ? $"[ConfigManager] Reloaded config for {p.Name}"
-                    : $"[ConfigManager] No config to reload for {p.Name}");
+                    : ConfigManager.HasConfig(p)
+                        ? $"[ConfigManager] Failed to reload config for {p.Name}: {ConfigManager.LastError ?? "see the server console"}. It keeps its previous settings."
+                        : $"[ConfigManager] {p.Name} has no config to reload");
             }
             catch (Exception ex)
             {
