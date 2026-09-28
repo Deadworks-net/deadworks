@@ -20,6 +20,21 @@ public sealed partial class AdminPlugin
         return id != 0 ? id : throw new CommandException($"{player.PlayerName} is a bot.");
     }
 
+    /// <summary>
+    /// The players an action hit, for its one announcement: "lapka", "lapka and wisp", "lapka, wisp and 3 others".
+    /// A group command announces once, not once per player.
+    /// </summary>
+    internal static string ListNames(IReadOnlyList<string> names) => names.Count switch
+    {
+        1 => names[0],
+        2 or 3 => $"{string.Join(", ", names.Take(names.Count - 1))} and {names[^1]}",
+        _ => $"{string.Join(", ", names.Take(3))} and {names.Count - 3} others",
+    };
+
+    /// <summary>Every target's SteamID for the log line, which names them all even when the announcement doesn't. Bots are 0.</summary>
+    private static string TargetIds(IEnumerable<CCitadelPlayerController> players)
+        => $"target={string.Join(',', players.Select(p => Permissions.GetSteamId(p.Slot)))}";
+
     /// <summary>One named player; groups like @all are refused for penalties.</summary>
     private static CCitadelPlayerController OnePlayer(Target target, string command)
         => target.IsGroup

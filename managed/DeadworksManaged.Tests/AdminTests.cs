@@ -376,6 +376,14 @@ public sealed class AdminPluginTests : AdminTestBase
     public void Permanent_duration() => Assert.Equal("permanently", AdminPlugin.DescribeDuration(null));
 
     [Theory]
+    [InlineData("lapka", "lapka")]
+    [InlineData("lapka,wisp", "lapka and wisp")]
+    [InlineData("lapka,wisp,dingus", "lapka, wisp and dingus")]
+    [InlineData("lapka,wisp,dingus,fella,bot", "lapka, wisp, dingus and 2 others")]
+    public void Group_actions_name_their_targets_in_one_line(string names, string expected)
+        => Assert.Equal(expected, AdminPlugin.ListNames(names.Split(',')));
+
+    [Theory]
     [InlineData("sv_password hunter2", "sv_password (value hidden)")]
     [InlineData("\"sv_password\" hunter2", "sv_password (value hidden)")]
     [InlineData("sv_password", "sv_password")]   // reading it isn't a secret in the log

@@ -112,11 +112,16 @@ public sealed partial class AdminPlugin
             throw new CommandException($"{cvar.Name} didn't accept \"{value}\".");
 
         // Password cvars are logged without the value and not announced, so they don't end up in everyone's chat.
+        // Otherwise the announcement is the caller's answer too.
         if (IsProtected(cvar))
+        {
             AdminActivity.Log(caller, $"changed the protected cvar {cvar.Name}");
+            caller.Reply($"{cvar.Name} is now \"(hidden)\".");
+        }
         else
+        {
             AdminActivity.Show(caller, $"set {cvar.Name} to \"{value}\"");
-        caller.Reply($"{cvar.Name} is now \"{(IsProtected(cvar) ? "(hidden)" : value)}\".");
+        }
     }
 
     private static bool IsProtected(ConVarEntry cvar) => (cvar.Flags & (ulong)FCVar.Protected) != 0;

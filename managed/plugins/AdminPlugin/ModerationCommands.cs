@@ -15,13 +15,11 @@ public sealed partial class AdminPlugin
         if (players.Count == 0)
             throw new CommandException($"'{target.Input}' only matches you.");
 
+        var names = players.Select(p => p.PlayerName).ToList();
+        var ids = TargetIds(players);
         foreach (var player in players)
-        {
-            var name = player.PlayerName;
-            var id = Permissions.GetSteamId(player.Slot);
             player.Kick($"You were kicked: {why}");
-            AdminActivity.Show(caller, $"kicked {name}: {why}", details: $"target={id}");
-        }
+        AdminActivity.Show(caller, $"kicked {ListNames(names)}: {why}", details: ids);
     }
 
     [Command("ban", Description = "Ban a player: ban <player> <minutes> [reason], 0 = permanent", Permission = Perm.Ban, SuppressChat = true)]
@@ -95,6 +93,7 @@ public sealed partial class AdminPlugin
     [Command("slay", Description = "Kill a player's hero: slay <player>", Permission = Perm.Slay, SuppressChat = true)]
     public void CmdSlay(Caller caller, Target target)
     {
+        var slain = new List<CCitadelPlayerController>();
         foreach (var player in target)
         {
             var pawn = player.GetHeroPawn();
@@ -103,8 +102,11 @@ public sealed partial class AdminPlugin
             using var damage = new CTakeDamageInfo(999999f, attacker: pawn);
             damage.DamageFlags |= TakeDamageFlags.ForceDeath | TakeDamageFlags.AllowSuicide;
             pawn.TakeDamage(damage);
-            AdminActivity.Show(caller, $"slayed {player.PlayerName}", details: $"target={Permissions.GetSteamId(player.Slot)}");
+            slain.Add(player);
         }
+        if (slain.Count == 0)
+            throw new CommandException(target.IsGroup ? $"Nobody in {target.Input} is alive." : $"{target.Single().PlayerName} isn't alive.");
+        AdminActivity.Show(caller, $"slayed {ListNames(slain.Select(p => p.PlayerName).ToList())}", details: TargetIds(slain));
     }
 
     [Command("who", Description = "List players with their SteamID, team, roles and penalties: who [player]", Permission = Perm.Who, SuppressChat = true)]

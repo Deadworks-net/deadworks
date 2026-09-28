@@ -65,9 +65,14 @@ internal static class AdminActivityService
 
         if (!announce)
             return;
+        // Everyone gets at most one line. The admin who did it always gets theirs, even with announcements off,
+        // since it is their only confirmation.
+        var callerSlot = admin.Player?.Slot;
         foreach (var player in Players.GetAll())
         {
             var visibility = PermissionManager.HasForSlot(player.Slot, NotifyPermission) ? _notified : _players;
+            if (player.Slot == callerSlot && visibility == Visibility.None)
+                visibility = Visibility.Named;
             if (Format(visibility, adminName, action) is { } text)
                 SendChat(player, text);
         }
