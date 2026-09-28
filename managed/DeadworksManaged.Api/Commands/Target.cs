@@ -116,8 +116,8 @@ internal static class TargetResolver
             if (allowed.Count == 0)
             {
                 error = isGroup
-                    ? $"You can't target any of the players matching '{token}'."
-                    : $"You can't target {matched[0].Name}.";
+                    ? $"You can't target any of the players matching '{token}': their immunity is higher than yours."
+                    : $"You can't target {matched[0].Name}: their immunity is higher than yours.";
                 return false;
             }
             matched = allowed;

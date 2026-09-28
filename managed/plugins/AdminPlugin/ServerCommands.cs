@@ -4,7 +4,11 @@ namespace DeadworksAdmin;
 
 public sealed partial class AdminPlugin
 {
-    [Command("map", Description = "Change map: map <name>, or map to list them", Permission = Perm.Map, SuppressChat = true)]
+    // The change waiting out map_change_delay_seconds, so a second !map doesn't stack another one and it can be called off.
+    private IHandle? _pendingMapChange;
+    private string? _pendingMap;
+
+    [Command("map", Description = "Change map: map <name>, map on its own to list them, or map cancel", Permission = Perm.Map, SuppressChat = true)]
     public void CmdMap(Caller caller, string map = "")
     {
         if (map.Length == 0)
@@ -12,14 +16,33 @@ public sealed partial class AdminPlugin
             ReplyLines(caller, Server.GetMapList().Select(m => $"  {m}").Prepend("Maps:"));
             return;
         }
+        if (map.Equals("cancel", StringComparison.OrdinalIgnoreCase))
+        {
+            if (_pendingMap is not { } pending)
+                throw new CommandException("No map change is waiting to happen.");
+            _pendingMapChange?.Cancel();
+            (_pendingMapChange, _pendingMap) = (null, null);
+            AdminActivity.Show(caller, $"called off the change to {pending}");
+            return;
+        }
+        if (_pendingMap != null || Server.IsChangingLevel)
+            throw new CommandException($"The map is already changing{(_pendingMap != null ? $" to {_pendingMap}" : "")}. Use map cancel to call it off first.");
         if (!Server.IsMapValid(map))
-            throw new CommandException($"There's no map called '{map}'. Run map with no name to list them.");
+            throw new CommandException($"There's no map called '{map}'. Run map on its own to list them.");
 
-        AdminActivity.Show(caller, $"is changing the map to {map} in {Config.MapChangeDelaySeconds}s");
         if (Config.MapChangeDelaySeconds == 0)
+        {
+            AdminActivity.Show(caller, $"changed the map to {map}");
             Server.ChangeMap(map);
-        else
-            Timer.Once(Config.MapChangeDelaySeconds.Seconds(), () => Server.ChangeMap(map));
+            return;
+        }
+        AdminActivity.Show(caller, $"is changing the map to {map} in {Config.MapChangeDelaySeconds}s");
+        _pendingMap = map;
+        _pendingMapChange = Timer.Once(Config.MapChangeDelaySeconds.Seconds(), () =>
+        {
+            (_pendingMapChange, _pendingMap) = (null, null);
+            Server.ChangeMap(map);
+        });
     }
 
     [Command("rcon", Description = "Run a server console command and see its output: rcon <command...>", Permission = Perm.Rcon, SuppressChat = true)]

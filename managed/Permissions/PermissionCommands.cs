@@ -119,7 +119,8 @@ internal sealed class PermissionCommands : DeadworksPluginBase
     {
         bool temporary = temp.Length > 0;
         if (temporary && !temp.Equals("--temp", StringComparison.OrdinalIgnoreCase) && !temp.Equals("temp", StringComparison.OrdinalIgnoreCase))
-            throw new CommandException($"Unknown option '{temp}'. The only option is --temp.");
+            throw new CommandException($"Unknown option '{temp}'; the only one is --temp. If the player's name has a space in it, "
+                                       + "put it in quotes, like \"Big Dave\".");
 
         var who = ResolvePlayer(caller, player);
         // Only the console skips the delegation rules; a player caller must still be here to be checked.

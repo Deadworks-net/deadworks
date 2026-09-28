@@ -259,7 +259,7 @@ public static unsafe class Server {
 	public static bool ChangeMap(string map) {
 		if (!IsMapValid(map))
 			return false;
-		ExecuteCommand($"changelevel {map}");
+		ChangeLevel(map); // so IsChangingLevel is set, as for any other change
 		return true;
 	}
 

@@ -364,7 +364,7 @@ public class TargetResolverTests
     public void Immune_single_target_is_an_error()
     {
         Assert.False(TargetResolver.TryMatch("lapka", Wisp, All, c => c.Slot != 1, out _, out _, out var error));
-        Assert.Equal("You can't target lapka.", error);
+        Assert.Equal("You can't target lapka: their immunity is higher than yours.", error);
     }
 
     [Fact]
