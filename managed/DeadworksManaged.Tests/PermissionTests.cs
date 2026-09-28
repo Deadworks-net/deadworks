@@ -596,6 +596,29 @@ public sealed class PermissionManagerTests : IDisposable
     }
 
     [Fact]
+    public void Steam_validating_a_player_counts_as_their_permissions_changing()
+    {
+        var changed = new List<ulong?>();
+        void OnChanged(ulong? id) => changed.Add(id);
+        PermissionManager.Changed += OnChanged;
+        try
+        {
+            PermissionManager.OnClientConnect(4, Admin);
+            PermissionManager.IsSlotAuthenticated = _ => false;
+            Assert.Empty(PermissionManager.TakeNewlyAuthorized());
+            changed.Clear();
+
+            PermissionManager.IsSlotAuthenticated = _ => true;
+            Assert.Single(PermissionManager.TakeNewlyAuthorized());
+            Assert.Equal([Admin], changed);
+        }
+        finally
+        {
+            PermissionManager.Changed -= OnChanged;
+        }
+    }
+
+    [Fact]
     public void Checking_by_steam_id_waits_for_steam_too()
     {
         // Plugins often check caller.SteamId64 instead of the slot; that mustn't hand out permissions early.

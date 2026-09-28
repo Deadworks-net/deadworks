@@ -173,8 +173,9 @@ public interface IDeadworksPlugin {
 	void OnClientAuthorized(ClientAuthorizedEvent args) { }
 
 	/// <summary>
-	/// Called after permissions change: a reload (<paramref name="steamId64"/> is null, meaning everyone) or a grant or
-	/// revoke for one player. Use it to refresh anything that depends on who can do what, such as admin menus.
+	/// Called after permissions change: a reload (<paramref name="steamId64"/> is null, meaning everyone), a grant or
+	/// revoke for one player, or Steam validating a player, when their own roles replace <c>default</c>. Use it to
+	/// refresh anything that depends on who can do what, such as admin menus.
 	/// </summary>
 	void OnPermissionsChanged(ulong? steamId64) { }
 
