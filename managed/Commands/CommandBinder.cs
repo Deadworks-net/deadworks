@@ -41,13 +41,14 @@ internal static class CommandBinder
             var p = parameters[i];
             var pt = p.ParameterType;
 
-            if (pt == typeof(CCitadelPlayerController))
+            if (pt == typeof(CCitadelPlayerController) || pt == typeof(Caller))
             {
                 if (callerIndex >= 0)
                     throw new InvalidOperationException(
-                        $"[Command] method '{method.DeclaringType?.Name}.{method.Name}' has more than one CCitadelPlayerController parameter");
+                        $"[Command] method '{method.DeclaringType?.Name}.{method.Name}' has more than one caller parameter");
 
-                var isNullable = nullCtx.Create(p).WriteState == NullabilityState.Nullable;
+                // A Caller always has a value: the console is Caller.Console.
+                var isNullable = pt == typeof(Caller) || nullCtx.Create(p).WriteState == NullabilityState.Nullable;
                 slots[i] = new Slot
                 {
                     Kind = SlotKind.Caller,
@@ -155,7 +156,9 @@ internal static class CommandBinder
                         silentSkip = true;
                         return false;
                     }
-                    boundArgs[i] = caller;
+                    boundArgs[i] = slot.Type == typeof(Caller)
+                        ? (caller == null ? Caller.Console : Caller.Of(caller))
+                        : caller;
                     break;
 
                 case SlotKind.RawArgs:
