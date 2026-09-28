@@ -13,7 +13,7 @@ public:
     SCHEMA_FIELD_POINTER(CCitadelAbilityComponent, m_CCitadelAbilityComponent);
 
     void ModifyCurrency(ECurrencyType nCurrencyType, int32_t nAmount, ECurrencySource nSource, bool bSilent, bool bForceGain, bool bSpendOnly, void *pSourceAbility, void *pSourceEntity) {
-        static const auto fn = reinterpret_cast<void(__fastcall *)(void *, ECurrencyType, int32_t, ECurrencySource, bool, bool, bool, void *, void *)>(
+        static const auto fn = reinterpret_cast<void(__fastcall *)(void *, ECurrencyType, int32_t, ECurrencySource, int32_t, int32_t, int32_t, void *, void *)>(
             deadworks::MemoryDataLoader::Get().GetOffset("CCitadelPlayerPawn::ModifyCurrency").value());
         fn(this, nCurrencyType, nAmount, nSource, bSilent, bForceGain, bSpendOnly, pSourceAbility, pSourceEntity);
     }

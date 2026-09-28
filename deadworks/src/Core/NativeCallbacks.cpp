@@ -134,7 +134,8 @@ static void __cdecl NativeModifyCurrency(void *pPawnThis, uint32_t nCurrencyType
     hooks::g_CCitadelPlayerPawn_ModifyCurrency.thiscall<void>(
         pPawnThis, static_cast<ECurrencyType>(nCurrencyType), nAmount,
         static_cast<ECurrencySource>(nSource),
-        bSilent != 0, bForceGain != 0, bSpendOnly != 0,
+        // Full dwords, not bools: see Hook_CCitadelPlayerPawn_ModifyCurrency.
+        int32_t{bSilent != 0}, int32_t{bForceGain != 0}, int32_t{bSpendOnly != 0},
         pSourceAbility, pSourceEntity);
 }
 
