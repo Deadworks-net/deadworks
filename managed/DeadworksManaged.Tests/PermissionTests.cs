@@ -865,6 +865,23 @@ public sealed class PermissionManagerTests : IDisposable
     }
 
     [Fact]
+    public void Reconnecting_after_a_map_change_does_not_raise_OnClientAuthorized_again()
+    {
+        PermissionManager.OnClientConnect(3, Admin);
+        Assert.Equal([(3, Admin)], PermissionManager.TakeNewlyAuthorized());
+
+        // A map change runs connect again for the same player in the same slot, with no disconnect in between.
+        PermissionManager.OnClientConnect(3, Admin);
+        Assert.Empty(PermissionManager.TakeNewlyAuthorized());
+        Assert.True(PermissionManager.HasForSlot(3, "server.rcon"));
+
+        // Someone else in that slot is a new connection.
+        PermissionManager.OnClientDisconnect(3);
+        PermissionManager.OnClientConnect(3, Moderator);
+        Assert.Equal([(3, Moderator)], PermissionManager.TakeNewlyAuthorized());
+    }
+
+    [Fact]
     public void Disconnecting_forgets_the_entry_so_the_next_connect_reads_the_store()
     {
         PermissionManager.OnClientConnect(3, Admin);

@@ -188,7 +188,7 @@ public static class EntryPoint
         PermissionSystem.PermissionManager.OnClientConnect(slot, xuid);
 
         // Bans are core's to enforce, so they apply before any plugin sees the connection.
-        if (AdminSystem.PenaltyManager.ConnectRejection(xuid) is { } banned)
+        if (AdminSystem.PenaltyManager.ConnectRejection(xuid, args.IsMapChangeReconnect) is { } banned)
         {
             Console.WriteLine($"[Penalties] Rejected banned player {args.Name} ({xuid})");
             RejectConnection(slot, banned);
@@ -204,6 +204,7 @@ public static class EntryPoint
     private static unsafe void RejectConnection(int slot, string? reason)
     {
         // A refused client never disconnects, so its slot has to be forgotten here.
+        Players.OnDisconnect(slot);
         PermissionSystem.PermissionManager.OnClientDisconnect(slot);
         if (string.IsNullOrEmpty(reason) || NativeInterop.SetConnectRejectReason == null)
             return;
@@ -254,10 +255,13 @@ public static class EntryPoint
         if (args.IsMapChange)
             Server.OnMapShutdown();
         PluginLoader.DispatchClientDisconnect(args);
-        // Still connected: they reload into the next map, and Players.OnMapStart counts them as coming back.
+        // Still connected: they reload into the next map, and Players.OnMapStart counts them as coming back. The
+        // engine keeps their SteamID and Steam's confirmation across the reload, so permissions keep them too.
         if (!args.IsMapChange)
+        {
             Players.OnDisconnect(slot);
-        PermissionSystem.PermissionManager.OnClientDisconnect(slot);
+            PermissionSystem.PermissionManager.OnClientDisconnect(slot);
+        }
         ZoneRegistry.OnDisconnect(slot);
         DeadworksManaged.Api.UI.UIChannel.OnPlayerDisconnect(slot);
     }

@@ -122,9 +122,9 @@ internal static class PenaltyManager
         }
         Console.WriteLine($"[Penalties] Loaded {_active.Count} active penalties from the '{_storeName}' store");
 
-        // Anyone connected who is now banned has to go.
-        foreach (var player in Players.GetAll())
-            EnforceBan(player.Slot);
+        // Anyone on the server, or still connecting, who is now banned has to go.
+        for (int slot = 0; slot < Players.MaxSlot; slot++)
+            EnforceBan(slot);
         return true;
     }
 
@@ -266,13 +266,16 @@ internal static class PenaltyManager
 
     // --- Enforcement ---
 
-    /// <summary>The message to reject a connecting SteamID with, or null to let them in.</summary>
-    public static string? ConnectRejection(ulong steamId64)
+    /// <summary>
+    /// The message to refuse a connecting SteamID with, or null to let them in. Someone reloading after a map change
+    /// was already on the server, so a ban list that's down doesn't turn them away; a ban still does.
+    /// </summary>
+    public static string? ConnectRejection(ulong steamId64, bool isMapChangeReconnect = false)
     {
         if (steamId64 == 0)
             return null;
         if (!_ready)
-            return UnavailableRejection;
+            return isMapChangeReconnect ? null : UnavailableRejection;
         return GetActive(PenaltyType.Ban, steamId64) is { } ban ? BanMessage(ban) : null;
     }
 

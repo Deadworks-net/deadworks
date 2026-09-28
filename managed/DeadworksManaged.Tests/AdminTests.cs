@@ -179,6 +179,14 @@ public sealed class PenaltyTests : AdminTestBase
     }
 
     [Fact]
+    public void Players_reloading_after_a_map_change_are_not_refused_while_the_ban_list_is_down()
+    {
+        PenaltyManager.Initialize(Path.Combine(Dir, "penalties"), "mysql");
+        Assert.Equal(PenaltyManager.UnavailableRejection, PenaltyManager.ConnectRejection(Lapka));
+        Assert.Null(PenaltyManager.ConnectRejection(Lapka, isMapChangeReconnect: true));
+    }
+
+    [Fact]
     public void A_configured_penalty_store_that_is_not_registered_fails_closed()
     {
         PenaltyManager.Initialize(Path.Combine(Dir, "penalties"), "mysql");

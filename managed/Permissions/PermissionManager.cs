@@ -495,8 +495,11 @@ internal static class PermissionManager
             return;
         lock (_lock)
         {
+            // A map change runs connect again for everyone staying, with no disconnect in between. The engine keeps
+            // their confirmation, so OnClientAuthorized isn't raised a second time for the same player.
+            if (_slotSteamIds[slot] != steamId64)
+                _slotAuthorizedRaised[slot] = false;
             _slotSteamIds[slot] = steamId64;
-            _slotAuthorizedRaised[slot] = false;
         }
         if (steamId64 != 0)
             EnsurePlayerLoaded(steamId64);
