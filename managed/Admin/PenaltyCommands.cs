@@ -14,6 +14,6 @@ internal sealed class PenaltyCommands : DeadworksPluginBase
         AdminActivity.Log(caller, ok ? "reloaded penalties" : "tried to reload penalties, which failed");
         caller.PrintToConsole(ok
             ? "Reloaded penalties."
-            : "Failed to reload penalties; the server console has details. The previous ones are still in force.");
+            : $"Failed to reload penalties: {PenaltyManager.LastLoadError?.TrimEnd('.') ?? "the server console has details"}. The previous ones are still in force.");
     }
 }

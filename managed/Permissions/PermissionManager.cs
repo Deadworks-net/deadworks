@@ -103,6 +103,8 @@ internal static class PermissionManager
             Array.Clear(_slotAuthorizedRaised);
             _startupComplete = false;
             _warnedUndeclared.Clear();
+            _rolesLoaded = false;
+            LastLoadError = null;
         }
 
         PermissionManifest.Initialize(permissionsDir);
@@ -123,6 +125,21 @@ internal static class PermissionManager
 
     // --- Loading ---
 
+    /// <summary>Why the last load of roles and players failed, or null if it worked; for replies to staff who can't see the console.</summary>
+    public static string? LastLoadError { get; private set; }
+
+    // Whether roles have ever loaded: failing before that means nobody has any role at all, which deserves an ERROR.
+    private static bool _rolesLoaded;
+
+    private static void ReportLoadFailure(string? reason)
+    {
+        LastLoadError = reason ?? "unknown error";
+        Console.WriteLine(_rolesLoaded
+            ? $"[Permissions] Failed to load permissions, keeping the previous ones: {LastLoadError}"
+            : $"[Permissions] ERROR: failed to load permissions: {LastLoadError.TrimEnd('.')}. Nobody has any roles until it's fixed and "
+              + "dw_perm_reload is run; the server console still works.");
+    }
+
     /// <summary>Re-reads roles, players and overrides from the active store. Returns false if anything failed to load.</summary>
     public static bool Reload()
     {
@@ -139,7 +156,7 @@ internal static class PermissionManager
         }
         catch (Exception ex)
         {
-            Console.WriteLine($"[Permissions] Failed to load permissions: {ex.Message}");
+            ReportLoadFailure(ex.Message);
             return false;
         }
 
@@ -158,7 +175,7 @@ internal static class PermissionManager
     {
         if (!task.IsCompletedSuccessfully)
         {
-            Console.WriteLine($"[Permissions] Failed to load permissions, keeping the previous ones: {task.Exception?.GetBaseException().Message}");
+            ReportLoadFailure(task.Exception?.GetBaseException().Message);
             return false;
         }
 
@@ -169,7 +186,7 @@ internal static class PermissionManager
         }
         catch (Exception ex)
         {
-            Console.WriteLine($"[Permissions] Failed to load permissions, keeping the previous ones: {ex.Message}");
+            ReportLoadFailure(ex.Message);
             return false;
         }
 
@@ -180,6 +197,8 @@ internal static class PermissionManager
                 return false;
 
             _roles = roles;
+            _rolesLoaded = true;
+            LastLoadError = null;
             _players.Clear();
             _loading.Clear();
             _retryAfter.Clear();

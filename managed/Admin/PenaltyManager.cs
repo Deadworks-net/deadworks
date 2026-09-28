@@ -80,6 +80,17 @@ internal static class PenaltyManager
 
     // --- Loading ---
 
+    /// <summary>Why the last load of penalties failed, or null if it worked; for replies to staff who can't see the console.</summary>
+    public static string? LastLoadError { get; private set; }
+
+    private static void ReportLoadFailure(string? reason)
+    {
+        LastLoadError = reason ?? "unknown error";
+        Console.WriteLine(_ready
+            ? $"[Penalties] Failed to load penalties, keeping the previous ones: {LastLoadError}"
+            : $"[Penalties] ERROR: failed to load penalties: {LastLoadError.TrimEnd('.')}. New players can't join until they load; run dw_penalties_reload once it's fixed.");
+    }
+
     public static bool Reload()
     {
         var store = _store;
@@ -93,9 +104,7 @@ internal static class PenaltyManager
         }
         catch (Exception ex)
         {
-            Console.WriteLine(_ready
-                ? $"[Penalties] Failed to load penalties, keeping the previous ones: {ex.Message}"
-                : $"[Penalties] ERROR: failed to load penalties: {ex.Message}. New players can't join until they load; run dw_penalties_reload once it's fixed.");
+            ReportLoadFailure(ex.Message);
             return false;
         }
 
@@ -113,10 +122,7 @@ internal static class PenaltyManager
     {
         if (!task.IsCompletedSuccessfully)
         {
-            var reason = task.Exception?.GetBaseException().Message;
-            Console.WriteLine(_ready
-                ? $"[Penalties] Failed to load penalties, keeping the previous ones: {reason}"
-                : $"[Penalties] ERROR: failed to load penalties: {reason}. New players can't join until they load; run dw_penalties_reload once it's fixed.");
+            ReportLoadFailure(task.Exception?.GetBaseException().Message);
             return false;
         }
 
@@ -128,6 +134,7 @@ internal static class PenaltyManager
             _active = task.Result.Where(p => p.IsActiveAt(now)).ToList();
             RefreshMutes();
             _ready = true;
+            LastLoadError = null;
         }
         Console.WriteLine($"[Penalties] Loaded {_active.Count} active penalties from the '{_storeName}' store");
 

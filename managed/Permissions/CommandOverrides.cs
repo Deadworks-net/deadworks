@@ -42,6 +42,9 @@ internal static class CommandOverrides
     /// </summary>
     public static bool Unreadable { get; private set; }
 
+    /// <summary>Why overrides.jsonc last failed to load, or null if it loaded.</summary>
+    public static string? LastError { get; private set; }
+
     /// <summary>Reads overrides.jsonc. Returns false if it has an error, keeping the previous overrides if there are any.</summary>
     public static bool Load(string path)
     {
@@ -54,10 +57,12 @@ internal static class CommandOverrides
             var parsed = JsonSerializer.Deserialize<OverridesFile>(text, ReadOptions);
             UnknownJsonKeys.Warn(text, typeof(OverridesFile), Path.GetFileName(path), "[Permissions] WARNING:");
             Set(parsed?.Commands ?? []);
+            LastError = null;
             return true;
         }
         catch (Exception ex)
         {
+            LastError = $"{Path.GetFileName(path)}: {ex.Message}";
             if (_loadedOnce)
             {
                 Console.WriteLine($"[Permissions] Failed to parse {Path.GetFileName(path)}, keeping the previous overrides: {ex.Message}");

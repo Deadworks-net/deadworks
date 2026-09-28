@@ -18,9 +18,11 @@ internal sealed class PermissionCommands : DeadworksPluginBase
     {
         var ok = PermissionManager.Reload();
         AdminActivity.Log(caller, ok ? "reloaded permissions" : "tried to reload permissions, which failed");
+        // Say what's wrong: staff on a hosted server can't see its console.
+        var error = PermissionManager.LastLoadError ?? CommandOverrides.LastError;
         caller.PrintToConsole(ok
             ? "Reloaded permissions."
-            : "Failed to reload permissions; the server console has details. The previous settings are still in use.");
+            : $"Failed to reload permissions: {error?.TrimEnd('.') ?? "the server console has details"}. The previous settings are still in use.");
     }
 
     [Command("role_list", Description = "List roles with their immunity and permissions", Permission = View, ConsoleOnly = true)]

@@ -520,6 +520,19 @@ public sealed class PermissionManagerTests : IDisposable
     }
 
     [Fact]
+    public void A_failed_reload_keeps_the_previous_roles_and_says_why()
+    {
+        File.AppendAllText(Path.Combine(_dir, "players.jsonc"), "oops");
+        Assert.False(PermissionManager.Reload());
+        Assert.StartsWith("players.jsonc:", PermissionManager.LastLoadError);
+        Assert.True(Permissions.Has(Admin, "server.rcon")); // still the previous settings
+
+        File.WriteAllText(Path.Combine(_dir, "players.jsonc"), File.ReadAllText(Path.Combine(_dir, "players.jsonc"))[..^"oops".Length]);
+        Assert.True(PermissionManager.Reload());
+        Assert.Null(PermissionManager.LastLoadError);
+    }
+
+    [Fact]
     public void Saved_grants_persist_and_survive_reload()
     {
         Assert.Null(Change(Nobody, PermissionManager.ChangeKind.GrantRole, "moderator", temporary: false, "newbie"));
