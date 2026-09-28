@@ -147,7 +147,10 @@ public static class EntryPoint
     {
         // A mute is core's to enforce, like a gag: the voice is dropped before it's relayed or any plugin sees it.
         if (AdminSystem.PenaltyManager.DropsVoice(senderSlot, msgId))
+        {
+            AdminSystem.PenaltyManager.NoteMutedVoice(senderSlot);
             return (int)HookResult.Stop;
+        }
 
         var span = new ReadOnlySpan<byte>(protoBytes, protoLen);
         var result = PluginLoader.DispatchNetMessageIncoming(senderSlot, msgId, span);

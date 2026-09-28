@@ -33,7 +33,7 @@ public sealed partial class AdminPlugin
         var replacing = CheckReplace(caller, PenaltyType.Ban, id, name ?? id.ToString(), duration, liftPermission: Perm.Unban);
         // Adding the ban kicks them, so it goes last; it also refuses players Steam hasn't verified yet.
         var penalty = Penalties.Add(PenaltyType.Ban, id, duration, why, caller, name);
-        AdminActivity.Show(caller, $"banned {name ?? id.ToString()} {DescribeDuration(duration)}: {why}{replacing}", details: $"target={id} penalty={penalty.Id}");
+        Announce(caller, name, id, $"banned {name ?? id.ToString()} {DescribeDuration(duration)}: {why}{replacing}", $"target={id} penalty={penalty.Id}");
     }
 
     [Command("unban", Description = "Lift a ban: unban <steamid> [reason]", Permission = Perm.Unban, SuppressChat = true)]
@@ -79,7 +79,7 @@ public sealed partial class AdminPlugin
         var (id, name) = PlayerOrSteamId(caller, player, Noun(type));
         var replacing = CheckReplace(caller, type, id, name ?? id.ToString(), duration, liftPermission: null);
         Penalties.Add(type, id, duration, why, caller, name);
-        AdminActivity.Show(caller, $"{verb} {name ?? id.ToString()} {DescribeDuration(duration)}: {why}{replacing}", details: $"target={id}");
+        Announce(caller, name, id, $"{verb} {name ?? id.ToString()} {DescribeDuration(duration)}: {why}{replacing}", $"target={id}");
     }
 
     /// <summary>ungag and unmute: whoever gave it, online or not.</summary>
@@ -89,7 +89,7 @@ public sealed partial class AdminPlugin
         var why = string.Join(' ', reason).Trim();
         if (!Penalties.Remove(type, id, caller, why))
             throw new CommandException($"{name ?? id.ToString()} isn't {Past(type)}.");
-        AdminActivity.Show(caller, $"un{Past(type)} {name ?? id.ToString()}{(why.Length > 0 ? $": {why}" : "")}", details: $"target={id}");
+        Announce(caller, name, id, $"un{Past(type)} {name ?? id.ToString()}{(why.Length > 0 ? $": {why}" : "")}", $"target={id}");
     }
 
     [Command("mutes", Description = "List active mutes", Permission = Perm.Mute, SuppressChat = true)]

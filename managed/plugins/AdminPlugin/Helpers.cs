@@ -76,6 +76,21 @@ public sealed partial class AdminPlugin
         return (SteamIdOf(target), target.PlayerName);
     }
 
+    /// <summary>
+    /// Announces an action on a player, or, for a SteamID that isn't on the server (no name), only logs it and tells the
+    /// caller: everyone else would see "ADMIN: banned 76561197960287930", which means nothing to them.
+    /// </summary>
+    private static void Announce(Caller caller, string? name, ulong id, string action, string details)
+    {
+        if (name != null)
+        {
+            AdminActivity.Show(caller, action, details: details);
+            return;
+        }
+        AdminActivity.Log(caller, action, details: details);
+        caller.Reply($"{char.ToUpperInvariant(action[0])}{action[1..]}.");
+    }
+
     private static string Noun(PenaltyType type) => type.ToString().ToLowerInvariant();
 
     private static string Past(PenaltyType type) => type switch

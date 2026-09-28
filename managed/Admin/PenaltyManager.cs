@@ -376,6 +376,32 @@ internal static class PenaltyManager
     public static string GagMessage(Penalty gag)
         => $"You are gagged {gag.DescribeRemaining(Now())} and can't use chat.{(gag.Reason.Length > 0 ? $" Reason: {gag.Reason}" : "")}";
 
+    public static string MuteMessage(Penalty mute)
+        => $"You are muted {mute.DescribeRemaining(Now())}: nobody can hear you on voice chat.{(mute.Reason.Length > 0 ? $" Reason: {mute.Reason}" : "")}";
+
+    private static readonly long[] _mutedToldAt = new long[Players.MaxSlot];
+
+    /// <summary>
+    /// Tells a muted player who is talking that nobody hears them, at most every 30 seconds. Otherwise they'd think
+    /// their mic was broken, especially if they were muted while away. Called from the voice hook, so the message
+    /// itself goes out on the next tick.
+    /// </summary>
+    public static void NoteMutedVoice(int slot)
+    {
+        if ((uint)slot >= (uint)_mutedToldAt.Length)
+            return;
+        var now = Environment.TickCount64;
+        if (_mutedToldAt[slot] != 0 && now - _mutedToldAt[slot] < 30_000)
+            return;
+        _mutedToldAt[slot] = now;
+        var id = PermissionManager.GetSlotSteamId(slot);
+        TimerEngine.EnqueueNextTick(() =>
+        {
+            if (_mutes.TryGetValue(id, out var mute) && PermissionManager.GetSlotSteamId(slot) == id && Players.FromSlot(slot) is { } player)
+                Chat.PrintToChat(player, MuteMessage(mute));
+        });
+    }
+
     // --- Helpers ---
 
     private static void Raise(Action<Penalty>? handlers, Penalty penalty)
