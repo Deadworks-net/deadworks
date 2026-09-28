@@ -228,6 +228,33 @@ public sealed class PenaltyTests : AdminTestBase
     }
 
     [Fact]
+    public void Muted_players_voice_is_dropped()
+    {
+        const int voice = (int)CLC_Messages.ClcVoiceData;
+        PermissionManager.SetSlotSteamIdForTests(3, Lapka);
+        Assert.False(PenaltyManager.DropsVoice(3, voice));
+
+        Penalties.Add(PenaltyType.Mute, Lapka, TimeSpan.FromMinutes(5), "mic spam", by: Caller.Console);
+        Assert.True(PenaltyManager.DropsVoice(3, voice));
+        Assert.False(PenaltyManager.DropsVoice(3, (int)CLC_Messages.ClcMove)); // only voice
+        Assert.False(PenaltyManager.DropsVoice(4, voice));                       // only them
+
+        Clock = Clock.AddMinutes(6); // expired, even before anything sweeps it
+        Assert.False(PenaltyManager.DropsVoice(3, voice));
+    }
+
+    [Fact]
+    public void Unmuting_lets_them_talk_again()
+    {
+        const int voice = (int)CLC_Messages.ClcVoiceData;
+        PermissionManager.SetSlotSteamIdForTests(3, Lapka);
+        Penalties.Add(PenaltyType.Mute, Lapka, null, "", by: Caller.Console);
+        Assert.True(PenaltyManager.DropsVoice(3, voice));
+        Assert.True(Penalties.Remove(PenaltyType.Mute, Lapka, Caller.Console));
+        Assert.False(PenaltyManager.DropsVoice(3, voice));
+    }
+
+    [Fact]
     public void Gagged_players_chat_is_blocked_before_plugins_see_it()
     {
         PermissionManager.SetSlotSteamIdForTests(3, Lapka);
@@ -358,7 +385,7 @@ public sealed class AdminPluginTests : AdminTestBase
         var text = File.ReadAllText(Path.Combine(Dir, "permissions", "generated", "AdminPlugin.jsonc"));
         foreach (var perm in new[]
                  {
-                     "admin.moderation.kick", "admin.moderation.ban", "admin.moderation.unban", "admin.moderation.gag",
+                     "admin.moderation.kick", "admin.moderation.ban", "admin.moderation.unban", "admin.moderation.gag", "admin.moderation.mute",
                      "admin.moderation.slay", "admin.moderation.who",
                      "admin.server.map", "admin.server.rcon", "admin.server.cvar", "admin.server.config"
                  })

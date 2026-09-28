@@ -57,8 +57,9 @@ public sealed record Penalty
 }
 
 /// <summary>
-/// Bans, gags and mutes. Deadworks stores and enforces bans and gags: banned players can't join, and gagged players'
-/// chat never reaches chat or any plugin. Mutes are stored but not enforced yet. Plugins only decide when to add or
+/// Bans, gags and mutes. Deadworks stores and enforces all three: banned players can't join, gagged players' chat
+/// never reaches chat or any plugin, and muted players' voice is dropped before anyone hears it or any plugin sees it.
+/// Plugins only decide when to add or
 /// remove them, and hear about changes through <see cref="IDeadworksPlugin.OnPenaltyAdded"/> and
 /// <see cref="IDeadworksPlugin.OnPenaltyRemoved"/>. Immunity is not checked here; check <see cref="Caller.CanTarget"/>
 /// or <see cref="Permissions.CanTarget(ulong, ulong)"/> before penalizing someone on another player's behalf.

@@ -87,6 +87,31 @@ public sealed partial class AdminPlugin
     [Command("gags", Description = "List active gags", Permission = Perm.Gag, SuppressChat = true)]
     public void CmdGags(Caller caller) => ListActive(caller, PenaltyType.Gag, "gags");
 
+    [Command("mute", Description = "Stop a player using voice chat: mute <player> <minutes> [reason], 0 = permanent", Permission = Perm.Mute, SuppressChat = true)]
+    public void CmdMute(Caller caller, Target target, int minutes, params string[] reason)
+    {
+        var player = OnePlayer(target, "mute");
+        var id = SteamIdOf(player);
+        var duration = Duration(minutes);
+        var why = Reason(reason, Config.DefaultMuteReason);
+
+        Penalties.Add(PenaltyType.Mute, id, duration, why, caller, player.PlayerName);
+        AdminActivity.Show(caller, $"muted {player.PlayerName} {DescribeDuration(duration)}: {why}", details: $"target={id}");
+    }
+
+    [Command("unmute", Description = "Let a muted player use voice chat again: unmute <player>", Permission = Perm.Mute, SuppressChat = true)]
+    public void CmdUnmute(Caller caller, Target target)
+    {
+        var player = OnePlayer(target, "unmute");
+        var id = SteamIdOf(player);
+        if (!Penalties.Remove(PenaltyType.Mute, id, caller))
+            throw new CommandException($"{player.PlayerName} isn't muted.");
+        AdminActivity.Show(caller, $"unmuted {player.PlayerName}", details: $"target={id}");
+    }
+
+    [Command("mutes", Description = "List active mutes", Permission = Perm.Mute, SuppressChat = true)]
+    public void CmdMutes(Caller caller) => ListActive(caller, PenaltyType.Mute, "mutes");
+
     [Command("slay", Description = "Kill a player's hero: slay <player>", Permission = Perm.Slay, SuppressChat = true)]
     public void CmdSlay(Caller caller, Target target)
     {
@@ -118,6 +143,7 @@ public sealed partial class AdminPlugin
             var flags = new List<string>();
             if (id != 0 && !Players.IsAuthenticated(p.Slot)) flags.Add("not Steam-verified");
             if (id != 0 && Penalties.IsGagged(id)) flags.Add("gagged");
+            if (id != 0 && Penalties.IsMuted(id)) flags.Add("muted");
             var suffix = flags.Count > 0 ? $" [{string.Join(", ", flags)}]" : "";
             lines.Add($"  #{p.Slot} {p.PlayerName} ({(id == 0 ? "bot" : id)}) team {p.TeamNum}, {roles}{suffix}");
         }

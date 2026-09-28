@@ -145,6 +145,10 @@ public static class EntryPoint
     [UnmanagedCallersOnly]
     public static unsafe int OnNetMessageIncoming(int senderSlot, int msgId, byte* protoBytes, int protoLen)
     {
+        // A mute is core's to enforce, like a gag: the voice is dropped before it's relayed or any plugin sees it.
+        if (AdminSystem.PenaltyManager.DropsVoice(senderSlot, msgId))
+            return (int)HookResult.Stop;
+
         var span = new ReadOnlySpan<byte>(protoBytes, protoLen);
         var result = PluginLoader.DispatchNetMessageIncoming(senderSlot, msgId, span);
         if (result >= HookResult.Stop)

@@ -15,7 +15,10 @@ public sealed class AdminPluginConfig : IConfig
     [JsonPropertyName("default_gag_reason")]
     public string DefaultGagReason { get; set; } = "Gagged by an admin";
 
-    /// <summary>When true, ban and gag refuse to run without a reason.</summary>
+    [JsonPropertyName("default_mute_reason")]
+    public string DefaultMuteReason { get; set; } = "Muted by an admin";
+
+    /// <summary>When true, ban, gag and mute refuse to run without a reason.</summary>
     [JsonPropertyName("require_reason")]
     public bool RequireReason { get; set; }
 
@@ -51,6 +54,7 @@ internal static class Perm
     public const string Ban = "admin.moderation.ban";
     public const string Unban = "admin.moderation.unban";
     public const string Gag = "admin.moderation.gag";
+    public const string Mute = "admin.moderation.mute";
     public const string Slay = "admin.moderation.slay";
     public const string Who = "admin.moderation.who";
 

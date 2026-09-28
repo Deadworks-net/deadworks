@@ -26,6 +26,9 @@ internal static class PenaltyManager
 
     private static readonly Lock _lock = new();
     private static List<Penalty> _active = [];
+    // Active mutes by SteamID, rebuilt whenever _active changes: voice is checked many times a second per speaker, so
+    // that check is one lookup, with no lock, sweep or allocation.
+    private static volatile Dictionary<ulong, Penalty> _mutes = [];
     private static JsonPenaltyStore? _jsonStore;
     private static IPenaltyStore? _store;
     private static string _storeName = JsonPenaltyStore.StoreName;
@@ -57,6 +60,7 @@ internal static class PenaltyManager
         {
             _registered.Clear();
             _active = [];
+            RefreshMutes();
         }
         Penalties.Backend = new Backend();
         if (_storeName.Equals(JsonPenaltyStore.StoreName, StringComparison.OrdinalIgnoreCase))
@@ -118,6 +122,7 @@ internal static class PenaltyManager
             if (generation != _generation)
                 return false;
             _active = task.Result.Where(p => p.IsActiveAt(now)).ToList();
+            RefreshMutes();
             _ready = true;
         }
         Console.WriteLine($"[Penalties] Loaded {_active.Count} active penalties from the '{_storeName}' store");
@@ -178,6 +183,7 @@ internal static class PenaltyManager
                 _active.RemoveAt(index);
             }
             _active.Add(penalty);
+            RefreshMutes();
         }
 
         if (replaced != null)
@@ -206,6 +212,7 @@ internal static class PenaltyManager
             {
                 removed = _active[index] with { RemovedUtc = Now(), RemovedBySteamId64 = adminId };
                 _active.RemoveAt(index);
+                RefreshMutes();
             }
         }
 
@@ -259,6 +266,7 @@ internal static class PenaltyManager
             if (expired.Count == 0)
                 return;
             _active.RemoveAll(p => !p.IsActiveAt(now));
+            RefreshMutes();
         }
         foreach (var penalty in expired)
             Raise(Removed, penalty);
@@ -297,6 +305,25 @@ internal static class PenaltyManager
         var id = PermissionManager.GetSlotSteamId(slot);
         return id == 0 ? null : GetActive(PenaltyType.Gag, id);
     }
+
+    /// <summary>
+    /// Whether an incoming message is voice from a muted player, to be dropped. Voice arrives as clc_VoiceData
+    /// many times a second while someone talks, and a dropped packet is simply never relayed to anyone.
+    /// </summary>
+    public static bool DropsVoice(int senderSlot, int msgId)
+    {
+        if (msgId != (int)CLC_Messages.ClcVoiceData || senderSlot < 0)
+            return false;
+        var mutes = _mutes;
+        if (mutes.Count == 0)
+            return false;
+        var id = PermissionManager.GetSlotSteamId(senderSlot);
+        return id != 0 && mutes.TryGetValue(id, out var mute) && mute.IsActiveAt(Now());
+    }
+
+    /// <summary>Call with <see cref="_lock"/> held, after changing <see cref="_active"/>.</summary>
+    private static void RefreshMutes()
+        => _mutes = _active.Where(p => p.Type == PenaltyType.Mute).ToDictionary(p => p.SteamId64);
 
     public static string BanMessage(Penalty ban)
         => $"You are banned from this server {ban.DescribeRemaining(Now())}.{(ban.Reason.Length > 0 ? $" Reason: {ban.Reason}" : "")}";
