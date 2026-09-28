@@ -69,28 +69,11 @@ public static class Players {
 	internal static Func<int, bool>? AuthenticatedResolver;
 
 	/// <summary>
-	/// Whether Steam has validated the player in <paramref name="slot"/>, so their SteamID can be trusted. Always true
-	/// when <c>permissions.require_steam_auth</c> is off in <c>deadworks.jsonc</c>.
+	/// Whether Steam has confirmed the player in <paramref name="slot"/>, so their roles and permissions apply. Always true
+	/// when <c>sv_lan</c> is on or <c>permissions.require_steam_auth</c> is off in <c>deadworks.jsonc</c>.
+	/// <see cref="IDeadworksPlugin.OnClientAuthorized"/> fires when it becomes true.
 	/// </summary>
 	public static bool IsAuthenticated(int slot) => AuthenticatedResolver?.Invoke(slot) ?? false;
-
-	/// <summary>
-	/// Raised once per connection when Steam validates a player (slot, SteamID64), usually a few seconds after they
-	/// connect. Unsubscribe in <see cref="IDeadworksPlugin.OnUnload"/>.
-	/// </summary>
-	public static event Action<int, ulong>? ClientAuthorized;
-
-	internal static void RaiseClientAuthorized(int slot, ulong steamId64) {
-		var handlers = ClientAuthorized;
-		if (handlers == null) return;
-		foreach (var handler in handlers.GetInvocationList()) {
-			try {
-				((Action<int, ulong>)handler)(slot, steamId64);
-			} catch (Exception ex) {
-				Console.WriteLine($"[Players] ClientAuthorized handler threw: {ex.Message}");
-			}
-		}
-	}
 
 	/// <summary>Returns whether the given slot is marked as fully connected.</summary>
 	public static bool IsConnected(int slot) => (uint)slot < MaxSlot && _connected[slot];

@@ -21,9 +21,10 @@ internal static class AdminTick
         {
             // The SteamID a player connects with isn't checked until now, so bans get a second look.
             PenaltyManager.EnforceBan(slot);
-            Players.RaiseClientAuthorized(slot, steamId64);
+            PluginLoader.DispatchClientAuthorized(new ClientAuthorizedEvent { Slot = slot, SteamId64 = steamId64 });
         }
 
         PenaltyManager.Sweep();
+        CommandCapture.Sweep();
     }
 }

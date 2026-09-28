@@ -165,4 +165,25 @@ public interface IDeadworksPlugin {
 	/// <see cref="GameRules.ChangeGameState"/> are not vetoable. Default: allow.
 	/// </summary>
 	bool OnGameStateChanging(EGameState currentState, EGameState newState) => true;
+
+	/// <summary>
+	/// Called once per connection when Steam confirms who a player is, usually a few seconds after they connect.
+	/// Until then they only have the <c>default</c> role.
+	/// </summary>
+	void OnClientAuthorized(ClientAuthorizedEvent args) { }
+
+	/// <summary>
+	/// Called after permissions change: a reload (<paramref name="steamId64"/> is null, meaning everyone) or a grant or
+	/// revoke for one player. Use it to refresh anything that depends on who can do what, such as admin menus.
+	/// </summary>
+	void OnPermissionsChanged(ulong? steamId64) { }
+
+	/// <summary>Called after a ban, gag or mute is added, by any plugin.</summary>
+	void OnPenaltyAdded(Penalty penalty) { }
+
+	/// <summary>Called after a penalty ends: lifted, replaced by a newer one, or run out. The penalty passed is the ended one.</summary>
+	void OnPenaltyRemoved(Penalty penalty) { }
+
+	/// <summary>Called for every action written to the admin log, e.g. to forward it to Discord.</summary>
+	void OnAdminAction(AdminLogEntry entry) { }
 }

@@ -92,6 +92,16 @@ internal static partial class PluginLoader
         TimerRegistry.Initialize();
         DeadworksConfig.Initialize();
         ConfigManager.Initialize();
+        // Core's own events reach plugins as IDeadworksPlugin overrides, which unload with the plugin.
+        // Removing first keeps a second LoadAll from subscribing twice.
+        PermissionSystem.PermissionManager.Changed -= DispatchPermissionsChanged;
+        PermissionSystem.PermissionManager.Changed += DispatchPermissionsChanged;
+        AdminSystem.PenaltyManager.Added -= DispatchPenaltyAdded;
+        AdminSystem.PenaltyManager.Added += DispatchPenaltyAdded;
+        AdminSystem.PenaltyManager.Removed -= DispatchPenaltyRemoved;
+        AdminSystem.PenaltyManager.Removed += DispatchPenaltyRemoved;
+        AdminSystem.AdminActivityService.Logged -= DispatchAdminAction;
+        AdminSystem.AdminActivityService.Logged += DispatchAdminAction;
         PermissionSystem.PermissionManager.Initialize();
         AdminSystem.PenaltyManager.Initialize();
         AdminSystem.AdminActivityService.Initialize();
@@ -484,6 +494,21 @@ internal static partial class PluginLoader
     }
 
     // --- Plugin lifecycle dispatchers ---
+
+    public static void DispatchClientAuthorized(ClientAuthorizedEvent args)
+        => DispatchToPlugins(p => p.OnClientAuthorized(args), nameof(IDeadworksPlugin.OnClientAuthorized));
+
+    private static void DispatchPermissionsChanged(ulong? steamId64)
+        => DispatchToPlugins(p => p.OnPermissionsChanged(steamId64), nameof(IDeadworksPlugin.OnPermissionsChanged));
+
+    private static void DispatchPenaltyAdded(Penalty penalty)
+        => DispatchToPlugins(p => p.OnPenaltyAdded(penalty), nameof(IDeadworksPlugin.OnPenaltyAdded));
+
+    private static void DispatchPenaltyRemoved(Penalty penalty)
+        => DispatchToPlugins(p => p.OnPenaltyRemoved(penalty), nameof(IDeadworksPlugin.OnPenaltyRemoved));
+
+    private static void DispatchAdminAction(AdminLogEntry entry)
+        => DispatchToPlugins(p => p.OnAdminAction(entry), nameof(IDeadworksPlugin.OnAdminAction));
 
     public static void DispatchPrecacheResources()
         => DispatchToPlugins(p => p.OnPrecacheResources(), nameof(IDeadworksPlugin.OnPrecacheResources));

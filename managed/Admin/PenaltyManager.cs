@@ -11,6 +11,19 @@ internal static class PenaltyManager
 {
     private sealed record StoreRegistration(IDeadworksPlugin Owner, string Name, IPenaltyStore Store);
 
+    /// <summary>Stands in for a configured store no plugin has registered. It never loads, so nobody new gets in.</summary>
+    private sealed class UnavailableStore(string name) : IPenaltyStore
+    {
+        private Exception Missing => new InvalidOperationException($"no plugin has registered the '{name}' store");
+        public Task<IReadOnlyList<Penalty>> LoadActiveAsync(CancellationToken ct) => Task.FromException<IReadOnlyList<Penalty>>(Missing);
+        public Task AddAsync(Penalty penalty, CancellationToken ct) => Task.FromException(Missing);
+        public Task UpdateAsync(Penalty penalty, CancellationToken ct) => Task.FromException(Missing);
+        public Task<IReadOnlyList<Penalty>> LoadHistoryAsync(ulong steamId64, CancellationToken ct) => Task.FromResult<IReadOnlyList<Penalty>>([]);
+        public event Action? Changed { add { } remove { } }
+    }
+
+    public const string UnavailableRejection = "This server can't check its ban list right now. Try again in a few minutes.";
+
     private static readonly Lock _lock = new();
     private static List<Penalty> _active = [];
     private static JsonPenaltyStore? _jsonStore;
@@ -18,6 +31,13 @@ internal static class PenaltyManager
     private static string _storeName = JsonPenaltyStore.StoreName;
     private static readonly List<StoreRegistration> _registered = [];
     private static int _generation;
+    // Whether the active store has loaded. Until it has, Deadworks can't know who is banned, so nobody new gets in.
+    private static bool _ready;
+
+    /// <summary>Raised after a penalty is added; the plugin loader forwards it to <see cref="IDeadworksPlugin.OnPenaltyAdded"/>.</summary>
+    internal static event Action<Penalty>? Added;
+    /// <summary>Raised after a penalty ends; forwarded to <see cref="IDeadworksPlugin.OnPenaltyRemoved"/>.</summary>
+    internal static event Action<Penalty>? Removed;
 
     /// <summary>Overridable so tests can move time.</summary>
     internal static Func<DateTime> Now { get; set; } = () => DateTime.UtcNow;
@@ -39,9 +59,15 @@ internal static class PenaltyManager
             _active = [];
         }
         Penalties.Backend = new Backend();
-        if (!_storeName.Equals(JsonPenaltyStore.StoreName, StringComparison.OrdinalIgnoreCase))
-            Console.WriteLine($"[Penalties] Using the JSON store until a plugin registers the '{_storeName}' store");
-        SetStore(_jsonStore);
+        if (_storeName.Equals(JsonPenaltyStore.StoreName, StringComparison.OrdinalIgnoreCase))
+        {
+            SetStore(_jsonStore);
+        }
+        else
+        {
+            Console.WriteLine($"[Penalties] Waiting for a plugin to register the '{_storeName}' store. New players can't join until it does.");
+            SetStore(new UnavailableStore(_storeName));
+        }
     }
 
     // --- Loading ---
@@ -59,7 +85,9 @@ internal static class PenaltyManager
         }
         catch (Exception ex)
         {
-            Console.WriteLine($"[Penalties] Failed to load penalties, keeping the previous ones: {ex.Message}");
+            Console.WriteLine(_ready
+                ? $"[Penalties] Failed to load penalties, keeping the previous ones: {ex.Message}"
+                : $"[Penalties] ERROR: failed to load penalties: {ex.Message}. New players can't join until they load; run dw_penalties_reload once it's fixed.");
             return false;
         }
 
@@ -77,7 +105,10 @@ internal static class PenaltyManager
     {
         if (!task.IsCompletedSuccessfully)
         {
-            Console.WriteLine($"[Penalties] Failed to load penalties, keeping the previous ones: {task.Exception?.GetBaseException().Message}");
+            var reason = task.Exception?.GetBaseException().Message;
+            Console.WriteLine(_ready
+                ? $"[Penalties] Failed to load penalties, keeping the previous ones: {reason}"
+                : $"[Penalties] ERROR: failed to load penalties: {reason}. New players can't join until they load; run dw_penalties_reload once it's fixed.");
             return false;
         }
 
@@ -87,6 +118,7 @@ internal static class PenaltyManager
             if (generation != _generation)
                 return false;
             _active = task.Result.Where(p => p.IsActiveAt(now)).ToList();
+            _ready = true;
         }
         Console.WriteLine($"[Penalties] Loaded {_active.Count} active penalties from the '{_storeName}' store");
 
@@ -98,14 +130,30 @@ internal static class PenaltyManager
 
     // --- Changes ---
 
-    public static Penalty Add(PenaltyType type, ulong steamId64, TimeSpan? duration, string reason,
-        CCitadelPlayerController? admin, string? playerName)
+    /// <summary>Why penalties can't be changed right now, or null. A penalty that can't be saved would vanish on restart.</summary>
+    private static string? CantSave()
+    {
+        if (!_ready)
+            return $"Penalties can't be changed right now: the '{_storeName}' store isn't available.";
+        if (ReferenceEquals(_store, _jsonStore) && _jsonStore!.Unreadable)
+            return "Penalties can't be changed right now: penalties.jsonc has an error. Fix it and run dw_penalties_reload.";
+        return null;
+    }
+
+    public static Penalty Add(PenaltyType type, ulong steamId64, TimeSpan? duration, string reason, Caller by, string? playerName)
     {
         if (steamId64 == 0)
-            throw new ArgumentException("A penalty needs a SteamID.", nameof(steamId64));
+            throw new ArgumentException("A penalty needs a SteamID; bots don't have one.", nameof(steamId64));
+        if (CantSave() is { } cantSave)
+            throw new CommandException(cantSave);
+
+        // Until Steam confirms a connected player, the SteamID they claim isn't safe to record a penalty against.
+        var slot = PermissionManager.FindSlot(steamId64);
+        if (slot >= 0 && !PermissionManager.IsAuthorized(slot))
+            throw new CommandException($"{playerName ?? FindOnline(steamId64)?.PlayerName ?? steamId64.ToString()} hasn't been verified by Steam yet. Try again in a moment.");
 
         var now = Now();
-        var (adminId, adminName) = Identify(admin);
+        var (adminId, adminName) = (by.SteamId64, by.Name);
         playerName ??= FindOnline(steamId64)?.PlayerName;
 
         var penalty = new Penalty
@@ -137,17 +185,19 @@ internal static class PenaltyManager
         Persist(s => s.AddAsync(penalty, CancellationToken.None));
 
         if (replaced != null)
-            Penalties.RaiseRemoved(replaced);
-        Penalties.RaiseAdded(penalty);
+            Raise(Removed, replaced);
+        Raise(Added, penalty);
 
         if (type == PenaltyType.Ban && FindOnline(steamId64) is { } online)
             Server.Kick(online.Slot, BanMessage(penalty));
         return penalty;
     }
 
-    public static bool Remove(PenaltyType type, ulong steamId64, CCitadelPlayerController? admin)
+    public static bool Remove(PenaltyType type, ulong steamId64, Caller by)
     {
-        var (adminId, _) = Identify(admin);
+        if (CantSave() is { } cantSave)
+            throw new CommandException(cantSave);
+        var adminId = by.SteamId64;
         Penalty? removed = null;
         lock (_lock)
         {
@@ -162,7 +212,7 @@ internal static class PenaltyManager
         if (removed == null)
             return false;
         Persist(s => s.UpdateAsync(removed, CancellationToken.None));
-        Penalties.RaiseRemoved(removed);
+        Raise(Removed, removed);
         return true;
     }
 
@@ -198,7 +248,7 @@ internal static class PenaltyManager
             return _active.Where(p => type == null || p.Type == type).OrderBy(p => p.CreatedUtc).ToList();
     }
 
-    /// <summary>Drops penalties that have run out, raising <see cref="Penalties.Removed"/> for each.</summary>
+    /// <summary>Drops penalties that have run out, raising <see cref="Removed"/> for each.</summary>
     public static void Sweep()
     {
         var now = Now();
@@ -211,23 +261,30 @@ internal static class PenaltyManager
             _active.RemoveAll(p => !p.IsActiveAt(now));
         }
         foreach (var penalty in expired)
-            Penalties.RaiseRemoved(penalty);
+            Raise(Removed, penalty);
     }
 
     // --- Enforcement ---
 
     /// <summary>The message to reject a connecting SteamID with, or null to let them in.</summary>
     public static string? ConnectRejection(ulong steamId64)
-        => steamId64 != 0 && GetActive(PenaltyType.Ban, steamId64) is { } ban ? BanMessage(ban) : null;
+    {
+        if (steamId64 == 0)
+            return null;
+        if (!_ready)
+            return UnavailableRejection;
+        return GetActive(PenaltyType.Ban, steamId64) is { } ban ? BanMessage(ban) : null;
+    }
 
     /// <summary>Kicks the player in <paramref name="slot"/> if their SteamID is banned. Called once Steam validates them.</summary>
     public static void EnforceBan(int slot)
     {
+        // Only real bans: a store that's down keeps new players out at connect, but doesn't kick people already here.
         var id = PermissionManager.GetSlotSteamId(slot);
-        if (ConnectRejection(id) is { } message)
+        if (id != 0 && GetActive(PenaltyType.Ban, id) is { } ban)
         {
             Console.WriteLine($"[Penalties] Kicking banned player in slot {slot} ({id})");
-            Server.Kick(slot, message);
+            Server.Kick(slot, BanMessage(ban));
         }
     }
 
@@ -246,8 +303,17 @@ internal static class PenaltyManager
 
     // --- Helpers ---
 
-    private static (ulong Id, string Name) Identify(CCitadelPlayerController? admin)
-        => admin == null ? (0UL, "Console") : (PermissionManager.GetSlotSteamId(admin.Slot), admin.PlayerName);
+    private static void Raise(Action<Penalty>? handlers, Penalty penalty)
+    {
+        try
+        {
+            handlers?.Invoke(penalty);
+        }
+        catch (Exception ex)
+        {
+            Console.WriteLine($"[Penalties] A penalty handler threw: {ex.Message}");
+        }
+    }
 
     private static unsafe CCitadelPlayerController? FindOnline(ulong steamId64)
     {
@@ -270,7 +336,11 @@ internal static class PenaltyManager
         }
         Console.WriteLine($"[Penalties] {owner.Name} registered the '{name}' store");
         if (name.Equals(_storeName, StringComparison.OrdinalIgnoreCase))
-            SetStore(store);
+        {
+            // Loading enforces bans (engine calls), and OnLoad can run off the game thread during hot reload.
+            SetStore(store, reload: false);
+            TimerEngine.EnqueueNextTick(() => Reload());
+        }
     }
 
     public static void UnregisterStoresOwnedBy(IReadOnlyCollection<IDeadworksPlugin> plugins)
@@ -286,27 +356,35 @@ internal static class PenaltyManager
         }
         if (activeRemoved)
         {
-            Console.WriteLine($"[Penalties] The '{_storeName}' store was unloaded; falling back to the JSON store");
-            SetStore(_jsonStore!);
+            // Unloads can run off the game thread (hot reload): stop letting people in now, and reload on the next tick.
+            Console.WriteLine($"[Penalties] The '{_storeName}' store was unloaded. New players can't join until it's back.");
+            SetStore(new UnavailableStore(_storeName), reload: false);
+            TimerEngine.EnqueueNextTick(() => Reload());
         }
     }
 
-    private static void SetStore(IPenaltyStore store)
+    private static void SetStore(IPenaltyStore store, bool reload = true)
     {
         if (_store != null)
             _store.Changed -= OnStoreChanged;
-        _store = store;
+        lock (_lock)
+        {
+            _store = store;
+            _ready = false;
+            ++_generation;
+        }
         store.Changed += OnStoreChanged;
-        Reload();
+        if (reload)
+            Reload();
     }
 
     private static void OnStoreChanged() => TimerEngine.EnqueueNextTick(() => Reload());
 
     private sealed class Backend : IPenaltyBackend
     {
-        public Penalty Add(PenaltyType type, ulong steamId64, TimeSpan? duration, string reason, CCitadelPlayerController? admin, string? playerName)
-            => PenaltyManager.Add(type, steamId64, duration, reason, admin, playerName);
-        public bool Remove(PenaltyType type, ulong steamId64, CCitadelPlayerController? admin) => PenaltyManager.Remove(type, steamId64, admin);
+        public Penalty Add(PenaltyType type, ulong steamId64, TimeSpan? duration, string reason, Caller by, string? playerName)
+            => PenaltyManager.Add(type, steamId64, duration, reason, by, playerName);
+        public bool Remove(PenaltyType type, ulong steamId64, Caller by) => PenaltyManager.Remove(type, steamId64, by);
         public Penalty? GetActive(PenaltyType type, ulong steamId64) => PenaltyManager.GetActive(type, steamId64);
         public IReadOnlyList<Penalty> GetAllActive(PenaltyType? type) => PenaltyManager.GetAllActive(type);
         public Task<IReadOnlyList<Penalty>> GetHistoryAsync(ulong steamId64)

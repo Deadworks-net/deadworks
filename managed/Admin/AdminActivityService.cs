@@ -44,15 +44,24 @@ internal static class AdminActivityService
         return fallback;
     }
 
-    private static void Handle(CCitadelPlayerController? admin, string action, string? details, bool announce)
+    /// <summary>Raised for every logged action; the plugin loader forwards it to <see cref="IDeadworksPlugin.OnAdminAction"/>.</summary>
+    internal static event Action<AdminLogEntry>? Logged;
+
+    private static void Handle(Caller admin, string action, string? details, bool announce)
     {
-        var adminId = admin == null ? 0 : PermissionManager.GetSlotSteamId(admin.Slot);
-        var adminName = admin?.PlayerName ?? "Console";
-        var entry = new AdminLogEntry(Now(), adminId, adminName, action, details);
+        var adminName = admin.Name;
+        var entry = new AdminLogEntry(Now(), admin.SteamId64, adminName, action, details);
 
         Console.WriteLine($"[Admin] {entry}");
         WriteToFile(entry);
-        AdminActivity.RaiseLogged(entry);
+        try
+        {
+            Logged?.Invoke(entry);
+        }
+        catch (Exception ex)
+        {
+            Console.WriteLine($"[AdminActivity] An admin action handler threw: {ex.Message}");
+        }
 
         if (!announce)
             return;

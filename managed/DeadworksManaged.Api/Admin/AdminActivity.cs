@@ -17,43 +17,23 @@ public sealed record AdminLogEntry(DateTime TimeUtc, ulong AdminSteamId64, strin
 /// <summary>
 /// Announces admin actions to players and records them in the admin log, so every admin plugin behaves the same.
 /// Players see "ADMIN: kicked lapka"; holders of <c>deadworks.admin.notify</c> see who did it. Both are configurable
-/// under <c>admin.show_activity</c> in <c>configs/deadworks.jsonc</c>.
+/// under <c>admin.show_activity</c> in <c>configs/deadworks.jsonc</c>. Every entry also reaches
+/// <see cref="IDeadworksPlugin.OnAdminAction"/>.
 /// </summary>
 public static class AdminActivity
 {
-    internal static Action<CCitadelPlayerController?, string, string?, bool>? Backend;
+    internal static Action<Caller, string, string?, bool>? Backend;
 
     /// <summary>
     /// Announces <paramref name="action"/> (e.g. "kicked lapka: spam") and logs it. <paramref name="details"/>, such as
     /// the target's SteamID, goes in the log only.
     /// </summary>
-    public static void Show(CCitadelPlayerController? admin, string action, string? details = null) => Invoke(admin, action, details, announce: true);
+    public static void Show(Caller admin, string action, string? details = null) => Invoke(admin, action, details, announce: true);
 
     /// <summary>Logs <paramref name="action"/> without announcing it, e.g. for rcon or unban.</summary>
-    public static void Log(CCitadelPlayerController? admin, string action, string? details = null) => Invoke(admin, action, details, announce: false);
+    public static void Log(Caller admin, string action, string? details = null) => Invoke(admin, action, details, announce: false);
 
-    /// <summary>Raised for every logged action, e.g. to forward admin actions to Discord.</summary>
-    public static event Action<AdminLogEntry>? Logged;
-
-    internal static void RaiseLogged(AdminLogEntry entry)
-    {
-        var handlers = Logged;
-        if (handlers == null)
-            return;
-        foreach (var handler in handlers.GetInvocationList())
-        {
-            try
-            {
-                ((Action<AdminLogEntry>)handler)(entry);
-            }
-            catch (Exception ex)
-            {
-                Console.WriteLine($"[AdminActivity] Logged handler threw: {ex.Message}");
-            }
-        }
-    }
-
-    private static void Invoke(CCitadelPlayerController? admin, string action, string? details, bool announce)
+    private static void Invoke(Caller admin, string action, string? details, bool announce)
     {
         if (Backend == null)
             throw new InvalidOperationException("Admin activity is not initialized.");

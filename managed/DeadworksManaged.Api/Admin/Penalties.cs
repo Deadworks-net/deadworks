@@ -57,10 +57,11 @@ public sealed record Penalty
 }
 
 /// <summary>
-/// Bans, gags and mutes. Deadworks stores and enforces them: banned players can't join, gagged players' chat never
-/// reaches chat or any plugin, and muted players can't be heard. Plugins only decide when to add or remove them.
-/// Immunity is not checked here; check <see cref="Permissions.CanTarget(CCitadelPlayerController?, CCitadelPlayerController)"/>
-/// before penalizing someone on another player's behalf.
+/// Bans, gags and mutes. Deadworks stores and enforces bans and gags: banned players can't join, and gagged players'
+/// chat never reaches chat or any plugin. Mutes are stored but not enforced yet. Plugins only decide when to add or
+/// remove them, and hear about changes through <see cref="IDeadworksPlugin.OnPenaltyAdded"/> and
+/// <see cref="IDeadworksPlugin.OnPenaltyRemoved"/>. Immunity is not checked here; check <see cref="Caller.CanTarget"/>
+/// or <see cref="Permissions.CanTarget(ulong, ulong)"/> before penalizing someone on another player's behalf.
 /// </summary>
 public static class Penalties
 {
@@ -69,15 +70,17 @@ public static class Penalties
     private static IPenaltyBackend B => Backend ?? throw new InvalidOperationException("Penalty system not initialized.");
 
     /// <summary>
-    /// Adds a penalty. A null <paramref name="duration"/> is permanent. An active penalty of the same type on the same
-    /// player is replaced. Adding a ban kicks the player if they're connected.
+    /// Adds a penalty on behalf of <paramref name="by"/>. A null <paramref name="duration"/> is permanent. An active
+    /// penalty of the same type on the same player is replaced. Adding a ban kicks the player if they're connected.
     /// </summary>
-    public static Penalty Add(PenaltyType type, ulong steamId64, TimeSpan? duration, string reason,
-        CCitadelPlayerController? admin, string? playerName = null)
-        => B.Add(type, steamId64, duration, reason, admin, playerName);
+    /// <exception cref="CommandException">
+    /// The SteamID belongs to a player on the server whom Steam hasn't confirmed yet, so it can't be trusted to penalize.
+    /// </exception>
+    public static Penalty Add(PenaltyType type, ulong steamId64, TimeSpan? duration, string reason, Caller by, string? playerName = null)
+        => B.Add(type, steamId64, duration, reason, by, playerName);
 
-    /// <summary>Lifts the player's active penalty of this type. Returns false if they had none.</summary>
-    public static bool Remove(PenaltyType type, ulong steamId64, CCitadelPlayerController? admin) => B.Remove(type, steamId64, admin);
+    /// <summary>Lifts the player's active penalty of this type on behalf of <paramref name="by"/>. Returns false if they had none.</summary>
+    public static bool Remove(PenaltyType type, ulong steamId64, Caller by) => B.Remove(type, steamId64, by);
 
     /// <summary>The player's active penalty of this type, or null.</summary>
     public static Penalty? GetActive(PenaltyType type, ulong steamId64) => B.GetActive(type, steamId64);
@@ -100,32 +103,6 @@ public static class Penalties
     /// it, and is dropped automatically when <paramref name="owner"/> unloads.
     /// </summary>
     public static void RegisterStore(IDeadworksPlugin owner, string name, IPenaltyStore store) => B.RegisterStore(owner, name, store);
-
-    /// <summary>Raised after a penalty is added.</summary>
-    public static event Action<Penalty>? Added;
-
-    /// <summary>Raised after a penalty is lifted, replaced or runs out. The penalty passed is the ended one.</summary>
-    public static event Action<Penalty>? Removed;
-
-    internal static void RaiseAdded(Penalty penalty) => Raise(Added, penalty, nameof(Added));
-    internal static void RaiseRemoved(Penalty penalty) => Raise(Removed, penalty, nameof(Removed));
-
-    private static void Raise(Action<Penalty>? handlers, Penalty penalty, string name)
-    {
-        if (handlers == null)
-            return;
-        foreach (var handler in handlers.GetInvocationList())
-        {
-            try
-            {
-                ((Action<Penalty>)handler)(penalty);
-            }
-            catch (Exception ex)
-            {
-                Console.WriteLine($"[Penalties] {name} handler threw: {ex.Message}");
-            }
-        }
-    }
 }
 
 /// <summary>
@@ -152,8 +129,8 @@ public interface IPenaltyStore
 
 internal interface IPenaltyBackend
 {
-    Penalty Add(PenaltyType type, ulong steamId64, TimeSpan? duration, string reason, CCitadelPlayerController? admin, string? playerName);
-    bool Remove(PenaltyType type, ulong steamId64, CCitadelPlayerController? admin);
+    Penalty Add(PenaltyType type, ulong steamId64, TimeSpan? duration, string reason, Caller by, string? playerName);
+    bool Remove(PenaltyType type, ulong steamId64, Caller by);
     Penalty? GetActive(PenaltyType type, ulong steamId64);
     IReadOnlyList<Penalty> GetAllActive(PenaltyType? type);
     Task<IReadOnlyList<Penalty>> GetHistoryAsync(ulong steamId64);

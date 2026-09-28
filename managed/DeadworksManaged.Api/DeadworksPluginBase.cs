@@ -45,4 +45,9 @@ public abstract class DeadworksPluginBase : IDeadworksPlugin {
 	public virtual void OnPawnHeroInitialized(CCitadelPlayerPawn pawn) { }
 	public virtual void OnGameStateChanged(EGameState newState) { }
 	public virtual bool OnGameStateChanging(EGameState currentState, EGameState newState) => true;
+	public virtual void OnClientAuthorized(ClientAuthorizedEvent args) { }
+	public virtual void OnPermissionsChanged(ulong? steamId64) { }
+	public virtual void OnPenaltyAdded(Penalty penalty) { }
+	public virtual void OnPenaltyRemoved(Penalty penalty) { }
+	public virtual void OnAdminAction(AdminLogEntry entry) { }
 }

@@ -82,6 +82,12 @@ internal sealed class JsonPenaltyStore : IPenaltyStore
                 _all.Where(p => p.SteamId64 == steamId64).OrderByDescending(p => p.CreatedUtc).ToList());
     }
 
+    /// <summary>True when the file couldn't be read; saving then would lose its history, so nothing is saved.</summary>
+    internal bool Unreadable
+    {
+        get { lock (_lock) return _unreadable; }
+    }
+
     private void Load()
     {
         Directory.CreateDirectory(Path.GetDirectoryName(_path)!);
