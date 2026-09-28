@@ -62,7 +62,8 @@ internal static class UnknownJsonKeys
         }
 
         var known = type.GetProperties(BindingFlags.Public | BindingFlags.Instance)
-            .Where(p => p.GetCustomAttribute<JsonIgnoreAttribute>() == null && p.GetCustomAttribute<JsonExtensionDataAttribute>() == null)
+            // [JsonIgnore] properties still count: older files may carry them (penalties.jsonc's isPermanent), harmlessly.
+            .Where(p => p.GetCustomAttribute<JsonExtensionDataAttribute>() == null)
             // Named as the files write them: an explicit JSON name, otherwise camelCase.
             .ToDictionary(p => p.GetCustomAttribute<JsonPropertyNameAttribute>()?.Name ?? JsonNamingPolicy.CamelCase.ConvertName(p.Name),
                 p => p.PropertyType, StringComparer.OrdinalIgnoreCase);

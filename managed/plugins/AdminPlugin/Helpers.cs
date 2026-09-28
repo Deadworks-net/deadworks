@@ -121,6 +121,26 @@ public sealed partial class AdminPlugin
         return fallback;
     }
 
+    /// <summary>
+    /// One line of someone's record, as needed for an appeal: when, what and for how long it was given, by whom and why,
+    /// and how it ended. "2026-09-26 ban for 1 day by wisp: cheating; lifted early by lapka on 2026-09-27: appeal accepted".
+    /// </summary>
+    internal static string DescribeHistory(Penalty p, DateTime now)
+    {
+        var length = p.ExpiresUtc is { } expires ? DescribeDuration(expires - p.CreatedUtc) : "permanently";
+        var given = $"{p.CreatedUtc:yyyy-MM-dd} {p.Type.ToString().ToLowerInvariant()} {length} by {p.AdminName ?? "Console"}"
+                    + (p.Reason.Length > 0 ? $": {p.Reason}" : "");
+        var ended = p.EndedAt(now) switch
+        {
+            PenaltyEnd.Lifted => $"lifted early by {p.RemovedByName ?? "Console"} on {p.RemovedUtc:yyyy-MM-dd}"
+                                 + (p.RemovalReason is { Length: > 0 } why ? $": {why}" : ""),
+            PenaltyEnd.Replaced => $"replaced by a new {p.Type.ToString().ToLowerInvariant()} on {p.RemovedUtc:yyyy-MM-dd}",
+            PenaltyEnd.Expired => "ran out",
+            _ => p.IsPermanent ? "ACTIVE, permanent" : $"ACTIVE, {p.DescribeRemaining(now)["for ".Length..]} left",
+        };
+        return $"{given}; {ended}";
+    }
+
     private static string Describe(Penalty p, DateTime now)
         => $"{p.PlayerName ?? "unknown player"} ({p.SteamId64}) {p.Type.ToString().ToLowerInvariant()} {p.DescribeRemaining(now)}"
            + $" by {p.AdminName ?? "Console"}{(p.Reason.Length > 0 ? $": {p.Reason}" : "")}";

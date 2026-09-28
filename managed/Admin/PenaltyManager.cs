@@ -194,16 +194,20 @@ internal static class PenaltyManager
             var index = _active.FindIndex(p => p.Type == type && p.SteamId64 == steamId64);
             if (index >= 0)
             {
-                replaced = _active[index] with { RemovedUtc = now, RemovedBySteamId64 = adminId };
+                replaced = _active[index] with { RemovedUtc = now, RemovedBySteamId64 = adminId, RemovedByName = adminName, ReplacedBy = penalty.Id };
                 _active.RemoveAt(index);
             }
             _active.Add(penalty);
             RefreshMutes();
         }
 
-        if (replaced != null)
-            Persist(s => s.UpdateAsync(replaced, CancellationToken.None));
-        Persist(s => s.AddAsync(penalty, CancellationToken.None));
+        // In order: a store that saw the new penalty first could briefly hold two active ones.
+        Persist(async s =>
+        {
+            if (replaced != null)
+                await s.UpdateAsync(replaced, CancellationToken.None);
+            await s.AddAsync(penalty, CancellationToken.None);
+        });
 
         if (replaced != null)
             Raise(Removed, replaced);
@@ -214,7 +218,7 @@ internal static class PenaltyManager
         return penalty;
     }
 
-    public static bool Remove(PenaltyType type, ulong steamId64, Caller by)
+    public static bool Remove(PenaltyType type, ulong steamId64, Caller by, string reason = "")
     {
         if (CantSave() is { } cantSave)
             throw new CommandException(cantSave);
@@ -225,7 +229,11 @@ internal static class PenaltyManager
             var index = _active.FindIndex(p => p.Type == type && p.SteamId64 == steamId64);
             if (index >= 0)
             {
-                removed = _active[index] with { RemovedUtc = Now(), RemovedBySteamId64 = adminId };
+                removed = _active[index] with
+                {
+                    RemovedUtc = Now(), RemovedBySteamId64 = adminId, RemovedByName = by.Name,
+                    RemovalReason = reason.Trim() is { Length: > 0 } why ? why : null
+                };
                 _active.RemoveAt(index);
                 RefreshMutes();
             }
@@ -438,7 +446,7 @@ internal static class PenaltyManager
     {
         public Penalty Add(PenaltyType type, ulong steamId64, TimeSpan? duration, string reason, Caller by, string? playerName)
             => PenaltyManager.Add(type, steamId64, duration, reason, by, playerName);
-        public bool Remove(PenaltyType type, ulong steamId64, Caller by) => PenaltyManager.Remove(type, steamId64, by);
+        public bool Remove(PenaltyType type, ulong steamId64, Caller by, string reason) => PenaltyManager.Remove(type, steamId64, by, reason);
         public Penalty? GetActive(PenaltyType type, ulong steamId64) => PenaltyManager.GetActive(type, steamId64);
         public Penalty? WouldShorten(PenaltyType type, ulong steamId64, TimeSpan? duration) => PenaltyManager.WouldShorten(type, steamId64, duration);
         public IReadOnlyList<Penalty> GetAllActive(PenaltyType? type) => PenaltyManager.GetAllActive(type);

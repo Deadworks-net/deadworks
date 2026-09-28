@@ -399,6 +399,30 @@ public sealed class AdminPluginTests : AdminTestBase
     }
 
     [Fact]
+    public void History_says_how_long_each_penalty_was_and_how_it_ended()
+    {
+        Console_("dw_ban", Lapka.ToString(), "1440", "cheating");
+        Clock = Clock.AddHours(2);
+        Console_("dw_ban", Lapka.ToString(), "60", "reduced");          // replaces the first
+        Console_("dw_unban", Lapka.ToString(), "appeal", "accepted");   // lifts the second
+        Console_("dw_gag", Lapka.ToString(), "5");
+        Clock = Clock.AddMinutes(10);                                    // the gag runs out
+        Console_("dw_mute", Lapka.ToString(), "0");
+
+        var history = Penalties.GetHistoryAsync(Lapka).Result.OrderBy(p => p.CreatedUtc).ToList();
+        Assert.Equal([PenaltyEnd.Replaced, PenaltyEnd.Lifted, PenaltyEnd.Expired, null], history.Select(p => p.EndedAt(Clock)));
+        Assert.Equal(history[1].Id, history[0].ReplacedBy);
+        Assert.Equal("appeal accepted", history[1].RemovalReason);
+
+        var lines = history.Select(p => AdminPlugin.DescribeHistory(p, Clock)).ToList();
+        Assert.Equal("2026-09-26 ban for 1 day by Console: cheating; replaced by a new ban on 2026-09-26", lines[0]);
+        Assert.Equal("2026-09-26 ban for 1 hour by Console: reduced; lifted early by Console on 2026-09-26: appeal accepted", lines[1]);
+        Assert.EndsWith("ran out", lines[2]);
+        Assert.EndsWith("ACTIVE, permanent", lines[3]);
+        Assert.Equal($"unbanned {Lapka}: appeal accepted", Logged.Single(e => e.Action.StartsWith("unbanned")).Action);
+    }
+
+    [Fact]
     public void Gags_and_mutes_work_on_players_who_have_left()
     {
         Console_("dw_gag", "STEAM_0:1:11101", "30", "spam");

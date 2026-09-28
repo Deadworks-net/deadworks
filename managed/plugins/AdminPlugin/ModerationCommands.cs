@@ -36,16 +36,19 @@ public sealed partial class AdminPlugin
         AdminActivity.Show(caller, $"banned {name ?? id.ToString()} {DescribeDuration(duration)}: {why}{replacing}", details: $"target={id} penalty={penalty.Id}");
     }
 
-    [Command("unban", Description = "Lift a ban: unban <steamid>", Permission = Perm.Unban, SuppressChat = true)]
-    public void CmdUnban(Caller caller, string steamId)
+    [Command("unban", Description = "Lift a ban: unban <steamid> [reason]", Permission = Perm.Unban, SuppressChat = true)]
+    public void CmdUnban(Caller caller, string steamId, params string[] reason)
     {
         if (!SteamIds.TryParse(steamId, out var id))
             throw new CommandException($"'{steamId}' isn't a SteamID64, Steam2 or Steam3 ID.");
-        if (!Penalties.Remove(PenaltyType.Ban, id, caller))
+        var name = Penalties.GetActive(PenaltyType.Ban, id)?.PlayerName;
+        var why = string.Join(' ', reason).Trim();
+        if (!Penalties.Remove(PenaltyType.Ban, id, caller, why))
             throw new CommandException($"{id} isn't banned.");
 
-        AdminActivity.Log(caller, $"unbanned {id}", details: $"target={id}");
-        caller.Reply($"Unbanned {id}.");
+        var who = name != null ? $"{name} ({id})" : id.ToString();
+        AdminActivity.Log(caller, $"unbanned {who}{(why.Length > 0 ? $": {why}" : "")}", details: $"target={id}");
+        caller.Reply($"Unbanned {who}.");
     }
 
     [Command("bans", Description = "List active bans", Permission = Perm.Ban, SuppressChat = true)]
@@ -55,8 +58,8 @@ public sealed partial class AdminPlugin
     public void CmdGag(Caller caller, string player, int minutes, params string[] reason)
         => AddPenalty(caller, PenaltyType.Gag, player, minutes, Reason(reason, Config.DefaultGagReason));
 
-    [Command("ungag", Description = "Let a gagged player use chat again: ungag <player|steamid>", Permission = Perm.Gag, SuppressChat = true)]
-    public void CmdUngag(Caller caller, string player) => LiftPenalty(caller, PenaltyType.Gag, player);
+    [Command("ungag", Description = "Let a gagged player use chat again: ungag <player|steamid> [reason]", Permission = Perm.Gag, SuppressChat = true)]
+    public void CmdUngag(Caller caller, string player, params string[] reason) => LiftPenalty(caller, PenaltyType.Gag, player, reason);
 
     [Command("gags", Description = "List active gags", Permission = Perm.Gag, SuppressChat = true)]
     public void CmdGags(Caller caller) => ListActive(caller, PenaltyType.Gag, "gag");
@@ -65,8 +68,8 @@ public sealed partial class AdminPlugin
     public void CmdMute(Caller caller, string player, int minutes, params string[] reason)
         => AddPenalty(caller, PenaltyType.Mute, player, minutes, Reason(reason, Config.DefaultMuteReason));
 
-    [Command("unmute", Description = "Let a muted player use voice chat again: unmute <player|steamid>", Permission = Perm.Mute, SuppressChat = true)]
-    public void CmdUnmute(Caller caller, string player) => LiftPenalty(caller, PenaltyType.Mute, player);
+    [Command("unmute", Description = "Let a muted player use voice chat again: unmute <player|steamid> [reason]", Permission = Perm.Mute, SuppressChat = true)]
+    public void CmdUnmute(Caller caller, string player, params string[] reason) => LiftPenalty(caller, PenaltyType.Mute, player, reason);
 
     /// <summary>gag and mute: the same steps as ban, without a kick or a separate lifting permission.</summary>
     private void AddPenalty(Caller caller, PenaltyType type, string player, int minutes, string why)
@@ -80,12 +83,13 @@ public sealed partial class AdminPlugin
     }
 
     /// <summary>ungag and unmute: whoever gave it, online or not.</summary>
-    private static void LiftPenalty(Caller caller, PenaltyType type, string player)
+    private static void LiftPenalty(Caller caller, PenaltyType type, string player, string[] reason)
     {
         var (id, name) = PlayerOrSteamId(caller, player, $"un{Noun(type)}");
-        if (!Penalties.Remove(type, id, caller))
+        var why = string.Join(' ', reason).Trim();
+        if (!Penalties.Remove(type, id, caller, why))
             throw new CommandException($"{name ?? id.ToString()} isn't {Past(type)}.");
-        AdminActivity.Show(caller, $"un{Past(type)} {name ?? id.ToString()}", details: $"target={id}");
+        AdminActivity.Show(caller, $"un{Past(type)} {name ?? id.ToString()}{(why.Length > 0 ? $": {why}" : "")}", details: $"target={id}");
     }
 
     [Command("mutes", Description = "List active mutes", Permission = Perm.Mute, SuppressChat = true)]
@@ -176,7 +180,7 @@ public sealed partial class AdminPlugin
         foreach (var p in history.Result)
         {
             var state = p.IsActiveAt(now) ? "ACTIVE" : p.RemovedUtc != null ? "lifted" : "expired";
-            lines.Add($"  [{state}] {p.CreatedUtc:yyyy-MM-dd} {Describe(p, now)}");
+            lines.Add($"  {DescribeHistory(p, now)}");
         }
         if (history.Result.Count == 0)
             lines.Add("  none");

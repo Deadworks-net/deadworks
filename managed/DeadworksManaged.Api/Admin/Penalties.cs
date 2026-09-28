@@ -1,3 +1,5 @@
+using System.Text.Json.Serialization;
+
 namespace DeadworksManaged.Api;
 
 /// <summary>What a <see cref="Penalty"/> stops a player doing.</summary>
@@ -9,6 +11,17 @@ public enum PenaltyType
     Gag,
     /// <summary>Talking on voice chat.</summary>
     Mute
+}
+
+/// <summary>How a penalty stopped applying.</summary>
+public enum PenaltyEnd
+{
+    /// <summary>Lifted early by an admin: unban, ungag, unmute.</summary>
+    Lifted,
+    /// <summary>Replaced by a newer penalty of the same type, e.g. a ban extended or shortened. The player is still penalized.</summary>
+    Replaced,
+    /// <summary>Ran out.</summary>
+    Expired
 }
 
 /// <summary>A ban, gag or mute on one SteamID. Removed and expired penalties are kept as history.</summary>
@@ -34,11 +47,28 @@ public sealed record Penalty
     public string? AdminName { get; init; }
     /// <summary>When it was lifted early (unban, ungag, ...), or replaced by a newer penalty of the same type.</summary>
     public DateTime? RemovedUtc { get; init; }
-    /// <summary>Who lifted it, or 0 for the server console.</summary>
+    /// <summary>Who lifted or replaced it, or 0 for the server console.</summary>
     public ulong RemovedBySteamId64 { get; init; }
+    /// <summary>The name of who lifted or replaced it, for display only; null if it hasn't been.</summary>
+    public string? RemovedByName { get; init; }
+    /// <summary>Why it was lifted, if the admin said.</summary>
+    public string? RemovalReason { get; init; }
+    /// <summary>The penalty that replaced this one, if it was replaced rather than lifted.</summary>
+    public Guid? ReplacedBy { get; init; }
 
     /// <summary>True for a penalty with no end date.</summary>
+    [JsonIgnore]
     public bool IsPermanent => ExpiresUtc == null;
+
+    /// <summary>How it stopped applying by <paramref name="nowUtc"/>, or null if it still applies.</summary>
+    public PenaltyEnd? EndedAt(DateTime nowUtc)
+    {
+        if (ReplacedBy != null)
+            return PenaltyEnd.Replaced;
+        if (RemovedUtc != null)
+            return PenaltyEnd.Lifted;
+        return ExpiresUtc <= nowUtc ? PenaltyEnd.Expired : null;
+    }
 
     /// <summary>Whether it applies at <paramref name="nowUtc"/>: not lifted and not expired.</summary>
     public bool IsActiveAt(DateTime nowUtc) => RemovedUtc == null && (ExpiresUtc == null || ExpiresUtc > nowUtc);
@@ -88,8 +118,11 @@ public static class Penalties
     public static Penalty Add(PenaltyType type, ulong steamId64, TimeSpan? duration, string reason, Caller by, string? playerName = null)
         => B.Add(type, steamId64, duration, reason, by, playerName);
 
-    /// <summary>Lifts the player's active penalty of this type on behalf of <paramref name="by"/>. Returns false if they had none.</summary>
-    public static bool Remove(PenaltyType type, ulong steamId64, Caller by) => B.Remove(type, steamId64, by);
+    /// <summary>
+    /// Lifts the player's active penalty of this type on behalf of <paramref name="by"/>, with an optional reason kept in
+    /// its history. Returns false if they had none.
+    /// </summary>
+    public static bool Remove(PenaltyType type, ulong steamId64, Caller by, string reason = "") => B.Remove(type, steamId64, by, reason);
 
     /// <summary>The player's active penalty of this type, or null.</summary>
     public static Penalty? GetActive(PenaltyType type, ulong steamId64) => B.GetActive(type, steamId64);
@@ -146,7 +179,7 @@ public interface IPenaltyStore
 internal interface IPenaltyBackend
 {
     Penalty Add(PenaltyType type, ulong steamId64, TimeSpan? duration, string reason, Caller by, string? playerName);
-    bool Remove(PenaltyType type, ulong steamId64, Caller by);
+    bool Remove(PenaltyType type, ulong steamId64, Caller by, string reason);
     Penalty? GetActive(PenaltyType type, ulong steamId64);
     Penalty? WouldShorten(PenaltyType type, ulong steamId64, TimeSpan? duration);
     IReadOnlyList<Penalty> GetAllActive(PenaltyType? type);
