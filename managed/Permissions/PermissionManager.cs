@@ -384,8 +384,19 @@ internal static class PermissionManager
         _defaultSubject = null;
     }
 
+    /// <summary>
+    /// What a SteamID may do: its saved entry, unless it belongs to a player on the server whom Steam hasn't confirmed
+    /// yet, who gets "default" exactly as their slot does. Otherwise a plugin checking caller.SteamId64 would hand out a
+    /// player's permissions before their ticket was validated.
+    /// </summary>
+    private static CompiledSubject GetActingSubject(ulong steamId64)
+    {
+        var slot = FindSlot(steamId64);
+        return slot >= 0 && !IsTrusted(slot) ? GetDefaultSubject() : GetSubject(steamId64);
+    }
+
     public static PermissionExplanation Explain(ulong steamId64, string permission)
-        => PermissionEvaluator.Evaluate(GetSubject(steamId64), permission);
+        => PermissionEvaluator.Evaluate(GetActingSubject(steamId64), permission);
 
     public static PermissionExplanation ExplainSlot(int slot, string permission)
     {
@@ -415,10 +426,12 @@ internal static class PermissionManager
     {
         if (caller == target)
             return true;
+        // The target is judged by their saved entry even before Steam confirms them, which errs towards protecting them;
+        // the caller only acts with what Steam has confirmed.
         var targetSubject = GetSubject(target);
         if (target != 0 && !IsLoaded(target))
             return false;
-        return targetSubject.Immunity <= GetSubject(caller).Immunity;
+        return targetSubject.Immunity <= GetActingSubject(caller).Immunity;
     }
 
     public static CompiledSubject Describe(ulong steamId64) => GetSubject(steamId64);

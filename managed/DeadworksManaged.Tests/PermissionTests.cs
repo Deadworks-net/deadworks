@@ -583,6 +583,22 @@ public sealed class PermissionManagerTests : IDisposable
     }
 
     [Fact]
+    public void Checking_by_steam_id_waits_for_steam_too()
+    {
+        // Plugins often check caller.SteamId64 instead of the slot; that mustn't hand out permissions early.
+        Assert.True(Permissions.Has(Admin, "server.rcon")); // offline: judged by the saved entry
+        PermissionManager.OnClientConnect(4, Admin);
+        PermissionManager.IsSlotAuthenticated = _ => false;
+        Assert.False(Permissions.Has(Admin, "server.rcon"));
+        Assert.True(Permissions.Has(Admin, "rtd.use"));
+        Assert.False(Permissions.CanTarget(Admin, Moderator)); // acts with default's immunity 0, not admin's 90
+
+        PermissionManager.IsSlotAuthenticated = _ => true;
+        Assert.True(Permissions.Has(Admin, "server.rcon"));
+        Assert.True(Permissions.CanTarget(Admin, Moderator));
+    }
+
+    [Fact]
     public void Sv_lan_skips_the_steam_wait()
     {
         PermissionManager.OnClientConnect(4, Admin);
