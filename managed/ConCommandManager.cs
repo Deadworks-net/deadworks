@@ -14,184 +14,15 @@ internal static class ConCommandManager
 
     private static readonly Lock _lock = new();
 
-    public static void Initialize()
+    /// <summary>An internal command that isn't a [Command], such as the capture marker. Server-only ones refuse players.</summary>
+    internal static void RegisterBuiltInCommand(string name, string description, bool serverOnly, Action<ConCommandContext> handler)
     {
-        RegisterBuiltInCommand("dw_reloadconfig", "Reload plugin configs. Usage: dw_reloadconfig [PluginName]", true, OnReloadConfig,
-            permission: "deadworks.config.reload");
-        RegisterBuiltInCommand("dw_plugin", "Manage plugins. Usage: dw_plugin <list|enable|disable|commands> [PluginName]", true, OnPluginCommand,
-            permission: "deadworks.plugins.manage");
-        RegisterBuiltInCommand("dw_help", "List all available commands.", false, OnHelp);
-    }
-
-    private static void OnReloadConfig(ConCommandContext ctx)
-    {
-        var targetName = ctx.Args.Length > 1 ? ctx.Args[1] : null;
-
-        var plugins = PluginLoader.PluginSnapshot;
-        foreach (var plugin in plugins)
-        {
-            if (targetName != null
-                && !string.Equals(plugin.GetType().Name, targetName, StringComparison.OrdinalIgnoreCase)
-                && !string.Equals(plugin.Name, targetName, StringComparison.OrdinalIgnoreCase))
-                continue;
-
-            try
-            {
-                if (plugin.ReloadConfig())
-                    Reply(ctx.Controller, $"[ConfigManager] Reloaded config for {plugin.Name}");
-                else
-                    Reply(ctx.Controller, $"[ConfigManager] No config to reload for {plugin.Name}");
-            }
-            catch (Exception ex)
-            {
-                Reply(ctx.Controller, $"[ConfigManager] Failed to reload config for {plugin.Name}: {ex.Message}");
-            }
-        }
-    }
-
-    private static void OnPluginCommand(ConCommandContext ctx)
-    {
-        var sub = ctx.Args.Length > 1 ? ctx.Args[1] : "list";
-
-        if (string.Equals(sub, "list", StringComparison.OrdinalIgnoreCase))
-        {
-            var names = PluginLoader.InstalledPluginNames().ToList();
-            if (names.Count == 0)
-            {
-                Reply(ctx.Controller, "[PluginLoader] No plugins installed");
-                return;
-            }
-
-            Reply(ctx.Controller, "[PluginLoader] Installed plugins:");
-            foreach (var name in names)
-            {
-                var enabled = PluginStateManager.IsEnabled(name);
-                var loaded = PluginLoader.IsPluginLoaded(name);
-                var status = enabled ? (loaded ? "enabled (loaded)" : "enabled (not loaded)") : "disabled";
-                var origin = PluginLoader.IsBuiltin(name) ? " [ships with Deadworks]" : "";
-                Reply(ctx.Controller, $"  {name}: {status}{origin}");
-            }
-        }
-        else if (string.Equals(sub, "enable", StringComparison.OrdinalIgnoreCase))
-        {
-            if (ctx.Args.Length < 3)
-            {
-                Reply(ctx.Controller, "Usage: dw_plugin enable <PluginName>");
-                return;
-            }
-            PluginLoader.EnablePlugin(ctx.Args[2]);
-        }
-        else if (string.Equals(sub, "disable", StringComparison.OrdinalIgnoreCase))
-        {
-            if (ctx.Args.Length < 3)
-            {
-                Reply(ctx.Controller, "Usage: dw_plugin disable <PluginName>");
-                return;
-            }
-            PluginLoader.DisablePlugin(ctx.Args[2]);
-        }
-        else if (string.Equals(sub, "commands", StringComparison.OrdinalIgnoreCase))
-        {
-            if (ctx.Args.Length < 3)
-            {
-                Reply(ctx.Controller, "Usage: dw_plugin commands <PluginName>");
-                return;
-            }
-            ListPluginCommands(ctx.Controller, ctx.Args[2]);
-        }
-        else
-        {
-            Reply(ctx.Controller, "Usage: dw_plugin <list|enable|disable|commands> [PluginName]");
-        }
-    }
-
-    private static void OnHelp(ConCommandContext ctx)
-    {
-        var to = ctx.Controller;
-        var entries = PluginRegistrationTracker.GetAllEntries()
-            .Where(e => e.CanRun == null || e.CanRun(to))
-            .ToList();
-
-        var consoleCmds = entries
-            .Where(e => e.Kind == "command" && !e.Hidden)
-            .OrderBy(e => e.Name, StringComparer.OrdinalIgnoreCase)
-            .ToList();
-        var chatCmds = entries
-            .Where(e => e.Kind == "chat" && !e.Hidden)
-            .OrderBy(e => e.Name, StringComparer.OrdinalIgnoreCase)
-            .ToList();
-
-        Reply(to, "Available commands:");
-
-        if (consoleCmds.Count > 0)
-        {
-            Reply(to, "Console:");
-            foreach (var e in consoleCmds)
-            {
-                var desc = string.IsNullOrEmpty(e.Description) ? "" : $" - {e.Description}";
-                Reply(to, $"  {e.Name}{desc}");
-            }
-        }
-
-        if (chatCmds.Count > 0)
-        {
-            Reply(to, "Chat:");
-            foreach (var e in chatCmds)
-            {
-                var desc = string.IsNullOrEmpty(e.Description) ? "" : $" - {e.Description}";
-                Reply(to, $"  {e.Name}{desc}");
-            }
-        }
-
-        if (consoleCmds.Count == 0 && chatCmds.Count == 0)
-            Reply(to, "  (none)");
-    }
-
-    private static void Reply(CCitadelPlayerController? to, string message)
-    {
-        if (to != null)
-            to.PrintToConsole(message);
-        else
-            Console.WriteLine(message);
-    }
-
-    private static void ListPluginCommands(CCitadelPlayerController? to, string pluginName)
-    {
-        var normalizedPath = PluginLoader.ResolvePluginPath(pluginName);
-        if (normalizedPath == null || !PluginLoader.IsPluginLoaded(pluginName))
-        {
-            Reply(to, $"[ConCommandManager] Plugin '{pluginName}' is not loaded");
-            return;
-        }
-
-        var entries = PluginRegistrationTracker.GetEntries(normalizedPath);
-        if (entries.Count == 0)
-        {
-            Reply(to, $"[ConCommandManager] Plugin '{pluginName}' has no registered commands");
-            return;
-        }
-
-        Reply(to, $"[ConCommandManager] Commands registered by '{pluginName}':");
-        foreach (var entry in entries)
-        {
-            var desc = string.IsNullOrEmpty(entry.Description) ? "" : $" - {entry.Description}";
-            Reply(to, $"  [{entry.Kind}] {entry.Name}{desc}");
-        }
-    }
-
-    /// <param name="permission">With <paramref name="serverOnly"/>, lets players holding this permission run it too.</param>
-    internal static void RegisterBuiltInCommand(string name, string description, bool serverOnly, Action<ConCommandContext> handler,
-        string permission = "")
-    {
-        bool mayRun(CCitadelPlayerController? caller)
-            => !serverOnly || caller == null || (permission.Length > 0 && Permissions.Has(caller, permission));
-
         Action<ConCommandContext> wrapped = serverOnly
             ? ctx =>
             {
-                if (!ctx.IsServerCommand && !mayRun(ctx.Controller))
+                if (!ctx.IsServerCommand)
                 {
-                    Reply(ctx.Controller, Commands.CommandRegistration.DeniedMessage);
+                    ctx.Controller?.PrintToConsole(Commands.CommandRegistration.DeniedMessage);
                     return;
                 }
                 handler(ctx);
@@ -199,9 +30,7 @@ internal static class ConCommandManager
             : handler;
 
         AddHandler(name, wrapped);
-
-        // Player-callable built-ins can't carry the engine's server-only flag.
-        NativeRegisterConCommand(name, description, BuildConCommandFlags(serverOnly && permission.Length == 0));
+        NativeRegisterConCommand(name, description, BuildConCommandFlags(serverOnly));
 
         Console.WriteLine($"[ConCommandManager] Registered built-in concommand: {name}{(serverOnly ? " (server-only)" : "")}");
     }
@@ -212,7 +41,6 @@ internal static class ConCommandManager
 
         foreach (var plugin in plugins)
         {
-            RegisterConCommands(normalizedPath, plugin, registered);
             RegisterConVars(normalizedPath, plugin, registered);
         }
 
@@ -288,47 +116,6 @@ internal static class ConCommandManager
             _conVars.Clear();
         }
 
-        // Re-register built-in commands
-        Initialize();
-    }
-
-    private static void RegisterConCommands(string normalizedPath, IDeadworksPlugin plugin, List<(string, Action<ConCommandContext>)> registered)
-    {
-        var methods = plugin.GetType().GetMethods(
-            BindingFlags.Instance | BindingFlags.Public | BindingFlags.NonPublic);
-
-        foreach (var method in methods)
-        {
-#pragma warning disable CS0618 // ConCommandAttribute is obsolete; intentionally scanned for back-compat
-            var attrs = method.GetCustomAttributes<ConCommandAttribute>();
-#pragma warning restore CS0618
-            foreach (var attr in attrs)
-            {
-                var del = (Action<ConCommandContext>)Delegate.CreateDelegate(
-                    typeof(Action<ConCommandContext>), plugin, method);
-
-                bool serverOnly = attr.ServerOnly;
-                Action<ConCommandContext> handler = serverOnly
-                    ? ctx =>
-                    {
-                        if (!ctx.IsServerCommand)
-                        {
-                            Console.WriteLine($"[ConCommandManager] Command '{attr.Name}' is server-only");
-                            return;
-                        }
-                        del(ctx);
-                    }
-                    : del;
-
-                AddHandler(attr.Name, handler);
-                registered.Add((attr.Name, handler));
-                PluginRegistrationTracker.Add(normalizedPath, "command", attr.Name, attr.Description);
-
-                NativeRegisterConCommand(attr.Name, attr.Description, BuildConCommandFlags(serverOnly));
-
-                Console.WriteLine($"[ConCommandManager] Registered concommand: {plugin.Name} -> {attr.Name}{(serverOnly ? " (server-only)" : "")}");
-            }
-        }
     }
 
     private static void RegisterConVars(string normalizedPath, IDeadworksPlugin plugin, List<(string, Action<ConCommandContext>)> registered)

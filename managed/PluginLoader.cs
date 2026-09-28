@@ -93,7 +93,6 @@ internal static partial class PluginLoader
         DeadworksConfig.Initialize();
         ConfigManager.Initialize();
         PermissionSystem.PermissionManager.Initialize();
-        ConCommandManager.Initialize();
         AdminSystem.PenaltyManager.Initialize();
         AdminSystem.AdminActivityService.Initialize();
         AdminSystem.CommandCapture.Initialize();
@@ -179,7 +178,7 @@ internal static partial class PluginLoader
         lock (_lock)
         {
             Commands.CommandRegistration.RegisterPluginCommands(
-                CoreCommandsPath, [new PermissionSystem.PermissionCommands(), new AdminSystem.PenaltyCommands()], _chatCommandRegistry,
+                CoreCommandsPath, [new Commands.CoreCommands(), new PermissionSystem.PermissionCommands(), new AdminSystem.PenaltyCommands()], _chatCommandRegistry,
                 manifestKey: PermissionSystem.PermissionManifest.CoreFileKey);
         }
     }
@@ -307,7 +306,7 @@ internal static partial class PluginLoader
             RegisterPluginEventHandlers(normalizedPath, plugins);
             RegisterPluginNetMessageHandlers(normalizedPath, plugins);
             RegisterPluginEntityIOHooks(normalizedPath, plugins);
-            RegisterPluginChatCommands(normalizedPath, plugins);
+            Commands.LegacyCommands.Report(plugins);
             ConCommandManager.RegisterPlugin(normalizedPath, plugins);
             Commands.CommandRegistration.RegisterPluginCommands(normalizedPath, plugins, _chatCommandRegistry);
         }

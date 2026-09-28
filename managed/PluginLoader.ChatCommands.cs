@@ -80,31 +80,4 @@ internal static partial class PluginLoader
         args = tokens[1..];
         return true;
     }
-
-    // --- Chat command registration ---
-
-    private static void RegisterPluginChatCommands(string normalizedPath, List<IDeadworksPlugin> plugins)
-    {
-        foreach (var plugin in plugins)
-        {
-            var methods = plugin.GetType().GetMethods(
-                BindingFlags.Instance | BindingFlags.Public | BindingFlags.NonPublic);
-
-            foreach (var method in methods)
-            {
-#pragma warning disable CS0618 // ChatCommandAttribute is obsolete; intentionally scanned for back-compat
-                var attrs = method.GetCustomAttributes<ChatCommandAttribute>();
-#pragma warning restore CS0618
-                foreach (var attr in attrs)
-                {
-                    var del = (Func<ChatCommandContext, HookResult>)Delegate.CreateDelegate(
-                        typeof(Func<ChatCommandContext, HookResult>), plugin, method);
-
-                    _chatCommandRegistry.AddForPlugin(normalizedPath, attr.Command, del);
-                    PluginRegistrationTracker.Add(normalizedPath, "chat", $"/{attr.Command}");
-                    Console.WriteLine($"[PluginLoader] Registered chat command: {plugin.Name} -> /{attr.Command}");
-                }
-            }
-        }
-    }
 }
