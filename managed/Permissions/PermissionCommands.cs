@@ -61,15 +61,34 @@ internal sealed class PermissionCommands : DeadworksPluginBase
     public void PermRevoke(Caller caller, string player, string permission, string temp = "")
         => Change(caller, player, PermissionManager.ChangeKind.RevokePermission, permission, temp);
 
-    [Command("perm_check", Description = "Show whether a player has a permission, and which grant decided it", Permission = View, ConsoleOnly = true)]
+    [Command("perm_check", Description = "Show whether a player can use a command or has a permission, and why: perm_check <player> <command|permission>", Permission = View, ConsoleOnly = true)]
     public void PermCheck(Caller caller, string player, string permission)
     {
         var who = ResolvePlayer(caller, player);
-        var result = who.Slot >= 0
-            ? PermissionManager.ExplainSlot(who.Slot, permission)
-            : PermissionManager.Explain(who.SteamId64, permission);
-        caller.PrintToConsole($"{who.Display}: {permission.Trim().ToLowerInvariant()} is {result}");
+        string Explain(string perm) => (who.Slot >= 0
+            ? PermissionManager.ExplainSlot(who.Slot, perm)
+            : PermissionManager.Explain(who.SteamId64, perm)).ToString();
+
+        // A command's name is what staff know when they're told "you don't have permission": look up what it needs.
+        // Permissions have dots, so a bare word or anything with !, / or dw_ in front is a command.
+        var commands = permission.Contains('.') ? [] : PermissionManifest.FindCommand(permission);
+        if (commands.Count > 0)
+        {
+            foreach (var (plugin, command, needs) in commands)
+                caller.PrintToConsole(needs.Length == 0
+                    ? $"{who.Display}: {command} ({plugin}) is open to everyone"
+                    : $"{who.Display}: {command} ({plugin}) needs {needs}, which is {Explain(needs)}");
+            return;
+        }
+
+        caller.PrintToConsole($"{who.Display}: {permission.Trim().ToLowerInvariant()} is {Explain(permission)}{Undeclared(permission)}");
     }
+
+    /// <summary>A note when no loaded plugin declares anything this grant or check matches, which is usually a typo.</summary>
+    private static string Undeclared(string permission)
+        => PermissionEvaluator.UnknownGrants([permission], PermissionManifest.DeclaredPermissions()).Any()
+            ? $" (note: no loaded plugin declares {permission.Trim()}; check the spelling)"
+            : "";
 
     [Command("perm_list", Description = "Show a player's roles, permissions and immunity", Permission = View, ConsoleOnly = true)]
     public void PermList(Caller caller, string player)
@@ -126,7 +145,8 @@ internal sealed class PermissionCommands : DeadworksPluginBase
             if (error == null)
                 // Staff changes belong in the action log: who promoted whom is the first thing an owner asks.
                 AdminActivity.Log(caller, verb, details: $"target={who.SteamId64}");
-            caller.PrintToConsole(error ?? $"{char.ToUpperInvariant(verb[0])}{verb[1..]}.");
+            var note = kind is PermissionManager.ChangeKind.GrantPermission ? Undeclared(value) : "";
+            caller.PrintToConsole(error ?? $"{char.ToUpperInvariant(verb[0])}{verb[1..]}.{note}");
         }
 
         // A store that saves asynchronously completes on a later game frame, where replying is safe.

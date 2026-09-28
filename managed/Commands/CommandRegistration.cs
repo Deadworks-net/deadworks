@@ -8,6 +8,8 @@ namespace DeadworksManaged.Commands;
 internal static class CommandRegistration
 {
     internal const string DeniedMessage = "You don't have permission to use this command.";
+    internal const string NotConfirmedMessage =
+        "You don't have permission to use this command yet: your roles apply once Steam has confirmed your account, a few seconds after joining.";
     internal const string OverridesBrokenMessage = "Commands are unavailable until the server fixes an error in its permission settings.";
 
     /// <summary>A command's permission, looked up on every call so <c>dw_perm_reload</c> applies overrides without re-registering.</summary>
@@ -32,7 +34,16 @@ internal static class CommandRegistration
             => player != null && !CommandOverrides.Unreadable
                && (permission.Length == 0 || PermissionManager.HasForSlot(player.Slot, permission));
 
-        public static string Refusal => CommandOverrides.Unreadable ? OverridesBrokenMessage : DeniedMessage;
+        /// <summary>
+        /// Why a player was refused. Staff who just joined hit this before Steam confirms them, and a bare "no permission"
+        /// sends them to the owner for nothing; when Steam is down, every admin hits it at once.
+        /// </summary>
+        public static string RefusalFor(CCitadelPlayerController? player)
+        {
+            if (CommandOverrides.Unreadable)
+                return OverridesBrokenMessage;
+            return player != null && !Players.IsAuthenticated(player.Slot) ? NotConfirmedMessage : DeniedMessage;
+        }
 
         /// <summary>For listings such as <c>dw_help</c>. A null caller is the server console.</summary>
         public bool CanRun(CCitadelPlayerController? caller)
@@ -136,7 +147,7 @@ internal static class CommandRegistration
             var permission = gate.Permission;
             if (!CommandGate.PlayerMay(ctx.Controller, permission))
             {
-                reply(CommandGate.Refusal);
+                reply(CommandGate.RefusalFor(ctx.Controller));
                 return HookResult.Handled;
             }
 
@@ -199,7 +210,7 @@ internal static class CommandRegistration
             var caller = ctx.Controller;
             if (!ctx.IsServerCommand && !CommandGate.PlayerMay(caller, permission))
             {
-                reply(CommandGate.Refusal);
+                reply(CommandGate.RefusalFor(caller));
                 return;
             }
 

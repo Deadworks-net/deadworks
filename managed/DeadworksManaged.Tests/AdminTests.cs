@@ -526,7 +526,40 @@ public sealed class StaffChangeLogTests : AdminTestBase
     public StaffChangeLogTests()
     {
         var chat = new HandlerRegistry<string, Func<ChatCommandContext, HookResult>>(StringComparer.OrdinalIgnoreCase);
-        CommandRegistration.RegisterPluginCommands(PluginPath, [new PermissionCommands()], chat);
+        CommandRegistration.RegisterPluginCommands(PluginPath, [new PermissionCommands(), new AdminPlugin()], chat);
+    }
+
+    private static string Run(params string[] argv)
+    {
+        var original = Console.Out;
+        var writer = new StringWriter();
+        Console.SetOut(writer);
+        try
+        {
+            ConCommandManager.Dispatch(-1, argv[0], argv);
+        }
+        finally
+        {
+            Console.SetOut(original);
+        }
+        return writer.ToString();
+    }
+
+    [Fact]
+    public void Perm_check_takes_a_command_name_and_explains_what_it_needs()
+    {
+        Run("dw_role_grant", Lapka.ToString(), "admin");
+        var output = Run("dw_perm_check", Lapka.ToString(), "!ban");
+        Assert.Contains("ban (Admin) needs admin.moderation.ban, which is allowed", output);
+        Assert.Contains("open to everyone", Run("dw_perm_check", Greeny.ToString(), "penalties"));
+    }
+
+    [Fact]
+    public void Granting_or_checking_something_no_plugin_declares_gets_a_note()
+    {
+        Assert.Contains("no loaded plugin declares admin.moderation.bna", Run("dw_perm_grant", Lapka.ToString(), "admin.moderation.bna"));
+        Assert.DoesNotContain("no loaded plugin", Run("dw_perm_grant", Lapka.ToString(), "admin.moderation.*"));
+        Assert.Contains("no loaded plugin declares admin.moderation.bna", Run("dw_perm_check", Lapka.ToString(), "admin.moderation.bna"));
     }
 
     public override void Dispose()

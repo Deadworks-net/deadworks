@@ -121,6 +121,22 @@ internal static class PermissionManifest
         return set;
     }
 
+    /// <summary>
+    /// Every registered command called <paramref name="name"/> (any of its names, without !, / or dw_), with the plugin
+    /// it belongs to and the permission it needs after overrides.jsonc ("" for anyone).
+    /// </summary>
+    public static List<(string Plugin, string Command, string Permission)> FindCommand(string name)
+    {
+        name = name.Trim().TrimStart('!', '/');
+        if (name.StartsWith("dw_", StringComparison.OrdinalIgnoreCase))
+            name = name[3..];
+        return Snapshot()
+            .SelectMany(info => info.Commands
+                .Where(c => c.Names.Contains(name, StringComparer.OrdinalIgnoreCase))
+                .Select(c => (info.PluginName, c.Names[0], CommandOverrides.Resolve(c.Names, c.DeclaredPermission, c.Owner ?? info.Owner, out _))))
+            .ToList();
+    }
+
     /// <summary>Every registered command with its owner, for checking overrides.jsonc against.</summary>
     public static IReadOnlyCollection<(CommandOverrides.Owner Owner, IReadOnlyList<string> Names)> AllCommands()
         => Snapshot().SelectMany(info => info.Commands.Select(c => (c.Owner ?? info.Owner, c.Names))).ToList();
