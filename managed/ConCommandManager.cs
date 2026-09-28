@@ -222,7 +222,8 @@ internal static class ConCommandManager
         bool serverOnly,
         Action<ConCommandContext> handler,
         bool hidden = false,
-        Func<CCitadelPlayerController?, bool>? canRun = null)
+        Func<CCitadelPlayerController?, bool>? canRun = null,
+        string? aliasOf = null)
     {
         Action<ConCommandContext> wrapped = serverOnly
             ? ctx =>
@@ -248,7 +249,7 @@ internal static class ConCommandManager
             registered.Add((name, wrapped));
         }
 
-        PluginRegistrationTracker.Add(normalizedPath, "command", name, description, hidden, canRun);
+        PluginRegistrationTracker.Add(normalizedPath, "command", name, description, hidden, canRun, aliasOf);
 
         NativeRegisterConCommand(name, description, BuildConCommandFlags(serverOnly));
     }

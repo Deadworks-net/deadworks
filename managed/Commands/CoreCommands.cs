@@ -90,13 +90,19 @@ internal sealed class CoreCommands : DeadworksPluginBase
         var any = false;
         foreach (var (kind, heading) in new[] { ("command", "Console:"), ("chat", "Chat:") })
         {
-            var list = entries.Where(e => e.Kind == kind).OrderBy(e => e.Name, StringComparer.OrdinalIgnoreCase).ToList();
+            var list = entries.Where(e => e.Kind == kind).ToList();
             if (list.Count == 0)
                 continue;
             any = true;
             caller.PrintToConsole(heading);
-            foreach (var e in list)
-                caller.PrintToConsole($"  {e.Name}{(string.IsNullOrEmpty(e.Description) ? "" : $" - {e.Description}")}");
+            // Each command once, under its first name, with its other names after it.
+            var aliases = list.Where(e => e.AliasOf != null).ToLookup(e => e.AliasOf!, e => e.Name, StringComparer.OrdinalIgnoreCase);
+            foreach (var e in list.Where(e => e.AliasOf == null).OrderBy(e => e.Name, StringComparer.OrdinalIgnoreCase))
+            {
+                var also = aliases[e.Name].ToList();
+                caller.PrintToConsole($"  {e.Name}{(also.Count > 0 ? $" (also {string.Join(", ", also)})" : "")}"
+                                      + (string.IsNullOrEmpty(e.Description) ? "" : $" - {e.Description}"));
+            }
         }
         if (!any)
             caller.PrintToConsole("  (none)");

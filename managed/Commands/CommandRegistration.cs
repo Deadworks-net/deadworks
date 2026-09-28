@@ -149,9 +149,14 @@ internal static class CommandRegistration
         if (chatRegistry.Snapshot(name) is { Count: > 0 })
             Console.WriteLine($"[CommandRegistration] Warning: another plugin already registered /{name}; both will run. Rename one of them.");
         chatRegistry.AddForPlugin(normalizedPath, name, handler);
-        PluginRegistrationTracker.Add(normalizedPath, "chat", $"/{name}", attr.Description, attr.Hidden, gate.CanRun);
+        PluginRegistrationTracker.Add(normalizedPath, "chat", $"/{name}", attr.Description, attr.Hidden, gate.CanRun,
+            IsAlias(attr, name) ? $"/{attr.Names[0]}" : null);
         Console.WriteLine($"[CommandRegistration] Registered chat command: {plugin.Name} -> /{name}");
     }
+
+    private static bool IsAlias(CommandAttribute attr, string name) => !name.Equals(attr.Names[0], StringComparison.OrdinalIgnoreCase);
+
+    private static string ConCommandName(string name) => "dw_" + name;
 
     private static void RegisterConsole(
         string normalizedPath,
@@ -162,7 +167,7 @@ internal static class CommandRegistration
         CommandAttribute attr,
         CommandGate gate)
     {
-        var conName = "dw_" + name;
+        var conName = ConCommandName(name);
         var namedPlan = conName == plan.Name ? plan : new CommandBinder.Plan
         {
             Name = conName,
@@ -205,7 +210,8 @@ internal static class CommandRegistration
 
         if (ConCommandManager.IsRegistered(conName))
             Console.WriteLine($"[CommandRegistration] Warning: {conName} is already registered by another plugin; both will run. Rename one of them.");
-        ConCommandManager.RegisterExternal(normalizedPath, conName, attr.Description, serverOnly: false, handler, attr.Hidden, gate.CanRun);
+        ConCommandManager.RegisterExternal(normalizedPath, conName, attr.Description, serverOnly: false, handler, attr.Hidden, gate.CanRun,
+            IsAlias(attr, name) ? ConCommandName(attr.Names[0]) : null);
         Console.WriteLine($"[CommandRegistration] Registered console command: {plugin.Name} -> {conName}{(attr.ServerOnly ? " (server-only)" : "")}");
     }
 
