@@ -28,14 +28,14 @@ public abstract class AdminTestBase : IDisposable
         AdminActivityService.Now = () => Clock;
         PenaltyManager.Initialize(Path.Combine(Dir, "penalties"));
         AdminActivityService.Initialize(LogDir, AdminActivityService.Visibility.Anonymous, AdminActivityService.Visibility.Named);
-        AdminActivity.Logged += OnLogged;
+        AdminActivityService.Logged += OnLogged;
     }
 
     private void OnLogged(AdminLogEntry entry) => Logged.Add(entry);
 
     public virtual void Dispose()
     {
-        AdminActivity.Logged -= OnLogged;
+        AdminActivityService.Logged -= OnLogged;
         PenaltyManager.Now = () => DateTime.UtcNow;
         AdminActivityService.Now = () => DateTime.UtcNow;
         for (int i = 0; i < Players.MaxSlot; i++)
@@ -51,11 +51,11 @@ public sealed class PenaltyTests : AdminTestBase
     {
         var added = new List<Penalty>();
         var removed = new List<Penalty>();
-        Penalties.Added += added.Add;
-        Penalties.Removed += removed.Add;
+        PenaltyManager.Added += added.Add;
+        PenaltyManager.Removed += removed.Add;
         try
         {
-            Penalties.Add(PenaltyType.Ban, Lapka, TimeSpan.FromMinutes(60), "spam", admin: null, playerName: "lapka");
+            Penalties.Add(PenaltyType.Ban, Lapka, TimeSpan.FromMinutes(60), "spam", by: Caller.Console, playerName: "lapka");
             Assert.True(Penalties.IsBanned(Lapka));
             Assert.False(Penalties.IsBanned(Greeny));
             Assert.Equal("You are banned from this server for 1h 0m. Reason: spam", PenaltyManager.ConnectRejection(Lapka));
@@ -66,8 +66,8 @@ public sealed class PenaltyTests : AdminTestBase
         }
         finally
         {
-            Penalties.Added -= added.Add;
-            Penalties.Removed -= removed.Add;
+            PenaltyManager.Added -= added.Add;
+            PenaltyManager.Removed -= removed.Add;
         }
         Assert.Single(added);
         Assert.Equal(added[0].Id, Assert.Single(removed).Id); // expiry raises Removed
@@ -76,7 +76,7 @@ public sealed class PenaltyTests : AdminTestBase
     [Fact]
     public void Permanent_penalties_have_no_end()
     {
-        Penalties.Add(PenaltyType.Gag, Lapka, null, "", admin: null);
+        Penalties.Add(PenaltyType.Gag, Lapka, null, "", by: Caller.Console);
         Clock = Clock.AddYears(10);
         var gag = Penalties.GetActive(PenaltyType.Gag, Lapka);
         Assert.NotNull(gag);
@@ -87,9 +87,9 @@ public sealed class PenaltyTests : AdminTestBase
     [Fact]
     public void A_new_penalty_replaces_the_active_one_of_the_same_type()
     {
-        var first = Penalties.Add(PenaltyType.Ban, Lapka, TimeSpan.FromDays(1), "first", admin: null);
-        Penalties.Add(PenaltyType.Gag, Lapka, TimeSpan.FromDays(1), "gag", admin: null);
-        var second = Penalties.Add(PenaltyType.Ban, Lapka, null, "second", admin: null);
+        var first = Penalties.Add(PenaltyType.Ban, Lapka, TimeSpan.FromDays(1), "first", by: Caller.Console);
+        Penalties.Add(PenaltyType.Gag, Lapka, TimeSpan.FromDays(1), "gag", by: Caller.Console);
+        var second = Penalties.Add(PenaltyType.Ban, Lapka, null, "second", by: Caller.Console);
 
         Assert.Equal(second.Id, Penalties.GetActive(PenaltyType.Ban, Lapka)!.Id);
         Assert.Equal(2, Penalties.GetActive().Count); // the ban and the gag
@@ -102,9 +102,9 @@ public sealed class PenaltyTests : AdminTestBase
     [Fact]
     public void Remove_lifts_the_penalty_and_keeps_history()
     {
-        Penalties.Add(PenaltyType.Ban, Lapka, null, "x", admin: null);
-        Assert.True(Penalties.Remove(PenaltyType.Ban, Lapka, admin: null));
-        Assert.False(Penalties.Remove(PenaltyType.Ban, Lapka, admin: null));
+        Penalties.Add(PenaltyType.Ban, Lapka, null, "x", by: Caller.Console);
+        Assert.True(Penalties.Remove(PenaltyType.Ban, Lapka, by: Caller.Console));
+        Assert.False(Penalties.Remove(PenaltyType.Ban, Lapka, by: Caller.Console));
         Assert.False(Penalties.IsBanned(Lapka));
         Assert.NotNull(Assert.Single(Penalties.GetHistoryAsync(Lapka).Result).RemovedUtc);
     }
@@ -112,7 +112,7 @@ public sealed class PenaltyTests : AdminTestBase
     [Fact]
     public void Penalties_survive_a_restart()
     {
-        Penalties.Add(PenaltyType.Ban, Lapka, TimeSpan.FromDays(7), "it's \"cheating\"", admin: null, playerName: "lapka");
+        Penalties.Add(PenaltyType.Ban, Lapka, TimeSpan.FromDays(7), "it's \"cheating\"", by: Caller.Console, playerName: "lapka");
 
         var text = File.ReadAllText(PenaltiesFile);
         Assert.StartsWith("// Bans, gags and mutes.", text);
@@ -129,8 +129,8 @@ public sealed class PenaltyTests : AdminTestBase
     [Fact]
     public void Old_history_is_pruned_on_load()
     {
-        Penalties.Add(PenaltyType.Ban, Lapka, TimeSpan.FromMinutes(1), "old", admin: null);
-        Penalties.Add(PenaltyType.Ban, Greeny, null, "current", admin: null);
+        Penalties.Add(PenaltyType.Ban, Lapka, TimeSpan.FromMinutes(1), "old", by: Caller.Console);
+        Penalties.Add(PenaltyType.Ban, Greeny, null, "current", by: Caller.Console);
         Clock = Clock.AddDays(91);
 
         PenaltyManager.Initialize(Path.Combine(Dir, "penalties"), historyDays: 90);
@@ -142,14 +142,81 @@ public sealed class PenaltyTests : AdminTestBase
     [Fact]
     public void An_unreadable_file_is_not_overwritten()
     {
-        Penalties.Add(PenaltyType.Ban, Greeny, null, "keep me", admin: null);
+        Penalties.Add(PenaltyType.Ban, Greeny, null, "keep me", by: Caller.Console);
         File.WriteAllText(PenaltiesFile, File.ReadAllText(PenaltiesFile) + "{ broken");
 
         Assert.False(PenaltyManager.Reload());
         Assert.True(Penalties.IsBanned(Greeny)); // the previous penalties stay in force
 
-        Penalties.Add(PenaltyType.Ban, Lapka, null, "new", admin: null);
+        // New ones are refused rather than enforced until restart and then lost.
+        var error = Assert.Throws<CommandException>(() => Penalties.Add(PenaltyType.Ban, Lapka, null, "new", by: Caller.Console));
+        Assert.Contains("penalties.jsonc has an error", error.Message);
         Assert.Contains("{ broken", File.ReadAllText(PenaltiesFile)); // and the file keeps its history
+    }
+
+    [Fact]
+    public void A_ban_list_that_never_loaded_keeps_new_players_out()
+    {
+        File.WriteAllText(PenaltiesFile, "{ broken");
+        PenaltyManager.Initialize(Path.Combine(Dir, "penalties"));
+        Assert.Equal(PenaltyManager.UnavailableRejection, PenaltyManager.ConnectRejection(Lapka));
+        Assert.Null(PenaltyManager.ConnectRejection(0)); // bots
+        Assert.Throws<CommandException>(() => Penalties.Add(PenaltyType.Gag, Lapka, null, "x", Caller.Console));
+    }
+
+    private sealed class MemoryPenaltyStore : IPenaltyStore
+    {
+        public Task<IReadOnlyList<Penalty>> LoadActiveAsync(CancellationToken ct) => Task.FromResult<IReadOnlyList<Penalty>>([]);
+        public Task AddAsync(Penalty penalty, CancellationToken ct) => Task.CompletedTask;
+        public Task UpdateAsync(Penalty penalty, CancellationToken ct) => Task.CompletedTask;
+        public Task<IReadOnlyList<Penalty>> LoadHistoryAsync(ulong steamId64, CancellationToken ct) => Task.FromResult<IReadOnlyList<Penalty>>([]);
+        public event Action? Changed { add { } remove { } }
+    }
+
+    private sealed class StoreOwner : DeadworksPluginBase
+    {
+        public override string Name => "Store";
+    }
+
+    [Fact]
+    public void A_configured_penalty_store_that_is_not_registered_fails_closed()
+    {
+        PenaltyManager.Initialize(Path.Combine(Dir, "penalties"), "mysql");
+        Assert.Equal(PenaltyManager.UnavailableRejection, PenaltyManager.ConnectRejection(Lapka));
+
+        var owner = new StoreOwner();
+        Penalties.RegisterStore(owner, "mysql", new MemoryPenaltyStore());
+        TimerEngine.OnTick(); // it loads on the next tick
+        Assert.Null(PenaltyManager.ConnectRejection(Lapka));
+        Penalties.Add(PenaltyType.Ban, Lapka, null, "x", Caller.Console);
+        Assert.NotNull(PenaltyManager.ConnectRejection(Lapka));
+
+        PenaltyManager.UnregisterStoresOwnedBy([owner]);
+        Assert.Equal(PenaltyManager.UnavailableRejection, PenaltyManager.ConnectRejection(Greeny));
+    }
+
+    [Fact]
+    public void Players_steam_has_not_verified_yet_cannot_be_penalized()
+    {
+        PermissionManager.OnClientConnect(4, Lapka);
+        PermissionManager.IsSlotAuthenticated = _ => false;
+        try
+        {
+            var error = Assert.Throws<CommandException>(() => Penalties.Add(PenaltyType.Ban, Lapka, null, "x", Caller.Console));
+            Assert.Contains("hasn't been verified by Steam yet", error.Message);
+            Assert.Throws<CommandException>(() => Penalties.Add(PenaltyType.Gag, Lapka, null, "x", Caller.Console));
+            Assert.Empty(Penalties.GetActive());
+
+            // Offline SteamIDs are unaffected, and so is everyone once Steam has confirmed them.
+            Penalties.Add(PenaltyType.Ban, Greeny, null, "x", Caller.Console);
+            PermissionManager.IsSlotAuthenticated = _ => true;
+            Penalties.Add(PenaltyType.Gag, Lapka, null, "x", Caller.Console);
+            Assert.Equal(2, Penalties.GetActive().Count);
+        }
+        finally
+        {
+            PermissionManager.IsSlotAuthenticated = _ => true;
+        }
     }
 
     [Fact]
@@ -159,7 +226,7 @@ public sealed class PenaltyTests : AdminTestBase
         var message = new ChatMessage { SenderSlot = 3, ChatText = "hello", AllChat = true, LaneColor = default };
         Assert.Equal(HookResult.Continue, PluginLoader.DispatchChatMessage(message));
 
-        Penalties.Add(PenaltyType.Gag, Lapka, TimeSpan.FromMinutes(5), "spam", admin: null);
+        Penalties.Add(PenaltyType.Gag, Lapka, TimeSpan.FromMinutes(5), "spam", by: Caller.Console);
         Assert.Equal(HookResult.Handled, PluginLoader.DispatchChatMessage(message));
 
         // Chat commands still count as handled, so they're never shown in chat either.
@@ -170,8 +237,8 @@ public sealed class PenaltyTests : AdminTestBase
     [Fact]
     public void Activity_is_logged_to_a_daily_file_with_details()
     {
-        AdminActivity.Show(null, "kicked lapka: spam", details: $"target={Lapka}");
-        AdminActivity.Log(null, "unbanned 1");
+        AdminActivity.Show(Caller.Console, "kicked lapka: spam", details: $"target={Lapka}");
+        AdminActivity.Log(Caller.Console, "unbanned 1");
 
         var file = Path.Combine(LogDir, "admin-2026-09-26.log");
         var lines = File.ReadAllLines(file);
@@ -275,12 +342,15 @@ public sealed class AdminPluginTests : AdminTestBase
         var text = File.ReadAllText(Path.Combine(Dir, "permissions", "generated", "AdminPlugin.jsonc"));
         foreach (var perm in new[]
                  {
-                     "admin.moderation.kick", "admin.moderation.ban", "admin.moderation.ban.permanent", "admin.moderation.ban.offline",
-                     "admin.moderation.unban", "admin.moderation.gag", "admin.moderation.slay", "admin.moderation.who",
-                     "admin.server.map", "admin.server.rcon", "admin.server.cvar", "admin.server.cvar.cheats",
-                     "admin.server.cvar.protected", "admin.server.config"
+                     "admin.moderation.kick", "admin.moderation.ban", "admin.moderation.unban", "admin.moderation.gag",
+                     "admin.moderation.slay", "admin.moderation.who",
+                     "admin.server.map", "admin.server.rcon", "admin.server.cvar", "admin.server.config"
                  })
             Assert.Contains($"\"tag\": \"{perm}\"", text);
+
+        // No permission is also the parent of another.
+        Assert.DoesNotContain("admin.moderation.ban.", text);
+        Assert.DoesNotContain("admin.server.cvar.", text);
     }
 
     [Theory]
@@ -296,6 +366,15 @@ public sealed class AdminPluginTests : AdminTestBase
 
     [Fact]
     public void Permanent_duration() => Assert.Equal("permanently", AdminPlugin.DescribeDuration(null));
+
+    [Theory]
+    [InlineData("sv_password hunter2", "sv_password (value hidden)")]
+    [InlineData("\"sv_password\" hunter2", "sv_password (value hidden)")]
+    [InlineData("sv_password", "sv_password")]   // reading it isn't a secret in the log
+    [InlineData("sv_cheats 1", "sv_cheats 1")]
+    [InlineData("sv_cheats 1; sv_password hunter2", "sv_cheats 1; sv_password (value hidden)")]
+    public void Rcon_lines_that_set_passwords_are_redacted_in_the_log(string line, string logged)
+        => Assert.Equal(logged, AdminPlugin.Redact(line, name => name == "sv_password"));
 
     [Theory]
     [InlineData("server.cfg", true)]

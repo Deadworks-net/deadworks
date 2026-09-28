@@ -61,20 +61,14 @@ public class CommandDispatchTests
         Assert.Equal("paramstestcommand", commandName);
         Assert.Equal(expected, args); // exactly what ChatCommandContext.Args exposes
 
-        var message = new ChatMessage { SenderSlot = -1, ChatText = chatText, AllChat = true, LaneColor = default };
-        var plugin = DispatchChat(new ChatCommandContext(message, commandName, args, prefix));
+        // Chat always comes from a player, and a test has no player controller to run it as, so bind the
+        // tokenized arguments through the console path instead.
+        var plugin = DispatchConsole("dw_paramstestcommand", [.. args]);
         Assert.Equal(expected, plugin.Received);
     }
 
     private static RecordingPlugin DispatchConsole(string command, params string[] args) =>
         WithRegisteredPlugin(_ => ConCommandManager.Dispatch(-1, command, [command, .. args]));
-
-    private static RecordingPlugin DispatchChat(ChatCommandContext ctx) =>
-        WithRegisteredPlugin(chatRegistry =>
-        {
-            foreach (var handler in chatRegistry.Snapshot(ctx.Command) ?? [])
-                handler(ctx);
-        });
 
     private static RecordingPlugin WithRegisteredPlugin(
         Action<HandlerRegistry<string, Func<ChatCommandContext, HookResult>>> dispatch)
