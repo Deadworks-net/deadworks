@@ -181,6 +181,11 @@ internal static class CommandBinder
                         boundArgs[i] = Convert(tokens[tokenIdx], slot.Type);
                         tokenIdx++;
                     }
+                    catch (CommandException cex)
+                    {
+                        error = cex.Message; // a converter explaining what's wrong beats the usage line
+                        return false;
+                    }
                     catch
                     {
                         error = BuildUsage(plan);
@@ -216,6 +221,11 @@ internal static class CommandBinder
                         for (int j = 0; j < remaining; j++)
                             arr.SetValue(Convert(tokens[tokenIdx + j], slot.Type), j);
                     }
+                    catch (CommandException cex)
+                    {
+                        error = cex.Message;
+                        return false;
+                    }
                     catch
                     {
                         error = BuildUsage(plan);
@@ -238,8 +248,13 @@ internal static class CommandBinder
 
     public static object Convert(string token, Type type)
     {
+        type = Nullable.GetUnderlyingType(type) ?? type;
         if (type.IsEnum)
-            return Enum.Parse(type, token, ignoreCase: true);
+        {
+            // Enum.Parse also takes any number, so "99" would bind to a value the enum doesn't have.
+            var parsed = Enum.Parse(type, token, ignoreCase: true);
+            return Enum.IsDefined(type, parsed) ? parsed : throw new FormatException($"'{token}' isn't a {type.Name}");
+        }
 
         if (IsBuiltInScalar(type))
             return ConCommandManager.ConvertValue(token, type);
@@ -251,9 +266,16 @@ internal static class CommandBinder
     }
 
     private static bool IsBuiltInScalar(Type type) =>
-        type == typeof(int) || type == typeof(long) ||
+        type == typeof(int) || type == typeof(long) || type == typeof(uint) || type == typeof(ulong) ||
         type == typeof(float) || type == typeof(double) ||
         type == typeof(bool) || type == typeof(string);
+
+    /// <summary>Whether an argument of this type can be parsed at all: built in, an enum, or a registered converter.</summary>
+    internal static bool CanConvert(Type type)
+    {
+        type = Nullable.GetUnderlyingType(type) ?? type;
+        return type.IsEnum || IsBuiltInScalar(type) || CommandConverters.Has(type);
+    }
 
     private static bool HasParams(Plan plan)
     {

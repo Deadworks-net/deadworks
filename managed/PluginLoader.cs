@@ -346,6 +346,7 @@ internal static partial class PluginLoader
 
         // Stop the plugin's zones before OnUnload, like its timers below.
         ZoneRegistry.RemoveOwnedBy(entry.Context);
+        CommandConverters.RemoveOwnedBy(entry.Context);
 
         foreach (var plugin in entry.Plugins)
         {

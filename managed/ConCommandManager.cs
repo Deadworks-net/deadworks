@@ -210,6 +210,8 @@ internal static class ConCommandManager
         }
         if (type == typeof(string)) return arg;
         if (type == typeof(long)) return long.Parse(arg);
+        if (type == typeof(uint)) return uint.Parse(arg);
+        if (type == typeof(ulong)) return ulong.Parse(arg);
 
         throw new NotSupportedException($"Type '{type.Name}' is not supported");
     }

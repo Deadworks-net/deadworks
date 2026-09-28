@@ -83,6 +83,16 @@ internal static class CommandRegistration
                         continue;
                     }
 
+                    // Said once at load, rather than as a bare usage line every time someone runs the command.
+                    foreach (var parameter in method.GetParameters())
+                    {
+                        var type = parameter.ParameterType.IsArray ? parameter.ParameterType.GetElementType()! : parameter.ParameterType;
+                        if (!IsInjected(type) && !CommandBinder.CanConvert(type))
+                            Console.WriteLine($"[CommandRegistration] Warning: {plugin.Name}.{method.Name}: parameter '{parameter.Name}' is a "
+                                              + $"{type.Name}, which Deadworks can't parse, so the command will only ever show its usage. "
+                                              + "Register a parser with CommandConverters.Register in OnLoad.");
+                    }
+
                     CommandBinder.Plan plan;
                     try
                     {
@@ -172,6 +182,9 @@ internal static class CommandRegistration
             IsAlias(attr, name) ? $"/{attr.Names[0]}" : null);
         Console.WriteLine($"[CommandRegistration] Registered chat command: {plugin.Name} -> /{name}");
     }
+
+    private static bool IsInjected(Type type)
+        => type == typeof(Caller) || type == typeof(Target) || typeof(CCitadelPlayerController).IsAssignableFrom(type);
 
     private static bool IsAlias(CommandAttribute attr, string name) => !name.Equals(attr.Names[0], StringComparison.OrdinalIgnoreCase);
 

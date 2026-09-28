@@ -40,7 +40,20 @@ public class CommandDispatchTests
 
         [Command("asyncvoidtestcommand")]
         public async void AsyncVoid() => await Task.Yield();
+
+        [Command("typestestcommand")]
+        public void Types(ulong id, Colour colour, int? count = null) => Received.Add($"{id} {colour} {count?.ToString() ?? "none"}");
+
+        [Command("coordtestcommand")]
+        public void Coords(Coord at) => Received.Add($"{at.X},{at.Y}");
+
+        [Command("unparseabletestcommand")]
+        public void Unparseable(TimeSpan length) => Received.Add(length.ToString());
     }
+
+    public enum Colour { Red, Blue }
+
+    public readonly record struct Coord(int X, int Y);
 
     /// <summary>
     /// <c>dw_stringtestcommand "one two"</c> arrives as argv <c>["dw_stringtestcommand", "one two"]</c>:
@@ -116,6 +129,50 @@ public class CommandDispatchTests
     {
         var output = CaptureConsole(() => WithRegisteredPlugin(_ => Assert.False(ConCommandManager.IsRegistered("dw_asyncvoidtestcommand"))));
         Assert.Contains("AsyncVoid is async void", output);
+    }
+
+    [Fact]
+    public void Steam_ids_enums_and_optional_numbers_bind()
+    {
+        var plugin = DispatchConsole("dw_typestestcommand", "76561197960287930", "blue", "3");
+        Assert.Equal("76561197960287930 Blue 3", Assert.Single(plugin.Received));
+        Assert.Equal("76561197960287930 Red none", Assert.Single(DispatchConsole("dw_typestestcommand", "76561197960287930", "red").Received));
+    }
+
+    [Fact]
+    public void An_enum_number_it_doesnt_have_is_refused()
+    {
+        string? output = null;
+        var plugin = WithRegisteredPlugin(_ => output = CaptureConsole(() =>
+            ConCommandManager.Dispatch(-1, "dw_typestestcommand", ["dw_typestestcommand", "1", "99"])));
+        Assert.Empty(plugin.Received);
+        Assert.Contains("Usage: dw_typestestcommand <id> <red|blue> [count]", output);
+    }
+
+    [Fact]
+    public void A_converter_can_explain_what_is_wrong()
+    {
+        CommandConverters.Register<Coord>(s => s.Split(',') is [var x, var y] && int.TryParse(x, out var xi) && int.TryParse(y, out var yi)
+            ? new Coord(xi, yi)
+            : throw new CommandException($"'{s}' isn't x,y."));
+        try
+        {
+            Assert.Equal("3,4", Assert.Single(DispatchConsole("dw_coordtestcommand", "3,4").Received));
+            string? output = null;
+            WithRegisteredPlugin(_ => output = CaptureConsole(() => ConCommandManager.Dispatch(-1, "dw_coordtestcommand", ["dw_coordtestcommand", "nope"])));
+            Assert.Contains("'nope' isn't x,y.", output);
+        }
+        finally
+        {
+            CommandConverters.Unregister<Coord>();
+        }
+    }
+
+    [Fact]
+    public void A_parameter_type_nothing_can_parse_is_reported_at_load()
+    {
+        var output = CaptureConsole(() => WithRegisteredPlugin(_ => { }));
+        Assert.Contains("Unparseable: parameter 'length' is a TimeSpan, which Deadworks can't parse", output);
     }
 
     private static string CaptureConsole(Action action)
