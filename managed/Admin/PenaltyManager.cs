@@ -14,7 +14,9 @@ internal static class PenaltyManager
     /// <summary>Stands in for a configured store no plugin has registered. It never loads, so nobody new gets in.</summary>
     private sealed class UnavailableStore(string name) : IPenaltyStore
     {
-        private Exception Missing => new InvalidOperationException($"no plugin has registered the '{name}' store");
+        private Exception Missing => new InvalidOperationException(name == DeadworksConfig.BrokenStoreName
+            ? "deadworks.jsonc has an error, so which store to use is unknown"
+            : $"no plugin has registered the '{name}' store");
         public Task<IReadOnlyList<Penalty>> LoadActiveAsync(CancellationToken ct) => Task.FromException<IReadOnlyList<Penalty>>(Missing);
         public Task AddAsync(Penalty penalty, CancellationToken ct) => Task.FromException(Missing);
         public Task UpdateAsync(Penalty penalty, CancellationToken ct) => Task.FromException(Missing);
