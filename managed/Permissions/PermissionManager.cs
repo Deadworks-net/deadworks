@@ -191,11 +191,13 @@ internal static class PermissionManager
         }
 
         ulong[] online;
+        var firstLoad = false;
         lock (_lock)
         {
             if (generation != _generation)
                 return false;
 
+            firstLoad = !_rolesLoaded;
             _roles = roles;
             _rolesLoaded = true;
             LastLoadError = null;
@@ -216,6 +218,10 @@ internal static class PermissionManager
             Console.WriteLine($"[Permissions] WARNING: {UnavailableMessage}");
         else
             Console.WriteLine($"[Permissions] Loaded {_roles.Count} roles from the '{_storeName}' store");
+
+        // A fresh server has nobody to run admin commands in game; say how, where the owner is looking right now.
+        if (firstLoad && ReferenceEquals(_store, _jsonStore) && _jsonStore!.AllPlayers().Count == 0)
+            Console.WriteLine("[Permissions] No admins yet. Join the server, then run this here: dw_role_grant <your name> admin");
 
         PermissionManifest.WriteAll();
         if (_startupComplete)
