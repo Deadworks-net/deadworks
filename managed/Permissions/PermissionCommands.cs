@@ -215,13 +215,24 @@ internal sealed class PermissionCommands : DeadworksPluginBase
         if (SteamIds.TryParse(input, out var steamId64))
         {
             var slot = PermissionManager.FindSlot(steamId64);
-            return new ResolvedPlayer(steamId64, slot, slot >= 0 ? NameInSlot(slot) : null);
+            PermissionManager.IsLoaded(steamId64);
+            return new ResolvedPlayer(steamId64, slot, slot >= 0 ? NameInSlot(slot) : PermissionManager.SavedName(steamId64));
         }
 
         if (!caller.IsConsole && caller.Player == null)
             throw new CommandException("You're no longer on the server.");
         if (!TargetResolver.TryResolve(input, caller.Player, enforceImmunity: false, out var target, out var error))
-            throw new CommandException(error ?? $"No player matches '{input}'.");
+        {
+            // Staff are often managed while they're away: players.jsonc keeps the name each one had.
+            var saved = PermissionManager.FindSavedByName(input);
+            if (saved.Count == 1)
+                return new ResolvedPlayer(saved[0].SteamId64, -1, saved[0].Name);
+            if (saved.Count > 1)
+                throw new CommandException($"'{input}' matches several saved players: "
+                                           + $"{string.Join(", ", saved.Select(s => $"{s.Name} ({s.SteamId64})"))}. Use a SteamID.");
+            throw new CommandException($"{error ?? $"No player matches '{input}'."} For someone who isn't on the server, use their SteamID"
+                                       + " or the exact name saved in players.jsonc.");
+        }
         if (target!.IsGroup)
             throw new CommandException("Name one player: a SteamID, #slot or part of their name.");
 

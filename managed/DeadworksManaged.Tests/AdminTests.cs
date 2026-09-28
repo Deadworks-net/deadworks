@@ -619,6 +619,20 @@ public sealed class StaffChangeLogTests : AdminTestBase
     }
 
     [Fact]
+    public void Staff_who_are_offline_can_be_managed_by_their_saved_name()
+    {
+        File.WriteAllText(Path.Combine(Dir, "permissions", "players.jsonc"),
+            $$"""{ "{{Lapka}}": { "name": "lapka", "roles": ["admin"] }, "{{Greeny}}": { "name": "greeny" } }""");
+        Run("dw_perm_reload");
+
+        Assert.Contains($"lapka ({Lapka}):", Run("dw_perm_list", "LAPKA"));
+        Run("dw_role_revoke", "lapka", "admin");
+        Assert.Empty(Permissions.GetRoles(Lapka));
+        Assert.Contains($"greeny ({Greeny}):", Run("dw_perm_list", Greeny.ToString())); // by SteamID, named from the file
+        Assert.Contains("use their SteamID or the exact name saved in players.jsonc", Run("dw_perm_list", "nobody"));
+    }
+
+    [Fact]
     public void Usage_lines_read_like_what_you_type()
     {
         Assert.Contains("Usage: dw_role_grant <player> <role> [temp]", Run("dw_role_grant", "lapka"));

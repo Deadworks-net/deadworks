@@ -275,6 +275,23 @@ internal static class PermissionManager
         return HasArrived(steamId64);
     }
 
+    /// <summary>
+    /// Players in players.jsonc whose saved name is exactly <paramref name="name"/> (ignoring case), for managing staff
+    /// who aren't on the server by name. Empty for custom stores, which may not keep names at all.
+    /// </summary>
+    public static List<(ulong SteamId64, string Name)> FindSavedByName(string name)
+        => ReferenceEquals(_store, _jsonStore) && _jsonStore != null
+            ? _jsonStore.AllPlayers().Where(p => string.Equals(p.Entry.Name, name.Trim(), StringComparison.OrdinalIgnoreCase))
+                .Select(p => (p.Id, p.Entry.Name!)).ToList()
+            : [];
+
+    /// <summary>The name saved with this player's entry, if their entry has arrived and has one.</summary>
+    public static string? SavedName(ulong steamId64)
+    {
+        lock (_lock)
+            return _players.TryGetValue(steamId64, out var entry) ? entry?.Name : null;
+    }
+
     /// <summary>Whether the entry is in memory, without starting a load.</summary>
     internal static bool HasArrived(ulong steamId64)
     {
