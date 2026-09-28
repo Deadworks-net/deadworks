@@ -117,8 +117,9 @@ internal static class PermissionManager
     /// <summary>True while the configured store isn't registered, so nobody has any permission.</summary>
     public static bool StoreUnavailable => _store is UnavailableStore;
 
-    public static string UnavailableMessage =>
-        $"permissions.store is '{_storeName}', but no plugin has registered that store. Nobody has any permissions until one does; the server console still works.";
+    public static string UnavailableMessage => _storeName == DeadworksConfig.BrokenStoreName
+        ? "deadworks.jsonc has an error, so Deadworks doesn't know which permission store to use. Nobody has any permissions until it's fixed and the server restarted; the server console still works."
+        : $"permissions.store is '{_storeName}', but no plugin has registered that store. Nobody has any permissions until one does; the server console still works.";
 
     // --- Loading ---
 

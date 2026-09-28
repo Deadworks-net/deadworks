@@ -69,7 +69,9 @@ internal static class PenaltyManager
         }
         else
         {
-            Console.WriteLine($"[Penalties] Waiting for a plugin to register the '{_storeName}' store. New players can't join until it does.");
+            Console.WriteLine(_storeName == DeadworksConfig.BrokenStoreName
+                ? "[Penalties] deadworks.jsonc has an error, so the ban list can't be checked. New players can't join until it's fixed and the server restarted."
+                : $"[Penalties] Waiting for a plugin to register the '{_storeName}' store. New players can't join until it does.");
             SetStore(new UnavailableStore(_storeName));
         }
     }

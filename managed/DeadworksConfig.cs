@@ -84,11 +84,21 @@ internal static class DeadworksConfig
     private static readonly JsonSerializerOptions JsonOptions = new()
     {
         ReadCommentHandling = JsonCommentHandling.Skip,
+        AllowTrailingCommas = true,
         WriteIndented = true,
         PropertyNameCaseInsensitive = true
     };
 
     private static DeadworksConfigRoot _root = new();
+
+    /// <summary>
+    /// The store name used when deadworks.jsonc can't be read: no plugin can register it, so the permission and penalty
+    /// stores stay unavailable. Falling back to the defaults would quietly swap a server's database for the JSON files.
+    /// </summary>
+    internal const string BrokenStoreName = "(deadworks.jsonc has an error)";
+
+    /// <summary>deadworks.jsonc exists but couldn't be read, so everything that depends on it fails closed.</summary>
+    public static bool Broken { get; private set; }
     private static string _configPath = "";
 
     public static ServerBrowserConfig ServerBrowser => _root.ServerBrowser;
@@ -105,6 +115,17 @@ internal static class DeadworksConfig
         var configsDir = Path.GetFullPath(Path.Combine(managedDir!, "..", "configs"));
         _configPath = Path.Combine(configsDir, "deadworks.jsonc");
 
+        Load();
+    }
+
+    /// <summary>Reads <paramref name="path"/> as deadworks.jsonc from scratch; null just resets to the defaults.</summary>
+    internal static void LoadForTests(string? path)
+    {
+        _root = new();
+        Broken = false;
+        if (path == null)
+            return;
+        _configPath = path;
         Load();
     }
 
@@ -133,7 +154,14 @@ internal static class DeadworksConfig
         }
         catch (Exception ex)
         {
-            Console.WriteLine($"[DeadworksConfig] Failed to parse config: {ex.Message}");
+            Broken = true;
+            _root = new();
+            _root.ServerBrowser.Unlisted = true;
+            _root.Permissions.Store = BrokenStoreName;
+            _root.Penalties.Store = BrokenStoreName;
+            Console.WriteLine($"[DeadworksConfig] ERROR: failed to parse deadworks.jsonc: {ex.Message.TrimEnd('.')}. Until it's fixed and the "
+                              + "server restarted, nobody has any permissions, new players can't join (the ban list can't be checked) and "
+                              + "the server isn't listed. The server console still works.");
         }
     }
 }
