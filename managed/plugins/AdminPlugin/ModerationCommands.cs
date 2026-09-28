@@ -5,20 +5,20 @@ namespace DeadworksAdmin;
 public sealed partial class AdminPlugin
 {
     [Command("kick", Description = "Kick a player: kick <player> [reason]", Permission = Perm.Kick, SuppressChat = true)]
-    public void CmdKick(Caller caller, Target target, params string[] reason)
+    public void CmdKick(Caller caller, Target player, params string[] reason)
     {
         var why = Reason(reason, Config.DefaultKickReason);
         // @all and @team leave out whoever ran the command.
-        var players = target.IsGroup && caller.Player is { } self
-            ? target.Where(p => p.Slot != self.Slot).ToList()
-            : target.ToList();
+        var players = player.IsGroup && caller.Player is { } self
+            ? player.Where(p => p.Slot != self.Slot).ToList()
+            : player.ToList();
         if (players.Count == 0)
-            throw new CommandException($"'{target.Input}' only matches you.");
+            throw new CommandException($"'{player.Input}' only matches you.");
 
         var names = players.Select(p => p.PlayerName).ToList();
         var ids = TargetIds(players);
-        foreach (var player in players)
-            player.Kick($"You were kicked: {why}");
+        foreach (var p in players)
+            p.Kick($"You were kicked: {why}");
         AdminActivity.Show(caller, $"kicked {ListNames(names)}: {why}", details: ids);
     }
 
@@ -28,21 +28,7 @@ public sealed partial class AdminPlugin
     {
         var duration = Duration(minutes);
         var why = Reason(reason, Config.DefaultBanReason);
-
-        ulong id;
-        string? name;
-        // A SteamID nobody here has is a ban for someone who has left (or never joined). Anything else is a player.
-        if (SteamIds.TryParse(player, out var offlineId) && !Players.GetAll().Any(p => Permissions.GetSteamId(p.Slot) == offlineId))
-        {
-            if (!caller.IsConsole && !Permissions.CanTarget(caller.SteamId64, offlineId))
-                throw new CommandException($"You can't ban {offlineId}: their immunity is higher than yours.");
-            (id, name) = (offlineId, null);
-        }
-        else
-        {
-            var target = OnePlayer(Target.Resolve(caller, player), "ban");
-            (id, name) = (SteamIdOf(target), target.PlayerName);
-        }
+        var (id, name) = PlayerOrSteamId(caller, player, "ban");
 
         var replacing = CheckReplace(caller, PenaltyType.Ban, id, name ?? id.ToString(), duration, liftPermission: Perm.Unban);
         // Adding the ban kicks them, so it goes last; it also refuses players Steam hasn't verified yet.
@@ -65,81 +51,69 @@ public sealed partial class AdminPlugin
     [Command("bans", Description = "List active bans", Permission = Perm.Ban, SuppressChat = true)]
     public void CmdBans(Caller caller) => ListActive(caller, PenaltyType.Ban, "ban");
 
-    [Command("gag", Description = "Stop a player using chat: gag <player> <minutes> [reason], 0 = permanent", Permission = Perm.Gag, SuppressChat = true)]
-    public void CmdGag(Caller caller, Target target, int minutes, params string[] reason)
-    {
-        var player = OnePlayer(target, "gag");
-        var id = SteamIdOf(player);
-        var duration = Duration(minutes);
-        var why = Reason(reason, Config.DefaultGagReason);
+    [Command("gag", Description = "Stop a player using chat: gag <player|steamid> <minutes> [reason], 0 = permanent", Permission = Perm.Gag, SuppressChat = true)]
+    public void CmdGag(Caller caller, string player, int minutes, params string[] reason)
+        => AddPenalty(caller, PenaltyType.Gag, player, minutes, Reason(reason, Config.DefaultGagReason));
 
-        var replacing = CheckReplace(caller, PenaltyType.Gag, id, player.PlayerName, duration, liftPermission: null);
-        Penalties.Add(PenaltyType.Gag, id, duration, why, caller, player.PlayerName);
-        AdminActivity.Show(caller, $"gagged {player.PlayerName} {DescribeDuration(duration)}: {why}{replacing}", details: $"target={id}");
-    }
-
-    [Command("ungag", Description = "Let a gagged player use chat again: ungag <player>", Permission = Perm.Gag, SuppressChat = true)]
-    public void CmdUngag(Caller caller, Target target)
-    {
-        var player = OnePlayer(target, "ungag");
-        var id = SteamIdOf(player);
-        if (!Penalties.Remove(PenaltyType.Gag, id, caller))
-            throw new CommandException($"{player.PlayerName} isn't gagged.");
-        AdminActivity.Show(caller, $"ungagged {player.PlayerName}", details: $"target={id}");
-    }
+    [Command("ungag", Description = "Let a gagged player use chat again: ungag <player|steamid>", Permission = Perm.Gag, SuppressChat = true)]
+    public void CmdUngag(Caller caller, string player) => LiftPenalty(caller, PenaltyType.Gag, player);
 
     [Command("gags", Description = "List active gags", Permission = Perm.Gag, SuppressChat = true)]
     public void CmdGags(Caller caller) => ListActive(caller, PenaltyType.Gag, "gag");
 
-    [Command("mute", Description = "Stop a player using voice chat: mute <player> <minutes> [reason], 0 = permanent", Permission = Perm.Mute, SuppressChat = true)]
-    public void CmdMute(Caller caller, Target target, int minutes, params string[] reason)
-    {
-        var player = OnePlayer(target, "mute");
-        var id = SteamIdOf(player);
-        var duration = Duration(minutes);
-        var why = Reason(reason, Config.DefaultMuteReason);
+    [Command("mute", Description = "Stop a player using voice chat: mute <player|steamid> <minutes> [reason], 0 = permanent", Permission = Perm.Mute, SuppressChat = true)]
+    public void CmdMute(Caller caller, string player, int minutes, params string[] reason)
+        => AddPenalty(caller, PenaltyType.Mute, player, minutes, Reason(reason, Config.DefaultMuteReason));
 
-        var replacing = CheckReplace(caller, PenaltyType.Mute, id, player.PlayerName, duration, liftPermission: null);
-        Penalties.Add(PenaltyType.Mute, id, duration, why, caller, player.PlayerName);
-        AdminActivity.Show(caller, $"muted {player.PlayerName} {DescribeDuration(duration)}: {why}{replacing}", details: $"target={id}");
+    [Command("unmute", Description = "Let a muted player use voice chat again: unmute <player|steamid>", Permission = Perm.Mute, SuppressChat = true)]
+    public void CmdUnmute(Caller caller, string player) => LiftPenalty(caller, PenaltyType.Mute, player);
+
+    /// <summary>gag and mute: the same steps as ban, without a kick or a separate lifting permission.</summary>
+    private void AddPenalty(Caller caller, PenaltyType type, string player, int minutes, string why)
+    {
+        var duration = Duration(minutes);
+        var verb = Past(type);
+        var (id, name) = PlayerOrSteamId(caller, player, Noun(type));
+        var replacing = CheckReplace(caller, type, id, name ?? id.ToString(), duration, liftPermission: null);
+        Penalties.Add(type, id, duration, why, caller, name);
+        AdminActivity.Show(caller, $"{verb} {name ?? id.ToString()} {DescribeDuration(duration)}: {why}{replacing}", details: $"target={id}");
     }
 
-    [Command("unmute", Description = "Let a muted player use voice chat again: unmute <player>", Permission = Perm.Mute, SuppressChat = true)]
-    public void CmdUnmute(Caller caller, Target target)
+    /// <summary>ungag and unmute: whoever gave it, online or not.</summary>
+    private static void LiftPenalty(Caller caller, PenaltyType type, string player)
     {
-        var player = OnePlayer(target, "unmute");
-        var id = SteamIdOf(player);
-        if (!Penalties.Remove(PenaltyType.Mute, id, caller))
-            throw new CommandException($"{player.PlayerName} isn't muted.");
-        AdminActivity.Show(caller, $"unmuted {player.PlayerName}", details: $"target={id}");
+        var (id, name) = PlayerOrSteamId(caller, player, $"un{Noun(type)}");
+        if (!Penalties.Remove(type, id, caller))
+            throw new CommandException($"{name ?? id.ToString()} isn't {Past(type)}.");
+        AdminActivity.Show(caller, $"un{Past(type)} {name ?? id.ToString()}", details: $"target={id}");
     }
 
     [Command("mutes", Description = "List active mutes", Permission = Perm.Mute, SuppressChat = true)]
     public void CmdMutes(Caller caller) => ListActive(caller, PenaltyType.Mute, "mute");
 
     [Command("slay", Description = "Kill a player's hero: slay <player>", Permission = Perm.Slay, SuppressChat = true)]
-    public void CmdSlay(Caller caller, Target target)
+    public void CmdSlay(Caller caller, Target player)
     {
         var slain = new List<CCitadelPlayerController>();
-        foreach (var player in target)
+        foreach (var p in player)
         {
-            var pawn = player.GetHeroPawn();
+            var pawn = p.GetHeroPawn();
             if (pawn == null || pawn.Health <= 0)
                 continue;
             using var damage = new CTakeDamageInfo(999999f, attacker: pawn);
             damage.DamageFlags |= TakeDamageFlags.ForceDeath | TakeDamageFlags.AllowSuicide;
             pawn.TakeDamage(damage);
-            slain.Add(player);
+            slain.Add(p);
         }
         if (slain.Count == 0)
-            throw new CommandException(target.IsGroup ? $"Nobody in {target.Input} is alive." : $"{target.Single().PlayerName} isn't alive.");
+            throw new CommandException(player.IsGroup ? $"Nobody in {player.Input} is alive." : $"{player.Single().PlayerName} isn't alive.");
         AdminActivity.Show(caller, $"slayed {ListNames(slain.Select(p => p.PlayerName).ToList())}", details: TargetIds(slain));
     }
 
     [Command("who", Description = "List players with their SteamID, team, roles and penalties: who [player]", Permission = Perm.Who, SuppressChat = true)]
-    public void CmdWho(Caller caller, Target? target = null)
+    public void CmdWho(Caller caller, Target? player = null)
     {
-        var players = target?.ToList() ?? Players.GetAll().ToList();
+        var players = player?.ToList() ?? Players.GetAll().ToList();
         var lines = new List<string> { $"{players.Count} player{(players.Count == 1 ? "" : "s")}:" };
         foreach (var p in players.OrderBy(p => p.Slot))
         {

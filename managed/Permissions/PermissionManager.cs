@@ -891,6 +891,7 @@ internal static class PermissionManager
         public bool CanTarget(ulong caller, ulong target) => PermissionManager.CanTarget(caller, target);
         public bool CanTargetSlots(int callerSlot, int targetSlot) => PermissionManager.CanTargetSlots(callerSlot, targetSlot);
         public int GetImmunity(ulong steamId64) => GetSubject(steamId64).Immunity;
+        public bool IsLoaded(ulong steamId64) => PermissionManager.IsLoaded(steamId64);
         public IReadOnlyList<string> GetRoles(ulong steamId64) => GetSubject(steamId64).AssignedRoles;
         public ulong GetSlotSteamId(int slot) => PermissionManager.GetSlotSteamId(slot);
         public void RegisterStore(IDeadworksPlugin owner, string name, IPermissionStore store) => PermissionManager.RegisterStore(owner, name, store);

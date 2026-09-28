@@ -277,42 +277,25 @@ internal static class CommandBinder
             if (slot.Kind == SlotKind.Caller || slot.Kind == SlotKind.RawArgs)
                 continue;
 
+            // Written for the people typing it: the parameter's name (an enum's choices), no C# types, and a default only
+            // when there is one worth showing. "<player> <minutes> [reason...]", not "<player:string> [temp:string=]".
             sb.Append(' ');
+            var label = slot.Type.IsEnum ? string.Join('|', Enum.GetNames(slot.Type)).ToLowerInvariant() : slot.Name;
             if (slot.Kind == SlotKind.Params)
             {
-                sb.Append('[');
-                sb.Append(slot.Name);
-                sb.Append(':');
-                sb.Append(TypeLabel(slot.Type));
-                sb.Append("...]");
+                sb.Append($"[{label}...]");
                 continue;
             }
 
-            bool optional = slot.HasDefault;
-            sb.Append(optional ? '[' : '<');
-            sb.Append(slot.Name);
-            sb.Append(':');
-            sb.Append(TypeLabel(slot.Type));
-            if (optional && slot.DefaultValue != null)
+            if (!slot.HasDefault)
             {
-                sb.Append('=');
-                sb.Append(slot.DefaultValue);
+                sb.Append($"<{label}>");
+                continue;
             }
-            sb.Append(optional ? ']' : '>');
+            var shownDefault = slot.DefaultValue is { } d && d.ToString() is { Length: > 0 } text && !slot.Type.IsEnum ? $"={text}" : "";
+            sb.Append($"[{label}{shownDefault}]");
         }
 
         return sb.ToString();
-    }
-
-    private static string TypeLabel(Type type)
-    {
-        if (type == typeof(int)) return "int";
-        if (type == typeof(long)) return "long";
-        if (type == typeof(float)) return "float";
-        if (type == typeof(double)) return "double";
-        if (type == typeof(bool)) return "bool";
-        if (type == typeof(string)) return "string";
-        if (type == typeof(Target)) return "player";
-        return type.Name;
     }
 }

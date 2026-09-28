@@ -45,19 +45,19 @@ internal sealed class PermissionCommands : DeadworksPluginBase
         }
     }
 
-    [Command("role_grant", Description = "Give a player a role. Add --temp to keep it for this session only", Permission = Manage, ConsoleOnly = true)]
+    [Command("role_grant", Description = "Give a player a role: role_grant <player> <role> [--temp]. --temp undoes it when the server restarts", Permission = Manage, ConsoleOnly = true)]
     public void RoleGrant(Caller caller, string player, string role, string temp = "")
         => Change(caller, player, PermissionManager.ChangeKind.GrantRole, role, temp);
 
-    [Command("role_revoke", Description = "Take a role from a player. Add --temp to undo it on restart", Permission = Manage, ConsoleOnly = true)]
+    [Command("role_revoke", Description = "Take a role from a player: role_revoke <player> <role> [--temp]. --temp undoes it when the server restarts", Permission = Manage, ConsoleOnly = true)]
     public void RoleRevoke(Caller caller, string player, string role, string temp = "")
         => Change(caller, player, PermissionManager.ChangeKind.RevokeRole, role, temp);
 
-    [Command("perm_grant", Description = "Give a player a permission; prefix with - to deny it. Add --temp for this session only", Permission = Manage, ConsoleOnly = true)]
+    [Command("perm_grant", Description = "Give a player a permission, or -permission to deny it: perm_grant <player> <permission> [--temp]. --temp undoes it when the server restarts", Permission = Manage, ConsoleOnly = true)]
     public void PermGrant(Caller caller, string player, string permission, string temp = "")
         => Change(caller, player, PermissionManager.ChangeKind.GrantPermission, permission, temp);
 
-    [Command("perm_revoke", Description = "Remove a permission (or a -deny) from a player's entry. Add --temp for this session only", Permission = Manage, ConsoleOnly = true)]
+    [Command("perm_revoke", Description = "Remove a permission or -deny from a player: perm_revoke <player> <permission> [--temp]. --temp undoes it when the server restarts", Permission = Manage, ConsoleOnly = true)]
     public void PermRevoke(Caller caller, string player, string permission, string temp = "")
         => Change(caller, player, PermissionManager.ChangeKind.RevokePermission, permission, temp);
 
@@ -90,7 +90,7 @@ internal sealed class PermissionCommands : DeadworksPluginBase
             ? $" (note: no loaded plugin declares {permission.Trim()}; check the spelling)"
             : "";
 
-    [Command("perm_list", Description = "Show a player's roles, permissions and immunity", Permission = View, ConsoleOnly = true)]
+    [Command("perm_list", Description = "Show a player's roles, permissions and immunity: perm_list <player>", Permission = View, ConsoleOnly = true)]
     public void PermList(Caller caller, string player)
     {
         var who = ResolvePlayer(caller, player);

@@ -34,6 +34,12 @@ public sealed class Caller
     /// <summary>Whether the caller may act on <paramref name="target"/> given both players' immunity. The console may target anyone.</summary>
     public bool CanTarget(CCitadelPlayerController target) => Player == null || Player.CanTarget(target);
 
+    /// <summary>
+    /// Whether the caller may act on this SteamID, on the server or not, by immunity. The console always may. False while
+    /// the target's entry is still loading; <see cref="Permissions.IsLoaded"/> tells the two apart.
+    /// </summary>
+    public bool CanTarget(ulong steamId64) => Player == null || Permissions.CanTarget(SteamId64, steamId64);
+
     /// <summary>A short reply: the player's chat, or the server console.</summary>
     public void Reply(string message)
     {

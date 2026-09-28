@@ -58,6 +58,33 @@ public sealed partial class AdminPlugin
         return $" (replaces {existing})";
     }
 
+    /// <summary>
+    /// A player on the server, or a SteamID that isn't, for commands that work on both. Immunity is checked either way,
+    /// against the saved entry for an offline SteamID. The name is null for an offline SteamID.
+    /// </summary>
+    private static (ulong Id, string? Name) PlayerOrSteamId(Caller caller, string player, string command)
+    {
+        if (SteamIds.TryParse(player, out var offlineId) && !Players.GetAll().Any(p => Permissions.GetSteamId(p.Slot) == offlineId))
+        {
+            if (!caller.CanTarget(offlineId))
+                throw new CommandException(Permissions.IsLoaded(offlineId)
+                    ? $"You can't {command} {offlineId}: their immunity is higher than yours."
+                    : $"{offlineId}'s record is still loading. Try again in a moment.");
+            return (offlineId, null);
+        }
+        var target = OnePlayer(Target.Resolve(caller, player), command);
+        return (SteamIdOf(target), target.PlayerName);
+    }
+
+    private static string Noun(PenaltyType type) => type.ToString().ToLowerInvariant();
+
+    private static string Past(PenaltyType type) => type switch
+    {
+        PenaltyType.Ban => "banned",
+        PenaltyType.Gag => "gagged",
+        _ => "muted",
+    };
+
     /// <summary>One named player; groups like @all are refused for penalties.</summary>
     private static CCitadelPlayerController OnePlayer(Target target, string command)
         => target.IsGroup

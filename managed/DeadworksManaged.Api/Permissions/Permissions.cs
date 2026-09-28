@@ -24,8 +24,18 @@ public static class Permissions
     /// <summary>Which grant decided <see cref="Has(ulong, string)"/>. This is what <c>dw_perm_check</c> prints.</summary>
     public static PermissionExplanation Explain(ulong steamId64, string permission) => B.Explain(steamId64, permission);
 
-    /// <summary>Whether the caller may act on the target: the target's immunity is not above the caller's.</summary>
+    /// <summary>
+    /// Whether the caller may act on the target: the target's immunity is not above the caller's. False while the
+    /// target's entry is still loading from the store, since their immunity isn't known yet; see <see cref="IsLoaded"/>.
+    /// </summary>
     public static bool CanTarget(ulong callerSteamId64, ulong targetSteamId64) => B.CanTarget(callerSteamId64, targetSteamId64);
+
+    /// <summary>
+    /// Whether the store's answer for this SteamID has arrived: its entry, or that it has none. Checks by SteamID start
+    /// loading it; until it arrives they answer as <c>default</c>, and <see cref="CanTarget(ulong, ulong)"/> refuses.
+    /// Always true for the JSON store.
+    /// </summary>
+    public static bool IsLoaded(ulong steamId64) => B.IsLoaded(steamId64);
 
     /// <summary>
     /// Whether the caller may act on the target given both players' immunity. A null caller or target is refused; use
@@ -61,6 +71,7 @@ internal interface IPermissionBackend
     bool CanTarget(ulong callerSteamId64, ulong targetSteamId64);
     bool CanTargetSlots(int callerSlot, int targetSlot);
     int GetImmunity(ulong steamId64);
+    bool IsLoaded(ulong steamId64);
     IReadOnlyList<string> GetRoles(ulong steamId64);
     ulong GetSlotSteamId(int slot);
     void RegisterStore(IDeadworksPlugin owner, string name, IPermissionStore store);

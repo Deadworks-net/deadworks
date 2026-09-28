@@ -399,6 +399,22 @@ public sealed class AdminPluginTests : AdminTestBase
     }
 
     [Fact]
+    public void Gags_and_mutes_work_on_players_who_have_left()
+    {
+        Console_("dw_gag", "STEAM_0:1:11101", "30", "spam");
+        Console_("dw_mute", Lapka.ToString(), "0");
+        Assert.True(Penalties.IsGagged(Lapka));
+        Assert.True(Penalties.IsMuted(Lapka));
+        Assert.Equal($"muted {Lapka} permanently: Muted by an admin", Logged[^1].Action);
+
+        Console_("dw_ungag", "[U:1:22203]");
+        Console_("dw_unmute", Lapka.ToString());
+        Assert.False(Penalties.IsGagged(Lapka));
+        Assert.False(Penalties.IsMuted(Lapka));
+        Assert.Equal($"unmuted {Lapka}", Logged[^1].Action);
+    }
+
+    [Fact]
     public void Replacing_a_ban_says_what_it_replaced()
     {
         Console_("dw_ban", Lapka.ToString(), "0", "cheating");
@@ -543,6 +559,13 @@ public sealed class StaffChangeLogTests : AdminTestBase
             Console.SetOut(original);
         }
         return writer.ToString();
+    }
+
+    [Fact]
+    public void Usage_lines_read_like_what_you_type()
+    {
+        Assert.Contains("Usage: dw_role_grant <player> <role> [temp]", Run("dw_role_grant", "lapka"));
+        Assert.Contains("Usage: dw_kick <player> [reason...]", Run("dw_kick"));
     }
 
     [Fact]
