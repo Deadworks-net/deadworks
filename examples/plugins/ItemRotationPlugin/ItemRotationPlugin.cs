@@ -70,15 +70,15 @@ public class ItemRotationPlugin : DeadworksPluginBase
 	#region Commands
 
 	[Command("ir_sets", Description = "Show the configured item sets and rotation options")]
-	public void CmdSets(CCitadelPlayerController? caller)
+	public void CmdSets(Caller caller)
 	{
-		Reply(caller, $"[ItemRotation] Swap Interval: {Config.SwapIntervalSeconds}s (time between rotations)");
-		Reply(caller, $"[ItemRotation] Selection Mode: {Config.SelectionMode} (sequential = 1->2->3, random = random each rotation)");
-		Reply(caller, $"[ItemRotation] Allow Duplicates: {Config.AllowDuplicateSets} (can multiple players share a set)");
+		caller.Reply($"[ItemRotation] Swap Interval: {Config.SwapIntervalSeconds}s (time between rotations)");
+		caller.Reply($"[ItemRotation] Selection Mode: {Config.SelectionMode} (sequential = 1->2->3, random = random each rotation)");
+		caller.Reply($"[ItemRotation] Allow Duplicates: {Config.AllowDuplicateSets} (can multiple players share a set)");
 
 		if (Config.ItemSets.Count == 0)
 		{
-			Reply(caller, "[ItemRotation] No item sets configured.");
+			caller.Reply("[ItemRotation] No item sets configured.");
 			return;
 		}
 
@@ -86,12 +86,12 @@ public class ItemRotationPlugin : DeadworksPluginBase
 		{
 			var set = Config.ItemSets[i];
 			var label = string.IsNullOrEmpty(set.Name) ? $"Set {i + 1}" : set.Name;
-			Reply(caller, $"{label}: {string.Join(", ", set.Items)}");
+			caller.Reply($"{label}: {string.Join(", ", set.Items)}");
 		}
 	}
 
 	[Command("ir_start", Description = "Start the item-rotation game", Permission = "itemrotation.manage")]
-	public void CmdStart(CCitadelPlayerController? caller)
+	public void CmdStart(Caller caller)
 	{
 		if (_running)
 			throw new CommandException("[ItemRotation] Game is already running! Use /ir_reset to stop.");
@@ -126,17 +126,17 @@ public class ItemRotationPlugin : DeadworksPluginBase
 	}
 
 	[Command("ir_swap", Description = "Force an immediate item-set rotation", Permission = "itemrotation.manage")]
-	public void CmdSwap(CCitadelPlayerController? caller)
+	public void CmdSwap(Caller caller)
 	{
 		if (!_running)
 			throw new CommandException("[ItemRotation] No game is running.");
 
 		OnSwapTick();
-		Reply(caller, "[ItemRotation] Forced a swap.");
+		caller.Reply("[ItemRotation] Forced a swap.");
 	}
 
 	[Command("ir_reset", Description = "Stop the item-rotation game and clear all items", Permission = "itemrotation.manage")]
-	public void CmdReset(CCitadelPlayerController? caller)
+	public void CmdReset(Caller caller)
 	{
 		if (!_running)
 			throw new CommandException("[ItemRotation] No game is running.");
@@ -144,12 +144,6 @@ public class ItemRotationPlugin : DeadworksPluginBase
 		StopGame();
 		ClearAllPlayerItems();
 		SendChatAll("[ItemRotation] Game stopped. All items cleared.");
-	}
-
-	private static void Reply(CCitadelPlayerController? to, string text)
-	{
-		if (to != null) SendChat(to.EntityIndex - 1, text);
-		else Console.WriteLine(text);
 	}
 
 	#endregion

@@ -60,6 +60,7 @@ internal static class CommandRegistration
         {
             var owner = PermissionManifest.OwnerOf(normalizedPath, plugin);
             var manifestCommands = new List<PermissionManifest.CommandInfo>();
+            var nullableCallers = new List<string>();
             var methods = plugin.GetType().GetMethods(
                 BindingFlags.Instance | BindingFlags.Public | BindingFlags.NonPublic);
 
@@ -97,6 +98,8 @@ internal static class CommandRegistration
                     try
                     {
                         plan = CommandBinder.Build(method, attr.Names[0]);
+                        if (plan.Slots.Any(s => s.Kind == CommandBinder.SlotKind.Caller && s.Type == typeof(CCitadelPlayerController) && s.CallerNullable))
+                            nullableCallers.Add(method.Name);
                     }
                     catch (Exception ex)
                     {
@@ -121,6 +124,12 @@ internal static class CommandRegistration
             }
 
             PermissionManifest.Add(normalizedPath, plugin, manifestCommands, manifestKey);
+
+            // One line per plugin: it's advice for the plugin's author, and many existing plugins do this.
+            if (nullableCallers.Count > 0)
+                Console.WriteLine($"[CommandRegistration] Note for {plugin.Name}'s author: {string.Join(", ", nullableCallers.Distinct())} take a "
+                                  + "CCitadelPlayerController? caller, where null quietly means the server console. A Caller parameter "
+                                  + "says it outright (caller.IsConsole), and Reply works for both.");
         }
     }
 
@@ -230,8 +239,12 @@ internal static class CommandRegistration
             if (!CommandBinder.TryBind(namedPlan, tokens, caller, out var boundArgs, out var error, out var silentSkip,
                     gate.EnforceImmunity))
             {
+                // The server console ran a command written for players only; say so rather than do nothing.
                 if (silentSkip)
+                {
+                    reply("Only players can run this command.");
                     return;
+                }
                 if (error != null)
                     reply(error);
                 return;

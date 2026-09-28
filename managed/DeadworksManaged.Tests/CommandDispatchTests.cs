@@ -47,6 +47,12 @@ public class CommandDispatchTests
         [Command("coordtestcommand")]
         public void Coords(Coord at) => Received.Add($"{at.X},{at.Y}");
 
+        [Command("playeronlytestcommand")]
+        public void PlayerOnly(CCitadelPlayerController player) => Received.Add(player.PlayerName);
+
+        [Command("nullablecallertestcommand")]
+        public void NullableCaller(CCitadelPlayerController? player) => Received.Add(player == null ? "console" : player.PlayerName);
+
         [Command("unparseabletestcommand")]
         public void Unparseable(TimeSpan length) => Received.Add(length.ToString());
     }
@@ -167,6 +173,19 @@ public class CommandDispatchTests
             CommandConverters.Unregister<Coord>();
         }
     }
+
+    [Fact]
+    public void The_console_is_told_when_a_command_is_for_players_only()
+    {
+        string? output = null;
+        var plugin = WithRegisteredPlugin(_ => output = CaptureConsole(() => ConCommandManager.Dispatch(-1, "dw_playeronlytestcommand", ["dw_playeronlytestcommand"])));
+        Assert.Empty(plugin.Received);
+        Assert.Contains("Only players can run this command.", output);
+    }
+
+    [Fact]
+    public void A_nullable_controller_caller_is_flagged_at_load()
+        => Assert.Contains("NullableCaller take a CCitadelPlayerController? caller", CaptureConsole(() => WithRegisteredPlugin(_ => { })));
 
     [Fact]
     public void A_parameter_type_nothing_can_parse_is_reported_at_load()
