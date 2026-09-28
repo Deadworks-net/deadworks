@@ -1,5 +1,5 @@
 using System.Reflection;
-using System.Runtime.ExceptionServices;
+using System.Runtime.CompilerServices;
 using DeadworksManaged.Api;
 using DeadworksManaged.PermissionSystem;
 
@@ -61,6 +61,14 @@ internal static class CommandRegistration
                     {
                         Console.WriteLine(
                             $"[CommandRegistration] {plugin.Name}.{method.Name}: ChatOnly and ConsoleOnly both set — skipping");
+                        continue;
+                    }
+
+                    // An exception escaping an async void method can't be caught here and takes the whole server down.
+                    if (method.ReturnType == typeof(void) && method.GetCustomAttribute<AsyncStateMachineAttribute>() != null)
+                    {
+                        Console.WriteLine($"[CommandRegistration] ERROR: {plugin.Name}.{method.Name} is async void, so an exception in it would "
+                                          + "crash the server. Make it return Task. Not registered.");
                         continue;
                     }
 
@@ -142,7 +150,7 @@ internal static class CommandRegistration
                 return resultOnSuccess;
             }
 
-            Invoke(plugin, method, boundArgs, reply);
+            Invoke(plugin, method, name, boundArgs, ctx.Controller, viaChat: true);
             return resultOnSuccess;
         };
 
@@ -205,7 +213,7 @@ internal static class CommandRegistration
                 return;
             }
 
-            Invoke(plugin, method, boundArgs, reply);
+            Invoke(plugin, method, conName, boundArgs, ctx.Controller, viaChat: false);
         };
 
         if (ConCommandManager.IsRegistered(conName))
@@ -215,24 +223,72 @@ internal static class CommandRegistration
         Console.WriteLine($"[CommandRegistration] Registered console command: {plugin.Name} -> {conName}{(attr.ServerOnly ? " (server-only)" : "")}");
     }
 
-    private static void Invoke(
-        IDeadworksPlugin plugin,
-        MethodInfo method,
-        object?[] boundArgs,
-        Action<string> reply)
+    internal const string FailedMessage = "That command failed. The server console has details.";
+
+    /// <summary>
+    /// Runs a command and deals with how it ends: a <see cref="CommandException"/> is the caller's answer; anything else
+    /// is a bug in the plugin, logged with its stack while the caller hears the command failed. A command returning a
+    /// Task is followed to the end the same way, back on the game thread, and only answers the player who ran it.
+    /// </summary>
+    private static void Invoke(IDeadworksPlugin plugin, MethodInfo method, string name, object?[] boundArgs,
+        CCitadelPlayerController? player, bool viaChat)
     {
+        void reply(string message)
+        {
+            if (viaChat)
+                ReplyViaChat(player, message);
+            else
+                ReplyViaConsole(player, message);
+        }
+
+        object? result;
         try
         {
-            method.Invoke(plugin, boundArgs);
+            result = method.Invoke(plugin, boundArgs);
         }
         catch (TargetInvocationException tie) when (tie.InnerException is CommandException cex)
         {
             reply(cex.Message);
+            return;
         }
         catch (TargetInvocationException tie) when (tie.InnerException != null)
         {
-            ExceptionDispatchInfo.Capture(tie.InnerException).Throw();
+            Failed(plugin, name, tie.InnerException, reply);
+            return;
         }
+
+        if (result is not Task task || task.IsCompletedSuccessfully)
+            return;
+
+        // By the time it finishes the player may have left, and someone else may have their slot and controller.
+        var slot = player?.Slot ?? -1;
+        var steamId64 = slot >= 0 ? PermissionManager.GetSlotSteamId(slot) : 0;
+        void replyIfStillHere(string message)
+        {
+            if (slot < 0)
+            {
+                Console.WriteLine(message);
+                return;
+            }
+            if (Players.FromSlot(slot) is not { } still || PermissionManager.GetSlotSteamId(slot) != steamId64)
+                return;
+            player = still;
+            reply(message);
+        }
+
+        task.ContinueWith(t => TimerEngine.EnqueueNextTick(() =>
+        {
+            if (t.Exception?.GetBaseException() is CommandException cex)
+                replyIfStillHere(cex.Message);
+            else if (t.Exception != null)
+                Failed(plugin, name, t.Exception.GetBaseException(), replyIfStillHere);
+        }), TaskScheduler.Default);
+    }
+
+    private static void Failed(IDeadworksPlugin plugin, string name, Exception ex, Action<string> reply)
+    {
+        Console.WriteLine($"[CommandRegistration] {plugin.Name}: command '{name}' threw {ex}");
+        reply(FailedMessage);
     }
 
     private static void ReplyViaChat(CCitadelPlayerController? to, string message)

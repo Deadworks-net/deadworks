@@ -37,7 +37,11 @@ internal static partial class PluginLoader
                     }
                     catch (Exception ex)
                     {
-                        Console.WriteLine($"[PluginLoader] Chat command handler for '/{commandName}' threw: {ex.Message}");
+                        // Keep the command out of public chat, and tell the player rather than leave them guessing.
+                        Console.WriteLine($"[PluginLoader] Chat command handler for '/{commandName}' threw {ex}");
+                        if (message.Controller is { } sender)
+                            Chat.PrintToChat(sender, Commands.CommandRegistration.FailedMessage);
+                        result = HookResult.Handled;
                     }
                 }
 

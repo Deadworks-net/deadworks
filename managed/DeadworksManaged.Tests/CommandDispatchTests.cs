@@ -23,6 +23,23 @@ public class CommandDispatchTests
 
         [Command("paramstestcommand")]
         public void TestParams(params string[] args) => Received.AddRange(args);
+
+        [Command("throwingtestcommand")]
+        public void Throwing() => throw new InvalidOperationException("plugin bug");
+
+        public TaskCompletionSource Gate { get; } = new(TaskCreationOptions.RunContinuationsAsynchronously);
+
+        [Command("asynctestcommand")]
+        public async Task Async(string mode)
+        {
+            await Gate.Task;
+            if (mode == "refuse")
+                throw new CommandException("Not now.");
+            throw new InvalidOperationException("plugin bug after await");
+        }
+
+        [Command("asyncvoidtestcommand")]
+        public async void AsyncVoid() => await Task.Yield();
     }
 
     /// <summary>
@@ -67,18 +84,67 @@ public class CommandDispatchTests
         Assert.Equal(expected, plugin.Received);
     }
 
+    [Fact]
+    public void A_command_that_throws_tells_the_caller_it_failed_and_logs_why()
+    {
+        var output = CaptureConsole(() => DispatchConsole("dw_throwingtestcommand"));
+        Assert.Contains(CommandRegistration.FailedMessage, output);
+        Assert.Contains("RecordingPlugin: command 'dw_throwingtestcommand' threw System.InvalidOperationException: plugin bug", output);
+    }
+
+    [Theory]
+    [InlineData("refuse", "Not now.")]
+    [InlineData("crash", "plugin bug after await")]
+    public void An_async_command_is_followed_to_the_end_on_the_game_thread(string mode, string expected)
+    {
+        var output = CaptureConsole(() => WithRegisteredPlugin(plugin =>
+        {
+            ConCommandManager.Dispatch(-1, "dw_asynctestcommand", ["dw_asynctestcommand", mode]);
+            plugin.Gate.SetResult();
+            // The failure is reported on a later tick, never from the thread pool.
+            for (var i = 0; i < 200 && !Console.Out.ToString()!.Contains(expected); i++)
+            {
+                Thread.Sleep(5);
+                TimerEngine.OnTick();
+            }
+        }));
+        Assert.Contains(expected, output);
+    }
+
+    [Fact]
+    public void Async_void_commands_are_refused_because_they_can_crash_the_server()
+    {
+        var output = CaptureConsole(() => WithRegisteredPlugin(_ => Assert.False(ConCommandManager.IsRegistered("dw_asyncvoidtestcommand"))));
+        Assert.Contains("AsyncVoid is async void", output);
+    }
+
+    private static string CaptureConsole(Action action)
+    {
+        var original = Console.Out;
+        var writer = new StringWriter();
+        Console.SetOut(writer);
+        try
+        {
+            action();
+        }
+        finally
+        {
+            Console.SetOut(original);
+        }
+        return writer.ToString();
+    }
+
     private static RecordingPlugin DispatchConsole(string command, params string[] args) =>
         WithRegisteredPlugin(_ => ConCommandManager.Dispatch(-1, command, [command, .. args]));
 
-    private static RecordingPlugin WithRegisteredPlugin(
-        Action<HandlerRegistry<string, Func<ChatCommandContext, HookResult>>> dispatch)
+    private static RecordingPlugin WithRegisteredPlugin(Action<RecordingPlugin> dispatch)
     {
         var plugin = new RecordingPlugin();
         var chatRegistry = new HandlerRegistry<string, Func<ChatCommandContext, HookResult>>(StringComparer.OrdinalIgnoreCase);
         CommandRegistration.RegisterPluginCommands(PluginPath, [plugin], chatRegistry);
         try
         {
-            dispatch(chatRegistry);
+            dispatch(plugin);
         }
         finally
         {
