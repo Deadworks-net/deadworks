@@ -63,7 +63,7 @@ internal static class CommandOverrides
             else
             {
                 Unreadable = true;
-                Console.WriteLine($"[Permissions] ERROR: failed to parse {Path.GetFileName(path)}: {ex.Message}. Players can't run any "
+                Console.WriteLine($"[Permissions] ERROR: failed to parse {Path.GetFileName(path)}: {ex.Message.TrimEnd('.')}. Players can't run any "
                                   + "commands until it's fixed and dw_perm_reload is run; the server console still can.");
             }
             return false;

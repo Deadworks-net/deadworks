@@ -58,7 +58,7 @@ public sealed class PenaltyTests : AdminTestBase
             Penalties.Add(PenaltyType.Ban, Lapka, TimeSpan.FromMinutes(60), "spam", by: Caller.Console, playerName: "lapka");
             Assert.True(Penalties.IsBanned(Lapka));
             Assert.False(Penalties.IsBanned(Greeny));
-            Assert.Equal("You are banned from this server for 1h 0m. Reason: spam", PenaltyManager.ConnectRejection(Lapka));
+            Assert.Equal("You are banned from this server for 1 hour. Reason: spam", PenaltyManager.ConnectRejection(Lapka));
 
             Clock = Clock.AddMinutes(61);
             Assert.False(Penalties.IsBanned(Lapka));
@@ -409,6 +409,21 @@ public sealed class AdminPluginTests : AdminTestBase
 
     [Fact]
     public void Permanent_duration() => Assert.Equal("permanently", AdminPlugin.DescribeDuration(null));
+
+    [Theory]
+    [InlineData(0.5, "for 1 minute")]
+    [InlineData(59.5, "for 1 hour")]      // rounded up, never "60m"
+    [InlineData(65, "for 1h 5m")]
+    [InlineData(120, "for 2 hours")]
+    [InlineData(1440, "for 1 day")]
+    [InlineData(1500, "for 1d 1h")]
+    [InlineData(4320, "for 3 days")]
+    public void Time_left_reads_like_announcements(double minutes, string expected)
+    {
+        var now = new DateTime(2026, 9, 28, 12, 0, 0, DateTimeKind.Utc);
+        var penalty = new Penalty { Type = PenaltyType.Ban, SteamId64 = Lapka, ExpiresUtc = now.AddMinutes(minutes) };
+        Assert.Equal(expected, penalty.DescribeRemaining(now));
+    }
 
     [Theory]
     [InlineData("lapka", "lapka")]

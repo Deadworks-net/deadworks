@@ -43,16 +43,21 @@ public sealed record Penalty
     /// <summary>Whether it applies at <paramref name="nowUtc"/>: not lifted and not expired.</summary>
     public bool IsActiveAt(DateTime nowUtc) => RemovedUtc == null && (ExpiresUtc == null || ExpiresUtc > nowUtc);
 
-    /// <summary>"permanently", or how long is left, e.g. "for 1h 5m".</summary>
+    /// <summary>
+    /// "permanently", or how long is left, rounded up to the minute and worded like an admin announcement:
+    /// "for 45 minutes", "for 1 hour", "for 1h 5m", "for 3 days", "for 2d 4h".
+    /// </summary>
     public string DescribeRemaining(DateTime nowUtc)
     {
         if (ExpiresUtc is not { } expires)
             return "permanently";
-        var left = expires - nowUtc;
-        if (left.TotalMinutes < 1) return "for less than a minute";
-        if (left.TotalHours < 1) return $"for {(int)Math.Ceiling(left.TotalMinutes)}m";
-        if (left.TotalDays < 1) return $"for {(int)left.TotalHours}h {left.Minutes}m";
-        return $"for {(int)left.TotalDays}d {left.Hours}h";
+        var minutes = (long)Math.Ceiling((expires - nowUtc).TotalMinutes);
+        if (minutes < 1) return "for less than a minute";
+        if (minutes < 60) return $"for {minutes} minute{(minutes == 1 ? "" : "s")}";
+        if (minutes < 1440)
+            return minutes % 60 == 0 ? $"for {minutes / 60} hour{(minutes == 60 ? "" : "s")}" : $"for {minutes / 60}h {minutes % 60}m";
+        var hours = minutes / 60;
+        return hours % 24 == 0 ? $"for {hours / 24} day{(hours == 24 ? "" : "s")}" : $"for {hours / 24}d {hours % 24}h";
     }
 }
 

@@ -130,7 +130,7 @@ internal sealed class JsonPermissionStore : IPermissionStore
             catch (Exception ex)
             {
                 return Task.FromException(new InvalidDataException(
-                    $"players.jsonc has an error, so it wasn't changed. Fix it and run dw_perm_reload. ({ex.Message})"));
+                    $"players.jsonc has an error. Fix it and run dw_perm_reload. ({ex.Message})"));
             }
 
             // The change was worked out from this player's entry as of the last reload. If the file now says something
@@ -138,7 +138,7 @@ internal sealed class JsonPermissionStore : IPermissionStore
             var onDisk = ParsePlayers(current, warn: false).GetValueOrDefault(steamId64);
             if (Canonical(onDisk) != Canonical(_players.GetValueOrDefault(steamId64)))
                 return Task.FromException(new InvalidDataException(
-                    "players.jsonc was edited for this player since the last reload, so it wasn't changed. Run dw_perm_reload, then try again."));
+                    "players.jsonc was edited for this player since the last reload. Run dw_perm_reload, then try again."));
 
             // Keep every other entry under the key it was written with; this player's is rewritten as a SteamID64.
             var next = current

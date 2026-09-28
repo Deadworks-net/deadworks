@@ -138,7 +138,7 @@ internal static class PermissionManager
         }
         catch (Exception ex)
         {
-            Console.WriteLine($"[Permissions] Failed to load roles: {ex.Message}");
+            Console.WriteLine($"[Permissions] Failed to load permissions: {ex.Message}");
             return false;
         }
 
@@ -157,7 +157,7 @@ internal static class PermissionManager
     {
         if (!task.IsCompletedSuccessfully)
         {
-            Console.WriteLine($"[Permissions] Failed to load roles, keeping the previous ones: {task.Exception?.GetBaseException().Message}");
+            Console.WriteLine($"[Permissions] Failed to load permissions, keeping the previous ones: {task.Exception?.GetBaseException().Message}");
             return false;
         }
 
@@ -168,7 +168,7 @@ internal static class PermissionManager
         }
         catch (Exception ex)
         {
-            Console.WriteLine($"[Permissions] Failed to load roles, keeping the previous ones: {ex.Message}");
+            Console.WriteLine($"[Permissions] Failed to load permissions, keeping the previous ones: {ex.Message}");
             return false;
         }
 

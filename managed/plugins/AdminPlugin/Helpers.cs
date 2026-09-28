@@ -72,6 +72,6 @@ public sealed partial class AdminPlugin
     }
 
     private static string Describe(Penalty p, DateTime now)
-        => $"{p.PlayerName ?? "?"} ({p.SteamId64}) {p.Type.ToString().ToLowerInvariant()} {p.DescribeRemaining(now)}"
+        => $"{p.PlayerName ?? "unknown player"} ({p.SteamId64}) {p.Type.ToString().ToLowerInvariant()} {p.DescribeRemaining(now)}"
            + $" by {p.AdminName ?? "Console"}{(p.Reason.Length > 0 ? $": {p.Reason}" : "")}";
 }

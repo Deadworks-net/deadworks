@@ -60,7 +60,7 @@ public sealed partial class AdminPlugin
     }
 
     [Command("bans", Description = "List active bans", Permission = Perm.Ban, SuppressChat = true)]
-    public void CmdBans(Caller caller) => ListActive(caller, PenaltyType.Ban, "bans");
+    public void CmdBans(Caller caller) => ListActive(caller, PenaltyType.Ban, "ban");
 
     [Command("gag", Description = "Stop a player using chat: gag <player> <minutes> [reason], 0 = permanent", Permission = Perm.Gag, SuppressChat = true)]
     public void CmdGag(Caller caller, Target target, int minutes, params string[] reason)
@@ -85,7 +85,7 @@ public sealed partial class AdminPlugin
     }
 
     [Command("gags", Description = "List active gags", Permission = Perm.Gag, SuppressChat = true)]
-    public void CmdGags(Caller caller) => ListActive(caller, PenaltyType.Gag, "gags");
+    public void CmdGags(Caller caller) => ListActive(caller, PenaltyType.Gag, "gag");
 
     [Command("mute", Description = "Stop a player using voice chat: mute <player> <minutes> [reason], 0 = permanent", Permission = Perm.Mute, SuppressChat = true)]
     public void CmdMute(Caller caller, Target target, int minutes, params string[] reason)
@@ -110,7 +110,7 @@ public sealed partial class AdminPlugin
     }
 
     [Command("mutes", Description = "List active mutes", Permission = Perm.Mute, SuppressChat = true)]
-    public void CmdMutes(Caller caller) => ListActive(caller, PenaltyType.Mute, "mutes");
+    public void CmdMutes(Caller caller) => ListActive(caller, PenaltyType.Mute, "mute");
 
     [Command("slay", Description = "Kill a player's hero: slay <player>", Permission = Perm.Slay, SuppressChat = true)]
     public void CmdSlay(Caller caller, Target target)
@@ -135,7 +135,7 @@ public sealed partial class AdminPlugin
     public void CmdWho(Caller caller, Target? target = null)
     {
         var players = target?.ToList() ?? Players.GetAll().ToList();
-        var lines = new List<string> { $"{players.Count} player(s):" };
+        var lines = new List<string> { $"{players.Count} player{(players.Count == 1 ? "" : "s")}:" };
         foreach (var p in players.OrderBy(p => p.Slot))
         {
             var id = Permissions.GetSteamId(p.Slot);
@@ -150,7 +150,7 @@ public sealed partial class AdminPlugin
         ReplyLines(caller, lines);
     }
 
-    [Command("penalties", Description = "Show your own bans and gags, or another player's: penalties [steamid]", SuppressChat = true)]
+    [Command("penalties", Description = "Show your own bans, gags and mutes, or another player's: penalties [steamid]", SuppressChat = true)]
     public void CmdPenalties(Caller caller, string steamId = "")
     {
         ulong id;
@@ -208,7 +208,7 @@ public sealed partial class AdminPlugin
     {
         var now = DateTime.UtcNow;
         var active = Penalties.GetActive(type);
-        var lines = new List<string> { $"{active.Count} active {what}:" };
+        var lines = new List<string> { $"{active.Count} active {what}{(active.Count == 1 ? "" : "s")}:" };
         lines.AddRange(active.Select(p => $"  {Describe(p, now)}"));
         ReplyLines(caller, lines);
     }
