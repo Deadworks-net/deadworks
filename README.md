@@ -104,7 +104,7 @@ with `connect <server-ip>:27015`. Only UDP 27015 needs to be open.
 | Use a remote RCON tool | set `RCON_PASSWORD` and uncomment the tcp port in `compose.yaml` |
 | Reuse game files I already have | mount a Windows install of Deadlock at `/steam/game:ro`, leave `STEAM_USERNAME` empty; nothing is written to it |
 | Pin a Deadworks version | `DEADWORKS_VERSION=v0.4.16` in `.env` (`image` for the one baked into the image) |
-| Back up | `./configs`, `./plugins` and `./maps` are everything; the volumes can always be re-created |
+| Back up | `./configs` (including admins and bans), `./plugins`, `./maps` and `./logs` (the admin action log) are everything; the volumes can always be re-created |
 
 ### Several servers on one host
 
@@ -119,7 +119,7 @@ docker compose up -d
 docker compose exec one console status
 ```
 
-Each server gets its own `./<name>/plugins` and `./<name>/configs`; `./maps` is shared. The game is only updated when
+Each server gets its own `./<name>/plugins`, `./<name>/configs` and `./<name>/logs`; `./maps` is shared. The game is only updated when
 no server is using it, so to pick up a game update restart them all together
 (`docker compose restart`); a server restarted on its own keeps running the installed build.
 

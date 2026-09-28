@@ -16,6 +16,7 @@ services:
       - ./plugins:/plugins      # drop plugin .dlls here; hot-reloaded
       - ./configs:/configs      # deadworks.jsonc, per-plugin configs, optional server.cfg
       - ./maps:/maps            # custom map .vpks, loadable by name like the stock ones
+      - ./logs:/logs            # the admin action log (logs/admin), for settling ban appeals
     logging:
       options:
         max-size: "20m"

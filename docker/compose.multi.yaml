@@ -30,6 +30,7 @@ services:
       - one:/data
       - ./one/plugins:/plugins
       - ./one/configs:/configs
+      - ./one/logs:/logs
       - ./maps:/maps
 
   two:
@@ -44,6 +45,7 @@ services:
       - two:/data
       - ./two/plugins:/plugins
       - ./two/configs:/configs
+      - ./two/logs:/logs
       - ./maps:/maps
 
 volumes:
