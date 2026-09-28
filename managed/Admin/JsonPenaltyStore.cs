@@ -146,7 +146,7 @@ internal sealed class JsonPenaltyStore : IPenaltyStore
         """
         // Bans, gags and mutes. Deadworks enforces everything here that hasn't been removed or expired.
         //
-        // Add and remove penalties with the Admin plugin (ban, addban, unban, gag, ungag, ...). This file is rewritten
+        // Add and remove penalties with the Admin plugin (ban, unban, gag, ungag, ...). This file is rewritten
         // whenever that happens, and only this header is kept. If you edit it by hand, run dw_penalties_reload.
         //
         // Lifted and expired penalties stay here as history for penalties.history_days in deadworks.jsonc.

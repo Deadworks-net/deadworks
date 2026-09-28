@@ -22,32 +22,29 @@ public sealed partial class AdminPlugin
         AdminActivity.Show(caller, $"kicked {ListNames(names)}: {why}", details: ids);
     }
 
-    [Command("ban", Description = "Ban a player: ban <player> <minutes> [reason], 0 = permanent", Permission = Perm.Ban, SuppressChat = true)]
-    public void CmdBan(Caller caller, Target target, int minutes, params string[] reason)
+    // "addban" is SourceMod's name for banning by SteamID; here ban already takes one, online or not.
+    [Command("ban", "addban", Description = "Ban a player, or a SteamID online or not: ban <player|steamid> <minutes> [reason], 0 = permanent", Permission = Perm.Ban, SuppressChat = true)]
+    public void CmdBan(Caller caller, string player, int minutes, params string[] reason)
     {
-        var player = OnePlayer(target, "ban");
-        var id = SteamIdOf(player);
         var duration = Duration(minutes);
         var why = Reason(reason, Config.DefaultBanReason);
-        var name = player.PlayerName;
 
+        // A SteamID nobody here has is a ban for someone who has left (or never joined). Anything else is a player.
+        if (SteamIds.TryParse(player, out var offlineId) && !Players.GetAll().Any(p => Permissions.GetSteamId(p.Slot) == offlineId))
+        {
+            if (!caller.IsConsole && !Permissions.CanTarget(caller.SteamId64, offlineId))
+                throw new CommandException($"You can't ban {offlineId}: their immunity is higher than yours.");
+            var offline = Penalties.Add(PenaltyType.Ban, offlineId, duration, why, caller);
+            AdminActivity.Show(caller, $"banned {offlineId} {DescribeDuration(duration)}: {why}", details: $"target={offlineId} penalty={offline.Id}");
+            return;
+        }
+
+        var target = OnePlayer(Target.Resolve(caller, player), "ban");
+        var id = SteamIdOf(target);
+        var name = target.PlayerName;
         // Adding the ban kicks them, so it goes last; it also refuses players Steam hasn't verified yet.
         var penalty = Penalties.Add(PenaltyType.Ban, id, duration, why, caller, name);
         AdminActivity.Show(caller, $"banned {name} {DescribeDuration(duration)}: {why}", details: $"target={id} penalty={penalty.Id}");
-    }
-
-    [Command("addban", Description = "Ban a SteamID, online or not: addban <steamid> <minutes> [reason], 0 = permanent", Permission = Perm.Ban, SuppressChat = true)]
-    public void CmdAddBan(Caller caller, string steamId, int minutes, params string[] reason)
-    {
-        if (!SteamIds.TryParse(steamId, out var id))
-            throw new CommandException($"'{steamId}' isn't a SteamID64, Steam2 or Steam3 ID.");
-        if (!caller.IsConsole && !Permissions.CanTarget(caller.SteamId64, id))
-            throw new CommandException($"You can't ban {id}: their immunity is higher than yours.");
-
-        var duration = Duration(minutes);
-        var why = Reason(reason, Config.DefaultBanReason);
-        Penalties.Add(PenaltyType.Ban, id, duration, why, caller);
-        AdminActivity.Show(caller, $"banned {id} {DescribeDuration(duration)}: {why}", details: $"target={id}");
     }
 
     [Command("unban", Description = "Lift a ban: unban <steamid>", Permission = Perm.Unban, SuppressChat = true)]

@@ -15,7 +15,7 @@ public sealed class AdminPluginConfig : IConfig
     [JsonPropertyName("default_gag_reason")]
     public string DefaultGagReason { get; set; } = "Gagged by an admin";
 
-    /// <summary>When true, ban, addban and gag refuse to run without a reason.</summary>
+    /// <summary>When true, ban and gag refuse to run without a reason.</summary>
     [JsonPropertyName("require_reason")]
     public bool RequireReason { get; set; }
 

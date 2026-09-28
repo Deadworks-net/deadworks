@@ -300,9 +300,9 @@ public sealed class AdminPluginTests : AdminTestBase
     private static void Console_(params string[] argv) => ConCommandManager.Dispatch(-1, argv[0], argv);
 
     [Fact]
-    public void Addban_and_unban_by_steamid_in_any_format()
+    public void Ban_and_unban_by_steamid_in_any_format()
     {
-        Console_("dw_addban", "STEAM_0:1:11101", "60", "ban", "evasion");
+        Console_("dw_ban", "STEAM_0:1:11101", "60", "ban", "evasion");
         var ban = Penalties.GetActive(PenaltyType.Ban, Lapka);
         Assert.NotNull(ban);
         Assert.Equal("ban evasion", ban.Reason);
@@ -317,7 +317,7 @@ public sealed class AdminPluginTests : AdminTestBase
     [Fact]
     public void The_console_can_ban_permanently_and_uses_the_default_reason()
     {
-        Console_("dw_addban", Lapka.ToString(), "0");
+        Console_("dw_ban", Lapka.ToString(), "0");
         var ban = Penalties.GetActive(PenaltyType.Ban, Lapka);
         Assert.NotNull(ban);
         Assert.True(ban.IsPermanent);
@@ -327,11 +327,19 @@ public sealed class AdminPluginTests : AdminTestBase
     [Fact]
     public void Bad_input_changes_nothing()
     {
-        Console_("dw_addban", "not-a-steamid", "60");
-        Console_("dw_addban", Lapka.ToString(), "-5");
+        Console_("dw_ban", "not-a-steamid", "60");
+        Console_("dw_ban", Lapka.ToString(), "-5");
         Console_("dw_unban", Lapka.ToString()); // not banned
         Assert.Empty(Penalties.GetActive());
         Assert.Empty(Logged);
+    }
+
+    [Fact]
+    public void Addban_is_another_name_for_ban()
+    {
+        Console_("dw_addban", "[U:1:22203]", "30");
+        Assert.True(Penalties.IsBanned(Lapka));
+        Assert.Equal("banned 76561197960287931 for 30 minutes: Banned by an admin", Logged[^1].Action);
     }
 
     [Fact]

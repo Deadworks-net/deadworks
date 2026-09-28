@@ -25,6 +25,17 @@ public sealed class Target : IReadOnlyList<CCitadelPlayerController>
         _players = players;
     }
 
+    /// <summary>
+    /// Resolves <paramref name="input"/> the way a <see cref="Target"/> parameter is bound, for commands that decide
+    /// for themselves whether an argument is a player, e.g. "a player, or a SteamID that isn't online". Players the
+    /// caller can't target are left out unless <paramref name="enforceImmunity"/> is false.
+    /// </summary>
+    /// <exception cref="CommandException">Nobody matches, or a single-player pattern hits someone the caller can't target.</exception>
+    public static Target Resolve(Caller caller, string input, bool enforceImmunity = true)
+        => TargetResolver.TryResolve(input, caller.Player, enforceImmunity, out var target, out var error)
+            ? target!
+            : throw new CommandException(error ?? $"No player matches '{input}'.");
+
     /// <summary>The one player matched, or a <see cref="CommandException"/> telling the caller to be more specific.</summary>
     public CCitadelPlayerController Single()
         => _players.Count == 1
