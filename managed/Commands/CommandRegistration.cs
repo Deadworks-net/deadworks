@@ -167,6 +167,7 @@ internal static class CommandRegistration
             if (!CommandGate.PlayerMay(ctx.Controller, permission))
             {
                 reply(CommandGate.RefusalFor(ctx.Controller));
+                NoteRefused(ctx.Controller, $"/{name}", permission);
                 return HookResult.Handled;
             }
 
@@ -233,6 +234,7 @@ internal static class CommandRegistration
             if (!ctx.IsServerCommand && !CommandGate.PlayerMay(caller, permission))
             {
                 reply(CommandGate.RefusalFor(caller));
+                NoteRefused(caller, conName, permission);
                 return;
             }
 
@@ -261,6 +263,33 @@ internal static class CommandRegistration
     }
 
     internal const string FailedMessage = "That command failed. The server console has details.";
+
+    private static readonly Dictionary<(ulong, string), long> _lastRefusal = [];
+
+    /// <summary>
+    /// Records a refused attempt, so the owner can see staff trying what they weren't given and diagnose "it says I
+    /// don't have permission" without asking. The server console gets every one; the admin log only those of players
+    /// holding a role, since a random player typing !ban isn't news. At most once a minute per player and command.
+    /// </summary>
+    private static void NoteRefused(CCitadelPlayerController? player, string command, string permission)
+    {
+        if (player == null || CommandOverrides.Unreadable)
+            return;
+        var id = PermissionManager.GetSlotSteamId(player.Slot);
+        var now = Environment.TickCount64;
+        lock (_lastRefusal)
+        {
+            if (_lastRefusal.TryGetValue((id, command), out var last) && now - last < 60_000)
+                return;
+            _lastRefusal[(id, command)] = now;
+        }
+
+        var unconfirmed = !Players.IsAuthenticated(player.Slot) ? " (not confirmed by Steam yet)" : "";
+        var needs = permission.Length > 0 ? $"needs {permission}" : "not allowed";
+        Console.WriteLine($"[Permissions] {player.PlayerName} ({id}) was refused {command}: {needs}{unconfirmed}");
+        if (id != 0 && PermissionManager.Describe(id).AssignedRoles.Count > 0) // their saved roles: staff even before Steam confirms them
+            AdminActivity.Log(Caller.Of(player), $"was refused {command} ({needs}){unconfirmed}");
+    }
 
     /// <summary>
     /// Runs a command and deals with how it ends: a <see cref="CommandException"/> is the caller's answer; anything else
