@@ -133,20 +133,26 @@ public sealed partial class AdminPlugin
         ReplyLines(caller, lines);
     }
 
-    [Command("penalties", Description = "Show your own bans, gags and mutes, or another player's: penalties [steamid]", SuppressChat = true)]
-    public async Task CmdPenalties(Caller caller, string steamId = "")
+    [Command("penalties", Description = "Show your own bans, gags and mutes, or another player's: penalties [player|steamid]", SuppressChat = true)]
+    public async Task CmdPenalties(Caller caller, string player = "")
     {
         ulong id;
-        if (steamId.Length > 0)
+        string? name = null;
+        if (player.Length > 0)
         {
             if (!caller.HasPermission(Perm.Who))
-                throw new CommandException("You can only look up your own penalties. Use penalties with no SteamID.");
-            if (!SteamIds.TryParse(steamId, out id))
-                throw new CommandException($"'{steamId}' isn't a SteamID64, Steam2 or Steam3 ID.");
+                throw new CommandException("You can only look up your own penalties. Use penalties on its own.");
+            // Anyone's record can be read, whatever their immunity: looking isn't acting on them.
+            if (!SteamIds.TryParse(player, out id))
+            {
+                var target = OnePlayer(Target.Resolve(caller, player, enforceImmunity: false), "penalties");
+                (id, name) = (SteamIdOf(target), target.PlayerName);
+            }
         }
         else
         {
-            id = !caller.IsConsole ? caller.SteamId64 : throw new CommandException("Give a SteamID.");
+            id = !caller.IsConsole ? caller.SteamId64 : throw new CommandException("Give a player or a SteamID.");
+            name = caller.Name;
         }
 
         IReadOnlyList<Penalty> history;
@@ -161,7 +167,8 @@ public sealed partial class AdminPlugin
 
         // Replies to a player who has left go nowhere, not to whoever took their slot.
         var now = DateTime.UtcNow;
-        var lines = new List<string> { $"Penalties for {id}:" };
+        name ??= history.Select(p => p.PlayerName).FirstOrDefault(n => n != null);
+        var lines = new List<string> { $"Penalties for {(name != null ? $"{name} ({id})" : id.ToString())}:" };
         lines.AddRange(history.Select(p => $"  {DescribeHistory(p, now)}"));
         if (history.Count == 0)
             lines.Add("  none");

@@ -69,14 +69,30 @@ internal sealed class CoreCommands : DeadworksPluginBase
                 }
                 return;
 
+            // Both are remembered in configs/plugins.jsonc, which is easy to forget, so the reply says so. It goes to the
+            // caller: the loader's own messages only reach the server console.
             case "enable" when plugin.Length > 0:
+                if (PluginLoader.IsPluginLoaded(plugin))
+                {
+                    caller.PrintToConsole($"{plugin} is already enabled and running.");
+                    return;
+                }
                 AdminActivity.Log(caller, $"enabled the plugin {plugin}");
                 PluginLoader.EnablePlugin(plugin);
+                caller.PrintToConsole(PluginLoader.IsPluginLoaded(plugin)
+                    ? $"Enabled {plugin}. It stays on after restarts."
+                    : $"Enabled {plugin}, but it didn't load; the server console says why.");
                 return;
 
             case "disable" when plugin.Length > 0:
+                if (!PluginStateManager.IsEnabled(plugin) && !PluginLoader.IsPluginLoaded(plugin))
+                {
+                    caller.PrintToConsole($"{plugin} is already disabled.");
+                    return;
+                }
                 AdminActivity.Log(caller, $"disabled the plugin {plugin}");
                 PluginLoader.DisablePlugin(plugin);
+                caller.PrintToConsole($"Disabled {plugin}. It stays off after restarts; dw_plugin enable {plugin} turns it back on.");
                 return;
 
             case "commands" when plugin.Length > 0:

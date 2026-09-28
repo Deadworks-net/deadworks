@@ -448,7 +448,7 @@ public sealed class AdminPluginTests : AdminTestBase
         Assert.Equal("appeal accepted", history[1].RemovalReason);
 
         var lines = history.Select(p => AdminPlugin.DescribeHistory(p, Clock)).ToList();
-        Assert.Equal("2026-09-26 ban for 1 day by Console: cheating; replaced by a new ban on 2026-09-26", lines[0]);
+        Assert.Equal("2026-09-26 ban for 1 day by Console: cheating; replaced by a new ban from Console on 2026-09-26", lines[0]);
         Assert.Equal("2026-09-26 ban for 1 hour by Console: reduced; lifted early by Console on 2026-09-26: appeal accepted", lines[1]);
         Assert.EndsWith("ran out", lines[2]);
         Assert.EndsWith("ACTIVE, permanent", lines[3]);

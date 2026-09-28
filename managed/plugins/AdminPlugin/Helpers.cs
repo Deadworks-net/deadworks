@@ -127,21 +127,30 @@ public sealed partial class AdminPlugin
     /// </summary>
     internal static string DescribeHistory(Penalty p, DateTime now)
     {
+        var type = p.Type.ToString().ToLowerInvariant();
         var length = p.ExpiresUtc is { } expires ? DescribeDuration(expires - p.CreatedUtc) : "permanently";
-        var given = $"{p.CreatedUtc:yyyy-MM-dd} {p.Type.ToString().ToLowerInvariant()} {length} by {p.AdminName ?? "Console"}"
+        var given = $"{p.CreatedUtc:yyyy-MM-dd} {type} {length} by {Who(p.AdminName, p.AdminSteamId64)}"
                     + (p.Reason.Length > 0 ? $": {p.Reason}" : "");
         var ended = p.HowEnded(now) switch
         {
-            PenaltyEnd.Lifted => $"lifted early by {p.RemovedByName ?? "Console"} on {p.RemovedUtc:yyyy-MM-dd}"
+            PenaltyEnd.Lifted => $"lifted{(p.IsPermanent ? "" : " early")} by {Who(p.RemovedByName, p.RemovedBySteamId64)} on {p.RemovedUtc:yyyy-MM-dd}"
                                  + (p.RemovalReason is { Length: > 0 } why ? $": {why}" : ""),
-            PenaltyEnd.Replaced => $"replaced by a new {p.Type.ToString().ToLowerInvariant()} on {p.RemovedUtc:yyyy-MM-dd}",
+            PenaltyEnd.Replaced => $"replaced by a new {type} from {Who(p.RemovedByName, p.RemovedBySteamId64)} on {p.RemovedUtc:yyyy-MM-dd}",
             PenaltyEnd.Expired => "ran out",
-            _ => p.IsPermanent ? "ACTIVE, permanent" : $"ACTIVE, {p.DescribeRemaining(now)["for ".Length..]} left",
+            _ => $"ACTIVE, {Left(p, now)}",
         };
         return $"{given}; {ended}";
     }
 
+    /// <summary>One line of a bans/gags/mutes list: who, what's left of it, and who gave it why.</summary>
     private static string Describe(Penalty p, DateTime now)
-        => $"{p.PlayerName ?? "unknown player"} ({p.SteamId64}) {p.Type.ToString().ToLowerInvariant()} {p.DescribeRemaining(now)}"
-           + $" by {p.AdminName ?? "Console"}{(p.Reason.Length > 0 ? $": {p.Reason}" : "")}";
+        => $"{p.PlayerName ?? "unknown player"} ({p.SteamId64}): {p.Type.ToString().ToLowerInvariant()}, {Left(p, now)}"
+           + $", by {Who(p.AdminName, p.AdminSteamId64)}{(p.Reason.Length > 0 ? $": {p.Reason}" : "")}";
+
+    // "2 hours left", not "for 2 hours", which reads like how long it was given for.
+    private static string Left(Penalty p, DateTime now)
+        => p.IsPermanent ? "permanent" : $"{p.DescribeRemaining(now)["for ".Length..]} left";
+
+    // A name, or the SteamID when the record has none (older entries, custom stores). 0 is the server console.
+    private static string Who(string? name, ulong steamId64) => name ?? (steamId64 == 0 ? "Console" : steamId64.ToString());
 }
