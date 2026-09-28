@@ -151,6 +151,9 @@ internal static class PenaltyManager
     {
         if (steamId64 == 0)
             throw new ArgumentException("A penalty needs a SteamID; bots don't have one.", nameof(steamId64));
+        // Zero is a common way to say "permanent" elsewhere; here it would add a penalty that has already run out.
+        if (duration is { } length && length <= TimeSpan.Zero)
+            throw new ArgumentOutOfRangeException(nameof(duration), duration, "A penalty needs a positive duration; use null for permanent.");
         if (CantSave() is { } cantSave)
             throw new CommandException(cantSave);
 
@@ -248,6 +251,15 @@ internal static class PenaltyManager
         Sweep();
         lock (_lock)
             return _active.Find(p => p.Type == type && p.SteamId64 == steamId64);
+    }
+
+    public static Penalty? WouldShorten(PenaltyType type, ulong steamId64, TimeSpan? duration)
+    {
+        if (GetActive(type, steamId64) is not { } current)
+            return null;
+        if (current.ExpiresUtc is not { } currentEnd)
+            return duration == null ? null : current; // only another permanent one lasts as long as a permanent one
+        return duration is { } d && Now() + d < currentEnd ? current : null;
     }
 
     public static IReadOnlyList<Penalty> GetAllActive(PenaltyType? type)
@@ -418,6 +430,7 @@ internal static class PenaltyManager
             => PenaltyManager.Add(type, steamId64, duration, reason, by, playerName);
         public bool Remove(PenaltyType type, ulong steamId64, Caller by) => PenaltyManager.Remove(type, steamId64, by);
         public Penalty? GetActive(PenaltyType type, ulong steamId64) => PenaltyManager.GetActive(type, steamId64);
+        public Penalty? WouldShorten(PenaltyType type, ulong steamId64, TimeSpan? duration) => PenaltyManager.WouldShorten(type, steamId64, duration);
         public IReadOnlyList<Penalty> GetAllActive(PenaltyType? type) => PenaltyManager.GetAllActive(type);
         public Task<IReadOnlyList<Penalty>> GetHistoryAsync(ulong steamId64)
             => _store?.LoadHistoryAsync(steamId64, CancellationToken.None) ?? Task.FromResult<IReadOnlyList<Penalty>>([]);

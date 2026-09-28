@@ -29,22 +29,25 @@ public sealed partial class AdminPlugin
         var duration = Duration(minutes);
         var why = Reason(reason, Config.DefaultBanReason);
 
+        ulong id;
+        string? name;
         // A SteamID nobody here has is a ban for someone who has left (or never joined). Anything else is a player.
         if (SteamIds.TryParse(player, out var offlineId) && !Players.GetAll().Any(p => Permissions.GetSteamId(p.Slot) == offlineId))
         {
             if (!caller.IsConsole && !Permissions.CanTarget(caller.SteamId64, offlineId))
                 throw new CommandException($"You can't ban {offlineId}: their immunity is higher than yours.");
-            var offline = Penalties.Add(PenaltyType.Ban, offlineId, duration, why, caller);
-            AdminActivity.Show(caller, $"banned {offlineId} {DescribeDuration(duration)}: {why}", details: $"target={offlineId} penalty={offline.Id}");
-            return;
+            (id, name) = (offlineId, null);
+        }
+        else
+        {
+            var target = OnePlayer(Target.Resolve(caller, player), "ban");
+            (id, name) = (SteamIdOf(target), target.PlayerName);
         }
 
-        var target = OnePlayer(Target.Resolve(caller, player), "ban");
-        var id = SteamIdOf(target);
-        var name = target.PlayerName;
+        var replacing = CheckReplace(caller, PenaltyType.Ban, id, name ?? id.ToString(), duration, liftPermission: Perm.Unban);
         // Adding the ban kicks them, so it goes last; it also refuses players Steam hasn't verified yet.
         var penalty = Penalties.Add(PenaltyType.Ban, id, duration, why, caller, name);
-        AdminActivity.Show(caller, $"banned {name} {DescribeDuration(duration)}: {why}", details: $"target={id} penalty={penalty.Id}");
+        AdminActivity.Show(caller, $"banned {name ?? id.ToString()} {DescribeDuration(duration)}: {why}{replacing}", details: $"target={id} penalty={penalty.Id}");
     }
 
     [Command("unban", Description = "Lift a ban: unban <steamid>", Permission = Perm.Unban, SuppressChat = true)]
@@ -70,8 +73,9 @@ public sealed partial class AdminPlugin
         var duration = Duration(minutes);
         var why = Reason(reason, Config.DefaultGagReason);
 
+        var replacing = CheckReplace(caller, PenaltyType.Gag, id, player.PlayerName, duration, liftPermission: null);
         Penalties.Add(PenaltyType.Gag, id, duration, why, caller, player.PlayerName);
-        AdminActivity.Show(caller, $"gagged {player.PlayerName} {DescribeDuration(duration)}: {why}", details: $"target={id}");
+        AdminActivity.Show(caller, $"gagged {player.PlayerName} {DescribeDuration(duration)}: {why}{replacing}", details: $"target={id}");
     }
 
     [Command("ungag", Description = "Let a gagged player use chat again: ungag <player>", Permission = Perm.Gag, SuppressChat = true)]
@@ -95,8 +99,9 @@ public sealed partial class AdminPlugin
         var duration = Duration(minutes);
         var why = Reason(reason, Config.DefaultMuteReason);
 
+        var replacing = CheckReplace(caller, PenaltyType.Mute, id, player.PlayerName, duration, liftPermission: null);
         Penalties.Add(PenaltyType.Mute, id, duration, why, caller, player.PlayerName);
-        AdminActivity.Show(caller, $"muted {player.PlayerName} {DescribeDuration(duration)}: {why}", details: $"target={id}");
+        AdminActivity.Show(caller, $"muted {player.PlayerName} {DescribeDuration(duration)}: {why}{replacing}", details: $"target={id}");
     }
 
     [Command("unmute", Description = "Let a muted player use voice chat again: unmute <player>", Permission = Perm.Mute, SuppressChat = true)]

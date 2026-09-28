@@ -77,10 +77,13 @@ public static class Penalties
 
     /// <summary>
     /// Adds a penalty on behalf of <paramref name="by"/>. A null <paramref name="duration"/> is permanent. An active
-    /// penalty of the same type on the same player is replaced. Adding a ban kicks the player if they're connected.
+    /// penalty of the same type on the same player is replaced, even by a shorter one: check <see cref="WouldShorten"/>
+    /// first if shortening should need more than adding. Adding a ban kicks the player if they're connected.
     /// </summary>
+    /// <exception cref="ArgumentOutOfRangeException"><paramref name="duration"/> is zero or negative; use null for permanent.</exception>
     /// <exception cref="CommandException">
-    /// The SteamID belongs to a player on the server whom Steam hasn't confirmed yet, so it can't be trusted to penalize.
+    /// The SteamID belongs to a player on the server whom Steam hasn't confirmed yet, so it can't be trusted to penalize;
+    /// or the penalty store can't be written to.
     /// </exception>
     public static Penalty Add(PenaltyType type, ulong steamId64, TimeSpan? duration, string reason, Caller by, string? playerName = null)
         => B.Add(type, steamId64, duration, reason, by, playerName);
@@ -90,6 +93,13 @@ public static class Penalties
 
     /// <summary>The player's active penalty of this type, or null.</summary>
     public static Penalty? GetActive(PenaltyType type, ulong steamId64) => B.GetActive(type, steamId64);
+
+    /// <summary>
+    /// The active penalty that adding one of <paramref name="duration"/> (null = permanent) would cut short, or null if
+    /// there is none or the new one lasts at least as long. Replacing a penalty with a shorter one partly lifts it, so a
+    /// command may want the lifting permission for that, as the Admin plugin's ban does.
+    /// </summary>
+    public static Penalty? WouldShorten(PenaltyType type, ulong steamId64, TimeSpan? duration) => B.WouldShorten(type, steamId64, duration);
 
     /// <summary>Every active penalty, optionally of one type.</summary>
     public static IReadOnlyList<Penalty> GetActive(PenaltyType? type = null) => B.GetAllActive(type);
@@ -138,6 +148,7 @@ internal interface IPenaltyBackend
     Penalty Add(PenaltyType type, ulong steamId64, TimeSpan? duration, string reason, Caller by, string? playerName);
     bool Remove(PenaltyType type, ulong steamId64, Caller by);
     Penalty? GetActive(PenaltyType type, ulong steamId64);
+    Penalty? WouldShorten(PenaltyType type, ulong steamId64, TimeSpan? duration);
     IReadOnlyList<Penalty> GetAllActive(PenaltyType? type);
     Task<IReadOnlyList<Penalty>> GetHistoryAsync(ulong steamId64);
     void RegisterStore(IDeadworksPlugin owner, string name, IPenaltyStore store);

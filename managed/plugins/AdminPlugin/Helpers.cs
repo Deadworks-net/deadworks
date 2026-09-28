@@ -35,6 +35,29 @@ public sealed partial class AdminPlugin
     private static string TargetIds(IEnumerable<CCitadelPlayerController> players)
         => $"target={string.Join(',', players.Select(p => Permissions.GetSteamId(p.Slot)))}";
 
+    /// <summary>
+    /// Checks a new penalty against the player's current one of the same type, which it replaces. Nobody may penalize
+    /// themselves, and cutting a penalty short partly lifts it, so that needs <paramref name="liftPermission"/> (null when
+    /// the command's own permission already lifts, as with gag and ungag). Returns the note for the announcement, e.g.
+    /// " (replaces a permanent ban by wisp)", or "" when there was nothing to replace.
+    /// </summary>
+    private static string CheckReplace(Caller caller, PenaltyType type, ulong id, string name, TimeSpan? duration, string? liftPermission)
+    {
+        var noun = type.ToString().ToLowerInvariant();
+        if (!caller.IsConsole && id == caller.SteamId64)
+            throw new CommandException($"You can't {noun} yourself.");
+        if (Penalties.GetActive(type, id) is not { } current)
+            return "";
+
+        var by = current.AdminName ?? "Console";
+        var existing = current.IsPermanent
+            ? $"a permanent {noun} by {by}"
+            : $"a {noun} by {by} with {current.DescribeRemaining(DateTime.UtcNow)["for ".Length..]} left";
+        if (liftPermission != null && Penalties.WouldShorten(type, id, duration) != null && !caller.HasPermission(liftPermission))
+            throw new CommandException($"{name} already has {existing}. Shortening it needs {liftPermission}.");
+        return $" (replaces {existing})";
+    }
+
     /// <summary>One named player; groups like @all are refused for penalties.</summary>
     private static CCitadelPlayerController OnePlayer(Target target, string command)
         => target.IsGroup

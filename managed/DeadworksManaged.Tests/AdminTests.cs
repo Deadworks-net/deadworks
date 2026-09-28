@@ -228,6 +228,30 @@ public sealed class PenaltyTests : AdminTestBase
     }
 
     [Fact]
+    public void WouldShorten_finds_the_penalty_a_new_one_cuts_short()
+    {
+        Assert.Null(Penalties.WouldShorten(PenaltyType.Ban, Lapka, TimeSpan.FromMinutes(5))); // nothing to replace
+
+        Penalties.Add(PenaltyType.Ban, Lapka, TimeSpan.FromHours(2), "", by: Caller.Console);
+        Assert.NotNull(Penalties.WouldShorten(PenaltyType.Ban, Lapka, TimeSpan.FromMinutes(5)));
+        Assert.Null(Penalties.WouldShorten(PenaltyType.Ban, Lapka, TimeSpan.FromHours(3)));
+        Assert.Null(Penalties.WouldShorten(PenaltyType.Ban, Lapka, null));
+        Assert.Null(Penalties.WouldShorten(PenaltyType.Gag, Lapka, TimeSpan.FromMinutes(5))); // other types don't count
+
+        Penalties.Add(PenaltyType.Ban, Lapka, null, "", by: Caller.Console);
+        Assert.NotNull(Penalties.WouldShorten(PenaltyType.Ban, Lapka, TimeSpan.FromDays(3650)));
+        Assert.Null(Penalties.WouldShorten(PenaltyType.Ban, Lapka, null));
+    }
+
+    [Fact]
+    public void A_zero_or_negative_duration_is_refused_rather_than_expiring_at_once()
+    {
+        Assert.Throws<ArgumentOutOfRangeException>(() => Penalties.Add(PenaltyType.Ban, Lapka, TimeSpan.Zero, "", Caller.Console));
+        Assert.Throws<ArgumentOutOfRangeException>(() => Penalties.Add(PenaltyType.Gag, Lapka, TimeSpan.FromMinutes(-1), "", Caller.Console));
+        Assert.Empty(Penalties.GetActive());
+    }
+
+    [Fact]
     public void Muted_players_voice_is_dropped()
     {
         const int voice = (int)CLC_Messages.ClcVoiceData;
@@ -339,6 +363,15 @@ public sealed class AdminPluginTests : AdminTestBase
         Console_("dw_unban", "[U:1:22203]");
         Assert.False(Penalties.IsBanned(Lapka));
         Assert.Equal("unbanned 76561197960287931", Logged[^1].Action);
+    }
+
+    [Fact]
+    public void Replacing_a_ban_says_what_it_replaced()
+    {
+        Console_("dw_ban", Lapka.ToString(), "0", "cheating");
+        Console_("dw_ban", Lapka.ToString(), "60", "appeal");
+        Assert.Equal($"banned {Lapka} for 1 hour: appeal (replaces a permanent ban by Console)", Logged[^1].Action);
+        Assert.Equal(Clock.AddMinutes(60), Penalties.GetActive(PenaltyType.Ban, Lapka)!.ExpiresUtc);
     }
 
     [Fact]
