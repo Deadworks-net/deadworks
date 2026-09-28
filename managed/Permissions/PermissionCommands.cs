@@ -16,7 +16,9 @@ internal sealed class PermissionCommands : DeadworksPluginBase
     [Command("perm_reload", Description = "Reload roles, players and command overrides", Permission = "deadworks.permissions.reload", ConsoleOnly = true)]
     public void PermReload(Caller caller)
     {
-        caller.PrintToConsole(PermissionManager.Reload()
+        var ok = PermissionManager.Reload();
+        AdminActivity.Log(caller, ok ? "reloaded permissions" : "tried to reload permissions, which failed");
+        caller.PrintToConsole(ok
             ? "Reloaded permissions."
             : "Failed to reload permissions; the server console has details. The previous settings are still in use.");
     }
@@ -104,11 +106,11 @@ internal sealed class PermissionCommands : DeadworksPluginBase
 
         var verb = kind switch
         {
-            PermissionManager.ChangeKind.GrantRole => $"Gave {who.Display} the role {value}",
-            PermissionManager.ChangeKind.RevokeRole => $"Took the role {value} from {who.Display}",
-            PermissionManager.ChangeKind.GrantPermission => $"Gave {who.Display} {value}",
-            _ => $"Removed {value} from {who.Display}",
-        };
+            PermissionManager.ChangeKind.GrantRole => $"gave {who.Display} the role {value}",
+            PermissionManager.ChangeKind.RevokeRole => $"took the role {value} from {who.Display}",
+            PermissionManager.ChangeKind.GrantPermission => $"gave {who.Display} {value}",
+            _ => $"removed {value} from {who.Display}",
+        } + (temporary ? " until restart" : "");
 
         // The reply waits for the store, so "Gave ..." is only said once the change is really saved.
         var change = PermissionManager.ChangeAsync(who.SteamId64, kind, value, temporary, who.Name);
@@ -119,7 +121,10 @@ internal sealed class PermissionCommands : DeadworksPluginBase
             // A slow save can finish after the caller left; don't tell whoever took their slot.
             if (callerSlot >= 0 && PermissionManager.GetSlotSteamId(callerSlot) != callerId)
                 return;
-            caller.PrintToConsole(error ?? $"{verb}{(temporary ? " until restart" : "")}.");
+            if (error == null)
+                // Staff changes belong in the action log: who promoted whom is the first thing an owner asks.
+                AdminActivity.Log(caller, verb, details: $"target={who.SteamId64}");
+            caller.PrintToConsole(error ?? $"{char.ToUpperInvariant(verb[0])}{verb[1..]}.");
         }
 
         // A store that saves asynchronously completes on a later game frame, where replying is safe.

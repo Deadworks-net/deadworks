@@ -14,6 +14,7 @@ internal sealed class CoreCommands : DeadworksPluginBase
     [Command("reloadconfig", Description = "Reload plugin configs: reloadconfig [plugin]", Permission = "deadworks.config.reload", ConsoleOnly = true)]
     public void ReloadConfig(Caller caller, string plugin = "")
     {
+        AdminActivity.Log(caller, plugin.Length > 0 ? $"reloaded the config of {plugin}" : "reloaded plugin configs");
         foreach (var p in PluginLoader.PluginSnapshot)
         {
             if (plugin.Length > 0
@@ -63,10 +64,12 @@ internal sealed class CoreCommands : DeadworksPluginBase
                 return;
 
             case "enable" when plugin.Length > 0:
+                AdminActivity.Log(caller, $"enabled the plugin {plugin}");
                 PluginLoader.EnablePlugin(plugin);
                 return;
 
             case "disable" when plugin.Length > 0:
+                AdminActivity.Log(caller, $"disabled the plugin {plugin}");
                 PluginLoader.DisablePlugin(plugin);
                 return;
 

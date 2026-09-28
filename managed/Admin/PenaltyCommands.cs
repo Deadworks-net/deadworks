@@ -9,7 +9,11 @@ internal sealed class PenaltyCommands : DeadworksPluginBase
 
     [Command("penalties_reload", Description = "Reload bans, gags and mutes from their store", Permission = "deadworks.penalties.reload", ConsoleOnly = true)]
     public void PenaltiesReload(Caller caller)
-        => caller.PrintToConsole(PenaltyManager.Reload()
+    {
+        var ok = PenaltyManager.Reload();
+        AdminActivity.Log(caller, ok ? "reloaded penalties" : "tried to reload penalties, which failed");
+        caller.PrintToConsole(ok
             ? "Reloaded penalties."
             : "Failed to reload penalties; the server console has details. The previous ones are still in force.");
+    }
 }

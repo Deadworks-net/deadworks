@@ -517,3 +517,34 @@ public sealed class AdminPluginTests : AdminTestBase
     [InlineData("a.cfg; quit", false)]
     public void Config_names_stay_inside_cfg(string file, bool ok) => Assert.Equal(ok, AdminPlugin.IsSafeConfigName(file));
 }
+
+/// <summary>Staff changes made through the core permission commands, as the server console.</summary>
+public sealed class StaffChangeLogTests : AdminTestBase
+{
+    private const string PluginPath = "test://StaffChangeLogTests";
+
+    public StaffChangeLogTests()
+    {
+        var chat = new HandlerRegistry<string, Func<ChatCommandContext, HookResult>>(StringComparer.OrdinalIgnoreCase);
+        CommandRegistration.RegisterPluginCommands(PluginPath, [new PermissionCommands()], chat);
+    }
+
+    public override void Dispose()
+    {
+        ConCommandManager.UnregisterPlugin(PluginPath);
+        PluginRegistrationTracker.Remove(PluginPath);
+        PermissionManifest.Remove(PluginPath);
+        base.Dispose();
+    }
+
+    [Fact]
+    public void Role_and_permission_changes_go_in_the_admin_log()
+    {
+        ConCommandManager.Dispatch(-1, "dw_role_grant", ["dw_role_grant", Lapka.ToString(), "admin"]);
+        ConCommandManager.Dispatch(-1, "dw_perm_grant", ["dw_perm_grant", Lapka.ToString(), "-admin.server.rcon", "--temp"]);
+
+        Assert.Equal(["gave 76561197960287931 the role admin", "gave 76561197960287931 -admin.server.rcon until restart"],
+            Logged.Select(e => e.Action));
+        Assert.All(Logged, e => Assert.Equal($"target={Lapka}", e.Details));
+    }
+}
