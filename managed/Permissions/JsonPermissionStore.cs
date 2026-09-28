@@ -62,8 +62,8 @@ internal sealed class JsonPermissionStore : IPermissionStore
     /// <summary>Re-reads both files. Players are read here too, so one reload sees one consistent pair.</summary>
     public Task<IReadOnlyDictionary<string, RoleDefinition>> LoadRolesAsync(CancellationToken ct)
     {
-        var roles = Read<Dictionary<string, RoleDefinition>>(RolesPath) ?? [];
-        var players = ParsePlayers(Read<Dictionary<string, PlayerEntry>>(PlayersPath) ?? [], warn: true);
+        var roles = Read<Dictionary<string, RoleDefinition>>(RolesPath, warn: true) ?? [];
+        var players = ParsePlayers(Read<Dictionary<string, PlayerEntry>>(PlayersPath, warn: true) ?? [], warn: true);
 
         lock (_lock)
             _players = players;
@@ -169,13 +169,18 @@ internal sealed class JsonPermissionStore : IPermissionStore
     /// <summary>A comment header, then <paramref name="value"/> as JSON.</summary>
     private static string Render<T>(string header, T value) => header + JsonSerializer.Serialize(value, WriteOptions) + "\n";
 
-    private static T? Read<T>(string path) where T : class
+    /// <param name="warn">Report keys the file has but <typeparamref name="T"/> doesn't; only on a real load, not before each save.</param>
+    private static T? Read<T>(string path, bool warn = false) where T : class
     {
         if (!File.Exists(path))
             return null;
         try
         {
-            return JsonSerializer.Deserialize<T>(File.ReadAllText(path), ReadOptions);
+            var text = File.ReadAllText(path);
+            var value = JsonSerializer.Deserialize<T>(text, ReadOptions);
+            if (warn)
+                UnknownJsonKeys.Warn(text, typeof(T), Path.GetFileName(path), "[Permissions] WARNING:");
+            return value;
         }
         catch (Exception ex)
         {

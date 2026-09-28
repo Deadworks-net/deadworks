@@ -96,6 +96,7 @@ internal static class ConfigManager
 				var json = File.ReadAllText(filePath);
 				config = JsonSerializer.Deserialize(json, configType, JsonOptions)
 					?? Activator.CreateInstance(configType);
+				UnknownJsonKeys.Warn(json, configType, Path.GetFileName(filePath), "[ConfigManager] WARNING:");
 			}
 			catch (Exception ex)
 			{

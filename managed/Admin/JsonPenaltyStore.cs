@@ -151,7 +151,7 @@ internal sealed class JsonPenaltyStore : IPenaltyStore
         {
             try
             {
-                var all = Parse();
+                var all = Parse(warn: true);
                 total = all.Count;
                 kept = Trim(all);
             }
@@ -170,11 +170,15 @@ internal sealed class JsonPenaltyStore : IPenaltyStore
     /// <summary>The file's penalties, minus history older than penalties.history_days; empty if there's no file.</summary>
     private List<Penalty> ReadFile() => File.Exists(_path) ? Trim(Parse()) : [];
 
-    private List<Penalty> Parse()
+    private List<Penalty> Parse(bool warn = false)
     {
         try
         {
-            return JsonSerializer.Deserialize<PenaltyFile>(File.ReadAllText(_path), Options)?.Penalties ?? [];
+            var text = File.ReadAllText(_path);
+            var penalties = JsonSerializer.Deserialize<PenaltyFile>(text, Options)?.Penalties ?? [];
+            if (warn)
+                UnknownJsonKeys.Warn(text, typeof(PenaltyFile), Path.GetFileName(_path), "[Penalties] WARNING:");
+            return penalties;
         }
         catch (Exception ex) when (ex is JsonException or NotSupportedException)
         {

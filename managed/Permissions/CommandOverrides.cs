@@ -50,7 +50,9 @@ internal static class CommandOverrides
 
         try
         {
-            var parsed = JsonSerializer.Deserialize<OverridesFile>(File.ReadAllText(path), ReadOptions);
+            var text = File.ReadAllText(path);
+            var parsed = JsonSerializer.Deserialize<OverridesFile>(text, ReadOptions);
+            UnknownJsonKeys.Warn(text, typeof(OverridesFile), Path.GetFileName(path), "[Permissions] WARNING:");
             Set(parsed?.Commands ?? []);
             return true;
         }

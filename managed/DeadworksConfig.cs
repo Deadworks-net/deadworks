@@ -151,6 +151,7 @@ internal static class DeadworksConfig
         {
             var json = File.ReadAllText(_configPath);
             _root = JsonSerializer.Deserialize<DeadworksConfigRoot>(json, JsonOptions) ?? new();
+            UnknownJsonKeys.Warn(json, typeof(DeadworksConfigRoot), "deadworks.jsonc", "[DeadworksConfig] WARNING:");
         }
         catch (Exception ex)
         {
