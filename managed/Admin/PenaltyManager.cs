@@ -20,7 +20,8 @@ internal static class PenaltyManager
         public Task<IReadOnlyList<Penalty>> LoadActiveAsync(CancellationToken ct) => Task.FromException<IReadOnlyList<Penalty>>(Missing);
         public Task AddAsync(Penalty penalty, CancellationToken ct) => Task.FromException(Missing);
         public Task UpdateAsync(Penalty penalty, CancellationToken ct) => Task.FromException(Missing);
-        public Task<IReadOnlyList<Penalty>> LoadHistoryAsync(ulong steamId64, CancellationToken ct) => Task.FromResult<IReadOnlyList<Penalty>>([]);
+        // An error, not an empty history: "none" would tell staff checking an appeal that the player has a clean record.
+        public Task<IReadOnlyList<Penalty>> LoadHistoryAsync(ulong steamId64, CancellationToken ct) => Task.FromException<IReadOnlyList<Penalty>>(Missing);
         public event Action? Changed { add { } remove { } }
     }
 
@@ -169,10 +170,12 @@ internal static class PenaltyManager
         // Anything that has run out goes first, as Expired, so it can't be replaced as if it were still in force.
         Sweep();
 
-        // Until Steam confirms a connected player, the SteamID they claim isn't safe to record a penalty against.
+        // Until Steam confirms a connected player, the SteamID they claim isn't safe to record a penalty against. The
+        // server console may anyway: it's the owner, and while Steam is down nobody would ever be confirmed.
         var slot = PermissionManager.FindSlot(steamId64);
-        if (slot >= 0 && !PermissionManager.IsAuthorized(slot))
-            throw new CommandException($"{playerName ?? FindOnline(steamId64)?.PlayerName ?? steamId64.ToString()} hasn't been verified by Steam yet. Try again in a moment.");
+        if (slot >= 0 && !PermissionManager.IsAuthorized(slot) && !by.IsConsole)
+            throw new CommandException($"{playerName ?? FindOnline(steamId64)?.PlayerName ?? steamId64.ToString()} hasn't been verified by Steam yet. "
+                                       + "Try again in a moment; if Steam is down, kick them, or ask someone at the server console.");
 
         var now = Now();
         var (adminId, adminName) = (by.SteamId64, by.Name);
@@ -209,7 +212,7 @@ internal static class PenaltyManager
             if (replaced != null)
                 await s.UpdateAsync(replaced, CancellationToken.None);
             await s.AddAsync(penalty, CancellationToken.None);
-        });
+        }, $"the {type.ToString().ToLowerInvariant()} on {playerName ?? steamId64.ToString()}");
 
         if (replaced != null)
             Raise(Removed, replaced);
@@ -245,24 +248,30 @@ internal static class PenaltyManager
 
         if (removed == null)
             return false;
-        Persist(s => s.UpdateAsync(removed, CancellationToken.None));
+        Persist(s => s.UpdateAsync(removed, CancellationToken.None), $"lifting the {type.ToString().ToLowerInvariant()} on {removed.PlayerName ?? steamId64.ToString()}");
         Raise(Removed, removed);
         return true;
     }
 
-    private static void Persist(Func<IPenaltyStore, Task> write)
+    /// <summary>
+    /// Saves a change in the background. It's already in force; a failed save only means it won't survive a restart,
+    /// which the console says plainly, since the admin was already told it worked.
+    /// </summary>
+    private static void Persist(Func<IPenaltyStore, Task> write, string what)
     {
         var store = _store;
         if (store == null)
             return;
+        void Failed(Exception? ex)
+            => Console.WriteLine($"[Penalties] ERROR: couldn't save {what}: {ex?.GetBaseException().Message ?? "unknown error"}. "
+                                 + "It applies now, but will be gone after a restart unless it's added again.");
         try
         {
-            write(store).ContinueWith(t => Console.WriteLine($"[Penalties] Failed to save: {t.Exception?.GetBaseException().Message}"),
-                TaskContinuationOptions.OnlyOnFaulted);
+            write(store).ContinueWith(t => Failed(t.Exception), TaskContinuationOptions.OnlyOnFaulted);
         }
         catch (Exception ex)
         {
-            Console.WriteLine($"[Penalties] Failed to save: {ex.Message}");
+            Failed(ex);
         }
     }
 

@@ -113,9 +113,13 @@ public static class Penalties
     /// </summary>
     /// <exception cref="ArgumentOutOfRangeException"><paramref name="duration"/> is zero or negative; use null for permanent.</exception>
     /// <exception cref="CommandException">
-    /// The SteamID belongs to a player on the server whom Steam hasn't confirmed yet, so it can't be trusted to penalize;
-    /// or the penalty store can't be written to.
+    /// The SteamID belongs to a player on the server whom Steam hasn't confirmed yet, so it can't be trusted to penalize
+    /// (the server console may anyway); or the penalty store is unavailable or its file has an error.
     /// </exception>
+    /// <remarks>
+    /// The penalty applies at once and is saved in the background. If that save fails, it still applies until the server
+    /// restarts, and the console prints an ERROR; this method has already returned by then.
+    /// </remarks>
     public static Penalty Add(PenaltyType type, ulong steamId64, TimeSpan? duration, string reason, Caller by, string? playerName = null)
         => B.Add(type, steamId64, duration, reason, by, playerName);
 
@@ -138,7 +142,10 @@ public static class Penalties
     /// <summary>Every active penalty, optionally of one type.</summary>
     public static IReadOnlyList<Penalty> GetActive(PenaltyType? type = null) => B.GetAllActive(type);
 
-    /// <summary>Every penalty the store still has for this player, newest first, including removed and expired ones.</summary>
+    /// <summary>
+    /// Every penalty the store still has for this player, newest first, including removed and expired ones. Faults
+    /// while the store is unavailable, rather than answering with an empty history.
+    /// </summary>
     public static Task<IReadOnlyList<Penalty>> GetHistoryAsync(ulong steamId64) => B.GetHistoryAsync(steamId64);
 
     /// <summary>Whether the player has an active ban.</summary>

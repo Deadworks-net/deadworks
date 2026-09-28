@@ -204,21 +204,16 @@ public sealed class PenaltyTests : AdminTestBase
     }
 
     [Fact]
-    public void Players_steam_has_not_verified_yet_cannot_be_penalized()
+    public void The_server_console_can_penalize_players_steam_has_not_verified()
     {
+        // Players are refused (that needs a live controller, so it's checked on a real server); the console isn't, so
+        // the owner can still act while Steam is down and nobody gets confirmed.
         PermissionManager.OnClientConnect(4, Lapka);
         PermissionManager.IsSlotAuthenticated = _ => false;
         try
         {
-            var error = Assert.Throws<CommandException>(() => Penalties.Add(PenaltyType.Ban, Lapka, null, "x", Caller.Console));
-            Assert.Contains("hasn't been verified by Steam yet", error.Message);
-            Assert.Throws<CommandException>(() => Penalties.Add(PenaltyType.Gag, Lapka, null, "x", Caller.Console));
-            Assert.Empty(Penalties.GetActive());
-
-            // Offline SteamIDs are unaffected, and so is everyone once Steam has confirmed them.
+            Penalties.Add(PenaltyType.Gag, Lapka, null, "spam during an outage", Caller.Console);
             Penalties.Add(PenaltyType.Ban, Greeny, null, "x", Caller.Console);
-            PermissionManager.IsSlotAuthenticated = _ => true;
-            Penalties.Add(PenaltyType.Gag, Lapka, null, "x", Caller.Console);
             Assert.Equal(2, Penalties.GetActive().Count);
         }
         finally
