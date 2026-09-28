@@ -228,6 +228,39 @@ public sealed class PenaltyTests : AdminTestBase
     }
 
     [Fact]
+    public void Hand_edits_to_penalties_jsonc_survive_the_next_change()
+    {
+        Penalties.Add(PenaltyType.Ban, Lapka, TimeSpan.FromHours(1), "first", Caller.Console);
+
+        // The owner adds a ban by hand and changes the first ban's reason, without reloading.
+        var text = File.ReadAllText(PenaltiesFile)
+            .Replace("\"reason\": \"first\"", "\"reason\": \"edited by hand\"")
+            .Replace("\"penalties\": [", "\"penalties\": [ { \"type\": \"Ban\", \"steamId64\": 76561197960287999, \"reason\": \"added by hand\" },");
+        File.WriteAllText(PenaltiesFile, text);
+
+        Penalties.Add(PenaltyType.Gag, Greeny, TimeSpan.FromMinutes(5), "spam", Caller.Console);
+
+        var saved = File.ReadAllText(PenaltiesFile);
+        Assert.Contains("edited by hand", saved);
+        Assert.Contains("added by hand", saved);
+        Assert.Contains("spam", saved);
+    }
+
+    [Fact]
+    public void A_penalties_file_broken_after_loading_refuses_changes_and_isnt_overwritten()
+    {
+        Penalties.Add(PenaltyType.Ban, Lapka, TimeSpan.FromHours(1), "first", Caller.Console);
+        var broken = File.ReadAllText(PenaltiesFile) + "oops";
+        File.WriteAllText(PenaltiesFile, broken);
+
+        var ex = Assert.Throws<CommandException>(() => Penalties.Add(PenaltyType.Gag, Greeny, TimeSpan.FromMinutes(5), "spam", Caller.Console));
+        Assert.StartsWith("Penalties can't be changed right now: penalties.jsonc has an error.", ex.Message);
+        Assert.Throws<CommandException>(() => Penalties.Remove(PenaltyType.Ban, Lapka, Caller.Console));
+        Assert.Equal(broken, File.ReadAllText(PenaltiesFile));
+        Assert.True(Penalties.IsBanned(Lapka)); // what was loaded keeps being enforced
+    }
+
+    [Fact]
     public void WouldShorten_finds_the_penalty_a_new_one_cuts_short()
     {
         Assert.Null(Penalties.WouldShorten(PenaltyType.Ban, Lapka, TimeSpan.FromMinutes(5))); // nothing to replace

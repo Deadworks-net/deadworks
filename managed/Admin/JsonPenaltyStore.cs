@@ -55,24 +55,67 @@ internal sealed class JsonPenaltyStore : IPenaltyStore
 
     public Task AddAsync(Penalty penalty, CancellationToken ct)
     {
-        lock (_lock)
-            _all.Add(penalty);
-        Save();
+        Change(all => all.Add(penalty));
         return Task.CompletedTask;
     }
 
     public Task UpdateAsync(Penalty penalty, CancellationToken ct)
     {
+        Change(all =>
+        {
+            var index = all.FindIndex(p => p.Id == penalty.Id);
+            if (index >= 0)
+                all[index] = penalty;
+            else
+                all.Add(penalty);
+        });
+        return Task.CompletedTask;
+    }
+
+    /// <summary>
+    /// Applies one change to the file as it is now, not as it was at the last reload, so entries edited, added or
+    /// deleted by hand in the meantime are kept as written. They take effect on dw_penalties_reload.
+    /// </summary>
+    private void Change(Action<List<Penalty>> apply)
+    {
         lock (_lock)
         {
-            var index = _all.FindIndex(p => p.Id == penalty.Id);
-            if (index >= 0)
-                _all[index] = penalty;
-            else
-                _all.Add(penalty);
+            List<Penalty> current;
+            try
+            {
+                current = ReadFile();
+            }
+            catch (InvalidDataException ex)
+            {
+                _unreadable = true;
+                throw new InvalidDataException($"Not saved, so the hand edits aren't overwritten. {ex.Message}", ex);
+            }
+            apply(current);
+            _all = current;
+            _unreadable = false;
+            WriteLocked();
         }
-        Save();
-        return Task.CompletedTask;
+    }
+
+    /// <summary>
+    /// Null if the file can be read and so written, otherwise why not. Checked before a penalty is added or lifted, so
+    /// a file broken by hand since the last reload refuses the change instead of silently losing it.
+    /// </summary>
+    internal string? CheckReadable()
+    {
+        lock (_lock)
+        {
+            try
+            {
+                ReadFile();
+                return null;
+            }
+            catch (InvalidDataException ex)
+            {
+                _unreadable = true;
+                return ex.Message;
+            }
+        }
     }
 
     public Task<IReadOnlyList<Penalty>> LoadHistoryAsync(ulong steamId64, CancellationToken ct)
@@ -102,34 +145,53 @@ internal sealed class JsonPenaltyStore : IPenaltyStore
             return;
         }
 
-        List<Penalty> all;
-        try
-        {
-            all = JsonSerializer.Deserialize<PenaltyFile>(File.ReadAllText(_path), Options)?.Penalties ?? [];
-        }
-        catch (Exception ex)
-        {
-            lock (_lock)
-                _unreadable = true;
-            throw new InvalidDataException($"{Path.GetFileName(_path)}: {ex.Message}", ex);
-        }
-
-        // History only needs to go back so far; drop entries that ended before then.
-        var cutoff = _now().AddDays(-Math.Max(0, _historyDays));
-        var kept = all.Where(p => p.IsActiveAt(_now()) || (p.RemovedUtc ?? p.ExpiresUtc ?? DateTime.MaxValue) >= cutoff).ToList();
-
+        List<Penalty> kept;
+        int total;
         lock (_lock)
         {
+            try
+            {
+                var all = Parse();
+                total = all.Count;
+                kept = Trim(all);
+            }
+            catch (InvalidDataException)
+            {
+                _unreadable = true;
+                throw;
+            }
             _all = kept;
             _unreadable = false;
         }
-        if (kept.Count != all.Count)
+        if (kept.Count != total)
             Save();
+    }
+
+    /// <summary>The file's penalties, minus history older than penalties.history_days; empty if there's no file.</summary>
+    private List<Penalty> ReadFile() => File.Exists(_path) ? Trim(Parse()) : [];
+
+    private List<Penalty> Parse()
+    {
+        try
+        {
+            return JsonSerializer.Deserialize<PenaltyFile>(File.ReadAllText(_path), Options)?.Penalties ?? [];
+        }
+        catch (Exception ex) when (ex is JsonException or NotSupportedException)
+        {
+            throw new InvalidDataException($"{Path.GetFileName(_path)}: {ex.Message}", ex);
+        }
+    }
+
+    // History only needs to go back so far; drop entries that ended before then.
+    private List<Penalty> Trim(List<Penalty> all)
+    {
+        var now = _now();
+        var cutoff = now.AddDays(-Math.Max(0, _historyDays));
+        return all.Where(p => p.IsActiveAt(now) || (p.RemovedUtc ?? p.ExpiresUtc ?? DateTime.MaxValue) >= cutoff).ToList();
     }
 
     private void Save()
     {
-        string json;
         lock (_lock)
         {
             if (_unreadable)
@@ -137,17 +199,21 @@ internal sealed class JsonPenaltyStore : IPenaltyStore
                 Console.WriteLine($"[Penalties] Not saving {Path.GetFileName(_path)}: it couldn't be read, and saving would lose its history. Fix it and run dw_penalties_reload.");
                 return;
             }
-            json = JsonSerializer.Serialize(new PenaltyFile { Penalties = _all }, Options);
+            WriteLocked();
         }
-        JsonPermissionStore.AtomicWrite(_path, Header + json + "\n");
     }
+
+    private void WriteLocked()
+        => JsonPermissionStore.AtomicWrite(_path, Header + JsonSerializer.Serialize(new PenaltyFile { Penalties = _all }, Options) + "\n");
 
     private const string Header =
         """
         // Bans, gags and mutes. Deadworks enforces everything here that hasn't been removed or expired.
         //
         // Add and remove penalties with the Admin plugin (ban, unban, gag, ungag, ...). This file is rewritten
-        // whenever that happens, and only this header is kept. If you edit it by hand, run dw_penalties_reload.
+        // whenever that happens: your entries are kept, but not your comments (only this header is). If you edit it
+        // by hand, run dw_penalties_reload for the changes to take effect. While it has an error, penalties can't be
+        // added or lifted, so nothing you wrote is overwritten.
         //
         // Lifted and expired penalties stay here as history for penalties.history_days in deadworks.jsonc.
 

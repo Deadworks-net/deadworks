@@ -142,8 +142,9 @@ internal static class PenaltyManager
     {
         if (!_ready)
             return $"Penalties can't be changed right now: the '{_storeName}' store isn't available.";
-        if (ReferenceEquals(_store, _jsonStore) && _jsonStore!.Unreadable)
-            return "Penalties can't be changed right now: penalties.jsonc has an error. Fix it and run dw_penalties_reload.";
+        // Checked against the file as it is now: it may have been broken by hand since it was loaded.
+        if (ReferenceEquals(_store, _jsonStore) && _jsonStore!.CheckReadable() is { } error)
+            return $"Penalties can't be changed right now: penalties.jsonc has an error. Fix it and run dw_penalties_reload. ({error})";
         return null;
     }
 
