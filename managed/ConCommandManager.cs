@@ -199,9 +199,11 @@ internal static class ConCommandManager
 
     internal static object ConvertValue(string arg, Type type)
     {
-        if (type == typeof(int)) return int.Parse(arg);
-        if (type == typeof(float)) return float.Parse(arg);
-        if (type == typeof(double)) return double.Parse(arg);
+        // Invariant: "1.5" must mean one and a half on every server, not be refused (ru-RU) or read as 15 (de-DE).
+        var invariant = System.Globalization.CultureInfo.InvariantCulture;
+        if (type == typeof(int)) return int.Parse(arg, invariant);
+        if (type == typeof(float)) return float.Parse(arg, invariant);
+        if (type == typeof(double)) return double.Parse(arg, invariant);
         if (type == typeof(bool))
         {
             if (arg == "1" || arg.Equals("true", StringComparison.OrdinalIgnoreCase)) return true;
@@ -209,9 +211,9 @@ internal static class ConCommandManager
             return bool.Parse(arg);
         }
         if (type == typeof(string)) return arg;
-        if (type == typeof(long)) return long.Parse(arg);
-        if (type == typeof(uint)) return uint.Parse(arg);
-        if (type == typeof(ulong)) return ulong.Parse(arg);
+        if (type == typeof(long)) return long.Parse(arg, invariant);
+        if (type == typeof(uint)) return uint.Parse(arg, invariant);
+        if (type == typeof(ulong)) return ulong.Parse(arg, invariant);
 
         throw new NotSupportedException($"Type '{type.Name}' is not supported");
     }

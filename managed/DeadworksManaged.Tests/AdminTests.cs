@@ -228,6 +228,20 @@ public sealed class PenaltyTests : AdminTestBase
     }
 
     [Fact]
+    public void History_days_of_zero_keeps_history_forever()
+    {
+        var path = Path.Combine(Dir, "zero", "penalties.jsonc");
+        var store = new JsonPenaltyStore(path, historyDays: 0, () => Clock);
+        store.LoadActiveAsync(CancellationToken.None).Wait();
+        store.AddAsync(new Penalty { Type = PenaltyType.Ban, SteamId64 = Lapka, CreatedUtc = Clock.AddYears(-3), ExpiresUtc = Clock.AddYears(-2) },
+            CancellationToken.None).Wait();
+
+        var reloaded = new JsonPenaltyStore(path, historyDays: 0, () => Clock);
+        reloaded.LoadActiveAsync(CancellationToken.None).Wait();
+        Assert.Single(reloaded.LoadHistoryAsync(Lapka, CancellationToken.None).Result);
+    }
+
+    [Fact]
     public void Hand_edits_to_penalties_jsonc_survive_the_next_change()
     {
         Penalties.Add(PenaltyType.Ban, Lapka, TimeSpan.FromHours(1), "first", Caller.Console);

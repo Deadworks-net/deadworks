@@ -619,6 +619,16 @@ public sealed class PermissionManagerTests : IDisposable
     }
 
     [Fact]
+    public void An_admin_steam_hasnt_confirmed_yet_is_still_protected_by_their_immunity()
+    {
+        PermissionManager.OnClientConnect(4, Admin);     // immunity 90 once confirmed
+        PermissionManager.OnClientConnect(5, Moderator); // immunity 50
+        PermissionManager.IsSlotAuthenticated = slot => slot == 5;
+        Assert.False(PermissionManager.CanTargetSlots(5, 4)); // not kickable just because Steam is slow or down
+        Assert.False(Permissions.CanTarget(Moderator, Admin));
+    }
+
+    [Fact]
     public void Checking_by_steam_id_waits_for_steam_too()
     {
         // Plugins often check caller.SteamId64 instead of the slot; that mustn't hand out permissions early.
@@ -937,9 +947,10 @@ public sealed class PermissionManagerTests : IDisposable
     public void Disconnecting_forgets_the_entry_so_the_next_connect_reads_the_store()
     {
         PermissionManager.OnClientConnect(3, Admin);
-        Assert.True(PermissionManager.IsLoaded(Admin));
+        Assert.True(PermissionManager.HasArrived(Admin));
         PermissionManager.OnClientDisconnect(3);
-        Assert.False(PermissionManager.IsLoaded(Admin));
+        Assert.False(PermissionManager.HasArrived(Admin));
+        Assert.True(PermissionManager.IsLoaded(Admin)); // asking loads it again; the JSON store answers at once
     }
 
     [Fact]

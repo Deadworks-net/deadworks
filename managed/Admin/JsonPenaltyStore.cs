@@ -186,11 +186,14 @@ internal sealed class JsonPenaltyStore : IPenaltyStore
         }
     }
 
-    // History only needs to go back so far; drop entries that ended before then.
+    // History only needs to go back so far; drop entries that ended before then. Zero or less keeps it forever: 0 means
+    // permanent everywhere else in the admin commands, and reading it as "keep nothing" would wipe the file.
     private List<Penalty> Trim(List<Penalty> all)
     {
+        if (_historyDays <= 0)
+            return all;
         var now = _now();
-        var cutoff = now.AddDays(-Math.Max(0, _historyDays));
+        var cutoff = now.AddDays(-_historyDays);
         return all.Where(p => p.IsActiveAt(now) || (p.RemovedUtc ?? p.ExpiresUtc ?? DateTime.MaxValue) >= cutoff).ToList();
     }
 

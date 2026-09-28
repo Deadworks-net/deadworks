@@ -44,10 +44,16 @@ public static class Permissions
     public static bool CanTarget(CCitadelPlayerController caller, CCitadelPlayerController target)
         => caller != null && target != null && B.CanTargetSlots(caller.Slot, target.Slot);
 
-    /// <summary>The player's immunity: the highest of their roles', or their own if set.</summary>
+    /// <summary>
+    /// The player's immunity: the highest of their roles', or their own if set. Taken from their saved entry even before
+    /// Steam confirms them, since immunity protects them rather than letting them do anything.
+    /// </summary>
     public static int GetImmunity(ulong steamId64) => B.GetImmunity(steamId64);
 
-    /// <summary>Roles assigned to the player, not counting <c>default</c> or inherited roles.</summary>
+    /// <summary>
+    /// Roles assigned to the player, not counting <c>default</c> or inherited roles. Like <see cref="Has(ulong, string)"/>,
+    /// none while the player is on the server but not yet confirmed by Steam. For access checks prefer a permission.
+    /// </summary>
     public static IReadOnlyList<string> GetRoles(ulong steamId64) => B.GetRoles(steamId64);
 
     /// <summary>

@@ -59,7 +59,7 @@ internal class PenaltiesConfig
     [JsonPropertyName("store")]
     public string Store { get; set; } = "json";
 
-    /// <summary>How long the JSON store keeps lifted and expired penalties as history.</summary>
+    /// <summary>How many days the JSON store keeps lifted and expired penalties as history. 0 keeps them forever.</summary>
     [JsonPropertyName("history_days")]
     public int HistoryDays { get; set; } = 90;
 }

@@ -263,8 +263,20 @@ internal static class PermissionManager
 
     private static List<string> CleanList(List<string>? list) => list?.Where(v => !string.IsNullOrWhiteSpace(v)).ToList() ?? [];
 
-    /// <summary>Whether the store's answer for this player has arrived (an entry, or that there is none).</summary>
+    /// <summary>
+    /// Whether the store's answer for this player has arrived (an entry, or that there is none), starting to load it if
+    /// nothing has asked yet. The JSON store answers at once, so it's true straight away there.
+    /// </summary>
     public static bool IsLoaded(ulong steamId64)
+    {
+        if (steamId64 == 0 || HasArrived(steamId64))
+            return true;
+        EnsurePlayerLoaded(steamId64);
+        return HasArrived(steamId64);
+    }
+
+    /// <summary>Whether the entry is in memory, without starting a load.</summary>
+    internal static bool HasArrived(ulong steamId64)
     {
         lock (_lock)
             return _players.ContainsKey(steamId64);
@@ -440,9 +452,14 @@ internal static class PermissionManager
         if (callerSlot < 0 || callerSlot == targetSlot)
             return true;
         var caller = GetSlotSubject(callerSlot, out _, out _);
-        var target = GetSlotSubject(targetSlot, out var targetId, out var targetAuthenticated);
-        // Until their entry arrives, a confirmed player's immunity is unknown; treating it as 0 would fail open.
-        if (targetAuthenticated && !IsLoaded(targetId))
+        // The target is judged by their saved entry even before Steam confirms them, as CanTarget(ulong) does: a freshly
+        // joined admin, or every admin while Steam is down, must not drop to default's immunity and become kickable.
+        var targetId = GetSlotSteamId(targetSlot);
+        if (targetId == 0)
+            return GetDefaultSubject().Immunity <= caller.Immunity;
+        var target = GetSubject(targetId);
+        // Until their entry arrives, their immunity is unknown; treating it as 0 would fail open.
+        if (!IsLoaded(targetId))
             return false;
         return target.Immunity <= caller.Immunity;
     }
@@ -904,7 +921,8 @@ internal static class PermissionManager
         public bool CanTargetSlots(int callerSlot, int targetSlot) => PermissionManager.CanTargetSlots(callerSlot, targetSlot);
         public int GetImmunity(ulong steamId64) => GetSubject(steamId64).Immunity;
         public bool IsLoaded(ulong steamId64) => PermissionManager.IsLoaded(steamId64);
-        public IReadOnlyList<string> GetRoles(ulong steamId64) => GetSubject(steamId64).AssignedRoles;
+        // Roles grant things, so they wait for Steam like Has does; immunity protects, so it doesn't (see CanTargetSlots).
+        public IReadOnlyList<string> GetRoles(ulong steamId64) => GetActingSubject(steamId64).AssignedRoles;
         public ulong GetSlotSteamId(int slot) => PermissionManager.GetSlotSteamId(slot);
         public void RegisterStore(IDeadworksPlugin owner, string name, IPermissionStore store) => PermissionManager.RegisterStore(owner, name, store);
     }

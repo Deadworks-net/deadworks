@@ -181,6 +181,24 @@ public class CommandDispatchTests
         Assert.Contains("AsyncVoid is async void", output);
     }
 
+    [Theory]
+    [InlineData("ru-RU")]
+    [InlineData("de-DE")]
+    public void Decimals_parse_the_same_whatever_the_servers_locale(string culture)
+    {
+        var previous = System.Globalization.CultureInfo.CurrentCulture;
+        System.Globalization.CultureInfo.CurrentCulture = new System.Globalization.CultureInfo(culture);
+        try
+        {
+            Assert.Equal(1.5f, ConCommandManager.ConvertValue("1.5", typeof(float)));
+            Assert.Equal(2.25, ConCommandManager.ConvertValue("2.25", typeof(double)));
+        }
+        finally
+        {
+            System.Globalization.CultureInfo.CurrentCulture = previous;
+        }
+    }
+
     [Fact]
     public void Steam_ids_enums_and_optional_numbers_bind()
     {
