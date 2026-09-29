@@ -152,14 +152,17 @@ static const char *__cdecl NativeGetEntityDesignerName(void *entity) {
 static const char *__cdecl NativeGetEntityClassname(void *entity) {
     if (!entity)
         return "";
+    // The C++ class name comes from the entity's network serializer class info (CEntityInstance vtable slot 0,
+    // name at +8). The previous route through CEntityClass::m_pServerClass depends on the CEntityClass layout,
+    // which drifted in the 2026-09-29 patch.
     auto *ent = static_cast<CBaseEntity *>(entity);
-    if (!ent->m_pEntity ||
-        !ent->m_pEntity->m_pClass ||
-        !ent->m_pEntity->m_pClass->m_pServerClass ||
-        !ent->m_pEntity->m_pClass->m_pServerClass->m_pDLLClassName) {
+    if (!ent->m_pEntity)
         return "";
-    }
-    return ent->m_pEntity->m_pClass->m_pServerClass->m_pDLLClassName;
+    auto *info = ent->GetSerializerClassInfo();
+    if (!info)
+        return "";
+    const char *name = info->m_pszClassName.Get();
+    return name ? name : "";
 }
 
 // Walks the schema base classes of the entity's DLL class name, so a server-only class (no
