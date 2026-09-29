@@ -50,7 +50,7 @@ void __fastcall Hook_CBasePlayerController_SetPawn(CBasePlayerController *thispt
     if (!server)
         return;
 
-    auto *client = server->GetClientBySlot(CPlayerSlot(thisptr->GetEntityIndex().Get() - 1));
+    auto *client = GetServerClientBySlot(server, thisptr->GetEntityIndex().Get() - 1);
     if (!client || client->IsFakeClient() || client->IsHLTV() || !client->IsInGame())
         return;
 

@@ -30,7 +30,14 @@ class CCheckTransmitInfo;
 
 extern IGameEventSystem *g_pGameEventSystem;
 
+class CServerSideClientBase;
+
 namespace deadworks {
+
+// Client for a player slot, read through the engine's own m_Clients offset (see CNetworkGameServerBase::m_Clients
+// in deadworks_mem.jsonc). Prefer this over sourcesdk's inline CNetworkGameServerBase::GetClientBySlot, whose
+// struct layout drifts whenever CSVCMsg_GameSessionConfiguration changes size.
+CServerSideClientBase *GetServerClientBySlot(void *server, int slot);
 
 class Deadworks {
 public:

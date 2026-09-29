@@ -23,6 +23,7 @@
 #include "../SDK/CCitadelPlayerController.hpp"
 #include "../SDK/CEntitySystem.hpp"
 #include "../SDK/Core.hpp"
+#include "../SDK/NetMessageInfo.hpp"
 #include "../SDK/Util.hpp"
 
 #include <cstring>
@@ -784,11 +785,13 @@ static void __cdecl NativeSendNetMessage(int msgId, const uint8_t *protoBytes, i
     if (!g_pNetworkMessages || !protoBytes || protoLen <= 0)
         return;
 
+    // Since the 2026-09-29 patch this is a plain NetMessageInfoDL record, not a serializer with virtuals.
     auto *serializer = g_pNetworkMessages->FindNetworkMessageById(static_cast<NetworkMessageId>(msgId));
-    if (!serializer)
+    auto *info = reinterpret_cast<const NetMessageInfoDL *>(serializer);
+    if (!info || !info->m_pfnAllocate)
         return;
 
-    CNetMessage *msg = serializer->AllocateMessage();
+    CNetMessage *msg = info->m_pfnAllocate();
     if (!msg)
         return;
 
@@ -809,8 +812,9 @@ static const char *__cdecl NativeGetNetMessageName(int msgId) {
     if (!g_pNetworkMessages)
         return nullptr;
 
-    auto *serializer = g_pNetworkMessages->FindNetworkMessageById(static_cast<NetworkMessageId>(msgId));
-    return serializer ? serializer->GetUnscopedName() : nullptr;
+    auto *info = reinterpret_cast<const NetMessageInfoDL *>(
+        g_pNetworkMessages->FindNetworkMessageById(static_cast<NetworkMessageId>(msgId)));
+    return info ? info->m_szName : nullptr;
 }
 
 // ---------------------------------------------------------------------------

@@ -1,6 +1,6 @@
 namespace DeadworksManaged.Api;
 
-/// <summary>Enum of all Deadlock hero identities. Values match game hero IDs. Use <see cref="HeroTypeExtensions"/> to convert to/from hero name strings.</summary>
+/// <summary>Enum of all Deadlock hero identities. Values match game hero IDs (m_HeroID in heroes.vdata). Use <see cref="HeroTypeExtensions"/> to convert to/from hero name strings.</summary>
 public enum Heroes {
 	Inferno = 1,
 	Gigawatt = 2,
@@ -27,6 +27,7 @@ public enum Heroes {
 	Viscous = 35,
 	Gunslinger = 38,
 	Yakuza = 39,
+	GenericPerson = 46,
 	Tokamak = 47,
 	Wrecker = 48,
 	Rutger = 49,
@@ -35,6 +36,7 @@ public enum Heroes {
 	Mirage = 52,
 	Slork = 53,
 	Cadence = 54,
+	TargetDummy = 55,
 	Bomber = 56,
 	ShieldGuy = 57,
 	Viper = 58,
@@ -62,4 +64,10 @@ public enum Heroes {
 	Werewolf = 80,
 	Unicorn = 81,
 	Opera = 82,
+	TestHero = 83,
+	Ratking = 84,
+	Chessmaster = 85,
+	Artist = 86,
+	Nurse = 87,
+	Baba = 88,
 }

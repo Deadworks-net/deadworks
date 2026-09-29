@@ -6,6 +6,8 @@
 #include <networksystem/inetworkserializer.h>
 #include <networksystem/netmessage.h>
 
+#include "../../SDK/NetMessageInfo.hpp"
+
 namespace deadworks {
 namespace hooks {
 
@@ -15,7 +17,8 @@ void __fastcall Hook_PostEventAbstract(IGameEventSystem *thisptr, CSplitScreenSl
     unsigned long nSize, NetChannelBufType_t bufType)
 {
     if (pEvent && pData && clients) {
-        auto *info = pEvent->GetNetMessageInfo();
+        // pEvent is the engine's NetMessageInfoDL record since the 2026-09-29 patch (no virtuals).
+        auto *info = reinterpret_cast<const NetMessageInfoDL *>(pEvent);
         if (info) {
             int msgId = info->m_MessageId;
             uint64 clientsMask = *clients;

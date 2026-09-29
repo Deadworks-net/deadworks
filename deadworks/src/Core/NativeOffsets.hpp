@@ -42,6 +42,9 @@ constexpr int32_t kMaxPlayerControllerSize = 0x2000;
 // signatured directly, so it is resolved from the E8 call inside this anchor.
 constexpr uintptr_t kHeroDefMgrAnchor_GetManagerCall = 0xE;
 
+// CNetworkGameServerBase::m_Clients anchor (engine2): disp32 of the vector inside the anchor function.
+constexpr uintptr_t kClientsAnchor_Disp = 0x6;
+
 // CCitadelGameRules::BuildGameSessionManifest
 constexpr uintptr_t kBGSM_GetHeroTableCall = 0x2BB;
 constexpr uintptr_t kBGSM_PrecacheGlobalLea = 0x389;

@@ -1,5 +1,6 @@
 #include "Deadworks.hpp"
 #include "NativeCallbacks.hpp"
+#include "NativeOffsets.hpp"
 #include "NativeHero.hpp"
 #include "ManagedCallbacks.hpp"
 
@@ -36,6 +37,7 @@
 #include "../SDK/CEntitySystem.hpp"
 #include "../Utils/String.hpp"
 #include "../SDK/Util.hpp"
+#include "../SDK/NetMessageInfo.hpp"
 
 #include <tier1/convar.h>
 
@@ -491,13 +493,28 @@ bool Deadworks::ShouldAllowGameStateChange(int currentState, int newState) {
     return m_managed.shouldAllowGameStateChange(currentState, newState) != 0;
 }
 
+CServerSideClientBase *GetServerClientBySlot(void *server, int slot) {
+    static const uintptr_t clientsOffset = [] {
+        auto anchor = MemoryDataLoader::Get().GetOffset("CNetworkGameServerBase::m_Clients").value();
+        return static_cast<uintptr_t>(*reinterpret_cast<int32_t *>(anchor + offsets::kClientsAnchor_Disp));
+    }();
+    if (!server || slot < 0)
+        return nullptr;
+    auto vec = reinterpret_cast<uintptr_t>(server) + clientsOffset;
+    int count = *reinterpret_cast<int32_t *>(vec);
+    auto **elements = *reinterpret_cast<CServerSideClientBase ***>(vec + 8);
+    if (slot >= count || !elements)
+        return nullptr;
+    return elements[slot];
+}
+
 void Deadworks::On_ISource2Server_GameFrame(bool simulating, bool bFirstTick, bool bLastTick) {
     // Poll for fully-connected transitions. A slot re-arms whenever its client isn't in game, so every arrival is
     // reported however the slot was emptied or filled (map changes, fake clients), not only via ClientConnect.
     if (m_managed.onClientFullConnect) {
         auto *server = g_pNetworkServerService->GetIGameServer();
         for (int i = 0; i < 64; ++i) {
-            auto *client = server->GetClientBySlot(CPlayerSlot(i));
+            auto *client = GetServerClientBySlot(server, i);
             if (!client || !client->IsInGame()) {
                 m_clientFullyConnected[i] = false;
                 continue;
@@ -573,7 +590,8 @@ void Deadworks::On_ISource2GameClients_ClientDisconnect(CPlayerSlot slot, ENetwo
 
 std::optional<bool> Deadworks::OnPre_CServerSideClientBase_FilterMessage(INetworkMessageProcessingPreFilter *thisptr, const CNetMessage *pData) {
     auto *client = static_cast<CServerSideClientBase *>(thisptr);
-    auto *info = pData->GetSerializerPB()->GetNetMessageInfo();
+    // GetSerializerPB() returns the engine's NetMessageInfoDL record since the 2026-09-29 patch.
+    auto *info = reinterpret_cast<const NetMessageInfoDL *>(pData->GetSerializerPB());
 
     // Forward all incoming messages to managed for generic hook dispatch
     if (m_managed.onNetMessageIncoming) {

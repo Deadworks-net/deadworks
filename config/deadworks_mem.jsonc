@@ -16,6 +16,13 @@
 			"library": "engine2.dll",
 			"windows": "48 8B C4 55 41 55 41 56"
 		},
+		// Anchor for CNetworkGameServerBase::m_Clients: a tiny per-slot getter. The disp32 at +6 (kClientsAnchor_Disp) is the
+		// offset of the client CUtlVector (count, element pointer at +8). The sourcesdk struct places m_Clients after an
+		// embedded CSVCMsg_GameSessionConfiguration whose size changes with the game's protobufs, so it is read from the engine.
+		"CNetworkGameServerBase::m_Clients": {
+			"library": "engine2.dll",
+			"windows": "85 D2 78 ?? 3B 91 ?? ?? 00 00 7D ?? 48 8B 81 ?? ?? 00 00 4C 63 C2 4A 8B 04 C0 48 85 C0 74 ?? 0F"
+		},
 		"UTIL_Remove": {
 			"library": "server.dll",
 			"windows": "48 85 C9 74 ? 48 8B D1 48 8B 0D"

@@ -11,4 +11,5 @@ public enum ECitadelDamageType : uint {
 	Poison = 0x5,
 	WeakpointBonus = 0x6,
 	Pure = 0x7,
+	NoDamage = 0x8,
 }

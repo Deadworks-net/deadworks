@@ -79,6 +79,13 @@ public static class HeroTypeExtensions {
 		[Heroes.Werewolf] = "Silver",
 		[Heroes.Unicorn] = "Celeste",
 		[Heroes.Opera] = "Opera",
+		[Heroes.GenericPerson] = "Generic Person",
+		[Heroes.TargetDummy] = "TargetDummy",
+		[Heroes.Ratking] = "Rat King",
+		[Heroes.Chessmaster] = "Solomon",
+		[Heroes.Artist] = "Violet",
+		[Heroes.Nurse] = "Nurse Harrow",
+		[Heroes.Baba] = "Baba",
 	};
 
 	/// <summary>Returns the localized English display name (e.g. "Grey Talon" for Orion).</summary>
