@@ -123,6 +123,9 @@
     <ClCompile Include="src\Core\NativeAbility.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="src\Core\NativeCollision.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
     <ClCompile Include="src\Core\NativeDamage.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
@@ -330,6 +333,9 @@
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="src\Core\NativeAbility.hpp">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="src\Core\NativeCollision.hpp">
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="src\Core\NativeDamage.hpp">

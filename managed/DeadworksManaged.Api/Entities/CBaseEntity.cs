@@ -334,6 +334,15 @@ public unsafe class CBaseEntity : NativeEntity, IEquatable<CBaseEntity> {
 		}
 	}
 
+	/// <summary>
+	/// Stops this entity and <paramref name="other"/> colliding with each other. Everything else still collides with
+	/// both. Undo it with <see cref="EnableCollisionsWith"/>.
+	/// </summary>
+	public void DisableCollisionsWith(CBaseEntity other) => NativeInterop.SetEntityCollisionsWith((void*)Handle, (void*)other.Handle, 0);
+
+	/// <summary>Lets this entity and <paramref name="other"/> collide again.</summary>
+	public void EnableCollisionsWith(CBaseEntity other) => NativeInterop.SetEntityCollisionsWith((void*)Handle, (void*)other.Handle, 1);
+
 	private static readonly SchemaAccessor<int> _health = new("CBaseEntity"u8, "m_iHealth"u8);
 	public int Health { get => _health.Get(Handle); set => _health.Set(Handle, value); }
 

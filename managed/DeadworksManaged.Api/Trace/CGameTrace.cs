@@ -13,7 +13,8 @@ public unsafe struct CGameTrace {
 	[FieldOffset(0x20)] public nint Shape;
 	[FieldOffset(0x28)] public ulong Contents;
 	[FieldOffset(0x30)] public fixed byte BodyTransform[32];
-	[FieldOffset(0x50)] public fixed byte ShapeAttributes[40];
+	/// <summary>Collision attributes of the shape the trace hit. <see cref="RnCollisionAttr_t.EntityId"/> is the hit entity's handle.</summary>
+	[FieldOffset(0x50)] public RnCollisionAttr_t ShapeAttributes;
 	[FieldOffset(0x78)] public Vector3 StartPos;
 	[FieldOffset(0x84)] public Vector3 EndPos;
 	[FieldOffset(0x90)] public Vector3 HitNormal;

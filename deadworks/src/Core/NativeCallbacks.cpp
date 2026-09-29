@@ -1,6 +1,7 @@
 #include "NativeCallbacks.hpp"
 #include "NativeOffsets.hpp"
 #include "NativeAbility.hpp"
+#include "NativeCollision.hpp"
 #include "NativeDamage.hpp"
 #include "NativeHero.hpp"
 #include "Deadworks.hpp"
@@ -1146,6 +1147,7 @@ static uint32_t __cdecl NativeTakeSoundEventGuid() {
 // ---------------------------------------------------------------------------
 
 void deadworks::ResolveNativeStatics() {
+    ResolveCollisionStatics();
     ResolveDamageStatics();
     ResolveHeroStatics();
     ResolveSubclassStatics();
@@ -1253,6 +1255,7 @@ void deadworks::PopulateNativeCallbacks(NativeCallbacks &callbacks) {
 
     // Subsystems
     PopulateAbilityNatives(callbacks);
+    PopulateCollisionNatives(callbacks);
     PopulateDamageNatives(callbacks);
     PopulateHeroNatives(callbacks);
 
