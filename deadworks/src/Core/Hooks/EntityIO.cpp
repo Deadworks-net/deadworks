@@ -8,7 +8,7 @@ namespace hooks {
 
 bool __fastcall Hook_CEntityInstance_AcceptInput(CEntityInstance *thisptr, const char *inputName,
                                                  CEntityInstance *activator, CEntityInstance *caller,
-                                                 void *variantValue, int outputID, void *unk) {
+                                                 void *variantValue) {
     const char *className = thisptr ? thisptr->GetClassname() : "";
 
     int result = g_Deadworks.OnEntityAcceptInputPre(className, inputName, thisptr, activator, caller, variantValue);
@@ -16,7 +16,7 @@ bool __fastcall Hook_CEntityInstance_AcceptInput(CEntityInstance *thisptr, const
         return true;
     }
 
-    bool ret = g_CEntityInstance_AcceptInput.fastcall<bool>(thisptr, inputName, activator, caller, variantValue, outputID, unk);
+    bool ret = g_CEntityInstance_AcceptInput.fastcall<bool>(thisptr, inputName, activator, caller, variantValue);
 
     g_Deadworks.OnEntityAcceptInputPost(className, inputName, thisptr, activator, caller, variantValue);
     return ret;

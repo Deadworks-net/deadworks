@@ -94,7 +94,7 @@ public:
 
 // --- Entity manipulation types ---
 
-using AcceptInputFn = bool(__thiscall *)(void *thisptr, const char *pInputName, CEntityInstance *pActivator, CEntityInstance *pCaller, variant_t *pValue, int nOutputID, void *);
+using AcceptInputFn = bool(__thiscall *)(void *thisptr, const char *pInputName, CEntityInstance *pActivator, CEntityInstance *pCaller, variant_t *pValue);
 
 // ---------------------------------------------------------------------------
 // Native callback implementations - Core / Entity / Schema / ConVar / Events
@@ -675,7 +675,7 @@ static void __cdecl NativeAcceptInput(void *entity, const char *inputName, void 
     fn(entity, inputName,
        static_cast<CEntityInstance *>(activator),
        static_cast<CEntityInstance *>(caller),
-       &val, 0, nullptr);
+       &val);
 }
 
 static void __cdecl NativeSetSchemaString(void *entity, const char *className, const char *fieldName, const char *value) {

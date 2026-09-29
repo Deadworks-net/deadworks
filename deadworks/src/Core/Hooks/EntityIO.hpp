@@ -22,11 +22,13 @@ struct CEntityIOOutput {
 
 // Original signature: bool CEntityInstance::AcceptInput(
 //     const char* pInputName, CEntityInstance* pActivator, CEntityInstance* pCaller,
-//     variant_t* pValue, int nOutputID, void* unk)
+//     variant_t* pValue)
+// Since 6711 the output ID / unk arguments are gone; the wrapper builds the new input
+// parameter objects itself before calling CEntityIdentity::AcceptInput.
 inline safetyhook::InlineHook g_CEntityInstance_AcceptInput;
 bool __fastcall Hook_CEntityInstance_AcceptInput(CEntityInstance *thisptr, const char *inputName,
                                                  CEntityInstance *activator, CEntityInstance *caller,
-                                                 void *variantValue, int outputID, void *unk);
+                                                 void *variantValue);
 
 // Original signature: void CEntityIOOutput::FireOutputInternal(
 //     CEntityInstance* pActivator, CEntityInstance* pCaller,
