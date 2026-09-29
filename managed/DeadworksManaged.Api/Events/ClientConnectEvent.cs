@@ -14,4 +14,10 @@ public sealed class ClientConnectEvent {
 	/// the same value for the same connection. Always false for bots, which a map change removes.
 	/// </summary>
 	public bool IsMapChangeReconnect { get; init; }
+
+	/// <summary>
+	/// Why the connection is being refused, when a plugin returns false from <see cref="IDeadworksPlugin.OnClientConnect"/>.
+	/// It's passed to the engine as the reject reason. Ignored when the connection is allowed.
+	/// </summary>
+	public string? RejectReason { get; set; }
 }

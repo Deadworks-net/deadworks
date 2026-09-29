@@ -30,13 +30,12 @@ public static unsafe class GlobalVars
 	//   MapLoadType_t eLoadType (4 bytes), bool mp_teamplay (1 byte + padding)
 	//   int maxEntities (4 bytes), int serverCount (4 bytes)
 
+	// Without the native callback (tests, or before startup) there are no globals; every property handles null.
 	private static byte* Get()
-	{
-		return (byte*)NativeInterop.GetGlobalVars();
-	}
+		=> NativeInterop.GetGlobalVars == null ? null : (byte*)NativeInterop.GetGlobalVars();
 
 	/// <summary>Whether the global vars pointer is currently available.</summary>
-	public static bool IsValid => NativeInterop.GetGlobalVars() != null;
+	public static bool IsValid => Get() != null;
 
 	/// <summary>Absolute time (per frame, not high-precision). Use for render-related timing.</summary>
 	public static float RealTime { get { var p = Get(); return p != null ? *(float*)(p + kRealTime) : 0f; } }

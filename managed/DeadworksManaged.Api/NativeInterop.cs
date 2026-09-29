@@ -154,6 +154,10 @@ internal static unsafe class NativeInterop
 	public static delegate* unmanaged[Cdecl]<int, int, void> DisconnectClient => (delegate* unmanaged[Cdecl]<int, int, void>)_cb.DisconnectClient;
 	public static delegate* unmanaged[Cdecl]<byte, void> SetMatchStartOnAnyMap => (delegate* unmanaged[Cdecl]<byte, void>)_cb.SetMatchStartOnAnyMap;
 	public static delegate* unmanaged[Cdecl]<byte> GetMatchStartOnAnyMap => (delegate* unmanaged[Cdecl]<byte>)_cb.GetMatchStartOnAnyMap;
+	public static delegate* unmanaged[Cdecl]<int, byte> IsClientAuthenticated => (delegate* unmanaged[Cdecl]<int, byte>)_cb.IsClientAuthenticated;
+	public static delegate* unmanaged[Cdecl]<int, byte*, int, void> KickClient => (delegate* unmanaged[Cdecl]<int, byte*, int, void>)_cb.KickClient;
+	public static delegate* unmanaged[Cdecl]<byte*, byte> IsMapValid => (delegate* unmanaged[Cdecl]<byte*, byte>)_cb.IsMapValid;
+	public static delegate* unmanaged[Cdecl]<byte*, void> SetConnectRejectReason => (delegate* unmanaged[Cdecl]<byte*, void>)_cb.SetConnectRejectReason;
 
 	// Entity movement and class checks
 	public static delegate* unmanaged[Cdecl]<void*, byte, void> SetMoveType => (delegate* unmanaged[Cdecl]<void*, byte, void>)_cb.SetMoveType;

@@ -146,4 +146,8 @@ internal struct NativeCallbacks
 	public nint DisconnectClient;
 	public nint SetMatchStartOnAnyMap;
 	public nint GetMatchStartOnAnyMap;
+	public nint IsClientAuthenticated;
+	public nint KickClient;
+	public nint IsMapValid;
+	public nint SetConnectRejectReason;
 }
