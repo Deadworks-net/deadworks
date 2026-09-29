@@ -32,12 +32,14 @@ bool __fastcall Hook_CEntityInstance_AcceptInput(CEntityInstance *thisptr, const
 
 // Original signature: void CEntityIOOutput::FireOutputInternal(
 //     CEntityInstance* pActivator, CEntityInstance* pCaller,
-//     const CVariant* value, float flDelay, void* unk1, void* unk2)
+//     const void* pParams, float flDelay, void* unk, const CVariant* pValue)
+// Since 6711 the fourth argument is the new output parameter container, not a CVariant.
+// The CVariant moved to the last argument and is only passed by some callers (null otherwise).
 inline safetyhook::InlineHook g_CEntityIOOutput_FireOutputInternal;
 void __fastcall Hook_CEntityIOOutput_FireOutputInternal(CEntityIOOutput *pThis,
                                                         CEntityInstance *pActivator, CEntityInstance *pCaller,
-                                                        const void *pValue, float delay,
-                                                        void *unk1, void *unk2);
+                                                        const void *pParams, float delay,
+                                                        void *unk, const void *pValue);
 
 } // namespace hooks
 } // namespace deadworks
