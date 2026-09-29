@@ -17,10 +17,14 @@ class CCitadelAbilityComponent {
         return fn(this, name);
     }
 
-    void *CreateAndRegisterAbility(void *def, uint16_t slot, int flags = 0, int upgradeLevel = -1, int arg6 = 1) {
-        static const auto fn = reinterpret_cast<void *(__fastcall *)(void *, void *, uint16_t, int, int, int)>(
+    // (component, def, slot, upgrade, flag, extra spawn keyvalues). Since 6711 the upgrade argument is
+    // 64-bit: the low word is the initial upgrade bits (SetUpgradeBits), the high dword goes to a second
+    // setter on the ability and is 0 from the engine's own callers. They pass true for the flag, which the
+    // function does not read. The last argument is an optional keyvalues node merged into the spawn keyvalues.
+    void *CreateAndRegisterAbility(void *def, uint16_t slot, uint16_t upgradeBits = 0) {
+        static const auto fn = reinterpret_cast<void *(__fastcall *)(void *, void *, uint16_t, uint64_t, bool, void *)>(
             deadworks::MemoryDataLoader::Get().GetOffset("CCitadelAbilityComponent::CreateAndRegisterAbility").value());
-        return fn(this, def, slot, flags, upgradeLevel, arg6);
+        return fn(this, def, slot, upgradeBits, true, nullptr);
     }
 
     int ExecuteAbilityBySlot(int16_t slot, char altCast = 0, uint8_t flags = 0) {
