@@ -94,7 +94,7 @@ public sealed unsafe class CCitadelPlayerPawn : CBasePlayerPawn {
 	public void ModifyCurrency(ECurrencyType type, int amount, ECurrencySource source,
 								bool silent = false, bool forceGain = false, bool spendOnly = false) {
 		NativeInterop.ModifyCurrency((void*)Handle, (uint)type, amount, (uint)source,
-									  silent ? (byte)1 : (byte)0, spendOnly ? (byte)1 : (byte)0, forceGain ? (byte)1 : (byte)0,
+									  silent ? (byte)1 : (byte)0, forceGain ? (byte)1 : (byte)0, spendOnly ? (byte)1 : (byte)0,
 									  (void*)0, (void*)0);
 	}
 

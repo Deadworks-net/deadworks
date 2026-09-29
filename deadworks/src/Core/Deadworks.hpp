@@ -54,7 +54,7 @@ public:
     bool OnPre_CBaseEntity_TakeDamageOld(CBaseEntity *entity, CTakeDamageInfo *info, CTakeDamageResult *result);
     // CCitadelPlayerPawn
     bool OnPre_CCitadelPlayerPawn_ModifyCurrency(void *pawn, ECurrencyType nCurrencyType, int32_t nAmount,
-                                                  ECurrencySource nSource, bool bSilent, bool bForceGain, bool bSpendOnly,
+                                                  ECurrencySource nSource, int32_t bSilent, int32_t bForceGain, int32_t bSpendOnly,
                                                   void *pSourceAbility, void *pSourceEntity);
     // Game Events
     int OnPre_GameEvent(const char *eventName, void *eventPtr);

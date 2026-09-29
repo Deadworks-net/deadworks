@@ -356,7 +356,7 @@ bool Deadworks::OnPre_CBaseEntity_TakeDamageOld(CBaseEntity *entity, CTakeDamage
 }
 
 bool Deadworks::OnPre_CCitadelPlayerPawn_ModifyCurrency(void *pawn, ECurrencyType nCurrencyType, int32_t nAmount,
-                                                        ECurrencySource nSource, bool bSilent, bool bForceGain, bool bSpendOnly,
+                                                        ECurrencySource nSource, int32_t bSilent, int32_t bForceGain, int32_t bSpendOnly,
                                                         void *pSourceAbility, void *pSourceEntity) {
     if (m_managed.onModifyCurrency)
         return m_managed.onModifyCurrency(pawn, static_cast<uint32_t>(nCurrencyType), nAmount,
