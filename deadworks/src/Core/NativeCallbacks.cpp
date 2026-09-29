@@ -800,7 +800,8 @@ static void __cdecl NativeSendNetMessage(int msgId, const uint8_t *protoBytes, i
         g_pGameEventSystem->PostEventAbstract(-1, false, &filter, serializer, msg, 0);
     }
 
-    g_pNetworkMessages->DeallocateNetMessageAbstract(serializer, msg);
+    // The game allocated it, so its deleting destructor frees it with the game's allocator.
+    delete msg;
 }
 
 static const char *__cdecl NativeGetNetMessageName(int msgId) {
