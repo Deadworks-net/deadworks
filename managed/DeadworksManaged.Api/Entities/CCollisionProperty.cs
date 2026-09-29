@@ -88,7 +88,7 @@ public unsafe class CCollisionProperty : NativeEntity {
 	/// </remarks>
 	/// <example>
 	/// Let shots pass through a prop that players still collide with:
-	/// <code>prop.Collision?.AddInteractsExclude(CollisionLayers.BulletsAndAbilities);</code>
+	/// <code>prop.Collision?.AddInteractsExclude(MaskTrace.CitadelBullet | MaskTrace.CitadelAbility);</code>
 	/// </example>
 	public void AddInteractsExclude(MaskTrace layers) => NativeInterop.AddCollisionLayers((void*)Handle, InteractsExcludeMask, (ulong)layers);
 

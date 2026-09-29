@@ -32,14 +32,6 @@ public class CollisionLayoutTests
     }
 
     [Fact]
-    public void BulletsAndAbilities_IsTheBulletAndAbilityLayers()
-    {
-        Assert.Equal((1UL << 34) | (1UL << 35), (ulong)CollisionLayers.BulletsAndAbilities);
-        Assert.Equal(MaskTrace.CitadelAbility, CollisionLayers.BulletsAndAbilities & MaskTrace.CitadelAbility);
-        Assert.Equal(MaskTrace.CitadelBullet, CollisionLayers.BulletsAndAbilities & MaskTrace.CitadelBullet);
-    }
-
-    [Fact]
     public void SolidFlags_UseDeadlockBits()
     {
         Assert.Equal(0x1, (int)SolidFlags.NotStandable);
