@@ -9,11 +9,11 @@ namespace DeadworksManaged.Api;
 [StructLayout(LayoutKind.Sequential)]
 public struct RnCollisionAttr_t {
 	/// <summary>Layers the object belongs to.</summary>
-	public MaskTrace InteractsAs;
+	public InteractionLayer InteractsAs;
 	/// <summary>Layers the object collides with.</summary>
-	public MaskTrace InteractsWith;
+	public InteractionLayer InteractsWith;
 	/// <summary>Layers that never collide with the object.</summary>
-	public MaskTrace InteractsExclude;
+	public InteractionLayer InteractsExclude;
 	/// <summary>Handle of the entity the object belongs to.</summary>
 	public uint EntityId;
 	/// <summary>Handle of the entity's owner, or <c>0xFFFFFFFF</c>. An object never collides with its owner.</summary>

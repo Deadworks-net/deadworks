@@ -9,9 +9,9 @@ namespace DeadworksManaged.Api;
 /// </summary>
 [StructLayout(LayoutKind.Sequential, Pack = 8)]
 public unsafe struct RnQueryShapeAttr_t {
-	public MaskTrace InteractsWith;
-	public MaskTrace InteractsExclude;
-	public MaskTrace InteractsAs;
+	public InteractionLayer InteractsWith;
+	public InteractionLayer InteractsExclude;
+	public InteractionLayer InteractsAs;
 	public fixed uint EntityIdsToIgnore[2];
 	public fixed uint OwnerIdsToIgnore[2];
 	public fixed ushort HierarchyIds[2];

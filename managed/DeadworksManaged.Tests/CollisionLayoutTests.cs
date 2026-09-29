@@ -32,6 +32,18 @@ public class CollisionLayoutTests
     }
 
     [Fact]
+    public void InteractionLayer_IsOneBitPerLayer()
+    {
+        var bits = Enum.GetValues<InteractionLayer>().Where(l => l != InteractionLayer.None).Select(l => (ulong)l).ToList();
+        Assert.All(bits, b => Assert.True(ulong.IsPow2(b)));
+        Assert.Equal(64, bits.Distinct().Count());
+        Assert.Equal(1UL << 31, (ulong)InteractionLayer.CitadelTeamAmber);
+        Assert.Equal(1UL << 34, (ulong)InteractionLayer.CitadelAbility);
+        Assert.Equal(1UL << 35, (ulong)InteractionLayer.CitadelBullet);
+        Assert.Equal(1UL << 63, (ulong)InteractionLayer.CitadelPortalEnvironment);
+    }
+
+    [Fact]
     public void SolidFlags_UseDeadlockBits()
     {
         Assert.Equal(0x1, (int)SolidFlags.NotStandable);

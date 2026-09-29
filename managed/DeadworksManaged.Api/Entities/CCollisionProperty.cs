@@ -56,30 +56,30 @@ public unsafe class CCollisionProperty : NativeEntity {
 	/// <summary>All of the entity's collision attributes in one read.</summary>
 	public RnCollisionAttr_t Attribute => _attribute.Get(_collisionAttribute.GetAddress(Handle));
 
-	/// <summary>Layers the entity belongs to, such as <see cref="MaskTrace.Solid"/>.</summary>
-	public MaskTrace InteractsAs => Attribute.InteractsAs;
+	/// <summary>Layers the entity belongs to, such as <see cref="InteractionLayer.Solid"/>.</summary>
+	public InteractionLayer InteractsAs => Attribute.InteractsAs;
 
 	/// <summary>Layers the entity collides with.</summary>
-	public MaskTrace InteractsWith => Attribute.InteractsWith;
+	public InteractionLayer InteractsWith => Attribute.InteractsWith;
 
 	/// <summary>Layers that never collide with the entity. Wins over <see cref="InteractsAs"/>, <see cref="InteractsWith"/> and the collision group.</summary>
-	public MaskTrace InteractsExclude => Attribute.InteractsExclude;
+	public InteractionLayer InteractsExclude => Attribute.InteractsExclude;
 
 	/// <summary>Adds <paramref name="layers"/> to <see cref="InteractsAs"/>.</summary>
 	/// <inheritdoc cref="AddInteractsExclude" path="/remarks"/>
-	public void AddInteractsAs(MaskTrace layers) => NativeInterop.AddCollisionLayers((void*)Handle, InteractsAsMask, (ulong)layers);
+	public void AddInteractsAs(InteractionLayer layers) => NativeInterop.AddCollisionLayers((void*)Handle, InteractsAsMask, (ulong)layers);
 
 	/// <summary>Removes <paramref name="layers"/> from <see cref="InteractsAs"/>.</summary>
 	/// <inheritdoc cref="AddInteractsExclude" path="/remarks"/>
-	public void RemoveInteractsAs(MaskTrace layers) => NativeInterop.RemoveCollisionLayers((void*)Handle, InteractsAsMask, (ulong)layers);
+	public void RemoveInteractsAs(InteractionLayer layers) => NativeInterop.RemoveCollisionLayers((void*)Handle, InteractsAsMask, (ulong)layers);
 
 	/// <summary>Adds <paramref name="layers"/> to <see cref="InteractsWith"/>.</summary>
 	/// <inheritdoc cref="AddInteractsExclude" path="/remarks"/>
-	public void AddInteractsWith(MaskTrace layers) => NativeInterop.AddCollisionLayers((void*)Handle, InteractsWithMask, (ulong)layers);
+	public void AddInteractsWith(InteractionLayer layers) => NativeInterop.AddCollisionLayers((void*)Handle, InteractsWithMask, (ulong)layers);
 
 	/// <summary>Removes <paramref name="layers"/> from <see cref="InteractsWith"/>.</summary>
 	/// <inheritdoc cref="AddInteractsExclude" path="/remarks"/>
-	public void RemoveInteractsWith(MaskTrace layers) => NativeInterop.RemoveCollisionLayers((void*)Handle, InteractsWithMask, (ulong)layers);
+	public void RemoveInteractsWith(InteractionLayer layers) => NativeInterop.RemoveCollisionLayers((void*)Handle, InteractsWithMask, (ulong)layers);
 
 	/// <summary>Adds <paramref name="layers"/> to <see cref="InteractsExclude"/>, so nothing on those layers collides with the entity.</summary>
 	/// <remarks>
@@ -88,21 +88,21 @@ public unsafe class CCollisionProperty : NativeEntity {
 	/// </remarks>
 	/// <example>
 	/// Let shots pass through a prop that players still collide with:
-	/// <code>prop.Collision?.AddInteractsExclude(MaskTrace.CitadelBullet | MaskTrace.CitadelAbility);</code>
+	/// <code>prop.Collision?.AddInteractsExclude(InteractionLayer.CitadelBullet | InteractionLayer.CitadelAbility);</code>
 	/// </example>
-	public void AddInteractsExclude(MaskTrace layers) => NativeInterop.AddCollisionLayers((void*)Handle, InteractsExcludeMask, (ulong)layers);
+	public void AddInteractsExclude(InteractionLayer layers) => NativeInterop.AddCollisionLayers((void*)Handle, InteractsExcludeMask, (ulong)layers);
 
 	/// <summary>Removes <paramref name="layers"/> from <see cref="InteractsExclude"/>.</summary>
 	/// <inheritdoc cref="AddInteractsExclude" path="/remarks"/>
-	public void RemoveInteractsExclude(MaskTrace layers) => NativeInterop.RemoveCollisionLayers((void*)Handle, InteractsExcludeMask, (ulong)layers);
+	public void RemoveInteractsExclude(InteractionLayer layers) => NativeInterop.RemoveCollisionLayers((void*)Handle, InteractsExcludeMask, (ulong)layers);
 
 	/// <summary>The entity's collision group. Change it with <see cref="SetCollisionGroup"/>.</summary>
 	public CollisionGroup CollisionGroup => (CollisionGroup)_collisionGroup.Get(Handle);
 
 	/// <summary>Moves the entity to another collision group. Takes effect immediately.</summary>
 	/// <remarks>
-	/// Also updates <see cref="InteractsAs"/>: <see cref="Api.CollisionGroup.Debris"/> adds <see cref="MaskTrace.Debris"/>,
-	/// and most other groups add <see cref="MaskTrace.TouchAll"/>.
+	/// Also updates <see cref="InteractsAs"/>: <see cref="Api.CollisionGroup.Debris"/> adds <see cref="InteractionLayer.Debris"/>,
+	/// and most other groups add <see cref="InteractionLayer.TouchAll"/>.
 	/// </remarks>
 	public void SetCollisionGroup(CollisionGroup group) => NativeInterop.SetCollisionGroup((void*)Handle, (byte)group);
 

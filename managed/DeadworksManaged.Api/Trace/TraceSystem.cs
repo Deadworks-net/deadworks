@@ -23,7 +23,7 @@ public static class Trace {
 	public static unsafe void SimpleTrace(
 		Vector3 start, Vector3 end,
 		RayType_t rayKind, RnQueryObjectSet objectQuery,
-		MaskTrace interactWith, MaskTrace interactExclude, MaskTrace interactAs,
+		InteractionLayer interactWith, InteractionLayer interactExclude, InteractionLayer interactAs,
 		CollisionGroup collision, ref CGameTrace trace,
 		CBaseEntity? filterEntity = null, CBaseEntity? filterSecondEntity = null) {
 
@@ -53,7 +53,7 @@ public static class Trace {
 	public static void SimpleTraceAngles(
 		Vector3 start, Vector3 angles,
 		RayType_t rayKind, RnQueryObjectSet objectQuery,
-		MaskTrace interactWith, MaskTrace interactExclude, MaskTrace interactAs,
+		InteractionLayer interactWith, InteractionLayer interactExclude, InteractionLayer interactAs,
 		CollisionGroup collision, ref CGameTrace trace,
 		CBaseEntity? filterEntity = null, CBaseEntity? filterSecondEntity = null,
 		float maxDistance = 8192f) {
@@ -69,12 +69,12 @@ public static class Trace {
 	}
 
 	/// <summary>Fires a simple line ray from <paramref name="start"/> to <paramref name="end"/>. Returns a <see cref="TraceResult"/> with hit position and fraction.</summary>
-	public static unsafe TraceResult Ray(Vector3 start, Vector3 end, MaskTrace mask = MaskTrace.Solid | MaskTrace.Hitbox, CBaseEntity? ignore = null) {
+	public static unsafe TraceResult Ray(Vector3 start, Vector3 end, InteractionLayer mask = InteractionLayer.Solid | InteractionLayer.Hitbox, CBaseEntity? ignore = null) {
 		if (!IsReady)
 			return new TraceResult { HitPosition = end, Fraction = 1.0f, DidHit = false };
 
 		var trace = CGameTrace.Create();
-		SimpleTrace(start, end, RayType_t.Line, RnQueryObjectSet.All, mask, MaskTrace.Empty, MaskTrace.Empty,
+		SimpleTrace(start, end, RayType_t.Line, RnQueryObjectSet.All, mask, InteractionLayer.None, InteractionLayer.None,
 			CollisionGroup.Always, ref trace, ignore);
 
 		return new TraceResult {
