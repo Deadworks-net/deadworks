@@ -128,16 +128,37 @@ internal static class PenaltyManager
         }
 
         var now = Now();
+        List<Penalty> added = [], removed = [];
         lock (_lock)
         {
             if (generation != _generation)
                 return false;
-            _active = task.Result.Where(p => p.IsActiveAt(now)).ToList();
+            var loaded = task.Result.Where(p => p.IsActiveAt(now)).ToList();
+            // A reload of the store already in use can bring changes made elsewhere: by hand, or on another server
+            // sharing it. Plugins hear about those like any other. A first load, or a newly selected store, is where
+            // the list starts, not a change.
+            if (_ready)
+            {
+                var loadedIds = loaded.Select(p => p.Id).ToHashSet();
+                var activeIds = _active.Select(p => p.Id).ToHashSet();
+                // The store's copy says how it ended. A store that only returns active penalties has none, so one that
+                // hadn't run out was lifted, by someone this server doesn't know, some time before this reload.
+                removed = _active.Where(p => !loadedIds.Contains(p.Id))
+                                 .Select(p => task.Result.FirstOrDefault(r => r.Id == p.Id)
+                                              ?? (p.IsActiveAt(now) ? p with { RemovedUtc = now } : p))
+                                 .ToList();
+                added = loaded.Where(p => !activeIds.Contains(p.Id)).ToList();
+            }
+            _active = loaded;
             RefreshMutes();
             _ready = true;
             LastLoadError = null;
         }
         Console.WriteLine($"[Penalties] Loaded {_active.Count} active penalties from the '{_storeName}' store");
+        foreach (var penalty in removed)
+            Raise(Removed, penalty);
+        foreach (var penalty in added)
+            Raise(Added, penalty);
 
         // Anyone on the server, or still connecting, who is now banned has to go.
         for (int slot = 0; slot < Players.MaxSlot; slot++)
@@ -332,16 +353,19 @@ internal static class PenaltyManager
         return GetActive(PenaltyType.Ban, steamId64) is { } ban ? BanMessage(ban) : null;
     }
 
-    /// <summary>Kicks the player in <paramref name="slot"/> if their SteamID is banned. Called once Steam validates them.</summary>
-    public static void EnforceBan(int slot)
+    /// <summary>
+    /// Kicks the player in <paramref name="slot"/> if their SteamID is banned, and returns whether it did. Called once
+    /// Steam validates them.
+    /// </summary>
+    public static bool EnforceBan(int slot)
     {
         // Only real bans: a store that's down keeps new players out at connect, but doesn't kick people already here.
         var id = PermissionManager.GetSlotSteamId(slot);
-        if (id != 0 && GetActive(PenaltyType.Ban, id) is { } ban)
-        {
-            Console.WriteLine($"[Penalties] Kicking banned player in slot {slot} ({id})");
-            Server.Kick(slot, BanMessage(ban));
-        }
+        if (id == 0 || GetActive(PenaltyType.Ban, id) is not { } ban)
+            return false;
+        Console.WriteLine($"[Penalties] Kicking banned player in slot {slot} ({id})");
+        Server.Kick(slot, BanMessage(ban));
+        return true;
     }
 
     /// <summary>The player's active gag, looked up by the SteamID they connected with.</summary>

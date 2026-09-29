@@ -19,8 +19,10 @@ internal static class AdminTick
 
         foreach (var (slot, steamId64) in PermissionManager.TakeNewlyAuthorized())
         {
-            // The SteamID a player connects with isn't checked until now, so bans get a second look.
-            PenaltyManager.EnforceBan(slot);
+            // The SteamID a player connects with isn't checked until now, so bans get a second look. A player kicked
+            // for one isn't authorized for anything, so plugins aren't told they were.
+            if (PenaltyManager.EnforceBan(slot))
+                continue;
             PluginLoader.DispatchClientAuthorized(new ClientAuthorizedEvent { Slot = slot, SteamId64 = steamId64 });
         }
 

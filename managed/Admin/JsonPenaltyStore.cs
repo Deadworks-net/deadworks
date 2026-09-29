@@ -147,11 +147,12 @@ internal sealed class JsonPenaltyStore : IPenaltyStore
 
         List<Penalty> kept;
         int total;
+        bool incomplete;
         lock (_lock)
         {
             try
             {
-                var all = Parse(warn: true);
+                var all = Parse(warn: true, out incomplete);
                 total = all.Count;
                 kept = Trim(all);
             }
@@ -163,14 +164,20 @@ internal sealed class JsonPenaltyStore : IPenaltyStore
             _all = kept;
             _unreadable = false;
         }
-        if (kept.Count != total)
+        // Entries written by hand without an id or date get new ones on every read, so they're saved once: otherwise
+        // lifting one would record a lifted copy and leave the original in force, and every reload would look like a
+        // new penalty.
+        if (kept.Count != total || incomplete)
             Save();
     }
 
     /// <summary>The file's penalties, minus history older than penalties.history_days; empty if there's no file.</summary>
     private List<Penalty> ReadFile() => File.Exists(_path) ? Trim(Parse()) : [];
 
-    private List<Penalty> Parse(bool warn = false)
+    private List<Penalty> Parse(bool warn = false) => Parse(warn, out _);
+
+    /// <param name="incomplete">Set when an entry has no <c>id</c> or <c>createdUtc</c>, which parsing makes up.</param>
+    private List<Penalty> Parse(bool warn, out bool incomplete)
     {
         try
         {
@@ -178,12 +185,36 @@ internal sealed class JsonPenaltyStore : IPenaltyStore
             var penalties = JsonSerializer.Deserialize<PenaltyFile>(text, Options)?.Penalties ?? [];
             if (warn)
                 UnknownJsonKeys.Warn(text, typeof(PenaltyFile), Path.GetFileName(_path), "[Penalties] WARNING:");
+            incomplete = HasIncompleteEntries(text);
             return penalties;
         }
         catch (Exception ex) when (ex is JsonException or NotSupportedException)
         {
             throw new InvalidDataException(JsonErrors.Describe(Path.GetFileName(_path), ex), ex);
         }
+    }
+
+    private static bool HasIncompleteEntries(string text)
+    {
+        using var doc = JsonDocument.Parse(text, new JsonDocumentOptions { CommentHandling = JsonCommentHandling.Skip, AllowTrailingCommas = true });
+        if (doc.RootElement.ValueKind != JsonValueKind.Object)
+            return false;
+        foreach (var property in doc.RootElement.EnumerateObject())
+        {
+            if (!property.Name.Equals("penalties", StringComparison.OrdinalIgnoreCase))
+                continue;
+            if (property.Value.ValueKind != JsonValueKind.Array)
+                return false;
+            foreach (var entry in property.Value.EnumerateArray())
+            {
+                if (entry.ValueKind != JsonValueKind.Object)
+                    continue;
+                var names = entry.EnumerateObject().Select(p => p.Name).ToList();
+                if (!names.Contains("id", StringComparer.OrdinalIgnoreCase) || !names.Contains("createdUtc", StringComparer.OrdinalIgnoreCase))
+                    return true;
+            }
+        }
+        return false;
     }
 
     // History only needs to go back so far; drop entries that ended before then. Zero or less keeps it forever: 0 means

@@ -280,6 +280,53 @@ public sealed class PenaltyTests : AdminTestBase
     }
 
     [Fact]
+    public void A_reload_reports_penalties_added_and_lifted_elsewhere()
+    {
+        var kept = Penalties.Add(PenaltyType.Gag, Greeny, null, Caller.Console, "kept");
+        var liftedElsewhere = Penalties.Add(PenaltyType.Ban, Lapka, null, Caller.Console, "lifted by hand");
+        var text = File.ReadAllText(PenaltiesFile)
+            .Replace("\"reason\": \"lifted by hand\"", "\"reason\": \"lifted by hand\", \"removedUtc\": \"2026-09-26T12:00:00Z\"")
+            .Replace("\"penalties\": [", "\"penalties\": [ { \"type\": \"Mute\", \"steamId64\": 76561197960287999, \"reason\": \"added by hand\" },");
+        File.WriteAllText(PenaltiesFile, text);
+
+        var added = new List<Penalty>();
+        var removed = new List<Penalty>();
+        PenaltyManager.Added += added.Add;
+        PenaltyManager.Removed += removed.Add;
+        try
+        {
+            Assert.True(PenaltyManager.Reload());
+            Assert.Equal("added by hand", Assert.Single(added).Reason);
+            var lifted = Assert.Single(removed);
+            Assert.Equal(liftedElsewhere.Id, lifted.Id);
+            Assert.NotNull(lifted.RemovedUtc); // the store's copy, which says it was lifted
+
+            // Nothing changed since, so a second reload reports nothing: the hand-written entry kept its id.
+            Assert.True(PenaltyManager.Reload());
+            Assert.Single(added);
+            Assert.Single(removed);
+        }
+        finally
+        {
+            PenaltyManager.Added -= added.Add;
+            PenaltyManager.Removed -= removed.Add;
+        }
+        Assert.Equal(kept.Id, Penalties.GetActive(PenaltyType.Gag, Greeny)!.Id);
+    }
+
+    [Fact]
+    public void A_penalty_written_by_hand_stays_lifted()
+    {
+        File.WriteAllText(PenaltiesFile, "{ \"penalties\": [ { \"type\": \"Ban\", \"steamId64\": 76561197960287931, \"reason\": \"by hand\" } ] }");
+        Assert.True(PenaltyManager.Reload());
+        Assert.True(Penalties.Remove(PenaltyType.Ban, Lapka, Caller.Console));
+
+        Assert.True(PenaltyManager.Reload());
+        Assert.False(Penalties.IsBanned(Lapka));
+        Assert.Single(Penalties.GetHistoryAsync(Lapka).Result);
+    }
+
+    [Fact]
     public void A_penalties_file_broken_after_loading_refuses_changes_and_isnt_overwritten()
     {
         Penalties.Add(PenaltyType.Ban, Lapka, TimeSpan.FromHours(1), Caller.Console, "first");

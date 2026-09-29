@@ -168,7 +168,8 @@ public interface IDeadworksPlugin {
 
 	/// <summary>
 	/// Called once per connection when Steam confirms who a player is, usually a few seconds after they connect.
-	/// Until then they only have the <c>default</c> role.
+	/// Until then they only have the <c>default</c> role. Not called for a player who turns out to be banned: they are
+	/// kicked instead.
 	/// </summary>
 	void OnClientAuthorized(ClientAuthorizedEvent args) { }
 
@@ -179,10 +180,17 @@ public interface IDeadworksPlugin {
 	/// </summary>
 	void OnPermissionsChanged(ulong? steamId64) { }
 
-	/// <summary>Called after a ban, gag or mute is added, by any plugin.</summary>
+	/// <summary>
+	/// Called after a ban, gag or mute is added, by any plugin, or found when penalties are reloaded (added by hand, or
+	/// by another server sharing the store).
+	/// </summary>
 	void OnPenaltyAdded(Penalty penalty) { }
 
-	/// <summary>Called after a penalty ends: lifted, replaced by a newer one, or run out. The penalty passed is the ended one.</summary>
+	/// <summary>
+	/// Called after a penalty ends: lifted, replaced by a newer one, or run out. The penalty passed is the ended one.
+	/// When a reload finds a penalty lifted elsewhere, <see cref="Penalty.RemovedUtc"/> is set, but who lifted it may
+	/// be unknown.
+	/// </summary>
 	void OnPenaltyRemoved(Penalty penalty) { }
 
 	/// <summary>Called for every action written to the admin log, e.g. to forward it to Discord.</summary>
