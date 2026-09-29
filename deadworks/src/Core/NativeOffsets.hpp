@@ -17,19 +17,19 @@ constexpr uintptr_t kSubclassDefDisabled = 0x2A;
 constexpr int kVtblTeleport = 163;
 
 // CBaseEntity
-constexpr int kVtblHeal = 123;
+constexpr int kVtblHeal = 124;
 constexpr int kVtblGetMaxHealth = 181;
-constexpr int kVtblSetScale = 246;
+constexpr int kVtblSetScale = 255;
 
 // CBaseModifier
-constexpr int kVtblModifierDestroy = 22;
+constexpr int kVtblModifierDestroy = 27;
 
 // CBasePlayerController
-constexpr int kVtblChangeTeam = 103;
+constexpr int kVtblChangeTeam = 105;
 
 // CCitadelAbilityComponent::OnAbilityRemoved
-constexpr uintptr_t kOnAbilityRemoved_FindSlotCall = 0x7D;
-constexpr uintptr_t kOnAbilityRemoved_RemoveSlotCall = 0x8D;
+constexpr uintptr_t kOnAbilityRemoved_FindSlotCall = 0x7B;
+constexpr uintptr_t kOnAbilityRemoved_RemoveSlotCall = 0x8B;
 
 // CCitadelPlayerController::ChangeTeamKeepHero
 // The bool has no schema entry, so read its offset from the disp32 in the
