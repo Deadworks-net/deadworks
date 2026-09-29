@@ -380,6 +380,39 @@ public sealed class PenaltyTests : AdminTestBase
         Assert.False(PenaltyManager.DropsVoice(3, voice));
     }
 
+    // Two active mutes for one player: a line copied by hand, or two servers sharing a store. Nothing in Deadworks
+    // writes this, but a store can hold it.
+    private const string TwoMutesForLapka = """
+        { "penalties": [
+          { "type": "Mute", "steamId64": 76561197960287931, "reason": "short", "expiresUtc": "2026-09-26T12:10:00Z" },
+          { "type": "Mute", "steamId64": 76561197960287931, "reason": "long", "expiresUtc": "2026-09-26T14:00:00Z" }
+        ] }
+        """;
+
+    [Fact]
+    public void Two_mutes_for_one_player_still_load_so_players_can_join()
+    {
+        File.WriteAllText(PenaltiesFile, TwoMutesForLapka);
+        PenaltyManager.Initialize(Path.Combine(Dir, "penalties"));
+
+        Assert.Null(PenaltyManager.ConnectRejection(Greeny)); // penalties loaded, so joins aren't refused
+        Assert.True(Penalties.IsMuted(Lapka));
+    }
+
+    [Fact]
+    public void Two_mutes_for_one_player_reload_and_the_longer_one_is_enforced()
+    {
+        const int voice = (int)CLC_Messages.ClcVoiceData;
+        PermissionManager.SetSlotSteamIdForTests(3, Lapka);
+        File.WriteAllText(PenaltiesFile, TwoMutesForLapka);
+
+        Assert.True(PenaltyManager.Reload());
+        Assert.True(PenaltyManager.DropsVoice(3, voice));
+
+        Clock = Clock.AddMinutes(30); // the short one has run out; the long one still holds
+        Assert.True(PenaltyManager.DropsVoice(3, voice));
+    }
+
     [Fact]
     public void Unmuting_lets_them_talk_again()
     {

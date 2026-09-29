@@ -390,9 +390,14 @@ internal static class PenaltyManager
         return id != 0 && mutes.TryGetValue(id, out var mute) && mute.IsActiveAt(Now());
     }
 
-    /// <summary>Call with <see cref="_lock"/> held, after changing <see cref="_active"/>.</summary>
+    /// <summary>
+    /// Call with <see cref="_lock"/> held, after changing <see cref="_active"/>. A store can hold more than one active
+    /// mute for a player (a line copied by hand, or servers sharing it); the one that lasts longest wins.
+    /// </summary>
     private static void RefreshMutes()
-        => _mutes = _active.Where(p => p.Type == PenaltyType.Mute).ToDictionary(p => p.SteamId64);
+        => _mutes = _active.Where(p => p.Type == PenaltyType.Mute)
+                           .GroupBy(p => p.SteamId64)
+                           .ToDictionary(g => g.Key, g => g.MaxBy(p => p.ExpiresUtc ?? DateTime.MaxValue)!);
 
     public static string BanMessage(Penalty ban)
         => $"You are banned from this server {ban.DescribeRemaining(Now())}.{(ban.Reason.Length > 0 ? $" Reason: {ban.Reason}" : "")}";
