@@ -44,7 +44,6 @@ public static class HeroTypeExtensions {
 		[Heroes.Viscous] = "Viscous",
 		[Heroes.Gunslinger] = "Gunslinger",
 		[Heroes.Yakuza] = "The Boss",
-		[Heroes.Tokamak] = "Tokamak",
 		[Heroes.Wrecker] = "Wrecker",
 		[Heroes.Rutger] = "Rutger",
 		[Heroes.Synth] = "Pocket",
@@ -74,11 +73,18 @@ public static class HeroTypeExtensions {
 		[Heroes.Fortuna] = "Fortuna",
 		[Heroes.Necro] = "Graves",
 		[Heroes.Fencer] = "Apollo",
-		[Heroes.Airheart] = "Airheart",
+		[Heroes.Deadpack] = "Deadman Danny",
 		[Heroes.Familiar] = "Rem",
 		[Heroes.Werewolf] = "Silver",
 		[Heroes.Unicorn] = "Celeste",
 		[Heroes.Opera] = "Opera",
+		[Heroes.GenericPerson] = "Generic Person",
+		[Heroes.TargetDummy] = "Target Dummy",
+		[Heroes.RatKing] = "Rat King",
+		[Heroes.Chessmaster] = "Solomon",
+		[Heroes.Artist] = "Violet",
+		[Heroes.Nurse] = "Nurse Harrow",
+		[Heroes.Baba] = "Baba",
 	};
 
 	/// <summary>Returns the localized English display name (e.g. "Grey Talon" for Orion).</summary>
