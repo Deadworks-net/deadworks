@@ -23,6 +23,9 @@ internal static class AdminTick
             // for one isn't authorized for anything, so plugins aren't told they were.
             if (PenaltyManager.EnforceBan(slot))
                 continue;
+            if (PermissionManager.HasNoStaff)
+                Console.WriteLine($"[Permissions] No admins yet. To make {Players.FromSlot(slot)?.PlayerName ?? "the player who just joined"} one, "
+                                  + $"run this in the server console or over RCON: dw_role_grant {steamId64} admin");
             PluginLoader.DispatchClientAuthorized(new ClientAuthorizedEvent { Slot = slot, SteamId64 = steamId64 });
         }
 

@@ -78,9 +78,10 @@ public sealed partial class AdminPlugin
 
     /// <summary>
     /// Announces an action on a player, or, for a SteamID that isn't on the server (no name), only logs it and tells the
-    /// caller: everyone else would see "ADMIN: banned 76561197960287930", which means nothing to them.
+    /// caller: everyone else would see "ADMIN: banned 76561197960287930", which means nothing to them. A new penalty on
+    /// a SteamID also gets a link to its Steam profile, since a mistyped one is a valid ID of someone else.
     /// </summary>
-    private static void Announce(Caller caller, string? name, ulong id, string action, string details)
+    private static void Announce(Caller caller, string? name, ulong id, string action, string details, bool newPenalty = false)
     {
         if (name != null)
         {
@@ -88,7 +89,8 @@ public sealed partial class AdminPlugin
             return;
         }
         AdminActivity.Log(caller, action, details: details);
-        caller.Reply($"{char.ToUpperInvariant(action[0])}{action[1..]}.");
+        caller.Reply($"{char.ToUpperInvariant(action[0])}{action[1..]}."
+                     + (newPenalty ? $" Check it's the right account: https://steamcommunity.com/profiles/{id}" : ""));
     }
 
     private static string Noun(PenaltyType type) => type.ToString().ToLowerInvariant();
@@ -147,7 +149,7 @@ public sealed partial class AdminPlugin
 
     /// <summary>One line of a bans/gags/mutes list: who, what's left of it, and who gave it why.</summary>
     private static string Describe(Penalty p, DateTime now)
-        => $"{p.PlayerName ?? "unknown player"} ({p.SteamId64}): {p.Type.ToString().ToLowerInvariant()}, {Left(p, now)}"
+        => $"{(p.PlayerName != null ? $"{p.PlayerName} ({p.SteamId64})" : p.SteamId64.ToString())}: {p.Type.ToString().ToLowerInvariant()}, {Left(p, now)}"
            + $", by {Who(p.AdminName, p.AdminSteamId64)}{(p.Reason.Length > 0 ? $": {p.Reason}" : "")}";
 
     // "2 hours left", not "for 2 hours", which reads like how long it was given for.

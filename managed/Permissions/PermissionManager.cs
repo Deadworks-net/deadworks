@@ -220,8 +220,9 @@ internal static class PermissionManager
             Console.WriteLine($"[Permissions] Loaded {_roles.Count} roles from the '{_storeName}' store");
 
         // A fresh server has nobody to run admin commands in game; say how, where the owner is looking right now.
-        if (firstLoad && ReferenceEquals(_store, _jsonStore) && _jsonStore!.AllPlayers().Count == 0)
-            Console.WriteLine("[Permissions] No admins yet. Join the server, then run this here: dw_role_grant <your name> admin");
+        // It's said again when someone joins (see HasNoStaff), since this is easily lost in the startup output.
+        if (firstLoad && HasNoStaff)
+            Console.WriteLine("[Permissions] No admins yet. Join the server, then make yourself one from the server console or RCON: dw_role_grant <your name> admin");
 
         PermissionManifest.WriteAll();
         if (_startupComplete)
@@ -503,6 +504,9 @@ internal static class PermissionManager
         get { lock (_lock) return _roles; }
     }
 
+    /// <summary>Whether the built-in store has nobody in it yet, as on a new server.</summary>
+    public static bool HasNoStaff => _rolesLoaded && ReferenceEquals(_store, _jsonStore) && _jsonStore!.AllPlayers().Count == 0;
+
     public static bool IsTemporary(ulong steamId64)
     {
         lock (_lock)
@@ -731,7 +735,18 @@ internal static class PermissionManager
         {
             lock (_lock)
             {
-                if (!_overlays.TryGetValue(steamId64, out var overlay))
+                // Judged by what they have right now, saved and --temp together: a temporary change that changes
+                // nothing would only be confusing to undo.
+                _overlays.TryGetValue(steamId64, out var overlay);
+                var current = ApplyOverlay(_players.GetValueOrDefault(steamId64), overlay);
+                var held = (kind is ChangeKind.GrantRole or ChangeKind.RevokeRole ? current?.Roles : current?.Permissions)
+                    ?.Any(v => v.Equals(value, StringComparison.OrdinalIgnoreCase)) == true;
+                if (held && kind is ChangeKind.GrantRole or ChangeKind.GrantPermission)
+                    return Task.FromResult<string?>($"Already has {value}.");
+                if (!held && kind is ChangeKind.RevokeRole or ChangeKind.RevokePermission)
+                    return Task.FromResult<string?>($"Doesn't have {value}.");
+
+                if (overlay == null)
                     _overlays[steamId64] = overlay = new SessionOverlay();
                 var (add, remove) = kind switch
                 {

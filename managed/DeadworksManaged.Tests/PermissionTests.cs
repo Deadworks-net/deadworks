@@ -316,6 +316,9 @@ public class SteamIdTests
     [InlineData("U:1:22202")]
     [InlineData("wisp")]
     [InlineData("12345")]
+    [InlineData("86561197960287930")]    // a mistyped first digit: not an individual account
+    [InlineData("76561197960265728")]    // account number 0
+    [InlineData("[U:1:99999999999999]")] // too big for an account number
     public void Other_text_does_not_parse(string value) => Assert.False(SteamIds.TryParse(value, out _));
 
     [Fact]

@@ -33,7 +33,7 @@ public sealed partial class AdminPlugin
         var replacing = CheckReplace(caller, PenaltyType.Ban, id, name ?? id.ToString(), duration, liftPermission: Perm.Unban);
         // Adding the ban kicks them, so it goes last; it also refuses players Steam hasn't verified yet.
         var penalty = Penalties.Add(PenaltyType.Ban, id, duration, caller, why, name);
-        Announce(caller, name, id, $"banned {name ?? id.ToString()} {Penalties.DescribeDuration(duration)}: {why}{replacing}", $"target={id} penalty={penalty.Id}");
+        Announce(caller, name, id, $"banned {name ?? id.ToString()} {Penalties.DescribeDuration(duration)}: {why}{replacing}", $"target={id} penalty={penalty.Id}", newPenalty: true);
     }
 
     [Command("unban", Description = "Lift a ban: unban <steamid> [reason]", Permission = Perm.Unban, SuppressChat = true)]
@@ -79,7 +79,7 @@ public sealed partial class AdminPlugin
         var (id, name) = PlayerOrSteamId(caller, player, Noun(type));
         var replacing = CheckReplace(caller, type, id, name ?? id.ToString(), duration, liftPermission: null);
         Penalties.Add(type, id, duration, caller, why, name);
-        Announce(caller, name, id, $"{verb} {name ?? id.ToString()} {Penalties.DescribeDuration(duration)}: {why}{replacing}", $"target={id}");
+        Announce(caller, name, id, $"{verb} {name ?? id.ToString()} {Penalties.DescribeDuration(duration)}: {why}{replacing}", $"target={id}", newPenalty: true);
     }
 
     /// <summary>ungag and unmute: whoever gave it, online or not.</summary>
@@ -168,7 +168,7 @@ public sealed partial class AdminPlugin
         // Replies to a player who has left go nowhere, not to whoever took their slot.
         var now = DateTime.UtcNow;
         name ??= history.Select(p => p.PlayerName).FirstOrDefault(n => n != null);
-        var lines = new List<string> { $"Penalties for {(name != null ? $"{name} ({id})" : id.ToString())}:" };
+        var lines = new List<string> { $"Penalties for {(name != null ? $"{name} ({id})" : id.ToString())}, dates in UTC:" };
         lines.AddRange(history.Select(p => $"  {DescribeHistory(p, now)}"));
         if (history.Count == 0)
             lines.Add("  none");

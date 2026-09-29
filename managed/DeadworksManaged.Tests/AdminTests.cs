@@ -704,6 +704,32 @@ public sealed class StaffChangeLogTests : AdminTestBase
         Assert.Contains("no loaded plugin declares admin.moderation.bna", Run("dw_perm_check", Lapka.ToString(), "admin.moderation.bna"));
     }
 
+    [Fact]
+    public void A_temp_change_that_changes_nothing_is_refused()
+    {
+        Assert.Contains("Doesn't have admin.", Run("dw_role_revoke", Lapka.ToString(), "admin", "--temp"));
+        Run("dw_role_grant", Lapka.ToString(), "admin");
+        Assert.Contains("Already has admin.", Run("dw_role_grant", Lapka.ToString(), "admin", "--temp"));
+
+        Run("dw_role_revoke", Lapka.ToString(), "admin", "--temp");
+        Assert.Empty(Permissions.GetRoles(Lapka));
+        Assert.Contains("Doesn't have admin.", Run("dw_role_revoke", Lapka.ToString(), "admin", "--temp"));
+        Assert.Contains("Doesn't have -admin.server.rcon.", Run("dw_perm_revoke", Lapka.ToString(), "-admin.server.rcon", "--temp"));
+    }
+
+    [Fact]
+    public void A_penalty_on_an_offline_steamid_links_its_profile_and_lists_without_a_name()
+    {
+        Assert.Contains($"Check it's the right account: https://steamcommunity.com/profiles/{Lapka}", Run("dw_ban", Lapka.ToString(), "60"));
+        Assert.DoesNotContain("steamcommunity", Run("dw_unban", Lapka.ToString()));
+
+        Run("dw_gag", Lapka.ToString(), "0");
+        var list = Run("dw_gags");
+        Assert.Contains($"  {Lapka}: gag, permanent, by Console", list);
+        Assert.DoesNotContain("unknown player", list);
+        Assert.Contains($"Penalties for {Lapka}, dates in UTC:", Run("dw_penalties", Lapka.ToString()));
+    }
+
     public override void Dispose()
     {
         ConCommandManager.UnregisterPlugin(PluginPath);
