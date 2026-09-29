@@ -650,8 +650,9 @@ internal static class PermissionManager
         }
 
         // Until now these players only had default; their own roles apply from here on, which is a change like any
-        // grant. (With the Steam wait off, they applied at connect and nothing changes now.)
-        if (RequireSteamAuth && !IsLanServer())
+        // grant. (With the Steam wait off, they applied at connect and nothing changes now.) Only asked once someone is
+        // confirmed: this runs every tick, and asking reads sv_lan for good, which must wait until server.cfg has run.
+        if (result.Count > 0 && RequireSteamAuth && !IsLanServer())
             foreach (var (_, id) in result)
                 Changed?.Invoke(id);
         return result;

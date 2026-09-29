@@ -635,6 +635,23 @@ public sealed class PermissionManagerTests : IDisposable
     }
 
     [Fact]
+    public void Nobody_being_confirmed_doesnt_read_sv_lan_early()
+    {
+        // TakeNewlyAuthorized runs every tick from the first frame; reading sv_lan then would lock it in before
+        // server.cfg could set it.
+        var previous = PermissionManager.IsLanServer;
+        PermissionManager.IsLanServer = () => throw new InvalidOperationException("sv_lan read with nobody confirmed");
+        try
+        {
+            Assert.Empty(PermissionManager.TakeNewlyAuthorized());
+        }
+        finally
+        {
+            PermissionManager.IsLanServer = previous;
+        }
+    }
+
+    [Fact]
     public void Checking_by_steam_id_waits_for_steam_too()
     {
         // Plugins often check caller.SteamId64 instead of the slot; that mustn't hand out permissions early.
