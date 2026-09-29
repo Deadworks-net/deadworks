@@ -32,8 +32,8 @@ public sealed partial class AdminPlugin
 
         var replacing = CheckReplace(caller, PenaltyType.Ban, id, name ?? id.ToString(), duration, liftPermission: Perm.Unban);
         // Adding the ban kicks them, so it goes last; it also refuses players Steam hasn't verified yet.
-        var penalty = Penalties.Add(PenaltyType.Ban, id, duration, why, caller, name);
-        Announce(caller, name, id, $"banned {name ?? id.ToString()} {DescribeDuration(duration)}: {why}{replacing}", $"target={id} penalty={penalty.Id}");
+        var penalty = Penalties.Add(PenaltyType.Ban, id, duration, caller, why, name);
+        Announce(caller, name, id, $"banned {name ?? id.ToString()} {Penalties.DescribeDuration(duration)}: {why}{replacing}", $"target={id} penalty={penalty.Id}");
     }
 
     [Command("unban", Description = "Lift a ban: unban <steamid> [reason]", Permission = Perm.Unban, SuppressChat = true)]
@@ -78,8 +78,8 @@ public sealed partial class AdminPlugin
         var verb = Past(type);
         var (id, name) = PlayerOrSteamId(caller, player, Noun(type));
         var replacing = CheckReplace(caller, type, id, name ?? id.ToString(), duration, liftPermission: null);
-        Penalties.Add(type, id, duration, why, caller, name);
-        Announce(caller, name, id, $"{verb} {name ?? id.ToString()} {DescribeDuration(duration)}: {why}{replacing}", $"target={id}");
+        Penalties.Add(type, id, duration, caller, why, name);
+        Announce(caller, name, id, $"{verb} {name ?? id.ToString()} {Penalties.DescribeDuration(duration)}: {why}{replacing}", $"target={id}");
     }
 
     /// <summary>ungag and unmute: whoever gave it, online or not.</summary>
@@ -121,10 +121,10 @@ public sealed partial class AdminPlugin
         var lines = new List<string> { $"{players.Count} player{(players.Count == 1 ? "" : "s")}:" };
         foreach (var p in players.OrderBy(p => p.Slot))
         {
-            var id = Permissions.GetSteamId(p.Slot);
+            var id = Permissions.GetSteamId64(p.Slot);
             var roles = id == 0 ? "bot" : string.Join(", ", Permissions.GetRoles(id).DefaultIfEmpty("no roles"));
             var flags = new List<string>();
-            if (id != 0 && !Players.IsAuthenticated(p.Slot)) flags.Add("not Steam-verified");
+            if (id != 0 && !Players.IsAuthorized(p.Slot)) flags.Add("not Steam-verified");
             if (id != 0 && Penalties.IsGagged(id)) flags.Add("gagged");
             if (id != 0 && Penalties.IsMuted(id)) flags.Add("muted");
             var suffix = flags.Count > 0 ? $" [{string.Join(", ", flags)}]" : "";
@@ -178,7 +178,7 @@ public sealed partial class AdminPlugin
     private static void ListActive(Caller caller, PenaltyType type, string what)
     {
         var now = DateTime.UtcNow;
-        var active = Penalties.GetActive(type);
+        var active = Penalties.GetAllActive(type);
         var lines = new List<string> { $"{active.Count} active {what}{(active.Count == 1 ? "" : "s")}:" };
         lines.AddRange(active.Select(p => $"  {Describe(p, now)}"));
         ReplyLines(caller, lines);

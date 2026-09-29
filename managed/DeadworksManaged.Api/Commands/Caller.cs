@@ -46,7 +46,7 @@ public sealed class Caller
     /// <summary>The player's name when they ran the command, or "Console".</summary>
     public string Name { get; }
 
-    /// <summary>The SteamID the player connected with (see <see cref="Permissions.GetSteamId"/>), or 0 for the console.</summary>
+    /// <summary>The SteamID the player connected with (see <see cref="Permissions.GetSteamId64"/>), or 0 for the console.</summary>
     public ulong SteamId64 { get; }
 
     /// <summary>Whether the caller holds <paramref name="permission"/>. The console holds everything; a player who has left, nothing.</summary>

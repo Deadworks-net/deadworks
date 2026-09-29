@@ -42,7 +42,7 @@ internal static class CommandRegistration
         {
             if (CommandOverrides.Unreadable)
                 return OverridesBrokenMessage;
-            return player != null && !Players.IsAuthenticated(player.Slot) ? NotConfirmedMessage : DeniedMessage;
+            return player != null && !Players.IsAuthorized(player.Slot) ? NotConfirmedMessage : DeniedMessage;
         }
 
         /// <summary>For listings such as <c>dw_help</c>. A null caller is the server console.</summary>
@@ -284,7 +284,7 @@ internal static class CommandRegistration
             _lastRefusal[(id, command)] = now;
         }
 
-        var unconfirmed = !Players.IsAuthenticated(player.Slot) ? " (not confirmed by Steam yet)" : "";
+        var unconfirmed = !Players.IsAuthorized(player.Slot) ? " (not confirmed by Steam yet)" : "";
         var needs = permission.Length > 0 ? $"needs {permission}" : "not allowed";
         Console.WriteLine($"[Permissions] {player.PlayerName} ({id}) was refused {command}: {needs}{unconfirmed}");
         if (id != 0 && PermissionManager.Describe(id).AssignedRoles.Count > 0) // their saved roles: staff even before Steam confirms them

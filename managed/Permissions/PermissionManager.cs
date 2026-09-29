@@ -109,7 +109,7 @@ internal static class PermissionManager
 
         PermissionManifest.Initialize(permissionsDir);
         DeadworksManaged.Api.Permissions.Backend = new Backend();
-        Players.AuthenticatedResolver = IsAuthorized;
+        Players.AuthorizedResolver = IsAuthorized;
 
         SetStore(IsJson(_storeName) ? _jsonStore : new UnavailableStore(_storeName));
     }
@@ -605,7 +605,7 @@ internal static class PermissionManager
         }
     }
 
-    /// <summary>Whether the player in <paramref name="slot"/> has a trustworthy SteamID (see <see cref="Players.IsAuthenticated"/>).</summary>
+    /// <summary>Whether the player in <paramref name="slot"/> has a trustworthy SteamID (see <see cref="Players.IsAuthorized"/>).</summary>
     public static bool IsAuthorized(int slot) => GetSlotSteamId(slot) != 0 && IsTrusted(slot);
 
     /// <summary>

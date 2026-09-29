@@ -16,7 +16,7 @@ public sealed partial class AdminPlugin
     /// <summary>The SteamID the player connected with. Bots have none, and can't be penalized.</summary>
     private static ulong SteamIdOf(CCitadelPlayerController player)
     {
-        var id = Permissions.GetSteamId(player.Slot);
+        var id = Permissions.GetSteamId64(player.Slot);
         return id != 0 ? id : throw new CommandException($"{player.PlayerName} is a bot.");
     }
 
@@ -33,7 +33,7 @@ public sealed partial class AdminPlugin
 
     /// <summary>Every target's SteamID for the log line, which names them all even when the announcement doesn't. Bots are 0.</summary>
     private static string TargetIds(IEnumerable<CCitadelPlayerController> players)
-        => $"target={string.Join(',', players.Select(p => Permissions.GetSteamId(p.Slot)))}";
+        => $"target={string.Join(',', players.Select(p => Permissions.GetSteamId64(p.Slot)))}";
 
     /// <summary>
     /// Checks a new penalty against the player's current one of the same type, which it replaces. Nobody may penalize
@@ -64,7 +64,7 @@ public sealed partial class AdminPlugin
     /// </summary>
     private static (ulong Id, string? Name) PlayerOrSteamId(Caller caller, string player, string command)
     {
-        if (SteamIds.TryParse(player, out var offlineId) && !Players.GetAll().Any(p => Permissions.GetSteamId(p.Slot) == offlineId))
+        if (SteamIds.TryParse(player, out var offlineId) && !Players.GetAll().Any(p => Permissions.GetSteamId64(p.Slot) == offlineId))
         {
             if (!caller.CanTarget(offlineId))
                 throw new CommandException(Permissions.IsLoaded(offlineId)
@@ -114,18 +114,6 @@ public sealed partial class AdminPlugin
         return minutes > 0 ? TimeSpan.FromMinutes(minutes) : null;
     }
 
-    /// <summary>"permanently", "for 45 minutes", "for 2 hours", "for 3 days", "for 1h 30m".</summary>
-    internal static string DescribeDuration(TimeSpan? duration)
-    {
-        if (duration is not { } d)
-            return "permanently";
-        var minutes = (long)d.TotalMinutes;
-        if (minutes < 60) return $"for {minutes} minute{(minutes == 1 ? "" : "s")}";
-        if (minutes % 1440 == 0) return $"for {minutes / 1440} day{(minutes == 1440 ? "" : "s")}";
-        if (minutes % 60 == 0) return $"for {minutes / 60} hour{(minutes == 60 ? "" : "s")}";
-        return $"for {minutes / 60}h {minutes % 60}m";
-    }
-
     private string Reason(string[] words, string fallback)
     {
         var reason = string.Join(' ', words).Trim();
@@ -143,7 +131,7 @@ public sealed partial class AdminPlugin
     internal static string DescribeHistory(Penalty p, DateTime now)
     {
         var type = p.Type.ToString().ToLowerInvariant();
-        var length = p.ExpiresUtc is { } expires ? DescribeDuration(expires - p.CreatedUtc) : "permanently";
+        var length = Penalties.DescribeDuration(p.ExpiresUtc - p.CreatedUtc);
         var given = $"{p.CreatedUtc:yyyy-MM-dd} {type} {length} by {Who(p.AdminName, p.AdminSteamId64)}"
                     + (p.Reason.Length > 0 ? $": {p.Reason}" : "");
         var ended = p.HowEnded(now) switch

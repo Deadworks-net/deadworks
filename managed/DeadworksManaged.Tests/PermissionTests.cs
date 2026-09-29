@@ -674,16 +674,16 @@ public sealed class PermissionManagerTests : IDisposable
         PermissionManager.IsSlotAuthenticated = _ => false;
         PermissionManager.IsLanServer = () => true;
         Assert.True(PermissionManager.HasForSlot(4, "server.rcon"));
-        Assert.True(Players.IsAuthenticated(4));
+        Assert.True(Players.IsAuthorized(4));
     }
 
     [Fact]
     public void Slot_identity_is_the_connect_steam_id_and_clears_on_disconnect()
     {
         PermissionManager.OnClientConnect(5, Admin);
-        Assert.Equal(Admin, Permissions.GetSteamId(5));
+        Assert.Equal(Admin, Permissions.GetSteamId64(5));
         PermissionManager.OnClientDisconnect(5);
-        Assert.Equal(0UL, Permissions.GetSteamId(5));
+        Assert.Equal(0UL, Permissions.GetSteamId64(5));
         Assert.False(PermissionManager.HasForSlot(5, "server.rcon"));
 
         PermissionManager.OnClientConnect(6, Admin);

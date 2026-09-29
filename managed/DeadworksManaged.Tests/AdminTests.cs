@@ -55,7 +55,7 @@ public sealed class PenaltyTests : AdminTestBase
         PenaltyManager.Removed += removed.Add;
         try
         {
-            Penalties.Add(PenaltyType.Ban, Lapka, TimeSpan.FromMinutes(60), "spam", by: Caller.Console, playerName: "lapka");
+            Penalties.Add(PenaltyType.Ban, Lapka, TimeSpan.FromMinutes(60), Caller.Console, "spam", playerName: "lapka");
             Assert.True(Penalties.IsBanned(Lapka));
             Assert.False(Penalties.IsBanned(Greeny));
             Assert.Equal("You are banned from this server for 1 hour. Reason: spam", PenaltyManager.ConnectRejection(Lapka));
@@ -76,7 +76,7 @@ public sealed class PenaltyTests : AdminTestBase
     [Fact]
     public void Permanent_penalties_have_no_end()
     {
-        Penalties.Add(PenaltyType.Gag, Lapka, null, "", by: Caller.Console);
+        Penalties.Add(PenaltyType.Gag, Lapka, null, Caller.Console, "");
         Clock = Clock.AddYears(10);
         var gag = Penalties.GetActive(PenaltyType.Gag, Lapka);
         Assert.NotNull(gag);
@@ -87,12 +87,12 @@ public sealed class PenaltyTests : AdminTestBase
     [Fact]
     public void A_new_penalty_replaces_the_active_one_of_the_same_type()
     {
-        var first = Penalties.Add(PenaltyType.Ban, Lapka, TimeSpan.FromDays(1), "first", by: Caller.Console);
-        Penalties.Add(PenaltyType.Gag, Lapka, TimeSpan.FromDays(1), "gag", by: Caller.Console);
-        var second = Penalties.Add(PenaltyType.Ban, Lapka, null, "second", by: Caller.Console);
+        var first = Penalties.Add(PenaltyType.Ban, Lapka, TimeSpan.FromDays(1), Caller.Console, "first");
+        Penalties.Add(PenaltyType.Gag, Lapka, TimeSpan.FromDays(1), Caller.Console, "gag");
+        var second = Penalties.Add(PenaltyType.Ban, Lapka, null, Caller.Console, "second");
 
         Assert.Equal(second.Id, Penalties.GetActive(PenaltyType.Ban, Lapka)!.Id);
-        Assert.Equal(2, Penalties.GetActive().Count); // the ban and the gag
+        Assert.Equal(2, Penalties.GetAllActive().Count); // the ban and the gag
 
         var history = Penalties.GetHistoryAsync(Lapka).Result;
         Assert.Equal(3, history.Count);
@@ -102,7 +102,7 @@ public sealed class PenaltyTests : AdminTestBase
     [Fact]
     public void Remove_lifts_the_penalty_and_keeps_history()
     {
-        Penalties.Add(PenaltyType.Ban, Lapka, null, "x", by: Caller.Console);
+        Penalties.Add(PenaltyType.Ban, Lapka, null, Caller.Console, "x");
         Assert.True(Penalties.Remove(PenaltyType.Ban, Lapka, by: Caller.Console));
         Assert.False(Penalties.Remove(PenaltyType.Ban, Lapka, by: Caller.Console));
         Assert.False(Penalties.IsBanned(Lapka));
@@ -112,7 +112,7 @@ public sealed class PenaltyTests : AdminTestBase
     [Fact]
     public void Penalties_survive_a_restart()
     {
-        Penalties.Add(PenaltyType.Ban, Lapka, TimeSpan.FromDays(7), "it's \"cheating\"", by: Caller.Console, playerName: "lapka");
+        Penalties.Add(PenaltyType.Ban, Lapka, TimeSpan.FromDays(7), Caller.Console, "it's \"cheating\"", playerName: "lapka");
 
         var text = File.ReadAllText(PenaltiesFile);
         Assert.StartsWith("// Bans, gags and mutes.", text);
@@ -129,8 +129,8 @@ public sealed class PenaltyTests : AdminTestBase
     [Fact]
     public void Old_history_is_pruned_on_load()
     {
-        Penalties.Add(PenaltyType.Ban, Lapka, TimeSpan.FromMinutes(1), "old", by: Caller.Console);
-        Penalties.Add(PenaltyType.Ban, Greeny, null, "current", by: Caller.Console);
+        Penalties.Add(PenaltyType.Ban, Lapka, TimeSpan.FromMinutes(1), Caller.Console, "old");
+        Penalties.Add(PenaltyType.Ban, Greeny, null, Caller.Console, "current");
         Clock = Clock.AddDays(91);
 
         PenaltyManager.Initialize(Path.Combine(Dir, "penalties"), historyDays: 90);
@@ -142,14 +142,14 @@ public sealed class PenaltyTests : AdminTestBase
     [Fact]
     public void An_unreadable_file_is_not_overwritten()
     {
-        Penalties.Add(PenaltyType.Ban, Greeny, null, "keep me", by: Caller.Console);
+        Penalties.Add(PenaltyType.Ban, Greeny, null, Caller.Console, "keep me");
         File.WriteAllText(PenaltiesFile, File.ReadAllText(PenaltiesFile) + "{ broken");
 
         Assert.False(PenaltyManager.Reload());
         Assert.True(Penalties.IsBanned(Greeny)); // the previous penalties stay in force
 
         // New ones are refused rather than enforced until restart and then lost.
-        var error = Assert.Throws<CommandException>(() => Penalties.Add(PenaltyType.Ban, Lapka, null, "new", by: Caller.Console));
+        var error = Assert.Throws<CommandException>(() => Penalties.Add(PenaltyType.Ban, Lapka, null, Caller.Console, "new"));
         Assert.Contains("penalties.jsonc has an error", error.Message);
         Assert.Contains("{ broken", File.ReadAllText(PenaltiesFile)); // and the file keeps its history
     }
@@ -161,7 +161,7 @@ public sealed class PenaltyTests : AdminTestBase
         PenaltyManager.Initialize(Path.Combine(Dir, "penalties"));
         Assert.Equal(PenaltyManager.UnavailableRejection, PenaltyManager.ConnectRejection(Lapka));
         Assert.Null(PenaltyManager.ConnectRejection(0)); // bots
-        Assert.Throws<CommandException>(() => Penalties.Add(PenaltyType.Gag, Lapka, null, "x", Caller.Console));
+        Assert.Throws<CommandException>(() => Penalties.Add(PenaltyType.Gag, Lapka, null, Caller.Console, "x"));
     }
 
     private sealed class MemoryPenaltyStore : IPenaltyStore
@@ -196,7 +196,7 @@ public sealed class PenaltyTests : AdminTestBase
         Penalties.RegisterStore(owner, "mysql", new MemoryPenaltyStore());
         TimerEngine.OnTick(); // it loads on the next tick
         Assert.Null(PenaltyManager.ConnectRejection(Lapka));
-        Penalties.Add(PenaltyType.Ban, Lapka, null, "x", Caller.Console);
+        Penalties.Add(PenaltyType.Ban, Lapka, null, Caller.Console, "x");
         Assert.NotNull(PenaltyManager.ConnectRejection(Lapka));
 
         PenaltyManager.UnregisterStoresOwnedBy([owner]);
@@ -212,9 +212,9 @@ public sealed class PenaltyTests : AdminTestBase
         PermissionManager.IsSlotAuthenticated = _ => false;
         try
         {
-            Penalties.Add(PenaltyType.Gag, Lapka, null, "spam during an outage", Caller.Console);
-            Penalties.Add(PenaltyType.Ban, Greeny, null, "x", Caller.Console);
-            Assert.Equal(2, Penalties.GetActive().Count);
+            Penalties.Add(PenaltyType.Gag, Lapka, null, Caller.Console, "spam during an outage");
+            Penalties.Add(PenaltyType.Ban, Greeny, null, Caller.Console, "x");
+            Assert.Equal(2, Penalties.GetAllActive().Count);
         }
         finally
         {
@@ -229,15 +229,15 @@ public sealed class PenaltyTests : AdminTestBase
         PenaltyManager.Removed += removed.Add;
         try
         {
-            Penalties.Add(PenaltyType.Gag, Lapka, TimeSpan.FromMinutes(5), "", Caller.Console);
+            Penalties.Add(PenaltyType.Gag, Lapka, TimeSpan.FromMinutes(5), Caller.Console, "");
             Clock = Clock.AddMinutes(10); // ran out, but nothing has swept it yet
             Assert.False(Penalties.Remove(PenaltyType.Gag, Lapka, Caller.Console));
             Assert.Equal(PenaltyEnd.Expired, Assert.Single(removed).HowEnded(Clock));
 
-            Penalties.Add(PenaltyType.Mute, Lapka, TimeSpan.FromMinutes(5), "", Caller.Console);
+            Penalties.Add(PenaltyType.Mute, Lapka, TimeSpan.FromMinutes(5), Caller.Console, "");
             Clock = Clock.AddMinutes(10);
             Assert.Null(Penalties.WouldShorten(PenaltyType.Mute, Lapka, TimeSpan.FromMinutes(1)));
-            Penalties.Add(PenaltyType.Mute, Lapka, TimeSpan.FromMinutes(1), "", Caller.Console);
+            Penalties.Add(PenaltyType.Mute, Lapka, TimeSpan.FromMinutes(1), Caller.Console, "");
             Assert.Equal(PenaltyEnd.Expired, removed[^1].HowEnded(Clock)); // not "Replaced"
         }
         finally
@@ -263,7 +263,7 @@ public sealed class PenaltyTests : AdminTestBase
     [Fact]
     public void Hand_edits_to_penalties_jsonc_survive_the_next_change()
     {
-        Penalties.Add(PenaltyType.Ban, Lapka, TimeSpan.FromHours(1), "first", Caller.Console);
+        Penalties.Add(PenaltyType.Ban, Lapka, TimeSpan.FromHours(1), Caller.Console, "first");
 
         // The owner adds a ban by hand and changes the first ban's reason, without reloading.
         var text = File.ReadAllText(PenaltiesFile)
@@ -271,7 +271,7 @@ public sealed class PenaltyTests : AdminTestBase
             .Replace("\"penalties\": [", "\"penalties\": [ { \"type\": \"Ban\", \"steamId64\": 76561197960287999, \"reason\": \"added by hand\" },");
         File.WriteAllText(PenaltiesFile, text);
 
-        Penalties.Add(PenaltyType.Gag, Greeny, TimeSpan.FromMinutes(5), "spam", Caller.Console);
+        Penalties.Add(PenaltyType.Gag, Greeny, TimeSpan.FromMinutes(5), Caller.Console, "spam");
 
         var saved = File.ReadAllText(PenaltiesFile);
         Assert.Contains("edited by hand", saved);
@@ -282,11 +282,11 @@ public sealed class PenaltyTests : AdminTestBase
     [Fact]
     public void A_penalties_file_broken_after_loading_refuses_changes_and_isnt_overwritten()
     {
-        Penalties.Add(PenaltyType.Ban, Lapka, TimeSpan.FromHours(1), "first", Caller.Console);
+        Penalties.Add(PenaltyType.Ban, Lapka, TimeSpan.FromHours(1), Caller.Console, "first");
         var broken = File.ReadAllText(PenaltiesFile) + "oops";
         File.WriteAllText(PenaltiesFile, broken);
 
-        var ex = Assert.Throws<CommandException>(() => Penalties.Add(PenaltyType.Gag, Greeny, TimeSpan.FromMinutes(5), "spam", Caller.Console));
+        var ex = Assert.Throws<CommandException>(() => Penalties.Add(PenaltyType.Gag, Greeny, TimeSpan.FromMinutes(5), Caller.Console, "spam"));
         Assert.StartsWith("Penalties can't be changed right now: penalties.jsonc has an error.", ex.Message);
         Assert.Throws<CommandException>(() => Penalties.Remove(PenaltyType.Ban, Lapka, Caller.Console));
         Assert.Equal(broken, File.ReadAllText(PenaltiesFile));
@@ -298,13 +298,13 @@ public sealed class PenaltyTests : AdminTestBase
     {
         Assert.Null(Penalties.WouldShorten(PenaltyType.Ban, Lapka, TimeSpan.FromMinutes(5))); // nothing to replace
 
-        Penalties.Add(PenaltyType.Ban, Lapka, TimeSpan.FromHours(2), "", by: Caller.Console);
+        Penalties.Add(PenaltyType.Ban, Lapka, TimeSpan.FromHours(2), Caller.Console, "");
         Assert.NotNull(Penalties.WouldShorten(PenaltyType.Ban, Lapka, TimeSpan.FromMinutes(5)));
         Assert.Null(Penalties.WouldShorten(PenaltyType.Ban, Lapka, TimeSpan.FromHours(3)));
         Assert.Null(Penalties.WouldShorten(PenaltyType.Ban, Lapka, null));
         Assert.Null(Penalties.WouldShorten(PenaltyType.Gag, Lapka, TimeSpan.FromMinutes(5))); // other types don't count
 
-        Penalties.Add(PenaltyType.Ban, Lapka, null, "", by: Caller.Console);
+        Penalties.Add(PenaltyType.Ban, Lapka, null, Caller.Console, "");
         Assert.NotNull(Penalties.WouldShorten(PenaltyType.Ban, Lapka, TimeSpan.FromDays(3650)));
         Assert.Null(Penalties.WouldShorten(PenaltyType.Ban, Lapka, null));
     }
@@ -312,9 +312,9 @@ public sealed class PenaltyTests : AdminTestBase
     [Fact]
     public void A_zero_or_negative_duration_is_refused_rather_than_expiring_at_once()
     {
-        Assert.Throws<ArgumentOutOfRangeException>(() => Penalties.Add(PenaltyType.Ban, Lapka, TimeSpan.Zero, "", Caller.Console));
-        Assert.Throws<ArgumentOutOfRangeException>(() => Penalties.Add(PenaltyType.Gag, Lapka, TimeSpan.FromMinutes(-1), "", Caller.Console));
-        Assert.Empty(Penalties.GetActive());
+        Assert.Throws<ArgumentOutOfRangeException>(() => Penalties.Add(PenaltyType.Ban, Lapka, TimeSpan.Zero, Caller.Console, ""));
+        Assert.Throws<ArgumentOutOfRangeException>(() => Penalties.Add(PenaltyType.Gag, Lapka, TimeSpan.FromMinutes(-1), Caller.Console, ""));
+        Assert.Empty(Penalties.GetAllActive());
     }
 
     [Fact]
@@ -324,7 +324,7 @@ public sealed class PenaltyTests : AdminTestBase
         PermissionManager.SetSlotSteamIdForTests(3, Lapka);
         Assert.False(PenaltyManager.DropsVoice(3, voice));
 
-        Penalties.Add(PenaltyType.Mute, Lapka, TimeSpan.FromMinutes(5), "mic spam", by: Caller.Console);
+        Penalties.Add(PenaltyType.Mute, Lapka, TimeSpan.FromMinutes(5), Caller.Console, "mic spam");
         Assert.True(PenaltyManager.DropsVoice(3, voice));
         Assert.False(PenaltyManager.DropsVoice(3, (int)CLC_Messages.ClcMove)); // only voice
         Assert.False(PenaltyManager.DropsVoice(4, voice));                       // only them
@@ -338,7 +338,7 @@ public sealed class PenaltyTests : AdminTestBase
     {
         const int voice = (int)CLC_Messages.ClcVoiceData;
         PermissionManager.SetSlotSteamIdForTests(3, Lapka);
-        Penalties.Add(PenaltyType.Mute, Lapka, null, "", by: Caller.Console);
+        Penalties.Add(PenaltyType.Mute, Lapka, null, Caller.Console, "");
         Assert.True(PenaltyManager.DropsVoice(3, voice));
         Assert.True(Penalties.Remove(PenaltyType.Mute, Lapka, Caller.Console));
         Assert.False(PenaltyManager.DropsVoice(3, voice));
@@ -351,7 +351,7 @@ public sealed class PenaltyTests : AdminTestBase
         var message = new ChatMessage { SenderSlot = 3, ChatText = "hello", AllChat = true, LaneColor = default };
         Assert.Equal(HookResult.Continue, PluginLoader.DispatchChatMessage(message));
 
-        Penalties.Add(PenaltyType.Gag, Lapka, TimeSpan.FromMinutes(5), "spam", by: Caller.Console);
+        Penalties.Add(PenaltyType.Gag, Lapka, TimeSpan.FromMinutes(5), Caller.Console, "spam");
         Assert.Equal(HookResult.Handled, PluginLoader.DispatchChatMessage(message));
 
         // Chat commands still count as handled, so they're never shown in chat either.
@@ -496,7 +496,7 @@ public sealed class AdminPluginTests : AdminTestBase
         Console_("dw_ban", "not-a-steamid", "60");
         Console_("dw_ban", Lapka.ToString(), "-5");
         Console_("dw_unban", Lapka.ToString()); // not banned
-        Assert.Empty(Penalties.GetActive());
+        Assert.Empty(Penalties.GetAllActive());
         Assert.Empty(Logged);
     }
 
@@ -543,11 +543,12 @@ public sealed class AdminPluginTests : AdminTestBase
     [InlineData(1440, "for 1 day")]
     [InlineData(10080, "for 7 days")]
     [InlineData(90, "for 1h 30m")]
+    [InlineData(1500, "for 1d 1h")]
     public void Durations_read_naturally(int minutes, string expected)
-        => Assert.Equal(expected, AdminPlugin.DescribeDuration(TimeSpan.FromMinutes(minutes)));
+        => Assert.Equal(expected, Penalties.DescribeDuration(TimeSpan.FromMinutes(minutes)));
 
     [Fact]
-    public void Permanent_duration() => Assert.Equal("permanently", AdminPlugin.DescribeDuration(null));
+    public void Permanent_duration() => Assert.Equal("permanently", Penalties.DescribeDuration(null));
 
     [Theory]
     [InlineData(0.5, "for 1 minute")]

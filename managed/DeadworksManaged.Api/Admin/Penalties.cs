@@ -79,17 +79,7 @@ public sealed record Penalty
     /// "for 45 minutes", "for 1 hour", "for 1h 5m", "for 3 days", "for 2d 4h".
     /// </summary>
     public string DescribeRemaining(DateTime nowUtc)
-    {
-        if (ExpiresUtc is not { } expires)
-            return "permanently";
-        var minutes = (long)Math.Ceiling((expires - nowUtc).TotalMinutes);
-        if (minutes < 1) return "for less than a minute";
-        if (minutes < 60) return $"for {minutes} minute{(minutes == 1 ? "" : "s")}";
-        if (minutes < 1440)
-            return minutes % 60 == 0 ? $"for {minutes / 60} hour{(minutes == 60 ? "" : "s")}" : $"for {minutes / 60}h {minutes % 60}m";
-        var hours = minutes / 60;
-        return hours % 24 == 0 ? $"for {hours / 24} day{(hours == 24 ? "" : "s")}" : $"for {hours / 24}d {hours % 24}h";
-    }
+        => ExpiresUtc is { } expires ? Penalties.DescribeDuration(expires - nowUtc) : "permanently";
 }
 
 /// <summary>
@@ -107,6 +97,24 @@ public static class Penalties
     private static IPenaltyBackend B => Backend ?? throw new InvalidOperationException("Penalty system not initialized.");
 
     /// <summary>
+    /// A penalty length worded like an admin announcement, rounded up to the minute: "permanently" for null,
+    /// "for 45 minutes", "for 1 hour", "for 1h 5m", "for 3 days", "for 2d 4h". The Admin plugin words every length this
+    /// way, so a plugin that announces penalties matches it.
+    /// </summary>
+    public static string DescribeDuration(TimeSpan? duration)
+    {
+        if (duration is not { } length)
+            return "permanently";
+        var minutes = (long)Math.Ceiling(length.TotalMinutes);
+        if (minutes < 1) return "for less than a minute";
+        if (minutes < 60) return $"for {minutes} minute{(minutes == 1 ? "" : "s")}";
+        if (minutes < 1440)
+            return minutes % 60 == 0 ? $"for {minutes / 60} hour{(minutes == 60 ? "" : "s")}" : $"for {minutes / 60}h {minutes % 60}m";
+        var hours = minutes / 60;
+        return hours % 24 == 0 ? $"for {hours / 24} day{(hours == 24 ? "" : "s")}" : $"for {hours / 24}d {hours % 24}h";
+    }
+
+    /// <summary>
     /// Adds a penalty on behalf of <paramref name="by"/>. A null <paramref name="duration"/> is permanent. An active
     /// penalty of the same type on the same player is replaced, even by a shorter one: check <see cref="WouldShorten"/>
     /// first if shortening should need more than adding. Adding a ban kicks the player if they're connected.
@@ -120,8 +128,8 @@ public static class Penalties
     /// The penalty applies at once and is saved in the background. If that save fails, it still applies until the server
     /// restarts, and the console prints an ERROR; this method has already returned by then.
     /// </remarks>
-    public static Penalty Add(PenaltyType type, ulong steamId64, TimeSpan? duration, string reason, Caller by, string? playerName = null)
-        => B.Add(type, steamId64, duration, reason, by, playerName);
+    public static Penalty Add(PenaltyType type, ulong steamId64, TimeSpan? duration, Caller by, string reason = "", string? playerName = null)
+        => B.Add(type, steamId64, duration, by, reason, playerName);
 
     /// <summary>
     /// Lifts the player's active penalty of this type on behalf of <paramref name="by"/>, with an optional reason kept in
@@ -139,8 +147,8 @@ public static class Penalties
     /// </summary>
     public static Penalty? WouldShorten(PenaltyType type, ulong steamId64, TimeSpan? duration) => B.WouldShorten(type, steamId64, duration);
 
-    /// <summary>Every active penalty, optionally of one type.</summary>
-    public static IReadOnlyList<Penalty> GetActive(PenaltyType? type = null) => B.GetAllActive(type);
+    /// <summary>Every active penalty, optionally only those of one type, oldest first.</summary>
+    public static IReadOnlyList<Penalty> GetAllActive(PenaltyType? type = null) => B.GetAllActive(type);
 
     /// <summary>
     /// Every penalty the store still has for this player, newest first, including removed and expired ones. Faults
@@ -186,7 +194,7 @@ public interface IPenaltyStore
 
 internal interface IPenaltyBackend
 {
-    Penalty Add(PenaltyType type, ulong steamId64, TimeSpan? duration, string reason, Caller by, string? playerName);
+    Penalty Add(PenaltyType type, ulong steamId64, TimeSpan? duration, Caller by, string reason, string? playerName);
     bool Remove(PenaltyType type, ulong steamId64, Caller by, string reason);
     Penalty? GetActive(PenaltyType type, ulong steamId64);
     Penalty? WouldShorten(PenaltyType type, ulong steamId64, TimeSpan? duration);

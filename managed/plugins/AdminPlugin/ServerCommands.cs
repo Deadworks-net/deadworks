@@ -71,7 +71,7 @@ public sealed partial class AdminPlugin
         Server.ExecuteCommand(line, output =>
         {
             // Only answer if the same player is still in that slot.
-            if (Players.FromSlot(slot) is { } still && Permissions.GetSteamId(slot) == id)
+            if (Players.FromSlot(slot) is { } still && Permissions.GetSteamId64(slot) == id)
                 ReplyLines(Caller.Of(still), output.Length > 0 ? output.Split('\n') : ["(no output)"]);
         });
     }

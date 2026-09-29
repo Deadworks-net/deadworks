@@ -66,14 +66,14 @@ public static class Players {
 	/// </summary>
 	private static int SlotCount => Math.Clamp(GlobalVars.MaxClients, 0, MaxSlot);
 
-	internal static Func<int, bool>? AuthenticatedResolver;
+	internal static Func<int, bool>? AuthorizedResolver;
 
 	/// <summary>
 	/// Whether Steam has confirmed the player in <paramref name="slot"/>, so their roles and permissions apply. Always true
 	/// when <c>sv_lan</c> is on or <c>permissions.require_steam_auth</c> is off in <c>deadworks.jsonc</c>.
 	/// <see cref="IDeadworksPlugin.OnClientAuthorized"/> fires when it becomes true.
 	/// </summary>
-	public static bool IsAuthenticated(int slot) => AuthenticatedResolver?.Invoke(slot) ?? false;
+	public static bool IsAuthorized(int slot) => AuthorizedResolver?.Invoke(slot) ?? false;
 
 	/// <summary>Returns whether the given slot is marked as fully connected.</summary>
 	public static bool IsConnected(int slot) => (uint)slot < MaxSlot && _connected[slot];

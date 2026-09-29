@@ -60,7 +60,7 @@ public static class Permissions
     /// The SteamID64 the player in <paramref name="slot"/> connected with, or 0 for an empty slot or a bot.
     /// Unlike <see cref="CBasePlayerController.PlayerSteamId"/>, plugins can't change it.
     /// </summary>
-    public static ulong GetSteamId(int slot) => B.GetSlotSteamId(slot);
+    public static ulong GetSteamId64(int slot) => B.GetSlotSteamId(slot);
 
     /// <summary>
     /// Offers a store for roles and players. It becomes active when <c>permissions.store</c> in

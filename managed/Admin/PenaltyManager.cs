@@ -158,7 +158,7 @@ internal static class PenaltyManager
         return null;
     }
 
-    public static Penalty Add(PenaltyType type, ulong steamId64, TimeSpan? duration, string reason, Caller by, string? playerName)
+    public static Penalty Add(PenaltyType type, ulong steamId64, TimeSpan? duration, Caller by, string reason, string? playerName)
     {
         if (steamId64 == 0)
             throw new ArgumentException("A penalty needs a SteamID; bots don't have one.", nameof(steamId64));
@@ -483,8 +483,8 @@ internal static class PenaltyManager
 
     private sealed class Backend : IPenaltyBackend
     {
-        public Penalty Add(PenaltyType type, ulong steamId64, TimeSpan? duration, string reason, Caller by, string? playerName)
-            => PenaltyManager.Add(type, steamId64, duration, reason, by, playerName);
+        public Penalty Add(PenaltyType type, ulong steamId64, TimeSpan? duration, Caller by, string reason, string? playerName)
+            => PenaltyManager.Add(type, steamId64, duration, by, reason, playerName);
         public bool Remove(PenaltyType type, ulong steamId64, Caller by, string reason) => PenaltyManager.Remove(type, steamId64, by, reason);
         public Penalty? GetActive(PenaltyType type, ulong steamId64) => PenaltyManager.GetActive(type, steamId64);
         public Penalty? WouldShorten(PenaltyType type, ulong steamId64, TimeSpan? duration) => PenaltyManager.WouldShorten(type, steamId64, duration);

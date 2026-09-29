@@ -237,6 +237,14 @@ public class CommandDispatchTests
     }
 
     [Fact]
+    public void A_converter_for_a_type_Deadworks_parses_is_refused()
+    {
+        Assert.Throws<ArgumentException>(() => CommandConverters.Register<int>(int.Parse));
+        Assert.Throws<ArgumentException>(() => CommandConverters.Register<Caller>(_ => Caller.Console));
+        Assert.Throws<ArgumentException>(() => CommandConverters.Register<PenaltyType?>(_ => null));
+    }
+
+    [Fact]
     public void The_console_is_told_when_a_command_is_for_players_only()
     {
         string? output = null;
