@@ -20,13 +20,16 @@ struct CEntityIOOutput {
     EntityIOOutputDesc_t *m_pDesc;
 };
 
-// Original signature: bool CEntityInstance::AcceptInput(
-//     const char* pInputName, CEntityInstance* pActivator, CEntityInstance* pCaller,
-//     variant_t* pValue, int nOutputID, void* unk)
+// Since the 2026-09-29 patch the CEntityInstance::AcceptInput wrapper no longer exists; the
+// "CEntityInstance::AcceptInput" signature now resolves the entity-system method it used to
+// forward to, which takes the entity system first and queues the input for the next IO tick:
+//     void CEntitySystem::AddEntityIOEvent(CEntityInstance* pTarget, const char* pInputName,
+//         CEntityInstance* pActivator, CEntityInstance* pCaller, variant_t* pValue,
+//         int nOutputID, void* unk1, void* unk2)
 inline safetyhook::InlineHook g_CEntityInstance_AcceptInput;
-bool __fastcall Hook_CEntityInstance_AcceptInput(CEntityInstance *thisptr, const char *inputName,
+void __fastcall Hook_CEntityInstance_AcceptInput(void *pEntitySystem, CEntityInstance *thisptr, const char *inputName,
                                                  CEntityInstance *activator, CEntityInstance *caller,
-                                                 void *variantValue, int outputID, void *unk);
+                                                 void *variantValue, int outputID, void *unk1, void *unk2);
 
 // Original signature: void CEntityIOOutput::FireOutputInternal(
 //     CEntityInstance* pActivator, CEntityInstance* pCaller,

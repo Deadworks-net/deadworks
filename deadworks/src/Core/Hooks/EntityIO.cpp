@@ -6,20 +6,19 @@
 namespace deadworks {
 namespace hooks {
 
-bool __fastcall Hook_CEntityInstance_AcceptInput(CEntityInstance *thisptr, const char *inputName,
+void __fastcall Hook_CEntityInstance_AcceptInput(void *pEntitySystem, CEntityInstance *thisptr, const char *inputName,
                                                  CEntityInstance *activator, CEntityInstance *caller,
-                                                 void *variantValue, int outputID, void *unk) {
+                                                 void *variantValue, int outputID, void *unk1, void *unk2) {
     const char *className = thisptr ? thisptr->GetClassname() : "";
 
     int result = g_Deadworks.OnEntityAcceptInputPre(className, inputName, thisptr, activator, caller, variantValue);
     if (result >= 1) {
-        return true;
+        return;
     }
 
-    bool ret = g_CEntityInstance_AcceptInput.fastcall<bool>(thisptr, inputName, activator, caller, variantValue, outputID, unk);
+    g_CEntityInstance_AcceptInput.fastcall<void>(pEntitySystem, thisptr, inputName, activator, caller, variantValue, outputID, unk1, unk2);
 
     g_Deadworks.OnEntityAcceptInputPost(className, inputName, thisptr, activator, caller, variantValue);
-    return ret;
 }
 
 void __fastcall Hook_CEntityIOOutput_FireOutputInternal(CEntityIOOutput *pThis,

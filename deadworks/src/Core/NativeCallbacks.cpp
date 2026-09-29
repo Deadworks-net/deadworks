@@ -94,7 +94,9 @@ public:
 
 // --- Entity manipulation types ---
 
-using AcceptInputFn = bool(__thiscall *)(void *thisptr, const char *pInputName, CEntityInstance *pActivator, CEntityInstance *pCaller, variant_t *pValue, int nOutputID, void *);
+// Since the 2026-09-29 patch this is CEntitySystem::AddEntityIOEvent - the entity system comes first and the
+// input is queued for the next IO tick (see Hooks/EntityIO.hpp).
+using AcceptInputFn = void(__fastcall *)(void *pEntitySystem, void *pTarget, const char *pInputName, CEntityInstance *pActivator, CEntityInstance *pCaller, variant_t *pValue, int nOutputID, void *, void *);
 
 // ---------------------------------------------------------------------------
 // Native callback implementations - Core / Entity / Schema / ConVar / Events
@@ -672,10 +674,10 @@ static void __cdecl NativeAcceptInput(void *entity, const char *inputName, void 
         MemoryDataLoader::Get().GetOffset("CEntityInstance::AcceptInput").value());
 
     variant_t val(value ? value : "");
-    fn(entity, inputName,
+    fn(GameEntitySystem(), entity, inputName,
        static_cast<CEntityInstance *>(activator),
        static_cast<CEntityInstance *>(caller),
-       &val, 0, nullptr);
+       &val, 0, nullptr, nullptr);
 }
 
 static void __cdecl NativeSetSchemaString(void *entity, const char *className, const char *fieldName, const char *value) {
