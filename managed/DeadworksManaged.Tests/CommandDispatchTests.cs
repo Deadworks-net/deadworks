@@ -45,6 +45,37 @@ public class CommandDispatchTests
             Received.Add(Environment.CurrentManagedThreadId.ToString());
         }
 
+        [Command("multiawaittestcommand")]
+        public async Task MultiAwait()
+        {
+            await Task.Delay(10);
+            Received.Add($"after 1: {Environment.CurrentManagedThreadId}");
+            await Task.Delay(10);
+            Received.Add($"after 2: {Environment.CurrentManagedThreadId}");
+            await Task.Delay(10);
+            Received.Add($"after 3: {Environment.CurrentManagedThreadId}");
+        }
+
+        [Command("nestedawaittestcommand")]
+        public async Task NestedAwait()
+        {
+            await LoadAsync();
+            await SaveAsync();
+            Received.Add($"done: {Environment.CurrentManagedThreadId}");
+        }
+
+        private async Task LoadAsync()
+        {
+            await Task.Delay(10);
+            Received.Add($"loaded: {Environment.CurrentManagedThreadId}");
+        }
+
+        private async Task SaveAsync()
+        {
+            await Task.Delay(10);
+            Received.Add($"saved: {Environment.CurrentManagedThreadId}");
+        }
+
         [Command("valuetasktestcommand")]
         public async ValueTask ValueTaskRefusal()
         {
@@ -158,6 +189,36 @@ public class CommandDispatchTests
         });
         Assert.Equal(Environment.CurrentManagedThreadId.ToString(), Assert.Single(plugin.Received));
     }
+
+    /// <summary>
+    /// Every <c>await</c> in a command must come back on the game thread, not just the first: each resume posts
+    /// the next continuation, so the context has to still be current when the continuation runs.
+    /// </summary>
+    [Fact]
+    public void Code_after_every_await_in_a_command_runs_on_the_game_thread()
+    {
+        var plugin = RunUntil("dw_multiawaittestcommand", 3);
+        var game = Environment.CurrentManagedThreadId;
+        Assert.Equal([$"after 1: {game}", $"after 2: {game}", $"after 3: {game}"], plugin.Received);
+    }
+
+    [Fact]
+    public void Awaits_inside_helper_methods_a_command_calls_run_on_the_game_thread()
+    {
+        var plugin = RunUntil("dw_nestedawaittestcommand", 3);
+        var game = Environment.CurrentManagedThreadId;
+        Assert.Equal([$"loaded: {game}", $"saved: {game}", $"done: {game}"], plugin.Received);
+    }
+
+    private RecordingPlugin RunUntil(string command, int entries) => WithRegisteredPlugin(p =>
+    {
+        ConCommandManager.Dispatch(-1, command, [command]);
+        for (var i = 0; i < 400 && p.Received.Count < entries; i++)
+        {
+            Thread.Sleep(5);
+            TimerEngine.OnTick(); // this thread plays the game thread
+        }
+    });
 
     [Fact]
     public void A_value_task_command_is_followed_like_a_task()
