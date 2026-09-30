@@ -282,7 +282,8 @@ def main() -> None:
     # The same enum is in several modules; the server's is the one plugins run against.
     game_enums = {}
     for enum in sorted(schemas["enums"], key=lambda e: e["module"] != "server"):
-        game_enums.setdefault(enum["name"], {m["name"]: m["value"] for m in enum.get("members", [])})
+        # Values past 2^53 come as decimal strings, which JSON numbers could not hold exactly.
+        game_enums.setdefault(enum["name"], {m["name"]: int(m["value"]) for m in enum.get("members", [])})
 
     report = [f"Enums checked against Deadlock build {vdata['version']}.", ""]
     for spec in ENUMS:
