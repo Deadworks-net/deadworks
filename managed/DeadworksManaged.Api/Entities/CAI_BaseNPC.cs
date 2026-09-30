@@ -21,6 +21,8 @@ public unsafe class CAI_BaseNPC : CBaseEntity {
 	private static readonly SchemaAccessor<int> _idealNpcState = new(Class, "m_IdealNPCState"u8);
 	private static readonly SchemaAccessor<nint> _enemyServices = new(Class, "m_pEnemyServices"u8);
 	private static readonly SchemaAccessor<uint> _hEnemy = new("CAI_EnemyServices"u8, "m_hEnemy"u8);
+	private static readonly SchemaAccessor<byte> _scheduler = new(Class, "m_Scheduler"u8);
+	private static readonly SchemaAccessor<nint> _translatedSchedule = new("CAI_Scheduler"u8, "m_translatedSchedule"u8);
 
 	/// <summary>The NPC's current AI state.</summary>
 	public NpcState State => (NpcState)_npcState.Get(Handle);
@@ -33,6 +35,18 @@ public unsafe class CAI_BaseNPC : CBaseEntity {
 	/// inert troopers and brings them back as new spawns, so skip these when giving orders.
 	/// </summary>
 	public bool IsDormant => State == NpcState.Inert;
+
+	/// <summary>
+	/// Name of the schedule the NPC is running, such as <c>SCHED_TROOPER_RUN_DOWN_LANE</c> or
+	/// <c>SCHED_FORCED_GO</c>, or null between schedules.
+	/// </summary>
+	public string? Schedule {
+		get {
+			// ScheduleId_t is a CGlobalSymbol: a pointer to the interned name.
+			nint name = _translatedSchedule.Get(_scheduler.GetAddress(Handle));
+			return name != 0 ? System.Runtime.InteropServices.Marshal.PtrToStringUTF8(name) : null;
+		}
+	}
 
 	/// <summary>The entity the NPC is currently fighting, or null.</summary>
 	public CBaseEntity? Enemy {
