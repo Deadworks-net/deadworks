@@ -29,6 +29,7 @@
 #include "Hooks/InitializeHeroOnPawn.hpp"
 #include "Hooks/FireModifierEvent.hpp"
 #include "Hooks/ReplayComplete.hpp"
+#include "Hooks/NpcSchedule.hpp"
 #include "A2SPatch.hpp"
 
 #include "../Memory/MemoryDataLoader.hpp"
@@ -198,6 +199,9 @@ void Deadworks::PostInit() {
     HookInline(hooks::g_CCitadelPlayerPawn_SelectHeroInternal,
                "CCitadelPlayerPawn::SelectHeroInternal",
                &hooks::Hook_CCitadelPlayerPawn_SelectHeroInternal);
+    HookInline(hooks::g_CAI_BaseNPC_GetNewSchedule,
+               "CAI_BaseNPC::GetNewSchedule",
+               &hooks::Hook_CAI_BaseNPC_GetNewSchedule);
     HookInline(hooks::g_CCitadelPlayerController_ClientConCommand,
                "CCitadelPlayerController::ClientConCommand",
                &hooks::Hook_CCitadelPlayerController_ClientConCommand);
@@ -364,6 +368,12 @@ bool Deadworks::OnPre_CBaseEntity_TakeDamageOld(CBaseEntity *entity, CTakeDamage
     if (m_managed.onTakeDamageOld)
         return m_managed.onTakeDamageOld(entity, info, result);
     return false;
+}
+
+const char *Deadworks::OnPost_NpcSelectSchedule(void *npc, const char *chosenId) {
+    if (m_managed.onNpcSelectSchedule)
+        return m_managed.onNpcSelectSchedule(npc, chosenId);
+    return nullptr;
 }
 
 bool Deadworks::OnPre_CCitadelPlayerPawn_ModifyCurrency(void *pawn, ECurrencyType nCurrencyType, int32_t nAmount,

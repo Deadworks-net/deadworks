@@ -413,6 +413,24 @@ public static class EntryPoint
         };
         PluginLoader.DispatchEntityFireOutputPost(callerClass, evt);
     }
+    // UTF-8 copies of the schedule names plugins return; native reads them right away, and there are only a
+    // few hundred distinct names, so each is allocated once and kept.
+    private static readonly Dictionary<string, nint> _scheduleNames = new();
+
+    [UnmanagedCallersOnly]
+    public static unsafe byte* OnNpcSelectSchedule(void* npc, byte* chosenId)
+    {
+        var requested = PluginLoader.DispatchNpcSelectSchedule((nint)npc, chosenId);
+        if (requested == null)
+            return null;
+        if (!_scheduleNames.TryGetValue(requested, out var utf8))
+        {
+            utf8 = Marshal.StringToCoTaskMemUTF8(requested);
+            _scheduleNames[requested] = utf8;
+        }
+        return (byte*)utf8;
+    }
+
     [UnmanagedCallersOnly]
     public static unsafe ulong OnAbilityAttempt(int playerSlot, void* pawnEntity, ulong heldButtons, ulong changedButtons, ulong scrollButtons, ulong* outForcedButtons)
     {

@@ -448,6 +448,28 @@ internal static partial class PluginLoader
     private static void RebuildSnapshot()
     {
         _pluginSnapshot = _loaded.Values.SelectMany(e => e.Plugins).ToArray();
+        _npcScheduleListeners = _pluginSnapshot.Where(p => Overrides(p, nameof(IDeadworksPlugin.OnNpcSelectSchedule))).ToArray();
+    }
+
+    // NPCs pick schedules all the time, so only plugins that override the hook are called for it.
+    private static volatile IDeadworksPlugin[] _npcScheduleListeners = [];
+
+    private static bool Overrides(IDeadworksPlugin plugin, string methodName)
+    {
+        var map = plugin.GetType().GetInterfaceMap(typeof(IDeadworksPlugin));
+        for (int i = 0; i < map.InterfaceMethods.Length; i++)
+        {
+            if (map.InterfaceMethods[i].Name != methodName)
+                continue;
+            var target = map.TargetMethods[i];
+            if (target.DeclaringType == typeof(IDeadworksPlugin))
+                return false; // the interface's default body
+            // A DeadworksPluginBase subclass maps to the base's virtual; look for an override below it.
+            var mostDerived = plugin.GetType().GetMethod(methodName, BindingFlags.Public | BindingFlags.Instance,
+                target.GetParameters().Select(p => p.ParameterType).ToArray());
+            return mostDerived?.DeclaringType != typeof(DeadworksPluginBase);
+        }
+        return false;
     }
 
     // --- Dispatch helpers ---
@@ -605,6 +627,31 @@ internal static partial class PluginLoader
 
     public static void DispatchModifierEvent(ModifierEvent args)
         => DispatchToPlugins(p => p.OnModifierEvent(args), nameof(IDeadworksPlugin.OnModifierEvent));
+
+    /// <summary>The schedule plugins want instead of chosenId, or null to keep the game's choice.</summary>
+    public static unsafe string? DispatchNpcSelectSchedule(nint npc, byte* chosenId)
+    {
+        var listeners = _npcScheduleListeners;
+        if (listeners.Length == 0)
+            return null;
+
+        var chosen = chosenId != null ? System.Runtime.InteropServices.Marshal.PtrToStringUTF8((nint)chosenId) ?? "" : "";
+        var args = new NpcSelectScheduleEvent { Npc = new CAI_BaseNPC(npc), Schedule = chosen };
+        foreach (var plugin in listeners)
+        {
+            var start = Stopwatch.GetTimestamp();
+            try
+            {
+                plugin.OnNpcSelectSchedule(args);
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine($"[PluginLoader] {plugin.Name}.{nameof(IDeadworksPlugin.OnNpcSelectSchedule)} threw: {ex.Message}");
+            }
+            WarnIfSlow(start, $"{plugin.Name}.{nameof(IDeadworksPlugin.OnNpcSelectSchedule)}");
+        }
+        return string.IsNullOrEmpty(args.Override) || args.Override == chosen ? null : args.Override;
+    }
 
     public static void DispatchAbilityAttempt(AbilityAttemptEvent args)
         => DispatchToPlugins(p => p.OnAbilityAttempt(args), nameof(IDeadworksPlugin.OnAbilityAttempt));
