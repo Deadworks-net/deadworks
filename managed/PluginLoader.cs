@@ -1,3 +1,4 @@
+using System.Diagnostics;
 using System.Reflection;
 using System.Runtime.Loader;
 using Google.Protobuf;
@@ -387,6 +388,7 @@ internal static partial class PluginLoader
         var result = HookResult.Continue;
         foreach (var plugin in snapshot)
         {
+            var start = Stopwatch.GetTimestamp();
             try
             {
                 var hr = invoke(plugin);
@@ -396,8 +398,19 @@ internal static partial class PluginLoader
             {
                 Console.WriteLine($"[PluginLoader] {plugin.Name}.{methodName} threw: {ex.Message}");
             }
+            WarnIfSlow(start, $"{plugin.Name}.{methodName}");
         }
         return result;
+    }
+
+    private const double SlowHandlerWarnMs = 50;
+
+    /// <summary>Logs a slow handler. Inside a client's netchan ProcessMessages, ~200 ms gets that client dropped (6712+).</summary>
+    internal static void WarnIfSlow(long startTimestamp, string handler)
+    {
+        var elapsed = Stopwatch.GetElapsedTime(startTimestamp).TotalMilliseconds;
+        if (elapsed >= SlowHandlerWarnMs)
+            Console.WriteLine($"[PluginLoader] {handler} took {elapsed:F0} ms");
     }
 
     /// <summary>Any plugin returning false vetoes. Every plugin is still invoked; not a HookResult-style max, a plain AND.</summary>

@@ -1,3 +1,4 @@
+using System.Diagnostics;
 using System.Reflection;
 using DeadworksManaged.Api;
 
@@ -24,6 +25,7 @@ internal static partial class PluginLoader
                 var ctx = new ChatCommandContext(message, commandName, args, prefix);
                 foreach (var handler in handlers)
                 {
+                    var start = Stopwatch.GetTimestamp();
                     try
                     {
                         var hr = handler(ctx);
@@ -33,6 +35,7 @@ internal static partial class PluginLoader
                     {
                         Console.WriteLine($"[PluginLoader] Chat command handler for '/{commandName}' threw: {ex.Message}");
                     }
+                    WarnIfSlow(start, $"Chat command handler for '/{commandName}'");
                 }
 
                 if (result > HookResult.Continue)

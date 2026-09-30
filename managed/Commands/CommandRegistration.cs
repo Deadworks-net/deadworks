@@ -1,3 +1,4 @@
+using System.Diagnostics;
 using System.Reflection;
 using System.Runtime.ExceptionServices;
 using DeadworksManaged.Api;
@@ -89,7 +90,9 @@ internal static class CommandRegistration
                 return resultOnSuccess;
             }
 
-            Invoke(plugin, method, boundArgs, reply);
+            // Chat arrives inside the sender's netchan ProcessMessages, which drops a client past a ~200 ms budget
+            // (6712+). The block result above doesn't depend on the method, so it can run next tick.
+            TimerEngine.EnqueueNextTick(() => InvokeDeferred(plugin, method, boundArgs, reply, $"/{name}"));
             return resultOnSuccess;
         };
 
@@ -135,7 +138,11 @@ internal static class CommandRegistration
                 return;
             }
 
-            Invoke(plugin, method, boundArgs, reply);
+            // Client commands share the netchan budget (see RegisterChat); server/RCON stay synchronous for output capture.
+            if (ctx.IsServerCommand)
+                Invoke(plugin, method, boundArgs, reply);
+            else
+                TimerEngine.EnqueueNextTick(() => InvokeDeferred(plugin, method, boundArgs, reply, conName));
         };
 
         ConCommandManager.RegisterExternal(normalizedPath, conName, attr.Description, serverOnly: false, handler, attr.Hidden);
@@ -160,6 +167,25 @@ internal static class CommandRegistration
         {
             ExceptionDispatchInfo.Capture(tie.InnerException).Throw();
         }
+    }
+
+    private static void InvokeDeferred(
+        IDeadworksPlugin plugin,
+        MethodInfo method,
+        object?[] boundArgs,
+        Action<string> reply,
+        string label)
+    {
+        var start = Stopwatch.GetTimestamp();
+        try
+        {
+            Invoke(plugin, method, boundArgs, reply);
+        }
+        catch (Exception ex)
+        {
+            Console.WriteLine($"[CommandRegistration] {plugin.Name} {label} threw: {ex.Message}");
+        }
+        PluginLoader.WarnIfSlow(start, $"{plugin.Name} {label}");
     }
 
     private static void ReplyViaChat(CCitadelPlayerController? to, string message)
