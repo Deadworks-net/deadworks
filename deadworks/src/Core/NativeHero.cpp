@@ -139,7 +139,7 @@ static void __cdecl NativeChangeTeam(void *controller, int32_t teamNum, uint8_t 
     if (!controller)
         return;
 
-    auto changeTeamFn = GetVFunc<void (*)(void *, int)>(controller, kVtblChangeTeam);
+    auto changeTeamFn = GetVFunc<void (*)(void *, int)>(controller, MemoryDataLoader::Get().GetVirtual("CBaseEntity::ChangeTeam").value());
 
     if (!bKeepHero) {
         changeTeamFn(controller, teamNum);
@@ -193,7 +193,7 @@ static void __cdecl NativePrecacheHero(const char *heroName) {
 static void __cdecl NativeTeleport(void *entity, const float *position, const float *angles, const float *velocity) {
     if (!entity)
         return;
-    auto fn = GetVFunc<TeleportFn>(entity, kVtblTeleport);
+    auto fn = GetVFunc<TeleportFn>(entity, MemoryDataLoader::Get().GetVirtual("CBaseEntity::Teleport").value());
     fn(static_cast<CBaseEntity *>(entity),
        position ? reinterpret_cast<const Vector *>(position) : nullptr,
        angles ? reinterpret_cast<const QAngle *>(angles) : nullptr,

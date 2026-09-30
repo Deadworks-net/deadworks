@@ -66,6 +66,9 @@
     <ClCompile Include="..\protobuf\source2_steam_stats.pb.cc">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="..\protobuf\valveextensions.pb.cc">
+      <Filter>Source Files</Filter>
+    </ClCompile>
     <ClCompile Include="src\Memory\Scanner.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
@@ -240,6 +243,9 @@
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="..\protobuf\source2_steam_stats.pb.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="..\protobuf\valveextensions.pb.h">
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="src\SDK\Core.hpp">

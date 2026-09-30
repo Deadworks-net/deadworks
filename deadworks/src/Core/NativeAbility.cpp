@@ -356,7 +356,7 @@ static void *__cdecl NativeAddAbility(void *pawn, const char *abilityName, uint1
 
 static void *__cdecl NativeAddItem(void *pawn, const char *itemName, int nInitialUpgradeBits) {
     if (!pawn || !itemName) return nullptr;
-    return static_cast<CCitadelPlayerPawn *>(pawn)->AddItem(itemName, nInitialUpgradeBits, -1);
+    return static_cast<CCitadelPlayerPawn *>(pawn)->AddItem(itemName, static_cast<uint16_t>(nInitialUpgradeBits));
 }
 
 static uint8_t __cdecl NativeSellItem(void *pawn, const char *itemName, uint8_t bFullRefund, uint8_t bForceSellPrice) {
@@ -496,7 +496,7 @@ static uint8_t __cdecl NativeRemoveModifier(void *entity, void *modifier) {
         return 0;
     }
 
-    auto destroyFn = GetVFunc<void(__fastcall *)(void *, uint32_t, void *, void *)>(modifier, kVtblModifierDestroy);
+    auto destroyFn = GetVFunc<void(__fastcall *)(void *, uint32_t, void *, void *)>(modifier, MemoryDataLoader::Get().GetVirtual("CBaseModifier::Destroy").value());
     destroyFn(modifier, 6, nullptr, nullptr);
     modProp->m_bModifierStatesDirty = true;
 

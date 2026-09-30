@@ -15,6 +15,7 @@ enum class ECitadelTargetAbilityEffects : uint32_t {
     ImbueModifierValue = 0x1,
     ImbueActive = 0x2,
     ImbueActiveNonUlt = 0x4,
+    ImbueEnhance = 0x8,
 };
 
 class CitadelAbilityVData {

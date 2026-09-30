@@ -29,6 +29,9 @@ public class CollisionLayoutTests
         Assert.Equal(192, Unsafe.SizeOf<CGameTrace>());
         Assert.Equal(0x50, Offset<CGameTrace>(nameof(CGameTrace.ShapeAttributes)));
         Assert.Equal(0x78, Offset<CGameTrace>(nameof(CGameTrace.StartPos)));
+        Assert.Equal(0xAC, Offset<CGameTrace>(nameof(CGameTrace.Fraction)));
+        Assert.Equal(0xB8, Offset<CGameTrace>(nameof(CGameTrace.HitboxBoneIndex)));
+        Assert.Equal(0xBB, Offset<CGameTrace>(nameof(CGameTrace.StartInSolid)));
     }
 
     [Fact]
