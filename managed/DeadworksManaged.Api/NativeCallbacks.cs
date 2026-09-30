@@ -167,5 +167,9 @@ internal struct NativeCallbacks
 	public nint NpcStopMoving;
 	public nint NpcSetEnemy;
 	public nint NpcSetState;
+	public nint NpcSetSchedule;
+	public nint NpcSetMinion;
+	public nint NpcGetSummoner;
+	public nint NpcSetSummoner;
 	public nint NavGetNearestPoint;
 }

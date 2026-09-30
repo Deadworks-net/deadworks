@@ -35,4 +35,30 @@ public unsafe class CAI_CitadelNPC : CAI_BaseNPC {
 	/// also attacks neutral creeps.
 	/// </summary>
 	public bool IsMinion => _minion.Get(Handle);
+
+	/// <summary>
+	/// Makes the NPC a minion, like Necro's skeletons, or back into a regular NPC. A minion's damage and kills
+	/// are credited to its <see cref="Summoner"/> while the summoner is alive, it also attacks neutral creeps, and
+	/// enemies' abilities treat it as a minion rather than a trooper.
+	/// </summary>
+	public void SetMinion(bool minion) => NativeInterop.NpcSetMinion((void*)Handle, minion ? (byte)1 : (byte)0);
+
+	/// <summary>
+	/// Who the NPC works for: the entity set with <see cref="SetSummoner"/>, else the owner of
+	/// <see cref="OwningAbility"/> (a summon's hero). Null for map NPCs.
+	/// </summary>
+	public CBaseEntity? Summoner {
+		get {
+			void* summoner = NativeInterop.NpcGetSummoner((void*)Handle);
+			return summoner != null ? new CBaseEntity((nint)summoner) : null;
+		}
+	}
+
+	/// <summary>
+	/// Sets who the NPC works for, usually a hero pawn. Together with <see cref="SetMinion"/>, that hero gets the
+	/// credit for its damage and kills. When the pawn entity is removed (for example on a hero swap) the game
+	/// removes its minions too; they stay alive through the hero's death. Null clears it.
+	/// </summary>
+	public void SetSummoner(CBaseEntity? summoner) =>
+		NativeInterop.NpcSetSummoner((void*)Handle, summoner?.EntityHandle ?? InvalidEntityHandle);
 }

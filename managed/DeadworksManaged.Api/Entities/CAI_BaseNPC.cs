@@ -91,6 +91,22 @@ public unsafe class CAI_BaseNPC : CBaseEntity {
 	public void SetEnemy(CBaseEntity? enemy) => NativeInterop.NpcSetEnemy((void*)Handle, enemy != null ? (void*)enemy.Handle : null);
 
 	/// <summary>
+	/// Switches the NPC to the named schedule now, such as <c>SCHED_IDLE_STAND</c>, the way the game's own
+	/// "set schedule" task does. Returns false if the NPC refuses it.
+	/// </summary>
+	/// <remarks>
+	/// The schedule runs until it finishes or something interrupts it (a new enemy, damage...), and then the
+	/// NPC picks its next one as usual; <see cref="IDeadworksPlugin.OnNpcSelectSchedule"/> can steer that choice.
+	/// A name the NPC's class has no schedule for runs <c>SCHED_IDLE_STAND</c>, and the game logs "No CASE for
+	/// Schedule Type".
+	/// </remarks>
+	public bool SetSchedule(string name) {
+		Span<byte> utf8 = Utf8.Encode(name, stackalloc byte[Utf8.Size(name)]);
+		fixed (byte* p = utf8)
+			return NativeInterop.NpcSetSchedule((void*)Handle, p) != 0;
+	}
+
+	/// <summary>
 	/// Changes the NPC's AI state. <see cref="NpcState.Idle"/> also clears the enemy. In some conditions the game
 	/// turns a request for <see cref="NpcState.Idle"/> into <see cref="NpcState.Alert"/>.
 	/// </summary>

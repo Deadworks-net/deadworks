@@ -182,5 +182,9 @@ internal static unsafe class NativeInterop
 	public static delegate* unmanaged[Cdecl]<void*, byte, void> NpcStopMoving => (delegate* unmanaged[Cdecl]<void*, byte, void>)_cb.NpcStopMoving;
 	public static delegate* unmanaged[Cdecl]<void*, void*, void> NpcSetEnemy => (delegate* unmanaged[Cdecl]<void*, void*, void>)_cb.NpcSetEnemy;
 	public static delegate* unmanaged[Cdecl]<void*, int, void> NpcSetState => (delegate* unmanaged[Cdecl]<void*, int, void>)_cb.NpcSetState;
+	public static delegate* unmanaged[Cdecl]<void*, byte*, byte> NpcSetSchedule => (delegate* unmanaged[Cdecl]<void*, byte*, byte>)_cb.NpcSetSchedule;
+	public static delegate* unmanaged[Cdecl]<void*, byte, void> NpcSetMinion => (delegate* unmanaged[Cdecl]<void*, byte, void>)_cb.NpcSetMinion;
+	public static delegate* unmanaged[Cdecl]<void*, void*> NpcGetSummoner => (delegate* unmanaged[Cdecl]<void*, void*>)_cb.NpcGetSummoner;
+	public static delegate* unmanaged[Cdecl]<void*, uint, void> NpcSetSummoner => (delegate* unmanaged[Cdecl]<void*, uint, void>)_cb.NpcSetSummoner;
 	public static delegate* unmanaged[Cdecl]<float*, float, int, float*, byte> NavGetNearestPoint => (delegate* unmanaged[Cdecl]<float*, float, int, float*, byte>)_cb.NavGetNearestPoint;
 }
