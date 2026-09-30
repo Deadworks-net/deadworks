@@ -177,4 +177,8 @@ internal static unsafe class NativeInterop
 	public static delegate* unmanaged[Cdecl]<void*, byte, void> SetSolidFlags => (delegate* unmanaged[Cdecl]<void*, byte, void>)_cb.SetSolidFlags;
 	public static delegate* unmanaged[Cdecl]<void*, byte, void> SetCollisionEnabled => (delegate* unmanaged[Cdecl]<void*, byte, void>)_cb.SetCollisionEnabled;
 	public static delegate* unmanaged[Cdecl]<void*, void*, byte, void> SetEntityCollisionsWith => (delegate* unmanaged[Cdecl]<void*, void*, byte, void>)_cb.SetEntityCollisionsWith;
+	public static delegate* unmanaged[Cdecl]<void*, float*, byte, float, void> NpcMoveTo => (delegate* unmanaged[Cdecl]<void*, float*, byte, float, void>)_cb.NpcMoveTo;
+	public static delegate* unmanaged[Cdecl]<void*, byte, void> NpcStopMoving => (delegate* unmanaged[Cdecl]<void*, byte, void>)_cb.NpcStopMoving;
+	public static delegate* unmanaged[Cdecl]<void*, void*, void> NpcSetEnemy => (delegate* unmanaged[Cdecl]<void*, void*, void>)_cb.NpcSetEnemy;
+	public static delegate* unmanaged[Cdecl]<void*, int, void> NpcSetState => (delegate* unmanaged[Cdecl]<void*, int, void>)_cb.NpcSetState;
 }

@@ -162,4 +162,8 @@ internal struct NativeCallbacks
 	public nint GetSchemaClassSize;
 	public nint GetSchemaClassAlignment;
 	public nint GrowUtlVector;
+	public nint NpcMoveTo;
+	public nint NpcStopMoving;
+	public nint NpcSetEnemy;
+	public nint NpcSetState;
 }

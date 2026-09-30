@@ -336,6 +336,24 @@
 		"SubclassRegistry::GlobalRef": {
 			"library": "server.dll",
 			"windows": "48 8B 0D ?? ?? ?? ?? 4C 8B C3 BA FF FF FF FF E8"
+		},
+		// (npc, const Vector *goal, bool run, float tolerance, const Vector *teleportFirst, bool log). What npc_go
+		// runs, minus the cheat flag and the NPC selection. Stores the goal, tolerance and gait (run = Fast), then
+		// sets SCHED_FORCED_GO, which AI conditions don't interrupt unless npc_go_allow_interrupt_by_ai_conditions is on.
+		"CAI_BaseNPC::ForceNpcGo": {
+			"library": "server.dll",
+			"windows": "48 8B C4 55 53 56 57 48 8D A8 ?? ?? ?? ?? 48 81 EC ?? ?? ?? ?? 4C 89 60"
+		},
+		// (npc, CBaseEntity *enemy). Hands the enemy to CAI_EnemyServices, then calls OnEnemyChanged. Vfunc 433,
+		// which no NPC class overrides. The next ChooseEnemy can replace it.
+		"CAI_BaseNPC::SetEnemy": {
+			"library": "server.dll",
+			"windows": "48 89 5C 24 ?? 48 89 74 24 ?? 57 48 83 EC ?? 4C 8B 0D ?? ?? ?? ?? 48 8B F9"
+		},
+		// (npc, NPC_STATE). Setting NPC_STATE_IDLE also clears the enemy.
+		"CAI_BaseNPC::SetState": {
+			"library": "server.dll",
+			"windows": "48 89 5C 24 ?? 57 48 83 EC ?? 89 91 ?? ?? ?? ?? 8B DA"
 		}
 	},
 	"patches": {
@@ -369,6 +387,9 @@
 		"CCitadelBaseAbility::EndCooldown": 271,
 		"CCitadelBaseAbility::UsesCharges": 282,
 		"CCitadelBaseAbility::AddCharges": 284,
-		"CCitadelBaseAbility::GetMaxCharges": 307
+		"CCitadelBaseAbility::GetMaxCharges": 307,
+		// On the navigator's movement interface (CAI_BaseNPC::m_pNavigator + 0x48), not its primary vtable:
+		// StopMoving(AI_NavStopMovingMode_t, facing, const CUtlSourceLocation *), what npc_stop_moving calls.
+		"CAI_Navigator::StopMoving": 13
 	}
 }

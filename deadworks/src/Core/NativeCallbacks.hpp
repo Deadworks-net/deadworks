@@ -203,6 +203,11 @@ struct NativeCallbacks {
     // Makes room for count elements of elementSize bytes in a CUtlVector, keeping what it holds. Returns 0 if
     // the vector does not own its memory.
     uint8_t(__cdecl *GrowUtlVector)(void *vec, int32_t elementSize, int32_t count);
+    // NPC orders and state — see NativeNpc.cpp. npc is always a CAI_BaseNPC.
+    void(__cdecl *NpcMoveTo)(void *npc, const float *goal, uint8_t run, float tolerance);
+    void(__cdecl *NpcStopMoving)(void *npc, uint8_t instant);
+    void(__cdecl *NpcSetEnemy)(void *npc, void *enemy);
+    void(__cdecl *NpcSetState)(void *npc, int32_t state);
 };
 
 void PopulateNativeCallbacks(NativeCallbacks &callbacks);
