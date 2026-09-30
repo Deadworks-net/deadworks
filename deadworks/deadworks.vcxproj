@@ -219,6 +219,7 @@ if not "$(DeadlockDir)"=="" if exist "$(TargetDir)$(TargetName).pdb" copy /Y "$(
     <ClCompile Include="src\Core\NativeCollision.cpp" />
     <ClCompile Include="src\Core\NativeDamage.cpp" />
     <ClCompile Include="src\Core\NativeHero.cpp" />
+    <ClCompile Include="src\Core\NativeNpc.cpp" />
     <ClCompile Include="src\Core\ManagedCallbacks.cpp" />
     <ClCompile Include="src\Core\Hooks\BuildGameSessionManifest.cpp" />
     <ClCompile Include="src\Core\Hooks\ChangeGameState.cpp" />
@@ -283,6 +284,7 @@ if not "$(DeadlockDir)"=="" if exist "$(TargetDir)$(TargetName).pdb" copy /Y "$(
     <ClInclude Include="src\Core\NativeCollision.hpp" />
     <ClInclude Include="src\Core\NativeDamage.hpp" />
     <ClInclude Include="src\Core\NativeHero.hpp" />
+    <ClInclude Include="src\Core\NativeNpc.hpp" />
     <ClInclude Include="src\Core\ManagedCallbacks.hpp" />
     <ClInclude Include="src\Logging\ConsoleLogger.hpp" />
     <ClInclude Include="src\Lib\Module.hpp" />
@@ -301,6 +303,7 @@ if not "$(DeadlockDir)"=="" if exist "$(TargetDir)$(TargetName).pdb" copy /Y "$(
     <ClInclude Include="src\SDK\CCitadelPlayerController.hpp" />
     <ClInclude Include="src\SDK\CCitadelPlayerPawn.hpp" />
     <ClInclude Include="src\SDK\CEntitySystem.hpp" />
+    <ClInclude Include="src\SDK\CAI_BaseNPC.hpp" />
     <ClInclude Include="src\SDK\CGameSceneNode.hpp" />
     <ClInclude Include="src\SDK\CitadelAbilityProperty.hpp" />
     <ClInclude Include="src\SDK\CitadelAbilityVData.hpp" />

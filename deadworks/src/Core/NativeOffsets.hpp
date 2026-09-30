@@ -7,6 +7,9 @@ namespace deadworks::offsets {
 // CCitadelAbilityComponent
 constexpr uintptr_t kAbilityCompSlotTable = 0x30;
 
+// CAI_Navigator: the movement interface (second vtable) that npc_stop_moving calls StopMoving on.
+constexpr uintptr_t kNavigatorMoveInterface = 0x48;
+
 // CEntitySubclassVDataBase
 constexpr uintptr_t kSubclassDefType = 0x28;
 constexpr uintptr_t kSubclassDefDisabled = 0x2A;
