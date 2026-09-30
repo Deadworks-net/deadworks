@@ -11,22 +11,6 @@ constexpr uintptr_t kAbilityCompSlotTable = 0x30;
 constexpr uintptr_t kSubclassDefType = 0x28;
 constexpr uintptr_t kSubclassDefDisabled = 0x2A;
 
-// Vtable
-
-// CBaseEntity
-constexpr int kVtblTeleport = 163;
-
-// CBaseEntity
-constexpr int kVtblHeal = 124;
-constexpr int kVtblGetMaxHealth = 181;
-constexpr int kVtblSetScale = 255;
-
-// CBaseModifier
-constexpr int kVtblModifierDestroy = 27;
-
-// CBasePlayerController
-constexpr int kVtblChangeTeam = 105;
-
 // CCitadelAbilityComponent::OnAbilityRemoved
 constexpr uintptr_t kOnAbilityRemoved_FindSlotCall = 0x7B;
 constexpr uintptr_t kOnAbilityRemoved_RemoveSlotCall = 0x8B;

@@ -995,19 +995,19 @@ static void __cdecl NativeSetWaitingForPlayersRoster(uint32_t readyCount, uint32
 static int32_t __cdecl NativeGetMaxHealth(void *entity) {
     if (!entity)
         return 0;
-    return GetVFunc<int(__thiscall *)(void *)>(entity, offsets::kVtblGetMaxHealth)(entity);
+    return GetVFunc<int(__thiscall *)(void *)>(entity, MemoryDataLoader::Get().GetVirtual("CBaseEntity::GetMaxHealth").value())(entity);
 }
 
 static int32_t __cdecl NativeHeal(void *entity, float amount) {
     if (!entity)
         return 0;
-    return GetVFunc<int(__thiscall *)(void *, float)>(entity, offsets::kVtblHeal)(entity, amount);
+    return GetVFunc<int(__thiscall *)(void *, float)>(entity, MemoryDataLoader::Get().GetVirtual("CBaseEntity::TakeHealth").value())(entity, amount);
 }
 
 static void __cdecl NativeSetScale(void *entity, float scale) {
     if (!entity)
         return;
-    GetVFunc<void(__thiscall *)(void *, float)>(entity, offsets::kVtblSetScale)(entity, scale);
+    GetVFunc<void(__thiscall *)(void *, float)>(entity, MemoryDataLoader::Get().GetVirtual("CBaseModelEntity::SetScale").value())(entity, scale);
 }
 
 // ---------------------------------------------------------------------------

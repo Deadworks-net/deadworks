@@ -496,7 +496,7 @@ static uint8_t __cdecl NativeRemoveModifier(void *entity, void *modifier) {
         return 0;
     }
 
-    auto destroyFn = GetVFunc<void(__fastcall *)(void *, uint32_t, void *, void *)>(modifier, kVtblModifierDestroy);
+    auto destroyFn = GetVFunc<void(__fastcall *)(void *, uint32_t, void *, void *)>(modifier, MemoryDataLoader::Get().GetVirtual("CBaseModifier::Destroy").value());
     destroyFn(modifier, 6, nullptr, nullptr);
     modProp->m_bModifierStatesDirty = true;
 
