@@ -341,7 +341,7 @@
 		"IGameEventManager2::FireEvent": 7,
 		"IGameEventSystem::PostEventAbstract": 16,
 		"CBaseEntity::ChangeTeam": 105,
-		"CBaseEntity::TakeHealth": 124,
+		"CBaseEntity::Heal": 124,
 		"CBaseEntity::StartTouch": 148,
 		"CBaseEntity::EndTouch": 150,
 		"CBaseEntity::Teleport": 163,

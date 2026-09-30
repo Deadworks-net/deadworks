@@ -1001,7 +1001,7 @@ static int32_t __cdecl NativeGetMaxHealth(void *entity) {
 static int32_t __cdecl NativeHeal(void *entity, float amount) {
     if (!entity)
         return 0;
-    return GetVFunc<int(__thiscall *)(void *, float)>(entity, MemoryDataLoader::Get().GetVirtual("CBaseEntity::TakeHealth").value())(entity, amount);
+    return GetVFunc<int(__thiscall *)(void *, float)>(entity, MemoryDataLoader::Get().GetVirtual("CBaseEntity::Heal").value())(entity, amount);
 }
 
 static void __cdecl NativeSetScale(void *entity, float scale) {
