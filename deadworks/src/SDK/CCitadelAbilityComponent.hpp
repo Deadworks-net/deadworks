@@ -9,7 +9,7 @@
 class CCitadelAbilityComponent {
     DECLARE_SCHEMA_CLASS(CCitadelAbilityComponent);
     SCHEMA_FIELD(CUtlVector<uint32_t>, m_vecAbilities);
-    SCHEMA_FIELD(CUtlVector<uint32_t>, m_vecThinkableAbilities);
+    SCHEMA_FIELD(bool, m_bThinkableAbilitiesDirty);
 
     CBaseEntity *FindAbilityByName(const char *name) {
         static const auto fn = reinterpret_cast<CBaseEntity *(__fastcall *)(void *, const char *)>(

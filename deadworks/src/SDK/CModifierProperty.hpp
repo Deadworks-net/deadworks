@@ -11,7 +11,6 @@ class KeyValues3;
 class CModifierProperty {
     DECLARE_SCHEMA_CLASS(CModifierProperty);
     SCHEMA_FIELD(bool, m_bPredictedOwner);
-    SCHEMA_FIELD(bool, m_bModifierStatesDirty);
 
     void *AddModifier(CBaseEntity *pCaster, uint32_t hAbility, int iTeam,
                       CModifierVData *vdata, KeyValues3 *pParams = nullptr, KeyValues3 *pKV = nullptr) {
