@@ -208,6 +208,8 @@ struct NativeCallbacks {
     void(__cdecl *NpcStopMoving)(void *npc, uint8_t instant);
     void(__cdecl *NpcSetEnemy)(void *npc, void *enemy);
     void(__cdecl *NpcSetState)(void *npc, int32_t state);
+    // Navmesh queries — see NativeNav.cpp.
+    uint8_t(__cdecl *NavGetNearestPoint)(const float *pos, float maxDistance, int32_t hull, float *out);
 };
 
 void PopulateNativeCallbacks(NativeCallbacks &callbacks);
