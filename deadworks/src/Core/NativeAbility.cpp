@@ -100,7 +100,8 @@ static __int64 __fastcall Hook_LookupVDataByHash(int typeIndex, int hash) {
 // then iterates AbilityPropertyMapEntry/CitadelAbilityProperty_t to find and override values.
 static uint32_t CloneAbilityVDataWithOverrides(
     uint32_t abilityHash,
-    const char *const *overrideNames, const float *overrideValues, int32_t overrideCount) {
+    const char *const *overrideNames, const float *overrideValues, int32_t overrideCount)
+{
     auto originalVData = g_Hook_LookupVDataByHash.call<__int64>(4, static_cast<int>(abilityHash));
     if (!originalVData) {
         g_Log->Warning("CloneVData: ability VData not found for hash 0x{:X}", abilityHash);
@@ -143,7 +144,7 @@ static uint32_t CloneAbilityVDataWithOverrides(
         return 0;
     }
 
-    constexpr int kRBTreeLinksSize = 16;                                     // UtlRBTreeLinks_t<int> = 4 * int
+    constexpr int kRBTreeLinksSize = 16;                                        // UtlRBTreeLinks_t<int> = 4 * int
     constexpr int kKeyOffset = kRBTreeLinksSize;                                // CUtlString key follows the links
     const int kElemOffset = kKeyOffset + static_cast<int>(sizeof(CUtlString));  // elem follows the key
 
@@ -268,22 +269,7 @@ static void ResolveSlotTableFns(FindSlotEntryFn &findFn, RemoveSlotEntryFn &remo
 // ---------------------------------------------------------------------------
 
 static uint8_t RemoveAbilityImpl(CCitadelPlayerPawn *pPawn, CCitadelBaseAbility *ability) {
-    // Build 6712 removed m_vecThinkableAbilities; invalidate the cache through its dirty flag instead.
-    static const auto dirtyField = schema::GetOffset(
-        "CCitadelAbilityComponent", hash_32_fnv1a_const("CCitadelAbilityComponent"),
-        "m_bThinkableAbilitiesDirty", hash_32_fnv1a_const("m_bThinkableAbilitiesDirty"));
-    static const int componentSize = schema::GetClassSize("CCitadelAbilityComponent");
-    if (dirtyField.Offset <= 0 || dirtyField.Offset >= componentSize) {
-        static bool warned = false;
-        if (!warned) {
-            g_Log->Warning("RemoveAbility: unsupported thinkable-ability cache layout; no ability state was changed.");
-            warned = true;
-        }
-        return 0;
-    }
-
     auto *comp = pPawn->m_CCitadelAbilityComponent.Get();
-    if (!comp) return 0;
     auto compAddr = reinterpret_cast<uintptr_t>(comp);
 
     uint32_t rawHandle = static_cast<uint32_t>(ability->GetRefEHandle().ToInt());
@@ -307,7 +293,8 @@ static uint8_t RemoveAbilityImpl(CCitadelPlayerPawn *pPawn, CCitadelBaseAbility 
     }
 
     comp->m_vecAbilities.NetworkStateChanged();
-    comp->m_bThinkableAbilitiesDirty.Get() = true;
+    // The thinkable list is no longer a schema field; the component's Think rebuilds it when this is set.
+    comp->m_bThinkableAbilitiesDirty = true;
 
     UTIL_Remove(static_cast<CEntityInstance *>(ability));
     return 1;
