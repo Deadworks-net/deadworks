@@ -208,6 +208,10 @@ struct NativeCallbacks {
     void(__cdecl *NpcStopMoving)(void *npc, uint8_t instant);
     void(__cdecl *NpcSetEnemy)(void *npc, void *enemy);
     void(__cdecl *NpcSetState)(void *npc, int32_t state);
+    uint8_t(__cdecl *NpcSetSchedule)(void *npc, const char *name);
+    void(__cdecl *NpcSetMinion)(void *npc, uint8_t minion);
+    void *(__cdecl *NpcGetSummoner)(void *npc);
+    void(__cdecl *NpcSetSummoner)(void *npc, uint32_t handle);
     // Navmesh queries — see NativeNav.cpp.
     uint8_t(__cdecl *NavGetNearestPoint)(const float *pos, float maxDistance, int32_t hull, float *out);
 };

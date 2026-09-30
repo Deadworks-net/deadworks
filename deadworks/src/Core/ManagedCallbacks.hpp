@@ -49,6 +49,8 @@ struct ManagedCallbacks {
     using OnPawnHeroInitializedFn = void(CORECLR_DELEGATE_CALLTYPE *)(void *pawn);
     using OnModifierEventFn = void(CORECLR_DELEGATE_CALLTYPE *)(uint32_t event, void *caster, void *target, void *castEntity, void *eventData);
     using OnGameStateChangedFn = void(CORECLR_DELEGATE_CALLTYPE *)(int32_t newState);
+    // Returns the name of a schedule to use instead of chosenId, or nullptr to keep it.
+    using OnNpcSelectScheduleFn = const char *(CORECLR_DELEGATE_CALLTYPE *)(void *npc, const char *chosenId);
     using ShouldAllowGameStateChangeFn = uint8_t(CORECLR_DELEGATE_CALLTYPE *)(int32_t currentState, int32_t newState);
 
     OnStartupServerFn onStartupServer = nullptr;
@@ -78,6 +80,7 @@ struct ManagedCallbacks {
     OnProcessUsercmdsFn onProcessUsercmds = nullptr;
     OnAbilityAttemptFn onAbilityAttempt = nullptr;
     OnAddModifierFn onAddModifier = nullptr;
+    OnNpcSelectScheduleFn onNpcSelectSchedule = nullptr;
     OnCheckTransmitFn onCheckTransmit = nullptr;
     OnPawnHeroInitializedFn onPawnHeroInitialized = nullptr;
     OnGameStateChangedFn onGameStateChanged = nullptr;

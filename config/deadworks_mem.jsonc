@@ -355,6 +355,36 @@
 			"library": "server.dll",
 			"windows": "48 89 5C 24 ?? 57 48 83 EC ?? 89 91 ?? ?? ?? ?? 8B DA"
 		},
+		// (npc, CAI_Schedule **outSchedule, const char **outName, CGlobalSymbol *outId) -> CAI_Schedule *. Where an NPC
+		// picks its next schedule: SelectSchedule (vfunc 391), or SelectFailSchedule (403) after a failure, then
+		// GetScheduleOfType. Hooked so plugins can replace the choice.
+		"CAI_BaseNPC::GetNewSchedule": {
+			"library": "server.dll",
+			"windows": "48 89 5C 24 ?? 56 57 41 56 48 83 EC ?? 83 B9"
+		},
+		// (npc, const CGlobalSymbol *id, const char **outName) -> CAI_Schedule *. Translates the id for the NPC's
+		// class, then looks it up. Unknown ids log "No CASE for Schedule Type" and fall back to SCHED_IDLE_STAND.
+		"CAI_BaseNPC::GetScheduleOfType": {
+			"library": "server.dll",
+			"windows": "48 89 74 24 ?? 57 48 83 EC ?? ?? ?? ?? 49 8B F0 4C 8D 44 24"
+		},
+		// (CAI_Scheduler *, CAI_Schedule *, const char *const *name, const CGlobalSymbol *id). What the SetSchedule
+		// task and ForceNpcGo use to switch the running schedule.
+		"CAI_Scheduler::SetSchedule": {
+			"library": "server.dll",
+			"windows": "48 89 5C 24 ?? 48 89 74 24 ?? 57 41 56 41 57 48 83 EC ?? 4C 8B F2"
+		},
+		// (npc, bool). Networks m_bMinion and widens what the NPC senses; Necro's skeletons are the only caller.
+		"CAI_CitadelNPC::SetMinion": {
+			"library": "server.dll",
+			"windows": "48 89 5C 24 ?? 48 89 74 24 ?? 57 48 83 EC ?? 0F B6 DA 48 8B F1 38 91 ?? ?? ?? ?? 74"
+		},
+		// (npc) -> CBaseEntity *: m_hCaster, else the owner of m_hAbilityOwner. Damage and kill credit for minions go
+		// to it. Starts with mov edx, [rcx + disp32]: the offset of m_hCaster, which isn't in the schema.
+		"CAI_CitadelNPC::GetSummoner": {
+			"library": "server.dll",
+			"windows": "8B 91 ?? ?? ?? ?? 4C 8B D1 4C 8B 05"
+		},
 		// (CNavMesh *, const Vector *pos, const int *hull, uint flags, Vector *outPos, float maxDist, const params *).
 		// Returns the nav area it snapped to, or null. NPCs call it to put a goal on the navmesh before pathing.
 		"CNavMesh::GetNearestNav": {
@@ -402,6 +432,8 @@
 		"CCitadelBaseAbility::GetMaxCharges": 307,
 		// On the navigator's movement interface (CAI_BaseNPC::m_pNavigator + 0x48), not its primary vtable:
 		// StopMoving(AI_NavStopMovingMode_t, facing, const CUtlSourceLocation *), what npc_stop_moving calls.
-		"CAI_Navigator::StopMoving": 13
+		"CAI_Navigator::StopMoving": 13,
+		// bool (const CGlobalSymbol *id): true refuses a schedule set from outside, as the SetSchedule task checks.
+		"CAI_BaseNPC::VetoSchedule": 428
 	}
 }

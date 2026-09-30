@@ -129,6 +129,12 @@ public interface IDeadworksPlugin {
 	/// </summary>
 	void OnAbilityAttempt(AbilityAttemptEvent args) { }
 
+	/// <summary>
+	/// Called each time an NPC picks its next schedule. Set <see cref="NpcSelectScheduleEvent.Override"/> to run
+	/// another one, for example to keep a trooper from walking back down its lane.
+	/// </summary>
+	void OnNpcSelectSchedule(NpcSelectScheduleEvent args) { }
+
 	/// <summary>Called when a player's usercmds are being processed.</summary>
 	void OnProcessUsercmds(ProcessUsercmdsEvent args) { }
 

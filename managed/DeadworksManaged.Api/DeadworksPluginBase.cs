@@ -61,6 +61,7 @@ public abstract class DeadworksPluginBase : IDeadworksPlugin {
 	/// <inheritdoc/>
 	public virtual void OnAbilityAttempt(AbilityAttemptEvent args) { }
 	/// <inheritdoc/>
+	public virtual void OnNpcSelectSchedule(NpcSelectScheduleEvent args) { }
 	public virtual void OnProcessUsercmds(ProcessUsercmdsEvent args) { }
 	/// <inheritdoc/>
 	public virtual HookResult OnAddModifier(AddModifierEvent args) => HookResult.Continue;

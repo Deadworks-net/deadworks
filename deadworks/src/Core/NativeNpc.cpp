@@ -26,10 +26,22 @@ using ForceNpcGoFn = void(__fastcall *)(void *npc, const Vector *goal, bool run,
 using SetEnemyFn = void(__fastcall *)(void *npc, void *enemy);
 using SetStateFn = void(__fastcall *)(void *npc, int32_t state);
 using StopMovingFn = void(__fastcall *)(void *moveInterface, int32_t mode, int32_t facing, const SourceLocation *caller);
+using MakeGlobalSymbolFn = const char *(*)(const char *name);
+using GetScheduleOfTypeFn = void *(__fastcall *)(void *npc, const char **id, const char **outName);
+using SchedulerSetScheduleFn = void(__fastcall *)(void *scheduler, void *schedule, const char *const *name, const char *const *id);
+using VetoScheduleFn = bool(__fastcall *)(void *npc, const char *const *id);
+using SetMinionFn = void(__fastcall *)(void *npc, bool minion);
+using GetSummonerFn = void *(__fastcall *)(void *npc);
 
 static ForceNpcGoFn g_pForceNpcGo = nullptr;
 static SetEnemyFn g_pSetEnemy = nullptr;
 static SetStateFn g_pSetState = nullptr;
+static MakeGlobalSymbolFn g_pMakeGlobalSymbol = nullptr;
+static GetScheduleOfTypeFn g_pGetScheduleOfType = nullptr;
+static SchedulerSetScheduleFn g_pSchedulerSetSchedule = nullptr;
+static SetMinionFn g_pSetMinion = nullptr;
+static GetSummonerFn g_pGetSummoner = nullptr;
+static int32_t g_summonerHandleOffset = 0; // CAI_CitadelNPC::m_hCaster, read from GetSummoner's first instruction
 
 // AI_NavStopMovingMode_t, as npc_stop_moving picks them ("asap" = instant).
 constexpr int32_t kStopMovingInstant = 0;
@@ -69,6 +81,47 @@ static void __cdecl NativeNpcSetState(void *npc, int32_t state) {
     g_pSetState(npc, state);
 }
 
+// Switches to the named schedule now, the way the SetSchedule task does. Returns 0 if the NPC vetoes it.
+// A name the NPC's class has no schedule for falls back to SCHED_IDLE_STAND (the game logs "No CASE").
+static uint8_t __cdecl NativeNpcSetSchedule(void *npc, const char *name) {
+    if (!npc || !name || !g_pMakeGlobalSymbol || !g_pGetScheduleOfType || !g_pSchedulerSetSchedule) return 0;
+
+    const char *id = g_pMakeGlobalSymbol(name);
+    static const int vetoIndex = MemoryDataLoader::Get().GetVirtual("CAI_BaseNPC::VetoSchedule").value();
+    if (GetVFunc<VetoScheduleFn>(npc, vetoIndex)(npc, &id)) return 0;
+
+    const char *translated = nullptr;
+    void *schedule = g_pGetScheduleOfType(npc, &id, &translated);
+    if (!schedule) return 0;
+    g_pSchedulerSetSchedule(&static_cast<CAI_BaseNPC *>(npc)->m_Scheduler.Get(), schedule, &translated, &id);
+    return 1;
+}
+
+// CAI_CitadelNPC only, like the two below.
+static void __cdecl NativeNpcSetMinion(void *npc, uint8_t minion) {
+    if (!npc || !g_pSetMinion) return;
+    g_pSetMinion(npc, minion != 0);
+}
+
+static void *__cdecl NativeNpcGetSummoner(void *npc) {
+    if (!npc || !g_pGetSummoner) return nullptr;
+    return g_pGetSummoner(npc);
+}
+
+// Stores the handle in m_hCaster, which GetSummoner prefers over the owning ability's owner.
+static void __cdecl NativeNpcSetSummoner(void *npc, uint32_t handle) {
+    if (!npc || !g_summonerHandleOffset) return;
+    *reinterpret_cast<uint32_t *>(reinterpret_cast<uint8_t *>(npc) + g_summonerHandleOffset) = handle;
+}
+
+const char *deadworks::npc::MakeScheduleId(const char *name) {
+    return g_pMakeGlobalSymbol ? g_pMakeGlobalSymbol(name) : nullptr;
+}
+
+void *deadworks::npc::GetScheduleOfType(void *npc, const char **id, const char **outName) {
+    return g_pGetScheduleOfType ? g_pGetScheduleOfType(npc, id, outName) : nullptr;
+}
+
 // ---------------------------------------------------------------------------
 // Resolution & populate
 // ---------------------------------------------------------------------------
@@ -80,6 +133,18 @@ void deadworks::ResolveNpcStatics() {
     g_pForceNpcGo = reinterpret_cast<ForceNpcGoFn>(resolve("CAI_BaseNPC::ForceNpcGo"));
     g_pSetEnemy = reinterpret_cast<SetEnemyFn>(resolve("CAI_BaseNPC::SetEnemy"));
     g_pSetState = reinterpret_cast<SetStateFn>(resolve("CAI_BaseNPC::SetState"));
+    g_pGetScheduleOfType = reinterpret_cast<GetScheduleOfTypeFn>(resolve("CAI_BaseNPC::GetScheduleOfType"));
+    g_pSchedulerSetSchedule = reinterpret_cast<SchedulerSetScheduleFn>(resolve("CAI_Scheduler::SetSchedule"));
+    g_pSetMinion = reinterpret_cast<SetMinionFn>(resolve("CAI_CitadelNPC::SetMinion"));
+
+    // GetSummoner starts with mov edx, [rcx + disp32] (8B 91): the disp32 is m_hCaster's offset.
+    auto getSummoner = resolve("CAI_CitadelNPC::GetSummoner");
+    g_pGetSummoner = reinterpret_cast<GetSummonerFn>(getSummoner);
+    g_summonerHandleOffset = *reinterpret_cast<int32_t *>(getSummoner + 2);
+
+    // Exported by tier0 as _MakeGlobalSymbol; the CGlobalSymbol it returns is just the interned string.
+    if (HMODULE tier0 = GetModuleHandleA("tier0.dll"))
+        g_pMakeGlobalSymbol = reinterpret_cast<MakeGlobalSymbolFn>(GetProcAddress(tier0, "_MakeGlobalSymbol"));
 }
 
 void deadworks::PopulateNpcNatives(NativeCallbacks &cb) {
@@ -87,4 +152,8 @@ void deadworks::PopulateNpcNatives(NativeCallbacks &cb) {
     cb.NpcStopMoving = &NativeNpcStopMoving;
     cb.NpcSetEnemy = &NativeNpcSetEnemy;
     cb.NpcSetState = &NativeNpcSetState;
+    cb.NpcSetSchedule = &NativeNpcSetSchedule;
+    cb.NpcSetMinion = &NativeNpcSetMinion;
+    cb.NpcGetSummoner = &NativeNpcGetSummoner;
+    cb.NpcSetSummoner = &NativeNpcSetSummoner;
 }
