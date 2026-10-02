@@ -31,7 +31,7 @@
 }
 
 .titlebarTitle {
-  font-size: 0.72rem;
+  font-size: 0.875rem;
   font-weight: 700;
   letter-spacing: 2px;
   color: var(--text-muted);
@@ -95,7 +95,7 @@
   border: 1px solid var(--border);
   background: var(--bg-panel);
   padding: 6px 10px;
-  font-size: 0.78rem;
+  font-size: 1rem;
   font-family: var(--font-family);
   color: var(--text);
   outline: none;
@@ -122,7 +122,7 @@
   width: 100%;
   padding: 8px 16px;
   text-align: left;
-  font-size: 0.82rem;
+  font-size: 1rem;
   color: var(--text-muted);
   background: transparent;
   border: none;
@@ -152,13 +152,13 @@
 }
 
 .sectionTitle {
-  font-size: 1.2rem;
+  font-size: 1.5rem;
   font-weight: 700;
   margin-bottom: 4px;
 }
 
 .sectionSubtitle {
-  font-size: 0.68rem;
+  font-size: 0.875rem;
   text-transform: uppercase;
   letter-spacing: 1.5px;
   color: var(--text-muted);
@@ -181,14 +181,14 @@
 }
 
 .settingLabel {
-  font-size: 0.85rem;
+  font-size: 1.125rem;
   font-weight: 600;
   color: var(--text);
   margin-bottom: 3px;
 }
 
 .settingDesc {
-  font-size: 0.78rem;
+  font-size: 1rem;
   color: var(--text-muted);
 }
 
@@ -199,7 +199,7 @@
   border-radius: 4px;
   padding: 6px 12px;
   font-family: var(--font-family);
-  font-size: 0.78rem;
+  font-size: 1rem;
   cursor: pointer;
   outline: none;
   flex-shrink: 0;
@@ -217,7 +217,7 @@
   border-radius: 4px;
   padding: 6px 16px;
   font-family: var(--font-family);
-  font-size: 0.78rem;
+  font-size: 1rem;
   font-weight: 600;
   cursor: pointer;
   transition: all 0.15s;
@@ -270,7 +270,7 @@
   background: var(--bg);
   border: 1px solid var(--border);
   border-radius: 4px;
-  font-size: 0.78rem;
+  font-size: 1rem;
   font-family: 'Consolas', 'Monaco', monospace;
   color: var(--text-secondary);
   word-break: break-all;
@@ -283,7 +283,7 @@
 
 .pathError {
   margin-top: 6px;
-  font-size: 0.75rem;
+  font-size: 1rem;
   color: var(--ping-bad);
 }
 
