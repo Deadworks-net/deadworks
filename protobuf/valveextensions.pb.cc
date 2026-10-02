@@ -38,32 +38,32 @@ const char descriptor_table_protodef_valveextensions_2eproto[] PROTOBUF_SECTION_
   "\030\310\334\003 \001(\010:\005false:\?\n\017valve_map_field\022\035.goo"
   "gle.protobuf.FieldOptions\030\310\334\003 \001(\010:\005false"
   ":=\n\rvalve_map_key\022\035.google.protobuf.Fiel"
-  "dOptions\030\311\334\003 \001(\010:\005false:=\n\021diff_encode_f"
+  "dOptions\030\311\334\003 \001(\010:\005false::\n\021diff_encode_f"
   "ield\022\035.google.protobuf.FieldOptions\030\312\334\003 "
-  "\001(\005:\0010:<\n\014delta_ignore\022\035.google.protobuf"
-  ".FieldOptions\030\313\334\003 \001(\010:\005false:A\n\023untruste"
-  "d_delta_max\022\035.google.protobuf.FieldOptio"
-  "ns\030\320\334\003 \001(\005:\003256:\?\n\023steamml_max_entries\022\035"
-  ".google.protobuf.FieldOptions\030\314\334\003 \001(\r:\0010"
-  ":D\n\024steamml_is_timestamp\022\035.google.protob"
-  "uf.FieldOptions\030\315\334\003 \001(\010:\005false:<\n\020steaml"
-  "earn_count\022\035.google.protobuf.FieldOption"
-  "s\030\316\334\003 \001(\r:\0010:u\n\025debugprint_visibility\022\035."
-  "google.protobuf.FieldOptions\030\317\334\003 \001(\0162\025.E"
-  "ProtoDebugVisiblity:\036k_EProtoDebugVisibi"
-  "lity_Always:@\n\024schema_friendly_name\022!.go"
-  "ogle.protobuf.EnumValueOptions\030\350\007 \001(\t:>\n"
-  "\022schema_description\022!.google.protobuf.En"
-  "umValueOptions\030\351\007 \001(\t:F\n\032schema_suppress"
-  "_enumerator\022!.google.protobuf.EnumValueO"
-  "ptions\030\352\007 \001(\010"
+  "\001(\005:<\n\014delta_ignore\022\035.google.protobuf.Fi"
+  "eldOptions\030\313\334\003 \001(\010:\005false:A\n\023untrusted_d"
+  "elta_max\022\035.google.protobuf.FieldOptions\030"
+  "\320\334\003 \001(\005:\003256:<\n\023steamml_max_entries\022\035.go"
+  "ogle.protobuf.FieldOptions\030\314\334\003 \001(\r:D\n\024st"
+  "eamml_is_timestamp\022\035.google.protobuf.Fie"
+  "ldOptions\030\315\334\003 \001(\010:\005false:9\n\020steamlearn_c"
+  "ount\022\035.google.protobuf.FieldOptions\030\316\334\003 "
+  "\001(\r:u\n\025debugprint_visibility\022\035.google.pr"
+  "otobuf.FieldOptions\030\317\334\003 \001(\0162\025.EProtoDebu"
+  "gVisiblity:\036k_EProtoDebugVisibility_Alwa"
+  "ys:@\n\024schema_friendly_name\022!.google.prot"
+  "obuf.EnumValueOptions\030\350\007 \001(\t:>\n\022schema_d"
+  "escription\022!.google.protobuf.EnumValueOp"
+  "tions\030\351\007 \001(\t:F\n\032schema_suppress_enumerat"
+  "or\022!.google.protobuf.EnumValueOptions\030\352\007"
+  " \001(\010"
   ;
 static const ::_pbi::DescriptorTable* const descriptor_table_valveextensions_2eproto_deps[1] = {
   &::descriptor_table_google_2fprotobuf_2fdescriptor_2eproto,
 };
 static ::_pbi::once_flag descriptor_table_valveextensions_2eproto_once;
 const ::_pbi::DescriptorTable descriptor_table_valveextensions_2eproto = {
-    false, false, 1173, descriptor_table_protodef_valveextensions_2eproto,
+    false, false, 1164, descriptor_table_protodef_valveextensions_2eproto,
     "valveextensions.proto",
     &descriptor_table_valveextensions_2eproto_once, descriptor_table_valveextensions_2eproto_deps, 1, 0,
     schemas, file_default_instances, TableStruct_valveextensions_2eproto::offsets,
