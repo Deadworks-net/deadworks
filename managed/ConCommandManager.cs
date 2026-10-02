@@ -482,9 +482,9 @@ internal static class ConCommandManager
 
     private static FCVar BuildConCommandFlags(bool serverOnly)
     {
-        var flags = FCVar.Unregistered;
+        var flags = FCVar.LinkedConCommand;
         if (!serverOnly)
-            flags |= FCVar.AccessibleFromThreads;
+            flags |= FCVar.ClientCanExecute;
         return flags;
     }
 

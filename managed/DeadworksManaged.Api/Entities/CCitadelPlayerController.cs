@@ -1,3 +1,5 @@
+using System.Numerics;
+
 namespace DeadworksManaged.Api;
 
 /// <summary>Deadlock-specific player controller. Provides access to player data, hero selection, team changes, and console messaging.</summary>
@@ -6,12 +8,56 @@ public sealed unsafe class CCitadelPlayerController : CBasePlayerController {
 	internal CCitadelPlayerController(nint handle) : base(handle) { }
 
 	private static readonly SchemaAccessor<byte> _playerDataGlobal = new("CCitadelPlayerController"u8, "m_PlayerDataGlobal"u8);
-	public PlayerDataGlobal PlayerDataGlobal => new(_playerDataGlobal.GetAddress(Handle));
+	public PlayerDataGlobal PlayerDataGlobal => new(_playerDataGlobal.GetAddress(Handle), Handle);
+
+	private static readonly SchemaAccessor<sbyte> _assignedLane = new("CCitadelPlayerController"u8, "m_nAssignedLane"u8);
+	/// <summary>
+	/// Which lane's zipline this player rides if the match starts with the zipline launch. Setting it doesn't cause a
+	/// launch, it only picks the lane. <see cref="LaneColor.Invalid"/>, the default, leaves the choice to the game. Not
+	/// every map has every lane; dl_midtown has Yellow, Blue and Purple.
+	/// </summary>
+	public LaneColor AssignedLane { get => (LaneColor)_assignedLane.Get(Handle); set => _assignedLane.Set(Handle, (sbyte)value); }
+
+	private static readonly SchemaAccessor<sbyte> _originalLaneAssignment = new("CCitadelPlayerController"u8, "m_nOriginalLaneAssignment"u8);
+	/// <summary>The lane this player was first assigned, before any lane swap.</summary>
+	public LaneColor OriginalLaneAssignment {
+		get => (LaneColor)_originalLaneAssignment.Get(Handle);
+		set => _originalLaneAssignment.Set(Handle, (sbyte)value);
+	}
 
 	/// <summary>Returns the player's current hero pawn, or null if they have none.</summary>
 	public CCitadelPlayerPawn? GetHeroPawn() {
 		var ptr = NativeInterop.GetHeroPawn((void*)Handle);
 		return ptr != null ? new CCitadelPlayerPawn((nint)ptr) : null;
+	}
+
+	private static readonly SchemaAccessor<uint> _hHeroPawn = new("CCitadelPlayerController"u8, "m_hHeroPawn"u8);
+
+	/// <summary>
+	/// Gives this player <paramref name="from"/>'s hero, as it is: level, souls, items, health and position carry over,
+	/// along with its team and lane. Use it to hand a leaver's hero to someone else. This player's old pawn (usually a
+	/// spectator's) is removed, and <paramref name="from"/> is left without one.
+	/// </summary>
+	/// <returns>False if <paramref name="from"/> has no hero.</returns>
+	public bool TakeOverHero(CCitadelPlayerController from) {
+		if (from == this || from.GetHeroPawn() is not { } hero)
+			return false;
+
+		var previous = Pawn;
+		ChangeTeam(hero.TeamNum);
+		SetPawn(hero);
+		_hHeroPawn.Set(Handle, hero.EntityHandle);
+		if (previous != null && previous.EntityHandle != hero.EntityHandle)
+			previous.Remove();
+
+		// Raw writes on purpose: SetPawn(null) on the old owner would reach into the pawn it just lost.
+		from.ClearPawnHandle();
+		_hHeroPawn.Set(from.Handle, CBaseEntity.InvalidEntityHandle);
+
+		PlayerDataGlobal.HeroID = from.PlayerDataGlobal.HeroID;
+		AssignedLane = from.AssignedLane;
+		OriginalLaneAssignment = from.OriginalLaneAssignment;
+		return true;
 	}
 
 	/// <summary>
@@ -24,10 +70,32 @@ public sealed unsafe class CCitadelPlayerController : CBasePlayerController {
 	}
 
 	/// <summary>
+	/// Removes this player from the game completely: their hero, any other pawn they control (such as a spectator's
+	/// observer pawn), and this controller, together in the same tick.
+	///
+	/// By default a player who leaves keeps their controller and hero, so they can reconnect to them, and their portrait
+	/// stays in the top bar. Call this from <see cref="IDeadworksPlugin.OnClientDisconnect"/> to drop them instead.
+	/// Don't remove the hero or the controller on its own: either one left behind crashes clients or the server. To
+	/// remove a player who is still connected, <see cref="CBasePlayerController.Kick"/> them.
+	/// </summary>
+	public void RemoveWithPawns() {
+		var hero = GetHeroPawn();
+		var pawn = Pawn;
+		hero?.Remove();
+		if (pawn != null && pawn.EntityHandle != hero?.EntityHandle)
+			pawn.Remove();
+		Remove();
+	}
+
+	/// <summary>
 	/// Forcibly removes the player's current pawn, spawns an observer pawn, and attaches it.
 	/// </summary>
 	public void MakeObserver() {
-		Pawn?.Remove();
+		if (Pawn is { } pawn) {
+			if (_hHeroPawn.Get(Handle) == pawn.EntityHandle)
+				_hHeroPawn.Set(Handle, CBaseEntity.InvalidEntityHandle);
+			pawn.Remove();
+		}
 		SetPawn(null, retainOldPawnTeam: true);
 		NativeInterop.SpawnObserverPawn((void*)Handle);
 	}
@@ -53,6 +121,32 @@ public sealed unsafe class CCitadelPlayerController : CBasePlayerController {
 			DescriptionLocstring = description
 		}, Recipients);
 	}
+
+	/// <summary>
+	/// Moves this player's camera without moving their hero: pull it back, zoom, point it somewhere else and hold it
+	/// there. See <see cref="PlayerCamera"/>.
+	/// </summary>
+	public PlayerCamera Camera => new(this);
+
+	/// <summary>
+	/// Turns this player's camera to face <paramref name="angles"/> (pitch, yaw, roll in degrees).
+	/// </summary>
+	/// <remarks>
+	/// <see cref="CBaseEntity.Teleport"/> can't turn a player's camera (its <c>angles</c> are ignored for players),
+	/// so call this after moving someone to control which way they end up facing, or use
+	/// <see cref="CCitadelPlayerPawn.TeleportWithView"/> to do both at once. To restore a view you saved
+	/// earlier, save <see cref="CCitadelPlayerPawn.CameraAngles"/>. <see cref="CCitadelPlayerPawn.EyeAngles"/>
+	/// is where the crosshair aims, which can be far off from where the camera points.
+	/// </remarks>
+	public void SetCameraAngles(Vector3 angles) {
+		NetMessages.Send(new CCitadelUserMsg_SetClientCameraAngles {
+			PlayerSlot = Slot,
+			CameraAngles = new CMsgQAngle { X = angles.X, Y = angles.Y, Z = angles.Z }
+		}, Recipients);
+	}
+
+	/// <inheritdoc cref="SetCameraAngles(Vector3)"/>
+	public void SetCameraAngles(float pitch, float yaw, float roll = 0f) => SetCameraAngles(new Vector3(pitch, yaw, roll));
 
 	/// <summary>Sends a message to all connected players' consoles.</summary>
 	public static void PrintToConsoleAll(string message) {

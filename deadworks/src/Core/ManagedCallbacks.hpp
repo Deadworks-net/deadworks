@@ -61,6 +61,7 @@ struct ManagedCallbacks {
     OnClientConnectFn onClientConnect = nullptr;
     OnClientPutInServerFn onClientPutInServer = nullptr;
     OnClientFullConnectFn onClientFullConnect = nullptr;
+    OnClientDisconnectFn onClientDisconnecting = nullptr;
     OnClientDisconnectFn onClientDisconnect = nullptr;
     OnEntityCreatedFn onEntityCreated = nullptr;
     OnEntitySpawnedFn onEntitySpawned = nullptr;

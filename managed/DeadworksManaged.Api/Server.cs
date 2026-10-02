@@ -8,6 +8,54 @@ public static unsafe class Server {
 	/// <summary>The current map name, set when the server starts up.</summary>
 	public static string MapName { get; internal set; } = "";
 
+	/// <summary>
+	/// True while the map is changing, until the next map's <see cref="IDeadworksPlugin.OnStartupServer"/>. It turns on
+	/// at <see cref="ChangeLevel"/>, or for a change started elsewhere, such as <c>changelevel</c> in the server console,
+	/// once the current map starts shutting down, which is before every player gets a disconnect event with
+	/// <see cref="ClientDisconnectedEvent.IsMapChange"/>. Anything done to players, pawns or panels meanwhile is lost with
+	/// the old map. If the change fails, such as for a map that doesn't exist, it turns off again after a few seconds.
+	/// </summary>
+	public static bool IsChangingLevel { get; private set; }
+
+	// When ChangeLevel was called, in Environment.TickCount64 ms; 0 once the map has started shutting down.
+	private static long _changeLevelRequestedAt;
+
+	// A changelevel that works shuts the current map down within a frame or two; one that fails never does.
+	private const long ChangeLevelTimeoutMs = 5000;
+
+	/// <summary>
+	/// Change to <paramref name="map"/>. Everyone connected stays connected and reloads into it; see
+	/// <see cref="ClientConnectEvent.IsMapChangeReconnect"/>. <see cref="IsChangingLevel"/> is true from this call.
+	/// </summary>
+	/// <param name="map">A map name, such as <c>dl_midtown</c>.</param>
+	/// <exception cref="ArgumentException"><paramref name="map"/> is empty or isn't a plain map name.</exception>
+	public static void ChangeLevel(string map) {
+		if (string.IsNullOrWhiteSpace(map) || map.Any(c => char.IsWhiteSpace(c) || c is ';' or '"'))
+			throw new ArgumentException($"'{map}' isn't a map name", nameof(map));
+		IsChangingLevel = true;
+		_changeLevelRequestedAt = Environment.TickCount64;
+		ExecuteCommand($"changelevel {map}");
+	}
+
+	internal static void OnMapStart(string mapName) {
+		MapName = mapName;
+		IsChangingLevel = false;
+		_changeLevelRequestedAt = 0;
+	}
+
+	internal static void OnMapShutdown() {
+		IsChangingLevel = true;
+		_changeLevelRequestedAt = 0;
+	}
+
+	internal static void OnGameFrame() {
+		if (_changeLevelRequestedAt == 0 || Environment.TickCount64 - _changeLevelRequestedAt < ChangeLevelTimeoutMs)
+			return;
+		Console.WriteLine($"[Server] changelevel didn't start within {ChangeLevelTimeoutMs} ms; staying on {MapName}");
+		IsChangingLevel = false;
+		_changeLevelRequestedAt = 0;
+	}
+
 	/// <summary>Sends a console command to the client in the given slot.</summary>
 	public static void ClientCommand(int slot, string command) {
 		Span<byte> utf8 = Utf8.Encode(command, stackalloc byte[Utf8.Size(command)]);
@@ -115,6 +163,26 @@ public static unsafe class Server {
 		if (isEmpty)
 			NativeInterop.SetEngineLogCallback(0);
 	}
+
+	/// <summary>
+	/// Connects a fake client ("bot") that occupies a real player slot but has no netchannel.
+	/// Returns its player slot, or -1 when the engine had no slot free. An unreserved Deadlock
+	/// server keeps no slots at all, so this fails until a match has been set up.
+	/// </summary>
+	public static int CreateFakeClient(string name) {
+		Span<byte> utf8 = Utf8.Encode(name, stackalloc byte[Utf8.Size(name)]);
+		fixed (byte* ptr = utf8) {
+			return NativeInterop.CreateFakeClient(ptr);
+		}
+	}
+
+	/// <summary>
+	/// Disconnects the player in <paramref name="slot"/>. They're sent back to the main menu without being told why, so
+	/// tell them first if they should know. The reason is for plugins: it's what
+	/// <see cref="IDeadworksPlugin.OnClientDisconnecting"/> and <see cref="IDeadworksPlugin.OnClientDisconnect"/> see.
+	/// </summary>
+	public static void Kick(int slot, ENetworkDisconnectionReason reason = ENetworkDisconnectionReason.NetworkDisconnectKicked)
+		=> NativeInterop.DisconnectClient(slot, (int)reason);
 
 	/// <summary>Returns true if the given parameter is present on the engine command line (e.g. "-nomaster").</summary>
 	public static bool HasCommandLineParm(string parm) {

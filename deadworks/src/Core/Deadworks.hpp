@@ -1,6 +1,8 @@
 #pragma once
 
 #include <iappsystem.h>
+#include <optional>
+#include <string>
 
 #include "../Logging/S2Logger.hpp"
 #include "../Lib/Module.hpp"
@@ -42,6 +44,7 @@ public:
     // ISource2GameClients
     void On_ISource2GameClients_ClientPutInServer(CPlayerSlot slot, const char *pszName, int type, uint64 xuid);
     bool On_ISource2GameClients_ClientConnect(CPlayerSlot slot, const char *pszName, uint64 xuid, const char *pszNetworkID, bool unk1, CBufferString *pRejectReason);
+    void OnPre_ISource2GameClients_ClientDisconnect(CPlayerSlot slot, ENetworkDisconnectionReason reason);
     void On_ISource2GameClients_ClientDisconnect(CPlayerSlot slot, ENetworkDisconnectionReason reason, const char *pszName, uint64 xuid, const char *pszNetworkID);
     // INetworkServerService
     void On_StartupServer(const char *pszMapName);
@@ -51,7 +54,7 @@ public:
     bool OnPre_CBaseEntity_TakeDamageOld(CBaseEntity *entity, CTakeDamageInfo *info, CTakeDamageResult *result);
     // CCitadelPlayerPawn
     bool OnPre_CCitadelPlayerPawn_ModifyCurrency(void *pawn, ECurrencyType nCurrencyType, int32_t nAmount,
-                                                  ECurrencySource nSource, bool bSilent, bool bForceGain, bool bSpendOnly,
+                                                  ECurrencySource nSource, int32_t bSilent, int32_t bForceGain, int32_t bSpendOnly,
                                                   void *pSourceAbility, void *pSourceEntity);
     // Game Events
     int OnPre_GameEvent(const char *eventName, void *eventPtr);
@@ -130,6 +133,8 @@ private:
     std::string m_desiredServerAddons; // value set by managed plugins via SetServerAddons
     DotNetHost m_dotnetHost;
     bool m_dotnetInitialized = false;
+    // The first map starts before .NET is up; kept so its StartupServer can be replayed to plugins.
+    std::optional<std::string> m_startupMap;
     ManagedCallbacks m_managed{};
 };
 

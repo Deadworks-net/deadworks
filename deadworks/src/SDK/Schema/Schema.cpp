@@ -121,6 +121,32 @@ int GetClassSize(const char *className) {
 
     return pClassInfo->m_nSize;
 }
+
+static bool ClassInfoDerivesFrom(SchemaClassInfoData_t *pClassInfo, std::string_view baseClassName) {
+    if (pClassInfo->m_pszName == baseClassName)
+        return true;
+    for (auto i = 0; i < pClassInfo->m_nBaseClassCount; i++) {
+        if (ClassInfoDerivesFrom(pClassInfo->m_pBaseClasses[i].m_pClass, baseClassName))
+            return true;
+    }
+    return false;
+}
+
+bool IsDerivedFrom(const char *className, const char *baseClassName) {
+    static std::map<uint64_t, bool> cache;
+
+    const auto key = (static_cast<uint64_t>(hash_32_fnv1a_const(className)) << 32) | hash_32_fnv1a_const(baseClassName);
+    if (const auto it = cache.find(key); it != cache.end())
+        return it->second;
+
+    auto *pType = g_pSchemaSystem->FindTypeScopeForModule("server.dll");
+    if (!pType) return false;
+
+    auto *pClassInfo = pType->FindDeclaredClass(className).Get();
+    const bool derives = pClassInfo && ClassInfoDerivesFrom(pClassInfo, baseClassName);
+    cache.emplace(key, derives);
+    return derives;
+}
 } // namespace schema
 
 void NetworkVarStateChanged(uintptr_t pNetworkVar, uint32_t nOffset, uint32_t nNetworkStateChangedOffset) {

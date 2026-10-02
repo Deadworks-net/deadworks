@@ -66,6 +66,30 @@ public class CommandDispatchTests
         Assert.Equal(expected, plugin.Received);
     }
 
+    /// <summary>The block result comes back immediately; the method itself runs next tick.</summary>
+    [Theory]
+    [InlineData("/stringtestcommand hello", HookResult.Handled)]
+    [InlineData("!stringtestcommand hello", HookResult.Continue)]
+    public void ChatCommandBlocksImmediatelyAndRunsNextTick(string chatText, HookResult expected)
+    {
+        Assert.True(PluginLoader.TryParseChatCommand(chatText, out var prefix, out var commandName, out var args));
+        var message = new ChatMessage { SenderSlot = -1, ChatText = chatText, AllChat = true, LaneColor = default };
+        var ctx = new ChatCommandContext(message, commandName, args, prefix);
+
+        var results = new List<HookResult>();
+        var plugin = WithRegisteredPlugin(chatRegistry =>
+        {
+            foreach (var handler in chatRegistry.Snapshot(ctx.Command) ?? [])
+                results.Add(handler(ctx));
+        });
+
+        Assert.Equal(expected, Assert.Single(results));
+        Assert.Empty(plugin.Received);
+
+        TimerEngine.OnTick();
+        Assert.Equal("hello", Assert.Single(plugin.Received));
+    }
+
     private static RecordingPlugin DispatchConsole(string command, params string[] args) =>
         WithRegisteredPlugin(_ => ConCommandManager.Dispatch(-1, command, [command, .. args]));
 
@@ -74,6 +98,7 @@ public class CommandDispatchTests
         {
             foreach (var handler in chatRegistry.Snapshot(ctx.Command) ?? [])
                 handler(ctx);
+            TimerEngine.OnTick();
         });
 
     private static RecordingPlugin WithRegisteredPlugin(

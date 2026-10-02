@@ -7,7 +7,7 @@
 /// frame; plugins don't call this directly.
 /// </summary>
 internal static class UIChannel {
-	internal enum OrderedKind { Clear, Raw, Build, Destroy, Precache, Show, LoadXml, Append, Erase }
+	internal enum OrderedKind { Clear, Raw, Build, Destroy, Precache, Show, LoadXml, Append, Erase, Cursor }
 
 	internal readonly struct OrderedOp {
 		internal readonly string PanelId;
@@ -46,6 +46,7 @@ internal static class UIChannel {
 		internal bool    Shown;     // Show was issued (Build implies it)
 		internal string? XmlPath;   // LoadXml path, mutually exclusive with Layout
 		internal bool    UsedDeltas; // Append/Erase seen — see ReplayInto
+		internal bool    Cursor;     // the panel holds a free-cursor claim
 	}
 
 	private sealed class Slot {
@@ -111,6 +112,10 @@ internal static class UIChannel {
 		// Ordered ops queued so far. Stamped onto both the ops and the pending
 		// updates so their relative order survives coalescing.
 		internal long OrderedSeq;
+
+		// Where the idle re-send of Shadow/StyleShadow picks up next, and when it last ran.
+		internal int RefreshCursor;
+		internal long LastRefreshTicks;
 	}
 
 	/// <summary>
@@ -136,11 +141,11 @@ internal static class UIChannel {
 	}
 
 	// ─── Session liveness / disconnect detection ───────────────────────────
-	// One token per server process (regenerated on full restart). The client
-	// tears its UI down if heartbeats stop (disconnect) or if the token changes
-	// (it reconnected to a different process). Stable across plugin hot reloads
+	// One token per map. The client tears its UI down if heartbeats stop
+	// (disconnect) or if the token changes, which it does on every map load
+	// (see OnMapStart) and on a full restart. Stable across plugin hot reloads
 	// because this assembly is shared and loaded once.
-	internal static readonly string SessionToken = NewSessionToken();
+	internal static string SessionToken { get; private set; } = NewSessionToken();
 	internal static int HeartbeatIntervalMs = 1000;
 	private static long _lastHeartbeatTicks;
 	private static long _heartbeatSeq;
@@ -228,6 +233,14 @@ internal static class UIChannel {
 		=> CaptionSlots * CaptionPoolUtilisation
 		   / Math.Max(0.02f, CaptionLengthSeconds + CaptionLingerSeconds);
 	internal static int BytesPerSecond = 16384;
+
+	// Captions carry no acknowledgement and live only a fraction of a second, so one the client doesn't read in time
+	// (a hitch loading a hero model is enough) is gone, and a value that doesn't change again would stay wrong on
+	// screen. While a slot has nothing else to send, its current values and styles are re-sent a few at a time, in
+	// rotation, so anything lost heals within a few seconds. Re-applying a value the client already has changes
+	// nothing.
+	private const int RefreshIntervalMs = 300;
+	private const int RefreshBatch = 12;
 	internal static int ByteBurst = 16384;
 
 	private static void PushOrdered(Slot s, string panelId, OrderedKind kind,
@@ -326,6 +339,15 @@ internal static class UIChannel {
 			var s = _slots[slot];
 			PushOrdered(s, panelId, OrderedKind.Destroy, null);
 			ForgetPanel(s, panelId);   // nothing to rebuild
+		}
+	}
+
+	internal static void EnqueueCursor(RecipientFilter to, string panelId, bool free) {
+		for (int slot = 0; slot < _slots.Length; slot++) {
+			if (!to.HasRecipient(slot)) continue;
+			var s = _slots[slot];
+			PushOrdered(s, panelId, OrderedKind.Cursor, free ? "1" : "0");
+			Snapshot(s, panelId).Cursor = free;
 		}
 	}
 
@@ -505,8 +527,41 @@ internal static class UIChannel {
 
 			// 4) Emit whatever fits this tick
 			DrainOutFrames(slot, s);
+
+			// 5) Idle: re-send a slice of the current state, to heal anything the client missed.
+			if (IsIdle(s) && now - s.LastRefreshTicks >= RefreshIntervalMs * TimeSpan.TicksPerMillisecond) {
+				s.LastRefreshTicks = now;
+				RequeueStateSlice(s);
+			}
 		}
 	}
+
+	private static bool IsIdle(Slot s) =>
+		s.Ordered.Count == 0 && s.Reliable.Count == 0 && s.Unreliable.Count == 0 && s.Styles.Count == 0
+		&& s.OutFrames.Count == 0 && !s.ShadowReplayPending && s.Tokens >= 1.0;
+
+	/// <summary>
+	/// Queue the next <see cref="RefreshBatch"/> retained values and styles, round-robin over both, to go out with
+	/// the next tick's reliable flush.
+	/// </summary>
+	private static void RequeueStateSlice(Slot s) {
+		int total = s.Shadow.Count + s.StyleShadow.Count;
+		if (total == 0) return;
+		int start = s.RefreshCursor % total;
+		int take = Math.Min(RefreshBatch, total);
+		int index = 0;
+		foreach (var (key, value) in s.Shadow) {
+			if (InSlice(index++, start, take, total)) s.Reliable[key] = new Pending(value, s.OrderedSeq);
+		}
+		foreach (var (key, value) in s.StyleShadow) {
+			if (InSlice(index++, start, take, total)) s.Styles[key] = new Pending(value, s.OrderedSeq);
+		}
+		s.RefreshCursor = (start + take) % total;
+	}
+
+	/// <summary>Whether <paramref name="index"/> falls in the <paramref name="take"/> entries from <paramref name="start"/>, wrapping at <paramref name="total"/>.</summary>
+	private static bool InSlice(int index, int start, int take, int total) =>
+		((index - start) % total + total) % total < take;
 
 	private static void BuildOrderedFrames(Slot s) {
 		while (s.Ordered.Count > 0) {
@@ -534,6 +589,7 @@ internal static class UIChannel {
 				OrderedKind.LoadXml  => UIWire.EncodeLoadXml(op.PanelId, op.Payload ?? ""),
 				OrderedKind.Append   => UIWire.EncodeAppend(op.PanelId, op.Aux ?? "", op.Payload ?? ""),
 				OrderedKind.Erase    => UIWire.EncodeErase(op.PanelId, op.Payload ?? ""),
+				OrderedKind.Cursor   => UIWire.EncodeCursor(op.PanelId, op.Payload == "1"),
 				_                    => "",
 			};
 			if (msg.Length == 0) continue;
@@ -742,6 +798,9 @@ internal static class UIChannel {
 		}
 	}
 
+	/// <summary>Whether the client at <paramref name="slot"/> has answered this session's hello.</summary>
+	internal static bool IsAcked(int slot) => slot >= 0 && slot < _slots.Length && _slots[slot].Acked;
+
 	/// <summary>Panel ids the client at <paramref name="slot"/> supplies its own layout for.</summary>
 	internal static IReadOnlyCollection<string> ClientPanels(int slot)
 		=> (slot < 0 || slot >= _slots.Length) ? Array.Empty<string>() : _slots[slot].ClientPanels;
@@ -836,6 +895,8 @@ internal static class UIChannel {
 				PushOrdered(s, panelId, OrderedKind.Precache, snap.Layout);
 				if (snap.Shown) PushOrdered(s, panelId, OrderedKind.Show, null);
 			}
+			// The client dropped its claims along with its panels.
+			if (snap.Cursor) PushOrdered(s, panelId, OrderedKind.Cursor, "1");
 			if (snap.UsedDeltas) {
 				Console.WriteLine($"[UI] panel '{panelId}' uses Append/Erase — resync restores its base layout only");
 			}
@@ -853,7 +914,23 @@ internal static class UIChannel {
 
 	internal static void OnPlayerDisconnect(int slot) {
 		if (slot < 0 || slot >= _slots.Length) return;
-		var s = _slots[slot];
+		Reset(_slots[slot]);
+	}
+
+	/// <summary>
+	/// A new map is starting: forget every panel sent on the old one. Players stay
+	/// connected through a map change, so otherwise their game would get the old
+	/// panels back when it rebuilds its UI after the load, with no plugin tracking
+	/// them any more to close them. The new token also clears any client whose UI
+	/// survived the load.
+	/// </summary>
+	internal static void OnMapStart() {
+		SessionToken = NewSessionToken();
+		foreach (var s in _slots)
+			Reset(s);
+	}
+
+	private static void Reset(Slot s) {
 		s.Reliable.Clear();
 		s.Unreliable.Clear();
 		s.Styles.Clear();
@@ -862,6 +939,7 @@ internal static class UIChannel {
 		s.Panels.Clear();
 		s.Shadow.Clear();
 		s.StyleShadow.Clear();
+		s.ShadowReplayPending = false;
 		s.ClientPanels.Clear();
 		s.Addons.Clear();
 		s.Tokens = 0;

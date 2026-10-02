@@ -22,20 +22,24 @@ struct CEntityIOOutput {
 
 // Original signature: bool CEntityInstance::AcceptInput(
 //     const char* pInputName, CEntityInstance* pActivator, CEntityInstance* pCaller,
-//     variant_t* pValue, int nOutputID, void* unk)
+//     variant_t* pValue)
+// Since 6711 the output ID / unk arguments are gone; the wrapper builds the new input
+// parameter objects itself before calling CEntityIdentity::AcceptInput.
 inline safetyhook::InlineHook g_CEntityInstance_AcceptInput;
 bool __fastcall Hook_CEntityInstance_AcceptInput(CEntityInstance *thisptr, const char *inputName,
                                                  CEntityInstance *activator, CEntityInstance *caller,
-                                                 void *variantValue, int outputID, void *unk);
+                                                 void *variantValue);
 
 // Original signature: void CEntityIOOutput::FireOutputInternal(
 //     CEntityInstance* pActivator, CEntityInstance* pCaller,
-//     const CVariant* value, float flDelay, void* unk1, void* unk2)
+//     const void* pParams, float flDelay, void* unk, const CVariant* pValue)
+// Since 6711 the fourth argument is the new output parameter container, not a CVariant.
+// The CVariant moved to the last argument and is only passed by some callers (null otherwise).
 inline safetyhook::InlineHook g_CEntityIOOutput_FireOutputInternal;
 void __fastcall Hook_CEntityIOOutput_FireOutputInternal(CEntityIOOutput *pThis,
                                                         CEntityInstance *pActivator, CEntityInstance *pCaller,
-                                                        const void *pValue, float delay,
-                                                        void *unk1, void *unk2);
+                                                        const void *pParams, float delay,
+                                                        void *unk, const void *pValue);
 
 } // namespace hooks
 } // namespace deadworks

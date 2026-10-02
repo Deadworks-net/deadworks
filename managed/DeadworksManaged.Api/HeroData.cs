@@ -27,6 +27,34 @@ public unsafe class CitadelHeroData {
 	private static readonly SchemaAccessor<nint> _searchName = new(Class, "m_strHeroSearchName"u8);
 	public string? SearchName => ReadCUtlString(_searchName);
 
+	// CPanoramaImageName is 16 bytes laid out like a CBufferString: int32 length and int32 capacity, both with flags
+	// in their top two bits, then the characters inline (capacity has 0x40000000) or a pointer to them.
+	private string? ReadPanoramaImageName(SchemaAccessor<byte> accessor) {
+		var address = accessor.GetAddress(Pointer);
+		int length = *(int*)address & 0x3FFFFFFF;
+		int capacity = *(int*)(address + 4);
+		if (length == 0 || length > 1024) return null;
+		if ((capacity & 0x40000000) != 0) return Marshal.PtrToStringUTF8(address + 8, length);
+		var chars = *(nint*)(address + 8);
+		return chars == 0 ? null : Marshal.PtrToStringUTF8(chars, length);
+	}
+
+	private static readonly SchemaAccessor<byte> _iconImageSmall = new(Class, "m_strIconImageSmall"u8);
+	/// <summary>The small square portrait, as an image source for <see cref="UI.UI.Image"/>, e.g. <c>file://{images}/heroes/bull_sm.psd</c>.</summary>
+	public string? IconImageSmall => ReadPanoramaImageName(_iconImageSmall);
+
+	private static readonly SchemaAccessor<byte> _iconHeroCard = new(Class, "m_strIconHeroCard"u8);
+	/// <summary>The tall hero card art, as an image source for <see cref="UI.UI.Image"/>.</summary>
+	public string? IconHeroCard => ReadPanoramaImageName(_iconHeroCard);
+
+	private static readonly SchemaAccessor<byte> _topBarVertical = new(Class, "m_strTopBarVertical"u8);
+	/// <summary>The narrow portrait from the HUD's top bar, as an image source for <see cref="UI.UI.Image"/>.</summary>
+	public string? TopBarVertical => ReadPanoramaImageName(_topBarVertical);
+
+	private static readonly SchemaAccessor<byte> _minimapImage = new(Class, "m_strMinimapImage"u8);
+	/// <summary>The minimap icon, as an image source for <see cref="UI.UI.Image"/>.</summary>
+	public string? MinimapImage => ReadPanoramaImageName(_minimapImage);
+
 	private static readonly SchemaAccessor<uint> _colorUI = new(Class, "m_colorUI"u8);
 	public byte ColorR => (byte)(_colorUI.Get(Pointer) & 0xFF);
 	public byte ColorG => (byte)((_colorUI.Get(Pointer) >> 8) & 0xFF);

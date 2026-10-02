@@ -38,4 +38,15 @@ public unsafe class CBasePlayerPawn : CBaseEntity {
 
 	/// <inheritdoc cref="CPlayer_ObserverServices.IsValidObserverTarget"/>
 	public bool IsValidObserverTarget(CBaseEntity? target) => ObserverServices?.IsValidObserverTarget(target) ?? false;
+
+	/// <summary>
+	/// Respawns this pawn immediately, the same way the <c>respawn</c> cheat command does.
+	/// It behaves like a normal respawn, including firing the <c>player_respawned</c> event.
+	/// </summary>
+	/// <param name="releaseButtons">Release any buttons the player is holding, so they don't keep moving or
+	/// shooting after the respawn.</param>
+	public void ForceRespawn(bool releaseButtons = true) {
+		if (NativeInterop.ForceRespawn != null)
+			NativeInterop.ForceRespawn((void*)Handle, releaseButtons ? (byte)1 : (byte)0);
+	}
 }

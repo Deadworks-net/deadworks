@@ -15,7 +15,10 @@
 #include "Hooks/BuildGameSessionManifest.hpp"
 #include "Hooks/ChangeGameState.hpp"
 #include "Hooks/AreAllLobbyPlayersConnected.hpp"
+#include "Hooks/GetPlayerStartLane.hpp"
+#include "Hooks/MatchMapOverride.hpp"
 #include "Hooks/CCitadelPlayerController.hpp"
+#include "Hooks/CBasePlayerController.hpp"
 #include "Hooks/EntityIO.hpp"
 #include "Hooks/TraceShape.hpp"
 #include "Hooks/ProcessUsercmds.hpp"
@@ -25,6 +28,7 @@
 #include "Hooks/CheckTransmit.hpp"
 #include "Hooks/InitializeHeroOnPawn.hpp"
 #include "Hooks/FireModifierEvent.hpp"
+#include "Hooks/ReplayComplete.hpp"
 #include "A2SPatch.hpp"
 
 #include "../Memory/MemoryDataLoader.hpp"
@@ -188,9 +192,15 @@ void Deadworks::PostInit() {
     HookInline(hooks::g_CCitadelPlayerPawn_ModifyCurrency,
                "CCitadelPlayerPawn::ModifyCurrency",
                &hooks::Hook_CCitadelPlayerPawn_ModifyCurrency);
+    HookInline(hooks::g_CCitadelPlayerPawn_SelectHeroInternal,
+               "CCitadelPlayerPawn::SelectHeroInternal",
+               &hooks::Hook_CCitadelPlayerPawn_SelectHeroInternal);
     HookInline(hooks::g_CCitadelPlayerController_ClientConCommand,
                "CCitadelPlayerController::ClientConCommand",
                &hooks::Hook_CCitadelPlayerController_ClientConCommand);
+    HookInline(hooks::g_CBasePlayerController_SetPawn,
+               "CBasePlayerController::SetPawn",
+               &hooks::Hook_CBasePlayerController_SetPawn);
 
     // Resolve IGameEventManager2 from a known xref
     {
@@ -235,9 +245,25 @@ void Deadworks::PostInit() {
     HookInline(hooks::g_AreAllLobbyPlayersConnected,
                "AreAllLobbyPlayersConnected",
                &hooks::Hook_AreAllLobbyPlayersConnected);
+    HookInline(hooks::g_GetPlayerStartLane,
+               "CCitadelGameRules::GetPlayerStartLane",
+               &hooks::Hook_GetPlayerStartLane);
+    HookInline(hooks::g_UsesMatchFlow,
+               "CCitadelGameRules::UsesMatchFlow",
+               &hooks::Hook_UsesMatchFlow);
+    HookInline(hooks::g_StartPlayersInLanes,
+               "CCitadelGameRules::StartPlayersInLanes",
+               &hooks::Hook_StartPlayersInLanes);
     HookInline(hooks::g_TraceShape,
                "TraceShape",
                &hooks::Hook_TraceShape);
+    {
+        // The signature is a call to it; the target is its rel32.
+        auto call = MemoryDataLoader::Get().GetOffset("CCitadelGameRules::IsReplayComplete").value();
+        auto target = call + 5 + *reinterpret_cast<int32_t *>(call + 1);
+        hooks::g_IsReplayComplete = safetyhook::create_inline(target, &hooks::Hook_IsReplayComplete);
+        g_Log->Info("Hooked CCitadelGameRules::IsReplayComplete");
+    }
 
     // Touch hooks (StartTouch / EndTouch) are initialized lazily in OnEntityCreated
     // because we need an entity vtable to resolve the virtual function addresses.
@@ -275,11 +301,15 @@ void Deadworks::On_ISource2Server_ApplyGameSettings() {
     if (!m_dotnetInitialized) {
         m_dotnetInitialized = true;
         InitializeManagedCallbacks(m_dotnetHost, m_managed);
+        // A map given on the command line starts before this point, so plugins never saw its StartupServer.
+        if (m_startupMap && m_managed.onStartupServer)
+            m_managed.onStartupServer(m_startupMap->c_str());
     }
 }
 
 void Deadworks::On_StartupServer(const char *pszMapName) {
     g_Log->Info("StartupServer (map: {})", pszMapName ? pszMapName : "");
+    m_startupMap = pszMapName ? pszMapName : "";
 
     // Register entity listener
     GameEntitySystem()->AddListenerEntity(&g_EntityListener);
@@ -334,7 +364,7 @@ bool Deadworks::OnPre_CBaseEntity_TakeDamageOld(CBaseEntity *entity, CTakeDamage
 }
 
 bool Deadworks::OnPre_CCitadelPlayerPawn_ModifyCurrency(void *pawn, ECurrencyType nCurrencyType, int32_t nAmount,
-                                                        ECurrencySource nSource, bool bSilent, bool bForceGain, bool bSpendOnly,
+                                                        ECurrencySource nSource, int32_t bSilent, int32_t bForceGain, int32_t bSpendOnly,
                                                         void *pSourceAbility, void *pSourceEntity) {
     if (m_managed.onModifyCurrency)
         return m_managed.onModifyCurrency(pawn, static_cast<uint32_t>(nCurrencyType), nAmount,
@@ -470,17 +500,20 @@ bool Deadworks::ShouldAllowGameStateChange(int currentState, int newState) {
 }
 
 void Deadworks::On_ISource2Server_GameFrame(bool simulating, bool bFirstTick, bool bLastTick) {
-    // Poll for fully-connected transitions
+    // Poll for fully-connected transitions. A slot re-arms whenever its client isn't in game, so every arrival is
+    // reported however the slot was emptied or filled (map changes, fake clients), not only via ClientConnect.
     if (m_managed.onClientFullConnect) {
         auto *server = g_pNetworkServerService->GetIGameServer();
         for (int i = 0; i < 64; ++i) {
+            auto *client = server->GetClientBySlot(CPlayerSlot(i));
+            if (!client || !client->IsInGame()) {
+                m_clientFullyConnected[i] = false;
+                continue;
+            }
             if (m_clientFullyConnected[i])
                 continue;
-            auto *client = server->GetClientBySlot(CPlayerSlot(i));
-            if (client && client->IsInGame()) {
-                m_clientFullyConnected[i] = true;
-                m_managed.onClientFullConnect(i);
-            }
+            m_clientFullyConnected[i] = true;
+            m_managed.onClientFullConnect(i);
         }
     }
 
@@ -533,6 +566,11 @@ bool Deadworks::On_ISource2GameClients_ClientConnect(CPlayerSlot slot, const cha
     }
 
     return true;
+}
+
+void Deadworks::OnPre_ISource2GameClients_ClientDisconnect(CPlayerSlot slot, ENetworkDisconnectionReason reason) {
+    if (m_managed.onClientDisconnecting)
+        m_managed.onClientDisconnecting(slot.Get(), static_cast<int>(reason));
 }
 
 void Deadworks::On_ISource2GameClients_ClientDisconnect(CPlayerSlot slot, ENetworkDisconnectionReason reason, const char *pszName, uint64 xuid, const char *pszNetworkID) {

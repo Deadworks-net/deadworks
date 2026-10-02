@@ -28,6 +28,7 @@ public static unsafe class GameRules
 	private static readonly SchemaAccessor<float> _matchClockAtLastUpdate = new("CCitadelGameRules"u8, "m_flMatchClockAtLastUpdate"u8);
 	private static readonly SchemaAccessor<ulong> _matchID = new("CCitadelGameRules"u8, "m_unMatchID"u8);
 	private static readonly SchemaAccessor<byte> _serverPaused = new("CCitadelGameRules"u8, "m_bServerPaused"u8);
+	private static readonly SchemaAccessor<int> _winningTeam = new("CCitadelGameRules"u8, "m_iWinningTeam"u8);
 
 	// CGameRules fields
 	private static readonly SchemaAccessor<byte> _gamePaused = new("CGameRules"u8, "m_bGamePaused"u8);
@@ -57,6 +58,29 @@ public static unsafe class GameRules
 	public static float MatchClockAtLastUpdate => _gameRulesPtr != 0 ? _matchClockAtLastUpdate.Get(_gameRulesPtr) : 0f;
 	public static ulong MatchID => _gameRulesPtr != 0 ? _matchID.Get(_gameRulesPtr) : 0;
 	public static bool ServerPaused => _gameRulesPtr != 0 && _serverPaused.Get(_gameRulesPtr) != 0;
+
+	/// <summary>
+	/// The team that won the match, or -1 while it's still being played. Set it to end the match with that team as the
+	/// winner; the enemy Patron is left standing.
+	/// </summary>
+	public static int WinningTeam {
+		get => _gameRulesPtr != 0 ? _winningTeam.Get(_gameRulesPtr) : -1;
+		set { if (_gameRulesPtr != 0) _winningTeam.Set(_gameRulesPtr, value); }
+	}
+
+	/// <summary>
+	/// Gives every map the match start dl_midtown has: a countdown in base, then everyone launched down their lane's
+	/// zipline (choose lanes with <see cref="CCitadelPlayerController.AssignedLane"/>). Off by default, when only
+	/// dl_midtown starts that way and any other map goes straight into the match with everyone in base.
+	/// </summary>
+	/// <remarks>
+	/// On a server without a matchmaking lobby the countdown also needs <c>citadel_match_intro_force_enabled 1</c>, the
+	/// same as on dl_midtown. The setting lasts across map changes, so turn it off again when your plugin unloads.
+	/// </remarks>
+	public static bool MatchStartOnAnyMap {
+		get => NativeInterop.GetMatchStartOnAnyMap() != 0;
+		set => NativeInterop.SetMatchStartOnAnyMap(value ? (byte)1 : (byte)0);
+	}
 
 	/// <summary>Calls the real CCitadelGameRules::ChangeGameState, running the engine's normal transition logic.</summary>
 	public static void ChangeGameState(EGameState state)
@@ -148,5 +172,7 @@ public static unsafe class GameRules
 		Console.WriteLine("[GameRules] CCitadelGameRules entity destroyed");
 		_proxyPtr = 0;
 		_gameRulesPtr = 0;
+		// Only the map shutting down takes the game rules with it.
+		Server.OnMapShutdown();
 	}
 }

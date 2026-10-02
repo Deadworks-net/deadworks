@@ -137,42 +137,18 @@ done
 echo "=== Compiling deadworks sources ==="
 PROJECT_FLAGS=("${CXX23_FLAGS[@]}" "/FI${SRC}/pch.hpp" "/I${SRC}")
 
-for f in \
-    ${SRC}/startup.cpp \
-    ${SRC}/Hosting/DotNetHost.cpp \
-    ${SRC}/Core/Hooks/CoreHooks.cpp \
-    ${SRC}/Core/Hooks/CBaseEntity.cpp \
-    ${SRC}/Core/Hooks/CCitadelPlayerPawn.cpp \
-    ${SRC}/Core/Hooks/CCitadelPlayerController.cpp \
-    ${SRC}/Core/Hooks/GameEvents.cpp \
-    ${SRC}/Core/Hooks/CServerSideClientBase.cpp \
-    ${SRC}/Core/Hooks/ReplyConnection.cpp \
-    ${SRC}/Core/Hooks/PostEventAbstract.cpp \
-    ${SRC}/Core/Hooks/NetworkServerService.cpp \
-    ${SRC}/Core/Hooks/Source2GameClients.cpp \
-    ${SRC}/Core/Hooks/Source2Server.cpp \
-    ${SRC}/Core/Hooks/TraceShape.cpp \
-    ${SRC}/Core/Hooks/EntityIO.cpp \
-    ${SRC}/Core/Hooks/ProcessUsercmds.cpp \
-    ${SRC}/Core/Hooks/AbilityThink.cpp \
-    ${SRC}/Core/Hooks/AddModifier.cpp \
-    ${SRC}/Core/Hooks/BuildGameSessionManifest.cpp \
-    ${SRC}/Core/Hooks/CheckTransmit.cpp \
-    ${SRC}/Core/Hooks/InitializeHeroOnPawn.cpp \
-    ${SRC}/Core/Hooks/FireModifierEvent.cpp \
-    ${SRC}/Core/Hooks/ChangeGameState.cpp \
-    ${SRC}/Core/Hooks/AreAllLobbyPlayersConnected.cpp \
-    ${SRC}/Core/A2SPatch.cpp \
-    ${SRC}/Core/Deadworks.cpp \
-    ${SRC}/Core/NativeCallbacks.cpp \
-    ${SRC}/Core/NativeAbility.cpp \
-    ${SRC}/Core/NativeDamage.cpp \
-    ${SRC}/Core/NativeHero.cpp \
-    ${SRC}/Core/ManagedCallbacks.cpp \
-    ${SRC}/Memory/MemoryDataLoader.cpp \
-    ${SRC}/Memory/Scanner.cpp \
-    ${SRC}/SDK/Interfaces.cpp \
-    ${SRC}/SDK/Schema/Schema.cpp; do
+# The vcxproj is the source list; keeping a second list here misses new upstream hooks.
+mapfile -t source_files < <(python3 - <<'PY'
+import xml.etree.ElementTree as ET
+root = ET.parse("deadworks/deadworks.vcxproj").getroot()
+for node in root.iter("{http://schemas.microsoft.com/developer/msbuild/2003}ClCompile"):
+    path = node.attrib.get("Include", "").replace("\\", "/")
+    if path.startswith("src/") and path != "src/pch.cpp":
+        print("deadworks/" + path)
+PY
+)
+test ${#source_files[@]} -gt 0
+for f in "${source_files[@]}"; do
     name=$(basename "$f" .cpp)
     echo "  $name.cpp"
     clang-cl "${PROJECT_FLAGS[@]}" /c "$f" "/Fo${OBJ}/${name}.obj"

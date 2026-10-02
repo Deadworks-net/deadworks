@@ -59,6 +59,7 @@ void deadworks::InitializeManagedCallbacks(DotNetHost &host, ManagedCallbacks &m
     BindCallback(host, assemblyPath, managed.onClientConnect, L"OnClientConnect");
     BindCallback(host, assemblyPath, managed.onClientPutInServer, L"OnClientPutInServer");
     BindCallback(host, assemblyPath, managed.onClientFullConnect, L"OnClientFullConnect");
+    BindCallback(host, assemblyPath, managed.onClientDisconnecting, L"OnClientDisconnecting");
     BindCallback(host, assemblyPath, managed.onClientDisconnect, L"OnClientDisconnect");
     BindCallback(host, assemblyPath, managed.onEntityCreated, L"OnEntityCreated");
     BindCallback(host, assemblyPath, managed.onEntitySpawned, L"OnEntitySpawned");

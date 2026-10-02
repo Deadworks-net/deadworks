@@ -32,6 +32,7 @@ internal static unsafe class NativeInterop
 	public static delegate* unmanaged[Cdecl]<void*, byte*, uint> GameEventGetEHandle => (delegate* unmanaged[Cdecl]<void*, byte*, uint>)_cb.GameEventGetEHandle;
 	/// <summary>Last parameter is NetChannelBufType_t: 0 = BUF_UNRELIABLE, 1 = BUF_RELIABLE.</summary>
 	public static delegate* unmanaged[Cdecl]<int, byte*, int, ulong, int, void> SendNetMessage => (delegate* unmanaged[Cdecl]<int, byte*, int, ulong, int, void>)_cb.SendNetMessage;
+	public static delegate* unmanaged[Cdecl]<int, byte*> GetNetMessageName => (delegate* unmanaged[Cdecl]<int, byte*>)_cb.GetNetMessageName;
 	public static delegate* unmanaged[Cdecl]<int, byte*, void> ClientCommand => (delegate* unmanaged[Cdecl]<int, byte*, void>)_cb.ClientCommand;
 	public static delegate* unmanaged[Cdecl]<void*, void> RemoveEntity => (delegate* unmanaged[Cdecl]<void*, void>)_cb.RemoveEntity;
 	public static delegate* unmanaged[Cdecl]<void*, void*, byte, byte, byte, byte, void> SetPawn => (delegate* unmanaged[Cdecl]<void*, void*, byte, byte, byte, byte, void>)_cb.SetPawn;
@@ -84,6 +85,7 @@ internal static unsafe class NativeInterop
 	public static delegate* unmanaged[Cdecl]<void*, void*, void*, float, int, void*> CreateDamageInfo => (delegate* unmanaged[Cdecl]<void*, void*, void*, float, int, void*>)_cb.CreateDamageInfo;
 	public static delegate* unmanaged[Cdecl]<void*, void> DestroyDamageInfo => (delegate* unmanaged[Cdecl]<void*, void>)_cb.DestroyDamageInfo;
 	public static delegate* unmanaged[Cdecl]<void*, void*, void> TakeDamage => (delegate* unmanaged[Cdecl]<void*, void*, void>)_cb.TakeDamage;
+	public static delegate* unmanaged[Cdecl]<void*, void*, void> ApplyDamage => (delegate* unmanaged[Cdecl]<void*, void*, void>)_cb.ApplyDamage;
 	public static delegate* unmanaged[Cdecl]<byte*, void> PrecacheHero => (delegate* unmanaged[Cdecl]<byte*, void>)_cb.PrecacheHero;
 	public static delegate* unmanaged[Cdecl]<byte*, byte*, ulong, void> RegisterConCommand => (delegate* unmanaged[Cdecl]<byte*, byte*, ulong, void>)_cb.RegisterConCommand;
 	public static delegate* unmanaged[Cdecl]<byte*, void> UnregisterConCommand => (delegate* unmanaged[Cdecl]<byte*, void>)_cb.UnregisterConCommand;
@@ -106,11 +108,15 @@ internal static unsafe class NativeInterop
 	public static delegate* unmanaged[Cdecl]<void*> GetGlobalVars => (delegate* unmanaged[Cdecl]<void*>)_cb.GetGlobalVars;
 	public static delegate* unmanaged[Cdecl]<nint, void> SetEngineLogCallback => (delegate* unmanaged[Cdecl]<nint, void>)_cb.SetEngineLogCallback;
 	public static delegate* unmanaged[Cdecl]<void*, int, void> SetUpgradeBits => (delegate* unmanaged[Cdecl]<void*, int, void>)_cb.SetUpgradeBits;
+	public static delegate* unmanaged[Cdecl]<void*, void> ResetAbilityCooldown => (delegate* unmanaged[Cdecl]<void*, void>)_cb.ResetAbilityCooldown;
+	public static delegate* unmanaged[Cdecl]<void*, int> GetAbilityMaxCharges => (delegate* unmanaged[Cdecl]<void*, int>)_cb.GetAbilityMaxCharges;
 	public static delegate* unmanaged[Cdecl]<byte*, void> SetServerAddons => (delegate* unmanaged[Cdecl]<byte*, void>)_cb.SetServerAddons;
 	public static delegate* unmanaged[Cdecl]<byte*, byte*, int, byte> AddFileSystemSearchPath => (delegate* unmanaged[Cdecl]<byte*, byte*, int, byte>)_cb.AddFileSystemSearchPath;
 	public static delegate* unmanaged[Cdecl]<ulong, int> GetConVarInt => (delegate* unmanaged[Cdecl]<ulong, int>)_cb.GetConVarInt;
 	public static delegate* unmanaged[Cdecl]<ulong, float> GetConVarFloat => (delegate* unmanaged[Cdecl]<ulong, float>)_cb.GetConVarFloat;
 	public static delegate* unmanaged[Cdecl]<ulong, byte*> GetConVarString => (delegate* unmanaged[Cdecl]<ulong, byte*>)_cb.GetConVarString;
+	public static delegate* unmanaged[Cdecl]<ulong, byte*, byte> SetConVarString => (delegate* unmanaged[Cdecl]<ulong, byte*, byte>)_cb.SetConVarString;
+	public static delegate* unmanaged[Cdecl]<ulong, byte> GetConVarBool => (delegate* unmanaged[Cdecl]<ulong, byte>)_cb.GetConVarBool;
 	public static delegate* unmanaged[Cdecl]<byte*, byte> HasCommandLineParm => (delegate* unmanaged[Cdecl]<byte*, byte>)_cb.HasCommandLineParm;
 	public static delegate* unmanaged[Cdecl]<void*, byte*, byte*, void> EKVSetStringToken => (delegate* unmanaged[Cdecl]<void*, byte*, byte*, void>)_cb.EKVSetStringToken;
 	public static delegate* unmanaged[Cdecl]<byte*, uint*, byte*> ResolveDesignerName => (delegate* unmanaged[Cdecl]<byte*, uint*, byte*>)_cb.ResolveDesignerName;
@@ -139,4 +145,27 @@ internal static unsafe class NativeInterop
 	// Game state
 	public static delegate* unmanaged[Cdecl]<void*, int, void> ChangeGameState => (delegate* unmanaged[Cdecl]<void*, int, void>)_cb.ChangeGameState;
 	public static delegate* unmanaged[Cdecl]<uint, uint, void> SetWaitingForPlayersRoster => (delegate* unmanaged[Cdecl]<uint, uint, void>)_cb.SetWaitingForPlayersRoster;
+
+	// Pawn force-respawn
+	public static delegate* unmanaged[Cdecl]<void*, byte, void> ForceRespawn => (delegate* unmanaged[Cdecl]<void*, byte, void>)_cb.ForceRespawn;
+
+	// Fake clients
+	public static delegate* unmanaged[Cdecl]<byte*, int> CreateFakeClient => (delegate* unmanaged[Cdecl]<byte*, int>)_cb.CreateFakeClient;
+	public static delegate* unmanaged[Cdecl]<int, int, void> DisconnectClient => (delegate* unmanaged[Cdecl]<int, int, void>)_cb.DisconnectClient;
+	public static delegate* unmanaged[Cdecl]<byte, void> SetMatchStartOnAnyMap => (delegate* unmanaged[Cdecl]<byte, void>)_cb.SetMatchStartOnAnyMap;
+	public static delegate* unmanaged[Cdecl]<byte> GetMatchStartOnAnyMap => (delegate* unmanaged[Cdecl]<byte>)_cb.GetMatchStartOnAnyMap;
+
+	// Entity movement and class checks
+	public static delegate* unmanaged[Cdecl]<void*, byte, void> SetMoveType => (delegate* unmanaged[Cdecl]<void*, byte, void>)_cb.SetMoveType;
+	public static delegate* unmanaged[Cdecl]<void*, float, void> SetGravityScale => (delegate* unmanaged[Cdecl]<void*, float, void>)_cb.SetGravityScale;
+	public static delegate* unmanaged[Cdecl]<void*, byte*, byte> EntityDerivesFrom => (delegate* unmanaged[Cdecl]<void*, byte*, byte>)_cb.EntityDerivesFrom;
+
+	// Collision. The byte after the collision pointer picks the mask: 0 = InteractsAs, 1 = InteractsWith, 2 = InteractsExclude.
+	public static delegate* unmanaged[Cdecl]<void*, byte, ulong, void> AddCollisionLayers => (delegate* unmanaged[Cdecl]<void*, byte, ulong, void>)_cb.AddCollisionLayers;
+	public static delegate* unmanaged[Cdecl]<void*, byte, ulong, void> RemoveCollisionLayers => (delegate* unmanaged[Cdecl]<void*, byte, ulong, void>)_cb.RemoveCollisionLayers;
+	public static delegate* unmanaged[Cdecl]<void*, byte, void> SetCollisionGroup => (delegate* unmanaged[Cdecl]<void*, byte, void>)_cb.SetCollisionGroup;
+	public static delegate* unmanaged[Cdecl]<void*, byte, void> SetSolid => (delegate* unmanaged[Cdecl]<void*, byte, void>)_cb.SetSolid;
+	public static delegate* unmanaged[Cdecl]<void*, byte, void> SetSolidFlags => (delegate* unmanaged[Cdecl]<void*, byte, void>)_cb.SetSolidFlags;
+	public static delegate* unmanaged[Cdecl]<void*, byte, void> SetCollisionEnabled => (delegate* unmanaged[Cdecl]<void*, byte, void>)_cb.SetCollisionEnabled;
+	public static delegate* unmanaged[Cdecl]<void*, void*, byte, void> SetEntityCollisionsWith => (delegate* unmanaged[Cdecl]<void*, void*, byte, void>)_cb.SetEntityCollisionsWith;
 }

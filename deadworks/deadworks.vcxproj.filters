@@ -66,6 +66,9 @@
     <ClCompile Include="..\protobuf\source2_steam_stats.pb.cc">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="..\protobuf\valveextensions.pb.cc">
+      <Filter>Source Files</Filter>
+    </ClCompile>
     <ClCompile Include="src\Memory\Scanner.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
@@ -102,6 +105,9 @@
     <ClCompile Include="src\Core\Hooks\CCitadelPlayerController.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="src\Core\Hooks\CBasePlayerController.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
     <ClCompile Include="src\Core\Hooks\TraceShape.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
@@ -120,6 +126,9 @@
     <ClCompile Include="src\Core\NativeAbility.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="src\Core\NativeCollision.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
     <ClCompile Include="src\Core\NativeDamage.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
@@ -136,6 +145,15 @@
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="src\Core\Hooks\AreAllLobbyPlayersConnected.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="src\Core\Hooks\GetPlayerStartLane.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="src\Core\Hooks\MatchMapOverride.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="src\Core\Hooks\ReplayComplete.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="src\Memory\MemoryDataLoader.cpp">
@@ -230,6 +248,9 @@
     <ClInclude Include="..\protobuf\source2_steam_stats.pb.h">
       <Filter>Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="..\protobuf\valveextensions.pb.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
     <ClInclude Include="src\SDK\Core.hpp">
       <Filter>Header Files</Filter>
     </ClInclude>
@@ -281,6 +302,9 @@
     <ClInclude Include="src\Core\Hooks\CCitadelPlayerController.hpp">
       <Filter>Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="src\Core\Hooks\CBasePlayerController.hpp">
+      <Filter>Header Files</Filter>
+    </ClInclude>
     <ClInclude Include="src\Core\Hooks\BuildGameSessionManifest.hpp">
       <Filter>Header Files</Filter>
     </ClInclude>
@@ -288,6 +312,15 @@
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="src\Core\Hooks\AreAllLobbyPlayersConnected.hpp">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="src\Core\Hooks\GetPlayerStartLane.hpp">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="src\Core\Hooks\MatchMapOverride.hpp">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="src\Core\Hooks\ReplayComplete.hpp">
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="src\SDK\CEntitySystem.hpp">
@@ -312,6 +345,9 @@
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="src\Core\NativeAbility.hpp">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="src\Core\NativeCollision.hpp">
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="src\Core\NativeDamage.hpp">

@@ -15,6 +15,7 @@ internal static class TimerRegistry
     public static void Initialize()
     {
         TimerResolver.Resolve = Get;
+        TimerResolver.NextTick = TimerEngine.EnqueueNextTick;
     }
 
     public static void Register(IDeadworksPlugin plugin, TimerService service)

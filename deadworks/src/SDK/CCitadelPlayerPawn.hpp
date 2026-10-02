@@ -13,15 +13,17 @@ public:
     SCHEMA_FIELD_POINTER(CCitadelAbilityComponent, m_CCitadelAbilityComponent);
 
     void ModifyCurrency(ECurrencyType nCurrencyType, int32_t nAmount, ECurrencySource nSource, bool bSilent, bool bForceGain, bool bSpendOnly, void *pSourceAbility, void *pSourceEntity) {
-        static const auto fn = reinterpret_cast<void(__fastcall *)(void *, ECurrencyType, int32_t, ECurrencySource, bool, bool, bool, void *, void *)>(
+        static const auto fn = reinterpret_cast<void(__fastcall *)(void *, ECurrencyType, int32_t, ECurrencySource, int32_t, int32_t, int32_t, void *, void *)>(
             deadworks::MemoryDataLoader::Get().GetOffset("CCitadelPlayerPawn::ModifyCurrency").value());
         fn(this, nCurrencyType, nAmount, nSource, bSilent, bForceGain, bSpendOnly, pSourceAbility, pSourceEntity);
     }
 
-    void *AddItem(const char *pszItemName, int nInitialUpgradeBits, int nHeroBonusContext) {
-        static const auto fn = reinterpret_cast<void *(__fastcall *)(void *, const char *, int, int)>(
+    // Since 6711 the last two arguments go straight to CreateAndRegisterAbility: the 64-bit upgrade value
+    // (low word = upgrade bits) and the optional extra spawn keyvalues, which must be null or valid.
+    void *AddItem(const char *pszItemName, uint16_t nInitialUpgradeBits) {
+        static const auto fn = reinterpret_cast<void *(__fastcall *)(void *, const char *, uint64_t, void *)>(
             deadworks::MemoryDataLoader::Get().GetOffset("CCitadelPlayerPawn::AddItem").value());
-        return fn(this, pszItemName, nInitialUpgradeBits, nHeroBonusContext);
+        return fn(this, pszItemName, nInitialUpgradeBits, nullptr);
     }
 
     uint8_t SellItem(const char *itemName, uint8_t bFullRefund = 0, uint8_t bForceSellPrice = 0) {

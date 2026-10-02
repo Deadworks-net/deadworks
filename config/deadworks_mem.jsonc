@@ -30,11 +30,87 @@
 		},
 		"CCitadelPlayerPawn::ModifyCurrency": {
 			"library": "server.dll",
-			"windows": "48 89 5C 24 ?? 55 41 54 41 55 41 56 41 57 48 8D AC 24"
+			"windows": "48 89 5C 24 ?? 48 89 7C 24 ?? 55 41 54 41 55 41 56 41 57 48 8D 6C 24"
 		},
 		"CBaseEntity::TakeDamageOld": {
 			"library": "server.dll",
-			"windows": "40 55 41 54 41 55 41 56 41 57 48 81 EC ?? ?? ?? ?? 48 8D 6C 24 ?? 48 89 9D ?? ?? ?? ?? 45 33 ED"
+			"windows": "40 55 53 56 57 48 8D AC 24 ?? ?? ?? ?? 48 81 EC ?? ?? ?? ?? 49 8B D8"
+		},
+		"CBaseEntity::ApplyDamage": {
+			"library": "server.dll",
+			"windows": "48 85 C9 0F 84 ?? ?? ?? ?? 48 8B C4 55 56"
+		},
+		// (entity, MoveType_t, MoveCollide_t). Writes m_MoveType/m_MoveCollide, then calls the virtual that recomputes m_nActualMoveType.
+		"CBaseEntity::SetMoveType": {
+			"library": "server.dll",
+			"windows": "48 89 5C 24 ?? 48 89 6C 24 ?? 48 89 74 24 ?? 48 89 7C 24 ?? 41 56 48 83 EC ?? 41 0F B6 F0"
+		},
+		// (entity, float). Writes m_flGravityScale, then recomputes m_flActualGravityScale.
+		"CBaseEntity::SetGravityScale": {
+			"library": "server.dll",
+			"windows": "48 89 5C 24 08 57 48 83 EC ?? F3 0F 10 81 04 04 00 00"
+		},
+		// (CCollisionProperty, uint64 layers). The six mask helpers OR in or clear the layers in m_collisionAttribute,
+		// network the fields that changed, then call CBaseEntity::CollisionRulesChanged (vfunc 184) on the owner.
+		// They only differ in the mask they test: +0x18 m_nInteractsAs, +0x20 m_nInteractsWith, +0x28 m_nInteractsExclude.
+		"CCollisionProperty::AddInteractsAs": {
+			"library": "server.dll",
+			"windows": "4C 8B DC 49 89 5B 08 57 48 83 EC ?? 48 8B 41 18"
+		},
+		"CCollisionProperty::AddInteractsWith": {
+			"library": "server.dll",
+			"windows": "4C 8B DC 49 89 5B 08 57 48 83 EC ?? 48 8B 41 20"
+		},
+		"CCollisionProperty::AddInteractsExclude": {
+			"library": "server.dll",
+			"windows": "4C 8B DC 49 89 5B 08 57 48 83 EC ?? 48 8B 41 28"
+		},
+		"CCollisionProperty::RemoveInteractsAs": {
+			"library": "server.dll",
+			"windows": "4C 8B DC 49 89 5B 08 57 48 83 EC ?? 48 8B DA 48 8B F9 48 85 51 18"
+		},
+		"CCollisionProperty::RemoveInteractsWith": {
+			"library": "server.dll",
+			"windows": "4C 8B DC 49 89 5B 08 57 48 83 EC ?? 48 8B DA 48 8B F9 48 85 51 20"
+		},
+		"CCollisionProperty::RemoveInteractsExclude": {
+			"library": "server.dll",
+			"windows": "4C 8B DC 49 89 5B 08 57 48 83 EC ?? 48 8B DA 48 8B F9 48 85 51 28"
+		},
+		// (CCollisionProperty, uint8). Writes m_CollisionGroup and swaps the Debris/TouchAll InteractsAs bits to match it.
+		"CCollisionProperty::SetCollisionGroup": {
+			"library": "server.dll",
+			"windows": "48 89 5C 24 ?? 48 89 74 24 ?? 57 48 83 EC ?? 0F B6 41 ?? 8B FA"
+		},
+		// (CCollisionProperty, SolidType_t). Writes m_nSolidType; the physics shape is only rebuilt from it on the next model change.
+		"CCollisionProperty::SetSolid": {
+			"library": "server.dll",
+			"windows": "48 89 5C 24 ?? 48 89 74 24 ?? 57 48 83 EC ?? 0F B6 FA 48 8B D9 38 51"
+		},
+		// (CCollisionProperty, uint8). Writes m_usSolidFlags; flipping 0x4 calls CollisionRulesChanged.
+		"CCollisionProperty::SetSolidFlags": {
+			"library": "server.dll",
+			"windows": "48 89 5C 24 ?? 48 89 74 24 ?? 48 89 7C 24 ?? 41 56 48 83 EC ?? 0F B6 79"
+		},
+		// (CCollisionProperty) -> bool changed. Sets / clears EnableSolidContact | EnableTraceQuery | EnableTouchEvent
+		// in the collision function mask.
+		"CCollisionProperty::EnableCollision": {
+			"library": "server.dll",
+			"windows": "40 53 48 83 EC ?? 48 8D 05 ?? ?? ?? ?? 48 89 4C 24 ?? 48 89 44 24 ?? 48 8D 51 ?? 33 C0 48 8B D9 0F 57 C0 48 89 44 24 ?? 48 8D 4C 24 ?? 48 89 44 24 ?? 48 89 44 24 ?? 88 44 24 ?? 66 0F 7F 44 24 ?? E8 ?? ?? ?? ?? 48 8B 54 24"
+		},
+		"CCollisionProperty::DisableCollision": {
+			"library": "server.dll",
+			"windows": "40 53 48 83 EC 60 48 8D 05 ?? ?? ?? ?? 48 89 4C 24 20 48 89 44 24 28 48 8D 51 10 33 C0 48 8B D9 0F 57 C0 48 89 44 24 40 48 8D 4C 24 28 48 89 44 24 48 48 89 44 24 50 88 44 24 58 66 0F 7F 44 24 30 E8 ?? ?? ?? ?? 48 8B 4C 24 20 0F B6 41 3F A8 07"
+		},
+		// (entity, entity). What logic_collision_pair calls: adds / removes the pair in the physics world's disabled-pair set,
+		// then calls CollisionRulesChanged on both.
+		"PhysDisableEntityCollisions": {
+			"library": "server.dll",
+			"windows": "48 85 C9 0F 84 ?? ?? ?? ?? 48 89 5C 24 ?? 56 48 83 EC ?? 48 8B F2 48 8B D9 48 85 D2 0F 84 ?? ?? ?? ?? 48 8B 4A ?? 48 8B 43 ?? 48 89 7C 24 ?? 8B 79 ?? 39 78 ?? 74 ?? E8 ?? ?? ?? ?? 48 8B 4B ?? 48 8B F0 8B 59 ?? E8 ?? ?? ?? ?? 4C 8B CE 89 7C 24 ?? 44 8B C3 48 8D 0D ?? ?? ?? ?? 48 8B D0 FF 15 ?? ?? ?? ?? 48 8B 7C 24 ?? 48 8B 5C 24 ?? 48 83 C4 ?? 5E C3 48 8B CB E8 ?? ?? ?? ?? 4C 8B D0 41 B9 ?? ?? ?? ?? ?? ?? ?? 4C 8B 99 ?? ?? ?? ?? 48 8B 4E ?? 48 85 C9 74 ?? 8B 51 ?? 44 8B C2 8B 49 ?? 8B C2 83 E1 ?? 41 C1 E8 ?? 44 2B C1 41 23 C1 41 C1 E0 ?? 41 8B C9 83 FA ?? 0F 45 C8 44 0B C1 EB ?? 41 B8 ?? ?? ?? ?? 48 8B 43 ?? 48 85 C0 74 ?? 8B 48 ?? 8B D1 8B 40 ?? 83 E0 ?? C1 EA ?? 2B D0 8B C1 41 23 C1 C1 E2 ?? 83 F9 ?? 44 0F 45 C8 41 0B D1 EB ?? BA ?? ?? ?? ?? 49 8B CA 41 FF D3 84 C0"
+		},
+		"PhysEnableEntityCollisions": {
+			"library": "server.dll",
+			"windows": "48 85 C9 0F 84 ?? ?? ?? ?? 48 89 5C 24 ?? 56 48 83 EC ?? 48 8B F2 48 8B D9 48 85 D2 0F 84 ?? ?? ?? ?? 48 8B 4A ?? 48 8B 43 ?? 48 89 7C 24 ?? 8B 79 ?? 39 78 ?? 74 ?? E8 ?? ?? ?? ?? 48 8B 4B ?? 48 8B F0 8B 59 ?? E8 ?? ?? ?? ?? 4C 8B CE 89 7C 24 ?? 44 8B C3 48 8D 0D ?? ?? ?? ?? 48 8B D0 FF 15 ?? ?? ?? ?? 48 8B 7C 24 ?? 48 8B 5C 24 ?? 48 83 C4 ?? 5E C3 48 8B CB E8 ?? ?? ?? ?? 4C 8B D0 41 B9 ?? ?? ?? ?? ?? ?? ?? 4C 8B 99 ?? ?? ?? ?? 48 8B 4E ?? 48 85 C9 74 ?? 8B 51 ?? 44 8B C2 8B 49 ?? 8B C2 83 E1 ?? 41 C1 E8 ?? 44 2B C1 41 23 C1 41 C1 E0 ?? 41 8B C9 83 FA ?? 0F 45 C8 44 0B C1 EB ?? 41 B8 ?? ?? ?? ?? 48 8B 43 ?? 48 85 C0 74 ?? 8B 48 ?? 8B D1 8B 40 ?? 83 E0 ?? C1 EA ?? 2B D0 8B C1 41 23 C1 C1 E2 ?? 83 F9 ?? 44 0F 45 C8 41 0B D1 EB ?? BA ?? ?? ?? ?? 49 8B CA 41 FF D3 ?? ?? ?? 48 8B CB"
 		},
 		"g_GameEventManager": {
 			"library": "server.dll",
@@ -46,7 +122,7 @@
 		},
 		"CCitadelPlayerPawn::SelectHeroInternal": {
 			"library": "server.dll",
-			"windows": "40 55 41 54 41 55 41 56 48 8D 6C 24 88 48 81 EC 78 01 00 00 4C 8B E1 4C 8B EA"
+			"windows": "40 55 41 54 41 55 41 56 48 8D AC 24"
 		},
 		"CHeroDefinitionManager::GetHeroById": {
 			"library": "server.dll",
@@ -74,7 +150,7 @@
 		},
 		"CCitadelModifier::AutoRegisterAbilityValues": {
 			"library": "server.dll",
-			"windows": "48 89 4C 24 ?? 53 57 48 81 EC ?? ?? ?? ?? ?? ?? ?? 48 8D 79"
+			"windows": "48 89 4C 24 ?? 56 41 55 48 81 EC ?? ?? ?? ?? 4C 8B E9"
 		},
 		"LookupVDataByHash": {
 			"library": "server.dll",
@@ -94,23 +170,45 @@
 		},
 		"CEntityInstance::AcceptInput": {
 			"library": "server.dll",
-			"windows": "48 89 5C 24 ?? 48 89 74 24 ?? 57 48 83 EC ?? 49 8B F0 48 8B D9"
+			"windows": "48 89 5C 24 ?? 48 89 6C 24 ?? 56 57 41 56 48 81 EC ?? ?? ?? ?? 4D 8B F0 48 8B F1"
 		},
 		"CEntityIOOutput::FireOutputInternal": {
 			"library": "server.dll",
-			"windows": "4C 89 4C 24 ?? 48 89 4C 24 ?? 53 56"
+			"windows": "48 8B C4 48 89 58 ?? 48 89 70 ?? 48 89 48 ?? 55"
 		},
 		"CCitadelGameRules::BuildGameSessionManifest": {
 			"library": "server.dll",
 			"windows": "48 89 54 24 ?? 48 89 4C 24 ?? 55 53 56 57 41 54 41 55 41 56 41 57 48 8D AC 24 ?? ?? ?? ?? 48 81 EC ?? ?? ?? ?? ?? ?? ?? 4C 8B FA"
 		},
+		// Guessed name. The call to it in the GC system's per-frame shutdown check, next to "Signout started, but server
+		// not shutting down": the getter itself is one instruction and too short to have a signature. Deadworks follows
+		// the call's rel32 to hook it.
+		"CCitadelGameRules::IsReplayComplete": {
+			"library": "server.dll",
+			"windows": "E8 ?? ?? ?? ?? 84 C0 8D 4B ?? 89 0D"
+		},
 		"CCitadelGameRules::ChangeGameState": {
 			"library": "server.dll",
-			"windows": "48 89 5C 24 ?? 48 89 74 24 ?? 55 57 41 54 41 56 41 57 48 8D 6C 24 ?? 48 81 EC ?? ?? ?? ?? 4C 8D B9"
+			"windows": "48 8B C4 55 53 56 57 41 54 41 56 48 8D 6C 24"
 		},
 		"AreAllLobbyPlayersConnected": {
 			"library": "server.dll",
 			"windows": "48 8B C4 4C 89 40 ?? 48 89 50 ?? 88 48"
+		},
+		// Guessed name. (gameRules) -> whether the matchmade flow (pre-game countdown) applies; dl_midtown only.
+		"CCitadelGameRules::UsesMatchFlow": {
+			"library": "server.dll",
+			"windows": "48 89 5C 24 ?? 48 89 6C 24 ?? 48 89 74 24 ?? 48 89 7C 24 ?? 41 56 48 83 EC 20 48 8B 05 ?? ?? ?? ?? 48 8D 2D"
+		},
+		// Guessed name. (gameRules, bForceIntro): puts heroes on their lane's zipline as GameInProgress starts; dl_midtown only.
+		"CCitadelGameRules::StartPlayersInLanes": {
+			"library": "server.dll",
+			"windows": "48 8B C4 48 89 48 ?? 55 53 41 54 48 8D 68 ?? 48 81 EC ?? ?? ?? ?? 48 89 70 ?? 4C 8D 0D"
+		},
+		// Guessed name. (gameRules, controller) -> the lane whose zipline the player starts on.
+		"CCitadelGameRules::GetPlayerStartLane": {
+			"library": "server.dll",
+			"windows": "48 89 6C 24 ?? 57 48 83 EC ?? 48 8B EA 48 8B F9 48 85 D2 0F 84 ?? ?? ?? ?? 48 8B 05 ?? ?? ?? ?? 8B 40 ?? 85 C0 0F 85 ?? ?? ?? ?? 0F B6 82"
 		},
 		"AddResource": {
 			"library": "server.dll",
@@ -122,15 +220,19 @@
 		},
 		"CCitadelPlayerController::ClientConCommand": {
 			"library": "server.dll",
-			"windows": "48 89 74 24 ?? 55 57 41 54 41 55 41 57 48 8D AC 24"
+			"windows": "48 89 74 24 ?? 55 57 41 54 41 55 41 57 48 8D AC 24 ?? ?? ?? ?? 48 81 EC ?? ?? ?? ?? 83 BA"
 		},
 		"CCitadelPlayerPawn::ResetHero": {
 			"library": "server.dll",
 			"windows": "48 89 74 24 ?? 57 48 83 EC 20 0F B6 81 ?? ?? ?? ?? 0F B6 F2"
 		},
+		"CBasePlayerPawn::ForceRespawn": {
+			"library": "server.dll",
+			"windows": "48 89 5C 24 ?? 57 48 83 EC ?? 48 8B D9 0F B6 FA 48 8B 89 ?? ?? ?? ?? 48 85 C9 74 ?? ?? ?? ?? B2"
+		},
 		"CCitadelPlayerPawn::InitializeHeroOnPawn": {
 			"library": "server.dll",
-			"windows": "4C 8B DC 41 55 41 57 48 83 EC 58 0F B6 81 ?? ?? ?? ?? 44 0F B6 FA 83 C0 FE 4C 8B E9"
+			"windows": "40 55 41 56 48 83 EC ?? 0F B6 81"
 		},
 		// Free function (event, caster, target, castEntity, eventData). Not exported by name; named after the Dota 2 equivalent FireModifierEvent(modifierfunction, CModifierParams const&).
 		"FireModifierEvent": {
@@ -143,7 +245,7 @@
 		},
 		"CCitadelAbilityComponent::CreateAndRegisterAbility": {
 			"library": "server.dll",
-			"windows": "48 89 5C 24 ?? 44 89 4C 24 ?? 55 56 57 41 56 41 57 48 83 EC"
+			"windows": "4C 89 4C 24 ?? 53 57 41 54 41 55 48 83 EC ?? 49 8B D9"
 		},
 		"CHeroDefinitionManager::HeroNameToId": {
 			"library": "server.dll",
@@ -159,12 +261,11 @@
 		},
 		"CTakeDamageInfo::Dtor": {
 			"library": "server.dll",
-			// this is a bad sig
-			"windows": "48 89 5C 24 08 57 48 83 EC 20 48 8D 05 ?? ?? ?? ?? 48 8B D9 48 89 01 48 81 C1 FC 00 00 00 E8 ?? ?? ?? ?? 8B 83 F4 00 00 00"
+			"windows": "48 89 5C 24 ?? 48 89 6C 24 ?? 48 89 74 24 ?? 57 48 83 EC ?? 33 ED 48 8D 05 ?? ?? ?? ?? ?? ?? ?? 48 8B F9 F7 81"
 		},
 		"TraceShape": {
 			"library": "server.dll",
-			"windows": "48 89 5C 24 ?? 48 89 4C 24 ?? 55 56 41 54"
+			"windows": "48 89 54 24 ?? 48 89 4C 24 ?? 55 53 56 57 41 54 41 56 41 57 48 8D AC 24"
 		},
 		"CBasePlayerController::ProcessUsercmds": {
 			"library": "server.dll",
@@ -172,11 +273,11 @@
 		},
 		"CCitadelPlayerPawn::AbilityThink": {
 			"library": "server.dll",
-			"windows": "40 55 53 41 54 41 55 41 57 48 8D AC 24"
+			"windows": "48 89 4C 24 ?? 55 53 57 41 54 41 55 41 56 48 8D AC 24"
 		},
 		"CCitadelPlayerPawn::AddItem": {
 			"library": "server.dll",
-			"windows": "48 89 5C 24 ?? 48 89 6C 24 ?? 48 89 74 24 ?? 57 48 83 EC 30 48 8B D9 41 8B F1 B9 04 00 00 00 41"
+			"windows": "48 89 5C 24 ?? 48 89 6C 24 ?? 48 89 74 24 ?? 57 48 83 EC ?? 48 8B F9 49 8B E9 B9"
 		},
 		"CCitadelPlayerPawn::SellItem": {
 			"library": "server.dll",
@@ -196,11 +297,11 @@
 		},
 		"CCitadelAbilityComponent::ExecuteAbilityByID": {
 			"library": "server.dll",
-			"windows": "48 89 5C 24 ?? 48 89 6C 24 ?? 48 89 74 24 ?? 48 89 7C 24 ?? 41 54 41 56 41 57 48 63 B9"
+			"windows": "48 89 5C 24 ?? 48 89 74 24 ?? 57 48 83 EC ?? 41 0F B6 F9"
 		},
 		"CCitadelAbilityComponent::ExecuteAbility": {
 			"library": "server.dll",
-			"windows": "44 88 4C 24 ?? 44 88 44 24 ?? 53 56 57"
+			"windows": "44 88 4C 24 ?? 44 88 44 24 ?? 55 53 56 57"
 		},
 		"CCitadelAbilityComponent::GetAbilityBySlot": {
 			"library": "server.dll",
@@ -212,7 +313,7 @@
 		},
 		"CCitadelBaseAbility::SetUpgradeBits": {
 			"library": "server.dll",
-			"windows": "48 8B C4 89 50 ?? 55 57 48 8D 68"
+			"windows": "48 8B C4 55 57 48 8D 68 ?? 48 81 EC ?? ?? ?? ?? 48 89 58 ?? 41 B9"
 		},
 		"CCitadelBaseAbility::ImbueAbility": {
 			"library": "server.dll",
@@ -228,7 +329,7 @@
 		},
 		"SubclassRegistry::GlobalRef": {
 			"library": "server.dll",
-			"windows": "48 8B 0D ?? ?? ?? ?? BB ?? ?? ?? ?? 8B D3 4D 8B C7"
+			"windows": "48 8B 0D ?? ?? ?? ?? 4C 8B C3 BA FF FF FF FF E8"
 		}
 	},
 	"patches": {
@@ -246,11 +347,22 @@
 		"INetworkServerService::StartupServer": 26,
 		"IGameEventManager2::FireEvent": 7,
 		"IGameEventSystem::PostEventAbstract": 16,
+		"CBaseEntity::ChangeTeam": 105,
+		"CBaseEntity::Heal": 124,
 		"CBaseEntity::StartTouch": 148,
 		"CBaseEntity::EndTouch": 150,
+		"CBaseEntity::Teleport": 163,
+		"CBaseEntity::GetMaxHealth": 181,
+		"CBaseModelEntity::SetScale": 255,
+		"CBaseModifier::Destroy": 27,
 		"ISource2GameEntities::CheckTransmit": 12,
-		"CSoundSystem::TakeGuid": 77,
-		"CPlayer_ObserverServices::SetObserverTarget": 25,
-		"CPlayer_ObserverServices::SetObserverMode": 28
+		"CSoundSystem::TakeGuid": 78,
+		"CPlayer_ObserverServices::SetObserverTarget": 28,
+		"CPlayer_ObserverServices::SetObserverMode": 31,
+		// The calls the Refresher item makes on each ability (CCitadel_Modifier_HeroRefresh).
+		"CCitadelBaseAbility::EndCooldown": 271,
+		"CCitadelBaseAbility::UsesCharges": 282,
+		"CCitadelBaseAbility::AddCharges": 284,
+		"CCitadelBaseAbility::GetMaxCharges": 307
 	}
 }

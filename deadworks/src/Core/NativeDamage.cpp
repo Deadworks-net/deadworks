@@ -44,7 +44,19 @@ static void __cdecl NativeDestroyDamageInfo(void *info) {
 
 static void __cdecl NativeTakeDamage(void *victim, void *info) {
     if (!victim || !info) return;
+    // Direct TakeDamageOld route - skips the ApplyDamage wrapper (see NativeApplyDamage).
     hooks::g_CBaseEntity_TakeDamageOld.thiscall<void>(victim, info, nullptr);
+}
+
+static void __cdecl NativeApplyDamage(void *victim, void *info) {
+    if (!victim || !info) return;
+    // Route through CBaseEntity::ApplyDamage, the engine's canonical
+    // damage entry - NOT straight to TakeDamageOld. ApplyDamage runs the attribute /
+    // resistance modification, does bunch of other stuff, then calls TakeDamageOld (whose inline hook still fires,
+    // so plugin OnTakeDamage dispatch is preserved).
+    static const auto target = MemoryDataLoader::Get().GetOffset("CBaseEntity::ApplyDamage");
+    if (!target) return;
+    reinterpret_cast<void (*)(void *, void *, void *)>(target.value())(victim, info, nullptr);
 }
 
 // ---------------------------------------------------------------------------
@@ -62,4 +74,5 @@ void deadworks::PopulateDamageNatives(NativeCallbacks &cb) {
     cb.CreateDamageInfo = &NativeCreateDamageInfo;
     cb.DestroyDamageInfo = &NativeDestroyDamageInfo;
     cb.TakeDamage = &NativeTakeDamage;
+    cb.ApplyDamage = &NativeApplyDamage;
 }

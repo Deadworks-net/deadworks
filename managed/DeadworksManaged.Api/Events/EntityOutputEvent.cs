@@ -14,7 +14,8 @@ public sealed class EntityOutputEvent {
 	/// <summary>The entity that fired the output. Usually equivalent to looking up an entity with <see cref="CallerClass"/>.</summary>
 	public CBaseEntity? Caller { get; init; }
 
-	/// <summary>The typed variant value carried by the output. Pointer is only valid for the duration of the callback.</summary>
+	/// <summary>The typed variant value carried by the output. Pointer is only valid for the duration of the callback.
+	/// Void when the engine fires the output without a variant (typed outputs pass their value in a separate parameter object).</summary>
 	public required EntityIOValue Value { get; init; }
 
 	/// <summary>Delay (seconds) before the output's connected inputs will fire. Read-only.</summary>

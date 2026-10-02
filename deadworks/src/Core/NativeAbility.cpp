@@ -292,16 +292,9 @@ static uint8_t RemoveAbilityImpl(CCitadelPlayerPawn *pPawn, CCitadelBaseAbility 
         }
     }
 
-    auto &vecThinkable = comp->m_vecThinkableAbilities.Get();
-    for (int i = 0; i < vecThinkable.Count(); i++) {
-        if (vecThinkable[i] == rawHandle) {
-            vecThinkable.Remove(i);
-            break;
-        }
-    }
-
     comp->m_vecAbilities.NetworkStateChanged();
-    comp->m_vecThinkableAbilities.NetworkStateChanged();
+    // The thinkable list is no longer a schema field; the component's Think rebuilds it when this is set.
+    comp->m_bThinkableAbilitiesDirty = true;
 
     UTIL_Remove(static_cast<CEntityInstance *>(ability));
     return 1;
@@ -356,7 +349,7 @@ static void *__cdecl NativeAddAbility(void *pawn, const char *abilityName, uint1
 
 static void *__cdecl NativeAddItem(void *pawn, const char *itemName, int nInitialUpgradeBits) {
     if (!pawn || !itemName) return nullptr;
-    return static_cast<CCitadelPlayerPawn *>(pawn)->AddItem(itemName, nInitialUpgradeBits, -1);
+    return static_cast<CCitadelPlayerPawn *>(pawn)->AddItem(itemName, static_cast<uint16_t>(nInitialUpgradeBits));
 }
 
 static uint8_t __cdecl NativeSellItem(void *pawn, const char *itemName, uint8_t bFullRefund, uint8_t bForceSellPrice) {
@@ -496,9 +489,10 @@ static uint8_t __cdecl NativeRemoveModifier(void *entity, void *modifier) {
         return 0;
     }
 
-    auto destroyFn = GetVFunc<void(__fastcall *)(void *, uint32_t, void *, void *)>(modifier, kVtblModifierDestroy);
+    auto destroyFn = GetVFunc<void(__fastcall *)(void *, uint32_t, void *, void *)>(modifier, MemoryDataLoader::Get().GetVirtual("CBaseModifier::Destroy").value());
     destroyFn(modifier, 6, nullptr, nullptr);
-    modProp->m_bModifierStatesDirty = true;
+    // Build 6712 removed m_bModifierStatesDirty. Destroy runs the engine's
+    // modifier-property removal path; do not write through a missing schema field.
 
     return 1;
 }
@@ -537,6 +531,22 @@ static void __cdecl NativeSetUpgradeBits(void *ability, int32_t newBits) {
     static_cast<CCitadelBaseAbility *>(ability)->SetUpgradeBits(newBits);
 }
 
+// What the Refresher item does to each ability (CCitadel_Modifier_HeroRefresh): end the cooldown, then
+// refill the charges. Charges matter because the cast check refuses an ability that uses them and has none.
+static void __cdecl NativeResetAbilityCooldown(void *ability) {
+    if (!ability) return;
+    auto *pAbility = static_cast<CCitadelBaseAbility *>(ability);
+    pAbility->EndCooldown();
+    if (pAbility->UsesCharges())
+        pAbility->AddCharges(pAbility->GetMaxCharges());
+}
+
+static int32_t __cdecl NativeGetAbilityMaxCharges(void *ability) {
+    if (!ability) return 0;
+    auto *pAbility = static_cast<CCitadelBaseAbility *>(ability);
+    return pAbility->UsesCharges() ? pAbility->GetMaxCharges() : 0;
+}
+
 // ---------------------------------------------------------------------------
 // Populate
 // ---------------------------------------------------------------------------
@@ -559,6 +569,8 @@ void deadworks::PopulateAbilityNatives(NativeCallbacks &cb) {
     cb.GetAbilityBySlot = &NativeGetAbilityBySlot;
     cb.ToggleActivate = &NativeToggleActivate;
     cb.SetUpgradeBits = &NativeSetUpgradeBits;
+    cb.ResetAbilityCooldown = &NativeResetAbilityCooldown;
+    cb.GetAbilityMaxCharges = &NativeGetAbilityMaxCharges;
 
     g_Hook_AutoRegisterValues = safetyhook::create_inline(
         MemoryDataLoader::Get().GetOffset("CCitadelModifier::AutoRegisterAbilityValues").value(),

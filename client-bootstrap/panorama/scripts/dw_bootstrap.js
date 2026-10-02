@@ -47,6 +47,39 @@
 
     var _registrations = {};
 
+    var _cursorClaims = {};
+    var _cursorApplied = false;
+    var CURSOR_REASSERT_TICKS = 4;
+
+    function AnyCursorClaim() {
+        for (var id in _cursorClaims) {
+            if (Object.prototype.hasOwnProperty.call(_cursorClaims, id)) return true;
+        }
+        return false;
+    }
+
+    function ReconcileCursor(force) {
+        var want = AnyCursorClaim();
+        if (want === _cursorApplied && !force) return;
+        _cursorApplied = want;
+        try { $.DispatchEvent("CitadelConCommand", "hud_free_cursor " + (want ? "1" : "-1")); }
+        catch (e) { $.Msg(DW_TAG, " could not set hud_free_cursor: ", String(e)); }
+    }
+
+    function handleCursor(panelId, rawAfterOp) {
+        if (rawAfterOp === "1") _cursorClaims[panelId] = true;
+        else delete _cursorClaims[panelId];
+        ReconcileCursor(false);
+    }
+
+    function DropCursorClaim(panelId) {
+        if (!_cursorClaims[panelId]) return;
+        delete _cursorClaims[panelId];
+        ReconcileCursor(false);
+    }
+
+    ReconcileCursor(true);
+
     var _sessionToken = null;
     var _lastDwActivityMs = 0;
     var HEARTBEAT_TIMEOUT_MS = 5000;
@@ -570,6 +603,10 @@
             handleDestroy(panelId);
             return;
         }
+        if (op === "m") {
+            handleCursor(panelId, rawAfterOp);
+            return;
+        }
         if (op === "a") {
             handleAppend(panelId, rawAfterOp);
             return;
@@ -967,7 +1004,8 @@
                     (function (ev, ea) {
                         elem.SetPanelEvent("onactivate", function () {
                             if (pressFlash) pressFlash();
-                            entry.wrapper.send.apply(entry.wrapper, [ev].concat(ea));
+                            if (ev === "~copy") copyToClipboard(elem, ea.join(","));
+                            else entry.wrapper.send.apply(entry.wrapper, [ev].concat(ea));
                         });
                     })(evtName, evtArgs);
                 }
@@ -984,7 +1022,15 @@
         }
         if (hasChildren) {
             for (var i = 0; i < node.c.length; i++) buildNode(entry, elem, node.c[i]);
+            if (t === "B" && clickable) {
+                try { elem.hittestchildren = false; } catch (e) {}
+            }
         }
+    }
+
+    function copyToClipboard(panel, text) {
+        try { $.DispatchEvent("CopyStringToClipboard", panel, text, "Copied to clipboard"); }
+        catch (e) { $.Msg(DW_TAG, " copy to clipboard failed: ", String(e)); }
     }
 
     function parseStyle(styleStr) {
@@ -1082,6 +1128,7 @@
     }
 
     function handleDestroy(panelId) {
+        DropCursorClaim(panelId);
         var entry = _panels[panelId];
         if (!entry) return;
         teardownHost(entry);
@@ -1096,6 +1143,8 @@
         _panels = {};
         _cachedTrees = {};
         _inflight = {};
+        _cursorClaims = {};
+        ReconcileCursor(false);
         ReviveRegistered();
     }
 
@@ -1479,6 +1528,8 @@
             EnsureVersionBanner();
 
             CheckHeartbeatWatchdog();
+
+            if (_cursorApplied && _pollTick % CURSOR_REASSERT_TICKS === 0) ReconcileCursor(true);
 
             var live = (_sessionToken !== null);
             if (live !== _lastLiveFlag) {

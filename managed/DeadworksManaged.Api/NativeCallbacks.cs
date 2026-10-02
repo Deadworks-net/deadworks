@@ -83,6 +83,7 @@ internal struct NativeCallbacks
 	public nint CreateDamageInfo;
 	public nint DestroyDamageInfo;
 	public nint TakeDamage;
+	public nint ApplyDamage;
 	public nint PrecacheHero;
 	public nint RegisterConCommand;
 	public nint UnregisterConCommand;
@@ -132,4 +133,24 @@ internal struct NativeCallbacks
 	public nint ImbueAbility;
 	public nint ChangeGameState;
 	public nint SetWaitingForPlayersRoster;
+	public nint ForceRespawn;
+	public nint CreateFakeClient;
+	public nint SetMoveType;
+	public nint SetGravityScale;
+	public nint EntityDerivesFrom;
+	public nint SetConVarString;
+	public nint GetConVarBool;
+	public nint ResetAbilityCooldown;
+	public nint GetAbilityMaxCharges;
+	public nint GetNetMessageName;
+	public nint DisconnectClient;
+	public nint SetMatchStartOnAnyMap;
+	public nint GetMatchStartOnAnyMap;
+	public nint AddCollisionLayers;
+	public nint RemoveCollisionLayers;
+	public nint SetCollisionGroup;
+	public nint SetSolid;
+	public nint SetSolidFlags;
+	public nint SetCollisionEnabled;
+	public nint SetEntityCollisionsWith;
 }

@@ -5,6 +5,7 @@ using Google.Protobuf;
 using Microsoft.Extensions.Logging;
 using DeadworksManaged.Api;
 using DeadworksManaged.Api.UI;
+using DeadworksManaged.Api.Utils;
 using DeadworksManaged.Telemetry;
 
 namespace DeadworksManaged;
@@ -313,6 +314,9 @@ internal static partial class PluginLoader
             PluginRegistrationTracker.Remove(normalizedPath);
         }
 
+        // Stop the plugin's zones before OnUnload, like its timers below.
+        ZoneRegistry.RemoveOwnedBy(entry.Context);
+
         foreach (var plugin in entry.Plugins)
         {
             try
@@ -429,6 +433,7 @@ internal static partial class PluginLoader
         var result = HookResult.Continue;
         foreach (var plugin in snapshot)
         {
+            var start = Stopwatch.GetTimestamp();
             try
             {
                 var hr = invoke(plugin);
@@ -440,8 +445,19 @@ internal static partial class PluginLoader
                 DeadworksMetrics.EventHandlerErrors.Add(1,
                     new KeyValuePair<string, object?>("plugin.name", plugin.Name));
             }
+            WarnIfSlow(start, $"{plugin.Name}.{methodName}");
         }
         return result;
+    }
+
+    private const double SlowHandlerWarnMs = 50;
+
+    /// <summary>Logs a slow handler. Inside a client's netchan ProcessMessages, ~200 ms gets that client dropped (6712+).</summary>
+    internal static void WarnIfSlow(long startTimestamp, string handler)
+    {
+        var elapsed = Stopwatch.GetElapsedTime(startTimestamp).TotalMilliseconds;
+        if (elapsed >= SlowHandlerWarnMs)
+            Console.WriteLine($"[PluginLoader] {handler} took {elapsed:F0} ms");
     }
 
     /// <summary>Any plugin returning false vetoes. Every plugin is still invoked; not a HookResult-style max, a plain AND.</summary>
@@ -488,6 +504,8 @@ internal static partial class PluginLoader
         _frameStopwatch.Restart();
         TimerEngine.OnTick();
         UI.Tick();
+        if (simulating)
+            ZoneRegistry.Tick();
         DispatchToPlugins(p => p.OnGameFrame(simulating, firstTick, lastTick), nameof(IDeadworksPlugin.OnGameFrame));
         _frameStopwatch.Stop();
 
@@ -542,6 +560,9 @@ internal static partial class PluginLoader
 
     public static void DispatchClientFullConnect(ClientFullConnectEvent args)
         => DispatchToPlugins(p => p.OnClientFullConnect(args), nameof(IDeadworksPlugin.OnClientFullConnect));
+
+    public static void DispatchClientDisconnecting(ClientDisconnectedEvent args)
+        => DispatchToPlugins(p => p.OnClientDisconnecting(args), nameof(IDeadworksPlugin.OnClientDisconnecting));
 
     public static void DispatchClientDisconnect(ClientDisconnectedEvent args)
     {
@@ -643,6 +664,7 @@ internal static partial class PluginLoader
         // Dispose all timer services and reset engine
         TimerRegistry.Clear();
         TimerEngine.Reset();
+        ZoneRegistry.Clear();
 
         foreach (var entry in entries)
         {

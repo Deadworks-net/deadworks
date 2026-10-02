@@ -1,6 +1,7 @@
 using System.Runtime.InteropServices;
 using System.Text;
 using DeadworksManaged.Api;
+using DeadworksManaged.Api.Utils;
 using DeadworksManaged.Telemetry;
 using Google.Protobuf;
 
@@ -34,14 +35,16 @@ public static class EntryPoint
     [UnmanagedCallersOnly]
     public static unsafe void OnStartupServer(byte* mapNamePtr)
     {
-        Players.ResetAll();
-        Server.MapName = Marshal.PtrToStringUTF8((nint)mapNamePtr) ?? "";
+        Players.OnMapStart();
+        DeadworksManaged.Api.UI.UIChannel.OnMapStart();
+        Server.OnMapStart(Marshal.PtrToStringUTF8((nint)mapNamePtr) ?? "");
         PluginLoader.DispatchStartupServer();
     }
 
     [UnmanagedCallersOnly]
     public static void OnGameFrame(byte simulating, byte firstTick, byte lastTick)
     {
+        Server.OnGameFrame();
         PluginLoader.DispatchGameFrame(simulating != 0, firstTick != 0, lastTick != 0);
     }
 
@@ -183,7 +186,8 @@ public static class EntryPoint
             Slot = slot,
             Name = new string(name),
             SteamId = xuid,
-            IpAddress = new string(ipAddress)
+            IpAddress = new string(ipAddress),
+            IsMapChangeReconnect = Players.OnConnect(slot, xuid)
         };
 
         return PluginLoader.DispatchClientConnect(args) ? (byte)1 : (byte)0;
@@ -192,12 +196,14 @@ public static class EntryPoint
     [UnmanagedCallersOnly]
     public static unsafe void OnClientPutInServer(int slot, char* name, ulong xuid, byte isBot)
     {
+        Players.OnPutInServer(slot, xuid);
         var args = new ClientPutInServerEvent
         {
             Slot = slot,
             Name = new string(name),
             Xuid = xuid,
-            IsBot = isBot != 0
+            IsBot = isBot != 0,
+            IsMapChangeReconnect = Players.IsMapChangeReconnect(slot)
         };
 
         PluginLoader.DispatchClientPutInServer(args);
@@ -206,17 +212,31 @@ public static class EntryPoint
     [UnmanagedCallersOnly]
     public static void OnClientFullConnect(int slot)
     {
-        Players.SetConnected(slot, true);
-        var args = new ClientFullConnectEvent { Slot = slot };
+        Players.OnFullConnect(slot);
+        var args = new ClientFullConnectEvent { Slot = slot, IsMapChangeReconnect = Players.IsMapChangeReconnect(slot) };
         PluginLoader.DispatchClientFullConnect(args);
+    }
+
+    [UnmanagedCallersOnly]
+    public static void OnClientDisconnecting(int slot, int reason)
+    {
+        var args = new ClientDisconnectedEvent { Slot = slot, Reason = (ENetworkDisconnectionReason)reason };
+        if (args.IsMapChange)
+            Server.OnMapShutdown();
+        PluginLoader.DispatchClientDisconnecting(args);
     }
 
     [UnmanagedCallersOnly]
     public static void OnClientDisconnect(int slot, int reason)
     {
-        var args = new ClientDisconnectedEvent { Slot = slot, Reason = reason };
+        var args = new ClientDisconnectedEvent { Slot = slot, Reason = (ENetworkDisconnectionReason)reason };
+        if (args.IsMapChange)
+            Server.OnMapShutdown();
         PluginLoader.DispatchClientDisconnect(args);
-        Players.SetConnected(slot, false);
+        // Still connected: they reload into the next map, and Players.OnMapStart counts them as coming back.
+        if (!args.IsMapChange)
+            Players.OnDisconnect(slot);
+        ZoneRegistry.OnDisconnect(slot);
         DeadworksManaged.Api.UI.UIChannel.OnPlayerDisconnect(slot);
     }
 

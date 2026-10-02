@@ -22,6 +22,11 @@ public enum AddonState {
 /// Entry point for the UI message manager. Use <see cref="Panel"/> to obtain a
 /// handle for a logical UI panel; the panel id binds to the panorama-side panel
 /// script registered with the same id via <c>DW.registerPanel({ id: "..." })</c>.
+///
+/// A panel stays up until you destroy it, the player leaves, or the map changes.
+/// Every panel is gone on a new map, so treat any you were tracking as closed in
+/// <see cref="IDeadworksPlugin.OnStartupServer"/> and show them again as players
+/// arrive.
 /// </summary>
 public static class UI {
 	private static readonly Dictionary<string, UIPanel> _panels = new();
@@ -137,6 +142,14 @@ public static class UI {
 	/// client had.
 	/// </summary>
 	public static event Action<int>? ClientResync;
+
+	/// <summary>
+	/// Whether the player at <paramref name="slot"/> has the Deadworks client bootstrap, the addon the Deadworks launcher
+	/// installs. Without it they see none of the server's UI. It reports in once their game has loaded the map, usually
+	/// within a few seconds of <see cref="IDeadworksPlugin.OnClientFullConnect"/>, so false straight after joining
+	/// doesn't mean they lack it. It also reads false for a moment while their UI rebuilds after a hitch.
+	/// </summary>
+	public static bool HasClientBootstrap(int slot) => UIChannel.IsAcked(slot);
 
 	/// <summary>
 	/// Panel ids the client at <paramref name="slot"/> supplies its own layout
@@ -334,6 +347,18 @@ public sealed class UIPanel {
 	/// <summary>Tells the panel script to clear its state.</summary>
 	public void Clear(RecipientFilter to)
 		=> UIChannel.EnqueueClear(to, Id);
+
+	/// <summary>
+	/// Frees the mouse cursor for each recipient so they can click this panel's buttons. While it's free they can't
+	/// move, aim or cast. It stays free until <see cref="ReleaseCursor"/> or <see cref="DestroyLayout"/>; when several
+	/// panels ask for it, it stays free until the last one lets go.
+	/// </summary>
+	public void RequestCursor(RecipientFilter to)
+		=> UIChannel.EnqueueCursor(to, Id, free: true);
+
+	/// <summary>Gives back the cursor this panel asked for with <see cref="RequestCursor"/>.</summary>
+	public void ReleaseCursor(RecipientFilter to)
+		=> UIChannel.EnqueueCursor(to, Id, free: false);
 
 	/// <summary>Sends an opaque text payload to the panel script's onRaw handler.</summary>
 	public void SendRaw(RecipientFilter to, string text)

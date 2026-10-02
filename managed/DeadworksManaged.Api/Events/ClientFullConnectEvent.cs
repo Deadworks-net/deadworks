@@ -4,6 +4,12 @@ namespace DeadworksManaged.Api;
 public sealed class ClientFullConnectEvent {
 	public required int Slot { get; init; }
 
+	/// <summary>
+	/// True for a player reloading after a map change, rather than joining. See
+	/// <see cref="ClientConnectEvent.IsMapChangeReconnect"/>.
+	/// </summary>
+	public bool IsMapChangeReconnect { get; init; }
+
 	[System.Diagnostics.DebuggerBrowsable(System.Diagnostics.DebuggerBrowsableState.Never)]
 	public unsafe CCitadelPlayerController? Controller {
 		get {

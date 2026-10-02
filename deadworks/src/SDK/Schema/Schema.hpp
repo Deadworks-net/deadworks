@@ -16,6 +16,8 @@ namespace schema {
 int16_t FindChainOffset(const char *className, uint32_t classNameHash);
 SchemaKey GetOffset(const char *className, uint32_t classKey, const char *memberName, uint32_t memberKey);
 int GetClassSize(const char *className);
+// True when className is baseClassName or inherits from it anywhere in its schema base-class tree.
+bool IsDerivedFrom(const char *className, const char *baseClassName);
 } // namespace schema
 
 constexpr uint32_t val_32_const = 0x811c9dc5;

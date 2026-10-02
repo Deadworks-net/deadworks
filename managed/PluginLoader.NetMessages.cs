@@ -1,3 +1,4 @@
+using System.Diagnostics;
 using System.Reflection;
 using Google.Protobuf;
 using Microsoft.Extensions.Logging;
@@ -221,6 +222,7 @@ internal static partial class PluginLoader
         var result = HookResult.Continue;
         foreach (var handler in handlers)
         {
+            var start = Stopwatch.GetTimestamp();
             try
             {
                 var hr = InvokeIncomingHandler(handler, message, msgId, senderSlot);
@@ -230,6 +232,7 @@ internal static partial class PluginLoader
             {
                 _logger.LogError(ex, "Net message incoming handler for msgId={MsgId} threw", msgId);
             }
+            WarnIfSlow(start, $"{handler.Method.DeclaringType?.Name}.{handler.Method.Name} (incoming msgId={msgId})");
         }
 
         return result;

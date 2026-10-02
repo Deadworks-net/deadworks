@@ -4,13 +4,22 @@ namespace DeadworksManaged.Api;
 public unsafe class PlayerDataGlobal : NativeEntity {
 	private static ReadOnlySpan<byte> Class => "PlayerDataGlobal_t"u8;
 
-	internal PlayerDataGlobal(nint handle) : base(handle) { }
+	// The controller this struct is embedded in. PlayerDataGlobal_t has no network chainer of its own, so a change
+	// has to be reported on the controller at the struct's own offset plus the field's.
+	private readonly nint _owner;
+
+	internal PlayerDataGlobal(nint handle, nint owner) : base(handle) { _owner = owner; }
+
+	private void Set<T>(SchemaAccessor<T> field, T value) where T : unmanaged {
+		*(T*)field.GetAddress(Handle) = value;
+		NativeInterop.NotifyStateChanged((void*)_owner, (int)(Handle - _owner) + field.Offset, 0, 0);
+	}
 
 	private static readonly SchemaAccessor<int> _iLevel = new(Class, "m_iLevel"u8);
 	public int Level => _iLevel.Get(Handle);
 
 	private static readonly SchemaAccessor<int> _nHeroID = new(Class, "m_nHeroID"u8);
-	public int HeroID { get => _nHeroID.Get(Handle); set => _nHeroID.Set(Handle, value); }
+	public int HeroID { get => _nHeroID.Get(Handle); set => Set(_nHeroID, value); }
 
 	private static readonly SchemaAccessor<int> _iMaxAmmo = new(Class, "m_iMaxAmmo"u8);
 	public int MaxAmmo => _iMaxAmmo.Get(Handle);

@@ -20,7 +20,6 @@ public enum EntityFlags : uint {
 	AimTarget = 0x10000,
 	Grenade = 0x100000,
 	DontTouch = 0x400000,
-	Object = 0x2000000,
 	OnFire = 0x8000000,
 	Dissolving = 0x10000000,
 	TransRagdoll = 0x20000000,

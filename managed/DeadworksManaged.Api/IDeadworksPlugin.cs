@@ -88,12 +88,21 @@ public interface IDeadworksPlugin {
 	void OnClientPutInServer(ClientPutInServerEvent args) { }
 
 	/// <summary>
-	/// Called when a client has fully connected and is in-game.
+	/// Called when a client is fully in game: when they join, and again each time they finish loading into a new map.
+	/// Bots included.
 	/// </summary>
 	void OnClientFullConnect(ClientFullConnectEvent args) { }
 
 	/// <summary>
-	/// Called when a client disconnects from the server.
+	/// Called as a client starts disconnecting, while their controller and hero are still intact. A bot's hero is
+	/// deleted right after this, so this is the place to hand it to someone else. <see cref="OnClientDisconnect"/>
+	/// follows.
+	/// </summary>
+	void OnClientDisconnecting(ClientDisconnectedEvent args) { }
+
+	/// <summary>
+	/// Called after a client has disconnected. A player's controller and hero stay on the server for when they
+	/// reconnect; a bot's hero is already gone.
 	/// </summary>
 	void OnClientDisconnect(ClientDisconnectedEvent args) { }
 

@@ -127,6 +127,7 @@ internal static class UIWire {
 		Erase     = (byte)'e',
 		Heartbeat = (byte)'h',
 		Style     = (byte)'y',
+		Cursor    = (byte)'m',
 	}
 
 	/// <summary>
@@ -189,6 +190,14 @@ internal static class UIWire {
 	/// <summary>Encodes a Destroy op: panel \x1f d</summary>
 	internal static string EncodeDestroy(string panelId) {
 		return panelId + Sep + (char)Op.Destroy;
+	}
+
+	/// <summary>
+	/// Encodes a Cursor op: <c>panel \x1f m \x1f 1|0</c>. The panel claims (1) or
+	/// releases (0) the free mouse cursor; the client frees it while any claim is live.
+	/// </summary>
+	internal static string EncodeCursor(string panelId, bool free) {
+		return panelId + Sep + (char)Op.Cursor + Sep + (free ? "1" : "0");
 	}
 
 	/// <summary>

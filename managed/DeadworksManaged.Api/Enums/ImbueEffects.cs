@@ -18,4 +18,5 @@ public enum ImbueEffects : uint {
 
 	/// <summary>Like <see cref="Active"/>, but the imbued ability may not be the hero's ultimate.</summary>
 	ActiveNonUltimate = 1 << 2,
+	Enhance = 1 << 3,
 }

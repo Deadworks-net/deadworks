@@ -1,6 +1,7 @@
 #include "NativeCallbacks.hpp"
 #include "NativeOffsets.hpp"
 #include "NativeAbility.hpp"
+#include "NativeCollision.hpp"
 #include "NativeDamage.hpp"
 #include "NativeHero.hpp"
 #include "Deadworks.hpp"
@@ -12,6 +13,7 @@
 #include "Hooks/BuildGameSessionManifest.hpp"
 #include "Hooks/ChangeGameState.hpp"
 #include "Hooks/AreAllLobbyPlayersConnected.hpp"
+#include "Hooks/MatchMapOverride.hpp"
 
 #include "Hooks/TraceShape.hpp"
 #include "../Memory/MemoryDataLoader.hpp"
@@ -92,7 +94,7 @@ public:
 
 // --- Entity manipulation types ---
 
-using AcceptInputFn = bool(__thiscall *)(void *thisptr, const char *pInputName, CEntityInstance *pActivator, CEntityInstance *pCaller, variant_t *pValue, int nOutputID, void *);
+using AcceptInputFn = bool(__thiscall *)(void *thisptr, const char *pInputName, CEntityInstance *pActivator, CEntityInstance *pCaller, variant_t *pValue);
 
 // ---------------------------------------------------------------------------
 // Native callback implementations - Core / Entity / Schema / ConVar / Events
@@ -133,7 +135,8 @@ static void __cdecl NativeModifyCurrency(void *pPawnThis, uint32_t nCurrencyType
     hooks::g_CCitadelPlayerPawn_ModifyCurrency.thiscall<void>(
         pPawnThis, static_cast<ECurrencyType>(nCurrencyType), nAmount,
         static_cast<ECurrencySource>(nSource),
-        bSilent != 0, bForceGain != 0, bSpendOnly != 0,
+        // Full dwords, not bools: see Hook_CCitadelPlayerPawn_ModifyCurrency.
+        int32_t{bSilent != 0}, int32_t{bForceGain != 0}, int32_t{bSpendOnly != 0},
         pSourceAbility, pSourceEntity);
 }
 
@@ -154,6 +157,17 @@ static const char *__cdecl NativeGetEntityClassname(void *entity) {
         return "";
     }
     return ent->m_pEntity->m_pClass->m_pServerClass->m_pDLLClassName;
+}
+
+// Walks the schema base classes of the entity's DLL class name, so a server-only class (no
+// ServerClass, empty classname) never matches.
+static uint8_t __cdecl NativeEntityDerivesFrom(void *entity, const char *baseClassName) {
+    if (!entity || !baseClassName)
+        return 0;
+    const char *className = NativeGetEntityClassname(entity);
+    if (!*className)
+        return 0;
+    return schema::IsDerivedFrom(className, baseClassName) ? 1 : 0;
 }
 
 static int32_t __cdecl NativeGetUtlVectorSize(void *vec) {
@@ -256,6 +270,20 @@ static float __cdecl NativeGetConVarFloat(uint64_t handle) {
     return cvarAbs.GetAs<float>();
 }
 
+// GetAs<bool> converts from the cvar's own type: a float cvar reads true for any non-zero value
+// and a string cvar is parsed as a bool. Going through GetAs<int> instead truncates 0.5 to 0 and
+// fails to parse "true".
+static uint8_t __cdecl NativeGetConVarBool(uint64_t handle) {
+    if (!handle)
+        return 0;
+    ConVarRef ref(handle);
+    ConVarData *data = g_pCVar->GetConVarData(ref);
+    if (!data)
+        return 0;
+    ConVarRefAbstract cvarAbs(ref, data);
+    return cvarAbs.GetAs<bool>() ? 1 : 0;
+}
+
 static const char *__cdecl NativeGetConVarString(uint64_t handle) {
     if (!handle)
         return "";
@@ -277,6 +305,20 @@ static void __cdecl NativeSetConVarFloat(uint64_t handle, float value) {
         return;
     ConVarRefAbstract cvarAbs(ref, data);
     cvarAbs.SetAs<float>(value);
+}
+
+// ConVarRefAbstract::SetString parses the text into the cvar's own type and returns false only when
+// that fails; the new value is then clamped to the cvar's min/max. Nothing on this path checks
+// FCVAR_CHEAT, so it sets cheat cvars while sv_cheats is off, which the console refuses.
+static uint8_t __cdecl NativeSetConVarString(uint64_t handle, const char *value) {
+    if (!handle || !value)
+        return 0;
+    ConVarRef ref(handle);
+    ConVarData *data = g_pCVar->GetConVarData(ref);
+    if (!data)
+        return 0;
+    ConVarRefAbstract cvarAbs(ref, data);
+    return cvarAbs.SetString(CUtlString(value)) ? 1 : 0;
 }
 
 static void __cdecl NativeNotifyStateChanged(void *entity, int32_t fieldOffset, int16_t chainOffset, int32_t networkStateChangedOffset) {
@@ -392,6 +434,22 @@ static void __cdecl NativeExecuteServerCommand(const char *command) {
     if (!g_pEngineServer || !command)
         return;
     g_pEngineServer->ServerCommand(command);
+}
+
+// Runs the normal client-connect path for a client that has no netchannel, allocating a player
+// slot and a controller. Returns the slot, or -1 when the engine had none to give - which is the
+// usual answer on a Deadlock server that was never handed a match, since an unreserved server
+// reports "0 max" and keeps no slots around.
+static int32_t __cdecl NativeCreateFakeClient(const char *name) {
+    if (!g_pEngineServer || !name || !*name)
+        return -1;
+    return g_pEngineServer->CreateFakeClient(name).Get();
+}
+
+static void __cdecl NativeDisconnectClient(int32_t slot, int32_t reason) {
+    if (!g_pEngineServer || slot < 0)
+        return;
+    g_pEngineServer->DisconnectClient(CPlayerSlot(slot), static_cast<ENetworkDisconnectionReason>(reason));
 }
 
 // --- Engine log forwarding to managed code ---
@@ -617,7 +675,7 @@ static void __cdecl NativeAcceptInput(void *entity, const char *inputName, void 
     fn(entity, inputName,
        static_cast<CEntityInstance *>(activator),
        static_cast<CEntityInstance *>(caller),
-       &val, 0, nullptr);
+       &val);
 }
 
 static void __cdecl NativeSetSchemaString(void *entity, const char *className, const char *fieldName, const char *value) {
@@ -742,7 +800,16 @@ static void __cdecl NativeSendNetMessage(int msgId, const uint8_t *protoBytes, i
         g_pGameEventSystem->PostEventAbstract(-1, false, &filter, serializer, msg, 0);
     }
 
-    g_pNetworkMessages->DeallocateNetMessageAbstract(serializer, msg);
+    // The game allocated it, so its deleting destructor frees it with the game's allocator.
+    delete msg;
+}
+
+static const char *__cdecl NativeGetNetMessageName(int msgId) {
+    if (!g_pNetworkMessages)
+        return nullptr;
+
+    auto *serializer = g_pNetworkMessages->FindNetworkMessageById(static_cast<NetworkMessageId>(msgId));
+    return serializer ? serializer->GetUnscopedName() : nullptr;
 }
 
 // ---------------------------------------------------------------------------
@@ -908,6 +975,14 @@ static void __cdecl NativeChangeGameState(void *gameRules, int32_t newState) {
     hooks::ChangeGameState(gameRules, newState);
 }
 
+static void __cdecl NativeSetMatchStartOnAnyMap(uint8_t enabled) {
+    hooks::g_MatchStartOnAnyMap = enabled != 0;
+}
+
+static uint8_t __cdecl NativeGetMatchStartOnAnyMap() {
+    return hooks::g_MatchStartOnAnyMap ? 1 : 0;
+}
+
 static void __cdecl NativeSetWaitingForPlayersRoster(uint32_t readyCount, uint32_t totalCount) {
     hooks::g_LobbyPlayersConnectedOverride = readyCount;
     hooks::g_LobbyPlayersTotalOverride = totalCount;
@@ -920,19 +995,52 @@ static void __cdecl NativeSetWaitingForPlayersRoster(uint32_t readyCount, uint32
 static int32_t __cdecl NativeGetMaxHealth(void *entity) {
     if (!entity)
         return 0;
-    return GetVFunc<int(__thiscall *)(void *)>(entity, offsets::kVtblGetMaxHealth)(entity);
+    return GetVFunc<int(__thiscall *)(void *)>(entity, MemoryDataLoader::Get().GetVirtual("CBaseEntity::GetMaxHealth").value())(entity);
 }
 
 static int32_t __cdecl NativeHeal(void *entity, float amount) {
     if (!entity)
         return 0;
-    return GetVFunc<int(__thiscall *)(void *, float)>(entity, offsets::kVtblHeal)(entity, amount);
+    return GetVFunc<int(__thiscall *)(void *, float)>(entity, MemoryDataLoader::Get().GetVirtual("CBaseEntity::Heal").value())(entity, amount);
 }
 
 static void __cdecl NativeSetScale(void *entity, float scale) {
     if (!entity)
         return;
-    GetVFunc<void(__thiscall *)(void *, float)>(entity, offsets::kVtblSetScale)(entity, scale);
+    GetVFunc<void(__thiscall *)(void *, float)>(entity, MemoryDataLoader::Get().GetVirtual("CBaseModelEntity::SetScale").value())(entity, scale);
+}
+
+// ---------------------------------------------------------------------------
+// Entity movement
+// ---------------------------------------------------------------------------
+
+using SetMoveTypeFn = void(__fastcall *)(void *entity, uint8_t moveType, uint8_t moveCollide);
+using SetGravityScaleFn = void(__fastcall *)(void *entity, float scale);
+
+static SetMoveTypeFn g_pSetMoveType = nullptr;
+static SetGravityScaleFn g_pSetGravityScale = nullptr;
+
+// CBaseEntity::SetMoveType(MoveType_t, MoveCollide_t) stores the requested type in m_MoveType,
+// then calls the virtual that recomputes m_nActualMoveType, the copy movement code reads. That
+// recompute lets the noclip flag, modifiers and a move parent override the request, and refreshes
+// collision rules and the physics simulation mode; a schema write of either field skips all of it.
+// m_MoveCollide is passed back unchanged.
+static void __cdecl NativeSetMoveType(void *entity, uint8_t moveType) {
+    if (!entity || !g_pSetMoveType)
+        return;
+    const uint8_t moveCollide = static_cast<CBaseEntity *>(entity)->m_MoveCollide.Get();
+    g_pSetMoveType(entity, moveType, moveCollide);
+}
+
+// CBaseEntity::SetGravityScale stores m_flGravityScale, then recomputes m_flActualGravityScale,
+// which is what movement and physics multiply gravity by (the stored scale times any modifier
+// multiplier, or 0 while gravity is disabled). Heroes also recompute it every movement tick, but
+// other entities only do when one of those inputs changes, so a schema write alone leaves them on
+// the old gravity.
+static void __cdecl NativeSetGravityScale(void *entity, float scale) {
+    if (!entity || !g_pSetGravityScale)
+        return;
+    g_pSetGravityScale(entity, scale);
 }
 
 static void *__cdecl NativeGetGlobalVars() {
@@ -1041,9 +1149,18 @@ static uint32_t __cdecl NativeTakeSoundEventGuid() {
 // ---------------------------------------------------------------------------
 
 void deadworks::ResolveNativeStatics() {
+    ResolveCollisionStatics();
     ResolveDamageStatics();
     ResolveHeroStatics();
     ResolveSubclassStatics();
+
+    g_pSetMoveType = reinterpret_cast<SetMoveTypeFn>(
+        MemoryDataLoader::Get().GetOffset("CBaseEntity::SetMoveType").value());
+    g_Log->Info("Resolved CBaseEntity::SetMoveType: {:p}", reinterpret_cast<void *>(g_pSetMoveType));
+
+    g_pSetGravityScale = reinterpret_cast<SetGravityScaleFn>(
+        MemoryDataLoader::Get().GetOffset("CBaseEntity::SetGravityScale").value());
+    g_Log->Info("Resolved CBaseEntity::SetGravityScale: {:p}", reinterpret_cast<void *>(g_pSetGravityScale));
 }
 
 // ---------------------------------------------------------------------------
@@ -1069,6 +1186,8 @@ void deadworks::PopulateNativeCallbacks(NativeCallbacks &callbacks) {
     callbacks.GetConVarInt = &NativeGetConVarInt;
     callbacks.GetConVarFloat = &NativeGetConVarFloat;
     callbacks.GetConVarString = &NativeGetConVarString;
+    callbacks.SetConVarString = &NativeSetConVarString;
+    callbacks.GetConVarBool = &NativeGetConVarBool;
 
     // Entity
     callbacks.GetEntityDesignerName = &NativeGetEntityDesignerName;
@@ -1107,6 +1226,7 @@ void deadworks::PopulateNativeCallbacks(NativeCallbacks &callbacks) {
 
     // Networking
     callbacks.SendNetMessage = &NativeSendNetMessage;
+    callbacks.GetNetMessageName = &NativeGetNetMessageName;
 
     // KV3
     callbacks.KV3Create = &NativeKV3Create;
@@ -1137,6 +1257,7 @@ void deadworks::PopulateNativeCallbacks(NativeCallbacks &callbacks) {
 
     // Subsystems
     PopulateAbilityNatives(callbacks);
+    PopulateCollisionNatives(callbacks);
     PopulateDamageNatives(callbacks);
     PopulateHeroNatives(callbacks);
 
@@ -1169,6 +1290,12 @@ void deadworks::PopulateNativeCallbacks(NativeCallbacks &callbacks) {
     // Server addons
     callbacks.SetServerAddons = &NativeSetServerAddons;
     callbacks.AddFileSystemSearchPath = &NativeAddFileSystemSearchPath;
+
+    // Fake clients
+    callbacks.CreateFakeClient = &NativeCreateFakeClient;
+    callbacks.DisconnectClient = &NativeDisconnectClient;
+    callbacks.SetMatchStartOnAnyMap = &NativeSetMatchStartOnAnyMap;
+    callbacks.GetMatchStartOnAnyMap = &NativeGetMatchStartOnAnyMap;
 
     // Command line
     callbacks.HasCommandLineParm = &NativeHasCommandLineParm;
@@ -1204,4 +1331,9 @@ void deadworks::PopulateNativeCallbacks(NativeCallbacks &callbacks) {
     // Game state
     callbacks.ChangeGameState = &NativeChangeGameState;
     callbacks.SetWaitingForPlayersRoster = &NativeSetWaitingForPlayersRoster;
+
+    // Entity movement and class checks
+    callbacks.SetMoveType = &NativeSetMoveType;
+    callbacks.SetGravityScale = &NativeSetGravityScale;
+    callbacks.EntityDerivesFrom = &NativeEntityDerivesFrom;
 }

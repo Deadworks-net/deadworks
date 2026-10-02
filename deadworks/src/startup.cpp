@@ -4,9 +4,30 @@
 #include "Logging/ConsoleLogger.hpp"
 #include "Core/Hooks/CoreHooks.hpp"
 
+#include <filesystem>
+#include <fstream>
+#include <string>
+
 using namespace std::literals;
 
 using Source2MainFn = int (*)(void *hInstance, void *hPrevInstance, const char *pszCmdLine, int nShowCmd, const char *pszBaseDir, const char *pszGame);
+
+// Matched by docker/entrypoint.sh.
+constexpr int EXIT_UNSUPPORTED_GAME_BUILD = 78;
+
+// ClientVersion from steam.inf, the number Valve's patch notes and SteamDB go by.
+static std::string ReadGameBuild(const std::filesystem::path &exePath) {
+    std::ifstream inf(exePath / "../../citadel/steam.inf");
+    std::string line;
+    while (std::getline(inf, line)) {
+        if (line.starts_with("ClientVersion=")) {
+            auto build = line.substr("ClientVersion="sv.size());
+            while (!build.empty() && (build.back() == '\r' || build.back() == ' ')) build.pop_back();
+            return build;
+        }
+    }
+    return "unknown";
+}
 
 int main(int argc, char **argv) {
     auto log = deadworks::ConsoleLogger{"bootstrap"};
@@ -34,6 +55,16 @@ int main(int argc, char **argv) {
     auto loadResult = data.Load((exePath / "../../citadel/cfg/deadworks_mem.jsonc").string());
     if (!loadResult.has_value()) {
         log.Critical("Failed to load data: {}", loadResult.error());
+        if (!data.GetMissing().empty()) {
+            // The usual cause by far: Valve shipped a game update and the signatures in
+            // deadworks_mem.jsonc no longer match. Say so, and exit with a code of its own so
+            // whatever supervises the server can tell this from a crash and wait for a release
+            // instead of restarting in a loop.
+            log.Critical("Deadlock build {} is not supported by this version of Deadworks ({} of its signatures were not found). "
+                         "The game has most likely been updated: install a newer Deadworks release.",
+                         ReadGameBuild(exePath), data.GetMissing().size());
+            return EXIT_UNSUPPORTED_GAME_BUILD;
+        }
         return 1;
     }
 
