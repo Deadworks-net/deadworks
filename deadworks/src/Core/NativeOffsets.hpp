@@ -27,9 +27,8 @@ constexpr int32_t kMaxPlayerControllerSize = 0x2000;
 constexpr uintptr_t kHeroDefMgrAnchor_GetManagerCall = 0xE;
 
 // CCitadelGameRules::BuildGameSessionManifest
-constexpr uintptr_t kBGSM_GetHeroTableCall = 0x2BB;
-constexpr uintptr_t kBGSM_PrecacheGlobalLea = 0x389;
-constexpr uintptr_t kBGSM_PrecacheCall = 0x394;
+constexpr uintptr_t kBGSM_PrecacheGlobalLea = 0x33B;
+constexpr uintptr_t kBGSM_PrecacheCall = 0x342;
 
 } // namespace deadworks::offsets
 
