@@ -22,7 +22,7 @@
 
 .table th {
   position: relative;
-  background: #161720;
+  background: var(--bg-card);
   padding: 8px 12px;
   font-size: 0.7rem;
   font-weight: 700;

@@ -51,7 +51,7 @@
 .tabActive {
   color: var(--text);
   font-weight: 800;
-  background: #151620;
+  background: var(--bg-card);
   border-color: var(--border);
 }
 
@@ -186,8 +186,8 @@
   font-weight: 800;
   letter-spacing: 1.5px;
   text-transform: uppercase;
-  color: #000;
-  background: linear-gradient(90deg, #8cf5b4 0%, #4cbc6e 100%);
+  color: var(--accent-text);
+  background: var(--connect-bg);
   border: none;
   border-radius: 2px;
   cursor: pointer;
@@ -196,17 +196,17 @@
 }
 
 .connectBtn:hover {
-  background: linear-gradient(90deg, #a5f8c8 0%, #5ed484 100%);
+  background: var(--connect-hover);
 }
 
 .connectBtnDisabled {
-  background: #2a2c35;
-  color: var(--text-muted);
+  background: var(--disabled-bg);
+  color: var(--disabled-text);
   cursor: default;
 }
 
 .connectBtnDisabled:hover {
-  background: #2a2c35;
+  background: var(--disabled-bg);
 }
 
 /* Container for table + detail panel */

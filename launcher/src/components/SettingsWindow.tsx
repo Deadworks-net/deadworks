@@ -3,10 +3,11 @@ import { getCurrentWindow } from "@tauri-apps/api/window";
 import { emitTo } from "@tauri-apps/api/event";
 import { invoke } from "@tauri-apps/api/core";
 import { open } from "@tauri-apps/plugin-dialog";
-import { useSettings } from "@/hooks/use-settings";
+import { useSettings, type Theme } from "@/hooks/use-settings";
 import { getStore } from "@/lib/tauri";
 import { cn } from "@/lib/utils";
 import styles from "./SettingsWindow.module.css";
+import CustomSelect from "./CustomSelect";
 
 const NAV_ITEMS = [
   { id: "general", label: "General" },
@@ -34,7 +35,14 @@ function SettingRow({
 }
 
 export default function SettingsWindow() {
-  const { apiEndpoint, setApiEndpoint, telemetryEnabled, setTelemetryEnabled } = useSettings();
+  const { 
+    apiEndpoint, 
+    setApiEndpoint, 
+    telemetryEnabled, 
+    setTelemetryEnabled,
+    theme, 
+    setTheme 
+  } = useSettings();
   const [activeSection, setActiveSection] = useState("general");
   const [autostart, setAutostart] = useState(false);
   const [detectedPath, setDetectedPath] = useState<string | null>(null);
@@ -156,6 +164,7 @@ export default function SettingsWindow() {
           {activeSection === "general" && (
             <>
               <h2 className={styles.sectionTitle}>General</h2>
+
               <div className={styles.sectionSubtitle}>Startup</div>
 
               <SettingRow
@@ -234,6 +243,22 @@ export default function SettingsWindow() {
                   </button>
                 }
               />
+
+              <SettingRow
+                title="App Theme"
+                description="Choose the appearance of the application."
+                control={
+                  <CustomSelect
+                      value={theme}
+                      onChange={(v) => setTheme(v as Theme)}
+                      options={[
+                        { value: "system", label: "System Default" },
+                        { value: "light", label: "Light" },
+                        { value: "dark", label: "Dark" }
+                      ]}
+                    />
+                }
+              />
             </>
           )}
 
@@ -246,14 +271,14 @@ export default function SettingsWindow() {
                 title="API Endpoint"
                 description="Switch between production and local API for testing"
                 control={
-                  <select
+                  <CustomSelect
                     value={apiEndpoint}
-                    onChange={(e) => setApiEndpoint(e.target.value)}
-                    className={styles.select}
-                  >
-                    <option value="prod">Production (api.deadworks.net)</option>
-                    <option value="local">Local (localhost:8787)</option>
-                  </select>
+                    onChange={setApiEndpoint}
+                    options={[
+                      { value: "prod", label: "Production (api.deadworks.net)" },
+                      { value: "local", label: "Local (localhost:8787)" }
+                    ]}
+                  />
                 }
               />
 
