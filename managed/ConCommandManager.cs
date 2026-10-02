@@ -19,6 +19,7 @@ internal static class ConCommandManager
         RegisterBuiltInCommand("dw_reloadconfig", "Reload plugin configs. Usage: dw_reloadconfig [PluginName]", true, OnReloadConfig);
         RegisterBuiltInCommand("dw_plugin", "Manage plugins. Usage: dw_plugin <list|enable|disable|commands> [PluginName]", true, OnPluginCommand);
         RegisterBuiltInCommand("dw_help", "List all available commands.", false, OnHelp);
+        RegisterBuiltInCommand("dw_pluginbus", "List plugin-bus event subscriptions, query handlers, and recent activity.", true, OnPluginBusCommand);
     }
 
     private static void OnReloadConfig(ConCommandContext ctx)
@@ -102,6 +103,110 @@ internal static class ConCommandManager
             Console.WriteLine("Usage: dw_plugin <list|enable|disable|commands> [PluginName]");
         }
     }
+
+    private static void OnPluginBusCommand(ConCommandContext ctx)
+    {
+        var eventSubs = PluginLoader.GetEventSubscriptions();
+        var queryHandlers = PluginLoader.GetQueryHandlers();
+        var recentPublishes = PluginLoader.GetRecentPublishes(TimeSpan.FromSeconds(60));
+        var recentQueries = PluginLoader.GetRecentQueries(TimeSpan.FromSeconds(60));
+
+        var activeEventNames = new HashSet<string>(eventSubs.Select(s => s.Name), StringComparer.Ordinal);
+        var activeQueryNames = new HashSet<string>(queryHandlers.Select(s => s.Name), StringComparer.Ordinal);
+
+        Console.WriteLine("[PluginBus] Event subscriptions:");
+        if (eventSubs.Count == 0)
+        {
+            Console.WriteLine("  (none)");
+        }
+        else
+        {
+            var nameWidth = Math.Max(28, eventSubs.Max(s => s.Name.Length));
+            Console.WriteLine($"  {"Event name".PadRight(nameWidth)}  Subs  Plugin(s)");
+            foreach (var (name, count, plugins) in eventSubs)
+            {
+                var pluginList = plugins.Count == 0 ? "(host)" : string.Join(", ", plugins);
+                Console.WriteLine($"  {name.PadRight(nameWidth)}  {count,4}  {pluginList}");
+            }
+        }
+
+        Console.WriteLine("[PluginBus] Query handlers:");
+        if (queryHandlers.Count == 0)
+        {
+            Console.WriteLine("  (none)");
+        }
+        else
+        {
+            var nameWidth = Math.Max(28, queryHandlers.Max(s => s.Name.Length));
+            Console.WriteLine($"  {"Query name".PadRight(nameWidth)}  Hdrs  Plugin(s)");
+            foreach (var (name, count, plugins) in queryHandlers)
+            {
+                var pluginList = plugins.Count == 0 ? "(host)" : string.Join(", ", plugins);
+                Console.WriteLine($"  {name.PadRight(nameWidth)}  {count,4}  {pluginList}");
+            }
+        }
+
+        if (recentPublishes.Count > 0)
+        {
+            Console.WriteLine("[PluginBus] Recently published events (last 60s):");
+            var grouped = recentPublishes
+                .GroupBy(p => p.Name, StringComparer.Ordinal)
+                .Select(g => (Name: g.Key, Count: g.Count(), LastSubs: g.Last().SubscriberCount))
+                .OrderBy(g => g.Name, StringComparer.Ordinal);
+
+            var nameWidth = Math.Max(28, grouped.Max(g => g.Name.Length));
+            foreach (var (name, count, lastSubs) in grouped)
+            {
+                var hint = "";
+                if (lastSubs == 0 && !activeEventNames.Contains(name))
+                {
+                    var suggestion = FindCloseSubscription(name, activeEventNames);
+                    hint = suggestion != null
+                        ? $"  ← no subscribers — did you mean '{suggestion}'?"
+                        : "  ← no subscribers";
+                }
+                Console.WriteLine($"  {name.PadRight(nameWidth)}  x{count}  (subs: {lastSubs}){hint}");
+            }
+        }
+
+        if (recentQueries.Count > 0)
+        {
+            Console.WriteLine("[PluginBus] Recently issued queries (last 60s):");
+            var grouped = recentQueries
+                .GroupBy(q => q.Name, StringComparer.Ordinal)
+                .Select(g => (Name: g.Key, Count: g.Count(), LastHandlers: g.Last().HandlerCount, LastResponses: g.Last().ResponseCount))
+                .OrderBy(g => g.Name, StringComparer.Ordinal);
+
+            var nameWidth = Math.Max(28, grouped.Max(g => g.Name.Length));
+            foreach (var (name, count, lastHandlers, lastResponses) in grouped)
+            {
+                var hint = "";
+                if (lastHandlers == 0 && !activeQueryNames.Contains(name))
+                {
+                    var suggestion = FindCloseSubscription(name, activeQueryNames);
+                    hint = suggestion != null
+                        ? $"  ← no handlers — did you mean '{suggestion}'?"
+                        : "  ← no handlers";
+                }
+                Console.WriteLine($"  {name.PadRight(nameWidth)}  x{count}  (handlers: {lastHandlers}, responses: {lastResponses}){hint}");
+            }
+        }
+    }
+
+    private static string? FindCloseSubscription(string published, HashSet<string> active)
+    {
+        foreach (var candidate in active)
+        {
+            if (string.Equals(candidate, published, StringComparison.OrdinalIgnoreCase))
+                return candidate;
+            if (NormalizeSeparators(candidate) == NormalizeSeparators(published))
+                return candidate;
+        }
+        return null;
+    }
+
+    private static string NormalizeSeparators(string s)
+        => s.Replace('-', '_').Replace('.', '_').Replace(':', '_').ToLowerInvariant();
 
     private static void OnHelp(ConCommandContext ctx)
     {

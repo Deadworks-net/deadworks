@@ -80,4 +80,32 @@ internal sealed class HandlerRegistry<TKey, THandler> where TKey : notnull
         _handlers.Clear();
         _pluginTracking.Clear();
     }
+
+    /// <summary>Snapshot of (key, handler count) for every registered key. Caller must hold external lock if relevant.</summary>
+    public List<(TKey Key, int HandlerCount)> ListHandlers()
+    {
+        var result = new List<(TKey, int)>(_handlers.Count);
+        foreach (var kv in _handlers)
+            result.Add((kv.Key, kv.Value.Count));
+        return result;
+    }
+
+    /// <summary>Returns the plugin paths that have registered at least one handler for <paramref name="key"/>.</summary>
+    public List<string> PluginsWithHandlerFor(TKey key)
+    {
+        var result = new List<string>();
+        var comparer = _handlers.Comparer;
+        foreach (var (pluginPath, tracked) in _pluginTracking)
+        {
+            foreach (var (k, _) in tracked)
+            {
+                if (comparer.Equals(k, key))
+                {
+                    result.Add(pluginPath);
+                    break;
+                }
+            }
+        }
+        return result;
+    }
 }
