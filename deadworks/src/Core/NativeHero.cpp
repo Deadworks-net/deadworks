@@ -230,15 +230,9 @@ void deadworks::ResolveHeroStatics() {
 
 void deadworks::ResolveHeroPrecacheFns() {
     auto addr = MemoryDataLoader::Get().GetOffset("CCitadelGameRules::BuildGameSessionManifest").value();
-    // Build 6737: validate instruction shapes before resolving relative targets.
-    auto lea = reinterpret_cast<const uint8_t *>(addr + kBGSM_PrecacheGlobalLea);
-    auto call = reinterpret_cast<const uint8_t *>(addr + kBGSM_PrecacheCall);
-    if (lea[0] != 0x48 || lea[1] != 0x8D || lea[2] != 0x0D || call[0] != 0xE8)
-        throw std::runtime_error("Unsupported hero precache instruction layout");
     g_pHeroPrecacheGlobal = reinterpret_cast<void *>(ResolveLea(addr + kBGSM_PrecacheGlobalLea));
     g_pHeroPrecache = reinterpret_cast<HeroPrecacheFn>(ResolveE8Call(addr + kBGSM_PrecacheCall));
-    g_Log->Info("HeroPrecache: precache={} global={}",
-                (void *)g_pHeroPrecache, g_pHeroPrecacheGlobal);
+    g_Log->Info("HeroPrecache: precache={} global={}", (void *)g_pHeroPrecache, g_pHeroPrecacheGlobal);
 }
 
 bool deadworks::IsHeroPrecacheResolved() {
