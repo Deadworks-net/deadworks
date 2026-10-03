@@ -178,7 +178,7 @@
 		},
 		"CCitadelGameRules::BuildGameSessionManifest": {
 			"library": "server.dll",
-			"windows": "48 89 54 24 ?? 48 89 4C 24 ?? 55 53 56 57 41 54 41 55 41 56 41 57 48 8D AC 24 ?? ?? ?? ?? 48 81 EC ?? ?? ?? ?? ?? ?? ?? 4C 8B FA"
+			"windows": "48 89 54 24 ?? 48 89 4C 24 ?? 55 53 56 57 41 54 41 55 41 56 41 57 48 8D AC 24 ?? ?? ?? ?? 48 81 EC ?? ?? ?? ?? ?? ?? ?? 48 8D 0D"
 		},
 		// Guessed name. The call to it in the GC system's per-frame shutdown check, next to "Signout started, but server
 		// not shutting down": the getter itself is one instruction and too short to have a signature. Deadworks follows
