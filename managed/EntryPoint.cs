@@ -39,6 +39,7 @@ public static class EntryPoint
     {
         Server.OnGameFrame();
         PluginLoader.DispatchGameFrame(simulating != 0, firstTick != 0, lastTick != 0);
+        AdminSystem.AdminTick.OnGameFrame();
     }
 
     [UnmanagedCallersOnly]
@@ -144,6 +145,13 @@ public static class EntryPoint
     [UnmanagedCallersOnly]
     public static unsafe int OnNetMessageIncoming(int senderSlot, int msgId, byte* protoBytes, int protoLen)
     {
+        // A mute is core's to enforce, like a gag: the voice is dropped before it's relayed or any plugin sees it.
+        if (AdminSystem.PenaltyManager.DropsVoice(senderSlot, msgId))
+        {
+            AdminSystem.PenaltyManager.NoteMutedVoice(senderSlot);
+            return (int)HookResult.Stop;
+        }
+
         var span = new ReadOnlySpan<byte>(protoBytes, protoLen);
         var result = PluginLoader.DispatchNetMessageIncoming(senderSlot, msgId, span);
         if (result >= HookResult.Stop)
@@ -183,7 +191,33 @@ public static class EntryPoint
             IsMapChangeReconnect = Players.OnConnect(slot, xuid)
         };
 
-        return PluginLoader.DispatchClientConnect(args) ? (byte)1 : (byte)0;
+        // Record the SteamID the engine connected with before any plugin can see (or rewrite) the controller's.
+        PermissionSystem.PermissionManager.OnClientConnect(slot, xuid);
+
+        // Bans are core's to enforce, so they apply before any plugin sees the connection.
+        if (AdminSystem.PenaltyManager.ConnectRejection(xuid, args.IsMapChangeReconnect) is { } banned)
+        {
+            Console.WriteLine($"[Penalties] Rejected banned player {args.Name} ({xuid})");
+            RejectConnection(slot, banned);
+            return 0;
+        }
+
+        if (PluginLoader.DispatchClientConnect(args))
+            return 1;
+        RejectConnection(slot, args.RejectReason);
+        return 0;
+    }
+
+    private static unsafe void RejectConnection(int slot, string? reason)
+    {
+        // A refused client never disconnects, so its slot has to be forgotten here.
+        Players.OnDisconnect(slot);
+        PermissionSystem.PermissionManager.OnClientDisconnect(slot);
+        if (string.IsNullOrEmpty(reason) || NativeInterop.SetConnectRejectReason == null)
+            return;
+        Span<byte> utf8 = Utf8.Encode(reason, stackalloc byte[Utf8.Size(reason)]);
+        fixed (byte* ptr = utf8)
+            NativeInterop.SetConnectRejectReason(ptr);
     }
 
     [UnmanagedCallersOnly]
@@ -198,6 +232,8 @@ public static class EntryPoint
             IsBot = isBot != 0,
             IsMapChangeReconnect = Players.IsMapChangeReconnect(slot)
         };
+
+        PermissionSystem.PermissionManager.OnClientPutInServer(slot, args.IsBot);
 
         PluginLoader.DispatchClientPutInServer(args);
     }
@@ -226,9 +262,13 @@ public static class EntryPoint
         if (args.IsMapChange)
             Server.OnMapShutdown();
         PluginLoader.DispatchClientDisconnect(args);
-        // Still connected: they reload into the next map, and Players.OnMapStart counts them as coming back.
+        // Still connected: they reload into the next map, and Players.OnMapStart counts them as coming back. The
+        // engine keeps their SteamID and Steam's confirmation across the reload, so permissions keep them too.
         if (!args.IsMapChange)
+        {
             Players.OnDisconnect(slot);
+            PermissionSystem.PermissionManager.OnClientDisconnect(slot);
+        }
         ZoneRegistry.OnDisconnect(slot);
         DeadworksManaged.Api.UI.UIChannel.OnPlayerDisconnect(slot);
     }

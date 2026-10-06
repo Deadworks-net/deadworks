@@ -98,14 +98,14 @@ public class ItemTestPlugin : DeadworksPluginBase
 			: $"Failed to remove '{itemName}'");
 	}
 
-	[Command("givegold", Description = "Give yourself gold (default 50000)")]
-	public void CmdGiveGold(CCitadelPlayerController caller, int amount = 50000)
+	[Command("givesouls", Description = "Give yourself souls (default 50000)")]
+	public void CmdGiveSouls(CCitadelPlayerController caller, int amount = 50000)
 	{
 		var pawn = caller.GetHeroPawn();
 		if (pawn == null) return;
 
 		pawn.ModifyCurrency(ECurrencyType.EGold, amount, ECurrencySource.ECheats, silent: true, forceGain: true);
-		Reply(caller, $"Gave {amount} gold");
+		Reply(caller, $"Gave {amount} souls");
 	}
 
 	[Command("listitems", Description = "List all abilities/items currently on your pawn")]
@@ -121,17 +121,6 @@ public class ItemTestPlugin : DeadworksPluginBase
 			string imbued = ent.IsImbued ? $" [imbued into {string.Join(", ", ent.ImbuedAbilities)}]" : "";
 			Reply(caller, $"  #{ent.EntityIndex}: {ent.DesignerName} ({ent.Classname}){imbued}");
 		}
-	}
-
-	[Command("rcon", Description = "Execute a server console command", SuppressChat = true)]
-	public void CmdRcon(CCitadelPlayerController? caller, params string[] commandParts)
-	{
-		if (commandParts.Length == 0)
-			throw new CommandException("Nothing to execute.");
-
-		string command = string.Join(' ', commandParts);
-		Server.ExecuteCommand(command);
-		Reply(caller, $"Executed: {command}");
 	}
 
 	private static void Reply(CCitadelPlayerController? to, string message)

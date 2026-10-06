@@ -8,12 +8,17 @@ namespace DeadworksManaged;
 /// </summary>
 internal static class PluginRegistrationTracker
 {
-    public readonly record struct Entry(string Kind, string Name, string Description, bool Hidden = false);
+    /// <param name="CanRun">Whether a caller may run it, for listings; null means anyone.</param>
+    /// <param name="AliasOf">For another name of a command, the command's first name, so listings show it once.</param>
+    public readonly record struct Entry(
+        string Kind, string Name, string Description, bool Hidden = false, Func<DeadworksManaged.Api.CCitadelPlayerController?, bool>? CanRun = null,
+        string? AliasOf = null);
 
     private static readonly Dictionary<string, List<Entry>> _entries = new(StringComparer.OrdinalIgnoreCase);
     private static readonly Lock _lock = new();
 
-    public static void Add(string normalizedPath, string kind, string name, string description = "", bool hidden = false)
+    public static void Add(string normalizedPath, string kind, string name, string description = "", bool hidden = false,
+        Func<DeadworksManaged.Api.CCitadelPlayerController?, bool>? canRun = null, string? aliasOf = null)
     {
         lock (_lock)
         {
@@ -22,7 +27,7 @@ internal static class PluginRegistrationTracker
                 list = [];
                 _entries[normalizedPath] = list;
             }
-            list.Add(new Entry(kind, name, description, hidden));
+            list.Add(new Entry(kind, name, description, hidden, canRun, aliasOf));
         }
     }
 

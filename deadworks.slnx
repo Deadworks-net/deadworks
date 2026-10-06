@@ -7,4 +7,5 @@
   <Project Path="managed\DeadworksManaged.Api\DeadworksManaged.Api.csproj" />
   <Project Path="managed\DeadworksManaged.csproj" />
   <Project Path="managed\DeadworksManaged.Generators\DeadworksManaged.Generators.csproj" />
+  <Project Path="managed\plugins\AdminPlugin\AdminPlugin.csproj" />
 </Solution>

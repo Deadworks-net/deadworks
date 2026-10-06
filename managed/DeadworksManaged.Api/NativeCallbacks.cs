@@ -153,4 +153,8 @@ internal struct NativeCallbacks
 	public nint SetSolidFlags;
 	public nint SetCollisionEnabled;
 	public nint SetEntityCollisionsWith;
+	public nint IsClientAuthenticated;
+	public nint KickClient;
+	public nint IsMapValid;
+	public nint SetConnectRejectReason;
 }
