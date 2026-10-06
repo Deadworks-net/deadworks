@@ -1,0 +1,105 @@
+using DeadworksManaged.Api;
+using DeadworksManaged.PermissionSystem;
+
+namespace DeadworksManaged.AdminSystem;
+
+/// <summary>Backs <see cref="AdminActivity"/>: announces admin actions in chat and writes the daily admin log.</summary>
+internal static class AdminActivityService
+{
+    internal enum Visibility { Named, Anonymous, None }
+
+    public const string NotifyPermission = "deadworks.admin.notify";
+
+    private static readonly Lock _fileLock = new();
+    private static string _logDir = "";
+    private static Visibility _players = Visibility.Anonymous;
+    private static Visibility _notified = Visibility.Named;
+
+    /// <summary>Overridable so tests can capture chat.</summary>
+    internal static Action<CCitadelPlayerController, string> SendChat { get; set; } = Chat.PrintToChat;
+
+    internal static Func<DateTime> Now { get; set; } = () => DateTime.UtcNow;
+
+    public static void Initialize()
+    {
+        var config = DeadworksConfig.Admin;
+        Initialize(Path.GetFullPath(Path.Combine(DeadworksConfig.BaseDir, config.LogDir)),
+            Parse(config.ShowActivity.Players, Visibility.Anonymous),
+            Parse(config.ShowActivity.Notified, Visibility.Named));
+    }
+
+    internal static void Initialize(string logDir, Visibility players, Visibility notified)
+    {
+        _logDir = logDir;
+        _players = players;
+        _notified = notified;
+        AdminActivity.Backend = Handle;
+    }
+
+    private static Visibility Parse(string value, Visibility fallback)
+    {
+        if (Enum.TryParse<Visibility>(value, ignoreCase: true, out var v))
+            return v;
+        Console.WriteLine($"[AdminActivity] '{value}' is not named, anonymous or none; using {fallback.ToString().ToLowerInvariant()}");
+        return fallback;
+    }
+
+    /// <summary>Raised for every logged action; the plugin loader forwards it to <see cref="IDeadworksPlugin.OnAdminAction"/>.</summary>
+    internal static event Action<AdminLogEntry>? Logged;
+
+    private static void Handle(Caller admin, string action, string? details, bool announce)
+    {
+        var adminName = admin.Name;
+        var entry = new AdminLogEntry(Now(), admin.SteamId64, adminName, action, details);
+
+        Console.WriteLine($"[Admin] {entry}");
+        WriteToFile(entry);
+        try
+        {
+            Logged?.Invoke(entry);
+        }
+        catch (Exception ex)
+        {
+            Console.WriteLine($"[AdminActivity] An admin action handler threw: {ex.Message}");
+        }
+
+        if (!announce)
+            return;
+        // Everyone gets at most one line. The admin who did it always gets theirs, even with announcements off,
+        // since it is their only confirmation.
+        var callerSlot = admin.Player?.Slot;
+        foreach (var player in Players.GetAll())
+        {
+            var visibility = PermissionManager.HasForSlot(player.Slot, NotifyPermission) ? _notified : _players;
+            if (player.Slot == callerSlot && visibility == Visibility.None)
+                visibility = Visibility.Named;
+            if (Format(visibility, adminName, action) is { } text)
+                SendChat(player, text);
+        }
+    }
+
+    internal static string? Format(Visibility visibility, string adminName, string action) => visibility switch
+    {
+        Visibility.Named => $"{adminName}: {action}",
+        Visibility.Anonymous => $"ADMIN: {action}",
+        _ => null
+    };
+
+    private static void WriteToFile(AdminLogEntry entry)
+    {
+        if (_logDir.Length == 0)
+            return;
+        try
+        {
+            lock (_fileLock)
+            {
+                Directory.CreateDirectory(_logDir);
+                File.AppendAllText(Path.Combine(_logDir, $"admin-{entry.TimeUtc:yyyy-MM-dd}.log"), entry + Environment.NewLine);
+            }
+        }
+        catch (Exception ex)
+        {
+            Console.WriteLine($"[AdminActivity] Failed to write the admin log: {ex.Message}");
+        }
+    }
+}

@@ -12,6 +12,12 @@ internal static partial class PluginLoader
     {
         var result = HookResult.Continue;
 
+        // A gag is core's to enforce: plugin OnChatMessage handlers can't stop each other seeing a message.
+        // A gagged player's chat commands still run, but nothing they type reaches chat or any plugin.
+        var gag = message.SenderSlot >= 0 ? AdminSystem.PenaltyManager.GagForSlot(message.SenderSlot) : null;
+        if (gag != null)
+            result = HookResult.Handled;
+
         if (TryParseChatCommand(message.ChatText, out var prefix, out var commandName, out var args))
         {
             List<Func<ChatCommandContext, HookResult>>? handlers;
@@ -33,7 +39,11 @@ internal static partial class PluginLoader
                     }
                     catch (Exception ex)
                     {
-                        Console.WriteLine($"[PluginLoader] Chat command handler for '/{commandName}' threw: {ex.Message}");
+                        // Keep the command out of public chat, and tell the player rather than leave them guessing.
+                        Console.WriteLine($"[PluginLoader] Chat command handler for '/{commandName}' threw {ex}");
+                        if (message.Controller is { } sender)
+                            Chat.PrintToChat(sender, Commands.CommandRegistration.FailedMessage);
+                        result = HookResult.Handled;
                     }
                     WarnIfSlow(start, $"Chat command handler for '/{commandName}'");
                 }
@@ -41,6 +51,13 @@ internal static partial class PluginLoader
                 if (result > HookResult.Continue)
                     return result;
             }
+        }
+
+        if (gag != null)
+        {
+            if (message.Controller is { } sender)
+                Chat.PrintToChat(sender, AdminSystem.PenaltyManager.GagMessage(gag));
+            return HookResult.Handled;
         }
 
         // Fall through to plugin OnChatMessage
@@ -69,32 +86,5 @@ internal static partial class PluginLoader
         commandName = tokens[0];
         args = tokens[1..];
         return true;
-    }
-
-    // --- Chat command registration ---
-
-    private static void RegisterPluginChatCommands(string normalizedPath, List<IDeadworksPlugin> plugins)
-    {
-        foreach (var plugin in plugins)
-        {
-            var methods = plugin.GetType().GetMethods(
-                BindingFlags.Instance | BindingFlags.Public | BindingFlags.NonPublic);
-
-            foreach (var method in methods)
-            {
-#pragma warning disable CS0618 // ChatCommandAttribute is obsolete; intentionally scanned for back-compat
-                var attrs = method.GetCustomAttributes<ChatCommandAttribute>();
-#pragma warning restore CS0618
-                foreach (var attr in attrs)
-                {
-                    var del = (Func<ChatCommandContext, HookResult>)Delegate.CreateDelegate(
-                        typeof(Func<ChatCommandContext, HookResult>), plugin, method);
-
-                    _chatCommandRegistry.AddForPlugin(normalizedPath, attr.Command, del);
-                    PluginRegistrationTracker.Add(normalizedPath, "chat", $"/{attr.Command}");
-                    Console.WriteLine($"[PluginLoader] Registered chat command: {plugin.Name} -> /{attr.Command}");
-                }
-            }
-        }
     }
 }

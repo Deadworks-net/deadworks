@@ -6,7 +6,7 @@ namespace DeadworksManaged.Commands;
 
 internal static class CommandBinder
 {
-    internal enum SlotKind { Caller, RawArgs, Typed, Params }
+    internal enum SlotKind { Caller, RawArgs, Typed, Params, Target }
 
     internal sealed class Slot
     {
@@ -41,13 +41,14 @@ internal static class CommandBinder
             var p = parameters[i];
             var pt = p.ParameterType;
 
-            if (pt == typeof(CCitadelPlayerController))
+            if (pt == typeof(CCitadelPlayerController) || pt == typeof(Caller))
             {
                 if (callerIndex >= 0)
                     throw new InvalidOperationException(
-                        $"[Command] method '{method.DeclaringType?.Name}.{method.Name}' has more than one CCitadelPlayerController parameter");
+                        $"[Command] method '{method.DeclaringType?.Name}.{method.Name}' has more than one caller parameter");
 
-                var isNullable = nullCtx.Create(p).WriteState == NullabilityState.Nullable;
+                // A Caller always has a value: the console is Caller.Console.
+                var isNullable = pt == typeof(Caller) || nullCtx.Create(p).WriteState == NullabilityState.Nullable;
                 slots[i] = new Slot
                 {
                     Kind = SlotKind.Caller,
@@ -98,6 +99,19 @@ internal static class CommandBinder
                 continue;
             }
 
+            if (pt == typeof(Target))
+            {
+                slots[i] = new Slot
+                {
+                    Kind = SlotKind.Target,
+                    Type = pt,
+                    Name = p.Name ?? $"arg{i}",
+                    HasDefault = p.HasDefaultValue,
+                    DefaultValue = p.HasDefaultValue ? p.DefaultValue : null
+                };
+                continue;
+            }
+
             slots[i] = new Slot
             {
                 Kind = SlotKind.Typed,
@@ -123,7 +137,8 @@ internal static class CommandBinder
         CCitadelPlayerController? caller,
         out object?[] boundArgs,
         out string? error,
-        out bool silentSkip)
+        out bool silentSkip,
+        bool enforceImmunity = false)
     {
         error = null;
         silentSkip = false;
@@ -141,7 +156,9 @@ internal static class CommandBinder
                         silentSkip = true;
                         return false;
                     }
-                    boundArgs[i] = caller;
+                    boundArgs[i] = slot.Type == typeof(Caller)
+                        ? (caller == null ? Caller.Console : Caller.Of(caller))
+                        : caller;
                     break;
 
                 case SlotKind.RawArgs:
@@ -164,11 +181,36 @@ internal static class CommandBinder
                         boundArgs[i] = Convert(tokens[tokenIdx], slot.Type);
                         tokenIdx++;
                     }
+                    catch (CommandException cex)
+                    {
+                        error = cex.Message; // a converter explaining what's wrong beats the usage line
+                        return false;
+                    }
                     catch
                     {
                         error = BuildUsage(plan);
                         return false;
                     }
+                    break;
+
+                case SlotKind.Target:
+                    if (tokenIdx >= tokens.Length)
+                    {
+                        if (slot.HasDefault)
+                        {
+                            boundArgs[i] = slot.DefaultValue;
+                            break;
+                        }
+                        error = BuildUsage(plan);
+                        return false;
+                    }
+                    if (!TargetResolver.TryResolve(tokens[tokenIdx], caller, enforceImmunity, out var target, out var targetError))
+                    {
+                        error = targetError;
+                        return false;
+                    }
+                    boundArgs[i] = target;
+                    tokenIdx++;
                     break;
 
                 case SlotKind.Params:
@@ -178,6 +220,11 @@ internal static class CommandBinder
                     {
                         for (int j = 0; j < remaining; j++)
                             arr.SetValue(Convert(tokens[tokenIdx + j], slot.Type), j);
+                    }
+                    catch (CommandException cex)
+                    {
+                        error = cex.Message;
+                        return false;
                     }
                     catch
                     {
@@ -201,8 +248,13 @@ internal static class CommandBinder
 
     public static object Convert(string token, Type type)
     {
+        type = Nullable.GetUnderlyingType(type) ?? type;
         if (type.IsEnum)
-            return Enum.Parse(type, token, ignoreCase: true);
+        {
+            // Enum.Parse also takes any number, so "99" would bind to a value the enum doesn't have.
+            var parsed = Enum.Parse(type, token, ignoreCase: true);
+            return Enum.IsDefined(type, parsed) ? parsed : throw new FormatException($"'{token}' isn't a {type.Name}");
+        }
 
         if (IsBuiltInScalar(type))
             return ConCommandManager.ConvertValue(token, type);
@@ -214,9 +266,16 @@ internal static class CommandBinder
     }
 
     private static bool IsBuiltInScalar(Type type) =>
-        type == typeof(int) || type == typeof(long) ||
+        type == typeof(int) || type == typeof(long) || type == typeof(uint) || type == typeof(ulong) ||
         type == typeof(float) || type == typeof(double) ||
         type == typeof(bool) || type == typeof(string);
+
+    /// <summary>Whether an argument of this type can be parsed at all: built in, an enum, or a registered converter.</summary>
+    internal static bool CanConvert(Type type)
+    {
+        type = Nullable.GetUnderlyingType(type) ?? type;
+        return type.IsEnum || IsBuiltInScalar(type) || CommandConverters.Has(type);
+    }
 
     private static bool HasParams(Plan plan)
     {
@@ -240,41 +299,25 @@ internal static class CommandBinder
             if (slot.Kind == SlotKind.Caller || slot.Kind == SlotKind.RawArgs)
                 continue;
 
+            // Written for the people typing it: the parameter's name (an enum's choices), no C# types, and a default only
+            // when there is one worth showing. "<player> <minutes> [reason...]", not "<player:string> [temp:string=]".
             sb.Append(' ');
+            var label = slot.Type.IsEnum ? string.Join('|', Enum.GetNames(slot.Type)).ToLowerInvariant() : slot.Name;
             if (slot.Kind == SlotKind.Params)
             {
-                sb.Append('[');
-                sb.Append(slot.Name);
-                sb.Append(':');
-                sb.Append(TypeLabel(slot.Type));
-                sb.Append("...]");
+                sb.Append($"[{label}...]");
                 continue;
             }
 
-            bool optional = slot.HasDefault;
-            sb.Append(optional ? '[' : '<');
-            sb.Append(slot.Name);
-            sb.Append(':');
-            sb.Append(TypeLabel(slot.Type));
-            if (optional && slot.DefaultValue != null)
+            if (!slot.HasDefault)
             {
-                sb.Append('=');
-                sb.Append(slot.DefaultValue);
+                sb.Append($"<{label}>");
+                continue;
             }
-            sb.Append(optional ? ']' : '>');
+            var shownDefault = slot.DefaultValue is { } d && d.ToString() is { Length: > 0 } text && !slot.Type.IsEnum ? $"={text}" : "";
+            sb.Append($"[{label}{shownDefault}]");
         }
 
         return sb.ToString();
-    }
-
-    private static string TypeLabel(Type type)
-    {
-        if (type == typeof(int)) return "int";
-        if (type == typeof(long)) return "long";
-        if (type == typeof(float)) return "float";
-        if (type == typeof(double)) return "double";
-        if (type == typeof(bool)) return "bool";
-        if (type == typeof(string)) return "string";
-        return type.Name;
     }
 }
