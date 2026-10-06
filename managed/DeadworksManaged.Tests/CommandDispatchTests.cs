@@ -1,3 +1,5 @@
+using System.Runtime.CompilerServices;
+using System.Runtime.InteropServices;
 using DeadworksManaged.Api;
 using DeadworksManaged.Commands;
 using Xunit;
@@ -341,17 +343,89 @@ public class CommandDispatchTests
         return writer.ToString();
     }
 
+    /// <summary>The block result comes back immediately; the method itself runs next tick.</summary>
+    [Theory]
+    [InlineData("/stringtestcommand hello", HookResult.Handled)]
+    [InlineData("!stringtestcommand hello", HookResult.Continue)]
+    public unsafe void ChatCommandBlocksImmediatelyAndRunsNextTick(string chatText, HookResult expected)
+    {
+        Assert.True(PluginLoader.TryParseChatCommand(chatText, out var prefix, out var commandName, out var args));
+        var message = new ChatMessage { SenderSlot = FakePlayerSlot, ChatText = chatText, AllChat = true, LaneColor = default };
+        var ctx = new ChatCommandContext(message, commandName, args, prefix);
+
+        // A chat command with no player behind it is refused, so the sender has to resolve to a controller. These two
+        // callbacks are all a controller needs to exist; nothing on this path reads through it, since the command
+        // needs no permission and takes no caller.
+        var callbacks = default(NativeCallbacks);
+        callbacks.GetPlayerController = (nint)(delegate* unmanaged[Cdecl]<int, void*>)&FakeGetPlayerController;
+        callbacks.GetEntityHandle = (nint)(delegate* unmanaged[Cdecl]<void*, uint>)&FakeGetEntityHandle;
+        NativeInterop.Bind(&callbacks);
+        try
+        {
+            var results = new List<HookResult>();
+            var plugin = WithRegisteredPlugin((_, chatRegistry) =>
+            {
+                foreach (var handler in chatRegistry.Snapshot(ctx.Command) ?? [])
+                    results.Add(handler(ctx));
+            });
+
+            Assert.Equal(expected, Assert.Single(results));
+            Assert.Empty(plugin.Received);
+
+            TimerEngine.OnTick();
+            Assert.Equal("hello", Assert.Single(plugin.Received));
+        }
+        finally
+        {
+            var none = default(NativeCallbacks);
+            NativeInterop.Bind(&none);
+        }
+    }
+
+    [Fact]
+    public void A_chat_command_with_no_player_behind_it_is_refused()
+    {
+        Assert.True(PluginLoader.TryParseChatCommand("!stringtestcommand hello", out var prefix, out var commandName, out var args));
+        var message = new ChatMessage { SenderSlot = -1, ChatText = "!stringtestcommand hello", AllChat = true, LaneColor = default };
+        var ctx = new ChatCommandContext(message, commandName, args, prefix);
+
+        var results = new List<HookResult>();
+        var plugin = WithRegisteredPlugin((_, chatRegistry) =>
+        {
+            foreach (var handler in chatRegistry.Snapshot(ctx.Command) ?? [])
+                results.Add(handler(ctx));
+            TimerEngine.OnTick();
+        });
+
+        Assert.Equal(HookResult.Handled, Assert.Single(results)); // never echoed to chat
+        Assert.Empty(plugin.Received);
+    }
+
+    private const int FakePlayerSlot = 3;
+
+    // Never dereferenced: it only has to be non-null, and FakeGetEntityHandle answers for it.
+    [UnmanagedCallersOnly(CallConvs = [typeof(CallConvCdecl)])]
+    private static unsafe void* FakeGetPlayerController(int slot) => slot == FakePlayerSlot ? (void*)0x1000 : null;
+
+    // A controller's entity index is its slot plus one.
+    [UnmanagedCallersOnly(CallConvs = [typeof(CallConvCdecl)])]
+    private static unsafe uint FakeGetEntityHandle(void* entity) => FakePlayerSlot + 1;
+
     private static RecordingPlugin DispatchConsole(string command, params string[] args) =>
         WithRegisteredPlugin(_ => ConCommandManager.Dispatch(-1, command, [command, .. args]));
 
     private static RecordingPlugin WithRegisteredPlugin(Action<RecordingPlugin> dispatch)
+        => WithRegisteredPlugin((plugin, _) => dispatch(plugin));
+
+    private static RecordingPlugin WithRegisteredPlugin(
+        Action<RecordingPlugin, HandlerRegistry<string, Func<ChatCommandContext, HookResult>>> dispatch)
     {
         var plugin = new RecordingPlugin();
         var chatRegistry = new HandlerRegistry<string, Func<ChatCommandContext, HookResult>>(StringComparer.OrdinalIgnoreCase);
         CommandRegistration.RegisterPluginCommands(PluginPath, [plugin], chatRegistry);
         try
         {
-            dispatch(plugin);
+            dispatch(plugin, chatRegistry);
         }
         finally
         {

@@ -22,7 +22,6 @@ using EmitSoundParamsFn = void(__fastcall *)(void *entity, const char *soundName
 using PawnResetHeroFn = __int64(__fastcall *)(void *pawn, bool bReset);
 using PawnForceRespawnFn = void(__fastcall *)(void *pawn, uint8_t bReleaseButtons);
 using AddResourceFn = void (*)(const char *path, void *manifest);
-using GetHeroTableFn = void *(__fastcall *)();
 using HeroPrecacheFn = void(__fastcall *)(void *globalSet, const char *heroName, void *resourceCtx);
 using GetHeroDataManagerFn = void *(*)();
 using HeroNameToIdFn = int *(*)(void *manager, int *outId, const char *heroName);
@@ -75,7 +74,6 @@ static EmitSoundParamsFn g_pEmitSoundParams = nullptr;
 static PawnResetHeroFn g_pPawnResetHero = nullptr;
 static PawnForceRespawnFn g_pPawnForceRespawn = nullptr;
 static AddResourceFn g_pAddResource = nullptr;
-static GetHeroTableFn g_pGetHeroTable = nullptr;
 static HeroPrecacheFn g_pHeroPrecache = nullptr;
 static void *g_pHeroPrecacheGlobal = nullptr;
 
@@ -139,7 +137,7 @@ static void __cdecl NativeChangeTeam(void *controller, int32_t teamNum, uint8_t 
     if (!controller)
         return;
 
-    auto changeTeamFn = GetVFunc<void (*)(void *, int)>(controller, kVtblChangeTeam);
+    auto changeTeamFn = GetVFunc<void (*)(void *, int)>(controller, MemoryDataLoader::Get().GetVirtual("CBaseEntity::ChangeTeam").value());
 
     if (!bKeepHero) {
         changeTeamFn(controller, teamNum);
@@ -193,7 +191,7 @@ static void __cdecl NativePrecacheHero(const char *heroName) {
 static void __cdecl NativeTeleport(void *entity, const float *position, const float *angles, const float *velocity) {
     if (!entity)
         return;
-    auto fn = GetVFunc<TeleportFn>(entity, kVtblTeleport);
+    auto fn = GetVFunc<TeleportFn>(entity, MemoryDataLoader::Get().GetVirtual("CBaseEntity::Teleport").value());
     fn(static_cast<CBaseEntity *>(entity),
        position ? reinterpret_cast<const Vector *>(position) : nullptr,
        angles ? reinterpret_cast<const QAngle *>(angles) : nullptr,
@@ -232,15 +230,13 @@ void deadworks::ResolveHeroStatics() {
 
 void deadworks::ResolveHeroPrecacheFns() {
     auto addr = MemoryDataLoader::Get().GetOffset("CCitadelGameRules::BuildGameSessionManifest").value();
-    g_pGetHeroTable = reinterpret_cast<GetHeroTableFn>(ResolveE8Call(addr + kBGSM_GetHeroTableCall));
     g_pHeroPrecacheGlobal = reinterpret_cast<void *>(ResolveLea(addr + kBGSM_PrecacheGlobalLea));
     g_pHeroPrecache = reinterpret_cast<HeroPrecacheFn>(ResolveE8Call(addr + kBGSM_PrecacheCall));
-    g_Log->Info("HeroPrecache: table={} precache={} global={}",
-                (void *)g_pGetHeroTable, (void *)g_pHeroPrecache, g_pHeroPrecacheGlobal);
+    g_Log->Info("HeroPrecache: precache={} global={}", (void *)g_pHeroPrecache, g_pHeroPrecacheGlobal);
 }
 
 bool deadworks::IsHeroPrecacheResolved() {
-    return g_pGetHeroTable != nullptr;
+    return g_pHeroPrecache != nullptr && g_pHeroPrecacheGlobal != nullptr;
 }
 
 // ---------------------------------------------------------------------------

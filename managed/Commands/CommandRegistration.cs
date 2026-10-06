@@ -1,3 +1,4 @@
+using System.Diagnostics;
 using System.Reflection;
 using System.Runtime.CompilerServices;
 using DeadworksManaged.Api;
@@ -181,7 +182,9 @@ internal static class CommandRegistration
                 return resultOnSuccess;
             }
 
-            Invoke(plugin, method, name, boundArgs, ctx.Controller, viaChat: true);
+            // Chat arrives inside the sender's netchan ProcessMessages, which drops a client past a ~200 ms budget
+            // (6712+). The block result above doesn't depend on the method, so it can run next tick.
+            TimerEngine.EnqueueNextTick(() => InvokeDeferred(plugin, method, name, boundArgs, ctx.Controller, viaChat: true, $"/{name}"));
             return resultOnSuccess;
         };
 
@@ -252,7 +255,11 @@ internal static class CommandRegistration
                 return;
             }
 
-            Invoke(plugin, method, conName, boundArgs, ctx.Controller, viaChat: false);
+            // Client commands share the netchan budget (see RegisterChat); server/RCON stay synchronous for output capture.
+            if (ctx.IsServerCommand)
+                Invoke(plugin, method, conName, boundArgs, ctx.Controller, viaChat: false);
+            else
+                TimerEngine.EnqueueNextTick(() => InvokeDeferred(plugin, method, conName, boundArgs, ctx.Controller, viaChat: false, conName));
         };
 
         if (ConCommandManager.IsRegistered(conName))
@@ -366,6 +373,27 @@ internal static class CommandRegistration
     {
         Console.WriteLine($"[CommandRegistration] {plugin.Name}: command '{name}' threw {ex}");
         reply(FailedMessage);
+    }
+
+    private static void InvokeDeferred(
+        IDeadworksPlugin plugin,
+        MethodInfo method,
+        string name,
+        object?[] boundArgs,
+        CCitadelPlayerController? player,
+        bool viaChat,
+        string label)
+    {
+        var start = Stopwatch.GetTimestamp();
+        try
+        {
+            Invoke(plugin, method, name, boundArgs, player, viaChat);
+        }
+        catch (Exception ex)
+        {
+            Console.WriteLine($"[CommandRegistration] {plugin.Name} {label} threw: {ex.Message}");
+        }
+        PluginLoader.WarnIfSlow(start, $"{plugin.Name} {label}");
     }
 
     private static void ReplyViaChat(CCitadelPlayerController? to, string message)

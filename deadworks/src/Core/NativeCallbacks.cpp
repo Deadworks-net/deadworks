@@ -1,6 +1,7 @@
 #include "NativeCallbacks.hpp"
 #include "NativeOffsets.hpp"
 #include "NativeAbility.hpp"
+#include "NativeCollision.hpp"
 #include "NativeDamage.hpp"
 #include "NativeHero.hpp"
 #include "Deadworks.hpp"
@@ -93,7 +94,7 @@ public:
 
 // --- Entity manipulation types ---
 
-using AcceptInputFn = bool(__thiscall *)(void *thisptr, const char *pInputName, CEntityInstance *pActivator, CEntityInstance *pCaller, variant_t *pValue, int nOutputID, void *);
+using AcceptInputFn = bool(__thiscall *)(void *thisptr, const char *pInputName, CEntityInstance *pActivator, CEntityInstance *pCaller, variant_t *pValue);
 
 // ---------------------------------------------------------------------------
 // Native callback implementations - Core / Entity / Schema / ConVar / Events
@@ -704,7 +705,7 @@ static void __cdecl NativeAcceptInput(void *entity, const char *inputName, void 
     fn(entity, inputName,
        static_cast<CEntityInstance *>(activator),
        static_cast<CEntityInstance *>(caller),
-       &val, 0, nullptr);
+       &val);
 }
 
 static void __cdecl NativeSetSchemaString(void *entity, const char *className, const char *fieldName, const char *value) {
@@ -829,7 +830,8 @@ static void __cdecl NativeSendNetMessage(int msgId, const uint8_t *protoBytes, i
         g_pGameEventSystem->PostEventAbstract(-1, false, &filter, serializer, msg, 0);
     }
 
-    g_pNetworkMessages->DeallocateNetMessageAbstract(serializer, msg);
+    // The game allocated it, so its deleting destructor frees it with the game's allocator.
+    delete msg;
 }
 
 static const char *__cdecl NativeGetNetMessageName(int msgId) {
@@ -1034,19 +1036,19 @@ static void __cdecl NativeSetWaitingForPlayersRoster(uint32_t readyCount, uint32
 static int32_t __cdecl NativeGetMaxHealth(void *entity) {
     if (!entity)
         return 0;
-    return GetVFunc<int(__thiscall *)(void *)>(entity, offsets::kVtblGetMaxHealth)(entity);
+    return GetVFunc<int(__thiscall *)(void *)>(entity, MemoryDataLoader::Get().GetVirtual("CBaseEntity::GetMaxHealth").value())(entity);
 }
 
 static int32_t __cdecl NativeHeal(void *entity, float amount) {
     if (!entity)
         return 0;
-    return GetVFunc<int(__thiscall *)(void *, float)>(entity, offsets::kVtblHeal)(entity, amount);
+    return GetVFunc<int(__thiscall *)(void *, float)>(entity, MemoryDataLoader::Get().GetVirtual("CBaseEntity::Heal").value())(entity, amount);
 }
 
 static void __cdecl NativeSetScale(void *entity, float scale) {
     if (!entity)
         return;
-    GetVFunc<void(__thiscall *)(void *, float)>(entity, offsets::kVtblSetScale)(entity, scale);
+    GetVFunc<void(__thiscall *)(void *, float)>(entity, MemoryDataLoader::Get().GetVirtual("CBaseModelEntity::SetScale").value())(entity, scale);
 }
 
 // ---------------------------------------------------------------------------
@@ -1188,6 +1190,7 @@ static uint32_t __cdecl NativeTakeSoundEventGuid() {
 // ---------------------------------------------------------------------------
 
 void deadworks::ResolveNativeStatics() {
+    ResolveCollisionStatics();
     ResolveDamageStatics();
     ResolveHeroStatics();
     ResolveSubclassStatics();
@@ -1295,6 +1298,7 @@ void deadworks::PopulateNativeCallbacks(NativeCallbacks &callbacks) {
 
     // Subsystems
     PopulateAbilityNatives(callbacks);
+    PopulateCollisionNatives(callbacks);
     PopulateDamageNatives(callbacks);
     PopulateHeroNatives(callbacks);
 

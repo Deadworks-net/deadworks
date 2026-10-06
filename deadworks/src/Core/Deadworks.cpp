@@ -28,6 +28,7 @@
 #include "Hooks/CheckTransmit.hpp"
 #include "Hooks/InitializeHeroOnPawn.hpp"
 #include "Hooks/FireModifierEvent.hpp"
+#include "Hooks/ReplayComplete.hpp"
 #include "A2SPatch.hpp"
 
 #include "../Memory/MemoryDataLoader.hpp"
@@ -256,6 +257,13 @@ void Deadworks::PostInit() {
     HookInline(hooks::g_TraceShape,
                "TraceShape",
                &hooks::Hook_TraceShape);
+    {
+        // The signature is a call to it; the target is its rel32.
+        auto call = MemoryDataLoader::Get().GetOffset("CCitadelGameRules::IsReplayComplete").value();
+        auto target = call + 5 + *reinterpret_cast<int32_t *>(call + 1);
+        hooks::g_IsReplayComplete = safetyhook::create_inline(target, &hooks::Hook_IsReplayComplete);
+        g_Log->Info("Hooked CCitadelGameRules::IsReplayComplete");
+    }
 
     // Touch hooks (StartTouch / EndTouch) are initialized lazily in OnEntityCreated
     // because we need an entity vtable to resolve the virtual function addresses.

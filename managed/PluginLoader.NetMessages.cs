@@ -1,3 +1,4 @@
+using System.Diagnostics;
 using System.Reflection;
 using Google.Protobuf;
 using DeadworksManaged.Api;
@@ -219,6 +220,7 @@ internal static partial class PluginLoader
         var result = HookResult.Continue;
         foreach (var handler in handlers)
         {
+            var start = Stopwatch.GetTimestamp();
             try
             {
                 var hr = InvokeIncomingHandler(handler, message, msgId, senderSlot);
@@ -228,6 +230,7 @@ internal static partial class PluginLoader
             {
                 Console.WriteLine($"[PluginLoader] Net message incoming handler for msgId={msgId} threw: {ex.Message}");
             }
+            WarnIfSlow(start, $"{handler.Method.DeclaringType?.Name}.{handler.Method.Name} (incoming msgId={msgId})");
         }
 
         return result;
