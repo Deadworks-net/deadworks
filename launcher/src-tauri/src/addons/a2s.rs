@@ -22,7 +22,7 @@ enum Reply {
 
 /// Asks `addr` for its rules; a bare host gets the default port, as `ping_server` does.
 /// Blocking: call it from `spawn_blocking`.
-pub fn query_rules(addr: &str, wait: Duration) -> Result<HashMap<String, String>, String> {
+pub fn query_rules(addr: &str, wait: Duration, require_challenge: bool) -> Result<HashMap<String, String>, String> {
     let addr = if addr.contains(':') {
         addr.to_string()
     } else {
@@ -68,6 +68,15 @@ pub fn query_rules(addr: &str, wait: Duration) -> Result<HashMap<String, String>
             Err(e) => return Err(format!("No A2S_RULES reply from {}: {}", addr, e)),
         };
         match parse_reply(&buf[..n])? {
+            // Steam answers a stranger with a challenge first. Rules that arrive without one
+            // came from someone who did not have to see our request to send them: a forged
+            // source address is all it takes. Thrown away, and the question asked again.
+            Reply::Rules(_) if require_challenge && !challenged => {
+                sends_left -= 1;
+                if sends_left == 0 {
+                    return Err(format!("{} answered A2S_RULES without the challenge Steam requires", addr));
+                }
+            }
             Reply::Rules(rules) => return Ok(rules),
             Reply::Challenge(_) if challenged => {
                 return Err(format!("{} kept answering A2S_RULES with a new challenge", addr));
@@ -181,9 +190,27 @@ mod tests {
             server.send_to(&rules_packet(&[("dw_ver", "1")]), from).unwrap();
         });
 
-        let rules = query_rules(&addr, Duration::from_secs(2)).unwrap();
+        let rules = query_rules(&addr, Duration::from_secs(2), true).unwrap();
         responder.join().unwrap();
         assert_eq!(rules["dw_ver"], "1");
+    }
+
+    #[test]
+    fn rules_without_a_challenge_are_not_believed_from_a_stranger() {
+        let server = UdpSocket::bind("127.0.0.1:0").unwrap();
+        let addr = server.local_addr().unwrap().to_string();
+        let responder = std::thread::spawn(move || {
+            let mut buf = [0u8; 64];
+            // Answers every request with rules straight away, as a forged reply would.
+            server.set_read_timeout(Some(Duration::from_millis(1500))).unwrap();
+            while let Ok((_, from)) = server.recv_from(&mut buf) {
+                server.send_to(&rules_packet(&[("dw_ver", "1"), ("dw_fastdl", "http://evil.example")]), from).unwrap();
+            }
+        });
+
+        assert!(query_rules(&addr, Duration::from_millis(600), true).unwrap_err().contains("challenge"));
+        assert_eq!(query_rules(&addr, Duration::from_millis(600), false).unwrap()["dw_ver"], "1");
+        responder.join().unwrap();
     }
 
     #[test]
@@ -198,7 +225,7 @@ mod tests {
             server.send_to(&rules_packet(&[("dw_ver", "1")]), from).unwrap();
         });
 
-        let rules = query_rules(&addr, Duration::from_millis(900)).unwrap();
+        let rules = query_rules(&addr, Duration::from_millis(900), false).unwrap();
         responder.join().unwrap();
         assert_eq!(rules["dw_ver"], "1");
     }
@@ -207,6 +234,6 @@ mod tests {
     fn times_out_against_a_silent_server() {
         let silent = UdpSocket::bind("127.0.0.1:0").unwrap();
         let addr = silent.local_addr().unwrap().to_string();
-        assert!(query_rules(&addr, Duration::from_millis(200)).is_err());
+        assert!(query_rules(&addr, Duration::from_millis(200), true).is_err());
     }
 }

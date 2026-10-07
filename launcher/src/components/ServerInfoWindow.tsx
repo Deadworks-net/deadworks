@@ -1,6 +1,6 @@
 import { useEffect, useState, useCallback } from "react";
 import { getCurrentWebviewWindow } from "@tauri-apps/api/webviewWindow";
-import { connectAnyway, fetchServers, prepareAndConnect, recordId } from "@/lib/tauri";
+import { cancelConnect, connectAnyway, fetchServers, prepareAndConnect, recordId } from "@/lib/tauri";
 import type { Server } from "@/lib/types";
 import styles from "./ServerInfoWindow.module.css";
 
@@ -53,13 +53,15 @@ export default function ServerInfoWindow() {
         setError(result.message);
       }
     } catch (e) {
-      setError(String(e));
+      if (String(e) !== "CANCELLED") setError(String(e));
     } finally {
       setJoining(false);
     }
   };
 
-  const handleClose = () => {
+  const handleClose = async () => {
+    // A join left running would launch the game after this window is gone.
+    if (joining) await cancelConnect().catch(() => {});
     getCurrentWebviewWindow().close();
   };
 

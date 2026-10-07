@@ -1,5 +1,5 @@
 import { useState, useEffect, useRef } from "react";
-import { prepareAndConnect, connectAnyway, listenDownloadProgress, recordId } from "@/lib/tauri";
+import { prepareAndConnect, connectAnyway, cancelConnect, listenDownloadProgress, recordId } from "@/lib/tauri";
 import type { Server } from "@/lib/types";
 import styles from "./ConnectDialog.module.css";
 import { cn } from "@/lib/utils";
@@ -7,9 +7,16 @@ import { cn } from "@/lib/utils";
 interface ConnectDialogProps {
   server: Server;
   onClose: () => void;
+  /**
+   * Ask before doing anything. For a join the player did not start by picking a server here: a
+   * link on a web page can open this dialog, and joining downloads and installs that server's
+   * content.
+   */
+  askFirst?: boolean;
 }
 
-export default function ConnectDialog({ server, onClose }: ConnectDialogProps) {
+export default function ConnectDialog({ server, onClose, askFirst = false }: ConnectDialogProps) {
+  const [agreed, setAgreed] = useState(!askFirst);
   const [status, setStatus] = useState("Initializing...");
   const [progress, setProgress] = useState<number | null>(null);
   const [error, setError] = useState<string | null>(null);
@@ -20,7 +27,7 @@ export default function ConnectDialog({ server, onClose }: ConnectDialogProps) {
   const partialRef = useRef(false);
 
   useEffect(() => {
-    if (startedRef.current) return;
+    if (!agreed || startedRef.current) return;
     startedRef.current = true;
 
     let unlisten: (() => void) | null = null;
@@ -73,6 +80,8 @@ export default function ConnectDialog({ server, onClose }: ConnectDialogProps) {
         }
       } catch (e) {
         const msg = typeof e === "string" ? e : String(e);
+        // The player closed the dialog; there is no one left to tell.
+        if (msg === "CANCELLED") return;
         setError(
           msg.includes("FILE_IN_USE")
             ? "One of this server's files is currently loaded in Deadlock. " +
@@ -87,7 +96,14 @@ export default function ConnectDialog({ server, onClose }: ConnectDialogProps) {
     return () => {
       unlisten?.();
     };
-  }, [server, onClose]);
+  }, [server, onClose, agreed]);
+
+  // Leaving the dialog ends the join. Without this the downloads carried on behind it and the
+  // game launched whenever they finished.
+  function leave() {
+    void cancelConnect();
+    onClose();
+  }
 
   // Go again with the mismatch tolerated. This re-downloads, so clear the error and hand
   // the dialog back to the progress listener rather than sitting on a dead message.
@@ -103,7 +119,8 @@ export default function ConnectDialog({ server, onClose }: ConnectDialogProps) {
       setStatus(result.message);
       setTimeout(onClose, 2000);
     } catch (e) {
-      setError(typeof e === "string" ? e : String(e));
+      const msg = typeof e === "string" ? e : String(e);
+      if (msg !== "CANCELLED") setError(msg);
     }
   }
 
@@ -113,8 +130,31 @@ export default function ConnectDialog({ server, onClose }: ConnectDialogProps) {
   // that is how the rest of this path classifies errors across the command boundary.
   const mismatch = failed && error.includes("does not match the version the server runs");
 
+  if (!agreed) {
+    return (
+      <div className={styles.overlay} onClick={(e) => e.target === e.currentTarget && onClose()}>
+        <div className={styles.box}>
+          <h3 className={styles.title}>Join this server?</h3>
+          <p className={styles.serverName}>{server.name}</p>
+          <p className={styles.addr}>{server.address}</p>
+          <p className={styles.dialogMessage}>
+            A link asked the launcher to join this server.
+            <span className={styles.hint}>
+              Joining downloads and installs the server's custom content first. Only continue if
+              you meant to open this link.
+            </span>
+          </p>
+          <div className={styles.actions}>
+            <button onClick={() => setAgreed(true)} className={styles.cancelBtn}>JOIN</button>
+            <button onClick={onClose} className={styles.cancelBtn}>CANCEL</button>
+          </div>
+        </div>
+      </div>
+    );
+  }
+
   return (
-    <div className={styles.overlay} onClick={(e) => e.target === e.currentTarget && onClose()}>
+    <div className={styles.overlay} onClick={(e) => e.target === e.currentTarget && leave()}>
       <div className={styles.box}>
         <h3 className={styles.title}>{failed ? "Could not join server" : "Connecting to server..."}</h3>
         <p className={styles.serverName}>{server.name}</p>
@@ -150,7 +190,7 @@ export default function ConnectDialog({ server, onClose }: ConnectDialogProps) {
               CONNECT ANYWAY
             </button>
           )}
-          <button onClick={onClose} className={styles.cancelBtn}>CANCEL</button>
+          <button onClick={leave} className={styles.cancelBtn}>CANCEL</button>
         </div>
       </div>
     </div>

@@ -39,6 +39,7 @@ export default function App() {
           key={request.requestId}
           server={request.server}
           onClose={clear}
+          askFirst
         />
       )}
       {request?.error && (

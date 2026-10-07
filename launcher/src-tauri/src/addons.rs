@@ -26,10 +26,13 @@ const VPK_MAGIC: [u8; 4] = [0x34, 0x12, 0xAA, 0x55]; // 0x55aa1234 LE
 
 /// Hard cap on VPK size (4 GiB), both as downloaded and once decompressed, to bound
 /// what a hostile server or host can make the launcher fetch and write.
-const MAX_VPK_BYTES: u64 = 4 * 1024 * 1024 * 1024;
+pub(crate) const MAX_VPK_BYTES: u64 = 4 * 1024 * 1024 * 1024;
 
-/// The most one join may download, across all of a server's content.
+/// The most one join may put on disk, across all of a server's content.
 const MAX_JOIN_BYTES: u64 = 16 * 1024 * 1024 * 1024;
+/// A download has to bring in at least this much in every window of this length.
+const SLOW_WINDOW: Duration = Duration::from_secs(60);
+const SLOW_FLOOR_BYTES: u64 = 512 * 1024;
 
 /// How long to wait for a server's A2S_RULES reply before asking the API instead.
 const RULES_TIMEOUT: Duration = Duration::from_millis(1500);
@@ -75,9 +78,17 @@ struct ManifestItem {
 }
 
 impl ManifestItem {
+    /// The hash this item must match, if it names one worth the name. `starts_with` is how a
+    /// prefix is compared, so an empty or stub hash would match any file at all.
+    fn wanted_hash(&self) -> Option<&str> {
+        self.sha256
+            .as_deref()
+            .filter(|h| h.len() >= rules::HASH_LEN && h.bytes().all(|b| b.is_ascii_hexdigit()))
+    }
+
     fn expected(&self) -> Option<Expected> {
-        self.sha256.as_ref().map(|sha256| Expected {
-            sha256: sha256.clone(),
+        self.wanted_hash().map(|sha256| Expected {
+            sha256: sha256.to_string(),
             size: self.size,
             enforce: !self.accept_mismatch,
         })
@@ -182,8 +193,29 @@ struct VersionEntry {
 
 #[derive(Debug, Default, Serialize, Deserialize)]
 struct VersionsState {
+    /// What the launcher installed, keyed `kind/filename`. Older files are keyed by filename
+    /// alone, which let an addon and a map of the same name overwrite each other's entry.
     #[serde(default)]
-    managed: HashMap<String, VersionEntry>, // filename → entry
+    managed: HashMap<String, VersionEntry>,
+}
+
+impl VersionsState {
+    fn key(kind: &str, filename: &str) -> String {
+        format!("{kind}/{filename}")
+    }
+
+    fn entry(&self, kind: &str, filename: &str) -> Option<&VersionEntry> {
+        self.managed
+            .get(&Self::key(kind, filename))
+            .or_else(|| self.managed.get(filename).filter(|e| e.kind == kind))
+    }
+
+    fn record(&mut self, filename: &str, entry: VersionEntry) {
+        if self.managed.get(filename).is_some_and(|old| old.kind == entry.kind) {
+            self.managed.remove(filename);
+        }
+        self.managed.insert(Self::key(&entry.kind, filename), entry);
+    }
 }
 
 // ── Validation ──
@@ -370,6 +402,7 @@ pub(crate) async fn download_and_decompress<E>(
     window: &E,
     cancel: Option<Arc<AtomicBool>>,
     local_source: bool,
+    max_bytes: u64,
 ) -> Result<String, String>
 where
     E: Emitter<tauri::Wry> + Clone + Send + Sync + 'static,
@@ -388,11 +421,11 @@ where
     let too_big = || {
         format!(
             "compressed payload for {} exceeds maximum size ({} bytes)",
-            item_name, MAX_VPK_BYTES
+            item_name, max_bytes
         )
     };
     let total_compressed = response.content_length().unwrap_or(0);
-    if total_compressed > MAX_VPK_BYTES {
+    if total_compressed > max_bytes {
         return Err(too_big());
     }
     let bz2_tmp = dest_vpk.with_extension("vpk.bz2.part");
@@ -409,14 +442,34 @@ where
 
         let mut stream = response.bytes_stream();
         let mut downloaded: u64 = 0;
-        while let Some(chunk) = stream.next().await {
+        // The host sets the pace, so it is held to one: a download that trickles would otherwise
+        // keep a join (and the install lock) alive for as long as its host liked.
+        let mut window_started = std::time::Instant::now();
+        let mut window_bytes: u64 = 0;
+        loop {
+            // Woken every second whether or not anything arrived, so cancelling takes effect
+            // against a host that has gone quiet.
+            let next = tokio::time::timeout(Duration::from_secs(1), stream.next()).await;
             if cancelled(&cancel) {
                 return Err(CANCELLED_MSG.into());
             }
+            if window_started.elapsed() >= SLOW_WINDOW {
+                if window_bytes < SLOW_FLOOR_BYTES {
+                    return Err(format!("Download error for {}: the download host is sending too slowly", item_name));
+                }
+                window_started = std::time::Instant::now();
+                window_bytes = 0;
+            }
+            let chunk = match next {
+                Err(_) => continue,
+                Ok(None) => break,
+                Ok(Some(chunk)) => chunk,
+            };
             let chunk = chunk.map_err(|e| format!("Download error for {}: {}", item_name, e))?;
             downloaded += chunk.len() as u64;
+            window_bytes += chunk.len() as u64;
             // Content-Length is only a claim; hold the stream itself to the cap.
-            if downloaded > MAX_VPK_BYTES {
+            if downloaded > max_bytes {
                 return Err(too_big());
             }
             file.write_all(&chunk)
@@ -456,7 +509,7 @@ where
             &bz2_tmp_clone,
             &vpk_tmp_clone,
             &name,
-            MAX_VPK_BYTES,
+            max_bytes,
             expected.as_ref(),
             |written| {
                 if cancelled(&cancel_bg) {
@@ -519,13 +572,38 @@ static INSTALLING: tokio::sync::Mutex<()> = tokio::sync::Mutex::const_new(());
 
 // ── Main command ──
 
+/// The join a launcher window is waiting on, so its CANCEL can stop it. Starting another
+/// cancels the one before: nothing is left running behind a dialog that has gone.
+static WINDOW_JOIN: Mutex<Option<Arc<AtomicBool>>> = Mutex::new(None);
+
+fn begin_window_join() -> Arc<AtomicBool> {
+    let flag = Arc::new(AtomicBool::new(false));
+    if let Some(previous) = WINDOW_JOIN.lock().unwrap().replace(flag.clone()) {
+        previous.store(true, Ordering::Relaxed);
+    }
+    flag
+}
+
+/// Stops the join started by `prepare_and_connect` or `connect_anyway`: the downloads end, and
+/// the game is not launched when they would have finished.
+#[tauri::command]
+pub fn cancel_connect() {
+    if let Some(flag) = WINDOW_JOIN.lock().unwrap().as_ref() {
+        flag.store(true, Ordering::Relaxed);
+    }
+}
+
 #[tauri::command]
 pub async fn prepare_and_connect(
     window: tauri::Window,
     server_id: String,
     addr: String,
 ) -> Result<crate::connect::ConnectResult, String> {
-    prepare(&window, &server_id, &addr, Strictness::Exact).await?;
+    let cancel = begin_window_join();
+    prepare(&window, &server_id, &addr, Strictness::Exact, &cancel).await?;
+    if cancel.load(Ordering::Relaxed) {
+        return Err(CANCELLED_MSG.into());
+    }
     let _ = window.emit("download-progress", connecting_event());
     crate::connect::connect_to_server_inner(&addr)
 }
@@ -547,7 +625,13 @@ pub async fn connect_anyway(
     // Only a mismatch the player was just shown is theirs to wave through. After any other
     // failure this is one more ordinary attempt, whose errors no longer stop the join.
     let strictness = if accept_mismatch { Strictness::AcceptMismatch } else { Strictness::Exact };
-    match prepare(&window, &server_id, &addr, strictness).await {
+    let cancel = begin_window_join();
+    let prepared = prepare(&window, &server_id, &addr, strictness, &cancel).await;
+    // "Regardless" covers what went wrong with the content, not a player who has since left.
+    if cancel.load(Ordering::Relaxed) {
+        return Err(CANCELLED_MSG.into());
+    }
+    match prepared {
         // Only a pass that got everything gets to say so; the dialog reads this as "done".
         Ok(()) => {
             let _ = window.emit("download-progress", connecting_event());
@@ -573,6 +657,7 @@ async fn prepare(
     server_id: &str,
     addr: &str,
     strictness: Strictness,
+    cancel: &Arc<AtomicBool>,
 ) -> Result<(), String> {
     let api_url = resolve_api_url(window.app_handle());
 
@@ -611,7 +696,7 @@ async fn prepare(
         return Ok(());
     }
 
-    let installed = install_items(&items, &game_dir, "download-progress", window, None, None).await;
+    let installed = install_items(&items, &game_dir, "download-progress", window, Some(cancel.clone()), None).await;
     match installed {
         // What the server advertised could not be installed, so use the API's record if
         // it has one that covers the same content. Otherwise the failure is the answer.
@@ -625,7 +710,7 @@ async fn prepare(
                     validate_filename(&item.filename)?;
                 }
                 prepare_gameinfo(&game_dir, &items)?;
-                install_items(&items, &game_dir, "download-progress", window, None, None).await
+                install_items(&items, &game_dir, "download-progress", window, Some(cancel.clone()), None).await
             };
             // The record did not have those builds either: the first failure is the one
             // the player can act on, so that is the one they see.
@@ -708,7 +793,7 @@ fn api_covers(
     advertised.iter().all(|wanted| {
         let named = api.iter().any(|i| i.filename == wanted.filename && i.kind == wanted.kind);
         let kept_local_map = wanted.kind == "map"
-            && !state.managed.get(&wanted.filename).is_some_and(|e| e.kind == wanted.kind)
+            && state.entry(&wanted.kind, &wanted.filename).is_none()
             && target_dir_for(&wanted.kind, game_dir)
                 .is_ok_and(|dir| dir.join(format!("{}.vpk", wanted.filename)).exists());
         named || kept_local_map
@@ -799,7 +884,8 @@ async fn resolve_items(
 /// server, or one started with -nomaster) or does not use the format.
 async fn query_advertised(addr: &str) -> Option<rules::Advertised> {
     let query_addr = addr.to_string();
-    let reply = tokio::task::spawn_blocking(move || a2s::query_rules(&query_addr, RULES_TIMEOUT))
+    let stranger = !fetch::server_is_local(addr);
+    let reply = tokio::task::spawn_blocking(move || a2s::query_rules(&query_addr, RULES_TIMEOUT, stranger))
         .await
         .ok()?;
     let advertised = match reply {
@@ -862,11 +948,8 @@ async fn already_current(
     hashes: &Arc<Mutex<HashCache>>,
     progress: &Arc<dyn Fn(u64, u64) + Send + Sync>,
 ) -> Result<bool, String> {
-    let managed = state
-        .managed
-        .get(&item.filename)
-        .filter(|e| e.kind == item.kind);
-    let Some(wanted) = item.sha256.as_deref() else {
+    let managed = state.entry(&item.kind, &item.filename);
+    let Some(wanted) = item.wanted_hash() else {
         // Versioned by the API's upload counter.
         return Ok(dest.exists() && managed.is_some_and(|e| e.version == item.version));
     };
@@ -1009,6 +1092,10 @@ where
         f(&sizes);
     }
 
+    // The sizes above are the server's word, and an entry may give none. What is written is
+    // counted as it lands, so the cap holds whatever was advertised.
+    let mut budget = MAX_JOIN_BYTES;
+
     for (idx, item) in items.iter().enumerate() {
         if cancelled(&cancel) {
             return Err(CANCELLED_MSG.into());
@@ -1058,16 +1145,24 @@ where
             window,
             cancel.clone(),
             item.local_source,
+            MAX_VPK_BYTES.min(budget),
         )
         .await?;
+        budget = budget.saturating_sub(std::fs::metadata(&dest_vpk).map(|m| m.len()).unwrap_or(0));
+        if budget == 0 && items[idx + 1..].iter().zip(&sizes[idx + 1..]).any(|(_, size)| *size > 0) {
+            return Err(format!(
+                "this server's content is more than the {} GiB the launcher will install for one join",
+                MAX_JOIN_BYTES / (1024 * 1024 * 1024)
+            ));
+        }
 
         {
             let mut hashes = hashes.lock().unwrap();
             hashes.record(&dest_vpk, &sha);
             hashes.save();
         }
-        state.managed.insert(
-            item.filename.clone(),
+        state.record(
+            &item.filename,
             VersionEntry {
                 kind: item.kind.clone(),
                 version: item.version,
@@ -1325,7 +1420,7 @@ mod tests {
         std::fs::write(maps.join("dl_midtown.vpk"), b"stock").unwrap();
         std::fs::write(maps.join("ware_arena.vpk"), b"ours").unwrap();
         let mut state = VersionsState::default();
-        state.managed.insert("ware_arena".into(), VersionEntry { kind: "map".into(), ..Default::default() });
+        state.record("ware_arena", VersionEntry { kind: "map".into(), ..Default::default() });
 
         let covers = |api: &[ManifestItem], advertised: &[ManifestItem]| api_covers(api, advertised, &game_dir, &state);
         let advertised = [item("turbo", "addon"), item("dl_midtown", "map")];

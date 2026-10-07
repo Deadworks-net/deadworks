@@ -347,6 +347,7 @@ pub async fn ensure(
             None, // the bootstrap update is small and never user-cancelled
             // The API names this download. A developer's local API may point at itself.
             crate::addons::fetch::url_host_is_local(&crate::addons::resolve_api_url(app)),
+            crate::addons::MAX_VPK_BYTES,
         )
         .await?;
 

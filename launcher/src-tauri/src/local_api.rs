@@ -472,6 +472,26 @@ fn from_browser(req: &tiny_http::Request) -> bool {
     })
 }
 
+/// Whether a `Host` header names this machine by a loopback address. A web page can reach the
+/// bridge through any DNS name that resolves to 127.0.0.1, and for such a name a browser sends
+/// none of the headers `from_browser` looks for. The in-game browser always uses the literal
+/// address, so anything else is not it.
+fn loopback_host(value: &str) -> bool {
+    let value = value.trim();
+    let host = match value.rsplit_once(':') {
+        Some((host, port)) if !port.is_empty() && port.bytes().all(|b| b.is_ascii_digit()) => host,
+        _ => value,
+    };
+    host == "127.0.0.1" || host == "[::1]" || host.eq_ignore_ascii_case("localhost")
+}
+
+fn addressed_to_loopback(req: &tiny_http::Request) -> bool {
+    req.headers()
+        .iter()
+        .filter(|h| h.field.as_str().as_str().eq_ignore_ascii_case("host"))
+        .all(|h| loopback_host(h.value.as_str()))
+}
+
 /// A content download of our own that a hostile host redirected here. Following it would let
 /// any server start installs on the player's machine by naming this bridge as its download.
 fn from_launcher_download(req: &tiny_http::Request) -> bool {
@@ -497,7 +517,7 @@ fn respond(req: tiny_http::Request, png: Vec<u8>) {
 }
 
 fn handle(app: &AppHandle, req: tiny_http::Request) {
-    if from_browser(&req) || from_launcher_download(&req) {
+    if from_browser(&req) || from_launcher_download(&req) || !addressed_to_loopback(&req) {
         let _ = req.respond(tiny_http::Response::empty(403));
         return;
     }
@@ -871,6 +891,16 @@ mod tests {
         assert_eq!(ping_result(Some(seq), 9), PING_PENDING, "out of range");
         assert_eq!(ping_result(Some(seq + 1), 0), PING_PENDING, "stale batch");
         assert_eq!(ping_result(None, 0), PING_PENDING);
+    }
+
+    #[test]
+    fn only_a_loopback_host_header_is_served() {
+        for ok in ["127.0.0.1:47800", "127.0.0.1", "localhost:47801", "LOCALHOST", "[::1]:47800", " 127.0.0.1:47803 "] {
+            assert!(loopback_host(ok), "{ok}");
+        }
+        for bad in ["lvh.me:47800", "127.0.0.1.nip.io:47800", "localtest.me", "127.0.0.1.evil.example", "evil.example:47800", "127.0.0.2:47800", "", "127.0.0.1:x", "localhost.evil.example"] {
+            assert!(!loopback_host(bad), "{bad}");
+        }
     }
 
     #[test]

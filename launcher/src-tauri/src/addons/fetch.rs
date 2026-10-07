@@ -5,9 +5,11 @@
 //! bridge the in-game browser drives, where a plain GET starts an install. So unless the game
 //! server is itself on the player's network, nothing here will fetch from a local address: not
 //! as the URL given, not as a redirect, and not as what a public name turns out to resolve to.
+//! That last one is settled before anything connects (see `PublicOnly`), so a name pointing at a
+//! local address never receives the request at all.
 
-use std::net::IpAddr;
-use std::sync::OnceLock;
+use std::net::{IpAddr, Ipv4Addr, SocketAddr, ToSocketAddrs};
+use std::sync::{Arc, OnceLock};
 use std::time::Duration;
 
 /// Sent with every content download. The in-game bridge refuses requests that carry it, so a
@@ -27,19 +29,32 @@ pub fn is_local_ip(ip: IpAddr) -> bool {
             v4.is_loopback()
                 || v4.is_private()
                 || v4.is_link_local()
-                || v4.is_unspecified()
-                || v4.is_broadcast()
+                // "This network", 0.0.0.0/8: several stacks deliver it to the local machine.
+                || o[0] == 0
                 // Carrier-grade NAT, 100.64.0.0/10.
                 || (o[0] == 100 && (o[1] & 0xC0) == 64)
+                // IETF protocol assignments 192.0.0.0/24 and benchmarking 198.18.0.0/15.
+                || (o[0] == 192 && o[1] == 0 && o[2] == 0)
+                || (o[0] == 198 && (o[1] & 0xFE) == 18)
+                // Multicast, reserved and broadcast: 224.0.0.0 and up.
+                || o[0] >= 224
         }
         IpAddr::V6(v6) => {
-            let first = v6.segments()[0];
+            let s = v6.segments();
+            let embedded = |hi: u16, lo: u16| is_local_ip(IpAddr::V4(Ipv4Addr::new((hi >> 8) as u8, hi as u8, (lo >> 8) as u8, lo as u8)));
             v6.is_loopback()
                 || v6.is_unspecified()
-                // Unique local fc00::/7 and link-local fe80::/10.
-                || (first & 0xFE00) == 0xFC00
-                || (first & 0xFFC0) == 0xFE80
+                || v6.is_multicast()
+                // Unique local fc00::/7, link-local fe80::/10 and the retired site-local fec0::/10.
+                || (s[0] & 0xFE00) == 0xFC00
+                || (s[0] & 0xFFC0) == 0xFE80
+                || (s[0] & 0xFFC0) == 0xFEC0
+                // Addresses that carry an IPv4 one: mapped, the old "compatible" form, NAT64
+                // 64:ff9b::/96 and 6to4 2002::/16. Each is as local as the address inside it.
                 || v6.to_ipv4_mapped().is_some_and(|v4| is_local_ip(IpAddr::V4(v4)))
+                || (s[..6] == [0, 0, 0, 0, 0, 0] && embedded(s[6], s[7]))
+                || (s[..6] == [0x64, 0xFF9B, 0, 0, 0, 0] && embedded(s[6], s[7]))
+                || (s[0] == 0x2002 && embedded(s[1], s[2]))
         }
     }
 }
@@ -70,6 +85,41 @@ fn url_is_local(url: &reqwest::Url) -> bool {
     url.host_str().is_none_or(is_local_host)
 }
 
+/// Name resolution for downloads that must not reach a local address: every local answer is
+/// dropped before anything connects. Checking the address after the fact would be too late for a
+/// GET, which has done its work by the time the reply arrives.
+struct PublicOnly;
+
+impl reqwest::dns::Resolve for PublicOnly {
+    fn resolve(&self, name: reqwest::dns::Name) -> reqwest::dns::Resolving {
+        let host = name.as_str().to_string();
+        Box::pin(async move {
+            let found = tokio::task::spawn_blocking(move || (host.as_str(), 0).to_socket_addrs().map(|a| a.collect::<Vec<_>>()))
+                .await
+                .map_err(|e| Box::new(e) as Box<dyn std::error::Error + Send + Sync>)??;
+            let public: Vec<SocketAddr> = found.into_iter().filter(|a| !is_local_ip(a.ip())).collect();
+            if public.is_empty() {
+                return Err("the download host resolves to a local address, which this server may not name".into());
+            }
+            Ok(Box::new(public.into_iter()) as reqwest::dns::Addrs)
+        })
+    }
+}
+
+/// An error with the reasons under it; reqwest's own text stops at "error sending request".
+fn explain(error: &dyn std::error::Error) -> String {
+    let mut text = error.to_string();
+    let mut source = error.source();
+    while let Some(inner) = source {
+        let inner_text = inner.to_string();
+        if !text.contains(&inner_text) {
+            text = format!("{text}: {inner_text}");
+        }
+        source = inner.source();
+    }
+    text
+}
+
 fn build(allow_local: bool) -> reqwest::Client {
     let policy = if allow_local {
         reqwest::redirect::Policy::limited(MAX_REDIRECTS)
@@ -84,13 +134,13 @@ fn build(allow_local: bool) -> reqwest::Client {
             attempt.follow()
         })
     };
-    reqwest::Client::builder()
+    let builder = reqwest::Client::builder()
         .user_agent(USER_AGENT)
         .redirect(policy)
         .connect_timeout(CONNECT_TIMEOUT)
-        .read_timeout(READ_TIMEOUT)
-        .build()
-        .expect("the content download client could not be built")
+        .read_timeout(READ_TIMEOUT);
+    let builder = if allow_local { builder } else { builder.dns_resolver(Arc::new(PublicOnly)) };
+    builder.build().expect("the content download client could not be built")
 }
 
 fn client(allow_local: bool) -> &'static reqwest::Client {
@@ -113,16 +163,7 @@ pub async fn get(url: &str, allow_local: bool) -> Result<reqwest::Response, Stri
     if !allow_local && url_is_local(&parsed) {
         return Err("the download host is a local address, which this server may not name".into());
     }
-    let response = client(allow_local)
-        .get(parsed)
-        .send()
-        .await
-        .map_err(|e| e.to_string())?;
-    // A public name can resolve to a local address; what was actually connected to settles it.
-    if !allow_local && response.remote_addr().is_some_and(|a| is_local_ip(a.ip())) {
-        return Err("the download host resolved to a local address, which this server may not name".into());
-    }
-    Ok(response)
+    client(allow_local).get(parsed).send().await.map_err(|e| explain(&e))
 }
 
 #[cfg(test)]
@@ -135,11 +176,14 @@ mod tests {
             "127.0.0.1", "127.8.9.10", "10.0.0.5", "172.16.0.1", "172.31.255.255", "192.168.1.1", "169.254.1.1",
             "0.0.0.0", "100.64.0.1", "100.127.255.255", "::1", "[::1]", "fc00::1", "fd12:3456::1", "fe80::1",
             "::ffff:127.0.0.1", "::ffff:192.168.0.1", "localhost", "LOCALHOST", "localhost.", "a.localhost", "printer.local",
+            "0.0.0.1", "192.0.0.8", "198.18.0.1", "198.19.255.255", "224.0.0.1", "240.0.0.1", "255.255.255.255",
+            "::7f00:1", "64:ff9b::7f00:1", "64:ff9b::c0a8:101", "2002:7f00:1::1", "2002:c0a8:101::1", "fec0::1", "ff02::1",
         ] {
             assert!(is_local_host(local), "{local}");
         }
         for public in [
             "8.8.8.8", "172.32.0.1", "100.128.0.1", "192.169.0.1", "2606:4700::1111", "dl.example.com",
+            "198.17.0.1", "198.20.0.1", "192.0.1.1", "223.255.255.255", "64:ff9b::808:808", "2002:808:808::1",
             "localhost.example.com", "notlocalhost", "api.deadworks.net",
         ] {
             assert!(!is_local_host(public), "{public}");
@@ -185,6 +229,19 @@ mod tests {
                 let err = get(&to(target), false).await.unwrap_err();
                 assert!(err.contains("redirect"), "{target}: {err}");
             }
+
+            // A public name for 127.0.0.1: refused, and the local listener never hears of it -
+            // not directly, and not at the end of a redirect.
+            let listener = std::net::TcpListener::bind("127.0.0.1:0").unwrap();
+            listener.set_nonblocking(true).unwrap();
+            let port = listener.local_addr().unwrap().port();
+            for name in ["localtest.me", "lvh.me"] {
+                let err = get(&format!("http://{name}:{port}/router/apply?reboot=1"), false).await.unwrap_err();
+                assert!(err.contains("local address"), "{name}: {err}");
+                let err = get(&to(&format!("http%3A%2F%2F{name}%3A{port}%2Fx")), false).await.unwrap_err();
+                assert!(err.contains("local address"), "{name} by redirect: {err}");
+            }
+            assert!(listener.accept().is_err(), "a request reached the local listener");
         });
     }
 }

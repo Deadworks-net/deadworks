@@ -154,6 +154,14 @@ export function prepareAndConnect(
  * once more, then connects whatever the outcome. `acceptMismatch` installs a download that is not
  * the build the server runs, and is only for a player who was just shown that mismatch.
  */
+/**
+ * Stops the join a dialog is waiting on: its downloads end and the game is not launched when
+ * they would have finished. Safe to call when nothing is running.
+ */
+export function cancelConnect(): Promise<void> {
+  return invoke<void>("cancel_connect");
+}
+
 export function connectAnyway(serverId: string, addr: string, acceptMismatch: boolean): Promise<ConnectResult> {
   return invoke<ConnectResult>("connect_anyway", { serverId, addr, acceptMismatch });
 }
