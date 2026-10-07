@@ -158,4 +158,5 @@ internal struct NativeCallbacks
 	public nint IsMapValid;
 	public nint SetConnectRejectReason;
 	public nint GetSchemaClassSize;
+	public nint GetSchemaClassAlignment;
 }

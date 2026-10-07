@@ -18,6 +18,7 @@ SchemaKey GetOffset(const char *className, uint32_t classKey, const char *member
 // True if the class is in the server's schema and declares the member itself.
 bool HasField(const char *className, uint32_t classKey, uint32_t memberKey);
 int GetClassSize(const char *className);
+int GetClassAlignment(const char *className);
 // True when className is baseClassName or inherits from it anywhere in its schema base-class tree.
 bool IsDerivedFrom(const char *className, const char *baseClassName);
 } // namespace schema

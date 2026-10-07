@@ -234,6 +234,10 @@ static int32_t __cdecl NativeGetSchemaClassSize(const char *className) {
     return className ? schema::GetClassSize(className) : 0;
 }
 
+static int32_t __cdecl NativeGetSchemaClassAlignment(const char *className) {
+    return className ? schema::GetClassAlignment(className) : 0;
+}
+
 static uint64_t __cdecl NativeFindConVar(const char *name) {
     if (!g_pCVar || !name)
         return 0;
@@ -1224,6 +1228,7 @@ void deadworks::PopulateNativeCallbacks(NativeCallbacks &callbacks) {
     callbacks.NotifyStateChanged = &NativeNotifyStateChanged;
     callbacks.SetSchemaString = &NativeSetSchemaString;
     callbacks.GetSchemaClassSize = &NativeGetSchemaClassSize;
+    callbacks.GetSchemaClassAlignment = &NativeGetSchemaClassAlignment;
 
     // ConVar
     callbacks.FindConVar = &NativeFindConVar;

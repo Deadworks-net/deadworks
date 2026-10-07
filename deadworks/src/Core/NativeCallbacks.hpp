@@ -194,6 +194,8 @@ struct NativeCallbacks {
     void(__cdecl *SetConnectRejectReason)(const char *reason);
     // sizeof a schema class in the server module, or 0 if the schema has no such class.
     int32_t(__cdecl *GetSchemaClassSize)(const char *className);
+    // alignof a schema class in the server module, or 0 if the schema has no such class.
+    int32_t(__cdecl *GetSchemaClassAlignment)(const char *className);
 };
 
 void PopulateNativeCallbacks(NativeCallbacks &callbacks);

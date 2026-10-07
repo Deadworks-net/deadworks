@@ -136,6 +136,16 @@ int GetClassSize(const char *className) {
     return pClassInfo->m_nSize;
 }
 
+int GetClassAlignment(const char *className) {
+    auto *pType = g_pSchemaSystem->FindTypeScopeForModule("server.dll");
+    if (!pType) return 0;
+
+    auto *pClassInfo = pType->FindDeclaredClass(className).Get();
+    if (!pClassInfo) return 0;
+
+    return pClassInfo->m_nAlignment;
+}
+
 static bool ClassInfoDerivesFrom(SchemaClassInfoData_t *pClassInfo, std::string_view baseClassName) {
     if (pClassInfo->m_pszName == baseClassName)
         return true;

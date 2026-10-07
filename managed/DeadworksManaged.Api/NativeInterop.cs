@@ -159,6 +159,7 @@ internal static unsafe class NativeInterop
 	public static delegate* unmanaged[Cdecl]<byte*, byte> IsMapValid => (delegate* unmanaged[Cdecl]<byte*, byte>)_cb.IsMapValid;
 	public static delegate* unmanaged[Cdecl]<byte*, void> SetConnectRejectReason => (delegate* unmanaged[Cdecl]<byte*, void>)_cb.SetConnectRejectReason;
 	public static delegate* unmanaged[Cdecl]<byte*, int> GetSchemaClassSize => (delegate* unmanaged[Cdecl]<byte*, int>)_cb.GetSchemaClassSize;
+	public static delegate* unmanaged[Cdecl]<byte*, int> GetSchemaClassAlignment => (delegate* unmanaged[Cdecl]<byte*, int>)_cb.GetSchemaClassAlignment;
 
 	// Entity movement and class checks
 	public static delegate* unmanaged[Cdecl]<void*, byte, void> SetMoveType => (delegate* unmanaged[Cdecl]<void*, byte, void>)_cb.SetMoveType;
