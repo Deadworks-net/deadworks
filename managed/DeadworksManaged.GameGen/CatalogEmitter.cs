@@ -55,11 +55,11 @@ sealed class CatalogEmitter {
 		output.Add("Console/ConVars.g.cs", w.ToString());
 
 		w = new CodeWriter();
-		w.Summary("Every console command a dedicated server has. Each runs one line at the server console: <c>Commands.changelevel(\"dl_midtown\")</c>.");
-		w.Open("public static class Commands");
+		w.Summary("Every console command a dedicated server has. Each runs one line at the server console: <c>ConCommands.changelevel(\"dl_midtown\")</c>.");
+		w.Open("public static class ConCommands");
 		w.Line("private static void Run(string command, string arguments)");
 		w.Line("\t=> global::DeadworksManaged.Api.Server.ExecuteCommand(arguments.Length == 0 ? command : command + \" \" + arguments);");
-		taken = new HashSet<string>(ObjectMembers, StringComparer.Ordinal) { "Commands", "Run" };
+		taken = new HashSet<string>(ObjectMembers, StringComparer.Ordinal) { "ConCommands", "Run" };
 		foreach (var command in root.GetProperty("commands").EnumerateArray().OrderBy(c => c.GetProperty("name").GetString(), StringComparer.Ordinal)) {
 			string name = command.GetProperty("name").GetString()!;
 			string[] flags = Flags(command);
@@ -73,7 +73,7 @@ sealed class CatalogEmitter {
 			Stats.Commands++;
 		}
 		w.Close();
-		output.Add("Console/Commands.g.cs", w.ToString());
+		output.Add("Console/ConCommands.g.cs", w.ToString());
 	}
 
 	public void EmitNames(OutputSet output, JsonElement root) {

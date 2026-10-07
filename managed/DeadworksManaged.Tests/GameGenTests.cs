@@ -35,7 +35,11 @@ public class GameGenTests {
 		  { "name": "Outer::Inner_t", "module": "server", "fields": [] }
 		], "enums": [
 		  { "name": "State_t", "module": "server", "alignment": "uint8_t", "members": [{ "name": "STATE_NONE", "value": -1 }, { "name": "State_t", "value": 0 }] },
-		  { "name": "Big_t", "module": "server", "alignment": "uint64_t", "members": [{ "name": "BIG", "value": "18446744073709551615" }] }
+		  { "name": "Big_t", "module": "server", "alignment": "uint64_t", "members": [{ "name": "BIG", "value": "18446744073709551615" }] },
+		  { "name": "Bits_t", "module": "server", "alignment": "uint32_t", "members": [
+		    { "name": "BITS_NONE", "value": 0 }, { "name": "BITS_A", "value": 1 }, { "name": "BITS_B", "value": 2 }, { "name": "BITS_C", "value": 4 }] },
+		  { "name": "Steps_t", "module": "server", "alignment": "uint32_t", "members": [
+		    { "name": "STEP_0", "value": 0 }, { "name": "STEP_1", "value": 1 }, { "name": "STEP_2", "value": 2 }, { "name": "STEP_3", "value": 3 }, { "name": "STEP_4", "value": 4 }] }
 		] }
 		""";
 
@@ -65,15 +69,28 @@ public class GameGenTests {
 		] }
 		""";
 
-	private static (Dictionary<string, string> Files, SchemaEmitter Schema, SchemaModel Model) Generate(Dictionary<string, string>? warnings = null) {
+	// One file of entity subclasses, as the modding database serves it.
+	private const string Units = """
+		{ "version": 1, "path": "scripts/units.vdata", "entries": {
+		  "thing_base": { "m_iHealth": 1 },
+		  "thing_small": { "_class": "prop_thing", "_base": "thing_base" },
+		  "info_base": { "_class": "info_base" }
+		} }
+		""";
+
+	private static (Dictionary<string, string> Files, SchemaEmitter Schema, SchemaModel Model) Generate(Dictionary<string, string>? warnings = null, ApiScanner? api = null, bool units = false) {
 		using var schemas = JsonDocument.Parse(Schemas);
 		using var entities = JsonDocument.Parse(Entities);
 		var model = SchemaModel.Load(schemas.RootElement);
 		var entityModel = EntityModel.Load(entities.RootElement);
+		if (units) {
+			using var file = JsonDocument.Parse(Units);
+			entityModel.AddSubclasses(file.RootElement);
+		}
 		string directory = Path.Combine(Path.GetTempPath(), "gamegen-" + Guid.NewGuid().ToString("N"));
 		try {
 			var output = new OutputSet(directory);
-			var emitter = new SchemaEmitter(model, entityModel, new ApiScanner(), warnings ?? []);
+			var emitter = new SchemaEmitter(model, entityModel, api ?? new ApiScanner(), warnings ?? []);
 			emitter.Emit(output);
 			new EntityEmitter(entityModel, model, emitter.Ids).Emit(output);
 			output.Flush();
@@ -150,6 +167,38 @@ public class GameGenTests {
 	}
 
 	[Fact]
+	public void An_enum_of_single_bits_is_a_flags_enum_and_a_sequence_is_not() {
+		var files = Generate().Files;
+
+		Assert.Contains("[Flags]", files["Schema/Enums/Bits_t.cs"]);
+		Assert.DoesNotContain("[Flags]", files["Schema/Enums/Steps_t.cs"]); // 1, 2 and 4 are there, but so is 3
+		Assert.DoesNotContain("[Flags]", files["Schema/Enums/State_t.cs"]);
+	}
+
+	[Fact]
+	public void A_curated_wrapper_and_its_schema_class_lead_to_each_other() {
+		var api = new ApiScanner();
+		api.ScanFile("NativeEntity.cs", "public abstract class NativeEntity { }");
+		api.ScanFile("CBaseEntity.cs", "public unsafe class CBaseEntity : NativeEntity { }");
+		api.ScanFile("CProp.cs", "public sealed class CProp : CBaseEntity { }");
+		api.ScanFile("CGlowProperty.cs", "public sealed class CGlowProperty : NativeEntity { }");
+		api.ScanFile("CNotSchema.cs", "public sealed class CNotSchema : NativeEntity { }");
+		var files = Generate(api: api).Files;
+		string bridge = files["Schema/SchemaBridge.g.cs"];
+
+		// In the API's namespace, so .Schema needs no using directive of its own.
+		Assert.Contains("namespace DeadworksManaged.Api;", bridge);
+		Assert.Contains("extension(CProp self)", bridge);
+		Assert.Contains("public Schema.CProp Schema => SchemaRegistry.Bridge<Schema.CProp>(self.EntityHandle);", bridge);
+		Assert.Contains("public Schema.CGlowProperty Schema => SchemaObject.At<Schema.CGlowProperty>(self.Handle);", bridge); // not an entity: by pointer
+		Assert.DoesNotContain("CNotSchema", bridge);
+
+		// And back, typed. CBaseEntity's is the runtime's own.
+		Assert.Contains("public new global::DeadworksManaged.Api.CProp? Entity => SchemaRegistry.Wrapper<global::DeadworksManaged.Api.CProp>(EntityHandle);", files["Schema/Classes/CProp.cs"]);
+		Assert.DoesNotContain("public new", files["Schema/Classes/CBaseEntity.cs"]);
+	}
+
+	[Fact]
 	public void Names_that_are_not_identifiers_are_adapted_and_the_games_name_kept() {
 		var (files, emitter, _) = Generate();
 
@@ -183,12 +232,28 @@ public class GameGenTests {
 	public void Every_entity_gets_a_spawn_function_typed_as_its_class() {
 		var files = Generate().Files;
 
-		Assert.Contains("public static Schema.CProp? prop_thing(Keys.CProp? keys = null) => Spawner.Create<Schema.CProp>(\"prop_thing\", keys);", files["Entities/Spawn.g.cs"]);
+		Assert.Contains("public static Schema.CProp? prop_thing(Keys.CProp? keys = null, Action<Schema.CProp>? beforeSpawn = null) => Spawner.Create(\"prop_thing\", keys, beforeSpawn);", files["Entities/Spawn.g.cs"]);
 		Assert.Contains("classes[\"CProp\"] = static () => new Schema.CProp();", files["Schema/SchemaRegistry.g.cs"]);
 		Assert.Contains("designerNames[\"prop_thing\"] = static () => new Schema.CProp();", files["Schema/SchemaRegistry.g.cs"]);
 		Assert.DoesNotContain("CGlowProperty", files["Schema/SchemaRegistry.g.cs"]); // not an entity
 		Assert.Contains("public abstract class CProp : CBaseEntity", files["Entities/Inputs.g.cs"]);
 		Assert.Contains("public const string OnUser = \"OnUser\";", files["Entities/Outputs.g.cs"]);
+	}
+
+	[Fact]
+	public void An_entity_made_from_data_entries_is_spawned_through_them() {
+		var files = Generate(units: true).Files;
+		string spawn = files["Entities/Spawn.g.cs"];
+
+		// The entry, as the class and with the keys of the entity it makes.
+		Assert.Contains("public static Schema.CProp? thing_small(Keys.CProp? keys = null, Action<Schema.CProp>? beforeSpawn = null) => Spawner.Create(\"thing_small\", keys, beforeSpawn);", spawn);
+		// Not by its own name: without an entry the game has nothing to build it from.
+		Assert.DoesNotContain(" prop_thing(", spawn);
+		// An entry that only other entries build on is not something to spawn.
+		Assert.DoesNotContain("thing_base", spawn);
+		// An entry named after its entity is one function, not two.
+		Assert.Single(spawn.Split('\n'), line => line.Contains(" info_base("));
+		Assert.Contains("public const string thing_small = \"thing_small\";", files["Entities/SubclassNames.g.cs"]);
 	}
 
 	[Fact]

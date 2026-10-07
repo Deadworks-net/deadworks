@@ -9,6 +9,7 @@ namespace DeadworksManaged.Game;
 /// in <see cref="Keys"/> add a typed property per key the entity reads; <see cref="With(string, string)"/>
 /// and its overloads set any other key by name.
 /// </summary>
+/// <example><code>Spawn.point_worldtext(new() { origin = position, message = "hello", targetname = "sign" });</code></example>
 public abstract class EntityKeys {
 	private readonly Dictionary<string, object> _values = new(StringComparer.OrdinalIgnoreCase);
 
@@ -66,6 +67,12 @@ public abstract class EntityKeys {
 	}
 }
 
+/// <summary>
+/// The spawn key values of each kind of entity, as typed properties. A class here is the
+/// parameter of a <see cref="Spawn"/> function, so it is usually written as <c>new() { … }</c>.
+/// </summary>
+public static partial class Keys;
+
 /// <summary>Creates entities for the generated <see cref="Spawn"/> methods.</summary>
 public static class Spawner {
 	/// <summary>
@@ -73,9 +80,19 @@ public static class Spawner {
 	/// <paramref name="keys"/>, and returns it as a <typeparamref name="T"/>. Null if the game
 	/// could not create it.
 	/// </summary>
-	public static T? Create<T>(string designerName, EntityKeys? keys = null) where T : Schema.CEntityInstance, ISchemaClass<T> {
-		var entity = CBaseEntity.CreateByName(designerName);
+	/// <param name="designerName">
+	/// The entity's name as a map names it (<c>prop_dynamic</c>), or the name of a data entry
+	/// it is created from (<c>npc_boss_tier1</c>), which gives the entity that entry's data.
+	/// </param>
+	/// <param name="keys">The key values a map would give the entity.</param>
+	/// <param name="beforeSpawn">
+	/// Runs after the entity exists and before it spawns, for fields the game only reads while
+	/// spawning (a unit's <c>m_iInitialTeamNum</c>).
+	/// </param>
+	public static T? Create<T>(string designerName, EntityKeys? keys = null, Action<T>? beforeSpawn = null) where T : Schema.CEntityInstance, ISchemaClass<T> {
+		var entity = CBaseEntity.CreateByDesignerName(designerName);
 		if (entity == null) return null;
+		beforeSpawn?.Invoke(SchemaRegistry.Bridge<T>(entity.EntityHandle));
 		if (keys != null) entity.Spawn(keys.Build());
 		else entity.Spawn();
 		return entity.IsValid ? SchemaRegistry.Bridge<T>(entity.EntityHandle) : null;

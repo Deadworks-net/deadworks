@@ -39,22 +39,39 @@ sealed class SchemaEmitter(SchemaModel model, EntityModel entities, ApiScanner a
 	private static readonly string[] Reserved = [
 		"Handle", "IsValid", "Equals", "GetHashCode", "ToString", "GetType", "MemberwiseClone", "Finalize", "At", "Get", "Set",
 		"Embedded", "Pointer", "EntityPointer", "GetHandle", "SetHandle", "GetString", "SetString", "GetBufferString", "GetChars", "Raw",
-		"EntityHandle", "EntityIndex", "Entity", "As", "Is", "FireInput", "Remove", "New", "NativeName",
+		"EntityHandle", "EntityIndex", "Entity", "As", "Is", "FireInput", "Remove", "New", "NativeName", "Cast", "SubclassVData",
 	];
 
 	// Types generated code names without qualification; a schema type of the same name would hide them.
 	private static readonly string[] RuntimeTypes = [
 		"Vector2", "Vector3", "Vector4", "Quaternion", "Color32", "SchemaField", "SchemaObject", "RawField", "ISchemaClass",
 		"SchemaValueList", "SchemaObjectList", "SchemaPointerList", "SchemaHandleList", "SchemaStringList", "Spawner", "Obsolete",
+		"SchemaRegistry", "Flags",
 	];
 
 	private readonly Dictionary<string, HashSet<string>> _members = new(StringComparer.Ordinal);
+
+	/// <summary>Each curated wrapper that is a view of one schema class, by that class's name.</summary>
+	private readonly SortedDictionary<string, List<(ApiWrapper Wrapper, bool IsEntity)>> _bridges = new(StringComparer.Ordinal);
+
+	private void FindBridges() {
+		foreach (var wrapper in api.Wrappers.GroupBy(x => x.Name).Select(g => g.First()).OrderBy(x => x.Name, StringComparer.Ordinal)) {
+			if (!api.DerivesFrom(wrapper, "NativeEntity")) continue;
+			string? schemaClass = new[] { wrapper.Name }.Concat(wrapper.NativeNames).FirstOrDefault(model.Classes.ContainsKey);
+			if (schemaClass == null) continue;
+			bool wrapperIsEntity = api.DerivesFrom(wrapper, "CBaseEntity");
+			if (wrapperIsEntity != model.IsEntity(schemaClass)) continue;
+			if (!_bridges.TryGetValue(schemaClass, out var list)) _bridges[schemaClass] = list = [];
+			list.Add((wrapper, wrapperIsEntity));
+		}
+	}
 
 	public void Emit(OutputSet output) {
 		var taken = new HashSet<string>(RuntimeTypes, StringComparer.Ordinal);
 		foreach (var name in model.Classes.Keys) Ids[name] = Naming.Unique(Naming.Identifier(name), taken);
 		foreach (var name in model.Enums.Keys) if (!Ids.ContainsKey(name)) Ids[name] = Naming.Unique(Naming.Identifier(name), taken);
 
+		FindBridges();
 		var files = new HashSet<string>();
 		foreach (var c in ParentsFirst()) {
 			output.Add($"Schema/Classes/{OutputSet.FileName(c.Name, files)}.cs", EmitClass(c));
@@ -204,6 +221,14 @@ sealed class SchemaEmitter(SchemaModel model, EntityModel entities, ApiScanner a
 			else w.Line($"{modifier} RawField {property} => Raw({descriptor}, {Naming.Literal(field.Type.Display)});");
 		}
 
+		// The way back to the curated wrapper, typed, where one wraps exactly this class.
+		if (isEntity && c.Name != "CBaseEntity" && _bridges.TryGetValue(c.Name, out var bridged) && bridged.Any(b => b.Wrapper.Name == c.Name)) {
+			string type = $"global::DeadworksManaged.Api.{c.Name}";
+			w.Line();
+			w.Summary($"The curated <see cref=\"{type}\"/> for this entity, or null if it is gone.");
+			w.Line($"public new {type}? Entity => SchemaRegistry.Wrapper<{type}>(EntityHandle);");
+		}
+
 		if (isEntity) EmitInputs(w, c, own, inherited, declared);
 
 		w.Close().Close();
@@ -277,6 +302,9 @@ sealed class SchemaEmitter(SchemaModel model, EntityModel entities, ApiScanner a
 		var w = new CodeWriter();
 		w.Open("public static partial class Schema");
 		w.Summary($"Schema enum <c>{Naming.Doc(e.Name)}</c>. <see href=\"https://deadworks.net/db/schema/{e.Module}/{Uri.EscapeDataString(e.Name)}\">Modding database</see>.");
+		// Bit flags print as their names combined. A sequential enum that reaches 4 has a 3, so it is not mistaken for one.
+		var bits = e.Members.Select(m => m.Value).Where(v => v != 0).Distinct().ToList();
+		if (bits.Count >= 3 && bits.All(v => v > 0 && v.IsPowerOfTwo) && bits.Any(v => v >= 4)) w.Line("[Flags]");
 		w.Open($"public enum {id} : {type}");
 		var taken = new HashSet<string>(StringComparer.Ordinal) { id };
 		foreach (var (name, value) in e.Members) {
@@ -309,24 +337,22 @@ sealed class SchemaEmitter(SchemaModel model, EntityModel entities, ApiScanner a
 	}
 
 	private string EmitBridge() {
-		var w = new CodeWriter();
-		w.Summary("Adds <c>.Schema</c> to the curated wrappers in DeadworksManaged.Api: every schema field of the object, typed as its generated class.");
+		// In the API's namespace, so .Schema is there for anyone who references this assembly.
+		var w = new CodeWriter("DeadworksManaged.Api", ["DeadworksManaged.Game"]);
+		w.Summary("Adds <c>.Schema</c> to the curated wrappers: every schema field of the object, typed as its generated class.");
 		w.Open("public static class SchemaBridge");
-		foreach (var wrapper in api.Wrappers.GroupBy(x => x.Name).Select(g => g.First()).OrderBy(x => x.Name, StringComparer.Ordinal)) {
-			if (!api.DerivesFrom(wrapper, "NativeEntity")) continue;
-			string? schemaClass = new[] { wrapper.Name }.Concat(wrapper.NativeNames).FirstOrDefault(model.Classes.ContainsKey);
-			if (schemaClass == null) continue;
-			bool wrapperIsEntity = api.DerivesFrom(wrapper, "CBaseEntity");
-			if (wrapperIsEntity != model.IsEntity(schemaClass)) continue;
-
-			string type = $"Schema.{Ids[schemaClass]}";
-			w.Open($"extension(global::DeadworksManaged.Api.{wrapper.Name} self)");
-			w.Summary($"This object as <see cref=\"{type}\"/>: every schema field the game declares for it, under the game's own names.");
-			w.Line(wrapperIsEntity
-				? $"public {type} Schema => SchemaRegistry.Bridge<{type}>(self.EntityHandle);"
-				: $"public {type} Schema => SchemaObject.At<{type}>(self.Handle);");
-			w.Close();
-			Stats.Bridges++;
+		foreach (var (schemaClass, wrappers) in _bridges) {
+			foreach (var (wrapper, wrapperIsEntity) in wrappers) {
+				string type = $"Schema.{Ids[schemaClass]}";
+				w.Open($"extension({wrapper.Name} self)");
+				w.Summary($"This object as <see cref=\"{type}\"/>: every schema field the game declares for it, under the game's own names. "
+					+ "Each use looks the object up again, so keep the view in a local when you read several fields.");
+				w.Line(wrapperIsEntity
+					? $"public {type} Schema => SchemaRegistry.Bridge<{type}>(self.EntityHandle);"
+					: $"public {type} Schema => SchemaObject.At<{type}>(self.Handle);");
+				w.Close();
+				Stats.Bridges++;
+			}
 		}
 		w.Close();
 		return w.ToString();

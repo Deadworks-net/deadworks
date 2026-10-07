@@ -327,9 +327,58 @@ public unsafe class GameSchemaTests {
 	public void Equality_is_by_native_object() {
 		using var game = new FakeGame();
 		uint handle = game.Entity("CNPC_Trooper", "npc_trooper", out _);
+		var first = SchemaRegistry.Resolve(handle);
+		var again = SchemaRegistry.Resolve<Schema.CBaseEntity>(handle);
+		var other = SchemaRegistry.Resolve(game.Entity("CNPC_Trooper", "npc_trooper", out _));
 
-		Assert.Equal<SchemaObject>(SchemaRegistry.Resolve(handle), SchemaRegistry.Resolve<Schema.CBaseEntity>(handle));
-		Assert.NotEqual<SchemaObject>(SchemaRegistry.Resolve(handle), SchemaRegistry.Resolve(game.Entity("CNPC_Trooper", "npc_trooper", out _)));
+		Assert.Equal<SchemaObject>(first, again);
+		Assert.NotEqual<SchemaObject>(first, other);
+		Assert.True(first == again);   // two views, one entity
+		Assert.True(first != other);
+		Assert.False(first == null);
+	}
+
+	[Fact]
+	public void A_curated_wrapper_and_its_schema_view_lead_to_each_other() {
+		using var game = new FakeGame();
+		uint handle = game.Entity("CCitadelPlayerPawn", "player", out _);
+		var view = SchemaRegistry.Resolve<Schema.CCitadelPlayerPawn>(handle)!;
+
+		CCitadelPlayerPawn wrapper = view.Entity!;   // typed: no As<>() to get the curated pawn back
+		Assert.Equal(handle, wrapper.EntityHandle);
+		Assert.IsType<Schema.CCitadelPlayerPawn>(wrapper.Schema);
+		Assert.True(wrapper.Schema == view);
+		Assert.IsType<Schema.CCitadelPlayerPawn>(((CBaseEntity)wrapper).Schema); // the most derived class, whatever the wrapper's type
+		Assert.Equal("CCitadelPlayerPawn #" + view.EntityIndex + " (player)", view.ToString());
+
+		game.Kill(handle);
+		Assert.Null(view.Entity);
+		Assert.EndsWith("[gone]", view.ToString());
+	}
+
+	[Fact]
+	public void Cast_and_AsSchema_view_the_same_object_as_another_class() {
+		using var game = new FakeGame()
+			.Field("CBaseEntity", "m_nSubclassID", 0x600)
+			.Field("CitadelAbilityVData", "m_strCastDelaySound", 0x10);
+		uint handle = game.Entity("CCitadelBaseAbility", "citadel_ability_x", out nint memory);
+		nint data = game.Allocate(0x100);
+		*(nint*)(memory + 0x604) = data;   // the data pointer sits right after the subclass id
+		*(uint*)(data + 0x10) = 3;
+		*(uint*)(data + 0x14) = 0xC0000008;
+		"abc"u8.CopyTo(new Span<byte>((void*)(data + 0x18), 3));
+		var ability = SchemaRegistry.Resolve<Schema.CCitadelBaseAbility>(handle)!;
+
+		var vdata = ability.SubclassVData<Schema.CitadelAbilityVData>()!;
+		Assert.Equal(data, vdata.Handle);
+		Assert.Equal("abc", vdata.m_strCastDelaySound);
+		Assert.Equal(data, ability.Entity!.SubclassVData!.AsSchema<Schema.CitadelAbilityVData>().Handle);
+
+		// Cast keeps following the entity, so it is as safe as the view it came from.
+		var asBase = ability.Cast<Schema.CBaseEntity>();
+		Assert.Equal(memory, asBase.Handle);
+		game.Kill(handle);
+		Assert.False(asBase.IsValid);
 	}
 
 	[Fact]
@@ -350,6 +399,8 @@ public unsafe class GameSchemaTests {
 		Assert.Equal("Kill", Inputs.CBaseEntity.Kill);
 		Assert.Equal("Kill", Inputs.CBaseModelEntity.Kill);
 		Assert.Equal("sv_cheats", ConVars.sv_cheats.Name);
+		Assert.Equal("changelevel", nameof(ConCommands.changelevel));
+		Assert.NotNull(typeof(Schema.TakeDamageFlags_t).GetCustomAttributes(typeof(FlagsAttribute), false).SingleOrDefault());
 		Assert.Equal("hero_inferno", HeroNames.hero_inferno);
 		Assert.True(GameBuild.Version > 6000);
 	}

@@ -7,13 +7,20 @@ using DeadworksManaged.GameGen;
 // database (https://deadworks.net/db): schema classes and enums, entity spawn functions, key
 // values, inputs and outputs, console variables and commands, and hero, ability, item and
 // modifier names.
-//
-//   dotnet run --project managed/DeadworksManaged.GameGen -- [--build N|latest] [--input DIR]
-//       [--out DIR] [--api DIR] [--report FILE] [--check-api]
-//
-// --input reads schemas.json, entities.json, concommands.json and vdata.json from DIR instead
-// of downloading them. --check-api exits with 3 when a handwritten SchemaAccessor in
-// DeadworksManaged.Api names a field the build does not have.
+
+const string Usage = """
+	Usage: dotnet run --project managed/DeadworksManaged.GameGen -- [options]
+
+	  --build N|latest   Build to generate from (default: latest).
+	  --input DIR        Read schemas.json, entities.json, concommands.json and vdata.json
+	                     (and npc_units.vdata.json, misc.vdata.json if present) from DIR
+	                     instead of downloading them.
+	  --out DIR          Where to write (default: managed/DeadworksManaged.Game/Generated).
+	  --api DIR          The curated API's source (default: managed/DeadworksManaged.Api).
+	  --report FILE      Also write the summary to FILE, as Markdown.
+	  --check-api        Exit with 3 when a handwritten SchemaAccessor in the curated API
+	                     names a field the build does not have.
+	""";
 
 const string Endpoint = "https://deadworks.net/api/moddb/builds";
 
@@ -21,22 +28,30 @@ string build = "latest";
 string? input = null, output = null, apiDirectory = null, report = null;
 bool checkApi = false;
 for (int i = 0; i < args.Length; i++) {
-	string Next() => ++i < args.Length ? args[i] : throw new ArgumentException($"{args[i - 1]} needs a value");
-	switch (args[i]) {
-		case "--build": build = Next(); break;
-		case "--input": input = Next(); break;
-		case "--out": output = Next(); break;
-		case "--api": apiDirectory = Next(); break;
-		case "--report": report = Next(); break;
+	string option = args[i];
+	string? Next() => ++i < args.Length ? args[i] : null;
+	string? value = option;
+	switch (option) {
+		case "--build": value = Next(); build = value ?? build; break;
+		case "--input": input = value = Next(); break;
+		case "--out": output = value = Next(); break;
+		case "--api": apiDirectory = value = Next(); break;
+		case "--report": report = value = Next(); break;
 		case "--check-api": checkApi = true; break;
-		default: throw new ArgumentException($"Unknown argument {args[i]}");
+		case "--help" or "-h": Console.WriteLine(Usage); return 0;
+		default: Console.Error.WriteLine($"Unknown option {option}\n\n{Usage}"); return 2;
 	}
+	if (value == null) { Console.Error.WriteLine($"{option} needs a value\n\n{Usage}"); return 2; }
 }
 
 string? repo = Directory.GetCurrentDirectory();
 while (repo != null && !File.Exists(Path.Combine(repo, "deadworks.slnx"))) repo = Path.GetDirectoryName(repo);
-output ??= repo != null ? Path.Combine(repo, "managed", "DeadworksManaged.Game", "Generated") : throw new ArgumentException("Run inside the repository or pass --out");
-apiDirectory ??= repo != null ? Path.Combine(repo, "managed", "DeadworksManaged.Api") : throw new ArgumentException("Run inside the repository or pass --api");
+if (repo == null && (output == null || apiDirectory == null)) {
+	Console.Error.WriteLine("Run this inside the repository, or pass both --out and --api.");
+	return 2;
+}
+output ??= Path.Combine(repo!, "managed", "DeadworksManaged.Game", "Generated");
+apiDirectory ??= Path.Combine(repo!, "managed", "DeadworksManaged.Api");
 
 using var http = new HttpClient(new HttpClientHandler { AutomaticDecompression = DecompressionMethods.All }) { Timeout = TimeSpan.FromMinutes(5) };
 
@@ -50,6 +65,15 @@ using var schemasJson = await Load("schemas.json");
 using var entitiesJson = await Load("entities.json");
 using var consoleJson = await Load("concommands.json");
 using var vdataJson = await Load("vdata.json");
+
+// The VData files whose entries are entities to spawn. A local dump may go without them.
+string[] subclassFiles = ["scripts/npc_units.vdata", "scripts/misc.vdata"];
+var subclassJson = new List<JsonDocument>();
+foreach (var file in subclassFiles) {
+	string local = Path.GetFileName(file) + ".json";
+	if (input != null && !File.Exists(Path.Combine(input, local))) continue;
+	subclassJson.Add(await Load(input != null ? local : "vdata/" + file));
+}
 
 int version = schemasJson.RootElement.GetProperty("version").GetInt32();
 foreach (var (name, document) in new[] { ("entities.json", entitiesJson), ("concommands.json", consoleJson), ("vdata.json", vdataJson) })
@@ -67,6 +91,7 @@ if (input == null) {
 
 var schema = SchemaModel.Load(schemasJson.RootElement);
 var entities = EntityModel.Load(entitiesJson.RootElement);
+foreach (var document in subclassJson) entities.AddSubclasses(document.RootElement);
 var api = ApiScanner.Scan(apiDirectory);
 
 var setterWarnings = new Dictionary<string, string>(StringComparer.Ordinal);
@@ -107,7 +132,8 @@ summary.AppendLine($"| Schema classes | {s.Classes} ({s.EntityClasses} entities)
 summary.AppendLine($"| Schema fields | {s.Fields} ({s.Fields - s.RawFields} typed, {s.RawFields} by address) |");
 summary.AppendLine($"| Schema enums | {s.Enums} |");
 summary.AppendLine($"| Curated wrappers bridged | {s.Bridges} |");
-summary.AppendLine($"| Spawn functions | {e.Spawnable} ({e.NotSpawnable} entity names left out: abilities, items, players) |");
+summary.AppendLine($"| Spawn functions | {e.Spawnable - e.NeedSubclass} entities and {e.SubclassSpawns} data entries "
+	+ $"({e.NotSpawnable} entity names left out: abilities, items, players; {e.NeedSubclass} spawned only through their entries) |");
 summary.AppendLine($"| Spawn key values | {e.Keys} in {e.KeyClasses} classes |");
 summary.AppendLine($"| Inputs, outputs | {e.Inputs}, {e.Outputs} ({s.InputMethods} inputs as methods) |");
 summary.AppendLine($"| Console variables, commands | {k.ConVars}, {k.Commands} |");

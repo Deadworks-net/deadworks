@@ -67,6 +67,22 @@ public abstract unsafe class SchemaObject : IEquatable<SchemaObject> {
 		return view;
 	}
 
+	/// <summary>
+	/// This same object, viewed as a <typeparamref name="T"/>. Nothing checks that it is one: use
+	/// it where the game types a member as a base class (a scene node that is a skeleton instance,
+	/// VData that is an ability's). For entities, <c>As&lt;T&gt;()</c> checks.
+	/// </summary>
+	public T Cast<T>() where T : SchemaObject, ISchemaClass<T> {
+		var view = T.New();
+		view._mode = _mode;
+		view._entityHandle = _entityHandle;
+		view._owner = _owner;
+		view._via = _via;
+		view._extraOffset = _extraOffset;
+		view._pointer = _pointer;
+		return view;
+	}
+
 	internal static T ForEntityHandle<T>(uint entityHandle) where T : SchemaObject, ISchemaClass<T> {
 		var view = T.New();
 		view.BindEntity(entityHandle);
@@ -220,6 +236,10 @@ public abstract unsafe class SchemaObject : IEquatable<SchemaObject> {
 	}
 
 	public override bool Equals(object? obj) => obj is SchemaObject other && Equals(other);
+
+	public static bool operator ==(SchemaObject? a, SchemaObject? b) => a is null ? b is null : a.Equals(b);
+
+	public static bool operator !=(SchemaObject? a, SchemaObject? b) => !(a == b);
 
 	public override int GetHashCode() => _mode == Mode.Entity ? _entityHandle.GetHashCode() : Handle.GetHashCode();
 

@@ -82,5 +82,8 @@ public sealed class GameConVar<T> {
 		};
 	}
 
+	/// <summary>A variable reads as its value: <c>if (ConVars.sv_cheats) …</c>.</summary>
+	public static implicit operator T(GameConVar<T> conVar) => conVar.Value;
+
 	public override string ToString() => Name;
 }

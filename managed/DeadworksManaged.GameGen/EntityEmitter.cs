@@ -1,7 +1,7 @@
 namespace DeadworksManaged.GameGen;
 
 sealed class EntityStats {
-	public int Spawnable, NotSpawnable, KeyClasses, Keys, Inputs, Outputs;
+	public int Spawnable, NotSpawnable, SubclassSpawns, NeedSubclass, KeyClasses, Keys, Inputs, Outputs;
 }
 
 /// <summary>Writes the typed spawn functions, their key value classes, and the name constants for entities, inputs and outputs.</summary>
@@ -52,6 +52,7 @@ sealed class EntityEmitter(EntityModel entities, SchemaModel schema, Dictionary<
 
 		output.Add("Entities/Spawn.g.cs", EmitSpawn(spawnable!));
 		output.Add("Entities/EntityNames.g.cs", EmitEntityNames());
+		output.Add("Entities/SubclassNames.g.cs", EmitSubclassNames());
 		output.Add("Entities/Inputs.g.cs", EmitIo("Inputs", "Input", c => c.Inputs, n => Stats.Inputs += n));
 		output.Add("Entities/Outputs.g.cs", EmitIo("Outputs", "Output", c => c.Outputs, n => Stats.Outputs += n));
 	}
@@ -98,17 +99,55 @@ sealed class EntityEmitter(EntityModel entities, SchemaModel schema, Dictionary<
 	}
 
 	private string EmitSpawn(List<(EntityClass Entity, ClassDef Class)> spawnable) {
+		var byName = spawnable.ToDictionary(s => s.Entity.Name, StringComparer.Ordinal);
+		// An entity that data entries are made from reads its entry while it spawns, and takes
+		// the server down without one. It is spawned through its entries, not by its own name.
+		var needSubclass = entities.Subclasses.Values.Select(s => s.EntityName).ToHashSet(StringComparer.Ordinal);
+
+		var functions = new SortedDictionary<string, (EntityClass Entity, ClassDef Class, SubclassEntry? Subclass)>(StringComparer.Ordinal);
+		foreach (var (entity, schemaClass) in spawnable) {
+			if (needSubclass.Contains(entity.Name)) Stats.NeedSubclass++;
+			else functions[entity.Name] = (entity, schemaClass, null);
+		}
+		foreach (var subclass in entities.Subclasses.Values) {
+			if (!byName.TryGetValue(subclass.EntityName, out var made)) continue;
+			functions[subclass.Name] = (made.Entity, made.Class, subclass);
+			Stats.SubclassSpawns++;
+		}
+
 		var w = new CodeWriter();
-		w.Summary("Creates and spawns any entity the game can create by name, with the key values a map would give it. "
-			+ "A function exists for every entity class in the game; that does not promise the entity works alone on a dedicated server.");
+		w.Summary("Creates and spawns any entity the game can create, with the key values a map would give it: "
+			+ "<c>Spawn.point_worldtext(new() { origin = position, message = \"hello\" })</c>. A unit, pickup or breakable is created from "
+			+ "its data entry, so it has a function per entry: <c>Spawn.npc_boss_tier1(new() { origin = position, teamnumber = 2 })</c>. "
+			+ "<c>beforeSpawn</c> runs between creating the entity and spawning it, for fields the game only reads while spawning. "
+			+ "An entity's model has to be loaded: one the map does not already use needs <c>Precache.AddResource</c> in "
+			+ "<c>OnPrecacheResources</c>, or the engine reports a nonresident asset. "
+			+ "A function existing does not promise the entity works alone on a dedicated server.");
 		w.Open("public static partial class Spawn");
 		var taken = new HashSet<string>(["Equals", "ReferenceEquals", "GetHashCode", "ToString", "GetType", "MemberwiseClone", "Spawn"], StringComparer.Ordinal);
-		foreach (var (entity, schemaClass) in spawnable) {
+		foreach (var (name, (entity, schemaClass, subclass)) in functions) {
 			string type = $"Schema.{schemaIds[schemaClass.Name]}";
 			string keys = _keyIds.TryGetValue(entity.DataMap, out var keyId) ? $"Keys.{keyId}" : "EntityKeys";
-			w.Summary($"Creates and spawns a <c>{Naming.Doc(entity.Name)}</c> as a <see cref=\"{type}\"/>, or returns null if the game refuses. "
+			string what = subclass == null
+				? $"a <c>{Naming.Doc(name)}</c>"
+				: $"the <c>{Naming.Doc(name)}</c> entry of <c>{Naming.Doc(subclass.File)}</c>, which is a <c>{Naming.Doc(entity.Name)}</c>,";
+			w.Summary($"Creates and spawns {what} as a <see cref=\"{type}\"/>, or returns null if the game refuses. "
 				+ $"<see href=\"https://deadworks.net/db/entities/{Uri.EscapeDataString(entity.Name)}\">Modding database</see>.");
-			w.Line($"public static {type}? {Naming.Unique(Naming.Identifier(entity.Name), taken)}({keys}? keys = null) => Spawner.Create<{type}>({Naming.Literal(entity.Name)}, keys);");
+			w.Line($"public static {type}? {Naming.Unique(Naming.Identifier(name), taken)}({keys}? keys = null, Action<{type}>? beforeSpawn = null) => Spawner.Create({Naming.Literal(name)}, keys, beforeSpawn);");
+		}
+		w.Close();
+		return w.ToString();
+	}
+
+	private string EmitSubclassNames() {
+		var w = new CodeWriter();
+		w.Summary("The name of every data entry an entity is created from (units, pickups, breakables), as <c>CBaseEntity.CreateByDesignerName</c> takes it. "
+			+ "A spawned entry's designer name is its entity's, not the entry's.");
+		w.Open("public static class SubclassNames");
+		var taken = new HashSet<string>(["Equals", "ReferenceEquals", "GetHashCode", "ToString", "GetType", "MemberwiseClone", "SubclassNames"], StringComparer.Ordinal);
+		foreach (var subclass in entities.Subclasses.Values) {
+			w.Summary($"A <c>{Naming.Doc(subclass.EntityName)}</c>, from <c>{Naming.Doc(subclass.File)}</c>.");
+			w.Line($"public const string {Naming.Unique(Naming.Identifier(subclass.Name), taken)} = {Naming.Literal(subclass.Name)};");
 		}
 		w.Close();
 		return w.ToString();

@@ -16,6 +16,12 @@ sealed record IoBinding(string Name, List<IoParam> Params, bool Returns, string 
 
 sealed record IoClass(string Name, List<IoBinding> Inputs, List<IoBinding> Outputs);
 
+/// <summary>
+/// A data entry an entity is created from: <c>npc_boss_tier1</c> in <c>scripts/npc_units.vdata</c>
+/// is an <c>npc_trooper_boss</c> with a Guardian's health, model and weapons.
+/// </summary>
+sealed record SubclassEntry(string Name, string EntityName, string File);
+
 /// <summary>A spawn key value an entity reads, and the datamap field it lands in.</summary>
 sealed record KeyDef(string Name, string Type, int Size, string? Enum, string DataMap, string Field, bool Procedural);
 
@@ -24,6 +30,22 @@ sealed class EntityModel {
 	public SortedDictionary<string, EntityClass> Entities { get; } = new(StringComparer.Ordinal);
 	public SortedDictionary<string, DataMap> DataMaps { get; } = new(StringComparer.Ordinal);
 	public SortedDictionary<string, IoClass> Io { get; } = new(StringComparer.Ordinal);
+
+	/// <summary>Every data entry that names the entity it makes, by entry name.</summary>
+	public SortedDictionary<string, SubclassEntry> Subclasses { get; } = new(StringComparer.Ordinal);
+
+	/// <summary>
+	/// Adds the entries of one VData file of entity subclasses, as the modding database serves
+	/// it: each entry's <c>_class</c> is the entity it is created as. An entry without one is a
+	/// base for other entries, not something to spawn.
+	/// </summary>
+	public void AddSubclasses(JsonElement file) {
+		string path = Text(file, "path") ?? "";
+		if (!file.TryGetProperty("entries", out var entries) || entries.ValueKind != JsonValueKind.Object) return;
+		foreach (var entry in entries.EnumerateObject())
+			if (entry.Value.ValueKind == JsonValueKind.Object && Text(entry.Value, "_class") is { Length: > 0 } entityName)
+				Subclasses.TryAdd(entry.Name, new(entry.Name, entityName, path));
+	}
 
 	public static EntityModel Load(JsonElement root) {
 		var model = new EntityModel();

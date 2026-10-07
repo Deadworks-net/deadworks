@@ -70,6 +70,19 @@ public static unsafe partial class SchemaRegistry {
 		return entity;
 	}
 
+	/// <summary>
+	/// The curated wrapper for an entity whose class its schema view has already established.
+	/// Null if the entity is gone.
+	/// </summary>
+	internal static T? Wrapper<T>(uint entityHandle) where T : CBaseEntity {
+		if (entityHandle == CBaseEntity.InvalidEntityHandle) return null;
+		void* pointer = NativeInterop.GetEntityFromHandle(entityHandle);
+		return pointer == null ? null : NativeEntityFactory.Create<T>((nint)pointer);
+	}
+
+	internal static string DesignerNameOf(nint entity)
+		=> Marshal.PtrToStringUTF8((nint)NativeInterop.GetEntityDesignerName((void*)entity)) ?? "";
+
 	private static bool DerivesFrom(nint entity, string className) {
 		Span<byte> utf8 = Utf8.Encode(className, stackalloc byte[Utf8.Size(className)]);
 		fixed (byte* p = utf8)
@@ -116,6 +129,11 @@ public static unsafe class GameEntities {
 	public static Schema.CEntityInstance? FromHandle(uint entityHandle) => SchemaRegistry.Resolve(entityHandle);
 }
 
+/// <summary>
+/// Every schema class the server uses, and every schema enum, under the game's own names.
+/// A class is a typed view of one native object: <c>pawn.Schema</c> from a curated wrapper,
+/// <see cref="GameEntities"/> for the entity list, <see cref="SchemaObject.At{T}"/> for a pointer.
+/// </summary>
 public static partial class Schema {
 	public partial class CEntityInstance {
 		/// <summary>Packed entity handle (serial and index): this entity's identity across frames.</summary>
@@ -143,5 +161,19 @@ public static partial class Schema {
 
 		/// <summary>Marks this entity for removal at the end of the frame.</summary>
 		public void Remove() => Entity?.Remove();
+
+		/// <summary>
+		/// The data entry this entity was created from (an ability's, a unit's, a modifier's), viewed
+		/// as a <typeparamref name="T"/>, or null if it has none. Nothing checks that the data is a
+		/// <typeparamref name="T"/>: an ability's is a <c>CitadelAbilityVData</c>.
+		/// </summary>
+		public T? SubclassVData<T>() where T : SchemaObject, ISchemaClass<T>
+			=> Entity?.SubclassVData is { } data ? At<T>(data.Handle) : null;
+
+		/// <summary>The class, entity index and designer name: <c>CNPC_Trooper #412 (npc_trooper)</c>.</summary>
+		public override string ToString() {
+			nint handle = Handle;
+			return handle == 0 ? $"{GetType().Name} [gone]" : $"{GetType().Name} #{EntityIndex} ({SchemaRegistry.DesignerNameOf(handle)})";
+		}
 	}
 }

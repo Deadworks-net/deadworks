@@ -71,7 +71,7 @@ public sealed class SchemaFieldMissingException : Exception {
 
 	public SchemaFieldMissingException(string className, string fieldName)
 		: base($"The running game has no schema field {className}.{fieldName}. DeadworksManaged.Game was generated from build {GameBuild.Version}; "
-			+ $"see https://deadworks.net/db for what changed.") {
+			+ $"https://deadworks.net/db/schema/server/{Uri.EscapeDataString(className)} shows the class as it is now and what changed.") {
 		ClassName = className;
 		FieldName = fieldName;
 	}
