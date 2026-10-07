@@ -48,7 +48,7 @@ internal static class HostStatus
                 continue;
 
             var heroId = controller.PlayerDataGlobal.HeroID;
-            var hero = heroId > 0 && Enum.IsDefined((Heroes)heroId) ? ((Heroes)heroId).ToHeroName() : null;
+            var hero = heroId > 0 && Enum.IsDefined((Heroes)heroId) ? ((Heroes)heroId).ToDisplayName() : null;
             long? connected = _inGameSince[slot] != 0
                 ? (long)Stopwatch.GetElapsedTime(_inGameSince[slot]).TotalSeconds
                 : null;
