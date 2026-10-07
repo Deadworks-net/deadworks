@@ -135,6 +135,16 @@ public static unsafe class GameEntities {
 /// <see cref="GameEntities"/> for the entity list, <see cref="SchemaObject.At{T}"/> for a pointer.
 /// </summary>
 public static partial class Schema {
+	public partial class CEntitySubclassVDataBase {
+		/// <summary>The entry's name in its data file, e.g. <c>npc_boss_tier1</c> or <c>upgrade_fleetfoot_boots</c>.</summary>
+		public string EntryName => StringAtOffset(0x10);   // not a schema field; DeadworksManaged.Api reads it there too
+	}
+
+	public partial class CBaseModifier {
+		// m_pSubclassVData is a datamap field, not a schema one; DeadworksManaged.Api reads it at 0x10 too.
+		protected T? ModifierData<T>() where T : SchemaObject, ISchemaClass<T> => PointerAtOffset<T>(0x10);
+	}
+
 	public partial class CEntityInstance {
 		/// <summary>Packed entity handle (serial and index): this entity's identity across frames.</summary>
 		public uint EntityHandle => BoundEntityHandle;

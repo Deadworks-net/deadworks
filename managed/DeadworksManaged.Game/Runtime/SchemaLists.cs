@@ -28,19 +28,20 @@ internal readonly unsafe struct ListStorage {
 	}
 }
 
-/// <summary><c>sizeof</c> a schema class in the running game, looked up once.</summary>
+/// <summary><c>sizeof</c> and <c>alignof</c> a schema class in the running game, looked up once.</summary>
 internal static unsafe class SchemaClassSize<T> where T : SchemaObject, ISchemaClass<T> {
-	public static readonly int Value = Lookup();
+	public static readonly int Value = Lookup(alignment: false);
+	public static readonly int Alignment = Lookup(alignment: true);
 
-	private static int Lookup() {
+	private static int Lookup(bool alignment) {
 		string name = T.NativeName;
 		Span<byte> utf8 = Utf8.Encode(name, stackalloc byte[Utf8.Size(name)]);
-		int size;
+		int result;
 		fixed (byte* p = utf8)
-			size = NativeInterop.GetSchemaClassSize(p);
-		if (size <= 0)
-			throw new NotSupportedException($"The running game's schema has no class {name}, so a list of them cannot be walked.");
-		return size;
+			result = alignment ? NativeInterop.GetSchemaClassAlignment(p) : NativeInterop.GetSchemaClassSize(p);
+		if (result <= 0)
+			throw new NotSupportedException($"The running game's schema has no class {name}, so a collection of them cannot be walked.");
+		return result;
 	}
 }
 
@@ -101,15 +102,24 @@ public readonly struct SchemaObjectList<T> : IReadOnlyList<T> where T : SchemaOb
 /// <summary>A fixed array or <c>CUtlVector</c> of pointers to objects.</summary>
 public readonly unsafe struct SchemaPointerList<T> : IReadOnlyList<T?> where T : SchemaObject, ISchemaClass<T> {
 	private readonly ListStorage _storage;
+	private readonly int _stride, _offset;
 
-	internal SchemaPointerList(SchemaObject owner, SchemaField field, int fixedCount) => _storage = new(owner, field, fixedCount);
+	/// <summary>
+	/// <paramref name="stride"/> is the size of one element where an element is more than the
+	/// pointer, and <paramref name="offset"/> where the pointer sits in it.
+	/// </summary>
+	internal SchemaPointerList(SchemaObject owner, SchemaField field, int fixedCount, int stride = 0, int offset = 0) {
+		_storage = new(owner, field, fixedCount);
+		_stride = stride;
+		_offset = offset;
+	}
 
 	public int Count => _storage.Count;
 
 	/// <summary>The object the pointer at <paramref name="index"/> refers to, or null if the pointer is null.</summary>
 	public T? this[int index] {
 		get {
-			nint pointer = *(nint*)_storage.Element(index, sizeof(nint));
+			nint pointer = *(nint*)(_storage.Element(index, _stride == 0 ? sizeof(nint) : _stride) + _offset);
 			return pointer == 0 ? null : SchemaObject.At<T>(pointer);
 		}
 	}

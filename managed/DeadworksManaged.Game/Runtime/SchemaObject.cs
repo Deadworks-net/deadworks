@@ -141,6 +141,24 @@ public abstract unsafe class SchemaObject : IEquatable<SchemaObject> {
 		return view;
 	}
 
+	/// <summary>
+	/// The data a <c>CEmbeddedSubclass</c> field refers to (a modifier an ability defines inside
+	/// itself), or null if it names none. The field is a one-entry vtable followed by the pointer.
+	/// </summary>
+	protected T? EmbeddedSubclass<T>(SchemaField field) where T : SchemaObject, ISchemaClass<T> {
+		nint data = *(nint*)(Ptr + field.Offset + sizeof(nint));
+		return data == 0 ? null : At<T>(data);
+	}
+
+	/// <summary>The object a pointer at a fixed offset refers to, for the few pointers the game keeps outside the schema.</summary>
+	protected T? PointerAtOffset<T>(int offset) where T : SchemaObject, ISchemaClass<T> {
+		nint pointer = *(nint*)(Ptr + offset);
+		return pointer == 0 ? null : At<T>(pointer);
+	}
+
+	/// <summary>The string a <c>const char*</c> at a fixed offset refers to.</summary>
+	protected string StringAtOffset(int offset) => ReadCString(*(nint*)(Ptr + offset));
+
 	/// <summary>An entity this object points at directly, or null while the pointer is null.</summary>
 	protected T? EntityPointer<T>(SchemaField field) where T : Schema.CEntityInstance, ISchemaClass<T> {
 		nint entity = *(nint*)(Ptr + field.Offset);
