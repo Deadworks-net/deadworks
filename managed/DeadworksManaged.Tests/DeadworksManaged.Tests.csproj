@@ -22,6 +22,8 @@
   <ItemGroup>
     <ProjectReference Include="..\DeadworksManaged.Api\DeadworksManaged.Api.csproj" />
     <ProjectReference Include="..\DeadworksManaged.csproj" />
+    <ProjectReference Include="..\DeadworksManaged.Game\DeadworksManaged.Game.csproj" />
+    <ProjectReference Include="..\DeadworksManaged.GameGen\DeadworksManaged.GameGen.csproj" />
     <ProjectReference Include="..\plugins\AdminPlugin\AdminPlugin.csproj" />
   </ItemGroup>
 
