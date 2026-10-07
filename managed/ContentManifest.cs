@@ -125,11 +125,19 @@ internal static class ContentManifest
         foreach (var raw in extraMaps.Prepend(currentMap))
         {
             var name = raw?.Trim();
-            if (!string.IsNullOrEmpty(name) && seen.Add(name))
+            if (!string.IsNullOrEmpty(name) && IsListableName(name) && seen.Add(name))
                 names.Add(name);
         }
         return names;
     }
+
+    /// <summary>
+    /// Whether a name can go into a rules list and be turned into a file path at all: no list or
+    /// entry separator, and nothing that leaves the content folder. Looser than
+    /// <see cref="IsPortableName"/>, which is what launchers accept.
+    /// </summary>
+    public static bool IsListableName(string name)
+        => name.Length > 0 && name[0] != '.' && name.IndexOfAny([',', ':', '/', '\\']) < 0;
 
     /// <summary>Where a client fetches an entry, relative to dw_fastdl. Null for an entry with no hash.</summary>
     public static string? FastDlPath(string dir, ContentEntry entry)

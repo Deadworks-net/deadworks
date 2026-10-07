@@ -147,10 +147,12 @@ internal static class ContentAddonManager
             return;
 
         // The engine takes the addons as one comma-separated string, so a comma would split the entry;
-        // a colon would split the name:hash entries A2S_RULES carries.
-        if (name.Contains(',') || name.Contains(':'))
+        // a colon would split the name:hash entries A2S_RULES carries. The name also becomes a file
+        // path that is opened and hashed, and the hash is published: it must stay inside the addon
+        // folder, whatever a plugin or a config asks for.
+        if (!ContentManifest.IsListableName(name))
         {
-            Console.WriteLine($"[ContentAddons] Ignoring '{name}' from {source}: addon names cannot contain ',' or ':'.");
+            Console.WriteLine($"[ContentAddons] Ignoring '{name}' from {source}: addon names cannot contain ',', ':', '/' or '\\', or start with '.'.");
             return;
         }
 

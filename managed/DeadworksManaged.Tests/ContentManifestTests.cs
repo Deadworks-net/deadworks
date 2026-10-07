@@ -131,6 +131,16 @@ public class ContentManifestTests
     }
 
     [Fact]
+    public void MapNames_LeavesOutNamesThatWouldBreakTheListOrLeaveTheFolder()
+    {
+        Assert.Equal(new[] { "dl_express" },
+            ContentManifest.MapNames("dl_express", ["evil,injected:0000000000000000", "a:b", @"..\..\secret", "sub/map", ".hidden"]));
+        Assert.True(ContentManifest.IsListableName("My-Addon 2"));
+        foreach (var bad in new[] { "", "a,b", "a:b", "..", @"..\x", "x/y", @"\\host\share\x", ".x" })
+            Assert.False(ContentManifest.IsListableName(bad), bad);
+    }
+
+    [Fact]
     public void FastDlPath_EmbedsTheHash_AndIsNullWithoutOne()
     {
         Assert.Equal($"addons/turbo_{HashA}.vpk.bz2", ContentManifest.FastDlPath(ContentManifest.AddonsDir, new("turbo", HashA)));

@@ -108,8 +108,10 @@ internal static class ContentHashes
             if (File.Exists(_cachePath))
             {
                 var stored = JsonSerializer.Deserialize<Dictionary<string, Entry>>(File.ReadAllText(_cachePath));
+                // Hand-edited or damaged entries are dropped; the file is hashed again instead.
                 foreach (var (path, entry) in stored ?? [])
-                    _cache[path] = entry;
+                    if (entry?.Sha256 is { Length: 64 } sha && sha.All(char.IsAsciiHexDigit))
+                        _cache[path] = entry;
             }
         }
         catch (Exception ex) when (ex is IOException or UnauthorizedAccessException or JsonException)
