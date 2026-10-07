@@ -424,7 +424,7 @@ bool Deadworks::OnPre_PostEventAbstract(int msgId, const CNetMessage *pData, uin
     return result >= 1;
 }
 
-static constexpr ptrdiff_t kServerAddonsOffset = 0x158;
+static constexpr ptrdiff_t kServerAddonsOffset = 0x178;
 
 void Deadworks::OnPre_ReplyConnection(void *server, CServerSideClientBase *client) {
     if (m_desiredServerAddons.empty())

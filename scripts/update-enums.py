@@ -41,6 +41,7 @@ ENUMS = [
     {"file": MANAGED + "ECurrencySource.cs", "enum": "ECurrencySource", "game": "ECurrencySource"},
     {"file": MANAGED + "ECurrencyType.cs", "enum": "ECurrencyType", "game": "ECurrencyType"},
     {"file": MANAGED + "EGameState.cs", "enum": "EGameState", "game": "EGameState"},
+    {"file": MANAGED + "EHeroDevelopmentState.cs", "enum": "EHeroDevelopmentState", "game": "EHeroDevelopmentState"},
     {"file": MANAGED + "EKnockDownTypes.cs", "enum": "EKnockDownTypes", "game": "EKnockDownTypes"},
     {"file": MANAGED + "EModifierEvent.cs", "enum": "EModifierEvent", "game": "EModifierEvent"},
     {"file": MANAGED + "EntityFlags.cs", "enum": "EntityFlags", "game": "Flags_t"},
