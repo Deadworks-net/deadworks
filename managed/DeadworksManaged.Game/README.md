@@ -44,8 +44,12 @@ var sign = Spawn.point_worldtext(new() { origin = position, message = "hello", t
 // A unit, pickup or breakable is created from its data entry.
 var guardian = Spawn.npc_boss_tier1(new() { origin = position, teamnumber = 2 }, beforeSpawn: boss => boss.m_iLane = 1);
 
-// The data an ability, unit or modifier was created from.
-string? image = ability.SubclassVData<Schema.CitadelAbilityVData>()?.m_strAbilityImage;
+// The data an ability, unit or modifier was created from: properties by name, the modifiers
+// it defines, sounds, particles, weapon numbers.
+if (ability.VData is { } data) {
+    string? cooldown = data.m_mapAbilityProperties["AbilityCooldown"]?.m_strValue;
+    string? intrinsic = data.m_AutoIntrinsicModifiers.FirstOrDefault()?.EntryName;
+}
 
 if (!ConVars.sv_cheats) ConVars.sv_cheats.Value = true;
 ConCommands.changelevel("dl_midtown");
@@ -60,7 +64,8 @@ ConCommands.changelevel("dl_midtown");
 | `Schema.*` | A class per schema class the server uses, with real inheritance, and every schema enum. |
 | `wrapper.Schema`, `view.Entity` | Between a curated wrapper and its generated class, both ways. `.Schema` needs only `using DeadworksManaged.Api`. |
 | `GameEntities` | The entity list, by index or handle, as generated classes. |
-| `Spawn.*`, `Keys.*` | A spawn function per entity class and per data entry, and its key values as typed properties. |
+| `Spawn.*`, `Keys.*` | A spawn function per entity and per data entry that survives being spawned, and its key values as typed properties. |
+| `VData` | On an ability, a unit or a modifier: the data entry it was created from, as its own class. |
 | `Input…()` methods, `Inputs.*`, `Outputs.*` | Entity inputs as methods, and every input and output name. |
 | `ConVars.*`, `ConCommands.*` | Console variables with their declared types, and console commands. |
 | `HeroNames`, `AbilityNames`, `ItemNames`, `ModifierNames`, `EntityNames`, `SubclassNames` | Every name the curated API takes as a string. |
@@ -81,28 +86,47 @@ ConCommands.changelevel("dl_midtown");
 - **Writes are networked.** Setting a networked field tells the game, through the struct's
   own network chain if it has one and otherwise through the entity it is stored in.
 - **Raw means raw.** A setter is a plain write. Where a plain write is known to break
-  something (`m_nLevel`, the move type), the setter carries an `[Obsolete]` warning that
-  says what to use; add to `DeadworksManaged.GameGen/overrides.json` when you find another.
+  something, the setter carries an `[Obsolete]` warning that says what to use. That is
+  every field the curated API exposes read-only beside a `SetX` method, found by the
+  generator, plus the entries in `DeadworksManaged.GameGen/overrides.json`.
 - **Every field is present.** A field whose type has no typed mapping yet is a `RawField`:
   its address and the game's name for its type.
+- **Collections are views.** A vector or fixed array is a list; a `CUtlDict` or
+  `CUtlOrderedMap` is a `SchemaDict`, `SchemaMap` or one of their plain-value forms, read by
+  key or enumerated in the order the game filled it. The collections are read-only; what
+  they hold can be written through.
 - **The game types some members as a base class.** `As<T>()` on an entity checks the
   class; `Cast<T>()` on any view and `AsSchema<T>()` on any curated wrapper do not.
 
 ## Spawning
 
-- An entity that data entries are made from (a trooper, a Guardian, a pickup) reads its
-  entry while it spawns and takes the server down without one, so it has no function under
-  its own name: `Spawn.trooper_melee`, not `Spawn.npc_trooper`.
+What the game can create and what survives being created are different lists, and only
+trying tells them apart. The spawn survey (`tools/spawn-survey`) spawns every candidate name
+alone on a real dedicated server; `DeadworksManaged.GameGen/spawn-survey.json` is its result,
+and the generator reads it:
+
+- A name that took the server down, hung it or was refused has no function.
+- Every function's documentation says how it fared: lived, or removed itself at once (it
+  may need key values or another entity), and whether its model was missing on the map.
+- A unit, pickup or breakable is created from its data entry (`Spawn.trooper_melee`). The
+  entity those entries are made from has a function under its own name only where the
+  survey saw it survive without one: a pickup does, a trooper does not.
+- A name the survey has not tried (new in a later build) still gets a function, and says so.
+
+Also:
+
 - An entity's model has to be loaded. One the map does not already use needs
   `Precache.AddResource` in `OnPrecacheResources`, or the engine reports a nonresident asset.
 - There is no function for abilities, items or players: a hero holds the first two
   (`AddAbility`, `AddItem`) and the engine makes the last.
-- A function existing does not promise the entity works alone on a dedicated server.
+- Living for half a second alone is all the survey checks. It does not check that the
+  entity looks or behaves right.
 
 ## Console variables
 
-`ConVars` lists what a dedicated server could have. A few rendering and Panorama variables
-are not registered on one: `Exists` tells, and `Value` throws naming the variable.
+`ConVars` has the variables a dedicated server registers. The survey also checks which of
+the variables the game declares a server never registers (rendering and Panorama ones,
+which no flag marks) and the generator leaves those out.
 
 ## Regenerating
 
@@ -117,3 +141,20 @@ dotnet run --project managed/DeadworksManaged.GameGen -- --help
 files for things the game no longer has are deleted. `--check-api` fails when a handwritten
 `SchemaAccessor` in `DeadworksManaged.Api` names a field the build does not have, and the
 report lists them.
+
+The spawn survey is run by hand, on a machine with the game, after an update that adds or
+changes entities. It needs a private copy of the server, because it crashes its servers on
+purpose:
+
+```sh
+dotnet run --project managed/DeadworksManaged.GameGen -- --survey-dir WORK
+dotnet build tools/spawn-survey/SpawnSurvey -c Release -o WORK/plugin   # then copy SpawnSurvey.dll to the server's managed/plugins
+python tools/spawn-survey/survey.py --server-dir "<server>/game/bin/win64" --work WORK
+dotnet run --project managed/DeadworksManaged.GameGen
+```
+
+It takes about half an hour for 800 names on three servers. The servers run on a Windows
+desktop of their own, so their console windows and anything else they open stay off your
+screen, and the plugin ends a server silently when it faults. A few crashes cannot be
+intercepted that way and make Windows raise an error box; the runner closes it at once and
+says at the end how many it closed (2 in the build 6759 run).

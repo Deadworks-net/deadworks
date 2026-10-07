@@ -64,16 +64,21 @@ public class GameSchemaPlugin : DeadworksPluginBase
 		caller.PrintToConsole($"Spawned {guardian}");
 	}
 
-	// The data an ability, unit or modifier was created from is one call away.
-	[Command("icons", Description = "List your abilities' HUD images")]
-	public void CmdIcons(CCitadelPlayerController caller)
+	// The data an ability, unit or modifier was created from is its VData: the ability's
+	// properties by name, the modifiers it defines, its sounds and particles.
+	[Command("cooldowns", Description = "List your abilities' cooldowns and the modifiers they apply")]
+	public void CmdCooldowns(CCitadelPlayerController caller)
 	{
 		var pawn = caller.GetHeroPawn();
 		if (pawn == null) return;
 
 		foreach (var ability in pawn.Schema.m_CCitadelAbilityComponent.m_vecAbilities)
-			if (ability?.SubclassVData<Schema.CitadelAbilityVData>() is { } data)
-				caller.PrintToConsole($"{ability.Entity?.AbilityName}: {data.m_strAbilityImage}");
+		{
+			if (ability?.VData is not { } data) continue;
+			string cooldown = data.m_mapAbilityProperties["AbilityCooldown"]?.m_strValue ?? "none";
+			var modifiers = data.m_AutoIntrinsicModifiers.Select(modifier => modifier?.EntryName);
+			caller.PrintToConsole($"{data.EntryName}: cooldown {cooldown}, intrinsic modifiers {string.Join(", ", modifiers)}");
+		}
 	}
 
 	// ConVars has the game's console variables with their types; ItemNames, AbilityNames,
