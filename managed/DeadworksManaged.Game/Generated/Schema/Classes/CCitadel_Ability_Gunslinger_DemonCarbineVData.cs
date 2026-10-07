@@ -14,12 +14,12 @@ public static partial class Schema {
 		static string ISchemaClass<CCitadel_Ability_Gunslinger_DemonCarbineVData>.NativeName => "CCitadel_Ability_Gunslinger_DemonCarbineVData";
 
 		private static readonly SchemaField __m_ChargingModifier = new("CCitadel_Ability_Gunslinger_DemonCarbineVData", "m_ChargingModifier");
-		/// <summary><c>CEmbeddedSubclass&lt;CCitadelModifier&gt;</c>. No typed mapping yet: read it through its address.</summary>
-		public RawField m_ChargingModifier => Raw(__m_ChargingModifier, "CEmbeddedSubclass<CCitadelModifier>");
+		/// <summary><c>CEmbeddedSubclass&lt;CCitadelModifier&gt;</c>.</summary>
+		public CCitadelModifierVData? m_ChargingModifier => EmbeddedSubclass<CCitadelModifierVData>(__m_ChargingModifier);
 
 		private static readonly SchemaField __m_DebuffModifier = new("CCitadel_Ability_Gunslinger_DemonCarbineVData", "m_DebuffModifier");
-		/// <summary><c>CEmbeddedSubclass&lt;CCitadelModifier&gt;</c>. No typed mapping yet: read it through its address.</summary>
-		public RawField m_DebuffModifier => Raw(__m_DebuffModifier, "CEmbeddedSubclass<CCitadelModifier>");
+		/// <summary><c>CEmbeddedSubclass&lt;CCitadelModifier&gt;</c>.</summary>
+		public CCitadelModifierVData? m_DebuffModifier => EmbeddedSubclass<CCitadelModifierVData>(__m_DebuffModifier);
 
 		private static readonly SchemaField __m_cameraDemonCarbineShotFired = new("CCitadel_Ability_Gunslinger_DemonCarbineVData", "m_cameraDemonCarbineShotFired");
 		/// <summary><c>CitadelCameraOperationsSequence_t</c>.</summary>

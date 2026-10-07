@@ -22,8 +22,8 @@ public static partial class Schema {
 		public float m_SilenceDuration { get => Get<float>(__m_SilenceDuration); set => Set(__m_SilenceDuration, value); }
 
 		private static readonly SchemaField __m_SilenceModifier = new("CCitadelModifierItemPickupTimerVData", "m_SilenceModifier");
-		/// <summary><c>CEmbeddedSubclass&lt;CCitadelModifier&gt;</c>. No typed mapping yet: read it through its address.</summary>
-		public RawField m_SilenceModifier => Raw(__m_SilenceModifier, "CEmbeddedSubclass<CCitadelModifier>");
+		/// <summary><c>CEmbeddedSubclass&lt;CCitadelModifier&gt;</c>.</summary>
+		public CCitadelModifierVData? m_SilenceModifier => EmbeddedSubclass<CCitadelModifierVData>(__m_SilenceModifier);
 
 		private static readonly SchemaField __m_TimerToSilence = new("CCitadelModifierItemPickupTimerVData", "m_TimerToSilence");
 		/// <summary><c>float32</c>.</summary>

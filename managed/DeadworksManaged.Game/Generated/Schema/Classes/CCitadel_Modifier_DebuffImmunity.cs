@@ -12,5 +12,8 @@ public static partial class Schema {
 		internal CCitadel_Modifier_DebuffImmunity() { }
 		static CCitadel_Modifier_DebuffImmunity ISchemaClass<CCitadel_Modifier_DebuffImmunity>.New() => new();
 		static string ISchemaClass<CCitadel_Modifier_DebuffImmunity>.NativeName => "CCitadel_Modifier_DebuffImmunity";
+
+		/// <summary>The data entry this was created from, as <see cref="CCitadel_Modifier_DebuffImmunityVData"/>, or null if it has none.</summary>
+		public new CCitadel_Modifier_DebuffImmunityVData? VData => ModifierData<CCitadel_Modifier_DebuffImmunityVData>();
 	}
 }

@@ -16,5 +16,8 @@ public static partial class Schema {
 		private static readonly SchemaField __m_fHealingSoundBuildup = new("CCitadel_Modifier_TangoTether_Tether", "m_fHealingSoundBuildup");
 		/// <summary><c>float32</c>.</summary>
 		public float m_fHealingSoundBuildup { get => Get<float>(__m_fHealingSoundBuildup); set => Set(__m_fHealingSoundBuildup, value); }
+
+		/// <summary>The data entry this was created from, as <see cref="CCitadel_Modifier_TangoTether_TetherVData"/>, or null if it has none.</summary>
+		public new CCitadel_Modifier_TangoTether_TetherVData? VData => ModifierData<CCitadel_Modifier_TangoTether_TetherVData>();
 	}
 }

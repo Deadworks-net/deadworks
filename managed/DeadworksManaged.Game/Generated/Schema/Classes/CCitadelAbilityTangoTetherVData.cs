@@ -22,12 +22,12 @@ public static partial class Schema {
 		public string m_EnemyGrappleParticle => GetBufferString(__m_EnemyGrappleParticle);
 
 		private static readonly SchemaField __m_GrappleTargetModifier = new("CCitadelAbilityTangoTetherVData", "m_GrappleTargetModifier");
-		/// <summary><c>CEmbeddedSubclass&lt;CBaseModifier&gt;</c>. No typed mapping yet: read it through its address.</summary>
-		public RawField m_GrappleTargetModifier => Raw(__m_GrappleTargetModifier, "CEmbeddedSubclass<CBaseModifier>");
+		/// <summary><c>CEmbeddedSubclass&lt;CBaseModifier&gt;</c>.</summary>
+		public CModifierVData? m_GrappleTargetModifier => EmbeddedSubclass<CModifierVData>(__m_GrappleTargetModifier);
 
 		private static readonly SchemaField __m_TetherModifier = new("CCitadelAbilityTangoTetherVData", "m_TetherModifier");
-		/// <summary><c>CEmbeddedSubclass&lt;CBaseModifier&gt;</c>. No typed mapping yet: read it through its address.</summary>
-		public RawField m_TetherModifier => Raw(__m_TetherModifier, "CEmbeddedSubclass<CBaseModifier>");
+		/// <summary><c>CEmbeddedSubclass&lt;CBaseModifier&gt;</c>.</summary>
+		public CModifierVData? m_TetherModifier => EmbeddedSubclass<CModifierVData>(__m_TetherModifier);
 
 		private static readonly SchemaField __m_strDamageTarget = new("CCitadelAbilityTangoTetherVData", "m_strDamageTarget");
 		/// <summary><c>CSoundEventName</c>.</summary>

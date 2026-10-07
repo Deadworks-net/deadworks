@@ -20,5 +20,8 @@ public static partial class Schema {
 		private static readonly SchemaField __m_vecKnockbackedUnits = new("CCitadel_Ability_Gunslinger_KnockbackBlast", "m_vecKnockbackedUnits");
 		/// <summary><c>CUtlVector&lt;CHandle&lt;CBaseEntity&gt;&gt;</c>.</summary>
 		public SchemaHandleList<CBaseEntity> m_vecKnockbackedUnits => new(this, __m_vecKnockbackedUnits, -1);
+
+		/// <summary>The data entry this was created from, as <see cref="CCitadel_Ability_Gunslinger_KnockbackBlastVData"/>, or null if it has none.</summary>
+		public new CCitadel_Ability_Gunslinger_KnockbackBlastVData? VData => SubclassVData<CCitadel_Ability_Gunslinger_KnockbackBlastVData>();
 	}
 }

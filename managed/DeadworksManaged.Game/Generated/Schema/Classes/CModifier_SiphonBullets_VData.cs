@@ -22,12 +22,12 @@ public static partial class Schema {
 		public string m_ExplodeSound => GetBufferString(__m_ExplodeSound);
 
 		private static readonly SchemaField __m_HealModifier = new("CModifier_SiphonBullets_VData", "m_HealModifier");
-		/// <summary><c>CEmbeddedSubclass&lt;CCitadelModifier&gt;</c>. No typed mapping yet: read it through its address.</summary>
-		public RawField m_HealModifier => Raw(__m_HealModifier, "CEmbeddedSubclass<CCitadelModifier>");
+		/// <summary><c>CEmbeddedSubclass&lt;CCitadelModifier&gt;</c>.</summary>
+		public CCitadelModifierVData? m_HealModifier => EmbeddedSubclass<CCitadelModifierVData>(__m_HealModifier);
 
 		private static readonly SchemaField __m_StealWatcherModifier = new("CModifier_SiphonBullets_VData", "m_StealWatcherModifier");
-		/// <summary><c>CEmbeddedSubclass&lt;CCitadelModifier&gt;</c>. No typed mapping yet: read it through its address.</summary>
-		public RawField m_StealWatcherModifier => Raw(__m_StealWatcherModifier, "CEmbeddedSubclass<CCitadelModifier>");
+		/// <summary><c>CEmbeddedSubclass&lt;CCitadelModifier&gt;</c>.</summary>
+		public CCitadelModifierVData? m_StealWatcherModifier => EmbeddedSubclass<CCitadelModifierVData>(__m_StealWatcherModifier);
 
 		private static readonly SchemaField __m_TracerParticle = new("CModifier_SiphonBullets_VData", "m_TracerParticle");
 		/// <summary><c>CResourceNameTyped&lt;CWeakHandle&lt;InfoForResourceTypeIParticleSystemDefinition&gt;&gt;</c>.</summary>

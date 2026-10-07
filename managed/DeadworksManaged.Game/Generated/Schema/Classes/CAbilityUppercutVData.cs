@@ -14,20 +14,20 @@ public static partial class Schema {
 		static string ISchemaClass<CAbilityUppercutVData>.NativeName => "CAbilityUppercutVData";
 
 		private static readonly SchemaField __m_BuffModifier = new("CAbilityUppercutVData", "m_BuffModifier");
-		/// <summary><c>CEmbeddedSubclass&lt;CCitadelModifier&gt;</c>. No typed mapping yet: read it through its address.</summary>
-		public RawField m_BuffModifier => Raw(__m_BuffModifier, "CEmbeddedSubclass<CCitadelModifier>");
+		/// <summary><c>CEmbeddedSubclass&lt;CCitadelModifier&gt;</c>.</summary>
+		public CCitadelModifierVData? m_BuffModifier => EmbeddedSubclass<CCitadelModifierVData>(__m_BuffModifier);
 
 		private static readonly SchemaField __m_ClipModifier = new("CAbilityUppercutVData", "m_ClipModifier");
-		/// <summary><c>CEmbeddedSubclass&lt;CCitadelModifier&gt;</c>. No typed mapping yet: read it through its address.</summary>
-		public RawField m_ClipModifier => Raw(__m_ClipModifier, "CEmbeddedSubclass<CCitadelModifier>");
+		/// <summary><c>CEmbeddedSubclass&lt;CCitadelModifier&gt;</c>.</summary>
+		public CCitadelModifierVData? m_ClipModifier => EmbeddedSubclass<CCitadelModifierVData>(__m_ClipModifier);
 
 		private static readonly SchemaField __m_UppercutAttackData = new("CAbilityUppercutVData", "m_UppercutAttackData");
 		/// <summary><c>AttackData_t</c>.</summary>
 		public AttackData_t m_UppercutAttackData => Embedded<AttackData_t>(__m_UppercutAttackData);
 
 		private static readonly SchemaField __m_UppercutModifier = new("CAbilityUppercutVData", "m_UppercutModifier");
-		/// <summary><c>CEmbeddedSubclass&lt;CCitadelModifier&gt;</c>. No typed mapping yet: read it through its address.</summary>
-		public RawField m_UppercutModifier => Raw(__m_UppercutModifier, "CEmbeddedSubclass<CCitadelModifier>");
+		/// <summary><c>CEmbeddedSubclass&lt;CCitadelModifier&gt;</c>.</summary>
+		public CCitadelModifierVData? m_UppercutModifier => EmbeddedSubclass<CCitadelModifierVData>(__m_UppercutModifier);
 
 		private static readonly SchemaField __m_flDamageTriggerTime = new("CAbilityUppercutVData", "m_flDamageTriggerTime");
 		/// <summary><c>float32</c>.</summary>

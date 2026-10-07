@@ -14,12 +14,12 @@ public static partial class Schema {
 		static string ISchemaClass<CNPC_TrooperBossVData>.NativeName => "CNPC_TrooperBossVData";
 
 		private static readonly SchemaField __m_BackdoorProtectionModifier = new("CNPC_TrooperBossVData", "m_BackdoorProtectionModifier");
-		/// <summary><c>CEmbeddedSubclass&lt;CCitadelModifier&gt;</c>. No typed mapping yet: read it through its address.</summary>
-		public RawField m_BackdoorProtectionModifier => Raw(__m_BackdoorProtectionModifier, "CEmbeddedSubclass<CCitadelModifier>");
+		/// <summary><c>CEmbeddedSubclass&lt;CCitadelModifier&gt;</c>.</summary>
+		public CCitadelModifierVData? m_BackdoorProtectionModifier => EmbeddedSubclass<CCitadelModifierVData>(__m_BackdoorProtectionModifier);
 
 		private static readonly SchemaField __m_TrooperBossInvulnModifier = new("CNPC_TrooperBossVData", "m_TrooperBossInvulnModifier");
-		/// <summary><c>CEmbeddedSubclass&lt;CCitadelModifier&gt;</c>. No typed mapping yet: read it through its address.</summary>
-		public RawField m_TrooperBossInvulnModifier => Raw(__m_TrooperBossInvulnModifier, "CEmbeddedSubclass<CCitadelModifier>");
+		/// <summary><c>CEmbeddedSubclass&lt;CCitadelModifier&gt;</c>.</summary>
+		public CCitadelModifierVData? m_TrooperBossInvulnModifier => EmbeddedSubclass<CCitadelModifierVData>(__m_TrooperBossInvulnModifier);
 
 		private static readonly SchemaField __m_bMitigateDamageFromPlayers = new("CNPC_TrooperBossVData", "m_bMitigateDamageFromPlayers");
 		/// <summary><c>bool</c>.</summary>

@@ -20,6 +20,7 @@ internal sealed unsafe class FakeGame : IDisposable {
 	private readonly Dictionary<(string Class, string Field), (int Offset, bool Networked)> _fields = new();
 	private readonly Dictionary<string, short> _chains = new();
 	private readonly Dictionary<string, int> _sizes = new();
+	private readonly Dictionary<string, int> _alignments = new();
 	private readonly Dictionary<uint, nint> _entities = new();
 	private readonly Dictionary<nint, (nint ClassName, nint DesignerName)> _names = new();
 	private readonly Dictionary<string, nint> _strings = new();
@@ -41,6 +42,7 @@ internal sealed unsafe class FakeGame : IDisposable {
 		callbacks.GetUtlVectorSize = (nint)(delegate* unmanaged[Cdecl]<void*, int>)&GetUtlVectorSize;
 		callbacks.GetUtlVectorData = (nint)(delegate* unmanaged[Cdecl]<void*, void*>)&GetUtlVectorData;
 		callbacks.GetSchemaClassSize = (nint)(delegate* unmanaged[Cdecl]<byte*, int>)&GetSchemaClassSize;
+		callbacks.GetSchemaClassAlignment = (nint)(delegate* unmanaged[Cdecl]<byte*, int>)&GetSchemaClassAlignment;
 		NativeInterop.Bind(&callbacks);
 	}
 
@@ -58,7 +60,11 @@ internal sealed unsafe class FakeGame : IDisposable {
 
 	public FakeGame Chain(string className, short offset) { _chains[className] = offset; return this; }
 
-	public FakeGame Size(string className, int size) { _sizes[className] = size; return this; }
+	public FakeGame Size(string className, int size, int alignment = 8) {
+		_sizes[className] = size;
+		_alignments[className] = alignment;
+		return this;
+	}
 
 	public nint Allocate(int bytes) {
 		nint memory = (nint)NativeMemory.AllocZeroed((nuint)bytes);
@@ -128,6 +134,32 @@ internal sealed unsafe class FakeGame : IDisposable {
 
 	[UnmanagedCallersOnly(CallConvs = [typeof(CallConvCdecl)])]
 	private static int GetSchemaClassSize(byte* className) => _current!._sizes.GetValueOrDefault(Read(className));
+
+	[UnmanagedCallersOnly(CallConvs = [typeof(CallConvCdecl)])]
+	private static int GetSchemaClassAlignment(byte* className) => _current!._alignments.GetValueOrDefault(Read(className));
+
+	/// <summary>
+	/// Lays out a <c>CUtlDict</c> or <c>CUtlOrderedMap</c> at <paramref name="map"/> as the game does: a node
+	/// array of four links, the key and the value, with node 1 freed (a free node's left link is itself).
+	/// Returns the address of each live node's value.
+	/// </summary>
+	public nint[] Tree(nint map, int count, int keyOffset, int valueOffset, int stride, Action<nint, int> writeKey) {
+		nint nodes = Allocate((count + 1) * stride);
+		var values = new List<nint>();
+		for (int i = 0, live = 0; i < count + 1; i++) {
+			nint node = nodes + i * stride;
+			if (i == 1) { *(int*)node = 1; continue; }
+			*(int*)node = -1;
+			writeKey(node + keyOffset, live++);
+			values.Add(node + valueOffset);
+		}
+		*(int*)(map + 8) = count + 1;    // nodes handed out
+		*(nint*)(map + 16) = nodes;
+		*(int*)(map + 28) = count;       // elements
+		return [.. values];
+	}
+
+	public nint Text(string text, bool keep) => Text(text);
 }
 
 public unsafe class GameSchemaTests {
@@ -305,6 +337,60 @@ public unsafe class GameSchemaTests {
 		// Empty: no length, whatever the rest says.
 		*(uint*)(memory + 0x304) = 0xC0000008;
 		Assert.Equal("", vdata.m_strCastSound);
+	}
+
+	[Fact]
+	public void A_dictionary_of_structs_is_read_by_name_and_skips_free_nodes() {
+		using var game = new FakeGame()
+			.Field("CitadelAbilityVData", "m_mapAbilityProperties", 0x40)
+			.Field("CitadelAbilityProperty_t", "m_strValue", 0x10)
+			.Size("CitadelAbilityProperty_t", 240);
+		nint data = game.Allocate(0x100);
+		string[] names = ["AbilityCooldown", "Damage"];
+		// Four 32-bit links, an 8-byte key, then the value: a node is 16 + 8 + 240 bytes.
+		nint[] values = game.Tree(data + 0x40, names.Length, keyOffset: 16, valueOffset: 24, stride: 264,
+			(key, i) => *(nint*)key = game.Text(names[i], keep: true));
+		*(nint*)(values[0] + 0x10) = game.Text("18", keep: true);
+		*(nint*)(values[1] + 0x10) = game.Text("120", keep: true);
+
+		var properties = SchemaObject.At<Schema.CitadelAbilityVData>(data).m_mapAbilityProperties;
+
+		Assert.Equal(2, properties.Count);
+		Assert.Equal(["AbilityCooldown", "Damage"], properties.Keys);
+		Assert.Equal("120", properties["damage"]!.m_strValue);   // keys compare as the game's do
+		Assert.Null(properties["Range"]);
+	}
+
+	[Fact]
+	public void A_map_from_an_enum_packs_a_small_value_right_after_the_key() {
+		using var game = new FakeGame().Field("CitadelHeroData_t", "m_mapStartingStats", 0x80);
+		nint data = game.Allocate(0x100);
+		// A 4-byte key and a 4-byte value fit after the links with no padding: a node is 24 bytes.
+		nint[] values = game.Tree(data + 0x80, 2, keyOffset: 16, valueOffset: 20, stride: 24,
+			(key, i) => *(uint*)key = (uint)(i == 0 ? Schema.EStatsType.EMaxHealth : Schema.EStatsType.EStamina));
+		*(float*)values[0] = 680f;
+		*(float*)values[1] = 3f;
+
+		var stats = SchemaObject.At<Schema.CitadelHeroData_t>(data).m_mapStartingStats;
+
+		Assert.Equal(680f, stats[Schema.EStatsType.EMaxHealth]);
+		Assert.Equal(3f, stats[Schema.EStatsType.EStamina]);
+		Assert.Null(stats[Schema.EStatsType.EBaseHealthRegen]);
+	}
+
+	[Fact]
+	public void An_embedded_subclass_is_the_data_its_second_pointer_names() {
+		using var game = new FakeGame().Field("CitadelAbilityVData", "m_AutoChannelModifier", 0x20);
+		nint data = game.Allocate(0x100), modifier = game.Allocate(0x40);
+		var ability = SchemaObject.At<Schema.CitadelAbilityVData>(data);
+
+		*(nint*)(data + 0x20) = 0x1234;    // the vtable of the embedded subclass itself
+		Assert.Null(ability.m_AutoChannelModifier);
+
+		*(nint*)(data + 0x28) = modifier;
+		*(nint*)(modifier + 0x10) = game.Text("ability_x/modifier_y", keep: true);
+		Assert.Equal(modifier, ability.m_AutoChannelModifier!.Handle);
+		Assert.Equal("ability_x/modifier_y", ability.m_AutoChannelModifier!.EntryName);
 	}
 
 	[Fact]

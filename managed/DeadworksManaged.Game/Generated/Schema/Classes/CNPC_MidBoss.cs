@@ -12,5 +12,8 @@ public static partial class Schema {
 		internal CNPC_MidBoss() { }
 		static CNPC_MidBoss ISchemaClass<CNPC_MidBoss>.New() => new();
 		static string ISchemaClass<CNPC_MidBoss>.NativeName => "CNPC_MidBoss";
+
+		/// <summary>The data entry this was created from, as <see cref="CNPC_MidBossVData"/>, or null if it has none.</summary>
+		public new CNPC_MidBossVData? VData => SubclassVData<CNPC_MidBossVData>();
 	}
 }

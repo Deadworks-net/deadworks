@@ -12,5 +12,8 @@ public static partial class Schema {
 		internal CCitadel_Modifier_NeutralDamageGrowth() { }
 		static CCitadel_Modifier_NeutralDamageGrowth ISchemaClass<CCitadel_Modifier_NeutralDamageGrowth>.New() => new();
 		static string ISchemaClass<CCitadel_Modifier_NeutralDamageGrowth>.NativeName => "CCitadel_Modifier_NeutralDamageGrowth";
+
+		/// <summary>The data entry this was created from, as <see cref="CCitadel_Modifier_NeutralDamageGrowthVData"/>, or null if it has none.</summary>
+		public new CCitadel_Modifier_NeutralDamageGrowthVData? VData => ModifierData<CCitadel_Modifier_NeutralDamageGrowthVData>();
 	}
 }

@@ -12,5 +12,8 @@ public static partial class Schema {
 		internal CCitadel_Ability_Boho_DoubleHit() { }
 		static CCitadel_Ability_Boho_DoubleHit ISchemaClass<CCitadel_Ability_Boho_DoubleHit>.New() => new();
 		static string ISchemaClass<CCitadel_Ability_Boho_DoubleHit>.NativeName => "CCitadel_Ability_Boho_DoubleHit";
+
+		/// <summary>The data entry this was created from, as <see cref="CCitadel_Ability_Boho_DoubleHitVData"/>, or null if it has none.</summary>
+		public new CCitadel_Ability_Boho_DoubleHitVData? VData => SubclassVData<CCitadel_Ability_Boho_DoubleHitVData>();
 	}
 }

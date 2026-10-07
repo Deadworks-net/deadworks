@@ -18,12 +18,12 @@ public static partial class Schema {
 		public string m_AOEParticle => GetBufferString(__m_AOEParticle);
 
 		private static readonly SchemaField __m_TargetModifier = new("CItemAOERootVData", "m_TargetModifier");
-		/// <summary><c>CEmbeddedSubclass&lt;CCitadelModifier&gt;</c>. No typed mapping yet: read it through its address.</summary>
-		public RawField m_TargetModifier => Raw(__m_TargetModifier, "CEmbeddedSubclass<CCitadelModifier>");
+		/// <summary><c>CEmbeddedSubclass&lt;CCitadelModifier&gt;</c>.</summary>
+		public CCitadelModifierVData? m_TargetModifier => EmbeddedSubclass<CCitadelModifierVData>(__m_TargetModifier);
 
 		private static readonly SchemaField __m_TetherModifier = new("CItemAOERootVData", "m_TetherModifier");
-		/// <summary><c>CEmbeddedSubclass&lt;CCitadelModifier&gt;</c>. No typed mapping yet: read it through its address.</summary>
-		public RawField m_TetherModifier => Raw(__m_TetherModifier, "CEmbeddedSubclass<CCitadelModifier>");
+		/// <summary><c>CEmbeddedSubclass&lt;CCitadelModifier&gt;</c>.</summary>
+		public CCitadelModifierVData? m_TetherModifier => EmbeddedSubclass<CCitadelModifierVData>(__m_TetherModifier);
 
 		private static readonly SchemaField __m_strRootTargetSound = new("CItemAOERootVData", "m_strRootTargetSound");
 		/// <summary><c>CSoundEventName</c>.</summary>

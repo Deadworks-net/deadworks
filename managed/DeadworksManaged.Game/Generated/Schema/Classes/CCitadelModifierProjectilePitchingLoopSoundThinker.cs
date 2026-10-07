@@ -12,5 +12,8 @@ public static partial class Schema {
 		internal CCitadelModifierProjectilePitchingLoopSoundThinker() { }
 		static CCitadelModifierProjectilePitchingLoopSoundThinker ISchemaClass<CCitadelModifierProjectilePitchingLoopSoundThinker>.New() => new();
 		static string ISchemaClass<CCitadelModifierProjectilePitchingLoopSoundThinker>.NativeName => "CCitadelModifierProjectilePitchingLoopSoundThinker";
+
+		/// <summary>The data entry this was created from, as <see cref="CCitadelModifierProjectilePitchingLoopSoundThinkerVData"/>, or null if it has none.</summary>
+		public new CCitadelModifierProjectilePitchingLoopSoundThinkerVData? VData => ModifierData<CCitadelModifierProjectilePitchingLoopSoundThinkerVData>();
 	}
 }

@@ -12,5 +12,8 @@ public static partial class Schema {
 		internal CCitadel_Modifier_Slow() { }
 		static CCitadel_Modifier_Slow ISchemaClass<CCitadel_Modifier_Slow>.New() => new();
 		static string ISchemaClass<CCitadel_Modifier_Slow>.NativeName => "CCitadel_Modifier_Slow";
+
+		/// <summary>The data entry this was created from, as <see cref="CCitadel_Modifier_SlowVData"/>, or null if it has none.</summary>
+		public new CCitadel_Modifier_SlowVData? VData => ModifierData<CCitadel_Modifier_SlowVData>();
 	}
 }

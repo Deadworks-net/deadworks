@@ -14,8 +14,8 @@ public static partial class Schema {
 		static string ISchemaClass<CModifier_SiphonBullets_HealthLoss_VData>.NativeName => "CModifier_SiphonBullets_HealthLoss_VData";
 
 		private static readonly SchemaField __m_HealModifier = new("CModifier_SiphonBullets_HealthLoss_VData", "m_HealModifier");
-		/// <summary><c>CEmbeddedSubclass&lt;CCitadelModifier&gt;</c>. No typed mapping yet: read it through its address.</summary>
-		public RawField m_HealModifier => Raw(__m_HealModifier, "CEmbeddedSubclass<CCitadelModifier>");
+		/// <summary><c>CEmbeddedSubclass&lt;CCitadelModifier&gt;</c>.</summary>
+		public CCitadelModifierVData? m_HealModifier => EmbeddedSubclass<CCitadelModifierVData>(__m_HealModifier);
 
 		private static readonly SchemaField __m_SiphonParticle = new("CModifier_SiphonBullets_HealthLoss_VData", "m_SiphonParticle");
 		/// <summary><c>CResourceNameTyped&lt;CWeakHandle&lt;InfoForResourceTypeIParticleSystemDefinition&gt;&gt;</c>.</summary>

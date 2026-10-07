@@ -12,5 +12,8 @@ public static partial class Schema {
 		internal CNPC_Neutral_Hideout_Cat() { }
 		static CNPC_Neutral_Hideout_Cat ISchemaClass<CNPC_Neutral_Hideout_Cat>.New() => new();
 		static string ISchemaClass<CNPC_Neutral_Hideout_Cat>.NativeName => "CNPC_Neutral_Hideout_Cat";
+
+		/// <summary>The data entry this was created from, as <see cref="CNPC_Neutral_Hideout_CatVData"/>, or null if it has none.</summary>
+		public CNPC_Neutral_Hideout_CatVData? VData => SubclassVData<CNPC_Neutral_Hideout_CatVData>();
 	}
 }

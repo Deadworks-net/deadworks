@@ -12,5 +12,8 @@ public static partial class Schema {
 		internal CCitadel_Modifier_Priest_Flashbang() { }
 		static CCitadel_Modifier_Priest_Flashbang ISchemaClass<CCitadel_Modifier_Priest_Flashbang>.New() => new();
 		static string ISchemaClass<CCitadel_Modifier_Priest_Flashbang>.NativeName => "CCitadel_Modifier_Priest_Flashbang";
+
+		/// <summary>The data entry this was created from, as <see cref="CCitadel_Modifier_Priest_FlashbangVData"/>, or null if it has none.</summary>
+		public new CCitadel_Modifier_Priest_FlashbangVData? VData => ModifierData<CCitadel_Modifier_Priest_FlashbangVData>();
 	}
 }

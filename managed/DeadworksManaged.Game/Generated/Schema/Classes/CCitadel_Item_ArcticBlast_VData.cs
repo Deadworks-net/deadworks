@@ -14,7 +14,7 @@ public static partial class Schema {
 		static string ISchemaClass<CCitadel_Item_ArcticBlast_VData>.NativeName => "CCitadel_Item_ArcticBlast_VData";
 
 		private static readonly SchemaField __m_AOEModifier = new("CCitadel_Item_ArcticBlast_VData", "m_AOEModifier");
-		/// <summary><c>CEmbeddedSubclass&lt;CCitadelModifier&gt;</c>. No typed mapping yet: read it through its address.</summary>
-		public RawField m_AOEModifier => Raw(__m_AOEModifier, "CEmbeddedSubclass<CCitadelModifier>");
+		/// <summary><c>CEmbeddedSubclass&lt;CCitadelModifier&gt;</c>.</summary>
+		public CCitadelModifierVData? m_AOEModifier => EmbeddedSubclass<CCitadelModifierVData>(__m_AOEModifier);
 	}
 }

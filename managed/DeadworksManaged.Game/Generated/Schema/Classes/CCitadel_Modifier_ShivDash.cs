@@ -20,5 +20,8 @@ public static partial class Schema {
 		private static readonly SchemaField __m_bUseTrail = new("CCitadel_Modifier_ShivDash", "m_bUseTrail");
 		/// <summary><c>bool</c>.</summary>
 		public bool m_bUseTrail { get => Get<bool>(__m_bUseTrail); set => Set(__m_bUseTrail, value); }
+
+		/// <summary>The data entry this was created from, as <see cref="CCitadel_Modifier_ShivDashVData"/>, or null if it has none.</summary>
+		public new CCitadel_Modifier_ShivDashVData? VData => ModifierData<CCitadel_Modifier_ShivDashVData>();
 	}
 }

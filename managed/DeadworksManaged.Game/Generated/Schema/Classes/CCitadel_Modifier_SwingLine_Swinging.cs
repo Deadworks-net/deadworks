@@ -12,5 +12,8 @@ public static partial class Schema {
 		internal CCitadel_Modifier_SwingLine_Swinging() { }
 		static CCitadel_Modifier_SwingLine_Swinging ISchemaClass<CCitadel_Modifier_SwingLine_Swinging>.New() => new();
 		static string ISchemaClass<CCitadel_Modifier_SwingLine_Swinging>.NativeName => "CCitadel_Modifier_SwingLine_Swinging";
+
+		/// <summary>The data entry this was created from, as <see cref="CCitadel_Modifier_SwingLine_SwingingVData"/>, or null if it has none.</summary>
+		public new CCitadel_Modifier_SwingLine_SwingingVData? VData => ModifierData<CCitadel_Modifier_SwingLine_SwingingVData>();
 	}
 }

@@ -12,5 +12,8 @@ public static partial class Schema {
 		internal CCitadel_Modifier_BulletShredImbue_Proc() { }
 		static CCitadel_Modifier_BulletShredImbue_Proc ISchemaClass<CCitadel_Modifier_BulletShredImbue_Proc>.New() => new();
 		static string ISchemaClass<CCitadel_Modifier_BulletShredImbue_Proc>.NativeName => "CCitadel_Modifier_BulletShredImbue_Proc";
+
+		/// <summary>The data entry this was created from, as <see cref="CCitadel_Modifier_BulletShredImbue_ProcVData"/>, or null if it has none.</summary>
+		public new CCitadel_Modifier_BulletShredImbue_ProcVData? VData => ModifierData<CCitadel_Modifier_BulletShredImbue_ProcVData>();
 	}
 }

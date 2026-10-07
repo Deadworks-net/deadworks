@@ -18,8 +18,8 @@ public static partial class Schema {
 		public string m_DashLineEffect => GetBufferString(__m_DashLineEffect);
 
 		private static readonly SchemaField __m_DebuffModifier = new("CCitadel_Ability_Fencer_RiposteVData", "m_DebuffModifier");
-		/// <summary><c>CEmbeddedSubclass&lt;CCitadelModifier&gt;</c>. No typed mapping yet: read it through its address.</summary>
-		public RawField m_DebuffModifier => Raw(__m_DebuffModifier, "CEmbeddedSubclass<CCitadelModifier>");
+		/// <summary><c>CEmbeddedSubclass&lt;CCitadelModifier&gt;</c>.</summary>
+		public CCitadelModifierVData? m_DebuffModifier => EmbeddedSubclass<CCitadelModifierVData>(__m_DebuffModifier);
 
 		private static readonly SchemaField __m_RiposteDashParticle = new("CCitadel_Ability_Fencer_RiposteVData", "m_RiposteDashParticle");
 		/// <summary><c>CResourceNameTyped&lt;CWeakHandle&lt;InfoForResourceTypeIParticleSystemDefinition&gt;&gt;</c>.</summary>
@@ -30,8 +30,8 @@ public static partial class Schema {
 		public string m_RiposteParriedParticle => GetBufferString(__m_RiposteParriedParticle);
 
 		private static readonly SchemaField __m_TargetLifestealModifier = new("CCitadel_Ability_Fencer_RiposteVData", "m_TargetLifestealModifier");
-		/// <summary><c>CEmbeddedSubclass&lt;CCitadelModifier&gt;</c>. No typed mapping yet: read it through its address.</summary>
-		public RawField m_TargetLifestealModifier => Raw(__m_TargetLifestealModifier, "CEmbeddedSubclass<CCitadelModifier>");
+		/// <summary><c>CEmbeddedSubclass&lt;CCitadelModifier&gt;</c>.</summary>
+		public CCitadelModifierVData? m_TargetLifestealModifier => EmbeddedSubclass<CCitadelModifierVData>(__m_TargetLifestealModifier);
 
 		private static readonly SchemaField __m_flAirDrag = new("CCitadel_Ability_Fencer_RiposteVData", "m_flAirDrag");
 		/// <summary><c>float32</c>.</summary>

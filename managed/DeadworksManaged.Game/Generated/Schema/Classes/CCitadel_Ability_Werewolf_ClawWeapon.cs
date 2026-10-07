@@ -12,5 +12,8 @@ public static partial class Schema {
 		internal CCitadel_Ability_Werewolf_ClawWeapon() { }
 		static CCitadel_Ability_Werewolf_ClawWeapon ISchemaClass<CCitadel_Ability_Werewolf_ClawWeapon>.New() => new();
 		static string ISchemaClass<CCitadel_Ability_Werewolf_ClawWeapon>.NativeName => "CCitadel_Ability_Werewolf_ClawWeapon";
+
+		/// <summary>The data entry this was created from, as <see cref="CCitadel_Ability_Werewolf_ClawWeaponVData"/>, or null if it has none.</summary>
+		public new CCitadel_Ability_Werewolf_ClawWeaponVData? VData => SubclassVData<CCitadel_Ability_Werewolf_ClawWeaponVData>();
 	}
 }

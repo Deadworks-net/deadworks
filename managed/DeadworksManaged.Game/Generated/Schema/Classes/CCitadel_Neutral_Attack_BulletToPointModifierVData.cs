@@ -14,8 +14,8 @@ public static partial class Schema {
 		static string ISchemaClass<CCitadel_Neutral_Attack_BulletToPointModifierVData>.NativeName => "CCitadel_Neutral_Attack_BulletToPointModifierVData";
 
 		private static readonly SchemaField __m_GroundPointModifier = new("CCitadel_Neutral_Attack_BulletToPointModifierVData", "m_GroundPointModifier");
-		/// <summary><c>CEmbeddedSubclass&lt;CCitadelModifier&gt;</c>. No typed mapping yet: read it through its address.</summary>
-		public RawField m_GroundPointModifier => Raw(__m_GroundPointModifier, "CEmbeddedSubclass<CCitadelModifier>");
+		/// <summary><c>CEmbeddedSubclass&lt;CCitadelModifier&gt;</c>.</summary>
+		public CCitadelModifierVData? m_GroundPointModifier => EmbeddedSubclass<CCitadelModifierVData>(__m_GroundPointModifier);
 
 		private static readonly SchemaField __m_HitSound = new("CCitadel_Neutral_Attack_BulletToPointModifierVData", "m_HitSound");
 		/// <summary><c>CSoundEventName</c>.</summary>

@@ -12,5 +12,8 @@ public static partial class Schema {
 		internal CCitadel_Ability_Viper_DebuffDagger() { }
 		static CCitadel_Ability_Viper_DebuffDagger ISchemaClass<CCitadel_Ability_Viper_DebuffDagger>.New() => new();
 		static string ISchemaClass<CCitadel_Ability_Viper_DebuffDagger>.NativeName => "CCitadel_Ability_Viper_DebuffDagger";
+
+		/// <summary>The data entry this was created from, as <see cref="CCitadel_Ability_Viper_DebuffDaggerVData"/>, or null if it has none.</summary>
+		public new CCitadel_Ability_Viper_DebuffDaggerVData? VData => SubclassVData<CCitadel_Ability_Viper_DebuffDaggerVData>();
 	}
 }

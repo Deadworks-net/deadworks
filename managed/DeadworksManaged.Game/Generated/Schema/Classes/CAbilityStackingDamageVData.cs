@@ -14,7 +14,7 @@ public static partial class Schema {
 		static string ISchemaClass<CAbilityStackingDamageVData>.NativeName => "CAbilityStackingDamageVData";
 
 		private static readonly SchemaField __m_StackingModifier = new("CAbilityStackingDamageVData", "m_StackingModifier");
-		/// <summary><c>CEmbeddedSubclass&lt;CCitadelModifier&gt;</c>. No typed mapping yet: read it through its address.</summary>
-		public RawField m_StackingModifier => Raw(__m_StackingModifier, "CEmbeddedSubclass<CCitadelModifier>");
+		/// <summary><c>CEmbeddedSubclass&lt;CCitadelModifier&gt;</c>.</summary>
+		public CCitadelModifierVData? m_StackingModifier => EmbeddedSubclass<CCitadelModifierVData>(__m_StackingModifier);
 	}
 }

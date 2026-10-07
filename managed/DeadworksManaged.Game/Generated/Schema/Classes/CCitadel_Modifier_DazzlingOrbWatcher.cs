@@ -56,5 +56,8 @@ public static partial class Schema {
 		private static readonly SchemaField __m_vLastHitLocation = new("CCitadel_Modifier_DazzlingOrbWatcher", "m_vLastHitLocation");
 		/// <summary><c>VectorWS</c>.</summary>
 		public Vector3 m_vLastHitLocation { get => Get<Vector3>(__m_vLastHitLocation); set => Set(__m_vLastHitLocation, value); }
+
+		/// <summary>The data entry this was created from, as <see cref="CCitadel_Modifier_DazzlingOrbWatcherVData"/>, or null if it has none.</summary>
+		public new CCitadel_Modifier_DazzlingOrbWatcherVData? VData => ModifierData<CCitadel_Modifier_DazzlingOrbWatcherVData>();
 	}
 }

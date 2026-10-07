@@ -18,24 +18,24 @@ public static partial class Schema {
 		public DOFDesc_t m_DOFWhileZiplining => Embedded<DOFDesc_t>(__m_DOFWhileZiplining);
 
 		private static readonly SchemaField __m_KnockedOffSlowModifier = new("CCitadel_Ability_ZipLine_VData", "m_KnockedOffSlowModifier");
-		/// <summary><c>CEmbeddedSubclass&lt;CCitadelModifier&gt;</c>. No typed mapping yet: read it through its address.</summary>
-		public RawField m_KnockedOffSlowModifier => Raw(__m_KnockedOffSlowModifier, "CEmbeddedSubclass<CCitadelModifier>");
+		/// <summary><c>CEmbeddedSubclass&lt;CCitadelModifier&gt;</c>.</summary>
+		public CCitadelModifierVData? m_KnockedOffSlowModifier => EmbeddedSubclass<CCitadelModifierVData>(__m_KnockedOffSlowModifier);
 
 		private static readonly SchemaField __m_RidingZipLineModifier = new("CCitadel_Ability_ZipLine_VData", "m_RidingZipLineModifier");
-		/// <summary><c>CEmbeddedSubclass&lt;CCitadelModifier&gt;</c>. No typed mapping yet: read it through its address.</summary>
-		public RawField m_RidingZipLineModifier => Raw(__m_RidingZipLineModifier, "CEmbeddedSubclass<CCitadelModifier>");
+		/// <summary><c>CEmbeddedSubclass&lt;CCitadelModifier&gt;</c>.</summary>
+		public CCitadelModifierVData? m_RidingZipLineModifier => EmbeddedSubclass<CCitadelModifierVData>(__m_RidingZipLineModifier);
 
 		private static readonly SchemaField __m_ZipLineEnemyKnockdownProtectionParticle = new("CCitadel_Ability_ZipLine_VData", "m_ZipLineEnemyKnockdownProtectionParticle");
 		/// <summary><c>CResourceNameTyped&lt;CWeakHandle&lt;InfoForResourceTypeIParticleSystemDefinition&gt;&gt;</c>.</summary>
 		public string m_ZipLineEnemyKnockdownProtectionParticle => GetBufferString(__m_ZipLineEnemyKnockdownProtectionParticle);
 
 		private static readonly SchemaField __m_ZipLineIntroModifier = new("CCitadel_Ability_ZipLine_VData", "m_ZipLineIntroModifier");
-		/// <summary><c>CEmbeddedSubclass&lt;CCitadelModifier&gt;</c>. No typed mapping yet: read it through its address.</summary>
-		public RawField m_ZipLineIntroModifier => Raw(__m_ZipLineIntroModifier, "CEmbeddedSubclass<CCitadelModifier>");
+		/// <summary><c>CEmbeddedSubclass&lt;CCitadelModifier&gt;</c>.</summary>
+		public CCitadelModifierVData? m_ZipLineIntroModifier => EmbeddedSubclass<CCitadelModifierVData>(__m_ZipLineIntroModifier);
 
 		private static readonly SchemaField __m_ZipLineKnockdownImmuneModifier = new("CCitadel_Ability_ZipLine_VData", "m_ZipLineKnockdownImmuneModifier");
-		/// <summary><c>CEmbeddedSubclass&lt;CCitadelModifier&gt;</c>. No typed mapping yet: read it through its address.</summary>
-		public RawField m_ZipLineKnockdownImmuneModifier => Raw(__m_ZipLineKnockdownImmuneModifier, "CEmbeddedSubclass<CCitadelModifier>");
+		/// <summary><c>CEmbeddedSubclass&lt;CCitadelModifier&gt;</c>.</summary>
+		public CCitadelModifierVData? m_ZipLineKnockdownImmuneModifier => EmbeddedSubclass<CCitadelModifierVData>(__m_ZipLineKnockdownImmuneModifier);
 
 		private static readonly SchemaField __m_ZipLineKnockdownProtectionStatusParticle = new("CCitadel_Ability_ZipLine_VData", "m_ZipLineKnockdownProtectionStatusParticle");
 		/// <summary><c>CResourceNameTyped&lt;CWeakHandle&lt;InfoForResourceTypeIParticleSystemDefinition&gt;&gt;</c>.</summary>
@@ -50,8 +50,8 @@ public static partial class Schema {
 		public string m_ZipLineSelfKnockdownProtectionParticle => GetBufferString(__m_ZipLineSelfKnockdownProtectionParticle);
 
 		private static readonly SchemaField __m_ZipLineSlowModifier = new("CCitadel_Ability_ZipLine_VData", "m_ZipLineSlowModifier");
-		/// <summary><c>CEmbeddedSubclass&lt;CCitadelModifier&gt;</c>. No typed mapping yet: read it through its address.</summary>
-		public RawField m_ZipLineSlowModifier => Raw(__m_ZipLineSlowModifier, "CEmbeddedSubclass<CCitadelModifier>");
+		/// <summary><c>CEmbeddedSubclass&lt;CCitadelModifier&gt;</c>.</summary>
+		public CCitadelModifierVData? m_ZipLineSlowModifier => EmbeddedSubclass<CCitadelModifierVData>(__m_ZipLineSlowModifier);
 
 		private static readonly SchemaField __m_ZipLineSpeedParticle = new("CCitadel_Ability_ZipLine_VData", "m_ZipLineSpeedParticle");
 		/// <summary><c>CResourceNameTyped&lt;CWeakHandle&lt;InfoForResourceTypeIParticleSystemDefinition&gt;&gt;</c>.</summary>

@@ -22,44 +22,44 @@ public static partial class Schema {
 		public string m_ChannelStartParticle => GetBufferString(__m_ChannelStartParticle);
 
 		private static readonly SchemaField __m_DamageModifier = new("CCitadel_Ability_Doorman_Hotel_VData", "m_DamageModifier");
-		/// <summary><c>CEmbeddedSubclass&lt;CCitadelModifier&gt;</c>. No typed mapping yet: read it through its address.</summary>
-		public RawField m_DamageModifier => Raw(__m_DamageModifier, "CEmbeddedSubclass<CCitadelModifier>");
+		/// <summary><c>CEmbeddedSubclass&lt;CCitadelModifier&gt;</c>.</summary>
+		public CCitadelModifierVData? m_DamageModifier => EmbeddedSubclass<CCitadelModifierVData>(__m_DamageModifier);
 
 		private static readonly SchemaField __m_FreezeModifier = new("CCitadel_Ability_Doorman_Hotel_VData", "m_FreezeModifier");
-		/// <summary><c>CEmbeddedSubclass&lt;CCitadelModifier&gt;</c>. No typed mapping yet: read it through its address.</summary>
-		public RawField m_FreezeModifier => Raw(__m_FreezeModifier, "CEmbeddedSubclass<CCitadelModifier>");
+		/// <summary><c>CEmbeddedSubclass&lt;CCitadelModifier&gt;</c>.</summary>
+		public CCitadelModifierVData? m_FreezeModifier => EmbeddedSubclass<CCitadelModifierVData>(__m_FreezeModifier);
 
 		private static readonly SchemaField __m_HotelModifier = new("CCitadel_Ability_Doorman_Hotel_VData", "m_HotelModifier");
-		/// <summary><c>CEmbeddedSubclass&lt;CCitadelModifier&gt;</c>. No typed mapping yet: read it through its address.</summary>
-		public RawField m_HotelModifier => Raw(__m_HotelModifier, "CEmbeddedSubclass<CCitadelModifier>");
+		/// <summary><c>CEmbeddedSubclass&lt;CCitadelModifier&gt;</c>.</summary>
+		public CCitadelModifierVData? m_HotelModifier => EmbeddedSubclass<CCitadelModifierVData>(__m_HotelModifier);
 
 		private static readonly SchemaField __m_ImposterModifier = new("CCitadel_Ability_Doorman_Hotel_VData", "m_ImposterModifier");
-		/// <summary><c>CEmbeddedSubclass&lt;CCitadel_Modifier_Doorman_Hotel_Imposter&gt;</c>. No typed mapping yet: read it through its address.</summary>
-		public RawField m_ImposterModifier => Raw(__m_ImposterModifier, "CEmbeddedSubclass<CCitadel_Modifier_Doorman_Hotel_Imposter>");
+		/// <summary><c>CEmbeddedSubclass&lt;CCitadel_Modifier_Doorman_Hotel_Imposter&gt;</c>.</summary>
+		public CCitadelModifierVData? m_ImposterModifier => EmbeddedSubclass<CCitadelModifierVData>(__m_ImposterModifier);
 
 		private static readonly SchemaField __m_NoDrawModifier = new("CCitadel_Ability_Doorman_Hotel_VData", "m_NoDrawModifier");
-		/// <summary><c>CEmbeddedSubclass&lt;CCitadelModifier&gt;</c>. No typed mapping yet: read it through its address.</summary>
-		public RawField m_NoDrawModifier => Raw(__m_NoDrawModifier, "CEmbeddedSubclass<CCitadelModifier>");
+		/// <summary><c>CEmbeddedSubclass&lt;CCitadelModifier&gt;</c>.</summary>
+		public CCitadelModifierVData? m_NoDrawModifier => EmbeddedSubclass<CCitadelModifierVData>(__m_NoDrawModifier);
 
 		private static readonly SchemaField __m_PreTeleportModifier = new("CCitadel_Ability_Doorman_Hotel_VData", "m_PreTeleportModifier");
-		/// <summary><c>CEmbeddedSubclass&lt;CCitadelModifier&gt;</c>. No typed mapping yet: read it through its address.</summary>
-		public RawField m_PreTeleportModifier => Raw(__m_PreTeleportModifier, "CEmbeddedSubclass<CCitadelModifier>");
+		/// <summary><c>CEmbeddedSubclass&lt;CCitadelModifier&gt;</c>.</summary>
+		public CCitadelModifierVData? m_PreTeleportModifier => EmbeddedSubclass<CCitadelModifierVData>(__m_PreTeleportModifier);
 
 		private static readonly SchemaField __m_TeleportFXModifier = new("CCitadel_Ability_Doorman_Hotel_VData", "m_TeleportFXModifier");
-		/// <summary><c>CEmbeddedSubclass&lt;CCitadelModifier&gt;</c>. No typed mapping yet: read it through its address.</summary>
-		public RawField m_TeleportFXModifier => Raw(__m_TeleportFXModifier, "CEmbeddedSubclass<CCitadelModifier>");
+		/// <summary><c>CEmbeddedSubclass&lt;CCitadelModifier&gt;</c>.</summary>
+		public CCitadelModifierVData? m_TeleportFXModifier => EmbeddedSubclass<CCitadelModifierVData>(__m_TeleportFXModifier);
 
 		private static readonly SchemaField __m_TimeslowModifier = new("CCitadel_Ability_Doorman_Hotel_VData", "m_TimeslowModifier");
-		/// <summary><c>CEmbeddedSubclass&lt;CCitadelModifier&gt;</c>. No typed mapping yet: read it through its address.</summary>
-		public RawField m_TimeslowModifier => Raw(__m_TimeslowModifier, "CEmbeddedSubclass<CCitadelModifier>");
+		/// <summary><c>CEmbeddedSubclass&lt;CCitadelModifier&gt;</c>.</summary>
+		public CCitadelModifierVData? m_TimeslowModifier => EmbeddedSubclass<CCitadelModifierVData>(__m_TimeslowModifier);
 
 		private static readonly SchemaField __m_TrackEnemy = new("CCitadel_Ability_Doorman_Hotel_VData", "m_TrackEnemy");
-		/// <summary><c>CEmbeddedSubclass&lt;CCitadelModifier&gt;</c>. No typed mapping yet: read it through its address.</summary>
-		public RawField m_TrackEnemy => Raw(__m_TrackEnemy, "CEmbeddedSubclass<CCitadelModifier>");
+		/// <summary><c>CEmbeddedSubclass&lt;CCitadelModifier&gt;</c>.</summary>
+		public CCitadelModifierVData? m_TrackEnemy => EmbeddedSubclass<CCitadelModifierVData>(__m_TrackEnemy);
 
 		private static readonly SchemaField __m_UnstoppableWhileChannelingModifier = new("CCitadel_Ability_Doorman_Hotel_VData", "m_UnstoppableWhileChannelingModifier");
-		/// <summary><c>CEmbeddedSubclass&lt;CCitadelModifier&gt;</c>. No typed mapping yet: read it through its address.</summary>
-		public RawField m_UnstoppableWhileChannelingModifier => Raw(__m_UnstoppableWhileChannelingModifier, "CEmbeddedSubclass<CCitadelModifier>");
+		/// <summary><c>CEmbeddedSubclass&lt;CCitadelModifier&gt;</c>.</summary>
+		public CCitadelModifierVData? m_UnstoppableWhileChannelingModifier => EmbeddedSubclass<CCitadelModifierVData>(__m_UnstoppableWhileChannelingModifier);
 
 		private static readonly SchemaField __m_flDoormanAirDrag = new("CCitadel_Ability_Doorman_Hotel_VData", "m_flDoormanAirDrag");
 		/// <summary><c>float32</c>. Doorman's air drag while channeling. The victim's is specified in the pre-teleport modifier.</summary>

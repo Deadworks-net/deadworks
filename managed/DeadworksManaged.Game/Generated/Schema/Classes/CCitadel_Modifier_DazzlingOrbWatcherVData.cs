@@ -30,16 +30,16 @@ public static partial class Schema {
 		public string m_GraceParticle => GetBufferString(__m_GraceParticle);
 
 		private static readonly SchemaField __m_NextTargetModifier = new("CCitadel_Modifier_DazzlingOrbWatcherVData", "m_NextTargetModifier");
-		/// <summary><c>CEmbeddedSubclass&lt;CCitadelModifier&gt;</c>. No typed mapping yet: read it through its address.</summary>
-		public RawField m_NextTargetModifier => Raw(__m_NextTargetModifier, "CEmbeddedSubclass<CCitadelModifier>");
+		/// <summary><c>CEmbeddedSubclass&lt;CCitadelModifier&gt;</c>.</summary>
+		public CCitadelModifierVData? m_NextTargetModifier => EmbeddedSubclass<CCitadelModifierVData>(__m_NextTargetModifier);
 
 		private static readonly SchemaField __m_OrbFriendlyBounceWatcherModifier = new("CCitadel_Modifier_DazzlingOrbWatcherVData", "m_OrbFriendlyBounceWatcherModifier");
-		/// <summary><c>CEmbeddedSubclass&lt;CCitadelModifier&gt;</c>. No typed mapping yet: read it through its address.</summary>
-		public RawField m_OrbFriendlyBounceWatcherModifier => Raw(__m_OrbFriendlyBounceWatcherModifier, "CEmbeddedSubclass<CCitadelModifier>");
+		/// <summary><c>CEmbeddedSubclass&lt;CCitadelModifier&gt;</c>.</summary>
+		public CCitadelModifierVData? m_OrbFriendlyBounceWatcherModifier => EmbeddedSubclass<CCitadelModifierVData>(__m_OrbFriendlyBounceWatcherModifier);
 
 		private static readonly SchemaField __m_SlowModifier = new("CCitadel_Modifier_DazzlingOrbWatcherVData", "m_SlowModifier");
-		/// <summary><c>CEmbeddedSubclass&lt;CCitadelModifier&gt;</c>. No typed mapping yet: read it through its address.</summary>
-		public RawField m_SlowModifier => Raw(__m_SlowModifier, "CEmbeddedSubclass<CCitadelModifier>");
+		/// <summary><c>CEmbeddedSubclass&lt;CCitadelModifier&gt;</c>.</summary>
+		public CCitadelModifierVData? m_SlowModifier => EmbeddedSubclass<CCitadelModifierVData>(__m_SlowModifier);
 
 		private static readonly SchemaField __m_TrackingParams = new("CCitadel_Modifier_DazzlingOrbWatcherVData", "m_TrackingParams");
 		/// <summary><c>CCitadelProjectileTrackingParams</c>.</summary>

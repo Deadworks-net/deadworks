@@ -14,15 +14,15 @@ public static partial class Schema {
 		static string ISchemaClass<CCitadel_Item_FocusLens_VData>.NativeName => "CCitadel_Item_FocusLens_VData";
 
 		private static readonly SchemaField __m_DamageModifier = new("CCitadel_Item_FocusLens_VData", "m_DamageModifier");
-		/// <summary><c>CEmbeddedSubclass&lt;CCitadelModifier&gt;</c>. No typed mapping yet: read it through its address.</summary>
-		public RawField m_DamageModifier => Raw(__m_DamageModifier, "CEmbeddedSubclass<CCitadelModifier>");
+		/// <summary><c>CEmbeddedSubclass&lt;CCitadelModifier&gt;</c>.</summary>
+		public CCitadelModifierVData? m_DamageModifier => EmbeddedSubclass<CCitadelModifierVData>(__m_DamageModifier);
 
 		private static readonly SchemaField __m_ResistReductionModifier = new("CCitadel_Item_FocusLens_VData", "m_ResistReductionModifier");
-		/// <summary><c>CEmbeddedSubclass&lt;CCitadelModifier&gt;</c>. No typed mapping yet: read it through its address.</summary>
-		public RawField m_ResistReductionModifier => Raw(__m_ResistReductionModifier, "CEmbeddedSubclass<CCitadelModifier>");
+		/// <summary><c>CEmbeddedSubclass&lt;CCitadelModifier&gt;</c>.</summary>
+		public CCitadelModifierVData? m_ResistReductionModifier => EmbeddedSubclass<CCitadelModifierVData>(__m_ResistReductionModifier);
 
 		private static readonly SchemaField __m_SilenceModifier = new("CCitadel_Item_FocusLens_VData", "m_SilenceModifier");
-		/// <summary><c>CEmbeddedSubclass&lt;CCitadelModifier&gt;</c>. No typed mapping yet: read it through its address.</summary>
-		public RawField m_SilenceModifier => Raw(__m_SilenceModifier, "CEmbeddedSubclass<CCitadelModifier>");
+		/// <summary><c>CEmbeddedSubclass&lt;CCitadelModifier&gt;</c>.</summary>
+		public CCitadelModifierVData? m_SilenceModifier => EmbeddedSubclass<CCitadelModifierVData>(__m_SilenceModifier);
 	}
 }

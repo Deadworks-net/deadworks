@@ -14,8 +14,8 @@ public static partial class Schema {
 		static string ISchemaClass<CModifier_Mirage_Tornado_Lift_VData>.NativeName => "CModifier_Mirage_Tornado_Lift_VData";
 
 		private static readonly SchemaField __m_HoldInPlaceModifier = new("CModifier_Mirage_Tornado_Lift_VData", "m_HoldInPlaceModifier");
-		/// <summary><c>CEmbeddedSubclass&lt;CBaseModifier&gt;</c>. No typed mapping yet: read it through its address.</summary>
-		public RawField m_HoldInPlaceModifier => Raw(__m_HoldInPlaceModifier, "CEmbeddedSubclass<CBaseModifier>");
+		/// <summary><c>CEmbeddedSubclass&lt;CBaseModifier&gt;</c>.</summary>
+		public CModifierVData? m_HoldInPlaceModifier => EmbeddedSubclass<CModifierVData>(__m_HoldInPlaceModifier);
 
 		private static readonly SchemaField __m_LiftParticle = new("CModifier_Mirage_Tornado_Lift_VData", "m_LiftParticle");
 		/// <summary><c>CResourceNameTyped&lt;CWeakHandle&lt;InfoForResourceTypeIParticleSystemDefinition&gt;&gt;</c>.</summary>

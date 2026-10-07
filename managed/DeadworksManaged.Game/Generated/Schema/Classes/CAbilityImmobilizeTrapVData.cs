@@ -18,16 +18,16 @@ public static partial class Schema {
 		public string m_ArmedParticle => GetBufferString(__m_ArmedParticle);
 
 		private static readonly SchemaField __m_DebuffModifier = new("CAbilityImmobilizeTrapVData", "m_DebuffModifier");
-		/// <summary><c>CEmbeddedSubclass&lt;CCitadelModifier&gt;</c>. No typed mapping yet: read it through its address.</summary>
-		public RawField m_DebuffModifier => Raw(__m_DebuffModifier, "CEmbeddedSubclass<CCitadelModifier>");
+		/// <summary><c>CEmbeddedSubclass&lt;CCitadelModifier&gt;</c>.</summary>
+		public CCitadelModifierVData? m_DebuffModifier => EmbeddedSubclass<CCitadelModifierVData>(__m_DebuffModifier);
 
 		private static readonly SchemaField __m_ExplodeParticle = new("CAbilityImmobilizeTrapVData", "m_ExplodeParticle");
 		/// <summary><c>CResourceNameTyped&lt;CWeakHandle&lt;InfoForResourceTypeIParticleSystemDefinition&gt;&gt;</c>.</summary>
 		public string m_ExplodeParticle => GetBufferString(__m_ExplodeParticle);
 
 		private static readonly SchemaField __m_GlitchModifier = new("CAbilityImmobilizeTrapVData", "m_GlitchModifier");
-		/// <summary><c>CEmbeddedSubclass&lt;CCitadelModifier&gt;</c>. No typed mapping yet: read it through its address.</summary>
-		public RawField m_GlitchModifier => Raw(__m_GlitchModifier, "CEmbeddedSubclass<CCitadelModifier>");
+		/// <summary><c>CEmbeddedSubclass&lt;CCitadelModifier&gt;</c>.</summary>
+		public CCitadelModifierVData? m_GlitchModifier => EmbeddedSubclass<CCitadelModifierVData>(__m_GlitchModifier);
 
 		private static readonly SchemaField __m_PreviewRingParticle = new("CAbilityImmobilizeTrapVData", "m_PreviewRingParticle");
 		/// <summary><c>CResourceNameTyped&lt;CWeakHandle&lt;InfoForResourceTypeIParticleSystemDefinition&gt;&gt;</c>.</summary>

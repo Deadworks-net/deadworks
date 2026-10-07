@@ -14,16 +14,16 @@ public static partial class Schema {
 		static string ISchemaClass<CNPC_TrooperNeutralVData>.NativeName => "CNPC_TrooperNeutralVData";
 
 		private static readonly SchemaField __m_NeutralDamageGrowth = new("CNPC_TrooperNeutralVData", "m_NeutralDamageGrowth");
-		/// <summary><c>CEmbeddedSubclass&lt;CCitadelModifier&gt;</c>. No typed mapping yet: read it through its address.</summary>
-		public RawField m_NeutralDamageGrowth => Raw(__m_NeutralDamageGrowth, "CEmbeddedSubclass<CCitadelModifier>");
+		/// <summary><c>CEmbeddedSubclass&lt;CCitadelModifier&gt;</c>.</summary>
+		public CCitadelModifierVData? m_NeutralDamageGrowth => EmbeddedSubclass<CCitadelModifierVData>(__m_NeutralDamageGrowth);
 
 		private static readonly SchemaField __m_ShieldParticle = new("CNPC_TrooperNeutralVData", "m_ShieldParticle");
 		/// <summary><c>CResourceNameTyped&lt;CWeakHandle&lt;InfoForResourceTypeIParticleSystemDefinition&gt;&gt;</c>.</summary>
 		public string m_ShieldParticle => GetBufferString(__m_ShieldParticle);
 
 		private static readonly SchemaField __m_SleepModifier = new("CNPC_TrooperNeutralVData", "m_SleepModifier");
-		/// <summary><c>CEmbeddedSubclass&lt;CCitadelModifier&gt;</c>. No typed mapping yet: read it through its address.</summary>
-		public RawField m_SleepModifier => Raw(__m_SleepModifier, "CEmbeddedSubclass<CCitadelModifier>");
+		/// <summary><c>CEmbeddedSubclass&lt;CCitadelModifier&gt;</c>.</summary>
+		public CCitadelModifierVData? m_SleepModifier => EmbeddedSubclass<CCitadelModifierVData>(__m_SleepModifier);
 
 		private static readonly SchemaField __m_SpawnSound = new("CNPC_TrooperNeutralVData", "m_SpawnSound");
 		/// <summary><c>CSoundEventName</c>.</summary>

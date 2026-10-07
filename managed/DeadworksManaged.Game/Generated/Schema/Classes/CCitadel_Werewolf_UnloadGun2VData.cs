@@ -14,8 +14,8 @@ public static partial class Schema {
 		static string ISchemaClass<CCitadel_Werewolf_UnloadGun2VData>.NativeName => "CCitadel_Werewolf_UnloadGun2VData";
 
 		private static readonly SchemaField __m_BuffModifier = new("CCitadel_Werewolf_UnloadGun2VData", "m_BuffModifier");
-		/// <summary><c>CEmbeddedSubclass&lt;CCitadelModifier&gt;</c>. No typed mapping yet: read it through its address.</summary>
-		public RawField m_BuffModifier => Raw(__m_BuffModifier, "CEmbeddedSubclass<CCitadelModifier>");
+		/// <summary><c>CEmbeddedSubclass&lt;CCitadelModifier&gt;</c>.</summary>
+		public CCitadelModifierVData? m_BuffModifier => EmbeddedSubclass<CCitadelModifierVData>(__m_BuffModifier);
 
 		private static readonly SchemaField __m_GunReloadParticle = new("CCitadel_Werewolf_UnloadGun2VData", "m_GunReloadParticle");
 		/// <summary><c>CResourceNameTyped&lt;CWeakHandle&lt;InfoForResourceTypeIParticleSystemDefinition&gt;&gt;</c>.</summary>

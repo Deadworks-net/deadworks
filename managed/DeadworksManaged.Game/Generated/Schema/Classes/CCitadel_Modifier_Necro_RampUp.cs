@@ -20,5 +20,8 @@ public static partial class Schema {
 		private static readonly SchemaField __m_tLastTetherTime = new("CCitadel_Modifier_Necro_RampUp", "m_tLastTetherTime");
 		/// <summary><c>GameTime_t</c>.</summary>
 		public float m_tLastTetherTime { get => Get<float>(__m_tLastTetherTime); set => Set(__m_tLastTetherTime, value); }
+
+		/// <summary>The data entry this was created from, as <see cref="CCitadel_Modifier_Necro_RampUpVData"/>, or null if it has none.</summary>
+		public new CCitadel_Modifier_Necro_RampUpVData? VData => ModifierData<CCitadel_Modifier_Necro_RampUpVData>();
 	}
 }

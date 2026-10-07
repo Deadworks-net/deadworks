@@ -20,5 +20,8 @@ public static partial class Schema {
 		private static readonly SchemaField __m_vecCharmLocation = new("CCitadel_Modifier_Charmed", "m_vecCharmLocation");
 		/// <summary><c>VectorWS</c>.</summary>
 		public Vector3 m_vecCharmLocation { get => Get<Vector3>(__m_vecCharmLocation); set => Set(__m_vecCharmLocation, value); }
+
+		/// <summary>The data entry this was created from, as <see cref="CCitadel_Modifier_CharmedVData"/>, or null if it has none.</summary>
+		public new CCitadel_Modifier_CharmedVData? VData => ModifierData<CCitadel_Modifier_CharmedVData>();
 	}
 }

@@ -325,6 +325,9 @@ public static partial class Schema {
 		/// <summary><c>CUtlVector&lt;CHandle&lt;CAI_BaseNPC&gt;&gt;</c>.</summary>
 		public SchemaHandleList<CAI_BaseNPC> m_vecSynchronizedSecondaryNPCs => new(this, __m_vecSynchronizedSecondaryNPCs, -1);
 
+		/// <summary>The data entry this was created from, as <see cref="CAI_BaseNPCVData"/>, or null if it has none.</summary>
+		public CAI_BaseNPCVData? VData => SubclassVData<CAI_BaseNPCVData>();
+
 		/// <summary>Fires the <c>Break</c> input.</summary>
 		public void InputBreak() => FireInput("Break");
 

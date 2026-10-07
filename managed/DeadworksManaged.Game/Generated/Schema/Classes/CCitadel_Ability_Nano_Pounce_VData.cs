@@ -14,8 +14,8 @@ public static partial class Schema {
 		static string ISchemaClass<CCitadel_Ability_Nano_Pounce_VData>.NativeName => "CCitadel_Ability_Nano_Pounce_VData";
 
 		private static readonly SchemaField __m_ActiveBuff = new("CCitadel_Ability_Nano_Pounce_VData", "m_ActiveBuff");
-		/// <summary><c>CEmbeddedSubclass&lt;CCitadelModifier&gt;</c>. No typed mapping yet: read it through its address.</summary>
-		public RawField m_ActiveBuff => Raw(__m_ActiveBuff, "CEmbeddedSubclass<CCitadelModifier>");
+		/// <summary><c>CEmbeddedSubclass&lt;CCitadelModifier&gt;</c>.</summary>
+		public CCitadelModifierVData? m_ActiveBuff => EmbeddedSubclass<CCitadelModifierVData>(__m_ActiveBuff);
 
 		private static readonly SchemaField __m_AttackParticle = new("CCitadel_Ability_Nano_Pounce_VData", "m_AttackParticle");
 		/// <summary><c>CResourceNameTyped&lt;CWeakHandle&lt;InfoForResourceTypeIParticleSystemDefinition&gt;&gt;</c>.</summary>
@@ -30,8 +30,8 @@ public static partial class Schema {
 		public string m_CastParticle => GetBufferString(__m_CastParticle);
 
 		private static readonly SchemaField __m_DoublePounceModifier = new("CCitadel_Ability_Nano_Pounce_VData", "m_DoublePounceModifier");
-		/// <summary><c>CEmbeddedSubclass&lt;CCitadelModifier&gt;</c>. No typed mapping yet: read it through its address.</summary>
-		public RawField m_DoublePounceModifier => Raw(__m_DoublePounceModifier, "CEmbeddedSubclass<CCitadelModifier>");
+		/// <summary><c>CEmbeddedSubclass&lt;CCitadelModifier&gt;</c>.</summary>
+		public CCitadelModifierVData? m_DoublePounceModifier => EmbeddedSubclass<CCitadelModifierVData>(__m_DoublePounceModifier);
 
 		private static readonly SchemaField __m_ExplodeSlowParticle = new("CCitadel_Ability_Nano_Pounce_VData", "m_ExplodeSlowParticle");
 		/// <summary><c>CResourceNameTyped&lt;CWeakHandle&lt;InfoForResourceTypeIParticleSystemDefinition&gt;&gt;</c>.</summary>
@@ -42,16 +42,16 @@ public static partial class Schema {
 		public string m_FlashParticle => GetBufferString(__m_FlashParticle);
 
 		private static readonly SchemaField __m_LeapModifier = new("CCitadel_Ability_Nano_Pounce_VData", "m_LeapModifier");
-		/// <summary><c>CEmbeddedSubclass&lt;CCitadelModifier&gt;</c>. No typed mapping yet: read it through its address.</summary>
-		public RawField m_LeapModifier => Raw(__m_LeapModifier, "CEmbeddedSubclass<CCitadelModifier>");
+		/// <summary><c>CEmbeddedSubclass&lt;CCitadelModifier&gt;</c>.</summary>
+		public CCitadelModifierVData? m_LeapModifier => EmbeddedSubclass<CCitadelModifierVData>(__m_LeapModifier);
 
 		private static readonly SchemaField __m_PrimaryHitParticle = new("CCitadel_Ability_Nano_Pounce_VData", "m_PrimaryHitParticle");
 		/// <summary><c>CResourceNameTyped&lt;CWeakHandle&lt;InfoForResourceTypeIParticleSystemDefinition&gt;&gt;</c>.</summary>
 		public string m_PrimaryHitParticle => GetBufferString(__m_PrimaryHitParticle);
 
 		private static readonly SchemaField __m_SlowModifier = new("CCitadel_Ability_Nano_Pounce_VData", "m_SlowModifier");
-		/// <summary><c>CEmbeddedSubclass&lt;CCitadelModifier&gt;</c>. No typed mapping yet: read it through its address.</summary>
-		public RawField m_SlowModifier => Raw(__m_SlowModifier, "CEmbeddedSubclass<CCitadelModifier>");
+		/// <summary><c>CEmbeddedSubclass&lt;CCitadelModifier&gt;</c>.</summary>
+		public CCitadelModifierVData? m_SlowModifier => EmbeddedSubclass<CCitadelModifierVData>(__m_SlowModifier);
 
 		private static readonly SchemaField __m_flAllyMinTargetRange = new("CCitadel_Ability_Nano_Pounce_VData", "m_flAllyMinTargetRange");
 		/// <summary><c>float32</c>.</summary>

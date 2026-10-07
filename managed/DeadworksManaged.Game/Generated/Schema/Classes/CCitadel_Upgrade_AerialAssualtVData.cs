@@ -18,7 +18,7 @@ public static partial class Schema {
 		public string m_LaunchParticle => GetBufferString(__m_LaunchParticle);
 
 		private static readonly SchemaField __m_WatcherModifier = new("CCitadel_Upgrade_AerialAssualtVData", "m_WatcherModifier");
-		/// <summary><c>CEmbeddedSubclass&lt;CCitadelModifier&gt;</c>. No typed mapping yet: read it through its address.</summary>
-		public RawField m_WatcherModifier => Raw(__m_WatcherModifier, "CEmbeddedSubclass<CCitadelModifier>");
+		/// <summary><c>CEmbeddedSubclass&lt;CCitadelModifier&gt;</c>.</summary>
+		public CCitadelModifierVData? m_WatcherModifier => EmbeddedSubclass<CCitadelModifierVData>(__m_WatcherModifier);
 	}
 }

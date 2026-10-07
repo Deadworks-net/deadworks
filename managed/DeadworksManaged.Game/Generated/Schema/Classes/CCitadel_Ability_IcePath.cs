@@ -40,5 +40,8 @@ public static partial class Schema {
 		private static readonly SchemaField __m_vLastVelocity = new("CCitadel_Ability_IcePath", "m_vLastVelocity");
 		/// <summary><c>Vector</c>.</summary>
 		public Vector3 m_vLastVelocity { get => Get<Vector3>(__m_vLastVelocity); set => Set(__m_vLastVelocity, value); }
+
+		/// <summary>The data entry this was created from, as <see cref="CCitadel_Ability_IcePathVData"/>, or null if it has none.</summary>
+		public new CCitadel_Ability_IcePathVData? VData => SubclassVData<CCitadel_Ability_IcePathVData>();
 	}
 }

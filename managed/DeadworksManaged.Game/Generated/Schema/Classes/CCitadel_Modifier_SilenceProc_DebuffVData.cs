@@ -14,7 +14,7 @@ public static partial class Schema {
 		static string ISchemaClass<CCitadel_Modifier_SilenceProc_DebuffVData>.NativeName => "CCitadel_Modifier_SilenceProc_DebuffVData";
 
 		private static readonly SchemaField __m_SilenceModifier = new("CCitadel_Modifier_SilenceProc_DebuffVData", "m_SilenceModifier");
-		/// <summary><c>CEmbeddedSubclass&lt;CCitadelModifier&gt;</c>. No typed mapping yet: read it through its address.</summary>
-		public RawField m_SilenceModifier => Raw(__m_SilenceModifier, "CEmbeddedSubclass<CCitadelModifier>");
+		/// <summary><c>CEmbeddedSubclass&lt;CCitadelModifier&gt;</c>.</summary>
+		public CCitadelModifierVData? m_SilenceModifier => EmbeddedSubclass<CCitadelModifierVData>(__m_SilenceModifier);
 	}
 }

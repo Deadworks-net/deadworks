@@ -66,8 +66,8 @@ public static partial class Schema {
 		public float m_flMinDashTime { get => Get<float>(__m_flMinDashTime); set => Set(__m_flMinDashTime, value); }
 
 		private static readonly SchemaField __m_mapAttacks = new("CAbilityHoldMelee_VData", "m_mapAttacks");
-		/// <summary><c>CUtlOrderedMap&lt;EMeleeHold_AttackType, AttackData_t&gt;</c>. No typed mapping yet: read it through its address.</summary>
-		public RawField m_mapAttacks => Raw(__m_mapAttacks, "CUtlOrderedMap<EMeleeHold_AttackType, AttackData_t>");
+		/// <summary><c>CUtlOrderedMap&lt;EMeleeHold_AttackType, AttackData_t&gt;</c>.</summary>
+		public SchemaMap<EMeleeHold_AttackType, AttackData_t> m_mapAttacks => new(this, __m_mapAttacks);
 
 		private static readonly SchemaField __m_strHoldBegin = new("CAbilityHoldMelee_VData", "m_strHoldBegin");
 		/// <summary><c>CSoundEventName</c>. Sound to play when starting the hold.</summary>

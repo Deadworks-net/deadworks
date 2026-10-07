@@ -12,5 +12,8 @@ public static partial class Schema {
 		internal CCitadel_Ability_Priest_BearTrap() { }
 		static CCitadel_Ability_Priest_BearTrap ISchemaClass<CCitadel_Ability_Priest_BearTrap>.New() => new();
 		static string ISchemaClass<CCitadel_Ability_Priest_BearTrap>.NativeName => "CCitadel_Ability_Priest_BearTrap";
+
+		/// <summary>The data entry this was created from, as <see cref="CCitadel_Ability_Priest_BearTrapVData"/>, or null if it has none.</summary>
+		public new CCitadel_Ability_Priest_BearTrapVData? VData => SubclassVData<CCitadel_Ability_Priest_BearTrapVData>();
 	}
 }

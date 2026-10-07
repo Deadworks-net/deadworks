@@ -12,5 +12,8 @@ public static partial class Schema {
 		internal CCitadel_UtilityUpgrade_AOESmokeBomb() { }
 		static CCitadel_UtilityUpgrade_AOESmokeBomb ISchemaClass<CCitadel_UtilityUpgrade_AOESmokeBomb>.New() => new();
 		static string ISchemaClass<CCitadel_UtilityUpgrade_AOESmokeBomb>.NativeName => "CCitadel_UtilityUpgrade_AOESmokeBomb";
+
+		/// <summary>The data entry this was created from, as <see cref="CCitadel_UtilityUpgrade_AOESmokeBombVData"/>, or null if it has none.</summary>
+		public new CCitadel_UtilityUpgrade_AOESmokeBombVData? VData => SubclassVData<CCitadel_UtilityUpgrade_AOESmokeBombVData>();
 	}
 }

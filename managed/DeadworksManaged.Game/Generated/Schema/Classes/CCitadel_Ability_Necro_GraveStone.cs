@@ -24,5 +24,8 @@ public static partial class Schema {
 		private static readonly SchemaField __m_vecDeployedGravestones = new("CCitadel_Ability_Necro_GraveStone", "m_vecDeployedGravestones");
 		/// <summary><c>CNetworkUtlVectorBase&lt;CHandle&lt;CBaseEntity&gt;&gt;</c>.</summary>
 		public SchemaHandleList<CBaseEntity> m_vecDeployedGravestones => new(this, __m_vecDeployedGravestones, -1);
+
+		/// <summary>The data entry this was created from, as <see cref="CCitadel_Ability_Necro_GraveStoneVData"/>, or null if it has none.</summary>
+		public new CCitadel_Ability_Necro_GraveStoneVData? VData => SubclassVData<CCitadel_Ability_Necro_GraveStoneVData>();
 	}
 }

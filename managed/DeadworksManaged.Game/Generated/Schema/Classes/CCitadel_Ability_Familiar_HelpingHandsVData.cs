@@ -14,12 +14,12 @@ public static partial class Schema {
 		static string ISchemaClass<CCitadel_Ability_Familiar_HelpingHandsVData>.NativeName => "CCitadel_Ability_Familiar_HelpingHandsVData";
 
 		private static readonly SchemaField __m_AIAggroModifier = new("CCitadel_Ability_Familiar_HelpingHandsVData", "m_AIAggroModifier");
-		/// <summary><c>CEmbeddedSubclass&lt;CCitadelModifier&gt;</c>. No typed mapping yet: read it through its address.</summary>
-		public RawField m_AIAggroModifier => Raw(__m_AIAggroModifier, "CEmbeddedSubclass<CCitadelModifier>");
+		/// <summary><c>CEmbeddedSubclass&lt;CCitadelModifier&gt;</c>.</summary>
+		public CCitadelModifierVData? m_AIAggroModifier => EmbeddedSubclass<CCitadelModifierVData>(__m_AIAggroModifier);
 
 		private static readonly SchemaField __m_AIPhysicsModifier = new("CCitadel_Ability_Familiar_HelpingHandsVData", "m_AIPhysicsModifier");
-		/// <summary><c>CEmbeddedSubclass&lt;CCitadelModifier&gt;</c>. No typed mapping yet: read it through its address.</summary>
-		public RawField m_AIPhysicsModifier => Raw(__m_AIPhysicsModifier, "CEmbeddedSubclass<CCitadelModifier>");
+		/// <summary><c>CEmbeddedSubclass&lt;CCitadelModifier&gt;</c>.</summary>
+		public CCitadelModifierVData? m_AIPhysicsModifier => EmbeddedSubclass<CCitadelModifierVData>(__m_AIPhysicsModifier);
 
 		private static readonly SchemaField __m_AuraInactiveParticle = new("CCitadel_Ability_Familiar_HelpingHandsVData", "m_AuraInactiveParticle");
 		/// <summary><c>CResourceNameTyped&lt;CWeakHandle&lt;InfoForResourceTypeIParticleSystemDefinition&gt;&gt;</c>.</summary>
@@ -102,16 +102,16 @@ public static partial class Schema {
 		public string m_HelperTeleportOutParticle => GetBufferString(__m_HelperTeleportOutParticle);
 
 		private static readonly SchemaField __m_InfestBarrierModifier = new("CCitadel_Ability_Familiar_HelpingHandsVData", "m_InfestBarrierModifier");
-		/// <summary><c>CEmbeddedSubclass&lt;CCitadelModifier&gt;</c>. No typed mapping yet: read it through its address.</summary>
-		public RawField m_InfestBarrierModifier => Raw(__m_InfestBarrierModifier, "CEmbeddedSubclass<CCitadelModifier>");
+		/// <summary><c>CEmbeddedSubclass&lt;CCitadelModifier&gt;</c>.</summary>
+		public CCitadelModifierVData? m_InfestBarrierModifier => EmbeddedSubclass<CCitadelModifierVData>(__m_InfestBarrierModifier);
 
 		private static readonly SchemaField __m_InfestModifier = new("CCitadel_Ability_Familiar_HelpingHandsVData", "m_InfestModifier");
-		/// <summary><c>CEmbeddedSubclass&lt;CCitadelModifier&gt;</c>. No typed mapping yet: read it through its address.</summary>
-		public RawField m_InfestModifier => Raw(__m_InfestModifier, "CEmbeddedSubclass<CCitadelModifier>");
+		/// <summary><c>CEmbeddedSubclass&lt;CCitadelModifier&gt;</c>.</summary>
+		public CCitadelModifierVData? m_InfestModifier => EmbeddedSubclass<CCitadelModifierVData>(__m_InfestModifier);
 
 		private static readonly SchemaField __m_InfestWaitingModifier = new("CCitadel_Ability_Familiar_HelpingHandsVData", "m_InfestWaitingModifier");
-		/// <summary><c>CEmbeddedSubclass&lt;CCitadelModifier&gt;</c>. No typed mapping yet: read it through its address.</summary>
-		public RawField m_InfestWaitingModifier => Raw(__m_InfestWaitingModifier, "CEmbeddedSubclass<CCitadelModifier>");
+		/// <summary><c>CEmbeddedSubclass&lt;CCitadelModifier&gt;</c>.</summary>
+		public CCitadelModifierVData? m_InfestWaitingModifier => EmbeddedSubclass<CCitadelModifierVData>(__m_InfestWaitingModifier);
 
 		private static readonly SchemaField __m_InfestedHeroParticle = new("CCitadel_Ability_Familiar_HelpingHandsVData", "m_InfestedHeroParticle");
 		/// <summary><c>CResourceNameTyped&lt;CWeakHandle&lt;InfoForResourceTypeIParticleSystemDefinition&gt;&gt;</c>.</summary>
@@ -122,8 +122,8 @@ public static partial class Schema {
 		public string m_InfestedParticle => GetBufferString(__m_InfestedParticle);
 
 		private static readonly SchemaField __m_InvisWatcherModifier = new("CCitadel_Ability_Familiar_HelpingHandsVData", "m_InvisWatcherModifier");
-		/// <summary><c>CEmbeddedSubclass&lt;CCitadelModifier&gt;</c>. No typed mapping yet: read it through its address.</summary>
-		public RawField m_InvisWatcherModifier => Raw(__m_InvisWatcherModifier, "CEmbeddedSubclass<CCitadelModifier>");
+		/// <summary><c>CEmbeddedSubclass&lt;CCitadelModifier&gt;</c>.</summary>
+		public CCitadelModifierVData? m_InvisWatcherModifier => EmbeddedSubclass<CCitadelModifierVData>(__m_InvisWatcherModifier);
 
 		private static readonly SchemaField __m_PatrolTravelTimeByDistance = new("CCitadel_Ability_Familiar_HelpingHandsVData", "m_PatrolTravelTimeByDistance");
 		/// <summary><c>CPiecewiseCurve</c>. No typed mapping yet: read it through its address.</summary>

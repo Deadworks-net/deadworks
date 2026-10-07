@@ -36,5 +36,8 @@ public static partial class Schema {
 		private static readonly SchemaField __m_iBonusBats = new("CCitadel_Ability_VampireBat_BatSwarm", "m_iBonusBats");
 		/// <summary><c>int32</c>.</summary>
 		public int m_iBonusBats { get => Get<int>(__m_iBonusBats); set => Set(__m_iBonusBats, value); }
+
+		/// <summary>The data entry this was created from, as <see cref="CCitadel_Ability_VampireBat_BatSwarmVData"/>, or null if it has none.</summary>
+		public new CCitadel_Ability_VampireBat_BatSwarmVData? VData => SubclassVData<CCitadel_Ability_VampireBat_BatSwarmVData>();
 	}
 }

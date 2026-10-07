@@ -20,5 +20,8 @@ public static partial class Schema {
 		private static readonly SchemaField __m_nParentViewParticle = new("CCitadel_Modifier_TeamRelativeParticle", "m_nParentViewParticle");
 		/// <summary><c>ParticleIndex_t</c>.</summary>
 		public int m_nParentViewParticle { get => Get<int>(__m_nParentViewParticle); set => Set(__m_nParentViewParticle, value); }
+
+		/// <summary>The data entry this was created from, as <see cref="CCitadel_Modifier_TeamRelativeParticleVData"/>, or null if it has none.</summary>
+		public new CCitadel_Modifier_TeamRelativeParticleVData? VData => ModifierData<CCitadel_Modifier_TeamRelativeParticleVData>();
 	}
 }

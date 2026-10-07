@@ -18,8 +18,8 @@ public static partial class Schema {
 		public string m_ChannelStartParticle => GetBufferString(__m_ChannelStartParticle);
 
 		private static readonly SchemaField __m_DebuffModifier = new("CAbilityWreckerScrapBlastVData", "m_DebuffModifier");
-		/// <summary><c>CEmbeddedSubclass&lt;CBaseModifier&gt;</c>. No typed mapping yet: read it through its address.</summary>
-		public RawField m_DebuffModifier => Raw(__m_DebuffModifier, "CEmbeddedSubclass<CBaseModifier>");
+		/// <summary><c>CEmbeddedSubclass&lt;CBaseModifier&gt;</c>.</summary>
+		public CModifierVData? m_DebuffModifier => EmbeddedSubclass<CModifierVData>(__m_DebuffModifier);
 
 		private static readonly SchemaField __m_SprayParticle = new("CAbilityWreckerScrapBlastVData", "m_SprayParticle");
 		/// <summary><c>CResourceNameTyped&lt;CWeakHandle&lt;InfoForResourceTypeIParticleSystemDefinition&gt;&gt;</c>.</summary>

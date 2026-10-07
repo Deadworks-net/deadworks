@@ -22,16 +22,16 @@ public static partial class Schema {
 		public string m_DomeParticle => GetBufferString(__m_DomeParticle);
 
 		private static readonly SchemaField __m_EnemyAuraModifier = new("CCitadel_Modifier_IceDomeVData", "m_EnemyAuraModifier");
-		/// <summary><c>CEmbeddedSubclass&lt;CCitadelModifier&gt;</c>. No typed mapping yet: read it through its address.</summary>
-		public RawField m_EnemyAuraModifier => Raw(__m_EnemyAuraModifier, "CEmbeddedSubclass<CCitadelModifier>");
+		/// <summary><c>CEmbeddedSubclass&lt;CCitadelModifier&gt;</c>.</summary>
+		public CCitadelModifierVData? m_EnemyAuraModifier => EmbeddedSubclass<CCitadelModifierVData>(__m_EnemyAuraModifier);
 
 		private static readonly SchemaField __m_EnemyFreezeAuraModifier = new("CCitadel_Modifier_IceDomeVData", "m_EnemyFreezeAuraModifier");
-		/// <summary><c>CEmbeddedSubclass&lt;CCitadelModifier&gt;</c>. No typed mapping yet: read it through its address.</summary>
-		public RawField m_EnemyFreezeAuraModifier => Raw(__m_EnemyFreezeAuraModifier, "CEmbeddedSubclass<CCitadelModifier>");
+		/// <summary><c>CEmbeddedSubclass&lt;CCitadelModifier&gt;</c>.</summary>
+		public CCitadelModifierVData? m_EnemyFreezeAuraModifier => EmbeddedSubclass<CCitadelModifierVData>(__m_EnemyFreezeAuraModifier);
 
 		private static readonly SchemaField __m_FriendlyAuraModifier = new("CCitadel_Modifier_IceDomeVData", "m_FriendlyAuraModifier");
-		/// <summary><c>CEmbeddedSubclass&lt;CCitadelModifier&gt;</c>. No typed mapping yet: read it through its address.</summary>
-		public RawField m_FriendlyAuraModifier => Raw(__m_FriendlyAuraModifier, "CEmbeddedSubclass<CCitadelModifier>");
+		/// <summary><c>CEmbeddedSubclass&lt;CCitadelModifier&gt;</c>.</summary>
+		public CCitadelModifierVData? m_FriendlyAuraModifier => EmbeddedSubclass<CCitadelModifierVData>(__m_FriendlyAuraModifier);
 
 		private static readonly SchemaField __m_strDomeEndSound = new("CCitadel_Modifier_IceDomeVData", "m_strDomeEndSound");
 		/// <summary><c>CSoundEventName</c>.</summary>

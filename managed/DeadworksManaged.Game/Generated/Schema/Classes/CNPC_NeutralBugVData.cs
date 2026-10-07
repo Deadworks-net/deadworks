@@ -22,8 +22,8 @@ public static partial class Schema {
 		public uint m_DeathSwarmImmuneHeroID { get => Get<uint>(__m_DeathSwarmImmuneHeroID); set => Set(__m_DeathSwarmImmuneHeroID, value); }
 
 		private static readonly SchemaField __m_SwarmModifier = new("CNPC_NeutralBugVData", "m_SwarmModifier");
-		/// <summary><c>CEmbeddedSubclass&lt;CCitadelModifier&gt;</c>. No typed mapping yet: read it through its address.</summary>
-		public RawField m_SwarmModifier => Raw(__m_SwarmModifier, "CEmbeddedSubclass<CCitadelModifier>");
+		/// <summary><c>CEmbeddedSubclass&lt;CCitadelModifier&gt;</c>.</summary>
+		public CCitadelModifierVData? m_SwarmModifier => EmbeddedSubclass<CCitadelModifierVData>(__m_SwarmModifier);
 
 		private static readonly SchemaField __m_bIsRat = new("CNPC_NeutralBugVData", "m_bIsRat");
 		/// <summary><c>bool</c>.</summary>

@@ -12,5 +12,8 @@ public static partial class Schema {
 		internal CCitadelPlayerBotNPCBrain() { }
 		static CCitadelPlayerBotNPCBrain ISchemaClass<CCitadelPlayerBotNPCBrain>.New() => new();
 		static string ISchemaClass<CCitadelPlayerBotNPCBrain>.NativeName => "CCitadelPlayerBotNPCBrain";
+
+		/// <summary>The data entry this was created from, as <see cref="CCitadelPlayerBotNPCBrainVData"/>, or null if it has none.</summary>
+		public new CCitadelPlayerBotNPCBrainVData? VData => SubclassVData<CCitadelPlayerBotNPCBrainVData>();
 	}
 }

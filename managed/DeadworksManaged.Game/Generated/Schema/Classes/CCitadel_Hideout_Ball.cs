@@ -12,5 +12,8 @@ public static partial class Schema {
 		internal CCitadel_Hideout_Ball() { }
 		static CCitadel_Hideout_Ball ISchemaClass<CCitadel_Hideout_Ball>.New() => new();
 		static string ISchemaClass<CCitadel_Hideout_Ball>.NativeName => "CCitadel_Hideout_Ball";
+
+		/// <summary>The data entry this was created from, as <see cref="CCitadel_Hideout_BallVData"/>, or null if it has none.</summary>
+		public CCitadel_Hideout_BallVData? VData => SubclassVData<CCitadel_Hideout_BallVData>();
 	}
 }

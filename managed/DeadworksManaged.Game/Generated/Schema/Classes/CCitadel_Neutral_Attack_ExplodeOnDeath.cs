@@ -12,5 +12,8 @@ public static partial class Schema {
 		internal CCitadel_Neutral_Attack_ExplodeOnDeath() { }
 		static CCitadel_Neutral_Attack_ExplodeOnDeath ISchemaClass<CCitadel_Neutral_Attack_ExplodeOnDeath>.New() => new();
 		static string ISchemaClass<CCitadel_Neutral_Attack_ExplodeOnDeath>.NativeName => "CCitadel_Neutral_Attack_ExplodeOnDeath";
+
+		/// <summary>The data entry this was created from, as <see cref="CCitadel_Neutral_Attack_ExplodeOnDeathVData"/>, or null if it has none.</summary>
+		public new CCitadel_Neutral_Attack_ExplodeOnDeathVData? VData => ModifierData<CCitadel_Neutral_Attack_ExplodeOnDeathVData>();
 	}
 }

@@ -18,7 +18,7 @@ public static partial class Schema {
 		public string m_BerserkerSound => GetBufferString(__m_BerserkerSound);
 
 		private static readonly SchemaField __m_ModifierActiveDisplay = new("CCitadel_Modifier_Surging_PowerVData", "m_ModifierActiveDisplay");
-		/// <summary><c>CEmbeddedSubclass&lt;CCitadelModifier&gt;</c>. No typed mapping yet: read it through its address.</summary>
-		public RawField m_ModifierActiveDisplay => Raw(__m_ModifierActiveDisplay, "CEmbeddedSubclass<CCitadelModifier>");
+		/// <summary><c>CEmbeddedSubclass&lt;CCitadelModifier&gt;</c>.</summary>
+		public CCitadelModifierVData? m_ModifierActiveDisplay => EmbeddedSubclass<CCitadelModifierVData>(__m_ModifierActiveDisplay);
 	}
 }

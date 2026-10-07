@@ -14,12 +14,12 @@ public static partial class Schema {
 		static string ISchemaClass<CCitadel_Ability_MageWalkVData>.NativeName => "CCitadel_Ability_MageWalkVData";
 
 		private static readonly SchemaField __m_BubbleModifier = new("CCitadel_Ability_MageWalkVData", "m_BubbleModifier");
-		/// <summary><c>CEmbeddedSubclass&lt;CBaseModifier&gt;</c>. No typed mapping yet: read it through its address.</summary>
-		public RawField m_BubbleModifier => Raw(__m_BubbleModifier, "CEmbeddedSubclass<CBaseModifier>");
+		/// <summary><c>CEmbeddedSubclass&lt;CBaseModifier&gt;</c>.</summary>
+		public CModifierVData? m_BubbleModifier => EmbeddedSubclass<CModifierVData>(__m_BubbleModifier);
 
 		private static readonly SchemaField __m_TurretModifier = new("CCitadel_Ability_MageWalkVData", "m_TurretModifier");
-		/// <summary><c>CEmbeddedSubclass&lt;CBaseModifier&gt;</c>. No typed mapping yet: read it through its address.</summary>
-		public RawField m_TurretModifier => Raw(__m_TurretModifier, "CEmbeddedSubclass<CBaseModifier>");
+		/// <summary><c>CEmbeddedSubclass&lt;CBaseModifier&gt;</c>.</summary>
+		public CModifierVData? m_TurretModifier => EmbeddedSubclass<CModifierVData>(__m_TurretModifier);
 
 		private static readonly SchemaField __m_strCastEffect = new("CCitadel_Ability_MageWalkVData", "m_strCastEffect");
 		/// <summary><c>CResourceNameTyped&lt;CWeakHandle&lt;InfoForResourceTypeIParticleSystemDefinition&gt;&gt;</c>.</summary>

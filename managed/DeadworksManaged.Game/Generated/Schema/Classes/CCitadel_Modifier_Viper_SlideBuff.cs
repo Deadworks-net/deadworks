@@ -12,5 +12,8 @@ public static partial class Schema {
 		internal CCitadel_Modifier_Viper_SlideBuff() { }
 		static CCitadel_Modifier_Viper_SlideBuff ISchemaClass<CCitadel_Modifier_Viper_SlideBuff>.New() => new();
 		static string ISchemaClass<CCitadel_Modifier_Viper_SlideBuff>.NativeName => "CCitadel_Modifier_Viper_SlideBuff";
+
+		/// <summary>The data entry this was created from, as <see cref="CCitadel_Modifier_Viper_SlideBuffVData"/>, or null if it has none.</summary>
+		public new CCitadel_Modifier_Viper_SlideBuffVData? VData => ModifierData<CCitadel_Modifier_Viper_SlideBuffVData>();
 	}
 }

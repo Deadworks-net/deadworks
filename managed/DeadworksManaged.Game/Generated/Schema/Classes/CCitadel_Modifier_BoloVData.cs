@@ -14,11 +14,11 @@ public static partial class Schema {
 		static string ISchemaClass<CCitadel_Modifier_BoloVData>.NativeName => "CCitadel_Modifier_BoloVData";
 
 		private static readonly SchemaField __m_ReverseLeechModifier = new("CCitadel_Modifier_BoloVData", "m_ReverseLeechModifier");
-		/// <summary><c>CEmbeddedSubclass&lt;CCitadelModifier&gt;</c>. No typed mapping yet: read it through its address.</summary>
-		public RawField m_ReverseLeechModifier => Raw(__m_ReverseLeechModifier, "CEmbeddedSubclass<CCitadelModifier>");
+		/// <summary><c>CEmbeddedSubclass&lt;CCitadelModifier&gt;</c>.</summary>
+		public CCitadelModifierVData? m_ReverseLeechModifier => EmbeddedSubclass<CCitadelModifierVData>(__m_ReverseLeechModifier);
 
 		private static readonly SchemaField __m_TrapModifier = new("CCitadel_Modifier_BoloVData", "m_TrapModifier");
-		/// <summary><c>CEmbeddedSubclass&lt;CCitadelModifier&gt;</c>. No typed mapping yet: read it through its address.</summary>
-		public RawField m_TrapModifier => Raw(__m_TrapModifier, "CEmbeddedSubclass<CCitadelModifier>");
+		/// <summary><c>CEmbeddedSubclass&lt;CCitadelModifier&gt;</c>.</summary>
+		public CCitadelModifierVData? m_TrapModifier => EmbeddedSubclass<CCitadelModifierVData>(__m_TrapModifier);
 	}
 }

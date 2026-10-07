@@ -12,5 +12,8 @@ public static partial class Schema {
 		internal CCitadel_Ability_Gunslinger_SpreadingFire() { }
 		static CCitadel_Ability_Gunslinger_SpreadingFire ISchemaClass<CCitadel_Ability_Gunslinger_SpreadingFire>.New() => new();
 		static string ISchemaClass<CCitadel_Ability_Gunslinger_SpreadingFire>.NativeName => "CCitadel_Ability_Gunslinger_SpreadingFire";
+
+		/// <summary>The data entry this was created from, as <see cref="CCitadel_Ability_Gunslinger_SpreadingFireVData"/>, or null if it has none.</summary>
+		public new CCitadel_Ability_Gunslinger_SpreadingFireVData? VData => SubclassVData<CCitadel_Ability_Gunslinger_SpreadingFireVData>();
 	}
 }

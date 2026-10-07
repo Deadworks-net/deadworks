@@ -12,5 +12,8 @@ public static partial class Schema {
 		internal CCitadel_Werewolf_UnloadGun() { }
 		static CCitadel_Werewolf_UnloadGun ISchemaClass<CCitadel_Werewolf_UnloadGun>.New() => new();
 		static string ISchemaClass<CCitadel_Werewolf_UnloadGun>.NativeName => "CCitadel_Werewolf_UnloadGun";
+
+		/// <summary>The data entry this was created from, as <see cref="CCitadel_Werewolf_UnloadGunVData"/>, or null if it has none.</summary>
+		public new CCitadel_Werewolf_UnloadGunVData? VData => SubclassVData<CCitadel_Werewolf_UnloadGunVData>();
 	}
 }

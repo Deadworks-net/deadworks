@@ -20,5 +20,8 @@ public static partial class Schema {
 		private static readonly SchemaField __m_vecProcdBulletIDs = new("CCitadel_Modifier_BaseBulletPreRollProc", "m_vecProcdBulletIDs");
 		/// <summary><c>CUtlVector&lt;BulletID_t&gt;</c>.</summary>
 		public SchemaObjectList<BulletID_t> m_vecProcdBulletIDs => new(this, __m_vecProcdBulletIDs, -1);
+
+		/// <summary>The data entry this was created from, as <see cref="CCitadel_Modifier_BaseBulletPreRollProcVData"/>, or null if it has none.</summary>
+		public new CCitadel_Modifier_BaseBulletPreRollProcVData? VData => ModifierData<CCitadel_Modifier_BaseBulletPreRollProcVData>();
 	}
 }

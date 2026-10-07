@@ -14,8 +14,8 @@ public static partial class Schema {
 		static string ISchemaClass<CCitadel_Ability_Shiv_KillingBlowVData>.NativeName => "CCitadel_Ability_Shiv_KillingBlowVData";
 
 		private static readonly SchemaField __m_ActiveBuff = new("CCitadel_Ability_Shiv_KillingBlowVData", "m_ActiveBuff");
-		/// <summary><c>CEmbeddedSubclass&lt;CCitadelModifier&gt;</c>. No typed mapping yet: read it through its address.</summary>
-		public RawField m_ActiveBuff => Raw(__m_ActiveBuff, "CEmbeddedSubclass<CCitadelModifier>");
+		/// <summary><c>CEmbeddedSubclass&lt;CCitadelModifier&gt;</c>.</summary>
+		public CCitadelModifierVData? m_ActiveBuff => EmbeddedSubclass<CCitadelModifierVData>(__m_ActiveBuff);
 
 		private static readonly SchemaField __m_AttackParticle = new("CCitadel_Ability_Shiv_KillingBlowVData", "m_AttackParticle");
 		/// <summary><c>CResourceNameTyped&lt;CWeakHandle&lt;InfoForResourceTypeIParticleSystemDefinition&gt;&gt;</c>.</summary>
@@ -30,28 +30,28 @@ public static partial class Schema {
 		public string m_ImpactParticle => GetBufferString(__m_ImpactParticle);
 
 		private static readonly SchemaField __m_KillableModifier = new("CCitadel_Ability_Shiv_KillingBlowVData", "m_KillableModifier");
-		/// <summary><c>CEmbeddedSubclass&lt;CCitadelModifier&gt;</c>. No typed mapping yet: read it through its address.</summary>
-		public RawField m_KillableModifier => Raw(__m_KillableModifier, "CEmbeddedSubclass<CCitadelModifier>");
+		/// <summary><c>CEmbeddedSubclass&lt;CCitadelModifier&gt;</c>.</summary>
+		public CCitadelModifierVData? m_KillableModifier => EmbeddedSubclass<CCitadelModifierVData>(__m_KillableModifier);
 
 		private static readonly SchemaField __m_KillingBlowCastParticle = new("CCitadel_Ability_Shiv_KillingBlowVData", "m_KillingBlowCastParticle");
 		/// <summary><c>CResourceNameTyped&lt;CWeakHandle&lt;InfoForResourceTypeIParticleSystemDefinition&gt;&gt;</c>.</summary>
 		public string m_KillingBlowCastParticle => GetBufferString(__m_KillingBlowCastParticle);
 
 		private static readonly SchemaField __m_LeapModifier = new("CCitadel_Ability_Shiv_KillingBlowVData", "m_LeapModifier");
-		/// <summary><c>CEmbeddedSubclass&lt;CCitadelModifier&gt;</c>. No typed mapping yet: read it through its address.</summary>
-		public RawField m_LeapModifier => Raw(__m_LeapModifier, "CEmbeddedSubclass<CCitadelModifier>");
+		/// <summary><c>CEmbeddedSubclass&lt;CCitadelModifier&gt;</c>.</summary>
+		public CCitadelModifierVData? m_LeapModifier => EmbeddedSubclass<CCitadelModifierVData>(__m_LeapModifier);
 
 		private static readonly SchemaField __m_OnKillSound = new("CCitadel_Ability_Shiv_KillingBlowVData", "m_OnKillSound");
 		/// <summary><c>CSoundEventName</c>.</summary>
 		public string m_OnKillSound => GetBufferString(__m_OnKillSound);
 
 		private static readonly SchemaField __m_RageDrainSuppressedModifier = new("CCitadel_Ability_Shiv_KillingBlowVData", "m_RageDrainSuppressedModifier");
-		/// <summary><c>CEmbeddedSubclass&lt;CCitadelModifier&gt;</c>. No typed mapping yet: read it through its address.</summary>
-		public RawField m_RageDrainSuppressedModifier => Raw(__m_RageDrainSuppressedModifier, "CEmbeddedSubclass<CCitadelModifier>");
+		/// <summary><c>CEmbeddedSubclass&lt;CCitadelModifier&gt;</c>.</summary>
+		public CCitadelModifierVData? m_RageDrainSuppressedModifier => EmbeddedSubclass<CCitadelModifierVData>(__m_RageDrainSuppressedModifier);
 
 		private static readonly SchemaField __m_RecastWindowModifier = new("CCitadel_Ability_Shiv_KillingBlowVData", "m_RecastWindowModifier");
-		/// <summary><c>CEmbeddedSubclass&lt;CCitadelModifier&gt;</c>. No typed mapping yet: read it through its address.</summary>
-		public RawField m_RecastWindowModifier => Raw(__m_RecastWindowModifier, "CEmbeddedSubclass<CCitadelModifier>");
+		/// <summary><c>CEmbeddedSubclass&lt;CCitadelModifier&gt;</c>.</summary>
+		public CCitadelModifierVData? m_RecastWindowModifier => EmbeddedSubclass<CCitadelModifierVData>(__m_RecastWindowModifier);
 
 		private static readonly SchemaField __m_SpeedCurve = new("CCitadel_Ability_Shiv_KillingBlowVData", "m_SpeedCurve");
 		/// <summary><c>CPiecewiseCurve</c>. No typed mapping yet: read it through its address.</summary>

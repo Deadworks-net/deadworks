@@ -12,5 +12,8 @@ public static partial class Schema {
 		internal CCitadel_Ability_VoidSphere() { }
 		static CCitadel_Ability_VoidSphere ISchemaClass<CCitadel_Ability_VoidSphere>.New() => new();
 		static string ISchemaClass<CCitadel_Ability_VoidSphere>.NativeName => "CCitadel_Ability_VoidSphere";
+
+		/// <summary>The data entry this was created from, as <see cref="CCitadel_Ability_VoidSphereVData"/>, or null if it has none.</summary>
+		public new CCitadel_Ability_VoidSphereVData? VData => SubclassVData<CCitadel_Ability_VoidSphereVData>();
 	}
 }

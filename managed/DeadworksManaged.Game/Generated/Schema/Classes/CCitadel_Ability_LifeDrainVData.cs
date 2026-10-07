@@ -14,11 +14,11 @@ public static partial class Schema {
 		static string ISchemaClass<CCitadel_Ability_LifeDrainVData>.NativeName => "CCitadel_Ability_LifeDrainVData";
 
 		private static readonly SchemaField __m_LifeDrainCasterModifier = new("CCitadel_Ability_LifeDrainVData", "m_LifeDrainCasterModifier");
-		/// <summary><c>CEmbeddedSubclass&lt;CCitadelModifier&gt;</c>. No typed mapping yet: read it through its address.</summary>
-		public RawField m_LifeDrainCasterModifier => Raw(__m_LifeDrainCasterModifier, "CEmbeddedSubclass<CCitadelModifier>");
+		/// <summary><c>CEmbeddedSubclass&lt;CCitadelModifier&gt;</c>.</summary>
+		public CCitadelModifierVData? m_LifeDrainCasterModifier => EmbeddedSubclass<CCitadelModifierVData>(__m_LifeDrainCasterModifier);
 
 		private static readonly SchemaField __m_LifeDrainTargetModifier = new("CCitadel_Ability_LifeDrainVData", "m_LifeDrainTargetModifier");
-		/// <summary><c>CEmbeddedSubclass&lt;CCitadelModifier&gt;</c>. No typed mapping yet: read it through its address.</summary>
-		public RawField m_LifeDrainTargetModifier => Raw(__m_LifeDrainTargetModifier, "CEmbeddedSubclass<CCitadelModifier>");
+		/// <summary><c>CEmbeddedSubclass&lt;CCitadelModifier&gt;</c>.</summary>
+		public CCitadelModifierVData? m_LifeDrainTargetModifier => EmbeddedSubclass<CCitadelModifierVData>(__m_LifeDrainTargetModifier);
 	}
 }

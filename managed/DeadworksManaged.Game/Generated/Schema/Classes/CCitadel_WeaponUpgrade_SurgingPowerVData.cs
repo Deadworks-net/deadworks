@@ -18,7 +18,7 @@ public static partial class Schema {
 		public string m_CastTargetEffect => GetBufferString(__m_CastTargetEffect);
 
 		private static readonly SchemaField __m_ModifierSurgingPower = new("CCitadel_WeaponUpgrade_SurgingPowerVData", "m_ModifierSurgingPower");
-		/// <summary><c>CEmbeddedSubclass&lt;CCitadelModifier&gt;</c>. No typed mapping yet: read it through its address.</summary>
-		public RawField m_ModifierSurgingPower => Raw(__m_ModifierSurgingPower, "CEmbeddedSubclass<CCitadelModifier>");
+		/// <summary><c>CEmbeddedSubclass&lt;CCitadelModifier&gt;</c>.</summary>
+		public CCitadelModifierVData? m_ModifierSurgingPower => EmbeddedSubclass<CCitadelModifierVData>(__m_ModifierSurgingPower);
 	}
 }

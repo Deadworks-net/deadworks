@@ -60,5 +60,8 @@ public static partial class Schema {
 		private static readonly SchemaField __m_vPlantDir = new("CCitadel_Ability_Ratking_StandardBearer", "m_vPlantDir");
 		/// <summary><c>Vector</c>.</summary>
 		public Vector3 m_vPlantDir { get => Get<Vector3>(__m_vPlantDir); set => Set(__m_vPlantDir, value); }
+
+		/// <summary>The data entry this was created from, as <see cref="CCitadel_Ability_Ratking_StandardBearerVData"/>, or null if it has none.</summary>
+		public new CCitadel_Ability_Ratking_StandardBearerVData? VData => SubclassVData<CCitadel_Ability_Ratking_StandardBearerVData>();
 	}
 }

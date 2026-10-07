@@ -12,5 +12,8 @@ public static partial class Schema {
 		internal CCitadel_Modifier_Frank_PainAura_Target() { }
 		static CCitadel_Modifier_Frank_PainAura_Target ISchemaClass<CCitadel_Modifier_Frank_PainAura_Target>.New() => new();
 		static string ISchemaClass<CCitadel_Modifier_Frank_PainAura_Target>.NativeName => "CCitadel_Modifier_Frank_PainAura_Target";
+
+		/// <summary>The data entry this was created from, as <see cref="CCitadel_Modifier_Frank_PainAura_TargetVData"/>, or null if it has none.</summary>
+		public new CCitadel_Modifier_Frank_PainAura_TargetVData? VData => ModifierData<CCitadel_Modifier_Frank_PainAura_TargetVData>();
 	}
 }

@@ -24,5 +24,8 @@ public static partial class Schema {
 		private static readonly SchemaField __m_hEnemy = new("CNPC_SimpleAnimatingAI", "m_hEnemy");
 		/// <summary><c>CHandle&lt;CBaseEntity&gt;</c>.</summary>
 		public CBaseEntity? m_hEnemy { get => GetHandle<CBaseEntity>(__m_hEnemy); set => SetHandle(__m_hEnemy, value); }
+
+		/// <summary>The data entry this was created from, as <see cref="CNPC_SimpleAnimatingAIVData"/>, or null if it has none.</summary>
+		public CNPC_SimpleAnimatingAIVData? VData => SubclassVData<CNPC_SimpleAnimatingAIVData>();
 	}
 }

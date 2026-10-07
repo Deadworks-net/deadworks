@@ -12,5 +12,8 @@ public static partial class Schema {
 		internal CCitadel_HideOutTargetSpawner() { }
 		static CCitadel_HideOutTargetSpawner ISchemaClass<CCitadel_HideOutTargetSpawner>.New() => new();
 		static string ISchemaClass<CCitadel_HideOutTargetSpawner>.NativeName => "CCitadel_HideOutTargetSpawner";
+
+		/// <summary>The data entry this was created from, as <see cref="CCitadel_HideOutTargetSpawnerVData"/>, or null if it has none.</summary>
+		public CCitadel_HideOutTargetSpawnerVData? VData => SubclassVData<CCitadel_HideOutTargetSpawnerVData>();
 	}
 }

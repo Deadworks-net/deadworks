@@ -12,5 +12,8 @@ public static partial class Schema {
 		internal CCitadel_WeaponUpgrade_InfiniteMagazine() { }
 		static CCitadel_WeaponUpgrade_InfiniteMagazine ISchemaClass<CCitadel_WeaponUpgrade_InfiniteMagazine>.New() => new();
 		static string ISchemaClass<CCitadel_WeaponUpgrade_InfiniteMagazine>.NativeName => "CCitadel_WeaponUpgrade_InfiniteMagazine";
+
+		/// <summary>The data entry this was created from, as <see cref="CCitadel_WeaponUpgrade_InfiniteMagazineVData"/>, or null if it has none.</summary>
+		public new CCitadel_WeaponUpgrade_InfiniteMagazineVData? VData => SubclassVData<CCitadel_WeaponUpgrade_InfiniteMagazineVData>();
 	}
 }

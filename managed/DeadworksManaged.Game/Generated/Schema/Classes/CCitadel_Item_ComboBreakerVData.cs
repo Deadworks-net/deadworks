@@ -14,11 +14,11 @@ public static partial class Schema {
 		static string ISchemaClass<CCitadel_Item_ComboBreakerVData>.NativeName => "CCitadel_Item_ComboBreakerVData";
 
 		private static readonly SchemaField __m_ComboBreakerModifier = new("CCitadel_Item_ComboBreakerVData", "m_ComboBreakerModifier");
-		/// <summary><c>CEmbeddedSubclass&lt;CCitadelModifier&gt;</c>. No typed mapping yet: read it through its address.</summary>
-		public RawField m_ComboBreakerModifier => Raw(__m_ComboBreakerModifier, "CEmbeddedSubclass<CCitadelModifier>");
+		/// <summary><c>CEmbeddedSubclass&lt;CCitadelModifier&gt;</c>.</summary>
+		public CCitadelModifierVData? m_ComboBreakerModifier => EmbeddedSubclass<CCitadelModifierVData>(__m_ComboBreakerModifier);
 
 		private static readonly SchemaField __m_HealModifier = new("CCitadel_Item_ComboBreakerVData", "m_HealModifier");
-		/// <summary><c>CEmbeddedSubclass&lt;CCitadelModifier&gt;</c>. No typed mapping yet: read it through its address.</summary>
-		public RawField m_HealModifier => Raw(__m_HealModifier, "CEmbeddedSubclass<CCitadelModifier>");
+		/// <summary><c>CEmbeddedSubclass&lt;CCitadelModifier&gt;</c>.</summary>
+		public CCitadelModifierVData? m_HealModifier => EmbeddedSubclass<CCitadelModifierVData>(__m_HealModifier);
 	}
 }

@@ -22,7 +22,7 @@ public static partial class Schema {
 		public string m_ChargeUpParticle => GetBufferString(__m_ChargeUpParticle);
 
 		private static readonly SchemaField __m_WardenBuffModifier = new("CAbilityRiotProtocolVData", "m_WardenBuffModifier");
-		/// <summary><c>CEmbeddedSubclass&lt;CCitadelModifier&gt;</c>. No typed mapping yet: read it through its address.</summary>
-		public RawField m_WardenBuffModifier => Raw(__m_WardenBuffModifier, "CEmbeddedSubclass<CCitadelModifier>");
+		/// <summary><c>CEmbeddedSubclass&lt;CCitadelModifier&gt;</c>.</summary>
+		public CCitadelModifierVData? m_WardenBuffModifier => EmbeddedSubclass<CCitadelModifierVData>(__m_WardenBuffModifier);
 	}
 }

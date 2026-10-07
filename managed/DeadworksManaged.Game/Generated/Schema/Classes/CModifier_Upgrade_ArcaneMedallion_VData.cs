@@ -14,7 +14,7 @@ public static partial class Schema {
 		static string ISchemaClass<CModifier_Upgrade_ArcaneMedallion_VData>.NativeName => "CModifier_Upgrade_ArcaneMedallion_VData";
 
 		private static readonly SchemaField __m_TriggeredModifier = new("CModifier_Upgrade_ArcaneMedallion_VData", "m_TriggeredModifier");
-		/// <summary><c>CEmbeddedSubclass&lt;CBaseModifier&gt;</c>. No typed mapping yet: read it through its address.</summary>
-		public RawField m_TriggeredModifier => Raw(__m_TriggeredModifier, "CEmbeddedSubclass<CBaseModifier>");
+		/// <summary><c>CEmbeddedSubclass&lt;CBaseModifier&gt;</c>.</summary>
+		public CModifierVData? m_TriggeredModifier => EmbeddedSubclass<CModifierVData>(__m_TriggeredModifier);
 	}
 }

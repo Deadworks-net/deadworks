@@ -14,8 +14,8 @@ public static partial class Schema {
 		static string ISchemaClass<CCitadel_Neutral_SelfCastModifierVData>.NativeName => "CCitadel_Neutral_SelfCastModifierVData";
 
 		private static readonly SchemaField __m_SelfCastModifier = new("CCitadel_Neutral_SelfCastModifierVData", "m_SelfCastModifier");
-		/// <summary><c>CEmbeddedSubclass&lt;CCitadelModifier&gt;</c>. No typed mapping yet: read it through its address.</summary>
-		public RawField m_SelfCastModifier => Raw(__m_SelfCastModifier, "CEmbeddedSubclass<CCitadelModifier>");
+		/// <summary><c>CEmbeddedSubclass&lt;CCitadelModifier&gt;</c>.</summary>
+		public CCitadelModifierVData? m_SelfCastModifier => EmbeddedSubclass<CCitadelModifierVData>(__m_SelfCastModifier);
 
 		private static readonly SchemaField __m_flModifierDuration = new("CCitadel_Neutral_SelfCastModifierVData", "m_flModifierDuration");
 		/// <summary><c>float32</c>.</summary>

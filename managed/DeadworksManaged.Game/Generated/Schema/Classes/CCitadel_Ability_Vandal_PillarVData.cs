@@ -18,7 +18,7 @@ public static partial class Schema {
 		public string m_ExplodeParticle => GetBufferString(__m_ExplodeParticle);
 
 		private static readonly SchemaField __m_PetrifyModifier = new("CCitadel_Ability_Vandal_PillarVData", "m_PetrifyModifier");
-		/// <summary><c>CEmbeddedSubclass&lt;CCitadelModifier&gt;</c>. No typed mapping yet: read it through its address.</summary>
-		public RawField m_PetrifyModifier => Raw(__m_PetrifyModifier, "CEmbeddedSubclass<CCitadelModifier>");
+		/// <summary><c>CEmbeddedSubclass&lt;CCitadelModifier&gt;</c>.</summary>
+		public CCitadelModifierVData? m_PetrifyModifier => EmbeddedSubclass<CCitadelModifierVData>(__m_PetrifyModifier);
 	}
 }

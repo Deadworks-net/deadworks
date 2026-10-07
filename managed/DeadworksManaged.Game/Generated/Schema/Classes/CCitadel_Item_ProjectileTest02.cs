@@ -12,5 +12,8 @@ public static partial class Schema {
 		internal CCitadel_Item_ProjectileTest02() { }
 		static CCitadel_Item_ProjectileTest02 ISchemaClass<CCitadel_Item_ProjectileTest02>.New() => new();
 		static string ISchemaClass<CCitadel_Item_ProjectileTest02>.NativeName => "CCitadel_Item_ProjectileTest02";
+
+		/// <summary>The data entry this was created from, as <see cref="CCitadel_Item_ProjectileTest02VData"/>, or null if it has none.</summary>
+		public new CCitadel_Item_ProjectileTest02VData? VData => SubclassVData<CCitadel_Item_ProjectileTest02VData>();
 	}
 }

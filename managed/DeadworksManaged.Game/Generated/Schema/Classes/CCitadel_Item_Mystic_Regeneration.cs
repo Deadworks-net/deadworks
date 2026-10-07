@@ -24,5 +24,8 @@ public static partial class Schema {
 		private static readonly SchemaField __m_iRegenStacks = new("CCitadel_Item_Mystic_Regeneration", "m_iRegenStacks");
 		/// <summary><c>int32</c>.</summary>
 		public int m_iRegenStacks { get => Get<int>(__m_iRegenStacks); set => Set(__m_iRegenStacks, value); }
+
+		/// <summary>The data entry this was created from, as <see cref="CCitadel_Item_Mystic_RegenerationVData"/>, or null if it has none.</summary>
+		public new CCitadel_Item_Mystic_RegenerationVData? VData => SubclassVData<CCitadel_Item_Mystic_RegenerationVData>();
 	}
 }

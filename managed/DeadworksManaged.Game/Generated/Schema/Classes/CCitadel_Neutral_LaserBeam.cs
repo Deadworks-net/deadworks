@@ -44,5 +44,8 @@ public static partial class Schema {
 		private static readonly SchemaField __m_vInitialTargetPos = new("CCitadel_Neutral_LaserBeam", "m_vInitialTargetPos");
 		/// <summary><c>VectorWS</c>.</summary>
 		public Vector3 m_vInitialTargetPos { get => Get<Vector3>(__m_vInitialTargetPos); set => Set(__m_vInitialTargetPos, value); }
+
+		/// <summary>The data entry this was created from, as <see cref="CCitadel_Neutral_LaserBeamVData"/>, or null if it has none.</summary>
+		public new CCitadel_Neutral_LaserBeamVData? VData => ModifierData<CCitadel_Neutral_LaserBeamVData>();
 	}
 }

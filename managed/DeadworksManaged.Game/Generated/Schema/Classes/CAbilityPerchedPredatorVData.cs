@@ -26,8 +26,8 @@ public static partial class Schema {
 		public string m_ExplodeFriendlyParticle => GetBufferString(__m_ExplodeFriendlyParticle);
 
 		private static readonly SchemaField __m_ModifierDragEnemy = new("CAbilityPerchedPredatorVData", "m_ModifierDragEnemy");
-		/// <summary><c>CEmbeddedSubclass&lt;CCitadelModifier&gt;</c>. No typed mapping yet: read it through its address.</summary>
-		public RawField m_ModifierDragEnemy => Raw(__m_ModifierDragEnemy, "CEmbeddedSubclass<CCitadelModifier>");
+		/// <summary><c>CEmbeddedSubclass&lt;CCitadelModifier&gt;</c>.</summary>
+		public CCitadelModifierVData? m_ModifierDragEnemy => EmbeddedSubclass<CCitadelModifierVData>(__m_ModifierDragEnemy);
 
 		private static readonly SchemaField __m_flOnHitDetonateTimer = new("CAbilityPerchedPredatorVData", "m_flOnHitDetonateTimer");
 		/// <summary><c>float32</c>.</summary>

@@ -18,12 +18,12 @@ public static partial class Schema {
 		public string m_CastParticle => GetBufferString(__m_CastParticle);
 
 		private static readonly SchemaField __m_StaticChargeModifier = new("CCitadel_Ability_StaticCharge_V2_VData", "m_StaticChargeModifier");
-		/// <summary><c>CEmbeddedSubclass&lt;CCitadelModifier&gt;</c>. No typed mapping yet: read it through its address.</summary>
-		public RawField m_StaticChargeModifier => Raw(__m_StaticChargeModifier, "CEmbeddedSubclass<CCitadelModifier>");
+		/// <summary><c>CEmbeddedSubclass&lt;CCitadelModifier&gt;</c>.</summary>
+		public CCitadelModifierVData? m_StaticChargeModifier => EmbeddedSubclass<CCitadelModifierVData>(__m_StaticChargeModifier);
 
 		private static readonly SchemaField __m_StaticChargeWorldModifier = new("CCitadel_Ability_StaticCharge_V2_VData", "m_StaticChargeWorldModifier");
-		/// <summary><c>CEmbeddedSubclass&lt;CCitadelModifier&gt;</c>. No typed mapping yet: read it through its address.</summary>
-		public RawField m_StaticChargeWorldModifier => Raw(__m_StaticChargeWorldModifier, "CEmbeddedSubclass<CCitadelModifier>");
+		/// <summary><c>CEmbeddedSubclass&lt;CCitadelModifier&gt;</c>.</summary>
+		public CCitadelModifierVData? m_StaticChargeWorldModifier => EmbeddedSubclass<CCitadelModifierVData>(__m_StaticChargeWorldModifier);
 
 		private static readonly SchemaField __m_flUnitTraceRadius = new("CCitadel_Ability_StaticCharge_V2_VData", "m_flUnitTraceRadius");
 		/// <summary><c>float32</c>.</summary>

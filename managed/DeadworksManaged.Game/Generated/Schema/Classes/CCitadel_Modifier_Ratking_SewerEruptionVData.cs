@@ -22,8 +22,8 @@ public static partial class Schema {
 		public string m_AnticipationSound => GetBufferString(__m_AnticipationSound);
 
 		private static readonly SchemaField __m_EnemyAuraModifier = new("CCitadel_Modifier_Ratking_SewerEruptionVData", "m_EnemyAuraModifier");
-		/// <summary><c>CEmbeddedSubclass&lt;CCitadelModifier&gt;</c>. No typed mapping yet: read it through its address.</summary>
-		public RawField m_EnemyAuraModifier => Raw(__m_EnemyAuraModifier, "CEmbeddedSubclass<CCitadelModifier>");
+		/// <summary><c>CEmbeddedSubclass&lt;CCitadelModifier&gt;</c>.</summary>
+		public CCitadelModifierVData? m_EnemyAuraModifier => EmbeddedSubclass<CCitadelModifierVData>(__m_EnemyAuraModifier);
 
 		private static readonly SchemaField __m_ExplodeParticle = new("CCitadel_Modifier_Ratking_SewerEruptionVData", "m_ExplodeParticle");
 		/// <summary><c>CResourceNameTyped&lt;CWeakHandle&lt;InfoForResourceTypeIParticleSystemDefinition&gt;&gt;</c>.</summary>

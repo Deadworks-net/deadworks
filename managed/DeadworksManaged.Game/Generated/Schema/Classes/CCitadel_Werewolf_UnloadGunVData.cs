@@ -22,8 +22,8 @@ public static partial class Schema {
 		public string m_MuzzleFlashParticle => GetBufferString(__m_MuzzleFlashParticle);
 
 		private static readonly SchemaField __m_ShootingModifier = new("CCitadel_Werewolf_UnloadGunVData", "m_ShootingModifier");
-		/// <summary><c>CEmbeddedSubclass&lt;CCitadelModifier&gt;</c>. No typed mapping yet: read it through its address.</summary>
-		public RawField m_ShootingModifier => Raw(__m_ShootingModifier, "CEmbeddedSubclass<CCitadelModifier>");
+		/// <summary><c>CEmbeddedSubclass&lt;CCitadelModifier&gt;</c>.</summary>
+		public CCitadelModifierVData? m_ShootingModifier => EmbeddedSubclass<CCitadelModifierVData>(__m_ShootingModifier);
 
 		private static readonly SchemaField __m_bGrantAmmoOnCast = new("CCitadel_Werewolf_UnloadGunVData", "m_bGrantAmmoOnCast");
 		/// <summary><c>bool</c>.</summary>

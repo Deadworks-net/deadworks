@@ -14,15 +14,15 @@ public static partial class Schema {
 		static string ISchemaClass<CAbilityWreckerSalvageVData>.NativeName => "CAbilityWreckerSalvageVData";
 
 		private static readonly SchemaField __m_BuffModifier = new("CAbilityWreckerSalvageVData", "m_BuffModifier");
-		/// <summary><c>CEmbeddedSubclass&lt;CCitadelModifier&gt;</c>. No typed mapping yet: read it through its address.</summary>
-		public RawField m_BuffModifier => Raw(__m_BuffModifier, "CEmbeddedSubclass<CCitadelModifier>");
+		/// <summary><c>CEmbeddedSubclass&lt;CCitadelModifier&gt;</c>.</summary>
+		public CCitadelModifierVData? m_BuffModifier => EmbeddedSubclass<CCitadelModifierVData>(__m_BuffModifier);
 
 		private static readonly SchemaField __m_SalvageEnemyModifier = new("CAbilityWreckerSalvageVData", "m_SalvageEnemyModifier");
-		/// <summary><c>CEmbeddedSubclass&lt;CCitadelModifier&gt;</c>. No typed mapping yet: read it through its address.</summary>
-		public RawField m_SalvageEnemyModifier => Raw(__m_SalvageEnemyModifier, "CEmbeddedSubclass<CCitadelModifier>");
+		/// <summary><c>CEmbeddedSubclass&lt;CCitadelModifier&gt;</c>.</summary>
+		public CCitadelModifierVData? m_SalvageEnemyModifier => EmbeddedSubclass<CCitadelModifierVData>(__m_SalvageEnemyModifier);
 
 		private static readonly SchemaField __m_StunEnemyModifier = new("CAbilityWreckerSalvageVData", "m_StunEnemyModifier");
-		/// <summary><c>CEmbeddedSubclass&lt;CCitadelModifier&gt;</c>. No typed mapping yet: read it through its address.</summary>
-		public RawField m_StunEnemyModifier => Raw(__m_StunEnemyModifier, "CEmbeddedSubclass<CCitadelModifier>");
+		/// <summary><c>CEmbeddedSubclass&lt;CCitadelModifier&gt;</c>.</summary>
+		public CCitadelModifierVData? m_StunEnemyModifier => EmbeddedSubclass<CCitadelModifierVData>(__m_StunEnemyModifier);
 	}
 }

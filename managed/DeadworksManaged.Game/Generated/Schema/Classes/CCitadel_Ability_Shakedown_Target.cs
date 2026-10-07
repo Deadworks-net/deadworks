@@ -20,5 +20,8 @@ public static partial class Schema {
 		private static readonly SchemaField __m_hShadowdownAbility = new("CCitadel_Ability_Shakedown_Target", "m_hShadowdownAbility");
 		/// <summary><c>CHandle&lt;CCitadel_Ability_Yakuza_Shakedown&gt;</c>.</summary>
 		public CCitadel_Ability_Yakuza_Shakedown? m_hShadowdownAbility { get => GetHandle<CCitadel_Ability_Yakuza_Shakedown>(__m_hShadowdownAbility); set => SetHandle(__m_hShadowdownAbility, value); }
+
+		/// <summary>The data entry this was created from, as <see cref="CCitadel_Ability_Shakedown_TargetVData"/>, or null if it has none.</summary>
+		public new CCitadel_Ability_Shakedown_TargetVData? VData => SubclassVData<CCitadel_Ability_Shakedown_TargetVData>();
 	}
 }

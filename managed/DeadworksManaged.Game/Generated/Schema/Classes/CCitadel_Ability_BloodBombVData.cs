@@ -18,8 +18,8 @@ public static partial class Schema {
 		public string m_ExplodeParticle => GetBufferString(__m_ExplodeParticle);
 
 		private static readonly SchemaField __m_SpilledBloodModifier = new("CCitadel_Ability_BloodBombVData", "m_SpilledBloodModifier");
-		/// <summary><c>CEmbeddedSubclass&lt;CCitadelModifier&gt;</c>. No typed mapping yet: read it through its address.</summary>
-		public RawField m_SpilledBloodModifier => Raw(__m_SpilledBloodModifier, "CEmbeddedSubclass<CCitadelModifier>");
+		/// <summary><c>CEmbeddedSubclass&lt;CCitadelModifier&gt;</c>.</summary>
+		public CCitadelModifierVData? m_SpilledBloodModifier => EmbeddedSubclass<CCitadelModifierVData>(__m_SpilledBloodModifier);
 
 		private static readonly SchemaField __m_strBloodSpillStatName = new("CCitadel_Ability_BloodBombVData", "m_strBloodSpillStatName");
 		/// <summary><c>CUtlString</c>.</summary>

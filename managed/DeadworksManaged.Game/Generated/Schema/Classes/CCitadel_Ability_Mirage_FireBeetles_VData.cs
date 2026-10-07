@@ -14,16 +14,16 @@ public static partial class Schema {
 		static string ISchemaClass<CCitadel_Ability_Mirage_FireBeetles_VData>.NativeName => "CCitadel_Ability_Mirage_FireBeetles_VData";
 
 		private static readonly SchemaField __m_DebuffModifier = new("CCitadel_Ability_Mirage_FireBeetles_VData", "m_DebuffModifier");
-		/// <summary><c>CEmbeddedSubclass&lt;CCitadelModifier&gt;</c>. No typed mapping yet: read it through its address.</summary>
-		public RawField m_DebuffModifier => Raw(__m_DebuffModifier, "CEmbeddedSubclass<CCitadelModifier>");
+		/// <summary><c>CEmbeddedSubclass&lt;CCitadelModifier&gt;</c>.</summary>
+		public CCitadelModifierVData? m_DebuffModifier => EmbeddedSubclass<CCitadelModifierVData>(__m_DebuffModifier);
 
 		private static readonly SchemaField __m_ExplodeParticle = new("CCitadel_Ability_Mirage_FireBeetles_VData", "m_ExplodeParticle");
 		/// <summary><c>CResourceNameTyped&lt;CWeakHandle&lt;InfoForResourceTypeIParticleSystemDefinition&gt;&gt;</c>.</summary>
 		public string m_ExplodeParticle => GetBufferString(__m_ExplodeParticle);
 
 		private static readonly SchemaField __m_StatStolenDebuffModifier = new("CCitadel_Ability_Mirage_FireBeetles_VData", "m_StatStolenDebuffModifier");
-		/// <summary><c>CEmbeddedSubclass&lt;CCitadelModifier&gt;</c>. No typed mapping yet: read it through its address.</summary>
-		public RawField m_StatStolenDebuffModifier => Raw(__m_StatStolenDebuffModifier, "CEmbeddedSubclass<CCitadelModifier>");
+		/// <summary><c>CEmbeddedSubclass&lt;CCitadelModifier&gt;</c>.</summary>
+		public CCitadelModifierVData? m_StatStolenDebuffModifier => EmbeddedSubclass<CCitadelModifierVData>(__m_StatStolenDebuffModifier);
 
 		private static readonly SchemaField __m_strHitConfirmSound = new("CCitadel_Ability_Mirage_FireBeetles_VData", "m_strHitConfirmSound");
 		/// <summary><c>CSoundEventName</c>.</summary>

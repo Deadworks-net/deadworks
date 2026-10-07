@@ -20,5 +20,8 @@ public static partial class Schema {
 		private static readonly SchemaField __m_flPoolHealthMax = new("CCitadel_Modifier_RatKing_RatArmor", "m_flPoolHealthMax");
 		/// <summary><c>float32</c>.</summary>
 		public float m_flPoolHealthMax { get => Get<float>(__m_flPoolHealthMax); set => Set(__m_flPoolHealthMax, value); }
+
+		/// <summary>The data entry this was created from, as <see cref="CCitadel_Modifier_RatKing_RatArmorVData"/>, or null if it has none.</summary>
+		public new CCitadel_Modifier_RatKing_RatArmorVData? VData => ModifierData<CCitadel_Modifier_RatKing_RatArmorVData>();
 	}
 }

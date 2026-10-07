@@ -14,20 +14,20 @@ public static partial class Schema {
 		static string ISchemaClass<CAbility_Synth_Barrage_VData>.NativeName => "CAbility_Synth_Barrage_VData";
 
 		private static readonly SchemaField __m_AmpModifier = new("CAbility_Synth_Barrage_VData", "m_AmpModifier");
-		/// <summary><c>CEmbeddedSubclass&lt;CCitadelModifier&gt;</c>. No typed mapping yet: read it through its address.</summary>
-		public RawField m_AmpModifier => Raw(__m_AmpModifier, "CEmbeddedSubclass<CCitadelModifier>");
+		/// <summary><c>CEmbeddedSubclass&lt;CCitadelModifier&gt;</c>.</summary>
+		public CCitadelModifierVData? m_AmpModifier => EmbeddedSubclass<CCitadelModifierVData>(__m_AmpModifier);
 
 		private static readonly SchemaField __m_BarrageCasterModifier = new("CAbility_Synth_Barrage_VData", "m_BarrageCasterModifier");
-		/// <summary><c>CEmbeddedSubclass&lt;CCitadelModifier&gt;</c>. No typed mapping yet: read it through its address.</summary>
-		public RawField m_BarrageCasterModifier => Raw(__m_BarrageCasterModifier, "CEmbeddedSubclass<CCitadelModifier>");
+		/// <summary><c>CEmbeddedSubclass&lt;CCitadelModifier&gt;</c>.</summary>
+		public CCitadelModifierVData? m_BarrageCasterModifier => EmbeddedSubclass<CCitadelModifierVData>(__m_BarrageCasterModifier);
 
 		private static readonly SchemaField __m_ChannelParticle = new("CAbility_Synth_Barrage_VData", "m_ChannelParticle");
 		/// <summary><c>CResourceNameTyped&lt;CWeakHandle&lt;InfoForResourceTypeIParticleSystemDefinition&gt;&gt;</c>.</summary>
 		public string m_ChannelParticle => GetBufferString(__m_ChannelParticle);
 
 		private static readonly SchemaField __m_DebuffModifier = new("CAbility_Synth_Barrage_VData", "m_DebuffModifier");
-		/// <summary><c>CEmbeddedSubclass&lt;CCitadelModifier&gt;</c>. No typed mapping yet: read it through its address.</summary>
-		public RawField m_DebuffModifier => Raw(__m_DebuffModifier, "CEmbeddedSubclass<CCitadelModifier>");
+		/// <summary><c>CEmbeddedSubclass&lt;CCitadelModifier&gt;</c>.</summary>
+		public CCitadelModifierVData? m_DebuffModifier => EmbeddedSubclass<CCitadelModifierVData>(__m_DebuffModifier);
 
 		private static readonly SchemaField __m_ImpactParticle = new("CAbility_Synth_Barrage_VData", "m_ImpactParticle");
 		/// <summary><c>CResourceNameTyped&lt;CWeakHandle&lt;InfoForResourceTypeIParticleSystemDefinition&gt;&gt;</c>.</summary>

@@ -14,16 +14,16 @@ public static partial class Schema {
 		static string ISchemaClass<CCitadel_Ability_Nano_ShadowVData>.NativeName => "CCitadel_Ability_Nano_ShadowVData";
 
 		private static readonly SchemaField __m_EnemyAura = new("CCitadel_Ability_Nano_ShadowVData", "m_EnemyAura");
-		/// <summary><c>CEmbeddedSubclass&lt;CCitadelModifier&gt;</c>. No typed mapping yet: read it through its address.</summary>
-		public RawField m_EnemyAura => Raw(__m_EnemyAura, "CEmbeddedSubclass<CCitadelModifier>");
+		/// <summary><c>CEmbeddedSubclass&lt;CCitadelModifier&gt;</c>.</summary>
+		public CCitadelModifierVData? m_EnemyAura => EmbeddedSubclass<CCitadelModifierVData>(__m_EnemyAura);
 
 		private static readonly SchemaField __m_PurgeModifier = new("CCitadel_Ability_Nano_ShadowVData", "m_PurgeModifier");
-		/// <summary><c>CEmbeddedSubclass&lt;CCitadelModifier&gt;</c>. No typed mapping yet: read it through its address.</summary>
-		public RawField m_PurgeModifier => Raw(__m_PurgeModifier, "CEmbeddedSubclass<CCitadelModifier>");
+		/// <summary><c>CEmbeddedSubclass&lt;CCitadelModifier&gt;</c>.</summary>
+		public CCitadelModifierVData? m_PurgeModifier => EmbeddedSubclass<CCitadelModifierVData>(__m_PurgeModifier);
 
 		private static readonly SchemaField __m_ShadowModifier = new("CCitadel_Ability_Nano_ShadowVData", "m_ShadowModifier");
-		/// <summary><c>CEmbeddedSubclass&lt;CCitadelModifier&gt;</c>. No typed mapping yet: read it through its address.</summary>
-		public RawField m_ShadowModifier => Raw(__m_ShadowModifier, "CEmbeddedSubclass<CCitadelModifier>");
+		/// <summary><c>CEmbeddedSubclass&lt;CCitadelModifier&gt;</c>.</summary>
+		public CCitadelModifierVData? m_ShadowModifier => EmbeddedSubclass<CCitadelModifierVData>(__m_ShadowModifier);
 
 		private static readonly SchemaField __m_flAuraRadius = new("CCitadel_Ability_Nano_ShadowVData", "m_flAuraRadius");
 		/// <summary><c>float32</c>.</summary>

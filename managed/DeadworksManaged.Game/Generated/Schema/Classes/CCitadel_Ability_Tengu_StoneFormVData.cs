@@ -18,8 +18,8 @@ public static partial class Schema {
 		public string m_CastParticle => GetBufferString(__m_CastParticle);
 
 		private static readonly SchemaField __m_DragModifier = new("CCitadel_Ability_Tengu_StoneFormVData", "m_DragModifier");
-		/// <summary><c>CEmbeddedSubclass&lt;CBaseModifier&gt;</c>. No typed mapping yet: read it through its address.</summary>
-		public RawField m_DragModifier => Raw(__m_DragModifier, "CEmbeddedSubclass<CBaseModifier>");
+		/// <summary><c>CEmbeddedSubclass&lt;CBaseModifier&gt;</c>.</summary>
+		public CModifierVData? m_DragModifier => EmbeddedSubclass<CModifierVData>(__m_DragModifier);
 
 		private static readonly SchemaField __m_ImpactParticle = new("CCitadel_Ability_Tengu_StoneFormVData", "m_ImpactParticle");
 		/// <summary><c>CResourceNameTyped&lt;CWeakHandle&lt;InfoForResourceTypeIParticleSystemDefinition&gt;&gt;</c>.</summary>

@@ -14,8 +14,8 @@ public static partial class Schema {
 		static string ISchemaClass<CCitadel_Ability_BulletFlurryVData>.NativeName => "CCitadel_Ability_BulletFlurryVData";
 
 		private static readonly SchemaField __m_BulletFlurryModifier = new("CCitadel_Ability_BulletFlurryVData", "m_BulletFlurryModifier");
-		/// <summary><c>CEmbeddedSubclass&lt;CCitadelModifier&gt;</c>. No typed mapping yet: read it through its address.</summary>
-		public RawField m_BulletFlurryModifier => Raw(__m_BulletFlurryModifier, "CEmbeddedSubclass<CCitadelModifier>");
+		/// <summary><c>CEmbeddedSubclass&lt;CCitadelModifier&gt;</c>.</summary>
+		public CCitadelModifierVData? m_BulletFlurryModifier => EmbeddedSubclass<CCitadelModifierVData>(__m_BulletFlurryModifier);
 
 		private static readonly SchemaField __m_ChannelParticle = new("CCitadel_Ability_BulletFlurryVData", "m_ChannelParticle");
 		/// <summary><c>CResourceNameTyped&lt;CWeakHandle&lt;InfoForResourceTypeIParticleSystemDefinition&gt;&gt;</c>.</summary>

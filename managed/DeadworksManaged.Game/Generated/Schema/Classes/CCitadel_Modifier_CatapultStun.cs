@@ -16,5 +16,8 @@ public static partial class Schema {
 		private static readonly SchemaField __m_bLanded = new("CCitadel_Modifier_CatapultStun", "m_bLanded");
 		/// <summary><c>bool</c>.</summary>
 		public bool m_bLanded { get => Get<bool>(__m_bLanded); set => Set(__m_bLanded, value); }
+
+		/// <summary>The data entry this was created from, as <see cref="CCitadel_Modifier_CatapultStunVData"/>, or null if it has none.</summary>
+		public new CCitadel_Modifier_CatapultStunVData? VData => ModifierData<CCitadel_Modifier_CatapultStunVData>();
 	}
 }

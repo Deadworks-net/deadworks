@@ -24,5 +24,8 @@ public static partial class Schema {
 		private static readonly SchemaField __m_flFlyingStartTime = new("CCitadel_Upgrade_MagicCarpet", "m_flFlyingStartTime");
 		/// <summary><c>GameTime_t</c>.</summary>
 		public float m_flFlyingStartTime { get => Get<float>(__m_flFlyingStartTime); set => Set(__m_flFlyingStartTime, value); }
+
+		/// <summary>The data entry this was created from, as <see cref="CCitadel_Upgrade_MagicCarpetVData"/>, or null if it has none.</summary>
+		public new CCitadel_Upgrade_MagicCarpetVData? VData => SubclassVData<CCitadel_Upgrade_MagicCarpetVData>();
 	}
 }

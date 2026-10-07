@@ -14,8 +14,8 @@ public static partial class Schema {
 		static string ISchemaClass<CBaseLockonAbilityVData>.NativeName => "CBaseLockonAbilityVData";
 
 		private static readonly SchemaField __m_TargetModifier = new("CBaseLockonAbilityVData", "m_TargetModifier");
-		/// <summary><c>CEmbeddedSubclass&lt;CBaseModifier&gt;</c>. No typed mapping yet: read it through its address.</summary>
-		public RawField m_TargetModifier => Raw(__m_TargetModifier, "CEmbeddedSubclass<CBaseModifier>");
+		/// <summary><c>CEmbeddedSubclass&lt;CBaseModifier&gt;</c>.</summary>
+		public CModifierVData? m_TargetModifier => EmbeddedSubclass<CModifierVData>(__m_TargetModifier);
 
 		private static readonly SchemaField __m_strApplyLockonStack = new("CBaseLockonAbilityVData", "m_strApplyLockonStack");
 		/// <summary><c>CSoundEventName</c>.</summary>

@@ -18,8 +18,8 @@ public static partial class Schema {
 		public bool bPhysicallyDropToTheGroundOnSpawn { get => Get<bool>(__bPhysicallyDropToTheGroundOnSpawn); set => Set(__bPhysicallyDropToTheGroundOnSpawn, value); }
 
 		private static readonly SchemaField __m_AuraModifier = new("CCitadel_Pickup_VData", "m_AuraModifier");
-		/// <summary><c>CEmbeddedSubclass&lt;CCitadelModifier&gt;</c>. No typed mapping yet: read it through its address.</summary>
-		public RawField m_AuraModifier => Raw(__m_AuraModifier, "CEmbeddedSubclass<CCitadelModifier>");
+		/// <summary><c>CEmbeddedSubclass&lt;CCitadelModifier&gt;</c>.</summary>
+		public CCitadelModifierVData? m_AuraModifier => EmbeddedSubclass<CCitadelModifierVData>(__m_AuraModifier);
 
 		private static readonly SchemaField __m_BuffTypeGraphColor = new("CCitadel_Pickup_VData", "m_BuffTypeGraphColor");
 		/// <summary><c>Color</c>. Line color for this buff type in the postgame Permanent Buffs graph.</summary>
@@ -38,8 +38,8 @@ public static partial class Schema {
 		public Color32 m_OutlineColor { get => Get<Color32>(__m_OutlineColor); set => Set(__m_OutlineColor, value); }
 
 		private static readonly SchemaField __m_ParryCheckModifier = new("CCitadel_Pickup_VData", "m_ParryCheckModifier");
-		/// <summary><c>CEmbeddedSubclass&lt;CBaseModifier&gt;</c>. No typed mapping yet: read it through its address.</summary>
-		public RawField m_ParryCheckModifier => Raw(__m_ParryCheckModifier, "CEmbeddedSubclass<CBaseModifier>");
+		/// <summary><c>CEmbeddedSubclass&lt;CBaseModifier&gt;</c>.</summary>
+		public CModifierVData? m_ParryCheckModifier => EmbeddedSubclass<CModifierVData>(__m_ParryCheckModifier);
 
 		private static readonly SchemaField __m_VacuumInitialVelSpeedCurve = new("CCitadel_Pickup_VData", "m_VacuumInitialVelSpeedCurve");
 		/// <summary><c>CPiecewiseCurve</c>. No typed mapping yet: read it through its address.</summary>

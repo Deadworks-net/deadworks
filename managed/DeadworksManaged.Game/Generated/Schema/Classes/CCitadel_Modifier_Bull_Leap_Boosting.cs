@@ -12,5 +12,8 @@ public static partial class Schema {
 		internal CCitadel_Modifier_Bull_Leap_Boosting() { }
 		static CCitadel_Modifier_Bull_Leap_Boosting ISchemaClass<CCitadel_Modifier_Bull_Leap_Boosting>.New() => new();
 		static string ISchemaClass<CCitadel_Modifier_Bull_Leap_Boosting>.NativeName => "CCitadel_Modifier_Bull_Leap_Boosting";
+
+		/// <summary>The data entry this was created from, as <see cref="CCitadel_Modifier_Bull_Leap_BoostingVData"/>, or null if it has none.</summary>
+		public new CCitadel_Modifier_Bull_Leap_BoostingVData? VData => ModifierData<CCitadel_Modifier_Bull_Leap_BoostingVData>();
 	}
 }

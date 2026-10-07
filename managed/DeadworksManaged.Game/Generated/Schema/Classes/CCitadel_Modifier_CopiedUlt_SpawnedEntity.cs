@@ -12,5 +12,8 @@ public static partial class Schema {
 		internal CCitadel_Modifier_CopiedUlt_SpawnedEntity() { }
 		static CCitadel_Modifier_CopiedUlt_SpawnedEntity ISchemaClass<CCitadel_Modifier_CopiedUlt_SpawnedEntity>.New() => new();
 		static string ISchemaClass<CCitadel_Modifier_CopiedUlt_SpawnedEntity>.NativeName => "CCitadel_Modifier_CopiedUlt_SpawnedEntity";
+
+		/// <summary>The data entry this was created from, as <see cref="CCitadel_Modifier_CopiedUlt_SpawnedEntityVData"/>, or null if it has none.</summary>
+		public new CCitadel_Modifier_CopiedUlt_SpawnedEntityVData? VData => ModifierData<CCitadel_Modifier_CopiedUlt_SpawnedEntityVData>();
 	}
 }

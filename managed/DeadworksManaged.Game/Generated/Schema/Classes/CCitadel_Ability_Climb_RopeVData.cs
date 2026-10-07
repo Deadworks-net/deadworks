@@ -14,12 +14,12 @@ public static partial class Schema {
 		static string ISchemaClass<CCitadel_Ability_Climb_RopeVData>.NativeName => "CCitadel_Ability_Climb_RopeVData";
 
 		private static readonly SchemaField __m_ClimbRopeSlowFromRecentDamageModifier = new("CCitadel_Ability_Climb_RopeVData", "m_ClimbRopeSlowFromRecentDamageModifier");
-		/// <summary><c>CEmbeddedSubclass&lt;CCitadelModifier&gt;</c>. No typed mapping yet: read it through its address.</summary>
-		public RawField m_ClimbRopeSlowFromRecentDamageModifier => Raw(__m_ClimbRopeSlowFromRecentDamageModifier, "CEmbeddedSubclass<CCitadelModifier>");
+		/// <summary><c>CEmbeddedSubclass&lt;CCitadelModifier&gt;</c>.</summary>
+		public CCitadelModifierVData? m_ClimbRopeSlowFromRecentDamageModifier => EmbeddedSubclass<CCitadelModifierVData>(__m_ClimbRopeSlowFromRecentDamageModifier);
 
 		private static readonly SchemaField __m_ClimbRopeSlowOnHitModifier = new("CCitadel_Ability_Climb_RopeVData", "m_ClimbRopeSlowOnHitModifier");
-		/// <summary><c>CEmbeddedSubclass&lt;CCitadelModifier&gt;</c>. No typed mapping yet: read it through its address.</summary>
-		public RawField m_ClimbRopeSlowOnHitModifier => Raw(__m_ClimbRopeSlowOnHitModifier, "CEmbeddedSubclass<CCitadelModifier>");
+		/// <summary><c>CEmbeddedSubclass&lt;CCitadelModifier&gt;</c>.</summary>
+		public CCitadelModifierVData? m_ClimbRopeSlowOnHitModifier => EmbeddedSubclass<CCitadelModifierVData>(__m_ClimbRopeSlowOnHitModifier);
 
 		private static readonly SchemaField __m_flActivateRange = new("CCitadel_Ability_Climb_RopeVData", "m_flActivateRange");
 		/// <summary><c>float32</c>.</summary>

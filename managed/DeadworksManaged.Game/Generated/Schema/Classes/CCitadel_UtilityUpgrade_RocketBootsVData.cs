@@ -14,8 +14,8 @@ public static partial class Schema {
 		static string ISchemaClass<CCitadel_UtilityUpgrade_RocketBootsVData>.NativeName => "CCitadel_UtilityUpgrade_RocketBootsVData";
 
 		private static readonly SchemaField __m_InAirWatcherModifier = new("CCitadel_UtilityUpgrade_RocketBootsVData", "m_InAirWatcherModifier");
-		/// <summary><c>CEmbeddedSubclass&lt;CCitadelModifier&gt;</c>. No typed mapping yet: read it through its address.</summary>
-		public RawField m_InAirWatcherModifier => Raw(__m_InAirWatcherModifier, "CEmbeddedSubclass<CCitadelModifier>");
+		/// <summary><c>CEmbeddedSubclass&lt;CCitadelModifier&gt;</c>.</summary>
+		public CCitadelModifierVData? m_InAirWatcherModifier => EmbeddedSubclass<CCitadelModifierVData>(__m_InAirWatcherModifier);
 
 		private static readonly SchemaField __m_LaunchParticle = new("CCitadel_UtilityUpgrade_RocketBootsVData", "m_LaunchParticle");
 		/// <summary><c>CResourceNameTyped&lt;CWeakHandle&lt;InfoForResourceTypeIParticleSystemDefinition&gt;&gt;</c>.</summary>

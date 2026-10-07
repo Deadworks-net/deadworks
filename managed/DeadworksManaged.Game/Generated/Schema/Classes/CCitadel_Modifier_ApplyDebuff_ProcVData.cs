@@ -14,8 +14,8 @@ public static partial class Schema {
 		static string ISchemaClass<CCitadel_Modifier_ApplyDebuff_ProcVData>.NativeName => "CCitadel_Modifier_ApplyDebuff_ProcVData";
 
 		private static readonly SchemaField __m_DebuffModifier = new("CCitadel_Modifier_ApplyDebuff_ProcVData", "m_DebuffModifier");
-		/// <summary><c>CEmbeddedSubclass&lt;CBaseModifier&gt;</c>. No typed mapping yet: read it through its address.</summary>
-		public RawField m_DebuffModifier => Raw(__m_DebuffModifier, "CEmbeddedSubclass<CBaseModifier>");
+		/// <summary><c>CEmbeddedSubclass&lt;CBaseModifier&gt;</c>.</summary>
+		public CModifierVData? m_DebuffModifier => EmbeddedSubclass<CModifierVData>(__m_DebuffModifier);
 
 		private static readonly SchemaField __m_DurationAbilityPropOverride = new("CCitadel_Modifier_ApplyDebuff_ProcVData", "m_DurationAbilityPropOverride");
 		/// <summary><c>CUtlString</c>. If this is set, the modifier will use the value from this AbilityProperty as the duration, instead of AbilityDuration.</summary>

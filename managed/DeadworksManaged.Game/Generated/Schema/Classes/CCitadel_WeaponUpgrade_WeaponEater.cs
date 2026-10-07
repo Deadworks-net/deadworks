@@ -16,5 +16,8 @@ public static partial class Schema {
 		private static readonly SchemaField __m_nWeaponPower = new("CCitadel_WeaponUpgrade_WeaponEater", "m_nWeaponPower");
 		/// <summary><c>int32</c>.</summary>
 		public int m_nWeaponPower { get => Get<int>(__m_nWeaponPower); set => Set(__m_nWeaponPower, value); }
+
+		/// <summary>The data entry this was created from, as <see cref="CCitadel_WeaponUpgrade_WeaponEaterVData"/>, or null if it has none.</summary>
+		public new CCitadel_WeaponUpgrade_WeaponEaterVData? VData => SubclassVData<CCitadel_WeaponUpgrade_WeaponEaterVData>();
 	}
 }

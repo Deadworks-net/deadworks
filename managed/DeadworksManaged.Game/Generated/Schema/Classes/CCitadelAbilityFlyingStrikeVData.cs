@@ -14,8 +14,8 @@ public static partial class Schema {
 		static string ISchemaClass<CCitadelAbilityFlyingStrikeVData>.NativeName => "CCitadelAbilityFlyingStrikeVData";
 
 		private static readonly SchemaField __m_BuffModifier = new("CCitadelAbilityFlyingStrikeVData", "m_BuffModifier");
-		/// <summary><c>CEmbeddedSubclass&lt;CBaseModifier&gt;</c>. No typed mapping yet: read it through its address.</summary>
-		public RawField m_BuffModifier => Raw(__m_BuffModifier, "CEmbeddedSubclass<CBaseModifier>");
+		/// <summary><c>CEmbeddedSubclass&lt;CBaseModifier&gt;</c>.</summary>
+		public CModifierVData? m_BuffModifier => EmbeddedSubclass<CModifierVData>(__m_BuffModifier);
 
 		private static readonly SchemaField __m_BulletGrappleTracerParticle = new("CCitadelAbilityFlyingStrikeVData", "m_BulletGrappleTracerParticle");
 		/// <summary><c>CResourceNameTyped&lt;CWeakHandle&lt;InfoForResourceTypeIParticleSystemDefinition&gt;&gt;</c>.</summary>
@@ -26,8 +26,8 @@ public static partial class Schema {
 		public string m_EnemyGrappleParticle => GetBufferString(__m_EnemyGrappleParticle);
 
 		private static readonly SchemaField __m_GrappleTargetModifier = new("CCitadelAbilityFlyingStrikeVData", "m_GrappleTargetModifier");
-		/// <summary><c>CEmbeddedSubclass&lt;CBaseModifier&gt;</c>. No typed mapping yet: read it through its address.</summary>
-		public RawField m_GrappleTargetModifier => Raw(__m_GrappleTargetModifier, "CEmbeddedSubclass<CBaseModifier>");
+		/// <summary><c>CEmbeddedSubclass&lt;CBaseModifier&gt;</c>.</summary>
+		public CModifierVData? m_GrappleTargetModifier => EmbeddedSubclass<CModifierVData>(__m_GrappleTargetModifier);
 
 		private static readonly SchemaField __m_ImpactParticle = new("CCitadelAbilityFlyingStrikeVData", "m_ImpactParticle");
 		/// <summary><c>CResourceNameTyped&lt;CWeakHandle&lt;InfoForResourceTypeIParticleSystemDefinition&gt;&gt;</c>.</summary>
@@ -42,8 +42,8 @@ public static partial class Schema {
 		public string m_SlashParticle => GetBufferString(__m_SlashParticle);
 
 		private static readonly SchemaField __m_SlowModifier = new("CCitadelAbilityFlyingStrikeVData", "m_SlowModifier");
-		/// <summary><c>CEmbeddedSubclass&lt;CBaseModifier&gt;</c>. No typed mapping yet: read it through its address.</summary>
-		public RawField m_SlowModifier => Raw(__m_SlowModifier, "CEmbeddedSubclass<CBaseModifier>");
+		/// <summary><c>CEmbeddedSubclass&lt;CBaseModifier&gt;</c>.</summary>
+		public CModifierVData? m_SlowModifier => EmbeddedSubclass<CModifierVData>(__m_SlowModifier);
 
 		private static readonly SchemaField __m_cameraSequenceAttacking = new("CCitadelAbilityFlyingStrikeVData", "m_cameraSequenceAttacking");
 		/// <summary><c>CitadelCameraOperationsSequence_t</c>.</summary>

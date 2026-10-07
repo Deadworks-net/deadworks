@@ -48,5 +48,8 @@ public static partial class Schema {
 		private static readonly SchemaField __m_vecWeakPoints = new("CAI_CitadelNPC", "m_vecWeakPoints");
 		/// <summary><c>CUtlVectorEmbeddedNetworkVar&lt;WeakPoint_t&gt;</c>.</summary>
 		public SchemaObjectList<WeakPoint_t> m_vecWeakPoints => new(this, __m_vecWeakPoints, -1);
+
+		/// <summary>The data entry this was created from, as <see cref="CAI_CitadelNPCVData"/>, or null if it has none.</summary>
+		public new CAI_CitadelNPCVData? VData => SubclassVData<CAI_CitadelNPCVData>();
 	}
 }

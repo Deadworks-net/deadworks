@@ -12,5 +12,8 @@ public static partial class Schema {
 		internal CCitadel_Modifier_Passive_Cloak() { }
 		static CCitadel_Modifier_Passive_Cloak ISchemaClass<CCitadel_Modifier_Passive_Cloak>.New() => new();
 		static string ISchemaClass<CCitadel_Modifier_Passive_Cloak>.NativeName => "CCitadel_Modifier_Passive_Cloak";
+
+		/// <summary>The data entry this was created from, as <see cref="CCitadel_Modifier_Passive_CloakVData"/>, or null if it has none.</summary>
+		public new CCitadel_Modifier_Passive_CloakVData? VData => ModifierData<CCitadel_Modifier_Passive_CloakVData>();
 	}
 }

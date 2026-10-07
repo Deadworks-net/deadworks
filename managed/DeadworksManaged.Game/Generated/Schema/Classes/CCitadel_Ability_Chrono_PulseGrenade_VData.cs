@@ -14,8 +14,8 @@ public static partial class Schema {
 		static string ISchemaClass<CCitadel_Ability_Chrono_PulseGrenade_VData>.NativeName => "CCitadel_Ability_Chrono_PulseGrenade_VData";
 
 		private static readonly SchemaField __m_PulseAreaModifier = new("CCitadel_Ability_Chrono_PulseGrenade_VData", "m_PulseAreaModifier");
-		/// <summary><c>CEmbeddedSubclass&lt;CCitadelModifier&gt;</c>. No typed mapping yet: read it through its address.</summary>
-		public RawField m_PulseAreaModifier => Raw(__m_PulseAreaModifier, "CEmbeddedSubclass<CCitadelModifier>");
+		/// <summary><c>CEmbeddedSubclass&lt;CCitadelModifier&gt;</c>.</summary>
+		public CCitadelModifierVData? m_PulseAreaModifier => EmbeddedSubclass<CCitadelModifierVData>(__m_PulseAreaModifier);
 
 		private static readonly SchemaField __m_strDebuffStatName = new("CCitadel_Ability_Chrono_PulseGrenade_VData", "m_strDebuffStatName");
 		/// <summary><c>CUtlString</c>.</summary>

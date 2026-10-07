@@ -32,5 +32,8 @@ public static partial class Schema {
 		private static readonly SchemaField __m_flSpinUpRateOverride = new("CCitadel_Modifier_BeltFed_Magazine", "m_flSpinUpRateOverride");
 		/// <summary><c>float32</c>.</summary>
 		public float m_flSpinUpRateOverride { get => Get<float>(__m_flSpinUpRateOverride); set => Set(__m_flSpinUpRateOverride, value); }
+
+		/// <summary>The data entry this was created from, as <see cref="CCitadel_Modifier_BeltFed_MagazineVData"/>, or null if it has none.</summary>
+		public new CCitadel_Modifier_BeltFed_MagazineVData? VData => ModifierData<CCitadel_Modifier_BeltFed_MagazineVData>();
 	}
 }

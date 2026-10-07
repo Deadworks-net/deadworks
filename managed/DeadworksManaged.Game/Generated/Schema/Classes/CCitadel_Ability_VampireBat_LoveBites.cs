@@ -12,5 +12,8 @@ public static partial class Schema {
 		internal CCitadel_Ability_VampireBat_LoveBites() { }
 		static CCitadel_Ability_VampireBat_LoveBites ISchemaClass<CCitadel_Ability_VampireBat_LoveBites>.New() => new();
 		static string ISchemaClass<CCitadel_Ability_VampireBat_LoveBites>.NativeName => "CCitadel_Ability_VampireBat_LoveBites";
+
+		/// <summary>The data entry this was created from, as <see cref="CCitadel_Ability_VampireBat_LoveBitesVData"/>, or null if it has none.</summary>
+		public new CCitadel_Ability_VampireBat_LoveBitesVData? VData => SubclassVData<CCitadel_Ability_VampireBat_LoveBitesVData>();
 	}
 }

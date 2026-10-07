@@ -12,5 +12,8 @@ public static partial class Schema {
 		internal CCitadel_Ability_Familiar_Attach_Trigger() { }
 		static CCitadel_Ability_Familiar_Attach_Trigger ISchemaClass<CCitadel_Ability_Familiar_Attach_Trigger>.New() => new();
 		static string ISchemaClass<CCitadel_Ability_Familiar_Attach_Trigger>.NativeName => "CCitadel_Ability_Familiar_Attach_Trigger";
+
+		/// <summary>The data entry this was created from, as <see cref="CCitadel_Ability_Familiar_Attach_TriggerVData"/>, or null if it has none.</summary>
+		public new CCitadel_Ability_Familiar_Attach_TriggerVData? VData => SubclassVData<CCitadel_Ability_Familiar_Attach_TriggerVData>();
 	}
 }

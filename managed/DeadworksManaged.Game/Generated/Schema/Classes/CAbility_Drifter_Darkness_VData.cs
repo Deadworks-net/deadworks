@@ -22,23 +22,23 @@ public static partial class Schema {
 		public string m_CastParticle => GetBufferString(__m_CastParticle);
 
 		private static readonly SchemaField __m_CasterModifier = new("CAbility_Drifter_Darkness_VData", "m_CasterModifier");
-		/// <summary><c>CEmbeddedSubclass&lt;CCitadelModifier&gt;</c>. No typed mapping yet: read it through its address.</summary>
-		public RawField m_CasterModifier => Raw(__m_CasterModifier, "CEmbeddedSubclass<CCitadelModifier>");
+		/// <summary><c>CEmbeddedSubclass&lt;CCitadelModifier&gt;</c>.</summary>
+		public CCitadelModifierVData? m_CasterModifier => EmbeddedSubclass<CCitadelModifierVData>(__m_CasterModifier);
 
 		private static readonly SchemaField __m_HitConfirmSound = new("CAbility_Drifter_Darkness_VData", "m_HitConfirmSound");
 		/// <summary><c>CSoundEventName</c>.</summary>
 		public string m_HitConfirmSound => GetBufferString(__m_HitConfirmSound);
 
 		private static readonly SchemaField __m_OutOfCombatSprintCamera = new("CAbility_Drifter_Darkness_VData", "m_OutOfCombatSprintCamera");
-		/// <summary><c>CEmbeddedSubclass&lt;CCitadelModifier&gt;</c>. No typed mapping yet: read it through its address.</summary>
-		public RawField m_OutOfCombatSprintCamera => Raw(__m_OutOfCombatSprintCamera, "CEmbeddedSubclass<CCitadelModifier>");
+		/// <summary><c>CEmbeddedSubclass&lt;CCitadelModifier&gt;</c>.</summary>
+		public CCitadelModifierVData? m_OutOfCombatSprintCamera => EmbeddedSubclass<CCitadelModifierVData>(__m_OutOfCombatSprintCamera);
 
 		private static readonly SchemaField __m_TargetModifier = new("CAbility_Drifter_Darkness_VData", "m_TargetModifier");
-		/// <summary><c>CEmbeddedSubclass&lt;CCitadelModifier&gt;</c>. No typed mapping yet: read it through its address.</summary>
-		public RawField m_TargetModifier => Raw(__m_TargetModifier, "CEmbeddedSubclass<CCitadelModifier>");
+		/// <summary><c>CEmbeddedSubclass&lt;CCitadelModifier&gt;</c>.</summary>
+		public CCitadelModifierVData? m_TargetModifier => EmbeddedSubclass<CCitadelModifierVData>(__m_TargetModifier);
 
 		private static readonly SchemaField __m_TargetRevealModifier = new("CAbility_Drifter_Darkness_VData", "m_TargetRevealModifier");
-		/// <summary><c>CEmbeddedSubclass&lt;CCitadelModifier&gt;</c>. No typed mapping yet: read it through its address.</summary>
-		public RawField m_TargetRevealModifier => Raw(__m_TargetRevealModifier, "CEmbeddedSubclass<CCitadelModifier>");
+		/// <summary><c>CEmbeddedSubclass&lt;CCitadelModifier&gt;</c>.</summary>
+		public CCitadelModifierVData? m_TargetRevealModifier => EmbeddedSubclass<CCitadelModifierVData>(__m_TargetRevealModifier);
 	}
 }

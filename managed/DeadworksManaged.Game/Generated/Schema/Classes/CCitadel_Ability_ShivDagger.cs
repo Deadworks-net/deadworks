@@ -12,5 +12,8 @@ public static partial class Schema {
 		internal CCitadel_Ability_ShivDagger() { }
 		static CCitadel_Ability_ShivDagger ISchemaClass<CCitadel_Ability_ShivDagger>.New() => new();
 		static string ISchemaClass<CCitadel_Ability_ShivDagger>.NativeName => "CCitadel_Ability_ShivDagger";
+
+		/// <summary>The data entry this was created from, as <see cref="CCitadel_Ability_ShivDaggerVData"/>, or null if it has none.</summary>
+		public new CCitadel_Ability_ShivDaggerVData? VData => SubclassVData<CCitadel_Ability_ShivDaggerVData>();
 	}
 }

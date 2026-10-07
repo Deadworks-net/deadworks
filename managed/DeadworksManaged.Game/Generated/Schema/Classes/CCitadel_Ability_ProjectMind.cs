@@ -12,5 +12,8 @@ public static partial class Schema {
 		internal CCitadel_Ability_ProjectMind() { }
 		static CCitadel_Ability_ProjectMind ISchemaClass<CCitadel_Ability_ProjectMind>.New() => new();
 		static string ISchemaClass<CCitadel_Ability_ProjectMind>.NativeName => "CCitadel_Ability_ProjectMind";
+
+		/// <summary>The data entry this was created from, as <see cref="CCitadel_Ability_ProjectMindVData"/>, or null if it has none.</summary>
+		public new CCitadel_Ability_ProjectMindVData? VData => SubclassVData<CCitadel_Ability_ProjectMindVData>();
 	}
 }

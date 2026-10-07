@@ -12,5 +12,8 @@ public static partial class Schema {
 		internal CCitadel_ArmorUpgrade_HealOnLevel() { }
 		static CCitadel_ArmorUpgrade_HealOnLevel ISchemaClass<CCitadel_ArmorUpgrade_HealOnLevel>.New() => new();
 		static string ISchemaClass<CCitadel_ArmorUpgrade_HealOnLevel>.NativeName => "CCitadel_ArmorUpgrade_HealOnLevel";
+
+		/// <summary>The data entry this was created from, as <see cref="CCitadel_ArmorUpgrade_HealOnLevelVData"/>, or null if it has none.</summary>
+		public new CCitadel_ArmorUpgrade_HealOnLevelVData? VData => SubclassVData<CCitadel_ArmorUpgrade_HealOnLevelVData>();
 	}
 }

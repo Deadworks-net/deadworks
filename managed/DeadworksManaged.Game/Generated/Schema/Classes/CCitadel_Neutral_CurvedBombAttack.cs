@@ -12,5 +12,8 @@ public static partial class Schema {
 		internal CCitadel_Neutral_CurvedBombAttack() { }
 		static CCitadel_Neutral_CurvedBombAttack ISchemaClass<CCitadel_Neutral_CurvedBombAttack>.New() => new();
 		static string ISchemaClass<CCitadel_Neutral_CurvedBombAttack>.NativeName => "CCitadel_Neutral_CurvedBombAttack";
+
+		/// <summary>The data entry this was created from, as <see cref="CCitadel_Neutral_CurvedBombAttackVData"/>, or null if it has none.</summary>
+		public new CCitadel_Neutral_CurvedBombAttackVData? VData => ModifierData<CCitadel_Neutral_CurvedBombAttackVData>();
 	}
 }

@@ -20,5 +20,8 @@ public static partial class Schema {
 		private static readonly SchemaField __m_bIsPulling = new("CCitadel_Modifier_Succor_Move", "m_bIsPulling");
 		/// <summary><c>bool</c>.</summary>
 		public bool m_bIsPulling { get => Get<bool>(__m_bIsPulling); set => Set(__m_bIsPulling, value); }
+
+		/// <summary>The data entry this was created from, as <see cref="CCitadel_Modifier_Succor_MoveVData"/>, or null if it has none.</summary>
+		public new CCitadel_Modifier_Succor_MoveVData? VData => ModifierData<CCitadel_Modifier_Succor_MoveVData>();
 	}
 }

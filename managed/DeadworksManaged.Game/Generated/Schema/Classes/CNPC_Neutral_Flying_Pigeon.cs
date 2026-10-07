@@ -12,5 +12,8 @@ public static partial class Schema {
 		internal CNPC_Neutral_Flying_Pigeon() { }
 		static CNPC_Neutral_Flying_Pigeon ISchemaClass<CNPC_Neutral_Flying_Pigeon>.New() => new();
 		static string ISchemaClass<CNPC_Neutral_Flying_Pigeon>.NativeName => "CNPC_Neutral_Flying_Pigeon";
+
+		/// <summary>The data entry this was created from, as <see cref="CNPC_Neutral_Flying_PigeonVData"/>, or null if it has none.</summary>
+		public CNPC_Neutral_Flying_PigeonVData? VData => SubclassVData<CNPC_Neutral_Flying_PigeonVData>();
 	}
 }

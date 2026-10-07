@@ -102,12 +102,12 @@ public static partial class Schema {
 		public SchemaObjectList<NPCMovementBlockedClip_t> m_MovementBlockedClips => new(this, __m_MovementBlockedClips, -1);
 
 		private static readonly SchemaField __m_NpcInCombatModifier = new("CAI_CitadelNPCVData", "m_NpcInCombatModifier");
-		/// <summary><c>CEmbeddedSubclass&lt;CCitadelModifier&gt;</c>. No typed mapping yet: read it through its address.</summary>
-		public RawField m_NpcInCombatModifier => Raw(__m_NpcInCombatModifier, "CEmbeddedSubclass<CCitadelModifier>");
+		/// <summary><c>CEmbeddedSubclass&lt;CCitadelModifier&gt;</c>.</summary>
+		public CCitadelModifierVData? m_NpcInCombatModifier => EmbeddedSubclass<CCitadelModifierVData>(__m_NpcInCombatModifier);
 
 		private static readonly SchemaField __m_NpcOutOfCombatModifier = new("CAI_CitadelNPCVData", "m_NpcOutOfCombatModifier");
-		/// <summary><c>CEmbeddedSubclass&lt;CCitadelModifier&gt;</c>. No typed mapping yet: read it through its address.</summary>
-		public RawField m_NpcOutOfCombatModifier => Raw(__m_NpcOutOfCombatModifier, "CEmbeddedSubclass<CCitadelModifier>");
+		/// <summary><c>CEmbeddedSubclass&lt;CCitadelModifier&gt;</c>.</summary>
+		public CCitadelModifierVData? m_NpcOutOfCombatModifier => EmbeddedSubclass<CCitadelModifierVData>(__m_NpcOutOfCombatModifier);
 
 		private static readonly SchemaField __m_bDamageBreakableWithMelee = new("CAI_CitadelNPCVData", "m_bDamageBreakableWithMelee");
 		/// <summary><c>bool</c>.</summary>
@@ -238,8 +238,8 @@ public static partial class Schema {
 		public RawField m_mapBoundAbilities => Raw(__m_mapBoundAbilities, "CUtlOrderedMap<EAbilitySlots_t, CSubclassName>");
 
 		private static readonly SchemaField __m_mapWeaponInfos = new("CAI_CitadelNPCVData", "m_mapWeaponInfos");
-		/// <summary><c>CUtlOrderedMap&lt;CGlobalSymbol, CCitadelWeaponInfo&gt;</c>. Weapon infos keyed by context. The "primary" context is what GetWeaponInfoVData() returns by default. No typed mapping yet: read it through its address.</summary>
-		public RawField m_mapWeaponInfos => Raw(__m_mapWeaponInfos, "CUtlOrderedMap<CGlobalSymbol, CCitadelWeaponInfo>");
+		/// <summary><c>CUtlOrderedMap&lt;CGlobalSymbol, CCitadelWeaponInfo&gt;</c>. Weapon infos keyed by context. The "primary" context is what GetWeaponInfoVData() returns by default.</summary>
+		public SchemaDict<CCitadelWeaponInfo> m_mapWeaponInfos => new(this, __m_mapWeaponInfos);
 
 		private static readonly SchemaField __m_nSquadPriority = new("CAI_CitadelNPCVData", "m_nSquadPriority");
 		/// <summary><c>int32</c>.</summary>

@@ -26,12 +26,12 @@ public static partial class Schema {
 		public string m_OnBulletRolledProcSound => GetBufferString(__m_OnBulletRolledProcSound);
 
 		private static readonly SchemaField __m_PassiveVictimModifier = new("CCitadel_Modifier_Mirage_SandPhantom_Proc_VData", "m_PassiveVictimModifier");
-		/// <summary><c>CEmbeddedSubclass&lt;CCitadelModifier&gt;</c>. No typed mapping yet: read it through its address.</summary>
-		public RawField m_PassiveVictimModifier => Raw(__m_PassiveVictimModifier, "CEmbeddedSubclass<CCitadelModifier>");
+		/// <summary><c>CEmbeddedSubclass&lt;CCitadelModifier&gt;</c>.</summary>
+		public CCitadelModifierVData? m_PassiveVictimModifier => EmbeddedSubclass<CCitadelModifierVData>(__m_PassiveVictimModifier);
 
 		private static readonly SchemaField __m_ProcReadyModifier = new("CCitadel_Modifier_Mirage_SandPhantom_Proc_VData", "m_ProcReadyModifier");
-		/// <summary><c>CEmbeddedSubclass&lt;CCitadelModifier&gt;</c>. No typed mapping yet: read it through its address.</summary>
-		public RawField m_ProcReadyModifier => Raw(__m_ProcReadyModifier, "CEmbeddedSubclass<CCitadelModifier>");
+		/// <summary><c>CEmbeddedSubclass&lt;CCitadelModifier&gt;</c>.</summary>
+		public CCitadelModifierVData? m_ProcReadyModifier => EmbeddedSubclass<CCitadelModifierVData>(__m_ProcReadyModifier);
 
 		private static readonly SchemaField __m_ProcReadyParticle = new("CCitadel_Modifier_Mirage_SandPhantom_Proc_VData", "m_ProcReadyParticle");
 		/// <summary><c>CResourceNameTyped&lt;CWeakHandle&lt;InfoForResourceTypeIParticleSystemDefinition&gt;&gt;</c>.</summary>

@@ -14,19 +14,19 @@ public static partial class Schema {
 		static string ISchemaClass<CAbilityBouncePadVData>.NativeName => "CAbilityBouncePadVData";
 
 		private static readonly SchemaField __m_AllyBounceModifier = new("CAbilityBouncePadVData", "m_AllyBounceModifier");
-		/// <summary><c>CEmbeddedSubclass&lt;CCitadelModifier&gt;</c>. No typed mapping yet: read it through its address.</summary>
-		public RawField m_AllyBounceModifier => Raw(__m_AllyBounceModifier, "CEmbeddedSubclass<CCitadelModifier>");
+		/// <summary><c>CEmbeddedSubclass&lt;CCitadelModifier&gt;</c>.</summary>
+		public CCitadelModifierVData? m_AllyBounceModifier => EmbeddedSubclass<CCitadelModifierVData>(__m_AllyBounceModifier);
 
 		private static readonly SchemaField __m_BounceModifier = new("CAbilityBouncePadVData", "m_BounceModifier");
-		/// <summary><c>CEmbeddedSubclass&lt;CCitadelModifier&gt;</c>. No typed mapping yet: read it through its address.</summary>
-		public RawField m_BounceModifier => Raw(__m_BounceModifier, "CEmbeddedSubclass<CCitadelModifier>");
+		/// <summary><c>CEmbeddedSubclass&lt;CCitadelModifier&gt;</c>.</summary>
+		public CCitadelModifierVData? m_BounceModifier => EmbeddedSubclass<CCitadelModifierVData>(__m_BounceModifier);
 
 		private static readonly SchemaField __m_NoBounceModifier = new("CAbilityBouncePadVData", "m_NoBounceModifier");
-		/// <summary><c>CEmbeddedSubclass&lt;CCitadelModifier&gt;</c>. No typed mapping yet: read it through its address.</summary>
-		public RawField m_NoBounceModifier => Raw(__m_NoBounceModifier, "CEmbeddedSubclass<CCitadelModifier>");
+		/// <summary><c>CEmbeddedSubclass&lt;CCitadelModifier&gt;</c>.</summary>
+		public CCitadelModifierVData? m_NoBounceModifier => EmbeddedSubclass<CCitadelModifierVData>(__m_NoBounceModifier);
 
 		private static readonly SchemaField __m_SpeedOnLandModifier = new("CAbilityBouncePadVData", "m_SpeedOnLandModifier");
-		/// <summary><c>CEmbeddedSubclass&lt;CCitadelModifier&gt;</c>. No typed mapping yet: read it through its address.</summary>
-		public RawField m_SpeedOnLandModifier => Raw(__m_SpeedOnLandModifier, "CEmbeddedSubclass<CCitadelModifier>");
+		/// <summary><c>CEmbeddedSubclass&lt;CCitadelModifier&gt;</c>.</summary>
+		public CCitadelModifierVData? m_SpeedOnLandModifier => EmbeddedSubclass<CCitadelModifierVData>(__m_SpeedOnLandModifier);
 	}
 }

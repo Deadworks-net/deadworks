@@ -14,16 +14,16 @@ public static partial class Schema {
 		static string ISchemaClass<CCitadel_Ability_RocketBarrageVData>.NativeName => "CCitadel_Ability_RocketBarrageVData";
 
 		private static readonly SchemaField __m_BarrageModifier = new("CCitadel_Ability_RocketBarrageVData", "m_BarrageModifier");
-		/// <summary><c>CEmbeddedSubclass&lt;CCitadelModifier&gt;</c>. No typed mapping yet: read it through its address.</summary>
-		public RawField m_BarrageModifier => Raw(__m_BarrageModifier, "CEmbeddedSubclass<CCitadelModifier>");
+		/// <summary><c>CEmbeddedSubclass&lt;CCitadelModifier&gt;</c>.</summary>
+		public CCitadelModifierVData? m_BarrageModifier => EmbeddedSubclass<CCitadelModifierVData>(__m_BarrageModifier);
 
 		private static readonly SchemaField __m_ImpactParticle = new("CCitadel_Ability_RocketBarrageVData", "m_ImpactParticle");
 		/// <summary><c>CResourceNameTyped&lt;CWeakHandle&lt;InfoForResourceTypeIParticleSystemDefinition&gt;&gt;</c>.</summary>
 		public string m_ImpactParticle => GetBufferString(__m_ImpactParticle);
 
 		private static readonly SchemaField __m_MoveSlowModifier = new("CCitadel_Ability_RocketBarrageVData", "m_MoveSlowModifier");
-		/// <summary><c>CEmbeddedSubclass&lt;CCitadelModifier&gt;</c>. No typed mapping yet: read it through its address.</summary>
-		public RawField m_MoveSlowModifier => Raw(__m_MoveSlowModifier, "CEmbeddedSubclass<CCitadelModifier>");
+		/// <summary><c>CEmbeddedSubclass&lt;CCitadelModifier&gt;</c>.</summary>
+		public CCitadelModifierVData? m_MoveSlowModifier => EmbeddedSubclass<CCitadelModifierVData>(__m_MoveSlowModifier);
 
 		private static readonly SchemaField __m_cameraSequenceSelected = new("CCitadel_Ability_RocketBarrageVData", "m_cameraSequenceSelected");
 		/// <summary><c>CitadelCameraOperationsSequence_t</c>.</summary>

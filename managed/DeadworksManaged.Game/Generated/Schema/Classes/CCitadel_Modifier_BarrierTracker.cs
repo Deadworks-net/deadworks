@@ -20,5 +20,8 @@ public static partial class Schema {
 		private static readonly SchemaField __m_flMaxHealth = new("CCitadel_Modifier_BarrierTracker", "m_flMaxHealth");
 		/// <summary><c>float32</c>.</summary>
 		public float m_flMaxHealth { get => Get<float>(__m_flMaxHealth); set => Set(__m_flMaxHealth, value); }
+
+		/// <summary>The data entry this was created from, as <see cref="CCitadel_Modifier_BarrierTrackerVData"/>, or null if it has none.</summary>
+		public new CCitadel_Modifier_BarrierTrackerVData? VData => ModifierData<CCitadel_Modifier_BarrierTrackerVData>();
 	}
 }

@@ -26,8 +26,8 @@ public static partial class Schema {
 		public string m_TargetDamageParticle => GetBufferString(__m_TargetDamageParticle);
 
 		private static readonly SchemaField __m_TargetModifier = new("CAbility_Werewolf_FrenzyVData", "m_TargetModifier");
-		/// <summary><c>CEmbeddedSubclass&lt;CCitadelModifier&gt;</c>. No typed mapping yet: read it through its address.</summary>
-		public RawField m_TargetModifier => Raw(__m_TargetModifier, "CEmbeddedSubclass<CCitadelModifier>");
+		/// <summary><c>CEmbeddedSubclass&lt;CCitadelModifier&gt;</c>.</summary>
+		public CCitadelModifierVData? m_TargetModifier => EmbeddedSubclass<CCitadelModifierVData>(__m_TargetModifier);
 
 		private static readonly SchemaField __m_strHitConfirmSound = new("CAbility_Werewolf_FrenzyVData", "m_strHitConfirmSound");
 		/// <summary><c>CSoundEventName</c>.</summary>

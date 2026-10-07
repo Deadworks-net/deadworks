@@ -14,16 +14,16 @@ public static partial class Schema {
 		static string ISchemaClass<CCitadel_Modifier_UltimateBurst_ProcVData>.NativeName => "CCitadel_Modifier_UltimateBurst_ProcVData";
 
 		private static readonly SchemaField __m_DelayedEffectModifier = new("CCitadel_Modifier_UltimateBurst_ProcVData", "m_DelayedEffectModifier");
-		/// <summary><c>CEmbeddedSubclass&lt;CBaseModifier&gt;</c>. No typed mapping yet: read it through its address.</summary>
-		public RawField m_DelayedEffectModifier => Raw(__m_DelayedEffectModifier, "CEmbeddedSubclass<CBaseModifier>");
+		/// <summary><c>CEmbeddedSubclass&lt;CBaseModifier&gt;</c>.</summary>
+		public CModifierVData? m_DelayedEffectModifier => EmbeddedSubclass<CModifierVData>(__m_DelayedEffectModifier);
 
 		private static readonly SchemaField __m_LightningParticle = new("CCitadel_Modifier_UltimateBurst_ProcVData", "m_LightningParticle");
 		/// <summary><c>CResourceNameTyped&lt;CWeakHandle&lt;InfoForResourceTypeIParticleSystemDefinition&gt;&gt;</c>.</summary>
 		public string m_LightningParticle => GetBufferString(__m_LightningParticle);
 
 		private static readonly SchemaField __m_SlowModifier = new("CCitadel_Modifier_UltimateBurst_ProcVData", "m_SlowModifier");
-		/// <summary><c>CEmbeddedSubclass&lt;CBaseModifier&gt;</c>. No typed mapping yet: read it through its address.</summary>
-		public RawField m_SlowModifier => Raw(__m_SlowModifier, "CEmbeddedSubclass<CBaseModifier>");
+		/// <summary><c>CEmbeddedSubclass&lt;CBaseModifier&gt;</c>.</summary>
+		public CModifierVData? m_SlowModifier => EmbeddedSubclass<CModifierVData>(__m_SlowModifier);
 
 		private static readonly SchemaField __m_strLightningSound = new("CCitadel_Modifier_UltimateBurst_ProcVData", "m_strLightningSound");
 		/// <summary><c>CSoundEventName</c>.</summary>

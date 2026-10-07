@@ -16,5 +16,8 @@ public static partial class Schema {
 		private static readonly SchemaField __m_unItemID = new("CCitadel_Modifier_Econ", "m_unItemID");
 		/// <summary><c>itemid_t</c>.</summary>
 		public ulong m_unItemID { get => Get<ulong>(__m_unItemID); set => Set(__m_unItemID, value); }
+
+		/// <summary>The data entry this was created from, as <see cref="CCitadel_Modifier_EconVData"/>, or null if it has none.</summary>
+		public new CCitadel_Modifier_EconVData? VData => ModifierData<CCitadel_Modifier_EconVData>();
 	}
 }

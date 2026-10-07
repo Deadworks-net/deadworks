@@ -12,5 +12,8 @@ public static partial class Schema {
 		internal CCitadel_Modifier_ZiplineKnockdownImmune() { }
 		static CCitadel_Modifier_ZiplineKnockdownImmune ISchemaClass<CCitadel_Modifier_ZiplineKnockdownImmune>.New() => new();
 		static string ISchemaClass<CCitadel_Modifier_ZiplineKnockdownImmune>.NativeName => "CCitadel_Modifier_ZiplineKnockdownImmune";
+
+		/// <summary>The data entry this was created from, as <see cref="CCitadel_Modifier_ZiplineKnockdownImmuneVData"/>, or null if it has none.</summary>
+		public new CCitadel_Modifier_ZiplineKnockdownImmuneVData? VData => ModifierData<CCitadel_Modifier_ZiplineKnockdownImmuneVData>();
 	}
 }

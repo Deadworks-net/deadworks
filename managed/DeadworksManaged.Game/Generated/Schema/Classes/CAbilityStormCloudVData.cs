@@ -18,12 +18,12 @@ public static partial class Schema {
 		public string m_AoEPreviewParticle => GetBufferString(__m_AoEPreviewParticle);
 
 		private static readonly SchemaField __m_LightningStrikeAOEModifier = new("CAbilityStormCloudVData", "m_LightningStrikeAOEModifier");
-		/// <summary><c>CEmbeddedSubclass&lt;CCitadelModifier&gt;</c>. No typed mapping yet: read it through its address.</summary>
-		public RawField m_LightningStrikeAOEModifier => Raw(__m_LightningStrikeAOEModifier, "CEmbeddedSubclass<CCitadelModifier>");
+		/// <summary><c>CEmbeddedSubclass&lt;CCitadelModifier&gt;</c>.</summary>
+		public CCitadelModifierVData? m_LightningStrikeAOEModifier => EmbeddedSubclass<CCitadelModifierVData>(__m_LightningStrikeAOEModifier);
 
 		private static readonly SchemaField __m_StormCloudModifier = new("CAbilityStormCloudVData", "m_StormCloudModifier");
-		/// <summary><c>CEmbeddedSubclass&lt;CBaseModifier&gt;</c>. No typed mapping yet: read it through its address.</summary>
-		public RawField m_StormCloudModifier => Raw(__m_StormCloudModifier, "CEmbeddedSubclass<CBaseModifier>");
+		/// <summary><c>CEmbeddedSubclass&lt;CBaseModifier&gt;</c>.</summary>
+		public CModifierVData? m_StormCloudModifier => EmbeddedSubclass<CModifierVData>(__m_StormCloudModifier);
 
 		private static readonly SchemaField __m_flAirAcceleration = new("CAbilityStormCloudVData", "m_flAirAcceleration");
 		/// <summary><c>float32</c>.</summary>

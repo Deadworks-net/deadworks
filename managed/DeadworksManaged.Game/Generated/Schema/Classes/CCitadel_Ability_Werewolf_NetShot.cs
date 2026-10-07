@@ -12,5 +12,8 @@ public static partial class Schema {
 		internal CCitadel_Ability_Werewolf_NetShot() { }
 		static CCitadel_Ability_Werewolf_NetShot ISchemaClass<CCitadel_Ability_Werewolf_NetShot>.New() => new();
 		static string ISchemaClass<CCitadel_Ability_Werewolf_NetShot>.NativeName => "CCitadel_Ability_Werewolf_NetShot";
+
+		/// <summary>The data entry this was created from, as <see cref="CCitadel_Ability_Werewolf_NetShotVData"/>, or null if it has none.</summary>
+		public new CCitadel_Ability_Werewolf_NetShotVData? VData => SubclassVData<CCitadel_Ability_Werewolf_NetShotVData>();
 	}
 }

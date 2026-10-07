@@ -48,5 +48,8 @@ public static partial class Schema {
 		private static readonly SchemaField __m_vBouncedPlayerBefore = new("CCitadel_Bounce_Pad", "m_vBouncedPlayerBefore");
 		/// <summary><c>CUtlVector&lt;CHandle&lt;CBaseEntity&gt;&gt;</c>.</summary>
 		public SchemaHandleList<CBaseEntity> m_vBouncedPlayerBefore => new(this, __m_vBouncedPlayerBefore, -1);
+
+		/// <summary>The data entry this was created from, as <see cref="CCitadel_Bounce_PadVData"/>, or null if it has none.</summary>
+		public CCitadel_Bounce_PadVData? VData => SubclassVData<CCitadel_Bounce_PadVData>();
 	}
 }

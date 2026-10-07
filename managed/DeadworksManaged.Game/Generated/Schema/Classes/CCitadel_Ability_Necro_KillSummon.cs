@@ -20,5 +20,8 @@ public static partial class Schema {
 		private static readonly SchemaField __m_bIsInRecast = new("CCitadel_Ability_Necro_KillSummon", "m_bIsInRecast");
 		/// <summary><c>bool</c>.</summary>
 		public bool m_bIsInRecast { get => Get<bool>(__m_bIsInRecast); set => Set(__m_bIsInRecast, value); }
+
+		/// <summary>The data entry this was created from, as <see cref="CCitadel_Ability_Necro_KillSummonVData"/>, or null if it has none.</summary>
+		public new CCitadel_Ability_Necro_KillSummonVData? VData => SubclassVData<CCitadel_Ability_Necro_KillSummonVData>();
 	}
 }

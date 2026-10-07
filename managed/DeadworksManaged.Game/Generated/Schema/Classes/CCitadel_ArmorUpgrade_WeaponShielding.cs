@@ -12,5 +12,8 @@ public static partial class Schema {
 		internal CCitadel_ArmorUpgrade_WeaponShielding() { }
 		static CCitadel_ArmorUpgrade_WeaponShielding ISchemaClass<CCitadel_ArmorUpgrade_WeaponShielding>.New() => new();
 		static string ISchemaClass<CCitadel_ArmorUpgrade_WeaponShielding>.NativeName => "CCitadel_ArmorUpgrade_WeaponShielding";
+
+		/// <summary>The data entry this was created from, as <see cref="CCitadel_ArmorUpgrade_WeaponShieldingVData"/>, or null if it has none.</summary>
+		public new CCitadel_ArmorUpgrade_WeaponShieldingVData? VData => SubclassVData<CCitadel_ArmorUpgrade_WeaponShieldingVData>();
 	}
 }

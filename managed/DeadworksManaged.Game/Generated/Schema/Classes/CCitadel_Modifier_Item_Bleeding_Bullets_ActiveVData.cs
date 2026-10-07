@@ -14,12 +14,12 @@ public static partial class Schema {
 		static string ISchemaClass<CCitadel_Modifier_Item_Bleeding_Bullets_ActiveVData>.NativeName => "CCitadel_Modifier_Item_Bleeding_Bullets_ActiveVData";
 
 		private static readonly SchemaField __m_BleedModifier = new("CCitadel_Modifier_Item_Bleeding_Bullets_ActiveVData", "m_BleedModifier");
-		/// <summary><c>CEmbeddedSubclass&lt;CCitadelModifier&gt;</c>. No typed mapping yet: read it through its address.</summary>
-		public RawField m_BleedModifier => Raw(__m_BleedModifier, "CEmbeddedSubclass<CCitadelModifier>");
+		/// <summary><c>CEmbeddedSubclass&lt;CCitadelModifier&gt;</c>.</summary>
+		public CCitadelModifierVData? m_BleedModifier => EmbeddedSubclass<CCitadelModifierVData>(__m_BleedModifier);
 
 		private static readonly SchemaField __m_BuildUpModifier = new("CCitadel_Modifier_Item_Bleeding_Bullets_ActiveVData", "m_BuildUpModifier");
-		/// <summary><c>CEmbeddedSubclass&lt;CCitadel_Modifier_Base_Buildup&gt;</c>. No typed mapping yet: read it through its address.</summary>
-		public RawField m_BuildUpModifier => Raw(__m_BuildUpModifier, "CEmbeddedSubclass<CCitadel_Modifier_Base_Buildup>");
+		/// <summary><c>CEmbeddedSubclass&lt;CCitadel_Modifier_Base_Buildup&gt;</c>.</summary>
+		public CCitadel_Modifier_Base_BuildupVData? m_BuildUpModifier => EmbeddedSubclass<CCitadel_Modifier_Base_BuildupVData>(__m_BuildUpModifier);
 
 		private static readonly SchemaField __m_BulletImpactParticle = new("CCitadel_Modifier_Item_Bleeding_Bullets_ActiveVData", "m_BulletImpactParticle");
 		/// <summary><c>CResourceNameTyped&lt;CWeakHandle&lt;InfoForResourceTypeIParticleSystemDefinition&gt;&gt;</c>.</summary>

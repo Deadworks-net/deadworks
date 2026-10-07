@@ -12,5 +12,8 @@ public static partial class Schema {
 		internal CCitadel_ArmorUpgrade_SlowImmunity() { }
 		static CCitadel_ArmorUpgrade_SlowImmunity ISchemaClass<CCitadel_ArmorUpgrade_SlowImmunity>.New() => new();
 		static string ISchemaClass<CCitadel_ArmorUpgrade_SlowImmunity>.NativeName => "CCitadel_ArmorUpgrade_SlowImmunity";
+
+		/// <summary>The data entry this was created from, as <see cref="CCitadel_ArmorUpgrade_SlowImmunityVData"/>, or null if it has none.</summary>
+		public new CCitadel_ArmorUpgrade_SlowImmunityVData? VData => SubclassVData<CCitadel_ArmorUpgrade_SlowImmunityVData>();
 	}
 }

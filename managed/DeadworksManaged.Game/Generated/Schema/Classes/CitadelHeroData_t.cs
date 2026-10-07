@@ -166,36 +166,36 @@ public static partial class Schema {
 		public RawField m_mapBoundAbilities => Raw(__m_mapBoundAbilities, "CUtlOrderedMap<EAbilitySlots_t, CSubclassName>");
 
 		private static readonly SchemaField __m_mapItemDraftBucketing = new("CitadelHeroData_t", "m_mapItemDraftBucketing");
-		/// <summary><c>CUtlOrderedMap&lt;CUtlString, ItemDraftWeight_t&gt;</c>. No typed mapping yet: read it through its address.</summary>
-		public RawField m_mapItemDraftBucketing => Raw(__m_mapItemDraftBucketing, "CUtlOrderedMap<CUtlString, ItemDraftWeight_t>");
+		/// <summary><c>CUtlOrderedMap&lt;CUtlString, ItemDraftWeight_t&gt;</c>.</summary>
+		public SchemaDict<ItemDraftWeight_t> m_mapItemDraftBucketing => new(this, __m_mapItemDraftBucketing);
 
 		private static readonly SchemaField __m_mapItemDraftCounterWeights = new("CitadelHeroData_t", "m_mapItemDraftCounterWeights");
-		/// <summary><c>CUtlDict&lt;float32&gt;</c>. No typed mapping yet: read it through its address.</summary>
-		public RawField m_mapItemDraftCounterWeights => Raw(__m_mapItemDraftCounterWeights, "CUtlDict<float32>");
+		/// <summary><c>CUtlDict&lt;float32&gt;</c>.</summary>
+		public SchemaValueDict<float> m_mapItemDraftCounterWeights => new(this, __m_mapItemDraftCounterWeights);
 
 		private static readonly SchemaField __m_mapItemSlotInfo = new("CitadelHeroData_t", "m_mapItemSlotInfo");
-		/// <summary><c>CUtlOrderedMap&lt;EItemSlotTypes_t, ItemSlotInfo_t&gt;</c>. No typed mapping yet: read it through its address.</summary>
-		public RawField m_mapItemSlotInfo => Raw(__m_mapItemSlotInfo, "CUtlOrderedMap<EItemSlotTypes_t, ItemSlotInfo_t>");
+		/// <summary><c>CUtlOrderedMap&lt;EItemSlotTypes_t, ItemSlotInfo_t&gt;</c>.</summary>
+		public SchemaMap<EItemSlotTypes_t, ItemSlotInfo_t> m_mapItemSlotInfo => new(this, __m_mapItemSlotInfo);
 
 		private static readonly SchemaField __m_mapLevelInfo = new("CitadelHeroData_t", "m_mapLevelInfo");
-		/// <summary><c>CUtlOrderedMap&lt;int32, HeroLevel_t&gt;</c>. No typed mapping yet: read it through its address.</summary>
-		public RawField m_mapLevelInfo => Raw(__m_mapLevelInfo, "CUtlOrderedMap<int32, HeroLevel_t>");
+		/// <summary><c>CUtlOrderedMap&lt;int32, HeroLevel_t&gt;</c>.</summary>
+		public SchemaMap<int, HeroLevel_t> m_mapLevelInfo => new(this, __m_mapLevelInfo);
 
 		private static readonly SchemaField __m_mapModCostBonuses = new("CitadelHeroData_t", "m_mapModCostBonuses");
 		/// <summary><c>CUtlOrderedMap&lt;EItemSlotTypes_t, CUtlVector&lt;ModCostBonuses_t&gt;&gt;</c>. No typed mapping yet: read it through its address.</summary>
 		public RawField m_mapModCostBonuses => Raw(__m_mapModCostBonuses, "CUtlOrderedMap<EItemSlotTypes_t, CUtlVector<ModCostBonuses_t>>");
 
 		private static readonly SchemaField __m_mapScalingStats = new("CitadelHeroData_t", "m_mapScalingStats");
-		/// <summary><c>CUtlOrderedMap&lt;EStatsType, HeroScalingStat_t&gt;</c>. No typed mapping yet: read it through its address.</summary>
-		public RawField m_mapScalingStats => Raw(__m_mapScalingStats, "CUtlOrderedMap<EStatsType, HeroScalingStat_t>");
+		/// <summary><c>CUtlOrderedMap&lt;EStatsType, HeroScalingStat_t&gt;</c>.</summary>
+		public SchemaMap<EStatsType, HeroScalingStat_t> m_mapScalingStats => new(this, __m_mapScalingStats);
 
 		private static readonly SchemaField __m_mapStandardLevelUpUpgrades = new("CitadelHeroData_t", "m_mapStandardLevelUpUpgrades");
-		/// <summary><c>CUtlOrderedMap&lt;EModifierValue, float32&gt;</c>. No typed mapping yet: read it through its address.</summary>
-		public RawField m_mapStandardLevelUpUpgrades => Raw(__m_mapStandardLevelUpUpgrades, "CUtlOrderedMap<EModifierValue, float32>");
+		/// <summary><c>CUtlOrderedMap&lt;EModifierValue, float32&gt;</c>.</summary>
+		public SchemaValueMap<EModifierValue, float> m_mapStandardLevelUpUpgrades => new(this, __m_mapStandardLevelUpUpgrades);
 
 		private static readonly SchemaField __m_mapStartingStats = new("CitadelHeroData_t", "m_mapStartingStats");
-		/// <summary><c>CUtlOrderedMap&lt;EStatsType, float32&gt;</c>. No typed mapping yet: read it through its address.</summary>
-		public RawField m_mapStartingStats => Raw(__m_mapStartingStats, "CUtlOrderedMap<EStatsType, float32>");
+		/// <summary><c>CUtlOrderedMap&lt;EStatsType, float32&gt;</c>.</summary>
+		public SchemaValueMap<EStatsType, float> m_mapStartingStats => new(this, __m_mapStartingStats);
 
 		private static readonly SchemaField __m_mapWIPAbilities = new("CitadelHeroData_t", "m_mapWIPAbilities");
 		/// <summary><c>CUtlOrderedMap&lt;EAbilitySlots_t, CSubclassName&gt;</c>. No typed mapping yet: read it through its address.</summary>

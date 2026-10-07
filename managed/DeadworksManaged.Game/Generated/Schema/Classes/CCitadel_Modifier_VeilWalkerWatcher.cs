@@ -16,5 +16,8 @@ public static partial class Schema {
 		private static readonly SchemaField __m_vPreviousPos = new("CCitadel_Modifier_VeilWalkerWatcher", "m_vPreviousPos");
 		/// <summary><c>VectorWS</c>.</summary>
 		public Vector3 m_vPreviousPos { get => Get<Vector3>(__m_vPreviousPos); set => Set(__m_vPreviousPos, value); }
+
+		/// <summary>The data entry this was created from, as <see cref="CCitadel_Modifier_VeilWalkerWatcherVData"/>, or null if it has none.</summary>
+		public new CCitadel_Modifier_VeilWalkerWatcherVData? VData => ModifierData<CCitadel_Modifier_VeilWalkerWatcherVData>();
 	}
 }

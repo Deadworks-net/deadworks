@@ -12,5 +12,8 @@ public static partial class Schema {
 		internal CCitadelAbilityDruidPlantBranchWall() { }
 		static CCitadelAbilityDruidPlantBranchWall ISchemaClass<CCitadelAbilityDruidPlantBranchWall>.New() => new();
 		static string ISchemaClass<CCitadelAbilityDruidPlantBranchWall>.NativeName => "CCitadelAbilityDruidPlantBranchWall";
+
+		/// <summary>The data entry this was created from, as <see cref="CCitadelAbilityDruidPlantBranchWallVData"/>, or null if it has none.</summary>
+		public new CCitadelAbilityDruidPlantBranchWallVData? VData => SubclassVData<CCitadelAbilityDruidPlantBranchWallVData>();
 	}
 }

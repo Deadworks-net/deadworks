@@ -18,8 +18,8 @@ public static partial class Schema {
 		public string m_ExplosionParticle => GetBufferString(__m_ExplosionParticle);
 
 		private static readonly SchemaField __m_InFlightModifier = new("CCitadel_Ability_Fathom_Breach_VData", "m_InFlightModifier");
-		/// <summary><c>CEmbeddedSubclass&lt;CCitadelModifier&gt;</c>. No typed mapping yet: read it through its address.</summary>
-		public RawField m_InFlightModifier => Raw(__m_InFlightModifier, "CEmbeddedSubclass<CCitadelModifier>");
+		/// <summary><c>CEmbeddedSubclass&lt;CCitadelModifier&gt;</c>.</summary>
+		public CCitadelModifierVData? m_InFlightModifier => EmbeddedSubclass<CCitadelModifierVData>(__m_InFlightModifier);
 
 		private static readonly SchemaField __m_LeapParticle = new("CCitadel_Ability_Fathom_Breach_VData", "m_LeapParticle");
 		/// <summary><c>CResourceNameTyped&lt;CWeakHandle&lt;InfoForResourceTypeIParticleSystemDefinition&gt;&gt;</c>.</summary>

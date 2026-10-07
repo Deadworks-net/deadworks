@@ -12,5 +12,8 @@ public static partial class Schema {
 		internal CCitadel_Modifier_NearbyEnemyResist() { }
 		static CCitadel_Modifier_NearbyEnemyResist ISchemaClass<CCitadel_Modifier_NearbyEnemyResist>.New() => new();
 		static string ISchemaClass<CCitadel_Modifier_NearbyEnemyResist>.NativeName => "CCitadel_Modifier_NearbyEnemyResist";
+
+		/// <summary>The data entry this was created from, as <see cref="CCitadel_Modifier_NearbyEnemyResistVData"/>, or null if it has none.</summary>
+		public new CCitadel_Modifier_NearbyEnemyResistVData? VData => ModifierData<CCitadel_Modifier_NearbyEnemyResistVData>();
 	}
 }

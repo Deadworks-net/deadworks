@@ -12,5 +12,8 @@ public static partial class Schema {
 		internal CCitadel_Item_ModDisruptor() { }
 		static CCitadel_Item_ModDisruptor ISchemaClass<CCitadel_Item_ModDisruptor>.New() => new();
 		static string ISchemaClass<CCitadel_Item_ModDisruptor>.NativeName => "CCitadel_Item_ModDisruptor";
+
+		/// <summary>The data entry this was created from, as <see cref="CCitadel_Item_ModDisruptorVData"/>, or null if it has none.</summary>
+		public new CCitadel_Item_ModDisruptorVData? VData => SubclassVData<CCitadel_Item_ModDisruptorVData>();
 	}
 }

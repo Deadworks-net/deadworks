@@ -14,24 +14,24 @@ public static partial class Schema {
 		static string ISchemaClass<CAbilityBullChargeVData>.NativeName => "CAbilityBullChargeVData";
 
 		private static readonly SchemaField __m_ModifierBullCharging = new("CAbilityBullChargeVData", "m_ModifierBullCharging");
-		/// <summary><c>CEmbeddedSubclass&lt;CBaseModifier&gt;</c>. No typed mapping yet: read it through its address.</summary>
-		public RawField m_ModifierBullCharging => Raw(__m_ModifierBullCharging, "CEmbeddedSubclass<CBaseModifier>");
+		/// <summary><c>CEmbeddedSubclass&lt;CBaseModifier&gt;</c>.</summary>
+		public CModifierVData? m_ModifierBullCharging => EmbeddedSubclass<CModifierVData>(__m_ModifierBullCharging);
 
 		private static readonly SchemaField __m_ModifierChargeDragEnemy = new("CAbilityBullChargeVData", "m_ModifierChargeDragEnemy");
-		/// <summary><c>CEmbeddedSubclass&lt;CBaseModifier&gt;</c>. No typed mapping yet: read it through its address.</summary>
-		public RawField m_ModifierChargeDragEnemy => Raw(__m_ModifierChargeDragEnemy, "CEmbeddedSubclass<CBaseModifier>");
+		/// <summary><c>CEmbeddedSubclass&lt;CBaseModifier&gt;</c>.</summary>
+		public CModifierVData? m_ModifierChargeDragEnemy => EmbeddedSubclass<CModifierVData>(__m_ModifierChargeDragEnemy);
 
 		private static readonly SchemaField __m_ModifierTossAirControlLockout = new("CAbilityBullChargeVData", "m_ModifierTossAirControlLockout");
-		/// <summary><c>CEmbeddedSubclass&lt;CBaseModifier&gt;</c>. No typed mapping yet: read it through its address.</summary>
-		public RawField m_ModifierTossAirControlLockout => Raw(__m_ModifierTossAirControlLockout, "CEmbeddedSubclass<CBaseModifier>");
+		/// <summary><c>CEmbeddedSubclass&lt;CBaseModifier&gt;</c>.</summary>
+		public CModifierVData? m_ModifierTossAirControlLockout => EmbeddedSubclass<CModifierVData>(__m_ModifierTossAirControlLockout);
 
 		private static readonly SchemaField __m_ModifierWeaponPowerIncrease = new("CAbilityBullChargeVData", "m_ModifierWeaponPowerIncrease");
-		/// <summary><c>CEmbeddedSubclass&lt;CBaseModifier&gt;</c>. No typed mapping yet: read it through its address.</summary>
-		public RawField m_ModifierWeaponPowerIncrease => Raw(__m_ModifierWeaponPowerIncrease, "CEmbeddedSubclass<CBaseModifier>");
+		/// <summary><c>CEmbeddedSubclass&lt;CBaseModifier&gt;</c>.</summary>
+		public CModifierVData? m_ModifierWeaponPowerIncrease => EmbeddedSubclass<CModifierVData>(__m_ModifierWeaponPowerIncrease);
 
 		private static readonly SchemaField __m_SlowModifier = new("CAbilityBullChargeVData", "m_SlowModifier");
-		/// <summary><c>CEmbeddedSubclass&lt;CBaseModifier&gt;</c>. No typed mapping yet: read it through its address.</summary>
-		public RawField m_SlowModifier => Raw(__m_SlowModifier, "CEmbeddedSubclass<CBaseModifier>");
+		/// <summary><c>CEmbeddedSubclass&lt;CBaseModifier&gt;</c>.</summary>
+		public CModifierVData? m_SlowModifier => EmbeddedSubclass<CModifierVData>(__m_SlowModifier);
 
 		private static readonly SchemaField __m_WallImpactParticle = new("CAbilityBullChargeVData", "m_WallImpactParticle");
 		/// <summary><c>CResourceNameTyped&lt;CWeakHandle&lt;InfoForResourceTypeIParticleSystemDefinition&gt;&gt;</c>.</summary>

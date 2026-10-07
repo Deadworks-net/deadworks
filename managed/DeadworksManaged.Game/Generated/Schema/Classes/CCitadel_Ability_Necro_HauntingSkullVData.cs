@@ -14,8 +14,8 @@ public static partial class Schema {
 		static string ISchemaClass<CCitadel_Ability_Necro_HauntingSkullVData>.NativeName => "CCitadel_Ability_Necro_HauntingSkullVData";
 
 		private static readonly SchemaField __m_AreaModifier = new("CCitadel_Ability_Necro_HauntingSkullVData", "m_AreaModifier");
-		/// <summary><c>CEmbeddedSubclass&lt;CCitadelModifier&gt;</c>. No typed mapping yet: read it through its address.</summary>
-		public RawField m_AreaModifier => Raw(__m_AreaModifier, "CEmbeddedSubclass<CCitadelModifier>");
+		/// <summary><c>CEmbeddedSubclass&lt;CCitadelModifier&gt;</c>.</summary>
+		public CCitadelModifierVData? m_AreaModifier => EmbeddedSubclass<CCitadelModifierVData>(__m_AreaModifier);
 
 		private static readonly SchemaField __m_HeroResourceGainedParticle = new("CCitadel_Ability_Necro_HauntingSkullVData", "m_HeroResourceGainedParticle");
 		/// <summary><c>CResourceNameTyped&lt;CWeakHandle&lt;InfoForResourceTypeIParticleSystemDefinition&gt;&gt;</c>.</summary>
@@ -94,20 +94,20 @@ public static partial class Schema {
 		public string m_SkullTargetFoundParticle => GetBufferString(__m_SkullTargetFoundParticle);
 
 		private static readonly SchemaField __m_SlowModifier = new("CCitadel_Ability_Necro_HauntingSkullVData", "m_SlowModifier");
-		/// <summary><c>CEmbeddedSubclass&lt;CCitadelModifier&gt;</c>. No typed mapping yet: read it through its address.</summary>
-		public RawField m_SlowModifier => Raw(__m_SlowModifier, "CEmbeddedSubclass<CCitadelModifier>");
+		/// <summary><c>CEmbeddedSubclass&lt;CCitadelModifier&gt;</c>.</summary>
+		public CCitadelModifierVData? m_SlowModifier => EmbeddedSubclass<CCitadelModifierVData>(__m_SlowModifier);
 
 		private static readonly SchemaField __m_StackingDebuffModifier = new("CCitadel_Ability_Necro_HauntingSkullVData", "m_StackingDebuffModifier");
-		/// <summary><c>CEmbeddedSubclass&lt;CCitadelModifier&gt;</c>. No typed mapping yet: read it through its address.</summary>
-		public RawField m_StackingDebuffModifier => Raw(__m_StackingDebuffModifier, "CEmbeddedSubclass<CCitadelModifier>");
+		/// <summary><c>CEmbeddedSubclass&lt;CCitadelModifier&gt;</c>.</summary>
+		public CCitadelModifierVData? m_StackingDebuffModifier => EmbeddedSubclass<CCitadelModifierVData>(__m_StackingDebuffModifier);
 
 		private static readonly SchemaField __m_SummonBuffModifier = new("CCitadel_Ability_Necro_HauntingSkullVData", "m_SummonBuffModifier");
-		/// <summary><c>CEmbeddedSubclass&lt;CCitadelModifier&gt;</c>. No typed mapping yet: read it through its address.</summary>
-		public RawField m_SummonBuffModifier => Raw(__m_SummonBuffModifier, "CEmbeddedSubclass<CCitadelModifier>");
+		/// <summary><c>CEmbeddedSubclass&lt;CCitadelModifier&gt;</c>.</summary>
+		public CCitadelModifierVData? m_SummonBuffModifier => EmbeddedSubclass<CCitadelModifierVData>(__m_SummonBuffModifier);
 
 		private static readonly SchemaField __m_SummonModifier = new("CCitadel_Ability_Necro_HauntingSkullVData", "m_SummonModifier");
-		/// <summary><c>CEmbeddedSubclass&lt;CCitadelModifier&gt;</c>. No typed mapping yet: read it through its address.</summary>
-		public RawField m_SummonModifier => Raw(__m_SummonModifier, "CEmbeddedSubclass<CCitadelModifier>");
+		/// <summary><c>CEmbeddedSubclass&lt;CCitadelModifier&gt;</c>.</summary>
+		public CCitadelModifierVData? m_SummonModifier => EmbeddedSubclass<CCitadelModifierVData>(__m_SummonModifier);
 
 		private static readonly SchemaField __m_bAllowStackingDamageFromGun = new("CCitadel_Ability_Necro_HauntingSkullVData", "m_bAllowStackingDamageFromGun");
 		/// <summary><c>bool</c>.</summary>

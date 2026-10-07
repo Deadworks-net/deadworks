@@ -18,15 +18,15 @@ public static partial class Schema {
 		public string m_CastParticle => GetBufferString(__m_CastParticle);
 
 		private static readonly SchemaField __m_HowlDebuffModifier = new("CCitadel_Ability_Werewolf_TrackingBombVData", "m_HowlDebuffModifier");
-		/// <summary><c>CEmbeddedSubclass&lt;CCitadelModifier&gt;</c>. No typed mapping yet: read it through its address.</summary>
-		public RawField m_HowlDebuffModifier => Raw(__m_HowlDebuffModifier, "CEmbeddedSubclass<CCitadelModifier>");
+		/// <summary><c>CEmbeddedSubclass&lt;CCitadelModifier&gt;</c>.</summary>
+		public CCitadelModifierVData? m_HowlDebuffModifier => EmbeddedSubclass<CCitadelModifierVData>(__m_HowlDebuffModifier);
 
 		private static readonly SchemaField __m_SlowModifier = new("CCitadel_Ability_Werewolf_TrackingBombVData", "m_SlowModifier");
-		/// <summary><c>CEmbeddedSubclass&lt;CCitadelModifier&gt;</c>. No typed mapping yet: read it through its address.</summary>
-		public RawField m_SlowModifier => Raw(__m_SlowModifier, "CEmbeddedSubclass<CCitadelModifier>");
+		/// <summary><c>CEmbeddedSubclass&lt;CCitadelModifier&gt;</c>.</summary>
+		public CCitadelModifierVData? m_SlowModifier => EmbeddedSubclass<CCitadelModifierVData>(__m_SlowModifier);
 
 		private static readonly SchemaField __m_VialDebuffModifier = new("CCitadel_Ability_Werewolf_TrackingBombVData", "m_VialDebuffModifier");
-		/// <summary><c>CEmbeddedSubclass&lt;CCitadelModifier&gt;</c>. No typed mapping yet: read it through its address.</summary>
-		public RawField m_VialDebuffModifier => Raw(__m_VialDebuffModifier, "CEmbeddedSubclass<CCitadelModifier>");
+		/// <summary><c>CEmbeddedSubclass&lt;CCitadelModifier&gt;</c>.</summary>
+		public CCitadelModifierVData? m_VialDebuffModifier => EmbeddedSubclass<CCitadelModifierVData>(__m_VialDebuffModifier);
 	}
 }

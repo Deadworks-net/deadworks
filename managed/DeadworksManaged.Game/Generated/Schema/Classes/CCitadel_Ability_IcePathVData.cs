@@ -14,8 +14,8 @@ public static partial class Schema {
 		static string ISchemaClass<CCitadel_Ability_IcePathVData>.NativeName => "CCitadel_Ability_IcePathVData";
 
 		private static readonly SchemaField __m_IcePathModifier = new("CCitadel_Ability_IcePathVData", "m_IcePathModifier");
-		/// <summary><c>CEmbeddedSubclass&lt;CCitadelModifier&gt;</c>. No typed mapping yet: read it through its address.</summary>
-		public RawField m_IcePathModifier => Raw(__m_IcePathModifier, "CEmbeddedSubclass<CCitadelModifier>");
+		/// <summary><c>CEmbeddedSubclass&lt;CCitadelModifier&gt;</c>.</summary>
+		public CCitadelModifierVData? m_IcePathModifier => EmbeddedSubclass<CCitadelModifierVData>(__m_IcePathModifier);
 
 		private static readonly SchemaField __m_flForwardAngleBias = new("CCitadel_Ability_IcePathVData", "m_flForwardAngleBias");
 		/// <summary><c>float32</c>.</summary>

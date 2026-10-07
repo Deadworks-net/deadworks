@@ -22,16 +22,16 @@ public static partial class Schema {
 		public string m_FruitPickupParticle => GetBufferString(__m_FruitPickupParticle);
 
 		private static readonly SchemaField __m_HealingAuraModifier = new("CCitadelAbilityDruidPlantHealingTreeVData", "m_HealingAuraModifier");
-		/// <summary><c>CEmbeddedSubclass&lt;CCitadelModifier&gt;</c>. No typed mapping yet: read it through its address.</summary>
-		public RawField m_HealingAuraModifier => Raw(__m_HealingAuraModifier, "CEmbeddedSubclass<CCitadelModifier>");
+		/// <summary><c>CEmbeddedSubclass&lt;CCitadelModifier&gt;</c>.</summary>
+		public CCitadelModifierVData? m_HealingAuraModifier => EmbeddedSubclass<CCitadelModifierVData>(__m_HealingAuraModifier);
 
 		private static readonly SchemaField __m_HealingFruitModel = new("CCitadelAbilityDruidPlantHealingTreeVData", "m_HealingFruitModel");
 		/// <summary><c>CResourceNameTyped&lt;CWeakHandle&lt;InfoForResourceTypeCModel&gt;&gt;</c>.</summary>
 		public string m_HealingFruitModel => GetBufferString(__m_HealingFruitModel);
 
 		private static readonly SchemaField __m_HealingFruitModifier = new("CCitadelAbilityDruidPlantHealingTreeVData", "m_HealingFruitModifier");
-		/// <summary><c>CEmbeddedSubclass&lt;CCitadelModifier&gt;</c>. No typed mapping yet: read it through its address.</summary>
-		public RawField m_HealingFruitModifier => Raw(__m_HealingFruitModifier, "CEmbeddedSubclass<CCitadelModifier>");
+		/// <summary><c>CEmbeddedSubclass&lt;CCitadelModifier&gt;</c>.</summary>
+		public CCitadelModifierVData? m_HealingFruitModifier => EmbeddedSubclass<CCitadelModifierVData>(__m_HealingFruitModifier);
 
 		private static readonly SchemaField __m_HealingTreeModel = new("CCitadelAbilityDruidPlantHealingTreeVData", "m_HealingTreeModel");
 		/// <summary><c>CResourceNameTyped&lt;CWeakHandle&lt;InfoForResourceTypeCModel&gt;&gt;</c>.</summary>

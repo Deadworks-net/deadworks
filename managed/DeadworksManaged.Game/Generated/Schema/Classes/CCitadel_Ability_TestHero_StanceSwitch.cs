@@ -16,5 +16,8 @@ public static partial class Schema {
 		private static readonly SchemaField __m_bStanceActive = new("CCitadel_Ability_TestHero_StanceSwitch", "m_bStanceActive");
 		/// <summary><c>bool</c>.</summary>
 		public bool m_bStanceActive { get => Get<bool>(__m_bStanceActive); set => Set(__m_bStanceActive, value); }
+
+		/// <summary>The data entry this was created from, as <see cref="CCitadel_Ability_TestHero_StanceSwitchVData"/>, or null if it has none.</summary>
+		public new CCitadel_Ability_TestHero_StanceSwitchVData? VData => SubclassVData<CCitadel_Ability_TestHero_StanceSwitchVData>();
 	}
 }

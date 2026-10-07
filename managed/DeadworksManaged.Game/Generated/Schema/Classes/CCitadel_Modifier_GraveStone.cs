@@ -24,5 +24,8 @@ public static partial class Schema {
 		private static readonly SchemaField __m_nParticleIndexAura = new("CCitadel_Modifier_GraveStone", "m_nParticleIndexAura");
 		/// <summary><c>ParticleIndex_t</c>.</summary>
 		public int m_nParticleIndexAura { get => Get<int>(__m_nParticleIndexAura); set => Set(__m_nParticleIndexAura, value); }
+
+		/// <summary>The data entry this was created from, as <see cref="CCitadel_Modifier_GraveStoneVData"/>, or null if it has none.</summary>
+		public new CCitadel_Modifier_GraveStoneVData? VData => ModifierData<CCitadel_Modifier_GraveStoneVData>();
 	}
 }

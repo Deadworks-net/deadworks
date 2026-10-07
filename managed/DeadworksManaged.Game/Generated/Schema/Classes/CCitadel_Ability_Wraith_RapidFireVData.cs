@@ -18,8 +18,8 @@ public static partial class Schema {
 		public string m_CastParticle => GetBufferString(__m_CastParticle);
 
 		private static readonly SchemaField __m_RapidFireModifier = new("CCitadel_Ability_Wraith_RapidFireVData", "m_RapidFireModifier");
-		/// <summary><c>CEmbeddedSubclass&lt;CCitadelModifier&gt;</c>. No typed mapping yet: read it through its address.</summary>
-		public RawField m_RapidFireModifier => Raw(__m_RapidFireModifier, "CEmbeddedSubclass<CCitadelModifier>");
+		/// <summary><c>CEmbeddedSubclass&lt;CCitadelModifier&gt;</c>.</summary>
+		public CCitadelModifierVData? m_RapidFireModifier => EmbeddedSubclass<CCitadelModifierVData>(__m_RapidFireModifier);
 
 		private static readonly SchemaField __m_TargetBuffSound = new("CCitadel_Ability_Wraith_RapidFireVData", "m_TargetBuffSound");
 		/// <summary><c>CSoundEventName</c>.</summary>

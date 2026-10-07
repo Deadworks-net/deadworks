@@ -14,8 +14,8 @@ public static partial class Schema {
 		static string ISchemaClass<ProjectileInfo_t>.NativeName => "ProjectileInfo_t";
 
 		private static readonly SchemaField __m_AutoProjectileModifier = new("ProjectileInfo_t", "m_AutoProjectileModifier");
-		/// <summary><c>CEmbeddedSubclass&lt;CBaseModifier&gt;</c>. No typed mapping yet: read it through its address.</summary>
-		public RawField m_AutoProjectileModifier => Raw(__m_AutoProjectileModifier, "CEmbeddedSubclass<CBaseModifier>");
+		/// <summary><c>CEmbeddedSubclass&lt;CBaseModifier&gt;</c>.</summary>
+		public CModifierVData? m_AutoProjectileModifier => EmbeddedSubclass<CModifierVData>(__m_AutoProjectileModifier);
 
 		private static readonly SchemaField __m_DetonateSound = new("ProjectileInfo_t", "m_DetonateSound");
 		/// <summary><c>CSoundEventName</c>. Plays when a projectile detonates. Not all projectiles detonate.</summary>

@@ -14,36 +14,36 @@ public static partial class Schema {
 		static string ISchemaClass<CAbilityPunkgoatGoatFlipVData>.NativeName => "CAbilityPunkgoatGoatFlipVData";
 
 		private static readonly SchemaField __m_Charging = new("CAbilityPunkgoatGoatFlipVData", "m_Charging");
-		/// <summary><c>CEmbeddedSubclass&lt;CCitadelModifier&gt;</c>. No typed mapping yet: read it through its address.</summary>
-		public RawField m_Charging => Raw(__m_Charging, "CEmbeddedSubclass<CCitadelModifier>");
+		/// <summary><c>CEmbeddedSubclass&lt;CCitadelModifier&gt;</c>.</summary>
+		public CCitadelModifierVData? m_Charging => EmbeddedSubclass<CCitadelModifierVData>(__m_Charging);
 
 		private static readonly SchemaField __m_ChargingSpeedCurve = new("CAbilityPunkgoatGoatFlipVData", "m_ChargingSpeedCurve");
 		/// <summary><c>CPiecewiseCurve</c>. No typed mapping yet: read it through its address.</summary>
 		public RawField m_ChargingSpeedCurve => Raw(__m_ChargingSpeedCurve, "CPiecewiseCurve");
 
 		private static readonly SchemaField __m_DamageBuff = new("CAbilityPunkgoatGoatFlipVData", "m_DamageBuff");
-		/// <summary><c>CEmbeddedSubclass&lt;CCitadelModifier&gt;</c>. No typed mapping yet: read it through its address.</summary>
-		public RawField m_DamageBuff => Raw(__m_DamageBuff, "CEmbeddedSubclass<CCitadelModifier>");
+		/// <summary><c>CEmbeddedSubclass&lt;CCitadelModifier&gt;</c>.</summary>
+		public CCitadelModifierVData? m_DamageBuff => EmbeddedSubclass<CCitadelModifierVData>(__m_DamageBuff);
 
 		private static readonly SchemaField __m_EmpowerMelee = new("CAbilityPunkgoatGoatFlipVData", "m_EmpowerMelee");
-		/// <summary><c>CEmbeddedSubclass&lt;CCitadelModifier&gt;</c>. No typed mapping yet: read it through its address.</summary>
-		public RawField m_EmpowerMelee => Raw(__m_EmpowerMelee, "CEmbeddedSubclass<CCitadelModifier>");
+		/// <summary><c>CEmbeddedSubclass&lt;CCitadelModifier&gt;</c>.</summary>
+		public CCitadelModifierVData? m_EmpowerMelee => EmbeddedSubclass<CCitadelModifierVData>(__m_EmpowerMelee);
 
 		private static readonly SchemaField __m_GoatGoingUp = new("CAbilityPunkgoatGoatFlipVData", "m_GoatGoingUp");
-		/// <summary><c>CEmbeddedSubclass&lt;CCitadelModifier&gt;</c>. No typed mapping yet: read it through its address.</summary>
-		public RawField m_GoatGoingUp => Raw(__m_GoatGoingUp, "CEmbeddedSubclass<CCitadelModifier>");
+		/// <summary><c>CEmbeddedSubclass&lt;CCitadelModifier&gt;</c>.</summary>
+		public CCitadelModifierVData? m_GoatGoingUp => EmbeddedSubclass<CCitadelModifierVData>(__m_GoatGoingUp);
 
 		private static readonly SchemaField __m_GoingUpSpeedCurve = new("CAbilityPunkgoatGoatFlipVData", "m_GoingUpSpeedCurve");
 		/// <summary><c>CPiecewiseCurve</c>. No typed mapping yet: read it through its address.</summary>
 		public RawField m_GoingUpSpeedCurve => Raw(__m_GoingUpSpeedCurve, "CPiecewiseCurve");
 
 		private static readonly SchemaField __m_LingeringAirControl = new("CAbilityPunkgoatGoatFlipVData", "m_LingeringAirControl");
-		/// <summary><c>CEmbeddedSubclass&lt;CCitadelModifier&gt;</c>. No typed mapping yet: read it through its address.</summary>
-		public RawField m_LingeringAirControl => Raw(__m_LingeringAirControl, "CEmbeddedSubclass<CCitadelModifier>");
+		/// <summary><c>CEmbeddedSubclass&lt;CCitadelModifier&gt;</c>.</summary>
+		public CCitadelModifierVData? m_LingeringAirControl => EmbeddedSubclass<CCitadelModifierVData>(__m_LingeringAirControl);
 
 		private static readonly SchemaField __m_MaxHealthBuff = new("CAbilityPunkgoatGoatFlipVData", "m_MaxHealthBuff");
-		/// <summary><c>CEmbeddedSubclass&lt;CCitadelModifier&gt;</c>. No typed mapping yet: read it through its address.</summary>
-		public RawField m_MaxHealthBuff => Raw(__m_MaxHealthBuff, "CEmbeddedSubclass<CCitadelModifier>");
+		/// <summary><c>CEmbeddedSubclass&lt;CCitadelModifier&gt;</c>.</summary>
+		public CCitadelModifierVData? m_MaxHealthBuff => EmbeddedSubclass<CCitadelModifierVData>(__m_MaxHealthBuff);
 
 		private static readonly SchemaField __m_flDelayBeforeCasterRegainsControlAfterFlip = new("CAbilityPunkgoatGoatFlipVData", "m_flDelayBeforeCasterRegainsControlAfterFlip");
 		/// <summary><c>float32</c>.</summary>

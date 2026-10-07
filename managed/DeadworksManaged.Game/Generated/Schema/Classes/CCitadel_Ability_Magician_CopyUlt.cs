@@ -44,5 +44,8 @@ public static partial class Schema {
 		private static readonly SchemaField __m_vecLingeringCopiedAbilities = new("CCitadel_Ability_Magician_CopyUlt", "m_vecLingeringCopiedAbilities");
 		/// <summary><c>CUtlVector&lt;LingeringCopiedAbility_t&gt;</c>.</summary>
 		public SchemaObjectList<LingeringCopiedAbility_t> m_vecLingeringCopiedAbilities => new(this, __m_vecLingeringCopiedAbilities, -1);
+
+		/// <summary>The data entry this was created from, as <see cref="CCitadel_Ability_Magician_CopyUltVData"/>, or null if it has none.</summary>
+		public new CCitadel_Ability_Magician_CopyUltVData? VData => SubclassVData<CCitadel_Ability_Magician_CopyUltVData>();
 	}
 }

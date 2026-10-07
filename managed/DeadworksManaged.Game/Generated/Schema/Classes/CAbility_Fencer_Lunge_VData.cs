@@ -14,8 +14,8 @@ public static partial class Schema {
 		static string ISchemaClass<CAbility_Fencer_Lunge_VData>.NativeName => "CAbility_Fencer_Lunge_VData";
 
 		private static readonly SchemaField __m_DashBuffModifier = new("CAbility_Fencer_Lunge_VData", "m_DashBuffModifier");
-		/// <summary><c>CEmbeddedSubclass&lt;CCitadelModifier&gt;</c>. No typed mapping yet: read it through its address.</summary>
-		public RawField m_DashBuffModifier => Raw(__m_DashBuffModifier, "CEmbeddedSubclass<CCitadelModifier>");
+		/// <summary><c>CEmbeddedSubclass&lt;CCitadelModifier&gt;</c>.</summary>
+		public CCitadelModifierVData? m_DashBuffModifier => EmbeddedSubclass<CCitadelModifierVData>(__m_DashBuffModifier);
 
 		private static readonly SchemaField __m_DashImpactEffect = new("CAbility_Fencer_Lunge_VData", "m_DashImpactEffect");
 		/// <summary><c>CResourceNameTyped&lt;CWeakHandle&lt;InfoForResourceTypeIParticleSystemDefinition&gt;&gt;</c>.</summary>
@@ -50,8 +50,8 @@ public static partial class Schema {
 		public string m_SwordChargeEffect => GetBufferString(__m_SwordChargeEffect);
 
 		private static readonly SchemaField __m_UIRecastModifier = new("CAbility_Fencer_Lunge_VData", "m_UIRecastModifier");
-		/// <summary><c>CEmbeddedSubclass&lt;CCitadelModifier&gt;</c>. No typed mapping yet: read it through its address.</summary>
-		public RawField m_UIRecastModifier => Raw(__m_UIRecastModifier, "CEmbeddedSubclass<CCitadelModifier>");
+		/// <summary><c>CEmbeddedSubclass&lt;CCitadelModifier&gt;</c>.</summary>
+		public CCitadelModifierVData? m_UIRecastModifier => EmbeddedSubclass<CCitadelModifierVData>(__m_UIRecastModifier);
 
 		private static readonly SchemaField __m_cameraSequencePreRelease = new("CAbility_Fencer_Lunge_VData", "m_cameraSequencePreRelease");
 		/// <summary><c>CitadelCameraOperationsSequence_t</c>.</summary>

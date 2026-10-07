@@ -14,7 +14,7 @@ public static partial class Schema {
 		static string ISchemaClass<CAbilityCadenceLullabyVData>.NativeName => "CAbilityCadenceLullabyVData";
 
 		private static readonly SchemaField __m_SleepAOEModifier = new("CAbilityCadenceLullabyVData", "m_SleepAOEModifier");
-		/// <summary><c>CEmbeddedSubclass&lt;CCitadelModifier&gt;</c>. No typed mapping yet: read it through its address.</summary>
-		public RawField m_SleepAOEModifier => Raw(__m_SleepAOEModifier, "CEmbeddedSubclass<CCitadelModifier>");
+		/// <summary><c>CEmbeddedSubclass&lt;CCitadelModifier&gt;</c>.</summary>
+		public CCitadelModifierVData? m_SleepAOEModifier => EmbeddedSubclass<CCitadelModifierVData>(__m_SleepAOEModifier);
 	}
 }

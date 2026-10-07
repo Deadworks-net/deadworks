@@ -14,8 +14,8 @@ public static partial class Schema {
 		static string ISchemaClass<CAbilityVandalOverflowVData>.NativeName => "CAbilityVandalOverflowVData";
 
 		private static readonly SchemaField __m_LiftModifier = new("CAbilityVandalOverflowVData", "m_LiftModifier");
-		/// <summary><c>CEmbeddedSubclass&lt;CCitadelModifier&gt;</c>. No typed mapping yet: read it through its address.</summary>
-		public RawField m_LiftModifier => Raw(__m_LiftModifier, "CEmbeddedSubclass<CCitadelModifier>");
+		/// <summary><c>CEmbeddedSubclass&lt;CCitadelModifier&gt;</c>.</summary>
+		public CCitadelModifierVData? m_LiftModifier => EmbeddedSubclass<CCitadelModifierVData>(__m_LiftModifier);
 
 		private static readonly SchemaField __m_TargetCastSound = new("CAbilityVandalOverflowVData", "m_TargetCastSound");
 		/// <summary><c>CSoundEventName</c>.</summary>

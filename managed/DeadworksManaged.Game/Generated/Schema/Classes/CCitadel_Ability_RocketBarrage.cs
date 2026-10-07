@@ -32,5 +32,8 @@ public static partial class Schema {
 		private static readonly SchemaField __m_vecAimVel = new("CCitadel_Ability_RocketBarrage", "m_vecAimVel");
 		/// <summary><c>Vector</c>.</summary>
 		public Vector3 m_vecAimVel { get => Get<Vector3>(__m_vecAimVel); set => Set(__m_vecAimVel, value); }
+
+		/// <summary>The data entry this was created from, as <see cref="CCitadel_Ability_RocketBarrageVData"/>, or null if it has none.</summary>
+		public new CCitadel_Ability_RocketBarrageVData? VData => SubclassVData<CCitadel_Ability_RocketBarrageVData>();
 	}
 }

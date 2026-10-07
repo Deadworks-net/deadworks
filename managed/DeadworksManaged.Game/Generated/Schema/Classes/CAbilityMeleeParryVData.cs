@@ -18,28 +18,28 @@ public static partial class Schema {
 		public string m_ActiveParryParticle => GetBufferString(__m_ActiveParryParticle);
 
 		private static readonly SchemaField __m_ParryActiveModifier = new("CAbilityMeleeParryVData", "m_ParryActiveModifier");
-		/// <summary><c>CEmbeddedSubclass&lt;CCitadelModifier&gt;</c>. No typed mapping yet: read it through its address.</summary>
-		public RawField m_ParryActiveModifier => Raw(__m_ParryActiveModifier, "CEmbeddedSubclass<CCitadelModifier>");
+		/// <summary><c>CEmbeddedSubclass&lt;CCitadelModifier&gt;</c>.</summary>
+		public CCitadelModifierVData? m_ParryActiveModifier => EmbeddedSubclass<CCitadelModifierVData>(__m_ParryActiveModifier);
 
 		private static readonly SchemaField __m_ParryBossVictimCalmModifier = new("CAbilityMeleeParryVData", "m_ParryBossVictimCalmModifier");
-		/// <summary><c>CEmbeddedSubclass&lt;CCitadelModifier&gt;</c>. No typed mapping yet: read it through its address.</summary>
-		public RawField m_ParryBossVictimCalmModifier => Raw(__m_ParryBossVictimCalmModifier, "CEmbeddedSubclass<CCitadelModifier>");
+		/// <summary><c>CEmbeddedSubclass&lt;CCitadelModifier&gt;</c>.</summary>
+		public CCitadelModifierVData? m_ParryBossVictimCalmModifier => EmbeddedSubclass<CCitadelModifierVData>(__m_ParryBossVictimCalmModifier);
 
 		private static readonly SchemaField __m_ParryBossVictimNoMeleeModifier = new("CAbilityMeleeParryVData", "m_ParryBossVictimNoMeleeModifier");
-		/// <summary><c>CEmbeddedSubclass&lt;CCitadelModifier&gt;</c>. No typed mapping yet: read it through its address.</summary>
-		public RawField m_ParryBossVictimNoMeleeModifier => Raw(__m_ParryBossVictimNoMeleeModifier, "CEmbeddedSubclass<CCitadelModifier>");
+		/// <summary><c>CEmbeddedSubclass&lt;CCitadelModifier&gt;</c>.</summary>
+		public CCitadelModifierVData? m_ParryBossVictimNoMeleeModifier => EmbeddedSubclass<CCitadelModifierVData>(__m_ParryBossVictimNoMeleeModifier);
 
 		private static readonly SchemaField __m_ParryCooldownModifier = new("CAbilityMeleeParryVData", "m_ParryCooldownModifier");
-		/// <summary><c>CEmbeddedSubclass&lt;CCitadelModifier&gt;</c>. No typed mapping yet: read it through its address.</summary>
-		public RawField m_ParryCooldownModifier => Raw(__m_ParryCooldownModifier, "CEmbeddedSubclass<CCitadelModifier>");
+		/// <summary><c>CEmbeddedSubclass&lt;CCitadelModifier&gt;</c>.</summary>
+		public CCitadelModifierVData? m_ParryCooldownModifier => EmbeddedSubclass<CCitadelModifierVData>(__m_ParryCooldownModifier);
 
 		private static readonly SchemaField __m_ParryEndVisualModifier = new("CAbilityMeleeParryVData", "m_ParryEndVisualModifier");
-		/// <summary><c>CEmbeddedSubclass&lt;CCitadelModifier&gt;</c>. No typed mapping yet: read it through its address.</summary>
-		public RawField m_ParryEndVisualModifier => Raw(__m_ParryEndVisualModifier, "CEmbeddedSubclass<CCitadelModifier>");
+		/// <summary><c>CEmbeddedSubclass&lt;CCitadelModifier&gt;</c>.</summary>
+		public CCitadelModifierVData? m_ParryEndVisualModifier => EmbeddedSubclass<CCitadelModifierVData>(__m_ParryEndVisualModifier);
 
 		private static readonly SchemaField __m_ParryVictimModifier = new("CAbilityMeleeParryVData", "m_ParryVictimModifier");
-		/// <summary><c>CEmbeddedSubclass&lt;CCitadelModifier&gt;</c>. No typed mapping yet: read it through its address.</summary>
-		public RawField m_ParryVictimModifier => Raw(__m_ParryVictimModifier, "CEmbeddedSubclass<CCitadelModifier>");
+		/// <summary><c>CEmbeddedSubclass&lt;CCitadelModifier&gt;</c>.</summary>
+		public CCitadelModifierVData? m_ParryVictimModifier => EmbeddedSubclass<CCitadelModifierVData>(__m_ParryVictimModifier);
 
 		private static readonly SchemaField __m_SuccessfulAbilityParryParticle = new("CAbilityMeleeParryVData", "m_SuccessfulAbilityParryParticle");
 		/// <summary><c>CResourceNameTyped&lt;CWeakHandle&lt;InfoForResourceTypeIParticleSystemDefinition&gt;&gt;</c>.</summary>

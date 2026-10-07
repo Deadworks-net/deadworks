@@ -20,5 +20,8 @@ public static partial class Schema {
 		private static readonly SchemaField __m_flRadius = new("CCitadel_Modifier_SpilledBloodThinker", "m_flRadius");
 		/// <summary><c>float32</c>.</summary>
 		public float m_flRadius { get => Get<float>(__m_flRadius); set => Set(__m_flRadius, value); }
+
+		/// <summary>The data entry this was created from, as <see cref="CCitadel_Modifier_SpilledBloodThinkerVData"/>, or null if it has none.</summary>
+		public new CCitadel_Modifier_SpilledBloodThinkerVData? VData => ModifierData<CCitadel_Modifier_SpilledBloodThinkerVData>();
 	}
 }

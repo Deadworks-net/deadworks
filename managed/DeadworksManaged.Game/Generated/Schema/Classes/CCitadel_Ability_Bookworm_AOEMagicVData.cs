@@ -14,8 +14,8 @@ public static partial class Schema {
 		static string ISchemaClass<CCitadel_Ability_Bookworm_AOEMagicVData>.NativeName => "CCitadel_Ability_Bookworm_AOEMagicVData";
 
 		private static readonly SchemaField __m_AreaModifier = new("CCitadel_Ability_Bookworm_AOEMagicVData", "m_AreaModifier");
-		/// <summary><c>CEmbeddedSubclass&lt;CCitadelModifier&gt;</c>. No typed mapping yet: read it through its address.</summary>
-		public RawField m_AreaModifier => Raw(__m_AreaModifier, "CEmbeddedSubclass<CCitadelModifier>");
+		/// <summary><c>CEmbeddedSubclass&lt;CCitadelModifier&gt;</c>.</summary>
+		public CCitadelModifierVData? m_AreaModifier => EmbeddedSubclass<CCitadelModifierVData>(__m_AreaModifier);
 
 		private static readonly SchemaField __m_flGroundDistance = new("CCitadel_Ability_Bookworm_AOEMagicVData", "m_flGroundDistance");
 		/// <summary><c>float32</c>.</summary>

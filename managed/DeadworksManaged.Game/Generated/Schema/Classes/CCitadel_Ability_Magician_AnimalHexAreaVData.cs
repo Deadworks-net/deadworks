@@ -18,8 +18,8 @@ public static partial class Schema {
 		public string m_AreaWarningEffect => GetBufferString(__m_AreaWarningEffect);
 
 		private static readonly SchemaField __m_HexAreaModifier = new("CCitadel_Ability_Magician_AnimalHexAreaVData", "m_HexAreaModifier");
-		/// <summary><c>CEmbeddedSubclass&lt;CCitadelModifier&gt;</c>. No typed mapping yet: read it through its address.</summary>
-		public RawField m_HexAreaModifier => Raw(__m_HexAreaModifier, "CEmbeddedSubclass<CCitadelModifier>");
+		/// <summary><c>CEmbeddedSubclass&lt;CCitadelModifier&gt;</c>.</summary>
+		public CCitadelModifierVData? m_HexAreaModifier => EmbeddedSubclass<CCitadelModifierVData>(__m_HexAreaModifier);
 
 		private static readonly SchemaField __m_ProjectileHitConfirm = new("CCitadel_Ability_Magician_AnimalHexAreaVData", "m_ProjectileHitConfirm");
 		/// <summary><c>CSoundEventName</c>.</summary>

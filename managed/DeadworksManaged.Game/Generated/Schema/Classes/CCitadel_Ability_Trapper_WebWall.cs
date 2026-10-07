@@ -28,5 +28,8 @@ public static partial class Schema {
 		private static readonly SchemaField __m_vecEndPositionNormal = new("CCitadel_Ability_Trapper_WebWall", "m_vecEndPositionNormal");
 		/// <summary><c>Vector</c>.</summary>
 		public Vector3 m_vecEndPositionNormal { get => Get<Vector3>(__m_vecEndPositionNormal); set => Set(__m_vecEndPositionNormal, value); }
+
+		/// <summary>The data entry this was created from, as <see cref="CCitadel_Ability_Trapper_WebWallVData"/>, or null if it has none.</summary>
+		public new CCitadel_Ability_Trapper_WebWallVData? VData => SubclassVData<CCitadel_Ability_Trapper_WebWallVData>();
 	}
 }

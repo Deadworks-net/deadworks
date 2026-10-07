@@ -16,5 +16,8 @@ public static partial class Schema {
 		private static readonly SchemaField __fl_StoredDamage = new("CCitadel_TechUpgrade_SuperAcolyteGloves", "fl_StoredDamage");
 		/// <summary><c>float32</c>.</summary>
 		public float fl_StoredDamage { get => Get<float>(__fl_StoredDamage); set => Set(__fl_StoredDamage, value); }
+
+		/// <summary>The data entry this was created from, as <see cref="CCitadel_TechUpgrade_SuperAcolyteGlovesVData"/>, or null if it has none.</summary>
+		public new CCitadel_TechUpgrade_SuperAcolyteGlovesVData? VData => SubclassVData<CCitadel_TechUpgrade_SuperAcolyteGlovesVData>();
 	}
 }

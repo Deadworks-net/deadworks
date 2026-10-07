@@ -18,8 +18,8 @@ public static partial class Schema {
 		public string m_BarrierCastParticle => GetBufferString(__m_BarrierCastParticle);
 
 		private static readonly SchemaField __m_BarrierModifier = new("CCitadel_Ability_Bookworm_KnightBarrierVData", "m_BarrierModifier");
-		/// <summary><c>CEmbeddedSubclass&lt;CCitadelModifier&gt;</c>. No typed mapping yet: read it through its address.</summary>
-		public RawField m_BarrierModifier => Raw(__m_BarrierModifier, "CEmbeddedSubclass<CCitadelModifier>");
+		/// <summary><c>CEmbeddedSubclass&lt;CCitadelModifier&gt;</c>.</summary>
+		public CCitadelModifierVData? m_BarrierModifier => EmbeddedSubclass<CCitadelModifierVData>(__m_BarrierModifier);
 
 		private static readonly SchemaField __m_ShoveParticle = new("CCitadel_Ability_Bookworm_KnightBarrierVData", "m_ShoveParticle");
 		/// <summary><c>CResourceNameTyped&lt;CWeakHandle&lt;InfoForResourceTypeIParticleSystemDefinition&gt;&gt;</c>.</summary>

@@ -12,5 +12,8 @@ public static partial class Schema {
 		internal CCitadel_Modifier_Wraith_RapidFire() { }
 		static CCitadel_Modifier_Wraith_RapidFire ISchemaClass<CCitadel_Modifier_Wraith_RapidFire>.New() => new();
 		static string ISchemaClass<CCitadel_Modifier_Wraith_RapidFire>.NativeName => "CCitadel_Modifier_Wraith_RapidFire";
+
+		/// <summary>The data entry this was created from, as <see cref="CCitadel_Modifier_Wraith_RapidFireVData"/>, or null if it has none.</summary>
+		public new CCitadel_Modifier_Wraith_RapidFireVData? VData => ModifierData<CCitadel_Modifier_Wraith_RapidFireVData>();
 	}
 }

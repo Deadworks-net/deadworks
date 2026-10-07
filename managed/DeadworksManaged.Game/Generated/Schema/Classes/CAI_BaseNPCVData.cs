@@ -102,8 +102,8 @@ public static partial class Schema {
 		public SchemaObjectList<NPCAttachmentDesc_t> m_vecAttachments => new(this, __m_vecAttachments, -1);
 
 		private static readonly SchemaField __m_vecIntrinsicModifiers = new("CAI_BaseNPCVData", "m_vecIntrinsicModifiers");
-		/// <summary><c>CUtlVector&lt;CEmbeddedSubclass&lt;CCitadelModifier&gt;&gt;</c>. No typed mapping yet: read it through its address.</summary>
-		public RawField m_vecIntrinsicModifiers => Raw(__m_vecIntrinsicModifiers, "CUtlVector<CEmbeddedSubclass<CCitadelModifier>>");
+		/// <summary><c>CUtlVector&lt;CEmbeddedSubclass&lt;CCitadelModifier&gt;&gt;</c>.</summary>
+		public SchemaPointerList<CCitadelModifierVData> m_vecIntrinsicModifiers => new(this, __m_vecIntrinsicModifiers, -1, 16, 8);
 
 		private static readonly SchemaField __m_vecIntrinsicModifiersByName = new("CAI_BaseNPCVData", "m_vecIntrinsicModifiersByName");
 		/// <summary><c>CUtlVector&lt;CSubclassName&gt;</c>. No typed mapping yet: read it through its address.</summary>

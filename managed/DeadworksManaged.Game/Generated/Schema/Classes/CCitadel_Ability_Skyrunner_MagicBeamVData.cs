@@ -22,7 +22,7 @@ public static partial class Schema {
 		public string m_ExplodeSound => GetBufferString(__m_ExplodeSound);
 
 		private static readonly SchemaField __m_MagicBeamModifier = new("CCitadel_Ability_Skyrunner_MagicBeamVData", "m_MagicBeamModifier");
-		/// <summary><c>CEmbeddedSubclass&lt;CCitadelModifier&gt;</c>. No typed mapping yet: read it through its address.</summary>
-		public RawField m_MagicBeamModifier => Raw(__m_MagicBeamModifier, "CEmbeddedSubclass<CCitadelModifier>");
+		/// <summary><c>CEmbeddedSubclass&lt;CCitadelModifier&gt;</c>.</summary>
+		public CCitadelModifierVData? m_MagicBeamModifier => EmbeddedSubclass<CCitadelModifierVData>(__m_MagicBeamModifier);
 	}
 }

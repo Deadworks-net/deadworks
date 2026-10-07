@@ -32,5 +32,8 @@ public static partial class Schema {
 		private static readonly SchemaField __m_vLastValidAuraPosition = new("CCitadel_Ability_Familiar_Spotlight", "m_vLastValidAuraPosition");
 		/// <summary><c>VectorWS</c>.</summary>
 		public Vector3 m_vLastValidAuraPosition { get => Get<Vector3>(__m_vLastValidAuraPosition); set => Set(__m_vLastValidAuraPosition, value); }
+
+		/// <summary>The data entry this was created from, as <see cref="CCitadel_Ability_Familiar_SpotlightVData"/>, or null if it has none.</summary>
+		public new CCitadel_Ability_Familiar_SpotlightVData? VData => SubclassVData<CCitadel_Ability_Familiar_SpotlightVData>();
 	}
 }

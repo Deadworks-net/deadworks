@@ -14,7 +14,7 @@ public static partial class Schema {
 		static string ISchemaClass<CModifier_Operative_Revelation_Target_VData>.NativeName => "CModifier_Operative_Revelation_Target_VData";
 
 		private static readonly SchemaField __m_DebuffModifier = new("CModifier_Operative_Revelation_Target_VData", "m_DebuffModifier");
-		/// <summary><c>CEmbeddedSubclass&lt;CBaseModifier&gt;</c>. No typed mapping yet: read it through its address.</summary>
-		public RawField m_DebuffModifier => Raw(__m_DebuffModifier, "CEmbeddedSubclass<CBaseModifier>");
+		/// <summary><c>CEmbeddedSubclass&lt;CBaseModifier&gt;</c>.</summary>
+		public CModifierVData? m_DebuffModifier => EmbeddedSubclass<CModifierVData>(__m_DebuffModifier);
 	}
 }

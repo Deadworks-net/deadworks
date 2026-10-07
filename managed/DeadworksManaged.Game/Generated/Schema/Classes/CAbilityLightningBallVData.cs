@@ -18,12 +18,12 @@ public static partial class Schema {
 		public string m_ExplodeParticle => GetBufferString(__m_ExplodeParticle);
 
 		private static readonly SchemaField __m_SlowModifier = new("CAbilityLightningBallVData", "m_SlowModifier");
-		/// <summary><c>CEmbeddedSubclass&lt;CCitadelModifier&gt;</c>. No typed mapping yet: read it through its address.</summary>
-		public RawField m_SlowModifier => Raw(__m_SlowModifier, "CEmbeddedSubclass<CCitadelModifier>");
+		/// <summary><c>CEmbeddedSubclass&lt;CCitadelModifier&gt;</c>.</summary>
+		public CCitadelModifierVData? m_SlowModifier => EmbeddedSubclass<CCitadelModifierVData>(__m_SlowModifier);
 
 		private static readonly SchemaField __m_ZapModifier = new("CAbilityLightningBallVData", "m_ZapModifier");
-		/// <summary><c>CEmbeddedSubclass&lt;CCitadelModifier&gt;</c>. No typed mapping yet: read it through its address.</summary>
-		public RawField m_ZapModifier => Raw(__m_ZapModifier, "CEmbeddedSubclass<CCitadelModifier>");
+		/// <summary><c>CEmbeddedSubclass&lt;CCitadelModifier&gt;</c>.</summary>
+		public CCitadelModifierVData? m_ZapModifier => EmbeddedSubclass<CCitadelModifierVData>(__m_ZapModifier);
 
 		private static readonly SchemaField __m_ZapParticle = new("CAbilityLightningBallVData", "m_ZapParticle");
 		/// <summary><c>CResourceNameTyped&lt;CWeakHandle&lt;InfoForResourceTypeIParticleSystemDefinition&gt;&gt;</c>.</summary>

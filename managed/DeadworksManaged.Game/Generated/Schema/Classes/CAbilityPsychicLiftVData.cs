@@ -26,8 +26,8 @@ public static partial class Schema {
 		public string m_HitConfirmSound => GetBufferString(__m_HitConfirmSound);
 
 		private static readonly SchemaField __m_LiftModifier = new("CAbilityPsychicLiftVData", "m_LiftModifier");
-		/// <summary><c>CEmbeddedSubclass&lt;CCitadelModifier&gt;</c>. No typed mapping yet: read it through its address.</summary>
-		public RawField m_LiftModifier => Raw(__m_LiftModifier, "CEmbeddedSubclass<CCitadelModifier>");
+		/// <summary><c>CEmbeddedSubclass&lt;CCitadelModifier&gt;</c>.</summary>
+		public CCitadelModifierVData? m_LiftModifier => EmbeddedSubclass<CCitadelModifierVData>(__m_LiftModifier);
 
 		private static readonly SchemaField __m_TargetCastSound = new("CAbilityPsychicLiftVData", "m_TargetCastSound");
 		/// <summary><c>CSoundEventName</c>.</summary>

@@ -74,8 +74,8 @@ public static partial class Schema {
 		public float m_flMinDashTime { get => Get<float>(__m_flMinDashTime); set => Set(__m_flMinDashTime, value); }
 
 		private static readonly SchemaField __m_mapAttacks = new("CAbilityBabaBenchMeleeVData", "m_mapAttacks");
-		/// <summary><c>CUtlOrderedMap&lt;EBabaBenchMeleeAttackType, BabaBenchMeleeAttack_t&gt;</c>. No typed mapping yet: read it through its address.</summary>
-		public RawField m_mapAttacks => Raw(__m_mapAttacks, "CUtlOrderedMap<EBabaBenchMeleeAttackType, BabaBenchMeleeAttack_t>");
+		/// <summary><c>CUtlOrderedMap&lt;EBabaBenchMeleeAttackType, BabaBenchMeleeAttack_t&gt;</c>.</summary>
+		public SchemaMap<EBabaBenchMeleeAttackType, BabaBenchMeleeAttack_t> m_mapAttacks => new(this, __m_mapAttacks);
 
 		private static readonly SchemaField __m_strEffectsAttachName = new("CAbilityBabaBenchMeleeVData", "m_strEffectsAttachName");
 		/// <summary><c>CUtlString</c>.</summary>

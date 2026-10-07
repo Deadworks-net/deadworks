@@ -12,5 +12,8 @@ public static partial class Schema {
 		internal CModifier_CheatDeathImmunity() { }
 		static CModifier_CheatDeathImmunity ISchemaClass<CModifier_CheatDeathImmunity>.New() => new();
 		static string ISchemaClass<CModifier_CheatDeathImmunity>.NativeName => "CModifier_CheatDeathImmunity";
+
+		/// <summary>The data entry this was created from, as <see cref="CModifier_CheatDeathImmunityVData"/>, or null if it has none.</summary>
+		public new CModifier_CheatDeathImmunityVData? VData => ModifierData<CModifier_CheatDeathImmunityVData>();
 	}
 }

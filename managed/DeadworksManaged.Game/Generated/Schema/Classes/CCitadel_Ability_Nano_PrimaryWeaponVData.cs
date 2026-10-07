@@ -14,8 +14,8 @@ public static partial class Schema {
 		static string ISchemaClass<CCitadel_Ability_Nano_PrimaryWeaponVData>.NativeName => "CCitadel_Ability_Nano_PrimaryWeaponVData";
 
 		private static readonly SchemaField __m_EscapeModifier = new("CCitadel_Ability_Nano_PrimaryWeaponVData", "m_EscapeModifier");
-		/// <summary><c>CEmbeddedSubclass&lt;CCitadelModifier&gt;</c>. No typed mapping yet: read it through its address.</summary>
-		public RawField m_EscapeModifier => Raw(__m_EscapeModifier, "CEmbeddedSubclass<CCitadelModifier>");
+		/// <summary><c>CEmbeddedSubclass&lt;CCitadelModifier&gt;</c>.</summary>
+		public CCitadelModifierVData? m_EscapeModifier => EmbeddedSubclass<CCitadelModifierVData>(__m_EscapeModifier);
 
 		private static readonly SchemaField __m_SlashEffectParticle = new("CCitadel_Ability_Nano_PrimaryWeaponVData", "m_SlashEffectParticle");
 		/// <summary><c>CResourceNameTyped&lt;CWeakHandle&lt;InfoForResourceTypeIParticleSystemDefinition&gt;&gt;</c>.</summary>

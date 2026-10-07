@@ -14,8 +14,8 @@ public static partial class Schema {
 		static string ISchemaClass<CCitadel_Modifier_Baba_Ult2_Impact_VData>.NativeName => "CCitadel_Modifier_Baba_Ult2_Impact_VData";
 
 		private static readonly SchemaField __m_HexModifier = new("CCitadel_Modifier_Baba_Ult2_Impact_VData", "m_HexModifier");
-		/// <summary><c>CEmbeddedSubclass&lt;CCitadelModifier&gt;</c>. No typed mapping yet: read it through its address.</summary>
-		public RawField m_HexModifier => Raw(__m_HexModifier, "CEmbeddedSubclass<CCitadelModifier>");
+		/// <summary><c>CEmbeddedSubclass&lt;CCitadelModifier&gt;</c>.</summary>
+		public CCitadelModifierVData? m_HexModifier => EmbeddedSubclass<CCitadelModifierVData>(__m_HexModifier);
 
 		private static readonly SchemaField __m_strHexSound = new("CCitadel_Modifier_Baba_Ult2_Impact_VData", "m_strHexSound");
 		/// <summary><c>CSoundEventName</c>.</summary>

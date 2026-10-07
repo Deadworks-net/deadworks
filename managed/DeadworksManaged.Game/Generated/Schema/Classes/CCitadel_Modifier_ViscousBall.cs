@@ -12,5 +12,8 @@ public static partial class Schema {
 		internal CCitadel_Modifier_ViscousBall() { }
 		static CCitadel_Modifier_ViscousBall ISchemaClass<CCitadel_Modifier_ViscousBall>.New() => new();
 		static string ISchemaClass<CCitadel_Modifier_ViscousBall>.NativeName => "CCitadel_Modifier_ViscousBall";
+
+		/// <summary>The data entry this was created from, as <see cref="CCitadel_Modifier_ViscousBallVData"/>, or null if it has none.</summary>
+		public new CCitadel_Modifier_ViscousBallVData? VData => ModifierData<CCitadel_Modifier_ViscousBallVData>();
 	}
 }

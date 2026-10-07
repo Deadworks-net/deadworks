@@ -16,5 +16,8 @@ public static partial class Schema {
 		private static readonly SchemaField __m_pBeamModifier = new("CCitadel_Ability_Tier3Boss_LaserBeam", "m_pBeamModifier");
 		/// <summary><c>CModifierHandleTyped&lt;CCitadelModifier&gt;[1]</c>. No typed mapping yet: read it through its address.</summary>
 		public RawField m_pBeamModifier => Raw(__m_pBeamModifier, "CModifierHandleTyped<CCitadelModifier>[1]");
+
+		/// <summary>The data entry this was created from, as <see cref="CCitadel_Ability_Tier3Boss_LaserBeamVData"/>, or null if it has none.</summary>
+		public new CCitadel_Ability_Tier3Boss_LaserBeamVData? VData => SubclassVData<CCitadel_Ability_Tier3Boss_LaserBeamVData>();
 	}
 }

@@ -14,15 +14,15 @@ public static partial class Schema {
 		static string ISchemaClass<CAbilityChronoSwapVData>.NativeName => "CAbilityChronoSwapVData";
 
 		private static readonly SchemaField __m_BubbleMoveModifier = new("CAbilityChronoSwapVData", "m_BubbleMoveModifier");
-		/// <summary><c>CEmbeddedSubclass&lt;CCitadelModifier&gt;</c>. No typed mapping yet: read it through its address.</summary>
-		public RawField m_BubbleMoveModifier => Raw(__m_BubbleMoveModifier, "CEmbeddedSubclass<CCitadelModifier>");
+		/// <summary><c>CEmbeddedSubclass&lt;CCitadelModifier&gt;</c>.</summary>
+		public CCitadelModifierVData? m_BubbleMoveModifier => EmbeddedSubclass<CCitadelModifierVData>(__m_BubbleMoveModifier);
 
 		private static readonly SchemaField __m_MultiSwapEffect = new("CAbilityChronoSwapVData", "m_MultiSwapEffect");
 		/// <summary><c>CResourceNameTyped&lt;CWeakHandle&lt;InfoForResourceTypeIParticleSystemDefinition&gt;&gt;</c>.</summary>
 		public string m_MultiSwapEffect => GetBufferString(__m_MultiSwapEffect);
 
 		private static readonly SchemaField __m_ShieldModifier = new("CAbilityChronoSwapVData", "m_ShieldModifier");
-		/// <summary><c>CEmbeddedSubclass&lt;CCitadelModifier&gt;</c>. No typed mapping yet: read it through its address.</summary>
-		public RawField m_ShieldModifier => Raw(__m_ShieldModifier, "CEmbeddedSubclass<CCitadelModifier>");
+		/// <summary><c>CEmbeddedSubclass&lt;CCitadelModifier&gt;</c>.</summary>
+		public CCitadelModifierVData? m_ShieldModifier => EmbeddedSubclass<CCitadelModifierVData>(__m_ShieldModifier);
 	}
 }

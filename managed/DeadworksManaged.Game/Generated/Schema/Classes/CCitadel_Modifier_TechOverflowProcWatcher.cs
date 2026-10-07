@@ -12,5 +12,8 @@ public static partial class Schema {
 		internal CCitadel_Modifier_TechOverflowProcWatcher() { }
 		static CCitadel_Modifier_TechOverflowProcWatcher ISchemaClass<CCitadel_Modifier_TechOverflowProcWatcher>.New() => new();
 		static string ISchemaClass<CCitadel_Modifier_TechOverflowProcWatcher>.NativeName => "CCitadel_Modifier_TechOverflowProcWatcher";
+
+		/// <summary>The data entry this was created from, as <see cref="CCitadel_Modifier_TechOverflowProcWatcherVData"/>, or null if it has none.</summary>
+		public new CCitadel_Modifier_TechOverflowProcWatcherVData? VData => ModifierData<CCitadel_Modifier_TechOverflowProcWatcherVData>();
 	}
 }

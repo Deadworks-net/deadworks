@@ -12,5 +12,8 @@ public static partial class Schema {
 		internal CCitadel_Modifier_KothComebackBonuses() { }
 		static CCitadel_Modifier_KothComebackBonuses ISchemaClass<CCitadel_Modifier_KothComebackBonuses>.New() => new();
 		static string ISchemaClass<CCitadel_Modifier_KothComebackBonuses>.NativeName => "CCitadel_Modifier_KothComebackBonuses";
+
+		/// <summary>The data entry this was created from, as <see cref="CCitadel_Modifier_KothComebackBonusesVData"/>, or null if it has none.</summary>
+		public new CCitadel_Modifier_KothComebackBonusesVData? VData => ModifierData<CCitadel_Modifier_KothComebackBonusesVData>();
 	}
 }

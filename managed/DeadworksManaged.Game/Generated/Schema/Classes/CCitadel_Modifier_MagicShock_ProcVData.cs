@@ -18,7 +18,7 @@ public static partial class Schema {
 		public string m_ProcParticle => GetBufferString(__m_ProcParticle);
 
 		private static readonly SchemaField __m_hDamageTrackModifier = new("CCitadel_Modifier_MagicShock_ProcVData", "m_hDamageTrackModifier");
-		/// <summary><c>CEmbeddedSubclass&lt;CBaseModifier&gt;</c>. No typed mapping yet: read it through its address.</summary>
-		public RawField m_hDamageTrackModifier => Raw(__m_hDamageTrackModifier, "CEmbeddedSubclass<CBaseModifier>");
+		/// <summary><c>CEmbeddedSubclass&lt;CBaseModifier&gt;</c>.</summary>
+		public CModifierVData? m_hDamageTrackModifier => EmbeddedSubclass<CModifierVData>(__m_hDamageTrackModifier);
 	}
 }

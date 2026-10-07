@@ -20,5 +20,8 @@ public static partial class Schema {
 		private static readonly SchemaField __m_hitTargets = new("CCitadel_Modifier_TechBurst_Proc", "m_hitTargets");
 		/// <summary><c>CUtlVector&lt;CHandle&lt;CBaseEntity&gt;&gt;</c>.</summary>
 		public SchemaHandleList<CBaseEntity> m_hitTargets => new(this, __m_hitTargets, -1);
+
+		/// <summary>The data entry this was created from, as <see cref="CCitadel_Modifier_TechBurst_ProcVData"/>, or null if it has none.</summary>
+		public new CCitadel_Modifier_TechBurst_ProcVData? VData => ModifierData<CCitadel_Modifier_TechBurst_ProcVData>();
 	}
 }

@@ -12,5 +12,8 @@ public static partial class Schema {
 		internal CCitadel_Ability_Tier3Boss_AoEWave() { }
 		static CCitadel_Ability_Tier3Boss_AoEWave ISchemaClass<CCitadel_Ability_Tier3Boss_AoEWave>.New() => new();
 		static string ISchemaClass<CCitadel_Ability_Tier3Boss_AoEWave>.NativeName => "CCitadel_Ability_Tier3Boss_AoEWave";
+
+		/// <summary>The data entry this was created from, as <see cref="CCitadel_Ability_Tier3Boss_AoEWaveVData"/>, or null if it has none.</summary>
+		public new CCitadel_Ability_Tier3Boss_AoEWaveVData? VData => SubclassVData<CCitadel_Ability_Tier3Boss_AoEWaveVData>();
 	}
 }

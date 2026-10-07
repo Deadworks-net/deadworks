@@ -14,8 +14,8 @@ public static partial class Schema {
 		static string ISchemaClass<CCitadel_Ability_Necro_FearVData>.NativeName => "CCitadel_Ability_Necro_FearVData";
 
 		private static readonly SchemaField __m_DebuffModifier = new("CCitadel_Ability_Necro_FearVData", "m_DebuffModifier");
-		/// <summary><c>CEmbeddedSubclass&lt;CCitadel_Modifier_Base_Buildup&gt;</c>. No typed mapping yet: read it through its address.</summary>
-		public RawField m_DebuffModifier => Raw(__m_DebuffModifier, "CEmbeddedSubclass<CCitadel_Modifier_Base_Buildup>");
+		/// <summary><c>CEmbeddedSubclass&lt;CCitadel_Modifier_Base_Buildup&gt;</c>.</summary>
+		public CCitadel_Modifier_Base_BuildupVData? m_DebuffModifier => EmbeddedSubclass<CCitadel_Modifier_Base_BuildupVData>(__m_DebuffModifier);
 
 		private static readonly SchemaField __m_strProcSound = new("CCitadel_Ability_Necro_FearVData", "m_strProcSound");
 		/// <summary><c>CSoundEventName</c>.</summary>

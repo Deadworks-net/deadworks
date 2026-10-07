@@ -12,5 +12,8 @@ public static partial class Schema {
 		internal CCitadel_Modifier_Werewolf_OnTheHunt() { }
 		static CCitadel_Modifier_Werewolf_OnTheHunt ISchemaClass<CCitadel_Modifier_Werewolf_OnTheHunt>.New() => new();
 		static string ISchemaClass<CCitadel_Modifier_Werewolf_OnTheHunt>.NativeName => "CCitadel_Modifier_Werewolf_OnTheHunt";
+
+		/// <summary>The data entry this was created from, as <see cref="CCitadel_Modifier_Werewolf_OnTheHuntVData"/>, or null if it has none.</summary>
+		public new CCitadel_Modifier_Werewolf_OnTheHuntVData? VData => ModifierData<CCitadel_Modifier_Werewolf_OnTheHuntVData>();
 	}
 }

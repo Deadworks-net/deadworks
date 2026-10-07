@@ -16,5 +16,8 @@ public static partial class Schema {
 		private static readonly SchemaField __m_flNextStackTime = new("CCitadel_Modifier_Unleash", "m_flNextStackTime");
 		/// <summary><c>GameTime_t</c>.</summary>
 		public float m_flNextStackTime { get => Get<float>(__m_flNextStackTime); set => Set(__m_flNextStackTime, value); }
+
+		/// <summary>The data entry this was created from, as <see cref="CCitadel_Modifier_UnleashVData"/>, or null if it has none.</summary>
+		public new CCitadel_Modifier_UnleashVData? VData => ModifierData<CCitadel_Modifier_UnleashVData>();
 	}
 }

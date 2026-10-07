@@ -147,5 +147,8 @@ public static partial class Schema {
 
 		/// <summary>The curated <see cref="global::DeadworksManaged.Api.CCitadelBaseAbility"/> for this entity, or null if it is gone.</summary>
 		public new global::DeadworksManaged.Api.CCitadelBaseAbility? Entity => SchemaRegistry.Wrapper<global::DeadworksManaged.Api.CCitadelBaseAbility>(EntityHandle);
+
+		/// <summary>The data entry this was created from, as <see cref="CitadelAbilityVData"/>, or null if it has none.</summary>
+		public CitadelAbilityVData? VData => SubclassVData<CitadelAbilityVData>();
 	}
 }

@@ -16,5 +16,8 @@ public static partial class Schema {
 		private static readonly SchemaField __m_flTotalBuildup = new("CCitadel_Ability_Necro_Fear", "m_flTotalBuildup");
 		/// <summary><c>float32</c>.</summary>
 		public float m_flTotalBuildup { get => Get<float>(__m_flTotalBuildup); set => Set(__m_flTotalBuildup, value); }
+
+		/// <summary>The data entry this was created from, as <see cref="CCitadel_Ability_Necro_FearVData"/>, or null if it has none.</summary>
+		public new CCitadel_Ability_Necro_FearVData? VData => SubclassVData<CCitadel_Ability_Necro_FearVData>();
 	}
 }

@@ -18,8 +18,8 @@ public static partial class Schema {
 		public string m_ExplodeParticle => GetBufferString(__m_ExplodeParticle);
 
 		private static readonly SchemaField __m_GarbageAuraModifier = new("CAbilityGarbageVData", "m_GarbageAuraModifier");
-		/// <summary><c>CEmbeddedSubclass&lt;CCitadelModifier&gt;</c>. No typed mapping yet: read it through its address.</summary>
-		public RawField m_GarbageAuraModifier => Raw(__m_GarbageAuraModifier, "CEmbeddedSubclass<CCitadelModifier>");
+		/// <summary><c>CEmbeddedSubclass&lt;CCitadelModifier&gt;</c>.</summary>
+		public CCitadelModifierVData? m_GarbageAuraModifier => EmbeddedSubclass<CCitadelModifierVData>(__m_GarbageAuraModifier);
 
 		private static readonly SchemaField __m_flAirDrag = new("CAbilityGarbageVData", "m_flAirDrag");
 		/// <summary><c>float32</c>.</summary>

@@ -16,5 +16,8 @@ public static partial class Schema {
 		private static readonly SchemaField __m_bCastWhileAttached = new("CCitadel_Ability_Familiar_Ability02", "m_bCastWhileAttached");
 		/// <summary><c>bool</c>.</summary>
 		public bool m_bCastWhileAttached { get => Get<bool>(__m_bCastWhileAttached); set => Set(__m_bCastWhileAttached, value); }
+
+		/// <summary>The data entry this was created from, as <see cref="CCitadel_Ability_Familiar_Ability02VData"/>, or null if it has none.</summary>
+		public new CCitadel_Ability_Familiar_Ability02VData? VData => SubclassVData<CCitadel_Ability_Familiar_Ability02VData>();
 	}
 }

@@ -20,5 +20,8 @@ public static partial class Schema {
 		private static readonly SchemaField __m_nCastDelayParticleIndex = new("CCitadel_Item_ShadowStep", "m_nCastDelayParticleIndex");
 		/// <summary><c>ParticleIndex_t</c>.</summary>
 		public int m_nCastDelayParticleIndex { get => Get<int>(__m_nCastDelayParticleIndex); set => Set(__m_nCastDelayParticleIndex, value); }
+
+		/// <summary>The data entry this was created from, as <see cref="CCitadel_Item_ShadowStepVData"/>, or null if it has none.</summary>
+		public new CCitadel_Item_ShadowStepVData? VData => SubclassVData<CCitadel_Item_ShadowStepVData>();
 	}
 }

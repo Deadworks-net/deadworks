@@ -52,5 +52,8 @@ public static partial class Schema {
 		private static readonly SchemaField __m_flTrackingSpeed = new("CNPC_ShieldedSentry", "m_flTrackingSpeed");
 		/// <summary><c>float32</c>.</summary>
 		public float m_flTrackingSpeed { get => Get<float>(__m_flTrackingSpeed); set => Set(__m_flTrackingSpeed, value); }
+
+		/// <summary>The data entry this was created from, as <see cref="CNPC_ShieldedSentryVData"/>, or null if it has none.</summary>
+		public new CNPC_ShieldedSentryVData? VData => SubclassVData<CNPC_ShieldedSentryVData>();
 	}
 }

@@ -14,7 +14,7 @@ public static partial class Schema {
 		static string ISchemaClass<CCitadel_WeaponUpgrade_Headhunter_VData>.NativeName => "CCitadel_WeaponUpgrade_Headhunter_VData";
 
 		private static readonly SchemaField __m_HeadshotBuffModifier = new("CCitadel_WeaponUpgrade_Headhunter_VData", "m_HeadshotBuffModifier");
-		/// <summary><c>CEmbeddedSubclass&lt;CCitadelModifier&gt;</c>. No typed mapping yet: read it through its address.</summary>
-		public RawField m_HeadshotBuffModifier => Raw(__m_HeadshotBuffModifier, "CEmbeddedSubclass<CCitadelModifier>");
+		/// <summary><c>CEmbeddedSubclass&lt;CCitadelModifier&gt;</c>.</summary>
+		public CCitadelModifierVData? m_HeadshotBuffModifier => EmbeddedSubclass<CCitadelModifierVData>(__m_HeadshotBuffModifier);
 	}
 }

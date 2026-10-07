@@ -18,8 +18,8 @@ public static partial class Schema {
 		public string m_FinalTickParticle => GetBufferString(__m_FinalTickParticle);
 
 		private static readonly SchemaField __m_ImpactModifier = new("CCitadel_Modifier_Baba_Ult2_Mark_VData", "m_ImpactModifier");
-		/// <summary><c>CEmbeddedSubclass&lt;CCitadelModifier&gt;</c>. Added for each barrage hit. The hit lands when it expires. No typed mapping yet: read it through its address.</summary>
-		public RawField m_ImpactModifier => Raw(__m_ImpactModifier, "CEmbeddedSubclass<CCitadelModifier>");
+		/// <summary><c>CEmbeddedSubclass&lt;CCitadelModifier&gt;</c>. Added for each barrage hit. The hit lands when it expires.</summary>
+		public CCitadelModifierVData? m_ImpactModifier => EmbeddedSubclass<CCitadelModifierVData>(__m_ImpactModifier);
 
 		private static readonly SchemaField __m_LockingOnParticle = new("CCitadel_Modifier_Baba_Ult2_Mark_VData", "m_LockingOnParticle");
 		/// <summary><c>CResourceNameTyped&lt;CWeakHandle&lt;InfoForResourceTypeIParticleSystemDefinition&gt;&gt;</c>.</summary>

@@ -14,48 +14,48 @@ public static partial class Schema {
 		static string ISchemaClass<CCitadel_Ability_Tengu_AirLiftVData>.NativeName => "CCitadel_Ability_Tengu_AirLiftVData";
 
 		private static readonly SchemaField __m_BulletResistModifier = new("CCitadel_Ability_Tengu_AirLiftVData", "m_BulletResistModifier");
-		/// <summary><c>CEmbeddedSubclass&lt;CCitadelModifier&gt;</c>. No typed mapping yet: read it through its address.</summary>
-		public RawField m_BulletResistModifier => Raw(__m_BulletResistModifier, "CEmbeddedSubclass<CCitadelModifier>");
+		/// <summary><c>CEmbeddedSubclass&lt;CCitadelModifier&gt;</c>.</summary>
+		public CCitadelModifierVData? m_BulletResistModifier => EmbeddedSubclass<CCitadelModifierVData>(__m_BulletResistModifier);
 
 		private static readonly SchemaField __m_DroppedBuffModifier = new("CCitadel_Ability_Tengu_AirLiftVData", "m_DroppedBuffModifier");
-		/// <summary><c>CEmbeddedSubclass&lt;CCitadelModifier&gt;</c>. No typed mapping yet: read it through its address.</summary>
-		public RawField m_DroppedBuffModifier => Raw(__m_DroppedBuffModifier, "CEmbeddedSubclass<CCitadelModifier>");
+		/// <summary><c>CEmbeddedSubclass&lt;CCitadelModifier&gt;</c>.</summary>
+		public CCitadelModifierVData? m_DroppedBuffModifier => EmbeddedSubclass<CCitadelModifierVData>(__m_DroppedBuffModifier);
 
 		private static readonly SchemaField __m_ExplodeParticle = new("CCitadel_Ability_Tengu_AirLiftVData", "m_ExplodeParticle");
 		/// <summary><c>CResourceNameTyped&lt;CWeakHandle&lt;InfoForResourceTypeIParticleSystemDefinition&gt;&gt;</c>.</summary>
 		public string m_ExplodeParticle => GetBufferString(__m_ExplodeParticle);
 
 		private static readonly SchemaField __m_ExplodingAllyModifier = new("CCitadel_Ability_Tengu_AirLiftVData", "m_ExplodingAllyModifier");
-		/// <summary><c>CEmbeddedSubclass&lt;CCitadelModifier&gt;</c>. No typed mapping yet: read it through its address.</summary>
-		public RawField m_ExplodingAllyModifier => Raw(__m_ExplodingAllyModifier, "CEmbeddedSubclass<CCitadelModifier>");
+		/// <summary><c>CEmbeddedSubclass&lt;CCitadelModifier&gt;</c>.</summary>
+		public CCitadelModifierVData? m_ExplodingAllyModifier => EmbeddedSubclass<CCitadelModifierVData>(__m_ExplodingAllyModifier);
 
 		private static readonly SchemaField __m_FlyingModifier = new("CCitadel_Ability_Tengu_AirLiftVData", "m_FlyingModifier");
-		/// <summary><c>CEmbeddedSubclass&lt;CCitadelModifier&gt;</c>. No typed mapping yet: read it through its address.</summary>
-		public RawField m_FlyingModifier => Raw(__m_FlyingModifier, "CEmbeddedSubclass<CCitadelModifier>");
+		/// <summary><c>CEmbeddedSubclass&lt;CCitadelModifier&gt;</c>.</summary>
+		public CCitadelModifierVData? m_FlyingModifier => EmbeddedSubclass<CCitadelModifierVData>(__m_FlyingModifier);
 
 		private static readonly SchemaField __m_GrabModifier = new("CCitadel_Ability_Tengu_AirLiftVData", "m_GrabModifier");
-		/// <summary><c>CEmbeddedSubclass&lt;CCitadelModifier&gt;</c>. No typed mapping yet: read it through its address.</summary>
-		public RawField m_GrabModifier => Raw(__m_GrabModifier, "CEmbeddedSubclass<CCitadelModifier>");
+		/// <summary><c>CEmbeddedSubclass&lt;CCitadelModifier&gt;</c>.</summary>
+		public CCitadelModifierVData? m_GrabModifier => EmbeddedSubclass<CCitadelModifierVData>(__m_GrabModifier);
 
 		private static readonly SchemaField __m_HoldBombEffect = new("CCitadel_Ability_Tengu_AirLiftVData", "m_HoldBombEffect");
 		/// <summary><c>CResourceNameTyped&lt;CWeakHandle&lt;InfoForResourceTypeIParticleSystemDefinition&gt;&gt;</c>.</summary>
 		public string m_HoldBombEffect => GetBufferString(__m_HoldBombEffect);
 
 		private static readonly SchemaField __m_HoldBombModifier = new("CCitadel_Ability_Tengu_AirLiftVData", "m_HoldBombModifier");
-		/// <summary><c>CEmbeddedSubclass&lt;CCitadelModifier&gt;</c>. No typed mapping yet: read it through its address.</summary>
-		public RawField m_HoldBombModifier => Raw(__m_HoldBombModifier, "CEmbeddedSubclass<CCitadelModifier>");
+		/// <summary><c>CEmbeddedSubclass&lt;CCitadelModifier&gt;</c>.</summary>
+		public CCitadelModifierVData? m_HoldBombModifier => EmbeddedSubclass<CCitadelModifierVData>(__m_HoldBombModifier);
 
 		private static readonly SchemaField __m_InitialExplodeParticle = new("CCitadel_Ability_Tengu_AirLiftVData", "m_InitialExplodeParticle");
 		/// <summary><c>CResourceNameTyped&lt;CWeakHandle&lt;InfoForResourceTypeIParticleSystemDefinition&gt;&gt;</c>.</summary>
 		public string m_InitialExplodeParticle => GetBufferString(__m_InitialExplodeParticle);
 
 		private static readonly SchemaField __m_SilenceModifier = new("CCitadel_Ability_Tengu_AirLiftVData", "m_SilenceModifier");
-		/// <summary><c>CEmbeddedSubclass&lt;CCitadelModifier&gt;</c>. No typed mapping yet: read it through its address.</summary>
-		public RawField m_SilenceModifier => Raw(__m_SilenceModifier, "CEmbeddedSubclass<CCitadelModifier>");
+		/// <summary><c>CEmbeddedSubclass&lt;CCitadelModifier&gt;</c>.</summary>
+		public CCitadelModifierVData? m_SilenceModifier => EmbeddedSubclass<CCitadelModifierVData>(__m_SilenceModifier);
 
 		private static readonly SchemaField __m_SlowModifier = new("CCitadel_Ability_Tengu_AirLiftVData", "m_SlowModifier");
-		/// <summary><c>CEmbeddedSubclass&lt;CCitadelModifier&gt;</c>. No typed mapping yet: read it through its address.</summary>
-		public RawField m_SlowModifier => Raw(__m_SlowModifier, "CEmbeddedSubclass<CCitadelModifier>");
+		/// <summary><c>CEmbeddedSubclass&lt;CCitadelModifier&gt;</c>.</summary>
+		public CCitadelModifierVData? m_SlowModifier => EmbeddedSubclass<CCitadelModifierVData>(__m_SlowModifier);
 
 		private static readonly SchemaField __m_flAcceleration = new("CCitadel_Ability_Tengu_AirLiftVData", "m_flAcceleration");
 		/// <summary><c>float32</c>.</summary>

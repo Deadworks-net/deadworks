@@ -20,5 +20,8 @@ public static partial class Schema {
 		private static readonly SchemaField __m_vecTagAlongVisitedAllies = new("CCitadel_Ability_Familiar_Attach", "m_vecTagAlongVisitedAllies");
 		/// <summary><c>CNetworkUtlVectorBase&lt;CHandle&lt;CBaseEntity&gt;&gt;</c>.</summary>
 		public SchemaHandleList<CBaseEntity> m_vecTagAlongVisitedAllies => new(this, __m_vecTagAlongVisitedAllies, -1);
+
+		/// <summary>The data entry this was created from, as <see cref="CCitadel_Ability_Familiar_AttachVData"/>, or null if it has none.</summary>
+		public new CCitadel_Ability_Familiar_AttachVData? VData => SubclassVData<CCitadel_Ability_Familiar_AttachVData>();
 	}
 }

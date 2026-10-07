@@ -20,5 +20,8 @@ public static partial class Schema {
 		private static readonly SchemaField __m_iCurrentResistValue = new("CCitadel_ArmorUpgrade_AblativeCoat", "m_iCurrentResistValue");
 		/// <summary><c>int32</c>.</summary>
 		public int m_iCurrentResistValue { get => Get<int>(__m_iCurrentResistValue); set => Set(__m_iCurrentResistValue, value); }
+
+		/// <summary>The data entry this was created from, as <see cref="CCitadel_ArmorUpgrade_AblativeCoatVData"/>, or null if it has none.</summary>
+		public new CCitadel_ArmorUpgrade_AblativeCoatVData? VData => SubclassVData<CCitadel_ArmorUpgrade_AblativeCoatVData>();
 	}
 }

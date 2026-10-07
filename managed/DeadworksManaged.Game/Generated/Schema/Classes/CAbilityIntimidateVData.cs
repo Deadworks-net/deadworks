@@ -22,11 +22,11 @@ public static partial class Schema {
 		public string m_AoEPlayerParticle => GetBufferString(__m_AoEPlayerParticle);
 
 		private static readonly SchemaField __m_DebuffModifier = new("CAbilityIntimidateVData", "m_DebuffModifier");
-		/// <summary><c>CEmbeddedSubclass&lt;CCitadelModifier&gt;</c>. No typed mapping yet: read it through its address.</summary>
-		public RawField m_DebuffModifier => Raw(__m_DebuffModifier, "CEmbeddedSubclass<CCitadelModifier>");
+		/// <summary><c>CEmbeddedSubclass&lt;CCitadelModifier&gt;</c>.</summary>
+		public CCitadelModifierVData? m_DebuffModifier => EmbeddedSubclass<CCitadelModifierVData>(__m_DebuffModifier);
 
 		private static readonly SchemaField __m_EnemyModifier = new("CAbilityIntimidateVData", "m_EnemyModifier");
-		/// <summary><c>CEmbeddedSubclass&lt;CCitadelModifier&gt;</c>. No typed mapping yet: read it through its address.</summary>
-		public RawField m_EnemyModifier => Raw(__m_EnemyModifier, "CEmbeddedSubclass<CCitadelModifier>");
+		/// <summary><c>CEmbeddedSubclass&lt;CCitadelModifier&gt;</c>.</summary>
+		public CCitadelModifierVData? m_EnemyModifier => EmbeddedSubclass<CCitadelModifierVData>(__m_EnemyModifier);
 	}
 }

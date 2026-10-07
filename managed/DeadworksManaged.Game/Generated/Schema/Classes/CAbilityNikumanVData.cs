@@ -18,7 +18,7 @@ public static partial class Schema {
 		public string m_CastParticle => GetBufferString(__m_CastParticle);
 
 		private static readonly SchemaField __m_NikumanModifier = new("CAbilityNikumanVData", "m_NikumanModifier");
-		/// <summary><c>CEmbeddedSubclass&lt;CCitadelModifier&gt;</c>. No typed mapping yet: read it through its address.</summary>
-		public RawField m_NikumanModifier => Raw(__m_NikumanModifier, "CEmbeddedSubclass<CCitadelModifier>");
+		/// <summary><c>CEmbeddedSubclass&lt;CCitadelModifier&gt;</c>.</summary>
+		public CCitadelModifierVData? m_NikumanModifier => EmbeddedSubclass<CCitadelModifierVData>(__m_NikumanModifier);
 	}
 }

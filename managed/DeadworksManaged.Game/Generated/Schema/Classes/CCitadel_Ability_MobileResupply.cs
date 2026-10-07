@@ -20,5 +20,8 @@ public static partial class Schema {
 		private static readonly SchemaField __m_vDeployPosition = new("CCitadel_Ability_MobileResupply", "m_vDeployPosition");
 		/// <summary><c>VectorWS</c>.</summary>
 		public Vector3 m_vDeployPosition { get => Get<Vector3>(__m_vDeployPosition); set => Set(__m_vDeployPosition, value); }
+
+		/// <summary>The data entry this was created from, as <see cref="CCitadel_Ability_MobileResupplyVData"/>, or null if it has none.</summary>
+		public new CCitadel_Ability_MobileResupplyVData? VData => SubclassVData<CCitadel_Ability_MobileResupplyVData>();
 	}
 }

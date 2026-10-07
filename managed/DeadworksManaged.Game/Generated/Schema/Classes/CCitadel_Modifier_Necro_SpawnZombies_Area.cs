@@ -16,5 +16,8 @@ public static partial class Schema {
 		private static readonly SchemaField __m_vecSpawnedZombies = new("CCitadel_Modifier_Necro_SpawnZombies_Area", "m_vecSpawnedZombies");
 		/// <summary><c>CUtlVector&lt;CHandle&lt;CBaseEntity&gt;&gt;</c>.</summary>
 		public SchemaHandleList<CBaseEntity> m_vecSpawnedZombies => new(this, __m_vecSpawnedZombies, -1);
+
+		/// <summary>The data entry this was created from, as <see cref="CCitadel_Modifier_Necro_SpawnZombies_AreaVData"/>, or null if it has none.</summary>
+		public new CCitadel_Modifier_Necro_SpawnZombies_AreaVData? VData => ModifierData<CCitadel_Modifier_Necro_SpawnZombies_AreaVData>();
 	}
 }

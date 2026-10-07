@@ -28,5 +28,8 @@ public static partial class Schema {
 		private static readonly SchemaField __m_vecHelpers = new("CCitadel_Ability_Familiar_HelpingHands", "m_vecHelpers");
 		/// <summary><c>CNetworkUtlVectorBase&lt;CHandle&lt;CBaseEntity&gt;&gt;</c>.</summary>
 		public SchemaHandleList<CBaseEntity> m_vecHelpers => new(this, __m_vecHelpers, -1);
+
+		/// <summary>The data entry this was created from, as <see cref="CCitadel_Ability_Familiar_HelpingHandsVData"/>, or null if it has none.</summary>
+		public new CCitadel_Ability_Familiar_HelpingHandsVData? VData => SubclassVData<CCitadel_Ability_Familiar_HelpingHandsVData>();
 	}
 }

@@ -12,5 +12,8 @@ public static partial class Schema {
 		internal CCitadel_Ability_Bull_Heal() { }
 		static CCitadel_Ability_Bull_Heal ISchemaClass<CCitadel_Ability_Bull_Heal>.New() => new();
 		static string ISchemaClass<CCitadel_Ability_Bull_Heal>.NativeName => "CCitadel_Ability_Bull_Heal";
+
+		/// <summary>The data entry this was created from, as <see cref="CCitadel_Ability_Bull_HealVData"/>, or null if it has none.</summary>
+		public new CCitadel_Ability_Bull_HealVData? VData => SubclassVData<CCitadel_Ability_Bull_HealVData>();
 	}
 }

@@ -12,5 +12,8 @@ public static partial class Schema {
 		internal CCitadel_Modifier_PatronsBlessingEnemyTracker() { }
 		static CCitadel_Modifier_PatronsBlessingEnemyTracker ISchemaClass<CCitadel_Modifier_PatronsBlessingEnemyTracker>.New() => new();
 		static string ISchemaClass<CCitadel_Modifier_PatronsBlessingEnemyTracker>.NativeName => "CCitadel_Modifier_PatronsBlessingEnemyTracker";
+
+		/// <summary>The data entry this was created from, as <see cref="CCitadel_Modifier_PatronsBlessingEnemyTrackerVData"/>, or null if it has none.</summary>
+		public new CCitadel_Modifier_PatronsBlessingEnemyTrackerVData? VData => ModifierData<CCitadel_Modifier_PatronsBlessingEnemyTrackerVData>();
 	}
 }

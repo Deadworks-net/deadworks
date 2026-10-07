@@ -18,8 +18,8 @@ public static partial class Schema {
 		public string m_EarnedParticle => GetBufferString(__m_EarnedParticle);
 
 		private static readonly SchemaField __m_TrophyStacksModifier = new("CCitadel_Item_TrophyCollectorVData", "m_TrophyStacksModifier");
-		/// <summary><c>CEmbeddedSubclass&lt;CCitadelModifier&gt;</c>. No typed mapping yet: read it through its address.</summary>
-		public RawField m_TrophyStacksModifier => Raw(__m_TrophyStacksModifier, "CEmbeddedSubclass<CCitadelModifier>");
+		/// <summary><c>CEmbeddedSubclass&lt;CCitadelModifier&gt;</c>.</summary>
+		public CCitadelModifierVData? m_TrophyStacksModifier => EmbeddedSubclass<CCitadelModifierVData>(__m_TrophyStacksModifier);
 
 		private static readonly SchemaField __m_strEarnedSound = new("CCitadel_Item_TrophyCollectorVData", "m_strEarnedSound");
 		/// <summary><c>CSoundEventName</c>.</summary>

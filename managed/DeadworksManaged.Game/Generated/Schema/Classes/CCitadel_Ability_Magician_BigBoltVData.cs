@@ -14,12 +14,12 @@ public static partial class Schema {
 		static string ISchemaClass<CCitadel_Ability_Magician_BigBoltVData>.NativeName => "CCitadel_Ability_Magician_BigBoltVData";
 
 		private static readonly SchemaField __m_BoltHitModifier = new("CCitadel_Ability_Magician_BigBoltVData", "m_BoltHitModifier");
-		/// <summary><c>CEmbeddedSubclass&lt;CCitadelModifier&gt;</c>. No typed mapping yet: read it through its address.</summary>
-		public RawField m_BoltHitModifier => Raw(__m_BoltHitModifier, "CEmbeddedSubclass<CCitadelModifier>");
+		/// <summary><c>CEmbeddedSubclass&lt;CCitadelModifier&gt;</c>.</summary>
+		public CCitadelModifierVData? m_BoltHitModifier => EmbeddedSubclass<CCitadelModifierVData>(__m_BoltHitModifier);
 
 		private static readonly SchemaField __m_CasterModifier = new("CCitadel_Ability_Magician_BigBoltVData", "m_CasterModifier");
-		/// <summary><c>CEmbeddedSubclass&lt;CCitadelModifier&gt;</c>. No typed mapping yet: read it through its address.</summary>
-		public RawField m_CasterModifier => Raw(__m_CasterModifier, "CEmbeddedSubclass<CCitadelModifier>");
+		/// <summary><c>CEmbeddedSubclass&lt;CCitadelModifier&gt;</c>.</summary>
+		public CCitadelModifierVData? m_CasterModifier => EmbeddedSubclass<CCitadelModifierVData>(__m_CasterModifier);
 
 		private static readonly SchemaField __m_ChargeParticle = new("CCitadel_Ability_Magician_BigBoltVData", "m_ChargeParticle");
 		/// <summary><c>CResourceNameTyped&lt;CWeakHandle&lt;InfoForResourceTypeIParticleSystemDefinition&gt;&gt;</c>.</summary>

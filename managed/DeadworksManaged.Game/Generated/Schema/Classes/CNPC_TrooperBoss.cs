@@ -36,5 +36,8 @@ public static partial class Schema {
 		private static readonly SchemaField __m_iLane = new("CNPC_TrooperBoss", "m_iLane");
 		/// <summary><c>int32</c>.</summary>
 		public int m_iLane { get => Get<int>(__m_iLane); set => Set(__m_iLane, value); }
+
+		/// <summary>The data entry this was created from, as <see cref="CNPC_TrooperBossVData"/>, or null if it has none.</summary>
+		public new CNPC_TrooperBossVData? VData => SubclassVData<CNPC_TrooperBossVData>();
 	}
 }

@@ -14,7 +14,7 @@ public static partial class Schema {
 		static string ISchemaClass<CAbility_Rutger_CheatDeath_VData>.NativeName => "CAbility_Rutger_CheatDeath_VData";
 
 		private static readonly SchemaField __m_ModifierCheatDeathActivated = new("CAbility_Rutger_CheatDeath_VData", "m_ModifierCheatDeathActivated");
-		/// <summary><c>CEmbeddedSubclass&lt;CBaseModifier&gt;</c>. No typed mapping yet: read it through its address.</summary>
-		public RawField m_ModifierCheatDeathActivated => Raw(__m_ModifierCheatDeathActivated, "CEmbeddedSubclass<CBaseModifier>");
+		/// <summary><c>CEmbeddedSubclass&lt;CBaseModifier&gt;</c>.</summary>
+		public CModifierVData? m_ModifierCheatDeathActivated => EmbeddedSubclass<CModifierVData>(__m_ModifierCheatDeathActivated);
 	}
 }

@@ -14,12 +14,12 @@ public static partial class Schema {
 		static string ISchemaClass<CCitadel_Ability_Gravity_Lasso_VData>.NativeName => "CCitadel_Ability_Gravity_Lasso_VData";
 
 		private static readonly SchemaField __m_GravityLassoSelf = new("CCitadel_Ability_Gravity_Lasso_VData", "m_GravityLassoSelf");
-		/// <summary><c>CEmbeddedSubclass&lt;CBaseModifier&gt;</c>. No typed mapping yet: read it through its address.</summary>
-		public RawField m_GravityLassoSelf => Raw(__m_GravityLassoSelf, "CEmbeddedSubclass<CBaseModifier>");
+		/// <summary><c>CEmbeddedSubclass&lt;CBaseModifier&gt;</c>.</summary>
+		public CModifierVData? m_GravityLassoSelf => EmbeddedSubclass<CModifierVData>(__m_GravityLassoSelf);
 
 		private static readonly SchemaField __m_GravityLassoTarget = new("CCitadel_Ability_Gravity_Lasso_VData", "m_GravityLassoTarget");
-		/// <summary><c>CEmbeddedSubclass&lt;CBaseModifier&gt;</c>. No typed mapping yet: read it through its address.</summary>
-		public RawField m_GravityLassoTarget => Raw(__m_GravityLassoTarget, "CEmbeddedSubclass<CBaseModifier>");
+		/// <summary><c>CEmbeddedSubclass&lt;CBaseModifier&gt;</c>.</summary>
+		public CModifierVData? m_GravityLassoTarget => EmbeddedSubclass<CModifierVData>(__m_GravityLassoTarget);
 
 		private static readonly SchemaField __m_PreCastParticle = new("CCitadel_Ability_Gravity_Lasso_VData", "m_PreCastParticle");
 		/// <summary><c>CResourceNameTyped&lt;CWeakHandle&lt;InfoForResourceTypeIParticleSystemDefinition&gt;&gt;</c>.</summary>

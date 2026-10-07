@@ -30,8 +30,8 @@ public static partial class Schema {
 		public string m_ExplodeParticle => GetBufferString(__m_ExplodeParticle);
 
 		private static readonly SchemaField __m_OnGroundModifier = new("CCitadel_Modifier_StickyBombAttachedVData", "m_OnGroundModifier");
-		/// <summary><c>CEmbeddedSubclass&lt;CCitadelModifier&gt;</c>. No typed mapping yet: read it through its address.</summary>
-		public RawField m_OnGroundModifier => Raw(__m_OnGroundModifier, "CEmbeddedSubclass<CCitadelModifier>");
+		/// <summary><c>CEmbeddedSubclass&lt;CCitadelModifier&gt;</c>.</summary>
+		public CCitadelModifierVData? m_OnGroundModifier => EmbeddedSubclass<CCitadelModifierVData>(__m_OnGroundModifier);
 
 		private static readonly SchemaField __m_StunAttachedParticle = new("CCitadel_Modifier_StickyBombAttachedVData", "m_StunAttachedParticle");
 		/// <summary><c>CResourceNameTyped&lt;CWeakHandle&lt;InfoForResourceTypeIParticleSystemDefinition&gt;&gt;</c>.</summary>

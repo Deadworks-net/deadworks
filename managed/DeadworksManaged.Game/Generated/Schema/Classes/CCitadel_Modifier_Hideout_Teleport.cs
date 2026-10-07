@@ -24,5 +24,8 @@ public static partial class Schema {
 		private static readonly SchemaField __m_sLandmarkName = new("CCitadel_Modifier_Hideout_Teleport", "m_sLandmarkName");
 		/// <summary><c>CUtlString</c>.</summary>
 		public string m_sLandmarkName => GetString(__m_sLandmarkName);
+
+		/// <summary>The data entry this was created from, as <see cref="CCitadel_Modifier_Hideout_TeleportVData"/>, or null if it has none.</summary>
+		public new CCitadel_Modifier_Hideout_TeleportVData? VData => ModifierData<CCitadel_Modifier_Hideout_TeleportVData>();
 	}
 }

@@ -12,5 +12,8 @@ public static partial class Schema {
 		internal CCitadel_Modifier_FrenzyAura() { }
 		static CCitadel_Modifier_FrenzyAura ISchemaClass<CCitadel_Modifier_FrenzyAura>.New() => new();
 		static string ISchemaClass<CCitadel_Modifier_FrenzyAura>.NativeName => "CCitadel_Modifier_FrenzyAura";
+
+		/// <summary>The data entry this was created from, as <see cref="CCitadel_Modifier_FrenzyAuraVData"/>, or null if it has none.</summary>
+		public new CCitadel_Modifier_FrenzyAuraVData? VData => ModifierData<CCitadel_Modifier_FrenzyAuraVData>();
 	}
 }

@@ -14,16 +14,16 @@ public static partial class Schema {
 		static string ISchemaClass<CCitadel_Modifier_RatNibbleVData>.NativeName => "CCitadel_Modifier_RatNibbleVData";
 
 		private static readonly SchemaField __m_ArmorTotalModifier = new("CCitadel_Modifier_RatNibbleVData", "m_ArmorTotalModifier");
-		/// <summary><c>CEmbeddedSubclass&lt;CCitadelModifier&gt;</c>. Shows the target's combined bullet armor reduction from every nibble debuff and linger as one overhead icon. No typed mapping yet: read it through its address.</summary>
-		public RawField m_ArmorTotalModifier => Raw(__m_ArmorTotalModifier, "CEmbeddedSubclass<CCitadelModifier>");
+		/// <summary><c>CEmbeddedSubclass&lt;CCitadelModifier&gt;</c>. Shows the target's combined bullet armor reduction from every nibble debuff and linger as one overhead icon.</summary>
+		public CCitadelModifierVData? m_ArmorTotalModifier => EmbeddedSubclass<CCitadelModifierVData>(__m_ArmorTotalModifier);
 
 		private static readonly SchemaField __m_DpsSound = new("CCitadel_Modifier_RatNibbleVData", "m_DpsSound");
 		/// <summary><c>CSoundEventName</c>.</summary>
 		public string m_DpsSound => GetBufferString(__m_DpsSound);
 
 		private static readonly SchemaField __m_LingerModifier = new("CCitadel_Modifier_RatNibbleVData", "m_LingerModifier");
-		/// <summary><c>CEmbeddedSubclass&lt;CCitadelModifier&gt;</c>. No typed mapping yet: read it through its address.</summary>
-		public RawField m_LingerModifier => Raw(__m_LingerModifier, "CEmbeddedSubclass<CCitadelModifier>");
+		/// <summary><c>CEmbeddedSubclass&lt;CCitadelModifier&gt;</c>.</summary>
+		public CCitadelModifierVData? m_LingerModifier => EmbeddedSubclass<CCitadelModifierVData>(__m_LingerModifier);
 
 		private static readonly SchemaField __m_RatCountParticle = new("CCitadel_Modifier_RatNibbleVData", "m_RatCountParticle");
 		/// <summary><c>CResourceNameTyped&lt;CWeakHandle&lt;InfoForResourceTypeIParticleSystemDefinition&gt;&gt;</c>.</summary>

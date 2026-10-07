@@ -14,7 +14,7 @@ public static partial class Schema {
 		static string ISchemaClass<CCitadel_Modifier_TeleportVData>.NativeName => "CCitadel_Modifier_TeleportVData";
 
 		private static readonly SchemaField __m_SpeedBonusModifier = new("CCitadel_Modifier_TeleportVData", "m_SpeedBonusModifier");
-		/// <summary><c>CEmbeddedSubclass&lt;CCitadelModifier&gt;</c>. No typed mapping yet: read it through its address.</summary>
-		public RawField m_SpeedBonusModifier => Raw(__m_SpeedBonusModifier, "CEmbeddedSubclass<CCitadelModifier>");
+		/// <summary><c>CEmbeddedSubclass&lt;CCitadelModifier&gt;</c>.</summary>
+		public CCitadelModifierVData? m_SpeedBonusModifier => EmbeddedSubclass<CCitadelModifierVData>(__m_SpeedBonusModifier);
 	}
 }

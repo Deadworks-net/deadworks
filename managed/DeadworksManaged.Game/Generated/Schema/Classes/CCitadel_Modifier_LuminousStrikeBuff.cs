@@ -16,5 +16,8 @@ public static partial class Schema {
 		private static readonly SchemaField __m_nPowerupParticle = new("CCitadel_Modifier_LuminousStrikeBuff", "m_nPowerupParticle");
 		/// <summary><c>ParticleIndex_t</c>.</summary>
 		public int m_nPowerupParticle { get => Get<int>(__m_nPowerupParticle); set => Set(__m_nPowerupParticle, value); }
+
+		/// <summary>The data entry this was created from, as <see cref="CCitadel_Modifier_LuminousStrikeBuffVData"/>, or null if it has none.</summary>
+		public new CCitadel_Modifier_LuminousStrikeBuffVData? VData => ModifierData<CCitadel_Modifier_LuminousStrikeBuffVData>();
 	}
 }

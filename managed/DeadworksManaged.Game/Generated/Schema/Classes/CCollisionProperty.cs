@@ -15,7 +15,7 @@ public static partial class Schema {
 
 		private static readonly SchemaField __m_CollisionGroup = new("CCollisionProperty", "m_CollisionGroup");
 		/// <summary><c>uint8</c>. Wrapped by <c>CCollisionProperty.CollisionGroup</c> in DeadworksManaged.Api.</summary>
-		public byte m_CollisionGroup { get => Get<byte>(__m_CollisionGroup); set => Set(__m_CollisionGroup, value); }
+		public byte m_CollisionGroup { get => Get<byte>(__m_CollisionGroup); [Obsolete("A raw write skips what CCollisionProperty.SetCollisionGroup does; call that on the curated wrapper instead.")] set => Set(__m_CollisionGroup, value); }
 
 		private static readonly SchemaField __m_collisionAttribute = new("CCollisionProperty", "m_collisionAttribute");
 		/// <summary><c>VPhysicsCollisionAttribute_t</c>. Wrapped by <c>CCollisionProperty.Attribute</c> in DeadworksManaged.Api.</summary>
@@ -47,7 +47,7 @@ public static partial class Schema {
 
 		private static readonly SchemaField __m_usSolidFlags = new("CCollisionProperty", "m_usSolidFlags");
 		/// <summary><c>uint8</c>. Wrapped by <c>CCollisionProperty.SolidFlags</c> in DeadworksManaged.Api.</summary>
-		public byte m_usSolidFlags { get => Get<byte>(__m_usSolidFlags); set => Set(__m_usSolidFlags, value); }
+		public byte m_usSolidFlags { get => Get<byte>(__m_usSolidFlags); [Obsolete("A raw write skips what CCollisionProperty.SetSolidFlags does; call that on the curated wrapper instead.")] set => Set(__m_usSolidFlags, value); }
 
 		private static readonly SchemaField __m_vCapsuleCenter1 = new("CCollisionProperty", "m_vCapsuleCenter1");
 		/// <summary><c>Vector</c>.</summary>

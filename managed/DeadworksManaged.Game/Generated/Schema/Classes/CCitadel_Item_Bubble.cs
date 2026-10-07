@@ -16,5 +16,8 @@ public static partial class Schema {
 		private static readonly SchemaField __m_flEndTime = new("CCitadel_Item_Bubble", "m_flEndTime");
 		/// <summary><c>GameTime_t</c>.</summary>
 		public float m_flEndTime { get => Get<float>(__m_flEndTime); set => Set(__m_flEndTime, value); }
+
+		/// <summary>The data entry this was created from, as <see cref="CCitadel_Item_BubbleVData"/>, or null if it has none.</summary>
+		public new CCitadel_Item_BubbleVData? VData => SubclassVData<CCitadel_Item_BubbleVData>();
 	}
 }

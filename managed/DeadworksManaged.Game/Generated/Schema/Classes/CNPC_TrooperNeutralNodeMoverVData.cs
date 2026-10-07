@@ -14,8 +14,8 @@ public static partial class Schema {
 		static string ISchemaClass<CNPC_TrooperNeutralNodeMoverVData>.NativeName => "CNPC_TrooperNeutralNodeMoverVData";
 
 		private static readonly SchemaField __m_HidingModifier = new("CNPC_TrooperNeutralNodeMoverVData", "m_HidingModifier");
-		/// <summary><c>CEmbeddedSubclass&lt;CCitadelModifier&gt;</c>. No typed mapping yet: read it through its address.</summary>
-		public RawField m_HidingModifier => Raw(__m_HidingModifier, "CEmbeddedSubclass<CCitadelModifier>");
+		/// <summary><c>CEmbeddedSubclass&lt;CCitadelModifier&gt;</c>.</summary>
+		public CCitadelModifierVData? m_HidingModifier => EmbeddedSubclass<CCitadelModifierVData>(__m_HidingModifier);
 
 		private static readonly SchemaField __m_bEnableMovementToNodes = new("CNPC_TrooperNeutralNodeMoverVData", "m_bEnableMovementToNodes");
 		/// <summary><c>bool</c>.</summary>

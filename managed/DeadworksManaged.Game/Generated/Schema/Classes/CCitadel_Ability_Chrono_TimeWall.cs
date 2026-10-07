@@ -36,5 +36,8 @@ public static partial class Schema {
 		private static readonly SchemaField __vecDir = new("CCitadel_Ability_Chrono_TimeWall", "vecDir");
 		/// <summary><c>Vector</c>.</summary>
 		public Vector3 vecDir { get => Get<Vector3>(__vecDir); set => Set(__vecDir, value); }
+
+		/// <summary>The data entry this was created from, as <see cref="CCitadel_Ability_Chrono_TimeWallVData"/>, or null if it has none.</summary>
+		public new CCitadel_Ability_Chrono_TimeWallVData? VData => SubclassVData<CCitadel_Ability_Chrono_TimeWallVData>();
 	}
 }

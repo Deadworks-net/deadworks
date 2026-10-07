@@ -26,7 +26,7 @@ public static partial class Schema {
 		public SchemaStringList m_vecExcludedPenalties => new(this, __m_vecExcludedPenalties, -1);
 
 		private static readonly SchemaField __m_vecIntrinsicModifiers = new("CorruptedItemInfo_t", "m_vecIntrinsicModifiers");
-		/// <summary><c>CUtlVector&lt;CEmbeddedSubclass&lt;CBaseModifier&gt;&gt;</c>. Extra intrinsic modifiers granted only while the item is corrupted. No typed mapping yet: read it through its address.</summary>
-		public RawField m_vecIntrinsicModifiers => Raw(__m_vecIntrinsicModifiers, "CUtlVector<CEmbeddedSubclass<CBaseModifier>>");
+		/// <summary><c>CUtlVector&lt;CEmbeddedSubclass&lt;CBaseModifier&gt;&gt;</c>. Extra intrinsic modifiers granted only while the item is corrupted.</summary>
+		public SchemaPointerList<CModifierVData> m_vecIntrinsicModifiers => new(this, __m_vecIntrinsicModifiers, -1, 16, 8);
 	}
 }

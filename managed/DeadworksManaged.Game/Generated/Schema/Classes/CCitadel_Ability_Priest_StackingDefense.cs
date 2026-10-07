@@ -16,5 +16,8 @@ public static partial class Schema {
 		private static readonly SchemaField __m_flMaxStacksBonusDamage = new("CCitadel_Ability_Priest_StackingDefense", "m_flMaxStacksBonusDamage");
 		/// <summary><c>float32</c>.</summary>
 		public float m_flMaxStacksBonusDamage { get => Get<float>(__m_flMaxStacksBonusDamage); set => Set(__m_flMaxStacksBonusDamage, value); }
+
+		/// <summary>The data entry this was created from, as <see cref="CCitadel_Ability_Priest_StackingDefenseVData"/>, or null if it has none.</summary>
+		public new CCitadel_Ability_Priest_StackingDefenseVData? VData => SubclassVData<CCitadel_Ability_Priest_StackingDefenseVData>();
 	}
 }

@@ -34,12 +34,12 @@ public static partial class Schema {
 		public string m_PowerUpParticle => GetBufferString(__m_PowerUpParticle);
 
 		private static readonly SchemaField __m_SlowModifier = new("CAbilityPowerSlashVData", "m_SlowModifier");
-		/// <summary><c>CEmbeddedSubclass&lt;CBaseModifier&gt;</c>. No typed mapping yet: read it through its address.</summary>
-		public RawField m_SlowModifier => Raw(__m_SlowModifier, "CEmbeddedSubclass<CBaseModifier>");
+		/// <summary><c>CEmbeddedSubclass&lt;CBaseModifier&gt;</c>.</summary>
+		public CModifierVData? m_SlowModifier => EmbeddedSubclass<CModifierVData>(__m_SlowModifier);
 
 		private static readonly SchemaField __m_UnstoppableWhileCastingModifier = new("CAbilityPowerSlashVData", "m_UnstoppableWhileCastingModifier");
-		/// <summary><c>CEmbeddedSubclass&lt;CCitadelModifier&gt;</c>. No typed mapping yet: read it through its address.</summary>
-		public RawField m_UnstoppableWhileCastingModifier => Raw(__m_UnstoppableWhileCastingModifier, "CEmbeddedSubclass<CCitadelModifier>");
+		/// <summary><c>CEmbeddedSubclass&lt;CCitadelModifier&gt;</c>.</summary>
+		public CCitadelModifierVData? m_UnstoppableWhileCastingModifier => EmbeddedSubclass<CCitadelModifierVData>(__m_UnstoppableWhileCastingModifier);
 
 		private static readonly SchemaField __m_flAirDrag = new("CAbilityPowerSlashVData", "m_flAirDrag");
 		/// <summary><c>float32</c>.</summary>

@@ -36,5 +36,8 @@ public static partial class Schema {
 		private static readonly SchemaField __m_vecLinkPosition = new("CCitadel_Modifier_Link", "m_vecLinkPosition");
 		/// <summary><c>VectorWS</c>.</summary>
 		public Vector3 m_vecLinkPosition { get => Get<Vector3>(__m_vecLinkPosition); set => Set(__m_vecLinkPosition, value); }
+
+		/// <summary>The data entry this was created from, as <see cref="CCitadel_Modifier_LinkVData"/>, or null if it has none.</summary>
+		public new CCitadel_Modifier_LinkVData? VData => ModifierData<CCitadel_Modifier_LinkVData>();
 	}
 }

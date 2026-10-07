@@ -16,5 +16,8 @@ public static partial class Schema {
 		private static readonly SchemaField __m_hAttachedTo = new("CCitadel_Modifier_Familiar_Attached", "m_hAttachedTo");
 		/// <summary><c>CHandle&lt;CBaseEntity&gt;</c>.</summary>
 		public CBaseEntity? m_hAttachedTo { get => GetHandle<CBaseEntity>(__m_hAttachedTo); set => SetHandle(__m_hAttachedTo, value); }
+
+		/// <summary>The data entry this was created from, as <see cref="CCitadel_Modifier_Familiar_AttachedVData"/>, or null if it has none.</summary>
+		public new CCitadel_Modifier_Familiar_AttachedVData? VData => ModifierData<CCitadel_Modifier_Familiar_AttachedVData>();
 	}
 }

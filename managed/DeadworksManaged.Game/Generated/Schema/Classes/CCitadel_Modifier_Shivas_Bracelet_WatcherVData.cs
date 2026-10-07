@@ -14,12 +14,12 @@ public static partial class Schema {
 		static string ISchemaClass<CCitadel_Modifier_Shivas_Bracelet_WatcherVData>.NativeName => "CCitadel_Modifier_Shivas_Bracelet_WatcherVData";
 
 		private static readonly SchemaField __m_FreezeModifier = new("CCitadel_Modifier_Shivas_Bracelet_WatcherVData", "m_FreezeModifier");
-		/// <summary><c>CEmbeddedSubclass&lt;CCitadelModifier&gt;</c>. No typed mapping yet: read it through its address.</summary>
-		public RawField m_FreezeModifier => Raw(__m_FreezeModifier, "CEmbeddedSubclass<CCitadelModifier>");
+		/// <summary><c>CEmbeddedSubclass&lt;CCitadelModifier&gt;</c>.</summary>
+		public CCitadelModifierVData? m_FreezeModifier => EmbeddedSubclass<CCitadelModifierVData>(__m_FreezeModifier);
 
 		private static readonly SchemaField __m_ImmuneModifier = new("CCitadel_Modifier_Shivas_Bracelet_WatcherVData", "m_ImmuneModifier");
-		/// <summary><c>CEmbeddedSubclass&lt;CCitadelModifier&gt;</c>. No typed mapping yet: read it through its address.</summary>
-		public RawField m_ImmuneModifier => Raw(__m_ImmuneModifier, "CEmbeddedSubclass<CCitadelModifier>");
+		/// <summary><c>CEmbeddedSubclass&lt;CCitadelModifier&gt;</c>.</summary>
+		public CCitadelModifierVData? m_ImmuneModifier => EmbeddedSubclass<CCitadelModifierVData>(__m_ImmuneModifier);
 
 		private static readonly SchemaField __m_ProcParticle = new("CCitadel_Modifier_Shivas_Bracelet_WatcherVData", "m_ProcParticle");
 		/// <summary><c>CResourceNameTyped&lt;CWeakHandle&lt;InfoForResourceTypeIParticleSystemDefinition&gt;&gt;</c>.</summary>

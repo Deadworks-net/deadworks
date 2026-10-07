@@ -22,8 +22,8 @@ public static partial class Schema {
 		public string m_TeleportTrailParticle => GetBufferString(__m_TeleportTrailParticle);
 
 		private static readonly SchemaField __m_WeaponDamageBonusModifier = new("CAbility_Synth_PlasmaFlux_VData", "m_WeaponDamageBonusModifier");
-		/// <summary><c>CEmbeddedSubclass&lt;CBaseModifier&gt;</c>. No typed mapping yet: read it through its address.</summary>
-		public RawField m_WeaponDamageBonusModifier => Raw(__m_WeaponDamageBonusModifier, "CEmbeddedSubclass<CBaseModifier>");
+		/// <summary><c>CEmbeddedSubclass&lt;CBaseModifier&gt;</c>.</summary>
+		public CModifierVData? m_WeaponDamageBonusModifier => EmbeddedSubclass<CModifierVData>(__m_WeaponDamageBonusModifier);
 
 		private static readonly SchemaField __m_cameraSequenceTeleport = new("CAbility_Synth_PlasmaFlux_VData", "m_cameraSequenceTeleport");
 		/// <summary><c>CitadelCameraOperationsSequence_t</c>.</summary>

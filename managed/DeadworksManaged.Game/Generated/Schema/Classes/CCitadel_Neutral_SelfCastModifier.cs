@@ -12,5 +12,8 @@ public static partial class Schema {
 		internal CCitadel_Neutral_SelfCastModifier() { }
 		static CCitadel_Neutral_SelfCastModifier ISchemaClass<CCitadel_Neutral_SelfCastModifier>.New() => new();
 		static string ISchemaClass<CCitadel_Neutral_SelfCastModifier>.NativeName => "CCitadel_Neutral_SelfCastModifier";
+
+		/// <summary>The data entry this was created from, as <see cref="CCitadel_Neutral_SelfCastModifierVData"/>, or null if it has none.</summary>
+		public new CCitadel_Neutral_SelfCastModifierVData? VData => ModifierData<CCitadel_Neutral_SelfCastModifierVData>();
 	}
 }

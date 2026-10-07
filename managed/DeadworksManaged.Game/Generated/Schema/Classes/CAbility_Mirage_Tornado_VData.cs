@@ -14,8 +14,8 @@ public static partial class Schema {
 		static string ISchemaClass<CAbility_Mirage_Tornado_VData>.NativeName => "CAbility_Mirage_Tornado_VData";
 
 		private static readonly SchemaField __m_AdditionalTornadoMover = new("CAbility_Mirage_Tornado_VData", "m_AdditionalTornadoMover");
-		/// <summary><c>CEmbeddedSubclass&lt;CCitadelModifier&gt;</c>. No typed mapping yet: read it through its address.</summary>
-		public RawField m_AdditionalTornadoMover => Raw(__m_AdditionalTornadoMover, "CEmbeddedSubclass<CCitadelModifier>");
+		/// <summary><c>CEmbeddedSubclass&lt;CCitadelModifier&gt;</c>.</summary>
+		public CCitadelModifierVData? m_AdditionalTornadoMover => EmbeddedSubclass<CCitadelModifierVData>(__m_AdditionalTornadoMover);
 
 		private static readonly SchemaField __m_PurgeCastParticle = new("CAbility_Mirage_Tornado_VData", "m_PurgeCastParticle");
 		/// <summary><c>CResourceNameTyped&lt;CWeakHandle&lt;InfoForResourceTypeIParticleSystemDefinition&gt;&gt;</c>.</summary>
@@ -26,16 +26,16 @@ public static partial class Schema {
 		public string m_PurgeSound => GetBufferString(__m_PurgeSound);
 
 		private static readonly SchemaField __m_TornadoAura = new("CAbility_Mirage_Tornado_VData", "m_TornadoAura");
-		/// <summary><c>CEmbeddedSubclass&lt;CCitadelModifier&gt;</c>. No typed mapping yet: read it through its address.</summary>
-		public RawField m_TornadoAura => Raw(__m_TornadoAura, "CEmbeddedSubclass<CCitadelModifier>");
+		/// <summary><c>CEmbeddedSubclass&lt;CCitadelModifier&gt;</c>.</summary>
+		public CCitadelModifierVData? m_TornadoAura => EmbeddedSubclass<CCitadelModifierVData>(__m_TornadoAura);
 
 		private static readonly SchemaField __m_TornadoCastParticle = new("CAbility_Mirage_Tornado_VData", "m_TornadoCastParticle");
 		/// <summary><c>CResourceNameTyped&lt;CWeakHandle&lt;InfoForResourceTypeIParticleSystemDefinition&gt;&gt;</c>.</summary>
 		public string m_TornadoCastParticle => GetBufferString(__m_TornadoCastParticle);
 
 		private static readonly SchemaField __m_WhirlwindEvasionModifier = new("CAbility_Mirage_Tornado_VData", "m_WhirlwindEvasionModifier");
-		/// <summary><c>CEmbeddedSubclass&lt;CCitadelModifier&gt;</c>. No typed mapping yet: read it through its address.</summary>
-		public RawField m_WhirlwindEvasionModifier => Raw(__m_WhirlwindEvasionModifier, "CEmbeddedSubclass<CCitadelModifier>");
+		/// <summary><c>CEmbeddedSubclass&lt;CCitadelModifier&gt;</c>.</summary>
+		public CCitadelModifierVData? m_WhirlwindEvasionModifier => EmbeddedSubclass<CCitadelModifierVData>(__m_WhirlwindEvasionModifier);
 
 		private static readonly SchemaField __m_cameraSequenceTravelingInTornado = new("CAbility_Mirage_Tornado_VData", "m_cameraSequenceTravelingInTornado");
 		/// <summary><c>CitadelCameraOperationsSequence_t</c>.</summary>

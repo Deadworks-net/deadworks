@@ -22,7 +22,7 @@ public static partial class Schema {
 		public string m_RegenParticle => GetBufferString(__m_RegenParticle);
 
 		private static readonly SchemaField __m_StackNotificationModifier = new("CCitadel_Item_Mystic_RegenerationVData", "m_StackNotificationModifier");
-		/// <summary><c>CEmbeddedSubclass&lt;CBaseModifier&gt;</c>. No typed mapping yet: read it through its address.</summary>
-		public RawField m_StackNotificationModifier => Raw(__m_StackNotificationModifier, "CEmbeddedSubclass<CBaseModifier>");
+		/// <summary><c>CEmbeddedSubclass&lt;CBaseModifier&gt;</c>.</summary>
+		public CModifierVData? m_StackNotificationModifier => EmbeddedSubclass<CModifierVData>(__m_StackNotificationModifier);
 	}
 }

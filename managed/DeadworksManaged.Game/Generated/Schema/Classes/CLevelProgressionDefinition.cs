@@ -18,7 +18,7 @@ public static partial class Schema {
 		public EBetweenValueBehavior m_eBetweenBehavior { get => Get<EBetweenValueBehavior>(__m_eBetweenBehavior); set => Set(__m_eBetweenBehavior, value); }
 
 		private static readonly SchemaField __m_mapLevelsToValue = new("CLevelProgressionDefinition", "m_mapLevelsToValue");
-		/// <summary><c>CUtlOrderedMap&lt;int32, float32&gt;</c>. No typed mapping yet: read it through its address.</summary>
-		public RawField m_mapLevelsToValue => Raw(__m_mapLevelsToValue, "CUtlOrderedMap<int32, float32>");
+		/// <summary><c>CUtlOrderedMap&lt;int32, float32&gt;</c>.</summary>
+		public SchemaValueMap<int, float> m_mapLevelsToValue => new(this, __m_mapLevelsToValue);
 	}
 }

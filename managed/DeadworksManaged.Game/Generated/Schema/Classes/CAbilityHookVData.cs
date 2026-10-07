@@ -14,8 +14,8 @@ public static partial class Schema {
 		static string ISchemaClass<CAbilityHookVData>.NativeName => "CAbilityHookVData";
 
 		private static readonly SchemaField __m_BulletAmpModifier = new("CAbilityHookVData", "m_BulletAmpModifier");
-		/// <summary><c>CEmbeddedSubclass&lt;CCitadelModifier&gt;</c>. No typed mapping yet: read it through its address.</summary>
-		public RawField m_BulletAmpModifier => Raw(__m_BulletAmpModifier, "CEmbeddedSubclass<CCitadelModifier>");
+		/// <summary><c>CEmbeddedSubclass&lt;CCitadelModifier&gt;</c>.</summary>
+		public CCitadelModifierVData? m_BulletAmpModifier => EmbeddedSubclass<CCitadelModifierVData>(__m_BulletAmpModifier);
 
 		private static readonly SchemaField __m_HookOutParticle = new("CAbilityHookVData", "m_HookOutParticle");
 		/// <summary><c>CResourceNameTyped&lt;CWeakHandle&lt;InfoForResourceTypeIParticleSystemDefinition&gt;&gt;</c>.</summary>
@@ -34,12 +34,12 @@ public static partial class Schema {
 		public string m_PrecastHookParticle => GetBufferString(__m_PrecastHookParticle);
 
 		private static readonly SchemaField __m_SelfModifier = new("CAbilityHookVData", "m_SelfModifier");
-		/// <summary><c>CEmbeddedSubclass&lt;CCitadelModifier&gt;</c>. No typed mapping yet: read it through its address.</summary>
-		public RawField m_SelfModifier => Raw(__m_SelfModifier, "CEmbeddedSubclass<CCitadelModifier>");
+		/// <summary><c>CEmbeddedSubclass&lt;CCitadelModifier&gt;</c>.</summary>
+		public CCitadelModifierVData? m_SelfModifier => EmbeddedSubclass<CCitadelModifierVData>(__m_SelfModifier);
 
 		private static readonly SchemaField __m_TargetModifier = new("CAbilityHookVData", "m_TargetModifier");
-		/// <summary><c>CEmbeddedSubclass&lt;CCitadelModifier&gt;</c>. No typed mapping yet: read it through its address.</summary>
-		public RawField m_TargetModifier => Raw(__m_TargetModifier, "CEmbeddedSubclass<CCitadelModifier>");
+		/// <summary><c>CEmbeddedSubclass&lt;CCitadelModifier&gt;</c>.</summary>
+		public CCitadelModifierVData? m_TargetModifier => EmbeddedSubclass<CCitadelModifierVData>(__m_TargetModifier);
 
 		private static readonly SchemaField __m_flFriendlyHookIgnoreRange = new("CAbilityHookVData", "m_flFriendlyHookIgnoreRange");
 		/// <summary><c>float32</c>.</summary>

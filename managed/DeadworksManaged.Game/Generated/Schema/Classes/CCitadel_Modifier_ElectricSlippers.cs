@@ -12,5 +12,8 @@ public static partial class Schema {
 		internal CCitadel_Modifier_ElectricSlippers() { }
 		static CCitadel_Modifier_ElectricSlippers ISchemaClass<CCitadel_Modifier_ElectricSlippers>.New() => new();
 		static string ISchemaClass<CCitadel_Modifier_ElectricSlippers>.NativeName => "CCitadel_Modifier_ElectricSlippers";
+
+		/// <summary>The data entry this was created from, as <see cref="CCitadel_Modifier_ElectricSlippersVData"/>, or null if it has none.</summary>
+		public new CCitadel_Modifier_ElectricSlippersVData? VData => ModifierData<CCitadel_Modifier_ElectricSlippersVData>();
 	}
 }

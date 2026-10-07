@@ -14,12 +14,12 @@ public static partial class Schema {
 		static string ISchemaClass<CCitadel_Werewolf_TransformationVData>.NativeName => "CCitadel_Werewolf_TransformationVData";
 
 		private static readonly SchemaField __m_KillCreditModifier = new("CCitadel_Werewolf_TransformationVData", "m_KillCreditModifier");
-		/// <summary><c>CEmbeddedSubclass&lt;CCitadelModifier&gt;</c>. No typed mapping yet: read it through its address.</summary>
-		public RawField m_KillCreditModifier => Raw(__m_KillCreditModifier, "CEmbeddedSubclass<CCitadelModifier>");
+		/// <summary><c>CEmbeddedSubclass&lt;CCitadelModifier&gt;</c>.</summary>
+		public CCitadelModifierVData? m_KillCreditModifier => EmbeddedSubclass<CCitadelModifierVData>(__m_KillCreditModifier);
 
 		private static readonly SchemaField __m_ReadyModifier = new("CCitadel_Werewolf_TransformationVData", "m_ReadyModifier");
-		/// <summary><c>CEmbeddedSubclass&lt;CCitadelModifier&gt;</c>. No typed mapping yet: read it through its address.</summary>
-		public RawField m_ReadyModifier => Raw(__m_ReadyModifier, "CEmbeddedSubclass<CCitadelModifier>");
+		/// <summary><c>CEmbeddedSubclass&lt;CCitadelModifier&gt;</c>.</summary>
+		public CCitadelModifierVData? m_ReadyModifier => EmbeddedSubclass<CCitadelModifierVData>(__m_ReadyModifier);
 
 		private static readonly SchemaField __m_TransformEndParticle = new("CCitadel_Werewolf_TransformationVData", "m_TransformEndParticle");
 		/// <summary><c>CResourceNameTyped&lt;CWeakHandle&lt;InfoForResourceTypeIParticleSystemDefinition&gt;&gt;</c>.</summary>
@@ -30,8 +30,8 @@ public static partial class Schema {
 		public string m_TransformKillParticle => GetBufferString(__m_TransformKillParticle);
 
 		private static readonly SchemaField __m_WerewolfModifier = new("CCitadel_Werewolf_TransformationVData", "m_WerewolfModifier");
-		/// <summary><c>CEmbeddedSubclass&lt;CCitadelModifier&gt;</c>. No typed mapping yet: read it through its address.</summary>
-		public RawField m_WerewolfModifier => Raw(__m_WerewolfModifier, "CEmbeddedSubclass<CCitadelModifier>");
+		/// <summary><c>CEmbeddedSubclass&lt;CCitadelModifier&gt;</c>.</summary>
+		public CCitadelModifierVData? m_WerewolfModifier => EmbeddedSubclass<CCitadelModifierVData>(__m_WerewolfModifier);
 
 		private static readonly SchemaField __m_bAutoTransformOnReadyComplete = new("CCitadel_Werewolf_TransformationVData", "m_bAutoTransformOnReadyComplete");
 		/// <summary><c>bool</c>.</summary>

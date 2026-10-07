@@ -28,5 +28,8 @@ public static partial class Schema {
 		private static readonly SchemaField __m_vecTeleportPositionNormal = new("CCitadel_Ability_Viscous_Telepunch", "m_vecTeleportPositionNormal");
 		/// <summary><c>Vector</c>.</summary>
 		public Vector3 m_vecTeleportPositionNormal { get => Get<Vector3>(__m_vecTeleportPositionNormal); set => Set(__m_vecTeleportPositionNormal, value); }
+
+		/// <summary>The data entry this was created from, as <see cref="CCitadel_Ability_Viscous_TelepunchVData"/>, or null if it has none.</summary>
+		public new CCitadel_Ability_Viscous_TelepunchVData? VData => SubclassVData<CCitadel_Ability_Viscous_TelepunchVData>();
 	}
 }

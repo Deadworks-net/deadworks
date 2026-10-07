@@ -24,5 +24,8 @@ public static partial class Schema {
 		private static readonly SchemaField __m_iMessageCount = new("CCitadel_Modifier_RespawnCredit", "m_iMessageCount");
 		/// <summary><c>int32</c>.</summary>
 		public int m_iMessageCount { get => Get<int>(__m_iMessageCount); set => Set(__m_iMessageCount, value); }
+
+		/// <summary>The data entry this was created from, as <see cref="CCitadel_Modifier_RespawnCreditVData"/>, or null if it has none.</summary>
+		public new CCitadel_Modifier_RespawnCreditVData? VData => ModifierData<CCitadel_Modifier_RespawnCreditVData>();
 	}
 }

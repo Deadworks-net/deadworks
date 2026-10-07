@@ -12,5 +12,8 @@ public static partial class Schema {
 		internal CCitadel_Upgrade_WeaponPowerForHealth() { }
 		static CCitadel_Upgrade_WeaponPowerForHealth ISchemaClass<CCitadel_Upgrade_WeaponPowerForHealth>.New() => new();
 		static string ISchemaClass<CCitadel_Upgrade_WeaponPowerForHealth>.NativeName => "CCitadel_Upgrade_WeaponPowerForHealth";
+
+		/// <summary>The data entry this was created from, as <see cref="CCitadel_Upgrade_WeaponPowerForHealthVData"/>, or null if it has none.</summary>
+		public new CCitadel_Upgrade_WeaponPowerForHealthVData? VData => SubclassVData<CCitadel_Upgrade_WeaponPowerForHealthVData>();
 	}
 }

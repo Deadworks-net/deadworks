@@ -14,12 +14,12 @@ public static partial class Schema {
 		static string ISchemaClass<CAbilityThumper2VData>.NativeName => "CAbilityThumper2VData";
 
 		private static readonly SchemaField __m_BarbedWireAuraModifier = new("CAbilityThumper2VData", "m_BarbedWireAuraModifier");
-		/// <summary><c>CEmbeddedSubclass&lt;CCitadelModifier&gt;</c>. No typed mapping yet: read it through its address.</summary>
-		public RawField m_BarbedWireAuraModifier => Raw(__m_BarbedWireAuraModifier, "CEmbeddedSubclass<CCitadelModifier>");
+		/// <summary><c>CEmbeddedSubclass&lt;CCitadelModifier&gt;</c>.</summary>
+		public CCitadelModifierVData? m_BarbedWireAuraModifier => EmbeddedSubclass<CCitadelModifierVData>(__m_BarbedWireAuraModifier);
 
 		private static readonly SchemaField __m_BuffModifier = new("CAbilityThumper2VData", "m_BuffModifier");
-		/// <summary><c>CEmbeddedSubclass&lt;CCitadelModifier&gt;</c>. No typed mapping yet: read it through its address.</summary>
-		public RawField m_BuffModifier => Raw(__m_BuffModifier, "CEmbeddedSubclass<CCitadelModifier>");
+		/// <summary><c>CEmbeddedSubclass&lt;CCitadelModifier&gt;</c>.</summary>
+		public CCitadelModifierVData? m_BuffModifier => EmbeddedSubclass<CCitadelModifierVData>(__m_BuffModifier);
 
 		private static readonly SchemaField __m_StompParticle = new("CAbilityThumper2VData", "m_StompParticle");
 		/// <summary><c>CResourceNameTyped&lt;CWeakHandle&lt;InfoForResourceTypeIParticleSystemDefinition&gt;&gt;</c>.</summary>

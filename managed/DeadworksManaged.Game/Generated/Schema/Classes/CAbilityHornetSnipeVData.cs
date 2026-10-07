@@ -22,12 +22,12 @@ public static partial class Schema {
 		public string m_AssassinateShotParticleOwnerOnly => GetBufferString(__m_AssassinateShotParticleOwnerOnly);
 
 		private static readonly SchemaField __m_GlowEnemyModifier = new("CAbilityHornetSnipeVData", "m_GlowEnemyModifier");
-		/// <summary><c>CEmbeddedSubclass&lt;CCitadelModifier&gt;</c>. No typed mapping yet: read it through its address.</summary>
-		public RawField m_GlowEnemyModifier => Raw(__m_GlowEnemyModifier, "CEmbeddedSubclass<CCitadelModifier>");
+		/// <summary><c>CEmbeddedSubclass&lt;CCitadelModifier&gt;</c>.</summary>
+		public CCitadelModifierVData? m_GlowEnemyModifier => EmbeddedSubclass<CCitadelModifierVData>(__m_GlowEnemyModifier);
 
 		private static readonly SchemaField __m_KillCheckModifier = new("CAbilityHornetSnipeVData", "m_KillCheckModifier");
-		/// <summary><c>CEmbeddedSubclass&lt;CCitadelModifier&gt;</c>. No typed mapping yet: read it through its address.</summary>
-		public RawField m_KillCheckModifier => Raw(__m_KillCheckModifier, "CEmbeddedSubclass<CCitadelModifier>");
+		/// <summary><c>CEmbeddedSubclass&lt;CCitadelModifier&gt;</c>.</summary>
+		public CCitadelModifierVData? m_KillCheckModifier => EmbeddedSubclass<CCitadelModifierVData>(__m_KillCheckModifier);
 
 		private static readonly SchemaField __m_LaserSightParticle = new("CAbilityHornetSnipeVData", "m_LaserSightParticle");
 		/// <summary><c>CResourceNameTyped&lt;CWeakHandle&lt;InfoForResourceTypeIParticleSystemDefinition&gt;&gt;</c>.</summary>
@@ -42,8 +42,8 @@ public static partial class Schema {
 		public SchemaValueList<float> m_ScopeFoV => new(this, __m_ScopeFoV, -1);
 
 		private static readonly SchemaField __m_SnipeModifier = new("CAbilityHornetSnipeVData", "m_SnipeModifier");
-		/// <summary><c>CEmbeddedSubclass&lt;CCitadelModifier&gt;</c>. No typed mapping yet: read it through its address.</summary>
-		public RawField m_SnipeModifier => Raw(__m_SnipeModifier, "CEmbeddedSubclass<CCitadelModifier>");
+		/// <summary><c>CEmbeddedSubclass&lt;CCitadelModifier&gt;</c>.</summary>
+		public CCitadelModifierVData? m_SnipeModifier => EmbeddedSubclass<CCitadelModifierVData>(__m_SnipeModifier);
 
 		private static readonly SchemaField __m_flFadeToBlackTime = new("CAbilityHornetSnipeVData", "m_flFadeToBlackTime");
 		/// <summary><c>float32</c>.</summary>

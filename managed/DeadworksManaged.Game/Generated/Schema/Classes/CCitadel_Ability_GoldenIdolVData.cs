@@ -14,12 +14,12 @@ public static partial class Schema {
 		static string ISchemaClass<CCitadel_Ability_GoldenIdolVData>.NativeName => "CCitadel_Ability_GoldenIdolVData";
 
 		private static readonly SchemaField __m_DropoffTimerModifier = new("CCitadel_Ability_GoldenIdolVData", "m_DropoffTimerModifier");
-		/// <summary><c>CEmbeddedSubclass&lt;CCitadelModifier&gt;</c>. No typed mapping yet: read it through its address.</summary>
-		public RawField m_DropoffTimerModifier => Raw(__m_DropoffTimerModifier, "CEmbeddedSubclass<CCitadelModifier>");
+		/// <summary><c>CEmbeddedSubclass&lt;CCitadelModifier&gt;</c>.</summary>
+		public CCitadelModifierVData? m_DropoffTimerModifier => EmbeddedSubclass<CCitadelModifierVData>(__m_DropoffTimerModifier);
 
 		private static readonly SchemaField __m_HoldingIdolModifier = new("CCitadel_Ability_GoldenIdolVData", "m_HoldingIdolModifier");
-		/// <summary><c>CEmbeddedSubclass&lt;CCitadelModifier&gt;</c>. No typed mapping yet: read it through its address.</summary>
-		public RawField m_HoldingIdolModifier => Raw(__m_HoldingIdolModifier, "CEmbeddedSubclass<CCitadelModifier>");
+		/// <summary><c>CEmbeddedSubclass&lt;CCitadelModifier&gt;</c>.</summary>
+		public CCitadelModifierVData? m_HoldingIdolModifier => EmbeddedSubclass<CCitadelModifierVData>(__m_HoldingIdolModifier);
 
 		private static readonly SchemaField __m_OnExpireParticle = new("CCitadel_Ability_GoldenIdolVData", "m_OnExpireParticle");
 		/// <summary><c>CResourceNameTyped&lt;CWeakHandle&lt;InfoForResourceTypeIParticleSystemDefinition&gt;&gt;</c>.</summary>

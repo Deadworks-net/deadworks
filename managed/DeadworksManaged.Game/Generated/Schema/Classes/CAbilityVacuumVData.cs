@@ -14,8 +14,8 @@ public static partial class Schema {
 		static string ISchemaClass<CAbilityVacuumVData>.NativeName => "CAbilityVacuumVData";
 
 		private static readonly SchemaField __m_VacuumAuraModifier = new("CAbilityVacuumVData", "m_VacuumAuraModifier");
-		/// <summary><c>CEmbeddedSubclass&lt;CCitadelModifier&gt;</c>. No typed mapping yet: read it through its address.</summary>
-		public RawField m_VacuumAuraModifier => Raw(__m_VacuumAuraModifier, "CEmbeddedSubclass<CCitadelModifier>");
+		/// <summary><c>CEmbeddedSubclass&lt;CCitadelModifier&gt;</c>.</summary>
+		public CCitadelModifierVData? m_VacuumAuraModifier => EmbeddedSubclass<CCitadelModifierVData>(__m_VacuumAuraModifier);
 
 		private static readonly SchemaField __m_flAirDrag = new("CAbilityVacuumVData", "m_flAirDrag");
 		/// <summary><c>float32</c>.</summary>

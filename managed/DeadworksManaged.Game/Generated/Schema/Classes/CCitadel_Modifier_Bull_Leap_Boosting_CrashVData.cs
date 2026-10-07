@@ -18,8 +18,8 @@ public static partial class Schema {
 		public string m_CrashTrailParticle => GetBufferString(__m_CrashTrailParticle);
 
 		private static readonly SchemaField __m_DragModifier = new("CCitadel_Modifier_Bull_Leap_Boosting_CrashVData", "m_DragModifier");
-		/// <summary><c>CEmbeddedSubclass&lt;CCitadelModifier&gt;</c>. No typed mapping yet: read it through its address.</summary>
-		public RawField m_DragModifier => Raw(__m_DragModifier, "CEmbeddedSubclass<CCitadelModifier>");
+		/// <summary><c>CEmbeddedSubclass&lt;CCitadelModifier&gt;</c>.</summary>
+		public CCitadelModifierVData? m_DragModifier => EmbeddedSubclass<CCitadelModifierVData>(__m_DragModifier);
 
 		private static readonly SchemaField __m_flCollideRadius = new("CCitadel_Modifier_Bull_Leap_Boosting_CrashVData", "m_flCollideRadius");
 		/// <summary><c>float32</c>.</summary>

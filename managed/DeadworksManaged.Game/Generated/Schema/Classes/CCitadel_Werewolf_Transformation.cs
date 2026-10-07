@@ -36,5 +36,8 @@ public static partial class Schema {
 		private static readonly SchemaField __m_tLastRegenComponentThinkTime = new("CCitadel_Werewolf_Transformation", "m_tLastRegenComponentThinkTime");
 		/// <summary><c>GameTime_t</c>.</summary>
 		public float m_tLastRegenComponentThinkTime { get => Get<float>(__m_tLastRegenComponentThinkTime); set => Set(__m_tLastRegenComponentThinkTime, value); }
+
+		/// <summary>The data entry this was created from, as <see cref="CCitadel_Werewolf_TransformationVData"/>, or null if it has none.</summary>
+		public new CCitadel_Werewolf_TransformationVData? VData => SubclassVData<CCitadel_Werewolf_TransformationVData>();
 	}
 }

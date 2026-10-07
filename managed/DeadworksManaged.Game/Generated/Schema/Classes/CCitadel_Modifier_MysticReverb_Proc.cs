@@ -28,5 +28,8 @@ public static partial class Schema {
 		private static readonly SchemaField __m_nDamageTick = new("CCitadel_Modifier_MysticReverb_Proc", "m_nDamageTick");
 		/// <summary><c>int32</c>.</summary>
 		public int m_nDamageTick { get => Get<int>(__m_nDamageTick); set => Set(__m_nDamageTick, value); }
+
+		/// <summary>The data entry this was created from, as <see cref="CCitadel_Modifier_MysticReverb_ProcVData"/>, or null if it has none.</summary>
+		public new CCitadel_Modifier_MysticReverb_ProcVData? VData => ModifierData<CCitadel_Modifier_MysticReverb_ProcVData>();
 	}
 }

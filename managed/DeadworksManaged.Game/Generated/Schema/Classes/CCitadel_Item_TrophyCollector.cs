@@ -32,5 +32,8 @@ public static partial class Schema {
 		private static readonly SchemaField __m_iTrophyCount = new("CCitadel_Item_TrophyCollector", "m_iTrophyCount");
 		/// <summary><c>int32</c>.</summary>
 		public int m_iTrophyCount { get => Get<int>(__m_iTrophyCount); set => Set(__m_iTrophyCount, value); }
+
+		/// <summary>The data entry this was created from, as <see cref="CCitadel_Item_TrophyCollectorVData"/>, or null if it has none.</summary>
+		public new CCitadel_Item_TrophyCollectorVData? VData => SubclassVData<CCitadel_Item_TrophyCollectorVData>();
 	}
 }

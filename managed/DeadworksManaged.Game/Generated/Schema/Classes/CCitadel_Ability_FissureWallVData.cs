@@ -22,12 +22,12 @@ public static partial class Schema {
 		public string m_FriendlyWallParticle => GetBufferString(__m_FriendlyWallParticle);
 
 		private static readonly SchemaField __m_SlowModifier = new("CCitadel_Ability_FissureWallVData", "m_SlowModifier");
-		/// <summary><c>CEmbeddedSubclass&lt;CCitadelModifier&gt;</c>. No typed mapping yet: read it through its address.</summary>
-		public RawField m_SlowModifier => Raw(__m_SlowModifier, "CEmbeddedSubclass<CCitadelModifier>");
+		/// <summary><c>CEmbeddedSubclass&lt;CCitadelModifier&gt;</c>.</summary>
+		public CCitadelModifierVData? m_SlowModifier => EmbeddedSubclass<CCitadelModifierVData>(__m_SlowModifier);
 
 		private static readonly SchemaField __m_WallModifier = new("CCitadel_Ability_FissureWallVData", "m_WallModifier");
-		/// <summary><c>CEmbeddedSubclass&lt;CCitadelModifier&gt;</c>. No typed mapping yet: read it through its address.</summary>
-		public RawField m_WallModifier => Raw(__m_WallModifier, "CEmbeddedSubclass<CCitadelModifier>");
+		/// <summary><c>CEmbeddedSubclass&lt;CCitadelModifier&gt;</c>.</summary>
+		public CCitadelModifierVData? m_WallModifier => EmbeddedSubclass<CCitadelModifierVData>(__m_WallModifier);
 
 		private static readonly SchemaField __m_WallTravelSoundLoop = new("CCitadel_Ability_FissureWallVData", "m_WallTravelSoundLoop");
 		/// <summary><c>CSoundEventName</c>.</summary>

@@ -131,7 +131,7 @@ public static partial class Schema {
 
 		private static readonly SchemaField __m_flGravityScale = new("CBaseEntity", "m_flGravityScale");
 		/// <summary><c>float32</c>. Wrapped by <c>CBaseEntity.GravityScale</c> in DeadworksManaged.Api.</summary>
-		public float m_flGravityScale { get => Get<float>(__m_flGravityScale); set => Set(__m_flGravityScale, value); }
+		public float m_flGravityScale { get => Get<float>(__m_flGravityScale); [Obsolete("A raw write skips what CBaseEntity.SetGravityScale does; call that on the curated wrapper instead.")] set => Set(__m_flGravityScale, value); }
 
 		private static readonly SchemaField __m_flLocalTime = new("CBaseEntity", "m_flLocalTime");
 		/// <summary><c>float32</c>.</summary>

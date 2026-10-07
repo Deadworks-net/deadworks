@@ -14,8 +14,8 @@ public static partial class Schema {
 		static string ISchemaClass<CCitadel_Modifier_LuggageDragVData>.NativeName => "CCitadel_Modifier_LuggageDragVData";
 
 		private static readonly SchemaField __m_StompIgnoreLingerModifier = new("CCitadel_Modifier_LuggageDragVData", "m_StompIgnoreLingerModifier");
-		/// <summary><c>CEmbeddedSubclass&lt;CCitadelModifier&gt;</c>. No typed mapping yet: read it through its address.</summary>
-		public RawField m_StompIgnoreLingerModifier => Raw(__m_StompIgnoreLingerModifier, "CEmbeddedSubclass<CCitadelModifier>");
+		/// <summary><c>CEmbeddedSubclass&lt;CCitadelModifier&gt;</c>.</summary>
+		public CCitadelModifierVData? m_StompIgnoreLingerModifier => EmbeddedSubclass<CCitadelModifierVData>(__m_StompIgnoreLingerModifier);
 
 		private static readonly SchemaField __m_flStompIgnoreLingerDuration = new("CCitadel_Modifier_LuggageDragVData", "m_flStompIgnoreLingerDuration");
 		/// <summary><c>float32</c>.</summary>

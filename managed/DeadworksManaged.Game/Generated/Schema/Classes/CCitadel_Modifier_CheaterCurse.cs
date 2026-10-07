@@ -12,5 +12,8 @@ public static partial class Schema {
 		internal CCitadel_Modifier_CheaterCurse() { }
 		static CCitadel_Modifier_CheaterCurse ISchemaClass<CCitadel_Modifier_CheaterCurse>.New() => new();
 		static string ISchemaClass<CCitadel_Modifier_CheaterCurse>.NativeName => "CCitadel_Modifier_CheaterCurse";
+
+		/// <summary>The data entry this was created from, as <see cref="CCitadel_Modifier_CheaterCurseVData"/>, or null if it has none.</summary>
+		public new CCitadel_Modifier_CheaterCurseVData? VData => ModifierData<CCitadel_Modifier_CheaterCurseVData>();
 	}
 }

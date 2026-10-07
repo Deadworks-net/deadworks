@@ -14,8 +14,8 @@ public static partial class Schema {
 		static string ISchemaClass<CCitadel_Ability_ViperVenomVData>.NativeName => "CCitadel_Ability_ViperVenomVData";
 
 		private static readonly SchemaField __m_BuildUpModifier = new("CCitadel_Ability_ViperVenomVData", "m_BuildUpModifier");
-		/// <summary><c>CEmbeddedSubclass&lt;CCitadel_Modifier_Base_Buildup&gt;</c>. No typed mapping yet: read it through its address.</summary>
-		public RawField m_BuildUpModifier => Raw(__m_BuildUpModifier, "CEmbeddedSubclass<CCitadel_Modifier_Base_Buildup>");
+		/// <summary><c>CEmbeddedSubclass&lt;CCitadel_Modifier_Base_Buildup&gt;</c>.</summary>
+		public CCitadel_Modifier_Base_BuildupVData? m_BuildUpModifier => EmbeddedSubclass<CCitadel_Modifier_Base_BuildupVData>(__m_BuildUpModifier);
 
 		private static readonly SchemaField __m_CastVenomParticle = new("CCitadel_Ability_ViperVenomVData", "m_CastVenomParticle");
 		/// <summary><c>CResourceNameTyped&lt;CWeakHandle&lt;InfoForResourceTypeIParticleSystemDefinition&gt;&gt;</c>.</summary>
@@ -26,8 +26,8 @@ public static partial class Schema {
 		public string m_VenomExplodeParticle => GetBufferString(__m_VenomExplodeParticle);
 
 		private static readonly SchemaField __m_VenomModifier = new("CCitadel_Ability_ViperVenomVData", "m_VenomModifier");
-		/// <summary><c>CEmbeddedSubclass&lt;CCitadelModifier&gt;</c>. No typed mapping yet: read it through its address.</summary>
-		public RawField m_VenomModifier => Raw(__m_VenomModifier, "CEmbeddedSubclass<CCitadelModifier>");
+		/// <summary><c>CEmbeddedSubclass&lt;CCitadelModifier&gt;</c>.</summary>
+		public CCitadelModifierVData? m_VenomModifier => EmbeddedSubclass<CCitadelModifierVData>(__m_VenomModifier);
 
 		private static readonly SchemaField __m_strVenomExplode = new("CCitadel_Ability_ViperVenomVData", "m_strVenomExplode");
 		/// <summary><c>CSoundEventName</c>.</summary>

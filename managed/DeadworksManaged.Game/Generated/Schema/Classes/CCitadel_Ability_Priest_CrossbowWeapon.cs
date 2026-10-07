@@ -12,5 +12,8 @@ public static partial class Schema {
 		internal CCitadel_Ability_Priest_CrossbowWeapon() { }
 		static CCitadel_Ability_Priest_CrossbowWeapon ISchemaClass<CCitadel_Ability_Priest_CrossbowWeapon>.New() => new();
 		static string ISchemaClass<CCitadel_Ability_Priest_CrossbowWeapon>.NativeName => "CCitadel_Ability_Priest_CrossbowWeapon";
+
+		/// <summary>The data entry this was created from, as <see cref="CCitadel_Ability_Priest_CrossbowWeaponVData"/>, or null if it has none.</summary>
+		public new CCitadel_Ability_Priest_CrossbowWeaponVData? VData => SubclassVData<CCitadel_Ability_Priest_CrossbowWeaponVData>();
 	}
 }

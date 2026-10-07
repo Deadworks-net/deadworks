@@ -16,5 +16,8 @@ public static partial class Schema {
 		private static readonly SchemaField __m_flReloadSpeed = new("CCitadel_Modifier_ReloadSpeed", "m_flReloadSpeed");
 		/// <summary><c>float32</c>.</summary>
 		public float m_flReloadSpeed { get => Get<float>(__m_flReloadSpeed); set => Set(__m_flReloadSpeed, value); }
+
+		/// <summary>The data entry this was created from, as <see cref="CCitadel_Modifier_ReloadSpeedVData"/>, or null if it has none.</summary>
+		public new CCitadel_Modifier_ReloadSpeedVData? VData => ModifierData<CCitadel_Modifier_ReloadSpeedVData>();
 	}
 }

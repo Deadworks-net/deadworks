@@ -12,5 +12,8 @@ public static partial class Schema {
 		internal CCitadel_Ability_SkyRunner_PrimaryWeapon() { }
 		static CCitadel_Ability_SkyRunner_PrimaryWeapon ISchemaClass<CCitadel_Ability_SkyRunner_PrimaryWeapon>.New() => new();
 		static string ISchemaClass<CCitadel_Ability_SkyRunner_PrimaryWeapon>.NativeName => "CCitadel_Ability_SkyRunner_PrimaryWeapon";
+
+		/// <summary>The data entry this was created from, as <see cref="CCitadel_Ability_SkyRunner_PrimaryWeaponVData"/>, or null if it has none.</summary>
+		public new CCitadel_Ability_SkyRunner_PrimaryWeaponVData? VData => SubclassVData<CCitadel_Ability_SkyRunner_PrimaryWeaponVData>();
 	}
 }

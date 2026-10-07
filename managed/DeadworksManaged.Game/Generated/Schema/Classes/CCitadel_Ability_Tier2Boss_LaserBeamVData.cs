@@ -14,19 +14,19 @@ public static partial class Schema {
 		static string ISchemaClass<CCitadel_Ability_Tier2Boss_LaserBeamVData>.NativeName => "CCitadel_Ability_Tier2Boss_LaserBeamVData";
 
 		private static readonly SchemaField __m_LaserCharge = new("CCitadel_Ability_Tier2Boss_LaserBeamVData", "m_LaserCharge");
-		/// <summary><c>CEmbeddedSubclass&lt;CCitadelModifier&gt;</c>. No typed mapping yet: read it through its address.</summary>
-		public RawField m_LaserCharge => Raw(__m_LaserCharge, "CEmbeddedSubclass<CCitadelModifier>");
+		/// <summary><c>CEmbeddedSubclass&lt;CCitadelModifier&gt;</c>.</summary>
+		public CCitadelModifierVData? m_LaserCharge => EmbeddedSubclass<CCitadelModifierVData>(__m_LaserCharge);
 
 		private static readonly SchemaField __m_LaserLeft = new("CCitadel_Ability_Tier2Boss_LaserBeamVData", "m_LaserLeft");
-		/// <summary><c>CEmbeddedSubclass&lt;CCitadelModifier&gt;</c>. No typed mapping yet: read it through its address.</summary>
-		public RawField m_LaserLeft => Raw(__m_LaserLeft, "CEmbeddedSubclass<CCitadelModifier>");
+		/// <summary><c>CEmbeddedSubclass&lt;CCitadelModifier&gt;</c>.</summary>
+		public CCitadelModifierVData? m_LaserLeft => EmbeddedSubclass<CCitadelModifierVData>(__m_LaserLeft);
 
 		private static readonly SchemaField __m_LaserMid = new("CCitadel_Ability_Tier2Boss_LaserBeamVData", "m_LaserMid");
-		/// <summary><c>CEmbeddedSubclass&lt;CCitadelModifier&gt;</c>. No typed mapping yet: read it through its address.</summary>
-		public RawField m_LaserMid => Raw(__m_LaserMid, "CEmbeddedSubclass<CCitadelModifier>");
+		/// <summary><c>CEmbeddedSubclass&lt;CCitadelModifier&gt;</c>.</summary>
+		public CCitadelModifierVData? m_LaserMid => EmbeddedSubclass<CCitadelModifierVData>(__m_LaserMid);
 
 		private static readonly SchemaField __m_LaserRight = new("CCitadel_Ability_Tier2Boss_LaserBeamVData", "m_LaserRight");
-		/// <summary><c>CEmbeddedSubclass&lt;CCitadelModifier&gt;</c>. No typed mapping yet: read it through its address.</summary>
-		public RawField m_LaserRight => Raw(__m_LaserRight, "CEmbeddedSubclass<CCitadelModifier>");
+		/// <summary><c>CEmbeddedSubclass&lt;CCitadelModifier&gt;</c>.</summary>
+		public CCitadelModifierVData? m_LaserRight => EmbeddedSubclass<CCitadelModifierVData>(__m_LaserRight);
 	}
 }

@@ -12,5 +12,8 @@ public static partial class Schema {
 		internal CCitadel_Werewolf_CripplingSlash() { }
 		static CCitadel_Werewolf_CripplingSlash ISchemaClass<CCitadel_Werewolf_CripplingSlash>.New() => new();
 		static string ISchemaClass<CCitadel_Werewolf_CripplingSlash>.NativeName => "CCitadel_Werewolf_CripplingSlash";
+
+		/// <summary>The data entry this was created from, as <see cref="CCitadel_Werewolf_CripplingSlashVData"/>, or null if it has none.</summary>
+		public new CCitadel_Werewolf_CripplingSlashVData? VData => SubclassVData<CCitadel_Werewolf_CripplingSlashVData>();
 	}
 }

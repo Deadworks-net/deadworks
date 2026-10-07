@@ -14,12 +14,12 @@ public static partial class Schema {
 		static string ISchemaClass<CCitadel_Werewolf_CripplingSlashVData>.NativeName => "CCitadel_Werewolf_CripplingSlashVData";
 
 		private static readonly SchemaField __m_DebuffModifier = new("CCitadel_Werewolf_CripplingSlashVData", "m_DebuffModifier");
-		/// <summary><c>CEmbeddedSubclass&lt;CCitadelModifier&gt;</c>. No typed mapping yet: read it through its address.</summary>
-		public RawField m_DebuffModifier => Raw(__m_DebuffModifier, "CEmbeddedSubclass<CCitadelModifier>");
+		/// <summary><c>CEmbeddedSubclass&lt;CCitadelModifier&gt;</c>.</summary>
+		public CCitadelModifierVData? m_DebuffModifier => EmbeddedSubclass<CCitadelModifierVData>(__m_DebuffModifier);
 
 		private static readonly SchemaField __m_DisarmModifier = new("CCitadel_Werewolf_CripplingSlashVData", "m_DisarmModifier");
-		/// <summary><c>CEmbeddedSubclass&lt;CCitadelModifier&gt;</c>. No typed mapping yet: read it through its address.</summary>
-		public RawField m_DisarmModifier => Raw(__m_DisarmModifier, "CEmbeddedSubclass<CCitadelModifier>");
+		/// <summary><c>CEmbeddedSubclass&lt;CCitadelModifier&gt;</c>.</summary>
+		public CCitadelModifierVData? m_DisarmModifier => EmbeddedSubclass<CCitadelModifierVData>(__m_DisarmModifier);
 
 		private static readonly SchemaField __m_SlashImpactEffect = new("CCitadel_Werewolf_CripplingSlashVData", "m_SlashImpactEffect");
 		/// <summary><c>CResourceNameTyped&lt;CWeakHandle&lt;InfoForResourceTypeIParticleSystemDefinition&gt;&gt;</c>.</summary>
@@ -30,8 +30,8 @@ public static partial class Schema {
 		public string m_SlashSwingEffect => GetBufferString(__m_SlashSwingEffect);
 
 		private static readonly SchemaField __m_SlowModifier = new("CCitadel_Werewolf_CripplingSlashVData", "m_SlowModifier");
-		/// <summary><c>CEmbeddedSubclass&lt;CCitadelModifier&gt;</c>. No typed mapping yet: read it through its address.</summary>
-		public RawField m_SlowModifier => Raw(__m_SlowModifier, "CEmbeddedSubclass<CCitadelModifier>");
+		/// <summary><c>CEmbeddedSubclass&lt;CCitadelModifier&gt;</c>.</summary>
+		public CCitadelModifierVData? m_SlowModifier => EmbeddedSubclass<CCitadelModifierVData>(__m_SlowModifier);
 
 		private static readonly SchemaField __m_flSlashForwardOffset = new("CCitadel_Werewolf_CripplingSlashVData", "m_flSlashForwardOffset");
 		/// <summary><c>float32</c>.</summary>

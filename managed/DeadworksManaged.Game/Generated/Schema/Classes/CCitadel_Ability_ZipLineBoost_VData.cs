@@ -14,8 +14,8 @@ public static partial class Schema {
 		static string ISchemaClass<CCitadel_Ability_ZipLineBoost_VData>.NativeName => "CCitadel_Ability_ZipLineBoost_VData";
 
 		private static readonly SchemaField __m_ZipboostModifier = new("CCitadel_Ability_ZipLineBoost_VData", "m_ZipboostModifier");
-		/// <summary><c>CEmbeddedSubclass&lt;CCitadelModifier&gt;</c>. No typed mapping yet: read it through its address.</summary>
-		public RawField m_ZipboostModifier => Raw(__m_ZipboostModifier, "CEmbeddedSubclass<CCitadelModifier>");
+		/// <summary><c>CEmbeddedSubclass&lt;CCitadelModifier&gt;</c>.</summary>
+		public CCitadelModifierVData? m_ZipboostModifier => EmbeddedSubclass<CCitadelModifierVData>(__m_ZipboostModifier);
 
 		private static readonly SchemaField __m_flTimeForHint = new("CCitadel_Ability_ZipLineBoost_VData", "m_flTimeForHint");
 		/// <summary><c>float32</c>.</summary>

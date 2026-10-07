@@ -16,5 +16,8 @@ public static partial class Schema {
 		private static readonly SchemaField __m_bWithinTrackingRange = new("CCitadel_Modifier_Werewolf_TrackingBomb", "m_bWithinTrackingRange");
 		/// <summary><c>bool</c>.</summary>
 		public bool m_bWithinTrackingRange { get => Get<bool>(__m_bWithinTrackingRange); set => Set(__m_bWithinTrackingRange, value); }
+
+		/// <summary>The data entry this was created from, as <see cref="CCitadel_Modifier_Werewolf_TrackingBombVData"/>, or null if it has none.</summary>
+		public new CCitadel_Modifier_Werewolf_TrackingBombVData? VData => ModifierData<CCitadel_Modifier_Werewolf_TrackingBombVData>();
 	}
 }

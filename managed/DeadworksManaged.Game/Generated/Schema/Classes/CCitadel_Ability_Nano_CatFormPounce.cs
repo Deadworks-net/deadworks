@@ -12,5 +12,8 @@ public static partial class Schema {
 		internal CCitadel_Ability_Nano_CatFormPounce() { }
 		static CCitadel_Ability_Nano_CatFormPounce ISchemaClass<CCitadel_Ability_Nano_CatFormPounce>.New() => new();
 		static string ISchemaClass<CCitadel_Ability_Nano_CatFormPounce>.NativeName => "CCitadel_Ability_Nano_CatFormPounce";
+
+		/// <summary>The data entry this was created from, as <see cref="CCitadel_Ability_Nano_CatFormPounceVData"/>, or null if it has none.</summary>
+		public new CCitadel_Ability_Nano_CatFormPounceVData? VData => SubclassVData<CCitadel_Ability_Nano_CatFormPounceVData>();
 	}
 }

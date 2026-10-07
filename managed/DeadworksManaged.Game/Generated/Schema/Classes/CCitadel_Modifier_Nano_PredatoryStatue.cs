@@ -28,5 +28,8 @@ public static partial class Schema {
 		private static readonly SchemaField __m_iTargetID = new("CCitadel_Modifier_Nano_PredatoryStatue", "m_iTargetID");
 		/// <summary><c>int32</c>.</summary>
 		public int m_iTargetID { get => Get<int>(__m_iTargetID); set => Set(__m_iTargetID, value); }
+
+		/// <summary>The data entry this was created from, as <see cref="CCitadel_Modifier_Nano_PredatoryStatueVData"/>, or null if it has none.</summary>
+		public new CCitadel_Modifier_Nano_PredatoryStatueVData? VData => ModifierData<CCitadel_Modifier_Nano_PredatoryStatueVData>();
 	}
 }

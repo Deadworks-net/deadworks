@@ -22,8 +22,8 @@ public static partial class Schema {
 		public HeroCardOverride_t m_HeroCardOverride => Embedded<HeroCardOverride_t>(__m_HeroCardOverride);
 
 		private static readonly SchemaField __m_StackingBuffModifier = new("CCitadel_Modifier_WerewolfVData", "m_StackingBuffModifier");
-		/// <summary><c>CEmbeddedSubclass&lt;CCitadelModifier&gt;</c>. No typed mapping yet: read it through its address.</summary>
-		public RawField m_StackingBuffModifier => Raw(__m_StackingBuffModifier, "CEmbeddedSubclass<CCitadelModifier>");
+		/// <summary><c>CEmbeddedSubclass&lt;CCitadelModifier&gt;</c>.</summary>
+		public CCitadelModifierVData? m_StackingBuffModifier => EmbeddedSubclass<CCitadelModifierVData>(__m_StackingBuffModifier);
 
 		private static readonly SchemaField __m_WerewolfModel = new("CCitadel_Modifier_WerewolfVData", "m_WerewolfModel");
 		/// <summary><c>ModelChange_t</c>.</summary>

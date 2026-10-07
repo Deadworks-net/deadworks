@@ -22,12 +22,12 @@ public static partial class Schema {
 		public string m_IsFrozenParticle => GetBufferString(__m_IsFrozenParticle);
 
 		private static readonly SchemaField __m_PunchPickupModifier = new("CCitadelItemPickupRejuvVData", "m_PunchPickupModifier");
-		/// <summary><c>CEmbeddedSubclass&lt;CCitadelModifier&gt;</c>. No typed mapping yet: read it through its address.</summary>
-		public RawField m_PunchPickupModifier => Raw(__m_PunchPickupModifier, "CEmbeddedSubclass<CCitadelModifier>");
+		/// <summary><c>CEmbeddedSubclass&lt;CCitadelModifier&gt;</c>.</summary>
+		public CCitadelModifierVData? m_PunchPickupModifier => EmbeddedSubclass<CCitadelModifierVData>(__m_PunchPickupModifier);
 
 		private static readonly SchemaField __m_RebirthModifier = new("CCitadelItemPickupRejuvVData", "m_RebirthModifier");
-		/// <summary><c>CEmbeddedSubclass&lt;CCitadelModifier&gt;</c>. No typed mapping yet: read it through its address.</summary>
-		public RawField m_RebirthModifier => Raw(__m_RebirthModifier, "CEmbeddedSubclass<CCitadelModifier>");
+		/// <summary><c>CEmbeddedSubclass&lt;CCitadelModifier&gt;</c>.</summary>
+		public CCitadelModifierVData? m_RebirthModifier => EmbeddedSubclass<CCitadelModifierVData>(__m_RebirthModifier);
 
 		private static readonly SchemaField __m_flMaxDistForHeal = new("CCitadelItemPickupRejuvVData", "m_flMaxDistForHeal");
 		/// <summary><c>float32</c>.</summary>

@@ -16,5 +16,8 @@ public static partial class Schema {
 		private static readonly SchemaField __m_nDebuffsTotal = new("CModifier_Headshot_Damage_Debuff", "m_nDebuffsTotal");
 		/// <summary><c>float32</c>.</summary>
 		public float m_nDebuffsTotal { get => Get<float>(__m_nDebuffsTotal); set => Set(__m_nDebuffsTotal, value); }
+
+		/// <summary>The data entry this was created from, as <see cref="CModifier_Headshot_Damage_DebuffVData"/>, or null if it has none.</summary>
+		public new CModifier_Headshot_Damage_DebuffVData? VData => ModifierData<CModifier_Headshot_Damage_DebuffVData>();
 	}
 }

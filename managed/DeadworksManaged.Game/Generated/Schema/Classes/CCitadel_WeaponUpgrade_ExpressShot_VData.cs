@@ -18,8 +18,8 @@ public static partial class Schema {
 		public float flShotDelay { get => Get<float>(__flShotDelay); set => Set(__flShotDelay, value); }
 
 		private static readonly SchemaField __m_ProcNotificationModifier = new("CCitadel_WeaponUpgrade_ExpressShot_VData", "m_ProcNotificationModifier");
-		/// <summary><c>CEmbeddedSubclass&lt;CCitadelModifier&gt;</c>. No typed mapping yet: read it through its address.</summary>
-		public RawField m_ProcNotificationModifier => Raw(__m_ProcNotificationModifier, "CEmbeddedSubclass<CCitadelModifier>");
+		/// <summary><c>CEmbeddedSubclass&lt;CCitadelModifier&gt;</c>.</summary>
+		public CCitadelModifierVData? m_ProcNotificationModifier => EmbeddedSubclass<CCitadelModifierVData>(__m_ProcNotificationModifier);
 
 		private static readonly SchemaField __m_ReadyParticle = new("CCitadel_WeaponUpgrade_ExpressShot_VData", "m_ReadyParticle");
 		/// <summary><c>CResourceNameTyped&lt;CWeakHandle&lt;InfoForResourceTypeIParticleSystemDefinition&gt;&gt;</c>.</summary>

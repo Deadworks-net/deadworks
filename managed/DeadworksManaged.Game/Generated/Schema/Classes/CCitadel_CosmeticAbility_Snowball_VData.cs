@@ -14,8 +14,8 @@ public static partial class Schema {
 		static string ISchemaClass<CCitadel_CosmeticAbility_Snowball_VData>.NativeName => "CCitadel_CosmeticAbility_Snowball_VData";
 
 		private static readonly SchemaField __m_SnowballModifier = new("CCitadel_CosmeticAbility_Snowball_VData", "m_SnowballModifier");
-		/// <summary><c>CEmbeddedSubclass&lt;CBaseModifier&gt;</c>. No typed mapping yet: read it through its address.</summary>
-		public RawField m_SnowballModifier => Raw(__m_SnowballModifier, "CEmbeddedSubclass<CBaseModifier>");
+		/// <summary><c>CEmbeddedSubclass&lt;CBaseModifier&gt;</c>.</summary>
+		public CModifierVData? m_SnowballModifier => EmbeddedSubclass<CModifierVData>(__m_SnowballModifier);
 
 		private static readonly SchemaField __m_flMaxLevelDebuffDuration = new("CCitadel_CosmeticAbility_Snowball_VData", "m_flMaxLevelDebuffDuration");
 		/// <summary><c>float32</c>.</summary>

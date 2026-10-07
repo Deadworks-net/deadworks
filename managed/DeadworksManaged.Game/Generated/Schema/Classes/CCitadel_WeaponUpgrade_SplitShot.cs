@@ -40,5 +40,8 @@ public static partial class Schema {
 		private static readonly SchemaField __m_nWpnBatchCount = new("CCitadel_WeaponUpgrade_SplitShot", "m_nWpnBatchCount");
 		/// <summary><c>int32</c>.</summary>
 		public int m_nWpnBatchCount { get => Get<int>(__m_nWpnBatchCount); set => Set(__m_nWpnBatchCount, value); }
+
+		/// <summary>The data entry this was created from, as <see cref="CCitadel_WeaponUpgrade_SplitShotVData"/>, or null if it has none.</summary>
+		public new CCitadel_WeaponUpgrade_SplitShotVData? VData => SubclassVData<CCitadel_WeaponUpgrade_SplitShotVData>();
 	}
 }

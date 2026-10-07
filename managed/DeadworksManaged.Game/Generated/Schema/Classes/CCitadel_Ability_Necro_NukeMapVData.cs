@@ -18,8 +18,8 @@ public static partial class Schema {
 		public string m_DamageParticle => GetBufferString(__m_DamageParticle);
 
 		private static readonly SchemaField __m_DelayedEffectModifier = new("CCitadel_Ability_Necro_NukeMapVData", "m_DelayedEffectModifier");
-		/// <summary><c>CEmbeddedSubclass&lt;CBaseModifier&gt;</c>. No typed mapping yet: read it through its address.</summary>
-		public RawField m_DelayedEffectModifier => Raw(__m_DelayedEffectModifier, "CEmbeddedSubclass<CBaseModifier>");
+		/// <summary><c>CEmbeddedSubclass&lt;CBaseModifier&gt;</c>.</summary>
+		public CModifierVData? m_DelayedEffectModifier => EmbeddedSubclass<CModifierVData>(__m_DelayedEffectModifier);
 
 		private static readonly SchemaField __m_flForwardOffset = new("CCitadel_Ability_Necro_NukeMapVData", "m_flForwardOffset");
 		/// <summary><c>float32</c>.</summary>

@@ -20,5 +20,8 @@ public static partial class Schema {
 		private static readonly SchemaField __m_vecHitTargets = new("CAbility_Werewolf_Frenzy", "m_vecHitTargets");
 		/// <summary><c>CUtlVector&lt;CHandle&lt;CBaseEntity&gt;&gt;</c>.</summary>
 		public SchemaHandleList<CBaseEntity> m_vecHitTargets => new(this, __m_vecHitTargets, -1);
+
+		/// <summary>The data entry this was created from, as <see cref="CAbility_Werewolf_FrenzyVData"/>, or null if it has none.</summary>
+		public new CAbility_Werewolf_FrenzyVData? VData => SubclassVData<CAbility_Werewolf_FrenzyVData>();
 	}
 }

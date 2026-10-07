@@ -26,8 +26,8 @@ public static partial class Schema {
 		public string m_DaggerStuckParticle => GetBufferString(__m_DaggerStuckParticle);
 
 		private static readonly SchemaField __m_SlowDebuffModifier = new("CCitadel_Ability_ViperHookBladeVData", "m_SlowDebuffModifier");
-		/// <summary><c>CEmbeddedSubclass&lt;CCitadelModifier&gt;</c>. No typed mapping yet: read it through its address.</summary>
-		public RawField m_SlowDebuffModifier => Raw(__m_SlowDebuffModifier, "CEmbeddedSubclass<CCitadelModifier>");
+		/// <summary><c>CEmbeddedSubclass&lt;CCitadelModifier&gt;</c>.</summary>
+		public CCitadelModifierVData? m_SlowDebuffModifier => EmbeddedSubclass<CCitadelModifierVData>(__m_SlowDebuffModifier);
 
 		private static readonly SchemaField __m_strDaggerExplodeSound = new("CCitadel_Ability_ViperHookBladeVData", "m_strDaggerExplodeSound");
 		/// <summary><c>CSoundEventName</c>.</summary>

@@ -14,8 +14,8 @@ public static partial class Schema {
 		static string ISchemaClass<CCitadel_WeaponUpgrade_SpellslingerHeadshots_VData>.NativeName => "CCitadel_WeaponUpgrade_SpellslingerHeadshots_VData";
 
 		private static readonly SchemaField __m_HeadshotDebuffModifier = new("CCitadel_WeaponUpgrade_SpellslingerHeadshots_VData", "m_HeadshotDebuffModifier");
-		/// <summary><c>CEmbeddedSubclass&lt;CCitadelModifier&gt;</c>. No typed mapping yet: read it through its address.</summary>
-		public RawField m_HeadshotDebuffModifier => Raw(__m_HeadshotDebuffModifier, "CEmbeddedSubclass<CCitadelModifier>");
+		/// <summary><c>CEmbeddedSubclass&lt;CCitadelModifier&gt;</c>.</summary>
+		public CCitadelModifierVData? m_HeadshotDebuffModifier => EmbeddedSubclass<CCitadelModifierVData>(__m_HeadshotDebuffModifier);
 
 		private static readonly SchemaField __m_ImpactParticle = new("CCitadel_WeaponUpgrade_SpellslingerHeadshots_VData", "m_ImpactParticle");
 		/// <summary><c>CResourceNameTyped&lt;CWeakHandle&lt;InfoForResourceTypeIParticleSystemDefinition&gt;&gt;</c>.</summary>

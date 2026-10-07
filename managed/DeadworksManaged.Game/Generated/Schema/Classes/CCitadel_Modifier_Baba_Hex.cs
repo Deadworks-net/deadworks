@@ -24,5 +24,8 @@ public static partial class Schema {
 		private static readonly SchemaField __m_flLastJumpTime = new("CCitadel_Modifier_Baba_Hex", "m_flLastJumpTime");
 		/// <summary><c>GameTime_t</c>.</summary>
 		public float m_flLastJumpTime { get => Get<float>(__m_flLastJumpTime); set => Set(__m_flLastJumpTime, value); }
+
+		/// <summary>The data entry this was created from, as <see cref="CCitadel_Modifier_Baba_HexVData"/>, or null if it has none.</summary>
+		public new CCitadel_Modifier_Baba_HexVData? VData => ModifierData<CCitadel_Modifier_Baba_HexVData>();
 	}
 }

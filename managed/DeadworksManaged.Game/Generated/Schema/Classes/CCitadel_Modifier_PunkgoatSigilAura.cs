@@ -28,5 +28,8 @@ public static partial class Schema {
 		private static readonly SchemaField __m_vecHitUnits = new("CCitadel_Modifier_PunkgoatSigilAura", "m_vecHitUnits");
 		/// <summary><c>CUtlVector&lt;CHandle&lt;CBaseEntity&gt;&gt;</c>.</summary>
 		public SchemaHandleList<CBaseEntity> m_vecHitUnits => new(this, __m_vecHitUnits, -1);
+
+		/// <summary>The data entry this was created from, as <see cref="CCitadel_Modifier_PunkgoatSigilAuraVData"/>, or null if it has none.</summary>
+		public new CCitadel_Modifier_PunkgoatSigilAuraVData? VData => ModifierData<CCitadel_Modifier_PunkgoatSigilAuraVData>();
 	}
 }

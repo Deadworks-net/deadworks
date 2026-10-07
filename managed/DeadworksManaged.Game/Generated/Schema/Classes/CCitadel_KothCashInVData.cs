@@ -14,12 +14,12 @@ public static partial class Schema {
 		static string ISchemaClass<CCitadel_KothCashInVData>.NativeName => "CCitadel_KothCashInVData";
 
 		private static readonly SchemaField __m_AuraModifier = new("CCitadel_KothCashInVData", "m_AuraModifier");
-		/// <summary><c>CEmbeddedSubclass&lt;CBaseModifier&gt;</c>. No typed mapping yet: read it through its address.</summary>
-		public RawField m_AuraModifier => Raw(__m_AuraModifier, "CEmbeddedSubclass<CBaseModifier>");
+		/// <summary><c>CEmbeddedSubclass&lt;CBaseModifier&gt;</c>.</summary>
+		public CModifierVData? m_AuraModifier => EmbeddedSubclass<CModifierVData>(__m_AuraModifier);
 
 		private static readonly SchemaField __m_ComebackAuraModifier = new("CCitadel_KothCashInVData", "m_ComebackAuraModifier");
-		/// <summary><c>CEmbeddedSubclass&lt;CBaseModifier&gt;</c>. No typed mapping yet: read it through its address.</summary>
-		public RawField m_ComebackAuraModifier => Raw(__m_ComebackAuraModifier, "CEmbeddedSubclass<CBaseModifier>");
+		/// <summary><c>CEmbeddedSubclass&lt;CBaseModifier&gt;</c>.</summary>
+		public CModifierVData? m_ComebackAuraModifier => EmbeddedSubclass<CModifierVData>(__m_ComebackAuraModifier);
 
 		private static readonly SchemaField __m_EndParticleEnemy = new("CCitadel_KothCashInVData", "m_EndParticleEnemy");
 		/// <summary><c>CResourceNameTyped&lt;CWeakHandle&lt;InfoForResourceTypeIParticleSystemDefinition&gt;&gt;</c>.</summary>
@@ -30,8 +30,8 @@ public static partial class Schema {
 		public string m_EndParticleFriendly => GetBufferString(__m_EndParticleFriendly);
 
 		private static readonly SchemaField __m_TrooperModifier = new("CCitadel_KothCashInVData", "m_TrooperModifier");
-		/// <summary><c>CEmbeddedSubclass&lt;CBaseModifier&gt;</c>. No typed mapping yet: read it through its address.</summary>
-		public RawField m_TrooperModifier => Raw(__m_TrooperModifier, "CEmbeddedSubclass<CBaseModifier>");
+		/// <summary><c>CEmbeddedSubclass&lt;CBaseModifier&gt;</c>.</summary>
+		public CModifierVData? m_TrooperModifier => EmbeddedSubclass<CModifierVData>(__m_TrooperModifier);
 
 		private static readonly SchemaField __m_ZoneParticle = new("CCitadel_KothCashInVData", "m_ZoneParticle");
 		/// <summary><c>CResourceNameTyped&lt;CWeakHandle&lt;InfoForResourceTypeIParticleSystemDefinition&gt;&gt;</c>.</summary>

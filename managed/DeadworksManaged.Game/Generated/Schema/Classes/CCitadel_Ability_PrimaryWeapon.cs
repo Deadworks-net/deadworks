@@ -256,5 +256,8 @@ public static partial class Schema {
 		private static readonly SchemaField __m_tFireOnReleaseHoldBeginTime = new("CCitadel_Ability_PrimaryWeapon", "m_tFireOnReleaseHoldBeginTime");
 		/// <summary><c>GameTime_t</c>.</summary>
 		public float m_tFireOnReleaseHoldBeginTime { get => Get<float>(__m_tFireOnReleaseHoldBeginTime); set => Set(__m_tFireOnReleaseHoldBeginTime, value); }
+
+		/// <summary>The data entry this was created from, as <see cref="CCitadel_Ability_PrimaryWeaponVData"/>, or null if it has none.</summary>
+		public new CCitadel_Ability_PrimaryWeaponVData? VData => SubclassVData<CCitadel_Ability_PrimaryWeaponVData>();
 	}
 }

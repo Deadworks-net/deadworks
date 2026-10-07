@@ -14,32 +14,32 @@ public static partial class Schema {
 		static string ISchemaClass<CCitadel_Ability_Priest_KnockbackVData>.NativeName => "CCitadel_Ability_Priest_KnockbackVData";
 
 		private static readonly SchemaField __m_BuffModifier = new("CCitadel_Ability_Priest_KnockbackVData", "m_BuffModifier");
-		/// <summary><c>CEmbeddedSubclass&lt;CCitadelModifier&gt;</c>. No typed mapping yet: read it through its address.</summary>
-		public RawField m_BuffModifier => Raw(__m_BuffModifier, "CEmbeddedSubclass<CCitadelModifier>");
+		/// <summary><c>CEmbeddedSubclass&lt;CCitadelModifier&gt;</c>.</summary>
+		public CCitadelModifierVData? m_BuffModifier => EmbeddedSubclass<CCitadelModifierVData>(__m_BuffModifier);
 
 		private static readonly SchemaField __m_DebuffModifier = new("CCitadel_Ability_Priest_KnockbackVData", "m_DebuffModifier");
-		/// <summary><c>CEmbeddedSubclass&lt;CCitadelModifier&gt;</c>. No typed mapping yet: read it through its address.</summary>
-		public RawField m_DebuffModifier => Raw(__m_DebuffModifier, "CEmbeddedSubclass<CCitadelModifier>");
+		/// <summary><c>CEmbeddedSubclass&lt;CCitadelModifier&gt;</c>.</summary>
+		public CCitadelModifierVData? m_DebuffModifier => EmbeddedSubclass<CCitadelModifierVData>(__m_DebuffModifier);
 
 		private static readonly SchemaField __m_InitialImpactParticle = new("CCitadel_Ability_Priest_KnockbackVData", "m_InitialImpactParticle");
 		/// <summary><c>CResourceNameTyped&lt;CWeakHandle&lt;InfoForResourceTypeIParticleSystemDefinition&gt;&gt;</c>.</summary>
 		public string m_InitialImpactParticle => GetBufferString(__m_InitialImpactParticle);
 
 		private static readonly SchemaField __m_KnockbackModifier = new("CCitadel_Ability_Priest_KnockbackVData", "m_KnockbackModifier");
-		/// <summary><c>CEmbeddedSubclass&lt;CCitadelModifier&gt;</c>. No typed mapping yet: read it through its address.</summary>
-		public RawField m_KnockbackModifier => Raw(__m_KnockbackModifier, "CEmbeddedSubclass<CCitadelModifier>");
+		/// <summary><c>CEmbeddedSubclass&lt;CCitadelModifier&gt;</c>.</summary>
+		public CCitadelModifierVData? m_KnockbackModifier => EmbeddedSubclass<CCitadelModifierVData>(__m_KnockbackModifier);
 
 		private static readonly SchemaField __m_KnockbackToWallModifier = new("CCitadel_Ability_Priest_KnockbackVData", "m_KnockbackToWallModifier");
-		/// <summary><c>CEmbeddedSubclass&lt;CCitadelModifier&gt;</c>. No typed mapping yet: read it through its address.</summary>
-		public RawField m_KnockbackToWallModifier => Raw(__m_KnockbackToWallModifier, "CEmbeddedSubclass<CCitadelModifier>");
+		/// <summary><c>CEmbeddedSubclass&lt;CCitadelModifier&gt;</c>.</summary>
+		public CCitadelModifierVData? m_KnockbackToWallModifier => EmbeddedSubclass<CCitadelModifierVData>(__m_KnockbackToWallModifier);
 
 		private static readonly SchemaField __m_ShootParticle = new("CCitadel_Ability_Priest_KnockbackVData", "m_ShootParticle");
 		/// <summary><c>CResourceNameTyped&lt;CWeakHandle&lt;InfoForResourceTypeIParticleSystemDefinition&gt;&gt;</c>.</summary>
 		public string m_ShootParticle => GetBufferString(__m_ShootParticle);
 
 		private static readonly SchemaField __m_SlowModifier = new("CCitadel_Ability_Priest_KnockbackVData", "m_SlowModifier");
-		/// <summary><c>CEmbeddedSubclass&lt;CCitadelModifier&gt;</c>. No typed mapping yet: read it through its address.</summary>
-		public RawField m_SlowModifier => Raw(__m_SlowModifier, "CEmbeddedSubclass<CCitadelModifier>");
+		/// <summary><c>CEmbeddedSubclass&lt;CCitadelModifier&gt;</c>.</summary>
+		public CCitadelModifierVData? m_SlowModifier => EmbeddedSubclass<CCitadelModifierVData>(__m_SlowModifier);
 
 		private static readonly SchemaField __m_WallImpactParticle = new("CCitadel_Ability_Priest_KnockbackVData", "m_WallImpactParticle");
 		/// <summary><c>CResourceNameTyped&lt;CWeakHandle&lt;InfoForResourceTypeIParticleSystemDefinition&gt;&gt;</c>.</summary>

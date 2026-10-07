@@ -16,5 +16,8 @@ public static partial class Schema {
 		private static readonly SchemaField __m_vLastDropZonePos = new("CCitadel_Modifier_FlameDash", "m_vLastDropZonePos");
 		/// <summary><c>VectorWS</c>.</summary>
 		public Vector3 m_vLastDropZonePos { get => Get<Vector3>(__m_vLastDropZonePos); set => Set(__m_vLastDropZonePos, value); }
+
+		/// <summary>The data entry this was created from, as <see cref="CCitadel_Modifier_FlameDashVData"/>, or null if it has none.</summary>
+		public new CCitadel_Modifier_FlameDashVData? VData => ModifierData<CCitadel_Modifier_FlameDashVData>();
 	}
 }

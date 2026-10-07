@@ -24,5 +24,8 @@ public static partial class Schema {
 		private static readonly SchemaField __m_nShotCount = new("CCitadel_Modifier_Neutral_ShotCounter", "m_nShotCount");
 		/// <summary><c>int32</c>.</summary>
 		public int m_nShotCount { get => Get<int>(__m_nShotCount); set => Set(__m_nShotCount, value); }
+
+		/// <summary>The data entry this was created from, as <see cref="CCitadel_Modifier_Neutral_ShotCounterVData"/>, or null if it has none.</summary>
+		public new CCitadel_Modifier_Neutral_ShotCounterVData? VData => ModifierData<CCitadel_Modifier_Neutral_ShotCounterVData>();
 	}
 }

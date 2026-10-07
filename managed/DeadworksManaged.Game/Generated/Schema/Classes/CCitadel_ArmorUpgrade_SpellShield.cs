@@ -16,5 +16,8 @@ public static partial class Schema {
 		private static readonly SchemaField __fl_mSpellShieldBreakTime = new("CCitadel_ArmorUpgrade_SpellShield", "fl_mSpellShieldBreakTime");
 		/// <summary><c>GameTime_t</c>.</summary>
 		public float fl_mSpellShieldBreakTime { get => Get<float>(__fl_mSpellShieldBreakTime); set => Set(__fl_mSpellShieldBreakTime, value); }
+
+		/// <summary>The data entry this was created from, as <see cref="CCitadel_ArmorUpgrade_SpellShieldVData"/>, or null if it has none.</summary>
+		public new CCitadel_ArmorUpgrade_SpellShieldVData? VData => SubclassVData<CCitadel_ArmorUpgrade_SpellShieldVData>();
 	}
 }

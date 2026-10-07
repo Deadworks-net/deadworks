@@ -18,16 +18,16 @@ public static partial class Schema {
 		public string m_ClubCardTrail => GetBufferString(__m_ClubCardTrail);
 
 		private static readonly SchemaField __m_ClubModifier = new("CAbilityCardTossVData", "m_ClubModifier");
-		/// <summary><c>CEmbeddedSubclass&lt;CBaseModifier&gt;</c>. No typed mapping yet: read it through its address.</summary>
-		public RawField m_ClubModifier => Raw(__m_ClubModifier, "CEmbeddedSubclass<CBaseModifier>");
+		/// <summary><c>CEmbeddedSubclass&lt;CBaseModifier&gt;</c>.</summary>
+		public CModifierVData? m_ClubModifier => EmbeddedSubclass<CModifierVData>(__m_ClubModifier);
 
 		private static readonly SchemaField __m_DiamondCardTrail = new("CAbilityCardTossVData", "m_DiamondCardTrail");
 		/// <summary><c>CResourceNameTyped&lt;CWeakHandle&lt;InfoForResourceTypeIParticleSystemDefinition&gt;&gt;</c>.</summary>
 		public string m_DiamondCardTrail => GetBufferString(__m_DiamondCardTrail);
 
 		private static readonly SchemaField __m_DiamondModifier = new("CAbilityCardTossVData", "m_DiamondModifier");
-		/// <summary><c>CEmbeddedSubclass&lt;CBaseModifier&gt;</c>. No typed mapping yet: read it through its address.</summary>
-		public RawField m_DiamondModifier => Raw(__m_DiamondModifier, "CEmbeddedSubclass<CBaseModifier>");
+		/// <summary><c>CEmbeddedSubclass&lt;CBaseModifier&gt;</c>.</summary>
+		public CModifierVData? m_DiamondModifier => EmbeddedSubclass<CModifierVData>(__m_DiamondModifier);
 
 		private static readonly SchemaField __m_ExplodeParticle = new("CAbilityCardTossVData", "m_ExplodeParticle");
 		/// <summary><c>CResourceNameTyped&lt;CWeakHandle&lt;InfoForResourceTypeIParticleSystemDefinition&gt;&gt;</c>.</summary>

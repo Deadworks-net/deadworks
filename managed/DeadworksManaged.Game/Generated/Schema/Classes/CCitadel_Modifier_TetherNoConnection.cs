@@ -12,5 +12,8 @@ public static partial class Schema {
 		internal CCitadel_Modifier_TetherNoConnection() { }
 		static CCitadel_Modifier_TetherNoConnection ISchemaClass<CCitadel_Modifier_TetherNoConnection>.New() => new();
 		static string ISchemaClass<CCitadel_Modifier_TetherNoConnection>.NativeName => "CCitadel_Modifier_TetherNoConnection";
+
+		/// <summary>The data entry this was created from, as <see cref="CCitadel_Modifier_TetherNoConnectionVData"/>, or null if it has none.</summary>
+		public new CCitadel_Modifier_TetherNoConnectionVData? VData => ModifierData<CCitadel_Modifier_TetherNoConnectionVData>();
 	}
 }

@@ -14,7 +14,7 @@ public static partial class Schema {
 		static string ISchemaClass<CCitadel_Ability_Tier3Boss_LaserBeamVData>.NativeName => "CCitadel_Ability_Tier3Boss_LaserBeamVData";
 
 		private static readonly SchemaField __m_BeamModifier = new("CCitadel_Ability_Tier3Boss_LaserBeamVData", "m_BeamModifier");
-		/// <summary><c>CEmbeddedSubclass&lt;CCitadelModifier&gt;</c>. No typed mapping yet: read it through its address.</summary>
-		public RawField m_BeamModifier => Raw(__m_BeamModifier, "CEmbeddedSubclass<CCitadelModifier>");
+		/// <summary><c>CEmbeddedSubclass&lt;CCitadelModifier&gt;</c>.</summary>
+		public CCitadelModifierVData? m_BeamModifier => EmbeddedSubclass<CCitadelModifierVData>(__m_BeamModifier);
 	}
 }

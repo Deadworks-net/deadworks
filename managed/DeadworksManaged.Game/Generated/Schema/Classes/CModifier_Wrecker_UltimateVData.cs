@@ -18,24 +18,24 @@ public static partial class Schema {
 		public string m_AmbientLoopingSound => GetBufferString(__m_AmbientLoopingSound);
 
 		private static readonly SchemaField __m_EnemyDamageModifier = new("CModifier_Wrecker_UltimateVData", "m_EnemyDamageModifier");
-		/// <summary><c>CEmbeddedSubclass&lt;CCitadelModifier&gt;</c>. No typed mapping yet: read it through its address.</summary>
-		public RawField m_EnemyDamageModifier => Raw(__m_EnemyDamageModifier, "CEmbeddedSubclass<CCitadelModifier>");
+		/// <summary><c>CEmbeddedSubclass&lt;CCitadelModifier&gt;</c>.</summary>
+		public CCitadelModifierVData? m_EnemyDamageModifier => EmbeddedSubclass<CCitadelModifierVData>(__m_EnemyDamageModifier);
 
 		private static readonly SchemaField __m_EnemyGrabModifier = new("CModifier_Wrecker_UltimateVData", "m_EnemyGrabModifier");
-		/// <summary><c>CEmbeddedSubclass&lt;CCitadelModifier&gt;</c>. No typed mapping yet: read it through its address.</summary>
-		public RawField m_EnemyGrabModifier => Raw(__m_EnemyGrabModifier, "CEmbeddedSubclass<CCitadelModifier>");
+		/// <summary><c>CEmbeddedSubclass&lt;CCitadelModifier&gt;</c>.</summary>
+		public CCitadelModifierVData? m_EnemyGrabModifier => EmbeddedSubclass<CCitadelModifierVData>(__m_EnemyGrabModifier);
 
 		private static readonly SchemaField __m_EnemyThrowModifier = new("CModifier_Wrecker_UltimateVData", "m_EnemyThrowModifier");
-		/// <summary><c>CEmbeddedSubclass&lt;CCitadelModifier&gt;</c>. No typed mapping yet: read it through its address.</summary>
-		public RawField m_EnemyThrowModifier => Raw(__m_EnemyThrowModifier, "CEmbeddedSubclass<CCitadelModifier>");
+		/// <summary><c>CEmbeddedSubclass&lt;CCitadelModifier&gt;</c>.</summary>
+		public CCitadelModifierVData? m_EnemyThrowModifier => EmbeddedSubclass<CCitadelModifierVData>(__m_EnemyThrowModifier);
 
 		private static readonly SchemaField __m_GrabSound = new("CModifier_Wrecker_UltimateVData", "m_GrabSound");
 		/// <summary><c>CSoundEventName</c>.</summary>
 		public string m_GrabSound => GetBufferString(__m_GrabSound);
 
 		private static readonly SchemaField __m_InvincibleModifier = new("CModifier_Wrecker_UltimateVData", "m_InvincibleModifier");
-		/// <summary><c>CEmbeddedSubclass&lt;CCitadelModifier&gt;</c>. No typed mapping yet: read it through its address.</summary>
-		public RawField m_InvincibleModifier => Raw(__m_InvincibleModifier, "CEmbeddedSubclass<CCitadelModifier>");
+		/// <summary><c>CEmbeddedSubclass&lt;CCitadelModifier&gt;</c>.</summary>
+		public CCitadelModifierVData? m_InvincibleModifier => EmbeddedSubclass<CCitadelModifierVData>(__m_InvincibleModifier);
 
 		private static readonly SchemaField __m_StartSound = new("CModifier_Wrecker_UltimateVData", "m_StartSound");
 		/// <summary><c>CSoundEventName</c>.</summary>

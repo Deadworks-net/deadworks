@@ -24,5 +24,8 @@ public static partial class Schema {
 		private static readonly SchemaField __m_nAbilityBlocking = new("CCitadel_ArmorUpgrade_AutoCleanse", "m_nAbilityBlocking");
 		/// <summary><c>CUtlStringToken</c>.</summary>
 		public uint m_nAbilityBlocking { get => Get<uint>(__m_nAbilityBlocking); set => Set(__m_nAbilityBlocking, value); }
+
+		/// <summary>The data entry this was created from, as <see cref="CCitadel_ArmorUpgrade_AutoCleanseVData"/>, or null if it has none.</summary>
+		public new CCitadel_ArmorUpgrade_AutoCleanseVData? VData => SubclassVData<CCitadel_ArmorUpgrade_AutoCleanseVData>();
 	}
 }

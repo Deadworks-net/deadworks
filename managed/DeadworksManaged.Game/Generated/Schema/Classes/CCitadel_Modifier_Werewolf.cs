@@ -16,5 +16,8 @@ public static partial class Schema {
 		private static readonly SchemaField __m_mapHunterAbilities = new("CCitadel_Modifier_Werewolf", "m_mapHunterAbilities");
 		/// <summary><c>CUtlOrderedMap&lt;EAbilitySlots_t, CSubclassName&gt;</c>. No typed mapping yet: read it through its address.</summary>
 		public RawField m_mapHunterAbilities => Raw(__m_mapHunterAbilities, "CUtlOrderedMap<EAbilitySlots_t, CSubclassName>");
+
+		/// <summary>The data entry this was created from, as <see cref="CCitadel_Modifier_WerewolfVData"/>, or null if it has none.</summary>
+		public new CCitadel_Modifier_WerewolfVData? VData => ModifierData<CCitadel_Modifier_WerewolfVData>();
 	}
 }

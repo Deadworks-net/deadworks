@@ -52,5 +52,8 @@ public static partial class Schema {
 		private static readonly SchemaField __m_vecLastPosition = new("CCitadel_Ability_Fencer_Riposte", "m_vecLastPosition");
 		/// <summary><c>VectorWS</c>.</summary>
 		public Vector3 m_vecLastPosition { get => Get<Vector3>(__m_vecLastPosition); set => Set(__m_vecLastPosition, value); }
+
+		/// <summary>The data entry this was created from, as <see cref="CCitadel_Ability_Fencer_RiposteVData"/>, or null if it has none.</summary>
+		public new CCitadel_Ability_Fencer_RiposteVData? VData => SubclassVData<CCitadel_Ability_Fencer_RiposteVData>();
 	}
 }

@@ -12,5 +12,8 @@ public static partial class Schema {
 		internal CCitadel_Ability_RatKing_RatNibble() { }
 		static CCitadel_Ability_RatKing_RatNibble ISchemaClass<CCitadel_Ability_RatKing_RatNibble>.New() => new();
 		static string ISchemaClass<CCitadel_Ability_RatKing_RatNibble>.NativeName => "CCitadel_Ability_RatKing_RatNibble";
+
+		/// <summary>The data entry this was created from, as <see cref="CCitadel_Ability_RatKing_RatNibbleVData"/>, or null if it has none.</summary>
+		public new CCitadel_Ability_RatKing_RatNibbleVData? VData => SubclassVData<CCitadel_Ability_RatKing_RatNibbleVData>();
 	}
 }

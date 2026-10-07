@@ -12,5 +12,8 @@ public static partial class Schema {
 		internal CCitadel_Doorman_Bomb_Debuff() { }
 		static CCitadel_Doorman_Bomb_Debuff ISchemaClass<CCitadel_Doorman_Bomb_Debuff>.New() => new();
 		static string ISchemaClass<CCitadel_Doorman_Bomb_Debuff>.NativeName => "CCitadel_Doorman_Bomb_Debuff";
+
+		/// <summary>The data entry this was created from, as <see cref="CCitadel_Doorman_Bomb_DebuffVData"/>, or null if it has none.</summary>
+		public new CCitadel_Doorman_Bomb_DebuffVData? VData => ModifierData<CCitadel_Doorman_Bomb_DebuffVData>();
 	}
 }

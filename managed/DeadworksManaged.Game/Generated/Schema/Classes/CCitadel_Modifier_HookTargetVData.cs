@@ -22,8 +22,8 @@ public static partial class Schema {
 		public RawField m_PullSpeedScaleCurve => Raw(__m_PullSpeedScaleCurve, "CPiecewiseCurve");
 
 		private static readonly SchemaField __m_RestrictionModifier = new("CCitadel_Modifier_HookTargetVData", "m_RestrictionModifier");
-		/// <summary><c>CEmbeddedSubclass&lt;CCitadelModifier&gt;</c>. No typed mapping yet: read it through its address.</summary>
-		public RawField m_RestrictionModifier => Raw(__m_RestrictionModifier, "CEmbeddedSubclass<CCitadelModifier>");
+		/// <summary><c>CEmbeddedSubclass&lt;CCitadelModifier&gt;</c>.</summary>
+		public CCitadelModifierVData? m_RestrictionModifier => EmbeddedSubclass<CCitadelModifierVData>(__m_RestrictionModifier);
 
 		private static readonly SchemaField __m_flApproachingWhooshAnticipationTime = new("CCitadel_Modifier_HookTargetVData", "m_flApproachingWhooshAnticipationTime");
 		/// <summary><c>float32</c>. How soon before the target arrives at Bebop to play the approaching whoosh sound.</summary>

@@ -16,5 +16,8 @@ public static partial class Schema {
 		private static readonly SchemaField __m_hTarget = new("CCitadel_Modifier_HealthSwapPrecast", "m_hTarget");
 		/// <summary><c>CHandle&lt;CBaseEntity&gt;</c>.</summary>
 		public CBaseEntity? m_hTarget { get => GetHandle<CBaseEntity>(__m_hTarget); set => SetHandle(__m_hTarget, value); }
+
+		/// <summary>The data entry this was created from, as <see cref="CCitadel_Modifier_HealthSwapPrecastVData"/>, or null if it has none.</summary>
+		public new CCitadel_Modifier_HealthSwapPrecastVData? VData => ModifierData<CCitadel_Modifier_HealthSwapPrecastVData>();
 	}
 }

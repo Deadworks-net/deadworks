@@ -14,12 +14,12 @@ public static partial class Schema {
 		static string ISchemaClass<CCitadel_Ability_TestHero_StanceSwitchVData>.NativeName => "CCitadel_Ability_TestHero_StanceSwitchVData";
 
 		private static readonly SchemaField __m_CastModifier = new("CCitadel_Ability_TestHero_StanceSwitchVData", "m_CastModifier");
-		/// <summary><c>CEmbeddedSubclass&lt;CCitadelModifier&gt;</c>. No typed mapping yet: read it through its address.</summary>
-		public RawField m_CastModifier => Raw(__m_CastModifier, "CEmbeddedSubclass<CCitadelModifier>");
+		/// <summary><c>CEmbeddedSubclass&lt;CCitadelModifier&gt;</c>.</summary>
+		public CCitadelModifierVData? m_CastModifier => EmbeddedSubclass<CCitadelModifierVData>(__m_CastModifier);
 
 		private static readonly SchemaField __m_StanceActiveModifier = new("CCitadel_Ability_TestHero_StanceSwitchVData", "m_StanceActiveModifier");
-		/// <summary><c>CEmbeddedSubclass&lt;CCitadelModifier&gt;</c>. No typed mapping yet: read it through its address.</summary>
-		public RawField m_StanceActiveModifier => Raw(__m_StanceActiveModifier, "CEmbeddedSubclass<CCitadelModifier>");
+		/// <summary><c>CEmbeddedSubclass&lt;CCitadelModifier&gt;</c>.</summary>
+		public CCitadelModifierVData? m_StanceActiveModifier => EmbeddedSubclass<CCitadelModifierVData>(__m_StanceActiveModifier);
 
 		private static readonly SchemaField __m_StanceSwapEndParticle = new("CCitadel_Ability_TestHero_StanceSwitchVData", "m_StanceSwapEndParticle");
 		/// <summary><c>CResourceNameTyped&lt;CWeakHandle&lt;InfoForResourceTypeIParticleSystemDefinition&gt;&gt;</c>.</summary>

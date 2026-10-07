@@ -16,5 +16,8 @@ public static partial class Schema {
 		private static readonly SchemaField __hProjectile = new("CCitadel_Modifier_Unicorn_DazzlingOrbNextTarget", "hProjectile");
 		/// <summary><c>CHandle&lt;CBaseEntity&gt;</c>.</summary>
 		public CBaseEntity? hProjectile { get => GetHandle<CBaseEntity>(__hProjectile); set => SetHandle(__hProjectile, value); }
+
+		/// <summary>The data entry this was created from, as <see cref="CCitadel_Modifier_Unicorn_DazzlingOrbNextTargetVData"/>, or null if it has none.</summary>
+		public new CCitadel_Modifier_Unicorn_DazzlingOrbNextTargetVData? VData => ModifierData<CCitadel_Modifier_Unicorn_DazzlingOrbNextTargetVData>();
 	}
 }

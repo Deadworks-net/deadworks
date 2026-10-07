@@ -332,8 +332,6 @@ public static class ConVars {
 	public static readonly GameConVar<int> animgraph_debug_entindex = new("animgraph_debug_entindex");
 	/// <summary>Filter setting for animgraph_debug_variables output. If set to -1, show debug for all entities. If set to 0, show debug for any NPCs that have been npc_selected. If set to &gt;0, something other than 0, show debug for the entity with the matching entindex. Default <c>0</c>. Flags: developmentonly, gamedll, clientdll, replicated, defensive.</summary>
 	public static readonly GameConVar<int> animgraph_debug_filterent = new("animgraph_debug_filterent");
-	/// <summary>Default <c>False</c>. Flags: reference.</summary>
-	public static readonly GameConVar<bool> animgraph_debug_max_poseop_count = new("animgraph_debug_max_poseop_count");
 	/// <summary>Comma separated list of params to filter against when drawing debug text overlays. Default <c>""</c>. Flags: developmentonly, gamedll, clientdll, replicated, defensive.</summary>
 	public static readonly GameConVar<string> animgraph_debug_set_filter_params = new("animgraph_debug_set_filter_params");
 	/// <summary>Comma separated list of tags to filter against when drawing debug text overlays. Default <c>""</c>. Flags: developmentonly, gamedll, clientdll, replicated, defensive.</summary>
@@ -3280,10 +3278,6 @@ public static class ConVars {
 	public static readonly GameConVar<int> mp_restartgame = new("mp_restartgame");
 	/// <summary>Default <c>False</c>. Flags: developmentonly, gamedll, notify, defensive.</summary>
 	public static readonly GameConVar<bool> mp_teamplay = new("mp_teamplay");
-	/// <summary>Default <c>False</c>. Flags: developmentonly, defensive.</summary>
-	public static readonly GameConVar<bool> multigpu_skip_semaphores = new("multigpu_skip_semaphores");
-	/// <summary>Default <c>False</c>. Flags: developmentonly, defensive.</summary>
-	public static readonly GameConVar<bool> multigpu_skip_transfers = new("multigpu_skip_transfers");
 	/// <summary>Default <c>unnamed</c>. Flags: archive, per_user.</summary>
 	public static readonly GameConVar<string> name = new("name");
 	/// <summary>Default <c>True</c>. Flags: developmentonly, gamedll, clientdll, replicated, defensive.</summary>
@@ -3974,166 +3968,6 @@ public static class ConVars {
 	public static readonly GameConVar<float> orb_display_claim_offset = new("orb_display_claim_offset");
 	/// <summary>Spew a bunch of timing info about when orbs are hit and claimed into the log. Default <c>False</c>. Flags: gamedll, release.</summary>
 	public static readonly GameConVar<bool> orb_timing_debug = new("orb_timing_debug");
-	/// <summary>Default <c>True</c>. Flags: developmentonly, hidden, defensive.</summary>
-	public static readonly GameConVar<bool> panorama_2d_translate_no_comp_layer = new("panorama_2d_translate_no_comp_layer");
-	/// <summary>Default <c>True</c>. Flags: developmentonly, hidden, defensive.</summary>
-	public static readonly GameConVar<bool> panorama_allow_texture_composition_layer_fast_path = new("panorama_allow_texture_composition_layer_fast_path");
-	/// <summary>Default <c>True</c>. Flags: developmentonly, hidden, defensive.</summary>
-	public static readonly GameConVar<bool> panorama_allow_transitions = new("panorama_allow_transitions");
-	/// <summary>Specifies whether to short circuit applying styles when a parent is invisible. Default <c>False</c>. Flags: developmentonly, hidden, defensive.</summary>
-	public static readonly GameConVar<bool> panorama_apply_styles_for_invisible_parents = new("panorama_apply_styles_for_invisible_parents");
-	/// <summary>Force style invalidation of the entire panel subtree when adding / removing classes. Default <c>False</c>. Flags: developmentonly, hidden, defensive.</summary>
-	public static readonly GameConVar<bool> panorama_assert_loading_panel_type = new("panorama_assert_loading_panel_type");
-	/// <summary>Default <c>True</c>. Flags: developmentonly, hidden, defensive.</summary>
-	public static readonly GameConVar<bool> panorama_box_shadow_no_comp_layer = new("panorama_box_shadow_no_comp_layer");
-	/// <summary>Default <c>0.25</c>. Flags: developmentonly, hidden, defensive.</summary>
-	public static readonly GameConVar<float> panorama_cache_command_list_repaint_threshold = new("panorama_cache_command_list_repaint_threshold");
-	/// <summary>Default <c>384</c>. Flags: developmentonly, hidden, defensive.</summary>
-	public static readonly GameConVar<uint> panorama_cache_command_list_size_threshold = new("panorama_cache_command_list_size_threshold");
-	/// <summary>Force style invalidation of the entire panel subtree when adding / removing classes. Default <c>False</c>. Flags: developmentonly, hidden, defensive.</summary>
-	public static readonly GameConVar<bool> panorama_classes_force_invalidate = new("panorama_classes_force_invalidate");
-	/// <summary>Default <c>2</c>. Flags: developmentonly, hidden, defensive.</summary>
-	public static readonly GameConVar<int> panorama_clear_frames_on_device_restore = new("panorama_clear_frames_on_device_restore");
-	/// <summary>Default <c>1</c>. Flags: developmentonly, hidden, defensive.</summary>
-	public static readonly GameConVar<float> panorama_comp_layer_lru_lifetime = new("panorama_comp_layer_lru_lifetime");
-	/// <summary>Default <c>True</c>. Flags: developmentonly, hidden, defensive.</summary>
-	public static readonly GameConVar<bool> panorama_composition_atlas = new("panorama_composition_atlas");
-	/// <summary>Default <c>0.5</c>. Flags: developmentonly, hidden, defensive.</summary>
-	public static readonly GameConVar<float> panorama_dash_gap_ratio = new("panorama_dash_gap_ratio");
-	/// <summary>Default <c>20</c>. Flags: developmentonly, hidden, defensive.</summary>
-	public static readonly GameConVar<float> panorama_dash_len = new("panorama_dash_len");
-	/// <summary>Default <c>0.25</c>. Flags: hidden, archive.</summary>
-	public static readonly GameConVar<float> panorama_debug_overlay_opacity = new("panorama_debug_overlay_opacity");
-	/// <summary>Default <c>0.25</c>. Flags: hidden, archive.</summary>
-	public static readonly GameConVar<float> panorama_debug_overlay_opacity_max = new("panorama_debug_overlay_opacity_max");
-	/// <summary>Default <c>0.01</c>. Flags: hidden, archive.</summary>
-	public static readonly GameConVar<float> panorama_debug_overlay_opacity_min = new("panorama_debug_overlay_opacity_min");
-	/// <summary>Default <c>False</c>. Flags: developmentonly, hidden, defensive.</summary>
-	public static readonly GameConVar<bool> panorama_debug_ready_for_display = new("panorama_debug_ready_for_display");
-	/// <summary>Default <c>False</c>. Flags: developmentonly, hidden, defensive.</summary>
-	public static readonly GameConVar<bool> panorama_debug_treat_all_addons_as_untrusted = new("panorama_debug_treat_all_addons_as_untrusted");
-	/// <summary>Default <c>False</c>. Flags: developmentonly, hidden, defensive.</summary>
-	public static readonly GameConVar<bool> panorama_disable_blur = new("panorama_disable_blur");
-	/// <summary>Default <c>False</c>. Flags: developmentonly, hidden, defensive.</summary>
-	public static readonly GameConVar<bool> panorama_disable_box_shadow = new("panorama_disable_box_shadow");
-	/// <summary>Disable descendant selector filtering. Default <c>False</c>. Flags: developmentonly, hidden, defensive.</summary>
-	public static readonly GameConVar<bool> panorama_disable_descendant_filtering = new("panorama_disable_descendant_filtering");
-	/// <summary>Default <c>False</c>. Flags: developmentonly, hidden, defensive.</summary>
-	public static readonly GameConVar<bool> panorama_disable_draw_fancy_quad = new("panorama_disable_draw_fancy_quad");
-	/// <summary>Default <c>False</c>. Flags: developmentonly, hidden, defensive.</summary>
-	public static readonly GameConVar<bool> panorama_disable_draw_text = new("panorama_disable_draw_text");
-	/// <summary>Default <c>False</c>. Flags: developmentonly, hidden, defensive.</summary>
-	public static readonly GameConVar<bool> panorama_disable_draw_text_shadow = new("panorama_disable_draw_text_shadow");
-	/// <summary>Default <c>False</c>. Flags: developmentonly, hidden, defensive.</summary>
-	public static readonly GameConVar<bool> panorama_disable_layer_cache = new("panorama_disable_layer_cache");
-	/// <summary>Default <c>False</c>. Flags: developmentonly, hidden, defensive.</summary>
-	public static readonly GameConVar<bool> panorama_disable_layer_clear = new("panorama_disable_layer_clear");
-	/// <summary>Default <c>False</c>. Flags: developmentonly, hidden, defensive.</summary>
-	public static readonly GameConVar<bool> panorama_disable_render_callbacks = new("panorama_disable_render_callbacks");
-	/// <summary>Default <c>True</c>. Flags: developmentonly, hidden, defensive.</summary>
-	public static readonly GameConVar<bool> panorama_disable_render_target_cache = new("panorama_disable_render_target_cache");
-	/// <summary>Default <c>False</c>. Flags: developmentonly, hidden, defensive.</summary>
-	public static readonly GameConVar<bool> panorama_disallow_hover_styles = new("panorama_disallow_hover_styles");
-	/// <summary>Minimum mouse movement in pixels before a move is treated as a drag scroll. Default <c>20</c>. Flags: developmentonly, hidden, defensive.</summary>
-	public static readonly GameConVar<int> panorama_dragscroll_affordance = new("panorama_dragscroll_affordance");
-	/// <summary>Minimum time that the mouse button must be down before a move is treated as a drag scroll. Default <c>0.02</c>. Flags: developmentonly, hidden, defensive.</summary>
-	public static readonly GameConVar<float> panorama_dragscroll_mintime = new("panorama_dragscroll_mintime");
-	/// <summary>Multiplier for flick velocity off of actual measured velocity. Default <c>0.5</c>. Flags: developmentonly, hidden, defensive.</summary>
-	public static readonly GameConVar<float> panorama_dragscroll_velocitymultiplier = new("panorama_dragscroll_velocitymultiplier");
-	/// <summary>Default <c>True</c>. Flags: developmentonly, hidden, defensive.</summary>
-	public static readonly GameConVar<bool> panorama_draw_fast_path_img_shadow = new("panorama_draw_fast_path_img_shadow");
-	/// <summary>Default <c>True</c>. Flags: developmentonly, hidden, defensive.</summary>
-	public static readonly GameConVar<bool> panorama_draw_text_fast_path = new("panorama_draw_text_fast_path");
-	/// <summary>Default <c>True</c>. Flags: developmentonly, hidden, defensive.</summary>
-	public static readonly GameConVar<bool> panorama_draw_text_fast_path_text_shadow = new("panorama_draw_text_fast_path_text_shadow");
-	/// <summary>Default <c>True</c>. Flags: developmentonly, hidden, defensive.</summary>
-	public static readonly GameConVar<bool> panorama_enable_secondary_layout_pass = new("panorama_enable_secondary_layout_pass");
-	/// <summary>Default <c>-1</c>. Flags: developmentonly, hidden, defensive.</summary>
-	public static readonly GameConVar<int> panorama_force_active_controller_type = new("panorama_force_active_controller_type");
-	/// <summary>Default <c>False</c>. Flags: developmentonly, hidden, defensive.</summary>
-	public static readonly GameConVar<bool> panorama_force_atlas_clear = new("panorama_force_atlas_clear");
-	/// <summary>Force desired layout traverse, even if the cached values are up to date. Default <c>False</c>. Flags: developmentonly, hidden, defensive.</summary>
-	public static readonly GameConVar<bool> panorama_force_desired_layout_traverse = new("panorama_force_desired_layout_traverse");
-	/// <summary>Default <c>False</c>. Flags: developmentonly, hidden, defensive.</summary>
-	public static readonly GameConVar<bool> panorama_highlight_bad_opacity_masks = new("panorama_highlight_bad_opacity_masks");
-	/// <summary>Default <c>False</c>. Flags: developmentonly, hidden, defensive.</summary>
-	public static readonly GameConVar<bool> panorama_highlight_composition_layers = new("panorama_highlight_composition_layers");
-	/// <summary>Default <c>False</c>. Flags: developmentonly, hidden, defensive.</summary>
-	public static readonly GameConVar<bool> panorama_highlight_slow_operations = new("panorama_highlight_slow_operations");
-	/// <summary>Default <c>True</c>. Flags: developmentonly, hidden, defensive.</summary>
-	public static readonly GameConVar<bool> panorama_hsbc_through_fast_path = new("panorama_hsbc_through_fast_path");
-	/// <summary>Default <c>1</c>. Flags: developmentonly, hidden, defensive.</summary>
-	public static readonly GameConVar<float> panorama_joystick_axis_repeat_curve_time = new("panorama_joystick_axis_repeat_curve_time");
-	/// <summary>Default <c>0.05</c>. Flags: developmentonly, hidden, defensive.</summary>
-	public static readonly GameConVar<float> panorama_joystick_axis_repeat_interval_end = new("panorama_joystick_axis_repeat_interval_end");
-	/// <summary>Default <c>0.22</c>. Flags: developmentonly, hidden, defensive.</summary>
-	public static readonly GameConVar<float> panorama_joystick_axis_repeat_interval_start = new("panorama_joystick_axis_repeat_interval_start");
-	/// <summary>Default <c>1.2</c>. Flags: developmentonly, hidden, defensive.</summary>
-	public static readonly GameConVar<float> panorama_joystick_button_repeat_curve_time = new("panorama_joystick_button_repeat_curve_time");
-	/// <summary>Default <c>0.1</c>. Flags: developmentonly, hidden, defensive.</summary>
-	public static readonly GameConVar<float> panorama_joystick_button_repeat_interval_end = new("panorama_joystick_button_repeat_interval_end");
-	/// <summary>Default <c>0.48</c>. Flags: developmentonly, hidden, defensive.</summary>
-	public static readonly GameConVar<float> panorama_joystick_button_repeat_interval_start = new("panorama_joystick_button_repeat_interval_start");
-	/// <summary>Enable panorama joystick input. Default <c>True</c>. Flags: archive.</summary>
-	public static readonly GameConVar<bool> panorama_joystick_enabled = new("panorama_joystick_enabled");
-	/// <summary>Enable sending minidumps on JS Exceptions. Default <c>False</c>. Flags: developmentonly, hidden, defensive.</summary>
-	public static readonly GameConVar<bool> panorama_js_minidumps = new("panorama_js_minidumps");
-	/// <summary>Default <c>0</c>. Flags: developmentonly, hidden, defensive.</summary>
-	public static readonly GameConVar<int> panorama_large_dispatch_event_queue = new("panorama_large_dispatch_event_queue");
-	/// <summary>Default <c>10</c>. Flags: developmentonly, hidden, defensive.</summary>
-	public static readonly GameConVar<float> panorama_max_text_shadow_strength = new("panorama_max_text_shadow_strength");
-	/// <summary>Default <c>True</c>. Flags: developmentonly, hidden, defensive.</summary>
-	public static readonly GameConVar<bool> panorama_might_scroll_no_comp_layer = new("panorama_might_scroll_no_comp_layer");
-	/// <summary>Default <c>4096</c>. Flags: developmentonly, hidden, defensive.</summary>
-	public static readonly GameConVar<int> panorama_min_comp_layer_cache_cost = new("panorama_min_comp_layer_cache_cost");
-	/// <summary>Default <c>True</c>. Flags: developmentonly, hidden, defensive.</summary>
-	public static readonly GameConVar<bool> panorama_panel_occlusion = new("panorama_panel_occlusion");
-	/// <summary>Print the RenderOperation_t tree for the given root window; set to * to print all. Default <c>""</c>. Flags: developmentonly, hidden, defensive.</summary>
-	public static readonly GameConVar<string> panorama_print_render_tree = new("panorama_print_render_tree");
-	/// <summary>Default <c>2</c>. Flags: developmentonly, hidden, defensive.</summary>
-	public static readonly GameConVar<int> panorama_reload_animations = new("panorama_reload_animations");
-	/// <summary>Default <c>31457280</c>. Flags: developmentonly, hidden, defensive.</summary>
-	public static readonly GameConVar<int> panorama_render_target_cache_max_size = new("panorama_render_target_cache_max_size");
-	/// <summary>Enable script caching to speed up recompiling scripts multiple times. Default <c>True</c>. Flags: developmentonly, hidden, defensive.</summary>
-	public static readonly GameConVar<bool> panorama_script_cache_enabled = new("panorama_script_cache_enabled");
-	/// <summary>Default <c>False</c>. Flags: developmentonly, defensive.</summary>
-	public static readonly GameConVar<bool> panorama_show_fps = new("panorama_show_fps");
-	/// <summary>Default <c>1</c>. Flags: developmentonly, defensive.</summary>
-	public static readonly GameConVar<float> panorama_show_fps_scale = new("panorama_show_fps_scale");
-	/// <summary>Default <c>True</c>. Flags: developmentonly, hidden, defensive.</summary>
-	public static readonly GameConVar<bool> panorama_simple_borders_no_comp_layer = new("panorama_simple_borders_no_comp_layer");
-	/// <summary>Default <c>True</c>. Flags: developmentonly, hidden, defensive.</summary>
-	public static readonly GameConVar<bool> panorama_skip_composition_layer_content_paint = new("panorama_skip_composition_layer_content_paint");
-	/// <summary>Default <c>False</c>. Flags: developmentonly, hidden, defensive.</summary>
-	public static readonly GameConVar<bool> panorama_skip_composition_layer_content_paint_tint = new("panorama_skip_composition_layer_content_paint_tint");
-	/// <summary>If non-empty, print debug info about async event queue and dispatch behavior for events containing the substring. Default <c>""</c>. Flags: developmentonly, hidden, defensive.</summary>
-	public static readonly GameConVar<string> panorama_spew_async_event_substring = new("panorama_spew_async_event_substring");
-	/// <summary>Default <c>False</c>. Flags: developmentonly, hidden, defensive.</summary>
-	public static readonly GameConVar<bool> panorama_spew_layout_invalidates = new("panorama_spew_layout_invalidates");
-	/// <summary>Default <c>0</c>. Flags: developmentonly, hidden, defensive.</summary>
-	public static readonly GameConVar<float> panorama_stats_log_time = new("panorama_stats_log_time");
-	/// <summary>Force style invalidation of the entire panel subtree when adding / removing style flags. Default <c>False</c>. Flags: developmentonly, hidden, defensive.</summary>
-	public static readonly GameConVar<bool> panorama_style_flag_force_invalidate = new("panorama_style_flag_force_invalidate");
-	/// <summary>Default <c>False</c>. Flags: developmentonly, hidden, defensive.</summary>
-	public static readonly GameConVar<bool> panorama_suspend_animation = new("panorama_suspend_animation");
-	/// <summary>Default <c>False</c>. Flags: developmentonly, hidden, defensive.</summary>
-	public static readonly GameConVar<bool> panorama_suspend_paint = new("panorama_suspend_paint");
-	/// <summary>Default <c>512</c>. Flags: developmentonly, hidden, defensive.</summary>
-	public static readonly GameConVar<float> panorama_temp_comp_layer_min_dimension = new("panorama_temp_comp_layer_min_dimension");
-	/// <summary>Toggledebugger key operation : 0 = open/inspect, 1 = open/close. Default <c>0</c>, range 0 to 1. Flags: hidden, archive.</summary>
-	public static readonly GameConVar<int> panorama_toggledebugger_mode = new("panorama_toggledebugger_mode");
-	/// <summary>Default <c>False</c>. Flags: developmentonly, hidden, defensive.</summary>
-	public static readonly GameConVar<bool> panorama_track_render_commands = new("panorama_track_render_commands");
-	/// <summary>A float representing a scale factor for transitions. 1.0 is normal, 2.0 would be twice as fast as normal, 0.5 half as fast. Default <c>1</c>. Flags: developmentonly, hidden, defensive.</summary>
-	public static readonly GameConVar<float> panorama_transition_time_factor = new("panorama_transition_time_factor");
-	/// <summary>Default <c>True</c>. Flags: developmentonly, hidden, defensive.</summary>
-	public static readonly GameConVar<bool> panorama_unlink_from_render_tree = new("panorama_unlink_from_render_tree");
-	/// <summary>Default <c>True</c>. Flags: developmentonly, hidden, defensive.</summary>
-	public static readonly GameConVar<bool> panorama_use_backbuffer_directly = new("panorama_use_backbuffer_directly");
-	/// <summary>Default <c>True</c>. Flags: developmentonly, hidden, defensive.</summary>
-	public static readonly GameConVar<bool> panorama_use_composite_cmd_for_cached_layers = new("panorama_use_composite_cmd_for_cached_layers");
-	/// <summary>Default <c>True</c>. Flags: developmentonly, hidden, defensive.</summary>
-	public static readonly GameConVar<bool> panorama_use_new_occlusion_invalidation = new("panorama_use_new_occlusion_invalidation");
 	/// <summary>Default <c>False</c>. Flags: developmentonly, gamedll, clientdll, replicated.</summary>
 	public static readonly GameConVar<bool> parallel_perform_invalidate_physics = new("parallel_perform_invalidate_physics");
 	/// <summary>Default <c>False</c>. Flags: developmentonly, gamedll, clientdll, replicated.</summary>
@@ -4352,8 +4186,6 @@ public static class ConVars {
 	public static readonly GameConVar<bool> r_directional_lightmaps = new("r_directional_lightmaps");
 	/// <summary>Set to use direct lighting. Default <c>True</c>. Flags: cheat.</summary>
 	public static readonly GameConVar<bool> r_directlighting = new("r_directlighting");
-	/// <summary>Default <c>5</c>. Flags: developmentonly, defensive.</summary>
-	public static readonly GameConVar<int> r_dlss_preset = new("r_dlss_preset");
 	/// <summary>Default <c>False</c>. Flags: cheat.</summary>
 	public static readonly GameConVar<bool> r_dof_override = new("r_dof_override");
 	/// <summary>Default <c>2000</c>. Flags: cheat.</summary>
@@ -4368,10 +4200,6 @@ public static class ConVars {
 	public static readonly GameConVar<float> r_dof_override_tilt_to_ground = new("r_dof_override_tilt_to_ground");
 	/// <summary>Default <c>True</c>. Flags: cheat.</summary>
 	public static readonly GameConVar<bool> r_dopixelvisibility = new("r_dopixelvisibility");
-	/// <summary>Default <c>False</c>. Flags: cheat.</summary>
-	public static readonly GameConVar<bool> r_draw_first_tri_only = new("r_draw_first_tri_only");
-	/// <summary>Default <c>True</c>. Flags: cheat.</summary>
-	public static readonly GameConVar<bool> r_draw_instances = new("r_draw_instances");
 	/// <summary>Render blank instead of the game world. Default <c>False</c>. Flags: cheat.</summary>
 	public static readonly GameConVar<bool> r_drawblankworld = new("r_drawblankworld");
 	/// <summary>Set to render decals. Default <c>True</c>. Flags: cheat.</summary>
@@ -4384,24 +4212,16 @@ public static class ConVars {
 	public static readonly GameConVar<bool> r_drawskybox = new("r_drawskybox");
 	/// <summary>Render the world. Default <c>True</c>. Flags: cheat.</summary>
 	public static readonly GameConVar<bool> r_drawworld = new("r_drawworld");
-	/// <summary>Aggressively unbind bound resources to cleanup DX11 debug warnings. Default <c>False</c>. Flags: release.</summary>
-	public static readonly GameConVar<bool> r_dx11_debug_clean = new("r_dx11_debug_clean");
-	/// <summary>Enable Software Command lists for DX11 (Avoid using deferred contexts). Default <c>True</c>. Flags: developmentonly, defensive.</summary>
-	public static readonly GameConVar<bool> r_dx11_software_cmd_lists = new("r_dx11_software_cmd_lists");
 	/// <summary>Default <c>False</c>. Flags: developmentonly, defensive.</summary>
 	public static readonly GameConVar<bool> r_experimental_lag_limiter = new("r_experimental_lag_limiter");
 	/// <summary>Default <c>0</c>. Flags: cheat.</summary>
 	public static readonly GameConVar<int> r_extra_render_frames = new("r_extra_render_frames");
 	/// <summary>Scale factor for requested texture size (texture streaming) - used for geo that doesn't have a precomputed UV density measure. Default <c>2</c>. Flags: cheat.</summary>
 	public static readonly GameConVar<float> r_fallback_texture_lod_scale = new("r_fallback_texture_lod_scale");
-	/// <summary>Force the render device to not present frames. Default <c>False</c>. Flags: cheat.</summary>
-	public static readonly GameConVar<bool> r_force_no_present = new("r_force_no_present");
 	/// <summary>The number of frames to render when a. Default <c>5</c>. Flags: developmentonly.</summary>
 	public static readonly GameConVar<int> r_force_render_frame_count = new("r_force_render_frame_count");
 	/// <summary>Default <c>False</c>. Flags: developmentonly, cheat.</summary>
 	public static readonly GameConVar<bool> r_force_thick_hair = new("r_force_thick_hair");
-	/// <summary>Default <c>True</c>. Flags: developmentonly, defensive.</summary>
-	public static readonly GameConVar<bool> r_frame_sync_enable = new("r_frame_sync_enable");
 	/// <summary>Default <c>False</c>. Flags: reference.</summary>
 	public static readonly GameConVar<bool> r_freezeparticles = new("r_freezeparticles");
 	/// <summary>Screen Gamma (only in fullscreen modes). Default <c>2.2</c>, range 1 to 4. Flags: archive, missing1.</summary>
@@ -4456,8 +4276,6 @@ public static class ConVars {
 	public static readonly GameConVar<bool> r_hairsort = new("r_hairsort");
 	/// <summary>Set to use indirect lighting. Default <c>True</c>. Flags: cheat.</summary>
 	public static readonly GameConVar<bool> r_indirectlighting = new("r_indirectlighting");
-	/// <summary>Use legacy vsync mode -- for testing for a couple user machines. Default <c>False</c>. Flags: developmentonly, hidden, defensive.</summary>
-	public static readonly GameConVar<bool> r_legacy_vsync = new("r_legacy_vsync");
 	/// <summary>Default <c>True</c>. Flags: developmentonly, gamedll, clientdll, replicated, defensive.</summary>
 	public static readonly GameConVar<bool> r_light_flickering_enabled = new("r_light_flickering_enabled");
 	/// <summary>Default <c>False</c>. Flags: cheat.</summary>
@@ -4484,10 +4302,6 @@ public static class ConVars {
 	public static readonly GameConVar<int> r_lightmap_size_directional_irradiance = new("r_lightmap_size_directional_irradiance");
 	/// <summary>Default <c>False</c>. Flags: reference.</summary>
 	public static readonly GameConVar<bool> r_limit_particle_job_duration = new("r_limit_particle_job_duration");
-	/// <summary>NVIDIA Low Latency/AMD Anti-Lag 2 (0 = off, 1 = on, 2 = NV-only, on + boost). Default <c>1</c>. Flags: developmentonly, defensive.</summary>
-	public static readonly GameConVar<int> r_low_latency = new("r_low_latency");
-	/// <summary>NVIDIA Low Latency Trigger Flash. Default <c>True</c>. Flags: developmentonly, defensive.</summary>
-	public static readonly GameConVar<bool> r_low_latency_trigger_flash = new("r_low_latency_trigger_flash");
 	/// <summary>Upper limit on texture pool size. Default <c>0</c>. Flags: developmentonly, defensive.</summary>
 	public static readonly GameConVar<int> r_max_texture_pool_size = new("r_max_texture_pool_size");
 	/// <summary>Default <c>0.5</c>. Flags: developmentonly, gamedll, clientdll, replicated, defensive.</summary>
@@ -4496,22 +4310,10 @@ public static class ConVars {
 	public static readonly GameConVar<float> r_mixed_shadows_fade_out_time = new("r_mixed_shadows_fade_out_time");
 	/// <summary>Default <c>True</c>. Flags: cheat.</summary>
 	public static readonly GameConVar<bool> r_morphing_enabled = new("r_morphing_enabled");
-	/// <summary>Default <c>1</c>. Flags: developmentonly, defensive.</summary>
-	public static readonly GameConVar<int> r_multigpu_num_gpus_found = new("r_multigpu_num_gpus_found");
-	/// <summary>Default <c>1</c>. Flags: developmentonly, defensive.</summary>
-	public static readonly GameConVar<int> r_multigpu_num_gpus_used = new("r_multigpu_num_gpus_used");
 	/// <summary>Default <c>0</c>. Flags: reference.</summary>
 	public static readonly GameConVar<int> r_particle_max_detail_level = new("r_particle_max_detail_level");
 	/// <summary>Default <c>0</c>. Flags: reference.</summary>
 	public static readonly GameConVar<float> r_particle_timescale = new("r_particle_timescale");
-	/// <summary>Experimental: Set to 1 to enable full GPU pipeline flushing after each command list. Default <c>False</c>. Flags: developmentonly, defensive.</summary>
-	public static readonly GameConVar<bool> r_pipeline_stats_command_flush = new("r_pipeline_stats_command_flush");
-	/// <summary>Experimental: Set to 1 to enable GPU pipeline flushes right before the render thread sleeps to wait for more work. Default <c>False</c>. Flags: developmentonly, defensive.</summary>
-	public static readonly GameConVar<bool> r_pipeline_stats_flush_before_sleeping = new("r_pipeline_stats_flush_before_sleeping");
-	/// <summary>Experimental: Set to 1 to enable full GPU pipeline flushing after each present. Default <c>False</c>. Flags: developmentonly, defensive.</summary>
-	public static readonly GameConVar<bool> r_pipeline_stats_present_flush = new("r_pipeline_stats_present_flush");
-	/// <summary>Experimental: Set to 1 to use the ID3D11DeviceContext11::Flush() to flush the GPU pipeline instead of queries. Default <c>True</c>. Flags: developmentonly, defensive.</summary>
-	public static readonly GameConVar<bool> r_pipeline_stats_use_flush_api = new("r_pipeline_stats_use_flush_api");
 	/// <summary>Default <c>True</c>. Flags: cheat.</summary>
 	public static readonly GameConVar<bool> r_pixelvisibility_partial = new("r_pixelvisibility_partial");
 	/// <summary>Default <c>False</c>. Flags: cheat.</summary>
@@ -4532,8 +4334,6 @@ public static class ConVars {
 	public static readonly GameConVar<bool> r_reset_character_decals = new("r_reset_character_decals");
 	/// <summary>Default <c>True</c>. Flags: cheat.</summary>
 	public static readonly GameConVar<bool> r_shadows = new("r_shadows");
-	/// <summary>Default <c>False</c>. Flags: reference.</summary>
-	public static readonly GameConVar<bool> r_shadowtile_waveops = new("r_shadowtile_waveops");
 	/// <summary>Set to render debug overlays. Default <c>False</c>. Flags: cheat.</summary>
 	public static readonly GameConVar<bool> r_showdebugoverlays = new("r_showdebugoverlays");
 	/// <summary>Show scenesystem object bounding boxes. Default <c>False</c>. Flags: cheat.</summary>
@@ -4560,62 +4360,28 @@ public static class ConVars {
 	public static readonly GameConVar<float> r_ssao_radius = new("r_ssao_radius");
 	/// <summary>Default <c>1.2</c>. Flags: developmentonly, defensive.</summary>
 	public static readonly GameConVar<float> r_ssao_strength = new("r_ssao_strength");
-	/// <summary>Dynamically adjust texture streaming budget based on GPU memory usage. Default <c>True</c>. Flags: developmentonly, defensive.</summary>
-	public static readonly GameConVar<bool> r_texture_budget_dynamic = new("r_texture_budget_dynamic");
-	/// <summary>Reduce texture memory pool size when this percentage of the budget is full. Default <c>0.9</c>. Flags: developmentonly, defensive.</summary>
-	public static readonly GameConVar<float> r_texture_budget_threshold = new("r_texture_budget_threshold");
-	/// <summary>Time (in seconds) between updating texture memory budget. Default <c>0.1</c>. Flags: developmentonly, defensive.</summary>
-	public static readonly GameConVar<float> r_texture_budget_update_period = new("r_texture_budget_update_period");
-	/// <summary>Default <c>False</c>. Flags: developmentonly, defensive.</summary>
-	public static readonly GameConVar<bool> r_texture_eager_eviction = new("r_texture_eager_eviction");
 	/// <summary>Async Texture hookup uses its own threadpool instead of the global pool. Default <c>True</c>. Flags: developmentonly, defensive.</summary>
 	public static readonly GameConVar<bool> r_texture_hookup_uses_threadpool = new("r_texture_hookup_uses_threadpool");
 	/// <summary>Scale factor for requested texture size (texture streaming). Default <c>1</c>. Flags: cheat.</summary>
 	public static readonly GameConVar<float> r_texture_lod_scale = new("r_texture_lod_scale");
 	/// <summary>Allow immediately loading mips of textures (when possible) when their headers are loaded, saving IO &amp; reducing latency. Default <c>True</c>. Flags: developmentonly, defensive.</summary>
 	public static readonly GameConVar<bool> r_texture_nonstreaming_load = new("r_texture_nonstreaming_load");
-	/// <summary>Increase texture memory pool size by this many MB / s when under budget. Default <c>64</c>. Flags: developmentonly, defensive.</summary>
-	public static readonly GameConVar<float> r_texture_pool_increase_rate = new("r_texture_pool_increase_rate");
-	/// <summary>Reduce texture memory pool size by this many MB / s when over budget. Default <c>256</c>. Flags: developmentonly, defensive.</summary>
-	public static readonly GameConVar<float> r_texture_pool_reduce_rate = new("r_texture_pool_reduce_rate");
 	/// <summary>Total size of the texture pool in MB. Default <c>1600</c>. Flags: developmentonly, defensive.</summary>
 	public static readonly GameConVar<int> r_texture_pool_size = new("r_texture_pool_size");
 	/// <summary>Maximum resolution for top mip level in streaming textures. Default <c>2147483647</c>, range 512 to …. Flags: developmentonly, defensive.</summary>
 	public static readonly GameConVar<int> r_texture_stream_max_resolution = new("r_texture_stream_max_resolution");
 	/// <summary>Biases the mip level the texture streaming system choses to stream for each texture. Default <c>0</c>. Flags: developmentonly, defensive.</summary>
 	public static readonly GameConVar<int> r_texture_stream_mip_bias = new("r_texture_stream_mip_bias");
-	/// <summary>Default <c>0.1</c>. Flags: developmentonly, defensive.</summary>
-	public static readonly GameConVar<float> r_texture_stream_resolution_bias_decrease_rate = new("r_texture_stream_resolution_bias_decrease_rate");
-	/// <summary>Default <c>0.05</c>. Flags: developmentonly, defensive.</summary>
-	public static readonly GameConVar<float> r_texture_stream_resolution_bias_increase_rate = new("r_texture_stream_resolution_bias_increase_rate");
-	/// <summary>Default <c>1</c>. Flags: developmentonly, defensive.</summary>
-	public static readonly GameConVar<float> r_texture_stream_resolution_bias_min = new("r_texture_stream_resolution_bias_min");
-	/// <summary>Default <c>0.5</c>. Flags: developmentonly, defensive.</summary>
-	public static readonly GameConVar<float> r_texture_stream_resolution_bias_update_period = new("r_texture_stream_resolution_bias_update_period");
-	/// <summary>Default <c>10</c>. Flags: developmentonly, defensive.</summary>
-	public static readonly GameConVar<float> r_texture_stream_throttle_amount = new("r_texture_stream_throttle_amount");
-	/// <summary>Default <c>3</c>. Flags: developmentonly, defensive.</summary>
-	public static readonly GameConVar<int> r_texture_stream_throttle_count = new("r_texture_stream_throttle_count");
-	/// <summary>Default <c>1</c>. Flags: developmentonly, defensive.</summary>
-	public static readonly GameConVar<int> r_texture_stream_throttle_count_over_budget = new("r_texture_stream_throttle_count_over_budget");
-	/// <summary>Default <c>True</c>. Flags: developmentonly, defensive.</summary>
-	public static readonly GameConVar<bool> r_texture_streaming_timesliced = new("r_texture_streaming_timesliced");
-	/// <summary>After hitting throttling limits for streamout, allow it to continue up to this number of milliseconds. Default <c>0.2</c>. Flags: developmentonly, defensive.</summary>
-	public static readonly GameConVar<float> r_texture_streamout_unthrottle_ms = new("r_texture_streamout_unthrottle_ms");
 	/// <summary>0: Bilinear, 1: Trilinear, 2: Aniso 2x, 3: Aniso 4x, 4: Aniso 8x, 5: Aniso 16x. Default <c>1</c>. Flags: developmentonly, missing1, defensive.</summary>
 	public static readonly GameConVar<int> r_texturefilteringquality = new("r_texturefilteringquality");
 	/// <summary>Default <c>False</c>. Flags: reference.</summary>
 	public static readonly GameConVar<bool> r_threaded_particle_creation = new("r_threaded_particle_creation");
 	/// <summary>Default <c>False</c>. Flags: reference.</summary>
 	public static readonly GameConVar<bool> r_threaded_particles = new("r_threaded_particles");
-	/// <summary>Set the TIMESTAMP query cycle multiplier, for drivers that lie. Default <c>1</c>. Flags: developmentonly, defensive.</summary>
-	public static readonly GameConVar<float> r_timestamp_query_multiplier = new("r_timestamp_query_multiplier");
 	/// <summary>Enable rendering of translucent geometry. Default <c>True</c>. Flags: cheat.</summary>
 	public static readonly GameConVar<bool> r_translucent = new("r_translucent");
 	/// <summary>Default <c>False</c>. Flags: developmentonly, defensive.</summary>
 	public static readonly GameConVar<bool> r_ui_update_parallel_with_server = new("r_ui_update_parallel_with_server");
-	/// <summary>Use a model of GPU memory use to determine budget rather than querying the OS. Default <c>False</c>. Flags: developmentonly, defensive.</summary>
-	public static readonly GameConVar<bool> r_use_memory_budget_model = new("r_use_memory_budget_model");
 	/// <summary>Dumps state of texture streaming at the next frame boundary. Default <c>False</c>. Flags: developmentonly, defensive.</summary>
 	public static readonly GameConVar<bool> r_validate_texture_streaming = new("r_validate_texture_streaming");
 	/// <summary>When VConsole is in the foreground, force all engine &amp; tools to render. Default <c>True</c>. Flags: developmentonly, defensive.</summary>
@@ -5346,10 +5112,6 @@ public static class ConVars {
 	public static readonly GameConVar<bool> snd_steamaudio_source_pathing_enable_validation = new("snd_steamaudio_source_pathing_enable_validation");
 	/// <summary>Volume of sounds in tools (e.g. Hammer, SFM). Default <c>1</c>, range 0 to 1. Flags: archive.</summary>
 	public static readonly GameConVar<float> snd_toolvolume = new("snd_toolvolume");
-	/// <summary>Default <c>False</c>. Flags: developmentonly, cheat.</summary>
-	public static readonly GameConVar<bool> snd_ui_positional = new("snd_ui_positional");
-	/// <summary>Default <c>1</c>. Flags: developmentonly, cheat.</summary>
-	public static readonly GameConVar<float> snd_ui_spatialization_spread = new("snd_ui_spatialization_spread");
 	/// <summary>Default <c>0</c>. Flags: replicated, cheat, release.</summary>
 	public static readonly GameConVar<float> snd_use_baked_occlusion = new("snd_use_baked_occlusion");
 	/// <summary>If set &gt; 0, overrides how long the decay time is on all mix graphs (in seconds).. Default <c>-1</c>. Flags: cheat.</summary>
@@ -5986,8 +5748,6 @@ public static class ConVars {
 	public static readonly GameConVar<bool> teleport_trigger_debug = new("teleport_trigger_debug");
 	/// <summary>Default <c>-1</c>. Flags: developmentonly, gamedll, clientdll, replicated, defensive.</summary>
 	public static readonly GameConVar<int> testhero_force_spotted = new("testhero_force_spotted");
-	/// <summary>Debug test scripts. Default <c>False</c>. Flags: developmentonly, defensive.</summary>
-	public static readonly GameConVar<bool> testscript_debug = new("testscript_debug");
 	/// <summary>Maximum think time in milliseconds, warning is printed if this is exceeded. Default <c>10</c>. Flags: gamedll, clientdll, replicated, release.</summary>
 	public static readonly GameConVar<float> think_limit = new("think_limit");
 	/// <summary>Thread pool option. Default <c>-1</c>. Flags: hidden, release.</summary>

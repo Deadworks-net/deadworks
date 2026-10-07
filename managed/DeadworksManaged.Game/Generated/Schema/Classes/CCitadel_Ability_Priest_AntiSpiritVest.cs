@@ -16,5 +16,8 @@ public static partial class Schema {
 		private static readonly SchemaField __m_tBuffRechargeTime = new("CCitadel_Ability_Priest_AntiSpiritVest", "m_tBuffRechargeTime");
 		/// <summary><c>GameTime_t</c>.</summary>
 		public float m_tBuffRechargeTime { get => Get<float>(__m_tBuffRechargeTime); set => Set(__m_tBuffRechargeTime, value); }
+
+		/// <summary>The data entry this was created from, as <see cref="CCitadel_Ability_Priest_AntiSpiritVestVData"/>, or null if it has none.</summary>
+		public new CCitadel_Ability_Priest_AntiSpiritVestVData? VData => SubclassVData<CCitadel_Ability_Priest_AntiSpiritVestVData>();
 	}
 }

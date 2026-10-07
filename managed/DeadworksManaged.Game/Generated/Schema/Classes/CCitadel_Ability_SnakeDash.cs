@@ -12,5 +12,8 @@ public static partial class Schema {
 		internal CCitadel_Ability_SnakeDash() { }
 		static CCitadel_Ability_SnakeDash ISchemaClass<CCitadel_Ability_SnakeDash>.New() => new();
 		static string ISchemaClass<CCitadel_Ability_SnakeDash>.NativeName => "CCitadel_Ability_SnakeDash";
+
+		/// <summary>The data entry this was created from, as <see cref="CCitadel_Ability_SnakeDashVData"/>, or null if it has none.</summary>
+		public new CCitadel_Ability_SnakeDashVData? VData => SubclassVData<CCitadel_Ability_SnakeDashVData>();
 	}
 }

@@ -22,8 +22,8 @@ public static partial class Schema {
 		public string m_DashBurstSound => GetBufferString(__m_DashBurstSound);
 
 		private static readonly SchemaField __m_FlameDashModifier = new("CCitadel_Ability_FlameDashVData", "m_FlameDashModifier");
-		/// <summary><c>CEmbeddedSubclass&lt;CCitadelModifier&gt;</c>. No typed mapping yet: read it through its address.</summary>
-		public RawField m_FlameDashModifier => Raw(__m_FlameDashModifier, "CEmbeddedSubclass<CCitadelModifier>");
+		/// <summary><c>CEmbeddedSubclass&lt;CCitadelModifier&gt;</c>.</summary>
+		public CCitadelModifierVData? m_FlameDashModifier => EmbeddedSubclass<CCitadelModifierVData>(__m_FlameDashModifier);
 
 		private static readonly SchemaField __m_cameraSpeedBoost = new("CCitadel_Ability_FlameDashVData", "m_cameraSpeedBoost");
 		/// <summary><c>CitadelCameraOperationsSequence_t</c>.</summary>

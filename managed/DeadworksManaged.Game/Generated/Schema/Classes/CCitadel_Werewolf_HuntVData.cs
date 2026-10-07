@@ -14,19 +14,19 @@ public static partial class Schema {
 		static string ISchemaClass<CCitadel_Werewolf_HuntVData>.NativeName => "CCitadel_Werewolf_HuntVData";
 
 		private static readonly SchemaField __m_AuraHumanModifier = new("CCitadel_Werewolf_HuntVData", "m_AuraHumanModifier");
-		/// <summary><c>CEmbeddedSubclass&lt;CCitadelModifier&gt;</c>. No typed mapping yet: read it through its address.</summary>
-		public RawField m_AuraHumanModifier => Raw(__m_AuraHumanModifier, "CEmbeddedSubclass<CCitadelModifier>");
+		/// <summary><c>CEmbeddedSubclass&lt;CCitadelModifier&gt;</c>.</summary>
+		public CCitadelModifierVData? m_AuraHumanModifier => EmbeddedSubclass<CCitadelModifierVData>(__m_AuraHumanModifier);
 
 		private static readonly SchemaField __m_AuraWerewolfModifier = new("CCitadel_Werewolf_HuntVData", "m_AuraWerewolfModifier");
-		/// <summary><c>CEmbeddedSubclass&lt;CCitadelModifier&gt;</c>. No typed mapping yet: read it through its address.</summary>
-		public RawField m_AuraWerewolfModifier => Raw(__m_AuraWerewolfModifier, "CEmbeddedSubclass<CCitadelModifier>");
+		/// <summary><c>CEmbeddedSubclass&lt;CCitadelModifier&gt;</c>.</summary>
+		public CCitadelModifierVData? m_AuraWerewolfModifier => EmbeddedSubclass<CCitadelModifierVData>(__m_AuraWerewolfModifier);
 
 		private static readonly SchemaField __m_SelfBuffHumanModifier = new("CCitadel_Werewolf_HuntVData", "m_SelfBuffHumanModifier");
-		/// <summary><c>CEmbeddedSubclass&lt;CCitadelModifier&gt;</c>. No typed mapping yet: read it through its address.</summary>
-		public RawField m_SelfBuffHumanModifier => Raw(__m_SelfBuffHumanModifier, "CEmbeddedSubclass<CCitadelModifier>");
+		/// <summary><c>CEmbeddedSubclass&lt;CCitadelModifier&gt;</c>.</summary>
+		public CCitadelModifierVData? m_SelfBuffHumanModifier => EmbeddedSubclass<CCitadelModifierVData>(__m_SelfBuffHumanModifier);
 
 		private static readonly SchemaField __m_SelfBuffWerewolfModifier = new("CCitadel_Werewolf_HuntVData", "m_SelfBuffWerewolfModifier");
-		/// <summary><c>CEmbeddedSubclass&lt;CCitadelModifier&gt;</c>. No typed mapping yet: read it through its address.</summary>
-		public RawField m_SelfBuffWerewolfModifier => Raw(__m_SelfBuffWerewolfModifier, "CEmbeddedSubclass<CCitadelModifier>");
+		/// <summary><c>CEmbeddedSubclass&lt;CCitadelModifier&gt;</c>.</summary>
+		public CCitadelModifierVData? m_SelfBuffWerewolfModifier => EmbeddedSubclass<CCitadelModifierVData>(__m_SelfBuffWerewolfModifier);
 	}
 }

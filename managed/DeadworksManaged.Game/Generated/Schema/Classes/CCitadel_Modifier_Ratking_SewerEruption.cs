@@ -16,5 +16,8 @@ public static partial class Schema {
 		private static readonly SchemaField __m_AnticipationParticleIndex = new("CCitadel_Modifier_Ratking_SewerEruption", "m_AnticipationParticleIndex");
 		/// <summary><c>ParticleIndex_t</c>.</summary>
 		public int m_AnticipationParticleIndex { get => Get<int>(__m_AnticipationParticleIndex); set => Set(__m_AnticipationParticleIndex, value); }
+
+		/// <summary>The data entry this was created from, as <see cref="CCitadel_Modifier_Ratking_SewerEruptionVData"/>, or null if it has none.</summary>
+		public new CCitadel_Modifier_Ratking_SewerEruptionVData? VData => ModifierData<CCitadel_Modifier_Ratking_SewerEruptionVData>();
 	}
 }

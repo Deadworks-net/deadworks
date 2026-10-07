@@ -14,8 +14,8 @@ public static partial class Schema {
 		static string ISchemaClass<CModifierRestorativeGooVData>.NativeName => "CModifierRestorativeGooVData";
 
 		private static readonly SchemaField __m_BreakoutProgressBarModifier = new("CModifierRestorativeGooVData", "m_BreakoutProgressBarModifier");
-		/// <summary><c>CEmbeddedSubclass&lt;CCitadelModifier&gt;</c>. No typed mapping yet: read it through its address.</summary>
-		public RawField m_BreakoutProgressBarModifier => Raw(__m_BreakoutProgressBarModifier, "CEmbeddedSubclass<CCitadelModifier>");
+		/// <summary><c>CEmbeddedSubclass&lt;CCitadelModifier&gt;</c>.</summary>
+		public CCitadelModifierVData? m_BreakoutProgressBarModifier => EmbeddedSubclass<CCitadelModifierVData>(__m_BreakoutProgressBarModifier);
 
 		private static readonly SchemaField __m_HeavyMeleeImpact = new("CModifierRestorativeGooVData", "m_HeavyMeleeImpact");
 		/// <summary><c>CSoundEventName</c>.</summary>
@@ -34,8 +34,8 @@ public static partial class Schema {
 		public string m_NonTargetLoopingSound => GetBufferString(__m_NonTargetLoopingSound);
 
 		private static readonly SchemaField __m_PostCubeBuffModifier = new("CModifierRestorativeGooVData", "m_PostCubeBuffModifier");
-		/// <summary><c>CEmbeddedSubclass&lt;CCitadelModifier&gt;</c>. No typed mapping yet: read it through its address.</summary>
-		public RawField m_PostCubeBuffModifier => Raw(__m_PostCubeBuffModifier, "CEmbeddedSubclass<CCitadelModifier>");
+		/// <summary><c>CEmbeddedSubclass&lt;CCitadelModifier&gt;</c>.</summary>
+		public CCitadelModifierVData? m_PostCubeBuffModifier => EmbeddedSubclass<CCitadelModifierVData>(__m_PostCubeBuffModifier);
 
 		private static readonly SchemaField __m_RestorativeGooEndParticle = new("CModifierRestorativeGooVData", "m_RestorativeGooEndParticle");
 		/// <summary><c>CResourceNameTyped&lt;CWeakHandle&lt;InfoForResourceTypeIParticleSystemDefinition&gt;&gt;</c>.</summary>

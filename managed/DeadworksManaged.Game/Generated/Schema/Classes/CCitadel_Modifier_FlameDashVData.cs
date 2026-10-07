@@ -22,11 +22,11 @@ public static partial class Schema {
 		public string m_FlameDashParticle => GetBufferString(__m_FlameDashParticle);
 
 		private static readonly SchemaField __m_GroundAuraModifier = new("CCitadel_Modifier_FlameDashVData", "m_GroundAuraModifier");
-		/// <summary><c>CEmbeddedSubclass&lt;CCitadelModifier&gt;</c>. No typed mapping yet: read it through its address.</summary>
-		public RawField m_GroundAuraModifier => Raw(__m_GroundAuraModifier, "CEmbeddedSubclass<CCitadelModifier>");
+		/// <summary><c>CEmbeddedSubclass&lt;CCitadelModifier&gt;</c>.</summary>
+		public CCitadelModifierVData? m_GroundAuraModifier => EmbeddedSubclass<CCitadelModifierVData>(__m_GroundAuraModifier);
 
 		private static readonly SchemaField __m_ProgressModifier = new("CCitadel_Modifier_FlameDashVData", "m_ProgressModifier");
-		/// <summary><c>CEmbeddedSubclass&lt;CCitadelModifier&gt;</c>. No typed mapping yet: read it through its address.</summary>
-		public RawField m_ProgressModifier => Raw(__m_ProgressModifier, "CEmbeddedSubclass<CCitadelModifier>");
+		/// <summary><c>CEmbeddedSubclass&lt;CCitadelModifier&gt;</c>.</summary>
+		public CCitadelModifierVData? m_ProgressModifier => EmbeddedSubclass<CCitadelModifierVData>(__m_ProgressModifier);
 	}
 }

@@ -14,8 +14,8 @@ public static partial class Schema {
 		static string ISchemaClass<CCitadel_Ability_Chrono_TimeWallVData>.NativeName => "CCitadel_Ability_Chrono_TimeWallVData";
 
 		private static readonly SchemaField __m_AuraModifier = new("CCitadel_Ability_Chrono_TimeWallVData", "m_AuraModifier");
-		/// <summary><c>CEmbeddedSubclass&lt;CCitadelModifier&gt;</c>. No typed mapping yet: read it through its address.</summary>
-		public RawField m_AuraModifier => Raw(__m_AuraModifier, "CEmbeddedSubclass<CCitadelModifier>");
+		/// <summary><c>CEmbeddedSubclass&lt;CCitadelModifier&gt;</c>.</summary>
+		public CCitadelModifierVData? m_AuraModifier => EmbeddedSubclass<CCitadelModifierVData>(__m_AuraModifier);
 
 		private static readonly SchemaField __m_TimeWallChargeParticle = new("CCitadel_Ability_Chrono_TimeWallVData", "m_TimeWallChargeParticle");
 		/// <summary><c>CResourceNameTyped&lt;CWeakHandle&lt;InfoForResourceTypeIParticleSystemDefinition&gt;&gt;</c>.</summary>

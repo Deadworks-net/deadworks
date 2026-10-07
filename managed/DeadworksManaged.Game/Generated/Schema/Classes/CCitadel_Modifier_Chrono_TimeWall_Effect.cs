@@ -12,5 +12,8 @@ public static partial class Schema {
 		internal CCitadel_Modifier_Chrono_TimeWall_Effect() { }
 		static CCitadel_Modifier_Chrono_TimeWall_Effect ISchemaClass<CCitadel_Modifier_Chrono_TimeWall_Effect>.New() => new();
 		static string ISchemaClass<CCitadel_Modifier_Chrono_TimeWall_Effect>.NativeName => "CCitadel_Modifier_Chrono_TimeWall_Effect";
+
+		/// <summary>The data entry this was created from, as <see cref="CCitadel_Modifier_Chrono_TimeWall_EffectVData"/>, or null if it has none.</summary>
+		public new CCitadel_Modifier_Chrono_TimeWall_EffectVData? VData => ModifierData<CCitadel_Modifier_Chrono_TimeWall_EffectVData>();
 	}
 }

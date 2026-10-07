@@ -12,5 +12,8 @@ public static partial class Schema {
 		internal CCitadel_Ability_Familiar_CloneSingle() { }
 		static CCitadel_Ability_Familiar_CloneSingle ISchemaClass<CCitadel_Ability_Familiar_CloneSingle>.New() => new();
 		static string ISchemaClass<CCitadel_Ability_Familiar_CloneSingle>.NativeName => "CCitadel_Ability_Familiar_CloneSingle";
+
+		/// <summary>The data entry this was created from, as <see cref="CCitadel_Ability_Familiar_CloneSingleVData"/>, or null if it has none.</summary>
+		public new CCitadel_Ability_Familiar_CloneSingleVData? VData => SubclassVData<CCitadel_Ability_Familiar_CloneSingleVData>();
 	}
 }

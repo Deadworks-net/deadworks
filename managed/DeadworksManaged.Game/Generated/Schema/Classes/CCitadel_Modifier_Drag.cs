@@ -24,5 +24,8 @@ public static partial class Schema {
 		private static readonly SchemaField __m_vCapturedOffset = new("CCitadel_Modifier_Drag", "m_vCapturedOffset");
 		/// <summary><c>Vector</c>.</summary>
 		public Vector3 m_vCapturedOffset { get => Get<Vector3>(__m_vCapturedOffset); set => Set(__m_vCapturedOffset, value); }
+
+		/// <summary>The data entry this was created from, as <see cref="CCitadel_Modifier_DragVData"/>, or null if it has none.</summary>
+		public new CCitadel_Modifier_DragVData? VData => ModifierData<CCitadel_Modifier_DragVData>();
 	}
 }

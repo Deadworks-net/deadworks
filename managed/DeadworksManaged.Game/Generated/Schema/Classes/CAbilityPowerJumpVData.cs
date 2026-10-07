@@ -14,15 +14,15 @@ public static partial class Schema {
 		static string ISchemaClass<CAbilityPowerJumpVData>.NativeName => "CAbilityPowerJumpVData";
 
 		private static readonly SchemaField __m_InAirModifier = new("CAbilityPowerJumpVData", "m_InAirModifier");
-		/// <summary><c>CEmbeddedSubclass&lt;CCitadelModifier&gt;</c>. No typed mapping yet: read it through its address.</summary>
-		public RawField m_InAirModifier => Raw(__m_InAirModifier, "CEmbeddedSubclass<CCitadelModifier>");
+		/// <summary><c>CEmbeddedSubclass&lt;CCitadelModifier&gt;</c>.</summary>
+		public CCitadelModifierVData? m_InAirModifier => EmbeddedSubclass<CCitadelModifierVData>(__m_InAirModifier);
 
 		private static readonly SchemaField __m_JumpParticle = new("CAbilityPowerJumpVData", "m_JumpParticle");
 		/// <summary><c>CResourceNameTyped&lt;CWeakHandle&lt;InfoForResourceTypeIParticleSystemDefinition&gt;&gt;</c>.</summary>
 		public string m_JumpParticle => GetBufferString(__m_JumpParticle);
 
 		private static readonly SchemaField __m_PowerJumpModifier = new("CAbilityPowerJumpVData", "m_PowerJumpModifier");
-		/// <summary><c>CEmbeddedSubclass&lt;CCitadelModifier&gt;</c>. No typed mapping yet: read it through its address.</summary>
-		public RawField m_PowerJumpModifier => Raw(__m_PowerJumpModifier, "CEmbeddedSubclass<CCitadelModifier>");
+		/// <summary><c>CEmbeddedSubclass&lt;CCitadelModifier&gt;</c>.</summary>
+		public CCitadelModifierVData? m_PowerJumpModifier => EmbeddedSubclass<CCitadelModifierVData>(__m_PowerJumpModifier);
 	}
 }

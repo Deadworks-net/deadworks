@@ -16,5 +16,8 @@ public static partial class Schema {
 		private static readonly SchemaField __m_vHitEnts = new("CItemSilenceGlyph", "m_vHitEnts");
 		/// <summary><c>CUtlVector&lt;CHandle&lt;CBaseEntity&gt;&gt;</c>.</summary>
 		public SchemaHandleList<CBaseEntity> m_vHitEnts => new(this, __m_vHitEnts, -1);
+
+		/// <summary>The data entry this was created from, as <see cref="CItemSilenceGlyphVData"/>, or null if it has none.</summary>
+		public new CItemSilenceGlyphVData? VData => SubclassVData<CItemSilenceGlyphVData>();
 	}
 }

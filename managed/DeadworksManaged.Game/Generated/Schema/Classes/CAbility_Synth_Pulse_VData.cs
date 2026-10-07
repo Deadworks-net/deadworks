@@ -22,16 +22,16 @@ public static partial class Schema {
 		public string m_ChannelParticle => GetBufferString(__m_ChannelParticle);
 
 		private static readonly SchemaField __m_DebuffModifier = new("CAbility_Synth_Pulse_VData", "m_DebuffModifier");
-		/// <summary><c>CEmbeddedSubclass&lt;CCitadelModifier&gt;</c>. No typed mapping yet: read it through its address.</summary>
-		public RawField m_DebuffModifier => Raw(__m_DebuffModifier, "CEmbeddedSubclass<CCitadelModifier>");
+		/// <summary><c>CEmbeddedSubclass&lt;CCitadelModifier&gt;</c>.</summary>
+		public CCitadelModifierVData? m_DebuffModifier => EmbeddedSubclass<CCitadelModifierVData>(__m_DebuffModifier);
 
 		private static readonly SchemaField __m_EffectParticle = new("CAbility_Synth_Pulse_VData", "m_EffectParticle");
 		/// <summary><c>CResourceNameTyped&lt;CWeakHandle&lt;InfoForResourceTypeIParticleSystemDefinition&gt;&gt;</c>.</summary>
 		public string m_EffectParticle => GetBufferString(__m_EffectParticle);
 
 		private static readonly SchemaField __m_EscapeModifier = new("CAbility_Synth_Pulse_VData", "m_EscapeModifier");
-		/// <summary><c>CEmbeddedSubclass&lt;CCitadelModifier&gt;</c>. No typed mapping yet: read it through its address.</summary>
-		public RawField m_EscapeModifier => Raw(__m_EscapeModifier, "CEmbeddedSubclass<CCitadelModifier>");
+		/// <summary><c>CEmbeddedSubclass&lt;CCitadelModifier&gt;</c>.</summary>
+		public CCitadelModifierVData? m_EscapeModifier => EmbeddedSubclass<CCitadelModifierVData>(__m_EscapeModifier);
 
 		private static readonly SchemaField __m_HitParticle = new("CAbility_Synth_Pulse_VData", "m_HitParticle");
 		/// <summary><c>CResourceNameTyped&lt;CWeakHandle&lt;InfoForResourceTypeIParticleSystemDefinition&gt;&gt;</c>.</summary>

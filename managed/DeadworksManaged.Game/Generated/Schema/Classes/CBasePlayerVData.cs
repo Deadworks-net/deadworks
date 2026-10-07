@@ -74,7 +74,7 @@ public static partial class Schema {
 		public string m_sModelNameAg2Override => GetBufferString(__m_sModelNameAg2Override);
 
 		private static readonly SchemaField __m_vecIntrinsicModifiers = new("CBasePlayerVData", "m_vecIntrinsicModifiers");
-		/// <summary><c>CUtlVector&lt;CEmbeddedSubclass&lt;CCitadelModifier&gt;&gt;</c>. No typed mapping yet: read it through its address.</summary>
-		public RawField m_vecIntrinsicModifiers => Raw(__m_vecIntrinsicModifiers, "CUtlVector<CEmbeddedSubclass<CCitadelModifier>>");
+		/// <summary><c>CUtlVector&lt;CEmbeddedSubclass&lt;CCitadelModifier&gt;&gt;</c>.</summary>
+		public SchemaPointerList<CCitadelModifierVData> m_vecIntrinsicModifiers => new(this, __m_vecIntrinsicModifiers, -1, 16, 8);
 	}
 }

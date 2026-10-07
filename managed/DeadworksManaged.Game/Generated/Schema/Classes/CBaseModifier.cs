@@ -124,5 +124,8 @@ public static partial class Schema {
 		private static readonly SchemaField __m_pVecTrackedObjects = new("CBaseModifier", "m_pVecTrackedObjects");
 		/// <summary><c>CUtlVector&lt;IModifierTrackedObject*&gt;*</c>. No typed mapping yet: read it through its address.</summary>
 		public RawField m_pVecTrackedObjects => Raw(__m_pVecTrackedObjects, "CUtlVector<IModifierTrackedObject*>*");
+
+		/// <summary>The data entry this was created from, as <see cref="CModifierVData"/>, or null if it has none.</summary>
+		public CModifierVData? VData => ModifierData<CModifierVData>();
 	}
 }

@@ -54,8 +54,8 @@ public static partial class Schema {
 		public float m_flTotalTimeToCapture { get => Get<float>(__m_flTotalTimeToCapture); set => Set(__m_flTotalTimeToCapture, value); }
 
 		private static readonly SchemaField __m_modifierCapturer = new("CCitadel_MultiCapturePointVData", "m_modifierCapturer");
-		/// <summary><c>CEmbeddedSubclass&lt;CBaseModifier&gt;</c>. No typed mapping yet: read it through its address.</summary>
-		public RawField m_modifierCapturer => Raw(__m_modifierCapturer, "CEmbeddedSubclass<CBaseModifier>");
+		/// <summary><c>CEmbeddedSubclass&lt;CBaseModifier&gt;</c>.</summary>
+		public CModifierVData? m_modifierCapturer => EmbeddedSubclass<CModifierVData>(__m_modifierCapturer);
 
 		private static readonly SchemaField __m_strEnableStartSound = new("CCitadel_MultiCapturePointVData", "m_strEnableStartSound");
 		/// <summary><c>CSoundEventName</c>. Plays when the enable period starts.</summary>

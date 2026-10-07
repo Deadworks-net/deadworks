@@ -36,5 +36,8 @@ public static partial class Schema {
 		private static readonly SchemaField __m_flStopDuration = new("CCitadelBulletTimeWarp", "m_flStopDuration");
 		/// <summary><c>float32</c>.</summary>
 		public float m_flStopDuration { get => Get<float>(__m_flStopDuration); set => Set(__m_flStopDuration, value); }
+
+		/// <summary>The data entry this was created from, as <see cref="CCitadelBulletTimeWarpVData"/>, or null if it has none.</summary>
+		public CCitadelBulletTimeWarpVData? VData => SubclassVData<CCitadelBulletTimeWarpVData>();
 	}
 }

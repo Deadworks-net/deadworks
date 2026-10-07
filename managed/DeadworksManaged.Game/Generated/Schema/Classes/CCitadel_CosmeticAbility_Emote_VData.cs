@@ -14,7 +14,7 @@ public static partial class Schema {
 		static string ISchemaClass<CCitadel_CosmeticAbility_Emote_VData>.NativeName => "CCitadel_CosmeticAbility_Emote_VData";
 
 		private static readonly SchemaField __m_EmotingModifier = new("CCitadel_CosmeticAbility_Emote_VData", "m_EmotingModifier");
-		/// <summary><c>CEmbeddedSubclass&lt;CBaseModifier&gt;</c>. No typed mapping yet: read it through its address.</summary>
-		public RawField m_EmotingModifier => Raw(__m_EmotingModifier, "CEmbeddedSubclass<CBaseModifier>");
+		/// <summary><c>CEmbeddedSubclass&lt;CBaseModifier&gt;</c>.</summary>
+		public CModifierVData? m_EmotingModifier => EmbeddedSubclass<CModifierVData>(__m_EmotingModifier);
 	}
 }

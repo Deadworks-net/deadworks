@@ -12,5 +12,8 @@ public static partial class Schema {
 		internal CCitadel_TechUpgrade_CorpseExplosion() { }
 		static CCitadel_TechUpgrade_CorpseExplosion ISchemaClass<CCitadel_TechUpgrade_CorpseExplosion>.New() => new();
 		static string ISchemaClass<CCitadel_TechUpgrade_CorpseExplosion>.NativeName => "CCitadel_TechUpgrade_CorpseExplosion";
+
+		/// <summary>The data entry this was created from, as <see cref="CCitadel_TechUpgrade_CorpseExplosionVData"/>, or null if it has none.</summary>
+		public new CCitadel_TechUpgrade_CorpseExplosionVData? VData => SubclassVData<CCitadel_TechUpgrade_CorpseExplosionVData>();
 	}
 }

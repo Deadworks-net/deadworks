@@ -16,5 +16,8 @@ public static partial class Schema {
 		private static readonly SchemaField __m_ModelChange = new("CCitadel_Modifier_Nano_CatForm", "m_ModelChange");
 		/// <summary><c>ModelChange_t</c>.</summary>
 		public ModelChange_t m_ModelChange => Embedded<ModelChange_t>(__m_ModelChange);
+
+		/// <summary>The data entry this was created from, as <see cref="CCitadel_Modifier_Nano_CatFormVData"/>, or null if it has none.</summary>
+		public new CCitadel_Modifier_Nano_CatFormVData? VData => ModifierData<CCitadel_Modifier_Nano_CatFormVData>();
 	}
 }

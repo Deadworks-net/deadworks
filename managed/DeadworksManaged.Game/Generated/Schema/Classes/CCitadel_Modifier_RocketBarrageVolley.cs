@@ -28,5 +28,8 @@ public static partial class Schema {
 		private static readonly SchemaField __m_nGrenadesLeft = new("CCitadel_Modifier_RocketBarrageVolley", "m_nGrenadesLeft");
 		/// <summary><c>int32</c>.</summary>
 		public int m_nGrenadesLeft { get => Get<int>(__m_nGrenadesLeft); set => Set(__m_nGrenadesLeft, value); }
+
+		/// <summary>The data entry this was created from, as <see cref="CCitadel_Modifier_RocketBarrageVolleyVData"/>, or null if it has none.</summary>
+		public new CCitadel_Modifier_RocketBarrageVolleyVData? VData => ModifierData<CCitadel_Modifier_RocketBarrageVolleyVData>();
 	}
 }

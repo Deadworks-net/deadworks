@@ -18,16 +18,16 @@ public static partial class Schema {
 		public string m_GooGrenadeExplodeParticle => GetBufferString(__m_GooGrenadeExplodeParticle);
 
 		private static readonly SchemaField __m_GooGrenadeImpactModifier = new("CAbilityGooGrenadeVData", "m_GooGrenadeImpactModifier");
-		/// <summary><c>CEmbeddedSubclass&lt;CCitadelModifier&gt;</c>. No typed mapping yet: read it through its address.</summary>
-		public RawField m_GooGrenadeImpactModifier => Raw(__m_GooGrenadeImpactModifier, "CEmbeddedSubclass<CCitadelModifier>");
+		/// <summary><c>CEmbeddedSubclass&lt;CCitadelModifier&gt;</c>.</summary>
+		public CCitadelModifierVData? m_GooGrenadeImpactModifier => EmbeddedSubclass<CCitadelModifierVData>(__m_GooGrenadeImpactModifier);
 
 		private static readonly SchemaField __m_GooGrenadePuddleAuraFriendlyModifier = new("CAbilityGooGrenadeVData", "m_GooGrenadePuddleAuraFriendlyModifier");
-		/// <summary><c>CEmbeddedSubclass&lt;CCitadelModifier&gt;</c>. No typed mapping yet: read it through its address.</summary>
-		public RawField m_GooGrenadePuddleAuraFriendlyModifier => Raw(__m_GooGrenadePuddleAuraFriendlyModifier, "CEmbeddedSubclass<CCitadelModifier>");
+		/// <summary><c>CEmbeddedSubclass&lt;CCitadelModifier&gt;</c>.</summary>
+		public CCitadelModifierVData? m_GooGrenadePuddleAuraFriendlyModifier => EmbeddedSubclass<CCitadelModifierVData>(__m_GooGrenadePuddleAuraFriendlyModifier);
 
 		private static readonly SchemaField __m_GooGrenadePuddleAuraModifier = new("CAbilityGooGrenadeVData", "m_GooGrenadePuddleAuraModifier");
-		/// <summary><c>CEmbeddedSubclass&lt;CCitadelModifier&gt;</c>. No typed mapping yet: read it through its address.</summary>
-		public RawField m_GooGrenadePuddleAuraModifier => Raw(__m_GooGrenadePuddleAuraModifier, "CEmbeddedSubclass<CCitadelModifier>");
+		/// <summary><c>CEmbeddedSubclass&lt;CCitadelModifier&gt;</c>.</summary>
+		public CCitadelModifierVData? m_GooGrenadePuddleAuraModifier => EmbeddedSubclass<CCitadelModifierVData>(__m_GooGrenadePuddleAuraModifier);
 
 		private static readonly SchemaField __m_GooGrenadeSkipParticle = new("CAbilityGooGrenadeVData", "m_GooGrenadeSkipParticle");
 		/// <summary><c>CResourceNameTyped&lt;CWeakHandle&lt;InfoForResourceTypeIParticleSystemDefinition&gt;&gt;</c>.</summary>

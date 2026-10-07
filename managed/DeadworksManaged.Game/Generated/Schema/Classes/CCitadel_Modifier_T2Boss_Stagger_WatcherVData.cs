@@ -14,12 +14,12 @@ public static partial class Schema {
 		static string ISchemaClass<CCitadel_Modifier_T2Boss_Stagger_WatcherVData>.NativeName => "CCitadel_Modifier_T2Boss_Stagger_WatcherVData";
 
 		private static readonly SchemaField __m_BuildUpModifier = new("CCitadel_Modifier_T2Boss_Stagger_WatcherVData", "m_BuildUpModifier");
-		/// <summary><c>CEmbeddedSubclass&lt;CCitadel_Modifier_Base_Buildup&gt;</c>. No typed mapping yet: read it through its address.</summary>
-		public RawField m_BuildUpModifier => Raw(__m_BuildUpModifier, "CEmbeddedSubclass<CCitadel_Modifier_Base_Buildup>");
+		/// <summary><c>CEmbeddedSubclass&lt;CCitadel_Modifier_Base_Buildup&gt;</c>.</summary>
+		public CCitadel_Modifier_Base_BuildupVData? m_BuildUpModifier => EmbeddedSubclass<CCitadel_Modifier_Base_BuildupVData>(__m_BuildUpModifier);
 
 		private static readonly SchemaField __m_StaggeredModifier = new("CCitadel_Modifier_T2Boss_Stagger_WatcherVData", "m_StaggeredModifier");
-		/// <summary><c>CEmbeddedSubclass&lt;CCitadelModifier&gt;</c>. No typed mapping yet: read it through its address.</summary>
-		public RawField m_StaggeredModifier => Raw(__m_StaggeredModifier, "CEmbeddedSubclass<CCitadelModifier>");
+		/// <summary><c>CEmbeddedSubclass&lt;CCitadelModifier&gt;</c>.</summary>
+		public CCitadelModifierVData? m_StaggeredModifier => EmbeddedSubclass<CCitadelModifierVData>(__m_StaggeredModifier);
 
 		private static readonly SchemaField __m_flAdditionlPlayerMinContribution = new("CCitadel_Modifier_T2Boss_Stagger_WatcherVData", "m_flAdditionlPlayerMinContribution");
 		/// <summary><c>float32</c>. Frac * 5 Players to get how much extra buildup is added. Larger values make the buildup complete faster. 0.2 (*5 Players) is exactly halving the buildup time.</summary>

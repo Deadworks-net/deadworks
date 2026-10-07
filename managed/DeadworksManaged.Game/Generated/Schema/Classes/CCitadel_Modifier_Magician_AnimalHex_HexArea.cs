@@ -16,5 +16,8 @@ public static partial class Schema {
 		private static readonly SchemaField __m_hHexWarningParticle = new("CCitadel_Modifier_Magician_AnimalHex_HexArea", "m_hHexWarningParticle");
 		/// <summary><c>ParticleIndex_t</c>.</summary>
 		public int m_hHexWarningParticle { get => Get<int>(__m_hHexWarningParticle); set => Set(__m_hHexWarningParticle, value); }
+
+		/// <summary>The data entry this was created from, as <see cref="CCitadel_Modifier_Magician_AnimalHex_HexAreaVData"/>, or null if it has none.</summary>
+		public new CCitadel_Modifier_Magician_AnimalHex_HexAreaVData? VData => ModifierData<CCitadel_Modifier_Magician_AnimalHex_HexAreaVData>();
 	}
 }

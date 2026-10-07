@@ -14,16 +14,16 @@ public static partial class Schema {
 		static string ISchemaClass<CCitadel_Modifier_VeilWalkerWatcherVData>.NativeName => "CCitadel_Modifier_VeilWalkerWatcherVData";
 
 		private static readonly SchemaField __m_InvisModifier = new("CCitadel_Modifier_VeilWalkerWatcherVData", "m_InvisModifier");
-		/// <summary><c>CEmbeddedSubclass&lt;CCitadelModifier&gt;</c>. No typed mapping yet: read it through its address.</summary>
-		public RawField m_InvisModifier => Raw(__m_InvisModifier, "CEmbeddedSubclass<CCitadelModifier>");
+		/// <summary><c>CEmbeddedSubclass&lt;CCitadelModifier&gt;</c>.</summary>
+		public CCitadelModifierVData? m_InvisModifier => EmbeddedSubclass<CCitadelModifierVData>(__m_InvisModifier);
 
 		private static readonly SchemaField __m_VeilWalkerMovespeed = new("CCitadel_Modifier_VeilWalkerWatcherVData", "m_VeilWalkerMovespeed");
-		/// <summary><c>CEmbeddedSubclass&lt;CCitadelModifier&gt;</c>. No typed mapping yet: read it through its address.</summary>
-		public RawField m_VeilWalkerMovespeed => Raw(__m_VeilWalkerMovespeed, "CEmbeddedSubclass<CCitadelModifier>");
+		/// <summary><c>CEmbeddedSubclass&lt;CCitadelModifier&gt;</c>.</summary>
+		public CCitadelModifierVData? m_VeilWalkerMovespeed => EmbeddedSubclass<CCitadelModifierVData>(__m_VeilWalkerMovespeed);
 
 		private static readonly SchemaField __m_VeilWalkerTriggeredModifier = new("CCitadel_Modifier_VeilWalkerWatcherVData", "m_VeilWalkerTriggeredModifier");
-		/// <summary><c>CEmbeddedSubclass&lt;CCitadelModifier&gt;</c>. No typed mapping yet: read it through its address.</summary>
-		public RawField m_VeilWalkerTriggeredModifier => Raw(__m_VeilWalkerTriggeredModifier, "CEmbeddedSubclass<CCitadelModifier>");
+		/// <summary><c>CEmbeddedSubclass&lt;CCitadelModifier&gt;</c>.</summary>
+		public CCitadelModifierVData? m_VeilWalkerTriggeredModifier => EmbeddedSubclass<CCitadelModifierVData>(__m_VeilWalkerTriggeredModifier);
 
 		private static readonly SchemaField __m_flTraceLengthMin = new("CCitadel_Modifier_VeilWalkerWatcherVData", "m_flTraceLengthMin");
 		/// <summary><c>float32</c>.</summary>

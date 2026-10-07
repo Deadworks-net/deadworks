@@ -14,8 +14,8 @@ public static partial class Schema {
 		static string ISchemaClass<CCitadel_Modifier_TechBurst_ProcVData>.NativeName => "CCitadel_Modifier_TechBurst_ProcVData";
 
 		private static readonly SchemaField __m_ProcNotificationModifier = new("CCitadel_Modifier_TechBurst_ProcVData", "m_ProcNotificationModifier");
-		/// <summary><c>CEmbeddedSubclass&lt;CBaseModifier&gt;</c>. No typed mapping yet: read it through its address.</summary>
-		public RawField m_ProcNotificationModifier => Raw(__m_ProcNotificationModifier, "CEmbeddedSubclass<CBaseModifier>");
+		/// <summary><c>CEmbeddedSubclass&lt;CBaseModifier&gt;</c>.</summary>
+		public CModifierVData? m_ProcNotificationModifier => EmbeddedSubclass<CModifierVData>(__m_ProcNotificationModifier);
 
 		private static readonly SchemaField __m_ProcParticle = new("CCitadel_Modifier_TechBurst_ProcVData", "m_ProcParticle");
 		/// <summary><c>CResourceNameTyped&lt;CWeakHandle&lt;InfoForResourceTypeIParticleSystemDefinition&gt;&gt;</c>.</summary>

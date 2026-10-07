@@ -18,8 +18,8 @@ public static partial class Schema {
 		public HealingOverTimeLoopSoundOverride_t m_HealingLoopSoundOverride => Embedded<HealingOverTimeLoopSoundOverride_t>(__m_HealingLoopSoundOverride);
 
 		private static readonly SchemaField __m_OnCastModifier = new("CItem_ResonantHealing_VData", "m_OnCastModifier");
-		/// <summary><c>CEmbeddedSubclass&lt;CCitadelModifier&gt;</c>. No typed mapping yet: read it through its address.</summary>
-		public RawField m_OnCastModifier => Raw(__m_OnCastModifier, "CEmbeddedSubclass<CCitadelModifier>");
+		/// <summary><c>CEmbeddedSubclass&lt;CCitadelModifier&gt;</c>.</summary>
+		public CCitadelModifierVData? m_OnCastModifier => EmbeddedSubclass<CCitadelModifierVData>(__m_OnCastModifier);
 
 		private static readonly SchemaField __m_ProcParticle = new("CItem_ResonantHealing_VData", "m_ProcParticle");
 		/// <summary><c>CResourceNameTyped&lt;CWeakHandle&lt;InfoForResourceTypeIParticleSystemDefinition&gt;&gt;</c>.</summary>
@@ -30,7 +30,7 @@ public static partial class Schema {
 		public string m_RegenParticle => GetBufferString(__m_RegenParticle);
 
 		private static readonly SchemaField __m_StackNotificationModifier = new("CItem_ResonantHealing_VData", "m_StackNotificationModifier");
-		/// <summary><c>CEmbeddedSubclass&lt;CBaseModifier&gt;</c>. No typed mapping yet: read it through its address.</summary>
-		public RawField m_StackNotificationModifier => Raw(__m_StackNotificationModifier, "CEmbeddedSubclass<CBaseModifier>");
+		/// <summary><c>CEmbeddedSubclass&lt;CBaseModifier&gt;</c>.</summary>
+		public CModifierVData? m_StackNotificationModifier => EmbeddedSubclass<CModifierVData>(__m_StackNotificationModifier);
 	}
 }

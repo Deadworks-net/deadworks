@@ -22,8 +22,8 @@ public static partial class Schema {
 		public string m_BurrowInGroundParticle => GetBufferString(__m_BurrowInGroundParticle);
 
 		private static readonly SchemaField __m_BurrowModifier = new("CCitadel_Ability_BurrowVData", "m_BurrowModifier");
-		/// <summary><c>CEmbeddedSubclass&lt;CCitadelModifier&gt;</c>. No typed mapping yet: read it through its address.</summary>
-		public RawField m_BurrowModifier => Raw(__m_BurrowModifier, "CEmbeddedSubclass<CCitadelModifier>");
+		/// <summary><c>CEmbeddedSubclass&lt;CCitadelModifier&gt;</c>.</summary>
+		public CCitadelModifierVData? m_BurrowModifier => EmbeddedSubclass<CCitadelModifierVData>(__m_BurrowModifier);
 
 		private static readonly SchemaField __m_BurrowStartParticle = new("CCitadel_Ability_BurrowVData", "m_BurrowStartParticle");
 		/// <summary><c>CResourceNameTyped&lt;CWeakHandle&lt;InfoForResourceTypeIParticleSystemDefinition&gt;&gt;</c>.</summary>
@@ -34,8 +34,8 @@ public static partial class Schema {
 		public string m_ExplodeParticle => GetBufferString(__m_ExplodeParticle);
 
 		private static readonly SchemaField __m_SpinModifier = new("CCitadel_Ability_BurrowVData", "m_SpinModifier");
-		/// <summary><c>CEmbeddedSubclass&lt;CCitadelModifier&gt;</c>. No typed mapping yet: read it through its address.</summary>
-		public RawField m_SpinModifier => Raw(__m_SpinModifier, "CEmbeddedSubclass<CCitadelModifier>");
+		/// <summary><c>CEmbeddedSubclass&lt;CCitadelModifier&gt;</c>.</summary>
+		public CCitadelModifierVData? m_SpinModifier => EmbeddedSubclass<CCitadelModifierVData>(__m_SpinModifier);
 
 		private static readonly SchemaField __m_cameraSpinStart = new("CCitadel_Ability_BurrowVData", "m_cameraSpinStart");
 		/// <summary><c>CitadelCameraOperationsSequence_t</c>. Spin Camera Controller that matches the modifier for client.</summary>

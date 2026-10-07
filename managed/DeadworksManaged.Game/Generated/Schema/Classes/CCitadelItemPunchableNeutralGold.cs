@@ -16,5 +16,8 @@ public static partial class Schema {
 		private static readonly SchemaField __m_hVictimPlayer = new("CCitadelItemPunchableNeutralGold", "m_hVictimPlayer");
 		/// <summary><c>CHandle&lt;CBaseEntity&gt;</c>.</summary>
 		public CBaseEntity? m_hVictimPlayer { get => GetHandle<CBaseEntity>(__m_hVictimPlayer); set => SetHandle(__m_hVictimPlayer, value); }
+
+		/// <summary>The data entry this was created from, as <see cref="CCitadelItemPunchableNeutralGoldVData"/>, or null if it has none.</summary>
+		public new CCitadelItemPunchableNeutralGoldVData? VData => SubclassVData<CCitadelItemPunchableNeutralGoldVData>();
 	}
 }

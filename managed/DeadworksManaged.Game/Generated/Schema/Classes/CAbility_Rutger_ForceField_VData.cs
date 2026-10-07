@@ -14,20 +14,20 @@ public static partial class Schema {
 		static string ISchemaClass<CAbility_Rutger_ForceField_VData>.NativeName => "CAbility_Rutger_ForceField_VData";
 
 		private static readonly SchemaField __m_AuraModifier = new("CAbility_Rutger_ForceField_VData", "m_AuraModifier");
-		/// <summary><c>CEmbeddedSubclass&lt;CCitadelModifier&gt;</c>. No typed mapping yet: read it through its address.</summary>
-		public RawField m_AuraModifier => Raw(__m_AuraModifier, "CEmbeddedSubclass<CCitadelModifier>");
+		/// <summary><c>CEmbeddedSubclass&lt;CCitadelModifier&gt;</c>.</summary>
+		public CCitadelModifierVData? m_AuraModifier => EmbeddedSubclass<CCitadelModifierVData>(__m_AuraModifier);
 
 		private static readonly SchemaField __m_ChronoSphereChargeParticle = new("CAbility_Rutger_ForceField_VData", "m_ChronoSphereChargeParticle");
 		/// <summary><c>CResourceNameTyped&lt;CWeakHandle&lt;InfoForResourceTypeIParticleSystemDefinition&gt;&gt;</c>.</summary>
 		public string m_ChronoSphereChargeParticle => GetBufferString(__m_ChronoSphereChargeParticle);
 
 		private static readonly SchemaField __m_SlowModifier = new("CAbility_Rutger_ForceField_VData", "m_SlowModifier");
-		/// <summary><c>CEmbeddedSubclass&lt;CBaseModifier&gt;</c>. No typed mapping yet: read it through its address.</summary>
-		public RawField m_SlowModifier => Raw(__m_SlowModifier, "CEmbeddedSubclass<CBaseModifier>");
+		/// <summary><c>CEmbeddedSubclass&lt;CBaseModifier&gt;</c>.</summary>
+		public CModifierVData? m_SlowModifier => EmbeddedSubclass<CModifierVData>(__m_SlowModifier);
 
 		private static readonly SchemaField __m_VictimPushModifier = new("CAbility_Rutger_ForceField_VData", "m_VictimPushModifier");
-		/// <summary><c>CEmbeddedSubclass&lt;CCitadelModifier&gt;</c>. No typed mapping yet: read it through its address.</summary>
-		public RawField m_VictimPushModifier => Raw(__m_VictimPushModifier, "CEmbeddedSubclass<CCitadelModifier>");
+		/// <summary><c>CEmbeddedSubclass&lt;CCitadelModifier&gt;</c>.</summary>
+		public CCitadelModifierVData? m_VictimPushModifier => EmbeddedSubclass<CCitadelModifierVData>(__m_VictimPushModifier);
 
 		private static readonly SchemaField __m_strChargeUpSound = new("CAbility_Rutger_ForceField_VData", "m_strChargeUpSound");
 		/// <summary><c>CSoundEventName</c>.</summary>

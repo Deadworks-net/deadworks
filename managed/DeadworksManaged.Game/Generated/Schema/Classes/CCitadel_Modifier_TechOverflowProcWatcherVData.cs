@@ -14,15 +14,15 @@ public static partial class Schema {
 		static string ISchemaClass<CCitadel_Modifier_TechOverflowProcWatcherVData>.NativeName => "CCitadel_Modifier_TechOverflowProcWatcherVData";
 
 		private static readonly SchemaField __m_BuildUpModifier = new("CCitadel_Modifier_TechOverflowProcWatcherVData", "m_BuildUpModifier");
-		/// <summary><c>CEmbeddedSubclass&lt;CCitadel_Modifier_Base_Buildup&gt;</c>. No typed mapping yet: read it through its address.</summary>
-		public RawField m_BuildUpModifier => Raw(__m_BuildUpModifier, "CEmbeddedSubclass<CCitadel_Modifier_Base_Buildup>");
+		/// <summary><c>CEmbeddedSubclass&lt;CCitadel_Modifier_Base_Buildup&gt;</c>.</summary>
+		public CCitadel_Modifier_Base_BuildupVData? m_BuildUpModifier => EmbeddedSubclass<CCitadel_Modifier_Base_BuildupVData>(__m_BuildUpModifier);
 
 		private static readonly SchemaField __m_BuildupSuccessEffect = new("CCitadel_Modifier_TechOverflowProcWatcherVData", "m_BuildupSuccessEffect");
 		/// <summary><c>CResourceNameTyped&lt;CWeakHandle&lt;InfoForResourceTypeIParticleSystemDefinition&gt;&gt;</c>.</summary>
 		public string m_BuildupSuccessEffect => GetBufferString(__m_BuildupSuccessEffect);
 
 		private static readonly SchemaField __m_ProcModifier = new("CCitadel_Modifier_TechOverflowProcWatcherVData", "m_ProcModifier");
-		/// <summary><c>CEmbeddedSubclass&lt;CCitadelModifier&gt;</c>. No typed mapping yet: read it through its address.</summary>
-		public RawField m_ProcModifier => Raw(__m_ProcModifier, "CEmbeddedSubclass<CCitadelModifier>");
+		/// <summary><c>CEmbeddedSubclass&lt;CCitadelModifier&gt;</c>.</summary>
+		public CCitadelModifierVData? m_ProcModifier => EmbeddedSubclass<CCitadelModifierVData>(__m_ProcModifier);
 	}
 }

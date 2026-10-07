@@ -24,5 +24,8 @@ public static partial class Schema {
 		private static readonly SchemaField __m_vecPushDirection = new("CCitadel_Modifier_PriestKnockback", "m_vecPushDirection");
 		/// <summary><c>Vector</c>.</summary>
 		public Vector3 m_vecPushDirection { get => Get<Vector3>(__m_vecPushDirection); set => Set(__m_vecPushDirection, value); }
+
+		/// <summary>The data entry this was created from, as <see cref="CCitadel_Modifier_PriestKnockbackVData"/>, or null if it has none.</summary>
+		public new CCitadel_Modifier_PriestKnockbackVData? VData => ModifierData<CCitadel_Modifier_PriestKnockbackVData>();
 	}
 }

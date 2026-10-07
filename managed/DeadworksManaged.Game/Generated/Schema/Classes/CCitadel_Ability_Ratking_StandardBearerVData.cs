@@ -14,8 +14,8 @@ public static partial class Schema {
 		static string ISchemaClass<CCitadel_Ability_Ratking_StandardBearerVData>.NativeName => "CCitadel_Ability_Ratking_StandardBearerVData";
 
 		private static readonly SchemaField __m_AllyFlagAuraModifier = new("CCitadel_Ability_Ratking_StandardBearerVData", "m_AllyFlagAuraModifier");
-		/// <summary><c>CEmbeddedSubclass&lt;CCitadelModifier&gt;</c>. No typed mapping yet: read it through its address.</summary>
-		public RawField m_AllyFlagAuraModifier => Raw(__m_AllyFlagAuraModifier, "CEmbeddedSubclass<CCitadelModifier>");
+		/// <summary><c>CEmbeddedSubclass&lt;CCitadelModifier&gt;</c>.</summary>
+		public CCitadelModifierVData? m_AllyFlagAuraModifier => EmbeddedSubclass<CCitadelModifierVData>(__m_AllyFlagAuraModifier);
 
 		private static readonly SchemaField __m_AnticipationParticle = new("CCitadel_Ability_Ratking_StandardBearerVData", "m_AnticipationParticle");
 		/// <summary><c>CResourceNameTyped&lt;CWeakHandle&lt;InfoForResourceTypeIParticleSystemDefinition&gt;&gt;</c>.</summary>
@@ -26,8 +26,8 @@ public static partial class Schema {
 		public string m_CastParticle => GetBufferString(__m_CastParticle);
 
 		private static readonly SchemaField __m_CasterModifier = new("CCitadel_Ability_Ratking_StandardBearerVData", "m_CasterModifier");
-		/// <summary><c>CEmbeddedSubclass&lt;CCitadelModifier&gt;</c>. No typed mapping yet: read it through its address.</summary>
-		public RawField m_CasterModifier => Raw(__m_CasterModifier, "CEmbeddedSubclass<CCitadelModifier>");
+		/// <summary><c>CEmbeddedSubclass&lt;CCitadelModifier&gt;</c>.</summary>
+		public CCitadelModifierVData? m_CasterModifier => EmbeddedSubclass<CCitadelModifierVData>(__m_CasterModifier);
 
 		private static readonly SchemaField __m_ChargeImpactSound = new("CCitadel_Ability_Ratking_StandardBearerVData", "m_ChargeImpactSound");
 		/// <summary><c>CSoundEventName</c>.</summary>
@@ -38,8 +38,8 @@ public static partial class Schema {
 		public CitadelCameraOperationsSequence_t m_ChargingCameraSequence => Embedded<CitadelCameraOperationsSequence_t>(__m_ChargingCameraSequence);
 
 		private static readonly SchemaField __m_EnemyFlagAuraModifier = new("CCitadel_Ability_Ratking_StandardBearerVData", "m_EnemyFlagAuraModifier");
-		/// <summary><c>CEmbeddedSubclass&lt;CCitadelModifier&gt;</c>. No typed mapping yet: read it through its address.</summary>
-		public RawField m_EnemyFlagAuraModifier => Raw(__m_EnemyFlagAuraModifier, "CEmbeddedSubclass<CCitadelModifier>");
+		/// <summary><c>CEmbeddedSubclass&lt;CCitadelModifier&gt;</c>.</summary>
+		public CCitadelModifierVData? m_EnemyFlagAuraModifier => EmbeddedSubclass<CCitadelModifierVData>(__m_EnemyFlagAuraModifier);
 
 		private static readonly SchemaField __m_FlagModel = new("CCitadel_Ability_Ratking_StandardBearerVData", "m_FlagModel");
 		/// <summary><c>CResourceNameTyped&lt;CWeakHandle&lt;InfoForResourceTypeCModel&gt;&gt;</c>.</summary>
@@ -62,8 +62,8 @@ public static partial class Schema {
 		public RawField m_PlantLeapSpeedCurve => Raw(__m_PlantLeapSpeedCurve, "CPiecewiseCurve");
 
 		private static readonly SchemaField __m_PlantedModifier = new("CCitadel_Ability_Ratking_StandardBearerVData", "m_PlantedModifier");
-		/// <summary><c>CEmbeddedSubclass&lt;CCitadelModifier&gt;</c>. No typed mapping yet: read it through its address.</summary>
-		public RawField m_PlantedModifier => Raw(__m_PlantedModifier, "CEmbeddedSubclass<CCitadelModifier>");
+		/// <summary><c>CEmbeddedSubclass&lt;CCitadelModifier&gt;</c>.</summary>
+		public CCitadelModifierVData? m_PlantedModifier => EmbeddedSubclass<CCitadelModifierVData>(__m_PlantedModifier);
 
 		private static readonly SchemaField __m_flChargeAccelerationMeters = new("CCitadel_Ability_Ratking_StandardBearerVData", "m_flChargeAccelerationMeters");
 		/// <summary><c>float32</c>. How fast he builds up to full charge speed.</summary>

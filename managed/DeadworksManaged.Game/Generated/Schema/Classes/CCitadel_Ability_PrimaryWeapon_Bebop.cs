@@ -24,5 +24,8 @@ public static partial class Schema {
 		private static readonly SchemaField __m_flStartWindUpTime = new("CCitadel_Ability_PrimaryWeapon_Bebop", "m_flStartWindUpTime");
 		/// <summary><c>GameTime_t</c>.</summary>
 		public float m_flStartWindUpTime { get => Get<float>(__m_flStartWindUpTime); set => Set(__m_flStartWindUpTime, value); }
+
+		/// <summary>The data entry this was created from, as <see cref="CCitadel_Ability_PrimaryWeapon_BebopVData"/>, or null if it has none.</summary>
+		public new CCitadel_Ability_PrimaryWeapon_BebopVData? VData => SubclassVData<CCitadel_Ability_PrimaryWeapon_BebopVData>();
 	}
 }

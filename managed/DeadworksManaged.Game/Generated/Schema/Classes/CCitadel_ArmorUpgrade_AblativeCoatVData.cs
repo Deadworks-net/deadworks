@@ -14,20 +14,20 @@ public static partial class Schema {
 		static string ISchemaClass<CCitadel_ArmorUpgrade_AblativeCoatVData>.NativeName => "CCitadel_ArmorUpgrade_AblativeCoatVData";
 
 		private static readonly SchemaField __m_OnBreakEffectModifier = new("CCitadel_ArmorUpgrade_AblativeCoatVData", "m_OnBreakEffectModifier");
-		/// <summary><c>CEmbeddedSubclass&lt;CCitadelModifier&gt;</c>. No typed mapping yet: read it through its address.</summary>
-		public RawField m_OnBreakEffectModifier => Raw(__m_OnBreakEffectModifier, "CEmbeddedSubclass<CCitadelModifier>");
+		/// <summary><c>CEmbeddedSubclass&lt;CCitadelModifier&gt;</c>.</summary>
+		public CCitadelModifierVData? m_OnBreakEffectModifier => EmbeddedSubclass<CCitadelModifierVData>(__m_OnBreakEffectModifier);
 
 		private static readonly SchemaField __m_OnTakeDamageEffectModifier = new("CCitadel_ArmorUpgrade_AblativeCoatVData", "m_OnTakeDamageEffectModifier");
-		/// <summary><c>CEmbeddedSubclass&lt;CCitadelModifier&gt;</c>. No typed mapping yet: read it through its address.</summary>
-		public RawField m_OnTakeDamageEffectModifier => Raw(__m_OnTakeDamageEffectModifier, "CEmbeddedSubclass<CCitadelModifier>");
+		/// <summary><c>CEmbeddedSubclass&lt;CCitadelModifier&gt;</c>.</summary>
+		public CCitadelModifierVData? m_OnTakeDamageEffectModifier => EmbeddedSubclass<CCitadelModifierVData>(__m_OnTakeDamageEffectModifier);
 
 		private static readonly SchemaField __m_ResistBuffModifier = new("CCitadel_ArmorUpgrade_AblativeCoatVData", "m_ResistBuffModifier");
-		/// <summary><c>CEmbeddedSubclass&lt;CCitadelModifier&gt;</c>. No typed mapping yet: read it through its address.</summary>
-		public RawField m_ResistBuffModifier => Raw(__m_ResistBuffModifier, "CEmbeddedSubclass<CCitadelModifier>");
+		/// <summary><c>CEmbeddedSubclass&lt;CCitadelModifier&gt;</c>.</summary>
+		public CCitadelModifierVData? m_ResistBuffModifier => EmbeddedSubclass<CCitadelModifierVData>(__m_ResistBuffModifier);
 
 		private static readonly SchemaField __m_RestoreEffectModifier = new("CCitadel_ArmorUpgrade_AblativeCoatVData", "m_RestoreEffectModifier");
-		/// <summary><c>CEmbeddedSubclass&lt;CCitadelModifier&gt;</c>. No typed mapping yet: read it through its address.</summary>
-		public RawField m_RestoreEffectModifier => Raw(__m_RestoreEffectModifier, "CEmbeddedSubclass<CCitadelModifier>");
+		/// <summary><c>CEmbeddedSubclass&lt;CCitadelModifier&gt;</c>.</summary>
+		public CCitadelModifierVData? m_RestoreEffectModifier => EmbeddedSubclass<CCitadelModifierVData>(__m_RestoreEffectModifier);
 
 		private static readonly SchemaField __m_flOnBreakEffectDuration = new("CCitadel_ArmorUpgrade_AblativeCoatVData", "m_flOnBreakEffectDuration");
 		/// <summary><c>float32</c>.</summary>

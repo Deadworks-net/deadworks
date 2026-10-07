@@ -14,12 +14,12 @@ public static partial class Schema {
 		static string ISchemaClass<CAbility_Mirage_Teleport_VData>.NativeName => "CAbility_Mirage_Teleport_VData";
 
 		private static readonly SchemaField __m_BuffModifier = new("CAbility_Mirage_Teleport_VData", "m_BuffModifier");
-		/// <summary><c>CEmbeddedSubclass&lt;CCitadelModifier&gt;</c>. No typed mapping yet: read it through its address.</summary>
-		public RawField m_BuffModifier => Raw(__m_BuffModifier, "CEmbeddedSubclass<CCitadelModifier>");
+		/// <summary><c>CEmbeddedSubclass&lt;CCitadelModifier&gt;</c>.</summary>
+		public CCitadelModifierVData? m_BuffModifier => EmbeddedSubclass<CCitadelModifierVData>(__m_BuffModifier);
 
 		private static readonly SchemaField __m_InterruptNotificationModifier = new("CAbility_Mirage_Teleport_VData", "m_InterruptNotificationModifier");
-		/// <summary><c>CEmbeddedSubclass&lt;CCitadelModifier&gt;</c>. No typed mapping yet: read it through its address.</summary>
-		public RawField m_InterruptNotificationModifier => Raw(__m_InterruptNotificationModifier, "CEmbeddedSubclass<CCitadelModifier>");
+		/// <summary><c>CEmbeddedSubclass&lt;CCitadelModifier&gt;</c>.</summary>
+		public CCitadelModifierVData? m_InterruptNotificationModifier => EmbeddedSubclass<CCitadelModifierVData>(__m_InterruptNotificationModifier);
 
 		private static readonly SchemaField __m_TeleportEndParticle = new("CAbility_Mirage_Teleport_VData", "m_TeleportEndParticle");
 		/// <summary><c>CResourceNameTyped&lt;CWeakHandle&lt;InfoForResourceTypeIParticleSystemDefinition&gt;&gt;</c>.</summary>

@@ -18,8 +18,8 @@ public static partial class Schema {
 		public string m_CastParticle => GetBufferString(__m_CastParticle);
 
 		private static readonly SchemaField __m_DisarmModifier = new("CModifierPsychicLiftVData", "m_DisarmModifier");
-		/// <summary><c>CEmbeddedSubclass&lt;CCitadelModifier&gt;</c>. No typed mapping yet: read it through its address.</summary>
-		public RawField m_DisarmModifier => Raw(__m_DisarmModifier, "CEmbeddedSubclass<CCitadelModifier>");
+		/// <summary><c>CEmbeddedSubclass&lt;CCitadelModifier&gt;</c>.</summary>
+		public CCitadelModifierVData? m_DisarmModifier => EmbeddedSubclass<CCitadelModifierVData>(__m_DisarmModifier);
 
 		private static readonly SchemaField __m_ImpactParticle = new("CModifierPsychicLiftVData", "m_ImpactParticle");
 		/// <summary><c>CResourceNameTyped&lt;CWeakHandle&lt;InfoForResourceTypeIParticleSystemDefinition&gt;&gt;</c>.</summary>
@@ -30,12 +30,12 @@ public static partial class Schema {
 		public string m_LiftParticle => GetBufferString(__m_LiftParticle);
 
 		private static readonly SchemaField __m_SilenceModifier = new("CModifierPsychicLiftVData", "m_SilenceModifier");
-		/// <summary><c>CEmbeddedSubclass&lt;CCitadelModifier&gt;</c>. No typed mapping yet: read it through its address.</summary>
-		public RawField m_SilenceModifier => Raw(__m_SilenceModifier, "CEmbeddedSubclass<CCitadelModifier>");
+		/// <summary><c>CEmbeddedSubclass&lt;CCitadelModifier&gt;</c>.</summary>
+		public CCitadelModifierVData? m_SilenceModifier => EmbeddedSubclass<CCitadelModifierVData>(__m_SilenceModifier);
 
 		private static readonly SchemaField __m_SlowModifier = new("CModifierPsychicLiftVData", "m_SlowModifier");
-		/// <summary><c>CEmbeddedSubclass&lt;CCitadelModifier&gt;</c>. No typed mapping yet: read it through its address.</summary>
-		public RawField m_SlowModifier => Raw(__m_SlowModifier, "CEmbeddedSubclass<CCitadelModifier>");
+		/// <summary><c>CEmbeddedSubclass&lt;CCitadelModifier&gt;</c>.</summary>
+		public CCitadelModifierVData? m_SlowModifier => EmbeddedSubclass<CCitadelModifierVData>(__m_SlowModifier);
 
 		private static readonly SchemaField __m_flOccilateDegreesPerSecond = new("CModifierPsychicLiftVData", "m_flOccilateDegreesPerSecond");
 		/// <summary><c>float32</c>.</summary>

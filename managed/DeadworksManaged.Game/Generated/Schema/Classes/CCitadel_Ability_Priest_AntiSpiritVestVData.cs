@@ -14,16 +14,16 @@ public static partial class Schema {
 		static string ISchemaClass<CCitadel_Ability_Priest_AntiSpiritVestVData>.NativeName => "CCitadel_Ability_Priest_AntiSpiritVestVData";
 
 		private static readonly SchemaField __m_BuffModifier = new("CCitadel_Ability_Priest_AntiSpiritVestVData", "m_BuffModifier");
-		/// <summary><c>CEmbeddedSubclass&lt;CCitadelModifier&gt;</c>. No typed mapping yet: read it through its address.</summary>
-		public RawField m_BuffModifier => Raw(__m_BuffModifier, "CEmbeddedSubclass<CCitadelModifier>");
+		/// <summary><c>CEmbeddedSubclass&lt;CCitadelModifier&gt;</c>.</summary>
+		public CCitadelModifierVData? m_BuffModifier => EmbeddedSubclass<CCitadelModifierVData>(__m_BuffModifier);
 
 		private static readonly SchemaField __m_ProcParticle = new("CCitadel_Ability_Priest_AntiSpiritVestVData", "m_ProcParticle");
 		/// <summary><c>CResourceNameTyped&lt;CWeakHandle&lt;InfoForResourceTypeIParticleSystemDefinition&gt;&gt;</c>.</summary>
 		public string m_ProcParticle => GetBufferString(__m_ProcParticle);
 
 		private static readonly SchemaField __m_ShieldBreakModifier = new("CCitadel_Ability_Priest_AntiSpiritVestVData", "m_ShieldBreakModifier");
-		/// <summary><c>CEmbeddedSubclass&lt;CCitadelModifier&gt;</c>. No typed mapping yet: read it through its address.</summary>
-		public RawField m_ShieldBreakModifier => Raw(__m_ShieldBreakModifier, "CEmbeddedSubclass<CCitadelModifier>");
+		/// <summary><c>CEmbeddedSubclass&lt;CCitadelModifier&gt;</c>.</summary>
+		public CCitadelModifierVData? m_ShieldBreakModifier => EmbeddedSubclass<CCitadelModifierVData>(__m_ShieldBreakModifier);
 
 		private static readonly SchemaField __m_strProcSound = new("CCitadel_Ability_Priest_AntiSpiritVestVData", "m_strProcSound");
 		/// <summary><c>CSoundEventName</c>.</summary>

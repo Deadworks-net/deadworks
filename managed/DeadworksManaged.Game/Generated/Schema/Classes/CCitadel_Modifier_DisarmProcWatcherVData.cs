@@ -14,16 +14,16 @@ public static partial class Schema {
 		static string ISchemaClass<CCitadel_Modifier_DisarmProcWatcherVData>.NativeName => "CCitadel_Modifier_DisarmProcWatcherVData";
 
 		private static readonly SchemaField __m_BuildUpModifier = new("CCitadel_Modifier_DisarmProcWatcherVData", "m_BuildUpModifier");
-		/// <summary><c>CEmbeddedSubclass&lt;CCitadel_Modifier_Base_Buildup&gt;</c>. No typed mapping yet: read it through its address.</summary>
-		public RawField m_BuildUpModifier => Raw(__m_BuildUpModifier, "CEmbeddedSubclass<CCitadel_Modifier_Base_Buildup>");
+		/// <summary><c>CEmbeddedSubclass&lt;CCitadel_Modifier_Base_Buildup&gt;</c>.</summary>
+		public CCitadel_Modifier_Base_BuildupVData? m_BuildUpModifier => EmbeddedSubclass<CCitadel_Modifier_Base_BuildupVData>(__m_BuildUpModifier);
 
 		private static readonly SchemaField __m_DisarmProcModifier = new("CCitadel_Modifier_DisarmProcWatcherVData", "m_DisarmProcModifier");
-		/// <summary><c>CEmbeddedSubclass&lt;CCitadelModifier&gt;</c>. No typed mapping yet: read it through its address.</summary>
-		public RawField m_DisarmProcModifier => Raw(__m_DisarmProcModifier, "CEmbeddedSubclass<CCitadelModifier>");
+		/// <summary><c>CEmbeddedSubclass&lt;CCitadelModifier&gt;</c>.</summary>
+		public CCitadelModifierVData? m_DisarmProcModifier => EmbeddedSubclass<CCitadelModifierVData>(__m_DisarmProcModifier);
 
 		private static readonly SchemaField __m_ImmunityModifier = new("CCitadel_Modifier_DisarmProcWatcherVData", "m_ImmunityModifier");
-		/// <summary><c>CEmbeddedSubclass&lt;CCitadelModifier&gt;</c>. No typed mapping yet: read it through its address.</summary>
-		public RawField m_ImmunityModifier => Raw(__m_ImmunityModifier, "CEmbeddedSubclass<CCitadelModifier>");
+		/// <summary><c>CEmbeddedSubclass&lt;CCitadelModifier&gt;</c>.</summary>
+		public CCitadelModifierVData? m_ImmunityModifier => EmbeddedSubclass<CCitadelModifierVData>(__m_ImmunityModifier);
 
 		private static readonly SchemaField __m_TracerParticle = new("CCitadel_Modifier_DisarmProcWatcherVData", "m_TracerParticle");
 		/// <summary><c>CResourceNameTyped&lt;CWeakHandle&lt;InfoForResourceTypeIParticleSystemDefinition&gt;&gt;</c>.</summary>

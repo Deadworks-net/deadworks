@@ -30,8 +30,8 @@ public static partial class Schema {
 		public float m_ArrowOffsetX { get => Get<float>(__m_ArrowOffsetX); set => Set(__m_ArrowOffsetX, value); }
 
 		private static readonly SchemaField __m_DebuffModifier = new("CAbilityGuidedArrowVData", "m_DebuffModifier");
-		/// <summary><c>CEmbeddedSubclass&lt;CCitadelModifier&gt;</c>. No typed mapping yet: read it through its address.</summary>
-		public RawField m_DebuffModifier => Raw(__m_DebuffModifier, "CEmbeddedSubclass<CCitadelModifier>");
+		/// <summary><c>CEmbeddedSubclass&lt;CCitadelModifier&gt;</c>.</summary>
+		public CCitadelModifierVData? m_DebuffModifier => EmbeddedSubclass<CCitadelModifierVData>(__m_DebuffModifier);
 
 		private static readonly SchemaField __m_ExplosionParticle = new("CAbilityGuidedArrowVData", "m_ExplosionParticle");
 		/// <summary><c>CResourceNameTyped&lt;CWeakHandle&lt;InfoForResourceTypeIParticleSystemDefinition&gt;&gt;</c>.</summary>
@@ -42,12 +42,12 @@ public static partial class Schema {
 		public string m_GuidedArrowChannelParticle => GetBufferString(__m_GuidedArrowChannelParticle);
 
 		private static readonly SchemaField __m_GuidingModifier = new("CAbilityGuidedArrowVData", "m_GuidingModifier");
-		/// <summary><c>CEmbeddedSubclass&lt;CCitadelModifier&gt;</c>. No typed mapping yet: read it through its address.</summary>
-		public RawField m_GuidingModifier => Raw(__m_GuidingModifier, "CEmbeddedSubclass<CCitadelModifier>");
+		/// <summary><c>CEmbeddedSubclass&lt;CCitadelModifier&gt;</c>.</summary>
+		public CCitadelModifierVData? m_GuidingModifier => EmbeddedSubclass<CCitadelModifierVData>(__m_GuidingModifier);
 
 		private static readonly SchemaField __m_KillCheckModifier = new("CAbilityGuidedArrowVData", "m_KillCheckModifier");
-		/// <summary><c>CEmbeddedSubclass&lt;CCitadelModifier&gt;</c>. No typed mapping yet: read it through its address.</summary>
-		public RawField m_KillCheckModifier => Raw(__m_KillCheckModifier, "CEmbeddedSubclass<CCitadelModifier>");
+		/// <summary><c>CEmbeddedSubclass&lt;CCitadelModifier&gt;</c>.</summary>
+		public CCitadelModifierVData? m_KillCheckModifier => EmbeddedSubclass<CCitadelModifierVData>(__m_KillCheckModifier);
 
 		private static readonly SchemaField __m_ProjectileModel = new("CAbilityGuidedArrowVData", "m_ProjectileModel");
 		/// <summary><c>CResourceNameTyped&lt;CWeakHandle&lt;InfoForResourceTypeCModel&gt;&gt;</c>.</summary>

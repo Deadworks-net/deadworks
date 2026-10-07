@@ -12,5 +12,8 @@ public static partial class Schema {
 		internal CCitadel_Item_TechDamagePulse() { }
 		static CCitadel_Item_TechDamagePulse ISchemaClass<CCitadel_Item_TechDamagePulse>.New() => new();
 		static string ISchemaClass<CCitadel_Item_TechDamagePulse>.NativeName => "CCitadel_Item_TechDamagePulse";
+
+		/// <summary>The data entry this was created from, as <see cref="CCitadel_Item_TechDamagePulseVData"/>, or null if it has none.</summary>
+		public new CCitadel_Item_TechDamagePulseVData? VData => SubclassVData<CCitadel_Item_TechDamagePulseVData>();
 	}
 }

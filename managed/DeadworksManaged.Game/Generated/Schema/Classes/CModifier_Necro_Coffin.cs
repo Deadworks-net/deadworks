@@ -12,5 +12,8 @@ public static partial class Schema {
 		internal CModifier_Necro_Coffin() { }
 		static CModifier_Necro_Coffin ISchemaClass<CModifier_Necro_Coffin>.New() => new();
 		static string ISchemaClass<CModifier_Necro_Coffin>.NativeName => "CModifier_Necro_Coffin";
+
+		/// <summary>The data entry this was created from, as <see cref="CModifier_Necro_CoffinVData"/>, or null if it has none.</summary>
+		public new CModifier_Necro_CoffinVData? VData => ModifierData<CModifier_Necro_CoffinVData>();
 	}
 }

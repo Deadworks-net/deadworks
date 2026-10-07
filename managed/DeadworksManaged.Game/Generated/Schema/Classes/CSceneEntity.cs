@@ -14,8 +14,8 @@ public static partial class Schema {
 		static string ISchemaClass<CSceneEntity>.NativeName => "CSceneEntity";
 
 		private static readonly SchemaField __m_ActorClipMap = new("CSceneEntity", "m_ActorClipMap");
-		/// <summary><c>CUtlDict&lt;ActorClipEntry_t&gt;</c>. No typed mapping yet: read it through its address.</summary>
-		public RawField m_ActorClipMap => Raw(__m_ActorClipMap, "CUtlDict<ActorClipEntry_t>");
+		/// <summary><c>CUtlDict&lt;ActorClipEntry_t&gt;</c>.</summary>
+		public SchemaDict<ActorClipEntry_t> m_ActorClipMap => new(this, __m_ActorClipMap);
 
 		private static readonly SchemaField __m_ActorGraphMap = new("CSceneEntity", "m_ActorGraphMap");
 		/// <summary><c>CUtlDict&lt;CUtlSymbolLarge&gt;</c>. No typed mapping yet: read it through its address.</summary>
@@ -34,8 +34,8 @@ public static partial class Schema {
 		public int m_BusyActor { get => Get<int>(__m_BusyActor); set => Set(__m_BusyActor, value); }
 
 		private static readonly SchemaField __m_LocatorSettingsMap = new("CSceneEntity", "m_LocatorSettingsMap");
-		/// <summary><c>CUtlDict&lt;SceneLocatorSettings_t&gt;</c>. No typed mapping yet: read it through its address.</summary>
-		public RawField m_LocatorSettingsMap => Raw(__m_LocatorSettingsMap, "CUtlDict<SceneLocatorSettings_t>");
+		/// <summary><c>CUtlDict&lt;SceneLocatorSettings_t&gt;</c>.</summary>
+		public SchemaDict<SceneLocatorSettings_t> m_LocatorSettingsMap => new(this, __m_LocatorSettingsMap);
 
 		private static readonly SchemaField __m_OnCanceled = new("CSceneEntity", "m_OnCanceled");
 		/// <summary><c>CEntityIOOutput</c>.</summary>

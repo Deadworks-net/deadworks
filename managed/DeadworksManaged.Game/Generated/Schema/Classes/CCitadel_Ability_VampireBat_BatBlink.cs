@@ -28,5 +28,8 @@ public static partial class Schema {
 		private static readonly SchemaField __m_iRemainingCasts = new("CCitadel_Ability_VampireBat_BatBlink", "m_iRemainingCasts");
 		/// <summary><c>int32</c>.</summary>
 		public int m_iRemainingCasts { get => Get<int>(__m_iRemainingCasts); set => Set(__m_iRemainingCasts, value); }
+
+		/// <summary>The data entry this was created from, as <see cref="CCitadel_Ability_VampireBat_BatBlinkVData"/>, or null if it has none.</summary>
+		public new CCitadel_Ability_VampireBat_BatBlinkVData? VData => SubclassVData<CCitadel_Ability_VampireBat_BatBlinkVData>();
 	}
 }

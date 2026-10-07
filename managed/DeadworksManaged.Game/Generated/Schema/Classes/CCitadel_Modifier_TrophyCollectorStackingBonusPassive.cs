@@ -16,5 +16,8 @@ public static partial class Schema {
 		private static readonly SchemaField __m_flCurrentThinkRate = new("CCitadel_Modifier_TrophyCollectorStackingBonusPassive", "m_flCurrentThinkRate");
 		/// <summary><c>float32</c>.</summary>
 		public float m_flCurrentThinkRate { get => Get<float>(__m_flCurrentThinkRate); set => Set(__m_flCurrentThinkRate, value); }
+
+		/// <summary>The data entry this was created from, as <see cref="CCitadel_Modifier_TrophyCollectorStackingBonusPassiveVData"/>, or null if it has none.</summary>
+		public new CCitadel_Modifier_TrophyCollectorStackingBonusPassiveVData? VData => ModifierData<CCitadel_Modifier_TrophyCollectorStackingBonusPassiveVData>();
 	}
 }

@@ -24,5 +24,8 @@ public static partial class Schema {
 		private static readonly SchemaField __m_tLeapStartTime = new("CCitadel_Ability_Werewolf_KickFlip", "m_tLeapStartTime");
 		/// <summary><c>GameTime_t</c>.</summary>
 		public float m_tLeapStartTime { get => Get<float>(__m_tLeapStartTime); set => Set(__m_tLeapStartTime, value); }
+
+		/// <summary>The data entry this was created from, as <see cref="CCitadel_Ability_Werewolf_KickFlipVData"/>, or null if it has none.</summary>
+		public new CCitadel_Ability_Werewolf_KickFlipVData? VData => SubclassVData<CCitadel_Ability_Werewolf_KickFlipVData>();
 	}
 }

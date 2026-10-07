@@ -12,5 +12,8 @@ public static partial class Schema {
 		internal CCitadel_Modifier_Spin() { }
 		static CCitadel_Modifier_Spin ISchemaClass<CCitadel_Modifier_Spin>.New() => new();
 		static string ISchemaClass<CCitadel_Modifier_Spin>.NativeName => "CCitadel_Modifier_Spin";
+
+		/// <summary>The data entry this was created from, as <see cref="CCitadel_Modifier_SpinVData"/>, or null if it has none.</summary>
+		public new CCitadel_Modifier_SpinVData? VData => ModifierData<CCitadel_Modifier_SpinVData>();
 	}
 }

@@ -14,8 +14,8 @@ public static partial class Schema {
 		static string ISchemaClass<CAbilityLashFlogVData>.NativeName => "CAbilityLashFlogVData";
 
 		private static readonly SchemaField __m_FlogDebuffModifier = new("CAbilityLashFlogVData", "m_FlogDebuffModifier");
-		/// <summary><c>CEmbeddedSubclass&lt;CCitadelModifier&gt;</c>. No typed mapping yet: read it through its address.</summary>
-		public RawField m_FlogDebuffModifier => Raw(__m_FlogDebuffModifier, "CEmbeddedSubclass<CCitadelModifier>");
+		/// <summary><c>CEmbeddedSubclass&lt;CCitadelModifier&gt;</c>.</summary>
+		public CCitadelModifierVData? m_FlogDebuffModifier => EmbeddedSubclass<CCitadelModifierVData>(__m_FlogDebuffModifier);
 
 		private static readonly SchemaField __m_FlogLifeLeachParticle = new("CAbilityLashFlogVData", "m_FlogLifeLeachParticle");
 		/// <summary><c>CResourceNameTyped&lt;CWeakHandle&lt;InfoForResourceTypeIParticleSystemDefinition&gt;&gt;</c>.</summary>

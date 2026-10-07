@@ -24,5 +24,8 @@ public static partial class Schema {
 		private static readonly SchemaField __m_iTotalShots = new("CCitadel_Ability_Gunslinger_Salvo", "m_iTotalShots");
 		/// <summary><c>int32</c>.</summary>
 		public int m_iTotalShots { get => Get<int>(__m_iTotalShots); set => Set(__m_iTotalShots, value); }
+
+		/// <summary>The data entry this was created from, as <see cref="CCitadel_Ability_Gunslinger_SalvoVData"/>, or null if it has none.</summary>
+		public new CCitadel_Ability_Gunslinger_SalvoVData? VData => SubclassVData<CCitadel_Ability_Gunslinger_SalvoVData>();
 	}
 }

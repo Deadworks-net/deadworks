@@ -12,5 +12,8 @@ public static partial class Schema {
 		internal CCitadel_Modifier_Frank_ShockTarget() { }
 		static CCitadel_Modifier_Frank_ShockTarget ISchemaClass<CCitadel_Modifier_Frank_ShockTarget>.New() => new();
 		static string ISchemaClass<CCitadel_Modifier_Frank_ShockTarget>.NativeName => "CCitadel_Modifier_Frank_ShockTarget";
+
+		/// <summary>The data entry this was created from, as <see cref="CCitadel_Modifier_Frank_ShockTargetVData"/>, or null if it has none.</summary>
+		public new CCitadel_Modifier_Frank_ShockTargetVData? VData => ModifierData<CCitadel_Modifier_Frank_ShockTargetVData>();
 	}
 }

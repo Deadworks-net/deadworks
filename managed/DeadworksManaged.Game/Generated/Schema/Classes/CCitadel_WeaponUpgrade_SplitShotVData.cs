@@ -14,12 +14,12 @@ public static partial class Schema {
 		static string ISchemaClass<CCitadel_WeaponUpgrade_SplitShotVData>.NativeName => "CCitadel_WeaponUpgrade_SplitShotVData";
 
 		private static readonly SchemaField __m_BuffIndicatorModifier = new("CCitadel_WeaponUpgrade_SplitShotVData", "m_BuffIndicatorModifier");
-		/// <summary><c>CEmbeddedSubclass&lt;CCitadelModifier&gt;</c>. No typed mapping yet: read it through its address.</summary>
-		public RawField m_BuffIndicatorModifier => Raw(__m_BuffIndicatorModifier, "CEmbeddedSubclass<CCitadelModifier>");
+		/// <summary><c>CEmbeddedSubclass&lt;CCitadelModifier&gt;</c>.</summary>
+		public CCitadelModifierVData? m_BuffIndicatorModifier => EmbeddedSubclass<CCitadelModifierVData>(__m_BuffIndicatorModifier);
 
 		private static readonly SchemaField __m_WeaponDamageBuff = new("CCitadel_WeaponUpgrade_SplitShotVData", "m_WeaponDamageBuff");
-		/// <summary><c>CEmbeddedSubclass&lt;CCitadelModifier&gt;</c>. No typed mapping yet: read it through its address.</summary>
-		public RawField m_WeaponDamageBuff => Raw(__m_WeaponDamageBuff, "CEmbeddedSubclass<CCitadelModifier>");
+		/// <summary><c>CEmbeddedSubclass&lt;CCitadelModifier&gt;</c>.</summary>
+		public CCitadelModifierVData? m_WeaponDamageBuff => EmbeddedSubclass<CCitadelModifierVData>(__m_WeaponDamageBuff);
 
 		private static readonly SchemaField __m_strWeaponShootSound = new("CCitadel_WeaponUpgrade_SplitShotVData", "m_strWeaponShootSound");
 		/// <summary><c>CSoundEventName</c>.</summary>

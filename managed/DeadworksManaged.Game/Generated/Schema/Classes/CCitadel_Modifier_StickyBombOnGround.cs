@@ -16,5 +16,8 @@ public static partial class Schema {
 		private static readonly SchemaField __m_tLastStopTime = new("CCitadel_Modifier_StickyBombOnGround", "m_tLastStopTime");
 		/// <summary><c>GameTime_t</c>.</summary>
 		public float m_tLastStopTime { get => Get<float>(__m_tLastStopTime); set => Set(__m_tLastStopTime, value); }
+
+		/// <summary>The data entry this was created from, as <see cref="CCitadel_Modifier_StickyBombOnGroundVData"/>, or null if it has none.</summary>
+		public new CCitadel_Modifier_StickyBombOnGroundVData? VData => ModifierData<CCitadel_Modifier_StickyBombOnGroundVData>();
 	}
 }

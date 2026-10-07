@@ -14,20 +14,20 @@ public static partial class Schema {
 		static string ISchemaClass<CAbilityChargedTackleVData>.NativeName => "CAbilityChargedTackleVData";
 
 		private static readonly SchemaField __m_ChargeActiveModifier = new("CAbilityChargedTackleVData", "m_ChargeActiveModifier");
-		/// <summary><c>CEmbeddedSubclass&lt;CCitadelModifier&gt;</c>. No typed mapping yet: read it through its address.</summary>
-		public RawField m_ChargeActiveModifier => Raw(__m_ChargeActiveModifier, "CEmbeddedSubclass<CCitadelModifier>");
+		/// <summary><c>CEmbeddedSubclass&lt;CCitadelModifier&gt;</c>.</summary>
+		public CCitadelModifierVData? m_ChargeActiveModifier => EmbeddedSubclass<CCitadelModifierVData>(__m_ChargeActiveModifier);
 
 		private static readonly SchemaField __m_ChargePrepareModifier = new("CAbilityChargedTackleVData", "m_ChargePrepareModifier");
-		/// <summary><c>CEmbeddedSubclass&lt;CCitadelModifier&gt;</c>. No typed mapping yet: read it through its address.</summary>
-		public RawField m_ChargePrepareModifier => Raw(__m_ChargePrepareModifier, "CEmbeddedSubclass<CCitadelModifier>");
+		/// <summary><c>CEmbeddedSubclass&lt;CCitadelModifier&gt;</c>.</summary>
+		public CCitadelModifierVData? m_ChargePrepareModifier => EmbeddedSubclass<CCitadelModifierVData>(__m_ChargePrepareModifier);
 
 		private static readonly SchemaField __m_ChargePreviewParticle = new("CAbilityChargedTackleVData", "m_ChargePreviewParticle");
 		/// <summary><c>CResourceNameTyped&lt;CWeakHandle&lt;InfoForResourceTypeIParticleSystemDefinition&gt;&gt;</c>.</summary>
 		public string m_ChargePreviewParticle => GetBufferString(__m_ChargePreviewParticle);
 
 		private static readonly SchemaField __m_DragModifier = new("CAbilityChargedTackleVData", "m_DragModifier");
-		/// <summary><c>CEmbeddedSubclass&lt;CCitadelModifier&gt;</c>. No typed mapping yet: read it through its address.</summary>
-		public RawField m_DragModifier => Raw(__m_DragModifier, "CEmbeddedSubclass<CCitadelModifier>");
+		/// <summary><c>CEmbeddedSubclass&lt;CCitadelModifier&gt;</c>.</summary>
+		public CCitadelModifierVData? m_DragModifier => EmbeddedSubclass<CCitadelModifierVData>(__m_DragModifier);
 
 		private static readonly SchemaField __m_strHitSound = new("CAbilityChargedTackleVData", "m_strHitSound");
 		/// <summary><c>CSoundEventName</c>.</summary>

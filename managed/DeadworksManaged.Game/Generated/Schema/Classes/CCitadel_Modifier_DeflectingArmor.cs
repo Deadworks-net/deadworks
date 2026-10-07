@@ -12,5 +12,8 @@ public static partial class Schema {
 		internal CCitadel_Modifier_DeflectingArmor() { }
 		static CCitadel_Modifier_DeflectingArmor ISchemaClass<CCitadel_Modifier_DeflectingArmor>.New() => new();
 		static string ISchemaClass<CCitadel_Modifier_DeflectingArmor>.NativeName => "CCitadel_Modifier_DeflectingArmor";
+
+		/// <summary>The data entry this was created from, as <see cref="CCitadel_Modifier_DeflectingArmorVData"/>, or null if it has none.</summary>
+		public new CCitadel_Modifier_DeflectingArmorVData? VData => ModifierData<CCitadel_Modifier_DeflectingArmorVData>();
 	}
 }

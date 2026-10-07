@@ -14,20 +14,20 @@ public static partial class Schema {
 		static string ISchemaClass<CCitadel_Upgrade_MagicCarpetVData>.NativeName => "CCitadel_Upgrade_MagicCarpetVData";
 
 		private static readonly SchemaField __m_FlyingCarpetModifier = new("CCitadel_Upgrade_MagicCarpetVData", "m_FlyingCarpetModifier");
-		/// <summary><c>CEmbeddedSubclass&lt;CCitadelModifier&gt;</c>. No typed mapping yet: read it through its address.</summary>
-		public RawField m_FlyingCarpetModifier => Raw(__m_FlyingCarpetModifier, "CEmbeddedSubclass<CCitadelModifier>");
+		/// <summary><c>CEmbeddedSubclass&lt;CCitadelModifier&gt;</c>.</summary>
+		public CCitadelModifierVData? m_FlyingCarpetModifier => EmbeddedSubclass<CCitadelModifierVData>(__m_FlyingCarpetModifier);
 
 		private static readonly SchemaField __m_FlyingCarpetVisualModifier = new("CCitadel_Upgrade_MagicCarpetVData", "m_FlyingCarpetVisualModifier");
-		/// <summary><c>CEmbeddedSubclass&lt;CCitadelModifier&gt;</c>. No typed mapping yet: read it through its address.</summary>
-		public RawField m_FlyingCarpetVisualModifier => Raw(__m_FlyingCarpetVisualModifier, "CEmbeddedSubclass<CCitadelModifier>");
+		/// <summary><c>CEmbeddedSubclass&lt;CCitadelModifier&gt;</c>.</summary>
+		public CCitadelModifierVData? m_FlyingCarpetVisualModifier => EmbeddedSubclass<CCitadelModifierVData>(__m_FlyingCarpetVisualModifier);
 
 		private static readonly SchemaField __m_SummonFlyingCarpetModifier = new("CCitadel_Upgrade_MagicCarpetVData", "m_SummonFlyingCarpetModifier");
-		/// <summary><c>CEmbeddedSubclass&lt;CCitadelModifier&gt;</c>. No typed mapping yet: read it through its address.</summary>
-		public RawField m_SummonFlyingCarpetModifier => Raw(__m_SummonFlyingCarpetModifier, "CEmbeddedSubclass<CCitadelModifier>");
+		/// <summary><c>CEmbeddedSubclass&lt;CCitadelModifier&gt;</c>.</summary>
+		public CCitadelModifierVData? m_SummonFlyingCarpetModifier => EmbeddedSubclass<CCitadelModifierVData>(__m_SummonFlyingCarpetModifier);
 
 		private static readonly SchemaField __m_SummonFlyingCarpetVisualModifier = new("CCitadel_Upgrade_MagicCarpetVData", "m_SummonFlyingCarpetVisualModifier");
-		/// <summary><c>CEmbeddedSubclass&lt;CCitadelModifier&gt;</c>. No typed mapping yet: read it through its address.</summary>
-		public RawField m_SummonFlyingCarpetVisualModifier => Raw(__m_SummonFlyingCarpetVisualModifier, "CEmbeddedSubclass<CCitadelModifier>");
+		/// <summary><c>CEmbeddedSubclass&lt;CCitadelModifier&gt;</c>.</summary>
+		public CCitadelModifierVData? m_SummonFlyingCarpetVisualModifier => EmbeddedSubclass<CCitadelModifierVData>(__m_SummonFlyingCarpetVisualModifier);
 
 		private static readonly SchemaField __m_SummonParticle = new("CCitadel_Upgrade_MagicCarpetVData", "m_SummonParticle");
 		/// <summary><c>CResourceNameTyped&lt;CWeakHandle&lt;InfoForResourceTypeIParticleSystemDefinition&gt;&gt;</c>.</summary>

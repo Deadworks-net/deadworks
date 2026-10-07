@@ -14,11 +14,11 @@ public static partial class Schema {
 		static string ISchemaClass<CCitadel_Modifier_StatStealBaseVData>.NativeName => "CCitadel_Modifier_StatStealBaseVData";
 
 		private static readonly SchemaField __m_StatStolenBuffModifier = new("CCitadel_Modifier_StatStealBaseVData", "m_StatStolenBuffModifier");
-		/// <summary><c>CEmbeddedSubclass&lt;CCitadelModifier&gt;</c>. No typed mapping yet: read it through its address.</summary>
-		public RawField m_StatStolenBuffModifier => Raw(__m_StatStolenBuffModifier, "CEmbeddedSubclass<CCitadelModifier>");
+		/// <summary><c>CEmbeddedSubclass&lt;CCitadelModifier&gt;</c>.</summary>
+		public CCitadelModifierVData? m_StatStolenBuffModifier => EmbeddedSubclass<CCitadelModifierVData>(__m_StatStolenBuffModifier);
 
 		private static readonly SchemaField __m_StatStolenDebuffModifier = new("CCitadel_Modifier_StatStealBaseVData", "m_StatStolenDebuffModifier");
-		/// <summary><c>CEmbeddedSubclass&lt;CCitadelModifier&gt;</c>. No typed mapping yet: read it through its address.</summary>
-		public RawField m_StatStolenDebuffModifier => Raw(__m_StatStolenDebuffModifier, "CEmbeddedSubclass<CCitadelModifier>");
+		/// <summary><c>CEmbeddedSubclass&lt;CCitadelModifier&gt;</c>.</summary>
+		public CCitadelModifierVData? m_StatStolenDebuffModifier => EmbeddedSubclass<CCitadelModifierVData>(__m_StatStolenDebuffModifier);
 	}
 }

@@ -44,5 +44,8 @@ public static partial class Schema {
 		private static readonly SchemaField __m_vStart = new("CCitadel_Modifier_ChronoSwap_BubbleMove", "m_vStart");
 		/// <summary><c>VectorWS</c>.</summary>
 		public Vector3 m_vStart { get => Get<Vector3>(__m_vStart); set => Set(__m_vStart, value); }
+
+		/// <summary>The data entry this was created from, as <see cref="CCitadel_Modifier_ChronoSwap_BubbleMoveVData"/>, or null if it has none.</summary>
+		public new CCitadel_Modifier_ChronoSwap_BubbleMoveVData? VData => ModifierData<CCitadel_Modifier_ChronoSwap_BubbleMoveVData>();
 	}
 }

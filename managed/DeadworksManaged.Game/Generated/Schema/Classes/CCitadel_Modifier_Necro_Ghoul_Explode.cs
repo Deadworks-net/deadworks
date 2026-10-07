@@ -12,5 +12,8 @@ public static partial class Schema {
 		internal CCitadel_Modifier_Necro_Ghoul_Explode() { }
 		static CCitadel_Modifier_Necro_Ghoul_Explode ISchemaClass<CCitadel_Modifier_Necro_Ghoul_Explode>.New() => new();
 		static string ISchemaClass<CCitadel_Modifier_Necro_Ghoul_Explode>.NativeName => "CCitadel_Modifier_Necro_Ghoul_Explode";
+
+		/// <summary>The data entry this was created from, as <see cref="CCitadel_Modifier_Necro_Ghoul_ExplodeVData"/>, or null if it has none.</summary>
+		public new CCitadel_Modifier_Necro_Ghoul_ExplodeVData? VData => ModifierData<CCitadel_Modifier_Necro_Ghoul_ExplodeVData>();
 	}
 }

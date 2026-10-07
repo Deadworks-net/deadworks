@@ -14,12 +14,12 @@ public static partial class Schema {
 		static string ISchemaClass<CModifierNeutralAbilityVData>.NativeName => "CModifierNeutralAbilityVData";
 
 		private static readonly SchemaField __m_AutoCastDelayModifier = new("CModifierNeutralAbilityVData", "m_AutoCastDelayModifier");
-		/// <summary><c>CEmbeddedSubclass&lt;CCitadelModifier&gt;</c>. No typed mapping yet: read it through its address.</summary>
-		public RawField m_AutoCastDelayModifier => Raw(__m_AutoCastDelayModifier, "CEmbeddedSubclass<CCitadelModifier>");
+		/// <summary><c>CEmbeddedSubclass&lt;CCitadelModifier&gt;</c>.</summary>
+		public CCitadelModifierVData? m_AutoCastDelayModifier => EmbeddedSubclass<CCitadelModifierVData>(__m_AutoCastDelayModifier);
 
 		private static readonly SchemaField __m_AutoChannelModifier = new("CModifierNeutralAbilityVData", "m_AutoChannelModifier");
-		/// <summary><c>CEmbeddedSubclass&lt;CCitadelModifier&gt;</c>. No typed mapping yet: read it through its address.</summary>
-		public RawField m_AutoChannelModifier => Raw(__m_AutoChannelModifier, "CEmbeddedSubclass<CCitadelModifier>");
+		/// <summary><c>CEmbeddedSubclass&lt;CCitadelModifier&gt;</c>.</summary>
+		public CCitadelModifierVData? m_AutoChannelModifier => EmbeddedSubclass<CCitadelModifierVData>(__m_AutoChannelModifier);
 
 		private static readonly SchemaField __m_WeaponInfo = new("CModifierNeutralAbilityVData", "m_WeaponInfo");
 		/// <summary><c>CCitadelWeaponInfo</c>.</summary>

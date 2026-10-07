@@ -20,5 +20,8 @@ public static partial class Schema {
 		private static readonly SchemaField __m_nBuffParticleEnemy = new("CCitadel_Modifier_BerserkerDamageStack", "m_nBuffParticleEnemy");
 		/// <summary><c>ParticleIndex_t</c>.</summary>
 		public int m_nBuffParticleEnemy { get => Get<int>(__m_nBuffParticleEnemy); set => Set(__m_nBuffParticleEnemy, value); }
+
+		/// <summary>The data entry this was created from, as <see cref="CCitadel_Modifier_BerserkerDamageStackVData"/>, or null if it has none.</summary>
+		public new CCitadel_Modifier_BerserkerDamageStackVData? VData => ModifierData<CCitadel_Modifier_BerserkerDamageStackVData>();
 	}
 }

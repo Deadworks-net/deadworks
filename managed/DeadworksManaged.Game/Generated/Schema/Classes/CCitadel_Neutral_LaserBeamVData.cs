@@ -42,8 +42,8 @@ public static partial class Schema {
 		public string m_BeamStopSound => GetBufferString(__m_BeamStopSound);
 
 		private static readonly SchemaField __m_GroundAuraModifier = new("CCitadel_Neutral_LaserBeamVData", "m_GroundAuraModifier");
-		/// <summary><c>CEmbeddedSubclass&lt;CCitadelModifierAura&gt;</c>. No typed mapping yet: read it through its address.</summary>
-		public RawField m_GroundAuraModifier => Raw(__m_GroundAuraModifier, "CEmbeddedSubclass<CCitadelModifierAura>");
+		/// <summary><c>CEmbeddedSubclass&lt;CCitadelModifierAura&gt;</c>.</summary>
+		public CCitadelModifierAuraVData? m_GroundAuraModifier => EmbeddedSubclass<CCitadelModifierAuraVData>(__m_GroundAuraModifier);
 
 		private static readonly SchemaField __m_flAuraDropTickRate = new("CCitadel_Neutral_LaserBeamVData", "m_flAuraDropTickRate");
 		/// <summary><c>float32</c>.</summary>

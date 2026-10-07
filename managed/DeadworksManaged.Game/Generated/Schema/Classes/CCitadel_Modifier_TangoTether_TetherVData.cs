@@ -14,16 +14,16 @@ public static partial class Schema {
 		static string ISchemaClass<CCitadel_Modifier_TangoTether_TetherVData>.NativeName => "CCitadel_Modifier_TangoTether_TetherVData";
 
 		private static readonly SchemaField __m_BuffModifier = new("CCitadel_Modifier_TangoTether_TetherVData", "m_BuffModifier");
-		/// <summary><c>CEmbeddedSubclass&lt;CCitadelModifier&gt;</c>. No typed mapping yet: read it through its address.</summary>
-		public RawField m_BuffModifier => Raw(__m_BuffModifier, "CEmbeddedSubclass<CCitadelModifier>");
+		/// <summary><c>CEmbeddedSubclass&lt;CCitadelModifier&gt;</c>.</summary>
+		public CCitadelModifierVData? m_BuffModifier => EmbeddedSubclass<CCitadelModifierVData>(__m_BuffModifier);
 
 		private static readonly SchemaField __m_DisconnectedModifier = new("CCitadel_Modifier_TangoTether_TetherVData", "m_DisconnectedModifier");
-		/// <summary><c>CEmbeddedSubclass&lt;CCitadelModifier&gt;</c>. No typed mapping yet: read it through its address.</summary>
-		public RawField m_DisconnectedModifier => Raw(__m_DisconnectedModifier, "CEmbeddedSubclass<CCitadelModifier>");
+		/// <summary><c>CEmbeddedSubclass&lt;CCitadelModifier&gt;</c>.</summary>
+		public CCitadelModifierVData? m_DisconnectedModifier => EmbeddedSubclass<CCitadelModifierVData>(__m_DisconnectedModifier);
 
 		private static readonly SchemaField __m_DisconnectingModifier = new("CCitadel_Modifier_TangoTether_TetherVData", "m_DisconnectingModifier");
-		/// <summary><c>CEmbeddedSubclass&lt;CCitadelModifier&gt;</c>. No typed mapping yet: read it through its address.</summary>
-		public RawField m_DisconnectingModifier => Raw(__m_DisconnectingModifier, "CEmbeddedSubclass<CCitadelModifier>");
+		/// <summary><c>CEmbeddedSubclass&lt;CCitadelModifier&gt;</c>.</summary>
+		public CCitadelModifierVData? m_DisconnectingModifier => EmbeddedSubclass<CCitadelModifierVData>(__m_DisconnectingModifier);
 
 		private static readonly SchemaField __m_GrappleHitSound = new("CCitadel_Modifier_TangoTether_TetherVData", "m_GrappleHitSound");
 		/// <summary><c>CSoundEventName</c>.</summary>
@@ -34,12 +34,12 @@ public static partial class Schema {
 		public string m_HealSound => GetBufferString(__m_HealSound);
 
 		private static readonly SchemaField __m_LockedTargetModifier = new("CCitadel_Modifier_TangoTether_TetherVData", "m_LockedTargetModifier");
-		/// <summary><c>CEmbeddedSubclass&lt;CCitadelModifier&gt;</c>. No typed mapping yet: read it through its address.</summary>
-		public RawField m_LockedTargetModifier => Raw(__m_LockedTargetModifier, "CEmbeddedSubclass<CCitadelModifier>");
+		/// <summary><c>CEmbeddedSubclass&lt;CCitadelModifier&gt;</c>.</summary>
+		public CCitadelModifierVData? m_LockedTargetModifier => EmbeddedSubclass<CCitadelModifierVData>(__m_LockedTargetModifier);
 
 		private static readonly SchemaField __m_NoConnectionModifier = new("CCitadel_Modifier_TangoTether_TetherVData", "m_NoConnectionModifier");
-		/// <summary><c>CEmbeddedSubclass&lt;CCitadelModifier&gt;</c>. No typed mapping yet: read it through its address.</summary>
-		public RawField m_NoConnectionModifier => Raw(__m_NoConnectionModifier, "CEmbeddedSubclass<CCitadelModifier>");
+		/// <summary><c>CEmbeddedSubclass&lt;CCitadelModifier&gt;</c>.</summary>
+		public CCitadelModifierVData? m_NoConnectionModifier => EmbeddedSubclass<CCitadelModifierVData>(__m_NoConnectionModifier);
 
 		private static readonly SchemaField __m_flCandidateCloserDistance = new("CCitadel_Modifier_TangoTether_TetherVData", "m_flCandidateCloserDistance");
 		/// <summary><c>float32</c>.</summary>

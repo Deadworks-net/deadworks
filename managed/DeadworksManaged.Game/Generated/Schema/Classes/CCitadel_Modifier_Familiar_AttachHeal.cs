@@ -20,5 +20,8 @@ public static partial class Schema {
 		private static readonly SchemaField __m_flTotalPendingHeal = new("CCitadel_Modifier_Familiar_AttachHeal", "m_flTotalPendingHeal");
 		/// <summary><c>float32</c>.</summary>
 		public float m_flTotalPendingHeal { get => Get<float>(__m_flTotalPendingHeal); set => Set(__m_flTotalPendingHeal, value); }
+
+		/// <summary>The data entry this was created from, as <see cref="CCitadel_Modifier_Familiar_AttachHealVData"/>, or null if it has none.</summary>
+		public new CCitadel_Modifier_Familiar_AttachHealVData? VData => ModifierData<CCitadel_Modifier_Familiar_AttachHealVData>();
 	}
 }

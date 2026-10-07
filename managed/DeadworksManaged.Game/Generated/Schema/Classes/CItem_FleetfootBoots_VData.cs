@@ -14,11 +14,11 @@ public static partial class Schema {
 		static string ISchemaClass<CItem_FleetfootBoots_VData>.NativeName => "CItem_FleetfootBoots_VData";
 
 		private static readonly SchemaField __m_FleetfootBootsBonusClipModifier = new("CItem_FleetfootBoots_VData", "m_FleetfootBootsBonusClipModifier");
-		/// <summary><c>CEmbeddedSubclass&lt;CCitadelModifier&gt;</c>. No typed mapping yet: read it through its address.</summary>
-		public RawField m_FleetfootBootsBonusClipModifier => Raw(__m_FleetfootBootsBonusClipModifier, "CEmbeddedSubclass<CCitadelModifier>");
+		/// <summary><c>CEmbeddedSubclass&lt;CCitadelModifier&gt;</c>.</summary>
+		public CCitadelModifierVData? m_FleetfootBootsBonusClipModifier => EmbeddedSubclass<CCitadelModifierVData>(__m_FleetfootBootsBonusClipModifier);
 
 		private static readonly SchemaField __m_FleetfootBootsModifier = new("CItem_FleetfootBoots_VData", "m_FleetfootBootsModifier");
-		/// <summary><c>CEmbeddedSubclass&lt;CCitadelModifier&gt;</c>. No typed mapping yet: read it through its address.</summary>
-		public RawField m_FleetfootBootsModifier => Raw(__m_FleetfootBootsModifier, "CEmbeddedSubclass<CCitadelModifier>");
+		/// <summary><c>CEmbeddedSubclass&lt;CCitadelModifier&gt;</c>.</summary>
+		public CCitadelModifierVData? m_FleetfootBootsModifier => EmbeddedSubclass<CCitadelModifierVData>(__m_FleetfootBootsModifier);
 	}
 }

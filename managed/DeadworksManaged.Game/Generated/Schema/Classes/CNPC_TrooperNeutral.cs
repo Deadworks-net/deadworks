@@ -16,5 +16,8 @@ public static partial class Schema {
 		private static readonly SchemaField __m_vecSpawnOrigin = new("CNPC_TrooperNeutral", "m_vecSpawnOrigin");
 		/// <summary><c>VectorWS</c>.</summary>
 		public Vector3 m_vecSpawnOrigin { get => Get<Vector3>(__m_vecSpawnOrigin); set => Set(__m_vecSpawnOrigin, value); }
+
+		/// <summary>The data entry this was created from, as <see cref="CNPC_TrooperNeutralVData"/>, or null if it has none.</summary>
+		public new CNPC_TrooperNeutralVData? VData => SubclassVData<CNPC_TrooperNeutralVData>();
 	}
 }

@@ -20,5 +20,8 @@ public static partial class Schema {
 		private static readonly SchemaField __m_vecHitEnemies = new("CCitadel_Ability_Nano_ClusterGrenade", "m_vecHitEnemies");
 		/// <summary><c>CUtlVector&lt;CHandle&lt;CBaseEntity&gt;&gt;</c>.</summary>
 		public SchemaHandleList<CBaseEntity> m_vecHitEnemies => new(this, __m_vecHitEnemies, -1);
+
+		/// <summary>The data entry this was created from, as <see cref="CCitadel_Ability_Nano_ClusterGrenadeVData"/>, or null if it has none.</summary>
+		public new CCitadel_Ability_Nano_ClusterGrenadeVData? VData => SubclassVData<CCitadel_Ability_Nano_ClusterGrenadeVData>();
 	}
 }

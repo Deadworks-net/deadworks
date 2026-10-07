@@ -12,5 +12,8 @@ public static partial class Schema {
 		internal CCitadel_Modifier_Shivas_Bracelet_Watcher() { }
 		static CCitadel_Modifier_Shivas_Bracelet_Watcher ISchemaClass<CCitadel_Modifier_Shivas_Bracelet_Watcher>.New() => new();
 		static string ISchemaClass<CCitadel_Modifier_Shivas_Bracelet_Watcher>.NativeName => "CCitadel_Modifier_Shivas_Bracelet_Watcher";
+
+		/// <summary>The data entry this was created from, as <see cref="CCitadel_Modifier_Shivas_Bracelet_WatcherVData"/>, or null if it has none.</summary>
+		public new CCitadel_Modifier_Shivas_Bracelet_WatcherVData? VData => ModifierData<CCitadel_Modifier_Shivas_Bracelet_WatcherVData>();
 	}
 }

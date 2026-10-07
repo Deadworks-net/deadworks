@@ -20,5 +20,8 @@ public static partial class Schema {
 		private static readonly SchemaField __m_nCastParticleIndex = new("CCitadel_Ability_Bookworm_KnightBarrier", "m_nCastParticleIndex");
 		/// <summary><c>ParticleIndex_t</c>.</summary>
 		public int m_nCastParticleIndex { get => Get<int>(__m_nCastParticleIndex); set => Set(__m_nCastParticleIndex, value); }
+
+		/// <summary>The data entry this was created from, as <see cref="CCitadel_Ability_Bookworm_KnightBarrierVData"/>, or null if it has none.</summary>
+		public new CCitadel_Ability_Bookworm_KnightBarrierVData? VData => SubclassVData<CCitadel_Ability_Bookworm_KnightBarrierVData>();
 	}
 }

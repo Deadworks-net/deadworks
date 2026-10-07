@@ -14,8 +14,8 @@ public static partial class Schema {
 		static string ISchemaClass<CCitadelAbilityChargedBombVData>.NativeName => "CCitadelAbilityChargedBombVData";
 
 		private static readonly SchemaField __m_ChargeBombModifier = new("CCitadelAbilityChargedBombVData", "m_ChargeBombModifier");
-		/// <summary><c>CEmbeddedSubclass&lt;CCitadelModifier&gt;</c>. No typed mapping yet: read it through its address.</summary>
-		public RawField m_ChargeBombModifier => Raw(__m_ChargeBombModifier, "CEmbeddedSubclass<CCitadelModifier>");
+		/// <summary><c>CEmbeddedSubclass&lt;CCitadelModifier&gt;</c>.</summary>
+		public CCitadelModifierVData? m_ChargeBombModifier => EmbeddedSubclass<CCitadelModifierVData>(__m_ChargeBombModifier);
 
 		private static readonly SchemaField __m_ExplodeParticle = new("CCitadelAbilityChargedBombVData", "m_ExplodeParticle");
 		/// <summary><c>CResourceNameTyped&lt;CWeakHandle&lt;InfoForResourceTypeIParticleSystemDefinition&gt;&gt;</c>.</summary>

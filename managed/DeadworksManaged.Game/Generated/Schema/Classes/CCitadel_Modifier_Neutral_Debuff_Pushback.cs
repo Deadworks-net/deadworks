@@ -12,5 +12,8 @@ public static partial class Schema {
 		internal CCitadel_Modifier_Neutral_Debuff_Pushback() { }
 		static CCitadel_Modifier_Neutral_Debuff_Pushback ISchemaClass<CCitadel_Modifier_Neutral_Debuff_Pushback>.New() => new();
 		static string ISchemaClass<CCitadel_Modifier_Neutral_Debuff_Pushback>.NativeName => "CCitadel_Modifier_Neutral_Debuff_Pushback";
+
+		/// <summary>The data entry this was created from, as <see cref="CCitadel_Modifier_Neutral_Debuff_PushbackVData"/>, or null if it has none.</summary>
+		public new CCitadel_Modifier_Neutral_Debuff_PushbackVData? VData => ModifierData<CCitadel_Modifier_Neutral_Debuff_PushbackVData>();
 	}
 }

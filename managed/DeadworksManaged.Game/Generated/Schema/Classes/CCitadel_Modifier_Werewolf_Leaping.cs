@@ -12,5 +12,8 @@ public static partial class Schema {
 		internal CCitadel_Modifier_Werewolf_Leaping() { }
 		static CCitadel_Modifier_Werewolf_Leaping ISchemaClass<CCitadel_Modifier_Werewolf_Leaping>.New() => new();
 		static string ISchemaClass<CCitadel_Modifier_Werewolf_Leaping>.NativeName => "CCitadel_Modifier_Werewolf_Leaping";
+
+		/// <summary>The data entry this was created from, as <see cref="CCitadel_Modifier_Werewolf_LeapingVData"/>, or null if it has none.</summary>
+		public new CCitadel_Modifier_Werewolf_LeapingVData? VData => ModifierData<CCitadel_Modifier_Werewolf_LeapingVData>();
 	}
 }

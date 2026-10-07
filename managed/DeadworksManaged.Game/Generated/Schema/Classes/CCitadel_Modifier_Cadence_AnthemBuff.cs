@@ -12,5 +12,8 @@ public static partial class Schema {
 		internal CCitadel_Modifier_Cadence_AnthemBuff() { }
 		static CCitadel_Modifier_Cadence_AnthemBuff ISchemaClass<CCitadel_Modifier_Cadence_AnthemBuff>.New() => new();
 		static string ISchemaClass<CCitadel_Modifier_Cadence_AnthemBuff>.NativeName => "CCitadel_Modifier_Cadence_AnthemBuff";
+
+		/// <summary>The data entry this was created from, as <see cref="CCitadel_Modifier_Cadence_AnthemBuffVData"/>, or null if it has none.</summary>
+		public new CCitadel_Modifier_Cadence_AnthemBuffVData? VData => ModifierData<CCitadel_Modifier_Cadence_AnthemBuffVData>();
 	}
 }

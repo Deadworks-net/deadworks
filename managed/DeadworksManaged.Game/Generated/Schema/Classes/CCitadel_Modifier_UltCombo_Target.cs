@@ -16,5 +16,8 @@ public static partial class Schema {
 		private static readonly SchemaField __m_angles = new("CCitadel_Modifier_UltCombo_Target", "m_angles");
 		/// <summary><c>QAngle</c>.</summary>
 		public Vector3 m_angles { get => Get<Vector3>(__m_angles); set => Set(__m_angles, value); }
+
+		/// <summary>The data entry this was created from, as <see cref="CCitadel_Modifier_UltCombo_TargetVData"/>, or null if it has none.</summary>
+		public new CCitadel_Modifier_UltCombo_TargetVData? VData => ModifierData<CCitadel_Modifier_UltCombo_TargetVData>();
 	}
 }

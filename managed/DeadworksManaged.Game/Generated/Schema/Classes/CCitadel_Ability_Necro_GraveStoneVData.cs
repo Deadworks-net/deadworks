@@ -22,12 +22,12 @@ public static partial class Schema {
 		public string m_CastWarningParticle => GetBufferString(__m_CastWarningParticle);
 
 		private static readonly SchemaField __m_GraveStoneModifier = new("CCitadel_Ability_Necro_GraveStoneVData", "m_GraveStoneModifier");
-		/// <summary><c>CEmbeddedSubclass&lt;CCitadelModifier&gt;</c>. No typed mapping yet: read it through its address.</summary>
-		public RawField m_GraveStoneModifier => Raw(__m_GraveStoneModifier, "CEmbeddedSubclass<CCitadelModifier>");
+		/// <summary><c>CEmbeddedSubclass&lt;CCitadelModifier&gt;</c>.</summary>
+		public CCitadelModifierVData? m_GraveStoneModifier => EmbeddedSubclass<CCitadelModifierVData>(__m_GraveStoneModifier);
 
 		private static readonly SchemaField __m_ZombieSummonModifier = new("CCitadel_Ability_Necro_GraveStoneVData", "m_ZombieSummonModifier");
-		/// <summary><c>CEmbeddedSubclass&lt;CCitadelModifier&gt;</c>. No typed mapping yet: read it through its address.</summary>
-		public RawField m_ZombieSummonModifier => Raw(__m_ZombieSummonModifier, "CEmbeddedSubclass<CCitadelModifier>");
+		/// <summary><c>CEmbeddedSubclass&lt;CCitadelModifier&gt;</c>.</summary>
+		public CCitadelModifierVData? m_ZombieSummonModifier => EmbeddedSubclass<CCitadelModifierVData>(__m_ZombieSummonModifier);
 
 		private static readonly SchemaField __m_bAllowStackingDamageFromGun = new("CCitadel_Ability_Necro_GraveStoneVData", "m_bAllowStackingDamageFromGun");
 		/// <summary><c>bool</c>.</summary>

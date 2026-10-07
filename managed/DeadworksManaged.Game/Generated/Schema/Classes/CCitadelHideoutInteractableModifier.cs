@@ -13,5 +13,8 @@ public static partial class Schema {
 		internal CCitadelHideoutInteractableModifier() { }
 		static CCitadelHideoutInteractableModifier ISchemaClass<CCitadelHideoutInteractableModifier>.New() => new();
 		static string ISchemaClass<CCitadelHideoutInteractableModifier>.NativeName => "CCitadelHideoutInteractableModifier";
+
+		/// <summary>The data entry this was created from, as <see cref="CCitadelHideoutInteractableModifierVData"/>, or null if it has none.</summary>
+		public new CCitadelHideoutInteractableModifierVData? VData => ModifierData<CCitadelHideoutInteractableModifierVData>();
 	}
 }

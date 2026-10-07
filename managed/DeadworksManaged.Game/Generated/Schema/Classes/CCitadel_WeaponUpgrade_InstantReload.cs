@@ -16,5 +16,8 @@ public static partial class Schema {
 		private static readonly SchemaField __m_bIsManualReloading = new("CCitadel_WeaponUpgrade_InstantReload", "m_bIsManualReloading");
 		/// <summary><c>bool</c>.</summary>
 		public bool m_bIsManualReloading { get => Get<bool>(__m_bIsManualReloading); set => Set(__m_bIsManualReloading, value); }
+
+		/// <summary>The data entry this was created from, as <see cref="CCitadel_WeaponUpgrade_InstantReloadVData"/>, or null if it has none.</summary>
+		public new CCitadel_WeaponUpgrade_InstantReloadVData? VData => SubclassVData<CCitadel_WeaponUpgrade_InstantReloadVData>();
 	}
 }

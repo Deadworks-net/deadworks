@@ -14,24 +14,24 @@ public static partial class Schema {
 		static string ISchemaClass<CCitadel_Ability_HealthSwapVData>.NativeName => "CCitadel_Ability_HealthSwapVData";
 
 		private static readonly SchemaField __m_BuffModifier = new("CCitadel_Ability_HealthSwapVData", "m_BuffModifier");
-		/// <summary><c>CEmbeddedSubclass&lt;CCitadelModifier&gt;</c>. No typed mapping yet: read it through its address.</summary>
-		public RawField m_BuffModifier => Raw(__m_BuffModifier, "CEmbeddedSubclass<CCitadelModifier>");
+		/// <summary><c>CEmbeddedSubclass&lt;CCitadelModifier&gt;</c>.</summary>
+		public CCitadelModifierVData? m_BuffModifier => EmbeddedSubclass<CCitadelModifierVData>(__m_BuffModifier);
 
 		private static readonly SchemaField __m_PreCastModifier = new("CCitadel_Ability_HealthSwapVData", "m_PreCastModifier");
-		/// <summary><c>CEmbeddedSubclass&lt;CCitadelModifier&gt;</c>. No typed mapping yet: read it through its address.</summary>
-		public RawField m_PreCastModifier => Raw(__m_PreCastModifier, "CEmbeddedSubclass<CCitadelModifier>");
+		/// <summary><c>CEmbeddedSubclass&lt;CCitadelModifier&gt;</c>.</summary>
+		public CCitadelModifierVData? m_PreCastModifier => EmbeddedSubclass<CCitadelModifierVData>(__m_PreCastModifier);
 
 		private static readonly SchemaField __m_SilenceExplodeParticle = new("CCitadel_Ability_HealthSwapVData", "m_SilenceExplodeParticle");
 		/// <summary><c>CResourceNameTyped&lt;CWeakHandle&lt;InfoForResourceTypeIParticleSystemDefinition&gt;&gt;</c>.</summary>
 		public string m_SilenceExplodeParticle => GetBufferString(__m_SilenceExplodeParticle);
 
 		private static readonly SchemaField __m_SilenceModifier = new("CCitadel_Ability_HealthSwapVData", "m_SilenceModifier");
-		/// <summary><c>CEmbeddedSubclass&lt;CCitadelModifier&gt;</c>. No typed mapping yet: read it through its address.</summary>
-		public RawField m_SilenceModifier => Raw(__m_SilenceModifier, "CEmbeddedSubclass<CCitadelModifier>");
+		/// <summary><c>CEmbeddedSubclass&lt;CCitadelModifier&gt;</c>.</summary>
+		public CCitadelModifierVData? m_SilenceModifier => EmbeddedSubclass<CCitadelModifierVData>(__m_SilenceModifier);
 
 		private static readonly SchemaField __m_SwapModifier = new("CCitadel_Ability_HealthSwapVData", "m_SwapModifier");
-		/// <summary><c>CEmbeddedSubclass&lt;CCitadelModifier&gt;</c>. No typed mapping yet: read it through its address.</summary>
-		public RawField m_SwapModifier => Raw(__m_SwapModifier, "CEmbeddedSubclass<CCitadelModifier>");
+		/// <summary><c>CEmbeddedSubclass&lt;CCitadelModifier&gt;</c>.</summary>
+		public CCitadelModifierVData? m_SwapModifier => EmbeddedSubclass<CCitadelModifierVData>(__m_SwapModifier);
 
 		private static readonly SchemaField __m_SwapParticle = new("CCitadel_Ability_HealthSwapVData", "m_SwapParticle");
 		/// <summary><c>CResourceNameTyped&lt;CWeakHandle&lt;InfoForResourceTypeIParticleSystemDefinition&gt;&gt;</c>.</summary>

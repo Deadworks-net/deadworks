@@ -18,7 +18,7 @@ public static partial class Schema {
 		public string m_CastParticle => GetBufferString(__m_CastParticle);
 
 		private static readonly SchemaField __m_GuardianWardModifier = new("CCitadel_Item_GuardianWard_VData", "m_GuardianWardModifier");
-		/// <summary><c>CEmbeddedSubclass&lt;CCitadelModifier&gt;</c>. No typed mapping yet: read it through its address.</summary>
-		public RawField m_GuardianWardModifier => Raw(__m_GuardianWardModifier, "CEmbeddedSubclass<CCitadelModifier>");
+		/// <summary><c>CEmbeddedSubclass&lt;CCitadelModifier&gt;</c>.</summary>
+		public CCitadelModifierVData? m_GuardianWardModifier => EmbeddedSubclass<CCitadelModifierVData>(__m_GuardianWardModifier);
 	}
 }

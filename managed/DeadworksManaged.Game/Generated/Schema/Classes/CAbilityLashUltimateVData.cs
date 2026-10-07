@@ -22,8 +22,8 @@ public static partial class Schema {
 		public string m_GrabSound => GetBufferString(__m_GrabSound);
 
 		private static readonly SchemaField __m_GrappleEnemyModifier = new("CAbilityLashUltimateVData", "m_GrappleEnemyModifier");
-		/// <summary><c>CEmbeddedSubclass&lt;CCitadel_Modifier_LashGrappleEnemy_Debuff&gt;</c>. No typed mapping yet: read it through its address.</summary>
-		public RawField m_GrappleEnemyModifier => Raw(__m_GrappleEnemyModifier, "CEmbeddedSubclass<CCitadel_Modifier_LashGrappleEnemy_Debuff>");
+		/// <summary><c>CEmbeddedSubclass&lt;CCitadel_Modifier_LashGrappleEnemy_Debuff&gt;</c>.</summary>
+		public CCitadel_Modifier_StunnedVData? m_GrappleEnemyModifier => EmbeddedSubclass<CCitadel_Modifier_StunnedVData>(__m_GrappleEnemyModifier);
 
 		private static readonly SchemaField __m_LaunchParticle = new("CAbilityLashUltimateVData", "m_LaunchParticle");
 		/// <summary><c>CResourceNameTyped&lt;CWeakHandle&lt;InfoForResourceTypeIParticleSystemDefinition&gt;&gt;</c>.</summary>

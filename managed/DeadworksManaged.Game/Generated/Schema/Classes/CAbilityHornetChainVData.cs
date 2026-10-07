@@ -14,12 +14,12 @@ public static partial class Schema {
 		static string ISchemaClass<CAbilityHornetChainVData>.NativeName => "CAbilityHornetChainVData";
 
 		private static readonly SchemaField __m_ChainModifier = new("CAbilityHornetChainVData", "m_ChainModifier");
-		/// <summary><c>CEmbeddedSubclass&lt;CCitadelModifier&gt;</c>. No typed mapping yet: read it through its address.</summary>
-		public RawField m_ChainModifier => Raw(__m_ChainModifier, "CEmbeddedSubclass<CCitadelModifier>");
+		/// <summary><c>CEmbeddedSubclass&lt;CCitadelModifier&gt;</c>.</summary>
+		public CCitadelModifierVData? m_ChainModifier => EmbeddedSubclass<CCitadelModifierVData>(__m_ChainModifier);
 
 		private static readonly SchemaField __m_DisarmModifier = new("CAbilityHornetChainVData", "m_DisarmModifier");
-		/// <summary><c>CEmbeddedSubclass&lt;CCitadelModifier&gt;</c>. No typed mapping yet: read it through its address.</summary>
-		public RawField m_DisarmModifier => Raw(__m_DisarmModifier, "CEmbeddedSubclass<CCitadelModifier>");
+		/// <summary><c>CEmbeddedSubclass&lt;CCitadelModifier&gt;</c>.</summary>
+		public CCitadelModifierVData? m_DisarmModifier => EmbeddedSubclass<CCitadelModifierVData>(__m_DisarmModifier);
 
 		private static readonly SchemaField __m_ExplodeParticle = new("CAbilityHornetChainVData", "m_ExplodeParticle");
 		/// <summary><c>CResourceNameTyped&lt;CWeakHandle&lt;InfoForResourceTypeIParticleSystemDefinition&gt;&gt;</c>.</summary>

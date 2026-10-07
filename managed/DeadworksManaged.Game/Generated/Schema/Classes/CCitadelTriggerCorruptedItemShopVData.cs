@@ -14,8 +14,8 @@ public static partial class Schema {
 		static string ISchemaClass<CCitadelTriggerCorruptedItemShopVData>.NativeName => "CCitadelTriggerCorruptedItemShopVData";
 
 		private static readonly SchemaField __m_InShopModifier = new("CCitadelTriggerCorruptedItemShopVData", "m_InShopModifier");
-		/// <summary><c>CEmbeddedSubclass&lt;CBaseModifier&gt;</c>. No typed mapping yet: read it through its address.</summary>
-		public RawField m_InShopModifier => Raw(__m_InShopModifier, "CEmbeddedSubclass<CBaseModifier>");
+		/// <summary><c>CEmbeddedSubclass&lt;CBaseModifier&gt;</c>.</summary>
+		public CModifierVData? m_InShopModifier => EmbeddedSubclass<CModifierVData>(__m_InShopModifier);
 
 		private static readonly SchemaField __m_nSpawnMusicState = new("CCitadelTriggerCorruptedItemShopVData", "m_nSpawnMusicState");
 		/// <summary><c>CitadelMusicMsgType</c>.</summary>

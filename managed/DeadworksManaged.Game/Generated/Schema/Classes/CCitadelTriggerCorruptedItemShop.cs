@@ -20,5 +20,8 @@ public static partial class Schema {
 		private static readonly SchemaField __m_OnItemLimitChanged = new("CCitadelTriggerCorruptedItemShop", "m_OnItemLimitChanged");
 		/// <summary><c>CEntityIOOutput</c>.</summary>
 		public CEntityIOOutput m_OnItemLimitChanged => Embedded<CEntityIOOutput>(__m_OnItemLimitChanged);
+
+		/// <summary>The data entry this was created from, as <see cref="CCitadelTriggerCorruptedItemShopVData"/>, or null if it has none.</summary>
+		public CCitadelTriggerCorruptedItemShopVData? VData => SubclassVData<CCitadelTriggerCorruptedItemShopVData>();
 	}
 }

@@ -14,20 +14,20 @@ public static partial class Schema {
 		static string ISchemaClass<CModifierT2BossWaveTargetVData>.NativeName => "CModifierT2BossWaveTargetVData";
 
 		private static readonly SchemaField __m_BulletResistModifier = new("CModifierT2BossWaveTargetVData", "m_BulletResistModifier");
-		/// <summary><c>CEmbeddedSubclass&lt;CCitadelModifier&gt;</c>. No typed mapping yet: read it through its address.</summary>
-		public RawField m_BulletResistModifier => Raw(__m_BulletResistModifier, "CEmbeddedSubclass<CCitadelModifier>");
+		/// <summary><c>CEmbeddedSubclass&lt;CCitadelModifier&gt;</c>.</summary>
+		public CCitadelModifierVData? m_BulletResistModifier => EmbeddedSubclass<CCitadelModifierVData>(__m_BulletResistModifier);
 
 		private static readonly SchemaField __m_DisarmModifier = new("CModifierT2BossWaveTargetVData", "m_DisarmModifier");
-		/// <summary><c>CEmbeddedSubclass&lt;CCitadelModifier&gt;</c>. No typed mapping yet: read it through its address.</summary>
-		public RawField m_DisarmModifier => Raw(__m_DisarmModifier, "CEmbeddedSubclass<CCitadelModifier>");
+		/// <summary><c>CEmbeddedSubclass&lt;CCitadelModifier&gt;</c>.</summary>
+		public CCitadelModifierVData? m_DisarmModifier => EmbeddedSubclass<CCitadelModifierVData>(__m_DisarmModifier);
 
 		private static readonly SchemaField __m_SilenceModifier = new("CModifierT2BossWaveTargetVData", "m_SilenceModifier");
-		/// <summary><c>CEmbeddedSubclass&lt;CCitadelModifier&gt;</c>. No typed mapping yet: read it through its address.</summary>
-		public RawField m_SilenceModifier => Raw(__m_SilenceModifier, "CEmbeddedSubclass<CCitadelModifier>");
+		/// <summary><c>CEmbeddedSubclass&lt;CCitadelModifier&gt;</c>.</summary>
+		public CCitadelModifierVData? m_SilenceModifier => EmbeddedSubclass<CCitadelModifierVData>(__m_SilenceModifier);
 
 		private static readonly SchemaField __m_SlowModifier = new("CModifierT2BossWaveTargetVData", "m_SlowModifier");
-		/// <summary><c>CEmbeddedSubclass&lt;CCitadelModifier&gt;</c>. No typed mapping yet: read it through its address.</summary>
-		public RawField m_SlowModifier => Raw(__m_SlowModifier, "CEmbeddedSubclass<CCitadelModifier>");
+		/// <summary><c>CEmbeddedSubclass&lt;CCitadelModifier&gt;</c>.</summary>
+		public CCitadelModifierVData? m_SlowModifier => EmbeddedSubclass<CCitadelModifierVData>(__m_SlowModifier);
 
 		private static readonly SchemaField __m_flDebuffDuration = new("CModifierT2BossWaveTargetVData", "m_flDebuffDuration");
 		/// <summary><c>float32</c>.</summary>

@@ -16,5 +16,8 @@ public static partial class Schema {
 		private static readonly SchemaField __m_vecTargetsInCone = new("CCitadel_Ability_Familiar_Ability01", "m_vecTargetsInCone");
 		/// <summary><c>CNetworkUtlVectorBase&lt;CHandle&lt;CBaseEntity&gt;&gt;</c>.</summary>
 		public SchemaHandleList<CBaseEntity> m_vecTargetsInCone => new(this, __m_vecTargetsInCone, -1);
+
+		/// <summary>The data entry this was created from, as <see cref="CCitadel_Ability_Familiar_Ability01VData"/>, or null if it has none.</summary>
+		public new CCitadel_Ability_Familiar_Ability01VData? VData => SubclassVData<CCitadel_Ability_Familiar_Ability01VData>();
 	}
 }

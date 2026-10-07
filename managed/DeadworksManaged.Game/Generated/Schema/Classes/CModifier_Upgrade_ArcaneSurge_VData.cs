@@ -14,12 +14,12 @@ public static partial class Schema {
 		static string ISchemaClass<CModifier_Upgrade_ArcaneSurge_VData>.NativeName => "CModifier_Upgrade_ArcaneSurge_VData";
 
 		private static readonly SchemaField __m_AbilityWatcherModifier = new("CModifier_Upgrade_ArcaneSurge_VData", "m_AbilityWatcherModifier");
-		/// <summary><c>CEmbeddedSubclass&lt;CCitadelModifier&gt;</c>. No typed mapping yet: read it through its address.</summary>
-		public RawField m_AbilityWatcherModifier => Raw(__m_AbilityWatcherModifier, "CEmbeddedSubclass<CCitadelModifier>");
+		/// <summary><c>CEmbeddedSubclass&lt;CCitadelModifier&gt;</c>.</summary>
+		public CCitadelModifierVData? m_AbilityWatcherModifier => EmbeddedSubclass<CCitadelModifierVData>(__m_AbilityWatcherModifier);
 
 		private static readonly SchemaField __m_SurgeWindowModifier = new("CModifier_Upgrade_ArcaneSurge_VData", "m_SurgeWindowModifier");
-		/// <summary><c>CEmbeddedSubclass&lt;CCitadelModifier&gt;</c>. No typed mapping yet: read it through its address.</summary>
-		public RawField m_SurgeWindowModifier => Raw(__m_SurgeWindowModifier, "CEmbeddedSubclass<CCitadelModifier>");
+		/// <summary><c>CEmbeddedSubclass&lt;CCitadelModifier&gt;</c>.</summary>
+		public CCitadelModifierVData? m_SurgeWindowModifier => EmbeddedSubclass<CCitadelModifierVData>(__m_SurgeWindowModifier);
 
 		private static readonly SchemaField __m_flMaxSurgeTime = new("CModifier_Upgrade_ArcaneSurge_VData", "m_flMaxSurgeTime");
 		/// <summary><c>float32</c>.</summary>

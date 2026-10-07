@@ -12,5 +12,8 @@ public static partial class Schema {
 		internal CCitadel_Modifier_Bookworm_KnightBarrier() { }
 		static CCitadel_Modifier_Bookworm_KnightBarrier ISchemaClass<CCitadel_Modifier_Bookworm_KnightBarrier>.New() => new();
 		static string ISchemaClass<CCitadel_Modifier_Bookworm_KnightBarrier>.NativeName => "CCitadel_Modifier_Bookworm_KnightBarrier";
+
+		/// <summary>The data entry this was created from, as <see cref="CCitadel_Modifier_Bookworm_KnightBarrierVData"/>, or null if it has none.</summary>
+		public new CCitadel_Modifier_Bookworm_KnightBarrierVData? VData => ModifierData<CCitadel_Modifier_Bookworm_KnightBarrierVData>();
 	}
 }

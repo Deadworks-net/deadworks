@@ -14,28 +14,28 @@ public static partial class Schema {
 		static string ISchemaClass<CAbilityPunkgoatBlastedVData>.NativeName => "CAbilityPunkgoatBlastedVData";
 
 		private static readonly SchemaField __m_BlastedModifier = new("CAbilityPunkgoatBlastedVData", "m_BlastedModifier");
-		/// <summary><c>CEmbeddedSubclass&lt;CCitadelModifier&gt;</c>. No typed mapping yet: read it through its address.</summary>
-		public RawField m_BlastedModifier => Raw(__m_BlastedModifier, "CEmbeddedSubclass<CCitadelModifier>");
+		/// <summary><c>CEmbeddedSubclass&lt;CCitadelModifier&gt;</c>.</summary>
+		public CCitadelModifierVData? m_BlastedModifier => EmbeddedSubclass<CCitadelModifierVData>(__m_BlastedModifier);
 
 		private static readonly SchemaField __m_BlastedPassiveModifier = new("CAbilityPunkgoatBlastedVData", "m_BlastedPassiveModifier");
-		/// <summary><c>CEmbeddedSubclass&lt;CCitadelModifier&gt;</c>. No typed mapping yet: read it through its address.</summary>
-		public RawField m_BlastedPassiveModifier => Raw(__m_BlastedPassiveModifier, "CEmbeddedSubclass<CCitadelModifier>");
+		/// <summary><c>CEmbeddedSubclass&lt;CCitadelModifier&gt;</c>.</summary>
+		public CCitadelModifierVData? m_BlastedPassiveModifier => EmbeddedSubclass<CCitadelModifierVData>(__m_BlastedPassiveModifier);
 
 		private static readonly SchemaField __m_HealthDisplayModifier = new("CAbilityPunkgoatBlastedVData", "m_HealthDisplayModifier");
-		/// <summary><c>CEmbeddedSubclass&lt;CCitadelModifier&gt;</c>. No typed mapping yet: read it through its address.</summary>
-		public RawField m_HealthDisplayModifier => Raw(__m_HealthDisplayModifier, "CEmbeddedSubclass<CCitadelModifier>");
+		/// <summary><c>CEmbeddedSubclass&lt;CCitadelModifier&gt;</c>.</summary>
+		public CCitadelModifierVData? m_HealthDisplayModifier => EmbeddedSubclass<CCitadelModifierVData>(__m_HealthDisplayModifier);
 
 		private static readonly SchemaField __m_HealthModifier = new("CAbilityPunkgoatBlastedVData", "m_HealthModifier");
-		/// <summary><c>CEmbeddedSubclass&lt;CCitadelModifier&gt;</c>. No typed mapping yet: read it through its address.</summary>
-		public RawField m_HealthModifier => Raw(__m_HealthModifier, "CEmbeddedSubclass<CCitadelModifier>");
+		/// <summary><c>CEmbeddedSubclass&lt;CCitadelModifier&gt;</c>.</summary>
+		public CCitadelModifierVData? m_HealthModifier => EmbeddedSubclass<CCitadelModifierVData>(__m_HealthModifier);
 
 		private static readonly SchemaField __m_MeleeReloadFX = new("CAbilityPunkgoatBlastedVData", "m_MeleeReloadFX");
 		/// <summary><c>CResourceNameTyped&lt;CWeakHandle&lt;InfoForResourceTypeIParticleSystemDefinition&gt;&gt;</c>.</summary>
 		public string m_MeleeReloadFX => GetBufferString(__m_MeleeReloadFX);
 
 		private static readonly SchemaField __m_ShredModifier = new("CAbilityPunkgoatBlastedVData", "m_ShredModifier");
-		/// <summary><c>CEmbeddedSubclass&lt;CCitadelModifier&gt;</c>. No typed mapping yet: read it through its address.</summary>
-		public RawField m_ShredModifier => Raw(__m_ShredModifier, "CEmbeddedSubclass<CCitadelModifier>");
+		/// <summary><c>CEmbeddedSubclass&lt;CCitadelModifier&gt;</c>.</summary>
+		public CCitadelModifierVData? m_ShredModifier => EmbeddedSubclass<CCitadelModifierVData>(__m_ShredModifier);
 
 		private static readonly SchemaField __m_strMeleeReloadSoundHeavy = new("CAbilityPunkgoatBlastedVData", "m_strMeleeReloadSoundHeavy");
 		/// <summary><c>CSoundEventName</c>.</summary>

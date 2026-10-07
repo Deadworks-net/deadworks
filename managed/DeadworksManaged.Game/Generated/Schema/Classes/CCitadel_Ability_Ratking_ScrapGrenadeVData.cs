@@ -14,8 +14,8 @@ public static partial class Schema {
 		static string ISchemaClass<CCitadel_Ability_Ratking_ScrapGrenadeVData>.NativeName => "CCitadel_Ability_Ratking_ScrapGrenadeVData";
 
 		private static readonly SchemaField __m_BigExplosionSlowModifier = new("CCitadel_Ability_Ratking_ScrapGrenadeVData", "m_BigExplosionSlowModifier");
-		/// <summary><c>CEmbeddedSubclass&lt;CCitadelModifier&gt;</c>. No typed mapping yet: read it through its address.</summary>
-		public RawField m_BigExplosionSlowModifier => Raw(__m_BigExplosionSlowModifier, "CEmbeddedSubclass<CCitadelModifier>");
+		/// <summary><c>CEmbeddedSubclass&lt;CCitadelModifier&gt;</c>.</summary>
+		public CCitadelModifierVData? m_BigExplosionSlowModifier => EmbeddedSubclass<CCitadelModifierVData>(__m_BigExplosionSlowModifier);
 
 		private static readonly SchemaField __m_BounceParticle = new("CCitadel_Ability_Ratking_ScrapGrenadeVData", "m_BounceParticle");
 		/// <summary><c>CResourceNameTyped&lt;CWeakHandle&lt;InfoForResourceTypeIParticleSystemDefinition&gt;&gt;</c>.</summary>
@@ -38,8 +38,8 @@ public static partial class Schema {
 		public string m_ShrapnelTracer => GetBufferString(__m_ShrapnelTracer);
 
 		private static readonly SchemaField __m_SlowModifier = new("CCitadel_Ability_Ratking_ScrapGrenadeVData", "m_SlowModifier");
-		/// <summary><c>CEmbeddedSubclass&lt;CCitadelModifier&gt;</c>. No typed mapping yet: read it through its address.</summary>
-		public RawField m_SlowModifier => Raw(__m_SlowModifier, "CEmbeddedSubclass<CCitadelModifier>");
+		/// <summary><c>CEmbeddedSubclass&lt;CCitadelModifier&gt;</c>.</summary>
+		public CCitadelModifierVData? m_SlowModifier => EmbeddedSubclass<CCitadelModifierVData>(__m_SlowModifier);
 
 		private static readonly SchemaField __m_flBounceDirectionalDampening = new("CCitadel_Ability_Ratking_ScrapGrenadeVData", "m_flBounceDirectionalDampening");
 		/// <summary><c>float32</c>.</summary>

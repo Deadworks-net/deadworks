@@ -28,5 +28,8 @@ public static partial class Schema {
 		private static readonly SchemaField __m_vHitTargets = new("CCitadel_Ability_Tier3Boss_DropBombs", "m_vHitTargets");
 		/// <summary><c>CUtlVector&lt;CHandle&lt;CBaseEntity&gt;&gt;</c>.</summary>
 		public SchemaHandleList<CBaseEntity> m_vHitTargets => new(this, __m_vHitTargets, -1);
+
+		/// <summary>The data entry this was created from, as <see cref="CCitadel_Ability_Tier3Boss_DropBombsVData"/>, or null if it has none.</summary>
+		public new CCitadel_Ability_Tier3Boss_DropBombsVData? VData => SubclassVData<CCitadel_Ability_Tier3Boss_DropBombsVData>();
 	}
 }

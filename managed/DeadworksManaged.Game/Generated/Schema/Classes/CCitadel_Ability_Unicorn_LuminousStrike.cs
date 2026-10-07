@@ -36,5 +36,8 @@ public static partial class Schema {
 		private static readonly SchemaField __m_vecNextExplosionTime = new("CCitadel_Ability_Unicorn_LuminousStrike", "m_vecNextExplosionTime");
 		/// <summary><c>CNetworkUtlVectorBase&lt;GameTime_t&gt;</c>.</summary>
 		public SchemaValueList<float> m_vecNextExplosionTime => new(this, __m_vecNextExplosionTime, -1);
+
+		/// <summary>The data entry this was created from, as <see cref="CCitadel_Ability_Unicorn_LuminousStrikeVData"/>, or null if it has none.</summary>
+		public new CCitadel_Ability_Unicorn_LuminousStrikeVData? VData => SubclassVData<CCitadel_Ability_Unicorn_LuminousStrikeVData>();
 	}
 }

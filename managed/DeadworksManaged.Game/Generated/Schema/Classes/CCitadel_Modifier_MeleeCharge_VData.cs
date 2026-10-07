@@ -14,16 +14,16 @@ public static partial class Schema {
 		static string ISchemaClass<CCitadel_Modifier_MeleeCharge_VData>.NativeName => "CCitadel_Modifier_MeleeCharge_VData";
 
 		private static readonly SchemaField __m_AmmoAddedVisualModifier = new("CCitadel_Modifier_MeleeCharge_VData", "m_AmmoAddedVisualModifier");
-		/// <summary><c>CEmbeddedSubclass&lt;CCitadelModifier&gt;</c>. No typed mapping yet: read it through its address.</summary>
-		public RawField m_AmmoAddedVisualModifier => Raw(__m_AmmoAddedVisualModifier, "CEmbeddedSubclass<CCitadelModifier>");
+		/// <summary><c>CEmbeddedSubclass&lt;CCitadelModifier&gt;</c>.</summary>
+		public CCitadelModifierVData? m_AmmoAddedVisualModifier => EmbeddedSubclass<CCitadelModifierVData>(__m_AmmoAddedVisualModifier);
 
 		private static readonly SchemaField __m_HitParticle = new("CCitadel_Modifier_MeleeCharge_VData", "m_HitParticle");
 		/// <summary><c>CResourceNameTyped&lt;CWeakHandle&lt;InfoForResourceTypeIParticleSystemDefinition&gt;&gt;</c>.</summary>
 		public string m_HitParticle => GetBufferString(__m_HitParticle);
 
 		private static readonly SchemaField __m_ReloadVisualModifier = new("CCitadel_Modifier_MeleeCharge_VData", "m_ReloadVisualModifier");
-		/// <summary><c>CEmbeddedSubclass&lt;CCitadelModifier&gt;</c>. No typed mapping yet: read it through its address.</summary>
-		public RawField m_ReloadVisualModifier => Raw(__m_ReloadVisualModifier, "CEmbeddedSubclass<CCitadelModifier>");
+		/// <summary><c>CEmbeddedSubclass&lt;CCitadelModifier&gt;</c>.</summary>
+		public CCitadelModifierVData? m_ReloadVisualModifier => EmbeddedSubclass<CCitadelModifierVData>(__m_ReloadVisualModifier);
 
 		private static readonly SchemaField __m_SwingParticle = new("CCitadel_Modifier_MeleeCharge_VData", "m_SwingParticle");
 		/// <summary><c>CResourceNameTyped&lt;CWeakHandle&lt;InfoForResourceTypeIParticleSystemDefinition&gt;&gt;</c>.</summary>

@@ -12,5 +12,8 @@ public static partial class Schema {
 		internal CCitadel_Modifier_NeutralRatSwarm() { }
 		static CCitadel_Modifier_NeutralRatSwarm ISchemaClass<CCitadel_Modifier_NeutralRatSwarm>.New() => new();
 		static string ISchemaClass<CCitadel_Modifier_NeutralRatSwarm>.NativeName => "CCitadel_Modifier_NeutralRatSwarm";
+
+		/// <summary>The data entry this was created from, as <see cref="CCitadel_Modifier_NeutralRatSwarmVData"/>, or null if it has none.</summary>
+		public new CCitadel_Modifier_NeutralRatSwarmVData? VData => ModifierData<CCitadel_Modifier_NeutralRatSwarmVData>();
 	}
 }

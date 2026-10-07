@@ -14,7 +14,7 @@ public static partial class Schema {
 		static string ISchemaClass<CCitadel_Modifier_Cadence_Crescendo_InAOE_VData>.NativeName => "CCitadel_Modifier_Cadence_Crescendo_InAOE_VData";
 
 		private static readonly SchemaField __m_PostAOEModifier = new("CCitadel_Modifier_Cadence_Crescendo_InAOE_VData", "m_PostAOEModifier");
-		/// <summary><c>CEmbeddedSubclass&lt;CCitadelModifier&gt;</c>. No typed mapping yet: read it through its address.</summary>
-		public RawField m_PostAOEModifier => Raw(__m_PostAOEModifier, "CEmbeddedSubclass<CCitadelModifier>");
+		/// <summary><c>CEmbeddedSubclass&lt;CCitadelModifier&gt;</c>.</summary>
+		public CCitadelModifierVData? m_PostAOEModifier => EmbeddedSubclass<CCitadelModifierVData>(__m_PostAOEModifier);
 	}
 }

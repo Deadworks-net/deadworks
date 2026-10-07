@@ -29,6 +29,9 @@ public static partial class Schema {
 		/// <summary><c>GameTime_t</c>.</summary>
 		public float m_tNextPingTime { get => Get<float>(__m_tNextPingTime); set => Set(__m_tNextPingTime, value); }
 
+		/// <summary>The data entry this was created from, as <see cref="CCitadel_PickupItemSpawnerVData"/>, or null if it has none.</summary>
+		public CCitadel_PickupItemSpawnerVData? VData => SubclassVData<CCitadel_PickupItemSpawnerVData>();
+
 		/// <summary>Fires the <c>DropPowerup</c> input. Drop one of the spawner's configured powerups.</summary>
 		public void InputDropPowerup() => FireInput("DropPowerup");
 	}

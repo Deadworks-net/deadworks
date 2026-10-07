@@ -12,5 +12,8 @@ public static partial class Schema {
 		internal CCitadel_Modifier_MetalSkin() { }
 		static CCitadel_Modifier_MetalSkin ISchemaClass<CCitadel_Modifier_MetalSkin>.New() => new();
 		static string ISchemaClass<CCitadel_Modifier_MetalSkin>.NativeName => "CCitadel_Modifier_MetalSkin";
+
+		/// <summary>The data entry this was created from, as <see cref="CCitadel_Modifier_MetalSkinVData"/>, or null if it has none.</summary>
+		public new CCitadel_Modifier_MetalSkinVData? VData => ModifierData<CCitadel_Modifier_MetalSkinVData>();
 	}
 }

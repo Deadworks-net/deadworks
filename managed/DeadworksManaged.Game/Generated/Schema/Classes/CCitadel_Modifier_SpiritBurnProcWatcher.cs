@@ -12,5 +12,8 @@ public static partial class Schema {
 		internal CCitadel_Modifier_SpiritBurnProcWatcher() { }
 		static CCitadel_Modifier_SpiritBurnProcWatcher ISchemaClass<CCitadel_Modifier_SpiritBurnProcWatcher>.New() => new();
 		static string ISchemaClass<CCitadel_Modifier_SpiritBurnProcWatcher>.NativeName => "CCitadel_Modifier_SpiritBurnProcWatcher";
+
+		/// <summary>The data entry this was created from, as <see cref="CCitadel_Modifier_SpiritBurnProcWatcherVData"/>, or null if it has none.</summary>
+		public new CCitadel_Modifier_SpiritBurnProcWatcherVData? VData => ModifierData<CCitadel_Modifier_SpiritBurnProcWatcherVData>();
 	}
 }

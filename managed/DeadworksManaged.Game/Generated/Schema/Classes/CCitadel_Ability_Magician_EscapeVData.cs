@@ -14,8 +14,8 @@ public static partial class Schema {
 		static string ISchemaClass<CCitadel_Ability_Magician_EscapeVData>.NativeName => "CCitadel_Ability_Magician_EscapeVData";
 
 		private static readonly SchemaField __m_EscapedModifier = new("CCitadel_Ability_Magician_EscapeVData", "m_EscapedModifier");
-		/// <summary><c>CEmbeddedSubclass&lt;CCitadelModifier&gt;</c>. No typed mapping yet: read it through its address.</summary>
-		public RawField m_EscapedModifier => Raw(__m_EscapedModifier, "CEmbeddedSubclass<CCitadelModifier>");
+		/// <summary><c>CEmbeddedSubclass&lt;CCitadelModifier&gt;</c>.</summary>
+		public CCitadelModifierVData? m_EscapedModifier => EmbeddedSubclass<CCitadelModifierVData>(__m_EscapedModifier);
 
 		private static readonly SchemaField __m_PoofParticle = new("CCitadel_Ability_Magician_EscapeVData", "m_PoofParticle");
 		/// <summary><c>CResourceNameTyped&lt;CWeakHandle&lt;InfoForResourceTypeIParticleSystemDefinition&gt;&gt;</c>.</summary>

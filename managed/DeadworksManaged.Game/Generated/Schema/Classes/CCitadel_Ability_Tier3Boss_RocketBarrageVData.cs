@@ -14,8 +14,8 @@ public static partial class Schema {
 		static string ISchemaClass<CCitadel_Ability_Tier3Boss_RocketBarrageVData>.NativeName => "CCitadel_Ability_Tier3Boss_RocketBarrageVData";
 
 		private static readonly SchemaField __m_AuraModifier = new("CCitadel_Ability_Tier3Boss_RocketBarrageVData", "m_AuraModifier");
-		/// <summary><c>CEmbeddedSubclass&lt;CCitadelModifier&gt;</c>. No typed mapping yet: read it through its address.</summary>
-		public RawField m_AuraModifier => Raw(__m_AuraModifier, "CEmbeddedSubclass<CCitadelModifier>");
+		/// <summary><c>CEmbeddedSubclass&lt;CCitadelModifier&gt;</c>.</summary>
+		public CCitadelModifierVData? m_AuraModifier => EmbeddedSubclass<CCitadelModifierVData>(__m_AuraModifier);
 
 		private static readonly SchemaField __m_ExplosionParticle = new("CCitadel_Ability_Tier3Boss_RocketBarrageVData", "m_ExplosionParticle");
 		/// <summary><c>CResourceNameTyped&lt;CWeakHandle&lt;InfoForResourceTypeIParticleSystemDefinition&gt;&gt;</c>.</summary>

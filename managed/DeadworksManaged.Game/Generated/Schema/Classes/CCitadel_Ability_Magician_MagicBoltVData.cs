@@ -22,8 +22,8 @@ public static partial class Schema {
 		public string m_RetargetParticle => GetBufferString(__m_RetargetParticle);
 
 		private static readonly SchemaField __m_TargetDebuffModifier = new("CCitadel_Ability_Magician_MagicBoltVData", "m_TargetDebuffModifier");
-		/// <summary><c>CEmbeddedSubclass&lt;CCitadelModifier&gt;</c>. No typed mapping yet: read it through its address.</summary>
-		public RawField m_TargetDebuffModifier => Raw(__m_TargetDebuffModifier, "CEmbeddedSubclass<CCitadelModifier>");
+		/// <summary><c>CEmbeddedSubclass&lt;CCitadelModifier&gt;</c>.</summary>
+		public CCitadelModifierVData? m_TargetDebuffModifier => EmbeddedSubclass<CCitadelModifierVData>(__m_TargetDebuffModifier);
 
 		private static readonly SchemaField __m_strRedirect = new("CCitadel_Ability_Magician_MagicBoltVData", "m_strRedirect");
 		/// <summary><c>CSoundEventName</c>.</summary>

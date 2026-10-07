@@ -38,24 +38,24 @@ public static partial class Schema {
 		public string m_BeamStopSound => GetBufferString(__m_BeamStopSound);
 
 		private static readonly SchemaField __m_BuildupModifier = new("CCitadel_Ability_IceBeamVData", "m_BuildupModifier");
-		/// <summary><c>CEmbeddedSubclass&lt;CCitadel_Modifier_Base_Buildup&gt;</c>. No typed mapping yet: read it through its address.</summary>
-		public RawField m_BuildupModifier => Raw(__m_BuildupModifier, "CEmbeddedSubclass<CCitadel_Modifier_Base_Buildup>");
+		/// <summary><c>CEmbeddedSubclass&lt;CCitadel_Modifier_Base_Buildup&gt;</c>.</summary>
+		public CCitadel_Modifier_Base_BuildupVData? m_BuildupModifier => EmbeddedSubclass<CCitadel_Modifier_Base_BuildupVData>(__m_BuildupModifier);
 
 		private static readonly SchemaField __m_BuildupProcModifier = new("CCitadel_Ability_IceBeamVData", "m_BuildupProcModifier");
-		/// <summary><c>CEmbeddedSubclass&lt;CCitadelModifier&gt;</c>. No typed mapping yet: read it through its address.</summary>
-		public RawField m_BuildupProcModifier => Raw(__m_BuildupProcModifier, "CEmbeddedSubclass<CCitadelModifier>");
+		/// <summary><c>CEmbeddedSubclass&lt;CCitadelModifier&gt;</c>.</summary>
+		public CCitadelModifierVData? m_BuildupProcModifier => EmbeddedSubclass<CCitadelModifierVData>(__m_BuildupProcModifier);
 
 		private static readonly SchemaField __m_HitParticle = new("CCitadel_Ability_IceBeamVData", "m_HitParticle");
 		/// <summary><c>CResourceNameTyped&lt;CWeakHandle&lt;InfoForResourceTypeIParticleSystemDefinition&gt;&gt;</c>.</summary>
 		public string m_HitParticle => GetBufferString(__m_HitParticle);
 
 		private static readonly SchemaField __m_IceBeamModifier = new("CCitadel_Ability_IceBeamVData", "m_IceBeamModifier");
-		/// <summary><c>CEmbeddedSubclass&lt;CCitadelModifier&gt;</c>. No typed mapping yet: read it through its address.</summary>
-		public RawField m_IceBeamModifier => Raw(__m_IceBeamModifier, "CEmbeddedSubclass<CCitadelModifier>");
+		/// <summary><c>CEmbeddedSubclass&lt;CCitadelModifier&gt;</c>.</summary>
+		public CCitadelModifierVData? m_IceBeamModifier => EmbeddedSubclass<CCitadelModifierVData>(__m_IceBeamModifier);
 
 		private static readonly SchemaField __m_SlowModifier = new("CCitadel_Ability_IceBeamVData", "m_SlowModifier");
-		/// <summary><c>CEmbeddedSubclass&lt;CCitadelModifier&gt;</c>. No typed mapping yet: read it through its address.</summary>
-		public RawField m_SlowModifier => Raw(__m_SlowModifier, "CEmbeddedSubclass<CCitadelModifier>");
+		/// <summary><c>CEmbeddedSubclass&lt;CCitadelModifier&gt;</c>.</summary>
+		public CCitadelModifierVData? m_SlowModifier => EmbeddedSubclass<CCitadelModifierVData>(__m_SlowModifier);
 
 		private static readonly SchemaField __m_SplitBeamWidth = new("CCitadel_Ability_IceBeamVData", "m_SplitBeamWidth");
 		/// <summary><c>float32</c>.</summary>

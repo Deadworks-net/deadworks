@@ -16,5 +16,8 @@ public static partial class Schema {
 		private static readonly SchemaField __m_pCrossbowWeapon = new("CCitadel_Modifier_Priest_CrossbowEquipped", "m_pCrossbowWeapon");
 		/// <summary><c>CCitadel_Ability_Priest_CrossbowWeapon*</c>.</summary>
 		public CCitadel_Ability_Priest_CrossbowWeapon? m_pCrossbowWeapon => EntityPointer<CCitadel_Ability_Priest_CrossbowWeapon>(__m_pCrossbowWeapon);
+
+		/// <summary>The data entry this was created from, as <see cref="CCitadel_Modifier_Priest_CrossbowEquippedVData"/>, or null if it has none.</summary>
+		public new CCitadel_Modifier_Priest_CrossbowEquippedVData? VData => ModifierData<CCitadel_Modifier_Priest_CrossbowEquippedVData>();
 	}
 }

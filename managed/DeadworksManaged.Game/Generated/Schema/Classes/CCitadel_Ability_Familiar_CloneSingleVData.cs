@@ -14,15 +14,15 @@ public static partial class Schema {
 		static string ISchemaClass<CCitadel_Ability_Familiar_CloneSingleVData>.NativeName => "CCitadel_Ability_Familiar_CloneSingleVData";
 
 		private static readonly SchemaField __m_CloneModifier = new("CCitadel_Ability_Familiar_CloneSingleVData", "m_CloneModifier");
-		/// <summary><c>CEmbeddedSubclass&lt;CCitadelModifier&gt;</c>. No typed mapping yet: read it through its address.</summary>
-		public RawField m_CloneModifier => Raw(__m_CloneModifier, "CEmbeddedSubclass<CCitadelModifier>");
+		/// <summary><c>CEmbeddedSubclass&lt;CCitadelModifier&gt;</c>.</summary>
+		public CCitadelModifierVData? m_CloneModifier => EmbeddedSubclass<CCitadelModifierVData>(__m_CloneModifier);
 
 		private static readonly SchemaField __m_ClonedParticle = new("CCitadel_Ability_Familiar_CloneSingleVData", "m_ClonedParticle");
 		/// <summary><c>CResourceNameTyped&lt;CWeakHandle&lt;InfoForResourceTypeIParticleSystemDefinition&gt;&gt;</c>.</summary>
 		public string m_ClonedParticle => GetBufferString(__m_ClonedParticle);
 
 		private static readonly SchemaField __m_mapClonedAbilities = new("CCitadel_Ability_Familiar_CloneSingleVData", "m_mapClonedAbilities");
-		/// <summary><c>CUtlOrderedMap&lt;CUtlString, EAbilitySlots_t&gt;</c>. No typed mapping yet: read it through its address.</summary>
-		public RawField m_mapClonedAbilities => Raw(__m_mapClonedAbilities, "CUtlOrderedMap<CUtlString, EAbilitySlots_t>");
+		/// <summary><c>CUtlOrderedMap&lt;CUtlString, EAbilitySlots_t&gt;</c>.</summary>
+		public SchemaValueDict<EAbilitySlots_t> m_mapClonedAbilities => new(this, __m_mapClonedAbilities);
 	}
 }

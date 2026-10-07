@@ -18,16 +18,16 @@ public static partial class Schema {
 		public string m_BenchRunEndParticle => GetBufferString(__m_BenchRunEndParticle);
 
 		private static readonly SchemaField __m_GroundPoundFallModifier = new("CCitadel_Modifier_Baba_BenchRun_VData", "m_GroundPoundFallModifier");
-		/// <summary><c>CEmbeddedSubclass&lt;CCitadelModifier&gt;</c>. No typed mapping yet: read it through its address.</summary>
-		public RawField m_GroundPoundFallModifier => Raw(__m_GroundPoundFallModifier, "CEmbeddedSubclass<CCitadelModifier>");
+		/// <summary><c>CEmbeddedSubclass&lt;CCitadelModifier&gt;</c>.</summary>
+		public CCitadelModifierVData? m_GroundPoundFallModifier => EmbeddedSubclass<CCitadelModifierVData>(__m_GroundPoundFallModifier);
 
 		private static readonly SchemaField __m_HeavyKickSlowModifier = new("CCitadel_Modifier_Baba_BenchRun_VData", "m_HeavyKickSlowModifier");
-		/// <summary><c>CEmbeddedSubclass&lt;CCitadelModifier&gt;</c>. No typed mapping yet: read it through its address.</summary>
-		public RawField m_HeavyKickSlowModifier => Raw(__m_HeavyKickSlowModifier, "CEmbeddedSubclass<CCitadelModifier>");
+		/// <summary><c>CEmbeddedSubclass&lt;CCitadelModifier&gt;</c>.</summary>
+		public CCitadelModifierVData? m_HeavyKickSlowModifier => EmbeddedSubclass<CCitadelModifierVData>(__m_HeavyKickSlowModifier);
 
 		private static readonly SchemaField __m_LightKickShoveModifier = new("CCitadel_Modifier_Baba_BenchRun_VData", "m_LightKickShoveModifier");
-		/// <summary><c>CEmbeddedSubclass&lt;CCitadelModifier&gt;</c>. No typed mapping yet: read it through its address.</summary>
-		public RawField m_LightKickShoveModifier => Raw(__m_LightKickShoveModifier, "CEmbeddedSubclass<CCitadelModifier>");
+		/// <summary><c>CEmbeddedSubclass&lt;CCitadelModifier&gt;</c>.</summary>
+		public CCitadelModifierVData? m_LightKickShoveModifier => EmbeddedSubclass<CCitadelModifierVData>(__m_LightKickShoveModifier);
 
 		private static readonly SchemaField __m_flUpwardsForceOnHeavyMeleeStart = new("CCitadel_Modifier_Baba_BenchRun_VData", "m_flUpwardsForceOnHeavyMeleeStart");
 		/// <summary><c>float32</c>.</summary>

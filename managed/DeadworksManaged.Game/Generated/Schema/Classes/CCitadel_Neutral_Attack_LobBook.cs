@@ -36,5 +36,8 @@ public static partial class Schema {
 		private static readonly SchemaField __m_vTargetLocation = new("CCitadel_Neutral_Attack_LobBook", "m_vTargetLocation");
 		/// <summary><c>VectorWS</c>.</summary>
 		public Vector3 m_vTargetLocation { get => Get<Vector3>(__m_vTargetLocation); set => Set(__m_vTargetLocation, value); }
+
+		/// <summary>The data entry this was created from, as <see cref="CCitadel_Neutral_Attack_LobBookVData"/>, or null if it has none.</summary>
+		public new CCitadel_Neutral_Attack_LobBookVData? VData => ModifierData<CCitadel_Neutral_Attack_LobBookVData>();
 	}
 }

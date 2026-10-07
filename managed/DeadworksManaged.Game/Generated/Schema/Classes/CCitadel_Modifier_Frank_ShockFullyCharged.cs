@@ -12,5 +12,8 @@ public static partial class Schema {
 		internal CCitadel_Modifier_Frank_ShockFullyCharged() { }
 		static CCitadel_Modifier_Frank_ShockFullyCharged ISchemaClass<CCitadel_Modifier_Frank_ShockFullyCharged>.New() => new();
 		static string ISchemaClass<CCitadel_Modifier_Frank_ShockFullyCharged>.NativeName => "CCitadel_Modifier_Frank_ShockFullyCharged";
+
+		/// <summary>The data entry this was created from, as <see cref="CCitadel_Modifier_Frank_ShockFullyChargedVData"/>, or null if it has none.</summary>
+		public new CCitadel_Modifier_Frank_ShockFullyChargedVData? VData => ModifierData<CCitadel_Modifier_Frank_ShockFullyChargedVData>();
 	}
 }

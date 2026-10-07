@@ -16,5 +16,8 @@ public static partial class Schema {
 		private static readonly SchemaField __m_flBatCloudEndTime = new("CCitadel_Ability_VampireBat_BatCloud", "m_flBatCloudEndTime");
 		/// <summary><c>GameTime_t</c>.</summary>
 		public float m_flBatCloudEndTime { get => Get<float>(__m_flBatCloudEndTime); set => Set(__m_flBatCloudEndTime, value); }
+
+		/// <summary>The data entry this was created from, as <see cref="CCitadel_Ability_VampireBat_BatCloudVData"/>, or null if it has none.</summary>
+		public new CCitadel_Ability_VampireBat_BatCloudVData? VData => SubclassVData<CCitadel_Ability_VampireBat_BatCloudVData>();
 	}
 }

@@ -12,5 +12,8 @@ public static partial class Schema {
 		internal CCitadel_Ability_Swan_Leap() { }
 		static CCitadel_Ability_Swan_Leap ISchemaClass<CCitadel_Ability_Swan_Leap>.New() => new();
 		static string ISchemaClass<CCitadel_Ability_Swan_Leap>.NativeName => "CCitadel_Ability_Swan_Leap";
+
+		/// <summary>The data entry this was created from, as <see cref="CCitadel_Ability_Swan_LeapVData"/>, or null if it has none.</summary>
+		public new CCitadel_Ability_Swan_LeapVData? VData => SubclassVData<CCitadel_Ability_Swan_LeapVData>();
 	}
 }

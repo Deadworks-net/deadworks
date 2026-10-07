@@ -14,12 +14,12 @@ public static partial class Schema {
 		static string ISchemaClass<CCitadel_Ability_Boho_ChannelTetherVData>.NativeName => "CCitadel_Ability_Boho_ChannelTetherVData";
 
 		private static readonly SchemaField __m_BuffModifier = new("CCitadel_Ability_Boho_ChannelTetherVData", "m_BuffModifier");
-		/// <summary><c>CEmbeddedSubclass&lt;CCitadelModifier&gt;</c>. No typed mapping yet: read it through its address.</summary>
-		public RawField m_BuffModifier => Raw(__m_BuffModifier, "CEmbeddedSubclass<CCitadelModifier>");
+		/// <summary><c>CEmbeddedSubclass&lt;CCitadelModifier&gt;</c>.</summary>
+		public CCitadelModifierVData? m_BuffModifier => EmbeddedSubclass<CCitadelModifierVData>(__m_BuffModifier);
 
 		private static readonly SchemaField __m_DebuffModifier = new("CCitadel_Ability_Boho_ChannelTetherVData", "m_DebuffModifier");
-		/// <summary><c>CEmbeddedSubclass&lt;CCitadelModifier&gt;</c>. No typed mapping yet: read it through its address.</summary>
-		public RawField m_DebuffModifier => Raw(__m_DebuffModifier, "CEmbeddedSubclass<CCitadelModifier>");
+		/// <summary><c>CEmbeddedSubclass&lt;CCitadelModifier&gt;</c>.</summary>
+		public CCitadelModifierVData? m_DebuffModifier => EmbeddedSubclass<CCitadelModifierVData>(__m_DebuffModifier);
 
 		private static readonly SchemaField __m_EffectParticle = new("CCitadel_Ability_Boho_ChannelTetherVData", "m_EffectParticle");
 		/// <summary><c>CResourceNameTyped&lt;CWeakHandle&lt;InfoForResourceTypeIParticleSystemDefinition&gt;&gt;</c>.</summary>
@@ -34,8 +34,8 @@ public static partial class Schema {
 		public string m_HitParticle => GetBufferString(__m_HitParticle);
 
 		private static readonly SchemaField __m_ImmobilizeModifier = new("CCitadel_Ability_Boho_ChannelTetherVData", "m_ImmobilizeModifier");
-		/// <summary><c>CEmbeddedSubclass&lt;CCitadelModifier&gt;</c>. No typed mapping yet: read it through its address.</summary>
-		public RawField m_ImmobilizeModifier => Raw(__m_ImmobilizeModifier, "CEmbeddedSubclass<CCitadelModifier>");
+		/// <summary><c>CEmbeddedSubclass&lt;CCitadelModifier&gt;</c>.</summary>
+		public CCitadelModifierVData? m_ImmobilizeModifier => EmbeddedSubclass<CCitadelModifierVData>(__m_ImmobilizeModifier);
 
 		private static readonly SchemaField __m_RadiusParticle = new("CCitadel_Ability_Boho_ChannelTetherVData", "m_RadiusParticle");
 		/// <summary><c>CResourceNameTyped&lt;CWeakHandle&lt;InfoForResourceTypeIParticleSystemDefinition&gt;&gt;</c>.</summary>

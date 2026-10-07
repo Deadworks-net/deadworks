@@ -18,8 +18,8 @@ public static partial class Schema {
 		public string m_ImpactParticle => GetBufferString(__m_ImpactParticle);
 
 		private static readonly SchemaField __m_SlowModifier = new("CModifierAirRaidVData", "m_SlowModifier");
-		/// <summary><c>CEmbeddedSubclass&lt;CCitadelModifier&gt;</c>. No typed mapping yet: read it through its address.</summary>
-		public RawField m_SlowModifier => Raw(__m_SlowModifier, "CEmbeddedSubclass<CCitadelModifier>");
+		/// <summary><c>CEmbeddedSubclass&lt;CCitadelModifier&gt;</c>.</summary>
+		public CCitadelModifierVData? m_SlowModifier => EmbeddedSubclass<CCitadelModifierVData>(__m_SlowModifier);
 
 		private static readonly SchemaField __m_strAttackerHitSound = new("CModifierAirRaidVData", "m_strAttackerHitSound");
 		/// <summary><c>CSoundEventName</c>.</summary>

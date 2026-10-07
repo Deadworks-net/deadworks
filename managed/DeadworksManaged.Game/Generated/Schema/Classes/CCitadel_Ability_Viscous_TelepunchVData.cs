@@ -26,12 +26,12 @@ public static partial class Schema {
 		public string m_EnemyPortalSound => GetBufferString(__m_EnemyPortalSound);
 
 		private static readonly SchemaField __m_FriendlyImpactModifier = new("CCitadel_Ability_Viscous_TelepunchVData", "m_FriendlyImpactModifier");
-		/// <summary><c>CEmbeddedSubclass&lt;CCitadelModifier&gt;</c>. No typed mapping yet: read it through its address.</summary>
-		public RawField m_FriendlyImpactModifier => Raw(__m_FriendlyImpactModifier, "CEmbeddedSubclass<CCitadelModifier>");
+		/// <summary><c>CEmbeddedSubclass&lt;CCitadelModifier&gt;</c>.</summary>
+		public CCitadelModifierVData? m_FriendlyImpactModifier => EmbeddedSubclass<CCitadelModifierVData>(__m_FriendlyImpactModifier);
 
 		private static readonly SchemaField __m_ImpactModifier = new("CCitadel_Ability_Viscous_TelepunchVData", "m_ImpactModifier");
-		/// <summary><c>CEmbeddedSubclass&lt;CCitadelModifier&gt;</c>. No typed mapping yet: read it through its address.</summary>
-		public RawField m_ImpactModifier => Raw(__m_ImpactModifier, "CEmbeddedSubclass<CCitadelModifier>");
+		/// <summary><c>CEmbeddedSubclass&lt;CCitadelModifier&gt;</c>.</summary>
+		public CCitadelModifierVData? m_ImpactModifier => EmbeddedSubclass<CCitadelModifierVData>(__m_ImpactModifier);
 
 		private static readonly SchemaField __m_PortalParticle = new("CCitadel_Ability_Viscous_TelepunchVData", "m_PortalParticle");
 		/// <summary><c>CResourceNameTyped&lt;CWeakHandle&lt;InfoForResourceTypeIParticleSystemDefinition&gt;&gt;</c>.</summary>
@@ -42,8 +42,8 @@ public static partial class Schema {
 		public string m_PunchParticle => GetBufferString(__m_PunchParticle);
 
 		private static readonly SchemaField __m_PunchRollSlowModifier = new("CCitadel_Ability_Viscous_TelepunchVData", "m_PunchRollSlowModifier");
-		/// <summary><c>CEmbeddedSubclass&lt;CCitadelModifier&gt;</c>. No typed mapping yet: read it through its address.</summary>
-		public RawField m_PunchRollSlowModifier => Raw(__m_PunchRollSlowModifier, "CEmbeddedSubclass<CCitadelModifier>");
+		/// <summary><c>CEmbeddedSubclass&lt;CCitadelModifier&gt;</c>.</summary>
+		public CCitadelModifierVData? m_PunchRollSlowModifier => EmbeddedSubclass<CCitadelModifierVData>(__m_PunchRollSlowModifier);
 
 		private static readonly SchemaField __m_PunchSelfSound = new("CCitadel_Ability_Viscous_TelepunchVData", "m_PunchSelfSound");
 		/// <summary><c>CSoundEventName</c>.</summary>

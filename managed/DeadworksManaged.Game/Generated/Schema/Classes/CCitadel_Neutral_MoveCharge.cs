@@ -20,5 +20,8 @@ public static partial class Schema {
 		private static readonly SchemaField __m_vMoveDirection = new("CCitadel_Neutral_MoveCharge", "m_vMoveDirection");
 		/// <summary><c>Vector</c>.</summary>
 		public Vector3 m_vMoveDirection { get => Get<Vector3>(__m_vMoveDirection); set => Set(__m_vMoveDirection, value); }
+
+		/// <summary>The data entry this was created from, as <see cref="CCitadel_Neutral_MoveChargeVData"/>, or null if it has none.</summary>
+		public new CCitadel_Neutral_MoveChargeVData? VData => ModifierData<CCitadel_Neutral_MoveChargeVData>();
 	}
 }

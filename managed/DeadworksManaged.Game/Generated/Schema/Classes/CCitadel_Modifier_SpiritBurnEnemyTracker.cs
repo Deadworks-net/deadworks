@@ -12,5 +12,8 @@ public static partial class Schema {
 		internal CCitadel_Modifier_SpiritBurnEnemyTracker() { }
 		static CCitadel_Modifier_SpiritBurnEnemyTracker ISchemaClass<CCitadel_Modifier_SpiritBurnEnemyTracker>.New() => new();
 		static string ISchemaClass<CCitadel_Modifier_SpiritBurnEnemyTracker>.NativeName => "CCitadel_Modifier_SpiritBurnEnemyTracker";
+
+		/// <summary>The data entry this was created from, as <see cref="CCitadel_Modifier_SpiritBurnEnemyTrackerVData"/>, or null if it has none.</summary>
+		public new CCitadel_Modifier_SpiritBurnEnemyTrackerVData? VData => ModifierData<CCitadel_Modifier_SpiritBurnEnemyTrackerVData>();
 	}
 }

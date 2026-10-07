@@ -26,8 +26,8 @@ public static partial class Schema {
 		public string m_BallTrailFx => GetBufferString(__m_BallTrailFx);
 
 		private static readonly SchemaField __m_DamagePreventionModifier = new("CAbilityViscousBowlingVData", "m_DamagePreventionModifier");
-		/// <summary><c>CEmbeddedSubclass&lt;CCitadelModifier&gt;</c>. No typed mapping yet: read it through its address.</summary>
-		public RawField m_DamagePreventionModifier => Raw(__m_DamagePreventionModifier, "CEmbeddedSubclass<CCitadelModifier>");
+		/// <summary><c>CEmbeddedSubclass&lt;CCitadelModifier&gt;</c>.</summary>
+		public CCitadelModifierVData? m_DamagePreventionModifier => EmbeddedSubclass<CCitadelModifierVData>(__m_DamagePreventionModifier);
 
 		private static readonly SchemaField __m_DirectionParticle = new("CAbilityViscousBowlingVData", "m_DirectionParticle");
 		/// <summary><c>CResourceNameTyped&lt;CWeakHandle&lt;InfoForResourceTypeIParticleSystemDefinition&gt;&gt;</c>.</summary>
@@ -50,8 +50,8 @@ public static partial class Schema {
 		public string m_GroundImpactParticle => GetBufferString(__m_GroundImpactParticle);
 
 		private static readonly SchemaField __m_ImpactModifier = new("CAbilityViscousBowlingVData", "m_ImpactModifier");
-		/// <summary><c>CEmbeddedSubclass&lt;CCitadelModifier&gt;</c>. No typed mapping yet: read it through its address.</summary>
-		public RawField m_ImpactModifier => Raw(__m_ImpactModifier, "CEmbeddedSubclass<CCitadelModifier>");
+		/// <summary><c>CEmbeddedSubclass&lt;CCitadelModifier&gt;</c>.</summary>
+		public CCitadelModifierVData? m_ImpactModifier => EmbeddedSubclass<CCitadelModifierVData>(__m_ImpactModifier);
 
 		private static readonly SchemaField __m_JumpParticle = new("CAbilityViscousBowlingVData", "m_JumpParticle");
 		/// <summary><c>CResourceNameTyped&lt;CWeakHandle&lt;InfoForResourceTypeIParticleSystemDefinition&gt;&gt;</c>.</summary>
@@ -62,8 +62,8 @@ public static partial class Schema {
 		public string m_PlayerImpactSound => GetBufferString(__m_PlayerImpactSound);
 
 		private static readonly SchemaField __m_RollingModifier = new("CAbilityViscousBowlingVData", "m_RollingModifier");
-		/// <summary><c>CEmbeddedSubclass&lt;CCitadelModifier&gt;</c>. No typed mapping yet: read it through its address.</summary>
-		public RawField m_RollingModifier => Raw(__m_RollingModifier, "CEmbeddedSubclass<CCitadelModifier>");
+		/// <summary><c>CEmbeddedSubclass&lt;CCitadelModifier&gt;</c>.</summary>
+		public CCitadelModifierVData? m_RollingModifier => EmbeddedSubclass<CCitadelModifierVData>(__m_RollingModifier);
 
 		private static readonly SchemaField __m_TransformStartFx = new("CAbilityViscousBowlingVData", "m_TransformStartFx");
 		/// <summary><c>CResourceNameTyped&lt;CWeakHandle&lt;InfoForResourceTypeIParticleSystemDefinition&gt;&gt;</c>.</summary>

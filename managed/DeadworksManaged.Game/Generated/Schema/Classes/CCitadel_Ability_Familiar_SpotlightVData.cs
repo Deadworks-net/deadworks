@@ -34,20 +34,20 @@ public static partial class Schema {
 		public float m_AirSpeedMax { get => Get<float>(__m_AirSpeedMax); set => Set(__m_AirSpeedMax, value); }
 
 		private static readonly SchemaField __m_BuildupModifier = new("CCitadel_Ability_Familiar_SpotlightVData", "m_BuildupModifier");
-		/// <summary><c>CEmbeddedSubclass&lt;CCitadel_Modifier_Base_Buildup&gt;</c>. No typed mapping yet: read it through its address.</summary>
-		public RawField m_BuildupModifier => Raw(__m_BuildupModifier, "CEmbeddedSubclass<CCitadel_Modifier_Base_Buildup>");
+		/// <summary><c>CEmbeddedSubclass&lt;CCitadel_Modifier_Base_Buildup&gt;</c>.</summary>
+		public CCitadel_Modifier_Base_BuildupVData? m_BuildupModifier => EmbeddedSubclass<CCitadel_Modifier_Base_BuildupVData>(__m_BuildupModifier);
 
 		private static readonly SchemaField __m_CameraTurnRateMax = new("CCitadel_Ability_Familiar_SpotlightVData", "m_CameraTurnRateMax");
 		/// <summary><c>float32</c>.</summary>
 		public float m_CameraTurnRateMax { get => Get<float>(__m_CameraTurnRateMax); set => Set(__m_CameraTurnRateMax, value); }
 
 		private static readonly SchemaField __m_EffectModifier = new("CCitadel_Ability_Familiar_SpotlightVData", "m_EffectModifier");
-		/// <summary><c>CEmbeddedSubclass&lt;CCitadelModifier&gt;</c>. No typed mapping yet: read it through its address.</summary>
-		public RawField m_EffectModifier => Raw(__m_EffectModifier, "CEmbeddedSubclass<CCitadelModifier>");
+		/// <summary><c>CEmbeddedSubclass&lt;CCitadelModifier&gt;</c>.</summary>
+		public CCitadelModifierVData? m_EffectModifier => EmbeddedSubclass<CCitadelModifierVData>(__m_EffectModifier);
 
 		private static readonly SchemaField __m_ExposedAuraModifier = new("CCitadel_Ability_Familiar_SpotlightVData", "m_ExposedAuraModifier");
-		/// <summary><c>CEmbeddedSubclass&lt;CCitadelModifier&gt;</c>. No typed mapping yet: read it through its address.</summary>
-		public RawField m_ExposedAuraModifier => Raw(__m_ExposedAuraModifier, "CEmbeddedSubclass<CCitadelModifier>");
+		/// <summary><c>CEmbeddedSubclass&lt;CCitadelModifier&gt;</c>.</summary>
+		public CCitadelModifierVData? m_ExposedAuraModifier => EmbeddedSubclass<CCitadelModifierVData>(__m_ExposedAuraModifier);
 
 		private static readonly SchemaField __m_EyeGlowParticle = new("CCitadel_Ability_Familiar_SpotlightVData", "m_EyeGlowParticle");
 		/// <summary><c>CResourceNameTyped&lt;CWeakHandle&lt;InfoForResourceTypeIParticleSystemDefinition&gt;&gt;</c>.</summary>

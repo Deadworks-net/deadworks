@@ -12,5 +12,8 @@ public static partial class Schema {
 		internal CCitadel_Ability_Unicorn_DazzlingOrb() { }
 		static CCitadel_Ability_Unicorn_DazzlingOrb ISchemaClass<CCitadel_Ability_Unicorn_DazzlingOrb>.New() => new();
 		static string ISchemaClass<CCitadel_Ability_Unicorn_DazzlingOrb>.NativeName => "CCitadel_Ability_Unicorn_DazzlingOrb";
+
+		/// <summary>The data entry this was created from, as <see cref="CCitadel_Ability_Unicorn_DazzlingOrbVData"/>, or null if it has none.</summary>
+		public new CCitadel_Ability_Unicorn_DazzlingOrbVData? VData => SubclassVData<CCitadel_Ability_Unicorn_DazzlingOrbVData>();
 	}
 }

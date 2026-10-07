@@ -36,5 +36,8 @@ public static partial class Schema {
 		private static readonly SchemaField __m_vPullToLocation = new("CCitadel_Modifier_PunkgoatPull", "m_vPullToLocation");
 		/// <summary><c>VectorWS</c>.</summary>
 		public Vector3 m_vPullToLocation { get => Get<Vector3>(__m_vPullToLocation); set => Set(__m_vPullToLocation, value); }
+
+		/// <summary>The data entry this was created from, as <see cref="CCitadel_Modifier_PunkgoatPullVData"/>, or null if it has none.</summary>
+		public new CCitadel_Modifier_PunkgoatPullVData? VData => ModifierData<CCitadel_Modifier_PunkgoatPullVData>();
 	}
 }

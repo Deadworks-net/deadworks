@@ -14,7 +14,7 @@ public static partial class Schema {
 		static string ISchemaClass<CModifierRiotCastDelayVData>.NativeName => "CModifierRiotCastDelayVData";
 
 		private static readonly SchemaField __m_UnstoppableModifier = new("CModifierRiotCastDelayVData", "m_UnstoppableModifier");
-		/// <summary><c>CEmbeddedSubclass&lt;CCitadelModifier&gt;</c>. No typed mapping yet: read it through its address.</summary>
-		public RawField m_UnstoppableModifier => Raw(__m_UnstoppableModifier, "CEmbeddedSubclass<CCitadelModifier>");
+		/// <summary><c>CEmbeddedSubclass&lt;CCitadelModifier&gt;</c>.</summary>
+		public CCitadelModifierVData? m_UnstoppableModifier => EmbeddedSubclass<CCitadelModifierVData>(__m_UnstoppableModifier);
 	}
 }

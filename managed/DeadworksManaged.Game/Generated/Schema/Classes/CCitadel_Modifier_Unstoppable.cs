@@ -16,5 +16,8 @@ public static partial class Schema {
 		private static readonly SchemaField __m_bInCheckState = new("CCitadel_Modifier_Unstoppable", "m_bInCheckState");
 		/// <summary><c>bool</c>.</summary>
 		public bool m_bInCheckState { get => Get<bool>(__m_bInCheckState); set => Set(__m_bInCheckState, value); }
+
+		/// <summary>The data entry this was created from, as <see cref="CCitadel_Modifier_UnstoppableVData"/>, or null if it has none.</summary>
+		public new CCitadel_Modifier_UnstoppableVData? VData => ModifierData<CCitadel_Modifier_UnstoppableVData>();
 	}
 }

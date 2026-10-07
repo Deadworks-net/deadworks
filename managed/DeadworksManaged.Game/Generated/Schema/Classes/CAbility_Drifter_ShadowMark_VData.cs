@@ -14,24 +14,24 @@ public static partial class Schema {
 		static string ISchemaClass<CAbility_Drifter_ShadowMark_VData>.NativeName => "CAbility_Drifter_ShadowMark_VData";
 
 		private static readonly SchemaField __m_BuffModifier = new("CAbility_Drifter_ShadowMark_VData", "m_BuffModifier");
-		/// <summary><c>CEmbeddedSubclass&lt;CCitadelModifier&gt;</c>. No typed mapping yet: read it through its address.</summary>
-		public RawField m_BuffModifier => Raw(__m_BuffModifier, "CEmbeddedSubclass<CCitadelModifier>");
+		/// <summary><c>CEmbeddedSubclass&lt;CCitadelModifier&gt;</c>.</summary>
+		public CCitadelModifierVData? m_BuffModifier => EmbeddedSubclass<CCitadelModifierVData>(__m_BuffModifier);
 
 		private static readonly SchemaField __m_ImpactParticle = new("CAbility_Drifter_ShadowMark_VData", "m_ImpactParticle");
 		/// <summary><c>CResourceNameTyped&lt;CWeakHandle&lt;InfoForResourceTypeIParticleSystemDefinition&gt;&gt;</c>.</summary>
 		public string m_ImpactParticle => GetBufferString(__m_ImpactParticle);
 
 		private static readonly SchemaField __m_PostTeleportModifier = new("CAbility_Drifter_ShadowMark_VData", "m_PostTeleportModifier");
-		/// <summary><c>CEmbeddedSubclass&lt;CCitadelModifier&gt;</c>. No typed mapping yet: read it through its address.</summary>
-		public RawField m_PostTeleportModifier => Raw(__m_PostTeleportModifier, "CEmbeddedSubclass<CCitadelModifier>");
+		/// <summary><c>CEmbeddedSubclass&lt;CCitadelModifier&gt;</c>.</summary>
+		public CCitadelModifierVData? m_PostTeleportModifier => EmbeddedSubclass<CCitadelModifierVData>(__m_PostTeleportModifier);
 
 		private static readonly SchemaField __m_TargetModifier = new("CAbility_Drifter_ShadowMark_VData", "m_TargetModifier");
-		/// <summary><c>CEmbeddedSubclass&lt;CCitadelModifier&gt;</c>. No typed mapping yet: read it through its address.</summary>
-		public RawField m_TargetModifier => Raw(__m_TargetModifier, "CEmbeddedSubclass<CCitadelModifier>");
+		/// <summary><c>CEmbeddedSubclass&lt;CCitadelModifier&gt;</c>.</summary>
+		public CCitadelModifierVData? m_TargetModifier => EmbeddedSubclass<CCitadelModifierVData>(__m_TargetModifier);
 
 		private static readonly SchemaField __m_TargetTeleportModifier = new("CAbility_Drifter_ShadowMark_VData", "m_TargetTeleportModifier");
-		/// <summary><c>CEmbeddedSubclass&lt;CCitadelModifier&gt;</c>. No typed mapping yet: read it through its address.</summary>
-		public RawField m_TargetTeleportModifier => Raw(__m_TargetTeleportModifier, "CEmbeddedSubclass<CCitadelModifier>");
+		/// <summary><c>CEmbeddedSubclass&lt;CCitadelModifier&gt;</c>.</summary>
+		public CCitadelModifierVData? m_TargetTeleportModifier => EmbeddedSubclass<CCitadelModifierVData>(__m_TargetTeleportModifier);
 
 		private static readonly SchemaField __m_TeleportTrailParticle = new("CAbility_Drifter_ShadowMark_VData", "m_TeleportTrailParticle");
 		/// <summary><c>CResourceNameTyped&lt;CWeakHandle&lt;InfoForResourceTypeIParticleSystemDefinition&gt;&gt;</c>.</summary>

@@ -26,8 +26,8 @@ public static partial class Schema {
 		public string m_AmberLaserPreviewEffect => GetBufferString(__m_AmberLaserPreviewEffect);
 
 		private static readonly SchemaField __m_GroundAuraModifier = new("CModifierTier3BossLaserBeamVData", "m_GroundAuraModifier");
-		/// <summary><c>CEmbeddedSubclass&lt;CCitadelModifierAura&gt;</c>. No typed mapping yet: read it through its address.</summary>
-		public RawField m_GroundAuraModifier => Raw(__m_GroundAuraModifier, "CEmbeddedSubclass<CCitadelModifierAura>");
+		/// <summary><c>CEmbeddedSubclass&lt;CCitadelModifierAura&gt;</c>.</summary>
+		public CCitadelModifierAuraVData? m_GroundAuraModifier => EmbeddedSubclass<CCitadelModifierAuraVData>(__m_GroundAuraModifier);
 
 		private static readonly SchemaField __m_SapphLaserBeamEffect = new("CModifierTier3BossLaserBeamVData", "m_SapphLaserBeamEffect");
 		/// <summary><c>CResourceNameTyped&lt;CWeakHandle&lt;InfoForResourceTypeIParticleSystemDefinition&gt;&gt;</c>.</summary>

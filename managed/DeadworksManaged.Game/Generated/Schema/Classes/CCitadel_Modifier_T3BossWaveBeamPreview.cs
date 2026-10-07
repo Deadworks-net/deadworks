@@ -12,5 +12,8 @@ public static partial class Schema {
 		internal CCitadel_Modifier_T3BossWaveBeamPreview() { }
 		static CCitadel_Modifier_T3BossWaveBeamPreview ISchemaClass<CCitadel_Modifier_T3BossWaveBeamPreview>.New() => new();
 		static string ISchemaClass<CCitadel_Modifier_T3BossWaveBeamPreview>.NativeName => "CCitadel_Modifier_T3BossWaveBeamPreview";
+
+		/// <summary>The data entry this was created from, as <see cref="CCitadel_Modifier_T3BossWaveBeamPreviewVData"/>, or null if it has none.</summary>
+		public new CCitadel_Modifier_T3BossWaveBeamPreviewVData? VData => ModifierData<CCitadel_Modifier_T3BossWaveBeamPreviewVData>();
 	}
 }

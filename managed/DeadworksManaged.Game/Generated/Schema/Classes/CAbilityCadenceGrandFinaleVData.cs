@@ -14,8 +14,8 @@ public static partial class Schema {
 		static string ISchemaClass<CAbilityCadenceGrandFinaleVData>.NativeName => "CAbilityCadenceGrandFinaleVData";
 
 		private static readonly SchemaField __m_GrandFinaleAOEModifier = new("CAbilityCadenceGrandFinaleVData", "m_GrandFinaleAOEModifier");
-		/// <summary><c>CEmbeddedSubclass&lt;CCitadelModifier&gt;</c>. No typed mapping yet: read it through its address.</summary>
-		public RawField m_GrandFinaleAOEModifier => Raw(__m_GrandFinaleAOEModifier, "CEmbeddedSubclass<CCitadelModifier>");
+		/// <summary><c>CEmbeddedSubclass&lt;CCitadelModifier&gt;</c>.</summary>
+		public CCitadelModifierVData? m_GrandFinaleAOEModifier => EmbeddedSubclass<CCitadelModifierVData>(__m_GrandFinaleAOEModifier);
 
 		private static readonly SchemaField __m_StageModel = new("CAbilityCadenceGrandFinaleVData", "m_StageModel");
 		/// <summary><c>CResourceNameTyped&lt;CWeakHandle&lt;InfoForResourceTypeCModel&gt;&gt;</c>.</summary>

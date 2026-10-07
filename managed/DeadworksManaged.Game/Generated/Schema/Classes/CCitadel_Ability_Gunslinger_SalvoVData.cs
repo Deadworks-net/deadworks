@@ -18,11 +18,11 @@ public static partial class Schema {
 		public string m_BulletWarningParticle => GetBufferString(__m_BulletWarningParticle);
 
 		private static readonly SchemaField __m_ProcWatcherModifier = new("CCitadel_Ability_Gunslinger_SalvoVData", "m_ProcWatcherModifier");
-		/// <summary><c>CEmbeddedSubclass&lt;CCitadelModifier&gt;</c>. No typed mapping yet: read it through its address.</summary>
-		public RawField m_ProcWatcherModifier => Raw(__m_ProcWatcherModifier, "CEmbeddedSubclass<CCitadelModifier>");
+		/// <summary><c>CEmbeddedSubclass&lt;CCitadelModifier&gt;</c>.</summary>
+		public CCitadelModifierVData? m_ProcWatcherModifier => EmbeddedSubclass<CCitadelModifierVData>(__m_ProcWatcherModifier);
 
 		private static readonly SchemaField __m_VictimWarningModifier = new("CCitadel_Ability_Gunslinger_SalvoVData", "m_VictimWarningModifier");
-		/// <summary><c>CEmbeddedSubclass&lt;CCitadelModifier&gt;</c>. No typed mapping yet: read it through its address.</summary>
-		public RawField m_VictimWarningModifier => Raw(__m_VictimWarningModifier, "CEmbeddedSubclass<CCitadelModifier>");
+		/// <summary><c>CEmbeddedSubclass&lt;CCitadelModifier&gt;</c>.</summary>
+		public CCitadelModifierVData? m_VictimWarningModifier => EmbeddedSubclass<CCitadelModifierVData>(__m_VictimWarningModifier);
 	}
 }

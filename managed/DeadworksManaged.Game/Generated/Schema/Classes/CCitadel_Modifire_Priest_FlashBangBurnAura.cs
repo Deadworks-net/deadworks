@@ -12,5 +12,8 @@ public static partial class Schema {
 		internal CCitadel_Modifire_Priest_FlashBangBurnAura() { }
 		static CCitadel_Modifire_Priest_FlashBangBurnAura ISchemaClass<CCitadel_Modifire_Priest_FlashBangBurnAura>.New() => new();
 		static string ISchemaClass<CCitadel_Modifire_Priest_FlashBangBurnAura>.NativeName => "CCitadel_Modifire_Priest_FlashBangBurnAura";
+
+		/// <summary>The data entry this was created from, as <see cref="CCitadel_Modifire_Priest_FlashBangBurnAuraVData"/>, or null if it has none.</summary>
+		public new CCitadel_Modifire_Priest_FlashBangBurnAuraVData? VData => ModifierData<CCitadel_Modifire_Priest_FlashBangBurnAuraVData>();
 	}
 }

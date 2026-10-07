@@ -18,8 +18,8 @@ public static partial class Schema {
 		public string m_ExplodeParticle => GetBufferString(__m_ExplodeParticle);
 
 		private static readonly SchemaField __m_OnHitModifier = new("CCitadel_Neutral_Attack_SludgeVData", "m_OnHitModifier");
-		/// <summary><c>CEmbeddedSubclass&lt;CCitadelModifierAura&gt;</c>. No typed mapping yet: read it through its address.</summary>
-		public RawField m_OnHitModifier => Raw(__m_OnHitModifier, "CEmbeddedSubclass<CCitadelModifierAura>");
+		/// <summary><c>CEmbeddedSubclass&lt;CCitadelModifierAura&gt;</c>.</summary>
+		public CCitadelModifierAuraVData? m_OnHitModifier => EmbeddedSubclass<CCitadelModifierAuraVData>(__m_OnHitModifier);
 
 		private static readonly SchemaField __m_flDamage = new("CCitadel_Neutral_Attack_SludgeVData", "m_flDamage");
 		/// <summary><c>float32</c>.</summary>

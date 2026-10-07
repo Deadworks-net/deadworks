@@ -14,7 +14,7 @@ public static partial class Schema {
 		static string ISchemaClass<CModifier_Upgrade_KineticSash_VData>.NativeName => "CModifier_Upgrade_KineticSash_VData";
 
 		private static readonly SchemaField __m_KineticSashTriggeredModifier = new("CModifier_Upgrade_KineticSash_VData", "m_KineticSashTriggeredModifier");
-		/// <summary><c>CEmbeddedSubclass&lt;CCitadelModifier&gt;</c>. No typed mapping yet: read it through its address.</summary>
-		public RawField m_KineticSashTriggeredModifier => Raw(__m_KineticSashTriggeredModifier, "CEmbeddedSubclass<CCitadelModifier>");
+		/// <summary><c>CEmbeddedSubclass&lt;CCitadelModifier&gt;</c>.</summary>
+		public CCitadelModifierVData? m_KineticSashTriggeredModifier => EmbeddedSubclass<CCitadelModifierVData>(__m_KineticSashTriggeredModifier);
 	}
 }

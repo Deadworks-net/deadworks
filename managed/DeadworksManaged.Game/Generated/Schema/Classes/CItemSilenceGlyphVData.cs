@@ -14,12 +14,12 @@ public static partial class Schema {
 		static string ISchemaClass<CItemSilenceGlyphVData>.NativeName => "CItemSilenceGlyphVData";
 
 		private static readonly SchemaField __m_DebuffModifier = new("CItemSilenceGlyphVData", "m_DebuffModifier");
-		/// <summary><c>CEmbeddedSubclass&lt;CCitadelModifier&gt;</c>. No typed mapping yet: read it through its address.</summary>
-		public RawField m_DebuffModifier => Raw(__m_DebuffModifier, "CEmbeddedSubclass<CCitadelModifier>");
+		/// <summary><c>CEmbeddedSubclass&lt;CCitadelModifier&gt;</c>.</summary>
+		public CCitadelModifierVData? m_DebuffModifier => EmbeddedSubclass<CCitadelModifierVData>(__m_DebuffModifier);
 
 		private static readonly SchemaField __m_ResistReductionModifier = new("CItemSilenceGlyphVData", "m_ResistReductionModifier");
-		/// <summary><c>CEmbeddedSubclass&lt;CCitadelModifier&gt;</c>. No typed mapping yet: read it through its address.</summary>
-		public RawField m_ResistReductionModifier => Raw(__m_ResistReductionModifier, "CEmbeddedSubclass<CCitadelModifier>");
+		/// <summary><c>CEmbeddedSubclass&lt;CCitadelModifier&gt;</c>.</summary>
+		public CCitadelModifierVData? m_ResistReductionModifier => EmbeddedSubclass<CCitadelModifierVData>(__m_ResistReductionModifier);
 
 		private static readonly SchemaField __m_strHitConfirmSound = new("CItemSilenceGlyphVData", "m_strHitConfirmSound");
 		/// <summary><c>CSoundEventName</c>.</summary>

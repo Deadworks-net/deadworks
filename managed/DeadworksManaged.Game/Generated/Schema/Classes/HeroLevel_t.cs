@@ -18,8 +18,8 @@ public static partial class Schema {
 		public bool m_bUseStandardUpgrade { get => Get<bool>(__m_bUseStandardUpgrade); set => Set(__m_bUseStandardUpgrade, value); }
 
 		private static readonly SchemaField __m_mapBonusCurrencies = new("HeroLevel_t", "m_mapBonusCurrencies");
-		/// <summary><c>CUtlOrderedMap&lt;ECurrencyType, int32&gt;</c>. No typed mapping yet: read it through its address.</summary>
-		public RawField m_mapBonusCurrencies => Raw(__m_mapBonusCurrencies, "CUtlOrderedMap<ECurrencyType, int32>");
+		/// <summary><c>CUtlOrderedMap&lt;ECurrencyType, int32&gt;</c>.</summary>
+		public SchemaValueMap<ECurrencyType, int> m_mapBonusCurrencies => new(this, __m_mapBonusCurrencies);
 
 		private static readonly SchemaField __m_unRequiredGold = new("HeroLevel_t", "m_unRequiredGold");
 		/// <summary><c>uint32</c>.</summary>

@@ -12,5 +12,8 @@ public static partial class Schema {
 		internal CGameModifier_FireUserEntityIO() { }
 		static CGameModifier_FireUserEntityIO ISchemaClass<CGameModifier_FireUserEntityIO>.New() => new();
 		static string ISchemaClass<CGameModifier_FireUserEntityIO>.NativeName => "CGameModifier_FireUserEntityIO";
+
+		/// <summary>The data entry this was created from, as <see cref="CGameModifier_FireUserEntityIOVData"/>, or null if it has none.</summary>
+		public new CGameModifier_FireUserEntityIOVData? VData => ModifierData<CGameModifier_FireUserEntityIOVData>();
 	}
 }

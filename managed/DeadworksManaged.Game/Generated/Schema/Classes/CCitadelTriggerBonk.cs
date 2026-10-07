@@ -16,5 +16,8 @@ public static partial class Schema {
 		private static readonly SchemaField __m_flBonkRange = new("CCitadelTriggerBonk", "m_flBonkRange");
 		/// <summary><c>float32</c>.</summary>
 		public float m_flBonkRange { get => Get<float>(__m_flBonkRange); set => Set(__m_flBonkRange, value); }
+
+		/// <summary>The data entry this was created from, as <see cref="CCitadelTriggerBonkVData"/>, or null if it has none.</summary>
+		public CCitadelTriggerBonkVData? VData => SubclassVData<CCitadelTriggerBonkVData>();
 	}
 }

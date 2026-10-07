@@ -12,5 +12,8 @@ public static partial class Schema {
 		internal CCitadel_Modifier_Intrinsic_Base() { }
 		static CCitadel_Modifier_Intrinsic_Base ISchemaClass<CCitadel_Modifier_Intrinsic_Base>.New() => new();
 		static string ISchemaClass<CCitadel_Modifier_Intrinsic_Base>.NativeName => "CCitadel_Modifier_Intrinsic_Base";
+
+		/// <summary>The data entry this was created from, as <see cref="CCitadel_Modifier_Intrinsic_BaseVData"/>, or null if it has none.</summary>
+		public new CCitadel_Modifier_Intrinsic_BaseVData? VData => ModifierData<CCitadel_Modifier_Intrinsic_BaseVData>();
 	}
 }

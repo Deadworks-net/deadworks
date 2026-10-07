@@ -12,5 +12,8 @@ public static partial class Schema {
 		internal CCitadel_Modifier_EconBodygroupSwap() { }
 		static CCitadel_Modifier_EconBodygroupSwap ISchemaClass<CCitadel_Modifier_EconBodygroupSwap>.New() => new();
 		static string ISchemaClass<CCitadel_Modifier_EconBodygroupSwap>.NativeName => "CCitadel_Modifier_EconBodygroupSwap";
+
+		/// <summary>The data entry this was created from, as <see cref="CCitadel_Modifier_EconBodygroupSwapVData"/>, or null if it has none.</summary>
+		public new CCitadel_Modifier_EconBodygroupSwapVData? VData => ModifierData<CCitadel_Modifier_EconBodygroupSwapVData>();
 	}
 }

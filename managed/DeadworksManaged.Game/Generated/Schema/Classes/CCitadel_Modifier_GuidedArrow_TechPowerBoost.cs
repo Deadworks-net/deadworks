@@ -12,5 +12,8 @@ public static partial class Schema {
 		internal CCitadel_Modifier_GuidedArrow_TechPowerBoost() { }
 		static CCitadel_Modifier_GuidedArrow_TechPowerBoost ISchemaClass<CCitadel_Modifier_GuidedArrow_TechPowerBoost>.New() => new();
 		static string ISchemaClass<CCitadel_Modifier_GuidedArrow_TechPowerBoost>.NativeName => "CCitadel_Modifier_GuidedArrow_TechPowerBoost";
+
+		/// <summary>The data entry this was created from, as <see cref="CCitadel_Modifier_GuidedArrow_TechPowerBoostVData"/>, or null if it has none.</summary>
+		public new CCitadel_Modifier_GuidedArrow_TechPowerBoostVData? VData => ModifierData<CCitadel_Modifier_GuidedArrow_TechPowerBoostVData>();
 	}
 }

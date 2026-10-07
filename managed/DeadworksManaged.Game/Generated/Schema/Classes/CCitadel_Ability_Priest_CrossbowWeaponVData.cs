@@ -22,8 +22,8 @@ public static partial class Schema {
 		public string m_CrossbowMuzzleFlashParticle => GetBufferString(__m_CrossbowMuzzleFlashParticle);
 
 		private static readonly SchemaField __m_ExecuteModifier = new("CCitadel_Ability_Priest_CrossbowWeaponVData", "m_ExecuteModifier");
-		/// <summary><c>CEmbeddedSubclass&lt;CCitadelModifier&gt;</c>. No typed mapping yet: read it through its address.</summary>
-		public RawField m_ExecuteModifier => Raw(__m_ExecuteModifier, "CEmbeddedSubclass<CCitadelModifier>");
+		/// <summary><c>CEmbeddedSubclass&lt;CCitadelModifier&gt;</c>.</summary>
+		public CCitadelModifierVData? m_ExecuteModifier => EmbeddedSubclass<CCitadelModifierVData>(__m_ExecuteModifier);
 
 		private static readonly SchemaField __m_LaserSightParticle = new("CCitadel_Ability_Priest_CrossbowWeaponVData", "m_LaserSightParticle");
 		/// <summary><c>CResourceNameTyped&lt;CWeakHandle&lt;InfoForResourceTypeIParticleSystemDefinition&gt;&gt;</c>.</summary>

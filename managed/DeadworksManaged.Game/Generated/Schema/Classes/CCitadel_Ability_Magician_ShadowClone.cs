@@ -12,5 +12,8 @@ public static partial class Schema {
 		internal CCitadel_Ability_Magician_ShadowClone() { }
 		static CCitadel_Ability_Magician_ShadowClone ISchemaClass<CCitadel_Ability_Magician_ShadowClone>.New() => new();
 		static string ISchemaClass<CCitadel_Ability_Magician_ShadowClone>.NativeName => "CCitadel_Ability_Magician_ShadowClone";
+
+		/// <summary>The data entry this was created from, as <see cref="CCitadel_Ability_Magician_ShadowCloneVData"/>, or null if it has none.</summary>
+		public new CCitadel_Ability_Magician_ShadowCloneVData? VData => SubclassVData<CCitadel_Ability_Magician_ShadowCloneVData>();
 	}
 }

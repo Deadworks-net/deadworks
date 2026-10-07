@@ -12,5 +12,8 @@ public static partial class Schema {
 		internal CCitadel_Item_SelfBuffModifier() { }
 		static CCitadel_Item_SelfBuffModifier ISchemaClass<CCitadel_Item_SelfBuffModifier>.New() => new();
 		static string ISchemaClass<CCitadel_Item_SelfBuffModifier>.NativeName => "CCitadel_Item_SelfBuffModifier";
+
+		/// <summary>The data entry this was created from, as <see cref="CCitadel_Item_SelfBuffModifierVData"/>, or null if it has none.</summary>
+		public new CCitadel_Item_SelfBuffModifierVData? VData => SubclassVData<CCitadel_Item_SelfBuffModifierVData>();
 	}
 }

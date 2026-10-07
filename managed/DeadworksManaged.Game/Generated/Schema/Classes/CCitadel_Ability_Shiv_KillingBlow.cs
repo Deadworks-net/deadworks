@@ -76,5 +76,8 @@ public static partial class Schema {
 		private static readonly SchemaField __m_vStartPosition = new("CCitadel_Ability_Shiv_KillingBlow", "m_vStartPosition");
 		/// <summary><c>VectorWS</c>.</summary>
 		public Vector3 m_vStartPosition { get => Get<Vector3>(__m_vStartPosition); set => Set(__m_vStartPosition, value); }
+
+		/// <summary>The data entry this was created from, as <see cref="CCitadel_Ability_Shiv_KillingBlowVData"/>, or null if it has none.</summary>
+		public new CCitadel_Ability_Shiv_KillingBlowVData? VData => SubclassVData<CCitadel_Ability_Shiv_KillingBlowVData>();
 	}
 }

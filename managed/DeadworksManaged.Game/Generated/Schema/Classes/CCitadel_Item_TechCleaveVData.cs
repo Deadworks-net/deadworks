@@ -14,8 +14,8 @@ public static partial class Schema {
 		static string ISchemaClass<CCitadel_Item_TechCleaveVData>.NativeName => "CCitadel_Item_TechCleaveVData";
 
 		private static readonly SchemaField __m_TechCleaveModifier = new("CCitadel_Item_TechCleaveVData", "m_TechCleaveModifier");
-		/// <summary><c>CEmbeddedSubclass&lt;CCitadelModifier&gt;</c>. No typed mapping yet: read it through its address.</summary>
-		public RawField m_TechCleaveModifier => Raw(__m_TechCleaveModifier, "CEmbeddedSubclass<CCitadelModifier>");
+		/// <summary><c>CEmbeddedSubclass&lt;CCitadelModifier&gt;</c>.</summary>
+		public CCitadelModifierVData? m_TechCleaveModifier => EmbeddedSubclass<CCitadelModifierVData>(__m_TechCleaveModifier);
 
 		private static readonly SchemaField __m_sCleaveProcSound = new("CCitadel_Item_TechCleaveVData", "m_sCleaveProcSound");
 		/// <summary><c>CSoundEventName</c>.</summary>

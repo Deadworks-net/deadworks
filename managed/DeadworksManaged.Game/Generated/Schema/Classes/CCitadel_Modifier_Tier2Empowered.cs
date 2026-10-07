@@ -24,5 +24,8 @@ public static partial class Schema {
 		private static readonly SchemaField __m_nStartingHealth = new("CCitadel_Modifier_Tier2Empowered", "m_nStartingHealth");
 		/// <summary><c>int32</c>.</summary>
 		public int m_nStartingHealth { get => Get<int>(__m_nStartingHealth); set => Set(__m_nStartingHealth, value); }
+
+		/// <summary>The data entry this was created from, as <see cref="CCitadel_Modifier_Tier2EmpoweredVData"/>, or null if it has none.</summary>
+		public new CCitadel_Modifier_Tier2EmpoweredVData? VData => ModifierData<CCitadel_Modifier_Tier2EmpoweredVData>();
 	}
 }

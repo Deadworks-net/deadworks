@@ -30,8 +30,8 @@ public static partial class Schema {
 		public string m_DashJumpParticle => GetBufferString(__m_DashJumpParticle);
 
 		private static readonly SchemaField __m_DebuffModifier = new("CAbilityJumpVData", "m_DebuffModifier");
-		/// <summary><c>CEmbeddedSubclass&lt;CCitadelModifier&gt;</c>. No typed mapping yet: read it through its address.</summary>
-		public RawField m_DebuffModifier => Raw(__m_DebuffModifier, "CEmbeddedSubclass<CCitadelModifier>");
+		/// <summary><c>CEmbeddedSubclass&lt;CCitadelModifier&gt;</c>.</summary>
+		public CCitadelModifierVData? m_DebuffModifier => EmbeddedSubclass<CCitadelModifierVData>(__m_DebuffModifier);
 
 		private static readonly SchemaField __m_GroundJumpExecutedSound = new("CAbilityJumpVData", "m_GroundJumpExecutedSound");
 		/// <summary><c>CSoundEventName</c>.</summary>

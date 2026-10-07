@@ -12,5 +12,8 @@ public static partial class Schema {
 		internal CPrecipitation() { }
 		static CPrecipitation ISchemaClass<CPrecipitation>.New() => new();
 		static string ISchemaClass<CPrecipitation>.NativeName => "CPrecipitation";
+
+		/// <summary>The data entry this was created from, as <see cref="CPrecipitationVData"/>, or null if it has none.</summary>
+		public CPrecipitationVData? VData => SubclassVData<CPrecipitationVData>();
 	}
 }

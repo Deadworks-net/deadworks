@@ -16,5 +16,8 @@ public static partial class Schema {
 		private static readonly SchemaField __m_flSharedDamage = new("CCitadel_Modifier_ShakedownPulse", "m_flSharedDamage");
 		/// <summary><c>float32</c>.</summary>
 		public float m_flSharedDamage { get => Get<float>(__m_flSharedDamage); set => Set(__m_flSharedDamage, value); }
+
+		/// <summary>The data entry this was created from, as <see cref="CCitadel_Modifier_ShakedownPulseVData"/>, or null if it has none.</summary>
+		public new CCitadel_Modifier_ShakedownPulseVData? VData => ModifierData<CCitadel_Modifier_ShakedownPulseVData>();
 	}
 }

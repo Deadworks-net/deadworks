@@ -12,5 +12,8 @@ public static partial class Schema {
 		internal CCitadel_Modifier_Necro_WallDebuff() { }
 		static CCitadel_Modifier_Necro_WallDebuff ISchemaClass<CCitadel_Modifier_Necro_WallDebuff>.New() => new();
 		static string ISchemaClass<CCitadel_Modifier_Necro_WallDebuff>.NativeName => "CCitadel_Modifier_Necro_WallDebuff";
+
+		/// <summary>The data entry this was created from, as <see cref="CCitadel_Modifier_Necro_WallDebuffVData"/>, or null if it has none.</summary>
+		public new CCitadel_Modifier_Necro_WallDebuffVData? VData => ModifierData<CCitadel_Modifier_Necro_WallDebuffVData>();
 	}
 }

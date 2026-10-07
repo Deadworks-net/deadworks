@@ -24,5 +24,8 @@ public static partial class Schema {
 		private static readonly SchemaField __m_flApproachZ = new("CCitadel_Item_ProjectileTest06", "m_flApproachZ");
 		/// <summary><c>float32</c>.</summary>
 		public float m_flApproachZ { get => Get<float>(__m_flApproachZ); set => Set(__m_flApproachZ, value); }
+
+		/// <summary>The data entry this was created from, as <see cref="CCitadel_Item_ProjectileTest06VData"/>, or null if it has none.</summary>
+		public new CCitadel_Item_ProjectileTest06VData? VData => SubclassVData<CCitadel_Item_ProjectileTest06VData>();
 	}
 }

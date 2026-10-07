@@ -14,7 +14,7 @@ public static partial class Schema {
 		static string ISchemaClass<CCitadel_Pickup_Modifier_VData>.NativeName => "CCitadel_Pickup_Modifier_VData";
 
 		private static readonly SchemaField __m_sModifer = new("CCitadel_Pickup_Modifier_VData", "m_sModifer");
-		/// <summary><c>CEmbeddedSubclass&lt;CCitadelModifier&gt;</c>. No typed mapping yet: read it through its address.</summary>
-		public RawField m_sModifer => Raw(__m_sModifer, "CEmbeddedSubclass<CCitadelModifier>");
+		/// <summary><c>CEmbeddedSubclass&lt;CCitadelModifier&gt;</c>.</summary>
+		public CCitadelModifierVData? m_sModifer => EmbeddedSubclass<CCitadelModifierVData>(__m_sModifer);
 	}
 }

@@ -14,11 +14,11 @@ public static partial class Schema {
 		static string ISchemaClass<CCitadel_Modifier_ArcticBlastAOE_VData>.NativeName => "CCitadel_Modifier_ArcticBlastAOE_VData";
 
 		private static readonly SchemaField __m_FreezeModifier = new("CCitadel_Modifier_ArcticBlastAOE_VData", "m_FreezeModifier");
-		/// <summary><c>CEmbeddedSubclass&lt;CCitadelModifier&gt;</c>. No typed mapping yet: read it through its address.</summary>
-		public RawField m_FreezeModifier => Raw(__m_FreezeModifier, "CEmbeddedSubclass<CCitadelModifier>");
+		/// <summary><c>CEmbeddedSubclass&lt;CCitadelModifier&gt;</c>.</summary>
+		public CCitadelModifierVData? m_FreezeModifier => EmbeddedSubclass<CCitadelModifierVData>(__m_FreezeModifier);
 
 		private static readonly SchemaField __m_SlowModifier = new("CCitadel_Modifier_ArcticBlastAOE_VData", "m_SlowModifier");
-		/// <summary><c>CEmbeddedSubclass&lt;CCitadelModifier&gt;</c>. No typed mapping yet: read it through its address.</summary>
-		public RawField m_SlowModifier => Raw(__m_SlowModifier, "CEmbeddedSubclass<CCitadelModifier>");
+		/// <summary><c>CEmbeddedSubclass&lt;CCitadelModifier&gt;</c>.</summary>
+		public CCitadelModifierVData? m_SlowModifier => EmbeddedSubclass<CCitadelModifierVData>(__m_SlowModifier);
 	}
 }

@@ -16,5 +16,8 @@ public static partial class Schema {
 		private static readonly SchemaField __m_tActiveEndTime = new("CCitadel_Werewolf_UnloadGun2", "m_tActiveEndTime");
 		/// <summary><c>GameTime_t</c>.</summary>
 		public float m_tActiveEndTime { get => Get<float>(__m_tActiveEndTime); set => Set(__m_tActiveEndTime, value); }
+
+		/// <summary>The data entry this was created from, as <see cref="CCitadel_Werewolf_UnloadGun2VData"/>, or null if it has none.</summary>
+		public new CCitadel_Werewolf_UnloadGun2VData? VData => SubclassVData<CCitadel_Werewolf_UnloadGun2VData>();
 	}
 }

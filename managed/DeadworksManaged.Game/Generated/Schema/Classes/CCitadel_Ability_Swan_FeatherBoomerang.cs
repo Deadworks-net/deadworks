@@ -16,5 +16,8 @@ public static partial class Schema {
 		private static readonly SchemaField __m_vecHitTargetList = new("CCitadel_Ability_Swan_FeatherBoomerang", "m_vecHitTargetList");
 		/// <summary><c>CUtlVector&lt;CHandle&lt;CBaseEntity&gt;&gt;</c>.</summary>
 		public SchemaHandleList<CBaseEntity> m_vecHitTargetList => new(this, __m_vecHitTargetList, -1);
+
+		/// <summary>The data entry this was created from, as <see cref="CCitadel_Ability_Swan_FeatherBoomerangVData"/>, or null if it has none.</summary>
+		public new CCitadel_Ability_Swan_FeatherBoomerangVData? VData => SubclassVData<CCitadel_Ability_Swan_FeatherBoomerangVData>();
 	}
 }

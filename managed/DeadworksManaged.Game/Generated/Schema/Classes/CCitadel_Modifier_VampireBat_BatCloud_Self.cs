@@ -12,5 +12,8 @@ public static partial class Schema {
 		internal CCitadel_Modifier_VampireBat_BatCloud_Self() { }
 		static CCitadel_Modifier_VampireBat_BatCloud_Self ISchemaClass<CCitadel_Modifier_VampireBat_BatCloud_Self>.New() => new();
 		static string ISchemaClass<CCitadel_Modifier_VampireBat_BatCloud_Self>.NativeName => "CCitadel_Modifier_VampireBat_BatCloud_Self";
+
+		/// <summary>The data entry this was created from, as <see cref="CCitadel_Modifier_VampireBat_BatCloud_SelfVData"/>, or null if it has none.</summary>
+		public new CCitadel_Modifier_VampireBat_BatCloud_SelfVData? VData => ModifierData<CCitadel_Modifier_VampireBat_BatCloud_SelfVData>();
 	}
 }

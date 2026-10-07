@@ -12,5 +12,8 @@ public static partial class Schema {
 		internal CCitadel_ArmorUpgrade_DebuffReducer() { }
 		static CCitadel_ArmorUpgrade_DebuffReducer ISchemaClass<CCitadel_ArmorUpgrade_DebuffReducer>.New() => new();
 		static string ISchemaClass<CCitadel_ArmorUpgrade_DebuffReducer>.NativeName => "CCitadel_ArmorUpgrade_DebuffReducer";
+
+		/// <summary>The data entry this was created from, as <see cref="CCitadel_ArmorUpgrade_DebuffReducerVData"/>, or null if it has none.</summary>
+		public new CCitadel_ArmorUpgrade_DebuffReducerVData? VData => SubclassVData<CCitadel_ArmorUpgrade_DebuffReducerVData>();
 	}
 }

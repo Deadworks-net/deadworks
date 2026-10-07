@@ -18,12 +18,12 @@ public static partial class Schema {
 		public string m_AutoDestructParticle => GetBufferString(__m_AutoDestructParticle);
 
 		private static readonly SchemaField __m_DeployProgressModifier = new("CNPC_ShieldedSentryVData", "m_DeployProgressModifier");
-		/// <summary><c>CEmbeddedSubclass&lt;CCitadelModifier&gt;</c>. No typed mapping yet: read it through its address.</summary>
-		public RawField m_DeployProgressModifier => Raw(__m_DeployProgressModifier, "CEmbeddedSubclass<CCitadelModifier>");
+		/// <summary><c>CEmbeddedSubclass&lt;CCitadelModifier&gt;</c>.</summary>
+		public CCitadelModifierVData? m_DeployProgressModifier => EmbeddedSubclass<CCitadelModifierVData>(__m_DeployProgressModifier);
 
 		private static readonly SchemaField __m_IntrinsicModifier = new("CNPC_ShieldedSentryVData", "m_IntrinsicModifier");
-		/// <summary><c>CEmbeddedSubclass&lt;CCitadelModifier&gt;</c>. No typed mapping yet: read it through its address.</summary>
-		public RawField m_IntrinsicModifier => Raw(__m_IntrinsicModifier, "CEmbeddedSubclass<CCitadelModifier>");
+		/// <summary><c>CEmbeddedSubclass&lt;CCitadelModifier&gt;</c>.</summary>
+		public CCitadelModifierVData? m_IntrinsicModifier => EmbeddedSubclass<CCitadelModifierVData>(__m_IntrinsicModifier);
 
 		private static readonly SchemaField __m_KillExplosionParticle = new("CNPC_ShieldedSentryVData", "m_KillExplosionParticle");
 		/// <summary><c>CResourceNameTyped&lt;CWeakHandle&lt;InfoForResourceTypeIParticleSystemDefinition&gt;&gt;</c>.</summary>
@@ -34,8 +34,8 @@ public static partial class Schema {
 		public string m_LaserSightParticle => GetBufferString(__m_LaserSightParticle);
 
 		private static readonly SchemaField __m_NearDeathModifier = new("CNPC_ShieldedSentryVData", "m_NearDeathModifier");
-		/// <summary><c>CEmbeddedSubclass&lt;CCitadelModifier&gt;</c>. No typed mapping yet: read it through its address.</summary>
-		public RawField m_NearDeathModifier => Raw(__m_NearDeathModifier, "CEmbeddedSubclass<CCitadelModifier>");
+		/// <summary><c>CEmbeddedSubclass&lt;CCitadelModifier&gt;</c>.</summary>
+		public CCitadelModifierVData? m_NearDeathModifier => EmbeddedSubclass<CCitadelModifierVData>(__m_NearDeathModifier);
 
 		private static readonly SchemaField __m_flAttackThinkTime = new("CNPC_ShieldedSentryVData", "m_flAttackThinkTime");
 		/// <summary><c>float32</c>.</summary>

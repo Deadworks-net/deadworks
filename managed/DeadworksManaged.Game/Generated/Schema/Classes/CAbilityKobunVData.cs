@@ -14,8 +14,8 @@ public static partial class Schema {
 		static string ISchemaClass<CAbilityKobunVData>.NativeName => "CAbilityKobunVData";
 
 		private static readonly SchemaField __m_CloneModifier = new("CAbilityKobunVData", "m_CloneModifier");
-		/// <summary><c>CEmbeddedSubclass&lt;CCitadelModifier&gt;</c>. No typed mapping yet: read it through its address.</summary>
-		public RawField m_CloneModifier => Raw(__m_CloneModifier, "CEmbeddedSubclass<CCitadelModifier>");
+		/// <summary><c>CEmbeddedSubclass&lt;CCitadelModifier&gt;</c>.</summary>
+		public CCitadelModifierVData? m_CloneModifier => EmbeddedSubclass<CCitadelModifierVData>(__m_CloneModifier);
 
 		private static readonly SchemaField __m_vSummonFollowOffset = new("CAbilityKobunVData", "m_vSummonFollowOffset");
 		/// <summary><c>Vector</c>.</summary>

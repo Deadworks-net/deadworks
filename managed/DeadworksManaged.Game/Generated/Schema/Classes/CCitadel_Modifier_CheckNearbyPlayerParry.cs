@@ -12,5 +12,8 @@ public static partial class Schema {
 		internal CCitadel_Modifier_CheckNearbyPlayerParry() { }
 		static CCitadel_Modifier_CheckNearbyPlayerParry ISchemaClass<CCitadel_Modifier_CheckNearbyPlayerParry>.New() => new();
 		static string ISchemaClass<CCitadel_Modifier_CheckNearbyPlayerParry>.NativeName => "CCitadel_Modifier_CheckNearbyPlayerParry";
+
+		/// <summary>The data entry this was created from, as <see cref="CCitadel_Modifier_CheckNearbyPlayerParryVData"/>, or null if it has none.</summary>
+		public new CCitadel_Modifier_CheckNearbyPlayerParryVData? VData => ModifierData<CCitadel_Modifier_CheckNearbyPlayerParryVData>();
 	}
 }

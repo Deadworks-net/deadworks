@@ -14,12 +14,12 @@ public static partial class Schema {
 		static string ISchemaClass<CAbility_Fencer_Ultimate_VData>.NativeName => "CAbility_Fencer_Ultimate_VData";
 
 		private static readonly SchemaField __m_CasterArrivalModifier = new("CAbility_Fencer_Ultimate_VData", "m_CasterArrivalModifier");
-		/// <summary><c>CEmbeddedSubclass&lt;CCitadelModifier&gt;</c>. No typed mapping yet: read it through its address.</summary>
-		public RawField m_CasterArrivalModifier => Raw(__m_CasterArrivalModifier, "CEmbeddedSubclass<CCitadelModifier>");
+		/// <summary><c>CEmbeddedSubclass&lt;CCitadelModifier&gt;</c>.</summary>
+		public CCitadelModifierVData? m_CasterArrivalModifier => EmbeddedSubclass<CCitadelModifierVData>(__m_CasterArrivalModifier);
 
 		private static readonly SchemaField __m_CasterModifier = new("CAbility_Fencer_Ultimate_VData", "m_CasterModifier");
-		/// <summary><c>CEmbeddedSubclass&lt;CCitadelModifier&gt;</c>. No typed mapping yet: read it through its address.</summary>
-		public RawField m_CasterModifier => Raw(__m_CasterModifier, "CEmbeddedSubclass<CCitadelModifier>");
+		/// <summary><c>CEmbeddedSubclass&lt;CCitadelModifier&gt;</c>.</summary>
+		public CCitadelModifierVData? m_CasterModifier => EmbeddedSubclass<CCitadelModifierVData>(__m_CasterModifier);
 
 		private static readonly SchemaField __m_DashImpactEffect = new("CAbility_Fencer_Ultimate_VData", "m_DashImpactEffect");
 		/// <summary><c>CResourceNameTyped&lt;CWeakHandle&lt;InfoForResourceTypeIParticleSystemDefinition&gt;&gt;</c>.</summary>
@@ -38,12 +38,12 @@ public static partial class Schema {
 		public string m_DirPreviewEffect => GetBufferString(__m_DirPreviewEffect);
 
 		private static readonly SchemaField __m_TargetModifier = new("CAbility_Fencer_Ultimate_VData", "m_TargetModifier");
-		/// <summary><c>CEmbeddedSubclass&lt;CCitadelModifier&gt;</c>. No typed mapping yet: read it through its address.</summary>
-		public RawField m_TargetModifier => Raw(__m_TargetModifier, "CEmbeddedSubclass<CCitadelModifier>");
+		/// <summary><c>CEmbeddedSubclass&lt;CCitadelModifier&gt;</c>.</summary>
+		public CCitadelModifierVData? m_TargetModifier => EmbeddedSubclass<CCitadelModifierVData>(__m_TargetModifier);
 
 		private static readonly SchemaField __m_TargetNonHeroModifier = new("CAbility_Fencer_Ultimate_VData", "m_TargetNonHeroModifier");
-		/// <summary><c>CEmbeddedSubclass&lt;CCitadelModifier&gt;</c>. No typed mapping yet: read it through its address.</summary>
-		public RawField m_TargetNonHeroModifier => Raw(__m_TargetNonHeroModifier, "CEmbeddedSubclass<CCitadelModifier>");
+		/// <summary><c>CEmbeddedSubclass&lt;CCitadelModifier&gt;</c>.</summary>
+		public CCitadelModifierVData? m_TargetNonHeroModifier => EmbeddedSubclass<CCitadelModifierVData>(__m_TargetNonHeroModifier);
 
 		private static readonly SchemaField __m_TargetPreviewParticle = new("CAbility_Fencer_Ultimate_VData", "m_TargetPreviewParticle");
 		/// <summary><c>CResourceNameTyped&lt;CWeakHandle&lt;InfoForResourceTypeIParticleSystemDefinition&gt;&gt;</c>.</summary>

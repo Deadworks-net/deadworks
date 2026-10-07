@@ -14,7 +14,7 @@ public static partial class Schema {
 		static string ISchemaClass<CCitadel_Modifier_SleepDagger_Drowsy_VData>.NativeName => "CCitadel_Modifier_SleepDagger_Drowsy_VData";
 
 		private static readonly SchemaField __m_SleepModifier = new("CCitadel_Modifier_SleepDagger_Drowsy_VData", "m_SleepModifier");
-		/// <summary><c>CEmbeddedSubclass&lt;CCitadelModifier&gt;</c>. No typed mapping yet: read it through its address.</summary>
-		public RawField m_SleepModifier => Raw(__m_SleepModifier, "CEmbeddedSubclass<CCitadelModifier>");
+		/// <summary><c>CEmbeddedSubclass&lt;CCitadelModifier&gt;</c>.</summary>
+		public CCitadelModifierVData? m_SleepModifier => EmbeddedSubclass<CCitadelModifierVData>(__m_SleepModifier);
 	}
 }

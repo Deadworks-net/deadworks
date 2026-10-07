@@ -14,16 +14,16 @@ public static partial class Schema {
 		static string ISchemaClass<CCitadel_Ability_Werewolf_NetShotVData>.NativeName => "CCitadel_Ability_Werewolf_NetShotVData";
 
 		private static readonly SchemaField __m_BonusDebuffModifier = new("CCitadel_Ability_Werewolf_NetShotVData", "m_BonusDebuffModifier");
-		/// <summary><c>CEmbeddedSubclass&lt;CCitadelModifier&gt;</c>. No typed mapping yet: read it through its address.</summary>
-		public RawField m_BonusDebuffModifier => Raw(__m_BonusDebuffModifier, "CEmbeddedSubclass<CCitadelModifier>");
+		/// <summary><c>CEmbeddedSubclass&lt;CCitadelModifier&gt;</c>.</summary>
+		public CCitadelModifierVData? m_BonusDebuffModifier => EmbeddedSubclass<CCitadelModifierVData>(__m_BonusDebuffModifier);
 
 		private static readonly SchemaField __m_DebuffModifier = new("CCitadel_Ability_Werewolf_NetShotVData", "m_DebuffModifier");
-		/// <summary><c>CEmbeddedSubclass&lt;CCitadelModifier&gt;</c>. No typed mapping yet: read it through its address.</summary>
-		public RawField m_DebuffModifier => Raw(__m_DebuffModifier, "CEmbeddedSubclass<CCitadelModifier>");
+		/// <summary><c>CEmbeddedSubclass&lt;CCitadelModifier&gt;</c>.</summary>
+		public CCitadelModifierVData? m_DebuffModifier => EmbeddedSubclass<CCitadelModifierVData>(__m_DebuffModifier);
 
 		private static readonly SchemaField __m_RootModifier = new("CCitadel_Ability_Werewolf_NetShotVData", "m_RootModifier");
-		/// <summary><c>CEmbeddedSubclass&lt;CCitadelModifier&gt;</c>. No typed mapping yet: read it through its address.</summary>
-		public RawField m_RootModifier => Raw(__m_RootModifier, "CEmbeddedSubclass<CCitadelModifier>");
+		/// <summary><c>CEmbeddedSubclass&lt;CCitadelModifier&gt;</c>.</summary>
+		public CCitadelModifierVData? m_RootModifier => EmbeddedSubclass<CCitadelModifierVData>(__m_RootModifier);
 
 		private static readonly SchemaField __m_ShootParticle = new("CCitadel_Ability_Werewolf_NetShotVData", "m_ShootParticle");
 		/// <summary><c>CResourceNameTyped&lt;CWeakHandle&lt;InfoForResourceTypeIParticleSystemDefinition&gt;&gt;</c>.</summary>

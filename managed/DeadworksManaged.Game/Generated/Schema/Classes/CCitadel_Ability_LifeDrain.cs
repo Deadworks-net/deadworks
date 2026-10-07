@@ -28,5 +28,8 @@ public static partial class Schema {
 		private static readonly SchemaField __m_vecModifiers = new("CCitadel_Ability_LifeDrain", "m_vecModifiers");
 		/// <summary><c>CUtlVector&lt;CModifierHandleTyped&lt;CCitadelModifier&gt;&gt;</c>. No typed mapping yet: read it through its address.</summary>
 		public RawField m_vecModifiers => Raw(__m_vecModifiers, "CUtlVector<CModifierHandleTyped<CCitadelModifier>>");
+
+		/// <summary>The data entry this was created from, as <see cref="CCitadel_Ability_LifeDrainVData"/>, or null if it has none.</summary>
+		public new CCitadel_Ability_LifeDrainVData? VData => SubclassVData<CCitadel_Ability_LifeDrainVData>();
 	}
 }

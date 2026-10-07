@@ -16,5 +16,8 @@ public static partial class Schema {
 		private static readonly SchemaField __m_hProjectile = new("CCitadel_Modifier_LightningBall", "m_hProjectile");
 		/// <summary><c>CHandle&lt;CBaseEntity&gt;</c>.</summary>
 		public CBaseEntity? m_hProjectile { get => GetHandle<CBaseEntity>(__m_hProjectile); set => SetHandle(__m_hProjectile, value); }
+
+		/// <summary>The data entry this was created from, as <see cref="CCitadel_Modifier_LightningBallVData"/>, or null if it has none.</summary>
+		public new CCitadel_Modifier_LightningBallVData? VData => ModifierData<CCitadel_Modifier_LightningBallVData>();
 	}
 }

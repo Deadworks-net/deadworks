@@ -12,5 +12,8 @@ public static partial class Schema {
 		internal CCitadel_Modifier_PatronsBlessingProcWatcher() { }
 		static CCitadel_Modifier_PatronsBlessingProcWatcher ISchemaClass<CCitadel_Modifier_PatronsBlessingProcWatcher>.New() => new();
 		static string ISchemaClass<CCitadel_Modifier_PatronsBlessingProcWatcher>.NativeName => "CCitadel_Modifier_PatronsBlessingProcWatcher";
+
+		/// <summary>The data entry this was created from, as <see cref="CCitadel_Modifier_PatronsBlessingProcWatcherVData"/>, or null if it has none.</summary>
+		public new CCitadel_Modifier_PatronsBlessingProcWatcherVData? VData => ModifierData<CCitadel_Modifier_PatronsBlessingProcWatcherVData>();
 	}
 }

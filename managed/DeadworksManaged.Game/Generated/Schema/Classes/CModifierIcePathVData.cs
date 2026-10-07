@@ -18,20 +18,20 @@ public static partial class Schema {
 		public string m_BodyModel => GetBufferString(__m_BodyModel);
 
 		private static readonly SchemaField __m_BonusSpiritLingerModifier = new("CModifierIcePathVData", "m_BonusSpiritLingerModifier");
-		/// <summary><c>CEmbeddedSubclass&lt;CCitadelModifier&gt;</c>. No typed mapping yet: read it through its address.</summary>
-		public RawField m_BonusSpiritLingerModifier => Raw(__m_BonusSpiritLingerModifier, "CEmbeddedSubclass<CCitadelModifier>");
+		/// <summary><c>CEmbeddedSubclass&lt;CCitadelModifier&gt;</c>.</summary>
+		public CCitadelModifierVData? m_BonusSpiritLingerModifier => EmbeddedSubclass<CCitadelModifierVData>(__m_BonusSpiritLingerModifier);
 
 		private static readonly SchemaField __m_ExplodeModifier = new("CModifierIcePathVData", "m_ExplodeModifier");
-		/// <summary><c>CEmbeddedSubclass&lt;CCitadelModifier&gt;</c>. No typed mapping yet: read it through its address.</summary>
-		public RawField m_ExplodeModifier => Raw(__m_ExplodeModifier, "CEmbeddedSubclass<CCitadelModifier>");
+		/// <summary><c>CEmbeddedSubclass&lt;CCitadelModifier&gt;</c>.</summary>
+		public CCitadelModifierVData? m_ExplodeModifier => EmbeddedSubclass<CCitadelModifierVData>(__m_ExplodeModifier);
 
 		private static readonly SchemaField __m_FloatingParticle = new("CModifierIcePathVData", "m_FloatingParticle");
 		/// <summary><c>CResourceNameTyped&lt;CWeakHandle&lt;InfoForResourceTypeIParticleSystemDefinition&gt;&gt;</c>.</summary>
 		public string m_FloatingParticle => GetBufferString(__m_FloatingParticle);
 
 		private static readonly SchemaField __m_FriendlyAuraModifier = new("CModifierIcePathVData", "m_FriendlyAuraModifier");
-		/// <summary><c>CEmbeddedSubclass&lt;CCitadelModifierAura&gt;</c>. No typed mapping yet: read it through its address.</summary>
-		public RawField m_FriendlyAuraModifier => Raw(__m_FriendlyAuraModifier, "CEmbeddedSubclass<CCitadelModifierAura>");
+		/// <summary><c>CEmbeddedSubclass&lt;CCitadelModifierAura&gt;</c>.</summary>
+		public CCitadelModifierAuraVData? m_FriendlyAuraModifier => EmbeddedSubclass<CCitadelModifierAuraVData>(__m_FriendlyAuraModifier);
 
 		private static readonly SchemaField __m_FrontModel = new("CModifierIcePathVData", "m_FrontModel");
 		/// <summary><c>CResourceNameTyped&lt;CWeakHandle&lt;InfoForResourceTypeCModel&gt;&gt;</c>.</summary>

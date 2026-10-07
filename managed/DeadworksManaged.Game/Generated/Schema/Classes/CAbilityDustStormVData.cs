@@ -14,11 +14,11 @@ public static partial class Schema {
 		static string ISchemaClass<CAbilityDustStormVData>.NativeName => "CAbilityDustStormVData";
 
 		private static readonly SchemaField __m_DustStormAura = new("CAbilityDustStormVData", "m_DustStormAura");
-		/// <summary><c>CEmbeddedSubclass&lt;CCitadelModifier&gt;</c>. No typed mapping yet: read it through its address.</summary>
-		public RawField m_DustStormAura => Raw(__m_DustStormAura, "CEmbeddedSubclass<CCitadelModifier>");
+		/// <summary><c>CEmbeddedSubclass&lt;CCitadelModifier&gt;</c>.</summary>
+		public CCitadelModifierVData? m_DustStormAura => EmbeddedSubclass<CCitadelModifierVData>(__m_DustStormAura);
 
 		private static readonly SchemaField __m_GrenadeTrailModifier = new("CAbilityDustStormVData", "m_GrenadeTrailModifier");
-		/// <summary><c>CEmbeddedSubclass&lt;CCitadelModifier&gt;</c>. No typed mapping yet: read it through its address.</summary>
-		public RawField m_GrenadeTrailModifier => Raw(__m_GrenadeTrailModifier, "CEmbeddedSubclass<CCitadelModifier>");
+		/// <summary><c>CEmbeddedSubclass&lt;CCitadelModifier&gt;</c>.</summary>
+		public CCitadelModifierVData? m_GrenadeTrailModifier => EmbeddedSubclass<CCitadelModifierVData>(__m_GrenadeTrailModifier);
 	}
 }

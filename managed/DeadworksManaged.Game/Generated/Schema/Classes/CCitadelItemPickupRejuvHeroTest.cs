@@ -12,5 +12,8 @@ public static partial class Schema {
 		internal CCitadelItemPickupRejuvHeroTest() { }
 		static CCitadelItemPickupRejuvHeroTest ISchemaClass<CCitadelItemPickupRejuvHeroTest>.New() => new();
 		static string ISchemaClass<CCitadelItemPickupRejuvHeroTest>.NativeName => "CCitadelItemPickupRejuvHeroTest";
+
+		/// <summary>The data entry this was created from, as <see cref="CCitadelItemPickupRejuvHeroTestVData"/>, or null if it has none.</summary>
+		public new CCitadelItemPickupRejuvHeroTestVData? VData => SubclassVData<CCitadelItemPickupRejuvHeroTestVData>();
 	}
 }

@@ -26,16 +26,16 @@ public static partial class Schema {
 		public AbilityTooltipDetails_t m_AbilityTooltipDetails => Embedded<AbilityTooltipDetails_t>(__m_AbilityTooltipDetails);
 
 		private static readonly SchemaField __m_AutoCastDelayModifier = new("CitadelAbilityVData", "m_AutoCastDelayModifier");
-		/// <summary><c>CEmbeddedSubclass&lt;CBaseModifier&gt;</c>. No typed mapping yet: read it through its address.</summary>
-		public RawField m_AutoCastDelayModifier => Raw(__m_AutoCastDelayModifier, "CEmbeddedSubclass<CBaseModifier>");
+		/// <summary><c>CEmbeddedSubclass&lt;CBaseModifier&gt;</c>.</summary>
+		public CModifierVData? m_AutoCastDelayModifier => EmbeddedSubclass<CModifierVData>(__m_AutoCastDelayModifier);
 
 		private static readonly SchemaField __m_AutoChannelModifier = new("CitadelAbilityVData", "m_AutoChannelModifier");
-		/// <summary><c>CEmbeddedSubclass&lt;CBaseModifier&gt;</c>. No typed mapping yet: read it through its address.</summary>
-		public RawField m_AutoChannelModifier => Raw(__m_AutoChannelModifier, "CEmbeddedSubclass<CBaseModifier>");
+		/// <summary><c>CEmbeddedSubclass&lt;CBaseModifier&gt;</c>.</summary>
+		public CModifierVData? m_AutoChannelModifier => EmbeddedSubclass<CModifierVData>(__m_AutoChannelModifier);
 
 		private static readonly SchemaField __m_AutoIntrinsicModifiers = new("CitadelAbilityVData", "m_AutoIntrinsicModifiers");
-		/// <summary><c>CUtlVector&lt;CEmbeddedSubclass&lt;CBaseModifier&gt;&gt;</c>. No typed mapping yet: read it through its address.</summary>
-		public RawField m_AutoIntrinsicModifiers => Raw(__m_AutoIntrinsicModifiers, "CUtlVector<CEmbeddedSubclass<CBaseModifier>>");
+		/// <summary><c>CUtlVector&lt;CEmbeddedSubclass&lt;CBaseModifier&gt;&gt;</c>.</summary>
+		public SchemaPointerList<CModifierVData> m_AutoIntrinsicModifiers => new(this, __m_AutoIntrinsicModifiers, -1, 16, 8);
 
 		private static readonly SchemaField __m_ConePreviewParticleOverride = new("CitadelAbilityVData", "m_ConePreviewParticleOverride");
 		/// <summary><c>CResourceNameTyped&lt;CWeakHandle&lt;InfoForResourceTypeIParticleSystemDefinition&gt;&gt;</c>. The preview used for cone targeting. CP0 = effect position, CP1 = cone left, CP2 = cone right, CP3 = cone center, CP15 = color. Defaults if unset.</summary>
@@ -262,8 +262,8 @@ public static partial class Schema {
 		public ulong m_iUpdateTime { get => Get<ulong>(__m_iUpdateTime); set => Set(__m_iUpdateTime, value); }
 
 		private static readonly SchemaField __m_mapAbilityProperties = new("CitadelAbilityVData", "m_mapAbilityProperties");
-		/// <summary><c>CUtlDict&lt;CitadelAbilityProperty_t&gt;</c>. No typed mapping yet: read it through its address.</summary>
-		public RawField m_mapAbilityProperties => Raw(__m_mapAbilityProperties, "CUtlDict<CitadelAbilityProperty_t>");
+		/// <summary><c>CUtlDict&lt;CitadelAbilityProperty_t&gt;</c>.</summary>
+		public SchemaDict<CitadelAbilityProperty_t> m_mapAbilityProperties => new(this, __m_mapAbilityProperties);
 
 		private static readonly SchemaField __m_mapCastEventParticles = new("CitadelAbilityVData", "m_mapCastEventParticles");
 		/// <summary><c>CUtlOrderedMap&lt;AbilityCastEvent_t, CResourceNameTyped&lt;CWeakHandle&lt;InfoForResourceTypeIParticleSystemDefinition&gt;&gt;&gt;</c>. Particle attaching to the caster on cast event. No typed mapping yet: read it through its address.</summary>
@@ -274,8 +274,8 @@ public static partial class Schema {
 		public RawField m_mapDependentAbilities => Raw(__m_mapDependentAbilities, "CUtlOrderedMap<CSubclassName, AbilityDependencyDescription_t>");
 
 		private static readonly SchemaField __m_mapWeaponInfos = new("CitadelAbilityVData", "m_mapWeaponInfos");
-		/// <summary><c>CUtlOrderedMap&lt;CGlobalSymbol, CCitadelWeaponInfo&gt;</c>. Weapon infos keyed by context. The "primary" context is what GetWeaponInfoVData() returns by default. No typed mapping yet: read it through its address.</summary>
-		public RawField m_mapWeaponInfos => Raw(__m_mapWeaponInfos, "CUtlOrderedMap<CGlobalSymbol, CCitadelWeaponInfo>");
+		/// <summary><c>CUtlOrderedMap&lt;CGlobalSymbol, CCitadelWeaponInfo&gt;</c>. Weapon infos keyed by context. The "primary" context is what GetWeaponInfoVData() returns by default.</summary>
+		public SchemaDict<CCitadelWeaponInfo> m_mapWeaponInfos => new(this, __m_mapWeaponInfos);
 
 		private static readonly SchemaField __m_nAbilityPointsCost = new("CitadelAbilityVData", "m_nAbilityPointsCost");
 		/// <summary><c>int32</c>.</summary>

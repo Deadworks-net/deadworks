@@ -28,5 +28,8 @@ public static partial class Schema {
 		private static readonly SchemaField __m_flLastBuildupAppliedTime = new("CCitadel_Modifier_Base_Buildup", "m_flLastBuildupAppliedTime");
 		/// <summary><c>GameTime_t</c>.</summary>
 		public float m_flLastBuildupAppliedTime { get => Get<float>(__m_flLastBuildupAppliedTime); set => Set(__m_flLastBuildupAppliedTime, value); }
+
+		/// <summary>The data entry this was created from, as <see cref="CCitadel_Modifier_Base_BuildupVData"/>, or null if it has none.</summary>
+		public new CCitadel_Modifier_Base_BuildupVData? VData => ModifierData<CCitadel_Modifier_Base_BuildupVData>();
 	}
 }

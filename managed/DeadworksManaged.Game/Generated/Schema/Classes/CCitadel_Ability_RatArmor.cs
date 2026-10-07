@@ -12,5 +12,8 @@ public static partial class Schema {
 		internal CCitadel_Ability_RatArmor() { }
 		static CCitadel_Ability_RatArmor ISchemaClass<CCitadel_Ability_RatArmor>.New() => new();
 		static string ISchemaClass<CCitadel_Ability_RatArmor>.NativeName => "CCitadel_Ability_RatArmor";
+
+		/// <summary>The data entry this was created from, as <see cref="CCitadel_Ability_RatArmorVData"/>, or null if it has none.</summary>
+		public new CCitadel_Ability_RatArmorVData? VData => SubclassVData<CCitadel_Ability_RatArmorVData>();
 	}
 }

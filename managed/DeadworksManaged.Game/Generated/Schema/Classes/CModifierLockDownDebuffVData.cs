@@ -26,20 +26,20 @@ public static partial class Schema {
 		public string m_AOEParticleOthers => GetBufferString(__m_AOEParticleOthers);
 
 		private static readonly SchemaField __m_BulletResistModifier = new("CModifierLockDownDebuffVData", "m_BulletResistModifier");
-		/// <summary><c>CEmbeddedSubclass&lt;CCitadelModifier&gt;</c>. No typed mapping yet: read it through its address.</summary>
-		public RawField m_BulletResistModifier => Raw(__m_BulletResistModifier, "CEmbeddedSubclass<CCitadelModifier>");
+		/// <summary><c>CEmbeddedSubclass&lt;CCitadelModifier&gt;</c>.</summary>
+		public CCitadelModifierVData? m_BulletResistModifier => EmbeddedSubclass<CCitadelModifierVData>(__m_BulletResistModifier);
 
 		private static readonly SchemaField __m_DebuffParticle = new("CModifierLockDownDebuffVData", "m_DebuffParticle");
 		/// <summary><c>CResourceNameTyped&lt;CWeakHandle&lt;InfoForResourceTypeIParticleSystemDefinition&gt;&gt;</c>.</summary>
 		public string m_DebuffParticle => GetBufferString(__m_DebuffParticle);
 
 		private static readonly SchemaField __m_RootModifier = new("CModifierLockDownDebuffVData", "m_RootModifier");
-		/// <summary><c>CEmbeddedSubclass&lt;CCitadelModifier&gt;</c>. No typed mapping yet: read it through its address.</summary>
-		public RawField m_RootModifier => Raw(__m_RootModifier, "CEmbeddedSubclass<CCitadelModifier>");
+		/// <summary><c>CEmbeddedSubclass&lt;CCitadelModifier&gt;</c>.</summary>
+		public CCitadelModifierVData? m_RootModifier => EmbeddedSubclass<CCitadelModifierVData>(__m_RootModifier);
 
 		private static readonly SchemaField __m_SilencedModifier = new("CModifierLockDownDebuffVData", "m_SilencedModifier");
-		/// <summary><c>CEmbeddedSubclass&lt;CCitadelModifier&gt;</c>. No typed mapping yet: read it through its address.</summary>
-		public RawField m_SilencedModifier => Raw(__m_SilencedModifier, "CEmbeddedSubclass<CCitadelModifier>");
+		/// <summary><c>CEmbeddedSubclass&lt;CCitadelModifier&gt;</c>.</summary>
+		public CCitadelModifierVData? m_SilencedModifier => EmbeddedSubclass<CCitadelModifierVData>(__m_SilencedModifier);
 
 		private static readonly SchemaField __m_strEscapedSound = new("CModifierLockDownDebuffVData", "m_strEscapedSound");
 		/// <summary><c>CSoundEventName</c>.</summary>

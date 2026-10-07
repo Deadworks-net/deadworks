@@ -14,8 +14,8 @@ public static partial class Schema {
 		static string ISchemaClass<CCitadel_Ability_NanoDash_VData>.NativeName => "CCitadel_Ability_NanoDash_VData";
 
 		private static readonly SchemaField __m_BountyModifier = new("CCitadel_Ability_NanoDash_VData", "m_BountyModifier");
-		/// <summary><c>CEmbeddedSubclass&lt;CCitadelModifier&gt;</c>. No typed mapping yet: read it through its address.</summary>
-		public RawField m_BountyModifier => Raw(__m_BountyModifier, "CEmbeddedSubclass<CCitadelModifier>");
+		/// <summary><c>CEmbeddedSubclass&lt;CCitadelModifier&gt;</c>.</summary>
+		public CCitadelModifierVData? m_BountyModifier => EmbeddedSubclass<CCitadelModifierVData>(__m_BountyModifier);
 
 		private static readonly SchemaField __m_DashImpactEffect = new("CCitadel_Ability_NanoDash_VData", "m_DashImpactEffect");
 		/// <summary><c>CResourceNameTyped&lt;CWeakHandle&lt;InfoForResourceTypeIParticleSystemDefinition&gt;&gt;</c>.</summary>

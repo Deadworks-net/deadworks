@@ -22,8 +22,8 @@ public static partial class Schema {
 		public CModifierLevelFloat m_flAuraRadius => Embedded<CModifierLevelFloat>(__m_flAuraRadius);
 
 		private static readonly SchemaField __m_modifierProvidedByAura = new("CModifierVData_BaseAura", "m_modifierProvidedByAura");
-		/// <summary><c>CEmbeddedSubclass&lt;CBaseModifier&gt;</c>. Aura - Modifier to Apply. No typed mapping yet: read it through its address.</summary>
-		public RawField m_modifierProvidedByAura => Raw(__m_modifierProvidedByAura, "CEmbeddedSubclass<CBaseModifier>");
+		/// <summary><c>CEmbeddedSubclass&lt;CBaseModifier&gt;</c>. Aura - Modifier to Apply.</summary>
+		public CModifierVData? m_modifierProvidedByAura => EmbeddedSubclass<CModifierVData>(__m_modifierProvidedByAura);
 
 		private static readonly SchemaField __m_nAmbientParticleRadiusControlPoint = new("CModifierVData_BaseAura", "m_nAmbientParticleRadiusControlPoint");
 		/// <summary><c>int32</c>.</summary>

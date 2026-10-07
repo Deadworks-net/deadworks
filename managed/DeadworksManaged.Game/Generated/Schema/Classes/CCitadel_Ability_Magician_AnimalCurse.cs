@@ -16,5 +16,8 @@ public static partial class Schema {
 		private static readonly SchemaField __m_CachedTarget = new("CCitadel_Ability_Magician_AnimalCurse", "m_CachedTarget");
 		/// <summary><c>CHandle&lt;CBaseEntity&gt;</c>.</summary>
 		public CBaseEntity? m_CachedTarget { get => GetHandle<CBaseEntity>(__m_CachedTarget); set => SetHandle(__m_CachedTarget, value); }
+
+		/// <summary>The data entry this was created from, as <see cref="CCitadel_Ability_Magician_AnimalCurseVData"/>, or null if it has none.</summary>
+		public new CCitadel_Ability_Magician_AnimalCurseVData? VData => SubclassVData<CCitadel_Ability_Magician_AnimalCurseVData>();
 	}
 }

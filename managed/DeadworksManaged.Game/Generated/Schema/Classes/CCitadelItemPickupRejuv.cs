@@ -20,5 +20,8 @@ public static partial class Schema {
 		private static readonly SchemaField __m_bPickedUp = new("CCitadelItemPickupRejuv", "m_bPickedUp");
 		/// <summary><c>bool</c>.</summary>
 		public bool m_bPickedUp { get => Get<bool>(__m_bPickedUp); set => Set(__m_bPickedUp, value); }
+
+		/// <summary>The data entry this was created from, as <see cref="CCitadelItemPickupRejuvVData"/>, or null if it has none.</summary>
+		public new CCitadelItemPickupRejuvVData? VData => SubclassVData<CCitadelItemPickupRejuvVData>();
 	}
 }

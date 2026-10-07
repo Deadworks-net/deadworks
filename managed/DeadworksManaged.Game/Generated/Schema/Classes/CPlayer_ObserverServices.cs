@@ -27,6 +27,6 @@ public static partial class Schema {
 
 		private static readonly SchemaField __m_iObserverMode = new("CPlayer_ObserverServices", "m_iObserverMode");
 		/// <summary><c>uint8</c>. Wrapped by <c>CPlayer_ObserverServices.ObserverMode</c> in DeadworksManaged.Api.</summary>
-		public byte m_iObserverMode { get => Get<byte>(__m_iObserverMode); set => Set(__m_iObserverMode, value); }
+		public byte m_iObserverMode { get => Get<byte>(__m_iObserverMode); [Obsolete("A raw write skips what CPlayer_ObserverServices.SetObserverMode does; call that on the curated wrapper instead.")] set => Set(__m_iObserverMode, value); }
 	}
 }

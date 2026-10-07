@@ -14,8 +14,8 @@ public static partial class Schema {
 		static string ISchemaClass<CCitadel_Ability_Werewolf_MaulingLeapVData>.NativeName => "CCitadel_Ability_Werewolf_MaulingLeapVData";
 
 		private static readonly SchemaField __m_DebuffModifier = new("CCitadel_Ability_Werewolf_MaulingLeapVData", "m_DebuffModifier");
-		/// <summary><c>CEmbeddedSubclass&lt;CCitadelModifier&gt;</c>. No typed mapping yet: read it through its address.</summary>
-		public RawField m_DebuffModifier => Raw(__m_DebuffModifier, "CEmbeddedSubclass<CCitadelModifier>");
+		/// <summary><c>CEmbeddedSubclass&lt;CCitadelModifier&gt;</c>.</summary>
+		public CCitadelModifierVData? m_DebuffModifier => EmbeddedSubclass<CCitadelModifierVData>(__m_DebuffModifier);
 
 		private static readonly SchemaField __m_LeapHitImpact = new("CCitadel_Ability_Werewolf_MaulingLeapVData", "m_LeapHitImpact");
 		/// <summary><c>CResourceNameTyped&lt;CWeakHandle&lt;InfoForResourceTypeIParticleSystemDefinition&gt;&gt;</c>.</summary>
@@ -26,8 +26,8 @@ public static partial class Schema {
 		public string m_LeapHitSound => GetBufferString(__m_LeapHitSound);
 
 		private static readonly SchemaField __m_LeapingModifier = new("CCitadel_Ability_Werewolf_MaulingLeapVData", "m_LeapingModifier");
-		/// <summary><c>CEmbeddedSubclass&lt;CCitadelModifier&gt;</c>. No typed mapping yet: read it through its address.</summary>
-		public RawField m_LeapingModifier => Raw(__m_LeapingModifier, "CEmbeddedSubclass<CCitadelModifier>");
+		/// <summary><c>CEmbeddedSubclass&lt;CCitadelModifier&gt;</c>.</summary>
+		public CCitadelModifierVData? m_LeapingModifier => EmbeddedSubclass<CCitadelModifierVData>(__m_LeapingModifier);
 
 		private static readonly SchemaField __m_LeapingSpeedCurve = new("CCitadel_Ability_Werewolf_MaulingLeapVData", "m_LeapingSpeedCurve");
 		/// <summary><c>CPiecewiseCurve</c>. No typed mapping yet: read it through its address.</summary>

@@ -14,7 +14,7 @@ public static partial class Schema {
 		static string ISchemaClass<CCitadel_Modifier_SpiritBurnProcWatcherVData>.NativeName => "CCitadel_Modifier_SpiritBurnProcWatcherVData";
 
 		private static readonly SchemaField __m_SpiritBurnDamageTracker = new("CCitadel_Modifier_SpiritBurnProcWatcherVData", "m_SpiritBurnDamageTracker");
-		/// <summary><c>CEmbeddedSubclass&lt;CBaseModifier&gt;</c>. No typed mapping yet: read it through its address.</summary>
-		public RawField m_SpiritBurnDamageTracker => Raw(__m_SpiritBurnDamageTracker, "CEmbeddedSubclass<CBaseModifier>");
+		/// <summary><c>CEmbeddedSubclass&lt;CBaseModifier&gt;</c>.</summary>
+		public CModifierVData? m_SpiritBurnDamageTracker => EmbeddedSubclass<CModifierVData>(__m_SpiritBurnDamageTracker);
 	}
 }

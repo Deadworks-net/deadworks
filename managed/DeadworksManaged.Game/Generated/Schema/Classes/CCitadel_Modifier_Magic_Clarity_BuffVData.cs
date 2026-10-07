@@ -14,7 +14,7 @@ public static partial class Schema {
 		static string ISchemaClass<CCitadel_Modifier_Magic_Clarity_BuffVData>.NativeName => "CCitadel_Modifier_Magic_Clarity_BuffVData";
 
 		private static readonly SchemaField __m_VisualModifier = new("CCitadel_Modifier_Magic_Clarity_BuffVData", "m_VisualModifier");
-		/// <summary><c>CEmbeddedSubclass&lt;CCitadelModifier&gt;</c>. No typed mapping yet: read it through its address.</summary>
-		public RawField m_VisualModifier => Raw(__m_VisualModifier, "CEmbeddedSubclass<CCitadelModifier>");
+		/// <summary><c>CEmbeddedSubclass&lt;CCitadelModifier&gt;</c>.</summary>
+		public CCitadelModifierVData? m_VisualModifier => EmbeddedSubclass<CCitadelModifierVData>(__m_VisualModifier);
 	}
 }

@@ -12,5 +12,8 @@ public static partial class Schema {
 		internal CCitadel_Modifier_Nano_PredatoryStatueTarget() { }
 		static CCitadel_Modifier_Nano_PredatoryStatueTarget ISchemaClass<CCitadel_Modifier_Nano_PredatoryStatueTarget>.New() => new();
 		static string ISchemaClass<CCitadel_Modifier_Nano_PredatoryStatueTarget>.NativeName => "CCitadel_Modifier_Nano_PredatoryStatueTarget";
+
+		/// <summary>The data entry this was created from, as <see cref="CCitadel_Modifier_Nano_PredatoryStatueTargetVData"/>, or null if it has none.</summary>
+		public new CCitadel_Modifier_Nano_PredatoryStatueTargetVData? VData => ModifierData<CCitadel_Modifier_Nano_PredatoryStatueTargetVData>();
 	}
 }

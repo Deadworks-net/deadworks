@@ -12,5 +12,8 @@ public static partial class Schema {
 		internal CCitadel_ArmorUpgrade_ReturnFire() { }
 		static CCitadel_ArmorUpgrade_ReturnFire ISchemaClass<CCitadel_ArmorUpgrade_ReturnFire>.New() => new();
 		static string ISchemaClass<CCitadel_ArmorUpgrade_ReturnFire>.NativeName => "CCitadel_ArmorUpgrade_ReturnFire";
+
+		/// <summary>The data entry this was created from, as <see cref="CCitadel_ArmorUpgrade_ReturnFireVData"/>, or null if it has none.</summary>
+		public new CCitadel_ArmorUpgrade_ReturnFireVData? VData => SubclassVData<CCitadel_ArmorUpgrade_ReturnFireVData>();
 	}
 }

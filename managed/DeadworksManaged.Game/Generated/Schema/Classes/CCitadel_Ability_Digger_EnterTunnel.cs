@@ -20,5 +20,8 @@ public static partial class Schema {
 		private static readonly SchemaField __m_hPushedFakeWallLastThink = new("CCitadel_Ability_Digger_EnterTunnel", "m_hPushedFakeWallLastThink");
 		/// <summary><c>CHandle&lt;CCitadelPassthroughFakeWall&gt;</c>.</summary>
 		public CCitadelPassthroughFakeWall? m_hPushedFakeWallLastThink { get => GetHandle<CCitadelPassthroughFakeWall>(__m_hPushedFakeWallLastThink); set => SetHandle(__m_hPushedFakeWallLastThink, value); }
+
+		/// <summary>The data entry this was created from, as <see cref="CCitadel_Ability_Digger_EnterTunnelVData"/>, or null if it has none.</summary>
+		public new CCitadel_Ability_Digger_EnterTunnelVData? VData => SubclassVData<CCitadel_Ability_Digger_EnterTunnelVData>();
 	}
 }

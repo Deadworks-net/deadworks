@@ -22,8 +22,8 @@ public static partial class Schema {
 		public string m_ExplodeEffect => GetBufferString(__m_ExplodeEffect);
 
 		private static readonly SchemaField __m_HexModifier = new("CCitadel_Modifier_Magician_AnimalHex_HexAreaVData", "m_HexModifier");
-		/// <summary><c>CEmbeddedSubclass&lt;CCitadelModifier&gt;</c>. No typed mapping yet: read it through its address.</summary>
-		public RawField m_HexModifier => Raw(__m_HexModifier, "CEmbeddedSubclass<CCitadelModifier>");
+		/// <summary><c>CEmbeddedSubclass&lt;CCitadelModifier&gt;</c>.</summary>
+		public CCitadelModifierVData? m_HexModifier => EmbeddedSubclass<CCitadelModifierVData>(__m_HexModifier);
 
 		private static readonly SchemaField __m_strArmedSound = new("CCitadel_Modifier_Magician_AnimalHex_HexAreaVData", "m_strArmedSound");
 		/// <summary><c>CSoundEventName</c>.</summary>

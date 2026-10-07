@@ -16,5 +16,8 @@ public static partial class Schema {
 		private static readonly SchemaField __m_flHealthDrained = new("CCitadel_Modifier_WeaponPowerForHealth", "m_flHealthDrained");
 		/// <summary><c>float32</c>.</summary>
 		public float m_flHealthDrained { get => Get<float>(__m_flHealthDrained); set => Set(__m_flHealthDrained, value); }
+
+		/// <summary>The data entry this was created from, as <see cref="CCitadel_Modifier_WeaponPowerForHealthVData"/>, or null if it has none.</summary>
+		public new CCitadel_Modifier_WeaponPowerForHealthVData? VData => ModifierData<CCitadel_Modifier_WeaponPowerForHealthVData>();
 	}
 }

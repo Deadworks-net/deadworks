@@ -18,8 +18,8 @@ public static partial class Schema {
 		public string m_BeamTargetParticle => GetBufferString(__m_BeamTargetParticle);
 
 		private static readonly SchemaField __m_SettingSunThinkerModifier = new("CCitadel_Ability_SettingSun_VData", "m_SettingSunThinkerModifier");
-		/// <summary><c>CEmbeddedSubclass&lt;CBaseModifier&gt;</c>. No typed mapping yet: read it through its address.</summary>
-		public RawField m_SettingSunThinkerModifier => Raw(__m_SettingSunThinkerModifier, "CEmbeddedSubclass<CBaseModifier>");
+		/// <summary><c>CEmbeddedSubclass&lt;CBaseModifier&gt;</c>.</summary>
+		public CModifierVData? m_SettingSunThinkerModifier => EmbeddedSubclass<CModifierVData>(__m_SettingSunThinkerModifier);
 
 		private static readonly SchemaField __m_UnitTargetParticle = new("CCitadel_Ability_SettingSun_VData", "m_UnitTargetParticle");
 		/// <summary><c>CResourceNameTyped&lt;CWeakHandle&lt;InfoForResourceTypeIParticleSystemDefinition&gt;&gt;</c>.</summary>

@@ -12,5 +12,8 @@ public static partial class Schema {
 		internal CCitadel_UtilityUpgrade_RocketBoots() { }
 		static CCitadel_UtilityUpgrade_RocketBoots ISchemaClass<CCitadel_UtilityUpgrade_RocketBoots>.New() => new();
 		static string ISchemaClass<CCitadel_UtilityUpgrade_RocketBoots>.NativeName => "CCitadel_UtilityUpgrade_RocketBoots";
+
+		/// <summary>The data entry this was created from, as <see cref="CCitadel_UtilityUpgrade_RocketBootsVData"/>, or null if it has none.</summary>
+		public new CCitadel_UtilityUpgrade_RocketBootsVData? VData => SubclassVData<CCitadel_UtilityUpgrade_RocketBootsVData>();
 	}
 }

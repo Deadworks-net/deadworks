@@ -32,5 +32,8 @@ public static partial class Schema {
 		private static readonly SchemaField __m_tLastLOSTime = new("CCitadel_Modifier_PunkgoatTethered", "m_tLastLOSTime");
 		/// <summary><c>GameTime_t</c>.</summary>
 		public float m_tLastLOSTime { get => Get<float>(__m_tLastLOSTime); set => Set(__m_tLastLOSTime, value); }
+
+		/// <summary>The data entry this was created from, as <see cref="CCitadel_Modifier_PunkgoatTetheredVData"/>, or null if it has none.</summary>
+		public new CCitadel_Modifier_PunkgoatTetheredVData? VData => ModifierData<CCitadel_Modifier_PunkgoatTetheredVData>();
 	}
 }

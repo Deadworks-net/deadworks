@@ -12,5 +12,8 @@ public static partial class Schema {
 		internal CCitadelBulletRedirectVolume() { }
 		static CCitadelBulletRedirectVolume ISchemaClass<CCitadelBulletRedirectVolume>.New() => new();
 		static string ISchemaClass<CCitadelBulletRedirectVolume>.NativeName => "CCitadelBulletRedirectVolume";
+
+		/// <summary>The data entry this was created from, as <see cref="CCitadelBulletRedirectVolumeVData"/>, or null if it has none.</summary>
+		public CCitadelBulletRedirectVolumeVData? VData => SubclassVData<CCitadelBulletRedirectVolumeVData>();
 	}
 }

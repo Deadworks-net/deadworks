@@ -26,16 +26,16 @@ public static partial class Schema {
 		public string m_EnabledParticle => GetBufferString(__m_EnabledParticle);
 
 		private static readonly SchemaField __m_RevealModifier = new("CCitadel_Modifier_Nano_PredatoryStatueVData", "m_RevealModifier");
-		/// <summary><c>CEmbeddedSubclass&lt;CCitadelModifier&gt;</c>. No typed mapping yet: read it through its address.</summary>
-		public RawField m_RevealModifier => Raw(__m_RevealModifier, "CEmbeddedSubclass<CCitadelModifier>");
+		/// <summary><c>CEmbeddedSubclass&lt;CCitadelModifier&gt;</c>.</summary>
+		public CCitadelModifierVData? m_RevealModifier => EmbeddedSubclass<CCitadelModifierVData>(__m_RevealModifier);
 
 		private static readonly SchemaField __m_StatueInvis = new("CCitadel_Modifier_Nano_PredatoryStatueVData", "m_StatueInvis");
-		/// <summary><c>CEmbeddedSubclass&lt;CCitadelModifier&gt;</c>. No typed mapping yet: read it through its address.</summary>
-		public RawField m_StatueInvis => Raw(__m_StatueInvis, "CEmbeddedSubclass<CCitadelModifier>");
+		/// <summary><c>CEmbeddedSubclass&lt;CCitadelModifier&gt;</c>.</summary>
+		public CCitadelModifierVData? m_StatueInvis => EmbeddedSubclass<CCitadelModifierVData>(__m_StatueInvis);
 
 		private static readonly SchemaField __m_TargetModifier = new("CCitadel_Modifier_Nano_PredatoryStatueVData", "m_TargetModifier");
-		/// <summary><c>CEmbeddedSubclass&lt;CCitadelModifier&gt;</c>. No typed mapping yet: read it through its address.</summary>
-		public RawField m_TargetModifier => Raw(__m_TargetModifier, "CEmbeddedSubclass<CCitadelModifier>");
+		/// <summary><c>CEmbeddedSubclass&lt;CCitadelModifier&gt;</c>.</summary>
+		public CCitadelModifierVData? m_TargetModifier => EmbeddedSubclass<CCitadelModifierVData>(__m_TargetModifier);
 
 		private static readonly SchemaField __m_flMinDebuffTime = new("CCitadel_Modifier_Nano_PredatoryStatueVData", "m_flMinDebuffTime");
 		/// <summary><c>float32</c>.</summary>

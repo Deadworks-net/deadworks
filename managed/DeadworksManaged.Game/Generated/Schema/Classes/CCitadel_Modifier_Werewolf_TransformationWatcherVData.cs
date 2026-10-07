@@ -14,12 +14,12 @@ public static partial class Schema {
 		static string ISchemaClass<CCitadel_Modifier_Werewolf_TransformationWatcherVData>.NativeName => "CCitadel_Modifier_Werewolf_TransformationWatcherVData";
 
 		private static readonly SchemaField __m_HunterModifier = new("CCitadel_Modifier_Werewolf_TransformationWatcherVData", "m_HunterModifier");
-		/// <summary><c>CEmbeddedSubclass&lt;CCitadelModifier&gt;</c>. No typed mapping yet: read it through its address.</summary>
-		public RawField m_HunterModifier => Raw(__m_HunterModifier, "CEmbeddedSubclass<CCitadelModifier>");
+		/// <summary><c>CEmbeddedSubclass&lt;CCitadelModifier&gt;</c>.</summary>
+		public CCitadelModifierVData? m_HunterModifier => EmbeddedSubclass<CCitadelModifierVData>(__m_HunterModifier);
 
 		private static readonly SchemaField __m_WerewolfModifier = new("CCitadel_Modifier_Werewolf_TransformationWatcherVData", "m_WerewolfModifier");
-		/// <summary><c>CEmbeddedSubclass&lt;CCitadelModifier&gt;</c>. No typed mapping yet: read it through its address.</summary>
-		public RawField m_WerewolfModifier => Raw(__m_WerewolfModifier, "CEmbeddedSubclass<CCitadelModifier>");
+		/// <summary><c>CEmbeddedSubclass&lt;CCitadelModifier&gt;</c>.</summary>
+		public CCitadelModifierVData? m_WerewolfModifier => EmbeddedSubclass<CCitadelModifierVData>(__m_WerewolfModifier);
 
 		private static readonly SchemaField __m_vecHunterAbilitySlots = new("CCitadel_Modifier_Werewolf_TransformationWatcherVData", "m_vecHunterAbilitySlots");
 		/// <summary><c>CUtlVector&lt;EAbilitySlots_t&gt;</c>.</summary>

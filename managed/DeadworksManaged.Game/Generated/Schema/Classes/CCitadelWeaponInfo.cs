@@ -434,8 +434,8 @@ public static partial class Schema {
 		public int m_iSplitShotsMax { get => Get<int>(__m_iSplitShotsMax); set => Set(__m_iSplitShotsMax, value); }
 
 		private static readonly SchemaField __m_mapImpactEffects = new("CCitadelWeaponInfo", "m_mapImpactEffects");
-		/// <summary><c>CUtlOrderedMap&lt;CUtlStringToken, PerSurfaceImpactEffects_t&gt;</c>. Per surface impact effects. CP0=position &amp; surface normal, CP1=position &amp; reflect dir, CP2=position &amp; bullet dir, CP3=damage CP4=normal CP5=explosion radius. No typed mapping yet: read it through its address.</summary>
-		public RawField m_mapImpactEffects => Raw(__m_mapImpactEffects, "CUtlOrderedMap<CUtlStringToken, PerSurfaceImpactEffects_t>");
+		/// <summary><c>CUtlOrderedMap&lt;CUtlStringToken, PerSurfaceImpactEffects_t&gt;</c>. Per surface impact effects. CP0=position &amp; surface normal, CP1=position &amp; reflect dir, CP2=position &amp; bullet dir, CP3=damage CP4=normal CP5=explosion radius.</summary>
+		public SchemaMap<uint, PerSurfaceImpactEffects_t> m_mapImpactEffects => new(this, __m_mapImpactEffects);
 
 		private static readonly SchemaField __m_nRecoilSeed = new("CCitadelWeaponInfo", "m_nRecoilSeed");
 		/// <summary><c>int32</c>.</summary>

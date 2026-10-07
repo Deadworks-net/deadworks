@@ -32,5 +32,8 @@ public static partial class Schema {
 		private static readonly SchemaField __m_tActivationTime = new("CCitadel_Modifier_Backdoor_Protection", "m_tActivationTime");
 		/// <summary><c>GameTime_t</c>.</summary>
 		public float m_tActivationTime { get => Get<float>(__m_tActivationTime); set => Set(__m_tActivationTime, value); }
+
+		/// <summary>The data entry this was created from, as <see cref="CCitadel_Modifier_Backdoor_ProtectionVData"/>, or null if it has none.</summary>
+		public new CCitadel_Modifier_Backdoor_ProtectionVData? VData => ModifierData<CCitadel_Modifier_Backdoor_ProtectionVData>();
 	}
 }

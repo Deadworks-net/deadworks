@@ -14,16 +14,16 @@ public static partial class Schema {
 		static string ISchemaClass<CModifierApplyModifierOnDamageTakenVData>.NativeName => "CModifierApplyModifierOnDamageTakenVData";
 
 		private static readonly SchemaField __m_SelfModifier = new("CModifierApplyModifierOnDamageTakenVData", "m_SelfModifier");
-		/// <summary><c>CEmbeddedSubclass&lt;CBaseModifier&gt;</c>. Modifier to apply to the owner, when owner takes damage. No typed mapping yet: read it through its address.</summary>
-		public RawField m_SelfModifier => Raw(__m_SelfModifier, "CEmbeddedSubclass<CBaseModifier>");
+		/// <summary><c>CEmbeddedSubclass&lt;CBaseModifier&gt;</c>. Modifier to apply to the owner, when owner takes damage.</summary>
+		public CModifierVData? m_SelfModifier => EmbeddedSubclass<CModifierVData>(__m_SelfModifier);
 
 		private static readonly SchemaField __m_SelfModifierDurationAbilityProp = new("CModifierApplyModifierOnDamageTakenVData", "m_SelfModifierDurationAbilityProp");
 		/// <summary><c>CUtlString</c>. AbilityPropVal to grab duration from.</summary>
 		public string m_SelfModifierDurationAbilityProp => GetString(__m_SelfModifierDurationAbilityProp);
 
 		private static readonly SchemaField __m_TargetModifier = new("CModifierApplyModifierOnDamageTakenVData", "m_TargetModifier");
-		/// <summary><c>CEmbeddedSubclass&lt;CBaseModifier&gt;</c>. Modifier to apply to the target dealing damage, when owner takes damage. No typed mapping yet: read it through its address.</summary>
-		public RawField m_TargetModifier => Raw(__m_TargetModifier, "CEmbeddedSubclass<CBaseModifier>");
+		/// <summary><c>CEmbeddedSubclass&lt;CBaseModifier&gt;</c>. Modifier to apply to the target dealing damage, when owner takes damage.</summary>
+		public CModifierVData? m_TargetModifier => EmbeddedSubclass<CModifierVData>(__m_TargetModifier);
 
 		private static readonly SchemaField __m_TargetModifierDurationAbilityProp = new("CModifierApplyModifierOnDamageTakenVData", "m_TargetModifierDurationAbilityProp");
 		/// <summary><c>CUtlString</c>. AbilityPropVal to grab duration from.</summary>

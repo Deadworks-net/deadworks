@@ -22,8 +22,8 @@ public static partial class Schema {
 		public RawField m_FallSpeedCurve => Raw(__m_FallSpeedCurve, "CPiecewiseCurve");
 
 		private static readonly SchemaField __m_OrbWatcherModifier = new("CCitadel_Ability_Unicorn_DazzlingOrbVData", "m_OrbWatcherModifier");
-		/// <summary><c>CEmbeddedSubclass&lt;CCitadelModifier&gt;</c>. No typed mapping yet: read it through its address.</summary>
-		public RawField m_OrbWatcherModifier => Raw(__m_OrbWatcherModifier, "CEmbeddedSubclass<CCitadelModifier>");
+		/// <summary><c>CEmbeddedSubclass&lt;CCitadelModifier&gt;</c>.</summary>
+		public CCitadelModifierVData? m_OrbWatcherModifier => EmbeddedSubclass<CCitadelModifierVData>(__m_OrbWatcherModifier);
 
 		private static readonly SchemaField __m_flAirDrag = new("CCitadel_Ability_Unicorn_DazzlingOrbVData", "m_flAirDrag");
 		/// <summary><c>float32</c>.</summary>

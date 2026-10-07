@@ -22,8 +22,8 @@ public static partial class Schema {
 		public string m_BounceSound => GetBufferString(__m_BounceSound);
 
 		private static readonly SchemaField __m_EnemyDebuffModifier = new("CCitadel_Ability_Boho_SkipGrenadeVData", "m_EnemyDebuffModifier");
-		/// <summary><c>CEmbeddedSubclass&lt;CCitadelModifier&gt;</c>. No typed mapping yet: read it through its address.</summary>
-		public RawField m_EnemyDebuffModifier => Raw(__m_EnemyDebuffModifier, "CEmbeddedSubclass<CCitadelModifier>");
+		/// <summary><c>CEmbeddedSubclass&lt;CCitadelModifier&gt;</c>.</summary>
+		public CCitadelModifierVData? m_EnemyDebuffModifier => EmbeddedSubclass<CCitadelModifierVData>(__m_EnemyDebuffModifier);
 
 		private static readonly SchemaField __m_ExplodeParticle = new("CCitadel_Ability_Boho_SkipGrenadeVData", "m_ExplodeParticle");
 		/// <summary><c>CResourceNameTyped&lt;CWeakHandle&lt;InfoForResourceTypeIParticleSystemDefinition&gt;&gt;</c>.</summary>
@@ -34,8 +34,8 @@ public static partial class Schema {
 		public string m_ExplosionSound => GetBufferString(__m_ExplosionSound);
 
 		private static readonly SchemaField __m_SlowModifier = new("CCitadel_Ability_Boho_SkipGrenadeVData", "m_SlowModifier");
-		/// <summary><c>CEmbeddedSubclass&lt;CCitadelModifier&gt;</c>. No typed mapping yet: read it through its address.</summary>
-		public RawField m_SlowModifier => Raw(__m_SlowModifier, "CEmbeddedSubclass<CCitadelModifier>");
+		/// <summary><c>CEmbeddedSubclass&lt;CCitadelModifier&gt;</c>.</summary>
+		public CCitadelModifierVData? m_SlowModifier => EmbeddedSubclass<CCitadelModifierVData>(__m_SlowModifier);
 
 		private static readonly SchemaField __m_flBounceForwardRatio = new("CCitadel_Ability_Boho_SkipGrenadeVData", "m_flBounceForwardRatio");
 		/// <summary><c>float32</c>.</summary>

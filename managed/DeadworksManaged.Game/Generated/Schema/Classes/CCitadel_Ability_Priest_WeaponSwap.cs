@@ -16,5 +16,8 @@ public static partial class Schema {
 		private static readonly SchemaField __m_hOriginalGun = new("CCitadel_Ability_Priest_WeaponSwap", "m_hOriginalGun");
 		/// <summary><c>CHandle&lt;CCitadelBaseAbility&gt;</c>.</summary>
 		public CCitadelBaseAbility? m_hOriginalGun { get => GetHandle<CCitadelBaseAbility>(__m_hOriginalGun); set => SetHandle(__m_hOriginalGun, value); }
+
+		/// <summary>The data entry this was created from, as <see cref="CCitadel_Ability_Priest_WeaponSwapVData"/>, or null if it has none.</summary>
+		public new CCitadel_Ability_Priest_WeaponSwapVData? VData => SubclassVData<CCitadel_Ability_Priest_WeaponSwapVData>();
 	}
 }

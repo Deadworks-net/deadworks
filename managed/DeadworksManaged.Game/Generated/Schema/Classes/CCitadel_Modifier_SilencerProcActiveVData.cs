@@ -14,8 +14,8 @@ public static partial class Schema {
 		static string ISchemaClass<CCitadel_Modifier_SilencerProcActiveVData>.NativeName => "CCitadel_Modifier_SilencerProcActiveVData";
 
 		private static readonly SchemaField __m_SilenceActiveModifier = new("CCitadel_Modifier_SilencerProcActiveVData", "m_SilenceActiveModifier");
-		/// <summary><c>CEmbeddedSubclass&lt;CCitadelModifier&gt;</c>. No typed mapping yet: read it through its address.</summary>
-		public RawField m_SilenceActiveModifier => Raw(__m_SilenceActiveModifier, "CEmbeddedSubclass<CCitadelModifier>");
+		/// <summary><c>CEmbeddedSubclass&lt;CCitadelModifier&gt;</c>.</summary>
+		public CCitadelModifierVData? m_SilenceActiveModifier => EmbeddedSubclass<CCitadelModifierVData>(__m_SilenceActiveModifier);
 
 		private static readonly SchemaField __m_SilencerActiveParticle = new("CCitadel_Modifier_SilencerProcActiveVData", "m_SilencerActiveParticle");
 		/// <summary><c>CResourceNameTyped&lt;CWeakHandle&lt;InfoForResourceTypeIParticleSystemDefinition&gt;&gt;</c>.</summary>

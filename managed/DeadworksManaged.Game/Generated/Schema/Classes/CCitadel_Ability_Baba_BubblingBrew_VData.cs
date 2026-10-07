@@ -18,16 +18,16 @@ public static partial class Schema {
 		public string m_BoltParticle => GetBufferString(__m_BoltParticle);
 
 		private static readonly SchemaField __m_BuffModifier = new("CCitadel_Ability_Baba_BubblingBrew_VData", "m_BuffModifier");
-		/// <summary><c>CEmbeddedSubclass&lt;CCitadelModifier&gt;</c>. No typed mapping yet: read it through its address.</summary>
-		public RawField m_BuffModifier => Raw(__m_BuffModifier, "CEmbeddedSubclass<CCitadelModifier>");
+		/// <summary><c>CEmbeddedSubclass&lt;CCitadelModifier&gt;</c>.</summary>
+		public CCitadelModifierVData? m_BuffModifier => EmbeddedSubclass<CCitadelModifierVData>(__m_BuffModifier);
 
 		private static readonly SchemaField __m_CasterBuffParticle = new("CCitadel_Ability_Baba_BubblingBrew_VData", "m_CasterBuffParticle");
 		/// <summary><c>CResourceNameTyped&lt;CWeakHandle&lt;InfoForResourceTypeIParticleSystemDefinition&gt;&gt;</c>.</summary>
 		public string m_CasterBuffParticle => GetBufferString(__m_CasterBuffParticle);
 
 		private static readonly SchemaField __m_DebuffModifier = new("CCitadel_Ability_Baba_BubblingBrew_VData", "m_DebuffModifier");
-		/// <summary><c>CEmbeddedSubclass&lt;CCitadelModifier&gt;</c>. No typed mapping yet: read it through its address.</summary>
-		public RawField m_DebuffModifier => Raw(__m_DebuffModifier, "CEmbeddedSubclass<CCitadelModifier>");
+		/// <summary><c>CEmbeddedSubclass&lt;CCitadelModifier&gt;</c>.</summary>
+		public CCitadelModifierVData? m_DebuffModifier => EmbeddedSubclass<CCitadelModifierVData>(__m_DebuffModifier);
 
 		private static readonly SchemaField __m_ExplosionParticle = new("CCitadel_Ability_Baba_BubblingBrew_VData", "m_ExplosionParticle");
 		/// <summary><c>CResourceNameTyped&lt;CWeakHandle&lt;InfoForResourceTypeIParticleSystemDefinition&gt;&gt;</c>.</summary>
@@ -38,8 +38,8 @@ public static partial class Schema {
 		public RawField m_ProjectileTurnAngleSpeedCurve => Raw(__m_ProjectileTurnAngleSpeedCurve, "CPiecewiseCurve");
 
 		private static readonly SchemaField __m_PullModifier = new("CCitadel_Ability_Baba_BubblingBrew_VData", "m_PullModifier");
-		/// <summary><c>CEmbeddedSubclass&lt;CCitadelModifier&gt;</c>. No typed mapping yet: read it through its address.</summary>
-		public RawField m_PullModifier => Raw(__m_PullModifier, "CEmbeddedSubclass<CCitadelModifier>");
+		/// <summary><c>CEmbeddedSubclass&lt;CCitadelModifier&gt;</c>.</summary>
+		public CCitadelModifierVData? m_PullModifier => EmbeddedSubclass<CCitadelModifierVData>(__m_PullModifier);
 
 		private static readonly SchemaField __m_StringParticle = new("CCitadel_Ability_Baba_BubblingBrew_VData", "m_StringParticle");
 		/// <summary><c>CResourceNameTyped&lt;CWeakHandle&lt;InfoForResourceTypeIParticleSystemDefinition&gt;&gt;</c>.</summary>

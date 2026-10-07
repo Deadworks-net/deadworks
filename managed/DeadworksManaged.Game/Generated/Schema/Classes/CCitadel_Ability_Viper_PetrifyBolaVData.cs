@@ -18,12 +18,12 @@ public static partial class Schema {
 		public string m_ExplodeParticle => GetBufferString(__m_ExplodeParticle);
 
 		private static readonly SchemaField __m_PetrifyModifier = new("CCitadel_Ability_Viper_PetrifyBolaVData", "m_PetrifyModifier");
-		/// <summary><c>CEmbeddedSubclass&lt;CCitadelModifier&gt;</c>. No typed mapping yet: read it through its address.</summary>
-		public RawField m_PetrifyModifier => Raw(__m_PetrifyModifier, "CEmbeddedSubclass<CCitadelModifier>");
+		/// <summary><c>CEmbeddedSubclass&lt;CCitadelModifier&gt;</c>.</summary>
+		public CCitadelModifierVData? m_PetrifyModifier => EmbeddedSubclass<CCitadelModifierVData>(__m_PetrifyModifier);
 
 		private static readonly SchemaField __m_SlowModifier = new("CCitadel_Ability_Viper_PetrifyBolaVData", "m_SlowModifier");
-		/// <summary><c>CEmbeddedSubclass&lt;CCitadelModifier&gt;</c>. No typed mapping yet: read it through its address.</summary>
-		public RawField m_SlowModifier => Raw(__m_SlowModifier, "CEmbeddedSubclass<CCitadelModifier>");
+		/// <summary><c>CEmbeddedSubclass&lt;CCitadelModifier&gt;</c>.</summary>
+		public CCitadelModifierVData? m_SlowModifier => EmbeddedSubclass<CCitadelModifierVData>(__m_SlowModifier);
 
 		private static readonly SchemaField __m_strBolaExplodeSound = new("CCitadel_Ability_Viper_PetrifyBolaVData", "m_strBolaExplodeSound");
 		/// <summary><c>CSoundEventName</c>.</summary>

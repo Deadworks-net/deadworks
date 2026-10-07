@@ -18,12 +18,12 @@ public static partial class Schema {
 		public string m_AuraActive => GetBufferString(__m_AuraActive);
 
 		private static readonly SchemaField __m_AuraModifier = new("CCitadel_Ability_Frank_PainAuraVData", "m_AuraModifier");
-		/// <summary><c>CEmbeddedSubclass&lt;CCitadelModifier&gt;</c>. No typed mapping yet: read it through its address.</summary>
-		public RawField m_AuraModifier => Raw(__m_AuraModifier, "CEmbeddedSubclass<CCitadelModifier>");
+		/// <summary><c>CEmbeddedSubclass&lt;CCitadelModifier&gt;</c>.</summary>
+		public CCitadelModifierVData? m_AuraModifier => EmbeddedSubclass<CCitadelModifierVData>(__m_AuraModifier);
 
 		private static readonly SchemaField __m_AuraOffModifier = new("CCitadel_Ability_Frank_PainAuraVData", "m_AuraOffModifier");
-		/// <summary><c>CEmbeddedSubclass&lt;CCitadelModifier&gt;</c>. No typed mapping yet: read it through its address.</summary>
-		public RawField m_AuraOffModifier => Raw(__m_AuraOffModifier, "CEmbeddedSubclass<CCitadelModifier>");
+		/// <summary><c>CEmbeddedSubclass&lt;CCitadelModifier&gt;</c>.</summary>
+		public CCitadelModifierVData? m_AuraOffModifier => EmbeddedSubclass<CCitadelModifierVData>(__m_AuraOffModifier);
 
 		private static readonly SchemaField __m_ExplodeParticle = new("CCitadel_Ability_Frank_PainAuraVData", "m_ExplodeParticle");
 		/// <summary><c>CResourceNameTyped&lt;CWeakHandle&lt;InfoForResourceTypeIParticleSystemDefinition&gt;&gt;</c>.</summary>

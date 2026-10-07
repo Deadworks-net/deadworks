@@ -12,5 +12,8 @@ public static partial class Schema {
 		internal CCitadel_Neutral_LightMelee() { }
 		static CCitadel_Neutral_LightMelee ISchemaClass<CCitadel_Neutral_LightMelee>.New() => new();
 		static string ISchemaClass<CCitadel_Neutral_LightMelee>.NativeName => "CCitadel_Neutral_LightMelee";
+
+		/// <summary>The data entry this was created from, as <see cref="CCitadel_Neutral_LightMeleeVData"/>, or null if it has none.</summary>
+		public new CCitadel_Neutral_LightMeleeVData? VData => ModifierData<CCitadel_Neutral_LightMeleeVData>();
 	}
 }

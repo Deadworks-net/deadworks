@@ -16,5 +16,8 @@ public static partial class Schema {
 		private static readonly SchemaField __m_bProcApplied = new("CCitadel_Modifier_Urn_Debuff", "m_bProcApplied");
 		/// <summary><c>bool</c>.</summary>
 		public bool m_bProcApplied { get => Get<bool>(__m_bProcApplied); set => Set(__m_bProcApplied, value); }
+
+		/// <summary>The data entry this was created from, as <see cref="CCitadel_Modifier_Urn_DebuffVData"/>, or null if it has none.</summary>
+		public new CCitadel_Modifier_Urn_DebuffVData? VData => ModifierData<CCitadel_Modifier_Urn_DebuffVData>();
 	}
 }

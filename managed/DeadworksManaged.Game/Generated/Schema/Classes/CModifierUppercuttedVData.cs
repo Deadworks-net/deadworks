@@ -14,12 +14,12 @@ public static partial class Schema {
 		static string ISchemaClass<CModifierUppercuttedVData>.NativeName => "CModifierUppercuttedVData";
 
 		private static readonly SchemaField __m_ExplodeDebuffModifier = new("CModifierUppercuttedVData", "m_ExplodeDebuffModifier");
-		/// <summary><c>CEmbeddedSubclass&lt;CCitadelModifier&gt;</c>. No typed mapping yet: read it through its address.</summary>
-		public RawField m_ExplodeDebuffModifier => Raw(__m_ExplodeDebuffModifier, "CEmbeddedSubclass<CCitadelModifier>");
+		/// <summary><c>CEmbeddedSubclass&lt;CCitadelModifier&gt;</c>.</summary>
+		public CCitadelModifierVData? m_ExplodeDebuffModifier => EmbeddedSubclass<CCitadelModifierVData>(__m_ExplodeDebuffModifier);
 
 		private static readonly SchemaField __m_NoExplodeModifier = new("CModifierUppercuttedVData", "m_NoExplodeModifier");
-		/// <summary><c>CEmbeddedSubclass&lt;CCitadelModifier&gt;</c>. No typed mapping yet: read it through its address.</summary>
-		public RawField m_NoExplodeModifier => Raw(__m_NoExplodeModifier, "CEmbeddedSubclass<CCitadelModifier>");
+		/// <summary><c>CEmbeddedSubclass&lt;CCitadelModifier&gt;</c>.</summary>
+		public CCitadelModifierVData? m_NoExplodeModifier => EmbeddedSubclass<CCitadelModifierVData>(__m_NoExplodeModifier);
 
 		private static readonly SchemaField __m_StunParticle = new("CModifierUppercuttedVData", "m_StunParticle");
 		/// <summary><c>CResourceNameTyped&lt;CWeakHandle&lt;InfoForResourceTypeIParticleSystemDefinition&gt;&gt;</c>.</summary>

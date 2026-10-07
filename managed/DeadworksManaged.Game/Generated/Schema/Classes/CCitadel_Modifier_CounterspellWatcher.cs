@@ -20,5 +20,8 @@ public static partial class Schema {
 		private static readonly SchemaField __m_bSpellBlocked = new("CCitadel_Modifier_CounterspellWatcher", "m_bSpellBlocked");
 		/// <summary><c>bool</c>.</summary>
 		public bool m_bSpellBlocked { get => Get<bool>(__m_bSpellBlocked); set => Set(__m_bSpellBlocked, value); }
+
+		/// <summary>The data entry this was created from, as <see cref="CCitadel_Modifier_CounterspellWatcherVData"/>, or null if it has none.</summary>
+		public new CCitadel_Modifier_CounterspellWatcherVData? VData => ModifierData<CCitadel_Modifier_CounterspellWatcherVData>();
 	}
 }

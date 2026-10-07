@@ -12,5 +12,8 @@ public static partial class Schema {
 		internal CCitadel_ArmorUpgrade_Grit() { }
 		static CCitadel_ArmorUpgrade_Grit ISchemaClass<CCitadel_ArmorUpgrade_Grit>.New() => new();
 		static string ISchemaClass<CCitadel_ArmorUpgrade_Grit>.NativeName => "CCitadel_ArmorUpgrade_Grit";
+
+		/// <summary>The data entry this was created from, as <see cref="CCitadel_ArmorUpgrade_GritVData"/>, or null if it has none.</summary>
+		public new CCitadel_ArmorUpgrade_GritVData? VData => SubclassVData<CCitadel_ArmorUpgrade_GritVData>();
 	}
 }

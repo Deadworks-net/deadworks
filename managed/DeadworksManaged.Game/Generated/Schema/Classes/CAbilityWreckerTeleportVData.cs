@@ -38,16 +38,16 @@ public static partial class Schema {
 		public string m_ChannelParticle => GetBufferString(__m_ChannelParticle);
 
 		private static readonly SchemaField __m_DebuffModifier = new("CAbilityWreckerTeleportVData", "m_DebuffModifier");
-		/// <summary><c>CEmbeddedSubclass&lt;CCitadelModifier&gt;</c>. No typed mapping yet: read it through its address.</summary>
-		public RawField m_DebuffModifier => Raw(__m_DebuffModifier, "CEmbeddedSubclass<CCitadelModifier>");
+		/// <summary><c>CEmbeddedSubclass&lt;CCitadelModifier&gt;</c>.</summary>
+		public CCitadelModifierVData? m_DebuffModifier => EmbeddedSubclass<CCitadelModifierVData>(__m_DebuffModifier);
 
 		private static readonly SchemaField __m_ExplosionParticle = new("CAbilityWreckerTeleportVData", "m_ExplosionParticle");
 		/// <summary><c>CResourceNameTyped&lt;CWeakHandle&lt;InfoForResourceTypeIParticleSystemDefinition&gt;&gt;</c>.</summary>
 		public string m_ExplosionParticle => GetBufferString(__m_ExplosionParticle);
 
 		private static readonly SchemaField __m_GuidingModifier = new("CAbilityWreckerTeleportVData", "m_GuidingModifier");
-		/// <summary><c>CEmbeddedSubclass&lt;CCitadelModifier&gt;</c>. No typed mapping yet: read it through its address.</summary>
-		public RawField m_GuidingModifier => Raw(__m_GuidingModifier, "CEmbeddedSubclass<CCitadelModifier>");
+		/// <summary><c>CEmbeddedSubclass&lt;CCitadelModifier&gt;</c>.</summary>
+		public CCitadelModifierVData? m_GuidingModifier => EmbeddedSubclass<CCitadelModifierVData>(__m_GuidingModifier);
 
 		private static readonly SchemaField __m_SpectatingProjectileParticle = new("CAbilityWreckerTeleportVData", "m_SpectatingProjectileParticle");
 		/// <summary><c>CResourceNameTyped&lt;CWeakHandle&lt;InfoForResourceTypeIParticleSystemDefinition&gt;&gt;</c>.</summary>

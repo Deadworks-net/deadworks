@@ -12,5 +12,8 @@ public static partial class Schema {
 		internal CCitadel_Modifier_Werewolf_Kickflip_BonusDamage() { }
 		static CCitadel_Modifier_Werewolf_Kickflip_BonusDamage ISchemaClass<CCitadel_Modifier_Werewolf_Kickflip_BonusDamage>.New() => new();
 		static string ISchemaClass<CCitadel_Modifier_Werewolf_Kickflip_BonusDamage>.NativeName => "CCitadel_Modifier_Werewolf_Kickflip_BonusDamage";
+
+		/// <summary>The data entry this was created from, as <see cref="CCitadel_Modifier_Werewolf_Kickflip_BonusDamageVData"/>, or null if it has none.</summary>
+		public new CCitadel_Modifier_Werewolf_Kickflip_BonusDamageVData? VData => ModifierData<CCitadel_Modifier_Werewolf_Kickflip_BonusDamageVData>();
 	}
 }

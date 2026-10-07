@@ -20,5 +20,8 @@ public static partial class Schema {
 		private static readonly SchemaField __m_iAbilityID = new("CCitadel_Modifier_Magic_Clarity_Buff", "m_iAbilityID");
 		/// <summary><c>uint64</c>.</summary>
 		public ulong m_iAbilityID { get => Get<ulong>(__m_iAbilityID); set => Set(__m_iAbilityID, value); }
+
+		/// <summary>The data entry this was created from, as <see cref="CCitadel_Modifier_Magic_Clarity_BuffVData"/>, or null if it has none.</summary>
+		public new CCitadel_Modifier_Magic_Clarity_BuffVData? VData => ModifierData<CCitadel_Modifier_Magic_Clarity_BuffVData>();
 	}
 }

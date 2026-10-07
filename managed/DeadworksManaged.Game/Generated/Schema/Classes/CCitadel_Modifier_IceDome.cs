@@ -40,5 +40,8 @@ public static partial class Schema {
 		private static readonly SchemaField __m_vOrigin = new("CCitadel_Modifier_IceDome", "m_vOrigin");
 		/// <summary><c>VectorWS</c>.</summary>
 		public Vector3 m_vOrigin { get => Get<Vector3>(__m_vOrigin); set => Set(__m_vOrigin, value); }
+
+		/// <summary>The data entry this was created from, as <see cref="CCitadel_Modifier_IceDomeVData"/>, or null if it has none.</summary>
+		public new CCitadel_Modifier_IceDomeVData? VData => ModifierData<CCitadel_Modifier_IceDomeVData>();
 	}
 }

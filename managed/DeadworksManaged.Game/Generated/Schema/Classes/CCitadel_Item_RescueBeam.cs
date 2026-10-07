@@ -16,5 +16,8 @@ public static partial class Schema {
 		private static readonly SchemaField __m_bCanPull = new("CCitadel_Item_RescueBeam", "m_bCanPull");
 		/// <summary><c>bool</c>.</summary>
 		public bool m_bCanPull { get => Get<bool>(__m_bCanPull); set => Set(__m_bCanPull, value); }
+
+		/// <summary>The data entry this was created from, as <see cref="CCitadel_Item_RescueBeamVData"/>, or null if it has none.</summary>
+		public new CCitadel_Item_RescueBeamVData? VData => SubclassVData<CCitadel_Item_RescueBeamVData>();
 	}
 }

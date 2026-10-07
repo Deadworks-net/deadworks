@@ -14,8 +14,8 @@ public static partial class Schema {
 		static string ISchemaClass<CCitadel_Modifier_CrushingFistsWatcher_VData>.NativeName => "CCitadel_Modifier_CrushingFistsWatcher_VData";
 
 		private static readonly SchemaField __m_StackingDebuffModifier = new("CCitadel_Modifier_CrushingFistsWatcher_VData", "m_StackingDebuffModifier");
-		/// <summary><c>CEmbeddedSubclass&lt;CCitadelModifier&gt;</c>. No typed mapping yet: read it through its address.</summary>
-		public RawField m_StackingDebuffModifier => Raw(__m_StackingDebuffModifier, "CEmbeddedSubclass<CCitadelModifier>");
+		/// <summary><c>CEmbeddedSubclass&lt;CCitadelModifier&gt;</c>.</summary>
+		public CCitadelModifierVData? m_StackingDebuffModifier => EmbeddedSubclass<CCitadelModifierVData>(__m_StackingDebuffModifier);
 
 		private static readonly SchemaField __m_strStackSound = new("CCitadel_Modifier_CrushingFistsWatcher_VData", "m_strStackSound");
 		/// <summary><c>CSoundEventName</c>.</summary>

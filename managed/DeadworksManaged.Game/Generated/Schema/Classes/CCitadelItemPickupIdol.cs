@@ -16,5 +16,8 @@ public static partial class Schema {
 		private static readonly SchemaField __m_nTeamBias = new("CCitadelItemPickupIdol", "m_nTeamBias");
 		/// <summary><c>int32</c>.</summary>
 		public int m_nTeamBias { get => Get<int>(__m_nTeamBias); set => Set(__m_nTeamBias, value); }
+
+		/// <summary>The data entry this was created from, as <see cref="CCitadelItemPickupIdolVData"/>, or null if it has none.</summary>
+		public new CCitadelItemPickupIdolVData? VData => SubclassVData<CCitadelItemPickupIdolVData>();
 	}
 }

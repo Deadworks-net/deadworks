@@ -12,5 +12,8 @@ public static partial class Schema {
 		internal CCitadel_ArmorUpgrade_SpiritBubble() { }
 		static CCitadel_ArmorUpgrade_SpiritBubble ISchemaClass<CCitadel_ArmorUpgrade_SpiritBubble>.New() => new();
 		static string ISchemaClass<CCitadel_ArmorUpgrade_SpiritBubble>.NativeName => "CCitadel_ArmorUpgrade_SpiritBubble";
+
+		/// <summary>The data entry this was created from, as <see cref="CCitadel_ArmorUpgrade_SpiritBubbleVData"/>, or null if it has none.</summary>
+		public new CCitadel_ArmorUpgrade_SpiritBubbleVData? VData => SubclassVData<CCitadel_ArmorUpgrade_SpiritBubbleVData>();
 	}
 }

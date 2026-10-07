@@ -36,5 +36,8 @@ public static partial class Schema {
 		private static readonly SchemaField __m_flRevealStartLevel = new("CCitadelModifierInvisBush", "m_flRevealStartLevel");
 		/// <summary><c>float32</c>.</summary>
 		public float m_flRevealStartLevel { get => Get<float>(__m_flRevealStartLevel); set => Set(__m_flRevealStartLevel, value); }
+
+		/// <summary>The data entry this was created from, as <see cref="CCitadelModifierInvisBushVData"/>, or null if it has none.</summary>
+		public new CCitadelModifierInvisBushVData? VData => ModifierData<CCitadelModifierInvisBushVData>();
 	}
 }

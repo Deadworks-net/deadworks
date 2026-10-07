@@ -12,5 +12,8 @@ public static partial class Schema {
 		internal CCitadel_Modifier_StatStealBase() { }
 		static CCitadel_Modifier_StatStealBase ISchemaClass<CCitadel_Modifier_StatStealBase>.New() => new();
 		static string ISchemaClass<CCitadel_Modifier_StatStealBase>.NativeName => "CCitadel_Modifier_StatStealBase";
+
+		/// <summary>The data entry this was created from, as <see cref="CCitadel_Modifier_StatStealBaseVData"/>, or null if it has none.</summary>
+		public new CCitadel_Modifier_StatStealBaseVData? VData => ModifierData<CCitadel_Modifier_StatStealBaseVData>();
 	}
 }

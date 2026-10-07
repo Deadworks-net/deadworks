@@ -18,8 +18,8 @@ public static partial class Schema {
 		public string m_AuraParticle => GetBufferString(__m_AuraParticle);
 
 		private static readonly SchemaField __m_CasterBuffModifier = new("CCitadel_Modifier_GraveStoneVData", "m_CasterBuffModifier");
-		/// <summary><c>CEmbeddedSubclass&lt;CCitadelModifier&gt;</c>. No typed mapping yet: read it through its address.</summary>
-		public RawField m_CasterBuffModifier => Raw(__m_CasterBuffModifier, "CEmbeddedSubclass<CCitadelModifier>");
+		/// <summary><c>CEmbeddedSubclass&lt;CCitadelModifier&gt;</c>.</summary>
+		public CCitadelModifierVData? m_CasterBuffModifier => EmbeddedSubclass<CCitadelModifierVData>(__m_CasterBuffModifier);
 
 		private static readonly SchemaField __m_DestroyParticle = new("CCitadel_Modifier_GraveStoneVData", "m_DestroyParticle");
 		/// <summary><c>CResourceNameTyped&lt;CWeakHandle&lt;InfoForResourceTypeIParticleSystemDefinition&gt;&gt;</c>.</summary>
@@ -30,8 +30,8 @@ public static partial class Schema {
 		public string m_DestroySound => GetBufferString(__m_DestroySound);
 
 		private static readonly SchemaField __m_GravestoneCriticalModifier = new("CCitadel_Modifier_GraveStoneVData", "m_GravestoneCriticalModifier");
-		/// <summary><c>CEmbeddedSubclass&lt;CCitadelModifier&gt;</c>. No typed mapping yet: read it through its address.</summary>
-		public RawField m_GravestoneCriticalModifier => Raw(__m_GravestoneCriticalModifier, "CEmbeddedSubclass<CCitadelModifier>");
+		/// <summary><c>CEmbeddedSubclass&lt;CCitadelModifier&gt;</c>.</summary>
+		public CCitadelModifierVData? m_GravestoneCriticalModifier => EmbeddedSubclass<CCitadelModifierVData>(__m_GravestoneCriticalModifier);
 
 		private static readonly SchemaField __m_GravestoneParticle = new("CCitadel_Modifier_GraveStoneVData", "m_GravestoneParticle");
 		/// <summary><c>CResourceNameTyped&lt;CWeakHandle&lt;InfoForResourceTypeIParticleSystemDefinition&gt;&gt;</c>.</summary>

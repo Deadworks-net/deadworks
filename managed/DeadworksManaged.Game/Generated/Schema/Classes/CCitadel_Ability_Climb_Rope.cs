@@ -60,5 +60,8 @@ public static partial class Schema {
 		private static readonly SchemaField __m_vTop = new("CCitadel_Ability_Climb_Rope", "m_vTop");
 		/// <summary><c>CNetworkOriginQuantizedVectorWS</c>.</summary>
 		public CNetworkOriginQuantizedVectorWS m_vTop => Embedded<CNetworkOriginQuantizedVectorWS>(__m_vTop);
+
+		/// <summary>The data entry this was created from, as <see cref="CCitadel_Ability_Climb_RopeVData"/>, or null if it has none.</summary>
+		public new CCitadel_Ability_Climb_RopeVData? VData => SubclassVData<CCitadel_Ability_Climb_RopeVData>();
 	}
 }

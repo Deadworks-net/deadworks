@@ -12,5 +12,8 @@ public static partial class Schema {
 		internal CCitadel_Ability_TestHero_Stance_Spaceman() { }
 		static CCitadel_Ability_TestHero_Stance_Spaceman ISchemaClass<CCitadel_Ability_TestHero_Stance_Spaceman>.New() => new();
 		static string ISchemaClass<CCitadel_Ability_TestHero_Stance_Spaceman>.NativeName => "CCitadel_Ability_TestHero_Stance_Spaceman";
+
+		/// <summary>The data entry this was created from, as <see cref="CCitadel_Ability_TestHero_Stance_SpacemanVData"/>, or null if it has none.</summary>
+		public new CCitadel_Ability_TestHero_Stance_SpacemanVData? VData => SubclassVData<CCitadel_Ability_TestHero_Stance_SpacemanVData>();
 	}
 }

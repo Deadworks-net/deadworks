@@ -14,8 +14,8 @@ public static partial class Schema {
 		static string ISchemaClass<CTakeDamageInfo>.NativeName => "CTakeDamageInfo";
 
 		private static readonly SchemaField __m_DestructibleHitGroupRequests = new("CTakeDamageInfo", "m_DestructibleHitGroupRequests");
-		/// <summary><c>CUtlLeanVector&lt;DestructiblePartDamageRequest_t&gt;</c>. No typed mapping yet: read it through its address.</summary>
-		public RawField m_DestructibleHitGroupRequests => Raw(__m_DestructibleHitGroupRequests, "CUtlLeanVector<DestructiblePartDamageRequest_t>");
+		/// <summary><c>CUtlLeanVector&lt;DestructiblePartDamageRequest_t&gt;</c>.</summary>
+		public SchemaObjectList<DestructiblePartDamageRequest_t> m_DestructibleHitGroupRequests => new(this, __m_DestructibleHitGroupRequests, -1);
 
 		private static readonly SchemaField __m_bEvaded = new("CTakeDamageInfo", "m_bEvaded");
 		/// <summary><c>bool</c>.</summary>

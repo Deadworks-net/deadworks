@@ -36,5 +36,8 @@ public static partial class Schema {
 		private static readonly SchemaField __m_nHoldBombEffect = new("CCitadel_Ability_Tengu_AirLift", "m_nHoldBombEffect");
 		/// <summary><c>ParticleIndex_t</c>.</summary>
 		public int m_nHoldBombEffect { get => Get<int>(__m_nHoldBombEffect); set => Set(__m_nHoldBombEffect, value); }
+
+		/// <summary>The data entry this was created from, as <see cref="CCitadel_Ability_Tengu_AirLiftVData"/>, or null if it has none.</summary>
+		public new CCitadel_Ability_Tengu_AirLiftVData? VData => SubclassVData<CCitadel_Ability_Tengu_AirLiftVData>();
 	}
 }

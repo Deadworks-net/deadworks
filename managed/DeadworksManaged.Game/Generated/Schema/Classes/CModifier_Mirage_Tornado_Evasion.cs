@@ -12,5 +12,8 @@ public static partial class Schema {
 		internal CModifier_Mirage_Tornado_Evasion() { }
 		static CModifier_Mirage_Tornado_Evasion ISchemaClass<CModifier_Mirage_Tornado_Evasion>.New() => new();
 		static string ISchemaClass<CModifier_Mirage_Tornado_Evasion>.NativeName => "CModifier_Mirage_Tornado_Evasion";
+
+		/// <summary>The data entry this was created from, as <see cref="CModifier_Mirage_Tornado_EvasionVData"/>, or null if it has none.</summary>
+		public new CModifier_Mirage_Tornado_EvasionVData? VData => ModifierData<CModifier_Mirage_Tornado_EvasionVData>();
 	}
 }

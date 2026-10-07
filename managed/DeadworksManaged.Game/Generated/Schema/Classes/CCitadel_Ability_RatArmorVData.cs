@@ -14,7 +14,7 @@ public static partial class Schema {
 		static string ISchemaClass<CCitadel_Ability_RatArmorVData>.NativeName => "CCitadel_Ability_RatArmorVData";
 
 		private static readonly SchemaField __m_RatArmorModifier = new("CCitadel_Ability_RatArmorVData", "m_RatArmorModifier");
-		/// <summary><c>CEmbeddedSubclass&lt;CCitadelModifier&gt;</c>. No typed mapping yet: read it through its address.</summary>
-		public RawField m_RatArmorModifier => Raw(__m_RatArmorModifier, "CEmbeddedSubclass<CCitadelModifier>");
+		/// <summary><c>CEmbeddedSubclass&lt;CCitadelModifier&gt;</c>.</summary>
+		public CCitadelModifierVData? m_RatArmorModifier => EmbeddedSubclass<CCitadelModifierVData>(__m_RatArmorModifier);
 	}
 }

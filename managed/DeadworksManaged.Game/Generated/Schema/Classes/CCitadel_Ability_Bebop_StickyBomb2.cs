@@ -12,5 +12,8 @@ public static partial class Schema {
 		internal CCitadel_Ability_Bebop_StickyBomb2() { }
 		static CCitadel_Ability_Bebop_StickyBomb2 ISchemaClass<CCitadel_Ability_Bebop_StickyBomb2>.New() => new();
 		static string ISchemaClass<CCitadel_Ability_Bebop_StickyBomb2>.NativeName => "CCitadel_Ability_Bebop_StickyBomb2";
+
+		/// <summary>The data entry this was created from, as <see cref="CCitadel_Ability_Bebop_StickyBomb2VData"/>, or null if it has none.</summary>
+		public new CCitadel_Ability_Bebop_StickyBomb2VData? VData => SubclassVData<CCitadel_Ability_Bebop_StickyBomb2VData>();
 	}
 }

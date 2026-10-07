@@ -18,15 +18,15 @@ public static partial class Schema {
 		public string m_DebuffParticle => GetBufferString(__m_DebuffParticle);
 
 		private static readonly SchemaField __m_PostSleepBulletShredModifier = new("CCitadel_Modifier_SleepDaggerAsleepVData", "m_PostSleepBulletShredModifier");
-		/// <summary><c>CEmbeddedSubclass&lt;CCitadelModifier&gt;</c>. No typed mapping yet: read it through its address.</summary>
-		public RawField m_PostSleepBulletShredModifier => Raw(__m_PostSleepBulletShredModifier, "CEmbeddedSubclass<CCitadelModifier>");
+		/// <summary><c>CEmbeddedSubclass&lt;CCitadelModifier&gt;</c>.</summary>
+		public CCitadelModifierVData? m_PostSleepBulletShredModifier => EmbeddedSubclass<CCitadelModifierVData>(__m_PostSleepBulletShredModifier);
 
 		private static readonly SchemaField __m_PostSleepModifier = new("CCitadel_Modifier_SleepDaggerAsleepVData", "m_PostSleepModifier");
-		/// <summary><c>CEmbeddedSubclass&lt;CCitadelModifier&gt;</c>. No typed mapping yet: read it through its address.</summary>
-		public RawField m_PostSleepModifier => Raw(__m_PostSleepModifier, "CEmbeddedSubclass<CCitadelModifier>");
+		/// <summary><c>CEmbeddedSubclass&lt;CCitadelModifier&gt;</c>.</summary>
+		public CCitadelModifierVData? m_PostSleepModifier => EmbeddedSubclass<CCitadelModifierVData>(__m_PostSleepModifier);
 
 		private static readonly SchemaField __m_PostSleepStaminaModifier = new("CCitadel_Modifier_SleepDaggerAsleepVData", "m_PostSleepStaminaModifier");
-		/// <summary><c>CEmbeddedSubclass&lt;CCitadelModifier&gt;</c>. No typed mapping yet: read it through its address.</summary>
-		public RawField m_PostSleepStaminaModifier => Raw(__m_PostSleepStaminaModifier, "CEmbeddedSubclass<CCitadelModifier>");
+		/// <summary><c>CEmbeddedSubclass&lt;CCitadelModifier&gt;</c>.</summary>
+		public CCitadelModifierVData? m_PostSleepStaminaModifier => EmbeddedSubclass<CCitadelModifierVData>(__m_PostSleepStaminaModifier);
 	}
 }

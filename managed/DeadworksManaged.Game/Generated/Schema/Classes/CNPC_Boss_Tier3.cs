@@ -44,5 +44,8 @@ public static partial class Schema {
 		private static readonly SchemaField __m_vecElectricBeamTargetEnd = new("CNPC_Boss_Tier3", "m_vecElectricBeamTargetEnd");
 		/// <summary><c>VectorWS</c>.</summary>
 		public Vector3 m_vecElectricBeamTargetEnd { get => Get<Vector3>(__m_vecElectricBeamTargetEnd); set => Set(__m_vecElectricBeamTargetEnd, value); }
+
+		/// <summary>The data entry this was created from, as <see cref="CNPC_Boss_Tier3VData"/>, or null if it has none.</summary>
+		public new CNPC_Boss_Tier3VData? VData => SubclassVData<CNPC_Boss_Tier3VData>();
 	}
 }

@@ -18,16 +18,16 @@ public static partial class Schema {
 		public string m_ChargeUpParticle => GetBufferString(__m_ChargeUpParticle);
 
 		private static readonly SchemaField __m_DebuffModifier = new("CAbility_Fathom_LurkersAmbush_VData", "m_DebuffModifier");
-		/// <summary><c>CEmbeddedSubclass&lt;CCitadelModifier&gt;</c>. No typed mapping yet: read it through its address.</summary>
-		public RawField m_DebuffModifier => Raw(__m_DebuffModifier, "CEmbeddedSubclass<CCitadelModifier>");
+		/// <summary><c>CEmbeddedSubclass&lt;CCitadelModifier&gt;</c>.</summary>
+		public CCitadelModifierVData? m_DebuffModifier => EmbeddedSubclass<CCitadelModifierVData>(__m_DebuffModifier);
 
 		private static readonly SchemaField __m_InvisModifier = new("CAbility_Fathom_LurkersAmbush_VData", "m_InvisModifier");
-		/// <summary><c>CEmbeddedSubclass&lt;CCitadel_Modifier_LurkersAmbush_Invis&gt;</c>. No typed mapping yet: read it through its address.</summary>
-		public RawField m_InvisModifier => Raw(__m_InvisModifier, "CEmbeddedSubclass<CCitadel_Modifier_LurkersAmbush_Invis>");
+		/// <summary><c>CEmbeddedSubclass&lt;CCitadel_Modifier_LurkersAmbush_Invis&gt;</c>.</summary>
+		public CCitadel_Modifier_LurkersAmbush_InvisVData? m_InvisModifier => EmbeddedSubclass<CCitadel_Modifier_LurkersAmbush_InvisVData>(__m_InvisModifier);
 
 		private static readonly SchemaField __m_RegenModifier = new("CAbility_Fathom_LurkersAmbush_VData", "m_RegenModifier");
-		/// <summary><c>CEmbeddedSubclass&lt;CCitadelModifier&gt;</c>. No typed mapping yet: read it through its address.</summary>
-		public RawField m_RegenModifier => Raw(__m_RegenModifier, "CEmbeddedSubclass<CCitadelModifier>");
+		/// <summary><c>CEmbeddedSubclass&lt;CCitadelModifier&gt;</c>.</summary>
+		public CCitadelModifierVData? m_RegenModifier => EmbeddedSubclass<CCitadelModifierVData>(__m_RegenModifier);
 
 		private static readonly SchemaField __m_strSwapStarted = new("CAbility_Fathom_LurkersAmbush_VData", "m_strSwapStarted");
 		/// <summary><c>CSoundEventName</c>.</summary>

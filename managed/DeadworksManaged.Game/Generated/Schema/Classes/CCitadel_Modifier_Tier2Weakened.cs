@@ -12,5 +12,8 @@ public static partial class Schema {
 		internal CCitadel_Modifier_Tier2Weakened() { }
 		static CCitadel_Modifier_Tier2Weakened ISchemaClass<CCitadel_Modifier_Tier2Weakened>.New() => new();
 		static string ISchemaClass<CCitadel_Modifier_Tier2Weakened>.NativeName => "CCitadel_Modifier_Tier2Weakened";
+
+		/// <summary>The data entry this was created from, as <see cref="CCitadel_Modifier_Tier2WeakenedVData"/>, or null if it has none.</summary>
+		public new CCitadel_Modifier_Tier2WeakenedVData? VData => ModifierData<CCitadel_Modifier_Tier2WeakenedVData>();
 	}
 }

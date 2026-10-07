@@ -12,5 +12,8 @@ public static partial class Schema {
 		internal CCitadel_Modifier_KothTrooperBuff() { }
 		static CCitadel_Modifier_KothTrooperBuff ISchemaClass<CCitadel_Modifier_KothTrooperBuff>.New() => new();
 		static string ISchemaClass<CCitadel_Modifier_KothTrooperBuff>.NativeName => "CCitadel_Modifier_KothTrooperBuff";
+
+		/// <summary>The data entry this was created from, as <see cref="CCitadel_Modifier_KothTrooperBuffVData"/>, or null if it has none.</summary>
+		public new CCitadel_Modifier_KothTrooperBuffVData? VData => ModifierData<CCitadel_Modifier_KothTrooperBuffVData>();
 	}
 }

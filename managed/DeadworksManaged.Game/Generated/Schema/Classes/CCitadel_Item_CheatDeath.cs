@@ -16,5 +16,8 @@ public static partial class Schema {
 		private static readonly SchemaField __m_bStartCooldown = new("CCitadel_Item_CheatDeath", "m_bStartCooldown");
 		/// <summary><c>bool</c>.</summary>
 		public bool m_bStartCooldown { get => Get<bool>(__m_bStartCooldown); set => Set(__m_bStartCooldown, value); }
+
+		/// <summary>The data entry this was created from, as <see cref="CCitadel_Item_CheatDeathVData"/>, or null if it has none.</summary>
+		public new CCitadel_Item_CheatDeathVData? VData => SubclassVData<CCitadel_Item_CheatDeathVData>();
 	}
 }

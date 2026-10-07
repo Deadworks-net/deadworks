@@ -14,8 +14,8 @@ public static partial class Schema {
 		static string ISchemaClass<CCitadel_Modifier_Fervor_VData>.NativeName => "CCitadel_Modifier_Fervor_VData";
 
 		private static readonly SchemaField __m_BonusesModifier = new("CCitadel_Modifier_Fervor_VData", "m_BonusesModifier");
-		/// <summary><c>CEmbeddedSubclass&lt;CCitadelModifier&gt;</c>. No typed mapping yet: read it through its address.</summary>
-		public RawField m_BonusesModifier => Raw(__m_BonusesModifier, "CEmbeddedSubclass<CCitadelModifier>");
+		/// <summary><c>CEmbeddedSubclass&lt;CCitadelModifier&gt;</c>.</summary>
+		public CCitadelModifierVData? m_BonusesModifier => EmbeddedSubclass<CCitadelModifierVData>(__m_BonusesModifier);
 
 		private static readonly SchemaField __m_FervorParticle = new("CCitadel_Modifier_Fervor_VData", "m_FervorParticle");
 		/// <summary><c>CResourceNameTyped&lt;CWeakHandle&lt;InfoForResourceTypeIParticleSystemDefinition&gt;&gt;</c>.</summary>

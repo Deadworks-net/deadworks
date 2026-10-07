@@ -12,5 +12,8 @@ public static partial class Schema {
 		internal CCitadel_Modifier_Neutral_DoT_Debuff() { }
 		static CCitadel_Modifier_Neutral_DoT_Debuff ISchemaClass<CCitadel_Modifier_Neutral_DoT_Debuff>.New() => new();
 		static string ISchemaClass<CCitadel_Modifier_Neutral_DoT_Debuff>.NativeName => "CCitadel_Modifier_Neutral_DoT_Debuff";
+
+		/// <summary>The data entry this was created from, as <see cref="CCitadel_Modifier_Neutral_DoT_DebuffVData"/>, or null if it has none.</summary>
+		public new CCitadel_Modifier_Neutral_DoT_DebuffVData? VData => ModifierData<CCitadel_Modifier_Neutral_DoT_DebuffVData>();
 	}
 }

@@ -12,5 +12,8 @@ public static partial class Schema {
 		internal CCitadel_Modifier_Necro_Gravestone_Buff() { }
 		static CCitadel_Modifier_Necro_Gravestone_Buff ISchemaClass<CCitadel_Modifier_Necro_Gravestone_Buff>.New() => new();
 		static string ISchemaClass<CCitadel_Modifier_Necro_Gravestone_Buff>.NativeName => "CCitadel_Modifier_Necro_Gravestone_Buff";
+
+		/// <summary>The data entry this was created from, as <see cref="CCitadel_Modifier_Necro_Gravestone_BuffVData"/>, or null if it has none.</summary>
+		public new CCitadel_Modifier_Necro_Gravestone_BuffVData? VData => ModifierData<CCitadel_Modifier_Necro_Gravestone_BuffVData>();
 	}
 }

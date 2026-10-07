@@ -14,7 +14,7 @@ public static partial class Schema {
 		static string ISchemaClass<CAbility_Operative_Revelation_VData>.NativeName => "CAbility_Operative_Revelation_VData";
 
 		private static readonly SchemaField __m_CasterModifier = new("CAbility_Operative_Revelation_VData", "m_CasterModifier");
-		/// <summary><c>CEmbeddedSubclass&lt;CCitadelModifier&gt;</c>. No typed mapping yet: read it through its address.</summary>
-		public RawField m_CasterModifier => Raw(__m_CasterModifier, "CEmbeddedSubclass<CCitadelModifier>");
+		/// <summary><c>CEmbeddedSubclass&lt;CCitadelModifier&gt;</c>.</summary>
+		public CCitadelModifierVData? m_CasterModifier => EmbeddedSubclass<CCitadelModifierVData>(__m_CasterModifier);
 	}
 }

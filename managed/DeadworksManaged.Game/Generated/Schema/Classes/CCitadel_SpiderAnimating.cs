@@ -12,5 +12,8 @@ public static partial class Schema {
 		internal CCitadel_SpiderAnimating() { }
 		static CCitadel_SpiderAnimating ISchemaClass<CCitadel_SpiderAnimating>.New() => new();
 		static string ISchemaClass<CCitadel_SpiderAnimating>.NativeName => "CCitadel_SpiderAnimating";
+
+		/// <summary>The data entry this was created from, as <see cref="CCitadel_SpiderAnimatingVData"/>, or null if it has none.</summary>
+		public CCitadel_SpiderAnimatingVData? VData => SubclassVData<CCitadel_SpiderAnimatingVData>();
 	}
 }

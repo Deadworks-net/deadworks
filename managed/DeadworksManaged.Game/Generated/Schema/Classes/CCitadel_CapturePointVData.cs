@@ -54,8 +54,8 @@ public static partial class Schema {
 		public float m_flTotalHealthToCapture { get => Get<float>(__m_flTotalHealthToCapture); set => Set(__m_flTotalHealthToCapture, value); }
 
 		private static readonly SchemaField __m_modifierCapturer = new("CCitadel_CapturePointVData", "m_modifierCapturer");
-		/// <summary><c>CEmbeddedSubclass&lt;CBaseModifier&gt;</c>. No typed mapping yet: read it through its address.</summary>
-		public RawField m_modifierCapturer => Raw(__m_modifierCapturer, "CEmbeddedSubclass<CBaseModifier>");
+		/// <summary><c>CEmbeddedSubclass&lt;CBaseModifier&gt;</c>.</summary>
+		public CModifierVData? m_modifierCapturer => EmbeddedSubclass<CModifierVData>(__m_modifierCapturer);
 
 		private static readonly SchemaField __m_remapCapturersToCaptureTime = new("CCitadel_CapturePointVData", "m_remapCapturersToCaptureTime");
 		/// <summary><c>CRemapFloat</c>. Remap of number of capturers to capture time in seconds. Smaller is faster!.</summary>

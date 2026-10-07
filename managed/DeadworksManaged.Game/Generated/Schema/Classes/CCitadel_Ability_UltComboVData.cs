@@ -14,8 +14,8 @@ public static partial class Schema {
 		static string ISchemaClass<CCitadel_Ability_UltComboVData>.NativeName => "CCitadel_Ability_UltComboVData";
 
 		private static readonly SchemaField __m_KillCheckModifier = new("CCitadel_Ability_UltComboVData", "m_KillCheckModifier");
-		/// <summary><c>CEmbeddedSubclass&lt;CCitadelModifier&gt;</c>. No typed mapping yet: read it through its address.</summary>
-		public RawField m_KillCheckModifier => Raw(__m_KillCheckModifier, "CEmbeddedSubclass<CCitadelModifier>");
+		/// <summary><c>CEmbeddedSubclass&lt;CCitadelModifier&gt;</c>.</summary>
+		public CCitadelModifierVData? m_KillCheckModifier => EmbeddedSubclass<CCitadelModifierVData>(__m_KillCheckModifier);
 
 		private static readonly SchemaField __m_MeleeImpactParticle = new("CCitadel_Ability_UltComboVData", "m_MeleeImpactParticle");
 		/// <summary><c>CResourceNameTyped&lt;CWeakHandle&lt;InfoForResourceTypeIParticleSystemDefinition&gt;&gt;</c>.</summary>
@@ -26,12 +26,12 @@ public static partial class Schema {
 		public string m_MeleeSwingParticle => GetBufferString(__m_MeleeSwingParticle);
 
 		private static readonly SchemaField __m_SelfModifier = new("CCitadel_Ability_UltComboVData", "m_SelfModifier");
-		/// <summary><c>CEmbeddedSubclass&lt;CCitadelModifier&gt;</c>. No typed mapping yet: read it through its address.</summary>
-		public RawField m_SelfModifier => Raw(__m_SelfModifier, "CEmbeddedSubclass<CCitadelModifier>");
+		/// <summary><c>CEmbeddedSubclass&lt;CCitadelModifier&gt;</c>.</summary>
+		public CCitadelModifierVData? m_SelfModifier => EmbeddedSubclass<CCitadelModifierVData>(__m_SelfModifier);
 
 		private static readonly SchemaField __m_TargetModifier = new("CCitadel_Ability_UltComboVData", "m_TargetModifier");
-		/// <summary><c>CEmbeddedSubclass&lt;CCitadel_Modifier_UltCombo_Target&gt;</c>. No typed mapping yet: read it through its address.</summary>
-		public RawField m_TargetModifier => Raw(__m_TargetModifier, "CEmbeddedSubclass<CCitadel_Modifier_UltCombo_Target>");
+		/// <summary><c>CEmbeddedSubclass&lt;CCitadel_Modifier_UltCombo_Target&gt;</c>.</summary>
+		public CCitadel_Modifier_UltCombo_TargetVData? m_TargetModifier => EmbeddedSubclass<CCitadel_Modifier_UltCombo_TargetVData>(__m_TargetModifier);
 
 		private static readonly SchemaField __m_flDamageInterval = new("CCitadel_Ability_UltComboVData", "m_flDamageInterval");
 		/// <summary><c>float32</c>.</summary>

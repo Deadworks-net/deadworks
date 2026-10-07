@@ -20,5 +20,8 @@ public static partial class Schema {
 		private static readonly SchemaField __m_flSnapShotDPS = new("CCitadel_Modifier_Basic_DOT", "m_flSnapShotDPS");
 		/// <summary><c>float32</c>.</summary>
 		public float m_flSnapShotDPS { get => Get<float>(__m_flSnapShotDPS); set => Set(__m_flSnapShotDPS, value); }
+
+		/// <summary>The data entry this was created from, as <see cref="CCitadel_Modifier_Basic_DOTVData"/>, or null if it has none.</summary>
+		public new CCitadel_Modifier_Basic_DOTVData? VData => ModifierData<CCitadel_Modifier_Basic_DOTVData>();
 	}
 }

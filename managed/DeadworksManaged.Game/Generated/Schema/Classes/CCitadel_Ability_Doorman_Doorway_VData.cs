@@ -66,8 +66,8 @@ public static partial class Schema {
 		public string m_DoorStartCastSound => GetBufferString(__m_DoorStartCastSound);
 
 		private static readonly SchemaField __m_DoorwayTimerModifier = new("CCitadel_Ability_Doorman_Doorway_VData", "m_DoorwayTimerModifier");
-		/// <summary><c>CEmbeddedSubclass&lt;CCitadelModifier&gt;</c>. No typed mapping yet: read it through its address.</summary>
-		public RawField m_DoorwayTimerModifier => Raw(__m_DoorwayTimerModifier, "CEmbeddedSubclass<CCitadelModifier>");
+		/// <summary><c>CEmbeddedSubclass&lt;CCitadelModifier&gt;</c>.</summary>
+		public CCitadelModifierVData? m_DoorwayTimerModifier => EmbeddedSubclass<CCitadelModifierVData>(__m_DoorwayTimerModifier);
 
 		private static readonly SchemaField __m_PendingDoorParticle = new("CCitadel_Ability_Doorman_Doorway_VData", "m_PendingDoorParticle");
 		/// <summary><c>CResourceNameTyped&lt;CWeakHandle&lt;InfoForResourceTypeIParticleSystemDefinition&gt;&gt;</c>.</summary>
@@ -78,8 +78,8 @@ public static partial class Schema {
 		public string m_PlaceDoorParticle => GetBufferString(__m_PlaceDoorParticle);
 
 		private static readonly SchemaField __m_PortalBarrierModifier = new("CCitadel_Ability_Doorman_Doorway_VData", "m_PortalBarrierModifier");
-		/// <summary><c>CEmbeddedSubclass&lt;CCitadelModifier&gt;</c>. No typed mapping yet: read it through its address.</summary>
-		public RawField m_PortalBarrierModifier => Raw(__m_PortalBarrierModifier, "CEmbeddedSubclass<CCitadelModifier>");
+		/// <summary><c>CEmbeddedSubclass&lt;CCitadelModifier&gt;</c>.</summary>
+		public CCitadelModifierVData? m_PortalBarrierModifier => EmbeddedSubclass<CCitadelModifierVData>(__m_PortalBarrierModifier);
 
 		private static readonly SchemaField __m_colorPlacementSphereDesat = new("CCitadel_Ability_Doorman_Doorway_VData", "m_colorPlacementSphereDesat");
 		/// <summary><c>Color</c>.</summary>

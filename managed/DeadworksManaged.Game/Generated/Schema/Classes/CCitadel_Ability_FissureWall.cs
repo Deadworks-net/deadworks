@@ -48,5 +48,8 @@ public static partial class Schema {
 		private static readonly SchemaField __m_vecTravellingPosition = new("CCitadel_Ability_FissureWall", "m_vecTravellingPosition");
 		/// <summary><c>VectorWS</c>.</summary>
 		public Vector3 m_vecTravellingPosition { get => Get<Vector3>(__m_vecTravellingPosition); set => Set(__m_vecTravellingPosition, value); }
+
+		/// <summary>The data entry this was created from, as <see cref="CCitadel_Ability_FissureWallVData"/>, or null if it has none.</summary>
+		public new CCitadel_Ability_FissureWallVData? VData => SubclassVData<CCitadel_Ability_FissureWallVData>();
 	}
 }

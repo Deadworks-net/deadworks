@@ -12,5 +12,8 @@ public static partial class Schema {
 		internal CCitadel_Neutral_Attack_BulletToPointModifier() { }
 		static CCitadel_Neutral_Attack_BulletToPointModifier ISchemaClass<CCitadel_Neutral_Attack_BulletToPointModifier>.New() => new();
 		static string ISchemaClass<CCitadel_Neutral_Attack_BulletToPointModifier>.NativeName => "CCitadel_Neutral_Attack_BulletToPointModifier";
+
+		/// <summary>The data entry this was created from, as <see cref="CCitadel_Neutral_Attack_BulletToPointModifierVData"/>, or null if it has none.</summary>
+		public new CCitadel_Neutral_Attack_BulletToPointModifierVData? VData => ModifierData<CCitadel_Neutral_Attack_BulletToPointModifierVData>();
 	}
 }

@@ -12,5 +12,8 @@ public static partial class Schema {
 		internal CModifier_Drifter_ShadowMark_Target() { }
 		static CModifier_Drifter_ShadowMark_Target ISchemaClass<CModifier_Drifter_ShadowMark_Target>.New() => new();
 		static string ISchemaClass<CModifier_Drifter_ShadowMark_Target>.NativeName => "CModifier_Drifter_ShadowMark_Target";
+
+		/// <summary>The data entry this was created from, as <see cref="CModifier_Drifter_ShadowMark_TargetVData"/>, or null if it has none.</summary>
+		public new CModifier_Drifter_ShadowMark_TargetVData? VData => ModifierData<CModifier_Drifter_ShadowMark_TargetVData>();
 	}
 }

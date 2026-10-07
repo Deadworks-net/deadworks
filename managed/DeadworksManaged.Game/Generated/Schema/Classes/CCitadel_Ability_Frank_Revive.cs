@@ -28,5 +28,8 @@ public static partial class Schema {
 		private static readonly SchemaField __m_flTotalPendingHeal = new("CCitadel_Ability_Frank_Revive", "m_flTotalPendingHeal");
 		/// <summary><c>float32</c>.</summary>
 		public float m_flTotalPendingHeal { get => Get<float>(__m_flTotalPendingHeal); set => Set(__m_flTotalPendingHeal, value); }
+
+		/// <summary>The data entry this was created from, as <see cref="CCitadel_Ability_Frank_ReviveVData"/>, or null if it has none.</summary>
+		public new CCitadel_Ability_Frank_ReviveVData? VData => SubclassVData<CCitadel_Ability_Frank_ReviveVData>();
 	}
 }

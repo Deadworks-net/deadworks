@@ -12,5 +12,8 @@ public static partial class Schema {
 		internal CCitadel_Ability_Priest_SmokeGrenade() { }
 		static CCitadel_Ability_Priest_SmokeGrenade ISchemaClass<CCitadel_Ability_Priest_SmokeGrenade>.New() => new();
 		static string ISchemaClass<CCitadel_Ability_Priest_SmokeGrenade>.NativeName => "CCitadel_Ability_Priest_SmokeGrenade";
+
+		/// <summary>The data entry this was created from, as <see cref="CCitadel_Ability_Priest_SmokeGrenadeVData"/>, or null if it has none.</summary>
+		public new CCitadel_Ability_Priest_SmokeGrenadeVData? VData => SubclassVData<CCitadel_Ability_Priest_SmokeGrenadeVData>();
 	}
 }

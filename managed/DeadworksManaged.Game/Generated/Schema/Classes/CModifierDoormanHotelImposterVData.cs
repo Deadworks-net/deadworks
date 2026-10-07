@@ -14,8 +14,8 @@ public static partial class Schema {
 		static string ISchemaClass<CModifierDoormanHotelImposterVData>.NativeName => "CModifierDoormanHotelImposterVData";
 
 		private static readonly SchemaField __m_ImposterModifierFX = new("CModifierDoormanHotelImposterVData", "m_ImposterModifierFX");
-		/// <summary><c>CEmbeddedSubclass&lt;CCitadel_Modifier_Doorman_Hotel_Imposter_FX&gt;</c>. No typed mapping yet: read it through its address.</summary>
-		public RawField m_ImposterModifierFX => Raw(__m_ImposterModifierFX, "CEmbeddedSubclass<CCitadel_Modifier_Doorman_Hotel_Imposter_FX>");
+		/// <summary><c>CEmbeddedSubclass&lt;CCitadel_Modifier_Doorman_Hotel_Imposter_FX&gt;</c>.</summary>
+		public CCitadelModifierVData? m_ImposterModifierFX => EmbeddedSubclass<CCitadelModifierVData>(__m_ImposterModifierFX);
 
 		private static readonly SchemaField __m_strKeyTurnSound = new("CModifierDoormanHotelImposterVData", "m_strKeyTurnSound");
 		/// <summary><c>CSoundEventName</c>.</summary>

@@ -22,7 +22,7 @@ public static partial class Schema {
 		public string m_HealParticle => GetBufferString(__m_HealParticle);
 
 		private static readonly SchemaField __m_HealingPulseTrackerModifier = new("CCitadel_Item_HealthRegenAuraVData", "m_HealingPulseTrackerModifier");
-		/// <summary><c>CEmbeddedSubclass&lt;CCitadelModifier&gt;</c>. No typed mapping yet: read it through its address.</summary>
-		public RawField m_HealingPulseTrackerModifier => Raw(__m_HealingPulseTrackerModifier, "CEmbeddedSubclass<CCitadelModifier>");
+		/// <summary><c>CEmbeddedSubclass&lt;CCitadelModifier&gt;</c>.</summary>
+		public CCitadelModifierVData? m_HealingPulseTrackerModifier => EmbeddedSubclass<CCitadelModifierVData>(__m_HealingPulseTrackerModifier);
 	}
 }

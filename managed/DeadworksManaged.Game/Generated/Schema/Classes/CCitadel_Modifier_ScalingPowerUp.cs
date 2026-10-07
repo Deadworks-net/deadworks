@@ -12,5 +12,8 @@ public static partial class Schema {
 		internal CCitadel_Modifier_ScalingPowerUp() { }
 		static CCitadel_Modifier_ScalingPowerUp ISchemaClass<CCitadel_Modifier_ScalingPowerUp>.New() => new();
 		static string ISchemaClass<CCitadel_Modifier_ScalingPowerUp>.NativeName => "CCitadel_Modifier_ScalingPowerUp";
+
+		/// <summary>The data entry this was created from, as <see cref="CCitadel_Modifier_ScalingPowerUpVData"/>, or null if it has none.</summary>
+		public new CCitadel_Modifier_ScalingPowerUpVData? VData => ModifierData<CCitadel_Modifier_ScalingPowerUpVData>();
 	}
 }

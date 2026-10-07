@@ -20,5 +20,8 @@ public static partial class Schema {
 		private static readonly SchemaField __m_mapStartLookTime = new("CCitadel_Modifier_SpookyHide_Invis", "m_mapStartLookTime");
 		/// <summary><c>CUtlOrderedMap&lt;CCitadelPlayerPawn*, GameTime_t&gt;</c>. No typed mapping yet: read it through its address.</summary>
 		public RawField m_mapStartLookTime => Raw(__m_mapStartLookTime, "CUtlOrderedMap<CCitadelPlayerPawn*, GameTime_t>");
+
+		/// <summary>The data entry this was created from, as <see cref="CCitadel_Modifier_SpookyHide_InvisVData"/>, or null if it has none.</summary>
+		public new CCitadel_Modifier_SpookyHide_InvisVData? VData => ModifierData<CCitadel_Modifier_SpookyHide_InvisVData>();
 	}
 }

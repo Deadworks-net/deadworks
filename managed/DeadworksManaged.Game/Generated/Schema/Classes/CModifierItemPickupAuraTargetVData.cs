@@ -18,7 +18,7 @@ public static partial class Schema {
 		public float m_PickupTimer { get => Get<float>(__m_PickupTimer); set => Set(__m_PickupTimer, value); }
 
 		private static readonly SchemaField __m_PickupTimerModifier = new("CModifierItemPickupAuraTargetVData", "m_PickupTimerModifier");
-		/// <summary><c>CEmbeddedSubclass&lt;CCitadelModifier&gt;</c>. No typed mapping yet: read it through its address.</summary>
-		public RawField m_PickupTimerModifier => Raw(__m_PickupTimerModifier, "CEmbeddedSubclass<CCitadelModifier>");
+		/// <summary><c>CEmbeddedSubclass&lt;CCitadelModifier&gt;</c>.</summary>
+		public CCitadelModifierVData? m_PickupTimerModifier => EmbeddedSubclass<CCitadelModifierVData>(__m_PickupTimerModifier);
 	}
 }

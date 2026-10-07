@@ -24,5 +24,8 @@ public static partial class Schema {
 		private static readonly SchemaField __m_vStartingPositionSpringVelocity = new("CCitadel_Ability_Ratking_EnterTunnel", "m_vStartingPositionSpringVelocity");
 		/// <summary><c>Vector</c>.</summary>
 		public Vector3 m_vStartingPositionSpringVelocity { get => Get<Vector3>(__m_vStartingPositionSpringVelocity); set => Set(__m_vStartingPositionSpringVelocity, value); }
+
+		/// <summary>The data entry this was created from, as <see cref="CCitadel_Ability_Ratking_EnterTunnelVData"/>, or null if it has none.</summary>
+		public new CCitadel_Ability_Ratking_EnterTunnelVData? VData => SubclassVData<CCitadel_Ability_Ratking_EnterTunnelVData>();
 	}
 }

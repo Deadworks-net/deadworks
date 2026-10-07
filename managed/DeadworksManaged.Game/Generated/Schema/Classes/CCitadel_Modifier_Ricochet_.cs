@@ -12,5 +12,8 @@ public static partial class Schema {
 		internal CCitadel_Modifier_Ricochet_() { }
 		static CCitadel_Modifier_Ricochet_ ISchemaClass<CCitadel_Modifier_Ricochet_>.New() => new();
 		static string ISchemaClass<CCitadel_Modifier_Ricochet_>.NativeName => "CCitadel_Modifier_Ricochet_";
+
+		/// <summary>The data entry this was created from, as <see cref="CCitadel_Modifier_Ricochet_VData"/>, or null if it has none.</summary>
+		public new CCitadel_Modifier_Ricochet_VData? VData => ModifierData<CCitadel_Modifier_Ricochet_VData>();
 	}
 }

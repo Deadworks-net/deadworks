@@ -20,5 +20,8 @@ public static partial class Schema {
 		private static readonly SchemaField __m_nCastParticleIndex = new("CCitadel_Modifier_Bookworm_AOEMagic_AreaModifier", "m_nCastParticleIndex");
 		/// <summary><c>ParticleIndex_t</c>.</summary>
 		public int m_nCastParticleIndex { get => Get<int>(__m_nCastParticleIndex); set => Set(__m_nCastParticleIndex, value); }
+
+		/// <summary>The data entry this was created from, as <see cref="CCitadel_Modifier_Bookworm_AOEMagic_AreaModifierVData"/>, or null if it has none.</summary>
+		public new CCitadel_Modifier_Bookworm_AOEMagic_AreaModifierVData? VData => ModifierData<CCitadel_Modifier_Bookworm_AOEMagic_AreaModifierVData>();
 	}
 }

@@ -12,5 +12,8 @@ public static partial class Schema {
 		internal CCitadel_Modifier_AnimalCurse() { }
 		static CCitadel_Modifier_AnimalCurse ISchemaClass<CCitadel_Modifier_AnimalCurse>.New() => new();
 		static string ISchemaClass<CCitadel_Modifier_AnimalCurse>.NativeName => "CCitadel_Modifier_AnimalCurse";
+
+		/// <summary>The data entry this was created from, as <see cref="CCitadel_Modifier_AnimalCurseVData"/>, or null if it has none.</summary>
+		public new CCitadel_Modifier_AnimalCurseVData? VData => ModifierData<CCitadel_Modifier_AnimalCurseVData>();
 	}
 }

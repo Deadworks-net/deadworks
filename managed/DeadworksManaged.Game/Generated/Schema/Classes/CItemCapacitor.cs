@@ -12,5 +12,8 @@ public static partial class Schema {
 		internal CItemCapacitor() { }
 		static CItemCapacitor ISchemaClass<CItemCapacitor>.New() => new();
 		static string ISchemaClass<CItemCapacitor>.NativeName => "CItemCapacitor";
+
+		/// <summary>The data entry this was created from, as <see cref="CItemCapacitorVData"/>, or null if it has none.</summary>
+		public new CItemCapacitorVData? VData => SubclassVData<CItemCapacitorVData>();
 	}
 }

@@ -12,5 +12,8 @@ public static partial class Schema {
 		internal CCitadel_Modifier_BoxingGlove() { }
 		static CCitadel_Modifier_BoxingGlove ISchemaClass<CCitadel_Modifier_BoxingGlove>.New() => new();
 		static string ISchemaClass<CCitadel_Modifier_BoxingGlove>.NativeName => "CCitadel_Modifier_BoxingGlove";
+
+		/// <summary>The data entry this was created from, as <see cref="CCitadel_Modifier_BoxingGloveVData"/>, or null if it has none.</summary>
+		public new CCitadel_Modifier_BoxingGloveVData? VData => ModifierData<CCitadel_Modifier_BoxingGloveVData>();
 	}
 }

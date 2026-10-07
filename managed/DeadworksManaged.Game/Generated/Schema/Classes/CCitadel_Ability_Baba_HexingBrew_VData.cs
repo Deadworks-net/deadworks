@@ -14,8 +14,8 @@ public static partial class Schema {
 		static string ISchemaClass<CCitadel_Ability_Baba_HexingBrew_VData>.NativeName => "CCitadel_Ability_Baba_HexingBrew_VData";
 
 		private static readonly SchemaField __m_BarrierModifier = new("CCitadel_Ability_Baba_HexingBrew_VData", "m_BarrierModifier");
-		/// <summary><c>CEmbeddedSubclass&lt;CCitadelModifier&gt;</c>. No typed mapping yet: read it through its address.</summary>
-		public RawField m_BarrierModifier => Raw(__m_BarrierModifier, "CEmbeddedSubclass<CCitadelModifier>");
+		/// <summary><c>CEmbeddedSubclass&lt;CCitadelModifier&gt;</c>.</summary>
+		public CCitadelModifierVData? m_BarrierModifier => EmbeddedSubclass<CCitadelModifierVData>(__m_BarrierModifier);
 
 		private static readonly SchemaField __m_DetonateBarrierParticle = new("CCitadel_Ability_Baba_HexingBrew_VData", "m_DetonateBarrierParticle");
 		/// <summary><c>CResourceNameTyped&lt;CWeakHandle&lt;InfoForResourceTypeIParticleSystemDefinition&gt;&gt;</c>.</summary>
@@ -34,12 +34,12 @@ public static partial class Schema {
 		public string m_DetonateSound => GetBufferString(__m_DetonateSound);
 
 		private static readonly SchemaField __m_FailModifier = new("CCitadel_Ability_Baba_HexingBrew_VData", "m_FailModifier");
-		/// <summary><c>CEmbeddedSubclass&lt;CCitadelModifier&gt;</c>. No typed mapping yet: read it through its address.</summary>
-		public RawField m_FailModifier => Raw(__m_FailModifier, "CEmbeddedSubclass<CCitadelModifier>");
+		/// <summary><c>CEmbeddedSubclass&lt;CCitadelModifier&gt;</c>.</summary>
+		public CCitadelModifierVData? m_FailModifier => EmbeddedSubclass<CCitadelModifierVData>(__m_FailModifier);
 
 		private static readonly SchemaField __m_FireModifier = new("CCitadel_Ability_Baba_HexingBrew_VData", "m_FireModifier");
-		/// <summary><c>CEmbeddedSubclass&lt;CCitadelModifier&gt;</c>. No typed mapping yet: read it through its address.</summary>
-		public RawField m_FireModifier => Raw(__m_FireModifier, "CEmbeddedSubclass<CCitadelModifier>");
+		/// <summary><c>CEmbeddedSubclass&lt;CCitadelModifier&gt;</c>.</summary>
+		public CCitadelModifierVData? m_FireModifier => EmbeddedSubclass<CCitadelModifierVData>(__m_FireModifier);
 
 		private static readonly SchemaField __m_FuseBarrierColor = new("CCitadel_Ability_Baba_HexingBrew_VData", "m_FuseBarrierColor");
 		/// <summary><c>Color</c>.</summary>
@@ -58,16 +58,16 @@ public static partial class Schema {
 		public string m_FuseParticle => GetBufferString(__m_FuseParticle);
 
 		private static readonly SchemaField __m_HoldingModifier = new("CCitadel_Ability_Baba_HexingBrew_VData", "m_HoldingModifier");
-		/// <summary><c>CEmbeddedSubclass&lt;CCitadelModifier&gt;</c>. On her while she carries the flask. Its HUD bar shows the brewing timeline. No typed mapping yet: read it through its address.</summary>
-		public RawField m_HoldingModifier => Raw(__m_HoldingModifier, "CEmbeddedSubclass<CCitadelModifier>");
+		/// <summary><c>CEmbeddedSubclass&lt;CCitadelModifier&gt;</c>. On her while she carries the flask. Its HUD bar shows the brewing timeline.</summary>
+		public CCitadelModifierVData? m_HoldingModifier => EmbeddedSubclass<CCitadelModifierVData>(__m_HoldingModifier);
 
 		private static readonly SchemaField __m_NoneModifier = new("CCitadel_Ability_Baba_HexingBrew_VData", "m_NoneModifier");
-		/// <summary><c>CEmbeddedSubclass&lt;CCitadelModifier&gt;</c>. No typed mapping yet: read it through its address.</summary>
-		public RawField m_NoneModifier => Raw(__m_NoneModifier, "CEmbeddedSubclass<CCitadelModifier>");
+		/// <summary><c>CEmbeddedSubclass&lt;CCitadelModifier&gt;</c>.</summary>
+		public CCitadelModifierVData? m_NoneModifier => EmbeddedSubclass<CCitadelModifierVData>(__m_NoneModifier);
 
 		private static readonly SchemaField __m_SilenceModifier = new("CCitadel_Ability_Baba_HexingBrew_VData", "m_SilenceModifier");
-		/// <summary><c>CEmbeddedSubclass&lt;CCitadelModifier&gt;</c>. No typed mapping yet: read it through its address.</summary>
-		public RawField m_SilenceModifier => Raw(__m_SilenceModifier, "CEmbeddedSubclass<CCitadelModifier>");
+		/// <summary><c>CEmbeddedSubclass&lt;CCitadelModifier&gt;</c>.</summary>
+		public CCitadelModifierVData? m_SilenceModifier => EmbeddedSubclass<CCitadelModifierVData>(__m_SilenceModifier);
 
 		private static readonly SchemaField __m_strBarrierAppliedSound = new("CCitadel_Ability_Baba_HexingBrew_VData", "m_strBarrierAppliedSound");
 		/// <summary><c>CSoundEventName</c>.</summary>

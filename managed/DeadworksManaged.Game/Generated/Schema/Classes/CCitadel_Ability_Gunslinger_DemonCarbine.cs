@@ -36,5 +36,8 @@ public static partial class Schema {
 		private static readonly SchemaField __m_flStoredPowerPct = new("CCitadel_Ability_Gunslinger_DemonCarbine", "m_flStoredPowerPct");
 		/// <summary><c>float32</c>.</summary>
 		public float m_flStoredPowerPct { get => Get<float>(__m_flStoredPowerPct); set => Set(__m_flStoredPowerPct, value); }
+
+		/// <summary>The data entry this was created from, as <see cref="CCitadel_Ability_Gunslinger_DemonCarbineVData"/>, or null if it has none.</summary>
+		public new CCitadel_Ability_Gunslinger_DemonCarbineVData? VData => SubclassVData<CCitadel_Ability_Gunslinger_DemonCarbineVData>();
 	}
 }

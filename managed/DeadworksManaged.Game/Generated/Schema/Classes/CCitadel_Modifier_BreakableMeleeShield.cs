@@ -16,5 +16,8 @@ public static partial class Schema {
 		private static readonly SchemaField __m_tNextHitSound = new("CCitadel_Modifier_BreakableMeleeShield", "m_tNextHitSound");
 		/// <summary><c>GameTime_t</c>.</summary>
 		public float m_tNextHitSound { get => Get<float>(__m_tNextHitSound); set => Set(__m_tNextHitSound, value); }
+
+		/// <summary>The data entry this was created from, as <see cref="CCitadel_Modifier_BreakableMeleeShieldVData"/>, or null if it has none.</summary>
+		public new CCitadel_Modifier_BreakableMeleeShieldVData? VData => ModifierData<CCitadel_Modifier_BreakableMeleeShieldVData>();
 	}
 }

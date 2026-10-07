@@ -14,11 +14,11 @@ public static partial class Schema {
 		static string ISchemaClass<CCitadel_Upgrade_OverdriveClip_VData>.NativeName => "CCitadel_Upgrade_OverdriveClip_VData";
 
 		private static readonly SchemaField __m_OverdriveClipModifier = new("CCitadel_Upgrade_OverdriveClip_VData", "m_OverdriveClipModifier");
-		/// <summary><c>CEmbeddedSubclass&lt;CCitadelModifier&gt;</c>. No typed mapping yet: read it through its address.</summary>
-		public RawField m_OverdriveClipModifier => Raw(__m_OverdriveClipModifier, "CEmbeddedSubclass<CCitadelModifier>");
+		/// <summary><c>CEmbeddedSubclass&lt;CCitadelModifier&gt;</c>.</summary>
+		public CCitadelModifierVData? m_OverdriveClipModifier => EmbeddedSubclass<CCitadelModifierVData>(__m_OverdriveClipModifier);
 
 		private static readonly SchemaField __m_ReloadModifier = new("CCitadel_Upgrade_OverdriveClip_VData", "m_ReloadModifier");
-		/// <summary><c>CEmbeddedSubclass&lt;CCitadelModifier&gt;</c>. No typed mapping yet: read it through its address.</summary>
-		public RawField m_ReloadModifier => Raw(__m_ReloadModifier, "CEmbeddedSubclass<CCitadelModifier>");
+		/// <summary><c>CEmbeddedSubclass&lt;CCitadelModifier&gt;</c>.</summary>
+		public CCitadelModifierVData? m_ReloadModifier => EmbeddedSubclass<CCitadelModifierVData>(__m_ReloadModifier);
 	}
 }

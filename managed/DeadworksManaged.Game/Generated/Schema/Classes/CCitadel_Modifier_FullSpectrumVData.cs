@@ -14,11 +14,11 @@ public static partial class Schema {
 		static string ISchemaClass<CCitadel_Modifier_FullSpectrumVData>.NativeName => "CCitadel_Modifier_FullSpectrumVData";
 
 		private static readonly SchemaField __m_BonusDamageModifier = new("CCitadel_Modifier_FullSpectrumVData", "m_BonusDamageModifier");
-		/// <summary><c>CEmbeddedSubclass&lt;CCitadelModifier&gt;</c>. No typed mapping yet: read it through its address.</summary>
-		public RawField m_BonusDamageModifier => Raw(__m_BonusDamageModifier, "CEmbeddedSubclass<CCitadelModifier>");
+		/// <summary><c>CEmbeddedSubclass&lt;CCitadelModifier&gt;</c>.</summary>
+		public CCitadelModifierVData? m_BonusDamageModifier => EmbeddedSubclass<CCitadelModifierVData>(__m_BonusDamageModifier);
 
 		private static readonly SchemaField __m_DebuffModifier = new("CCitadel_Modifier_FullSpectrumVData", "m_DebuffModifier");
-		/// <summary><c>CEmbeddedSubclass&lt;CCitadelModifier&gt;</c>. No typed mapping yet: read it through its address.</summary>
-		public RawField m_DebuffModifier => Raw(__m_DebuffModifier, "CEmbeddedSubclass<CCitadelModifier>");
+		/// <summary><c>CEmbeddedSubclass&lt;CCitadelModifier&gt;</c>.</summary>
+		public CCitadelModifierVData? m_DebuffModifier => EmbeddedSubclass<CCitadelModifierVData>(__m_DebuffModifier);
 	}
 }

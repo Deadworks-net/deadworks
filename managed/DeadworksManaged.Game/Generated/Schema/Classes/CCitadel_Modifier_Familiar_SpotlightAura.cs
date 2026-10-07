@@ -16,5 +16,8 @@ public static partial class Schema {
 		private static readonly SchemaField __m_vRightVectorWS = new("CCitadel_Modifier_Familiar_SpotlightAura", "m_vRightVectorWS");
 		/// <summary><c>Vector</c>.</summary>
 		public Vector3 m_vRightVectorWS { get => Get<Vector3>(__m_vRightVectorWS); set => Set(__m_vRightVectorWS, value); }
+
+		/// <summary>The data entry this was created from, as <see cref="CCitadel_Modifier_Familiar_SpotlightAuraVData"/>, or null if it has none.</summary>
+		public new CCitadel_Modifier_Familiar_SpotlightAuraVData? VData => ModifierData<CCitadel_Modifier_Familiar_SpotlightAuraVData>();
 	}
 }

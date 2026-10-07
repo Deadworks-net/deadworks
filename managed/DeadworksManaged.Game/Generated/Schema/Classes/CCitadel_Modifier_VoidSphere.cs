@@ -40,5 +40,8 @@ public static partial class Schema {
 		private static readonly SchemaField __m_vecStartPosition = new("CCitadel_Modifier_VoidSphere", "m_vecStartPosition");
 		/// <summary><c>VectorWS</c>.</summary>
 		public Vector3 m_vecStartPosition { get => Get<Vector3>(__m_vecStartPosition); set => Set(__m_vecStartPosition, value); }
+
+		/// <summary>The data entry this was created from, as <see cref="CCitadel_Modifier_VoidSphereVData"/>, or null if it has none.</summary>
+		public new CCitadel_Modifier_VoidSphereVData? VData => ModifierData<CCitadel_Modifier_VoidSphereVData>();
 	}
 }

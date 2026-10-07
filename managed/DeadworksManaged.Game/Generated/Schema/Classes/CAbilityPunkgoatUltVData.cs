@@ -18,36 +18,36 @@ public static partial class Schema {
 		public string m_BatChargingEffect => GetBufferString(__m_BatChargingEffect);
 
 		private static readonly SchemaField __m_DiminishingSlowModifier = new("CAbilityPunkgoatUltVData", "m_DiminishingSlowModifier");
-		/// <summary><c>CEmbeddedSubclass&lt;CCitadelModifier&gt;</c>. No typed mapping yet: read it through its address.</summary>
-		public RawField m_DiminishingSlowModifier => Raw(__m_DiminishingSlowModifier, "CEmbeddedSubclass<CCitadelModifier>");
+		/// <summary><c>CEmbeddedSubclass&lt;CCitadelModifier&gt;</c>.</summary>
+		public CCitadelModifierVData? m_DiminishingSlowModifier => EmbeddedSubclass<CCitadelModifierVData>(__m_DiminishingSlowModifier);
 
 		private static readonly SchemaField __m_FireRateModifier = new("CAbilityPunkgoatUltVData", "m_FireRateModifier");
-		/// <summary><c>CEmbeddedSubclass&lt;CCitadelModifier&gt;</c>. No typed mapping yet: read it through its address.</summary>
-		public RawField m_FireRateModifier => Raw(__m_FireRateModifier, "CEmbeddedSubclass<CCitadelModifier>");
+		/// <summary><c>CEmbeddedSubclass&lt;CCitadelModifier&gt;</c>.</summary>
+		public CCitadelModifierVData? m_FireRateModifier => EmbeddedSubclass<CCitadelModifierVData>(__m_FireRateModifier);
 
 		private static readonly SchemaField __m_GoUpSpeedCurve = new("CAbilityPunkgoatUltVData", "m_GoUpSpeedCurve");
 		/// <summary><c>CPiecewiseCurve</c>. No typed mapping yet: read it through its address.</summary>
 		public RawField m_GoUpSpeedCurve => Raw(__m_GoUpSpeedCurve, "CPiecewiseCurve");
 
 		private static readonly SchemaField __m_GroundAuraModifier = new("CAbilityPunkgoatUltVData", "m_GroundAuraModifier");
-		/// <summary><c>CEmbeddedSubclass&lt;CCitadelModifier&gt;</c>. No typed mapping yet: read it through its address.</summary>
-		public RawField m_GroundAuraModifier => Raw(__m_GroundAuraModifier, "CEmbeddedSubclass<CCitadelModifier>");
+		/// <summary><c>CEmbeddedSubclass&lt;CCitadelModifier&gt;</c>.</summary>
+		public CCitadelModifierVData? m_GroundAuraModifier => EmbeddedSubclass<CCitadelModifierVData>(__m_GroundAuraModifier);
 
 		private static readonly SchemaField __m_GroundParticle = new("CAbilityPunkgoatUltVData", "m_GroundParticle");
 		/// <summary><c>CResourceNameTyped&lt;CWeakHandle&lt;InfoForResourceTypeIParticleSystemDefinition&gt;&gt;</c>.</summary>
 		public string m_GroundParticle => GetBufferString(__m_GroundParticle);
 
 		private static readonly SchemaField __m_PullToGroundModifier = new("CAbilityPunkgoatUltVData", "m_PullToGroundModifier");
-		/// <summary><c>CEmbeddedSubclass&lt;CCitadelModifier&gt;</c>. No typed mapping yet: read it through its address.</summary>
-		public RawField m_PullToGroundModifier => Raw(__m_PullToGroundModifier, "CEmbeddedSubclass<CCitadelModifier>");
+		/// <summary><c>CEmbeddedSubclass&lt;CCitadelModifier&gt;</c>.</summary>
+		public CCitadelModifierVData? m_PullToGroundModifier => EmbeddedSubclass<CCitadelModifierVData>(__m_PullToGroundModifier);
 
 		private static readonly SchemaField __m_TimeToReachGroundByHeight = new("CAbilityPunkgoatUltVData", "m_TimeToReachGroundByHeight");
 		/// <summary><c>CPiecewiseCurve</c>. No typed mapping yet: read it through its address.</summary>
 		public RawField m_TimeToReachGroundByHeight => Raw(__m_TimeToReachGroundByHeight, "CPiecewiseCurve");
 
 		private static readonly SchemaField __m_VulnerableModifier = new("CAbilityPunkgoatUltVData", "m_VulnerableModifier");
-		/// <summary><c>CEmbeddedSubclass&lt;CCitadelModifier&gt;</c>. No typed mapping yet: read it through its address.</summary>
-		public RawField m_VulnerableModifier => Raw(__m_VulnerableModifier, "CEmbeddedSubclass<CCitadelModifier>");
+		/// <summary><c>CEmbeddedSubclass&lt;CCitadelModifier&gt;</c>.</summary>
+		public CCitadelModifierVData? m_VulnerableModifier => EmbeddedSubclass<CCitadelModifierVData>(__m_VulnerableModifier);
 
 		private static readonly SchemaField __m_flGoDownVelocityDampRate = new("CAbilityPunkgoatUltVData", "m_flGoDownVelocityDampRate");
 		/// <summary><c>float32</c>.</summary>

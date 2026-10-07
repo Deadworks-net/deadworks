@@ -14,11 +14,11 @@ public static partial class Schema {
 		static string ISchemaClass<CCitadel_Item_ShadowStrikeVData>.NativeName => "CCitadel_Item_ShadowStrikeVData";
 
 		private static readonly SchemaField __m_ShadowStrikeInvisModifier = new("CCitadel_Item_ShadowStrikeVData", "m_ShadowStrikeInvisModifier");
-		/// <summary><c>CEmbeddedSubclass&lt;CCitadelModifier&gt;</c>. No typed mapping yet: read it through its address.</summary>
-		public RawField m_ShadowStrikeInvisModifier => Raw(__m_ShadowStrikeInvisModifier, "CEmbeddedSubclass<CCitadelModifier>");
+		/// <summary><c>CEmbeddedSubclass&lt;CCitadelModifier&gt;</c>.</summary>
+		public CCitadelModifierVData? m_ShadowStrikeInvisModifier => EmbeddedSubclass<CCitadelModifierVData>(__m_ShadowStrikeInvisModifier);
 
 		private static readonly SchemaField __m_StealWatcherModifier = new("CCitadel_Item_ShadowStrikeVData", "m_StealWatcherModifier");
-		/// <summary><c>CEmbeddedSubclass&lt;CCitadelModifier&gt;</c>. No typed mapping yet: read it through its address.</summary>
-		public RawField m_StealWatcherModifier => Raw(__m_StealWatcherModifier, "CEmbeddedSubclass<CCitadelModifier>");
+		/// <summary><c>CEmbeddedSubclass&lt;CCitadelModifier&gt;</c>.</summary>
+		public CCitadelModifierVData? m_StealWatcherModifier => EmbeddedSubclass<CCitadelModifierVData>(__m_StealWatcherModifier);
 	}
 }

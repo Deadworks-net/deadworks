@@ -46,8 +46,8 @@ public static partial class Schema {
 		public float m_ConeSpacingMeters { get => Get<float>(__m_ConeSpacingMeters); set => Set(__m_ConeSpacingMeters, value); }
 
 		private static readonly SchemaField __m_EffectModifier = new("CCitadel_Ability_Familiar_Ability01VData", "m_EffectModifier");
-		/// <summary><c>CEmbeddedSubclass&lt;CCitadelModifier&gt;</c>. No typed mapping yet: read it through its address.</summary>
-		public RawField m_EffectModifier => Raw(__m_EffectModifier, "CEmbeddedSubclass<CCitadelModifier>");
+		/// <summary><c>CEmbeddedSubclass&lt;CCitadelModifier&gt;</c>.</summary>
+		public CCitadelModifierVData? m_EffectModifier => EmbeddedSubclass<CCitadelModifierVData>(__m_EffectModifier);
 
 		private static readonly SchemaField __m_ExplosionParticle = new("CCitadel_Ability_Familiar_Ability01VData", "m_ExplosionParticle");
 		/// <summary><c>CResourceNameTyped&lt;CWeakHandle&lt;InfoForResourceTypeIParticleSystemDefinition&gt;&gt;</c>.</summary>
@@ -98,20 +98,20 @@ public static partial class Schema {
 		public string m_SleepHitSound => GetBufferString(__m_SleepHitSound);
 
 		private static readonly SchemaField __m_SlowModifier = new("CCitadel_Ability_Familiar_Ability01VData", "m_SlowModifier");
-		/// <summary><c>CEmbeddedSubclass&lt;CCitadelModifier&gt;</c>. No typed mapping yet: read it through its address.</summary>
-		public RawField m_SlowModifier => Raw(__m_SlowModifier, "CEmbeddedSubclass<CCitadelModifier>");
+		/// <summary><c>CEmbeddedSubclass&lt;CCitadelModifier&gt;</c>.</summary>
+		public CCitadelModifierVData? m_SlowModifier => EmbeddedSubclass<CCitadelModifierVData>(__m_SlowModifier);
 
 		private static readonly SchemaField __m_StaringModifier = new("CCitadel_Ability_Familiar_Ability01VData", "m_StaringModifier");
-		/// <summary><c>CEmbeddedSubclass&lt;CCitadelModifier&gt;</c>. No typed mapping yet: read it through its address.</summary>
-		public RawField m_StaringModifier => Raw(__m_StaringModifier, "CEmbeddedSubclass<CCitadelModifier>");
+		/// <summary><c>CEmbeddedSubclass&lt;CCitadelModifier&gt;</c>.</summary>
+		public CCitadelModifierVData? m_StaringModifier => EmbeddedSubclass<CCitadelModifierVData>(__m_StaringModifier);
 
 		private static readonly SchemaField __m_TargetDebuffParticle = new("CCitadel_Ability_Familiar_Ability01VData", "m_TargetDebuffParticle");
 		/// <summary><c>CResourceNameTyped&lt;CWeakHandle&lt;InfoForResourceTypeIParticleSystemDefinition&gt;&gt;</c>.</summary>
 		public string m_TargetDebuffParticle => GetBufferString(__m_TargetDebuffParticle);
 
 		private static readonly SchemaField __m_UnstoppableWhileChannelingModifier = new("CCitadel_Ability_Familiar_Ability01VData", "m_UnstoppableWhileChannelingModifier");
-		/// <summary><c>CEmbeddedSubclass&lt;CCitadelModifier&gt;</c>. No typed mapping yet: read it through its address.</summary>
-		public RawField m_UnstoppableWhileChannelingModifier => Raw(__m_UnstoppableWhileChannelingModifier, "CEmbeddedSubclass<CCitadelModifier>");
+		/// <summary><c>CEmbeddedSubclass&lt;CCitadelModifier&gt;</c>.</summary>
+		public CCitadelModifierVData? m_UnstoppableWhileChannelingModifier => EmbeddedSubclass<CCitadelModifierVData>(__m_UnstoppableWhileChannelingModifier);
 
 		private static readonly SchemaField __m_VerticalDrag = new("CCitadel_Ability_Familiar_Ability01VData", "m_VerticalDrag");
 		/// <summary><c>float32</c>.</summary>

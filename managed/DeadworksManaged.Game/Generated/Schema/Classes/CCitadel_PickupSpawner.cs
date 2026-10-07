@@ -25,6 +25,9 @@ public static partial class Schema {
 		/// <summary><c>CUtlSymbolLarge</c>.</summary>
 		public string m_iszPickupSubclass { get => GetString(__m_iszPickupSubclass); set => SetString(__m_iszPickupSubclass, value); }
 
+		/// <summary>The data entry this was created from, as <see cref="CCitadel_PickupSpawnerVData"/>, or null if it has none.</summary>
+		public CCitadel_PickupSpawnerVData? VData => SubclassVData<CCitadel_PickupSpawnerVData>();
+
 		/// <summary>Fires the <c>SpawnPickup</c> input. Spawn the configured pickup now, restarting the respawn cycle.</summary>
 		public void InputSpawnPickup() => FireInput("SpawnPickup");
 	}

@@ -14,8 +14,8 @@ public static partial class Schema {
 		static string ISchemaClass<CCitadel_Ability_IceGrenadeVData>.NativeName => "CCitadel_Ability_IceGrenadeVData";
 
 		private static readonly SchemaField __m_EnemyAuraModifier = new("CCitadel_Ability_IceGrenadeVData", "m_EnemyAuraModifier");
-		/// <summary><c>CEmbeddedSubclass&lt;CCitadelModifier&gt;</c>. No typed mapping yet: read it through its address.</summary>
-		public RawField m_EnemyAuraModifier => Raw(__m_EnemyAuraModifier, "CEmbeddedSubclass<CCitadelModifier>");
+		/// <summary><c>CEmbeddedSubclass&lt;CCitadelModifier&gt;</c>.</summary>
+		public CCitadelModifierVData? m_EnemyAuraModifier => EmbeddedSubclass<CCitadelModifierVData>(__m_EnemyAuraModifier);
 
 		private static readonly SchemaField __m_ExplodeParticle = new("CCitadel_Ability_IceGrenadeVData", "m_ExplodeParticle");
 		/// <summary><c>CResourceNameTyped&lt;CWeakHandle&lt;InfoForResourceTypeIParticleSystemDefinition&gt;&gt;</c>.</summary>
@@ -26,11 +26,11 @@ public static partial class Schema {
 		public string m_ExplosionSound => GetBufferString(__m_ExplosionSound);
 
 		private static readonly SchemaField __m_FriendlyAuraModifier = new("CCitadel_Ability_IceGrenadeVData", "m_FriendlyAuraModifier");
-		/// <summary><c>CEmbeddedSubclass&lt;CCitadelModifier&gt;</c>. No typed mapping yet: read it through its address.</summary>
-		public RawField m_FriendlyAuraModifier => Raw(__m_FriendlyAuraModifier, "CEmbeddedSubclass<CCitadelModifier>");
+		/// <summary><c>CEmbeddedSubclass&lt;CCitadelModifier&gt;</c>.</summary>
+		public CCitadelModifierVData? m_FriendlyAuraModifier => EmbeddedSubclass<CCitadelModifierVData>(__m_FriendlyAuraModifier);
 
 		private static readonly SchemaField __m_IceGrenadeSlowModifier = new("CCitadel_Ability_IceGrenadeVData", "m_IceGrenadeSlowModifier");
-		/// <summary><c>CEmbeddedSubclass&lt;CCitadelModifier&gt;</c>. No typed mapping yet: read it through its address.</summary>
-		public RawField m_IceGrenadeSlowModifier => Raw(__m_IceGrenadeSlowModifier, "CEmbeddedSubclass<CCitadelModifier>");
+		/// <summary><c>CEmbeddedSubclass&lt;CCitadelModifier&gt;</c>.</summary>
+		public CCitadelModifierVData? m_IceGrenadeSlowModifier => EmbeddedSubclass<CCitadelModifierVData>(__m_IceGrenadeSlowModifier);
 	}
 }

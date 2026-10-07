@@ -18,8 +18,8 @@ public static partial class Schema {
 		public string m_FailureParticle => GetBufferString(__m_FailureParticle);
 
 		private static readonly SchemaField __m_SuccessModifier = new("CItem_ActiveReload_VData", "m_SuccessModifier");
-		/// <summary><c>CEmbeddedSubclass&lt;CCitadelModifier&gt;</c>. No typed mapping yet: read it through its address.</summary>
-		public RawField m_SuccessModifier => Raw(__m_SuccessModifier, "CEmbeddedSubclass<CCitadelModifier>");
+		/// <summary><c>CEmbeddedSubclass&lt;CCitadelModifier&gt;</c>.</summary>
+		public CCitadelModifierVData? m_SuccessModifier => EmbeddedSubclass<CCitadelModifierVData>(__m_SuccessModifier);
 
 		private static readonly SchemaField __m_SuccessParticle = new("CItem_ActiveReload_VData", "m_SuccessParticle");
 		/// <summary><c>CResourceNameTyped&lt;CWeakHandle&lt;InfoForResourceTypeIParticleSystemDefinition&gt;&gt;</c>.</summary>

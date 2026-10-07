@@ -18,20 +18,20 @@ public static partial class Schema {
 		public string m_CrashParticle => GetBufferString(__m_CrashParticle);
 
 		private static readonly SchemaField __m_DebuffModifier = new("CCitadel_Ability_Werewolf_LeapVData", "m_DebuffModifier");
-		/// <summary><c>CEmbeddedSubclass&lt;CCitadelModifier&gt;</c>. No typed mapping yet: read it through its address.</summary>
-		public RawField m_DebuffModifier => Raw(__m_DebuffModifier, "CEmbeddedSubclass<CCitadelModifier>");
+		/// <summary><c>CEmbeddedSubclass&lt;CCitadelModifier&gt;</c>.</summary>
+		public CCitadelModifierVData? m_DebuffModifier => EmbeddedSubclass<CCitadelModifierVData>(__m_DebuffModifier);
 
 		private static readonly SchemaField __m_LandingBonusesModifier = new("CCitadel_Ability_Werewolf_LeapVData", "m_LandingBonusesModifier");
-		/// <summary><c>CEmbeddedSubclass&lt;CCitadelModifier&gt;</c>. No typed mapping yet: read it through its address.</summary>
-		public RawField m_LandingBonusesModifier => Raw(__m_LandingBonusesModifier, "CEmbeddedSubclass<CCitadelModifier>");
+		/// <summary><c>CEmbeddedSubclass&lt;CCitadelModifier&gt;</c>.</summary>
+		public CCitadelModifierVData? m_LandingBonusesModifier => EmbeddedSubclass<CCitadelModifierVData>(__m_LandingBonusesModifier);
 
 		private static readonly SchemaField __m_LeapSpeedCurve = new("CCitadel_Ability_Werewolf_LeapVData", "m_LeapSpeedCurve");
 		/// <summary><c>CPiecewiseCurve</c>. No typed mapping yet: read it through its address.</summary>
 		public RawField m_LeapSpeedCurve => Raw(__m_LeapSpeedCurve, "CPiecewiseCurve");
 
 		private static readonly SchemaField __m_LeapingModifier = new("CCitadel_Ability_Werewolf_LeapVData", "m_LeapingModifier");
-		/// <summary><c>CEmbeddedSubclass&lt;CCitadelModifier&gt;</c>. No typed mapping yet: read it through its address.</summary>
-		public RawField m_LeapingModifier => Raw(__m_LeapingModifier, "CEmbeddedSubclass<CCitadelModifier>");
+		/// <summary><c>CEmbeddedSubclass&lt;CCitadelModifier&gt;</c>.</summary>
+		public CCitadelModifierVData? m_LeapingModifier => EmbeddedSubclass<CCitadelModifierVData>(__m_LeapingModifier);
 
 		private static readonly SchemaField __m_flBufferTimeBeforeLanding = new("CCitadel_Ability_Werewolf_LeapVData", "m_flBufferTimeBeforeLanding");
 		/// <summary><c>float32</c>.</summary>

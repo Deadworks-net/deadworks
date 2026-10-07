@@ -20,5 +20,8 @@ public static partial class Schema {
 		private static readonly SchemaField __m_flDampingFactor = new("CCitadel_Modifier_Bubble", "m_flDampingFactor");
 		/// <summary><c>float32</c>.</summary>
 		public float m_flDampingFactor { get => Get<float>(__m_flDampingFactor); set => Set(__m_flDampingFactor, value); }
+
+		/// <summary>The data entry this was created from, as <see cref="CCitadel_Modifier_BubbleVData"/>, or null if it has none.</summary>
+		public new CCitadel_Modifier_BubbleVData? VData => ModifierData<CCitadel_Modifier_BubbleVData>();
 	}
 }

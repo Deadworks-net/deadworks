@@ -12,5 +12,8 @@ public static partial class Schema {
 		internal CItemHauntingScream() { }
 		static CItemHauntingScream ISchemaClass<CItemHauntingScream>.New() => new();
 		static string ISchemaClass<CItemHauntingScream>.NativeName => "CItemHauntingScream";
+
+		/// <summary>The data entry this was created from, as <see cref="CItemHauntingScreamVData"/>, or null if it has none.</summary>
+		public new CItemHauntingScreamVData? VData => SubclassVData<CItemHauntingScreamVData>();
 	}
 }

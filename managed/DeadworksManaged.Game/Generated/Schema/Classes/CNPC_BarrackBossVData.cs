@@ -14,20 +14,20 @@ public static partial class Schema {
 		static string ISchemaClass<CNPC_BarrackBossVData>.NativeName => "CNPC_BarrackBossVData";
 
 		private static readonly SchemaField __m_BackdoorBulletResistModifier = new("CNPC_BarrackBossVData", "m_BackdoorBulletResistModifier");
-		/// <summary><c>CEmbeddedSubclass&lt;CCitadelModifier&gt;</c>. No typed mapping yet: read it through its address.</summary>
-		public RawField m_BackdoorBulletResistModifier => Raw(__m_BackdoorBulletResistModifier, "CEmbeddedSubclass<CCitadelModifier>");
+		/// <summary><c>CEmbeddedSubclass&lt;CCitadelModifier&gt;</c>.</summary>
+		public CCitadelModifierVData? m_BackdoorBulletResistModifier => EmbeddedSubclass<CCitadelModifierVData>(__m_BackdoorBulletResistModifier);
 
 		private static readonly SchemaField __m_BackdoorProtectionModifier = new("CNPC_BarrackBossVData", "m_BackdoorProtectionModifier");
-		/// <summary><c>CEmbeddedSubclass&lt;CCitadelModifier&gt;</c>. No typed mapping yet: read it through its address.</summary>
-		public RawField m_BackdoorProtectionModifier => Raw(__m_BackdoorProtectionModifier, "CEmbeddedSubclass<CCitadelModifier>");
+		/// <summary><c>CEmbeddedSubclass&lt;CCitadelModifier&gt;</c>.</summary>
+		public CCitadelModifierVData? m_BackdoorProtectionModifier => EmbeddedSubclass<CCitadelModifierVData>(__m_BackdoorProtectionModifier);
 
 		private static readonly SchemaField __m_ObjectiveRegen = new("CNPC_BarrackBossVData", "m_ObjectiveRegen");
-		/// <summary><c>CEmbeddedSubclass&lt;CCitadelModifier&gt;</c>. No typed mapping yet: read it through its address.</summary>
-		public RawField m_ObjectiveRegen => Raw(__m_ObjectiveRegen, "CEmbeddedSubclass<CCitadelModifier>");
+		/// <summary><c>CEmbeddedSubclass&lt;CCitadelModifier&gt;</c>.</summary>
+		public CCitadelModifierVData? m_ObjectiveRegen => EmbeddedSubclass<CCitadelModifierVData>(__m_ObjectiveRegen);
 
 		private static readonly SchemaField __m_TrooperBossInvulnModifier = new("CNPC_BarrackBossVData", "m_TrooperBossInvulnModifier");
-		/// <summary><c>CEmbeddedSubclass&lt;CCitadelModifier&gt;</c>. No typed mapping yet: read it through its address.</summary>
-		public RawField m_TrooperBossInvulnModifier => Raw(__m_TrooperBossInvulnModifier, "CEmbeddedSubclass<CCitadelModifier>");
+		/// <summary><c>CEmbeddedSubclass&lt;CCitadelModifier&gt;</c>.</summary>
+		public CCitadelModifierVData? m_TrooperBossInvulnModifier => EmbeddedSubclass<CCitadelModifierVData>(__m_TrooperBossInvulnModifier);
 
 		private static readonly SchemaField __m_flBackDoorProtectionRange = new("CNPC_BarrackBossVData", "m_flBackDoorProtectionRange");
 		/// <summary><c>float32</c>.</summary>

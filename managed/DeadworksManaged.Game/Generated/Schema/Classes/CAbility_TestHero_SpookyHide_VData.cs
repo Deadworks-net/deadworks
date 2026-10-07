@@ -14,11 +14,11 @@ public static partial class Schema {
 		static string ISchemaClass<CAbility_TestHero_SpookyHide_VData>.NativeName => "CAbility_TestHero_SpookyHide_VData";
 
 		private static readonly SchemaField __m_InvisModifier = new("CAbility_TestHero_SpookyHide_VData", "m_InvisModifier");
-		/// <summary><c>CEmbeddedSubclass&lt;CCitadel_Modifier_SpookyHide_Invis&gt;</c>. No typed mapping yet: read it through its address.</summary>
-		public RawField m_InvisModifier => Raw(__m_InvisModifier, "CEmbeddedSubclass<CCitadel_Modifier_SpookyHide_Invis>");
+		/// <summary><c>CEmbeddedSubclass&lt;CCitadel_Modifier_SpookyHide_Invis&gt;</c>.</summary>
+		public CCitadel_Modifier_SpookyHide_InvisVData? m_InvisModifier => EmbeddedSubclass<CCitadel_Modifier_SpookyHide_InvisVData>(__m_InvisModifier);
 
 		private static readonly SchemaField __m_RegenModifier = new("CAbility_TestHero_SpookyHide_VData", "m_RegenModifier");
-		/// <summary><c>CEmbeddedSubclass&lt;CCitadelModifier&gt;</c>. No typed mapping yet: read it through its address.</summary>
-		public RawField m_RegenModifier => Raw(__m_RegenModifier, "CEmbeddedSubclass<CCitadelModifier>");
+		/// <summary><c>CEmbeddedSubclass&lt;CCitadelModifier&gt;</c>.</summary>
+		public CCitadelModifierVData? m_RegenModifier => EmbeddedSubclass<CCitadelModifierVData>(__m_RegenModifier);
 	}
 }

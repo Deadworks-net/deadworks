@@ -20,5 +20,8 @@ public static partial class Schema {
 		private static readonly SchemaField __m_nBodyGroupName = new("CGameModifier_BodyGroupChoice", "m_nBodyGroupName");
 		/// <summary><c>CUtlStringToken</c>.</summary>
 		public uint m_nBodyGroupName { get => Get<uint>(__m_nBodyGroupName); set => Set(__m_nBodyGroupName, value); }
+
+		/// <summary>The data entry this was created from, as <see cref="CGameModifier_BodyGroupChoiceVData"/>, or null if it has none.</summary>
+		public new CGameModifier_BodyGroupChoiceVData? VData => ModifierData<CGameModifier_BodyGroupChoiceVData>();
 	}
 }

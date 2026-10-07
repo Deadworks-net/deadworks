@@ -14,8 +14,8 @@ public static partial class Schema {
 		static string ISchemaClass<CCitadel_Modifier_Urn_DebuffVData>.NativeName => "CCitadel_Modifier_Urn_DebuffVData";
 
 		private static readonly SchemaField __m_EntangleModifier = new("CCitadel_Modifier_Urn_DebuffVData", "m_EntangleModifier");
-		/// <summary><c>CEmbeddedSubclass&lt;CCitadelModifier&gt;</c>. No typed mapping yet: read it through its address.</summary>
-		public RawField m_EntangleModifier => Raw(__m_EntangleModifier, "CEmbeddedSubclass<CCitadelModifier>");
+		/// <summary><c>CEmbeddedSubclass&lt;CCitadelModifier&gt;</c>.</summary>
+		public CCitadelModifierVData? m_EntangleModifier => EmbeddedSubclass<CCitadelModifierVData>(__m_EntangleModifier);
 
 		private static readonly SchemaField __m_strEntangleBuildupSound = new("CCitadel_Modifier_Urn_DebuffVData", "m_strEntangleBuildupSound");
 		/// <summary><c>CSoundEventName</c>.</summary>

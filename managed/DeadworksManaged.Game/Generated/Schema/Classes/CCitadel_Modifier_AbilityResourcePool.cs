@@ -12,5 +12,8 @@ public static partial class Schema {
 		internal CCitadel_Modifier_AbilityResourcePool() { }
 		static CCitadel_Modifier_AbilityResourcePool ISchemaClass<CCitadel_Modifier_AbilityResourcePool>.New() => new();
 		static string ISchemaClass<CCitadel_Modifier_AbilityResourcePool>.NativeName => "CCitadel_Modifier_AbilityResourcePool";
+
+		/// <summary>The data entry this was created from, as <see cref="CCitadel_Modifier_AbilityResourcePoolVData"/>, or null if it has none.</summary>
+		public new CCitadel_Modifier_AbilityResourcePoolVData? VData => ModifierData<CCitadel_Modifier_AbilityResourcePoolVData>();
 	}
 }

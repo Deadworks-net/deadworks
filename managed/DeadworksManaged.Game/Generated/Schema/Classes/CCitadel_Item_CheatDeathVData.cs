@@ -22,8 +22,8 @@ public static partial class Schema {
 		public string m_DamageTargetParticle => GetBufferString(__m_DamageTargetParticle);
 
 		private static readonly SchemaField __m_DeathImmuneModifier = new("CCitadel_Item_CheatDeathVData", "m_DeathImmuneModifier");
-		/// <summary><c>CEmbeddedSubclass&lt;CCitadelModifier&gt;</c>. No typed mapping yet: read it through its address.</summary>
-		public RawField m_DeathImmuneModifier => Raw(__m_DeathImmuneModifier, "CEmbeddedSubclass<CCitadelModifier>");
+		/// <summary><c>CEmbeddedSubclass&lt;CCitadelModifier&gt;</c>.</summary>
+		public CCitadelModifierVData? m_DeathImmuneModifier => EmbeddedSubclass<CCitadelModifierVData>(__m_DeathImmuneModifier);
 
 		private static readonly SchemaField __m_sHealAndDamagePulseSound = new("CCitadel_Item_CheatDeathVData", "m_sHealAndDamagePulseSound");
 		/// <summary><c>CSoundEventName</c>.</summary>

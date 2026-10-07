@@ -20,5 +20,8 @@ public static partial class Schema {
 		private static readonly SchemaField __m_flFloatElapsedTime = new("CCitadel_Ability_VampireBat_StealLife", "m_flFloatElapsedTime");
 		/// <summary><c>float32</c>.</summary>
 		public float m_flFloatElapsedTime { get => Get<float>(__m_flFloatElapsedTime); set => Set(__m_flFloatElapsedTime, value); }
+
+		/// <summary>The data entry this was created from, as <see cref="CCitadel_Ability_VampireBat_StealLifeVData"/>, or null if it has none.</summary>
+		public new CCitadel_Ability_VampireBat_StealLifeVData? VData => SubclassVData<CCitadel_Ability_VampireBat_StealLifeVData>();
 	}
 }

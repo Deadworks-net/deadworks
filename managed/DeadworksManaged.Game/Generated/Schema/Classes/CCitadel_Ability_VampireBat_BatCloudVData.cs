@@ -22,12 +22,12 @@ public static partial class Schema {
 		public string m_BatHitParticle => GetBufferString(__m_BatHitParticle);
 
 		private static readonly SchemaField __m_DebuffModifier = new("CCitadel_Ability_VampireBat_BatCloudVData", "m_DebuffModifier");
-		/// <summary><c>CEmbeddedSubclass&lt;CCitadelModifier&gt;</c>. No typed mapping yet: read it through its address.</summary>
-		public RawField m_DebuffModifier => Raw(__m_DebuffModifier, "CEmbeddedSubclass<CCitadelModifier>");
+		/// <summary><c>CEmbeddedSubclass&lt;CCitadelModifier&gt;</c>.</summary>
+		public CCitadelModifierVData? m_DebuffModifier => EmbeddedSubclass<CCitadelModifierVData>(__m_DebuffModifier);
 
 		private static readonly SchemaField __m_SelfModifier = new("CCitadel_Ability_VampireBat_BatCloudVData", "m_SelfModifier");
-		/// <summary><c>CEmbeddedSubclass&lt;CCitadelModifier&gt;</c>. No typed mapping yet: read it through its address.</summary>
-		public RawField m_SelfModifier => Raw(__m_SelfModifier, "CEmbeddedSubclass<CCitadelModifier>");
+		/// <summary><c>CEmbeddedSubclass&lt;CCitadelModifier&gt;</c>.</summary>
+		public CCitadelModifierVData? m_SelfModifier => EmbeddedSubclass<CCitadelModifierVData>(__m_SelfModifier);
 
 		private static readonly SchemaField __m_cameraSequenceBatCloud = new("CCitadel_Ability_VampireBat_BatCloudVData", "m_cameraSequenceBatCloud");
 		/// <summary><c>CitadelCameraOperationsSequence_t</c>.</summary>

@@ -12,5 +12,8 @@ public static partial class Schema {
 		internal CCitadel_Modifier_FlagAllyBuff() { }
 		static CCitadel_Modifier_FlagAllyBuff ISchemaClass<CCitadel_Modifier_FlagAllyBuff>.New() => new();
 		static string ISchemaClass<CCitadel_Modifier_FlagAllyBuff>.NativeName => "CCitadel_Modifier_FlagAllyBuff";
+
+		/// <summary>The data entry this was created from, as <see cref="CCitadel_Modifier_FlagAllyBuffVData"/>, or null if it has none.</summary>
+		public new CCitadel_Modifier_FlagAllyBuffVData? VData => ModifierData<CCitadel_Modifier_FlagAllyBuffVData>();
 	}
 }

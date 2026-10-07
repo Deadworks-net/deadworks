@@ -14,8 +14,8 @@ public static partial class Schema {
 		static string ISchemaClass<CCitadel_Ability_Frank_ReviveVData>.NativeName => "CCitadel_Ability_Frank_ReviveVData";
 
 		private static readonly SchemaField __m_DashSlowModifier = new("CCitadel_Ability_Frank_ReviveVData", "m_DashSlowModifier");
-		/// <summary><c>CEmbeddedSubclass&lt;CCitadelModifier&gt;</c>. No typed mapping yet: read it through its address.</summary>
-		public RawField m_DashSlowModifier => Raw(__m_DashSlowModifier, "CEmbeddedSubclass<CCitadelModifier>");
+		/// <summary><c>CEmbeddedSubclass&lt;CCitadelModifier&gt;</c>.</summary>
+		public CCitadelModifierVData? m_DashSlowModifier => EmbeddedSubclass<CCitadelModifierVData>(__m_DashSlowModifier);
 
 		private static readonly SchemaField __m_ElectricBulletImpactParticle = new("CCitadel_Ability_Frank_ReviveVData", "m_ElectricBulletImpactParticle");
 		/// <summary><c>CResourceNameTyped&lt;CWeakHandle&lt;InfoForResourceTypeIParticleSystemDefinition&gt;&gt;</c>.</summary>
@@ -34,12 +34,12 @@ public static partial class Schema {
 		public string m_PreExplodeParticle => GetBufferString(__m_PreExplodeParticle);
 
 		private static readonly SchemaField __m_RevivingModifier = new("CCitadel_Ability_Frank_ReviveVData", "m_RevivingModifier");
-		/// <summary><c>CEmbeddedSubclass&lt;CCitadelModifier&gt;</c>. No typed mapping yet: read it through its address.</summary>
-		public RawField m_RevivingModifier => Raw(__m_RevivingModifier, "CEmbeddedSubclass<CCitadelModifier>");
+		/// <summary><c>CEmbeddedSubclass&lt;CCitadelModifier&gt;</c>.</summary>
+		public CCitadelModifierVData? m_RevivingModifier => EmbeddedSubclass<CCitadelModifierVData>(__m_RevivingModifier);
 
 		private static readonly SchemaField __m_SlowModifier = new("CCitadel_Ability_Frank_ReviveVData", "m_SlowModifier");
-		/// <summary><c>CEmbeddedSubclass&lt;CCitadelModifier&gt;</c>. No typed mapping yet: read it through its address.</summary>
-		public RawField m_SlowModifier => Raw(__m_SlowModifier, "CEmbeddedSubclass<CCitadelModifier>");
+		/// <summary><c>CEmbeddedSubclass&lt;CCitadelModifier&gt;</c>.</summary>
+		public CCitadelModifierVData? m_SlowModifier => EmbeddedSubclass<CCitadelModifierVData>(__m_SlowModifier);
 
 		private static readonly SchemaField __m_nDeathMarkParticle = new("CCitadel_Ability_Frank_ReviveVData", "m_nDeathMarkParticle");
 		/// <summary><c>CResourceNameTyped&lt;CWeakHandle&lt;InfoForResourceTypeIParticleSystemDefinition&gt;&gt;</c>.</summary>

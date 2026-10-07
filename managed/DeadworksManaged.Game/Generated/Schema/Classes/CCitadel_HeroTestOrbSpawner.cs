@@ -12,5 +12,8 @@ public static partial class Schema {
 		internal CCitadel_HeroTestOrbSpawner() { }
 		static CCitadel_HeroTestOrbSpawner ISchemaClass<CCitadel_HeroTestOrbSpawner>.New() => new();
 		static string ISchemaClass<CCitadel_HeroTestOrbSpawner>.NativeName => "CCitadel_HeroTestOrbSpawner";
+
+		/// <summary>The data entry this was created from, as <see cref="CCitadel_HeroTestOrbSpawnerVData"/>, or null if it has none.</summary>
+		public CCitadel_HeroTestOrbSpawnerVData? VData => SubclassVData<CCitadel_HeroTestOrbSpawnerVData>();
 	}
 }

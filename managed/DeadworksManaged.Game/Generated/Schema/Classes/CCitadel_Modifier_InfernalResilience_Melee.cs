@@ -12,5 +12,8 @@ public static partial class Schema {
 		internal CCitadel_Modifier_InfernalResilience_Melee() { }
 		static CCitadel_Modifier_InfernalResilience_Melee ISchemaClass<CCitadel_Modifier_InfernalResilience_Melee>.New() => new();
 		static string ISchemaClass<CCitadel_Modifier_InfernalResilience_Melee>.NativeName => "CCitadel_Modifier_InfernalResilience_Melee";
+
+		/// <summary>The data entry this was created from, as <see cref="CCitadel_Modifier_InfernalResilience_MeleeVData"/>, or null if it has none.</summary>
+		public new CCitadel_Modifier_InfernalResilience_MeleeVData? VData => ModifierData<CCitadel_Modifier_InfernalResilience_MeleeVData>();
 	}
 }

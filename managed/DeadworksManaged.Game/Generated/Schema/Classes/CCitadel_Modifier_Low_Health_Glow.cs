@@ -12,5 +12,8 @@ public static partial class Schema {
 		internal CCitadel_Modifier_Low_Health_Glow() { }
 		static CCitadel_Modifier_Low_Health_Glow ISchemaClass<CCitadel_Modifier_Low_Health_Glow>.New() => new();
 		static string ISchemaClass<CCitadel_Modifier_Low_Health_Glow>.NativeName => "CCitadel_Modifier_Low_Health_Glow";
+
+		/// <summary>The data entry this was created from, as <see cref="CCitadel_Modifier_Low_Health_GlowVData"/>, or null if it has none.</summary>
+		public new CCitadel_Modifier_Low_Health_GlowVData? VData => ModifierData<CCitadel_Modifier_Low_Health_GlowVData>();
 	}
 }

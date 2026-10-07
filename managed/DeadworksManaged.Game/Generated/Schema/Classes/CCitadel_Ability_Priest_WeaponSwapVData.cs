@@ -26,12 +26,12 @@ public static partial class Schema {
 		public RawField m_NewWeaponAbility => Raw(__m_NewWeaponAbility, "CSubclassName");
 
 		private static readonly SchemaField __m_SelfModifier = new("CCitadel_Ability_Priest_WeaponSwapVData", "m_SelfModifier");
-		/// <summary><c>CEmbeddedSubclass&lt;CCitadelModifier&gt;</c>. No typed mapping yet: read it through its address.</summary>
-		public RawField m_SelfModifier => Raw(__m_SelfModifier, "CEmbeddedSubclass<CCitadelModifier>");
+		/// <summary><c>CEmbeddedSubclass&lt;CCitadelModifier&gt;</c>.</summary>
+		public CCitadelModifierVData? m_SelfModifier => EmbeddedSubclass<CCitadelModifierVData>(__m_SelfModifier);
 
 		private static readonly SchemaField __m_SlowModifier = new("CCitadel_Ability_Priest_WeaponSwapVData", "m_SlowModifier");
-		/// <summary><c>CEmbeddedSubclass&lt;CCitadelModifier&gt;</c>. No typed mapping yet: read it through its address.</summary>
-		public RawField m_SlowModifier => Raw(__m_SlowModifier, "CEmbeddedSubclass<CCitadelModifier>");
+		/// <summary><c>CEmbeddedSubclass&lt;CCitadelModifier&gt;</c>.</summary>
+		public CCitadelModifierVData? m_SlowModifier => EmbeddedSubclass<CCitadelModifierVData>(__m_SlowModifier);
 
 		private static readonly SchemaField __m_cameraSequenceSwapWeapons = new("CCitadel_Ability_Priest_WeaponSwapVData", "m_cameraSequenceSwapWeapons");
 		/// <summary><c>CitadelCameraOperationsSequence_t</c>.</summary>

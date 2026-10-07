@@ -14,16 +14,16 @@ public static partial class Schema {
 		static string ISchemaClass<CCitadel_Item_RescueBeamVData>.NativeName => "CCitadel_Item_RescueBeamVData";
 
 		private static readonly SchemaField __m_AfterChannelModifier = new("CCitadel_Item_RescueBeamVData", "m_AfterChannelModifier");
-		/// <summary><c>CEmbeddedSubclass&lt;CCitadelModifier&gt;</c>. No typed mapping yet: read it through its address.</summary>
-		public RawField m_AfterChannelModifier => Raw(__m_AfterChannelModifier, "CEmbeddedSubclass<CCitadelModifier>");
+		/// <summary><c>CEmbeddedSubclass&lt;CCitadelModifier&gt;</c>.</summary>
+		public CCitadelModifierVData? m_AfterChannelModifier => EmbeddedSubclass<CCitadelModifierVData>(__m_AfterChannelModifier);
 
 		private static readonly SchemaField __m_DispelAndHealModifier = new("CCitadel_Item_RescueBeamVData", "m_DispelAndHealModifier");
-		/// <summary><c>CEmbeddedSubclass&lt;CCitadelModifier&gt;</c>. No typed mapping yet: read it through its address.</summary>
-		public RawField m_DispelAndHealModifier => Raw(__m_DispelAndHealModifier, "CEmbeddedSubclass<CCitadelModifier>");
+		/// <summary><c>CEmbeddedSubclass&lt;CCitadelModifier&gt;</c>.</summary>
+		public CCitadelModifierVData? m_DispelAndHealModifier => EmbeddedSubclass<CCitadelModifierVData>(__m_DispelAndHealModifier);
 
 		private static readonly SchemaField __m_PullModifier = new("CCitadel_Item_RescueBeamVData", "m_PullModifier");
-		/// <summary><c>CEmbeddedSubclass&lt;CCitadelModifier&gt;</c>. No typed mapping yet: read it through its address.</summary>
-		public RawField m_PullModifier => Raw(__m_PullModifier, "CEmbeddedSubclass<CCitadelModifier>");
+		/// <summary><c>CEmbeddedSubclass&lt;CCitadelModifier&gt;</c>.</summary>
+		public CCitadelModifierVData? m_PullModifier => EmbeddedSubclass<CCitadelModifierVData>(__m_PullModifier);
 
 		private static readonly SchemaField __m_bAllowPull = new("CCitadel_Item_RescueBeamVData", "m_bAllowPull");
 		/// <summary><c>bool</c>.</summary>

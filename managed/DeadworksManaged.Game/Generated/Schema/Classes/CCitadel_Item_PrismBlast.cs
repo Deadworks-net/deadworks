@@ -32,5 +32,8 @@ public static partial class Schema {
 		private static readonly SchemaField __m_beam04 = new("CCitadel_Item_PrismBlast", "m_beam04");
 		/// <summary><c>CCitadelAbilityBeam_t</c>.</summary>
 		public CCitadelAbilityBeam_t m_beam04 => Embedded<CCitadelAbilityBeam_t>(__m_beam04);
+
+		/// <summary>The data entry this was created from, as <see cref="CCitadel_Item_PrismBlastVData"/>, or null if it has none.</summary>
+		public new CCitadel_Item_PrismBlastVData? VData => SubclassVData<CCitadel_Item_PrismBlastVData>();
 	}
 }

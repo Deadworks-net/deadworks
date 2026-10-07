@@ -14,28 +14,28 @@ public static partial class Schema {
 		static string ISchemaClass<CAbilityPunkgoatTetherVData>.NativeName => "CAbilityPunkgoatTetherVData";
 
 		private static readonly SchemaField __m_FireRateSlowModifier = new("CAbilityPunkgoatTetherVData", "m_FireRateSlowModifier");
-		/// <summary><c>CEmbeddedSubclass&lt;CCitadelModifier&gt;</c>. No typed mapping yet: read it through its address.</summary>
-		public RawField m_FireRateSlowModifier => Raw(__m_FireRateSlowModifier, "CEmbeddedSubclass<CCitadelModifier>");
+		/// <summary><c>CEmbeddedSubclass&lt;CCitadelModifier&gt;</c>.</summary>
+		public CCitadelModifierVData? m_FireRateSlowModifier => EmbeddedSubclass<CCitadelModifierVData>(__m_FireRateSlowModifier);
 
 		private static readonly SchemaField __m_PullModifier = new("CAbilityPunkgoatTetherVData", "m_PullModifier");
-		/// <summary><c>CEmbeddedSubclass&lt;CCitadelModifier&gt;</c>. No typed mapping yet: read it through its address.</summary>
-		public RawField m_PullModifier => Raw(__m_PullModifier, "CEmbeddedSubclass<CCitadelModifier>");
+		/// <summary><c>CEmbeddedSubclass&lt;CCitadelModifier&gt;</c>.</summary>
+		public CCitadelModifierVData? m_PullModifier => EmbeddedSubclass<CCitadelModifierVData>(__m_PullModifier);
 
 		private static readonly SchemaField __m_RopeParticle = new("CAbilityPunkgoatTetherVData", "m_RopeParticle");
 		/// <summary><c>CResourceNameTyped&lt;CWeakHandle&lt;InfoForResourceTypeIParticleSystemDefinition&gt;&gt;</c>.</summary>
 		public string m_RopeParticle => GetBufferString(__m_RopeParticle);
 
 		private static readonly SchemaField __m_TetheredModifier = new("CAbilityPunkgoatTetherVData", "m_TetheredModifier");
-		/// <summary><c>CEmbeddedSubclass&lt;CCitadelModifier&gt;</c>. No typed mapping yet: read it through its address.</summary>
-		public RawField m_TetheredModifier => Raw(__m_TetheredModifier, "CEmbeddedSubclass<CCitadelModifier>");
+		/// <summary><c>CEmbeddedSubclass&lt;CCitadelModifier&gt;</c>.</summary>
+		public CCitadelModifierVData? m_TetheredModifier => EmbeddedSubclass<CCitadelModifierVData>(__m_TetheredModifier);
 
 		private static readonly SchemaField __m_UnstoppableModifier = new("CAbilityPunkgoatTetherVData", "m_UnstoppableModifier");
-		/// <summary><c>CEmbeddedSubclass&lt;CCitadelModifier&gt;</c>. No typed mapping yet: read it through its address.</summary>
-		public RawField m_UnstoppableModifier => Raw(__m_UnstoppableModifier, "CEmbeddedSubclass<CCitadelModifier>");
+		/// <summary><c>CEmbeddedSubclass&lt;CCitadelModifier&gt;</c>.</summary>
+		public CCitadelModifierVData? m_UnstoppableModifier => EmbeddedSubclass<CCitadelModifierVData>(__m_UnstoppableModifier);
 
 		private static readonly SchemaField __m_WaitingToPullModifier = new("CAbilityPunkgoatTetherVData", "m_WaitingToPullModifier");
-		/// <summary><c>CEmbeddedSubclass&lt;CCitadelModifier&gt;</c>. No typed mapping yet: read it through its address.</summary>
-		public RawField m_WaitingToPullModifier => Raw(__m_WaitingToPullModifier, "CEmbeddedSubclass<CCitadelModifier>");
+		/// <summary><c>CEmbeddedSubclass&lt;CCitadelModifier&gt;</c>.</summary>
+		public CCitadelModifierVData? m_WaitingToPullModifier => EmbeddedSubclass<CCitadelModifierVData>(__m_WaitingToPullModifier);
 
 		private static readonly SchemaField __m_strPullSound = new("CAbilityPunkgoatTetherVData", "m_strPullSound");
 		/// <summary><c>CSoundEventName</c>.</summary>

@@ -14,8 +14,8 @@ public static partial class Schema {
 		static string ISchemaClass<CNPC_Boss_Tier2VData>.NativeName => "CNPC_Boss_Tier2VData";
 
 		private static readonly SchemaField __m_BackdoorProtectionModifier = new("CNPC_Boss_Tier2VData", "m_BackdoorProtectionModifier");
-		/// <summary><c>CEmbeddedSubclass&lt;CCitadelModifier&gt;</c>. Backdoor Protection Modifier. No typed mapping yet: read it through its address.</summary>
-		public RawField m_BackdoorProtectionModifier => Raw(__m_BackdoorProtectionModifier, "CEmbeddedSubclass<CCitadelModifier>");
+		/// <summary><c>CEmbeddedSubclass&lt;CCitadelModifier&gt;</c>. Backdoor Protection Modifier.</summary>
+		public CCitadelModifierVData? m_BackdoorProtectionModifier => EmbeddedSubclass<CCitadelModifierVData>(__m_BackdoorProtectionModifier);
 
 		private static readonly SchemaField __m_BarrageAnnounceSound = new("CNPC_Boss_Tier2VData", "m_BarrageAnnounceSound");
 		/// <summary><c>CSoundEventName</c>.</summary>
@@ -30,44 +30,44 @@ public static partial class Schema {
 		public string m_BeamHitSound => GetBufferString(__m_BeamHitSound);
 
 		private static readonly SchemaField __m_EmpoweredModifierLevel1 = new("CNPC_Boss_Tier2VData", "m_EmpoweredModifierLevel1");
-		/// <summary><c>CEmbeddedSubclass&lt;CCitadelModifier&gt;</c>. No typed mapping yet: read it through its address.</summary>
-		public RawField m_EmpoweredModifierLevel1 => Raw(__m_EmpoweredModifierLevel1, "CEmbeddedSubclass<CCitadelModifier>");
+		/// <summary><c>CEmbeddedSubclass&lt;CCitadelModifier&gt;</c>.</summary>
+		public CCitadelModifierVData? m_EmpoweredModifierLevel1 => EmbeddedSubclass<CCitadelModifierVData>(__m_EmpoweredModifierLevel1);
 
 		private static readonly SchemaField __m_EmpoweredModifierLevel2 = new("CNPC_Boss_Tier2VData", "m_EmpoweredModifierLevel2");
-		/// <summary><c>CEmbeddedSubclass&lt;CCitadelModifier&gt;</c>. No typed mapping yet: read it through its address.</summary>
-		public RawField m_EmpoweredModifierLevel2 => Raw(__m_EmpoweredModifierLevel2, "CEmbeddedSubclass<CCitadelModifier>");
+		/// <summary><c>CEmbeddedSubclass&lt;CCitadelModifier&gt;</c>.</summary>
+		public CCitadelModifierVData? m_EmpoweredModifierLevel2 => EmbeddedSubclass<CCitadelModifierVData>(__m_EmpoweredModifierLevel2);
 
 		private static readonly SchemaField __m_FriendlyAuraModifier = new("CNPC_Boss_Tier2VData", "m_FriendlyAuraModifier");
-		/// <summary><c>CEmbeddedSubclass&lt;CCitadelModifier&gt;</c>. No typed mapping yet: read it through its address.</summary>
-		public RawField m_FriendlyAuraModifier => Raw(__m_FriendlyAuraModifier, "CEmbeddedSubclass<CCitadelModifier>");
+		/// <summary><c>CEmbeddedSubclass&lt;CCitadelModifier&gt;</c>.</summary>
+		public CCitadelModifierVData? m_FriendlyAuraModifier => EmbeddedSubclass<CCitadelModifierVData>(__m_FriendlyAuraModifier);
 
 		private static readonly SchemaField __m_InvulModifier = new("CNPC_Boss_Tier2VData", "m_InvulModifier");
-		/// <summary><c>CEmbeddedSubclass&lt;CCitadelModifier&gt;</c>. No typed mapping yet: read it through its address.</summary>
-		public RawField m_InvulModifier => Raw(__m_InvulModifier, "CEmbeddedSubclass<CCitadelModifier>");
+		/// <summary><c>CEmbeddedSubclass&lt;CCitadelModifier&gt;</c>.</summary>
+		public CCitadelModifierVData? m_InvulModifier => EmbeddedSubclass<CCitadelModifierVData>(__m_InvulModifier);
 
 		private static readonly SchemaField __m_MeleeAnnounceSound = new("CNPC_Boss_Tier2VData", "m_MeleeAnnounceSound");
 		/// <summary><c>CSoundEventName</c>.</summary>
 		public string m_MeleeAnnounceSound => GetBufferString(__m_MeleeAnnounceSound);
 
 		private static readonly SchemaField __m_NearbyEnemyResist = new("CNPC_Boss_Tier2VData", "m_NearbyEnemyResist");
-		/// <summary><c>CEmbeddedSubclass&lt;CCitadelModifier&gt;</c>. No typed mapping yet: read it through its address.</summary>
-		public RawField m_NearbyEnemyResist => Raw(__m_NearbyEnemyResist, "CEmbeddedSubclass<CCitadelModifier>");
+		/// <summary><c>CEmbeddedSubclass&lt;CCitadelModifier&gt;</c>.</summary>
+		public CCitadelModifierVData? m_NearbyEnemyResist => EmbeddedSubclass<CCitadelModifierVData>(__m_NearbyEnemyResist);
 
 		private static readonly SchemaField __m_RangeRingParticle = new("CNPC_Boss_Tier2VData", "m_RangeRingParticle");
 		/// <summary><c>CResourceNameTyped&lt;CWeakHandle&lt;InfoForResourceTypeIParticleSystemDefinition&gt;&gt;</c>.</summary>
 		public string m_RangeRingParticle => GetBufferString(__m_RangeRingParticle);
 
 		private static readonly SchemaField __m_RangedArmorModifier = new("CNPC_Boss_Tier2VData", "m_RangedArmorModifier");
-		/// <summary><c>CEmbeddedSubclass&lt;CCitadelModifier&gt;</c>. No typed mapping yet: read it through its address.</summary>
-		public RawField m_RangedArmorModifier => Raw(__m_RangedArmorModifier, "CEmbeddedSubclass<CCitadelModifier>");
+		/// <summary><c>CEmbeddedSubclass&lt;CCitadelModifier&gt;</c>.</summary>
+		public CCitadelModifierVData? m_RangedArmorModifier => EmbeddedSubclass<CCitadelModifierVData>(__m_RangedArmorModifier);
 
 		private static readonly SchemaField __m_StaggerWatcherModifier = new("CNPC_Boss_Tier2VData", "m_StaggerWatcherModifier");
-		/// <summary><c>CEmbeddedSubclass&lt;CCitadelModifier&gt;</c>. No typed mapping yet: read it through its address.</summary>
-		public RawField m_StaggerWatcherModifier => Raw(__m_StaggerWatcherModifier, "CEmbeddedSubclass<CCitadelModifier>");
+		/// <summary><c>CEmbeddedSubclass&lt;CCitadelModifier&gt;</c>.</summary>
+		public CCitadelModifierVData? m_StaggerWatcherModifier => EmbeddedSubclass<CCitadelModifierVData>(__m_StaggerWatcherModifier);
 
 		private static readonly SchemaField __m_StatTrackerAuraModifier = new("CNPC_Boss_Tier2VData", "m_StatTrackerAuraModifier");
-		/// <summary><c>CEmbeddedSubclass&lt;CCitadelModifier&gt;</c>. No typed mapping yet: read it through its address.</summary>
-		public RawField m_StatTrackerAuraModifier => Raw(__m_StatTrackerAuraModifier, "CEmbeddedSubclass<CCitadelModifier>");
+		/// <summary><c>CEmbeddedSubclass&lt;CCitadelModifier&gt;</c>.</summary>
+		public CCitadelModifierVData? m_StatTrackerAuraModifier => EmbeddedSubclass<CCitadelModifierVData>(__m_StatTrackerAuraModifier);
 
 		private static readonly SchemaField __m_StompAnnounceSound = new("CNPC_Boss_Tier2VData", "m_StompAnnounceSound");
 		/// <summary><c>CSoundEventName</c>.</summary>

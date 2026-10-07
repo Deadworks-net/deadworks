@@ -18,7 +18,7 @@ public static partial class Schema {
 		public string m_ProcNotificationEffect => GetBufferString(__m_ProcNotificationEffect);
 
 		private static readonly SchemaField __m_ProcNotificationModifier = new("CCitadel_Modifier_CrushingFistsDebuff_VData", "m_ProcNotificationModifier");
-		/// <summary><c>CEmbeddedSubclass&lt;CCitadelModifier&gt;</c>. No typed mapping yet: read it through its address.</summary>
-		public RawField m_ProcNotificationModifier => Raw(__m_ProcNotificationModifier, "CEmbeddedSubclass<CCitadelModifier>");
+		/// <summary><c>CEmbeddedSubclass&lt;CCitadelModifier&gt;</c>.</summary>
+		public CCitadelModifierVData? m_ProcNotificationModifier => EmbeddedSubclass<CCitadelModifierVData>(__m_ProcNotificationModifier);
 	}
 }

@@ -12,5 +12,8 @@ public static partial class Schema {
 		internal CCitadel_Modifier_Cadence_SilenceContraptionsDebuff() { }
 		static CCitadel_Modifier_Cadence_SilenceContraptionsDebuff ISchemaClass<CCitadel_Modifier_Cadence_SilenceContraptionsDebuff>.New() => new();
 		static string ISchemaClass<CCitadel_Modifier_Cadence_SilenceContraptionsDebuff>.NativeName => "CCitadel_Modifier_Cadence_SilenceContraptionsDebuff";
+
+		/// <summary>The data entry this was created from, as <see cref="CCitadel_Modifier_Cadence_SilenceContraptionsDebuffVData"/>, or null if it has none.</summary>
+		public new CCitadel_Modifier_Cadence_SilenceContraptionsDebuffVData? VData => ModifierData<CCitadel_Modifier_Cadence_SilenceContraptionsDebuffVData>();
 	}
 }

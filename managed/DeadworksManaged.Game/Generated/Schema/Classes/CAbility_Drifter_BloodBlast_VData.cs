@@ -22,16 +22,16 @@ public static partial class Schema {
 		public string m_ChargeParticle => GetBufferString(__m_ChargeParticle);
 
 		private static readonly SchemaField __m_DebuffModifier = new("CAbility_Drifter_BloodBlast_VData", "m_DebuffModifier");
-		/// <summary><c>CEmbeddedSubclass&lt;CCitadelModifier&gt;</c>. No typed mapping yet: read it through its address.</summary>
-		public RawField m_DebuffModifier => Raw(__m_DebuffModifier, "CEmbeddedSubclass<CCitadelModifier>");
+		/// <summary><c>CEmbeddedSubclass&lt;CCitadelModifier&gt;</c>.</summary>
+		public CCitadelModifierVData? m_DebuffModifier => EmbeddedSubclass<CCitadelModifierVData>(__m_DebuffModifier);
 
 		private static readonly SchemaField __m_TargetDamageParticle = new("CAbility_Drifter_BloodBlast_VData", "m_TargetDamageParticle");
 		/// <summary><c>CResourceNameTyped&lt;CWeakHandle&lt;InfoForResourceTypeIParticleSystemDefinition&gt;&gt;</c>.</summary>
 		public string m_TargetDamageParticle => GetBufferString(__m_TargetDamageParticle);
 
 		private static readonly SchemaField __m_TargetModifier = new("CAbility_Drifter_BloodBlast_VData", "m_TargetModifier");
-		/// <summary><c>CEmbeddedSubclass&lt;CCitadelModifier&gt;</c>. No typed mapping yet: read it through its address.</summary>
-		public RawField m_TargetModifier => Raw(__m_TargetModifier, "CEmbeddedSubclass<CCitadelModifier>");
+		/// <summary><c>CEmbeddedSubclass&lt;CCitadelModifier&gt;</c>.</summary>
+		public CCitadelModifierVData? m_TargetModifier => EmbeddedSubclass<CCitadelModifierVData>(__m_TargetModifier);
 
 		private static readonly SchemaField __m_strHitConfirmSound = new("CAbility_Drifter_BloodBlast_VData", "m_strHitConfirmSound");
 		/// <summary><c>CSoundEventName</c>.</summary>

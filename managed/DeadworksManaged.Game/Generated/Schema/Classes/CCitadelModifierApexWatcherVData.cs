@@ -14,7 +14,7 @@ public static partial class Schema {
 		static string ISchemaClass<CCitadelModifierApexWatcherVData>.NativeName => "CCitadelModifierApexWatcherVData";
 
 		private static readonly SchemaField __m_BuffModifier = new("CCitadelModifierApexWatcherVData", "m_BuffModifier");
-		/// <summary><c>CEmbeddedSubclass&lt;CCitadelModifier&gt;</c>. No typed mapping yet: read it through its address.</summary>
-		public RawField m_BuffModifier => Raw(__m_BuffModifier, "CEmbeddedSubclass<CCitadelModifier>");
+		/// <summary><c>CEmbeddedSubclass&lt;CCitadelModifier&gt;</c>.</summary>
+		public CCitadelModifierVData? m_BuffModifier => EmbeddedSubclass<CCitadelModifierVData>(__m_BuffModifier);
 	}
 }

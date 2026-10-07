@@ -12,5 +12,8 @@ public static partial class Schema {
 		internal CCitadel_Ability_StaticCharge() { }
 		static CCitadel_Ability_StaticCharge ISchemaClass<CCitadel_Ability_StaticCharge>.New() => new();
 		static string ISchemaClass<CCitadel_Ability_StaticCharge>.NativeName => "CCitadel_Ability_StaticCharge";
+
+		/// <summary>The data entry this was created from, as <see cref="CCitadel_Ability_StaticChargeVData"/>, or null if it has none.</summary>
+		public new CCitadel_Ability_StaticChargeVData? VData => SubclassVData<CCitadel_Ability_StaticChargeVData>();
 	}
 }

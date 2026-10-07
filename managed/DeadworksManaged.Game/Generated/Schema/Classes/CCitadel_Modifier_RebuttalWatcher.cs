@@ -12,5 +12,8 @@ public static partial class Schema {
 		internal CCitadel_Modifier_RebuttalWatcher() { }
 		static CCitadel_Modifier_RebuttalWatcher ISchemaClass<CCitadel_Modifier_RebuttalWatcher>.New() => new();
 		static string ISchemaClass<CCitadel_Modifier_RebuttalWatcher>.NativeName => "CCitadel_Modifier_RebuttalWatcher";
+
+		/// <summary>The data entry this was created from, as <see cref="CCitadel_Modifier_RebuttalWatcherVData"/>, or null if it has none.</summary>
+		public new CCitadel_Modifier_RebuttalWatcherVData? VData => ModifierData<CCitadel_Modifier_RebuttalWatcherVData>();
 	}
 }

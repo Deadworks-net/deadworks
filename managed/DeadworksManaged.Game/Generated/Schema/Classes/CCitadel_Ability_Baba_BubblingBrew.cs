@@ -13,16 +13,8 @@ public static partial class Schema {
 		static CCitadel_Ability_Baba_BubblingBrew ISchemaClass<CCitadel_Ability_Baba_BubblingBrew>.New() => new();
 		static string ISchemaClass<CCitadel_Ability_Baba_BubblingBrew>.NativeName => "CCitadel_Ability_Baba_BubblingBrew";
 
-		private static readonly SchemaField __m_CurrentStacks = new("CCitadel_Ability_Baba_BubblingBrew", "m_CurrentStacks");
-		/// <summary><c>int32</c>.</summary>
-		public int m_CurrentStacks { get => Get<int>(__m_CurrentStacks); set => Set(__m_CurrentStacks, value); }
-
 		private static readonly SchemaField __m_eState = new("CCitadel_Ability_Baba_BubblingBrew", "m_eState");
 		/// <summary><c>CCitadel_Ability_Baba_BubblingBrew::EState</c>.</summary>
 		public CCitadel_Ability_Baba_BubblingBrew__EState m_eState { get => Get<CCitadel_Ability_Baba_BubblingBrew__EState>(__m_eState); set => Set(__m_eState, value); }
-
-		private static readonly SchemaField __m_tStackExpiryTime = new("CCitadel_Ability_Baba_BubblingBrew", "m_tStackExpiryTime");
-		/// <summary><c>GameTime_t</c>.</summary>
-		public float m_tStackExpiryTime { get => Get<float>(__m_tStackExpiryTime); set => Set(__m_tStackExpiryTime, value); }
 	}
 }

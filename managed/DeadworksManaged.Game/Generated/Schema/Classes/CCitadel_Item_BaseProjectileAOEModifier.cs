@@ -24,5 +24,8 @@ public static partial class Schema {
 		private static readonly SchemaField __m_vLaunchPosition = new("CCitadel_Item_BaseProjectileAOEModifier", "m_vLaunchPosition");
 		/// <summary><c>VectorWS</c>.</summary>
 		public Vector3 m_vLaunchPosition { get => Get<Vector3>(__m_vLaunchPosition); set => Set(__m_vLaunchPosition, value); }
+
+		/// <summary>The data entry this was created from, as <see cref="CCitadel_Item_BaseProjectileAOEModifierVData"/>, or null if it has none.</summary>
+		public new CCitadel_Item_BaseProjectileAOEModifierVData? VData => SubclassVData<CCitadel_Item_BaseProjectileAOEModifierVData>();
 	}
 }

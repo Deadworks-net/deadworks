@@ -14,20 +14,20 @@ public static partial class Schema {
 		static string ISchemaClass<CAbilityStickyBombVData>.NativeName => "CAbilityStickyBombVData";
 
 		private static readonly SchemaField __m_BombAttachedModifier = new("CAbilityStickyBombVData", "m_BombAttachedModifier");
-		/// <summary><c>CEmbeddedSubclass&lt;CCitadelModifier&gt;</c>. No typed mapping yet: read it through its address.</summary>
-		public RawField m_BombAttachedModifier => Raw(__m_BombAttachedModifier, "CEmbeddedSubclass<CCitadelModifier>");
+		/// <summary><c>CEmbeddedSubclass&lt;CCitadelModifier&gt;</c>.</summary>
+		public CCitadelModifierVData? m_BombAttachedModifier => EmbeddedSubclass<CCitadelModifierVData>(__m_BombAttachedModifier);
 
 		private static readonly SchemaField __m_CastBombParticle = new("CAbilityStickyBombVData", "m_CastBombParticle");
 		/// <summary><c>CResourceNameTyped&lt;CWeakHandle&lt;InfoForResourceTypeIParticleSystemDefinition&gt;&gt;</c>.</summary>
 		public string m_CastBombParticle => GetBufferString(__m_CastBombParticle);
 
 		private static readonly SchemaField __m_KillCheckModifier = new("CAbilityStickyBombVData", "m_KillCheckModifier");
-		/// <summary><c>CEmbeddedSubclass&lt;CCitadelModifier&gt;</c>. No typed mapping yet: read it through its address.</summary>
-		public RawField m_KillCheckModifier => Raw(__m_KillCheckModifier, "CEmbeddedSubclass<CCitadelModifier>");
+		/// <summary><c>CEmbeddedSubclass&lt;CCitadelModifier&gt;</c>.</summary>
+		public CCitadelModifierVData? m_KillCheckModifier => EmbeddedSubclass<CCitadelModifierVData>(__m_KillCheckModifier);
 
 		private static readonly SchemaField __m_SelfBuffModifier = new("CAbilityStickyBombVData", "m_SelfBuffModifier");
-		/// <summary><c>CEmbeddedSubclass&lt;CCitadelModifier&gt;</c>. No typed mapping yet: read it through its address.</summary>
-		public RawField m_SelfBuffModifier => Raw(__m_SelfBuffModifier, "CEmbeddedSubclass<CCitadelModifier>");
+		/// <summary><c>CEmbeddedSubclass&lt;CCitadelModifier&gt;</c>.</summary>
+		public CCitadelModifierVData? m_SelfBuffModifier => EmbeddedSubclass<CCitadelModifierVData>(__m_SelfBuffModifier);
 
 		private static readonly SchemaField __m_flAllyCollideRadius = new("CAbilityStickyBombVData", "m_flAllyCollideRadius");
 		/// <summary><c>float32</c>.</summary>

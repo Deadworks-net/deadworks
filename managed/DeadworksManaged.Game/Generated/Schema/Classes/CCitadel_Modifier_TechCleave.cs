@@ -16,5 +16,8 @@ public static partial class Schema {
 		private static readonly SchemaField __m_vDamageTakenEvents = new("CCitadel_Modifier_TechCleave", "m_vDamageTakenEvents");
 		/// <summary><c>CUtlVector&lt;CCitadel_Modifier_TechCleave::DamageTaken_t&gt;</c>.</summary>
 		public SchemaObjectList<CCitadel_Modifier_TechCleave__DamageTaken_t> m_vDamageTakenEvents => new(this, __m_vDamageTakenEvents, -1);
+
+		/// <summary>The data entry this was created from, as <see cref="CCitadel_Modifier_TechCleaveVData"/>, or null if it has none.</summary>
+		public new CCitadel_Modifier_TechCleaveVData? VData => ModifierData<CCitadel_Modifier_TechCleaveVData>();
 	}
 }

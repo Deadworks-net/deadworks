@@ -14,12 +14,12 @@ public static partial class Schema {
 		static string ISchemaClass<CAI_NPC_NecroSkeleVData>.NativeName => "CAI_NPC_NecroSkeleVData";
 
 		private static readonly SchemaField __m_DamageSlowModifier = new("CAI_NPC_NecroSkeleVData", "m_DamageSlowModifier");
-		/// <summary><c>CEmbeddedSubclass&lt;CCitadelModifier&gt;</c>. No typed mapping yet: read it through its address.</summary>
-		public RawField m_DamageSlowModifier => Raw(__m_DamageSlowModifier, "CEmbeddedSubclass<CCitadelModifier>");
+		/// <summary><c>CEmbeddedSubclass&lt;CCitadelModifier&gt;</c>.</summary>
+		public CCitadelModifierVData? m_DamageSlowModifier => EmbeddedSubclass<CCitadelModifierVData>(__m_DamageSlowModifier);
 
 		private static readonly SchemaField __m_ExplodeModifier = new("CAI_NPC_NecroSkeleVData", "m_ExplodeModifier");
-		/// <summary><c>CEmbeddedSubclass&lt;CCitadelModifier&gt;</c>. No typed mapping yet: read it through its address.</summary>
-		public RawField m_ExplodeModifier => Raw(__m_ExplodeModifier, "CEmbeddedSubclass<CCitadelModifier>");
+		/// <summary><c>CEmbeddedSubclass&lt;CCitadelModifier&gt;</c>.</summary>
+		public CCitadelModifierVData? m_ExplodeModifier => EmbeddedSubclass<CCitadelModifierVData>(__m_ExplodeModifier);
 
 		private static readonly SchemaField __m_flHeroLockBreakRange = new("CAI_NPC_NecroSkeleVData", "m_flHeroLockBreakRange");
 		/// <summary><c>float32</c>.</summary>

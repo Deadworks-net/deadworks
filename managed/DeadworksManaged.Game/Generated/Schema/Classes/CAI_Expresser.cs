@@ -26,8 +26,8 @@ public static partial class Schema {
 		public bool m_bSceneEntityDisabled { get => Get<bool>(__m_bSceneEntityDisabled); set => Set(__m_bSceneEntityDisabled, value); }
 
 		private static readonly SchemaField __m_conceptCooldowns = new("CAI_Expresser", "m_conceptCooldowns");
-		/// <summary><c>CUtlDict&lt;GameTime_t&gt;</c>. No typed mapping yet: read it through its address.</summary>
-		public RawField m_conceptCooldowns => Raw(__m_conceptCooldowns, "CUtlDict<GameTime_t>");
+		/// <summary><c>CUtlDict&lt;GameTime_t&gt;</c>.</summary>
+		public SchemaValueDict<float> m_conceptCooldowns => new(this, __m_conceptCooldowns);
 
 		private static readonly SchemaField __m_flBlockedTalkTime = new("CAI_Expresser", "m_flBlockedTalkTime");
 		/// <summary><c>GameTime_t</c>.</summary>
@@ -58,8 +58,8 @@ public static partial class Schema {
 		public CBaseModelEntity? m_pOuter => EntityPointer<CBaseModelEntity>(__m_pOuter);
 
 		private static readonly SchemaField __m_ruleCooldowns = new("CAI_Expresser", "m_ruleCooldowns");
-		/// <summary><c>CUtlDict&lt;GameTime_t&gt;</c>. No typed mapping yet: read it through its address.</summary>
-		public RawField m_ruleCooldowns => Raw(__m_ruleCooldowns, "CUtlDict<GameTime_t>");
+		/// <summary><c>CUtlDict&lt;GameTime_t&gt;</c>.</summary>
+		public SchemaValueDict<float> m_ruleCooldowns => new(this, __m_ruleCooldowns);
 
 		private static readonly SchemaField __m_voicePitch = new("CAI_Expresser", "m_voicePitch");
 		/// <summary><c>int32</c>.</summary>

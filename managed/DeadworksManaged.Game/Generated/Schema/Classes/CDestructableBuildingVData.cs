@@ -22,28 +22,28 @@ public static partial class Schema {
 		public string m_AmberDeathSound => GetBufferString(__m_AmberDeathSound);
 
 		private static readonly SchemaField __m_BackdoorBulletResistModifier = new("CDestructableBuildingVData", "m_BackdoorBulletResistModifier");
-		/// <summary><c>CEmbeddedSubclass&lt;CCitadelModifier&gt;</c>. No typed mapping yet: read it through its address.</summary>
-		public RawField m_BackdoorBulletResistModifier => Raw(__m_BackdoorBulletResistModifier, "CEmbeddedSubclass<CCitadelModifier>");
+		/// <summary><c>CEmbeddedSubclass&lt;CCitadelModifier&gt;</c>.</summary>
+		public CCitadelModifierVData? m_BackdoorBulletResistModifier => EmbeddedSubclass<CCitadelModifierVData>(__m_BackdoorBulletResistModifier);
 
 		private static readonly SchemaField __m_BackdoorProtectionModifier = new("CDestructableBuildingVData", "m_BackdoorProtectionModifier");
-		/// <summary><c>CEmbeddedSubclass&lt;CCitadelModifier&gt;</c>. No typed mapping yet: read it through its address.</summary>
-		public RawField m_BackdoorProtectionModifier => Raw(__m_BackdoorProtectionModifier, "CEmbeddedSubclass<CCitadelModifier>");
+		/// <summary><c>CEmbeddedSubclass&lt;CCitadelModifier&gt;</c>.</summary>
+		public CCitadelModifierVData? m_BackdoorProtectionModifier => EmbeddedSubclass<CCitadelModifierVData>(__m_BackdoorProtectionModifier);
 
 		private static readonly SchemaField __m_BarrackBossProtection = new("CDestructableBuildingVData", "m_BarrackBossProtection");
-		/// <summary><c>CEmbeddedSubclass&lt;CCitadelModifier&gt;</c>. No typed mapping yet: read it through its address.</summary>
-		public RawField m_BarrackBossProtection => Raw(__m_BarrackBossProtection, "CEmbeddedSubclass<CCitadelModifier>");
+		/// <summary><c>CEmbeddedSubclass&lt;CCitadelModifier&gt;</c>.</summary>
+		public CCitadelModifierVData? m_BarrackBossProtection => EmbeddedSubclass<CCitadelModifierVData>(__m_BarrackBossProtection);
 
 		private static readonly SchemaField __m_ObjectiveRegen = new("CDestructableBuildingVData", "m_ObjectiveRegen");
-		/// <summary><c>CEmbeddedSubclass&lt;CCitadelModifier&gt;</c>. No typed mapping yet: read it through its address.</summary>
-		public RawField m_ObjectiveRegen => Raw(__m_ObjectiveRegen, "CEmbeddedSubclass<CCitadelModifier>");
+		/// <summary><c>CEmbeddedSubclass&lt;CCitadelModifier&gt;</c>.</summary>
+		public CCitadelModifierVData? m_ObjectiveRegen => EmbeddedSubclass<CCitadelModifierVData>(__m_ObjectiveRegen);
 
 		private static readonly SchemaField __m_PowerGenerator = new("CDestructableBuildingVData", "m_PowerGenerator");
-		/// <summary><c>CEmbeddedSubclass&lt;CCitadelModifier&gt;</c>. No typed mapping yet: read it through its address.</summary>
-		public RawField m_PowerGenerator => Raw(__m_PowerGenerator, "CEmbeddedSubclass<CCitadelModifier>");
+		/// <summary><c>CEmbeddedSubclass&lt;CCitadelModifier&gt;</c>.</summary>
+		public CCitadelModifierVData? m_PowerGenerator => EmbeddedSubclass<CCitadelModifierVData>(__m_PowerGenerator);
 
 		private static readonly SchemaField __m_RangedArmorModifier = new("CDestructableBuildingVData", "m_RangedArmorModifier");
-		/// <summary><c>CEmbeddedSubclass&lt;CCitadelModifier&gt;</c>. No typed mapping yet: read it through its address.</summary>
-		public RawField m_RangedArmorModifier => Raw(__m_RangedArmorModifier, "CEmbeddedSubclass<CCitadelModifier>");
+		/// <summary><c>CEmbeddedSubclass&lt;CCitadelModifier&gt;</c>.</summary>
+		public CCitadelModifierVData? m_RangedArmorModifier => EmbeddedSubclass<CCitadelModifierVData>(__m_RangedArmorModifier);
 
 		private static readonly SchemaField __m_SapphDeathParticle = new("CDestructableBuildingVData", "m_SapphDeathParticle");
 		/// <summary><c>CResourceNameTyped&lt;CWeakHandle&lt;InfoForResourceTypeIParticleSystemDefinition&gt;&gt;</c>.</summary>
@@ -86,7 +86,7 @@ public static partial class Schema {
 		public string m_sSapphModelName => GetBufferString(__m_sSapphModelName);
 
 		private static readonly SchemaField __m_vecIntrinsicModifiers = new("CDestructableBuildingVData", "m_vecIntrinsicModifiers");
-		/// <summary><c>CUtlVector&lt;CEmbeddedSubclass&lt;CCitadelModifier&gt;&gt;</c>. No typed mapping yet: read it through its address.</summary>
-		public RawField m_vecIntrinsicModifiers => Raw(__m_vecIntrinsicModifiers, "CUtlVector<CEmbeddedSubclass<CCitadelModifier>>");
+		/// <summary><c>CUtlVector&lt;CEmbeddedSubclass&lt;CCitadelModifier&gt;&gt;</c>.</summary>
+		public SchemaPointerList<CCitadelModifierVData> m_vecIntrinsicModifiers => new(this, __m_vecIntrinsicModifiers, -1, 16, 8);
 	}
 }

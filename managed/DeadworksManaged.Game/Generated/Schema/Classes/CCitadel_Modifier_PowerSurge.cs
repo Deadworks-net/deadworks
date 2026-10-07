@@ -12,5 +12,8 @@ public static partial class Schema {
 		internal CCitadel_Modifier_PowerSurge() { }
 		static CCitadel_Modifier_PowerSurge ISchemaClass<CCitadel_Modifier_PowerSurge>.New() => new();
 		static string ISchemaClass<CCitadel_Modifier_PowerSurge>.NativeName => "CCitadel_Modifier_PowerSurge";
+
+		/// <summary>The data entry this was created from, as <see cref="CCitadel_Modifier_PowerSurgeVData"/>, or null if it has none.</summary>
+		public new CCitadel_Modifier_PowerSurgeVData? VData => ModifierData<CCitadel_Modifier_PowerSurgeVData>();
 	}
 }

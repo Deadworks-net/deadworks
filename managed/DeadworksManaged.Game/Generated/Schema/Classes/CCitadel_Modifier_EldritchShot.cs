@@ -20,5 +20,8 @@ public static partial class Schema {
 		private static readonly SchemaField __m_shotID = new("CCitadel_Modifier_EldritchShot", "m_shotID");
 		/// <summary><c>ShotID_t</c>.</summary>
 		public uint m_shotID { get => Get<uint>(__m_shotID); set => Set(__m_shotID, value); }
+
+		/// <summary>The data entry this was created from, as <see cref="CCitadel_Modifier_EldritchShotVData"/>, or null if it has none.</summary>
+		public new CCitadel_Modifier_EldritchShotVData? VData => ModifierData<CCitadel_Modifier_EldritchShotVData>();
 	}
 }

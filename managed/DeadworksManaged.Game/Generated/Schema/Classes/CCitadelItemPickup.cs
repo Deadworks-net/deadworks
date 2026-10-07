@@ -72,5 +72,8 @@ public static partial class Schema {
 		private static readonly SchemaField __m_vHomePosition = new("CCitadelItemPickup", "m_vHomePosition");
 		/// <summary><c>VectorWS</c>.</summary>
 		public Vector3 m_vHomePosition { get => Get<Vector3>(__m_vHomePosition); set => Set(__m_vHomePosition, value); }
+
+		/// <summary>The data entry this was created from, as <see cref="CCitadelItemPickupVData"/>, or null if it has none.</summary>
+		public CCitadelItemPickupVData? VData => SubclassVData<CCitadelItemPickupVData>();
 	}
 }

@@ -34,12 +34,12 @@ public static partial class Schema {
 		public string m_IsPunchableParticle => GetBufferString(__m_IsPunchableParticle);
 
 		private static readonly SchemaField __m_NearRejuvAuraModifier = new("CCitadel_Modifier_ItemPunchable_RejuvVData", "m_NearRejuvAuraModifier");
-		/// <summary><c>CEmbeddedSubclass&lt;CCitadelModifier&gt;</c>. No typed mapping yet: read it through its address.</summary>
-		public RawField m_NearRejuvAuraModifier => Raw(__m_NearRejuvAuraModifier, "CEmbeddedSubclass<CCitadelModifier>");
+		/// <summary><c>CEmbeddedSubclass&lt;CCitadelModifier&gt;</c>.</summary>
+		public CCitadelModifierVData? m_NearRejuvAuraModifier => EmbeddedSubclass<CCitadelModifierVData>(__m_NearRejuvAuraModifier);
 
 		private static readonly SchemaField __m_ParryCheckModifier = new("CCitadel_Modifier_ItemPunchable_RejuvVData", "m_ParryCheckModifier");
-		/// <summary><c>CEmbeddedSubclass&lt;CCitadelModifier&gt;</c>. No typed mapping yet: read it through its address.</summary>
-		public RawField m_ParryCheckModifier => Raw(__m_ParryCheckModifier, "CEmbeddedSubclass<CCitadelModifier>");
+		/// <summary><c>CEmbeddedSubclass&lt;CCitadelModifier&gt;</c>.</summary>
+		public CCitadelModifierVData? m_ParryCheckModifier => EmbeddedSubclass<CCitadelModifierVData>(__m_ParryCheckModifier);
 
 		private static readonly SchemaField __m_flMaxDistForHeal = new("CCitadel_Modifier_ItemPunchable_RejuvVData", "m_flMaxDistForHeal");
 		/// <summary><c>float32</c>.</summary>

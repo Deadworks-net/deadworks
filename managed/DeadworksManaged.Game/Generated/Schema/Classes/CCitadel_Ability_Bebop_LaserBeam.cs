@@ -36,5 +36,8 @@ public static partial class Schema {
 		private static readonly SchemaField __m_nTotalDamage = new("CCitadel_Ability_Bebop_LaserBeam", "m_nTotalDamage");
 		/// <summary><c>int32</c>.</summary>
 		public int m_nTotalDamage { get => Get<int>(__m_nTotalDamage); set => Set(__m_nTotalDamage, value); }
+
+		/// <summary>The data entry this was created from, as <see cref="CCitadel_Ability_Bebop_LaserBeamVData"/>, or null if it has none.</summary>
+		public new CCitadel_Ability_Bebop_LaserBeamVData? VData => SubclassVData<CCitadel_Ability_Bebop_LaserBeamVData>();
 	}
 }

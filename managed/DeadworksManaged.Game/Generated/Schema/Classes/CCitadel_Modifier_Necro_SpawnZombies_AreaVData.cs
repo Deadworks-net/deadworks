@@ -14,16 +14,16 @@ public static partial class Schema {
 		static string ISchemaClass<CCitadel_Modifier_Necro_SpawnZombies_AreaVData>.NativeName => "CCitadel_Modifier_Necro_SpawnZombies_AreaVData";
 
 		private static readonly SchemaField __m_SpawningInModifier = new("CCitadel_Modifier_Necro_SpawnZombies_AreaVData", "m_SpawningInModifier");
-		/// <summary><c>CEmbeddedSubclass&lt;CCitadelModifier&gt;</c>. No typed mapping yet: read it through its address.</summary>
-		public RawField m_SpawningInModifier => Raw(__m_SpawningInModifier, "CEmbeddedSubclass<CCitadelModifier>");
+		/// <summary><c>CEmbeddedSubclass&lt;CCitadelModifier&gt;</c>.</summary>
+		public CCitadelModifierVData? m_SpawningInModifier => EmbeddedSubclass<CCitadelModifierVData>(__m_SpawningInModifier);
 
 		private static readonly SchemaField __m_SummonDecayModifier = new("CCitadel_Modifier_Necro_SpawnZombies_AreaVData", "m_SummonDecayModifier");
-		/// <summary><c>CEmbeddedSubclass&lt;CCitadelModifier&gt;</c>. No typed mapping yet: read it through its address.</summary>
-		public RawField m_SummonDecayModifier => Raw(__m_SummonDecayModifier, "CEmbeddedSubclass<CCitadelModifier>");
+		/// <summary><c>CEmbeddedSubclass&lt;CCitadelModifier&gt;</c>.</summary>
+		public CCitadelModifierVData? m_SummonDecayModifier => EmbeddedSubclass<CCitadelModifierVData>(__m_SummonDecayModifier);
 
 		private static readonly SchemaField __m_SummonModifier = new("CCitadel_Modifier_Necro_SpawnZombies_AreaVData", "m_SummonModifier");
-		/// <summary><c>CEmbeddedSubclass&lt;CCitadelModifier&gt;</c>. No typed mapping yet: read it through its address.</summary>
-		public RawField m_SummonModifier => Raw(__m_SummonModifier, "CEmbeddedSubclass<CCitadelModifier>");
+		/// <summary><c>CEmbeddedSubclass&lt;CCitadelModifier&gt;</c>.</summary>
+		public CCitadelModifierVData? m_SummonModifier => EmbeddedSubclass<CCitadelModifierVData>(__m_SummonModifier);
 
 		private static readonly SchemaField __m_SummonParticle = new("CCitadel_Modifier_Necro_SpawnZombies_AreaVData", "m_SummonParticle");
 		/// <summary><c>CResourceNameTyped&lt;CWeakHandle&lt;InfoForResourceTypeIParticleSystemDefinition&gt;&gt;</c>.</summary>

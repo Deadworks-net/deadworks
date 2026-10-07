@@ -78,8 +78,8 @@ public static partial class Schema {
 		public bool m_bRenderToCubemaps { get => Get<bool>(__m_bRenderToCubemaps); set => Set(__m_bRenderToCubemaps, value); }
 
 		private static readonly SchemaField __m_bodyGroupChoices = new("CBaseModelEntity", "m_bodyGroupChoices");
-		/// <summary><c>CUtlOrderedMap&lt;CGlobalSymbol, int32&gt;</c>. No typed mapping yet: read it through its address.</summary>
-		public RawField m_bodyGroupChoices => Raw(__m_bodyGroupChoices, "CUtlOrderedMap<CGlobalSymbol, int32>");
+		/// <summary><c>CUtlOrderedMap&lt;CGlobalSymbol, int32&gt;</c>.</summary>
+		public SchemaValueDict<int> m_bodyGroupChoices => new(this, __m_bodyGroupChoices);
 
 		private static readonly SchemaField __m_bodyGroupRequests = new("CBaseModelEntity", "m_bodyGroupRequests");
 		/// <summary><c>CUtlVectorFixedGrowable&lt;CBaseModelEntity::BodyGroupRequest_t&gt;</c>. No typed mapping yet: read it through its address.</summary>

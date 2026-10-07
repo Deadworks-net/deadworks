@@ -14,19 +14,19 @@ public static partial class Schema {
 		static string ISchemaClass<CCitadel_Item_TrackingProjectileApplyModifierVData>.NativeName => "CCitadel_Item_TrackingProjectileApplyModifierVData";
 
 		private static readonly SchemaField __m_CasterModifier = new("CCitadel_Item_TrackingProjectileApplyModifierVData", "m_CasterModifier");
-		/// <summary><c>CEmbeddedSubclass&lt;CCitadelModifier&gt;</c>. Optional. Applied to the caster on cast for the ability's duration - use for a self-cost. No typed mapping yet: read it through its address.</summary>
-		public RawField m_CasterModifier => Raw(__m_CasterModifier, "CEmbeddedSubclass<CCitadelModifier>");
+		/// <summary><c>CEmbeddedSubclass&lt;CCitadelModifier&gt;</c>. Optional. Applied to the caster on cast for the ability's duration - use for a self-cost.</summary>
+		public CCitadelModifierVData? m_CasterModifier => EmbeddedSubclass<CCitadelModifierVData>(__m_CasterModifier);
 
 		private static readonly SchemaField __m_FriendlyOnlyModifier = new("CCitadel_Item_TrackingProjectileApplyModifierVData", "m_FriendlyOnlyModifier");
-		/// <summary><c>CEmbeddedSubclass&lt;CCitadelModifier&gt;</c>. No typed mapping yet: read it through its address.</summary>
-		public RawField m_FriendlyOnlyModifier => Raw(__m_FriendlyOnlyModifier, "CEmbeddedSubclass<CCitadelModifier>");
+		/// <summary><c>CEmbeddedSubclass&lt;CCitadelModifier&gt;</c>.</summary>
+		public CCitadelModifierVData? m_FriendlyOnlyModifier => EmbeddedSubclass<CCitadelModifierVData>(__m_FriendlyOnlyModifier);
 
 		private static readonly SchemaField __m_ProjectileImpactParticle = new("CCitadel_Item_TrackingProjectileApplyModifierVData", "m_ProjectileImpactParticle");
 		/// <summary><c>CResourceNameTyped&lt;CWeakHandle&lt;InfoForResourceTypeIParticleSystemDefinition&gt;&gt;</c>.</summary>
 		public string m_ProjectileImpactParticle => GetBufferString(__m_ProjectileImpactParticle);
 
 		private static readonly SchemaField __m_TargetModifier = new("CCitadel_Item_TrackingProjectileApplyModifierVData", "m_TargetModifier");
-		/// <summary><c>CEmbeddedSubclass&lt;CCitadelModifier&gt;</c>. No typed mapping yet: read it through its address.</summary>
-		public RawField m_TargetModifier => Raw(__m_TargetModifier, "CEmbeddedSubclass<CCitadelModifier>");
+		/// <summary><c>CEmbeddedSubclass&lt;CCitadelModifier&gt;</c>.</summary>
+		public CCitadelModifierVData? m_TargetModifier => EmbeddedSubclass<CCitadelModifierVData>(__m_TargetModifier);
 	}
 }

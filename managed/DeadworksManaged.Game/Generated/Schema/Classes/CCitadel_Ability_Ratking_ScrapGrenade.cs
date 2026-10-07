@@ -12,5 +12,8 @@ public static partial class Schema {
 		internal CCitadel_Ability_Ratking_ScrapGrenade() { }
 		static CCitadel_Ability_Ratking_ScrapGrenade ISchemaClass<CCitadel_Ability_Ratking_ScrapGrenade>.New() => new();
 		static string ISchemaClass<CCitadel_Ability_Ratking_ScrapGrenade>.NativeName => "CCitadel_Ability_Ratking_ScrapGrenade";
+
+		/// <summary>The data entry this was created from, as <see cref="CCitadel_Ability_Ratking_ScrapGrenadeVData"/>, or null if it has none.</summary>
+		public new CCitadel_Ability_Ratking_ScrapGrenadeVData? VData => SubclassVData<CCitadel_Ability_Ratking_ScrapGrenadeVData>();
 	}
 }

@@ -14,16 +14,16 @@ public static partial class Schema {
 		static string ISchemaClass<CCitadel_Ability_Fencer_ThrowBladeVData>.NativeName => "CCitadel_Ability_Fencer_ThrowBladeVData";
 
 		private static readonly SchemaField __m_BuffModifier = new("CCitadel_Ability_Fencer_ThrowBladeVData", "m_BuffModifier");
-		/// <summary><c>CEmbeddedSubclass&lt;CCitadelModifier&gt;</c>. No typed mapping yet: read it through its address.</summary>
-		public RawField m_BuffModifier => Raw(__m_BuffModifier, "CEmbeddedSubclass<CCitadelModifier>");
+		/// <summary><c>CEmbeddedSubclass&lt;CCitadelModifier&gt;</c>.</summary>
+		public CCitadelModifierVData? m_BuffModifier => EmbeddedSubclass<CCitadelModifierVData>(__m_BuffModifier);
 
 		private static readonly SchemaField __m_DebuffModifier = new("CCitadel_Ability_Fencer_ThrowBladeVData", "m_DebuffModifier");
-		/// <summary><c>CEmbeddedSubclass&lt;CCitadelModifier&gt;</c>. No typed mapping yet: read it through its address.</summary>
-		public RawField m_DebuffModifier => Raw(__m_DebuffModifier, "CEmbeddedSubclass<CCitadelModifier>");
+		/// <summary><c>CEmbeddedSubclass&lt;CCitadelModifier&gt;</c>.</summary>
+		public CCitadelModifierVData? m_DebuffModifier => EmbeddedSubclass<CCitadelModifierVData>(__m_DebuffModifier);
 
 		private static readonly SchemaField __m_DisarmModifier = new("CCitadel_Ability_Fencer_ThrowBladeVData", "m_DisarmModifier");
-		/// <summary><c>CEmbeddedSubclass&lt;CCitadelModifier&gt;</c>. No typed mapping yet: read it through its address.</summary>
-		public RawField m_DisarmModifier => Raw(__m_DisarmModifier, "CEmbeddedSubclass<CCitadelModifier>");
+		/// <summary><c>CEmbeddedSubclass&lt;CCitadelModifier&gt;</c>.</summary>
+		public CCitadelModifierVData? m_DisarmModifier => EmbeddedSubclass<CCitadelModifierVData>(__m_DisarmModifier);
 
 		private static readonly SchemaField __m_ExplodeParticle = new("CCitadel_Ability_Fencer_ThrowBladeVData", "m_ExplodeParticle");
 		/// <summary><c>CResourceNameTyped&lt;CWeakHandle&lt;InfoForResourceTypeIParticleSystemDefinition&gt;&gt;</c>.</summary>
@@ -42,8 +42,8 @@ public static partial class Schema {
 		public string m_MarkParticle => GetBufferString(__m_MarkParticle);
 
 		private static readonly SchemaField __m_UIRecastModifier = new("CCitadel_Ability_Fencer_ThrowBladeVData", "m_UIRecastModifier");
-		/// <summary><c>CEmbeddedSubclass&lt;CCitadelModifier&gt;</c>. No typed mapping yet: read it through its address.</summary>
-		public RawField m_UIRecastModifier => Raw(__m_UIRecastModifier, "CEmbeddedSubclass<CCitadelModifier>");
+		/// <summary><c>CEmbeddedSubclass&lt;CCitadelModifier&gt;</c>.</summary>
+		public CCitadelModifierVData? m_UIRecastModifier => EmbeddedSubclass<CCitadelModifierVData>(__m_UIRecastModifier);
 
 		private static readonly SchemaField __m_flForwardPlacementDistance = new("CCitadel_Ability_Fencer_ThrowBladeVData", "m_flForwardPlacementDistance");
 		/// <summary><c>float32</c>.</summary>

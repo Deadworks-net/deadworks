@@ -16,5 +16,8 @@ public static partial class Schema {
 		private static readonly SchemaField __m_vTargets = new("CCitadel_Modifier_Tier3_DamagePulse", "m_vTargets");
 		/// <summary><c>CUtlVector&lt;CHandle&lt;CBaseEntity&gt;&gt;</c>.</summary>
 		public SchemaHandleList<CBaseEntity> m_vTargets => new(this, __m_vTargets, -1);
+
+		/// <summary>The data entry this was created from, as <see cref="CCitadel_Modifier_Tier3_DamagePulseVData"/>, or null if it has none.</summary>
+		public new CCitadel_Modifier_Tier3_DamagePulseVData? VData => ModifierData<CCitadel_Modifier_Tier3_DamagePulseVData>();
 	}
 }

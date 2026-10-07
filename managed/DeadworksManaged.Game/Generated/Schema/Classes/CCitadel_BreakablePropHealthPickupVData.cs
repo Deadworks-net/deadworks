@@ -30,8 +30,8 @@ public static partial class Schema {
 		public string m_ParticleAOEHeal => GetBufferString(__m_ParticleAOEHeal);
 
 		private static readonly SchemaField __m_RegenModifier = new("CCitadel_BreakablePropHealthPickupVData", "m_RegenModifier");
-		/// <summary><c>CEmbeddedSubclass&lt;CCitadelModifier&gt;</c>. No typed mapping yet: read it through its address.</summary>
-		public RawField m_RegenModifier => Raw(__m_RegenModifier, "CEmbeddedSubclass<CCitadelModifier>");
+		/// <summary><c>CEmbeddedSubclass&lt;CCitadelModifier&gt;</c>.</summary>
+		public CCitadelModifierVData? m_RegenModifier => EmbeddedSubclass<CCitadelModifierVData>(__m_RegenModifier);
 
 		private static readonly SchemaField __m_bUseFixedDuration = new("CCitadel_BreakablePropHealthPickupVData", "m_bUseFixedDuration");
 		/// <summary><c>bool</c>.</summary>

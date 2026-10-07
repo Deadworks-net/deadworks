@@ -64,5 +64,8 @@ public static partial class Schema {
 		private static readonly SchemaField __m_vecLastVel = new("CCitadel_Ability_Bull_Leap", "m_vecLastVel");
 		/// <summary><c>Vector</c>.</summary>
 		public Vector3 m_vecLastVel { get => Get<Vector3>(__m_vecLastVel); set => Set(__m_vecLastVel, value); }
+
+		/// <summary>The data entry this was created from, as <see cref="CCitadel_Ability_Bull_LeapVData"/>, or null if it has none.</summary>
+		public new CCitadel_Ability_Bull_LeapVData? VData => SubclassVData<CCitadel_Ability_Bull_LeapVData>();
 	}
 }

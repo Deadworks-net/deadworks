@@ -38,8 +38,8 @@ public static partial class Schema {
 		public string m_FriendlyCastProjectileTrailParticle => GetBufferString(__m_FriendlyCastProjectileTrailParticle);
 
 		private static readonly SchemaField __m_ModifierDrag = new("CCitadel_Ability_Doorman_Cart_VData", "m_ModifierDrag");
-		/// <summary><c>CEmbeddedSubclass&lt;CBaseModifier&gt;</c>. No typed mapping yet: read it through its address.</summary>
-		public RawField m_ModifierDrag => Raw(__m_ModifierDrag, "CEmbeddedSubclass<CBaseModifier>");
+		/// <summary><c>CEmbeddedSubclass&lt;CBaseModifier&gt;</c>.</summary>
+		public CModifierVData? m_ModifierDrag => EmbeddedSubclass<CModifierVData>(__m_ModifierDrag);
 
 		private static readonly SchemaField __m_WallImpactParticle = new("CCitadel_Ability_Doorman_Cart_VData", "m_WallImpactParticle");
 		/// <summary><c>CResourceNameTyped&lt;CWeakHandle&lt;InfoForResourceTypeIParticleSystemDefinition&gt;&gt;</c>.</summary>

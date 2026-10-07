@@ -12,5 +12,8 @@ public static partial class Schema {
 		internal CCitadel_Modifier_ItemWalkBack() { }
 		static CCitadel_Modifier_ItemWalkBack ISchemaClass<CCitadel_Modifier_ItemWalkBack>.New() => new();
 		static string ISchemaClass<CCitadel_Modifier_ItemWalkBack>.NativeName => "CCitadel_Modifier_ItemWalkBack";
+
+		/// <summary>The data entry this was created from, as <see cref="CCitadel_Modifier_ItemWalkBackVData"/>, or null if it has none.</summary>
+		public new CCitadel_Modifier_ItemWalkBackVData? VData => ModifierData<CCitadel_Modifier_ItemWalkBackVData>();
 	}
 }

@@ -12,5 +12,8 @@ public static partial class Schema {
 		internal CCitadel_Modifier_Shiv_RageDrain() { }
 		static CCitadel_Modifier_Shiv_RageDrain ISchemaClass<CCitadel_Modifier_Shiv_RageDrain>.New() => new();
 		static string ISchemaClass<CCitadel_Modifier_Shiv_RageDrain>.NativeName => "CCitadel_Modifier_Shiv_RageDrain";
+
+		/// <summary>The data entry this was created from, as <see cref="CCitadel_Modifier_Shiv_RageDrainVData"/>, or null if it has none.</summary>
+		public new CCitadel_Modifier_Shiv_RageDrainVData? VData => ModifierData<CCitadel_Modifier_Shiv_RageDrainVData>();
 	}
 }

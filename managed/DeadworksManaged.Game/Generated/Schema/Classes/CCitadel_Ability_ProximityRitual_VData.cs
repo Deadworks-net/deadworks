@@ -38,16 +38,16 @@ public static partial class Schema {
 		public string m_PredatoryStatueModel => GetBufferString(__m_PredatoryStatueModel);
 
 		private static readonly SchemaField __m_PredatoryStatueModifier = new("CCitadel_Ability_ProximityRitual_VData", "m_PredatoryStatueModifier");
-		/// <summary><c>CEmbeddedSubclass&lt;CCitadelModifier&gt;</c>. No typed mapping yet: read it through its address.</summary>
-		public RawField m_PredatoryStatueModifier => Raw(__m_PredatoryStatueModifier, "CEmbeddedSubclass<CCitadelModifier>");
+		/// <summary><c>CEmbeddedSubclass&lt;CCitadelModifier&gt;</c>.</summary>
+		public CCitadelModifierVData? m_PredatoryStatueModifier => EmbeddedSubclass<CCitadelModifierVData>(__m_PredatoryStatueModifier);
 
 		private static readonly SchemaField __m_RecallLineParticle = new("CCitadel_Ability_ProximityRitual_VData", "m_RecallLineParticle");
 		/// <summary><c>CResourceNameTyped&lt;CWeakHandle&lt;InfoForResourceTypeIParticleSystemDefinition&gt;&gt;</c>.</summary>
 		public string m_RecallLineParticle => GetBufferString(__m_RecallLineParticle);
 
 		private static readonly SchemaField __m_RecentDamageModifier = new("CCitadel_Ability_ProximityRitual_VData", "m_RecentDamageModifier");
-		/// <summary><c>CEmbeddedSubclass&lt;CCitadelModifier&gt;</c>. No typed mapping yet: read it through its address.</summary>
-		public RawField m_RecentDamageModifier => Raw(__m_RecentDamageModifier, "CEmbeddedSubclass<CCitadelModifier>");
+		/// <summary><c>CEmbeddedSubclass&lt;CCitadelModifier&gt;</c>.</summary>
+		public CCitadelModifierVData? m_RecentDamageModifier => EmbeddedSubclass<CCitadelModifierVData>(__m_RecentDamageModifier);
 
 		private static readonly SchemaField __m_flAbilityDamageScale = new("CCitadel_Ability_ProximityRitual_VData", "m_flAbilityDamageScale");
 		/// <summary><c>float32</c>.</summary>

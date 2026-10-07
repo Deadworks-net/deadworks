@@ -24,5 +24,8 @@ public static partial class Schema {
 		private static readonly SchemaField __m_flLastDamageTime = new("CCitadel_Ability_Burrow", "m_flLastDamageTime");
 		/// <summary><c>GameTime_t</c>.</summary>
 		public float m_flLastDamageTime { get => Get<float>(__m_flLastDamageTime); set => Set(__m_flLastDamageTime, value); }
+
+		/// <summary>The data entry this was created from, as <see cref="CCitadel_Ability_BurrowVData"/>, or null if it has none.</summary>
+		public new CCitadel_Ability_BurrowVData? VData => SubclassVData<CCitadel_Ability_BurrowVData>();
 	}
 }

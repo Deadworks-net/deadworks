@@ -12,5 +12,8 @@ public static partial class Schema {
 		internal CCitadel_UtilityUpgrade_DebuffImmunity() { }
 		static CCitadel_UtilityUpgrade_DebuffImmunity ISchemaClass<CCitadel_UtilityUpgrade_DebuffImmunity>.New() => new();
 		static string ISchemaClass<CCitadel_UtilityUpgrade_DebuffImmunity>.NativeName => "CCitadel_UtilityUpgrade_DebuffImmunity";
+
+		/// <summary>The data entry this was created from, as <see cref="CCitadel_UtilityUpgrade_DebuffImmunityVData"/>, or null if it has none.</summary>
+		public new CCitadel_UtilityUpgrade_DebuffImmunityVData? VData => SubclassVData<CCitadel_UtilityUpgrade_DebuffImmunityVData>();
 	}
 }

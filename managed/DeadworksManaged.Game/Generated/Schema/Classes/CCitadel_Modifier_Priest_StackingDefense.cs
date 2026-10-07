@@ -12,5 +12,8 @@ public static partial class Schema {
 		internal CCitadel_Modifier_Priest_StackingDefense() { }
 		static CCitadel_Modifier_Priest_StackingDefense ISchemaClass<CCitadel_Modifier_Priest_StackingDefense>.New() => new();
 		static string ISchemaClass<CCitadel_Modifier_Priest_StackingDefense>.NativeName => "CCitadel_Modifier_Priest_StackingDefense";
+
+		/// <summary>The data entry this was created from, as <see cref="CCitadel_Modifier_Priest_StackingDefenseVData"/>, or null if it has none.</summary>
+		public new CCitadel_Modifier_Priest_StackingDefenseVData? VData => ModifierData<CCitadel_Modifier_Priest_StackingDefenseVData>();
 	}
 }

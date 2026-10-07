@@ -14,12 +14,12 @@ public static partial class Schema {
 		static string ISchemaClass<CModifier_Mirage_Tornado_Aura_Apply_VData>.NativeName => "CModifier_Mirage_Tornado_Aura_Apply_VData";
 
 		private static readonly SchemaField __m_LiftModifier = new("CModifier_Mirage_Tornado_Aura_Apply_VData", "m_LiftModifier");
-		/// <summary><c>CEmbeddedSubclass&lt;CCitadelModifier&gt;</c>. No typed mapping yet: read it through its address.</summary>
-		public RawField m_LiftModifier => Raw(__m_LiftModifier, "CEmbeddedSubclass<CCitadelModifier>");
+		/// <summary><c>CEmbeddedSubclass&lt;CCitadelModifier&gt;</c>.</summary>
+		public CCitadelModifierVData? m_LiftModifier => EmbeddedSubclass<CCitadelModifierVData>(__m_LiftModifier);
 
 		private static readonly SchemaField __m_SlowModifier = new("CModifier_Mirage_Tornado_Aura_Apply_VData", "m_SlowModifier");
-		/// <summary><c>CEmbeddedSubclass&lt;CCitadelModifier&gt;</c>. No typed mapping yet: read it through its address.</summary>
-		public RawField m_SlowModifier => Raw(__m_SlowModifier, "CEmbeddedSubclass<CCitadelModifier>");
+		/// <summary><c>CEmbeddedSubclass&lt;CCitadelModifier&gt;</c>.</summary>
+		public CCitadelModifierVData? m_SlowModifier => EmbeddedSubclass<CCitadelModifierVData>(__m_SlowModifier);
 
 		private static readonly SchemaField __m_strHitConfirmSound = new("CModifier_Mirage_Tornado_Aura_Apply_VData", "m_strHitConfirmSound");
 		/// <summary><c>CSoundEventName</c>.</summary>

@@ -12,5 +12,8 @@ public static partial class Schema {
 		internal CCitadel_Modifier_Objective_HealthGrowth() { }
 		static CCitadel_Modifier_Objective_HealthGrowth ISchemaClass<CCitadel_Modifier_Objective_HealthGrowth>.New() => new();
 		static string ISchemaClass<CCitadel_Modifier_Objective_HealthGrowth>.NativeName => "CCitadel_Modifier_Objective_HealthGrowth";
+
+		/// <summary>The data entry this was created from, as <see cref="CCitadel_Modifier_Objective_HealthGrowthVData"/>, or null if it has none.</summary>
+		public new CCitadel_Modifier_Objective_HealthGrowthVData? VData => ModifierData<CCitadel_Modifier_Objective_HealthGrowthVData>();
 	}
 }

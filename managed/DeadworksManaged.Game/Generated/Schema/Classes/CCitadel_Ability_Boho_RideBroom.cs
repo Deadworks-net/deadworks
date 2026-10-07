@@ -28,5 +28,8 @@ public static partial class Schema {
 		private static readonly SchemaField __m_nFXIndex = new("CCitadel_Ability_Boho_RideBroom", "m_nFXIndex");
 		/// <summary><c>ParticleIndex_t</c>.</summary>
 		public int m_nFXIndex { get => Get<int>(__m_nFXIndex); set => Set(__m_nFXIndex, value); }
+
+		/// <summary>The data entry this was created from, as <see cref="CCitadel_Ability_Boho_RideBroomVData"/>, or null if it has none.</summary>
+		public new CCitadel_Ability_Boho_RideBroomVData? VData => SubclassVData<CCitadel_Ability_Boho_RideBroomVData>();
 	}
 }

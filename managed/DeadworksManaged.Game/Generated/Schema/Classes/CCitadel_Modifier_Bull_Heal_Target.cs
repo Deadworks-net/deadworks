@@ -16,5 +16,8 @@ public static partial class Schema {
 		private static readonly SchemaField __m_flTetherRangeSquared = new("CCitadel_Modifier_Bull_Heal_Target", "m_flTetherRangeSquared");
 		/// <summary><c>float32</c>.</summary>
 		public float m_flTetherRangeSquared { get => Get<float>(__m_flTetherRangeSquared); set => Set(__m_flTetherRangeSquared, value); }
+
+		/// <summary>The data entry this was created from, as <see cref="CCitadel_Modifier_Bull_Heal_TargetVData"/>, or null if it has none.</summary>
+		public new CCitadel_Modifier_Bull_Heal_TargetVData? VData => ModifierData<CCitadel_Modifier_Bull_Heal_TargetVData>();
 	}
 }

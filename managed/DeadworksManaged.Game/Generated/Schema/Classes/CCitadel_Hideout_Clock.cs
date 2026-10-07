@@ -12,5 +12,8 @@ public static partial class Schema {
 		internal CCitadel_Hideout_Clock() { }
 		static CCitadel_Hideout_Clock ISchemaClass<CCitadel_Hideout_Clock>.New() => new();
 		static string ISchemaClass<CCitadel_Hideout_Clock>.NativeName => "CCitadel_Hideout_Clock";
+
+		/// <summary>The data entry this was created from, as <see cref="CCitadel_Hideout_ClockVData"/>, or null if it has none.</summary>
+		public CCitadel_Hideout_ClockVData? VData => SubclassVData<CCitadel_Hideout_ClockVData>();
 	}
 }

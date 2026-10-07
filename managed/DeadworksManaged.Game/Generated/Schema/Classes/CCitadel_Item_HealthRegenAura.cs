@@ -12,5 +12,8 @@ public static partial class Schema {
 		internal CCitadel_Item_HealthRegenAura() { }
 		static CCitadel_Item_HealthRegenAura ISchemaClass<CCitadel_Item_HealthRegenAura>.New() => new();
 		static string ISchemaClass<CCitadel_Item_HealthRegenAura>.NativeName => "CCitadel_Item_HealthRegenAura";
+
+		/// <summary>The data entry this was created from, as <see cref="CCitadel_Item_HealthRegenAuraVData"/>, or null if it has none.</summary>
+		public new CCitadel_Item_HealthRegenAuraVData? VData => SubclassVData<CCitadel_Item_HealthRegenAuraVData>();
 	}
 }

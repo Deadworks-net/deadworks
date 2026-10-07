@@ -14,24 +14,24 @@ public static partial class Schema {
 		static string ISchemaClass<CCitadel_Ability_Magician_CopyUltVData>.NativeName => "CCitadel_Ability_Magician_CopyUltVData";
 
 		private static readonly SchemaField __m_CopiedUltSpawnedEntityModifier = new("CCitadel_Ability_Magician_CopyUltVData", "m_CopiedUltSpawnedEntityModifier");
-		/// <summary><c>CEmbeddedSubclass&lt;CCitadelModifier&gt;</c>. No typed mapping yet: read it through its address.</summary>
-		public RawField m_CopiedUltSpawnedEntityModifier => Raw(__m_CopiedUltSpawnedEntityModifier, "CEmbeddedSubclass<CCitadelModifier>");
+		/// <summary><c>CEmbeddedSubclass&lt;CCitadelModifier&gt;</c>.</summary>
+		public CCitadelModifierVData? m_CopiedUltSpawnedEntityModifier => EmbeddedSubclass<CCitadelModifierVData>(__m_CopiedUltSpawnedEntityModifier);
 
 		private static readonly SchemaField __m_CopyTetherParticle = new("CCitadel_Ability_Magician_CopyUltVData", "m_CopyTetherParticle");
 		/// <summary><c>CResourceNameTyped&lt;CWeakHandle&lt;InfoForResourceTypeIParticleSystemDefinition&gt;&gt;</c>.</summary>
 		public string m_CopyTetherParticle => GetBufferString(__m_CopyTetherParticle);
 
 		private static readonly SchemaField __m_InformTargetUltCopiedModifier = new("CCitadel_Ability_Magician_CopyUltVData", "m_InformTargetUltCopiedModifier");
-		/// <summary><c>CEmbeddedSubclass&lt;CCitadelModifier&gt;</c>. No typed mapping yet: read it through its address.</summary>
-		public RawField m_InformTargetUltCopiedModifier => Raw(__m_InformTargetUltCopiedModifier, "CEmbeddedSubclass<CCitadelModifier>");
+		/// <summary><c>CEmbeddedSubclass&lt;CCitadelModifier&gt;</c>.</summary>
+		public CCitadelModifierVData? m_InformTargetUltCopiedModifier => EmbeddedSubclass<CCitadelModifierVData>(__m_InformTargetUltCopiedModifier);
 
 		private static readonly SchemaField __m_UltActiveModifier = new("CCitadel_Ability_Magician_CopyUltVData", "m_UltActiveModifier");
-		/// <summary><c>CEmbeddedSubclass&lt;CCitadelModifier&gt;</c>. No typed mapping yet: read it through its address.</summary>
-		public RawField m_UltActiveModifier => Raw(__m_UltActiveModifier, "CEmbeddedSubclass<CCitadelModifier>");
+		/// <summary><c>CEmbeddedSubclass&lt;CCitadelModifier&gt;</c>.</summary>
+		public CCitadelModifierVData? m_UltActiveModifier => EmbeddedSubclass<CCitadelModifierVData>(__m_UltActiveModifier);
 
 		private static readonly SchemaField __m_UltCopiedModifier = new("CCitadel_Ability_Magician_CopyUltVData", "m_UltCopiedModifier");
-		/// <summary><c>CEmbeddedSubclass&lt;CCitadelModifier&gt;</c>. No typed mapping yet: read it through its address.</summary>
-		public RawField m_UltCopiedModifier => Raw(__m_UltCopiedModifier, "CEmbeddedSubclass<CCitadelModifier>");
+		/// <summary><c>CEmbeddedSubclass&lt;CCitadelModifier&gt;</c>.</summary>
+		public CCitadelModifierVData? m_UltCopiedModifier => EmbeddedSubclass<CCitadelModifierVData>(__m_UltCopiedModifier);
 
 		private static readonly SchemaField __m_vecCompanionAbilities = new("CCitadel_Ability_Magician_CopyUltVData", "m_vecCompanionAbilities");
 		/// <summary><c>CUtlVector&lt;CopyUltCompanionAbility_t&gt;</c>.</summary>

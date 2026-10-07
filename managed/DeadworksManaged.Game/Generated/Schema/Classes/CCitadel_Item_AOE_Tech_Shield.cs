@@ -12,5 +12,8 @@ public static partial class Schema {
 		internal CCitadel_Item_AOE_Tech_Shield() { }
 		static CCitadel_Item_AOE_Tech_Shield ISchemaClass<CCitadel_Item_AOE_Tech_Shield>.New() => new();
 		static string ISchemaClass<CCitadel_Item_AOE_Tech_Shield>.NativeName => "CCitadel_Item_AOE_Tech_Shield";
+
+		/// <summary>The data entry this was created from, as <see cref="CCitadel_Item_AOE_Tech_ShieldVData"/>, or null if it has none.</summary>
+		public new CCitadel_Item_AOE_Tech_ShieldVData? VData => SubclassVData<CCitadel_Item_AOE_Tech_ShieldVData>();
 	}
 }

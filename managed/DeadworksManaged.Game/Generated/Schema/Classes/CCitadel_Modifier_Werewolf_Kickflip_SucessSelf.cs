@@ -20,5 +20,8 @@ public static partial class Schema {
 		private static readonly SchemaField __m_vecKickOffVelocity = new("CCitadel_Modifier_Werewolf_Kickflip_SucessSelf", "m_vecKickOffVelocity");
 		/// <summary><c>Vector</c>.</summary>
 		public Vector3 m_vecKickOffVelocity { get => Get<Vector3>(__m_vecKickOffVelocity); set => Set(__m_vecKickOffVelocity, value); }
+
+		/// <summary>The data entry this was created from, as <see cref="CCitadel_Modifier_Werewolf_Kickflip_SucessSelfVData"/>, or null if it has none.</summary>
+		public new CCitadel_Modifier_Werewolf_Kickflip_SucessSelfVData? VData => ModifierData<CCitadel_Modifier_Werewolf_Kickflip_SucessSelfVData>();
 	}
 }

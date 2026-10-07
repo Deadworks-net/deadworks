@@ -12,5 +12,8 @@ public static partial class Schema {
 		internal CCitadel_Modifier_Werewolf_TransformationWatcher() { }
 		static CCitadel_Modifier_Werewolf_TransformationWatcher ISchemaClass<CCitadel_Modifier_Werewolf_TransformationWatcher>.New() => new();
 		static string ISchemaClass<CCitadel_Modifier_Werewolf_TransformationWatcher>.NativeName => "CCitadel_Modifier_Werewolf_TransformationWatcher";
+
+		/// <summary>The data entry this was created from, as <see cref="CCitadel_Modifier_Werewolf_TransformationWatcherVData"/>, or null if it has none.</summary>
+		public new CCitadel_Modifier_Werewolf_TransformationWatcherVData? VData => ModifierData<CCitadel_Modifier_Werewolf_TransformationWatcherVData>();
 	}
 }

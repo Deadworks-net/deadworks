@@ -12,5 +12,8 @@ public static partial class Schema {
 		internal CCitadel_Modifier_ViperVenomProcWatcher() { }
 		static CCitadel_Modifier_ViperVenomProcWatcher ISchemaClass<CCitadel_Modifier_ViperVenomProcWatcher>.New() => new();
 		static string ISchemaClass<CCitadel_Modifier_ViperVenomProcWatcher>.NativeName => "CCitadel_Modifier_ViperVenomProcWatcher";
+
+		/// <summary>The data entry this was created from, as <see cref="CCitadel_Modifier_ViperVenomProcWatcherVData"/>, or null if it has none.</summary>
+		public new CCitadel_Modifier_ViperVenomProcWatcherVData? VData => ModifierData<CCitadel_Modifier_ViperVenomProcWatcherVData>();
 	}
 }

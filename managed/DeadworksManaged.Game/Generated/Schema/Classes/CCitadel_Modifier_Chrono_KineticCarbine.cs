@@ -32,5 +32,8 @@ public static partial class Schema {
 		private static readonly SchemaField __m_nFullyChargedParticle = new("CCitadel_Modifier_Chrono_KineticCarbine", "m_nFullyChargedParticle");
 		/// <summary><c>ParticleIndex_t</c>.</summary>
 		public int m_nFullyChargedParticle { get => Get<int>(__m_nFullyChargedParticle); set => Set(__m_nFullyChargedParticle, value); }
+
+		/// <summary>The data entry this was created from, as <see cref="CCitadel_Modifier_Chrono_KineticCarbineVData"/>, or null if it has none.</summary>
+		public new CCitadel_Modifier_Chrono_KineticCarbineVData? VData => ModifierData<CCitadel_Modifier_Chrono_KineticCarbineVData>();
 	}
 }

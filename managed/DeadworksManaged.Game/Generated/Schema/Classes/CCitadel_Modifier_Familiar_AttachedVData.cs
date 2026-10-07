@@ -14,20 +14,20 @@ public static partial class Schema {
 		static string ISchemaClass<CCitadel_Modifier_Familiar_AttachedVData>.NativeName => "CCitadel_Modifier_Familiar_AttachedVData";
 
 		private static readonly SchemaField __m_AttachEndingModifier = new("CCitadel_Modifier_Familiar_AttachedVData", "m_AttachEndingModifier");
-		/// <summary><c>CEmbeddedSubclass&lt;CCitadelModifier&gt;</c>. No typed mapping yet: read it through its address.</summary>
-		public RawField m_AttachEndingModifier => Raw(__m_AttachEndingModifier, "CEmbeddedSubclass<CCitadelModifier>");
+		/// <summary><c>CEmbeddedSubclass&lt;CCitadelModifier&gt;</c>.</summary>
+		public CCitadelModifierVData? m_AttachEndingModifier => EmbeddedSubclass<CCitadelModifierVData>(__m_AttachEndingModifier);
 
 		private static readonly SchemaField __m_HostModifier = new("CCitadel_Modifier_Familiar_AttachedVData", "m_HostModifier");
-		/// <summary><c>CEmbeddedSubclass&lt;CCitadelModifier&gt;</c>. No typed mapping yet: read it through its address.</summary>
-		public RawField m_HostModifier => Raw(__m_HostModifier, "CEmbeddedSubclass<CCitadelModifier>");
+		/// <summary><c>CEmbeddedSubclass&lt;CCitadelModifier&gt;</c>.</summary>
+		public CCitadelModifierVData? m_HostModifier => EmbeddedSubclass<CCitadelModifierVData>(__m_HostModifier);
 
 		private static readonly SchemaField __m_ItemUsedParticle = new("CCitadel_Modifier_Familiar_AttachedVData", "m_ItemUsedParticle");
 		/// <summary><c>CResourceNameTyped&lt;CWeakHandle&lt;InfoForResourceTypeIParticleSystemDefinition&gt;&gt;</c>.</summary>
 		public string m_ItemUsedParticle => GetBufferString(__m_ItemUsedParticle);
 
 		private static readonly SchemaField __m_ReplicatedBarrierModifier = new("CCitadel_Modifier_Familiar_AttachedVData", "m_ReplicatedBarrierModifier");
-		/// <summary><c>CEmbeddedSubclass&lt;CCitadelModifier&gt;</c>. No typed mapping yet: read it through its address.</summary>
-		public RawField m_ReplicatedBarrierModifier => Raw(__m_ReplicatedBarrierModifier, "CEmbeddedSubclass<CCitadelModifier>");
+		/// <summary><c>CEmbeddedSubclass&lt;CCitadelModifier&gt;</c>.</summary>
+		public CCitadelModifierVData? m_ReplicatedBarrierModifier => EmbeddedSubclass<CCitadelModifierVData>(__m_ReplicatedBarrierModifier);
 
 		private static readonly SchemaField __m_flEndingWarningDuration = new("CCitadel_Modifier_Familiar_AttachedVData", "m_flEndingWarningDuration");
 		/// <summary><c>float32</c>.</summary>

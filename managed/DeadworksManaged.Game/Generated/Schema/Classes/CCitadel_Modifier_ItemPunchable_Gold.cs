@@ -12,5 +12,8 @@ public static partial class Schema {
 		internal CCitadel_Modifier_ItemPunchable_Gold() { }
 		static CCitadel_Modifier_ItemPunchable_Gold ISchemaClass<CCitadel_Modifier_ItemPunchable_Gold>.New() => new();
 		static string ISchemaClass<CCitadel_Modifier_ItemPunchable_Gold>.NativeName => "CCitadel_Modifier_ItemPunchable_Gold";
+
+		/// <summary>The data entry this was created from, as <see cref="CCitadel_Modifier_ItemPunchable_GoldVData"/>, or null if it has none.</summary>
+		public new CCitadel_Modifier_ItemPunchable_GoldVData? VData => ModifierData<CCitadel_Modifier_ItemPunchable_GoldVData>();
 	}
 }

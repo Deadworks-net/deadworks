@@ -33,6 +33,9 @@ public static partial class Schema {
 		/// <summary><c>Vector</c>.</summary>
 		public Vector3 m_vecForward { get => Get<Vector3>(__m_vecForward); set => Set(__m_vecForward, value); }
 
+		/// <summary>The data entry this was created from, as <see cref="CNPC_BaseDefenseSentryVData"/>, or null if it has none.</summary>
+		public new CNPC_BaseDefenseSentryVData? VData => SubclassVData<CNPC_BaseDefenseSentryVData>();
+
 		/// <summary>Fires the <c>DisableAttacking</c> input.</summary>
 		public void InputDisableAttacking() => FireInput("DisableAttacking");
 

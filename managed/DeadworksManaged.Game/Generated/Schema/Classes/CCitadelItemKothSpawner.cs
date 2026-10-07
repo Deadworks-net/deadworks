@@ -12,5 +12,8 @@ public static partial class Schema {
 		internal CCitadelItemKothSpawner() { }
 		static CCitadelItemKothSpawner ISchemaClass<CCitadelItemKothSpawner>.New() => new();
 		static string ISchemaClass<CCitadelItemKothSpawner>.NativeName => "CCitadelItemKothSpawner";
+
+		/// <summary>The data entry this was created from, as <see cref="CCitadelItemKothSpawnerVData"/>, or null if it has none.</summary>
+		public new CCitadelItemKothSpawnerVData? VData => SubclassVData<CCitadelItemKothSpawnerVData>();
 	}
 }

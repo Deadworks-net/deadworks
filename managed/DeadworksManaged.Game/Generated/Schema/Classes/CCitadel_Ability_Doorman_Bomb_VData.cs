@@ -14,8 +14,8 @@ public static partial class Schema {
 		static string ISchemaClass<CCitadel_Ability_Doorman_Bomb_VData>.NativeName => "CCitadel_Ability_Doorman_Bomb_VData";
 
 		private static readonly SchemaField __m_AuraModifier = new("CCitadel_Ability_Doorman_Bomb_VData", "m_AuraModifier");
-		/// <summary><c>CEmbeddedSubclass&lt;CCitadelModifierAura&gt;</c>. No typed mapping yet: read it through its address.</summary>
-		public RawField m_AuraModifier => Raw(__m_AuraModifier, "CEmbeddedSubclass<CCitadelModifierAura>");
+		/// <summary><c>CEmbeddedSubclass&lt;CCitadelModifierAura&gt;</c>.</summary>
+		public CCitadelModifierAuraVData? m_AuraModifier => EmbeddedSubclass<CCitadelModifierAuraVData>(__m_AuraModifier);
 
 		private static readonly SchemaField __m_ExplodeParticle = new("CCitadel_Ability_Doorman_Bomb_VData", "m_ExplodeParticle");
 		/// <summary><c>CResourceNameTyped&lt;CWeakHandle&lt;InfoForResourceTypeIParticleSystemDefinition&gt;&gt;</c>.</summary>
@@ -38,8 +38,8 @@ public static partial class Schema {
 		public string m_ImpactSound => GetBufferString(__m_ImpactSound);
 
 		private static readonly SchemaField __m_InaccuracyModifier = new("CCitadel_Ability_Doorman_Bomb_VData", "m_InaccuracyModifier");
-		/// <summary><c>CEmbeddedSubclass&lt;CCitadelModifier&gt;</c>. No typed mapping yet: read it through its address.</summary>
-		public RawField m_InaccuracyModifier => Raw(__m_InaccuracyModifier, "CEmbeddedSubclass<CCitadelModifier>");
+		/// <summary><c>CEmbeddedSubclass&lt;CCitadelModifier&gt;</c>.</summary>
+		public CCitadelModifierVData? m_InaccuracyModifier => EmbeddedSubclass<CCitadelModifierVData>(__m_InaccuracyModifier);
 
 		private static readonly SchemaField __m_MiniExplodeParticle = new("CCitadel_Ability_Doorman_Bomb_VData", "m_MiniExplodeParticle");
 		/// <summary><c>CResourceNameTyped&lt;CWeakHandle&lt;InfoForResourceTypeIParticleSystemDefinition&gt;&gt;</c>.</summary>

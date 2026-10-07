@@ -14,7 +14,7 @@ public static partial class Schema {
 		static string ISchemaClass<CAbilityCadenceCrescendoVData>.NativeName => "CAbilityCadenceCrescendoVData";
 
 		private static readonly SchemaField __m_CrescendoAOEModifier = new("CAbilityCadenceCrescendoVData", "m_CrescendoAOEModifier");
-		/// <summary><c>CEmbeddedSubclass&lt;CCitadelModifierAura&gt;</c>. No typed mapping yet: read it through its address.</summary>
-		public RawField m_CrescendoAOEModifier => Raw(__m_CrescendoAOEModifier, "CEmbeddedSubclass<CCitadelModifierAura>");
+		/// <summary><c>CEmbeddedSubclass&lt;CCitadelModifierAura&gt;</c>.</summary>
+		public CCitadelModifierAuraVData? m_CrescendoAOEModifier => EmbeddedSubclass<CCitadelModifierAuraVData>(__m_CrescendoAOEModifier);
 	}
 }

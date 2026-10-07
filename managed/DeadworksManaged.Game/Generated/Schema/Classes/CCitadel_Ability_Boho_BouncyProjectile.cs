@@ -12,5 +12,8 @@ public static partial class Schema {
 		internal CCitadel_Ability_Boho_BouncyProjectile() { }
 		static CCitadel_Ability_Boho_BouncyProjectile ISchemaClass<CCitadel_Ability_Boho_BouncyProjectile>.New() => new();
 		static string ISchemaClass<CCitadel_Ability_Boho_BouncyProjectile>.NativeName => "CCitadel_Ability_Boho_BouncyProjectile";
+
+		/// <summary>The data entry this was created from, as <see cref="CCitadel_Ability_Boho_BouncyProjectileVData"/>, or null if it has none.</summary>
+		public new CCitadel_Ability_Boho_BouncyProjectileVData? VData => SubclassVData<CCitadel_Ability_Boho_BouncyProjectileVData>();
 	}
 }

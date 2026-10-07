@@ -18,8 +18,8 @@ public static partial class Schema {
 		public string m_CastParticle => GetBufferString(__m_CastParticle);
 
 		private static readonly SchemaField __m_FullyChargedFXModifier = new("CCitadel_Ability_Frank_ShockTarget2VData", "m_FullyChargedFXModifier");
-		/// <summary><c>CEmbeddedSubclass&lt;CCitadelModifier&gt;</c>. No typed mapping yet: read it through its address.</summary>
-		public RawField m_FullyChargedFXModifier => Raw(__m_FullyChargedFXModifier, "CEmbeddedSubclass<CCitadelModifier>");
+		/// <summary><c>CEmbeddedSubclass&lt;CCitadelModifier&gt;</c>.</summary>
+		public CCitadelModifierVData? m_FullyChargedFXModifier => EmbeddedSubclass<CCitadelModifierVData>(__m_FullyChargedFXModifier);
 
 		private static readonly SchemaField __m_ShockImpactParticle = new("CCitadel_Ability_Frank_ShockTarget2VData", "m_ShockImpactParticle");
 		/// <summary><c>CResourceNameTyped&lt;CWeakHandle&lt;InfoForResourceTypeIParticleSystemDefinition&gt;&gt;</c>.</summary>
@@ -38,8 +38,8 @@ public static partial class Schema {
 		public string m_ShockShootSound => GetBufferString(__m_ShockShootSound);
 
 		private static readonly SchemaField __m_SlowModifier = new("CCitadel_Ability_Frank_ShockTarget2VData", "m_SlowModifier");
-		/// <summary><c>CEmbeddedSubclass&lt;CCitadelModifier&gt;</c>. No typed mapping yet: read it through its address.</summary>
-		public RawField m_SlowModifier => Raw(__m_SlowModifier, "CEmbeddedSubclass<CCitadelModifier>");
+		/// <summary><c>CEmbeddedSubclass&lt;CCitadelModifier&gt;</c>.</summary>
+		public CCitadelModifierVData? m_SlowModifier => EmbeddedSubclass<CCitadelModifierVData>(__m_SlowModifier);
 
 		private static readonly SchemaField __m_TracerParticle = new("CCitadel_Ability_Frank_ShockTarget2VData", "m_TracerParticle");
 		/// <summary><c>CResourceNameTyped&lt;CWeakHandle&lt;InfoForResourceTypeIParticleSystemDefinition&gt;&gt;</c>.</summary>

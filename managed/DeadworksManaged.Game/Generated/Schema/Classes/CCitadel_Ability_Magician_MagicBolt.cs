@@ -20,5 +20,8 @@ public static partial class Schema {
 		private static readonly SchemaField __m_vecDeployedProjectiles = new("CCitadel_Ability_Magician_MagicBolt", "m_vecDeployedProjectiles");
 		/// <summary><c>CUtlVector&lt;CHandle&lt;CCitadelProjectile&gt;&gt;</c>.</summary>
 		public SchemaHandleList<CCitadelProjectile> m_vecDeployedProjectiles => new(this, __m_vecDeployedProjectiles, -1);
+
+		/// <summary>The data entry this was created from, as <see cref="CCitadel_Ability_Magician_MagicBoltVData"/>, or null if it has none.</summary>
+		public new CCitadel_Ability_Magician_MagicBoltVData? VData => SubclassVData<CCitadel_Ability_Magician_MagicBoltVData>();
 	}
 }

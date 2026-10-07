@@ -12,5 +12,8 @@ public static partial class Schema {
 		internal CCitadel_Ability_BloodBomb() { }
 		static CCitadel_Ability_BloodBomb ISchemaClass<CCitadel_Ability_BloodBomb>.New() => new();
 		static string ISchemaClass<CCitadel_Ability_BloodBomb>.NativeName => "CCitadel_Ability_BloodBomb";
+
+		/// <summary>The data entry this was created from, as <see cref="CCitadel_Ability_BloodBombVData"/>, or null if it has none.</summary>
+		public new CCitadel_Ability_BloodBombVData? VData => SubclassVData<CCitadel_Ability_BloodBombVData>();
 	}
 }

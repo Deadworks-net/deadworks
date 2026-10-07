@@ -12,5 +12,8 @@ public static partial class Schema {
 		internal CCitadel_Ability_Boho_ChannelTether() { }
 		static CCitadel_Ability_Boho_ChannelTether ISchemaClass<CCitadel_Ability_Boho_ChannelTether>.New() => new();
 		static string ISchemaClass<CCitadel_Ability_Boho_ChannelTether>.NativeName => "CCitadel_Ability_Boho_ChannelTether";
+
+		/// <summary>The data entry this was created from, as <see cref="CCitadel_Ability_Boho_ChannelTetherVData"/>, or null if it has none.</summary>
+		public new CCitadel_Ability_Boho_ChannelTetherVData? VData => SubclassVData<CCitadel_Ability_Boho_ChannelTetherVData>();
 	}
 }

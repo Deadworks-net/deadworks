@@ -14,12 +14,12 @@ public static partial class Schema {
 		static string ISchemaClass<CCitadel_Modifier_AfterburnWatcherVData>.NativeName => "CCitadel_Modifier_AfterburnWatcherVData";
 
 		private static readonly SchemaField __m_AfterburnDotModifier = new("CCitadel_Modifier_AfterburnWatcherVData", "m_AfterburnDotModifier");
-		/// <summary><c>CEmbeddedSubclass&lt;CCitadelModifier&gt;</c>. No typed mapping yet: read it through its address.</summary>
-		public RawField m_AfterburnDotModifier => Raw(__m_AfterburnDotModifier, "CEmbeddedSubclass<CCitadelModifier>");
+		/// <summary><c>CEmbeddedSubclass&lt;CCitadelModifier&gt;</c>.</summary>
+		public CCitadelModifierVData? m_AfterburnDotModifier => EmbeddedSubclass<CCitadelModifierVData>(__m_AfterburnDotModifier);
 
 		private static readonly SchemaField __m_BuildUpModifier = new("CCitadel_Modifier_AfterburnWatcherVData", "m_BuildUpModifier");
-		/// <summary><c>CEmbeddedSubclass&lt;CCitadel_Modifier_Base_Buildup&gt;</c>. No typed mapping yet: read it through its address.</summary>
-		public RawField m_BuildUpModifier => Raw(__m_BuildUpModifier, "CEmbeddedSubclass<CCitadel_Modifier_Base_Buildup>");
+		/// <summary><c>CEmbeddedSubclass&lt;CCitadel_Modifier_Base_Buildup&gt;</c>.</summary>
+		public CCitadel_Modifier_Base_BuildupVData? m_BuildUpModifier => EmbeddedSubclass<CCitadel_Modifier_Base_BuildupVData>(__m_BuildUpModifier);
 
 		private static readonly SchemaField __m_flHeavyMeleeBuildUp = new("CCitadel_Modifier_AfterburnWatcherVData", "m_flHeavyMeleeBuildUp");
 		/// <summary><c>float32</c>.</summary>

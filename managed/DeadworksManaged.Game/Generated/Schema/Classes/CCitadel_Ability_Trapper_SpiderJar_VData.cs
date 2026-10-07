@@ -22,7 +22,7 @@ public static partial class Schema {
 		public string m_SpiderExplodeParticle => GetBufferString(__m_SpiderExplodeParticle);
 
 		private static readonly SchemaField __m_SpiritStealDebuffModifier = new("CCitadel_Ability_Trapper_SpiderJar_VData", "m_SpiritStealDebuffModifier");
-		/// <summary><c>CEmbeddedSubclass&lt;CCitadelModifier&gt;</c>. No typed mapping yet: read it through its address.</summary>
-		public RawField m_SpiritStealDebuffModifier => Raw(__m_SpiritStealDebuffModifier, "CEmbeddedSubclass<CCitadelModifier>");
+		/// <summary><c>CEmbeddedSubclass&lt;CCitadelModifier&gt;</c>.</summary>
+		public CCitadelModifierVData? m_SpiritStealDebuffModifier => EmbeddedSubclass<CCitadelModifierVData>(__m_SpiritStealDebuffModifier);
 	}
 }

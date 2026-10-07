@@ -14,7 +14,7 @@ public static partial class Schema {
 		static string ISchemaClass<CCitadel_WeaponUpgrade_WeaponEaterVData>.NativeName => "CCitadel_WeaponUpgrade_WeaponEaterVData";
 
 		private static readonly SchemaField __m_WeaponEaterTracker = new("CCitadel_WeaponUpgrade_WeaponEaterVData", "m_WeaponEaterTracker");
-		/// <summary><c>CEmbeddedSubclass&lt;CCitadelModifier&gt;</c>. No typed mapping yet: read it through its address.</summary>
-		public RawField m_WeaponEaterTracker => Raw(__m_WeaponEaterTracker, "CEmbeddedSubclass<CCitadelModifier>");
+		/// <summary><c>CEmbeddedSubclass&lt;CCitadelModifier&gt;</c>.</summary>
+		public CCitadelModifierVData? m_WeaponEaterTracker => EmbeddedSubclass<CCitadelModifierVData>(__m_WeaponEaterTracker);
 	}
 }

@@ -16,5 +16,8 @@ public static partial class Schema {
 		private static readonly SchemaField __m_hAbility = new("CCitadelViscousBall", "m_hAbility");
 		/// <summary><c>CHandle&lt;CCitadelBaseAbility&gt;</c>.</summary>
 		public CCitadelBaseAbility? m_hAbility { get => GetHandle<CCitadelBaseAbility>(__m_hAbility); set => SetHandle(__m_hAbility, value); }
+
+		/// <summary>The data entry this was created from, as <see cref="CCitadelViscousBallVData"/>, or null if it has none.</summary>
+		public CCitadelViscousBallVData? VData => SubclassVData<CCitadelViscousBallVData>();
 	}
 }

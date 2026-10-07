@@ -16,5 +16,8 @@ public static partial class Schema {
 		private static readonly SchemaField __nInvisID = new("CCitadelDruidInvisAura", "nInvisID");
 		/// <summary><c>int32</c>.</summary>
 		public int nInvisID { get => Get<int>(__nInvisID); set => Set(__nInvisID, value); }
+
+		/// <summary>The data entry this was created from, as <see cref="CCitadelDruidInvisAuraVData"/>, or null if it has none.</summary>
+		public new CCitadelDruidInvisAuraVData? VData => ModifierData<CCitadelDruidInvisAuraVData>();
 	}
 }

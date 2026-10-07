@@ -18,7 +18,7 @@ public static partial class Schema {
 		public string m_CastParticle => GetBufferString(__m_CastParticle);
 
 		private static readonly SchemaField __m_StimPakModifier = new("CItemStimPakVData", "m_StimPakModifier");
-		/// <summary><c>CEmbeddedSubclass&lt;CCitadelModifier&gt;</c>. No typed mapping yet: read it through its address.</summary>
-		public RawField m_StimPakModifier => Raw(__m_StimPakModifier, "CEmbeddedSubclass<CCitadelModifier>");
+		/// <summary><c>CEmbeddedSubclass&lt;CCitadelModifier&gt;</c>.</summary>
+		public CCitadelModifierVData? m_StimPakModifier => EmbeddedSubclass<CCitadelModifierVData>(__m_StimPakModifier);
 	}
 }

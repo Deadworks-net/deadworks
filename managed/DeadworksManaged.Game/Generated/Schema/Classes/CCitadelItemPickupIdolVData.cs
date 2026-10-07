@@ -14,11 +14,11 @@ public static partial class Schema {
 		static string ISchemaClass<CCitadelItemPickupIdolVData>.NativeName => "CCitadelItemPickupIdolVData";
 
 		private static readonly SchemaField __m_PickUpAura = new("CCitadelItemPickupIdolVData", "m_PickUpAura");
-		/// <summary><c>CEmbeddedSubclass&lt;CCitadelModifier&gt;</c>. No typed mapping yet: read it through its address.</summary>
-		public RawField m_PickUpAura => Raw(__m_PickUpAura, "CEmbeddedSubclass<CCitadelModifier>");
+		/// <summary><c>CEmbeddedSubclass&lt;CCitadelModifier&gt;</c>.</summary>
+		public CCitadelModifierVData? m_PickUpAura => EmbeddedSubclass<CCitadelModifierVData>(__m_PickUpAura);
 
 		private static readonly SchemaField __m_WalkBackModifier = new("CCitadelItemPickupIdolVData", "m_WalkBackModifier");
-		/// <summary><c>CEmbeddedSubclass&lt;CCitadelModifier&gt;</c>. No typed mapping yet: read it through its address.</summary>
-		public RawField m_WalkBackModifier => Raw(__m_WalkBackModifier, "CEmbeddedSubclass<CCitadelModifier>");
+		/// <summary><c>CEmbeddedSubclass&lt;CCitadelModifier&gt;</c>.</summary>
+		public CCitadelModifierVData? m_WalkBackModifier => EmbeddedSubclass<CCitadelModifierVData>(__m_WalkBackModifier);
 	}
 }

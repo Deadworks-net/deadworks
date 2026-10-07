@@ -14,7 +14,7 @@ public static partial class Schema {
 		static string ISchemaClass<CCitadel_Ability_Rutger_Pulse_VData>.NativeName => "CCitadel_Ability_Rutger_Pulse_VData";
 
 		private static readonly SchemaField __m_AuraModifier = new("CCitadel_Ability_Rutger_Pulse_VData", "m_AuraModifier");
-		/// <summary><c>CEmbeddedSubclass&lt;CBaseModifier&gt;</c>. No typed mapping yet: read it through its address.</summary>
-		public RawField m_AuraModifier => Raw(__m_AuraModifier, "CEmbeddedSubclass<CBaseModifier>");
+		/// <summary><c>CEmbeddedSubclass&lt;CBaseModifier&gt;</c>.</summary>
+		public CModifierVData? m_AuraModifier => EmbeddedSubclass<CModifierVData>(__m_AuraModifier);
 	}
 }

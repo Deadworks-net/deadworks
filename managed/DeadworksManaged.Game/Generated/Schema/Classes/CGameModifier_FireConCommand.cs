@@ -12,5 +12,8 @@ public static partial class Schema {
 		internal CGameModifier_FireConCommand() { }
 		static CGameModifier_FireConCommand ISchemaClass<CGameModifier_FireConCommand>.New() => new();
 		static string ISchemaClass<CGameModifier_FireConCommand>.NativeName => "CGameModifier_FireConCommand";
+
+		/// <summary>The data entry this was created from, as <see cref="CGameModifier_FireConCommandVData"/>, or null if it has none.</summary>
+		public new CGameModifier_FireConCommandVData? VData => ModifierData<CGameModifier_FireConCommandVData>();
 	}
 }

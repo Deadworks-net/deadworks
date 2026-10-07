@@ -12,5 +12,8 @@ public static partial class Schema {
 		internal CCitadel_Modifier_CombatStatus() { }
 		static CCitadel_Modifier_CombatStatus ISchemaClass<CCitadel_Modifier_CombatStatus>.New() => new();
 		static string ISchemaClass<CCitadel_Modifier_CombatStatus>.NativeName => "CCitadel_Modifier_CombatStatus";
+
+		/// <summary>The data entry this was created from, as <see cref="CCitadel_Modifier_CombatStatusVData"/>, or null if it has none.</summary>
+		public new CCitadel_Modifier_CombatStatusVData? VData => ModifierData<CCitadel_Modifier_CombatStatusVData>();
 	}
 }

@@ -58,44 +58,44 @@ public static partial class Schema {
 		public string m_ArmAttackGroundHit => GetBufferString(__m_ArmAttackGroundHit);
 
 		private static readonly SchemaField __m_BackdoorProtection = new("CNPC_Boss_Tier3VData", "m_BackdoorProtection");
-		/// <summary><c>CEmbeddedSubclass&lt;CBaseModifier&gt;</c>. No typed mapping yet: read it through its address.</summary>
-		public RawField m_BackdoorProtection => Raw(__m_BackdoorProtection, "CEmbeddedSubclass<CBaseModifier>");
+		/// <summary><c>CEmbeddedSubclass&lt;CBaseModifier&gt;</c>.</summary>
+		public CModifierVData? m_BackdoorProtection => EmbeddedSubclass<CModifierVData>(__m_BackdoorProtection);
 
 		private static readonly SchemaField __m_DefenderInPitInvulnerable = new("CNPC_Boss_Tier3VData", "m_DefenderInPitInvulnerable");
-		/// <summary><c>CEmbeddedSubclass&lt;CBaseModifier&gt;</c>. No typed mapping yet: read it through its address.</summary>
-		public RawField m_DefenderInPitInvulnerable => Raw(__m_DefenderInPitInvulnerable, "CEmbeddedSubclass<CBaseModifier>");
+		/// <summary><c>CEmbeddedSubclass&lt;CBaseModifier&gt;</c>.</summary>
+		public CModifierVData? m_DefenderInPitInvulnerable => EmbeddedSubclass<CModifierVData>(__m_DefenderInPitInvulnerable);
 
 		private static readonly SchemaField __m_DyingModifier = new("CNPC_Boss_Tier3VData", "m_DyingModifier");
-		/// <summary><c>CEmbeddedSubclass&lt;CBaseModifier&gt;</c>. No typed mapping yet: read it through its address.</summary>
-		public RawField m_DyingModifier => Raw(__m_DyingModifier, "CEmbeddedSubclass<CBaseModifier>");
+		/// <summary><c>CEmbeddedSubclass&lt;CBaseModifier&gt;</c>.</summary>
+		public CModifierVData? m_DyingModifier => EmbeddedSubclass<CModifierVData>(__m_DyingModifier);
 
 		private static readonly SchemaField __m_EffigyAmberExplodeSound = new("CNPC_Boss_Tier3VData", "m_EffigyAmberExplodeSound");
 		/// <summary><c>CSoundEventName</c>.</summary>
 		public string m_EffigyAmberExplodeSound => GetBufferString(__m_EffigyAmberExplodeSound);
 
 		private static readonly SchemaField __m_EffigyModifier = new("CNPC_Boss_Tier3VData", "m_EffigyModifier");
-		/// <summary><c>CEmbeddedSubclass&lt;CBaseModifier&gt;</c>. No typed mapping yet: read it through its address.</summary>
-		public RawField m_EffigyModifier => Raw(__m_EffigyModifier, "CEmbeddedSubclass<CBaseModifier>");
+		/// <summary><c>CEmbeddedSubclass&lt;CBaseModifier&gt;</c>.</summary>
+		public CModifierVData? m_EffigyModifier => EmbeddedSubclass<CModifierVData>(__m_EffigyModifier);
 
 		private static readonly SchemaField __m_EffigySapphireExplodeSound = new("CNPC_Boss_Tier3VData", "m_EffigySapphireExplodeSound");
 		/// <summary><c>CSoundEventName</c>.</summary>
 		public string m_EffigySapphireExplodeSound => GetBufferString(__m_EffigySapphireExplodeSound);
 
 		private static readonly SchemaField __m_LaserBeamModifier = new("CNPC_Boss_Tier3VData", "m_LaserBeamModifier");
-		/// <summary><c>CEmbeddedSubclass&lt;CBaseModifier&gt;</c>. No typed mapping yet: read it through its address.</summary>
-		public RawField m_LaserBeamModifier => Raw(__m_LaserBeamModifier, "CEmbeddedSubclass<CBaseModifier>");
+		/// <summary><c>CEmbeddedSubclass&lt;CBaseModifier&gt;</c>.</summary>
+		public CModifierVData? m_LaserBeamModifier => EmbeddedSubclass<CModifierVData>(__m_LaserBeamModifier);
 
 		private static readonly SchemaField __m_ObjectiveHealthGrowthPhase1 = new("CNPC_Boss_Tier3VData", "m_ObjectiveHealthGrowthPhase1");
-		/// <summary><c>CEmbeddedSubclass&lt;CBaseModifier&gt;</c>. No typed mapping yet: read it through its address.</summary>
-		public RawField m_ObjectiveHealthGrowthPhase1 => Raw(__m_ObjectiveHealthGrowthPhase1, "CEmbeddedSubclass<CBaseModifier>");
+		/// <summary><c>CEmbeddedSubclass&lt;CBaseModifier&gt;</c>.</summary>
+		public CModifierVData? m_ObjectiveHealthGrowthPhase1 => EmbeddedSubclass<CModifierVData>(__m_ObjectiveHealthGrowthPhase1);
 
 		private static readonly SchemaField __m_ObjectiveHealthGrowthPhase2 = new("CNPC_Boss_Tier3VData", "m_ObjectiveHealthGrowthPhase2");
-		/// <summary><c>CEmbeddedSubclass&lt;CBaseModifier&gt;</c>. No typed mapping yet: read it through its address.</summary>
-		public RawField m_ObjectiveHealthGrowthPhase2 => Raw(__m_ObjectiveHealthGrowthPhase2, "CEmbeddedSubclass<CBaseModifier>");
+		/// <summary><c>CEmbeddedSubclass&lt;CBaseModifier&gt;</c>.</summary>
+		public CModifierVData? m_ObjectiveHealthGrowthPhase2 => EmbeddedSubclass<CModifierVData>(__m_ObjectiveHealthGrowthPhase2);
 
 		private static readonly SchemaField __m_ObjectiveRegen = new("CNPC_Boss_Tier3VData", "m_ObjectiveRegen");
-		/// <summary><c>CEmbeddedSubclass&lt;CBaseModifier&gt;</c>. No typed mapping yet: read it through its address.</summary>
-		public RawField m_ObjectiveRegen => Raw(__m_ObjectiveRegen, "CEmbeddedSubclass<CBaseModifier>");
+		/// <summary><c>CEmbeddedSubclass&lt;CBaseModifier&gt;</c>.</summary>
+		public CModifierVData? m_ObjectiveRegen => EmbeddedSubclass<CModifierVData>(__m_ObjectiveRegen);
 
 		private static readonly SchemaField __m_PatronKilledSound = new("CNPC_Boss_Tier3VData", "m_PatronKilledSound");
 		/// <summary><c>CSoundEventName</c>.</summary>
@@ -110,16 +110,16 @@ public static partial class Schema {
 		public string m_PatronTransformStartSound => GetBufferString(__m_PatronTransformStartSound);
 
 		private static readonly SchemaField __m_Phase1Modifier = new("CNPC_Boss_Tier3VData", "m_Phase1Modifier");
-		/// <summary><c>CEmbeddedSubclass&lt;CBaseModifier&gt;</c>. No typed mapping yet: read it through its address.</summary>
-		public RawField m_Phase1Modifier => Raw(__m_Phase1Modifier, "CEmbeddedSubclass<CBaseModifier>");
+		/// <summary><c>CEmbeddedSubclass&lt;CBaseModifier&gt;</c>.</summary>
+		public CModifierVData? m_Phase1Modifier => EmbeddedSubclass<CModifierVData>(__m_Phase1Modifier);
 
 		private static readonly SchemaField __m_Phase2DamagePulseModifier = new("CNPC_Boss_Tier3VData", "m_Phase2DamagePulseModifier");
-		/// <summary><c>CEmbeddedSubclass&lt;CBaseModifier&gt;</c>. No typed mapping yet: read it through its address.</summary>
-		public RawField m_Phase2DamagePulseModifier => Raw(__m_Phase2DamagePulseModifier, "CEmbeddedSubclass<CBaseModifier>");
+		/// <summary><c>CEmbeddedSubclass&lt;CBaseModifier&gt;</c>.</summary>
+		public CModifierVData? m_Phase2DamagePulseModifier => EmbeddedSubclass<CModifierVData>(__m_Phase2DamagePulseModifier);
 
 		private static readonly SchemaField __m_RangedArmorModifier = new("CNPC_Boss_Tier3VData", "m_RangedArmorModifier");
-		/// <summary><c>CEmbeddedSubclass&lt;CBaseModifier&gt;</c>. No typed mapping yet: read it through its address.</summary>
-		public RawField m_RangedArmorModifier => Raw(__m_RangedArmorModifier, "CEmbeddedSubclass<CBaseModifier>");
+		/// <summary><c>CEmbeddedSubclass&lt;CBaseModifier&gt;</c>.</summary>
+		public CModifierVData? m_RangedArmorModifier => EmbeddedSubclass<CModifierVData>(__m_RangedArmorModifier);
 
 		private static readonly SchemaField __m_SapphBeginDyingParticle = new("CNPC_Boss_Tier3VData", "m_SapphBeginDyingParticle");
 		/// <summary><c>CResourceNameTyped&lt;CWeakHandle&lt;InfoForResourceTypeIParticleSystemDefinition&gt;&gt;</c>.</summary>
@@ -162,8 +162,8 @@ public static partial class Schema {
 		public string m_SapphireReformingLoopSound => GetBufferString(__m_SapphireReformingLoopSound);
 
 		private static readonly SchemaField __m_VulnerableModifier = new("CNPC_Boss_Tier3VData", "m_VulnerableModifier");
-		/// <summary><c>CEmbeddedSubclass&lt;CBaseModifier&gt;</c>. No typed mapping yet: read it through its address.</summary>
-		public RawField m_VulnerableModifier => Raw(__m_VulnerableModifier, "CEmbeddedSubclass<CBaseModifier>");
+		/// <summary><c>CEmbeddedSubclass&lt;CBaseModifier&gt;</c>.</summary>
+		public CModifierVData? m_VulnerableModifier => EmbeddedSubclass<CModifierVData>(__m_VulnerableModifier);
 
 		private static readonly SchemaField __m_flAllyPitTimeMin = new("CNPC_Boss_Tier3VData", "m_flAllyPitTimeMin");
 		/// <summary><c>float32</c>.</summary>

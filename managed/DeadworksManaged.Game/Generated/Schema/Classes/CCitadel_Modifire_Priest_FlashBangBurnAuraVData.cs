@@ -14,8 +14,8 @@ public static partial class Schema {
 		static string ISchemaClass<CCitadel_Modifire_Priest_FlashBangBurnAuraVData>.NativeName => "CCitadel_Modifire_Priest_FlashBangBurnAuraVData";
 
 		private static readonly SchemaField __m_BurnModifier = new("CCitadel_Modifire_Priest_FlashBangBurnAuraVData", "m_BurnModifier");
-		/// <summary><c>CEmbeddedSubclass&lt;CCitadelModifier&gt;</c>. No typed mapping yet: read it through its address.</summary>
-		public RawField m_BurnModifier => Raw(__m_BurnModifier, "CEmbeddedSubclass<CCitadelModifier>");
+		/// <summary><c>CEmbeddedSubclass&lt;CCitadelModifier&gt;</c>.</summary>
+		public CCitadelModifierVData? m_BurnModifier => EmbeddedSubclass<CCitadelModifierVData>(__m_BurnModifier);
 
 		private static readonly SchemaField __m_RadiusParticle = new("CCitadel_Modifire_Priest_FlashBangBurnAuraVData", "m_RadiusParticle");
 		/// <summary><c>CResourceNameTyped&lt;CWeakHandle&lt;InfoForResourceTypeIParticleSystemDefinition&gt;&gt;</c>.</summary>

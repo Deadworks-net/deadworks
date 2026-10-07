@@ -48,5 +48,8 @@ public static partial class Schema {
 		private static readonly SchemaField __m_vecShootTargets = new("CCitadel_Ability_BulletFlurry", "m_vecShootTargets");
 		/// <summary><c>CUtlVector&lt;CHandle&lt;CBaseEntity&gt;&gt;</c>.</summary>
 		public SchemaHandleList<CBaseEntity> m_vecShootTargets => new(this, __m_vecShootTargets, -1);
+
+		/// <summary>The data entry this was created from, as <see cref="CCitadel_Ability_BulletFlurryVData"/>, or null if it has none.</summary>
+		public new CCitadel_Ability_BulletFlurryVData? VData => SubclassVData<CCitadel_Ability_BulletFlurryVData>();
 	}
 }

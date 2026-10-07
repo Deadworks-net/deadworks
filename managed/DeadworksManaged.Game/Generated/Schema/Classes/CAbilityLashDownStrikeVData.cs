@@ -18,16 +18,16 @@ public static partial class Schema {
 		public string m_ChargingParticle => GetBufferString(__m_ChargingParticle);
 
 		private static readonly SchemaField __m_DownStrikeModifier = new("CAbilityLashDownStrikeVData", "m_DownStrikeModifier");
-		/// <summary><c>CEmbeddedSubclass&lt;CBaseModifier&gt;</c>. No typed mapping yet: read it through its address.</summary>
-		public RawField m_DownStrikeModifier => Raw(__m_DownStrikeModifier, "CEmbeddedSubclass<CBaseModifier>");
+		/// <summary><c>CEmbeddedSubclass&lt;CBaseModifier&gt;</c>.</summary>
+		public CModifierVData? m_DownStrikeModifier => EmbeddedSubclass<CModifierVData>(__m_DownStrikeModifier);
 
 		private static readonly SchemaField __m_DragModifier = new("CAbilityLashDownStrikeVData", "m_DragModifier");
-		/// <summary><c>CEmbeddedSubclass&lt;CBaseModifier&gt;</c>. No typed mapping yet: read it through its address.</summary>
-		public RawField m_DragModifier => Raw(__m_DragModifier, "CEmbeddedSubclass<CBaseModifier>");
+		/// <summary><c>CEmbeddedSubclass&lt;CBaseModifier&gt;</c>.</summary>
+		public CModifierVData? m_DragModifier => EmbeddedSubclass<CModifierVData>(__m_DragModifier);
 
 		private static readonly SchemaField __m_ImpactModifier = new("CAbilityLashDownStrikeVData", "m_ImpactModifier");
-		/// <summary><c>CEmbeddedSubclass&lt;CBaseModifier&gt;</c>. No typed mapping yet: read it through its address.</summary>
-		public RawField m_ImpactModifier => Raw(__m_ImpactModifier, "CEmbeddedSubclass<CBaseModifier>");
+		/// <summary><c>CEmbeddedSubclass&lt;CBaseModifier&gt;</c>.</summary>
+		public CModifierVData? m_ImpactModifier => EmbeddedSubclass<CModifierVData>(__m_ImpactModifier);
 
 		private static readonly SchemaField __m_StompEnemyImpactSound = new("CAbilityLashDownStrikeVData", "m_StompEnemyImpactSound");
 		/// <summary><c>CSoundEventName</c>.</summary>

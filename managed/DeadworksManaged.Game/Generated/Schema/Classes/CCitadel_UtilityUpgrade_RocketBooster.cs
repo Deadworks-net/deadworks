@@ -44,5 +44,8 @@ public static partial class Schema {
 		private static readonly SchemaField __m_vecCrashPosition = new("CCitadel_UtilityUpgrade_RocketBooster", "m_vecCrashPosition");
 		/// <summary><c>VectorWS</c>.</summary>
 		public Vector3 m_vecCrashPosition { get => Get<Vector3>(__m_vecCrashPosition); set => Set(__m_vecCrashPosition, value); }
+
+		/// <summary>The data entry this was created from, as <see cref="CCitadel_UtilityUpgrade_RocketBoosterVData"/>, or null if it has none.</summary>
+		public new CCitadel_UtilityUpgrade_RocketBoosterVData? VData => SubclassVData<CCitadel_UtilityUpgrade_RocketBoosterVData>();
 	}
 }

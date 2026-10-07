@@ -20,5 +20,8 @@ public static partial class Schema {
 		private static readonly SchemaField __m_nBallParticle = new("CCitadel_Ability_Wrecker_BoulderGrenade", "m_nBallParticle");
 		/// <summary><c>ParticleIndex_t</c>.</summary>
 		public int m_nBallParticle { get => Get<int>(__m_nBallParticle); set => Set(__m_nBallParticle, value); }
+
+		/// <summary>The data entry this was created from, as <see cref="CCitadel_Ability_Wrecker_BoulderGrenadeVData"/>, or null if it has none.</summary>
+		public new CCitadel_Ability_Wrecker_BoulderGrenadeVData? VData => SubclassVData<CCitadel_Ability_Wrecker_BoulderGrenadeVData>();
 	}
 }

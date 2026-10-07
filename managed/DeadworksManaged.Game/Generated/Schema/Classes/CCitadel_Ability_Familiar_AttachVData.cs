@@ -14,60 +14,60 @@ public static partial class Schema {
 		static string ISchemaClass<CCitadel_Ability_Familiar_AttachVData>.NativeName => "CCitadel_Ability_Familiar_AttachVData";
 
 		private static readonly SchemaField __m_AllyLockoutModifier = new("CCitadel_Ability_Familiar_AttachVData", "m_AllyLockoutModifier");
-		/// <summary><c>CEmbeddedSubclass&lt;CCitadelModifier&gt;</c>. No typed mapping yet: read it through its address.</summary>
-		public RawField m_AllyLockoutModifier => Raw(__m_AllyLockoutModifier, "CEmbeddedSubclass<CCitadelModifier>");
+		/// <summary><c>CEmbeddedSubclass&lt;CCitadelModifier&gt;</c>.</summary>
+		public CCitadelModifierVData? m_AllyLockoutModifier => EmbeddedSubclass<CCitadelModifierVData>(__m_AllyLockoutModifier);
 
 		private static readonly SchemaField __m_AttachHealModifier = new("CCitadel_Ability_Familiar_AttachVData", "m_AttachHealModifier");
-		/// <summary><c>CEmbeddedSubclass&lt;CCitadelModifier&gt;</c>. No typed mapping yet: read it through its address.</summary>
-		public RawField m_AttachHealModifier => Raw(__m_AttachHealModifier, "CEmbeddedSubclass<CCitadelModifier>");
+		/// <summary><c>CEmbeddedSubclass&lt;CCitadelModifier&gt;</c>.</summary>
+		public CCitadelModifierVData? m_AttachHealModifier => EmbeddedSubclass<CCitadelModifierVData>(__m_AttachHealModifier);
 
 		private static readonly SchemaField __m_AttachedModifier = new("CCitadel_Ability_Familiar_AttachVData", "m_AttachedModifier");
-		/// <summary><c>CEmbeddedSubclass&lt;CCitadelModifier&gt;</c>. No typed mapping yet: read it through its address.</summary>
-		public RawField m_AttachedModifier => Raw(__m_AttachedModifier, "CEmbeddedSubclass<CCitadelModifier>");
+		/// <summary><c>CEmbeddedSubclass&lt;CCitadelModifier&gt;</c>.</summary>
+		public CCitadelModifierVData? m_AttachedModifier => EmbeddedSubclass<CCitadelModifierVData>(__m_AttachedModifier);
 
 		private static readonly SchemaField __m_CameraDummyModifier = new("CCitadel_Ability_Familiar_AttachVData", "m_CameraDummyModifier");
-		/// <summary><c>CEmbeddedSubclass&lt;CCitadelModifier&gt;</c>. No typed mapping yet: read it through its address.</summary>
-		public RawField m_CameraDummyModifier => Raw(__m_CameraDummyModifier, "CEmbeddedSubclass<CCitadelModifier>");
+		/// <summary><c>CEmbeddedSubclass&lt;CCitadelModifier&gt;</c>.</summary>
+		public CCitadelModifierVData? m_CameraDummyModifier => EmbeddedSubclass<CCitadelModifierVData>(__m_CameraDummyModifier);
 
 		private static readonly SchemaField __m_DeathBarrierModifier = new("CCitadel_Ability_Familiar_AttachVData", "m_DeathBarrierModifier");
-		/// <summary><c>CEmbeddedSubclass&lt;CCitadelModifier&gt;</c>. No typed mapping yet: read it through its address.</summary>
-		public RawField m_DeathBarrierModifier => Raw(__m_DeathBarrierModifier, "CEmbeddedSubclass<CCitadelModifier>");
+		/// <summary><c>CEmbeddedSubclass&lt;CCitadelModifier&gt;</c>.</summary>
+		public CCitadelModifierVData? m_DeathBarrierModifier => EmbeddedSubclass<CCitadelModifierVData>(__m_DeathBarrierModifier);
 
 		private static readonly SchemaField __m_FakeFamiliarParticle = new("CCitadel_Ability_Familiar_AttachVData", "m_FakeFamiliarParticle");
 		/// <summary><c>CResourceNameTyped&lt;CWeakHandle&lt;InfoForResourceTypeIParticleSystemDefinition&gt;&gt;</c>.</summary>
 		public string m_FakeFamiliarParticle => GetBufferString(__m_FakeFamiliarParticle);
 
 		private static readonly SchemaField __m_HopOffBuffModifier = new("CCitadel_Ability_Familiar_AttachVData", "m_HopOffBuffModifier");
-		/// <summary><c>CEmbeddedSubclass&lt;CCitadelModifier&gt;</c>. No typed mapping yet: read it through its address.</summary>
-		public RawField m_HopOffBuffModifier => Raw(__m_HopOffBuffModifier, "CEmbeddedSubclass<CCitadelModifier>");
+		/// <summary><c>CEmbeddedSubclass&lt;CCitadelModifier&gt;</c>.</summary>
+		public CCitadelModifierVData? m_HopOffBuffModifier => EmbeddedSubclass<CCitadelModifierVData>(__m_HopOffBuffModifier);
 
 		private static readonly SchemaField __m_HopOutLockoutModifier = new("CCitadel_Ability_Familiar_AttachVData", "m_HopOutLockoutModifier");
-		/// <summary><c>CEmbeddedSubclass&lt;CCitadelModifier&gt;</c>. No typed mapping yet: read it through its address.</summary>
-		public RawField m_HopOutLockoutModifier => Raw(__m_HopOutLockoutModifier, "CEmbeddedSubclass<CCitadelModifier>");
+		/// <summary><c>CEmbeddedSubclass&lt;CCitadelModifier&gt;</c>.</summary>
+		public CCitadelModifierVData? m_HopOutLockoutModifier => EmbeddedSubclass<CCitadelModifierVData>(__m_HopOutLockoutModifier);
 
 		private static readonly SchemaField __m_LaunchAngleRemap = new("CCitadel_Ability_Familiar_AttachVData", "m_LaunchAngleRemap");
 		/// <summary><c>CPiecewiseCurve</c>. No typed mapping yet: read it through its address.</summary>
 		public RawField m_LaunchAngleRemap => Raw(__m_LaunchAngleRemap, "CPiecewiseCurve");
 
 		private static readonly SchemaField __m_LaunchTossModifier = new("CCitadel_Ability_Familiar_AttachVData", "m_LaunchTossModifier");
-		/// <summary><c>CEmbeddedSubclass&lt;CCitadelModifier&gt;</c>. No typed mapping yet: read it through its address.</summary>
-		public RawField m_LaunchTossModifier => Raw(__m_LaunchTossModifier, "CEmbeddedSubclass<CCitadelModifier>");
+		/// <summary><c>CEmbeddedSubclass&lt;CCitadelModifier&gt;</c>.</summary>
+		public CCitadelModifierVData? m_LaunchTossModifier => EmbeddedSubclass<CCitadelModifierVData>(__m_LaunchTossModifier);
 
 		private static readonly SchemaField __m_LaunchedSelfModifier = new("CCitadel_Ability_Familiar_AttachVData", "m_LaunchedSelfModifier");
-		/// <summary><c>CEmbeddedSubclass&lt;CCitadelModifier&gt;</c>. No typed mapping yet: read it through its address.</summary>
-		public RawField m_LaunchedSelfModifier => Raw(__m_LaunchedSelfModifier, "CEmbeddedSubclass<CCitadelModifier>");
+		/// <summary><c>CEmbeddedSubclass&lt;CCitadelModifier&gt;</c>.</summary>
+		public CCitadelModifierVData? m_LaunchedSelfModifier => EmbeddedSubclass<CCitadelModifierVData>(__m_LaunchedSelfModifier);
 
 		private static readonly SchemaField __m_MovingToAttachModifier = new("CCitadel_Ability_Familiar_AttachVData", "m_MovingToAttachModifier");
-		/// <summary><c>CEmbeddedSubclass&lt;CCitadelModifier&gt;</c>. No typed mapping yet: read it through its address.</summary>
-		public RawField m_MovingToAttachModifier => Raw(__m_MovingToAttachModifier, "CEmbeddedSubclass<CCitadelModifier>");
+		/// <summary><c>CEmbeddedSubclass&lt;CCitadelModifier&gt;</c>.</summary>
+		public CCitadelModifierVData? m_MovingToAttachModifier => EmbeddedSubclass<CCitadelModifierVData>(__m_MovingToAttachModifier);
 
 		private static readonly SchemaField __m_MovingToAttachProjectileSpeedCurve = new("CCitadel_Ability_Familiar_AttachVData", "m_MovingToAttachProjectileSpeedCurve");
 		/// <summary><c>CPiecewiseCurve</c>. No typed mapping yet: read it through its address.</summary>
 		public RawField m_MovingToAttachProjectileSpeedCurve => Raw(__m_MovingToAttachProjectileSpeedCurve, "CPiecewiseCurve");
 
 		private static readonly SchemaField __m_SpeedModifier = new("CCitadel_Ability_Familiar_AttachVData", "m_SpeedModifier");
-		/// <summary><c>CEmbeddedSubclass&lt;CCitadelModifier&gt;</c>. No typed mapping yet: read it through its address.</summary>
-		public RawField m_SpeedModifier => Raw(__m_SpeedModifier, "CEmbeddedSubclass<CCitadelModifier>");
+		/// <summary><c>CEmbeddedSubclass&lt;CCitadelModifier&gt;</c>.</summary>
+		public CCitadelModifierVData? m_SpeedModifier => EmbeddedSubclass<CCitadelModifierVData>(__m_SpeedModifier);
 
 		private static readonly SchemaField __m_flDetachForce = new("CCitadel_Ability_Familiar_AttachVData", "m_flDetachForce");
 		/// <summary><c>float32</c>.</summary>

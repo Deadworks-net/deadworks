@@ -16,5 +16,8 @@ public static partial class Schema {
 		private static readonly SchemaField __m_iStacks = new("CCitadel_WeaponUpgrade_SiphonBullets", "m_iStacks");
 		/// <summary><c>int32</c>.</summary>
 		public int m_iStacks { get => Get<int>(__m_iStacks); set => Set(__m_iStacks, value); }
+
+		/// <summary>The data entry this was created from, as <see cref="CCitadel_WeaponUpgrade_SiphonBulletsVData"/>, or null if it has none.</summary>
+		public new CCitadel_WeaponUpgrade_SiphonBulletsVData? VData => SubclassVData<CCitadel_WeaponUpgrade_SiphonBulletsVData>();
 	}
 }

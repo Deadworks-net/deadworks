@@ -88,5 +88,8 @@ public static partial class Schema {
 		private static readonly SchemaField __m_nZoneParticle = new("CCitadel_KothCashIn", "m_nZoneParticle");
 		/// <summary><c>ParticleIndex_t</c>.</summary>
 		public int m_nZoneParticle { get => Get<int>(__m_nZoneParticle); set => Set(__m_nZoneParticle, value); }
+
+		/// <summary>The data entry this was created from, as <see cref="CCitadel_KothCashInVData"/>, or null if it has none.</summary>
+		public CCitadel_KothCashInVData? VData => SubclassVData<CCitadel_KothCashInVData>();
 	}
 }

@@ -18,16 +18,16 @@ public static partial class Schema {
 		public string m_BootKickCast => GetBufferString(__m_BootKickCast);
 
 		private static readonly SchemaField __m_BuffModifier = new("CCitadel_Ability_Werewolf_KickFlipVData", "m_BuffModifier");
-		/// <summary><c>CEmbeddedSubclass&lt;CCitadelModifier&gt;</c>. No typed mapping yet: read it through its address.</summary>
-		public RawField m_BuffModifier => Raw(__m_BuffModifier, "CEmbeddedSubclass<CCitadelModifier>");
+		/// <summary><c>CEmbeddedSubclass&lt;CCitadelModifier&gt;</c>.</summary>
+		public CCitadelModifierVData? m_BuffModifier => EmbeddedSubclass<CCitadelModifierVData>(__m_BuffModifier);
 
 		private static readonly SchemaField __m_DebuffModifier = new("CCitadel_Ability_Werewolf_KickFlipVData", "m_DebuffModifier");
-		/// <summary><c>CEmbeddedSubclass&lt;CCitadelModifier&gt;</c>. No typed mapping yet: read it through its address.</summary>
-		public RawField m_DebuffModifier => Raw(__m_DebuffModifier, "CEmbeddedSubclass<CCitadelModifier>");
+		/// <summary><c>CEmbeddedSubclass&lt;CCitadelModifier&gt;</c>.</summary>
+		public CCitadelModifierVData? m_DebuffModifier => EmbeddedSubclass<CCitadelModifierVData>(__m_DebuffModifier);
 
 		private static readonly SchemaField __m_DisarmModifier = new("CCitadel_Ability_Werewolf_KickFlipVData", "m_DisarmModifier");
-		/// <summary><c>CEmbeddedSubclass&lt;CCitadelModifier&gt;</c>. No typed mapping yet: read it through its address.</summary>
-		public RawField m_DisarmModifier => Raw(__m_DisarmModifier, "CEmbeddedSubclass<CCitadelModifier>");
+		/// <summary><c>CEmbeddedSubclass&lt;CCitadelModifier&gt;</c>.</summary>
+		public CCitadelModifierVData? m_DisarmModifier => EmbeddedSubclass<CCitadelModifierVData>(__m_DisarmModifier);
 
 		private static readonly SchemaField __m_KickHitImpact = new("CCitadel_Ability_Werewolf_KickFlipVData", "m_KickHitImpact");
 		/// <summary><c>CResourceNameTyped&lt;CWeakHandle&lt;InfoForResourceTypeIParticleSystemDefinition&gt;&gt;</c>.</summary>
@@ -38,28 +38,28 @@ public static partial class Schema {
 		public string m_KickHitSound => GetBufferString(__m_KickHitSound);
 
 		private static readonly SchemaField __m_LeapingModifier = new("CCitadel_Ability_Werewolf_KickFlipVData", "m_LeapingModifier");
-		/// <summary><c>CEmbeddedSubclass&lt;CCitadelModifier&gt;</c>. No typed mapping yet: read it through its address.</summary>
-		public RawField m_LeapingModifier => Raw(__m_LeapingModifier, "CEmbeddedSubclass<CCitadelModifier>");
+		/// <summary><c>CEmbeddedSubclass&lt;CCitadelModifier&gt;</c>.</summary>
+		public CCitadelModifierVData? m_LeapingModifier => EmbeddedSubclass<CCitadelModifierVData>(__m_LeapingModifier);
 
 		private static readonly SchemaField __m_LeapingSpeedCurve = new("CCitadel_Ability_Werewolf_KickFlipVData", "m_LeapingSpeedCurve");
 		/// <summary><c>CPiecewiseCurve</c>. No typed mapping yet: read it through its address.</summary>
 		public RawField m_LeapingSpeedCurve => Raw(__m_LeapingSpeedCurve, "CPiecewiseCurve");
 
 		private static readonly SchemaField __m_MarkModifier = new("CCitadel_Ability_Werewolf_KickFlipVData", "m_MarkModifier");
-		/// <summary><c>CEmbeddedSubclass&lt;CCitadelModifier&gt;</c>. No typed mapping yet: read it through its address.</summary>
-		public RawField m_MarkModifier => Raw(__m_MarkModifier, "CEmbeddedSubclass<CCitadelModifier>");
+		/// <summary><c>CEmbeddedSubclass&lt;CCitadelModifier&gt;</c>.</summary>
+		public CCitadelModifierVData? m_MarkModifier => EmbeddedSubclass<CCitadelModifierVData>(__m_MarkModifier);
 
 		private static readonly SchemaField __m_PushOffImpact = new("CCitadel_Ability_Werewolf_KickFlipVData", "m_PushOffImpact");
 		/// <summary><c>CResourceNameTyped&lt;CWeakHandle&lt;InfoForResourceTypeIParticleSystemDefinition&gt;&gt;</c>.</summary>
 		public string m_PushOffImpact => GetBufferString(__m_PushOffImpact);
 
 		private static readonly SchemaField __m_SuccessEnemyModifier = new("CCitadel_Ability_Werewolf_KickFlipVData", "m_SuccessEnemyModifier");
-		/// <summary><c>CEmbeddedSubclass&lt;CCitadelModifier&gt;</c>. No typed mapping yet: read it through its address.</summary>
-		public RawField m_SuccessEnemyModifier => Raw(__m_SuccessEnemyModifier, "CEmbeddedSubclass<CCitadelModifier>");
+		/// <summary><c>CEmbeddedSubclass&lt;CCitadelModifier&gt;</c>.</summary>
+		public CCitadelModifierVData? m_SuccessEnemyModifier => EmbeddedSubclass<CCitadelModifierVData>(__m_SuccessEnemyModifier);
 
 		private static readonly SchemaField __m_SuccessSelfModifier = new("CCitadel_Ability_Werewolf_KickFlipVData", "m_SuccessSelfModifier");
-		/// <summary><c>CEmbeddedSubclass&lt;CCitadelModifier&gt;</c>. No typed mapping yet: read it through its address.</summary>
-		public RawField m_SuccessSelfModifier => Raw(__m_SuccessSelfModifier, "CEmbeddedSubclass<CCitadelModifier>");
+		/// <summary><c>CEmbeddedSubclass&lt;CCitadelModifier&gt;</c>.</summary>
+		public CCitadelModifierVData? m_SuccessSelfModifier => EmbeddedSubclass<CCitadelModifierVData>(__m_SuccessSelfModifier);
 
 		private static readonly SchemaField __m_flFracToAllowUp = new("CCitadel_Ability_Werewolf_KickFlipVData", "m_flFracToAllowUp");
 		/// <summary><c>float32</c>.</summary>

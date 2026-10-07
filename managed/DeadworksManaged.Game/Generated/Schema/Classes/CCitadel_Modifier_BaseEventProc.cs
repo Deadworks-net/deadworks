@@ -24,5 +24,8 @@ public static partial class Schema {
 		private static readonly SchemaField __m_vecTrackedUnitsThisFrame = new("CCitadel_Modifier_BaseEventProc", "m_vecTrackedUnitsThisFrame");
 		/// <summary><c>CUtlVector&lt;CBaseEntity*&gt;</c>. No typed mapping yet: read it through its address.</summary>
 		public RawField m_vecTrackedUnitsThisFrame => Raw(__m_vecTrackedUnitsThisFrame, "CUtlVector<CBaseEntity*>");
+
+		/// <summary>The data entry this was created from, as <see cref="CCitadel_Modifier_BaseEventProcVData"/>, or null if it has none.</summary>
+		public new CCitadel_Modifier_BaseEventProcVData? VData => ModifierData<CCitadel_Modifier_BaseEventProcVData>();
 	}
 }

@@ -14,8 +14,8 @@ public static partial class Schema {
 		static string ISchemaClass<CModifierNeutralLobBookAuraVData>.NativeName => "CModifierNeutralLobBookAuraVData";
 
 		private static readonly SchemaField __m_ExplodeDebuffModifier = new("CModifierNeutralLobBookAuraVData", "m_ExplodeDebuffModifier");
-		/// <summary><c>CEmbeddedSubclass&lt;CCitadelModifier&gt;</c>. No typed mapping yet: read it through its address.</summary>
-		public RawField m_ExplodeDebuffModifier => Raw(__m_ExplodeDebuffModifier, "CEmbeddedSubclass<CCitadelModifier>");
+		/// <summary><c>CEmbeddedSubclass&lt;CCitadelModifier&gt;</c>.</summary>
+		public CCitadelModifierVData? m_ExplodeDebuffModifier => EmbeddedSubclass<CCitadelModifierVData>(__m_ExplodeDebuffModifier);
 
 		private static readonly SchemaField __m_ExplodeParticle = new("CModifierNeutralLobBookAuraVData", "m_ExplodeParticle");
 		/// <summary><c>CResourceNameTyped&lt;CWeakHandle&lt;InfoForResourceTypeIParticleSystemDefinition&gt;&gt;</c>.</summary>

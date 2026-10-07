@@ -12,5 +12,8 @@ public static partial class Schema {
 		internal CCitadel_Modifier_PermanentPickup() { }
 		static CCitadel_Modifier_PermanentPickup ISchemaClass<CCitadel_Modifier_PermanentPickup>.New() => new();
 		static string ISchemaClass<CCitadel_Modifier_PermanentPickup>.NativeName => "CCitadel_Modifier_PermanentPickup";
+
+		/// <summary>The data entry this was created from, as <see cref="CCitadel_Modifier_PermanentPickupVData"/>, or null if it has none.</summary>
+		public new CCitadel_Modifier_PermanentPickupVData? VData => ModifierData<CCitadel_Modifier_PermanentPickupVData>();
 	}
 }

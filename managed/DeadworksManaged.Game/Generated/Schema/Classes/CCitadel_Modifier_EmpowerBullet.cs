@@ -16,5 +16,8 @@ public static partial class Schema {
 		private static readonly SchemaField __m_BuffedShotId = new("CCitadel_Modifier_EmpowerBullet", "m_BuffedShotId");
 		/// <summary><c>ShotID_t</c>.</summary>
 		public uint m_BuffedShotId { get => Get<uint>(__m_BuffedShotId); set => Set(__m_BuffedShotId, value); }
+
+		/// <summary>The data entry this was created from, as <see cref="CCitadel_Modifier_EmpowerBulletVData"/>, or null if it has none.</summary>
+		public new CCitadel_Modifier_EmpowerBulletVData? VData => ModifierData<CCitadel_Modifier_EmpowerBulletVData>();
 	}
 }

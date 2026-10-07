@@ -18,20 +18,20 @@ public static partial class Schema {
 		public string m_ActiveParticle => GetBufferString(__m_ActiveParticle);
 
 		private static readonly SchemaField __m_DummyTetherModifier = new("CCitadel_Ability_Necro_PrimaryWeaponVData", "m_DummyTetherModifier");
-		/// <summary><c>CEmbeddedSubclass&lt;CCitadelModifier&gt;</c>. No typed mapping yet: read it through its address.</summary>
-		public RawField m_DummyTetherModifier => Raw(__m_DummyTetherModifier, "CEmbeddedSubclass<CCitadelModifier>");
+		/// <summary><c>CEmbeddedSubclass&lt;CCitadelModifier&gt;</c>.</summary>
+		public CCitadelModifierVData? m_DummyTetherModifier => EmbeddedSubclass<CCitadelModifierVData>(__m_DummyTetherModifier);
 
 		private static readonly SchemaField __m_SearchingModifier = new("CCitadel_Ability_Necro_PrimaryWeaponVData", "m_SearchingModifier");
-		/// <summary><c>CEmbeddedSubclass&lt;CCitadelModifier&gt;</c>. No typed mapping yet: read it through its address.</summary>
-		public RawField m_SearchingModifier => Raw(__m_SearchingModifier, "CEmbeddedSubclass<CCitadelModifier>");
+		/// <summary><c>CEmbeddedSubclass&lt;CCitadelModifier&gt;</c>.</summary>
+		public CCitadelModifierVData? m_SearchingModifier => EmbeddedSubclass<CCitadelModifierVData>(__m_SearchingModifier);
 
 		private static readonly SchemaField __m_TetherModifier = new("CCitadel_Ability_Necro_PrimaryWeaponVData", "m_TetherModifier");
-		/// <summary><c>CEmbeddedSubclass&lt;CCitadelModifier&gt;</c>. No typed mapping yet: read it through its address.</summary>
-		public RawField m_TetherModifier => Raw(__m_TetherModifier, "CEmbeddedSubclass<CCitadelModifier>");
+		/// <summary><c>CEmbeddedSubclass&lt;CCitadelModifier&gt;</c>.</summary>
+		public CCitadelModifierVData? m_TetherModifier => EmbeddedSubclass<CCitadelModifierVData>(__m_TetherModifier);
 
 		private static readonly SchemaField __m_TetheredModifier = new("CCitadel_Ability_Necro_PrimaryWeaponVData", "m_TetheredModifier");
-		/// <summary><c>CEmbeddedSubclass&lt;CCitadelModifier&gt;</c>. No typed mapping yet: read it through its address.</summary>
-		public RawField m_TetheredModifier => Raw(__m_TetheredModifier, "CEmbeddedSubclass<CCitadelModifier>");
+		/// <summary><c>CEmbeddedSubclass&lt;CCitadelModifier&gt;</c>.</summary>
+		public CCitadelModifierVData? m_TetheredModifier => EmbeddedSubclass<CCitadelModifierVData>(__m_TetheredModifier);
 
 		private static readonly SchemaField __m_flApproachSpeed = new("CCitadel_Ability_Necro_PrimaryWeaponVData", "m_flApproachSpeed");
 		/// <summary><c>float32</c>.</summary>

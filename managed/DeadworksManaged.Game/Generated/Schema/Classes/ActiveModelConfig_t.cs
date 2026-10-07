@@ -30,11 +30,11 @@ public static partial class Schema {
 		public string m_Name { get => GetString(__m_Name); set => SetString(__m_Name, value); }
 
 		private static readonly SchemaField __m_vecAssociatedEntityCollidesOutsideHierarchy = new("ActiveModelConfig_t", "m_vecAssociatedEntityCollidesOutsideHierarchy");
-		/// <summary><c>CUtlLeanVector&lt;bool&gt;</c>. No typed mapping yet: read it through its address.</summary>
-		public RawField m_vecAssociatedEntityCollidesOutsideHierarchy => Raw(__m_vecAssociatedEntityCollidesOutsideHierarchy, "CUtlLeanVector<bool>");
+		/// <summary><c>CUtlLeanVector&lt;bool&gt;</c>.</summary>
+		public SchemaValueList<bool> m_vecAssociatedEntityCollidesOutsideHierarchy => new(this, __m_vecAssociatedEntityCollidesOutsideHierarchy, -1);
 
 		private static readonly SchemaField __m_vecAssociatedEntityCollidesWithHierarchy = new("ActiveModelConfig_t", "m_vecAssociatedEntityCollidesWithHierarchy");
-		/// <summary><c>CUtlLeanVector&lt;bool&gt;</c>. No typed mapping yet: read it through its address.</summary>
-		public RawField m_vecAssociatedEntityCollidesWithHierarchy => Raw(__m_vecAssociatedEntityCollidesWithHierarchy, "CUtlLeanVector<bool>");
+		/// <summary><c>CUtlLeanVector&lt;bool&gt;</c>.</summary>
+		public SchemaValueList<bool> m_vecAssociatedEntityCollidesWithHierarchy => new(this, __m_vecAssociatedEntityCollidesWithHierarchy, -1);
 	}
 }

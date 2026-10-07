@@ -14,8 +14,8 @@ public static partial class Schema {
 		static string ISchemaClass<CAbilityRestorativeGooVData>.NativeName => "CAbilityRestorativeGooVData";
 
 		private static readonly SchemaField __m_RestorativeGooModifier = new("CAbilityRestorativeGooVData", "m_RestorativeGooModifier");
-		/// <summary><c>CEmbeddedSubclass&lt;CCitadelModifier&gt;</c>. No typed mapping yet: read it through its address.</summary>
-		public RawField m_RestorativeGooModifier => Raw(__m_RestorativeGooModifier, "CEmbeddedSubclass<CCitadelModifier>");
+		/// <summary><c>CEmbeddedSubclass&lt;CCitadelModifier&gt;</c>.</summary>
+		public CCitadelModifierVData? m_RestorativeGooModifier => EmbeddedSubclass<CCitadelModifierVData>(__m_RestorativeGooModifier);
 
 		private static readonly SchemaField __m_RestorativeGooParticle = new("CAbilityRestorativeGooVData", "m_RestorativeGooParticle");
 		/// <summary><c>CResourceNameTyped&lt;CWeakHandle&lt;InfoForResourceTypeIParticleSystemDefinition&gt;&gt;</c>.</summary>
@@ -26,7 +26,7 @@ public static partial class Schema {
 		public string m_RestorativeGooSelfParticle => GetBufferString(__m_RestorativeGooSelfParticle);
 
 		private static readonly SchemaField __m_SelfCubeModelSwapModifier = new("CAbilityRestorativeGooVData", "m_SelfCubeModelSwapModifier");
-		/// <summary><c>CEmbeddedSubclass&lt;CCitadelModifier&gt;</c>. No typed mapping yet: read it through its address.</summary>
-		public RawField m_SelfCubeModelSwapModifier => Raw(__m_SelfCubeModelSwapModifier, "CEmbeddedSubclass<CCitadelModifier>");
+		/// <summary><c>CEmbeddedSubclass&lt;CCitadelModifier&gt;</c>.</summary>
+		public CCitadelModifierVData? m_SelfCubeModelSwapModifier => EmbeddedSubclass<CCitadelModifierVData>(__m_SelfCubeModelSwapModifier);
 	}
 }

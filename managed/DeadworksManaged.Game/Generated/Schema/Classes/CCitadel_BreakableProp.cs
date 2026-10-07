@@ -30,8 +30,8 @@ public static partial class Schema {
 		public CCitadelPlayerPawn? m_hBreaker { get => GetHandle<CCitadelPlayerPawn>(__m_hBreaker); set => SetHandle(__m_hBreaker, value); }
 
 		private static readonly SchemaField __m_mapCurrencyRewards = new("CCitadel_BreakableProp", "m_mapCurrencyRewards");
-		/// <summary><c>CUtlOrderedMap&lt;ECurrencyType, BreakablePropCurrencyReward_t&gt;</c>. No typed mapping yet: read it through its address.</summary>
-		public RawField m_mapCurrencyRewards => Raw(__m_mapCurrencyRewards, "CUtlOrderedMap<ECurrencyType, BreakablePropCurrencyReward_t>");
+		/// <summary><c>CUtlOrderedMap&lt;ECurrencyType, BreakablePropCurrencyReward_t&gt;</c>.</summary>
+		public SchemaMap<ECurrencyType, BreakablePropCurrencyReward_t> m_mapCurrencyRewards => new(this, __m_mapCurrencyRewards);
 
 		private static readonly SchemaField __m_nGoldCost = new("CCitadel_BreakableProp", "m_nGoldCost");
 		/// <summary><c>int32</c>.</summary>
@@ -48,5 +48,8 @@ public static partial class Schema {
 		private static readonly SchemaField __m_vecPickupRewards = new("CCitadel_BreakableProp", "m_vecPickupRewards");
 		/// <summary><c>CUtlVector&lt;CSubclassName&gt;</c>. No typed mapping yet: read it through its address.</summary>
 		public RawField m_vecPickupRewards => Raw(__m_vecPickupRewards, "CUtlVector<CSubclassName>");
+
+		/// <summary>The data entry this was created from, as <see cref="CCitadel_BreakablePropVData"/>, or null if it has none.</summary>
+		public CCitadel_BreakablePropVData? VData => SubclassVData<CCitadel_BreakablePropVData>();
 	}
 }

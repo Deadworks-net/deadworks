@@ -14,8 +14,8 @@ public static partial class Schema {
 		static string ISchemaClass<CAbility_Fathom_ReefdwellerHarpoon_VData>.NativeName => "CAbility_Fathom_ReefdwellerHarpoon_VData";
 
 		private static readonly SchemaField __m_DetachBuff = new("CAbility_Fathom_ReefdwellerHarpoon_VData", "m_DetachBuff");
-		/// <summary><c>CEmbeddedSubclass&lt;CCitadel_Modifier_ReefdwellerHarpoon_DetachBuff&gt;</c>. No typed mapping yet: read it through its address.</summary>
-		public RawField m_DetachBuff => Raw(__m_DetachBuff, "CEmbeddedSubclass<CCitadel_Modifier_ReefdwellerHarpoon_DetachBuff>");
+		/// <summary><c>CEmbeddedSubclass&lt;CCitadel_Modifier_ReefdwellerHarpoon_DetachBuff&gt;</c>.</summary>
+		public CCitadelModifierVData? m_DetachBuff => EmbeddedSubclass<CCitadelModifierVData>(__m_DetachBuff);
 
 		private static readonly SchemaField __m_cameraSequenceFlying = new("CAbility_Fathom_ReefdwellerHarpoon_VData", "m_cameraSequenceFlying");
 		/// <summary><c>CitadelCameraOperationsSequence_t</c>.</summary>

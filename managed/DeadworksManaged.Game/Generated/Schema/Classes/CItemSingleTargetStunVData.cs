@@ -18,8 +18,8 @@ public static partial class Schema {
 		public string m_CastParticle => GetBufferString(__m_CastParticle);
 
 		private static readonly SchemaField __m_StunDelayModifier = new("CItemSingleTargetStunVData", "m_StunDelayModifier");
-		/// <summary><c>CEmbeddedSubclass&lt;CCitadelModifier&gt;</c>. No typed mapping yet: read it through its address.</summary>
-		public RawField m_StunDelayModifier => Raw(__m_StunDelayModifier, "CEmbeddedSubclass<CCitadelModifier>");
+		/// <summary><c>CEmbeddedSubclass&lt;CCitadelModifier&gt;</c>.</summary>
+		public CCitadelModifierVData? m_StunDelayModifier => EmbeddedSubclass<CCitadelModifierVData>(__m_StunDelayModifier);
 
 		private static readonly SchemaField __m_strCastHitSound = new("CItemSingleTargetStunVData", "m_strCastHitSound");
 		/// <summary><c>CSoundEventName</c>.</summary>

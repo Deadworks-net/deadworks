@@ -18,12 +18,12 @@ public static partial class Schema {
 		public string m_BlockerModel => GetBufferString(__m_BlockerModel);
 
 		private static readonly SchemaField __m_EnemyAuraModifier = new("CCitadel_Modifier_SmokeGrenadeVData", "m_EnemyAuraModifier");
-		/// <summary><c>CEmbeddedSubclass&lt;CCitadelModifier&gt;</c>. No typed mapping yet: read it through its address.</summary>
-		public RawField m_EnemyAuraModifier => Raw(__m_EnemyAuraModifier, "CEmbeddedSubclass<CCitadelModifier>");
+		/// <summary><c>CEmbeddedSubclass&lt;CCitadelModifier&gt;</c>.</summary>
+		public CCitadelModifierVData? m_EnemyAuraModifier => EmbeddedSubclass<CCitadelModifierVData>(__m_EnemyAuraModifier);
 
 		private static readonly SchemaField __m_FriendlyAuraModifier = new("CCitadel_Modifier_SmokeGrenadeVData", "m_FriendlyAuraModifier");
-		/// <summary><c>CEmbeddedSubclass&lt;CCitadelModifier&gt;</c>. No typed mapping yet: read it through its address.</summary>
-		public RawField m_FriendlyAuraModifier => Raw(__m_FriendlyAuraModifier, "CEmbeddedSubclass<CCitadelModifier>");
+		/// <summary><c>CEmbeddedSubclass&lt;CCitadelModifier&gt;</c>.</summary>
+		public CCitadelModifierVData? m_FriendlyAuraModifier => EmbeddedSubclass<CCitadelModifierVData>(__m_FriendlyAuraModifier);
 
 		private static readonly SchemaField __m_SmokeParticle = new("CCitadel_Modifier_SmokeGrenadeVData", "m_SmokeParticle");
 		/// <summary><c>CResourceNameTyped&lt;CWeakHandle&lt;InfoForResourceTypeIParticleSystemDefinition&gt;&gt;</c>.</summary>

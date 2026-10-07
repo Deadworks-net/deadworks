@@ -12,5 +12,8 @@ public static partial class Schema {
 		internal CCitadel_CatAnimating() { }
 		static CCitadel_CatAnimating ISchemaClass<CCitadel_CatAnimating>.New() => new();
 		static string ISchemaClass<CCitadel_CatAnimating>.NativeName => "CCitadel_CatAnimating";
+
+		/// <summary>The data entry this was created from, as <see cref="CCitadel_CatAnimatingVData"/>, or null if it has none.</summary>
+		public CCitadel_CatAnimatingVData? VData => SubclassVData<CCitadel_CatAnimatingVData>();
 	}
 }
