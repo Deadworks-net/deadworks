@@ -1,3 +1,4 @@
+using System.Numerics;
 using DeadworksManaged.Api;
 using DeadworksManaged.Game;
 
@@ -47,6 +48,32 @@ public class GameSchemaPlugin : DeadworksPluginBase
 
 		var statue = Spawn.prop_dynamic(new() { model = StatueModel, origin = pawn.Position });
 		statue?.InputColor(new Color32(255, 0, 0));
+	}
+
+	// A unit, pickup or breakable is created from its data entry, so Spawn has a function per
+	// entry. beforeSpawn runs between creating the entity and spawning it.
+	[Command("guardian", Description = "Stand a Guardian of your team next to you")]
+	public void CmdGuardian(CCitadelPlayerController caller)
+	{
+		var pawn = caller.GetHeroPawn();
+		if (pawn == null) return;
+
+		var guardian = Spawn.npc_boss_tier1(
+			new() { origin = pawn.Position + new Vector3(150, 0, 0), teamnumber = pawn.TeamNum },
+			beforeSpawn: boss => boss.m_iLane = 1);
+		caller.PrintToConsole($"Spawned {guardian}");
+	}
+
+	// The data an ability, unit or modifier was created from is one call away.
+	[Command("icons", Description = "List your abilities' HUD images")]
+	public void CmdIcons(CCitadelPlayerController caller)
+	{
+		var pawn = caller.GetHeroPawn();
+		if (pawn == null) return;
+
+		foreach (var ability in pawn.Schema.m_CCitadelAbilityComponent.m_vecAbilities)
+			if (ability?.SubclassVData<Schema.CitadelAbilityVData>() is { } data)
+				caller.PrintToConsole($"{ability.Entity?.AbilityName}: {data.m_strAbilityImage}");
 	}
 
 	// ConVars has the game's console variables with their types; ItemNames, AbilityNames,
