@@ -38,9 +38,10 @@ use std::path::{Path, PathBuf};
 use std::time::Duration;
 
 use serde::{Deserialize, Serialize};
-use sha2::{Digest, Sha256};
 use tauri::{AppHandle, Emitter};
 use tokio::sync::Mutex;
+
+use crate::addons::verify::sha256_file;
 
 /// Progress channel, kept distinct from the connect dialog's `download-progress`
 /// so background polling never drives the connect UI.
@@ -227,25 +228,6 @@ async fn try_swap_with_retry(dir: &Path, state: &mut State) -> bool {
     false
 }
 
-fn sha256_file(path: &Path) -> Result<String, String> {
-    use std::io::Read;
-    let file = std::fs::File::open(path)
-        .map_err(|e| format!("Failed to open {} for hashing: {}", path.display(), e))?;
-    let mut reader = std::io::BufReader::new(file);
-    let mut hasher = Sha256::new();
-    let mut buf = [0u8; 256 * 1024];
-    loop {
-        let n = reader
-            .read(&mut buf)
-            .map_err(|e| format!("Read error while hashing: {}", e))?;
-        if n == 0 {
-            break;
-        }
-        hasher.update(&buf[..n]);
-    }
-    Ok(format!("{:x}", hasher.finalize()))
-}
-
 /// Leftovers from an interrupted download. None of these end in `.vpk`, so they
 /// were never registered by the engine — this is tidiness, not correctness.
 fn sweep_stray_parts(dir: &Path) {
@@ -359,9 +341,12 @@ pub async fn ensure(
             0,
             1,
             manifest.compressed_size.saturating_mul(3),
+            None, // verified in full below
             PROGRESS_EVENT,
             app,
             None, // the bootstrap update is small and never user-cancelled
+            // The API names this download. A developer's local API may point at itself.
+            crate::addons::fetch::url_host_is_local(&crate::addons::resolve_api_url(app)),
         )
         .await?;
 

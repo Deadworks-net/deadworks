@@ -1,12 +1,14 @@
 import { useEffect, useState, useCallback } from "react";
 import { getCurrentWebviewWindow } from "@tauri-apps/api/webviewWindow";
-import { fetchServers, prepareAndConnect } from "@/lib/tauri";
+import { connectAnyway, fetchServers, prepareAndConnect, recordId } from "@/lib/tauri";
 import type { Server } from "@/lib/types";
 import styles from "./ServerInfoWindow.module.css";
 
 export default function ServerInfoWindow() {
   const [server, setServer] = useState<Server | null>(null);
   const [apiUrl, setApiUrl] = useState("");
+  const [joining, setJoining] = useState(false);
+  const [error, setError] = useState<string | null>(null);
 
   useEffect(() => {
     const params = new URLSearchParams(window.location.search);
@@ -31,10 +33,30 @@ export default function ServerInfoWindow() {
     }
   }, [server, apiUrl]);
 
+  // Same wording the backend uses; see ConnectDialog.
+  const mismatch = error !== null && error.includes("does not match the version the server runs");
+
   const handleConnect = async () => {
-    if (!server?.online) return;
-    await prepareAndConnect(server.id, server.raw_address);
-    getCurrentWebviewWindow().close();
+    if (!server?.online || joining) return;
+    // A second press after a failure is the player choosing to go regardless.
+    const anyway = error !== null;
+    const acceptMismatch = mismatch;
+    setJoining(true);
+    setError(null);
+    try {
+      const result = anyway
+        ? await connectAnyway(recordId(server), server.raw_address, acceptMismatch)
+        : await prepareAndConnect(recordId(server), server.raw_address);
+      if (result.success) {
+        getCurrentWebviewWindow().close();
+      } else {
+        setError(result.message);
+      }
+    } catch (e) {
+      setError(String(e));
+    } finally {
+      setJoining(false);
+    }
   };
 
   const handleClose = () => {
@@ -109,13 +131,27 @@ export default function ServerInfoWindow() {
           </div>
         )}
 
+        {error !== null && (
+          <p className={styles.error}>
+            {error}
+            <span className={styles.errorHint}>
+              {mismatch
+                ? "Server content differs from the download host's content. Some custom content " +
+                  "may be missing or broken. Consider letting the server operator know you " +
+                  "received this warning."
+                : "Joining anyway tries once more, then connects with whatever content is " +
+                  "already installed, so some of it may be missing or out of date."}
+            </span>
+          </p>
+        )}
+
         <div className={styles.footer}>
           <button
             className={styles.connectBtn}
-            disabled={!server.online}
+            disabled={!server.online || joining}
             onClick={handleConnect}
           >
-            CONNECT
+            {joining ? "CONNECTING..." : error !== null ? "CONNECT ANYWAY" : "CONNECT"}
           </button>
           <button className={styles.actionBtn} onClick={handleRefresh}>
             REFRESH

@@ -67,6 +67,7 @@ pub fn run() {
             connect::set_game_dir,
             connect::reset_game_dir,
             addons::prepare_and_connect,
+            addons::connect_anyway,
             bootstrap::bootstrap_status,
             bootstrap::retry_bootstrap_install,
             gameinfo::gameinfo_error,

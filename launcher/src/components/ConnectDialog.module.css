@@ -100,3 +100,10 @@
   border-color: var(--text-muted);
   color: var(--text);
 }
+
+/* Sits under an error message to spell out what CONNECT ANYWAY actually costs. */
+.hint {
+  display: block;
+  margin-top: 10px;
+  opacity: 0.7;
+}

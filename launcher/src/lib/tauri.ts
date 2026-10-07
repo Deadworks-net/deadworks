@@ -131,6 +131,14 @@ export function pingServer(addr: string): Promise<number> {
   return invoke<number>("ping_server", { addr });
 }
 
+/**
+ * The id to ask the Deadworks API about a server with, or "" when it has no record there and
+ * its content can only come from what the server advertises.
+ */
+export function recordId(server: { id: string; registered?: boolean }): string {
+  return server.registered === false ? "" : server.id;
+}
+
 export function prepareAndConnect(
   serverId: string,
   addr: string
@@ -139,6 +147,15 @@ export function prepareAndConnect(
     serverId,
     addr,
   });
+}
+
+/**
+ * Join after `prepareAndConnect` failed and the player chose to go regardless: tries the content
+ * once more, then connects whatever the outcome. `acceptMismatch` installs a download that is not
+ * the build the server runs, and is only for a player who was just shown that mismatch.
+ */
+export function connectAnyway(serverId: string, addr: string, acceptMismatch: boolean): Promise<ConnectResult> {
+  return invoke<ConnectResult>("connect_anyway", { serverId, addr, acceptMismatch });
 }
 
 export function listenDownloadProgress(
