@@ -1,74 +1,78 @@
 namespace DeadworksManaged.Api;
 
-/// <summary>Individual content/interaction layers used to build <see cref="MaskTrace"/> bitmasks for trace queries.</summary>
-public enum InteractionLayer : sbyte {
-	// Base engine layers (0-30)
-	ContentsSolid = 0,
-	ContentsHitbox,
-	ContentsTrigger,
-	ContentsSky,
-	FirstUser,
-	ContentsPlayerClip = FirstUser,
-	ContentsNpcClip,
-	ContentsBlockLos,
-	ContentsBlockLight,
-	ContentsLadder,
-	ContentsPickup,
-	ContentsBlockSound,
-	ContentsNoDraw,
-	ContentsWindow,
-	ContentsPassBullets,
-	ContentsWorldGeometry,
-	ContentsWater,
-	ContentsSlime,
-	ContentsTouchAll,
-	ContentsPlayer,
-	ContentsNpc,
-	ContentsDebris,
-	ContentsPhysicsProp,
-	ContentsNavIgnore,
-	ContentsNavLocalIgnore,
-	ContentsPostProcessingVolume,
-	ContentsUnusedLayer3,
-	ContentsCarriedObject,
-	ContentsPushaway,
-	ContentsServerEntityOnClient,
-	ContentsCarriedWeapon,
-	ContentsStaticLevel,
-	// Deadlock layers (31-63)
-	FirstModSpecific,
-	CitadelTeamAmber = FirstModSpecific,  // 31
-	CitadelTeamSapphire,                  // 32
-	CitadelTeamNeutal,                    // 33
-	CitadelAbility,                       // 34
-	CitadelBullet,                        // 35
-	CitadelProjectile,                    // 36
-	CitadelUnitHero,                      // 37
-	CitadelUnitTrooper,                   // 38
-	CitadelUnitNeutral,                   // 39
-	CitadelUnitBuilding,                  // 40
-	CitadelUnitProp,                      // 41
-	CitadelUnitMinion,                    // 42
-	CitadelUnitBoss,                      // 43
-	CitadelUnitGoldOrb,                   // 44
-	CitadelUnitWorldProp,                 // 45
-	CitadelUnitTrophy,                    // 46
-	CitadelUnitZipline,                   // 47
-	CitadelMantleHidden,                  // 48
-	CitadelObscured,                      // 49
-	CitadelTimeWarp,                      // 50
-	CitadelFoliage,                       // 51
-	CitadelTransparent,                   // 52
-	CitadelBlockCamera,                   // 53
-	CitadelMantleable,                    // 54
-	CitadelWalkable,                      // 55
-	CitadelTempMovementBlocker,           // 56
-	CitadelBlockMantle,                   // 57
-	CitadelSkyclip,                       // 58
-	CitadelValidPingTarget,               // 59
-	CitadelCameraCanPassThrough,          // 60
-	CitadelAbilityTrigger,                // 61
-	CitadelPortalTrigger,                 // 62
-	CitadelPortalEnvironment,             // 63
-	NotFound = -1,
+/// <summary>
+/// Interaction layers, combined with <c>|</c>. An object belongs to layers (<see cref="CCollisionProperty.InteractsAs"/>),
+/// collides with layers (<see cref="CCollisionProperty.InteractsWith"/>) and can exclude layers
+/// (<see cref="CCollisionProperty.InteractsExclude"/>). Traces take the same masks.
+/// </summary>
+[Flags]
+public enum InteractionLayer : ulong {
+	/// <summary>No layers.</summary>
+	None = 0,
+	// Engine layers
+	Solid = 1ul << 0,
+	Hitbox = 1ul << 1,
+	Trigger = 1ul << 2,
+	Sky = 1ul << 3,
+	PlayerClip = 1ul << 4,
+	NpcClip = 1ul << 5,
+	BlockLos = 1ul << 6,
+	BlockLight = 1ul << 7,
+	Ladder = 1ul << 8,
+	Pickup = 1ul << 9,
+	BlockSound = 1ul << 10,
+	NoDraw = 1ul << 11,
+	Window = 1ul << 12,
+	PassBullets = 1ul << 13,
+	WorldGeometry = 1ul << 14,
+	Water = 1ul << 15,
+	Slime = 1ul << 16,
+	TouchAll = 1ul << 17,
+	Player = 1ul << 18,
+	Npc = 1ul << 19,
+	Debris = 1ul << 20,
+	PhysicsProp = 1ul << 21,
+	NavIgnore = 1ul << 22,
+	NavLocalIgnore = 1ul << 23,
+	PostProcessingVolume = 1ul << 24,
+	VehicleClip = 1ul << 25,
+	CarriedObject = 1ul << 26,
+	Pushaway = 1ul << 27,
+	ServerEntityOnClient = 1ul << 28,
+	CarriedWeapon = 1ul << 29,
+	StaticLevel = 1ul << 30,
+	// Deadlock layers
+	CitadelTeamAmber = 1ul << 31,
+	CitadelTeamSapphire = 1ul << 32,
+	CitadelTeamNeutal = 1ul << 33,
+	CitadelAbility = 1ul << 34,
+	CitadelBullet = 1ul << 35,
+	CitadelProjectile = 1ul << 36,
+	CitadelUnitHero = 1ul << 37,
+	CitadelUnitTrooper = 1ul << 38,
+	CitadelUnitNeutral = 1ul << 39,
+	CitadelUnitBuilding = 1ul << 40,
+	CitadelUnitProp = 1ul << 41,
+	CitadelUnitMinion = 1ul << 42,
+	CitadelUnitBoss = 1ul << 43,
+	CitadelUnitGoldOrb = 1ul << 44,
+	CitadelUnitWorldProp = 1ul << 45,
+	CitadelUnitTrophy = 1ul << 46,
+	CitadelUnitZipline = 1ul << 47,
+	CitadelMantleHidden = 1ul << 48,
+	CitadelObscured = 1ul << 49,
+	CitadelTimeWarp = 1ul << 50,
+	CitadelFoliage = 1ul << 51,
+	CitadelTransparent = 1ul << 52,
+	CitadelBlockCamera = 1ul << 53,
+	CitadelMantleable = 1ul << 54,
+	CitadelWalkable = 1ul << 55,
+	CitadelTempMovementBlocker = 1ul << 56,
+	CitadelBlockMantle = 1ul << 57,
+	CitadelSkyclip = 1ul << 58,
+	CitadelValidPingTarget = 1ul << 59,
+	CitadelCameraCanPassThrough = 1ul << 60,
+	CitadelAbilityTrigger = 1ul << 61,
+	CitadelPortalTrigger = 1ul << 62,
+	CitadelPortalEnvironment = 1ul << 63,
 }

@@ -1,6 +1,7 @@
 #pragma once
 
 #include <cstdint>
+#include <string>
 
 namespace deadworks {
 
@@ -175,11 +176,30 @@ struct NativeCallbacks {
     // Run the matchmade start (pre-game countdown, zipline launch) on any map. See Hooks/MatchMapOverride.hpp.
     void(__cdecl *SetMatchStartOnAnyMap)(uint8_t enabled);
     uint8_t(__cdecl *GetMatchStartOnAnyMap)();
+    // Collision — see NativeCollision.cpp. mask: 0 = InteractsAs, 1 = InteractsWith, 2 = InteractsExclude.
+    void(__cdecl *AddCollisionLayers)(void *collision, uint8_t mask, uint64_t layers);
+    void(__cdecl *RemoveCollisionLayers)(void *collision, uint8_t mask, uint64_t layers);
+    void(__cdecl *SetCollisionGroup)(void *collision, uint8_t group);
+    void(__cdecl *SetSolid)(void *collision, uint8_t solidType);
+    void(__cdecl *SetSolidFlags)(void *collision, uint8_t flags);
+    void(__cdecl *SetCollisionEnabled)(void *collision, uint8_t enabled);
+    void(__cdecl *SetEntityCollisionsWith)(void *entity, void *other, uint8_t enabled);
+    // 1 once Steam has validated the client in this slot's ticket, so its SteamID can be trusted.
+    uint8_t(__cdecl *IsClientAuthenticated)(int32_t slot);
+    // Disconnects a client with a reason string, which the engine can pass on to the client.
+    void(__cdecl *KickClient)(int32_t slot, const char *reason, int32_t code);
+    // 1 if the engine can load the named map.
+    uint8_t(__cdecl *IsMapValid)(const char *map);
+    // Called by managed code while it rejects a ClientConnect; the text becomes the engine's reject reason.
+    void(__cdecl *SetConnectRejectReason)(const char *reason);
 };
 
 void PopulateNativeCallbacks(NativeCallbacks &callbacks);
 
 // Resolve function pointers needed by Native* callbacks (called from PostInit)
 void ResolveNativeStatics();
+
+// Returns and clears the reason managed code set with SetConnectRejectReason.
+std::string TakeConnectRejectReason();
 
 } // namespace deadworks

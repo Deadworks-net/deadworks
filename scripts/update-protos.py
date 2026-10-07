@@ -24,6 +24,7 @@ CPP_PROTOS = [
     "networkbasetypes",
     "networksystem_protomessages",
     "source2_steam_stats",
+    "valveextensions",
 ]
 
 # Additional proto files to copy for managed/protos/ (beyond CPP_PROTOS)

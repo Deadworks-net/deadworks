@@ -33,7 +33,7 @@ trap 'log "ERROR: \"$BASH_COMMAND\" failed (entrypoint.sh line $LINENO)" >&2' ER
 # everything after this block runs unprivileged. Wine refuses a prefix it does not own.
 if [ "$(id -u)" = "0" ]; then
     mkdir -p "$GAME_DIR" "$STEAM_DIR/home" "$HOME" "$WINEPREFIX"
-    for d in /data "$STEAM_DIR" "$GAME_DIR" "$STEAM_DIR/home" "$HOME" "$WINEPREFIX" /plugins /configs; do
+    for d in /data "$STEAM_DIR" "$GAME_DIR" "$STEAM_DIR/home" "$HOME" "$WINEPREFIX" /plugins /configs /maps /logs; do
         # An install mounted read-only (somebody's existing copy) is left exactly as it is.
         [ -w "$d" ] || continue
         [ "$(stat -c %u:%g "$d")" = "$PUID:$PGID" ] || chown -R "$PUID:$PGID" "$d"
@@ -160,7 +160,7 @@ install_steamclient() {
 # file as a plain file. Rebuilt on every start, so files a game update added or removed follow.
 build_tree() {
     mkdir -p "$SERVER_DIR"
-    find "$SERVER_DIR" -type l -lname "$GAME_DIR/*" -delete
+    find "$SERVER_DIR" -type l \( -lname "$GAME_DIR/*" -o -lname "/maps/*" \) -delete
     # The skipped paths are DepotDownloader's bookkeeping and, if the install is a copy somebody
     # already ran Deadworks from, the directories this script owns.
     perl -e '
@@ -179,7 +179,20 @@ build_tree() {
             }
         }
         walk("");
-    ' "$GAME_DIR" "$SERVER_DIR" .DepotDownloader .deadworks.lock game/bin/win64/managed game/bin/win64/configs
+    ' "$GAME_DIR" "$SERVER_DIR" .DepotDownloader .deadworks.lock game/bin/win64/managed game/bin/win64/configs game/bin/win64/logs
+    link_maps
+}
+
+# Custom maps go next to the stock ones, so `map <name>` and SERVER_MAP find them. A custom map
+# named like a stock one replaces it for this server only.
+link_maps() {
+    local vpk
+    [ -d /maps ] || return 0
+    for vpk in /maps/*.vpk; do
+        [ -f "$vpk" ] || continue
+        ln -sfn "$vpk" "$SERVER_DIR/game/citadel/maps/${vpk##*/}"
+        log "custom map: $(basename "$vpk" .vpk)"
+    done
 }
 
 # The newest release tag, or nothing if GitHub cannot be reached. The releases/latest redirect
@@ -257,6 +270,10 @@ deploy_deadworks() {
     # five directories deep inside the game install.
     link_dir /plugins "$WIN64/managed/plugins"
     link_dir /configs "$WIN64/configs"
+    # The admin action log goes to /logs when the compose file mounts something there. With an older
+    # compose file /logs is just a folder in the container, lost when it's recreated, so the log stays
+    # in the data volume as before.
+    if [ "$(stat -c %d /logs)" != "$(stat -c %d /)" ]; then link_dir /logs "$WIN64/logs"; fi
     log "deployed Deadworks $DEADWORKS_TAG"
 }
 

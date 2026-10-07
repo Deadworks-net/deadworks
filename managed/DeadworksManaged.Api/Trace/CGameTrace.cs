@@ -13,7 +13,8 @@ public unsafe struct CGameTrace {
 	[FieldOffset(0x20)] public nint Shape;
 	[FieldOffset(0x28)] public ulong Contents;
 	[FieldOffset(0x30)] public fixed byte BodyTransform[32];
-	[FieldOffset(0x50)] public fixed byte ShapeAttributes[40];
+	/// <summary>Collision attributes of the shape the trace hit. <see cref="RnCollisionAttr_t.EntityId"/> is the hit entity's handle.</summary>
+	[FieldOffset(0x50)] public RnCollisionAttr_t ShapeAttributes;
 	[FieldOffset(0x78)] public Vector3 StartPos;
 	[FieldOffset(0x84)] public Vector3 EndPos;
 	[FieldOffset(0x90)] public Vector3 HitNormal;
@@ -21,10 +22,12 @@ public unsafe struct CGameTrace {
 	[FieldOffset(0xA8)] public float HitOffset;
 	[FieldOffset(0xAC)] public float Fraction;
 	[FieldOffset(0xB0)] public int Triangle;
-	[FieldOffset(0xB4)] public short HitboxBoneIndex;
-	[FieldOffset(0xB6)] public RayType_t RayType;
-	[FieldOffset(0xB7)] public bool StartInSolid;
-	[FieldOffset(0xB8)] public bool ExactHitPoint;
+	/// <summary>Added in 6711; copied together with <see cref="Triangle"/> from the hit, -1 when unset. Meaning unknown.</summary>
+	[FieldOffset(0xB4)] public int UnkB4;
+	[FieldOffset(0xB8)] public short HitboxBoneIndex;
+	[FieldOffset(0xBA)] public RayType_t RayType;
+	[FieldOffset(0xBB)] public bool StartInSolid;
+	[FieldOffset(0xBC)] public bool ExactHitPoint;
 
 	public readonly bool DidHit => Fraction < 1.0f || StartInSolid;
 
@@ -66,6 +69,7 @@ public unsafe struct CGameTrace {
 		*(float*)(trace.BodyTransform + 0x0C) = 1.0f;
 		trace.Fraction = 1.0f;
 		trace.Triangle = -1;
+		trace.UnkB4 = -1;
 		trace.HitboxBoneIndex = -1;
 		return trace;
 	}

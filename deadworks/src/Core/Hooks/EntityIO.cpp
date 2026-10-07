@@ -8,7 +8,7 @@ namespace hooks {
 
 bool __fastcall Hook_CEntityInstance_AcceptInput(CEntityInstance *thisptr, const char *inputName,
                                                  CEntityInstance *activator, CEntityInstance *caller,
-                                                 void *variantValue, int outputID, void *unk) {
+                                                 void *variantValue) {
     const char *className = thisptr ? thisptr->GetClassname() : "";
 
     int result = g_Deadworks.OnEntityAcceptInputPre(className, inputName, thisptr, activator, caller, variantValue);
@@ -16,7 +16,7 @@ bool __fastcall Hook_CEntityInstance_AcceptInput(CEntityInstance *thisptr, const
         return true;
     }
 
-    bool ret = g_CEntityInstance_AcceptInput.fastcall<bool>(thisptr, inputName, activator, caller, variantValue, outputID, unk);
+    bool ret = g_CEntityInstance_AcceptInput.fastcall<bool>(thisptr, inputName, activator, caller, variantValue);
 
     g_Deadworks.OnEntityAcceptInputPost(className, inputName, thisptr, activator, caller, variantValue);
     return ret;
@@ -24,8 +24,8 @@ bool __fastcall Hook_CEntityInstance_AcceptInput(CEntityInstance *thisptr, const
 
 void __fastcall Hook_CEntityIOOutput_FireOutputInternal(CEntityIOOutput *pThis,
                                                         CEntityInstance *pActivator, CEntityInstance *pCaller,
-                                                        const void *pValue, float delay,
-                                                        void *unk1, void *unk2) {
+                                                        const void *pParams, float delay,
+                                                        void *unk, const void *pValue) {
     const char *callerClass = pCaller ? pCaller->GetClassname() : "";
     const char *outputName = (pThis && pThis->m_pDesc) ? pThis->m_pDesc->m_pName : "";
 
@@ -34,7 +34,7 @@ void __fastcall Hook_CEntityIOOutput_FireOutputInternal(CEntityIOOutput *pThis,
         return;
     }
 
-    g_CEntityIOOutput_FireOutputInternal.fastcall<void>(pThis, pActivator, pCaller, pValue, delay, unk1, unk2);
+    g_CEntityIOOutput_FireOutputInternal.fastcall<void>(pThis, pActivator, pCaller, pParams, delay, unk, pValue);
 
     g_Deadworks.OnEntityFireOutputPost(callerClass, outputName, pActivator, pCaller, pValue, delay);
 }

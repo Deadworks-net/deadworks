@@ -7,6 +7,12 @@ public sealed class ClientPutInServerEvent {
 	public required ulong Xuid { get; init; }
 	public required bool IsBot { get; init; }
 
+	/// <summary>
+	/// True for a player reloading after a map change, rather than joining. See
+	/// <see cref="ClientConnectEvent.IsMapChangeReconnect"/>.
+	/// </summary>
+	public bool IsMapChangeReconnect { get; init; }
+
 	[System.Diagnostics.DebuggerBrowsable(System.Diagnostics.DebuggerBrowsableState.Never)]
 	public unsafe CCitadelPlayerController? Controller {
 		get {

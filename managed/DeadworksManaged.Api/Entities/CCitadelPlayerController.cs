@@ -70,10 +70,32 @@ public sealed unsafe class CCitadelPlayerController : CBasePlayerController {
 	}
 
 	/// <summary>
+	/// Removes this player from the game completely: their hero, any other pawn they control (such as a spectator's
+	/// observer pawn), and this controller, together in the same tick.
+	///
+	/// By default a player who leaves keeps their controller and hero, so they can reconnect to them, and their portrait
+	/// stays in the top bar. Call this from <see cref="IDeadworksPlugin.OnClientDisconnect"/> to drop them instead.
+	/// Don't remove the hero or the controller on its own: either one left behind crashes clients or the server. To
+	/// remove a player who is still connected, <see cref="CBasePlayerController.Kick"/> them.
+	/// </summary>
+	public void RemoveWithPawns() {
+		var hero = GetHeroPawn();
+		var pawn = Pawn;
+		hero?.Remove();
+		if (pawn != null && pawn.EntityHandle != hero?.EntityHandle)
+			pawn.Remove();
+		Remove();
+	}
+
+	/// <summary>
 	/// Forcibly removes the player's current pawn, spawns an observer pawn, and attaches it.
 	/// </summary>
 	public void MakeObserver() {
-		Pawn?.Remove();
+		if (Pawn is { } pawn) {
+			if (_hHeroPawn.Get(Handle) == pawn.EntityHandle)
+				_hHeroPawn.Set(Handle, CBaseEntity.InvalidEntityHandle);
+			pawn.Remove();
+		}
 		SetPawn(null, retainOldPawnTeam: true);
 		NativeInterop.SpawnObserverPawn((void*)Handle);
 	}
@@ -87,10 +109,18 @@ public sealed unsafe class CCitadelPlayerController : CBasePlayerController {
 		}
 	}
 
-	/// <summary>Sends a message to this player's console via "echo" client command.</summary>
+	/// <summary>Prints a message in this player's console, one <c>echo</c> per line.</summary>
 	public void PrintToConsole(string message) {
-		Server.ClientCommand(Slot, $"echo {message}");
+		foreach (var line in message.ReplaceLineEndings("\n").Split('\n'))
+			Server.ClientCommand(Slot, EchoCommand(line));
 	}
+
+	/// <summary>
+	/// Builds the <c>echo</c> for one line. A <c>;</c> in a player's name or a kick reason would end the echo and run
+	/// the rest on the client as a new command, so it becomes a full-width semicolon, which looks the same. Deadlock's
+	/// echo prints quotes literally, so quoting isn't an option; the console's own UM_TextMsg isn't shown by the client.
+	/// </summary>
+	internal static string EchoCommand(string line) => $"echo {line.Replace(';', '；')}";
 
 	/// <summary>Displays a HUD game announcement banner to this player with the given title and description.</summary>
 	public void HudAnnounce(string title = "", string description = "") {

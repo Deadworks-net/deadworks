@@ -1,3 +1,4 @@
+using System.Diagnostics;
 using System.Reflection;
 using System.Runtime.Loader;
 using Google.Protobuf;
@@ -58,6 +59,7 @@ internal static partial class PluginLoader
 
     private static string _pluginsDir = "";
     public static string PluginsDir => _pluginsDir;
+    private static string _builtinDir = "";
 
     private static FileSystemWatcher? _watcher;
     private static Timer? _debounceTimer;
@@ -91,7 +93,21 @@ internal static partial class PluginLoader
         TimerRegistry.Initialize();
         DeadworksConfig.Initialize();
         ConfigManager.Initialize();
-        ConCommandManager.Initialize();
+        // Core's own events reach plugins as IDeadworksPlugin overrides, which unload with the plugin.
+        // Removing first keeps a second LoadAll from subscribing twice.
+        PermissionSystem.PermissionManager.Changed -= DispatchPermissionsChanged;
+        PermissionSystem.PermissionManager.Changed += DispatchPermissionsChanged;
+        AdminSystem.PenaltyManager.Added -= DispatchPenaltyAdded;
+        AdminSystem.PenaltyManager.Added += DispatchPenaltyAdded;
+        AdminSystem.PenaltyManager.Removed -= DispatchPenaltyRemoved;
+        AdminSystem.PenaltyManager.Removed += DispatchPenaltyRemoved;
+        AdminSystem.AdminActivityService.Logged -= DispatchAdminAction;
+        AdminSystem.AdminActivityService.Logged += DispatchAdminAction;
+        PermissionSystem.PermissionManager.Initialize();
+        AdminSystem.PenaltyManager.Initialize();
+        AdminSystem.AdminActivityService.Initialize();
+        AdminSystem.CommandCapture.Initialize();
+        Server.ExtraMaps = () => DeadworksConfig.ServerBrowser.ExtraMaps;
         UIBootstrap.Initialize();
         ServerBrowser.Initialize();
         PluginStateManager.Initialize();
@@ -113,15 +129,30 @@ internal static partial class PluginLoader
         if (baseDir is null)
             return;
 
-        _pluginsDir = Path.Combine(baseDir, "plugins");
-        if (!Directory.Exists(_pluginsDir))
-        {
-            Console.WriteLine($"[PluginLoader] No plugins directory found at: {_pluginsDir}");
-            return;
-        }
+        RegisterCoreCommands();
 
-        var dlls = Directory.GetFiles(_pluginsDir, "*.dll");
-        Console.WriteLine($"[PluginLoader] Scanning {_pluginsDir} ({dlls.Length} DLLs found)");
+        _pluginsDir = Path.Combine(baseDir, "plugins");
+        _builtinDir = Path.Combine(baseDir, "builtin");
+
+        LoadDirectory(_builtinDir, builtin: true);
+        if (Directory.Exists(_pluginsDir))
+            LoadDirectory(_pluginsDir, builtin: false);
+        else
+            Console.WriteLine($"[PluginLoader] No plugins directory found at: {_pluginsDir}");
+
+        PermissionSystem.PermissionManifest.DeleteStale();
+        PermissionSystem.PermissionManager.OnStartupComplete();
+        if (Directory.Exists(_pluginsDir))
+            StartWatching(_pluginsDir);
+    }
+
+    private static void LoadDirectory(string dir, bool builtin)
+    {
+        if (!Directory.Exists(dir))
+            return;
+
+        var dlls = Directory.GetFiles(dir, "*.dll");
+        Console.WriteLine($"[PluginLoader] Scanning {dir} ({dlls.Length} DLLs found)");
 
         foreach (var dll in dlls)
         {
@@ -129,6 +160,13 @@ internal static partial class PluginLoader
             if (!PluginStateManager.IsEnabled(dllName))
             {
                 Console.WriteLine($"[PluginLoader] Skipping disabled plugin: {dllName}");
+                continue;
+            }
+
+            // A plugin of the same name in plugins/ replaces the one that ships with Deadworks.
+            if (builtin && File.Exists(Path.Combine(_pluginsDir, dllName + ".dll")))
+            {
+                Console.WriteLine($"[PluginLoader] Using plugins/{dllName}.dll instead of the built-in one");
                 continue;
             }
 
@@ -141,14 +179,25 @@ internal static partial class PluginLoader
                 Console.WriteLine($"[PluginLoader] Failed to load {Path.GetFileName(dll)}: {ex.Message}");
             }
         }
+    }
 
-        StartWatching(_pluginsDir);
+    private const string CoreCommandsPath = "deadworks://core";
+
+    /// <summary>Built-in commands written as [Command]s, so they get permission checks and a generated listing like any plugin's.</summary>
+    private static void RegisterCoreCommands()
+    {
+        lock (_lock)
+        {
+            Commands.CommandRegistration.RegisterPluginCommands(
+                CoreCommandsPath, [new Commands.CoreCommands(), new PermissionSystem.PermissionCommands(), new AdminSystem.PenaltyCommands()], _chatCommandRegistry,
+                manifestKey: PermissionSystem.PermissionManifest.CoreFileKey);
+        }
     }
 
     public static bool IsPluginLoaded(string dllName)
     {
-        if (_pluginsDir.Length == 0) return false;
-        var normalizedPath = Path.GetFullPath(Path.Combine(_pluginsDir, dllName + ".dll"));
+        var normalizedPath = ResolvePluginPath(dllName);
+        if (normalizedPath == null) return false;
         lock (_lock)
         {
             return _loaded.ContainsKey(normalizedPath);
@@ -164,25 +213,45 @@ internal static partial class PluginLoader
         }
     }
 
-    /// <summary>Returns the normalized full path for a plugin DLL name, or null if the plugins directory is not set.</summary>
+    /// <summary>Whether <paramref name="dllName"/> is one of the plugins that ship with Deadworks and isn't replaced in plugins/.</summary>
+    public static bool IsBuiltin(string dllName)
+        => _builtinDir.Length > 0
+           && File.Exists(Path.Combine(_builtinDir, dllName + ".dll"))
+           && !File.Exists(Path.Combine(_pluginsDir, dllName + ".dll"));
+
+    /// <summary>
+    /// The full path a plugin DLL name loads from: plugins/ if it's there, otherwise builtin/ if it ships with
+    /// Deadworks, otherwise where it would go in plugins/. Null before loading has started.
+    /// </summary>
     public static string? ResolvePluginPath(string dllName)
     {
         if (_pluginsDir.Length == 0) return null;
-        return Path.GetFullPath(Path.Combine(_pluginsDir, dllName + ".dll"));
+        var dir = IsBuiltin(dllName) ? _builtinDir : _pluginsDir;
+        return Path.GetFullPath(Path.Combine(dir, dllName + ".dll"));
+    }
+
+    /// <summary>Every plugin DLL name found in builtin/ and plugins/.</summary>
+    public static IEnumerable<string> InstalledPluginNames()
+    {
+        var names = new SortedSet<string>(StringComparer.OrdinalIgnoreCase);
+        foreach (var dir in new[] { _builtinDir, _pluginsDir })
+            if (dir.Length > 0 && Directory.Exists(dir))
+                foreach (var dll in Directory.GetFiles(dir, "*.dll"))
+                    names.Add(Path.GetFileNameWithoutExtension(dll));
+        return names;
     }
 
     public static void EnablePlugin(string dllName)
     {
         PluginStateManager.SetEnabled(dllName, true);
 
-        var dllPath = Path.Combine(_pluginsDir, dllName + ".dll");
-        if (!File.Exists(dllPath))
+        var normalizedPath = ResolvePluginPath(dllName);
+        if (normalizedPath == null || !File.Exists(normalizedPath))
         {
-            Console.WriteLine($"[PluginLoader] Cannot enable '{dllName}': DLL not found in plugins directory");
+            Console.WriteLine($"[PluginLoader] Cannot enable '{dllName}': DLL not found in the plugins or builtin directory");
             return;
         }
 
-        var normalizedPath = Path.GetFullPath(dllPath);
         lock (_lock)
         {
             if (_loaded.ContainsKey(normalizedPath))
@@ -206,9 +275,8 @@ internal static partial class PluginLoader
     {
         PluginStateManager.SetEnabled(dllName, false);
 
-        if (_pluginsDir.Length == 0) return;
-        var normalizedPath = Path.GetFullPath(Path.Combine(_pluginsDir, dllName + ".dll"));
-        UnloadPlugin(normalizedPath);
+        if (ResolvePluginPath(dllName) is { } normalizedPath)
+            UnloadPlugin(normalizedPath);
     }
 
     private static void LoadPlugin(string dllPath, bool isReload)
@@ -258,7 +326,7 @@ internal static partial class PluginLoader
             RegisterPluginEventHandlers(normalizedPath, plugins);
             RegisterPluginNetMessageHandlers(normalizedPath, plugins);
             RegisterPluginEntityIOHooks(normalizedPath, plugins);
-            RegisterPluginChatCommands(normalizedPath, plugins);
+            Commands.LegacyCommands.Report(plugins);
             ConCommandManager.RegisterPlugin(normalizedPath, plugins);
             Commands.CommandRegistration.RegisterPluginCommands(normalizedPath, plugins, _chatCommandRegistry);
         }
@@ -280,10 +348,15 @@ internal static partial class PluginLoader
             _chatCommandRegistry.UnregisterPlugin(normalizedPath);
             ConCommandManager.UnregisterPlugin(normalizedPath);
             PluginRegistrationTracker.Remove(normalizedPath);
+            PermissionSystem.PermissionManifest.Remove(normalizedPath);
         }
+
+        PermissionSystem.PermissionManager.UnregisterStoresOwnedBy(entry.Plugins);
+        AdminSystem.PenaltyManager.UnregisterStoresOwnedBy(entry.Plugins);
 
         // Stop the plugin's zones before OnUnload, like its timers below.
         ZoneRegistry.RemoveOwnedBy(entry.Context);
+        CommandConverters.RemoveOwnedBy(entry.Context);
 
         foreach (var plugin in entry.Plugins)
         {
@@ -356,6 +429,8 @@ internal static partial class PluginLoader
             try
             {
                 Console.WriteLine($"[PluginLoader] Detected change: {Path.GetFileName(dllPath)}");
+                if (_builtinDir.Length > 0)
+                    UnloadPlugin(Path.GetFullPath(Path.Combine(_builtinDir, dllName + ".dll")));
                 UnloadPlugin(dllPath);
                 LoadPlugin(dllPath, isReload: true);
             }
@@ -396,6 +471,7 @@ internal static partial class PluginLoader
         var result = HookResult.Continue;
         foreach (var plugin in snapshot)
         {
+            var start = Stopwatch.GetTimestamp();
             try
             {
                 var hr = invoke(plugin);
@@ -405,8 +481,19 @@ internal static partial class PluginLoader
             {
                 Console.WriteLine($"[PluginLoader] {plugin.Name}.{methodName} threw: {ex.Message}");
             }
+            WarnIfSlow(start, $"{plugin.Name}.{methodName}");
         }
         return result;
+    }
+
+    private const double SlowHandlerWarnMs = 50;
+
+    /// <summary>Logs a slow handler. Inside a client's netchan ProcessMessages, ~200 ms gets that client dropped (6712+).</summary>
+    internal static void WarnIfSlow(long startTimestamp, string handler)
+    {
+        var elapsed = Stopwatch.GetElapsedTime(startTimestamp).TotalMilliseconds;
+        if (elapsed >= SlowHandlerWarnMs)
+            Console.WriteLine($"[PluginLoader] {handler} took {elapsed:F0} ms");
     }
 
     /// <summary>Any plugin returning false vetoes. Every plugin is still invoked; not a HookResult-style max, a plain AND.</summary>
@@ -430,6 +517,21 @@ internal static partial class PluginLoader
     }
 
     // --- Plugin lifecycle dispatchers ---
+
+    public static void DispatchClientAuthorized(ClientAuthorizedEvent args)
+        => DispatchToPlugins(p => p.OnClientAuthorized(args), nameof(IDeadworksPlugin.OnClientAuthorized));
+
+    private static void DispatchPermissionsChanged(ulong? steamId64)
+        => DispatchToPlugins(p => p.OnPermissionsChanged(steamId64), nameof(IDeadworksPlugin.OnPermissionsChanged));
+
+    private static void DispatchPenaltyAdded(Penalty penalty)
+        => DispatchToPlugins(p => p.OnPenaltyAdded(penalty), nameof(IDeadworksPlugin.OnPenaltyAdded));
+
+    private static void DispatchPenaltyRemoved(Penalty penalty)
+        => DispatchToPlugins(p => p.OnPenaltyRemoved(penalty), nameof(IDeadworksPlugin.OnPenaltyRemoved));
+
+    private static void DispatchAdminAction(AdminLogEntry entry)
+        => DispatchToPlugins(p => p.OnAdminAction(entry), nameof(IDeadworksPlugin.OnAdminAction));
 
     public static void DispatchPrecacheResources()
         => DispatchToPlugins(p => p.OnPrecacheResources(), nameof(IDeadworksPlugin.OnPrecacheResources));

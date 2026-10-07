@@ -107,11 +107,12 @@ struct alignas(16) CGameTrace {
     float hitOffset;           // 0xA8
     float fraction;            // 0xAC
     int32_t triangle;          // 0xB0
-    int16_t hitboxBoneIndex;   // 0xB4
-    RayType_t rayType;         // 0xB6
-    bool startInSolid;         // 0xB7
-    bool exactHitPoint;        // 0xB8
-    uint8_t _pad[7];           // 0xB9
+    int32_t unk_B4;            // 0xB4 - new in 6711, copied together with triangle from the hit; -1 when unset
+    int16_t hitboxBoneIndex;   // 0xB8
+    RayType_t rayType;         // 0xBA
+    bool startInSolid;         // 0xBB
+    bool exactHitPoint;        // 0xBC
+    uint8_t _pad[3];           // 0xBD
 
     CGameTrace() {
         memset(this, 0, sizeof(*this));
@@ -119,13 +120,16 @@ struct alignas(16) CGameTrace {
         *reinterpret_cast<float *>(bodyTransform + 0x0C) = 1.0f;
         fraction = 1.0f;
         triangle = -1;
+        unk_B4 = -1;
         hitboxBoneIndex = -1;
     }
 
     bool DidHit() const { return fraction < 1.0f || startInSolid; }
 };
+static_assert(sizeof(CGameTrace) == 0xC0);
 static_assert(offsetof(CGameTrace, fraction) == 0xAC);
-static_assert(offsetof(CGameTrace, startInSolid) == 0xB7);
+static_assert(offsetof(CGameTrace, hitboxBoneIndex) == 0xB8);
+static_assert(offsetof(CGameTrace, startInSolid) == 0xBB);
 
 // ---------------------------------------------------------------------------
 // Hook declarations

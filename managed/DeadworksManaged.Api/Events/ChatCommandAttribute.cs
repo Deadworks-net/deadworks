@@ -1,7 +1,7 @@
 namespace DeadworksManaged.Api;
 
 /// <summary>Marks a plugin method as a handler for a chat command. Can be applied multiple times.</summary>
-[Obsolete("Use [Command] instead.", error: false)]
+[Obsolete("Use [Command] instead. Commands with this attribute are no longer registered: they skipped permission checks.", error: true)]
 [AttributeUsage(AttributeTargets.Method, AllowMultiple = true)]
 public class ChatCommandAttribute : Attribute
 {

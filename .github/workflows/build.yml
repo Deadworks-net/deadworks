@@ -76,6 +76,16 @@ jobs:
       - name: Build managed
         run: dotnet build managed/DeadworksManaged.csproj -c Release -o managed/bin/Release/
 
+      # Plugins that ship with Deadworks. They go in managed/builtin so they update with each release,
+      # while managed/plugins stays the server owner's.
+      - name: Build built-in plugins
+        run: dotnet build managed/plugins/AdminPlugin/AdminPlugin.csproj -c Release -o managed/bin/Release/builtin/
+
+      # Runs without the game: native callbacks are unset and the tests stub what they need. The hang timeout turns a
+      # stuck test into a failure with a dump instead of a job that runs until GitHub kills it.
+      - name: Test managed
+        run: dotnet test managed/DeadworksManaged.Tests/DeadworksManaged.Tests.csproj -c Release --blame-hang-timeout 60s
+
       - name: Stage artifact
         shell: pwsh
         run: |
@@ -83,10 +93,12 @@ jobs:
           New-Item -ItemType Directory -Path "$out/game/bin/win64/managed" -Force | Out-Null
           New-Item -ItemType Directory -Path "$out/game/citadel/cfg" -Force | Out-Null
           Copy-Item "deadworks/x64/Release/deadworks.exe" "$out/game/bin/win64/"
-          $managedFiles = @("DeadworksManaged.dll", "DeadworksManaged.Api.dll", "DeadworksManaged.runtimeconfig.json", "Google.Protobuf.dll")
+          $managedFiles = @("DeadworksManaged.dll", "DeadworksManaged.Api.dll", "DeadworksManaged.Api.xml", "DeadworksManaged.runtimeconfig.json", "Google.Protobuf.dll")
           foreach ($f in $managedFiles) { Copy-Item "managed/bin/Release/$f" "$out/game/bin/win64/managed/" }
           New-Item -ItemType Directory -Path "$out/game/bin/win64/managed/plugins" -Force | Out-Null
           Set-Content -Path "$out/game/bin/win64/managed/plugins/.gitkeep" -Value ""
+          New-Item -ItemType Directory -Path "$out/game/bin/win64/managed/builtin" -Force | Out-Null
+          Copy-Item "managed/bin/Release/builtin/AdminPlugin.dll" "$out/game/bin/win64/managed/builtin/"
           Copy-Item "config/deadworks_mem.jsonc" "$out/game/citadel/cfg/"
 
       - name: Upload build artifacts

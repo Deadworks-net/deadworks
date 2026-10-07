@@ -499,9 +499,9 @@ public class DeathmatchPlugin : DeadworksPluginBase {
 				IterateEntities = true,
 				QueryShapeAttributes = new RnQueryShapeAttr_t {
 					ObjectSetMask = RnQueryObjectSet.All,
-					InteractsWith = MaskTrace.Solid,
-					InteractsExclude = MaskTrace.Empty,
-					InteractsAs = MaskTrace.Empty,
+					InteractsWith = InteractionLayer.Solid,
+					InteractsExclude = InteractionLayer.None,
+					InteractsAs = InteractionLayer.None,
 					CollisionGroup = CollisionGroup.CitadelBullet,
 					HitSolid = true,
 				}

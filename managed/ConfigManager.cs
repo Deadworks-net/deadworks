@@ -11,6 +11,7 @@ internal static class ConfigManager
 	private static readonly JsonSerializerOptions JsonOptions = new()
 	{
 		ReadCommentHandling = JsonCommentHandling.Skip,
+		AllowTrailingCommas = true,
 		WriteIndented = true,
 		PropertyNameCaseInsensitive = true
 	};
@@ -41,6 +42,7 @@ internal static class ConfigManager
 		if (prop == null)
 			return false;
 
+		LastError = null;
 		if (!LoadConfigForProperty(plugin, prop, isReload: true))
 			return false;
 
@@ -55,6 +57,12 @@ internal static class ConfigManager
 
 		return true;
 	}
+
+	/// <summary>Why the last config reload failed, or null; for replying to whoever asked for it.</summary>
+	public static string? LastError { get; private set; }
+
+	/// <summary>Whether the plugin has a config at all.</summary>
+	public static bool HasConfig(IDeadworksPlugin plugin) => FindConfigProperty(plugin) != null;
 
 	private static string GetConfigKey(IDeadworksPlugin plugin) => plugin.GetType().Name;
 
@@ -96,12 +104,19 @@ internal static class ConfigManager
 				var json = File.ReadAllText(filePath);
 				config = JsonSerializer.Deserialize(json, configType, JsonOptions)
 					?? Activator.CreateInstance(configType);
+				UnknownJsonKeys.Warn(json, configType, Path.GetFileName(filePath), "[ConfigManager] WARNING:", plugin.Name);
 			}
 			catch (Exception ex)
 			{
-				Console.WriteLine($"[ConfigManager] Failed to parse config for {plugin.Name}: {ex.Message}");
+				LastError = JsonErrors.Describe(Path.GetFileName(filePath), ex);
 				if (isReload)
+				{
+					Console.WriteLine($"[ConfigManager] Failed to reload {LastError}. {plugin.Name} keeps its previous settings.");
 					return false;
+				}
+				// Loud, because the defaults can be less strict than what the owner wrote (require_reason, say).
+				Console.WriteLine($"[ConfigManager] ERROR: failed to parse {LastError}. {plugin.Name} is using its default settings "
+				                  + $"until it's fixed and dw_reloadconfig {plugin.Name} is run.");
 				config = Activator.CreateInstance(configType);
 			}
 		}

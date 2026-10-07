@@ -154,9 +154,22 @@ internal static unsafe class NativeInterop
 	public static delegate* unmanaged[Cdecl]<int, int, void> DisconnectClient => (delegate* unmanaged[Cdecl]<int, int, void>)_cb.DisconnectClient;
 	public static delegate* unmanaged[Cdecl]<byte, void> SetMatchStartOnAnyMap => (delegate* unmanaged[Cdecl]<byte, void>)_cb.SetMatchStartOnAnyMap;
 	public static delegate* unmanaged[Cdecl]<byte> GetMatchStartOnAnyMap => (delegate* unmanaged[Cdecl]<byte>)_cb.GetMatchStartOnAnyMap;
+	public static delegate* unmanaged[Cdecl]<int, byte> IsClientAuthenticated => (delegate* unmanaged[Cdecl]<int, byte>)_cb.IsClientAuthenticated;
+	public static delegate* unmanaged[Cdecl]<int, byte*, int, void> KickClient => (delegate* unmanaged[Cdecl]<int, byte*, int, void>)_cb.KickClient;
+	public static delegate* unmanaged[Cdecl]<byte*, byte> IsMapValid => (delegate* unmanaged[Cdecl]<byte*, byte>)_cb.IsMapValid;
+	public static delegate* unmanaged[Cdecl]<byte*, void> SetConnectRejectReason => (delegate* unmanaged[Cdecl]<byte*, void>)_cb.SetConnectRejectReason;
 
 	// Entity movement and class checks
 	public static delegate* unmanaged[Cdecl]<void*, byte, void> SetMoveType => (delegate* unmanaged[Cdecl]<void*, byte, void>)_cb.SetMoveType;
 	public static delegate* unmanaged[Cdecl]<void*, float, void> SetGravityScale => (delegate* unmanaged[Cdecl]<void*, float, void>)_cb.SetGravityScale;
 	public static delegate* unmanaged[Cdecl]<void*, byte*, byte> EntityDerivesFrom => (delegate* unmanaged[Cdecl]<void*, byte*, byte>)_cb.EntityDerivesFrom;
+
+	// Collision. The byte after the collision pointer picks the mask: 0 = InteractsAs, 1 = InteractsWith, 2 = InteractsExclude.
+	public static delegate* unmanaged[Cdecl]<void*, byte, ulong, void> AddCollisionLayers => (delegate* unmanaged[Cdecl]<void*, byte, ulong, void>)_cb.AddCollisionLayers;
+	public static delegate* unmanaged[Cdecl]<void*, byte, ulong, void> RemoveCollisionLayers => (delegate* unmanaged[Cdecl]<void*, byte, ulong, void>)_cb.RemoveCollisionLayers;
+	public static delegate* unmanaged[Cdecl]<void*, byte, void> SetCollisionGroup => (delegate* unmanaged[Cdecl]<void*, byte, void>)_cb.SetCollisionGroup;
+	public static delegate* unmanaged[Cdecl]<void*, byte, void> SetSolid => (delegate* unmanaged[Cdecl]<void*, byte, void>)_cb.SetSolid;
+	public static delegate* unmanaged[Cdecl]<void*, byte, void> SetSolidFlags => (delegate* unmanaged[Cdecl]<void*, byte, void>)_cb.SetSolidFlags;
+	public static delegate* unmanaged[Cdecl]<void*, byte, void> SetCollisionEnabled => (delegate* unmanaged[Cdecl]<void*, byte, void>)_cb.SetCollisionEnabled;
+	public static delegate* unmanaged[Cdecl]<void*, void*, byte, void> SetEntityCollisionsWith => (delegate* unmanaged[Cdecl]<void*, void*, byte, void>)_cb.SetEntityCollisionsWith;
 }

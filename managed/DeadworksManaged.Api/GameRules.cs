@@ -172,5 +172,7 @@ public static unsafe class GameRules
 		Console.WriteLine("[GameRules] CCitadelGameRules entity destroyed");
 		_proxyPtr = 0;
 		_gameRulesPtr = 0;
+		// Only the map shutting down takes the game rules with it.
+		Server.OnMapShutdown();
 	}
 }

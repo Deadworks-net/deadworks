@@ -1,6 +1,7 @@
 #include "NativeHero.hpp"
 #include "NativeOffsets.hpp"
 #include "Deadworks.hpp"
+#include "Hooks/InitializeHeroOnPawn.hpp"
 
 #include <stdexcept>
 
@@ -21,7 +22,6 @@ using EmitSoundParamsFn = void(__fastcall *)(void *entity, const char *soundName
 using PawnResetHeroFn = __int64(__fastcall *)(void *pawn, bool bReset);
 using PawnForceRespawnFn = void(__fastcall *)(void *pawn, uint8_t bReleaseButtons);
 using AddResourceFn = void (*)(const char *path, void *manifest);
-using GetHeroTableFn = void *(__fastcall *)();
 using HeroPrecacheFn = void(__fastcall *)(void *globalSet, const char *heroName, void *resourceCtx);
 using GetHeroDataManagerFn = void *(*)();
 using HeroNameToIdFn = int *(*)(void *manager, int *outId, const char *heroName);
@@ -74,7 +74,6 @@ static EmitSoundParamsFn g_pEmitSoundParams = nullptr;
 static PawnResetHeroFn g_pPawnResetHero = nullptr;
 static PawnForceRespawnFn g_pPawnForceRespawn = nullptr;
 static AddResourceFn g_pAddResource = nullptr;
-static GetHeroTableFn g_pGetHeroTable = nullptr;
 static HeroPrecacheFn g_pHeroPrecache = nullptr;
 static void *g_pHeroPrecacheGlobal = nullptr;
 
@@ -91,30 +90,13 @@ static void __cdecl NativeEmitSound(void *entity, const char *soundName, int32_t
     g_pEmitSoundParams(entity, soundName, pitch, volume, delay);
 }
 
-// CCitadelPlayerPawn::ResetHero tail-calls InitializeHeroOnPawn, which resolves the pawn's
-// controller from m_hController and hands it to two controller-side helpers without ever
-// null-checking it - on server.dll 6683 the first of those reads [controller+0x984]. A pawn
-// whose back-reference to its controller is stale (mid hero swap, team change or teardown)
-// therefore takes the whole server down with an access violation, so refuse the call instead.
-// GetHeroPawn() walking controller -> pawn does not imply the pawn points back.
-static bool PawnHasLiveController(void *pawn) {
-    static const int kPawn_hController = schema::GetOffset(
-                                             "CBasePlayerPawn", hash_32_fnv1a_const("CBasePlayerPawn"),
-                                             "m_hController", hash_32_fnv1a_const("m_hController"))
-                                             .Offset;
-    // Schema lookup failed - leave the call alone rather than silently turning it into a no-op.
-    if (kPawn_hController <= 0)
-        return true;
-
-    CEntityHandle handle(*reinterpret_cast<const uint32_t *>(
-        reinterpret_cast<uintptr_t>(pawn) + kPawn_hController));
-    return handle.IsValid() && handle.Get() != nullptr;
-}
-
+// CCitadelPlayerPawn::ResetHero tail-calls InitializeHeroOnPawn, which crashes on a pawn with a
+// stale m_hController (see Hook_InitializeHeroOnPawn). The hook would skip that part, but refuse
+// the whole reset up front rather than run ResetHero's own work on a pawn that is being torn down.
 static void __cdecl NativeResetHero(void *pawn, uint8_t bReset) {
     if (!pawn || !g_pPawnResetHero)
         return;
-    if (!PawnHasLiveController(pawn)) {
+    if (!hooks::PawnHasLiveController(pawn)) {
         g_Log->Warning("ResetHero skipped: pawn {:p} has no live controller (m_hController is stale)",
                        pawn);
         return;
@@ -155,7 +137,7 @@ static void __cdecl NativeChangeTeam(void *controller, int32_t teamNum, uint8_t 
     if (!controller)
         return;
 
-    auto changeTeamFn = GetVFunc<void (*)(void *, int)>(controller, kVtblChangeTeam);
+    auto changeTeamFn = GetVFunc<void (*)(void *, int)>(controller, MemoryDataLoader::Get().GetVirtual("CBaseEntity::ChangeTeam").value());
 
     if (!bKeepHero) {
         changeTeamFn(controller, teamNum);
@@ -209,7 +191,7 @@ static void __cdecl NativePrecacheHero(const char *heroName) {
 static void __cdecl NativeTeleport(void *entity, const float *position, const float *angles, const float *velocity) {
     if (!entity)
         return;
-    auto fn = GetVFunc<TeleportFn>(entity, kVtblTeleport);
+    auto fn = GetVFunc<TeleportFn>(entity, MemoryDataLoader::Get().GetVirtual("CBaseEntity::Teleport").value());
     fn(static_cast<CBaseEntity *>(entity),
        position ? reinterpret_cast<const Vector *>(position) : nullptr,
        angles ? reinterpret_cast<const QAngle *>(angles) : nullptr,
@@ -248,15 +230,13 @@ void deadworks::ResolveHeroStatics() {
 
 void deadworks::ResolveHeroPrecacheFns() {
     auto addr = MemoryDataLoader::Get().GetOffset("CCitadelGameRules::BuildGameSessionManifest").value();
-    g_pGetHeroTable = reinterpret_cast<GetHeroTableFn>(ResolveE8Call(addr + kBGSM_GetHeroTableCall));
     g_pHeroPrecacheGlobal = reinterpret_cast<void *>(ResolveLea(addr + kBGSM_PrecacheGlobalLea));
     g_pHeroPrecache = reinterpret_cast<HeroPrecacheFn>(ResolveE8Call(addr + kBGSM_PrecacheCall));
-    g_Log->Info("HeroPrecache: table={} precache={} global={}",
-                (void *)g_pGetHeroTable, (void *)g_pHeroPrecache, g_pHeroPrecacheGlobal);
+    g_Log->Info("HeroPrecache: precache={} global={}", (void *)g_pHeroPrecache, g_pHeroPrecacheGlobal);
 }
 
 bool deadworks::IsHeroPrecacheResolved() {
-    return g_pGetHeroTable != nullptr;
+    return g_pHeroPrecache != nullptr && g_pHeroPrecacheGlobal != nullptr;
 }
 
 // ---------------------------------------------------------------------------

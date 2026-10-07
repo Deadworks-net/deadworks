@@ -28,6 +28,7 @@
 #include "Hooks/CheckTransmit.hpp"
 #include "Hooks/InitializeHeroOnPawn.hpp"
 #include "Hooks/FireModifierEvent.hpp"
+#include "Hooks/ReplayComplete.hpp"
 #include "A2SPatch.hpp"
 
 #include "../Memory/MemoryDataLoader.hpp"
@@ -191,6 +192,9 @@ void Deadworks::PostInit() {
     HookInline(hooks::g_CCitadelPlayerPawn_ModifyCurrency,
                "CCitadelPlayerPawn::ModifyCurrency",
                &hooks::Hook_CCitadelPlayerPawn_ModifyCurrency);
+    HookInline(hooks::g_CCitadelPlayerPawn_SelectHeroInternal,
+               "CCitadelPlayerPawn::SelectHeroInternal",
+               &hooks::Hook_CCitadelPlayerPawn_SelectHeroInternal);
     HookInline(hooks::g_CCitadelPlayerController_ClientConCommand,
                "CCitadelPlayerController::ClientConCommand",
                &hooks::Hook_CCitadelPlayerController_ClientConCommand);
@@ -253,6 +257,13 @@ void Deadworks::PostInit() {
     HookInline(hooks::g_TraceShape,
                "TraceShape",
                &hooks::Hook_TraceShape);
+    {
+        // The signature is a call to it; the target is its rel32.
+        auto call = MemoryDataLoader::Get().GetOffset("CCitadelGameRules::IsReplayComplete").value();
+        auto target = call + 5 + *reinterpret_cast<int32_t *>(call + 1);
+        hooks::g_IsReplayComplete = safetyhook::create_inline(target, &hooks::Hook_IsReplayComplete);
+        g_Log->Info("Hooked CCitadelGameRules::IsReplayComplete");
+    }
 
     // Touch hooks (StartTouch / EndTouch) are initialized lazily in OnEntityCreated
     // because we need an entity vtable to resolve the virtual function addresses.
@@ -353,7 +364,7 @@ bool Deadworks::OnPre_CBaseEntity_TakeDamageOld(CBaseEntity *entity, CTakeDamage
 }
 
 bool Deadworks::OnPre_CCitadelPlayerPawn_ModifyCurrency(void *pawn, ECurrencyType nCurrencyType, int32_t nAmount,
-                                                        ECurrencySource nSource, bool bSilent, bool bForceGain, bool bSpendOnly,
+                                                        ECurrencySource nSource, int32_t bSilent, int32_t bForceGain, int32_t bSpendOnly,
                                                         void *pSourceAbility, void *pSourceEntity) {
     if (m_managed.onModifyCurrency)
         return m_managed.onModifyCurrency(pawn, static_cast<uint32_t>(nCurrencyType), nAmount,
@@ -413,7 +424,7 @@ bool Deadworks::OnPre_PostEventAbstract(int msgId, const CNetMessage *pData, uin
     return result >= 1;
 }
 
-static constexpr ptrdiff_t kServerAddonsOffset = 0x158;
+static constexpr ptrdiff_t kServerAddonsOffset = 0x178;
 
 void Deadworks::OnPre_ReplyConnection(void *server, CServerSideClientBase *client) {
     if (m_desiredServerAddons.empty())
@@ -544,14 +555,19 @@ bool Deadworks::On_ISource2GameClients_ClientConnect(CPlayerSlot slot, const cha
         std::wstring wip(ipLen - 1, L'\0');
         MultiByteToWideChar(CP_UTF8, 0, ip.c_str(), -1, wip.data(), ipLen);
 
+        TakeConnectRejectReason(); // drop anything left over from an earlier call
         uint8_t allowed = m_managed.onClientConnect(
             slot.Get(),
             reinterpret_cast<const char16_t *>(wname.c_str()),
             xuid,
             reinterpret_cast<const char16_t *>(wip.c_str()));
 
-        if (!allowed)
+        if (!allowed) {
+            std::string reason = TakeConnectRejectReason();
+            if (!reason.empty() && pRejectReason)
+                pRejectReason->Set(reason.c_str());
             return false;
+        }
     }
 
     return true;

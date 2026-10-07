@@ -15,10 +15,10 @@ public unsafe class CCitadelBaseAbility : CBaseEntity {
 	private static readonly SchemaAccessor<int> _remainingCharges = new(Class, "m_iRemainingCharges"u8);
 	private static readonly SchemaAccessor<byte> _vecImbuedAbilities = new(Class, "m_vecImbuedAbilities"u8);
 
-	private static int UpgradeBitsOffset => _abilitySlot.Offset - 0x20;
+	private static readonly SchemaAccessor<byte> _upgradeInfo = new(Class, "m_nUpgradeInfo"u8);
 
 	public int UpgradeBits {
-		get => *(short*)((byte*)Handle + UpgradeBitsOffset + 2);
+		get => *(ushort*)((byte*)Handle + _upgradeInfo.Offset + 2);
 		set => NativeInterop.SetUpgradeBits((void*)Handle, value);
 	}
 	public EAbilitySlot AbilitySlot => (EAbilitySlot)_abilitySlot.Get(Handle);

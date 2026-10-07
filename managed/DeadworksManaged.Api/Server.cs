@@ -8,6 +8,54 @@ public static unsafe class Server {
 	/// <summary>The current map name, set when the server starts up.</summary>
 	public static string MapName { get; internal set; } = "";
 
+	/// <summary>
+	/// True while the map is changing, until the next map's <see cref="IDeadworksPlugin.OnStartupServer"/>. It turns on
+	/// at <see cref="ChangeLevel"/>, or for a change started elsewhere, such as <c>changelevel</c> in the server console,
+	/// once the current map starts shutting down, which is before every player gets a disconnect event with
+	/// <see cref="ClientDisconnectedEvent.IsMapChange"/>. Anything done to players, pawns or panels meanwhile is lost with
+	/// the old map. If the change fails, such as for a map that doesn't exist, it turns off again after a few seconds.
+	/// </summary>
+	public static bool IsChangingLevel { get; private set; }
+
+	// When ChangeLevel was called, in Environment.TickCount64 ms; 0 once the map has started shutting down.
+	private static long _changeLevelRequestedAt;
+
+	// A changelevel that works shuts the current map down within a frame or two; one that fails never does.
+	private const long ChangeLevelTimeoutMs = 5000;
+
+	/// <summary>
+	/// Change to <paramref name="map"/>. Everyone connected stays connected and reloads into it; see
+	/// <see cref="ClientConnectEvent.IsMapChangeReconnect"/>. <see cref="IsChangingLevel"/> is true from this call.
+	/// </summary>
+	/// <param name="map">A map name, such as <c>dl_midtown</c>.</param>
+	/// <exception cref="ArgumentException"><paramref name="map"/> is empty or isn't a plain map name.</exception>
+	public static void ChangeLevel(string map) {
+		if (string.IsNullOrWhiteSpace(map) || map.Any(c => char.IsWhiteSpace(c) || c is ';' or '"'))
+			throw new ArgumentException($"'{map}' isn't a map name", nameof(map));
+		IsChangingLevel = true;
+		_changeLevelRequestedAt = Environment.TickCount64;
+		ExecuteCommand($"changelevel {map}");
+	}
+
+	internal static void OnMapStart(string mapName) {
+		MapName = mapName;
+		IsChangingLevel = false;
+		_changeLevelRequestedAt = 0;
+	}
+
+	internal static void OnMapShutdown() {
+		IsChangingLevel = true;
+		_changeLevelRequestedAt = 0;
+	}
+
+	internal static void OnGameFrame() {
+		if (_changeLevelRequestedAt == 0 || Environment.TickCount64 - _changeLevelRequestedAt < ChangeLevelTimeoutMs)
+			return;
+		Console.WriteLine($"[Server] changelevel didn't start within {ChangeLevelTimeoutMs} ms; staying on {MapName}");
+		IsChangingLevel = false;
+		_changeLevelRequestedAt = 0;
+	}
+
 	/// <summary>Sends a console command to the client in the given slot.</summary>
 	public static void ClientCommand(int slot, string command) {
 		Span<byte> utf8 = Utf8.Encode(command, stackalloc byte[Utf8.Size(command)]);
@@ -135,6 +183,99 @@ public static unsafe class Server {
 	/// </summary>
 	public static void Kick(int slot, ENetworkDisconnectionReason reason = ENetworkDisconnectionReason.NetworkDisconnectKicked)
 		=> NativeInterop.DisconnectClient(slot, (int)reason);
+
+	/// <summary>
+	/// Disconnects the player in <paramref name="slot"/> with a message. The message is printed to their chat and
+	/// console first, then passed to the engine as the disconnect reason.
+	/// </summary>
+	public static void Kick(int slot, string message, ENetworkDisconnectionReason reason = ENetworkDisconnectionReason.NetworkDisconnectKicked) {
+		if (string.IsNullOrWhiteSpace(message)) {
+			Kick(slot, reason);
+			return;
+		}
+
+		// The chat and console copies are what a player is sure to see before the client drops.
+		Chat.PrintToChat(slot, message);
+		Players.FromSlot(slot)?.PrintToConsole(message);
+
+		if (NativeInterop.KickClient == null) {
+			Kick(slot, reason);
+			return;
+		}
+		Span<byte> utf8 = Utf8.Encode(message, stackalloc byte[Utf8.Size(message)]);
+		fixed (byte* ptr = utf8) {
+			NativeInterop.KickClient(slot, ptr, (int)reason);
+		}
+	}
+
+	/// <summary>Where the game keeps its maps: <c>game/citadel/maps</c>, found relative to the managed folder.</summary>
+	private static string MapsDir => Path.GetFullPath(Path.Combine(
+		Path.GetDirectoryName(typeof(Server).Assembly.Location) ?? ".", "..", "..", "..", "citadel", "maps"));
+
+	/// <summary>Extra map names from <c>serverbrowser.extra_maps</c> in <c>deadworks.jsonc</c>. Set by the host.</summary>
+	internal static Func<IEnumerable<string>>? ExtraMaps;
+
+	/// <summary>
+	/// Maps the server can change to: the game's own <c>.vpk</c> maps plus <c>extra_maps</c> from <c>deadworks.jsonc</c>,
+	/// sorted by name.
+	/// </summary>
+	public static IReadOnlyList<string> GetMapList() {
+		var maps = new SortedSet<string>(StringComparer.OrdinalIgnoreCase);
+		try {
+			if (Directory.Exists(MapsDir))
+				foreach (var file in Directory.GetFiles(MapsDir, "*.vpk"))
+					maps.Add(Path.GetFileNameWithoutExtension(file));
+		} catch (IOException) { } catch (UnauthorizedAccessException) { }
+
+		foreach (var map in ExtraMaps?.Invoke() ?? [])
+			if (IsMapNameWellFormed(map))
+				maps.Add(map);
+		return [.. maps];
+	}
+
+	/// <summary>
+	/// Whether <paramref name="map"/> can be loaded: the engine knows it, or it's in <see cref="GetMapList"/>.
+	/// Names with spaces, quotes, <c>;</c> or path tricks are always rejected, so a valid name is safe to put in a command.
+	/// </summary>
+	public static bool IsMapValid(string map) {
+		if (!IsMapNameWellFormed(map))
+			return false;
+		if (NativeInterop.IsMapValid != null) {
+			Span<byte> utf8 = Utf8.Encode(map, stackalloc byte[Utf8.Size(map)]);
+			fixed (byte* ptr = utf8) {
+				if (NativeInterop.IsMapValid(ptr) != 0)
+					return true;
+			}
+		}
+		return GetMapList().Contains(map, StringComparer.OrdinalIgnoreCase);
+	}
+
+	internal static bool IsMapNameWellFormed(string map)
+		=> map.Length is > 0 and <= 128
+			&& !map.Contains("..", StringComparison.Ordinal)
+			&& map.All(c => char.IsAsciiLetterOrDigit(c) || c is '_' or '-' or '.' or '/');
+
+	/// <summary>Changes to <paramref name="map"/> if <see cref="IsMapValid"/> accepts it. Returns false otherwise.</summary>
+	public static bool ChangeMap(string map) {
+		if (!IsMapValid(map))
+			return false;
+		ChangeLevel(map); // so IsChangingLevel is set, as for any other change
+		return true;
+	}
+
+	/// <summary>Set by the host; runs a command and collects what it prints.</summary>
+	internal static Action<string, Action<string>>? ExecuteWithOutput;
+
+	/// <summary>
+	/// Runs a server console command and passes what it printed to <paramref name="onOutput"/>. Commands run on the
+	/// next frame, so the callback always comes later. Setting a cvar prints nothing, so the output is empty.
+	/// </summary>
+	public static void ExecuteCommand(string command, Action<string> onOutput) {
+		ArgumentNullException.ThrowIfNull(onOutput);
+		if (ExecuteWithOutput == null)
+			throw new InvalidOperationException("Command output capture is not initialized.");
+		ExecuteWithOutput(command, onOutput);
+	}
 
 	/// <summary>Returns true if the given parameter is present on the engine command line (e.g. "-nomaster").</summary>
 	public static bool HasCommandLineParm(string parm) {

@@ -146,4 +146,15 @@ internal struct NativeCallbacks
 	public nint DisconnectClient;
 	public nint SetMatchStartOnAnyMap;
 	public nint GetMatchStartOnAnyMap;
+	public nint AddCollisionLayers;
+	public nint RemoveCollisionLayers;
+	public nint SetCollisionGroup;
+	public nint SetSolid;
+	public nint SetSolidFlags;
+	public nint SetCollisionEnabled;
+	public nint SetEntityCollisionsWith;
+	public nint IsClientAuthenticated;
+	public nint KickClient;
+	public nint IsMapValid;
+	public nint SetConnectRejectReason;
 }

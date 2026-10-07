@@ -1,6 +1,7 @@
 #include "NativeCallbacks.hpp"
 #include "NativeOffsets.hpp"
 #include "NativeAbility.hpp"
+#include "NativeCollision.hpp"
 #include "NativeDamage.hpp"
 #include "NativeHero.hpp"
 #include "Deadworks.hpp"
@@ -93,7 +94,7 @@ public:
 
 // --- Entity manipulation types ---
 
-using AcceptInputFn = bool(__thiscall *)(void *thisptr, const char *pInputName, CEntityInstance *pActivator, CEntityInstance *pCaller, variant_t *pValue, int nOutputID, void *);
+using AcceptInputFn = bool(__thiscall *)(void *thisptr, const char *pInputName, CEntityInstance *pActivator, CEntityInstance *pCaller, variant_t *pValue);
 
 // ---------------------------------------------------------------------------
 // Native callback implementations - Core / Entity / Schema / ConVar / Events
@@ -134,7 +135,8 @@ static void __cdecl NativeModifyCurrency(void *pPawnThis, uint32_t nCurrencyType
     hooks::g_CCitadelPlayerPawn_ModifyCurrency.thiscall<void>(
         pPawnThis, static_cast<ECurrencyType>(nCurrencyType), nAmount,
         static_cast<ECurrencySource>(nSource),
-        bSilent != 0, bForceGain != 0, bSpendOnly != 0,
+        // Full dwords, not bools: see Hook_CCitadelPlayerPawn_ModifyCurrency.
+        int32_t{bSilent != 0}, int32_t{bForceGain != 0}, int32_t{bSpendOnly != 0},
         pSourceAbility, pSourceEntity);
 }
 
@@ -450,6 +452,36 @@ static void __cdecl NativeDisconnectClient(int32_t slot, int32_t reason) {
     g_pEngineServer->DisconnectClient(CPlayerSlot(slot), static_cast<ENetworkDisconnectionReason>(reason));
 }
 
+static uint8_t __cdecl NativeIsClientAuthenticated(int32_t slot) {
+    if (!g_pEngineServer || slot < 0)
+        return 0;
+    return g_pEngineServer->IsClientFullyAuthenticated(CPlayerSlot(slot)) ? 1 : 0;
+}
+
+static void __cdecl NativeKickClient(int32_t slot, const char *reason, int32_t code) {
+    if (!g_pEngineServer || slot < 0)
+        return;
+    g_pEngineServer->KickClient(CPlayerSlot(slot), reason ? reason : "", static_cast<ENetworkDisconnectionReason>(code));
+}
+
+static uint8_t __cdecl NativeIsMapValid(const char *map) {
+    if (!g_pEngineServer || !map || !map[0])
+        return 0;
+    return g_pEngineServer->IsMapValid(map) != 0 ? 1 : 0;
+}
+
+static std::string g_connectRejectReason;
+
+static void __cdecl NativeSetConnectRejectReason(const char *reason) {
+    g_connectRejectReason = reason ? reason : "";
+}
+
+std::string deadworks::TakeConnectRejectReason() {
+    std::string reason = std::move(g_connectRejectReason);
+    g_connectRejectReason.clear();
+    return reason;
+}
+
 // --- Engine log forwarding to managed code ---
 static void(__cdecl *g_ManagedLogCallback)(const char *message) = nullptr;
 
@@ -673,7 +705,7 @@ static void __cdecl NativeAcceptInput(void *entity, const char *inputName, void 
     fn(entity, inputName,
        static_cast<CEntityInstance *>(activator),
        static_cast<CEntityInstance *>(caller),
-       &val, 0, nullptr);
+       &val);
 }
 
 static void __cdecl NativeSetSchemaString(void *entity, const char *className, const char *fieldName, const char *value) {
@@ -798,7 +830,8 @@ static void __cdecl NativeSendNetMessage(int msgId, const uint8_t *protoBytes, i
         g_pGameEventSystem->PostEventAbstract(-1, false, &filter, serializer, msg, 0);
     }
 
-    g_pNetworkMessages->DeallocateNetMessageAbstract(serializer, msg);
+    // The game allocated it, so its deleting destructor frees it with the game's allocator.
+    delete msg;
 }
 
 static const char *__cdecl NativeGetNetMessageName(int msgId) {
@@ -822,9 +855,20 @@ static void ConCommandDispatchCallback(const CCommandContext &context, const CCo
         return;
 
     int playerSlot = context.GetPlayerSlot().Get();
-    int argc = args.ArgC();
-    const char *command = argc > 0 ? args[0] : "";
-    const char **argv = args.ArgV();
+
+    // The engine splits on its break characters ({}()':) as well as spaces, so "STEAM_0:1:11101" arrived as five
+    // arguments and "it's" as three. Re-split the raw line on whitespace and quotes only, the way chat commands are.
+    static characterset_t s_noBreaks = [] {
+        characterset_t set;
+        CharacterSetBuild(&set, "");
+        return set;
+    }();
+    CCommand retokenized;
+    const CCommand &source = retokenized.Tokenize(args.GetCommandString(), &s_noBreaks) ? retokenized : args;
+
+    int argc = source.ArgC();
+    const char *command = argc > 0 ? source[0] : "";
+    const char **argv = source.ArgV();
 
     g_ManagedConCommandDispatch(playerSlot, command, argc, argv);
 }
@@ -992,19 +1036,19 @@ static void __cdecl NativeSetWaitingForPlayersRoster(uint32_t readyCount, uint32
 static int32_t __cdecl NativeGetMaxHealth(void *entity) {
     if (!entity)
         return 0;
-    return GetVFunc<int(__thiscall *)(void *)>(entity, offsets::kVtblGetMaxHealth)(entity);
+    return GetVFunc<int(__thiscall *)(void *)>(entity, MemoryDataLoader::Get().GetVirtual("CBaseEntity::GetMaxHealth").value())(entity);
 }
 
 static int32_t __cdecl NativeHeal(void *entity, float amount) {
     if (!entity)
         return 0;
-    return GetVFunc<int(__thiscall *)(void *, float)>(entity, offsets::kVtblHeal)(entity, amount);
+    return GetVFunc<int(__thiscall *)(void *, float)>(entity, MemoryDataLoader::Get().GetVirtual("CBaseEntity::Heal").value())(entity, amount);
 }
 
 static void __cdecl NativeSetScale(void *entity, float scale) {
     if (!entity)
         return;
-    GetVFunc<void(__thiscall *)(void *, float)>(entity, offsets::kVtblSetScale)(entity, scale);
+    GetVFunc<void(__thiscall *)(void *, float)>(entity, MemoryDataLoader::Get().GetVirtual("CBaseModelEntity::SetScale").value())(entity, scale);
 }
 
 // ---------------------------------------------------------------------------
@@ -1146,6 +1190,7 @@ static uint32_t __cdecl NativeTakeSoundEventGuid() {
 // ---------------------------------------------------------------------------
 
 void deadworks::ResolveNativeStatics() {
+    ResolveCollisionStatics();
     ResolveDamageStatics();
     ResolveHeroStatics();
     ResolveSubclassStatics();
@@ -1253,6 +1298,7 @@ void deadworks::PopulateNativeCallbacks(NativeCallbacks &callbacks) {
 
     // Subsystems
     PopulateAbilityNatives(callbacks);
+    PopulateCollisionNatives(callbacks);
     PopulateDamageNatives(callbacks);
     PopulateHeroNatives(callbacks);
 
@@ -1291,6 +1337,10 @@ void deadworks::PopulateNativeCallbacks(NativeCallbacks &callbacks) {
     callbacks.DisconnectClient = &NativeDisconnectClient;
     callbacks.SetMatchStartOnAnyMap = &NativeSetMatchStartOnAnyMap;
     callbacks.GetMatchStartOnAnyMap = &NativeGetMatchStartOnAnyMap;
+    callbacks.IsClientAuthenticated = &NativeIsClientAuthenticated;
+    callbacks.KickClient = &NativeKickClient;
+    callbacks.IsMapValid = &NativeIsMapValid;
+    callbacks.SetConnectRejectReason = &NativeSetConnectRejectReason;
 
     // Command line
     callbacks.HasCommandLineParm = &NativeHasCommandLineParm;

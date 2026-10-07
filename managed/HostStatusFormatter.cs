@@ -4,16 +4,27 @@ using System.Text.Json;
 
 namespace DeadworksManaged;
 
-internal sealed record HostStatusPlayer(int Slot, ulong SteamId64, string Name, int Team, string? Hero, bool Bot, long? ConnectedSeconds);
+/// <summary>A connected player. <paramref name="Roles"/> are the roles assigned to them that apply right now; none for a bot.</summary>
+internal sealed record HostStatusPlayer(
+    int Slot, ulong SteamId64, string Name, int Team, string? Hero, bool Bot, long? ConnectedSeconds, IReadOnlyList<string> Roles);
 
-/// <summary>A plugin DLL by file name. <paramref name="Instances"/> is the number of IDeadworksPlugin types it produced, null when not loaded.</summary>
-internal sealed record HostStatusPlugin(string Name, bool Enabled, bool Loaded, bool OnDisk, int? Instances);
+/// <summary>
+/// A plugin DLL by file name. <paramref name="Builtin"/> is whether it's the one that ships with Deadworks.
+/// <paramref name="Instances"/> is the number of IDeadworksPlugin types it produced, null when not loaded.
+/// </summary>
+internal sealed record HostStatusPlugin(string Name, bool Enabled, bool Loaded, bool OnDisk, bool Builtin, int? Instances);
 
+/// <summary>
+/// <paramref name="Roles"/> are the names of the roles the server defines. <paramref name="Moderation"/> is whether
+/// <c>dw_kick</c> and <c>dw_ban</c> exist.
+/// </summary>
 internal sealed record HostStatusSnapshot(
     string Map,
     long UptimeSeconds,
     int? MaxPlayers,
     string Version,
+    IReadOnlyList<string> Roles,
+    bool Moderation,
     IReadOnlyList<HostStatusPlayer> Players,
     IReadOnlyList<HostStatusPlugin> Plugins);
 
@@ -36,7 +47,8 @@ internal static class HostStatusFormatter
     /// <summary>
     /// Formats the players in slot <paramref name="fromSlot"/> and up. When they don't all fit in
     /// <paramref name="maxLineBytes"/>, the line holds as many as do and <c>next</c> names the slot to ask for next.
-    /// At least one player is always included so paging makes progress.
+    /// At least one player is always included so paging makes progress. Everything else is repeated on every line
+    /// and counts towards its length.
     /// </summary>
     public static string Format(HostStatusSnapshot status, int fromSlot = 0, int maxLineBytes = DefaultMaxLineBytes)
     {
@@ -72,6 +84,8 @@ internal static class HostStatusFormatter
                 w.WriteNull("maxPlayers");
             w.WriteString("deadworks", status.Version);
             w.WriteNumber("playerCount", status.Players.Count);
+            WriteStrings(w, "roles", status.Roles);
+            w.WriteBoolean("moderation", status.Moderation);
 
             w.WriteStartArray("players");
             foreach (var player in players)
@@ -89,6 +103,7 @@ internal static class HostStatusFormatter
                 w.WriteBoolean("enabled", plugin.Enabled);
                 w.WriteBoolean("loaded", plugin.Loaded);
                 w.WriteBoolean("onDisk", plugin.OnDisk);
+                w.WriteBoolean("builtin", plugin.Builtin);
                 if (plugin.Instances is { } instances)
                     w.WriteNumber("instances", instances);
                 w.WriteEndObject();
@@ -121,7 +136,16 @@ internal static class HostStatusFormatter
             w.WriteNumber("connected", connected);
         else
             w.WriteNull("connected");
+        WriteStrings(w, "roles", player.Roles);
         w.WriteEndObject();
+    }
+
+    private static void WriteStrings(Utf8JsonWriter w, string name, IReadOnlyList<string> values)
+    {
+        w.WriteStartArray(name);
+        foreach (var value in values)
+            w.WriteStringValue(value);
+        w.WriteEndArray();
     }
 
     private static string Serialize(Action<Utf8JsonWriter> write)
