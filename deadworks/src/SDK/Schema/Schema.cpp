@@ -93,8 +93,22 @@ int16_t FindChainOffset(const char *className, uint32_t classNameHash) {
     return GetOffset(className, classNameHash, "__m_pChainEntity", g_ChainKey).Offset;
 }
 
-SchemaKey GetOffset(const char *className, uint32_t classKey, const char *memberName, uint32_t memberKey) {
+static SchemaTableMap_t &TableMap() {
     static SchemaTableMap_t schemaTableMap;
+    return schemaTableMap;
+}
+
+bool HasField(const char *className, uint32_t classKey, uint32_t memberKey) {
+    auto &schemaTableMap = TableMap();
+
+    if (!schemaTableMap.contains(classKey) && !InitSchemaFieldsForClass(schemaTableMap, className, classKey))
+        return false;
+
+    return schemaTableMap[classKey].contains(memberKey);
+}
+
+SchemaKey GetOffset(const char *className, uint32_t classKey, const char *memberName, uint32_t memberKey) {
+    auto &schemaTableMap = TableMap();
 
     if (!schemaTableMap.contains(classKey)) {
         if (InitSchemaFieldsForClass(schemaTableMap, className, classKey))

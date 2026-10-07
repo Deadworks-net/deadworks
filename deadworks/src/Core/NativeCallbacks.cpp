@@ -227,7 +227,11 @@ static void __cdecl NativeGetSchemaField(const char *className, const char *fiel
     result->offset = key.Offset;
     result->chainOffset = schema::FindChainOffset(className, classHash);
     result->networked = key.Networked ? 1 : 0;
-    result->_pad = 0;
+    result->found = schema::HasField(className, classHash, memberHash) ? 1 : 2;
+}
+
+static int32_t __cdecl NativeGetSchemaClassSize(const char *className) {
+    return className ? schema::GetClassSize(className) : 0;
 }
 
 static uint64_t __cdecl NativeFindConVar(const char *name) {
@@ -1219,6 +1223,7 @@ void deadworks::PopulateNativeCallbacks(NativeCallbacks &callbacks) {
     callbacks.GetSchemaField = &NativeGetSchemaField;
     callbacks.NotifyStateChanged = &NativeNotifyStateChanged;
     callbacks.SetSchemaString = &NativeSetSchemaString;
+    callbacks.GetSchemaClassSize = &NativeGetSchemaClassSize;
 
     // ConVar
     callbacks.FindConVar = &NativeFindConVar;

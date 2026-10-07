@@ -15,6 +15,8 @@ struct SchemaKey {
 namespace schema {
 int16_t FindChainOffset(const char *className, uint32_t classNameHash);
 SchemaKey GetOffset(const char *className, uint32_t classKey, const char *memberName, uint32_t memberKey);
+// True if the class is in the server's schema and declares the member itself.
+bool HasField(const char *className, uint32_t classKey, uint32_t memberKey);
 int GetClassSize(const char *className);
 // True when className is baseClassName or inherits from it anywhere in its schema base-class tree.
 bool IsDerivedFrom(const char *className, const char *baseClassName);
