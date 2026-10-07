@@ -120,10 +120,34 @@ internal static class ContentAddonManager
         if (!_mounted.Add(addon))
             return;
 
-        var vpkPath = $"deadworks_mods/vpks/{addon}.vpk";
+        var vpkPath = ResolveVpkPath(addon);
         if (Server.AddSearchPath(vpkPath))
             Console.WriteLine($"[ContentAddons] Mounted: {vpkPath}");
         else
             Console.WriteLine($"[ContentAddons] Failed to mount: {vpkPath}");
     }
+
+    /// <summary>
+    /// Addons live in <c>game/citadel/deadworks_mods/vpks</c>. The engine resolves a relative search path
+    /// against its working directory, which is <c>game/bin/win64</c>, so the path is made absolute here.
+    /// Servers set up before this was fixed have their VPKs under <c>game/bin/win64/deadworks_mods/vpks</c>;
+    /// those still load, with a note to move them.
+    /// </summary>
+    private static string ResolveVpkPath(string addon)
+    {
+        var exeDir = Path.GetDirectoryName(Environment.ProcessPath) ?? Directory.GetCurrentDirectory();
+        var dir = Path.GetFullPath(Path.Combine(exeDir, "..", "..", "citadel", "deadworks_mods", "vpks"));
+        var legacyDir = Path.Combine(exeDir, "deadworks_mods", "vpks");
+
+        if (!VpkExists(dir, addon) && VpkExists(legacyDir, addon))
+        {
+            Console.WriteLine($"[ContentAddons] {addon}.vpk is in {legacyDir}; move it to {dir}.");
+            return Path.Combine(legacyDir, addon + ".vpk");
+        }
+        return Path.Combine(dir, addon + ".vpk");
+    }
+
+    // A multi-part addon has no <name>.vpk, only <name>_dir.vpk and its numbered parts.
+    private static bool VpkExists(string dir, string addon)
+        => File.Exists(Path.Combine(dir, addon + ".vpk")) || File.Exists(Path.Combine(dir, addon + "_dir.vpk"));
 }

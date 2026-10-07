@@ -20,12 +20,16 @@ mod netcfg;
 mod plugins;
 mod process;
 mod pty;
+// The console transport for servers under Wine; unused on Windows.
+#[cfg_attr(windows, allow(dead_code))]
+mod rcon;
 mod release;
 mod steamcmd;
 mod store;
 mod task;
 mod tree;
 mod types;
+mod wine;
 
 use types::*;
 
@@ -158,6 +162,25 @@ pub async fn hosting_send_command(id: String, command: String) -> Result<(), Str
 #[tauri::command]
 pub async fn hosting_kick(id: String, slot: i32) -> Result<(), String> {
     blocking(move || manager::get().kick(&id, slot)).await
+}
+
+#[tauri::command]
+pub async fn hosting_ban(id: String, steam_id64: String, minutes: u32, reason: String) -> Result<(), String> {
+    blocking(move || manager::get().ban(&id, &steam_id64, minutes, &reason)).await
+}
+
+#[tauri::command]
+pub async fn hosting_permissions(id: String) -> Result<PermissionsSnapshot, String> {
+    blocking(move || manager::get().permissions(&id)).await
+}
+
+#[tauri::command]
+pub async fn hosting_write_permissions(
+    id: String,
+    expected: std::collections::BTreeMap<String, Option<String>>,
+    files: std::collections::BTreeMap<String, String>,
+) -> Result<PermissionsWriteResult, String> {
+    blocking(move || manager::get().write_permissions(&id, expected, files)).await
 }
 
 #[tauri::command]

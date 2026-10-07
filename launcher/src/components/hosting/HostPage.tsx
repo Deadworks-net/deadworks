@@ -10,6 +10,8 @@ import TaskProgressView from "./TaskProgressView";
 import ServerRail from "./ServerRail";
 import ServerPage from "./ServerPage";
 import CreateServerFlow from "./CreateServerFlow";
+import { ManagedHostingCard } from "./ManagedHostingCta";
+import ui from "./ui.module.css";
 import styles from "./HostPage.module.css";
 
 const SELECTED_KEY = "deadworks.hosting.selected";
@@ -92,6 +94,15 @@ export default function HostPage({ nav, active }: HostPageProps) {
         ) : (
           <Loading />
         )}
+      </div>
+    );
+  } else if (overview.platform === "unsupported") {
+    body = (
+      <div className={styles.card}>
+        <div className={ui.centered}>
+          <p className={styles.welcomeText}>Hosting a server needs Windows or Linux.</p>
+          <ManagedHostingCard />
+        </div>
       </div>
     );
   } else if (!overview.installed) {

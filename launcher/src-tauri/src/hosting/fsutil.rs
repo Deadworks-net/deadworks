@@ -13,6 +13,14 @@ use std::sync::atomic::{AtomicBool, AtomicU64, Ordering};
 
 use sha1::{Digest, Sha1};
 
+/// Join a path that uses either separator onto `base`. Steam's depot manifests (and the paths this
+/// module derives from them) are written with `\`, which is just a filename character on Linux.
+pub fn join_rel(base: &Path, rel: &str) -> std::path::PathBuf {
+    let mut out = base.to_path_buf();
+    out.extend(rel.split(['\\', '/']).filter(|seg| !seg.is_empty()));
+    out
+}
+
 /// Delete a file even when it is read-only, without touching the read-only bit
 /// of other hardlinks to the same data. Missing files are not an error.
 pub fn remove_file_force(path: &Path) -> std::io::Result<()> {
@@ -162,6 +170,7 @@ pub fn same_file(a: &Path, b: &Path) -> bool {
 }
 
 /// Volume identity of a path, for "can these two be hardlinked" checks.
+#[cfg(windows)]
 pub fn volume_of(path: &Path) -> Option<String> {
     let s = path.to_string_lossy();
     let b = s.as_bytes();
@@ -169,6 +178,14 @@ pub fn volume_of(path: &Path) -> Option<String> {
         return Some(s[..2].to_ascii_uppercase());
     }
     None
+}
+
+/// Volume identity of a path: the device of its nearest existing ancestor.
+#[cfg(unix)]
+pub fn volume_of(path: &Path) -> Option<String> {
+    use std::os::unix::fs::MetadataExt;
+    let existing = path.ancestors().find(|p| p.exists())?;
+    Some(std::fs::metadata(existing).ok()?.dev().to_string())
 }
 
 /// Recursively delete a directory tree, including read-only files.

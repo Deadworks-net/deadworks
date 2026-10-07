@@ -3,7 +3,8 @@ import type { NetworkInfo, PlayerInfo, ServerSummary } from "@/lib/hosting";
 import { cn } from "@/lib/utils";
 import type { HostingActions } from "../use-hosting";
 import { formatBytes, formatDuration, NETWORK_LABELS } from "../format";
-import { ConfirmDialog, useAction } from "../ui";
+import { ConfirmDialog, Modal, useAction } from "../ui";
+import { parseSteamId } from "../permissions/permissions";
 import ui from "../ui.module.css";
 import styles from "./tabs.module.css";
 
@@ -19,14 +20,26 @@ function Meter({ label, value, unit }: { label: string; value: string; unit?: st
   );
 }
 
+/** A person with a Steam account, so they can be banned or given a role. */
+function hasSteamAccount(p: PlayerInfo): boolean {
+  return !p.bot && parseSteamId(p.steamId64) !== null;
+}
+
 function PlayerTable({
   players,
   running,
+  moderation,
   onKick,
+  onBan,
+  onMakeAdmin,
 }: {
   players: PlayerInfo[];
   running: boolean;
+  /** The server has Deadworks' ban command. */
+  moderation: boolean;
   onKick: (p: PlayerInfo) => void;
+  onBan: (p: PlayerInfo) => void;
+  onMakeAdmin: (p: PlayerInfo) => void;
 }) {
   if (players.length === 0) {
     return (
@@ -36,34 +49,185 @@ function PlayerTable({
     );
   }
   return (
-    <div className={styles.list}>
-      <table className={ui.table}>
+    <div className={styles.list} style={{ overflowX: "auto" }}>
+      {/* Scrolls sideways in a narrow window instead of squeezing the name away. */}
+      <table className={ui.table} style={{ minWidth: 620 }}>
         <thead>
           <tr>
-            <th style={{ width: "36%" }}>Name</th>
-            <th style={{ width: "14%" }}>Ping</th>
-            <th style={{ width: "16%" }}>Time</th>
-            <th>Hero</th>
-            <th style={{ width: 70 }} aria-label="Actions" />
+            <th>Name</th>
+            <th style={{ width: 68 }}>Ping</th>
+            <th style={{ width: 76 }}>Time</th>
+            <th style={{ width: "13%" }}>Hero</th>
+            <th style={{ width: 236 }} aria-label="Actions" />
           </tr>
         </thead>
         <tbody>
-          {players.map((p) => (
-            <tr key={p.slot}>
-              <td title={p.steamId64}>{p.name}</td>
-              <td className={ui.num}>{p.pingMs} ms</td>
-              <td className={ui.num}>{formatDuration(p.connectedSeconds)}</td>
-              <td>{p.hero || "—"}</td>
-              <td>
-                <button className={cn(ui.btn, ui.btnSmall, ui.btnDanger)} onClick={() => onKick(p)}>
-                  Kick
-                </button>
-              </td>
-            </tr>
-          ))}
+          {players.map((p) => {
+            const person = hasSteamAccount(p);
+            return (
+              <tr key={p.slot}>
+                <td title={p.steamId64 || undefined}>
+                  <div className={styles.playerName}>
+                    <span className={styles.playerNameText}>{p.name}</span>
+                    {(p.bot || p.roles.length > 0) && (
+                      <span className={styles.playerTags} title={p.roles.join(", ") || undefined}>
+                        {p.bot && <span className={styles.botTag}>bot</span>}
+                        {p.roles.map((r) => (
+                          <span key={r} className={styles.rolePill}>
+                            {r}
+                          </span>
+                        ))}
+                      </span>
+                    )}
+                  </div>
+                </td>
+                <td className={ui.num}>{p.pingMs} ms</td>
+                <td className={ui.num}>{formatDuration(p.connectedSeconds)}</td>
+                <td>{p.hero || "—"}</td>
+                <td>
+                  <div className={styles.playerActions}>
+                    {person && p.roles.length === 0 && (
+                      <button className={cn(ui.btn, ui.btnSmall)} onClick={() => onMakeAdmin(p)}>
+                        Make admin
+                      </button>
+                    )}
+                    <button className={cn(ui.btn, ui.btnSmall, ui.btnDanger)} onClick={() => onKick(p)}>
+                      Kick
+                    </button>
+                    {person && (
+                      <button
+                        className={cn(ui.btn, ui.btnSmall, ui.btnDanger)}
+                        disabled={!moderation}
+                        title={moderation ? undefined : "The server's Admin plugin isn't loaded."}
+                        onClick={() => onBan(p)}
+                      >
+                        Ban
+                      </button>
+                    )}
+                  </div>
+                </td>
+              </tr>
+            );
+          })}
         </tbody>
       </table>
     </div>
+  );
+}
+
+const BAN_PRESETS: { label: string; minutes: number }[] = [
+  { label: "1 hour", minutes: 60 },
+  { label: "1 day", minutes: 60 * 24 },
+  { label: "1 week", minutes: 60 * 24 * 7 },
+  { label: "Permanent", minutes: 0 },
+];
+
+function BanDialog({
+  player,
+  onBan,
+  onClose,
+}: {
+  player: PlayerInfo;
+  /** `minutes` 0 = permanent. */
+  onBan: (minutes: number, reason: string) => Promise<void>;
+  onClose: () => void;
+}) {
+  const [choice, setChoice] = useState<number | "custom">(60 * 24);
+  const [custom, setCustom] = useState("");
+  const [reason, setReason] = useState("");
+  const { run, busy, error } = useAction();
+
+  const customMinutes = Number(custom);
+  const customValid = custom.trim() !== "" && Number.isInteger(customMinutes) && customMinutes > 0;
+  const minutes = choice === "custom" ? (customValid ? customMinutes : null) : choice;
+
+  const ban = async () => {
+    if (minutes == null) return;
+    if (await run(() => onBan(minutes, reason.trim()))) onClose();
+  };
+
+  return (
+    <Modal
+      title={`Ban ${player.name}?`}
+      onClose={busy ? () => {} : onClose}
+      actions={
+        <>
+          <button type="button" className={ui.btn} onClick={onClose} disabled={busy}>
+            Cancel
+          </button>
+          <button
+            type="button"
+            className={cn(ui.btn, ui.btnDanger)}
+            onClick={ban}
+            disabled={busy || minutes == null}
+          >
+            {busy ? "Working..." : "Ban"}
+          </button>
+        </>
+      }
+    >
+      <p style={{ marginBottom: 14 }}>They're removed from the server and can't join again until the ban ends.</p>
+
+      <div className={ui.field}>
+        <div className={ui.label}>Duration</div>
+        <div className={styles.presets} role="radiogroup" aria-label="Duration">
+          {BAN_PRESETS.map((preset) => (
+            <button
+              key={preset.label}
+              type="button"
+              role="radio"
+              aria-checked={choice === preset.minutes}
+              className={cn(ui.btn, ui.btnSmall, choice === preset.minutes && styles.presetActive)}
+              onClick={() => setChoice(preset.minutes)}
+            >
+              {preset.label}
+            </button>
+          ))}
+          <button
+            type="button"
+            role="radio"
+            aria-checked={choice === "custom"}
+            className={cn(ui.btn, ui.btnSmall, choice === "custom" && styles.presetActive)}
+            onClick={() => setChoice("custom")}
+          >
+            Custom
+          </button>
+        </div>
+        {choice === "custom" && (
+          <>
+            <input
+              className={cn(ui.input, ui.num, custom.trim() !== "" && !customValid && ui.inputInvalid)}
+              style={{ marginTop: 8 }}
+              type="number"
+              min={1}
+              step={1}
+              value={custom}
+              onChange={(e) => setCustom(e.target.value)}
+              placeholder="Minutes"
+              aria-label="Ban length in minutes"
+              autoFocus
+            />
+            <div className={ui.hint}>
+              {customValid ? `That is ${formatDuration(customMinutes * 60)}.` : "Enter a whole number of minutes."}
+            </div>
+          </>
+        )}
+      </div>
+
+      <div className={ui.field} style={{ marginBottom: 0 }}>
+        <label className={ui.label} htmlFor="ban-reason">
+          Reason (optional)
+        </label>
+        <input
+          id="ban-reason"
+          className={ui.input}
+          value={reason}
+          maxLength={120}
+          onChange={(e) => setReason(e.target.value)}
+        />
+      </div>
+      {error && <div className={ui.errorText}>{error}</div>}
+    </Modal>
   );
 }
 
@@ -158,9 +322,17 @@ function NetworkCard({ server, actions, running }: { server: ServerSummary; acti
   );
 }
 
-export default function OverviewTab({ server, actions }: { server: ServerSummary; actions: HostingActions }) {
+interface OverviewTabProps {
+  server: ServerSummary;
+  actions: HostingActions;
+  /** Opens the Admins tab with the add dialog filled in for this player. */
+  onMakeAdmin: (player: PlayerInfo) => void;
+}
+
+export default function OverviewTab({ server, actions, onMakeAdmin }: OverviewTabProps) {
   const { runtime, config } = server;
   const [kicking, setKicking] = useState<PlayerInfo | null>(null);
+  const [banning, setBanning] = useState<PlayerInfo | null>(null);
   const running = runtime.state === "running";
   const uptime = running && runtime.startedAt ? Date.now() / 1000 - runtime.startedAt : null;
 
@@ -178,7 +350,19 @@ export default function OverviewTab({ server, actions }: { server: ServerSummary
 
       <div>
         <div className={styles.subTitle} style={{ marginTop: 0 }}>Players</div>
-        <PlayerTable players={runtime.players} running={running} onKick={setKicking} />
+        <PlayerTable
+          players={runtime.players}
+          running={running}
+          moderation={runtime.moderation}
+          onKick={setKicking}
+          onBan={setBanning}
+          onMakeAdmin={onMakeAdmin}
+        />
+        <div className={ui.hint}>
+          Bans, gags and mutes can be listed or lifted from the Console tab with{" "}
+          <code className={styles.inlineCode}>dw_bans</code>,{" "}
+          <code className={styles.inlineCode}>dw_unban &lt;steamid&gt;</code>.
+        </div>
       </div>
 
       <NetworkCard server={server} actions={actions} running={running} />
@@ -191,6 +375,14 @@ export default function OverviewTab({ server, actions }: { server: ServerSummary
           danger
           onConfirm={() => actions.kick(config.id, kicking.slot)}
           onClose={() => setKicking(null)}
+        />
+      )}
+
+      {banning && (
+        <BanDialog
+          player={banning}
+          onBan={(minutes, reason) => actions.ban(config.id, banning.steamId64, minutes, reason)}
+          onClose={() => setBanning(null)}
         />
       )}
     </div>

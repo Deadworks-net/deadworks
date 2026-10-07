@@ -139,7 +139,7 @@ pub fn allow_program(_name: &str, _exe: &std::path::Path) -> Result<(), String> 
 
 #[cfg(not(windows))]
 pub fn port_in_use(port: u16) -> bool {
-    std::net::UdpSocket::bind(("0.0.0.0", port)).is_err()
+    std::net::UdpSocket::bind(("0.0.0.0", port)).is_err() || std::net::TcpListener::bind(("0.0.0.0", port)).is_err()
 }
 
 #[cfg(test)]

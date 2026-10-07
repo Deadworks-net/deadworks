@@ -118,6 +118,7 @@ export function emptyRuntime(config: ServerConfig): ServerRuntime {
       sdrIdChanged: false,
       connectCommand: null,
     },
+    moderation: false,
   };
 }
 

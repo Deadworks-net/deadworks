@@ -40,6 +40,8 @@ pub struct TreeInputs<'a> {
     /// Changes whenever base files change (build id + generation).
     pub base_stamp: String,
     pub release_dir: &'a Path,
+    /// Written into the generated cfg where the console is RCON.
+    pub rcon_password: Option<&'a str>,
 }
 
 pub fn prepare(inp: &TreeInputs) -> Result<(), String> {
@@ -59,12 +61,12 @@ pub fn prepare(inp: &TreeInputs) -> Result<(), String> {
         let keep: HashSet<String> = wanted.iter().map(|f| f.path.to_ascii_lowercase()).collect();
         for old in &state.linked {
             if !keep.contains(&old.to_ascii_lowercase()) {
-                let _ = fsutil::remove_file_force(&tree.join(old));
+                let _ = fsutil::remove_file_force(&fsutil::join_rel(&tree, old));
             }
         }
         let base_dir = inp.layout.base_dir();
         for f in &wanted {
-            fsutil::relink(&base_dir.join(&f.path), &tree.join(&f.path))
+            fsutil::relink(&fsutil::join_rel(&base_dir, &f.path), &fsutil::join_rel(&tree, &f.path))
                 .map_err(|e| format!("Couldn't prepare the server's game files ({}): {e}", f.path))?;
         }
         state.linked = wanted.iter().map(|f| f.path.clone()).collect();
@@ -77,24 +79,24 @@ pub fn prepare(inp: &TreeInputs) -> Result<(), String> {
     let current: HashSet<String> = release.iter().map(|p| p.to_ascii_lowercase()).collect();
     for old in &state.release {
         if !current.contains(&old.to_ascii_lowercase()) {
-            let _ = fsutil::remove_file_force(&tree.join(old));
+            let _ = fsutil::remove_file_force(&fsutil::join_rel(&tree, old));
         }
     }
     for rel in &release {
-        let data = std::fs::read(inp.release_dir.join(rel)).map_err(|e| format!("Couldn't read Deadworks file {rel}: {e}"))?;
-        fsutil::write_if_changed(&tree.join(rel), &data).map_err(|e| locked_error(rel, e))?;
+        let data = std::fs::read(fsutil::join_rel(inp.release_dir, rel)).map_err(|e| format!("Couldn't read Deadworks file {rel}: {e}"))?;
+        fsutil::write_if_changed(&fsutil::join_rel(&tree, rel), &data).map_err(|e| locked_error(rel, e))?;
     }
     state.release = release;
 
     // 3. gameinfo.gi for the network mode.
-    let vanilla = std::fs::read_to_string(inp.layout.base_dir().join(GAMEINFO))
+    let vanilla = std::fs::read_to_string(fsutil::join_rel(&inp.layout.base_dir(), GAMEINFO))
         .map_err(|e| format!("Couldn't read the base gameinfo.gi: {e}"))?;
     let gameinfo = netcfg::render_gameinfo(&vanilla, inp.config.network)?;
-    fsutil::write_if_changed(&tree.join(GAMEINFO), gameinfo.as_bytes()).map_err(|e| e.to_string())?;
+    fsutil::write_if_changed(&fsutil::join_rel(&tree, GAMEINFO), gameinfo.as_bytes()).map_err(|e| e.to_string())?;
 
     // 4. Generated config.
     let citadel_cfg = tree.join("game").join("citadel").join("cfg");
-    fsutil::write_if_changed(&citadel_cfg.join(cfg::LAUNCHER_CFG), cfg::launcher_cfg(inp.config).as_bytes())
+    fsutil::write_if_changed(&citadel_cfg.join(cfg::LAUNCHER_CFG), cfg::launcher_cfg(inp.config, inp.rcon_password).as_bytes())
         .map_err(|e| e.to_string())?;
     let user_cfg = citadel_cfg.join("deadworks_user.cfg");
     if !user_cfg.exists() {
@@ -178,12 +180,12 @@ fn sync_content(layout: &Layout, config: &ServerConfig, placed_before: &[String]
     let keep: HashSet<String> = wanted.iter().map(|(_, r)| r.to_ascii_lowercase()).collect();
     for old in placed_before {
         if !keep.contains(&old.to_ascii_lowercase()) {
-            let _ = fsutil::remove_file_force(&tree.join(old));
+            let _ = fsutil::remove_file_force(&fsutil::join_rel(&tree, old));
         }
     }
     let mut placed = Vec::new();
     for (src, rel) in wanted {
-        let dst = tree.join(&rel);
+        let dst = fsutil::join_rel(&tree, &rel);
         if !fsutil::same_file(&src, &dst) {
             fsutil::relink(&src, &dst).map_err(|e| format!("Couldn't install {rel}: {e}"))?;
         }

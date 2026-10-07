@@ -23,6 +23,17 @@ pub struct SpawnSpec {
     pub cwd: PathBuf,
     pub args: Vec<String>,
     pub env: Vec<(String, String)>,
+    /// Console access for platforms that can't type into the server's console (Wine).
+    #[cfg_attr(windows, allow(dead_code))]
+    pub rcon: Option<Rcon>,
+}
+
+/// Where and how to reach a server's RCON listener: TCP on its game port.
+#[derive(Clone)]
+#[cfg_attr(windows, allow(dead_code))]
+pub struct Rcon {
+    pub port: u16,
+    pub password: String,
 }
 
 #[derive(Clone, Copy, PartialEq, Eq)]
@@ -35,9 +46,10 @@ pub enum Stream {
 pub use win::*;
 
 #[cfg(not(windows))]
-pub use other::*;
+pub use unix::*;
 
 /// Quote one argument for a Windows command line (CommandLineToArgvW rules).
+#[cfg_attr(not(windows), allow(dead_code))]
 pub fn quote_arg(arg: &str) -> String {
     if !arg.is_empty() && !arg.contains([' ', '\t', '"']) {
         return arg.to_string();
@@ -334,6 +346,12 @@ mod win {
     }
 
     impl Process {
+        /// Type `line` + Enter into the server's console. The output shows up in the console
+        /// stream, so there is nothing to return.
+        pub fn send_line(&self, line: &str) -> Result<Option<String>, String> {
+            send_line(self.pid, line).map(|()| None)
+        }
+
         pub fn terminate(&self) {
             unsafe {
                 TerminateProcess(self.handle.as_raw_handle() as HANDLE, 1);
@@ -380,30 +398,209 @@ mod win {
     }
 }
 
+/// Linux: the server is a Windows program, run through Wine the way the Docker image does it.
+/// Output comes over pipes; the engine's once-per-tick complaint that stdin isn't a Windows console
+/// is dropped; commands go over RCON (see `rcon.rs`). Written from the Docker entrypoint's verified
+/// behaviour, but not itself run on a Linux desktop yet.
 #[cfg(not(windows))]
-mod other {
-    use super::{SpawnSpec, Stream};
+mod unix {
+    use std::io::{BufRead, BufReader, Read};
+    use std::net::{Ipv4Addr, SocketAddr};
+    use std::path::Path;
+    use std::process::{Child, Command, Stdio};
+    use std::sync::{Arc, Mutex};
+    use std::time::Instant;
+
+    use super::{Rcon, SpawnSpec, Stream};
+    use crate::hosting::{rcon, wine};
+
+    const STDIN_SPAM: &str = "CTextConsoleWin::GetLine";
+    /// Kernel clock ticks per second for /proc/<pid>/stat, and the page size for statm. Both are
+    /// fixed on every x86-64 Linux the server can run on.
+    const CLK_TCK: f64 = 100.0;
+    const PAGE: u64 = 4096;
 
     pub struct Process {
         pub pid: u32,
+        child: Arc<Mutex<Child>>,
+        /// This server's win64 folder, which shows up in the argv of its Wine processes.
+        marker: String,
+        rcon: Option<Rcon>,
+        cpu: Mutex<Option<(u64, Instant)>>,
+    }
+
+    fn read_lines(pipe: impl Read, emit: impl Fn(String)) {
+        for line in BufReader::new(pipe).split(b'\n') {
+            let Ok(mut line) = line else { break };
+            if line.last() == Some(&b'\r') {
+                line.pop();
+            }
+            let text = String::from_utf8_lossy(&line).into_owned();
+            if !text.contains(STDIN_SPAM) {
+                emit(text);
+            }
+        }
     }
 
     pub fn spawn(
-        _spec: SpawnSpec,
-        _on_line: impl Fn(Stream, String) + Send + Sync + 'static,
-        _on_exit: impl FnOnce(i32) + Send + 'static,
+        spec: SpawnSpec,
+        on_line: impl Fn(Stream, String) + Send + Sync + 'static,
+        on_exit: impl FnOnce(i32) + Send + 'static,
     ) -> Result<Process, String> {
-        Err("Hosting a server is only supported on Windows.".into())
+        let mut child = Command::new("wine")
+            .arg(&spec.exe)
+            .args(&spec.args)
+            .current_dir(&spec.cwd)
+            .envs(spec.env.iter().cloned())
+            .stdin(Stdio::null())
+            .stdout(Stdio::piped())
+            .stderr(Stdio::piped())
+            .spawn()
+            .map_err(|e| {
+                if e.kind() == std::io::ErrorKind::NotFound {
+                    "Wine isn't installed. Install Wine (64-bit) to host servers on Linux.".to_string()
+                } else {
+                    format!("Couldn't start the server through Wine: {e}")
+                }
+            })?;
+        let pid = child.id();
+        let on_line = Arc::new(on_line);
+        let mut readers = Vec::new();
+        if let Some(out) = child.stdout.take() {
+            let on_line = on_line.clone();
+            readers.push(std::thread::spawn(move || read_lines(out, |l| on_line(Stream::Stdout, l))));
+        }
+        if let Some(err) = child.stderr.take() {
+            let on_line = on_line.clone();
+            readers.push(std::thread::spawn(move || read_lines(err, |l| on_line(Stream::Stderr, l))));
+        }
+
+        let child = Arc::new(Mutex::new(child));
+        let waiter = child.clone();
+        std::thread::spawn(move || {
+            // Polled rather than a blocking wait, which would hold the lock `terminate` needs.
+            let code = loop {
+                match waiter.lock().unwrap_or_else(|e| e.into_inner()).try_wait() {
+                    Ok(Some(status)) => break status.code().unwrap_or(1),
+                    Ok(None) => {}
+                    Err(_) => break 1,
+                }
+                std::thread::sleep(std::time::Duration::from_millis(200));
+            };
+            for r in readers {
+                let _ = r.join();
+            }
+            on_exit(code);
+        });
+
+        Ok(Process {
+            pid,
+            child,
+            marker: spec.cwd.to_string_lossy().into_owned(),
+            rcon: spec.rcon,
+            cpu: Mutex::new(None),
+        })
     }
 
-    pub fn send_line(_pid: u32, _line: &str) -> Result<(), String> {
-        Err("Hosting a server is only supported on Windows.".into())
+    /// The address the server's RCON listener is bound to. The engine picks one interface (not
+    /// loopback), so it is read from the kernel's listener table rather than assumed.
+    fn rcon_addr(port: u16) -> SocketAddr {
+        let listening = std::fs::read_to_string("/proc/net/tcp").unwrap_or_default();
+        let ip = listening
+            .lines()
+            .skip(1)
+            .filter_map(|line| {
+                let mut f = line.split_whitespace();
+                let (local, state) = (f.nth(1)?, f.nth(1)?);
+                let (addr, p) = local.split_once(':')?;
+                if state != "0A" || u16::from_str_radix(p, 16).ok()? != port {
+                    return None;
+                }
+                Some(Ipv4Addr::from(u32::from_str_radix(addr, 16).ok()?.to_le_bytes()))
+            })
+            .next()
+            .filter(|ip| !ip.is_unspecified())
+            .unwrap_or(Ipv4Addr::LOCALHOST);
+        SocketAddr::from((ip, port))
+    }
+
+    /// Unix pids of the Wine processes whose command line names `dir` (in Unix or `Z:\` form) and
+    /// deadworks.exe.
+    fn server_pids(dir: &str) -> Vec<u32> {
+        let windows = wine::windows_path(Path::new(dir));
+        let Ok(rd) = std::fs::read_dir("/proc") else { return Vec::new() };
+        rd.flatten()
+            .filter_map(|e| e.file_name().to_str()?.parse::<u32>().ok())
+            .filter(|pid| {
+                let cmdline = std::fs::read(format!("/proc/{pid}/cmdline")).unwrap_or_default();
+                let cmdline = String::from_utf8_lossy(&cmdline).replace('\0', " ");
+                cmdline.contains("deadworks.exe") && (cmdline.contains(dir) || cmdline.contains(&windows))
+            })
+            .collect()
+    }
+
+    fn kill(pid: u32) {
+        let _ = Command::new("kill").args(["-9", &pid.to_string()]).stdout(Stdio::null()).stderr(Stdio::null()).status();
+    }
+
+    /// Servers left running by a launcher that crashed or was killed: nothing ties their lifetime
+    /// to ours on Linux, so the next launch clears them out before they hold a port.
+    pub fn kill_strays(hosting_root: &Path) {
+        for pid in server_pids(&hosting_root.to_string_lossy()) {
+            kill(pid);
+        }
     }
 
     impl Process {
-        pub fn terminate(&self) {}
+        /// Run `line` over RCON and return what it printed.
+        pub fn send_line(&self, line: &str) -> Result<Option<String>, String> {
+            let rcon = self.rcon.as_ref().ok_or("This server was started without console access.")?;
+            rcon::exec(rcon_addr(rcon.port), &rcon.password, line).map(Some)
+        }
+
+        pub fn terminate(&self) {
+            let _ = self.child.lock().unwrap_or_else(|e| e.into_inner()).kill();
+            // Killing the `wine` we started can leave the game itself running under the wineserver.
+            for pid in server_pids(&self.marker) {
+                kill(pid);
+            }
+        }
+
+        /// `(cpu % of the whole machine since the last call, resident bytes)`, summed over the
+        /// server's processes.
         pub fn sample(&self) -> (f32, u64) {
-            (0.0, 0)
+            let mut pids = server_pids(&self.marker);
+            if !pids.contains(&self.pid) {
+                pids.push(self.pid);
+            }
+            let (mut ticks, mut rss) = (0u64, 0u64);
+            for pid in pids {
+                if let Ok(stat) = std::fs::read_to_string(format!("/proc/{pid}/stat")) {
+                    // Fields after the "(comm)" part: state is the first, utime and stime the 12th and 13th.
+                    let rest: Vec<&str> = stat.rsplit_once(')').map(|(_, r)| r).unwrap_or("").split_whitespace().collect();
+                    let field = |i: usize| rest.get(i).and_then(|v| v.parse::<u64>().ok()).unwrap_or(0);
+                    ticks += field(11) + field(12);
+                }
+                if let Ok(statm) = std::fs::read_to_string(format!("/proc/{pid}/statm")) {
+                    rss += statm.split_whitespace().nth(1).and_then(|v| v.parse::<u64>().ok()).unwrap_or(0) * PAGE;
+                }
+            }
+            let now = Instant::now();
+            let mut last = self.cpu.lock().unwrap_or_else(|e| e.into_inner());
+            let pct = match *last {
+                Some((prev, at)) => {
+                    let wall = now.duration_since(at).as_secs_f64();
+                    let cpus = std::thread::available_parallelism().map(|n| n.get()).unwrap_or(1) as f64;
+                    if wall > 0.0 {
+                        (ticks.saturating_sub(prev) as f64 / CLK_TCK / (wall * cpus) * 100.0) as f32
+                    } else {
+                        0.0
+                    }
+                }
+                None => 0.0,
+            };
+            *last = Some((ticks, now));
+            (pct.clamp(0.0, 100.0), rss)
         }
     }
 }

@@ -185,6 +185,74 @@
   line-height: 1.6;
 }
 
+/* Player list: name with role pills, row actions, ban presets */
+
+.playerName {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  min-width: 0;
+}
+
+.playerNameText {
+  flex: 0 1 auto;
+  min-width: 0;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+/* Tags only get the room the name leaves, so a narrow row clips them and not the name. */
+.playerTags {
+  flex: 1 1 0;
+  display: flex;
+  gap: 4px;
+  min-width: 0;
+  overflow: hidden;
+}
+
+/* Role names are identifiers, so they keep their case (unlike ui.pill). */
+.rolePill,
+.botTag {
+  flex-shrink: 0;
+  display: inline-flex;
+  align-items: center;
+  padding: 1px 7px;
+  font-size: 0.7rem;
+  font-weight: 700;
+  letter-spacing: 0.4px;
+  white-space: nowrap;
+  color: var(--text-secondary);
+  background: var(--hover);
+  border: 1px solid var(--border);
+  border-radius: 2px;
+}
+
+.botTag {
+  font-weight: 400;
+  color: var(--text-muted);
+  background: none;
+  border-style: dashed;
+}
+
+.playerActions {
+  display: flex;
+  justify-content: flex-end;
+  gap: 6px;
+}
+
+.presets {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
+}
+
+button.presetActive,
+button.presetActive:hover:not(:disabled) {
+  color: var(--accent);
+  border-color: var(--accent);
+  background: var(--accent-dim);
+}
+
 .steps code,
 .inlineCode {
   font-family: 'Consolas', 'Courier New', monospace;

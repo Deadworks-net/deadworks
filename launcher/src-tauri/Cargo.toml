@@ -68,5 +68,9 @@ windows-sys = { version = "0.59", features = [
     "Win32_UI_Shell",
 ] }
 
+# Free disk space (statvfs) for the hosting setup screen on Linux.
+[target.'cfg(unix)'.dependencies]
+libc = "0.2"
+
 [target.'cfg(any(target_os = "macos", windows, target_os = "linux"))'.dependencies]
 tauri-plugin-autostart = "2.5.1"

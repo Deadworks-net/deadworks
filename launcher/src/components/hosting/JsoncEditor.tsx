@@ -175,9 +175,11 @@ interface JsoncEditorProps {
   /** Only read on mount; remount with a new `key` to load different text. */
   initialValue: string;
   onChange: (text: string) => void;
+  /** Only read on mount. The text can still be selected and copied. */
+  readOnly?: boolean;
 }
 
-export default function JsoncEditor({ initialValue, onChange }: JsoncEditorProps) {
+export default function JsoncEditor({ initialValue, onChange, readOnly }: JsoncEditorProps) {
   const host = useRef<HTMLDivElement>(null);
   const onChangeRef = useRef(onChange);
   onChangeRef.current = onChange;
@@ -198,6 +200,7 @@ export default function JsoncEditor({ initialValue, onChange }: JsoncEditorProps
           bracketMatching(),
           indentUnit.of("  "),
           EditorState.tabSize.of(2),
+          EditorState.readOnly.of(!!readOnly),
           keymap.of([...defaultKeymap, ...historyKeymap, indentWithTab]),
           jsoncLanguage,
           syntaxHighlighting(highlight),

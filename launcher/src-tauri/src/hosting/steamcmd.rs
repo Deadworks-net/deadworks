@@ -74,6 +74,7 @@ fn run(layout: &Layout, args: Vec<String>, password: Option<&str>, progress: &Pr
             cwd: layout.steamcmd_dir(),
             args,
             env: Vec::new(),
+            rcon: None,
         },
         move |line| {
             let _ = tx.send(Line::Out(line));

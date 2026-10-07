@@ -44,16 +44,16 @@ pub fn sync_from_client(
     let todo: Vec<&DepotFile> = files
         .iter()
         .filter(|f| {
-            let dst = base_dir.join(&f.path);
+            let dst = fsutil::join_rel(base_dir, &f.path);
             let unchanged = prev.get(&f.path.to_ascii_lowercase()) == Some(&f.sha1)
                 && std::fs::metadata(&dst).map(|m| m.len() == f.size).unwrap_or(false);
             // A hardlinked base must still be linked to the client's current file.
-            !(unchanged && (mode == CopyMode::Copy || fsutil::same_file(&dst, &client_dir.join(&f.path))))
+            !(unchanged && (mode == CopyMode::Copy || fsutil::same_file(&dst, &fsutil::join_rel(client_dir, &f.path))))
         })
         .collect();
 
     for f in &todo {
-        if !client_dir.join(&f.path).is_file() {
+        if !fsutil::join_rel(client_dir, &f.path).is_file() {
             return Err(format!(
                 "Your Deadlock install is missing {}. Verify the game files in Steam, then try again.",
                 f.path
@@ -146,8 +146,8 @@ fn place_file(
     allow_modified: bool,
     progress: &Progress,
 ) -> Result<Placed, String> {
-    let src = client_dir.join(&f.path);
-    let dst = base_dir.join(&f.path);
+    let src = fsutil::join_rel(client_dir, &f.path);
+    let dst = fsutil::join_rel(base_dir, &f.path);
     let io = |e: std::io::Error| {
         if e.kind() == std::io::ErrorKind::Interrupted {
             CANCELLED.to_string()
@@ -221,7 +221,7 @@ fn remove_stale(base_dir: &Path, files: &[DepotFile], previous: &[DepotFile]) {
     let keep: HashSet<String> = files.iter().map(|f| f.path.to_ascii_lowercase()).collect();
     for f in previous {
         if !keep.contains(&f.path.to_ascii_lowercase()) {
-            let _ = fsutil::remove_file_force(&base_dir.join(&f.path));
+            let _ = fsutil::remove_file_force(&fsutil::join_rel(base_dir, &f.path));
         }
     }
 }
@@ -252,7 +252,7 @@ pub fn verify(
                 }
                 let i = next.fetch_add(1, Ordering::Relaxed);
                 let Some(f) = files.get(i) else { return };
-                let ok = fsutil::sha1_file(&base_dir.join(&f.path), &progress.bytes_done, &progress.cancel)
+                let ok = fsutil::sha1_file(&fsutil::join_rel(base_dir, &f.path), &progress.bytes_done, &progress.cancel)
                     .map(|sha| sha == f.sha1)
                     .unwrap_or(false);
                 if !ok {
@@ -312,7 +312,7 @@ mod tests {
     }
 
     fn file(root: &Path, rel: &str, content: &[u8]) -> DepotFile {
-        let p = root.join(rel);
+        let p = fsutil::join_rel(root, rel);
         std::fs::create_dir_all(p.parent().unwrap()).unwrap();
         std::fs::write(&p, content).unwrap();
         DepotFile { path: rel.into(), size: content.len() as u64, sha1: fsutil::sha1_bytes(content) }
@@ -357,15 +357,15 @@ mod tests {
             "\t\t\tGame\t\t\t\tcitadel\n",
             "\t\t\t// Deadworks Launcher - Start\n\t\t\tGame                citadel/deadworks_mods\n\t\t\t// Deadworks Launcher - End\n\t\t\tGame\t\t\t\tcitadel\n",
         );
-        std::fs::write(client.join(GAMEINFO), &patched).unwrap();
+        std::fs::write(fsutil::join_rel(&client, GAMEINFO), &patched).unwrap();
 
         let p = Progress::new(TaskKind::Install);
         let ok = sync_from_client(&base, &client, &[a.clone(), gi], &[], CopyMode::Hardlink, false, &p).unwrap();
         assert!(ok.modified_files.is_empty());
         assert!(fsutil::same_file(&base.join(&a.path), &client.join(&a.path)), "clean files are links, not copies");
-        assert!(!fsutil::same_file(&base.join(GAMEINFO), &client.join(GAMEINFO)), "a recovered file is a real copy");
-        assert_eq!(std::fs::read_to_string(base.join(GAMEINFO)).unwrap(), vanilla);
-        assert_eq!(std::fs::read_to_string(client.join(GAMEINFO)).unwrap(), patched, "the client is never modified");
+        assert!(!fsutil::same_file(&fsutil::join_rel(&base, GAMEINFO), &fsutil::join_rel(&client, GAMEINFO)), "a recovered file is a real copy");
+        assert_eq!(std::fs::read_to_string(fsutil::join_rel(&base, GAMEINFO)).unwrap(), vanilla);
+        assert_eq!(std::fs::read_to_string(fsutil::join_rel(&client, GAMEINFO)).unwrap(), patched, "the client is never modified");
         assert!(
             !std::fs::metadata(client.join(&a.path)).unwrap().permissions().readonly(),
             "linking must not make client files read-only"
@@ -384,11 +384,11 @@ mod tests {
             "\t\t\tGame\t\t\t\tcitadel\n",
             "\t\t\t// Deadworks Launcher - Start\n\t\t\tGame                citadel/deadworks_mods\n\t\t\t// Deadworks Launcher - End\n\t\t\tGame\t\t\t\tcitadel\n",
         );
-        std::fs::write(client.join(GAMEINFO), &patched).unwrap();
+        std::fs::write(fsutil::join_rel(&client, GAMEINFO), &patched).unwrap();
         let p = Progress::new(TaskKind::Install);
         let ok = sync_from_client(&base, &client, &[f], &[], CopyMode::Copy, false, &p).unwrap();
         assert!(ok.modified_files.is_empty());
-        assert_eq!(std::fs::read_to_string(base.join(GAMEINFO)).unwrap(), vanilla);
+        assert_eq!(std::fs::read_to_string(fsutil::join_rel(&base, GAMEINFO)).unwrap(), vanilla);
         fsutil::remove_dir_all_force(&dir).unwrap();
     }
 

@@ -1,6 +1,14 @@
 import { useCallback, useEffect, useMemo, useState } from "react";
 import { open } from "@tauri-apps/plugin-dialog";
-import { hosting, type BaseSource, type CopyMode, type DriveInfo, type InstallOptions, type SetupCheck } from "@/lib/hosting";
+import {
+  hosting,
+  type BaseSource,
+  type CopyMode,
+  type DriveInfo,
+  type HostPlatform,
+  type InstallOptions,
+  type SetupCheck,
+} from "@/lib/hosting";
 import { cn } from "@/lib/utils";
 import { errorMessage, formatBytes } from "./format";
 import { ErrorNote, Loading } from "./ui";
@@ -13,17 +21,67 @@ const FALLBACK_REQUIRED = 40 * 1024 ** 3;
 const LINKED_REQUIRED = 2 * 1024 ** 3;
 const FOLDER_NAME = "Deadworks Servers";
 
-function driveFor(path: string, drives: DriveInfo[]): DriveInfo | null {
-  const p = path.trim().toUpperCase();
-  return drives.find((d) => p.startsWith(d.root.toUpperCase())) ?? null;
+/** Path rules for the platform the servers will live on. Linux paths are case-sensitive and use "/". */
+interface PathRules {
+  platform: HostPlatform;
+  separator: string;
 }
 
-function isAbsoluteWindowsPath(path: string): boolean {
-  return /^[A-Za-z]:\\/.test(path.trim());
+function pathRules(check: SetupCheck): PathRules {
+  const linux = check.platform === "linux";
+  return { platform: check.platform, separator: check.pathSeparator || (linux ? "/" : "\\") };
 }
 
-function driveLetter(root: string): string {
-  return root.replace(/\\$/, "");
+function foldCase(path: string, rules: PathRules): string {
+  return rules.platform === "linux" ? path : path.toUpperCase();
+}
+
+/** A drive root without its trailing separator: "H:\" becomes "H:", "/home" stays, "/" becomes "". */
+function rootStem(root: string, rules: PathRules): string {
+  const folded = foldCase(root, rules);
+  return folded.endsWith(rules.separator) ? folded.slice(0, -rules.separator.length) : folded;
+}
+
+/** The drive (Windows) or mount point (Linux) a path lives on: the longest root it sits under. */
+function driveFor(path: string, drives: DriveInfo[], rules: PathRules): DriveInfo | null {
+  const p = foldCase(path.trim(), rules);
+  if (!p) return null;
+  let best: DriveInfo | null = null;
+  let bestLength = -1;
+  for (const d of drives) {
+    const stem = rootStem(d.root, rules);
+    const inside = p === stem || p.startsWith(stem + rules.separator);
+    if (inside && stem.length > bestLength) {
+      best = d;
+      bestLength = stem.length;
+    }
+  }
+  return best;
+}
+
+function isAbsolutePath(path: string, rules: PathRules): boolean {
+  const p = path.trim();
+  return rules.platform === "linux" ? p.startsWith("/") : /^[A-Za-z]:\\/.test(p);
+}
+
+function examplePath(rules: PathRules): string {
+  return rules.platform === "linux" ? `/home/me/${FOLDER_NAME}` : `D:\\${FOLDER_NAME}`;
+}
+
+/** "H:" on Windows; the mount path ("/", "/home") on Linux. */
+function driveLabel(root: string, rules: PathRules): string {
+  return rules.platform === "linux" ? root : root.replace(/\\$/, "");
+}
+
+function joinFolder(root: string, rules: PathRules): string {
+  return `${root.endsWith(rules.separator) ? root : root + rules.separator}${FOLDER_NAME}`;
+}
+
+/** Picking a bare drive or mount point would scatter files over its root. */
+function isBareRoot(path: string, drives: DriveInfo[], rules: PathRules): boolean {
+  if (rules.platform !== "linux" && /^[A-Za-z]:\\?$/.test(path)) return true;
+  const stem = rootStem(path, rules);
+  return drives.some((d) => rootStem(d.root, rules) === stem);
 }
 
 export type InstallDraft = Omit<InstallOptions, "steamPassword">;
@@ -35,7 +93,7 @@ interface InstallScreenProps {
   onInstall: (options: InstallOptions) => void;
 }
 
-function SpaceBar({ drive, required }: { drive: DriveInfo; required: number }) {
+function SpaceBar({ drive, label, required }: { drive: DriveInfo; label: string; required: number }) {
   const used = drive.totalBytes - drive.freeBytes;
   const enough = drive.freeBytes >= required;
   const pct = (n: number) => `${drive.totalBytes > 0 ? (n / drive.totalBytes) * 100 : 0}%`;
@@ -51,7 +109,7 @@ function SpaceBar({ drive, required }: { drive: DriveInfo; required: number }) {
       <div className={styles.spaceLegend}>
         <span>Needs {formatBytes(required)}</span>
         <span className={enough ? undefined : ui["textTone-bad"]}>
-          {formatBytes(drive.freeBytes)} free on {driveLetter(drive.root)}
+          {formatBytes(drive.freeBytes)} free on {label}
         </span>
       </div>
     </>
@@ -76,7 +134,8 @@ export default function InstallScreen({ initial, onBack, onInstall }: InstallScr
       const result = await hosting.setupCheck();
       setCheck(result);
       setRoot((r) => r || result.suggestedRoot);
-      if (!result.clientGameDir) setSource("steamcmd");
+      if (!result.steamcmdAvailable) setSource("client");
+      else if (!result.clientGameDir) setSource("steamcmd");
     } catch (e) {
       setCheckError(errorMessage(e));
     } finally {
@@ -88,7 +147,11 @@ export default function InstallScreen({ initial, onBack, onInstall }: InstallScr
     runCheck();
   }, [runCheck]);
 
-  const drive = useMemo(() => (check ? driveFor(root, check.drives) : null), [check, root]);
+  const rules = useMemo(() => (check ? pathRules(check) : null), [check]);
+  const drive = useMemo(
+    () => (check && rules ? driveFor(root, check.drives, rules) : null),
+    [check, rules, root]
+  );
   const canLink = source === "client" && !!drive?.sameAsClient;
   const effectiveMode: CopyMode = canLink ? copyMode : "copy";
   const fullSize = check && check.requiredBytes > 0 ? check.requiredBytes : FALLBACK_REQUIRED;
@@ -100,13 +163,12 @@ export default function InstallScreen({ initial, onBack, onInstall }: InstallScr
       title: "Choose where to keep your servers",
       defaultPath: root || undefined,
     });
-    if (typeof picked !== "string") return;
-    // Picking a bare drive would scatter files over its root.
-    setRoot(/^[A-Za-z]:\\?$/.test(picked) ? `${picked.replace(/\\?$/, "\\")}${FOLDER_NAME}` : picked);
+    if (typeof picked !== "string" || !check || !rules) return;
+    setRoot(isBareRoot(picked, check.drives, rules) ? joinFolder(picked, rules) : picked);
   };
 
   if (checking && !check) return <div className={styles.card}><Loading label="Looking for Deadlock and free space..." /></div>;
-  if (!check) {
+  if (!check || !rules) {
     return (
       <div className={styles.card}>
         <div className={ui.centered}>
@@ -121,23 +183,35 @@ export default function InstallScreen({ initial, onBack, onInstall }: InstallScr
     );
   }
 
+  const linux = check.platform === "linux";
+  const driveName = drive ? driveLabel(drive.root, rules) : "";
+  // The folder the backend suggests on a drive beats its bare root (on Linux, "/" isn't ours to write to).
+  const suggestedDrive = driveFor(check.suggestedRoot, check.drives, rules);
+  const folderOn = (d: DriveInfo) =>
+    suggestedDrive?.root === d.root ? check.suggestedRoot : joinFolder(d.root, rules);
+
   const clientUnavailable = !check.clientGameDir
-    ? "We couldn't find Deadlock on this PC."
+    ? check.steamcmdAvailable
+      ? "We couldn't find Deadlock on this PC."
+      : "We couldn't find Deadlock on this PC. Install it through Steam first, then check again."
     : check.clientUpdating
       ? "Steam is updating Deadlock right now. Wait for it to finish, then check again."
       : null;
 
-  const blocker = !root.trim()
-    ? "Choose where to install."
-    : !isAbsoluteWindowsPath(root)
-      ? "Pick a full folder path, like D:\\Deadworks Servers."
-      : drive && drive.freeBytes < required
-        ? `Not enough space on ${driveLetter(drive.root)}. Pick a drive with at least ${formatBytes(required)} free.`
-        : source === "client" && clientUnavailable
-          ? clientUnavailable
-          : source === "steamcmd" && (!username.trim() || !password)
-            ? "Enter your Steam username and password."
-            : null;
+  const blocker =
+    check.missingTools.length > 0
+      ? "Install what's missing, then check again."
+      : !root.trim()
+        ? "Choose where to install."
+        : !isAbsolutePath(root, rules)
+          ? `Pick a full folder path, like ${examplePath(rules)}.`
+          : drive && drive.freeBytes < required
+            ? `Not enough space on ${driveName}. Pick a ${linux ? "location" : "drive"} with at least ${formatBytes(required)} free.`
+            : source === "client" && clientUnavailable
+              ? clientUnavailable
+              : source === "steamcmd" && (!username.trim() || !password)
+                ? "Enter your Steam username and password."
+                : null;
 
   const install = () => {
     if (blocker) return;
@@ -156,7 +230,22 @@ export default function InstallScreen({ initial, onBack, onInstall }: InstallScr
           <h2 className={styles.formTitle}>Set up hosting</h2>
           <p className={styles.formSubtitle}>
             This happens once. Every server you create shares these files.
+            {linux && " On Linux, servers run through Wine."}
           </p>
+
+          {check.missingTools.length > 0 && (
+            <div className={styles.section} style={{ display: "flex", flexDirection: "column", gap: 8 }}>
+              {check.missingTools.map((sentence) => (
+                <ErrorNote
+                  key={sentence}
+                  warn
+                  message={sentence}
+                  actionLabel={checking ? "Checking..." : "Check again"}
+                  onAction={runCheck}
+                />
+              ))}
+            </div>
+          )}
 
           <div className={styles.section}>
             <label className={ui.label} htmlFor="install-root">Install location</label>
@@ -175,15 +264,15 @@ export default function InstallScreen({ initial, onBack, onInstall }: InstallScr
                 <button
                   key={d.root}
                   className={cn(styles.driveChip, drive?.root === d.root && styles.driveChipActive)}
-                  onClick={() => setRoot(`${d.root.replace(/\\?$/, "\\")}${FOLDER_NAME}`)}
+                  onClick={() => setRoot(folderOn(d))}
                   title={`${formatBytes(d.freeBytes)} free of ${formatBytes(d.totalBytes)}`}
                 >
-                  {driveLetter(d.root)} · {formatBytes(d.freeBytes)} free
+                  {driveLabel(d.root, rules)} · {formatBytes(d.freeBytes)} free
                 </button>
               ))}
             </div>
             {drive ? (
-              <SpaceBar drive={drive} required={required} />
+              <SpaceBar drive={drive} label={driveName} required={required} />
             ) : (
               root.trim() && <div className={ui.hint}>We can't tell how much space is free there.</div>
             )}
@@ -236,11 +325,13 @@ export default function InstallScreen({ initial, onBack, onInstall }: InstallScr
                   </div>
                 )}
 
-                <div style={{ marginTop: 10 }}>
-                  <button className={ui.linkBtn} onClick={() => setSource("steamcmd")}>
-                    Download with SteamCMD instead
-                  </button>
-                </div>
+                {check.steamcmdAvailable && (
+                  <div style={{ marginTop: 10 }}>
+                    <button className={ui.linkBtn} onClick={() => setSource("steamcmd")}>
+                      Download with SteamCMD instead
+                    </button>
+                  </div>
+                )}
               </>
             ) : (
               <div className={styles.steamBox}>

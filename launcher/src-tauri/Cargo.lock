@@ -766,6 +766,7 @@ dependencies = [
  "flate2",
  "futures-util",
  "image",
+ "libc",
  "open",
  "portable-pty",
  "reqwest 0.12.28",

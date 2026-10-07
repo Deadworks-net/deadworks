@@ -148,12 +148,16 @@ export function Modal({
   children,
   actions,
   wide,
+  medium,
 }: {
   title: string;
   onClose: () => void;
   children: ReactNode;
   actions?: ReactNode;
+  /** Full-height editor dialog. */
   wide?: boolean;
+  /** Form dialog: wider than a confirm, and its body scrolls when the form is tall. */
+  medium?: boolean;
 }) {
   const onCloseRef = useRef(onClose);
   onCloseRef.current = onClose;
@@ -174,7 +178,12 @@ export function Modal({
 
   return (
     <div className={ui.overlay} onMouseDown={(e) => e.target === e.currentTarget && onClose()}>
-      <div className={cn(ui.dialog, wide && ui.dialogWide)} role="dialog" aria-modal aria-label={title}>
+      <div
+        className={cn(ui.dialog, wide && ui.dialogWide, medium && ui.dialogMedium)}
+        role="dialog"
+        aria-modal
+        aria-label={title}
+      >
         <h3 className={ui.dialogTitle}>{title}</h3>
         <div className={ui.dialogBody}>{children}</div>
         {actions && <div className={ui.dialogActions}>{actions}</div>}

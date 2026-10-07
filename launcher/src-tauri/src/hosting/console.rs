@@ -50,6 +50,16 @@ impl ConsoleBuffer {
         self.pending.push(line);
     }
 
+    /// The sequence number the next line will get.
+    pub fn next_seq(&self) -> u64 {
+        self.next_seq
+    }
+
+    /// Text of every line from `seq` on that is still in the scrollback.
+    pub fn since(&self, seq: u64) -> Vec<String> {
+        self.lines.iter().filter(|l| l.seq >= seq).map(|l| l.text.clone()).collect()
+    }
+
     pub fn history(&self) -> Vec<ConsoleLine> {
         self.lines.iter().cloned().collect()
     }
@@ -117,6 +127,9 @@ pub struct HostStatus {
     pub next: Option<i32>,
     #[serde(default)]
     pub player_count: Option<u32>,
+    /// Deadworks' kick and ban commands are registered (the Admin plugin is loaded).
+    #[serde(default)]
+    pub moderation: bool,
 }
 
 #[derive(Debug, Clone, PartialEq, Deserialize)]
@@ -135,6 +148,8 @@ pub struct HostPlayer {
     pub bot: bool,
     #[serde(default)]
     pub connected: Option<u64>,
+    #[serde(default)]
+    pub roles: Vec<String>,
 }
 
 /// Reads the console line by line. Owns the poll-hiding state.
@@ -317,6 +332,8 @@ pub fn merge_players(host: Option<&[HostPlayer]>, rows: &[StatusRow]) -> Vec<Pla
                     connected_seconds: h.connected.or(row.map(|r| r.seconds)).unwrap_or(0),
                     team: h.team.unwrap_or(0),
                     hero: h.hero.clone().unwrap_or_default(),
+                    roles: h.roles.clone(),
+                    bot: h.bot,
                 }
             })
             .collect(),
@@ -331,6 +348,8 @@ pub fn merge_players(host: Option<&[HostPlayer]>, rows: &[StatusRow]) -> Vec<Pla
                 connected_seconds: r.seconds,
                 team: 0,
                 hero: String::new(),
+                roles: Vec::new(),
+                bot: r.bot,
             })
             .collect(),
     }

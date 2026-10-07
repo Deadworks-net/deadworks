@@ -1,0 +1,522 @@
+/* Admins tab. Buttons, inputs, tables and modals come from ui.module.css; this file holds what is
+   particular to permissions. Overrides of shared classes are written as element.class so they win
+   whatever order the stylesheets load in. */
+
+/* ── View switcher: a segmented control, so it doesn't read as a second row of sub-tabs ── */
+
+.views {
+  display: flex;
+  gap: 3px;
+  padding: 3px;
+  max-width: 100%;
+  overflow-x: auto;
+  background: var(--bg);
+  border: 1px solid var(--border);
+  border-radius: 2px;
+}
+
+.view {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  padding: 5px 10px;
+  font-family: var(--font-family);
+  font-size: 0.68rem;
+  font-weight: 700;
+  letter-spacing: 1.2px;
+  text-transform: uppercase;
+  white-space: nowrap;
+  color: var(--text-muted);
+  background: none;
+  border: none;
+  border-radius: 2px;
+  cursor: pointer;
+  transition: color 0.15s, background 0.15s;
+}
+
+.view:hover {
+  color: var(--text);
+  background: var(--hover);
+}
+
+.view:focus-visible {
+  outline: 1px solid var(--accent);
+  outline-offset: 1px;
+}
+
+.viewActive,
+.viewActive:hover {
+  color: #000;
+  background: var(--accent);
+}
+
+.viewCount {
+  padding: 0 5px;
+  font-size: 0.62rem;
+  letter-spacing: 0;
+  font-variant-numeric: tabular-nums;
+  color: var(--text-secondary);
+  background: rgba(255, 255, 255, 0.08);
+  border-radius: 2px;
+}
+
+.viewActive .viewCount {
+  color: #000;
+  background: rgba(0, 0, 0, 0.18);
+}
+
+.viewWarn {
+  color: var(--ping-ok);
+}
+
+.viewWarn .viewCount {
+  color: #000;
+  background: var(--ping-ok);
+}
+
+/* ── Status and notices ── */
+
+.status {
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: 12px;
+  margin-bottom: 12px;
+  font-size: 0.76rem;
+  line-height: 1.45;
+  color: var(--text-muted);
+}
+
+.notices {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.notices:not(:empty) {
+  margin-bottom: 12px;
+}
+
+/* ── Sections ── */
+
+.sectionHead {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  gap: 8px 12px;
+  margin-bottom: 8px;
+}
+
+.tools {
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 8px;
+}
+
+.plugin {
+  margin-top: 18px;
+}
+
+input.search {
+  width: 230px;
+  padding: 5px 9px;
+  font-size: 0.8rem;
+}
+
+.scroll {
+  overflow-x: auto;
+}
+
+/* The shared table clips every cell to one line; these hold chips that wrap. */
+table.table {
+  table-layout: auto;
+}
+
+table.table td {
+  white-space: normal;
+  overflow: visible;
+  vertical-align: top;
+}
+
+table.table th {
+  white-space: nowrap;
+}
+
+table.table td.nowrap {
+  white-space: nowrap;
+}
+
+.muted {
+  font-size: 0.76rem;
+  color: var(--text-muted);
+}
+
+.emptyTitle {
+  font-size: 0.9rem;
+  font-weight: 700;
+  color: var(--text);
+  margin-bottom: 4px;
+}
+
+.emptyActions {
+  display: flex;
+  justify-content: center;
+  flex-wrap: wrap;
+  gap: 8px;
+  margin-top: 12px;
+}
+
+/* File names keep their case. */
+button.fileBtn {
+  text-transform: none;
+  letter-spacing: 0.3px;
+}
+
+.rowActions {
+  display: flex;
+  justify-content: flex-end;
+  gap: 6px;
+}
+
+/* ── Chips ── */
+
+.chips {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 4px;
+  max-width: 340px;
+}
+
+span.roleMissing {
+  border-style: dashed;
+  color: var(--ping-ok);
+}
+
+.person {
+  display: inline-flex;
+  align-items: center;
+  padding: 1px 7px;
+  font-size: 0.72rem;
+  color: var(--text-secondary);
+  border: 1px dashed var(--border);
+  border-radius: 2px;
+}
+
+.grant {
+  /* One box even when a long name wraps. */
+  display: inline-block;
+  padding: 1px 5px;
+  font-family: 'Consolas', 'Courier New', monospace;
+  font-size: 0.74rem;
+  color: var(--text-secondary);
+  background: var(--hover);
+  border-radius: 2px;
+  user-select: text;
+}
+
+.grantPart {
+  white-space: nowrap;
+}
+
+/* Usage strings like <list|enable|disable> have no spaces to wrap at. */
+table.table td.description {
+  overflow-wrap: anywhere;
+}
+
+.grantDeny {
+  color: var(--ping-bad);
+  background: rgba(224, 80, 80, 0.1);
+}
+
+.grantBad {
+  color: var(--ping-ok);
+  text-decoration: underline wavy;
+}
+
+.command {
+  font-family: 'Consolas', 'Courier New', monospace;
+  font-weight: 700;
+  color: var(--text);
+  user-select: text;
+}
+
+.overridden {
+  margin-top: 5px;
+}
+
+.player {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+}
+
+.player strong {
+  color: var(--text);
+}
+
+.player code {
+  font-family: 'Consolas', 'Courier New', monospace;
+  font-size: 0.72rem;
+  color: var(--text-muted);
+  user-select: text;
+}
+
+.held {
+  max-width: 200px;
+  font-size: 0.8rem;
+}
+
+/* ── Check ── */
+
+.verdicts {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+.verdict {
+  display: grid;
+  grid-template-columns: 100px 1fr;
+  gap: 2px 14px;
+  padding: 9px 12px;
+  font-size: 0.82rem;
+  color: var(--text-secondary);
+  background: var(--bg-card);
+  border: 1px solid var(--border);
+  border-left-width: 2px;
+  border-radius: 2px;
+}
+
+.verdict > :last-child {
+  grid-column: 2;
+}
+
+.verdictAllowed {
+  border-left-color: var(--accent);
+}
+
+.verdictAllowed strong {
+  color: var(--accent);
+}
+
+.verdictDenied {
+  border-left-color: var(--ping-bad);
+}
+
+.verdictDenied strong {
+  color: var(--ping-bad);
+}
+
+/* ── Errors ── */
+
+.problems {
+  list-style: none;
+}
+
+.problems li {
+  padding: 8px 12px;
+  font-size: 0.8rem;
+  color: var(--text-secondary);
+  border-left: 2px solid var(--ping-ok);
+  border-bottom: 1px solid var(--separator);
+  overflow-wrap: anywhere;
+}
+
+.problems li:last-child {
+  border-bottom: none;
+}
+
+.problems li.problem-error {
+  color: var(--text);
+  border-left-color: var(--ping-bad);
+}
+
+.problems li.problem-info {
+  color: var(--text-muted);
+  border-left-color: var(--text-muted);
+}
+
+/* ── Dialog forms ── */
+
+.form {
+  display: flex;
+  flex-direction: column;
+}
+
+.form > [role="alert"] {
+  margin-bottom: 14px;
+}
+
+.fieldset {
+  min-width: 0;
+  margin-bottom: 14px;
+  border: none;
+}
+
+.details {
+  margin-top: 2px;
+}
+
+/* ui.label is a block, which would hide the disclosure arrow. */
+.details > summary {
+  display: list-item;
+  cursor: pointer;
+  margin-bottom: 10px;
+}
+
+.details > summary:focus-visible {
+  outline: 1px solid var(--accent);
+  outline-offset: 2px;
+}
+
+.warnText {
+  color: var(--ping-ok);
+}
+
+.grantInput {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.grantInput .chips {
+  max-width: none;
+}
+
+.chipEdit {
+  display: inline-flex;
+  align-items: center;
+  gap: 1px;
+}
+
+.chipEdit button {
+  padding: 0 4px;
+  font-size: 0.9rem;
+  line-height: 1.2;
+  color: var(--text-muted);
+  background: none;
+  border: none;
+  cursor: pointer;
+}
+
+.chipEdit button:hover {
+  color: var(--ping-bad);
+}
+
+/* Role picker: one list, a row per role. */
+
+.picker {
+  border: 1px solid var(--border);
+  border-radius: 2px;
+}
+
+.pickerRow {
+  position: relative;
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 8px 12px;
+  border-left: 2px solid transparent;
+  cursor: pointer;
+}
+
+.pickerRow + .pickerRow {
+  border-top: 1px solid var(--separator);
+}
+
+.pickerRow:hover {
+  background: var(--hover);
+}
+
+.pickerRowOn,
+.pickerRowOn:hover {
+  background: var(--accent-dim);
+  border-left-color: var(--accent);
+}
+
+.pickerRow > input {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  opacity: 0;
+}
+
+.pickerRow:has(input:focus-visible) {
+  outline: 1px solid var(--accent);
+  outline-offset: -1px;
+}
+
+.pickerCheck {
+  flex: none;
+  display: grid;
+  place-items: center;
+  width: 16px;
+  height: 16px;
+  color: #000;
+  border: 1px solid var(--text-muted);
+  border-radius: 2px;
+}
+
+.pickerRowOn .pickerCheck {
+  background: var(--accent);
+  border-color: var(--accent);
+}
+
+.pickerText {
+  flex: 1;
+  min-width: 0;
+  display: flex;
+  flex-direction: column;
+}
+
+.pickerText strong {
+  font-size: 0.85rem;
+  color: var(--text);
+}
+
+.pickerText span {
+  font-size: 0.72rem;
+  color: var(--text-muted);
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.pickerImmunity {
+  flex: none;
+  min-width: 2.5rem;
+  text-align: right;
+  font-size: 0.76rem;
+  font-variant-numeric: tabular-nums;
+  color: var(--text-secondary);
+}
+
+.pickerImmunity::before {
+  content: 'IMMUNITY ';
+  font-size: 0.58rem;
+  letter-spacing: 1px;
+  color: var(--text-muted);
+}
+
+/* Override dialog */
+
+.options {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  margin: 12px 0;
+}
+
+.options label {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  cursor: pointer;
+}
+
+.options input[type="radio"] {
+  accent-color: var(--accent);
+}

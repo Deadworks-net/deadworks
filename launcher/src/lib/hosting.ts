@@ -31,7 +31,20 @@ export interface SetupCheck {
   drives: DriveInfo[];
   /** Default install folder: the drive with the most free space. */
   suggestedRoot: string;
+  /** Decides path rules in the form: "windows" paths look like D:\x, "linux" ones like /home/me/x. */
+  platform: HostPlatform;
+  /** Path separator for joining a folder name onto a drive root. */
+  pathSeparator: string;
+  /**
+   * What has to be installed before hosting can work, as short sentences to show as-is
+   * (Linux: Wine). Empty when nothing is missing. Install is blocked while non-empty.
+   */
+  missingTools: string[];
+  /** Whether the SteamCMD source is offered on this platform. */
+  steamcmdAvailable: boolean;
 }
+
+export type HostPlatform = "windows" | "linux" | "unsupported";
 
 export interface InstallOptions {
   root: string;
@@ -96,6 +109,8 @@ export interface UpdateState {
 }
 
 export interface HostingOverview {
+  /** "unsupported" (macOS): show a short notice instead of the hosting UI. */
+  platform: HostPlatform;
   installed: boolean;
   root: string | null;
   base: BaseInfo | null;
@@ -158,6 +173,9 @@ export interface PlayerInfo {
   connectedSeconds: number;
   team: number;
   hero: string;
+  /** Permission roles the player holds on this server (e.g. ["admin"]); empty when none or unknown. */
+  roles: string[];
+  bot: boolean;
 }
 
 export interface NetworkInfo {
@@ -187,6 +205,11 @@ export interface ServerRuntime {
   message: string | null;
   exitCode: number | null;
   network: NetworkInfo;
+  /**
+   * The server has Deadworks' kick and ban commands (the Admin plugin that ships with Deadworks).
+   * Without it only Kick works (the engine's own), and Ban is unavailable.
+   */
+  moderation: boolean;
 }
 
 export interface ServerSummary {
@@ -226,6 +249,33 @@ export interface ContentFile {
   sizeBytes: number;
 }
 
+// ── Permissions (the Admins tab) ──
+
+/**
+ * Deadworks' permission files for one server, as they are on disk. Keys are paths relative to the
+ * server's `game` folder, the same ones deadworks-web uses: `bin/win64/configs/permissions/roles.jsonc`,
+ * `.../players.jsonc`, `.../overrides.jsonc` and `.../generated/<Plugin>.jsonc`. null = file missing.
+ */
+export interface PermissionsSnapshot {
+  files: Record<string, string | null>;
+  running: boolean;
+  /** The Steam account signed in on this PC, for "Add me". Null when it can't be found. */
+  localSteamId: string | null;
+  localSteamName: string | null;
+}
+
+export interface PermissionsWriteResult {
+  changed: boolean;
+  /** Paths written. */
+  files: string[];
+  /** A file changed underneath; nothing was written. `contents` maps each differing path to its text now. */
+  conflict: boolean;
+  contents: Record<string, string | null>;
+  /** The running server confirmed it reloaded. False with a reason when stopped or when it failed. */
+  live: boolean;
+  liveReason: string | null;
+}
+
 // ── Commands ──
 
 export const hosting = {
@@ -256,6 +306,17 @@ export const hosting = {
   sendCommand: (id: string, command: string) => invoke<void>("hosting_send_command", { id, command }),
   /** Kicks by player slot (PlayerInfo.slot). */
   kick: (id: string, slot: number) => invoke<void>("hosting_kick", { id, slot }),
+  /** Needs `runtime.moderation`. `minutes` 0 = permanent. The ban also removes them from the server. */
+  ban: (id: string, steamId64: string, minutes: number, reason: string) =>
+    invoke<void>("hosting_ban", { id, steamId64, minutes, reason }),
+  permissions: (id: string) => invoke<PermissionsSnapshot>("hosting_permissions", { id }),
+  /**
+   * Compare-and-swap write of permission files. `expected` is the text each file had when the change
+   * was worked out (null = did not exist); if any differs now, nothing is written and `conflict` is set.
+   * A running server is told to reload (dw_perm_reload); `live` says whether it confirmed.
+   */
+  writePermissions: (id: string, expected: Record<string, string | null>, files: Record<string, string>) =>
+    invoke<PermissionsWriteResult>("hosting_write_permissions", { id, expected, files }),
   /** The user copied the connect command: clears `sdrIdChanged`. */
   markShared: (id: string) => invoke<void>("hosting_mark_shared", { id }),
   checkReachability: (id: string) => invoke<NetworkInfo>("hosting_check_reachability", { id }),

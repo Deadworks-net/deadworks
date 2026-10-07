@@ -52,6 +52,8 @@ export interface HostingActions {
   restart: (id: string) => Promise<void>;
   /** By PlayerInfo.slot; userId can be -1. */
   kick: (id: string, slot: number) => Promise<void>;
+  /** Needs `runtime.moderation`. `minutes` 0 = permanent. */
+  ban: (id: string, steamId64: string, minutes: number, reason: string) => Promise<void>;
   markShared: (id: string) => Promise<void>;
   checkReachability: (id: string) => Promise<void>;
   setPluginEnabled: (id: string, pluginId: string, enabled: boolean) => Promise<ServerConfig>;
@@ -235,6 +237,11 @@ export function useHosting(): UseHosting {
       kick: async (id, slot) => {
         await hosting.kick(id, slot);
         patchRuntime(id, (r) => ({ ...r, players: r.players.filter((p) => p.slot !== slot) }));
+      },
+      ban: async (id, steamId64, minutes, reason) => {
+        await hosting.ban(id, steamId64, minutes, reason);
+        // A ban also removes them from the server.
+        patchRuntime(id, (r) => ({ ...r, players: r.players.filter((p) => p.steamId64 !== steamId64) }));
       },
       markShared: async (id) => {
         await hosting.markShared(id);

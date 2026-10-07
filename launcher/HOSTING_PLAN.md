@@ -96,13 +96,75 @@ v0.4.16).
     a real UAC click.
 - **The port reachability check.** It needs the deadworks-api `hosting-reachability` branch (queued
   check handled by the probe) to be deployed. Until then the launcher shows "couldn't check".
-- **A player kick.** `dw_kick` and `dw_host_status` exist in managed but not in any Deadworks
-  release yet. Released builds fall back to `status` + `kickid`.
+- **The player list with a real player.** The `status` row parser and the `dw_host_status` merge
+  have only seen made-up rows and an empty server. Kick and Ban on a connected player are untested
+  for the same reason. `dw_host_status` is not in a Deadworks release yet; released builds fall back
+  to `status` + `kickid`.
+- **Linux.** Type-checked for the Linux target, never run (see "Linux" below).
 
 ### Not done (small)
 
 - The tray doesn't show a running-server count. Quit already asks before stopping servers.
-- The launcher's own auto-update restarts it, which stops running servers without asking.
+
+## Update 2026-10-07: merged with main, permissions, Linux
+
+Merged `origin/main` (57 commits: permissions, engine updates through v0.5.4).
+
+### Managed
+
+- `dw_host_status` is now a `[Command("host_status")]` in `CoreCommands` (console only, permission
+  `deadworks.host.status`). Its line gained top-level `roles` and `moderation`, per-player `roles`,
+  and per-plugin `builtin`.
+- The branch's own `dw_kick` is gone. The launcher uses the Admin plugin that ships with Deadworks
+  (`dw_kick #<slot>`, `dw_ban <steamid> <minutes> [reason]`) when `moderation` is true, and the
+  engine's `kickid` otherwise.
+- `ContentAddonManager` mounted `deadworks_mods/vpks/<name>.vpk` as a relative path, which the
+  engine resolves against its working directory (`game/bin/win64`). It now mounts the absolute
+  `game/citadel/deadworks_mods/vpks` path, which is where the launcher puts addons, and still
+  loads VPKs found in the old location with a note to move them.
+
+### Launcher
+
+- **Admins tab**, ported from deadworks-web's hosting portal (`PermissionsPanel.jsx`,
+  `permissions.js`): people, roles, command overrides, access check, problems, JSON editors. It
+  edits `configs/permissions/{roles,players,overrides}.jsonc` through a compare-and-swap write and
+  has a running server `dw_perm_reload`. "Add me" uses the Steam account signed in on this PC.
+- **Player list:** role pills, Kick, Ban (duration presets, reason), Make admin.
+- **Console commands are sent one at a time.** The engine takes one typed line per frame and drops
+  the rest, so each command waits for the previous one's echo (found when three back-to-back
+  commands lost two).
+
+### Verified on a real server (v0.5.4 native + this branch's managed DLLs)
+
+- The updater applied a second real game update (629 changed files) and v0.4.17 → v0.5.4.
+- An addon mounted from `game\citadel\deadworks_mods\vpks`.
+- `dw_host_status` polling stays hidden and reports `moderation`.
+- A burst of four commands arrives in order.
+- Permissions: snapshot; write + live reload (`dw_perm_list` shows the new admin); a stale write
+  is reported as a conflict; other files are refused.
+- `dw_ban` (reason sanitised), `dw_bans`, `dw_unban`, `dw_kick #7` ("No player in slot 7").
+
+### Linux
+
+Best effort, modelled on `docker/entrypoint.sh` (which is verified under Debian's Wine):
+
+- **Game files** are copied from the Linux Steam client's Deadlock install (Proton installs hold
+  the Windows build). The SteamCMD source is Windows-only for now.
+- **Wine:** one shared prefix under `<root>/cache/wineprefix`, created with `wineboot --init`.
+  The setup screen blocks with a plain message when `wine` is missing.
+- **Steam auth:** the Steamworks redistributable (app 1007) is fetched with DepotDownloader 3.4.0
+  and its three DLLs are copied beside each server's exe.
+- **.NET:** the same Windows runtime zip, reached through `DOTNET_ROOT=Z:\...`.
+- **Console:** stdin is never a console under Wine, so the `GetLine` complaint is filtered and
+  commands go over RCON (`-usercon`, a per-run random password, the listener address read from
+  `/proc/net/tcp`). Replies are fed into the console log.
+- **Processes:** CPU and memory come from `/proc`; a forced stop kills every process whose
+  command line names the server's folder; servers left over from a dead launcher are killed on
+  the next start (there is no job object).
+- **Not on Linux:** the firewall step (nothing to do) and SteamCMD.
+- **How it was checked:** `cargo check --target x86_64-unknown-linux-gnu` on the platform modules
+  through a scratch crate (the full launcher can't cross-compile from Windows because of GTK).
+  The RCON client has unit tests against a fake server. Nothing was run on Linux.
 
 ## Decisions (agreed)
 

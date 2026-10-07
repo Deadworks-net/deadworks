@@ -10,17 +10,19 @@ use tauri::{AppHandle, Emitter};
 
 use super::console::{self, ConsoleBuffer, Event, HostPlayer, Monitor, StatusRow};
 use super::manifest::{self, DepotFile};
-use super::process::{self, Process, SpawnSpec, Stream};
+use super::process::{self, Process, Rcon, SpawnSpec, Stream};
 use super::store::{self, now_secs, BaseRecord, HostingState, Layout, ServerFile};
 use super::task::{Progress, TaskError};
 use super::types::*;
-use super::{base, cfg, content, disk, dotnet, firewall, fsutil, netcfg, plugins, release, steamcmd, tree};
+use super::{base, cfg, content, disk, dotnet, firewall, fsutil, netcfg, plugins, release, steamcmd, tree, wine};
 
 const STORE_KEY: &str = "hosting_root";
 const FIRST_PORT: u16 = 27020;
 const STATUS_POLL: Duration = Duration::from_secs(5);
 const METRICS_EVERY: Duration = Duration::from_secs(2);
 const STOP_GRACE: Duration = Duration::from_secs(20);
+/// How long a typed console command may take to be echoed before the next one goes in anyway.
+const ECHO_WAIT: Duration = Duration::from_millis(1500);
 /// Runs this long on a build before that build counts as known-good.
 const GOOD_AFTER: u64 = 300;
 /// Starting with no Steam logon line (e.g. Steam unreachable) still counts as up after this.
@@ -39,6 +41,8 @@ pub fn init(app: &AppHandle) {
     let root = read_root(app);
     let mut inner = Inner::default();
     if let Some(root) = root.filter(|r| r.join("hosting.json").is_file()) {
+        #[cfg(not(windows))]
+        process::kill_strays(&root);
         inner.load(Layout::new(root));
     }
     let mgr = Arc::new(Manager { app: app.clone(), inner: Mutex::new(inner) });
@@ -125,6 +129,11 @@ struct Server {
     /// Commands the user typed whose echo hasn't come back yet; the echo is
     /// shown as their input line instead of as output.
     echoes: std::collections::VecDeque<String>,
+    /// One console command at a time: the engine takes a single typed line per frame and drops
+    /// the rest, so each command waits for the previous one's echo.
+    send_gate: Arc<Mutex<()>>,
+    /// The command just typed into the console, until the server echoes it.
+    awaiting_echo: Option<String>,
 }
 
 #[derive(Default)]
@@ -139,6 +148,8 @@ struct Runtime {
     host_players: Option<Vec<HostPlayer>>,
     host_partial: Vec<HostPlayer>,
     supports_host_status: Option<bool>,
+    /// Deadworks' kick and ban commands exist on this server (from dw_host_status).
+    moderation: bool,
     players: Vec<PlayerInfo>,
     cpu: f32,
     memory: u64,
@@ -156,7 +167,16 @@ struct Runtime {
 
 impl Server {
     fn new(file: ServerFile) -> Self {
-        Self { file, rt: Runtime::default(), console: ConsoleBuffer::default(), monitor: Monitor::default(), proc: None, echoes: Default::default() }
+        Self {
+            file,
+            rt: Runtime::default(),
+            console: ConsoleBuffer::default(),
+            monitor: Monitor::default(),
+            proc: None,
+            echoes: Default::default(),
+            send_gate: Default::default(),
+            awaiting_echo: None,
+        }
     }
 
     fn state(&self) -> ServerState {
@@ -196,6 +216,7 @@ impl Server {
             memory_bytes: self.rt.memory,
             message: self.rt.message.clone(),
             exit_code: self.rt.exit_code,
+            moderation: self.rt.moderation,
             network: NetworkInfo {
                 mode,
                 port,
@@ -235,6 +256,7 @@ impl Manager {
             modified_files: b.modified_files.clone(),
         });
         HostingOverview {
+            platform: HostPlatform::CURRENT,
             installed: inner.installed(),
             root: inner.layout.as_ref().map(|l| l.root.to_string_lossy().into_owned()),
             base,
@@ -287,6 +309,11 @@ impl Manager {
             required_bytes: app.as_ref().map(|a| a.size_on_disk).unwrap_or(0),
             suggested_root: disk::suggested_root(&drives),
             drives,
+            platform: HostPlatform::CURRENT,
+            path_separator: disk::PATH_SEPARATOR.into(),
+            missing_tools: if cfg!(windows) { Vec::new() } else { wine::missing_tools() },
+            // SteamCMD's Linux build and login flow aren't wired up; Linux copies from the Steam install.
+            steamcmd_available: cfg!(windows),
         }
     }
 
@@ -419,6 +446,9 @@ impl Manager {
                 }
             }
             BaseSource::Steamcmd => {
+                if !cfg!(windows) {
+                    return Err("SteamCMD isn't available on Linux yet. Install Deadlock through Steam, then copy from it.".into());
+                }
                 let user = opts.steam_username.clone().unwrap_or_default();
                 steamcmd::install(&layout, &user, opts.steam_password.as_deref(), true, p)?;
                 let (app, files) = steamcmd::installed(&layout)?;
@@ -461,6 +491,13 @@ impl Manager {
         p.check_cancel()?;
         let dotnet_current = self.lock().state.dotnet_version.clone();
         let dn = dotnet::ensure(layout, dotnet_current.as_deref(), p)?;
+        if !cfg!(windows) {
+            if let Some(missing) = wine::missing_tools().into_iter().next() {
+                return Err(missing.into());
+            }
+            wine::ensure_prefix(layout, p)?;
+            wine::ensure_redist(layout, p)?;
+        }
         let mut inner = self.lock();
         if inner.state.hold_deadworks.as_deref().is_some_and(|h| h != tag) {
             inner.state.hold_reason = None;
@@ -827,14 +864,26 @@ impl Manager {
         let id = id.to_string();
         std::thread::spawn(move || {
             let result = (|| -> Result<Process, String> {
+                // Under Wine the console is RCON on the game port, behind a password made for this run.
+                let rcon = (!cfg!(windows)).then(|| Rcon { port: config.port, password: uuid::Uuid::new_v4().simple().to_string() });
                 tree::prepare(&tree::TreeInputs {
                     layout: &layout,
                     config: &config,
                     base_files: &base_files,
                     base_stamp,
                     release_dir: &release::release_dir(&layout, &tag),
+                    rcon_password: rcon.as_ref().map(|r| r.password.as_str()),
                 })?;
                 let bin = layout.server_bin(&id);
+                let dotnet_dir = dotnet::runtime_dir(&layout, &dotnet_version);
+                let mut env = Vec::new();
+                if cfg!(windows) {
+                    env.push(("DOTNET_ROOT".to_string(), dotnet_dir.to_string_lossy().into_owned()));
+                } else {
+                    wine::install_redist(&layout, &bin)?;
+                    env.extend(wine::env(&layout));
+                    env.push(("DOTNET_ROOT".to_string(), wine::windows_path(&dotnet_dir)));
+                }
                 let rule = firewall::rule_name(&id);
                 // Automated test runs can't answer a UAC prompt.
                 let skip = cfg!(debug_assertions) && std::env::var_os("DEADWORKS_SKIP_FIREWALL").is_some();
@@ -854,11 +903,9 @@ impl Manager {
                     SpawnSpec {
                         exe: bin.join("deadworks.exe"),
                         cwd: bin,
-                        args: cfg::argv(&config),
-                        env: vec![(
-                            "DOTNET_ROOT".into(),
-                            dotnet::runtime_dir(&layout, &dotnet_version).to_string_lossy().into_owned(),
-                        )],
+                        args: cfg::argv(&config, rcon.is_some()),
+                        env,
+                        rcon,
                     },
                     move |stream, line| m1.on_line(&id1, run, stream, line),
                     move |code| m2.on_exit(&id2, run, code),
@@ -899,11 +946,15 @@ impl Manager {
         if s.rt.run != run {
             return;
         }
+        if s.awaiting_echo.as_deref() == Some(line.trim()) {
+            s.awaiting_echo = None;
+        }
         let (show, events) = s.monitor.feed(&line);
         if show {
             let _ = stream;
-            if s.echoes.front().is_some_and(|c| *c == line.trim()) {
-                s.echoes.pop_front();
+            // An earlier command whose echo never came must not make this one look like output.
+            if let Some(at) = s.echoes.iter().position(|c| *c == line.trim()) {
+                s.echoes.drain(..=at);
                 s.console.push(LineKind::In, line);
             } else {
                 s.console.push(LineKind::Out, line);
@@ -929,9 +980,10 @@ impl Manager {
                 }
                 Event::HostStatus(hs) => {
                     s.rt.supports_host_status = Some(true);
+                    s.rt.moderation = hs.moderation;
                     s.rt.host_partial.extend(hs.players);
                     match hs.next {
-                        Some(next) => followup = Some((s.proc.as_ref().map(|p| p.pid), format!("dw_host_status {next}"))),
+                        Some(next) => followup = Some(format!("dw_host_status {next}")),
                         None => {
                             s.rt.host_players = Some(std::mem::take(&mut s.rt.host_partial));
                             s.rt.players = console::merge_players(s.rt.host_players.as_deref(), &s.rt.status_rows);
@@ -945,8 +997,12 @@ impl Manager {
             self.emit_runtime_of(s);
         }
         drop(inner);
-        if let Some((Some(pid), cmd)) = followup {
-            let _ = process::send_line(pid, &cmd);
+        if let Some(cmd) = followup {
+            // Not on this thread: it is the one that delivers the echo `send` waits for.
+            let (mgr, id) = (get().clone(), id.to_string());
+            std::thread::spawn(move || {
+                let _ = mgr.send(&id, &cmd);
+            });
         }
     }
 
@@ -1028,7 +1084,7 @@ impl Manager {
             self.emit_runtime_of(s);
             (proc, s.rt.run)
         };
-        if process::send_line(proc.pid, "quit").is_err() {
+        if proc.send_line("quit").is_err() {
             proc.terminate();
             return Ok(());
         }
@@ -1090,10 +1146,48 @@ impl Manager {
         Ok(self.lock().server(id)?.console.history())
     }
 
-    fn live_pid(&self, id: &str) -> Result<u32, String> {
-        let mut inner = self.lock();
-        let s = inner.server(id)?;
-        s.proc.as_ref().map(|p| p.pid).ok_or_else(|| "The server isn't running.".to_string())
+    /// Run a console command on a running server. Where its output comes back out of band (RCON
+    /// under Wine) it is fed into the console as the echo and lines the server would have printed.
+    fn send(&self, id: &str, command: &str) -> Result<(), String> {
+        let gate = self.lock().server(id)?.send_gate.clone();
+        let _one_at_a_time = gate.lock().unwrap_or_else(|e| e.into_inner());
+        let (proc, run) = {
+            let mut inner = self.lock();
+            let s = inner.server(id)?;
+            let proc = s.proc.clone().ok_or_else(|| "The server isn't running.".to_string())?;
+            s.awaiting_echo = Some(command.to_string());
+            (proc, s.rt.run)
+        };
+        match proc.send_line(command) {
+            Ok(Some(reply)) => {
+                self.on_line(id, run, Stream::Stdout, command.to_string());
+                for line in reply.lines() {
+                    self.on_line(id, run, Stream::Stdout, line.to_string());
+                }
+            }
+            Ok(None) => {
+                // Typed into the console: give the server a moment to take the line before the
+                // next one may be typed. A hibernating server runs few frames, hence the patience.
+                let deadline = Instant::now() + ECHO_WAIT;
+                while Instant::now() < deadline {
+                    match self.lock().servers.get(id) {
+                        Some(s) if s.rt.run == run && s.proc.is_some() && s.awaiting_echo.is_some() => {}
+                        _ => break,
+                    }
+                    std::thread::sleep(Duration::from_millis(10));
+                }
+            }
+            Err(e) => {
+                if let Some(s) = self.lock().servers.get_mut(id) {
+                    s.awaiting_echo = None;
+                }
+                return Err(e);
+            }
+        }
+        if let Some(s) = self.lock().servers.get_mut(id) {
+            s.awaiting_echo = None;
+        }
+        Ok(())
     }
 
     pub fn send_command(&self, id: &str, command: &str) -> Result<(), String> {
@@ -1104,25 +1198,49 @@ impl Manager {
         if command.contains(['\r', '\n']) {
             return Err("Send one command at a time.".into());
         }
-        let pid = self.live_pid(id)?;
         {
             let mut inner = self.lock();
             let s = inner.server(id)?;
+            if s.proc.is_none() {
+                return Err("The server isn't running.".into());
+            }
             s.echoes.push_back(command.to_string());
             // An echo that never comes (engine busy) mustn't hide later output.
             while s.echoes.len() > 8 {
                 s.echoes.pop_front();
             }
         }
-        process::send_line(pid, command)
+        self.send(id, command)
     }
 
+    /// Kick with Deadworks' own command when the server has it; otherwise the engine's, which
+    /// goes by the user id `status` reports.
     pub fn kick(&self, id: &str, slot: i32) -> Result<(), String> {
-        let pid = self.live_pid(id)?;
-        let supports = self.lock().server(id)?.rt.supports_host_status == Some(true);
-        // Without dw_host_status the "slot" is status's user id.
-        let cmd = if supports { format!("dw_kick {slot}") } else { format!("kickid {slot}") };
-        process::send_line(pid, &cmd)
+        let (moderation, user_id) = {
+            let mut inner = self.lock();
+            let s = inner.server(id)?;
+            (s.rt.moderation, s.rt.players.iter().find(|p| p.slot == slot).map(|p| p.user_id).filter(|u| *u >= 0))
+        };
+        let cmd = if moderation { format!("dw_kick #{slot}") } else { format!("kickid {}", user_id.unwrap_or(slot)) };
+        self.send(id, &cmd)
+    }
+
+    /// `minutes` 0 is permanent. Bans are kept by Deadworks and enforced when the player connects.
+    pub fn ban(&self, id: &str, steam_id64: &str, minutes: u32, reason: &str) -> Result<(), String> {
+        if steam_id64.len() != 17 || !steam_id64.bytes().all(|b| b.is_ascii_digit()) {
+            return Err("That isn't a SteamID.".into());
+        }
+        if !self.lock().server(id)?.rt.moderation {
+            return Err("This server doesn't have Deadworks' ban command. Its Admin plugin isn't loaded.".into());
+        }
+        // The console splits on ';' and treats quotes and '//' specially; a reason needs none of them.
+        let reason: String = reason
+            .replace("//", " ")
+            .chars()
+            .filter(|c| !matches!(c, '"' | ';' | '\r' | '\n'))
+            .take(120)
+            .collect();
+        self.send(id, format!("dw_ban {steam_id64} {minutes} {}", reason.trim()).trim_end())
     }
 
     pub fn mark_shared(&self, id: &str) -> Result<(), String> {
@@ -1228,15 +1346,15 @@ impl Manager {
             store::save_server(&layout, &s.file)?;
             (layout, s.file.config.clone(), s.proc.as_ref().map(|p| p.pid))
         };
-        if let Some(pid) = pid {
+        if pid.is_some() {
             // Deleting a DLL doesn't unload it, so unload first; enabling needs the
             // files in place before Deadworks is told to load them.
             if !enabled {
-                let _ = process::send_line(pid, &format!("dw_plugin disable {plugin_id}"));
+                let _ = self.send(id, &format!("dw_plugin disable {plugin_id}"));
             }
             tree::apply_plugins(&layout, &config)?;
             if enabled {
-                let _ = process::send_line(pid, &format!("dw_plugin enable {plugin_id}"));
+                let _ = self.send(id, &format!("dw_plugin enable {plugin_id}"));
             }
         }
         self.emit_changed();
@@ -1287,8 +1405,8 @@ impl Manager {
         serde_json::from_str::<serde_json::Value>(&cfg::strip_jsonc(text)).map_err(|e| format!("That isn't valid JSON: {e}"))?;
         let (path, pid) = self.config_file(id, plugin_id)?;
         fsutil::write_real(&path, text.as_bytes()).map_err(|e| format!("Couldn't save: {e}"))?;
-        if let Some(pid) = pid {
-            let _ = process::send_line(pid, "dw_reloadconfig");
+        if pid.is_some() {
+            let _ = self.send(id, "dw_reloadconfig");
         }
         Ok(())
     }
@@ -1296,10 +1414,138 @@ impl Manager {
     pub fn reset_plugin_config(&self, id: &str, plugin_id: &str) -> Result<(), String> {
         let (path, pid) = self.config_file(id, plugin_id)?;
         fsutil::remove_file_force(&path).map_err(|e| format!("Couldn't reset: {e}"))?;
-        if let Some(pid) = pid {
-            let _ = process::send_line(pid, "dw_reloadconfig");
+        if pid.is_some() {
+            let _ = self.send(id, "dw_reloadconfig");
         }
         Ok(())
+    }
+
+    // ── Permissions (the Admins tab) ──
+
+    pub fn permissions(&self, id: &str) -> Result<PermissionsSnapshot, String> {
+        let (dir, running) = {
+            let mut inner = self.lock();
+            let layout = inner.layout()?;
+            (permissions_dir(&layout, id), inner.server(id)?.proc.is_some())
+        };
+        let mut files = BTreeMap::new();
+        for name in PERMISSION_FILES {
+            files.insert(format!("{PERMISSIONS_KEY}/{name}"), read_optional(&dir.join(name))?);
+        }
+        // One per plugin, written by Deadworks at startup; read-only here.
+        if let Ok(rd) = std::fs::read_dir(dir.join("generated")) {
+            let mut names: Vec<String> = rd
+                .flatten()
+                .filter_map(|e| e.file_name().into_string().ok())
+                .filter(|n| n.to_ascii_lowercase().ends_with(".jsonc"))
+                .collect();
+            names.sort();
+            for name in names.into_iter().take(GENERATED_LIMIT) {
+                let text = read_optional(&dir.join("generated").join(&name))?;
+                files.insert(format!("{PERMISSIONS_KEY}/generated/{name}"), text);
+            }
+        }
+        let local = local_steam_user();
+        Ok(PermissionsSnapshot {
+            files,
+            running,
+            local_steam_id: local.as_ref().map(|(id, _)| id.clone()),
+            local_steam_name: local.map(|(_, name)| name),
+        })
+    }
+
+    /// Write permission files if they still read as `expected`, then have a running server reload.
+    pub fn write_permissions(
+        &self,
+        id: &str,
+        expected: BTreeMap<String, Option<String>>,
+        files: BTreeMap<String, String>,
+    ) -> Result<PermissionsWriteResult, String> {
+        let (dir, running) = {
+            let mut inner = self.lock();
+            let layout = inner.layout()?;
+            (permissions_dir(&layout, id), inner.server(id)?.proc.is_some())
+        };
+        let mut targets = Vec::new();
+        for (key, text) in &files {
+            let name = key
+                .strip_prefix(PERMISSIONS_KEY)
+                .and_then(|rest| rest.strip_prefix('/'))
+                .filter(|name| PERMISSION_FILES.contains(name))
+                .ok_or("Only roles.jsonc, players.jsonc and overrides.jsonc can be edited here.")?;
+            if text.len() > 512 * 1024 {
+                return Err("The file is too large.".into());
+            }
+            targets.push((key.clone(), dir.join(name), text));
+        }
+
+        let mut result = PermissionsWriteResult::default();
+        let mut current = Vec::new();
+        for (key, path, _) in &targets {
+            let now = read_optional(path)?;
+            if expected.get(key).cloned().flatten() != now {
+                result.conflict = true;
+                result.contents.insert(key.clone(), now.clone());
+            }
+            current.push(now);
+        }
+        if result.conflict {
+            return Ok(result);
+        }
+        for ((key, path, text), now) in targets.iter().zip(current) {
+            if now.as_deref() == Some(text.as_str()) {
+                continue;
+            }
+            fsutil::write_real(path, text.as_bytes()).map_err(|e| format!("Couldn't save {}: {e}", path.display()))?;
+            result.files.push(key.clone());
+        }
+        result.changed = !result.files.is_empty();
+        if !running {
+            result.live_reason = Some("The server isn't running. The change applies when it next starts.".into());
+        } else if result.changed {
+            (result.live, result.live_reason) = self.reload_permissions(id);
+        } else {
+            result.live = true;
+        }
+        Ok(result)
+    }
+
+    /// Deadworks only reads the permission files at startup and on `dw_perm_reload`.
+    fn reload_permissions(&self, id: &str) -> (bool, Option<String>) {
+        let Some(mark) = self.lock().servers.get(id).map(|s| s.console.next_seq()) else {
+            return (false, None);
+        };
+        if let Err(e) = self.send(id, "dw_perm_reload") {
+            return (false, Some(format!("{e} Run dw_perm_reload in the console, or restart the server, to apply the change.")));
+        }
+        let deadline = Instant::now() + Duration::from_secs(4);
+        loop {
+            let lines = self.lock().servers.get(id).map(|s| s.console.since(mark)).unwrap_or_default();
+            for line in &lines {
+                if line.contains("Reloaded permissions.") {
+                    return (true, None);
+                }
+                if let Some(detail) = line
+                    .split_once("Failed to reload permissions: ")
+                    .and_then(|(_, rest)| rest.split_once(". The previous settings are still in use."))
+                    .map(|(detail, _)| detail)
+                {
+                    return (
+                        false,
+                        Some(format!(
+                            "Saved, but the server could not load it: {detail}. It keeps the previous permissions until this is fixed."
+                        )),
+                    );
+                }
+            }
+            if Instant::now() >= deadline {
+                return (
+                    false,
+                    Some("The server did not confirm it reloaded permissions. Run dw_perm_reload in the console to be sure.".into()),
+                );
+            }
+            std::thread::sleep(Duration::from_millis(100));
+        }
     }
 
     // ── Content ──
@@ -1400,7 +1646,7 @@ fn ticker(mgr: Arc<Manager>) {
     let mut last_metrics = Instant::now();
     loop {
         std::thread::sleep(Duration::from_millis(100));
-        let mut polls: Vec<(u32, bool)> = Vec::new();
+        let mut polls: Vec<(String, bool)> = Vec::new();
         {
             let mut inner = mgr.lock();
             let mut good_build = None;
@@ -1424,7 +1670,7 @@ fn ticker(mgr: Arc<Manager>) {
                         s.rt.last_poll = Some(Instant::now());
                         let host = s.rt.supports_host_status != Some(false);
                         s.monitor.poll_sent(host);
-                        polls.push((proc.pid, host));
+                        polls.push((s.file.config.id.clone(), host));
                     }
                 }
                 if sample {
@@ -1442,10 +1688,10 @@ fn ticker(mgr: Arc<Manager>) {
                 inner.save_state();
             }
         }
-        for (pid, host) in polls {
-            let _ = process::send_line(pid, "status");
+        for (id, host) in polls {
+            let _ = mgr.send(&id, "status");
             if host {
-                let _ = process::send_line(pid, "dw_host_status");
+                let _ = mgr.send(&id, "dw_host_status");
             }
         }
     }
@@ -1476,6 +1722,43 @@ fn updater(mgr: Arc<Manager>) {
 }
 
 // ── Helpers ──
+
+/// Key prefix of the permission files, relative to a server's `game` folder. deadworks-web's
+/// Admins tab uses the same keys, which lets the launcher share its logic.
+const PERMISSIONS_KEY: &str = "bin/win64/configs/permissions";
+const PERMISSION_FILES: [&str; 3] = ["roles.jsonc", "players.jsonc", "overrides.jsonc"];
+const GENERATED_LIMIT: usize = 60;
+
+fn permissions_dir(layout: &Layout, id: &str) -> PathBuf {
+    layout.server_configs(id).join("permissions")
+}
+
+/// A file's text, or None when it doesn't exist. Any other failure is an error, so a file that
+/// can't be read is never mistaken for a missing one and overwritten.
+fn read_optional(path: &Path) -> Result<Option<String>, String> {
+    match std::fs::read_to_string(path) {
+        Ok(text) => Ok(Some(text)),
+        Err(e) if e.kind() == std::io::ErrorKind::NotFound => Ok(None),
+        Err(e) => Err(format!("Couldn't read {}: {e}", path.display())),
+    }
+}
+
+/// The Steam account last signed in on this PC: `(SteamID64, persona name)`.
+fn local_steam_user() -> Option<(String, String)> {
+    let root = crate::connect::steam_root().ok()?;
+    let text = std::fs::read_to_string(root.join("config").join("loginusers.vdf")).ok()?;
+    let parsed = manifest::parse_vdf(&text);
+    let users = parsed.get("users")?.as_map()?;
+    let field = |user: &manifest::Vdf, key: &str| {
+        user.as_map()?.iter().find(|(k, _)| k.eq_ignore_ascii_case(key))?.1.as_str().map(String::from)
+    };
+    let (id, user) = users
+        .iter()
+        .find(|(_, u)| field(u, "MostRecent").as_deref() == Some("1"))
+        .or_else(|| users.iter().next())?;
+    let name = field(user, "PersonaName").or_else(|| field(user, "AccountName")).unwrap_or_default();
+    (id.len() == 17 && id.bytes().all(|b| b.is_ascii_digit())).then(|| (id.clone(), name))
+}
 
 /// Ask api.deadworks.net to send one A2S_INFO to our own public IP at `port`.
 /// A Worker can't send UDP, so the check is queued for the probe service and
@@ -1536,7 +1819,12 @@ fn client_manifest(game_dir: &Path) -> Result<(manifest::AppManifest, Vec<DepotF
 fn choose_root(requested: &str) -> Result<PathBuf, String> {
     let p = PathBuf::from(requested.trim());
     if !p.is_absolute() {
-        return Err("Choose a full folder path, like D:\\Deadworks Servers.".into());
+        return Err(if cfg!(windows) {
+            "Choose a full folder path, like D:\\Deadworks Servers."
+        } else {
+            "Choose a full folder path, like /home/you/Deadworks Servers."
+        }
+        .into());
     }
     if let Ok(game) = crate::connect::resolve_game_dir() {
         if let Some(install) = game.parent() {

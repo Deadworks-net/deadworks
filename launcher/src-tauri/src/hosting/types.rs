@@ -35,6 +35,28 @@ pub struct SetupCheck {
     pub required_bytes: u64,
     pub drives: Vec<DriveInfo>,
     pub suggested_root: String,
+    pub platform: HostPlatform,
+    pub path_separator: String,
+    pub missing_tools: Vec<String>,
+    pub steamcmd_available: bool,
+}
+
+#[derive(Debug, Clone, Copy, PartialEq, Eq, Serialize)]
+#[serde(rename_all = "snake_case")]
+pub enum HostPlatform {
+    Windows,
+    Linux,
+    Unsupported,
+}
+
+impl HostPlatform {
+    pub const CURRENT: HostPlatform = if cfg!(windows) {
+        HostPlatform::Windows
+    } else if cfg!(target_os = "linux") {
+        HostPlatform::Linux
+    } else {
+        HostPlatform::Unsupported
+    };
 }
 
 #[derive(Debug, Clone, Deserialize)]
@@ -107,6 +129,7 @@ pub struct UpdateState {
 #[derive(Debug, Clone, Serialize)]
 #[serde(rename_all = "camelCase")]
 pub struct HostingOverview {
+    pub platform: HostPlatform,
     pub installed: bool,
     pub root: Option<String>,
     pub base: Option<BaseInfo>,
@@ -188,6 +211,8 @@ pub struct PlayerInfo {
     pub connected_seconds: u64,
     pub team: i32,
     pub hero: String,
+    pub roles: Vec<String>,
+    pub bot: bool,
 }
 
 #[derive(Debug, Clone, Copy, PartialEq, Eq, Serialize)]
@@ -226,6 +251,7 @@ pub struct ServerRuntime {
     pub message: Option<String>,
     pub exit_code: Option<i32>,
     pub network: NetworkInfo,
+    pub moderation: bool,
 }
 
 #[derive(Debug, Clone, Serialize)]
@@ -288,4 +314,26 @@ pub struct ContentFile {
     pub file_name: String,
     pub kind: ContentKind,
     pub size_bytes: u64,
+}
+
+// ── Permissions (the Admins tab) ──
+
+#[derive(Debug, Clone, Serialize)]
+#[serde(rename_all = "camelCase")]
+pub struct PermissionsSnapshot {
+    pub files: std::collections::BTreeMap<String, Option<String>>,
+    pub running: bool,
+    pub local_steam_id: Option<String>,
+    pub local_steam_name: Option<String>,
+}
+
+#[derive(Debug, Clone, Default, Serialize)]
+#[serde(rename_all = "camelCase")]
+pub struct PermissionsWriteResult {
+    pub changed: bool,
+    pub files: Vec<String>,
+    pub conflict: bool,
+    pub contents: std::collections::BTreeMap<String, Option<String>>,
+    pub live: bool,
+    pub live_reason: Option<String>,
 }

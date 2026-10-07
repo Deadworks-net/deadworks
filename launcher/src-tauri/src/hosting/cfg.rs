@@ -65,7 +65,8 @@ fn is_token(s: &str) -> bool {
     !s.is_empty() && s.len() <= 128 && s.chars().all(|c| c.is_ascii_alphanumeric() || matches!(c, '_' | '-' | '.'))
 }
 
-pub fn launcher_cfg(c: &ServerConfig) -> String {
+/// `rcon_password` is set where commands reach the server over RCON (Linux, under Wine).
+pub fn launcher_cfg(c: &ServerConfig, rcon_password: Option<&str>) -> String {
     let mut out = String::from(
         "// Written by the Deadworks launcher every time the server starts; edits here are lost.\n\
          // Put your own settings in deadworks_user.cfg next to this file instead.\n",
@@ -73,13 +74,17 @@ pub fn launcher_cfg(c: &ServerConfig) -> String {
     out.push_str(&format!("hostname \"{}\"\n", c.name.trim()));
     out.push_str(&format!("sv_password \"{}\"\n", c.password));
     out.push_str(&format!("sv_hibernate_when_empty {}\n", u8::from(c.hibernate_when_empty)));
+    if let Some(password) = rcon_password {
+        out.push_str(&format!("rcon_password \"{password}\"\n"));
+    }
     for cv in &c.cvars {
         out.push_str(&format!("{} \"{}\"\n", cv.key, cv.value));
     }
     out
 }
 
-pub fn argv(c: &ServerConfig) -> Vec<String> {
+/// `usercon` opens the RCON listener on the game port; only used where it is the console.
+pub fn argv(c: &ServerConfig, usercon: bool) -> Vec<String> {
     let mut a: Vec<String> = [
         "-dedicated",
         "-console",
@@ -91,6 +96,9 @@ pub fn argv(c: &ServerConfig) -> Vec<String> {
     .map(|s| s.to_string())
     .collect();
     a.push(c.max_players.to_string());
+    if usercon {
+        a.push("-usercon".into());
+    }
     for (k, v) in [
         ("+hostport", c.port.to_string()),
         ("+tv_citadel_auto_record", "0".into()),
@@ -224,10 +232,10 @@ mod tests {
     #[test]
     fn names_with_spaces_go_in_the_cfg_not_argv() {
         let c = sample();
-        let cfg = launcher_cfg(&c);
+        let cfg = launcher_cfg(&c, None);
         assert!(cfg.contains("hostname \"My Server\"\n"));
         assert!(cfg.contains("citadel_trooper_spawn_enabled \"0\"\n"));
-        let a = argv(&c);
+        let a = argv(&c, false);
         assert!(a.iter().all(|t| !t.contains(' ')));
         assert_eq!(a.last().unwrap(), "dl_midtown");
         assert!(a.windows(2).any(|w| w == ["-maxplayers", "12"]));
