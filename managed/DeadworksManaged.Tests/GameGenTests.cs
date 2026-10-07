@@ -31,6 +31,20 @@ public class GameGenTests {
 		    { "name": "m_hTarget", "offset": 4, "type": { "category": "atomic", "name": "CHandle", "inner": { "category": "declared_class", "name": "C_BaseEntity" } } }
 		  ] },
 		  { "name": "C_BaseEntity", "module": "client", "fields": [{ "name": "m_bClientOnly", "offset": 0, "type": { "category": "builtin", "name": "bool" } }] },
+		  { "name": "CEntitySubclassVDataBase", "module": "server", "fields": [] },
+		  { "name": "CPropVData", "module": "server", "parents": [{ "name": "CEntitySubclassVDataBase", "module": "server" }], "fields": [
+		    { "name": "m_mapProperties", "offset": 40, "type": { "category": "atomic", "name": "CUtlDict", "inner": { "category": "declared_class", "name": "CGlowProperty" } } },
+		    { "name": "m_mapScales", "offset": 80, "type": { "category": "atomic", "name": "CUtlOrderedMap", "inner": { "category": "declared_enum", "name": "State_t" }, "inner2": { "category": "builtin", "name": "float32" } } },
+		    { "name": "m_mapByName", "offset": 120, "type": { "category": "atomic", "name": "CUtlOrderedMap", "inner": { "category": "atomic", "name": "CGlobalSymbol" }, "inner2": { "category": "declared_class", "name": "CGlowProperty" } } },
+		    { "name": "m_mapSounds", "offset": 160, "type": { "category": "atomic", "name": "CUtlOrderedMap", "inner": { "category": "declared_enum", "name": "State_t" }, "inner2": { "category": "atomic", "name": "CSoundEventName" } } },
+		    { "name": "m_BreakModifier", "offset": 200, "type": { "category": "atomic", "name": "CEmbeddedSubclass", "inner": { "category": "declared_class", "name": "CPropModifier" } } },
+		    { "name": "m_vecModifiers", "offset": 216, "type": { "category": "atomic", "name": "CUtlVector", "inner": { "category": "atomic", "name": "CEmbeddedSubclass", "inner": { "category": "declared_class", "name": "CBaseModifier" } } } },
+		    { "name": "m_Scale", "offset": 240, "type": { "category": "atomic", "name": "CEmbeddedSubclass", "inner": { "category": "declared_class", "name": "CGlowProperty" } } }
+		  ] },
+		  { "name": "CBaseModifier", "module": "server", "fields": [] },
+		  { "name": "CModifierVData", "module": "server", "parents": [{ "name": "CEntitySubclassVDataBase", "module": "server" }], "fields": [] },
+		  { "name": "CPropModifier", "module": "server", "parents": [{ "name": "CBaseModifier", "module": "server" }], "fields": [] },
+		  { "name": "CPropModifierVData", "module": "server", "parents": [{ "name": "CModifierVData", "module": "server" }], "fields": [] },
 		  { "name": "CClientOnly", "module": "client", "fields": [] },
 		  { "name": "Outer::Inner_t", "module": "server", "fields": [] }
 		], "enums": [
@@ -78,7 +92,8 @@ public class GameGenTests {
 		} }
 		""";
 
-	private static (Dictionary<string, string> Files, SchemaEmitter Schema, SchemaModel Model) Generate(Dictionary<string, string>? warnings = null, ApiScanner? api = null, bool units = false) {
+	private static (Dictionary<string, string> Files, SchemaEmitter Schema, SchemaModel Model) Generate(
+		Dictionary<string, string>? warnings = null, ApiScanner? api = null, bool units = false, string? survey = null) {
 		using var schemas = JsonDocument.Parse(Schemas);
 		using var entities = JsonDocument.Parse(Entities);
 		var model = SchemaModel.Load(schemas.RootElement);
@@ -92,7 +107,12 @@ public class GameGenTests {
 			var output = new OutputSet(directory);
 			var emitter = new SchemaEmitter(model, entityModel, api ?? new ApiScanner(), warnings ?? []);
 			emitter.Emit(output);
-			new EntityEmitter(entityModel, model, emitter.Ids).Emit(output);
+			SpawnSurvey? tried = null;
+			if (survey != null) {
+				using var surveyJson = JsonDocument.Parse(survey);
+				tried = SpawnSurvey.Load(surveyJson.RootElement);
+			}
+			new EntityEmitter(entityModel, model, emitter.Ids, tried).Emit(output);
 			output.Flush();
 			var files = Directory.EnumerateFiles(directory, "*.cs", SearchOption.AllDirectories)
 				.ToDictionary(f => Path.GetRelativePath(directory, f).Replace('\\', '/'), File.ReadAllText);
@@ -254,6 +274,72 @@ public class GameGenTests {
 		// An entry named after its entity is one function, not two.
 		Assert.Single(spawn.Split('\n'), line => line.Contains(" info_base("));
 		Assert.Contains("public const string thing_small = \"thing_small\";", files["Entities/SubclassNames.g.cs"]);
+	}
+
+	[Fact]
+	public void Dictionaries_and_maps_are_typed_by_what_their_keys_and_values_are() {
+		string code = Generate().Files["Schema/Classes/CPropVData.cs"];
+
+		Assert.Contains("public SchemaDict<CGlowProperty> m_mapProperties => new(this, __m_mapProperties);", code);       // a CUtlDict is keyed by a string
+		Assert.Contains("public SchemaValueMap<State_t, float> m_mapScales => new(this, __m_mapScales);", code);
+		Assert.Contains("public SchemaDict<CGlowProperty> m_mapByName => new(this, __m_mapByName);", code);               // so is a map keyed by a symbol
+		Assert.Contains("public RawField m_mapSounds => Raw(", code);                                                     // a value the runtime cannot walk yet
+	}
+
+	[Fact]
+	public void An_embedded_subclass_of_a_modifier_is_that_modifiers_data() {
+		string code = Generate().Files["Schema/Classes/CPropVData.cs"];
+
+		// A class that has data of its own names it after itself; one that does not uses its base's.
+		Assert.Contains("public CPropModifierVData? m_BreakModifier => EmbeddedSubclass<CPropModifierVData>(__m_BreakModifier);", code);
+		Assert.Contains("public SchemaPointerList<CModifierVData> m_vecModifiers => new(this, __m_vecModifiers, -1, 16, 8);", code);
+		Assert.Contains("public RawField m_Scale => Raw(", code);   // not a modifier: what it points at is not established
+	}
+
+	[Fact]
+	public void A_class_created_from_data_has_that_data_typed() {
+		var files = Generate().Files;
+
+		Assert.Contains("public CPropVData? VData => SubclassVData<CPropVData>();", files["Schema/Classes/CProp.cs"]);
+		Assert.DoesNotContain(" VData =>", files["Schema/Classes/CBaseEntity.cs"]);                    // no data class of its own
+		Assert.Contains("public CModifierVData? VData => ModifierData<CModifierVData>();", files["Schema/Classes/CBaseModifier.cs"]);
+		Assert.Contains("public new CPropModifierVData? VData => ModifierData<CPropModifierVData>();", files["Schema/Classes/CPropModifier.cs"]);
+	}
+
+	[Fact]
+	public void A_field_the_curated_api_only_sets_through_a_method_warns_on_a_raw_write() {
+		var api = new ApiScanner();
+		api.ScanFile("CBaseEntity.cs", """
+			public unsafe class CBaseEntity : NativeEntity {
+				private static readonly SchemaAccessor<int> _health = new("CBaseEntity"u8, "m_iHealth"u8);
+				private static readonly SchemaAccessor<byte> _state = new("CBaseEntity"u8, "m_nState"u8);
+				public int Health { get => _health.Get(Handle); set => _health.Set(Handle, value); }
+				public byte State => _state.Get(Handle);
+				public void SetState(byte state) => Native.SetState(Handle, state);
+			}
+			""");
+		string code = Generate(api: api).Files["Schema/Classes/CBaseEntity.cs"];
+
+		Assert.Contains("[Obsolete(\"A raw write skips what CBaseEntity.SetState does; call that on the curated wrapper instead.\")] set => Set(__m_nState, value);", code);
+		Assert.Contains("public int m_iHealth { get => Get<int>(__m_iHealth); set => Set(__m_iHealth, value); }", code);   // the curated setter is a plain write too
+	}
+
+	[Fact]
+	public void The_spawn_survey_decides_what_gets_a_function() {
+		const string survey = """
+			{ "build": 7, "map": "dl_test", "results": {
+			  "prop_thing": { "result": "lived", "class": "CProp" },
+			  "thing_small": { "result": "crashed", "at": "server.dll+0x10" },
+			  "info_base": { "result": "vanished", "model": "models/a.vmdl" }
+			}, "absentConVars": ["r_only_on_clients"] }
+			""";
+		string spawn = Generate(units: true, survey: survey).Files["Entities/Spawn.g.cs"];
+
+		Assert.DoesNotContain(" thing_small(", spawn);                 // takes the server down
+		Assert.Contains(" prop_thing(", spawn);                        // an entity with data entries that the survey saw live under its own name
+		Assert.Contains("Lived when spawned alone on dl_test in build 7.", spawn);
+		Assert.Contains("it removed itself at once", spawn);
+		Assert.Contains("Its model <c>models/a.vmdl</c> is not loaded on dl_test", spawn);
 	}
 
 	[Fact]

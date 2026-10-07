@@ -20,12 +20,15 @@ const string Usage = """
 	  --report FILE      Also write the summary to FILE, as Markdown.
 	  --check-api        Exit with 3 when a handwritten SchemaAccessor in the curated API
 	                     names a field the build does not have.
+	  --survey-dir DIR   Also write what the spawn survey should try to DIR: names.tsv
+	                     (name, kind and entity per line) and convars.txt
+	                     (see tools/spawn-survey).
 	""";
 
 const string Endpoint = "https://deadworks.net/api/moddb/builds";
 
 string build = "latest";
-string? input = null, output = null, apiDirectory = null, report = null;
+string? input = null, output = null, apiDirectory = null, report = null, surveyDirectory = null;
 bool checkApi = false;
 for (int i = 0; i < args.Length; i++) {
 	string option = args[i];
@@ -37,6 +40,7 @@ for (int i = 0; i < args.Length; i++) {
 		case "--out": output = value = Next(); break;
 		case "--api": apiDirectory = value = Next(); break;
 		case "--report": report = value = Next(); break;
+		case "--survey-dir": surveyDirectory = value = Next(); break;
 		case "--check-api": checkApi = true; break;
 		case "--help" or "-h": Console.WriteLine(Usage); return 0;
 		default: Console.Error.WriteLine($"Unknown option {option}\n\n{Usage}"); return 2;
@@ -102,13 +106,27 @@ if (File.Exists(overridesPath)) {
 		foreach (var warning in warnings.EnumerateObject()) setterWarnings[warning.Name] = warning.Value.GetString() ?? "";
 }
 
+// What the spawn survey found on a real server, if it has been run.
+SpawnSurvey? survey = null;
+string surveyPath = Path.Combine(AppContext.BaseDirectory, "spawn-survey.json");
+if (File.Exists(surveyPath)) {
+	using var surveyJson = JsonDocument.Parse(File.ReadAllText(surveyPath));
+	survey = SpawnSurvey.Load(surveyJson.RootElement);
+}
+
 var files = new OutputSet(output);
 var schemaEmitter = new SchemaEmitter(schema, entities, api, setterWarnings);
 schemaEmitter.Emit(files);
-var entityEmitter = new EntityEmitter(entities, schema, schemaEmitter.Ids);
+var entityEmitter = new EntityEmitter(entities, schema, schemaEmitter.Ids, survey);
+if (surveyDirectory != null) {
+	Directory.CreateDirectory(surveyDirectory);
+	File.WriteAllLines(Path.Combine(surveyDirectory, "names.tsv"), entityEmitter.SurveyCandidates().Select(c => $"{c.Name}\t{c.Kind}\t{c.Entity}"));
+	// Every variable a server could have, not only the ones the last survey left in: the survey decides again each time.
+	File.WriteAllLines(Path.Combine(surveyDirectory, "convars.txt"), CatalogEmitter.ServerConVars(consoleJson.RootElement));
+}
 entityEmitter.Emit(files);
 var catalog = new CatalogEmitter();
-catalog.EmitConsole(files, consoleJson.RootElement);
+catalog.EmitConsole(files, consoleJson.RootElement, survey?.AbsentConVars);
 catalog.EmitNames(files, vdataJson.RootElement);
 files.Add("GameBuild.g.cs", CatalogEmitter.EmitBuild(version, date));
 
@@ -132,8 +150,12 @@ summary.AppendLine($"| Schema classes | {s.Classes} ({s.EntityClasses} entities)
 summary.AppendLine($"| Schema fields | {s.Fields} ({s.Fields - s.RawFields} typed, {s.RawFields} by address) |");
 summary.AppendLine($"| Schema enums | {s.Enums} |");
 summary.AppendLine($"| Curated wrappers bridged | {s.Bridges} |");
-summary.AppendLine($"| Spawn functions | {e.Spawnable - e.NeedSubclass} entities and {e.SubclassSpawns} data entries "
-	+ $"({e.NotSpawnable} entity names left out: abilities, items, players; {e.NeedSubclass} spawned only through their entries) |");
+summary.AppendLine($"| Typed data entries, setter warnings from the curated API | {s.DataProperties}, {s.CuratedSetterWarnings} |");
+summary.AppendLine($"| Spawn functions | {e.SpawnFunctions}, {e.SubclassSpawns} of the candidates being data entries "
+	+ $"({e.NotSpawnable} entity names left out as abilities, items or players; {e.NeedSubclass} because they are spawned only through their entries) |");
+if (survey != null)
+	summary.AppendLine($"| Spawn survey (build {survey.Build}, {survey.Map}) | {e.Surveyed} names it tried, {e.SurveyRemoved} of them left out because they crash, hang or are refused; "
+		+ $"{survey.AbsentConVars.Count} console variables a dedicated server does not register left out |");
 summary.AppendLine($"| Spawn key values | {e.Keys} in {e.KeyClasses} classes |");
 summary.AppendLine($"| Inputs, outputs | {e.Inputs}, {e.Outputs} ({s.InputMethods} inputs as methods) |");
 summary.AppendLine($"| Console variables, commands | {k.ConVars}, {k.Commands} |");

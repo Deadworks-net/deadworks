@@ -15,6 +15,7 @@
 
   <ItemGroup>
     <None Include="overrides.json" CopyToOutputDirectory="PreserveNewest" />
+    <None Include="spawn-survey.json" CopyToOutputDirectory="PreserveNewest" Condition="Exists('spawn-survey.json')" />
   </ItemGroup>
 
 </Project>

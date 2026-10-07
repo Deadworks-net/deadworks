@@ -27,7 +27,15 @@ sealed class CatalogEmitter {
 	private static string Scalar(JsonElement e, string property)
 		=> e.TryGetProperty(property, out var value) && value.ValueKind != JsonValueKind.Null ? value.ToString() : "";
 
-	public void EmitConsole(OutputSet output, JsonElement root) {
+	/// <summary>The console variables a dedicated server could have, going by their flags.</summary>
+	public static IEnumerable<string> ServerConVars(JsonElement root) => root.GetProperty("convars").EnumerateArray()
+		.Where(conVar => OnServer(Flags(conVar)))
+		.Select(conVar => conVar.GetProperty("name").GetString()!)
+		.Where(Naming.IsIdentifier)
+		.Order(StringComparer.Ordinal);
+
+	/// <param name="absent">Variables the survey found a dedicated server does not register, whatever their flags say.</param>
+	public void EmitConsole(OutputSet output, JsonElement root, HashSet<string>? absent = null) {
 		var w = new CodeWriter("System.Numerics");
 		w.Summary("Every console variable a dedicated server has, with the type the game declares for it. "
 			+ "<c>ConVars.sv_cheats.Value = true</c> sets it directly, development-only and cheat-protected variables included.");
@@ -36,7 +44,7 @@ sealed class CatalogEmitter {
 		foreach (var conVar in root.GetProperty("convars").EnumerateArray().OrderBy(c => c.GetProperty("name").GetString(), StringComparer.Ordinal)) {
 			string name = conVar.GetProperty("name").GetString()!;
 			string[] flags = Flags(conVar);
-			if (!OnServer(flags) || !Naming.IsIdentifier(name)) continue;
+			if (!OnServer(flags) || !Naming.IsIdentifier(name) || absent?.Contains(name) == true) continue;
 			string type = ConVarTypes.GetValueOrDefault(Scalar(conVar, "type"), "string");
 
 			string summary = Naming.Doc(Scalar(conVar, "description").TrimEnd('.'));

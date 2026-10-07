@@ -6,7 +6,11 @@ namespace DeadworksManaged.GameGen;
 sealed record ApiWrapper(string Name, string? Base, string[] NativeNames);
 
 /// <summary>A handwritten <c>SchemaAccessor</c> and the public members of its wrapper that use it.</summary>
-sealed record ApiAccessor(string SchemaClass, string Field, string Wrapper, string[] Members, string File, int Line);
+/// <param name="SetMethod">
+/// A <c>SetX</c> method of the wrapper, where the accessor backs a property <c>X</c> that can only be
+/// read: the curated API's way of saying that changing the value takes more than writing the field.
+/// </param>
+sealed record ApiAccessor(string SchemaClass, string Field, string Wrapper, string[] Members, string File, int Line, string? SetMethod = null);
 
 /// <summary>
 /// What DeadworksManaged.Api already wraps, read from its source: the wrapper classes, and
@@ -40,6 +44,9 @@ sealed partial class ApiScanner {
 	[GeneratedRegex(@"//.*$")]
 	private static partial Regex LineComment();
 
+	[GeneratedRegex(@"\bset\b")]
+	private static partial Regex Setter();
+
 	public static ApiScanner Scan(string apiDirectory) {
 		var scanner = new ApiScanner();
 		foreach (var path in Directory.EnumerateFiles(apiDirectory, "*.cs", SearchOption.AllDirectories).Order(StringComparer.Ordinal)) {
@@ -58,6 +65,7 @@ sealed partial class ApiScanner {
 		string? shorthand = ClassShorthand().Match(text) is { Success: true } s ? s.Groups[1].Value : null;
 		var accessors = new List<(string Variable, string SchemaClass, string Field, string Wrapper, int Line)>();
 		var members = new List<(string Name, string Wrapper, string Body)>();
+		var methods = new HashSet<(string Wrapper, string Name)>();
 		int depth = 0;
 		string[]? pendingNative = null;
 		string? currentClass = null;
@@ -85,7 +93,10 @@ sealed partial class ApiScanner {
 			// A public member starts at class-body depth and runs until depth returns there.
 			if (depth == 1 && member == null && currentClass != null && !line.Contains(" class ")
 				&& Member().Match(line) is { Success: true } m)
+			{
 				member = (m.Groups[1].Value, currentClass, "");
+				if (m.Groups[2].Value == "(") methods.Add((currentClass, m.Groups[1].Value));
+			}
 			if (member is { } open) member = open with { Body = open.Body + line + "\n" };
 
 			foreach (char c in line) depth += c == '{' ? 1 : c == '}' ? -1 : 0;
@@ -100,8 +111,14 @@ sealed partial class ApiScanner {
 
 		foreach (var a in accessors) {
 			var uses = new Regex($@"\b{Regex.Escape(a.Variable)}\b");
-			string[] users = [.. members.Where(m => m.Wrapper == a.Wrapper && uses.IsMatch(m.Body)).Select(m => m.Name).Distinct()];
-			Accessors.Add(new(a.SchemaClass, a.Field, a.Wrapper, users, file, a.Line));
+			var using_ = members.Where(m => m.Wrapper == a.Wrapper && uses.IsMatch(m.Body)).ToList();
+			string[] users = [.. using_.Select(m => m.Name).Distinct()];
+			// A property with no setter beside a SetX method: the setter rule of the curated API.
+			string? setMethod = using_
+				.Where(m => !methods.Contains((m.Wrapper, m.Name)) && !Setter().IsMatch(m.Body))
+				.Select(m => "Set" + m.Name)
+				.FirstOrDefault(name => methods.Contains((a.Wrapper, name)));
+			Accessors.Add(new(a.SchemaClass, a.Field, a.Wrapper, users, file, a.Line, setMethod));
 		}
 	}
 

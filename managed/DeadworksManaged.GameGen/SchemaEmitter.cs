@@ -4,7 +4,7 @@ namespace DeadworksManaged.GameGen;
 
 /// <summary>Counts for the run's report.</summary>
 sealed class SchemaStats {
-	public int Classes, EntityClasses, Enums, Fields, RawFields, InputMethods, Bridges;
+	public int Classes, EntityClasses, Enums, Fields, RawFields, InputMethods, Bridges, CuratedSetterWarnings, DataProperties;
 	public SortedDictionary<string, int> RawTypes { get; } = new(StringComparer.Ordinal);
 }
 
@@ -29,7 +29,8 @@ sealed class SchemaEmitter(SchemaModel model, EntityModel entities, ApiScanner a
 		["CNetworkedQuantizedFloat"] = "float",
 	};
 
-	private static readonly HashSet<string> Vectors = ["CUtlVector", "CNetworkUtlVectorBase", "C_NetworkUtlVectorBase", "CUtlVectorEmbeddedNetworkVar"];
+	// All begin with a 32-bit count and keep the element pointer at +8 (tier1/utlvector.h, utlleanvector.h).
+	private static readonly HashSet<string> Vectors = ["CUtlVector", "CNetworkUtlVectorBase", "C_NetworkUtlVectorBase", "CUtlVectorEmbeddedNetworkVar", "CUtlLeanVector"];
 	private static readonly HashSet<string> Handles = ["CHandle", "CEntityHandle"];
 	private static readonly HashSet<string> Strings = ["CUtlSymbolLarge", "CGlobalSymbol", "CUtlString"];
 	// Atomics that are a CBufferString with the text inside the field (tier0/bufferstring.h).
@@ -38,15 +39,15 @@ sealed class SchemaEmitter(SchemaModel model, EntityModel entities, ApiScanner a
 	// Names a generated member must not take: the runtime's own members on SchemaObject and Schema.CEntityInstance.
 	private static readonly string[] Reserved = [
 		"Handle", "IsValid", "Equals", "GetHashCode", "ToString", "GetType", "MemberwiseClone", "Finalize", "At", "Get", "Set",
-		"Embedded", "Pointer", "EntityPointer", "GetHandle", "SetHandle", "GetString", "SetString", "GetBufferString", "GetChars", "Raw",
-		"EntityHandle", "EntityIndex", "Entity", "As", "Is", "FireInput", "Remove", "New", "NativeName", "Cast", "SubclassVData",
+		"Embedded", "Pointer", "EntityPointer", "EmbeddedSubclass", "GetHandle", "SetHandle", "GetString", "SetString", "GetBufferString", "GetChars", "Raw",
+		"EntityHandle", "EntityIndex", "Entity", "As", "Is", "FireInput", "Remove", "New", "NativeName", "Cast", "SubclassVData", "VData", "EntryName", "ModifierData", "PointerAtOffset", "StringAtOffset",
 	];
 
 	// Types generated code names without qualification; a schema type of the same name would hide them.
 	private static readonly string[] RuntimeTypes = [
 		"Vector2", "Vector3", "Vector4", "Quaternion", "Color32", "SchemaField", "SchemaObject", "RawField", "ISchemaClass",
 		"SchemaValueList", "SchemaObjectList", "SchemaPointerList", "SchemaHandleList", "SchemaStringList", "Spawner", "Obsolete",
-		"SchemaRegistry", "Flags",
+		"SchemaRegistry", "Flags", "SchemaDict", "SchemaValueDict", "SchemaMap", "SchemaValueMap",
 	];
 
 	private readonly Dictionary<string, HashSet<string>> _members = new(StringComparer.Ordinal);
@@ -122,7 +123,56 @@ sealed class SchemaEmitter(SchemaModel model, EntityModel entities, ApiScanner a
 		? Ids[inner.Name!]
 		: Ids[SchemaModel.EntityRoot];
 
+	// The data class of what an entity or modifier class is created from. A class that has data
+	// of its own names it after itself (CNPC_TrooperBoss, CNPC_TrooperBossVData); these two roots
+	// do not follow that.
+	private static readonly Dictionary<string, string> DataRoots = new() {
+		["CCitadelBaseAbility"] = "CitadelAbilityVData",
+		["CBaseModifier"] = "CModifierVData",
+	};
+
+	private const string DataBase = "CEntitySubclassVDataBase";
+
+	/// <summary>The schema class of the data an instance of <paramref name="className"/> is created from, or null if it has none.</summary>
+	private string? DataClassOf(string className) {
+		if (!model.Classes.TryGetValue(className, out var c)) return null;
+		foreach (var candidate in new[] { c }.Concat(model.Ancestors(c))) {
+			string own = candidate.Name + "VData";
+			if (model.Classes.TryGetValue(own, out var data) && model.DerivesFrom(data, DataBase)) return own;
+			if (DataRoots.TryGetValue(candidate.Name, out var declared) && model.Classes.ContainsKey(declared)) return declared;
+		}
+		return null;
+	}
+
 	private bool IsHandle(TypeRef type) => type.Category == "atomic" && Handles.Contains(type.Name!);
+
+	/// <summary>The data class behind a <c>CEmbeddedSubclass&lt;T&gt;</c>: T's, where T is a kind of modifier.</summary>
+	private string? EmbeddedData(TypeRef type) => type is { Category: "atomic", Name: "CEmbeddedSubclass", Inner: { Category: "declared_class" } inner }
+		&& model.Classes.TryGetValue(inner.Name!, out var instance) && model.DerivesFrom(instance, "CBaseModifier") && DataClassOf(inner.Name!) is { } data
+		? Ids[data]
+		: null;
+
+	private bool IsStringKey(TypeRef? type) => type != null && IsString(type);
+
+	/// <summary>A <c>CUtlDict</c> or <c>CUtlOrderedMap</c> whose key and value the runtime can walk, or null.</summary>
+	private (string Type, string Body)? Map_(TypeRef type, string field) {
+		// A CUtlDict is keyed by a string and has only its value as a template argument.
+		bool dict = type.Name == "CUtlDict";
+		TypeRef? key = dict ? null : type.Inner, value = dict ? type.Inner : type.Inner2;
+		if (value == null || (!dict && key == null)) return null;
+		bool stringKey = dict || IsStringKey(key);
+		string? keyType = stringKey ? null : ValueType(key!);
+		if (!stringKey && keyType == null) return null;
+
+		string? collection = (stringKey, ValueType(value), ClassId(value)) switch {
+			(true, { } plain, _) => $"SchemaValueDict<{plain}>",
+			(true, null, { } structure) => $"SchemaDict<{structure}>",
+			(false, { } plain, _) => $"SchemaValueMap<{keyType}, {plain}>",
+			(false, null, { } structure) => $"SchemaMap<{keyType}, {structure}>",
+			_ => null,
+		};
+		return collection == null ? null : (collection, $"=> new(this, {field});");
+	}
 	private bool IsString(TypeRef type) => type.Category == "atomic" && Strings.Contains(type.Name!);
 
 	/// <summary>A member's C# type and the text after its name. Null when the field has no typed mapping.</summary>
@@ -141,6 +191,10 @@ sealed class SchemaEmitter(SchemaModel model, EntityModel entities, ApiScanner a
 				return ("string", $"=> GetString({field});");
 			case "atomic" when BufferStrings.Contains(type.Name!):
 				return ("string", $"=> GetBufferString({field});");
+			case "atomic" when EmbeddedData(type) is { } data:
+				return ($"{data}?", $"=> EmbeddedSubclass<{data}>({field});");
+			case "atomic" when type.Name is "CUtlDict" or "CUtlOrderedMap":
+				return Map_(type, field);
 			case "atomic" when Vectors.Contains(type.Name!) && type.Inner != null:
 				return List(type.Inner, field, -1);
 			case "declared_class" when ClassId(type) is { } embedded:
@@ -157,6 +211,9 @@ sealed class SchemaEmitter(SchemaModel model, EntityModel entities, ApiScanner a
 	}
 
 	private (string Type, string Body)? List(TypeRef element, string field, int fixedCount) {
+		// An embedded subclass is 16 bytes with its data pointer in the second half.
+		if (EmbeddedData(element) is { } data)
+			return ($"SchemaPointerList<{data}>", $"=> new(this, {field}, {fixedCount}, 16, 8);");
 		string? list =
 			ValueType(element) is { } value ? $"SchemaValueList<{value}>"
 			: IsHandle(element) ? $"SchemaHandleList<{HandleTarget(element)}>"
@@ -202,7 +259,11 @@ sealed class SchemaEmitter(SchemaModel model, EntityModel entities, ApiScanner a
 			declared.Add(property);
 			string descriptor = "__" + property.TrimStart('@');
 			string key = $"{c.Name}.{field.Name}";
-			setterWarnings.TryGetValue(key, out var warning);
+			if (!setterWarnings.TryGetValue(key, out var warning)
+				&& api.Accessors.FirstOrDefault(x => x.SchemaClass == c.Name && x.Field == field.Name && x.SetMethod != null) is { } curated) {
+				warning = $"A raw write skips what {curated.Wrapper}.{curated.SetMethod} does; call that on the curated wrapper instead.";
+				Stats.CuratedSetterWarnings++;
+			}
 
 			var mapped = Map(field.Type, descriptor, warning);
 			if (warning != null && mapped is { } m && m.Body.Contains("[Obsolete(")) _warned.Add(key);
@@ -227,6 +288,18 @@ sealed class SchemaEmitter(SchemaModel model, EntityModel entities, ApiScanner a
 			w.Line();
 			w.Summary($"The curated <see cref=\"{type}\"/> for this entity, or null if it is gone.");
 			w.Line($"public new {type}? Entity => SchemaRegistry.Wrapper<{type}>(EntityHandle);");
+		}
+
+		// The data this is created from, typed, wherever the type is more specific than the base class's.
+		if (DataClassOf(c.Name) is { } dataClass && (parent == null || DataClassOf(parent.Name) != dataClass) && (isEntity || c.Name == "CBaseModifier" || model.DerivesFrom(c, "CBaseModifier"))) {
+			string dataType = Ids[dataClass];
+			string hides = parent != null && DataClassOf(parent.Name) != null ? "new " : "";
+			w.Line();
+			w.Summary($"The data entry this was created from, as <see cref=\"{dataType}\"/>, or null if it has none.");
+			w.Line(isEntity
+				? $"public {hides}{dataType}? VData => SubclassVData<{dataType}>();"
+				: $"public {hides}{dataType}? VData => ModifierData<{dataType}>();");
+			Stats.DataProperties++;
 		}
 
 		if (isEntity) EmitInputs(w, c, own, inherited, declared);

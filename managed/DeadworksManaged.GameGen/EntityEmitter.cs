@@ -1,11 +1,11 @@
 namespace DeadworksManaged.GameGen;
 
 sealed class EntityStats {
-	public int Spawnable, NotSpawnable, SubclassSpawns, NeedSubclass, KeyClasses, Keys, Inputs, Outputs;
+	public int Spawnable, NotSpawnable, SubclassSpawns, NeedSubclass, SurveyRemoved, Surveyed, SpawnFunctions, KeyClasses, Keys, Inputs, Outputs;
 }
 
 /// <summary>Writes the typed spawn functions, their key value classes, and the name constants for entities, inputs and outputs.</summary>
-sealed class EntityEmitter(EntityModel entities, SchemaModel schema, Dictionary<string, string> schemaIds) {
+sealed class EntityEmitter(EntityModel entities, SchemaModel schema, Dictionary<string, string> schemaIds, SpawnSurvey? survey = null) {
 	public EntityStats Stats { get; } = new();
 
 	// Entities only the engine or a hero may create: making one alone takes the server down.
@@ -29,11 +29,27 @@ sealed class EntityEmitter(EntityModel entities, SchemaModel schema, Dictionary<
 
 	private readonly Dictionary<string, string> _keyIds = new(StringComparer.Ordinal);
 
+	/// <summary>The entities a plugin may create: every entity class but abilities, items and players.</summary>
+	private List<(EntityClass Entity, ClassDef Class)> Spawnable() => entities.Entities.Values
+		.Select(e => (Entity: e, Class: entities.SchemaClassOf(e, schema)))
+		.Where(x => x.Class != null && schema.IsEntity(x.Class.Name) && !NotSpawnable.Any(n => schema.DerivesFrom(x.Class, n)))
+		.Select(x => (x.Entity, x.Class!))
+		.ToList();
+
+	/// <summary>
+	/// Every name the spawn survey should try: each spawnable entity by its own name, and each
+	/// data entry of one. A name that is both is tried once, as the entry it resolves to.
+	/// </summary>
+	public IEnumerable<(string Name, string Kind, string Entity)> SurveyCandidates() {
+		var spawnable = Spawnable().Select(s => s.Entity.Name).ToHashSet(StringComparer.Ordinal);
+		foreach (var subclass in entities.Subclasses.Values)
+			if (spawnable.Contains(subclass.EntityName)) yield return (subclass.Name, "entry", subclass.EntityName);
+		foreach (var name in spawnable.Order(StringComparer.Ordinal))
+			if (!entities.Subclasses.ContainsKey(name)) yield return (name, "entity", name);
+	}
+
 	public void Emit(OutputSet output) {
-		var spawnable = entities.Entities.Values
-			.Select(e => (Entity: e, Class: entities.SchemaClassOf(e, schema)))
-			.Where(x => x.Class != null && schema.IsEntity(x.Class.Name) && !NotSpawnable.Any(n => schema.DerivesFrom(x.Class, n)))
-			.ToList();
+		var spawnable = Spawnable();
 		Stats.Spawnable = spawnable.Count;
 		Stats.NotSpawnable = entities.Entities.Count - spawnable.Count;
 
@@ -50,7 +66,7 @@ sealed class EntityEmitter(EntityModel entities, SchemaModel schema, Dictionary<
 			Stats.KeyClasses++;
 		}
 
-		output.Add("Entities/Spawn.g.cs", EmitSpawn(spawnable!));
+		output.Add("Entities/Spawn.g.cs", EmitSpawn(spawnable));
 		output.Add("Entities/EntityNames.g.cs", EmitEntityNames());
 		output.Add("Entities/SubclassNames.g.cs", EmitSubclassNames());
 		output.Add("Entities/Inputs.g.cs", EmitIo("Inputs", "Input", c => c.Inputs, n => Stats.Inputs += n));
@@ -100,13 +116,15 @@ sealed class EntityEmitter(EntityModel entities, SchemaModel schema, Dictionary<
 
 	private string EmitSpawn(List<(EntityClass Entity, ClassDef Class)> spawnable) {
 		var byName = spawnable.ToDictionary(s => s.Entity.Name, StringComparer.Ordinal);
-		// An entity that data entries are made from reads its entry while it spawns, and takes
-		// the server down without one. It is spawned through its entries, not by its own name.
+		// An entity that data entries are made from usually reads its entry while it spawns, and
+		// takes the server down without one (a trooper does; a pickup does not). Unless the survey
+		// has seen it survive under its own name, it is spawned through its entries only.
 		var needSubclass = entities.Subclasses.Values.Select(s => s.EntityName).ToHashSet(StringComparer.Ordinal);
 
 		var functions = new SortedDictionary<string, (EntityClass Entity, ClassDef Class, SubclassEntry? Subclass)>(StringComparer.Ordinal);
 		foreach (var (entity, schemaClass) in spawnable) {
-			if (needSubclass.Contains(entity.Name)) Stats.NeedSubclass++;
+			bool survived = survey?.Results.GetValueOrDefault(entity.Name) is { Unusable: false };
+			if (needSubclass.Contains(entity.Name) && !survived) Stats.NeedSubclass++;
 			else functions[entity.Name] = (entity, schemaClass, null);
 		}
 		foreach (var subclass in entities.Subclasses.Values) {
@@ -122,16 +140,33 @@ sealed class EntityEmitter(EntityModel entities, SchemaModel schema, Dictionary<
 			+ "<c>beforeSpawn</c> runs between creating the entity and spawning it, for fields the game only reads while spawning. "
 			+ "An entity's model has to be loaded: one the map does not already use needs <c>Precache.AddResource</c> in "
 			+ "<c>OnPrecacheResources</c>, or the engine reports a nonresident asset. "
-			+ "A function existing does not promise the entity works alone on a dedicated server.");
+			+ "Each function says how its entity fared in the spawn survey, where every name was spawned alone on a dedicated server; "
+			+ "a name that took the server down there has no function.");
 		w.Open("public static partial class Spawn");
 		var taken = new HashSet<string>(["Equals", "ReferenceEquals", "GetHashCode", "ToString", "GetType", "MemberwiseClone", "Spawn"], StringComparer.Ordinal);
 		foreach (var (name, (entity, schemaClass, subclass)) in functions) {
+			// The survey tried this name on a real server. What cannot be spawned gets no function.
+			SurveyResult? tried = survey?.Results.GetValueOrDefault(name);
+			if (tried != null) Stats.Surveyed++;
+			if (tried is { Unusable: true }) {
+				Stats.SurveyRemoved++;
+				continue;
+			}
+			Stats.SpawnFunctions++;
 			string type = $"Schema.{schemaIds[schemaClass.Name]}";
 			string keys = _keyIds.TryGetValue(entity.DataMap, out var keyId) ? $"Keys.{keyId}" : "EntityKeys";
 			string what = subclass == null
 				? $"a <c>{Naming.Doc(name)}</c>"
 				: $"the <c>{Naming.Doc(name)}</c> entry of <c>{Naming.Doc(subclass.File)}</c>, which is a <c>{Naming.Doc(entity.Name)}</c>,";
-			w.Summary($"Creates and spawns {what} as a <see cref=\"{type}\"/>, or returns null if the game refuses. "
+			string surveyed = tried switch {
+				null when survey != null => " Not in the spawn survey.",
+				{ Result: "vanished" } => $" Spawned alone with no key values on {survey!.Map} in build {survey.Build}, it removed itself at once: it may need key values or another entity.",
+				{ Result: "lived" } => $" Lived when spawned alone on {survey!.Map} in build {survey.Build}.",
+				_ => "",
+			};
+			if (tried?.Model != null)
+				surveyed += $" Its model <c>{Naming.Doc(tried.Model)}</c> is not loaded on {survey!.Map}: precache it where the map does not use it.";
+			w.Summary($"Creates and spawns {what} as a <see cref=\"{type}\"/>, or returns null if the game refuses.{surveyed} "
 				+ $"<see href=\"https://deadworks.net/db/entities/{Uri.EscapeDataString(entity.Name)}\">Modding database</see>.");
 			w.Line($"public static {type}? {Naming.Unique(Naming.Identifier(name), taken)}({keys}? keys = null, Action<{type}>? beforeSpawn = null) => Spawner.Create({Naming.Literal(name)}, keys, beforeSpawn);");
 		}
