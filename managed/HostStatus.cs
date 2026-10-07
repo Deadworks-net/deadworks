@@ -5,7 +5,7 @@ using DeadworksManaged.PermissionSystem;
 namespace DeadworksManaged;
 
 /// <summary>
-/// Backs <c>dw_host_status</c>: gathers the server, player, role and plugin state the launcher polls
+/// Backs <c>dw_host_status</c>: gathers the server and player state the launcher polls
 /// and formats it with <see cref="HostStatusFormatter"/>.
 /// </summary>
 internal static class HostStatus
@@ -33,8 +33,10 @@ internal static class HostStatus
             _inGameSince[slot] = 0;
     }
 
-    /// <summary>The <c>DWHOST {json}</c> line for the players in slot <paramref name="fromSlot"/> and up.</summary>
-    public static string Line(int fromSlot) => HostStatusFormatter.Format(Collect(), fromSlot);
+    /// <summary>
+    /// The <c>DWHOST [token] {json}</c> line for the players in slot <paramref name="fromSlot"/> and up.
+    /// </summary>
+    public static string Line(int fromSlot, string token) => HostStatusFormatter.Format(Collect(), fromSlot, token);
 
     private static HostStatusSnapshot Collect()
     {
@@ -66,31 +68,8 @@ internal static class HostStatus
             (long)(DateTime.UtcNow - ProcessStartUtc).TotalSeconds,
             GlobalVars.IsValid ? GlobalVars.MaxClients : null,
             Deadworks.Version,
-            PermissionManager.Roles.Keys.OrderBy(name => name, StringComparer.OrdinalIgnoreCase).ToList(),
             // Whichever plugin provides them: the Admin plugin that ships with Deadworks, or a server's replacement.
             ConCommandManager.IsRegistered("dw_kick") && ConCommandManager.IsRegistered("dw_ban"),
-            players,
-            CollectPlugins());
-    }
-
-    private static List<HostStatusPlugin> CollectPlugins()
-    {
-        // A DLL deleted while loaded stays loaded (the watcher ignores deletes), so list loaded ones too. The same
-        // name can then also get loaded from builtin/, hence the grouping.
-        var installed = new HashSet<string>(PluginLoader.InstalledPluginNames(), StringComparer.OrdinalIgnoreCase);
-        var loaded = PluginLoader.GetLoadedAssemblies()
-            .GroupBy(a => a.DllName, StringComparer.OrdinalIgnoreCase)
-            .ToDictionary(g => g.Key, g => g.Sum(a => a.PluginCount), StringComparer.OrdinalIgnoreCase);
-
-        return installed.Union(loaded.Keys, StringComparer.OrdinalIgnoreCase)
-            .OrderBy(name => name, StringComparer.OrdinalIgnoreCase)
-            .Select(name => new HostStatusPlugin(
-                name,
-                PluginStateManager.IsEnabled(name),
-                loaded.ContainsKey(name),
-                installed.Contains(name),
-                PluginLoader.IsBuiltin(name),
-                loaded.TryGetValue(name, out var count) ? count : null))
-            .ToList();
+            players);
     }
 }

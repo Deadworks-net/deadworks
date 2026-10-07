@@ -204,15 +204,6 @@ internal static partial class PluginLoader
         }
     }
 
-    /// <summary>File name (without .dll) of every loaded plugin assembly, with how many IDeadworksPlugin types it produced.</summary>
-    public static List<(string DllName, int PluginCount)> GetLoadedAssemblies()
-    {
-        lock (_lock)
-        {
-            return _loaded.Select(kv => (Path.GetFileNameWithoutExtension(kv.Key), kv.Value.Plugins.Count)).ToList();
-        }
-    }
-
     /// <summary>Whether <paramref name="dllName"/> is one of the plugins that ship with Deadworks and isn't replaced in plugins/.</summary>
     public static bool IsBuiltin(string dllName)
         => _builtinDir.Length > 0
