@@ -15,6 +15,9 @@ pub struct VtLines {
     pending: Vec<u8>,
     line: String,
     prompt_sent: bool,
+    /// A `\r` was seen and what follows decides its meaning: `\n` ends the line, text overwrites
+    /// it. The two can arrive in separate reads.
+    cr: bool,
 }
 
 pub struct Fed {
@@ -83,6 +86,7 @@ impl VtLines {
             }
             match c {
                 '\n' => {
+                    self.cr = false;
                     let line = std::mem::take(&mut self.line);
                     // A prompt already went out when it appeared.
                     if !self.prompt_sent {
@@ -90,13 +94,14 @@ impl VtLines {
                     }
                     self.prompt_sent = false;
                 }
-                '\r' => {
-                    if chars.get(i + 1) != Some(&'\n') {
+                '\r' => self.cr = true,
+                c if (c as u32) < 0x20 && c != '\t' => {}
+                c => {
+                    if std::mem::take(&mut self.cr) {
                         self.line.clear();
                     }
+                    self.line.push(c);
                 }
-                c if (c as u32) < 0x20 && c != '\t' => {}
-                c => self.line.push(c),
             }
             i += 1;
         }
@@ -112,12 +117,16 @@ impl VtLines {
 #[cfg(windows)]
 mod win {
     use std::io::{Read, Write};
+    use std::sync::atomic::{AtomicU64, Ordering};
     use std::sync::Mutex;
 
     use portable_pty::{native_pty_system, Child, CommandBuilder, MasterPty, PtySize};
 
     use super::VtLines;
     use crate::hosting::process::SpawnSpec;
+
+    const DRAIN_QUIET_MS: u64 = 400;
+    const DRAIN_MAX_MS: u64 = 3000;
 
     pub struct PtyProcess {
         writer: Mutex<Box<dyn Write + Send>>,
@@ -163,8 +172,13 @@ mod win {
             _master: Mutex::new(pair.master),
         });
 
+        let started = std::time::Instant::now();
+        let last_read = std::sync::Arc::new(AtomicU64::new(0));
+
         let p = proc.clone();
+        let last_read_w = last_read.clone();
         std::thread::spawn(move || {
+            let last_read = last_read_w;
             let mut vt = VtLines::default();
             let mut buf = [0u8; 8192];
             loop {
@@ -172,6 +186,7 @@ mod win {
                     Ok(0) | Err(_) => break,
                     Ok(n) => n,
                 };
+                last_read.store(started.elapsed().as_millis() as u64, Ordering::Relaxed);
                 let fed = vt.feed(&buf[..n]);
                 if fed.cursor_query {
                     let mut w = p.writer.lock().unwrap_or_else(|e| e.into_inner());
@@ -192,8 +207,16 @@ mod win {
                 }
                 std::thread::sleep(std::time::Duration::from_millis(200));
             };
-            // Let the reader drain what the process printed last.
-            std::thread::sleep(std::time::Duration::from_millis(300));
+            // Let the reader drain what the process printed last: wait until it has been quiet for
+            // a moment, since the terminal can lag well behind a process that printed a lot.
+            let exited = started.elapsed().as_millis() as u64;
+            loop {
+                std::thread::sleep(std::time::Duration::from_millis(100));
+                let now = started.elapsed().as_millis() as u64;
+                if now - last_read.load(Ordering::Relaxed).min(now) >= DRAIN_QUIET_MS || now - exited >= DRAIN_MAX_MS {
+                    break;
+                }
+            }
             on_exit(code);
         });
         Ok(proc)
@@ -239,6 +262,24 @@ mod tests {
         assert!(vt.feed(b"").lines.is_empty());
         let fed = vt.feed(b"\r\nProceeding\r\n");
         assert_eq!(fed.lines, vec!["Proceeding"]);
+    }
+
+    /// SteamCMD printing fast makes the terminal split `\r\n` across reads; that once dropped
+    /// every such line, including "Success! App ... fully installed".
+    #[test]
+    fn line_endings_split_across_reads() {
+        let mut vt = VtLines::default();
+        let mut lines = vt.feed(b"Update state (0x61) downloading\r").lines;
+        lines.extend(vt.feed(b"\nSuccess! App '1422450' fully installed.\r").lines);
+        lines.extend(vt.feed(b"\x1b[12X").lines);
+        lines.extend(vt.feed(b"\nUnloading Steam API...OK\r\n").lines);
+        assert_eq!(
+            lines,
+            vec!["Update state (0x61) downloading", "Success! App '1422450' fully installed.", "Unloading Steam API...OK"]
+        );
+        // A bare `\r` still rewinds, also when the new text comes in the next read.
+        assert!(vt.feed(b"[ 10%] Downloading\r").lines.is_empty());
+        assert_eq!(vt.feed(b"[ 20%] Downloading\r\n").lines, vec!["[ 20%] Downloading"]);
     }
 
     #[test]

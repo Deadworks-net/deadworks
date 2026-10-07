@@ -208,14 +208,33 @@ pub fn install(
         args.push("validate".into());
     }
     args.push("+quit".into());
+    let started = std::time::SystemTime::now();
     let output = run(layout, args, password, progress);
     set_tree_readonly(&layout.base_dir().join("game"), true);
     let output = output?;
-    let ok = output.iter().any(|l| l.contains("Success! App") && l.contains(DEADLOCK_APP_ID));
-    if !ok {
-        return Err(failure(&output).unwrap_or_else(|| "SteamCMD didn't finish installing Deadlock.".into()));
+    if succeeded(&output) {
+        return Ok(());
     }
-    Ok(())
+    if let Some(reason) = failure(&output) {
+        return Err(reason);
+    }
+    // No verdict in the output. SteamCMD's own record decides: a 36 GB download must not be
+    // called failed because a line went missing.
+    if finished_since(layout, started) {
+        return Ok(());
+    }
+    Err("SteamCMD didn't finish installing Deadlock.".into())
+}
+
+fn succeeded(output: &[String]) -> bool {
+    output.iter().any(|l| l.contains("Success! App") && l.contains(DEADLOCK_APP_ID))
+}
+
+/// SteamCMD marked the app fully installed during this run.
+fn finished_since(layout: &Layout, started: std::time::SystemTime) -> bool {
+    let path = appmanifest_path(layout);
+    let written = std::fs::metadata(&path).and_then(|m| m.modified()).is_ok_and(|t| t >= started);
+    written && manifest::read_appmanifest(&path).is_ok_and(|app| !app.updating())
 }
 
 /// The public branch's current build id. Deadlock's depot and branch info is
@@ -285,6 +304,26 @@ mod tests {
         let build = latest_build(&layout, &user, &p).unwrap();
         assert!(build.parse::<u64>().is_ok(), "{build}");
         println!("public build {build}");
+    }
+
+    /// More than a screenful of output before the result line: SteamCMD's last lines must still
+    /// arrive (they were once lost to `\r\n` splitting across reads). Needs a cached login and
+    /// an installed base in `DW_STEAMCMD_TEST_ROOT`.
+    #[test]
+    #[ignore]
+    fn steamcmd_live_result_line_survives_long_output() {
+        let root = std::env::var("DW_STEAMCMD_TEST_ROOT").expect("set DW_STEAMCMD_TEST_ROOT");
+        let user = std::env::var("DW_STEAMCMD_TEST_USER").expect("set DW_STEAMCMD_TEST_USER");
+        let layout = Layout::new(root);
+        let p = Progress::new(crate::hosting::types::TaskKind::Update);
+        let base = layout.base_dir().to_string_lossy().into_owned();
+        let args = [
+            "+@ShutdownOnFailedCommand", "1", "+@NoPromptForPassword", "1", "+force_install_dir", &base,
+            "+login", &user, "+app_info_print", DEADLOCK_APP_ID, "+app_update", DEADLOCK_APP_ID, "+quit",
+        ];
+        let out = run(&layout, args.iter().map(|s| s.to_string()).collect(), None, &p).unwrap();
+        assert!(out.len() > 100, "expected a long listing, got {} lines", out.len());
+        assert!(succeeded(&out), "no result line in {} lines; last: {:?}", out.len(), out.last());
     }
 
     /// A login with a made-up account must surface the password prompt to the
