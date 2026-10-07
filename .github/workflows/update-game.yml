@@ -39,7 +39,9 @@ jobs:
       - name: Compare builds
         id: builds
         env:
-          REQUESTED: ${{ inputs.build }}
+          # A manual run names its build; the database's watcher sends the one it just ingested, which
+          # the build list may not show yet (it is cached for half a minute).
+          REQUESTED: ${{ inputs.build || github.event.client_payload.build }}
           FORCE: ${{ inputs.force }}
         run: |
           current=$(grep -oP 'const int Version = \K[0-9]+' managed/DeadworksManaged.Game/Generated/GameBuild.g.cs)
