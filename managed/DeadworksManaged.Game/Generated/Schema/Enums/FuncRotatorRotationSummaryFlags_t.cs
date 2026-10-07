@@ -7,6 +7,7 @@ namespace DeadworksManaged.Game;
 
 public static partial class Schema {
 	/// <summary>Schema enum <c>FuncRotatorRotationSummaryFlags_t</c>. <see href="https://deadworks.net/db/schema/server/FuncRotatorRotationSummaryFlags_t">Modding database</see>.</summary>
+	[Flags]
 	public enum FuncRotatorRotationSummaryFlags_t : uint {
 		eNone = 0,
 		eRotateBegin = 1,

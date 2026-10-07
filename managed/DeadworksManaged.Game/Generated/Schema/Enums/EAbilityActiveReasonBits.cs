@@ -7,6 +7,7 @@ namespace DeadworksManaged.Game;
 
 public static partial class Schema {
 	/// <summary>Schema enum <c>EAbilityActiveReasonBits</c>. <see href="https://deadworks.net/db/schema/client/EAbilityActiveReasonBits">Modding database</see>.</summary>
+	[Flags]
 	public enum EAbilityActiveReasonBits : uint {
 		ENone = 0,
 		EInCastDelay = 1,

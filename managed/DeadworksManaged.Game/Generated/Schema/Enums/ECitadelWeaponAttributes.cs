@@ -7,6 +7,7 @@ namespace DeadworksManaged.Game;
 
 public static partial class Schema {
 	/// <summary>Schema enum <c>ECitadelWeaponAttributes</c>. <see href="https://deadworks.net/db/schema/client/ECitadelWeaponAttributes">Modding database</see>.</summary>
+	[Flags]
 	public enum ECitadelWeaponAttributes : ushort {
 		EWeaponAttribute_None = 0,
 		EWeaponAttribute_RapidFire = 1,

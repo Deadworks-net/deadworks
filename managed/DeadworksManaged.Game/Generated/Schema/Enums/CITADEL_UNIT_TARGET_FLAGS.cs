@@ -7,6 +7,7 @@ namespace DeadworksManaged.Game;
 
 public static partial class Schema {
 	/// <summary>Schema enum <c>CITADEL_UNIT_TARGET_FLAGS</c>. <see href="https://deadworks.net/db/schema/client/CITADEL_UNIT_TARGET_FLAGS">Modding database</see>.</summary>
+	[Flags]
 	public enum CITADEL_UNIT_TARGET_FLAGS : uint {
 		CITADEL_UNIT_TARGET_FLAG_NONE = 0,
 		CITADEL_UNIT_TARGET_FLAG_PENETRATE_INVULNERABLE = 2,

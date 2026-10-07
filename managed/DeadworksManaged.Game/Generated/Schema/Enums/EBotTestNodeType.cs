@@ -7,6 +7,7 @@ namespace DeadworksManaged.Game;
 
 public static partial class Schema {
 	/// <summary>Schema enum <c>EBotTestNodeType</c>. <see href="https://deadworks.net/db/schema/server/EBotTestNodeType">Modding database</see>.</summary>
+	[Flags]
 	public enum EBotTestNodeType : uint {
 		EBotTestNode_NotSet = 0,
 		EBotTestNode_StandingMantleStart = 1,

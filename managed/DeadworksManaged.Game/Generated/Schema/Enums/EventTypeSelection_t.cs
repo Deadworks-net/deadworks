@@ -7,6 +7,7 @@ namespace DeadworksManaged.Game;
 
 public static partial class Schema {
 	/// <summary>Schema enum <c>EventTypeSelection_t</c>. <see href="https://deadworks.net/db/schema/particles/EventTypeSelection_t">Modding database</see>.</summary>
+	[Flags]
 	public enum EventTypeSelection_t : uint {
 		PARTICLE_EVENT_TYPE_MASK_NONE = 0,
 		PARTICLE_EVENT_TYPE_MASK_SPAWNED = 1,

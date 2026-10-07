@@ -7,6 +7,7 @@ namespace DeadworksManaged.Game;
 
 public static partial class Schema {
 	/// <summary>Schema enum <c>ModelMeshBufferUsage_t</c>. <see href="https://deadworks.net/db/schema/modellib/ModelMeshBufferUsage_t">Modding database</see>.</summary>
+	[Flags]
 	public enum ModelMeshBufferUsage_t : ushort {
 		MESH_BUFFER_USAGE_NONE = 0,
 		MESH_BUFFER_USAGE_VB = 1,

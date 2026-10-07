@@ -7,6 +7,7 @@ namespace DeadworksManaged.Game;
 
 public static partial class Schema {
 	/// <summary>Schema enum <c>EPreviewStatFlags</c>. <see href="https://deadworks.net/db/schema/client/EPreviewStatFlags">Modding database</see>.</summary>
+	[Flags]
 	public enum EPreviewStatFlags : uint {
 		EPreviewFlag_None = 0,
 		EPreviewFlag_WithPreviewItem = 1,

@@ -7,6 +7,7 @@ namespace DeadworksManaged.Game;
 
 public static partial class Schema {
 	/// <summary>Schema enum <c>ParticleImpulseType_t</c>. <see href="https://deadworks.net/db/schema/particles/ParticleImpulseType_t">Modding database</see>.</summary>
+	[Flags]
 	public enum ParticleImpulseType_t : uint {
 		IMPULSE_TYPE_NONE = 0,
 		IMPULSE_TYPE_GENERIC = 1,

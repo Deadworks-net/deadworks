@@ -7,6 +7,7 @@ namespace DeadworksManaged.Game;
 
 public static partial class Schema {
 	/// <summary>Schema enum <c>ModifierAttribute_t</c>. <see href="https://deadworks.net/db/schema/client/ModifierAttribute_t">Modding database</see>.</summary>
+	[Flags]
 	public enum ModifierAttribute_t : uint {
 		MODIFIER_ATTRIBUTE_NONE = 0,
 		MODIFIER_ATTRIBUTE_PERMANENT = 1,

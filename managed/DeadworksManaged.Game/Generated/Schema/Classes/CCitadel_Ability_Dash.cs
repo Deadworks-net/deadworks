@@ -68,5 +68,8 @@ public static partial class Schema {
 		private static readonly SchemaField __m_nLastGroundDashTick = new("CCitadel_Ability_Dash", "m_nLastGroundDashTick");
 		/// <summary><c>int32</c>.</summary>
 		public int m_nLastGroundDashTick { get => Get<int>(__m_nLastGroundDashTick); set => Set(__m_nLastGroundDashTick, value); }
+
+		/// <summary>The curated <see cref="global::DeadworksManaged.Api.CCitadel_Ability_Dash"/> for this entity, or null if it is gone.</summary>
+		public new global::DeadworksManaged.Api.CCitadel_Ability_Dash? Entity => SchemaRegistry.Wrapper<global::DeadworksManaged.Api.CCitadel_Ability_Dash>(EntityHandle);
 	}
 }

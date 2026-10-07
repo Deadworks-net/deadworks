@@ -7,6 +7,7 @@ namespace DeadworksManaged.Game;
 
 public static partial class Schema {
 	/// <summary>Schema enum <c>FootstepJumpPhase_t</c>. <see href="https://deadworks.net/db/schema/animgraphlib/FootstepJumpPhase_t">Modding database</see>.</summary>
+	[Flags]
 	public enum FootstepJumpPhase_t : byte {
 		Unknown = 0,
 		NotJumping = 1,

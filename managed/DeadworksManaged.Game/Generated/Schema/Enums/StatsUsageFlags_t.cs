@@ -7,6 +7,7 @@ namespace DeadworksManaged.Game;
 
 public static partial class Schema {
 	/// <summary>Schema enum <c>StatsUsageFlags_t</c>. <see href="https://deadworks.net/db/schema/client/StatsUsageFlags_t">Modding database</see>.</summary>
+	[Flags]
 	public enum StatsUsageFlags_t : uint {
 		None = 0,
 		IntrinsicallyProvidedInModifier = 1,

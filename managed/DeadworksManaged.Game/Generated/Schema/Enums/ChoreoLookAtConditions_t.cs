@@ -7,6 +7,7 @@ namespace DeadworksManaged.Game;
 
 public static partial class Schema {
 	/// <summary>Schema enum <c>ChoreoLookAtConditions_t</c>. <see href="https://deadworks.net/db/schema/client/ChoreoLookAtConditions_t">Modding database</see>.</summary>
+	[Flags]
 	public enum ChoreoLookAtConditions_t : uint {
 		WHILE_MOVING = 1,
 		WHILE_ANIMATING = 2,

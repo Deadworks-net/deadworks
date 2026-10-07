@@ -112,5 +112,8 @@ public static partial class Schema {
 		private static readonly SchemaField __m_szNetworkIDString = new("CBasePlayerController", "m_szNetworkIDString");
 		/// <summary><c>CUtlString</c>.</summary>
 		public string m_szNetworkIDString => GetString(__m_szNetworkIDString);
+
+		/// <summary>The curated <see cref="global::DeadworksManaged.Api.CBasePlayerController"/> for this entity, or null if it is gone.</summary>
+		public new global::DeadworksManaged.Api.CBasePlayerController? Entity => SchemaRegistry.Wrapper<global::DeadworksManaged.Api.CBasePlayerController>(EntityHandle);
 	}
 }

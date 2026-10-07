@@ -7,6 +7,7 @@ namespace DeadworksManaged.Game;
 
 public static partial class Schema {
 	/// <summary>Schema enum <c>SaveRestoreTableFlags_t</c>. <see href="https://deadworks.net/db/schema/client/SaveRestoreTableFlags_t">Modding database</see>.</summary>
+	[Flags]
 	public enum SaveRestoreTableFlags_t : uint {
 		FENTTABLE_NONE = 0,
 		FENTTABLE_PLAYER = 2147483648,

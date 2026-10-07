@@ -444,5 +444,8 @@ public static partial class Schema {
 		private static readonly SchemaField __m_vecRestrictedToItems = new("CCitadelPlayerPawn", "m_vecRestrictedToItems");
 		/// <summary><c>CNetworkUtlVectorBase&lt;CUtlStringToken&gt;</c>.</summary>
 		public SchemaValueList<uint> m_vecRestrictedToItems => new(this, __m_vecRestrictedToItems, -1);
+
+		/// <summary>The curated <see cref="global::DeadworksManaged.Api.CCitadelPlayerPawn"/> for this entity, or null if it is gone.</summary>
+		public new global::DeadworksManaged.Api.CCitadelPlayerPawn? Entity => SchemaRegistry.Wrapper<global::DeadworksManaged.Api.CCitadelPlayerPawn>(EntityHandle);
 	}
 }

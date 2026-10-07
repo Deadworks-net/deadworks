@@ -5,8 +5,8 @@
 
 namespace DeadworksManaged.Game;
 
-/// <summary>Every console command a dedicated server has. Each runs one line at the server console: <c>Commands.changelevel("dl_midtown")</c>.</summary>
-public static class Commands {
+/// <summary>Every console command a dedicated server has. Each runs one line at the server console: <c>ConCommands.changelevel("dl_midtown")</c>.</summary>
+public static class ConCommands {
 	private static void Run(string command, string arguments)
 		=> global::DeadworksManaged.Api.Server.ExecuteCommand(arguments.Length == 0 ? command : command + " " + arguments);
 

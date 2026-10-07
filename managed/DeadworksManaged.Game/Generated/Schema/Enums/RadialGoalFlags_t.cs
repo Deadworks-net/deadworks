@@ -7,6 +7,7 @@ namespace DeadworksManaged.Game;
 
 public static partial class Schema {
 	/// <summary>Schema enum <c>RadialGoalFlags_t</c>. <see href="https://deadworks.net/db/schema/server/RadialGoalFlags_t">Modding database</see>.</summary>
+	[Flags]
 	public enum RadialGoalFlags_t : uint {
 		eDefault = 0,
 		eAllowGapsFromCenter = 1,

@@ -7,6 +7,7 @@ namespace DeadworksManaged.Game;
 
 public static partial class Schema {
 	/// <summary>Schema enum <c>EAbilityRequirements_t</c>. <see href="https://deadworks.net/db/schema/client/EAbilityRequirements_t">Modding database</see>.</summary>
+	[Flags]
 	public enum EAbilityRequirements_t : ushort {
 		ERequirementNone = 0,
 		ERequirementChargedAbility = 1,

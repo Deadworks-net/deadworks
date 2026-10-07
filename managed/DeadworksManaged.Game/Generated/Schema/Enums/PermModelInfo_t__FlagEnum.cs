@@ -7,6 +7,7 @@ namespace DeadworksManaged.Game;
 
 public static partial class Schema {
 	/// <summary>Schema enum <c>PermModelInfo_t::FlagEnum</c>. <see href="https://deadworks.net/db/schema/modellib/PermModelInfo_t%3A%3AFlagEnum">Modding database</see>.</summary>
+	[Flags]
 	public enum PermModelInfo_t__FlagEnum : uint {
 		FLAG_TRANSLUCENT = 1,
 		FLAG_TRANSLUCENT_TWO_PASS = 2,

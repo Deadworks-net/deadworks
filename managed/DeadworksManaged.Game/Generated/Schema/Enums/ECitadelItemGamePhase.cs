@@ -7,6 +7,7 @@ namespace DeadworksManaged.Game;
 
 public static partial class Schema {
 	/// <summary>Schema enum <c>ECitadelItemGamePhase</c>. <see href="https://deadworks.net/db/schema/client/ECitadelItemGamePhase">Modding database</see>.</summary>
+	[Flags]
 	public enum ECitadelItemGamePhase : byte {
 		ECitadelItemGamePhase_Invalid = 0,
 		ECitadelItemGamePhase_EarlyGame = 1,

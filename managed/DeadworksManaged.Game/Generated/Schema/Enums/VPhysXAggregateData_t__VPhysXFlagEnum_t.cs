@@ -7,6 +7,7 @@ namespace DeadworksManaged.Game;
 
 public static partial class Schema {
 	/// <summary>Schema enum <c>VPhysXAggregateData_t::VPhysXFlagEnum_t</c>. <see href="https://deadworks.net/db/schema/modellib/VPhysXAggregateData_t%3A%3AVPhysXFlagEnum_t">Modding database</see>.</summary>
+	[Flags]
 	public enum VPhysXAggregateData_t__VPhysXFlagEnum_t : uint {
 		FLAG_IS_POLYSOUP_GEOMETRY = 1,
 		FLAG_LEVEL_COLLISION = 16,

@@ -7,6 +7,7 @@ namespace DeadworksManaged.Game;
 
 public static partial class Schema {
 	/// <summary>Schema enum <c>ProjectileBehaviorFlag_t</c>. <see href="https://deadworks.net/db/schema/client/ProjectileBehaviorFlag_t">Modding database</see>.</summary>
+	[Flags]
 	public enum ProjectileBehaviorFlag_t : uint {
 		PBF_None = 0,
 		PBF_BounceOffWall = 1,

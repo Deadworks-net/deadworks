@@ -7,6 +7,7 @@ namespace DeadworksManaged.Game;
 
 public static partial class Schema {
 	/// <summary>Schema enum <c>ParticleOrientationType_t</c>. <see href="https://deadworks.net/db/schema/particles/ParticleOrientationType_t">Modding database</see>.</summary>
+	[Flags]
 	public enum ParticleOrientationType_t : uint {
 		PARTICLE_ORIENTATION_NONE = 0,
 		PARTICLE_ORIENTATION_VELOCITY = 1,

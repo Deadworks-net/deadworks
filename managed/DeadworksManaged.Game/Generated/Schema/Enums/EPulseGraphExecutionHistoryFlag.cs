@@ -7,6 +7,7 @@ namespace DeadworksManaged.Game;
 
 public static partial class Schema {
 	/// <summary>Schema enum <c>EPulseGraphExecutionHistoryFlag</c>. <see href="https://deadworks.net/db/schema/pulse_runtime_lib/EPulseGraphExecutionHistoryFlag">Modding database</see>.</summary>
+	[Flags]
 	public enum EPulseGraphExecutionHistoryFlag : uint {
 		NO_FLAGS = 0,
 		CURSOR_ADD_TAG = 1,

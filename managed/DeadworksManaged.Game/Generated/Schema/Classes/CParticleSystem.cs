@@ -109,6 +109,9 @@ public static partial class Schema {
 		/// <summary><c>Vector</c>.</summary>
 		public Vector3 m_vecDataCPValue { get => Get<Vector3>(__m_vecDataCPValue); set => Set(__m_vecDataCPValue, value); }
 
+		/// <summary>The curated <see cref="global::DeadworksManaged.Api.CParticleSystem"/> for this entity, or null if it is gone.</summary>
+		public new global::DeadworksManaged.Api.CParticleSystem? Entity => SchemaRegistry.Wrapper<global::DeadworksManaged.Api.CParticleSystem>(EntityHandle);
+
 		/// <summary>Fires the <c>DestroyImmediately</c> input.</summary>
 		public void InputDestroyImmediately() => FireInput("DestroyImmediately");
 

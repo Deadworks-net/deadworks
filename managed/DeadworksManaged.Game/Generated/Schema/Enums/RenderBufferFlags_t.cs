@@ -7,6 +7,7 @@ namespace DeadworksManaged.Game;
 
 public static partial class Schema {
 	/// <summary>Schema enum <c>RenderBufferFlags_t</c>. <see href="https://deadworks.net/db/schema/modellib/RenderBufferFlags_t">Modding database</see>.</summary>
+	[Flags]
 	public enum RenderBufferFlags_t : uint {
 		RENDER_BUFFER_USAGE_NONE = 0,
 		RENDER_BUFFER_USAGE_VERTEX_BUFFER = 1,

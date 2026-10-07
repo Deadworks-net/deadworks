@@ -7,6 +7,7 @@ namespace DeadworksManaged.Game;
 
 public static partial class Schema {
 	/// <summary>Schema enum <c>EShopFilters_t</c>. <see href="https://deadworks.net/db/schema/client/EShopFilters_t">Modding database</see>.</summary>
+	[Flags]
 	public enum EShopFilters_t : ulong {
 		EShopFilterNone = 0,
 		EShopFilterWeaponDamage = 1,

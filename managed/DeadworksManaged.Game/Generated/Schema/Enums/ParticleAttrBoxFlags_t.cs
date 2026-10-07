@@ -7,6 +7,7 @@ namespace DeadworksManaged.Game;
 
 public static partial class Schema {
 	/// <summary>Schema enum <c>ParticleAttrBoxFlags_t</c>. <see href="https://deadworks.net/db/schema/particles/ParticleAttrBoxFlags_t">Modding database</see>.</summary>
+	[Flags]
 	public enum ParticleAttrBoxFlags_t : uint {
 		PARTICLE_ATTR_BOX_FLAGS_NONE = 0,
 		PARTICLE_ATTR_BOX_FLAGS_WATER = 1,

@@ -7,6 +7,7 @@ namespace DeadworksManaged.Game;
 
 public static partial class Schema {
 	/// <summary>Schema enum <c>ChoreoLocatorArrivalOptionFlags_t</c>. <see href="https://deadworks.net/db/schema/client/ChoreoLocatorArrivalOptionFlags_t">Modding database</see>.</summary>
+	[Flags]
 	public enum ChoreoLocatorArrivalOptionFlags_t : ushort {
 		eLocatorArrivalOption_None = 0,
 		eLocatorArrivalOption_DontStopAtGoal = 1,

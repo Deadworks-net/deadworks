@@ -7,6 +7,7 @@ namespace DeadworksManaged.Game;
 
 public static partial class Schema {
 	/// <summary>Schema enum <c>NmDocToolFlag_t</c>. <see href="https://deadworks.net/db/schema/animdoclib/NmDocToolFlag_t">Modding database</see>.</summary>
+	[Flags]
 	public enum NmDocToolFlag_t : uint {
 		None = 0,
 		StandaloneButton = 1,

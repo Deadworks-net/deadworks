@@ -7,6 +7,7 @@ namespace DeadworksManaged.Game;
 
 public static partial class Schema {
 	/// <summary>Schema enum <c>VPhysXBodyPart_t::VPhysXFlagEnum_t</c>. <see href="https://deadworks.net/db/schema/modellib/VPhysXBodyPart_t%3A%3AVPhysXFlagEnum_t">Modding database</see>.</summary>
+	[Flags]
 	public enum VPhysXBodyPart_t__VPhysXFlagEnum_t : uint {
 		FLAG_STATIC = 1,
 		FLAG_KINEMATIC = 2,

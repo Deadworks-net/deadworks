@@ -7,6 +7,7 @@ namespace DeadworksManaged.Game;
 
 public static partial class Schema {
 	/// <summary>Schema enum <c>TakeDamageFlags_t</c>. <see href="https://deadworks.net/db/schema/client/TakeDamageFlags_t">Modding database</see>.</summary>
+	[Flags]
 	public enum TakeDamageFlags_t : ulong {
 		DFLAG_NONE = 0,
 		DFLAG_SUPPRESS_HEALTH_CHANGES = 1,

@@ -105,6 +105,9 @@ public static partial class Schema {
 		/// <summary><c>VectorWS</c>. Wrapped by <c>CBeam.EndPosition</c> in DeadworksManaged.Api.</summary>
 		public Vector3 m_vecEndPos { get => Get<Vector3>(__m_vecEndPos); set => Set(__m_vecEndPos, value); }
 
+		/// <summary>The curated <see cref="global::DeadworksManaged.Api.CBeam"/> for this entity, or null if it is gone.</summary>
+		public new global::DeadworksManaged.Api.CBeam? Entity => SchemaRegistry.Wrapper<global::DeadworksManaged.Api.CBeam>(EntityHandle);
+
 		/// <summary>Fires the <c>ColorBlueValue</c> input.</summary>
 		public void InputColorBlueValue(float value) => FireInput("ColorBlueValue", Spawner.InputText(value));
 

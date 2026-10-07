@@ -7,6 +7,7 @@ namespace DeadworksManaged.Game;
 
 public static partial class Schema {
 	/// <summary>Schema enum <c>MeshDrawPrimitiveFlags_t</c>. <see href="https://deadworks.net/db/schema/modellib/MeshDrawPrimitiveFlags_t">Modding database</see>.</summary>
+	[Flags]
 	public enum MeshDrawPrimitiveFlags_t : uint {
 		MESH_DRAW_FLAGS_NONE = 0,
 		MESH_DRAW_FLAGS_USE_SHADOW_FAST_PATH = 1,

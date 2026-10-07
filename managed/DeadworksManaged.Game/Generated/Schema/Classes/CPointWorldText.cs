@@ -77,6 +77,9 @@ public static partial class Schema {
 		/// <summary><c>PointWorldTextReorientMode_t</c>.</summary>
 		public PointWorldTextReorientMode_t m_nReorientMode { get => Get<PointWorldTextReorientMode_t>(__m_nReorientMode); set => Set(__m_nReorientMode, value); }
 
+		/// <summary>The curated <see cref="global::DeadworksManaged.Api.CPointWorldText"/> for this entity, or null if it is gone.</summary>
+		public new global::DeadworksManaged.Api.CPointWorldText? Entity => SchemaRegistry.Wrapper<global::DeadworksManaged.Api.CPointWorldText>(EntityHandle);
+
 		/// <summary>Fires the <c>Disable</c> input.</summary>
 		public void InputDisable() => FireInput("Disable");
 

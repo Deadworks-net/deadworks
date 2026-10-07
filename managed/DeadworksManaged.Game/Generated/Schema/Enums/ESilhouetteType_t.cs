@@ -7,6 +7,7 @@ namespace DeadworksManaged.Game;
 
 public static partial class Schema {
 	/// <summary>Schema enum <c>ESilhouetteType_t</c>. <see href="https://deadworks.net/db/schema/scenesystem/ESilhouetteType_t">Modding database</see>.</summary>
+	[Flags]
 	public enum ESilhouetteType_t : uint {
 		SILHOUETTE_NONE = 0,
 		SILHOUETTE_LIGHT = 1,

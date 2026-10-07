@@ -113,6 +113,9 @@ public static partial class Schema {
 		/// <summary><c>QAngle</c>.</summary>
 		public Vector3 v_anglePrevious { get => Get<Vector3>(__v_anglePrevious); set => Set(__v_anglePrevious, value); }
 
+		/// <summary>The curated <see cref="global::DeadworksManaged.Api.CBasePlayerPawn"/> for this entity, or null if it is gone.</summary>
+		public new global::DeadworksManaged.Api.CBasePlayerPawn? Entity => SchemaRegistry.Wrapper<global::DeadworksManaged.Api.CBasePlayerPawn>(EntityHandle);
+
 		/// <summary>Fires the <c>SetFogController</c> input.</summary>
 		public void InputSetFogController(string value) => FireInput("SetFogController", value);
 

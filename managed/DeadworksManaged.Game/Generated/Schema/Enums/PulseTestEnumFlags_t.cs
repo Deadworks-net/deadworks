@@ -7,6 +7,7 @@ namespace DeadworksManaged.Game;
 
 public static partial class Schema {
 	/// <summary>Schema enum <c>PulseTestEnumFlags_t</c>. <see href="https://deadworks.net/db/schema/pulse_system/PulseTestEnumFlags_t">Modding database</see>.</summary>
+	[Flags]
 	public enum PulseTestEnumFlags_t : uint {
 		NONE = 0,
 		FIRST = 1,

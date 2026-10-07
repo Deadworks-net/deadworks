@@ -160,5 +160,8 @@ public static partial class Schema {
 		private static readonly SchemaField __m_vecRecentCommAttempts = new("CCitadelPlayerController", "m_vecRecentCommAttempts");
 		/// <summary><c>CUtlVector&lt;GameTime_t&gt;</c>.</summary>
 		public SchemaValueList<float> m_vecRecentCommAttempts => new(this, __m_vecRecentCommAttempts, -1);
+
+		/// <summary>The curated <see cref="global::DeadworksManaged.Api.CCitadelPlayerController"/> for this entity, or null if it is gone.</summary>
+		public new global::DeadworksManaged.Api.CCitadelPlayerController? Entity => SchemaRegistry.Wrapper<global::DeadworksManaged.Api.CCitadelPlayerController>(EntityHandle);
 	}
 }

@@ -7,6 +7,7 @@ namespace DeadworksManaged.Game;
 
 public static partial class Schema {
 	/// <summary>Schema enum <c>AI_VolumetricEventCategory_t</c>. <see href="https://deadworks.net/db/schema/server/AI_VolumetricEventCategory_t">Modding database</see>.</summary>
+	[Flags]
 	public enum AI_VolumetricEventCategory_t : byte {
 		eNone = 0,
 		eSound = 1,

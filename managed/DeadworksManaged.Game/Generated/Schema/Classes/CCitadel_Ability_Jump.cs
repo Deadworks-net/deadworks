@@ -132,5 +132,8 @@ public static partial class Schema {
 		private static readonly SchemaField __m_vWallJumpNormalUsed = new("CCitadel_Ability_Jump", "m_vWallJumpNormalUsed");
 		/// <summary><c>Vector</c>.</summary>
 		public Vector3 m_vWallJumpNormalUsed { get => Get<Vector3>(__m_vWallJumpNormalUsed); set => Set(__m_vWallJumpNormalUsed, value); }
+
+		/// <summary>The curated <see cref="global::DeadworksManaged.Api.CCitadel_Ability_Jump"/> for this entity, or null if it is gone.</summary>
+		public new global::DeadworksManaged.Api.CCitadel_Ability_Jump? Entity => SchemaRegistry.Wrapper<global::DeadworksManaged.Api.CCitadel_Ability_Jump>(EntityHandle);
 	}
 }

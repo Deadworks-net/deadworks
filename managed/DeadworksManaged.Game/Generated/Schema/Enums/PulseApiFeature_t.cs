@@ -7,6 +7,7 @@ namespace DeadworksManaged.Game;
 
 public static partial class Schema {
 	/// <summary>Schema enum <c>PulseApiFeature_t</c>. <see href="https://deadworks.net/db/schema/pulse_runtime_lib/PulseApiFeature_t">Modding database</see>.</summary>
+	[Flags]
 	public enum PulseApiFeature_t : uint {
 		AF_NONE = 0,
 		AF_ENTITIES = 1,

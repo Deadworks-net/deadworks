@@ -7,6 +7,7 @@ namespace DeadworksManaged.Game;
 
 public static partial class Schema {
 	/// <summary>Schema enum <c>NavAttributeDynamicType</c>. <see href="https://deadworks.net/db/schema/navlib/NavAttributeDynamicType">Modding database</see>.</summary>
+	[Flags]
 	public enum NavAttributeDynamicType : uint {
 		NAV_AREA_NONE = 0,
 		NAV_AREA_UNDER_WATER = 1,

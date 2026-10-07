@@ -7,6 +7,7 @@ namespace DeadworksManaged.Game;
 
 public static partial class Schema {
 	/// <summary>Schema enum <c>EAIScheduleFlags</c>. <see href="https://deadworks.net/db/schema/server/EAIScheduleFlags">Modding database</see>.</summary>
+	[Flags]
 	public enum EAIScheduleFlags : uint {
 		SCHEDULE_FLAGS_NONE = 0,
 		SCHEDULE_FLAGS_ABILITY = 1,

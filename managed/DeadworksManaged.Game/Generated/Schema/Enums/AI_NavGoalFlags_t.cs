@@ -7,6 +7,7 @@ namespace DeadworksManaged.Game;
 
 public static partial class Schema {
 	/// <summary>Schema enum <c>AI_NavGoalFlags_t</c>. <see href="https://deadworks.net/db/schema/server/AI_NavGoalFlags_t">Modding database</see>.</summary>
+	[Flags]
 	public enum AI_NavGoalFlags_t : uint {
 		eDisableUpdateGoalPos = 2,
 		eLocalSucceedOnWithinTolerance = 4,

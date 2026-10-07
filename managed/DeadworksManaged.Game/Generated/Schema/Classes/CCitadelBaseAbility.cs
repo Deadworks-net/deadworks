@@ -144,5 +144,8 @@ public static partial class Schema {
 		private static readonly SchemaField __m_vecIntrinsicModifiers = new("CCitadelBaseAbility", "m_vecIntrinsicModifiers");
 		/// <summary><c>CUtlVector&lt;CModifierHandleTyped&lt;CCitadelModifier&gt;&gt;</c>. No typed mapping yet: read it through its address.</summary>
 		public RawField m_vecIntrinsicModifiers => Raw(__m_vecIntrinsicModifiers, "CUtlVector<CModifierHandleTyped<CCitadelModifier>>");
+
+		/// <summary>The curated <see cref="global::DeadworksManaged.Api.CCitadelBaseAbility"/> for this entity, or null if it is gone.</summary>
+		public new global::DeadworksManaged.Api.CCitadelBaseAbility? Entity => SchemaRegistry.Wrapper<global::DeadworksManaged.Api.CCitadelBaseAbility>(EntityHandle);
 	}
 }

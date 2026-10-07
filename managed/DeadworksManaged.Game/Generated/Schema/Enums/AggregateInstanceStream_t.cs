@@ -7,6 +7,7 @@ namespace DeadworksManaged.Game;
 
 public static partial class Schema {
 	/// <summary>Schema enum <c>AggregateInstanceStream_t</c>. <see href="https://deadworks.net/db/schema/scenesystem/AggregateInstanceStream_t">Modding database</see>.</summary>
+	[Flags]
 	public enum AggregateInstanceStream_t : byte {
 		AGGREGATE_INSTANCE_STREAM_NONE = 0,
 		AGGREGATE_INSTANCE_STREAM_LIGHTMAPUV_UNORM16 = 1,

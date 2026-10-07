@@ -7,6 +7,7 @@ namespace DeadworksManaged.Game;
 
 public static partial class Schema {
 	/// <summary>Schema enum <c>ObjectTypeFlags_t</c>. <see href="https://deadworks.net/db/schema/scenesystem/ObjectTypeFlags_t">Modding database</see>.</summary>
+	[Flags]
 	public enum ObjectTypeFlags_t : uint {
 		OBJECT_TYPE_NONE = 0,
 		OBJECT_TYPE_MODEL = 8,

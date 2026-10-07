@@ -7,6 +7,7 @@ namespace DeadworksManaged.Game;
 
 public static partial class Schema {
 	/// <summary>Schema enum <c>ItemFlagTypes_t</c>. <see href="https://deadworks.net/db/schema/client/ItemFlagTypes_t">Modding database</see>.</summary>
+	[Flags]
 	public enum ItemFlagTypes_t : byte {
 		ITEM_FLAG_NONE = 0,
 		ITEM_FLAG_CAN_SELECT_WITHOUT_AMMO = 1,
