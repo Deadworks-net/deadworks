@@ -15,6 +15,8 @@
   <ItemGroup>
     <Compile Remove="DeadworksManaged.Api\**" />
     <Compile Remove="DeadworksManaged.Generators\**" />
+    <Compile Remove="DeadworksManaged.Game\**" />
+    <Compile Remove="DeadworksManaged.GameGen\**" />
     <Compile Remove="plugins\**" />
     <Compile Remove="DeadworksManaged.Tests\**" />
   </ItemGroup>
