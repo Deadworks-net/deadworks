@@ -6,6 +6,8 @@
   <Project Path="deadworks\deadworks.vcxproj" Id="191caf0c-d687-4a41-9d3e-10f7bd9e0dab" />
   <Project Path="managed\DeadworksManaged.Api\DeadworksManaged.Api.csproj" />
   <Project Path="managed\DeadworksManaged.csproj" />
+  <Project Path="managed\DeadworksManaged.Game\DeadworksManaged.Game.csproj" />
+  <Project Path="managed\DeadworksManaged.GameGen\DeadworksManaged.GameGen.csproj" />
   <Project Path="managed\DeadworksManaged.Generators\DeadworksManaged.Generators.csproj" />
   <Project Path="managed\plugins\AdminPlugin\AdminPlugin.csproj" />
 </Solution>
