@@ -22,3 +22,9 @@ docker/data/
 docker/steam/
 docker/one/
 docker/two/
+
+# Build output of the tools
+tools/**/bin/
+tools/**/obj/
+tools/**/out/
+__pycache__/
