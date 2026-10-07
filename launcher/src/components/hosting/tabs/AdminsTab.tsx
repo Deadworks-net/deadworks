@@ -30,6 +30,7 @@ import {
   playerImmunity,
   resolveCommand,
   roleImmunity,
+  sameName,
   steam3,
   whoCan,
   type CommandInfo,
@@ -81,7 +82,6 @@ type RoleSave = Omit<Extract<PermissionChange, { action: "role-save" }>, "action
 type OverrideSave = Omit<Extract<PermissionChange, { action: "override-save" }>, "action">;
 
 const displayName = (p: Person): string => p.entry.name || p.id || p.key;
-const sameName = (a: string, b: string): boolean => a.toLowerCase() === b.toLowerCase();
 const plural = (n: number, one: string, many = `${one}s`): string => `${n} ${n === 1 ? one : many}`;
 
 /** Hand-edited files can hold shapes the views don't expect; show a way to fix them instead of a blank window. */
@@ -302,9 +302,9 @@ export default function AdminsTab({ server, prefill, onPrefillUsed }: AdminsTabP
           <ErrorNote warn message={liveReason} actionLabel="OK" onAction={() => setLiveReason(null)} />
         )}
         {error && !dialog && <ErrorNote message={error} actionLabel="OK" onAction={() => setError(null)} />}
-        {fileErrors.map(({ text, path }) => (
+        {fileErrors.map(({ text, path }, i) => (
           <ErrorNote
-            key={text}
+            key={`${i}:${text}`}
             message={text}
             actionLabel={path ? "Open the file" : undefined}
             onAction={path ? () => openJson(path) : undefined}
@@ -644,7 +644,7 @@ function Roles({
               const held = holders(name);
               const chain = inheritChain(model.roles, name);
               const grants = role?.permissions || [];
-              const isDefault = name === DEFAULT_ROLE;
+              const isDefault = sameName(name, DEFAULT_ROLE);
               return (
                 <tr key={name}>
                   <td>
@@ -846,7 +846,7 @@ function Commands({
                           )}
                           {!who.anyone &&
                             who.people
-                              .filter((p) => !p.entry.roles.some((role) => who.roles.includes(role)))
+                              .filter((p) => !p.entry.roles.some((role) => who.roles.some((r) => sameName(r, role))))
                               .map((p) => (
                                 <span key={p.key} className={css.person}>
                                   {displayName(p)}
@@ -973,8 +973,8 @@ function Problems({ problems }: { problems: Problem[] }) {
       <SectionHead title="Errors" />
       {problems.length > 0 ? (
         <ul className={cn(styles.list, css.problems)}>
-          {problems.map((p) => (
-            <li key={p.text} className={css[`problem-${p.level}`]}>
+          {problems.map((p, i) => (
+            <li key={`${i}:${p.text}`} className={css[`problem-${p.level}`]}>
               {p.text}
             </li>
           ))}
@@ -1090,7 +1090,7 @@ function RolePicker({
   return (
     <div className={css.picker} role="group" aria-label="Roles">
       {names.map((r) => {
-        const on = selected.includes(r);
+        const on = selected.some((s) => sameName(s, r));
         return (
           <label key={r} className={cn(css.pickerRow, on && css.pickerRowOn)}>
             <input type="checkbox" checked={on} onChange={() => onToggle(r)} />
@@ -1115,8 +1115,9 @@ function RolePicker({
   );
 }
 
-const toggleIn = (list: string[], item: string): string[] =>
-  list.includes(item) ? list.filter((x) => x !== item) : [...list, item];
+// A role is held under whatever capitals the file gives it, so "Admin" ticks (and unticks) "admin".
+const toggleRole = (list: string[], role: string): string[] =>
+  list.some((x) => sameName(x, role)) ? list.filter((x) => !sameName(x, role)) : [...list, role];
 
 function PlayerDialog({
   model,
@@ -1148,8 +1149,8 @@ function PlayerDialog({
   const [extrasOpen] = useState(permissions.length > 0 || immunity !== "");
 
   const id = parseSteamId(steamId);
-  const roleNames = Object.keys(model.roles).filter((r) => r !== DEFAULT_ROLE);
-  const toggle = (r: string) => setRoles((rs) => toggleIn(rs, r));
+  const roleNames = Object.keys(model.roles).filter((r) => !sameName(r, DEFAULT_ROLE));
+  const toggle = (r: string) => setRoles((rs) => toggleRole(rs, r));
 
   const candidates = useMemo(() => {
     const seen = new Set(model.people.map((p) => p.id));
@@ -1262,7 +1263,7 @@ function PlayerDialog({
             <div className={ui.hint}>There are no roles besides default yet. Create one on the Roles view.</div>
           )}
           {roles
-            .filter((r) => !roleNames.includes(r))
+            .filter((r) => !roleNames.some((n) => sameName(n, r)))
             .map((r) => (
               <div key={r} className={cn(ui.hint, css.warnText)}>
                 They also have "{r}", which isn't defined.{" "}
@@ -1330,7 +1331,8 @@ function RoleDialog({
   const [permissions, setPermissions] = useState<string[]>(role?.permissions ?? []);
   const [inherits, setInherits] = useState<string[]>(role?.inherits ?? []);
   const [immunity, setImmunity] = useState(role?.immunity != null ? String(role.immunity) : "");
-  const others = Object.keys(model.roles).filter((r) => r !== name && r !== DEFAULT_ROLE);
+  const isDefault = name != null && sameName(name, DEFAULT_ROLE);
+  const others = Object.keys(model.roles).filter((r) => r !== name && !sameName(r, DEFAULT_ROLE));
 
   const formId = "perm-role-form";
   return (
@@ -1371,12 +1373,12 @@ function RoleDialog({
               value={roleName}
               onChange={(e) => setRoleName(e.target.value)}
               placeholder="moderator"
-              disabled={name === DEFAULT_ROLE}
+              disabled={isDefault}
               autoFocus={!name}
               spellCheck={false}
               required
             />
-            {name === DEFAULT_ROLE && <div className={ui.hint}>Every player has this role.</div>}
+            {isDefault && <div className={ui.hint}>Every player has this role.</div>}
           </div>
           <div className={ui.field}>
             <label className={ui.label} htmlFor="perm-role-immunity">
@@ -1415,7 +1417,7 @@ function RoleDialog({
               model={model}
               names={others}
               selected={inherits}
-              onToggle={(r) => setInherits((xs) => toggleIn(xs, r))}
+              onToggle={(r) => setInherits((xs) => toggleRole(xs, r))}
             />
           </fieldset>
         )}
