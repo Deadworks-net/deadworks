@@ -163,11 +163,21 @@ pub struct ServerFile {
     pub created_at: u64,
 }
 
+/// What `new_id` makes: lowercase letters, digits and dashes.
+pub fn valid_server_id(id: &str) -> bool {
+    !id.is_empty() && id.len() <= 64 && id.bytes().all(|b| b.is_ascii_lowercase() || b.is_ascii_digit() || b == b'-')
+}
+
 pub fn load_servers(layout: &Layout) -> Vec<ServerFile> {
     let Ok(rd) = std::fs::read_dir(layout.servers_dir()) else { return Vec::new() };
+    // The folder's name is the id. A `server.json` that claims another one (or one that is not
+    // a plain folder name) is not loaded: the id goes into paths, including ones that get deleted.
     let mut out: Vec<ServerFile> = rd
         .flatten()
-        .filter_map(|e| read_json::<ServerFile>(&e.path().join("server.json")).ok())
+        .filter_map(|e| {
+            let file = read_json::<ServerFile>(&e.path().join("server.json")).ok()?;
+            (valid_server_id(&file.config.id) && e.file_name().to_str() == Some(file.config.id.as_str())).then_some(file)
+        })
         .collect();
     out.sort_by(|a, b| a.created_at.cmp(&b.created_at).then_with(|| a.config.name.cmp(&b.config.name)));
     out

@@ -53,6 +53,11 @@ pub fn validate(c: &ServerConfig) -> Result<(), String> {
             return Err(format!("'{name}' isn't a valid content file name."));
         }
     }
+    for id in &c.plugins {
+        if !super::plugins::safe_id(id) {
+            return Err(format!("'{id}' isn't a usable plugin name."));
+        }
+    }
     Ok(())
 }
 
@@ -121,11 +126,12 @@ pub fn argv(c: &ServerConfig, usercon: bool) -> Vec<String> {
 
 /// `configs/deadworks.jsonc`: keep whatever else is in it, own the browser
 /// listing and the advertised content.
-pub fn deadworks_jsonc(existing: Option<&str>, c: &ServerConfig) -> String {
-    let mut root = existing.and_then(|t| serde_json::from_str::<Value>(&strip_jsonc(t)).ok()).unwrap_or_else(|| json!({}));
-    if !root.is_object() {
-        root = json!({});
-    }
+///
+/// A file that doesn't parse is an error, not an empty file: writing over it would throw away
+/// whatever its owner had in it. Unchanged content is returned as it was, comments and all.
+pub fn deadworks_jsonc(existing: Option<&str>, c: &ServerConfig) -> Result<String, String> {
+    let before = parse_existing("deadworks.jsonc", existing)?;
+    let mut root = Value::Object(before.clone().unwrap_or_default());
     let obj = root.as_object_mut().unwrap();
     let sb = obj.entry("serverbrowser").or_insert_with(|| json!({}));
     if !sb.is_object() {
@@ -136,19 +142,35 @@ pub fn deadworks_jsonc(existing: Option<&str>, c: &ServerConfig) -> String {
     sb.insert("unlisted".into(), json!(!(c.listed && c.network == NetworkMode::PortForward)));
     sb.insert("content_addons".into(), json!(stems(&c.content_addons)));
     sb.insert("extra_maps".into(), json!(stems(&c.extra_maps)));
-    serde_json::to_string_pretty(&root).unwrap_or_default()
+    Ok(render(existing, before, root))
+}
+
+/// The object in a config file that is already there. `None` when there is no file (or an
+/// empty one).
+fn parse_existing(file: &str, existing: Option<&str>) -> Result<Option<Map<String, Value>>, String> {
+    let Some(text) = existing.filter(|t| !t.trim().is_empty()) else { return Ok(None) };
+    match serde_json::from_str::<Value>(&strip_jsonc(text)) {
+        Ok(Value::Object(map)) => Ok(Some(map)),
+        Ok(_) => Err(format!("configs\\{file} should hold a {{ ... }} object. Fix or delete the file, then try again.")),
+        Err(e) => Err(format!("configs\\{file} has a mistake in it ({e}). Fix or delete the file, then try again.")),
+    }
+}
+
+fn render(existing: Option<&str>, before: Option<Map<String, Value>>, after: Value) -> String {
+    match (existing, &after) {
+        (Some(text), Value::Object(after)) if before.as_ref() == Some(after) => text.to_string(),
+        _ => serde_json::to_string_pretty(&after).unwrap_or_default(),
+    }
 }
 
 /// `configs/plugins.jsonc`: the enabled plugins switched on, everything else as found.
-pub fn plugins_jsonc(existing: Option<&str>, enabled: &[String]) -> String {
-    let mut map: Map<String, Value> = existing
-        .and_then(|t| serde_json::from_str::<Value>(&strip_jsonc(t)).ok())
-        .and_then(|v| v.as_object().cloned())
-        .unwrap_or_default();
+pub fn plugins_jsonc(existing: Option<&str>, enabled: &[String]) -> Result<String, String> {
+    let before = parse_existing("plugins.jsonc", existing)?;
+    let mut map = before.clone().unwrap_or_default();
     for id in enabled {
         map.insert(id.clone(), json!(true));
     }
-    serde_json::to_string_pretty(&Value::Object(map)).unwrap_or_default()
+    Ok(render(existing, before, Value::Object(map)))
 }
 
 fn stems(names: &[String]) -> Vec<String> {
@@ -157,8 +179,56 @@ fn stems(names: &[String]) -> Vec<String> {
 
 /// Remove `//` and `/* */` comments and trailing commas so serde_json can read JSONC.
 pub fn strip_jsonc(text: &str) -> String {
+    strip_trailing_commas(&strip_comments(text))
+}
+
+fn strip_comments(text: &str) -> String {
     let mut out = String::with_capacity(text.len());
-    let mut chars = text.char_indices().peekable();
+    let mut chars = text.chars().peekable();
+    let mut in_str = false;
+    while let Some(c) = chars.next() {
+        if in_str {
+            out.push(c);
+            if c == '\\' {
+                if let Some(escaped) = chars.next() {
+                    out.push(escaped);
+                }
+            } else if c == '"' {
+                in_str = false;
+            }
+            continue;
+        }
+        match (c, chars.peek().copied()) {
+            ('"', _) => {
+                in_str = true;
+                out.push('"');
+            }
+            ('/', Some('/')) => {
+                while chars.peek().is_some_and(|&n| n != '\n') {
+                    chars.next();
+                }
+            }
+            ('/', Some('*')) => {
+                chars.next();
+                let mut prev = ' ';
+                for n in chars.by_ref() {
+                    if prev == '*' && n == '/' {
+                        break;
+                    }
+                    prev = n;
+                }
+                // So `1/**/2` doesn't become `12`.
+                out.push(' ');
+            }
+            _ => out.push(c),
+        }
+    }
+    out
+}
+
+fn strip_trailing_commas(text: &str) -> String {
+    let mut out = String::with_capacity(text.len());
+    let mut chars = text.char_indices();
     let mut in_str = false;
     while let Some((i, c)) = chars.next() {
         if in_str {
@@ -172,27 +242,12 @@ pub fn strip_jsonc(text: &str) -> String {
             }
             continue;
         }
-        match (c, chars.peek().map(|&(_, n)| n)) {
-            ('"', _) => {
+        match c {
+            '"' => {
                 in_str = true;
                 out.push('"');
             }
-            ('/', Some('/')) => {
-                while chars.peek().is_some_and(|&(_, n)| n != '\n') {
-                    chars.next();
-                }
-            }
-            ('/', Some('*')) => {
-                chars.next();
-                let mut prev = ' ';
-                for (_, n) in chars.by_ref() {
-                    if prev == '*' && n == '/' {
-                        break;
-                    }
-                    prev = n;
-                }
-            }
-            (',', _) => {
+            ',' => {
                 let rest = text[i + 1..].trim_start();
                 if !(rest.starts_with('}') || rest.starts_with(']')) {
                     out.push(',');
@@ -264,23 +319,53 @@ mod tests {
     fn deadworks_jsonc_keeps_unknown_keys_and_lists_only_forwarded_servers() {
         let existing = "{\n  // comment\n  \"serverbrowser\": { \"api_url\": \"https://x\", \"unlisted\": false, },\n  \"other\": 1\n}";
         let mut c = sample();
-        let out: Value = serde_json::from_str(&deadworks_jsonc(Some(existing), &c)).unwrap();
+        let out: Value = serde_json::from_str(&deadworks_jsonc(Some(existing), &c).unwrap()).unwrap();
         assert_eq!(out["serverbrowser"]["api_url"], "https://x");
         assert_eq!(out["other"], 1);
         assert_eq!(out["serverbrowser"]["unlisted"], true);
         c.listed = true;
-        let out: Value = serde_json::from_str(&deadworks_jsonc(None, &c)).unwrap();
+        let out: Value = serde_json::from_str(&deadworks_jsonc(None, &c).unwrap()).unwrap();
         assert_eq!(out["serverbrowser"]["unlisted"], false);
         c.network = NetworkMode::Sdr;
-        let out: Value = serde_json::from_str(&deadworks_jsonc(None, &c)).unwrap();
+        let out: Value = serde_json::from_str(&deadworks_jsonc(None, &c).unwrap()).unwrap();
         assert_eq!(out["serverbrowser"]["unlisted"], true, "an SDR server can't be joined from the browser");
     }
 
     #[test]
     fn plugins_jsonc_turns_enabled_on_and_keeps_the_rest() {
-        let out: Value = serde_json::from_str(&plugins_jsonc(Some("{ \"Other\": false, }"), &["Mine".into()])).unwrap();
+        let out: Value = serde_json::from_str(&plugins_jsonc(Some("{ \"Other\": false, }"), &["Mine".into()]).unwrap()).unwrap();
         assert_eq!(out["Mine"], true);
         assert_eq!(out["Other"], false);
+    }
+
+    #[test]
+    fn a_config_file_that_does_not_parse_is_refused_not_replaced() {
+        let c = sample();
+        for broken in ["{ \"permissions\": { \"store\": \"json\" ", "[1, 2]", "{ \"a\": tru }"] {
+            assert!(deadworks_jsonc(Some(broken), &c).is_err(), "{broken}");
+            assert!(plugins_jsonc(Some(broken), &[]).is_err(), "{broken}");
+        }
+        // Missing and empty files are simply new.
+        assert!(deadworks_jsonc(Some("  \n"), &c).is_ok());
+        assert!(plugins_jsonc(None, &[]).is_ok());
+    }
+
+    #[test]
+    fn a_config_file_that_needs_no_change_keeps_its_comments() {
+        let c = sample();
+        let written = deadworks_jsonc(None, &c).unwrap();
+        let commented = written.replacen('{', "{ // set by hand", 1);
+        assert_eq!(deadworks_jsonc(Some(&commented), &c).unwrap(), commented);
+        let plugins = "{\n  \"Mine\": true, // keep\n}";
+        assert_eq!(plugins_jsonc(Some(plugins), &["Mine".into()]).unwrap(), plugins);
+    }
+
+    #[test]
+    fn a_comment_between_a_trailing_comma_and_the_bracket_is_fine() {
+        let text = "{\n  \"require_steam_auth\": false, // LAN\n  \"list\": [1, 2, /* more */ ],\n}";
+        let v: Value = serde_json::from_str(&strip_jsonc(text)).unwrap();
+        assert_eq!(v["require_steam_auth"], false);
+        assert_eq!(v["list"], json!([1, 2]));
     }
 
     #[test]

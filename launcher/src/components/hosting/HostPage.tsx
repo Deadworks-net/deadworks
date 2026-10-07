@@ -116,7 +116,7 @@ export default function HostPage({ nav, active }: HostPageProps) {
     body = (
       <>
         {taskView}
-        {holdReason && <ErrorNote warn message={holdReason} />}
+        {holdReason && <ErrorNote warn message={holdReason} actionLabel="Try anyway" onAction={actions.clearHold} />}
         <div className={styles.layout}>
           {servers.length > 0 && (
             <ServerRail

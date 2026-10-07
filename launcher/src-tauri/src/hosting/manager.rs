@@ -83,6 +83,9 @@ struct Inner {
     last_task: Option<TaskProgress>,
     available_build: Option<String>,
     last_auto_update: Option<Instant>,
+    /// The update (see `update_target`) whose last attempt failed after stopping the servers.
+    /// Not tried again automatically; the Update button still does.
+    auto_update_gave_up: Option<String>,
 }
 
 impl Inner {
@@ -283,6 +286,11 @@ impl Manager {
             hold_reason: inner.state.hold_reason.clone(),
             last_check: inner.state.last_check,
         }
+    }
+
+    /// Names what an update would move to, to tell one pending update from the next.
+    fn update_target(inner: &Inner) -> String {
+        format!("{:?} {:?}", inner.available_build, inner.state.deadworks_latest)
     }
 
     fn pending(inner: &Inner) -> bool {
@@ -521,64 +529,55 @@ impl Manager {
     }
 
     fn do_update(self: &Arc<Self>, p: &Progress) -> Result<(), TaskError> {
-        let (layout, record, previous, username) = {
+        let (layout, record, previous, username, runtime_before, target) = {
             let inner = self.lock();
             let record = inner.state.base.clone().ok_or("Server hosting isn't installed.")?;
-            (inner.layout()?, record, inner.base_files.clone(), inner.state.steam_username.clone())
+            (
+                inner.layout()?,
+                record,
+                inner.base_files.clone(),
+                inner.state.steam_username.clone(),
+                (inner.state.deadworks_tag.clone(), inner.state.dotnet_version.clone()),
+                Self::update_target(&inner),
+            )
         };
-        let was_running = self.stop_all_and_wait(p)?;
-        let result = (|| -> Result<(), TaskError> {
-            let record = match record.source {
-                BaseSource::Client => {
-                    let game_dir = crate::connect::resolve_game_dir().map_err(|_| "Deadlock isn't installed on this PC any more.")?;
-                    let (app, files) = client_manifest(&game_dir)?;
-                    if app.build_id == record.build_id && previous.len() == files.len() {
-                        record
-                    } else {
-                        let outcome = base::sync_from_client(
-                            &layout.base_dir(),
-                            &base::install_dir_of(&game_dir),
-                            &files,
-                            &previous,
-                            record.copy_mode,
-                            !record.modified_files.is_empty(),
-                            p,
-                        )?;
-                        store::save_base_files(&layout, &files)?;
-                        BaseRecord {
-                            build_id: app.build_id,
-                            depots: app.depots,
-                            size_bytes: outcome.size_bytes,
-                            modified_files: outcome.modified_files,
-                            generation: record.generation + 1,
-                            ..record
-                        }
-                    }
+
+        // First everything that can go wrong while the servers are still up. An update that
+        // can't go through must not cost anyone a running server, or an SDR server its address.
+        let step = match record.source {
+            BaseSource::Client => {
+                let game_dir = crate::connect::resolve_game_dir().map_err(|_| "Deadlock isn't installed on this PC any more.")?;
+                let (app, files) = client_manifest(&game_dir)?;
+                if app.build_id == record.build_id && previous.len() == files.len() {
+                    BaseStep::UpToDate
+                } else {
+                    BaseStep::FromClient(game_dir, app, files)
                 }
-                BaseSource::Steamcmd => {
-                    let user = username.ok_or("No Steam account is saved for updates; reinstall with SteamCMD.")?;
-                    steamcmd::install(&layout, &user, None, false, p)?;
-                    let (app, files) = steamcmd::installed(&layout)?;
-                    store::save_base_files(&layout, &files)?;
-                    BaseRecord {
-                        build_id: app.build_id,
-                        depots: app.depots,
-                        size_bytes: files.iter().map(|f| f.size).sum(),
-                        generation: record.generation + 1,
-                        ..record
-                    }
-                }
-            };
-            {
-                let mut inner = self.lock();
-                inner.available_build = Some(record.build_id.clone());
-                inner.state.base = Some(record);
-                inner.base_files = Arc::new(store::load_base_files(&layout));
-                inner.save_state();
             }
-            self.install_runtime(&layout, p)
-        })();
-        let mut restart = was_running;
+            BaseSource::Steamcmd => {
+                let user = username.ok_or("No Steam account is saved for updates; reinstall with SteamCMD.")?;
+                if steamcmd::latest_build(&layout, &user, p)? == record.build_id {
+                    BaseStep::UpToDate
+                } else {
+                    BaseStep::FromSteamcmd(user)
+                }
+            }
+        };
+        self.install_runtime(&layout, p)?;
+        let runtime_changed = {
+            let inner = self.lock();
+            (inner.state.deadworks_tag.clone(), inner.state.dotnet_version.clone()) != runtime_before
+        };
+
+        let mut restart = Vec::new();
+        let mut result = Ok(());
+        if runtime_changed || !matches!(step, BaseStep::UpToDate) {
+            restart = self.stop_all_and_wait(p)?;
+            result = self.update_base(&layout, record, &previous, step, p);
+            // It failed with the servers already stopped. Trying the same update again every half
+            // hour would stop them again every half hour.
+            self.lock().auto_update_gave_up = result.is_err().then_some(target);
+        }
         if result.is_ok() {
             // Servers held for an unsupported game build come back once the hold lifts.
             let inner = self.lock();
@@ -592,12 +591,92 @@ impl Manager {
                 );
             }
         }
-        for id in restart {
-            if let Err(e) = self.start_inner(&id, true) {
-                self.sys_line(&id, &format!("Couldn't restart after the update: {e}"));
+        self.restart_after_task(restart, "update");
+        result
+    }
+
+    fn update_base(
+        &self,
+        layout: &Layout,
+        record: BaseRecord,
+        previous: &[DepotFile],
+        step: BaseStep,
+        p: &Progress,
+    ) -> Result<(), TaskError> {
+        match step {
+            BaseStep::UpToDate => Ok(()),
+            BaseStep::FromClient(game_dir, app, files) => {
+                let outcome = base::sync_from_client(
+                    &layout.base_dir(),
+                    &base::install_dir_of(&game_dir),
+                    &files,
+                    previous,
+                    record.copy_mode,
+                    !record.modified_files.is_empty(),
+                    p,
+                )?;
+                store::save_base_files(layout, &files)?;
+                self.set_base(
+                    layout,
+                    BaseRecord {
+                        build_id: app.build_id,
+                        depots: app.depots,
+                        size_bytes: outcome.size_bytes,
+                        modified_files: outcome.modified_files,
+                        generation: record.generation + 1,
+                        ..record
+                    },
+                );
+                Ok(())
+            }
+            BaseStep::FromSteamcmd(user) => {
+                steamcmd::install(layout, &user, None, false, p)?;
+                self.record_steamcmd_base(layout, record)
             }
         }
-        result
+    }
+
+    /// Take what SteamCMD left in the base as the new base, so server folders are rebuilt from it.
+    fn record_steamcmd_base(&self, layout: &Layout, record: BaseRecord) -> Result<(), TaskError> {
+        let (app, files) = steamcmd::installed(layout)?;
+        store::save_base_files(layout, &files)?;
+        self.set_base(
+            layout,
+            BaseRecord {
+                build_id: app.build_id,
+                depots: app.depots,
+                size_bytes: files.iter().map(|f| f.size).sum(),
+                generation: record.generation + 1,
+                ..record
+            },
+        );
+        Ok(())
+    }
+
+    fn set_base(&self, layout: &Layout, record: BaseRecord) {
+        let mut inner = self.lock();
+        inner.available_build = Some(record.build_id.clone());
+        inner.state.base = Some(record);
+        inner.base_files = Arc::new(store::load_base_files(layout));
+        inner.save_state();
+    }
+
+    /// Start servers again after a task stopped them. One that can't start says why and reads
+    /// as stopped, not as updating for ever.
+    fn restart_after_task(self: &Arc<Self>, ids: Vec<String>, what: &str) {
+        for id in ids {
+            let Err(e) = self.start_inner(&id, true) else { continue };
+            let message = format!("Couldn't restart after the {what}: {e}");
+            self.sys_line(&id, &message);
+            let mut inner = self.lock();
+            if let Some(s) = inner.servers.get_mut(&id) {
+                if s.rt.state == Some(ServerState::Updating) {
+                    s.rt.state = Some(ServerState::Stopped);
+                    s.rt.message = Some(message);
+                }
+                self.emit_runtime_of(s);
+            }
+        }
     }
 
     /// Stop every live server for an update; returns the ones to start again.
@@ -641,11 +720,13 @@ impl Manager {
             if record.source == BaseSource::Steamcmd {
                 let user = user.ok_or("No Steam account is saved; reinstall with SteamCMD.")?;
                 let was_running = mgr.stop_all_and_wait(p)?;
-                let r = steamcmd::install(&layout, &user, None, true, p);
-                for id in was_running {
-                    let _ = mgr.start_inner(&id, true);
-                }
-                return r.map_err(Into::into);
+                // Validating also brings the base up to the current build, and replaces files
+                // rather than rewriting them, so the server folders have to follow.
+                let r = steamcmd::install(&layout, &user, None, true, p)
+                    .map_err(TaskError::from)
+                    .and_then(|()| mgr.record_steamcmd_base(&layout, record));
+                mgr.restart_after_task(was_running, "check");
+                return r;
             }
             let client = crate::connect::resolve_game_dir().ok().map(|g| base::install_dir_of(&g));
             let outcome = base::verify(&layout.base_dir(), client.as_deref(), &files, record.copy_mode, p)?;
@@ -823,6 +904,8 @@ impl Manager {
                 }
             }
             let layout = inner.layout()?;
+            // Settings are checked when saved, but `server.json` can also be edited by hand.
+            cfg::validate(&inner.server(id)?.file.config)?;
             let base = inner.state.base.clone().unwrap();
             let dotnet_version = inner.state.dotnet_version.clone().unwrap_or_default();
             let base_files = inner.base_files.clone();
@@ -853,7 +936,7 @@ impl Manager {
                 port: config.port,
                 ..Runtime::default()
             };
-            s.monitor = Monitor::default();
+            s.monitor = Monitor::new(uuid::Uuid::new_v4().simple().to_string());
             s.console.open_log(&layout.server_logs(id));
             s.console.push(LineKind::Sys, format!("Starting {} (Deadworks {tag}, game build {})", config.name, base.build_id));
             self.emit_runtime_of(s);
@@ -970,10 +1053,21 @@ impl Manager {
                         s.console.push(LineKind::Sys, "Server is up.");
                     }
                 }
-                Event::SdrId(sdr) => s.rt.sdr_id = Some(sdr),
+                // The server announces it once, before anyone can be connected. Later lines of
+                // that shape are not the server's.
+                Event::SdrId(sdr) => {
+                    if s.rt.sdr_id.is_none() {
+                        s.rt.sdr_id = Some(sdr);
+                    }
+                }
                 Event::RelayReady => {}
                 Event::PublicAddress(a) => s.rt.public_addr = Some(a),
-                Event::UnsupportedBuild => s.rt.unsupported_build = true,
+                // Hooks are placed while the server starts; nothing later is about the build.
+                Event::UnsupportedBuild => {
+                    if s.rt.state == Some(ServerState::Starting) {
+                        s.rt.unsupported_build = true;
+                    }
+                }
                 Event::StatusPlayers(rows) => {
                     s.rt.status_rows = rows;
                     s.rt.players = console::merge_players(s.rt.host_players.as_deref(), &s.rt.status_rows);
@@ -983,7 +1077,7 @@ impl Manager {
                     s.rt.moderation = hs.moderation;
                     s.rt.host_partial.extend(hs.players);
                     match hs.next {
-                        Some(next) => followup = Some(format!("dw_host_status {next}")),
+                        Some(next) => followup = Some(s.monitor.host_status_command(next)),
                         None => {
                             s.rt.host_players = Some(std::mem::take(&mut s.rt.host_partial));
                             s.rt.players = console::merge_players(s.rt.host_players.as_deref(), &s.rt.status_rows);
@@ -1084,7 +1178,9 @@ impl Manager {
             self.emit_runtime_of(s);
             (proc, s.rt.run)
         };
-        if proc.send_line("quit").is_err() {
+        // Through `send`, which types one command at a time: a `quit` typed in the same frame as
+        // a poll would be dropped, and the server killed after the grace period instead.
+        if self.send(id, "quit").is_err() {
             proc.terminate();
             return Ok(());
         }
@@ -1219,9 +1315,19 @@ impl Manager {
         let (moderation, user_id) = {
             let mut inner = self.lock();
             let s = inner.server(id)?;
-            (s.rt.moderation, s.rt.players.iter().find(|p| p.slot == slot).map(|p| p.user_id).filter(|u| *u >= 0))
+            let player = s.rt.players.iter().find(|p| p.slot == slot);
+            if !s.rt.moderation && player.is_none() {
+                return Err("That player isn't connected any more.".into());
+            }
+            (s.rt.moderation, player.map(|p| p.user_id).filter(|u| *u >= 0))
         };
-        let cmd = if moderation { format!("dw_kick #{slot}") } else { format!("kickid {}", user_id.unwrap_or(slot)) };
+        let cmd = match (moderation, user_id) {
+            (true, _) => format!("dw_kick #{slot}"),
+            (false, Some(user_id)) => format!("kickid {user_id}"),
+            (false, None) => {
+                return Err("Couldn't tell this player apart from another with the same name. Run status in the Console tab and kick them with kickid.".into())
+            }
+        };
         self.send(id, &cmd)
     }
 
@@ -1281,8 +1387,13 @@ impl Manager {
     pub fn open_folder(&self, id: Option<&str>) -> Result<(), String> {
         let inner = self.lock();
         let layout = inner.layout()?;
+        let mut inner = inner;
         let dir = match id {
-            Some(id) => layout.server_dir(id),
+            Some(id) => {
+                // Only a server that exists: the id comes from the page and goes into a path.
+                inner.server(id)?;
+                layout.server_dir(id)
+            }
             None => layout.root.clone(),
         };
         drop(inner);
@@ -1387,7 +1498,7 @@ impl Manager {
     }
 
     fn config_file(&self, id: &str, plugin_id: &str) -> Result<(PathBuf, Option<u32>), String> {
-        if plugin_id.is_empty() || !plugin_id.chars().all(|c| c.is_ascii_alphanumeric() || matches!(c, '_' | '-' | '.')) {
+        if !plugins::safe_id(plugin_id) {
             return Err("Unknown plugin".into());
         }
         let mut inner = self.lock();
@@ -1522,12 +1633,13 @@ impl Manager {
         loop {
             let lines = self.lock().servers.get(id).map(|s| s.console.since(mark)).unwrap_or_default();
             for line in &lines {
-                if line.contains("Reloaded permissions.") {
+                let message = console::log_message(line);
+                if message == "Reloaded permissions." {
                     return (true, None);
                 }
-                if let Some(detail) = line
-                    .split_once("Failed to reload permissions: ")
-                    .and_then(|(_, rest)| rest.split_once(". The previous settings are still in use."))
+                if let Some(detail) = message
+                    .strip_prefix("Failed to reload permissions: ")
+                    .and_then(|rest| rest.split_once(". The previous settings are still in use."))
                     .map(|(detail, _)| detail)
                 {
                     return (
@@ -1564,9 +1676,10 @@ impl Manager {
             inner.server(id)?;
             layout
         };
-        content::import(&layout, id, &paths, kind)?;
+        let imported = content::import(&layout, id, &paths, kind)?;
         self.emit_changed();
-        Ok(content::list(&layout, id))
+        // Only the files just imported: the caller switches these on.
+        Ok(content::list(&layout, id).into_iter().filter(|f| f.kind == kind && imported.contains(&f.file_name)).collect())
     }
 
     pub fn remove_content(&self, id: &str, file_name: &str) -> Result<(), String> {
@@ -1587,6 +1700,24 @@ impl Manager {
     }
 
     // ── Updates ──
+
+    /// Let servers start although this Deadworks was seen not to support the game build. If it
+    /// really doesn't, the next start says so again.
+    pub fn clear_hold(&self) {
+        {
+            let mut inner = self.lock();
+            inner.state.hold_reason = None;
+            inner.state.hold_deadworks = None;
+            inner.save_state();
+            for s in inner.servers.values_mut() {
+                if s.rt.state == Some(ServerState::WaitingForDeadworks) {
+                    s.rt.state = Some(ServerState::Stopped);
+                    s.rt.message = None;
+                }
+            }
+        }
+        self.emit_changed();
+    }
 
     /// Look for a newer game build / Deadworks release now.
     pub fn check_updates(&self, network: bool) -> UpdateState {
@@ -1630,6 +1761,7 @@ impl Manager {
             inner.installed()
                 && inner.task.is_none()
                 && Self::pending(&inner)
+                && inner.auto_update_gave_up.as_deref() != Some(Self::update_target(&inner).as_str())
                 && idle
                 && inner.last_auto_update.is_none_or(|t| t.elapsed() > AUTO_UPDATE_RETRY)
         };
@@ -1646,7 +1778,7 @@ fn ticker(mgr: Arc<Manager>) {
     let mut last_metrics = Instant::now();
     loop {
         std::thread::sleep(Duration::from_millis(100));
-        let mut polls: Vec<(String, bool)> = Vec::new();
+        let mut polls: Vec<(String, Option<String>)> = Vec::new();
         {
             let mut inner = mgr.lock();
             let mut good_build = None;
@@ -1668,8 +1800,10 @@ fn ticker(mgr: Arc<Manager>) {
                     }
                     if s.rt.last_poll.is_none_or(|t| t.elapsed() >= STATUS_POLL) {
                         s.rt.last_poll = Some(Instant::now());
-                        let host = s.rt.supports_host_status != Some(false);
-                        s.monitor.poll_sent(host);
+                        let host = (s.rt.supports_host_status != Some(false)).then(|| s.monitor.host_status_command(0));
+                        s.monitor.poll_sent(host.is_some());
+                        // A page of the last poll that never got its follow-up must not join this one.
+                        s.rt.host_partial.clear();
                         polls.push((s.file.config.id.clone(), host));
                     }
                 }
@@ -1690,8 +1824,8 @@ fn ticker(mgr: Arc<Manager>) {
         }
         for (id, host) in polls {
             let _ = mgr.send(&id, "status");
-            if host {
-                let _ = mgr.send(&id, "dw_host_status");
+            if let Some(poll) = host {
+                let _ = mgr.send(&id, &poll);
             }
         }
     }
@@ -1801,6 +1935,14 @@ fn reachability_check(api: &str, port: u16) -> (Reachability, Option<String>) {
         }
     }
     (Reachability::Error, ip)
+}
+
+/// What an update has to do to the base game files.
+enum BaseStep {
+    UpToDate,
+    FromClient(PathBuf, manifest::AppManifest, Vec<DepotFile>),
+    /// With this Steam account.
+    FromSteamcmd(String),
 }
 
 fn client_manifest(game_dir: &Path) -> Result<(manifest::AppManifest, Vec<DepotFile>), String> {

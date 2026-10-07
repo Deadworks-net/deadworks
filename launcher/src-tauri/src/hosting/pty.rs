@@ -224,7 +224,7 @@ mod win {
 }
 
 #[cfg(windows)]
-pub use win::spawn;
+pub use win::{spawn, PtyProcess};
 
 #[cfg(not(windows))]
 pub struct PtyProcess;

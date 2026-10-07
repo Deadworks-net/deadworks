@@ -17,6 +17,8 @@ use super::task::Progress;
 
 /// Pinned to the release the Docker image is tested with.
 const DEPOTDOWNLOADER_VERSION: &str = "3.4.0";
+/// SHA-512 of that release's `DepotDownloader-linux-x64.zip`. Changes with the version.
+const DEPOTDOWNLOADER_SHA512: &str = "f9ae7975438ec99e2f87f23511ca812b651564e2b1c4d8e55bc6b5ccca302259aea983811a859ed6b1dd8f5f665961af97faca70a0e7fe55f867ac3e64c1b2b8";
 const REDIST_APP: &str = "1007";
 const REDIST_DLLS: &[&str] = &["steamclient64.dll", "tier0_s64.dll", "vstdlib_s64.dll"];
 /// Keeps Wine from offering to install Gecko or creating desktop menu entries.
@@ -116,13 +118,18 @@ pub fn ensure_redist(layout: &Layout, progress: &Progress) -> Result<(), String>
     if !tool.is_file() {
         progress.stage("steam", "Downloading Steam's server files", 0, 0);
         let zip = layout.downloads_dir().join("depotdownloader.zip");
-        download::to_file(
+        let sha512 = download::to_file(
             &format!(
                 "https://github.com/SteamRE/DepotDownloader/releases/download/DepotDownloader_{DEPOTDOWNLOADER_VERSION}/DepotDownloader-linux-x64.zip"
             ),
             &zip,
             progress,
         )?;
+        // It is run as a native program: only the exact file this version was pinned to.
+        if !download::hex(&sha512).eq_ignore_ascii_case(DEPOTDOWNLOADER_SHA512) {
+            let _ = std::fs::remove_file(&zip);
+            return Err("The DepotDownloader download doesn't match the expected file. Try again later.".into());
+        }
         fsutil::extract_zip(&zip, &tool_dir)?;
         let _ = std::fs::remove_file(&zip);
         make_executable(&tool);

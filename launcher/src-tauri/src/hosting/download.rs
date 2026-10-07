@@ -15,6 +15,8 @@ pub fn client() -> reqwest::blocking::Client {
         .user_agent(concat!("deadworks-launcher/", env!("CARGO_PKG_VERSION")))
         .connect_timeout(Duration::from_secs(15))
         .timeout(None)
+        // What gets downloaded gets run. A redirect to plain http is refused, not followed.
+        .https_only(true)
         .build()
         .expect("http client")
 }

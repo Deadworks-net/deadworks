@@ -107,6 +107,7 @@ pub fn run() {
             hosting::hosting_steamcmd_input,
             hosting::hosting_check_updates,
             hosting::hosting_apply_updates,
+            hosting::hosting_clear_hold,
             hosting::hosting_verify,
             hosting::hosting_repair_client,
             hosting::hosting_uninstall,

@@ -183,6 +183,11 @@ mod win {
         on_line: impl Fn(Stream, String) + Send + Sync + 'static,
         on_exit: impl FnOnce(i32) + Send + 'static,
     ) -> Result<Process, String> {
+        // The child inherits every inheritable handle open at that moment. Two servers starting
+        // together would each get the other's pipe ends too, and a pipe held by a second
+        // process never reports that the first one has exited.
+        static SPAWNING: Mutex<()> = Mutex::new(());
+        let spawning = SPAWNING.lock().unwrap_or_else(|e| e.into_inner());
         let (out_r, out_w) = pipe().map_err(|e| format!("Couldn't start the server: {e}"))?;
         let (err_r, err_w) = pipe().map_err(|e| format!("Couldn't start the server: {e}"))?;
         let mut cmdline: Vec<u16> = std::iter::once(quote_arg(&spec.exe.to_string_lossy()))
@@ -232,6 +237,7 @@ mod win {
             CloseHandle(pi.hThread);
             pi
         };
+        drop(spawning);
 
         let handle = Arc::new(unsafe { OwnedHandle::from_raw_handle(pi.hProcess as _) });
         let on_line = Arc::new(on_line);
@@ -510,10 +516,14 @@ mod unix {
             .lines()
             .skip(1)
             .filter_map(|line| {
+                // sl local remote state tx:rx timer retransmits uid ...
                 let mut f = line.split_whitespace();
-                let (local, state) = (f.nth(1)?, f.nth(1)?);
+                let (local, state, uid) = (f.nth(1)?, f.nth(1)?, f.nth(3)?);
                 let (addr, p) = local.split_once(':')?;
-                if state != "0A" || u16::from_str_radix(p, 16).ok()? != port {
+                // A listener of another account on this port is not the server, and must not be
+                // sent its password.
+                let ours = uid.parse::<u32>().ok()? == unsafe { libc::getuid() };
+                if state != "0A" || !ours || u16::from_str_radix(p, 16).ok()? != port {
                     return None;
                 }
                 Some(Ipv4Addr::from(u32::from_str_radix(addr, 16).ok()?.to_le_bytes()))
@@ -524,17 +534,16 @@ mod unix {
         SocketAddr::from((ip, port))
     }
 
-    /// Unix pids of the Wine processes whose command line names `dir` (in Unix or `Z:\` form) and
-    /// deadworks.exe.
+    /// Unix pids of the Wine processes running a deadworks.exe from inside `dir`.
     fn server_pids(dir: &str) -> Vec<u32> {
-        let windows = wine::windows_path(Path::new(dir));
+        let dir = dir.trim_end_matches('/');
+        let prefixes = [format!("{dir}/"), format!("{}\\", wine::windows_path(Path::new(dir)))];
         let Ok(rd) = std::fs::read_dir("/proc") else { return Vec::new() };
         rd.flatten()
             .filter_map(|e| e.file_name().to_str()?.parse::<u32>().ok())
             .filter(|pid| {
                 let cmdline = std::fs::read(format!("/proc/{pid}/cmdline")).unwrap_or_default();
-                let cmdline = String::from_utf8_lossy(&cmdline).replace('\0', " ");
-                cmdline.contains("deadworks.exe") && (cmdline.contains(dir) || cmdline.contains(&windows))
+                cmdline.split(|b| *b == 0).any(|arg| super::runs_server_from(&String::from_utf8_lossy(arg), &prefixes))
             })
             .collect()
     }
@@ -605,9 +614,25 @@ mod unix {
     }
 }
 
+/// `arg` is the server's exe path under one of `prefixes` (each ends in a separator), alone
+/// or followed by its arguments: Wine rewrites a process's command line into one string.
+/// Matching from the start keeps an editor with such a file open, or a hosting folder whose
+/// name merely begins the same, from being taken for a server and killed.
+#[cfg_attr(windows, allow(dead_code))]
+fn runs_server_from(arg: &str, prefixes: &[String]) -> bool {
+    prefixes.iter().any(|prefix| {
+        arg.strip_prefix(prefix.as_str()).is_some_and(|rest| {
+            rest.find("deadworks.exe").is_some_and(|at| {
+                let (before, after) = (&rest[..at], &rest[at + "deadworks.exe".len()..]);
+                before.ends_with(['/', '\\']) && (after.is_empty() || after.starts_with(' '))
+            })
+        })
+    })
+}
+
 #[cfg(test)]
 mod tests {
-    use super::quote_arg;
+    use super::{quote_arg, runs_server_from};
 
     #[test]
     fn quoting() {
@@ -617,5 +642,19 @@ mod tests {
         assert_eq!(quote_arg(r"trailing\ "), r#""trailing\ ""#);
         assert_eq!(quote_arg(r"end\"), r"end\");
         assert_eq!(quote_arg(r"sp ace\"), r#""sp ace\\""#);
+    }
+
+    #[test]
+    fn only_a_server_exe_inside_the_folder_counts_as_a_server() {
+        let prefixes = ["/home/u/dw/".to_string(), r"Z:\home\u\dw\".to_string()];
+        let yes = |arg: &str| runs_server_from(arg, &prefixes);
+        assert!(yes("/home/u/dw/servers/a/game/bin/win64/deadworks.exe"));
+        assert!(yes(r"Z:\home\u\dw\servers\a\game\bin\win64\deadworks.exe -dedicated -console"));
+        // A neighbouring folder, a file that isn't the exe, and tools that only mention it.
+        assert!(!yes("/home/u/dw2/servers/a/game/bin/win64/deadworks.exe"));
+        assert!(!yes("/home/u/dw/servers/a/notes-on-deadworks.exe.txt"));
+        assert!(!yes("/home/u/dw/servers/a/game/bin/win64/deadworks.exe.bak"));
+        assert!(!yes("grep -r deadworks.exe /home/u/dw/"));
+        assert!(!yes("--file=/home/u/dw/servers/a/game/bin/win64/deadworks.exe"));
     }
 }

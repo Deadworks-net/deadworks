@@ -85,6 +85,15 @@ pub async fn hosting_check_updates() -> Result<UpdateState, String> {
 }
 
 #[tauri::command]
+pub async fn hosting_clear_hold() -> Result<(), String> {
+    blocking(|| {
+        manager::get().clear_hold();
+        Ok(())
+    })
+    .await
+}
+
+#[tauri::command]
 pub async fn hosting_apply_updates() -> Result<(), String> {
     blocking(|| manager::get().apply_updates()).await
 }

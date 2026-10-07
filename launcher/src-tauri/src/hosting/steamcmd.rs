@@ -83,11 +83,20 @@ fn run(layout: &Layout, args: Vec<String>, password: Option<&str>, progress: &Pr
             let _ = tx2.send(Line::Exit(code));
         },
     )?;
+    // However this returns (cancelled at a prompt, a failed write), SteamCMD goes with it. Left
+    // at its prompt it would sit there until the launcher exits, alongside the next attempt.
+    struct KillOnDrop(std::sync::Arc<pty::PtyProcess>);
+    impl Drop for KillOnDrop {
+        fn drop(&mut self) {
+            self.0.terminate();
+        }
+    }
+    let _kill = KillOnDrop(proc.clone());
+
     let mut output = Vec::new();
     let mut password_sent = false;
     let result = loop {
         if progress.cancelled() {
-            proc.terminate();
             break Err(CANCELLED.to_string());
         }
         let line = match rx.recv_timeout(Duration::from_millis(250)) {

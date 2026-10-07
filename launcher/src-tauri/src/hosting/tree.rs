@@ -96,8 +96,10 @@ pub fn prepare(inp: &TreeInputs) -> Result<(), String> {
 
     // 4. Generated config.
     let citadel_cfg = tree.join("game").join("citadel").join("cfg");
-    fsutil::write_if_changed(&citadel_cfg.join(cfg::LAUNCHER_CFG), cfg::launcher_cfg(inp.config, inp.rcon_password).as_bytes())
-        .map_err(|e| e.to_string())?;
+    let launcher_cfg = citadel_cfg.join(cfg::LAUNCHER_CFG);
+    fsutil::write_if_changed(&launcher_cfg, cfg::launcher_cfg(inp.config, inp.rcon_password).as_bytes()).map_err(|e| e.to_string())?;
+    // It holds the server password, and under Wine the console (RCON) password.
+    fsutil::owner_only(&launcher_cfg);
     let user_cfg = citadel_cfg.join("deadworks_user.cfg");
     if !user_cfg.exists() {
         let _ = std::fs::write(&user_cfg, "// Your own console commands, run after the launcher's settings on every start.\n");
@@ -123,11 +125,13 @@ pub fn write_configs(layout: &Layout, config: &ServerConfig) -> Result<(), Strin
     let dir = layout.server_configs(&config.id);
     let dw = dir.join("deadworks.jsonc");
     let existing = std::fs::read_to_string(&dw).ok();
-    fsutil::write_if_changed(&dw, cfg::deadworks_jsonc(existing.as_deref(), config).as_bytes()).map_err(|e| e.to_string())?;
+    let deadworks = cfg::deadworks_jsonc(existing.as_deref(), config)?;
     let pj = dir.join("plugins.jsonc");
     let existing = std::fs::read_to_string(&pj).ok();
-    fsutil::write_if_changed(&pj, cfg::plugins_jsonc(existing.as_deref(), &config.plugins).as_bytes())
-        .map_err(|e| e.to_string())?;
+    let plugins = cfg::plugins_jsonc(existing.as_deref(), &config.plugins)?;
+    // Both checked before either is written.
+    fsutil::write_if_changed(&dw, deadworks.as_bytes()).map_err(|e| e.to_string())?;
+    fsutil::write_if_changed(&pj, plugins.as_bytes()).map_err(|e| e.to_string())?;
     Ok(())
 }
 

@@ -25,6 +25,17 @@ pub fn plugin_dir(layout: &Layout, id: &str) -> PathBuf {
     layout.plugins_dir().join(id)
 }
 
+/// The library folder of plugin `id`, for deleting. Only ever a direct child of the library:
+/// an id like `..` would otherwise name the hosting root itself.
+fn owned_dir(layout: &Layout, id: &str) -> Result<PathBuf, String> {
+    let dir = plugin_dir(layout, id);
+    if safe_id(id) && dir.parent() == Some(layout.plugins_dir().as_path()) && dir.file_name().is_some_and(|n| n == id) {
+        Ok(dir)
+    } else {
+        Err(format!("'{id}' isn't a usable plugin name."))
+    }
+}
+
 pub fn entry(layout: &Layout, id: &str) -> Option<PluginEntry> {
     read_json(&plugin_dir(layout, id).join(ENTRY_FILE)).ok()
 }
@@ -37,10 +48,8 @@ pub fn library(layout: &Layout) -> Vec<PluginEntry> {
 }
 
 pub fn remove(layout: &Layout, id: &str) -> Result<(), String> {
-    if !safe_id(id) {
-        return Err("Unknown plugin".into());
-    }
-    fsutil::remove_dir_all_force(&plugin_dir(layout, id)).map_err(|e| format!("Couldn't remove the plugin: {e}"))
+    let dir = owned_dir(layout, id).map_err(|_| "Unknown plugin".to_string())?;
+    fsutil::remove_dir_all_force(&dir).map_err(|e| format!("Couldn't remove the plugin: {e}"))
 }
 
 /// Import DLLs, zips and folders. Each plugin assembly found becomes a library
@@ -111,10 +120,7 @@ fn import_files(layout: &Layout, files: &[PathBuf], origin: &Path) -> Result<Vec
     let mut out = Vec::new();
     for main in mains {
         let id = stem(main);
-        if !safe_id(&id) {
-            return Err(format!("'{id}' isn't a usable plugin name."));
-        }
-        let dir = plugin_dir(layout, &id);
+        let dir = owned_dir(layout, &id)?;
         let _ = fsutil::remove_dir_all_force(&dir);
         std::fs::create_dir_all(&dir).map_err(|e| e.to_string())?;
         let mut names = Vec::new();
@@ -180,8 +186,18 @@ fn is_plugin_assembly(b: &[u8]) -> bool {
     has(b"DeadworksManaged.Api") && (has(b"IDeadworksPlugin") || has(b"DeadworksPluginBase"))
 }
 
-fn safe_id(id: &str) -> bool {
-    !id.is_empty() && id.len() <= 100 && id.chars().all(|c| c.is_ascii_alphanumeric() || matches!(c, '_' | '-' | '.'))
+/// A plugin id is a DLL's file name without `.dll`, and becomes a folder name. `..` (from a
+/// file called `...dll`) and Windows' device names are file names too, and must not get that far.
+pub fn safe_id(id: &str) -> bool {
+    let first = id.split('.').next().unwrap_or_default().to_ascii_uppercase();
+    let device = matches!(first.as_str(), "CON" | "PRN" | "AUX" | "NUL")
+        || (first.len() == 4 && (first.starts_with("COM") || first.starts_with("LPT")) && first.ends_with(|c: char| c.is_ascii_digit()));
+    !id.is_empty()
+        && id.len() <= 100
+        && !id.starts_with('.')
+        && !id.ends_with('.')
+        && !device
+        && id.chars().all(|c| c.is_ascii_alphanumeric() || matches!(c, '_' | '-' | '.'))
 }
 
 fn has_ext(p: &Path, ext: &str) -> bool {
@@ -199,6 +215,28 @@ fn file_name(p: &Path) -> String {
 #[cfg(test)]
 mod tests {
     use super::*;
+
+    #[test]
+    fn ids_that_are_not_plain_folder_names_are_refused() {
+        for id in ["DeathmatchPlugin", "My.Plugin_v2", "a-b"] {
+            assert!(safe_id(id), "{id}");
+        }
+        // `...dll` has the stem `..`, which as a folder is the hosting root.
+        assert_eq!(stem(Path::new("...dll")), "..");
+        for id in ["", ".", "..", "...", ".hidden", "trailing.", "a/b", r"a\b", "a b", "CON", "nul.plugin", "com1", "LPT9.x"] {
+            assert!(!safe_id(id), "{id}");
+        }
+    }
+
+    #[test]
+    fn a_plugin_folder_is_only_ever_inside_the_library() {
+        let layout = Layout::new(std::env::temp_dir().join("dw-plugins-test"));
+        assert!(owned_dir(&layout, "Mine").is_ok_and(|d| d.parent() == Some(layout.plugins_dir().as_path())));
+        for id in ["..", ".", "a/b", ""] {
+            assert!(owned_dir(&layout, id).is_err(), "{id}");
+        }
+        assert!(remove(&layout, "..").is_err());
+    }
 
     #[test]
     fn native_and_garbage_are_not_managed() {

@@ -286,6 +286,8 @@ export const hosting = {
   steamcmdInput: (value: string) => invoke<void>("hosting_steamcmd_input", { value }),
   checkUpdates: () => invoke<UpdateState>("hosting_check_updates"),
   applyUpdates: () => invoke<void>("hosting_apply_updates"),
+  /** Lets servers start although Deadworks was seen not to support the game build. */
+  clearHold: () => invoke<void>("hosting_clear_hold"),
   verify: () => invoke<void>("hosting_verify"),
   /** Opens steam://validate/1422450 so Steam restores the client's modified game files. */
   repairClient: () => invoke<void>("hosting_repair_client"),

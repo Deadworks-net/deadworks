@@ -166,6 +166,52 @@ Best effort, modelled on `docker/entrypoint.sh` (which is verified under Debian'
   through a scratch crate (the full launcher can't cross-compile from Windows because of GTK).
   The RCON client has unit tests against a fake server. Nothing was run on Linux.
 
+## Review round (2026-10-07)
+
+A code review and an independent security review found 22 issues. What changed because of them:
+
+### What the launcher trusts
+
+- **The server's console is not trusted.** Players get text into it (names, chat a plugin logs).
+  - `dw_host_status` takes a token the launcher makes per run and answers `DWHOST <token> {json}`.
+    Only that line is read as the reply or hidden from the Console tab.
+  - Other signals are matched from the start of the line or of Deadworks' log message (timestamp
+    prefix required), never as a substring. A name is 32 characters at most, shorter than the prefix.
+  - The SDR identity is taken once per run. "Unsupported build" text only counts while starting.
+  - The hold for an unsupported build has a "Try anyway" button.
+- **Ids are path components.** A server's id must equal its folder name and be `[a-z0-9-]`; a
+  `server.json` that says otherwise isn't loaded. Plugin ids can't be `.`/`..`, start or end with
+  a dot, or be a Windows device name, and a plugin folder is only deleted as a direct child of
+  the library. Settings are validated again at start, not only when saved.
+- **The firewall step runs `netsh.exe` directly** by its System32 path. It used to go through
+  `cmd /c`, where `%CMDCMDLINE%` in a folder name could run commands elevated. Clearing block
+  rules is now a second prompt, shown only when such rules exist.
+- **Downloads:** https only; the .NET version is checked before it becomes a folder name;
+  DepotDownloader is pinned to a SHA-512.
+
+### Behaviour
+
+- **Updates check before they stop anything.** Reading Steam's manifest and downloading Deadworks
+  and .NET happen with servers running. Servers are stopped only if something changed, and an
+  update that failed after stopping them isn't retried automatically.
+- **Verify on a SteamCMD install** records the base again, so server folders are rebuilt.
+- **`deadworks.jsonc` / `plugins.jsonc` that don't parse stop the start** with a message. They used
+  to be treated as empty and overwritten. Files that need no change keep their comments.
+- **Stop** goes through the one-command-at-a-time gate; **server starts are serialised** so two
+  starting together can't inherit each other's pipes; **cancelling a SteamCMD prompt kills SteamCMD**.
+- **`dw_host_status` no longer lists plugins or role names** (the launcher never read them, and a
+  server with many plugin DLLs overflowed the 2,048-byte log line).
+
+### Deliberately not changed
+
+- **The Deadworks release zip is not signature-checked.** That needs a signing step in the release
+  pipeline first.
+- **The default folder at a drive root** can be opened by other Windows accounts on the same PC.
+  Open decision: lock its permissions down, or default to a per-user folder.
+- **SDR servers still get a firewall rule.** Without one, Windows shows its own prompt for every
+  new server path.
+- **Firewall rules stay behind** when a server is deleted: removing one needs another UAC prompt.
+
 ## Decisions (agreed)
 
 | Topic | Decision |

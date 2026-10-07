@@ -43,6 +43,7 @@ export interface HostingActions {
   /** Asks Steam to verify (and so restore) the client's modified files. */
   repairClient: () => Promise<void>;
   checkUpdates: () => Promise<void>;
+  clearHold: () => Promise<void>;
   createServer: (name: string, network: NetworkMode) => Promise<ServerConfig>;
   updateServer: (config: ServerConfig) => Promise<ServerConfig>;
   duplicateServer: (id: string) => Promise<ServerConfig>;
@@ -210,6 +211,7 @@ export function useHosting(): UseHosting {
         const updates = await hosting.checkUpdates();
         setOverview((prev) => (prev ? { ...prev, updates } : prev));
       },
+      clearHold: () => hosting.clearHold(),
       createServer: async (name, network) => {
         const config = await hosting.createServer(name, network);
         upsertConfig(config);

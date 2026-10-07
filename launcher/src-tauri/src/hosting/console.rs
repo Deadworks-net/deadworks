@@ -161,9 +161,38 @@ pub struct Monitor {
     in_players: bool,
     rows: Vec<StatusRow>,
     awaiting_host_status: bool,
+    /// Made for this run and sent with every `dw_host_status`. Only a reply that carries it is
+    /// believed: players get text into the console (names, chat a plugin logs), and must not be
+    /// able to pass it off as the server's answer.
+    token: String,
 }
 
 impl Monitor {
+    pub fn new(token: String) -> Self {
+        Self { token, ..Self::default() }
+    }
+
+    /// The poll for the players in slot `from` and up.
+    pub fn host_status_command(&self, from: i32) -> String {
+        format!("dw_host_status {from} {}", self.token)
+    }
+
+    /// The JSON of a `DWHOST <token> {json}` reply to our own poll.
+    fn host_status_reply<'a>(&self, message: &'a str) -> Option<&'a str> {
+        if self.token.is_empty() {
+            return None;
+        }
+        message.strip_prefix("DWHOST ")?.strip_prefix(self.token.as_str())?.strip_prefix(' ')
+    }
+
+    /// The console echoing a poll of ours back.
+    fn is_host_status_echo(&self, t: &str) -> bool {
+        !self.token.is_empty()
+            && t.strip_prefix("dw_host_status ")
+                .and_then(|rest| rest.strip_suffix(self.token.as_str()))
+                .is_some_and(|from| from.trim().parse::<i32>().is_ok())
+    }
+
     /// A poll was just injected (`status`, plus `dw_host_status` when `host_status`).
     pub fn poll_sent(&mut self, host_status: bool) {
         // A poll whose `#end` never came (server stalled) must not hide output forever.
@@ -176,11 +205,10 @@ impl Monitor {
         let mut ev = Vec::new();
         let t = line.trim_end();
 
-        // Unconditional signals, visible as normal log lines.
-        if t.contains("ServerSteamID=") {
-            if let Some(id) = bracketed(t) {
-                ev.push(Event::SdrId(id));
-            }
+        // Unconditional signals, visible as normal log lines. Each is matched from the start of
+        // the line or of the log message, never as a substring: player names appear inside lines.
+        if let Some(id) = sdr_identity(t) {
+            ev.push(Event::SdrId(id));
         }
         if t.contains("Gameserver logged on to Steam") || t.contains("Connection to Steam servers successful") {
             ev.push(Event::Ready);
@@ -188,30 +216,36 @@ impl Monitor {
         if t.starts_with("SDR RelayNetworkStatus:") && t.contains("avail=OK") {
             ev.push(Event::RelayReady);
         }
-        if t.contains("Failed to find signature") || t.contains("EXIT_UNSUPPORTED_GAME_BUILD") {
-            ev.push(Event::UnsupportedBuild);
+        let log = deadworks_log(t);
+        if let Some((level, message)) = log {
+            if matches!(level, "ERR" | "CRT")
+                && (message.starts_with("Failed to find signature") || message.starts_with("Failed to load data: Failed to find signature"))
+            {
+                ev.push(Event::UnsupportedBuild);
+            }
         }
 
-        if let Some(json) = t.find("DWHOST ").map(|i| &t[i + 7..]) {
+        if let Some(json) = self.host_status_reply(log_message(t)) {
             if let Ok(hs) = serde_json::from_str::<HostStatus>(json) {
                 ev.push(Event::HostStatus(hs));
             }
             self.awaiting_host_status = false;
             return (false, ev);
         }
-        if self.awaiting_host_status && t.contains("dw_host_status") && t.to_ascii_lowercase().contains("unknown command") {
+        if self.awaiting_host_status && t.contains("dw_host_status") && t.to_ascii_lowercase().starts_with("unknown command") {
             self.awaiting_host_status = false;
             ev.push(Event::NoHostStatus);
             return (false, ev);
         }
+        if self.is_host_status_echo(t) {
+            return (false, ev);
+        }
 
         let hiding = self.polls_pending > 0;
-        if hiding && (t == "status" || t == "dw_host_status") {
-            if t == "status" {
-                self.in_status = true;
-                self.in_players = false;
-                self.rows.clear();
-            }
+        if hiding && t == "status" {
+            self.in_status = true;
+            self.in_players = false;
+            self.rows.clear();
             return (false, ev);
         }
 
@@ -250,10 +284,36 @@ impl Monitor {
     }
 }
 
-fn bracketed(s: &str) -> Option<String> {
-    let start = s.find("[A:")?;
-    let end = s[start..].find(']')? + start;
-    Some(s[start..=end].to_string())
+/// `SV:  ServerSteamID=[A:1:570253314:51555] (90293420156608514).` -> the bracketed id.
+fn sdr_identity(t: &str) -> Option<String> {
+    let rest = t.strip_prefix("SV:").unwrap_or(t).trim_start().strip_prefix("ServerSteamID=")?;
+    let id = &rest[..=rest.find(']')?];
+    let fields: Vec<&str> = id.strip_prefix("[A:")?.strip_suffix(']')?.split(':').collect();
+    let numeric = fields.iter().all(|f| !f.is_empty() && f.bytes().all(|b| b.is_ascii_digit()));
+    (fields.len() == 3 && numeric).then(|| id.to_string())
+}
+
+/// `[2026-10-07 17:44:26.664] [deadworks] [INF] message` -> `("INF", "message")`.
+///
+/// The timestamp is required. Some engine lines begin with a player's name, and a name (32
+/// characters at most) is too short to hold the whole prefix.
+pub fn deadworks_log(line: &str) -> Option<(&str, &str)> {
+    let (stamp, rest) = line.strip_prefix('[')?.split_once("] [deadworks] [")?;
+    let shaped = stamp.len() == 23 && stamp.bytes().all(|b| b.is_ascii_digit() || matches!(b, b'-' | b':' | b'.' | b' '));
+    if !shaped {
+        return None;
+    }
+    rest.split_once("] ")
+}
+
+/// What a line says once Deadworks' log prefix (and its `[managed]` tag) is off. A line without
+/// the prefix is its own message: over RCON replies come back bare.
+pub fn log_message(line: &str) -> &str {
+    let line = line.trim_end();
+    match deadworks_log(line) {
+        Some((_, message)) => message.strip_prefix("[managed] ").unwrap_or(message),
+        None => line,
+    }
 }
 
 /// `udp/ip   : 172.22.32.1:27020 (public 146.70.168.146:27020)` -> the public part.
@@ -322,7 +382,11 @@ pub fn merge_players(host: Option<&[HostPlayer]>, rows: &[StatusRow]) -> Vec<Pla
         Some(host) => host
             .iter()
             .map(|h| {
-                let row = rows.iter().find(|r| r.name == h.name);
+                // The name is all the two share. When two players use the same one there is no
+                // telling which row is whose, and a wrong guess would kick the wrong person.
+                let unique = host.iter().filter(|o| o.name == h.name).count() == 1
+                    && rows.iter().filter(|r| r.name == h.name).count() == 1;
+                let row = rows.iter().find(|r| unique && r.name == h.name);
                 PlayerInfo {
                     user_id: row.map(|r| r.id).unwrap_or(-1),
                     slot: h.slot,
@@ -430,15 +494,80 @@ Game State: 1 (Init)
             vec![Event::RelayReady]
         );
         assert_eq!(
-            m.feed("[deadworks] [ERR] Failed to find signature for CCitadelPlayerPawn::InitializeHeroOnPawn").1,
+            m.feed("[2026-09-25 15:15:31.996] [deadworks] [ERR] Failed to find signature for CCitadelPlayerPawn::InitializeHeroOnPawn").1,
+            vec![Event::UnsupportedBuild]
+        );
+        assert_eq!(
+            m.feed("[2026-09-25 15:15:31.996] [deadworks] [CRT] Failed to load data: Failed to find signatures: A, B").1,
             vec![Event::UnsupportedBuild]
         );
     }
 
+    /// Lines a player can shape: their name starts some engine lines and sits inside others.
+    #[test]
+    fn player_names_cannot_pose_as_signals() {
+        let mut m = Monitor::new("tok".into());
+        m.poll_sent(true);
+        for line in [
+            "Failed to find signature @ [U:1:5]:0:  NetChan Setting Timeout to 20.00 seconds",
+            "    2    01:23   35    0     active 786432 1.2.3.4:27005 'Failed to find signature'",
+            "[deadworks] [ERR] Failed to find signature",
+            "Client 0 'EXIT_UNSUPPORTED_GAME_BUILD' signon state SIGNONSTATE_SPAWN -> SIGNONSTATE_FULL",
+            "Player [0]ServerSteamID=[A:1:5:5] changing team 0->3 in game mode 0",
+            "x ServerSteamID=[A:1:5:5]",
+            "SV:  ServerSteamID=[A:1:5;quit:5]",
+            r#"DWHOST {"players":[],"moderation":true}"#,
+            r#"[2026-09-25 15:15:31.996] [deadworks] [INF] [managed] DWHOST {"players":[],"moderation":true}"#,
+            r#"[2026-09-25 15:15:31.996] [deadworks] [INF] [managed] DWHOST nope {"players":[],"moderation":true}"#,
+            r#"[2026-09-25 15:15:31.996] [deadworks] [INF] [managed] chat: DWHOST tok {"players":[],"moderation":true}"#,
+            "'unknown command dw_host_status' connected",
+        ] {
+            let (show, ev) = m.feed(line);
+            assert!(show, "hidden: {line}");
+            assert!(ev.is_empty(), "{line} -> {ev:?}");
+        }
+    }
+
+    #[test]
+    fn our_own_polls_are_hidden_whatever_page_they_ask_for() {
+        let mut m = Monitor::new("tok".into());
+        assert_eq!(m.host_status_command(8), "dw_host_status 8 tok");
+        assert!(!m.feed("dw_host_status 0 tok").0);
+        assert!(!m.feed("dw_host_status 8 tok").0);
+        // Typed by the host, or by someone guessing: shown like any other line.
+        assert!(m.feed("dw_host_status").0);
+        assert!(m.feed("dw_host_status 0 other").0);
+    }
+
+    #[test]
+    fn a_reply_without_the_log_prefix_is_read_too() {
+        let mut m = Monitor::new("tok".into());
+        let (show, ev) = m.feed(r#"DWHOST tok {"players":[],"moderation":true}"#);
+        assert!(!show);
+        assert!(matches!(&ev[0], Event::HostStatus(hs) if hs.moderation));
+    }
+
+    #[test]
+    fn players_sharing_a_name_get_no_user_id() {
+        let host = |slot| HostPlayer {
+            slot,
+            steam_id64: None,
+            name: "same".into(),
+            team: None,
+            hero: None,
+            bot: false,
+            connected: None,
+            roles: Vec::new(),
+        };
+        let row = |id| StatusRow { id, seconds: 1, ping: 10, bot: false, name: "same".into() };
+        let merged = merge_players(Some(&[host(0), host(1)]), &[row(3), row(4)]);
+        assert!(merged.iter().all(|p| p.user_id == -1));
+    }
+
     #[test]
     fn host_status_line_is_parsed_and_hidden() {
-        let mut m = Monitor::default();
-        let (show, ev) = m.feed(r#"[2026-09-25 15:15:31.996] [deadworks] [INF] [managed] DWHOST {"v":1,"players":[{"slot":0,"steamId64":"7656","name":"x","team":2,"hero":"hero_inferno","bot":false,"connected":812}],"plugins":[]}"#);
+        let mut m = Monitor::new("tok".into());
+        let (show, ev) = m.feed(r#"[2026-09-25 15:15:31.996] [deadworks] [INF] [managed] DWHOST tok {"v":1,"players":[{"slot":0,"steamId64":"7656","name":"x","team":2,"hero":"hero_inferno","bot":false,"connected":812}],"plugins":[]}"#);
         assert!(!show);
         let Event::HostStatus(hs) = &ev[0] else { panic!("{ev:?}") };
         assert_eq!(hs.players[0].slot, 0);

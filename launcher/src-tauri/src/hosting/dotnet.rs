@@ -64,6 +64,14 @@ pub fn ensure(layout: &Layout, current: Option<&str>, progress: &Progress) -> Re
         }
     };
     let version = meta.latest_runtime.clone();
+    // It becomes a folder name, and that folder gets replaced.
+    let plain = !version.is_empty()
+        && version.len() < 64
+        && version.starts_with(|c: char| c.is_ascii_digit())
+        && version.chars().all(|c| c.is_ascii_alphanumeric() || matches!(c, '.' | '-'));
+    if !plain {
+        return Err(format!("Couldn't download .NET: unexpected version '{version}'"));
+    }
     if is_installed(layout, &version) {
         return Ok(version);
     }

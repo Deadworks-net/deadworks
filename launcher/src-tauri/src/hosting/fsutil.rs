@@ -79,6 +79,18 @@ pub fn write_real(dst: &Path, data: &[u8]) -> std::io::Result<()> {
 
 /// Write only when the content differs, so unchanged files keep their mtime
 /// and running servers' file watchers stay quiet.
+/// Keep other accounts on this machine from reading `path`. Where files have a mode, that is;
+/// on Windows the folder's permissions decide.
+pub fn owner_only(path: &Path) {
+    #[cfg(unix)]
+    {
+        use std::os::unix::fs::PermissionsExt;
+        let _ = std::fs::set_permissions(path, std::fs::Permissions::from_mode(0o600));
+    }
+    #[cfg(not(unix))]
+    let _ = path;
+}
+
 pub fn write_if_changed(dst: &Path, data: &[u8]) -> std::io::Result<bool> {
     if std::fs::read(dst).map(|cur| cur == data).unwrap_or(false) {
         return Ok(false);
