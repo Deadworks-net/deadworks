@@ -120,8 +120,8 @@ Merged `origin/main` (57 commits: permissions, engine updates through v0.5.4).
   engine's `kickid` otherwise.
 - `ContentAddonManager` mounted `deadworks_mods/vpks/<name>.vpk` as a relative path, which the
   engine resolves against its working directory (`game/bin/win64`). It now mounts the absolute
-  `game/citadel/deadworks_mods/vpks` path, which is where the launcher puts addons, and still
-  loads VPKs found in the old location with a note to move them.
+  `game/citadel/deadworks_mods/vpks` path, which is where the launcher puts addons. The old
+  location is not read any more: a server that has VPKs there must move them when it updates.
 
 ### Launcher
 
