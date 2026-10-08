@@ -11,6 +11,7 @@ public sealed unsafe class SchemaField {
 	private volatile int _offset = -1;
 	private short _chainOffset;
 	private bool _networked;
+	private bool _networkingKnown;
 
 	/// <summary>The class that declares the field, e.g. <c>CBaseEntity</c>.</summary>
 	public string ClassName { get; }
@@ -28,7 +29,7 @@ public sealed unsafe class SchemaField {
 	public int Offset { get { if (_offset < 0) Resolve(); return _offset; } }
 
 	/// <summary>True if the game networks this field, so writes must be announced.</summary>
-	public bool Networked { get { if (_offset < 0) Resolve(); return _networked; } }
+	public bool Networked { get { if (_offset < 0 || !_networkingKnown) Resolve(); return _networked; } }
 
 	/// <summary>Offset of the declaring class's network chain, or 0 if it has none.</summary>
 	internal short ChainOffset { get { if (_offset < 0) Resolve(); return _chainOffset; } }
@@ -52,7 +53,8 @@ public sealed unsafe class SchemaField {
 		if (r.Found == SchemaFieldResult.Missing)
 			return false;
 		_chainOffset = r.ChainOffset;
-		_networked = r.Networked != 0;
+		_networked = r.Networked != 0;   // not known yet counts as networked, and is asked again
+		_networkingKnown = r.Networked != SchemaFieldResult.NetworkingUnknown;
 		_offset = r.Offset; // volatile write last - publishes the others
 		return true;
 	}
