@@ -256,6 +256,18 @@ export interface ContentFile {
  * server's `game` folder, the same ones deadworks-web uses: `bin/win64/configs/permissions/roles.jsonc`,
  * `.../players.jsonc`, `.../overrides.jsonc` and `.../generated/<Plugin>.jsonc`. null = file missing.
  */
+/** A ban, gag or mute that has not been lifted. Dates are ISO 8601, UTC; one may already have run out. */
+export interface PenaltyInfo {
+  kind: "ban" | "gag" | "mute";
+  steamId64: string;
+  playerName: string | null;
+  createdUtc: string | null;
+  /** Null for a permanent penalty. */
+  expiresUtc: string | null;
+  reason: string;
+  adminName: string | null;
+}
+
 export interface PermissionsSnapshot {
   files: Record<string, string | null>;
   running: boolean;
@@ -311,6 +323,10 @@ export const hosting = {
   /** Needs `runtime.moderation`. `minutes` 0 = permanent. The ban also removes them from the server. */
   ban: (id: string, steamId64: string, minutes: number, reason: string) =>
     invoke<void>("hosting_ban", { id, steamId64, minutes, reason }),
+  /** Read from the server's penalties file, so it works while the server is stopped. */
+  penalties: (id: string) => invoke<PenaltyInfo[]>("hosting_penalties", { id }),
+  liftPenalty: (id: string, kind: PenaltyInfo["kind"], steamId64: string) =>
+    invoke<void>("hosting_lift_penalty", { id, kind, steamId64 }),
   permissions: (id: string) => invoke<PermissionsSnapshot>("hosting_permissions", { id }),
   /**
    * Compare-and-swap write of permission files. `expected` is the text each file had when the change

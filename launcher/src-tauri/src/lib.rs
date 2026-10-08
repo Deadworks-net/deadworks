@@ -125,6 +125,8 @@ pub fn run() {
             hosting::hosting_kick,
             hosting::hosting_ban,
             hosting::hosting_permissions,
+            hosting::hosting_penalties,
+            hosting::hosting_lift_penalty,
             hosting::hosting_write_permissions,
             hosting::hosting_mark_shared,
             hosting::hosting_check_reachability,

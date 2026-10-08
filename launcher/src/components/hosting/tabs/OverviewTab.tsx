@@ -320,7 +320,7 @@ function NetworkCard({ server, actions, running }: { server: ServerSummary; acti
 interface OverviewTabProps {
   server: ServerSummary;
   actions: HostingActions;
-  /** Opens the Admins tab with the add dialog filled in for this player. */
+  /** Opens the Permissions tab with the add dialog filled in for this player. */
   onMakeAdmin: (player: PlayerInfo) => void;
 }
 
@@ -353,10 +353,6 @@ export default function OverviewTab({ server, actions, onMakeAdmin }: OverviewTa
           onBan={setBanning}
           onMakeAdmin={onMakeAdmin}
         />
-        <div className={ui.hint}>
-          <code className={styles.inlineCode}>dw_bans</code> lists active bans.{" "}
-          <code className={styles.inlineCode}>dw_unban &lt;steamid&gt;</code> lifts one.
-        </div>
       </div>
 
       <NetworkCard server={server} actions={actions} running={running} />

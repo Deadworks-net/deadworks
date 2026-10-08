@@ -327,6 +327,21 @@ pub struct PermissionsSnapshot {
     pub local_steam_name: Option<String>,
 }
 
+/// A ban, gag or mute that has not been lifted. Dates are as Deadworks wrote them (ISO 8601, UTC).
+#[derive(Debug, Clone, PartialEq, Serialize)]
+#[serde(rename_all = "camelCase")]
+pub struct PenaltyInfo {
+    /// "ban", "gag" or "mute".
+    pub kind: String,
+    pub steam_id64: String,
+    pub player_name: Option<String>,
+    pub created_utc: Option<String>,
+    /// None for a permanent penalty.
+    pub expires_utc: Option<String>,
+    pub reason: String,
+    pub admin_name: Option<String>,
+}
+
 #[derive(Debug, Clone, Default, Serialize)]
 #[serde(rename_all = "camelCase")]
 pub struct PermissionsWriteResult {

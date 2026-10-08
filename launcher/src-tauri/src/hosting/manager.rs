@@ -14,7 +14,7 @@ use super::process::{self, Process, Rcon, SpawnSpec, Stream};
 use super::store::{self, now_secs, BaseRecord, HostingState, Layout, ServerFile};
 use super::task::{Progress, TaskError};
 use super::types::*;
-use super::{base, cfg, content, disk, dotnet, firewall, fsutil, netcfg, plugins, release, steamcmd, tree, wine};
+use super::{base, cfg, content, disk, dotnet, firewall, fsutil, netcfg, penalties, plugins, release, steamcmd, tree, wine};
 
 const STORE_KEY: &str = "hosting_root";
 const FIRST_PORT: u16 = 27020;
@@ -1346,6 +1346,48 @@ impl Manager {
             .take(120)
             .collect();
         self.send(id, format!("dw_ban {steam_id64} {minutes} {}", reason.trim()).trim_end())
+    }
+
+    /// Bans, gags and mutes that have not been lifted, from the server's penalties file.
+    pub fn penalties(&self, id: &str) -> Result<Vec<PenaltyInfo>, String> {
+        let path = {
+            let mut inner = self.lock();
+            let layout = inner.layout()?;
+            inner.server(id)?;
+            penalties::path(&layout.server_configs(id))
+        };
+        match read_optional(&path)? {
+            Some(text) => penalties::pending(&text),
+            None => Ok(Vec::new()),
+        }
+    }
+
+    /// Lift a ban, gag or mute by marking it lifted in the penalties file, the way the server's own
+    /// unban does. A running server is told to reload the file, which also tells its plugins.
+    pub fn lift_penalty(&self, id: &str, kind: &str, steam_id64: &str) -> Result<(), String> {
+        if steam_id64.len() != 17 || !steam_id64.bytes().all(|b| b.is_ascii_digit()) {
+            return Err("Invalid SteamID.".into());
+        }
+        if !penalties::KINDS.contains(&kind) {
+            return Err("Unknown penalty type.".into());
+        }
+        let (path, running) = {
+            let mut inner = self.lock();
+            let layout = inner.layout()?;
+            (penalties::path(&layout.server_configs(id)), inner.server(id)?.proc.is_some())
+        };
+        let lifted = match read_optional(&path)? {
+            Some(text) => penalties::lift(&text, kind, steam_id64, &penalties::utc_iso(now_secs()))?,
+            None => None,
+        };
+        let Some(text) = lifted else {
+            return Err("Already lifted.".into());
+        };
+        fsutil::write_real(&path, text.as_bytes()).map_err(|e| format!("Couldn't save {}: {e}", path.display()))?;
+        if running {
+            self.send(id, "dw_penalties_reload")?;
+        }
+        Ok(())
     }
 
     pub fn mark_shared(&self, id: &str) -> Result<(), String> {

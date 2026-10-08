@@ -16,6 +16,7 @@ mod fsutil;
 mod manager;
 mod manifest;
 mod netcfg;
+mod penalties;
 mod plugins;
 mod process;
 mod pty;
@@ -189,6 +190,16 @@ pub async fn hosting_write_permissions(
     files: std::collections::BTreeMap<String, String>,
 ) -> Result<PermissionsWriteResult, String> {
     blocking(move || manager::get().write_permissions(&id, expected, files)).await
+}
+
+#[tauri::command]
+pub async fn hosting_penalties(id: String) -> Result<Vec<PenaltyInfo>, String> {
+    blocking(move || manager::get().penalties(&id)).await
+}
+
+#[tauri::command]
+pub async fn hosting_lift_penalty(id: String, kind: String, steam_id64: String) -> Result<(), String> {
+    blocking(move || manager::get().lift_penalty(&id, &kind, &steam_id64)).await
 }
 
 #[tauri::command]

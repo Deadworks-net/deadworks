@@ -10,9 +10,9 @@ import {
   useState,
   type ReactNode,
 } from "react";
-import type { PlayerInfo, ServerSummary } from "@/lib/hosting";
+import { hosting, type PenaltyInfo, type PlayerInfo, type ServerSummary } from "@/lib/hosting";
 import { cn } from "@/lib/utils";
-import { errorMessage, isLive } from "../format";
+import { errorMessage, formatDuration, formatTimestamp, isLive } from "../format";
 import { ConfirmDialog, ErrorNote, Loading, Modal } from "../ui";
 import {
   DEFAULT_ROLE,
@@ -61,9 +61,10 @@ interface PermissionsTabProps {
   onPrefillUsed: () => void;
 }
 
-type View = "people" | "roles" | "commands" | "check" | "errors";
+type View = "people" | "bans" | "roles" | "commands" | "check" | "errors";
 const VIEWS: [View, string][] = [
   ["people", "People"],
+  ["bans", "Bans"],
   ["roles", "Roles"],
   ["commands", "Commands"],
   ["check", "Check"],
@@ -82,6 +83,11 @@ type RoleSave = Omit<Extract<PermissionChange, { action: "role-save" }>, "action
 type OverrideSave = Omit<Extract<PermissionChange, { action: "override-save" }>, "action">;
 
 const displayName = (p: Person): string => p.entry.name || p.id || p.key;
+
+/** Seconds until a penalty runs out, or null for a permanent one. */
+function secondsLeft(p: PenaltyInfo, now: number): number | null {
+  return p.expiresUtc == null ? null : (Date.parse(p.expiresUtc) - now) / 1000;
+}
 
 /** Hand-edited files can hold shapes the views don't expect; show a way to fix them instead of a blank window. */
 class ViewBoundary extends Component<
@@ -115,6 +121,38 @@ export default function PermissionsTab({ server, prefill, onPrefillUsed }: Permi
   const [busy, setBusy] = useState(false);
   const [view, setView] = useState<View>("people");
   const [dialog, setDialog] = useState<DialogState | null>(null);
+  const [penalties, setPenalties] = useState<PenaltyInfo[]>([]);
+  const [penaltyError, setPenaltyError] = useState<string | null>(null);
+
+  const loadPenalties = useCallback(async () => {
+    try {
+      setPenalties(await hosting.penalties(id));
+      setPenaltyError(null);
+    } catch (e) {
+      setPenaltyError(errorMessage(e));
+    }
+  }, [id]);
+
+  // Admins ban and unban from inside the game too, so the open list keeps itself current.
+  useEffect(() => {
+    loadPenalties();
+    if (view !== "bans") return;
+    const timer = window.setInterval(loadPenalties, 5000);
+    return () => window.clearInterval(timer);
+  }, [loadPenalties, view, state]);
+
+  const lift = async (p: PenaltyInfo) => {
+    setBusy(true);
+    setError(null);
+    try {
+      await hosting.liftPenalty(id, p.kind, p.steamId64);
+    } catch (e) {
+      setError(errorMessage(e));
+    } finally {
+      await loadPenalties();
+      setBusy(false);
+    }
+  };
 
   const loadSeq = useRef(0);
   const reload = useCallback(async () => {
@@ -221,7 +259,14 @@ export default function PermissionsTab({ server, prefill, onPrefillUsed }: Permi
         {running && "Changes take effect immediately."}
         {!snapshot.started && "Default roles are shown until the first start."}
       </span>
-      <button type="button" className={ui.linkBtn} onClick={reload}>
+      <button
+        type="button"
+        className={ui.linkBtn}
+        onClick={() => {
+          reload();
+          loadPenalties();
+        }}
+      >
         Reload
       </button>
     </div>
@@ -230,9 +275,6 @@ export default function PermissionsTab({ server, prefill, onPrefillUsed }: Permi
   if (!built) {
     return (
       <div className={styles.tab}>
-        <div className={styles.header}>
-          <span className={styles.headerTitle}>Permissions</span>
-        </div>
         {statusLine}
         {unreadable}
         {jsonDialog}
@@ -243,8 +285,11 @@ export default function PermissionsTab({ server, prefill, onPrefillUsed }: Permi
   const model = built;
   const writable = snapshot.writable && !busy;
   const fileErrors = model.problems.filter((p) => p.level === "error");
+  const now = Date.now();
+  const activePenalties = penalties.filter((p) => (secondsLeft(p, now) ?? 1) > 0);
   const counts: Record<View, number> = {
     people: model.people.length,
+    bans: activePenalties.length,
     roles: Object.keys(model.roles).length,
     commands: model.plugins.reduce((n, p) => n + p.commands.length, 0),
     check: 0,
@@ -262,8 +307,7 @@ export default function PermissionsTab({ server, prefill, onPrefillUsed }: Permi
   return (
     <div className={styles.tab}>
       <div className={styles.header}>
-        <span className={styles.headerTitle}>Permissions</span>
-        <div className={css.views} role="tablist" aria-label="Admin views">
+        <div className={css.views} role="tablist" aria-label="Permission views">
           {VIEWS.map(([key, title]) => (
             <button
               key={key}
@@ -353,6 +397,16 @@ export default function PermissionsTab({ server, prefill, onPrefillUsed }: Permi
             writable={writable}
             onJson={openJson}
             onOverride={(plugin, command) => setDialog({ kind: "override", plugin, command })}
+          />
+        )}
+        {view === "bans" && (
+          <Bans
+            penalties={activePenalties}
+            now={now}
+            loadError={penaltyError}
+            busy={busy}
+            onLift={lift}
+            onRetry={loadPenalties}
           />
         )}
         {view === "check" && <Check model={model} />}
@@ -589,6 +643,93 @@ function People({
         <div className={cn(styles.list, styles.listEmpty)}>
           <div className={css.emptyTitle}>No admins</div>
           <div className={css.emptyActions}>{addButtons}</div>
+        </div>
+      )}
+    </section>
+  );
+}
+
+const PENALTY_WORDS: Record<PenaltyInfo["kind"], { name: string; lift: string }> = {
+  ban: { name: "Ban", lift: "Unban" },
+  gag: { name: "Gag", lift: "Ungag" },
+  mute: { name: "Mute", lift: "Unmute" },
+};
+
+function Bans({
+  penalties,
+  now,
+  loadError,
+  busy,
+  onLift,
+  onRetry,
+}: {
+  /** Bans, gags and mutes still in force. */
+  penalties: PenaltyInfo[];
+  now: number;
+  loadError: string | null;
+  busy: boolean;
+  onLift: (penalty: PenaltyInfo) => void;
+  onRetry: () => void;
+}) {
+  return (
+    <section>
+      <SectionHead title="Bans, gags and mutes" />
+      {loadError ? (
+        <ErrorNote message={`Couldn't read the ban list: ${loadError}`} actionLabel="Try again" onAction={onRetry} />
+      ) : penalties.length > 0 ? (
+        <div className={cn(styles.list, css.scroll)}>
+          <table className={cn(ui.table, css.table)}>
+            <thead>
+              <tr>
+                <th>Player</th>
+                <th>Type</th>
+                <th>Reason</th>
+                <th>Expires</th>
+                <th>By</th>
+                <th aria-label="Actions" />
+              </tr>
+            </thead>
+            <tbody>
+              {penalties.map((p) => {
+                const left = secondsLeft(p, now);
+                return (
+                  <tr key={`${p.kind}:${p.steamId64}:${p.createdUtc}`}>
+                    <td>
+                      <div className={css.player}>
+                        {p.playerName && <strong>{p.playerName}</strong>}
+                        <code>{p.steamId64}</code>
+                      </div>
+                    </td>
+                    <td>{PENALTY_WORDS[p.kind].name}</td>
+                    <td className={css.description}>{p.reason || <None />}</td>
+                    <td
+                      className={css.nowrap}
+                      title={p.expiresUtc ? formatTimestamp(Date.parse(p.expiresUtc) / 1000) : undefined}
+                    >
+                      {left == null ? "Never" : `in ${formatDuration(left)}`}
+                    </td>
+                    <td>{p.adminName || <None />}</td>
+                    <td>
+                      <div className={css.rowActions}>
+                        <button
+                          type="button"
+                          className={cn(ui.btn, ui.btnSmall)}
+                          disabled={busy}
+                          onClick={() => onLift(p)}
+                        >
+                          {PENALTY_WORDS[p.kind].lift}
+                        </button>
+                      </div>
+                    </td>
+                  </tr>
+                );
+              })}
+            </tbody>
+          </table>
+        </div>
+      ) : (
+        <div className={cn(styles.list, styles.listEmpty)}>
+          <div className={css.emptyTitle}>No bans</div>
         </div>
       )}
     </section>
