@@ -74,6 +74,7 @@ pub fn run() {
             gameinfo::gameinfo_error,
             gameinfo::retry_gameinfo_patch,
             ping::ping_server,
+            ping::server_info,
             deep_link::deep_link_ready,
         ])
         .setup(|app| {

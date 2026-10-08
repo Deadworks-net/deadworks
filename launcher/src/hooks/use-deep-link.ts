@@ -1,5 +1,6 @@
 import { useCallback, useEffect, useRef, useState } from "react";
 import { invoke } from "@tauri-apps/api/core";
+import { serverInfo } from "@/lib/tauri";
 import { listen, type UnlistenFn } from "@tauri-apps/api/event";
 import type { Server } from "@/lib/types";
 
@@ -28,6 +29,35 @@ export function useDeepLink(apiUrl: string) {
     if (p.kind === "error") {
       setRequest({ requestId, server: null, error: p.value });
       return;
+    }
+    // A link by address is answered by the server itself, so it works for any server that is
+    // up, whether or not the Deadworks API lists it or can be reached. The API is only asked
+    // when the server stays silent, which is how one started with -nomaster looks.
+    if (p.kind === "ip") {
+      const info = await serverInfo(p.value).catch(() => null);
+      if (info) {
+        setRequest({
+          requestId,
+          error: null,
+          server: {
+            id: "",
+            name: info.name || p.value,
+            address: p.value,
+            raw_address: p.value,
+            country: "",
+            online: true,
+            player_count: info.players,
+            max_players: info.max_players,
+            map: info.map,
+            players: [],
+            mods: [],
+            content_addons: [],
+            extra_maps: [],
+            last_heartbeat: null,
+          },
+        });
+        return;
+      }
     }
     const base = apiUrlRef.current;
     const url =

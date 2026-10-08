@@ -666,8 +666,10 @@ async fn prepare(
         serde_json::json!({ "name": "", "status": "fetching", "bytes_downloaded": 0, "total_bytes": 0, "item_index": 0, "total_items": 0 }),
     );
 
-    // A row with no id is a server the API has never heard of.
-    let record = (!server_id.is_empty()).then_some(ApiRecord::Id(server_id));
+    // No id: a server found on Steam's list, or one joined by its address. The server is asked
+    // first either way; the registry is only looked in, by address, when the server names no
+    // download host of its own - which is what a server still on the registry looks like.
+    let record = Some(if server_id.is_empty() { ApiRecord::Address(addr) } else { ApiRecord::Id(server_id) });
     let Resolved { items, source, incomplete } = resolve_items(addr, &api_url, record.as_ref(), strictness).await?;
 
     // Validate every item up-front so a bad manifest is rejected before we

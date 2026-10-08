@@ -131,9 +131,16 @@ export function pingServer(addr: string): Promise<number> {
   return invoke<number>("ping_server", { addr });
 }
 
+/** What a server says about itself, asked directly. Rejects when nothing answers at `addr`. */
+export function serverInfo(addr: string): Promise<{ name: string; map: string; players: number; max_players: number }> {
+  return invoke("server_info", { addr });
+}
+
 /**
- * The id to ask the Deadworks API about a server with, or "" when it has no record there and
- * its content can only come from what the server advertises.
+ * The id to ask the Deadworks API about a server with, or "" when the launcher has none: a
+ * server found only on Steam's list, or one joined by its address. Its content then comes from
+ * what the server advertises, and the registry is only asked, by address, if that names no
+ * download host.
  */
 export function recordId(server: { id: string; registered?: boolean }): string {
   return server.registered === false ? "" : server.id;
