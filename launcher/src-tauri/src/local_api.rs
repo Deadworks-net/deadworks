@@ -69,6 +69,25 @@ struct Snapshot {
     files_total: u8,
     total_mib: u16,
     err: u8,
+    /// `note::*` bits about a job that finished; see `/dwl/note.png`.
+    notes: u8,
+}
+
+/// Things worth telling the player about a join that succeeded.
+mod note {
+    /// The server runs more content than it could list, so some of it was not installed.
+    pub const INCOMPLETE: u8 = 1;
+}
+
+/// The reply to `/dwl/note.png?j=<seq>`: the finished job's notes. A route of its own rather
+/// than another status slot, because a launcher from before it existed answers every unknown
+/// slot with the download size, and that must not be read as a note. Such a launcher has no
+/// such route at all, and a missing image is how the game knows there is nothing to say.
+fn note_png(seq: Option<u8>) -> Vec<u8> {
+    let j = job().lock().unwrap();
+    let notes = if seq == Some(j.seq) && j.snap.state == state::READY { j.snap.notes } else { 0 };
+    drop(j);
+    units_png(notes, 0)
 }
 
 #[derive(Default)]
@@ -557,6 +576,7 @@ fn handle(app: &AppHandle, req: tiny_http::Request) {
             };
             respond(req, png);
         }
+        "/dwl/note.png" => respond(req, note_png(query(&url, "j").and_then(|s| s.parse().ok()))),
         "/dwl/cancel.png" => {
             let seq: Option<u8> = query(&url, "j").and_then(|s| s.parse().ok());
             let mut j = job().lock().unwrap();
@@ -677,10 +697,11 @@ fn start_job(app: AppHandle, addr: String, strictness: Strictness) -> u8 {
         app.unlisten(listener);
 
         match result {
-            Ok(()) => publish(seq, |s| {
+            Ok(installed) => publish(seq, |s| {
                 s.state = state::READY;
                 s.pct63 = 63;
                 s.files_done = s.files_total;
+                s.notes = if installed.incomplete { note::INCOMPLETE } else { 0 };
             }),
             Err(msg) if msg == addons::CANCELLED_MSG => {
                 publish(seq, |s| s.state = state::CANCELLED);
@@ -1046,6 +1067,7 @@ mod tests {
                             },
                         );
                     }
+                    "/dwl/note.png" => respond(req, note_png(query(&url, "j").and_then(|s| s.parse().ok()))),
                     "/dwl/cancel.png" => {
                         let seq: Option<u8> = query(&url, "j").and_then(|s| s.parse().ok());
                         let mut j = job().lock().unwrap();
@@ -1216,9 +1238,20 @@ mod tests {
                 files_total: 5,
                 total_mib: 1234,
                 err: 0,
+                notes: note::INCOMPLETE,
             };
             j.seq
         };
+
+        // A note is only about a job that finished.
+        let (_, png) = get(port, &format!("/dwl/note.png?j={}", seq), "");
+        assert_eq!(dims(&png), (unit_dim(0), unit_dim(0)), "no note while the job is still running");
+        job().lock().unwrap().snap.state = state::READY;
+        let (_, png) = get(port, &format!("/dwl/note.png?j={}", seq), "");
+        assert_eq!(dims(&png), (unit_dim(note::INCOMPLETE), unit_dim(0)));
+        let (_, png) = get(port, &format!("/dwl/note.png?j={}", seq + 1), "");
+        assert_eq!(dims(&png), (unit_dim(0), unit_dim(0)), "another job's note is not this one's");
+        job().lock().unwrap().snap.state = state::DOWNLOADING;
 
         let (_, png) = get(port, &format!("/dwl/status.png?j={}&i=0", seq), "");
         assert_eq!(dims(&png), (unit_dim(state::DOWNLOADING), unit_dim(31)));

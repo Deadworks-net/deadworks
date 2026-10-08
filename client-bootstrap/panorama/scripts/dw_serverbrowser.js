@@ -548,6 +548,12 @@
                   function () {}, L_TIMEOUT_MS);
     }
 
+    function launcherNote(host, seq, done) {
+        loadImage(host, launcherUrl(_lport, "note", "j=" + seq), function (w, h) {
+            done(decPair(w, h, _cal)[0]);
+        }, function () { done(0); }, L_TIMEOUT_MS);
+    }
+
     function launcherStatus(host, seq, slot, done, fail) {
         loadImage(host, launcherUrl(_lport, "status", "j=" + seq + "&i=" + slot), function (w, h) {
             done(decPair(w, h, _cal));
@@ -1180,8 +1186,11 @@
         6: "Deadlock still has the old file open. Disconnect from your current server first.",
         7: "The launcher needs to patch gameinfo.gi. Restart it with Deadlock closed.",
         8: "Server content differs from the download host's content. Some custom content may be missing or broken. Consider letting the server operator know you received this warning.",
-        9: "Couldn't download this server's content from its download host."
+        9: "Couldn't download this server's content from its download host.",
+        10: "This server has more custom content than the launcher will download for one join."
     };
+
+    var LN_INCOMPLETE = 1;
 
     function joinAnyway(server) {
         closePrepare();
@@ -1358,10 +1367,17 @@
                 prepBar(1);
                 prepPhase("Ready — connecting…");
                 prepButtons([]);
-                $.Schedule(0.4, function () {
-                    closePrepare();
-                    closeOverlay();
-                    connectTo(server);
+                var mine = function () { return _prep.gen === gen && !_prep.active && _prep.modal.visible; };
+                launcherNote(host, _prep.seq, function (notes) {
+                    if (!mine()) return;
+                    var partial = (notes & LN_INCOMPLETE) !== 0;
+                    if (partial) prepDetail("This server could not list all of its content, so some of it may be missing.");
+                    $.Schedule(partial ? 3.5 : 0.4, function () {
+                        if (!mine()) return;
+                        closePrepare();
+                        closeOverlay();
+                        connectTo(server);
+                    });
                 });
                 return;
             }

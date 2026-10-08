@@ -137,6 +137,8 @@ pub(crate) const ERR_CONTENT_MISMATCH: u8 = 8;
 /// A download itself failed: the host is down, or does not have the file. Kept apart from 2,
 /// which blames the Deadworks API, because the host is usually the server operator's own.
 pub(crate) const ERR_DOWNLOAD_HOST: u8 = 9;
+/// The server's content is more than the launcher will fetch for one join.
+pub(crate) const ERR_TOO_MUCH_CONTENT: u8 = 10;
 
 pub(crate) fn error_code(msg: &str) -> u8 {
     if msg.starts_with("FILE_IN_USE:") {
@@ -148,6 +150,8 @@ pub(crate) fn error_code(msg: &str) -> u8 {
         // generic wording, so this needs no protocol bump. Checked before the rest: the
         // message names the file, and a file can be called anything.
         ERR_CONTENT_MISMATCH
+    } else if msg.starts_with("this server asks for") || msg.starts_with("this server's content is more than") {
+        ERR_TOO_MUCH_CONTENT
     } else if msg.contains("gameinfo.gi") || msg.contains("bootstrap addon") || msg.contains("requires bootstrap") {
         7
     } else if msg.contains("No online server") || msg.starts_with("API returned HTTP 404") {
@@ -1189,6 +1193,12 @@ where
     Ok(())
 }
 
+/// What a finished install has to say for itself.
+pub(crate) struct Installed {
+    /// The server runs more content than it could list, so not all of it was installed.
+    pub incomplete: bool,
+}
+
 /// In-game bridge entry point: prepare a server's content given only its
 /// `ip:port`, and stop there.
 ///
@@ -1208,11 +1218,11 @@ pub(crate) async fn install_for_address(
     cancel: Arc<AtomicBool>,
     plan_out: &(dyn Fn(&[u64]) + Send + Sync),
     strictness: Strictness,
-) -> Result<(), String> {
+) -> Result<Installed, String> {
     let api_url = resolve_api_url(app);
 
     let record = ApiRecord::Address(addr);
-    let Resolved { items, source, .. } = resolve_items(addr, &api_url, Some(&record), strictness).await?;
+    let Resolved { items, source, incomplete } = resolve_items(addr, &api_url, Some(&record), strictness).await?;
     match install_resolved(app, &items, channel, cancel.clone(), plan_out).await {
         // As in `prepare`: the API's record only if it covers what the server advertised.
         Err(e) if source == Source::Advertised && can_fall_back(&e) => {
@@ -1223,12 +1233,15 @@ pub(crate) async fn install_for_address(
                 return Err(e);
             };
             eprintln!("[content] {e}; falling back to the Deadworks API");
-            install_resolved(app, &items, channel, cancel, plan_out).await.map_err(|second| {
-                eprintln!("[content] the Deadworks API's copy did not work either: {second}");
-                e
-            })
+            install_resolved(app, &items, channel, cancel, plan_out)
+                .await
+                .map(|()| Installed { incomplete: false })
+                .map_err(|second| {
+                    eprintln!("[content] the Deadworks API's copy did not work either: {second}");
+                    e
+                })
         }
-        other => other,
+        other => other.map(|()| Installed { incomplete }),
     }
 }
 
@@ -1379,6 +1392,8 @@ mod tests {
         );
         assert_eq!(error_code("Download failed for bootstrap: HTTP 404 Not Found"), ERR_DOWNLOAD_HOST);
         assert_eq!(error_code("Failed to read VPK magic: failed to fill whole buffer"), 4);
+        assert_eq!(error_code("this server asks for 40 GiB of downloads, more than the launcher will fetch for one join"), ERR_TOO_MUCH_CONTENT);
+        assert_eq!(error_code("this server's content is more than the 16 GiB the launcher will install for one join"), ERR_TOO_MUCH_CONTENT);
         assert_eq!(error_code("decompressed payload for turbo is not a valid VPK (magic mismatch)"), 4);
     }
 
