@@ -273,19 +273,16 @@ internal static class ContentAddonManager
             : new ContentEntry(name, null);
     }
 
-    // Mount() hands the engine this path relative to the working directory, so resolve it the same
-    // way, then fall back to the executable's directory in case the server was started elsewhere.
+    // The file Mount() hands the engine, and no other: what is advertised has to be what is loaded.
+    // Both go through ResolveVpkPath, so moving the addon folder moves them together.
     private static string? FindAddonFile(string name)
     {
-        var relative = Path.Combine("deadworks_mods", "vpks", name + ".vpk");
-        foreach (var root in new[] { Directory.GetCurrentDirectory(), ExeDir })
-        {
-            var full = Path.GetFullPath(Path.Combine(root, relative));
-            if (File.Exists(full))
-                return full;
-        }
+        // The engine resolves a relative search path against the working directory; so does this.
+        var full = Path.GetFullPath(ResolveVpkPath(name));
+        if (File.Exists(full))
+            return full;
 
-        WarnOnce("addon:" + name, $"[ContentAddons] '{name}' has no file at {relative}; it is advertised without a " +
+        WarnOnce("addon:" + name, $"[ContentAddons] '{name}' has no file at {full}; it is advertised without a " +
                                   "version hash, so clients cannot verify it or fetch it over fastDL.");
         return null;
     }
@@ -340,10 +337,19 @@ internal static class ContentAddonManager
         if (!_mounted.Add(addon))
             return;
 
-        var vpkPath = $"deadworks_mods/vpks/{addon}.vpk";
+        var vpkPath = ResolveVpkPath(addon);
         if (Server.AddSearchPath(vpkPath))
             Console.WriteLine($"[ContentAddons] Mounted: {vpkPath}");
         else
             Console.WriteLine($"[ContentAddons] Failed to mount: {vpkPath}");
+    }
+
+    /// <summary>
+    /// Where an addon's VPK is: the one place that says so, for mounting it and for hashing it.
+    /// Relative to the engine's working directory, <c>game/bin/win64</c>.
+    /// </summary>
+    private static string ResolveVpkPath(string addon)
+    {
+        return $"deadworks_mods/vpks/{addon}.vpk";
     }
 }
