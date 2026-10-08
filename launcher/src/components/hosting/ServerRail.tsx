@@ -16,7 +16,7 @@ interface ServerRailProps {
 
 export default function ServerRail({ servers, selectedId, creating, onSelect, onNew }: ServerRailProps) {
   return (
-    <nav className={styles.rail} aria-label="Your servers">
+    <nav className={styles.rail} aria-label="Servers">
       <div className={styles.railList}>
         {servers.map(({ config, runtime }) => (
           <button

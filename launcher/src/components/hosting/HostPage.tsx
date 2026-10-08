@@ -86,7 +86,7 @@ export default function HostPage({ nav, active }: HostPageProps) {
         {error && !loading ? (
           <div style={{ padding: 24 }}>
             <ErrorNote
-              message={`We couldn't load your hosting setup: ${error}`}
+              message={`Couldn't load hosting: ${error}`}
               actionLabel="Try again"
               onAction={actions.reload}
             />
@@ -100,7 +100,7 @@ export default function HostPage({ nav, active }: HostPageProps) {
     body = (
       <div className={styles.card}>
         <div className={ui.centered}>
-          <p className={styles.welcomeText}>Hosting a server needs Windows or Linux.</p>
+          <p className={styles.welcomeText}>Hosting requires Windows or Linux.</p>
           <ManagedHostingCard />
         </div>
       </div>

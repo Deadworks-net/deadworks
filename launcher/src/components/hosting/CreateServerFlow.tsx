@@ -41,14 +41,14 @@ export default function CreateServerFlow({ servers, actions, active, onCancel, o
         <div className={styles.form} style={{ maxWidth: 720, paddingBottom: 0 }}>
           <h2 className={styles.formTitle}>Add plugins</h2>
           <p className={styles.formSubtitle}>
-            Optional. You can add or change plugins later in the Plugins tab.
+            Optional. Plugins can be changed later on the Plugins tab.
           </p>
         </div>
         {created ? (
           <PluginsTab server={created} actions={actions} dropActive={active} />
         ) : (
           <div className={styles.form}>
-            <ErrorNote message="Your server was created, but its details haven't loaded yet." actionLabel="Reload" onAction={actions.reload} />
+            <ErrorNote message="Server created, but it hasn't loaded yet." actionLabel="Reload" onAction={actions.reload} />
           </div>
         )}
         <div className={styles.form} style={{ maxWidth: 720, paddingTop: 0 }}>
@@ -66,7 +66,7 @@ export default function CreateServerFlow({ servers, actions, active, onCancel, o
             </button>
           </div>
           <div className={ui.hint} style={{ textAlign: "right" }}>
-            The first start asks for Windows permission so players can connect through the firewall.
+            The first start opens a Windows Firewall prompt.
           </div>
         </div>
       </div>
@@ -88,7 +88,7 @@ export default function CreateServerFlow({ servers, actions, active, onCancel, o
     <div className={styles.scroll}>
       <form className={styles.form} onSubmit={submit}>
         <h2 className={styles.formTitle}>{servers.length === 0 ? "Create your first server" : "New server"}</h2>
-        <p className={styles.formSubtitle}>Pick a name and how players will connect. You can change both later.</p>
+        <p className={styles.formSubtitle}>Both can be changed later.</p>
 
         <div className={ui.field}>
           <label className={ui.label} htmlFor="new-name">Server name</label>
@@ -103,7 +103,7 @@ export default function CreateServerFlow({ servers, actions, active, onCancel, o
         </div>
 
         <div className={styles.section}>
-          <div className={ui.label}>How will players connect?</div>
+          <div className={ui.label}>Network</div>
           <NetworkCards value={network} onChange={setNetwork} />
         </div>
 
@@ -119,7 +119,7 @@ export default function CreateServerFlow({ servers, actions, active, onCancel, o
               Cancel
             </button>
           )}
-          {!trimmed && <span className={styles.disabledReason}>Give your server a name.</span>}
+          {!trimmed && <span className={styles.disabledReason}>Enter a name.</span>}
           <button type="submit" className={cn(ui.btnPrimary, ui.btnLarge)} disabled={!trimmed || create.busy}>
             {create.busy ? "Creating..." : "Create server"}
           </button>

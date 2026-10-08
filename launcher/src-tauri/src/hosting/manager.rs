@@ -107,11 +107,11 @@ impl Inner {
     }
 
     fn layout(&self) -> Result<Layout, String> {
-        self.layout.clone().ok_or_else(|| "Server hosting isn't set up yet.".to_string())
+        self.layout.clone().ok_or_else(|| "Hosting isn't set up.".to_string())
     }
 
     fn server(&mut self, id: &str) -> Result<&mut Server, String> {
-        self.servers.get_mut(id).ok_or_else(|| "That server doesn't exist any more.".to_string())
+        self.servers.get_mut(id).ok_or_else(|| "Server no longer exists.".to_string())
     }
 
     fn save_state(&self) {
@@ -334,7 +334,7 @@ impl Manager {
         let progress = {
             let mut inner = self.lock();
             if inner.task.is_some() {
-                return Err("Another hosting task is still running.".into());
+                return Err("Another task is running.".into());
             }
             let p = Arc::new(Progress::new(kind));
             inner.task = Some(p.clone());
@@ -400,7 +400,7 @@ impl Manager {
 
     pub fn install(self: &Arc<Self>, opts: InstallOptions) -> Result<(), String> {
         if self.lock().servers.values().any(Server::live) {
-            return Err("Stop your servers before reinstalling.".into());
+            return Err("Stop all servers first.".into());
         }
         let root = choose_root(&opts.root)?;
         self.run_task(TaskKind::Install, move |mgr, p| mgr.do_install(root, opts, p))
@@ -428,9 +428,9 @@ impl Manager {
                 let game_dir = crate::connect::resolve_game_dir()
                     .ok()
                     .filter(|d| d.join("citadel").is_dir())
-                    .ok_or("Deadlock isn't installed on this PC. Install it in Steam, or use SteamCMD instead.")?;
+                    .ok_or("Deadlock isn't installed. Install it through Steam or use SteamCMD.")?;
                 if opts.copy_mode == CopyMode::Hardlink && fsutil::volume_of(&game_dir) != fsutil::volume_of(&root) {
-                    return Err("Linking only works when the server folder is on the same drive as Deadlock.".into());
+                    return Err("Linking needs the same drive as Deadlock.".into());
                 }
                 let (app, files) = client_manifest(&game_dir)?;
                 let outcome = base::sync_from_client(
@@ -455,7 +455,7 @@ impl Manager {
             }
             BaseSource::Steamcmd => {
                 if !cfg!(windows) {
-                    return Err("SteamCMD isn't available on Linux yet. Install Deadlock through Steam, then copy from it.".into());
+                    return Err("SteamCMD isn't supported on Linux. Copy from a Steam install instead.".into());
                 }
                 let user = opts.steam_username.clone().unwrap_or_default();
                 steamcmd::install(&layout, &user, opts.steam_password.as_deref(), true, p)?;
@@ -531,7 +531,7 @@ impl Manager {
     fn do_update(self: &Arc<Self>, p: &Progress) -> Result<(), TaskError> {
         let (layout, record, previous, username, runtime_before, target) = {
             let inner = self.lock();
-            let record = inner.state.base.clone().ok_or("Server hosting isn't installed.")?;
+            let record = inner.state.base.clone().ok_or("Hosting isn't set up.")?;
             (
                 inner.layout()?,
                 record,
@@ -546,7 +546,7 @@ impl Manager {
         // can't go through must not cost anyone a running server, or an SDR server its address.
         let step = match record.source {
             BaseSource::Client => {
-                let game_dir = crate::connect::resolve_game_dir().map_err(|_| "Deadlock isn't installed on this PC any more.")?;
+                let game_dir = crate::connect::resolve_game_dir().map_err(|_| "Deadlock is no longer installed.")?;
                 let (app, files) = client_manifest(&game_dir)?;
                 if app.build_id == record.build_id && previous.len() == files.len() {
                     BaseStep::UpToDate
@@ -555,7 +555,7 @@ impl Manager {
                 }
             }
             BaseSource::Steamcmd => {
-                let user = username.ok_or("No Steam account is saved for updates; reinstall with SteamCMD.")?;
+                let user = username.ok_or("No saved Steam account. Reinstall with SteamCMD.")?;
                 if steamcmd::latest_build(&layout, &user, p)? == record.build_id {
                     BaseStep::UpToDate
                 } else {
@@ -714,11 +714,11 @@ impl Manager {
         self.run_task(TaskKind::Verify, |mgr, p| {
             let (layout, record, files, user) = {
                 let inner = mgr.lock();
-                let record = inner.state.base.clone().ok_or("Server hosting isn't installed.")?;
+                let record = inner.state.base.clone().ok_or("Hosting isn't set up.")?;
                 (inner.layout()?, record, inner.base_files.clone(), inner.state.steam_username.clone())
             };
             if record.source == BaseSource::Steamcmd {
-                let user = user.ok_or("No Steam account is saved; reinstall with SteamCMD.")?;
+                let user = user.ok_or("No saved Steam account. Reinstall with SteamCMD.")?;
                 let was_running = mgr.stop_all_and_wait(p)?;
                 // Validating also brings the base up to the current build, and replaces files
                 // rather than rewriting them, so the server folders have to follow.
@@ -743,7 +743,7 @@ impl Manager {
             } else {
                 Err(TaskError {
                     message: format!(
-                        "{} game file{} couldn't be repaired from your Deadlock install. Repair Deadlock with Steam, then verify again.",
+                        "{} game file{} couldn't be repaired. Repair Deadlock in Steam, then verify again.",
                         broken.len(),
                         if broken.len() == 1 { "" } else { "s" }
                     ),
@@ -835,7 +835,7 @@ impl Manager {
             .values()
             .any(|s| s.file.config.id != config.id && s.file.config.port == config.port);
         if clash {
-            return Err(format!("Another server already uses port {}. Pick a different one.", config.port));
+            return Err(format!("Port {} is used by another server.", config.port));
         }
         let s = inner.server(&config.id)?;
         s.file.config = config.clone();
@@ -868,7 +868,7 @@ impl Manager {
         let mut inner = self.lock();
         let layout = inner.layout()?;
         if inner.server(id)?.live() {
-            return Err("Stop the server before deleting it.".into());
+            return Err("Stop the server first.".into());
         }
         inner.servers.remove(id);
         drop(inner);
@@ -892,7 +892,7 @@ impl Manager {
         let (layout, config, base_files, base_stamp, tag, dotnet_version, run) = {
             let mut inner = self.lock();
             if !inner.installed() {
-                return Err("Server hosting isn't installed yet.".into());
+                return Err("Hosting isn't set up.".into());
             }
             if !from_task && inner.task.as_ref().is_some_and(|t| t.kind != TaskKind::Verify) {
                 return Err("Wait for the current install or update to finish.".into());
@@ -921,11 +921,11 @@ impl Manager {
             }
             let config = s.file.config.clone();
             if others.contains(&config.port) {
-                return Err(format!("Another running server uses port {}. Change this server's port in Settings.", config.port));
+                return Err(format!("Port {} is used by another running server.", config.port));
             }
             if !netcfg::port_free(config.port) {
                 return Err(format!(
-                    "Port {} is already in use by another program. Pick a different port in Settings.",
+                    "Port {} is in use by another program.",
                     config.port
                 ));
             }
@@ -971,12 +971,12 @@ impl Manager {
                 // Automated test runs can't answer a UAC prompt.
                 let skip = cfg!(debug_assertions) && std::env::var_os("DEADWORKS_SKIP_FIREWALL").is_some();
                 if !skip && !firewall::rule_exists(&rule) {
-                    mgr.sys_line(&id, "Asking Windows to let this server accept connections (one-time permission prompt)...");
+                    mgr.sys_line(&id, "Opening a Windows Firewall prompt...");
                     if let Err(e) = firewall::allow_program(&rule, &bin.join("deadworks.exe")) {
                         let hint = if config.network == NetworkMode::Sdr {
                             "Players can still join through Steam's relay."
                         } else {
-                            "Players on other PCs may not be able to connect until it's allowed."
+                            "Players on other PCs may not be able to connect."
                         };
                         mgr.sys_line(&id, &format!("{e} {hint}"));
                     }
@@ -1127,8 +1127,7 @@ impl Manager {
             } else if code == 78 || s.rt.unsupported_build {
                 s.rt.state = Some(ServerState::WaitingForDeadworks);
                 let reason = format!(
-                    "Deadworks {tag} doesn't support Deadlock's latest update (build {build}) yet. \
-                     Servers will start again automatically once a Deadworks update is out."
+                    "Deadworks {tag} does not support game build {build}. Servers start again when a compatible release is installed."
                 );
                 s.rt.message = Some(reason.clone());
                 inner.state.hold_reason = Some(reason);
@@ -1137,9 +1136,9 @@ impl Manager {
                 hold_changed = true;
             } else {
                 s.rt.state = Some(ServerState::Crashed);
-                let mut msg = format!("The server stopped unexpectedly (exit code {code}).");
+                let mut msg = format!("Server crashed (exit code {code}).");
                 if uptime < GOOD_AFTER && last_good.as_deref() != Some(build.as_str()) && code != 0 {
-                    msg.push_str(" If this keeps happening right after a Deadlock update, Deadworks may need an update too.");
+                    msg.push_str(" If this started after a Deadlock update, Deadworks may need one too.");
                 }
                 s.rt.message = Some(msg);
             }
@@ -1196,7 +1195,7 @@ impl Manager {
                     _ => return,
                 }
             }
-            mgr.sys_line(&id, "The server didn't stop in time; forcing it.");
+            mgr.sys_line(&id, "Stop timed out; killing the server.");
             proc.terminate();
         });
         Ok(())
@@ -1317,7 +1316,7 @@ impl Manager {
             let s = inner.server(id)?;
             let player = s.rt.players.iter().find(|p| p.slot == slot);
             if !s.rt.moderation && player.is_none() {
-                return Err("That player isn't connected any more.".into());
+                return Err("Player is no longer connected.".into());
             }
             (s.rt.moderation, player.map(|p| p.user_id).filter(|u| *u >= 0))
         };
@@ -1325,7 +1324,7 @@ impl Manager {
             (true, _) => format!("dw_kick #{slot}"),
             (false, Some(user_id)) => format!("kickid {user_id}"),
             (false, None) => {
-                return Err("Couldn't tell this player apart from another with the same name. Run status in the Console tab and kick them with kickid.".into())
+                return Err("Another player has the same name. Use status and kickid in the Console.".into())
             }
         };
         self.send(id, &cmd)
@@ -1334,10 +1333,10 @@ impl Manager {
     /// `minutes` 0 is permanent. Bans are kept by Deadworks and enforced when the player connects.
     pub fn ban(&self, id: &str, steam_id64: &str, minutes: u32, reason: &str) -> Result<(), String> {
         if steam_id64.len() != 17 || !steam_id64.bytes().all(|b| b.is_ascii_digit()) {
-            return Err("That isn't a SteamID.".into());
+            return Err("Invalid SteamID.".into());
         }
         if !self.lock().server(id)?.rt.moderation {
-            return Err("This server doesn't have Deadworks' ban command. Its Admin plugin isn't loaded.".into());
+            return Err("Requires the Admin plugin.".into());
         }
         // The console splits on ';' and treats quotes and '//' specially; a reason needs none of them.
         let reason: String = reason
@@ -1366,7 +1365,7 @@ impl Manager {
             let mut inner = self.lock();
             let s = inner.server(id)?;
             if !s.live() {
-                return Err("Start the server first, then check.".into());
+                return Err("Start the server first.".into());
             }
             s.rt.reachability = Some(Reachability::Checking);
             self.emit_runtime_of(s);
@@ -1446,7 +1445,7 @@ impl Manager {
             let mut inner = self.lock();
             let layout = inner.layout()?;
             if enabled && plugins::entry(&layout, plugin_id).is_none() {
-                return Err("That plugin isn't in the library any more.".into());
+                return Err("Plugin is no longer in the library.".into());
             }
             let s = inner.server(id)?;
             let list = &mut s.file.config.plugins;
@@ -1513,7 +1512,7 @@ impl Manager {
     }
 
     pub fn write_plugin_config(&self, id: &str, plugin_id: &str, text: &str) -> Result<(), String> {
-        serde_json::from_str::<serde_json::Value>(&cfg::strip_jsonc(text)).map_err(|e| format!("That isn't valid JSON: {e}"))?;
+        serde_json::from_str::<serde_json::Value>(&cfg::strip_jsonc(text)).map_err(|e| format!("Invalid JSON: {e}"))?;
         let (path, pid) = self.config_file(id, plugin_id)?;
         fsutil::write_real(&path, text.as_bytes()).map_err(|e| format!("Couldn't save: {e}"))?;
         if pid.is_some() {
@@ -1612,7 +1611,7 @@ impl Manager {
         }
         result.changed = !result.files.is_empty();
         if !running {
-            result.live_reason = Some("The server isn't running. The change applies when it next starts.".into());
+            result.live_reason = Some("Applies on next start.".into());
         } else if result.changed {
             (result.live, result.live_reason) = self.reload_permissions(id);
         } else {
@@ -1627,7 +1626,7 @@ impl Manager {
             return (false, None);
         };
         if let Err(e) = self.send(id, "dw_perm_reload") {
-            return (false, Some(format!("{e} Run dw_perm_reload in the console, or restart the server, to apply the change.")));
+            return (false, Some(format!("{e} Run dw_perm_reload or restart to apply.")));
         }
         let deadline = Instant::now() + Duration::from_secs(4);
         loop {
@@ -1645,7 +1644,7 @@ impl Manager {
                     return (
                         false,
                         Some(format!(
-                            "Saved, but the server could not load it: {detail}. It keeps the previous permissions until this is fixed."
+                            "Saved, but the server couldn't load it: {detail}. Previous permissions stay active."
                         )),
                     );
                 }
@@ -1653,7 +1652,7 @@ impl Manager {
             if Instant::now() >= deadline {
                 return (
                     false,
-                    Some("The server did not confirm it reloaded permissions. Run dw_perm_reload in the console to be sure.".into()),
+                    Some("Saved, but the reload wasn't confirmed. Run dw_perm_reload to be sure.".into()),
                 );
             }
             std::thread::sleep(Duration::from_millis(100));
@@ -1686,7 +1685,7 @@ impl Manager {
         let mut inner = self.lock();
         let layout = inner.layout()?;
         if inner.server(id)?.live() {
-            return Err("Stop the server before removing its content.".into());
+            return Err("Stop the server first.".into());
         }
         content::remove(&layout, id, file_name)?;
         let s = inner.server(id)?;
@@ -1949,7 +1948,7 @@ fn client_manifest(game_dir: &Path) -> Result<(manifest::AppManifest, Vec<DepotF
     let acf = manifest::appmanifest_path_for_game_dir(game_dir).ok_or("Couldn't find Steam's record of your Deadlock install.")?;
     let app = manifest::read_appmanifest(&acf)?;
     if app.updating() {
-        return Err("Steam is still updating Deadlock. Try again once the update has finished.".into());
+        return Err("Steam is updating Deadlock. Try again when it's done.".into());
     }
     let steam_root = crate::connect::steam_root().ok();
     let files = manifest::load_depot_files(&app, &manifest::depotcache_dirs(steam_root.as_deref(), game_dir))?;
@@ -1962,9 +1961,9 @@ fn choose_root(requested: &str) -> Result<PathBuf, String> {
     let p = PathBuf::from(requested.trim());
     if !p.is_absolute() {
         return Err(if cfg!(windows) {
-            "Choose a full folder path, like D:\\Deadworks Servers."
+            "Enter a full path, like D:\\Deadworks Servers."
         } else {
-            "Choose a full folder path, like /home/you/Deadworks Servers."
+            "Enter a full path, like /home/you/Deadworks Servers."
         }
         .into());
     }

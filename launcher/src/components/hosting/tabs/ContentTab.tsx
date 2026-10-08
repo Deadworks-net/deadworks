@@ -14,13 +14,13 @@ const SECTIONS: { kind: Kind; title: string; empty: string; field: "contentAddon
   {
     kind: "addon",
     title: "Addons",
-    empty: "No addons yet. Addons are .vpk files that change models, sounds or UI.",
+    empty: "No addons. An addon is a VPK file that replaces models, sounds or UI.",
     field: "contentAddons",
   },
   {
     kind: "map",
     title: "Maps",
-    empty: "No extra maps yet. Add a map's .vpk file to play on it.",
+    empty: "No custom maps. A map is a single VPK file.",
     field: "extraMaps",
   },
 ];
@@ -73,7 +73,7 @@ export default function ContentTab({ server, actions }: { server: ServerSummary;
   if (loadError && !files) {
     return (
       <div className={styles.tab}>
-        <ErrorNote message={`We couldn't list this server's content: ${loadError}`} actionLabel="Try again" onAction={load} />
+        <ErrorNote message={`Couldn't load content: ${loadError}`} actionLabel="Try again" onAction={load} />
       </div>
     );
   }
@@ -105,7 +105,7 @@ export default function ContentTab({ server, actions }: { server: ServerSummary;
                   <div key={f.fileName} className={styles.listRow}>
                     <Toggle
                       checked={server.config[section.field].includes(f.fileName)}
-                      label={`Use ${f.fileName} on this server`}
+                      label={`Enable ${f.fileName}`}
                       disabled={change.busy}
                       onChange={(next) => setEnabled(f, next)}
                     />
@@ -128,14 +128,14 @@ export default function ContentTab({ server, actions }: { server: ServerSummary;
 
       <div className={ui.hint} style={{ marginTop: 14 }}>
         {isLive(server.runtime.state)
-          ? "Content changes take effect after a restart."
-          : "Enabled maps show up in the map list under Settings."}
+          ? "Changes take effect on restart."
+          : "Enabled maps are added to the map list on the Settings tab."}
       </div>
 
       {removing && (
         <ConfirmDialog
           title={`Remove ${removing.fileName}?`}
-          message="The file is deleted from this server's content folder."
+          message="Deletes the file from this server."
           confirmLabel="Remove"
           danger
           onConfirm={async () => {

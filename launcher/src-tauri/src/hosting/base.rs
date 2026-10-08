@@ -55,7 +55,7 @@ pub fn sync_from_client(
     for f in &todo {
         if !fsutil::join_rel(client_dir, &f.path).is_file() {
             return Err(format!(
-                "Your Deadlock install is missing {}. Verify the game files in Steam, then try again.",
+                "Deadlock is missing {}. Verify its files in Steam.",
                 f.path
             )
             .into());
@@ -67,7 +67,7 @@ pub fn sync_from_client(
         if let Some((free, _)) = super::disk::space(base_dir) {
             if free < needed + SPACE_MARGIN {
                 return Err(format!(
-                    "Not enough free space: the server needs {} more but the drive has {} free.",
+                    "Not enough space: needs {}, {} free.",
                     human_bytes(needed + SPACE_MARGIN),
                     human_bytes(free)
                 )
@@ -117,7 +117,7 @@ pub fn sync_from_client(
     if !modified.is_empty() && !allow_modified {
         return Err(TaskError {
             message: format!(
-                "{} game file{} in your Deadlock install {} been changed by mods. The server needs Steam's original versions.",
+                "{} game file{} {} been changed by mods.",
                 modified.len(),
                 if modified.len() == 1 { "" } else { "s" },
                 if modified.len() == 1 { "has" } else { "have" }
@@ -191,7 +191,7 @@ fn place_file(
 }
 
 fn link_error(path: &str, e: std::io::Error) -> String {
-    format!("Couldn't link {path}: {e}. Linking only works when the server folder is on the same drive as Deadlock.")
+    format!("Couldn't link {path}: {e}. Linking needs the same drive as Deadlock.")
 }
 
 /// Steam's original gameinfo.gi from a client copy that tools have patched.
@@ -241,7 +241,7 @@ pub fn verify(
     mode: CopyMode,
     progress: &Progress,
 ) -> Result<VerifyOutcome, String> {
-    progress.stage("verify", "Checking game files", files.iter().map(|f| f.size).sum(), files.len() as u64);
+    progress.stage("verify", "Verifying game files", files.iter().map(|f| f.size).sum(), files.len() as u64);
     let next = AtomicUsize::new(0);
     let broken = Mutex::new(Vec::<&DepotFile>::new());
     std::thread::scope(|s| {

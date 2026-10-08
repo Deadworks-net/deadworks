@@ -15,10 +15,10 @@ pub const MAX_PLAYERS: u32 = 31;
 pub fn validate(c: &ServerConfig) -> Result<(), String> {
     let name = c.name.trim();
     if name.is_empty() {
-        return Err("Give the server a name.".into());
+        return Err("Enter a server name.".into());
     }
     if name.chars().count() > 64 {
-        return Err("The server name can be at most 64 characters.".into());
+        return Err("Server name is too long (64 max).".into());
     }
     if !cfg_safe(&c.name) {
         return Err("The server name can't contain quotes or line breaks.".into());
@@ -37,7 +37,7 @@ pub fn validate(c: &ServerConfig) -> Result<(), String> {
     }
     for cv in &c.cvars {
         if !is_token(&cv.key) {
-            return Err(format!("'{}' isn't a valid console variable name.", cv.key));
+            return Err(format!("'{}' is not a valid ConVar name.", cv.key));
         }
         if !cfg_safe(&cv.value) {
             return Err(format!("The value for {} can't contain quotes or line breaks.", cv.key));
@@ -45,7 +45,7 @@ pub fn validate(c: &ServerConfig) -> Result<(), String> {
     }
     for arg in &c.launch_args {
         if arg.is_empty() || arg.chars().any(|ch| ch.is_whitespace() || ch == '"') {
-            return Err(format!("Launch argument '{arg}' can't contain spaces or quotes; put each word on its own line."));
+            return Err(format!("Launch parameter '{arg}' cannot contain spaces or quotes."));
         }
     }
     for name in c.content_addons.iter().chain(&c.extra_maps) {
@@ -151,8 +151,8 @@ fn parse_existing(file: &str, existing: Option<&str>) -> Result<Option<Map<Strin
     let Some(text) = existing.filter(|t| !t.trim().is_empty()) else { return Ok(None) };
     match serde_json::from_str::<Value>(&strip_jsonc(text)) {
         Ok(Value::Object(map)) => Ok(Some(map)),
-        Ok(_) => Err(format!("configs\\{file} should hold a {{ ... }} object. Fix or delete the file, then try again.")),
-        Err(e) => Err(format!("configs\\{file} has a mistake in it ({e}). Fix or delete the file, then try again.")),
+        Ok(_) => Err(format!("configs\\{file}  must be a JSON object. Fix or delete it.")),
+        Err(e) => Err(format!("configs\\{file}  is invalid ({e}). Fix or delete it.")),
     }
 }
 

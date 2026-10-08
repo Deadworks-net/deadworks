@@ -243,17 +243,17 @@ const NETWORK_CHOICES: { mode: NetworkMode; title: string; desc: string }[] = [
   {
     mode: "sdr",
     title: "SDR",
-    desc: "Steam Datagram Relay: no router setup, reachable from anywhere. The address changes each time the server restarts.",
+    desc: "Routes traffic through Steam Datagram Relay. Requires no port forwarding. The address changes on every restart.",
   },
   {
     mode: "port_forward",
     title: "Port forwarding",
-    desc: "The best connection and a fixed address. Needs access to your router settings.",
+    desc: "Accepts direct connections on a fixed address. Requires a forwarded UDP port.",
   },
   {
     mode: "lan",
-    title: "Same network (LAN)",
-    desc: "Only people on your home network (same Wi-Fi or router) can join.",
+    title: "LAN",
+    desc: "Accepts connections from the local network only.",
   },
 ];
 
@@ -267,7 +267,7 @@ export function NetworkCards({
   disabled?: boolean;
 }) {
   return (
-    <div className={ui.choiceGrid} role="radiogroup" aria-label="How players connect">
+    <div className={ui.choiceGrid} role="radiogroup" aria-label="Network">
       {NETWORK_CHOICES.map((c) => (
         <button
           key={c.mode}

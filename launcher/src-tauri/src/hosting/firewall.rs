@@ -96,7 +96,7 @@ mod win {
                 let e = std::io::Error::last_os_error();
                 // ERROR_CANCELLED: the user said no to UAC.
                 return Err(if e.raw_os_error() == Some(1223) {
-                    "Windows Firewall wasn't updated (permission declined).".into()
+                    "Firewall permission declined.".into()
                 } else {
                     format!("Couldn't update Windows Firewall: {e}")
                 });

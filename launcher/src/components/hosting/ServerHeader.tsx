@@ -38,9 +38,9 @@ export default function ServerHeader({ server, actions, holdReason }: ServerHead
   const running = state === "running";
   const startBlocked =
     state === "waiting_for_deadworks"
-      ? "Waiting for a Deadworks update that supports the new game version."
+      ? "Waiting for a Deadworks update for the new game build."
       : state === "updating"
-        ? "Updating. The server can start when that's done."
+        ? "Updating..."
         : holdReason;
 
   const doControl = (which: "start" | "stop" | "restart") => {
@@ -62,7 +62,7 @@ export default function ServerHeader({ server, actions, holdReason }: ServerHead
         <span className={styles.name} title={name}>{name}</span>
         <StateBadge state={state} />
         {network.sdrIdChanged && (
-          <span className={cn(ui.pill, ui.pillWarn)}>New address, share it again</span>
+          <span className={cn(ui.pill, ui.pillWarn)}>Address changed</span>
         )}
       </div>
 
@@ -92,7 +92,7 @@ export default function ServerHeader({ server, actions, holdReason }: ServerHead
           <button
             className={running ? ui.btnPrimary : ui.btn}
             disabled={!network.connectCommand || copy.busy}
-            title={network.connectCommand ? network.connectCommand : "Available once the server is running"}
+            title={network.connectCommand ? network.connectCommand : "Server isn't running"}
             onClick={copyConnect}
           >
             Copy connect command
@@ -118,12 +118,12 @@ export default function ServerHeader({ server, actions, holdReason }: ServerHead
           ) : network.connectCommand ? (
             <>
               <code className={styles.connectPreview}>{maskPassword(network.connectCommand)}</code>
-              Players paste this into the in-game console (F7).
+              Run in the game's developer console (F7).
             </>
           ) : state === "starting" ? (
-            "Getting the server's address..."
+            "Getting address..."
           ) : (
-            "Start the server to get an address players can join."
+            "Start the server to get its address."
           )}
         </div>
       )}

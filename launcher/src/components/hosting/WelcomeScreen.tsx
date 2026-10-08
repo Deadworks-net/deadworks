@@ -15,8 +15,7 @@ export default function WelcomeScreen({ onStart }: { onStart: () => void }) {
         </svg>
         <h2 className={styles.welcomeTitle}>Host your own server</h2>
         <p className={styles.welcomeText}>
-          Run a Deadworks server on this PC with your own plugins and settings. Setup takes a few
-          minutes and only happens once.
+          Runs a Deadworks dedicated server on this PC with custom plugins and settings.
         </p>
         <button className={cn(ui.btnPrimary, ui.btnLarge)} onClick={onStart} autoFocus>
           Get started

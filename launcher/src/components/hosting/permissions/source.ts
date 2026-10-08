@@ -99,7 +99,7 @@ export function localSource(serverId: string): PermissionsSource {
       // A structured change is recomputed from the fresh files, so one retry is safe.
       outcome = await attempt(change);
       if (!outcome.stale) return outcome.result;
-      throw new Error("The permission files keep changing while saving. Try again in a moment.");
+      throw new Error("The permission files changed while saving. Try again.");
     },
   };
 }

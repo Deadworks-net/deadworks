@@ -28,7 +28,7 @@ export default function HostingSettingsSection() {
 
   if (!overview) {
     return error ? (
-      <ErrorNote message={`We couldn't load hosting details: ${error}`} actionLabel="Try again" onAction={actions.reload} />
+      <ErrorNote message={`Couldn't load hosting: ${error}`} actionLabel="Try again" onAction={actions.reload} />
     ) : (
       <Loading />
     );
@@ -63,7 +63,7 @@ export default function HostingSettingsSection() {
         {taskView}
         <Row
           title="Not set up"
-          description="Open the HOST tab in the main window to set up hosting and create your first server."
+          description="Set up hosting from the HOST tab."
         />
       </>
     );
@@ -86,7 +86,7 @@ export default function HostingSettingsSection() {
       {check.error && (
         <div style={{ marginTop: 12 }}>
           <ErrorNote
-            message={`We couldn't check for updates: ${check.error}`}
+            message={`Couldn't check for updates: ${check.error}`}
             actionLabel="Try again"
             onAction={() => check.run(actions.checkUpdates)}
           />
@@ -115,10 +115,10 @@ export default function HostingSettingsSection() {
           title="Game files"
           description={
             <>
-              {base.source === "client" ? "Copied from your Deadlock install" : "Downloaded with SteamCMD"}
+              {base.source === "client" ? "Copied from the installed game" : "Downloaded with SteamCMD"}
               {" · "}
               {base.copyMode === "hardlink"
-                ? "linked (Steam can't update Deadlock while a server is running)"
+                ? "hard-linked (blocks Steam updates while a server is running)"
                 : "full copy"}
               {base.modifiedFiles.length > 0 &&
                 ` · ${base.modifiedFiles.length} modded file${base.modifiedFiles.length === 1 ? "" : "s"} kept`}
@@ -146,12 +146,12 @@ export default function HostingSettingsSection() {
         description={`Installed build ${updates.installedBuildId ?? base?.buildId ?? "—"} · available ${updates.availableBuildId ?? "—"}`}
       />
       <Row
-        title={updates.pending ? "An update is ready" : "Automatic updates"}
+        title={updates.pending ? "Update ready" : "Automatic updates"}
         description={
           <>
             {updates.pending
-              ? "It installs when every server is stopped or empty, so nobody's game is interrupted."
-              : "Updates install by themselves, but never in the middle of a game."}
+              ? "Installs when all servers are stopped or empty."
+              : "Updates install automatically while no players are connected."}
             {updates.lastCheck != null && ` Last checked ${formatTimestamp(updates.lastCheck)}.`}
           </>
         }
@@ -166,7 +166,7 @@ export default function HostingSettingsSection() {
             </button>
             {updates.pending && (
               <button className={sw.devBtn} disabled={taskRunning} onClick={() => actions.applyUpdates()}>
-                Apply now
+                Update now
               </button>
             )}
           </>
@@ -178,8 +178,8 @@ export default function HostingSettingsSection() {
         title="Uninstall hosting"
         description={
           anyLive
-            ? "Stop all your servers first."
-            : "Deletes the game files, every server and your plugin library from this PC."
+            ? "Stop all servers first."
+            : "Deletes the game files, all servers and the plugin library."
         }
         control={
           <button
@@ -195,7 +195,7 @@ export default function HostingSettingsSection() {
       {confirmUninstall && (
         <ConfirmDialog
           title="Uninstall hosting?"
-          message={`This deletes ${overview.root ?? "the hosting folder"}, including all ${servers.length} server${servers.length === 1 ? "" : "s"} and your plugin library. Your Deadlock game is not touched.`}
+          message={`Deletes ${overview.root ?? "the hosting folder"}, including ${servers.length} server${servers.length === 1 ? "" : "s"} and the plugin library. Does not affect the installed game.`}
           confirmLabel="Uninstall"
           danger
           onConfirm={async () => {

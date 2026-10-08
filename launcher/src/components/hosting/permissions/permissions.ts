@@ -268,7 +268,7 @@ export function explain(model: Pick<PermissionModel, "roles">, entry: EntryLike,
     if (r?.allowed) return { allowed: true, grant: r.grant, source };
     if (r && !denied) denied = { allowed: false, grant: r.grant, source };
   }
-  return denied || { allowed: false, reason: "No grant matches." };
+  return denied || { allowed: false, reason: "No matching grant." };
 }
 export function describe(result: Verdict): string {
   if (result.reason) return result.reason;
@@ -444,17 +444,17 @@ function readValue(raw: Json, kind: FieldKind, what: string): string | string[] 
   if (raw === null) return null;
   if (kind === "text") {
     if (typeof raw === "string") return raw;
-    throw new Refused(`${what} must be text in quotes, so Deadworks cannot read the file`);
+    throw new Refused(`${what} must be a quoted string`);
   }
   if (kind === "whole") {
     if (typeof raw === "number") return raw;
-    throw new Refused(`${what} must be a whole number, so Deadworks cannot read the file`);
+    throw new Refused(`${what} must be a whole number`);
   }
   if (Array.isArray(raw) && raw.every((v) => v === null || typeof v === "string")) {
     // Blank and null items are dropped (JsonPermissionStore.Clean, PermissionManager.CleanList).
     return raw.filter((v): v is string => typeof v === "string" && v.trim() !== "");
   }
-  throw new Refused(`${what} must be a list like ["a", "b"], so Deadworks cannot read the file`);
+  throw new Refused(`${what} must be a list like ["a", "b"]`);
 }
 
 // One role or player entry: each known property matched ignoring case, the last one written winning.
@@ -462,7 +462,7 @@ function readValue(raw: Json, kind: FieldKind, what: string): string | string[] 
 function readFields(value: Json, fields: Record<string, FieldKind>, file: string, owner: string, notes: Problem[]) {
   const out: Record<string, string | string[] | number | null> = {};
   if (value === null) return out;
-  if (!(value instanceof Members)) throw new Refused(`${owner} must be an object in { }, so Deadworks cannot read the file`);
+  if (!(value instanceof Members)) throw new Refused(`${owner} must be an object`);
   const written: Record<string, string[]> = {};
   for (const [key, raw] of value.list) {
     const field = Object.keys(fields).find((f) => sameName(f, key));
@@ -475,12 +475,12 @@ function readFields(value: Json, fields: Record<string, FieldKind>, file: string
       const spelled = new Set(keys).size > 1 ? ` (written ${quoted(keys)})` : "";
       notes.push({
         level: "warn",
-        text: `${file}: ${owner} sets "${field}" ${keys.length} times${spelled}. Deadworks uses the last one and ignores the rest; so does this tab.`,
+        text: `${file}: ${owner} sets "${field}" ${keys.length} times${spelled}. Only the last one counts.`,
       });
     } else if (keys[0] !== field) {
       notes.push({
         level: "info",
-        text: `${file}: ${owner} writes "${field}" as "${keys[0]}". Deadworks ignores capitals in these names, so it still counts.`,
+        text: `${file}: ${owner} writes "${field}" as "${keys[0]}". Capitals are ignored, so it still counts.`,
       });
     }
   }
@@ -489,7 +489,7 @@ function readFields(value: Json, fields: Record<string, FieldKind>, file: string
 
 function readEntries<T>(root: Json, readOne: (key: string, value: Json) => T): Member<T>[] {
   if (root === null) return [];
-  if (!(root instanceof Members)) throw new Refused("the file must hold one object in { }, so Deadworks cannot read it");
+  if (!(root instanceof Members)) throw new Refused("the file must be one JSON object");
   return root.list.map(([key, value]) => [key, readOne(key, value)]);
 }
 
@@ -522,19 +522,19 @@ const readPlayers = (text: string | null | undefined): Reading<PlayerEntry> =>
 const readOverrides = (text: string | null | undefined): Reading<string | null> =>
   readFileAs(text, (root, notes) => {
     if (root === null) return [];
-    if (!(root instanceof Members)) throw new Refused("the file must hold one object in { }, so Deadworks cannot read it");
+    if (!(root instanceof Members)) throw new Refused("the file must be one JSON object");
     let commands: Member<string | null>[] = [];
     const written: string[] = [];
     for (const [key, value] of root.list) {
       if (!sameName(key, "commands")) continue;
       written.push(key);
       if (value !== null && !(value instanceof Members)) {
-        throw new Refused(`"${key}" must map command names to permission names in { }, so Deadworks cannot read the file`);
+        throw new Refused(`"${key}" must be an object of command: permission pairs`);
       }
       // A later "commands" replaces an earlier one whole; the two are not merged.
       commands = (value?.list ?? []).map(([command, permission]) => {
         if (permission !== null && typeof permission !== "string") {
-          throw new Refused(`"${command}" under "${key}" must be a permission name in quotes, so Deadworks cannot read the file`);
+          throw new Refused(`"${command}" under "${key}" must be a quoted permission name`);
         }
         return [command, permission];
       });
@@ -543,12 +543,12 @@ const readOverrides = (text: string | null | undefined): Reading<string | null> 
       const spelled = new Set(written).size > 1 ? ` (written ${quoted(written)})` : "";
       notes.push({
         level: "warn",
-        text: `overrides.jsonc has "commands" ${written.length} times${spelled}. Deadworks uses the last one and ignores everything in the rest; so does this tab.`,
+        text: `overrides.jsonc has "commands" ${written.length} times${spelled}. Only the last one counts.`,
       });
     } else if (written.length === 1 && written[0] !== "commands") {
       notes.push({
         level: "info",
-        text: `overrides.jsonc writes "commands" as "${written[0]}". Deadworks ignores capitals in that name, so it still counts.`,
+        text: `overrides.jsonc writes "commands" as "${written[0]}". Capitals are ignored, so it still counts.`,
       });
     }
     return commands;
@@ -596,7 +596,7 @@ function grouped<T>(members: Member<T>[], identity: (key: string) => string | nu
   return groups;
 }
 
-// "... 3 times (written "a", "A", "a"). Deadworks uses the last one written "a" and ignores the rest; so does this tab."
+// "... 3 times (written "a", "A", "a"). Only the last one written "a" counts."
 // `why` says how differently written keys come to be the same thing.
 function repeated(what: string, group: Group<unknown>, why = ""): Problem {
   const varied = new Set(group.keys).size > 1;
@@ -608,7 +608,7 @@ function repeated(what: string, group: Group<unknown>, why = ""): Problem {
   const spelled = varied ? ` (written ${quoted(group.keys)})` : "";
   return {
     level: "warn",
-    text: `${what} ${group.keys.length} times${spelled}. ${varied ? why : ""}Deadworks uses ${used} and ignores the rest; so does this tab.`,
+    text: `${what} ${group.keys.length} times${spelled}. ${varied ? why : ""}Only ${used} counts.`,
   };
 }
 
@@ -650,14 +650,14 @@ export function buildModel(files: PermissionFiles): PermissionModel {
   };
   // The server reads these two together (JsonPermissionStore.LoadRolesAsync), so an error in either costs it both.
   const unread =
-    ". Until it is fixed, a running server keeps the roles and players it read before, and one that starts like this gives nobody any role.";
+    ". Until it's fixed, a running server keeps its previous roles and players; a fresh start gives nobody a role.";
   const roleMembers = take(ROLES_PATH, "roles.jsonc", readRoles(files[ROLES_PATH]), unread);
   const playerMembers = take(PLAYERS_PATH, "players.jsonc", readPlayers(files[PLAYERS_PATH]), unread);
   const overrideMembers = take(
     OVERRIDES_PATH,
     "overrides.jsonc",
     readOverrides(files[OVERRIDES_PATH]),
-    ". If the server starts like this, players cannot run any command until it is fixed."
+    ". Until it's fixed, players can't run any command after a restart."
   );
 
   const roleGroups = [...grouped(roleMembers, roleIdentity).values()];
@@ -666,7 +666,7 @@ export function buildModel(files: PermissionFiles): PermissionModel {
     if (g.keys.length > 1) problems.push(repeated(`roles.jsonc defines the role "${g.first}"`, g, "Role names ignore capitals. "));
   }
   if (roleMembers.some(([key]) => roleIdentity(key) === null)) {
-    problems.push({ level: "warn", text: "roles.jsonc has a role with a blank name, which Deadworks skips." });
+    problems.push({ level: "warn", text: "roles.jsonc has a role with a blank name, which is skipped." });
   }
 
   const { people, groups: playerGroups } = peopleOf(playerMembers);
@@ -686,7 +686,7 @@ export function buildModel(files: PermissionFiles): PermissionModel {
     if (g.value === null) {
       problems.push({
         level: "warn",
-        text: `overrides.jsonc sets the command "${command}" to null. Deadworks reads that as "", so anyone can run it.`,
+        text: `overrides.jsonc sets the command "${command}" to null, so anyone can run it.`,
       });
     }
   }
@@ -713,10 +713,10 @@ export function buildModel(files: PermissionFiles): PermissionModel {
   const model: PermissionModel = { roles, players, overrides, plugins, people, problems };
 
   for (const p of people) {
-    if (!p.id) problems.push({ level: "warn", text: `players.jsonc: "${p.key}" is not a SteamID, so Deadworks skips it.` });
+    if (!p.id) problems.push({ level: "warn", text: `players.jsonc: "${p.key}" is not a SteamID and is skipped.` });
     for (const r of p.entry.roles) {
       if (!findRole(roles, r)) {
-        problems.push({ level: "warn", text: `${p.entry.name || p.key} has the role "${r}", which roles.jsonc does not define.` });
+        problems.push({ level: "warn", text: `${p.entry.name || p.key} has the role "${r}", which isn't defined.` });
       }
     }
   }
@@ -725,7 +725,7 @@ export function buildModel(files: PermissionFiles): PermissionModel {
       if (!findRole(roles, parent)) problems.push({ level: "warn", text: `Role "${name}" inherits "${parent}", which does not exist.` });
     }
     if (inheritChain(roles, name).some((n) => sameName(n, name))) {
-      problems.push({ level: "warn", text: `Role "${name}" inherits itself through a loop; Deadworks ignores the loop.` });
+      problems.push({ level: "warn", text: `Role "${name}" inherits itself; the loop is ignored.` });
     }
   }
   // Grants that match nothing any loaded plugin declares: a typo, or a plugin that is not installed.
@@ -780,7 +780,7 @@ function membersToEdit<T>(text: string | null | undefined, label: string, read: 
   const { members, error } = read(text);
   // deadworks-web sends people to its Files tab here; in the launcher the JSON button is the way in.
   if (error) {
-    throw new PermissionError(`${label} has an error, so it was left alone. Fix it with the JSON button first. (${error})`, 409);
+    throw new PermissionError(`${label} has an error (${error}). Fix it with the JSON button first.`, 409);
   }
   return asDictionary(members);
 }
@@ -807,7 +807,7 @@ const optionalImmunity = (value: unknown): number | null => {
   if (value === "" || value == null) return null;
   const n = Number(value);
   if (!Number.isInteger(n) || n < 0 || n > 1000000) {
-    throw new PermissionError("Immunity must be a whole number, or empty to use the roles' immunity.");
+    throw new PermissionError("Immunity must be a whole number or empty.");
   }
   return n;
 };
@@ -887,14 +887,14 @@ export function applyChange(files: PermissionFiles, input: PermissionChange): Pl
       const players = playersToEdit();
       const roles = rolesToEdit();
       const id = parseSteamId(input.steamId);
-      if (!id) throw new PermissionError("Enter a SteamID64, a Steam2 or Steam3 ID, or a steamcommunity.com/profiles/ link.");
+      if (!id) throw new PermissionError("Enter a SteamID or a Steam profile link.");
       // Every key that is this player, however it is written; the server uses the last.
       const mine = (key: string) => parsePlayerKey(key) === id;
       const prior = players.filter(([key]) => mine(key)).pop()?.[1];
-      if (input.adding && prior) throw new PermissionError(`${prior.name || id} is already listed. Edit their row instead.`, 409);
+      if (input.adding && prior) throw new PermissionError(`${prior.name || id} is already listed.`, 409);
       const list = cleanList(input.roles, "roles", () => true);
       const unknown = list.filter((r) => !roles.some(([key]) => isRole(key, r)) && !(prior?.roles || []).includes(r));
-      if (unknown.length) throw new PermissionError(`There is no role called ${unknown.join(", ")}.`);
+      if (unknown.length) throw new PermissionError(`No role named ${unknown.join(", ")}.`);
       const grants = cleanList(input.permissions, "permissions", (g) => Boolean(parseGrant(g)));
       const entry = { name: name(input.name), roles: list, permissions: grants, immunity: optionalImmunity(input.immunity) };
       return {
@@ -907,7 +907,7 @@ export function applyChange(files: PermissionFiles, input: PermissionChange): Pl
       const id = parseSteamId(input.steamId);
       const mine = (key: string) => parsePlayerKey(key) === id;
       const last = id ? players.filter(([key]) => mine(key)).pop() : undefined;
-      if (!last) throw new PermissionError("That player is no longer listed.", 404);
+      if (!last) throw new PermissionError("Player is no longer listed.", 404);
       return {
         files: { [PLAYERS_PATH]: renderPlayerMembers(replaceMembers(players, mine, null)) },
         audit: `removed ${last[1].name || last[0]} (${id})`,
@@ -920,9 +920,9 @@ export function applyChange(files: PermissionFiles, input: PermissionChange): Pl
       const original = input.original ? String(input.original).toLowerCase() : null;
       const defined = (role: string) => roles.some(([key]) => isRole(key, role));
       if (!ROLE_NAME.test(roleName)) throw new PermissionError("Role names can use lowercase letters, numbers, - and _.");
-      if (original && !defined(original)) throw new PermissionError(`There is no role called ${original} any more.`, 404);
-      if (original !== roleName && defined(roleName)) throw new PermissionError(`There is already a role called ${roleName}.`, 409);
-      if (original === DEFAULT_ROLE && roleName !== DEFAULT_ROLE) throw new PermissionError("The default role cannot be renamed.");
+      if (original && !defined(original)) throw new PermissionError(`Role ${original} no longer exists.`, 404);
+      if (original !== roleName && defined(roleName)) throw new PermissionError(`Role ${roleName} already exists.`, 409);
+      if (original === DEFAULT_ROLE && roleName !== DEFAULT_ROLE) throw new PermissionError("The default role can't be renamed.");
       // roles.jsonc first, so it is written before players.jsonc.
       const out: Record<string, string> = { [ROLES_PATH]: "" };
       const renaming = original !== null && original !== roleName;
@@ -955,11 +955,11 @@ export function applyChange(files: PermissionFiles, input: PermissionChange): Pl
       const roleName = String(input.name || "").toLowerCase();
       const mine = (key: string) => isRole(key, roleName);
       const has = (p: PlayerEntry) => p.roles.some((r) => sameName(r, roleName));
-      if (roleName === DEFAULT_ROLE) throw new PermissionError("The default role cannot be deleted; it is what every player gets.");
-      if (!roles.some(([key]) => mine(key))) throw new PermissionError(`There is no role called ${roleName}.`, 404);
+      if (roleName === DEFAULT_ROLE) throw new PermissionError("The default role can't be deleted.");
+      if (!roles.some(([key]) => mine(key))) throw new PermissionError(`No role named ${roleName}.`, 404);
       const holders = peopleOf(players).people.filter((p) => has(p.entry));
       if (holders.length) {
-        throw new PermissionError(`${holders.length} player${holders.length === 1 ? " still has" : "s still have"} this role. Take it from them first.`, 409);
+        throw new PermissionError(`${holders.length} player${holders.length === 1 ? " still has" : "s still have"}  this role.`, 409);
       }
       const left = replaceMembers(roles, mine, null).map(
         ([key, r]): Member<RoleEntry> => [key, { ...r, inherits: r.inherits.filter((x) => !sameName(x, roleName)) }]
@@ -1004,8 +1004,8 @@ export function applyChange(files: PermissionFiles, input: PermissionChange): Pl
         return { files: {}, audit: null, conflict: true, contents: files[input.path] ?? null };
       }
       const { value, error } = parsePermissionFile(input.contents);
-      if (error) throw new PermissionError(`This is not valid JSON: ${error}`);
-      if (!value || typeof value !== "object" || Array.isArray(value)) throw new PermissionError("The file must hold one JSON object.");
+      if (error) throw new PermissionError(`Invalid JSON: ${error}`);
+      if (!value || typeof value !== "object" || Array.isArray(value)) throw new PermissionError("The file must be one JSON object.");
       // A broken overrides.jsonc stops players running any command, so it is held to what the server
       // accepts, under whatever capitals "commands" is written with. null is refused too: the server
       // would take it, as "anyone can run it".

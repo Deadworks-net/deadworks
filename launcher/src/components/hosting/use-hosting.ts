@@ -196,10 +196,10 @@ export function useHosting(): UseHosting {
   const actions = useMemo<HostingActions>(
     () => ({
       reload,
-      install: (options) => runTask("install", "Getting ready", () => hosting.install(options)),
-      verify: () => runTask("verify", "Checking game files", () => hosting.verify()),
-      applyUpdates: () => runTask("update", "Applying updates", () => hosting.applyUpdates()),
-      uninstall: () => runTask("uninstall", "Removing hosting files", () => hosting.uninstall()),
+      install: (options) => runTask("install", "Preparing", () => hosting.install(options)),
+      verify: () => runTask("verify", "Verifying game files", () => hosting.verify()),
+      applyUpdates: () => runTask("update", "Updating", () => hosting.applyUpdates()),
+      uninstall: () => runTask("uninstall", "Uninstalling", () => hosting.uninstall()),
       cancelTask: () => hosting.cancelTask(),
       dismissTask: () => setTask(null),
       steamcmdInput: async (value) => {

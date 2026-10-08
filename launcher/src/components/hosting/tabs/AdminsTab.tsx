@@ -82,7 +82,6 @@ type RoleSave = Omit<Extract<PermissionChange, { action: "role-save" }>, "action
 type OverrideSave = Omit<Extract<PermissionChange, { action: "override-save" }>, "action">;
 
 const displayName = (p: Person): string => p.entry.name || p.id || p.key;
-const plural = (n: number, one: string, many = `${one}s`): string => `${n} ${n === 1 ? one : many}`;
 
 /** Hand-edited files can hold shapes the views don't expect; show a way to fix them instead of a blank window. */
 class ViewBoundary extends Component<
@@ -180,12 +179,12 @@ export default function AdminsTab({ server, prefill, onPrefillUsed }: AdminsTabP
       <div className={styles.tab}>
         {loadError ? (
           <ErrorNote
-            message={`We couldn't read the permission files: ${loadError}`}
+            message={`Couldn't read the permission files: ${loadError}`}
             actionLabel="Try again"
             onAction={reload}
           />
         ) : (
-          <Loading label="Reading the permission files..." />
+          <Loading />
         )}
       </div>
     );
@@ -220,10 +219,10 @@ export default function AdminsTab({ server, prefill, onPrefillUsed }: AdminsTabP
     <div className={css.status}>
       <span>
         {running
-          ? "The server is running. Changes apply right away."
-          : "Changes apply the next time the server starts."}
+          ? "Changes take effect immediately."
+          : "Changes take effect when the server starts."}
         {!snapshot.started &&
-          " Deadworks creates these files the first time the server starts. Until then you see the roles it starts with."}
+          " The files are created on first start. Until then, the default roles are shown."}
       </span>
       <button type="button" className={ui.linkBtn} onClick={reload}>
         Reload
@@ -235,7 +234,7 @@ export default function AdminsTab({ server, prefill, onPrefillUsed }: AdminsTabP
     return (
       <div className={styles.tab}>
         <div className={styles.header}>
-          <span className={styles.headerTitle}>Permissions and admins</span>
+          <span className={styles.headerTitle}>Permissions</span>
         </div>
         {statusLine}
         {unreadable}
@@ -266,7 +265,7 @@ export default function AdminsTab({ server, prefill, onPrefillUsed }: AdminsTabP
   return (
     <div className={styles.tab}>
       <div className={styles.header}>
-        <span className={styles.headerTitle}>Permissions and admins</span>
+        <span className={styles.headerTitle}>Permissions</span>
         <div className={css.views} role="tablist" aria-label="Admin views">
           {VIEWS.map(([key, title]) => (
             <button
@@ -293,7 +292,7 @@ export default function AdminsTab({ server, prefill, onPrefillUsed }: AdminsTabP
       <div className={css.notices}>
         {loadError && (
           <ErrorNote
-            message={`We couldn't read the permission files: ${loadError}`}
+            message={`Couldn't read the permission files: ${loadError}`}
             actionLabel="Try again"
             onAction={reload}
           />
@@ -306,7 +305,7 @@ export default function AdminsTab({ server, prefill, onPrefillUsed }: AdminsTabP
           <ErrorNote
             key={`${i}:${text}`}
             message={text}
-            actionLabel={path ? "Open the file" : undefined}
+            actionLabel={path ? "Open file" : undefined}
             onAction={path ? () => openJson(path) : undefined}
           />
         ))}
@@ -326,7 +325,7 @@ export default function AdminsTab({ server, prefill, onPrefillUsed }: AdminsTabP
               setDialog({
                 kind: "confirm",
                 title: `Remove ${displayName(p)}?`,
-                body: "They lose every role and permission on this server, and keep only what the default role gives everyone.",
+                body: "Removes all roles and permissions from this player. The default role still applies.",
                 action: "Remove",
                 run: () => act({ action: "player-remove", steamId: p.id }),
               })
@@ -344,7 +343,7 @@ export default function AdminsTab({ server, prefill, onPrefillUsed }: AdminsTabP
               setDialog({
                 kind: "confirm",
                 title: `Delete role ${name}?`,
-                body: "Roles that inherit it stop doing so.",
+                body: "Also removes it from every role that inherits it.",
                 action: "Delete",
                 run: () => act({ action: "role-delete", name }),
               })
@@ -417,7 +416,7 @@ function Unreadable({ onJson }: { onJson: (path: string) => void }) {
   return (
     <div className={cn(styles.list, styles.listEmpty)}>
       <div className={css.emptyTitle}>These files can't be shown</div>
-      <p>One of the permission files holds something this tab doesn't understand. Open the file to fix it.</p>
+      <p>A permission file contains a structure this tab cannot display. Edit the file to fix it.</p>
       <div className={css.emptyActions}>
         {[ROLES_PATH, PLAYERS_PATH, OVERRIDES_PATH].map((path) => (
           <button key={path} type="button" className={cn(ui.btn, css.fileBtn)} onClick={() => onJson(path)}>
@@ -570,7 +569,7 @@ function People({
                         type="button"
                         className={cn(ui.btn, ui.btnSmall, ui.btnDanger)}
                         disabled={!writable || !p.id}
-                        title={p.id ? undefined : "This entry is not a SteamID. Fix it in the JSON."}
+                        title={p.id ? undefined : "Not a SteamID. Fix it in the JSON."}
                         onClick={() => onRemove(p)}
                       >
                         Remove
@@ -582,7 +581,7 @@ function People({
               {rows.length === 0 && (
                 <tr>
                   <td colSpan={5} className={css.muted}>
-                    Nobody matches "{query}".
+                    No matches for "{query}".
                   </td>
                 </tr>
               )}
@@ -591,12 +590,11 @@ function People({
         </div>
       ) : (
         <div className={cn(styles.list, styles.listEmpty)}>
-          <div className={css.emptyTitle}>No admins yet</div>
-          <p>Everyone has only what the default role gives. Add yourself or someone you trust.</p>
+          <div className={css.emptyTitle}>No admins</div>
+          <p>All players have the default role only.</p>
           <div className={css.emptyActions}>{addButtons}</div>
         </div>
       )}
-      <div className={ui.hint}>{plural(model.people.length, "listed player")}</div>
     </section>
   );
 }
@@ -655,7 +653,7 @@ function Roles({
                       {grants.length > 0 ? (
                         grants.map((g) => <Grant key={g} value={g} />)
                       ) : (
-                        <None text={chain.length > 0 ? "Nothing of its own" : "None"} />
+                        <None />
                       )}
                     </div>
                   </td>
@@ -698,7 +696,7 @@ function Roles({
                         className={cn(ui.btn, ui.btnSmall, ui.btnDanger)}
                         style={isDefault ? { visibility: "hidden" } : undefined}
                         disabled={!writable || held.length > 0 || isDefault}
-                        title={held.length > 0 ? "Take this role from everyone first" : undefined}
+                        title={held.length > 0 ? "Only works if no player holds the role" : undefined}
                         onClick={() => onDelete(name)}
                       >
                         Delete
@@ -711,7 +709,6 @@ function Roles({
           </tbody>
         </table>
       </div>
-      <div className={ui.hint}>{plural(Object.keys(model.roles).length, "role")}</div>
     </section>
   );
 }
@@ -733,10 +730,9 @@ function Commands({
   if (model.plugins.length === 0) {
     return (
       <div className={cn(styles.list, styles.listEmpty)}>
-        <div className={css.emptyTitle}>No command list yet</div>
+        <div className={css.emptyTitle}>No commands yet</div>
         <p>
-          Deadworks writes the list of commands each plugin adds when the server starts. Start the server once, then
-          come back.
+          The command list is written when the server starts. Start the server once.
         </p>
         <div className={css.emptyActions}>
           <button type="button" className={ui.btn} onClick={() => onJson(OVERRIDES_PATH)}>
@@ -777,7 +773,7 @@ function Commands({
       </SectionHead>
 
       {sections.length === 0 && (
-        <div className={cn(styles.list, styles.listEmpty)}>No command matches "{query}".</div>
+        <div className={cn(styles.list, styles.listEmpty)}>No matches for "{query}".</div>
       )}
 
       {sections.map(({ plugin, commands }) => (
@@ -786,7 +782,7 @@ function Commands({
             <button
               type="button"
               className={cn(ui.btn, ui.btnSmall)}
-              title="Deadworks writes this file. It opens read-only."
+              title="Read-only"
               onClick={() => onJson(plugin.path)}
             >
               JSON
@@ -797,9 +793,9 @@ function Commands({
               <thead>
                 <tr>
                   <th>Command</th>
-                  <th>What it does</th>
-                  <th>Needs</th>
-                  <th>Who can run it</th>
+                  <th>Description</th>
+                  <th>Permission</th>
+                  <th>Access</th>
                   <th aria-label="Override" />
                 </tr>
               </thead>
@@ -828,7 +824,7 @@ function Commands({
                           <div className={css.overridden}>
                             <span
                               className={cn(ui.pill, ui.pillWarn)}
-                              title={`The plugin asks for ${declared || "no permission"}`}
+                              title={`Plugin default: ${declared || "anyone"}`}
                             >
                               Overridden
                             </span>
@@ -842,7 +838,7 @@ function Commands({
                           ) : who.roles.length > 0 ? (
                             who.roles.map((n) => <RoleChip key={n} name={n} model={model} />)
                           ) : (
-                            <None text="Only the server console" />
+                            <None text="Console only" />
                           )}
                           {!who.anyone &&
                             who.people
@@ -872,7 +868,6 @@ function Commands({
               </tbody>
             </table>
           </div>
-          <div className={ui.hint}>{plural(plugin.commands.length, "command")}</div>
         </section>
       ))}
     </>
@@ -916,7 +911,7 @@ function Check({ model }: { model: PermissionModel }) {
                   </option>
                 )
             )}
-            <option value="">Anyone else (default role only)</option>
+            <option value="">Anyone else (default role)</option>
           </select>
         </div>
         <div className={ui.field}>
@@ -943,7 +938,7 @@ function Check({ model }: { model: PermissionModel }) {
         </div>
       </div>
       <div className={css.verdicts}>
-        {name && hits.length === 0 && <p className={css.muted}>No installed plugin has a command called {name}.</p>}
+        {name && hits.length === 0 && <p className={css.muted}>No command named {name}.</p>}
         {hits.map((h) => {
           const r = explain(model, entry, h.permission);
           return (
@@ -982,7 +977,6 @@ function Problems({ problems }: { problems: Problem[] }) {
       ) : (
         <div className={cn(styles.list, styles.listEmpty)}>
           <div className={css.emptyTitle}>No errors</div>
-          <p>The permission files read cleanly, and every role and permission they mention exists.</p>
         </div>
       )}
     </section>
@@ -1071,7 +1065,7 @@ function roleSummary(model: PermissionModel, name: string): string {
     return [`${p.deny ? "no " : ""}${last}${p.prefix ? " (all)" : ""}`];
   });
   const parts = [...(role.inherits || []).map((r) => `all of ${r}`), ...words];
-  if (parts.length === 0) return "Nothing yet";
+  if (parts.length === 0) return "Nothing";
   return parts.length > 5 ? `${parts.slice(0, 5).join(", ")} +${parts.length - 5} more` : parts.join(", ");
 }
 
@@ -1208,7 +1202,7 @@ function PlayerDialog({
                 setName(picked.name);
               }}
             >
-              <option value="">Pick someone who is on the server now</option>
+              <option value="">Select a player</option>
               {candidates.map((c) => (
                 <option key={c.id} value={c.id}>
                   {c.name}
@@ -1236,7 +1230,7 @@ function PlayerDialog({
           <div className={ui.hint}>
             {id
               ? `SteamID64 ${id} · ${steam3(id)}`
-              : "A SteamID64, STEAM_1:0:123, [U:1:246], or a steamcommunity.com/profiles/ link."}
+              : "SteamID64, STEAM_1:0:123, [U:1:246] or a profile link."}
           </div>
         </div>
 
@@ -1249,10 +1243,10 @@ function PlayerDialog({
             className={ui.input}
             value={name}
             onChange={(e) => setName(e.target.value)}
-            placeholder="Who this is"
+            placeholder="Optional"
             maxLength={64}
           />
-          <div className={ui.hint}>A note for you. Deadworks never uses it to match players.</div>
+          <div className={ui.hint}>A label for this entry. Not used to match players.</div>
         </div>
 
         <fieldset className={css.fieldset}>
@@ -1260,22 +1254,22 @@ function PlayerDialog({
           {roleNames.length > 0 ? (
             <RolePicker model={model} names={roleNames} selected={roles} onToggle={toggle} />
           ) : (
-            <div className={ui.hint}>There are no roles besides default yet. Create one on the Roles view.</div>
+            <div className={ui.hint}>No roles yet. Create one under Roles.</div>
           )}
           {roles
             .filter((r) => !roleNames.some((n) => sameName(n, r)))
             .map((r) => (
               <div key={r} className={cn(ui.hint, css.warnText)}>
-                They also have "{r}", which isn't defined.{" "}
+                "{r}" isn't defined.{" "}
                 <button type="button" className={ui.linkBtn} onClick={() => toggle(r)}>
-                  Remove it
+                  Remove
                 </button>
               </div>
             ))}
         </fieldset>
 
         <details className={css.details} open={extrasOpen}>
-          <summary className={ui.label}>Extra permissions and immunity</summary>
+          <summary className={ui.label}>Advanced</summary>
           <div className={ui.field}>
             <label className={ui.label} htmlFor="perm-player-grants">
               Own permissions
@@ -1287,7 +1281,7 @@ function PlayerDialog({
               suggestions={declaredPermissions(model)}
             />
             <div className={ui.hint}>
-              Checked before any role, so a deny here takes something away even if a role gives it.
+              Evaluated before roles. A denial here overrides any role.
             </div>
           </div>
           <div className={ui.field}>
@@ -1346,7 +1340,7 @@ function RoleDialog({
             Cancel
           </button>
           <button type="submit" form={formId} className={ui.btnPrimary} disabled={busy || !roleName.trim()}>
-            {busy ? "Saving..." : "Save role"}
+            {busy ? "Saving..." : "Save"}
           </button>
         </>
       }
@@ -1488,17 +1482,17 @@ function OverrideDialog({
         <label>
           <input type="radio" name="perm-override-mode" checked={mode === "plugin"} onChange={() => setMode("plugin")} />
           <span>
-            As the plugin decides:{" "}
+            Plugin default:{" "}
             {declared ? <code className={css.grant}>{declared}</code> : "anyone"}
           </span>
         </label>
         <label>
           <input type="radio" name="perm-override-mode" checked={mode === "anyone"} onChange={() => setMode("anyone")} />
-          <span>Anyone can run it</span>
+          <span>Anyone</span>
         </label>
         <label>
           <input type="radio" name="perm-override-mode" checked={mode === "custom"} onChange={() => setMode("custom")} />
-          <span>Require a different permission</span>
+          <span>Custom permission</span>
         </label>
         {mode === "custom" && (
           <input
@@ -1518,7 +1512,7 @@ function OverrideDialog({
         </datalist>
       </div>
       <div className={ui.hint}>
-        Saved in overrides.jsonc as <code className={css.grant}>{key}</code>, so it only changes this plugin's command.
+        Saved to overrides.jsonc as <code className={css.grant}>{key}</code>.
       </div>
     </Modal>
   );

@@ -36,7 +36,7 @@ function CrashPanel({ server, lines, actions }: {
   return (
     <div className={styles.crash}>
       <ErrorNote
-        message={restart.error ?? server.runtime.message ?? "The server stopped unexpectedly."}
+        message={restart.error ?? server.runtime.message ?? "Server crashed."}
         actionLabel="Restart"
         onAction={() => restart.run(() => actions.start(server.config.id))}
       />

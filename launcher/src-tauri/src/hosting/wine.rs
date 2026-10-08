@@ -66,7 +66,7 @@ pub fn missing_tools() -> Vec<String> {
     if has("wine") && has("wineserver") {
         Vec::new()
     } else {
-        vec!["Hosting on Linux needs Wine (64-bit, version 9 or newer). Install it with your package manager, then check again.".into()]
+        vec!["Hosting on Linux needs 64-bit Wine 9 or newer.".into()]
     }
 }
 
@@ -128,7 +128,7 @@ pub fn ensure_redist(layout: &Layout, progress: &Progress) -> Result<(), String>
         // It is run as a native program: only the exact file this version was pinned to.
         if !download::hex(&sha512).eq_ignore_ascii_case(DEPOTDOWNLOADER_SHA512) {
             let _ = std::fs::remove_file(&zip);
-            return Err("The DepotDownloader download doesn't match the expected file. Try again later.".into());
+            return Err("DepotDownloader failed its checksum. Try again later.".into());
         }
         fsutil::extract_zip(&zip, &tool_dir)?;
         let _ = std::fs::remove_file(&zip);
@@ -150,7 +150,7 @@ pub fn ensure_redist(layout: &Layout, progress: &Progress) -> Result<(), String>
         .status()
         .map_err(|e| format!("Couldn't run DepotDownloader: {e}"))?;
     if !status.success() || !REDIST_DLLS.iter().all(|f| redist.join(f).is_file()) {
-        return Err("Couldn't download Steam's server files (Steamworks redistributable). Check your connection and try again.".into());
+        return Err("Couldn't download Steam's server files. Check your connection.".into());
     }
     Ok(())
 }

@@ -51,7 +51,7 @@ fn quit_from_tray(app: &tauri::AppHandle) {
     let app = app.clone();
     let plural = if running == 1 { "server is" } else { "servers are" };
     app.dialog()
-        .message(format!("{running} {plural} running. Quitting the launcher stops {}.", if running == 1 { "it" } else { "them" }))
+        .message(format!("{running} {plural} running. Quitting stops {}.", if running == 1 { "it" } else { "them" }))
         .title("Stop servers and quit?")
         .kind(MessageDialogKind::Warning)
         .buttons(MessageDialogButtons::OkCancelCustom("Stop and quit".into(), "Cancel".into()))

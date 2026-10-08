@@ -107,7 +107,7 @@ function SpaceBar({ drive, label, required }: { drive: DriveInfo; label: string;
         />
       </div>
       <div className={styles.spaceLegend}>
-        <span>Needs {formatBytes(required)}</span>
+        <span>Requires {formatBytes(required)}</span>
         <span className={enough ? undefined : ui["textTone-bad"]}>
           {formatBytes(drive.freeBytes)} free on {label}
         </span>
@@ -160,20 +160,20 @@ export default function InstallScreen({ initial, onBack, onInstall }: InstallScr
   const browse = async () => {
     const picked = await open({
       directory: true,
-      title: "Choose where to keep your servers",
+      title: "Choose install location",
       defaultPath: root || undefined,
     });
     if (typeof picked !== "string" || !check || !rules) return;
     setRoot(isBareRoot(picked, check.drives, rules) ? joinFolder(picked, rules) : picked);
   };
 
-  if (checking && !check) return <div className={styles.card}><Loading label="Looking for Deadlock and free space..." /></div>;
+  if (checking && !check) return <div className={styles.card}><Loading label="Checking this PC..." /></div>;
   if (!check || !rules) {
     return (
       <div className={styles.card}>
         <div className={ui.centered}>
           <ErrorNote
-            message={`We couldn't check this PC: ${checkError ?? "unknown error"}`}
+            message={`Couldn't check this PC: ${checkError ?? "unknown error"}`}
             actionLabel="Try again"
             onAction={runCheck}
           />
@@ -192,21 +192,21 @@ export default function InstallScreen({ initial, onBack, onInstall }: InstallScr
 
   const clientUnavailable = !check.clientGameDir
     ? check.steamcmdAvailable
-      ? "We couldn't find Deadlock on this PC."
-      : "We couldn't find Deadlock on this PC. Install it through Steam first, then check again."
+      ? "Deadlock is not installed."
+      : "Deadlock is not installed. Install it through Steam."
     : check.clientUpdating
-      ? "Steam is updating Deadlock right now. Wait for it to finish, then check again."
+      ? "Steam is updating Deadlock. Wait for it to finish."
       : null;
 
   const blocker =
     check.missingTools.length > 0
-      ? "Install what's missing, then check again."
+      ? "Install the missing tools first."
       : !root.trim()
-        ? "Choose where to install."
+        ? "Requires an install location."
         : !isAbsolutePath(root, rules)
-          ? `Pick a full folder path, like ${examplePath(rules)}.`
+          ? `Requires an absolute path, e.g. ${examplePath(rules)}.`
           : drive && drive.freeBytes < required
-            ? `Not enough space on ${driveName}. Pick a ${linux ? "location" : "drive"} with at least ${formatBytes(required)} free.`
+            ? `Not enough space on ${driveName}. Requires ${formatBytes(required)}.`
             : source === "client" && clientUnavailable
               ? clientUnavailable
               : source === "steamcmd" && (!username.trim() || !password)
@@ -229,8 +229,8 @@ export default function InstallScreen({ initial, onBack, onInstall }: InstallScr
         <div className={styles.form}>
           <h2 className={styles.formTitle}>Set up hosting</h2>
           <p className={styles.formSubtitle}>
-            This happens once. Every server you create shares these files.
-            {linux && " On Linux, servers run through Wine."}
+            Installs the game files shared by all servers.
+            {linux && " On Linux, servers run under Wine."}
           </p>
 
           {check.missingTools.length > 0 && (
@@ -274,7 +274,7 @@ export default function InstallScreen({ initial, onBack, onInstall }: InstallScr
             {drive ? (
               <SpaceBar drive={drive} label={driveName} required={required} />
             ) : (
-              root.trim() && <div className={ui.hint}>We can't tell how much space is free there.</div>
+              root.trim() && <div className={ui.hint}>Free space unknown.</div>
             )}
           </div>
 
@@ -284,9 +284,8 @@ export default function InstallScreen({ initial, onBack, onInstall }: InstallScr
               <>
                 {check.clientGameDir && (
                   <div className={styles.detected}>
-                    Copied from your Deadlock install at{" "}
-                    <span className={styles.detectedPath}>{check.clientGameDir}</span>. Only the game's own
-                    files come along, so mods and anything else in that folder stay out of your servers.
+                    Copies the game from{" "}
+                    <span className={styles.detectedPath}>{check.clientGameDir}</span>. Skips mods and other files that are not part of the game.
                   </div>
                 )}
                 {clientUnavailable && (
@@ -307,7 +306,7 @@ export default function InstallScreen({ initial, onBack, onInstall }: InstallScr
                       >
                         <span className={ui.choiceTitle}>Full copy</span>
                         <span className={ui.choiceDesc}>
-                          Uses {formatBytes(fullSize)}. Works independently of your game.
+                          Copies every file. Uses {formatBytes(fullSize)}.
                         </span>
                       </button>
                       <button
@@ -316,9 +315,9 @@ export default function InstallScreen({ initial, onBack, onInstall }: InstallScr
                         className={cn(ui.choice, copyMode === "hardlink" && ui.choiceSelected)}
                         onClick={() => setCopyMode("hardlink")}
                       >
-                        <span className={ui.choiceTitle}>Link to your game files</span>
+                        <span className={ui.choiceTitle}>Hard link</span>
                         <span className={ui.choiceDesc}>
-                          Uses almost no extra space, but Steam can't update Deadlock while a server is running.
+                          Hard-links the files instead of copying them. Steam cannot update Deadlock while a server is running.
                         </span>
                       </button>
                     </div>
@@ -328,7 +327,7 @@ export default function InstallScreen({ initial, onBack, onInstall }: InstallScr
                 {check.steamcmdAvailable && (
                   <div style={{ marginTop: 10 }}>
                     <button className={ui.linkBtn} onClick={() => setSource("steamcmd")}>
-                      Download with SteamCMD instead
+                      Use SteamCMD instead
                     </button>
                   </div>
                 )}
@@ -336,7 +335,7 @@ export default function InstallScreen({ initial, onBack, onInstall }: InstallScr
             ) : (
               <div className={styles.steamBox}>
                 <div className={styles.detected}>
-                  Download the game straight from Steam. You need a Steam account that owns Deadlock.
+                  Downloads the game with SteamCMD. Requires a Steam account that owns Deadlock.
                 </div>
                 <div className={styles.twoCol}>
                   <div className={ui.field}>
@@ -362,11 +361,11 @@ export default function InstallScreen({ initial, onBack, onInstall }: InstallScr
                     />
                   </div>
                 </div>
-                <div className={ui.hint}>Your password is used once to log in and is never stored.</div>
+                <div className={ui.hint}>The password is not stored.</div>
                 {check.clientGameDir && (
                   <div style={{ marginTop: 10 }}>
                     <button className={ui.linkBtn} onClick={() => setSource("client")}>
-                      Copy from my Deadlock install instead
+                      Copy from the installed game instead
                     </button>
                   </div>
                 )}

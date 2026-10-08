@@ -51,16 +51,16 @@ export default function SettingsTab({ server, actions }: { server: ServerSummary
     return Array.from(new Set(all));
   }, [maps, server.config.extraMaps, draft.map]);
 
-  const nameError = !draft.name.trim() ? "Give your server a name." : null;
+  const nameError = !draft.name.trim() ? "Enter a name." : null;
   const playersError =
     !Number.isInteger(draft.maxPlayers) || draft.maxPlayers < 1 || draft.maxPlayers > 31
-      ? "Pick between 1 and 31 players."
+      ? "Must be 1 to 31."
       : null;
   const portError =
     !Number.isInteger(draft.port) || draft.port < 1024 || draft.port > 65535
-      ? "Use a port between 1024 and 65535."
+      ? "Must be 1024 to 65535."
       : draft.port === 27015
-        ? "27015 is Deadlock's own port and can break the game on this PC. Pick another."
+        ? "27015 conflicts with the Deadlock client. Use another port."
         : null;
   const invalid = !!(nameError || playersError || portError);
   const canList = draft.network === "port_forward";
@@ -103,7 +103,6 @@ export default function SettingsTab({ server, actions }: { server: ServerSummary
               {showPassword ? "Hide" : "Show"}
             </button>
           </div>
-          <div className={ui.hint}>Leave empty to let anyone with the address join.</div>
         </div>
 
         <div className={ui.field}>
@@ -161,22 +160,22 @@ export default function SettingsTab({ server, actions }: { server: ServerSummary
             <div className={ui.hint}>
               {draft.network === "port_forward"
                 ? "Forward this UDP port on your router."
-                : "Usually fine as it is. Each server needs its own port."}
+                : "Must be unique per server."}
             </div>
           )}
         </div>
       </div>
 
-      <div className={ui.label} style={{ marginTop: 4 }}>How players connect</div>
+      <div className={ui.label} style={{ marginTop: 4 }}>Network</div>
       <NetworkCards value={draft.network} onChange={(m) => update("network", m)} />
 
       <div style={{ marginTop: 8 }}>
         <SwitchRow
-          title="Show in Deadworks server browser"
+          title="List in server browser"
           description={
             canList
-              ? "Anyone can find and join from the SERVERS tab. Leave off to share the address yourself."
-              : "Only port-forwarded servers can be listed. The browser can't connect to SDR or LAN servers."
+              ? "Lists the server on the SERVERS tab."
+              : "Only works with port forwarding."
           }
           checked={canList && draft.listed}
           disabled={!canList}
@@ -184,13 +183,13 @@ export default function SettingsTab({ server, actions }: { server: ServerSummary
         />
         <SwitchRow
           title="Cheats"
-          description="Allows cheat commands (sv_cheats) for everyone on the server."
+          description="Starts the server with sv_cheats 1."
           checked={draft.cheats}
           onChange={(v) => update("cheats", v)}
         />
         <SwitchRow
-          title="Sleep when empty"
-          description="Uses almost no CPU while nobody is connected."
+          title="Hibernate when empty"
+          description="Stops simulating the game while no players are connected."
           checked={draft.hibernateWhenEmpty}
           onChange={(v) => update("hibernateWhenEmpty", v)}
         />
@@ -201,13 +200,13 @@ export default function SettingsTab({ server, actions }: { server: ServerSummary
           {save.error ? (
             <span className={ui.errorText}>{save.error}</span>
           ) : dirty ? (
-            live ? "Takes effect after a restart." : "You have unsaved changes."
+            live ? "Takes effect on restart." : "Unsaved changes"
           ) : savedNote ? (
-            <span className={ui.noteOk}>{live ? "Saved. Restart the server to apply." : "Saved."}</span>
+            <span className={ui.noteOk}>{live ? "Saved. Takes effect on restart." : "Saved."}</span>
           ) : null}
         </span>
         <button className={ui.btn} disabled={!dirty || save.busy} onClick={reset}>
-          Undo changes
+          Discard
         </button>
         <button className={ui.btnPrimary} disabled={!dirty || invalid || save.busy} onClick={doSave}>
           {save.busy ? "Saving..." : "Save"}

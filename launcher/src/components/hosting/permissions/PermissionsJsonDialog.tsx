@@ -101,11 +101,10 @@ export default function PermissionsJsonDialog({ path, snapshot, source, onClose,
                 <span className={ui.errorText}>{error}</span>
               ) : readOnly ? null : marks.length > 0 ? (
                 <span className={ui.errorText}>
-                  Fix the {marks.length === 1 ? "highlighted problem" : `${marks.length} highlighted problems`} before
-                  saving.
+                  Fix the {marks.length === 1 ? "highlighted error" : `${marks.length} highlighted errors`} to save.
                 </span>
               ) : invalid ? (
-                <span className={ui.errorText}>This is not valid JSON: {invalid}</span>
+                <span className={ui.errorText}>Invalid JSON: {invalid}</span>
               ) : (
                 dirty && <span className={ui.note}>Unsaved changes</span>
               )}
@@ -129,13 +128,13 @@ export default function PermissionsJsonDialog({ path, snapshot, source, onClose,
         <div style={{ height: "100%", display: "flex", flexDirection: "column", gap: 8 }}>
           <div className={ui.hint} style={{ marginTop: 0 }}>
             <span className={ui.mono}>{path}</span>
-            {readOnly && " · Read-only. Deadworks writes this file every time the plugin loads."}
+            {readOnly && " · Read-only, written by Deadworks"}
           </div>
           {conflict && (
             <div className={ui.warnBox} role="alert">
-              <span className={ui.errorBoxText}>{name} changed on disk since you opened it.</span>
+              <span className={ui.errorBoxText}>{name} changed on disk.</span>
               <button type="button" className={cn(ui.btn, ui.btnSmall)} onClick={loadDiskCopy}>
-                Load the copy on disk
+                Reload from disk
               </button>
               <button type="button" className={cn(ui.btn, ui.btnSmall)} onClick={keepMine}>
                 Keep mine
@@ -159,7 +158,7 @@ export default function PermissionsJsonDialog({ path, snapshot, source, onClose,
       {confirmDiscard && (
         <ConfirmDialog
           title="Discard changes?"
-          message={`You have unsaved changes to ${name}.`}
+          message={`Your unsaved changes to ${name} will be lost.`}
           confirmLabel="Discard"
           danger
           onConfirm={async () => onClose()}

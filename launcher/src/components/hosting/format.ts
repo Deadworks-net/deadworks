@@ -42,7 +42,7 @@ const STATE_LABELS: Record<ServerState, string> = {
   running: "Running",
   stopping: "Stopping",
   crashed: "Crashed",
-  waiting_for_deadworks: "Waiting for a Deadworks update",
+  waiting_for_deadworks: "Waiting for Deadworks update",
   updating: "Updating",
 };
 
@@ -77,7 +77,7 @@ export function isLive(state: ServerState): boolean {
 export const NETWORK_LABELS: Record<NetworkMode, string> = {
   sdr: "SDR",
   port_forward: "Port forwarding",
-  lan: "Same network (LAN)",
+  lan: "LAN",
 };
 
 /** Backend errors arrive as plain strings from Rust; anything else is unexpected. */
@@ -88,7 +88,7 @@ export function errorMessage(e: unknown): string {
     const msg = (e as { message: unknown }).message;
     if (typeof msg === "string" && msg) return msg;
   }
-  return "Something went wrong. Please try again.";
+  return "Something went wrong.";
 }
 
 /** Map VPK file name to the map name the server loads. */

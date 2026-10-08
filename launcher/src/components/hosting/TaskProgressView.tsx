@@ -8,9 +8,9 @@ import styles from "./HostPage.module.css";
 
 const TITLES: Record<TaskKind, { running: string; failed: string; done: string }> = {
   install: { running: "Setting up hosting", failed: "Setup didn't finish", done: "Hosting is ready" },
-  update: { running: "Updating", failed: "The update didn't finish", done: "Everything is up to date" },
-  verify: { running: "Checking game files", failed: "The check didn't finish", done: "Game files look good" },
-  uninstall: { running: "Uninstalling", failed: "Uninstall didn't finish", done: "Hosting was removed" },
+  update: { running: "Updating", failed: "Update didn't finish", done: "Up to date" },
+  verify: { running: "Verifying game files", failed: "Verification didn't finish", done: "Game files verified" },
+  uninstall: { running: "Uninstalling", failed: "Uninstall didn't finish", done: "Hosting removed" },
 };
 
 /** Rough time left, from the average rate since the current stage began. */
@@ -34,7 +34,6 @@ function SteamPromptBox({ task, onSubmit }: { task: TaskProgress; onSubmit: (v: 
     return (
       <div className={styles.prompt}>
         <div className={styles.taskLabel}>Approve the login in your Steam Mobile app.</div>
-        <div className={ui.hint}>This continues by itself once you approve it.</div>
       </div>
     );
   }
@@ -69,8 +68,8 @@ function SteamPromptBox({ task, onSubmit }: { task: TaskProgress; onSubmit: (v: 
       </div>
       <div className={ui.hint}>
         {isCode
-          ? "Steam sent this code to your email or shows it in the Steam Mobile app."
-          : "Steam asked for your password again. It is used once and never stored."}
+          ? "Sent by email or shown in the Steam Mobile app."
+          : "Steam requested the password again. It is not stored."}
       </div>
       {error && <div className={ui.errorText}>{error}</div>}
     </form>
@@ -99,8 +98,7 @@ function ModifiedFilesBox({
   return (
     <div className={styles.modified}>
       <div className={styles.taskLabel}>
-        These game files in your Deadlock install were changed by mods. The server needs Steam's original
-        versions.
+        These files differ from Steam's originals. The server requires unmodified files.
       </div>
       <ul className={styles.modifiedList}>
         {shown.map((f) => (
@@ -109,13 +107,13 @@ function ModifiedFilesBox({
         {more > 0 && <li className={styles.modifiedMore}>and {more.toLocaleString()} more</li>}
       </ul>
       {repairStarted && !repair.error && (
-        <div className={ui.noteOk}>Steam is checking your game files. When it finishes, press Retry.</div>
+        <div className={ui.noteOk}>Steam is verifying the game files. Retry once it finishes.</div>
       )}
       {repair.error && <div className={ui.errorText}>{repair.error}</div>}
       <div className={styles.taskActions}>
         {onUseModified && (
           <button className={cn(ui.linkBtn, styles.formActionsLeft)} onClick={onUseModified}>
-            Use them anyway
+            Use anyway
           </button>
         )}
         <button
@@ -232,7 +230,7 @@ export default function TaskProgressView({
     <div className={ui.centered}>
       <div className={styles.task}>
         <div className={styles.taskTitle}>
-          {modified ? "Some game files were changed by mods" : failed ? titles.failed : done ? titles.done : titles.running}
+          {modified ? "Modded game files found" : failed ? titles.failed : done ? titles.done : titles.running}
         </div>
         {modified ? (
           modifiedBox

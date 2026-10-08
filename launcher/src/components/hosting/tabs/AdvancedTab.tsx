@@ -43,7 +43,7 @@ export default function AdvancedTab({ server, actions, onDuplicated, onDeleted }
     !c.key.trim() ? "Enter a name." : hasSpace(c.key.trim()) ? "Names can't contain spaces." : null
   );
   const argErrors = draft.launchArgs.map((a) =>
-    !a.trim() ? "Enter an argument or remove this row." : hasSpace(a.trim()) ? "One argument per row, without spaces." : null
+    !a.trim() ? "Enter a parameter or remove this row." : hasSpace(a.trim()) ? "One parameter per row, no spaces." : null
   );
   const invalid = cvarErrors.some(Boolean) || argErrors.some(Boolean);
 
@@ -60,7 +60,7 @@ export default function AdvancedTab({ server, actions, onDuplicated, onDeleted }
   return (
     <div className={styles.tab}>
       <div className={styles.header} style={{ marginBottom: 6 }}>
-        <span className={styles.headerTitle}>Custom settings (cvars)</span>
+        <span className={styles.headerTitle}>ConVars</span>
         <button
           className={cn(ui.btn, ui.btnSmall)}
           onClick={() => update("cvars", [...draft.cvars, { key: "", value: "" }])}
@@ -69,7 +69,7 @@ export default function AdvancedTab({ server, actions, onDuplicated, onDeleted }
         </button>
       </div>
       <div className={ui.hint} style={{ marginTop: 0, marginBottom: 8 }}>
-        Console variables applied every time the server starts. Most people never need these.
+        Set every time the server starts.
       </div>
       <div className={styles.editTable}>
         {draft.cvars.length === 0 && <div className={ui.note}>None.</div>}
@@ -81,7 +81,7 @@ export default function AdvancedTab({ server, actions, onDuplicated, onDeleted }
                 placeholder="name"
                 value={c.key}
                 spellCheck={false}
-                aria-label={`Setting ${i + 1} name`}
+                aria-label={`ConVar ${i + 1} name`}
                 onChange={(e) =>
                   update("cvars", draft.cvars.map((x, j) => (j === i ? { ...x, key: e.target.value } : x)))
                 }
@@ -91,13 +91,13 @@ export default function AdvancedTab({ server, actions, onDuplicated, onDeleted }
                 placeholder="value"
                 value={c.value}
                 spellCheck={false}
-                aria-label={`Setting ${i + 1} value`}
+                aria-label={`ConVar ${i + 1} value`}
                 onChange={(e) =>
                   update("cvars", draft.cvars.map((x, j) => (j === i ? { ...x, value: e.target.value } : x)))
                 }
               />
               <RemoveButton
-                label="Remove setting"
+                label="Remove ConVar"
                 onClick={() => update("cvars", draft.cvars.filter((_, j) => j !== i))}
               />
             </div>
@@ -107,13 +107,13 @@ export default function AdvancedTab({ server, actions, onDuplicated, onDeleted }
       </div>
 
       <div className={styles.header} style={{ marginTop: 20, marginBottom: 6 }}>
-        <span className={styles.headerTitle}>Launch arguments</span>
+        <span className={styles.headerTitle}>Launch parameters</span>
         <button className={cn(ui.btn, ui.btnSmall)} onClick={() => update("launchArgs", [...draft.launchArgs, ""])}>
           Add
         </button>
       </div>
       <div className={ui.hint} style={{ marginTop: 0, marginBottom: 8 }}>
-        Extra command-line arguments, one per row, e.g. <code className={styles.inlineCode}>-dev</code>.
+        Appended to the command line. One per row, e.g. <code className={styles.inlineCode}>-dev</code>.
       </div>
       <div className={styles.editTable}>
         {draft.launchArgs.length === 0 && <div className={ui.note}>None.</div>}
@@ -124,11 +124,11 @@ export default function AdvancedTab({ server, actions, onDuplicated, onDeleted }
                 className={cn(ui.input, ui.mono, argErrors[i] && ui.inputInvalid)}
                 value={a}
                 spellCheck={false}
-                aria-label={`Launch argument ${i + 1}`}
+                aria-label={`Launch parameter ${i + 1}`}
                 onChange={(e) => update("launchArgs", draft.launchArgs.map((x, j) => (j === i ? e.target.value : x)))}
               />
               <RemoveButton
-                label="Remove argument"
+                label="Remove parameter"
                 onClick={() => update("launchArgs", draft.launchArgs.filter((_, j) => j !== i))}
               />
             </div>
@@ -142,7 +142,7 @@ export default function AdvancedTab({ server, actions, onDuplicated, onDeleted }
         <div className={ui.rowSpread}>
           <div>
             <div className={ui.switchTitle}>Server folder</div>
-            <div className={ui.switchDesc}>Logs, configs and content for this server.</div>
+            <div className={ui.switchDesc}>Contains logs, configs and content.</div>
           </div>
           <button className={ui.btn} onClick={() => misc.run(() => hosting.openFolder(id))}>
             Open folder
@@ -151,7 +151,7 @@ export default function AdvancedTab({ server, actions, onDuplicated, onDeleted }
         <div className={ui.rowSpread}>
           <div>
             <div className={ui.switchTitle}>Duplicate</div>
-            <div className={ui.switchDesc}>A new server with the same settings, plugins and content.</div>
+            <div className={ui.switchDesc}>Creates a new server with the same settings, plugins and content.</div>
           </div>
           <button
             className={ui.btn}
@@ -170,7 +170,7 @@ export default function AdvancedTab({ server, actions, onDuplicated, onDeleted }
           <div>
             <div className={ui.switchTitle}>Delete server</div>
             <div className={ui.switchDesc}>
-              {stopped ? "Removes this server and its settings, logs and content." : "Stop the server before deleting it."}
+              {stopped ? "Deletes the server's settings, logs and content." : "Only works while the server is stopped."}
             </div>
           </div>
           <button
@@ -190,13 +190,13 @@ export default function AdvancedTab({ server, actions, onDuplicated, onDeleted }
             {save.error ? (
               <span className={ui.errorText}>{save.error}</span>
             ) : live ? (
-              "Takes effect after a restart."
+              "Takes effect on restart."
             ) : (
-              "You have unsaved changes."
+              "Unsaved changes"
             )}
           </span>
           <button className={ui.btn} disabled={save.busy} onClick={reset}>
-            Undo changes
+            Discard
           </button>
           <button className={ui.btnPrimary} disabled={invalid || save.busy} onClick={doSave}>
             {save.busy ? "Saving..." : "Save"}
@@ -207,7 +207,7 @@ export default function AdvancedTab({ server, actions, onDuplicated, onDeleted }
       {confirmDelete && (
         <ConfirmDialog
           title={`Delete ${server.config.name}?`}
-          message="This removes the server with its settings, logs and content. Your plugin library is kept. This can't be undone."
+          message="Deletes the server's settings, logs and content. The plugin library is kept. Cannot be undone."
           confirmLabel="Delete"
           danger
           onConfirm={async () => {

@@ -47,7 +47,7 @@ export default function PluginConfigEditor({ serverId, file, running, onClose, o
 
   const problems = useMemo(() => jsoncProblems(text), [text]);
   const dirty = original != null && text !== original;
-  const title = `${file.pluginId} settings`;
+  const title = `${file.pluginId} config`;
 
   const close = () => (dirty ? setConfirmDiscard(true) : onClose());
 
@@ -59,8 +59,8 @@ export default function PluginConfigEditor({ serverId, file, running, onClose, o
         actions={<button className={ui.btn} onClick={onClose}>Close</button>}
       >
         {running
-          ? "This plugin doesn't have any settings."
-          : "Start the server once to create this plugin's settings."}
+          ? "This plugin has no config file."
+          : "The config file is created when the plugin first loads. Start the server once."}
       </Modal>
     );
   }
@@ -69,7 +69,7 @@ export default function PluginConfigEditor({ serverId, file, running, onClose, o
     save.run(async () => {
       await hosting.writePluginConfig(serverId, file.pluginId, text);
       setOriginal(text);
-      setSavedNote(running ? "Saved and applied live." : "Saved. It applies when the server starts.");
+      setSavedNote(running ? "Saved and applied." : "Saved. Takes effect when the server starts.");
       onChanged();
     });
 
@@ -93,8 +93,7 @@ export default function PluginConfigEditor({ serverId, file, running, onClose, o
               <span className={ui.errorText}>{save.error}</span>
             ) : problems.length > 0 ? (
               <span className={ui.errorText}>
-                Fix the {problems.length === 1 ? "highlighted problem" : `${problems.length} highlighted problems`} before
-                saving.
+                Fix the {problems.length === 1 ? "highlighted error" : `${problems.length} highlighted errors`} to save.
               </span>
             ) : (
               savedNote && !dirty && <span className={ui.noteOk}>{savedNote}</span>
@@ -119,7 +118,7 @@ export default function PluginConfigEditor({ serverId, file, running, onClose, o
           <div style={{ flex: 1, minHeight: 0 }}>
             {loadError ? (
               <ErrorNote
-                message={`We couldn't open this file: ${loadError}`}
+                message={`Couldn't open the file: ${loadError}`}
                 actionLabel="Try again"
                 onAction={() => setLoadKey((k) => k + 1)}
               />
@@ -142,7 +141,7 @@ export default function PluginConfigEditor({ serverId, file, running, onClose, o
       {confirmReset && (
         <ConfirmDialog
           title="Reset to defaults?"
-          message={`This deletes your changes to ${file.pluginId}'s settings. The plugin writes fresh defaults the next time it loads.`}
+          message={`Deletes ${file.pluginId}'s config file. The plugin writes a new one with default values when it next loads.`}
           confirmLabel="Reset"
           danger
           onConfirm={async () => {
@@ -157,7 +156,7 @@ export default function PluginConfigEditor({ serverId, file, running, onClose, o
       {confirmDiscard && (
         <ConfirmDialog
           title="Discard changes?"
-          message="You have unsaved changes to these settings."
+          message="Your unsaved changes will be lost."
           confirmLabel="Discard"
           danger
           onConfirm={async () => onClose()}

@@ -24,8 +24,7 @@ export function ManagedHostingCard() {
       <div className={styles.badge}>Deadworks Hosting</div>
       <h3 className={styles.title}>Want it online 24/7?</h3>
       <p className={styles.text}>
-        Rent a server that stays up when your PC is off. Same plugins, updates handled by the team that
-        builds Deadworks, a fixed address to share.
+        Rent a server that stays up when your PC is off. Same plugins, managed updates, a fixed address.
       </p>
       <ul className={styles.points}>
         <li>From {FROM_PRICE}</li>
@@ -69,7 +68,7 @@ export function ManagedHostingRailNote() {
       </button>
       <div className={styles.noteTitle}>Keep it online 24/7</div>
       <div className={styles.noteText}>
-        We host it for you, from {FROM_PRICE}, even when this PC is off.
+        Managed hosting from {FROM_PRICE}.
       </div>
       <button className={cn(ui.linkBtn, styles.noteLink)} onClick={() => open(RENT_URL)}>
         Rent a server →

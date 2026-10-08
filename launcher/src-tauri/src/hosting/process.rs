@@ -464,7 +464,7 @@ mod unix {
             .spawn()
             .map_err(|e| {
                 if e.kind() == std::io::ErrorKind::NotFound {
-                    "Wine isn't installed. Install Wine (64-bit) to host servers on Linux.".to_string()
+                    "Wine (64-bit) isn't installed.".to_string()
                 } else {
                     format!("Couldn't start the server through Wine: {e}")
                 }

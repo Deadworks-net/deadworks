@@ -45,11 +45,11 @@ pub fn import(layout: &Layout, id: &str, paths: &[String], kind: ContentKind) ->
         let stem = name.strip_suffix(".vpk").or_else(|| name.strip_suffix(".VPK")).unwrap_or("");
         if stem.is_empty() || !stem.chars().all(|c| c.is_ascii_alphanumeric() || matches!(c, '_' | '-' | '.')) {
             return Err(format!(
-                "{name} can't be used: content files must be .vpk files named with letters, digits, '_', '-' or '.'."
+                "{name} can't be used. Use a .vpk named with letters, digits, '_', '-' or '.'."
             ));
         }
         if stem.ends_with("_dir") && kind == ContentKind::Map {
-            return Err(format!("{name} is part of a multi-file archive; maps must be a single .vpk file."));
+            return Err(format!("{name} is a multi-part VPK. Maps must be a single file."));
         }
         let mut magic = [0u8; 4];
         std::fs::File::open(src)

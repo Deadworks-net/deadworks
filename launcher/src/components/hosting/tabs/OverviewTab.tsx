@@ -44,7 +44,7 @@ function PlayerTable({
   if (players.length === 0) {
     return (
       <div className={cn(styles.list, styles.listEmpty)}>
-        {running ? "No players connected." : "The server isn't running."}
+        {running ? "No players." : "Server isn't running."}
       </div>
     );
   }
@@ -98,7 +98,7 @@ function PlayerTable({
                       <button
                         className={cn(ui.btn, ui.btnSmall, ui.btnDanger)}
                         disabled={!moderation}
-                        title={moderation ? undefined : "The server's Admin plugin isn't loaded."}
+                        title={moderation ? undefined : "Requires the Admin plugin."}
                         onClick={() => onBan(p)}
                       >
                         Ban
@@ -166,7 +166,6 @@ function BanDialog({
         </>
       }
     >
-      <p style={{ marginBottom: 14 }}>They're removed from the server and can't join again until the ban ends.</p>
 
       <div className={ui.field}>
         <div className={ui.label}>Duration</div>
@@ -208,7 +207,7 @@ function BanDialog({
               autoFocus
             />
             <div className={ui.hint}>
-              {customValid ? `That is ${formatDuration(customMinutes * 60)}.` : "Enter a whole number of minutes."}
+              {customValid ? formatDuration(customMinutes * 60) : "Enter whole minutes."}
             </div>
           </>
         )}
@@ -232,11 +231,11 @@ function BanDialog({
 }
 
 const REACHABILITY: Record<NetworkInfo["reachability"], { text: string; tone: string }> = {
-  unknown: { text: "Not checked yet", tone: "off" },
+  unknown: { text: "Not checked", tone: "off" },
   checking: { text: "Checking...", tone: "busy" },
-  open: { text: "Players can reach your server", tone: "ok" },
-  closed: { text: "Players can't reach it yet. Follow the steps below, then check again.", tone: "bad" },
-  error: { text: "The check didn't work. Try again in a minute.", tone: "warn" },
+  open: { text: "Reachable", tone: "ok" },
+  closed: { text: "Not reachable. Forward the port as described below.", tone: "bad" },
+  error: { text: "Check failed. Try again shortly.", tone: "warn" },
 };
 
 function NetworkCard({ server, actions, running }: { server: ServerSummary; actions: HostingActions; running: boolean }) {
@@ -254,10 +253,10 @@ function NetworkCard({ server, actions, running }: { server: ServerSummary; acti
         <div className={styles.kv}>
           <span className={styles.kvKey}>Address</span>
           <span className={cn(styles.kvValue, ui.mono)}>
-            {net.sdrId ?? <span className={ui.note}>Appears once the server is running</span>}
+            {net.sdrId ?? <span className={ui.note}>Available once running</span>}
           </span>
           <span />
-          <span className={ui.note}>Uses Steam's relay network. This address changes each time the server restarts.</span>
+          <span className={ui.note}>Assigned by Steam Datagram Relay. Changes on every restart.</span>
         </div>
       )}
 
@@ -266,7 +265,7 @@ function NetworkCard({ server, actions, running }: { server: ServerSummary; acti
           <div className={styles.kv}>
             <span className={styles.kvKey}>Public address</span>
             <span className={cn(styles.kvValue, ui.mono)}>
-              {net.publicIp ? `${net.publicIp}:${port}` : <span className={ui.note}>Shown once the server is running</span>}
+              {net.publicIp ? `${net.publicIp}:${port}` : <span className={ui.note}>Available once running</span>}
             </span>
             <span className={styles.kvKey}>Status</span>
             <span className={cn(styles.kvValue, ui.row)}>
@@ -285,7 +284,7 @@ function NetworkCard({ server, actions, running }: { server: ServerSummary; acti
           {check.error && <div className={ui.errorText}>{check.error}</div>}
           {net.reachability !== "open" && (
             <ol className={styles.steps}>
-              <li>Open your router's settings page (often <code>192.168.1.1</code> or <code>192.168.0.1</code>).</li>
+              <li>Open the router's configuration page (usually <code>192.168.1.1</code> or <code>192.168.0.1</code>).</li>
               <li>
                 Forward <strong>UDP</strong> port <code>{port}</code> to this PC
                 {lanIps ? (
@@ -300,9 +299,9 @@ function NetworkCard({ server, actions, running }: { server: ServerSummary; acti
                     )
                   </>
                 ) : null}
-                . You don't need to forward TCP.
+                . TCP is not required.
               </li>
-              <li>Start the server, then press Check.</li>
+              <li>Start the server and click Check.</li>
             </ol>
           )}
         </>
@@ -315,7 +314,7 @@ function NetworkCard({ server, actions, running }: { server: ServerSummary; acti
             {lanIps ? lanIps.map((ip) => <div key={ip}>{`${ip}:${port}`}</div>) : <span className={ui.note}>No network found</span>}
           </span>
           <span />
-          <span className={ui.note}>Only people on the same Wi-Fi or router as this PC can join.</span>
+          <span className={ui.note}>Reachable from the local network only.</span>
         </div>
       )}
     </div>
@@ -359,9 +358,8 @@ export default function OverviewTab({ server, actions, onMakeAdmin }: OverviewTa
           onMakeAdmin={onMakeAdmin}
         />
         <div className={ui.hint}>
-          Bans, gags and mutes can be listed or lifted from the Console tab with{" "}
-          <code className={styles.inlineCode}>dw_bans</code>,{" "}
-          <code className={styles.inlineCode}>dw_unban &lt;steamid&gt;</code>.
+          <code className={styles.inlineCode}>dw_bans</code> lists active bans.{" "}
+          <code className={styles.inlineCode}>dw_unban &lt;steamid&gt;</code> lifts one.
         </div>
       </div>
 
@@ -370,7 +368,7 @@ export default function OverviewTab({ server, actions, onMakeAdmin }: OverviewTa
       {kicking && (
         <ConfirmDialog
           title={`Kick ${kicking.name}?`}
-          message="They're removed from the server but can join again."
+          message="Disconnects the player. The player can rejoin."
           confirmLabel="Kick"
           danger
           onConfirm={() => actions.kick(config.id, kicking.slot)}

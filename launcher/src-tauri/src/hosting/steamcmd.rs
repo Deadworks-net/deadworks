@@ -111,7 +111,7 @@ fn run(layout: &Layout, args: Vec<String>, password: Option<&str>, progress: &Pr
                 Some(p) => p.to_string(),
                 None => {
                     progress.set_prompt(Some(SteamPrompt::Password));
-                    progress.label("Enter your Steam password");
+                    progress.label("Waiting for your Steam password");
                     progress.wait_input()?
                 }
             };
@@ -123,7 +123,7 @@ fn run(layout: &Layout, args: Vec<String>, password: Option<&str>, progress: &Pr
         let is_prompt = lower.trim_end().ends_with(':');
         if is_prompt && ["steam guard code", "two-factor code", "auth code"].iter().any(|k| lower.contains(k)) {
             progress.set_prompt(Some(SteamPrompt::GuardCode));
-            progress.label("Enter your Steam Guard code");
+            progress.label("Waiting for your Steam Guard code");
             let code = progress.wait_input()?;
             progress.set_prompt(None);
             progress.label("Logging in to Steam");
@@ -132,7 +132,7 @@ fn run(layout: &Layout, args: Vec<String>, password: Option<&str>, progress: &Pr
         }
         if lower.contains("confirm the login in the steam mobile app") {
             progress.set_prompt(Some(SteamPrompt::MobileConfirm));
-            progress.label("Approve the login in your Steam Mobile app");
+            progress.label("Waiting for Steam Mobile approval");
         } else if lower.contains("waiting for user info") || lower.contains("logged in ok") {
             progress.set_prompt(None);
         }
@@ -164,15 +164,15 @@ fn failure(output: &[String]) -> Option<String> {
     for l in output.iter().rev() {
         let lower = l.to_ascii_lowercase();
         let msg = if lower.contains("invalid password") {
-            "Steam rejected the password. Check it and try again."
+            "Wrong Steam password."
         } else if lower.contains("no subscription") {
             "This Steam account doesn't own Deadlock."
         } else if lower.contains("rate limit") {
-            "Steam is rate-limiting logins from this PC. Wait a few minutes and try again."
+            "Too many login attempts. Try again in a few minutes."
         } else if lower.contains("invalid login auth code") || lower.contains("two-factor code mismatch") || lower.contains("invalid auth code") {
-            "The Steam Guard code was wrong or expired. Try again with a new code."
+            "Steam Guard code was wrong or expired."
         } else if lower.contains("not enough disk space") || lower.contains("disk space") {
-            "Not enough free disk space for Deadlock."
+            "Not enough disk space."
         } else if lower.starts_with("error!") || lower.contains("failed (") {
             return Some(format!("SteamCMD failed: {}", l.trim()));
         } else {
@@ -365,7 +365,7 @@ mod tests {
     #[test]
     fn failures_read_as_sentences() {
         let out = vec!["Logging in user 'x' to Steam Public...".to_string(), "FAILED (Invalid Password)".into()];
-        assert_eq!(failure(&out).unwrap(), "Steam rejected the password. Check it and try again.");
+        assert_eq!(failure(&out).unwrap(), "Wrong Steam password.");
         let out = vec!["ERROR! Failed to install app '1422450' (No subscription)".to_string()];
         assert_eq!(failure(&out).unwrap(), "This Steam account doesn't own Deadlock.");
     }

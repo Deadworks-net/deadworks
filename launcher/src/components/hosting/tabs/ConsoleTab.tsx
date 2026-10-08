@@ -55,7 +55,7 @@ export function ConsoleLog({ lines, filter }: { lines: KeyedLine[]; filter?: str
     <div className={styles.consoleWrap}>
       <div ref={logRef} className={styles.consoleLog} onScroll={onScroll} role="log" aria-live="off">
         {visible.length === 0 ? (
-          <div className={styles.lineSys}>{filter?.trim() ? "No lines match your filter." : "Nothing here yet."}</div>
+          <div className={styles.lineSys}>{filter?.trim() ? "No matching lines." : "No output yet."}</div>
         ) : (
           visible.map((l) => <Line key={l.key} line={l} />)
         )}
@@ -117,7 +117,7 @@ export default function ConsoleTab({ server, log: con }: { server: ServerSummary
         <input
           className={ui.input}
           style={{ maxWidth: 260 }}
-          placeholder="Filter lines..."
+          placeholder="Filter"
           value={filter}
           onChange={(e) => setFilter(e.target.value)}
           aria-label="Filter console lines"
@@ -127,13 +127,13 @@ export default function ConsoleTab({ server, log: con }: { server: ServerSummary
         </span>
       </div>
 
-      {con.error && <ErrorNote message={`Older output couldn't be loaded: ${con.error}`} />}
+      {con.error && <ErrorNote message={`Couldn't load earlier output: ${con.error}`} />}
       {con.loading ? <Loading /> : <ConsoleLog lines={con.lines} filter={filter} />}
 
       <div className={styles.consoleInput}>
         <input
           className={cn(ui.input, ui.mono)}
-          placeholder={live ? "Type a command, e.g. status" : "Start the server to send commands"}
+          placeholder={live ? "Command, e.g. status" : "Start the server to send commands"}
           value={command}
           disabled={!live}
           onChange={(e) => {

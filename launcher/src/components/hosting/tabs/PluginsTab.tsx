@@ -86,7 +86,7 @@ export default function PluginsTab({ server, actions, dropActive }: PluginsTabPr
         }
         setImportNote(
           added.length === 0
-            ? "No plugins were found in what you picked."
+            ? "No plugins found."
             : `Added ${added.map((p) => p.id).join(", ")}.`
         );
       }),
@@ -162,13 +162,12 @@ export default function PluginsTab({ server, actions, dropActive }: PluginsTabPr
       {importNote && <div className={ui.noteOk} style={{ marginBottom: 10 }}>{importNote}</div>}
 
       {libraryError && !library ? (
-        <ErrorNote message={`We couldn't load your plugins: ${libraryError}`} actionLabel="Try again" onAction={loadLibrary} />
+        <ErrorNote message={`Couldn't load plugins: ${libraryError}`} actionLabel="Try again" onAction={loadLibrary} />
       ) : !library ? (
         <Loading />
       ) : library.length === 0 ? (
         <div className={cn(styles.list, styles.listEmpty)}>
-          No plugins yet. Drag <strong>.dll</strong> or <strong>.zip</strong> files onto this window, or use Add
-          plugins.
+          No plugins. Drop <strong>.dll</strong> or <strong>.zip</strong> files here, or use Add plugins.
         </div>
       ) : (
         <div className={styles.list}>
@@ -179,7 +178,7 @@ export default function PluginsTab({ server, actions, dropActive }: PluginsTabPr
               <div key={p.id} className={styles.listRow}>
                 <Toggle
                   checked={enabled}
-                  label={`Use ${p.id} on this server`}
+                  label={`Enable ${p.id}`}
                   disabled={toggling.busy}
                   onChange={(next) => toggling.run(() => actions.setPluginEnabled(id, p.id, next))}
                 />
@@ -192,7 +191,7 @@ export default function PluginsTab({ server, actions, dropActive }: PluginsTabPr
                 <button
                   className={cn(ui.btn, ui.btnSmall)}
                   disabled={!enabled}
-                  title={enabled ? undefined : "Turn the plugin on to configure it"}
+                  title={enabled ? undefined : "Requires the plugin to be enabled"}
                   onClick={() =>
                     setEditing(config ?? { pluginId: p.id, exists: false, path: "" })
                   }
@@ -210,8 +209,8 @@ export default function PluginsTab({ server, actions, dropActive }: PluginsTabPr
 
       <div className={ui.hint} style={{ marginTop: 10 }}>
         {running
-          ? "Changes apply right away. No restart needed."
-          : "Plugins you add are available to all your servers. Turn them on per server here."}
+          ? "Plugins load and unload without a restart."
+          : "The library is shared by all servers. Plugins are enabled per server."}
       </div>
 
       {dragging && (
@@ -238,7 +237,7 @@ export default function PluginsTab({ server, actions, dropActive }: PluginsTabPr
       {removing && (
         <ConfirmDialog
           title={`Remove ${removing.id}?`}
-          message="This removes the plugin from your library and switches it off on every server that uses it."
+          message="Removes the plugin from the library and disables it on every server."
           confirmLabel="Remove"
           danger
           onConfirm={async () => {
