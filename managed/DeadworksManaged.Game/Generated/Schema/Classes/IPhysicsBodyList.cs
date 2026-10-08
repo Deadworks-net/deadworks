@@ -7,7 +7,7 @@ using System.Numerics;
 namespace DeadworksManaged.Game;
 
 public static partial class Schema {
-	/// <summary>Schema class <c>IPhysicsBodyList</c>. <see href="https://deadworks.net/db/schema/client/IPhysicsBodyList">Modding database</see>.</summary>
+	/// <summary>Schema class <c>IPhysicsBodyList</c>. <see href="https://deadworks.net/db/schema/server/IPhysicsBodyList">Modding database</see>.</summary>
 	public partial class IPhysicsBodyList : SchemaObject, ISchemaClass<IPhysicsBodyList> {
 		internal IPhysicsBodyList() { }
 		static IPhysicsBodyList ISchemaClass<IPhysicsBodyList>.New() => new();

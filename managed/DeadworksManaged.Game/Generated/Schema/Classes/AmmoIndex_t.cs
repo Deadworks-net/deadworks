@@ -7,7 +7,7 @@ using System.Numerics;
 namespace DeadworksManaged.Game;
 
 public static partial class Schema {
-	/// <summary>Schema class <c>AmmoIndex_t</c>. <see href="https://deadworks.net/db/schema/client/AmmoIndex_t">Modding database</see>.</summary>
+	/// <summary>Schema class <c>AmmoIndex_t</c>. <see href="https://deadworks.net/db/schema/server/AmmoIndex_t">Modding database</see>.</summary>
 	public partial class AmmoIndex_t : SchemaObject, ISchemaClass<AmmoIndex_t> {
 		internal AmmoIndex_t() { }
 		static AmmoIndex_t ISchemaClass<AmmoIndex_t>.New() => new();

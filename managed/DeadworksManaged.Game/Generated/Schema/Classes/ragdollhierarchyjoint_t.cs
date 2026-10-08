@@ -7,7 +7,7 @@ using System.Numerics;
 namespace DeadworksManaged.Game;
 
 public static partial class Schema {
-	/// <summary>Schema class <c>ragdollhierarchyjoint_t</c>. <see href="https://deadworks.net/db/schema/client/ragdollhierarchyjoint_t">Modding database</see>.</summary>
+	/// <summary>Schema class <c>ragdollhierarchyjoint_t</c>. <see href="https://deadworks.net/db/schema/server/ragdollhierarchyjoint_t">Modding database</see>.</summary>
 	public partial class ragdollhierarchyjoint_t : SchemaObject, ISchemaClass<ragdollhierarchyjoint_t> {
 		internal ragdollhierarchyjoint_t() { }
 		static ragdollhierarchyjoint_t ISchemaClass<ragdollhierarchyjoint_t>.New() => new();

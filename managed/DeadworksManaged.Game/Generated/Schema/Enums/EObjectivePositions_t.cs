@@ -6,7 +6,7 @@
 namespace DeadworksManaged.Game;
 
 public static partial class Schema {
-	/// <summary>Schema enum <c>EObjectivePositions_t</c>. <see href="https://deadworks.net/db/schema/client/EObjectivePositions_t">Modding database</see>.</summary>
+	/// <summary>Schema enum <c>EObjectivePositions_t</c>. <see href="https://deadworks.net/db/schema/server/EObjectivePositions_t">Modding database</see>.</summary>
 	public enum EObjectivePositions_t : int {
 		EObjectivePosition_Invalid = -1,
 		EObjectivePosition_CrateGarden = 0,

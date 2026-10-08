@@ -7,7 +7,7 @@ using System.Numerics;
 namespace DeadworksManaged.Game;
 
 public static partial class Schema {
-	/// <summary>Schema class <c>NPCStatusEffectMap_t</c>. <see href="https://deadworks.net/db/schema/client/NPCStatusEffectMap_t">Modding database</see>.</summary>
+	/// <summary>Schema class <c>NPCStatusEffectMap_t</c>. <see href="https://deadworks.net/db/schema/server/NPCStatusEffectMap_t">Modding database</see>.</summary>
 	public partial class NPCStatusEffectMap_t : SchemaObject, ISchemaClass<NPCStatusEffectMap_t> {
 		internal NPCStatusEffectMap_t() { }
 		static NPCStatusEffectMap_t ISchemaClass<NPCStatusEffectMap_t>.New() => new();

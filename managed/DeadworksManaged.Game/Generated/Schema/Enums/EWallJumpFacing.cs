@@ -6,7 +6,7 @@
 namespace DeadworksManaged.Game;
 
 public static partial class Schema {
-	/// <summary>Schema enum <c>EWallJumpFacing</c>. <see href="https://deadworks.net/db/schema/client/EWallJumpFacing">Modding database</see>.</summary>
+	/// <summary>Schema enum <c>EWallJumpFacing</c>. <see href="https://deadworks.net/db/schema/server/EWallJumpFacing">Modding database</see>.</summary>
 	public enum EWallJumpFacing : ushort {
 		NotOnWall = 0,
 		WallToFront = 1,

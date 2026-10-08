@@ -7,7 +7,7 @@ using System.Numerics;
 namespace DeadworksManaged.Game;
 
 public static partial class Schema {
-	/// <summary>Schema class <c>NPCHitReactClip_t</c>. <see href="https://deadworks.net/db/schema/client/NPCHitReactClip_t">Modding database</see>.</summary>
+	/// <summary>Schema class <c>NPCHitReactClip_t</c>. <see href="https://deadworks.net/db/schema/server/NPCHitReactClip_t">Modding database</see>.</summary>
 	public partial class NPCHitReactClip_t : SchemaObject, ISchemaClass<NPCHitReactClip_t> {
 		internal NPCHitReactClip_t() { }
 		static NPCHitReactClip_t ISchemaClass<NPCHitReactClip_t>.New() => new();

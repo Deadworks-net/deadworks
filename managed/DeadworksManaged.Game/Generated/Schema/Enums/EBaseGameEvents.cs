@@ -6,7 +6,7 @@
 namespace DeadworksManaged.Game;
 
 public static partial class Schema {
-	/// <summary>Schema enum <c>EBaseGameEvents</c>. <see href="https://deadworks.net/db/schema/client/EBaseGameEvents">Modding database</see>.</summary>
+	/// <summary>Schema enum <c>EBaseGameEvents</c>. <see href="https://deadworks.net/db/schema/server/EBaseGameEvents">Modding database</see>.</summary>
 	public enum EBaseGameEvents : uint {
 		GE_VDebugGameSessionIDEvent = 200,
 		GE_PlaceDecalEvent = 201,

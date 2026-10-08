@@ -6,7 +6,7 @@
 namespace DeadworksManaged.Game;
 
 public static partial class Schema {
-	/// <summary>Schema enum <c>Class_T</c>. <see href="https://deadworks.net/db/schema/client/Class_T">Modding database</see>.</summary>
+	/// <summary>Schema enum <c>Class_T</c>. <see href="https://deadworks.net/db/schema/server/Class_T">Modding database</see>.</summary>
 	public enum Class_T : uint {
 		CLASS_NONE = 0,
 		CLASS_PLAYER = 1,

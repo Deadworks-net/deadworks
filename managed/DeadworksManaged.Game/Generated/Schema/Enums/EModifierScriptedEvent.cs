@@ -6,7 +6,7 @@
 namespace DeadworksManaged.Game;
 
 public static partial class Schema {
-	/// <summary>Schema enum <c>EModifierScriptedEvent</c>. <see href="https://deadworks.net/db/schema/client/EModifierScriptedEvent">Modding database</see>.</summary>
+	/// <summary>Schema enum <c>EModifierScriptedEvent</c>. <see href="https://deadworks.net/db/schema/server/EModifierScriptedEvent">Modding database</see>.</summary>
 	public enum EModifierScriptedEvent : uint {
 		MODIFIER_SCRIPTED_EVENT_INVALID = 0,
 		MODIFIER_SCRIPTED_EVENT_COUNT = 1,

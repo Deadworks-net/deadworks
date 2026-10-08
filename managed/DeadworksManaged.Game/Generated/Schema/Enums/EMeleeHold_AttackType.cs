@@ -6,7 +6,7 @@
 namespace DeadworksManaged.Game;
 
 public static partial class Schema {
-	/// <summary>Schema enum <c>EMeleeHold_AttackType</c>. <see href="https://deadworks.net/db/schema/client/EMeleeHold_AttackType">Modding database</see>.</summary>
+	/// <summary>Schema enum <c>EMeleeHold_AttackType</c>. <see href="https://deadworks.net/db/schema/server/EMeleeHold_AttackType">Modding database</see>.</summary>
 	public enum EMeleeHold_AttackType : uint {
 		EAttackType_None = 0,
 		EAttackType_Light = 1,

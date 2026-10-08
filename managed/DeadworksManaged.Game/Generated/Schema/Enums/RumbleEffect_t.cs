@@ -6,7 +6,7 @@
 namespace DeadworksManaged.Game;
 
 public static partial class Schema {
-	/// <summary>Schema enum <c>RumbleEffect_t</c>. <see href="https://deadworks.net/db/schema/client/RumbleEffect_t">Modding database</see>.</summary>
+	/// <summary>Schema enum <c>RumbleEffect_t</c>. <see href="https://deadworks.net/db/schema/server/RumbleEffect_t">Modding database</see>.</summary>
 	public enum RumbleEffect_t : int {
 		RUMBLE_INVALID = -1,
 		RUMBLE_STOP_ALL = 0,

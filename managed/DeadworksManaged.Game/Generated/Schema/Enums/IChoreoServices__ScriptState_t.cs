@@ -6,7 +6,7 @@
 namespace DeadworksManaged.Game;
 
 public static partial class Schema {
-	/// <summary>Schema enum <c>IChoreoServices::ScriptState_t</c>. <see href="https://deadworks.net/db/schema/client/IChoreoServices%3A%3AScriptState_t">Modding database</see>.</summary>
+	/// <summary>Schema enum <c>IChoreoServices::ScriptState_t</c>. <see href="https://deadworks.net/db/schema/server/IChoreoServices%3A%3AScriptState_t">Modding database</see>.</summary>
 	public enum IChoreoServices__ScriptState_t : uint {
 		SCRIPT_PLAYING = 0,
 		SCRIPT_WAIT = 1,

@@ -6,7 +6,7 @@
 namespace DeadworksManaged.Game;
 
 public static partial class Schema {
-	/// <summary>Schema enum <c>PointTemplateOwnerSpawnGroupType_t</c>. <see href="https://deadworks.net/db/schema/client/PointTemplateOwnerSpawnGroupType_t">Modding database</see>.</summary>
+	/// <summary>Schema enum <c>PointTemplateOwnerSpawnGroupType_t</c>. <see href="https://deadworks.net/db/schema/server/PointTemplateOwnerSpawnGroupType_t">Modding database</see>.</summary>
 	public enum PointTemplateOwnerSpawnGroupType_t : uint {
 		INSERT_INTO_POINT_TEMPLATE_SPAWN_GROUP = 0,
 		INSERT_INTO_CURRENTLY_ACTIVE_SPAWN_GROUP = 1,

@@ -7,7 +7,7 @@ using System.Numerics;
 namespace DeadworksManaged.Game;
 
 public static partial class Schema {
-	/// <summary>Schema class <c>DOFDesc_t</c>. <see href="https://deadworks.net/db/schema/client/DOFDesc_t">Modding database</see>.</summary>
+	/// <summary>Schema class <c>DOFDesc_t</c>. <see href="https://deadworks.net/db/schema/server/DOFDesc_t">Modding database</see>.</summary>
 	public partial class DOFDesc_t : SchemaObject, ISchemaClass<DOFDesc_t> {
 		internal DOFDesc_t() { }
 		static DOFDesc_t ISchemaClass<DOFDesc_t>.New() => new();

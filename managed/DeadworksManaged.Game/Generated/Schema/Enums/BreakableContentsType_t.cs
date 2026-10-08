@@ -6,7 +6,7 @@
 namespace DeadworksManaged.Game;
 
 public static partial class Schema {
-	/// <summary>Schema enum <c>BreakableContentsType_t</c>. <see href="https://deadworks.net/db/schema/client/BreakableContentsType_t">Modding database</see>.</summary>
+	/// <summary>Schema enum <c>BreakableContentsType_t</c>. <see href="https://deadworks.net/db/schema/server/BreakableContentsType_t">Modding database</see>.</summary>
 	public enum BreakableContentsType_t : uint {
 		BC_DEFAULT = 0,
 		BC_EMPTY = 1,

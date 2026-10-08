@@ -6,7 +6,7 @@
 namespace DeadworksManaged.Game;
 
 public static partial class Schema {
-	/// <summary>Schema enum <c>CameraOperation</c>. <see href="https://deadworks.net/db/schema/client/CameraOperation">Modding database</see>.</summary>
+	/// <summary>Schema enum <c>CameraOperation</c>. <see href="https://deadworks.net/db/schema/server/CameraOperation">Modding database</see>.</summary>
 	public enum CameraOperation : uint {
 		k_ECameraOp_Maintain = 2,
 		k_ECameraOp_Approach = 3,

@@ -6,7 +6,7 @@
 namespace DeadworksManaged.Game;
 
 public static partial class Schema {
-	/// <summary>Schema enum <c>ETier3Phase_t</c>. <see href="https://deadworks.net/db/schema/client/ETier3Phase_t">Modding database</see>.</summary>
+	/// <summary>Schema enum <c>ETier3Phase_t</c>. <see href="https://deadworks.net/db/schema/server/ETier3Phase_t">Modding database</see>.</summary>
 	public enum ETier3Phase_t : uint {
 		ETier3Phase_Phase1 = 0,
 		ETier3Phase_Phase2 = 1,

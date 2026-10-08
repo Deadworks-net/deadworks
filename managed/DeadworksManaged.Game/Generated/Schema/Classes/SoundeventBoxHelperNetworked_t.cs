@@ -7,7 +7,7 @@ using System.Numerics;
 namespace DeadworksManaged.Game;
 
 public static partial class Schema {
-	/// <summary>Schema class <c>SoundeventBoxHelperNetworked_t</c>. <see href="https://deadworks.net/db/schema/client/SoundeventBoxHelperNetworked_t">Modding database</see>.</summary>
+	/// <summary>Schema class <c>SoundeventBoxHelperNetworked_t</c>. <see href="https://deadworks.net/db/schema/server/SoundeventBoxHelperNetworked_t">Modding database</see>.</summary>
 	public partial class SoundeventBoxHelperNetworked_t : SchemaObject, ISchemaClass<SoundeventBoxHelperNetworked_t> {
 		internal SoundeventBoxHelperNetworked_t() { }
 		static SoundeventBoxHelperNetworked_t ISchemaClass<SoundeventBoxHelperNetworked_t>.New() => new();

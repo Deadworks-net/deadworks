@@ -6,7 +6,7 @@
 namespace DeadworksManaged.Game;
 
 public static partial class Schema {
-	/// <summary>Schema enum <c>ModifierDebuffType_t</c>. <see href="https://deadworks.net/db/schema/client/ModifierDebuffType_t">Modding database</see>.</summary>
+	/// <summary>Schema enum <c>ModifierDebuffType_t</c>. <see href="https://deadworks.net/db/schema/server/ModifierDebuffType_t">Modding database</see>.</summary>
 	public enum ModifierDebuffType_t : uint {
 		MODIFIER_DEBUFF_ENEMY_TEAM_ONLY = 0,
 		MODIFIER_DEBUFF_YES = 1,

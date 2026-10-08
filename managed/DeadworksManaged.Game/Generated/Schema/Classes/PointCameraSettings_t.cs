@@ -7,7 +7,7 @@ using System.Numerics;
 namespace DeadworksManaged.Game;
 
 public static partial class Schema {
-	/// <summary>Schema class <c>PointCameraSettings_t</c>. <see href="https://deadworks.net/db/schema/client/PointCameraSettings_t">Modding database</see>.</summary>
+	/// <summary>Schema class <c>PointCameraSettings_t</c>. <see href="https://deadworks.net/db/schema/server/PointCameraSettings_t">Modding database</see>.</summary>
 	public partial class PointCameraSettings_t : SchemaObject, ISchemaClass<PointCameraSettings_t> {
 		internal PointCameraSettings_t() { }
 		static PointCameraSettings_t ISchemaClass<PointCameraSettings_t>.New() => new();

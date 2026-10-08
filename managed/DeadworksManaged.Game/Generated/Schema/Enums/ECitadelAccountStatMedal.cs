@@ -6,7 +6,7 @@
 namespace DeadworksManaged.Game;
 
 public static partial class Schema {
-	/// <summary>Schema enum <c>ECitadelAccountStatMedal</c>. <see href="https://deadworks.net/db/schema/client/ECitadelAccountStatMedal">Modding database</see>.</summary>
+	/// <summary>Schema enum <c>ECitadelAccountStatMedal</c>. <see href="https://deadworks.net/db/schema/server/ECitadelAccountStatMedal">Modding database</see>.</summary>
 	public enum ECitadelAccountStatMedal : uint {
 		k_eNone = 0,
 		k_eBronze = 1,

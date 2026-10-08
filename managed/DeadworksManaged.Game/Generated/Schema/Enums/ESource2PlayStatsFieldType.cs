@@ -6,7 +6,7 @@
 namespace DeadworksManaged.Game;
 
 public static partial class Schema {
-	/// <summary>Schema enum <c>ESource2PlayStatsFieldType</c>. <see href="https://deadworks.net/db/schema/client/ESource2PlayStatsFieldType">Modding database</see>.</summary>
+	/// <summary>Schema enum <c>ESource2PlayStatsFieldType</c>. <see href="https://deadworks.net/db/schema/server/ESource2PlayStatsFieldType">Modding database</see>.</summary>
 	public enum ESource2PlayStatsFieldType : uint {
 		Source2PlayStats_Invalid = 0,
 		Source2PlayStats_UInt64 = 1,

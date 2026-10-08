@@ -6,7 +6,7 @@
 namespace DeadworksManaged.Game;
 
 public static partial class Schema {
-	/// <summary>Schema enum <c>EEventActionPrerequisiteScoreType</c>. <see href="https://deadworks.net/db/schema/client/EEventActionPrerequisiteScoreType">Modding database</see>.</summary>
+	/// <summary>Schema enum <c>EEventActionPrerequisiteScoreType</c>. <see href="https://deadworks.net/db/schema/server/EEventActionPrerequisiteScoreType">Modding database</see>.</summary>
 	public enum EEventActionPrerequisiteScoreType : uint {
 		Scalar = 0,
 		Automatic = 1,

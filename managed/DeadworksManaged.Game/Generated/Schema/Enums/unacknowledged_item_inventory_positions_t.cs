@@ -6,7 +6,7 @@
 namespace DeadworksManaged.Game;
 
 public static partial class Schema {
-	/// <summary>Schema enum <c>unacknowledged_item_inventory_positions_t</c>. <see href="https://deadworks.net/db/schema/client/unacknowledged_item_inventory_positions_t">Modding database</see>.</summary>
+	/// <summary>Schema enum <c>unacknowledged_item_inventory_positions_t</c>. <see href="https://deadworks.net/db/schema/server/unacknowledged_item_inventory_positions_t">Modding database</see>.</summary>
 	public enum unacknowledged_item_inventory_positions_t : uint {
 		UNACK_ITEM_UNKNOWN = 0,
 		UNACK_ITEM_DROPPED = 1,

@@ -6,7 +6,7 @@
 namespace DeadworksManaged.Game;
 
 public static partial class Schema {
-	/// <summary>Schema enum <c>CCitadelModifierResponseRulesFilterType_t</c>. <see href="https://deadworks.net/db/schema/client/CCitadelModifierResponseRulesFilterType_t">Modding database</see>.</summary>
+	/// <summary>Schema enum <c>CCitadelModifierResponseRulesFilterType_t</c>. <see href="https://deadworks.net/db/schema/server/CCitadelModifierResponseRulesFilterType_t">Modding database</see>.</summary>
 	public enum CCitadelModifierResponseRulesFilterType_t : uint {
 		MODIFIER_RR_FILTER_BROADCAST = 0,
 		MODIFIER_RR_FILTER_SINGLE = 1,

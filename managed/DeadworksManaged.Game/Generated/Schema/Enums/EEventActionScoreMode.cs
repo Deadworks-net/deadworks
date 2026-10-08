@@ -6,7 +6,7 @@
 namespace DeadworksManaged.Game;
 
 public static partial class Schema {
-	/// <summary>Schema enum <c>EEventActionScoreMode</c>. <see href="https://deadworks.net/db/schema/client/EEventActionScoreMode">Modding database</see>.</summary>
+	/// <summary>Schema enum <c>EEventActionScoreMode</c>. <see href="https://deadworks.net/db/schema/server/EEventActionScoreMode">Modding database</see>.</summary>
 	public enum EEventActionScoreMode : uint {
 		k_eEventActionScoreMode_Add = 0,
 		k_eEventActionScoreMode_Min = 1,

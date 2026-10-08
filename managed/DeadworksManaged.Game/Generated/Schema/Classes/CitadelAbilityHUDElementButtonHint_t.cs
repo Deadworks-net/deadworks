@@ -7,7 +7,7 @@ using System.Numerics;
 namespace DeadworksManaged.Game;
 
 public static partial class Schema {
-	/// <summary>Schema class <c>CitadelAbilityHUDElementButtonHint_t</c>. <see href="https://deadworks.net/db/schema/client/CitadelAbilityHUDElementButtonHint_t">Modding database</see>.</summary>
+	/// <summary>Schema class <c>CitadelAbilityHUDElementButtonHint_t</c>. <see href="https://deadworks.net/db/schema/server/CitadelAbilityHUDElementButtonHint_t">Modding database</see>.</summary>
 	public partial class CitadelAbilityHUDElementButtonHint_t : SchemaObject, ISchemaClass<CitadelAbilityHUDElementButtonHint_t> {
 		internal CitadelAbilityHUDElementButtonHint_t() { }
 		static CitadelAbilityHUDElementButtonHint_t ISchemaClass<CitadelAbilityHUDElementButtonHint_t>.New() => new();

@@ -7,7 +7,7 @@ using System.Numerics;
 namespace DeadworksManaged.Game;
 
 public static partial class Schema {
-	/// <summary>Schema class <c>CModifierLevelFloat</c>. <see href="https://deadworks.net/db/schema/client/CModifierLevelFloat">Modding database</see>.</summary>
+	/// <summary>Schema class <c>CModifierLevelFloat</c>. <see href="https://deadworks.net/db/schema/server/CModifierLevelFloat">Modding database</see>.</summary>
 	public partial class CModifierLevelFloat : SchemaObject, ISchemaClass<CModifierLevelFloat> {
 		internal CModifierLevelFloat() { }
 		static CModifierLevelFloat ISchemaClass<CModifierLevelFloat>.New() => new();

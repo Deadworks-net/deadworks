@@ -6,7 +6,7 @@
 namespace DeadworksManaged.Game;
 
 public static partial class Schema {
-	/// <summary>Schema enum <c>ECitadelStatusImpact</c>. <see href="https://deadworks.net/db/schema/client/ECitadelStatusImpact">Modding database</see>.</summary>
+	/// <summary>Schema enum <c>ECitadelStatusImpact</c>. <see href="https://deadworks.net/db/schema/server/ECitadelStatusImpact">Modding database</see>.</summary>
 	[Flags]
 	public enum ECitadelStatusImpact : uint {
 		None = 0,

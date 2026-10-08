@@ -7,7 +7,7 @@ using System.Numerics;
 namespace DeadworksManaged.Game;
 
 public static partial class Schema {
-	/// <summary>Schema class <c>ItemDraftWeight_t</c>. <see href="https://deadworks.net/db/schema/client/ItemDraftWeight_t">Modding database</see>.</summary>
+	/// <summary>Schema class <c>ItemDraftWeight_t</c>. <see href="https://deadworks.net/db/schema/server/ItemDraftWeight_t">Modding database</see>.</summary>
 	public partial class ItemDraftWeight_t : SchemaObject, ISchemaClass<ItemDraftWeight_t> {
 		internal ItemDraftWeight_t() { }
 		static ItemDraftWeight_t ISchemaClass<ItemDraftWeight_t>.New() => new();

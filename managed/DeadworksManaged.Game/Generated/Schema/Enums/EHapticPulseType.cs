@@ -6,7 +6,7 @@
 namespace DeadworksManaged.Game;
 
 public static partial class Schema {
-	/// <summary>Schema enum <c>EHapticPulseType</c>. <see href="https://deadworks.net/db/schema/client/EHapticPulseType">Modding database</see>.</summary>
+	/// <summary>Schema enum <c>EHapticPulseType</c>. <see href="https://deadworks.net/db/schema/server/EHapticPulseType">Modding database</see>.</summary>
 	public enum EHapticPulseType : uint {
 		VR_HAND_HAPTIC_PULSE_LIGHT = 0,
 		VR_HAND_HAPTIC_PULSE_MEDIUM = 1,

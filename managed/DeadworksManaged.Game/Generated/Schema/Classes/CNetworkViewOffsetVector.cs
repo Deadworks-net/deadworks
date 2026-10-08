@@ -7,7 +7,7 @@ using System.Numerics;
 namespace DeadworksManaged.Game;
 
 public static partial class Schema {
-	/// <summary>Schema class <c>CNetworkViewOffsetVector</c>. <see href="https://deadworks.net/db/schema/client/CNetworkViewOffsetVector">Modding database</see>.</summary>
+	/// <summary>Schema class <c>CNetworkViewOffsetVector</c>. <see href="https://deadworks.net/db/schema/server/CNetworkViewOffsetVector">Modding database</see>.</summary>
 	public partial class CNetworkViewOffsetVector : SchemaObject, ISchemaClass<CNetworkViewOffsetVector> {
 		internal CNetworkViewOffsetVector() { }
 		static CNetworkViewOffsetVector ISchemaClass<CNetworkViewOffsetVector>.New() => new();

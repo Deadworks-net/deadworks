@@ -7,7 +7,7 @@ using System.Numerics;
 namespace DeadworksManaged.Game;
 
 public static partial class Schema {
-	/// <summary>Schema class <c>ScalingPowerupDefinition_t</c>. <see href="https://deadworks.net/db/schema/client/ScalingPowerupDefinition_t">Modding database</see>.</summary>
+	/// <summary>Schema class <c>ScalingPowerupDefinition_t</c>. <see href="https://deadworks.net/db/schema/server/ScalingPowerupDefinition_t">Modding database</see>.</summary>
 	public partial class ScalingPowerupDefinition_t : SchemaObject, ISchemaClass<ScalingPowerupDefinition_t> {
 		internal ScalingPowerupDefinition_t() { }
 		static ScalingPowerupDefinition_t ISchemaClass<ScalingPowerupDefinition_t>.New() => new();

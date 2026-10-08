@@ -6,7 +6,7 @@
 namespace DeadworksManaged.Game;
 
 public static partial class Schema {
-	/// <summary>Schema enum <c>ELockonState</c>. <see href="https://deadworks.net/db/schema/client/ELockonState">Modding database</see>.</summary>
+	/// <summary>Schema enum <c>ELockonState</c>. <see href="https://deadworks.net/db/schema/server/ELockonState">Modding database</see>.</summary>
 	public enum ELockonState : uint {
 		ELockingOn = 0,
 		ELosingLock = 1,

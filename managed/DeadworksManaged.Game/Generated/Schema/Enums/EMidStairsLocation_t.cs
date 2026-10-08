@@ -6,7 +6,7 @@
 namespace DeadworksManaged.Game;
 
 public static partial class Schema {
-	/// <summary>Schema enum <c>EMidStairsLocation_t</c>. <see href="https://deadworks.net/db/schema/client/EMidStairsLocation_t">Modding database</see>.</summary>
+	/// <summary>Schema enum <c>EMidStairsLocation_t</c>. <see href="https://deadworks.net/db/schema/server/EMidStairsLocation_t">Modding database</see>.</summary>
 	public enum EMidStairsLocation_t : uint {
 		EMidStairsNone = 0,
 		EMidStairsLeft = 1,

@@ -6,7 +6,7 @@
 namespace DeadworksManaged.Game;
 
 public static partial class Schema {
-	/// <summary>Schema enum <c>ValueRemapperRatchetType_t</c>. <see href="https://deadworks.net/db/schema/client/ValueRemapperRatchetType_t">Modding database</see>.</summary>
+	/// <summary>Schema enum <c>ValueRemapperRatchetType_t</c>. <see href="https://deadworks.net/db/schema/server/ValueRemapperRatchetType_t">Modding database</see>.</summary>
 	public enum ValueRemapperRatchetType_t : uint {
 		RatchetType_Absolute = 0,
 		RatchetType_EachEngage = 1,

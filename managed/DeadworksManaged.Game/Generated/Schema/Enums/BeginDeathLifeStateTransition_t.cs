@@ -6,7 +6,7 @@
 namespace DeadworksManaged.Game;
 
 public static partial class Schema {
-	/// <summary>Schema enum <c>BeginDeathLifeStateTransition_t</c>. <see href="https://deadworks.net/db/schema/client/BeginDeathLifeStateTransition_t">Modding database</see>.</summary>
+	/// <summary>Schema enum <c>BeginDeathLifeStateTransition_t</c>. <see href="https://deadworks.net/db/schema/server/BeginDeathLifeStateTransition_t">Modding database</see>.</summary>
 	public enum BeginDeathLifeStateTransition_t : byte {
 		TRANSITION_TO_LIFESTATE_DYING = 0,
 		TRANSITION_TO_LIFESTATE_DEAD = 1,

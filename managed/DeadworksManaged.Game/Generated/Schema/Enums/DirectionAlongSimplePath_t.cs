@@ -6,7 +6,7 @@
 namespace DeadworksManaged.Game;
 
 public static partial class Schema {
-	/// <summary>Schema enum <c>DirectionAlongSimplePath_t</c>. <see href="https://deadworks.net/db/schema/client/DirectionAlongSimplePath_t">Modding database</see>.</summary>
+	/// <summary>Schema enum <c>DirectionAlongSimplePath_t</c>. <see href="https://deadworks.net/db/schema/server/DirectionAlongSimplePath_t">Modding database</see>.</summary>
 	public enum DirectionAlongSimplePath_t : uint {
 		None = 0,
 		TGoesUp = 1,

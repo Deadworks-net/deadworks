@@ -6,7 +6,7 @@
 namespace DeadworksManaged.Game;
 
 public static partial class Schema {
-	/// <summary>Schema enum <c>EBasePredictionEvents</c>. <see href="https://deadworks.net/db/schema/client/EBasePredictionEvents">Modding database</see>.</summary>
+	/// <summary>Schema enum <c>EBasePredictionEvents</c>. <see href="https://deadworks.net/db/schema/server/EBasePredictionEvents">Modding database</see>.</summary>
 	public enum EBasePredictionEvents : uint {
 		BPE_StringCommand = 128,
 		BPE_Teleport = 130,

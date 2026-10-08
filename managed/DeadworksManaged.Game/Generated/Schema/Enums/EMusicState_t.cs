@@ -6,7 +6,7 @@
 namespace DeadworksManaged.Game;
 
 public static partial class Schema {
-	/// <summary>Schema enum <c>EMusicState_t</c>. <see href="https://deadworks.net/db/schema/client/EMusicState_t">Modding database</see>.</summary>
+	/// <summary>Schema enum <c>EMusicState_t</c>. <see href="https://deadworks.net/db/schema/server/EMusicState_t">Modding database</see>.</summary>
 	public enum EMusicState_t : int {
 		EMusicState_Invalid = -1,
 		EMusicState_None = 0,

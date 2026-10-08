@@ -6,7 +6,7 @@
 namespace DeadworksManaged.Game;
 
 public static partial class Schema {
-	/// <summary>Schema enum <c>ETrackedStatAggregate</c>. <see href="https://deadworks.net/db/schema/client/ETrackedStatAggregate">Modding database</see>.</summary>
+	/// <summary>Schema enum <c>ETrackedStatAggregate</c>. <see href="https://deadworks.net/db/schema/server/ETrackedStatAggregate">Modding database</see>.</summary>
 	public enum ETrackedStatAggregate : uint {
 		k_eTrackedStatAggregate_Invalid = 0,
 		k_eTrackedStatAggregate_Sum = 1,

@@ -6,7 +6,7 @@
 namespace DeadworksManaged.Game;
 
 public static partial class Schema {
-	/// <summary>Schema enum <c>ModifierBarrierBehavior_t</c>. <see href="https://deadworks.net/db/schema/client/ModifierBarrierBehavior_t">Modding database</see>.</summary>
+	/// <summary>Schema enum <c>ModifierBarrierBehavior_t</c>. <see href="https://deadworks.net/db/schema/server/ModifierBarrierBehavior_t">Modding database</see>.</summary>
 	public enum ModifierBarrierBehavior_t : uint {
 		MODIFIER_BARRIER_BEHAVIOR_KEEP_ON_DESTROY = 0,
 		MODIFIER_BARRIER_BEHAVIOR_REMOVE_ON_DESTROY = 1,

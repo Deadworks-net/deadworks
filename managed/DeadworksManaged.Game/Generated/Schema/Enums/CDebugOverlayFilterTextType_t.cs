@@ -6,7 +6,7 @@
 namespace DeadworksManaged.Game;
 
 public static partial class Schema {
-	/// <summary>Schema enum <c>CDebugOverlayFilterTextType_t</c>. <see href="https://deadworks.net/db/schema/client/CDebugOverlayFilterTextType_t">Modding database</see>.</summary>
+	/// <summary>Schema enum <c>CDebugOverlayFilterTextType_t</c>. <see href="https://deadworks.net/db/schema/server/CDebugOverlayFilterTextType_t">Modding database</see>.</summary>
 	public enum CDebugOverlayFilterTextType_t : uint {
 		FILTER_TEXT_NONE = 0,
 		MATCH = 1,

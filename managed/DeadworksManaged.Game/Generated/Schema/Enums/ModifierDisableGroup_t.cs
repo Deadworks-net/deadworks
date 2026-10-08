@@ -6,7 +6,7 @@
 namespace DeadworksManaged.Game;
 
 public static partial class Schema {
-	/// <summary>Schema enum <c>ModifierDisableGroup_t</c>. <see href="https://deadworks.net/db/schema/client/ModifierDisableGroup_t">Modding database</see>.</summary>
+	/// <summary>Schema enum <c>ModifierDisableGroup_t</c>. <see href="https://deadworks.net/db/schema/server/ModifierDisableGroup_t">Modding database</see>.</summary>
 	public enum ModifierDisableGroup_t : uint {
 		MODIFIER_DISABLE_GROUP_MIN = 0,
 		MODIFIER_DISABLE_GROUP_ACTIVE_WEAPON = 1,

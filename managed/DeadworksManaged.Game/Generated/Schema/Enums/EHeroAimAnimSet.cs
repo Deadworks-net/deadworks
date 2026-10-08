@@ -6,7 +6,7 @@
 namespace DeadworksManaged.Game;
 
 public static partial class Schema {
-	/// <summary>Schema enum <c>EHeroAimAnimSet</c>. <see href="https://deadworks.net/db/schema/client/EHeroAimAnimSet">Modding database</see>.</summary>
+	/// <summary>Schema enum <c>EHeroAimAnimSet</c>. <see href="https://deadworks.net/db/schema/server/EHeroAimAnimSet">Modding database</see>.</summary>
 	[Flags]
 	public enum EHeroAimAnimSet : byte {
 		Crouch = 1,

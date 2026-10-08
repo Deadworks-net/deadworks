@@ -6,7 +6,7 @@
 namespace DeadworksManaged.Game;
 
 public static partial class Schema {
-	/// <summary>Schema enum <c>EAbilityMoveExecuteType_t</c>. <see href="https://deadworks.net/db/schema/client/EAbilityMoveExecuteType_t">Modding database</see>.</summary>
+	/// <summary>Schema enum <c>EAbilityMoveExecuteType_t</c>. <see href="https://deadworks.net/db/schema/server/EAbilityMoveExecuteType_t">Modding database</see>.</summary>
 	public enum EAbilityMoveExecuteType_t : byte {
 		EMoveExecute_TryPlayerMove = 0,
 		EMoveExecute_FullWalkMove = 1,

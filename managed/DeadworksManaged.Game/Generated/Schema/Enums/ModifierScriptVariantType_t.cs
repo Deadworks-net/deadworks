@@ -6,7 +6,7 @@
 namespace DeadworksManaged.Game;
 
 public static partial class Schema {
-	/// <summary>Schema enum <c>ModifierScriptVariantType_t</c>. <see href="https://deadworks.net/db/schema/client/ModifierScriptVariantType_t">Modding database</see>.</summary>
+	/// <summary>Schema enum <c>ModifierScriptVariantType_t</c>. <see href="https://deadworks.net/db/schema/server/ModifierScriptVariantType_t">Modding database</see>.</summary>
 	public enum ModifierScriptVariantType_t : uint {
 		eFloat = 0,
 		eModelName = 1,

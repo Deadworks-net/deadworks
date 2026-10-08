@@ -7,7 +7,7 @@ using System.Numerics;
 namespace DeadworksManaged.Game;
 
 public static partial class Schema {
-	/// <summary>Schema class <c>CSimpleSimTimer</c>. <see href="https://deadworks.net/db/schema/client/CSimpleSimTimer">Modding database</see>.</summary>
+	/// <summary>Schema class <c>CSimpleSimTimer</c>. <see href="https://deadworks.net/db/schema/server/CSimpleSimTimer">Modding database</see>.</summary>
 	public partial class CSimpleSimTimer : SchemaObject, ISchemaClass<CSimpleSimTimer> {
 		internal CSimpleSimTimer() { }
 		static CSimpleSimTimer ISchemaClass<CSimpleSimTimer>.New() => new();

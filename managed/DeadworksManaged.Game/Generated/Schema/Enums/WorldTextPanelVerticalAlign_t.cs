@@ -6,7 +6,7 @@
 namespace DeadworksManaged.Game;
 
 public static partial class Schema {
-	/// <summary>Schema enum <c>WorldTextPanelVerticalAlign_t</c>. <see href="https://deadworks.net/db/schema/client/WorldTextPanelVerticalAlign_t">Modding database</see>.</summary>
+	/// <summary>Schema enum <c>WorldTextPanelVerticalAlign_t</c>. <see href="https://deadworks.net/db/schema/server/WorldTextPanelVerticalAlign_t">Modding database</see>.</summary>
 	public enum WorldTextPanelVerticalAlign_t : uint {
 		WORLDTEXT_VERTICAL_ALIGN_TOP = 0,
 		WORLDTEXT_VERTICAL_ALIGN_CENTER = 1,

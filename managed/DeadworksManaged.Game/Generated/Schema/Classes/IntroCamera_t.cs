@@ -7,7 +7,7 @@ using System.Numerics;
 namespace DeadworksManaged.Game;
 
 public static partial class Schema {
-	/// <summary>Schema class <c>IntroCamera_t</c>. <see href="https://deadworks.net/db/schema/client/IntroCamera_t">Modding database</see>.</summary>
+	/// <summary>Schema class <c>IntroCamera_t</c>. <see href="https://deadworks.net/db/schema/server/IntroCamera_t">Modding database</see>.</summary>
 	public partial class IntroCamera_t : SchemaObject, ISchemaClass<IntroCamera_t> {
 		internal IntroCamera_t() { }
 		static IntroCamera_t ISchemaClass<IntroCamera_t>.New() => new();

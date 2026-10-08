@@ -7,7 +7,7 @@ using System.Numerics;
 namespace DeadworksManaged.Game;
 
 public static partial class Schema {
-	/// <summary>Schema class <c>NPCAttachmentSpawnKV_t</c>. <see href="https://deadworks.net/db/schema/client/NPCAttachmentSpawnKV_t">Modding database</see>.</summary>
+	/// <summary>Schema class <c>NPCAttachmentSpawnKV_t</c>. <see href="https://deadworks.net/db/schema/server/NPCAttachmentSpawnKV_t">Modding database</see>.</summary>
 	public partial class NPCAttachmentSpawnKV_t : SchemaObject, ISchemaClass<NPCAttachmentSpawnKV_t> {
 		internal NPCAttachmentSpawnKV_t() { }
 		static NPCAttachmentSpawnKV_t ISchemaClass<NPCAttachmentSpawnKV_t>.New() => new();

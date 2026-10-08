@@ -6,7 +6,7 @@
 namespace DeadworksManaged.Game;
 
 public static partial class Schema {
-	/// <summary>Schema enum <c>PrefetchType</c>. <see href="https://deadworks.net/db/schema/client/PrefetchType">Modding database</see>.</summary>
+	/// <summary>Schema enum <c>PrefetchType</c>. <see href="https://deadworks.net/db/schema/server/PrefetchType">Modding database</see>.</summary>
 	public enum PrefetchType : uint {
 		PFT_SOUND = 0,
 	}

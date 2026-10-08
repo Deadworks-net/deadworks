@@ -6,7 +6,7 @@
 namespace DeadworksManaged.Game;
 
 public static partial class Schema {
-	/// <summary>Schema enum <c>NPC_STATE</c>. <see href="https://deadworks.net/db/schema/client/NPC_STATE">Modding database</see>.</summary>
+	/// <summary>Schema enum <c>NPC_STATE</c>. <see href="https://deadworks.net/db/schema/server/NPC_STATE">Modding database</see>.</summary>
 	public enum NPC_STATE : int {
 		NPC_STATE_INVALID = -1,
 		NPC_STATE_INIT = 0,

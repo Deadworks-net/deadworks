@@ -6,7 +6,7 @@
 namespace DeadworksManaged.Game;
 
 public static partial class Schema {
-	/// <summary>Schema enum <c>EJumpType_t</c>. <see href="https://deadworks.net/db/schema/client/EJumpType_t">Modding database</see>.</summary>
+	/// <summary>Schema enum <c>EJumpType_t</c>. <see href="https://deadworks.net/db/schema/server/EJumpType_t">Modding database</see>.</summary>
 	public enum EJumpType_t : byte {
 		EJumpType_Ground = 0,
 		EJumpType_Air = 1,

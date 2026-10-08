@@ -7,7 +7,7 @@ using System.Numerics;
 namespace DeadworksManaged.Game;
 
 public static partial class Schema {
-	/// <summary>Schema class <c>PackedRank_t</c>. <see href="https://deadworks.net/db/schema/client/PackedRank_t">Modding database</see>.</summary>
+	/// <summary>Schema class <c>PackedRank_t</c>. <see href="https://deadworks.net/db/schema/server/PackedRank_t">Modding database</see>.</summary>
 	public partial class PackedRank_t : SchemaObject, ISchemaClass<PackedRank_t> {
 		internal PackedRank_t() { }
 		static PackedRank_t ISchemaClass<PackedRank_t>.New() => new();

@@ -6,7 +6,7 @@
 namespace DeadworksManaged.Game;
 
 public static partial class Schema {
-	/// <summary>Schema enum <c>BrushSolidities_e</c>. <see href="https://deadworks.net/db/schema/client/BrushSolidities_e">Modding database</see>.</summary>
+	/// <summary>Schema enum <c>BrushSolidities_e</c>. <see href="https://deadworks.net/db/schema/server/BrushSolidities_e">Modding database</see>.</summary>
 	public enum BrushSolidities_e : uint {
 		BRUSHSOLID_TOGGLE = 0,
 		BRUSHSOLID_NEVER = 1,

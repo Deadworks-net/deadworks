@@ -6,7 +6,7 @@
 namespace DeadworksManaged.Game;
 
 public static partial class Schema {
-	/// <summary>Schema enum <c>ModifierRemoveTargets_t</c>. <see href="https://deadworks.net/db/schema/client/ModifierRemoveTargets_t">Modding database</see>.</summary>
+	/// <summary>Schema enum <c>ModifierRemoveTargets_t</c>. <see href="https://deadworks.net/db/schema/server/ModifierRemoveTargets_t">Modding database</see>.</summary>
 	public enum ModifierRemoveTargets_t : uint {
 		MODIFIER_REMOVE_ALL = 0,
 		MODIFIER_REMOVE_ENEMY = 1,

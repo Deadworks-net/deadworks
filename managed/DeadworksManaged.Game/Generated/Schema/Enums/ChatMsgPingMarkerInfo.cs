@@ -6,7 +6,7 @@
 namespace DeadworksManaged.Game;
 
 public static partial class Schema {
-	/// <summary>Schema enum <c>ChatMsgPingMarkerInfo</c>. <see href="https://deadworks.net/db/schema/client/ChatMsgPingMarkerInfo">Modding database</see>.</summary>
+	/// <summary>Schema enum <c>ChatMsgPingMarkerInfo</c>. <see href="https://deadworks.net/db/schema/server/ChatMsgPingMarkerInfo">Modding database</see>.</summary>
 	public enum ChatMsgPingMarkerInfo : uint {
 		k_EPingMarkerInfo_ShowMarkerAndSound = 0,
 		k_EPingMarkerInfo_ShowMarkerOnSender = 1,

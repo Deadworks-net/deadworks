@@ -7,7 +7,7 @@ using System.Numerics;
 namespace DeadworksManaged.Game;
 
 public static partial class Schema {
-	/// <summary>Schema class <c>CNetworkVelocityVector</c>. <see href="https://deadworks.net/db/schema/client/CNetworkVelocityVector">Modding database</see>.</summary>
+	/// <summary>Schema class <c>CNetworkVelocityVector</c>. <see href="https://deadworks.net/db/schema/server/CNetworkVelocityVector">Modding database</see>.</summary>
 	public partial class CNetworkVelocityVector : SchemaObject, ISchemaClass<CNetworkVelocityVector> {
 		internal CNetworkVelocityVector() { }
 		static CNetworkVelocityVector ISchemaClass<CNetworkVelocityVector>.New() => new();

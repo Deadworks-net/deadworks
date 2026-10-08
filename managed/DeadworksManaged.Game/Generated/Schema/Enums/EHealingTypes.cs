@@ -6,7 +6,7 @@
 namespace DeadworksManaged.Game;
 
 public static partial class Schema {
-	/// <summary>Schema enum <c>EHealingTypes</c>. <see href="https://deadworks.net/db/schema/client/EHealingTypes">Modding database</see>.</summary>
+	/// <summary>Schema enum <c>EHealingTypes</c>. <see href="https://deadworks.net/db/schema/server/EHealingTypes">Modding database</see>.</summary>
 	public enum EHealingTypes : ushort {
 		EHealTypeStandard = 0,
 		EHealTypeBaseRegen = 1,

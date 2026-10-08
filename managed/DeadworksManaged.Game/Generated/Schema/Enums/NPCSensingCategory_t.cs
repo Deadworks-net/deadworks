@@ -6,7 +6,7 @@
 namespace DeadworksManaged.Game;
 
 public static partial class Schema {
-	/// <summary>Schema enum <c>NPCSensingCategory_t</c>. <see href="https://deadworks.net/db/schema/client/NPCSensingCategory_t">Modding database</see>.</summary>
+	/// <summary>Schema enum <c>NPCSensingCategory_t</c>. <see href="https://deadworks.net/db/schema/server/NPCSensingCategory_t">Modding database</see>.</summary>
 	public enum NPCSensingCategory_t : sbyte {
 		eInvalid = -1,
 		eTemp = 0,

@@ -6,7 +6,7 @@
 namespace DeadworksManaged.Game;
 
 public static partial class Schema {
-	/// <summary>Schema enum <c>ECitadelPingMessageRecipients_t</c>. <see href="https://deadworks.net/db/schema/client/ECitadelPingMessageRecipients_t">Modding database</see>.</summary>
+	/// <summary>Schema enum <c>ECitadelPingMessageRecipients_t</c>. <see href="https://deadworks.net/db/schema/server/ECitadelPingMessageRecipients_t">Modding database</see>.</summary>
 	public enum ECitadelPingMessageRecipients_t : uint {
 		k_ECitadelRecipients_GlobalFriendlyTeam = 0,
 		k_ECitadelRecipients_RecipientAndPlayer = 1,

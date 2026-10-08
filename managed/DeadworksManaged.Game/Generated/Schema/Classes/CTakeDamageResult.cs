@@ -7,7 +7,7 @@ using System.Numerics;
 namespace DeadworksManaged.Game;
 
 public static partial class Schema {
-	/// <summary>Schema class <c>CTakeDamageResult</c>. <see href="https://deadworks.net/db/schema/client/CTakeDamageResult">Modding database</see>.</summary>
+	/// <summary>Schema class <c>CTakeDamageResult</c>. <see href="https://deadworks.net/db/schema/server/CTakeDamageResult">Modding database</see>.</summary>
 	public partial class CTakeDamageResult : SchemaObject, ISchemaClass<CTakeDamageResult> {
 		internal CTakeDamageResult() { }
 		static CTakeDamageResult ISchemaClass<CTakeDamageResult>.New() => new();

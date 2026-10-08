@@ -6,7 +6,7 @@
 namespace DeadworksManaged.Game;
 
 public static partial class Schema {
-	/// <summary>Schema enum <c>EStreetBrawlGameState</c>. <see href="https://deadworks.net/db/schema/client/EStreetBrawlGameState">Modding database</see>.</summary>
+	/// <summary>Schema enum <c>EStreetBrawlGameState</c>. <see href="https://deadworks.net/db/schema/server/EStreetBrawlGameState">Modding database</see>.</summary>
 	public enum EStreetBrawlGameState : uint {
 		ESBGS_Init = 0,
 		ESBGS_PreBuy = 1,

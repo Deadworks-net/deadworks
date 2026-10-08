@@ -6,7 +6,7 @@
 namespace DeadworksManaged.Game;
 
 public static partial class Schema {
-	/// <summary>Schema enum <c>BodySectionMutex_t</c>. <see href="https://deadworks.net/db/schema/client/BodySectionMutex_t">Modding database</see>.</summary>
+	/// <summary>Schema enum <c>BodySectionMutex_t</c>. <see href="https://deadworks.net/db/schema/server/BodySectionMutex_t">Modding database</see>.</summary>
 	public enum BodySectionMutex_t : uint {
 		eNone = 0,
 		eLowerBody = 1,

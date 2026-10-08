@@ -6,7 +6,7 @@
 namespace DeadworksManaged.Game;
 
 public static partial class Schema {
-	/// <summary>Schema enum <c>NPC_Vault_State_t</c>. <see href="https://deadworks.net/db/schema/client/NPC_Vault_State_t">Modding database</see>.</summary>
+	/// <summary>Schema enum <c>NPC_Vault_State_t</c>. <see href="https://deadworks.net/db/schema/server/NPC_Vault_State_t">Modding database</see>.</summary>
 	public enum NPC_Vault_State_t : uint {
 		kNPC_Vault_State_Idle = 0,
 		kNPC_Vault_State_Active = 1,

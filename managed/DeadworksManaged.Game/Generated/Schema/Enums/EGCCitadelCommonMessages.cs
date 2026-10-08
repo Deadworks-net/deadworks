@@ -6,7 +6,7 @@
 namespace DeadworksManaged.Game;
 
 public static partial class Schema {
-	/// <summary>Schema enum <c>EGCCitadelCommonMessages</c>. <see href="https://deadworks.net/db/schema/client/EGCCitadelCommonMessages">Modding database</see>.</summary>
+	/// <summary>Schema enum <c>EGCCitadelCommonMessages</c>. <see href="https://deadworks.net/db/schema/server/EGCCitadelCommonMessages">Modding database</see>.</summary>
 	public enum EGCCitadelCommonMessages : uint {
 		k_EMsgAnyToGCReportAsserts = 7000,
 		k_EMsgAnyToGCReportAssertsResponse = 7001,

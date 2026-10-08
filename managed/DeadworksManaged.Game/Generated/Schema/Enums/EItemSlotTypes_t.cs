@@ -6,7 +6,7 @@
 namespace DeadworksManaged.Game;
 
 public static partial class Schema {
-	/// <summary>Schema enum <c>EItemSlotTypes_t</c>. <see href="https://deadworks.net/db/schema/client/EItemSlotTypes_t">Modding database</see>.</summary>
+	/// <summary>Schema enum <c>EItemSlotTypes_t</c>. <see href="https://deadworks.net/db/schema/server/EItemSlotTypes_t">Modding database</see>.</summary>
 	public enum EItemSlotTypes_t : sbyte {
 		EItemSlotType_Invalid = -1,
 		EItemSlotType_WeaponMod = 0,

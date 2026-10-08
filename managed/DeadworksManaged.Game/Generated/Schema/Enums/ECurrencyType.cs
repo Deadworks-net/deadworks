@@ -6,7 +6,7 @@
 namespace DeadworksManaged.Game;
 
 public static partial class Schema {
-	/// <summary>Schema enum <c>ECurrencyType</c>. <see href="https://deadworks.net/db/schema/client/ECurrencyType">Modding database</see>.</summary>
+	/// <summary>Schema enum <c>ECurrencyType</c>. <see href="https://deadworks.net/db/schema/server/ECurrencyType">Modding database</see>.</summary>
 	public enum ECurrencyType : int {
 		ECurrencyInvalid = -1,
 		EGold = 0,

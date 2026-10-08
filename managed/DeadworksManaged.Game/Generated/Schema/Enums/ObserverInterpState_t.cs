@@ -6,7 +6,7 @@
 namespace DeadworksManaged.Game;
 
 public static partial class Schema {
-	/// <summary>Schema enum <c>ObserverInterpState_t</c>. <see href="https://deadworks.net/db/schema/client/ObserverInterpState_t">Modding database</see>.</summary>
+	/// <summary>Schema enum <c>ObserverInterpState_t</c>. <see href="https://deadworks.net/db/schema/server/ObserverInterpState_t">Modding database</see>.</summary>
 	public enum ObserverInterpState_t : uint {
 		OBSERVER_INTERP_NONE = 0,
 		OBSERVER_INTERP_STARTING = 1,

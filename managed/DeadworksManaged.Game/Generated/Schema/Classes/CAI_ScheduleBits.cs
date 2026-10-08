@@ -7,7 +7,7 @@ using System.Numerics;
 namespace DeadworksManaged.Game;
 
 public static partial class Schema {
-	/// <summary>Schema class <c>CAI_ScheduleBits</c>. <see href="https://deadworks.net/db/schema/client/CAI_ScheduleBits">Modding database</see>.</summary>
+	/// <summary>Schema class <c>CAI_ScheduleBits</c>. <see href="https://deadworks.net/db/schema/server/CAI_ScheduleBits">Modding database</see>.</summary>
 	public partial class CAI_ScheduleBits : SchemaObject, ISchemaClass<CAI_ScheduleBits> {
 		internal CAI_ScheduleBits() { }
 		static CAI_ScheduleBits ISchemaClass<CAI_ScheduleBits>.New() => new();

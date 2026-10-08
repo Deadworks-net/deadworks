@@ -6,7 +6,7 @@
 namespace DeadworksManaged.Game;
 
 public static partial class Schema {
-	/// <summary>Schema enum <c>CanPlaySequence_t</c>. <see href="https://deadworks.net/db/schema/client/CanPlaySequence_t">Modding database</see>.</summary>
+	/// <summary>Schema enum <c>CanPlaySequence_t</c>. <see href="https://deadworks.net/db/schema/server/CanPlaySequence_t">Modding database</see>.</summary>
 	public enum CanPlaySequence_t : uint {
 		CANNOT_PLAY = 0,
 		CAN_PLAY_NOW = 1,

@@ -6,7 +6,7 @@
 namespace DeadworksManaged.Game;
 
 public static partial class Schema {
-	/// <summary>Schema enum <c>EFireMode_t</c>. <see href="https://deadworks.net/db/schema/client/EFireMode_t">Modding database</see>.</summary>
+	/// <summary>Schema enum <c>EFireMode_t</c>. <see href="https://deadworks.net/db/schema/server/EFireMode_t">Modding database</see>.</summary>
 	public enum EFireMode_t : uint {
 		EFireMode_None = 0,
 		EFireMode_Primary = 1,

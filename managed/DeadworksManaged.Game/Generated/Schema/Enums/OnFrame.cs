@@ -6,7 +6,7 @@
 namespace DeadworksManaged.Game;
 
 public static partial class Schema {
-	/// <summary>Schema enum <c>OnFrame</c>. <see href="https://deadworks.net/db/schema/client/OnFrame">Modding database</see>.</summary>
+	/// <summary>Schema enum <c>OnFrame</c>. <see href="https://deadworks.net/db/schema/server/OnFrame">Modding database</see>.</summary>
 	public enum OnFrame : byte {
 		ONFRAME_UNKNOWN = 0,
 		ONFRAME_TRUE = 1,

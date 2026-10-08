@@ -7,7 +7,7 @@ using System.Numerics;
 namespace DeadworksManaged.Game;
 
 public static partial class Schema {
-	/// <summary>Schema class <c>CPlayerPawnComponent</c>. <see href="https://deadworks.net/db/schema/client/CPlayerPawnComponent">Modding database</see>.</summary>
+	/// <summary>Schema class <c>CPlayerPawnComponent</c>. <see href="https://deadworks.net/db/schema/server/CPlayerPawnComponent">Modding database</see>.</summary>
 	public partial class CPlayerPawnComponent : SchemaObject, ISchemaClass<CPlayerPawnComponent> {
 		internal CPlayerPawnComponent() { }
 		static CPlayerPawnComponent ISchemaClass<CPlayerPawnComponent>.New() => new();

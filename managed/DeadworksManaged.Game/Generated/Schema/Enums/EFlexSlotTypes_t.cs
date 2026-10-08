@@ -6,7 +6,7 @@
 namespace DeadworksManaged.Game;
 
 public static partial class Schema {
-	/// <summary>Schema enum <c>EFlexSlotTypes_t</c>. <see href="https://deadworks.net/db/schema/client/EFlexSlotTypes_t">Modding database</see>.</summary>
+	/// <summary>Schema enum <c>EFlexSlotTypes_t</c>. <see href="https://deadworks.net/db/schema/server/EFlexSlotTypes_t">Modding database</see>.</summary>
 	[Flags]
 	public enum EFlexSlotTypes_t : ushort {
 		EFlexSlot_Invalid = 0,

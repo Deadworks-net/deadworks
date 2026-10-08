@@ -6,7 +6,7 @@
 namespace DeadworksManaged.Game;
 
 public static partial class Schema {
-	/// <summary>Schema enum <c>eEconItemOrigin</c>. <see href="https://deadworks.net/db/schema/client/eEconItemOrigin">Modding database</see>.</summary>
+	/// <summary>Schema enum <c>eEconItemOrigin</c>. <see href="https://deadworks.net/db/schema/server/eEconItemOrigin">Modding database</see>.</summary>
 	public enum eEconItemOrigin : int {
 		kEconItemOrigin_Invalid = -1,
 		kEconItemOrigin_Drop = 0,

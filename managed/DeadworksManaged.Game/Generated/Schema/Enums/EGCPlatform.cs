@@ -6,7 +6,7 @@
 namespace DeadworksManaged.Game;
 
 public static partial class Schema {
-	/// <summary>Schema enum <c>EGCPlatform</c>. <see href="https://deadworks.net/db/schema/client/EGCPlatform">Modding database</see>.</summary>
+	/// <summary>Schema enum <c>EGCPlatform</c>. <see href="https://deadworks.net/db/schema/server/EGCPlatform">Modding database</see>.</summary>
 	public enum EGCPlatform : uint {
 		k_eGCPlatform_None = 0,
 		k_eGCPlatform_PC = 1,

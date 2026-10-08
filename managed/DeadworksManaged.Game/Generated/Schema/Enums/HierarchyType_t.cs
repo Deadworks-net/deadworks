@@ -6,7 +6,7 @@
 namespace DeadworksManaged.Game;
 
 public static partial class Schema {
-	/// <summary>Schema enum <c>HierarchyType_t</c>. <see href="https://deadworks.net/db/schema/client/HierarchyType_t">Modding database</see>.</summary>
+	/// <summary>Schema enum <c>HierarchyType_t</c>. <see href="https://deadworks.net/db/schema/server/HierarchyType_t">Modding database</see>.</summary>
 	public enum HierarchyType_t : uint {
 		HIERARCHY_NONE = 0,
 		HIERARCHY_BONE_MERGE = 1,

@@ -7,7 +7,7 @@ using System.Numerics;
 namespace DeadworksManaged.Game;
 
 public static partial class Schema {
-	/// <summary>Schema class <c>constraint_hingeparams_t</c>. <see href="https://deadworks.net/db/schema/client/constraint_hingeparams_t">Modding database</see>.</summary>
+	/// <summary>Schema class <c>constraint_hingeparams_t</c>. <see href="https://deadworks.net/db/schema/server/constraint_hingeparams_t">Modding database</see>.</summary>
 	public partial class constraint_hingeparams_t : SchemaObject, ISchemaClass<constraint_hingeparams_t> {
 		internal constraint_hingeparams_t() { }
 		static constraint_hingeparams_t ISchemaClass<constraint_hingeparams_t>.New() => new();

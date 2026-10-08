@@ -7,7 +7,7 @@ using System.Numerics;
 namespace DeadworksManaged.Game;
 
 public static partial class Schema {
-	/// <summary>Schema class <c>IncompatibleFilter_t</c>. <see href="https://deadworks.net/db/schema/client/IncompatibleFilter_t">Modding database</see>.</summary>
+	/// <summary>Schema class <c>IncompatibleFilter_t</c>. <see href="https://deadworks.net/db/schema/server/IncompatibleFilter_t">Modding database</see>.</summary>
 	public partial class IncompatibleFilter_t : SchemaObject, ISchemaClass<IncompatibleFilter_t> {
 		internal IncompatibleFilter_t() { }
 		static IncompatibleFilter_t ISchemaClass<IncompatibleFilter_t>.New() => new();

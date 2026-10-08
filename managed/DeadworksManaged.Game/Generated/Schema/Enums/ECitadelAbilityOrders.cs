@@ -6,7 +6,7 @@
 namespace DeadworksManaged.Game;
 
 public static partial class Schema {
-	/// <summary>Schema enum <c>ECitadelAbilityOrders</c>. <see href="https://deadworks.net/db/schema/client/ECitadelAbilityOrders">Modding database</see>.</summary>
+	/// <summary>Schema enum <c>ECitadelAbilityOrders</c>. <see href="https://deadworks.net/db/schema/server/ECitadelAbilityOrders">Modding database</see>.</summary>
 	public enum ECitadelAbilityOrders : uint {
 		ECitadelAbilityOrder_Success = 0,
 		ECitadelAbilityOrder_Invalid_InCastDelay = 1,

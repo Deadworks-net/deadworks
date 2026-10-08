@@ -6,7 +6,7 @@
 namespace DeadworksManaged.Game;
 
 public static partial class Schema {
-	/// <summary>Schema enum <c>EUnitQueryVolumeMode</c>. <see href="https://deadworks.net/db/schema/client/EUnitQueryVolumeMode">Modding database</see>.</summary>
+	/// <summary>Schema enum <c>EUnitQueryVolumeMode</c>. <see href="https://deadworks.net/db/schema/server/EUnitQueryVolumeMode">Modding database</see>.</summary>
 	public enum EUnitQueryVolumeMode : byte {
 		k_eUnitQueryVolume_None = 0,
 		k_eUnitQueryVolume_LimitRadius = 1,

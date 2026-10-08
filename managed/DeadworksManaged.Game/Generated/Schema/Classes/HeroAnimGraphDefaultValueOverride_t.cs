@@ -7,7 +7,7 @@ using System.Numerics;
 namespace DeadworksManaged.Game;
 
 public static partial class Schema {
-	/// <summary>Schema class <c>HeroAnimGraphDefaultValueOverride_t</c>. <see href="https://deadworks.net/db/schema/client/HeroAnimGraphDefaultValueOverride_t">Modding database</see>.</summary>
+	/// <summary>Schema class <c>HeroAnimGraphDefaultValueOverride_t</c>. <see href="https://deadworks.net/db/schema/server/HeroAnimGraphDefaultValueOverride_t">Modding database</see>.</summary>
 	public partial class HeroAnimGraphDefaultValueOverride_t : SchemaObject, ISchemaClass<HeroAnimGraphDefaultValueOverride_t> {
 		internal HeroAnimGraphDefaultValueOverride_t() { }
 		static HeroAnimGraphDefaultValueOverride_t ISchemaClass<HeroAnimGraphDefaultValueOverride_t>.New() => new();

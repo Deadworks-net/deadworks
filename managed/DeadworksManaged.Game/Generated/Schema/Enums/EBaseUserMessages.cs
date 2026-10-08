@@ -6,7 +6,7 @@
 namespace DeadworksManaged.Game;
 
 public static partial class Schema {
-	/// <summary>Schema enum <c>EBaseUserMessages</c>. <see href="https://deadworks.net/db/schema/client/EBaseUserMessages">Modding database</see>.</summary>
+	/// <summary>Schema enum <c>EBaseUserMessages</c>. <see href="https://deadworks.net/db/schema/server/EBaseUserMessages">Modding database</see>.</summary>
 	public enum EBaseUserMessages : uint {
 		UM_AchievementEvent = 101,
 		UM_CurrentTimescale = 104,

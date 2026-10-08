@@ -7,7 +7,7 @@ using System.Numerics;
 namespace DeadworksManaged.Game;
 
 public static partial class Schema {
-	/// <summary>Schema class <c>SensableByNPCHandle_t</c>. <see href="https://deadworks.net/db/schema/client/SensableByNPCHandle_t">Modding database</see>.</summary>
+	/// <summary>Schema class <c>SensableByNPCHandle_t</c>. <see href="https://deadworks.net/db/schema/server/SensableByNPCHandle_t">Modding database</see>.</summary>
 	public partial class SensableByNPCHandle_t : SchemaObject, ISchemaClass<SensableByNPCHandle_t> {
 		internal SensableByNPCHandle_t() { }
 		static SensableByNPCHandle_t ISchemaClass<SensableByNPCHandle_t>.New() => new();

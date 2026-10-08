@@ -6,7 +6,7 @@
 namespace DeadworksManaged.Game;
 
 public static partial class Schema {
-	/// <summary>Schema enum <c>ChoreoLookAtSpeed_t</c>. <see href="https://deadworks.net/db/schema/client/ChoreoLookAtSpeed_t">Modding database</see>.</summary>
+	/// <summary>Schema enum <c>ChoreoLookAtSpeed_t</c>. <see href="https://deadworks.net/db/schema/server/ChoreoLookAtSpeed_t">Modding database</see>.</summary>
 	public enum ChoreoLookAtSpeed_t : int {
 		eInvalid = -1,
 		eSlow = 0,

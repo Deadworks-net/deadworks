@@ -6,7 +6,7 @@
 namespace DeadworksManaged.Game;
 
 public static partial class Schema {
-	/// <summary>Schema enum <c>SVC_Messages</c>. <see href="https://deadworks.net/db/schema/client/SVC_Messages">Modding database</see>.</summary>
+	/// <summary>Schema enum <c>SVC_Messages</c>. <see href="https://deadworks.net/db/schema/server/SVC_Messages">Modding database</see>.</summary>
 	public enum SVC_Messages : uint {
 		svc_ServerInfo = 40,
 		svc_FlattenedSerializer = 41,

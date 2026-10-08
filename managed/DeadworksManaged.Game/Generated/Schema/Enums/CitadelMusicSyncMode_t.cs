@@ -6,7 +6,7 @@
 namespace DeadworksManaged.Game;
 
 public static partial class Schema {
-	/// <summary>Schema enum <c>CitadelMusicSyncMode_t</c>. <see href="https://deadworks.net/db/schema/client/CitadelMusicSyncMode_t">Modding database</see>.</summary>
+	/// <summary>Schema enum <c>CitadelMusicSyncMode_t</c>. <see href="https://deadworks.net/db/schema/server/CitadelMusicSyncMode_t">Modding database</see>.</summary>
 	public enum CitadelMusicSyncMode_t : uint {
 		ESyncMode_None = 0,
 		ESyncMode_Resume = 1,

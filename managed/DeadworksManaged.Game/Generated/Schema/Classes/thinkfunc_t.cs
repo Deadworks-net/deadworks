@@ -7,7 +7,7 @@ using System.Numerics;
 namespace DeadworksManaged.Game;
 
 public static partial class Schema {
-	/// <summary>Schema class <c>thinkfunc_t</c>. <see href="https://deadworks.net/db/schema/client/thinkfunc_t">Modding database</see>.</summary>
+	/// <summary>Schema class <c>thinkfunc_t</c>. <see href="https://deadworks.net/db/schema/server/thinkfunc_t">Modding database</see>.</summary>
 	public partial class thinkfunc_t : SchemaObject, ISchemaClass<thinkfunc_t> {
 		internal thinkfunc_t() { }
 		static thinkfunc_t ISchemaClass<thinkfunc_t>.New() => new();

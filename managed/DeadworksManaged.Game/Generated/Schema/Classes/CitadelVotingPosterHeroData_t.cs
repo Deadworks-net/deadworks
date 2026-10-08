@@ -7,7 +7,7 @@ using System.Numerics;
 namespace DeadworksManaged.Game;
 
 public static partial class Schema {
-	/// <summary>Schema class <c>CitadelVotingPosterHeroData_t</c>. <see href="https://deadworks.net/db/schema/client/CitadelVotingPosterHeroData_t">Modding database</see>.</summary>
+	/// <summary>Schema class <c>CitadelVotingPosterHeroData_t</c>. <see href="https://deadworks.net/db/schema/server/CitadelVotingPosterHeroData_t">Modding database</see>.</summary>
 	public partial class CitadelVotingPosterHeroData_t : SchemaObject, ISchemaClass<CitadelVotingPosterHeroData_t> {
 		internal CitadelVotingPosterHeroData_t() { }
 		static CitadelVotingPosterHeroData_t ISchemaClass<CitadelVotingPosterHeroData_t>.New() => new();

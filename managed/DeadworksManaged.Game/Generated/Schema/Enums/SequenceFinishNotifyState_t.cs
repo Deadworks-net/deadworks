@@ -6,7 +6,7 @@
 namespace DeadworksManaged.Game;
 
 public static partial class Schema {
-	/// <summary>Schema enum <c>SequenceFinishNotifyState_t</c>. <see href="https://deadworks.net/db/schema/client/SequenceFinishNotifyState_t">Modding database</see>.</summary>
+	/// <summary>Schema enum <c>SequenceFinishNotifyState_t</c>. <see href="https://deadworks.net/db/schema/server/SequenceFinishNotifyState_t">Modding database</see>.</summary>
 	public enum SequenceFinishNotifyState_t : byte {
 		eDoNotNotify = 0,
 		eNotifyWhenFinished = 1,

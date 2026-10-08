@@ -7,7 +7,7 @@ using System.Numerics;
 namespace DeadworksManaged.Game;
 
 public static partial class Schema {
-	/// <summary>Schema class <c>CCitadelProjectileTrackingParams</c>. <see href="https://deadworks.net/db/schema/client/CCitadelProjectileTrackingParams">Modding database</see>.</summary>
+	/// <summary>Schema class <c>CCitadelProjectileTrackingParams</c>. <see href="https://deadworks.net/db/schema/server/CCitadelProjectileTrackingParams">Modding database</see>.</summary>
 	public partial class CCitadelProjectileTrackingParams : SchemaObject, ISchemaClass<CCitadelProjectileTrackingParams> {
 		internal CCitadelProjectileTrackingParams() { }
 		static CCitadelProjectileTrackingParams ISchemaClass<CCitadelProjectileTrackingParams>.New() => new();

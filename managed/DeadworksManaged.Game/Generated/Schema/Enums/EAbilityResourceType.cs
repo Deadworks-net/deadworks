@@ -6,7 +6,7 @@
 namespace DeadworksManaged.Game;
 
 public static partial class Schema {
-	/// <summary>Schema enum <c>EAbilityResourceType</c>. <see href="https://deadworks.net/db/schema/client/EAbilityResourceType">Modding database</see>.</summary>
+	/// <summary>Schema enum <c>EAbilityResourceType</c>. <see href="https://deadworks.net/db/schema/server/EAbilityResourceType">Modding database</see>.</summary>
 	public enum EAbilityResourceType : uint {
 		EResourceType_None = 0,
 		EResourceType_Rage = 1,

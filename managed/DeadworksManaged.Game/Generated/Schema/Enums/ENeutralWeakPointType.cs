@@ -6,7 +6,7 @@
 namespace DeadworksManaged.Game;
 
 public static partial class Schema {
-	/// <summary>Schema enum <c>ENeutralWeakPointType</c>. <see href="https://deadworks.net/db/schema/client/ENeutralWeakPointType">Modding database</see>.</summary>
+	/// <summary>Schema enum <c>ENeutralWeakPointType</c>. <see href="https://deadworks.net/db/schema/server/ENeutralWeakPointType">Modding database</see>.</summary>
 	public enum ENeutralWeakPointType : byte {
 		ENWP_Weak = 0,
 		ENWP_Med = 1,

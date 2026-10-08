@@ -7,7 +7,7 @@ using System.Numerics;
 namespace DeadworksManaged.Game;
 
 public static partial class Schema {
-	/// <summary>Schema class <c>CSkillFloat</c>. <see href="https://deadworks.net/db/schema/client/CSkillFloat">Modding database</see>.</summary>
+	/// <summary>Schema class <c>CSkillFloat</c>. <see href="https://deadworks.net/db/schema/server/CSkillFloat">Modding database</see>.</summary>
 	public partial class CSkillFloat : SchemaObject, ISchemaClass<CSkillFloat> {
 		internal CSkillFloat() { }
 		static CSkillFloat ISchemaClass<CSkillFloat>.New() => new();

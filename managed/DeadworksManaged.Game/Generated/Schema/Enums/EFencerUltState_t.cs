@@ -6,7 +6,7 @@
 namespace DeadworksManaged.Game;
 
 public static partial class Schema {
-	/// <summary>Schema enum <c>EFencerUltState_t</c>. <see href="https://deadworks.net/db/schema/client/EFencerUltState_t">Modding database</see>.</summary>
+	/// <summary>Schema enum <c>EFencerUltState_t</c>. <see href="https://deadworks.net/db/schema/server/EFencerUltState_t">Modding database</see>.</summary>
 	public enum EFencerUltState_t : byte {
 		EFencerUlt_None = 0,
 		EFencerUlt_Windup = 1,

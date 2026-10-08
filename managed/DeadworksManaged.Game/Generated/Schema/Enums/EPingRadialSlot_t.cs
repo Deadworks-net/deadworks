@@ -6,7 +6,7 @@
 namespace DeadworksManaged.Game;
 
 public static partial class Schema {
-	/// <summary>Schema enum <c>EPingRadialSlot_t</c>. <see href="https://deadworks.net/db/schema/client/EPingRadialSlot_t">Modding database</see>.</summary>
+	/// <summary>Schema enum <c>EPingRadialSlot_t</c>. <see href="https://deadworks.net/db/schema/server/EPingRadialSlot_t">Modding database</see>.</summary>
 	public enum EPingRadialSlot_t : uint {
 		k_ePingSlot_North = 0,
 		k_ePingSlot_East = 1,

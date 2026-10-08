@@ -6,7 +6,7 @@
 namespace DeadworksManaged.Game;
 
 public static partial class Schema {
-	/// <summary>Schema enum <c>EModifierState</c>. <see href="https://deadworks.net/db/schema/client/EModifierState">Modding database</see>.</summary>
+	/// <summary>Schema enum <c>EModifierState</c>. <see href="https://deadworks.net/db/schema/server/EModifierState">Modding database</see>.</summary>
 	public enum EModifierState : ushort {
 		MODIFIER_STATE_MATERIAL_OVERRIDE = 0,
 		MODIFIER_STATE_ENTERING_VEHICLE = 1,

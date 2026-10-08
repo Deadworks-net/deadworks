@@ -6,7 +6,7 @@
 namespace DeadworksManaged.Game;
 
 public static partial class Schema {
-	/// <summary>Schema enum <c>CitadelEntityMessageIds</c>. <see href="https://deadworks.net/db/schema/client/CitadelEntityMessageIds">Modding database</see>.</summary>
+	/// <summary>Schema enum <c>CitadelEntityMessageIds</c>. <see href="https://deadworks.net/db/schema/server/CitadelEntityMessageIds">Modding database</see>.</summary>
 	public enum CitadelEntityMessageIds : uint {
 		k_EEntityMsg_BreakablePropSpawnDebris = 500,
 	}

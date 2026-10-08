@@ -7,7 +7,7 @@ using System.Numerics;
 namespace DeadworksManaged.Game;
 
 public static partial class Schema {
-	/// <summary>Schema class <c>ModifierScriptedEventHandler_t</c>. <see href="https://deadworks.net/db/schema/client/ModifierScriptedEventHandler_t">Modding database</see>.</summary>
+	/// <summary>Schema class <c>ModifierScriptedEventHandler_t</c>. <see href="https://deadworks.net/db/schema/server/ModifierScriptedEventHandler_t">Modding database</see>.</summary>
 	public partial class ModifierScriptedEventHandler_t : SchemaObject, ISchemaClass<ModifierScriptedEventHandler_t> {
 		internal ModifierScriptedEventHandler_t() { }
 		static ModifierScriptedEventHandler_t ISchemaClass<ModifierScriptedEventHandler_t>.New() => new();

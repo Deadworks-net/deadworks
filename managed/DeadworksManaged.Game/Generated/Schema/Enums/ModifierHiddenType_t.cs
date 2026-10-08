@@ -6,7 +6,7 @@
 namespace DeadworksManaged.Game;
 
 public static partial class Schema {
-	/// <summary>Schema enum <c>ModifierHiddenType_t</c>. <see href="https://deadworks.net/db/schema/client/ModifierHiddenType_t">Modding database</see>.</summary>
+	/// <summary>Schema enum <c>ModifierHiddenType_t</c>. <see href="https://deadworks.net/db/schema/server/ModifierHiddenType_t">Modding database</see>.</summary>
 	public enum ModifierHiddenType_t : uint {
 		eHideAlways = 0,
 		eHideIfCasterIsTarget = 1,

@@ -7,7 +7,7 @@ using System.Numerics;
 namespace DeadworksManaged.Game;
 
 public static partial class Schema {
-	/// <summary>Schema class <c>ItemTradeRoundID_t</c>. <see href="https://deadworks.net/db/schema/client/ItemTradeRoundID_t">Modding database</see>.</summary>
+	/// <summary>Schema class <c>ItemTradeRoundID_t</c>. <see href="https://deadworks.net/db/schema/server/ItemTradeRoundID_t">Modding database</see>.</summary>
 	public partial class ItemTradeRoundID_t : SchemaObject, ISchemaClass<ItemTradeRoundID_t> {
 		internal ItemTradeRoundID_t() { }
 		static ItemTradeRoundID_t ISchemaClass<ItemTradeRoundID_t>.New() => new();

@@ -6,7 +6,7 @@
 namespace DeadworksManaged.Game;
 
 public static partial class Schema {
-	/// <summary>Schema enum <c>ELOSCheck</c>. <see href="https://deadworks.net/db/schema/client/ELOSCheck">Modding database</see>.</summary>
+	/// <summary>Schema enum <c>ELOSCheck</c>. <see href="https://deadworks.net/db/schema/server/ELOSCheck">Modding database</see>.</summary>
 	public enum ELOSCheck : uint {
 		None = 0,
 		Head = 1,

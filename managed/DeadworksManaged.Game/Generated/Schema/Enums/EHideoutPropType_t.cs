@@ -6,7 +6,7 @@
 namespace DeadworksManaged.Game;
 
 public static partial class Schema {
-	/// <summary>Schema enum <c>EHideoutPropType_t</c>. <see href="https://deadworks.net/db/schema/client/EHideoutPropType_t">Modding database</see>.</summary>
+	/// <summary>Schema enum <c>EHideoutPropType_t</c>. <see href="https://deadworks.net/db/schema/server/EHideoutPropType_t">Modding database</see>.</summary>
 	public enum EHideoutPropType_t : uint {
 		HIDEOUT_PROP_TYPE_INVALID = 0,
 		HIDEOUT_PROP_TYPE_SMALL = 1,

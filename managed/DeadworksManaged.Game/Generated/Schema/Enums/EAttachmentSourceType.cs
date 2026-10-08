@@ -6,7 +6,7 @@
 namespace DeadworksManaged.Game;
 
 public static partial class Schema {
-	/// <summary>Schema enum <c>EAttachmentSourceType</c>. <see href="https://deadworks.net/db/schema/client/EAttachmentSourceType">Modding database</see>.</summary>
+	/// <summary>Schema enum <c>EAttachmentSourceType</c>. <see href="https://deadworks.net/db/schema/server/EAttachmentSourceType">Modding database</see>.</summary>
 	public enum EAttachmentSourceType : uint {
 		EAttachmentSource_WeaponMuzzles = 0,
 		EAttachmentSource_Custom = 1,

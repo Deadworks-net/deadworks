@@ -7,7 +7,7 @@ using System.Numerics;
 namespace DeadworksManaged.Game;
 
 public static partial class Schema {
-	/// <summary>Schema class <c>IChoreoServices</c>. <see href="https://deadworks.net/db/schema/client/IChoreoServices">Modding database</see>.</summary>
+	/// <summary>Schema class <c>IChoreoServices</c>. <see href="https://deadworks.net/db/schema/server/IChoreoServices">Modding database</see>.</summary>
 	public partial class IChoreoServices : SchemaObject, ISchemaClass<IChoreoServices> {
 		internal IChoreoServices() { }
 		static IChoreoServices ISchemaClass<IChoreoServices>.New() => new();

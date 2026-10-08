@@ -6,7 +6,7 @@
 namespace DeadworksManaged.Game;
 
 public static partial class Schema {
-	/// <summary>Schema enum <c>ExternalAnimGraphInactiveBehavior_t</c>. <see href="https://deadworks.net/db/schema/client/ExternalAnimGraphInactiveBehavior_t">Modding database</see>.</summary>
+	/// <summary>Schema enum <c>ExternalAnimGraphInactiveBehavior_t</c>. <see href="https://deadworks.net/db/schema/server/ExternalAnimGraphInactiveBehavior_t">Modding database</see>.</summary>
 	public enum ExternalAnimGraphInactiveBehavior_t : byte {
 		eNone = 0,
 		eUnbind = 1,

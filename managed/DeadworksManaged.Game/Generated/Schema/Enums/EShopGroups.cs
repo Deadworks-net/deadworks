@@ -6,7 +6,7 @@
 namespace DeadworksManaged.Game;
 
 public static partial class Schema {
-	/// <summary>Schema enum <c>EShopGroups</c>. <see href="https://deadworks.net/db/schema/client/EShopGroups">Modding database</see>.</summary>
+	/// <summary>Schema enum <c>EShopGroups</c>. <see href="https://deadworks.net/db/schema/server/EShopGroups">Modding database</see>.</summary>
 	public enum EShopGroups : uint {
 		EMagazines = 0,
 		EBulletVelocity = 1,

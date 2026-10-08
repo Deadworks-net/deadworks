@@ -6,7 +6,7 @@
 namespace DeadworksManaged.Game;
 
 public static partial class Schema {
-	/// <summary>Schema enum <c>EDenyDistributionType</c>. <see href="https://deadworks.net/db/schema/client/EDenyDistributionType">Modding database</see>.</summary>
+	/// <summary>Schema enum <c>EDenyDistributionType</c>. <see href="https://deadworks.net/db/schema/server/EDenyDistributionType">Modding database</see>.</summary>
 	public enum EDenyDistributionType : uint {
 		EDenyToDenier = 0,
 		EDenyToDenierNearbyTeammates = 1,

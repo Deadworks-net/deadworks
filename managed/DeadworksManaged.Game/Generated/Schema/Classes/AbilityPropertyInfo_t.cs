@@ -7,7 +7,7 @@ using System.Numerics;
 namespace DeadworksManaged.Game;
 
 public static partial class Schema {
-	/// <summary>Schema class <c>AbilityPropertyInfo_t</c>. <see href="https://deadworks.net/db/schema/client/AbilityPropertyInfo_t">Modding database</see>.</summary>
+	/// <summary>Schema class <c>AbilityPropertyInfo_t</c>. <see href="https://deadworks.net/db/schema/server/AbilityPropertyInfo_t">Modding database</see>.</summary>
 	public partial class AbilityPropertyInfo_t : SchemaObject, ISchemaClass<AbilityPropertyInfo_t> {
 		internal AbilityPropertyInfo_t() { }
 		static AbilityPropertyInfo_t ISchemaClass<AbilityPropertyInfo_t>.New() => new();

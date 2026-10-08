@@ -6,7 +6,7 @@
 namespace DeadworksManaged.Game;
 
 public static partial class Schema {
-	/// <summary>Schema enum <c>ECitadelRegionMode</c>. <see href="https://deadworks.net/db/schema/client/ECitadelRegionMode">Modding database</see>.</summary>
+	/// <summary>Schema enum <c>ECitadelRegionMode</c>. <see href="https://deadworks.net/db/schema/server/ECitadelRegionMode">Modding database</see>.</summary>
 	public enum ECitadelRegionMode : uint {
 		k_ECitadelRegionMode_ROW = 0,
 		k_ECitadelRegionMode_Europe = 1,

@@ -6,7 +6,7 @@
 namespace DeadworksManaged.Game;
 
 public static partial class Schema {
-	/// <summary>Schema enum <c>EntityDissolveType_t</c>. <see href="https://deadworks.net/db/schema/client/EntityDissolveType_t">Modding database</see>.</summary>
+	/// <summary>Schema enum <c>EntityDissolveType_t</c>. <see href="https://deadworks.net/db/schema/server/EntityDissolveType_t">Modding database</see>.</summary>
 	public enum EntityDissolveType_t : int {
 		ENTITY_DISSOLVE_INVALID = -1,
 		ENTITY_DISSOLVE_NORMAL = 0,

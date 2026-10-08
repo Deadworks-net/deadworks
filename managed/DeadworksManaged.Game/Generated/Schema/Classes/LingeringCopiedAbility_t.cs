@@ -7,7 +7,7 @@ using System.Numerics;
 namespace DeadworksManaged.Game;
 
 public static partial class Schema {
-	/// <summary>Schema class <c>LingeringCopiedAbility_t</c>. <see href="https://deadworks.net/db/schema/client/LingeringCopiedAbility_t">Modding database</see>.</summary>
+	/// <summary>Schema class <c>LingeringCopiedAbility_t</c>. <see href="https://deadworks.net/db/schema/server/LingeringCopiedAbility_t">Modding database</see>.</summary>
 	public partial class LingeringCopiedAbility_t : SchemaObject, ISchemaClass<LingeringCopiedAbility_t> {
 		internal LingeringCopiedAbility_t() { }
 		static LingeringCopiedAbility_t ISchemaClass<LingeringCopiedAbility_t>.New() => new();

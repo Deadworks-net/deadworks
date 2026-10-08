@@ -6,7 +6,7 @@
 namespace DeadworksManaged.Game;
 
 public static partial class Schema {
-	/// <summary>Schema enum <c>ECitadelChatMessage</c>. <see href="https://deadworks.net/db/schema/client/ECitadelChatMessage">Modding database</see>.</summary>
+	/// <summary>Schema enum <c>ECitadelChatMessage</c>. <see href="https://deadworks.net/db/schema/server/ECitadelChatMessage">Modding database</see>.</summary>
 	public enum ECitadelChatMessage : uint {
 		CITADEL_CHAT_MESSAGE_UNPAUSE_COUNTDOWN = 1,
 		CITADEL_CHAT_MESSAGE_UNPAUSED = 2,

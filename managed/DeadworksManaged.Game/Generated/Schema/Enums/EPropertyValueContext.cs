@@ -6,7 +6,7 @@
 namespace DeadworksManaged.Game;
 
 public static partial class Schema {
-	/// <summary>Schema enum <c>EPropertyValueContext</c>. <see href="https://deadworks.net/db/schema/client/EPropertyValueContext">Modding database</see>.</summary>
+	/// <summary>Schema enum <c>EPropertyValueContext</c>. <see href="https://deadworks.net/db/schema/server/EPropertyValueContext">Modding database</see>.</summary>
 	public enum EPropertyValueContext : uint {
 		Main = 0,
 		StreetBrawl = 1,

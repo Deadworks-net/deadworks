@@ -7,7 +7,7 @@ using System.Numerics;
 namespace DeadworksManaged.Game;
 
 public static partial class Schema {
-	/// <summary>Schema class <c>NPCSensingCategoryMask_t</c>. <see href="https://deadworks.net/db/schema/client/NPCSensingCategoryMask_t">Modding database</see>.</summary>
+	/// <summary>Schema class <c>NPCSensingCategoryMask_t</c>. <see href="https://deadworks.net/db/schema/server/NPCSensingCategoryMask_t">Modding database</see>.</summary>
 	public partial class NPCSensingCategoryMask_t : SchemaObject, ISchemaClass<NPCSensingCategoryMask_t> {
 		internal NPCSensingCategoryMask_t() { }
 		static NPCSensingCategoryMask_t ISchemaClass<NPCSensingCategoryMask_t>.New() => new();

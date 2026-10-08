@@ -6,7 +6,7 @@
 namespace DeadworksManaged.Game;
 
 public static partial class Schema {
-	/// <summary>Schema enum <c>EntityDistanceMode_t</c>. <see href="https://deadworks.net/db/schema/client/EntityDistanceMode_t">Modding database</see>.</summary>
+	/// <summary>Schema enum <c>EntityDistanceMode_t</c>. <see href="https://deadworks.net/db/schema/server/EntityDistanceMode_t">Modding database</see>.</summary>
 	public enum EntityDistanceMode_t : uint {
 		eOriginToOrigin = 0,
 		eCenterToCenter = 1,

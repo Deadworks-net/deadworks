@@ -7,7 +7,7 @@ using System.Numerics;
 namespace DeadworksManaged.Game;
 
 public static partial class Schema {
-	/// <summary>Schema class <c>CPathQueryUtil</c>. <see href="https://deadworks.net/db/schema/client/CPathQueryUtil">Modding database</see>.</summary>
+	/// <summary>Schema class <c>CPathQueryUtil</c>. <see href="https://deadworks.net/db/schema/server/CPathQueryUtil">Modding database</see>.</summary>
 	public partial class CPathQueryUtil : SchemaObject, ISchemaClass<CPathQueryUtil> {
 		internal CPathQueryUtil() { }
 		static CPathQueryUtil ISchemaClass<CPathQueryUtil>.New() => new();

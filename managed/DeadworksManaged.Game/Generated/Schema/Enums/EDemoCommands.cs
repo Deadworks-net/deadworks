@@ -6,7 +6,7 @@
 namespace DeadworksManaged.Game;
 
 public static partial class Schema {
-	/// <summary>Schema enum <c>EDemoCommands</c>. <see href="https://deadworks.net/db/schema/client/EDemoCommands">Modding database</see>.</summary>
+	/// <summary>Schema enum <c>EDemoCommands</c>. <see href="https://deadworks.net/db/schema/server/EDemoCommands">Modding database</see>.</summary>
 	public enum EDemoCommands : int {
 		DEM_Error = -1,
 		DEM_Stop = 0,

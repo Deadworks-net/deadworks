@@ -6,7 +6,7 @@
 namespace DeadworksManaged.Game;
 
 public static partial class Schema {
-	/// <summary>Schema enum <c>EntityAttachmentType_t</c>. <see href="https://deadworks.net/db/schema/client/EntityAttachmentType_t">Modding database</see>.</summary>
+	/// <summary>Schema enum <c>EntityAttachmentType_t</c>. <see href="https://deadworks.net/db/schema/server/EntityAttachmentType_t">Modding database</see>.</summary>
 	public enum EntityAttachmentType_t : uint {
 		eAbsOrigin = 0,
 		eCenter = 1,

@@ -6,7 +6,7 @@
 namespace DeadworksManaged.Game;
 
 public static partial class Schema {
-	/// <summary>Schema enum <c>InputBitMask_t</c>. <see href="https://deadworks.net/db/schema/client/InputBitMask_t">Modding database</see>.</summary>
+	/// <summary>Schema enum <c>InputBitMask_t</c>. <see href="https://deadworks.net/db/schema/server/InputBitMask_t">Modding database</see>.</summary>
 	public enum InputBitMask_t : long {
 		IN_NONE = 0,
 		IN_ALL = -1,

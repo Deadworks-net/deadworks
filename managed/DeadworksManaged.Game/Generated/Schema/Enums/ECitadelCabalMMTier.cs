@@ -6,7 +6,7 @@
 namespace DeadworksManaged.Game;
 
 public static partial class Schema {
-	/// <summary>Schema enum <c>ECitadelCabalMMTier</c>. <see href="https://deadworks.net/db/schema/client/ECitadelCabalMMTier">Modding database</see>.</summary>
+	/// <summary>Schema enum <c>ECitadelCabalMMTier</c>. <see href="https://deadworks.net/db/schema/server/ECitadelCabalMMTier">Modding database</see>.</summary>
 	public enum ECitadelCabalMMTier : uint {
 		k_eCabalMMTier_Invalid = 0,
 		k_eCabalMMTier_Bronze = 1,

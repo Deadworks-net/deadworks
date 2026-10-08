@@ -6,7 +6,7 @@
 namespace DeadworksManaged.Game;
 
 public static partial class Schema {
-	/// <summary>Schema enum <c>AI_PathState_t</c>. <see href="https://deadworks.net/db/schema/client/AI_PathState_t">Modding database</see>.</summary>
+	/// <summary>Schema enum <c>AI_PathState_t</c>. <see href="https://deadworks.net/db/schema/server/AI_PathState_t">Modding database</see>.</summary>
 	public enum AI_PathState_t : int {
 		eInvalid = -1,
 		eBuilding = 0,

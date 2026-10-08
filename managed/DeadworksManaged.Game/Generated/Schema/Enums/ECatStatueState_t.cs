@@ -6,7 +6,7 @@
 namespace DeadworksManaged.Game;
 
 public static partial class Schema {
-	/// <summary>Schema enum <c>ECatStatueState_t</c>. <see href="https://deadworks.net/db/schema/client/ECatStatueState_t">Modding database</see>.</summary>
+	/// <summary>Schema enum <c>ECatStatueState_t</c>. <see href="https://deadworks.net/db/schema/server/ECatStatueState_t">Modding database</see>.</summary>
 	public enum ECatStatueState_t : byte {
 		ECatStatue_None = 0,
 		ECatStatue_Shoulder = 1,

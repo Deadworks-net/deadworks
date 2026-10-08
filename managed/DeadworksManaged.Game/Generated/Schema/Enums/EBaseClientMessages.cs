@@ -6,7 +6,7 @@
 namespace DeadworksManaged.Game;
 
 public static partial class Schema {
-	/// <summary>Schema enum <c>EBaseClientMessages</c>. <see href="https://deadworks.net/db/schema/client/EBaseClientMessages">Modding database</see>.</summary>
+	/// <summary>Schema enum <c>EBaseClientMessages</c>. <see href="https://deadworks.net/db/schema/server/EBaseClientMessages">Modding database</see>.</summary>
 	public enum EBaseClientMessages : uint {
 		CM_CustomGameEvent = 280,
 		CM_CustomGameEventBounce = 281,

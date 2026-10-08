@@ -6,7 +6,7 @@
 namespace DeadworksManaged.Game;
 
 public static partial class Schema {
-	/// <summary>Schema enum <c>EPlayerSprayStatus</c>. <see href="https://deadworks.net/db/schema/client/EPlayerSprayStatus">Modding database</see>.</summary>
+	/// <summary>Schema enum <c>EPlayerSprayStatus</c>. <see href="https://deadworks.net/db/schema/server/EPlayerSprayStatus">Modding database</see>.</summary>
 	public enum EPlayerSprayStatus : uint {
 		k_eSuccess = 1,
 		k_eInvalidPawn = 2,

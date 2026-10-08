@@ -7,7 +7,7 @@ using System.Numerics;
 namespace DeadworksManaged.Game;
 
 public static partial class Schema {
-	/// <summary>Schema class <c>CustomCrosshairSettings_t</c>. <see href="https://deadworks.net/db/schema/client/CustomCrosshairSettings_t">Modding database</see>.</summary>
+	/// <summary>Schema class <c>CustomCrosshairSettings_t</c>. <see href="https://deadworks.net/db/schema/server/CustomCrosshairSettings_t">Modding database</see>.</summary>
 	public partial class CustomCrosshairSettings_t : SchemaObject, ISchemaClass<CustomCrosshairSettings_t> {
 		internal CustomCrosshairSettings_t() { }
 		static CustomCrosshairSettings_t ISchemaClass<CustomCrosshairSettings_t>.New() => new();

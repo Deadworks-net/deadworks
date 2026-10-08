@@ -6,7 +6,7 @@
 namespace DeadworksManaged.Game;
 
 public static partial class Schema {
-	/// <summary>Schema enum <c>PartnerAccountType</c>. <see href="https://deadworks.net/db/schema/client/PartnerAccountType">Modding database</see>.</summary>
+	/// <summary>Schema enum <c>PartnerAccountType</c>. <see href="https://deadworks.net/db/schema/server/PartnerAccountType">Modding database</see>.</summary>
 	public enum PartnerAccountType : uint {
 		PARTNER_NONE = 0,
 		PARTNER_PERFECT_WORLD = 1,

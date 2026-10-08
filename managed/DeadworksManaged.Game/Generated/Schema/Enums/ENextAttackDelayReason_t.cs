@@ -6,7 +6,7 @@
 namespace DeadworksManaged.Game;
 
 public static partial class Schema {
-	/// <summary>Schema enum <c>ENextAttackDelayReason_t</c>. <see href="https://deadworks.net/db/schema/client/ENextAttackDelayReason_t">Modding database</see>.</summary>
+	/// <summary>Schema enum <c>ENextAttackDelayReason_t</c>. <see href="https://deadworks.net/db/schema/server/ENextAttackDelayReason_t">Modding database</see>.</summary>
 	public enum ENextAttackDelayReason_t : uint {
 		EDelayReason_Reload = 0,
 		EDelayReason_BetweenShots = 1,

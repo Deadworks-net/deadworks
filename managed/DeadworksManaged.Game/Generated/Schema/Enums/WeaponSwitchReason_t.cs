@@ -6,7 +6,7 @@
 namespace DeadworksManaged.Game;
 
 public static partial class Schema {
-	/// <summary>Schema enum <c>WeaponSwitchReason_t</c>. <see href="https://deadworks.net/db/schema/client/WeaponSwitchReason_t">Modding database</see>.</summary>
+	/// <summary>Schema enum <c>WeaponSwitchReason_t</c>. <see href="https://deadworks.net/db/schema/server/WeaponSwitchReason_t">Modding database</see>.</summary>
 	public enum WeaponSwitchReason_t : uint {
 		eDrawn = 0,
 		eEquipped = 1,

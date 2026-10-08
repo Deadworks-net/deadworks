@@ -6,7 +6,7 @@
 namespace DeadworksManaged.Game;
 
 public static partial class Schema {
-	/// <summary>Schema enum <c>StatusEffectProperty_t</c>. <see href="https://deadworks.net/db/schema/client/StatusEffectProperty_t">Modding database</see>.</summary>
+	/// <summary>Schema enum <c>StatusEffectProperty_t</c>. <see href="https://deadworks.net/db/schema/server/StatusEffectProperty_t">Modding database</see>.</summary>
 	public enum StatusEffectProperty_t : uint {
 		EStatusEffect_None = 0,
 		EStatusEffect_EMP = 1,

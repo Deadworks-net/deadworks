@@ -6,7 +6,7 @@
 namespace DeadworksManaged.Game;
 
 public static partial class Schema {
-	/// <summary>Schema enum <c>ModifierSoundRecipients_t</c>. <see href="https://deadworks.net/db/schema/client/ModifierSoundRecipients_t">Modding database</see>.</summary>
+	/// <summary>Schema enum <c>ModifierSoundRecipients_t</c>. <see href="https://deadworks.net/db/schema/server/ModifierSoundRecipients_t">Modding database</see>.</summary>
 	public enum ModifierSoundRecipients_t : uint {
 		MODIFIER_SOUND_RECIPIENT_ALWAYS = 0,
 		MODIFIER_SOUND_RECIPIENT_PARENT_IS_LOCAL_PLAYER = 1,

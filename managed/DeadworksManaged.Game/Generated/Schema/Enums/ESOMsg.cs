@@ -6,7 +6,7 @@
 namespace DeadworksManaged.Game;
 
 public static partial class Schema {
-	/// <summary>Schema enum <c>ESOMsg</c>. <see href="https://deadworks.net/db/schema/client/ESOMsg">Modding database</see>.</summary>
+	/// <summary>Schema enum <c>ESOMsg</c>. <see href="https://deadworks.net/db/schema/server/ESOMsg">Modding database</see>.</summary>
 	public enum ESOMsg : uint {
 		k_ESOMsg_Create = 21,
 		k_ESOMsg_Update = 22,

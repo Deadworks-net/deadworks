@@ -7,7 +7,7 @@ using System.Numerics;
 namespace DeadworksManaged.Game;
 
 public static partial class Schema {
-	/// <summary>Schema class <c>DestructiblePartDamageRequest_t</c>. <see href="https://deadworks.net/db/schema/client/DestructiblePartDamageRequest_t">Modding database</see>.</summary>
+	/// <summary>Schema class <c>DestructiblePartDamageRequest_t</c>. <see href="https://deadworks.net/db/schema/server/DestructiblePartDamageRequest_t">Modding database</see>.</summary>
 	public partial class DestructiblePartDamageRequest_t : SchemaObject, ISchemaClass<DestructiblePartDamageRequest_t> {
 		internal DestructiblePartDamageRequest_t() { }
 		static DestructiblePartDamageRequest_t ISchemaClass<DestructiblePartDamageRequest_t>.New() => new();

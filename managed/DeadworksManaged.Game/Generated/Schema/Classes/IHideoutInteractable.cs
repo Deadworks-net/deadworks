@@ -7,7 +7,7 @@ using System.Numerics;
 namespace DeadworksManaged.Game;
 
 public static partial class Schema {
-	/// <summary>Schema class <c>IHideoutInteractable</c>. <see href="https://deadworks.net/db/schema/client/IHideoutInteractable">Modding database</see>.</summary>
+	/// <summary>Schema class <c>IHideoutInteractable</c>. <see href="https://deadworks.net/db/schema/server/IHideoutInteractable">Modding database</see>.</summary>
 	public partial class IHideoutInteractable : SchemaObject, ISchemaClass<IHideoutInteractable> {
 		internal IHideoutInteractable() { }
 		static IHideoutInteractable ISchemaClass<IHideoutInteractable>.New() => new();

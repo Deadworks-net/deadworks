@@ -6,7 +6,7 @@
 namespace DeadworksManaged.Game;
 
 public static partial class Schema {
-	/// <summary>Schema enum <c>AIMovementFlags_t</c>. <see href="https://deadworks.net/db/schema/client/AIMovementFlags_t">Modding database</see>.</summary>
+	/// <summary>Schema enum <c>AIMovementFlags_t</c>. <see href="https://deadworks.net/db/schema/server/AIMovementFlags_t">Modding database</see>.</summary>
 	public enum AIMovementFlags_t : uint {
 		MOVEMENT_FLAGS_NONE = 0,
 		MOVEMENT_FLAGS_PRESERVE_MOVEMENT_ON_COMPLETION = 1,

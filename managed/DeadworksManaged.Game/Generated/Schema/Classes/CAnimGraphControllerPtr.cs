@@ -7,7 +7,7 @@ using System.Numerics;
 namespace DeadworksManaged.Game;
 
 public static partial class Schema {
-	/// <summary>Schema class <c>CAnimGraphControllerPtr</c>. <see href="https://deadworks.net/db/schema/client/CAnimGraphControllerPtr">Modding database</see>.</summary>
+	/// <summary>Schema class <c>CAnimGraphControllerPtr</c>. <see href="https://deadworks.net/db/schema/server/CAnimGraphControllerPtr">Modding database</see>.</summary>
 	public partial class CAnimGraphControllerPtr : SchemaObject, ISchemaClass<CAnimGraphControllerPtr> {
 		internal CAnimGraphControllerPtr() { }
 		static CAnimGraphControllerPtr ISchemaClass<CAnimGraphControllerPtr>.New() => new();

@@ -6,7 +6,7 @@
 namespace DeadworksManaged.Game;
 
 public static partial class Schema {
-	/// <summary>Schema enum <c>CitadelUserMessageIds</c>. <see href="https://deadworks.net/db/schema/client/CitadelUserMessageIds">Modding database</see>.</summary>
+	/// <summary>Schema enum <c>CitadelUserMessageIds</c>. <see href="https://deadworks.net/db/schema/server/CitadelUserMessageIds">Modding database</see>.</summary>
 	public enum CitadelUserMessageIds : uint {
 		k_EUserMsg_Damage = 300,
 		k_EUserMsg_MapPing = 303,

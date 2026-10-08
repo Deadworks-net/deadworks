@@ -7,7 +7,7 @@ using System.Numerics;
 namespace DeadworksManaged.Game;
 
 public static partial class Schema {
-	/// <summary>Schema class <c>SatVolumeIndex_t</c>. <see href="https://deadworks.net/db/schema/client/SatVolumeIndex_t">Modding database</see>.</summary>
+	/// <summary>Schema class <c>SatVolumeIndex_t</c>. <see href="https://deadworks.net/db/schema/server/SatVolumeIndex_t">Modding database</see>.</summary>
 	public partial class SatVolumeIndex_t : SchemaObject, ISchemaClass<SatVolumeIndex_t> {
 		internal SatVolumeIndex_t() { }
 		static SatVolumeIndex_t ISchemaClass<SatVolumeIndex_t>.New() => new();

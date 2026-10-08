@@ -6,7 +6,7 @@
 namespace DeadworksManaged.Game;
 
 public static partial class Schema {
-	/// <summary>Schema enum <c>EGCCitadelServerMessages</c>. <see href="https://deadworks.net/db/schema/client/EGCCitadelServerMessages">Modding database</see>.</summary>
+	/// <summary>Schema enum <c>EGCCitadelServerMessages</c>. <see href="https://deadworks.net/db/schema/server/EGCCitadelServerMessages">Modding database</see>.</summary>
 	public enum EGCCitadelServerMessages : uint {
 		k_EMsgServerToGCMatchSignoutPermission = 10012,
 		k_EMsgServerToGCMatchSignoutPermissionResponse = 10013,

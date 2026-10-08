@@ -6,7 +6,7 @@
 namespace DeadworksManaged.Game;
 
 public static partial class Schema {
-	/// <summary>Schema enum <c>EntitySubclassScope_t</c>. <see href="https://deadworks.net/db/schema/client/EntitySubclassScope_t">Modding database</see>.</summary>
+	/// <summary>Schema enum <c>EntitySubclassScope_t</c>. <see href="https://deadworks.net/db/schema/server/EntitySubclassScope_t">Modding database</see>.</summary>
 	public enum EntitySubclassScope_t : int {
 		SUBCLASS_SCOPE_NONE = -1,
 		SUBCLASS_SCOPE_MISC = 0,

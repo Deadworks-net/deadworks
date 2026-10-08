@@ -6,7 +6,7 @@
 namespace DeadworksManaged.Game;
 
 public static partial class Schema {
-	/// <summary>Schema enum <c>CrosshairSpreadIndicatingElement</c>. <see href="https://deadworks.net/db/schema/client/CrosshairSpreadIndicatingElement">Modding database</see>.</summary>
+	/// <summary>Schema enum <c>CrosshairSpreadIndicatingElement</c>. <see href="https://deadworks.net/db/schema/server/CrosshairSpreadIndicatingElement">Modding database</see>.</summary>
 	public enum CrosshairSpreadIndicatingElement : uint {
 		LINE_GAP = 0,
 		DOT_OUTLINE_RADIUS = 1,

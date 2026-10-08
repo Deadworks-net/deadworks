@@ -7,7 +7,7 @@ using System.Numerics;
 namespace DeadworksManaged.Game;
 
 public static partial class Schema {
-	/// <summary>Schema class <c>CNetworkOriginCellCoordQuantizedVector</c>. <see href="https://deadworks.net/db/schema/client/CNetworkOriginCellCoordQuantizedVector">Modding database</see>.</summary>
+	/// <summary>Schema class <c>CNetworkOriginCellCoordQuantizedVector</c>. <see href="https://deadworks.net/db/schema/server/CNetworkOriginCellCoordQuantizedVector">Modding database</see>.</summary>
 	public partial class CNetworkOriginCellCoordQuantizedVector : SchemaObject, ISchemaClass<CNetworkOriginCellCoordQuantizedVector> {
 		internal CNetworkOriginCellCoordQuantizedVector() { }
 		static CNetworkOriginCellCoordQuantizedVector ISchemaClass<CNetworkOriginCellCoordQuantizedVector>.New() => new();

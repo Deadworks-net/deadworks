@@ -6,7 +6,7 @@
 namespace DeadworksManaged.Game;
 
 public static partial class Schema {
-	/// <summary>Schema enum <c>EAbilityTargetingLocation_t</c>. <see href="https://deadworks.net/db/schema/client/EAbilityTargetingLocation_t">Modding database</see>.</summary>
+	/// <summary>Schema enum <c>EAbilityTargetingLocation_t</c>. <see href="https://deadworks.net/db/schema/server/EAbilityTargetingLocation_t">Modding database</see>.</summary>
 	public enum EAbilityTargetingLocation_t : uint {
 		CITADEL_ABILITY_TARGETING_LOCATION_NONE = 0,
 		CITADEL_ABILITY_TARGETING_LOCATION_SELF = 1,

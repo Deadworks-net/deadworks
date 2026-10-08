@@ -6,7 +6,7 @@
 namespace DeadworksManaged.Game;
 
 public static partial class Schema {
-	/// <summary>Schema enum <c>EPlayOfTheGameState</c>. <see href="https://deadworks.net/db/schema/client/EPlayOfTheGameState">Modding database</see>.</summary>
+	/// <summary>Schema enum <c>EPlayOfTheGameState</c>. <see href="https://deadworks.net/db/schema/server/EPlayOfTheGameState">Modding database</see>.</summary>
 	public enum EPlayOfTheGameState : byte {
 		EPlayOfTheGameState_Inactive = 0,
 		EPlayOfTheGameState_Intro = 1,

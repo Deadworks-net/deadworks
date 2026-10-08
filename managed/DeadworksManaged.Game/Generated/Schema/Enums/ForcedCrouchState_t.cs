@@ -6,7 +6,7 @@
 namespace DeadworksManaged.Game;
 
 public static partial class Schema {
-	/// <summary>Schema enum <c>ForcedCrouchState_t</c>. <see href="https://deadworks.net/db/schema/client/ForcedCrouchState_t">Modding database</see>.</summary>
+	/// <summary>Schema enum <c>ForcedCrouchState_t</c>. <see href="https://deadworks.net/db/schema/server/ForcedCrouchState_t">Modding database</see>.</summary>
 	public enum ForcedCrouchState_t : uint {
 		FORCEDCROUCH_NONE = 0,
 		FORCEDCROUCH_CROUCHED = 1,

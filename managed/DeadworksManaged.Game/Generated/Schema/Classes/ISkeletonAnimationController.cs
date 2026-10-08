@@ -7,7 +7,7 @@ using System.Numerics;
 namespace DeadworksManaged.Game;
 
 public static partial class Schema {
-	/// <summary>Schema class <c>ISkeletonAnimationController</c>. <see href="https://deadworks.net/db/schema/client/ISkeletonAnimationController">Modding database</see>.</summary>
+	/// <summary>Schema class <c>ISkeletonAnimationController</c>. <see href="https://deadworks.net/db/schema/server/ISkeletonAnimationController">Modding database</see>.</summary>
 	public partial class ISkeletonAnimationController : SchemaObject, ISchemaClass<ISkeletonAnimationController> {
 		internal ISkeletonAnimationController() { }
 		static ISkeletonAnimationController ISchemaClass<ISkeletonAnimationController>.New() => new();

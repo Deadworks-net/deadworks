@@ -6,7 +6,7 @@
 namespace DeadworksManaged.Game;
 
 public static partial class Schema {
-	/// <summary>Schema enum <c>EHeroReleaseVoteOption_January2026</c>. <see href="https://deadworks.net/db/schema/client/EHeroReleaseVoteOption_January2026">Modding database</see>.</summary>
+	/// <summary>Schema enum <c>EHeroReleaseVoteOption_January2026</c>. <see href="https://deadworks.net/db/schema/server/EHeroReleaseVoteOption_January2026">Modding database</see>.</summary>
 	public enum EHeroReleaseVoteOption_January2026 : uint {
 		hero_priest = 0,
 		hero_necro = 1,

@@ -6,7 +6,7 @@
 namespace DeadworksManaged.Game;
 
 public static partial class Schema {
-	/// <summary>Schema enum <c>SolidType_t</c>. <see href="https://deadworks.net/db/schema/client/SolidType_t">Modding database</see>.</summary>
+	/// <summary>Schema enum <c>SolidType_t</c>. <see href="https://deadworks.net/db/schema/server/SolidType_t">Modding database</see>.</summary>
 	public enum SolidType_t : byte {
 		SOLID_NONE = 0,
 		SOLID_BSP = 1,

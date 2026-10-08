@@ -6,7 +6,7 @@
 namespace DeadworksManaged.Game;
 
 public static partial class Schema {
-	/// <summary>Schema enum <c>PostProcessingGameStates</c>. <see href="https://deadworks.net/db/schema/client/PostProcessingGameStates">Modding database</see>.</summary>
+	/// <summary>Schema enum <c>PostProcessingGameStates</c>. <see href="https://deadworks.net/db/schema/server/PostProcessingGameStates">Modding database</see>.</summary>
 	public enum PostProcessingGameStates : uint {
 		PostProcState_Killed = 0,
 		PostProcState_Black = 1,

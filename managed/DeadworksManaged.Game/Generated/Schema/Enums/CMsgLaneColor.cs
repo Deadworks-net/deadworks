@@ -6,7 +6,7 @@
 namespace DeadworksManaged.Game;
 
 public static partial class Schema {
-	/// <summary>Schema enum <c>CMsgLaneColor</c>. <see href="https://deadworks.net/db/schema/client/CMsgLaneColor">Modding database</see>.</summary>
+	/// <summary>Schema enum <c>CMsgLaneColor</c>. <see href="https://deadworks.net/db/schema/server/CMsgLaneColor">Modding database</see>.</summary>
 	public enum CMsgLaneColor : uint {
 		k_ELaneColor_Invalid = 0,
 		k_ELaneColor_Yellow = 1,

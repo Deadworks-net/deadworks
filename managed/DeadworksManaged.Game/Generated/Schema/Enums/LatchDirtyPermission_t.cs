@@ -6,7 +6,7 @@
 namespace DeadworksManaged.Game;
 
 public static partial class Schema {
-	/// <summary>Schema enum <c>LatchDirtyPermission_t</c>. <see href="https://deadworks.net/db/schema/client/LatchDirtyPermission_t">Modding database</see>.</summary>
+	/// <summary>Schema enum <c>LatchDirtyPermission_t</c>. <see href="https://deadworks.net/db/schema/server/LatchDirtyPermission_t">Modding database</see>.</summary>
 	public enum LatchDirtyPermission_t : uint {
 		LATCH_DIRTY_DISALLOW = 0,
 		LATCH_DIRTY_SERVER_CONTROLLED = 1,

@@ -6,7 +6,7 @@
 namespace DeadworksManaged.Game;
 
 public static partial class Schema {
-	/// <summary>Schema enum <c>ModifierOverheadDrawType_t</c>. <see href="https://deadworks.net/db/schema/client/ModifierOverheadDrawType_t">Modding database</see>.</summary>
+	/// <summary>Schema enum <c>ModifierOverheadDrawType_t</c>. <see href="https://deadworks.net/db/schema/server/ModifierOverheadDrawType_t">Modding database</see>.</summary>
 	public enum ModifierOverheadDrawType_t : uint {
 		OVERHEAD_DRAW_NEVER = 0,
 		OVERHEAD_DRAW_FOR_EVERYONE = 1,

@@ -6,7 +6,7 @@
 namespace DeadworksManaged.Game;
 
 public static partial class Schema {
-	/// <summary>Schema enum <c>PointTemplateClientOnlyEntityBehavior_t</c>. <see href="https://deadworks.net/db/schema/client/PointTemplateClientOnlyEntityBehavior_t">Modding database</see>.</summary>
+	/// <summary>Schema enum <c>PointTemplateClientOnlyEntityBehavior_t</c>. <see href="https://deadworks.net/db/schema/server/PointTemplateClientOnlyEntityBehavior_t">Modding database</see>.</summary>
 	public enum PointTemplateClientOnlyEntityBehavior_t : uint {
 		CREATE_FOR_CURRENTLY_CONNECTED_CLIENTS_ONLY = 0,
 		CREATE_FOR_CLIENTS_WHO_CONNECT_LATER = 1,

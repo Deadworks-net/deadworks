@@ -6,7 +6,7 @@
 namespace DeadworksManaged.Game;
 
 public static partial class Schema {
-	/// <summary>Schema enum <c>PointOrientGoalDirectionType_t</c>. <see href="https://deadworks.net/db/schema/client/PointOrientGoalDirectionType_t">Modding database</see>.</summary>
+	/// <summary>Schema enum <c>PointOrientGoalDirectionType_t</c>. <see href="https://deadworks.net/db/schema/server/PointOrientGoalDirectionType_t">Modding database</see>.</summary>
 	public enum PointOrientGoalDirectionType_t : uint {
 		eAbsOrigin = 0,
 		eCenter = 1,

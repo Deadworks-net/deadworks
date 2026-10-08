@@ -7,7 +7,7 @@ using System.Numerics;
 namespace DeadworksManaged.Game;
 
 public static partial class Schema {
-	/// <summary>Schema class <c>CitadelCameraDistanceOperationDef_t</c>. <see href="https://deadworks.net/db/schema/client/CitadelCameraDistanceOperationDef_t">Modding database</see>.</summary>
+	/// <summary>Schema class <c>CitadelCameraDistanceOperationDef_t</c>. <see href="https://deadworks.net/db/schema/server/CitadelCameraDistanceOperationDef_t">Modding database</see>.</summary>
 	public partial class CitadelCameraDistanceOperationDef_t : CitadelCameraOperationDef_t, ISchemaClass<CitadelCameraDistanceOperationDef_t> {
 		internal CitadelCameraDistanceOperationDef_t() { }
 		static CitadelCameraDistanceOperationDef_t ISchemaClass<CitadelCameraDistanceOperationDef_t>.New() => new();

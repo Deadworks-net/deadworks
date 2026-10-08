@@ -7,7 +7,7 @@ using System.Numerics;
 namespace DeadworksManaged.Game;
 
 public static partial class Schema {
-	/// <summary>Schema class <c>PerSurfaceImpactEffects_t</c>. <see href="https://deadworks.net/db/schema/client/PerSurfaceImpactEffects_t">Modding database</see>.</summary>
+	/// <summary>Schema class <c>PerSurfaceImpactEffects_t</c>. <see href="https://deadworks.net/db/schema/server/PerSurfaceImpactEffects_t">Modding database</see>.</summary>
 	public partial class PerSurfaceImpactEffects_t : SchemaObject, ISchemaClass<PerSurfaceImpactEffects_t> {
 		internal PerSurfaceImpactEffects_t() { }
 		static PerSurfaceImpactEffects_t ISchemaClass<PerSurfaceImpactEffects_t>.New() => new();

@@ -7,7 +7,7 @@ using System.Numerics;
 namespace DeadworksManaged.Game;
 
 public static partial class Schema {
-	/// <summary>Schema class <c>TrackedStatValue_t</c>. <see href="https://deadworks.net/db/schema/client/TrackedStatValue_t">Modding database</see>.</summary>
+	/// <summary>Schema class <c>TrackedStatValue_t</c>. <see href="https://deadworks.net/db/schema/server/TrackedStatValue_t">Modding database</see>.</summary>
 	public partial class TrackedStatValue_t : SchemaObject, ISchemaClass<TrackedStatValue_t> {
 		internal TrackedStatValue_t() { }
 		static TrackedStatValue_t ISchemaClass<TrackedStatValue_t>.New() => new();

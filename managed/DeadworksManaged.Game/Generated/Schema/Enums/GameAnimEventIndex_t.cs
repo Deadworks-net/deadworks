@@ -6,7 +6,7 @@
 namespace DeadworksManaged.Game;
 
 public static partial class Schema {
-	/// <summary>Schema enum <c>GameAnimEventIndex_t</c>. <see href="https://deadworks.net/db/schema/client/GameAnimEventIndex_t">Modding database</see>.</summary>
+	/// <summary>Schema enum <c>GameAnimEventIndex_t</c>. <see href="https://deadworks.net/db/schema/server/GameAnimEventIndex_t">Modding database</see>.</summary>
 	public enum GameAnimEventIndex_t : uint {
 		AE_EMPTY = 0,
 		AE_STATE_CHANGE_IN_PROGRESS = 1,

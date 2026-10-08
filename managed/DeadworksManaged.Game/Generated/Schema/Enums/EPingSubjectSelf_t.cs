@@ -6,7 +6,7 @@
 namespace DeadworksManaged.Game;
 
 public static partial class Schema {
-	/// <summary>Schema enum <c>EPingSubjectSelf_t</c>. <see href="https://deadworks.net/db/schema/client/EPingSubjectSelf_t">Modding database</see>.</summary>
+	/// <summary>Schema enum <c>EPingSubjectSelf_t</c>. <see href="https://deadworks.net/db/schema/server/EPingSubjectSelf_t">Modding database</see>.</summary>
 	public enum EPingSubjectSelf_t : uint {
 		k_ePingSubjectSelf_Any = 0,
 		k_ePingSubjectSelf_Self = 1,

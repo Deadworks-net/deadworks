@@ -6,7 +6,7 @@
 namespace DeadworksManaged.Game;
 
 public static partial class Schema {
-	/// <summary>Schema enum <c>ECitadelHintFeature</c>. <see href="https://deadworks.net/db/schema/client/ECitadelHintFeature">Modding database</see>.</summary>
+	/// <summary>Schema enum <c>ECitadelHintFeature</c>. <see href="https://deadworks.net/db/schema/server/ECitadelHintFeature">Modding database</see>.</summary>
 	public enum ECitadelHintFeature : uint {
 		CITADEL_HINT_FEATURE_INVALID = 0,
 		CITADEL_HINT_FEATURE_ZOOM_WEAPON = 1,

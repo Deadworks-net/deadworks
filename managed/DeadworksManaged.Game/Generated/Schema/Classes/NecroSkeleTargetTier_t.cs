@@ -7,7 +7,7 @@ using System.Numerics;
 namespace DeadworksManaged.Game;
 
 public static partial class Schema {
-	/// <summary>Schema class <c>NecroSkeleTargetTier_t</c>. <see href="https://deadworks.net/db/schema/client/NecroSkeleTargetTier_t">Modding database</see>.</summary>
+	/// <summary>Schema class <c>NecroSkeleTargetTier_t</c>. <see href="https://deadworks.net/db/schema/server/NecroSkeleTargetTier_t">Modding database</see>.</summary>
 	public partial class NecroSkeleTargetTier_t : SchemaObject, ISchemaClass<NecroSkeleTargetTier_t> {
 		internal NecroSkeleTargetTier_t() { }
 		static NecroSkeleTargetTier_t ISchemaClass<NecroSkeleTargetTier_t>.New() => new();

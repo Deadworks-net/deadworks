@@ -6,7 +6,7 @@
 namespace DeadworksManaged.Game;
 
 public static partial class Schema {
-	/// <summary>Schema enum <c>SubclassVDataChangeType_t</c>. <see href="https://deadworks.net/db/schema/client/SubclassVDataChangeType_t">Modding database</see>.</summary>
+	/// <summary>Schema enum <c>SubclassVDataChangeType_t</c>. <see href="https://deadworks.net/db/schema/server/SubclassVDataChangeType_t">Modding database</see>.</summary>
 	public enum SubclassVDataChangeType_t : uint {
 		SUBCLASS_VDATA_CREATED = 0,
 		SUBCLASS_VDATA_SUBCLASS_CHANGED = 1,

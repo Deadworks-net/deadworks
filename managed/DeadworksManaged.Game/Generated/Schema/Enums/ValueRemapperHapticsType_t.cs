@@ -6,7 +6,7 @@
 namespace DeadworksManaged.Game;
 
 public static partial class Schema {
-	/// <summary>Schema enum <c>ValueRemapperHapticsType_t</c>. <see href="https://deadworks.net/db/schema/client/ValueRemapperHapticsType_t">Modding database</see>.</summary>
+	/// <summary>Schema enum <c>ValueRemapperHapticsType_t</c>. <see href="https://deadworks.net/db/schema/server/ValueRemapperHapticsType_t">Modding database</see>.</summary>
 	public enum ValueRemapperHapticsType_t : uint {
 		HaticsType_Default = 0,
 		HaticsType_None = 1,

@@ -6,7 +6,7 @@
 namespace DeadworksManaged.Game;
 
 public static partial class Schema {
-	/// <summary>Schema enum <c>ECitadelLobbyTeam</c>. <see href="https://deadworks.net/db/schema/client/ECitadelLobbyTeam">Modding database</see>.</summary>
+	/// <summary>Schema enum <c>ECitadelLobbyTeam</c>. <see href="https://deadworks.net/db/schema/server/ECitadelLobbyTeam">Modding database</see>.</summary>
 	public enum ECitadelLobbyTeam : uint {
 		k_ECitadelLobbyTeam_Team0 = 0,
 		k_ECitadelLobbyTeam_Team1 = 1,

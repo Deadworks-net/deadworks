@@ -6,7 +6,7 @@
 namespace DeadworksManaged.Game;
 
 public static partial class Schema {
-	/// <summary>Schema enum <c>ChoreoScriptedMoveTo_t</c>. <see href="https://deadworks.net/db/schema/client/ChoreoScriptedMoveTo_t">Modding database</see>.</summary>
+	/// <summary>Schema enum <c>ChoreoScriptedMoveTo_t</c>. <see href="https://deadworks.net/db/schema/server/ChoreoScriptedMoveTo_t">Modding database</see>.</summary>
 	public enum ChoreoScriptedMoveTo_t : uint {
 		eWait = 0,
 		eMoveWithGait = 1,

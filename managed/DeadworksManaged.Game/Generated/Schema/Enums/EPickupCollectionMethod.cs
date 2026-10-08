@@ -6,7 +6,7 @@
 namespace DeadworksManaged.Game;
 
 public static partial class Schema {
-	/// <summary>Schema enum <c>EPickupCollectionMethod</c>. <see href="https://deadworks.net/db/schema/client/EPickupCollectionMethod">Modding database</see>.</summary>
+	/// <summary>Schema enum <c>EPickupCollectionMethod</c>. <see href="https://deadworks.net/db/schema/server/EPickupCollectionMethod">Modding database</see>.</summary>
 	public enum EPickupCollectionMethod : uint {
 		Touch = 0,
 		VacuumTrigger = 1,

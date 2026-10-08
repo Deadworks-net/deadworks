@@ -7,7 +7,7 @@ using System.Numerics;
 namespace DeadworksManaged.Game;
 
 public static partial class Schema {
-	/// <summary>Schema class <c>ModifierRenderAttribute_t</c>. <see href="https://deadworks.net/db/schema/client/ModifierRenderAttribute_t">Modding database</see>.</summary>
+	/// <summary>Schema class <c>ModifierRenderAttribute_t</c>. <see href="https://deadworks.net/db/schema/server/ModifierRenderAttribute_t">Modding database</see>.</summary>
 	public partial class ModifierRenderAttribute_t : SchemaObject, ISchemaClass<ModifierRenderAttribute_t> {
 		internal ModifierRenderAttribute_t() { }
 		static ModifierRenderAttribute_t ISchemaClass<ModifierRenderAttribute_t>.New() => new();

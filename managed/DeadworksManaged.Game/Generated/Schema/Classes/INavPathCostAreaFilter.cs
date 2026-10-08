@@ -7,7 +7,7 @@ using System.Numerics;
 namespace DeadworksManaged.Game;
 
 public static partial class Schema {
-	/// <summary>Schema class <c>INavPathCostAreaFilter</c>. <see href="https://deadworks.net/db/schema/client/INavPathCostAreaFilter">Modding database</see>.</summary>
+	/// <summary>Schema class <c>INavPathCostAreaFilter</c>. <see href="https://deadworks.net/db/schema/server/INavPathCostAreaFilter">Modding database</see>.</summary>
 	public partial class INavPathCostAreaFilter : SchemaObject, ISchemaClass<INavPathCostAreaFilter> {
 		internal INavPathCostAreaFilter() { }
 		static INavPathCostAreaFilter ISchemaClass<INavPathCostAreaFilter>.New() => new();

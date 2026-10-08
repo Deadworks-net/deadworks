@@ -6,7 +6,7 @@
 namespace DeadworksManaged.Game;
 
 public static partial class Schema {
-	/// <summary>Schema enum <c>AmmoPosition_t</c>. <see href="https://deadworks.net/db/schema/client/AmmoPosition_t">Modding database</see>.</summary>
+	/// <summary>Schema enum <c>AmmoPosition_t</c>. <see href="https://deadworks.net/db/schema/server/AmmoPosition_t">Modding database</see>.</summary>
 	public enum AmmoPosition_t : int {
 		AMMO_POSITION_INVALID = -1,
 		AMMO_POSITION_PRIMARY = 0,

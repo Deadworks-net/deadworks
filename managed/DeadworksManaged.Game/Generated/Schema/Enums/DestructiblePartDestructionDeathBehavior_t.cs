@@ -6,7 +6,7 @@
 namespace DeadworksManaged.Game;
 
 public static partial class Schema {
-	/// <summary>Schema enum <c>DestructiblePartDestructionDeathBehavior_t</c>. <see href="https://deadworks.net/db/schema/client/DestructiblePartDestructionDeathBehavior_t">Modding database</see>.</summary>
+	/// <summary>Schema enum <c>DestructiblePartDestructionDeathBehavior_t</c>. <see href="https://deadworks.net/db/schema/server/DestructiblePartDestructionDeathBehavior_t">Modding database</see>.</summary>
 	public enum DestructiblePartDestructionDeathBehavior_t : uint {
 		eDoNotKill = 0,
 		eKill = 1,

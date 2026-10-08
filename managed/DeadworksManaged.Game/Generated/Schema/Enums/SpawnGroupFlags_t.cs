@@ -6,7 +6,7 @@
 namespace DeadworksManaged.Game;
 
 public static partial class Schema {
-	/// <summary>Schema enum <c>SpawnGroupFlags_t</c>. <see href="https://deadworks.net/db/schema/client/SpawnGroupFlags_t">Modding database</see>.</summary>
+	/// <summary>Schema enum <c>SpawnGroupFlags_t</c>. <see href="https://deadworks.net/db/schema/server/SpawnGroupFlags_t">Modding database</see>.</summary>
 	[Flags]
 	public enum SpawnGroupFlags_t : uint {
 		SPAWN_GROUP_LOAD_ENTITIES_FROM_SAVE = 1,

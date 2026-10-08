@@ -6,7 +6,7 @@
 namespace DeadworksManaged.Game;
 
 public static partial class Schema {
-	/// <summary>Schema enum <c>AI_MotorGroundAnimGraph_StateType_t</c>. <see href="https://deadworks.net/db/schema/client/AI_MotorGroundAnimGraph_StateType_t">Modding database</see>.</summary>
+	/// <summary>Schema enum <c>AI_MotorGroundAnimGraph_StateType_t</c>. <see href="https://deadworks.net/db/schema/server/AI_MotorGroundAnimGraph_StateType_t">Modding database</see>.</summary>
 	public enum AI_MotorGroundAnimGraph_StateType_t : uint {
 		eIdle = 0,
 		eIdleTurn = 1,

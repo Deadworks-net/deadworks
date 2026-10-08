@@ -6,7 +6,7 @@
 namespace DeadworksManaged.Game;
 
 public static partial class Schema {
-	/// <summary>Schema enum <c>ECitadelCombatLogTypes</c>. <see href="https://deadworks.net/db/schema/client/ECitadelCombatLogTypes">Modding database</see>.</summary>
+	/// <summary>Schema enum <c>ECitadelCombatLogTypes</c>. <see href="https://deadworks.net/db/schema/server/ECitadelCombatLogTypes">Modding database</see>.</summary>
 	public enum ECitadelCombatLogTypes : int {
 		k_eCitadelCombatLog_Invalid = -1,
 		k_eCitadelCombatLog_Damage = 0,

@@ -6,7 +6,7 @@
 namespace DeadworksManaged.Game;
 
 public static partial class Schema {
-	/// <summary>Schema enum <c>EBannedFeature</c>. <see href="https://deadworks.net/db/schema/client/EBannedFeature">Modding database</see>.</summary>
+	/// <summary>Schema enum <c>EBannedFeature</c>. <see href="https://deadworks.net/db/schema/server/EBannedFeature">Modding database</see>.</summary>
 	public enum EBannedFeature : uint {
 		k_eBannedFeature_Invalid = 0,
 		k_eBannedFeature_LowPriorityMatchmaking = 1,

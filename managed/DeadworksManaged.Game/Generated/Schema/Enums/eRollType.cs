@@ -6,7 +6,7 @@
 namespace DeadworksManaged.Game;
 
 public static partial class Schema {
-	/// <summary>Schema enum <c>eRollType</c>. <see href="https://deadworks.net/db/schema/client/eRollType">Modding database</see>.</summary>
+	/// <summary>Schema enum <c>eRollType</c>. <see href="https://deadworks.net/db/schema/server/eRollType">Modding database</see>.</summary>
 	public enum eRollType : int {
 		ROLL_NONE = -1,
 		ROLL_STATS = 0,

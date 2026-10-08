@@ -6,7 +6,7 @@
 namespace DeadworksManaged.Game;
 
 public static partial class Schema {
-	/// <summary>Schema enum <c>CLC_Messages</c>. <see href="https://deadworks.net/db/schema/client/CLC_Messages">Modding database</see>.</summary>
+	/// <summary>Schema enum <c>CLC_Messages</c>. <see href="https://deadworks.net/db/schema/server/CLC_Messages">Modding database</see>.</summary>
 	public enum CLC_Messages : uint {
 		clc_ClientInfo = 20,
 		clc_Move = 21,

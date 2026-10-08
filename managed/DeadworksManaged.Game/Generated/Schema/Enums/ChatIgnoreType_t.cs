@@ -6,7 +6,7 @@
 namespace DeadworksManaged.Game;
 
 public static partial class Schema {
-	/// <summary>Schema enum <c>ChatIgnoreType_t</c>. <see href="https://deadworks.net/db/schema/client/ChatIgnoreType_t">Modding database</see>.</summary>
+	/// <summary>Schema enum <c>ChatIgnoreType_t</c>. <see href="https://deadworks.net/db/schema/server/ChatIgnoreType_t">Modding database</see>.</summary>
 	public enum ChatIgnoreType_t : uint {
 		CHAT_IGNORE_NONE = 0,
 		CHAT_IGNORE_ALL = 1,

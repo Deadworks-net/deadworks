@@ -6,7 +6,7 @@
 namespace DeadworksManaged.Game;
 
 public static partial class Schema {
-	/// <summary>Schema enum <c>ShatterDamageCause</c>. <see href="https://deadworks.net/db/schema/client/ShatterDamageCause">Modding database</see>.</summary>
+	/// <summary>Schema enum <c>ShatterDamageCause</c>. <see href="https://deadworks.net/db/schema/server/ShatterDamageCause">Modding database</see>.</summary>
 	public enum ShatterDamageCause : byte {
 		SHATTERDAMAGE_BULLET = 0,
 		SHATTERDAMAGE_MELEE = 1,

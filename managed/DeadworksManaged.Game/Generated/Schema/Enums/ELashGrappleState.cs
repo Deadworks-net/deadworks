@@ -6,7 +6,7 @@
 namespace DeadworksManaged.Game;
 
 public static partial class Schema {
-	/// <summary>Schema enum <c>ELashGrappleState</c>. <see href="https://deadworks.net/db/schema/client/ELashGrappleState">Modding database</see>.</summary>
+	/// <summary>Schema enum <c>ELashGrappleState</c>. <see href="https://deadworks.net/db/schema/server/ELashGrappleState">Modding database</see>.</summary>
 	public enum ELashGrappleState : byte {
 		ELashGrappleState_None = 0,
 		ELashGrappleState_LiftingUp = 1,

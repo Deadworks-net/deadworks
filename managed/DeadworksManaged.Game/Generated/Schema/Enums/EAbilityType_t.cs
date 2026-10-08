@@ -6,7 +6,7 @@
 namespace DeadworksManaged.Game;
 
 public static partial class Schema {
-	/// <summary>Schema enum <c>EAbilityType_t</c>. <see href="https://deadworks.net/db/schema/client/EAbilityType_t">Modding database</see>.</summary>
+	/// <summary>Schema enum <c>EAbilityType_t</c>. <see href="https://deadworks.net/db/schema/server/EAbilityType_t">Modding database</see>.</summary>
 	public enum EAbilityType_t : sbyte {
 		EAbilityType_Invalid = -1,
 		EAbilityType_Weapon = 0,

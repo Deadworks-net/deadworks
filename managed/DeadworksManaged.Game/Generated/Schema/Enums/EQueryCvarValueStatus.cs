@@ -6,7 +6,7 @@
 namespace DeadworksManaged.Game;
 
 public static partial class Schema {
-	/// <summary>Schema enum <c>EQueryCvarValueStatus</c>. <see href="https://deadworks.net/db/schema/client/EQueryCvarValueStatus">Modding database</see>.</summary>
+	/// <summary>Schema enum <c>EQueryCvarValueStatus</c>. <see href="https://deadworks.net/db/schema/server/EQueryCvarValueStatus">Modding database</see>.</summary>
 	public enum EQueryCvarValueStatus : uint {
 		eQueryCvarValueStatus_ValueIntact = 0,
 		eQueryCvarValueStatus_CvarNotFound = 1,

@@ -6,7 +6,7 @@
 namespace DeadworksManaged.Game;
 
 public static partial class Schema {
-	/// <summary>Schema enum <c>ENeutralNPCType</c>. <see href="https://deadworks.net/db/schema/client/ENeutralNPCType">Modding database</see>.</summary>
+	/// <summary>Schema enum <c>ENeutralNPCType</c>. <see href="https://deadworks.net/db/schema/server/ENeutralNPCType">Modding database</see>.</summary>
 	public enum ENeutralNPCType : int {
 		NEUTRAL_INVALID = -1,
 		NEUTRAL_NPC_WEAK = 1,

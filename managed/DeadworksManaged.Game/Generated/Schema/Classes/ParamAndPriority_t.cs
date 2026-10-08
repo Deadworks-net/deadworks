@@ -7,7 +7,7 @@ using System.Numerics;
 namespace DeadworksManaged.Game;
 
 public static partial class Schema {
-	/// <summary>Schema class <c>ParamAndPriority_t</c>. <see href="https://deadworks.net/db/schema/client/ParamAndPriority_t">Modding database</see>.</summary>
+	/// <summary>Schema class <c>ParamAndPriority_t</c>. <see href="https://deadworks.net/db/schema/server/ParamAndPriority_t">Modding database</see>.</summary>
 	public partial class ParamAndPriority_t : SchemaObject, ISchemaClass<ParamAndPriority_t> {
 		internal ParamAndPriority_t() { }
 		static ParamAndPriority_t ISchemaClass<ParamAndPriority_t>.New() => new();

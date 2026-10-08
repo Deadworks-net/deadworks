@@ -7,7 +7,7 @@ using System.Numerics;
 namespace DeadworksManaged.Game;
 
 public static partial class Schema {
-	/// <summary>Schema class <c>ModCostBonuses_t</c>. <see href="https://deadworks.net/db/schema/client/ModCostBonuses_t">Modding database</see>.</summary>
+	/// <summary>Schema class <c>ModCostBonuses_t</c>. <see href="https://deadworks.net/db/schema/server/ModCostBonuses_t">Modding database</see>.</summary>
 	public partial class ModCostBonuses_t : SchemaObject, ISchemaClass<ModCostBonuses_t> {
 		internal ModCostBonuses_t() { }
 		static ModCostBonuses_t ISchemaClass<ModCostBonuses_t>.New() => new();

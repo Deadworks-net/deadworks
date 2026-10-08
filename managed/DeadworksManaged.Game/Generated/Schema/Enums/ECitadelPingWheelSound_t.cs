@@ -6,7 +6,7 @@
 namespace DeadworksManaged.Game;
 
 public static partial class Schema {
-	/// <summary>Schema enum <c>ECitadelPingWheelSound_t</c>. <see href="https://deadworks.net/db/schema/client/ECitadelPingWheelSound_t">Modding database</see>.</summary>
+	/// <summary>Schema enum <c>ECitadelPingWheelSound_t</c>. <see href="https://deadworks.net/db/schema/server/ECitadelPingWheelSound_t">Modding database</see>.</summary>
 	public enum ECitadelPingWheelSound_t : uint {
 		CITADEL_PING_WHEEL_SOUND_NONE = 0,
 		CITADEL_PING_WHEEL_SOUND_MAP_PING = 1,

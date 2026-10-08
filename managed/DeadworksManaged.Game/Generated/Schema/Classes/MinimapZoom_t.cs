@@ -7,7 +7,7 @@ using System.Numerics;
 namespace DeadworksManaged.Game;
 
 public static partial class Schema {
-	/// <summary>Schema class <c>MinimapZoom_t</c>. <see href="https://deadworks.net/db/schema/client/MinimapZoom_t">Modding database</see>.</summary>
+	/// <summary>Schema class <c>MinimapZoom_t</c>. <see href="https://deadworks.net/db/schema/server/MinimapZoom_t">Modding database</see>.</summary>
 	public partial class MinimapZoom_t : SchemaObject, ISchemaClass<MinimapZoom_t> {
 		internal MinimapZoom_t() { }
 		static MinimapZoom_t ISchemaClass<MinimapZoom_t>.New() => new();

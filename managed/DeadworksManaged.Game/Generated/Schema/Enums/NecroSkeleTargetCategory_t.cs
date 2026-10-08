@@ -6,7 +6,7 @@
 namespace DeadworksManaged.Game;
 
 public static partial class Schema {
-	/// <summary>Schema enum <c>NecroSkeleTargetCategory_t</c>. <see href="https://deadworks.net/db/schema/client/NecroSkeleTargetCategory_t">Modding database</see>.</summary>
+	/// <summary>Schema enum <c>NecroSkeleTargetCategory_t</c>. <see href="https://deadworks.net/db/schema/server/NecroSkeleTargetCategory_t">Modding database</see>.</summary>
 	public enum NecroSkeleTargetCategory_t : uint {
 		SKELE_TARGET_INVALID = 0,
 		SKELE_TARGET_HERO = 1,

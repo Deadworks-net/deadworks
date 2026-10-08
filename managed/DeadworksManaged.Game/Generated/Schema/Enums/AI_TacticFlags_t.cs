@@ -6,7 +6,7 @@
 namespace DeadworksManaged.Game;
 
 public static partial class Schema {
-	/// <summary>Schema enum <c>AI_TacticFlags_t</c>. <see href="https://deadworks.net/db/schema/client/AI_TacticFlags_t">Modding database</see>.</summary>
+	/// <summary>Schema enum <c>AI_TacticFlags_t</c>. <see href="https://deadworks.net/db/schema/server/AI_TacticFlags_t">Modding database</see>.</summary>
 	public enum AI_TacticFlags_t : uint {
 		TACTIC_FLAGS_NONE = 0,
 	}

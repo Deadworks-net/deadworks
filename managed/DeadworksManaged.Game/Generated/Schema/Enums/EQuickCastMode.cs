@@ -6,7 +6,7 @@
 namespace DeadworksManaged.Game;
 
 public static partial class Schema {
-	/// <summary>Schema enum <c>EQuickCastMode</c>. <see href="https://deadworks.net/db/schema/client/EQuickCastMode">Modding database</see>.</summary>
+	/// <summary>Schema enum <c>EQuickCastMode</c>. <see href="https://deadworks.net/db/schema/server/EQuickCastMode">Modding database</see>.</summary>
 	public enum EQuickCastMode : uint {
 		EQuickCast_Default = 0,
 		EQuickCast_Enabled = 1,

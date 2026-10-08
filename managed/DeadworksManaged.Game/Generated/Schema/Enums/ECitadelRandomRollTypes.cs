@@ -6,7 +6,7 @@
 namespace DeadworksManaged.Game;
 
 public static partial class Schema {
-	/// <summary>Schema enum <c>ECitadelRandomRollTypes</c>. <see href="https://deadworks.net/db/schema/client/ECitadelRandomRollTypes">Modding database</see>.</summary>
+	/// <summary>Schema enum <c>ECitadelRandomRollTypes</c>. <see href="https://deadworks.net/db/schema/server/ECitadelRandomRollTypes">Modding database</see>.</summary>
 	public enum ECitadelRandomRollTypes : uint {
 		ECitadelRandomRoll_BreakableGoldPickup = 0,
 		ECitadelRandomRoll_BreakablePowerupPickup = 1,

@@ -6,7 +6,7 @@
 namespace DeadworksManaged.Game;
 
 public static partial class Schema {
-	/// <summary>Schema enum <c>ECitadelMMPreference</c>. <see href="https://deadworks.net/db/schema/client/ECitadelMMPreference">Modding database</see>.</summary>
+	/// <summary>Schema enum <c>ECitadelMMPreference</c>. <see href="https://deadworks.net/db/schema/server/ECitadelMMPreference">Modding database</see>.</summary>
 	public enum ECitadelMMPreference : uint {
 		k_ECitadelMMPreference_Invalid = 0,
 		k_ECitadelMMPreference_Casual = 1,

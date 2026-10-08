@@ -6,7 +6,7 @@
 namespace DeadworksManaged.Game;
 
 public static partial class Schema {
-	/// <summary>Schema enum <c>CITADEL_UNIT_TARGET_TYPE</c>. <see href="https://deadworks.net/db/schema/client/CITADEL_UNIT_TARGET_TYPE">Modding database</see>.</summary>
+	/// <summary>Schema enum <c>CITADEL_UNIT_TARGET_TYPE</c>. <see href="https://deadworks.net/db/schema/server/CITADEL_UNIT_TARGET_TYPE">Modding database</see>.</summary>
 	public enum CITADEL_UNIT_TARGET_TYPE : uint {
 		CITADEL_UNIT_TARGET_NONE = 0,
 		CITADEL_UNIT_TARGET_HERO_FRIENDLY = 1,

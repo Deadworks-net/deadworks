@@ -6,7 +6,7 @@
 namespace DeadworksManaged.Game;
 
 public static partial class Schema {
-	/// <summary>Schema enum <c>WaterLevel_t</c>. <see href="https://deadworks.net/db/schema/client/WaterLevel_t">Modding database</see>.</summary>
+	/// <summary>Schema enum <c>WaterLevel_t</c>. <see href="https://deadworks.net/db/schema/server/WaterLevel_t">Modding database</see>.</summary>
 	public enum WaterLevel_t : byte {
 		WL_NotInWater = 0,
 		WL_Feet = 1,

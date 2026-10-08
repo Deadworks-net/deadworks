@@ -6,7 +6,7 @@
 namespace DeadworksManaged.Game;
 
 public static partial class Schema {
-	/// <summary>Schema enum <c>ETier3State_t</c>. <see href="https://deadworks.net/db/schema/client/ETier3State_t">Modding database</see>.</summary>
+	/// <summary>Schema enum <c>ETier3State_t</c>. <see href="https://deadworks.net/db/schema/server/ETier3State_t">Modding database</see>.</summary>
 	public enum ETier3State_t : uint {
 		ETier3State_Alive = 0,
 		ETier3State_Dying = 1,

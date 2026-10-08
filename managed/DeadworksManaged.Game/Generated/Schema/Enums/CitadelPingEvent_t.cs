@@ -6,7 +6,7 @@
 namespace DeadworksManaged.Game;
 
 public static partial class Schema {
-	/// <summary>Schema enum <c>CitadelPingEvent_t</c>. <see href="https://deadworks.net/db/schema/client/CitadelPingEvent_t">Modding database</see>.</summary>
+	/// <summary>Schema enum <c>CitadelPingEvent_t</c>. <see href="https://deadworks.net/db/schema/server/CitadelPingEvent_t">Modding database</see>.</summary>
 	public enum CitadelPingEvent_t : uint {
 		CITADEL_PING_EVENT_LOCATION_PING = 0,
 		CITADEL_PING_MINIMAP_LOCATION_PING = 1,

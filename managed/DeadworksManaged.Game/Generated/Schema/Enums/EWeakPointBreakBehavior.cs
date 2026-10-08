@@ -6,7 +6,7 @@
 namespace DeadworksManaged.Game;
 
 public static partial class Schema {
-	/// <summary>Schema enum <c>EWeakPointBreakBehavior</c>. <see href="https://deadworks.net/db/schema/client/EWeakPointBreakBehavior">Modding database</see>.</summary>
+	/// <summary>Schema enum <c>EWeakPointBreakBehavior</c>. <see href="https://deadworks.net/db/schema/server/EWeakPointBreakBehavior">Modding database</see>.</summary>
 	public enum EWeakPointBreakBehavior : uint {
 		EBreakOnceBecomeInvuln = 0,
 		EBreakOnceRemainDamagable = 1,

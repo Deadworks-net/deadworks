@@ -6,7 +6,7 @@
 namespace DeadworksManaged.Game;
 
 public static partial class Schema {
-	/// <summary>Schema enum <c>EHUDElementButtonHintLocType_t</c>. <see href="https://deadworks.net/db/schema/client/EHUDElementButtonHintLocType_t">Modding database</see>.</summary>
+	/// <summary>Schema enum <c>EHUDElementButtonHintLocType_t</c>. <see href="https://deadworks.net/db/schema/server/EHUDElementButtonHintLocType_t">Modding database</see>.</summary>
 	public enum EHUDElementButtonHintLocType_t : uint {
 		EButtonHintLocType_Cast = 0,
 		EButtonHintLocType_AltCast = 1,

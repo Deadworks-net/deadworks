@@ -6,7 +6,7 @@
 namespace DeadworksManaged.Game;
 
 public static partial class Schema {
-	/// <summary>Schema enum <c>StanceType_t</c>. <see href="https://deadworks.net/db/schema/client/StanceType_t">Modding database</see>.</summary>
+	/// <summary>Schema enum <c>StanceType_t</c>. <see href="https://deadworks.net/db/schema/server/StanceType_t">Modding database</see>.</summary>
 	public enum StanceType_t : int {
 		STANCE_CURRENT = -1,
 		STANCE_DEFAULT = 0,

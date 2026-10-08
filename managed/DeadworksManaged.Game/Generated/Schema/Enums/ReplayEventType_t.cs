@@ -6,7 +6,7 @@
 namespace DeadworksManaged.Game;
 
 public static partial class Schema {
-	/// <summary>Schema enum <c>ReplayEventType_t</c>. <see href="https://deadworks.net/db/schema/client/ReplayEventType_t">Modding database</see>.</summary>
+	/// <summary>Schema enum <c>ReplayEventType_t</c>. <see href="https://deadworks.net/db/schema/server/ReplayEventType_t">Modding database</see>.</summary>
 	public enum ReplayEventType_t : uint {
 		REPLAY_EVENT_CANCEL = 0,
 		REPLAY_EVENT_DEATH = 1,

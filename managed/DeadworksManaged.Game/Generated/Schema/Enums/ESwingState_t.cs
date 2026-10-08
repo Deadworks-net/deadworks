@@ -6,7 +6,7 @@
 namespace DeadworksManaged.Game;
 
 public static partial class Schema {
-	/// <summary>Schema enum <c>ESwingState_t</c>. <see href="https://deadworks.net/db/schema/client/ESwingState_t">Modding database</see>.</summary>
+	/// <summary>Schema enum <c>ESwingState_t</c>. <see href="https://deadworks.net/db/schema/server/ESwingState_t">Modding database</see>.</summary>
 	public enum ESwingState_t : byte {
 		ESwingState_None = 0,
 		ESwingState_StartupDelay = 1,

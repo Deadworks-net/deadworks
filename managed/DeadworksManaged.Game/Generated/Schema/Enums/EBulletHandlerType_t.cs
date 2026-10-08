@@ -6,7 +6,7 @@
 namespace DeadworksManaged.Game;
 
 public static partial class Schema {
-	/// <summary>Schema enum <c>EBulletHandlerType_t</c>. <see href="https://deadworks.net/db/schema/client/EBulletHandlerType_t">Modding database</see>.</summary>
+	/// <summary>Schema enum <c>EBulletHandlerType_t</c>. <see href="https://deadworks.net/db/schema/server/EBulletHandlerType_t">Modding database</see>.</summary>
 	public enum EBulletHandlerType_t : uint {
 		EBulletHandler_Standard = 0,
 		EBulletHandler_Beam = 1,

@@ -6,7 +6,7 @@
 namespace DeadworksManaged.Game;
 
 public static partial class Schema {
-	/// <summary>Schema enum <c>MODIFIER_ENTRY_TYPE</c>. <see href="https://deadworks.net/db/schema/client/MODIFIER_ENTRY_TYPE">Modding database</see>.</summary>
+	/// <summary>Schema enum <c>MODIFIER_ENTRY_TYPE</c>. <see href="https://deadworks.net/db/schema/server/MODIFIER_ENTRY_TYPE">Modding database</see>.</summary>
 	public enum MODIFIER_ENTRY_TYPE : uint {
 		MODIFIER_ENTRY_TYPE_ACTIVE = 1,
 		MODIFIER_ENTRY_TYPE_REMOVED = 2,

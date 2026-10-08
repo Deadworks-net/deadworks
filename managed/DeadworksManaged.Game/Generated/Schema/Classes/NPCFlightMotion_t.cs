@@ -7,7 +7,7 @@ using System.Numerics;
 namespace DeadworksManaged.Game;
 
 public static partial class Schema {
-	/// <summary>Schema class <c>NPCFlightMotion_t</c>. <see href="https://deadworks.net/db/schema/client/NPCFlightMotion_t">Modding database</see>.</summary>
+	/// <summary>Schema class <c>NPCFlightMotion_t</c>. <see href="https://deadworks.net/db/schema/server/NPCFlightMotion_t">Modding database</see>.</summary>
 	public partial class NPCFlightMotion_t : SchemaObject, ISchemaClass<NPCFlightMotion_t> {
 		internal NPCFlightMotion_t() { }
 		static NPCFlightMotion_t ISchemaClass<NPCFlightMotion_t>.New() => new();

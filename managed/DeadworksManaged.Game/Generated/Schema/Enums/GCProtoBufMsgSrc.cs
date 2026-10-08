@@ -6,7 +6,7 @@
 namespace DeadworksManaged.Game;
 
 public static partial class Schema {
-	/// <summary>Schema enum <c>GCProtoBufMsgSrc</c>. <see href="https://deadworks.net/db/schema/client/GCProtoBufMsgSrc">Modding database</see>.</summary>
+	/// <summary>Schema enum <c>GCProtoBufMsgSrc</c>. <see href="https://deadworks.net/db/schema/server/GCProtoBufMsgSrc">Modding database</see>.</summary>
 	public enum GCProtoBufMsgSrc : uint {
 		GCProtoBufMsgSrc_Unspecified = 0,
 		GCProtoBufMsgSrc_FromSystem = 1,

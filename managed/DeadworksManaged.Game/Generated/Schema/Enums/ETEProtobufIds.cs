@@ -6,7 +6,7 @@
 namespace DeadworksManaged.Game;
 
 public static partial class Schema {
-	/// <summary>Schema enum <c>ETEProtobufIds</c>. <see href="https://deadworks.net/db/schema/client/ETEProtobufIds">Modding database</see>.</summary>
+	/// <summary>Schema enum <c>ETEProtobufIds</c>. <see href="https://deadworks.net/db/schema/server/ETEProtobufIds">Modding database</see>.</summary>
 	public enum ETEProtobufIds : uint {
 		TE_EffectDispatchId = 400,
 		TE_ArmorRicochetId = 401,

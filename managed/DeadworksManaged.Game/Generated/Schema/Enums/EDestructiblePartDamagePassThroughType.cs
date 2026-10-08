@@ -6,7 +6,7 @@
 namespace DeadworksManaged.Game;
 
 public static partial class Schema {
-	/// <summary>Schema enum <c>EDestructiblePartDamagePassThroughType</c>. <see href="https://deadworks.net/db/schema/client/EDestructiblePartDamagePassThroughType">Modding database</see>.</summary>
+	/// <summary>Schema enum <c>EDestructiblePartDamagePassThroughType</c>. <see href="https://deadworks.net/db/schema/server/EDestructiblePartDamagePassThroughType">Modding database</see>.</summary>
 	public enum EDestructiblePartDamagePassThroughType : uint {
 		Normal = 0,
 		Absorb = 1,

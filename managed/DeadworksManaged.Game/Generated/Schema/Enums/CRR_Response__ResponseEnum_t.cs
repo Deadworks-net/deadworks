@@ -6,7 +6,7 @@
 namespace DeadworksManaged.Game;
 
 public static partial class Schema {
-	/// <summary>Schema enum <c>CRR_Response::ResponseEnum_t</c>. <see href="https://deadworks.net/db/schema/client/CRR_Response%3A%3AResponseEnum_t">Modding database</see>.</summary>
+	/// <summary>Schema enum <c>CRR_Response::ResponseEnum_t</c>. <see href="https://deadworks.net/db/schema/server/CRR_Response%3A%3AResponseEnum_t">Modding database</see>.</summary>
 	public enum CRR_Response__ResponseEnum_t : uint {
 		MAX_RESPONSE_NAME = 192,
 		MAX_RULE_NAME = 128,

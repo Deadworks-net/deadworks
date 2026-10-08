@@ -7,7 +7,7 @@ using System.Numerics;
 namespace DeadworksManaged.Game;
 
 public static partial class Schema {
-	/// <summary>Schema class <c>CFootstepTableHandle</c>. <see href="https://deadworks.net/db/schema/client/CFootstepTableHandle">Modding database</see>.</summary>
+	/// <summary>Schema class <c>CFootstepTableHandle</c>. <see href="https://deadworks.net/db/schema/server/CFootstepTableHandle">Modding database</see>.</summary>
 	public partial class CFootstepTableHandle : SchemaObject, ISchemaClass<CFootstepTableHandle> {
 		internal CFootstepTableHandle() { }
 		static CFootstepTableHandle ISchemaClass<CFootstepTableHandle>.New() => new();

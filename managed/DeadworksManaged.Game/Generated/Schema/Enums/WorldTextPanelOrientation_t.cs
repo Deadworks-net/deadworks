@@ -6,7 +6,7 @@
 namespace DeadworksManaged.Game;
 
 public static partial class Schema {
-	/// <summary>Schema enum <c>WorldTextPanelOrientation_t</c>. <see href="https://deadworks.net/db/schema/client/WorldTextPanelOrientation_t">Modding database</see>.</summary>
+	/// <summary>Schema enum <c>WorldTextPanelOrientation_t</c>. <see href="https://deadworks.net/db/schema/server/WorldTextPanelOrientation_t">Modding database</see>.</summary>
 	public enum WorldTextPanelOrientation_t : uint {
 		WORLDTEXT_ORIENTATION_DEFAULT = 0,
 		WORLDTEXT_ORIENTATION_FACEUSER = 1,

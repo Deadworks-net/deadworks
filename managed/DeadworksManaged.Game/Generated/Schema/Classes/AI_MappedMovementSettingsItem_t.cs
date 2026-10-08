@@ -7,7 +7,7 @@ using System.Numerics;
 namespace DeadworksManaged.Game;
 
 public static partial class Schema {
-	/// <summary>Schema class <c>AI_MappedMovementSettingsItem_t</c>. <see href="https://deadworks.net/db/schema/client/AI_MappedMovementSettingsItem_t">Modding database</see>.</summary>
+	/// <summary>Schema class <c>AI_MappedMovementSettingsItem_t</c>. <see href="https://deadworks.net/db/schema/server/AI_MappedMovementSettingsItem_t">Modding database</see>.</summary>
 	public partial class AI_MappedMovementSettingsItem_t : SchemaObject, ISchemaClass<AI_MappedMovementSettingsItem_t> {
 		internal AI_MappedMovementSettingsItem_t() { }
 		static AI_MappedMovementSettingsItem_t ISchemaClass<AI_MappedMovementSettingsItem_t>.New() => new();

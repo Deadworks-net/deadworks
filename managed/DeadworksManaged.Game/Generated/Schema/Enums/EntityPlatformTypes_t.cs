@@ -6,7 +6,7 @@
 namespace DeadworksManaged.Game;
 
 public static partial class Schema {
-	/// <summary>Schema enum <c>EntityPlatformTypes_t</c>. <see href="https://deadworks.net/db/schema/client/EntityPlatformTypes_t">Modding database</see>.</summary>
+	/// <summary>Schema enum <c>EntityPlatformTypes_t</c>. <see href="https://deadworks.net/db/schema/server/EntityPlatformTypes_t">Modding database</see>.</summary>
 	public enum EntityPlatformTypes_t : byte {
 		ENTITY_NOT_PLATFORM = 0,
 		ENTITY_PLATFORM_PLAYER_FOLLOWS_YAW = 1,

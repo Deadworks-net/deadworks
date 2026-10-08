@@ -6,7 +6,7 @@
 namespace DeadworksManaged.Game;
 
 public static partial class Schema {
-	/// <summary>Schema enum <c>RenderMode_t</c>. <see href="https://deadworks.net/db/schema/client/RenderMode_t">Modding database</see>.</summary>
+	/// <summary>Schema enum <c>RenderMode_t</c>. <see href="https://deadworks.net/db/schema/server/RenderMode_t">Modding database</see>.</summary>
 	public enum RenderMode_t : byte {
 		kRenderNormal = 0,
 		kRenderTransAlpha = 1,

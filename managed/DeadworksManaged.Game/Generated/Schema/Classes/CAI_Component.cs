@@ -7,7 +7,7 @@ using System.Numerics;
 namespace DeadworksManaged.Game;
 
 public static partial class Schema {
-	/// <summary>Schema class <c>CAI_Component</c>. <see href="https://deadworks.net/db/schema/client/CAI_Component">Modding database</see>.</summary>
+	/// <summary>Schema class <c>CAI_Component</c>. <see href="https://deadworks.net/db/schema/server/CAI_Component">Modding database</see>.</summary>
 	public partial class CAI_Component : SchemaObject, ISchemaClass<CAI_Component> {
 		internal CAI_Component() { }
 		static CAI_Component ISchemaClass<CAI_Component>.New() => new();

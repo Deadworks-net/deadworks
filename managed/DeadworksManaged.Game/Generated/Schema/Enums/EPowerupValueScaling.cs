@@ -6,7 +6,7 @@
 namespace DeadworksManaged.Game;
 
 public static partial class Schema {
-	/// <summary>Schema enum <c>EPowerupValueScaling</c>. <see href="https://deadworks.net/db/schema/client/EPowerupValueScaling">Modding database</see>.</summary>
+	/// <summary>Schema enum <c>EPowerupValueScaling</c>. <see href="https://deadworks.net/db/schema/server/EPowerupValueScaling">Modding database</see>.</summary>
 	public enum EPowerupValueScaling : uint {
 		MatchTime = 0,
 		Flat = 1,

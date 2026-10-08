@@ -6,7 +6,7 @@
 namespace DeadworksManaged.Game;
 
 public static partial class Schema {
-	/// <summary>Schema enum <c>soundcommands_t</c>. <see href="https://deadworks.net/db/schema/client/soundcommands_t">Modding database</see>.</summary>
+	/// <summary>Schema enum <c>soundcommands_t</c>. <see href="https://deadworks.net/db/schema/server/soundcommands_t">Modding database</see>.</summary>
 	public enum soundcommands_t : uint {
 		SOUNDCTRL_CHANGE_VOLUME = 0,
 		SOUNDCTRL_CHANGE_PITCH = 1,

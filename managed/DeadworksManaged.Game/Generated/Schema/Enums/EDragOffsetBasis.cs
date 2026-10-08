@@ -6,7 +6,7 @@
 namespace DeadworksManaged.Game;
 
 public static partial class Schema {
-	/// <summary>Schema enum <c>EDragOffsetBasis</c>. <see href="https://deadworks.net/db/schema/client/EDragOffsetBasis">Modding database</see>.</summary>
+	/// <summary>Schema enum <c>EDragOffsetBasis</c>. <see href="https://deadworks.net/db/schema/server/EDragOffsetBasis">Modding database</see>.</summary>
 	public enum EDragOffsetBasis : byte {
 		EDragOffset_WorldFixed = 0,
 		EDragOffset_SourceFacing = 1,

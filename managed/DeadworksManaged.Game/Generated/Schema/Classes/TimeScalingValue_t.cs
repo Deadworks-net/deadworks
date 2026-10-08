@@ -7,7 +7,7 @@ using System.Numerics;
 namespace DeadworksManaged.Game;
 
 public static partial class Schema {
-	/// <summary>Schema class <c>TimeScalingValue_t</c>. <see href="https://deadworks.net/db/schema/client/TimeScalingValue_t">Modding database</see>.</summary>
+	/// <summary>Schema class <c>TimeScalingValue_t</c>. <see href="https://deadworks.net/db/schema/server/TimeScalingValue_t">Modding database</see>.</summary>
 	public partial class TimeScalingValue_t : SchemaObject, ISchemaClass<TimeScalingValue_t> {
 		internal TimeScalingValue_t() { }
 		static TimeScalingValue_t ISchemaClass<TimeScalingValue_t>.New() => new();

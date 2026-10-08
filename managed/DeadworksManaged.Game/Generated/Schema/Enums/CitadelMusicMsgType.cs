@@ -6,7 +6,7 @@
 namespace DeadworksManaged.Game;
 
 public static partial class Schema {
-	/// <summary>Schema enum <c>CitadelMusicMsgType</c>. <see href="https://deadworks.net/db/schema/client/CitadelMusicMsgType">Modding database</see>.</summary>
+	/// <summary>Schema enum <c>CitadelMusicMsgType</c>. <see href="https://deadworks.net/db/schema/server/CitadelMusicMsgType">Modding database</see>.</summary>
 	public enum CitadelMusicMsgType : uint {
 		k_EMusicQueue_Invalid = 0,
 		k_EMusicQueue_IdolAnnounce = 1,

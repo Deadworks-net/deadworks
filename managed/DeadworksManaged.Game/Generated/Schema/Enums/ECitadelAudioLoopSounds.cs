@@ -6,7 +6,7 @@
 namespace DeadworksManaged.Game;
 
 public static partial class Schema {
-	/// <summary>Schema enum <c>ECitadelAudioLoopSounds</c>. <see href="https://deadworks.net/db/schema/client/ECitadelAudioLoopSounds">Modding database</see>.</summary>
+	/// <summary>Schema enum <c>ECitadelAudioLoopSounds</c>. <see href="https://deadworks.net/db/schema/server/ECitadelAudioLoopSounds">Modding database</see>.</summary>
 	public enum ECitadelAudioLoopSounds : uint {
 		CITADEL_AUDIO_LOOP_START_SOUND = 0,
 		CITADEL_AUDIO_LOOP_LOOP_SOUND = 1,

@@ -6,7 +6,7 @@
 namespace DeadworksManaged.Game;
 
 public static partial class Schema {
-	/// <summary>Schema enum <c>EHeroDevelopmentState</c>. <see href="https://deadworks.net/db/schema/client/EHeroDevelopmentState">Modding database</see>.</summary>
+	/// <summary>Schema enum <c>EHeroDevelopmentState</c>. <see href="https://deadworks.net/db/schema/server/EHeroDevelopmentState">Modding database</see>.</summary>
 	public enum EHeroDevelopmentState : byte {
 		EHeroDevState_InDevelopment = 0,
 		EHeroDevState_DebugOnly = 1,

@@ -6,7 +6,7 @@
 namespace DeadworksManaged.Game;
 
 public static partial class Schema {
-	/// <summary>Schema enum <c>ECrateLootType_t</c>. <see href="https://deadworks.net/db/schema/client/ECrateLootType_t">Modding database</see>.</summary>
+	/// <summary>Schema enum <c>ECrateLootType_t</c>. <see href="https://deadworks.net/db/schema/server/ECrateLootType_t">Modding database</see>.</summary>
 	public enum ECrateLootType_t : int {
 		ELoot_Invalid = -1,
 		ELoot_GoldIdol = 0,

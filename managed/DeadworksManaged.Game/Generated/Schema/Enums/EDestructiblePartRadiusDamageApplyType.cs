@@ -6,7 +6,7 @@
 namespace DeadworksManaged.Game;
 
 public static partial class Schema {
-	/// <summary>Schema enum <c>EDestructiblePartRadiusDamageApplyType</c>. <see href="https://deadworks.net/db/schema/client/EDestructiblePartRadiusDamageApplyType">Modding database</see>.</summary>
+	/// <summary>Schema enum <c>EDestructiblePartRadiusDamageApplyType</c>. <see href="https://deadworks.net/db/schema/server/EDestructiblePartRadiusDamageApplyType">Modding database</see>.</summary>
 	public enum EDestructiblePartRadiusDamageApplyType : uint {
 		ScaleByExplosionRadius = 0,
 		PrioritizeClosestPart = 1,

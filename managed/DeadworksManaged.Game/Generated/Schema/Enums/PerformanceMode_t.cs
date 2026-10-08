@@ -6,7 +6,7 @@
 namespace DeadworksManaged.Game;
 
 public static partial class Schema {
-	/// <summary>Schema enum <c>PerformanceMode_t</c>. <see href="https://deadworks.net/db/schema/client/PerformanceMode_t">Modding database</see>.</summary>
+	/// <summary>Schema enum <c>PerformanceMode_t</c>. <see href="https://deadworks.net/db/schema/server/PerformanceMode_t">Modding database</see>.</summary>
 	public enum PerformanceMode_t : uint {
 		PM_NORMAL = 0,
 		PM_NO_GIBS = 1,

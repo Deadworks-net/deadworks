@@ -6,7 +6,7 @@
 namespace DeadworksManaged.Game;
 
 public static partial class Schema {
-	/// <summary>Schema enum <c>EAccoladeThresholdType</c>. <see href="https://deadworks.net/db/schema/client/EAccoladeThresholdType">Modding database</see>.</summary>
+	/// <summary>Schema enum <c>EAccoladeThresholdType</c>. <see href="https://deadworks.net/db/schema/server/EAccoladeThresholdType">Modding database</see>.</summary>
 	public enum EAccoladeThresholdType : uint {
 		Manual = 0,
 		Automatic = 1,

@@ -6,7 +6,7 @@
 namespace DeadworksManaged.Game;
 
 public static partial class Schema {
-	/// <summary>Schema enum <c>GCConnectionStatus</c>. <see href="https://deadworks.net/db/schema/client/GCConnectionStatus">Modding database</see>.</summary>
+	/// <summary>Schema enum <c>GCConnectionStatus</c>. <see href="https://deadworks.net/db/schema/server/GCConnectionStatus">Modding database</see>.</summary>
 	public enum GCConnectionStatus : uint {
 		GCConnectionStatus_HAVE_SESSION = 0,
 		GCConnectionStatus_GC_GOING_DOWN = 1,

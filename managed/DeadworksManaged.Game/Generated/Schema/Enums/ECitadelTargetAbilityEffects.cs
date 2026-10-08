@@ -6,7 +6,7 @@
 namespace DeadworksManaged.Game;
 
 public static partial class Schema {
-	/// <summary>Schema enum <c>ECitadelTargetAbilityEffects</c>. <see href="https://deadworks.net/db/schema/client/ECitadelTargetAbilityEffects">Modding database</see>.</summary>
+	/// <summary>Schema enum <c>ECitadelTargetAbilityEffects</c>. <see href="https://deadworks.net/db/schema/server/ECitadelTargetAbilityEffects">Modding database</see>.</summary>
 	[Flags]
 	public enum ECitadelTargetAbilityEffects : uint {
 		CITADEL_TARGET_ABILITY_BEHAVIOR_NONE = 0,

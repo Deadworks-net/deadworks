@@ -6,7 +6,7 @@
 namespace DeadworksManaged.Game;
 
 public static partial class Schema {
-	/// <summary>Schema enum <c>EGCMsgInitiateTradeResponse</c>. <see href="https://deadworks.net/db/schema/client/EGCMsgInitiateTradeResponse">Modding database</see>.</summary>
+	/// <summary>Schema enum <c>EGCMsgInitiateTradeResponse</c>. <see href="https://deadworks.net/db/schema/server/EGCMsgInitiateTradeResponse">Modding database</see>.</summary>
 	public enum EGCMsgInitiateTradeResponse : uint {
 		k_EGCMsgInitiateTradeResponse_Accepted = 0,
 		k_EGCMsgInitiateTradeResponse_Declined = 1,

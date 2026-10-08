@@ -6,7 +6,7 @@
 namespace DeadworksManaged.Game;
 
 public static partial class Schema {
-	/// <summary>Schema enum <c>EAbilitySpectatePriority</c>. <see href="https://deadworks.net/db/schema/client/EAbilitySpectatePriority">Modding database</see>.</summary>
+	/// <summary>Schema enum <c>EAbilitySpectatePriority</c>. <see href="https://deadworks.net/db/schema/server/EAbilitySpectatePriority">Modding database</see>.</summary>
 	public enum EAbilitySpectatePriority : byte {
 		CITADELTV_ABILITY_SPECTATE_PRIORITY_NONE = 0,
 		CITADELTV_ABILITY_SPECTATE_PRIORITY_MEDIUM = 1,

@@ -6,7 +6,7 @@
 namespace DeadworksManaged.Game;
 
 public static partial class Schema {
-	/// <summary>Schema enum <c>ChoreoExternalAnimgraphControlState_t</c>. <see href="https://deadworks.net/db/schema/client/ChoreoExternalAnimgraphControlState_t">Modding database</see>.</summary>
+	/// <summary>Schema enum <c>ChoreoExternalAnimgraphControlState_t</c>. <see href="https://deadworks.net/db/schema/server/ChoreoExternalAnimgraphControlState_t">Modding database</see>.</summary>
 	public enum ChoreoExternalAnimgraphControlState_t : uint {
 		eNone = 0,
 		eExit = 1,

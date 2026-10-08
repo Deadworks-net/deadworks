@@ -7,7 +7,7 @@ using System.Numerics;
 namespace DeadworksManaged.Game;
 
 public static partial class Schema {
-	/// <summary>Schema class <c>CRemapFloat</c>. <see href="https://deadworks.net/db/schema/client/CRemapFloat">Modding database</see>.</summary>
+	/// <summary>Schema class <c>CRemapFloat</c>. <see href="https://deadworks.net/db/schema/server/CRemapFloat">Modding database</see>.</summary>
 	public partial class CRemapFloat : SchemaObject, ISchemaClass<CRemapFloat> {
 		internal CRemapFloat() { }
 		static CRemapFloat ISchemaClass<CRemapFloat>.New() => new();

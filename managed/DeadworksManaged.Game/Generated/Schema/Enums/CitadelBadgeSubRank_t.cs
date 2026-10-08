@@ -6,7 +6,7 @@
 namespace DeadworksManaged.Game;
 
 public static partial class Schema {
-	/// <summary>Schema enum <c>CitadelBadgeSubRank_t</c>. <see href="https://deadworks.net/db/schema/client/CitadelBadgeSubRank_t">Modding database</see>.</summary>
+	/// <summary>Schema enum <c>CitadelBadgeSubRank_t</c>. <see href="https://deadworks.net/db/schema/server/CitadelBadgeSubRank_t">Modding database</see>.</summary>
 	public enum CitadelBadgeSubRank_t : uint {
 		Citadel_SubRankInvalid = 0,
 		Citadel_SubRank1 = 1,

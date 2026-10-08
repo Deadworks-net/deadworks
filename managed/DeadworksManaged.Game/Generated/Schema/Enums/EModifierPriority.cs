@@ -6,7 +6,7 @@
 namespace DeadworksManaged.Game;
 
 public static partial class Schema {
-	/// <summary>Schema enum <c>EModifierPriority</c>. <see href="https://deadworks.net/db/schema/client/EModifierPriority">Modding database</see>.</summary>
+	/// <summary>Schema enum <c>EModifierPriority</c>. <see href="https://deadworks.net/db/schema/server/EModifierPriority">Modding database</see>.</summary>
 	public enum EModifierPriority : uint {
 		MODIFIER_PRIORITY_LOW = 0,
 		MODIFIER_PRIORITY_NORMAL = 1,

@@ -6,7 +6,7 @@
 namespace DeadworksManaged.Game;
 
 public static partial class Schema {
-	/// <summary>Schema enum <c>EVoiceLineModifier</c>. <see href="https://deadworks.net/db/schema/client/EVoiceLineModifier">Modding database</see>.</summary>
+	/// <summary>Schema enum <c>EVoiceLineModifier</c>. <see href="https://deadworks.net/db/schema/server/EVoiceLineModifier">Modding database</see>.</summary>
 	public enum EVoiceLineModifier : uint {
 		None = 0,
 		Seasonal = 1,

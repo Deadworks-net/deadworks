@@ -7,7 +7,7 @@ using System.Numerics;
 namespace DeadworksManaged.Game;
 
 public static partial class Schema {
-	/// <summary>Schema class <c>item_definition_index_t</c>. <see href="https://deadworks.net/db/schema/client/item_definition_index_t">Modding database</see>.</summary>
+	/// <summary>Schema class <c>item_definition_index_t</c>. <see href="https://deadworks.net/db/schema/server/item_definition_index_t">Modding database</see>.</summary>
 	public partial class item_definition_index_t : SchemaObject, ISchemaClass<item_definition_index_t> {
 		internal item_definition_index_t() { }
 		static item_definition_index_t ISchemaClass<item_definition_index_t>.New() => new();

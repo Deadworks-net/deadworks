@@ -6,7 +6,7 @@
 namespace DeadworksManaged.Game;
 
 public static partial class Schema {
-	/// <summary>Schema enum <c>EGuidedBotMatchObjective</c>. <see href="https://deadworks.net/db/schema/client/EGuidedBotMatchObjective">Modding database</see>.</summary>
+	/// <summary>Schema enum <c>EGuidedBotMatchObjective</c>. <see href="https://deadworks.net/db/schema/server/EGuidedBotMatchObjective">Modding database</see>.</summary>
 	public enum EGuidedBotMatchObjective : uint {
 		EGuidedBotMatchObjective_LaningMetrics = 0,
 		EGuidedBotMatchObjective_PowerUp = 1,

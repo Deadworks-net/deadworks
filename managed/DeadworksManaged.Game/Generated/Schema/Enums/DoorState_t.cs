@@ -6,7 +6,7 @@
 namespace DeadworksManaged.Game;
 
 public static partial class Schema {
-	/// <summary>Schema enum <c>DoorState_t</c>. <see href="https://deadworks.net/db/schema/client/DoorState_t">Modding database</see>.</summary>
+	/// <summary>Schema enum <c>DoorState_t</c>. <see href="https://deadworks.net/db/schema/server/DoorState_t">Modding database</see>.</summary>
 	public enum DoorState_t : uint {
 		DOOR_STATE_CLOSED = 0,
 		DOOR_STATE_OPENING = 1,

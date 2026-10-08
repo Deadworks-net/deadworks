@@ -6,7 +6,7 @@
 namespace DeadworksManaged.Game;
 
 public static partial class Schema {
-	/// <summary>Schema enum <c>ERejuvenatorRespawnMechanic</c>. <see href="https://deadworks.net/db/schema/client/ERejuvenatorRespawnMechanic">Modding database</see>.</summary>
+	/// <summary>Schema enum <c>ERejuvenatorRespawnMechanic</c>. <see href="https://deadworks.net/db/schema/server/ERejuvenatorRespawnMechanic">Modding database</see>.</summary>
 	public enum ERejuvenatorRespawnMechanic : uint {
 		RejuvenatorRespawnMechanic_FixedDelay = 0,
 		RejuvenatorRespawnMechanic_PercentOfNormal = 1,

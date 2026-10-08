@@ -7,7 +7,7 @@ using System.Numerics;
 namespace DeadworksManaged.Game;
 
 public static partial class Schema {
-	/// <summary>Schema class <c>FullSellPriceAbilityUpgrades_t</c>. <see href="https://deadworks.net/db/schema/client/FullSellPriceAbilityUpgrades_t">Modding database</see>.</summary>
+	/// <summary>Schema class <c>FullSellPriceAbilityUpgrades_t</c>. <see href="https://deadworks.net/db/schema/server/FullSellPriceAbilityUpgrades_t">Modding database</see>.</summary>
 	public partial class FullSellPriceAbilityUpgrades_t : SchemaObject, ISchemaClass<FullSellPriceAbilityUpgrades_t> {
 		internal FullSellPriceAbilityUpgrades_t() { }
 		static FullSellPriceAbilityUpgrades_t ISchemaClass<FullSellPriceAbilityUpgrades_t>.New() => new();

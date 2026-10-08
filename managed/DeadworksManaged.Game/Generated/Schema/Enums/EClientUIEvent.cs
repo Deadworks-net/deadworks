@@ -6,7 +6,7 @@
 namespace DeadworksManaged.Game;
 
 public static partial class Schema {
-	/// <summary>Schema enum <c>EClientUIEvent</c>. <see href="https://deadworks.net/db/schema/client/EClientUIEvent">Modding database</see>.</summary>
+	/// <summary>Schema enum <c>EClientUIEvent</c>. <see href="https://deadworks.net/db/schema/server/EClientUIEvent">Modding database</see>.</summary>
 	public enum EClientUIEvent : uint {
 		EClientUIEvent_Invalid = 0,
 		EClientUIEvent_DialogFinished = 1,

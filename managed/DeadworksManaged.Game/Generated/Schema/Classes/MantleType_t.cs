@@ -7,7 +7,7 @@ using System.Numerics;
 namespace DeadworksManaged.Game;
 
 public static partial class Schema {
-	/// <summary>Schema class <c>MantleType_t</c>. <see href="https://deadworks.net/db/schema/client/MantleType_t">Modding database</see>.</summary>
+	/// <summary>Schema class <c>MantleType_t</c>. <see href="https://deadworks.net/db/schema/server/MantleType_t">Modding database</see>.</summary>
 	public partial class MantleType_t : SchemaObject, ISchemaClass<MantleType_t> {
 		internal MantleType_t() { }
 		static MantleType_t ISchemaClass<MantleType_t>.New() => new();

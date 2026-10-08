@@ -6,7 +6,7 @@
 namespace DeadworksManaged.Game;
 
 public static partial class Schema {
-	/// <summary>Schema enum <c>ChoreoLookAtMode_t</c>. <see href="https://deadworks.net/db/schema/client/ChoreoLookAtMode_t">Modding database</see>.</summary>
+	/// <summary>Schema enum <c>ChoreoLookAtMode_t</c>. <see href="https://deadworks.net/db/schema/server/ChoreoLookAtMode_t">Modding database</see>.</summary>
 	public enum ChoreoLookAtMode_t : int {
 		eInvalid = -1,
 		eChest = 0,

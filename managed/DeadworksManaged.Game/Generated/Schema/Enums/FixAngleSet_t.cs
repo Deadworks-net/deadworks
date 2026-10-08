@@ -6,7 +6,7 @@
 namespace DeadworksManaged.Game;
 
 public static partial class Schema {
-	/// <summary>Schema enum <c>FixAngleSet_t</c>. <see href="https://deadworks.net/db/schema/client/FixAngleSet_t">Modding database</see>.</summary>
+	/// <summary>Schema enum <c>FixAngleSet_t</c>. <see href="https://deadworks.net/db/schema/server/FixAngleSet_t">Modding database</see>.</summary>
 	public enum FixAngleSet_t : byte {
 		None = 0,
 		Absolute = 1,

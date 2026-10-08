@@ -6,7 +6,7 @@
 namespace DeadworksManaged.Game;
 
 public static partial class Schema {
-	/// <summary>Schema enum <c>LaneSide_t</c>. <see href="https://deadworks.net/db/schema/client/LaneSide_t">Modding database</see>.</summary>
+	/// <summary>Schema enum <c>LaneSide_t</c>. <see href="https://deadworks.net/db/schema/server/LaneSide_t">Modding database</see>.</summary>
 	public enum LaneSide_t : byte {
 		Center = 0,
 		Left = 1,

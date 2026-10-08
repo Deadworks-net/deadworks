@@ -7,7 +7,7 @@ using System.Numerics;
 namespace DeadworksManaged.Game;
 
 public static partial class Schema {
-	/// <summary>Schema class <c>CInButtonState</c>. <see href="https://deadworks.net/db/schema/client/CInButtonState">Modding database</see>.</summary>
+	/// <summary>Schema class <c>CInButtonState</c>. <see href="https://deadworks.net/db/schema/server/CInButtonState">Modding database</see>.</summary>
 	public partial class CInButtonState : SchemaObject, ISchemaClass<CInButtonState> {
 		internal CInButtonState() { }
 		static CInButtonState ISchemaClass<CInButtonState>.New() => new();

@@ -6,7 +6,7 @@
 namespace DeadworksManaged.Game;
 
 public static partial class Schema {
-	/// <summary>Schema enum <c>EPlayerPlayState</c>. <see href="https://deadworks.net/db/schema/client/EPlayerPlayState">Modding database</see>.</summary>
+	/// <summary>Schema enum <c>EPlayerPlayState</c>. <see href="https://deadworks.net/db/schema/server/EPlayerPlayState">Modding database</see>.</summary>
 	public enum EPlayerPlayState : int {
 		EPlayerStateInvalid = -1,
 		EPlayerActive = 0,

@@ -6,7 +6,7 @@
 namespace DeadworksManaged.Game;
 
 public static partial class Schema {
-	/// <summary>Schema enum <c>AnimationAlgorithm_t</c>. <see href="https://deadworks.net/db/schema/client/AnimationAlgorithm_t">Modding database</see>.</summary>
+	/// <summary>Schema enum <c>AnimationAlgorithm_t</c>. <see href="https://deadworks.net/db/schema/server/AnimationAlgorithm_t">Modding database</see>.</summary>
 	public enum AnimationAlgorithm_t : sbyte {
 		eInvalid = -1,
 		eNone = 0,

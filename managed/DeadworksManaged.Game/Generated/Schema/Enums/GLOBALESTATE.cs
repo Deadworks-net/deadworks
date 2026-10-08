@@ -6,7 +6,7 @@
 namespace DeadworksManaged.Game;
 
 public static partial class Schema {
-	/// <summary>Schema enum <c>GLOBALESTATE</c>. <see href="https://deadworks.net/db/schema/client/GLOBALESTATE">Modding database</see>.</summary>
+	/// <summary>Schema enum <c>GLOBALESTATE</c>. <see href="https://deadworks.net/db/schema/server/GLOBALESTATE">Modding database</see>.</summary>
 	public enum GLOBALESTATE : byte {
 		GLOBAL_OFF = 0,
 		GLOBAL_ON = 1,

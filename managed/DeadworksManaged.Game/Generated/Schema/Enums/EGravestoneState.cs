@@ -6,7 +6,7 @@
 namespace DeadworksManaged.Game;
 
 public static partial class Schema {
-	/// <summary>Schema enum <c>EGravestoneState</c>. <see href="https://deadworks.net/db/schema/client/EGravestoneState">Modding database</see>.</summary>
+	/// <summary>Schema enum <c>EGravestoneState</c>. <see href="https://deadworks.net/db/schema/server/EGravestoneState">Modding database</see>.</summary>
 	public enum EGravestoneState : uint {
 		kGravestone_State_Active = 0,
 		kGravestone_State_Critical = 1,

@@ -6,7 +6,7 @@
 namespace DeadworksManaged.Game;
 
 public static partial class Schema {
-	/// <summary>Schema enum <c>ENetworkDisconnectionReason</c>. <see href="https://deadworks.net/db/schema/client/ENetworkDisconnectionReason">Modding database</see>.</summary>
+	/// <summary>Schema enum <c>ENetworkDisconnectionReason</c>. <see href="https://deadworks.net/db/schema/server/ENetworkDisconnectionReason">Modding database</see>.</summary>
 	public enum ENetworkDisconnectionReason : uint {
 		NETWORK_DISCONNECT_INVALID = 0,
 		NETWORK_DISCONNECT_SHUTDOWN = 1,

@@ -7,7 +7,7 @@ using System.Numerics;
 namespace DeadworksManaged.Game;
 
 public static partial class Schema {
-	/// <summary>Schema class <c>sndopvarlatchdata_t</c>. <see href="https://deadworks.net/db/schema/client/sndopvarlatchdata_t">Modding database</see>.</summary>
+	/// <summary>Schema class <c>sndopvarlatchdata_t</c>. <see href="https://deadworks.net/db/schema/server/sndopvarlatchdata_t">Modding database</see>.</summary>
 	public partial class sndopvarlatchdata_t : SchemaObject, ISchemaClass<sndopvarlatchdata_t> {
 		internal sndopvarlatchdata_t() { }
 		static sndopvarlatchdata_t ISchemaClass<sndopvarlatchdata_t>.New() => new();

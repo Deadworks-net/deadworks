@@ -6,7 +6,7 @@
 namespace DeadworksManaged.Game;
 
 public static partial class Schema {
-	/// <summary>Schema enum <c>EInButtonState</c>. <see href="https://deadworks.net/db/schema/client/EInButtonState">Modding database</see>.</summary>
+	/// <summary>Schema enum <c>EInButtonState</c>. <see href="https://deadworks.net/db/schema/server/EInButtonState">Modding database</see>.</summary>
 	public enum EInButtonState : uint {
 		IN_BUTTON_UP = 0,
 		IN_BUTTON_DOWN = 1,

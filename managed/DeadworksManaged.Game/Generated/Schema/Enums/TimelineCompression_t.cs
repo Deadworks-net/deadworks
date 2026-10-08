@@ -6,7 +6,7 @@
 namespace DeadworksManaged.Game;
 
 public static partial class Schema {
-	/// <summary>Schema enum <c>TimelineCompression_t</c>. <see href="https://deadworks.net/db/schema/client/TimelineCompression_t">Modding database</see>.</summary>
+	/// <summary>Schema enum <c>TimelineCompression_t</c>. <see href="https://deadworks.net/db/schema/server/TimelineCompression_t">Modding database</see>.</summary>
 	public enum TimelineCompression_t : uint {
 		TIMELINE_COMPRESSION_SUM = 0,
 		TIMELINE_COMPRESSION_COUNT_PER_INTERVAL = 1,

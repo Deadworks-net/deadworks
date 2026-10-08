@@ -6,7 +6,7 @@
 namespace DeadworksManaged.Game;
 
 public static partial class Schema {
-	/// <summary>Schema enum <c>DecalFlags_t</c>. <see href="https://deadworks.net/db/schema/client/DecalFlags_t">Modding database</see>.</summary>
+	/// <summary>Schema enum <c>DecalFlags_t</c>. <see href="https://deadworks.net/db/schema/server/DecalFlags_t">Modding database</see>.</summary>
 	public enum DecalFlags_t : uint {
 		eNone = 0,
 		eCannotClear = 1,

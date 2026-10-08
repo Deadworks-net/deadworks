@@ -7,7 +7,7 @@ using System.Numerics;
 namespace DeadworksManaged.Game;
 
 public static partial class Schema {
-	/// <summary>Schema class <c>CBreakableStageHelper</c>. <see href="https://deadworks.net/db/schema/client/CBreakableStageHelper">Modding database</see>.</summary>
+	/// <summary>Schema class <c>CBreakableStageHelper</c>. <see href="https://deadworks.net/db/schema/server/CBreakableStageHelper">Modding database</see>.</summary>
 	public partial class CBreakableStageHelper : SchemaObject, ISchemaClass<CBreakableStageHelper> {
 		internal CBreakableStageHelper() { }
 		static CBreakableStageHelper ISchemaClass<CBreakableStageHelper>.New() => new();

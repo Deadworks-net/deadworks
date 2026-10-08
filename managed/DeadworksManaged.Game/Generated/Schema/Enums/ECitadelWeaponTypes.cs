@@ -6,7 +6,7 @@
 namespace DeadworksManaged.Game;
 
 public static partial class Schema {
-	/// <summary>Schema enum <c>ECitadelWeaponTypes</c>. <see href="https://deadworks.net/db/schema/client/ECitadelWeaponTypes">Modding database</see>.</summary>
+	/// <summary>Schema enum <c>ECitadelWeaponTypes</c>. <see href="https://deadworks.net/db/schema/server/ECitadelWeaponTypes">Modding database</see>.</summary>
 	public enum ECitadelWeaponTypes : int {
 		ECitadelWeapon_Invalid = -1,
 		ECitadelWeapon_Pistol = 0,

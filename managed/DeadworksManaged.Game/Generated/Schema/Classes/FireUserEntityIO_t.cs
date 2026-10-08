@@ -7,7 +7,7 @@ using System.Numerics;
 namespace DeadworksManaged.Game;
 
 public static partial class Schema {
-	/// <summary>Schema class <c>FireUserEntityIO_t</c>. <see href="https://deadworks.net/db/schema/client/FireUserEntityIO_t">Modding database</see>.</summary>
+	/// <summary>Schema class <c>FireUserEntityIO_t</c>. <see href="https://deadworks.net/db/schema/server/FireUserEntityIO_t">Modding database</see>.</summary>
 	public partial class FireUserEntityIO_t : SchemaObject, ISchemaClass<FireUserEntityIO_t> {
 		internal FireUserEntityIO_t() { }
 		static FireUserEntityIO_t ISchemaClass<FireUserEntityIO_t>.New() => new();

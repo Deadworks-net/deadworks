@@ -6,7 +6,7 @@
 namespace DeadworksManaged.Game;
 
 public static partial class Schema {
-	/// <summary>Schema enum <c>Hull_t</c>. <see href="https://deadworks.net/db/schema/client/Hull_t">Modding database</see>.</summary>
+	/// <summary>Schema enum <c>Hull_t</c>. <see href="https://deadworks.net/db/schema/server/Hull_t">Modding database</see>.</summary>
 	public enum Hull_t : uint {
 		HULL_HUMAN = 0,
 		HULL_SMALL_CENTERED = 1,

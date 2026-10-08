@@ -6,7 +6,7 @@
 namespace DeadworksManaged.Game;
 
 public static partial class Schema {
-	/// <summary>Schema enum <c>EMantleType</c>. <see href="https://deadworks.net/db/schema/client/EMantleType">Modding database</see>.</summary>
+	/// <summary>Schema enum <c>EMantleType</c>. <see href="https://deadworks.net/db/schema/server/EMantleType">Modding database</see>.</summary>
 	public enum EMantleType : uint {
 		EMantleNone = 0,
 		EMantle32 = 1,

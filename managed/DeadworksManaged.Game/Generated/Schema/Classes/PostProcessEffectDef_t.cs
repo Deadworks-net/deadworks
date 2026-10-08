@@ -7,7 +7,7 @@ using System.Numerics;
 namespace DeadworksManaged.Game;
 
 public static partial class Schema {
-	/// <summary>Schema class <c>PostProcessEffectDef_t</c>. <see href="https://deadworks.net/db/schema/client/PostProcessEffectDef_t">Modding database</see>.</summary>
+	/// <summary>Schema class <c>PostProcessEffectDef_t</c>. <see href="https://deadworks.net/db/schema/server/PostProcessEffectDef_t">Modding database</see>.</summary>
 	public partial class PostProcessEffectDef_t : SchemaObject, ISchemaClass<PostProcessEffectDef_t> {
 		internal PostProcessEffectDef_t() { }
 		static PostProcessEffectDef_t ISchemaClass<PostProcessEffectDef_t>.New() => new();

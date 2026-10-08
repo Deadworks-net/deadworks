@@ -7,7 +7,7 @@ using System.Numerics;
 namespace DeadworksManaged.Game;
 
 public static partial class Schema {
-	/// <summary>Schema class <c>AbilityCosmeticInfo_t</c>. <see href="https://deadworks.net/db/schema/client/AbilityCosmeticInfo_t">Modding database</see>.</summary>
+	/// <summary>Schema class <c>AbilityCosmeticInfo_t</c>. <see href="https://deadworks.net/db/schema/server/AbilityCosmeticInfo_t">Modding database</see>.</summary>
 	public partial class AbilityCosmeticInfo_t : SchemaObject, ISchemaClass<AbilityCosmeticInfo_t> {
 		internal AbilityCosmeticInfo_t() { }
 		static AbilityCosmeticInfo_t ISchemaClass<AbilityCosmeticInfo_t>.New() => new();

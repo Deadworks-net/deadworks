@@ -7,7 +7,7 @@ using System.Numerics;
 namespace DeadworksManaged.Game;
 
 public static partial class Schema {
-	/// <summary>Schema class <c>CEntitySubclassVDataBase</c>. <see href="https://deadworks.net/db/schema/client/CEntitySubclassVDataBase">Modding database</see>.</summary>
+	/// <summary>Schema class <c>CEntitySubclassVDataBase</c>. <see href="https://deadworks.net/db/schema/server/CEntitySubclassVDataBase">Modding database</see>.</summary>
 	public partial class CEntitySubclassVDataBase : SchemaObject, ISchemaClass<CEntitySubclassVDataBase> {
 		internal CEntitySubclassVDataBase() { }
 		static CEntitySubclassVDataBase ISchemaClass<CEntitySubclassVDataBase>.New() => new();

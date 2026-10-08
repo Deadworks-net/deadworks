@@ -6,7 +6,7 @@
 namespace DeadworksManaged.Game;
 
 public static partial class Schema {
-	/// <summary>Schema enum <c>WorldTextPanelHorizontalAlign_t</c>. <see href="https://deadworks.net/db/schema/client/WorldTextPanelHorizontalAlign_t">Modding database</see>.</summary>
+	/// <summary>Schema enum <c>WorldTextPanelHorizontalAlign_t</c>. <see href="https://deadworks.net/db/schema/server/WorldTextPanelHorizontalAlign_t">Modding database</see>.</summary>
 	public enum WorldTextPanelHorizontalAlign_t : uint {
 		WORLDTEXT_HORIZONTAL_ALIGN_LEFT = 0,
 		WORLDTEXT_HORIZONTAL_ALIGN_CENTER = 1,

@@ -6,7 +6,7 @@
 namespace DeadworksManaged.Game;
 
 public static partial class Schema {
-	/// <summary>Schema enum <c>ESoldierState</c>. <see href="https://deadworks.net/db/schema/client/ESoldierState">Modding database</see>.</summary>
+	/// <summary>Schema enum <c>ESoldierState</c>. <see href="https://deadworks.net/db/schema/server/ESoldierState">Modding database</see>.</summary>
 	public enum ESoldierState : uint {
 		kSoldier_State_Spawning = 0,
 		kSoldier_State_Idle = 1,

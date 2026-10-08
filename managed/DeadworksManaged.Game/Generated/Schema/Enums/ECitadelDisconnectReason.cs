@@ -6,7 +6,7 @@
 namespace DeadworksManaged.Game;
 
 public static partial class Schema {
-	/// <summary>Schema enum <c>ECitadelDisconnectReason</c>. <see href="https://deadworks.net/db/schema/client/ECitadelDisconnectReason">Modding database</see>.</summary>
+	/// <summary>Schema enum <c>ECitadelDisconnectReason</c>. <see href="https://deadworks.net/db/schema/server/ECitadelDisconnectReason">Modding database</see>.</summary>
 	public enum ECitadelDisconnectReason : uint {
 		k_ECitadelDisconnectReason_UserLeaveMatch = 1001,
 		k_ECitadelDisconnectReason_UserQuitApp = 1002,

@@ -6,7 +6,7 @@
 namespace DeadworksManaged.Game;
 
 public static partial class Schema {
-	/// <summary>Schema enum <c>SurroundingBoundsType_t</c>. <see href="https://deadworks.net/db/schema/client/SurroundingBoundsType_t">Modding database</see>.</summary>
+	/// <summary>Schema enum <c>SurroundingBoundsType_t</c>. <see href="https://deadworks.net/db/schema/server/SurroundingBoundsType_t">Modding database</see>.</summary>
 	public enum SurroundingBoundsType_t : byte {
 		USE_OBB_COLLISION_BOUNDS = 0,
 		USE_BEST_COLLISION_BOUNDS = 1,

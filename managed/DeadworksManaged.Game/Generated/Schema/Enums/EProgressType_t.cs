@@ -6,7 +6,7 @@
 namespace DeadworksManaged.Game;
 
 public static partial class Schema {
-	/// <summary>Schema enum <c>EProgressType_t</c>. <see href="https://deadworks.net/db/schema/client/EProgressType_t">Modding database</see>.</summary>
+	/// <summary>Schema enum <c>EProgressType_t</c>. <see href="https://deadworks.net/db/schema/server/EProgressType_t">Modding database</see>.</summary>
 	public enum EProgressType_t : uint {
 		EProgress_None = 0,
 		EProgress_Opacity = 1,

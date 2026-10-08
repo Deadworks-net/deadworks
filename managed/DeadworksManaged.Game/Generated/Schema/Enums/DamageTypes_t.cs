@@ -6,7 +6,7 @@
 namespace DeadworksManaged.Game;
 
 public static partial class Schema {
-	/// <summary>Schema enum <c>DamageTypes_t</c>. <see href="https://deadworks.net/db/schema/client/DamageTypes_t">Modding database</see>.</summary>
+	/// <summary>Schema enum <c>DamageTypes_t</c>. <see href="https://deadworks.net/db/schema/server/DamageTypes_t">Modding database</see>.</summary>
 	[Flags]
 	public enum DamageTypes_t : uint {
 		DMG_GENERIC = 0,

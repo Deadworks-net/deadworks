@@ -6,7 +6,7 @@
 namespace DeadworksManaged.Game;
 
 public static partial class Schema {
-	/// <summary>Schema enum <c>ECitadelMatchAuxStat</c>. <see href="https://deadworks.net/db/schema/client/ECitadelMatchAuxStat">Modding database</see>.</summary>
+	/// <summary>Schema enum <c>ECitadelMatchAuxStat</c>. <see href="https://deadworks.net/db/schema/server/ECitadelMatchAuxStat">Modding database</see>.</summary>
 	public enum ECitadelMatchAuxStat : uint {
 		k_eMatchAuxStat_Dummy = 1,
 	}

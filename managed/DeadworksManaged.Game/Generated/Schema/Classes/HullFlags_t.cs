@@ -7,7 +7,7 @@ using System.Numerics;
 namespace DeadworksManaged.Game;
 
 public static partial class Schema {
-	/// <summary>Schema class <c>HullFlags_t</c>. <see href="https://deadworks.net/db/schema/client/HullFlags_t">Modding database</see>.</summary>
+	/// <summary>Schema class <c>HullFlags_t</c>. <see href="https://deadworks.net/db/schema/server/HullFlags_t">Modding database</see>.</summary>
 	public partial class HullFlags_t : SchemaObject, ISchemaClass<HullFlags_t> {
 		internal HullFlags_t() { }
 		static HullFlags_t ISchemaClass<HullFlags_t>.New() => new();

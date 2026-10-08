@@ -6,7 +6,7 @@
 namespace DeadworksManaged.Game;
 
 public static partial class Schema {
-	/// <summary>Schema enum <c>ScriptedOnDeath_t</c>. <see href="https://deadworks.net/db/schema/client/ScriptedOnDeath_t">Modding database</see>.</summary>
+	/// <summary>Schema enum <c>ScriptedOnDeath_t</c>. <see href="https://deadworks.net/db/schema/server/ScriptedOnDeath_t">Modding database</see>.</summary>
 	public enum ScriptedOnDeath_t : int {
 		SS_ONDEATH_NOT_APPLICABLE = -1,
 		SS_ONDEATH_UNDEFINED = 0,

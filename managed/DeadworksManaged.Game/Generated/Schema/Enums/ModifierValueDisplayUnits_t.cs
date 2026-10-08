@@ -6,7 +6,7 @@
 namespace DeadworksManaged.Game;
 
 public static partial class Schema {
-	/// <summary>Schema enum <c>ModifierValueDisplayUnits_t</c>. <see href="https://deadworks.net/db/schema/client/ModifierValueDisplayUnits_t">Modding database</see>.</summary>
+	/// <summary>Schema enum <c>ModifierValueDisplayUnits_t</c>. <see href="https://deadworks.net/db/schema/server/ModifierValueDisplayUnits_t">Modding database</see>.</summary>
 	public enum ModifierValueDisplayUnits_t : uint {
 		EDisplayUnit_Normal = 0,
 		EDisplayUnit_Meters = 1,

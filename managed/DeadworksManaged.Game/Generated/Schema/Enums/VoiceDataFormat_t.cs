@@ -6,7 +6,7 @@
 namespace DeadworksManaged.Game;
 
 public static partial class Schema {
-	/// <summary>Schema enum <c>VoiceDataFormat_t</c>. <see href="https://deadworks.net/db/schema/client/VoiceDataFormat_t">Modding database</see>.</summary>
+	/// <summary>Schema enum <c>VoiceDataFormat_t</c>. <see href="https://deadworks.net/db/schema/server/VoiceDataFormat_t">Modding database</see>.</summary>
 	public enum VoiceDataFormat_t : uint {
 		VOICEDATA_FORMAT_STEAM = 0,
 		VOICEDATA_FORMAT_ENGINE = 1,

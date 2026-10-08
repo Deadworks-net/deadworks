@@ -6,7 +6,7 @@
 namespace DeadworksManaged.Game;
 
 public static partial class Schema {
-	/// <summary>Schema enum <c>EMinimapHeight</c>. <see href="https://deadworks.net/db/schema/client/EMinimapHeight">Modding database</see>.</summary>
+	/// <summary>Schema enum <c>EMinimapHeight</c>. <see href="https://deadworks.net/db/schema/server/EMinimapHeight">Modding database</see>.</summary>
 	public enum EMinimapHeight : byte {
 		NORMAL = 0,
 		UP = 1,

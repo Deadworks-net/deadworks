@@ -6,7 +6,7 @@
 namespace DeadworksManaged.Game;
 
 public static partial class Schema {
-	/// <summary>Schema enum <c>ModifierTimeScaleSource_t</c>. <see href="https://deadworks.net/db/schema/client/ModifierTimeScaleSource_t">Modding database</see>.</summary>
+	/// <summary>Schema enum <c>ModifierTimeScaleSource_t</c>. <see href="https://deadworks.net/db/schema/server/ModifierTimeScaleSource_t">Modding database</see>.</summary>
 	public enum ModifierTimeScaleSource_t : uint {
 		MODIFIER_TIME_SCALE_USE_PARENT = 0,
 		MODIFIER_TIME_SCALE_USE_CASTER = 1,

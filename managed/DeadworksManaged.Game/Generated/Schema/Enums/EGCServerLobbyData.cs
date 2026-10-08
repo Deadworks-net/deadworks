@@ -6,7 +6,7 @@
 namespace DeadworksManaged.Game;
 
 public static partial class Schema {
-	/// <summary>Schema enum <c>EGCServerLobbyData</c>. <see href="https://deadworks.net/db/schema/client/EGCServerLobbyData">Modding database</see>.</summary>
+	/// <summary>Schema enum <c>EGCServerLobbyData</c>. <see href="https://deadworks.net/db/schema/server/EGCServerLobbyData">Modding database</see>.</summary>
 	public enum EGCServerLobbyData : uint {
 		k_EServerLobbyData_PlayerMMR = 1,
 		k_EServerLobbyData_PlayerInfo = 2,

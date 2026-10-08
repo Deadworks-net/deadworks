@@ -6,7 +6,7 @@
 namespace DeadworksManaged.Game;
 
 public static partial class Schema {
-	/// <summary>Schema enum <c>BeamType_t</c>. <see href="https://deadworks.net/db/schema/client/BeamType_t">Modding database</see>.</summary>
+	/// <summary>Schema enum <c>BeamType_t</c>. <see href="https://deadworks.net/db/schema/server/BeamType_t">Modding database</see>.</summary>
 	public enum BeamType_t : uint {
 		BEAM_INVALID = 0,
 		BEAM_POINTS = 1,

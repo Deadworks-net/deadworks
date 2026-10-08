@@ -6,7 +6,7 @@
 namespace DeadworksManaged.Game;
 
 public static partial class Schema {
-	/// <summary>Schema enum <c>EModifierValue</c>. <see href="https://deadworks.net/db/schema/client/EModifierValue">Modding database</see>.</summary>
+	/// <summary>Schema enum <c>EModifierValue</c>. <see href="https://deadworks.net/db/schema/server/EModifierValue">Modding database</see>.</summary>
 	public enum EModifierValue : ushort {
 		MODIFIER_VALUE_MATERIAL_OVERRIDE = 0,
 		MODIFIER_VALUE_PROC_BUILDUP_RECEIVED_PERCENTAGE = 1,

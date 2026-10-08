@@ -6,7 +6,7 @@
 namespace DeadworksManaged.Game;
 
 public static partial class Schema {
-	/// <summary>Schema enum <c>EAttachState_t</c>. <see href="https://deadworks.net/db/schema/client/EAttachState_t">Modding database</see>.</summary>
+	/// <summary>Schema enum <c>EAttachState_t</c>. <see href="https://deadworks.net/db/schema/server/EAttachState_t">Modding database</see>.</summary>
 	public enum EAttachState_t : uint {
 		EAttachState_None = 0,
 		EAttachState_AwaitingTether = 1,

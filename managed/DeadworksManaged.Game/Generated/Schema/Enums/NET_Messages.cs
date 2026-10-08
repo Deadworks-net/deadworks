@@ -6,7 +6,7 @@
 namespace DeadworksManaged.Game;
 
 public static partial class Schema {
-	/// <summary>Schema enum <c>NET_Messages</c>. <see href="https://deadworks.net/db/schema/client/NET_Messages">Modding database</see>.</summary>
+	/// <summary>Schema enum <c>NET_Messages</c>. <see href="https://deadworks.net/db/schema/server/NET_Messages">Modding database</see>.</summary>
 	public enum NET_Messages : uint {
 		net_NOP = 0,
 		net_Disconnect_Legacy = 1,

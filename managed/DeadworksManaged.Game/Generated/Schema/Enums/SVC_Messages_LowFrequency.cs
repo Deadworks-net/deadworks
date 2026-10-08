@@ -6,7 +6,7 @@
 namespace DeadworksManaged.Game;
 
 public static partial class Schema {
-	/// <summary>Schema enum <c>SVC_Messages_LowFrequency</c>. <see href="https://deadworks.net/db/schema/client/SVC_Messages_LowFrequency">Modding database</see>.</summary>
+	/// <summary>Schema enum <c>SVC_Messages_LowFrequency</c>. <see href="https://deadworks.net/db/schema/server/SVC_Messages_LowFrequency">Modding database</see>.</summary>
 	public enum SVC_Messages_LowFrequency : uint {
 		svc_dummy = 600,
 	}

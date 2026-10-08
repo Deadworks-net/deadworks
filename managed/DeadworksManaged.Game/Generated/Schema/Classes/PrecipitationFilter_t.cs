@@ -7,7 +7,7 @@ using System.Numerics;
 namespace DeadworksManaged.Game;
 
 public static partial class Schema {
-	/// <summary>Schema class <c>PrecipitationFilter_t</c>. <see href="https://deadworks.net/db/schema/client/PrecipitationFilter_t">Modding database</see>.</summary>
+	/// <summary>Schema class <c>PrecipitationFilter_t</c>. <see href="https://deadworks.net/db/schema/server/PrecipitationFilter_t">Modding database</see>.</summary>
 	public partial class PrecipitationFilter_t : SchemaObject, ISchemaClass<PrecipitationFilter_t> {
 		internal PrecipitationFilter_t() { }
 		static PrecipitationFilter_t ISchemaClass<PrecipitationFilter_t>.New() => new();

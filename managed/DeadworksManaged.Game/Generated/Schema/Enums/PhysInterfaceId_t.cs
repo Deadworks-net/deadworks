@@ -6,7 +6,7 @@
 namespace DeadworksManaged.Game;
 
 public static partial class Schema {
-	/// <summary>Schema enum <c>PhysInterfaceId_t</c>. <see href="https://deadworks.net/db/schema/client/PhysInterfaceId_t">Modding database</see>.</summary>
+	/// <summary>Schema enum <c>PhysInterfaceId_t</c>. <see href="https://deadworks.net/db/schema/server/PhysInterfaceId_t">Modding database</see>.</summary>
 	public enum PhysInterfaceId_t : uint {
 		PIID_UNKNOWN = 0,
 		PIID_IPHYSICSBODY = 1,

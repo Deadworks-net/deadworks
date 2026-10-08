@@ -6,7 +6,7 @@
 namespace DeadworksManaged.Game;
 
 public static partial class Schema {
-	/// <summary>Schema enum <c>EEconItemQuality</c>. <see href="https://deadworks.net/db/schema/client/EEconItemQuality">Modding database</see>.</summary>
+	/// <summary>Schema enum <c>EEconItemQuality</c>. <see href="https://deadworks.net/db/schema/server/EEconItemQuality">Modding database</see>.</summary>
 	public enum EEconItemQuality : int {
 		AE_UNDEFINED = -1,
 		AE_BASE = 0,

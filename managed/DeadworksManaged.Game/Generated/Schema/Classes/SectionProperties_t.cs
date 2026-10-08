@@ -7,7 +7,7 @@ using System.Numerics;
 namespace DeadworksManaged.Game;
 
 public static partial class Schema {
-	/// <summary>Schema class <c>SectionProperties_t</c>. <see href="https://deadworks.net/db/schema/client/SectionProperties_t">Modding database</see>.</summary>
+	/// <summary>Schema class <c>SectionProperties_t</c>. <see href="https://deadworks.net/db/schema/server/SectionProperties_t">Modding database</see>.</summary>
 	public partial class SectionProperties_t : SchemaObject, ISchemaClass<SectionProperties_t> {
 		internal SectionProperties_t() { }
 		static SectionProperties_t ISchemaClass<SectionProperties_t>.New() => new();

@@ -6,7 +6,7 @@
 namespace DeadworksManaged.Game;
 
 public static partial class Schema {
-	/// <summary>Schema enum <c>EModTier_t</c>. <see href="https://deadworks.net/db/schema/client/EModTier_t">Modding database</see>.</summary>
+	/// <summary>Schema enum <c>EModTier_t</c>. <see href="https://deadworks.net/db/schema/server/EModTier_t">Modding database</see>.</summary>
 	public enum EModTier_t : byte {
 		EModTier_Invalid = 0,
 		EModTier_1 = 1,

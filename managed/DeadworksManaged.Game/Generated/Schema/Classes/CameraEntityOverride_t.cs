@@ -7,7 +7,7 @@ using System.Numerics;
 namespace DeadworksManaged.Game;
 
 public static partial class Schema {
-	/// <summary>Schema class <c>CameraEntityOverride_t</c>. <see href="https://deadworks.net/db/schema/client/CameraEntityOverride_t">Modding database</see>.</summary>
+	/// <summary>Schema class <c>CameraEntityOverride_t</c>. <see href="https://deadworks.net/db/schema/server/CameraEntityOverride_t">Modding database</see>.</summary>
 	public partial class CameraEntityOverride_t : SchemaObject, ISchemaClass<CameraEntityOverride_t> {
 		internal CameraEntityOverride_t() { }
 		static CameraEntityOverride_t ISchemaClass<CameraEntityOverride_t>.New() => new();

@@ -6,7 +6,7 @@
 namespace DeadworksManaged.Game;
 
 public static partial class Schema {
-	/// <summary>Schema enum <c>DIALOG_TYPE</c>. <see href="https://deadworks.net/db/schema/client/DIALOG_TYPE">Modding database</see>.</summary>
+	/// <summary>Schema enum <c>DIALOG_TYPE</c>. <see href="https://deadworks.net/db/schema/server/DIALOG_TYPE">Modding database</see>.</summary>
 	public enum DIALOG_TYPE : uint {
 		DIALOG_MSG = 0,
 		DIALOG_MENU = 1,

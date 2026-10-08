@@ -6,7 +6,7 @@
 namespace DeadworksManaged.Game;
 
 public static partial class Schema {
-	/// <summary>Schema enum <c>ESkullState_t</c>. <see href="https://deadworks.net/db/schema/client/ESkullState_t">Modding database</see>.</summary>
+	/// <summary>Schema enum <c>ESkullState_t</c>. <see href="https://deadworks.net/db/schema/server/ESkullState_t">Modding database</see>.</summary>
 	public enum ESkullState_t : byte {
 		EHauntingSkull_Idle = 0,
 		EHauntingSkull_FollowCaster = 1,

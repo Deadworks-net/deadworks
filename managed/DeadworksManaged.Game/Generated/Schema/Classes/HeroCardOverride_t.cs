@@ -7,7 +7,7 @@ using System.Numerics;
 namespace DeadworksManaged.Game;
 
 public static partial class Schema {
-	/// <summary>Schema class <c>HeroCardOverride_t</c>. <see href="https://deadworks.net/db/schema/client/HeroCardOverride_t">Modding database</see>.</summary>
+	/// <summary>Schema class <c>HeroCardOverride_t</c>. <see href="https://deadworks.net/db/schema/server/HeroCardOverride_t">Modding database</see>.</summary>
 	public partial class HeroCardOverride_t : SchemaObject, ISchemaClass<HeroCardOverride_t> {
 		internal HeroCardOverride_t() { }
 		static HeroCardOverride_t ISchemaClass<HeroCardOverride_t>.New() => new();

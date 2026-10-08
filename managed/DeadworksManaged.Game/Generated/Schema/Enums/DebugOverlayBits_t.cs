@@ -6,7 +6,7 @@
 namespace DeadworksManaged.Game;
 
 public static partial class Schema {
-	/// <summary>Schema enum <c>DebugOverlayBits_t</c>. <see href="https://deadworks.net/db/schema/client/DebugOverlayBits_t">Modding database</see>.</summary>
+	/// <summary>Schema enum <c>DebugOverlayBits_t</c>. <see href="https://deadworks.net/db/schema/server/DebugOverlayBits_t">Modding database</see>.</summary>
 	[Flags]
 	public enum DebugOverlayBits_t : ulong {
 		OVERLAY_TEXT_BIT = 1,

@@ -6,7 +6,7 @@
 namespace DeadworksManaged.Game;
 
 public static partial class Schema {
-	/// <summary>Schema enum <c>ETelepunchState_t</c>. <see href="https://deadworks.net/db/schema/client/ETelepunchState_t">Modding database</see>.</summary>
+	/// <summary>Schema enum <c>ETelepunchState_t</c>. <see href="https://deadworks.net/db/schema/server/ETelepunchState_t">Modding database</see>.</summary>
 	public enum ETelepunchState_t : byte {
 		ETelepunchState_None = 0,
 		ETelepunchState_EnemyPortalTelegraph = 1,

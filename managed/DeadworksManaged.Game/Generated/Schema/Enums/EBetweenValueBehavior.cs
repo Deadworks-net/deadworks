@@ -6,7 +6,7 @@
 namespace DeadworksManaged.Game;
 
 public static partial class Schema {
-	/// <summary>Schema enum <c>EBetweenValueBehavior</c>. <see href="https://deadworks.net/db/schema/client/EBetweenValueBehavior">Modding database</see>.</summary>
+	/// <summary>Schema enum <c>EBetweenValueBehavior</c>. <see href="https://deadworks.net/db/schema/server/EBetweenValueBehavior">Modding database</see>.</summary>
 	public enum EBetweenValueBehavior : uint {
 		Lerp = 0,
 		UsePrevious = 1,

@@ -6,7 +6,7 @@
 namespace DeadworksManaged.Game;
 
 public static partial class Schema {
-	/// <summary>Schema enum <c>CitadelMidiNotePitch_t</c>. <see href="https://deadworks.net/db/schema/client/CitadelMidiNotePitch_t">Modding database</see>.</summary>
+	/// <summary>Schema enum <c>CitadelMidiNotePitch_t</c>. <see href="https://deadworks.net/db/schema/server/CitadelMidiNotePitch_t">Modding database</see>.</summary>
 	public enum CitadelMidiNotePitch_t : uint {
 		EMidiNotePitch_0A = 1,
 		EMidiNotePitch_0Bb = 2,

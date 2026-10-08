@@ -6,7 +6,7 @@
 namespace DeadworksManaged.Game;
 
 public static partial class Schema {
-	/// <summary>Schema enum <c>PG_RisingRamState</c>. <see href="https://deadworks.net/db/schema/client/PG_RisingRamState">Modding database</see>.</summary>
+	/// <summary>Schema enum <c>PG_RisingRamState</c>. <see href="https://deadworks.net/db/schema/server/PG_RisingRamState">Modding database</see>.</summary>
 	public enum PG_RisingRamState : byte {
 		RRSTATE_INACTIVE = 0,
 		RRSTATE_CHARGING = 1,

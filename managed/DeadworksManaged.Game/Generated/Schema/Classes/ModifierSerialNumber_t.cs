@@ -7,7 +7,7 @@ using System.Numerics;
 namespace DeadworksManaged.Game;
 
 public static partial class Schema {
-	/// <summary>Schema class <c>ModifierSerialNumber_t</c>. <see href="https://deadworks.net/db/schema/client/ModifierSerialNumber_t">Modding database</see>.</summary>
+	/// <summary>Schema class <c>ModifierSerialNumber_t</c>. <see href="https://deadworks.net/db/schema/server/ModifierSerialNumber_t">Modding database</see>.</summary>
 	public partial class ModifierSerialNumber_t : SchemaObject, ISchemaClass<ModifierSerialNumber_t> {
 		internal ModifierSerialNumber_t() { }
 		static ModifierSerialNumber_t ISchemaClass<ModifierSerialNumber_t>.New() => new();

@@ -6,7 +6,7 @@
 namespace DeadworksManaged.Game;
 
 public static partial class Schema {
-	/// <summary>Schema enum <c>AbilityCastEvent_t</c>. <see href="https://deadworks.net/db/schema/client/AbilityCastEvent_t">Modding database</see>.</summary>
+	/// <summary>Schema enum <c>AbilityCastEvent_t</c>. <see href="https://deadworks.net/db/schema/server/AbilityCastEvent_t">Modding database</see>.</summary>
 	public enum AbilityCastEvent_t : uint {
 		CAST_DELAY_STARTED = 0,
 		CAST_COMPLETED = 1,

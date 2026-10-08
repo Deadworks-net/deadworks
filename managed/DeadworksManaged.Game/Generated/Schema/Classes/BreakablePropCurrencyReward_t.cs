@@ -7,7 +7,7 @@ using System.Numerics;
 namespace DeadworksManaged.Game;
 
 public static partial class Schema {
-	/// <summary>Schema class <c>BreakablePropCurrencyReward_t</c>. <see href="https://deadworks.net/db/schema/client/BreakablePropCurrencyReward_t">Modding database</see>.</summary>
+	/// <summary>Schema class <c>BreakablePropCurrencyReward_t</c>. <see href="https://deadworks.net/db/schema/server/BreakablePropCurrencyReward_t">Modding database</see>.</summary>
 	public partial class BreakablePropCurrencyReward_t : SchemaObject, ISchemaClass<BreakablePropCurrencyReward_t> {
 		internal BreakablePropCurrencyReward_t() { }
 		static BreakablePropCurrencyReward_t ISchemaClass<BreakablePropCurrencyReward_t>.New() => new();

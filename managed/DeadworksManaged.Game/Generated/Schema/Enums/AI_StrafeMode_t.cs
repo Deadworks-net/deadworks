@@ -6,7 +6,7 @@
 namespace DeadworksManaged.Game;
 
 public static partial class Schema {
-	/// <summary>Schema enum <c>AI_StrafeMode_t</c>. <see href="https://deadworks.net/db/schema/client/AI_StrafeMode_t">Modding database</see>.</summary>
+	/// <summary>Schema enum <c>AI_StrafeMode_t</c>. <see href="https://deadworks.net/db/schema/server/AI_StrafeMode_t">Modding database</see>.</summary>
 	public enum AI_StrafeMode_t : uint {
 		eContinuous = 0,
 		eDiscretized_180 = 1,

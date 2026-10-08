@@ -6,7 +6,7 @@
 namespace DeadworksManaged.Game;
 
 public static partial class Schema {
-	/// <summary>Schema enum <c>EWraithCardType</c>. <see href="https://deadworks.net/db/schema/client/EWraithCardType">Modding database</see>.</summary>
+	/// <summary>Schema enum <c>EWraithCardType</c>. <see href="https://deadworks.net/db/schema/server/EWraithCardType">Modding database</see>.</summary>
 	public enum EWraithCardType : uint {
 		EWraithCardType_Spade = 0,
 		EWraithCardType_Heart = 1,

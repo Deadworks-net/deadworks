@@ -6,7 +6,7 @@
 namespace DeadworksManaged.Game;
 
 public static partial class Schema {
-	/// <summary>Schema enum <c>EKnockDownTypes</c>. <see href="https://deadworks.net/db/schema/client/EKnockDownTypes">Modding database</see>.</summary>
+	/// <summary>Schema enum <c>EKnockDownTypes</c>. <see href="https://deadworks.net/db/schema/server/EKnockDownTypes">Modding database</see>.</summary>
 	public enum EKnockDownTypes : uint {
 		KnockdownLarge = 0,
 		KnockdownMedium = 1,

@@ -6,7 +6,7 @@
 namespace DeadworksManaged.Game;
 
 public static partial class Schema {
-	/// <summary>Schema enum <c>EAbilityInterruptType</c>. <see href="https://deadworks.net/db/schema/client/EAbilityInterruptType">Modding database</see>.</summary>
+	/// <summary>Schema enum <c>EAbilityInterruptType</c>. <see href="https://deadworks.net/db/schema/server/EAbilityInterruptType">Modding database</see>.</summary>
 	public enum EAbilityInterruptType : uint {
 		EAbilityInterruptNone = 0,
 		EAbilityInterruptCancel = 1,

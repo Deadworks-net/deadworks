@@ -6,7 +6,7 @@
 namespace DeadworksManaged.Game;
 
 public static partial class Schema {
-	/// <summary>Schema enum <c>EUnitQueryBucket</c>. <see href="https://deadworks.net/db/schema/client/EUnitQueryBucket">Modding database</see>.</summary>
+	/// <summary>Schema enum <c>EUnitQueryBucket</c>. <see href="https://deadworks.net/db/schema/server/EUnitQueryBucket">Modding database</see>.</summary>
 	public enum EUnitQueryBucket : byte {
 		k_eUnitBucket_Hero = 0,
 		k_eUnitBucket_Trooper = 1,

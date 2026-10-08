@@ -6,7 +6,7 @@
 namespace DeadworksManaged.Game;
 
 public static partial class Schema {
-	/// <summary>Schema enum <c>EGCItemMsg</c>. <see href="https://deadworks.net/db/schema/client/EGCItemMsg">Modding database</see>.</summary>
+	/// <summary>Schema enum <c>EGCItemMsg</c>. <see href="https://deadworks.net/db/schema/server/EGCItemMsg">Modding database</see>.</summary>
 	public enum EGCItemMsg : uint {
 		k_EMsgGCBase = 1000,
 		k_EMsgGCSetItemPosition = 1001,

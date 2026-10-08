@@ -6,7 +6,7 @@
 namespace DeadworksManaged.Game;
 
 public static partial class Schema {
-	/// <summary>Schema enum <c>EClimbRopeState_t</c>. <see href="https://deadworks.net/db/schema/client/EClimbRopeState_t">Modding database</see>.</summary>
+	/// <summary>Schema enum <c>EClimbRopeState_t</c>. <see href="https://deadworks.net/db/schema/server/EClimbRopeState_t">Modding database</see>.</summary>
 	public enum EClimbRopeState_t : uint {
 		ERopeClimb_None = 0,
 		ERopeClimb_Latching = 1,

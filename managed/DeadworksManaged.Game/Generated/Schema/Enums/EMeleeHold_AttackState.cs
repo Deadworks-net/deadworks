@@ -6,7 +6,7 @@
 namespace DeadworksManaged.Game;
 
 public static partial class Schema {
-	/// <summary>Schema enum <c>EMeleeHold_AttackState</c>. <see href="https://deadworks.net/db/schema/client/EMeleeHold_AttackState">Modding database</see>.</summary>
+	/// <summary>Schema enum <c>EMeleeHold_AttackState</c>. <see href="https://deadworks.net/db/schema/server/EMeleeHold_AttackState">Modding database</see>.</summary>
 	public enum EMeleeHold_AttackState : uint {
 		EAttackState_None = 0,
 		EAttackState_Charging = 1,

@@ -6,7 +6,7 @@
 namespace DeadworksManaged.Game;
 
 public static partial class Schema {
-	/// <summary>Schema enum <c>PARTICLE_MESSAGE</c>. <see href="https://deadworks.net/db/schema/client/PARTICLE_MESSAGE">Modding database</see>.</summary>
+	/// <summary>Schema enum <c>PARTICLE_MESSAGE</c>. <see href="https://deadworks.net/db/schema/server/PARTICLE_MESSAGE">Modding database</see>.</summary>
 	public enum PARTICLE_MESSAGE : uint {
 		GAME_PARTICLE_MANAGER_EVENT_CREATE = 0,
 		GAME_PARTICLE_MANAGER_EVENT_UPDATE = 1,

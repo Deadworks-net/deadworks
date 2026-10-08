@@ -6,7 +6,7 @@
 namespace DeadworksManaged.Game;
 
 public static partial class Schema {
-	/// <summary>Schema enum <c>EntityEffects_t</c>. <see href="https://deadworks.net/db/schema/client/EntityEffects_t">Modding database</see>.</summary>
+	/// <summary>Schema enum <c>EntityEffects_t</c>. <see href="https://deadworks.net/db/schema/server/EntityEffects_t">Modding database</see>.</summary>
 	public enum EntityEffects_t : ushort {
 		DEPRICATED_EF_NOINTERP = 8,
 		EF_NOSHADOW = 16,

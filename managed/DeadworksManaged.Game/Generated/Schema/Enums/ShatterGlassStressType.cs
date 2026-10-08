@@ -6,7 +6,7 @@
 namespace DeadworksManaged.Game;
 
 public static partial class Schema {
-	/// <summary>Schema enum <c>ShatterGlassStressType</c>. <see href="https://deadworks.net/db/schema/client/ShatterGlassStressType">Modding database</see>.</summary>
+	/// <summary>Schema enum <c>ShatterGlassStressType</c>. <see href="https://deadworks.net/db/schema/server/ShatterGlassStressType">Modding database</see>.</summary>
 	public enum ShatterGlassStressType : byte {
 		SHATTERGLASS_BLUNT = 0,
 		SHATTERGLASS_BALLISTIC = 1,

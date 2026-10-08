@@ -6,7 +6,7 @@
 namespace DeadworksManaged.Game;
 
 public static partial class Schema {
-	/// <summary>Schema enum <c>EDragPullModel</c>. <see href="https://deadworks.net/db/schema/client/EDragPullModel">Modding database</see>.</summary>
+	/// <summary>Schema enum <c>EDragPullModel</c>. <see href="https://deadworks.net/db/schema/server/EDragPullModel">Modding database</see>.</summary>
 	public enum EDragPullModel : byte {
 		EDragPull_SourceVelocityPlusDistance = 0,
 		EDragPull_CombinedSpeedTowardsHold = 1,

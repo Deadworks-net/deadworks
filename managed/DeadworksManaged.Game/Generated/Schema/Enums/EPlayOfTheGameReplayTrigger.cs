@@ -6,7 +6,7 @@
 namespace DeadworksManaged.Game;
 
 public static partial class Schema {
-	/// <summary>Schema enum <c>EPlayOfTheGameReplayTrigger</c>. <see href="https://deadworks.net/db/schema/client/EPlayOfTheGameReplayTrigger">Modding database</see>.</summary>
+	/// <summary>Schema enum <c>EPlayOfTheGameReplayTrigger</c>. <see href="https://deadworks.net/db/schema/server/EPlayOfTheGameReplayTrigger">Modding database</see>.</summary>
 	public enum EPlayOfTheGameReplayTrigger : byte {
 		EPlayOfTheGameReplayTrigger_Invalid = 0,
 		EPlayOfTheGameReplayTrigger_HeroCalloutMajor = 1,

@@ -7,7 +7,7 @@ using System.Numerics;
 namespace DeadworksManaged.Game;
 
 public static partial class Schema {
-	/// <summary>Schema class <c>HealingOverTimeLoopSoundOverride_t</c>. <see href="https://deadworks.net/db/schema/client/HealingOverTimeLoopSoundOverride_t">Modding database</see>.</summary>
+	/// <summary>Schema class <c>HealingOverTimeLoopSoundOverride_t</c>. <see href="https://deadworks.net/db/schema/server/HealingOverTimeLoopSoundOverride_t">Modding database</see>.</summary>
 	public partial class HealingOverTimeLoopSoundOverride_t : SchemaObject, ISchemaClass<HealingOverTimeLoopSoundOverride_t> {
 		internal HealingOverTimeLoopSoundOverride_t() { }
 		static HealingOverTimeLoopSoundOverride_t ISchemaClass<HealingOverTimeLoopSoundOverride_t>.New() => new();

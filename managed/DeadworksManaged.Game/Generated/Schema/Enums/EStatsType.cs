@@ -6,7 +6,7 @@
 namespace DeadworksManaged.Game;
 
 public static partial class Schema {
-	/// <summary>Schema enum <c>EStatsType</c>. <see href="https://deadworks.net/db/schema/client/EStatsType">Modding database</see>.</summary>
+	/// <summary>Schema enum <c>EStatsType</c>. <see href="https://deadworks.net/db/schema/server/EStatsType">Modding database</see>.</summary>
 	public enum EStatsType : uint {
 		EWeaponDPS = 0,
 		EMeleeDamage_DEPRECATED = 1,

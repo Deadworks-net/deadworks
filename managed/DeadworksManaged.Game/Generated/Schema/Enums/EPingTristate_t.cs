@@ -6,7 +6,7 @@
 namespace DeadworksManaged.Game;
 
 public static partial class Schema {
-	/// <summary>Schema enum <c>EPingTristate_t</c>. <see href="https://deadworks.net/db/schema/client/EPingTristate_t">Modding database</see>.</summary>
+	/// <summary>Schema enum <c>EPingTristate_t</c>. <see href="https://deadworks.net/db/schema/server/EPingTristate_t">Modding database</see>.</summary>
 	public enum EPingTristate_t : uint {
 		k_ePingTristate_Any = 0,
 		k_ePingTristate_Yes = 1,

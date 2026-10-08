@@ -6,7 +6,7 @@
 namespace DeadworksManaged.Game;
 
 public static partial class Schema {
-	/// <summary>Schema enum <c>EMinimapPingAnim_t</c>. <see href="https://deadworks.net/db/schema/client/EMinimapPingAnim_t">Modding database</see>.</summary>
+	/// <summary>Schema enum <c>EMinimapPingAnim_t</c>. <see href="https://deadworks.net/db/schema/server/EMinimapPingAnim_t">Modding database</see>.</summary>
 	public enum EMinimapPingAnim_t : uint {
 		k_eMinimapPingAnim_Default = 0,
 		k_eMinimapPingAnim_Attack = 1,

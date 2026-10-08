@@ -6,7 +6,7 @@
 namespace DeadworksManaged.Game;
 
 public static partial class Schema {
-	/// <summary>Schema enum <c>EPingSubjectSourceContext_t</c>. <see href="https://deadworks.net/db/schema/client/EPingSubjectSourceContext_t">Modding database</see>.</summary>
+	/// <summary>Schema enum <c>EPingSubjectSourceContext_t</c>. <see href="https://deadworks.net/db/schema/server/EPingSubjectSourceContext_t">Modding database</see>.</summary>
 	public enum EPingSubjectSourceContext_t : uint {
 		k_ePingSourceContext_Any = 0,
 		k_ePingSourceContext_Positional = 1,

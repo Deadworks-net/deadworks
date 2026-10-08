@@ -6,7 +6,7 @@
 namespace DeadworksManaged.Game;
 
 public static partial class Schema {
-	/// <summary>Schema enum <c>EHideoutPropSlotType_t</c>. <see href="https://deadworks.net/db/schema/client/EHideoutPropSlotType_t">Modding database</see>.</summary>
+	/// <summary>Schema enum <c>EHideoutPropSlotType_t</c>. <see href="https://deadworks.net/db/schema/server/EHideoutPropSlotType_t">Modding database</see>.</summary>
 	public enum EHideoutPropSlotType_t : uint {
 		SLOT_TYPE_INVALID = 0,
 		SLOT_TYPE_SMALL = 1,

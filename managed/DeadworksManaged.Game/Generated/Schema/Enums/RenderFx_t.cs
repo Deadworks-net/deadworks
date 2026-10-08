@@ -6,7 +6,7 @@
 namespace DeadworksManaged.Game;
 
 public static partial class Schema {
-	/// <summary>Schema enum <c>RenderFx_t</c>. <see href="https://deadworks.net/db/schema/client/RenderFx_t">Modding database</see>.</summary>
+	/// <summary>Schema enum <c>RenderFx_t</c>. <see href="https://deadworks.net/db/schema/server/RenderFx_t">Modding database</see>.</summary>
 	public enum RenderFx_t : byte {
 		kRenderFxNone = 0,
 		kRenderFxPulseSlow = 1,

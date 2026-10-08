@@ -6,7 +6,7 @@
 namespace DeadworksManaged.Game;
 
 public static partial class Schema {
-	/// <summary>Schema enum <c>PointWorldTextReorientMode_t</c>. <see href="https://deadworks.net/db/schema/client/PointWorldTextReorientMode_t">Modding database</see>.</summary>
+	/// <summary>Schema enum <c>PointWorldTextReorientMode_t</c>. <see href="https://deadworks.net/db/schema/server/PointWorldTextReorientMode_t">Modding database</see>.</summary>
 	public enum PointWorldTextReorientMode_t : uint {
 		POINT_WORLD_TEXT_REORIENT_NONE = 0,
 		POINT_WORLD_TEXT_REORIENT_AROUND_UP = 1,

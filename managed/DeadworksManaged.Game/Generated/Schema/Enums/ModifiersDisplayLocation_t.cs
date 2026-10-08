@@ -6,7 +6,7 @@
 namespace DeadworksManaged.Game;
 
 public static partial class Schema {
-	/// <summary>Schema enum <c>ModifiersDisplayLocation_t</c>. <see href="https://deadworks.net/db/schema/client/ModifiersDisplayLocation_t">Modding database</see>.</summary>
+	/// <summary>Schema enum <c>ModifiersDisplayLocation_t</c>. <see href="https://deadworks.net/db/schema/server/ModifiersDisplayLocation_t">Modding database</see>.</summary>
 	public enum ModifiersDisplayLocation_t : uint {
 		MODIFIER_DISPLAY_LOCAITON_ALL = 0,
 		MODIFIER_DISPLAY_HEALTHBAR = 1,

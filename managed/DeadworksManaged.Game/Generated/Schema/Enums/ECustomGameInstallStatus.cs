@@ -6,7 +6,7 @@
 namespace DeadworksManaged.Game;
 
 public static partial class Schema {
-	/// <summary>Schema enum <c>ECustomGameInstallStatus</c>. <see href="https://deadworks.net/db/schema/client/ECustomGameInstallStatus">Modding database</see>.</summary>
+	/// <summary>Schema enum <c>ECustomGameInstallStatus</c>. <see href="https://deadworks.net/db/schema/server/ECustomGameInstallStatus">Modding database</see>.</summary>
 	public enum ECustomGameInstallStatus : uint {
 		k_ECustomGameInstallStatus_Unknown = 0,
 		k_ECustomGameInstallStatus_Ready = 1,

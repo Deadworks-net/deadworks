@@ -7,7 +7,7 @@ using System.Numerics;
 namespace DeadworksManaged.Game;
 
 public static partial class Schema {
-	/// <summary>Schema class <c>HeroScalingStat_t</c>. <see href="https://deadworks.net/db/schema/client/HeroScalingStat_t">Modding database</see>.</summary>
+	/// <summary>Schema class <c>HeroScalingStat_t</c>. <see href="https://deadworks.net/db/schema/server/HeroScalingStat_t">Modding database</see>.</summary>
 	public partial class HeroScalingStat_t : SchemaObject, ISchemaClass<HeroScalingStat_t> {
 		internal HeroScalingStat_t() { }
 		static HeroScalingStat_t ISchemaClass<HeroScalingStat_t>.New() => new();

@@ -6,7 +6,7 @@
 namespace DeadworksManaged.Game;
 
 public static partial class Schema {
-	/// <summary>Schema enum <c>Flags_t</c>. <see href="https://deadworks.net/db/schema/client/Flags_t">Modding database</see>.</summary>
+	/// <summary>Schema enum <c>Flags_t</c>. <see href="https://deadworks.net/db/schema/server/Flags_t">Modding database</see>.</summary>
 	[Flags]
 	public enum Flags_t : uint {
 		FL_ONGROUND = 1,

@@ -6,7 +6,7 @@
 namespace DeadworksManaged.Game;
 
 public static partial class Schema {
-	/// <summary>Schema enum <c>AbilityDependencyFlags</c>. <see href="https://deadworks.net/db/schema/client/AbilityDependencyFlags">Modding database</see>.</summary>
+	/// <summary>Schema enum <c>AbilityDependencyFlags</c>. <see href="https://deadworks.net/db/schema/server/AbilityDependencyFlags">Modding database</see>.</summary>
 	[Flags]
 	public enum AbilityDependencyFlags : ushort {
 		None = 0,

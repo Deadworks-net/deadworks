@@ -6,7 +6,7 @@
 namespace DeadworksManaged.Game;
 
 public static partial class Schema {
-	/// <summary>Schema enum <c>EconEntityParticleDisableMode_t</c>. <see href="https://deadworks.net/db/schema/client/EconEntityParticleDisableMode_t">Modding database</see>.</summary>
+	/// <summary>Schema enum <c>EconEntityParticleDisableMode_t</c>. <see href="https://deadworks.net/db/schema/server/EconEntityParticleDisableMode_t">Modding database</see>.</summary>
 	public enum EconEntityParticleDisableMode_t : uint {
 		ECON_ENTITY_PARTICLES_ENABLED = 0,
 		ECON_ENTITY_PARTICLES_DISABLED = 1,

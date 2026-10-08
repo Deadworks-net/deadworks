@@ -6,7 +6,7 @@
 namespace DeadworksManaged.Game;
 
 public static partial class Schema {
-	/// <summary>Schema enum <c>ValueRemapperInputType_t</c>. <see href="https://deadworks.net/db/schema/client/ValueRemapperInputType_t">Modding database</see>.</summary>
+	/// <summary>Schema enum <c>ValueRemapperInputType_t</c>. <see href="https://deadworks.net/db/schema/server/ValueRemapperInputType_t">Modding database</see>.</summary>
 	public enum ValueRemapperInputType_t : uint {
 		InputType_PlayerShootPosition = 0,
 		InputType_PlayerShootPositionAroundAxis = 1,

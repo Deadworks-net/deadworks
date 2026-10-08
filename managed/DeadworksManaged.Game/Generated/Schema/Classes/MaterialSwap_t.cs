@@ -7,7 +7,7 @@ using System.Numerics;
 namespace DeadworksManaged.Game;
 
 public static partial class Schema {
-	/// <summary>Schema class <c>MaterialSwap_t</c>. <see href="https://deadworks.net/db/schema/client/MaterialSwap_t">Modding database</see>.</summary>
+	/// <summary>Schema class <c>MaterialSwap_t</c>. <see href="https://deadworks.net/db/schema/server/MaterialSwap_t">Modding database</see>.</summary>
 	public partial class MaterialSwap_t : SchemaObject, ISchemaClass<MaterialSwap_t> {
 		internal MaterialSwap_t() { }
 		static MaterialSwap_t ISchemaClass<MaterialSwap_t>.New() => new();

@@ -6,7 +6,7 @@
 namespace DeadworksManaged.Game;
 
 public static partial class Schema {
-	/// <summary>Schema enum <c>EMatchMetadataExtraMessage</c>. <see href="https://deadworks.net/db/schema/client/EMatchMetadataExtraMessage">Modding database</see>.</summary>
+	/// <summary>Schema enum <c>EMatchMetadataExtraMessage</c>. <see href="https://deadworks.net/db/schema/server/EMatchMetadataExtraMessage">Modding database</see>.</summary>
 	public enum EMatchMetadataExtraMessage : uint {
 		k_EMatchMetadataExtraMessage_HeroReleaseVotes = 2,
 	}

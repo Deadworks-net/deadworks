@@ -7,7 +7,7 @@ using System.Numerics;
 namespace DeadworksManaged.Game;
 
 public static partial class Schema {
-	/// <summary>Schema class <c>NPCMovementBlockedClip_t</c>. <see href="https://deadworks.net/db/schema/client/NPCMovementBlockedClip_t">Modding database</see>.</summary>
+	/// <summary>Schema class <c>NPCMovementBlockedClip_t</c>. <see href="https://deadworks.net/db/schema/server/NPCMovementBlockedClip_t">Modding database</see>.</summary>
 	public partial class NPCMovementBlockedClip_t : SchemaObject, ISchemaClass<NPCMovementBlockedClip_t> {
 		internal NPCMovementBlockedClip_t() { }
 		static NPCMovementBlockedClip_t ISchemaClass<NPCMovementBlockedClip_t>.New() => new();

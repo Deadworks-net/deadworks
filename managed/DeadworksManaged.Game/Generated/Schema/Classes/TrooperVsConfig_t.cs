@@ -7,7 +7,7 @@ using System.Numerics;
 namespace DeadworksManaged.Game;
 
 public static partial class Schema {
-	/// <summary>Schema class <c>TrooperVsConfig_t</c>. <see href="https://deadworks.net/db/schema/client/TrooperVsConfig_t">Modding database</see>.</summary>
+	/// <summary>Schema class <c>TrooperVsConfig_t</c>. <see href="https://deadworks.net/db/schema/server/TrooperVsConfig_t">Modding database</see>.</summary>
 	public partial class TrooperVsConfig_t : SchemaObject, ISchemaClass<TrooperVsConfig_t> {
 		internal TrooperVsConfig_t() { }
 		static TrooperVsConfig_t ISchemaClass<TrooperVsConfig_t>.New() => new();

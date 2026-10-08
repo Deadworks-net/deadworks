@@ -7,7 +7,7 @@ using System.Numerics;
 namespace DeadworksManaged.Game;
 
 public static partial class Schema {
-	/// <summary>Schema class <c>ParticleIndex_t</c>. <see href="https://deadworks.net/db/schema/client/ParticleIndex_t">Modding database</see>.</summary>
+	/// <summary>Schema class <c>ParticleIndex_t</c>. <see href="https://deadworks.net/db/schema/server/ParticleIndex_t">Modding database</see>.</summary>
 	public partial class ParticleIndex_t : SchemaObject, ISchemaClass<ParticleIndex_t> {
 		internal ParticleIndex_t() { }
 		static ParticleIndex_t ISchemaClass<ParticleIndex_t>.New() => new();

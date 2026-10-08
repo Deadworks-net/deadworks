@@ -6,7 +6,7 @@
 namespace DeadworksManaged.Game;
 
 public static partial class Schema {
-	/// <summary>Schema enum <c>CitadelArpeggiatorMode_t</c>. <see href="https://deadworks.net/db/schema/client/CitadelArpeggiatorMode_t">Modding database</see>.</summary>
+	/// <summary>Schema enum <c>CitadelArpeggiatorMode_t</c>. <see href="https://deadworks.net/db/schema/server/CitadelArpeggiatorMode_t">Modding database</see>.</summary>
 	public enum CitadelArpeggiatorMode_t : uint {
 		EArpMode_Default = 0,
 		EArpMode_Up = 1,

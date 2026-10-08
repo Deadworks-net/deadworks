@@ -6,7 +6,7 @@
 namespace DeadworksManaged.Game;
 
 public static partial class Schema {
-	/// <summary>Schema enum <c>ValueRemapperMomentumType_t</c>. <see href="https://deadworks.net/db/schema/client/ValueRemapperMomentumType_t">Modding database</see>.</summary>
+	/// <summary>Schema enum <c>ValueRemapperMomentumType_t</c>. <see href="https://deadworks.net/db/schema/server/ValueRemapperMomentumType_t">Modding database</see>.</summary>
 	public enum ValueRemapperMomentumType_t : uint {
 		MomentumType_None = 0,
 		MomentumType_Friction = 1,

@@ -6,7 +6,7 @@
 namespace DeadworksManaged.Game;
 
 public static partial class Schema {
-	/// <summary>Schema enum <c>attributeprovidertypes_t</c>. <see href="https://deadworks.net/db/schema/client/attributeprovidertypes_t">Modding database</see>.</summary>
+	/// <summary>Schema enum <c>attributeprovidertypes_t</c>. <see href="https://deadworks.net/db/schema/server/attributeprovidertypes_t">Modding database</see>.</summary>
 	public enum attributeprovidertypes_t : uint {
 		PROVIDER_GENERIC = 0,
 		PROVIDER_WEAPON = 1,

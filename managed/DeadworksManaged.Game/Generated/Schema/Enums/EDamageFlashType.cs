@@ -6,7 +6,7 @@
 namespace DeadworksManaged.Game;
 
 public static partial class Schema {
-	/// <summary>Schema enum <c>EDamageFlashType</c>. <see href="https://deadworks.net/db/schema/client/EDamageFlashType">Modding database</see>.</summary>
+	/// <summary>Schema enum <c>EDamageFlashType</c>. <see href="https://deadworks.net/db/schema/server/EDamageFlashType">Modding database</see>.</summary>
 	public enum EDamageFlashType : uint {
 		EFlashType_BulletDamage = 0,
 		EFlashType_TechDamage = 1,

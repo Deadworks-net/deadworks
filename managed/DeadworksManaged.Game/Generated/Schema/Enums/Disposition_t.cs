@@ -6,7 +6,7 @@
 namespace DeadworksManaged.Game;
 
 public static partial class Schema {
-	/// <summary>Schema enum <c>Disposition_t</c>. <see href="https://deadworks.net/db/schema/client/Disposition_t">Modding database</see>.</summary>
+	/// <summary>Schema enum <c>Disposition_t</c>. <see href="https://deadworks.net/db/schema/server/Disposition_t">Modding database</see>.</summary>
 	public enum Disposition_t : uint {
 		D_ER = 0,
 		D_HT = 1,

@@ -6,7 +6,7 @@
 namespace DeadworksManaged.Game;
 
 public static partial class Schema {
-	/// <summary>Schema enum <c>filter_t</c>. <see href="https://deadworks.net/db/schema/client/filter_t">Modding database</see>.</summary>
+	/// <summary>Schema enum <c>filter_t</c>. <see href="https://deadworks.net/db/schema/server/filter_t">Modding database</see>.</summary>
 	public enum filter_t : uint {
 		FILTER_AND = 0,
 		FILTER_OR = 1,

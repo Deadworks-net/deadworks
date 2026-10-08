@@ -6,7 +6,7 @@
 namespace DeadworksManaged.Game;
 
 public static partial class Schema {
-	/// <summary>Schema enum <c>Bidirectional_Messages</c>. <see href="https://deadworks.net/db/schema/client/Bidirectional_Messages">Modding database</see>.</summary>
+	/// <summary>Schema enum <c>Bidirectional_Messages</c>. <see href="https://deadworks.net/db/schema/server/Bidirectional_Messages">Modding database</see>.</summary>
 	public enum Bidirectional_Messages : uint {
 		bi_RebroadcastGameEvent = 16,
 		bi_RebroadcastSource = 17,

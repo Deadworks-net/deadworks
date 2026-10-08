@@ -7,7 +7,7 @@ using System.Numerics;
 namespace DeadworksManaged.Game;
 
 public static partial class Schema {
-	/// <summary>Schema class <c>CLevelProgressionDefinition</c>. <see href="https://deadworks.net/db/schema/client/CLevelProgressionDefinition">Modding database</see>.</summary>
+	/// <summary>Schema class <c>CLevelProgressionDefinition</c>. <see href="https://deadworks.net/db/schema/server/CLevelProgressionDefinition">Modding database</see>.</summary>
 	public partial class CLevelProgressionDefinition : SchemaObject, ISchemaClass<CLevelProgressionDefinition> {
 		internal CLevelProgressionDefinition() { }
 		static CLevelProgressionDefinition ISchemaClass<CLevelProgressionDefinition>.New() => new();

@@ -7,7 +7,7 @@ using System.Numerics;
 namespace DeadworksManaged.Game;
 
 public static partial class Schema {
-	/// <summary>Schema class <c>CopyUltCompanionAbility_t</c>. <see href="https://deadworks.net/db/schema/client/CopyUltCompanionAbility_t">Modding database</see>.</summary>
+	/// <summary>Schema class <c>CopyUltCompanionAbility_t</c>. <see href="https://deadworks.net/db/schema/server/CopyUltCompanionAbility_t">Modding database</see>.</summary>
 	public partial class CopyUltCompanionAbility_t : SchemaObject, ISchemaClass<CopyUltCompanionAbility_t> {
 		internal CopyUltCompanionAbility_t() { }
 		static CopyUltCompanionAbility_t ISchemaClass<CopyUltCompanionAbility_t>.New() => new();

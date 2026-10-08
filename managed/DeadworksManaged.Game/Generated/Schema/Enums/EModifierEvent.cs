@@ -6,7 +6,7 @@
 namespace DeadworksManaged.Game;
 
 public static partial class Schema {
-	/// <summary>Schema enum <c>EModifierEvent</c>. <see href="https://deadworks.net/db/schema/client/EModifierEvent">Modding database</see>.</summary>
+	/// <summary>Schema enum <c>EModifierEvent</c>. <see href="https://deadworks.net/db/schema/server/EModifierEvent">Modding database</see>.</summary>
 	public enum EModifierEvent : uint {
 		MODIFIER_EVENT_PRE_DAMAGE_TAKEN_BROADCAST = 0,
 		MODIFIER_EVENT_DAMAGE_TAKEN_BROADCAST = 1,

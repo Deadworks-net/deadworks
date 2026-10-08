@@ -6,7 +6,7 @@
 namespace DeadworksManaged.Game;
 
 public static partial class Schema {
-	/// <summary>Schema enum <c>ESplitScreenMessageType</c>. <see href="https://deadworks.net/db/schema/client/ESplitScreenMessageType">Modding database</see>.</summary>
+	/// <summary>Schema enum <c>ESplitScreenMessageType</c>. <see href="https://deadworks.net/db/schema/server/ESplitScreenMessageType">Modding database</see>.</summary>
 	public enum ESplitScreenMessageType : uint {
 		MSG_SPLITSCREEN_ADDUSER = 0,
 		MSG_SPLITSCREEN_REMOVEUSER = 1,

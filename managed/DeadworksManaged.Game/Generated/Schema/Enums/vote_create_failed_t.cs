@@ -6,7 +6,7 @@
 namespace DeadworksManaged.Game;
 
 public static partial class Schema {
-	/// <summary>Schema enum <c>vote_create_failed_t</c>. <see href="https://deadworks.net/db/schema/client/vote_create_failed_t">Modding database</see>.</summary>
+	/// <summary>Schema enum <c>vote_create_failed_t</c>. <see href="https://deadworks.net/db/schema/server/vote_create_failed_t">Modding database</see>.</summary>
 	public enum vote_create_failed_t : uint {
 		VOTE_FAILED_GENERIC = 0,
 		VOTE_FAILED_TRANSITIONING_PLAYERS = 1,

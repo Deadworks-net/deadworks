@@ -6,7 +6,7 @@
 namespace DeadworksManaged.Game;
 
 public static partial class Schema {
-	/// <summary>Schema enum <c>soundlevel_t</c>. <see href="https://deadworks.net/db/schema/client/soundlevel_t">Modding database</see>.</summary>
+	/// <summary>Schema enum <c>soundlevel_t</c>. <see href="https://deadworks.net/db/schema/server/soundlevel_t">Modding database</see>.</summary>
 	public enum soundlevel_t : uint {
 		SNDLVL_NONE = 0,
 		SNDLVL_20dB = 20,

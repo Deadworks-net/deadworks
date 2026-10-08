@@ -6,7 +6,7 @@
 namespace DeadworksManaged.Game;
 
 public static partial class Schema {
-	/// <summary>Schema enum <c>CitadelPingWheelConcept_t</c>. <see href="https://deadworks.net/db/schema/client/CitadelPingWheelConcept_t">Modding database</see>.</summary>
+	/// <summary>Schema enum <c>CitadelPingWheelConcept_t</c>. <see href="https://deadworks.net/db/schema/server/CitadelPingWheelConcept_t">Modding database</see>.</summary>
 	public enum CitadelPingWheelConcept_t : int {
 		CITADEL_PING_CONCEPT_NONE = -1,
 		CITADEL_PING_LETS_GO_THIS_WAY = 0,

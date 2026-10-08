@@ -6,7 +6,7 @@
 namespace DeadworksManaged.Game;
 
 public static partial class Schema {
-	/// <summary>Schema enum <c>MoveType_t</c>. <see href="https://deadworks.net/db/schema/client/MoveType_t">Modding database</see>.</summary>
+	/// <summary>Schema enum <c>MoveType_t</c>. <see href="https://deadworks.net/db/schema/server/MoveType_t">Modding database</see>.</summary>
 	public enum MoveType_t : byte {
 		MOVETYPE_NONE = 0,
 		MOVETYPE_OBSOLETE = 1,

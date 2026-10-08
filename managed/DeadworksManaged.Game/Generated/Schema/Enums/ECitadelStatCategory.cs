@@ -6,7 +6,7 @@
 namespace DeadworksManaged.Game;
 
 public static partial class Schema {
-	/// <summary>Schema enum <c>ECitadelStatCategory</c>. <see href="https://deadworks.net/db/schema/client/ECitadelStatCategory">Modding database</see>.</summary>
+	/// <summary>Schema enum <c>ECitadelStatCategory</c>. <see href="https://deadworks.net/db/schema/server/ECitadelStatCategory">Modding database</see>.</summary>
 	public enum ECitadelStatCategory : int {
 		ECitadelStat_Invalid = -1,
 		ECitadelStat_Weapon = 0,

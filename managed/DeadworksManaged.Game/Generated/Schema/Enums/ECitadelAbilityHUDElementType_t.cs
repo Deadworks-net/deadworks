@@ -6,7 +6,7 @@
 namespace DeadworksManaged.Game;
 
 public static partial class Schema {
-	/// <summary>Schema enum <c>ECitadelAbilityHUDElementType_t</c>. <see href="https://deadworks.net/db/schema/client/ECitadelAbilityHUDElementType_t">Modding database</see>.</summary>
+	/// <summary>Schema enum <c>ECitadelAbilityHUDElementType_t</c>. <see href="https://deadworks.net/db/schema/server/ECitadelAbilityHUDElementType_t">Modding database</see>.</summary>
 	public enum ECitadelAbilityHUDElementType_t : uint {
 		CITADEL_ABILITY_HUD_ELEMENT_TYPE_GUN = 0,
 		CITADEL_ABILITY_HUD_ELEMENT_TYPE_UNIT_TARGET = 1,

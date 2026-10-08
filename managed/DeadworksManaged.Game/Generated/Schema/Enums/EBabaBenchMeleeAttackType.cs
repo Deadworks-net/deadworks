@@ -6,7 +6,7 @@
 namespace DeadworksManaged.Game;
 
 public static partial class Schema {
-	/// <summary>Schema enum <c>EBabaBenchMeleeAttackType</c>. <see href="https://deadworks.net/db/schema/client/EBabaBenchMeleeAttackType">Modding database</see>.</summary>
+	/// <summary>Schema enum <c>EBabaBenchMeleeAttackType</c>. <see href="https://deadworks.net/db/schema/server/EBabaBenchMeleeAttackType">Modding database</see>.</summary>
 	public enum EBabaBenchMeleeAttackType : byte {
 		EBabaBenchMeleeAttack_None = 0,
 		EBabaBenchMeleeAttack_Light = 1,

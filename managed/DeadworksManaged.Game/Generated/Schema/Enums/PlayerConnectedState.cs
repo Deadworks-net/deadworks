@@ -6,7 +6,7 @@
 namespace DeadworksManaged.Game;
 
 public static partial class Schema {
-	/// <summary>Schema enum <c>PlayerConnectedState</c>. <see href="https://deadworks.net/db/schema/client/PlayerConnectedState">Modding database</see>.</summary>
+	/// <summary>Schema enum <c>PlayerConnectedState</c>. <see href="https://deadworks.net/db/schema/server/PlayerConnectedState">Modding database</see>.</summary>
 	public enum PlayerConnectedState : int {
 		NeverConnected = -1,
 		Connected = 0,

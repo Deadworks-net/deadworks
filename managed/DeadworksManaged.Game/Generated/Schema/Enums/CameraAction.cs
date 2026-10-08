@@ -6,7 +6,7 @@
 namespace DeadworksManaged.Game;
 
 public static partial class Schema {
-	/// <summary>Schema enum <c>CameraAction</c>. <see href="https://deadworks.net/db/schema/client/CameraAction">Modding database</see>.</summary>
+	/// <summary>Schema enum <c>CameraAction</c>. <see href="https://deadworks.net/db/schema/server/CameraAction">Modding database</see>.</summary>
 	public enum CameraAction : uint {
 		k_EAction_AddOp = 0,
 		k_EAction_ClearAllOps = 1,

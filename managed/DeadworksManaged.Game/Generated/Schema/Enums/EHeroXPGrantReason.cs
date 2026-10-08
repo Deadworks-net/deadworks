@@ -6,7 +6,7 @@
 namespace DeadworksManaged.Game;
 
 public static partial class Schema {
-	/// <summary>Schema enum <c>EHeroXPGrantReason</c>. <see href="https://deadworks.net/db/schema/client/EHeroXPGrantReason">Modding database</see>.</summary>
+	/// <summary>Schema enum <c>EHeroXPGrantReason</c>. <see href="https://deadworks.net/db/schema/server/EHeroXPGrantReason">Modding database</see>.</summary>
 	public enum EHeroXPGrantReason : uint {
 		k_eGrant_Win = 0,
 		k_eGrant_Loss = 1,

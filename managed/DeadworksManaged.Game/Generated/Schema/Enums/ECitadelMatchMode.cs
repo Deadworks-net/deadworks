@@ -6,7 +6,7 @@
 namespace DeadworksManaged.Game;
 
 public static partial class Schema {
-	/// <summary>Schema enum <c>ECitadelMatchMode</c>. <see href="https://deadworks.net/db/schema/client/ECitadelMatchMode">Modding database</see>.</summary>
+	/// <summary>Schema enum <c>ECitadelMatchMode</c>. <see href="https://deadworks.net/db/schema/server/ECitadelMatchMode">Modding database</see>.</summary>
 	public enum ECitadelMatchMode : uint {
 		k_ECitadelMatchMode_Invalid = 0,
 		k_ECitadelMatchMode_Unranked = 1,

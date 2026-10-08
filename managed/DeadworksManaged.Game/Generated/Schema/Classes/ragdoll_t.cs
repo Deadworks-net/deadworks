@@ -7,7 +7,7 @@ using System.Numerics;
 namespace DeadworksManaged.Game;
 
 public static partial class Schema {
-	/// <summary>Schema class <c>ragdoll_t</c>. <see href="https://deadworks.net/db/schema/client/ragdoll_t">Modding database</see>.</summary>
+	/// <summary>Schema class <c>ragdoll_t</c>. <see href="https://deadworks.net/db/schema/server/ragdoll_t">Modding database</see>.</summary>
 	public partial class ragdoll_t : SchemaObject, ISchemaClass<ragdoll_t> {
 		internal ragdoll_t() { }
 		static ragdoll_t ISchemaClass<ragdoll_t>.New() => new();

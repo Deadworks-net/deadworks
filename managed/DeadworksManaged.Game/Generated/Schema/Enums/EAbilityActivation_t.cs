@@ -6,7 +6,7 @@
 namespace DeadworksManaged.Game;
 
 public static partial class Schema {
-	/// <summary>Schema enum <c>EAbilityActivation_t</c>. <see href="https://deadworks.net/db/schema/client/EAbilityActivation_t">Modding database</see>.</summary>
+	/// <summary>Schema enum <c>EAbilityActivation_t</c>. <see href="https://deadworks.net/db/schema/server/EAbilityActivation_t">Modding database</see>.</summary>
 	public enum EAbilityActivation_t : uint {
 		CITADEL_ABILITY_ACTIVATION_NONE = 0,
 		CITADEL_ABILITY_ACTIVATION_PASSIVE = 1,

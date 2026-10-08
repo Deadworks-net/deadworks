@@ -6,7 +6,7 @@
 namespace DeadworksManaged.Game;
 
 public static partial class Schema {
-	/// <summary>Schema enum <c>EPermanentBuffValueUnit</c>. <see href="https://deadworks.net/db/schema/client/EPermanentBuffValueUnit">Modding database</see>.</summary>
+	/// <summary>Schema enum <c>EPermanentBuffValueUnit</c>. <see href="https://deadworks.net/db/schema/server/EPermanentBuffValueUnit">Modding database</see>.</summary>
 	public enum EPermanentBuffValueUnit : uint {
 		Flat = 0,
 		Percent = 1,

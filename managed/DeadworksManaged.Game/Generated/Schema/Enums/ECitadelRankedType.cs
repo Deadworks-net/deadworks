@@ -6,7 +6,7 @@
 namespace DeadworksManaged.Game;
 
 public static partial class Schema {
-	/// <summary>Schema enum <c>ECitadelRankedType</c>. <see href="https://deadworks.net/db/schema/client/ECitadelRankedType">Modding database</see>.</summary>
+	/// <summary>Schema enum <c>ECitadelRankedType</c>. <see href="https://deadworks.net/db/schema/server/ECitadelRankedType">Modding database</see>.</summary>
 	public enum ECitadelRankedType : uint {
 		k_eCitadelRankedType_Invalid = 0,
 		k_eCitadelRankedType_Normal = 1,

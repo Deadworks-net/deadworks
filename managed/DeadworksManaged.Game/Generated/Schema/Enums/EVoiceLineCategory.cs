@@ -6,7 +6,7 @@
 namespace DeadworksManaged.Game;
 
 public static partial class Schema {
-	/// <summary>Schema enum <c>EVoiceLineCategory</c>. <see href="https://deadworks.net/db/schema/client/EVoiceLineCategory">Modding database</see>.</summary>
+	/// <summary>Schema enum <c>EVoiceLineCategory</c>. <see href="https://deadworks.net/db/schema/server/EVoiceLineCategory">Modding database</see>.</summary>
 	public enum EVoiceLineCategory : uint {
 		HeroSelect = 0,
 		Abilities = 1,

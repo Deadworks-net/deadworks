@@ -6,7 +6,7 @@
 namespace DeadworksManaged.Game;
 
 public static partial class Schema {
-	/// <summary>Schema enum <c>EHeroType</c>. <see href="https://deadworks.net/db/schema/client/EHeroType">Modding database</see>.</summary>
+	/// <summary>Schema enum <c>EHeroType</c>. <see href="https://deadworks.net/db/schema/server/EHeroType">Modding database</see>.</summary>
 	public enum EHeroType : uint {
 		ECitadelHeroType_None = 0,
 		ECitadelHeroType_Marksman = 1,

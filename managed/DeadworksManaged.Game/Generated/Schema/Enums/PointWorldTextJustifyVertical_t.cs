@@ -6,7 +6,7 @@
 namespace DeadworksManaged.Game;
 
 public static partial class Schema {
-	/// <summary>Schema enum <c>PointWorldTextJustifyVertical_t</c>. <see href="https://deadworks.net/db/schema/client/PointWorldTextJustifyVertical_t">Modding database</see>.</summary>
+	/// <summary>Schema enum <c>PointWorldTextJustifyVertical_t</c>. <see href="https://deadworks.net/db/schema/server/PointWorldTextJustifyVertical_t">Modding database</see>.</summary>
 	public enum PointWorldTextJustifyVertical_t : uint {
 		POINT_WORLD_TEXT_JUSTIFY_VERTICAL_BOTTOM = 0,
 		POINT_WORLD_TEXT_JUSTIFY_VERTICAL_CENTER = 1,

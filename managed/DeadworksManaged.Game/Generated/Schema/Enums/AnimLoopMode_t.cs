@@ -6,7 +6,7 @@
 namespace DeadworksManaged.Game;
 
 public static partial class Schema {
-	/// <summary>Schema enum <c>AnimLoopMode_t</c>. <see href="https://deadworks.net/db/schema/client/AnimLoopMode_t">Modding database</see>.</summary>
+	/// <summary>Schema enum <c>AnimLoopMode_t</c>. <see href="https://deadworks.net/db/schema/server/AnimLoopMode_t">Modding database</see>.</summary>
 	public enum AnimLoopMode_t : int {
 		ANIM_LOOP_MODE_INVALID = -1,
 		ANIM_LOOP_MODE_NOT_LOOPING = 0,

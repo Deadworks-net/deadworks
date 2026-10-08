@@ -7,7 +7,7 @@ using System.Numerics;
 namespace DeadworksManaged.Game;
 
 public static partial class Schema {
-	/// <summary>Schema class <c>PropertyUpgrade_t</c>. <see href="https://deadworks.net/db/schema/client/PropertyUpgrade_t">Modding database</see>.</summary>
+	/// <summary>Schema class <c>PropertyUpgrade_t</c>. <see href="https://deadworks.net/db/schema/server/PropertyUpgrade_t">Modding database</see>.</summary>
 	public partial class PropertyUpgrade_t : SchemaObject, ISchemaClass<PropertyUpgrade_t> {
 		internal PropertyUpgrade_t() { }
 		static PropertyUpgrade_t ISchemaClass<PropertyUpgrade_t>.New() => new();

@@ -6,7 +6,7 @@
 namespace DeadworksManaged.Game;
 
 public static partial class Schema {
-	/// <summary>Schema enum <c>EDestructibleParts_DestroyParameterFlags</c>. <see href="https://deadworks.net/db/schema/client/EDestructibleParts_DestroyParameterFlags">Modding database</see>.</summary>
+	/// <summary>Schema enum <c>EDestructibleParts_DestroyParameterFlags</c>. <see href="https://deadworks.net/db/schema/server/EDestructibleParts_DestroyParameterFlags">Modding database</see>.</summary>
 	public enum EDestructibleParts_DestroyParameterFlags : uint {
 		None = 0,
 		GenerateBreakpieces = 1,

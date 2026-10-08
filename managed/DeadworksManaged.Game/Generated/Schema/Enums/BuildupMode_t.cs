@@ -6,7 +6,7 @@
 namespace DeadworksManaged.Game;
 
 public static partial class Schema {
-	/// <summary>Schema enum <c>BuildupMode_t</c>. <see href="https://deadworks.net/db/schema/client/BuildupMode_t">Modding database</see>.</summary>
+	/// <summary>Schema enum <c>BuildupMode_t</c>. <see href="https://deadworks.net/db/schema/server/BuildupMode_t">Modding database</see>.</summary>
 	public enum BuildupMode_t : uint {
 		BUILDUP_MODE_ONE_AND_DONE = 0,
 		BUILDUP_MODE_RESTART_ON_FILL = 1,

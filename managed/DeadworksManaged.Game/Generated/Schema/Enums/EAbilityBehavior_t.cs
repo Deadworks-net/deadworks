@@ -6,7 +6,7 @@
 namespace DeadworksManaged.Game;
 
 public static partial class Schema {
-	/// <summary>Schema enum <c>EAbilityBehavior_t</c>. <see href="https://deadworks.net/db/schema/client/EAbilityBehavior_t">Modding database</see>.</summary>
+	/// <summary>Schema enum <c>EAbilityBehavior_t</c>. <see href="https://deadworks.net/db/schema/server/EAbilityBehavior_t">Modding database</see>.</summary>
 	public enum EAbilityBehavior_t : uint {
 		CITADEL_ABILITY_BEHAVIOR_HIDDEN = 0,
 		CITADEL_ABILITY_BEHAVIOR_DONT_BREAK_INVISIBILITY = 1,

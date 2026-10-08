@@ -6,7 +6,7 @@
 namespace DeadworksManaged.Game;
 
 public static partial class Schema {
-	/// <summary>Schema enum <c>EHideoutButtonAction</c>. <see href="https://deadworks.net/db/schema/client/EHideoutButtonAction">Modding database</see>.</summary>
+	/// <summary>Schema enum <c>EHideoutButtonAction</c>. <see href="https://deadworks.net/db/schema/server/EHideoutButtonAction">Modding database</see>.</summary>
 	public enum EHideoutButtonAction : uint {
 		k_eNone = 0,
 		k_ePlay = 1,

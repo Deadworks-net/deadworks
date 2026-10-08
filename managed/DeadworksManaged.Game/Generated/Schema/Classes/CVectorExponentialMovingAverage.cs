@@ -7,7 +7,7 @@ using System.Numerics;
 namespace DeadworksManaged.Game;
 
 public static partial class Schema {
-	/// <summary>Schema class <c>CVectorExponentialMovingAverage</c>. <see href="https://deadworks.net/db/schema/client/CVectorExponentialMovingAverage">Modding database</see>.</summary>
+	/// <summary>Schema class <c>CVectorExponentialMovingAverage</c>. <see href="https://deadworks.net/db/schema/server/CVectorExponentialMovingAverage">Modding database</see>.</summary>
 	public partial class CVectorExponentialMovingAverage : SchemaObject, ISchemaClass<CVectorExponentialMovingAverage> {
 		internal CVectorExponentialMovingAverage() { }
 		static CVectorExponentialMovingAverage ISchemaClass<CVectorExponentialMovingAverage>.New() => new();

@@ -6,7 +6,7 @@
 namespace DeadworksManaged.Game;
 
 public static partial class Schema {
-	/// <summary>Schema enum <c>SignonState_t</c>. <see href="https://deadworks.net/db/schema/client/SignonState_t">Modding database</see>.</summary>
+	/// <summary>Schema enum <c>SignonState_t</c>. <see href="https://deadworks.net/db/schema/server/SignonState_t">Modding database</see>.</summary>
 	public enum SignonState_t : uint {
 		SIGNONSTATE_NONE = 0,
 		SIGNONSTATE_CHALLENGE = 1,

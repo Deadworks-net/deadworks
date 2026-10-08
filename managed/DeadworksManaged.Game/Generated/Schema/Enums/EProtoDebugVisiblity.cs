@@ -6,7 +6,7 @@
 namespace DeadworksManaged.Game;
 
 public static partial class Schema {
-	/// <summary>Schema enum <c>EProtoDebugVisiblity</c>. <see href="https://deadworks.net/db/schema/client/EProtoDebugVisiblity">Modding database</see>.</summary>
+	/// <summary>Schema enum <c>EProtoDebugVisiblity</c>. <see href="https://deadworks.net/db/schema/server/EProtoDebugVisiblity">Modding database</see>.</summary>
 	public enum EProtoDebugVisiblity : uint {
 		k_EProtoDebugVisibility_Always = 0,
 		k_EProtoDebugVisibility_Server = 70,

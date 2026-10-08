@@ -7,7 +7,7 @@ using System.Numerics;
 namespace DeadworksManaged.Game;
 
 public static partial class Schema {
-	/// <summary>Schema class <c>EventGrantDefinition_t</c>. <see href="https://deadworks.net/db/schema/client/EventGrantDefinition_t">Modding database</see>.</summary>
+	/// <summary>Schema class <c>EventGrantDefinition_t</c>. <see href="https://deadworks.net/db/schema/server/EventGrantDefinition_t">Modding database</see>.</summary>
 	public partial class EventGrantDefinition_t : SchemaObject, ISchemaClass<EventGrantDefinition_t> {
 		internal EventGrantDefinition_t() { }
 		static EventGrantDefinition_t ISchemaClass<EventGrantDefinition_t>.New() => new();

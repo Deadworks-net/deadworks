@@ -6,7 +6,7 @@
 namespace DeadworksManaged.Game;
 
 public static partial class Schema {
-	/// <summary>Schema enum <c>ELobbyServerState</c>. <see href="https://deadworks.net/db/schema/client/ELobbyServerState">Modding database</see>.</summary>
+	/// <summary>Schema enum <c>ELobbyServerState</c>. <see href="https://deadworks.net/db/schema/server/ELobbyServerState">Modding database</see>.</summary>
 	public enum ELobbyServerState : uint {
 		k_eLobbyServerState_Assign = 0,
 		k_eLobbyServerState_InGame = 1,

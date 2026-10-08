@@ -6,7 +6,7 @@
 namespace DeadworksManaged.Game;
 
 public static partial class Schema {
-	/// <summary>Schema enum <c>EBaseEntityMessages</c>. <see href="https://deadworks.net/db/schema/client/EBaseEntityMessages">Modding database</see>.</summary>
+	/// <summary>Schema enum <c>EBaseEntityMessages</c>. <see href="https://deadworks.net/db/schema/server/EBaseEntityMessages">Modding database</see>.</summary>
 	public enum EBaseEntityMessages : uint {
 		EM_PlayJingle = 136,
 		EM_ScreenOverlay = 137,

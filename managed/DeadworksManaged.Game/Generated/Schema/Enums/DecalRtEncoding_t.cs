@@ -6,7 +6,7 @@
 namespace DeadworksManaged.Game;
 
 public static partial class Schema {
-	/// <summary>Schema enum <c>DecalRtEncoding_t</c>. <see href="https://deadworks.net/db/schema/client/DecalRtEncoding_t">Modding database</see>.</summary>
+	/// <summary>Schema enum <c>DecalRtEncoding_t</c>. <see href="https://deadworks.net/db/schema/server/DecalRtEncoding_t">Modding database</see>.</summary>
 	public enum DecalRtEncoding_t : byte {
 		kDecalInvalid = 255,
 		kDecalMin = 0,

@@ -7,7 +7,7 @@ using System.Numerics;
 namespace DeadworksManaged.Game;
 
 public static partial class Schema {
-	/// <summary>Schema class <c>CCitadelModifierResponseRules_t</c>. <see href="https://deadworks.net/db/schema/client/CCitadelModifierResponseRules_t">Modding database</see>.</summary>
+	/// <summary>Schema class <c>CCitadelModifierResponseRules_t</c>. <see href="https://deadworks.net/db/schema/server/CCitadelModifierResponseRules_t">Modding database</see>.</summary>
 	public partial class CCitadelModifierResponseRules_t : SchemaObject, ISchemaClass<CCitadelModifierResponseRules_t> {
 		internal CCitadelModifierResponseRules_t() { }
 		static CCitadelModifierResponseRules_t ISchemaClass<CCitadelModifierResponseRules_t>.New() => new();

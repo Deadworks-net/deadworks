@@ -6,7 +6,7 @@
 namespace DeadworksManaged.Game;
 
 public static partial class Schema {
-	/// <summary>Schema enum <c>EGCServerSignoutData</c>. <see href="https://deadworks.net/db/schema/client/EGCServerSignoutData">Modding database</see>.</summary>
+	/// <summary>Schema enum <c>EGCServerSignoutData</c>. <see href="https://deadworks.net/db/schema/server/EGCServerSignoutData">Modding database</see>.</summary>
 	public enum EGCServerSignoutData : uint {
 		k_EServerSignoutData_Disconnections = 2,
 		k_EServerSignoutData_AccountStatChanges = 3,

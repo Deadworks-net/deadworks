@@ -6,7 +6,7 @@
 namespace DeadworksManaged.Game;
 
 public static partial class Schema {
-	/// <summary>Schema enum <c>UnitFilterResult</c>. <see href="https://deadworks.net/db/schema/client/UnitFilterResult">Modding database</see>.</summary>
+	/// <summary>Schema enum <c>UnitFilterResult</c>. <see href="https://deadworks.net/db/schema/server/UnitFilterResult">Modding database</see>.</summary>
 	public enum UnitFilterResult : byte {
 		UF_SUCCESS = 0,
 		UF_FAIL_INVALID_LOCATION = 1,

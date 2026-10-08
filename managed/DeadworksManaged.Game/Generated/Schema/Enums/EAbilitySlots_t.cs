@@ -6,7 +6,7 @@
 namespace DeadworksManaged.Game;
 
 public static partial class Schema {
-	/// <summary>Schema enum <c>EAbilitySlots_t</c>. <see href="https://deadworks.net/db/schema/client/EAbilitySlots_t">Modding database</see>.</summary>
+	/// <summary>Schema enum <c>EAbilitySlots_t</c>. <see href="https://deadworks.net/db/schema/server/EAbilitySlots_t">Modding database</see>.</summary>
 	public enum EAbilitySlots_t : short {
 		ESlot_Invalid = -1,
 		ESlot_Signature_First = 0,

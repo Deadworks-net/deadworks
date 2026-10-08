@@ -7,7 +7,7 @@ using System.Numerics;
 namespace DeadworksManaged.Game;
 
 public static partial class Schema {
-	/// <summary>Schema class <c>CNetworkTransmitComponent</c>. <see href="https://deadworks.net/db/schema/client/CNetworkTransmitComponent">Modding database</see>.</summary>
+	/// <summary>Schema class <c>CNetworkTransmitComponent</c>. <see href="https://deadworks.net/db/schema/server/CNetworkTransmitComponent">Modding database</see>.</summary>
 	public partial class CNetworkTransmitComponent : SchemaObject, ISchemaClass<CNetworkTransmitComponent> {
 		internal CNetworkTransmitComponent() { }
 		static CNetworkTransmitComponent ISchemaClass<CNetworkTransmitComponent>.New() => new();

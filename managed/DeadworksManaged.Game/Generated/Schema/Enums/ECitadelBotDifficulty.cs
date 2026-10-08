@@ -6,7 +6,7 @@
 namespace DeadworksManaged.Game;
 
 public static partial class Schema {
-	/// <summary>Schema enum <c>ECitadelBotDifficulty</c>. <see href="https://deadworks.net/db/schema/client/ECitadelBotDifficulty">Modding database</see>.</summary>
+	/// <summary>Schema enum <c>ECitadelBotDifficulty</c>. <see href="https://deadworks.net/db/schema/server/ECitadelBotDifficulty">Modding database</see>.</summary>
 	public enum ECitadelBotDifficulty : uint {
 		k_ECitadelBotDifficulty_None = 0,
 		k_ECitadelBotDifficulty_Easy = 1,

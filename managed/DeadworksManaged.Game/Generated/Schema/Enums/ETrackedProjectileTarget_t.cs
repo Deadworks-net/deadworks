@@ -6,7 +6,7 @@
 namespace DeadworksManaged.Game;
 
 public static partial class Schema {
-	/// <summary>Schema enum <c>ETrackedProjectileTarget_t</c>. <see href="https://deadworks.net/db/schema/client/ETrackedProjectileTarget_t">Modding database</see>.</summary>
+	/// <summary>Schema enum <c>ETrackedProjectileTarget_t</c>. <see href="https://deadworks.net/db/schema/server/ETrackedProjectileTarget_t">Modding database</see>.</summary>
 	public enum ETrackedProjectileTarget_t : uint {
 		ETrackedProjectileTarget_Entity = 0,
 		ETrackedProjectileTarget_Position = 1,

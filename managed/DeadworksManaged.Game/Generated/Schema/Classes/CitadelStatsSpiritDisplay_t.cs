@@ -7,7 +7,7 @@ using System.Numerics;
 namespace DeadworksManaged.Game;
 
 public static partial class Schema {
-	/// <summary>Schema class <c>CitadelStatsSpiritDisplay_t</c>. <see href="https://deadworks.net/db/schema/client/CitadelStatsSpiritDisplay_t">Modding database</see>.</summary>
+	/// <summary>Schema class <c>CitadelStatsSpiritDisplay_t</c>. <see href="https://deadworks.net/db/schema/server/CitadelStatsSpiritDisplay_t">Modding database</see>.</summary>
 	public partial class CitadelStatsSpiritDisplay_t : SchemaObject, ISchemaClass<CitadelStatsSpiritDisplay_t> {
 		internal CitadelStatsSpiritDisplay_t() { }
 		static CitadelStatsSpiritDisplay_t ISchemaClass<CitadelStatsSpiritDisplay_t>.New() => new();

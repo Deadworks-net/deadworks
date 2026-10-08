@@ -7,7 +7,7 @@ using System.Numerics;
 namespace DeadworksManaged.Game;
 
 public static partial class Schema {
-	/// <summary>Schema class <c>ClawSwipeInfo_t</c>. <see href="https://deadworks.net/db/schema/client/ClawSwipeInfo_t">Modding database</see>.</summary>
+	/// <summary>Schema class <c>ClawSwipeInfo_t</c>. <see href="https://deadworks.net/db/schema/server/ClawSwipeInfo_t">Modding database</see>.</summary>
 	public partial class ClawSwipeInfo_t : SchemaObject, ISchemaClass<ClawSwipeInfo_t> {
 		internal ClawSwipeInfo_t() { }
 		static ClawSwipeInfo_t ISchemaClass<ClawSwipeInfo_t>.New() => new();

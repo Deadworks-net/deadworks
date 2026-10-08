@@ -6,7 +6,7 @@
 namespace DeadworksManaged.Game;
 
 public static partial class Schema {
-	/// <summary>Schema enum <c>EPlantLeapPhase_t</c>. <see href="https://deadworks.net/db/schema/client/EPlantLeapPhase_t">Modding database</see>.</summary>
+	/// <summary>Schema enum <c>EPlantLeapPhase_t</c>. <see href="https://deadworks.net/db/schema/server/EPlantLeapPhase_t">Modding database</see>.</summary>
 	public enum EPlantLeapPhase_t : byte {
 		EPlantLeap_None = 0,
 		EPlantLeap_Rising = 1,

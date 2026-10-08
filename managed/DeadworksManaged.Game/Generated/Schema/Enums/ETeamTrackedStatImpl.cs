@@ -6,7 +6,7 @@
 namespace DeadworksManaged.Game;
 
 public static partial class Schema {
-	/// <summary>Schema enum <c>ETeamTrackedStatImpl</c>. <see href="https://deadworks.net/db/schema/client/ETeamTrackedStatImpl">Modding database</see>.</summary>
+	/// <summary>Schema enum <c>ETeamTrackedStatImpl</c>. <see href="https://deadworks.net/db/schema/server/ETeamTrackedStatImpl">Modding database</see>.</summary>
 	public enum ETeamTrackedStatImpl : uint {
 		k_eTeamTrackedStatImpl_Invalid = 0,
 		k_eTeamTrackedStatImpl_Direct = 1,

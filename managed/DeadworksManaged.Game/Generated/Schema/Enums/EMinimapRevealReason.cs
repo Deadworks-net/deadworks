@@ -6,7 +6,7 @@
 namespace DeadworksManaged.Game;
 
 public static partial class Schema {
-	/// <summary>Schema enum <c>EMinimapRevealReason</c>. <see href="https://deadworks.net/db/schema/client/EMinimapRevealReason">Modding database</see>.</summary>
+	/// <summary>Schema enum <c>EMinimapRevealReason</c>. <see href="https://deadworks.net/db/schema/server/EMinimapRevealReason">Modding database</see>.</summary>
 	public enum EMinimapRevealReason : uint {
 		EVisibleByEnemyPlayer = 0,
 		EVisibleFromAttackingEnemyPlayer = 1,

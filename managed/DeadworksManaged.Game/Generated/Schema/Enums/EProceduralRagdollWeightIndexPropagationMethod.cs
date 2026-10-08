@@ -6,7 +6,7 @@
 namespace DeadworksManaged.Game;
 
 public static partial class Schema {
-	/// <summary>Schema enum <c>EProceduralRagdollWeightIndexPropagationMethod</c>. <see href="https://deadworks.net/db/schema/client/EProceduralRagdollWeightIndexPropagationMethod">Modding database</see>.</summary>
+	/// <summary>Schema enum <c>EProceduralRagdollWeightIndexPropagationMethod</c>. <see href="https://deadworks.net/db/schema/server/EProceduralRagdollWeightIndexPropagationMethod">Modding database</see>.</summary>
 	public enum EProceduralRagdollWeightIndexPropagationMethod : uint {
 		Bone = 0,
 		BoneAndChildren = 1,

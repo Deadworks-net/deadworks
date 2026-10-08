@@ -6,7 +6,7 @@
 namespace DeadworksManaged.Game;
 
 public static partial class Schema {
-	/// <summary>Schema enum <c>EAbilityUpgradeType</c>. <see href="https://deadworks.net/db/schema/client/EAbilityUpgradeType">Modding database</see>.</summary>
+	/// <summary>Schema enum <c>EAbilityUpgradeType</c>. <see href="https://deadworks.net/db/schema/server/EAbilityUpgradeType">Modding database</see>.</summary>
 	public enum EAbilityUpgradeType : uint {
 		EAddToBase = 0,
 		EMultiplyBase = 1,

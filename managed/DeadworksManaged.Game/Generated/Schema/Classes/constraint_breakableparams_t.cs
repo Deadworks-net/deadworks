@@ -7,7 +7,7 @@ using System.Numerics;
 namespace DeadworksManaged.Game;
 
 public static partial class Schema {
-	/// <summary>Schema class <c>constraint_breakableparams_t</c>. <see href="https://deadworks.net/db/schema/client/constraint_breakableparams_t">Modding database</see>.</summary>
+	/// <summary>Schema class <c>constraint_breakableparams_t</c>. <see href="https://deadworks.net/db/schema/server/constraint_breakableparams_t">Modding database</see>.</summary>
 	public partial class constraint_breakableparams_t : SchemaObject, ISchemaClass<constraint_breakableparams_t> {
 		internal constraint_breakableparams_t() { }
 		static constraint_breakableparams_t ISchemaClass<constraint_breakableparams_t>.New() => new();

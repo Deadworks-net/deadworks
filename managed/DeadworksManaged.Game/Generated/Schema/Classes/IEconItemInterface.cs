@@ -7,7 +7,7 @@ using System.Numerics;
 namespace DeadworksManaged.Game;
 
 public static partial class Schema {
-	/// <summary>Schema class <c>IEconItemInterface</c>. <see href="https://deadworks.net/db/schema/client/IEconItemInterface">Modding database</see>.</summary>
+	/// <summary>Schema class <c>IEconItemInterface</c>. <see href="https://deadworks.net/db/schema/server/IEconItemInterface">Modding database</see>.</summary>
 	public partial class IEconItemInterface : SchemaObject, ISchemaClass<IEconItemInterface> {
 		internal IEconItemInterface() { }
 		static IEconItemInterface ISchemaClass<IEconItemInterface>.New() => new();

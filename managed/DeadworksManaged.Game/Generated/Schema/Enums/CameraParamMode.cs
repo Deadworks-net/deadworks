@@ -6,7 +6,7 @@
 namespace DeadworksManaged.Game;
 
 public static partial class Schema {
-	/// <summary>Schema enum <c>CameraParamMode</c>. <see href="https://deadworks.net/db/schema/client/CameraParamMode">Modding database</see>.</summary>
+	/// <summary>Schema enum <c>CameraParamMode</c>. <see href="https://deadworks.net/db/schema/server/CameraParamMode">Modding database</see>.</summary>
 	public enum CameraParamMode : uint {
 		k_EParamMode_AllowInOneContext = 0,
 		k_EParamMode_AllowInMultipleContexts = 1,

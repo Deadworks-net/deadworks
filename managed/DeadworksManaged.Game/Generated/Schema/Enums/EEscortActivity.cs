@@ -6,7 +6,7 @@
 namespace DeadworksManaged.Game;
 
 public static partial class Schema {
-	/// <summary>Schema enum <c>EEscortActivity</c>. <see href="https://deadworks.net/db/schema/client/EEscortActivity">Modding database</see>.</summary>
+	/// <summary>Schema enum <c>EEscortActivity</c>. <see href="https://deadworks.net/db/schema/server/EEscortActivity">Modding database</see>.</summary>
 	public enum EEscortActivity : uint {
 		IdleShielded = 0,
 		Alert = 1,

@@ -6,7 +6,7 @@
 namespace DeadworksManaged.Game;
 
 public static partial class Schema {
-	/// <summary>Schema enum <c>LifeState_t</c>. <see href="https://deadworks.net/db/schema/client/LifeState_t">Modding database</see>.</summary>
+	/// <summary>Schema enum <c>LifeState_t</c>. <see href="https://deadworks.net/db/schema/server/LifeState_t">Modding database</see>.</summary>
 	public enum LifeState_t : uint {
 		LIFE_ALIVE = 0,
 		LIFE_DYING = 1,

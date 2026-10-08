@@ -6,7 +6,7 @@
 namespace DeadworksManaged.Game;
 
 public static partial class Schema {
-	/// <summary>Schema enum <c>ECitadelGameEvents</c>. <see href="https://deadworks.net/db/schema/client/ECitadelGameEvents">Modding database</see>.</summary>
+	/// <summary>Schema enum <c>ECitadelGameEvents</c>. <see href="https://deadworks.net/db/schema/server/ECitadelGameEvents">Modding database</see>.</summary>
 	public enum ECitadelGameEvents : uint {
 		GE_FireBullets = 450,
 		GE_PlayerAnimEvent = 451,

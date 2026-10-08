@@ -7,7 +7,7 @@ using System.Numerics;
 namespace DeadworksManaged.Game;
 
 public static partial class Schema {
-	/// <summary>Schema class <c>CExternalAnimGraphList</c>. <see href="https://deadworks.net/db/schema/client/CExternalAnimGraphList">Modding database</see>.</summary>
+	/// <summary>Schema class <c>CExternalAnimGraphList</c>. <see href="https://deadworks.net/db/schema/server/CExternalAnimGraphList">Modding database</see>.</summary>
 	public partial class CExternalAnimGraphList : SchemaObject, ISchemaClass<CExternalAnimGraphList> {
 		internal CExternalAnimGraphList() { }
 		static CExternalAnimGraphList ISchemaClass<CExternalAnimGraphList>.New() => new();
