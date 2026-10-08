@@ -15,17 +15,20 @@
   <ItemGroup>
     <Compile Remove="DeadworksManaged.Api\**" />
     <Compile Remove="DeadworksManaged.Generators\**" />
+    <Compile Remove="DeadworksManaged.Game\**" />
+    <Compile Remove="DeadworksManaged.GameGen\**" />
     <Compile Remove="plugins\**" />
     <Compile Remove="DeadworksManaged.Tests\**" />
   </ItemGroup>
 
   <ItemGroup>
     <ProjectReference Include="DeadworksManaged.Api\DeadworksManaged.Api.csproj" />
+    <ProjectReference Include="DeadworksManaged.Game\DeadworksManaged.Game.csproj" />
   </ItemGroup>
 
   <Target Name="DeployToGame" AfterTargets="Build">
     <ItemGroup>
-      <DeployFiles Include="$(OutputPath)DeadworksManaged.dll;$(OutputPath)DeadworksManaged.pdb;$(OutputPath)DeadworksManaged.deps.json;$(OutputPath)DeadworksManaged.runtimeconfig.json;$(OutputPath)DeadworksManaged.Api.dll;$(OutputPath)DeadworksManaged.Api.pdb;$(OutputPath)Google.Protobuf.dll" />
+      <DeployFiles Include="$(OutputPath)DeadworksManaged.dll;$(OutputPath)DeadworksManaged.pdb;$(OutputPath)DeadworksManaged.deps.json;$(OutputPath)DeadworksManaged.runtimeconfig.json;$(OutputPath)DeadworksManaged.Api.dll;$(OutputPath)DeadworksManaged.Api.pdb;$(OutputPath)Google.Protobuf.dll;$(OutputPath)DeadworksManaged.Game.dll;$(OutputPath)DeadworksManaged.Game.pdb;$(OutputPath)DeadworksManaged.Game.xml" />
     </ItemGroup>
     <Copy SourceFiles="@(DeployFiles)" DestinationFolder="$(DeadlockManagedDir)" SkipUnchangedFiles="false" Retries="0" ContinueOnError="WarnAndContinue" />
   </Target>

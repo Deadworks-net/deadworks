@@ -10,6 +10,7 @@
 
   <ItemGroup>
     <InternalsVisibleTo Include="DeadworksManaged" />
+    <InternalsVisibleTo Include="DeadworksManaged.Game" />
     <InternalsVisibleTo Include="DeadworksManaged.Tests" />
   </ItemGroup>
 

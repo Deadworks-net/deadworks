@@ -1,0 +1,3353 @@
+{
+ "build": 6759,
+ "map": "dl_midtown",
+ "results": {
+  "ai_changehintgroup": {
+   "result": "lived",
+   "class": "CAI_ChangeHintGroup"
+  },
+  "ai_foot_sweep": {
+   "result": "lived",
+   "class": "CNpcFootSweep"
+  },
+  "ai_goal_entity": {
+   "result": "refused"
+  },
+  "ai_hint": {
+   "result": "lived",
+   "class": "CAI_Hint"
+  },
+  "ai_look_target": {
+   "result": "refused"
+  },
+  "ai_nav_link_area": {
+   "result": "lived",
+   "class": "CNavLinkAreaEntity"
+  },
+  "ai_network": {
+   "result": "lived",
+   "class": "CAI_NetworkManager"
+  },
+  "ai_relationship": {
+   "result": "vanished",
+   "class": "CAI_Relationship"
+  },
+  "ai_script_conditions": {
+   "result": "lived",
+   "class": "CAI_ScriptConditions"
+  },
+  "ai_sound": {
+   "result": "lived",
+   "class": "CAI_VolumetricEventEntity"
+  },
+  "ai_speechfilter": {
+   "result": "lived",
+   "class": "CAI_SpeechFilter"
+  },
+  "ai_test_path": {
+   "result": "lived",
+   "class": "CAITestPath"
+  },
+  "ai_volumetric_event": {
+   "result": "lived",
+   "class": "CAI_VolumetricEventEntity"
+  },
+  "ai_volumetric_event_sensor": {
+   "result": "lived",
+   "class": "CAI_VolumetricEventSensor"
+  },
+  "alt_npc_boss_tier1": {
+   "result": "lived",
+   "class": "CNPC_TrooperBoss"
+  },
+  "alt_npc_boss_tier2": {
+   "result": "lived",
+   "class": "CNPC_Boss_Tier2"
+  },
+  "alt_npc_boss_tier2_weak": {
+   "result": "lived",
+   "class": "CNPC_Boss_Tier2"
+  },
+  "alt_npc_boss_tier3": {
+   "result": "lived",
+   "class": "CNPC_Boss_Tier3"
+  },
+  "ambient_generic": {
+   "result": "vanished",
+   "class": "CAmbientGeneric"
+  },
+  "ammo_permanent_pickup": {
+   "result": "lived",
+   "class": "CCitadel_Pickup_Modifier"
+  },
+  "ammo_permanent_pickup_lv2": {
+   "result": "lived",
+   "class": "CCitadel_Pickup_Modifier"
+  },
+  "ammo_permanent_pickup_lv3": {
+   "result": "lived",
+   "class": "CCitadel_Pickup_Modifier"
+  },
+  "archer_charged_shot_projectile": {
+   "result": "lived",
+   "class": "CCitadel_Projectile_Archer_ChargedShot"
+  },
+  "baba_bubblingbrew_projectile": {
+   "result": "lived",
+   "class": "CCitadel_Projectile_BubblingBrew"
+  },
+  "base_clientui_entity": {
+   "result": "refused"
+  },
+  "base_combat_character": {
+   "result": "refused"
+  },
+  "base_npc": {
+   "result": "refused"
+  },
+  "base_plat_train": {
+   "result": "refused"
+  },
+  "base_player_weapon": {
+   "result": "refused"
+  },
+  "base_prop": {
+   "result": "lived",
+   "class": "CBaseProp"
+  },
+  "base_prop_door": {
+   "result": "refused"
+  },
+  "base_toggle": {
+   "result": "refused"
+  },
+  "baseanimating": {
+   "result": "lived",
+   "class": "CBaseAnimGraph"
+  },
+  "baseanimgraph": {
+   "result": "lived",
+   "class": "CBaseAnimGraph"
+  },
+  "basemodelentity": {
+   "result": "lived",
+   "class": "CBaseModelEntity"
+  },
+  "batswarm_extra_projectile": {
+   "result": "lived",
+   "class": "CCitadel_Projectile_BatSwarmExtraProjectile"
+  },
+  "batswarm_projectile": {
+   "result": "lived",
+   "class": "CCitadel_Projectile_BatSwarmProjectile"
+  },
+  "beam": {
+   "result": "lived",
+   "class": "CBeam"
+  },
+  "bebop_hook_projectile": {
+   "result": "lived",
+   "class": "CCitadel_Projectile_Bebop_Hook"
+  },
+  "big_gold_pickup": {
+   "result": "lived",
+   "class": "CCitadel_Pickup_Gold"
+  },
+  "blood_bomb_projectile": {
+   "result": "lived",
+   "class": "CCitadel_Projectile_BloodBomb"
+  },
+  "boho_bouncyprojectile": {
+   "result": "lived",
+   "class": "CProjectile_Boho_BouncyProjectile"
+  },
+  "bookwormdragon_projectile": {
+   "result": "lived",
+   "class": "CProjectile_BookwormDragon_Projectile"
+  },
+  "bookwormgun_projectile": {
+   "result": "lived",
+   "class": "CCitadel_Projectile_BookwormGun"
+  },
+  "breakable_prop": {
+   "result": "refused"
+  },
+  "bullet_redirect_volume": {
+   "result": "lived",
+   "class": "CCitadelBulletRedirectVolume"
+  },
+  "bullet_time_warp": {
+   "result": "lived",
+   "class": "CCitadelBulletTimeWarp"
+  },
+  "bulletresist_permanent_pickup": {
+   "result": "lived",
+   "class": "CCitadel_Pickup_Modifier"
+  },
+  "bulletresist_permanent_pickup_lv2": {
+   "result": "lived",
+   "class": "CCitadel_Pickup_Modifier"
+  },
+  "bulletresist_permanent_pickup_lv3": {
+   "result": "lived",
+   "class": "CCitadel_Pickup_Modifier"
+  },
+  "cable_dynamic": {
+   "result": "lived",
+   "class": "CDynamicProp"
+  },
+  "capture_point_escort": {
+   "result": "lived",
+   "class": "CCitadelTriggerCapturePoint_Escort"
+  },
+  "casting_powerup_pickup": {
+   "result": "lived",
+   "class": "CCitadel_Pickup_Modifier"
+  },
+  "cd_permanent_pickup": {
+   "result": "lived",
+   "class": "CCitadel_Pickup_Modifier"
+  },
+  "cd_permanent_pickup_lv2": {
+   "result": "lived",
+   "class": "CCitadel_Pickup_Modifier"
+  },
+  "cd_permanent_pickup_lv3": {
+   "result": "lived",
+   "class": "CCitadel_Pickup_Modifier"
+  },
+  "change_team_powerup_pickup": {
+   "result": "lived",
+   "class": "CCitadel_Pickup_Modifier"
+  },
+  "citadel_animating_model_entity": {
+   "result": "lived",
+   "class": "CCitadelAnimatingModelEntity"
+  },
+  "citadel_announcer": {
+   "result": "lived",
+   "class": "CCitadel_Announcer"
+  },
+  "citadel_base_hero": {
+   "result": "lived",
+   "class": "CCitadelHeroLoader"
+  },
+  "citadel_base_prop_midboss_indicator": {
+   "result": "lived",
+   "class": "CCitadel_Prop_MidBossIndicator"
+  },
+  "citadel_base_prop_stairs": {
+   "result": "lived",
+   "class": "CCitadel_BaseProp_MidStairs"
+  },
+  "citadel_basketball": {
+   "result": "lived",
+   "class": "CCitadel_Hideout_Ball"
+  },
+  "citadel_bot_test_node": {
+   "result": "lived",
+   "class": "CCitadelBotTestNode"
+  },
+  "citadel_bounce_pad": {
+   "result": "lived",
+   "class": "CCitadel_Bounce_Pad"
+  },
+  "citadel_breakable_bell_chinatown": {
+   "result": "lived",
+   "class": "CCitadel_BreakableProp"
+  },
+  "citadel_breakable_item_container": {
+   "result": "lived",
+   "class": "CCitadel_BreakableProp"
+  },
+  "citadel_breakable_jar_01": {
+   "result": "lived",
+   "class": "CCitadel_BreakableProp",
+   "model": "models/props_gameplay/jar_01/jar_01.vmdl"
+  },
+  "citadel_breakable_lion_statue": {
+   "result": "lived",
+   "class": "CCitadel_BreakableProp",
+   "model": "models/props_gameplay/lion_statue_02/lion_statue_02.vmdl"
+  },
+  "citadel_breakable_prop": {
+   "result": "crashed",
+   "at": "server.dll+0x74298C"
+  },
+  "citadel_breakable_prop_base": {
+   "result": "refused"
+  },
+  "citadel_breakable_prop_box_multi": {
+   "result": "lived",
+   "class": "CCitadel_BreakableProp"
+  },
+  "citadel_breakable_prop_drop_gold": {
+   "result": "refused"
+  },
+  "citadel_breakable_prop_drop_powerups": {
+   "result": "refused"
+  },
+  "citadel_breakable_prop_pumpkin01": {
+   "result": "lived",
+   "class": "CCitadel_BreakableProp"
+  },
+  "citadel_breakable_prop_pumpkin02": {
+   "result": "lived",
+   "class": "CCitadel_BreakableProp"
+  },
+  "citadel_breakable_prop_pumpkin03": {
+   "result": "lived",
+   "class": "CCitadel_BreakableProp",
+   "model": "models/props/pumpkin_c.vmdl"
+  },
+  "citadel_breakable_prop_pumpkin04": {
+   "result": "lived",
+   "class": "CCitadel_BreakableProp"
+  },
+  "citadel_breakable_prop_tough_crate": {
+   "result": "lived",
+   "class": "CCitadel_BreakableProp"
+  },
+  "citadel_breakable_prop_vase": {
+   "result": "lived",
+   "class": "CCitadel_BreakableProp"
+  },
+  "citadel_breakable_prop_wooden_crate": {
+   "result": "lived",
+   "class": "CCitadel_BreakableProp"
+  },
+  "citadel_breakable_prop_xmaspresent01": {
+   "result": "lived",
+   "class": "CCitadel_BreakableProp"
+  },
+  "citadel_breakable_prop_xmaspresent02": {
+   "result": "lived",
+   "class": "CCitadel_BreakableProp"
+  },
+  "citadel_breakable_prop_xmaspresent03": {
+   "result": "lived",
+   "class": "CCitadel_BreakableProp"
+  },
+  "citadel_breakable_sake_barrel": {
+   "result": "lived",
+   "class": "CCitadel_BreakableProp"
+  },
+  "citadel_breakable_wooden_crate_02": {
+   "result": "lived",
+   "class": "CCitadel_BreakableProp"
+  },
+  "citadel_breakable_wooden_crate_03": {
+   "result": "lived",
+   "class": "CCitadel_BreakableProp"
+  },
+  "citadel_capture_point": {
+   "result": "crashed",
+   "at": "server.dll+0x231322"
+  },
+  "citadel_capture_point_escort": {
+   "result": "crashed"
+  },
+  "citadel_cat_animating": {
+   "result": "lived",
+   "class": "CCitadel_CatAnimating"
+  },
+  "citadel_change_team_spawner": {
+   "result": "lived",
+   "class": "CCitadel_PickupItemSpawner"
+  },
+  "citadel_configurable_tracked_projectile": {
+   "result": "lived",
+   "class": "CCitadelConfigurableTrackedProjectile"
+  },
+  "citadel_control_point": {
+   "result": "lived",
+   "class": "CCitadelControlPointTrigger"
+  },
+  "citadel_deployable_preview": {
+   "result": "crashed",
+   "at": "server.dll+0x7786AE"
+  },
+  "citadel_dev_trigger": {
+   "result": "lived",
+   "class": "CCitadelDevTrigger"
+  },
+  "citadel_doorway_portal": {
+   "result": "lived",
+   "class": "CCitadel_DoorwayPortal"
+  },
+  "citadel_druid_healing_tree": {
+   "result": "lived",
+   "class": "CCitadelDruidHealingTree"
+  },
+  "citadel_druid_healing_tree_fruit": {
+   "result": "lived",
+   "class": "CCitadelDruidHealingFruit"
+  },
+  "citadel_druid_invis_bush": {
+   "result": "lived",
+   "class": "CCitadelDruidInvisBush"
+  },
+  "citadel_druid_plant_shield": {
+   "result": "lived",
+   "class": "CCitadelDruidPlantShield"
+  },
+  "citadel_econ_item_container": {
+   "result": "vanished",
+   "class": "CCitadelEconItemContainer"
+  },
+  "citadel_energy_tower": {
+   "result": "lived",
+   "class": "CCitadelEnergyTower"
+  },
+  "citadel_fissure_wall": {
+   "result": "lived",
+   "class": "CCitadel_FissureWall"
+  },
+  "citadel_gaffer": {
+   "result": "lived",
+   "class": "CCitadelGaffer"
+  },
+  "citadel_gamerules": {
+   "result": "lived",
+   "class": "CCitadelGameRulesProxy"
+  },
+  "citadel_grandfinale_stage": {
+   "result": "lived",
+   "class": "CCitadel_GrandFinaleStage"
+  },
+  "citadel_gravestone_blocker": {
+   "result": "vanished",
+   "class": "CCitadel_GraveStone_Blocker"
+  },
+  "citadel_hero_release_vote_terminal": {
+   "result": "vanished",
+   "class": "CCitadelHeroReleaseVoteTerminal"
+  },
+  "citadel_herotest_orbspawner": {
+   "result": "lived",
+   "class": "CCitadel_HeroTestOrbSpawner"
+  },
+  "citadel_hideout_ball": {
+   "result": "lived",
+   "class": "CCitadel_Hideout_Ball"
+  },
+  "citadel_hideout_button": {
+   "result": "lived",
+   "class": "CCitadelHideoutInteractableProp"
+  },
+  "citadel_hideout_clock": {
+   "result": "lived",
+   "class": "CCitadel_Hideout_Clock"
+  },
+  "citadel_hideout_interactable_trigger": {
+   "result": "lived",
+   "class": "CCitadelHideoutInteractableTrigger"
+  },
+  "citadel_hideout_prop_base": {
+   "result": "crashed",
+   "at": "server.dll+0xA788D0"
+  },
+  "citadel_hideout_prop_slot": {
+   "result": "lived",
+   "class": "CCitadelHideoutPropSlot"
+  },
+  "citadel_hideout_shootable_target_spawner": {
+   "result": "lived",
+   "class": "CCitadel_HideOutTargetSpawner"
+  },
+  "citadel_ice_dome_blocker": {
+   "result": "lived",
+   "class": "CCitadel_Ice_Dome_Blocker"
+  },
+  "citadel_invis_volume": {
+   "result": "lived",
+   "class": "CTriggerInvisVolume"
+  },
+  "citadel_item_koth_spawner": {
+   "result": "lived",
+   "class": "CCitadelItemKothSpawner"
+  },
+  "citadel_item_pickup": {
+   "result": "lived",
+   "class": "CCitadelItemPickup"
+  },
+  "citadel_item_pickup_idol": {
+   "result": "lived",
+   "class": "CCitadelItemPickupIdol"
+  },
+  "citadel_item_pickup_rejuv": {
+   "result": "lived",
+   "class": "CCitadelItemPickupRejuv"
+  },
+  "citadel_item_pickup_rejuv_herotest": {
+   "result": "lived",
+   "class": "CCitadelItemPickupRejuvHeroTest"
+  },
+  "citadel_item_pickup_rejuv_herotest_infospawn": {
+   "result": "lived",
+   "class": "CCitadelItemPickupRejuvHeroTestInfoSpawn"
+  },
+  "citadel_item_powerup_spawner": {
+   "result": "lived",
+   "class": "CCitadel_PickupItemSpawner"
+  },
+  "citadel_item_powerup_spawner_bounty_runes": {
+   "result": "lived",
+   "class": "CCitadel_PickupItemSpawner"
+  },
+  "citadel_item_punchable_gold": {
+   "result": "lived",
+   "class": "CCitadelItemPunchableNeutralGold"
+  },
+  "citadel_koth_cashin": {
+   "result": "lived",
+   "class": "CCitadel_KothCashIn"
+  },
+  "citadel_local_player_ranked_badge_prop": {
+   "result": "lived",
+   "class": "CCitadelLocalPlayerRankedBadgeProp"
+  },
+  "citadel_magic_beam_blocker": {
+   "result": "lived",
+   "class": "CCitadel_Magic_Beam_Blocker"
+  },
+  "citadel_magician_turret_object": {
+   "result": "crashed",
+   "at": "server.dll+0x141AD7E"
+  },
+  "citadel_minimap_boundary": {
+   "result": "lived",
+   "class": "CCitadelMinimapBoundary"
+  },
+  "citadel_mobile_resupply_object": {
+   "result": "crashed",
+   "at": "server.dll+0x12D3156"
+  },
+  "citadel_model_entity": {
+   "result": "lived",
+   "class": "CCitadelModelEntity"
+  },
+  "citadel_multi_capture_point": {
+   "result": "crashed",
+   "at": "server.dll+0x231322"
+  },
+  "citadel_nano_predatory_statue": {
+   "result": "crashed",
+   "at": "server.dll+0x15B7A54"
+  },
+  "citadel_new_years_fireworks": {
+   "result": "lived",
+   "class": "CCitadel_NewYears_Fireworks"
+  },
+  "citadel_npc": {
+   "result": "refused"
+  },
+  "citadel_obscured_volume": {
+   "result": "lived",
+   "class": "CTriggerObscuredVolume"
+  },
+  "citadel_passthrough_fake_wall": {
+   "result": "lived",
+   "class": "CCitadelPassthroughFakeWall"
+  },
+  "citadel_pickup": {
+   "result": "lived",
+   "class": "CCitadel_Pickup"
+  },
+  "citadel_pickup_ability": {
+   "result": "lived",
+   "class": "CCitadel_Pickup_Ability"
+  },
+  "citadel_pickup_assigned_gold": {
+   "result": "lived",
+   "class": "CCitadel_Pickup_AssignedGold"
+  },
+  "citadel_pickup_base": {
+   "result": "refused"
+  },
+  "citadel_pickup_currency": {
+   "result": "lived",
+   "class": "CCitadel_Pickup_Currency"
+  },
+  "citadel_pickup_floating_apple": {
+   "result": "lived",
+   "class": "CCitadel_PickupSpawner"
+  },
+  "citadel_pickup_floating_health": {
+   "result": "lived",
+   "class": "CCitadel_PickupSpawner"
+  },
+  "citadel_pickup_gold": {
+   "result": "lived",
+   "class": "CCitadel_Pickup_Gold"
+  },
+  "citadel_pickup_health": {
+   "result": "lived",
+   "class": "CCitadel_Pickup_Health"
+  },
+  "citadel_pickup_health_float_in_world": {
+   "result": "lived",
+   "class": "CCitadel_Pickup_Health"
+  },
+  "citadel_pickup_item": {
+   "result": "lived",
+   "class": "CCitadel_Pickup_Item"
+  },
+  "citadel_pickup_modifier": {
+   "result": "lived",
+   "class": "CCitadel_Pickup_Modifier"
+  },
+  "citadel_pickup_necro_death": {
+   "result": "lived",
+   "class": "CCitadel_Pickup_NecroDeath"
+  },
+  "citadel_pickup_spawner": {
+   "result": "lived",
+   "class": "CCitadel_PickupSpawner"
+  },
+  "citadel_point_talker": {
+   "result": "lived",
+   "class": "CCitadel_PointTalker"
+  },
+  "citadel_point_talker_base": {
+   "result": "refused"
+  },
+  "citadel_point_talker_idol": {
+   "result": "lived",
+   "class": "CCitadel_PointTalker_Idol"
+  },
+  "citadel_pregame_hero_draft_button": {
+   "result": "vanished",
+   "class": "CCitadelPregameHeroDraftButton"
+  },
+  "citadel_priest_slidetrap": {
+   "result": "lived",
+   "class": "CCitadel_Priest_SlideTrap"
+  },
+  "citadel_projectile": {
+   "result": "lived",
+   "class": "CCitadelProjectile"
+  },
+  "citadel_prop_dynamic": {
+   "result": "lived",
+   "class": "CCitadel_DynamicProp"
+  },
+  "citadel_punchable_powerup_base": {
+   "result": "lived",
+   "class": "CCitadel_Pickup_Modifier"
+  },
+  "citadel_ranked_badge_prop": {
+   "result": "lived",
+   "class": "CCitadelRankedBadgeProp"
+  },
+  "citadel_ratking_standard": {
+   "result": "lived",
+   "class": "CCitadel_Ratking_Standard"
+  },
+  "citadel_refresh_spawner": {
+   "result": "lived",
+   "class": "CCitadel_PickupItemSpawner"
+  },
+  "citadel_restorative_goo_cube": {
+   "result": "crashed",
+   "at": "tier0.dll+0x13B19E"
+  },
+  "citadel_shield": {
+   "result": "lived",
+   "class": "CCitadel_Shield"
+  },
+  "citadel_shop_prop_dynamic": {
+   "result": "lived",
+   "class": "CCitadel_ShopProp"
+  },
+  "citadel_smokegrenade_blocker": {
+   "result": "lived",
+   "class": "CCitadel_SmokeGrenade_Blocker"
+  },
+  "citadel_snd_base_music_obb": {
+   "result": "lived",
+   "class": "CCitadelBaseMusicOBB"
+  },
+  "citadel_snd_dsp_obb": {
+   "result": "lived",
+   "class": "CCitadelAudioProcessingVolumeOBB"
+  },
+  "citadel_snd_obb": {
+   "result": "lived",
+   "class": "CCitadelSoundEntityOBB"
+  },
+  "citadel_snd_opvar_set_obb": {
+   "result": "lived",
+   "class": "CCitadelSoundOpvarSetOBB"
+  },
+  "citadel_snd_stack_field_obb": {
+   "result": "lived",
+   "class": "CCitadelSoundStackFieldOBB"
+  },
+  "citadel_soldier_entity": {
+   "result": "vanished",
+   "class": "CCitadel_Soldier_Entity"
+  },
+  "citadel_spider_animating": {
+   "result": "lived",
+   "class": "CCitadel_SpiderAnimating"
+  },
+  "citadel_team_manager": {
+   "result": "lived",
+   "class": "CCitadelTeam"
+  },
+  "citadel_tracked_projectile": {
+   "result": "lived",
+   "class": "CCitadelTrackedProjectile"
+  },
+  "citadel_trigger_bonk": {
+   "result": "lived",
+   "class": "CCitadelTriggerBonk"
+  },
+  "citadel_trigger_capture_zipline": {
+   "result": "crashed",
+   "at": "server.dll+0xC012C3"
+  },
+  "citadel_trigger_climb_rope": {
+   "result": "lived",
+   "class": "CCitadelClimbRopeTrigger"
+  },
+  "citadel_trigger_corrupted_item_shop": {
+   "result": "lived",
+   "class": "CCitadelTriggerCorruptedItemShop"
+  },
+  "citadel_trigger_hideout": {
+   "result": "lived",
+   "class": "CCitadelTriggerHideout"
+  },
+  "citadel_trigger_hideout_teleport": {
+   "result": "lived",
+   "class": "CCitadelHideoutTeleportTrigger"
+  },
+  "citadel_trigger_hotel_exit": {
+   "result": "lived",
+   "class": "CCitadelHotelExitTrigger"
+  },
+  "citadel_trigger_idol_return": {
+   "result": "lived",
+   "class": "CCitadelIdolReturnTrigger"
+  },
+  "citadel_trigger_ignore_out_of_play_area": {
+   "result": "lived",
+   "class": "CCitadelIgnoreOutOfPlayArea"
+  },
+  "citadel_trigger_in_map_district": {
+   "result": "lived",
+   "class": "CCitadelMapDistrictTrigger"
+  },
+  "citadel_trigger_interior": {
+   "result": "lived",
+   "class": "CCitadelInteriorTrigger"
+  },
+  "citadel_trigger_no_portals": {
+   "result": "lived",
+   "class": "CCitadelTriggerNoPortals"
+  },
+  "citadel_trigger_push": {
+   "result": "lived",
+   "class": "CCitadelPushTrigger"
+  },
+  "citadel_trigger_secure_souls": {
+   "result": "lived",
+   "class": "CCitadelTriggerSecureSouls"
+  },
+  "citadel_trigger_shop_tunnel": {
+   "result": "lived",
+   "class": "CCitadelShopTunnelTrigger"
+  },
+  "citadel_trigger_speed_boost": {
+   "result": "lived",
+   "class": "CCitadelSpeedBoostTrigger"
+  },
+  "citadel_trigger_suspend_modifier": {
+   "result": "lived",
+   "class": "CTriggerSuspendModifier"
+  },
+  "citadel_trigger_teleport": {
+   "result": "lived",
+   "class": "CCitadelTeleportTrigger"
+  },
+  "citadel_trooper_minimap": {
+   "result": "lived",
+   "class": "CCitadelTrooperMinimap"
+  },
+  "citadel_tunnel_node": {
+   "result": "lived",
+   "class": "CCitadelTunnelNode"
+  },
+  "citadel_tunnel_trigger": {
+   "result": "lived",
+   "class": "CCitadelTunnelTrigger"
+  },
+  "citadel_tutorial_controller": {
+   "result": "lived",
+   "class": "CInfoTutorialController"
+  },
+  "citadel_viscous_ball": {
+   "result": "lived",
+   "class": "CCitadelViscousBall"
+  },
+  "citadel_zap_trigger": {
+   "result": "lived",
+   "class": "CCitadelZapTrigger"
+  },
+  "citadel_zipline_path": {
+   "result": "lived",
+   "class": "CCitadelZiplinePath"
+  },
+  "citadel_zipline_path_node": {
+   "result": "lived",
+   "class": "CCitadelZipLinePathNode"
+  },
+  "color_correction": {
+   "result": "lived",
+   "class": "CColorCorrection"
+  },
+  "color_correction_volume": {
+   "result": "lived",
+   "class": "CColorCorrectionVolume"
+  },
+  "commentary_auto": {
+   "result": "lived",
+   "class": "CCommentaryAuto"
+  },
+  "destroyable_building": {
+   "result": "lived",
+   "class": "CCitadel_Destroyable_Building"
+  },
+  "doorman_bomb_projectile": {
+   "result": "lived",
+   "class": "CDoormanBombProjectile"
+  },
+  "dropped_necro_pickup": {
+   "result": "lived",
+   "class": "CCitadel_Pickup_NecroDeath"
+  },
+  "dropped_soul_orb": {
+   "result": "lived",
+   "class": "CCitadel_Pickup_AssignedGold"
+  },
+  "dynamic_prop": {
+   "result": "lived",
+   "class": "CDynamicProp"
+  },
+  "entity_blocker": {
+   "result": "lived",
+   "class": "CEntityBlocker"
+  },
+  "entityflame": {
+   "result": "vanished",
+   "class": "CEntityFlame"
+  },
+  "env_beam": {
+   "result": "lived",
+   "class": "CEnvBeam"
+  },
+  "env_beverage": {
+   "result": "lived",
+   "class": "CEnvBeverage"
+  },
+  "env_combined_light_probe_volume": {
+   "result": "lived",
+   "class": "CEnvCombinedLightProbeVolume"
+  },
+  "env_credits": {
+   "result": "lived",
+   "class": "CCredits"
+  },
+  "env_cubemap": {
+   "result": "lived",
+   "class": "CEnvCubemap"
+  },
+  "env_cubemap_fog": {
+   "result": "lived",
+   "class": "CEnvCubemapFog"
+  },
+  "env_debughistory": {
+   "result": "vanished",
+   "class": "CDebugHistory"
+  },
+  "env_decal": {
+   "result": "lived",
+   "class": "CEnvDecal"
+  },
+  "env_detail_controller": {
+   "result": "lived",
+   "class": "CEnvDetailController"
+  },
+  "env_entity_dissolver": {
+   "result": "lived",
+   "class": "CEntityDissolve"
+  },
+  "env_entity_igniter": {
+   "result": "lived",
+   "class": "CEnvEntityIgniter"
+  },
+  "env_entity_maker": {
+   "result": "vanished",
+   "class": "CEnvEntityMaker"
+  },
+  "env_explosion": {
+   "result": "lived",
+   "class": "CEnvExplosion"
+  },
+  "env_fade": {
+   "result": "lived",
+   "class": "CEnvFade"
+  },
+  "env_fog_controller": {
+   "result": "lived",
+   "class": "CFogController"
+  },
+  "env_global": {
+   "result": "vanished",
+   "class": "CEnvGlobal"
+  },
+  "env_glow": {
+   "result": "lived",
+   "class": "CSprite"
+  },
+  "env_gradient_fog": {
+   "result": "lived",
+   "class": "CGradientFog"
+  },
+  "env_instructor_hint": {
+   "result": "lived",
+   "class": "CEnvInstructorHint"
+  },
+  "env_instructor_vr_hint": {
+   "result": "lived",
+   "class": "CEnvInstructorVRHint"
+  },
+  "env_laser": {
+   "result": "crashed"
+  },
+  "env_light_probe_volume": {
+   "result": "lived",
+   "class": "CEnvLightProbeVolume"
+  },
+  "env_message": {
+   "result": "lived",
+   "class": "CMessage"
+  },
+  "env_muzzleflash": {
+   "result": "lived",
+   "class": "CEnvMuzzleFlash"
+  },
+  "env_particle_glow": {
+   "result": "lived",
+   "class": "CEnvParticleGlow"
+  },
+  "env_physexplosion": {
+   "result": "lived",
+   "class": "CPhysExplosion"
+  },
+  "env_physimpact": {
+   "result": "lived",
+   "class": "CPhysImpact"
+  },
+  "env_physwire": {
+   "result": "lived",
+   "class": "CPhysicsWire"
+  },
+  "env_player_visibility": {
+   "result": "lived",
+   "class": "CPlayerVisibility"
+  },
+  "env_shake": {
+   "result": "lived",
+   "class": "CEnvShake"
+  },
+  "env_sky": {
+   "result": "lived",
+   "class": "CEnvSky"
+  },
+  "env_soundscape": {
+   "result": "lived",
+   "class": "CEnvSoundscape"
+  },
+  "env_soundscape_proxy": {
+   "result": "lived",
+   "class": "CEnvSoundscapeProxy"
+  },
+  "env_soundscape_triggerable": {
+   "result": "lived",
+   "class": "CEnvSoundscapeTriggerable"
+  },
+  "env_spark": {
+   "result": "lived",
+   "class": "CEnvSpark"
+  },
+  "env_splash": {
+   "result": "lived",
+   "class": "CEnvSplash"
+  },
+  "env_sprite": {
+   "result": "lived",
+   "class": "CSprite"
+  },
+  "env_sprite_oriented": {
+   "result": "lived",
+   "class": "CSpriteOriented"
+  },
+  "env_tilt": {
+   "result": "lived",
+   "class": "CEnvTilt"
+  },
+  "env_tonemap_controller": {
+   "result": "lived",
+   "class": "CTonemapController2"
+  },
+  "env_tonemap_controller2": {
+   "result": "lived",
+   "class": "CTonemapController2"
+  },
+  "env_viewpunch": {
+   "result": "lived",
+   "class": "CEnvViewPunch"
+  },
+  "env_volumetric_fog_controller": {
+   "result": "lived",
+   "class": "CEnvVolumetricFogController"
+  },
+  "env_volumetric_fog_volume": {
+   "result": "lived",
+   "class": "CEnvVolumetricFogVolume"
+  },
+  "env_wind": {
+   "result": "lived",
+   "class": "CEnvWind"
+  },
+  "familiar_projectile_movingtoattach": {
+   "result": "lived",
+   "class": "CProjectile_Familiar_MovingToAttach"
+  },
+  "featherboomerang_projectile": {
+   "result": "lived",
+   "class": "CCitadel_Projectile_FeatherBoomerang"
+  },
+  "filter_activator_attribute_int": {
+   "result": "lived",
+   "class": "CFilterAttributeInt"
+  },
+  "filter_activator_class": {
+   "result": "lived",
+   "class": "CFilterClass"
+  },
+  "filter_activator_context": {
+   "result": "lived",
+   "class": "CFilterContext"
+  },
+  "filter_activator_mass_greater": {
+   "result": "lived",
+   "class": "CFilterMassGreater"
+  },
+  "filter_activator_model": {
+   "result": "lived",
+   "class": "CFilterModel"
+  },
+  "filter_activator_modifier": {
+   "result": "lived",
+   "class": "CCitadelFilterModifier"
+  },
+  "filter_activator_name": {
+   "result": "lived",
+   "class": "CFilterName"
+  },
+  "filter_activator_team": {
+   "result": "lived",
+   "class": "CFilterTeam"
+  },
+  "filter_base": {
+   "result": "lived",
+   "class": "CBaseFilter"
+  },
+  "filter_damage_type": {
+   "result": "lived",
+   "class": "FilterDamageType"
+  },
+  "filter_enemy": {
+   "result": "lived",
+   "class": "CFilterEnemy"
+  },
+  "filter_health": {
+   "result": "lived",
+   "class": "FilterHealth"
+  },
+  "filter_los": {
+   "result": "lived",
+   "class": "CFilterLOS"
+  },
+  "filter_modifier": {
+   "result": "lived",
+   "class": "CFilterModifier"
+  },
+  "filter_multi": {
+   "result": "lived",
+   "class": "CFilterMultiple"
+  },
+  "filter_proximity": {
+   "result": "lived",
+   "class": "CFilterProximity"
+  },
+  "firerate_permanent_pickup": {
+   "result": "lived",
+   "class": "CCitadel_Pickup_Modifier"
+  },
+  "firerate_permanent_pickup_lv2": {
+   "result": "lived",
+   "class": "CCitadel_Pickup_Modifier"
+  },
+  "firerate_permanent_pickup_lv3": {
+   "result": "lived",
+   "class": "CCitadel_Pickup_Modifier"
+  },
+  "fish": {
+   "result": "lived",
+   "class": "CFish"
+  },
+  "floating_apple_pickup": {
+   "result": "lived",
+   "class": "CCitadel_Pickup_Gold"
+  },
+  "fog_volume": {
+   "result": "lived",
+   "class": "CFogVolume"
+  },
+  "fortuna_weapon_projectile": {
+   "result": "lived",
+   "class": "CCitadel_Projectile_FortunaWeapon"
+  },
+  "func_breakable": {
+   "result": "lived",
+   "class": "CBreakable"
+  },
+  "func_brush": {
+   "result": "lived",
+   "class": "CFuncBrush"
+  },
+  "func_button": {
+   "result": "lived",
+   "class": "CBaseButton"
+  },
+  "func_clip_interaction_layer": {
+   "result": "lived",
+   "class": "CFuncInteractionLayerClip"
+  },
+  "func_clip_vphysics": {
+   "result": "lived",
+   "class": "CFuncVPhysicsClip"
+  },
+  "func_combined_light_probe_volume": {
+   "result": "lived",
+   "class": "CEnvCombinedLightProbeVolume"
+  },
+  "func_conditional_collidable": {
+   "result": "lived",
+   "class": "CConditionalCollidable"
+  },
+  "func_door": {
+   "result": "lived",
+   "class": "CBaseDoor"
+  },
+  "func_door_rotating": {
+   "result": "lived",
+   "class": "CRotDoor"
+  },
+  "func_electrified_volume": {
+   "result": "lived",
+   "class": "CFuncElectrifiedVolume"
+  },
+  "func_fish_pool": {
+   "result": "lived",
+   "class": "CFishPool"
+  },
+  "func_guntarget": {
+   "result": "lived",
+   "class": "CGunTarget"
+  },
+  "func_illusionary": {
+   "result": "lived",
+   "class": "CFuncIllusionary"
+  },
+  "func_ladder": {
+   "result": "lived",
+   "class": "CFuncLadder"
+  },
+  "func_monitor": {
+   "result": "lived",
+   "class": "CFuncMonitor"
+  },
+  "func_movelinear": {
+   "result": "lived",
+   "class": "CFuncMoveLinear"
+  },
+  "func_mover": {
+   "result": "lived",
+   "class": "CFuncMover"
+  },
+  "func_mover_router": {
+   "result": "lived",
+   "class": "CFuncMoverRouter"
+  },
+  "func_nav_avoidance_obstacle": {
+   "result": "lived",
+   "class": "CFuncNavObstruction"
+  },
+  "func_nav_blocker": {
+   "result": "lived",
+   "class": "CFuncNavBlocker"
+  },
+  "func_nav_dynamic_connections": {
+   "result": "lived",
+   "class": "CDynamicNavConnectionsVolume"
+  },
+  "func_nav_markup": {
+   "result": "lived",
+   "class": "CMarkupVolumeTagged_Nav"
+  },
+  "func_nav_markup_citadel": {
+   "result": "lived",
+   "class": "CMarkupVolumeTagged_NavCitadel"
+  },
+  "func_nav_markup_game": {
+   "result": "lived",
+   "class": "CMarkupVolumeTagged_NavGame"
+  },
+  "func_physbox": {
+   "result": "lived",
+   "class": "CPhysBox"
+  },
+  "func_physical_button": {
+   "result": "lived",
+   "class": "CPhysicalButton"
+  },
+  "func_plat": {
+   "result": "lived",
+   "class": "CFuncPlat"
+  },
+  "func_platrot": {
+   "result": "lived",
+   "class": "CFuncPlatRot"
+  },
+  "func_precipitation": {
+   "result": "crashed",
+   "at": "server.dll+0x1C464CB"
+  },
+  "func_precipitation_blocker": {
+   "result": "lived",
+   "class": "CPrecipitationBlocker"
+  },
+  "func_proprrespawnzone": {
+   "result": "lived",
+   "class": "CFuncPropRespawnZone"
+  },
+  "func_pushable": {
+   "result": "lived",
+   "class": "CPushable"
+  },
+  "func_regenerate": {
+   "result": "lived",
+   "class": "CRegenerateZone"
+  },
+  "func_rot_button": {
+   "result": "lived",
+   "class": "CRotButton"
+  },
+  "func_rotating": {
+   "result": "lived",
+   "class": "CFuncRotating"
+  },
+  "func_rotator": {
+   "result": "lived",
+   "class": "CFuncRotator"
+  },
+  "func_shatterglass": {
+   "result": "lived",
+   "class": "CFuncShatterglass"
+  },
+  "func_spawn_blocker": {
+   "result": "lived",
+   "class": "CCitadelSpawnBlocker"
+  },
+  "func_tanktrain": {
+   "result": "lived",
+   "class": "CFuncTankTrain"
+  },
+  "func_timescale": {
+   "result": "lived",
+   "class": "CFuncTimescale"
+  },
+  "func_trackautochange": {
+   "result": "lived",
+   "class": "CFuncTrackAuto"
+  },
+  "func_trackchange": {
+   "result": "lived",
+   "class": "CFuncTrackChange"
+  },
+  "func_tracktrain": {
+   "result": "lived",
+   "class": "CFuncTrackTrain"
+  },
+  "func_train": {
+   "result": "lived",
+   "class": "CFuncTrain"
+  },
+  "func_traincontrols": {
+   "result": "lived",
+   "class": "CFuncTrainControls"
+  },
+  "func_useableladder": {
+   "result": "lived",
+   "class": "CFuncLadder"
+  },
+  "func_vehicleclip": {
+   "result": "lived",
+   "class": "CFuncVehicleClip"
+  },
+  "func_wall": {
+   "result": "lived",
+   "class": "CFuncWall"
+  },
+  "func_wall_toggle": {
+   "result": "lived",
+   "class": "CFuncWallToggle"
+  },
+  "game_gib_manager": {
+   "result": "lived",
+   "class": "CGameGibManager"
+  },
+  "game_player_equip": {
+   "result": "lived",
+   "class": "CGamePlayerEquip"
+  },
+  "game_ragdoll_manager": {
+   "result": "lived",
+   "class": "CRagdollManager"
+  },
+  "game_text": {
+   "result": "lived",
+   "class": "CGameText"
+  },
+  "game_zone_player": {
+   "result": "lived",
+   "class": "CGamePlayerZone"
+  },
+  "guided_arrow_projectile": {
+   "result": "lived",
+   "class": "CCitadel_Projectile_Guided_Arrow"
+  },
+  "gun_powerup_pickup": {
+   "result": "lived",
+   "class": "CCitadel_Pickup_Modifier"
+  },
+  "handle_dummy": {
+   "result": "lived",
+   "class": "CHandleDummy"
+  },
+  "handle_test": {
+   "result": "lived",
+   "class": "CHandleTest"
+  },
+  "hero_preview": {
+   "result": "lived",
+   "class": "C_HeroPreview"
+  },
+  "hero_testing_controller": {
+   "result": "lived",
+   "class": "CInfoHeroTestingController"
+  },
+  "hl_vr_texture_based_animatable": {
+   "result": "lived",
+   "class": "CTextureBasedAnimatable"
+  },
+  "hp_permanent_pickup": {
+   "result": "lived",
+   "class": "CCitadel_Pickup_Modifier"
+  },
+  "hp_permanent_pickup_lv2": {
+   "result": "lived",
+   "class": "CCitadel_Pickup_Modifier"
+  },
+  "hp_permanent_pickup_lv3": {
+   "result": "lived",
+   "class": "CCitadel_Pickup_Modifier"
+  },
+  "icepath_shard": {
+   "result": "lived",
+   "class": "CCitadel_Ice_Path_Shard_Physics"
+  },
+  "immobilize_trap_projectile": {
+   "result": "lived",
+   "class": "CCitadelProjectile_ImmobilizeTrap"
+  },
+  "in_world_key_bind_panel": {
+   "result": "lived",
+   "class": "CInWorldKeyBindPanel"
+  },
+  "info_ability_test_bot": {
+   "result": "lived",
+   "class": "CInfoAbilityTestBot"
+  },
+  "info_assigned_lane_particle": {
+   "result": "lived",
+   "class": "CAssignedLaneParticle"
+  },
+  "info_choreo_anchor": {
+   "result": "lived",
+   "class": "CInfoChoreoAnchor"
+  },
+  "info_citadel_familiar_helper": {
+   "result": "lived",
+   "class": "CInfoCitadelHelperLocation"
+  },
+  "info_citadel_hideout": {
+   "result": "lived",
+   "class": "CInfoCitadelHideout"
+  },
+  "info_citadel_hideout_interest_point": {
+   "result": "lived",
+   "class": "CCitadelHideoutInterestPoint"
+  },
+  "info_citadel_matchmaking_status": {
+   "result": "lived",
+   "class": "CCitadelMatchmakingStatusInfo"
+  },
+  "info_constraint_anchor": {
+   "result": "lived",
+   "class": "CConstraintAnchor"
+  },
+  "info_data": {
+   "result": "lived",
+   "class": "CInfoData"
+  },
+  "info_dynamic_shadow_hint": {
+   "result": "lived",
+   "class": "CInfoDynamicShadowHint"
+  },
+  "info_dynamic_shadow_hint_box": {
+   "result": "lived",
+   "class": "CInfoDynamicShadowHintBox"
+  },
+  "info_game_event_proxy": {
+   "result": "lived",
+   "class": "CInfoGameEventProxy"
+  },
+  "info_hero_testing_point": {
+   "result": "lived",
+   "class": "CInfoHeroTestingPoint"
+  },
+  "info_hint": {
+   "result": "refused"
+  },
+  "info_koth_spawn_location": {
+   "result": "lived",
+   "class": "CInfoKOTHSpawnLocation"
+  },
+  "info_ladder_dismount": {
+   "result": "lived",
+   "class": "CInfoLadderDismount"
+  },
+  "info_landmark": {
+   "result": "lived",
+   "class": "CInfoLandmark"
+  },
+  "info_mid_boss_spawn": {
+   "result": "lived",
+   "class": "CInfoMidBossSpawn"
+  },
+  "info_mini_map_marker": {
+   "result": "lived",
+   "class": "CMiniMapMarker"
+  },
+  "info_nav_space": {
+   "result": "lived",
+   "class": "CNavSpaceInfo"
+  },
+  "info_neutral_trooper_camp": {
+   "result": "lived",
+   "class": "CInfoTrooperNeutralCamp"
+  },
+  "info_neutral_trooper_spawn": {
+   "result": "lived",
+   "class": "CInfoTrooperNeutralSpawn"
+  },
+  "info_node": {
+   "result": "refused"
+  },
+  "info_node_air": {
+   "result": "refused"
+  },
+  "info_node_air_hint": {
+   "result": "refused"
+  },
+  "info_node_hint": {
+   "result": "refused"
+  },
+  "info_npc_spawn_destination": {
+   "result": "lived",
+   "class": "CNPCSpawnDestination"
+  },
+  "info_null": {
+   "result": "vanished",
+   "class": "CNullEntity"
+  },
+  "info_offscreen_panorama_texture": {
+   "result": "lived",
+   "class": "CInfoOffscreenPanoramaTexture"
+  },
+  "info_particle_system": {
+   "result": "lived",
+   "class": "CParticleSystem"
+  },
+  "info_particle_target": {
+   "result": "lived",
+   "class": "CInfoParticleTarget"
+  },
+  "info_player_deathmatch": {
+   "result": "lived",
+   "class": "CBaseDMStart"
+  },
+  "info_player_start": {
+   "result": "lived",
+   "class": "CInfoPlayerStart"
+  },
+  "info_portal_link": {
+   "result": "lived",
+   "class": "CInfoPortalLink"
+  },
+  "info_spawngroup_landmark": {
+   "result": "lived",
+   "class": "CInfoSpawnGroupLandmark"
+  },
+  "info_spawngroup_load_unload": {
+   "result": "vanished",
+   "class": "CInfoSpawnGroupLoadUnload"
+  },
+  "info_super_trooper_spawn": {
+   "result": "lived",
+   "class": "CInfoTrooperBossSpawn"
+  },
+  "info_target": {
+   "result": "lived",
+   "class": "CInfoTarget"
+  },
+  "info_target_choreo": {
+   "result": "lived",
+   "class": "CChoreoInfoTarget"
+  },
+  "info_target_instructor_hint": {
+   "result": "lived",
+   "class": "CInfoInstructorHintTarget"
+  },
+  "info_target_server_only": {
+   "result": "lived",
+   "class": "CInfoTargetServerOnly"
+  },
+  "info_team_relative_particle_system": {
+   "result": "lived",
+   "class": "CTeamRelativeParticleSystem"
+  },
+  "info_team_spawn": {
+   "result": "lived",
+   "class": "CInfoTeamSpawn",
+   "attempts": 2
+  },
+  "info_teleport_destination": {
+   "result": "lived",
+   "class": "CInfoTeleportDestination"
+  },
+  "info_teleport_location": {
+   "result": "lived",
+   "class": "CCitadelTeleportLocation"
+  },
+  "info_trigger_fan": {
+   "result": "lived",
+   "class": "CInfoFan"
+  },
+  "info_trooper_spawn": {
+   "result": "lived",
+   "class": "CInfoTrooperSpawn"
+  },
+  "info_tutorial_point": {
+   "result": "lived",
+   "class": "CInfoTutorialPoint"
+  },
+  "info_visibility_box": {
+   "result": "lived",
+   "class": "CInfoVisibilityBox"
+  },
+  "info_world_layer": {
+   "result": "lived",
+   "class": "CInfoWorldLayer"
+  },
+  "instanced_scripted_scene": {
+   "result": "lived",
+   "class": "CInstancedSceneEntity"
+  },
+  "item": {
+   "result": "refused"
+  },
+  "item_crate": {
+   "result": "lived",
+   "class": "CItemCrate"
+  },
+  "item_crate_spawn": {
+   "result": "lived",
+   "class": "CItemCrateSpawn"
+  },
+  "item_explosive_barrel": {
+   "result": "lived",
+   "class": "CItemExplosiveBarrel"
+  },
+  "item_generic": {
+   "result": "lived",
+   "class": "CItemGeneric"
+  },
+  "item_generic_trigger_helper": {
+   "result": "lived",
+   "class": "CItemGenericTriggerHelper"
+  },
+  "item_sodacan": {
+   "result": "crashed",
+   "at": "tier0.dll+0x13B19E"
+  },
+  "item_xp": {
+   "result": "crashed",
+   "at": "server.dll+0x1A62956"
+  },
+  "kali_boomerang_projectile": {
+   "result": "lived",
+   "class": "CCitadelBoomerangProjectile"
+  },
+  "keyframe_rope": {
+   "result": "lived",
+   "class": "CRopeKeyframe"
+  },
+  "keyframe_track": {
+   "result": "lived",
+   "class": "CPathKeyFrame"
+  },
+  "knightcharge_projectile": {
+   "result": "lived",
+   "class": "CProjectile_KnightCharge_Projectile"
+  },
+  "knightchargeleading_projectile": {
+   "result": "lived",
+   "class": "CProjectile_KnightChargeLeading_Projectile"
+  },
+  "lane_marker_path": {
+   "result": "lived",
+   "class": "CLaneMarkerPath"
+  },
+  "light_barn": {
+   "result": "lived",
+   "class": "CBarnLight"
+  },
+  "light_directional": {
+   "result": "lived",
+   "class": "CLightDirectionalEntity"
+  },
+  "light_dynamic": {
+   "result": "lived",
+   "class": "CDynamicLight"
+  },
+  "light_environment": {
+   "result": "lived",
+   "class": "CEnvironmentLight"
+  },
+  "light_omni": {
+   "result": "lived",
+   "class": "CLightEntity"
+  },
+  "light_omni2": {
+   "result": "lived",
+   "class": "COmniLight"
+  },
+  "light_ortho": {
+   "result": "lived",
+   "class": "CLightOrthoEntity"
+  },
+  "light_rect": {
+   "result": "lived",
+   "class": "CRectLight"
+  },
+  "light_spot": {
+   "result": "lived",
+   "class": "CLightSpotEntity"
+  },
+  "logic_achievement": {
+   "result": "lived",
+   "class": "CLogicAchievement"
+  },
+  "logic_active_autosave": {
+   "result": "lived",
+   "class": "CLogicActiveAutosave"
+  },
+  "logic_activityevent": {
+   "result": "lived",
+   "class": "CLogicActivityEvent"
+  },
+  "logic_auto": {
+   "result": "lived",
+   "class": "CLogicAuto"
+  },
+  "logic_auto_citadel": {
+   "result": "lived",
+   "class": "CLogicAutoCitadel"
+  },
+  "logic_autosave": {
+   "result": "lived",
+   "class": "CLogicAutosave"
+  },
+  "logic_branch": {
+   "result": "lived",
+   "class": "CLogicBranch"
+  },
+  "logic_branch_listener": {
+   "result": "lived",
+   "class": "CLogicBranchList"
+  },
+  "logic_case": {
+   "result": "lived",
+   "class": "CLogicCase"
+  },
+  "logic_choreographed_scene": {
+   "result": "lived",
+   "class": "CSceneEntity"
+  },
+  "logic_collision_pair": {
+   "result": "lived",
+   "class": "CLogicCollisionPair"
+  },
+  "logic_compare": {
+   "result": "lived",
+   "class": "CLogicCompare"
+  },
+  "logic_distance_autosave": {
+   "result": "lived",
+   "class": "CLogicDistanceAutosave"
+  },
+  "logic_distance_check": {
+   "result": "lived",
+   "class": "CLogicDistanceCheck"
+  },
+  "logic_game_event": {
+   "result": "lived",
+   "class": "CLogicGameEvent"
+  },
+  "logic_gameevent_listener": {
+   "result": "lived",
+   "class": "CLogicGameEventListener"
+  },
+  "logic_gamestate_report": {
+   "result": "lived",
+   "class": "CLogicGameStateReport"
+  },
+  "logic_lineto": {
+   "result": "lived",
+   "class": "CLogicLineToEntity"
+  },
+  "logic_measure_movement": {
+   "result": "lived",
+   "class": "CLogicMeasureMovement"
+  },
+  "logic_multilight_proxy": {
+   "result": "lived",
+   "class": "CMultiLightProxy"
+  },
+  "logic_navigation": {
+   "result": "lived",
+   "class": "CLogicNavigation"
+  },
+  "logic_npc_counter_aabb": {
+   "result": "lived",
+   "class": "CLogicNPCCounterAABB"
+  },
+  "logic_npc_counter_obb": {
+   "result": "lived",
+   "class": "CLogicNPCCounterOBB"
+  },
+  "logic_npc_counter_radius": {
+   "result": "lived",
+   "class": "CLogicNPCCounter"
+  },
+  "logic_playerproxy": {
+   "result": "lived",
+   "class": "CGenericLogicPlayerProxy"
+  },
+  "logic_playerproxy_base": {
+   "result": "refused"
+  },
+  "logic_proximity": {
+   "result": "lived",
+   "class": "CLogicProximity"
+  },
+  "logic_relay": {
+   "result": "lived",
+   "class": "CLogicRelay"
+  },
+  "logic_scene_list_manager": {
+   "result": "lived",
+   "class": "CSceneListManager"
+  },
+  "logic_script": {
+   "result": "lived",
+   "class": "CLogicScript"
+  },
+  "logic_timer": {
+   "result": "lived",
+   "class": "CTimerEntity"
+  },
+  "magician_magicbolt_projectile": {
+   "result": "lived",
+   "class": "CCitadel_Projectile_MagicBolt"
+  },
+  "map_shared_environment": {
+   "result": "lived",
+   "class": "CMapSharedEnvironment"
+  },
+  "markup_volume": {
+   "result": "lived",
+   "class": "CMarkupVolume"
+  },
+  "markup_volume_tagged": {
+   "result": "lived",
+   "class": "CSimpleMarkupVolumeTagged"
+  },
+  "markup_volume_tagged_base": {
+   "result": "refused"
+  },
+  "markup_volume_with_ref": {
+   "result": "lived",
+   "class": "CMarkupVolumeWithRef"
+  },
+  "match_tracked_stats": {
+   "result": "lived",
+   "class": "CMatchTrackedStatsEntity"
+  },
+  "math_colorblend": {
+   "result": "lived",
+   "class": "CMathColorBlend"
+  },
+  "math_counter": {
+   "result": "lived",
+   "class": "CMathCounter"
+  },
+  "math_remap": {
+   "result": "lived",
+   "class": "CMathRemap"
+  },
+  "medic_trooper_aoe_health_pickup_amber": {
+   "result": "lived",
+   "class": "CCitadel_Pickup_Health"
+  },
+  "medic_trooper_aoe_health_pickup_sapphire": {
+   "result": "lived",
+   "class": "CCitadel_Pickup_Health"
+  },
+  "momentary_door": {
+   "result": "lived",
+   "class": "CFuncMoveLinear"
+  },
+  "momentary_rot_button": {
+   "result": "lived",
+   "class": "CMomentaryRotButton"
+  },
+  "move_rope": {
+   "result": "lived",
+   "class": "CRopeKeyframe"
+  },
+  "movement_powerup_pickup": {
+   "result": "lived",
+   "class": "CCitadel_Pickup_Modifier"
+  },
+  "movespeed_permanent_pickup": {
+   "result": "lived",
+   "class": "CCitadel_Pickup_Modifier"
+  },
+  "movespeed_permanent_pickup_lv2": {
+   "result": "lived",
+   "class": "CCitadel_Pickup_Modifier"
+  },
+  "movespeed_permanent_pickup_lv3": {
+   "result": "lived",
+   "class": "CCitadel_Pickup_Modifier"
+  },
+  "multisource": {
+   "result": "lived",
+   "class": "CMultiSource"
+  },
+  "necro_haunt_projectile": {
+   "result": "lived",
+   "class": "CProjectile_Necro_HauntProjectile"
+  },
+  "neutral_barrel_01_normal": {
+   "result": "lived",
+   "class": "CNPC_TrooperNeutral"
+  },
+  "neutral_barrel_01_strong": {
+   "result": "lived",
+   "class": "CNPC_TrooperNeutral"
+  },
+  "neutral_barrel_01_weak": {
+   "result": "lived",
+   "class": "CNPC_TrooperNeutral"
+  },
+  "neutral_barrel_02_normal": {
+   "result": "lived",
+   "class": "CNPC_TrooperNeutral"
+  },
+  "neutral_barrel_02_strong": {
+   "result": "lived",
+   "class": "CNPC_TrooperNeutral"
+  },
+  "neutral_barrel_02_weak": {
+   "result": "lived",
+   "class": "CNPC_TrooperNeutral"
+  },
+  "neutral_base": {
+   "result": "refused"
+  },
+  "neutral_camp_bug": {
+   "result": "lived",
+   "class": "CInfoTrooperNeutralCamp"
+  },
+  "neutral_camp_bug_herotest": {
+   "result": "lived",
+   "class": "CInfoTrooperNeutralCamp"
+  },
+  "neutral_camp_medium": {
+   "result": "lived",
+   "class": "CInfoTrooperNeutralCamp"
+  },
+  "neutral_camp_medium_herotest": {
+   "result": "lived",
+   "class": "CInfoTrooperNeutralCamp"
+  },
+  "neutral_camp_midboss": {
+   "result": "lived",
+   "class": "CInfoTrooperNeutralCamp"
+  },
+  "neutral_camp_strong": {
+   "result": "lived",
+   "class": "CInfoTrooperNeutralCamp"
+  },
+  "neutral_camp_strong_herotest": {
+   "result": "lived",
+   "class": "CInfoTrooperNeutralCamp"
+  },
+  "neutral_camp_vaults": {
+   "result": "lived",
+   "class": "CInfoTrooperNeutralCamp"
+  },
+  "neutral_camp_vaults_herotest": {
+   "result": "lived",
+   "class": "CInfoTrooperNeutralCamp"
+  },
+  "neutral_camp_weak": {
+   "result": "lived",
+   "class": "CInfoTrooperNeutralCamp"
+  },
+  "neutral_camp_weak_herotest": {
+   "result": "lived",
+   "class": "CInfoTrooperNeutralCamp"
+  },
+  "neutral_dock_creature_normal": {
+   "result": "lived",
+   "class": "CNPC_TrooperNeutral"
+  },
+  "neutral_dock_creature_strong": {
+   "result": "lived",
+   "class": "CNPC_TrooperNeutral"
+  },
+  "neutral_dock_creature_weak": {
+   "result": "lived",
+   "class": "CNPC_TrooperNeutral"
+  },
+  "neutral_drain_creature_normal": {
+   "result": "lived",
+   "class": "CNPC_TrooperNeutral"
+  },
+  "neutral_drain_creature_strong": {
+   "result": "lived",
+   "class": "CNPC_TrooperNeutral"
+  },
+  "neutral_drain_creature_weak": {
+   "result": "lived",
+   "class": "CNPC_TrooperNeutral"
+  },
+  "neutral_lantern_normal": {
+   "result": "lived",
+   "class": "CNPC_TrooperNeutral"
+  },
+  "neutral_lantern_strong": {
+   "result": "lived",
+   "class": "CNPC_TrooperNeutral"
+  },
+  "neutral_lantern_weak": {
+   "result": "lived",
+   "class": "CNPC_TrooperNeutral"
+  },
+  "neutral_library_normal": {
+   "result": "lived",
+   "class": "CNPC_TrooperNeutral"
+  },
+  "neutral_library_strong": {
+   "result": "lived",
+   "class": "CNPC_TrooperNeutral"
+  },
+  "neutral_library_weak": {
+   "result": "lived",
+   "class": "CNPC_TrooperNeutral"
+  },
+  "neutral_mushroom_normal": {
+   "result": "lived",
+   "class": "CNPC_TrooperNeutral"
+  },
+  "neutral_mushroom_strong": {
+   "result": "lived",
+   "class": "CNPC_TrooperNeutral"
+  },
+  "neutral_mushroom_weak": {
+   "result": "lived",
+   "class": "CNPC_TrooperNeutral"
+  },
+  "neutral_park_watcher_normal": {
+   "result": "lived",
+   "class": "CNPC_TrooperNeutral"
+  },
+  "neutral_park_watcher_strong": {
+   "result": "lived",
+   "class": "CNPC_TrooperNeutral"
+  },
+  "neutral_park_watcher_weak": {
+   "result": "lived",
+   "class": "CNPC_TrooperNeutral"
+  },
+  "neutral_plant_normal": {
+   "result": "lived",
+   "class": "CNPC_TrooperNeutral"
+  },
+  "neutral_plant_strong": {
+   "result": "lived",
+   "class": "CNPC_TrooperNeutral"
+  },
+  "neutral_plant_weak": {
+   "result": "lived",
+   "class": "CNPC_TrooperNeutral"
+  },
+  "neutral_rooftop_pigeon_normal": {
+   "result": "lived",
+   "class": "CNPC_TrooperNeutral"
+  },
+  "neutral_rooftop_pigeon_strong": {
+   "result": "lived",
+   "class": "CNPC_TrooperNeutral"
+  },
+  "neutral_rooftop_pigeon_weak": {
+   "result": "lived",
+   "class": "CNPC_TrooperNeutral"
+  },
+  "neutral_sinners_sacrifice": {
+   "result": "lived",
+   "class": "CNPC_Neutral_SinnersSacrifice"
+  },
+  "neutral_specimen_normal": {
+   "result": "lived",
+   "class": "CNPC_TrooperNeutral"
+  },
+  "neutral_specimen_strong": {
+   "result": "lived",
+   "class": "CNPC_TrooperNeutral"
+  },
+  "neutral_specimen_weak": {
+   "result": "lived",
+   "class": "CNPC_TrooperNeutral"
+  },
+  "neutral_street_trash_normal": {
+   "result": "lived",
+   "class": "CNPC_TrooperNeutral"
+  },
+  "neutral_street_trash_strong": {
+   "result": "lived",
+   "class": "CNPC_TrooperNeutral"
+  },
+  "neutral_street_trash_weak": {
+   "result": "lived",
+   "class": "CNPC_TrooperNeutral"
+  },
+  "neutral_theater_normal": {
+   "result": "lived",
+   "class": "CNPC_TrooperNeutral"
+  },
+  "neutral_theater_strong": {
+   "result": "lived",
+   "class": "CNPC_TrooperNeutral"
+  },
+  "neutral_theater_weak": {
+   "result": "lived",
+   "class": "CNPC_TrooperNeutral"
+  },
+  "neutral_trooper_normal": {
+   "result": "lived",
+   "class": "CNPC_TrooperNeutral"
+  },
+  "neutral_trooper_strong": {
+   "result": "lived",
+   "class": "CNPC_TrooperNeutral"
+  },
+  "neutral_trooper_weak": {
+   "result": "lived",
+   "class": "CNPC_TrooperNeutral"
+  },
+  "neutral_underground_normal": {
+   "result": "lived",
+   "class": "CNPC_TrooperNeutral"
+  },
+  "neutral_underground_strong": {
+   "result": "lived",
+   "class": "CNPC_TrooperNeutral"
+  },
+  "neutral_underground_weak": {
+   "result": "lived",
+   "class": "CNPC_TrooperNeutral"
+  },
+  "npc_barrack_boss": {
+   "result": "lived",
+   "class": "CNPC_BarrackBoss"
+  },
+  "npc_barrack_boss_amber": {
+   "result": "lived",
+   "class": "CNPC_BarrackBoss"
+  },
+  "npc_barrack_boss_sapphire": {
+   "result": "lived",
+   "class": "CNPC_BarrackBoss"
+  },
+  "npc_base_defense_sentry": {
+   "result": "lived",
+   "class": "CNPC_BaseDefenseSentry"
+  },
+  "npc_boss_tier1": {
+   "result": "lived",
+   "class": "CNPC_TrooperBoss"
+  },
+  "npc_boss_tier2": {
+   "result": "lived",
+   "class": "CNPC_Boss_Tier2"
+  },
+  "npc_boss_tier2_weak": {
+   "result": "lived",
+   "class": "CNPC_Boss_Tier2"
+  },
+  "npc_boss_tier3": {
+   "result": "lived",
+   "class": "CNPC_Boss_Tier3"
+  },
+  "npc_boss_tier3core": {
+   "result": "lived",
+   "class": "CNPC_Boss_Tier3Core"
+  },
+  "npc_escort": {
+   "result": "crashed",
+   "at": "server.dll+0x5F6E8E"
+  },
+  "npc_familiar_helper": {
+   "result": "crashed"
+  },
+  "npc_maker": {
+   "result": "lived",
+   "class": "CNPCMaker"
+  },
+  "npc_maker_base": {
+   "result": "refused"
+  },
+  "npc_necro_hauntingskull": {
+   "result": "lived",
+   "class": "CNecro_HauntingSkullEntity"
+  },
+  "npc_necro_skele": {
+   "result": "lived",
+   "class": "CNPC_NecroSkele"
+  },
+  "npc_neutral_bug": {
+   "result": "lived",
+   "class": "CNPC_Neutral_Bug"
+  },
+  "npc_neutral_bug_rat": {
+   "result": "lived",
+   "class": "CNPC_Neutral_Bug"
+  },
+  "npc_neutral_bug_rat_swarm": {
+   "result": "lived",
+   "class": "CNPC_Neutral_Bug"
+  },
+  "npc_neutral_flying_pigeon": {
+   "result": "vanished",
+   "class": "CNPC_Neutral_Flying_Pigeon"
+  },
+  "npc_neutral_hideout_cat": {
+   "result": "crashed"
+  },
+  "npc_neutral_hideout_rabbit": {
+   "result": "vanished",
+   "class": "CNPC_Neutral_Hideout_Rabbit"
+  },
+  "npc_neutral_sinners_sacrifice": {
+   "result": "crashed",
+   "at": "server.dll+0x5F6E8E"
+  },
+  "npc_neutral_sinners_sacrifice_hideout": {
+   "result": "lived",
+   "class": "CNPC_Neutral_SinnersSacrifice_Hideout"
+  },
+  "npc_player_bot_brain": {
+   "result": "crashed",
+   "at": "server.dll+0x7F44F7"
+  },
+  "npc_ratking_rat": {
+   "result": "lived",
+   "class": "CNPC_Ratking_Rat"
+  },
+  "npc_shielded_sentry": {
+   "result": "crashed"
+  },
+  "npc_super_neutral": {
+   "result": "lived",
+   "class": "CNPC_MidBoss"
+  },
+  "npc_template_maker": {
+   "result": "lived",
+   "class": "CTemplateNPCMaker"
+  },
+  "npc_trooper": {
+   "result": "crashed",
+   "at": "server.dll+0x5F6E8E"
+  },
+  "npc_trooper_boss": {
+   "result": "crashed",
+   "at": "server.dll+0x5F6E8E"
+  },
+  "npc_trooper_neutral": {
+   "result": "crashed",
+   "at": "server.dll+0x5F6E8E"
+  },
+  "npc_yakuza_gangster": {
+   "result": "lived",
+   "class": "CNPC_YakuzaGangster"
+  },
+  "orb_spawner": {
+   "result": "lived",
+   "class": "COrbSpawner"
+  },
+  "path_accompany": {
+   "result": "lived",
+   "class": "CPathAccompany"
+  },
+  "path_corner": {
+   "result": "lived",
+   "class": "CPathCorner"
+  },
+  "path_corner_crash": {
+   "result": "lived",
+   "class": "CPathCornerCrash"
+  },
+  "path_mover": {
+   "result": "lived",
+   "class": "CPathMover"
+  },
+  "path_mover_entity_spawner": {
+   "result": "lived",
+   "class": "CPathMoverEntitySpawner"
+  },
+  "path_node": {
+   "result": "lived",
+   "class": "CPathNode"
+  },
+  "path_node_mover": {
+   "result": "lived",
+   "class": "CMoverPathNode"
+  },
+  "path_particle_rope": {
+   "result": "lived",
+   "class": "CPathParticleRope"
+  },
+  "path_particle_rope_clientside": {
+   "result": "lived",
+   "class": "CPathParticleRope"
+  },
+  "path_simple": {
+   "result": "lived",
+   "class": "CPathSimple"
+  },
+  "path_track": {
+   "result": "lived",
+   "class": "CPathTrack"
+  },
+  "path_with_dynamic_nodes": {
+   "result": "lived",
+   "class": "CPathWithDynamicNodes"
+  },
+  "permanent_pickup_base": {
+   "result": "refused"
+  },
+  "phys_ballsocket": {
+   "result": "vanished",
+   "class": "CPhysBallSocket"
+  },
+  "phys_constraint": {
+   "result": "vanished",
+   "class": "CPhysFixed"
+  },
+  "phys_constraint_base": {
+   "result": "refused"
+  },
+  "phys_force": {
+   "result": "refused"
+  },
+  "phys_genericconstraint": {
+   "result": "vanished",
+   "class": "CGenericConstraint"
+  },
+  "phys_hinge": {
+   "result": "vanished",
+   "class": "CPhysHinge"
+  },
+  "phys_hinge_local": {
+   "result": "vanished",
+   "class": "CPhysHinge"
+  },
+  "phys_keepupright": {
+   "result": "vanished",
+   "class": "CKeepUpright"
+  },
+  "phys_lengthconstraint": {
+   "result": "vanished",
+   "class": "CPhysLength"
+  },
+  "phys_magnet": {
+   "result": "lived",
+   "class": "CPhysMagnet"
+  },
+  "phys_motor": {
+   "result": "lived",
+   "class": "CPhysMotor"
+  },
+  "phys_pulleyconstraint": {
+   "result": "vanished",
+   "class": "CPhysPulley"
+  },
+  "phys_ragdollconstraint": {
+   "result": "vanished",
+   "class": "CRagdollConstraint"
+  },
+  "phys_ragdollmagnet": {
+   "result": "lived",
+   "class": "CRagdollMagnet"
+  },
+  "phys_slideconstraint": {
+   "result": "vanished",
+   "class": "CPhysSlideConstraint"
+  },
+  "phys_splineconstraint": {
+   "result": "vanished",
+   "class": "CSplineConstraint"
+  },
+  "phys_spring": {
+   "result": "vanished",
+   "class": "CPhysicsSpring"
+  },
+  "phys_thruster": {
+   "result": "lived",
+   "class": "CPhysThruster"
+  },
+  "phys_torque": {
+   "result": "lived",
+   "class": "CPhysTorque"
+  },
+  "phys_wheelconstraint": {
+   "result": "vanished",
+   "class": "CPhysWheelConstraint"
+  },
+  "physics_entity_solver": {
+   "result": "lived",
+   "class": "CPhysicsEntitySolver"
+  },
+  "physics_npc_solver": {
+   "result": "crashed",
+   "at": "server.dll+0x243F84"
+  },
+  "physics_prop_ragdoll": {
+   "result": "lived",
+   "class": "CRagdollProp"
+  },
+  "plat_trigger": {
+   "result": "lived",
+   "class": "CPlatTrigger"
+  },
+  "player_loadsaved": {
+   "result": "lived",
+   "class": "CRevertSaved"
+  },
+  "player_spray_decal": {
+   "result": "lived",
+   "class": "CPlayerSprayDecal"
+  },
+  "player_tracked_stats": {
+   "result": "lived",
+   "class": "CPlayerTrackedStatsEntity"
+  },
+  "point_anglesensor": {
+   "result": "lived",
+   "class": "CPointAngleSensor"
+  },
+  "point_angularvelocitysensor": {
+   "result": "lived",
+   "class": "CPointAngularVelocitySensor"
+  },
+  "point_broadcastclientcommand": {
+   "result": "lived",
+   "class": "CPointBroadcastClientCommand"
+  },
+  "point_camera": {
+   "result": "lived",
+   "class": "CPointCamera"
+  },
+  "point_camera_vertical_fov": {
+   "result": "lived",
+   "class": "CPointCameraVFOV"
+  },
+  "point_childmodifier": {
+   "result": "lived",
+   "class": "CPointChildModifier"
+  },
+  "point_clientcommand": {
+   "result": "lived",
+   "class": "CPointClientCommand"
+  },
+  "point_clientui_dialog": {
+   "result": "lived",
+   "class": "CPointClientUIDialog"
+  },
+  "point_clientui_world_panel": {
+   "result": "lived",
+   "class": "CPointClientUIWorldPanel"
+  },
+  "point_clientui_world_text_panel": {
+   "result": "lived",
+   "class": "CPointClientUIWorldTextPanel"
+  },
+  "point_commentary_node": {
+   "result": "crashed",
+   "at": "tier0.dll+0x13B19E"
+  },
+  "point_commentary_viewpoint": {
+   "result": "lived",
+   "class": "CCommentaryViewPosition"
+  },
+  "point_enable_motion_fixup": {
+   "result": "lived",
+   "class": "CEnableMotionFixup"
+  },
+  "point_entity": {
+   "result": "lived",
+   "class": "CPointEntity"
+  },
+  "point_entity_finder": {
+   "result": "lived",
+   "class": "CPointEntityFinder"
+  },
+  "point_hurt": {
+   "result": "lived",
+   "class": "CPointHurt"
+  },
+  "point_instructor_event": {
+   "result": "lived",
+   "class": "CInstructorEventEntity"
+  },
+  "point_message": {
+   "result": "lived",
+   "class": "CMessageEntity"
+  },
+  "point_modifier_thinker": {
+   "result": "lived",
+   "class": "CPointModifierThinker"
+  },
+  "point_nav_walkable": {
+   "result": "lived",
+   "class": "CNavWalkable"
+  },
+  "point_orient": {
+   "result": "lived",
+   "class": "CPointOrient"
+  },
+  "point_prefab": {
+   "result": "crashed",
+   "at": "server.dll+0x1DBCA83"
+  },
+  "point_proximity_sensor": {
+   "result": "lived",
+   "class": "CPointProximitySensor"
+  },
+  "point_pulse": {
+   "result": "lived",
+   "class": "CPointPulse"
+  },
+  "point_push": {
+   "result": "lived",
+   "class": "CPointPush"
+  },
+  "point_servercommand": {
+   "result": "lived",
+   "class": "CPointServerCommand"
+  },
+  "point_soundevent": {
+   "result": "lived",
+   "class": "CSoundEventEntity"
+  },
+  "point_teleport": {
+   "result": "lived",
+   "class": "CPointTeleport"
+  },
+  "point_template": {
+   "result": "lived",
+   "class": "CPointTemplate"
+  },
+  "point_value_remapper": {
+   "result": "lived",
+   "class": "CPointValueRemapper"
+  },
+  "point_velocitysensor": {
+   "result": "lived",
+   "class": "CPointVelocitySensor"
+  },
+  "point_worldtext": {
+   "result": "lived",
+   "class": "CPointWorldText"
+  },
+  "post_processing_volume": {
+   "result": "lived",
+   "class": "CPostProcessingVolume"
+  },
+  "projectile_boho_skipgrenade": {
+   "result": "lived",
+   "class": "CProjectile_Boho_SkipGrenade"
+  },
+  "projectile_cyclone": {
+   "result": "lived",
+   "class": "CCitadel_Projectile_Cyclone"
+  },
+  "projectile_doorman_cart_projectile": {
+   "result": "lived",
+   "class": "CProjectile_Doorman_Cart_Projectile"
+  },
+  "projectile_dust_storm": {
+   "result": "lived",
+   "class": "CCitadel_Projectile_DustStorm"
+  },
+  "projectile_gravestone_projectile": {
+   "result": "lived",
+   "class": "CProjectile_GraveStone_Projectile"
+  },
+  "projectile_necro_zombiewall_projectile": {
+   "result": "lived",
+   "class": "CProjectile_Necro_ZombieWall_Projectile"
+  },
+  "projectile_perched_predator": {
+   "result": "lived",
+   "class": "CProjectile_Perched_Predator"
+  },
+  "projectile_rolling_fireball": {
+   "result": "lived",
+   "class": "CProjectile_Rolling_FireBall"
+  },
+  "projectile_stomp_projectile": {
+   "result": "lived",
+   "class": "CProjectile_Stomp_Projectile"
+  },
+  "projectile_touch_volume": {
+   "result": "lived",
+   "class": "CCitadelProjectileTouchVolume"
+  },
+  "prop_animating_breakable": {
+   "result": "lived",
+   "class": "CPropAnimatingBreakable"
+  },
+  "prop_door_rotating": {
+   "result": "lived",
+   "class": "CPropDoorRotating"
+  },
+  "prop_door_rotating_breakable": {
+   "result": "refused"
+  },
+  "prop_dynamic": {
+   "result": "lived",
+   "class": "CDynamicProp"
+  },
+  "prop_dynamic_ornament": {
+   "result": "lived",
+   "class": "COrnamentProp"
+  },
+  "prop_dynamic_override": {
+   "result": "lived",
+   "class": "CDynamicProp"
+  },
+  "prop_physics": {
+   "result": "vanished",
+   "class": "CPhysicsProp"
+  },
+  "prop_physics_override": {
+   "result": "lived",
+   "class": "CPhysicsPropOverride"
+  },
+  "prop_physics_respawnable": {
+   "result": "lived",
+   "class": "CPhysicsPropRespawnable"
+  },
+  "prop_ragdoll": {
+   "result": "lived",
+   "class": "CRagdollProp"
+  },
+  "prop_ragdoll_attached": {
+   "result": "lived",
+   "class": "CRagdollPropAttached"
+  },
+  "pulse_game_blackboard": {
+   "result": "lived",
+   "class": "CPulseGameBlackboard"
+  },
+  "punkgoat_tether_projectile": {
+   "result": "lived",
+   "class": "CProjectile_PunkgoatTether"
+  },
+  "range_permanent_pickup": {
+   "result": "lived",
+   "class": "CCitadel_Pickup_Modifier"
+  },
+  "range_permanent_pickup_lv2": {
+   "result": "lived",
+   "class": "CCitadel_Pickup_Modifier"
+  },
+  "range_permanent_pickup_lv3": {
+   "result": "lived",
+   "class": "CCitadel_Pickup_Modifier"
+  },
+  "ratking_scrap_grenade_projectile": {
+   "result": "lived",
+   "class": "CScrapGrenadeProjectile"
+  },
+  "refresh_powerup_pickup": {
+   "result": "lived",
+   "class": "CCitadel_Pickup_Modifier"
+  },
+  "render_portal": {
+   "result": "vanished",
+   "class": "CRenderPortal"
+  },
+  "rocket_launcher_rocket_projectile": {
+   "result": "lived",
+   "class": "CCitadel_Projectile_RocketLauncher_Rocket"
+  },
+  "root": {
+   "result": "refused"
+  },
+  "rotator_target": {
+   "result": "lived",
+   "class": "CRotatorTarget"
+  },
+  "rule_entity": {
+   "result": "refused"
+  },
+  "rule_point_entity": {
+   "result": "refused"
+  },
+  "rutger_rocket_projectile": {
+   "result": "lived",
+   "class": "CProjectile_Rutger_Rocket"
+  },
+  "script_nav_blocker": {
+   "result": "lived",
+   "class": "CScriptNavBlocker"
+  },
+  "script_trigger_hurt": {
+   "result": "lived",
+   "class": "CScriptTriggerHurt"
+  },
+  "script_trigger_multiple": {
+   "result": "lived",
+   "class": "CScriptTriggerMultiple"
+  },
+  "script_trigger_once": {
+   "result": "lived",
+   "class": "CScriptTriggerOnce"
+  },
+  "script_trigger_push": {
+   "result": "lived",
+   "class": "CScriptTriggerPush"
+  },
+  "scripted_item_drop": {
+   "result": "lived",
+   "class": "CScriptItem"
+  },
+  "scripted_scene": {
+   "result": "lived",
+   "class": "CSceneEntity"
+  },
+  "scripted_sequence": {
+   "result": "lived",
+   "class": "CScriptedSequence"
+  },
+  "setting_sun_projectile": {
+   "result": "lived",
+   "class": "CCitadel_Projectile_SettingSun"
+  },
+  "shatterglass_shard": {
+   "result": "lived",
+   "class": "CShatterGlassShardPhysics"
+  },
+  "shield_escort": {
+   "result": "lived",
+   "class": "CNPC_Escort"
+  },
+  "simple_animating_ai": {
+   "result": "crashed",
+   "at": "server.dll+0xDB5351"
+  },
+  "sky_camera": {
+   "result": "lived",
+   "class": "CSkyCamera"
+  },
+  "skybox_reference": {
+   "result": "lived",
+   "class": "CSkyboxReference"
+  },
+  "small_gold_pickup": {
+   "result": "lived",
+   "class": "CCitadel_Pickup_Gold"
+  },
+  "snd_event_alignedbox": {
+   "result": "lived",
+   "class": "CSoundEventAABBEntity"
+  },
+  "snd_event_box_helper": {
+   "result": "lived",
+   "class": "CSoundEventBoxHelper"
+  },
+  "snd_event_cone": {
+   "result": "lived",
+   "class": "CSoundEventConeEntity"
+  },
+  "snd_event_multipoint": {
+   "result": "refused"
+  },
+  "snd_event_oriented_boxes": {
+   "result": "lived",
+   "class": "CSoundEventBoxEntity"
+  },
+  "snd_event_orientedbox": {
+   "result": "lived",
+   "class": "CSoundEventOBBEntity"
+  },
+  "snd_event_param": {
+   "result": "lived",
+   "class": "CSoundEventParameter"
+  },
+  "snd_event_path_corner": {
+   "result": "lived",
+   "class": "CSoundEventPathCornerEntity"
+  },
+  "snd_event_point": {
+   "result": "lived",
+   "class": "CSoundEventEntity"
+  },
+  "snd_event_sphere": {
+   "result": "lived",
+   "class": "CSoundEventSphereEntity"
+  },
+  "snd_opvar_set": {
+   "result": "lived",
+   "class": "CSoundOpvarSetEntity"
+  },
+  "snd_opvar_set_aabb": {
+   "result": "lived",
+   "class": "CSoundOpvarSetAABBEntity"
+  },
+  "snd_opvar_set_auto_room": {
+   "result": "lived",
+   "class": "CSoundOpvarSetAutoRoomEntity"
+  },
+  "snd_opvar_set_box_base": {
+   "result": "refused"
+  },
+  "snd_opvar_set_dome": {
+   "result": "lived",
+   "class": "CSoundOpvarSetDomeEntity"
+  },
+  "snd_opvar_set_obb": {
+   "result": "lived",
+   "class": "CSoundOpvarSetOBBEntity"
+  },
+  "snd_opvar_set_path_corner": {
+   "result": "lived",
+   "class": "CSoundOpvarSetPathCornerEntity"
+  },
+  "snd_opvar_set_point": {
+   "result": "lived",
+   "class": "CSoundOpvarSetPointEntity"
+  },
+  "snd_opvar_set_point_base": {
+   "result": "lived",
+   "class": "CSoundOpvarSetPointBase"
+  },
+  "snd_opvar_set_precipitation": {
+   "result": "lived",
+   "class": "CSoundOpvarSetPrecipitationEntity"
+  },
+  "snd_opvar_set_precipitation_obb": {
+   "result": "lived",
+   "class": "CSoundOpvarSetPrecipitationOBBEntity"
+  },
+  "snd_opvar_set_wind_obb": {
+   "result": "lived",
+   "class": "CSoundOpvarSetOBBWindEntity"
+  },
+  "snd_sound_area_base": {
+   "result": "refused"
+  },
+  "snd_sound_area_obb": {
+   "result": "lived",
+   "class": "CSoundAreaEntityOrientedBox"
+  },
+  "snd_sound_area_sphere": {
+   "result": "lived",
+   "class": "CSoundAreaEntitySphere"
+  },
+  "snd_soundscape": {
+   "result": "lived",
+   "class": "CEnvSoundscape"
+  },
+  "snd_soundscape_proxy": {
+   "result": "lived",
+   "class": "CEnvSoundscapeProxy"
+  },
+  "snd_soundscape_triggerable": {
+   "result": "lived",
+   "class": "CEnvSoundscapeTriggerable"
+  },
+  "snd_stack_save": {
+   "result": "lived",
+   "class": "CSoundStackSave"
+  },
+  "souls_powerup_pickup": {
+   "result": "lived",
+   "class": "CCitadel_Pickup_Modifier"
+  },
+  "spark_shower": {
+   "result": "crashed",
+   "at": "server.dll+0x1B3A130"
+  },
+  "spider_projectile": {
+   "result": "lived",
+   "class": "CCitadel_Projectile_SpiderProjectile"
+  },
+  "spirit_permanent_pickup": {
+   "result": "lived",
+   "class": "CCitadel_Pickup_Modifier"
+  },
+  "spirit_permanent_pickup_lv2": {
+   "result": "lived",
+   "class": "CCitadel_Pickup_Modifier"
+  },
+  "spirit_permanent_pickup_lv3": {
+   "result": "lived",
+   "class": "CCitadel_Pickup_Modifier"
+  },
+  "spiritresist_permanent_pickup": {
+   "result": "lived",
+   "class": "CCitadel_Pickup_Modifier"
+  },
+  "spiritresist_permanent_pickup_lv2": {
+   "result": "lived",
+   "class": "CCitadel_Pickup_Modifier"
+  },
+  "spiritresist_permanent_pickup_lv3": {
+   "result": "lived",
+   "class": "CCitadel_Pickup_Modifier"
+  },
+  "spotlight_end": {
+   "result": "lived",
+   "class": "CSpotlightEnd"
+  },
+  "survival_powerup_pickup": {
+   "result": "lived",
+   "class": "CCitadel_Pickup_Modifier"
+  },
+  "synth_barrage_projectile": {
+   "result": "lived",
+   "class": "CProjectile_Synth_Barrage"
+  },
+  "synth_plasma_flux_projectile": {
+   "result": "lived",
+   "class": "CProjectile_Synth_PlasmaFlux"
+  },
+  "tanktrain_ai": {
+   "result": "lived",
+   "class": "CTankTrainAI"
+  },
+  "tanktrain_aitarget": {
+   "result": "lived",
+   "class": "CTankTargetChange"
+  },
+  "team_manager": {
+   "result": "lived",
+   "class": "CTeam"
+  },
+  "team_tracked_stats": {
+   "result": "lived",
+   "class": "CTeamTrackedStatsEntity"
+  },
+  "test_effect": {
+   "result": "lived",
+   "class": "CTestEffect"
+  },
+  "test_io_combinations": {
+   "result": "lived",
+   "class": "CTestPulseIO"
+  },
+  "trigger": {
+   "result": "lived",
+   "class": "CBaseTrigger"
+  },
+  "trigger_Ice_Path_Volume": {
+   "result": "lived",
+   "class": "CTriggerIcePathVolume"
+  },
+  "trigger_active_weapon_detect": {
+   "result": "lived",
+   "class": "CTriggerActiveWeaponDetect"
+  },
+  "trigger_add_modifier": {
+   "result": "lived",
+   "class": "CTriggerAddModifier"
+  },
+  "trigger_autosave": {
+   "result": "vanished",
+   "class": "CTriggerSave"
+  },
+  "trigger_brush": {
+   "result": "lived",
+   "class": "CTriggerBrush"
+  },
+  "trigger_burrow_underground": {
+   "result": "lived",
+   "class": "CTriggerBurrowUnderground"
+  },
+  "trigger_callback": {
+   "result": "lived",
+   "class": "CTriggerCallback"
+  },
+  "trigger_catapult": {
+   "result": "lived",
+   "class": "CCitadelCatapultTrigger"
+  },
+  "trigger_changelevel": {
+   "result": "lived",
+   "class": "CChangeLevel"
+  },
+  "trigger_detect_bullet_fire": {
+   "result": "lived",
+   "class": "CTriggerDetectBulletFire"
+  },
+  "trigger_detect_explosion": {
+   "result": "lived",
+   "class": "CTriggerDetectExplosion"
+  },
+  "trigger_fan": {
+   "result": "lived",
+   "class": "CTriggerFan"
+  },
+  "trigger_fog": {
+   "result": "lived",
+   "class": "CFogTrigger"
+  },
+  "trigger_game_event": {
+   "result": "lived",
+   "class": "CTriggerGameEvent"
+  },
+  "trigger_gravity": {
+   "result": "lived",
+   "class": "CTriggerGravity"
+  },
+  "trigger_hurt": {
+   "result": "lived",
+   "class": "CTriggerHurt"
+  },
+  "trigger_hurt_citadel": {
+   "result": "lived",
+   "class": "CCitadelTriggerHurt"
+  },
+  "trigger_impact": {
+   "result": "lived",
+   "class": "CTriggerImpact"
+  },
+  "trigger_item_shop": {
+   "result": "lived",
+   "class": "CTriggerItemShop"
+  },
+  "trigger_item_shop_safe_zone": {
+   "result": "lived",
+   "class": "CTriggerItemShopSafeZone"
+  },
+  "trigger_lerp_object": {
+   "result": "lived",
+   "class": "CTriggerLerpObject"
+  },
+  "trigger_look": {
+   "result": "lived",
+   "class": "CTriggerLook"
+  },
+  "trigger_midboss_shield": {
+   "result": "lived",
+   "class": "CTriggerMidBossShield"
+  },
+  "trigger_modifier": {
+   "result": "lived",
+   "class": "CTriggerModifier"
+  },
+  "trigger_multiple": {
+   "result": "lived",
+   "class": "CTriggerMultiple"
+  },
+  "trigger_neutral_idles": {
+   "result": "lived",
+   "class": "CTriggerNeutralIdles"
+  },
+  "trigger_neutral_shield": {
+   "result": "lived",
+   "class": "CTriggerNeutralShield"
+  },
+  "trigger_once": {
+   "result": "lived",
+   "class": "CTriggerOnce"
+  },
+  "trigger_passthrough_fake_wall": {
+   "result": "lived",
+   "class": "CTriggerPassthroughFakeWall"
+  },
+  "trigger_physics": {
+   "result": "lived",
+   "class": "CTriggerPhysics"
+  },
+  "trigger_ping_location": {
+   "result": "lived",
+   "class": "CTriggerPingLocation"
+  },
+  "trigger_portal": {
+   "result": "lived",
+   "class": "CCitadelPortalTrigger"
+  },
+  "trigger_proximity": {
+   "result": "lived",
+   "class": "CTriggerProximity"
+  },
+  "trigger_push": {
+   "result": "lived",
+   "class": "CTriggerPush"
+  },
+  "trigger_remove": {
+   "result": "lived",
+   "class": "CTriggerRemove"
+  },
+  "trigger_remove_modifier": {
+   "result": "lived",
+   "class": "CTriggerRemoveModifier"
+  },
+  "trigger_serverragdoll": {
+   "result": "lived",
+   "class": "CServerRagdollTrigger"
+  },
+  "trigger_snd_sos_opvar": {
+   "result": "lived",
+   "class": "CTriggerSndSosOpvar"
+  },
+  "trigger_soundscape": {
+   "result": "lived",
+   "class": "CTriggerSoundscape"
+  },
+  "trigger_team_base": {
+   "result": "lived",
+   "class": "CTriggerTeamBase"
+  },
+  "trigger_teleport": {
+   "result": "lived",
+   "class": "CTriggerTeleport"
+  },
+  "trigger_tier3phase2_shield": {
+   "result": "lived",
+   "class": "CTriggerTier3Phase2Shield"
+  },
+  "trigger_tonemap": {
+   "result": "lived",
+   "class": "CTonemapTrigger"
+  },
+  "trigger_transition": {
+   "result": "lived",
+   "class": "CTriggerVolume"
+  },
+  "trigger_trooper_damage_reduction_detector": {
+   "result": "lived",
+   "class": "CTriggerTrooperDamageReductionDetector"
+  },
+  "trigger_trooper_detector": {
+   "result": "lived",
+   "class": "CTriggerTrooperDetector"
+  },
+  "trooper_approach_horizon": {
+   "result": "lived",
+   "class": "CTrooperApproachHorizon"
+  },
+  "trooper_base": {
+   "result": "refused"
+  },
+  "trooper_medic": {
+   "result": "lived",
+   "class": "CNPC_Trooper"
+  },
+  "trooper_melee": {
+   "result": "lived",
+   "class": "CNPC_Trooper"
+  },
+  "trooper_normal": {
+   "result": "lived",
+   "class": "CNPC_Trooper"
+  },
+  "trooper_zipline_container": {
+   "result": "lived",
+   "class": "CNPC_Trooper"
+  },
+  "vandal_pillar_projectile": {
+   "result": "lived",
+   "class": "CCitadel_Projectile_Pillar"
+  },
+  "viper_hookblade_projectile": {
+   "result": "lived",
+   "class": "CCitadel_Projectile_HookBlade"
+  },
+  "viper_petrify_projectile": {
+   "result": "lived",
+   "class": "CCitadel_Projectile_Petrify"
+  },
+  "viscous_goo_grenade_projectile": {
+   "result": "lived",
+   "class": "CCitadel_Projectile_Viscous_GooGrenade"
+  },
+  "waterbullet": {
+   "result": "crashed",
+   "at": "tier0.dll+0x13B19E"
+  },
+  "wearable_item": {
+   "result": "lived",
+   "class": "CEconWearable"
+  },
+  "webwall_projectile": {
+   "result": "lived",
+   "class": "CCitadel_Projectile_WebWall"
+  },
+  "worldent": {
+   "result": "refused"
+  },
+  "wp_permanent_pickup": {
+   "result": "lived",
+   "class": "CCitadel_Pickup_Modifier"
+  },
+  "wp_permanent_pickup_lv2": {
+   "result": "lived",
+   "class": "CCitadel_Pickup_Modifier"
+  },
+  "wp_permanent_pickup_lv3": {
+   "result": "lived",
+   "class": "CCitadel_Pickup_Modifier"
+  },
+  "wrecker_teleport_projectile": {
+   "result": "lived",
+   "class": "CCitadel_Projectile_Wrecker_Teleport"
+  },
+  "wrecking_ball_projectile": {
+   "result": "lived",
+   "class": "CCitadel_Projectile_WreckingBall"
+  },
+  "xp_orb": {
+   "result": "lived",
+   "class": "CItemXP"
+  },
+  "xp_orb_idol_dropoff": {
+   "result": "lived",
+   "class": "CItemXP"
+  },
+  "xp_orb_koth_giveup": {
+   "result": "lived",
+   "class": "CItemXP"
+  },
+  "xp_orb_neutral": {
+   "result": "lived",
+   "class": "CItemXP"
+  },
+  "xp_orb_objective": {
+   "result": "lived",
+   "class": "CItemXP"
+  },
+  "xp_orb_player_kill": {
+   "result": "lived",
+   "class": "CItemXP"
+  },
+  "xp_orb_siege_trooper": {
+   "result": "lived",
+   "class": "CItemXP"
+  },
+  "xp_orb_spawner": {
+   "result": "lived",
+   "class": "CItemXP"
+  },
+  "xp_orb_trooper": {
+   "result": "lived",
+   "class": "CItemXP"
+  },
+  "xp_orb_vault": {
+   "result": "lived",
+   "class": "CItemXP"
+  },
+  "zip_line_node": {
+   "result": "lived",
+   "class": "CCitadelZipLineNode"
+  }
+ },
+ "absentConVars": [
+  "animgraph_debug_max_poseop_count",
+  "multigpu_skip_semaphores",
+  "multigpu_skip_transfers",
+  "panorama_2d_translate_no_comp_layer",
+  "panorama_allow_texture_composition_layer_fast_path",
+  "panorama_allow_transitions",
+  "panorama_apply_styles_for_invisible_parents",
+  "panorama_assert_loading_panel_type",
+  "panorama_box_shadow_no_comp_layer",
+  "panorama_cache_command_list_repaint_threshold",
+  "panorama_cache_command_list_size_threshold",
+  "panorama_classes_force_invalidate",
+  "panorama_clear_frames_on_device_restore",
+  "panorama_comp_layer_lru_lifetime",
+  "panorama_composition_atlas",
+  "panorama_dash_gap_ratio",
+  "panorama_dash_len",
+  "panorama_debug_overlay_opacity",
+  "panorama_debug_overlay_opacity_max",
+  "panorama_debug_overlay_opacity_min",
+  "panorama_debug_ready_for_display",
+  "panorama_debug_treat_all_addons_as_untrusted",
+  "panorama_disable_blur",
+  "panorama_disable_box_shadow",
+  "panorama_disable_descendant_filtering",
+  "panorama_disable_draw_fancy_quad",
+  "panorama_disable_draw_text",
+  "panorama_disable_draw_text_shadow",
+  "panorama_disable_layer_cache",
+  "panorama_disable_layer_clear",
+  "panorama_disable_render_callbacks",
+  "panorama_disable_render_target_cache",
+  "panorama_disallow_hover_styles",
+  "panorama_dragscroll_affordance",
+  "panorama_dragscroll_mintime",
+  "panorama_dragscroll_velocitymultiplier",
+  "panorama_draw_fast_path_img_shadow",
+  "panorama_draw_text_fast_path",
+  "panorama_draw_text_fast_path_text_shadow",
+  "panorama_enable_secondary_layout_pass",
+  "panorama_force_active_controller_type",
+  "panorama_force_atlas_clear",
+  "panorama_force_desired_layout_traverse",
+  "panorama_highlight_bad_opacity_masks",
+  "panorama_highlight_composition_layers",
+  "panorama_highlight_slow_operations",
+  "panorama_hsbc_through_fast_path",
+  "panorama_joystick_axis_repeat_curve_time",
+  "panorama_joystick_axis_repeat_interval_end",
+  "panorama_joystick_axis_repeat_interval_start",
+  "panorama_joystick_button_repeat_curve_time",
+  "panorama_joystick_button_repeat_interval_end",
+  "panorama_joystick_button_repeat_interval_start",
+  "panorama_joystick_enabled",
+  "panorama_js_minidumps",
+  "panorama_large_dispatch_event_queue",
+  "panorama_max_text_shadow_strength",
+  "panorama_might_scroll_no_comp_layer",
+  "panorama_min_comp_layer_cache_cost",
+  "panorama_panel_occlusion",
+  "panorama_print_render_tree",
+  "panorama_reload_animations",
+  "panorama_render_target_cache_max_size",
+  "panorama_script_cache_enabled",
+  "panorama_show_fps",
+  "panorama_show_fps_scale",
+  "panorama_simple_borders_no_comp_layer",
+  "panorama_skip_composition_layer_content_paint",
+  "panorama_skip_composition_layer_content_paint_tint",
+  "panorama_spew_async_event_substring",
+  "panorama_spew_layout_invalidates",
+  "panorama_stats_log_time",
+  "panorama_style_flag_force_invalidate",
+  "panorama_suspend_animation",
+  "panorama_suspend_paint",
+  "panorama_temp_comp_layer_min_dimension",
+  "panorama_toggledebugger_mode",
+  "panorama_track_render_commands",
+  "panorama_transition_time_factor",
+  "panorama_unlink_from_render_tree",
+  "panorama_use_backbuffer_directly",
+  "panorama_use_composite_cmd_for_cached_layers",
+  "panorama_use_new_occlusion_invalidation",
+  "r_dlss_preset",
+  "r_draw_first_tri_only",
+  "r_draw_instances",
+  "r_dx11_debug_clean",
+  "r_dx11_software_cmd_lists",
+  "r_force_no_present",
+  "r_frame_sync_enable",
+  "r_legacy_vsync",
+  "r_low_latency",
+  "r_low_latency_trigger_flash",
+  "r_multigpu_num_gpus_found",
+  "r_multigpu_num_gpus_used",
+  "r_pipeline_stats_command_flush",
+  "r_pipeline_stats_flush_before_sleeping",
+  "r_pipeline_stats_present_flush",
+  "r_pipeline_stats_use_flush_api",
+  "r_shadowtile_waveops",
+  "r_texture_budget_dynamic",
+  "r_texture_budget_threshold",
+  "r_texture_budget_update_period",
+  "r_texture_eager_eviction",
+  "r_texture_pool_increase_rate",
+  "r_texture_pool_reduce_rate",
+  "r_texture_stream_resolution_bias_decrease_rate",
+  "r_texture_stream_resolution_bias_increase_rate",
+  "r_texture_stream_resolution_bias_min",
+  "r_texture_stream_resolution_bias_update_period",
+  "r_texture_stream_throttle_amount",
+  "r_texture_stream_throttle_count",
+  "r_texture_stream_throttle_count_over_budget",
+  "r_texture_streaming_timesliced",
+  "r_texture_streamout_unthrottle_ms",
+  "r_timestamp_query_multiplier",
+  "r_use_memory_budget_model",
+  "snd_ui_positional",
+  "snd_ui_spatialization_spread",
+  "testscript_debug"
+ ]
+}

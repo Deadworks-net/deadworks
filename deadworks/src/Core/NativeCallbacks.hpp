@@ -9,7 +9,7 @@ struct SchemaFieldResult {
     int32_t offset;      // byte offset of the field
     int16_t chainOffset; // __m_pChainEntity offset (0 if none)
     uint8_t networked;   // 1 if MNetworkEnable, else 0
-    uint8_t _pad;        // explicit padding to 8 bytes
+    uint8_t found;       // 1 if the class declares the field, 2 if it does not
 };
 
 struct NativeCallbacks {
@@ -192,6 +192,10 @@ struct NativeCallbacks {
     uint8_t(__cdecl *IsMapValid)(const char *map);
     // Called by managed code while it rejects a ClientConnect; the text becomes the engine's reject reason.
     void(__cdecl *SetConnectRejectReason)(const char *reason);
+    // sizeof a schema class in the server module, or 0 if the schema has no such class.
+    int32_t(__cdecl *GetSchemaClassSize)(const char *className);
+    // alignof a schema class in the server module, or 0 if the schema has no such class.
+    int32_t(__cdecl *GetSchemaClassAlignment)(const char *className);
 };
 
 void PopulateNativeCallbacks(NativeCallbacks &callbacks);

@@ -72,7 +72,7 @@ public readonly struct ModifierDamageEventData {
 
 	private static readonly SchemaAccessor<int> _healthLost = new("CTakeDamageResult"u8, "m_nHealthLost"u8);
 	private static readonly SchemaAccessor<int> _healthBefore = new("CTakeDamageResult"u8, "m_nHealthBefore"u8);
-	private static readonly SchemaAccessor<int> _damageDealt = new("CTakeDamageResult"u8, "m_nDamageDealt"u8);
+	private static readonly SchemaAccessor<float> _damageDealt = new("CTakeDamageResult"u8, "m_flDamageDealt"u8);
 	private static readonly SchemaAccessor<float> _preModifiedDamage = new("CTakeDamageResult"u8, "m_flPreModifiedDamage"u8);
 
 	private T ReadResult<T>(SchemaAccessor<T> field) where T : unmanaged {
@@ -82,7 +82,7 @@ public readonly struct ModifierDamageEventData {
 	}
 
 	/// <summary>Damage dealt after mitigation. <c>DamageTaken</c> only.</summary>
-	public int DamageDealt => ReadResult(_damageDealt);
+	public int DamageDealt => (int)MathF.Round(ReadResult(_damageDealt));
 
 	/// <summary>Health the victim actually lost. <c>DamageTaken</c> only.</summary>
 	public int HealthLost => ReadResult(_healthLost);

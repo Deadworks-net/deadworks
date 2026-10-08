@@ -85,6 +85,11 @@ internal static partial class PluginLoader
         var protobufAsm = typeof(IMessage).Assembly;
         map[protobufAsm.GetName().Name!] = protobufAsm;
 
+        // DeadworksManaged.Game - the generated schema classes, shared so a view one plugin
+        // hands to another, or to the host, is the same type on both sides
+        var gameAsm = typeof(DeadworksManaged.Game.GameBuild).Assembly;
+        map[gameAsm.GetName().Name!] = gameAsm;
+
         return map;
     }
 
@@ -109,6 +114,7 @@ internal static partial class PluginLoader
         AdminSystem.CommandCapture.Initialize();
         Server.ExtraMaps = () => DeadworksConfig.ServerBrowser.ExtraMaps;
         UIBootstrap.Initialize();
+        SchemaCommands.Initialize();
         ServerBrowser.Initialize();
         PluginStateManager.Initialize();
         PluginRegistry.Resolve = () => _pluginSnapshot.Select(p => p.Name).ToArray();

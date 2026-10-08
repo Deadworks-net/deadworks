@@ -1,3 +1,6 @@
 # Everything under docker/ runs inside a Linux container. A CRLF checkout (core.autocrlf on
 # Windows) would make the image fail at start with "bad interpreter: /usr/bin/env bash^M".
 docker/** text eol=lf
+
+# Generated from the modding database by managed/DeadworksManaged.GameGen; collapsed in pull request diffs.
+managed/DeadworksManaged.Game/Generated/** linguist-generated=true
