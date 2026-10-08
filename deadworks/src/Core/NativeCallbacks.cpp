@@ -226,7 +226,7 @@ static void __cdecl NativeGetSchemaField(const char *className, const char *fiel
     SchemaKey key = schema::GetOffset(className, classHash, fieldName, memberHash);
     result->offset = key.Offset;
     result->chainOffset = schema::FindChainOffset(className, classHash);
-    result->networked = key.Networked ? 1 : 0;
+    result->networked = static_cast<uint8_t>(schema::FieldNetworked(className, classHash, memberHash));
     result->_pad = 0;
 }
 

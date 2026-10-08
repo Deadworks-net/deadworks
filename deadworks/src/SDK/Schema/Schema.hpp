@@ -13,8 +13,16 @@ struct SchemaKey {
 };
 
 namespace schema {
+// Whether the game sends a field to clients. Unknown until an entity exists to reach the network database through.
+enum class FieldNetworking : uint8_t {
+    No,
+    Yes,
+    Unknown,
+};
+
 int16_t FindChainOffset(const char *className, uint32_t classNameHash);
 SchemaKey GetOffset(const char *className, uint32_t classKey, const char *memberName, uint32_t memberKey);
+FieldNetworking FieldNetworked(const char *className, uint32_t classKey, uint32_t memberKey);
 int GetClassSize(const char *className);
 // True when className is baseClassName or inherits from it anywhere in its schema base-class tree.
 bool IsDerivedFrom(const char *className, const char *baseClassName);
