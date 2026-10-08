@@ -391,6 +391,23 @@
 			"library": "server.dll",
 			"windows": "48 89 5C 24 ?? 44 89 4C 24 ?? 48 89 54 24 ?? 48 89 4C 24 ?? 55 56 57 41 54 41 55 41 56 41 57 48 8D AC 24"
 		},
+		// (CNavPath *) -> CNavPath *. A path is 0x4880 bytes; vtable slot 0 is its destructor.
+		"CNavPath::CNavPath": {
+			"library": "server.dll",
+			"windows": "40 53 48 83 EC ?? 48 8B D9 E8 ?? ?? ?? ?? 48 8D 05 ?? ?? ?? ?? C6 83 ?? ?? ?? ?? ?? ?? ?? ?? 33 C0 48 89 83 ?? ?? ?? ?? 48 89 83 ?? ?? ?? ?? 88 83"
+		},
+		// bool (CNavPath *, const query *, const Vector *start, CNavArea *startArea, const Vector *goal, CNavArea *goalArea,
+		// const void *extra). The overload nav_test_path uses: null areas are looked up from the positions.
+		"CNavPath::ComputePathPosToPos": {
+			"library": "server.dll",
+			"windows": "48 89 5C 24 ?? 48 89 7C 24 ?? 55 48 8D 6C 24 ?? 48 81 EC ?? ?? ?? ?? 48 8B 42"
+		},
+		// (CAI_PathCost *, int hull) -> CAI_PathCost *. The default path cost (208 bytes), what nav_test_path
+		// allocates when no NPC is selected.
+		"CAI_PathCost::CAI_PathCost": {
+			"library": "server.dll",
+			"windows": "48 89 5C 24 ?? 48 89 74 24 ?? 57 48 83 EC ?? 89 51"
+		},
 		// A small CNavMesh helper whose first instruction, mov rax, [rip + disp32], loads the CNavMesh global.
 		// (It returns navmesh+0x2BC != 0, which is not a "loaded" flag: it reads false with a working navmesh.)
 		"CNavMesh::GlobalRef": {

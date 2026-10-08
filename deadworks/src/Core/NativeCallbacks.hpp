@@ -214,6 +214,8 @@ struct NativeCallbacks {
     void(__cdecl *NpcSetSummoner)(void *npc, uint32_t handle);
     // Navmesh queries — see NativeNav.cpp.
     uint8_t(__cdecl *NavGetNearestPoint)(const float *pos, float maxDistance, int32_t hull, float *out);
+    int32_t(__cdecl *NavFindPath)(const float *start, const float *goal, int32_t hull, uint8_t allowPartial,
+                                  float *outPoints, int32_t maxPoints);
 };
 
 void PopulateNativeCallbacks(NativeCallbacks &callbacks);

@@ -186,4 +186,5 @@ internal static unsafe class NativeInterop
 	public static delegate* unmanaged[Cdecl]<void*, void*> NpcGetSummoner => (delegate* unmanaged[Cdecl]<void*, void*>)_cb.NpcGetSummoner;
 	public static delegate* unmanaged[Cdecl]<void*, uint, void> NpcSetSummoner => (delegate* unmanaged[Cdecl]<void*, uint, void>)_cb.NpcSetSummoner;
 	public static delegate* unmanaged[Cdecl]<float*, float, int, float*, byte> NavGetNearestPoint => (delegate* unmanaged[Cdecl]<float*, float, int, float*, byte>)_cb.NavGetNearestPoint;
+	public static delegate* unmanaged[Cdecl]<float*, float*, int, byte, float*, int, int> NavFindPath => (delegate* unmanaged[Cdecl]<float*, float*, int, byte, float*, int, int>)_cb.NavFindPath;
 }

@@ -7,6 +7,21 @@ namespace deadworks::offsets {
 // CCitadelAbilityComponent
 constexpr uintptr_t kAbilityCompSlotTable = 0x30;
 
+// CNavMesh: number of hulls (NPC size classes) the map's navmesh was generated for.
+constexpr uintptr_t kNavMeshHullCount = 0x178;
+
+// CNavPath (0x4880 bytes): up to 256 segments of 72 bytes from +8, then the count. A segment's waypoint
+// position is at +44 and its nav area index at +56.
+constexpr size_t kNavPathSize = 0x4880;
+constexpr uintptr_t kNavPathSegments = 0x8;
+constexpr uintptr_t kNavPathSegmentSize = 72;
+constexpr uintptr_t kNavPathSegmentPos = 44;
+constexpr int32_t kNavPathMaxSegments = 256;
+constexpr uintptr_t kNavPathSegmentCount = 0x4808;
+
+// CAI_PathCost (the default INavPathCost; its ctor takes the hull)
+constexpr size_t kPathCostSize = 208;
+
 // CAI_Navigator: the movement interface (second vtable) that npc_stop_moving calls StopMoving on.
 constexpr uintptr_t kNavigatorMoveInterface = 0x48;
 
