@@ -13,8 +13,12 @@ struct SchemaKey {
 };
 
 namespace schema {
-// Whether the game sends a field to clients. Unknown only before the first entity exists (see Schema.cpp).
-enum FieldNetworking : uint8_t { NotNetworked = 0, Networked = 1, NetworkingUnknown = 2 };
+// Whether the game sends a field to clients. Unknown until an entity exists to reach the network database through.
+enum class FieldNetworking : uint8_t {
+    No,
+    Yes,
+    Unknown,
+};
 
 int16_t FindChainOffset(const char *className, uint32_t classNameHash);
 SchemaKey GetOffset(const char *className, uint32_t classKey, const char *memberName, uint32_t memberKey);

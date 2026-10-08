@@ -71,75 +71,77 @@ static void InitSchemaKeyValueMap(SchemaClassInfoData_t *pClassInfo, SchemaKeyVa
         InitChainOffset(pClassInfo->m_pBaseClasses[0].m_pClass, keyValueMap);
 }
 
-// Deadlock 6711 took MNetworkEnable and MNetworkVarNames out of the schema, so the schema no longer says which fields
-// are networked. That is now only in the server's network serializer database (what upstream DumpSource2 dumps as
-// network classes). Every entity reaches the database through its serializer class info, so it is taken from the
-// first entity there is; before any entity exists it cannot be reached and the answer is not known yet.
-static bool ReadDatabase(CEntityInstance *entity, const CNetworkSerializerCodeGenDatabase **database, const char **problem) {
-    // These SDK types go out of date with game updates, so what is read is checked before it is trusted.
-    __try {
-        const auto *info = entity->GetSerializerClassInfo();
-        if (!info) return false;
-        const auto *candidate = info->m_pDatabase;
-        if (!candidate || candidate->m_ClassInfos.Count() == 0) {
-            *problem = "the serializer class info has no database";
-            return false;
-        }
-        auto index = candidate->m_ClassInfos.Find(info->m_pszClassName.Get());
-        if (index == candidate->m_ClassInfos.InvalidIndex() || candidate->m_ClassInfos.Element(index) != info) {
-            *problem = "the database does not hold the class it was reached through";
-            return false;
-        }
-        *database = candidate;
-        return true;
-    } __except (1) {
-        *problem = "reading it faulted";
-        return false;
-    }
+// A database read with a stale SDK layout does not hold the class info it was reached through
+static bool ContainsClassInfo(const CNetworkSerializerCodeGenDatabase *pDatabase, const CNetworkSerializerClassInfo *pClassInfo) {
+    auto index = pDatabase->m_ClassInfos.Find(pClassInfo->m_pszClassName.Get());
+
+    return index != pDatabase->m_ClassInfos.InvalidIndex() && pDatabase->m_ClassInfos.Element(index) == pClassInfo;
 }
 
-static const CNetworkSerializerCodeGenDatabase *NetworkDatabase() {
-    static const CNetworkSerializerCodeGenDatabase *database = nullptr;
+// Deadlock 6711 removed MNetworkEnable from the schema. What a class networks is now only in the server's network
+// serializer database, which is reached through the serializer class info of any entity.
+static const CNetworkSerializerCodeGenDatabase *GetNetworkDatabase() {
+    static const CNetworkSerializerCodeGenDatabase *pDatabase = nullptr;
     static bool warned = false;
-    if (database) return database;
+    if (pDatabase) return pDatabase;
 
-    auto *system = GameEntitySystem();
-    if (!system) return nullptr;
+    auto *pSystem = GameEntitySystem();
+    if (!pSystem) return nullptr;
 
-    for (auto *identity = system->m_EntityList.m_pFirstActiveEntity; identity; identity = identity->m_pNext) {
-        if (!identity->m_pInstance) continue;
-        const char *problem = nullptr;
-        if (ReadDatabase(identity->m_pInstance, &database, &problem)) {
-            g_Log->Info("Networked fields come from the network serializer database ({} classes)", database->m_ClassInfos.Count());
-            return database;
-        }
-        if (problem && !warned) {
+    for (auto *pIdentity = pSystem->m_EntityList.m_pFirstActiveEntity; pIdentity; pIdentity = pIdentity->m_pNext) {
+        if (!pIdentity->m_pInstance) continue;
+
+        auto *pClassInfo = pIdentity->m_pInstance->GetSerializerClassInfo();
+        if (!pClassInfo) continue;
+
+        auto *pCandidate = pClassInfo->m_pDatabase;
+
+        if (!pCandidate || !ContainsClassInfo(pCandidate, pClassInfo)) {
+            if (!warned)
+                g_Log->Warning("GetNetworkDatabase(): the database of '{}' does not hold it, CNetworkSerializerClassInfo is out of date", pClassInfo->m_pszClassName.Get());
             warned = true;
-            g_Log->Warning("Cannot read the network serializer database: {}. CNetworkSerializerClassInfo in the SDK needs "
-                           "updating; until then every schema write is announced as if its field were networked.", problem);
+            return nullptr;
         }
-        if (problem) return nullptr;
+
+        pDatabase = pCandidate;
+        return pDatabase;
     }
+
     return nullptr;
 }
 
-// The fields of a class that the database lists, by name hash. Null while the database cannot be reached.
-static const std::unordered_set<uint32_t> *NetworkedFieldsOf(const char *className, uint32_t classKey) {
-    static std::map<uint32_t, std::unordered_set<uint32_t>> classes;
-    if (auto found = classes.find(classKey); found != classes.end()) return &found->second;
+static const std::unordered_set<uint32_t> *GetNetworkedFields(const char *className, uint32_t classKey) {
+    static std::map<uint32_t, std::unordered_set<uint32_t>> networkedFieldsMap;
 
-    const auto *database = NetworkDatabase();
-    if (!database) return nullptr;
+    if (networkedFieldsMap.contains(classKey))
+        return &networkedFieldsMap[classKey];
 
-    auto &fields = classes[classKey];
-    auto index = database->m_ClassInfos.Find(className);
-    if (index == database->m_ClassInfos.InvalidIndex()) return &fields;
+    auto *pDatabase = GetNetworkDatabase();
+    if (!pDatabase) return nullptr;
 
-    const auto *info = database->m_ClassInfos.Element(index);
-    for (int i = 0; i < info->m_Fields.Count(); i++)
-        if (const auto *field = info->m_Fields[i])
-            fields.insert(hash_32_fnv1a_const(field->m_pszFieldName.Get()));
-    return &fields;
+    auto &networkedFields = networkedFieldsMap[classKey];
+
+    auto index = pDatabase->m_ClassInfos.Find(className);
+    if (index == pDatabase->m_ClassInfos.InvalidIndex())
+        return &networkedFields;
+
+    auto *pClassInfo = pDatabase->m_ClassInfos.Element(index);
+
+    for (auto i = 0; i < pClassInfo->m_Fields.Count(); i++)
+        networkedFields.insert(hash_32_fnv1a_const(pClassInfo->m_Fields[i]->m_pszFieldName.Get()));
+
+    return &networkedFields;
+}
+
+static schema::FieldNetworking GetFieldNetworking(const char *className, uint32_t classKey, uint32_t memberKey, bool schemaNetworked) {
+    if (schemaNetworked)
+        return schema::FieldNetworking::Yes;
+
+    auto *pNetworkedFields = GetNetworkedFields(className, classKey);
+    if (!pNetworkedFields)
+        return schema::FieldNetworking::Unknown;
+
+    return pNetworkedFields->contains(memberKey) ? schema::FieldNetworking::Yes : schema::FieldNetworking::No;
 }
 
 static bool InitSchemaFieldsForClass(SchemaTableMap_t &tableMap, const char *className, uint32_t classKey) {
@@ -189,26 +191,25 @@ SchemaKey GetOffset(const char *className, uint32_t classKey, const char *member
         return {0, 0};
     }
 
-    // A caller that keeps the key keeps this answer, so while it is not known the field counts as networked:
-    // announcing a write nobody listens for costs little, and not announcing one loses it.
-    SchemaKey key = tableMap[memberKey];
-    key.Networked = FieldNetworked(className, classKey, memberKey) != NotNetworked;
+    // Callers keep the key, so a field whose networking is not known yet counts as networked
+    auto key = tableMap[memberKey];
+    key.Networked = GetFieldNetworking(className, classKey, memberKey, key.Networked) != FieldNetworking::No;
+
     return key;
 }
 
 FieldNetworking FieldNetworked(const char *className, uint32_t classKey, uint32_t memberKey) {
     auto &schemaTableMap = TableMap();
+
     if (!schemaTableMap.contains(classKey) && !InitSchemaFieldsForClass(schemaTableMap, className, classKey))
-        return NotNetworked;
+        return FieldNetworking::No;
 
     auto &tableMap = schemaTableMap[classKey];
-    auto found = tableMap.find(memberKey);
-    if (found == tableMap.end()) return NotNetworked;
-    if (found->second.Networked) return Networked;   // the schema says so itself: builds before 6711
 
-    const auto *fields = NetworkedFieldsOf(className, classKey);
-    if (!fields) return NetworkingUnknown;
-    return fields->contains(memberKey) ? Networked : NotNetworked;
+    if (!tableMap.contains(memberKey))
+        return FieldNetworking::No;
+
+    return GetFieldNetworking(className, classKey, memberKey, tableMap[memberKey].Networked);
 }
 
 int GetClassSize(const char *className) {
