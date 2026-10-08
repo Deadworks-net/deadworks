@@ -172,4 +172,5 @@ internal struct NativeCallbacks
 	public nint NpcGetSummoner;
 	public nint NpcSetSummoner;
 	public nint NavGetNearestPoint;
+	public nint NavFindPath;
 }
