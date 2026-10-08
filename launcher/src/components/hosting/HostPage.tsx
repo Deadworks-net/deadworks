@@ -29,6 +29,8 @@ export default function HostPage({ nav, active }: HostPageProps) {
   const [lastInstall, setLastInstall] = useState<InstallDraft | null>(null);
   const [selectedId, setSelectedId] = useState<string | null>(() => readLocal(SELECTED_KEY));
   const [creating, setCreating] = useState(false);
+  /** The right end of the toolbar, which the selected server's controls render into. */
+  const [toolbarSlot, setToolbarSlot] = useState<HTMLDivElement | null>(null);
 
   const select = (id: string) => {
     setSelectedId(id);
@@ -136,6 +138,7 @@ export default function HostPage({ nav, active }: HostPageProps) {
                 server={selected}
                 actions={actions}
                 holdReason={holdReason}
+                toolbarSlot={toolbarSlot}
                 active={active}
                 onSelect={select}
                 onDeleted={() => setSelectedId(null)}
@@ -149,7 +152,10 @@ export default function HostPage({ nav, active }: HostPageProps) {
 
   return (
     <div className={styles.page}>
-      <div className={styles.toolbar}>{nav}</div>
+      <div className={styles.toolbar}>
+        {nav}
+        <div className={styles.toolbarRight} ref={setToolbarSlot} />
+      </div>
       <div className={styles.body}>{body}</div>
     </div>
   );

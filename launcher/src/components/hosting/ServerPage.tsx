@@ -5,7 +5,7 @@ import type { HostingActions } from "./use-hosting";
 import { useConsole } from "./use-console";
 import { readLocal, writeLocal } from "./format";
 import { ErrorNote, useAction } from "./ui";
-import ServerHeader from "./ServerHeader";
+import ServerControls from "./ServerControls";
 import OverviewTab from "./tabs/OverviewTab";
 import ConsoleTab, { ConsoleLog } from "./tabs/ConsoleTab";
 import PluginsTab from "./tabs/PluginsTab";
@@ -61,13 +61,23 @@ interface ServerPageProps {
   server: ServerSummary;
   actions: HostingActions;
   holdReason: string | null;
+  /** Where the start, stop and copy controls go: the page toolbar, outside this card. */
+  toolbarSlot: HTMLElement | null;
   /** The HOST tab is on screen (window-wide file drops go to the Plugins tab). */
   active: boolean;
   onSelect: (id: string) => void;
   onDeleted: () => void;
 }
 
-export default function ServerPage({ server, actions, holdReason, active, onSelect, onDeleted }: ServerPageProps) {
+export default function ServerPage({
+  server,
+  actions,
+  holdReason,
+  toolbarSlot,
+  active,
+  onSelect,
+  onDeleted,
+}: ServerPageProps) {
   const [tab, setTab] = useState<SubTab>(loadSubTab);
   /** A player picked with "Make admin" on the Overview tab, handed to the Admins tab once. */
   const [adminPrefill, setAdminPrefill] = useState<AdminPrefill | null>(null);
@@ -82,7 +92,7 @@ export default function ServerPage({ server, actions, holdReason, active, onSele
 
   return (
     <>
-      <ServerHeader server={server} actions={actions} holdReason={holdReason} />
+      <ServerControls server={server} actions={actions} holdReason={holdReason} toolbarSlot={toolbarSlot} />
       <div className={styles.subtabs} role="tablist">
         {SUB_TABS.map((t) => (
           <button

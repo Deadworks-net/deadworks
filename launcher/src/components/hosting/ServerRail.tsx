@@ -28,9 +28,13 @@ export default function ServerRail({ servers, selectedId, creating, onSelect, on
           >
             <StateDot state={runtime.state} />
             <span className={styles.railName}>{config.name}</span>
-            {runtime.state === "running" && (
+            {runtime.state !== "stopped" && (
               <span className={styles.railPlayers}>
-                {runtime.players.length}/{config.maxPlayers}
+                {runtime.state === "running"
+                  ? `${runtime.players.length}/${config.maxPlayers}`
+                  : runtime.state === "waiting_for_deadworks"
+                    ? "Waiting"
+                    : stateLabel(runtime.state)}
               </span>
             )}
           </button>
