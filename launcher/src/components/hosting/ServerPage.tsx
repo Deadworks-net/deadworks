@@ -25,6 +25,11 @@ function loadSubTab(): SubTab {
   return SUB_TABS.find((t) => t === saved) ?? "overview";
 }
 
+/** Sets the sub-tab a server page opens on when it is next shown. */
+export function rememberSubTab(tab: SubTab) {
+  writeLocal(SUB_TAB_KEY, tab);
+}
+
 const CRASH_LINES = 50;
 
 function CrashPanel({ server, lines, actions }: {
@@ -72,7 +77,7 @@ export default function ServerPage({ server, actions, holdReason, active, onSele
 
   const changeTab = (next: SubTab) => {
     setTab(next);
-    writeLocal(SUB_TAB_KEY, next);
+    rememberSubTab(next);
   };
 
   return (

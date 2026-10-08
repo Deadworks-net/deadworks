@@ -8,7 +8,7 @@ import WelcomeScreen from "./WelcomeScreen";
 import InstallScreen, { type InstallDraft } from "./InstallScreen";
 import TaskProgressView from "./TaskProgressView";
 import ServerRail from "./ServerRail";
-import ServerPage from "./ServerPage";
+import ServerPage, { rememberSubTab } from "./ServerPage";
 import CreateServerFlow from "./CreateServerFlow";
 import { ManagedHostingCard } from "./ManagedHostingCta";
 import ui from "./ui.module.css";
@@ -35,13 +35,6 @@ export default function HostPage({ nav, active }: HostPageProps) {
     setCreating(false);
     writeLocal(SELECTED_KEY, id);
   };
-
-  // With no servers, creating one is the only thing to do. Kept as state so the
-  // flow survives its own server appearing (it continues to the plugins step).
-  const installed = !!overview?.installed;
-  useEffect(() => {
-    if (installed && servers.length === 0) setCreating(true);
-  }, [installed, servers.length]);
 
   // Keep the selection pointing at a server that exists.
   useEffect(() => {
@@ -132,9 +125,11 @@ export default function HostPage({ nav, active }: HostPageProps) {
               <CreateServerFlow
                 servers={servers}
                 actions={actions}
-                active={active}
                 onCancel={selected ? () => setCreating(false) : null}
-                onDone={select}
+                onDone={(id) => {
+                  rememberSubTab("settings");
+                  select(id);
+                }}
               />
             ) : (
               <ServerPage
