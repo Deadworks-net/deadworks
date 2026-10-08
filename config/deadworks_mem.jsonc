@@ -344,7 +344,7 @@
 			"library": "server.dll",
 			"windows": "48 8B C4 55 53 56 57 48 8D A8 ?? ?? ?? ?? 48 81 EC ?? ?? ?? ?? 4C 89 60"
 		},
-		// (npc, CBaseEntity *enemy). Hands the enemy to CAI_EnemyServices, then calls OnEnemyChanged. Vfunc 433,
+		// (npc, CBaseEntity *enemy). Hands the enemy to CAI_EnemyServices, then calls OnEnemyChanged. Vfunc 435 (433 before 6762),
 		// which no NPC class overrides. The next ChooseEnemy can replace it.
 		"CAI_BaseNPC::SetEnemy": {
 			"library": "server.dll",
@@ -434,6 +434,6 @@
 		// StopMoving(AI_NavStopMovingMode_t, facing, const CUtlSourceLocation *), what npc_stop_moving calls.
 		"CAI_Navigator::StopMoving": 13,
 		// bool (const CGlobalSymbol *id): true refuses a schedule set from outside, as the SetSchedule task checks.
-		"CAI_BaseNPC::VetoSchedule": 428
+		"CAI_BaseNPC::VetoSchedule": 430
 	}
 }
