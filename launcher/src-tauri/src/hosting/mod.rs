@@ -3,7 +3,6 @@
 //! A shared base game install (copied from the user's Deadlock, or downloaded
 //! with SteamCMD) feeds any number of server profiles; each runs Deadworks from
 //! its own hardlinked tree with its own plugins, config and network mode.
-//! See `launcher/HOSTING_PLAN.md` for the design and what was verified.
 
 mod base;
 mod cfg;
