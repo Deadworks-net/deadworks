@@ -165,12 +165,6 @@
   font-size: 1.15rem;
   font-weight: 700;
   letter-spacing: 0.5px;
-  margin-bottom: 4px;
-}
-
-.formSubtitle {
-  font-size: 0.8rem;
-  color: var(--text-muted);
   margin-bottom: 18px;
 }
 

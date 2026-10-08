@@ -60,7 +60,7 @@ export default function PluginConfigEditor({ serverId, file, running, onClose, o
       >
         {running
           ? "This plugin has no config file."
-          : "The config file is created when the plugin first loads. Start the server once."}
+          : "Start the server once to create the config file."}
       </Modal>
     );
   }
@@ -141,7 +141,7 @@ export default function PluginConfigEditor({ serverId, file, running, onClose, o
       {confirmReset && (
         <ConfirmDialog
           title="Reset to defaults?"
-          message={`Deletes ${file.pluginId}'s config file. The plugin writes a new one with default values when it next loads.`}
+          message={`Deletes ${file.pluginId}'s config file. The plugin recreates it with defaults.`}
           confirmLabel="Reset"
           danger
           onConfirm={async () => {
@@ -156,7 +156,6 @@ export default function PluginConfigEditor({ serverId, file, running, onClose, o
       {confirmDiscard && (
         <ConfirmDialog
           title="Discard changes?"
-          message="Your unsaved changes will be lost."
           confirmLabel="Discard"
           danger
           onConfirm={async () => onClose()}

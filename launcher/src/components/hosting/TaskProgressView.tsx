@@ -66,11 +66,7 @@ function SteamPromptBox({ task, onSubmit }: { task: TaskProgress; onSubmit: (v: 
           Continue
         </button>
       </div>
-      <div className={ui.hint}>
-        {isCode
-          ? "Sent by email or shown in the Steam Mobile app."
-          : "Steam requested the password again. It is not stored."}
-      </div>
+      {!isCode && <div className={ui.hint}>The password is not stored.</div>}
       {error && <div className={ui.errorText}>{error}</div>}
     </form>
   );
@@ -98,7 +94,7 @@ function ModifiedFilesBox({
   return (
     <div className={styles.modified}>
       <div className={styles.taskLabel}>
-        These files differ from Steam's originals. The server requires unmodified files.
+        The server requires unmodified files.
       </div>
       <ul className={styles.modifiedList}>
         {shown.map((f) => (

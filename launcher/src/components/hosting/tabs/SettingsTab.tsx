@@ -157,11 +157,7 @@ export default function SettingsTab({ server, actions }: { server: ServerSummary
           {portError ? (
             <div className={ui.errorText}>{portError}</div>
           ) : (
-            <div className={ui.hint}>
-              {draft.network === "port_forward"
-                ? "Forward this UDP port on your router."
-                : "Must be unique per server."}
-            </div>
+            draft.network === "port_forward" && <div className={ui.hint}>Forward this UDP port on your router.</div>
           )}
         </div>
       </div>
@@ -172,24 +168,18 @@ export default function SettingsTab({ server, actions }: { server: ServerSummary
       <div style={{ marginTop: 8 }}>
         <SwitchRow
           title="List in server browser"
-          description={
-            canList
-              ? "Lists the server on the SERVERS tab."
-              : "Only works with port forwarding."
-          }
+          description={canList ? undefined : "Only works with port forwarding."}
           checked={canList && draft.listed}
           disabled={!canList}
           onChange={(v) => update("listed", v)}
         />
         <SwitchRow
-          title="Cheats"
-          description="Starts the server with sv_cheats 1."
+          title="Cheats (sv_cheats)"
           checked={draft.cheats}
           onChange={(v) => update("cheats", v)}
         />
         <SwitchRow
           title="Hibernate when empty"
-          description="Stops simulating the game while no players are connected."
           checked={draft.hibernateWhenEmpty}
           onChange={(v) => update("hibernateWhenEmpty", v)}
         />
@@ -200,7 +190,7 @@ export default function SettingsTab({ server, actions }: { server: ServerSummary
           {save.error ? (
             <span className={ui.errorText}>{save.error}</span>
           ) : dirty ? (
-            live ? "Takes effect on restart." : "Unsaved changes"
+            live && "Takes effect on restart."
           ) : savedNote ? (
             <span className={ui.noteOk}>{live ? "Saved. Takes effect on restart." : "Saved."}</span>
           ) : null}

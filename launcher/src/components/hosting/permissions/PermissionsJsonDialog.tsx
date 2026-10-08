@@ -128,7 +128,7 @@ export default function PermissionsJsonDialog({ path, snapshot, source, onClose,
         <div style={{ height: "100%", display: "flex", flexDirection: "column", gap: 8 }}>
           <div className={ui.hint} style={{ marginTop: 0 }}>
             <span className={ui.mono}>{path}</span>
-            {readOnly && " · Read-only, written by Deadworks"}
+            {readOnly && " · Read-only"}
           </div>
           {conflict && (
             <div className={ui.warnBox} role="alert">
@@ -158,7 +158,6 @@ export default function PermissionsJsonDialog({ path, snapshot, source, onClose,
       {confirmDiscard && (
         <ConfirmDialog
           title="Discard changes?"
-          message={`Your unsaved changes to ${name} will be lost.`}
           confirmLabel="Discard"
           danger
           onConfirm={async () => onClose()}

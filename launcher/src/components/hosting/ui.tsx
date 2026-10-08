@@ -61,7 +61,7 @@ export function SwitchRow({
   disabled,
 }: {
   title: string;
-  description: ReactNode;
+  description?: ReactNode;
   checked: boolean;
   onChange: (next: boolean) => void;
   disabled?: boolean;
@@ -70,7 +70,7 @@ export function SwitchRow({
     <div className={ui.switchRow}>
       <div>
         <div className={ui.switchTitle}>{title}</div>
-        <div className={ui.switchDesc}>{description}</div>
+        {description && <div className={ui.switchDesc}>{description}</div>}
       </div>
       <Toggle checked={checked} onChange={onChange} disabled={disabled} label={title} />
     </div>
@@ -201,7 +201,7 @@ export function ConfirmDialog({
   onClose,
 }: {
   title: string;
-  message: ReactNode;
+  message?: ReactNode;
   confirmLabel: string;
   danger?: boolean;
   /** Rejections are shown in the dialog; success closes it. */
@@ -243,17 +243,17 @@ const NETWORK_CHOICES: { mode: NetworkMode; title: string; desc: string }[] = [
   {
     mode: "sdr",
     title: "SDR",
-    desc: "Routes traffic through Steam Datagram Relay. Requires no port forwarding. The address changes on every restart.",
+    desc: "Requires no port forwarding. The address changes on every restart.",
   },
   {
     mode: "port_forward",
     title: "Port forwarding",
-    desc: "Accepts direct connections on a fixed address. Requires a forwarded UDP port.",
+    desc: "Fixed address. Requires a forwarded UDP port.",
   },
   {
     mode: "lan",
     title: "LAN",
-    desc: "Accepts connections from the local network only.",
+    desc: "Local network only.",
   },
 ];
 

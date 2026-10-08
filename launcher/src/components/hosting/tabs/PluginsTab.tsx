@@ -167,7 +167,7 @@ export default function PluginsTab({ server, actions, dropActive }: PluginsTabPr
         <Loading />
       ) : library.length === 0 ? (
         <div className={cn(styles.list, styles.listEmpty)}>
-          No plugins. Drop <strong>.dll</strong> or <strong>.zip</strong> files here, or use Add plugins.
+          No plugins. Drop <strong>.dll</strong> or <strong>.zip</strong> files here.
         </div>
       ) : (
         <div className={styles.list}>
@@ -207,11 +207,6 @@ export default function PluginsTab({ server, actions, dropActive }: PluginsTabPr
         </div>
       )}
 
-      <div className={ui.hint} style={{ marginTop: 10 }}>
-        {running
-          ? "Plugins load and unload without a restart."
-          : "The library is shared by all servers. Plugins are enabled per server."}
-      </div>
 
       {dragging && (
         <div className={styles.dropOverlay}>

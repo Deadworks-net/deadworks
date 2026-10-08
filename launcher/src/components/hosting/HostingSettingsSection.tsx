@@ -149,9 +149,7 @@ export default function HostingSettingsSection() {
         title={updates.pending ? "Update ready" : "Automatic updates"}
         description={
           <>
-            {updates.pending
-              ? "Installs when all servers are stopped or empty."
-              : "Updates install automatically while no players are connected."}
+            {updates.pending && "Installs when all servers are stopped or empty."}
             {updates.lastCheck != null && ` Last checked ${formatTimestamp(updates.lastCheck)}.`}
           </>
         }
@@ -176,11 +174,7 @@ export default function HostingSettingsSection() {
       <div className={sw.sectionSubtitle}>Remove</div>
       <Row
         title="Uninstall hosting"
-        description={
-          anyLive
-            ? "Stop all servers first."
-            : "Deletes the game files, all servers and the plugin library."
-        }
+        description={anyLive ? "Stop all servers first." : null}
         control={
           <button
             className={sw.devBtn}

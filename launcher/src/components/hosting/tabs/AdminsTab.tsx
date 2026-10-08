@@ -218,11 +218,8 @@ export default function AdminsTab({ server, prefill, onPrefillUsed }: AdminsTabP
   const statusLine = (
     <div className={css.status}>
       <span>
-        {running
-          ? "Changes take effect immediately."
-          : "Changes take effect when the server starts."}
-        {!snapshot.started &&
-          " The files are created on first start. Until then, the default roles are shown."}
+        {running && "Changes take effect immediately."}
+        {!snapshot.started && "Default roles are shown until the first start."}
       </span>
       <button type="button" className={ui.linkBtn} onClick={reload}>
         Reload
@@ -325,7 +322,7 @@ export default function AdminsTab({ server, prefill, onPrefillUsed }: AdminsTabP
               setDialog({
                 kind: "confirm",
                 title: `Remove ${displayName(p)}?`,
-                body: "Removes all roles and permissions from this player. The default role still applies.",
+                body: "Removes all of this player's roles and permissions.",
                 action: "Remove",
                 run: () => act({ action: "player-remove", steamId: p.id }),
               })
@@ -591,7 +588,6 @@ function People({
       ) : (
         <div className={cn(styles.list, styles.listEmpty)}>
           <div className={css.emptyTitle}>No admins</div>
-          <p>All players have the default role only.</p>
           <div className={css.emptyActions}>{addButtons}</div>
         </div>
       )}
@@ -732,7 +728,7 @@ function Commands({
       <div className={cn(styles.list, styles.listEmpty)}>
         <div className={css.emptyTitle}>No commands yet</div>
         <p>
-          The command list is written when the server starts. Start the server once.
+          Start the server once to list commands.
         </p>
         <div className={css.emptyActions}>
           <button type="button" className={ui.btn} onClick={() => onJson(OVERRIDES_PATH)}>
@@ -1246,7 +1242,6 @@ function PlayerDialog({
             placeholder="Optional"
             maxLength={64}
           />
-          <div className={ui.hint}>A label for this entry. Not used to match players.</div>
         </div>
 
         <fieldset className={css.fieldset}>
@@ -1510,9 +1505,6 @@ function OverrideDialog({
             <option key={p} value={p} />
           ))}
         </datalist>
-      </div>
-      <div className={ui.hint}>
-        Saved to overrides.jsonc as <code className={css.grant}>{key}</code>.
       </div>
     </Modal>
   );

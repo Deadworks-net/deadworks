@@ -68,9 +68,6 @@ export default function AdvancedTab({ server, actions, onDuplicated, onDeleted }
           Add
         </button>
       </div>
-      <div className={ui.hint} style={{ marginTop: 0, marginBottom: 8 }}>
-        Set every time the server starts.
-      </div>
       <div className={styles.editTable}>
         {draft.cvars.length === 0 && <div className={ui.note}>None.</div>}
         {draft.cvars.map((c, i) => (
@@ -113,7 +110,7 @@ export default function AdvancedTab({ server, actions, onDuplicated, onDeleted }
         </button>
       </div>
       <div className={ui.hint} style={{ marginTop: 0, marginBottom: 8 }}>
-        Appended to the command line. One per row, e.g. <code className={styles.inlineCode}>-dev</code>.
+        One per row, e.g. <code className={styles.inlineCode}>-dev</code>.
       </div>
       <div className={styles.editTable}>
         {draft.launchArgs.length === 0 && <div className={ui.note}>None.</div>}
@@ -140,19 +137,13 @@ export default function AdvancedTab({ server, actions, onDuplicated, onDeleted }
       <div className={styles.subTitle} style={{ marginTop: 26 }}>Manage</div>
       <div className={styles.stack}>
         <div className={ui.rowSpread}>
-          <div>
-            <div className={ui.switchTitle}>Server folder</div>
-            <div className={ui.switchDesc}>Contains logs, configs and content.</div>
-          </div>
+          <div className={ui.switchTitle}>Server folder</div>
           <button className={ui.btn} onClick={() => misc.run(() => hosting.openFolder(id))}>
             Open folder
           </button>
         </div>
         <div className={ui.rowSpread}>
-          <div>
-            <div className={ui.switchTitle}>Duplicate</div>
-            <div className={ui.switchDesc}>Creates a new server with the same settings, plugins and content.</div>
-          </div>
+          <div className={ui.switchTitle}>Duplicate</div>
           <button
             className={ui.btn}
             disabled={misc.busy}
@@ -169,9 +160,7 @@ export default function AdvancedTab({ server, actions, onDuplicated, onDeleted }
         <div className={ui.rowSpread}>
           <div>
             <div className={ui.switchTitle}>Delete server</div>
-            <div className={ui.switchDesc}>
-              {stopped ? "Deletes the server's settings, logs and content." : "Only works while the server is stopped."}
-            </div>
+            {!stopped && <div className={ui.switchDesc}>Only works while the server is stopped.</div>}
           </div>
           <button
             className={cn(ui.btn, ui.btnDanger)}
@@ -189,10 +178,8 @@ export default function AdvancedTab({ server, actions, onDuplicated, onDeleted }
           <span className={styles.saveBarNote}>
             {save.error ? (
               <span className={ui.errorText}>{save.error}</span>
-            ) : live ? (
-              "Takes effect on restart."
             ) : (
-              "Unsaved changes"
+              live && "Takes effect on restart."
             )}
           </span>
           <button className={ui.btn} disabled={save.busy} onClick={reset}>
@@ -207,7 +194,7 @@ export default function AdvancedTab({ server, actions, onDuplicated, onDeleted }
       {confirmDelete && (
         <ConfirmDialog
           title={`Delete ${server.config.name}?`}
-          message="Deletes the server's settings, logs and content. The plugin library is kept. Cannot be undone."
+          message="Deletes the server's settings, logs and content. Cannot be undone."
           confirmLabel="Delete"
           danger
           onConfirm={async () => {

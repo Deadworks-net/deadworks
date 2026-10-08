@@ -14,13 +14,13 @@ const SECTIONS: { kind: Kind; title: string; empty: string; field: "contentAddon
   {
     kind: "addon",
     title: "Addons",
-    empty: "No addons. An addon is a VPK file that replaces models, sounds or UI.",
+    empty: "No addons.",
     field: "contentAddons",
   },
   {
     kind: "map",
     title: "Maps",
-    empty: "No custom maps. A map is a single VPK file.",
+    empty: "No custom maps.",
     field: "extraMaps",
   },
 ];
@@ -126,11 +126,9 @@ export default function ContentTab({ server, actions }: { server: ServerSummary;
         );
       })}
 
-      <div className={ui.hint} style={{ marginTop: 14 }}>
-        {isLive(server.runtime.state)
-          ? "Changes take effect on restart."
-          : "Enabled maps are added to the map list on the Settings tab."}
-      </div>
+      {isLive(server.runtime.state) && (
+        <div className={ui.hint} style={{ marginTop: 14 }}>Changes take effect on restart.</div>
+      )}
 
       {removing && (
         <ConfirmDialog

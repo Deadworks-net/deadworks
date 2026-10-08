@@ -255,8 +255,6 @@ function NetworkCard({ server, actions, running }: { server: ServerSummary; acti
           <span className={cn(styles.kvValue, ui.mono)}>
             {net.sdrId ?? <span className={ui.note}>Available once running</span>}
           </span>
-          <span />
-          <span className={ui.note}>Assigned by Steam Datagram Relay. Changes on every restart.</span>
         </div>
       )}
 
@@ -299,7 +297,7 @@ function NetworkCard({ server, actions, running }: { server: ServerSummary; acti
                     )
                   </>
                 ) : null}
-                . TCP is not required.
+                .
               </li>
               <li>Start the server and click Check.</li>
             </ol>
@@ -313,8 +311,6 @@ function NetworkCard({ server, actions, running }: { server: ServerSummary; acti
           <span className={cn(styles.kvValue, ui.mono)}>
             {lanIps ? lanIps.map((ip) => <div key={ip}>{`${ip}:${port}`}</div>) : <span className={ui.note}>No network found</span>}
           </span>
-          <span />
-          <span className={ui.note}>Reachable from the local network only.</span>
         </div>
       )}
     </div>
@@ -368,7 +364,6 @@ export default function OverviewTab({ server, actions, onMakeAdmin }: OverviewTa
       {kicking && (
         <ConfirmDialog
           title={`Kick ${kicking.name}?`}
-          message="Disconnects the player. The player can rejoin."
           confirmLabel="Kick"
           danger
           onConfirm={() => actions.kick(config.id, kicking.slot)}

@@ -133,7 +133,7 @@ export default function ConsoleTab({ server, log: con }: { server: ServerSummary
       <div className={styles.consoleInput}>
         <input
           className={cn(ui.input, ui.mono)}
-          placeholder={live ? "Command, e.g. status" : "Start the server to send commands"}
+          placeholder={live ? "Command" : "Start the server to send commands"}
           value={command}
           disabled={!live}
           onChange={(e) => {

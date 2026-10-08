@@ -183,7 +183,6 @@ export default function InstallScreen({ initial, onBack, onInstall }: InstallScr
     );
   }
 
-  const linux = check.platform === "linux";
   const driveName = drive ? driveLabel(drive.root, rules) : "";
   // The folder the backend suggests on a drive beats its bare root (on Linux, "/" isn't ours to write to).
   const suggestedDrive = driveFor(check.suggestedRoot, check.drives, rules);
@@ -228,10 +227,6 @@ export default function InstallScreen({ initial, onBack, onInstall }: InstallScr
       <div className={styles.scroll}>
         <div className={styles.form}>
           <h2 className={styles.formTitle}>Set up hosting</h2>
-          <p className={styles.formSubtitle}>
-            Installs the game files shared by all servers.
-            {linux && " On Linux, servers run under Wine."}
-          </p>
 
           {check.missingTools.length > 0 && (
             <div className={styles.section} style={{ display: "flex", flexDirection: "column", gap: 8 }}>
@@ -285,7 +280,7 @@ export default function InstallScreen({ initial, onBack, onInstall }: InstallScr
                 {check.clientGameDir && (
                   <div className={styles.detected}>
                     Copies the game from{" "}
-                    <span className={styles.detectedPath}>{check.clientGameDir}</span>. Skips mods and other files that are not part of the game.
+                    <span className={styles.detectedPath}>{check.clientGameDir}</span>.
                   </div>
                 )}
                 {clientUnavailable && (
@@ -306,7 +301,7 @@ export default function InstallScreen({ initial, onBack, onInstall }: InstallScr
                       >
                         <span className={ui.choiceTitle}>Full copy</span>
                         <span className={ui.choiceDesc}>
-                          Copies every file. Uses {formatBytes(fullSize)}.
+                          Uses {formatBytes(fullSize)}.
                         </span>
                       </button>
                       <button
@@ -317,7 +312,7 @@ export default function InstallScreen({ initial, onBack, onInstall }: InstallScr
                       >
                         <span className={ui.choiceTitle}>Hard link</span>
                         <span className={ui.choiceDesc}>
-                          Hard-links the files instead of copying them. Steam cannot update Deadlock while a server is running.
+                          Uses almost no space. Steam cannot update Deadlock while a server is running.
                         </span>
                       </button>
                     </div>
@@ -335,7 +330,7 @@ export default function InstallScreen({ initial, onBack, onInstall }: InstallScr
             ) : (
               <div className={styles.steamBox}>
                 <div className={styles.detected}>
-                  Downloads the game with SteamCMD. Requires a Steam account that owns Deadlock.
+                  Requires a Steam account that owns Deadlock.
                 </div>
                 <div className={styles.twoCol}>
                   <div className={ui.field}>
