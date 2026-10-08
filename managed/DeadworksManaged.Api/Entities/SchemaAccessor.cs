@@ -9,6 +9,7 @@ public sealed unsafe class SchemaAccessor<T> where T : unmanaged {
 	private volatile int _offset = -1;
 	private short _chainOffset;
 	private bool _networked;
+	private bool _networkingKnown;
 	private readonly byte[] _className;
 	private readonly byte[] _fieldName;
 	private readonly int _networkStateChangedOffset;
@@ -31,6 +32,7 @@ public sealed unsafe class SchemaAccessor<T> where T : unmanaged {
 			NativeInterop.GetSchemaField(cls, fld, &r);
 			_chainOffset = r.ChainOffset;
 			_networked = r.Networked != 0;
+			_networkingKnown = r.Networked != SchemaFieldResult.NetworkingUnknown;
 			_offset = r.Offset; // volatile write last - publishes all fields
 		}
 	}
@@ -55,7 +57,7 @@ public sealed unsafe class SchemaAccessor<T> where T : unmanaged {
 
 	/// <summary>Writes the field value to <paramref name="entity"/>, notifying the network state if the field is networked.</summary>
 	public void Set(nint entity, T value) {
-		if (_offset < 0) Resolve();
+		if (_offset < 0 || !_networkingKnown) Resolve();
 		*(T*)((byte*)entity + _offset) = value;
 		if (_networked)
 			NativeInterop.NotifyStateChanged((void*)entity, _offset, _chainOffset, _networkStateChangedOffset);
