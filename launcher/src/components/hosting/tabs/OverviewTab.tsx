@@ -353,10 +353,6 @@ export default function OverviewTab({ server, actions, onMakeAdmin }: OverviewTa
           onBan={setBanning}
           onMakeAdmin={onMakeAdmin}
         />
-        <div className={ui.hint}>
-          <code className={styles.inlineCode}>dw_bans</code> lists active bans.{" "}
-          <code className={styles.inlineCode}>dw_unban &lt;steamid&gt;</code> lifts one.
-        </div>
       </div>
 
       <NetworkCard server={server} actions={actions} running={running} />

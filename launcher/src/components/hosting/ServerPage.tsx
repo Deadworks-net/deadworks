@@ -61,7 +61,7 @@ interface ServerPageProps {
   server: ServerSummary;
   actions: HostingActions;
   holdReason: string | null;
-  /** Where the start, stop and copy controls go: the page toolbar, outside this card. */
+  /** Where the server controls go, in the toolbar beside the top-level tabs. */
   toolbarSlot: HTMLElement | null;
   /** The HOST tab is on screen (window-wide file drops go to the Plugins tab). */
   active: boolean;
@@ -69,15 +69,7 @@ interface ServerPageProps {
   onDeleted: () => void;
 }
 
-export default function ServerPage({
-  server,
-  actions,
-  holdReason,
-  toolbarSlot,
-  active,
-  onSelect,
-  onDeleted,
-}: ServerPageProps) {
+export default function ServerPage({ server, actions, holdReason, toolbarSlot, active, onSelect, onDeleted }: ServerPageProps) {
   const [tab, setTab] = useState<SubTab>(loadSubTab);
   /** A player picked with "Make admin" on the Overview tab, handed to the Admins tab once. */
   const [adminPrefill, setAdminPrefill] = useState<AdminPrefill | null>(null);

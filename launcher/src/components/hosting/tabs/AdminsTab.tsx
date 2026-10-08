@@ -214,11 +214,9 @@ export default function AdminsTab({ server, prefill, onPrefillUsed }: AdminsTabP
     </Suspense>
   );
 
-  const running = state === "running";
   const statusLine = (
     <div className={css.status}>
       <span>
-        {running && "Changes take effect immediately."}
         {!snapshot.started && "Default roles are shown until the first start."}
       </span>
       <button type="button" className={ui.linkBtn} onClick={reload}>

@@ -12,6 +12,15 @@ const FIELDS = ["cvars", "launchArgs"] as const;
 
 const hasSpace = (s: string) => /\s/.test(s);
 
+/** Stop returns before the process exits, and a live server can't be deleted. */
+async function waitUntilStopped(id: string) {
+  const deadline = Date.now() + 30_000;
+  while (isLive((await hosting.runtime(id)).state)) {
+    if (Date.now() > deadline) throw new Error("The server didn't stop. Try again.");
+    await new Promise((r) => setTimeout(r, 250));
+  }
+}
+
 function RemoveButton({ label, onClick }: { label: string; onClick: () => void }) {
   return (
     <button className={styles.iconBtn} onClick={onClick} aria-label={label} title={label}>
@@ -37,7 +46,6 @@ export default function AdvancedTab({ server, actions, onDuplicated, onDeleted }
   const save = useAction();
   const misc = useAction();
   const live = isLive(server.runtime.state);
-  const stopped = server.runtime.state === "stopped" || server.runtime.state === "crashed";
 
   const cvarErrors = draft.cvars.map((c) =>
     !c.key.trim() ? "Enter a name." : hasSpace(c.key.trim()) ? "Names can't contain spaces." : null
@@ -158,15 +166,8 @@ export default function AdvancedTab({ server, actions, onDuplicated, onDeleted }
           </button>
         </div>
         <div className={ui.rowSpread}>
-          <div>
-            <div className={ui.switchTitle}>Delete server</div>
-            {!stopped && <div className={ui.switchDesc}>Only works while the server is stopped.</div>}
-          </div>
-          <button
-            className={cn(ui.btn, ui.btnDanger)}
-            disabled={!stopped}
-            onClick={() => setConfirmDelete(true)}
-          >
+          <div className={ui.switchTitle}>Delete server</div>
+          <button className={cn(ui.btn, ui.btnDanger)} onClick={() => setConfirmDelete(true)}>
             Delete
           </button>
         </div>
@@ -194,10 +195,18 @@ export default function AdvancedTab({ server, actions, onDuplicated, onDeleted }
       {confirmDelete && (
         <ConfirmDialog
           title={`Delete ${server.config.name}?`}
-          message="Deletes the server's settings, logs and content. Cannot be undone."
+          message={
+            live
+              ? "Are you sure you want to delete this server? This will stop the server. Its settings, logs and content are deleted and can't be recovered."
+              : "Are you sure you want to delete this server? Its settings, logs and content are deleted and can't be recovered."
+          }
           confirmLabel="Delete"
           danger
           onConfirm={async () => {
+            if (live) {
+              await actions.stop(id);
+              await waitUntilStopped(id);
+            }
             await actions.deleteServer(id);
             onDeleted();
           }}
