@@ -3,9 +3,12 @@
 #include <schemasystem/schemasystem.h>
 #include <entity2/entityinstance.h>
 #include <entity2/entitynetwork.h>
+#include <entity2/entitysystem.h>
+#include <networksystem/inetworkserializer.h>
 
 #include <map>
 #include <string_view>
+#include <unordered_set>
 
 #include "../../Core/Deadworks.hpp"
 #include "../../Lib/Virtual.hpp"
@@ -68,6 +71,79 @@ static void InitSchemaKeyValueMap(SchemaClassInfoData_t *pClassInfo, SchemaKeyVa
         InitChainOffset(pClassInfo->m_pBaseClasses[0].m_pClass, keyValueMap);
 }
 
+// A database read with a stale SDK layout does not hold the class info it was reached through
+static bool ContainsClassInfo(const CNetworkSerializerCodeGenDatabase *pDatabase, const CNetworkSerializerClassInfo *pClassInfo) {
+    auto index = pDatabase->m_ClassInfos.Find(pClassInfo->m_pszClassName.Get());
+
+    return index != pDatabase->m_ClassInfos.InvalidIndex() && pDatabase->m_ClassInfos.Element(index) == pClassInfo;
+}
+
+// Deadlock 6711 removed MNetworkEnable from the schema. What a class networks is now only in the server's network
+// serializer database, which is reached through the serializer class info of any entity.
+static const CNetworkSerializerCodeGenDatabase *GetNetworkDatabase() {
+    static const CNetworkSerializerCodeGenDatabase *pDatabase = nullptr;
+    static bool warned = false;
+    if (pDatabase) return pDatabase;
+
+    auto *pSystem = GameEntitySystem();
+    if (!pSystem) return nullptr;
+
+    for (auto *pIdentity = pSystem->m_EntityList.m_pFirstActiveEntity; pIdentity; pIdentity = pIdentity->m_pNext) {
+        if (!pIdentity->m_pInstance) continue;
+
+        auto *pClassInfo = pIdentity->m_pInstance->GetSerializerClassInfo();
+        if (!pClassInfo) continue;
+
+        auto *pCandidate = pClassInfo->m_pDatabase;
+
+        if (!pCandidate || !ContainsClassInfo(pCandidate, pClassInfo)) {
+            if (!warned)
+                g_Log->Warning("GetNetworkDatabase(): the database of '{}' does not hold it, CNetworkSerializerClassInfo is out of date", pClassInfo->m_pszClassName.Get());
+            warned = true;
+            return nullptr;
+        }
+
+        pDatabase = pCandidate;
+        return pDatabase;
+    }
+
+    return nullptr;
+}
+
+static const std::unordered_set<uint32_t> *GetNetworkedFields(const char *className, uint32_t classKey) {
+    static std::map<uint32_t, std::unordered_set<uint32_t>> networkedFieldsMap;
+
+    if (networkedFieldsMap.contains(classKey))
+        return &networkedFieldsMap[classKey];
+
+    auto *pDatabase = GetNetworkDatabase();
+    if (!pDatabase) return nullptr;
+
+    auto &networkedFields = networkedFieldsMap[classKey];
+
+    auto index = pDatabase->m_ClassInfos.Find(className);
+    if (index == pDatabase->m_ClassInfos.InvalidIndex())
+        return &networkedFields;
+
+    auto *pClassInfo = pDatabase->m_ClassInfos.Element(index);
+
+    for (auto i = 0; i < pClassInfo->m_Fields.Count(); i++)
+        networkedFields.insert(hash_32_fnv1a_const(pClassInfo->m_Fields[i]->m_pszFieldName.Get()));
+
+    return &networkedFields;
+}
+
+static schema::FieldNetworking GetFieldNetworking(const char *className, uint32_t classKey, uint32_t memberKey, bool schemaNetworked) {
+    if (schemaNetworked)
+        return schema::FieldNetworking::Yes;
+
+    auto *pNetworkedFields = GetNetworkedFields(className, classKey);
+    if (!pNetworkedFields)
+        return schema::FieldNetworking::Unknown;
+
+    return pNetworkedFields->contains(memberKey) ? schema::FieldNetworking::Yes : schema::FieldNetworking::No;
+}
+
 static bool InitSchemaFieldsForClass(SchemaTableMap_t &tableMap, const char *className, uint32_t classKey) {
     auto *pType = g_pSchemaSystem->FindTypeScopeForModule("server.dll");
     if (!pType) return false;
@@ -124,8 +200,27 @@ SchemaKey GetOffset(const char *className, uint32_t classKey, const char *member
         return {0, 0};
     }
 
-    return tableMap[memberKey];
+    // Callers keep the key, so a field whose networking is not known yet counts as networked
+    auto key = tableMap[memberKey];
+    key.Networked = GetFieldNetworking(className, classKey, memberKey, key.Networked) != FieldNetworking::No;
+
+    return key;
 }
+
+FieldNetworking FieldNetworked(const char *className, uint32_t classKey, uint32_t memberKey) {
+    auto &schemaTableMap = TableMap();
+
+    if (!schemaTableMap.contains(classKey) && !InitSchemaFieldsForClass(schemaTableMap, className, classKey))
+        return FieldNetworking::No;
+
+    auto &tableMap = schemaTableMap[classKey];
+
+    if (!tableMap.contains(memberKey))
+        return FieldNetworking::No;
+
+    return GetFieldNetworking(className, classKey, memberKey, tableMap[memberKey].Networked);
+}
+
 int GetClassSize(const char *className) {
     auto *pType = g_pSchemaSystem->FindTypeScopeForModule("server.dll");
     if (!pType) return 0;
