@@ -1,5 +1,5 @@
 // Deadworks' permission files (game/bin/win64/configs/permissions/) and the rules it applies to them,
-// mirrored from managed/Permissions/*.cs so the Admins tab can show who can run what without asking the
+// mirrored from managed/Permissions/*.cs so the Permissions tab can show who can run what without asking the
 // server. A TypeScript port of deadworks-web's app/hosting/permissions.js; keep the two in step.
 //
 // The tab must never show less access than the server grants, so the files are read exactly the way
@@ -822,7 +822,7 @@ const cleanList = (list: unknown, label: string, check: (value: string) => boole
 };
 const ROLE_NAME = /^[a-z0-9_-]{1,40}$/;
 
-/** One change from the Admins tab. */
+/** One change from the Permissions tab. */
 export type PermissionChange =
   | {
       action: "player-save";
@@ -867,7 +867,7 @@ export type PlannedChange =
   /** A file-save whose base is stale: nothing to write, `contents` is the file as it is now. */
   | { files: Record<string, never>; audit: null; conflict: true; contents: string | null };
 
-// One change from the Admins tab, applied to the files as they are now. Returns the files to write
+// One change from the Permissions tab, applied to the files as they are now. Returns the files to write
 // and a line for the audit log.
 //
 // Unlike deadworks-web, players.jsonc is only read by the changes that use it: there the Files tab

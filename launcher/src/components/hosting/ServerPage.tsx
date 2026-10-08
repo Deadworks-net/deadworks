@@ -9,14 +9,14 @@ import ServerControls from "./ServerControls";
 import OverviewTab from "./tabs/OverviewTab";
 import ConsoleTab, { ConsoleLog } from "./tabs/ConsoleTab";
 import PluginsTab from "./tabs/PluginsTab";
-import AdminsTab, { type AdminPrefill } from "./tabs/AdminsTab";
+import PermissionsTab, { type AdminPrefill } from "./tabs/PermissionsTab";
 import SettingsTab from "./tabs/SettingsTab";
 import ContentTab from "./tabs/ContentTab";
 import AdvancedTab from "./tabs/AdvancedTab";
 import ui from "./ui.module.css";
 import styles from "./ServerPage.module.css";
 
-const SUB_TABS = ["overview", "console", "plugins", "admins", "settings", "content", "advanced"] as const;
+const SUB_TABS = ["overview", "console", "plugins", "permissions", "settings", "content", "advanced"] as const;
 export type SubTab = (typeof SUB_TABS)[number];
 const SUB_TAB_KEY = "deadworks.hosting.subTab";
 
@@ -79,7 +79,7 @@ export default function ServerPage({
   onDeleted,
 }: ServerPageProps) {
   const [tab, setTab] = useState<SubTab>(loadSubTab);
-  /** A player picked with "Make admin" on the Overview tab, handed to the Admins tab once. */
+  /** A player picked with "Make admin" on the Overview tab, handed to the Permissions tab once. */
   const [adminPrefill, setAdminPrefill] = useState<AdminPrefill | null>(null);
   const clearAdminPrefill = useCallback(() => setAdminPrefill(null), []);
   const log = useConsole(server.config.id);
@@ -123,13 +123,13 @@ export default function ServerPage({
               actions={actions}
               onMakeAdmin={(player) => {
                 setAdminPrefill({ steamId: player.steamId64, name: player.name });
-                changeTab("admins");
+                changeTab("permissions");
               }}
             />
           )}
           {tab === "plugins" && <PluginsTab key={id} server={server} actions={actions} dropActive={active} />}
-          {tab === "admins" && (
-            <AdminsTab key={id} server={server} prefill={adminPrefill} onPrefillUsed={clearAdminPrefill} />
+          {tab === "permissions" && (
+            <PermissionsTab key={id} server={server} prefill={adminPrefill} onPrefillUsed={clearAdminPrefill} />
           )}
           {tab === "settings" && <SettingsTab key={id} server={server} actions={actions} />}
           {tab === "content" && <ContentTab key={id} server={server} actions={actions} />}

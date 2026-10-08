@@ -43,7 +43,7 @@ import {
 import { localSource, type ActResult, type AdminsSnapshot } from "../permissions/source";
 import ui from "../ui.module.css";
 import styles from "./tabs.module.css";
-import css from "./AdminsTab.module.css";
+import css from "./PermissionsTab.module.css";
 
 // CodeMirror is most of the bundle; load it only when someone opens a file.
 const PermissionsJsonDialog = lazy(() => import("../permissions/PermissionsJsonDialog"));
@@ -54,7 +54,7 @@ export interface AdminPrefill {
   name: string;
 }
 
-interface AdminsTabProps {
+interface PermissionsTabProps {
   server: ServerSummary;
   /** Opens the add dialog (or the player's row, when already listed) once the files are read. */
   prefill: AdminPrefill | null;
@@ -103,7 +103,7 @@ class ViewBoundary extends Component<
   }
 }
 
-export default function AdminsTab({ server, prefill, onPrefillUsed }: AdminsTabProps) {
+export default function PermissionsTab({ server, prefill, onPrefillUsed }: PermissionsTabProps) {
   const id = server.config.id;
   const state = server.runtime.state;
   const source = useMemo(() => localSource(id), [id]);

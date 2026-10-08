@@ -1,4 +1,4 @@
-/* Admins tab. Buttons, inputs, tables and modals come from ui.module.css; this file holds what is
+/* Permissions tab. Buttons, inputs, tables and modals come from ui.module.css; this file holds what is
    particular to permissions. Overrides of shared classes are written as element.class so they win
    whatever order the stylesheets load in. */
 

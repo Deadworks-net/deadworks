@@ -1,4 +1,4 @@
-// The Admins tab's data source for a local server: the permission files on disk, read and written
+// The Permissions tab's data source for a local server: the permission files on disk, read and written
 // through the backend. The files stay the source of truth, so grants made in game with dw_role_grant
 // and hand edits show up as they are.
 
