@@ -25,7 +25,7 @@ serde = { version = "1", features = ["derive"] }
 serde_json = "1"
 open = "5"
 tauri-plugin-store = "2.4.2"
-reqwest = { version = "0.12", features = ["stream", "json"] }
+reqwest = { version = "0.12", features = ["stream", "json", "blocking"] }
 tokio = { version = "1", features = ["fs", "io-util", "sync", "time"] }
 futures-util = "0.3"
 bzip2 = "0.5"
@@ -37,6 +37,10 @@ uuid = { version = "1", features = ["v4"] }
 tiny_http = "0.12"
 flate2 = "1"
 crc32fast = "1"
+# Local server hosting (src/hosting): release/.NET/plugin archives, and the
+# SHA1s Steam's depot manifests carry for every shipped file.
+zip = { version = "2", default-features = false, features = ["deflate"] }
+sha1 = "0.10"
 
 [dev-dependencies]
 # Decodes the PNGs local_api synthesises, so the tests check them with a real
@@ -46,6 +50,28 @@ image = { version = "0.25", default-features = false, features = ["png"] }
 
 [target.'cfg(windows)'.dependencies]
 winreg = "0.55"
+# SteamCMD runs under a pseudo console: with its stdout on a pipe it buffers
+# its prompts ("password:", "Steam Guard code:") and waits forever.
+portable-pty = "0.9"
+windows-sys = { version = "0.59", features = [
+    "Win32_Foundation",
+    "Win32_Security",
+    "Win32_Storage_FileSystem",
+    "Win32_System_Console",
+    "Win32_System_JobObjects",
+    "Win32_System_Pipes",
+    "Win32_System_ProcessStatus",
+    "Win32_System_SystemInformation",
+    "Win32_System_Threading",
+    "Win32_NetworkManagement_IpHelper",
+    "Win32_NetworkManagement_Ndis",
+    "Win32_Networking_WinSock",
+    "Win32_UI_Shell",
+] }
+
+# Free disk space (statvfs) for the hosting setup screen on Linux.
+[target.'cfg(unix)'.dependencies]
+libc = "0.2"
 
 [target.'cfg(any(target_os = "macos", windows, target_os = "linux"))'.dependencies]
 tauri-plugin-autostart = "2.5.1"

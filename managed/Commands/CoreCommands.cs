@@ -135,6 +135,17 @@ internal sealed class CoreCommands : DeadworksPluginBase
             caller.PrintToConsole("  (none)");
     }
 
+    // One line, whatever it holds: the launcher types this into the server console and reads the reply from the log.
+    // It passes a token and only believes a line that carries it, so nothing a player gets into the log can pose
+    // as the reply.
+    [Command("host_status", Description = "Print server and player status as one DWHOST [token] {json} line for the launcher: host_status [fromSlot] [token]", Permission = "deadworks.host.status", ConsoleOnly = true)]
+    public void HostStatus(Caller caller, int fromSlot = 0, string token = "")
+    {
+        if (!HostStatusFormatter.IsValidToken(token))
+            throw new CommandException($"The token must be letters and digits, {HostStatusFormatter.MaxTokenLength} at most.");
+        caller.PrintToConsole(DeadworksManaged.HostStatus.Line(fromSlot, token));
+    }
+
     private static void ListPluginCommands(Caller caller, string pluginName)
     {
         var normalizedPath = PluginLoader.ResolvePluginPath(pluginName);

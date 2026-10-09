@@ -223,9 +223,14 @@
   transition: all 0.15s;
 }
 
-.devBtn:hover {
+.devBtn:hover:not(:disabled) {
   border-color: var(--accent);
   color: var(--accent);
+}
+
+.devBtn:disabled {
+  opacity: 0.45;
+  cursor: default;
 }
 
 /* Toggle switch */

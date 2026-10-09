@@ -6,3 +6,11 @@
   bottom: 0;
   overflow-y: auto;
 }
+
+.pane {
+  height: 100%;
+}
+
+.paneHidden {
+  display: none;
+}
