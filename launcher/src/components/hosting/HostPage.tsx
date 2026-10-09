@@ -29,7 +29,7 @@ export default function HostPage({ nav, active }: HostPageProps) {
   const [lastInstall, setLastInstall] = useState<InstallDraft | null>(null);
   const [selectedId, setSelectedId] = useState<string | null>(() => readLocal(SELECTED_KEY));
   const [creating, setCreating] = useState(false);
-  /** The right end of the toolbar, which the selected server's controls render into. */
+  /** The right end of the toolbar; the selected server's controls render into it. */
   const [toolbarSlot, setToolbarSlot] = useState<HTMLDivElement | null>(null);
 
   const select = (id: string) => {

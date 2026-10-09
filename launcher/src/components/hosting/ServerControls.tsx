@@ -7,7 +7,7 @@ import { ErrorNote, useAction } from "./ui";
 import ui from "./ui.module.css";
 import styles from "./ServerPage.module.css";
 
-/** The toolbar is on screen while streaming; don't show the password in plain text. */
+/** The header is on screen while streaming; don't show the password in plain text. */
 function maskPassword(command: string): string {
   return command.replace(/password "[^"]*"/, 'password "••••"');
 }
@@ -27,7 +27,7 @@ const ICONS: Record<Control, ReactNode> = {
 
 function Icon({ name }: { name: Control }) {
   return (
-    <svg width="16" height="16" viewBox="0 0 24 24" aria-hidden>
+    <svg width="14" height="14" viewBox="0 0 24 24" aria-hidden>
       {ICONS[name]}
     </svg>
   );
@@ -38,11 +38,10 @@ interface ServerControlsProps {
   actions: HostingActions;
   /** Set while updates are held back; starting would fail anyway. */
   holdReason: string | null;
-  /** Where the buttons render: the page toolbar, outside the server's card. */
+  /** The controls render here, beside the top-level tabs. The rail already shows the name and state. */
   toolbarSlot: HTMLElement | null;
 }
 
-/** Start, stop, restart and copy for one server. The buttons go in the toolbar; a failure shows in the card. */
 export default function ServerControls({ server, actions, holdReason, toolbarSlot }: ServerControlsProps) {
   const { id } = server.config;
   const { state, network } = server.runtime;
@@ -58,7 +57,8 @@ export default function ServerControls({ server, actions, holdReason, toolbarSlo
   }, [copied]);
 
   const canStart = (state === "stopped" || state === "crashed") && !holdReason;
-  const canStop = state === "running" || state === "starting";
+  /** Once a stop is asked for, only Start is shown. */
+  const up = state === "running" || state === "starting";
   const canRestart = state === "running";
   const running = state === "running";
   const startBlocked =
@@ -69,9 +69,7 @@ export default function ServerControls({ server, actions, holdReason, toolbarSlo
         : holdReason;
   const copyHint = network.connectCommand
     ? `${maskPassword(network.connectCommand)}\nRun in the game's developer console (F7).`
-    : state === "starting"
-      ? "Getting address..."
-      : "Server isn't running";
+    : "Getting address...";
 
   const doControl = (which: Control) => {
     setLastControl(which);
@@ -86,70 +84,76 @@ export default function ServerControls({ server, actions, holdReason, toolbarSlo
       await actions.markShared(id);
     });
 
-  const buttons = (
-    <div className={styles.controls}>
-      {copied ? (
-        <span className={ui.noteOk}>Copied</span>
-      ) : (
-        network.sdrIdChanged && <span className={cn(ui.pill, ui.pillWarn)}>Address changed</span>
-      )}
-      {state === "stopped" || state === "crashed" || state === "waiting_for_deadworks" || state === "updating" ? (
-        <button
-          className={ui.btnPrimary}
-          disabled={!canStart || control.busy}
-          title={startBlocked ?? undefined}
-          onClick={() => doControl("start")}
-        >
-          <Icon name={state === "crashed" ? "restart" : "start"} />
-          {state === "crashed" ? "Restart" : "Start"}
-        </button>
-      ) : (
-        <>
-          <button
-            className={cn(ui.btn, styles.iconControl, styles.stopControl)}
-            disabled={!canStop || control.busy}
-            aria-label="Stop"
-            title="Stop"
-            onClick={() => doControl("stop")}
-          >
-            <Icon name="stop" />
-          </button>
-          <button
-            className={cn(ui.btn, styles.iconControl)}
-            disabled={!canRestart || control.busy}
-            aria-label="Restart"
-            title="Restart"
-            onClick={() => doControl("restart")}
-          >
-            <Icon name="restart" />
-          </button>
-        </>
-      )}
-      <button
-        className={running ? ui.btnPrimary : ui.btn}
-        disabled={!network.connectCommand || copy.busy}
-        title={copyHint}
-        onClick={copyConnect}
-      >
-        Copy connect command
-      </button>
-    </div>
-  );
-
-  const error = control.error ? (
-    <ErrorNote
-      message={control.error}
-      actionLabel="Try again"
-      onAction={() => lastControl && doControl(lastControl)}
-    />
-  ) : (
-    copy.error && <ErrorNote message={`Couldn't copy: ${copy.error}`} actionLabel="Try again" onAction={copyConnect} />
-  );
-
   return (
     <>
-      {toolbarSlot && createPortal(buttons, toolbarSlot)}
-      {error && <div className={styles.controlError}>{error}</div>}
+      {toolbarSlot &&
+        createPortal(
+          <div className={styles.controls}>
+            {network.sdrIdChanged && (
+              <span className={cn(ui.pill, ui.pillWarn)}>Address changed</span>
+            )}
+            {copied && <span className={ui.noteOk}>Copied</span>}
+            {!up ? (
+              <button
+                className={ui.btnPrimary}
+                disabled={!canStart || control.busy}
+                title={startBlocked ?? undefined}
+                onClick={() => doControl("start")}
+              >
+                <Icon name={state === "crashed" ? "restart" : "start"} />
+                {state === "crashed" ? "Restart" : "Start"}
+              </button>
+            ) : (
+              <>
+                <button
+                  className={cn(ui.btn, styles.iconControl, styles.stopControl)}
+                  disabled={control.busy}
+                  aria-label="Stop"
+                  title="Stop"
+                  onClick={() => doControl("stop")}
+                >
+                  <Icon name="stop" />
+                </button>
+                <button
+                  className={cn(ui.btn, styles.iconControl)}
+                  disabled={!canRestart || control.busy}
+                  aria-label="Restart"
+                  title="Restart"
+                  onClick={() => doControl("restart")}
+                >
+                  <Icon name="restart" />
+                </button>
+              </>
+            )}
+            {up && (
+              <button
+                className={running ? ui.btnPrimary : ui.btn}
+                disabled={!network.connectCommand || copy.busy}
+                title={copyHint}
+                onClick={copyConnect}
+              >
+                Copy connect command
+              </button>
+            )}
+          </div>,
+          toolbarSlot,
+        )}
+
+      {(control.error || copy.error) && (
+        <div className={styles.header}>
+          {control.error ? (
+            <ErrorNote
+              message={control.error}
+              actionLabel="Try again"
+              onAction={() => lastControl && doControl(lastControl)}
+            />
+          ) : (
+            copy.error && (
+              <ErrorNote message={`Couldn't copy: ${copy.error}`} actionLabel="Try again" onAction={copyConnect} />
+            )
+          )}
+        </div>
+      )}
     </>
   );
 }

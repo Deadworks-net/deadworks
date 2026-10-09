@@ -252,11 +252,9 @@ export default function PermissionsTab({ server, prefill, onPrefillUsed }: Permi
     </Suspense>
   );
 
-  const running = state === "running";
   const statusLine = (
     <div className={css.status}>
       <span>
-        {running && "Changes take effect immediately."}
         {!snapshot.started && "Default roles are shown until the first start."}
       </span>
       <button

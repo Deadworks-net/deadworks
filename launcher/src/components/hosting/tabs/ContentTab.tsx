@@ -25,12 +25,30 @@ const SECTIONS: { kind: Kind; title: string; empty: string; field: "contentAddon
   },
 ];
 
+/** Servers with content changes the running process hasn't loaded; outlives switching tabs. */
+const pendingRestart = new Set<string>();
+
 export default function ContentTab({ server, actions }: { server: ServerSummary; actions: HostingActions }) {
   const { id } = server.config;
   const [files, setFiles] = useState<ContentFile[] | null>(null);
   const [loadError, setLoadError] = useState<string | null>(null);
   const [removing, setRemoving] = useState<ContentFile | null>(null);
   const change = useAction();
+  const { state } = server.runtime;
+  const [needsRestart, setNeedsRestart] = useState(() => pendingRestart.has(id));
+
+  // Any stop or restart loads the current content.
+  useEffect(() => {
+    if (state === "running" || state === "starting") return;
+    pendingRestart.delete(id);
+    setNeedsRestart(false);
+  }, [id, state]);
+
+  const changed = () => {
+    if (!isLive(state)) return;
+    pendingRestart.add(id);
+    setNeedsRestart(true);
+  };
 
   const load = useCallback(async () => {
     try {
@@ -60,6 +78,7 @@ export default function ContentTab({ server, actions }: { server: ServerSummary;
       const current = server.config[field];
       const next = [...current, ...added.map((f) => f.fileName).filter((n) => !current.includes(n))];
       if (next.length !== current.length) await actions.updateServer({ ...server.config, [field]: next });
+      changed();
     });
   };
 
@@ -67,7 +86,10 @@ export default function ContentTab({ server, actions }: { server: ServerSummary;
     const field = file.kind === "map" ? "extraMaps" : "contentAddons";
     const current = server.config[field];
     const next = enabled ? [...current, file.fileName] : current.filter((n) => n !== file.fileName);
-    change.run(() => actions.updateServer({ ...server.config, [field]: next }));
+    change.run(async () => {
+      await actions.updateServer({ ...server.config, [field]: next });
+      changed();
+    });
   };
 
   if (loadError && !files) {
@@ -126,8 +148,8 @@ export default function ContentTab({ server, actions }: { server: ServerSummary;
         );
       })}
 
-      {isLive(server.runtime.state) && (
-        <div className={ui.hint} style={{ marginTop: 14 }}>Changes take effect on restart.</div>
+      {needsRestart && (
+        <div className={ui.hint} style={{ marginTop: 14 }}>Server needs a restart.</div>
       )}
 
       {removing && (
@@ -140,6 +162,7 @@ export default function ContentTab({ server, actions }: { server: ServerSummary;
             await hosting.removeContent(id, removing.fileName);
             await load();
             await actions.reload();
+            changed();
           }}
           onClose={() => setRemoving(null)}
         />
