@@ -26,7 +26,7 @@ use std::sync::{Arc, Mutex, OnceLock};
 
 use tauri::{AppHandle, Listener};
 
-use crate::addons::{self, DownloadProgress};
+use crate::addons::{self, DownloadProgress, Strictness};
 
 /// Ports tried in order; the client probes the whole range in parallel, so any
 /// one of them works and a busy port is never fatal.
@@ -69,6 +69,25 @@ struct Snapshot {
     files_total: u8,
     total_mib: u16,
     err: u8,
+    /// `note::*` bits about a job that finished; see `/dwl/note.png`.
+    notes: u8,
+}
+
+/// Things worth telling the player about a join that succeeded.
+mod note {
+    /// The server runs more content than it could list, so some of it was not installed.
+    pub const INCOMPLETE: u8 = 1;
+}
+
+/// The reply to `/dwl/note.png?j=<seq>`: the finished job's notes. A route of its own rather
+/// than another status slot, because a launcher from before it existed answers every unknown
+/// slot with the download size, and that must not be read as a note. Such a launcher has no
+/// such route at all, and a missing image is how the game knows there is nothing to say.
+fn note_png(seq: Option<u8>) -> Vec<u8> {
+    let j = job().lock().unwrap();
+    let notes = if seq == Some(j.seq) && j.snap.state == state::READY { j.snap.notes } else { 0 };
+    drop(j);
+    units_png(notes, 0)
 }
 
 #[derive(Default)]
@@ -146,6 +165,19 @@ fn set_plan(seq: u8, sizes: &[u64]) {
 }
 
 /// Fold one progress event into the single percentage the game draws.
+/// How much of an item's `size` share of the bar its download has filled. Scaled
+/// by the fraction downloaded rather than counted in raw bytes, because the plan
+/// may weight an item by the uncompressed size its server advertised while the
+/// download is the smaller compressed file. Without a known total, fall back to
+/// raw bytes.
+fn download_share(p: &DownloadProgress, size: u64) -> u64 {
+    if p.total_bytes == 0 {
+        return p.bytes_downloaded.min(size);
+    }
+    let fraction = p.bytes_downloaded.min(p.total_bytes) as u128;
+    (size as u128 * fraction / p.total_bytes as u128) as u64
+}
+
 fn fold_progress(seq: u8, p: &DownloadProgress) {
     let mut j = job().lock().unwrap();
     if j.seq != seq || j.plan.prefix.is_empty() {
@@ -159,8 +191,8 @@ fn fold_progress(seq: u8, p: &DownloadProgress) {
     // against a fake "compressed * 3" hint, so it is pinned at the item's end
     // rather than allowed to run the bar backwards.
     let (done, st) = match p.status.as_str() {
-        "downloading" => (before + p.bytes_downloaded.min(size), state::DOWNLOADING),
-        "decompressing" | "ready" => (before + size, state::INSTALLING),
+        "downloading" => (before.saturating_add(download_share(p, size)), state::DOWNLOADING),
+        "decompressing" | "ready" => (before.saturating_add(size), state::INSTALLING),
         "checking" => (before, state::DOWNLOADING),
         _ => (before, state::RESOLVING),
     };
@@ -459,6 +491,35 @@ fn from_browser(req: &tiny_http::Request) -> bool {
     })
 }
 
+/// Whether a `Host` header names this machine by a loopback address. A web page can reach the
+/// bridge through any DNS name that resolves to 127.0.0.1, and for such a name a browser sends
+/// none of the headers `from_browser` looks for. The in-game browser always uses the literal
+/// address, so anything else is not it.
+fn loopback_host(value: &str) -> bool {
+    let value = value.trim();
+    let host = match value.rsplit_once(':') {
+        Some((host, port)) if !port.is_empty() && port.bytes().all(|b| b.is_ascii_digit()) => host,
+        _ => value,
+    };
+    host == "127.0.0.1" || host == "[::1]" || host.eq_ignore_ascii_case("localhost")
+}
+
+fn addressed_to_loopback(req: &tiny_http::Request) -> bool {
+    req.headers()
+        .iter()
+        .filter(|h| h.field.as_str().as_str().eq_ignore_ascii_case("host"))
+        .all(|h| loopback_host(h.value.as_str()))
+}
+
+/// A content download of our own that a hostile host redirected here. Following it would let
+/// any server start installs on the player's machine by naming this bridge as its download.
+fn from_launcher_download(req: &tiny_http::Request) -> bool {
+    req.headers().iter().any(|h| {
+        h.field.as_str().as_str().eq_ignore_ascii_case("user-agent")
+            && h.value.as_str().starts_with("deadworks-launcher/")
+    })
+}
+
 fn respond(req: tiny_http::Request, png: Vec<u8>) {
     let mut resp = tiny_http::Response::from_data(png);
     for (k, v) in [
@@ -475,7 +536,7 @@ fn respond(req: tiny_http::Request, png: Vec<u8>) {
 }
 
 fn handle(app: &AppHandle, req: tiny_http::Request) {
-    if from_browser(&req) {
+    if from_browser(&req) || from_launcher_download(&req) || !addressed_to_loopback(&req) {
         let _ = req.respond(tiny_http::Response::empty(403));
         return;
     }
@@ -485,7 +546,13 @@ fn handle(app: &AppHandle, req: tiny_http::Request) {
         "/dwl/hello.png" => respond(req, units_png(PROTO_VERSION, HELLO_MAGIC)),
         "/dwl/prep.png" => match parse_addr(&url) {
             Some(addr) => {
-                let seq = start_job(app.clone(), addr);
+                // `any=1` is the player answering the content-mismatch prompt. Absent on
+                // every older addon, which is exactly the strict behaviour they expect.
+                let strictness = match query(&url, "any") {
+                    Some("1") => Strictness::AcceptMismatch,
+                    _ => Strictness::Exact,
+                };
+                let seq = start_job(app.clone(), addr, strictness);
                 respond(req, units_png(1, seq));
             }
             None => respond(req, units_png(2, 0)),
@@ -509,6 +576,7 @@ fn handle(app: &AppHandle, req: tiny_http::Request) {
             };
             respond(req, png);
         }
+        "/dwl/note.png" => respond(req, note_png(query(&url, "j").and_then(|s| s.parse().ok()))),
         "/dwl/cancel.png" => {
             let seq: Option<u8> = query(&url, "j").and_then(|s| s.parse().ok());
             let mut j = job().lock().unwrap();
@@ -592,7 +660,7 @@ fn handle(app: &AppHandle, req: tiny_http::Request) {
 
 /// Supersede any running job and start preparing `addr`. Returns the new
 /// sequence number, which the client quotes on every later poll.
-fn start_job(app: AppHandle, addr: String) -> u8 {
+fn start_job(app: AppHandle, addr: String, strictness: Strictness) -> u8 {
     let (seq, cancel) = {
         let mut j = job().lock().unwrap();
         // Tell the outgoing job to stop; it can no longer publish anyway,
@@ -623,15 +691,17 @@ fn start_job(app: AppHandle, addr: String) -> u8 {
             PROGRESS_EVENT,
             cancel,
             &|sizes: &[u64]| set_plan(seq, sizes),
+            strictness,
         )
         .await;
         app.unlisten(listener);
 
         match result {
-            Ok(()) => publish(seq, |s| {
+            Ok(installed) => publish(seq, |s| {
                 s.state = state::READY;
                 s.pct63 = 63;
                 s.files_done = s.files_total;
+                s.notes = if installed.incomplete { note::INCOMPLETE } else { 0 };
             }),
             Err(msg) if msg == addons::CANCELLED_MSG => {
                 publish(seq, |s| s.state = state::CANCELLED);
@@ -845,12 +915,41 @@ mod tests {
     }
 
     #[test]
+    fn only_a_loopback_host_header_is_served() {
+        for ok in ["127.0.0.1:47800", "127.0.0.1", "localhost:47801", "LOCALHOST", "[::1]:47800", " 127.0.0.1:47803 "] {
+            assert!(loopback_host(ok), "{ok}");
+        }
+        for bad in ["lvh.me:47800", "127.0.0.1.nip.io:47800", "localtest.me", "127.0.0.1.evil.example", "evil.example:47800", "127.0.0.2:47800", "", "127.0.0.1:x", "localhost.evil.example"] {
+            assert!(!loopback_host(bad), "{bad}");
+        }
+    }
+
+    #[test]
     fn total_mib_survives_the_two_unit_split() {
         for mib in [0u16, 1, 63, 64, 500, 4095] {
             let (lo, hi) = ((mib & 63) as u8, (mib >> 6) as u8);
             assert_eq!(lo as u16 | ((hi as u16) << 6), mib);
             assert!(hi <= 63);
         }
+    }
+
+    #[test]
+    fn a_download_fills_its_share_by_fraction_whatever_the_units() {
+        let progress = |done: u64, total: u64| DownloadProgress {
+            name: String::new(),
+            status: "downloading".into(),
+            bytes_downloaded: done,
+            total_bytes: total,
+            item_index: 0,
+            total_items: 1,
+        };
+        // Weighted by a 1000-byte uncompressed size, downloading a 300-byte file.
+        assert_eq!(download_share(&progress(150, 300), 1000), 500);
+        assert_eq!(download_share(&progress(300, 300), 1000), 1000);
+        assert_eq!(download_share(&progress(400, 300), 1000), 1000, "overshoot clamps");
+        // With no Content-Length, raw bytes, capped at the share.
+        assert_eq!(download_share(&progress(150, 0), 1000), 150);
+        assert_eq!(download_share(&progress(5000, 0), 1000), 1000);
     }
 
     #[test]
@@ -968,6 +1067,7 @@ mod tests {
                             },
                         );
                     }
+                    "/dwl/note.png" => respond(req, note_png(query(&url, "j").and_then(|s| s.parse().ok()))),
                     "/dwl/cancel.png" => {
                         let seq: Option<u8> = query(&url, "j").and_then(|s| s.parse().ok());
                         let mut j = job().lock().unwrap();
@@ -1138,9 +1238,20 @@ mod tests {
                 files_total: 5,
                 total_mib: 1234,
                 err: 0,
+                notes: note::INCOMPLETE,
             };
             j.seq
         };
+
+        // A note is only about a job that finished.
+        let (_, png) = get(port, &format!("/dwl/note.png?j={}", seq), "");
+        assert_eq!(dims(&png), (unit_dim(0), unit_dim(0)), "no note while the job is still running");
+        job().lock().unwrap().snap.state = state::READY;
+        let (_, png) = get(port, &format!("/dwl/note.png?j={}", seq), "");
+        assert_eq!(dims(&png), (unit_dim(note::INCOMPLETE), unit_dim(0)));
+        let (_, png) = get(port, &format!("/dwl/note.png?j={}", seq + 1), "");
+        assert_eq!(dims(&png), (unit_dim(0), unit_dim(0)), "another job's note is not this one's");
+        job().lock().unwrap().snap.state = state::DOWNLOADING;
 
         let (_, png) = get(port, &format!("/dwl/status.png?j={}&i=0", seq), "");
         assert_eq!(dims(&png), (unit_dim(state::DOWNLOADING), unit_dim(31)));

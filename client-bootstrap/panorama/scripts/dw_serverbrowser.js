@@ -527,10 +527,11 @@
         }
     }
 
-    function launcherPrep(host, address, done, fail) {
+    function launcherPrep(host, address, any, done, fail) {
         var at = address.lastIndexOf(":");
         var ip = address.slice(0, at), port = address.slice(at + 1);
-        loadImage(host, launcherUrl(_lport, "prep", "ip=" + ip + "&port=" + port), function (w, h) {
+        var q = "ip=" + ip + "&port=" + port + (any ? "&any=1" : "");
+        loadImage(host, launcherUrl(_lport, "prep", q), function (w, h) {
             var p = decPair(w, h, _cal);
             if (p[0] !== 1) { fail("refused"); return; }
             done(p[1]);
@@ -545,6 +546,12 @@
         loadImage(host, launcherUrl(_lport, "cancel", "j=" + seq),
                   function () {  },
                   function () {}, L_TIMEOUT_MS);
+    }
+
+    function launcherNote(host, seq, done) {
+        loadImage(host, launcherUrl(_lport, "note", "j=" + seq), function (w, h) {
+            done(decPair(w, h, _cal)[0]);
+        }, function () { done(0); }, L_TIMEOUT_MS);
     }
 
     function launcherStatus(host, seq, slot, done, fail) {
@@ -1168,6 +1175,8 @@
         return mib >= 1024 ? ((mib / 1024).toFixed(1) + " GB") : (mib + " MB");
     }
 
+    var L_ERR_MISMATCH = 8;
+
     var L_ERRORS = {
         1: "That server isn't online right now.",
         2: "Couldn't reach the Deadworks API to look up its content.",
@@ -1175,8 +1184,13 @@
         4: "A downloaded file was corrupt.",
         5: "The launcher hit an unexpected error.",
         6: "Deadlock still has the old file open. Disconnect from your current server first.",
-        7: "The launcher needs to patch gameinfo.gi. Restart it with Deadlock closed."
+        7: "The launcher needs to patch gameinfo.gi. Restart it with Deadlock closed.",
+        8: "Server content differs from the download host's content. Some custom content may be missing or broken. Consider letting the server operator know you received this warning.",
+        9: "Couldn't download this server's content from its download host.",
+        10: "This server has more custom content than the launcher will download for one join."
     };
+
+    var LN_INCOMPLETE = 1;
 
     function joinAnyway(server) {
         closePrepare();
@@ -1185,22 +1199,26 @@
         connectTo(server);
     }
 
-    function prepFail(server, msg) {
+    function prepFail(server, msg, code) {
         prepPhase(msg);
         prepBar(0);
         prepDetail("");
         _prep.active = false;
+        var first = (code === L_ERR_MISMATCH)
+            ? { text: "INSTALL ANYWAY", fn: function () { openPrepare(server, false, true); }, primary: true }
+            : { text: "RETRY", fn: function () { openPrepare(server); }, primary: true };
         prepButtons([
-            { text: "RETRY", fn: function () { openPrepare(server); }, primary: true },
+            first,
             { text: "JOIN ANYWAY", fn: function () { joinAnyway(server); } },
             { text: "CLOSE", fn: closePrepare }
         ]);
     }
 
-    function openPrepare(server, verifyOnly) {
+    function openPrepare(server, verifyOnly, acceptMismatch) {
         ensureOverlay();
         ensurePrepModal();
         _prep.verifyOnly = !!verifyOnly;
+        _prep.any = !!acceptMismatch;
         _prep.modal.visible = true;
         _prep.server = server;
         _prep.seq = null;
@@ -1244,7 +1262,7 @@
                 return;
             }
             prepPhase("Asking the launcher for this server's content…");
-            launcherPrep(host, server.address, function (seq) {
+            launcherPrep(host, server.address, _prep.any, function (seq) {
                 if (!live(gen)) return;
                 _prep.seq = seq;
                 tickJob(gen);
@@ -1328,7 +1346,7 @@
             if (p[0] === LS_ERROR) {
                 launcherStatus(host, _prep.seq, 1, function (q) {
                     if (!live(gen)) return;
-                    prepFail(server, L_ERRORS[q[0]] || "The download failed.");
+                    prepFail(server, L_ERRORS[q[0]] || "The download failed.", q[0]);
                 }, function () {
                     if (!live(gen)) return;
                     prepFail(server, "The download failed.");
@@ -1349,10 +1367,17 @@
                 prepBar(1);
                 prepPhase("Ready — connecting…");
                 prepButtons([]);
-                $.Schedule(0.4, function () {
-                    closePrepare();
-                    closeOverlay();
-                    connectTo(server);
+                var mine = function () { return _prep.gen === gen && !_prep.active && _prep.modal.visible; };
+                launcherNote(host, _prep.seq, function (notes) {
+                    if (!mine()) return;
+                    var partial = (notes & LN_INCOMPLETE) !== 0;
+                    if (partial) prepDetail("This server could not list all of its content, so some of it may be missing.");
+                    $.Schedule(partial ? 3.5 : 0.4, function () {
+                        if (!mine()) return;
+                        closePrepare();
+                        closeOverlay();
+                        connectTo(server);
+                    });
                 });
                 return;
             }

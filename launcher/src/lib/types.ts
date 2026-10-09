@@ -26,6 +26,11 @@ export interface ContentManifestItem {
 
 export interface Server {
   id: string;
+  /**
+   * False for a server found only on Steam's list. It has no record at the Deadworks API, so
+   * what it runs comes from the server itself. Absent on lists from before the field existed.
+   */
+  registered?: boolean;
   name: string;
   address: string;
   raw_address: string;

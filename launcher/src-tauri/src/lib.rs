@@ -67,11 +67,14 @@ pub fn run() {
             connect::set_game_dir,
             connect::reset_game_dir,
             addons::prepare_and_connect,
+            addons::connect_anyway,
+            addons::cancel_connect,
             bootstrap::bootstrap_status,
             bootstrap::retry_bootstrap_install,
             gameinfo::gameinfo_error,
             gameinfo::retry_gameinfo_patch,
             ping::ping_server,
+            ping::server_info,
             deep_link::deep_link_ready,
         ])
         .setup(|app| {
