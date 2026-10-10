@@ -1,7 +1,9 @@
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import { invoke } from "@tauri-apps/api/core";
 import Titlebar from "@/components/Titlebar";
 import ServersPage from "@/components/ServersPage";
+import MainNav, { type MainTab } from "@/components/MainNav";
+import HostPage from "@/components/hosting/HostPage";
 import UpdateManager from "@/components/UpdateManager";
 import ConnectDialog from "@/components/ConnectDialog";
 import DeepLinkErrorDialog from "@/components/DeepLinkErrorDialog";
@@ -10,11 +12,37 @@ import BootstrapRestartDialog from "@/components/BootstrapRestartDialog";
 import { useSettings } from "@/hooks/use-settings";
 import { useDeepLink } from "@/hooks/use-deep-link";
 import { getStore } from "@/lib/tauri";
+import { cn } from "@/lib/utils";
 import styles from "./App.module.css";
+
+const TAB_KEY = "deadworks.mainTab";
+
+function loadTab(): MainTab {
+  try {
+    return window.localStorage.getItem(TAB_KEY) === "host" ? "host" : "servers";
+  } catch {
+    return "servers";
+  }
+}
 
 export default function App() {
   const settings = useSettings();
   const { request, clear } = useDeepLink(settings.apiUrl);
+  const [tab, setTab] = useState<MainTab>(loadTab);
+  // Pages stay mounted once visited so switching tabs doesn't refetch/re-ping.
+  const [hostVisited, setHostVisited] = useState(tab === "host");
+
+  const changeTab = (next: MainTab) => {
+    setTab(next);
+    if (next === "host") setHostVisited(true);
+    try {
+      window.localStorage.setItem(TAB_KEY, next);
+    } catch {
+      // Remembering the tab is only a convenience.
+    }
+  };
+
+  const nav = <MainNav tab={tab} onChange={changeTab} />;
 
   // On first launch, enable autostart by default
   useEffect(() => {
@@ -32,7 +60,14 @@ export default function App() {
     <>
       <Titlebar />
       <main className={styles.main}>
-        <ServersPage apiUrl={settings.apiUrl} />
+        <div className={cn(styles.pane, tab !== "servers" && styles.paneHidden)}>
+          <ServersPage apiUrl={settings.apiUrl} nav={nav} />
+        </div>
+        {hostVisited && (
+          <div className={cn(styles.pane, tab !== "host" && styles.paneHidden)}>
+            <HostPage nav={nav} active={tab === "host"} />
+          </div>
+        )}
       </main>
       {request?.server && (
         <ConnectDialog

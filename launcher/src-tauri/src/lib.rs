@@ -3,6 +3,7 @@ mod bootstrap;
 mod connect;
 mod deep_link;
 mod gameinfo;
+mod hosting;
 mod local_api;
 mod ping;
 mod telemetry;
@@ -36,6 +37,32 @@ pub(crate) async fn prepare_for_launch(app: &tauri::AppHandle) {
     if let Err(e) = bootstrap::ensure(app, &game_dir, false).await {
         println!("[launch] bootstrap check failed: {}", e);
     }
+}
+
+/// Quit from the tray. Running servers are stopped cleanly first, after the
+/// user confirms; the kill-on-close job would otherwise end them abruptly.
+fn quit_from_tray(app: &tauri::AppHandle) {
+    use tauri_plugin_dialog::{DialogExt, MessageDialogButtons, MessageDialogKind};
+    let running = hosting::running_count();
+    if running == 0 {
+        app.exit(0);
+        return;
+    }
+    let app = app.clone();
+    let plural = if running == 1 { "server is" } else { "servers are" };
+    app.dialog()
+        .message(format!("{running} {plural} running. Quitting stops {}.", if running == 1 { "it" } else { "them" }))
+        .title("Stop servers and quit?")
+        .kind(MessageDialogKind::Warning)
+        .buttons(MessageDialogButtons::OkCancelCustom("Stop and quit".into(), "Cancel".into()))
+        .show(move |confirmed| {
+            if confirmed {
+                std::thread::spawn(move || {
+                    hosting::stop_all_blocking();
+                    app.exit(0);
+                });
+            }
+        });
 }
 
 #[cfg_attr(mobile, tauri::mobile_entry_point)]
@@ -73,6 +100,48 @@ pub fn run() {
             gameinfo::retry_gameinfo_patch,
             ping::ping_server,
             deep_link::deep_link_ready,
+            hosting::hosting_overview,
+            hosting::hosting_setup_check,
+            hosting::hosting_install,
+            hosting::hosting_cancel_task,
+            hosting::hosting_steamcmd_input,
+            hosting::hosting_check_updates,
+            hosting::hosting_apply_updates,
+            hosting::hosting_clear_hold,
+            hosting::hosting_verify,
+            hosting::hosting_repair_client,
+            hosting::hosting_uninstall,
+            hosting::hosting_maps,
+            hosting::hosting_create_server,
+            hosting::hosting_update_server,
+            hosting::hosting_duplicate_server,
+            hosting::hosting_delete_server,
+            hosting::hosting_start,
+            hosting::hosting_stop,
+            hosting::hosting_restart,
+            hosting::hosting_runtime,
+            hosting::hosting_console_history,
+            hosting::hosting_send_command,
+            hosting::hosting_kick,
+            hosting::hosting_ban,
+            hosting::hosting_permissions,
+            hosting::hosting_penalties,
+            hosting::hosting_lift_penalty,
+            hosting::hosting_write_permissions,
+            hosting::hosting_mark_shared,
+            hosting::hosting_check_reachability,
+            hosting::hosting_open_folder,
+            hosting::hosting_plugin_library,
+            hosting::hosting_import_plugins,
+            hosting::hosting_remove_plugin,
+            hosting::hosting_set_plugin_enabled,
+            hosting::hosting_plugin_configs,
+            hosting::hosting_read_plugin_config,
+            hosting::hosting_write_plugin_config,
+            hosting::hosting_reset_plugin_config,
+            hosting::hosting_content,
+            hosting::hosting_import_content,
+            hosting::hosting_remove_content,
         ])
         .setup(|app| {
             use tauri::menu::{Menu, MenuItem};
@@ -112,6 +181,10 @@ pub fn run() {
             // load images, so this answers with PNGs whose dimensions encode the
             // reply. Runs on its own thread; a bind failure is non-fatal.
             local_api::start(app.handle().clone());
+
+            // Local server hosting: loads saved servers and starts the
+            // console/metrics ticker and the update checker.
+            hosting::init(app.handle());
 
             let app_handle = app.handle().clone();
             tauri::async_runtime::spawn(async move {
@@ -158,9 +231,7 @@ pub fn run() {
                             let _ = open::that(format!("steam://run/{}", "1422450"));
                         });
                     }
-                    "quit" => {
-                        app.exit(0);
-                    }
+                    "quit" => quit_from_tray(app),
                     _ => {}
                 })
                 .build(app)?;

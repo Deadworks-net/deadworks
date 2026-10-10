@@ -55,6 +55,17 @@ fn find_steam_path() -> Result<PathBuf, String> {
 }
 
 
+/// Steam's install folder (holds `depotcache`), where detection is supported.
+#[cfg(any(windows, target_os = "linux"))]
+pub(crate) fn steam_root() -> Result<PathBuf, String> {
+    find_steam_path()
+}
+
+#[cfg(target_os = "macos")]
+pub(crate) fn steam_root() -> Result<PathBuf, String> {
+    Err("Steam detection is only supported on Windows and Linux".into())
+}
+
 /// Parse libraryfolders.vdf and return the library path whose `apps` block
 /// lists `app_id`. Returns an error if no library claims that app.
 fn find_library_for_app(steam_path: &PathBuf, app_id: &str) -> Result<PathBuf, String> {

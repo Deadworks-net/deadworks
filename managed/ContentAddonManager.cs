@@ -120,10 +120,21 @@ internal static class ContentAddonManager
         if (!_mounted.Add(addon))
             return;
 
-        var vpkPath = $"deadworks_mods/vpks/{addon}.vpk";
+        var vpkPath = ResolveVpkPath(addon);
         if (Server.AddSearchPath(vpkPath))
             Console.WriteLine($"[ContentAddons] Mounted: {vpkPath}");
         else
             Console.WriteLine($"[ContentAddons] Failed to mount: {vpkPath}");
+    }
+
+    /// <summary>
+    /// Addons live in <c>game/citadel/deadworks_mods/vpks</c>. The engine resolves a relative search path
+    /// against its working directory, which is <c>game/bin/win64</c>, so the path is made absolute here.
+    /// </summary>
+    private static string ResolveVpkPath(string addon)
+    {
+        var exeDir = Path.GetDirectoryName(Environment.ProcessPath) ?? Directory.GetCurrentDirectory();
+        var dir = Path.GetFullPath(Path.Combine(exeDir, "..", "..", "citadel", "deadworks_mods", "vpks"));
+        return Path.Combine(dir, addon + ".vpk");
     }
 }

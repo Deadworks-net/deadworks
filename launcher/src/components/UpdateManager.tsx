@@ -1,6 +1,8 @@
 import { useEffect, useMemo, useRef, useState } from "react";
 import { check, type Update } from "@tauri-apps/plugin-updater";
 import { relaunch } from "@tauri-apps/plugin-process";
+import { ask } from "@tauri-apps/plugin-dialog";
+import { hosting } from "@/lib/hosting";
 import { listen } from "@tauri-apps/api/event";
 import { cn } from "@/lib/utils";
 import styles from "./UpdateManager.module.css";
@@ -186,6 +188,7 @@ export default function UpdateManager() {
 
   const handleInstall = async () => {
     if (!update) return;
+    if (!testMode && !(await stopServersForUpdate())) return;
 
     setState("downloading");
     setDismissed(false);
@@ -229,6 +232,7 @@ export default function UpdateManager() {
       setState("idle");
       return;
     }
+    if (!(await stopServersForUpdate())) return;
     try {
       await relaunch();
     } catch (err) {
@@ -347,4 +351,35 @@ export default function UpdateManager() {
       )}
     </div>
   );
+}
+
+const LIVE_STATES = ["starting", "running", "stopping"];
+
+/**
+ * Installing an update restarts the launcher, and hosted servers die with it.
+ * Ask first, then stop them cleanly. False means the user cancelled.
+ */
+async function stopServersForUpdate(): Promise<boolean> {
+  const liveIds = async () => {
+    try {
+      const o = await hosting.overview();
+      return o.servers.filter((s) => LIVE_STATES.includes(s.runtime.state)).map((s) => s.config.id);
+    } catch {
+      return [];
+    }
+  };
+  const live = await liveIds();
+  if (live.length === 0) return true;
+  const ok = await ask(
+    `${live.length === 1 ? "A server you're hosting is" : `${live.length} servers you're hosting are`} running. ` +
+      "Updating restarts the launcher, which stops " +
+      (live.length === 1 ? "it." : "them."),
+    { title: "Stop servers and update?", kind: "warning", okLabel: "Stop and update", cancelLabel: "Not now" }
+  );
+  if (!ok) return false;
+  await Promise.all(live.map((id) => hosting.stop(id).catch(() => undefined)));
+  for (let i = 0; i < 40 && (await liveIds()).length > 0; i++) {
+    await new Promise((r) => setTimeout(r, 500));
+  }
+  return true;
 }

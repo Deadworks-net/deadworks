@@ -1,4 +1,4 @@
-import { useState, useCallback } from "react";
+import { useState, useCallback, type ReactNode } from "react";
 import { Menu } from "@tauri-apps/api/menu";
 import { invoke } from "@tauri-apps/api/core";
 import { useServers } from "@/hooks/use-servers";
@@ -11,9 +11,11 @@ import styles from "./ServersPage.module.css";
 
 interface ServersPageProps {
   apiUrl: string;
+  /** Brand + top-level tabs, owned by App. */
+  nav: ReactNode;
 }
 
-export default function ServersPage({ apiUrl }: ServersPageProps) {
+export default function ServersPage({ apiUrl, nav }: ServersPageProps) {
   const {
     pings,
     selectedServer,
@@ -80,10 +82,7 @@ export default function ServersPage({ apiUrl }: ServersPageProps) {
     <div className={styles.page}>
       {/* Toolbar */}
       <div className={styles.toolbar}>
-        <div className={styles.toolbarLeft}>
-          <span className={styles.brandText}>Deadworks</span>
-          <button className={cn(styles.tab, styles.tabActive)}>SERVERS</button>
-        </div>
+        {nav}
         <div className={styles.toolbarRight}>
           <div className={styles.searchBox}>
             <svg
