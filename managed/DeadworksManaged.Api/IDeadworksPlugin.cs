@@ -22,8 +22,8 @@ public interface IDeadworksPlugin {
 	/// in the server config's <c>serverbrowser.content_addons</c> ahead of time.
 	/// <para>
 	/// Merged with the config list and any other plugin's, advertised to clients on connect, and the
-	/// matching <c>deadworks_mods/vpks/&lt;name&gt;.vpk</c> is mounted server-side. Read whenever the
-	/// plugin loads or unloads; if the list changes while the plugin is running, call
+	/// matching <c>game/citadel/deadworks_server_addons/vpks/&lt;name&gt;.vpk</c> is mounted server-side.
+	/// Read whenever the plugin loads or unloads; if the list changes while the plugin is running, call
 	/// <see cref="DeadworksManaged.Api.ContentAddons.Refresh"/> to re-apply it.
 	/// </para>
 	/// </summary>

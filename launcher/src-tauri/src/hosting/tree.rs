@@ -175,7 +175,7 @@ fn sync_content(layout: &Layout, config: &ServerConfig, placed_before: &[String]
                 continue;
             }
             let rel = match kind {
-                ContentKind::Addon => format!("game\\citadel\\deadworks_mods\\vpks\\{file}"),
+                ContentKind::Addon => format!("game\\citadel\\deadworks_server_addons\\vpks\\{file}"),
                 ContentKind::Map => format!("game\\citadel\\maps\\{file}"),
             };
             wanted.push((src, rel));
