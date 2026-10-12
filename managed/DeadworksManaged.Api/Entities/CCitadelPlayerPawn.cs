@@ -215,17 +215,19 @@ public sealed unsafe class CCitadelPlayerPawn : CBasePlayerPawn {
 	/// <para>
 	/// Items that have to be imbued (Echo Shard, Mystic Reverb, ...) are granted unattached by
 	/// this overload and do nothing until imbued - use
-	/// <see cref="AddItem(string, EAbilitySlot, bool)"/> for those.
+	/// <see cref="AddItem(string, EAbilitySlot, bool, bool)"/> for those.
 	/// </para>
 	/// <param name="itemName">Internal item name.</param>
 	/// <param name="enhanced">Should the enhanced version of the item be given</param>
+	/// <param name="corrupted">Should the corrupted version of the item be given</param>
 	/// Returns the new item entity, or null on failure.
 	/// </summary>
-	public CCitadelBaseAbility? AddItem(string itemName, bool enhanced = false) {
+	public CCitadelBaseAbility? AddItem(string itemName, bool enhanced = false, bool corrupted = false) {
 		Span<byte> utf8 = Utf8.Encode(itemName, stackalloc byte[Utf8.Size(itemName)]);
 		fixed (byte* ptr = utf8) {
 			var bits = UpgradeFlags.Owned;
 			if (enhanced) bits |= UpgradeFlags.Enhanced;
+			if (corrupted) bits |= UpgradeFlags.Corrupted;
 			void* result = NativeInterop.AddItem((void*)Handle, ptr, (int)bits);
 			return result != null ? new CCitadelBaseAbility((nint)result) : null;
 		}
@@ -237,7 +239,7 @@ public sealed unsafe class CCitadelPlayerPawn : CBasePlayerPawn {
 	/// <para>
 	/// Nothing is granted unless the whole operation can succeed, so a rejected pairing never
 	/// leaves the pawn holding an unattached item. Use
-	/// <see cref="TryAddItem(string, EAbilitySlot, out CCitadelBaseAbility, bool)"/> when you
+	/// <see cref="TryAddItem(string, EAbilitySlot, out CCitadelBaseAbility, bool, bool)"/> when you
 	/// need to know <em>why</em> it failed.
 	/// </para>
 	/// <param name="itemName">Internal item name, e.g. "upgrade_echo_shard".</param>
@@ -246,18 +248,19 @@ public sealed unsafe class CCitadelPlayerPawn : CBasePlayerPawn {
 	/// through <see cref="EAbilitySlot.Signature4"/> (indices 0-3).
 	/// </param>
 	/// <param name="enhanced">Should the enhanced version of the item be given</param>
+	/// <param name="corrupted">Should the corrupted version of the item be given</param>
 	/// Returns the new item entity, or null on failure.
 	/// </summary>
-	public CCitadelBaseAbility? AddItem(string itemName, EAbilitySlot imbueSlot, bool enhanced = false) {
-		TryAddItem(itemName, imbueSlot, out var item, enhanced);
+	public CCitadelBaseAbility? AddItem(string itemName, EAbilitySlot imbueSlot, bool enhanced = false, bool corrupted = false) {
+		TryAddItem(itemName, imbueSlot, out var item, enhanced, corrupted);
 		return item;
 	}
 
 	/// <summary>
-	/// <see cref="AddItem(string, EAbilitySlot, bool)"/> with a reason on failure.
+	/// <see cref="AddItem(string, EAbilitySlot, bool, bool)"/> with a reason on failure.
 	/// <paramref name="item"/> is non-null only when the result is <see cref="ImbueResult.Success"/>.
 	/// </summary>
-	public ImbueResult TryAddItem(string itemName, EAbilitySlot imbueSlot, out CCitadelBaseAbility? item, bool enhanced = false) {
+	public ImbueResult TryAddItem(string itemName, EAbilitySlot imbueSlot, out CCitadelBaseAbility? item, bool enhanced = false, bool corrupted = false) {
 		item = null;
 
 		if (!ItemInfo.CanBeImbued(itemName))
@@ -268,7 +271,7 @@ public sealed unsafe class CCitadelPlayerPawn : CBasePlayerPawn {
 		if (!target.CanBeImbuedBy(itemName)) return ImbueResult.AbilityRejected;
 
 		// Validated above, so this only fails on grant-side problems (already owned, no slot).
-		var granted = AddItem(itemName, enhanced);
+		var granted = AddItem(itemName, enhanced, corrupted);
 		if (granted == null) return ImbueResult.GrantFailed;
 
 		if (NativeInterop.ImbueAbility((void*)granted.Handle, (void*)target.Handle) == 0) {
