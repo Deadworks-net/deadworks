@@ -277,7 +277,6 @@ internal static class ContentAddonManager
     // Both go through ResolveVpkPath, so moving the addon folder moves them together.
     private static string? FindAddonFile(string name)
     {
-        // The engine resolves a relative search path against the working directory; so does this.
         var full = Path.GetFullPath(ResolveVpkPath(name));
         if (File.Exists(full))
             return full;
@@ -346,10 +345,14 @@ internal static class ContentAddonManager
 
     /// <summary>
     /// Where an addon's VPK is: the one place that says so, for mounting it and for hashing it.
-    /// Relative to the engine's working directory, <c>game/bin/win64</c>.
+    /// Addons live in <c>game/citadel/deadworks_server_addons/vpks</c>. The engine resolves a relative
+    /// search path against its working directory, which is <c>game/bin/win64</c>, so the path is made
+    /// absolute here.
     /// </summary>
     private static string ResolveVpkPath(string addon)
     {
-        return $"deadworks_mods/vpks/{addon}.vpk";
+        var exeDir = Path.GetDirectoryName(Environment.ProcessPath) ?? Directory.GetCurrentDirectory();
+        var dir = Path.GetFullPath(Path.Combine(exeDir, "..", "..", "citadel", "deadworks_server_addons", "vpks"));
+        return Path.Combine(dir, addon + ".vpk");
     }
 }

@@ -15,6 +15,7 @@
 #include "../SDK/Core.hpp"
 #include "../SDK/Util.hpp"
 
+#include <entity2/entitynetwork.h>
 #include <tier0/utlstring.h>
 #include <tier0/utlstringtoken.h>
 #include <tier1/keyvalues3.h>
@@ -285,16 +286,24 @@ static uint8_t RemoveAbilityImpl(CCitadelPlayerPawn *pPawn, CCitadelBaseAbility 
         removeSlotFn(slotTable, entryIdx);
 
     auto &vecAbilities = comp->m_vecAbilities.Get();
+    int removedIdx = -1;
     for (int i = 0; i < vecAbilities.Count(); i++) {
         if (vecAbilities[i] == rawHandle) {
             vecAbilities.Remove(i);
+            removedIdx = i;
             break;
         }
     }
 
-    comp->m_vecAbilities.NetworkStateChanged();
-    // The thinkable list is no longer a schema field; the component's Think rebuilds it when this is set.
-    comp->m_bThinkableAbilitiesDirty = true;
+    // The component is not an entity: report on the pawn, the count first and then every handle that moved down.
+    if (removedIdx != -1) {
+        auto vecOffset = static_cast<uint32_t>(reinterpret_cast<uintptr_t>(&vecAbilities) - reinterpret_cast<uintptr_t>(pPawn));
+        pPawn->NetworkStateChanged(NetworkStateChanged_t(vecOffset));
+        for (int i = removedIdx; i < vecAbilities.Count(); i++)
+            pPawn->NetworkStateChanged(NetworkStateChanged_t(vecOffset, i));
+    }
+    // Not networked. The component's Think rebuilds the thinkable list when this is set.
+    comp->m_bThinkableAbilitiesDirty.Get() = true;
 
     UTIL_Remove(static_cast<CEntityInstance *>(ability));
     return 1;

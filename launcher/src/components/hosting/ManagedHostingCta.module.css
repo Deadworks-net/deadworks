@@ -1,0 +1,111 @@
+/* Welcome-screen card */
+
+.card {
+  width: 100%;
+  max-width: 440px;
+  margin-top: 26px;
+  padding: 16px 18px;
+  text-align: left;
+  background: linear-gradient(135deg, rgba(105, 232, 153, 0.07) 0%, rgba(105, 232, 153, 0.015) 100%);
+  border: 1px solid rgba(105, 232, 153, 0.22);
+  border-radius: 2px;
+}
+
+.badge {
+  font-size: 0.62rem;
+  font-weight: 700;
+  letter-spacing: 1.5px;
+  text-transform: uppercase;
+  color: var(--accent);
+}
+
+.title {
+  margin-top: 4px;
+  font-size: 1.02rem;
+  font-weight: 700;
+  letter-spacing: 0.4px;
+}
+
+.text {
+  margin-top: 4px;
+  font-size: 0.8rem;
+  line-height: 1.45;
+  color: var(--text-muted);
+}
+
+.points {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
+  margin-top: 10px;
+  list-style: none;
+}
+
+.points li {
+  padding: 2px 8px;
+  font-size: 0.72rem;
+  color: var(--text-secondary);
+  background: var(--hover);
+  border: 1px solid var(--border);
+  border-radius: 2px;
+}
+
+.actions {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  margin-top: 12px;
+}
+
+/* Server-rail note */
+
+.note {
+  position: relative;
+  margin: 0 10px 8px;
+  padding: 9px 22px 9px 10px;
+  background: rgba(105, 232, 153, 0.05);
+  border: 1px solid rgba(105, 232, 153, 0.18);
+  border-radius: 2px;
+}
+
+.noteTitle {
+  font-size: 0.72rem;
+  font-weight: 700;
+  letter-spacing: 0.4px;
+  color: var(--text);
+}
+
+.noteText {
+  margin-top: 2px;
+  font-size: 0.7rem;
+  line-height: 1.4;
+  color: var(--text-muted);
+}
+
+.noteLink {
+  margin-top: 5px;
+  font-size: 0.72rem;
+  color: var(--accent);
+  text-decoration: none;
+}
+
+.noteLink:hover {
+  text-decoration: underline;
+}
+
+.close {
+  position: absolute;
+  top: 3px;
+  right: 5px;
+  padding: 0 4px;
+  font-size: 0.95rem;
+  line-height: 1.2;
+  color: var(--text-muted);
+  background: none;
+  border: none;
+  cursor: pointer;
+}
+
+.close:hover {
+  color: var(--text);
+}

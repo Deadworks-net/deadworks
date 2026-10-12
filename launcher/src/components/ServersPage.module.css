@@ -13,48 +13,6 @@
   flex-shrink: 0;
 }
 
-.toolbarLeft {
-  display: flex;
-  flex-direction: column;
-  align-items: flex-start;
-  gap: 4px;
-}
-
-.brandText {
-  font-family: var(--font-family);
-  font-size: 1.65rem;
-  font-weight: 700;
-  letter-spacing: 1px;
-  color: var(--text);
-  margin-bottom: 0;
-}
-
-.tab {
-  padding: 12px 14px;
-  font-family: var(--font-family);
-  font-size: 0.8rem;
-  font-weight: 700;
-  letter-spacing: 1.5px;
-  color: var(--text-muted);
-  background: transparent;
-  border: 1px solid transparent;
-  border-radius: 2px;
-  cursor: pointer;
-  transition: all 0.15s;
-}
-
-.tab:hover {
-  color: var(--text-secondary);
-  background: var(--hover);
-}
-
-.tabActive {
-  color: var(--text);
-  font-weight: 800;
-  background: #151620;
-  border-color: var(--border);
-}
-
 .serverCount {
   font-size: 0.75rem;
   color: var(--text-muted);

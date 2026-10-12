@@ -8,6 +8,7 @@
 #include <string>
 
 #include "../Deadworks.hpp"
+#include "../NativeOffsets.hpp"
 
 namespace deadworks {
 namespace hooks {
@@ -44,6 +45,12 @@ void *Hook_ServerCreateInterface(const char *pszName, int *pReturnCode) {
 bool Hook_CGCClientSystem_OnServerVersionCheck(void *a1, int a2) {
     g_Log->Info("Engine version check. Forcing true. GC wants: {}", a2);
     return true;
+}
+
+bool Hook_CCitadelServerGCSystem_Init(void *gcSystem) {
+    const bool result = g_CCitadelServerGCSystem_Init.call<bool>(gcSystem);
+    *reinterpret_cast<uint32_t *>(reinterpret_cast<uintptr_t>(gcSystem) + offsets::kServerGCSystem_MaxUptimeShutdownTime) = 0;
+    return result;
 }
 
 } // namespace hooks

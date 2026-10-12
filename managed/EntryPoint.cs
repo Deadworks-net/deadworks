@@ -242,6 +242,7 @@ public static class EntryPoint
     public static void OnClientFullConnect(int slot)
     {
         Players.OnFullConnect(slot);
+        HostStatus.OnClientFullConnect(slot);
         var args = new ClientFullConnectEvent { Slot = slot, IsMapChangeReconnect = Players.IsMapChangeReconnect(slot) };
         PluginLoader.DispatchClientFullConnect(args);
     }
@@ -268,6 +269,7 @@ public static class EntryPoint
         {
             Players.OnDisconnect(slot);
             PermissionSystem.PermissionManager.OnClientDisconnect(slot);
+            HostStatus.OnClientDisconnect(slot);
         }
         ZoneRegistry.OnDisconnect(slot);
         DeadworksManaged.Api.UI.UIChannel.OnPlayerDisconnect(slot);
