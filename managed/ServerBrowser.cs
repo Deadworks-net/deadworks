@@ -254,7 +254,7 @@ internal static class ServerBrowser
             content_addons = ContentAddonManager.Active,
             extra_maps = _config.ExtraMaps,
             name = ConVar.Find("hostname")?.GetString() ?? _serverName,
-            version = typeof(ServerBrowser).Assembly.GetName().Version?.ToString() ?? "",
+            version = Deadworks.Version,
             port = _gamePort,
         };
     }
