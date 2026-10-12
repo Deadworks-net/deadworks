@@ -540,6 +540,7 @@ internal static partial class PluginLoader
         UI.Tick();
         if (simulating)
             ZoneRegistry.Tick();
+        ContentAddonManager.Tick();
         DispatchToPlugins(p => p.OnGameFrame(simulating, firstTick, lastTick), nameof(IDeadworksPlugin.OnGameFrame));
     }
 

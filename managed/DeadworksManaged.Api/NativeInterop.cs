@@ -14,6 +14,8 @@ internal static unsafe class NativeInterop
 	public static delegate* unmanaged[Cdecl]<byte*, ulong> FindConVar => (delegate* unmanaged[Cdecl]<byte*, ulong>)_cb.FindConVar;
 	public static delegate* unmanaged[Cdecl]<ulong, int, void> SetConVarInt => (delegate* unmanaged[Cdecl]<ulong, int, void>)_cb.SetConVarInt;
 	public static delegate* unmanaged[Cdecl]<ulong, float, void> SetConVarFloat => (delegate* unmanaged[Cdecl]<ulong, float, void>)_cb.SetConVarFloat;
+	public static delegate* unmanaged[Cdecl]<byte> ClearServerKeyValues => (delegate* unmanaged[Cdecl]<byte>)_cb.ClearServerKeyValues;
+	public static delegate* unmanaged[Cdecl]<byte*, byte*, byte> SetServerKeyValue => (delegate* unmanaged[Cdecl]<byte*, byte*, byte>)_cb.SetServerKeyValue;
 	public static delegate* unmanaged[Cdecl]<void*, byte*> GetEntityDesignerName => (delegate* unmanaged[Cdecl]<void*, byte*>)_cb.GetEntityDesignerName;
 	public static delegate* unmanaged[Cdecl]<void*, byte*> GetEntityClassname => (delegate* unmanaged[Cdecl]<void*, byte*>)_cb.GetEntityClassname;
 	public static delegate* unmanaged[Cdecl]<uint, void*> GetEntityFromHandle => (delegate* unmanaged[Cdecl]<uint, void*>)_cb.GetEntityFromHandle;

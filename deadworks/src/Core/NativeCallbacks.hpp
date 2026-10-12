@@ -192,6 +192,10 @@ struct NativeCallbacks {
     uint8_t(__cdecl *IsMapValid)(const char *map);
     // Called by managed code while it rejects a ClientConnect; the text becomes the engine's reject reason.
     void(__cdecl *SetConnectRejectReason)(const char *reason);
+    // Steam gameserver rules store, surfaced by A2S_RULES. Both return 0 if the Steam
+    // gameserver interface could not be resolved.
+    uint8_t(__cdecl *ClearServerKeyValues)();
+    uint8_t(__cdecl *SetServerKeyValue)(const char *key, const char *value);
 };
 
 void PopulateNativeCallbacks(NativeCallbacks &callbacks);

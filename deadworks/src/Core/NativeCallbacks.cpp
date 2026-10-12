@@ -40,6 +40,7 @@
 #include <server_class.h>
 #include <icvar.h>
 #include <tier0/icommandline.h>
+#include <steam/isteamgameserver.h>
 
 using namespace deadworks;
 
@@ -798,6 +799,51 @@ static void __cdecl NativeSetServerAddons(const char *addons) {
     g_Log->Info("[Addons] Set desired server addons to '{}'", addons ? addons : "");
 }
 
+// --- Steam gameserver rules (A2S_RULES key/values) ---
+//
+// The A2S_INFO response is assembled by Steam from ISteamGameServer state - every field of it
+// maps to a setter engine2 calls (SetServerName/SetMapName/SetModDir/SetGameTags/...), and a
+// value written to sv_tags round-trips out through the A2S keywords field. A2S_RULES is fed
+// the same way, from the key/value store below, which nothing in engine2 or server.dll ever
+// touches - hence the empty (silent) rules response.
+//
+// Resolved out of the already-loaded steam_api64.dll rather than linked, so the module keeps
+// no hard dependency on it. Deliberately not cached: CNetworkGameServer re-inits the Steam
+// gameserver on port/appid change, which invalidates the interface pointer.
+using FnGameServerGetHSteamUser = HSteamUser(S_CALLTYPE *)();
+using FnFindOrCreateGameServerInterface = void *(S_CALLTYPE *)(HSteamUser, const char *);
+
+static ISteamGameServer *GetSteamGameServer() {
+    HMODULE mod = GetModuleHandleA("steam_api64.dll");
+    if (!mod)
+        return nullptr;
+
+    auto getUser = reinterpret_cast<FnGameServerGetHSteamUser>(
+        GetProcAddress(mod, "SteamGameServer_GetHSteamUser"));
+    auto findOrCreate = reinterpret_cast<FnFindOrCreateGameServerInterface>(
+        GetProcAddress(mod, "SteamInternal_FindOrCreateGameServerInterface"));
+    if (!getUser || !findOrCreate)
+        return nullptr;
+
+    return static_cast<ISteamGameServer *>(findOrCreate(getUser(), STEAMGAMESERVER_INTERFACE_VERSION));
+}
+
+static uint8_t __cdecl NativeClearServerKeyValues() {
+    auto *gs = GetSteamGameServer();
+    if (!gs)
+        return 0;
+    gs->ClearAllKeyValues();
+    return 1;
+}
+
+static uint8_t __cdecl NativeSetServerKeyValue(const char *key, const char *value) {
+    auto *gs = GetSteamGameServer();
+    if (!gs || !key || !*key)
+        return 0;
+    gs->SetKeyValue(key, value ? value : "");
+    return 1;
+}
+
 static uint8_t __cdecl NativeAddFileSystemSearchPath(const char *path, const char *pathID, int addType) {
     if (!g_pFullFileSystem || !path) return 0;
     g_pFullFileSystem->AddSearchPath(path, pathID ? pathID : "GAME", static_cast<SearchPathAdd_t>(addType));
@@ -1330,6 +1376,8 @@ void deadworks::PopulateNativeCallbacks(NativeCallbacks &callbacks) {
 
     // Server addons
     callbacks.SetServerAddons = &NativeSetServerAddons;
+    callbacks.ClearServerKeyValues = &NativeClearServerKeyValues;
+    callbacks.SetServerKeyValue = &NativeSetServerKeyValue;
     callbacks.AddFileSystemSearchPath = &NativeAddFileSystemSearchPath;
 
     // Fake clients
