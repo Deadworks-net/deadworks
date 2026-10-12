@@ -143,7 +143,7 @@ public class ContentManifestTests
     [Fact]
     public void FastDlPath_EmbedsTheHash_AndIsNullWithoutOne()
     {
-        Assert.Equal($"addons/turbo_{HashA}.vpk.bz2", ContentManifest.FastDlPath(ContentManifest.AddonsDir, new("turbo", HashA)));
+        Assert.Equal($"addons/turbo_{HashA}.vpk.zst", ContentManifest.FastDlPath(ContentManifest.AddonsDir, new("turbo", HashA)));
         Assert.Null(ContentManifest.FastDlPath(ContentManifest.MapsDir, new("dl_express", null)));
     }
 

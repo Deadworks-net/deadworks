@@ -309,7 +309,7 @@ internal static class ContentAddonManager
             foreach (var entry in entries)
             {
                 lines.Add(ContentManifest.FastDlPath(dir, entry) is { } path
-                    ? $"  {path}  (bzip2 of {entry.Name}.vpk)"
+                    ? $"  {path}  (zstd of {entry.Name}.vpk; a bzip2 named .vpk.bz2 also works)"
                     : $"  {entry.Name}: no hash, so it cannot be fetched from fastDL");
             }
         }

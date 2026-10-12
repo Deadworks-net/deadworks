@@ -57,6 +57,11 @@ struct ManifestItem {
     #[serde(default)]
     compressed_size: u64,
     download_url: String,
+    /// The same file packed the older way (bzip2), for a host that has no zstd copy of it.
+    /// Only items built from a server's A2S_RULES have one: `download_url` is then a guess at
+    /// what the host holds, not a link the API handed out.
+    #[serde(skip)]
+    fallback_url: Option<String>,
     /// When set, the item is checked by content rather than by `version`: the file's SHA-256
     /// has to start with this. Items built from a server's A2S_RULES always carry the hash the
     /// server advertised; the API does not send one yet.
@@ -380,10 +385,50 @@ async fn lookup_manifest(api_url: &str, addr: &str) -> Result<ContentManifest, S
     Ok(ContentManifest { items: detail.content })
 }
 
-/// Download `.vpk.bz2` from `url` into `dest_vpk` as a fully decompressed `.vpk`,
-/// returning its SHA-256. Enforces `MAX_VPK_BYTES` on the download and during
-/// decompression so a malicious manifest cannot mount a bz2 bomb. When
-/// `expected` is given - what a server advertised - the result has to match it.
+/// A host saying "I do not have that file", as opposed to being broken: the cue to ask it for
+/// the same file packed the other way. 403 is what a storage bucket answers for a missing
+/// object when listing it is not allowed.
+fn file_missing(status: reqwest::StatusCode) -> bool {
+    matches!(status.as_u16(), 403 | 404 | 410)
+}
+
+/// Asks for the same file at each of `urls` in turn, moving on to the next only when the host
+/// says it does not have the one before: a host that is down or failing is not asked twice.
+/// Returns the response and which URL it came from.
+async fn open_first(
+    urls: &[&str],
+    local_source: bool,
+    item_name: &str,
+) -> Result<(reqwest::Response, usize), String> {
+    let mut at = 0;
+    loop {
+        let Some(url) = urls.get(at) else {
+            return Err(format!("Download failed for {}: nowhere to fetch it from", item_name));
+        };
+        let response = fetch::get(url, local_source)
+            .await
+            .map_err(|e| format!("Download request failed for {}: {}", item_name, e))?;
+        if response.status().is_success() {
+            return Ok((response, at));
+        }
+        if file_missing(response.status()) && at + 1 < urls.len() {
+            at += 1;
+            continue;
+        }
+        return Err(format!(
+            "Download failed for {}: HTTP {}",
+            item_name,
+            response.status()
+        ));
+    }
+}
+
+/// Download a compressed `.vpk` (zstd or bzip2, told apart by its first bytes) into `dest_vpk`
+/// as a fully decompressed `.vpk`, returning its SHA-256 and which of `urls` served it. The
+/// URLs are the same file packed different ways, in order of preference; the next is asked for
+/// only when the host says it does not have the one before. Enforces `max_bytes` on the
+/// download and during decompression so a malicious manifest cannot mount a decompression
+/// bomb. When `expected` is given - what a server advertised - the result has to match it.
 /// Uses a temp `.part` file beside the destination, then atomic rename.
 ///
 /// `channel` is the Tauri event name progress is emitted on, and `emitter` is
@@ -395,7 +440,7 @@ async fn lookup_manifest(api_url: &str, addr: &str) -> Result<ContentManifest, S
 /// actually be abandoned rather than merely hidden.
 #[allow(clippy::too_many_arguments)]
 pub(crate) async fn download_and_decompress<E>(
-    url: &str,
+    urls: &[&str],
     dest_vpk: &Path,
     item_name: &str,
     index: usize,
@@ -407,20 +452,11 @@ pub(crate) async fn download_and_decompress<E>(
     cancel: Option<Arc<AtomicBool>>,
     local_source: bool,
     max_bytes: u64,
-) -> Result<String, String>
+) -> Result<(String, usize), String>
 where
     E: Emitter<tauri::Wry> + Clone + Send + Sync + 'static,
 {
-    let response = fetch::get(url, local_source)
-        .await
-        .map_err(|e| format!("Download request failed for {}: {}", item_name, e))?;
-    if !response.status().is_success() {
-        return Err(format!(
-            "Download failed for {}: HTTP {}",
-            item_name,
-            response.status()
-        ));
-    }
+    let (response, served) = open_first(urls, local_source, item_name).await?;
 
     let too_big = || {
         format!(
@@ -432,15 +468,15 @@ where
     if total_compressed > max_bytes {
         return Err(too_big());
     }
-    let bz2_tmp = dest_vpk.with_extension("vpk.bz2.part");
+    let packed_tmp = dest_vpk.with_extension("vpk.dl.part");
     let vpk_tmp = dest_vpk.with_extension("vpk.part");
     // Whichever way this ends, neither temp file outlives it: the compressed one is always
     // finished with, and the unpacked one is renamed into place on success.
-    let _temps = TempFiles(vec![bz2_tmp.clone(), vpk_tmp.clone()]);
+    let _temps = TempFiles(vec![packed_tmp.clone(), vpk_tmp.clone()]);
 
     // Stream compressed bytes to temp file
     {
-        let mut file = tokio::fs::File::create(&bz2_tmp)
+        let mut file = tokio::fs::File::create(&packed_tmp)
             .await
             .map_err(|e| format!("Failed to create temp file: {}", e))?;
 
@@ -495,7 +531,7 @@ where
     }
 
     // Decompress into a sibling .vpk.part file, hashing as it goes.
-    let bz2_tmp_clone = bz2_tmp.clone();
+    let packed_tmp_clone = packed_tmp.clone();
     let vpk_tmp_clone = vpk_tmp.clone();
     let name = item_name.to_string();
     let win = window.clone();
@@ -510,7 +546,7 @@ where
 
     let sha = tokio::task::spawn_blocking(move || {
         verify::decompress_verified(
-            &bz2_tmp_clone,
+            &packed_tmp_clone,
             &vpk_tmp_clone,
             &name,
             max_bytes,
@@ -543,7 +579,7 @@ where
     // Atomic rename onto the canonical path. This is the step that can fail
     // with a sharing violation if the engine has the old file open.
     match std::fs::rename(&vpk_tmp, dest_vpk) {
-        Ok(()) => Ok(sha),
+        Ok(()) => Ok((sha, served)),
         Err(e) if is_sharing_violation(&e) => {
             Err(format!(
                 "FILE_IN_USE: {} is currently loaded by Deadlock. Please fully disconnect or quit the game and try again.",
@@ -935,7 +971,8 @@ fn items_from_advertised(
                 kind: entry.kind.as_str().to_string(),
                 version: 0,
                 compressed_size: 0,
-                download_url: rules::fastdl_url(&base, entry)?,
+                download_url: rules::fastdl_url(&base, entry, rules::Packing::Zstd)?,
+                fallback_url: rules::fastdl_url(&base, entry, rules::Packing::Bzip2),
                 sha256: entry.hash.clone(),
                 size: entry.size,
                 accept_mismatch: strictness == Strictness::AcceptMismatch,
@@ -1101,6 +1138,9 @@ where
     // The sizes above are the server's word, and an entry may give none. What is written is
     // counted as it lands, so the cap holds whatever was advertised.
     let mut budget = MAX_JOIN_BYTES;
+    // Every item in one install comes from the same host. Once it has said it has no zstd copy
+    // of one file, the rest are asked for as bzip2 first, which saves a wasted request each.
+    let mut prefer_fallback = false;
 
     for (idx, item) in items.iter().enumerate() {
         if cancelled(&cancel) {
@@ -1139,8 +1179,13 @@ where
             },
         );
 
-        let sha = download_and_decompress(
-            &item.download_url,
+        let urls: Vec<&str> = match item.fallback_url.as_deref() {
+            Some(fallback) if prefer_fallback => vec![fallback, &item.download_url],
+            Some(fallback) => vec![&item.download_url, fallback],
+            None => vec![&item.download_url],
+        };
+        let (sha, served) = download_and_decompress(
+            &urls,
             &dest_vpk,
             &display_name,
             idx,
@@ -1154,6 +1199,9 @@ where
             MAX_VPK_BYTES.min(budget),
         )
         .await?;
+        if served > 0 {
+            prefer_fallback = !prefer_fallback;
+        }
         budget = budget.saturating_sub(std::fs::metadata(&dest_vpk).map(|m| m.len()).unwrap_or(0));
         if budget == 0 && items[idx + 1..].iter().zip(&sizes[idx + 1..]).any(|(_, size)| *size > 0) {
             return Err(format!(
@@ -1338,13 +1386,22 @@ mod tests {
         let items = items_from_advertised(&adv, "https://api.deadworks.net", Strictness::Exact, false);
         // "ware" has no hash, so there is nothing to fetch it by or check it against.
         assert_eq!(items.len(), 2);
-        assert_eq!(items[0].download_url, "https://dl.example.com/dw/addons/turbo_9330149c74886724.vpk.bz2");
+        // zstd is asked for first, with the same file as bzip2 to fall back to.
+        assert_eq!(items[0].download_url, "https://dl.example.com/dw/addons/turbo_9330149c74886724.vpk.zst");
+        assert_eq!(
+            items[0].fallback_url.as_deref(),
+            Some("https://dl.example.com/dw/addons/turbo_9330149c74886724.vpk.bz2")
+        );
         assert_eq!(
             items[0].expected(),
             Some(Expected { sha256: "9330149c74886724".into(), size: Some(11965), enforce: true })
         );
         assert_eq!(items[1].kind, "map");
-        assert_eq!(items[1].download_url, "https://dl.example.com/dw/maps/dl_midtown_faf73184b902d52d.vpk.bz2");
+        assert_eq!(items[1].download_url, "https://dl.example.com/dw/maps/dl_midtown_faf73184b902d52d.vpk.zst");
+        assert_eq!(
+            items[1].fallback_url.as_deref(),
+            Some("https://dl.example.com/dw/maps/dl_midtown_faf73184b902d52d.vpk.bz2")
+        );
         assert_eq!(items[1].size, Some(1053579891));
     }
 
@@ -1352,7 +1409,11 @@ mod tests {
     fn advertised_content_without_a_host_comes_from_deadworks() {
         let adv = advertised(&[("dw_ver", "1"), ("dw_addons", "turbo:9330149c74886724")]);
         let items = items_from_advertised(&adv, "https://api.deadworks.net/", Strictness::Exact, false);
-        assert_eq!(items[0].download_url, "https://api.deadworks.net/fastdl/addons/turbo_9330149c74886724.vpk.bz2");
+        assert_eq!(items[0].download_url, "https://api.deadworks.net/fastdl/addons/turbo_9330149c74886724.vpk.zst");
+        assert_eq!(
+            items[0].fallback_url.as_deref(),
+            Some("https://api.deadworks.net/fastdl/addons/turbo_9330149c74886724.vpk.bz2")
+        );
     }
 
     /// CONNECT ANYWAY takes the same list from the same host - only the hash stops being
@@ -1392,9 +1453,87 @@ mod tests {
         );
         assert_eq!(error_code("Download failed for bootstrap: HTTP 404 Not Found"), ERR_DOWNLOAD_HOST);
         assert_eq!(error_code("Failed to read VPK magic: failed to fill whole buffer"), 4);
+        assert!(file_missing(reqwest::StatusCode::NOT_FOUND) && file_missing(reqwest::StatusCode::FORBIDDEN));
+        assert!(!file_missing(reqwest::StatusCode::INTERNAL_SERVER_ERROR) && !file_missing(reqwest::StatusCode::TOO_MANY_REQUESTS));
         assert_eq!(error_code("this server asks for 40 GiB of downloads, more than the launcher will fetch for one join"), ERR_TOO_MUCH_CONTENT);
         assert_eq!(error_code("this server's content is more than the 16 GiB the launcher will install for one join"), ERR_TOO_MUCH_CONTENT);
         assert_eq!(error_code("decompressed payload for turbo is not a valid VPK (magic mismatch)"), 4);
+    }
+
+    /// A download host on this machine that answers each path with the status it was given,
+    /// the path itself as the body, and keeps a list of what it was asked for.
+    fn stub_host(routes: &'static [(&'static str, u16)]) -> (String, Arc<Mutex<Vec<String>>>) {
+        use std::io::{BufRead, BufReader, Write};
+        let listener = std::net::TcpListener::bind("127.0.0.1:0").unwrap();
+        let base = format!("http://{}", listener.local_addr().unwrap());
+        let asked = Arc::new(Mutex::new(Vec::new()));
+        let log = asked.clone();
+        std::thread::spawn(move || {
+            for stream in listener.incoming() {
+                let Ok(mut stream) = stream else { continue };
+                let mut request = String::new();
+                if BufReader::new(&stream).read_line(&mut request).is_err() {
+                    continue;
+                }
+                let path = request.split_whitespace().nth(1).unwrap_or("").to_string();
+                let status = routes.iter().find(|(p, _)| *p == path).map_or(404, |(_, s)| *s);
+                log.lock().unwrap().push(path.clone());
+                let _ = write!(
+                    stream,
+                    "HTTP/1.1 {} X\r\nContent-Length: {}\r\nConnection: close\r\n\r\n{}",
+                    status,
+                    path.len(),
+                    path
+                );
+            }
+        });
+        (base, asked)
+    }
+
+    #[test]
+    fn a_host_without_the_zstd_file_is_asked_for_the_bzip2_one() {
+        let (base, asked) = stub_host(&[
+            ("/maps/old.vpk.bz2", 200),
+            ("/maps/new.vpk.zst", 200),
+            ("/maps/new.vpk.bz2", 200),
+            ("/maps/bucket.vpk.zst", 403),
+            ("/maps/bucket.vpk.bz2", 200),
+            ("/maps/broken.vpk.zst", 500),
+            ("/maps/broken.vpk.bz2", 200),
+        ]);
+        let at = |file: &str| format!("{base}/maps/{file}");
+        tauri::async_runtime::block_on(async {
+            // A host set up before zstd: the first answer is "no such file", the second is the file.
+            let (reply, served) = open_first(&[&at("old.vpk.zst"), &at("old.vpk.bz2")], true, "old").await.unwrap();
+            assert_eq!((served, reply.text().await.unwrap().as_str()), (1, "/maps/old.vpk.bz2"));
+            // A host with the zstd file is asked once.
+            let (reply, served) = open_first(&[&at("new.vpk.zst"), &at("new.vpk.bz2")], true, "new").await.unwrap();
+            assert_eq!((served, reply.text().await.unwrap().as_str()), (0, "/maps/new.vpk.zst"));
+            // A storage bucket says 403 for an object it does not have.
+            let (_, served) = open_first(&[&at("bucket.vpk.zst"), &at("bucket.vpk.bz2")], true, "bucket").await.unwrap();
+            assert_eq!(served, 1);
+            // A host that is failing is not the same as one without the file.
+            let err = open_first(&[&at("broken.vpk.zst"), &at("broken.vpk.bz2")], true, "broken").await.unwrap_err();
+            assert_eq!(err, "Download failed for broken: HTTP 500 Internal Server Error");
+            // Neither packing there: the failure is the download host's, as before.
+            let err = open_first(&[&at("gone.vpk.zst"), &at("gone.vpk.bz2")], true, "gone").await.unwrap_err();
+            assert!(err.starts_with("Download failed for gone: HTTP 404"), "{err}");
+            assert_eq!(error_code(&err), ERR_DOWNLOAD_HOST);
+            // A link with no alternative, as the API hands out, is asked once.
+            let err = open_first(&[&at("gone.vpk.bz2")], true, "gone").await.unwrap_err();
+            assert!(err.starts_with("Download failed for gone: HTTP 404"), "{err}");
+        });
+        assert_eq!(
+            *asked.lock().unwrap(),
+            [
+                "/maps/old.vpk.zst", "/maps/old.vpk.bz2",
+                "/maps/new.vpk.zst",
+                "/maps/bucket.vpk.zst", "/maps/bucket.vpk.bz2",
+                "/maps/broken.vpk.zst",
+                "/maps/gone.vpk.zst", "/maps/gone.vpk.bz2",
+                "/maps/gone.vpk.bz2",
+            ]
+        );
     }
 
     fn item(filename: &str, kind: &str) -> ManifestItem {
@@ -1404,6 +1543,7 @@ mod tests {
             version: 0,
             compressed_size: 0,
             download_url: String::new(),
+            fallback_url: None,
             sha256: None,
             size: None,
             accept_mismatch: false,

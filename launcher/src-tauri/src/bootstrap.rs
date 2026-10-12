@@ -335,7 +335,7 @@ pub async fn ensure(
     if !staged {
         let _ = std::fs::remove_file(&pending);
         crate::addons::download_and_decompress(
-            &manifest.download_url,
+            &[manifest.download_url.as_str()],
             &pending,
             "Deadworks bootstrap",
             0,
@@ -542,7 +542,7 @@ mod tests {
         let pending = pending_path(&d);
         let transient = [
             pending.clone(),
-            pending.with_extension("vpk.bz2.part"),
+            pending.with_extension("vpk.dl.part"),
             pending.with_extension("vpk.part"),
         ];
         for path in transient {

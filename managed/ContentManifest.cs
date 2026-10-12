@@ -58,8 +58,10 @@ internal sealed record RulesPayload(IReadOnlyList<KeyValuePair<string, string>> 
 /// </para>
 /// <para>
 /// <b>dw_fastdl</b> works like Source 1's sv_downloadurl. Clients fetch
-/// {dw_fastdl}/addons/{name}_{hash}.vpk.bz2 and {dw_fastdl}/maps/{name}_{hash}.vpk.bz2, a bzip2
-/// of the .vpk, and must check the hash after decompressing. The hash says which build, not whom
+/// {dw_fastdl}/addons/{name}_{hash}.vpk.zst and {dw_fastdl}/maps/{name}_{hash}.vpk.zst, a zstd
+/// of the .vpk with a window of at most 128 MiB, and must check the hash after decompressing.
+/// A host that has no .vpk.zst for a file is asked for the same path ending in .vpk.bz2, a
+/// bzip2 of it, which is what hosts served before zstd was supported. The hash says which build, not whom
 /// to trust: one operator picks both it and the host, so a mismatch means the host is out of date,
 /// and a client may offer to install that copy anyway. Without dw_fastdl, content comes from the
 /// Deadworks-hosted service.
@@ -139,9 +141,12 @@ internal static class ContentManifest
     public static bool IsListableName(string name)
         => name.Length > 0 && name[0] != '.' && name.IndexOfAny([',', ':', '/', '\\']) < 0;
 
-    /// <summary>Where a client fetches an entry, relative to dw_fastdl. Null for an entry with no hash.</summary>
+    /// <summary>
+    /// Where a client first looks for an entry, relative to dw_fastdl. Null for an entry with no hash.
+    /// The same path ending in .vpk.bz2 is where it looks next.
+    /// </summary>
     public static string? FastDlPath(string dir, ContentEntry entry)
-        => entry.Hash is null ? null : $"{dir}/{entry.Name}_{entry.Hash}.vpk.bz2";
+        => entry.Hash is null ? null : $"{dir}/{entry.Name}_{entry.Hash}.vpk.zst";
 
     /// <summary>Whether every client can safely use this name as a file name.</summary>
     public static bool IsPortableName(string name)

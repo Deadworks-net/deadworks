@@ -161,15 +161,33 @@ pub fn normalize_base_url(raw: &str) -> Option<String> {
     acceptable.then(|| trimmed.to_string())
 }
 
+/// How a file on a fastDL host is packed. zstd is what a host is asked for first; bzip2 is what
+/// one set up before zstd was supported, or with Source 1 era tooling, still serves.
+#[derive(Debug, Clone, Copy, PartialEq)]
+pub enum Packing {
+    Zstd,
+    Bzip2,
+}
+
+impl Packing {
+    fn extension(self) -> &'static str {
+        match self {
+            Packing::Zstd => "zst",
+            Packing::Bzip2 => "bz2",
+        }
+    }
+}
+
 /// Where an entry is fetched from under a fastDL base URL. None for an entry with no hash.
-pub fn fastdl_url(base: &str, entry: &Entry) -> Option<String> {
+pub fn fastdl_url(base: &str, entry: &Entry, packing: Packing) -> Option<String> {
     let hash = entry.hash.as_deref()?;
     Some(format!(
-        "{}/{}/{}_{}.vpk.bz2",
+        "{}/{}/{}_{}.vpk.{}",
         base,
         entry.kind.fastdl_dir(),
         entry.name,
-        hash
+        hash,
+        packing.extension()
     ))
 }
 
@@ -290,13 +308,17 @@ mod tests {
         let addon = Entry { name: "turbo".into(), kind: Kind::Addon, hash: Some(H.into()), size: Some(11965) };
         let map = Entry { name: "ware_arena".into(), kind: Kind::Map, hash: Some(H.into()), size: None };
         assert_eq!(
-            fastdl_url("https://dl.example.com/dw", &addon).unwrap(),
+            fastdl_url("https://dl.example.com/dw", &addon, Packing::Zstd).unwrap(),
+            format!("https://dl.example.com/dw/addons/turbo_{H}.vpk.zst")
+        );
+        assert_eq!(
+            fastdl_url("https://dl.example.com/dw", &addon, Packing::Bzip2).unwrap(),
             format!("https://dl.example.com/dw/addons/turbo_{H}.vpk.bz2")
         );
         assert_eq!(
-            fastdl_url("https://dl.example.com/dw", &map).unwrap(),
-            format!("https://dl.example.com/dw/maps/ware_arena_{H}.vpk.bz2")
+            fastdl_url("https://dl.example.com/dw", &map, Packing::Zstd).unwrap(),
+            format!("https://dl.example.com/dw/maps/ware_arena_{H}.vpk.zst")
         );
-        assert_eq!(fastdl_url("https://x", &Entry { hash: None, ..addon }), None);
+        assert_eq!(fastdl_url("https://x", &Entry { hash: None, ..addon }, Packing::Zstd), None);
     }
 }

@@ -1,9 +1,9 @@
 //! Content verification: SHA-256 of installed files (cached, so a 1 GB map is read once per
-//! version) and bz2 decompression that hashes what it writes and refuses to run away.
+//! version) and decompression (zstd or bzip2) that hashes what it writes and refuses to run away.
 
 use std::collections::HashMap;
 use std::fs::File;
-use std::io::{BufReader, BufWriter, Read, Write};
+use std::io::{BufRead, BufReader, BufWriter, Read, Write};
 use std::path::{Path, PathBuf};
 use std::time::UNIX_EPOCH;
 
@@ -167,18 +167,56 @@ pub(crate) struct Expected {
     pub enforce: bool,
 }
 
-/// Decompresses the bzip2 file `bz2` into `out`, hashing what it writes, and returns the full hex
+const ZSTD_MAGIC: [u8; 4] = [0x28, 0xB5, 0x2F, 0xFD];
+/// A zstd skippable frame, which is how a file written by pzstd starts: 0x184D2A50 to 0x184D2A5F,
+/// little-endian.
+const ZSTD_SKIPPABLE_MAGIC: [u8; 3] = [0x2A, 0x4D, 0x18];
+const BZIP2_MAGIC: [u8; 3] = *b"BZh";
+
+/// The largest zstd window a download may ask for, as a power of two: 128 MiB. That is zstd's
+/// own default limit and what `--long=27` and `--ultra -22` produce. The window is memory the
+/// decoder has to hold, so the file does not get to choose it freely.
+const ZSTD_WINDOW_LOG_MAX: u32 = 27;
+
+/// A decoder for the downloaded file at `packed`. Which kind is told from the file's first
+/// bytes, not from what its host called it.
+///
+/// Both read every stream in the file, not just the first: parallel compressors (pbzip2, pzstd,
+/// `zstd -T`) write several, and a single-stream decoder would silently stop early.
+fn open_packed(packed: &Path, name: &str) -> Result<Box<dyn Read>, String> {
+    let file = File::open(packed).map_err(|e| format!("Failed to open compressed temp: {}", e))?;
+    let mut input = BufReader::new(file);
+    let head = input
+        .fill_buf()
+        .map_err(|e| format!("Failed to read compressed temp: {}", e))?;
+    let zstd_frame = head.starts_with(&ZSTD_MAGIC)
+        || (head.len() >= 4 && head[0] & 0xF0 == 0x50 && head[1..4] == ZSTD_SKIPPABLE_MAGIC);
+    if zstd_frame {
+        let mut decoder = zstd::stream::read::Decoder::with_buffer(input)
+            .map_err(|e| format!("zstd decompression failed for {}: {}", name, e))?;
+        decoder
+            .window_log_max(ZSTD_WINDOW_LOG_MAX)
+            .map_err(|e| format!("zstd decompression failed for {}: {}", name, e))?;
+        Ok(Box::new(decoder))
+    } else if head.starts_with(&BZIP2_MAGIC) {
+        Ok(Box::new(bzip2::read::MultiBzDecoder::new(input)))
+    } else {
+        Err(format!(
+            "decompression failed for {}: the download is neither a zstd nor a bzip2 file",
+            name
+        ))
+    }
+}
+
+/// Decompresses the zstd or bzip2 file `packed` into `out`, hashing what it writes, and returns the full hex
 /// SHA-256. Fails once more than `max_bytes` come out (a decompression bomb), and - when
 /// `expected` is given and enforced - if the result is not what the server advertised: an
 /// advertised size is then both a tighter cap and an exact length to match. An `expected` that is
 /// not enforced only logs the mismatch and keeps the file, leaving `max_bytes` as the one cap,
 /// which is what CONNECT ANYWAY asks for. `on_chunk` sees the running total after every
 /// chunk and can stop the work by returning an error. The caller removes `out` on failure.
-///
-/// Reads every bzip2 stream in the file: parallel compressors like pbzip2 write several, and a
-/// single-stream decoder would silently stop after the first.
 pub(crate) fn decompress_verified(
-    bz2: &Path,
+    packed: &Path,
     out: &Path,
     name: &str,
     max_bytes: u64,
@@ -192,8 +230,7 @@ pub(crate) fn decompress_verified(
         .and_then(|e| e.size)
         .filter(|&s| s <= max_bytes);
     let limit = advertised_size.unwrap_or(max_bytes);
-    let input = File::open(bz2).map_err(|e| format!("Failed to open compressed temp: {}", e))?;
-    let mut decoder = bzip2::read::MultiBzDecoder::new(BufReader::new(input));
+    let mut decoder = open_packed(packed, name)?;
     let mut output = BufWriter::new(
         File::create(out).map_err(|e| format!("Failed to create {}: {}", out.display(), e))?,
     );
@@ -203,7 +240,7 @@ pub(crate) fn decompress_verified(
     loop {
         let n = decoder
             .read(&mut buf)
-            .map_err(|e| format!("bz2 decompression failed for {}: {}", name, e))?;
+            .map_err(|e| format!("decompression failed for {}: {}", name, e))?;
         if n == 0 {
             break;
         }
@@ -281,6 +318,20 @@ mod tests {
 
     fn bz2(data: &[u8]) -> Vec<u8> {
         let mut encoder = bzip2::write::BzEncoder::new(Vec::new(), bzip2::Compression::default());
+        encoder.write_all(data).unwrap();
+        encoder.finish().unwrap()
+    }
+
+    fn zst(data: &[u8]) -> Vec<u8> {
+        zstd::stream::encode_all(data, 3).unwrap()
+    }
+
+    /// zstd with a window of `1 << window_log` bytes, as `zstd --long=<window_log>` writes it.
+    fn zst_long(data: &[u8], window_log: u32) -> Vec<u8> {
+        use zstd::zstd_safe::CParameter;
+        let mut encoder = zstd::stream::write::Encoder::new(Vec::new(), 3).unwrap();
+        encoder.set_parameter(CParameter::EnableLongDistanceMatching(true)).unwrap();
+        encoder.set_parameter(CParameter::WindowLog(window_log)).unwrap();
         encoder.write_all(data).unwrap();
         encoder.finish().unwrap()
     }
@@ -411,6 +462,60 @@ mod tests {
         let dir = TempDir::new();
         let err = unpack(&dir, bz2(&vec![0u8; 4 << 20]), 64 << 10, None).unwrap_err();
         assert!(err.contains("exceeds maximum size"), "{err}");
+    }
+
+    #[test]
+    fn unpacks_zstd_checked_like_any_other_download() {
+        let dir = TempDir::new();
+        let data = b"the build the server runs".repeat(4096);
+        let wanted = expect(&sha(&data)[..16], Some(data.len() as u64));
+        assert_eq!(unpack(&dir, zst(&data), 1 << 20, Some(&wanted)).unwrap(), sha(&data));
+        assert_eq!(std::fs::read(dir.path("out.vpk")).unwrap(), data);
+
+        let err = unpack(&dir, zst(b"not what the server runs"), 1 << 20, Some(&wanted)).unwrap_err();
+        assert!(err.contains("does not match the version the server runs"), "{err}");
+    }
+
+    #[test]
+    fn stops_a_zstd_decompression_bomb() {
+        let dir = TempDir::new();
+        // 64 MiB of zeros is a few kilobytes of zstd.
+        let bomb = zst(&vec![0u8; 64 << 20]);
+        assert!(bomb.len() < 64 << 10, "{}", bomb.len());
+        let err = unpack(&dir, bomb, 1 << 20, None).unwrap_err();
+        assert!(err.contains("exceeds maximum size"), "{err}");
+    }
+
+    #[test]
+    fn reads_every_frame_of_a_multiframe_zstd_file() {
+        let dir = TempDir::new();
+        // A skippable frame first, the way pzstd starts a file, then two frames of data.
+        let mut multi = vec![0x50, 0x2A, 0x4D, 0x18, 4, 0, 0, 0, 1, 2, 3, 4];
+        multi.extend(zst(b"first frame "));
+        multi.extend(zst(b"second frame"));
+        assert_eq!(unpack(&dir, multi, 1 << 20, None).unwrap(), sha(b"first frame second frame"));
+    }
+
+    #[test]
+    fn a_zstd_window_is_allowed_up_to_128_mib_and_no_further() {
+        let dir = TempDir::new();
+        let data = vec![9u8; 1 << 20];
+        // --long=27, the most the documentation tells an operator to use.
+        assert_eq!(unpack(&dir, zst_long(&data, 27), 1 << 30, None).unwrap(), sha(&data));
+        // --long=28 would have the decoder hold 256 MiB on the file's say-so.
+        let err = unpack(&dir, zst_long(&data, 28), 1 << 30, None).unwrap_err();
+        assert!(err.contains("decompression failed"), "{err}");
+        assert_eq!(crate::addons::error_code(&err), 4);
+    }
+
+    #[test]
+    fn a_download_that_is_neither_format_is_refused() {
+        let dir = TempDir::new();
+        for junk in [&b"<html>404 not found</html>"[..], &b"4\x12\xaaU raw vpk"[..], &b""[..]] {
+            let err = unpack(&dir, junk.to_vec(), 1 << 20, None).unwrap_err();
+            assert!(err.contains("neither a zstd nor a bzip2 file"), "{err}");
+            assert_eq!(crate::addons::error_code(&err), 4);
+        }
     }
 
     #[test]

@@ -29,6 +29,7 @@ reqwest = { version = "0.12", features = ["stream", "json", "blocking"] }
 tokio = { version = "1", features = ["fs", "io-util", "sync", "time"] }
 futures-util = "0.3"
 bzip2 = "0.5"
+zstd = { version = "0.13", default-features = false }
 sha2 = "0.10"
 uuid = { version = "1", features = ["v4"] }
 # Loopback bridge for the in-game browser (src/local_api.rs): a blocking HTTP
