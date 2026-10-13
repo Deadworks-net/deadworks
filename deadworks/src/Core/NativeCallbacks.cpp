@@ -181,6 +181,28 @@ static void *__cdecl NativeGetUtlVectorData(void *vec) {
     return reinterpret_cast<CUtlVectorBase<uint8_t> *>(vec)->Base();
 }
 
+static uint8_t __cdecl NativeGrowUtlVector(void *vec, int32_t elementSize, int32_t count) {
+    struct Layout {
+        int32_t size;
+        void *pMemory;
+        int32_t allocationCount;
+        int32_t growSize;
+    };
+    auto *pVector = static_cast<Layout *>(vec);
+    if (!pVector || elementSize <= 0 || count < 0 || pVector->growSize != 0)
+        return 0;
+    if (count <= pVector->allocationCount)
+        return 1;
+
+    int32_t allocationCount = (std::max)({count, pVector->allocationCount * 2, 4});
+    void *pMemory = g_pMemAlloc->Realloc(pVector->pMemory, static_cast<size_t>(allocationCount) * elementSize);
+    if (!pMemory)
+        return 0;
+    pVector->pMemory = pMemory;
+    pVector->allocationCount = allocationCount;
+    return 1;
+}
+
 static void *__cdecl NativeGetEntityFromHandle(uint32_t handle) {
     CEntityHandle eh(handle);
     if (!eh.IsValid())
@@ -1275,6 +1297,7 @@ void deadworks::PopulateNativeCallbacks(NativeCallbacks &callbacks) {
     callbacks.SetSchemaString = &NativeSetSchemaString;
     callbacks.GetSchemaClassSize = &NativeGetSchemaClassSize;
     callbacks.GetSchemaClassAlignment = &NativeGetSchemaClassAlignment;
+    callbacks.GrowUtlVector = &NativeGrowUtlVector;
 
     // ConVar
     callbacks.FindConVar = &NativeFindConVar;

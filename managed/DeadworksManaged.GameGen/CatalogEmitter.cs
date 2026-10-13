@@ -3,7 +3,7 @@ using System.Text.Json;
 namespace DeadworksManaged.GameGen;
 
 sealed class CatalogStats {
-	public int ConVars, Commands, Heroes, Abilities, Items, Modifiers;
+	public int ConVars, Commands, Heroes, Abilities, Items, Modifiers, AbilityProperties;
 }
 
 /// <summary>Writes the typed console variables and commands, and the name constants for heroes, abilities, items and modifiers.</summary>
@@ -113,6 +113,23 @@ sealed class CatalogEmitter {
 				string cls = m.TryGetProperty("class", out var c) && c.ValueKind == JsonValueKind.String ? c.GetString()! : "";
 				return (Name(m), cls.Length > 0 ? $"Class <c>{Naming.Doc(cls)}</c>." : "");
 			}), n => Stats.Modifiers = n));
+	}
+
+	/// <summary>Writes <c>AbilityProperties</c>: every property name an ability or item gives a value for.</summary>
+	public void EmitAbilityProperties(OutputSet output, JsonElement root) {
+		var users = new SortedDictionary<string, List<string>>(StringComparer.Ordinal);
+		foreach (var ability in root.GetProperty("abilities").EnumerateArray()) {
+			if (!ability.GetProperty("vdata").TryGetProperty("m_mapAbilityProperties", out var properties) || properties.ValueKind != JsonValueKind.Object) continue;
+			foreach (var property in properties.EnumerateObject()) {
+				if (!users.TryGetValue(property.Name, out var list)) users[property.Name] = list = [];
+				list.Add(Name(ability));
+			}
+		}
+		output.Add("Names/AbilityProperties.g.cs", Constants("AbilityProperties",
+			"The name of every property an ability or item gives a value for, as <c>m_mapAbilityProperties</c> and <c>VData.Property</c> take it.",
+			users.Select(u => (u.Key, u.Value.Count > 3
+				? $"On {u.Value.Count} abilities and items."
+				: $"On {string.Join(", ", u.Value.Select(name => $"<c>{Naming.Doc(name)}</c>"))}.")), n => Stats.AbilityProperties = n));
 	}
 
 	private static string Name(JsonElement e) => e.GetProperty("name").GetString()!;

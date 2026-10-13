@@ -47,7 +47,7 @@ var guardian = Spawn.npc_boss_tier1(new() { origin = position, teamnumber = 2 },
 // The data an ability, unit or modifier was created from: properties by name, the modifiers
 // it defines, sounds, particles, weapon numbers.
 if (ability.VData is { } data) {
-    string? cooldown = data.m_mapAbilityProperties["AbilityCooldown"]?.m_strValue;
+    float? cooldown = data.Property(AbilityProperties.AbilityCooldown);
     string? intrinsic = data.m_AutoIntrinsicModifiers.FirstOrDefault()?.EntryName;
 }
 
@@ -69,6 +69,8 @@ ConCommands.changelevel("dl_midtown");
 | `Input…()` methods, `Inputs.*`, `Outputs.*` | Entity inputs as methods, and every input and output name. |
 | `ConVars.*`, `ConCommands.*` | Console variables with their declared types, and console commands. |
 | `HeroNames`, `AbilityNames`, `ItemNames`, `ModifierNames`, `EntityNames`, `SubclassNames` | Every name the curated API takes as a string. |
+| `AbilityProperties`, `VData.Property(name)` | Every ability property name, and a property's base value as a number. |
+| `GameTime`, `Transform`, `Matrix3x4`, `ResourceHandle` | The game's `GameTime_t`, `CTransform`, `matrix3x4_t` and `CStrongHandle` as values. |
 | `GameBuild` | The build the assembly was generated from. |
 
 ## How it behaves
@@ -84,7 +86,14 @@ ConCommands.changelevel("dl_midtown");
 - **`.Schema` looks the entity up each time.** Keep the view in a local when you read
   several fields.
 - **Writes are networked.** Setting a networked field tells the game, through the struct's
-  own network chain if it has one and otherwise through the entity it is stored in.
+  own network chain if it has one and otherwise through the entity it is stored in. A field's
+  documentation says when the game networks it. The schema stopped saying in build 6711, so
+  that comes from asking a running server (the survey below) and names the build asked.
+- **A `GameTime_t` is a `GameTime`.** It converts to and from `float`, and has `Remaining`,
+  `Elapsed` and `HasPassed` against the server's clock: `pawn.m_flRespawnTime = GameTime.FromNow(5)`.
+- **An ability property is text in the data** (`"25"`, `"8m"`). `Number` is the number as
+  written, `InGameUnits` converts a distance written in metres, and `VData.Property(name)`
+  is the short way to one. All are the base value, before upgrades, items and scaling.
 - **Raw means raw.** A setter is a plain write. Where a plain write is known to break
   something, the setter carries an `[Obsolete]` warning that says what to use. That is
   every field the curated API exposes read-only beside a `SetX` method, found by the
@@ -93,8 +102,10 @@ ConCommands.changelevel("dl_midtown");
   its address and the game's name for its type.
 - **Collections are views.** A vector or fixed array is a list; a `CUtlDict` or
   `CUtlOrderedMap` is a `SchemaDict`, `SchemaMap` or one of their plain-value forms, read by
-  key or enumerated in the order the game filled it. The collections are read-only; what
-  they hold can be written through.
+  key or enumerated in the order the game filled it. What they hold can be written through.
+  A `CUtlVector` of plain values or of entity handles can also change length (`Add`, `Insert`,
+  `RemoveAt`, `Clear`), with memory from the game's allocator. A vector of structs, a fixed
+  array and the dictionaries cannot: a struct needs the game's own constructor.
 - **The game types some members as a base class.** `As<T>()` on an entity checks the
   class; `Cast<T>()` on any view and `AsSchema<T>()` on any curated wrapper do not.
 

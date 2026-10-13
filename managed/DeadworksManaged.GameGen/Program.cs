@@ -115,7 +115,7 @@ if (File.Exists(surveyPath)) {
 }
 
 var files = new OutputSet(output);
-var schemaEmitter = new SchemaEmitter(schema, entities, api, setterWarnings);
+var schemaEmitter = new SchemaEmitter(schema, entities, api, setterWarnings, survey);
 schemaEmitter.Emit(files);
 var entityEmitter = new EntityEmitter(entities, schema, schemaEmitter.Ids, survey);
 if (surveyDirectory != null) {
@@ -128,6 +128,7 @@ entityEmitter.Emit(files);
 var catalog = new CatalogEmitter();
 catalog.EmitConsole(files, consoleJson.RootElement, survey?.AbsentConVars);
 catalog.EmitNames(files, vdataJson.RootElement);
+catalog.EmitAbilityProperties(files, vdataJson.RootElement);
 files.Add("GameBuild.g.cs", CatalogEmitter.EmitBuild(version, date));
 
 var (written, deleted) = files.Flush();
@@ -160,6 +161,9 @@ summary.AppendLine($"| Spawn key values | {e.Keys} in {e.KeyClasses} classes |")
 summary.AppendLine($"| Inputs, outputs | {e.Inputs}, {e.Outputs} ({s.InputMethods} inputs as methods) |");
 summary.AppendLine($"| Console variables, commands | {k.ConVars}, {k.Commands} |");
 summary.AppendLine($"| Heroes, abilities, items, modifiers | {k.Heroes}, {k.Abilities}, {k.Items}, {k.Modifiers} |");
+summary.AppendLine($"| Ability property names | {k.AbilityProperties} |");
+if (survey is { NetworkedFields.Count: > 0 })
+	summary.AppendLine($"| Fields marked networked (asked of build {survey.NetworkedBuild}) | {survey.NetworkedFields.Count} |");
 summary.AppendLine();
 summary.AppendLine($"{files.Count} files: {written} written, {deleted} deleted.");
 if (stale.Count > 0) {

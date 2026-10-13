@@ -29,3 +29,8 @@ A result per name is one of:
 
 The model note on a result depends on the order names were tried in: a model an earlier
 spawn loaded stays loaded.
+
+The first server also writes which generated fields the game networks (`networked` in the
+result, with the build it asked). The game's schema stopped marking them in build 6711; the
+running game still knows, once entities exist. `--new-only` refreshes this even when no name
+is new.

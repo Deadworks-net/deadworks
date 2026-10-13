@@ -200,6 +200,9 @@ struct NativeCallbacks {
     int32_t(__cdecl *GetSchemaClassSize)(const char *className);
     // alignof a schema class in the server module, or 0 if the schema has no such class.
     int32_t(__cdecl *GetSchemaClassAlignment)(const char *className);
+    // Makes room for count elements of elementSize bytes in a CUtlVector, keeping what it holds. Returns 0 if
+    // the vector does not own its memory.
+    uint8_t(__cdecl *GrowUtlVector)(void *vec, int32_t elementSize, int32_t count);
 };
 
 void PopulateNativeCallbacks(NativeCallbacks &callbacks);

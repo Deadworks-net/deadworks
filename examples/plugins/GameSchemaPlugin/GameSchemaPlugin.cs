@@ -75,7 +75,7 @@ public class GameSchemaPlugin : DeadworksPluginBase
 		foreach (var ability in pawn.Schema.m_CCitadelAbilityComponent.m_vecAbilities)
 		{
 			if (ability?.VData is not { } data) continue;
-			string cooldown = data.m_mapAbilityProperties["AbilityCooldown"]?.m_strValue ?? "none";
+			string cooldown = data.Property(AbilityProperties.AbilityCooldown)?.ToString() ?? "none";
 			var modifiers = data.m_AutoIntrinsicModifiers.Select(modifier => modifier?.EntryName);
 			caller.PrintToConsole($"{data.EntryName}: cooldown {cooldown}, intrinsic modifiers {string.Join(", ", modifiers)}");
 		}

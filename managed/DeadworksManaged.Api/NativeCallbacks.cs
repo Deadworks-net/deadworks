@@ -161,4 +161,5 @@ internal struct NativeCallbacks
 	public nint SetServerKeyValue;
 	public nint GetSchemaClassSize;
 	public nint GetSchemaClassAlignment;
+	public nint GrowUtlVector;
 }

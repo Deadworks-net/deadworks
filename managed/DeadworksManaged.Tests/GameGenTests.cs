@@ -17,6 +17,10 @@ public class GameGenTests {
 		    { "name": "m_Glow", "offset": 24, "type": { "category": "declared_class", "name": "CGlowProperty" } },
 		    { "name": "m_sSound", "offset": 64, "type": { "category": "atomic", "name": "CSoundEventName" } },
 		    { "name": "m_Curve", "offset": 148, "type": { "category": "atomic", "name": "CPiecewiseCurve" } },
+		    { "name": "m_hMaterial", "offset": 160, "type": { "category": "atomic", "name": "CStrongHandle", "inner": { "category": "declared_class", "name": "InfoForResourceTypeIMaterial2" } } },
+		    { "name": "m_sPickup", "offset": 168, "type": { "category": "atomic", "name": "CSubclassName" } },
+		    { "name": "m_xWorld", "offset": 192, "type": { "category": "atomic", "name": "CTransform" } },
+		    { "name": "m_vecLean", "offset": 224, "type": { "category": "atomic", "name": "CUtlLeanVector", "inner": { "category": "builtin", "name": "int32" } } },
 		    { "name": "m_nState", "offset": 80, "type": { "category": "declared_enum", "name": "State_t" } },
 		    { "name": "m_vecChildren", "offset": 88, "type": { "category": "atomic", "name": "CUtlVector", "inner": { "category": "atomic", "name": "CHandle", "inner": { "category": "declared_class", "name": "CBaseEntity" } } } },
 		    { "name": "m_szName", "offset": 112, "type": { "category": "fixed_array", "count": 32, "inner": { "category": "builtin", "name": "char" } } },
@@ -105,13 +109,13 @@ public class GameGenTests {
 		string directory = Path.Combine(Path.GetTempPath(), "gamegen-" + Guid.NewGuid().ToString("N"));
 		try {
 			var output = new OutputSet(directory);
-			var emitter = new SchemaEmitter(model, entityModel, api ?? new ApiScanner(), warnings ?? []);
-			emitter.Emit(output);
 			SpawnSurvey? tried = null;
 			if (survey != null) {
 				using var surveyJson = JsonDocument.Parse(survey);
 				tried = SpawnSurvey.Load(surveyJson.RootElement);
 			}
+			var emitter = new SchemaEmitter(model, entityModel, api ?? new ApiScanner(), warnings ?? [], tried);
+			emitter.Emit(output);
 			new EntityEmitter(entityModel, model, emitter.Ids, tried).Emit(output);
 			output.Flush();
 			var files = Directory.EnumerateFiles(directory, "*.cs", SearchOption.AllDirectories)
@@ -143,11 +147,15 @@ public class GameGenTests {
 
 		Assert.Contains("public partial class CBaseEntity : CEntityInstance, ISchemaClass<CBaseEntity>", code);
 		Assert.Contains("public int m_iHealth { get => Get<int>(__m_iHealth); set => Set(__m_iHealth, value); }", code);
-		Assert.Contains("public float m_flSpawnTime {", code);                       // a strong typedef is its value
+		Assert.Contains("public GameTime m_flSpawnTime { get => Get<GameTime>(__m_flSpawnTime);", code); // a moment on the clock
+		Assert.Contains("public ResourceHandle m_hMaterial { get => Get<ResourceHandle>(__m_hMaterial);", code);
+		Assert.Contains("public string m_sPickup => GetString(__m_sPickup);", code);
+		Assert.Contains("public Transform m_xWorld { get => Get<Transform>(__m_xWorld);", code);
+		Assert.Contains("public SchemaValueList<int> m_vecLean => new(this, __m_vecLean, ListStorage.UnresizableVector);", code); // another layout: never resized
 		Assert.Contains("public CBaseEntity? m_hOwner { get => GetHandle<CBaseEntity>(__m_hOwner);", code);
 		Assert.Contains("public CGlowProperty m_Glow => Embedded<CGlowProperty>(__m_Glow);", code);
 		Assert.Contains("public State_t m_nState {", code);
-		Assert.Contains("public SchemaHandleList<CBaseEntity> m_vecChildren => new(this, __m_vecChildren, -1);", code);
+		Assert.Contains("public SchemaHandleList<CBaseEntity> m_vecChildren => new(this, __m_vecChildren, ListStorage.Vector);", code);
 		Assert.Contains("public string m_szName => GetChars(__m_szName, 32);", code);
 		Assert.Contains("public string m_sSound => GetBufferString(__m_sSound);", code);
 		Assert.Contains("public RawField m_Curve => Raw(__m_Curve, \"CPiecewiseCurve\");", code); // unmapped, but present
@@ -292,7 +300,7 @@ public class GameGenTests {
 
 		// A class that has data of its own names it after itself; one that does not uses its base's.
 		Assert.Contains("public CPropModifierVData? m_BreakModifier => EmbeddedSubclass<CPropModifierVData>(__m_BreakModifier);", code);
-		Assert.Contains("public SchemaPointerList<CModifierVData> m_vecModifiers => new(this, __m_vecModifiers, -1, 16, 8);", code);
+		Assert.Contains("public SchemaPointerList<CModifierVData> m_vecModifiers => new(this, __m_vecModifiers, ListStorage.Vector, 16, 8);", code);
 		Assert.Contains("public RawField m_Scale => Raw(", code);   // not a modifier: what it points at is not established
 	}
 
@@ -340,6 +348,43 @@ public class GameGenTests {
 		Assert.Contains("Lived when spawned alone on dl_test in build 7.", spawn);
 		Assert.Contains("it removed itself at once", spawn);
 		Assert.Contains("Its model <c>models/a.vmdl</c> is not loaded on dl_test", spawn);
+	}
+
+	[Fact]
+	public void A_field_the_running_game_networks_says_so_and_names_the_build() {
+		string code = Generate(survey: """{ "build": 100, "results": {}, "networked": { "build": 104, "fields": { "CBaseEntity": ["m_iHealth"] } } }""")
+			.Files["Schema/Classes/CBaseEntity.cs"];
+
+		Assert.Contains("/// <summary><c>int32</c>. Networked in build 104: a write is sent to clients.</summary>", code);
+		Assert.Contains("/// <summary><c>CHandle&lt;CBaseEntity&gt;</c>.</summary>", code);   // not listed: nothing is claimed
+		Assert.DoesNotContain("Networked in", Generate().Files["Schema/Classes/CBaseEntity.cs"]);
+	}
+
+	[Fact]
+	public void Every_ability_property_name_is_a_constant_that_says_who_has_it() {
+		using var vdata = JsonDocument.Parse("""
+			{ "abilities": [
+			  { "name": "ability_a", "vdata": { "m_mapAbilityProperties": { "AbilityCooldown": { "m_strValue": "25" }, "Radius": { "m_strValue": "8m" } } } },
+			  { "name": "ability_b", "vdata": { "m_mapAbilityProperties": { "AbilityCooldown": { "m_strValue": "5" } } } },
+			  { "name": "ability_c", "vdata": {} }
+			] }
+			""");
+		string directory = Path.Combine(Path.GetTempPath(), "gamegen-" + Guid.NewGuid().ToString("N"));
+		try {
+			var output = new OutputSet(directory);
+			var catalog = new CatalogEmitter();
+			catalog.EmitAbilityProperties(output, vdata.RootElement);
+			output.Flush();
+			string code = File.ReadAllText(Path.Combine(directory, "Names", "AbilityProperties.g.cs"));
+
+			Assert.Equal(2, catalog.Stats.AbilityProperties);
+			Assert.Contains("public const string AbilityCooldown = \"AbilityCooldown\";", code);
+			Assert.Contains("/// <summary>On <c>ability_a</c>.</summary>", code);
+			Assert.Contains("public const string Radius = \"Radius\";", code);
+		}
+		finally {
+			if (Directory.Exists(directory)) Directory.Delete(directory, true);
+		}
 	}
 
 	[Fact]

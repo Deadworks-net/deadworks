@@ -43,6 +43,7 @@ internal sealed unsafe class FakeGame : IDisposable {
 		callbacks.GetUtlVectorData = (nint)(delegate* unmanaged[Cdecl]<void*, void*>)&GetUtlVectorData;
 		callbacks.GetSchemaClassSize = (nint)(delegate* unmanaged[Cdecl]<byte*, int>)&GetSchemaClassSize;
 		callbacks.GetSchemaClassAlignment = (nint)(delegate* unmanaged[Cdecl]<byte*, int>)&GetSchemaClassAlignment;
+		callbacks.GrowUtlVector = (nint)(delegate* unmanaged[Cdecl]<void*, int, int, byte>)&GrowUtlVector;
 		NativeInterop.Bind(&callbacks);
 	}
 
@@ -131,6 +132,26 @@ internal sealed unsafe class FakeGame : IDisposable {
 
 	[UnmanagedCallersOnly(CallConvs = [typeof(CallConvCdecl)])]
 	private static void* GetUtlVectorData(void* vector) => *(void**)((byte*)vector + 8);
+
+	/// <summary>How many times a vector's memory was reallocated.</summary>
+	public int Growths { get; private set; }
+
+	// As the native core does it: size, memory at +8, allocation count at +16, and a grow size at +20 that is 0 when the vector owns its memory.
+	[UnmanagedCallersOnly(CallConvs = [typeof(CallConvCdecl)])]
+	private static byte GrowUtlVector(void* vector, int elementSize, int count) {
+		int* allocated = (int*)((byte*)vector + 16);
+		if (allocated[1] != 0) return 0;
+		if (count <= *allocated) return 1;
+		int capacity = Math.Max(count, Math.Max(*allocated * 2, 4));
+		void** memory = (void**)((byte*)vector + 8);
+		void* grown = NativeMemory.AllocZeroed((nuint)(capacity * elementSize));
+		if (*memory != null) Buffer.MemoryCopy(*memory, grown, capacity * elementSize, *allocated * elementSize);
+		_current!._allocations.Add((nint)grown);
+		*memory = grown;
+		*allocated = capacity;
+		_current.Growths++;
+		return 1;
+	}
 
 	[UnmanagedCallersOnly(CallConvs = [typeof(CallConvCdecl)])]
 	private static int GetSchemaClassSize(byte* className) => _current!._sizes.GetValueOrDefault(Read(className));
@@ -309,6 +330,63 @@ public unsafe class GameSchemaTests {
 		Assert.Equal(77, gold[2]);
 		Assert.Equal((memory, 0x800 + 2 * sizeof(int), (short)0), game.Notifications[^1]);
 		Assert.Throws<ArgumentOutOfRangeException>(() => gold[gold.Count]);
+	}
+
+	[Fact]
+	public void A_vector_of_values_grows_shrinks_and_tells_the_game() {
+		using var game = new FakeGame().Field("CCitadelPlayerPawn", "m_vecQuickbuyQueue", 0x900, networked: true);
+		uint handle = game.Entity("CCitadelPlayerPawn", "player", out nint memory);
+		var queue = SchemaRegistry.Resolve<Schema.CCitadelPlayerPawn>(handle)!.m_vecQuickbuyQueue;
+
+		Assert.Empty(queue);
+		for (uint i = 1; i <= 5; i++) queue.Add(i * 10);
+		queue.Insert(1, 15);
+		Assert.Equal([10u, 15u, 20u, 30u, 40u, 50u], queue.ToArray());
+		Assert.Equal(6, *(int*)(memory + 0x900));
+		Assert.Equal(8, *(int*)(memory + 0x900 + 16));      // 4, then doubled once
+		Assert.Equal(2, game.Growths);
+		Assert.Equal((memory, 0x900, (short)0), game.Notifications[^1]);
+
+		queue.RemoveAt(0);
+		Assert.Equal([15u, 20u, 30u, 40u, 50u], queue.ToArray());
+		Assert.Throws<ArgumentOutOfRangeException>(() => queue.RemoveAt(5));
+		queue.Clear();
+		Assert.Empty(queue);
+		Assert.Equal(8, *(int*)(memory + 0x900 + 16));      // the memory stays
+	}
+
+	[Fact]
+	public void A_fixed_array_and_a_vector_that_does_not_own_its_memory_refuse_to_grow() {
+		using var game = new FakeGame()
+			.Field("CCitadelPlayerPawn", "m_arrGoldSources", 0x800)
+			.Field("CCitadelPlayerPawn", "m_vecQuickbuyQueue", 0x900);
+		uint handle = game.Entity("CCitadelPlayerPawn", "player", out nint memory);
+		var pawn = SchemaRegistry.Resolve<Schema.CCitadelPlayerPawn>(handle)!;
+
+		Assert.Throws<NotSupportedException>(() => pawn.m_arrGoldSources.Add(1));
+		*(int*)(memory + 0x900 + 20) = 1;   // a grow size: the memory is not the vector's to reallocate
+		Assert.Throws<NotSupportedException>(() => pawn.m_vecQuickbuyQueue.Add(1));
+		Assert.Equal(0, *(int*)(memory + 0x900));
+	}
+
+	[Fact]
+	public void A_game_time_reads_as_seconds_and_the_new_value_types_have_the_games_sizes() {
+		Assert.Equal(4, sizeof(GameTime));
+		Assert.Equal(32, sizeof(Transform));
+		Assert.Equal(48, sizeof(Matrix3x4));
+		Assert.Equal(8, sizeof(ResourceHandle));
+
+		GameTime time = 12.5f;
+		float seconds = time;
+		Assert.Equal(12.5f, seconds);
+		Assert.True(new GameTime(3f) < new GameTime(4f) ? true : false);
+
+		var transform = new Transform(new Vector3(1, 2, 3), Quaternion.Identity);
+		Assert.Equal(1f, ((float*)&transform)[3]);         // the game keeps 1 in the position's fourth float
+		Assert.Equal(1f, ((float*)&transform)[7]);
+
+		var matrix = new Matrix3x4 { M11 = 1, M22 = 1, M33 = 1, Translation = new Vector3(4, 5, 6) };
+		Assert.Equal(new Vector3(4, 5, 6), Vector3.Transform(Vector3.Zero, matrix.ToMatrix4x4()));
 	}
 
 	[Fact]

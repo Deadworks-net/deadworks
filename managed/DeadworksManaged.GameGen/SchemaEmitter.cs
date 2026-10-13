@@ -9,7 +9,7 @@ sealed class SchemaStats {
 }
 
 /// <summary>Writes <c>Schema.*</c>: a class per schema class, an enum per schema enum, the entity registry and the bridge from curated wrappers.</summary>
-sealed class SchemaEmitter(SchemaModel model, EntityModel entities, ApiScanner api, Dictionary<string, string> setterWarnings) {
+sealed class SchemaEmitter(SchemaModel model, EntityModel entities, ApiScanner api, Dictionary<string, string> setterWarnings, SpawnSurvey? survey) {
 	public SchemaStats Stats { get; } = new();
 
 	/// <summary>The C# identifier of each class and enum inside <c>Schema</c>.</summary>
@@ -27,14 +27,16 @@ sealed class SchemaEmitter(SchemaModel model, EntityModel entities, ApiScanner a
 		["CUtlStringToken"] = "uint", ["WorldGroupId_t"] = "uint",
 		["CPlayerSlot"] = "int", ["CEntityIndex"] = "int", ["CSplitScreenSlot"] = "int",
 		["CNetworkedQuantizedFloat"] = "float",
+		["CTransform"] = "Transform", ["CTransformWS"] = "Transform", ["matrix3x4_t"] = "Matrix3x4", ["matrix3x4a_t"] = "Matrix3x4",
 	};
 
 	// All begin with a 32-bit count and keep the element pointer at +8 (tier1/utlvector.h, utlleanvector.h).
 	private static readonly HashSet<string> Vectors = ["CUtlVector", "CNetworkUtlVectorBase", "C_NetworkUtlVectorBase", "CUtlVectorEmbeddedNetworkVar", "CUtlLeanVector"];
 	private static readonly HashSet<string> Handles = ["CHandle", "CEntityHandle"];
-	private static readonly HashSet<string> Strings = ["CUtlSymbolLarge", "CGlobalSymbol", "CUtlString"];
+	// Atomics that are one pointer to the text.
+	private static readonly HashSet<string> Strings = ["CUtlSymbolLarge", "CGlobalSymbol", "CUtlString", "CGameSoundEventName", "CModelMaterialGroupName"];
 	// Atomics that are a CBufferString with the text inside the field (tier0/bufferstring.h).
-	private static readonly HashSet<string> BufferStrings = ["CSoundEventName", "CPanoramaImageName", "CResourceNameTyped"];
+	private static readonly HashSet<string> BufferStrings = ["CSoundEventName", "CPanoramaImageName", "CResourceNameTyped", "CBufferString"];
 
 	// Names a generated member must not take: the runtime's own members on SchemaObject and Schema.CEntityInstance.
 	private static readonly string[] Reserved = [
@@ -48,6 +50,7 @@ sealed class SchemaEmitter(SchemaModel model, EntityModel entities, ApiScanner a
 		"Vector2", "Vector3", "Vector4", "Quaternion", "Color32", "SchemaField", "SchemaObject", "RawField", "ISchemaClass",
 		"SchemaValueList", "SchemaObjectList", "SchemaPointerList", "SchemaHandleList", "SchemaStringList", "Spawner", "Obsolete",
 		"SchemaRegistry", "Flags", "SchemaDict", "SchemaValueDict", "SchemaMap", "SchemaValueMap",
+		"GameTime", "Transform", "Matrix3x4", "ResourceHandle", "ListStorage",
 	];
 
 	private readonly Dictionary<string, HashSet<string>> _members = new(StringComparer.Ordinal);
@@ -111,8 +114,10 @@ sealed class SchemaEmitter(SchemaModel model, EntityModel entities, ApiScanner a
 	private string? ValueType(TypeRef type) => type.Category switch {
 		"builtin" => Builtins.GetValueOrDefault(type.Name!),
 		"declared_enum" => model.Enums.ContainsKey(type.Name!) ? Ids[type.Name!] : null,
+		"declared_class" when type.Name == "GameTime_t" && model.BoxedScalar(type.Name) == "float32" => "GameTime",
 		"declared_class" => model.BoxedScalar(type.Name!) is { } builtin ? Builtins.GetValueOrDefault(builtin) : null,
 		"atomic" when type.Inner == null => ValueAtomics.GetValueOrDefault(type.Name!),
+		"atomic" when type.Name == "CStrongHandle" => "ResourceHandle",
 		_ => null,
 	};
 
@@ -189,6 +194,9 @@ sealed class SchemaEmitter(SchemaModel model, EntityModel entities, ApiScanner a
 				return ("string", $"{{ get => GetString({field}); set => SetString({field}, value); }}");
 			case "atomic" when IsString(type):
 				return ("string", $"=> GetString({field});");
+			// The name's text pointer, then its token.
+			case "atomic" when type.Name == "CSubclassName":
+				return ("string", $"=> GetString({field});");
 			case "atomic" when BufferStrings.Contains(type.Name!):
 				return ("string", $"=> GetBufferString({field});");
 			case "atomic" when EmbeddedData(type) is { } data:
@@ -196,7 +204,7 @@ sealed class SchemaEmitter(SchemaModel model, EntityModel entities, ApiScanner a
 			case "atomic" when type.Name is "CUtlDict" or "CUtlOrderedMap":
 				return Map_(type, field);
 			case "atomic" when Vectors.Contains(type.Name!) && type.Inner != null:
-				return List(type.Inner, field, -1);
+				return List(type.Inner, field, type.Name == "CUtlLeanVector" ? "ListStorage.UnresizableVector" : "ListStorage.Vector");
 			case "declared_class" when ClassId(type) is { } embedded:
 				return (embedded, $"=> Embedded<{embedded}>({field});");
 			case "ptr" when ClassId(type.Inner) is { } pointee:
@@ -204,13 +212,13 @@ sealed class SchemaEmitter(SchemaModel model, EntityModel entities, ApiScanner a
 			case "fixed_array" when type.Inner is { Category: "builtin", Name: "char" }:
 				return ("string", $"=> GetChars({field}, {type.Count});");
 			case "fixed_array" when type.Inner != null:
-				return List(type.Inner, field, type.Count);
+				return List(type.Inner, field, type.Count.ToString());
 			default:
 				return null;
 		}
 	}
 
-	private (string Type, string Body)? List(TypeRef element, string field, int fixedCount) {
+	private (string Type, string Body)? List(TypeRef element, string field, string fixedCount) {
 		// An embedded subclass is 16 bytes with its data pointer in the second half.
 		if (EmbeddedData(element) is { } data)
 			return ($"SchemaPointerList<{data}>", $"=> new(this, {field}, {fixedCount}, 16, 8);");
@@ -317,6 +325,8 @@ sealed class SchemaEmitter(SchemaModel model, EntityModel entities, ApiScanner a
 			.Where(a => a.SchemaClass == c.Name && a.Field == field.Name)
 			.SelectMany(a => a.Members.Select(member => $"<c>{a.Wrapper}.{member}</c>"))
 			.Distinct().ToList();
+		if (survey != null && survey.NetworkedFields.Contains($"{c.Name}.{field.Name}"))
+			summary += $" Networked in build {survey.NetworkedBuild}: a write is sent to clients.";
 		if (curated.Count > 0) summary += $" Wrapped by {string.Join(", ", curated)} in DeadworksManaged.Api.";
 		if (raw) summary += " No typed mapping yet: read it through its address.";
 		return summary;

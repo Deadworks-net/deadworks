@@ -9,7 +9,13 @@ internal readonly unsafe struct ListStorage {
 	public readonly SchemaField Field;
 	private readonly int _fixedCount;
 
-	/// <summary><paramref name="fixedCount"/> is the length of a fixed array, or -1 for a <c>CUtlVector</c>.</summary>
+	/// <summary>A <c>CUtlVector</c>, which can grow.</summary>
+	public const int Vector = -1;
+
+	/// <summary>A vector of another layout (<c>CUtlLeanVector</c>): read in place, never resized.</summary>
+	public const int UnresizableVector = -2;
+
+	/// <summary><paramref name="fixedCount"/> is the length of a fixed array, or <see cref="Vector"/> or <see cref="UnresizableVector"/>.</summary>
 	public ListStorage(SchemaObject owner, SchemaField field, int fixedCount) {
 		Owner = owner;
 		Field = field;
@@ -26,6 +32,40 @@ internal readonly unsafe struct ListStorage {
 		if ((uint)index >= (uint)Count) throw new ArgumentOutOfRangeException(nameof(index));
 		return Data + index * stride;
 	}
+
+	/// <summary>Sets the vector's length, growing its memory with the game's allocator when it has to.</summary>
+	private nint Resize(int count, int stride) {
+		if (_fixedCount != Vector)
+			throw new NotSupportedException($"{Field} is {(IsFixed ? "a fixed array" : "not a CUtlVector")}, so its length cannot change.");
+		nint vector = Owner.AddressOf(Field);
+		if (NativeInterop.GrowUtlVector((void*)vector, stride, count) == 0)
+			throw new NotSupportedException($"{Field} does not own its memory, so it cannot grow.");
+		*(int*)vector = count;
+		return (nint)NativeInterop.GetUtlVectorData((void*)vector);
+	}
+
+	/// <summary>Opens a slot at <paramref name="index"/>, moving what follows up by one, and returns its address.</summary>
+	public nint Insert(int index, int stride) {
+		int count = Count;
+		if ((uint)index > (uint)count) throw new ArgumentOutOfRangeException(nameof(index));
+		nint data = Resize(count + 1, stride);
+		nint slot = data + index * stride;
+		Buffer.MemoryCopy((void*)slot, (void*)(slot + stride), (long)(count - index) * stride, (long)(count - index) * stride);
+		return slot;
+	}
+
+	/// <summary>Closes the slot at <paramref name="index"/>, moving what follows down by one.</summary>
+	public void RemoveAt(int index, int stride) {
+		int count = Count;
+		if ((uint)index >= (uint)count) throw new ArgumentOutOfRangeException(nameof(index));
+		nint slot = Data + index * stride;
+		Buffer.MemoryCopy((void*)(slot + stride), (void*)slot, (long)(count - index - 1) * stride, (long)(count - index - 1) * stride);
+		Resize(count - 1, stride);
+	}
+
+	public void Clear(int stride) => Resize(0, stride);
+
+	public void Changed() => Owner.NotifyChanged(Field);
 }
 
 /// <summary><c>sizeof</c> and <c>alignof</c> a schema class in the running game, looked up once.</summary>
@@ -45,7 +85,11 @@ internal static unsafe class SchemaClassSize<T> where T : SchemaObject, ISchemaC
 	}
 }
 
-/// <summary>A fixed array or <c>CUtlVector</c> of plain values, read and written in place.</summary>
+/// <summary>
+/// A fixed array or <c>CUtlVector</c> of plain values, read and written in place. A vector can
+/// also grow and shrink; its memory comes from the game's allocator, as it does when the game
+/// adds to it.
+/// </summary>
 public readonly unsafe struct SchemaValueList<T> : IReadOnlyList<T> where T : unmanaged {
 	private readonly ListStorage _storage;
 
@@ -63,6 +107,27 @@ public readonly unsafe struct SchemaValueList<T> : IReadOnlyList<T> where T : un
 
 	/// <summary>The elements as they are now. A vector's memory moves when the game grows it, so do not keep the span.</summary>
 	public ReadOnlySpan<T> AsSpan() => new((void*)_storage.Data, _storage.Count);
+
+	/// <summary>Appends <paramref name="value"/>. Throws <see cref="NotSupportedException"/> for a fixed array.</summary>
+	public void Add(T value) => Insert(Count, value);
+
+	/// <summary>Inserts <paramref name="value"/> at <paramref name="index"/>.</summary>
+	public void Insert(int index, T value) {
+		*(T*)_storage.Insert(index, sizeof(T)) = value;
+		_storage.Changed();
+	}
+
+	/// <summary>Removes the element at <paramref name="index"/>.</summary>
+	public void RemoveAt(int index) {
+		_storage.RemoveAt(index, sizeof(T));
+		_storage.Changed();
+	}
+
+	/// <summary>Removes every element. The vector keeps its memory.</summary>
+	public void Clear() {
+		_storage.Clear(sizeof(T));
+		_storage.Changed();
+	}
 
 	public IEnumerator<T> GetEnumerator() {
 		for (int i = 0, count = Count; i < count; i++) yield return this[i];
@@ -131,7 +196,7 @@ public readonly unsafe struct SchemaPointerList<T> : IReadOnlyList<T?> where T :
 	IEnumerator IEnumerable.GetEnumerator() => GetEnumerator();
 }
 
-/// <summary>A fixed array or <c>CUtlVector</c> of entity handles.</summary>
+/// <summary>A fixed array or <c>CUtlVector</c> of entity handles. A vector can also grow and shrink.</summary>
 public readonly unsafe struct SchemaHandleList<T> : IReadOnlyList<T?> where T : Schema.CEntityInstance, ISchemaClass<T> {
 	private readonly ListStorage _storage;
 
@@ -150,6 +215,38 @@ public readonly unsafe struct SchemaHandleList<T> : IReadOnlyList<T?> where T : 
 
 	/// <summary>The packed handle at <paramref name="index"/>, without looking the entity up.</summary>
 	public uint RawHandle(int index) => *(uint*)_storage.Element(index, sizeof(uint));
+
+	/// <summary>Appends a handle to <paramref name="entity"/>. Throws <see cref="NotSupportedException"/> for a fixed array.</summary>
+	public void Add(T? entity) => Insert(Count, entity);
+
+	/// <summary>Inserts a handle to <paramref name="entity"/> at <paramref name="index"/>.</summary>
+	public void Insert(int index, T? entity) {
+		*(uint*)_storage.Insert(index, sizeof(uint)) = entity?.EntityHandle ?? CBaseEntity.InvalidEntityHandle;
+		_storage.Changed();
+	}
+
+	/// <summary>Removes the first handle to <paramref name="entity"/>. False if the list has none.</summary>
+	public bool Remove(T entity) {
+		uint handle = entity.EntityHandle;
+		for (int i = 0, count = Count; i < count; i++) {
+			if (RawHandle(i) != handle) continue;
+			RemoveAt(i);
+			return true;
+		}
+		return false;
+	}
+
+	/// <summary>Removes the handle at <paramref name="index"/>.</summary>
+	public void RemoveAt(int index) {
+		_storage.RemoveAt(index, sizeof(uint));
+		_storage.Changed();
+	}
+
+	/// <summary>Removes every handle. The vector keeps its memory.</summary>
+	public void Clear() {
+		_storage.Clear(sizeof(uint));
+		_storage.Changed();
+	}
 
 	public IEnumerator<T?> GetEnumerator() {
 		for (int i = 0, count = Count; i < count; i++) yield return this[i];
