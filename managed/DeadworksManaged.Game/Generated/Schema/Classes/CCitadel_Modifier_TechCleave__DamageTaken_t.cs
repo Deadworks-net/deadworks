@@ -23,7 +23,7 @@ public static partial class Schema {
 
 		private static readonly SchemaField __m_flTimeToExpire = new("CCitadel_Modifier_TechCleave::DamageTaken_t", "m_flTimeToExpire");
 		/// <summary><c>GameTime_t</c>.</summary>
-		public float m_flTimeToExpire { get => Get<float>(__m_flTimeToExpire); set => Set(__m_flTimeToExpire, value); }
+		public GameTime m_flTimeToExpire { get => Get<GameTime>(__m_flTimeToExpire); set => Set(__m_flTimeToExpire, value); }
 
 		private static readonly SchemaField __m_pTarget = new("CCitadel_Modifier_TechCleave::DamageTaken_t", "m_pTarget");
 		/// <summary><c>CHandle&lt;CBaseEntity&gt;</c>.</summary>

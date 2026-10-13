@@ -14,12 +14,12 @@ public static partial class Schema {
 		static string ISchemaClass<CCitadel_Ability_IceDome>.NativeName => "CCitadel_Ability_IceDome";
 
 		private static readonly SchemaField __m_flDomeEndTime = new("CCitadel_Ability_IceDome", "m_flDomeEndTime");
-		/// <summary><c>GameTime_t</c>.</summary>
-		public float m_flDomeEndTime { get => Get<float>(__m_flDomeEndTime); set => Set(__m_flDomeEndTime, value); }
+		/// <summary><c>GameTime_t</c>. Networked in build 6779: a write is sent to clients.</summary>
+		public GameTime m_flDomeEndTime { get => Get<GameTime>(__m_flDomeEndTime); set => Set(__m_flDomeEndTime, value); }
 
 		private static readonly SchemaField __m_flDomeStartTime = new("CCitadel_Ability_IceDome", "m_flDomeStartTime");
-		/// <summary><c>GameTime_t</c>.</summary>
-		public float m_flDomeStartTime { get => Get<float>(__m_flDomeStartTime); set => Set(__m_flDomeStartTime, value); }
+		/// <summary><c>GameTime_t</c>. Networked in build 6779: a write is sent to clients.</summary>
+		public GameTime m_flDomeStartTime { get => Get<GameTime>(__m_flDomeStartTime); set => Set(__m_flDomeStartTime, value); }
 
 		/// <summary>The data entry this was created from, as <see cref="CCitadel_Ability_IceDomeVData"/>, or null if it has none.</summary>
 		public new CCitadel_Ability_IceDomeVData? VData => SubclassVData<CCitadel_Ability_IceDomeVData>();

@@ -22,11 +22,11 @@ public static partial class Schema {
 		public bool m_bSequenceChangeNetworked { get => Get<bool>(__m_bSequenceChangeNetworked); set => Set(__m_bSequenceChangeNetworked, value); }
 
 		private static readonly SchemaField __m_flCycle = new("CNetworkedSequenceOperation", "m_flCycle");
-		/// <summary><c>float32</c>.</summary>
+		/// <summary><c>float32</c>. Networked in build 6779: a write is sent to clients.</summary>
 		public float m_flCycle { get => Get<float>(__m_flCycle); set => Set(__m_flCycle, value); }
 
 		private static readonly SchemaField __m_flPrevCycle = new("CNetworkedSequenceOperation", "m_flPrevCycle");
-		/// <summary><c>float32</c>.</summary>
+		/// <summary><c>float32</c>. Networked in build 6779: a write is sent to clients.</summary>
 		public float m_flPrevCycle { get => Get<float>(__m_flPrevCycle); set => Set(__m_flPrevCycle, value); }
 
 		private static readonly SchemaField __m_flPrevCycleForAnimEventDetection = new("CNetworkedSequenceOperation", "m_flPrevCycleForAnimEventDetection");
@@ -38,11 +38,11 @@ public static partial class Schema {
 		public float m_flPrevCycleFromDiscontinuity { get => Get<float>(__m_flPrevCycleFromDiscontinuity); set => Set(__m_flPrevCycleFromDiscontinuity, value); }
 
 		private static readonly SchemaField __m_flWeight = new("CNetworkedSequenceOperation", "m_flWeight");
-		/// <summary><c>CNetworkedQuantizedFloat</c>.</summary>
+		/// <summary><c>CNetworkedQuantizedFloat</c>. Networked in build 6779: a write is sent to clients.</summary>
 		public float m_flWeight { get => Get<float>(__m_flWeight); set => Set(__m_flWeight, value); }
 
 		private static readonly SchemaField __m_hSequence = new("CNetworkedSequenceOperation", "m_hSequence");
-		/// <summary><c>HSequence</c>.</summary>
+		/// <summary><c>HSequence</c>. Networked in build 6779: a write is sent to clients.</summary>
 		public int m_hSequence { get => Get<int>(__m_hSequence); set => Set(__m_hSequence, value); }
 	}
 }

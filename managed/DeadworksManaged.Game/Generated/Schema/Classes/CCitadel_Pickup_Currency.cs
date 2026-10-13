@@ -14,7 +14,7 @@ public static partial class Schema {
 		static string ISchemaClass<CCitadel_Pickup_Currency>.NativeName => "CCitadel_Pickup_Currency";
 
 		private static readonly SchemaField __m_nCurrencyAmount = new("CCitadel_Pickup_Currency", "m_nCurrencyAmount");
-		/// <summary><c>int32</c>.</summary>
+		/// <summary><c>int32</c>. Networked in build 6779: a write is sent to clients.</summary>
 		public int m_nCurrencyAmount { get => Get<int>(__m_nCurrencyAmount); set => Set(__m_nCurrencyAmount, value); }
 	}
 }

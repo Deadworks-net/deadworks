@@ -35,10 +35,10 @@ public static partial class Schema {
 
 		private static readonly SchemaField __m_vecDisplayStats = new("CitadelStatsWeaponDisplay_t", "m_vecDisplayStats");
 		/// <summary><c>CUtlVector&lt;EStatsType&gt;</c>. What stats do we want to show in the top section?.</summary>
-		public SchemaValueList<EStatsType> m_vecDisplayStats => new(this, __m_vecDisplayStats, -1);
+		public SchemaValueList<EStatsType> m_vecDisplayStats => new(this, __m_vecDisplayStats, ListStorage.Vector);
 
 		private static readonly SchemaField __m_vecOtherDisplayStats = new("CitadelStatsWeaponDisplay_t", "m_vecOtherDisplayStats");
 		/// <summary><c>CUtlVector&lt;EStatsType&gt;</c>. What stats do we want to show in the other stats section?.</summary>
-		public SchemaValueList<EStatsType> m_vecOtherDisplayStats => new(this, __m_vecOtherDisplayStats, -1);
+		public SchemaValueList<EStatsType> m_vecOtherDisplayStats => new(this, __m_vecOtherDisplayStats, ListStorage.Vector);
 	}
 }

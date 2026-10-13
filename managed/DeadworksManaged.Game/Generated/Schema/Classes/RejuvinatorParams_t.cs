@@ -15,11 +15,11 @@ public static partial class Schema {
 
 		private static readonly SchemaField __m_PlayerRespawnMult = new("RejuvinatorParams_t", "m_PlayerRespawnMult");
 		/// <summary><c>CUtlVector&lt;float32&gt;</c>.</summary>
-		public SchemaValueList<float> m_PlayerRespawnMult => new(this, __m_PlayerRespawnMult, -1);
+		public SchemaValueList<float> m_PlayerRespawnMult => new(this, __m_PlayerRespawnMult, ListStorage.Vector);
 
 		private static readonly SchemaField __m_TrooperHealthMult = new("RejuvinatorParams_t", "m_TrooperHealthMult");
 		/// <summary><c>CUtlVector&lt;float32&gt;</c>.</summary>
-		public SchemaValueList<float> m_TrooperHealthMult => new(this, __m_TrooperHealthMult, -1);
+		public SchemaValueList<float> m_TrooperHealthMult => new(this, __m_TrooperHealthMult, ListStorage.Vector);
 
 		private static readonly SchemaField __m_flRejuvinatorBuffDuration = new("RejuvinatorParams_t", "m_flRejuvinatorBuffDuration");
 		/// <summary><c>float32</c>.</summary>

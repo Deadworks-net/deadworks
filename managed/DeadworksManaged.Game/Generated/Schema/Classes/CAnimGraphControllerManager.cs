@@ -19,6 +19,6 @@ public static partial class Schema {
 
 		private static readonly SchemaField __m_controllers = new("CAnimGraphControllerManager", "m_controllers");
 		/// <summary><c>CUtlVector&lt;CAnimGraphControllerBase*&gt;</c>.</summary>
-		public SchemaPointerList<CAnimGraphControllerBase> m_controllers => new(this, __m_controllers, -1);
+		public SchemaPointerList<CAnimGraphControllerBase> m_controllers => new(this, __m_controllers, ListStorage.Vector);
 	}
 }

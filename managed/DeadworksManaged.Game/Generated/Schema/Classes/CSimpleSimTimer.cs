@@ -15,7 +15,7 @@ public static partial class Schema {
 
 		private static readonly SchemaField __m_flNext = new("CSimpleSimTimer", "m_flNext");
 		/// <summary><c>GameTime_t</c>.</summary>
-		public float m_flNext { get => Get<float>(__m_flNext); set => Set(__m_flNext, value); }
+		public GameTime m_flNext { get => Get<GameTime>(__m_flNext); set => Set(__m_flNext, value); }
 
 		private static readonly SchemaField __m_nWorldGroupId = new("CSimpleSimTimer", "m_nWorldGroupId");
 		/// <summary><c>WorldGroupId_t</c>.</summary>

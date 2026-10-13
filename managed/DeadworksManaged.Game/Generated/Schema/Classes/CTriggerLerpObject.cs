@@ -75,6 +75,6 @@ public static partial class Schema {
 
 		private static readonly SchemaField __m_vecLerpingObjects = new("CTriggerLerpObject", "m_vecLerpingObjects");
 		/// <summary><c>CUtlVector&lt;lerpdata_t&gt;</c>.</summary>
-		public SchemaObjectList<lerpdata_t> m_vecLerpingObjects => new(this, __m_vecLerpingObjects, -1);
+		public SchemaObjectList<lerpdata_t> m_vecLerpingObjects => new(this, __m_vecLerpingObjects, ListStorage.Vector);
 	}
 }

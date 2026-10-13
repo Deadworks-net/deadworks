@@ -14,16 +14,16 @@ public static partial class Schema {
 		static string ISchemaClass<CCitadel_Ability_Necro_PrimaryWeapon>.NativeName => "CCitadel_Ability_Necro_PrimaryWeapon";
 
 		private static readonly SchemaField __m_bHasTetherTarget = new("CCitadel_Ability_Necro_PrimaryWeapon", "m_bHasTetherTarget");
-		/// <summary><c>bool</c>.</summary>
+		/// <summary><c>bool</c>. Networked in build 6779: a write is sent to clients.</summary>
 		public bool m_bHasTetherTarget { get => Get<bool>(__m_bHasTetherTarget); set => Set(__m_bHasTetherTarget, value); }
 
 		private static readonly SchemaField __m_tTetherAttachTime = new("CCitadel_Ability_Necro_PrimaryWeapon", "m_tTetherAttachTime");
-		/// <summary><c>GameTime_t</c>.</summary>
-		public float m_tTetherAttachTime { get => Get<float>(__m_tTetherAttachTime); set => Set(__m_tTetherAttachTime, value); }
+		/// <summary><c>GameTime_t</c>. Networked in build 6779: a write is sent to clients.</summary>
+		public GameTime m_tTetherAttachTime { get => Get<GameTime>(__m_tTetherAttachTime); set => Set(__m_tTetherAttachTime, value); }
 
 		private static readonly SchemaField __m_tTetherBreakTime = new("CCitadel_Ability_Necro_PrimaryWeapon", "m_tTetherBreakTime");
-		/// <summary><c>GameTime_t</c>.</summary>
-		public float m_tTetherBreakTime { get => Get<float>(__m_tTetherBreakTime); set => Set(__m_tTetherBreakTime, value); }
+		/// <summary><c>GameTime_t</c>. Networked in build 6779: a write is sent to clients.</summary>
+		public GameTime m_tTetherBreakTime { get => Get<GameTime>(__m_tTetherBreakTime); set => Set(__m_tTetherBreakTime, value); }
 
 		/// <summary>The data entry this was created from, as <see cref="CCitadel_Ability_Necro_PrimaryWeaponVData"/>, or null if it has none.</summary>
 		public new CCitadel_Ability_Necro_PrimaryWeaponVData? VData => SubclassVData<CCitadel_Ability_Necro_PrimaryWeaponVData>();

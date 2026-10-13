@@ -27,6 +27,6 @@ public static partial class Schema {
 
 		private static readonly SchemaField __m_vecStyleEquipModifiers = new("CVariantItemStyleDefinition", "m_vecStyleEquipModifiers");
 		/// <summary><c>CUtlVector&lt;CEmbeddedSubclass&lt;CCitadel_Modifier_Econ&gt;&gt;</c>.</summary>
-		public SchemaPointerList<CCitadel_Modifier_EconVData> m_vecStyleEquipModifiers => new(this, __m_vecStyleEquipModifiers, -1, 16, 8);
+		public SchemaPointerList<CCitadel_Modifier_EconVData> m_vecStyleEquipModifiers => new(this, __m_vecStyleEquipModifiers, ListStorage.Vector, 16, 8);
 	}
 }

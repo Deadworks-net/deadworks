@@ -14,7 +14,7 @@ public static partial class Schema {
 		static string ISchemaClass<CCitadel_Ability_Familiar_Ability02>.NativeName => "CCitadel_Ability_Familiar_Ability02";
 
 		private static readonly SchemaField __m_bCastWhileAttached = new("CCitadel_Ability_Familiar_Ability02", "m_bCastWhileAttached");
-		/// <summary><c>bool</c>.</summary>
+		/// <summary><c>bool</c>. Networked in build 6779: a write is sent to clients.</summary>
 		public bool m_bCastWhileAttached { get => Get<bool>(__m_bCastWhileAttached); set => Set(__m_bCastWhileAttached, value); }
 
 		/// <summary>The data entry this was created from, as <see cref="CCitadel_Ability_Familiar_Ability02VData"/>, or null if it has none.</summary>

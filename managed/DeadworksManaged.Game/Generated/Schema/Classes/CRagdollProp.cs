@@ -14,7 +14,7 @@ public static partial class Schema {
 		static string ISchemaClass<CRagdollProp>.NativeName => "CRagdollProp";
 
 		private static readonly SchemaField __m_CPropDataComponent = new("CRagdollProp", "m_CPropDataComponent");
-		/// <summary><c>CPropDataComponent</c>.</summary>
+		/// <summary><c>CPropDataComponent</c>. Networked in build 6779: a write is sent to clients.</summary>
 		public CPropDataComponent m_CPropDataComponent => Embedded<CPropDataComponent>(__m_CPropDataComponent);
 
 		private static readonly SchemaField __m_allAsleep = new("CRagdollProp", "m_allAsleep");
@@ -59,10 +59,10 @@ public static partial class Schema {
 
 		private static readonly SchemaField __m_flAwakeTime = new("CRagdollProp", "m_flAwakeTime");
 		/// <summary><c>GameTime_t</c>.</summary>
-		public float m_flAwakeTime { get => Get<float>(__m_flAwakeTime); set => Set(__m_flAwakeTime, value); }
+		public GameTime m_flAwakeTime { get => Get<GameTime>(__m_flAwakeTime); set => Set(__m_flAwakeTime, value); }
 
 		private static readonly SchemaField __m_flBlendWeight = new("CRagdollProp", "m_flBlendWeight");
-		/// <summary><c>float32</c>.</summary>
+		/// <summary><c>float32</c>. Networked in build 6779: a write is sent to clients.</summary>
 		public float m_flBlendWeight { get => Get<float>(__m_flBlendWeight); set => Set(__m_flBlendWeight, value); }
 
 		private static readonly SchemaField __m_flDefaultFadeScale = new("CRagdollProp", "m_flDefaultFadeScale");
@@ -71,7 +71,7 @@ public static partial class Schema {
 
 		private static readonly SchemaField __m_flFadeOutStartTime = new("CRagdollProp", "m_flFadeOutStartTime");
 		/// <summary><c>GameTime_t</c>.</summary>
-		public float m_flFadeOutStartTime { get => Get<float>(__m_flFadeOutStartTime); set => Set(__m_flFadeOutStartTime, value); }
+		public GameTime m_flFadeOutStartTime { get => Get<GameTime>(__m_flFadeOutStartTime); set => Set(__m_flFadeOutStartTime, value); }
 
 		private static readonly SchemaField __m_flFadeTime = new("CRagdollProp", "m_flFadeTime");
 		/// <summary><c>float32</c>.</summary>
@@ -79,11 +79,11 @@ public static partial class Schema {
 
 		private static readonly SchemaField __m_flLastOriginChangeTime = new("CRagdollProp", "m_flLastOriginChangeTime");
 		/// <summary><c>GameTime_t</c>.</summary>
-		public float m_flLastOriginChangeTime { get => Get<float>(__m_flLastOriginChangeTime); set => Set(__m_flLastOriginChangeTime, value); }
+		public GameTime m_flLastOriginChangeTime { get => Get<GameTime>(__m_flLastOriginChangeTime); set => Set(__m_flLastOriginChangeTime, value); }
 
 		private static readonly SchemaField __m_flLastPhysicsInfluenceTime = new("CRagdollProp", "m_flLastPhysicsInfluenceTime");
 		/// <summary><c>GameTime_t</c>.</summary>
-		public float m_flLastPhysicsInfluenceTime { get => Get<float>(__m_flLastPhysicsInfluenceTime); set => Set(__m_flLastPhysicsInfluenceTime, value); }
+		public GameTime m_flLastPhysicsInfluenceTime { get => Get<GameTime>(__m_flLastPhysicsInfluenceTime); set => Set(__m_flLastPhysicsInfluenceTime, value); }
 
 		private static readonly SchemaField __m_hDamageEntity = new("CRagdollProp", "m_hDamageEntity");
 		/// <summary><c>CHandle&lt;CBaseEntity&gt;</c>.</summary>
@@ -110,16 +110,16 @@ public static partial class Schema {
 		public INavObstacle__NavObstacleType_t m_nNavObstacleType { get => Get<INavObstacle__NavObstacleType_t>(__m_nNavObstacleType); set => Set(__m_nNavObstacleType, value); }
 
 		private static readonly SchemaField __m_ragAngles = new("CRagdollProp", "m_ragAngles");
-		/// <summary><c>CNetworkUtlVectorBase&lt;QAngle&gt;</c>.</summary>
-		public SchemaValueList<Vector3> m_ragAngles => new(this, __m_ragAngles, -1);
+		/// <summary><c>CNetworkUtlVectorBase&lt;QAngle&gt;</c>. Networked in build 6779: a write is sent to clients.</summary>
+		public SchemaValueList<Vector3> m_ragAngles => new(this, __m_ragAngles, ListStorage.Vector);
 
 		private static readonly SchemaField __m_ragEnabled = new("CRagdollProp", "m_ragEnabled");
-		/// <summary><c>CNetworkUtlVectorBase&lt;bool&gt;</c>.</summary>
-		public SchemaValueList<bool> m_ragEnabled => new(this, __m_ragEnabled, -1);
+		/// <summary><c>CNetworkUtlVectorBase&lt;bool&gt;</c>. Networked in build 6779: a write is sent to clients.</summary>
+		public SchemaValueList<bool> m_ragEnabled => new(this, __m_ragEnabled, ListStorage.Vector);
 
 		private static readonly SchemaField __m_ragPos = new("CRagdollProp", "m_ragPos");
-		/// <summary><c>CNetworkUtlVectorBase&lt;Vector&gt;</c>.</summary>
-		public SchemaValueList<Vector3> m_ragPos => new(this, __m_ragPos, -1);
+		/// <summary><c>CNetworkUtlVectorBase&lt;Vector&gt;</c>. Networked in build 6779: a write is sent to clients.</summary>
+		public SchemaValueList<Vector3> m_ragPos => new(this, __m_ragPos, ListStorage.Vector);
 
 		private static readonly SchemaField __m_ragdoll = new("CRagdollProp", "m_ragdoll");
 		/// <summary><c>ragdoll_t</c>.</summary>
@@ -127,11 +127,11 @@ public static partial class Schema {
 
 		private static readonly SchemaField __m_ragdollMaxs = new("CRagdollProp", "m_ragdollMaxs");
 		/// <summary><c>CUtlVector&lt;Vector&gt;</c>.</summary>
-		public SchemaValueList<Vector3> m_ragdollMaxs => new(this, __m_ragdollMaxs, -1);
+		public SchemaValueList<Vector3> m_ragdollMaxs => new(this, __m_ragdollMaxs, ListStorage.Vector);
 
 		private static readonly SchemaField __m_ragdollMins = new("CRagdollProp", "m_ragdollMins");
 		/// <summary><c>CUtlVector&lt;Vector&gt;</c>.</summary>
-		public SchemaValueList<Vector3> m_ragdollMins => new(this, __m_ragdollMins, -1);
+		public SchemaValueList<Vector3> m_ragdollMins => new(this, __m_ragdollMins, ListStorage.Vector);
 
 		private static readonly SchemaField __m_strOriginClassName = new("CRagdollProp", "m_strOriginClassName");
 		/// <summary><c>CUtlSymbolLarge</c>.</summary>
@@ -147,7 +147,7 @@ public static partial class Schema {
 
 		private static readonly SchemaField __m_vecNavObstacles = new("CRagdollProp", "m_vecNavObstacles");
 		/// <summary><c>CUtlVector&lt;INavObstacle*&gt;</c>.</summary>
-		public SchemaPointerList<INavObstacle> m_vecNavObstacles => new(this, __m_vecNavObstacles, -1);
+		public SchemaPointerList<INavObstacle> m_vecNavObstacles => new(this, __m_vecNavObstacles, ListStorage.Vector);
 
 		/// <summary>Fires the <c>Disable</c> input.</summary>
 		public void InputDisable() => FireInput("Disable");

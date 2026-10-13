@@ -15,30 +15,30 @@ public static partial class Schema {
 
 		private static readonly SchemaField __m_CachedResults = new("CAttributeManager", "m_CachedResults");
 		/// <summary><c>CUtlVector&lt;CAttributeManager::cached_attribute_float_t&gt;</c>.</summary>
-		public SchemaObjectList<CAttributeManager__cached_attribute_float_t> m_CachedResults => new(this, __m_CachedResults, -1);
+		public SchemaObjectList<CAttributeManager__cached_attribute_float_t> m_CachedResults => new(this, __m_CachedResults, ListStorage.Vector);
 
 		private static readonly SchemaField __m_ProviderType = new("CAttributeManager", "m_ProviderType");
-		/// <summary><c>attributeprovidertypes_t</c>.</summary>
+		/// <summary><c>attributeprovidertypes_t</c>. Networked in build 6779: a write is sent to clients.</summary>
 		public attributeprovidertypes_t m_ProviderType { get => Get<attributeprovidertypes_t>(__m_ProviderType); set => Set(__m_ProviderType, value); }
 
 		private static readonly SchemaField __m_Providers = new("CAttributeManager", "m_Providers");
 		/// <summary><c>CUtlVector&lt;CHandle&lt;CBaseEntity&gt;&gt;</c>.</summary>
-		public SchemaHandleList<CBaseEntity> m_Providers => new(this, __m_Providers, -1);
+		public SchemaHandleList<CBaseEntity> m_Providers => new(this, __m_Providers, ListStorage.Vector);
 
 		private static readonly SchemaField __m_Receivers = new("CAttributeManager", "m_Receivers");
 		/// <summary><c>CUtlVector&lt;CHandle&lt;CBaseEntity&gt;&gt;</c>.</summary>
-		public SchemaHandleList<CBaseEntity> m_Receivers => new(this, __m_Receivers, -1);
+		public SchemaHandleList<CBaseEntity> m_Receivers => new(this, __m_Receivers, ListStorage.Vector);
 
 		private static readonly SchemaField __m_bPreventLoopback = new("CAttributeManager", "m_bPreventLoopback");
 		/// <summary><c>bool</c>.</summary>
 		public bool m_bPreventLoopback { get => Get<bool>(__m_bPreventLoopback); set => Set(__m_bPreventLoopback, value); }
 
 		private static readonly SchemaField __m_hOuter = new("CAttributeManager", "m_hOuter");
-		/// <summary><c>CHandle&lt;CBaseEntity&gt;</c>.</summary>
+		/// <summary><c>CHandle&lt;CBaseEntity&gt;</c>. Networked in build 6779: a write is sent to clients.</summary>
 		public CBaseEntity? m_hOuter { get => GetHandle<CBaseEntity>(__m_hOuter); set => SetHandle(__m_hOuter, value); }
 
 		private static readonly SchemaField __m_iReapplyProvisionParity = new("CAttributeManager", "m_iReapplyProvisionParity");
-		/// <summary><c>int32</c>.</summary>
+		/// <summary><c>int32</c>. Networked in build 6779: a write is sent to clients.</summary>
 		public int m_iReapplyProvisionParity { get => Get<int>(__m_iReapplyProvisionParity); set => Set(__m_iReapplyProvisionParity, value); }
 	}
 }

@@ -22,23 +22,23 @@ public static partial class Schema {
 		public float m_flMeleeDamage { get => Get<float>(__m_flMeleeDamage); set => Set(__m_flMeleeDamage, value); }
 
 		private static readonly SchemaField __m_hAbility = new("CNPC_ChessPiece", "m_hAbility");
-		/// <summary><c>CHandle&lt;CCitadelBaseAbility&gt;</c>.</summary>
+		/// <summary><c>CHandle&lt;CCitadelBaseAbility&gt;</c>. Networked in build 6779: a write is sent to clients.</summary>
 		public CCitadelBaseAbility? m_hAbility { get => GetHandle<CCitadelBaseAbility>(__m_hAbility); set => SetHandle(__m_hAbility, value); }
 
 		private static readonly SchemaField __m_iChessPieceState = new("CNPC_ChessPiece", "m_iChessPieceState");
-		/// <summary><c>int32</c>.</summary>
+		/// <summary><c>int32</c>. Networked in build 6779: a write is sent to clients.</summary>
 		public int m_iChessPieceState { get => Get<int>(__m_iChessPieceState); set => Set(__m_iChessPieceState, value); }
 
 		private static readonly SchemaField __m_iChessPieceType = new("CNPC_ChessPiece", "m_iChessPieceType");
-		/// <summary><c>int32</c>.</summary>
+		/// <summary><c>int32</c>. Networked in build 6779: a write is sent to clients.</summary>
 		public int m_iChessPieceType { get => Get<int>(__m_iChessPieceType); set => Set(__m_iChessPieceType, value); }
 
 		private static readonly SchemaField __m_tCooldownEndTime = new("CNPC_ChessPiece", "m_tCooldownEndTime");
-		/// <summary><c>GameTime_t</c>.</summary>
-		public float m_tCooldownEndTime { get => Get<float>(__m_tCooldownEndTime); set => Set(__m_tCooldownEndTime, value); }
+		/// <summary><c>GameTime_t</c>. Networked in build 6779: a write is sent to clients.</summary>
+		public GameTime m_tCooldownEndTime { get => Get<GameTime>(__m_tCooldownEndTime); set => Set(__m_tCooldownEndTime, value); }
 
 		private static readonly SchemaField __m_tCooldownStartTime = new("CNPC_ChessPiece", "m_tCooldownStartTime");
-		/// <summary><c>GameTime_t</c>.</summary>
-		public float m_tCooldownStartTime { get => Get<float>(__m_tCooldownStartTime); set => Set(__m_tCooldownStartTime, value); }
+		/// <summary><c>GameTime_t</c>. Networked in build 6779: a write is sent to clients.</summary>
+		public GameTime m_tCooldownStartTime { get => Get<GameTime>(__m_tCooldownStartTime); set => Set(__m_tCooldownStartTime, value); }
 	}
 }

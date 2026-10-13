@@ -83,6 +83,6 @@ public static partial class Schema {
 
 		private static readonly SchemaField __m_vecAmbientParticleSettings = new("CCitadelHeroModelGameData_t", "m_vecAmbientParticleSettings");
 		/// <summary><c>CUtlVector&lt;AmbientParticleSettings_t&gt;</c>.</summary>
-		public SchemaObjectList<AmbientParticleSettings_t> m_vecAmbientParticleSettings => new(this, __m_vecAmbientParticleSettings, -1);
+		public SchemaObjectList<AmbientParticleSettings_t> m_vecAmbientParticleSettings => new(this, __m_vecAmbientParticleSettings, ListStorage.Vector);
 	}
 }

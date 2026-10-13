@@ -111,14 +111,14 @@ public static partial class Schema {
 
 		private static readonly SchemaField __m_vecRenderAttributes = new("CModifierVData", "m_vecRenderAttributes");
 		/// <summary><c>CUtlVector&lt;ModifierRenderAttribute_t&gt;</c>.</summary>
-		public SchemaObjectList<ModifierRenderAttribute_t> m_vecRenderAttributes => new(this, __m_vecRenderAttributes, -1);
+		public SchemaObjectList<ModifierRenderAttribute_t> m_vecRenderAttributes => new(this, __m_vecRenderAttributes, ListStorage.Vector);
 
 		private static readonly SchemaField __m_vecScriptEventHandlers = new("CModifierVData", "m_vecScriptEventHandlers");
 		/// <summary><c>CUtlVector&lt;ModifierScriptedEventHandler_t&gt;</c>. Scripted Event Handlers.</summary>
-		public SchemaObjectList<ModifierScriptedEventHandler_t> m_vecScriptEventHandlers => new(this, __m_vecScriptEventHandlers, -1);
+		public SchemaObjectList<ModifierScriptedEventHandler_t> m_vecScriptEventHandlers => new(this, __m_vecScriptEventHandlers, ListStorage.Vector);
 
 		private static readonly SchemaField __m_vecScriptValues = new("CModifierVData", "m_vecScriptValues");
 		/// <summary><c>CUtlVector&lt;ModifierScriptValue_t&gt;</c>. Scripted Modifier Values.</summary>
-		public SchemaObjectList<ModifierScriptValue_t> m_vecScriptValues => new(this, __m_vecScriptValues, -1);
+		public SchemaObjectList<ModifierScriptValue_t> m_vecScriptValues => new(this, __m_vecScriptValues, ListStorage.Vector);
 	}
 }

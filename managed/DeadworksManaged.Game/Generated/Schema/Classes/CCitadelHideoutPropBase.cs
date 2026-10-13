@@ -14,7 +14,7 @@ public static partial class Schema {
 		static string ISchemaClass<CCitadelHideoutPropBase>.NativeName => "CCitadelHideoutPropBase";
 
 		private static readonly SchemaField __m_ItemView = new("CCitadelHideoutPropBase", "m_ItemView");
-		/// <summary><c>CEconItemView</c>.</summary>
+		/// <summary><c>CEconItemView</c>. Networked in build 6779: a write is sent to clients.</summary>
 		public CEconItemView m_ItemView => Embedded<CEconItemView>(__m_ItemView);
 	}
 }

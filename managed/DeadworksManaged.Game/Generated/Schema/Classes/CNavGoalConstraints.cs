@@ -75,14 +75,14 @@ public static partial class Schema {
 
 		private static readonly SchemaField __m_vecConstrainingMarkups = new("CNavGoalConstraints", "m_vecConstrainingMarkups");
 		/// <summary><c>CUtlVector&lt;TgMarkup_t&gt;</c>.</summary>
-		public SchemaObjectList<TgMarkup_t> m_vecConstrainingMarkups => new(this, __m_vecConstrainingMarkups, -1);
+		public SchemaObjectList<TgMarkup_t> m_vecConstrainingMarkups => new(this, __m_vecConstrainingMarkups, ListStorage.Vector);
 
 		private static readonly SchemaField __m_vecConstrainingPlanes = new("CNavGoalConstraints", "m_vecConstrainingPlanes");
 		/// <summary><c>CUtlVector&lt;TgPlane_t&gt;</c>.</summary>
-		public SchemaObjectList<TgPlane_t> m_vecConstrainingPlanes => new(this, __m_vecConstrainingPlanes, -1);
+		public SchemaObjectList<TgPlane_t> m_vecConstrainingPlanes => new(this, __m_vecConstrainingPlanes, ListStorage.Vector);
 
 		private static readonly SchemaField __m_vecConstrainingSpheres = new("CNavGoalConstraints", "m_vecConstrainingSpheres");
 		/// <summary><c>CUtlVector&lt;TgSphere_t&gt;</c>.</summary>
-		public SchemaObjectList<TgSphere_t> m_vecConstrainingSpheres => new(this, __m_vecConstrainingSpheres, -1);
+		public SchemaObjectList<TgSphere_t> m_vecConstrainingSpheres => new(this, __m_vecConstrainingSpheres, ListStorage.Vector);
 	}
 }

@@ -35,6 +35,6 @@ public static partial class Schema {
 
 		private static readonly SchemaField __m_vecBeepIntervals = new("CCitadel_Projectile_BloodBomb", "m_vecBeepIntervals");
 		/// <summary><c>CUtlVector&lt;float32&gt;</c>.</summary>
-		public SchemaValueList<float> m_vecBeepIntervals => new(this, __m_vecBeepIntervals, -1);
+		public SchemaValueList<float> m_vecBeepIntervals => new(this, __m_vecBeepIntervals, ListStorage.Vector);
 	}
 }

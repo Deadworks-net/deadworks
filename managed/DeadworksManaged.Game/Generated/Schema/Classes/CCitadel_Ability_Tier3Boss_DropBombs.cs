@@ -23,11 +23,11 @@ public static partial class Schema {
 
 		private static readonly SchemaField __m_tNextBombTime = new("CCitadel_Ability_Tier3Boss_DropBombs", "m_tNextBombTime");
 		/// <summary><c>GameTime_t</c>.</summary>
-		public float m_tNextBombTime { get => Get<float>(__m_tNextBombTime); set => Set(__m_tNextBombTime, value); }
+		public GameTime m_tNextBombTime { get => Get<GameTime>(__m_tNextBombTime); set => Set(__m_tNextBombTime, value); }
 
 		private static readonly SchemaField __m_vHitTargets = new("CCitadel_Ability_Tier3Boss_DropBombs", "m_vHitTargets");
 		/// <summary><c>CUtlVector&lt;CHandle&lt;CBaseEntity&gt;&gt;</c>.</summary>
-		public SchemaHandleList<CBaseEntity> m_vHitTargets => new(this, __m_vHitTargets, -1);
+		public SchemaHandleList<CBaseEntity> m_vHitTargets => new(this, __m_vHitTargets, ListStorage.Vector);
 
 		/// <summary>The data entry this was created from, as <see cref="CCitadel_Ability_Tier3Boss_DropBombsVData"/>, or null if it has none.</summary>
 		public new CCitadel_Ability_Tier3Boss_DropBombsVData? VData => SubclassVData<CCitadel_Ability_Tier3Boss_DropBombsVData>();

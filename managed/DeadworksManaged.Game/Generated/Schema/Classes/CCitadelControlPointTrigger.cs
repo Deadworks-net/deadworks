@@ -22,39 +22,39 @@ public static partial class Schema {
 		public CEntityIOOutput m_OnFullyCaptured => Embedded<CEntityIOOutput>(__m_OnFullyCaptured);
 
 		private static readonly SchemaField __m_bAvailable = new("CCitadelControlPointTrigger", "m_bAvailable");
-		/// <summary><c>bool</c>.</summary>
+		/// <summary><c>bool</c>. Networked in build 6779: a write is sent to clients.</summary>
 		public bool m_bAvailable { get => Get<bool>(__m_bAvailable); set => Set(__m_bAvailable, value); }
 
 		private static readonly SchemaField __m_bIsBeingBlocked = new("CCitadelControlPointTrigger", "m_bIsBeingBlocked");
-		/// <summary><c>bool</c>.</summary>
+		/// <summary><c>bool</c>. Networked in build 6779: a write is sent to clients.</summary>
 		public bool m_bIsBeingBlocked { get => Get<bool>(__m_bIsBeingBlocked); set => Set(__m_bIsBeingBlocked, value); }
 
 		private static readonly SchemaField __m_bIsBeingCaptured = new("CCitadelControlPointTrigger", "m_bIsBeingCaptured");
-		/// <summary><c>bool</c>.</summary>
+		/// <summary><c>bool</c>. Networked in build 6779: a write is sent to clients.</summary>
 		public bool m_bIsBeingCaptured { get => Get<bool>(__m_bIsBeingCaptured); set => Set(__m_bIsBeingCaptured, value); }
 
 		private static readonly SchemaField __m_flCaptureTime = new("CCitadelControlPointTrigger", "m_flCaptureTime");
-		/// <summary><c>float32</c>.</summary>
+		/// <summary><c>float32</c>. Networked in build 6779: a write is sent to clients.</summary>
 		public float m_flCaptureTime { get => Get<float>(__m_flCaptureTime); set => Set(__m_flCaptureTime, value); }
 
 		private static readonly SchemaField __m_flEndRadius = new("CCitadelControlPointTrigger", "m_flEndRadius");
-		/// <summary><c>float32</c>.</summary>
+		/// <summary><c>float32</c>. Networked in build 6779: a write is sent to clients.</summary>
 		public float m_flEndRadius { get => Get<float>(__m_flEndRadius); set => Set(__m_flEndRadius, value); }
 
 		private static readonly SchemaField __m_flInitialRadius = new("CCitadelControlPointTrigger", "m_flInitialRadius");
-		/// <summary><c>float32</c>.</summary>
+		/// <summary><c>float32</c>. Networked in build 6779: a write is sent to clients.</summary>
 		public float m_flInitialRadius { get => Get<float>(__m_flInitialRadius); set => Set(__m_flInitialRadius, value); }
 
 		private static readonly SchemaField __m_flLastTouchedTime = new("CCitadelControlPointTrigger", "m_flLastTouchedTime");
 		/// <summary><c>GameTime_t</c>.</summary>
-		public float m_flLastTouchedTime { get => Get<float>(__m_flLastTouchedTime); set => Set(__m_flLastTouchedTime, value); }
+		public GameTime m_flLastTouchedTime { get => Get<GameTime>(__m_flLastTouchedTime); set => Set(__m_flLastTouchedTime, value); }
 
 		private static readonly SchemaField __m_flProgress = new("CCitadelControlPointTrigger", "m_flProgress");
-		/// <summary><c>float32</c>.</summary>
+		/// <summary><c>float32</c>. Networked in build 6779: a write is sent to clients.</summary>
 		public float m_flProgress { get => Get<float>(__m_flProgress); set => Set(__m_flProgress, value); }
 
 		private static readonly SchemaField __m_hUnlockPrereq = new("CCitadelControlPointTrigger", "m_hUnlockPrereq");
-		/// <summary><c>CHandle&lt;CBaseEntity&gt;</c>.</summary>
+		/// <summary><c>CHandle&lt;CBaseEntity&gt;</c>. Networked in build 6779: a write is sent to clients.</summary>
 		public CBaseEntity? m_hUnlockPrereq { get => GetHandle<CBaseEntity>(__m_hUnlockPrereq); set => SetHandle(__m_hUnlockPrereq, value); }
 
 		private static readonly SchemaField __m_nFXProgressBeam = new("CCitadelControlPointTrigger", "m_nFXProgressBeam");

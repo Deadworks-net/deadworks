@@ -15,7 +15,7 @@ public static partial class Schema {
 
 		private static readonly SchemaField __m_tAttackWindowStart = new("CCitadel_Item_ShadowStrike", "m_tAttackWindowStart");
 		/// <summary><c>GameTime_t</c>.</summary>
-		public float m_tAttackWindowStart { get => Get<float>(__m_tAttackWindowStart); set => Set(__m_tAttackWindowStart, value); }
+		public GameTime m_tAttackWindowStart { get => Get<GameTime>(__m_tAttackWindowStart); set => Set(__m_tAttackWindowStart, value); }
 
 		/// <summary>The data entry this was created from, as <see cref="CCitadel_Item_ShadowStrikeVData"/>, or null if it has none.</summary>
 		public new CCitadel_Item_ShadowStrikeVData? VData => SubclassVData<CCitadel_Item_ShadowStrikeVData>();

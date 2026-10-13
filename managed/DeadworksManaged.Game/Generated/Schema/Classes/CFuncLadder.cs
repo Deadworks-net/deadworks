@@ -15,7 +15,7 @@ public static partial class Schema {
 
 		private static readonly SchemaField __m_Dismounts = new("CFuncLadder", "m_Dismounts");
 		/// <summary><c>CUtlVector&lt;CHandle&lt;CInfoLadderDismount&gt;&gt;</c>.</summary>
-		public SchemaHandleList<CInfoLadderDismount> m_Dismounts => new(this, __m_Dismounts, -1);
+		public SchemaHandleList<CInfoLadderDismount> m_Dismounts => new(this, __m_Dismounts, ListStorage.Vector);
 
 		private static readonly SchemaField __m_OnPlayerGotOffLadder = new("CFuncLadder", "m_OnPlayerGotOffLadder");
 		/// <summary><c>CEntityIOOutput</c>.</summary>
@@ -30,7 +30,7 @@ public static partial class Schema {
 		public bool m_bDisabled { get => Get<bool>(__m_bDisabled); set => Set(__m_bDisabled, value); }
 
 		private static readonly SchemaField __m_bFakeLadder = new("CFuncLadder", "m_bFakeLadder");
-		/// <summary><c>bool</c>.</summary>
+		/// <summary><c>bool</c>. Networked in build 6779: a write is sent to clients.</summary>
 		public bool m_bFakeLadder { get => Get<bool>(__m_bFakeLadder); set => Set(__m_bFakeLadder, value); }
 
 		private static readonly SchemaField __m_bHasSlack = new("CFuncLadder", "m_bHasSlack");
@@ -38,7 +38,7 @@ public static partial class Schema {
 		public bool m_bHasSlack { get => Get<bool>(__m_bHasSlack); set => Set(__m_bHasSlack, value); }
 
 		private static readonly SchemaField __m_flAutoRideSpeed = new("CFuncLadder", "m_flAutoRideSpeed");
-		/// <summary><c>float32</c>.</summary>
+		/// <summary><c>float32</c>. Networked in build 6779: a write is sent to clients.</summary>
 		public float m_flAutoRideSpeed { get => Get<float>(__m_flAutoRideSpeed); set => Set(__m_flAutoRideSpeed, value); }
 
 		private static readonly SchemaField __m_surfacePropName = new("CFuncLadder", "m_surfacePropName");
@@ -46,7 +46,7 @@ public static partial class Schema {
 		public string m_surfacePropName { get => GetString(__m_surfacePropName); set => SetString(__m_surfacePropName, value); }
 
 		private static readonly SchemaField __m_vecLadderDir = new("CFuncLadder", "m_vecLadderDir");
-		/// <summary><c>Vector</c>.</summary>
+		/// <summary><c>Vector</c>. Networked in build 6779: a write is sent to clients.</summary>
 		public Vector3 m_vecLadderDir { get => Get<Vector3>(__m_vecLadderDir); set => Set(__m_vecLadderDir, value); }
 
 		private static readonly SchemaField __m_vecLocalTop = new("CFuncLadder", "m_vecLocalTop");
@@ -54,11 +54,11 @@ public static partial class Schema {
 		public Vector3 m_vecLocalTop { get => Get<Vector3>(__m_vecLocalTop); set => Set(__m_vecLocalTop, value); }
 
 		private static readonly SchemaField __m_vecPlayerMountPositionBottom = new("CFuncLadder", "m_vecPlayerMountPositionBottom");
-		/// <summary><c>VectorWS</c>.</summary>
+		/// <summary><c>VectorWS</c>. Networked in build 6779: a write is sent to clients.</summary>
 		public Vector3 m_vecPlayerMountPositionBottom { get => Get<Vector3>(__m_vecPlayerMountPositionBottom); set => Set(__m_vecPlayerMountPositionBottom, value); }
 
 		private static readonly SchemaField __m_vecPlayerMountPositionTop = new("CFuncLadder", "m_vecPlayerMountPositionTop");
-		/// <summary><c>VectorWS</c>.</summary>
+		/// <summary><c>VectorWS</c>. Networked in build 6779: a write is sent to clients.</summary>
 		public Vector3 m_vecPlayerMountPositionTop { get => Get<Vector3>(__m_vecPlayerMountPositionTop); set => Set(__m_vecPlayerMountPositionTop, value); }
 
 		/// <summary>Fires the <c>Disable</c> input.</summary>

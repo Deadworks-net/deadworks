@@ -18,11 +18,11 @@ public static partial class Schema {
 		public string m_backdoorProtectionTrigger { get => GetString(__m_backdoorProtectionTrigger); set => SetString(__m_backdoorProtectionTrigger, value); }
 
 		private static readonly SchemaField __m_eAliveState = new("CNPC_Boss_Tier3", "m_eAliveState");
-		/// <summary><c>ETier3State_t</c>.</summary>
+		/// <summary><c>ETier3State_t</c>. Networked in build 6779: a write is sent to clients.</summary>
 		public ETier3State_t m_eAliveState { get => Get<ETier3State_t>(__m_eAliveState); set => Set(__m_eAliveState, value); }
 
 		private static readonly SchemaField __m_ePhase = new("CNPC_Boss_Tier3", "m_ePhase");
-		/// <summary><c>ETier3Phase_t</c>.</summary>
+		/// <summary><c>ETier3Phase_t</c>. Networked in build 6779: a write is sent to clients.</summary>
 		public ETier3Phase_t m_ePhase { get => Get<ETier3Phase_t>(__m_ePhase); set => Set(__m_ePhase, value); }
 
 		private static readonly SchemaField __m_eventOnBossKilled = new("CNPC_Boss_Tier3", "m_eventOnBossKilled");
@@ -34,15 +34,15 @@ public static partial class Schema {
 		public CEntityIOOutput m_eventOnPhase1End => Embedded<CEntityIOOutput>(__m_eventOnPhase1End);
 
 		private static readonly SchemaField __m_iLane = new("CNPC_Boss_Tier3", "m_iLane");
-		/// <summary><c>int32</c>.</summary>
+		/// <summary><c>int32</c>. Networked in build 6779: a write is sent to clients.</summary>
 		public int m_iLane { get => Get<int>(__m_iLane); set => Set(__m_iLane, value); }
 
 		private static readonly SchemaField __m_vShrineAttackTargetPos = new("CNPC_Boss_Tier3", "m_vShrineAttackTargetPos");
-		/// <summary><c>VectorWS</c>.</summary>
+		/// <summary><c>VectorWS</c>. Networked in build 6779: a write is sent to clients.</summary>
 		public Vector3 m_vShrineAttackTargetPos { get => Get<Vector3>(__m_vShrineAttackTargetPos); set => Set(__m_vShrineAttackTargetPos, value); }
 
 		private static readonly SchemaField __m_vecElectricBeamTargetEnd = new("CNPC_Boss_Tier3", "m_vecElectricBeamTargetEnd");
-		/// <summary><c>VectorWS</c>.</summary>
+		/// <summary><c>VectorWS</c>. Networked in build 6779: a write is sent to clients.</summary>
 		public Vector3 m_vecElectricBeamTargetEnd { get => Get<Vector3>(__m_vecElectricBeamTargetEnd); set => Set(__m_vecElectricBeamTargetEnd, value); }
 
 		/// <summary>The data entry this was created from, as <see cref="CNPC_Boss_Tier3VData"/>, or null if it has none.</summary>

@@ -15,7 +15,7 @@ public static partial class Schema {
 
 		private static readonly SchemaField __m_ModifiedConvars = new("CCommentarySystem", "m_ModifiedConvars");
 		/// <summary><c>CUtlVector&lt;modifiedconvars_t&gt;</c>.</summary>
-		public SchemaObjectList<modifiedconvars_t> m_ModifiedConvars => new(this, __m_ModifiedConvars, -1);
+		public SchemaObjectList<modifiedconvars_t> m_ModifiedConvars => new(this, __m_ModifiedConvars, ListStorage.Vector);
 
 		private static readonly SchemaField __m_bCheatState = new("CCommentarySystem", "m_bCheatState");
 		/// <summary><c>bool</c>.</summary>
@@ -31,7 +31,7 @@ public static partial class Schema {
 
 		private static readonly SchemaField __m_flNextTeleportTime = new("CCommentarySystem", "m_flNextTeleportTime");
 		/// <summary><c>GameTime_t</c>.</summary>
-		public float m_flNextTeleportTime { get => Get<float>(__m_flNextTeleportTime); set => Set(__m_flNextTeleportTime, value); }
+		public GameTime m_flNextTeleportTime { get => Get<GameTime>(__m_flNextTeleportTime); set => Set(__m_flNextTeleportTime, value); }
 
 		private static readonly SchemaField __m_hActiveCommentaryNode = new("CCommentarySystem", "m_hActiveCommentaryNode");
 		/// <summary><c>CHandle&lt;CPointCommentaryNode&gt;</c>.</summary>
@@ -51,6 +51,6 @@ public static partial class Schema {
 
 		private static readonly SchemaField __m_vecNodes = new("CCommentarySystem", "m_vecNodes");
 		/// <summary><c>CUtlVector&lt;CHandle&lt;CPointCommentaryNode&gt;&gt;</c>.</summary>
-		public SchemaHandleList<CPointCommentaryNode> m_vecNodes => new(this, __m_vecNodes, -1);
+		public SchemaHandleList<CPointCommentaryNode> m_vecNodes => new(this, __m_vecNodes, ListStorage.Vector);
 	}
 }

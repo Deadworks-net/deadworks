@@ -35,7 +35,7 @@ public static partial class Schema {
 
 		private static readonly SchemaField __m_tCastCompleteTime = new("CCitadel_Ability_Tier2Boss_LaserBeam", "m_tCastCompleteTime");
 		/// <summary><c>GameTime_t</c>.</summary>
-		public float m_tCastCompleteTime { get => Get<float>(__m_tCastCompleteTime); set => Set(__m_tCastCompleteTime, value); }
+		public GameTime m_tCastCompleteTime { get => Get<GameTime>(__m_tCastCompleteTime); set => Set(__m_tCastCompleteTime, value); }
 
 		/// <summary>The data entry this was created from, as <see cref="CCitadel_Ability_Tier2Boss_LaserBeamVData"/>, or null if it has none.</summary>
 		public new CCitadel_Ability_Tier2Boss_LaserBeamVData? VData => SubclassVData<CCitadel_Ability_Tier2Boss_LaserBeamVData>();

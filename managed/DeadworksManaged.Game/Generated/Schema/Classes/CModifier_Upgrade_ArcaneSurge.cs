@@ -19,6 +19,6 @@ public static partial class Schema {
 
 		private static readonly SchemaField __m_tNextAbilityTriggerWindow = new("CModifier_Upgrade_ArcaneSurge", "m_tNextAbilityTriggerWindow");
 		/// <summary><c>GameTime_t</c>.</summary>
-		public float m_tNextAbilityTriggerWindow { get => Get<float>(__m_tNextAbilityTriggerWindow); set => Set(__m_tNextAbilityTriggerWindow, value); }
+		public GameTime m_tNextAbilityTriggerWindow { get => Get<GameTime>(__m_tNextAbilityTriggerWindow); set => Set(__m_tNextAbilityTriggerWindow, value); }
 	}
 }

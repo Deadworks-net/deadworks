@@ -14,15 +14,15 @@ public static partial class Schema {
 		static string ISchemaClass<PlayOfTheGameTrigger_t>.NativeName => "PlayOfTheGameTrigger_t";
 
 		private static readonly SchemaField __m_eType = new("PlayOfTheGameTrigger_t", "m_eType");
-		/// <summary><c>EPlayOfTheGameReplayTrigger</c>.</summary>
+		/// <summary><c>EPlayOfTheGameReplayTrigger</c>. Networked in build 6779: a write is sent to clients.</summary>
 		public EPlayOfTheGameReplayTrigger m_eType { get => Get<EPlayOfTheGameReplayTrigger>(__m_eType); set => Set(__m_eType, value); }
 
 		private static readonly SchemaField __m_nTarget = new("PlayOfTheGameTrigger_t", "m_nTarget");
-		/// <summary><c>CPlayerSlot</c>.</summary>
+		/// <summary><c>CPlayerSlot</c>. Networked in build 6779: a write is sent to clients.</summary>
 		public int m_nTarget { get => Get<int>(__m_nTarget); set => Set(__m_nTarget, value); }
 
 		private static readonly SchemaField __m_tTriggerTime = new("PlayOfTheGameTrigger_t", "m_tTriggerTime");
-		/// <summary><c>GameTime_t</c>.</summary>
-		public float m_tTriggerTime { get => Get<float>(__m_tTriggerTime); set => Set(__m_tTriggerTime, value); }
+		/// <summary><c>GameTime_t</c>. Networked in build 6779: a write is sent to clients.</summary>
+		public GameTime m_tTriggerTime { get => Get<GameTime>(__m_tTriggerTime); set => Set(__m_tTriggerTime, value); }
 	}
 }

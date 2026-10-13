@@ -23,7 +23,7 @@ public static partial class Schema {
 
 		private static readonly SchemaField __m_flStartTime = new("CLogicActiveAutosave", "m_flStartTime");
 		/// <summary><c>GameTime_t</c>.</summary>
-		public float m_flStartTime { get => Get<float>(__m_flStartTime); set => Set(__m_flStartTime, value); }
+		public GameTime m_flStartTime { get => Get<GameTime>(__m_flStartTime); set => Set(__m_flStartTime, value); }
 
 		private static readonly SchemaField __m_flTimeToTrigger = new("CLogicActiveAutosave", "m_flTimeToTrigger");
 		/// <summary><c>float32</c>.</summary>

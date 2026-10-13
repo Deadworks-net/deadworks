@@ -15,7 +15,7 @@ public static partial class Schema {
 
 		private static readonly SchemaField __m_flLastDamageTime = new("CCitadel_Modifier_Basic_DOT", "m_flLastDamageTime");
 		/// <summary><c>GameTime_t</c>.</summary>
-		public float m_flLastDamageTime { get => Get<float>(__m_flLastDamageTime); set => Set(__m_flLastDamageTime, value); }
+		public GameTime m_flLastDamageTime { get => Get<GameTime>(__m_flLastDamageTime); set => Set(__m_flLastDamageTime, value); }
 
 		private static readonly SchemaField __m_flSnapShotDPS = new("CCitadel_Modifier_Basic_DOT", "m_flSnapShotDPS");
 		/// <summary><c>float32</c>.</summary>

@@ -43,18 +43,18 @@ public static partial class Schema {
 
 		private static readonly SchemaField __m_vecFractionOfWheelSubmergedForWheelDrag = new("CBuoyancyHelper", "m_vecFractionOfWheelSubmergedForWheelDrag");
 		/// <summary><c>CUtlVector&lt;float32&gt;</c>.</summary>
-		public SchemaValueList<float> m_vecFractionOfWheelSubmergedForWheelDrag => new(this, __m_vecFractionOfWheelSubmergedForWheelDrag, -1);
+		public SchemaValueList<float> m_vecFractionOfWheelSubmergedForWheelDrag => new(this, __m_vecFractionOfWheelSubmergedForWheelDrag, ListStorage.Vector);
 
 		private static readonly SchemaField __m_vecFractionOfWheelSubmergedForWheelFriction = new("CBuoyancyHelper", "m_vecFractionOfWheelSubmergedForWheelFriction");
 		/// <summary><c>CUtlVector&lt;float32&gt;</c>.</summary>
-		public SchemaValueList<float> m_vecFractionOfWheelSubmergedForWheelFriction => new(this, __m_vecFractionOfWheelSubmergedForWheelFriction, -1);
+		public SchemaValueList<float> m_vecFractionOfWheelSubmergedForWheelFriction => new(this, __m_vecFractionOfWheelSubmergedForWheelFriction, ListStorage.Vector);
 
 		private static readonly SchemaField __m_vecWheelDrag = new("CBuoyancyHelper", "m_vecWheelDrag");
 		/// <summary><c>CUtlVector&lt;float32&gt;</c>.</summary>
-		public SchemaValueList<float> m_vecWheelDrag => new(this, __m_vecWheelDrag, -1);
+		public SchemaValueList<float> m_vecWheelDrag => new(this, __m_vecWheelDrag, ListStorage.Vector);
 
 		private static readonly SchemaField __m_vecWheelFrictionScales = new("CBuoyancyHelper", "m_vecWheelFrictionScales");
 		/// <summary><c>CUtlVector&lt;float32&gt;</c>.</summary>
-		public SchemaValueList<float> m_vecWheelFrictionScales => new(this, __m_vecWheelFrictionScales, -1);
+		public SchemaValueList<float> m_vecWheelFrictionScales => new(this, __m_vecWheelFrictionScales, ListStorage.Vector);
 	}
 }

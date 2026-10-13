@@ -22,8 +22,8 @@ public static partial class Schema {
 		public string m_CrossbowImpactParticle => GetBufferString(__m_CrossbowImpactParticle);
 
 		private static readonly SchemaField __m_NewWeaponAbility = new("CCitadel_Ability_Priest_WeaponSwapVData", "m_NewWeaponAbility");
-		/// <summary><c>CSubclassName</c>. No typed mapping yet: read it through its address.</summary>
-		public RawField m_NewWeaponAbility => Raw(__m_NewWeaponAbility, "CSubclassName");
+		/// <summary><c>CSubclassName</c>.</summary>
+		public string m_NewWeaponAbility => GetString(__m_NewWeaponAbility);
 
 		private static readonly SchemaField __m_SelfModifier = new("CCitadel_Ability_Priest_WeaponSwapVData", "m_SelfModifier");
 		/// <summary><c>CEmbeddedSubclass&lt;CCitadelModifier&gt;</c>.</summary>

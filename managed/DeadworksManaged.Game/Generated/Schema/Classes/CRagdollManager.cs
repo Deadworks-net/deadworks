@@ -22,7 +22,7 @@ public static partial class Schema {
 		public bool m_bSaveImportant { get => Get<bool>(__m_bSaveImportant); set => Set(__m_bSaveImportant, value); }
 
 		private static readonly SchemaField __m_iCurrentMaxRagdollCount = new("CRagdollManager", "m_iCurrentMaxRagdollCount");
-		/// <summary><c>int8</c>.</summary>
+		/// <summary><c>int8</c>. Networked in build 6779: a write is sent to clients.</summary>
 		public sbyte m_iCurrentMaxRagdollCount { get => Get<sbyte>(__m_iCurrentMaxRagdollCount); set => Set(__m_iCurrentMaxRagdollCount, value); }
 
 		private static readonly SchemaField __m_iMaxRagdollCount = new("CRagdollManager", "m_iMaxRagdollCount");

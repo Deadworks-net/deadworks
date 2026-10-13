@@ -22,11 +22,11 @@ public static partial class Schema {
 		public RawField m_OnLayerCycleUpdated => Raw(__m_OnLayerCycleUpdated, "CEntityOutputTemplate<float32>");
 
 		private static readonly SchemaField __m_RagdollPose = new("CBaseAnimGraph", "m_RagdollPose");
-		/// <summary><c>PhysicsRagdollPose_t</c>.</summary>
+		/// <summary><c>PhysicsRagdollPose_t</c>. Networked in build 6779: a write is sent to clients.</summary>
 		public PhysicsRagdollPose_t m_RagdollPose => Embedded<PhysicsRagdollPose_t>(__m_RagdollPose);
 
 		private static readonly SchemaField __m_bAnimGraphUpdateEnabled = new("CBaseAnimGraph", "m_bAnimGraphUpdateEnabled");
-		/// <summary><c>bool</c>.</summary>
+		/// <summary><c>bool</c>. Networked in build 6779: a write is sent to clients.</summary>
 		public bool m_bAnimGraphUpdateEnabled { get => Get<bool>(__m_bAnimGraphUpdateEnabled); set => Set(__m_bAnimGraphUpdateEnabled, value); }
 
 		private static readonly SchemaField __m_bAnimationUpdateScheduled = new("CBaseAnimGraph", "m_bAnimationUpdateScheduled");
@@ -34,19 +34,19 @@ public static partial class Schema {
 		public bool m_bAnimationUpdateScheduled { get => Get<bool>(__m_bAnimationUpdateScheduled); set => Set(__m_bAnimationUpdateScheduled, value); }
 
 		private static readonly SchemaField __m_bInitiallyPopulateInterpHistory = new("CBaseAnimGraph", "m_bInitiallyPopulateInterpHistory");
-		/// <summary><c>bool</c>.</summary>
+		/// <summary><c>bool</c>. Networked in build 6779: a write is sent to clients.</summary>
 		public bool m_bInitiallyPopulateInterpHistory { get => Get<bool>(__m_bInitiallyPopulateInterpHistory); set => Set(__m_bInitiallyPopulateInterpHistory, value); }
 
 		private static readonly SchemaField __m_bRagdollClientSide = new("CBaseAnimGraph", "m_bRagdollClientSide");
-		/// <summary><c>bool</c>.</summary>
+		/// <summary><c>bool</c>. Networked in build 6779: a write is sent to clients.</summary>
 		public bool m_bRagdollClientSide { get => Get<bool>(__m_bRagdollClientSide); set => Set(__m_bRagdollClientSide, value); }
 
 		private static readonly SchemaField __m_bRagdollEnabled = new("CBaseAnimGraph", "m_bRagdollEnabled");
-		/// <summary><c>bool</c>.</summary>
+		/// <summary><c>bool</c>. Networked in build 6779: a write is sent to clients.</summary>
 		public bool m_bRagdollEnabled { get => Get<bool>(__m_bRagdollEnabled); set => Set(__m_bRagdollEnabled, value); }
 
 		private static readonly SchemaField __m_bShouldUpdateTransformations = new("CBaseAnimGraph", "m_bShouldUpdateTransformations");
-		/// <summary><c>bool</c>.</summary>
+		/// <summary><c>bool</c>. Networked in build 6779: a write is sent to clients.</summary>
 		public bool m_bShouldUpdateTransformations { get => Get<bool>(__m_bShouldUpdateTransformations); set => Set(__m_bShouldUpdateTransformations, value); }
 
 		private static readonly SchemaField __m_bodyGroupModifiers = new("CBaseAnimGraph", "m_bodyGroupModifiers");
@@ -58,7 +58,7 @@ public static partial class Schema {
 		public CAnimGraphControllerManager m_graphControllerManager => Embedded<CAnimGraphControllerManager>(__m_graphControllerManager);
 
 		private static readonly SchemaField __m_nForceBone = new("CBaseAnimGraph", "m_nForceBone");
-		/// <summary><c>int32</c>.</summary>
+		/// <summary><c>int32</c>. Networked in build 6779: a write is sent to clients.</summary>
 		public int m_nForceBone { get => Get<int>(__m_nForceBone); set => Set(__m_nForceBone, value); }
 
 		private static readonly SchemaField __m_pChoreoServices = new("CBaseAnimGraph", "m_pChoreoServices");
@@ -74,12 +74,12 @@ public static partial class Schema {
 		public IPhysicsRagdollControl? m_pRagdollControl => Pointer<IPhysicsRagdollControl>(__m_pRagdollControl);
 
 		private static readonly SchemaField __m_vecForce = new("CBaseAnimGraph", "m_vecForce");
-		/// <summary><c>Vector</c>.</summary>
+		/// <summary><c>Vector</c>. Networked in build 6779: a write is sent to clients.</summary>
 		public Vector3 m_vecForce { get => Get<Vector3>(__m_vecForce); set => Set(__m_vecForce, value); }
 
 		private static readonly SchemaField __m_xParentedRagdollRootInEntitySpace = new("CBaseAnimGraph", "m_xParentedRagdollRootInEntitySpace");
-		/// <summary><c>CTransform</c>. No typed mapping yet: read it through its address.</summary>
-		public RawField m_xParentedRagdollRootInEntitySpace => Raw(__m_xParentedRagdollRootInEntitySpace, "CTransform");
+		/// <summary><c>CTransform</c>.</summary>
+		public Transform m_xParentedRagdollRootInEntitySpace { get => Get<Transform>(__m_xParentedRagdollRootInEntitySpace); set => Set(__m_xParentedRagdollRootInEntitySpace, value); }
 
 		/// <summary>Fires the <c>ClearTargetIdentifierOverride</c> input.</summary>
 		public void InputClearTargetIdentifierOverride() => FireInput("ClearTargetIdentifierOverride");

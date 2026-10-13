@@ -63,7 +63,7 @@ public static partial class Schema {
 
 		private static readonly SchemaField __m_flLastPickupCheck = new("CItemGeneric", "m_flLastPickupCheck");
 		/// <summary><c>GameTime_t</c>.</summary>
-		public float m_flLastPickupCheck { get => Get<float>(__m_flLastPickupCheck); set => Set(__m_flLastPickupCheck, value); }
+		public GameTime m_flLastPickupCheck { get => Get<GameTime>(__m_flLastPickupCheck); set => Set(__m_flLastPickupCheck, value); }
 
 		private static readonly SchemaField __m_flPickupRadius = new("CItemGeneric", "m_flPickupRadius");
 		/// <summary><c>float32</c>.</summary>
@@ -90,16 +90,16 @@ public static partial class Schema {
 		public CBaseFilter? m_hPickupFilter { get => GetHandle<CBaseFilter>(__m_hPickupFilter); set => SetHandle(__m_hPickupFilter, value); }
 
 		private static readonly SchemaField __m_hPickupParticleEffect = new("CItemGeneric", "m_hPickupParticleEffect");
-		/// <summary><c>CStrongHandle&lt;InfoForResourceTypeIParticleSystemDefinition&gt;</c>. No typed mapping yet: read it through its address.</summary>
-		public RawField m_hPickupParticleEffect => Raw(__m_hPickupParticleEffect, "CStrongHandle<InfoForResourceTypeIParticleSystemDefinition>");
+		/// <summary><c>CStrongHandle&lt;InfoForResourceTypeIParticleSystemDefinition&gt;</c>.</summary>
+		public ResourceHandle m_hPickupParticleEffect { get => Get<ResourceHandle>(__m_hPickupParticleEffect); set => Set(__m_hPickupParticleEffect, value); }
 
 		private static readonly SchemaField __m_hSpawnParticleEffect = new("CItemGeneric", "m_hSpawnParticleEffect");
-		/// <summary><c>CStrongHandle&lt;InfoForResourceTypeIParticleSystemDefinition&gt;</c>. No typed mapping yet: read it through its address.</summary>
-		public RawField m_hSpawnParticleEffect => Raw(__m_hSpawnParticleEffect, "CStrongHandle<InfoForResourceTypeIParticleSystemDefinition>");
+		/// <summary><c>CStrongHandle&lt;InfoForResourceTypeIParticleSystemDefinition&gt;</c>.</summary>
+		public ResourceHandle m_hSpawnParticleEffect { get => Get<ResourceHandle>(__m_hSpawnParticleEffect); set => Set(__m_hSpawnParticleEffect, value); }
 
 		private static readonly SchemaField __m_hTimeoutParticleEffect = new("CItemGeneric", "m_hTimeoutParticleEffect");
-		/// <summary><c>CStrongHandle&lt;InfoForResourceTypeIParticleSystemDefinition&gt;</c>. No typed mapping yet: read it through its address.</summary>
-		public RawField m_hTimeoutParticleEffect => Raw(__m_hTimeoutParticleEffect, "CStrongHandle<InfoForResourceTypeIParticleSystemDefinition>");
+		/// <summary><c>CStrongHandle&lt;InfoForResourceTypeIParticleSystemDefinition&gt;</c>.</summary>
+		public ResourceHandle m_hTimeoutParticleEffect { get => Get<ResourceHandle>(__m_hTimeoutParticleEffect); set => Set(__m_hTimeoutParticleEffect, value); }
 
 		private static readonly SchemaField __m_hTriggerHelper = new("CItemGeneric", "m_hTriggerHelper");
 		/// <summary><c>CHandle&lt;CItemGenericTriggerHelper&gt;</c>.</summary>

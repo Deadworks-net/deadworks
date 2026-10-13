@@ -19,7 +19,7 @@ public static partial class Schema {
 
 		private static readonly SchemaField __m_flExplosionTime = new("CCitadel_Modifier_CorpseExplosionThinker", "m_flExplosionTime");
 		/// <summary><c>GameTime_t</c>.</summary>
-		public float m_flExplosionTime { get => Get<float>(__m_flExplosionTime); set => Set(__m_flExplosionTime, value); }
+		public GameTime m_flExplosionTime { get => Get<GameTime>(__m_flExplosionTime); set => Set(__m_flExplosionTime, value); }
 
 		private static readonly SchemaField __m_flRadius = new("CCitadel_Modifier_CorpseExplosionThinker", "m_flRadius");
 		/// <summary><c>float32</c>.</summary>

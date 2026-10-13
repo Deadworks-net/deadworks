@@ -18,7 +18,7 @@ public static partial class Schema {
 		public int m_ChargeUpParticle { get => Get<int>(__m_ChargeUpParticle); set => Set(__m_ChargeUpParticle, value); }
 
 		private static readonly SchemaField __m_bActive = new("CCitadel_Ability_RiotProtocol", "m_bActive");
-		/// <summary><c>bool</c>.</summary>
+		/// <summary><c>bool</c>. Networked in build 6779: a write is sent to clients.</summary>
 		public bool m_bActive { get => Get<bool>(__m_bActive); set => Set(__m_bActive, value); }
 	}
 }

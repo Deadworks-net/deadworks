@@ -14,7 +14,7 @@ public static partial class Schema {
 		static string ISchemaClass<CEconItemView>.NativeName => "CEconItemView";
 
 		private static readonly SchemaField __m_AttributeList = new("CEconItemView", "m_AttributeList");
-		/// <summary><c>CAttributeList</c>.</summary>
+		/// <summary><c>CAttributeList</c>. Networked in build 6779: a write is sent to clients.</summary>
 		public CAttributeList m_AttributeList => Embedded<CAttributeList>(__m_AttributeList);
 
 		private static readonly SchemaField __m_bHasAttachedParticles = new("CEconItemView", "m_bHasAttachedParticles");
@@ -26,7 +26,7 @@ public static partial class Schema {
 		public bool m_bHasComputedAttachedParticles { get => Get<bool>(__m_bHasComputedAttachedParticles); set => Set(__m_bHasComputedAttachedParticles, value); }
 
 		private static readonly SchemaField __m_bInitialized = new("CEconItemView", "m_bInitialized");
-		/// <summary><c>bool</c>.</summary>
+		/// <summary><c>bool</c>. Networked in build 6779: a write is sent to clients.</summary>
 		public bool m_bInitialized { get => Get<bool>(__m_bInitialized); set => Set(__m_bInitialized, value); }
 
 		private static readonly SchemaField __m_bIsStoreItem = new("CEconItemView", "m_bIsStoreItem");
@@ -38,15 +38,15 @@ public static partial class Schema {
 		public bool m_bIsTradeItem { get => Get<bool>(__m_bIsTradeItem); set => Set(__m_bIsTradeItem, value); }
 
 		private static readonly SchemaField __m_iAccountID = new("CEconItemView", "m_iAccountID");
-		/// <summary><c>uint32</c>.</summary>
+		/// <summary><c>uint32</c>. Networked in build 6779: a write is sent to clients.</summary>
 		public uint m_iAccountID { get => Get<uint>(__m_iAccountID); set => Set(__m_iAccountID, value); }
 
 		private static readonly SchemaField __m_iEntityLevel = new("CEconItemView", "m_iEntityLevel");
-		/// <summary><c>uint32</c>.</summary>
+		/// <summary><c>uint32</c>. Networked in build 6779: a write is sent to clients.</summary>
 		public uint m_iEntityLevel { get => Get<uint>(__m_iEntityLevel); set => Set(__m_iEntityLevel, value); }
 
 		private static readonly SchemaField __m_iEntityQuality = new("CEconItemView", "m_iEntityQuality");
-		/// <summary><c>int32</c>.</summary>
+		/// <summary><c>int32</c>. Networked in build 6779: a write is sent to clients.</summary>
 		public int m_iEntityQuality { get => Get<int>(__m_iEntityQuality); set => Set(__m_iEntityQuality, value); }
 
 		private static readonly SchemaField __m_iEntityQuantity = new("CEconItemView", "m_iEntityQuantity");
@@ -54,19 +54,19 @@ public static partial class Schema {
 		public int m_iEntityQuantity { get => Get<int>(__m_iEntityQuantity); set => Set(__m_iEntityQuantity, value); }
 
 		private static readonly SchemaField __m_iInventoryPosition = new("CEconItemView", "m_iInventoryPosition");
-		/// <summary><c>uint32</c>.</summary>
+		/// <summary><c>uint32</c>. Networked in build 6779: a write is sent to clients.</summary>
 		public uint m_iInventoryPosition { get => Get<uint>(__m_iInventoryPosition); set => Set(__m_iInventoryPosition, value); }
 
 		private static readonly SchemaField __m_iItemDefinitionIndex = new("CEconItemView", "m_iItemDefinitionIndex");
-		/// <summary><c>item_definition_index_t</c>.</summary>
+		/// <summary><c>item_definition_index_t</c>. Networked in build 6779: a write is sent to clients.</summary>
 		public uint m_iItemDefinitionIndex { get => Get<uint>(__m_iItemDefinitionIndex); set => Set(__m_iItemDefinitionIndex, value); }
 
 		private static readonly SchemaField __m_iItemID = new("CEconItemView", "m_iItemID");
-		/// <summary><c>itemid_t</c>.</summary>
+		/// <summary><c>itemid_t</c>. Networked in build 6779: a write is sent to clients.</summary>
 		public ulong m_iItemID { get => Get<ulong>(__m_iItemID); set => Set(__m_iItemID, value); }
 
 		private static readonly SchemaField __m_nOverrideStyle = new("CEconItemView", "m_nOverrideStyle");
-		/// <summary><c>style_index_t</c>.</summary>
+		/// <summary><c>style_index_t</c>. Networked in build 6779: a write is sent to clients.</summary>
 		public byte m_nOverrideStyle { get => Get<byte>(__m_nOverrideStyle); set => Set(__m_nOverrideStyle, value); }
 
 		private static readonly SchemaField __m_unClientFlags = new("CEconItemView", "m_unClientFlags");

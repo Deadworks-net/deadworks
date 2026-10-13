@@ -75,7 +75,7 @@ public static partial class Schema {
 
 		private static readonly SchemaField __m_HitReactClips = new("CAI_CitadelNPCVData", "m_HitReactClips");
 		/// <summary><c>CUtlVector&lt;NPCHitReactClip_t&gt;</c>.</summary>
-		public SchemaObjectList<NPCHitReactClip_t> m_HitReactClips => new(this, __m_HitReactClips, -1);
+		public SchemaObjectList<NPCHitReactClip_t> m_HitReactClips => new(this, __m_HitReactClips, ListStorage.Vector);
 
 		private static readonly SchemaField __m_JumpParticle = new("CAI_CitadelNPCVData", "m_JumpParticle");
 		/// <summary><c>CResourceNameTyped&lt;CWeakHandle&lt;InfoForResourceTypeIParticleSystemDefinition&gt;&gt;</c>.</summary>
@@ -99,7 +99,7 @@ public static partial class Schema {
 
 		private static readonly SchemaField __m_MovementBlockedClips = new("CAI_CitadelNPCVData", "m_MovementBlockedClips");
 		/// <summary><c>CUtlVector&lt;NPCMovementBlockedClip_t&gt;</c>.</summary>
-		public SchemaObjectList<NPCMovementBlockedClip_t> m_MovementBlockedClips => new(this, __m_MovementBlockedClips, -1);
+		public SchemaObjectList<NPCMovementBlockedClip_t> m_MovementBlockedClips => new(this, __m_MovementBlockedClips, ListStorage.Vector);
 
 		private static readonly SchemaField __m_NpcInCombatModifier = new("CAI_CitadelNPCVData", "m_NpcInCombatModifier");
 		/// <summary><c>CEmbeddedSubclass&lt;CCitadelModifier&gt;</c>.</summary>
@@ -254,12 +254,12 @@ public static partial class Schema {
 		public string m_sAnimGraphIdentifier => GetString(__m_sAnimGraphIdentifier);
 
 		private static readonly SchemaField __m_sDefaultMaterialGroupName = new("CAI_CitadelNPCVData", "m_sDefaultMaterialGroupName");
-		/// <summary><c>CModelMaterialGroupName</c>. No typed mapping yet: read it through its address.</summary>
-		public RawField m_sDefaultMaterialGroupName => Raw(__m_sDefaultMaterialGroupName, "CModelMaterialGroupName");
+		/// <summary><c>CModelMaterialGroupName</c>.</summary>
+		public string m_sDefaultMaterialGroupName => GetString(__m_sDefaultMaterialGroupName);
 
 		private static readonly SchemaField __m_sEnemyMaterialGroupName = new("CAI_CitadelNPCVData", "m_sEnemyMaterialGroupName");
-		/// <summary><c>CModelMaterialGroupName</c>. No typed mapping yet: read it through its address.</summary>
-		public RawField m_sEnemyMaterialGroupName => Raw(__m_sEnemyMaterialGroupName, "CModelMaterialGroupName");
+		/// <summary><c>CModelMaterialGroupName</c>.</summary>
+		public string m_sEnemyMaterialGroupName => GetString(__m_sEnemyMaterialGroupName);
 
 		private static readonly SchemaField __m_sHealthBarAttachment = new("CAI_CitadelNPCVData", "m_sHealthBarAttachment");
 		/// <summary><c>CUtlString</c>.</summary>
@@ -274,12 +274,12 @@ public static partial class Schema {
 		public string m_sSapphireModelName => GetBufferString(__m_sSapphireModelName);
 
 		private static readonly SchemaField __m_sTeam1MaterialGroupName = new("CAI_CitadelNPCVData", "m_sTeam1MaterialGroupName");
-		/// <summary><c>CModelMaterialGroupName</c>. Amber Material Group Name. No typed mapping yet: read it through its address.</summary>
-		public RawField m_sTeam1MaterialGroupName => Raw(__m_sTeam1MaterialGroupName, "CModelMaterialGroupName");
+		/// <summary><c>CModelMaterialGroupName</c>. Amber Material Group Name.</summary>
+		public string m_sTeam1MaterialGroupName => GetString(__m_sTeam1MaterialGroupName);
 
 		private static readonly SchemaField __m_sTeam2MaterialGroupName = new("CAI_CitadelNPCVData", "m_sTeam2MaterialGroupName");
-		/// <summary><c>CModelMaterialGroupName</c>. Sapphire Material Group Name. No typed mapping yet: read it through its address.</summary>
-		public RawField m_sTeam2MaterialGroupName => Raw(__m_sTeam2MaterialGroupName, "CModelMaterialGroupName");
+		/// <summary><c>CModelMaterialGroupName</c>. Sapphire Material Group Name.</summary>
+		public string m_sTeam2MaterialGroupName => GetString(__m_sTeam2MaterialGroupName);
 
 		private static readonly SchemaField __m_strAmbientLoopSound = new("CAI_CitadelNPCVData", "m_strAmbientLoopSound");
 		/// <summary><c>CSoundEventName</c>.</summary>

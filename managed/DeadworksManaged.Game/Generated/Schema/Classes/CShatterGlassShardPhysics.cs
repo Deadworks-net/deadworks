@@ -14,7 +14,7 @@ public static partial class Schema {
 		static string ISchemaClass<CShatterGlassShardPhysics>.NativeName => "CShatterGlassShardPhysics";
 
 		private static readonly SchemaField __m_ShardDesc = new("CShatterGlassShardPhysics", "m_ShardDesc");
-		/// <summary><c>shard_model_desc_t</c>.</summary>
+		/// <summary><c>shard_model_desc_t</c>. Networked in build 6779: a write is sent to clients.</summary>
 		public shard_model_desc_t m_ShardDesc => Embedded<shard_model_desc_t>(__m_ShardDesc);
 
 		private static readonly SchemaField __m_bTouchedByPlayer = new("CShatterGlassShardPhysics", "m_bTouchedByPlayer");

@@ -14,12 +14,12 @@ public static partial class Schema {
 		static string ISchemaClass<CCitadel_Ability_FireBomb>.NativeName => "CCitadel_Ability_FireBomb";
 
 		private static readonly SchemaField __m_flDetonateTime = new("CCitadel_Ability_FireBomb", "m_flDetonateTime");
-		/// <summary><c>CCitadelAutoScaledTime</c>.</summary>
+		/// <summary><c>CCitadelAutoScaledTime</c>. Networked in build 6779: a write is sent to clients.</summary>
 		public CCitadelAutoScaledTime m_flDetonateTime => Embedded<CCitadelAutoScaledTime>(__m_flDetonateTime);
 
 		private static readonly SchemaField __m_flStartTime = new("CCitadel_Ability_FireBomb", "m_flStartTime");
-		/// <summary><c>GameTime_t</c>.</summary>
-		public float m_flStartTime { get => Get<float>(__m_flStartTime); set => Set(__m_flStartTime, value); }
+		/// <summary><c>GameTime_t</c>. Networked in build 6779: a write is sent to clients.</summary>
+		public GameTime m_flStartTime { get => Get<GameTime>(__m_flStartTime); set => Set(__m_flStartTime, value); }
 
 		/// <summary>The data entry this was created from, as <see cref="CCitadel_Ability_FireBombVData"/>, or null if it has none.</summary>
 		public new CCitadel_Ability_FireBombVData? VData => SubclassVData<CCitadel_Ability_FireBombVData>();

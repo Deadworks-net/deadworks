@@ -19,6 +19,6 @@ public static partial class Schema {
 
 		private static readonly SchemaField __m_vecOptions = new("CDecalGroupVData", "m_vecOptions");
 		/// <summary><c>CUtlVector&lt;DecalGroupOption_t&gt;</c>.</summary>
-		public SchemaObjectList<DecalGroupOption_t> m_vecOptions => new(this, __m_vecOptions, -1);
+		public SchemaObjectList<DecalGroupOption_t> m_vecOptions => new(this, __m_vecOptions, ListStorage.Vector);
 	}
 }

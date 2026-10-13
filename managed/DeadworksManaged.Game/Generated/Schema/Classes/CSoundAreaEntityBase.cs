@@ -14,15 +14,15 @@ public static partial class Schema {
 		static string ISchemaClass<CSoundAreaEntityBase>.NativeName => "CSoundAreaEntityBase";
 
 		private static readonly SchemaField __m_bDisabled = new("CSoundAreaEntityBase", "m_bDisabled");
-		/// <summary><c>bool</c>.</summary>
+		/// <summary><c>bool</c>. Networked in build 6779: a write is sent to clients.</summary>
 		public bool m_bDisabled { get => Get<bool>(__m_bDisabled); set => Set(__m_bDisabled, value); }
 
 		private static readonly SchemaField __m_iszSoundAreaType = new("CSoundAreaEntityBase", "m_iszSoundAreaType");
-		/// <summary><c>CUtlSymbolLarge</c>.</summary>
+		/// <summary><c>CUtlSymbolLarge</c>. Networked in build 6779: a write is sent to clients.</summary>
 		public string m_iszSoundAreaType { get => GetString(__m_iszSoundAreaType); set => SetString(__m_iszSoundAreaType, value); }
 
 		private static readonly SchemaField __m_vPos = new("CSoundAreaEntityBase", "m_vPos");
-		/// <summary><c>Vector</c>.</summary>
+		/// <summary><c>Vector</c>. Networked in build 6779: a write is sent to clients.</summary>
 		public Vector3 m_vPos { get => Get<Vector3>(__m_vPos); set => Set(__m_vPos, value); }
 
 		/// <summary>Fires the <c>Disable</c> input.</summary>

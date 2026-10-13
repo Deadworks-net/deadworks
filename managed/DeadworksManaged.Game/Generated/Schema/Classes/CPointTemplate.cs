@@ -27,7 +27,7 @@ public static partial class Schema {
 
 		private static readonly SchemaField __m_SpawnedEntityHandles = new("CPointTemplate", "m_SpawnedEntityHandles");
 		/// <summary><c>CUtlVector&lt;CEntityHandle&gt;</c>.</summary>
-		public SchemaHandleList<CEntityInstance> m_SpawnedEntityHandles => new(this, __m_SpawnedEntityHandles, -1);
+		public SchemaHandleList<CEntityInstance> m_SpawnedEntityHandles => new(this, __m_SpawnedEntityHandles, ListStorage.Vector);
 
 		private static readonly SchemaField __m_bAsynchronouslySpawnEntities = new("CPointTemplate", "m_bAsynchronouslySpawnEntities");
 		/// <summary><c>bool</c>.</summary>
@@ -39,7 +39,7 @@ public static partial class Schema {
 
 		private static readonly SchemaField __m_createdSpawnGroupHandles = new("CPointTemplate", "m_createdSpawnGroupHandles");
 		/// <summary><c>CUtlVector&lt;uint32&gt;</c>.</summary>
-		public SchemaValueList<uint> m_createdSpawnGroupHandles => new(this, __m_createdSpawnGroupHandles, -1);
+		public SchemaValueList<uint> m_createdSpawnGroupHandles => new(this, __m_createdSpawnGroupHandles, ListStorage.Vector);
 
 		private static readonly SchemaField __m_flTimeoutInterval = new("CPointTemplate", "m_flTimeoutInterval");
 		/// <summary><c>float32</c>.</summary>

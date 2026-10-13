@@ -26,7 +26,7 @@ public static partial class Schema {
 		public Vector3 m_angRecoilToAdd { get => Get<Vector3>(__m_angRecoilToAdd); set => Set(__m_angRecoilToAdd, value); }
 
 		private static readonly SchemaField __m_bCanActiveReload = new("CCitadel_Ability_PrimaryWeapon", "m_bCanActiveReload");
-		/// <summary><c>bool</c>.</summary>
+		/// <summary><c>bool</c>. Networked in build 6779: a write is sent to clients.</summary>
 		public bool m_bCanActiveReload { get => Get<bool>(__m_bCanActiveReload); set => Set(__m_bCanActiveReload, value); }
 
 		private static readonly SchemaField __m_bChargedShotNeedsInputRelease = new("CCitadel_Ability_PrimaryWeapon", "m_bChargedShotNeedsInputRelease");
@@ -38,19 +38,19 @@ public static partial class Schema {
 		public bool m_bFireOnEmpty { get => Get<bool>(__m_bFireOnEmpty); set => Set(__m_bFireOnEmpty, value); }
 
 		private static readonly SchemaField __m_bFiredRecently = new("CCitadel_Ability_PrimaryWeapon", "m_bFiredRecently");
-		/// <summary><c>bool</c>.</summary>
+		/// <summary><c>bool</c>. Networked in build 6779: a write is sent to clients.</summary>
 		public bool m_bFiredRecently { get => Get<bool>(__m_bFiredRecently); set => Set(__m_bFiredRecently, value); }
 
 		private static readonly SchemaField __m_bHasReleasedForFireOnRelease = new("CCitadel_Ability_PrimaryWeapon", "m_bHasReleasedForFireOnRelease");
-		/// <summary><c>bool</c>.</summary>
+		/// <summary><c>bool</c>. Networked in build 6779: a write is sent to clients.</summary>
 		public bool m_bHasReleasedForFireOnRelease { get => Get<bool>(__m_bHasReleasedForFireOnRelease); set => Set(__m_bHasReleasedForFireOnRelease, value); }
 
 		private static readonly SchemaField __m_bInReload = new("CCitadel_Ability_PrimaryWeapon", "m_bInReload");
-		/// <summary><c>bool</c>.</summary>
+		/// <summary><c>bool</c>. Networked in build 6779: a write is sent to clients.</summary>
 		public bool m_bInReload { get => Get<bool>(__m_bInReload); set => Set(__m_bInReload, value); }
 
 		private static readonly SchemaField __m_bInputPressedWhileSelected = new("CCitadel_Ability_PrimaryWeapon", "m_bInputPressedWhileSelected");
-		/// <summary><c>bool</c>.</summary>
+		/// <summary><c>bool</c>. Networked in build 6779: a write is sent to clients.</summary>
 		public bool m_bInputPressedWhileSelected { get => Get<bool>(__m_bInputPressedWhileSelected); set => Set(__m_bInputPressedWhileSelected, value); }
 
 		private static readonly SchemaField __m_bInputReleasedForFireOnRelease = new("CCitadel_Ability_PrimaryWeapon", "m_bInputReleasedForFireOnRelease");
@@ -58,11 +58,11 @@ public static partial class Schema {
 		public bool m_bInputReleasedForFireOnRelease { get => Get<bool>(__m_bInputReleasedForFireOnRelease); set => Set(__m_bInputReleasedForFireOnRelease, value); }
 
 		private static readonly SchemaField __m_bIsZoomed = new("CCitadel_Ability_PrimaryWeapon", "m_bIsZoomed");
-		/// <summary><c>bool</c>.</summary>
+		/// <summary><c>bool</c>. Networked in build 6779: a write is sent to clients.</summary>
 		public bool m_bIsZoomed { get => Get<bool>(__m_bIsZoomed); set => Set(__m_bIsZoomed, value); }
 
 		private static readonly SchemaField __m_bPassiveFXActive = new("CCitadel_Ability_PrimaryWeapon", "m_bPassiveFXActive");
-		/// <summary><c>bool</c>.</summary>
+		/// <summary><c>bool</c>. Networked in build 6779: a write is sent to clients.</summary>
 		public bool m_bPassiveFXActive { get => Get<bool>(__m_bPassiveFXActive); set => Set(__m_bPassiveFXActive, value); }
 
 		private static readonly SchemaField __m_bPrimaryAttackHeld = new("CCitadel_Ability_PrimaryWeapon", "m_bPrimaryAttackHeld");
@@ -70,7 +70,7 @@ public static partial class Schema {
 		public bool m_bPrimaryAttackHeld { get => Get<bool>(__m_bPrimaryAttackHeld); set => Set(__m_bPrimaryAttackHeld, value); }
 
 		private static readonly SchemaField __m_bSingleShotReloadFirstBullet = new("CCitadel_Ability_PrimaryWeapon", "m_bSingleShotReloadFirstBullet");
-		/// <summary><c>bool</c>.</summary>
+		/// <summary><c>bool</c>. Networked in build 6779: a write is sent to clients.</summary>
 		public bool m_bSingleShotReloadFirstBullet { get => Get<bool>(__m_bSingleShotReloadFirstBullet); set => Set(__m_bSingleShotReloadFirstBullet, value); }
 
 		private static readonly SchemaField __m_bWasSpinningUp = new("CCitadel_Ability_PrimaryWeapon", "m_bWasSpinningUp");
@@ -94,7 +94,7 @@ public static partial class Schema {
 		public float m_currentSpread { get => Get<float>(__m_currentSpread); set => Set(__m_currentSpread, value); }
 
 		private static readonly SchemaField __m_eActiveFireMode = new("CCitadel_Ability_PrimaryWeapon", "m_eActiveFireMode");
-		/// <summary><c>EFireMode_t</c>.</summary>
+		/// <summary><c>EFireMode_t</c>. Networked in build 6779: a write is sent to clients.</summary>
 		public EFireMode_t m_eActiveFireMode { get => Get<EFireMode_t>(__m_eActiveFireMode); set => Set(__m_eActiveFireMode, value); }
 
 		private static readonly SchemaField __m_eFireOnReleaseMode = new("CCitadel_Ability_PrimaryWeapon", "m_eFireOnReleaseMode");
@@ -102,7 +102,7 @@ public static partial class Schema {
 		public EFireMode_t m_eFireOnReleaseMode { get => Get<EFireMode_t>(__m_eFireOnReleaseMode); set => Set(__m_eFireOnReleaseMode, value); }
 
 		private static readonly SchemaField __m_eNextAttackDelayReason = new("CCitadel_Ability_PrimaryWeapon", "m_eNextAttackDelayReason");
-		/// <summary><c>ENextAttackDelayReason_t</c>.</summary>
+		/// <summary><c>ENextAttackDelayReason_t</c>. Networked in build 6779: a write is sent to clients.</summary>
 		public ENextAttackDelayReason_t m_eNextAttackDelayReason { get => Get<ENextAttackDelayReason_t>(__m_eNextAttackDelayReason); set => Set(__m_eNextAttackDelayReason, value); }
 
 		private static readonly SchemaField __m_fFireDuration = new("CCitadel_Ability_PrimaryWeapon", "m_fFireDuration");
@@ -114,20 +114,20 @@ public static partial class Schema {
 		public float m_flAddApproachSpeed { get => Get<float>(__m_flAddApproachSpeed); set => Set(__m_flAddApproachSpeed, value); }
 
 		private static readonly SchemaField __m_flAmmoFrac = new("CCitadel_Ability_PrimaryWeapon", "m_flAmmoFrac");
-		/// <summary><c>float32</c>.</summary>
+		/// <summary><c>float32</c>. Networked in build 6779: a write is sent to clients.</summary>
 		public float m_flAmmoFrac { get => Get<float>(__m_flAmmoFrac); set => Set(__m_flAmmoFrac, value); }
 
 		private static readonly SchemaField __m_flAttackDelayPauseEndTime = new("CCitadel_Ability_PrimaryWeapon", "m_flAttackDelayPauseEndTime");
-		/// <summary><c>GameTime_t</c>.</summary>
-		public float m_flAttackDelayPauseEndTime { get => Get<float>(__m_flAttackDelayPauseEndTime); set => Set(__m_flAttackDelayPauseEndTime, value); }
+		/// <summary><c>GameTime_t</c>. Networked in build 6779: a write is sent to clients.</summary>
+		public GameTime m_flAttackDelayPauseEndTime { get => Get<GameTime>(__m_flAttackDelayPauseEndTime); set => Set(__m_flAttackDelayPauseEndTime, value); }
 
 		private static readonly SchemaField __m_flAttackDelayPauseTotalTime = new("CCitadel_Ability_PrimaryWeapon", "m_flAttackDelayPauseTotalTime");
-		/// <summary><c>float32</c>.</summary>
+		/// <summary><c>float32</c>. Networked in build 6779: a write is sent to clients.</summary>
 		public float m_flAttackDelayPauseTotalTime { get => Get<float>(__m_flAttackDelayPauseTotalTime); set => Set(__m_flAttackDelayPauseTotalTime, value); }
 
 		private static readonly SchemaField __m_flContinuousShotStartTime = new("CCitadel_Ability_PrimaryWeapon", "m_flContinuousShotStartTime");
-		/// <summary><c>GameTime_t</c>.</summary>
-		public float m_flContinuousShotStartTime { get => Get<float>(__m_flContinuousShotStartTime); set => Set(__m_flContinuousShotStartTime, value); }
+		/// <summary><c>GameTime_t</c>. Networked in build 6779: a write is sent to clients.</summary>
+		public GameTime m_flContinuousShotStartTime { get => Get<GameTime>(__m_flContinuousShotStartTime); set => Set(__m_flContinuousShotStartTime, value); }
 
 		private static readonly SchemaField __m_flCurrentSpinRate = new("CCitadel_Ability_PrimaryWeapon", "m_flCurrentSpinRate");
 		/// <summary><c>float32</c>.</summary>
@@ -135,39 +135,39 @@ public static partial class Schema {
 
 		private static readonly SchemaField __m_flDelayedShotCreateTime = new("CCitadel_Ability_PrimaryWeapon", "m_flDelayedShotCreateTime");
 		/// <summary><c>GameTime_t</c>.</summary>
-		public float m_flDelayedShotCreateTime { get => Get<float>(__m_flDelayedShotCreateTime); set => Set(__m_flDelayedShotCreateTime, value); }
+		public GameTime m_flDelayedShotCreateTime { get => Get<GameTime>(__m_flDelayedShotCreateTime); set => Set(__m_flDelayedShotCreateTime, value); }
 
 		private static readonly SchemaField __m_flLastAttackTime = new("CCitadel_Ability_PrimaryWeapon", "m_flLastAttackTime");
-		/// <summary><c>GameTime_t</c>.</summary>
-		public float m_flLastAttackTime { get => Get<float>(__m_flLastAttackTime); set => Set(__m_flLastAttackTime, value); }
+		/// <summary><c>GameTime_t</c>. Networked in build 6779: a write is sent to clients.</summary>
+		public GameTime m_flLastAttackTime { get => Get<GameTime>(__m_flLastAttackTime); set => Set(__m_flLastAttackTime, value); }
 
 		private static readonly SchemaField __m_flLastReloadStartTime = new("CCitadel_Ability_PrimaryWeapon", "m_flLastReloadStartTime");
-		/// <summary><c>GameTime_t</c>.</summary>
-		public float m_flLastReloadStartTime { get => Get<float>(__m_flLastReloadStartTime); set => Set(__m_flLastReloadStartTime, value); }
+		/// <summary><c>GameTime_t</c>. Networked in build 6779: a write is sent to clients.</summary>
+		public GameTime m_flLastReloadStartTime { get => Get<GameTime>(__m_flLastReloadStartTime); set => Set(__m_flLastReloadStartTime, value); }
 
 		private static readonly SchemaField __m_flNextAttackDelayEndTime = new("CCitadel_Ability_PrimaryWeapon", "m_flNextAttackDelayEndTime");
-		/// <summary><c>GameTime_t</c>.</summary>
-		public float m_flNextAttackDelayEndTime { get => Get<float>(__m_flNextAttackDelayEndTime); set => Set(__m_flNextAttackDelayEndTime, value); }
+		/// <summary><c>GameTime_t</c>. Networked in build 6779: a write is sent to clients.</summary>
+		public GameTime m_flNextAttackDelayEndTime { get => Get<GameTime>(__m_flNextAttackDelayEndTime); set => Set(__m_flNextAttackDelayEndTime, value); }
 
 		private static readonly SchemaField __m_flNextAttackDelayStartTime = new("CCitadel_Ability_PrimaryWeapon", "m_flNextAttackDelayStartTime");
-		/// <summary><c>GameTime_t</c>.</summary>
-		public float m_flNextAttackDelayStartTime { get => Get<float>(__m_flNextAttackDelayStartTime); set => Set(__m_flNextAttackDelayStartTime, value); }
+		/// <summary><c>GameTime_t</c>. Networked in build 6779: a write is sent to clients.</summary>
+		public GameTime m_flNextAttackDelayStartTime { get => Get<GameTime>(__m_flNextAttackDelayStartTime); set => Set(__m_flNextAttackDelayStartTime, value); }
 
 		private static readonly SchemaField __m_flNextDisarmSound = new("CCitadel_Ability_PrimaryWeapon", "m_flNextDisarmSound");
 		/// <summary><c>GameTime_t</c>.</summary>
-		public float m_flNextDisarmSound { get => Get<float>(__m_flNextDisarmSound); set => Set(__m_flNextDisarmSound, value); }
+		public GameTime m_flNextDisarmSound { get => Get<GameTime>(__m_flNextDisarmSound); set => Set(__m_flNextDisarmSound, value); }
 
 		private static readonly SchemaField __m_flNextPrimaryAttack = new("CCitadel_Ability_PrimaryWeapon", "m_flNextPrimaryAttack");
-		/// <summary><c>GameTime_t</c>.</summary>
-		public float m_flNextPrimaryAttack { get => Get<float>(__m_flNextPrimaryAttack); set => Set(__m_flNextPrimaryAttack, value); }
+		/// <summary><c>GameTime_t</c>. Networked in build 6779: a write is sent to clients.</summary>
+		public GameTime m_flNextPrimaryAttack { get => Get<GameTime>(__m_flNextPrimaryAttack); set => Set(__m_flNextPrimaryAttack, value); }
 
 		private static readonly SchemaField __m_flNextShotRecoilRecoveryTime = new("CCitadel_Ability_PrimaryWeapon", "m_flNextShotRecoilRecoveryTime");
-		/// <summary><c>GameTime_t</c>.</summary>
-		public float m_flNextShotRecoilRecoveryTime { get => Get<float>(__m_flNextShotRecoilRecoveryTime); set => Set(__m_flNextShotRecoilRecoveryTime, value); }
+		/// <summary><c>GameTime_t</c>. Networked in build 6779: a write is sent to clients.</summary>
+		public GameTime m_flNextShotRecoilRecoveryTime { get => Get<GameTime>(__m_flNextShotRecoilRecoveryTime); set => Set(__m_flNextShotRecoilRecoveryTime, value); }
 
 		private static readonly SchemaField __m_flPrimaryMuzzleResetTime = new("CCitadel_Ability_PrimaryWeapon", "m_flPrimaryMuzzleResetTime");
 		/// <summary><c>GameTime_t</c>.</summary>
-		public float m_flPrimaryMuzzleResetTime { get => Get<float>(__m_flPrimaryMuzzleResetTime); set => Set(__m_flPrimaryMuzzleResetTime, value); }
+		public GameTime m_flPrimaryMuzzleResetTime { get => Get<GameTime>(__m_flPrimaryMuzzleResetTime); set => Set(__m_flPrimaryMuzzleResetTime, value); }
 
 		private static readonly SchemaField __m_flRecoilRecoverySpeed = new("CCitadel_Ability_PrimaryWeapon", "m_flRecoilRecoverySpeed");
 		/// <summary><c>float32</c>.</summary>
@@ -175,46 +175,46 @@ public static partial class Schema {
 
 		private static readonly SchemaField __m_flRecoilStartTime = new("CCitadel_Ability_PrimaryWeapon", "m_flRecoilStartTime");
 		/// <summary><c>GameTime_t</c>.</summary>
-		public float m_flRecoilStartTime { get => Get<float>(__m_flRecoilStartTime); set => Set(__m_flRecoilStartTime, value); }
+		public GameTime m_flRecoilStartTime { get => Get<GameTime>(__m_flRecoilStartTime); set => Set(__m_flRecoilStartTime, value); }
 
 		private static readonly SchemaField __m_flReloadAvailableTime = new("CCitadel_Ability_PrimaryWeapon", "m_flReloadAvailableTime");
-		/// <summary><c>GameTime_t</c>.</summary>
-		public float m_flReloadAvailableTime { get => Get<float>(__m_flReloadAvailableTime); set => Set(__m_flReloadAvailableTime, value); }
+		/// <summary><c>GameTime_t</c>. Networked in build 6779: a write is sent to clients.</summary>
+		public GameTime m_flReloadAvailableTime { get => Get<GameTime>(__m_flReloadAvailableTime); set => Set(__m_flReloadAvailableTime, value); }
 
 		private static readonly SchemaField __m_flSecondaryMuzzleResetTime = new("CCitadel_Ability_PrimaryWeapon", "m_flSecondaryMuzzleResetTime");
 		/// <summary><c>GameTime_t</c>.</summary>
-		public float m_flSecondaryMuzzleResetTime { get => Get<float>(__m_flSecondaryMuzzleResetTime); set => Set(__m_flSecondaryMuzzleResetTime, value); }
+		public GameTime m_flSecondaryMuzzleResetTime { get => Get<GameTime>(__m_flSecondaryMuzzleResetTime); set => Set(__m_flSecondaryMuzzleResetTime, value); }
 
 		private static readonly SchemaField __m_flShotChargeFrac = new("CCitadel_Ability_PrimaryWeapon", "m_flShotChargeFrac");
-		/// <summary><c>float32</c>.</summary>
+		/// <summary><c>float32</c>. Networked in build 6779: a write is sent to clients.</summary>
 		public float m_flShotChargeFrac { get => Get<float>(__m_flShotChargeFrac); set => Set(__m_flShotChargeFrac, value); }
 
 		private static readonly SchemaField __m_flSpreadPenalty = new("CCitadel_Ability_PrimaryWeapon", "m_flSpreadPenalty");
-		/// <summary><c>float32</c>.</summary>
+		/// <summary><c>float32</c>. Networked in build 6779: a write is sent to clients.</summary>
 		public float m_flSpreadPenalty { get => Get<float>(__m_flSpreadPenalty); set => Set(__m_flSpreadPenalty, value); }
 
 		private static readonly SchemaField __m_flZoomOutTime = new("CCitadel_Ability_PrimaryWeapon", "m_flZoomOutTime");
-		/// <summary><c>GameTime_t</c>.</summary>
-		public float m_flZoomOutTime { get => Get<float>(__m_flZoomOutTime); set => Set(__m_flZoomOutTime, value); }
+		/// <summary><c>GameTime_t</c>. Networked in build 6779: a write is sent to clients.</summary>
+		public GameTime m_flZoomOutTime { get => Get<GameTime>(__m_flZoomOutTime); set => Set(__m_flZoomOutTime, value); }
 
 		private static readonly SchemaField __m_flZoomTime = new("CCitadel_Ability_PrimaryWeapon", "m_flZoomTime");
-		/// <summary><c>GameTime_t</c>.</summary>
-		public float m_flZoomTime { get => Get<float>(__m_flZoomTime); set => Set(__m_flZoomTime, value); }
+		/// <summary><c>GameTime_t</c>. Networked in build 6779: a write is sent to clients.</summary>
+		public GameTime m_flZoomTime { get => Get<GameTime>(__m_flZoomTime); set => Set(__m_flZoomTime, value); }
 
 		private static readonly SchemaField __m_iBonusClip = new("CCitadel_Ability_PrimaryWeapon", "m_iBonusClip");
-		/// <summary><c>int32</c>.</summary>
+		/// <summary><c>int32</c>. Networked in build 6779: a write is sent to clients.</summary>
 		public int m_iBonusClip { get => Get<int>(__m_iBonusClip); set => Set(__m_iBonusClip, value); }
 
 		private static readonly SchemaField __m_iClip = new("CCitadel_Ability_PrimaryWeapon", "m_iClip");
-		/// <summary><c>int32</c>.</summary>
+		/// <summary><c>int32</c>. Networked in build 6779: a write is sent to clients.</summary>
 		public int m_iClip { get => Get<int>(__m_iClip); set => Set(__m_iClip, value); }
 
 		private static readonly SchemaField __m_iSpreadIndex = new("CCitadel_Ability_PrimaryWeapon", "m_iSpreadIndex");
-		/// <summary><c>int8</c>.</summary>
+		/// <summary><c>int8</c>. Networked in build 6779: a write is sent to clients.</summary>
 		public sbyte m_iSpreadIndex { get => Get<sbyte>(__m_iSpreadIndex); set => Set(__m_iSpreadIndex, value); }
 
 		private static readonly SchemaField __m_nBurstShotsRemaining = new("CCitadel_Ability_PrimaryWeapon", "m_nBurstShotsRemaining");
-		/// <summary><c>uint8</c>.</summary>
+		/// <summary><c>uint8</c>. Networked in build 6779: a write is sent to clients.</summary>
 		public byte m_nBurstShotsRemaining { get => Get<byte>(__m_nBurstShotsRemaining); set => Set(__m_nBurstShotsRemaining, value); }
 
 		private static readonly SchemaField __m_nClipSizeBeforeSwap = new("CCitadel_Ability_PrimaryWeapon", "m_nClipSizeBeforeSwap");
@@ -226,7 +226,7 @@ public static partial class Schema {
 		public int m_nLastUsedMuzzleIndex { get => Get<int>(__m_nLastUsedMuzzleIndex); set => Set(__m_nLastUsedMuzzleIndex, value); }
 
 		private static readonly SchemaField __m_nNumContinuousShots = new("CCitadel_Ability_PrimaryWeapon", "m_nNumContinuousShots");
-		/// <summary><c>int32</c>.</summary>
+		/// <summary><c>int32</c>. Networked in build 6779: a write is sent to clients.</summary>
 		public int m_nNumContinuousShots { get => Get<int>(__m_nNumContinuousShots); set => Set(__m_nNumContinuousShots, value); }
 
 		private static readonly SchemaField __m_nPrimaryMuzzleIndex = new("CCitadel_Ability_PrimaryWeapon", "m_nPrimaryMuzzleIndex");
@@ -242,20 +242,20 @@ public static partial class Schema {
 		public int m_nSecondaryMuzzleIndex { get => Get<int>(__m_nSecondaryMuzzleIndex); set => Set(__m_nSecondaryMuzzleIndex, value); }
 
 		private static readonly SchemaField __m_nShotNumber = new("CCitadel_Ability_PrimaryWeapon", "m_nShotNumber");
-		/// <summary><c>uint32</c>.</summary>
+		/// <summary><c>uint32</c>. Networked in build 6779: a write is sent to clients.</summary>
 		public uint m_nShotNumber { get => Get<uint>(__m_nShotNumber); set => Set(__m_nShotNumber, value); }
 
 		private static readonly SchemaField __m_nShotRecoilIndex = new("CCitadel_Ability_PrimaryWeapon", "m_nShotRecoilIndex");
-		/// <summary><c>int16</c>.</summary>
+		/// <summary><c>int16</c>. Networked in build 6779: a write is sent to clients.</summary>
 		public short m_nShotRecoilIndex { get => Get<short>(__m_nShotRecoilIndex); set => Set(__m_nShotRecoilIndex, value); }
 
 		private static readonly SchemaField __m_reloadQueuedStartTime = new("CCitadel_Ability_PrimaryWeapon", "m_reloadQueuedStartTime");
-		/// <summary><c>GameTime_t</c>.</summary>
-		public float m_reloadQueuedStartTime { get => Get<float>(__m_reloadQueuedStartTime); set => Set(__m_reloadQueuedStartTime, value); }
+		/// <summary><c>GameTime_t</c>. Networked in build 6779: a write is sent to clients.</summary>
+		public GameTime m_reloadQueuedStartTime { get => Get<GameTime>(__m_reloadQueuedStartTime); set => Set(__m_reloadQueuedStartTime, value); }
 
 		private static readonly SchemaField __m_tFireOnReleaseHoldBeginTime = new("CCitadel_Ability_PrimaryWeapon", "m_tFireOnReleaseHoldBeginTime");
-		/// <summary><c>GameTime_t</c>.</summary>
-		public float m_tFireOnReleaseHoldBeginTime { get => Get<float>(__m_tFireOnReleaseHoldBeginTime); set => Set(__m_tFireOnReleaseHoldBeginTime, value); }
+		/// <summary><c>GameTime_t</c>. Networked in build 6779: a write is sent to clients.</summary>
+		public GameTime m_tFireOnReleaseHoldBeginTime { get => Get<GameTime>(__m_tFireOnReleaseHoldBeginTime); set => Set(__m_tFireOnReleaseHoldBeginTime, value); }
 
 		/// <summary>The data entry this was created from, as <see cref="CCitadel_Ability_PrimaryWeaponVData"/>, or null if it has none.</summary>
 		public new CCitadel_Ability_PrimaryWeaponVData? VData => SubclassVData<CCitadel_Ability_PrimaryWeaponVData>();

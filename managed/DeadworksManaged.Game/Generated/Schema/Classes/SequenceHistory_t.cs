@@ -27,7 +27,7 @@ public static partial class Schema {
 
 		private static readonly SchemaField __m_flSeqStartTime = new("SequenceHistory_t", "m_flSeqStartTime");
 		/// <summary><c>GameTime_t</c>.</summary>
-		public float m_flSeqStartTime { get => Get<float>(__m_flSeqStartTime); set => Set(__m_flSeqStartTime, value); }
+		public GameTime m_flSeqStartTime { get => Get<GameTime>(__m_flSeqStartTime); set => Set(__m_flSeqStartTime, value); }
 
 		private static readonly SchemaField __m_hSequence = new("SequenceHistory_t", "m_hSequence");
 		/// <summary><c>HSequence</c>.</summary>

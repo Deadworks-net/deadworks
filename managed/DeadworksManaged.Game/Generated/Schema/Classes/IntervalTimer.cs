@@ -19,6 +19,6 @@ public static partial class Schema {
 
 		private static readonly SchemaField __m_timestamp = new("IntervalTimer", "m_timestamp");
 		/// <summary><c>GameTime_t</c>.</summary>
-		public float m_timestamp { get => Get<float>(__m_timestamp); set => Set(__m_timestamp, value); }
+		public GameTime m_timestamp { get => Get<GameTime>(__m_timestamp); set => Set(__m_timestamp, value); }
 	}
 }

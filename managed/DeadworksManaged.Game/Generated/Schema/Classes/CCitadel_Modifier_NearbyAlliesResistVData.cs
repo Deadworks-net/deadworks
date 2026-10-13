@@ -19,6 +19,6 @@ public static partial class Schema {
 
 		private static readonly SchemaField __m_flResistValues = new("CCitadel_Modifier_NearbyAlliesResistVData", "m_flResistValues");
 		/// <summary><c>CUtlVector&lt;float32&gt;</c>.</summary>
-		public SchemaValueList<float> m_flResistValues => new(this, __m_flResistValues, -1);
+		public SchemaValueList<float> m_flResistValues => new(this, __m_flResistValues, ListStorage.Vector);
 	}
 }

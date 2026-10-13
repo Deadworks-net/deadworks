@@ -162,7 +162,7 @@ public static partial class Schema {
 		public int m_iVaultSuccessLightBuffDropCount { get => Get<int>(__m_iVaultSuccessLightBuffDropCount); set => Set(__m_iVaultSuccessLightBuffDropCount, value); }
 
 		private static readonly SchemaField __m_strFastMaterialGroup = new("CNPC_NeutralSinnerSacrificeVData", "m_strFastMaterialGroup");
-		/// <summary><c>CModelMaterialGroupName</c>. No typed mapping yet: read it through its address.</summary>
-		public RawField m_strFastMaterialGroup => Raw(__m_strFastMaterialGroup, "CModelMaterialGroupName");
+		/// <summary><c>CModelMaterialGroupName</c>.</summary>
+		public string m_strFastMaterialGroup => GetString(__m_strFastMaterialGroup);
 	}
 }

@@ -27,6 +27,6 @@ public static partial class Schema {
 
 		private static readonly SchemaField __m_TimeNextAvailable = new("CNPCSpawnDestination", "m_TimeNextAvailable");
 		/// <summary><c>GameTime_t</c>.</summary>
-		public float m_TimeNextAvailable { get => Get<float>(__m_TimeNextAvailable); set => Set(__m_TimeNextAvailable, value); }
+		public GameTime m_TimeNextAvailable { get => Get<GameTime>(__m_TimeNextAvailable); set => Set(__m_TimeNextAvailable, value); }
 	}
 }

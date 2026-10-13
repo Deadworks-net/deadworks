@@ -15,6 +15,6 @@ public static partial class Schema {
 
 		private static readonly SchemaField __m_flTimePathUpdated = new("CCitadel_Modifier_PlayerDisconnected", "m_flTimePathUpdated");
 		/// <summary><c>GameTime_t</c>.</summary>
-		public float m_flTimePathUpdated { get => Get<float>(__m_flTimePathUpdated); set => Set(__m_flTimePathUpdated, value); }
+		public GameTime m_flTimePathUpdated { get => Get<GameTime>(__m_flTimePathUpdated); set => Set(__m_flTimePathUpdated, value); }
 	}
 }

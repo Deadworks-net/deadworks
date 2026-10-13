@@ -15,6 +15,6 @@ public static partial class Schema {
 
 		private static readonly SchemaField __m_Outflows = new("PulseNodeDynamicOutflows_t", "m_Outflows");
 		/// <summary><c>CUtlVector&lt;PulseNodeDynamicOutflows_t::DynamicOutflow_t&gt;</c>.</summary>
-		public SchemaObjectList<PulseNodeDynamicOutflows_t__DynamicOutflow_t> m_Outflows => new(this, __m_Outflows, -1);
+		public SchemaObjectList<PulseNodeDynamicOutflows_t__DynamicOutflow_t> m_Outflows => new(this, __m_Outflows, ListStorage.Vector);
 	}
 }

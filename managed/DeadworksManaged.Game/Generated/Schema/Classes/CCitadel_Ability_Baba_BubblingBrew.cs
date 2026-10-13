@@ -14,7 +14,7 @@ public static partial class Schema {
 		static string ISchemaClass<CCitadel_Ability_Baba_BubblingBrew>.NativeName => "CCitadel_Ability_Baba_BubblingBrew";
 
 		private static readonly SchemaField __m_eState = new("CCitadel_Ability_Baba_BubblingBrew", "m_eState");
-		/// <summary><c>CCitadel_Ability_Baba_BubblingBrew::EState</c>.</summary>
+		/// <summary><c>CCitadel_Ability_Baba_BubblingBrew::EState</c>. Networked in build 6779: a write is sent to clients.</summary>
 		public CCitadel_Ability_Baba_BubblingBrew__EState m_eState { get => Get<CCitadel_Ability_Baba_BubblingBrew__EState>(__m_eState); set => Set(__m_eState, value); }
 	}
 }

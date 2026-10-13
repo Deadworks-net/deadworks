@@ -15,10 +15,10 @@ public static partial class Schema {
 
 		private static readonly SchemaField __m_sActionHandshakesSupported = new("CAI_BaseNPCGraphVariationUserData", "m_sActionHandshakesSupported");
 		/// <summary><c>CUtlVector&lt;CGlobalSymbol&gt;</c>.</summary>
-		public SchemaStringList m_sActionHandshakesSupported => new(this, __m_sActionHandshakesSupported, -1);
+		public SchemaStringList m_sActionHandshakesSupported => new(this, __m_sActionHandshakesSupported, ListStorage.Vector);
 
 		private static readonly SchemaField __m_sMovementHandshakesSupported = new("CAI_BaseNPCGraphVariationUserData", "m_sMovementHandshakesSupported");
 		/// <summary><c>CUtlVector&lt;CGlobalSymbol&gt;</c>.</summary>
-		public SchemaStringList m_sMovementHandshakesSupported => new(this, __m_sMovementHandshakesSupported, -1);
+		public SchemaStringList m_sMovementHandshakesSupported => new(this, __m_sMovementHandshakesSupported, ListStorage.Vector);
 	}
 }

@@ -15,6 +15,6 @@ public static partial class Schema {
 
 		private static readonly SchemaField __m_vecPropertyUpgrades = new("AbilityUpgrade_t", "m_vecPropertyUpgrades");
 		/// <summary><c>CUtlVector&lt;PropertyUpgrade_t&gt;</c>.</summary>
-		public SchemaObjectList<PropertyUpgrade_t> m_vecPropertyUpgrades => new(this, __m_vecPropertyUpgrades, -1);
+		public SchemaObjectList<PropertyUpgrade_t> m_vecPropertyUpgrades => new(this, __m_vecPropertyUpgrades, ListStorage.Vector);
 	}
 }

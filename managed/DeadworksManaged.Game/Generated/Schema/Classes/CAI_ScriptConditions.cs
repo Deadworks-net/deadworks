@@ -23,7 +23,7 @@ public static partial class Schema {
 
 		private static readonly SchemaField __m_ElementList = new("CAI_ScriptConditions", "m_ElementList");
 		/// <summary><c>CUtlVector&lt;CAI_ScriptConditionsElement&gt;</c>.</summary>
-		public SchemaObjectList<CAI_ScriptConditionsElement> m_ElementList => new(this, __m_ElementList, -1);
+		public SchemaObjectList<CAI_ScriptConditionsElement> m_ElementList => new(this, __m_ElementList, ListStorage.Vector);
 
 		private static readonly SchemaField __m_NoValidActors = new("CAI_ScriptConditions", "m_NoValidActors");
 		/// <summary><c>CEntityIOOutput</c>.</summary>

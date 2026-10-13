@@ -19,7 +19,7 @@ public static partial class Schema {
 
 		private static readonly SchemaField __m_AnimRunSequences = new("CAI_NPC_Ratking_RatVData", "m_AnimRunSequences");
 		/// <summary><c>CUtlVector&lt;CUtlString&gt;</c>.</summary>
-		public SchemaStringList m_AnimRunSequences => new(this, __m_AnimRunSequences, -1);
+		public SchemaStringList m_AnimRunSequences => new(this, __m_AnimRunSequences, ListStorage.Vector);
 
 		private static readonly SchemaField __m_RatModel = new("CAI_NPC_Ratking_RatVData", "m_RatModel");
 		/// <summary><c>CResourceNameTyped&lt;CWeakHandle&lt;InfoForResourceTypeCModel&gt;&gt;</c>.</summary>

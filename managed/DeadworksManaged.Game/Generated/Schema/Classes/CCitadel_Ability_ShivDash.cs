@@ -15,14 +15,14 @@ public static partial class Schema {
 
 		private static readonly SchemaField __m_EchoStartTime = new("CCitadel_Ability_ShivDash", "m_EchoStartTime");
 		/// <summary><c>GameTime_t</c>.</summary>
-		public float m_EchoStartTime { get => Get<float>(__m_EchoStartTime); set => Set(__m_EchoStartTime, value); }
+		public GameTime m_EchoStartTime { get => Get<GameTime>(__m_EchoStartTime); set => Set(__m_EchoStartTime, value); }
 
 		private static readonly SchemaField __m_bDiscontinuityInEcho = new("CCitadel_Ability_ShivDash", "m_bDiscontinuityInEcho");
 		/// <summary><c>bool</c>.</summary>
 		public bool m_bDiscontinuityInEcho { get => Get<bool>(__m_bDiscontinuityInEcho); set => Set(__m_bDiscontinuityInEcho, value); }
 
 		private static readonly SchemaField __m_bIsDashing = new("CCitadel_Ability_ShivDash", "m_bIsDashing");
-		/// <summary><c>bool</c>.</summary>
+		/// <summary><c>bool</c>. Networked in build 6779: a write is sent to clients.</summary>
 		public bool m_bIsDashing { get => Get<bool>(__m_bIsDashing); set => Set(__m_bIsDashing, value); }
 
 		private static readonly SchemaField __m_bLetEchoPlay = new("CCitadel_Ability_ShivDash", "m_bLetEchoPlay");
@@ -31,7 +31,7 @@ public static partial class Schema {
 
 		private static readonly SchemaField __m_flStuckTime = new("CCitadel_Ability_ShivDash", "m_flStuckTime");
 		/// <summary><c>GameTime_t</c>.</summary>
-		public float m_flStuckTime { get => Get<float>(__m_flStuckTime); set => Set(__m_flStuckTime, value); }
+		public GameTime m_flStuckTime { get => Get<GameTime>(__m_flStuckTime); set => Set(__m_flStuckTime, value); }
 
 		private static readonly SchemaField __m_hEchoThinker = new("CCitadel_Ability_ShivDash", "m_hEchoThinker");
 		/// <summary><c>CHandle&lt;CPointModifierThinker&gt;</c>.</summary>
@@ -42,16 +42,16 @@ public static partial class Schema {
 		public int m_nReductionsLeft { get => Get<int>(__m_nReductionsLeft); set => Set(__m_nReductionsLeft, value); }
 
 		private static readonly SchemaField __m_vDashDirection = new("CCitadel_Ability_ShivDash", "m_vDashDirection");
-		/// <summary><c>Vector</c>.</summary>
+		/// <summary><c>Vector</c>. Networked in build 6779: a write is sent to clients.</summary>
 		public Vector3 m_vDashDirection { get => Get<Vector3>(__m_vDashDirection); set => Set(__m_vDashDirection, value); }
 
 		private static readonly SchemaField __m_vStartPosition = new("CCitadel_Ability_ShivDash", "m_vStartPosition");
-		/// <summary><c>VectorWS</c>.</summary>
+		/// <summary><c>VectorWS</c>. Networked in build 6779: a write is sent to clients.</summary>
 		public Vector3 m_vStartPosition { get => Get<Vector3>(__m_vStartPosition); set => Set(__m_vStartPosition, value); }
 
 		private static readonly SchemaField __m_vecHitEnemies = new("CCitadel_Ability_ShivDash", "m_vecHitEnemies");
 		/// <summary><c>CUtlVector&lt;CEntityIndex&gt;</c>.</summary>
-		public SchemaValueList<int> m_vecHitEnemies => new(this, __m_vecHitEnemies, -1);
+		public SchemaValueList<int> m_vecHitEnemies => new(this, __m_vecHitEnemies, ListStorage.Vector);
 
 		private static readonly SchemaField __m_vecLastPosition = new("CCitadel_Ability_ShivDash", "m_vecLastPosition");
 		/// <summary><c>VectorWS</c>.</summary>

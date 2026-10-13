@@ -15,14 +15,14 @@ public static partial class Schema {
 
 		private static readonly SchemaField __m_RecastWindowEnd = new("CAbility_Mirage_Tornado", "m_RecastWindowEnd");
 		/// <summary><c>GameTime_t</c>.</summary>
-		public float m_RecastWindowEnd { get => Get<float>(__m_RecastWindowEnd); set => Set(__m_RecastWindowEnd, value); }
+		public GameTime m_RecastWindowEnd { get => Get<GameTime>(__m_RecastWindowEnd); set => Set(__m_RecastWindowEnd, value); }
 
 		private static readonly SchemaField __m_anglesCharging = new("CAbility_Mirage_Tornado", "m_anglesCharging");
-		/// <summary><c>QAngle</c>.</summary>
+		/// <summary><c>QAngle</c>. Networked in build 6779: a write is sent to clients.</summary>
 		public Vector3 m_anglesCharging { get => Get<Vector3>(__m_anglesCharging); set => Set(__m_anglesCharging, value); }
 
 		private static readonly SchemaField __m_flChargeStartTime = new("CAbility_Mirage_Tornado", "m_flChargeStartTime");
-		/// <summary><c>GameTime_t</c>.</summary>
-		public float m_flChargeStartTime { get => Get<float>(__m_flChargeStartTime); set => Set(__m_flChargeStartTime, value); }
+		/// <summary><c>GameTime_t</c>. Networked in build 6779: a write is sent to clients.</summary>
+		public GameTime m_flChargeStartTime { get => Get<GameTime>(__m_flChargeStartTime); set => Set(__m_flChargeStartTime, value); }
 	}
 }

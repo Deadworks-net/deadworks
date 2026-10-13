@@ -18,32 +18,32 @@ public static partial class Schema {
 		public ModelChange_t m_ModelChange => Embedded<ModelChange_t>(__m_ModelChange);
 
 		private static readonly SchemaField __m_bHasCopiedUlt = new("CCitadel_Ability_Magician_CopyUlt", "m_bHasCopiedUlt");
-		/// <summary><c>bool</c>.</summary>
+		/// <summary><c>bool</c>. Networked in build 6779: a write is sent to clients.</summary>
 		public bool m_bHasCopiedUlt { get => Get<bool>(__m_bHasCopiedUlt); set => Set(__m_bHasCopiedUlt, value); }
 
 		private static readonly SchemaField __m_bHasUsedCopiedUlt = new("CCitadel_Ability_Magician_CopyUlt", "m_bHasUsedCopiedUlt");
-		/// <summary><c>bool</c>.</summary>
+		/// <summary><c>bool</c>. Networked in build 6779: a write is sent to clients.</summary>
 		public bool m_bHasUsedCopiedUlt { get => Get<bool>(__m_bHasUsedCopiedUlt); set => Set(__m_bHasUsedCopiedUlt, value); }
 
 		private static readonly SchemaField __m_bIsModelSwapped = new("CCitadel_Ability_Magician_CopyUlt", "m_bIsModelSwapped");
-		/// <summary><c>bool</c>.</summary>
+		/// <summary><c>bool</c>. Networked in build 6779: a write is sent to clients.</summary>
 		public bool m_bIsModelSwapped { get => Get<bool>(__m_bIsModelSwapped); set => Set(__m_bIsModelSwapped, value); }
 
 		private static readonly SchemaField __m_nCopiedHeroID = new("CCitadel_Ability_Magician_CopyUlt", "m_nCopiedHeroID");
-		/// <summary><c>HeroID_t</c>.</summary>
+		/// <summary><c>HeroID_t</c>. Networked in build 6779: a write is sent to clients.</summary>
 		public uint m_nCopiedHeroID { get => Get<uint>(__m_nCopiedHeroID); set => Set(__m_nCopiedHeroID, value); }
 
 		private static readonly SchemaField __m_pActiveCopyUltimateAbility = new("CCitadel_Ability_Magician_CopyUlt", "m_pActiveCopyUltimateAbility");
-		/// <summary><c>CHandle&lt;CCitadelBaseAbility&gt;</c>.</summary>
+		/// <summary><c>CHandle&lt;CCitadelBaseAbility&gt;</c>. Networked in build 6779: a write is sent to clients.</summary>
 		public CCitadelBaseAbility? m_pActiveCopyUltimateAbility { get => GetHandle<CCitadelBaseAbility>(__m_pActiveCopyUltimateAbility); set => SetHandle(__m_pActiveCopyUltimateAbility, value); }
 
 		private static readonly SchemaField __m_timeSwappedModel = new("CCitadel_Ability_Magician_CopyUlt", "m_timeSwappedModel");
-		/// <summary><c>GameTime_t</c>.</summary>
-		public float m_timeSwappedModel { get => Get<float>(__m_timeSwappedModel); set => Set(__m_timeSwappedModel, value); }
+		/// <summary><c>GameTime_t</c>. Networked in build 6779: a write is sent to clients.</summary>
+		public GameTime m_timeSwappedModel { get => Get<GameTime>(__m_timeSwappedModel); set => Set(__m_timeSwappedModel, value); }
 
 		private static readonly SchemaField __m_vecLingeringCopiedAbilities = new("CCitadel_Ability_Magician_CopyUlt", "m_vecLingeringCopiedAbilities");
 		/// <summary><c>CUtlVector&lt;LingeringCopiedAbility_t&gt;</c>.</summary>
-		public SchemaObjectList<LingeringCopiedAbility_t> m_vecLingeringCopiedAbilities => new(this, __m_vecLingeringCopiedAbilities, -1);
+		public SchemaObjectList<LingeringCopiedAbility_t> m_vecLingeringCopiedAbilities => new(this, __m_vecLingeringCopiedAbilities, ListStorage.Vector);
 
 		/// <summary>The data entry this was created from, as <see cref="CCitadel_Ability_Magician_CopyUltVData"/>, or null if it has none.</summary>
 		public new CCitadel_Ability_Magician_CopyUltVData? VData => SubclassVData<CCitadel_Ability_Magician_CopyUltVData>();

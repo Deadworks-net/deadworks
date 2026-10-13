@@ -14,15 +14,15 @@ public static partial class Schema {
 		static string ISchemaClass<CPlayer_CameraServices>.NativeName => "CPlayer_CameraServices";
 
 		private static readonly SchemaField __m_PlayerFog = new("CPlayer_CameraServices", "m_PlayerFog");
-		/// <summary><c>fogplayerparams_t</c>.</summary>
+		/// <summary><c>fogplayerparams_t</c>. Networked in build 6779: a write is sent to clients.</summary>
 		public fogplayerparams_t m_PlayerFog => Embedded<fogplayerparams_t>(__m_PlayerFog);
 
 		private static readonly SchemaField __m_PostProcessingVolumes = new("CPlayer_CameraServices", "m_PostProcessingVolumes");
-		/// <summary><c>CNetworkUtlVectorBase&lt;CHandle&lt;CPostProcessingVolume&gt;&gt;</c>.</summary>
-		public SchemaHandleList<CPostProcessingVolume> m_PostProcessingVolumes => new(this, __m_PostProcessingVolumes, -1);
+		/// <summary><c>CNetworkUtlVectorBase&lt;CHandle&lt;CPostProcessingVolume&gt;&gt;</c>. Networked in build 6779: a write is sent to clients.</summary>
+		public SchemaHandleList<CPostProcessingVolume> m_PostProcessingVolumes => new(this, __m_PostProcessingVolumes, ListStorage.Vector);
 
 		private static readonly SchemaField __m_audio = new("CPlayer_CameraServices", "m_audio");
-		/// <summary><c>audioparams_t</c>.</summary>
+		/// <summary><c>audioparams_t</c>. Networked in build 6779: a write is sent to clients.</summary>
 		public audioparams_t m_audio => Embedded<audioparams_t>(__m_audio);
 
 		private static readonly SchemaField __m_flOldPlayerViewOffsetZ = new("CPlayer_CameraServices", "m_flOldPlayerViewOffsetZ");
@@ -34,31 +34,31 @@ public static partial class Schema {
 		public float m_flOldPlayerZ { get => Get<float>(__m_flOldPlayerZ); set => Set(__m_flOldPlayerZ, value); }
 
 		private static readonly SchemaField __m_hColorCorrectionCtrl = new("CPlayer_CameraServices", "m_hColorCorrectionCtrl");
-		/// <summary><c>CHandle&lt;CColorCorrection&gt;</c>.</summary>
+		/// <summary><c>CHandle&lt;CColorCorrection&gt;</c>. Networked in build 6779: a write is sent to clients.</summary>
 		public CColorCorrection? m_hColorCorrectionCtrl { get => GetHandle<CColorCorrection>(__m_hColorCorrectionCtrl); set => SetHandle(__m_hColorCorrectionCtrl, value); }
 
 		private static readonly SchemaField __m_hTonemapController = new("CPlayer_CameraServices", "m_hTonemapController");
-		/// <summary><c>CHandle&lt;CTonemapController2&gt;</c>.</summary>
+		/// <summary><c>CHandle&lt;CTonemapController2&gt;</c>. Networked in build 6779: a write is sent to clients.</summary>
 		public CTonemapController2? m_hTonemapController { get => GetHandle<CTonemapController2>(__m_hTonemapController); set => SetHandle(__m_hTonemapController, value); }
 
 		private static readonly SchemaField __m_hTriggerSoundscapeList = new("CPlayer_CameraServices", "m_hTriggerSoundscapeList");
 		/// <summary><c>CUtlVector&lt;CHandle&lt;CEnvSoundscapeTriggerable&gt;&gt;</c>.</summary>
-		public SchemaHandleList<CEnvSoundscapeTriggerable> m_hTriggerSoundscapeList => new(this, __m_hTriggerSoundscapeList, -1);
+		public SchemaHandleList<CEnvSoundscapeTriggerable> m_hTriggerSoundscapeList => new(this, __m_hTriggerSoundscapeList, ListStorage.Vector);
 
 		private static readonly SchemaField __m_hViewEntity = new("CPlayer_CameraServices", "m_hViewEntity");
-		/// <summary><c>CHandle&lt;CBaseEntity&gt;</c>.</summary>
+		/// <summary><c>CHandle&lt;CBaseEntity&gt;</c>. Networked in build 6779: a write is sent to clients.</summary>
 		public CBaseEntity? m_hViewEntity { get => GetHandle<CBaseEntity>(__m_hViewEntity); set => SetHandle(__m_hViewEntity, value); }
 
 		private static readonly SchemaField __m_nPunchAngleJoltTick = new("CPlayer_CameraServices", "m_nPunchAngleJoltTick");
-		/// <summary><c>GameTick_t</c>.</summary>
+		/// <summary><c>GameTick_t</c>. Networked in build 6779: a write is sent to clients.</summary>
 		public int m_nPunchAngleJoltTick { get => Get<int>(__m_nPunchAngleJoltTick); set => Set(__m_nPunchAngleJoltTick, value); }
 
 		private static readonly SchemaField __m_vecPunchAngle = new("CPlayer_CameraServices", "m_vecPunchAngle");
-		/// <summary><c>QAngle</c>.</summary>
+		/// <summary><c>QAngle</c>. Networked in build 6779: a write is sent to clients.</summary>
 		public Vector3 m_vecPunchAngle { get => Get<Vector3>(__m_vecPunchAngle); set => Set(__m_vecPunchAngle, value); }
 
 		private static readonly SchemaField __m_vecPunchAngleVel = new("CPlayer_CameraServices", "m_vecPunchAngleVel");
-		/// <summary><c>QAngle</c>.</summary>
+		/// <summary><c>QAngle</c>. Networked in build 6779: a write is sent to clients.</summary>
 		public Vector3 m_vecPunchAngleVel { get => Get<Vector3>(__m_vecPunchAngleVel); set => Set(__m_vecPunchAngleVel, value); }
 	}
 }

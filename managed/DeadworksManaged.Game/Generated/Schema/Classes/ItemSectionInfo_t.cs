@@ -19,6 +19,6 @@ public static partial class Schema {
 
 		private static readonly SchemaField __m_vecSectionAttributes = new("ItemSectionInfo_t", "m_vecSectionAttributes");
 		/// <summary><c>CUtlVector&lt;SectionAttributes_t&gt;</c>.</summary>
-		public SchemaObjectList<SectionAttributes_t> m_vecSectionAttributes => new(this, __m_vecSectionAttributes, -1);
+		public SchemaObjectList<SectionAttributes_t> m_vecSectionAttributes => new(this, __m_vecSectionAttributes, ListStorage.Vector);
 	}
 }

@@ -14,39 +14,39 @@ public static partial class Schema {
 		static string ISchemaClass<CEnvDecal>.NativeName => "CEnvDecal";
 
 		private static readonly SchemaField __m_bProjectOnCharacters = new("CEnvDecal", "m_bProjectOnCharacters");
-		/// <summary><c>bool</c>.</summary>
+		/// <summary><c>bool</c>. Networked in build 6779: a write is sent to clients.</summary>
 		public bool m_bProjectOnCharacters { get => Get<bool>(__m_bProjectOnCharacters); set => Set(__m_bProjectOnCharacters, value); }
 
 		private static readonly SchemaField __m_bProjectOnWater = new("CEnvDecal", "m_bProjectOnWater");
-		/// <summary><c>bool</c>.</summary>
+		/// <summary><c>bool</c>. Networked in build 6779: a write is sent to clients.</summary>
 		public bool m_bProjectOnWater { get => Get<bool>(__m_bProjectOnWater); set => Set(__m_bProjectOnWater, value); }
 
 		private static readonly SchemaField __m_bProjectOnWorld = new("CEnvDecal", "m_bProjectOnWorld");
-		/// <summary><c>bool</c>.</summary>
+		/// <summary><c>bool</c>. Networked in build 6779: a write is sent to clients.</summary>
 		public bool m_bProjectOnWorld { get => Get<bool>(__m_bProjectOnWorld); set => Set(__m_bProjectOnWorld, value); }
 
 		private static readonly SchemaField __m_flDepth = new("CEnvDecal", "m_flDepth");
-		/// <summary><c>float32</c>.</summary>
+		/// <summary><c>float32</c>. Networked in build 6779: a write is sent to clients.</summary>
 		public float m_flDepth { get => Get<float>(__m_flDepth); set => Set(__m_flDepth, value); }
 
 		private static readonly SchemaField __m_flDepthSortBias = new("CEnvDecal", "m_flDepthSortBias");
-		/// <summary><c>float32</c>.</summary>
+		/// <summary><c>float32</c>. Networked in build 6779: a write is sent to clients.</summary>
 		public float m_flDepthSortBias { get => Get<float>(__m_flDepthSortBias); set => Set(__m_flDepthSortBias, value); }
 
 		private static readonly SchemaField __m_flHeight = new("CEnvDecal", "m_flHeight");
-		/// <summary><c>float32</c>.</summary>
+		/// <summary><c>float32</c>. Networked in build 6779: a write is sent to clients.</summary>
 		public float m_flHeight { get => Get<float>(__m_flHeight); set => Set(__m_flHeight, value); }
 
 		private static readonly SchemaField __m_flWidth = new("CEnvDecal", "m_flWidth");
-		/// <summary><c>float32</c>.</summary>
+		/// <summary><c>float32</c>. Networked in build 6779: a write is sent to clients.</summary>
 		public float m_flWidth { get => Get<float>(__m_flWidth); set => Set(__m_flWidth, value); }
 
 		private static readonly SchemaField __m_hDecalMaterial = new("CEnvDecal", "m_hDecalMaterial");
-		/// <summary><c>CStrongHandle&lt;InfoForResourceTypeIMaterial2&gt;</c>. No typed mapping yet: read it through its address.</summary>
-		public RawField m_hDecalMaterial => Raw(__m_hDecalMaterial, "CStrongHandle<InfoForResourceTypeIMaterial2>");
+		/// <summary><c>CStrongHandle&lt;InfoForResourceTypeIMaterial2&gt;</c>. Networked in build 6779: a write is sent to clients.</summary>
+		public ResourceHandle m_hDecalMaterial { get => Get<ResourceHandle>(__m_hDecalMaterial); set => Set(__m_hDecalMaterial, value); }
 
 		private static readonly SchemaField __m_nRenderOrder = new("CEnvDecal", "m_nRenderOrder");
-		/// <summary><c>uint32</c>.</summary>
+		/// <summary><c>uint32</c>. Networked in build 6779: a write is sent to clients.</summary>
 		public uint m_nRenderOrder { get => Get<uint>(__m_nRenderOrder); set => Set(__m_nRenderOrder, value); }
 	}
 }

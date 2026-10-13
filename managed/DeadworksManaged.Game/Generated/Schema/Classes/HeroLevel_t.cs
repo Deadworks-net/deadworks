@@ -27,6 +27,6 @@ public static partial class Schema {
 
 		private static readonly SchemaField __m_vecBonusUpgrades = new("HeroLevel_t", "m_vecBonusUpgrades");
 		/// <summary><c>CUtlVector&lt;BonusUpgrade_t&gt;</c>.</summary>
-		public SchemaObjectList<BonusUpgrade_t> m_vecBonusUpgrades => new(this, __m_vecBonusUpgrades, -1);
+		public SchemaObjectList<BonusUpgrade_t> m_vecBonusUpgrades => new(this, __m_vecBonusUpgrades, ListStorage.Vector);
 	}
 }

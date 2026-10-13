@@ -18,20 +18,20 @@ public static partial class Schema {
 		public string m_ChainTarget { get => GetString(__m_ChainTarget); set => SetString(__m_ChainTarget, value); }
 
 		private static readonly SchemaField __m_NoiseArrived = new("CBaseDoor", "m_NoiseArrived");
-		/// <summary><c>CGameSoundEventName</c>. No typed mapping yet: read it through its address.</summary>
-		public RawField m_NoiseArrived => Raw(__m_NoiseArrived, "CGameSoundEventName");
+		/// <summary><c>CGameSoundEventName</c>.</summary>
+		public string m_NoiseArrived => GetString(__m_NoiseArrived);
 
 		private static readonly SchemaField __m_NoiseArrivedClosed = new("CBaseDoor", "m_NoiseArrivedClosed");
-		/// <summary><c>CGameSoundEventName</c>. No typed mapping yet: read it through its address.</summary>
-		public RawField m_NoiseArrivedClosed => Raw(__m_NoiseArrivedClosed, "CGameSoundEventName");
+		/// <summary><c>CGameSoundEventName</c>.</summary>
+		public string m_NoiseArrivedClosed => GetString(__m_NoiseArrivedClosed);
 
 		private static readonly SchemaField __m_NoiseMoving = new("CBaseDoor", "m_NoiseMoving");
-		/// <summary><c>CGameSoundEventName</c>. No typed mapping yet: read it through its address.</summary>
-		public RawField m_NoiseMoving => Raw(__m_NoiseMoving, "CGameSoundEventName");
+		/// <summary><c>CGameSoundEventName</c>.</summary>
+		public string m_NoiseMoving => GetString(__m_NoiseMoving);
 
 		private static readonly SchemaField __m_NoiseMovingClosed = new("CBaseDoor", "m_NoiseMovingClosed");
-		/// <summary><c>CGameSoundEventName</c>. No typed mapping yet: read it through its address.</summary>
-		public RawField m_NoiseMovingClosed => Raw(__m_NoiseMovingClosed, "CGameSoundEventName");
+		/// <summary><c>CGameSoundEventName</c>.</summary>
+		public string m_NoiseMovingClosed => GetString(__m_NoiseMovingClosed);
 
 		private static readonly SchemaField __m_OnBlockedClosing = new("CBaseDoor", "m_OnBlockedClosing");
 		/// <summary><c>CEntityIOOutput</c>.</summary>
@@ -90,7 +90,7 @@ public static partial class Schema {
 		public bool m_bIgnoreDebris { get => Get<bool>(__m_bIgnoreDebris); set => Set(__m_bIgnoreDebris, value); }
 
 		private static readonly SchemaField __m_bIsUsable = new("CBaseDoor", "m_bIsUsable");
-		/// <summary><c>bool</c>.</summary>
+		/// <summary><c>bool</c>. Networked in build 6779: a write is sent to clients.</summary>
 		public bool m_bIsUsable { get => Get<bool>(__m_bIsUsable); set => Set(__m_bIsUsable, value); }
 
 		private static readonly SchemaField __m_bLocked = new("CBaseDoor", "m_bLocked");

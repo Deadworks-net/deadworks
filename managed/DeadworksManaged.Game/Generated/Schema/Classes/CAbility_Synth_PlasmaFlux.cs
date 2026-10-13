@@ -19,14 +19,14 @@ public static partial class Schema {
 
 		private static readonly SchemaField __m_flProjectileExpireTime = new("CAbility_Synth_PlasmaFlux", "m_flProjectileExpireTime");
 		/// <summary><c>GameTime_t</c>.</summary>
-		public float m_flProjectileExpireTime { get => Get<float>(__m_flProjectileExpireTime); set => Set(__m_flProjectileExpireTime, value); }
+		public GameTime m_flProjectileExpireTime { get => Get<GameTime>(__m_flProjectileExpireTime); set => Set(__m_flProjectileExpireTime, value); }
 
 		private static readonly SchemaField __m_flProjectileLaunchTime = new("CAbility_Synth_PlasmaFlux", "m_flProjectileLaunchTime");
 		/// <summary><c>GameTime_t</c>.</summary>
-		public float m_flProjectileLaunchTime { get => Get<float>(__m_flProjectileLaunchTime); set => Set(__m_flProjectileLaunchTime, value); }
+		public GameTime m_flProjectileLaunchTime { get => Get<GameTime>(__m_flProjectileLaunchTime); set => Set(__m_flProjectileLaunchTime, value); }
 
 		private static readonly SchemaField __m_hActiveProjectile = new("CAbility_Synth_PlasmaFlux", "m_hActiveProjectile");
-		/// <summary><c>CHandle&lt;CBaseEntity&gt;</c>.</summary>
+		/// <summary><c>CHandle&lt;CBaseEntity&gt;</c>. Networked in build 6779: a write is sent to clients.</summary>
 		public CBaseEntity? m_hActiveProjectile { get => GetHandle<CBaseEntity>(__m_hActiveProjectile); set => SetHandle(__m_hActiveProjectile, value); }
 
 		private static readonly SchemaField __m_vLastValidTeleportPosition = new("CAbility_Synth_PlasmaFlux", "m_vLastValidTeleportPosition");
@@ -35,6 +35,6 @@ public static partial class Schema {
 
 		private static readonly SchemaField __m_vecUniqueHitList = new("CAbility_Synth_PlasmaFlux", "m_vecUniqueHitList");
 		/// <summary><c>CUtlVector&lt;CHandle&lt;CBaseEntity&gt;&gt;</c>.</summary>
-		public SchemaHandleList<CBaseEntity> m_vecUniqueHitList => new(this, __m_vecUniqueHitList, -1);
+		public SchemaHandleList<CBaseEntity> m_vecUniqueHitList => new(this, __m_vecUniqueHitList, ListStorage.Vector);
 	}
 }

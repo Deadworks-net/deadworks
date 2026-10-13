@@ -14,11 +14,11 @@ public static partial class Schema {
 		static string ISchemaClass<CTriggerFan>.NativeName => "CTriggerFan";
 
 		private static readonly SchemaField __m_RampTimer = new("CTriggerFan", "m_RampTimer");
-		/// <summary><c>CountdownTimer</c>.</summary>
+		/// <summary><c>CountdownTimer</c>. Networked in build 6779: a write is sent to clients.</summary>
 		public CountdownTimer m_RampTimer => Embedded<CountdownTimer>(__m_RampTimer);
 
 		private static readonly SchemaField __m_bFalloff = new("CTriggerFan", "m_bFalloff");
-		/// <summary><c>bool</c>.</summary>
+		/// <summary><c>bool</c>. Networked in build 6779: a write is sent to clients.</summary>
 		public bool m_bFalloff { get => Get<bool>(__m_bFalloff); set => Set(__m_bFalloff, value); }
 
 		private static readonly SchemaField __m_bPlayerWindblock = new("CTriggerFan", "m_bPlayerWindblock");
@@ -26,7 +26,7 @@ public static partial class Schema {
 		public bool m_bPlayerWindblock { get => Get<bool>(__m_bPlayerWindblock); set => Set(__m_bPlayerWindblock, value); }
 
 		private static readonly SchemaField __m_bPushAwayFromInfoTarget = new("CTriggerFan", "m_bPushAwayFromInfoTarget");
-		/// <summary><c>bool</c>.</summary>
+		/// <summary><c>bool</c>. Networked in build 6779: a write is sent to clients.</summary>
 		public bool m_bPushAwayFromInfoTarget { get => Get<bool>(__m_bPushAwayFromInfoTarget); set => Set(__m_bPushAwayFromInfoTarget, value); }
 
 		private static readonly SchemaField __m_bPushPlayer = new("CTriggerFan", "m_bPushPlayer");
@@ -34,7 +34,7 @@ public static partial class Schema {
 		public bool m_bPushPlayer { get => Get<bool>(__m_bPushPlayer); set => Set(__m_bPushPlayer, value); }
 
 		private static readonly SchemaField __m_bPushTowardsInfoTarget = new("CTriggerFan", "m_bPushTowardsInfoTarget");
-		/// <summary><c>bool</c>.</summary>
+		/// <summary><c>bool</c>. Networked in build 6779: a write is sent to clients.</summary>
 		public bool m_bPushTowardsInfoTarget { get => Get<bool>(__m_bPushTowardsInfoTarget); set => Set(__m_bPushTowardsInfoTarget, value); }
 
 		private static readonly SchemaField __m_bRampDown = new("CTriggerFan", "m_bRampDown");
@@ -50,7 +50,7 @@ public static partial class Schema {
 		public float m_fNoiseSpeed { get => Get<float>(__m_fNoiseSpeed); set => Set(__m_fNoiseSpeed, value); }
 
 		private static readonly SchemaField __m_flForce = new("CTriggerFan", "m_flForce");
-		/// <summary><c>float32</c>.</summary>
+		/// <summary><c>float32</c>. Networked in build 6779: a write is sent to clients.</summary>
 		public float m_flForce { get => Get<float>(__m_flForce); set => Set(__m_flForce, value); }
 
 		private static readonly SchemaField __m_flNPCForce = new("CTriggerFan", "m_flNPCForce");
@@ -74,7 +74,7 @@ public static partial class Schema {
 		public float m_flRopeForceScale { get => Get<float>(__m_flRopeForceScale); set => Set(__m_flRopeForceScale, value); }
 
 		private static readonly SchemaField __m_hInfoFan = new("CTriggerFan", "m_hInfoFan");
-		/// <summary><c>CHandle&lt;CInfoFan&gt;</c>.</summary>
+		/// <summary><c>CHandle&lt;CInfoFan&gt;</c>. Networked in build 6779: a write is sent to clients.</summary>
 		public CInfoFan? m_hInfoFan { get => GetHandle<CInfoFan>(__m_hInfoFan); set => SetHandle(__m_hInfoFan, value); }
 
 		private static readonly SchemaField __m_iszInfoFan = new("CTriggerFan", "m_iszInfoFan");
@@ -86,11 +86,11 @@ public static partial class Schema {
 		public int m_nManagerFanIdx { get => Get<int>(__m_nManagerFanIdx); set => Set(__m_nManagerFanIdx, value); }
 
 		private static readonly SchemaField __m_qNoiseDelta = new("CTriggerFan", "m_qNoiseDelta");
-		/// <summary><c>Quaternion</c>.</summary>
+		/// <summary><c>Quaternion</c>. Networked in build 6779: a write is sent to clients.</summary>
 		public Quaternion m_qNoiseDelta { get => Get<Quaternion>(__m_qNoiseDelta); set => Set(__m_qNoiseDelta, value); }
 
 		private static readonly SchemaField __m_vDirection = new("CTriggerFan", "m_vDirection");
-		/// <summary><c>Vector</c>.</summary>
+		/// <summary><c>Vector</c>. Networked in build 6779: a write is sent to clients.</summary>
 		public Vector3 m_vDirection { get => Get<Vector3>(__m_vDirection); set => Set(__m_vDirection, value); }
 
 		private static readonly SchemaField __m_vFanEndLS = new("CTriggerFan", "m_vFanEndLS");
@@ -102,7 +102,7 @@ public static partial class Schema {
 		public Vector3 m_vFanOriginLS { get => Get<Vector3>(__m_vFanOriginLS); set => Set(__m_vFanOriginLS, value); }
 
 		private static readonly SchemaField __m_vFanOriginOffset = new("CTriggerFan", "m_vFanOriginOffset");
-		/// <summary><c>Vector</c>.</summary>
+		/// <summary><c>Vector</c>. Networked in build 6779: a write is sent to clients.</summary>
 		public Vector3 m_vFanOriginOffset { get => Get<Vector3>(__m_vFanOriginOffset); set => Set(__m_vFanOriginOffset, value); }
 
 		private static readonly SchemaField __m_vFanOriginWS = new("CTriggerFan", "m_vFanOriginWS");

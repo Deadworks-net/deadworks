@@ -14,7 +14,7 @@ public static partial class Schema {
 		static string ISchemaClass<CBreakable>.NativeName => "CBreakable";
 
 		private static readonly SchemaField __m_CPropDataComponent = new("CBreakable", "m_CPropDataComponent");
-		/// <summary><c>CPropDataComponent</c>.</summary>
+		/// <summary><c>CPropDataComponent</c>. Networked in build 6779: a write is sent to clients.</summary>
 		public CPropDataComponent m_CPropDataComponent => Embedded<CPropDataComponent>(__m_CPropDataComponent);
 
 		private static readonly SchemaField __m_Explosion = new("CBreakable", "m_Explosion");
@@ -43,7 +43,7 @@ public static partial class Schema {
 
 		private static readonly SchemaField __m_flLastPhysicsInfluenceTime = new("CBreakable", "m_flLastPhysicsInfluenceTime");
 		/// <summary><c>GameTime_t</c>.</summary>
-		public float m_flLastPhysicsInfluenceTime { get => Get<float>(__m_flLastPhysicsInfluenceTime); set => Set(__m_flLastPhysicsInfluenceTime, value); }
+		public GameTime m_flLastPhysicsInfluenceTime { get => Get<GameTime>(__m_flLastPhysicsInfluenceTime); set => Set(__m_flLastPhysicsInfluenceTime, value); }
 
 		private static readonly SchemaField __m_flPressureDelay = new("CBreakable", "m_flPressureDelay");
 		/// <summary><c>float32</c>.</summary>

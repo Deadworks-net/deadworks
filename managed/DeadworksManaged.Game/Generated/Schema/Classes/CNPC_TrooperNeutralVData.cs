@@ -134,8 +134,8 @@ public static partial class Schema {
 		public string m_retaliateParticle => GetBufferString(__m_retaliateParticle);
 
 		private static readonly SchemaField __m_sNeutralMelee = new("CNPC_TrooperNeutralVData", "m_sNeutralMelee");
-		/// <summary><c>CSubclassName</c>. No typed mapping yet: read it through its address.</summary>
-		public RawField m_sNeutralMelee => Raw(__m_sNeutralMelee, "CSubclassName");
+		/// <summary><c>CSubclassName</c>.</summary>
+		public string m_sNeutralMelee => GetString(__m_sNeutralMelee);
 
 		private static readonly SchemaField __m_vNeutralAbilities = new("CNPC_TrooperNeutralVData", "m_vNeutralAbilities");
 		/// <summary><c>CUtlVector&lt;CSubclassName&gt;</c>. No typed mapping yet: read it through its address.</summary>
@@ -143,10 +143,10 @@ public static partial class Schema {
 
 		private static readonly SchemaField __m_vecRandomBodyGroup = new("CNPC_TrooperNeutralVData", "m_vecRandomBodyGroup");
 		/// <summary><c>CUtlVector&lt;CUtlString&gt;</c>.</summary>
-		public SchemaStringList m_vecRandomBodyGroup => new(this, __m_vecRandomBodyGroup, -1);
+		public SchemaStringList m_vecRandomBodyGroup => new(this, __m_vecRandomBodyGroup, ListStorage.Vector);
 
 		private static readonly SchemaField __m_vecRandomSkin = new("CNPC_TrooperNeutralVData", "m_vecRandomSkin");
 		/// <summary><c>CUtlVector&lt;CUtlString&gt;</c>.</summary>
-		public SchemaStringList m_vecRandomSkin => new(this, __m_vecRandomSkin, -1);
+		public SchemaStringList m_vecRandomSkin => new(this, __m_vecRandomSkin, ListStorage.Vector);
 	}
 }

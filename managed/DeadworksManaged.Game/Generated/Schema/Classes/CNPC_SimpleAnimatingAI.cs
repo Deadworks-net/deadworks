@@ -14,15 +14,15 @@ public static partial class Schema {
 		static string ISchemaClass<CNPC_SimpleAnimatingAI>.NativeName => "CNPC_SimpleAnimatingAI";
 
 		private static readonly SchemaField __m_CCitadelRegenComponent = new("CNPC_SimpleAnimatingAI", "m_CCitadelRegenComponent");
-		/// <summary><c>CCitadelRegenComponent</c>.</summary>
+		/// <summary><c>CCitadelRegenComponent</c>. Networked in build 6779: a write is sent to clients.</summary>
 		public CCitadelRegenComponent m_CCitadelRegenComponent => Embedded<CCitadelRegenComponent>(__m_CCitadelRegenComponent);
 
 		private static readonly SchemaField __m_hAbilityOwner = new("CNPC_SimpleAnimatingAI", "m_hAbilityOwner");
-		/// <summary><c>CHandle&lt;CCitadelBaseAbility&gt;</c>.</summary>
+		/// <summary><c>CHandle&lt;CCitadelBaseAbility&gt;</c>. Networked in build 6779: a write is sent to clients.</summary>
 		public CCitadelBaseAbility? m_hAbilityOwner { get => GetHandle<CCitadelBaseAbility>(__m_hAbilityOwner); set => SetHandle(__m_hAbilityOwner, value); }
 
 		private static readonly SchemaField __m_hEnemy = new("CNPC_SimpleAnimatingAI", "m_hEnemy");
-		/// <summary><c>CHandle&lt;CBaseEntity&gt;</c>.</summary>
+		/// <summary><c>CHandle&lt;CBaseEntity&gt;</c>. Networked in build 6779: a write is sent to clients.</summary>
 		public CBaseEntity? m_hEnemy { get => GetHandle<CBaseEntity>(__m_hEnemy); set => SetHandle(__m_hEnemy, value); }
 
 		/// <summary>The data entry this was created from, as <see cref="CNPC_SimpleAnimatingAIVData"/>, or null if it has none.</summary>

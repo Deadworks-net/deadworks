@@ -14,19 +14,19 @@ public static partial class Schema {
 		static string ISchemaClass<CCitadel_Ability_VampireBat_BatBlink>.NativeName => "CCitadel_Ability_VampireBat_BatBlink";
 
 		private static readonly SchemaField __m_BlinkEndTime = new("CCitadel_Ability_VampireBat_BatBlink", "m_BlinkEndTime");
-		/// <summary><c>GameTime_t</c>.</summary>
-		public float m_BlinkEndTime { get => Get<float>(__m_BlinkEndTime); set => Set(__m_BlinkEndTime, value); }
+		/// <summary><c>GameTime_t</c>. Networked in build 6779: a write is sent to clients.</summary>
+		public GameTime m_BlinkEndTime { get => Get<GameTime>(__m_BlinkEndTime); set => Set(__m_BlinkEndTime, value); }
 
 		private static readonly SchemaField __m_RecastEndTime = new("CCitadel_Ability_VampireBat_BatBlink", "m_RecastEndTime");
-		/// <summary><c>GameTime_t</c>.</summary>
-		public float m_RecastEndTime { get => Get<float>(__m_RecastEndTime); set => Set(__m_RecastEndTime, value); }
+		/// <summary><c>GameTime_t</c>. Networked in build 6779: a write is sent to clients.</summary>
+		public GameTime m_RecastEndTime { get => Get<GameTime>(__m_RecastEndTime); set => Set(__m_RecastEndTime, value); }
 
 		private static readonly SchemaField __m_bIsBlinking = new("CCitadel_Ability_VampireBat_BatBlink", "m_bIsBlinking");
-		/// <summary><c>bool</c>.</summary>
+		/// <summary><c>bool</c>. Networked in build 6779: a write is sent to clients.</summary>
 		public bool m_bIsBlinking { get => Get<bool>(__m_bIsBlinking); set => Set(__m_bIsBlinking, value); }
 
 		private static readonly SchemaField __m_iRemainingCasts = new("CCitadel_Ability_VampireBat_BatBlink", "m_iRemainingCasts");
-		/// <summary><c>int32</c>.</summary>
+		/// <summary><c>int32</c>. Networked in build 6779: a write is sent to clients.</summary>
 		public int m_iRemainingCasts { get => Get<int>(__m_iRemainingCasts); set => Set(__m_iRemainingCasts, value); }
 
 		/// <summary>The data entry this was created from, as <see cref="CCitadel_Ability_VampireBat_BatBlinkVData"/>, or null if it has none.</summary>

@@ -35,10 +35,10 @@ public static partial class Schema {
 
 		private static readonly SchemaField __m_vecEnabledGameModes = new("CAccoladeDefinition", "m_vecEnabledGameModes");
 		/// <summary><c>CUtlVector&lt;ECitadelGameMode&gt;</c>.</summary>
-		public SchemaValueList<ECitadelGameMode> m_vecEnabledGameModes => new(this, __m_vecEnabledGameModes, -1);
+		public SchemaValueList<ECitadelGameMode> m_vecEnabledGameModes => new(this, __m_vecEnabledGameModes, ListStorage.Vector);
 
 		private static readonly SchemaField __m_vecThresholds = new("CAccoladeDefinition", "m_vecThresholds");
 		/// <summary><c>CUtlVector&lt;TrackedStatValue_t&gt;</c>.</summary>
-		public SchemaValueList<int> m_vecThresholds => new(this, __m_vecThresholds, -1);
+		public SchemaValueList<int> m_vecThresholds => new(this, __m_vecThresholds, ListStorage.Vector);
 	}
 }

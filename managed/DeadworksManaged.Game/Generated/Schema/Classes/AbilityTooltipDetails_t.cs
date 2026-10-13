@@ -15,10 +15,10 @@ public static partial class Schema {
 
 		private static readonly SchemaField __m_vecAbilityInfoSections = new("AbilityTooltipDetails_t", "m_vecAbilityInfoSections");
 		/// <summary><c>CUtlVector&lt;AbilitySectionInfo_t&gt;</c>. Add a new Section to the ability tooltip.</summary>
-		public SchemaObjectList<AbilitySectionInfo_t> m_vecAbilityInfoSections => new(this, __m_vecAbilityInfoSections, -1);
+		public SchemaObjectList<AbilitySectionInfo_t> m_vecAbilityInfoSections => new(this, __m_vecAbilityInfoSections, ListStorage.Vector);
 
 		private static readonly SchemaField __m_vecAdditionalHeaderProperties = new("AbilityTooltipDetails_t", "m_vecAdditionalHeaderProperties");
 		/// <summary><c>CUtlVector&lt;CUtlString&gt;</c>. Add additional header properties that aren't part of the default header properties.</summary>
-		public SchemaStringList m_vecAdditionalHeaderProperties => new(this, __m_vecAdditionalHeaderProperties, -1);
+		public SchemaStringList m_vecAdditionalHeaderProperties => new(this, __m_vecAdditionalHeaderProperties, ListStorage.Vector);
 	}
 }

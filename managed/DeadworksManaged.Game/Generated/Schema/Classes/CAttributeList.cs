@@ -14,8 +14,8 @@ public static partial class Schema {
 		static string ISchemaClass<CAttributeList>.NativeName => "CAttributeList";
 
 		private static readonly SchemaField __m_Attributes = new("CAttributeList", "m_Attributes");
-		/// <summary><c>CUtlVectorEmbeddedNetworkVar&lt;CEconItemAttribute&gt;</c>.</summary>
-		public SchemaObjectList<CEconItemAttribute> m_Attributes => new(this, __m_Attributes, -1);
+		/// <summary><c>CUtlVectorEmbeddedNetworkVar&lt;CEconItemAttribute&gt;</c>. Networked in build 6779: a write is sent to clients.</summary>
+		public SchemaObjectList<CEconItemAttribute> m_Attributes => new(this, __m_Attributes, ListStorage.Vector);
 
 		private static readonly SchemaField __m_pManager = new("CAttributeList", "m_pManager");
 		/// <summary><c>CAttributeManager*</c>.</summary>

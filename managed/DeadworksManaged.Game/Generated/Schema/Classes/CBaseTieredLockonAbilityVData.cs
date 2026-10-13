@@ -15,6 +15,6 @@ public static partial class Schema {
 
 		private static readonly SchemaField __m_vecLockonStackDurations = new("CBaseTieredLockonAbilityVData", "m_vecLockonStackDurations");
 		/// <summary><c>CUtlVector&lt;float32&gt;</c>. How long each lockon stack takes to gain, in order. The number of entries is the max number of stacks. When the TimeToMaxStacks property is above 0 these are relative weights scaled to sum to it.</summary>
-		public SchemaValueList<float> m_vecLockonStackDurations => new(this, __m_vecLockonStackDurations, -1);
+		public SchemaValueList<float> m_vecLockonStackDurations => new(this, __m_vecLockonStackDurations, ListStorage.Vector);
 	}
 }

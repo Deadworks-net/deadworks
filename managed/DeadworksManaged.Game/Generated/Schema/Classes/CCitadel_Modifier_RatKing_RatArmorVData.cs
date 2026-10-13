@@ -51,6 +51,6 @@ public static partial class Schema {
 
 		private static readonly SchemaField __m_vecArmorPieces = new("CCitadel_Modifier_RatKing_RatArmorVData", "m_vecArmorPieces");
 		/// <summary><c>CUtlVector&lt;RatArmorPiece_t&gt;</c>.</summary>
-		public SchemaObjectList<RatArmorPiece_t> m_vecArmorPieces => new(this, __m_vecArmorPieces, -1);
+		public SchemaObjectList<RatArmorPiece_t> m_vecArmorPieces => new(this, __m_vecArmorPieces, ListStorage.Vector);
 	}
 }

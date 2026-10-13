@@ -14,11 +14,11 @@ public static partial class Schema {
 		static string ISchemaClass<CGameSceneNodeHandle>.NativeName => "CGameSceneNodeHandle";
 
 		private static readonly SchemaField __m_hOwner = new("CGameSceneNodeHandle", "m_hOwner");
-		/// <summary><c>CEntityHandle</c>.</summary>
+		/// <summary><c>CEntityHandle</c>. Networked in build 6779: a write is sent to clients.</summary>
 		public CEntityInstance? m_hOwner { get => GetHandle<CEntityInstance>(__m_hOwner); set => SetHandle(__m_hOwner, value); }
 
 		private static readonly SchemaField __m_name = new("CGameSceneNodeHandle", "m_name");
-		/// <summary><c>CUtlStringToken</c>.</summary>
+		/// <summary><c>CUtlStringToken</c>. Networked in build 6779: a write is sent to clients.</summary>
 		public uint m_name { get => Get<uint>(__m_name); set => Set(__m_name, value); }
 	}
 }

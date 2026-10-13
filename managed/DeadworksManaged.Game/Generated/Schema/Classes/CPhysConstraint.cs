@@ -26,8 +26,8 @@ public static partial class Schema {
 		public bool m_bTreatEntity1AsInfiniteMass { get => Get<bool>(__m_bTreatEntity1AsInfiniteMass); set => Set(__m_bTreatEntity1AsInfiniteMass, value); }
 
 		private static readonly SchemaField __m_breakSound = new("CPhysConstraint", "m_breakSound");
-		/// <summary><c>CGameSoundEventName</c>. No typed mapping yet: read it through its address.</summary>
-		public RawField m_breakSound => Raw(__m_breakSound, "CGameSoundEventName");
+		/// <summary><c>CGameSoundEventName</c>.</summary>
+		public string m_breakSound => GetString(__m_breakSound);
 
 		private static readonly SchemaField __m_forceLimit = new("CPhysConstraint", "m_forceLimit");
 		/// <summary><c>float32</c>.</summary>

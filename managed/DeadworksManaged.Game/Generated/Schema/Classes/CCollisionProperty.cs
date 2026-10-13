@@ -14,11 +14,11 @@ public static partial class Schema {
 		static string ISchemaClass<CCollisionProperty>.NativeName => "CCollisionProperty";
 
 		private static readonly SchemaField __m_CollisionGroup = new("CCollisionProperty", "m_CollisionGroup");
-		/// <summary><c>uint8</c>. Wrapped by <c>CCollisionProperty.CollisionGroup</c> in DeadworksManaged.Api.</summary>
+		/// <summary><c>uint8</c>. Networked in build 6779: a write is sent to clients. Wrapped by <c>CCollisionProperty.CollisionGroup</c> in DeadworksManaged.Api.</summary>
 		public byte m_CollisionGroup { get => Get<byte>(__m_CollisionGroup); [Obsolete("A raw write skips what CCollisionProperty.SetCollisionGroup does; call that on the curated wrapper instead.")] set => Set(__m_CollisionGroup, value); }
 
 		private static readonly SchemaField __m_collisionAttribute = new("CCollisionProperty", "m_collisionAttribute");
-		/// <summary><c>VPhysicsCollisionAttribute_t</c>. Wrapped by <c>CCollisionProperty.Attribute</c> in DeadworksManaged.Api.</summary>
+		/// <summary><c>VPhysicsCollisionAttribute_t</c>. Networked in build 6779: a write is sent to clients. Wrapped by <c>CCollisionProperty.Attribute</c> in DeadworksManaged.Api.</summary>
 		public VPhysicsCollisionAttribute_t m_collisionAttribute => Embedded<VPhysicsCollisionAttribute_t>(__m_collisionAttribute);
 
 		private static readonly SchemaField __m_flBoundingRadius = new("CCollisionProperty", "m_flBoundingRadius");
@@ -26,51 +26,51 @@ public static partial class Schema {
 		public float m_flBoundingRadius { get => Get<float>(__m_flBoundingRadius); set => Set(__m_flBoundingRadius, value); }
 
 		private static readonly SchemaField __m_flCapsuleRadius = new("CCollisionProperty", "m_flCapsuleRadius");
-		/// <summary><c>float32</c>.</summary>
+		/// <summary><c>float32</c>. Networked in build 6779: a write is sent to clients.</summary>
 		public float m_flCapsuleRadius { get => Get<float>(__m_flCapsuleRadius); set => Set(__m_flCapsuleRadius, value); }
 
 		private static readonly SchemaField __m_nEnablePhysics = new("CCollisionProperty", "m_nEnablePhysics");
-		/// <summary><c>uint8</c>.</summary>
+		/// <summary><c>uint8</c>. Networked in build 6779: a write is sent to clients.</summary>
 		public byte m_nEnablePhysics { get => Get<byte>(__m_nEnablePhysics); set => Set(__m_nEnablePhysics, value); }
 
 		private static readonly SchemaField __m_nSolidType = new("CCollisionProperty", "m_nSolidType");
-		/// <summary><c>SolidType_t</c>. Wrapped by <c>CCollisionProperty.SolidType</c> in DeadworksManaged.Api.</summary>
+		/// <summary><c>SolidType_t</c>. Networked in build 6779: a write is sent to clients. Wrapped by <c>CCollisionProperty.SolidType</c> in DeadworksManaged.Api.</summary>
 		public SolidType_t m_nSolidType { get => Get<SolidType_t>(__m_nSolidType); set => Set(__m_nSolidType, value); }
 
 		private static readonly SchemaField __m_nSurroundType = new("CCollisionProperty", "m_nSurroundType");
-		/// <summary><c>SurroundingBoundsType_t</c>.</summary>
+		/// <summary><c>SurroundingBoundsType_t</c>. Networked in build 6779: a write is sent to clients.</summary>
 		public SurroundingBoundsType_t m_nSurroundType { get => Get<SurroundingBoundsType_t>(__m_nSurroundType); set => Set(__m_nSurroundType, value); }
 
 		private static readonly SchemaField __m_triggerBloat = new("CCollisionProperty", "m_triggerBloat");
-		/// <summary><c>uint8</c>.</summary>
+		/// <summary><c>uint8</c>. Networked in build 6779: a write is sent to clients.</summary>
 		public byte m_triggerBloat { get => Get<byte>(__m_triggerBloat); set => Set(__m_triggerBloat, value); }
 
 		private static readonly SchemaField __m_usSolidFlags = new("CCollisionProperty", "m_usSolidFlags");
-		/// <summary><c>uint8</c>. Wrapped by <c>CCollisionProperty.SolidFlags</c> in DeadworksManaged.Api.</summary>
+		/// <summary><c>uint8</c>. Networked in build 6779: a write is sent to clients. Wrapped by <c>CCollisionProperty.SolidFlags</c> in DeadworksManaged.Api.</summary>
 		public byte m_usSolidFlags { get => Get<byte>(__m_usSolidFlags); [Obsolete("A raw write skips what CCollisionProperty.SetSolidFlags does; call that on the curated wrapper instead.")] set => Set(__m_usSolidFlags, value); }
 
 		private static readonly SchemaField __m_vCapsuleCenter1 = new("CCollisionProperty", "m_vCapsuleCenter1");
-		/// <summary><c>Vector</c>.</summary>
+		/// <summary><c>Vector</c>. Networked in build 6779: a write is sent to clients.</summary>
 		public Vector3 m_vCapsuleCenter1 { get => Get<Vector3>(__m_vCapsuleCenter1); set => Set(__m_vCapsuleCenter1, value); }
 
 		private static readonly SchemaField __m_vCapsuleCenter2 = new("CCollisionProperty", "m_vCapsuleCenter2");
-		/// <summary><c>Vector</c>.</summary>
+		/// <summary><c>Vector</c>. Networked in build 6779: a write is sent to clients.</summary>
 		public Vector3 m_vCapsuleCenter2 { get => Get<Vector3>(__m_vCapsuleCenter2); set => Set(__m_vCapsuleCenter2, value); }
 
 		private static readonly SchemaField __m_vecMaxs = new("CCollisionProperty", "m_vecMaxs");
-		/// <summary><c>Vector</c>. Wrapped by <c>CCollisionProperty.Maxs</c> in DeadworksManaged.Api.</summary>
+		/// <summary><c>Vector</c>. Networked in build 6779: a write is sent to clients. Wrapped by <c>CCollisionProperty.Maxs</c> in DeadworksManaged.Api.</summary>
 		public Vector3 m_vecMaxs { get => Get<Vector3>(__m_vecMaxs); set => Set(__m_vecMaxs, value); }
 
 		private static readonly SchemaField __m_vecMins = new("CCollisionProperty", "m_vecMins");
-		/// <summary><c>Vector</c>. Wrapped by <c>CCollisionProperty.Mins</c> in DeadworksManaged.Api.</summary>
+		/// <summary><c>Vector</c>. Networked in build 6779: a write is sent to clients. Wrapped by <c>CCollisionProperty.Mins</c> in DeadworksManaged.Api.</summary>
 		public Vector3 m_vecMins { get => Get<Vector3>(__m_vecMins); set => Set(__m_vecMins, value); }
 
 		private static readonly SchemaField __m_vecSpecifiedSurroundingMaxs = new("CCollisionProperty", "m_vecSpecifiedSurroundingMaxs");
-		/// <summary><c>Vector</c>.</summary>
+		/// <summary><c>Vector</c>. Networked in build 6779: a write is sent to clients.</summary>
 		public Vector3 m_vecSpecifiedSurroundingMaxs { get => Get<Vector3>(__m_vecSpecifiedSurroundingMaxs); set => Set(__m_vecSpecifiedSurroundingMaxs, value); }
 
 		private static readonly SchemaField __m_vecSpecifiedSurroundingMins = new("CCollisionProperty", "m_vecSpecifiedSurroundingMins");
-		/// <summary><c>Vector</c>.</summary>
+		/// <summary><c>Vector</c>. Networked in build 6779: a write is sent to clients.</summary>
 		public Vector3 m_vecSpecifiedSurroundingMins { get => Get<Vector3>(__m_vecSpecifiedSurroundingMins); set => Set(__m_vecSpecifiedSurroundingMins, value); }
 
 		private static readonly SchemaField __m_vecSurroundingMaxs = new("CCollisionProperty", "m_vecSurroundingMaxs");

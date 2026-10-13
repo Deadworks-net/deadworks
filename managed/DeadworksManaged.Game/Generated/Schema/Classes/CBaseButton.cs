@@ -67,10 +67,10 @@ public static partial class Schema {
 
 		private static readonly SchemaField __m_flUseLockedTime = new("CBaseButton", "m_flUseLockedTime");
 		/// <summary><c>GameTime_t</c>.</summary>
-		public float m_flUseLockedTime { get => Get<float>(__m_flUseLockedTime); set => Set(__m_flUseLockedTime, value); }
+		public GameTime m_flUseLockedTime { get => Get<GameTime>(__m_flUseLockedTime); set => Set(__m_flUseLockedTime, value); }
 
 		private static readonly SchemaField __m_glowEntity = new("CBaseButton", "m_glowEntity");
-		/// <summary><c>CHandle&lt;CBaseModelEntity&gt;</c>.</summary>
+		/// <summary><c>CHandle&lt;CBaseModelEntity&gt;</c>. Networked in build 6779: a write is sent to clients.</summary>
 		public CBaseModelEntity? m_glowEntity { get => GetHandle<CBaseModelEntity>(__m_glowEntity); set => SetHandle(__m_glowEntity, value); }
 
 		private static readonly SchemaField __m_hConstraint = new("CBaseButton", "m_hConstraint");
@@ -94,27 +94,27 @@ public static partial class Schema {
 		public string m_sGlowEntity { get => GetString(__m_sGlowEntity); set => SetString(__m_sGlowEntity, value); }
 
 		private static readonly SchemaField __m_sLockedSound = new("CBaseButton", "m_sLockedSound");
-		/// <summary><c>CGameSoundEventName</c>. No typed mapping yet: read it through its address.</summary>
-		public RawField m_sLockedSound => Raw(__m_sLockedSound, "CGameSoundEventName");
+		/// <summary><c>CGameSoundEventName</c>.</summary>
+		public string m_sLockedSound => GetString(__m_sLockedSound);
 
 		private static readonly SchemaField __m_sOverrideAnticipationName = new("CBaseButton", "m_sOverrideAnticipationName");
 		/// <summary><c>CUtlSymbolLarge</c>.</summary>
 		public string m_sOverrideAnticipationName { get => GetString(__m_sOverrideAnticipationName); set => SetString(__m_sOverrideAnticipationName, value); }
 
 		private static readonly SchemaField __m_sUnlockedSound = new("CBaseButton", "m_sUnlockedSound");
-		/// <summary><c>CGameSoundEventName</c>. No typed mapping yet: read it through its address.</summary>
-		public RawField m_sUnlockedSound => Raw(__m_sUnlockedSound, "CGameSoundEventName");
+		/// <summary><c>CGameSoundEventName</c>.</summary>
+		public string m_sUnlockedSound => GetString(__m_sUnlockedSound);
 
 		private static readonly SchemaField __m_sUseSound = new("CBaseButton", "m_sUseSound");
-		/// <summary><c>CGameSoundEventName</c>. No typed mapping yet: read it through its address.</summary>
-		public RawField m_sUseSound => Raw(__m_sUseSound, "CGameSoundEventName");
+		/// <summary><c>CGameSoundEventName</c>.</summary>
+		public string m_sUseSound => GetString(__m_sUseSound);
 
 		private static readonly SchemaField __m_szDisplayText = new("CBaseButton", "m_szDisplayText");
-		/// <summary><c>CUtlSymbolLarge</c>.</summary>
+		/// <summary><c>CUtlSymbolLarge</c>. Networked in build 6779: a write is sent to clients.</summary>
 		public string m_szDisplayText { get => GetString(__m_szDisplayText); set => SetString(__m_szDisplayText, value); }
 
 		private static readonly SchemaField __m_usable = new("CBaseButton", "m_usable");
-		/// <summary><c>bool</c>.</summary>
+		/// <summary><c>bool</c>. Networked in build 6779: a write is sent to clients.</summary>
 		public bool m_usable { get => Get<bool>(__m_usable); set => Set(__m_usable, value); }
 
 		/// <summary>Fires the <c>Disable</c> input.</summary>

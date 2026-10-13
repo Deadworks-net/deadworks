@@ -14,7 +14,7 @@ public static partial class Schema {
 		static string ISchemaClass<AnimGraph2SerializedPoseRecipeSlot_t>.NativeName => "AnimGraph2SerializedPoseRecipeSlot_t";
 
 		private static readonly SchemaField __m_topology = new("AnimGraph2SerializedPoseRecipeSlot_t", "m_topology");
-		/// <summary><c>CUtlBinaryBlock</c>. No typed mapping yet: read it through its address.</summary>
+		/// <summary><c>CUtlBinaryBlock</c>. Networked in build 6779: a write is sent to clients. No typed mapping yet: read it through its address.</summary>
 		public RawField m_topology => Raw(__m_topology, "CUtlBinaryBlock");
 	}
 }

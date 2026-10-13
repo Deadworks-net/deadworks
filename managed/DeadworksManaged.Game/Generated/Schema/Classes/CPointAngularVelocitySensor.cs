@@ -47,7 +47,7 @@ public static partial class Schema {
 
 		private static readonly SchemaField __m_flFireTime = new("CPointAngularVelocitySensor", "m_flFireTime");
 		/// <summary><c>GameTime_t</c>.</summary>
-		public float m_flFireTime { get => Get<float>(__m_flFireTime); set => Set(__m_flFireTime, value); }
+		public GameTime m_flFireTime { get => Get<GameTime>(__m_flFireTime); set => Set(__m_flFireTime, value); }
 
 		private static readonly SchemaField __m_flLastAngVelocity = new("CPointAngularVelocitySensor", "m_flLastAngVelocity");
 		/// <summary><c>float32</c>.</summary>

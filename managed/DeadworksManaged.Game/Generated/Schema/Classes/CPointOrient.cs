@@ -19,7 +19,7 @@ public static partial class Schema {
 
 		private static readonly SchemaField __m_flLastGameTime = new("CPointOrient", "m_flLastGameTime");
 		/// <summary><c>GameTime_t</c>.</summary>
-		public float m_flLastGameTime { get => Get<float>(__m_flLastGameTime); set => Set(__m_flLastGameTime, value); }
+		public GameTime m_flLastGameTime { get => Get<GameTime>(__m_flLastGameTime); set => Set(__m_flLastGameTime, value); }
 
 		private static readonly SchemaField __m_flMaxTurnRate = new("CPointOrient", "m_flMaxTurnRate");
 		/// <summary><c>float32</c>.</summary>

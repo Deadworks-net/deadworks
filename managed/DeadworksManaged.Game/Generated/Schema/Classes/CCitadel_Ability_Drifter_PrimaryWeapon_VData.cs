@@ -27,6 +27,6 @@ public static partial class Schema {
 
 		private static readonly SchemaField __m_vecOriginOffsetsLeft = new("CCitadel_Ability_Drifter_PrimaryWeapon_VData", "m_vecOriginOffsetsLeft");
 		/// <summary><c>CUtlVector&lt;Vector2D&gt;</c>.</summary>
-		public SchemaValueList<Vector2> m_vecOriginOffsetsLeft => new(this, __m_vecOriginOffsetsLeft, -1);
+		public SchemaValueList<Vector2> m_vecOriginOffsetsLeft => new(this, __m_vecOriginOffsetsLeft, ListStorage.Vector);
 	}
 }

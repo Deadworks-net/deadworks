@@ -14,15 +14,15 @@ public static partial class Schema {
 		static string ISchemaClass<CCitadelHideoutPropSlot>.NativeName => "CCitadelHideoutPropSlot";
 
 		private static readonly SchemaField __m_hProp = new("CCitadelHideoutPropSlot", "m_hProp");
-		/// <summary><c>CHandle&lt;CCitadelHideoutPropBase&gt;</c>.</summary>
+		/// <summary><c>CHandle&lt;CCitadelHideoutPropBase&gt;</c>. Networked in build 6779: a write is sent to clients.</summary>
 		public CCitadelHideoutPropBase? m_hProp { get => GetHandle<CCitadelHideoutPropBase>(__m_hProp); set => SetHandle(__m_hProp, value); }
 
 		private static readonly SchemaField __m_nSlotID = new("CCitadelHideoutPropSlot", "m_nSlotID");
-		/// <summary><c>int32</c>.</summary>
+		/// <summary><c>int32</c>. Networked in build 6779: a write is sent to clients.</summary>
 		public int m_nSlotID { get => Get<int>(__m_nSlotID); set => Set(__m_nSlotID, value); }
 
 		private static readonly SchemaField __m_nSlotType = new("CCitadelHideoutPropSlot", "m_nSlotType");
-		/// <summary><c>EHideoutPropSlotType_t</c>.</summary>
+		/// <summary><c>EHideoutPropSlotType_t</c>. Networked in build 6779: a write is sent to clients.</summary>
 		public EHideoutPropSlotType_t m_nSlotType { get => Get<EHideoutPropSlotType_t>(__m_nSlotType); set => Set(__m_nSlotType, value); }
 	}
 }

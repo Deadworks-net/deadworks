@@ -15,10 +15,10 @@ public static partial class Schema {
 
 		private static readonly SchemaField __m_flLastDeferredDamageApplicationTime = new("CCitadel_Ability_Shiv_Defer_Damage", "m_flLastDeferredDamageApplicationTime");
 		/// <summary><c>GameTime_t</c>.</summary>
-		public float m_flLastDeferredDamageApplicationTime { get => Get<float>(__m_flLastDeferredDamageApplicationTime); set => Set(__m_flLastDeferredDamageApplicationTime, value); }
+		public GameTime m_flLastDeferredDamageApplicationTime { get => Get<GameTime>(__m_flLastDeferredDamageApplicationTime); set => Set(__m_flLastDeferredDamageApplicationTime, value); }
 
 		private static readonly SchemaField __m_flTotalPendingDamage = new("CCitadel_Ability_Shiv_Defer_Damage", "m_flTotalPendingDamage");
-		/// <summary><c>float32</c>.</summary>
+		/// <summary><c>float32</c>. Networked in build 6779: a write is sent to clients.</summary>
 		public float m_flTotalPendingDamage { get => Get<float>(__m_flTotalPendingDamage); set => Set(__m_flTotalPendingDamage, value); }
 	}
 }

@@ -14,12 +14,12 @@ public static partial class Schema {
 		static string ISchemaClass<CCitadel_Ability_Necro_ZombieWall>.NativeName => "CCitadel_Ability_Necro_ZombieWall";
 
 		private static readonly SchemaField __m_tWallDeployFinishTime = new("CCitadel_Ability_Necro_ZombieWall", "m_tWallDeployFinishTime");
-		/// <summary><c>GameTime_t</c>.</summary>
-		public float m_tWallDeployFinishTime { get => Get<float>(__m_tWallDeployFinishTime); set => Set(__m_tWallDeployFinishTime, value); }
+		/// <summary><c>GameTime_t</c>. Networked in build 6779: a write is sent to clients.</summary>
+		public GameTime m_tWallDeployFinishTime { get => Get<GameTime>(__m_tWallDeployFinishTime); set => Set(__m_tWallDeployFinishTime, value); }
 
 		private static readonly SchemaField __m_vecHitUnits = new("CCitadel_Ability_Necro_ZombieWall", "m_vecHitUnits");
 		/// <summary><c>CUtlVector&lt;CHandle&lt;CBaseEntity&gt;&gt;</c>.</summary>
-		public SchemaHandleList<CBaseEntity> m_vecHitUnits => new(this, __m_vecHitUnits, -1);
+		public SchemaHandleList<CBaseEntity> m_vecHitUnits => new(this, __m_vecHitUnits, ListStorage.Vector);
 
 		/// <summary>The data entry this was created from, as <see cref="CCitadel_Ability_Necro_ZombieWallVData"/>, or null if it has none.</summary>
 		public new CCitadel_Ability_Necro_ZombieWallVData? VData => SubclassVData<CCitadel_Ability_Necro_ZombieWallVData>();

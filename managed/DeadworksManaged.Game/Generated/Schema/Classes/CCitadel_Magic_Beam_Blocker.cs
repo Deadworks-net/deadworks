@@ -14,7 +14,7 @@ public static partial class Schema {
 		static string ISchemaClass<CCitadel_Magic_Beam_Blocker>.NativeName => "CCitadel_Magic_Beam_Blocker";
 
 		private static readonly SchemaField __m_flTurnSolidTime = new("CCitadel_Magic_Beam_Blocker", "m_flTurnSolidTime");
-		/// <summary><c>GameTime_t</c>.</summary>
-		public float m_flTurnSolidTime { get => Get<float>(__m_flTurnSolidTime); set => Set(__m_flTurnSolidTime, value); }
+		/// <summary><c>GameTime_t</c>. Networked in build 6779: a write is sent to clients.</summary>
+		public GameTime m_flTurnSolidTime { get => Get<GameTime>(__m_flTurnSolidTime); set => Set(__m_flTurnSolidTime, value); }
 	}
 }

@@ -15,7 +15,7 @@ public static partial class Schema {
 
 		private static readonly SchemaField __m_hEnemyHeroInVacuum = new("CCitadel_Modifier_VacuumAura", "m_hEnemyHeroInVacuum");
 		/// <summary><c>CUtlVector&lt;CHandle&lt;CBaseEntity&gt;&gt;</c>.</summary>
-		public SchemaHandleList<CBaseEntity> m_hEnemyHeroInVacuum => new(this, __m_hEnemyHeroInVacuum, -1);
+		public SchemaHandleList<CBaseEntity> m_hEnemyHeroInVacuum => new(this, __m_hEnemyHeroInVacuum, ListStorage.Vector);
 
 		private static readonly SchemaField __m_nNumPlayersKilled = new("CCitadel_Modifier_VacuumAura", "m_nNumPlayersKilled");
 		/// <summary><c>int32</c>.</summary>
@@ -23,6 +23,6 @@ public static partial class Schema {
 
 		private static readonly SchemaField __m_tLastDamageTime = new("CCitadel_Modifier_VacuumAura", "m_tLastDamageTime");
 		/// <summary><c>GameTime_t</c>.</summary>
-		public float m_tLastDamageTime { get => Get<float>(__m_tLastDamageTime); set => Set(__m_tLastDamageTime, value); }
+		public GameTime m_tLastDamageTime { get => Get<GameTime>(__m_tLastDamageTime); set => Set(__m_tLastDamageTime, value); }
 	}
 }

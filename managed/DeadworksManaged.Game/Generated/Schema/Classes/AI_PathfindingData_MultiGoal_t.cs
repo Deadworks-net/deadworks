@@ -15,6 +15,6 @@ public static partial class Schema {
 
 		private static readonly SchemaField __m_vecPoints = new("AI_PathfindingData_MultiGoal_t", "m_vecPoints");
 		/// <summary><c>CUtlVector&lt;CRelativeLocation&gt;</c>.</summary>
-		public SchemaObjectList<CRelativeLocation> m_vecPoints => new(this, __m_vecPoints, -1);
+		public SchemaObjectList<CRelativeLocation> m_vecPoints => new(this, __m_vecPoints, ListStorage.Vector);
 	}
 }

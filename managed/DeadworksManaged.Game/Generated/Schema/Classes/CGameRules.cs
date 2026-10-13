@@ -18,7 +18,7 @@ public static partial class Schema {
 		public CNetworkVarChainer __m_pChainEntity => Embedded<CNetworkVarChainer>(____m_pChainEntity);
 
 		private static readonly SchemaField __m_bGamePaused = new("CGameRules", "m_bGamePaused");
-		/// <summary><c>bool</c>.</summary>
+		/// <summary><c>bool</c>. Networked in build 6779: a write is sent to clients.</summary>
 		public bool m_bGamePaused { get => Get<bool>(__m_bGamePaused); set => Set(__m_bGamePaused, value); }
 
 		private static readonly SchemaField __m_nLastMatchTime = new("CGameRules", "m_nLastMatchTime");
@@ -30,7 +30,7 @@ public static partial class Schema {
 		public ulong m_nLastMatchTime_MatchID64 { get => Get<ulong>(__m_nLastMatchTime_MatchID64); set => Set(__m_nLastMatchTime_MatchID64, value); }
 
 		private static readonly SchemaField __m_nPauseStartTick = new("CGameRules", "m_nPauseStartTick");
-		/// <summary><c>int32</c>.</summary>
+		/// <summary><c>int32</c>. Networked in build 6779: a write is sent to clients.</summary>
 		public int m_nPauseStartTick { get => Get<int>(__m_nPauseStartTick); set => Set(__m_nPauseStartTick, value); }
 
 		private static readonly SchemaField __m_nQuestPhase = new("CGameRules", "m_nQuestPhase");
@@ -38,7 +38,7 @@ public static partial class Schema {
 		public int m_nQuestPhase { get => Get<int>(__m_nQuestPhase); set => Set(__m_nQuestPhase, value); }
 
 		private static readonly SchemaField __m_nTotalPausedTicks = new("CGameRules", "m_nTotalPausedTicks");
-		/// <summary><c>int32</c>.</summary>
+		/// <summary><c>int32</c>. Networked in build 6779: a write is sent to clients.</summary>
 		public int m_nTotalPausedTicks { get => Get<int>(__m_nTotalPausedTicks); set => Set(__m_nTotalPausedTicks, value); }
 
 		private static readonly SchemaField __m_szQuestName = new("CGameRules", "m_szQuestName");

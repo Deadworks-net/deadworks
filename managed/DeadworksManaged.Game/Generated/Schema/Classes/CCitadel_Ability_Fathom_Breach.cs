@@ -14,7 +14,7 @@ public static partial class Schema {
 		static string ISchemaClass<CCitadel_Ability_Fathom_Breach>.NativeName => "CCitadel_Ability_Fathom_Breach";
 
 		private static readonly SchemaField __m_bInFlight = new("CCitadel_Ability_Fathom_Breach", "m_bInFlight");
-		/// <summary><c>bool</c>.</summary>
+		/// <summary><c>bool</c>. Networked in build 6779: a write is sent to clients.</summary>
 		public bool m_bInFlight { get => Get<bool>(__m_bInFlight); set => Set(__m_bInFlight, value); }
 
 		private static readonly SchemaField __m_nRollFXIndex = new("CCitadel_Ability_Fathom_Breach", "m_nRollFXIndex");

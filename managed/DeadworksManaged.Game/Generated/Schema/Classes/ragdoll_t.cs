@@ -19,15 +19,15 @@ public static partial class Schema {
 
 		private static readonly SchemaField __boneIndex = new("ragdoll_t", "boneIndex");
 		/// <summary><c>CUtlVector&lt;int32&gt;</c>.</summary>
-		public SchemaValueList<int> boneIndex => new(this, __boneIndex, -1);
+		public SchemaValueList<int> boneIndex => new(this, __boneIndex, ListStorage.Vector);
 
 		private static readonly SchemaField __hierarchyJoints = new("ragdoll_t", "hierarchyJoints");
 		/// <summary><c>CUtlVector&lt;ragdollhierarchyjoint_t&gt;</c>.</summary>
-		public SchemaObjectList<ragdollhierarchyjoint_t> hierarchyJoints => new(this, __hierarchyJoints, -1);
+		public SchemaObjectList<ragdollhierarchyjoint_t> hierarchyJoints => new(this, __hierarchyJoints, ListStorage.Vector);
 
 		private static readonly SchemaField __list = new("ragdoll_t", "list");
 		/// <summary><c>CUtlVector&lt;ragdollelement_t&gt;</c>.</summary>
-		public SchemaObjectList<ragdollelement_t> list => new(this, __list, -1);
+		public SchemaObjectList<ragdollelement_t> list => new(this, __list, ListStorage.Vector);
 
 		private static readonly SchemaField __unused = new("ragdoll_t", "unused");
 		/// <summary><c>bool</c>.</summary>

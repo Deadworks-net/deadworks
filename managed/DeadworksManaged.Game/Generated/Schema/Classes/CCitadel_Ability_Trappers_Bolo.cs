@@ -19,7 +19,7 @@ public static partial class Schema {
 
 		private static readonly SchemaField __m_hHitTargets = new("CCitadel_Ability_Trappers_Bolo", "m_hHitTargets");
 		/// <summary><c>CUtlVector&lt;CHandle&lt;CBaseEntity&gt;&gt;</c>.</summary>
-		public SchemaHandleList<CBaseEntity> m_hHitTargets => new(this, __m_hHitTargets, -1);
+		public SchemaHandleList<CBaseEntity> m_hHitTargets => new(this, __m_hHitTargets, ListStorage.Vector);
 
 		private static readonly SchemaField __m_hNextTarget = new("CCitadel_Ability_Trappers_Bolo", "m_hNextTarget");
 		/// <summary><c>CHandle&lt;CBaseEntity&gt;</c>.</summary>

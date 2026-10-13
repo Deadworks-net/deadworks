@@ -15,7 +15,7 @@ public static partial class Schema {
 
 		private static readonly SchemaField __m_LastThinkTime = new("CCitadel_Modifier_IntensifyingClip", "m_LastThinkTime");
 		/// <summary><c>GameTime_t</c>.</summary>
-		public float m_LastThinkTime { get => Get<float>(__m_LastThinkTime); set => Set(__m_LastThinkTime, value); }
+		public GameTime m_LastThinkTime { get => Get<GameTime>(__m_LastThinkTime); set => Set(__m_LastThinkTime, value); }
 
 		private static readonly SchemaField __m_flSpinUpTime = new("CCitadel_Modifier_IntensifyingClip", "m_flSpinUpTime");
 		/// <summary><c>float32</c>.</summary>

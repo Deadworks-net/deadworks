@@ -14,11 +14,11 @@ public static partial class Schema {
 		static string ISchemaClass<CItemCrate>.NativeName => "CItemCrate";
 
 		private static readonly SchemaField __m_CCitadelMinimapComponent = new("CItemCrate", "m_CCitadelMinimapComponent");
-		/// <summary><c>CCitadelMinimapComponent</c>.</summary>
+		/// <summary><c>CCitadelMinimapComponent</c>. Networked in build 6779: a write is sent to clients.</summary>
 		public CCitadelMinimapComponent m_CCitadelMinimapComponent => Embedded<CCitadelMinimapComponent>(__m_CCitadelMinimapComponent);
 
 		private static readonly SchemaField __m_eLootType = new("CItemCrate", "m_eLootType");
-		/// <summary><c>int32</c>.</summary>
+		/// <summary><c>int32</c>. Networked in build 6779: a write is sent to clients.</summary>
 		public int m_eLootType { get => Get<int>(__m_eLootType); set => Set(__m_eLootType, value); }
 
 		private static readonly SchemaField __m_eObjectivePosition = new("CItemCrate", "m_eObjectivePosition");

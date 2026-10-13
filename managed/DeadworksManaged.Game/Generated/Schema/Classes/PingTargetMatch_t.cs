@@ -27,10 +27,10 @@ public static partial class Schema {
 
 		private static readonly SchemaField __m_vecEntityClasses = new("PingTargetMatch_t", "m_vecEntityClasses");
 		/// <summary><c>CUtlVector&lt;Class_T&gt;</c>. Entity classes this row describes. Listing several lets one row cover a family, i.e. all the boss tiers.</summary>
-		public SchemaValueList<Class_T> m_vecEntityClasses => new(this, __m_vecEntityClasses, -1);
+		public SchemaValueList<Class_T> m_vecEntityClasses => new(this, __m_vecEntityClasses, ListStorage.Vector);
 
 		private static readonly SchemaField __m_vecEntityClassnames = new("PingTargetMatch_t", "m_vecEntityClassnames");
 		/// <summary><c>CUtlVector&lt;CUtlString&gt;</c>. Optional. Narrow to these entity classnames, for classes that split by classname. Leave empty for any.</summary>
-		public SchemaStringList m_vecEntityClassnames => new(this, __m_vecEntityClassnames, -1);
+		public SchemaStringList m_vecEntityClassnames => new(this, __m_vecEntityClassnames, ListStorage.Vector);
 	}
 }

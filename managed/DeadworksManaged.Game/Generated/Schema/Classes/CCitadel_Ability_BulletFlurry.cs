@@ -18,12 +18,12 @@ public static partial class Schema {
 		public bool m_bHasCameraOverride { get => Get<bool>(__m_bHasCameraOverride); set => Set(__m_bHasCameraOverride, value); }
 
 		private static readonly SchemaField __m_flFlurryEndTime = new("CCitadel_Ability_BulletFlurry", "m_flFlurryEndTime");
-		/// <summary><c>CCitadelAutoScaledTime</c>.</summary>
+		/// <summary><c>CCitadelAutoScaledTime</c>. Networked in build 6779: a write is sent to clients.</summary>
 		public CCitadelAutoScaledTime m_flFlurryEndTime => Embedded<CCitadelAutoScaledTime>(__m_flFlurryEndTime);
 
 		private static readonly SchemaField __m_flNextAttackTime = new("CCitadel_Ability_BulletFlurry", "m_flNextAttackTime");
-		/// <summary><c>GameTime_t</c>.</summary>
-		public float m_flNextAttackTime { get => Get<float>(__m_flNextAttackTime); set => Set(__m_flNextAttackTime, value); }
+		/// <summary><c>GameTime_t</c>. Networked in build 6779: a write is sent to clients.</summary>
+		public GameTime m_flNextAttackTime { get => Get<GameTime>(__m_flNextAttackTime); set => Set(__m_flNextAttackTime, value); }
 
 		private static readonly SchemaField __m_nBurstShots = new("CCitadel_Ability_BulletFlurry", "m_nBurstShots");
 		/// <summary><c>int32</c>.</summary>
@@ -47,7 +47,7 @@ public static partial class Schema {
 
 		private static readonly SchemaField __m_vecShootTargets = new("CCitadel_Ability_BulletFlurry", "m_vecShootTargets");
 		/// <summary><c>CUtlVector&lt;CHandle&lt;CBaseEntity&gt;&gt;</c>.</summary>
-		public SchemaHandleList<CBaseEntity> m_vecShootTargets => new(this, __m_vecShootTargets, -1);
+		public SchemaHandleList<CBaseEntity> m_vecShootTargets => new(this, __m_vecShootTargets, ListStorage.Vector);
 
 		/// <summary>The data entry this was created from, as <see cref="CCitadel_Ability_BulletFlurryVData"/>, or null if it has none.</summary>
 		public new CCitadel_Ability_BulletFlurryVData? VData => SubclassVData<CCitadel_Ability_BulletFlurryVData>();

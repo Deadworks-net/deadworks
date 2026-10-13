@@ -14,7 +14,7 @@ public static partial class Schema {
 		static string ISchemaClass<CNPC_Ratking_Rat>.NativeName => "CNPC_Ratking_Rat";
 
 		private static readonly SchemaField __m_hAbility = new("CNPC_Ratking_Rat", "m_hAbility");
-		/// <summary><c>CHandle&lt;CCitadelBaseAbility&gt;</c>.</summary>
+		/// <summary><c>CHandle&lt;CCitadelBaseAbility&gt;</c>. Networked in build 6779: a write is sent to clients.</summary>
 		public CCitadelBaseAbility? m_hAbility { get => GetHandle<CCitadelBaseAbility>(__m_hAbility); set => SetHandle(__m_hAbility, value); }
 
 		private static readonly SchemaField __m_vFlightVelocity = new("CNPC_Ratking_Rat", "m_vFlightVelocity");

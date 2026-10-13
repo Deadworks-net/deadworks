@@ -15,14 +15,14 @@ public static partial class Schema {
 
 		private static readonly SchemaField __flwaitSound = new("locksound_t", "flwaitSound");
 		/// <summary><c>GameTime_t</c>.</summary>
-		public float flwaitSound { get => Get<float>(__flwaitSound); set => Set(__flwaitSound, value); }
+		public GameTime flwaitSound { get => Get<GameTime>(__flwaitSound); set => Set(__flwaitSound, value); }
 
 		private static readonly SchemaField __sLockedSound = new("locksound_t", "sLockedSound");
-		/// <summary><c>CGameSoundEventName</c>. No typed mapping yet: read it through its address.</summary>
-		public RawField sLockedSound => Raw(__sLockedSound, "CGameSoundEventName");
+		/// <summary><c>CGameSoundEventName</c>.</summary>
+		public string sLockedSound => GetString(__sLockedSound);
 
 		private static readonly SchemaField __sUnlockedSound = new("locksound_t", "sUnlockedSound");
-		/// <summary><c>CGameSoundEventName</c>. No typed mapping yet: read it through its address.</summary>
-		public RawField sUnlockedSound => Raw(__sUnlockedSound, "CGameSoundEventName");
+		/// <summary><c>CGameSoundEventName</c>.</summary>
+		public string sUnlockedSound => GetString(__sUnlockedSound);
 	}
 }

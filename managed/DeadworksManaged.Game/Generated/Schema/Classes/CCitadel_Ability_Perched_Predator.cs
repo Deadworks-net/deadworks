@@ -14,7 +14,7 @@ public static partial class Schema {
 		static string ISchemaClass<CCitadel_Ability_Perched_Predator>.NativeName => "CCitadel_Ability_Perched_Predator";
 
 		private static readonly SchemaField __m_hActiveProjectile = new("CCitadel_Ability_Perched_Predator", "m_hActiveProjectile");
-		/// <summary><c>CHandle&lt;CBaseEntity&gt;</c>.</summary>
+		/// <summary><c>CHandle&lt;CBaseEntity&gt;</c>. Networked in build 6779: a write is sent to clients.</summary>
 		public CBaseEntity? m_hActiveProjectile { get => GetHandle<CBaseEntity>(__m_hActiveProjectile); set => SetHandle(__m_hActiveProjectile, value); }
 	}
 }

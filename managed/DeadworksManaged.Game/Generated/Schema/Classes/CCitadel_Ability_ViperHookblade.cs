@@ -15,10 +15,10 @@ public static partial class Schema {
 
 		private static readonly SchemaField __m_vecOutgoingHitList = new("CCitadel_Ability_ViperHookblade", "m_vecOutgoingHitList");
 		/// <summary><c>CUtlVector&lt;CHandle&lt;CBaseEntity&gt;&gt;</c>.</summary>
-		public SchemaHandleList<CBaseEntity> m_vecOutgoingHitList => new(this, __m_vecOutgoingHitList, -1);
+		public SchemaHandleList<CBaseEntity> m_vecOutgoingHitList => new(this, __m_vecOutgoingHitList, ListStorage.Vector);
 
 		private static readonly SchemaField __m_vecReturningHitList = new("CCitadel_Ability_ViperHookblade", "m_vecReturningHitList");
 		/// <summary><c>CUtlVector&lt;CHandle&lt;CBaseEntity&gt;&gt;</c>.</summary>
-		public SchemaHandleList<CBaseEntity> m_vecReturningHitList => new(this, __m_vecReturningHitList, -1);
+		public SchemaHandleList<CBaseEntity> m_vecReturningHitList => new(this, __m_vecReturningHitList, ListStorage.Vector);
 	}
 }

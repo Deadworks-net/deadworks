@@ -15,7 +15,7 @@ public static partial class Schema {
 
 		private static readonly SchemaField __m_flLastRegenThinkTime = new("CCitadelRegenComponent", "m_flLastRegenThinkTime");
 		/// <summary><c>GameTime_t</c>.</summary>
-		public float m_flLastRegenThinkTime { get => Get<float>(__m_flLastRegenThinkTime); set => Set(__m_flLastRegenThinkTime, value); }
+		public GameTime m_flLastRegenThinkTime { get => Get<GameTime>(__m_flLastRegenThinkTime); set => Set(__m_flLastRegenThinkTime, value); }
 
 		private static readonly SchemaField __m_flRegenAccumulator = new("CCitadelRegenComponent", "m_flRegenAccumulator");
 		/// <summary><c>float32</c>.</summary>

@@ -14,27 +14,27 @@ public static partial class Schema {
 		static string ISchemaClass<CNPC_NecroSkele>.NativeName => "CNPC_NecroSkele";
 
 		private static readonly SchemaField __m_bDontMove = new("CNPC_NecroSkele", "m_bDontMove");
-		/// <summary><c>bool</c>.</summary>
+		/// <summary><c>bool</c>. Networked in build 6779: a write is sent to clients.</summary>
 		public bool m_bDontMove { get => Get<bool>(__m_bDontMove); set => Set(__m_bDontMove, value); }
 
 		private static readonly SchemaField __m_flAttackRange = new("CNPC_NecroSkele", "m_flAttackRange");
-		/// <summary><c>float32</c>.</summary>
+		/// <summary><c>float32</c>. Networked in build 6779: a write is sent to clients.</summary>
 		public float m_flAttackRange { get => Get<float>(__m_flAttackRange); set => Set(__m_flAttackRange, value); }
 
 		private static readonly SchemaField __m_flSpawnDuration = new("CNPC_NecroSkele", "m_flSpawnDuration");
-		/// <summary><c>float32</c>.</summary>
+		/// <summary><c>float32</c>. Networked in build 6779: a write is sent to clients.</summary>
 		public float m_flSpawnDuration { get => Get<float>(__m_flSpawnDuration); set => Set(__m_flSpawnDuration, value); }
 
 		private static readonly SchemaField __m_hCastingAbility = new("CNPC_NecroSkele", "m_hCastingAbility");
-		/// <summary><c>CHandle&lt;CCitadelBaseAbility&gt;</c>.</summary>
+		/// <summary><c>CHandle&lt;CCitadelBaseAbility&gt;</c>. Networked in build 6779: a write is sent to clients.</summary>
 		public CCitadelBaseAbility? m_hCastingAbility { get => GetHandle<CCitadelBaseAbility>(__m_hCastingAbility); set => SetHandle(__m_hCastingAbility, value); }
 
 		private static readonly SchemaField __m_tSpawnTime = new("CNPC_NecroSkele", "m_tSpawnTime");
-		/// <summary><c>GameTime_t</c>.</summary>
-		public float m_tSpawnTime { get => Get<float>(__m_tSpawnTime); set => Set(__m_tSpawnTime, value); }
+		/// <summary><c>GameTime_t</c>. Networked in build 6779: a write is sent to clients.</summary>
+		public GameTime m_tSpawnTime { get => Get<GameTime>(__m_tSpawnTime); set => Set(__m_tSpawnTime, value); }
 
 		private static readonly SchemaField __m_vecCastLocation = new("CNPC_NecroSkele", "m_vecCastLocation");
-		/// <summary><c>VectorWS</c>.</summary>
+		/// <summary><c>VectorWS</c>. Networked in build 6779: a write is sent to clients.</summary>
 		public Vector3 m_vecCastLocation { get => Get<Vector3>(__m_vecCastLocation); set => Set(__m_vecCastLocation, value); }
 	}
 }

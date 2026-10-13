@@ -14,19 +14,19 @@ public static partial class Schema {
 		static string ISchemaClass<CCitadelBaseAbility>.NativeName => "CCitadelBaseAbility";
 
 		private static readonly SchemaField __m_bCanBeImbued = new("CCitadelBaseAbility", "m_bCanBeImbued");
-		/// <summary><c>bool</c>.</summary>
+		/// <summary><c>bool</c>. Networked in build 6779: a write is sent to clients.</summary>
 		public bool m_bCanBeImbued { get => Get<bool>(__m_bCanBeImbued); set => Set(__m_bCanBeImbued, value); }
 
 		private static readonly SchemaField __m_bCanBeUpgraded = new("CCitadelBaseAbility", "m_bCanBeUpgraded");
-		/// <summary><c>bool</c>. Wrapped by <c>CCitadelBaseAbility.CanBeUpgraded</c> in DeadworksManaged.Api.</summary>
+		/// <summary><c>bool</c>. Networked in build 6779: a write is sent to clients. Wrapped by <c>CCitadelBaseAbility.CanBeUpgraded</c> in DeadworksManaged.Api.</summary>
 		public bool m_bCanBeUpgraded { get => Get<bool>(__m_bCanBeUpgraded); set => Set(__m_bCanBeUpgraded, value); }
 
 		private static readonly SchemaField __m_bChanneling = new("CCitadelBaseAbility", "m_bChanneling");
-		/// <summary><c>bool</c>. Wrapped by <c>CCitadelBaseAbility.IsChanneling</c> in DeadworksManaged.Api.</summary>
+		/// <summary><c>bool</c>. Networked in build 6779: a write is sent to clients. Wrapped by <c>CCitadelBaseAbility.IsChanneling</c> in DeadworksManaged.Api.</summary>
 		public bool m_bChanneling { get => Get<bool>(__m_bChanneling); set => Set(__m_bChanneling, value); }
 
 		private static readonly SchemaField __m_bInCastDelay = new("CCitadelBaseAbility", "m_bInCastDelay");
-		/// <summary><c>bool</c>.</summary>
+		/// <summary><c>bool</c>. Networked in build 6779: a write is sent to clients.</summary>
 		public bool m_bInCastDelay { get => Get<bool>(__m_bInCastDelay); set => Set(__m_bInCastDelay, value); }
 
 		private static readonly SchemaField __m_bIsCoolingDownInternal = new("CCitadelBaseAbility", "m_bIsCoolingDownInternal");
@@ -34,23 +34,23 @@ public static partial class Schema {
 		public bool m_bIsCoolingDownInternal { get => Get<bool>(__m_bIsCoolingDownInternal); set => Set(__m_bIsCoolingDownInternal, value); }
 
 		private static readonly SchemaField __m_bSelectionModeIsAltMode = new("CCitadelBaseAbility", "m_bSelectionModeIsAltMode");
-		/// <summary><c>bool</c>.</summary>
+		/// <summary><c>bool</c>. Networked in build 6779: a write is sent to clients.</summary>
 		public bool m_bSelectionModeIsAltMode { get => Get<bool>(__m_bSelectionModeIsAltMode); set => Set(__m_bSelectionModeIsAltMode, value); }
 
 		private static readonly SchemaField __m_bShouldBeExecuted = new("CCitadelBaseAbility", "m_bShouldBeExecuted");
-		/// <summary><c>bool</c>.</summary>
+		/// <summary><c>bool</c>. Networked in build 6779: a write is sent to clients.</summary>
 		public bool m_bShouldBeExecuted { get => Get<bool>(__m_bShouldBeExecuted); set => Set(__m_bShouldBeExecuted, value); }
 
 		private static readonly SchemaField __m_bToggleState = new("CCitadelBaseAbility", "m_bToggleState");
-		/// <summary><c>bool</c>. Wrapped by <c>CCitadelBaseAbility.ToggleState</c> in DeadworksManaged.Api.</summary>
+		/// <summary><c>bool</c>. Networked in build 6779: a write is sent to clients. Wrapped by <c>CCitadelBaseAbility.ToggleState</c> in DeadworksManaged.Api.</summary>
 		public bool m_bToggleState { get => Get<bool>(__m_bToggleState); set => Set(__m_bToggleState, value); }
 
 		private static readonly SchemaField __m_eAbilitySlot = new("CCitadelBaseAbility", "m_eAbilitySlot");
-		/// <summary><c>EAbilitySlots_t</c>. Wrapped by <c>CCitadelBaseAbility.AbilitySlot</c> in DeadworksManaged.Api.</summary>
+		/// <summary><c>EAbilitySlots_t</c>. Networked in build 6779: a write is sent to clients. Wrapped by <c>CCitadelBaseAbility.AbilitySlot</c> in DeadworksManaged.Api.</summary>
 		public EAbilitySlots_t m_eAbilitySlot { get => Get<EAbilitySlots_t>(__m_eAbilitySlot); set => Set(__m_eAbilitySlot, value); }
 
 		private static readonly SchemaField __m_eStolenInSlot = new("CCitadelBaseAbility", "m_eStolenInSlot");
-		/// <summary><c>CitadelStolenAbilitySlot_t</c>.</summary>
+		/// <summary><c>CitadelStolenAbilitySlot_t</c>. Networked in build 6779: a write is sent to clients.</summary>
 		public CitadelStolenAbilitySlot_t m_eStolenInSlot => Embedded<CitadelStolenAbilitySlot_t>(__m_eStolenInSlot);
 
 		private static readonly SchemaField __m_enActiveReasonBits = new("CCitadelBaseAbility", "m_enActiveReasonBits");
@@ -59,74 +59,74 @@ public static partial class Schema {
 
 		private static readonly SchemaField __m_flActiveWindowDeadlines = new("CCitadelBaseAbility", "m_flActiveWindowDeadlines");
 		/// <summary><c>GameTime_t[8]</c>.</summary>
-		public SchemaValueList<float> m_flActiveWindowDeadlines => new(this, __m_flActiveWindowDeadlines, 8);
+		public SchemaValueList<GameTime> m_flActiveWindowDeadlines => new(this, __m_flActiveWindowDeadlines, 8);
 
 		private static readonly SchemaField __m_flAltCastDoubleTapStartTime = new("CCitadelBaseAbility", "m_flAltCastDoubleTapStartTime");
-		/// <summary><c>GameTime_t</c>.</summary>
-		public float m_flAltCastDoubleTapStartTime { get => Get<float>(__m_flAltCastDoubleTapStartTime); set => Set(__m_flAltCastDoubleTapStartTime, value); }
+		/// <summary><c>GameTime_t</c>. Networked in build 6779: a write is sent to clients.</summary>
+		public GameTime m_flAltCastDoubleTapStartTime { get => Get<GameTime>(__m_flAltCastDoubleTapStartTime); set => Set(__m_flAltCastDoubleTapStartTime, value); }
 
 		private static readonly SchemaField __m_flAltCastHoldStartTime = new("CCitadelBaseAbility", "m_flAltCastHoldStartTime");
-		/// <summary><c>GameTime_t</c>.</summary>
-		public float m_flAltCastHoldStartTime { get => Get<float>(__m_flAltCastHoldStartTime); set => Set(__m_flAltCastHoldStartTime, value); }
+		/// <summary><c>GameTime_t</c>. Networked in build 6779: a write is sent to clients.</summary>
+		public GameTime m_flAltCastHoldStartTime { get => Get<GameTime>(__m_flAltCastHoldStartTime); set => Set(__m_flAltCastHoldStartTime, value); }
 
 		private static readonly SchemaField __m_flCancelLockoutEndTime = new("CCitadelBaseAbility", "m_flCancelLockoutEndTime");
 		/// <summary><c>GameTime_t</c>.</summary>
-		public float m_flCancelLockoutEndTime { get => Get<float>(__m_flCancelLockoutEndTime); set => Set(__m_flCancelLockoutEndTime, value); }
+		public GameTime m_flCancelLockoutEndTime { get => Get<GameTime>(__m_flCancelLockoutEndTime); set => Set(__m_flCancelLockoutEndTime, value); }
 
 		private static readonly SchemaField __m_flCancelMashProtectionEndTime = new("CCitadelBaseAbility", "m_flCancelMashProtectionEndTime");
 		/// <summary><c>GameTime_t</c>.</summary>
-		public float m_flCancelMashProtectionEndTime { get => Get<float>(__m_flCancelMashProtectionEndTime); set => Set(__m_flCancelMashProtectionEndTime, value); }
+		public GameTime m_flCancelMashProtectionEndTime { get => Get<GameTime>(__m_flCancelMashProtectionEndTime); set => Set(__m_flCancelMashProtectionEndTime, value); }
 
 		private static readonly SchemaField __m_flCastCompletedTime = new("CCitadelBaseAbility", "m_flCastCompletedTime");
-		/// <summary><c>GameTime_t</c>.</summary>
-		public float m_flCastCompletedTime { get => Get<float>(__m_flCastCompletedTime); set => Set(__m_flCastCompletedTime, value); }
+		/// <summary><c>GameTime_t</c>. Networked in build 6779: a write is sent to clients.</summary>
+		public GameTime m_flCastCompletedTime { get => Get<GameTime>(__m_flCastCompletedTime); set => Set(__m_flCastCompletedTime, value); }
 
 		private static readonly SchemaField __m_flCastDelayStartTime = new("CCitadelBaseAbility", "m_flCastDelayStartTime");
-		/// <summary><c>GameTime_t</c>.</summary>
-		public float m_flCastDelayStartTime { get => Get<float>(__m_flCastDelayStartTime); set => Set(__m_flCastDelayStartTime, value); }
+		/// <summary><c>GameTime_t</c>. Networked in build 6779: a write is sent to clients.</summary>
+		public GameTime m_flCastDelayStartTime { get => Get<GameTime>(__m_flCastDelayStartTime); set => Set(__m_flCastDelayStartTime, value); }
 
 		private static readonly SchemaField __m_flChannelStartTime = new("CCitadelBaseAbility", "m_flChannelStartTime");
-		/// <summary><c>GameTime_t</c>.</summary>
-		public float m_flChannelStartTime { get => Get<float>(__m_flChannelStartTime); set => Set(__m_flChannelStartTime, value); }
+		/// <summary><c>GameTime_t</c>. Networked in build 6779: a write is sent to clients.</summary>
+		public GameTime m_flChannelStartTime { get => Get<GameTime>(__m_flChannelStartTime); set => Set(__m_flChannelStartTime, value); }
 
 		private static readonly SchemaField __m_flChargeRechargeEnd = new("CCitadelBaseAbility", "m_flChargeRechargeEnd");
-		/// <summary><c>GameTime_t</c>.</summary>
-		public float m_flChargeRechargeEnd { get => Get<float>(__m_flChargeRechargeEnd); set => Set(__m_flChargeRechargeEnd, value); }
+		/// <summary><c>GameTime_t</c>. Networked in build 6779: a write is sent to clients.</summary>
+		public GameTime m_flChargeRechargeEnd { get => Get<GameTime>(__m_flChargeRechargeEnd); set => Set(__m_flChargeRechargeEnd, value); }
 
 		private static readonly SchemaField __m_flChargeRechargeStart = new("CCitadelBaseAbility", "m_flChargeRechargeStart");
-		/// <summary><c>GameTime_t</c>.</summary>
-		public float m_flChargeRechargeStart { get => Get<float>(__m_flChargeRechargeStart); set => Set(__m_flChargeRechargeStart, value); }
+		/// <summary><c>GameTime_t</c>. Networked in build 6779: a write is sent to clients.</summary>
+		public GameTime m_flChargeRechargeStart { get => Get<GameTime>(__m_flChargeRechargeStart); set => Set(__m_flChargeRechargeStart, value); }
 
 		private static readonly SchemaField __m_flCooldownEnd = new("CCitadelBaseAbility", "m_flCooldownEnd");
-		/// <summary><c>GameTime_t</c>. Wrapped by <c>CCitadelBaseAbility.CooldownEnd</c> in DeadworksManaged.Api.</summary>
-		public float m_flCooldownEnd { get => Get<float>(__m_flCooldownEnd); set => Set(__m_flCooldownEnd, value); }
+		/// <summary><c>GameTime_t</c>. Networked in build 6779: a write is sent to clients. Wrapped by <c>CCitadelBaseAbility.CooldownEnd</c> in DeadworksManaged.Api.</summary>
+		public GameTime m_flCooldownEnd { get => Get<GameTime>(__m_flCooldownEnd); set => Set(__m_flCooldownEnd, value); }
 
 		private static readonly SchemaField __m_flCooldownStart = new("CCitadelBaseAbility", "m_flCooldownStart");
-		/// <summary><c>GameTime_t</c>. Wrapped by <c>CCitadelBaseAbility.CooldownStart</c> in DeadworksManaged.Api.</summary>
-		public float m_flCooldownStart { get => Get<float>(__m_flCooldownStart); set => Set(__m_flCooldownStart, value); }
+		/// <summary><c>GameTime_t</c>. Networked in build 6779: a write is sent to clients. Wrapped by <c>CCitadelBaseAbility.CooldownStart</c> in DeadworksManaged.Api.</summary>
+		public GameTime m_flCooldownStart { get => Get<GameTime>(__m_flCooldownStart); set => Set(__m_flCooldownStart, value); }
 
 		private static readonly SchemaField __m_flMovementControlActiveTime = new("CCitadelBaseAbility", "m_flMovementControlActiveTime");
-		/// <summary><c>GameTime_t</c>.</summary>
-		public float m_flMovementControlActiveTime { get => Get<float>(__m_flMovementControlActiveTime); set => Set(__m_flMovementControlActiveTime, value); }
+		/// <summary><c>GameTime_t</c>. Networked in build 6779: a write is sent to clients.</summary>
+		public GameTime m_flMovementControlActiveTime { get => Get<GameTime>(__m_flMovementControlActiveTime); set => Set(__m_flMovementControlActiveTime, value); }
 
 		private static readonly SchemaField __m_flPostCastDelayEndTime = new("CCitadelBaseAbility", "m_flPostCastDelayEndTime");
-		/// <summary><c>GameTime_t</c>.</summary>
-		public float m_flPostCastDelayEndTime { get => Get<float>(__m_flPostCastDelayEndTime); set => Set(__m_flPostCastDelayEndTime, value); }
+		/// <summary><c>GameTime_t</c>. Networked in build 6779: a write is sent to clients.</summary>
+		public GameTime m_flPostCastDelayEndTime { get => Get<GameTime>(__m_flPostCastDelayEndTime); set => Set(__m_flPostCastDelayEndTime, value); }
 
 		private static readonly SchemaField __m_flPreviousEffectiveCooldown = new("CCitadelBaseAbility", "m_flPreviousEffectiveCooldown");
 		/// <summary><c>float32</c>.</summary>
 		public float m_flPreviousEffectiveCooldown { get => Get<float>(__m_flPreviousEffectiveCooldown); set => Set(__m_flPreviousEffectiveCooldown, value); }
 
 		private static readonly SchemaField __m_flSelectedChangedTime = new("CCitadelBaseAbility", "m_flSelectedChangedTime");
-		/// <summary><c>GameTime_t</c>.</summary>
-		public float m_flSelectedChangedTime { get => Get<float>(__m_flSelectedChangedTime); set => Set(__m_flSelectedChangedTime, value); }
+		/// <summary><c>GameTime_t</c>. Networked in build 6779: a write is sent to clients.</summary>
+		public GameTime m_flSelectedChangedTime { get => Get<GameTime>(__m_flSelectedChangedTime); set => Set(__m_flSelectedChangedTime, value); }
 
 		private static readonly SchemaField __m_iRemainingCharges = new("CCitadelBaseAbility", "m_iRemainingCharges");
-		/// <summary><c>int32</c>. Wrapped by <c>CCitadelBaseAbility.RemainingCharges</c> in DeadworksManaged.Api.</summary>
+		/// <summary><c>int32</c>. Networked in build 6779: a write is sent to clients. Wrapped by <c>CCitadelBaseAbility.RemainingCharges</c> in DeadworksManaged.Api.</summary>
 		public int m_iRemainingCharges { get => Get<int>(__m_iRemainingCharges); set => Set(__m_iRemainingCharges, value); }
 
 		private static readonly SchemaField __m_nUpgradeInfo = new("CCitadelBaseAbility", "m_nUpgradeInfo");
-		/// <summary><c>CitadelAbilityUpgradeInfoPacked_t</c>. Wrapped by <c>CCitadelBaseAbility.UpgradeBits</c> in DeadworksManaged.Api.</summary>
+		/// <summary><c>CitadelAbilityUpgradeInfoPacked_t</c>. Networked in build 6779: a write is sent to clients. Wrapped by <c>CCitadelBaseAbility.UpgradeBits</c> in DeadworksManaged.Api.</summary>
 		public uint m_nUpgradeInfo { get => Get<uint>(__m_nUpgradeInfo); set => Set(__m_nUpgradeInfo, value); }
 
 		private static readonly SchemaField __m_pCastDelayAutoModifier = new("CCitadelBaseAbility", "m_pCastDelayAutoModifier");
@@ -138,8 +138,8 @@ public static partial class Schema {
 		public RawField m_pChannelAutoModifier => Raw(__m_pChannelAutoModifier, "CModifierHandleTyped<CCitadelModifier>");
 
 		private static readonly SchemaField __m_vecImbuedAbilities = new("CCitadelBaseAbility", "m_vecImbuedAbilities");
-		/// <summary><c>CNetworkUtlVectorBase&lt;CUtlStringToken&gt;</c>. Wrapped by <c>CCitadelBaseAbility.ImbuedAbilityIds</c> in DeadworksManaged.Api.</summary>
-		public SchemaValueList<uint> m_vecImbuedAbilities => new(this, __m_vecImbuedAbilities, -1);
+		/// <summary><c>CNetworkUtlVectorBase&lt;CUtlStringToken&gt;</c>. Networked in build 6779: a write is sent to clients. Wrapped by <c>CCitadelBaseAbility.ImbuedAbilityIds</c> in DeadworksManaged.Api.</summary>
+		public SchemaValueList<uint> m_vecImbuedAbilities => new(this, __m_vecImbuedAbilities, ListStorage.Vector);
 
 		private static readonly SchemaField __m_vecIntrinsicModifiers = new("CCitadelBaseAbility", "m_vecIntrinsicModifiers");
 		/// <summary><c>CUtlVector&lt;CModifierHandleTyped&lt;CCitadelModifier&gt;&gt;</c>. No typed mapping yet: read it through its address.</summary>

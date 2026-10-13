@@ -14,51 +14,51 @@ public static partial class Schema {
 		static string ISchemaClass<CCitadelZipLineNode>.NativeName => "CCitadelZipLineNode";
 
 		private static readonly SchemaField __m_bCapturable = new("CCitadelZipLineNode", "m_bCapturable");
-		/// <summary><c>bool</c>.</summary>
+		/// <summary><c>bool</c>. Networked in build 6779: a write is sent to clients.</summary>
 		public bool m_bCapturable { get => Get<bool>(__m_bCapturable); set => Set(__m_bCapturable, value); }
 
 		private static readonly SchemaField __m_bCornerNode = new("CCitadelZipLineNode", "m_bCornerNode");
-		/// <summary><c>bool</c>.</summary>
+		/// <summary><c>bool</c>. Networked in build 6779: a write is sent to clients.</summary>
 		public bool m_bCornerNode { get => Get<bool>(__m_bCornerNode); set => Set(__m_bCornerNode, value); }
 
 		private static readonly SchemaField __m_bDisableZippingToByPlayers = new("CCitadelZipLineNode", "m_bDisableZippingToByPlayers");
-		/// <summary><c>bool</c>.</summary>
+		/// <summary><c>bool</c>. Networked in build 6779: a write is sent to clients.</summary>
 		public bool m_bDisableZippingToByPlayers { get => Get<bool>(__m_bDisableZippingToByPlayers); set => Set(__m_bDisableZippingToByPlayers, value); }
 
 		private static readonly SchemaField __m_eCaptureState = new("CCitadelZipLineNode", "m_eCaptureState");
-		/// <summary><c>int16</c>.</summary>
+		/// <summary><c>int16</c>. Networked in build 6779: a write is sent to clients.</summary>
 		public short m_eCaptureState { get => Get<short>(__m_eCaptureState); set => Set(__m_eCaptureState, value); }
 
 		private static readonly SchemaField __m_flCumulativeDistance = new("CCitadelZipLineNode", "m_flCumulativeDistance");
-		/// <summary><c>float32</c>.</summary>
+		/// <summary><c>float32</c>. Networked in build 6779: a write is sent to clients.</summary>
 		public float m_flCumulativeDistance { get => Get<float>(__m_flCumulativeDistance); set => Set(__m_flCumulativeDistance, value); }
 
 		private static readonly SchemaField __m_flRopeRadius = new("CCitadelZipLineNode", "m_flRopeRadius");
-		/// <summary><c>float32</c>.</summary>
+		/// <summary><c>float32</c>. Networked in build 6779: a write is sent to clients.</summary>
 		public float m_flRopeRadius { get => Get<float>(__m_flRopeRadius); set => Set(__m_flRopeRadius, value); }
 
 		private static readonly SchemaField __m_flSpeedMultiplierFromBaseBonus = new("CCitadelZipLineNode", "m_flSpeedMultiplierFromBaseBonus");
-		/// <summary><c>float32</c>.</summary>
+		/// <summary><c>float32</c>. Networked in build 6779: a write is sent to clients.</summary>
 		public float m_flSpeedMultiplierFromBaseBonus { get => Get<float>(__m_flSpeedMultiplierFromBaseBonus); set => Set(__m_flSpeedMultiplierFromBaseBonus, value); }
 
 		private static readonly SchemaField __m_flSpeedMultiplierToBaseBonus = new("CCitadelZipLineNode", "m_flSpeedMultiplierToBaseBonus");
-		/// <summary><c>float32</c>.</summary>
+		/// <summary><c>float32</c>. Networked in build 6779: a write is sent to clients.</summary>
 		public float m_flSpeedMultiplierToBaseBonus { get => Get<float>(__m_flSpeedMultiplierToBaseBonus); set => Set(__m_flSpeedMultiplierToBaseBonus, value); }
 
 		private static readonly SchemaField __m_hGuardingBosses = new("CCitadelZipLineNode", "m_hGuardingBosses");
-		/// <summary><c>CNetworkUtlVectorBase&lt;CHandle&lt;CBaseEntity&gt;&gt;</c>.</summary>
-		public SchemaHandleList<CBaseEntity> m_hGuardingBosses => new(this, __m_hGuardingBosses, -1);
+		/// <summary><c>CNetworkUtlVectorBase&lt;CHandle&lt;CBaseEntity&gt;&gt;</c>. Networked in build 6779: a write is sent to clients.</summary>
+		public SchemaHandleList<CBaseEntity> m_hGuardingBosses => new(this, __m_hGuardingBosses, ListStorage.Vector);
 
 		private static readonly SchemaField __m_iNodeIndex = new("CCitadelZipLineNode", "m_iNodeIndex");
-		/// <summary><c>int16</c>.</summary>
+		/// <summary><c>int16</c>. Networked in build 6779: a write is sent to clients.</summary>
 		public short m_iNodeIndex { get => Get<short>(__m_iNodeIndex); set => Set(__m_iNodeIndex, value); }
 
 		private static readonly SchemaField __m_iPrimaryLane = new("CCitadelZipLineNode", "m_iPrimaryLane");
-		/// <summary><c>int16</c>.</summary>
+		/// <summary><c>int16</c>. Networked in build 6779: a write is sent to clients.</summary>
 		public short m_iPrimaryLane { get => Get<short>(__m_iPrimaryLane); set => Set(__m_iPrimaryLane, value); }
 
 		private static readonly SchemaField __m_nRopesParity = new("CCitadelZipLineNode", "m_nRopesParity");
-		/// <summary><c>int16</c>.</summary>
+		/// <summary><c>int16</c>. Networked in build 6779: a write is sent to clients.</summary>
 		public short m_nRopesParity { get => Get<short>(__m_nRopesParity); set => Set(__m_nRopesParity, value); }
 
 		private static readonly SchemaField __m_strGuardBossName = new("CCitadelZipLineNode", "m_strGuardBossName");
@@ -74,19 +74,19 @@ public static partial class Schema {
 		public string m_strGuardBossName3 { get => GetString(__m_strGuardBossName3); set => SetString(__m_strGuardBossName3, value); }
 
 		private static readonly SchemaField __m_vTangentIn = new("CCitadelZipLineNode", "m_vTangentIn");
-		/// <summary><c>Vector</c>.</summary>
+		/// <summary><c>Vector</c>. Networked in build 6779: a write is sent to clients.</summary>
 		public Vector3 m_vTangentIn { get => Get<Vector3>(__m_vTangentIn); set => Set(__m_vTangentIn, value); }
 
 		private static readonly SchemaField __m_vTangentOut = new("CCitadelZipLineNode", "m_vTangentOut");
-		/// <summary><c>Vector</c>.</summary>
+		/// <summary><c>Vector</c>. Networked in build 6779: a write is sent to clients.</summary>
 		public Vector3 m_vTangentOut { get => Get<Vector3>(__m_vTangentOut); set => Set(__m_vTangentOut, value); }
 
 		private static readonly SchemaField __m_vecConnectionDir = new("CCitadelZipLineNode", "m_vecConnectionDir");
-		/// <summary><c>CNetworkUtlVectorBase&lt;int32&gt;</c>.</summary>
-		public SchemaValueList<int> m_vecConnectionDir => new(this, __m_vecConnectionDir, -1);
+		/// <summary><c>CNetworkUtlVectorBase&lt;int32&gt;</c>. Networked in build 6779: a write is sent to clients.</summary>
+		public SchemaValueList<int> m_vecConnectionDir => new(this, __m_vecConnectionDir, ListStorage.Vector);
 
 		private static readonly SchemaField __m_vecConnections = new("CCitadelZipLineNode", "m_vecConnections");
-		/// <summary><c>CNetworkUtlVectorBase&lt;CHandle&lt;CCitadelZipLineNode&gt;&gt;</c>.</summary>
-		public SchemaHandleList<CCitadelZipLineNode> m_vecConnections => new(this, __m_vecConnections, -1);
+		/// <summary><c>CNetworkUtlVectorBase&lt;CHandle&lt;CCitadelZipLineNode&gt;&gt;</c>. Networked in build 6779: a write is sent to clients.</summary>
+		public SchemaHandleList<CCitadelZipLineNode> m_vecConnections => new(this, __m_vecConnections, ListStorage.Vector);
 	}
 }

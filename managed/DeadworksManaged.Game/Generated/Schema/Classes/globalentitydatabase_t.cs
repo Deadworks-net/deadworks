@@ -15,6 +15,6 @@ public static partial class Schema {
 
 		private static readonly SchemaField __m_list = new("globalentitydatabase_t", "m_list");
 		/// <summary><c>CUtlVector&lt;globalentity_t&gt;</c>.</summary>
-		public SchemaObjectList<globalentity_t> m_list => new(this, __m_list, -1);
+		public SchemaObjectList<globalentity_t> m_list => new(this, __m_list, ListStorage.Vector);
 	}
 }

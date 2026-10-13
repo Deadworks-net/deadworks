@@ -34,11 +34,11 @@ public static partial class Schema {
 		public bool m_bIsLooking { get => Get<bool>(__m_bIsLooking); set => Set(__m_bIsLooking, value); }
 
 		private static readonly SchemaField __m_bTestAllVisibleOcclusion = new("CTriggerLook", "m_bTestAllVisibleOcclusion");
-		/// <summary><c>bool</c>.</summary>
+		/// <summary><c>bool</c>. Networked in build 6779: a write is sent to clients.</summary>
 		public bool m_bTestAllVisibleOcclusion { get => Get<bool>(__m_bTestAllVisibleOcclusion); set => Set(__m_bTestAllVisibleOcclusion, value); }
 
 		private static readonly SchemaField __m_bTestOcclusion = new("CTriggerLook", "m_bTestOcclusion");
-		/// <summary><c>bool</c>.</summary>
+		/// <summary><c>bool</c>. Networked in build 6779: a write is sent to clients.</summary>
 		public bool m_bTestOcclusion { get => Get<bool>(__m_bTestOcclusion); set => Set(__m_bTestOcclusion, value); }
 
 		private static readonly SchemaField __m_bTimeoutFired = new("CTriggerLook", "m_bTimeoutFired");
@@ -59,7 +59,7 @@ public static partial class Schema {
 
 		private static readonly SchemaField __m_flLookTimeLast = new("CTriggerLook", "m_flLookTimeLast");
 		/// <summary><c>GameTime_t</c>.</summary>
-		public float m_flLookTimeLast { get => Get<float>(__m_flLookTimeLast); set => Set(__m_flLookTimeLast, value); }
+		public GameTime m_flLookTimeLast { get => Get<GameTime>(__m_flLookTimeLast); set => Set(__m_flLookTimeLast, value); }
 
 		private static readonly SchemaField __m_flLookTimeTotal = new("CTriggerLook", "m_flLookTimeTotal");
 		/// <summary><c>float32</c>.</summary>

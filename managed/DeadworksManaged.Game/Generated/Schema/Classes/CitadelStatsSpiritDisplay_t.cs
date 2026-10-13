@@ -15,6 +15,6 @@ public static partial class Schema {
 
 		private static readonly SchemaField __m_vecDisplayStats = new("CitadelStatsSpiritDisplay_t", "m_vecDisplayStats");
 		/// <summary><c>CUtlVector&lt;EStatsType&gt;</c>. What stats do we want to display for Spirit?.</summary>
-		public SchemaValueList<EStatsType> m_vecDisplayStats => new(this, __m_vecDisplayStats, -1);
+		public SchemaValueList<EStatsType> m_vecDisplayStats => new(this, __m_vecDisplayStats, ListStorage.Vector);
 	}
 }

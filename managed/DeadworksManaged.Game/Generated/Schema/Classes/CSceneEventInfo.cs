@@ -55,15 +55,15 @@ public static partial class Schema {
 
 		private static readonly SchemaField __m_flNext = new("CSceneEventInfo", "m_flNext");
 		/// <summary><c>GameTime_t</c>.</summary>
-		public float m_flNext { get => Get<float>(__m_flNext); set => Set(__m_flNext, value); }
+		public GameTime m_flNext { get => Get<GameTime>(__m_flNext); set => Set(__m_flNext, value); }
 
 		private static readonly SchemaField __m_flWeight = new("CSceneEventInfo", "m_flWeight");
 		/// <summary><c>float32</c>.</summary>
 		public float m_flWeight { get => Get<float>(__m_flWeight); set => Set(__m_flWeight, value); }
 
 		private static readonly SchemaField __m_hAnimClip = new("CSceneEventInfo", "m_hAnimClip");
-		/// <summary><c>CStrongHandle&lt;InfoForResourceTypeCNmClip&gt;</c>. No typed mapping yet: read it through its address.</summary>
-		public RawField m_hAnimClip => Raw(__m_hAnimClip, "CStrongHandle<InfoForResourceTypeCNmClip>");
+		/// <summary><c>CStrongHandle&lt;InfoForResourceTypeCNmClip&gt;</c>.</summary>
+		public ResourceHandle m_hAnimClip { get => Get<ResourceHandle>(__m_hAnimClip); set => Set(__m_hAnimClip, value); }
 
 		private static readonly SchemaField __m_hBlinkModifier = new("CSceneEventInfo", "m_hBlinkModifier");
 		/// <summary><c>CModifierHandleTyped&lt;CCitadelModifier&gt;</c>. No typed mapping yet: read it through its address.</summary>

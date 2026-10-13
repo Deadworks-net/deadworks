@@ -19,6 +19,6 @@ public static partial class Schema {
 
 		private static readonly SchemaField __m_Triggers = new("CPulseCell_Outflow_PlaySceneBase", "m_Triggers");
 		/// <summary><c>CUtlVector&lt;CPulse_OutflowConnection&gt;</c>.</summary>
-		public SchemaObjectList<CPulse_OutflowConnection> m_Triggers => new(this, __m_Triggers, -1);
+		public SchemaObjectList<CPulse_OutflowConnection> m_Triggers => new(this, __m_Triggers, ListStorage.Vector);
 	}
 }

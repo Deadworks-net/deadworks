@@ -30,11 +30,11 @@ public static partial class Schema {
 		public string m_strConfigName => GetString(__m_strConfigName);
 
 		private static readonly SchemaField __m_strEnemyParticle = new("CitadelTeamRelativeParticleSettings_t", "m_strEnemyParticle");
-		/// <summary><c>CStrongHandle&lt;InfoForResourceTypeIParticleSystemDefinition&gt;</c>. No typed mapping yet: read it through its address.</summary>
-		public RawField m_strEnemyParticle => Raw(__m_strEnemyParticle, "CStrongHandle<InfoForResourceTypeIParticleSystemDefinition>");
+		/// <summary><c>CStrongHandle&lt;InfoForResourceTypeIParticleSystemDefinition&gt;</c>.</summary>
+		public ResourceHandle m_strEnemyParticle { get => Get<ResourceHandle>(__m_strEnemyParticle); set => Set(__m_strEnemyParticle, value); }
 
 		private static readonly SchemaField __m_strFriendlyParticle = new("CitadelTeamRelativeParticleSettings_t", "m_strFriendlyParticle");
-		/// <summary><c>CStrongHandle&lt;InfoForResourceTypeIParticleSystemDefinition&gt;</c>. No typed mapping yet: read it through its address.</summary>
-		public RawField m_strFriendlyParticle => Raw(__m_strFriendlyParticle, "CStrongHandle<InfoForResourceTypeIParticleSystemDefinition>");
+		/// <summary><c>CStrongHandle&lt;InfoForResourceTypeIParticleSystemDefinition&gt;</c>.</summary>
+		public ResourceHandle m_strFriendlyParticle { get => Get<ResourceHandle>(__m_strFriendlyParticle); set => Set(__m_strFriendlyParticle, value); }
 	}
 }

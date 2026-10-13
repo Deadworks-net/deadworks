@@ -14,7 +14,7 @@ public static partial class Schema {
 		static string ISchemaClass<CPlayer_MovementServices>.NativeName => "CPlayer_MovementServices";
 
 		private static readonly SchemaField __m_arrForceSubtickMoveWhen = new("CPlayer_MovementServices", "m_arrForceSubtickMoveWhen");
-		/// <summary><c>float32[4]</c>.</summary>
+		/// <summary><c>float32[4]</c>. Networked in build 6779: a write is sent to clients.</summary>
 		public SchemaValueList<float> m_arrForceSubtickMoveWhen => new(this, __m_arrForceSubtickMoveWhen, 4);
 
 		private static readonly SchemaField __m_flCmdForwardMove = new("CPlayer_MovementServices", "m_flCmdForwardMove");
@@ -38,7 +38,7 @@ public static partial class Schema {
 		public float m_flLeftMove { get => Get<float>(__m_flLeftMove); set => Set(__m_flLeftMove, value); }
 
 		private static readonly SchemaField __m_flMaxspeed = new("CPlayer_MovementServices", "m_flMaxspeed");
-		/// <summary><c>float32</c>.</summary>
+		/// <summary><c>float32</c>. Networked in build 6779: a write is sent to clients.</summary>
 		public float m_flMaxspeed { get => Get<float>(__m_flMaxspeed); set => Set(__m_flMaxspeed, value); }
 
 		private static readonly SchemaField __m_flUpMove = new("CPlayer_MovementServices", "m_flUpMove");
@@ -70,7 +70,7 @@ public static partial class Schema {
 		public ulong m_nQueuedButtonDownMask { get => Get<ulong>(__m_nQueuedButtonDownMask); set => Set(__m_nQueuedButtonDownMask, value); }
 
 		private static readonly SchemaField __m_nToggleButtonDownMask = new("CPlayer_MovementServices", "m_nToggleButtonDownMask");
-		/// <summary><c>uint64</c>.</summary>
+		/// <summary><c>uint64</c>. Networked in build 6779: a write is sent to clients.</summary>
 		public ulong m_nToggleButtonDownMask { get => Get<ulong>(__m_nToggleButtonDownMask); set => Set(__m_nToggleButtonDownMask, value); }
 
 		private static readonly SchemaField __m_pButtonPressedCmdNumber = new("CPlayer_MovementServices", "m_pButtonPressedCmdNumber");

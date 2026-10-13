@@ -15,6 +15,6 @@ public static partial class Schema {
 
 		private static readonly SchemaField __m_ExpresserTargets = new("CResponseQueue", "m_ExpresserTargets");
 		/// <summary><c>CUtlVector&lt;CAI_Expresser*&gt;</c>.</summary>
-		public SchemaPointerList<CAI_Expresser> m_ExpresserTargets => new(this, __m_ExpresserTargets, -1);
+		public SchemaPointerList<CAI_Expresser> m_ExpresserTargets => new(this, __m_ExpresserTargets, ListStorage.Vector);
 	}
 }

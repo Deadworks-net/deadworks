@@ -31,6 +31,6 @@ public static partial class Schema {
 
 		private static readonly SchemaField __m_vecMantleTypes = new("CAbilityMantleVData", "m_vecMantleTypes");
 		/// <summary><c>CUtlVector&lt;MantleType_t&gt;</c>.</summary>
-		public SchemaObjectList<MantleType_t> m_vecMantleTypes => new(this, __m_vecMantleTypes, -1);
+		public SchemaObjectList<MantleType_t> m_vecMantleTypes => new(this, __m_vecMantleTypes, ListStorage.Vector);
 	}
 }

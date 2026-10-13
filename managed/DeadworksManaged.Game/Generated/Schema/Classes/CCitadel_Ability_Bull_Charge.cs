@@ -14,7 +14,7 @@ public static partial class Schema {
 		static string ISchemaClass<CCitadel_Ability_Bull_Charge>.NativeName => "CCitadel_Ability_Bull_Charge";
 
 		private static readonly SchemaField __m_anglesCharging = new("CCitadel_Ability_Bull_Charge", "m_anglesCharging");
-		/// <summary><c>QAngle</c>.</summary>
+		/// <summary><c>QAngle</c>. Networked in build 6779: a write is sent to clients.</summary>
 		public Vector3 m_anglesCharging { get => Get<Vector3>(__m_anglesCharging); set => Set(__m_anglesCharging, value); }
 
 		private static readonly SchemaField __m_bFirstTick = new("CCitadel_Ability_Bull_Charge", "m_bFirstTick");
@@ -26,20 +26,20 @@ public static partial class Schema {
 		public bool m_bGainedWeaponPowerBuff { get => Get<bool>(__m_bGainedWeaponPowerBuff); set => Set(__m_bGainedWeaponPowerBuff, value); }
 
 		private static readonly SchemaField __m_bHitSomethingStunnable = new("CCitadel_Ability_Bull_Charge", "m_bHitSomethingStunnable");
-		/// <summary><c>bool</c>.</summary>
+		/// <summary><c>bool</c>. Networked in build 6779: a write is sent to clients.</summary>
 		public bool m_bHitSomethingStunnable { get => Get<bool>(__m_bHitSomethingStunnable); set => Set(__m_bHitSomethingStunnable, value); }
 
 		private static readonly SchemaField __m_flChargeStartTime = new("CCitadel_Ability_Bull_Charge", "m_flChargeStartTime");
-		/// <summary><c>GameTime_t</c>.</summary>
-		public float m_flChargeStartTime { get => Get<float>(__m_flChargeStartTime); set => Set(__m_flChargeStartTime, value); }
+		/// <summary><c>GameTime_t</c>. Networked in build 6779: a write is sent to clients.</summary>
+		public GameTime m_flChargeStartTime { get => Get<GameTime>(__m_flChargeStartTime); set => Set(__m_flChargeStartTime, value); }
 
 		private static readonly SchemaField __m_flFastChargeEndTime = new("CCitadel_Ability_Bull_Charge", "m_flFastChargeEndTime");
-		/// <summary><c>GameTime_t</c>.</summary>
-		public float m_flFastChargeEndTime { get => Get<float>(__m_flFastChargeEndTime); set => Set(__m_flFastChargeEndTime, value); }
+		/// <summary><c>GameTime_t</c>. Networked in build 6779: a write is sent to clients.</summary>
+		public GameTime m_flFastChargeEndTime { get => Get<GameTime>(__m_flFastChargeEndTime); set => Set(__m_flFastChargeEndTime, value); }
 
 		private static readonly SchemaField __m_flFastChargeStartTime = new("CCitadel_Ability_Bull_Charge", "m_flFastChargeStartTime");
-		/// <summary><c>GameTime_t</c>.</summary>
-		public float m_flFastChargeStartTime { get => Get<float>(__m_flFastChargeStartTime); set => Set(__m_flFastChargeStartTime, value); }
+		/// <summary><c>GameTime_t</c>. Networked in build 6779: a write is sent to clients.</summary>
+		public GameTime m_flFastChargeStartTime { get => Get<GameTime>(__m_flFastChargeStartTime); set => Set(__m_flFastChargeStartTime, value); }
 
 		private static readonly SchemaField __m_vGoalDir = new("CCitadel_Ability_Bull_Charge", "m_vGoalDir");
 		/// <summary><c>Vector</c>.</summary>
@@ -47,6 +47,6 @@ public static partial class Schema {
 
 		private static readonly SchemaField __m_vecHitEntities = new("CCitadel_Ability_Bull_Charge", "m_vecHitEntities");
 		/// <summary><c>CUtlVector&lt;CHandle&lt;CBaseEntity&gt;&gt;</c>.</summary>
-		public SchemaHandleList<CBaseEntity> m_vecHitEntities => new(this, __m_vecHitEntities, -1);
+		public SchemaHandleList<CBaseEntity> m_vecHitEntities => new(this, __m_vecHitEntities, ListStorage.Vector);
 	}
 }

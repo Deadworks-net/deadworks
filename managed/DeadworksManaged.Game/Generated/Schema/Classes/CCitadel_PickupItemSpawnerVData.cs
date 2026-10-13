@@ -62,7 +62,7 @@ public static partial class Schema {
 		public RawField m_mapPickupChances => Raw(__m_mapPickupChances, "CUtlOrderedMap<CSubclassName, float32>");
 
 		private static readonly SchemaField __m_sSinglePickupOverride = new("CCitadel_PickupItemSpawnerVData", "m_sSinglePickupOverride");
-		/// <summary><c>CSubclassName</c>. Ignore 'Pickups Rewards' and only spawn one type. No typed mapping yet: read it through its address.</summary>
-		public RawField m_sSinglePickupOverride => Raw(__m_sSinglePickupOverride, "CSubclassName");
+		/// <summary><c>CSubclassName</c>. Ignore 'Pickups Rewards' and only spawn one type.</summary>
+		public string m_sSinglePickupOverride => GetString(__m_sSinglePickupOverride);
 	}
 }

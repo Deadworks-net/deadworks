@@ -14,7 +14,7 @@ public static partial class Schema {
 		static string ISchemaClass<CCitadel_Modifier_LearningHeroAbility>.NativeName => "CCitadel_Modifier_LearningHeroAbility";
 
 		private static readonly SchemaField __m_sDescription = new("CCitadel_Modifier_LearningHeroAbility", "m_sDescription");
-		/// <summary><c>CBufferString</c>. No typed mapping yet: read it through its address.</summary>
-		public RawField m_sDescription => Raw(__m_sDescription, "CBufferString");
+		/// <summary><c>CBufferString</c>.</summary>
+		public string m_sDescription => GetBufferString(__m_sDescription);
 	}
 }

@@ -15,7 +15,7 @@ public static partial class Schema {
 
 		private static readonly SchemaField __m_flExpireTime = new("UnreachableTarget_t", "m_flExpireTime");
 		/// <summary><c>GameTime_t</c>.</summary>
-		public float m_flExpireTime { get => Get<float>(__m_flExpireTime); set => Set(__m_flExpireTime, value); }
+		public GameTime m_flExpireTime { get => Get<GameTime>(__m_flExpireTime); set => Set(__m_flExpireTime, value); }
 
 		private static readonly SchemaField __m_location = new("UnreachableTarget_t", "m_location");
 		/// <summary><c>CRelativeLocation</c>.</summary>

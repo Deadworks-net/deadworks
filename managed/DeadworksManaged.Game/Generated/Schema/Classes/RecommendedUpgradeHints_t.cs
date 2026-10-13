@@ -14,8 +14,8 @@ public static partial class Schema {
 		static string ISchemaClass<RecommendedUpgradeHints_t>.NativeName => "RecommendedUpgradeHints_t";
 
 		private static readonly SchemaField __sImbueTarget = new("RecommendedUpgradeHints_t", "sImbueTarget");
-		/// <summary><c>CSubclassName</c>. No typed mapping yet: read it through its address.</summary>
-		public RawField sImbueTarget => Raw(__sImbueTarget, "CSubclassName");
+		/// <summary><c>CSubclassName</c>.</summary>
+		public string sImbueTarget => GetString(__sImbueTarget);
 
 		private static readonly SchemaField __unRequiredFlexSlots = new("RecommendedUpgradeHints_t", "unRequiredFlexSlots");
 		/// <summary><c>uint32</c>.</summary>

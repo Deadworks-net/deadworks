@@ -274,8 +274,8 @@ public static partial class Schema {
 		public string m_iszSyncGroup { get => GetString(__m_iszSyncGroup); set => SetString(__m_iszSyncGroup, value); }
 
 		private static readonly SchemaField __m_matOtherToMain = new("CScriptedSequence", "m_matOtherToMain");
-		/// <summary><c>CTransform</c>. No typed mapping yet: read it through its address.</summary>
-		public RawField m_matOtherToMain => Raw(__m_matOtherToMain, "CTransform");
+		/// <summary><c>CTransform</c>.</summary>
+		public Transform m_matOtherToMain { get => Get<Transform>(__m_matOtherToMain); set => Set(__m_matOtherToMain, value); }
 
 		private static readonly SchemaField __m_nForcedCrouchState = new("CScriptedSequence", "m_nForcedCrouchState");
 		/// <summary><c>ForcedCrouchState_t</c>.</summary>
@@ -319,7 +319,7 @@ public static partial class Schema {
 
 		private static readonly SchemaField __m_startTime = new("CScriptedSequence", "m_startTime");
 		/// <summary><c>GameTime_t</c>.</summary>
-		public float m_startTime { get => Get<float>(__m_startTime); set => Set(__m_startTime, value); }
+		public GameTime m_startTime { get => Get<GameTime>(__m_startTime); set => Set(__m_startTime, value); }
 
 		/// <summary>Fires the <c>BeginSequence</c> input.</summary>
 		public void InputBeginSequence() => FireInput("BeginSequence");

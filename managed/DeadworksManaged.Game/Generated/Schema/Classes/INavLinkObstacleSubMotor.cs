@@ -15,6 +15,6 @@ public static partial class Schema {
 
 		private static readonly SchemaField __m_vecObstacles = new("INavLinkObstacleSubMotor", "m_vecObstacles");
 		/// <summary><c>CUtlVector&lt;CHandle&lt;CBaseEntity&gt;&gt;</c>.</summary>
-		public SchemaHandleList<CBaseEntity> m_vecObstacles => new(this, __m_vecObstacles, -1);
+		public SchemaHandleList<CBaseEntity> m_vecObstacles => new(this, __m_vecObstacles, ListStorage.Vector);
 	}
 }

@@ -38,7 +38,7 @@ public static partial class Schema {
 		public string m_hModel => GetBufferString(__m_hModel);
 
 		private static readonly SchemaField __m_sPickup = new("CCitadel_PickupSpawnerVData", "m_sPickup");
-		/// <summary><c>CSubclassName</c>. Which pickup subclass to spawn. Overridden by the pickup_subclass spawn key if that is set. No typed mapping yet: read it through its address.</summary>
-		public RawField m_sPickup => Raw(__m_sPickup, "CSubclassName");
+		/// <summary><c>CSubclassName</c>. Which pickup subclass to spawn. Overridden by the pickup_subclass spawn key if that is set.</summary>
+		public string m_sPickup => GetString(__m_sPickup);
 	}
 }

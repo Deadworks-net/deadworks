@@ -15,7 +15,7 @@ public static partial class Schema {
 
 		private static readonly SchemaField __m_Oscillators = new("NoiseStreamDef_t", "m_Oscillators");
 		/// <summary><c>CUtlVector&lt;NoiseOscillatorDef_t&gt;</c>.</summary>
-		public SchemaObjectList<NoiseOscillatorDef_t> m_Oscillators => new(this, __m_Oscillators, -1);
+		public SchemaObjectList<NoiseOscillatorDef_t> m_Oscillators => new(this, __m_Oscillators, ListStorage.Vector);
 
 		private static readonly SchemaField __m_flOffset = new("NoiseStreamDef_t", "m_flOffset");
 		/// <summary><c>float32</c>.</summary>

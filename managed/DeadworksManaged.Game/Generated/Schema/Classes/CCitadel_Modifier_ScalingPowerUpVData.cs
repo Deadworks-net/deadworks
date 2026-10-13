@@ -35,6 +35,6 @@ public static partial class Schema {
 
 		private static readonly SchemaField __m_vecModifierValues = new("CCitadel_Modifier_ScalingPowerUpVData", "m_vecModifierValues");
 		/// <summary><c>CUtlVector&lt;ScalingPowerupDefinition_t&gt;</c>.</summary>
-		public SchemaObjectList<ScalingPowerupDefinition_t> m_vecModifierValues => new(this, __m_vecModifierValues, -1);
+		public SchemaObjectList<ScalingPowerupDefinition_t> m_vecModifierValues => new(this, __m_vecModifierValues, ListStorage.Vector);
 	}
 }

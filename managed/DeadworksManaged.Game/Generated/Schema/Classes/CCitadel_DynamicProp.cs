@@ -14,19 +14,19 @@ public static partial class Schema {
 		static string ISchemaClass<CCitadel_DynamicProp>.NativeName => "CCitadel_DynamicProp";
 
 		private static readonly SchemaField __m_bIsWorld = new("CCitadel_DynamicProp", "m_bIsWorld");
-		/// <summary><c>bool</c>.</summary>
+		/// <summary><c>bool</c>. Networked in build 6779: a write is sent to clients.</summary>
 		public bool m_bIsWorld { get => Get<bool>(__m_bIsWorld); set => Set(__m_bIsWorld, value); }
 
 		private static readonly SchemaField __m_strDefaultSkin = new("CCitadel_DynamicProp", "m_strDefaultSkin");
-		/// <summary><c>CUtlString</c>.</summary>
+		/// <summary><c>CUtlString</c>. Networked in build 6779: a write is sent to clients.</summary>
 		public string m_strDefaultSkin => GetString(__m_strDefaultSkin);
 
 		private static readonly SchemaField __m_strEnemySkin = new("CCitadel_DynamicProp", "m_strEnemySkin");
-		/// <summary><c>CUtlString</c>.</summary>
+		/// <summary><c>CUtlString</c>. Networked in build 6779: a write is sent to clients.</summary>
 		public string m_strEnemySkin => GetString(__m_strEnemySkin);
 
 		private static readonly SchemaField __m_strFriendlySkin = new("CCitadel_DynamicProp", "m_strFriendlySkin");
-		/// <summary><c>CUtlString</c>.</summary>
+		/// <summary><c>CUtlString</c>. Networked in build 6779: a write is sent to clients.</summary>
 		public string m_strFriendlySkin => GetString(__m_strFriendlySkin);
 
 		/// <summary>Fires the <c>SetEnemySkin</c> input.</summary>

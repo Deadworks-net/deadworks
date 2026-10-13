@@ -15,6 +15,6 @@ public static partial class Schema {
 
 		private static readonly SchemaField __m_vecScalingStats = new("CScaleFunctionAbilityPropertyMultiStatsVData", "m_vecScalingStats");
 		/// <summary><c>CUtlVector&lt;EStatsType&gt;</c>.</summary>
-		public SchemaValueList<EStatsType> m_vecScalingStats => new(this, __m_vecScalingStats, -1);
+		public SchemaValueList<EStatsType> m_vecScalingStats => new(this, __m_vecScalingStats, ListStorage.Vector);
 	}
 }

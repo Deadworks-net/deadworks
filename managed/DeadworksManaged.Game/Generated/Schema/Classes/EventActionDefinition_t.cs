@@ -43,7 +43,7 @@ public static partial class Schema {
 
 		private static readonly SchemaField __m_vecAnyOfRequiredItemDefs = new("EventActionDefinition_t", "m_vecAnyOfRequiredItemDefs");
 		/// <summary><c>CUtlVector&lt;item_definition_index_t&gt;</c>.</summary>
-		public SchemaValueList<uint> m_vecAnyOfRequiredItemDefs => new(this, __m_vecAnyOfRequiredItemDefs, -1);
+		public SchemaValueList<uint> m_vecAnyOfRequiredItemDefs => new(this, __m_vecAnyOfRequiredItemDefs, ListStorage.Vector);
 
 		private static readonly SchemaField __strFriendsLeaderboard = new("EventActionDefinition_t", "strFriendsLeaderboard");
 		/// <summary><c>CUtlString</c>.</summary>
@@ -87,10 +87,10 @@ public static partial class Schema {
 
 		private static readonly SchemaField __vecPrerequisiteActions = new("EventActionDefinition_t", "vecPrerequisiteActions");
 		/// <summary><c>CUtlVector&lt;EventActionPrerequisite_t&gt;</c>.</summary>
-		public SchemaObjectList<EventActionPrerequisite_t> vecPrerequisiteActions => new(this, __vecPrerequisiteActions, -1);
+		public SchemaObjectList<EventActionPrerequisite_t> vecPrerequisiteActions => new(this, __vecPrerequisiteActions, ListStorage.Vector);
 
 		private static readonly SchemaField __vecScoreRewards = new("EventActionDefinition_t", "vecScoreRewards");
 		/// <summary><c>CUtlVector&lt;EventActionScoreDefinition_t&gt;</c>.</summary>
-		public SchemaObjectList<EventActionScoreDefinition_t> vecScoreRewards => new(this, __vecScoreRewards, -1);
+		public SchemaObjectList<EventActionScoreDefinition_t> vecScoreRewards => new(this, __vecScoreRewards, ListStorage.Vector);
 	}
 }

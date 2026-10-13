@@ -14,7 +14,7 @@ public static partial class Schema {
 		static string ISchemaClass<CCitadel_Ability_WreckingBall>.NativeName => "CCitadel_Ability_WreckingBall";
 
 		private static readonly SchemaField __m_bHoldingBall = new("CCitadel_Ability_WreckingBall", "m_bHoldingBall");
-		/// <summary><c>bool</c>.</summary>
+		/// <summary><c>bool</c>. Networked in build 6779: a write is sent to clients.</summary>
 		public bool m_bHoldingBall { get => Get<bool>(__m_bHoldingBall); set => Set(__m_bHoldingBall, value); }
 
 		private static readonly SchemaField __m_nBallParticle = new("CCitadel_Ability_WreckingBall", "m_nBallParticle");
@@ -27,6 +27,6 @@ public static partial class Schema {
 
 		private static readonly SchemaField __m_vecTargetsHit = new("CCitadel_Ability_WreckingBall", "m_vecTargetsHit");
 		/// <summary><c>CUtlVector&lt;CHandle&lt;CBaseEntity&gt;&gt;</c>.</summary>
-		public SchemaHandleList<CBaseEntity> m_vecTargetsHit => new(this, __m_vecTargetsHit, -1);
+		public SchemaHandleList<CBaseEntity> m_vecTargetsHit => new(this, __m_vecTargetsHit, ListStorage.Vector);
 	}
 }

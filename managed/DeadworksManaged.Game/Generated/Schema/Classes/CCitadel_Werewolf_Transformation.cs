@@ -14,7 +14,7 @@ public static partial class Schema {
 		static string ISchemaClass<CCitadel_Werewolf_Transformation>.NativeName => "CCitadel_Werewolf_Transformation";
 
 		private static readonly SchemaField __m_bIsTransformed = new("CCitadel_Werewolf_Transformation", "m_bIsTransformed");
-		/// <summary><c>bool</c>.</summary>
+		/// <summary><c>bool</c>. Networked in build 6779: a write is sent to clients.</summary>
 		public bool m_bIsTransformed { get => Get<bool>(__m_bIsTransformed); set => Set(__m_bIsTransformed, value); }
 
 		private static readonly SchemaField __m_bIsTransformingBack = new("CCitadel_Werewolf_Transformation", "m_bIsTransformingBack");
@@ -22,8 +22,8 @@ public static partial class Schema {
 		public bool m_bIsTransformingBack { get => Get<bool>(__m_bIsTransformingBack); set => Set(__m_bIsTransformingBack, value); }
 
 		private static readonly SchemaField __m_flWerewolfStartTime = new("CCitadel_Werewolf_Transformation", "m_flWerewolfStartTime");
-		/// <summary><c>GameTime_t</c>.</summary>
-		public float m_flWerewolfStartTime { get => Get<float>(__m_flWerewolfStartTime); set => Set(__m_flWerewolfStartTime, value); }
+		/// <summary><c>GameTime_t</c>. Networked in build 6779: a write is sent to clients.</summary>
+		public GameTime m_flWerewolfStartTime { get => Get<GameTime>(__m_flWerewolfStartTime); set => Set(__m_flWerewolfStartTime, value); }
 
 		private static readonly SchemaField __m_pWerewolfModifier = new("CCitadel_Werewolf_Transformation", "m_pWerewolfModifier");
 		/// <summary><c>CCitadelModifier*</c>.</summary>
@@ -31,11 +31,11 @@ public static partial class Schema {
 
 		private static readonly SchemaField __m_tForceTransformTime = new("CCitadel_Werewolf_Transformation", "m_tForceTransformTime");
 		/// <summary><c>GameTime_t</c>.</summary>
-		public float m_tForceTransformTime { get => Get<float>(__m_tForceTransformTime); set => Set(__m_tForceTransformTime, value); }
+		public GameTime m_tForceTransformTime { get => Get<GameTime>(__m_tForceTransformTime); set => Set(__m_tForceTransformTime, value); }
 
 		private static readonly SchemaField __m_tLastRegenComponentThinkTime = new("CCitadel_Werewolf_Transformation", "m_tLastRegenComponentThinkTime");
 		/// <summary><c>GameTime_t</c>.</summary>
-		public float m_tLastRegenComponentThinkTime { get => Get<float>(__m_tLastRegenComponentThinkTime); set => Set(__m_tLastRegenComponentThinkTime, value); }
+		public GameTime m_tLastRegenComponentThinkTime { get => Get<GameTime>(__m_tLastRegenComponentThinkTime); set => Set(__m_tLastRegenComponentThinkTime, value); }
 
 		/// <summary>The data entry this was created from, as <see cref="CCitadel_Werewolf_TransformationVData"/>, or null if it has none.</summary>
 		public new CCitadel_Werewolf_TransformationVData? VData => SubclassVData<CCitadel_Werewolf_TransformationVData>();

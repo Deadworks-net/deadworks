@@ -15,7 +15,7 @@ public static partial class Schema {
 
 		private static readonly SchemaField __m_children = new("CDebugSnapshotData_t", "m_children");
 		/// <summary><c>CUtlLeanVector&lt;CDebugSnapshotData_t&gt;</c>.</summary>
-		public SchemaObjectList<CDebugSnapshotData_t> m_children => new(this, __m_children, -1);
+		public SchemaObjectList<CDebugSnapshotData_t> m_children => new(this, __m_children, ListStorage.UnresizableVector);
 
 		private static readonly SchemaField __m_dataType = new("CDebugSnapshotData_t", "m_dataType");
 		/// <summary><c>uint32</c>.</summary>
@@ -58,8 +58,8 @@ public static partial class Schema {
 		public CGenericShapeProxy m_userShape => Embedded<CGenericShapeProxy>(__m_userShape);
 
 		private static readonly SchemaField __m_userTransform = new("CDebugSnapshotData_t", "m_userTransform");
-		/// <summary><c>CTransformWS</c>. No typed mapping yet: read it through its address.</summary>
-		public RawField m_userTransform => Raw(__m_userTransform, "CTransformWS");
+		/// <summary><c>CTransformWS</c>.</summary>
+		public Transform m_userTransform { get => Get<Transform>(__m_userTransform); set => Set(__m_userTransform, value); }
 
 		private static readonly SchemaField __m_userVector = new("CDebugSnapshotData_t", "m_userVector");
 		/// <summary><c>VectorWS</c>.</summary>
@@ -67,6 +67,6 @@ public static partial class Schema {
 
 		private static readonly SchemaField __m_vecDebugOverlayData = new("CDebugSnapshotData_t", "m_vecDebugOverlayData");
 		/// <summary><c>CUtlVector&lt;CDebugDrawHistoryData*&gt;</c>.</summary>
-		public SchemaPointerList<CDebugDrawHistoryData> m_vecDebugOverlayData => new(this, __m_vecDebugOverlayData, -1);
+		public SchemaPointerList<CDebugDrawHistoryData> m_vecDebugOverlayData => new(this, __m_vecDebugOverlayData, ListStorage.Vector);
 	}
 }

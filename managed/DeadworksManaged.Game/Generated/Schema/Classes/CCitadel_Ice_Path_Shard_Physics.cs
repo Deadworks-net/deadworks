@@ -14,23 +14,23 @@ public static partial class Schema {
 		static string ISchemaClass<CCitadel_Ice_Path_Shard_Physics>.NativeName => "CCitadel_Ice_Path_Shard_Physics";
 
 		private static readonly SchemaField __m_ShardDesc = new("CCitadel_Ice_Path_Shard_Physics", "m_ShardDesc");
-		/// <summary><c>ice_path_shard_model_desc_t</c>.</summary>
+		/// <summary><c>ice_path_shard_model_desc_t</c>. Networked in build 6779: a write is sent to clients.</summary>
 		public ice_path_shard_model_desc_t m_ShardDesc => Embedded<ice_path_shard_model_desc_t>(__m_ShardDesc);
 
 		private static readonly SchemaField __m_flEndTime = new("CCitadel_Ice_Path_Shard_Physics", "m_flEndTime");
-		/// <summary><c>GameTime_t</c>.</summary>
-		public float m_flEndTime { get => Get<float>(__m_flEndTime); set => Set(__m_flEndTime, value); }
+		/// <summary><c>GameTime_t</c>. Networked in build 6779: a write is sent to clients.</summary>
+		public GameTime m_flEndTime { get => Get<GameTime>(__m_flEndTime); set => Set(__m_flEndTime, value); }
 
 		private static readonly SchemaField __m_flShardWidth = new("CCitadel_Ice_Path_Shard_Physics", "m_flShardWidth");
-		/// <summary><c>float32</c>.</summary>
+		/// <summary><c>float32</c>. Networked in build 6779: a write is sent to clients.</summary>
 		public float m_flShardWidth { get => Get<float>(__m_flShardWidth); set => Set(__m_flShardWidth, value); }
 
 		private static readonly SchemaField __m_flStartTime = new("CCitadel_Ice_Path_Shard_Physics", "m_flStartTime");
-		/// <summary><c>GameTime_t</c>.</summary>
-		public float m_flStartTime { get => Get<float>(__m_flStartTime); set => Set(__m_flStartTime, value); }
+		/// <summary><c>GameTime_t</c>. Networked in build 6779: a write is sent to clients.</summary>
+		public GameTime m_flStartTime { get => Get<GameTime>(__m_flStartTime); set => Set(__m_flStartTime, value); }
 
 		private static readonly SchemaField __m_qForward = new("CCitadel_Ice_Path_Shard_Physics", "m_qForward");
-		/// <summary><c>QAngle</c>.</summary>
+		/// <summary><c>QAngle</c>. Networked in build 6779: a write is sent to clients.</summary>
 		public Vector3 m_qForward { get => Get<Vector3>(__m_qForward); set => Set(__m_qForward, value); }
 	}
 }

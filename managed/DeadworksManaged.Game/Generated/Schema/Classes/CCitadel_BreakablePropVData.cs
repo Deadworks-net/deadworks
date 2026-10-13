@@ -186,8 +186,8 @@ public static partial class Schema {
 		public string m_sBreakSound => GetBufferString(__m_sBreakSound);
 
 		private static readonly SchemaField __m_sMaterialGroupName = new("CCitadel_BreakablePropVData", "m_sMaterialGroupName");
-		/// <summary><c>CModelMaterialGroupName</c>. Material Group. No typed mapping yet: read it through its address.</summary>
-		public RawField m_sMaterialGroupName => Raw(__m_sMaterialGroupName, "CModelMaterialGroupName");
+		/// <summary><c>CModelMaterialGroupName</c>. Material Group.</summary>
+		public string m_sMaterialGroupName => GetString(__m_sMaterialGroupName);
 
 		private static readonly SchemaField __m_sMeleeDamageSound = new("CCitadel_BreakablePropVData", "m_sMeleeDamageSound");
 		/// <summary><c>CSoundEventName</c>. 3D Sound of the prop taking damage.</summary>

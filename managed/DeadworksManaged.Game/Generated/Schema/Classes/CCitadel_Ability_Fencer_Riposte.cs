@@ -14,23 +14,23 @@ public static partial class Schema {
 		static string ISchemaClass<CCitadel_Ability_Fencer_Riposte>.NativeName => "CCitadel_Ability_Fencer_Riposte";
 
 		private static readonly SchemaField __m_flStateStartTime = new("CCitadel_Ability_Fencer_Riposte", "m_flStateStartTime");
-		/// <summary><c>GameTime_t</c>.</summary>
-		public float m_flStateStartTime { get => Get<float>(__m_flStateStartTime); set => Set(__m_flStateStartTime, value); }
+		/// <summary><c>GameTime_t</c>. Networked in build 6779: a write is sent to clients.</summary>
+		public GameTime m_flStateStartTime { get => Get<GameTime>(__m_flStateStartTime); set => Set(__m_flStateStartTime, value); }
 
 		private static readonly SchemaField __m_flStuckTime = new("CCitadel_Ability_Fencer_Riposte", "m_flStuckTime");
 		/// <summary><c>GameTime_t</c>.</summary>
-		public float m_flStuckTime { get => Get<float>(__m_flStuckTime); set => Set(__m_flStuckTime, value); }
+		public GameTime m_flStuckTime { get => Get<GameTime>(__m_flStuckTime); set => Set(__m_flStuckTime, value); }
 
 		private static readonly SchemaField __m_flSuccessfulRiposteTime = new("CCitadel_Ability_Fencer_Riposte", "m_flSuccessfulRiposteTime");
-		/// <summary><c>GameTime_t</c>.</summary>
-		public float m_flSuccessfulRiposteTime { get => Get<float>(__m_flSuccessfulRiposteTime); set => Set(__m_flSuccessfulRiposteTime, value); }
+		/// <summary><c>GameTime_t</c>. Networked in build 6779: a write is sent to clients.</summary>
+		public GameTime m_flSuccessfulRiposteTime { get => Get<GameTime>(__m_flSuccessfulRiposteTime); set => Set(__m_flSuccessfulRiposteTime, value); }
 
 		private static readonly SchemaField __m_hTarget = new("CCitadel_Ability_Fencer_Riposte", "m_hTarget");
-		/// <summary><c>CHandle&lt;CBaseEntity&gt;</c>.</summary>
+		/// <summary><c>CHandle&lt;CBaseEntity&gt;</c>. Networked in build 6779: a write is sent to clients.</summary>
 		public CBaseEntity? m_hTarget { get => GetHandle<CBaseEntity>(__m_hTarget); set => SetHandle(__m_hTarget, value); }
 
 		private static readonly SchemaField __m_nCurrentRiposteState = new("CCitadel_Ability_Fencer_Riposte", "m_nCurrentRiposteState");
-		/// <summary><c>uint8</c>.</summary>
+		/// <summary><c>uint8</c>. Networked in build 6779: a write is sent to clients.</summary>
 		public byte m_nCurrentRiposteState { get => Get<byte>(__m_nCurrentRiposteState); set => Set(__m_nCurrentRiposteState, value); }
 
 		private static readonly SchemaField __m_nParriedFXIndex = new("CCitadel_Ability_Fencer_Riposte", "m_nParriedFXIndex");
@@ -38,16 +38,16 @@ public static partial class Schema {
 		public int m_nParriedFXIndex { get => Get<int>(__m_nParriedFXIndex); set => Set(__m_nParriedFXIndex, value); }
 
 		private static readonly SchemaField __m_vDashDirection = new("CCitadel_Ability_Fencer_Riposte", "m_vDashDirection");
-		/// <summary><c>Vector</c>.</summary>
+		/// <summary><c>Vector</c>. Networked in build 6779: a write is sent to clients.</summary>
 		public Vector3 m_vDashDirection { get => Get<Vector3>(__m_vDashDirection); set => Set(__m_vDashDirection, value); }
 
 		private static readonly SchemaField __m_vRiposteStartPosition = new("CCitadel_Ability_Fencer_Riposte", "m_vRiposteStartPosition");
-		/// <summary><c>VectorWS</c>.</summary>
+		/// <summary><c>VectorWS</c>. Networked in build 6779: a write is sent to clients.</summary>
 		public Vector3 m_vRiposteStartPosition { get => Get<Vector3>(__m_vRiposteStartPosition); set => Set(__m_vRiposteStartPosition, value); }
 
 		private static readonly SchemaField __m_vecHitEnemies = new("CCitadel_Ability_Fencer_Riposte", "m_vecHitEnemies");
 		/// <summary><c>CUtlVector&lt;CHandle&lt;CBaseEntity&gt;&gt;</c>.</summary>
-		public SchemaHandleList<CBaseEntity> m_vecHitEnemies => new(this, __m_vecHitEnemies, -1);
+		public SchemaHandleList<CBaseEntity> m_vecHitEnemies => new(this, __m_vecHitEnemies, ListStorage.Vector);
 
 		private static readonly SchemaField __m_vecLastPosition = new("CCitadel_Ability_Fencer_Riposte", "m_vecLastPosition");
 		/// <summary><c>VectorWS</c>.</summary>

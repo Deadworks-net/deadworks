@@ -27,7 +27,7 @@ public static partial class Schema {
 
 		private static readonly SchemaField __motor_path = new("AI_MotorServices_DebugSnapshotData_t", "motor_path");
 		/// <summary><c>CUtlVector&lt;AI_MotorServices_DebugSnapshotData_t::MotorPathWaypoint_t&gt;</c>.</summary>
-		public SchemaObjectList<AI_MotorServices_DebugSnapshotData_t__MotorPathWaypoint_t> motor_path => new(this, __motor_path, -1);
+		public SchemaObjectList<AI_MotorServices_DebugSnapshotData_t__MotorPathWaypoint_t> motor_path => new(this, __motor_path, ListStorage.Vector);
 
 		private static readonly SchemaField __motor_velocity = new("AI_MotorServices_DebugSnapshotData_t", "motor_velocity");
 		/// <summary><c>Vector</c>.</summary>

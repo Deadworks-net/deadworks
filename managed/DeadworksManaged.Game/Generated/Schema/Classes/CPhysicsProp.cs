@@ -54,7 +54,7 @@ public static partial class Schema {
 		public bool m_bAttachedToReferenceFrame { get => Get<bool>(__m_bAttachedToReferenceFrame); set => Set(__m_bAttachedToReferenceFrame, value); }
 
 		private static readonly SchemaField __m_bAwake = new("CPhysicsProp", "m_bAwake");
-		/// <summary><c>bool</c>.</summary>
+		/// <summary><c>bool</c>. Networked in build 6779: a write is sent to clients.</summary>
 		public bool m_bAwake { get => Get<bool>(__m_bAwake); set => Set(__m_bAwake, value); }
 
 		private static readonly SchemaField __m_bDroppedByPlayer = new("CPhysicsProp", "m_bDroppedByPlayer");
@@ -127,7 +127,7 @@ public static partial class Schema {
 
 		private static readonly SchemaField __m_fNextCheckDisableMotionContactsTime = new("CPhysicsProp", "m_fNextCheckDisableMotionContactsTime");
 		/// <summary><c>GameTime_t</c>.</summary>
-		public float m_fNextCheckDisableMotionContactsTime { get => Get<float>(__m_fNextCheckDisableMotionContactsTime); set => Set(__m_fNextCheckDisableMotionContactsTime, value); }
+		public GameTime m_fNextCheckDisableMotionContactsTime { get => Get<GameTime>(__m_fNextCheckDisableMotionContactsTime); set => Set(__m_fNextCheckDisableMotionContactsTime, value); }
 
 		private static readonly SchemaField __m_flForceToEnableMotion = new("CPhysicsProp", "m_flForceToEnableMotion");
 		/// <summary><c>float32</c>.</summary>
@@ -135,7 +135,7 @@ public static partial class Schema {
 
 		private static readonly SchemaField __m_flLastBurn = new("CPhysicsProp", "m_flLastBurn");
 		/// <summary><c>GameTime_t</c>.</summary>
-		public float m_flLastBurn { get => Get<float>(__m_flLastBurn); set => Set(__m_flLastBurn, value); }
+		public GameTime m_flLastBurn { get => Get<GameTime>(__m_flLastBurn); set => Set(__m_flLastBurn, value); }
 
 		private static readonly SchemaField __m_glowColor = new("CPhysicsProp", "m_glowColor");
 		/// <summary><c>Color</c>.</summary>

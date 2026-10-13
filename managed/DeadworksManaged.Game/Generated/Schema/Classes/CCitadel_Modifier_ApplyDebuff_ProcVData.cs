@@ -22,8 +22,8 @@ public static partial class Schema {
 		public string m_DurationAbilityPropOverride => GetString(__m_DurationAbilityPropOverride);
 
 		private static readonly SchemaField __m_NonEmbeddedModifier = new("CCitadel_Modifier_ApplyDebuff_ProcVData", "m_NonEmbeddedModifier");
-		/// <summary><c>CSubclassName</c>. No typed mapping yet: read it through its address.</summary>
-		public RawField m_NonEmbeddedModifier => Raw(__m_NonEmbeddedModifier, "CSubclassName");
+		/// <summary><c>CSubclassName</c>.</summary>
+		public string m_NonEmbeddedModifier => GetString(__m_NonEmbeddedModifier);
 
 		private static readonly SchemaField __m_bUseNonEmbedded = new("CCitadel_Modifier_ApplyDebuff_ProcVData", "m_bUseNonEmbedded");
 		/// <summary><c>bool</c>.</summary>

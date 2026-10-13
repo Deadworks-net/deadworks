@@ -87,6 +87,6 @@ public static partial class Schema {
 
 		private static readonly SchemaField __vec_events = new("AI_GroundRootMotionMotor_DebugSnapshotData_t", "vec_events");
 		/// <summary><c>CUtlVector&lt;AI_GroundRootMotionMotor_DebugSnapshotData_t::Event_t&gt;</c>.</summary>
-		public SchemaObjectList<AI_GroundRootMotionMotor_DebugSnapshotData_t__Event_t> vec_events => new(this, __vec_events, -1);
+		public SchemaObjectList<AI_GroundRootMotionMotor_DebugSnapshotData_t__Event_t> vec_events => new(this, __vec_events, ListStorage.Vector);
 	}
 }

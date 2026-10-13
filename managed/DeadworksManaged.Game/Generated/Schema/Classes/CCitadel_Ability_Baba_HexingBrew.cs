@@ -14,19 +14,19 @@ public static partial class Schema {
 		static string ISchemaClass<CCitadel_Ability_Baba_HexingBrew>.NativeName => "CCitadel_Ability_Baba_HexingBrew";
 
 		private static readonly SchemaField __m_bBrewLocked = new("CCitadel_Ability_Baba_HexingBrew", "m_bBrewLocked");
-		/// <summary><c>bool</c>.</summary>
+		/// <summary><c>bool</c>. Networked in build 6779: a write is sent to clients.</summary>
 		public bool m_bBrewLocked { get => Get<bool>(__m_bBrewLocked); set => Set(__m_bBrewLocked, value); }
 
 		private static readonly SchemaField __m_eBrewEffect = new("CCitadel_Ability_Baba_HexingBrew", "m_eBrewEffect");
-		/// <summary><c>CCitadel_Ability_Baba_HexingBrew::EBrewEffect</c>.</summary>
+		/// <summary><c>CCitadel_Ability_Baba_HexingBrew::EBrewEffect</c>. Networked in build 6779: a write is sent to clients.</summary>
 		public CCitadel_Ability_Baba_HexingBrew__EBrewEffect m_eBrewEffect { get => Get<CCitadel_Ability_Baba_HexingBrew__EBrewEffect>(__m_eBrewEffect); set => Set(__m_eBrewEffect, value); }
 
 		private static readonly SchemaField __m_flBrewLockTime = new("CCitadel_Ability_Baba_HexingBrew", "m_flBrewLockTime");
-		/// <summary><c>GameTime_t</c>.</summary>
-		public float m_flBrewLockTime { get => Get<float>(__m_flBrewLockTime); set => Set(__m_flBrewLockTime, value); }
+		/// <summary><c>GameTime_t</c>. Networked in build 6779: a write is sent to clients.</summary>
+		public GameTime m_flBrewLockTime { get => Get<GameTime>(__m_flBrewLockTime); set => Set(__m_flBrewLockTime, value); }
 
 		private static readonly SchemaField __m_flBrewPausedTime = new("CCitadel_Ability_Baba_HexingBrew", "m_flBrewPausedTime");
-		/// <summary><c>float32</c>.</summary>
+		/// <summary><c>float32</c>. Networked in build 6779: a write is sent to clients.</summary>
 		public float m_flBrewPausedTime { get => Get<float>(__m_flBrewPausedTime); set => Set(__m_flBrewPausedTime, value); }
 	}
 }

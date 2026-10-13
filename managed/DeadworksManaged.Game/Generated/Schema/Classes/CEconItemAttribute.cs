@@ -14,11 +14,11 @@ public static partial class Schema {
 		static string ISchemaClass<CEconItemAttribute>.NativeName => "CEconItemAttribute";
 
 		private static readonly SchemaField __m_flValue = new("CEconItemAttribute", "m_flValue");
-		/// <summary><c>float32</c>.</summary>
+		/// <summary><c>float32</c>. Networked in build 6779: a write is sent to clients.</summary>
 		public float m_flValue { get => Get<float>(__m_flValue); set => Set(__m_flValue, value); }
 
 		private static readonly SchemaField __m_iAttributeDefinitionIndex = new("CEconItemAttribute", "m_iAttributeDefinitionIndex");
-		/// <summary><c>attrib_definition_index_t</c>.</summary>
+		/// <summary><c>attrib_definition_index_t</c>. Networked in build 6779: a write is sent to clients.</summary>
 		public ushort m_iAttributeDefinitionIndex { get => Get<ushort>(__m_iAttributeDefinitionIndex); set => Set(__m_iAttributeDefinitionIndex, value); }
 	}
 }

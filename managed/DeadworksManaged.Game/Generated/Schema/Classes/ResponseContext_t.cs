@@ -15,7 +15,7 @@ public static partial class Schema {
 
 		private static readonly SchemaField __m_fExpirationTime = new("ResponseContext_t", "m_fExpirationTime");
 		/// <summary><c>GameTime_t</c>.</summary>
-		public float m_fExpirationTime { get => Get<float>(__m_fExpirationTime); set => Set(__m_fExpirationTime, value); }
+		public GameTime m_fExpirationTime { get => Get<GameTime>(__m_fExpirationTime); set => Set(__m_fExpirationTime, value); }
 
 		private static readonly SchemaField __m_iszName = new("ResponseContext_t", "m_iszName");
 		/// <summary><c>CUtlSymbolLarge</c>.</summary>

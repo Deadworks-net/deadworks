@@ -35,6 +35,6 @@ public static partial class Schema {
 
 		private static readonly SchemaField __m_vecCompanionAbilities = new("CCitadel_Ability_Magician_CopyUltVData", "m_vecCompanionAbilities");
 		/// <summary><c>CUtlVector&lt;CopyUltCompanionAbility_t&gt;</c>.</summary>
-		public SchemaObjectList<CopyUltCompanionAbility_t> m_vecCompanionAbilities => new(this, __m_vecCompanionAbilities, -1);
+		public SchemaObjectList<CopyUltCompanionAbility_t> m_vecCompanionAbilities => new(this, __m_vecCompanionAbilities, ListStorage.Vector);
 	}
 }

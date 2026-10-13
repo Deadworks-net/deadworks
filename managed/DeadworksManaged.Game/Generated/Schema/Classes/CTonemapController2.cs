@@ -14,23 +14,23 @@ public static partial class Schema {
 		static string ISchemaClass<CTonemapController2>.NativeName => "CTonemapController2";
 
 		private static readonly SchemaField __m_flAutoExposureMax = new("CTonemapController2", "m_flAutoExposureMax");
-		/// <summary><c>float32</c>.</summary>
+		/// <summary><c>float32</c>. Networked in build 6779: a write is sent to clients.</summary>
 		public float m_flAutoExposureMax { get => Get<float>(__m_flAutoExposureMax); set => Set(__m_flAutoExposureMax, value); }
 
 		private static readonly SchemaField __m_flAutoExposureMin = new("CTonemapController2", "m_flAutoExposureMin");
-		/// <summary><c>float32</c>.</summary>
+		/// <summary><c>float32</c>. Networked in build 6779: a write is sent to clients.</summary>
 		public float m_flAutoExposureMin { get => Get<float>(__m_flAutoExposureMin); set => Set(__m_flAutoExposureMin, value); }
 
 		private static readonly SchemaField __m_flExposureAdaptationSpeedDown = new("CTonemapController2", "m_flExposureAdaptationSpeedDown");
-		/// <summary><c>float32</c>.</summary>
+		/// <summary><c>float32</c>. Networked in build 6779: a write is sent to clients.</summary>
 		public float m_flExposureAdaptationSpeedDown { get => Get<float>(__m_flExposureAdaptationSpeedDown); set => Set(__m_flExposureAdaptationSpeedDown, value); }
 
 		private static readonly SchemaField __m_flExposureAdaptationSpeedUp = new("CTonemapController2", "m_flExposureAdaptationSpeedUp");
-		/// <summary><c>float32</c>.</summary>
+		/// <summary><c>float32</c>. Networked in build 6779: a write is sent to clients.</summary>
 		public float m_flExposureAdaptationSpeedUp { get => Get<float>(__m_flExposureAdaptationSpeedUp); set => Set(__m_flExposureAdaptationSpeedUp, value); }
 
 		private static readonly SchemaField __m_flTonemapEVSmoothingRange = new("CTonemapController2", "m_flTonemapEVSmoothingRange");
-		/// <summary><c>float32</c>.</summary>
+		/// <summary><c>float32</c>. Networked in build 6779: a write is sent to clients.</summary>
 		public float m_flTonemapEVSmoothingRange { get => Get<float>(__m_flTonemapEVSmoothingRange); set => Set(__m_flTonemapEVSmoothingRange, value); }
 
 		/// <summary>Fires the <c>Disable</c> input.</summary>

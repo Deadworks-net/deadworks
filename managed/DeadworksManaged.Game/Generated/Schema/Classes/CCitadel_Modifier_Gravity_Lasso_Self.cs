@@ -19,6 +19,6 @@ public static partial class Schema {
 
 		private static readonly SchemaField __m_vCastTargets = new("CCitadel_Modifier_Gravity_Lasso_Self", "m_vCastTargets");
 		/// <summary><c>CUtlVector&lt;CHandle&lt;CBaseEntity&gt;&gt;</c>.</summary>
-		public SchemaHandleList<CBaseEntity> m_vCastTargets => new(this, __m_vCastTargets, -1);
+		public SchemaHandleList<CBaseEntity> m_vCastTargets => new(this, __m_vCastTargets, ListStorage.Vector);
 	}
 }

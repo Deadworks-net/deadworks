@@ -14,7 +14,7 @@ public static partial class Schema {
 		static string ISchemaClass<CCitadel_Ability_Necro_HauntingSkull>.NativeName => "CCitadel_Ability_Necro_HauntingSkull";
 
 		private static readonly SchemaField __m_bIsFullyCharged = new("CCitadel_Ability_Necro_HauntingSkull", "m_bIsFullyCharged");
-		/// <summary><c>bool</c>.</summary>
+		/// <summary><c>bool</c>. Networked in build 6779: a write is sent to clients.</summary>
 		public bool m_bIsFullyCharged { get => Get<bool>(__m_bIsFullyCharged); set => Set(__m_bIsFullyCharged, value); }
 
 		private static readonly SchemaField __m_eSkullPriorityTarget = new("CCitadel_Ability_Necro_HauntingSkull", "m_eSkullPriorityTarget");
@@ -27,7 +27,7 @@ public static partial class Schema {
 
 		private static readonly SchemaField __m_tPriorityTargetTime = new("CCitadel_Ability_Necro_HauntingSkull", "m_tPriorityTargetTime");
 		/// <summary><c>GameTime_t</c>.</summary>
-		public float m_tPriorityTargetTime { get => Get<float>(__m_tPriorityTargetTime); set => Set(__m_tPriorityTargetTime, value); }
+		public GameTime m_tPriorityTargetTime { get => Get<GameTime>(__m_tPriorityTargetTime); set => Set(__m_tPriorityTargetTime, value); }
 
 		private static readonly SchemaField __m_vLaunchPosition = new("CCitadel_Ability_Necro_HauntingSkull", "m_vLaunchPosition");
 		/// <summary><c>VectorWS</c>.</summary>

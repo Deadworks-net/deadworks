@@ -14,7 +14,7 @@ public static partial class Schema {
 		static string ISchemaClass<CCitadel_Ability_Frank_ShockTarget2>.NativeName => "CCitadel_Ability_Frank_ShockTarget2";
 
 		private static readonly SchemaField __m_bIsFullyCharged = new("CCitadel_Ability_Frank_ShockTarget2", "m_bIsFullyCharged");
-		/// <summary><c>bool</c>.</summary>
+		/// <summary><c>bool</c>. Networked in build 6779: a write is sent to clients.</summary>
 		public bool m_bIsFullyCharged { get => Get<bool>(__m_bIsFullyCharged); set => Set(__m_bIsFullyCharged, value); }
 
 		private static readonly SchemaField __m_hFullyChargedFXModifier = new("CCitadel_Ability_Frank_ShockTarget2", "m_hFullyChargedFXModifier");
@@ -23,7 +23,7 @@ public static partial class Schema {
 
 		private static readonly SchemaField __m_vecHitTargets = new("CCitadel_Ability_Frank_ShockTarget2", "m_vecHitTargets");
 		/// <summary><c>CUtlVector&lt;CHandle&lt;CBaseEntity&gt;&gt;</c>.</summary>
-		public SchemaHandleList<CBaseEntity> m_vecHitTargets => new(this, __m_vecHitTargets, -1);
+		public SchemaHandleList<CBaseEntity> m_vecHitTargets => new(this, __m_vecHitTargets, ListStorage.Vector);
 
 		/// <summary>The data entry this was created from, as <see cref="CCitadel_Ability_Frank_ShockTarget2VData"/>, or null if it has none.</summary>
 		public new CCitadel_Ability_Frank_ShockTarget2VData? VData => SubclassVData<CCitadel_Ability_Frank_ShockTarget2VData>();

@@ -31,14 +31,14 @@ public static partial class Schema {
 
 		private static readonly SchemaField __m_tExecuteTime = new("CCitadel_Modifier_NeutralAbility", "m_tExecuteTime");
 		/// <summary><c>GameTime_t</c>.</summary>
-		public float m_tExecuteTime { get => Get<float>(__m_tExecuteTime); set => Set(__m_tExecuteTime, value); }
+		public GameTime m_tExecuteTime { get => Get<GameTime>(__m_tExecuteTime); set => Set(__m_tExecuteTime, value); }
 
 		private static readonly SchemaField __m_tNextCastTime = new("CCitadel_Modifier_NeutralAbility", "m_tNextCastTime");
 		/// <summary><c>GameTime_t</c>.</summary>
-		public float m_tNextCastTime { get => Get<float>(__m_tNextCastTime); set => Set(__m_tNextCastTime, value); }
+		public GameTime m_tNextCastTime { get => Get<GameTime>(__m_tNextCastTime); set => Set(__m_tNextCastTime, value); }
 
 		private static readonly SchemaField __m_tStateChangeTime = new("CCitadel_Modifier_NeutralAbility", "m_tStateChangeTime");
 		/// <summary><c>GameTime_t</c>.</summary>
-		public float m_tStateChangeTime { get => Get<float>(__m_tStateChangeTime); set => Set(__m_tStateChangeTime, value); }
+		public GameTime m_tStateChangeTime { get => Get<GameTime>(__m_tStateChangeTime); set => Set(__m_tStateChangeTime, value); }
 	}
 }

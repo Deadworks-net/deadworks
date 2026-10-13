@@ -42,8 +42,8 @@ public static partial class Schema {
 		public uint m_soundEventHash { get => Get<uint>(__m_soundEventHash); set => Set(__m_soundEventHash, value); }
 
 		private static readonly SchemaField __m_soundEventName = new("CEnvSoundscape", "m_soundEventName");
-		/// <summary><c>CGameSoundEventName</c>. No typed mapping yet: read it through its address.</summary>
-		public RawField m_soundEventName => Raw(__m_soundEventName, "CGameSoundEventName");
+		/// <summary><c>CGameSoundEventName</c>.</summary>
+		public string m_soundEventName => GetString(__m_soundEventName);
 
 		private static readonly SchemaField __m_soundscapeEntityListId = new("CEnvSoundscape", "m_soundscapeEntityListId");
 		/// <summary><c>int32</c>.</summary>

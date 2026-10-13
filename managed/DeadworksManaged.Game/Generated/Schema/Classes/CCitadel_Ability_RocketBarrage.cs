@@ -14,7 +14,7 @@ public static partial class Schema {
 		static string ISchemaClass<CCitadel_Ability_RocketBarrage>.NativeName => "CCitadel_Ability_RocketBarrage";
 
 		private static readonly SchemaField __m_flBarrageEndTime = new("CCitadel_Ability_RocketBarrage", "m_flBarrageEndTime");
-		/// <summary><c>CCitadelAutoScaledTime</c>.</summary>
+		/// <summary><c>CCitadelAutoScaledTime</c>. Networked in build 6779: a write is sent to clients.</summary>
 		public CCitadelAutoScaledTime m_flBarrageEndTime => Embedded<CCitadelAutoScaledTime>(__m_flBarrageEndTime);
 
 		private static readonly SchemaField __m_flCurrentTimeScale = new("CCitadel_Ability_RocketBarrage", "m_flCurrentTimeScale");
@@ -23,7 +23,7 @@ public static partial class Schema {
 
 		private static readonly SchemaField __m_flLastUpdateTime = new("CCitadel_Ability_RocketBarrage", "m_flLastUpdateTime");
 		/// <summary><c>GameTime_t</c>.</summary>
-		public float m_flLastUpdateTime { get => Get<float>(__m_flLastUpdateTime); set => Set(__m_flLastUpdateTime, value); }
+		public GameTime m_flLastUpdateTime { get => Get<GameTime>(__m_flLastUpdateTime); set => Set(__m_flLastUpdateTime, value); }
 
 		private static readonly SchemaField __m_vecAimPos = new("CCitadel_Ability_RocketBarrage", "m_vecAimPos");
 		/// <summary><c>VectorWS</c>.</summary>

@@ -15,6 +15,6 @@ public static partial class Schema {
 
 		private static readonly SchemaField __m_vecUsers = new("CNavLinkAreaEntity::NpcUserList_t", "m_vecUsers");
 		/// <summary><c>CUtlVector&lt;CHandle&lt;CAI_BaseNPC&gt;&gt;</c>.</summary>
-		public SchemaHandleList<CAI_BaseNPC> m_vecUsers => new(this, __m_vecUsers, -1);
+		public SchemaHandleList<CAI_BaseNPC> m_vecUsers => new(this, __m_vecUsers, ListStorage.Vector);
 	}
 }

@@ -14,19 +14,19 @@ public static partial class Schema {
 		static string ISchemaClass<CCitadel_Ability_Lash_Ultimate>.NativeName => "CCitadel_Ability_Lash_Ultimate";
 
 		private static readonly SchemaField __m_EGrappleState = new("CCitadel_Ability_Lash_Ultimate", "m_EGrappleState");
-		/// <summary><c>ELashGrappleState</c>.</summary>
+		/// <summary><c>ELashGrappleState</c>. Networked in build 6779: a write is sent to clients.</summary>
 		public ELashGrappleState m_EGrappleState { get => Get<ELashGrappleState>(__m_EGrappleState); set => Set(__m_EGrappleState, value); }
 
 		private static readonly SchemaField __m_flBoostEndTime = new("CCitadel_Ability_Lash_Ultimate", "m_flBoostEndTime");
-		/// <summary><c>GameTime_t</c>.</summary>
-		public float m_flBoostEndTime { get => Get<float>(__m_flBoostEndTime); set => Set(__m_flBoostEndTime, value); }
+		/// <summary><c>GameTime_t</c>. Networked in build 6779: a write is sent to clients.</summary>
+		public GameTime m_flBoostEndTime { get => Get<GameTime>(__m_flBoostEndTime); set => Set(__m_flBoostEndTime, value); }
 
 		private static readonly SchemaField __m_flNextStateTime = new("CCitadel_Ability_Lash_Ultimate", "m_flNextStateTime");
-		/// <summary><c>GameTime_t</c>.</summary>
-		public float m_flNextStateTime { get => Get<float>(__m_flNextStateTime); set => Set(__m_flNextStateTime, value); }
+		/// <summary><c>GameTime_t</c>. Networked in build 6779: a write is sent to clients.</summary>
+		public GameTime m_flNextStateTime { get => Get<GameTime>(__m_flNextStateTime); set => Set(__m_flNextStateTime, value); }
 
 		private static readonly SchemaField __m_flStateEnterTime = new("CCitadel_Ability_Lash_Ultimate", "m_flStateEnterTime");
-		/// <summary><c>GameTime_t</c>.</summary>
-		public float m_flStateEnterTime { get => Get<float>(__m_flStateEnterTime); set => Set(__m_flStateEnterTime, value); }
+		/// <summary><c>GameTime_t</c>. Networked in build 6779: a write is sent to clients.</summary>
+		public GameTime m_flStateEnterTime { get => Get<GameTime>(__m_flStateEnterTime); set => Set(__m_flStateEnterTime, value); }
 	}
 }

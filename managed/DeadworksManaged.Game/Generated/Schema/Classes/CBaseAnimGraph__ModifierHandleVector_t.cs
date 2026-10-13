@@ -15,6 +15,6 @@ public static partial class Schema {
 
 		private static readonly SchemaField __m_ModifierHandles = new("CBaseAnimGraph::ModifierHandleVector_t", "m_ModifierHandles");
 		/// <summary><c>CUtlVector&lt;CModifierHandleBase&gt;</c>.</summary>
-		public SchemaObjectList<CModifierHandleBase> m_ModifierHandles => new(this, __m_ModifierHandles, -1);
+		public SchemaObjectList<CModifierHandleBase> m_ModifierHandles => new(this, __m_ModifierHandles, ListStorage.Vector);
 	}
 }

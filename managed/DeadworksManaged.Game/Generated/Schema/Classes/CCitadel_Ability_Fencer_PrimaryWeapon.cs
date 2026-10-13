@@ -14,7 +14,7 @@ public static partial class Schema {
 		static string ISchemaClass<CCitadel_Ability_Fencer_PrimaryWeapon>.NativeName => "CCitadel_Ability_Fencer_PrimaryWeapon";
 
 		private static readonly SchemaField __m_iCurrentShotCount = new("CCitadel_Ability_Fencer_PrimaryWeapon", "m_iCurrentShotCount");
-		/// <summary><c>int32</c>.</summary>
+		/// <summary><c>int32</c>. Networked in build 6779: a write is sent to clients.</summary>
 		public int m_iCurrentShotCount { get => Get<int>(__m_iCurrentShotCount); set => Set(__m_iCurrentShotCount, value); }
 	}
 }

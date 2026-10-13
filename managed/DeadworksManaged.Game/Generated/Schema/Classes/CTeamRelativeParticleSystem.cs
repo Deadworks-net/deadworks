@@ -14,12 +14,12 @@ public static partial class Schema {
 		static string ISchemaClass<CTeamRelativeParticleSystem>.NativeName => "CTeamRelativeParticleSystem";
 
 		private static readonly SchemaField __m_iEnemyEffectIndex = new("CTeamRelativeParticleSystem", "m_iEnemyEffectIndex");
-		/// <summary><c>CStrongHandle&lt;InfoForResourceTypeIParticleSystemDefinition&gt;</c>. No typed mapping yet: read it through its address.</summary>
-		public RawField m_iEnemyEffectIndex => Raw(__m_iEnemyEffectIndex, "CStrongHandle<InfoForResourceTypeIParticleSystemDefinition>");
+		/// <summary><c>CStrongHandle&lt;InfoForResourceTypeIParticleSystemDefinition&gt;</c>. Networked in build 6779: a write is sent to clients.</summary>
+		public ResourceHandle m_iEnemyEffectIndex { get => Get<ResourceHandle>(__m_iEnemyEffectIndex); set => Set(__m_iEnemyEffectIndex, value); }
 
 		private static readonly SchemaField __m_iFriendlyEffectIndex = new("CTeamRelativeParticleSystem", "m_iFriendlyEffectIndex");
-		/// <summary><c>CStrongHandle&lt;InfoForResourceTypeIParticleSystemDefinition&gt;</c>. No typed mapping yet: read it through its address.</summary>
-		public RawField m_iFriendlyEffectIndex => Raw(__m_iFriendlyEffectIndex, "CStrongHandle<InfoForResourceTypeIParticleSystemDefinition>");
+		/// <summary><c>CStrongHandle&lt;InfoForResourceTypeIParticleSystemDefinition&gt;</c>. Networked in build 6779: a write is sent to clients.</summary>
+		public ResourceHandle m_iFriendlyEffectIndex { get => Get<ResourceHandle>(__m_iFriendlyEffectIndex); set => Set(__m_iFriendlyEffectIndex, value); }
 
 		private static readonly SchemaField __m_iszEnemyEffectName = new("CTeamRelativeParticleSystem", "m_iszEnemyEffectName");
 		/// <summary><c>CUtlSymbolLarge</c>.</summary>

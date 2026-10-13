@@ -15,6 +15,6 @@ public static partial class Schema {
 
 		private static readonly SchemaField __m_vecGangsters = new("CCitadel_Ability_SummonGangster", "m_vecGangsters");
 		/// <summary><c>CUtlVector&lt;CHandle&lt;CNPC_YakuzaGangster&gt;&gt;</c>.</summary>
-		public SchemaHandleList<CNPC_YakuzaGangster> m_vecGangsters => new(this, __m_vecGangsters, -1);
+		public SchemaHandleList<CNPC_YakuzaGangster> m_vecGangsters => new(this, __m_vecGangsters, ListStorage.Vector);
 	}
 }

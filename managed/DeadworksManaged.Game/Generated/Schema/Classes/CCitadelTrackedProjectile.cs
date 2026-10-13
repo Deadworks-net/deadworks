@@ -31,15 +31,15 @@ public static partial class Schema {
 
 		private static readonly SchemaField __m_flTrackingStartTime = new("CCitadelTrackedProjectile", "m_flTrackingStartTime");
 		/// <summary><c>GameTime_t</c>.</summary>
-		public float m_flTrackingStartTime { get => Get<float>(__m_flTrackingStartTime); set => Set(__m_flTrackingStartTime, value); }
+		public GameTime m_flTrackingStartTime { get => Get<GameTime>(__m_flTrackingStartTime); set => Set(__m_flTrackingStartTime, value); }
 
 		private static readonly SchemaField __m_flTrackingWindowEnd = new("CCitadelTrackedProjectile", "m_flTrackingWindowEnd");
 		/// <summary><c>GameTime_t</c>.</summary>
-		public float m_flTrackingWindowEnd { get => Get<float>(__m_flTrackingWindowEnd); set => Set(__m_flTrackingWindowEnd, value); }
+		public GameTime m_flTrackingWindowEnd { get => Get<GameTime>(__m_flTrackingWindowEnd); set => Set(__m_flTrackingWindowEnd, value); }
 
 		private static readonly SchemaField __m_flTrackingWindowStart = new("CCitadelTrackedProjectile", "m_flTrackingWindowStart");
 		/// <summary><c>GameTime_t</c>.</summary>
-		public float m_flTrackingWindowStart { get => Get<float>(__m_flTrackingWindowStart); set => Set(__m_flTrackingWindowStart, value); }
+		public GameTime m_flTrackingWindowStart { get => Get<GameTime>(__m_flTrackingWindowStart); set => Set(__m_flTrackingWindowStart, value); }
 
 		private static readonly SchemaField __m_hTarget = new("CCitadelTrackedProjectile", "m_hTarget");
 		/// <summary><c>CHandle&lt;CBaseEntity&gt;</c>.</summary>

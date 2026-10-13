@@ -15,7 +15,7 @@ public static partial class Schema {
 
 		private static readonly SchemaField __m_flNextSearchTime = new("CCitadel_Gunslinger_DemonMark", "m_flNextSearchTime");
 		/// <summary><c>GameTime_t</c>.</summary>
-		public float m_flNextSearchTime { get => Get<float>(__m_flNextSearchTime); set => Set(__m_flNextSearchTime, value); }
+		public GameTime m_flNextSearchTime { get => Get<GameTime>(__m_flNextSearchTime); set => Set(__m_flNextSearchTime, value); }
 
 		/// <summary>The data entry this was created from, as <see cref="CCitadel_Gunslinger_DemonMarkVData"/>, or null if it has none.</summary>
 		public new CCitadel_Gunslinger_DemonMarkVData? VData => SubclassVData<CCitadel_Gunslinger_DemonMarkVData>();

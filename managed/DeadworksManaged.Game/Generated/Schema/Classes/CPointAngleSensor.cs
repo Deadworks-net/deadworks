@@ -47,7 +47,7 @@ public static partial class Schema {
 
 		private static readonly SchemaField __m_flFacingTime = new("CPointAngleSensor", "m_flFacingTime");
 		/// <summary><c>GameTime_t</c>.</summary>
-		public float m_flFacingTime { get => Get<float>(__m_flFacingTime); set => Set(__m_flFacingTime, value); }
+		public GameTime m_flFacingTime { get => Get<GameTime>(__m_flFacingTime); set => Set(__m_flFacingTime, value); }
 
 		private static readonly SchemaField __m_hLookAtEntity = new("CPointAngleSensor", "m_hLookAtEntity");
 		/// <summary><c>CHandle&lt;CBaseEntity&gt;</c>.</summary>

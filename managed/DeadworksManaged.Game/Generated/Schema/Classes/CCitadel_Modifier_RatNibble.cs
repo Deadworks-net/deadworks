@@ -15,7 +15,7 @@ public static partial class Schema {
 
 		private static readonly SchemaField __m_flDestroyTime = new("CCitadel_Modifier_RatNibble", "m_flDestroyTime");
 		/// <summary><c>GameTime_t</c>.</summary>
-		public float m_flDestroyTime { get => Get<float>(__m_flDestroyTime); set => Set(__m_flDestroyTime, value); }
+		public GameTime m_flDestroyTime { get => Get<GameTime>(__m_flDestroyTime); set => Set(__m_flDestroyTime, value); }
 
 		private static readonly SchemaField __m_nArmorStacks = new("CCitadel_Modifier_RatNibble", "m_nArmorStacks");
 		/// <summary><c>int32</c>.</summary>
@@ -27,7 +27,7 @@ public static partial class Schema {
 
 		private static readonly SchemaField __m_vecRatParticles = new("CCitadel_Modifier_RatNibble", "m_vecRatParticles");
 		/// <summary><c>CUtlVector&lt;ParticleIndex_t&gt;</c>.</summary>
-		public SchemaValueList<int> m_vecRatParticles => new(this, __m_vecRatParticles, -1);
+		public SchemaValueList<int> m_vecRatParticles => new(this, __m_vecRatParticles, ListStorage.Vector);
 
 		/// <summary>The data entry this was created from, as <see cref="CCitadel_Modifier_RatNibbleVData"/>, or null if it has none.</summary>
 		public new CCitadel_Modifier_RatNibbleVData? VData => ModifierData<CCitadel_Modifier_RatNibbleVData>();

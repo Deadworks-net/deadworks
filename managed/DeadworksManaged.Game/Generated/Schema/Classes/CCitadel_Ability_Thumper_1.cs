@@ -27,6 +27,6 @@ public static partial class Schema {
 
 		private static readonly SchemaField __m_vecHitEntities = new("CCitadel_Ability_Thumper_1", "m_vecHitEntities");
 		/// <summary><c>CUtlVector&lt;CHandle&lt;CBaseEntity&gt;&gt;</c>.</summary>
-		public SchemaHandleList<CBaseEntity> m_vecHitEntities => new(this, __m_vecHitEntities, -1);
+		public SchemaHandleList<CBaseEntity> m_vecHitEntities => new(this, __m_vecHitEntities, ListStorage.Vector);
 	}
 }

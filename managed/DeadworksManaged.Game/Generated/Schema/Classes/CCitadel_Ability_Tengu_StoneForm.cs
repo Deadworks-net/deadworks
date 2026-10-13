@@ -14,28 +14,28 @@ public static partial class Schema {
 		static string ISchemaClass<CCitadel_Ability_Tengu_StoneForm>.NativeName => "CCitadel_Ability_Tengu_StoneForm";
 
 		private static readonly SchemaField __m_bFalling = new("CCitadel_Ability_Tengu_StoneForm", "m_bFalling");
-		/// <summary><c>bool</c>.</summary>
+		/// <summary><c>bool</c>. Networked in build 6779: a write is sent to clients.</summary>
 		public bool m_bFalling { get => Get<bool>(__m_bFalling); set => Set(__m_bFalling, value); }
 
 		private static readonly SchemaField __m_bInStoneForm = new("CCitadel_Ability_Tengu_StoneForm", "m_bInStoneForm");
-		/// <summary><c>bool</c>.</summary>
+		/// <summary><c>bool</c>. Networked in build 6779: a write is sent to clients.</summary>
 		public bool m_bInStoneForm { get => Get<bool>(__m_bInStoneForm); set => Set(__m_bInStoneForm, value); }
 
 		private static readonly SchemaField __m_bLanded = new("CCitadel_Ability_Tengu_StoneForm", "m_bLanded");
-		/// <summary><c>bool</c>.</summary>
+		/// <summary><c>bool</c>. Networked in build 6779: a write is sent to clients.</summary>
 		public bool m_bLanded { get => Get<bool>(__m_bLanded); set => Set(__m_bLanded, value); }
 
 		private static readonly SchemaField __m_flLandedTime = new("CCitadel_Ability_Tengu_StoneForm", "m_flLandedTime");
-		/// <summary><c>GameTime_t</c>.</summary>
-		public float m_flLandedTime { get => Get<float>(__m_flLandedTime); set => Set(__m_flLandedTime, value); }
+		/// <summary><c>GameTime_t</c>. Networked in build 6779: a write is sent to clients.</summary>
+		public GameTime m_flLandedTime { get => Get<GameTime>(__m_flLandedTime); set => Set(__m_flLandedTime, value); }
 
 		private static readonly SchemaField __m_flStartHeight = new("CCitadel_Ability_Tengu_StoneForm", "m_flStartHeight");
-		/// <summary><c>float32</c>.</summary>
+		/// <summary><c>float32</c>. Networked in build 6779: a write is sent to clients.</summary>
 		public float m_flStartHeight { get => Get<float>(__m_flStartHeight); set => Set(__m_flStartHeight, value); }
 
 		private static readonly SchemaField __m_flStartTime = new("CCitadel_Ability_Tengu_StoneForm", "m_flStartTime");
-		/// <summary><c>GameTime_t</c>.</summary>
-		public float m_flStartTime { get => Get<float>(__m_flStartTime); set => Set(__m_flStartTime, value); }
+		/// <summary><c>GameTime_t</c>. Networked in build 6779: a write is sent to clients.</summary>
+		public GameTime m_flStartTime { get => Get<GameTime>(__m_flStartTime); set => Set(__m_flStartTime, value); }
 
 		private static readonly SchemaField __m_nStoneFormEffect = new("CCitadel_Ability_Tengu_StoneForm", "m_nStoneFormEffect");
 		/// <summary><c>ParticleIndex_t</c>.</summary>
@@ -43,7 +43,7 @@ public static partial class Schema {
 
 		private static readonly SchemaField __m_vecHitEntities = new("CCitadel_Ability_Tengu_StoneForm", "m_vecHitEntities");
 		/// <summary><c>CUtlVector&lt;CHandle&lt;CBaseEntity&gt;&gt;</c>.</summary>
-		public SchemaHandleList<CBaseEntity> m_vecHitEntities => new(this, __m_vecHitEntities, -1);
+		public SchemaHandleList<CBaseEntity> m_vecHitEntities => new(this, __m_vecHitEntities, ListStorage.Vector);
 
 		/// <summary>The data entry this was created from, as <see cref="CCitadel_Ability_Tengu_StoneFormVData"/>, or null if it has none.</summary>
 		public new CCitadel_Ability_Tengu_StoneFormVData? VData => SubclassVData<CCitadel_Ability_Tengu_StoneFormVData>();

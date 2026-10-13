@@ -14,11 +14,11 @@ public static partial class Schema {
 		static string ISchemaClass<CCitadel_Ability_ProximityRitual>.NativeName => "CCitadel_Ability_ProximityRitual";
 
 		private static readonly SchemaField __m_eState = new("CCitadel_Ability_ProximityRitual", "m_eState");
-		/// <summary><c>ECatStatueState_t</c>.</summary>
+		/// <summary><c>ECatStatueState_t</c>. Networked in build 6779: a write is sent to clients.</summary>
 		public ECatStatueState_t m_eState { get => Get<ECatStatueState_t>(__m_eState); set => Set(__m_eState, value); }
 
 		private static readonly SchemaField __m_hStatue = new("CCitadel_Ability_ProximityRitual", "m_hStatue");
-		/// <summary><c>CHandle&lt;CBaseEntity&gt;</c>.</summary>
+		/// <summary><c>CHandle&lt;CBaseEntity&gt;</c>. Networked in build 6779: a write is sent to clients.</summary>
 		public CBaseEntity? m_hStatue { get => GetHandle<CBaseEntity>(__m_hStatue); set => SetHandle(__m_hStatue, value); }
 
 		private static readonly SchemaField __m_iCatRecallHealth = new("CCitadel_Ability_ProximityRitual", "m_iCatRecallHealth");
@@ -31,7 +31,7 @@ public static partial class Schema {
 
 		private static readonly SchemaField __m_tCatRecallTime = new("CCitadel_Ability_ProximityRitual", "m_tCatRecallTime");
 		/// <summary><c>GameTime_t</c>.</summary>
-		public float m_tCatRecallTime { get => Get<float>(__m_tCatRecallTime); set => Set(__m_tCatRecallTime, value); }
+		public GameTime m_tCatRecallTime { get => Get<GameTime>(__m_tCatRecallTime); set => Set(__m_tCatRecallTime, value); }
 
 		private static readonly SchemaField __m_vLaunchPosition = new("CCitadel_Ability_ProximityRitual", "m_vLaunchPosition");
 		/// <summary><c>VectorWS</c>.</summary>

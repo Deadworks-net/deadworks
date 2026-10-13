@@ -30,7 +30,7 @@ public static partial class Schema {
 		public string m_sGroupName => GetString(__m_sGroupName);
 
 		private static readonly SchemaField __m_vecWorldOffset = new("SPAWNGROUP_HEADER", "m_vecWorldOffset");
-		/// <summary><c>matrix3x4a_t</c>. No typed mapping yet: read it through its address.</summary>
-		public RawField m_vecWorldOffset => Raw(__m_vecWorldOffset, "matrix3x4a_t");
+		/// <summary><c>matrix3x4a_t</c>.</summary>
+		public Matrix3x4 m_vecWorldOffset { get => Get<Matrix3x4>(__m_vecWorldOffset); set => Set(__m_vecWorldOffset, value); }
 	}
 }

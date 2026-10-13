@@ -23,11 +23,11 @@ public static partial class Schema {
 
 		private static readonly SchemaField __m_flTimeCurTaskStarted = new("AIScheduleState_t", "m_flTimeCurTaskStarted");
 		/// <summary><c>GameTime_t</c>.</summary>
-		public float m_flTimeCurTaskStarted { get => Get<float>(__m_flTimeCurTaskStarted); set => Set(__m_flTimeCurTaskStarted, value); }
+		public GameTime m_flTimeCurTaskStarted { get => Get<GameTime>(__m_flTimeCurTaskStarted); set => Set(__m_flTimeCurTaskStarted, value); }
 
 		private static readonly SchemaField __m_flTimeStarted = new("AIScheduleState_t", "m_flTimeStarted");
 		/// <summary><c>GameTime_t</c>.</summary>
-		public float m_flTimeStarted { get => Get<float>(__m_flTimeStarted); set => Set(__m_flTimeStarted, value); }
+		public GameTime m_flTimeStarted { get => Get<GameTime>(__m_flTimeStarted); set => Set(__m_flTimeStarted, value); }
 
 		private static readonly SchemaField __m_nCurTask = new("AIScheduleState_t", "m_nCurTask");
 		/// <summary><c>int32</c>.</summary>

@@ -23,10 +23,10 @@ public static partial class Schema {
 
 		private static readonly SchemaField __m_vecAbilityPropertiesBlock = new("AbilitySectionInfo_t", "m_vecAbilityPropertiesBlock");
 		/// <summary><c>CUtlVector&lt;SectionProperties_t&gt;</c>. What Ability Property do we put in this block?.</summary>
-		public SchemaObjectList<SectionProperties_t> m_vecAbilityPropertiesBlock => new(this, __m_vecAbilityPropertiesBlock, -1);
+		public SchemaObjectList<SectionProperties_t> m_vecAbilityPropertiesBlock => new(this, __m_vecAbilityPropertiesBlock, ListStorage.Vector);
 
 		private static readonly SchemaField __m_vecBasicProperties = new("AbilitySectionInfo_t", "m_vecBasicProperties");
 		/// <summary><c>CUtlVector&lt;CUtlString&gt;</c>. Additional Ability Properties that are demoted compared to the Section Ability Properties.</summary>
-		public SchemaStringList m_vecBasicProperties => new(this, __m_vecBasicProperties, -1);
+		public SchemaStringList m_vecBasicProperties => new(this, __m_vecBasicProperties, ListStorage.Vector);
 	}
 }

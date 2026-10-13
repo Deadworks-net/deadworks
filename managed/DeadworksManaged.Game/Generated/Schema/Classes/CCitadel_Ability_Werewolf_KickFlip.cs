@@ -14,16 +14,16 @@ public static partial class Schema {
 		static string ISchemaClass<CCitadel_Ability_Werewolf_KickFlip>.NativeName => "CCitadel_Ability_Werewolf_KickFlip";
 
 		private static readonly SchemaField __m_bIsLeaping = new("CCitadel_Ability_Werewolf_KickFlip", "m_bIsLeaping");
-		/// <summary><c>bool</c>.</summary>
+		/// <summary><c>bool</c>. Networked in build 6779: a write is sent to clients.</summary>
 		public bool m_bIsLeaping { get => Get<bool>(__m_bIsLeaping); set => Set(__m_bIsLeaping, value); }
 
 		private static readonly SchemaField __m_tLeapOffTime = new("CCitadel_Ability_Werewolf_KickFlip", "m_tLeapOffTime");
-		/// <summary><c>GameTime_t</c>.</summary>
-		public float m_tLeapOffTime { get => Get<float>(__m_tLeapOffTime); set => Set(__m_tLeapOffTime, value); }
+		/// <summary><c>GameTime_t</c>. Networked in build 6779: a write is sent to clients.</summary>
+		public GameTime m_tLeapOffTime { get => Get<GameTime>(__m_tLeapOffTime); set => Set(__m_tLeapOffTime, value); }
 
 		private static readonly SchemaField __m_tLeapStartTime = new("CCitadel_Ability_Werewolf_KickFlip", "m_tLeapStartTime");
-		/// <summary><c>GameTime_t</c>.</summary>
-		public float m_tLeapStartTime { get => Get<float>(__m_tLeapStartTime); set => Set(__m_tLeapStartTime, value); }
+		/// <summary><c>GameTime_t</c>. Networked in build 6779: a write is sent to clients.</summary>
+		public GameTime m_tLeapStartTime { get => Get<GameTime>(__m_tLeapStartTime); set => Set(__m_tLeapStartTime, value); }
 
 		/// <summary>The data entry this was created from, as <see cref="CCitadel_Ability_Werewolf_KickFlipVData"/>, or null if it has none.</summary>
 		public new CCitadel_Ability_Werewolf_KickFlipVData? VData => SubclassVData<CCitadel_Ability_Werewolf_KickFlipVData>();

@@ -22,7 +22,7 @@ public static partial class Schema {
 		public bool m_bTrailAutoSpace { get => Get<bool>(__m_bTrailAutoSpace); set => Set(__m_bTrailAutoSpace, value); }
 
 		private static readonly SchemaField __m_flLaunchSpeed = new("CCitadelCatapultTrigger", "m_flLaunchSpeed");
-		/// <summary><c>float32</c>.</summary>
+		/// <summary><c>float32</c>. Networked in build 6779: a write is sent to clients.</summary>
 		public float m_flLaunchSpeed { get => Get<float>(__m_flLaunchSpeed); set => Set(__m_flLaunchSpeed, value); }
 
 		private static readonly SchemaField __m_flTrailSpawnInterval = new("CCitadelCatapultTrigger", "m_flTrailSpawnInterval");
@@ -50,7 +50,7 @@ public static partial class Schema {
 		public string m_nameTarget { get => GetString(__m_nameTarget); set => SetString(__m_nameTarget, value); }
 
 		private static readonly SchemaField __m_vLaunchTarget = new("CCitadelCatapultTrigger", "m_vLaunchTarget");
-		/// <summary><c>VectorWS</c>.</summary>
+		/// <summary><c>VectorWS</c>. Networked in build 6779: a write is sent to clients.</summary>
 		public Vector3 m_vLaunchTarget { get => Get<Vector3>(__m_vLaunchTarget); set => Set(__m_vLaunchTarget, value); }
 
 		/// <summary>Fires the <c>SpawnPickupTrail</c> input. Start laying the configured pickups along the launch arc now.</summary>

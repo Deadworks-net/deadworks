@@ -30,8 +30,8 @@ public static partial class Schema {
 		public Hull_t m_eHull { get => Get<Hull_t>(__m_eHull); set => Set(__m_eHull, value); }
 
 		private static readonly SchemaField __m_hMyWearables = new("CBaseCombatCharacter", "m_hMyWearables");
-		/// <summary><c>CNetworkUtlVectorBase&lt;CHandle&lt;CEconWearable&gt;&gt;</c>.</summary>
-		public SchemaHandleList<CEconWearable> m_hMyWearables => new(this, __m_hMyWearables, -1);
+		/// <summary><c>CNetworkUtlVectorBase&lt;CHandle&lt;CEconWearable&gt;&gt;</c>. Networked in build 6779: a write is sent to clients.</summary>
+		public SchemaHandleList<CEconWearable> m_hMyWearables => new(this, __m_hMyWearables, ListStorage.Vector);
 
 		private static readonly SchemaField __m_impactEnergyScale = new("CBaseCombatCharacter", "m_impactEnergyScale");
 		/// <summary><c>float32</c>.</summary>
@@ -51,7 +51,7 @@ public static partial class Schema {
 
 		private static readonly SchemaField __m_vecRelationships = new("CBaseCombatCharacter", "m_vecRelationships");
 		/// <summary><c>CUtlVector&lt;RelationshipOverride_t&gt;</c>.</summary>
-		public SchemaObjectList<RelationshipOverride_t> m_vecRelationships => new(this, __m_vecRelationships, -1);
+		public SchemaObjectList<RelationshipOverride_t> m_vecRelationships => new(this, __m_vecRelationships, ListStorage.Vector);
 
 		/// <summary>Fires the <c>SetRelationship</c> input.</summary>
 		public void InputSetRelationship(string value) => FireInput("SetRelationship", value);

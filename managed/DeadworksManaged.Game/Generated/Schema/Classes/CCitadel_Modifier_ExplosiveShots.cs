@@ -19,6 +19,6 @@ public static partial class Schema {
 
 		private static readonly SchemaField __m_vecHitEnts = new("CCitadel_Modifier_ExplosiveShots", "m_vecHitEnts");
 		/// <summary><c>CUtlVector&lt;CCitadel_Modifier_ExplosiveShots::BulletEntityPair_t&gt;</c>.</summary>
-		public SchemaObjectList<CCitadel_Modifier_ExplosiveShots__BulletEntityPair_t> m_vecHitEnts => new(this, __m_vecHitEnts, -1);
+		public SchemaObjectList<CCitadel_Modifier_ExplosiveShots__BulletEntityPair_t> m_vecHitEnts => new(this, __m_vecHitEnts, ListStorage.Vector);
 	}
 }

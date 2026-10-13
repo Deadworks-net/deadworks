@@ -39,19 +39,19 @@ public static partial class Schema {
 
 		private static readonly SchemaField __m_flOvertimeRespawnTimeIncrease = new("GameModeStreetBrawl_t", "m_flOvertimeRespawnTimeIncrease");
 		/// <summary><c>CUtlVector&lt;float32&gt;</c>.</summary>
-		public SchemaValueList<float> m_flOvertimeRespawnTimeIncrease => new(this, __m_flOvertimeRespawnTimeIncrease, -1);
+		public SchemaValueList<float> m_flOvertimeRespawnTimeIncrease => new(this, __m_flOvertimeRespawnTimeIncrease, ListStorage.Vector);
 
 		private static readonly SchemaField __m_flOvertimeRespawnTimeIncreaseUrgent = new("GameModeStreetBrawl_t", "m_flOvertimeRespawnTimeIncreaseUrgent");
 		/// <summary><c>CUtlVector&lt;float32&gt;</c>.</summary>
-		public SchemaValueList<float> m_flOvertimeRespawnTimeIncreaseUrgent => new(this, __m_flOvertimeRespawnTimeIncreaseUrgent, -1);
+		public SchemaValueList<float> m_flOvertimeRespawnTimeIncreaseUrgent => new(this, __m_flOvertimeRespawnTimeIncreaseUrgent, ListStorage.Vector);
 
 		private static readonly SchemaField __m_flOvertimeTrooperDamageScale = new("GameModeStreetBrawl_t", "m_flOvertimeTrooperDamageScale");
 		/// <summary><c>CUtlVector&lt;float32&gt;</c>.</summary>
-		public SchemaValueList<float> m_flOvertimeTrooperDamageScale => new(this, __m_flOvertimeTrooperDamageScale, -1);
+		public SchemaValueList<float> m_flOvertimeTrooperDamageScale => new(this, __m_flOvertimeTrooperDamageScale, ListStorage.Vector);
 
 		private static readonly SchemaField __m_flOvertimeTrooperHealthScale = new("GameModeStreetBrawl_t", "m_flOvertimeTrooperHealthScale");
 		/// <summary><c>CUtlVector&lt;float32&gt;</c>.</summary>
-		public SchemaValueList<float> m_flOvertimeTrooperHealthScale => new(this, __m_flOvertimeTrooperHealthScale, -1);
+		public SchemaValueList<float> m_flOvertimeTrooperHealthScale => new(this, __m_flOvertimeTrooperHealthScale, ListStorage.Vector);
 
 		private static readonly SchemaField __m_flPreScoringTime = new("GameModeStreetBrawl_t", "m_flPreScoringTime");
 		/// <summary><c>float32</c>.</summary>
@@ -91,7 +91,7 @@ public static partial class Schema {
 
 		private static readonly SchemaField __m_flTrooperSpawnTimer = new("GameModeStreetBrawl_t", "m_flTrooperSpawnTimer");
 		/// <summary><c>CUtlVector&lt;float32&gt;</c>.</summary>
-		public SchemaValueList<float> m_flTrooperSpawnTimer => new(this, __m_flTrooperSpawnTimer, -1);
+		public SchemaValueList<float> m_flTrooperSpawnTimer => new(this, __m_flTrooperSpawnTimer, ListStorage.Vector);
 
 		private static readonly SchemaField __m_flZipBoostCooldownOnStart = new("GameModeStreetBrawl_t", "m_flZipBoostCooldownOnStart");
 		/// <summary><c>float32</c>.</summary>
@@ -134,55 +134,55 @@ public static partial class Schema {
 		public int m_nTier2BonusHealth { get => Get<int>(__m_nTier2BonusHealth); set => Set(__m_nTier2BonusHealth, value); }
 
 		private static readonly SchemaField __m_strAmberTrooperPickupToDrop = new("GameModeStreetBrawl_t", "m_strAmberTrooperPickupToDrop");
-		/// <summary><c>CSubclassName</c>. No typed mapping yet: read it through its address.</summary>
-		public RawField m_strAmberTrooperPickupToDrop => Raw(__m_strAmberTrooperPickupToDrop, "CSubclassName");
+		/// <summary><c>CSubclassName</c>.</summary>
+		public string m_strAmberTrooperPickupToDrop => GetString(__m_strAmberTrooperPickupToDrop);
 
 		private static readonly SchemaField __m_strSapphireTrooperPickupToDrop = new("GameModeStreetBrawl_t", "m_strSapphireTrooperPickupToDrop");
-		/// <summary><c>CSubclassName</c>. No typed mapping yet: read it through its address.</summary>
-		public RawField m_strSapphireTrooperPickupToDrop => Raw(__m_strSapphireTrooperPickupToDrop, "CSubclassName");
+		/// <summary><c>CSubclassName</c>.</summary>
+		public string m_strSapphireTrooperPickupToDrop => GetString(__m_strSapphireTrooperPickupToDrop);
 
 		private static readonly SchemaField __m_strTrooperModifier = new("GameModeStreetBrawl_t", "m_strTrooperModifier");
-		/// <summary><c>CSubclassName</c>. No typed mapping yet: read it through its address.</summary>
-		public RawField m_strTrooperModifier => Raw(__m_strTrooperModifier, "CSubclassName");
+		/// <summary><c>CSubclassName</c>.</summary>
+		public string m_strTrooperModifier => GetString(__m_strTrooperModifier);
 
 		private static readonly SchemaField __m_vecAPPerRound = new("GameModeStreetBrawl_t", "m_vecAPPerRound");
 		/// <summary><c>CUtlVector&lt;int32&gt;</c>.</summary>
-		public SchemaValueList<int> m_vecAPPerRound => new(this, __m_vecAPPerRound, -1);
+		public SchemaValueList<int> m_vecAPPerRound => new(this, __m_vecAPPerRound, ListStorage.Vector);
 
 		private static readonly SchemaField __m_vecBuyTime = new("GameModeStreetBrawl_t", "m_vecBuyTime");
 		/// <summary><c>CUtlVector&lt;float32&gt;</c>.</summary>
-		public SchemaValueList<float> m_vecBuyTime => new(this, __m_vecBuyTime, -1);
+		public SchemaValueList<float> m_vecBuyTime => new(this, __m_vecBuyTime, ListStorage.Vector);
 
 		private static readonly SchemaField __m_vecGoldPerRound = new("GameModeStreetBrawl_t", "m_vecGoldPerRound");
 		/// <summary><c>CUtlVector&lt;int32&gt;</c>.</summary>
-		public SchemaValueList<int> m_vecGoldPerRound => new(this, __m_vecGoldPerRound, -1);
+		public SchemaValueList<int> m_vecGoldPerRound => new(this, __m_vecGoldPerRound, ListStorage.Vector);
 
 		private static readonly SchemaField __m_vecItemDraftRerollsPerRound = new("GameModeStreetBrawl_t", "m_vecItemDraftRerollsPerRound");
 		/// <summary><c>CUtlVector&lt;int32&gt;</c>.</summary>
-		public SchemaValueList<int> m_vecItemDraftRerollsPerRound => new(this, __m_vecItemDraftRerollsPerRound, -1);
+		public SchemaValueList<int> m_vecItemDraftRerollsPerRound => new(this, __m_vecItemDraftRerollsPerRound, ListStorage.Vector);
 
 		private static readonly SchemaField __m_vecItemDraftRoundsPerGameRound = new("GameModeStreetBrawl_t", "m_vecItemDraftRoundsPerGameRound");
 		/// <summary><c>CUtlVector&lt;StreetBrawlGameRoundDrafts_t&gt;</c>.</summary>
-		public SchemaObjectList<StreetBrawlGameRoundDrafts_t> m_vecItemDraftRoundsPerGameRound => new(this, __m_vecItemDraftRoundsPerGameRound, -1);
+		public SchemaObjectList<StreetBrawlGameRoundDrafts_t> m_vecItemDraftRoundsPerGameRound => new(this, __m_vecItemDraftRoundsPerGameRound, ListStorage.Vector);
 
 		private static readonly SchemaField __m_vecObjectiveMaxHealth = new("GameModeStreetBrawl_t", "m_vecObjectiveMaxHealth");
 		/// <summary><c>CUtlVector&lt;int32&gt;</c>.</summary>
-		public SchemaValueList<int> m_vecObjectiveMaxHealth => new(this, __m_vecObjectiveMaxHealth, -1);
+		public SchemaValueList<int> m_vecObjectiveMaxHealth => new(this, __m_vecObjectiveMaxHealth, ListStorage.Vector);
 
 		private static readonly SchemaField __m_vecPreBuyTime = new("GameModeStreetBrawl_t", "m_vecPreBuyTime");
 		/// <summary><c>CUtlVector&lt;float32&gt;</c>.</summary>
-		public SchemaValueList<float> m_vecPreBuyTime => new(this, __m_vecPreBuyTime, -1);
+		public SchemaValueList<float> m_vecPreBuyTime => new(this, __m_vecPreBuyTime, ListStorage.Vector);
 
 		private static readonly SchemaField __m_vecRespawnTimes = new("GameModeStreetBrawl_t", "m_vecRespawnTimes");
 		/// <summary><c>CUtlVector&lt;float32&gt;</c>.</summary>
-		public SchemaValueList<float> m_vecRespawnTimes => new(this, __m_vecRespawnTimes, -1);
+		public SchemaValueList<float> m_vecRespawnTimes => new(this, __m_vecRespawnTimes, ListStorage.Vector);
 
 		private static readonly SchemaField __m_vecRoundLengthMinutes = new("GameModeStreetBrawl_t", "m_vecRoundLengthMinutes");
 		/// <summary><c>CUtlVector&lt;float32&gt;</c>.</summary>
-		public SchemaValueList<float> m_vecRoundLengthMinutes => new(this, __m_vecRoundLengthMinutes, -1);
+		public SchemaValueList<float> m_vecRoundLengthMinutes => new(this, __m_vecRoundLengthMinutes, ListStorage.Vector);
 
 		private static readonly SchemaField __m_vecRoundLengthMinutesUrgent = new("GameModeStreetBrawl_t", "m_vecRoundLengthMinutesUrgent");
 		/// <summary><c>CUtlVector&lt;float32&gt;</c>.</summary>
-		public SchemaValueList<float> m_vecRoundLengthMinutesUrgent => new(this, __m_vecRoundLengthMinutesUrgent, -1);
+		public SchemaValueList<float> m_vecRoundLengthMinutesUrgent => new(this, __m_vecRoundLengthMinutesUrgent, ListStorage.Vector);
 	}
 }

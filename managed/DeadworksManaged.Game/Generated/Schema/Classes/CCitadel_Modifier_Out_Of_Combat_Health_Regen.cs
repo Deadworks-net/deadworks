@@ -15,6 +15,6 @@ public static partial class Schema {
 
 		private static readonly SchemaField __m_LastDamageTaken = new("CCitadel_Modifier_Out_Of_Combat_Health_Regen", "m_LastDamageTaken");
 		/// <summary><c>GameTime_t</c>.</summary>
-		public float m_LastDamageTaken { get => Get<float>(__m_LastDamageTaken); set => Set(__m_LastDamageTaken, value); }
+		public GameTime m_LastDamageTaken { get => Get<GameTime>(__m_LastDamageTaken); set => Set(__m_LastDamageTaken, value); }
 	}
 }

@@ -47,10 +47,10 @@ public static partial class Schema {
 
 		private static readonly SchemaField __m_vecIntervals = new("CRankedSeasonDefinition", "m_vecIntervals");
 		/// <summary><c>CUtlVector&lt;CRankedSeasonIntervalDefinition&gt;</c>.</summary>
-		public SchemaObjectList<CRankedSeasonIntervalDefinition> m_vecIntervals => new(this, __m_vecIntervals, -1);
+		public SchemaObjectList<CRankedSeasonIntervalDefinition> m_vecIntervals => new(this, __m_vecIntervals, ListStorage.Vector);
 
 		private static readonly SchemaField __m_vecValidPartySizes = new("CRankedSeasonDefinition", "m_vecValidPartySizes");
 		/// <summary><c>CUtlVector&lt;uint8&gt;</c>.</summary>
-		public SchemaValueList<byte> m_vecValidPartySizes => new(this, __m_vecValidPartySizes, -1);
+		public SchemaValueList<byte> m_vecValidPartySizes => new(this, __m_vecValidPartySizes, ListStorage.Vector);
 	}
 }

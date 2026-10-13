@@ -15,7 +15,7 @@ public static partial class Schema {
 
 		private static readonly SchemaField __m_flCastTime = new("CCitadel_Modifier_RocketBarrageVolley", "m_flCastTime");
 		/// <summary><c>GameTime_t</c>.</summary>
-		public float m_flCastTime { get => Get<float>(__m_flCastTime); set => Set(__m_flCastTime, value); }
+		public GameTime m_flCastTime { get => Get<GameTime>(__m_flCastTime); set => Set(__m_flCastTime, value); }
 
 		private static readonly SchemaField __m_flFiringInterval = new("CCitadel_Modifier_RocketBarrageVolley", "m_flFiringInterval");
 		/// <summary><c>float32</c>.</summary>
@@ -23,7 +23,7 @@ public static partial class Schema {
 
 		private static readonly SchemaField __m_flNextRocketTime = new("CCitadel_Modifier_RocketBarrageVolley", "m_flNextRocketTime");
 		/// <summary><c>GameTime_t</c>.</summary>
-		public float m_flNextRocketTime { get => Get<float>(__m_flNextRocketTime); set => Set(__m_flNextRocketTime, value); }
+		public GameTime m_flNextRocketTime { get => Get<GameTime>(__m_flNextRocketTime); set => Set(__m_flNextRocketTime, value); }
 
 		private static readonly SchemaField __m_nGrenadesLeft = new("CCitadel_Modifier_RocketBarrageVolley", "m_nGrenadesLeft");
 		/// <summary><c>int32</c>.</summary>

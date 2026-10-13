@@ -15,7 +15,7 @@ public static partial class Schema {
 
 		private static readonly SchemaField __path_queries_speculative = new("AI_DefaultNPC_DebugSnapshotData_t", "path_queries_speculative");
 		/// <summary><c>CUtlVector&lt;AI_DefaultNPC_DebugSnapshotData_t::PathQuery_t&gt;</c>.</summary>
-		public SchemaObjectList<AI_DefaultNPC_DebugSnapshotData_t__PathQuery_t> path_queries_speculative => new(this, __path_queries_speculative, -1);
+		public SchemaObjectList<AI_DefaultNPC_DebugSnapshotData_t__PathQuery_t> path_queries_speculative => new(this, __path_queries_speculative, ListStorage.Vector);
 
 		private static readonly SchemaField __path_query = new("AI_DefaultNPC_DebugSnapshotData_t", "path_query");
 		/// <summary><c>AI_DefaultNPC_DebugSnapshotData_t::PathQuery_t</c>.</summary>
@@ -39,6 +39,6 @@ public static partial class Schema {
 
 		private static readonly SchemaField __tactic_interrupt_conditions = new("AI_DefaultNPC_DebugSnapshotData_t", "tactic_interrupt_conditions");
 		/// <summary><c>CUtlVector&lt;CGlobalSymbol&gt;</c>.</summary>
-		public SchemaStringList tactic_interrupt_conditions => new(this, __tactic_interrupt_conditions, -1);
+		public SchemaStringList tactic_interrupt_conditions => new(this, __tactic_interrupt_conditions, ListStorage.Vector);
 	}
 }

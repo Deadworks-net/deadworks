@@ -14,15 +14,15 @@ public static partial class Schema {
 		static string ISchemaClass<CCitadel_Shield>.NativeName => "CCitadel_Shield";
 
 		private static readonly SchemaField __m_bAllowRotatingUp = new("CCitadel_Shield", "m_bAllowRotatingUp");
-		/// <summary><c>bool</c>.</summary>
+		/// <summary><c>bool</c>. Networked in build 6779: a write is sent to clients.</summary>
 		public bool m_bAllowRotatingUp { get => Get<bool>(__m_bAllowRotatingUp); set => Set(__m_bAllowRotatingUp, value); }
 
 		private static readonly SchemaField __m_bFixedPosition = new("CCitadel_Shield", "m_bFixedPosition");
-		/// <summary><c>bool</c>.</summary>
+		/// <summary><c>bool</c>. Networked in build 6779: a write is sent to clients.</summary>
 		public bool m_bFixedPosition { get => Get<bool>(__m_bFixedPosition); set => Set(__m_bFixedPosition, value); }
 
 		private static readonly SchemaField __m_flShieldOffset = new("CCitadel_Shield", "m_flShieldOffset");
-		/// <summary><c>float32</c>.</summary>
+		/// <summary><c>float32</c>. Networked in build 6779: a write is sent to clients.</summary>
 		public float m_flShieldOffset { get => Get<float>(__m_flShieldOffset); set => Set(__m_flShieldOffset, value); }
 	}
 }

@@ -14,19 +14,19 @@ public static partial class Schema {
 		static string ISchemaClass<PlayOfTheGamePlaybackData_t>.NativeName => "PlayOfTheGamePlaybackData_t";
 
 		private static readonly SchemaField __m_tBeginTimeWithPrewarm = new("PlayOfTheGamePlaybackData_t", "m_tBeginTimeWithPrewarm");
-		/// <summary><c>GameTime_t</c>.</summary>
-		public float m_tBeginTimeWithPrewarm { get => Get<float>(__m_tBeginTimeWithPrewarm); set => Set(__m_tBeginTimeWithPrewarm, value); }
+		/// <summary><c>GameTime_t</c>. Networked in build 6779: a write is sent to clients.</summary>
+		public GameTime m_tBeginTimeWithPrewarm { get => Get<GameTime>(__m_tBeginTimeWithPrewarm); set => Set(__m_tBeginTimeWithPrewarm, value); }
 
 		private static readonly SchemaField __m_tEndTime = new("PlayOfTheGamePlaybackData_t", "m_tEndTime");
-		/// <summary><c>GameTime_t</c>.</summary>
-		public float m_tEndTime { get => Get<float>(__m_tEndTime); set => Set(__m_tEndTime, value); }
+		/// <summary><c>GameTime_t</c>. Networked in build 6779: a write is sent to clients.</summary>
+		public GameTime m_tEndTime { get => Get<GameTime>(__m_tEndTime); set => Set(__m_tEndTime, value); }
 
 		private static readonly SchemaField __m_vecParticipants = new("PlayOfTheGamePlaybackData_t", "m_vecParticipants");
-		/// <summary><c>CNetworkUtlVectorBase&lt;CPlayerSlot&gt;</c>.</summary>
-		public SchemaValueList<int> m_vecParticipants => new(this, __m_vecParticipants, -1);
+		/// <summary><c>CNetworkUtlVectorBase&lt;CPlayerSlot&gt;</c>. Networked in build 6779: a write is sent to clients.</summary>
+		public SchemaValueList<int> m_vecParticipants => new(this, __m_vecParticipants, ListStorage.Vector);
 
 		private static readonly SchemaField __m_vecTriggers = new("PlayOfTheGamePlaybackData_t", "m_vecTriggers");
-		/// <summary><c>CUtlVectorEmbeddedNetworkVar&lt;PlayOfTheGameTrigger_t&gt;</c>.</summary>
-		public SchemaObjectList<PlayOfTheGameTrigger_t> m_vecTriggers => new(this, __m_vecTriggers, -1);
+		/// <summary><c>CUtlVectorEmbeddedNetworkVar&lt;PlayOfTheGameTrigger_t&gt;</c>. Networked in build 6779: a write is sent to clients.</summary>
+		public SchemaObjectList<PlayOfTheGameTrigger_t> m_vecTriggers => new(this, __m_vecTriggers, ListStorage.Vector);
 	}
 }

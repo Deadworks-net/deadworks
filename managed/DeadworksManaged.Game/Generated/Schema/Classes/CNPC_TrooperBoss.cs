@@ -14,7 +14,7 @@ public static partial class Schema {
 		static string ISchemaClass<CNPC_TrooperBoss>.NativeName => "CNPC_TrooperBoss";
 
 		private static readonly SchemaField __m_CCitadelPlayerClipComponent = new("CNPC_TrooperBoss", "m_CCitadelPlayerClipComponent");
-		/// <summary><c>CCitadelPlayerClipComponent</c>.</summary>
+		/// <summary><c>CCitadelPlayerClipComponent</c>. Networked in build 6779: a write is sent to clients.</summary>
 		public CCitadelPlayerClipComponent m_CCitadelPlayerClipComponent => Embedded<CCitadelPlayerClipComponent>(__m_CCitadelPlayerClipComponent);
 
 		private static readonly SchemaField __m_LaneSide = new("CNPC_TrooperBoss", "m_LaneSide");
@@ -22,19 +22,19 @@ public static partial class Schema {
 		public LaneSide_t m_LaneSide { get => Get<LaneSide_t>(__m_LaneSide); set => Set(__m_LaneSide, value); }
 
 		private static readonly SchemaField __m_flFadeOutEnd = new("CNPC_TrooperBoss", "m_flFadeOutEnd");
-		/// <summary><c>GameTime_t</c>.</summary>
-		public float m_flFadeOutEnd { get => Get<float>(__m_flFadeOutEnd); set => Set(__m_flFadeOutEnd, value); }
+		/// <summary><c>GameTime_t</c>. Networked in build 6779: a write is sent to clients.</summary>
+		public GameTime m_flFadeOutEnd { get => Get<GameTime>(__m_flFadeOutEnd); set => Set(__m_flFadeOutEnd, value); }
 
 		private static readonly SchemaField __m_flFadeOutStart = new("CNPC_TrooperBoss", "m_flFadeOutStart");
-		/// <summary><c>GameTime_t</c>.</summary>
-		public float m_flFadeOutStart { get => Get<float>(__m_flFadeOutStart); set => Set(__m_flFadeOutStart, value); }
+		/// <summary><c>GameTime_t</c>. Networked in build 6779: a write is sent to clients.</summary>
+		public GameTime m_flFadeOutStart { get => Get<GameTime>(__m_flFadeOutStart); set => Set(__m_flFadeOutStart, value); }
 
 		private static readonly SchemaField __m_hTrooperSpawnPoint = new("CNPC_TrooperBoss", "m_hTrooperSpawnPoint");
 		/// <summary><c>CHandle&lt;CBaseEntity&gt;</c>.</summary>
 		public CBaseEntity? m_hTrooperSpawnPoint { get => GetHandle<CBaseEntity>(__m_hTrooperSpawnPoint); set => SetHandle(__m_hTrooperSpawnPoint, value); }
 
 		private static readonly SchemaField __m_iLane = new("CNPC_TrooperBoss", "m_iLane");
-		/// <summary><c>int32</c>.</summary>
+		/// <summary><c>int32</c>. Networked in build 6779: a write is sent to clients.</summary>
 		public int m_iLane { get => Get<int>(__m_iLane); set => Set(__m_iLane, value); }
 
 		/// <summary>The data entry this was created from, as <see cref="CNPC_TrooperBossVData"/>, or null if it has none.</summary>

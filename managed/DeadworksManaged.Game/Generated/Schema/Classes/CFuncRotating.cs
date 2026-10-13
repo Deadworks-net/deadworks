@@ -14,8 +14,8 @@ public static partial class Schema {
 		static string ISchemaClass<CFuncRotating>.NativeName => "CFuncRotating";
 
 		private static readonly SchemaField __m_NoiseRunning = new("CFuncRotating", "m_NoiseRunning");
-		/// <summary><c>CGameSoundEventName</c>. No typed mapping yet: read it through its address.</summary>
-		public RawField m_NoiseRunning => Raw(__m_NoiseRunning, "CGameSoundEventName");
+		/// <summary><c>CGameSoundEventName</c>.</summary>
+		public string m_NoiseRunning => GetString(__m_NoiseRunning);
 
 		private static readonly SchemaField __m_OnReachedStart = new("CFuncRotating", "m_OnReachedStart");
 		/// <summary><c>CEntityIOOutput</c>.</summary>

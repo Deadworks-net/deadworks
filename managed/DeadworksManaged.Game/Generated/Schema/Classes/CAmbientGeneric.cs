@@ -38,8 +38,8 @@ public static partial class Schema {
 		public soundlevel_t m_iSoundLevel { get => Get<soundlevel_t>(__m_iSoundLevel); set => Set(__m_iSoundLevel, value); }
 
 		private static readonly SchemaField __m_iszSound = new("CAmbientGeneric", "m_iszSound");
-		/// <summary><c>CGameSoundEventName</c>. No typed mapping yet: read it through its address.</summary>
-		public RawField m_iszSound => Raw(__m_iszSound, "CGameSoundEventName");
+		/// <summary><c>CGameSoundEventName</c>.</summary>
+		public string m_iszSound => GetString(__m_iszSound);
 
 		private static readonly SchemaField __m_nSoundSourceEntIndex = new("CAmbientGeneric", "m_nSoundSourceEntIndex");
 		/// <summary><c>CEntityIndex</c>.</summary>

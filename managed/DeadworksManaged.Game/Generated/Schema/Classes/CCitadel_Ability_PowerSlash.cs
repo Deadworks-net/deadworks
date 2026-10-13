@@ -18,11 +18,11 @@ public static partial class Schema {
 		public int m_nCastParticle { get => Get<int>(__m_nCastParticle); set => Set(__m_nCastParticle, value); }
 
 		private static readonly SchemaField __m_nPowerLevel = new("CCitadel_Ability_PowerSlash", "m_nPowerLevel");
-		/// <summary><c>int32</c>.</summary>
+		/// <summary><c>int32</c>. Networked in build 6779: a write is sent to clients.</summary>
 		public int m_nPowerLevel { get => Get<int>(__m_nPowerLevel); set => Set(__m_nPowerLevel, value); }
 
 		private static readonly SchemaField __m_vecHitTargets = new("CCitadel_Ability_PowerSlash", "m_vecHitTargets");
 		/// <summary><c>CUtlVector&lt;CHandle&lt;CBaseEntity&gt;&gt;</c>.</summary>
-		public SchemaHandleList<CBaseEntity> m_vecHitTargets => new(this, __m_vecHitTargets, -1);
+		public SchemaHandleList<CBaseEntity> m_vecHitTargets => new(this, __m_vecHitTargets, ListStorage.Vector);
 	}
 }

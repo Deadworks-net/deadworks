@@ -14,19 +14,19 @@ public static partial class Schema {
 		static string ISchemaClass<CItemXP>.NativeName => "CItemXP";
 
 		private static readonly SchemaField __m_flAttackableTime = new("CItemXP", "m_flAttackableTime");
-		/// <summary><c>GameTime_t</c>.</summary>
-		public float m_flAttackableTime { get => Get<float>(__m_flAttackableTime); set => Set(__m_flAttackableTime, value); }
+		/// <summary><c>GameTime_t</c>. Networked in build 6779: a write is sent to clients.</summary>
+		public GameTime m_flAttackableTime { get => Get<GameTime>(__m_flAttackableTime); set => Set(__m_flAttackableTime, value); }
 
 		private static readonly SchemaField __m_flEndAttackableTime = new("CItemXP", "m_flEndAttackableTime");
-		/// <summary><c>GameTime_t</c>.</summary>
-		public float m_flEndAttackableTime { get => Get<float>(__m_flEndAttackableTime); set => Set(__m_flEndAttackableTime, value); }
+		/// <summary><c>GameTime_t</c>. Networked in build 6779: a write is sent to clients.</summary>
+		public GameTime m_flEndAttackableTime { get => Get<GameTime>(__m_flEndAttackableTime); set => Set(__m_flEndAttackableTime, value); }
 
 		private static readonly SchemaField __m_nLaunchNum = new("CItemXP", "m_nLaunchNum");
-		/// <summary><c>int32</c>.</summary>
+		/// <summary><c>int32</c>. Networked in build 6779: a write is sent to clients.</summary>
 		public int m_nLaunchNum { get => Get<int>(__m_nLaunchNum); set => Set(__m_nLaunchNum, value); }
 
 		private static readonly SchemaField __m_timeLaunch = new("CItemXP", "m_timeLaunch");
-		/// <summary><c>GameTime_t</c>.</summary>
-		public float m_timeLaunch { get => Get<float>(__m_timeLaunch); set => Set(__m_timeLaunch, value); }
+		/// <summary><c>GameTime_t</c>. Networked in build 6779: a write is sent to clients.</summary>
+		public GameTime m_timeLaunch { get => Get<GameTime>(__m_timeLaunch); set => Set(__m_timeLaunch, value); }
 	}
 }

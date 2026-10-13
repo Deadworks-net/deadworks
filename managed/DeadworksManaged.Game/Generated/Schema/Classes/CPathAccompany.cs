@@ -31,7 +31,7 @@ public static partial class Schema {
 
 		private static readonly SchemaField __m_flLastPathRecalc = new("CPathAccompany", "m_flLastPathRecalc");
 		/// <summary><c>GameTime_t</c>.</summary>
-		public float m_flLastPathRecalc { get => Get<float>(__m_flLastPathRecalc); set => Set(__m_flLastPathRecalc, value); }
+		public GameTime m_flLastPathRecalc { get => Get<GameTime>(__m_flLastPathRecalc); set => Set(__m_flLastPathRecalc, value); }
 
 		private static readonly SchemaField __m_flPathLength = new("CPathAccompany", "m_flPathLength");
 		/// <summary><c>float32</c>.</summary>
@@ -39,14 +39,14 @@ public static partial class Schema {
 
 		private static readonly SchemaField __m_nLastDebugDraw = new("CPathAccompany", "m_nLastDebugDraw");
 		/// <summary><c>GameTime_t</c>.</summary>
-		public float m_nLastDebugDraw { get => Get<float>(__m_nLastDebugDraw); set => Set(__m_nLastDebugDraw, value); }
+		public GameTime m_nLastDebugDraw { get => Get<GameTime>(__m_nLastDebugDraw); set => Set(__m_nLastDebugDraw, value); }
 
 		private static readonly SchemaField __m_vecNodes = new("CPathAccompany", "m_vecNodes");
 		/// <summary><c>CUtlVector&lt;PathAccompanyNode_t&gt;</c>.</summary>
-		public SchemaObjectList<PathAccompanyNode_t> m_vecNodes => new(this, __m_vecNodes, -1);
+		public SchemaObjectList<PathAccompanyNode_t> m_vecNodes => new(this, __m_vecNodes, ListStorage.Vector);
 
 		private static readonly SchemaField __m_xLastParentTransform = new("CPathAccompany", "m_xLastParentTransform");
-		/// <summary><c>CTransform</c>. No typed mapping yet: read it through its address.</summary>
-		public RawField m_xLastParentTransform => Raw(__m_xLastParentTransform, "CTransform");
+		/// <summary><c>CTransform</c>.</summary>
+		public Transform m_xLastParentTransform { get => Get<Transform>(__m_xLastParentTransform); set => Set(__m_xLastParentTransform, value); }
 	}
 }

@@ -47,7 +47,7 @@ public static partial class Schema {
 
 		private static readonly SchemaField __m_flLastDmgTime = new("CTriggerHurt", "m_flLastDmgTime");
 		/// <summary><c>GameTime_t</c>.</summary>
-		public float m_flLastDmgTime { get => Get<float>(__m_flLastDmgTime); set => Set(__m_flLastDmgTime, value); }
+		public GameTime m_flLastDmgTime { get => Get<GameTime>(__m_flLastDmgTime); set => Set(__m_flLastDmgTime, value); }
 
 		private static readonly SchemaField __m_flOriginalDamage = new("CTriggerHurt", "m_flOriginalDamage");
 		/// <summary><c>float32</c>.</summary>
@@ -55,7 +55,7 @@ public static partial class Schema {
 
 		private static readonly SchemaField __m_hurtEntities = new("CTriggerHurt", "m_hurtEntities");
 		/// <summary><c>CUtlVector&lt;CHandle&lt;CBaseEntity&gt;&gt;</c>.</summary>
-		public SchemaHandleList<CBaseEntity> m_hurtEntities => new(this, __m_hurtEntities, -1);
+		public SchemaHandleList<CBaseEntity> m_hurtEntities => new(this, __m_hurtEntities, ListStorage.Vector);
 
 		private static readonly SchemaField __m_hurtThinkPeriod = new("CTriggerHurt", "m_hurtThinkPeriod");
 		/// <summary><c>float32</c>.</summary>

@@ -47,7 +47,7 @@ public static partial class Schema {
 
 		private static readonly SchemaField __m_flNextUseTime = new("CAI_Hint", "m_flNextUseTime");
 		/// <summary><c>GameTime_t</c>.</summary>
-		public float m_flNextUseTime { get => Get<float>(__m_flNextUseTime); set => Set(__m_flNextUseTime, value); }
+		public GameTime m_flNextUseTime { get => Get<GameTime>(__m_flNextUseTime); set => Set(__m_flNextUseTime, value); }
 
 		private static readonly SchemaField __m_hAssociatedEntity = new("CAI_Hint", "m_hAssociatedEntity");
 		/// <summary><c>CHandle&lt;CBaseEntity&gt;</c>.</summary>

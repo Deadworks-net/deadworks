@@ -15,6 +15,6 @@ public static partial class Schema {
 
 		private static readonly SchemaField __m_flNextRandomPositionTime = new("CCitadel_Projectile_SpiderProjectile", "m_flNextRandomPositionTime");
 		/// <summary><c>GameTime_t</c>.</summary>
-		public float m_flNextRandomPositionTime { get => Get<float>(__m_flNextRandomPositionTime); set => Set(__m_flNextRandomPositionTime, value); }
+		public GameTime m_flNextRandomPositionTime { get => Get<GameTime>(__m_flNextRandomPositionTime); set => Set(__m_flNextRandomPositionTime, value); }
 	}
 }

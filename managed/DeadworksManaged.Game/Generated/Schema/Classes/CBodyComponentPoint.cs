@@ -14,7 +14,7 @@ public static partial class Schema {
 		static string ISchemaClass<CBodyComponentPoint>.NativeName => "CBodyComponentPoint";
 
 		private static readonly SchemaField __m_sceneNode = new("CBodyComponentPoint", "m_sceneNode");
-		/// <summary><c>CGameSceneNode</c>.</summary>
+		/// <summary><c>CGameSceneNode</c>. Networked in build 6779: a write is sent to clients.</summary>
 		public CGameSceneNode m_sceneNode => Embedded<CGameSceneNode>(__m_sceneNode);
 	}
 }

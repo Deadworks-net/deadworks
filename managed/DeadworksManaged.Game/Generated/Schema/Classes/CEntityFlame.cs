@@ -14,7 +14,7 @@ public static partial class Schema {
 		static string ISchemaClass<CEntityFlame>.NativeName => "CEntityFlame";
 
 		private static readonly SchemaField __m_bCheapEffect = new("CEntityFlame", "m_bCheapEffect");
-		/// <summary><c>bool</c>.</summary>
+		/// <summary><c>bool</c>. Networked in build 6779: a write is sent to clients.</summary>
 		public bool m_bCheapEffect { get => Get<bool>(__m_bCheapEffect); set => Set(__m_bCheapEffect, value); }
 
 		private static readonly SchemaField __m_bUseHitboxes = new("CEntityFlame", "m_bUseHitboxes");
@@ -31,7 +31,7 @@ public static partial class Schema {
 
 		private static readonly SchemaField __m_flLifetime = new("CEntityFlame", "m_flLifetime");
 		/// <summary><c>GameTime_t</c>.</summary>
-		public float m_flLifetime { get => Get<float>(__m_flLifetime); set => Set(__m_flLifetime, value); }
+		public GameTime m_flLifetime { get => Get<GameTime>(__m_flLifetime); set => Set(__m_flLifetime, value); }
 
 		private static readonly SchemaField __m_flSize = new("CEntityFlame", "m_flSize");
 		/// <summary><c>float32</c>.</summary>
@@ -42,7 +42,7 @@ public static partial class Schema {
 		public CBaseEntity? m_hAttacker { get => GetHandle<CBaseEntity>(__m_hAttacker); set => SetHandle(__m_hAttacker, value); }
 
 		private static readonly SchemaField __m_hEntAttached = new("CEntityFlame", "m_hEntAttached");
-		/// <summary><c>CHandle&lt;CBaseEntity&gt;</c>.</summary>
+		/// <summary><c>CHandle&lt;CBaseEntity&gt;</c>. Networked in build 6779: a write is sent to clients.</summary>
 		public CBaseEntity? m_hEntAttached { get => GetHandle<CBaseEntity>(__m_hEntAttached); set => SetHandle(__m_hEntAttached, value); }
 
 		private static readonly SchemaField __m_iCustomDamageType = new("CEntityFlame", "m_iCustomDamageType");

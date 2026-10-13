@@ -27,6 +27,6 @@ public static partial class Schema {
 
 		private static readonly SchemaField __m_vecOverrides = new("PingSlotDef_t", "m_vecOverrides");
 		/// <summary><c>CUtlVector&lt;PingSlotOverride_t&gt;</c>. Situational rules, first match wins. Checked before the slot's own concept.</summary>
-		public SchemaObjectList<PingSlotOverride_t> m_vecOverrides => new(this, __m_vecOverrides, -1);
+		public SchemaObjectList<PingSlotOverride_t> m_vecOverrides => new(this, __m_vecOverrides, ListStorage.Vector);
 	}
 }

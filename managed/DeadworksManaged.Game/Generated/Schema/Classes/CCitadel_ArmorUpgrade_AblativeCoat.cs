@@ -15,10 +15,10 @@ public static partial class Schema {
 
 		private static readonly SchemaField __m_flLastDamageTime = new("CCitadel_ArmorUpgrade_AblativeCoat", "m_flLastDamageTime");
 		/// <summary><c>GameTime_t</c>.</summary>
-		public float m_flLastDamageTime { get => Get<float>(__m_flLastDamageTime); set => Set(__m_flLastDamageTime, value); }
+		public GameTime m_flLastDamageTime { get => Get<GameTime>(__m_flLastDamageTime); set => Set(__m_flLastDamageTime, value); }
 
 		private static readonly SchemaField __m_iCurrentResistValue = new("CCitadel_ArmorUpgrade_AblativeCoat", "m_iCurrentResistValue");
-		/// <summary><c>int32</c>.</summary>
+		/// <summary><c>int32</c>. Networked in build 6779: a write is sent to clients.</summary>
 		public int m_iCurrentResistValue { get => Get<int>(__m_iCurrentResistValue); set => Set(__m_iCurrentResistValue, value); }
 
 		/// <summary>The data entry this was created from, as <see cref="CCitadel_ArmorUpgrade_AblativeCoatVData"/>, or null if it has none.</summary>

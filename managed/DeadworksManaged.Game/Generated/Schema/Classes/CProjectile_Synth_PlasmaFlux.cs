@@ -14,7 +14,7 @@ public static partial class Schema {
 		static string ISchemaClass<CProjectile_Synth_PlasmaFlux>.NativeName => "CProjectile_Synth_PlasmaFlux";
 
 		private static readonly SchemaField __m_bSpawnedInNoTeleportArea = new("CProjectile_Synth_PlasmaFlux", "m_bSpawnedInNoTeleportArea");
-		/// <summary><c>bool</c>.</summary>
+		/// <summary><c>bool</c>. Networked in build 6779: a write is sent to clients.</summary>
 		public bool m_bSpawnedInNoTeleportArea { get => Get<bool>(__m_bSpawnedInNoTeleportArea); set => Set(__m_bSpawnedInNoTeleportArea, value); }
 	}
 }

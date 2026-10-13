@@ -23,6 +23,6 @@ public static partial class Schema {
 
 		private static readonly SchemaField __m_spectators = new("CTriggerSoundscape", "m_spectators");
 		/// <summary><c>CUtlVector&lt;CHandle&lt;CBasePlayerPawn&gt;&gt;</c>.</summary>
-		public SchemaHandleList<CBasePlayerPawn> m_spectators => new(this, __m_spectators, -1);
+		public SchemaHandleList<CBasePlayerPawn> m_spectators => new(this, __m_spectators, ListStorage.Vector);
 	}
 }

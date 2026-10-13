@@ -14,24 +14,24 @@ public static partial class Schema {
 		static string ISchemaClass<CCitadel_Ability_Gunslinger_DemonCarbine>.NativeName => "CCitadel_Ability_Gunslinger_DemonCarbine";
 
 		private static readonly SchemaField __m_bWantsSlow = new("CCitadel_Ability_Gunslinger_DemonCarbine", "m_bWantsSlow");
-		/// <summary><c>bool</c>.</summary>
+		/// <summary><c>bool</c>. Networked in build 6779: a write is sent to clients.</summary>
 		public bool m_bWantsSlow { get => Get<bool>(__m_bWantsSlow); set => Set(__m_bWantsSlow, value); }
 
 		private static readonly SchemaField __m_flLatchedTimeScaleFrac = new("CCitadel_Ability_Gunslinger_DemonCarbine", "m_flLatchedTimeScaleFrac");
-		/// <summary><c>float32</c>.</summary>
+		/// <summary><c>float32</c>. Networked in build 6779: a write is sent to clients.</summary>
 		public float m_flLatchedTimeScaleFrac { get => Get<float>(__m_flLatchedTimeScaleFrac); set => Set(__m_flLatchedTimeScaleFrac, value); }
 
 		private static readonly SchemaField __m_flLatchedTimeScaleFracChangeTime = new("CCitadel_Ability_Gunslinger_DemonCarbine", "m_flLatchedTimeScaleFracChangeTime");
-		/// <summary><c>GameTime_t</c>.</summary>
-		public float m_flLatchedTimeScaleFracChangeTime { get => Get<float>(__m_flLatchedTimeScaleFracChangeTime); set => Set(__m_flLatchedTimeScaleFracChangeTime, value); }
+		/// <summary><c>GameTime_t</c>. Networked in build 6779: a write is sent to clients.</summary>
+		public GameTime m_flLatchedTimeScaleFracChangeTime { get => Get<GameTime>(__m_flLatchedTimeScaleFracChangeTime); set => Set(__m_flLatchedTimeScaleFracChangeTime, value); }
 
 		private static readonly SchemaField __m_flShotTimeScaleEndTime = new("CCitadel_Ability_Gunslinger_DemonCarbine", "m_flShotTimeScaleEndTime");
-		/// <summary><c>GameTime_t</c>.</summary>
-		public float m_flShotTimeScaleEndTime { get => Get<float>(__m_flShotTimeScaleEndTime); set => Set(__m_flShotTimeScaleEndTime, value); }
+		/// <summary><c>GameTime_t</c>. Networked in build 6779: a write is sent to clients.</summary>
+		public GameTime m_flShotTimeScaleEndTime { get => Get<GameTime>(__m_flShotTimeScaleEndTime); set => Set(__m_flShotTimeScaleEndTime, value); }
 
 		private static readonly SchemaField __m_flSpeedBoostEndTime = new("CCitadel_Ability_Gunslinger_DemonCarbine", "m_flSpeedBoostEndTime");
-		/// <summary><c>GameTime_t</c>.</summary>
-		public float m_flSpeedBoostEndTime { get => Get<float>(__m_flSpeedBoostEndTime); set => Set(__m_flSpeedBoostEndTime, value); }
+		/// <summary><c>GameTime_t</c>. Networked in build 6779: a write is sent to clients.</summary>
+		public GameTime m_flSpeedBoostEndTime { get => Get<GameTime>(__m_flSpeedBoostEndTime); set => Set(__m_flSpeedBoostEndTime, value); }
 
 		private static readonly SchemaField __m_flStoredPowerPct = new("CCitadel_Ability_Gunslinger_DemonCarbine", "m_flStoredPowerPct");
 		/// <summary><c>float32</c>.</summary>

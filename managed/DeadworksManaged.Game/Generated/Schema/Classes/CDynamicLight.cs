@@ -18,19 +18,19 @@ public static partial class Schema {
 		public byte m_ActualFlags { get => Get<byte>(__m_ActualFlags); set => Set(__m_ActualFlags, value); }
 
 		private static readonly SchemaField __m_Exponent = new("CDynamicLight", "m_Exponent");
-		/// <summary><c>int32</c>.</summary>
+		/// <summary><c>int32</c>. Networked in build 6779: a write is sent to clients.</summary>
 		public int m_Exponent { get => Get<int>(__m_Exponent); set => Set(__m_Exponent, value); }
 
 		private static readonly SchemaField __m_Flags = new("CDynamicLight", "m_Flags");
-		/// <summary><c>uint8</c>.</summary>
+		/// <summary><c>uint8</c>. Networked in build 6779: a write is sent to clients.</summary>
 		public byte m_Flags { get => Get<byte>(__m_Flags); set => Set(__m_Flags, value); }
 
 		private static readonly SchemaField __m_InnerAngle = new("CDynamicLight", "m_InnerAngle");
-		/// <summary><c>float32</c>.</summary>
+		/// <summary><c>float32</c>. Networked in build 6779: a write is sent to clients.</summary>
 		public float m_InnerAngle { get => Get<float>(__m_InnerAngle); set => Set(__m_InnerAngle, value); }
 
 		private static readonly SchemaField __m_LightStyle = new("CDynamicLight", "m_LightStyle");
-		/// <summary><c>uint8</c>.</summary>
+		/// <summary><c>uint8</c>. Networked in build 6779: a write is sent to clients.</summary>
 		public byte m_LightStyle { get => Get<byte>(__m_LightStyle); set => Set(__m_LightStyle, value); }
 
 		private static readonly SchemaField __m_On = new("CDynamicLight", "m_On");
@@ -38,15 +38,15 @@ public static partial class Schema {
 		public bool m_On { get => Get<bool>(__m_On); set => Set(__m_On, value); }
 
 		private static readonly SchemaField __m_OuterAngle = new("CDynamicLight", "m_OuterAngle");
-		/// <summary><c>float32</c>.</summary>
+		/// <summary><c>float32</c>. Networked in build 6779: a write is sent to clients.</summary>
 		public float m_OuterAngle { get => Get<float>(__m_OuterAngle); set => Set(__m_OuterAngle, value); }
 
 		private static readonly SchemaField __m_Radius = new("CDynamicLight", "m_Radius");
-		/// <summary><c>float32</c>.</summary>
+		/// <summary><c>float32</c>. Networked in build 6779: a write is sent to clients.</summary>
 		public float m_Radius { get => Get<float>(__m_Radius); set => Set(__m_Radius, value); }
 
 		private static readonly SchemaField __m_SpotRadius = new("CDynamicLight", "m_SpotRadius");
-		/// <summary><c>float32</c>.</summary>
+		/// <summary><c>float32</c>. Networked in build 6779: a write is sent to clients.</summary>
 		public float m_SpotRadius { get => Get<float>(__m_SpotRadius); set => Set(__m_SpotRadius, value); }
 
 		/// <summary>Fires the <c>Toggle</c> input.</summary>

@@ -15,7 +15,7 @@ public static partial class Schema {
 
 		private static readonly SchemaField __m_navTypes = new("CAI_MotorServices::MotorRegistration_t", "m_navTypes");
 		/// <summary><c>CUtlVector&lt;NavType_t&gt;</c>.</summary>
-		public SchemaValueList<NavType_t> m_navTypes => new(this, __m_navTypes, -1);
+		public SchemaValueList<NavType_t> m_navTypes => new(this, __m_navTypes, ListStorage.Vector);
 
 		private static readonly SchemaField __m_pMotor = new("CAI_MotorServices::MotorRegistration_t", "m_pMotor");
 		/// <summary><c>std::unique_ptr&lt;IAI_Motor&gt;</c>. No typed mapping yet: read it through its address.</summary>

@@ -19,7 +19,7 @@ public static partial class Schema {
 
 		private static readonly SchemaField __m_Recipients = new("CCopyRecipientFilter", "m_Recipients");
 		/// <summary><c>CUtlVector&lt;CPlayerSlot&gt;</c>.</summary>
-		public SchemaValueList<int> m_Recipients => new(this, __m_Recipients, -1);
+		public SchemaValueList<int> m_Recipients => new(this, __m_Recipients, ListStorage.Vector);
 
 		private static readonly SchemaField __m_slotPlayerExcludedDueToPrediction = new("CCopyRecipientFilter", "m_slotPlayerExcludedDueToPrediction");
 		/// <summary><c>CPlayerSlot</c>.</summary>

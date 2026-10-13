@@ -35,7 +35,7 @@ public static partial class Schema {
 
 		private static readonly SchemaField __m_AutoIntrinsicModifiers = new("CitadelAbilityVData", "m_AutoIntrinsicModifiers");
 		/// <summary><c>CUtlVector&lt;CEmbeddedSubclass&lt;CBaseModifier&gt;&gt;</c>.</summary>
-		public SchemaPointerList<CModifierVData> m_AutoIntrinsicModifiers => new(this, __m_AutoIntrinsicModifiers, -1, 16, 8);
+		public SchemaPointerList<CModifierVData> m_AutoIntrinsicModifiers => new(this, __m_AutoIntrinsicModifiers, ListStorage.Vector, 16, 8);
 
 		private static readonly SchemaField __m_ConePreviewParticleOverride = new("CitadelAbilityVData", "m_ConePreviewParticleOverride");
 		/// <summary><c>CResourceNameTyped&lt;CWeakHandle&lt;InfoForResourceTypeIParticleSystemDefinition&gt;&gt;</c>. The preview used for cone targeting. CP0 = effect position, CP1 = cone left, CP2 = cone right, CP3 = cone center, CP15 = color. Defaults if unset.</summary>
@@ -423,10 +423,10 @@ public static partial class Schema {
 
 		private static readonly SchemaField __m_vecAbilityUpgrades = new("CitadelAbilityVData", "m_vecAbilityUpgrades");
 		/// <summary><c>CUtlVector&lt;AbilityUpgrade_t&gt;</c>.</summary>
-		public SchemaObjectList<AbilityUpgrade_t> m_vecAbilityUpgrades => new(this, __m_vecAbilityUpgrades, -1);
+		public SchemaObjectList<AbilityUpgrade_t> m_vecAbilityUpgrades => new(this, __m_vecAbilityUpgrades, ListStorage.Vector);
 
 		private static readonly SchemaField __m_vecTooltipSectionInfo = new("CitadelAbilityVData", "m_vecTooltipSectionInfo");
 		/// <summary><c>CUtlVector&lt;ItemSectionInfo_t&gt;</c>. Item Tooltips.</summary>
-		public SchemaObjectList<ItemSectionInfo_t> m_vecTooltipSectionInfo => new(this, __m_vecTooltipSectionInfo, -1);
+		public SchemaObjectList<ItemSectionInfo_t> m_vecTooltipSectionInfo => new(this, __m_vecTooltipSectionInfo, ListStorage.Vector);
 	}
 }

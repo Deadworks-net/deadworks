@@ -18,7 +18,7 @@ public static partial class Schema {
 		public Vector3 m_angAbsRotation { get => Get<Vector3>(__m_angAbsRotation); set => Set(__m_angAbsRotation, value); }
 
 		private static readonly SchemaField __m_angRotation = new("CGameSceneNode", "m_angRotation");
-		/// <summary><c>QAngle</c>.</summary>
+		/// <summary><c>QAngle</c>. Networked in build 6779: a write is sent to clients.</summary>
 		public Vector3 m_angRotation { get => Get<Vector3>(__m_angRotation); set => Set(__m_angRotation, value); }
 
 		private static readonly SchemaField __m_bBoneMergeFlex = new("CGameSceneNode", "m_bBoneMergeFlex");
@@ -74,15 +74,15 @@ public static partial class Schema {
 		public float m_flClientLocalScale { get => Get<float>(__m_flClientLocalScale); set => Set(__m_flClientLocalScale, value); }
 
 		private static readonly SchemaField __m_flScale = new("CGameSceneNode", "m_flScale");
-		/// <summary><c>float32</c>. Wrapped by <c>CGameSceneNode.Scale</c> in DeadworksManaged.Api.</summary>
+		/// <summary><c>float32</c>. Networked in build 6779: a write is sent to clients. Wrapped by <c>CGameSceneNode.Scale</c> in DeadworksManaged.Api.</summary>
 		public float m_flScale { get => Get<float>(__m_flScale); set => Set(__m_flScale, value); }
 
 		private static readonly SchemaField __m_hParent = new("CGameSceneNode", "m_hParent");
-		/// <summary><c>CGameSceneNodeHandle</c>.</summary>
+		/// <summary><c>CGameSceneNodeHandle</c>. Networked in build 6779: a write is sent to clients.</summary>
 		public CGameSceneNodeHandle m_hParent => Embedded<CGameSceneNodeHandle>(__m_hParent);
 
 		private static readonly SchemaField __m_hierarchyAttachName = new("CGameSceneNode", "m_hierarchyAttachName");
-		/// <summary><c>CUtlStringToken</c>.</summary>
+		/// <summary><c>CUtlStringToken</c>. Networked in build 6779: a write is sent to clients.</summary>
 		public uint m_hierarchyAttachName { get => Get<uint>(__m_hierarchyAttachName); set => Set(__m_hierarchyAttachName, value); }
 
 		private static readonly SchemaField __m_nDoNotSetAnimTimeInInvalidatePhysicsCount = new("CGameSceneNode", "m_nDoNotSetAnimTimeInInvalidatePhysicsCount");
@@ -106,12 +106,12 @@ public static partial class Schema {
 		public short m_nParentAttachmentOrBone { get => Get<short>(__m_nParentAttachmentOrBone); set => Set(__m_nParentAttachmentOrBone, value); }
 
 		private static readonly SchemaField __m_name = new("CGameSceneNode", "m_name");
-		/// <summary><c>CUtlStringToken</c>.</summary>
+		/// <summary><c>CUtlStringToken</c>. Networked in build 6779: a write is sent to clients.</summary>
 		public uint m_name { get => Get<uint>(__m_name); set => Set(__m_name, value); }
 
 		private static readonly SchemaField __m_nodeToWorld = new("CGameSceneNode", "m_nodeToWorld");
-		/// <summary><c>CTransformWS</c>. No typed mapping yet: read it through its address.</summary>
-		public RawField m_nodeToWorld => Raw(__m_nodeToWorld, "CTransformWS");
+		/// <summary><c>CTransformWS</c>.</summary>
+		public Transform m_nodeToWorld { get => Get<Transform>(__m_nodeToWorld); set => Set(__m_nodeToWorld, value); }
 
 		private static readonly SchemaField __m_pChild = new("CGameSceneNode", "m_pChild");
 		/// <summary><c>CGameSceneNode*</c>.</summary>
@@ -134,7 +134,7 @@ public static partial class Schema {
 		public Vector3 m_vecAbsOrigin { get => Get<Vector3>(__m_vecAbsOrigin); set => Set(__m_vecAbsOrigin, value); }
 
 		private static readonly SchemaField __m_vecOrigin = new("CGameSceneNode", "m_vecOrigin");
-		/// <summary><c>CNetworkOriginCellCoordQuantizedVector</c>.</summary>
+		/// <summary><c>CNetworkOriginCellCoordQuantizedVector</c>. Networked in build 6779: a write is sent to clients.</summary>
 		public CNetworkOriginCellCoordQuantizedVector m_vecOrigin => Embedded<CNetworkOriginCellCoordQuantizedVector>(__m_vecOrigin);
 	}
 }

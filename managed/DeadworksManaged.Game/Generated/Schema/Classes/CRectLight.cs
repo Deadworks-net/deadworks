@@ -14,7 +14,7 @@ public static partial class Schema {
 		static string ISchemaClass<CRectLight>.NativeName => "CRectLight";
 
 		private static readonly SchemaField __m_bShowLight = new("CRectLight", "m_bShowLight");
-		/// <summary><c>bool</c>.</summary>
+		/// <summary><c>bool</c>. Networked in build 6779: a write is sent to clients.</summary>
 		public bool m_bShowLight { get => Get<bool>(__m_bShowLight); set => Set(__m_bShowLight, value); }
 	}
 }

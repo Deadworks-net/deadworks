@@ -15,11 +15,11 @@ public static partial class Schema {
 
 		private static readonly SchemaField __m_GameTimeEnabled = new("CCitadel_Modifier_Nano_PredatoryStatue", "m_GameTimeEnabled");
 		/// <summary><c>GameTime_t</c>.</summary>
-		public float m_GameTimeEnabled { get => Get<float>(__m_GameTimeEnabled); set => Set(__m_GameTimeEnabled, value); }
+		public GameTime m_GameTimeEnabled { get => Get<GameTime>(__m_GameTimeEnabled); set => Set(__m_GameTimeEnabled, value); }
 
 		private static readonly SchemaField __m_LastCatInAreaTime = new("CCitadel_Modifier_Nano_PredatoryStatue", "m_LastCatInAreaTime");
 		/// <summary><c>GameTime_t</c>.</summary>
-		public float m_LastCatInAreaTime { get => Get<float>(__m_LastCatInAreaTime); set => Set(__m_LastCatInAreaTime, value); }
+		public GameTime m_LastCatInAreaTime { get => Get<GameTime>(__m_LastCatInAreaTime); set => Set(__m_LastCatInAreaTime, value); }
 
 		private static readonly SchemaField __m_bIsAttacking = new("CCitadel_Modifier_Nano_PredatoryStatue", "m_bIsAttacking");
 		/// <summary><c>bool</c>.</summary>

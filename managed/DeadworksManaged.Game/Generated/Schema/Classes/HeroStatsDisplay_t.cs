@@ -15,26 +15,26 @@ public static partial class Schema {
 
 		private static readonly SchemaField __m_vecHealthHeaderStats = new("HeroStatsDisplay_t", "m_vecHealthHeaderStats");
 		/// <summary><c>CUtlVector&lt;EStatsType&gt;</c>. What stats do we want to show in the health header area?.</summary>
-		public SchemaValueList<EStatsType> m_vecHealthHeaderStats => new(this, __m_vecHealthHeaderStats, -1);
+		public SchemaValueList<EStatsType> m_vecHealthHeaderStats => new(this, __m_vecHealthHeaderStats, ListStorage.Vector);
 
 		private static readonly SchemaField __m_vecHealthStats = new("HeroStatsDisplay_t", "m_vecHealthStats");
 		/// <summary><c>CUtlVector&lt;EStatsType&gt;</c>. What stats do we want to show in the health stats area?.</summary>
-		public SchemaValueList<EStatsType> m_vecHealthStats => new(this, __m_vecHealthStats, -1);
+		public SchemaValueList<EStatsType> m_vecHealthStats => new(this, __m_vecHealthStats, ListStorage.Vector);
 
 		private static readonly SchemaField __m_vecMagicHeaderStats = new("HeroStatsDisplay_t", "m_vecMagicHeaderStats");
 		/// <summary><c>CUtlVector&lt;EStatsType&gt;</c>. What stats do we want to show in the magic header area?.</summary>
-		public SchemaValueList<EStatsType> m_vecMagicHeaderStats => new(this, __m_vecMagicHeaderStats, -1);
+		public SchemaValueList<EStatsType> m_vecMagicHeaderStats => new(this, __m_vecMagicHeaderStats, ListStorage.Vector);
 
 		private static readonly SchemaField __m_vecMagicStats = new("HeroStatsDisplay_t", "m_vecMagicStats");
 		/// <summary><c>CUtlVector&lt;EStatsType&gt;</c>. What stats do we want to show in the magic stats area?.</summary>
-		public SchemaValueList<EStatsType> m_vecMagicStats => new(this, __m_vecMagicStats, -1);
+		public SchemaValueList<EStatsType> m_vecMagicStats => new(this, __m_vecMagicStats, ListStorage.Vector);
 
 		private static readonly SchemaField __m_vecWeaponHeaderStats = new("HeroStatsDisplay_t", "m_vecWeaponHeaderStats");
 		/// <summary><c>CUtlVector&lt;EStatsType&gt;</c>. What stats do we want to show in the weapon header area?.</summary>
-		public SchemaValueList<EStatsType> m_vecWeaponHeaderStats => new(this, __m_vecWeaponHeaderStats, -1);
+		public SchemaValueList<EStatsType> m_vecWeaponHeaderStats => new(this, __m_vecWeaponHeaderStats, ListStorage.Vector);
 
 		private static readonly SchemaField __m_vecWeaponStats = new("HeroStatsDisplay_t", "m_vecWeaponStats");
 		/// <summary><c>CUtlVector&lt;EStatsType&gt;</c>. What stats do we want to show in the weapon stats area?.</summary>
-		public SchemaValueList<EStatsType> m_vecWeaponStats => new(this, __m_vecWeaponStats, -1);
+		public SchemaValueList<EStatsType> m_vecWeaponStats => new(this, __m_vecWeaponStats, ListStorage.Vector);
 	}
 }

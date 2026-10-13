@@ -59,7 +59,7 @@ public static partial class Schema {
 
 		private static readonly SchemaField __m_flPlaceTime = new("CDecalInstance", "m_flPlaceTime");
 		/// <summary><c>GameTime_t</c>.</summary>
-		public float m_flPlaceTime { get => Get<float>(__m_flPlaceTime); set => Set(__m_flPlaceTime, value); }
+		public GameTime m_flPlaceTime { get => Get<GameTime>(__m_flPlaceTime); set => Set(__m_flPlaceTime, value); }
 
 		private static readonly SchemaField __m_flWidth = new("CDecalInstance", "m_flWidth");
 		/// <summary><c>float32</c>.</summary>
@@ -70,16 +70,16 @@ public static partial class Schema {
 		public CBaseEntity? m_hEntity { get => GetHandle<CBaseEntity>(__m_hEntity); set => SetHandle(__m_hEntity, value); }
 
 		private static readonly SchemaField __m_hMaterial = new("CDecalInstance", "m_hMaterial");
-		/// <summary><c>CStrongHandle&lt;InfoForResourceTypeIMaterial2&gt;</c>. No typed mapping yet: read it through its address.</summary>
-		public RawField m_hMaterial => Raw(__m_hMaterial, "CStrongHandle<InfoForResourceTypeIMaterial2>");
+		/// <summary><c>CStrongHandle&lt;InfoForResourceTypeIMaterial2&gt;</c>.</summary>
+		public ResourceHandle m_hMaterial { get => Get<ResourceHandle>(__m_hMaterial); set => Set(__m_hMaterial, value); }
 
 		private static readonly SchemaField __m_mLocalToTriangle = new("CDecalInstance", "m_mLocalToTriangle");
-		/// <summary><c>matrix3x4_t</c>. No typed mapping yet: read it through its address.</summary>
-		public RawField m_mLocalToTriangle => Raw(__m_mLocalToTriangle, "matrix3x4_t");
+		/// <summary><c>matrix3x4_t</c>.</summary>
+		public Matrix3x4 m_mLocalToTriangle { get => Get<Matrix3x4>(__m_mLocalToTriangle); set => Set(__m_mLocalToTriangle, value); }
 
 		private static readonly SchemaField __m_mTransform = new("CDecalInstance", "m_mTransform");
-		/// <summary><c>matrix3x4_t</c>. No typed mapping yet: read it through its address.</summary>
-		public RawField m_mTransform => Raw(__m_mTransform, "matrix3x4_t");
+		/// <summary><c>matrix3x4_t</c>.</summary>
+		public Matrix3x4 m_mTransform { get => Get<Matrix3x4>(__m_mTransform); set => Set(__m_mTransform, value); }
 
 		private static readonly SchemaField __m_nBoneIndex = new("CDecalInstance", "m_nBoneIndex");
 		/// <summary><c>int32</c>.</summary>

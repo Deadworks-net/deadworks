@@ -23,6 +23,6 @@ public static partial class Schema {
 
 		private static readonly SchemaField __m_vecEffects = new("CorruptedPenaltyDef_t", "m_vecEffects");
 		/// <summary><c>CUtlVector&lt;CorruptedPenaltyEffect_t&gt;</c>. Effects applied together when this penalty is rolled.</summary>
-		public SchemaObjectList<CorruptedPenaltyEffect_t> m_vecEffects => new(this, __m_vecEffects, -1);
+		public SchemaObjectList<CorruptedPenaltyEffect_t> m_vecEffects => new(this, __m_vecEffects, ListStorage.Vector);
 	}
 }

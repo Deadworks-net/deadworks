@@ -14,11 +14,11 @@ public static partial class Schema {
 		static string ISchemaClass<CitadelStolenAbilitySlot_t>.NativeName => "CitadelStolenAbilitySlot_t";
 
 		private static readonly SchemaField __m_bIsActivelyStolen = new("CitadelStolenAbilitySlot_t", "m_bIsActivelyStolen");
-		/// <summary><c>bool</c>.</summary>
+		/// <summary><c>bool</c>. Networked in build 6779: a write is sent to clients.</summary>
 		public bool m_bIsActivelyStolen { get => Get<bool>(__m_bIsActivelyStolen); set => Set(__m_bIsActivelyStolen, value); }
 
 		private static readonly SchemaField __m_eStolenSlot = new("CitadelStolenAbilitySlot_t", "m_eStolenSlot");
-		/// <summary><c>EAbilitySlots_t</c>.</summary>
+		/// <summary><c>EAbilitySlots_t</c>. Networked in build 6779: a write is sent to clients.</summary>
 		public EAbilitySlots_t m_eStolenSlot { get => Get<EAbilitySlots_t>(__m_eStolenSlot); set => Set(__m_eStolenSlot, value); }
 	}
 }

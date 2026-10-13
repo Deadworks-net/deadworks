@@ -15,18 +15,18 @@ public static partial class Schema {
 
 		private static readonly SchemaField __m_flSightingEndTime = new("AI_MemoryData_t", "m_flSightingEndTime");
 		/// <summary><c>GameTime_t</c>.</summary>
-		public float m_flSightingEndTime { get => Get<float>(__m_flSightingEndTime); set => Set(__m_flSightingEndTime, value); }
+		public GameTime m_flSightingEndTime { get => Get<GameTime>(__m_flSightingEndTime); set => Set(__m_flSightingEndTime, value); }
 
 		private static readonly SchemaField __m_flSightingReacquisitionStartTime = new("AI_MemoryData_t", "m_flSightingReacquisitionStartTime");
 		/// <summary><c>GameTime_t</c>.</summary>
-		public float m_flSightingReacquisitionStartTime { get => Get<float>(__m_flSightingReacquisitionStartTime); set => Set(__m_flSightingReacquisitionStartTime, value); }
+		public GameTime m_flSightingReacquisitionStartTime { get => Get<GameTime>(__m_flSightingReacquisitionStartTime); set => Set(__m_flSightingReacquisitionStartTime, value); }
 
 		private static readonly SchemaField __m_flSightingStartTime = new("AI_MemoryData_t", "m_flSightingStartTime");
 		/// <summary><c>GameTime_t</c>.</summary>
-		public float m_flSightingStartTime { get => Get<float>(__m_flSightingStartTime); set => Set(__m_flSightingStartTime, value); }
+		public GameTime m_flSightingStartTime { get => Get<GameTime>(__m_flSightingStartTime); set => Set(__m_flSightingStartTime, value); }
 
 		private static readonly SchemaField __m_flTimeLastReceivedDamageFrom = new("AI_MemoryData_t", "m_flTimeLastReceivedDamageFrom");
 		/// <summary><c>GameTime_t</c>.</summary>
-		public float m_flTimeLastReceivedDamageFrom { get => Get<float>(__m_flTimeLastReceivedDamageFrom); set => Set(__m_flTimeLastReceivedDamageFrom, value); }
+		public GameTime m_flTimeLastReceivedDamageFrom { get => Get<GameTime>(__m_flTimeLastReceivedDamageFrom); set => Set(__m_flTimeLastReceivedDamageFrom, value); }
 	}
 }

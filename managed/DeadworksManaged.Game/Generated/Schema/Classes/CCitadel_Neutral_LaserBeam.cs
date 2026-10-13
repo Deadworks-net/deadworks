@@ -23,7 +23,7 @@ public static partial class Schema {
 
 		private static readonly SchemaField __m_flNextAuraDropTick = new("CCitadel_Neutral_LaserBeam", "m_flNextAuraDropTick");
 		/// <summary><c>GameTime_t</c>.</summary>
-		public float m_flNextAuraDropTick { get => Get<float>(__m_flNextAuraDropTick); set => Set(__m_flNextAuraDropTick, value); }
+		public GameTime m_flNextAuraDropTick { get => Get<GameTime>(__m_flNextAuraDropTick); set => Set(__m_flNextAuraDropTick, value); }
 
 		private static readonly SchemaField __m_flYaw = new("CCitadel_Neutral_LaserBeam", "m_flYaw");
 		/// <summary><c>float32</c>.</summary>
@@ -39,7 +39,7 @@ public static partial class Schema {
 
 		private static readonly SchemaField __m_tLastToggleTime = new("CCitadel_Neutral_LaserBeam", "m_tLastToggleTime");
 		/// <summary><c>GameTime_t</c>.</summary>
-		public float m_tLastToggleTime { get => Get<float>(__m_tLastToggleTime); set => Set(__m_tLastToggleTime, value); }
+		public GameTime m_tLastToggleTime { get => Get<GameTime>(__m_tLastToggleTime); set => Set(__m_tLastToggleTime, value); }
 
 		private static readonly SchemaField __m_vInitialTargetPos = new("CCitadel_Neutral_LaserBeam", "m_vInitialTargetPos");
 		/// <summary><c>VectorWS</c>.</summary>

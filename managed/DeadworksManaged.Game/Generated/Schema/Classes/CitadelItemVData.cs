@@ -83,6 +83,6 @@ public static partial class Schema {
 
 		private static readonly SchemaField __m_vecDisabledOnHeroes = new("CitadelItemVData", "m_vecDisabledOnHeroes");
 		/// <summary><c>CUtlVector&lt;CUtlString&gt;</c>.</summary>
-		public SchemaStringList m_vecDisabledOnHeroes => new(this, __m_vecDisabledOnHeroes, -1);
+		public SchemaStringList m_vecDisabledOnHeroes => new(this, __m_vecDisabledOnHeroes, ListStorage.Vector);
 	}
 }

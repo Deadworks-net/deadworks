@@ -35,6 +35,6 @@ public static partial class Schema {
 
 		private static readonly SchemaField __m_vecSpawnKV = new("NPCAttachmentDesc_t", "m_vecSpawnKV");
 		/// <summary><c>CUtlVector&lt;NPCAttachmentSpawnKV_t&gt;</c>.</summary>
-		public SchemaObjectList<NPCAttachmentSpawnKV_t> m_vecSpawnKV => new(this, __m_vecSpawnKV, -1);
+		public SchemaObjectList<NPCAttachmentSpawnKV_t> m_vecSpawnKV => new(this, __m_vecSpawnKV, ListStorage.Vector);
 	}
 }

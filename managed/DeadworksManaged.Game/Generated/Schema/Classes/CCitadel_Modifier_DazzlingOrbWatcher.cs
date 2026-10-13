@@ -23,11 +23,11 @@ public static partial class Schema {
 
 		private static readonly SchemaField __m_flLastHitTime = new("CCitadel_Modifier_DazzlingOrbWatcher", "m_flLastHitTime");
 		/// <summary><c>GameTime_t</c>.</summary>
-		public float m_flLastHitTime { get => Get<float>(__m_flLastHitTime); set => Set(__m_flLastHitTime, value); }
+		public GameTime m_flLastHitTime { get => Get<GameTime>(__m_flLastHitTime); set => Set(__m_flLastHitTime, value); }
 
 		private static readonly SchemaField __m_flLingerEndTime = new("CCitadel_Modifier_DazzlingOrbWatcher", "m_flLingerEndTime");
 		/// <summary><c>GameTime_t</c>.</summary>
-		public float m_flLingerEndTime { get => Get<float>(__m_flLingerEndTime); set => Set(__m_flLingerEndTime, value); }
+		public GameTime m_flLingerEndTime { get => Get<GameTime>(__m_flLingerEndTime); set => Set(__m_flLingerEndTime, value); }
 
 		private static readonly SchemaField __m_flSlowDurationAtCast = new("CCitadel_Modifier_DazzlingOrbWatcher", "m_flSlowDurationAtCast");
 		/// <summary><c>float32</c>.</summary>

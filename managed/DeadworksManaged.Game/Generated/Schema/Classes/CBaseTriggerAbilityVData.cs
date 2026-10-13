@@ -18,8 +18,8 @@ public static partial class Schema {
 		public bool bTriggerOnDeselect { get => Get<bool>(__bTriggerOnDeselect); set => Set(__bTriggerOnDeselect, value); }
 
 		private static readonly SchemaField __m_AbilityToTrigger = new("CBaseTriggerAbilityVData", "m_AbilityToTrigger");
-		/// <summary><c>CSubclassName</c>. Which ability to fire a MODIFIER_EVENT_ABILITY_TRIGGER_ACTIVATED event to when this ability is triggered. No typed mapping yet: read it through its address.</summary>
-		public RawField m_AbilityToTrigger => Raw(__m_AbilityToTrigger, "CSubclassName");
+		/// <summary><c>CSubclassName</c>. Which ability to fire a MODIFIER_EVENT_ABILITY_TRIGGER_ACTIVATED event to when this ability is triggered.</summary>
+		public string m_AbilityToTrigger => GetString(__m_AbilityToTrigger);
 
 		private static readonly SchemaField __m_eHintFeatureToMarkUsedOnTrigger = new("CBaseTriggerAbilityVData", "m_eHintFeatureToMarkUsedOnTrigger");
 		/// <summary><c>ECitadelHintFeature</c>. Which lesson to associate with activating this ability.</summary>

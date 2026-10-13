@@ -15,7 +15,7 @@ public static partial class Schema {
 
 		private static readonly SchemaField __m_flTimeLastLook = new("CAI_CitadelSenses", "m_flTimeLastLook");
 		/// <summary><c>GameTime_t</c>.</summary>
-		public float m_flTimeLastLook { get => Get<float>(__m_flTimeLastLook); set => Set(__m_flTimeLastLook, value); }
+		public GameTime m_flTimeLastLook { get => Get<GameTime>(__m_flTimeLastLook); set => Set(__m_flTimeLastLook, value); }
 
 		private static readonly SchemaField __m_iTargetTypes = new("CAI_CitadelSenses", "m_iTargetTypes");
 		/// <summary><c>CITADEL_UNIT_TARGET_TYPE</c>.</summary>
@@ -23,6 +23,6 @@ public static partial class Schema {
 
 		private static readonly SchemaField __m_vecSeenUnits = new("CAI_CitadelSenses", "m_vecSeenUnits");
 		/// <summary><c>CUtlVector&lt;CHandle&lt;CBaseEntity&gt;&gt;</c>.</summary>
-		public SchemaHandleList<CBaseEntity> m_vecSeenUnits => new(this, __m_vecSeenUnits, -1);
+		public SchemaHandleList<CBaseEntity> m_vecSeenUnits => new(this, __m_vecSeenUnits, ListStorage.Vector);
 	}
 }

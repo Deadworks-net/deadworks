@@ -14,19 +14,19 @@ public static partial class Schema {
 		static string ISchemaClass<CCitadel_Ability_Slide>.NativeName => "CCitadel_Ability_Slide";
 
 		private static readonly SchemaField __m_bAirborneWhenDuckPressed = new("CCitadel_Ability_Slide", "m_bAirborneWhenDuckPressed");
-		/// <summary><c>bool</c>.</summary>
+		/// <summary><c>bool</c>. Networked in build 6779: a write is sent to clients.</summary>
 		public bool m_bAirborneWhenDuckPressed { get => Get<bool>(__m_bAirborneWhenDuckPressed); set => Set(__m_bAirborneWhenDuckPressed, value); }
 
 		private static readonly SchemaField __m_bIsSliding = new("CCitadel_Ability_Slide", "m_bIsSliding");
-		/// <summary><c>bool</c>.</summary>
+		/// <summary><c>bool</c>. Networked in build 6779: a write is sent to clients.</summary>
 		public bool m_bIsSliding { get => Get<bool>(__m_bIsSliding); set => Set(__m_bIsSliding, value); }
 
 		private static readonly SchemaField __m_bShouldTriggerSlowGetup = new("CCitadel_Ability_Slide", "m_bShouldTriggerSlowGetup");
-		/// <summary><c>bool</c>.</summary>
+		/// <summary><c>bool</c>. Networked in build 6779: a write is sent to clients.</summary>
 		public bool m_bShouldTriggerSlowGetup { get => Get<bool>(__m_bShouldTriggerSlowGetup); set => Set(__m_bShouldTriggerSlowGetup, value); }
 
 		private static readonly SchemaField __m_bSlideIsSticky = new("CCitadel_Ability_Slide", "m_bSlideIsSticky");
-		/// <summary><c>bool</c>.</summary>
+		/// <summary><c>bool</c>. Networked in build 6779: a write is sent to clients.</summary>
 		public bool m_bSlideIsSticky { get => Get<bool>(__m_bSlideIsSticky); set => Set(__m_bSlideIsSticky, value); }
 
 		private static readonly SchemaField __m_bStartedSlideViaProbeSlope = new("CCitadel_Ability_Slide", "m_bStartedSlideViaProbeSlope");
@@ -34,39 +34,39 @@ public static partial class Schema {
 		public bool m_bStartedSlideViaProbeSlope { get => Get<bool>(__m_bStartedSlideViaProbeSlope); set => Set(__m_bStartedSlideViaProbeSlope, value); }
 
 		private static readonly SchemaField __m_bWantsSlide = new("CCitadel_Ability_Slide", "m_bWantsSlide");
-		/// <summary><c>bool</c>.</summary>
+		/// <summary><c>bool</c>. Networked in build 6779: a write is sent to clients.</summary>
 		public bool m_bWantsSlide { get => Get<bool>(__m_bWantsSlide); set => Set(__m_bWantsSlide, value); }
 
 		private static readonly SchemaField __m_flDashSlideStartTime = new("CCitadel_Ability_Slide", "m_flDashSlideStartTime");
-		/// <summary><c>GameTime_t</c>.</summary>
-		public float m_flDashSlideStartTime { get => Get<float>(__m_flDashSlideStartTime); set => Set(__m_flDashSlideStartTime, value); }
+		/// <summary><c>GameTime_t</c>. Networked in build 6779: a write is sent to clients.</summary>
+		public GameTime m_flDashSlideStartTime { get => Get<GameTime>(__m_flDashSlideStartTime); set => Set(__m_flDashSlideStartTime, value); }
 
 		private static readonly SchemaField __m_flDuckPressedTime = new("CCitadel_Ability_Slide", "m_flDuckPressedTime");
-		/// <summary><c>GameTime_t</c>.</summary>
-		public float m_flDuckPressedTime { get => Get<float>(__m_flDuckPressedTime); set => Set(__m_flDuckPressedTime, value); }
+		/// <summary><c>GameTime_t</c>. Networked in build 6779: a write is sent to clients.</summary>
+		public GameTime m_flDuckPressedTime { get => Get<GameTime>(__m_flDuckPressedTime); set => Set(__m_flDuckPressedTime, value); }
 
 		private static readonly SchemaField __m_flGroundDashSlideTime = new("CCitadel_Ability_Slide", "m_flGroundDashSlideTime");
-		/// <summary><c>CCitadelAutoScaledTime</c>.</summary>
+		/// <summary><c>CCitadelAutoScaledTime</c>. Networked in build 6779: a write is sent to clients.</summary>
 		public CCitadelAutoScaledTime m_flGroundDashSlideTime => Embedded<CCitadelAutoScaledTime>(__m_flGroundDashSlideTime);
 
 		private static readonly SchemaField __m_flOnGroundStartTime = new("CCitadel_Ability_Slide", "m_flOnGroundStartTime");
-		/// <summary><c>GameTime_t</c>.</summary>
-		public float m_flOnGroundStartTime { get => Get<float>(__m_flOnGroundStartTime); set => Set(__m_flOnGroundStartTime, value); }
+		/// <summary><c>GameTime_t</c>. Networked in build 6779: a write is sent to clients.</summary>
+		public GameTime m_flOnGroundStartTime { get => Get<GameTime>(__m_flOnGroundStartTime); set => Set(__m_flOnGroundStartTime, value); }
 
 		private static readonly SchemaField __m_flSlideChangeTime = new("CCitadel_Ability_Slide", "m_flSlideChangeTime");
-		/// <summary><c>GameTime_t</c>.</summary>
-		public float m_flSlideChangeTime { get => Get<float>(__m_flSlideChangeTime); set => Set(__m_flSlideChangeTime, value); }
+		/// <summary><c>GameTime_t</c>. Networked in build 6779: a write is sent to clients.</summary>
+		public GameTime m_flSlideChangeTime { get => Get<GameTime>(__m_flSlideChangeTime); set => Set(__m_flSlideChangeTime, value); }
 
 		private static readonly SchemaField __m_flSlidingOnFlatStartTime = new("CCitadel_Ability_Slide", "m_flSlidingOnFlatStartTime");
-		/// <summary><c>GameTime_t</c>.</summary>
-		public float m_flSlidingOnFlatStartTime { get => Get<float>(__m_flSlidingOnFlatStartTime); set => Set(__m_flSlidingOnFlatStartTime, value); }
+		/// <summary><c>GameTime_t</c>. Networked in build 6779: a write is sent to clients.</summary>
+		public GameTime m_flSlidingOnFlatStartTime { get => Get<GameTime>(__m_flSlidingOnFlatStartTime); set => Set(__m_flSlidingOnFlatStartTime, value); }
 
 		private static readonly SchemaField __m_flSlowGetupStartTime = new("CCitadel_Ability_Slide", "m_flSlowGetupStartTime");
-		/// <summary><c>GameTime_t</c>.</summary>
-		public float m_flSlowGetupStartTime { get => Get<float>(__m_flSlowGetupStartTime); set => Set(__m_flSlowGetupStartTime, value); }
+		/// <summary><c>GameTime_t</c>. Networked in build 6779: a write is sent to clients.</summary>
+		public GameTime m_flSlowGetupStartTime { get => Get<GameTime>(__m_flSlowGetupStartTime); set => Set(__m_flSlowGetupStartTime, value); }
 
 		private static readonly SchemaField __m_flSpeedAdjust = new("CCitadel_Ability_Slide", "m_flSpeedAdjust");
-		/// <summary><c>float32</c>.</summary>
+		/// <summary><c>float32</c>. Networked in build 6779: a write is sent to clients.</summary>
 		public float m_flSpeedAdjust { get => Get<float>(__m_flSpeedAdjust); set => Set(__m_flSpeedAdjust, value); }
 
 		private static readonly SchemaField __m_nForcedAllowRestartSlideTick = new("CCitadel_Ability_Slide", "m_nForcedAllowRestartSlideTick");
@@ -74,7 +74,7 @@ public static partial class Schema {
 		public int m_nForcedAllowRestartSlideTick { get => Get<int>(__m_nForcedAllowRestartSlideTick); set => Set(__m_nForcedAllowRestartSlideTick, value); }
 
 		private static readonly SchemaField __m_nJumpsThisSlideSession = new("CCitadel_Ability_Slide", "m_nJumpsThisSlideSession");
-		/// <summary><c>int32</c>.</summary>
+		/// <summary><c>int32</c>. Networked in build 6779: a write is sent to clients.</summary>
 		public int m_nJumpsThisSlideSession { get => Get<int>(__m_nJumpsThisSlideSession); set => Set(__m_nJumpsThisSlideSession, value); }
 
 		private static readonly SchemaField __m_nSlideEffectIndex = new("CCitadel_Ability_Slide", "m_nSlideEffectIndex");

@@ -14,8 +14,8 @@ public static partial class Schema {
 		static string ISchemaClass<CCitadel_Ability_Familiar_Ability01>.NativeName => "CCitadel_Ability_Familiar_Ability01";
 
 		private static readonly SchemaField __m_vecTargetsInCone = new("CCitadel_Ability_Familiar_Ability01", "m_vecTargetsInCone");
-		/// <summary><c>CNetworkUtlVectorBase&lt;CHandle&lt;CBaseEntity&gt;&gt;</c>.</summary>
-		public SchemaHandleList<CBaseEntity> m_vecTargetsInCone => new(this, __m_vecTargetsInCone, -1);
+		/// <summary><c>CNetworkUtlVectorBase&lt;CHandle&lt;CBaseEntity&gt;&gt;</c>. Networked in build 6779: a write is sent to clients.</summary>
+		public SchemaHandleList<CBaseEntity> m_vecTargetsInCone => new(this, __m_vecTargetsInCone, ListStorage.Vector);
 
 		/// <summary>The data entry this was created from, as <see cref="CCitadel_Ability_Familiar_Ability01VData"/>, or null if it has none.</summary>
 		public new CCitadel_Ability_Familiar_Ability01VData? VData => SubclassVData<CCitadel_Ability_Familiar_Ability01VData>();

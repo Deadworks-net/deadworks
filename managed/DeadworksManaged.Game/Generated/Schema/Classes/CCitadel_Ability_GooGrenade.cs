@@ -15,10 +15,10 @@ public static partial class Schema {
 
 		private static readonly SchemaField __m_LastDetonateTime = new("CCitadel_Ability_GooGrenade", "m_LastDetonateTime");
 		/// <summary><c>GameTime_t</c>.</summary>
-		public float m_LastDetonateTime { get => Get<float>(__m_LastDetonateTime); set => Set(__m_LastDetonateTime, value); }
+		public GameTime m_LastDetonateTime { get => Get<GameTime>(__m_LastDetonateTime); set => Set(__m_LastDetonateTime, value); }
 
 		private static readonly SchemaField __m_vecPuddleModifiers = new("CCitadel_Ability_GooGrenade", "m_vecPuddleModifiers");
-		/// <summary><c>CNetworkUtlVectorBase&lt;CHandle&lt;CBaseEntity&gt;&gt;</c>.</summary>
-		public SchemaHandleList<CBaseEntity> m_vecPuddleModifiers => new(this, __m_vecPuddleModifiers, -1);
+		/// <summary><c>CNetworkUtlVectorBase&lt;CHandle&lt;CBaseEntity&gt;&gt;</c>. Networked in build 6779: a write is sent to clients.</summary>
+		public SchemaHandleList<CBaseEntity> m_vecPuddleModifiers => new(this, __m_vecPuddleModifiers, ListStorage.Vector);
 	}
 }

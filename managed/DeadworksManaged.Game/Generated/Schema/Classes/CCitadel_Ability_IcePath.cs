@@ -14,11 +14,11 @@ public static partial class Schema {
 		static string ISchemaClass<CCitadel_Ability_IcePath>.NativeName => "CCitadel_Ability_IcePath";
 
 		private static readonly SchemaField __m_bFirstMovementTick = new("CCitadel_Ability_IcePath", "m_bFirstMovementTick");
-		/// <summary><c>bool</c>.</summary>
+		/// <summary><c>bool</c>. Networked in build 6779: a write is sent to clients.</summary>
 		public bool m_bFirstMovementTick { get => Get<bool>(__m_bFirstMovementTick); set => Set(__m_bFirstMovementTick, value); }
 
 		private static readonly SchemaField __m_bIcePathing = new("CCitadel_Ability_IcePath", "m_bIcePathing");
-		/// <summary><c>bool</c>.</summary>
+		/// <summary><c>bool</c>. Networked in build 6779: a write is sent to clients.</summary>
 		public bool m_bIcePathing { get => Get<bool>(__m_bIcePathing); set => Set(__m_bIcePathing, value); }
 
 		private static readonly SchemaField __m_cShardGenerator = new("CCitadel_Ability_IcePath", "m_cShardGenerator");
@@ -26,19 +26,19 @@ public static partial class Schema {
 		public CIcePathShardGenerator m_cShardGenerator => Embedded<CIcePathShardGenerator>(__m_cShardGenerator);
 
 		private static readonly SchemaField __m_qLastAngles = new("CCitadel_Ability_IcePath", "m_qLastAngles");
-		/// <summary><c>QAngle</c>.</summary>
+		/// <summary><c>QAngle</c>. Networked in build 6779: a write is sent to clients.</summary>
 		public Vector3 m_qLastAngles { get => Get<Vector3>(__m_qLastAngles); set => Set(__m_qLastAngles, value); }
 
 		private static readonly SchemaField __m_tLingerMovementControlUntilTime = new("CCitadel_Ability_IcePath", "m_tLingerMovementControlUntilTime");
 		/// <summary><c>GameTime_t</c>.</summary>
-		public float m_tLingerMovementControlUntilTime { get => Get<float>(__m_tLingerMovementControlUntilTime); set => Set(__m_tLingerMovementControlUntilTime, value); }
+		public GameTime m_tLingerMovementControlUntilTime { get => Get<GameTime>(__m_tLingerMovementControlUntilTime); set => Set(__m_tLingerMovementControlUntilTime, value); }
 
 		private static readonly SchemaField __m_vInitialPosition = new("CCitadel_Ability_IcePath", "m_vInitialPosition");
 		/// <summary><c>VectorWS</c>.</summary>
 		public Vector3 m_vInitialPosition { get => Get<Vector3>(__m_vInitialPosition); set => Set(__m_vInitialPosition, value); }
 
 		private static readonly SchemaField __m_vLastVelocity = new("CCitadel_Ability_IcePath", "m_vLastVelocity");
-		/// <summary><c>Vector</c>.</summary>
+		/// <summary><c>Vector</c>. Networked in build 6779: a write is sent to clients.</summary>
 		public Vector3 m_vLastVelocity { get => Get<Vector3>(__m_vLastVelocity); set => Set(__m_vLastVelocity, value); }
 
 		/// <summary>The data entry this was created from, as <see cref="CCitadel_Ability_IcePathVData"/>, or null if it has none.</summary>

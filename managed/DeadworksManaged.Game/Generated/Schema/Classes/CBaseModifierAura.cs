@@ -19,10 +19,10 @@ public static partial class Schema {
 
 		private static readonly SchemaField __m_hAuraUnits = new("CBaseModifierAura", "m_hAuraUnits");
 		/// <summary><c>CUtlVector&lt;CHandle&lt;CBaseEntity&gt;&gt;</c>.</summary>
-		public SchemaHandleList<CBaseEntity> m_hAuraUnits => new(this, __m_hAuraUnits, -1);
+		public SchemaHandleList<CBaseEntity> m_hAuraUnits => new(this, __m_hAuraUnits, ListStorage.Vector);
 
 		private static readonly SchemaField __m_hOldAuraUnits = new("CBaseModifierAura", "m_hOldAuraUnits");
 		/// <summary><c>CUtlVector&lt;CHandle&lt;CBaseEntity&gt;&gt;</c>.</summary>
-		public SchemaHandleList<CBaseEntity> m_hOldAuraUnits => new(this, __m_hOldAuraUnits, -1);
+		public SchemaHandleList<CBaseEntity> m_hOldAuraUnits => new(this, __m_hOldAuraUnits, ListStorage.Vector);
 	}
 }

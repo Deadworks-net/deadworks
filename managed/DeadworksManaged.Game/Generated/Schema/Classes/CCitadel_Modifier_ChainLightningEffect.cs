@@ -15,11 +15,11 @@ public static partial class Schema {
 
 		private static readonly SchemaField __m_hHitEntities = new("CCitadel_Modifier_ChainLightningEffect", "m_hHitEntities");
 		/// <summary><c>CUtlVector&lt;CHandle&lt;CBaseEntity&gt;&gt;</c>.</summary>
-		public SchemaHandleList<CBaseEntity> m_hHitEntities => new(this, __m_hHitEntities, -1);
+		public SchemaHandleList<CBaseEntity> m_hHitEntities => new(this, __m_hHitEntities, ListStorage.Vector);
 
 		private static readonly SchemaField __m_hUnhitEnts = new("CCitadel_Modifier_ChainLightningEffect", "m_hUnhitEnts");
 		/// <summary><c>CUtlVector&lt;CHandle&lt;CBaseEntity&gt;&gt;</c>.</summary>
-		public SchemaHandleList<CBaseEntity> m_hUnhitEnts => new(this, __m_hUnhitEnts, -1);
+		public SchemaHandleList<CBaseEntity> m_hUnhitEnts => new(this, __m_hUnhitEnts, ListStorage.Vector);
 
 		private static readonly SchemaField __m_nChainCount = new("CCitadel_Modifier_ChainLightningEffect", "m_nChainCount");
 		/// <summary><c>int32</c>.</summary>

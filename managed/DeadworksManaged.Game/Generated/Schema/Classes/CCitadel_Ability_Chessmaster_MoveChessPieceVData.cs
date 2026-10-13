@@ -135,6 +135,6 @@ public static partial class Schema {
 
 		private static readonly SchemaField __m_vecPossibleClasses = new("CCitadel_Ability_Chessmaster_MoveChessPieceVData", "m_vecPossibleClasses");
 		/// <summary><c>CUtlVector&lt;Class_T&gt;</c>.</summary>
-		public SchemaValueList<Class_T> m_vecPossibleClasses => new(this, __m_vecPossibleClasses, -1);
+		public SchemaValueList<Class_T> m_vecPossibleClasses => new(this, __m_vecPossibleClasses, ListStorage.Vector);
 	}
 }

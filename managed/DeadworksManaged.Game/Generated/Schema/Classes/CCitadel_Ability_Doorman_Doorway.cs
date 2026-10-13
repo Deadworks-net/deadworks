@@ -22,7 +22,7 @@ public static partial class Schema {
 		public double m_flLastRangeFailCast { get => Get<double>(__m_flLastRangeFailCast); set => Set(__m_flLastRangeFailCast, value); }
 
 		private static readonly SchemaField __m_hDoor1 = new("CCitadel_Ability_Doorman_Doorway", "m_hDoor1");
-		/// <summary><c>CHandle&lt;CCitadel_DoorwayPortal&gt;</c>.</summary>
+		/// <summary><c>CHandle&lt;CCitadel_DoorwayPortal&gt;</c>. Networked in build 6779: a write is sent to clients.</summary>
 		public CCitadel_DoorwayPortal? m_hDoor1 { get => GetHandle<CCitadel_DoorwayPortal>(__m_hDoor1); set => SetHandle(__m_hDoor1, value); }
 	}
 }

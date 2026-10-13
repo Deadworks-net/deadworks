@@ -14,55 +14,55 @@ public static partial class Schema {
 		static string ISchemaClass<shard_model_desc_t>.NativeName => "shard_model_desc_t";
 
 		private static readonly SchemaField __m_SurfacePropStringToken = new("shard_model_desc_t", "m_SurfacePropStringToken");
-		/// <summary><c>CUtlStringToken</c>.</summary>
+		/// <summary><c>CUtlStringToken</c>. Networked in build 6779: a write is sent to clients.</summary>
 		public uint m_SurfacePropStringToken { get => Get<uint>(__m_SurfacePropStringToken); set => Set(__m_SurfacePropStringToken, value); }
 
 		private static readonly SchemaField __m_bHasParent = new("shard_model_desc_t", "m_bHasParent");
-		/// <summary><c>bool</c>.</summary>
+		/// <summary><c>bool</c>. Networked in build 6779: a write is sent to clients.</summary>
 		public bool m_bHasParent { get => Get<bool>(__m_bHasParent); set => Set(__m_bHasParent, value); }
 
 		private static readonly SchemaField __m_bParentFrozen = new("shard_model_desc_t", "m_bParentFrozen");
-		/// <summary><c>bool</c>.</summary>
+		/// <summary><c>bool</c>. Networked in build 6779: a write is sent to clients.</summary>
 		public bool m_bParentFrozen { get => Get<bool>(__m_bParentFrozen); set => Set(__m_bParentFrozen, value); }
 
 		private static readonly SchemaField __m_flGlassHalfThickness = new("shard_model_desc_t", "m_flGlassHalfThickness");
-		/// <summary><c>float32</c>.</summary>
+		/// <summary><c>float32</c>. Networked in build 6779: a write is sent to clients.</summary>
 		public float m_flGlassHalfThickness { get => Get<float>(__m_flGlassHalfThickness); set => Set(__m_flGlassHalfThickness, value); }
 
 		private static readonly SchemaField __m_hMaterialBase = new("shard_model_desc_t", "m_hMaterialBase");
-		/// <summary><c>CStrongHandle&lt;InfoForResourceTypeIMaterial2&gt;</c>. No typed mapping yet: read it through its address.</summary>
-		public RawField m_hMaterialBase => Raw(__m_hMaterialBase, "CStrongHandle<InfoForResourceTypeIMaterial2>");
+		/// <summary><c>CStrongHandle&lt;InfoForResourceTypeIMaterial2&gt;</c>. Networked in build 6779: a write is sent to clients.</summary>
+		public ResourceHandle m_hMaterialBase { get => Get<ResourceHandle>(__m_hMaterialBase); set => Set(__m_hMaterialBase, value); }
 
 		private static readonly SchemaField __m_hMaterialDamageOverlay = new("shard_model_desc_t", "m_hMaterialDamageOverlay");
-		/// <summary><c>CStrongHandle&lt;InfoForResourceTypeIMaterial2&gt;</c>. No typed mapping yet: read it through its address.</summary>
-		public RawField m_hMaterialDamageOverlay => Raw(__m_hMaterialDamageOverlay, "CStrongHandle<InfoForResourceTypeIMaterial2>");
+		/// <summary><c>CStrongHandle&lt;InfoForResourceTypeIMaterial2&gt;</c>. Networked in build 6779: a write is sent to clients.</summary>
+		public ResourceHandle m_hMaterialDamageOverlay { get => Get<ResourceHandle>(__m_hMaterialDamageOverlay); set => Set(__m_hMaterialDamageOverlay, value); }
 
 		private static readonly SchemaField __m_nModelID = new("shard_model_desc_t", "m_nModelID");
-		/// <summary><c>int32</c>.</summary>
+		/// <summary><c>int32</c>. Networked in build 6779: a write is sent to clients.</summary>
 		public int m_nModelID { get => Get<int>(__m_nModelID); set => Set(__m_nModelID, value); }
 
 		private static readonly SchemaField __m_solid = new("shard_model_desc_t", "m_solid");
-		/// <summary><c>ShardSolid_t</c>.</summary>
+		/// <summary><c>ShardSolid_t</c>. Networked in build 6779: a write is sent to clients.</summary>
 		public ShardSolid_t m_solid { get => Get<ShardSolid_t>(__m_solid); set => Set(__m_solid, value); }
 
 		private static readonly SchemaField __m_vInitialPanelVertices = new("shard_model_desc_t", "m_vInitialPanelVertices");
-		/// <summary><c>CNetworkUtlVectorBase&lt;Vector4D&gt;</c>.</summary>
-		public SchemaValueList<Vector4> m_vInitialPanelVertices => new(this, __m_vInitialPanelVertices, -1);
+		/// <summary><c>CNetworkUtlVectorBase&lt;Vector4D&gt;</c>. Networked in build 6779: a write is sent to clients.</summary>
+		public SchemaValueList<Vector4> m_vInitialPanelVertices => new(this, __m_vInitialPanelVertices, ListStorage.Vector);
 
 		private static readonly SchemaField __m_vecPanelSize = new("shard_model_desc_t", "m_vecPanelSize");
-		/// <summary><c>Vector2D</c>.</summary>
+		/// <summary><c>Vector2D</c>. Networked in build 6779: a write is sent to clients.</summary>
 		public Vector2 m_vecPanelSize { get => Get<Vector2>(__m_vecPanelSize); set => Set(__m_vecPanelSize, value); }
 
 		private static readonly SchemaField __m_vecPanelVertices = new("shard_model_desc_t", "m_vecPanelVertices");
-		/// <summary><c>CNetworkUtlVectorBase&lt;Vector2D&gt;</c>.</summary>
-		public SchemaValueList<Vector2> m_vecPanelVertices => new(this, __m_vecPanelVertices, -1);
+		/// <summary><c>CNetworkUtlVectorBase&lt;Vector2D&gt;</c>. Networked in build 6779: a write is sent to clients.</summary>
+		public SchemaValueList<Vector2> m_vecPanelVertices => new(this, __m_vecPanelVertices, ListStorage.Vector);
 
 		private static readonly SchemaField __m_vecStressPositionA = new("shard_model_desc_t", "m_vecStressPositionA");
-		/// <summary><c>Vector2D</c>.</summary>
+		/// <summary><c>Vector2D</c>. Networked in build 6779: a write is sent to clients.</summary>
 		public Vector2 m_vecStressPositionA { get => Get<Vector2>(__m_vecStressPositionA); set => Set(__m_vecStressPositionA, value); }
 
 		private static readonly SchemaField __m_vecStressPositionB = new("shard_model_desc_t", "m_vecStressPositionB");
-		/// <summary><c>Vector2D</c>.</summary>
+		/// <summary><c>Vector2D</c>. Networked in build 6779: a write is sent to clients.</summary>
 		public Vector2 m_vecStressPositionB { get => Get<Vector2>(__m_vecStressPositionB); set => Set(__m_vecStressPositionB, value); }
 	}
 }

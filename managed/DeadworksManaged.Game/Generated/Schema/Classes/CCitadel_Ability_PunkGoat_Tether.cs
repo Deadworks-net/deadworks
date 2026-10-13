@@ -14,11 +14,11 @@ public static partial class Schema {
 		static string ISchemaClass<CCitadel_Ability_PunkGoat_Tether>.NativeName => "CCitadel_Ability_PunkGoat_Tether";
 
 		private static readonly SchemaField __m_bTetheringActive = new("CCitadel_Ability_PunkGoat_Tether", "m_bTetheringActive");
-		/// <summary><c>bool</c>.</summary>
+		/// <summary><c>bool</c>. Networked in build 6779: a write is sent to clients.</summary>
 		public bool m_bTetheringActive { get => Get<bool>(__m_bTetheringActive); set => Set(__m_bTetheringActive, value); }
 
 		private static readonly SchemaField __m_tTetherEndTime = new("CCitadel_Ability_PunkGoat_Tether", "m_tTetherEndTime");
 		/// <summary><c>GameTime_t</c>.</summary>
-		public float m_tTetherEndTime { get => Get<float>(__m_tTetherEndTime); set => Set(__m_tTetherEndTime, value); }
+		public GameTime m_tTetherEndTime { get => Get<GameTime>(__m_tTetherEndTime); set => Set(__m_tTetherEndTime, value); }
 	}
 }

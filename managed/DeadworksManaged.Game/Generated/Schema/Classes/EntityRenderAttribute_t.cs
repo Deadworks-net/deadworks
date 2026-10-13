@@ -14,11 +14,11 @@ public static partial class Schema {
 		static string ISchemaClass<EntityRenderAttribute_t>.NativeName => "EntityRenderAttribute_t";
 
 		private static readonly SchemaField __m_ID = new("EntityRenderAttribute_t", "m_ID");
-		/// <summary><c>CUtlStringToken</c>.</summary>
+		/// <summary><c>CUtlStringToken</c>. Networked in build 6779: a write is sent to clients.</summary>
 		public uint m_ID { get => Get<uint>(__m_ID); set => Set(__m_ID, value); }
 
 		private static readonly SchemaField __m_Values = new("EntityRenderAttribute_t", "m_Values");
-		/// <summary><c>Vector4D</c>.</summary>
+		/// <summary><c>Vector4D</c>. Networked in build 6779: a write is sent to clients.</summary>
 		public Vector4 m_Values { get => Get<Vector4>(__m_Values); set => Set(__m_Values, value); }
 	}
 }

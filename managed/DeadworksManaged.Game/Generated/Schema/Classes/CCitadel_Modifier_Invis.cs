@@ -23,15 +23,15 @@ public static partial class Schema {
 
 		private static readonly SchemaField __m_flLastDamageTaken = new("CCitadel_Modifier_Invis", "m_flLastDamageTaken");
 		/// <summary><c>GameTime_t</c>.</summary>
-		public float m_flLastDamageTaken { get => Get<float>(__m_flLastDamageTaken); set => Set(__m_flLastDamageTaken, value); }
+		public GameTime m_flLastDamageTaken { get => Get<GameTime>(__m_flLastDamageTaken); set => Set(__m_flLastDamageTaken, value); }
 
 		private static readonly SchemaField __m_flLastSpotted = new("CCitadel_Modifier_Invis", "m_flLastSpotted");
 		/// <summary><c>GameTime_t</c>.</summary>
-		public float m_flLastSpotted { get => Get<float>(__m_flLastSpotted); set => Set(__m_flLastSpotted, value); }
+		public GameTime m_flLastSpotted { get => Get<GameTime>(__m_flLastSpotted); set => Set(__m_flLastSpotted, value); }
 
 		private static readonly SchemaField __m_flStartInvisTime = new("CCitadel_Modifier_Invis", "m_flStartInvisTime");
 		/// <summary><c>GameTime_t</c>.</summary>
-		public float m_flStartInvisTime { get => Get<float>(__m_flStartInvisTime); set => Set(__m_flStartInvisTime, value); }
+		public GameTime m_flStartInvisTime { get => Get<GameTime>(__m_flStartInvisTime); set => Set(__m_flStartInvisTime, value); }
 
 		/// <summary>The data entry this was created from, as <see cref="CCitadel_Modifier_InvisVData"/>, or null if it has none.</summary>
 		public new CCitadel_Modifier_InvisVData? VData => ModifierData<CCitadel_Modifier_InvisVData>();

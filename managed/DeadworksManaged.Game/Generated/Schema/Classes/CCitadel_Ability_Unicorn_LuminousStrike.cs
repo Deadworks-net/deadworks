@@ -19,7 +19,7 @@ public static partial class Schema {
 
 		private static readonly SchemaField __m_flLastStackChangeTime = new("CCitadel_Ability_Unicorn_LuminousStrike", "m_flLastStackChangeTime");
 		/// <summary><c>GameTime_t</c>.</summary>
-		public float m_flLastStackChangeTime { get => Get<float>(__m_flLastStackChangeTime); set => Set(__m_flLastStackChangeTime, value); }
+		public GameTime m_flLastStackChangeTime { get => Get<GameTime>(__m_flLastStackChangeTime); set => Set(__m_flLastStackChangeTime, value); }
 
 		private static readonly SchemaField __m_nLastStackCount = new("CCitadel_Ability_Unicorn_LuminousStrike", "m_nLastStackCount");
 		/// <summary><c>int32</c>.</summary>
@@ -30,12 +30,12 @@ public static partial class Schema {
 		public int m_nStackCount { get => Get<int>(__m_nStackCount); set => Set(__m_nStackCount, value); }
 
 		private static readonly SchemaField __m_vecNextExplosionLocation = new("CCitadel_Ability_Unicorn_LuminousStrike", "m_vecNextExplosionLocation");
-		/// <summary><c>CNetworkUtlVectorBase&lt;VectorWS&gt;</c>.</summary>
-		public SchemaValueList<Vector3> m_vecNextExplosionLocation => new(this, __m_vecNextExplosionLocation, -1);
+		/// <summary><c>CNetworkUtlVectorBase&lt;VectorWS&gt;</c>. Networked in build 6779: a write is sent to clients.</summary>
+		public SchemaValueList<Vector3> m_vecNextExplosionLocation => new(this, __m_vecNextExplosionLocation, ListStorage.Vector);
 
 		private static readonly SchemaField __m_vecNextExplosionTime = new("CCitadel_Ability_Unicorn_LuminousStrike", "m_vecNextExplosionTime");
-		/// <summary><c>CNetworkUtlVectorBase&lt;GameTime_t&gt;</c>.</summary>
-		public SchemaValueList<float> m_vecNextExplosionTime => new(this, __m_vecNextExplosionTime, -1);
+		/// <summary><c>CNetworkUtlVectorBase&lt;GameTime_t&gt;</c>. Networked in build 6779: a write is sent to clients.</summary>
+		public SchemaValueList<GameTime> m_vecNextExplosionTime => new(this, __m_vecNextExplosionTime, ListStorage.Vector);
 
 		/// <summary>The data entry this was created from, as <see cref="CCitadel_Ability_Unicorn_LuminousStrikeVData"/>, or null if it has none.</summary>
 		public new CCitadel_Ability_Unicorn_LuminousStrikeVData? VData => SubclassVData<CCitadel_Ability_Unicorn_LuminousStrikeVData>();

@@ -14,7 +14,7 @@ public static partial class Schema {
 		static string ISchemaClass<CCitadelHideoutInterestPoint>.NativeName => "CCitadelHideoutInterestPoint";
 
 		private static readonly SchemaField __m_flMaxDistance = new("CCitadelHideoutInterestPoint", "m_flMaxDistance");
-		/// <summary><c>float32</c>.</summary>
+		/// <summary><c>float32</c>. Networked in build 6779: a write is sent to clients.</summary>
 		public float m_flMaxDistance { get => Get<float>(__m_flMaxDistance); set => Set(__m_flMaxDistance, value); }
 	}
 }

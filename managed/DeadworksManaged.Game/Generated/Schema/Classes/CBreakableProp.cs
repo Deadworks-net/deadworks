@@ -18,7 +18,7 @@ public static partial class Schema {
 		public BreakableContentsType_t m_BreakableContentsType { get => Get<BreakableContentsType_t>(__m_BreakableContentsType); set => Set(__m_BreakableContentsType, value); }
 
 		private static readonly SchemaField __m_CPropDataComponent = new("CBreakableProp", "m_CPropDataComponent");
-		/// <summary><c>CPropDataComponent</c>.</summary>
+		/// <summary><c>CPropDataComponent</c>. Networked in build 6779: a write is sent to clients.</summary>
 		public CPropDataComponent m_CPropDataComponent => Embedded<CPropDataComponent>(__m_CPropDataComponent);
 
 		private static readonly SchemaField __m_OnBreak = new("CBreakableProp", "m_OnBreak");
@@ -95,7 +95,7 @@ public static partial class Schema {
 
 		private static readonly SchemaField __m_flLastPhysicsInfluenceTime = new("CBreakableProp", "m_flLastPhysicsInfluenceTime");
 		/// <summary><c>GameTime_t</c>.</summary>
-		public float m_flLastPhysicsInfluenceTime { get => Get<float>(__m_flLastPhysicsInfluenceTime); set => Set(__m_flLastPhysicsInfluenceTime, value); }
+		public GameTime m_flLastPhysicsInfluenceTime { get => Get<GameTime>(__m_flLastPhysicsInfluenceTime); set => Set(__m_flLastPhysicsInfluenceTime, value); }
 
 		private static readonly SchemaField __m_flPressureDelay = new("CBreakableProp", "m_flPressureDelay");
 		/// <summary><c>float32</c>.</summary>
@@ -103,7 +103,7 @@ public static partial class Schema {
 
 		private static readonly SchemaField __m_flPreventDamageBeforeTime = new("CBreakableProp", "m_flPreventDamageBeforeTime");
 		/// <summary><c>GameTime_t</c>.</summary>
-		public float m_flPreventDamageBeforeTime { get => Get<float>(__m_flPreventDamageBeforeTime); set => Set(__m_flPreventDamageBeforeTime, value); }
+		public GameTime m_flPreventDamageBeforeTime { get => Get<GameTime>(__m_flPreventDamageBeforeTime); set => Set(__m_flPreventDamageBeforeTime, value); }
 
 		private static readonly SchemaField __m_hBreaker = new("CBreakableProp", "m_hBreaker");
 		/// <summary><c>CHandle&lt;CBaseEntity&gt;</c>.</summary>

@@ -18,11 +18,11 @@ public static partial class Schema {
 		public int m_CastStartParticle { get => Get<int>(__m_CastStartParticle); set => Set(__m_CastStartParticle, value); }
 
 		private static readonly SchemaField __m_bActive = new("CCitadel_Ability_Nano_Pounce", "m_bActive");
-		/// <summary><c>bool</c>.</summary>
+		/// <summary><c>bool</c>. Networked in build 6779: a write is sent to clients.</summary>
 		public bool m_bActive { get => Get<bool>(__m_bActive); set => Set(__m_bActive, value); }
 
 		private static readonly SchemaField __m_bIsFirstCastCompleted = new("CCitadel_Ability_Nano_Pounce", "m_bIsFirstCastCompleted");
-		/// <summary><c>bool</c>.</summary>
+		/// <summary><c>bool</c>. Networked in build 6779: a write is sent to clients.</summary>
 		public bool m_bIsFirstCastCompleted { get => Get<bool>(__m_bIsFirstCastCompleted); set => Set(__m_bIsFirstCastCompleted, value); }
 
 		private static readonly SchemaField __m_bStartedPhase01 = new("CCitadel_Ability_Nano_Pounce", "m_bStartedPhase01");
@@ -34,27 +34,27 @@ public static partial class Schema {
 		public bool m_bStartedPhase02 { get => Get<bool>(__m_bStartedPhase02); set => Set(__m_bStartedPhase02, value); }
 
 		private static readonly SchemaField __m_flArrivalTime = new("CCitadel_Ability_Nano_Pounce", "m_flArrivalTime");
-		/// <summary><c>CCitadelAutoScaledTime</c>.</summary>
+		/// <summary><c>CCitadelAutoScaledTime</c>. Networked in build 6779: a write is sent to clients.</summary>
 		public CCitadelAutoScaledTime m_flArrivalTime => Embedded<CCitadelAutoScaledTime>(__m_flArrivalTime);
 
 		private static readonly SchemaField __m_flDepartureTime = new("CCitadel_Ability_Nano_Pounce", "m_flDepartureTime");
-		/// <summary><c>CCitadelAutoScaledTime</c>.</summary>
+		/// <summary><c>CCitadelAutoScaledTime</c>. Networked in build 6779: a write is sent to clients.</summary>
 		public CCitadelAutoScaledTime m_flDepartureTime => Embedded<CCitadelAutoScaledTime>(__m_flDepartureTime);
 
 		private static readonly SchemaField __m_hCurrentTarget = new("CCitadel_Ability_Nano_Pounce", "m_hCurrentTarget");
-		/// <summary><c>CHandle&lt;CBaseEntity&gt;</c>.</summary>
+		/// <summary><c>CHandle&lt;CBaseEntity&gt;</c>. Networked in build 6779: a write is sent to clients.</summary>
 		public CBaseEntity? m_hCurrentTarget { get => GetHandle<CBaseEntity>(__m_hCurrentTarget); set => SetHandle(__m_hCurrentTarget, value); }
 
 		private static readonly SchemaField __m_hLastCastTarget = new("CCitadel_Ability_Nano_Pounce", "m_hLastCastTarget");
-		/// <summary><c>CHandle&lt;CBaseEntity&gt;</c>.</summary>
+		/// <summary><c>CHandle&lt;CBaseEntity&gt;</c>. Networked in build 6779: a write is sent to clients.</summary>
 		public CBaseEntity? m_hLastCastTarget { get => GetHandle<CBaseEntity>(__m_hLastCastTarget); set => SetHandle(__m_hLastCastTarget, value); }
 
 		private static readonly SchemaField __m_tDoubleCastWindow = new("CCitadel_Ability_Nano_Pounce", "m_tDoubleCastWindow");
-		/// <summary><c>GameTime_t</c>.</summary>
-		public float m_tDoubleCastWindow { get => Get<float>(__m_tDoubleCastWindow); set => Set(__m_tDoubleCastWindow, value); }
+		/// <summary><c>GameTime_t</c>. Networked in build 6779: a write is sent to clients.</summary>
+		public GameTime m_tDoubleCastWindow { get => Get<GameTime>(__m_tDoubleCastWindow); set => Set(__m_tDoubleCastWindow, value); }
 
 		private static readonly SchemaField __m_vDeparturePosition = new("CCitadel_Ability_Nano_Pounce", "m_vDeparturePosition");
-		/// <summary><c>VectorWS</c>.</summary>
+		/// <summary><c>VectorWS</c>. Networked in build 6779: a write is sent to clients.</summary>
 		public Vector3 m_vDeparturePosition { get => Get<Vector3>(__m_vDeparturePosition); set => Set(__m_vDeparturePosition, value); }
 
 		private static readonly SchemaField __m_vLastKnownSafePos = new("CCitadel_Ability_Nano_Pounce", "m_vLastKnownSafePos");
@@ -62,7 +62,7 @@ public static partial class Schema {
 		public Vector3 m_vLastKnownSafePos { get => Get<Vector3>(__m_vLastKnownSafePos); set => Set(__m_vLastKnownSafePos, value); }
 
 		private static readonly SchemaField __m_vStartPosition = new("CCitadel_Ability_Nano_Pounce", "m_vStartPosition");
-		/// <summary><c>VectorWS</c>.</summary>
+		/// <summary><c>VectorWS</c>. Networked in build 6779: a write is sent to clients.</summary>
 		public Vector3 m_vStartPosition { get => Get<Vector3>(__m_vStartPosition); set => Set(__m_vStartPosition, value); }
 	}
 }

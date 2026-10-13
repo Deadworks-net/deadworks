@@ -14,7 +14,7 @@ public static partial class Schema {
 		static string ISchemaClass<CCitadelRankedBadgeProp>.NativeName => "CCitadelRankedBadgeProp";
 
 		private static readonly SchemaField __m_unPackedRank = new("CCitadelRankedBadgeProp", "m_unPackedRank");
-		/// <summary><c>PackedRank_t</c>.</summary>
+		/// <summary><c>PackedRank_t</c>. Networked in build 6779: a write is sent to clients.</summary>
 		public byte m_unPackedRank { get => Get<byte>(__m_unPackedRank); set => Set(__m_unPackedRank, value); }
 	}
 }

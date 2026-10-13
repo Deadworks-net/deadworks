@@ -14,7 +14,7 @@ public static partial class Schema {
 		static string ISchemaClass<CCitadel_Ability_GoldenIdol>.NativeName => "CCitadel_Ability_GoldenIdol";
 
 		private static readonly SchemaField __m_flHeldTime = new("CCitadel_Ability_GoldenIdol", "m_flHeldTime");
-		/// <summary><c>float32</c>.</summary>
+		/// <summary><c>float32</c>. Networked in build 6779: a write is sent to clients.</summary>
 		public float m_flHeldTime { get => Get<float>(__m_flHeldTime); set => Set(__m_flHeldTime, value); }
 
 		private static readonly SchemaField __m_nGold = new("CCitadel_Ability_GoldenIdol", "m_nGold");
@@ -27,11 +27,11 @@ public static partial class Schema {
 
 		private static readonly SchemaField __m_tAbilityCreateTime = new("CCitadel_Ability_GoldenIdol", "m_tAbilityCreateTime");
 		/// <summary><c>GameTime_t</c>.</summary>
-		public float m_tAbilityCreateTime { get => Get<float>(__m_tAbilityCreateTime); set => Set(__m_tAbilityCreateTime, value); }
+		public GameTime m_tAbilityCreateTime { get => Get<GameTime>(__m_tAbilityCreateTime); set => Set(__m_tAbilityCreateTime, value); }
 
 		private static readonly SchemaField __m_tLastDamageTime = new("CCitadel_Ability_GoldenIdol", "m_tLastDamageTime");
 		/// <summary><c>GameTime_t</c>.</summary>
-		public float m_tLastDamageTime { get => Get<float>(__m_tLastDamageTime); set => Set(__m_tLastDamageTime, value); }
+		public GameTime m_tLastDamageTime { get => Get<GameTime>(__m_tLastDamageTime); set => Set(__m_tLastDamageTime, value); }
 
 		private static readonly SchemaField __m_vHomePosition = new("CCitadel_Ability_GoldenIdol", "m_vHomePosition");
 		/// <summary><c>VectorWS</c>.</summary>

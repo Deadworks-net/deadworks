@@ -14,7 +14,7 @@ public static partial class Schema {
 		static string ISchemaClass<WeakPoint_t>.NativeName => "WeakPoint_t";
 
 		private static readonly SchemaField __m_bPermanentlyBroken = new("WeakPoint_t", "m_bPermanentlyBroken");
-		/// <summary><c>bool</c>.</summary>
+		/// <summary><c>bool</c>. Networked in build 6779: a write is sent to clients.</summary>
 		public bool m_bPermanentlyBroken { get => Get<bool>(__m_bPermanentlyBroken); set => Set(__m_bPermanentlyBroken, value); }
 
 		private static readonly SchemaField __m_bRegistered = new("WeakPoint_t", "m_bRegistered");
@@ -22,19 +22,19 @@ public static partial class Schema {
 		public bool m_bRegistered { get => Get<bool>(__m_bRegistered); set => Set(__m_bRegistered, value); }
 
 		private static readonly SchemaField __m_hOuter = new("WeakPoint_t", "m_hOuter");
-		/// <summary><c>CHandle&lt;CBaseEntity&gt;</c>.</summary>
+		/// <summary><c>CHandle&lt;CBaseEntity&gt;</c>. Networked in build 6779: a write is sent to clients.</summary>
 		public CBaseEntity? m_hOuter { get => GetHandle<CBaseEntity>(__m_hOuter); set => SetHandle(__m_hOuter, value); }
 
 		private static readonly SchemaField __m_nBodyGroup = new("WeakPoint_t", "m_nBodyGroup");
-		/// <summary><c>int32</c>.</summary>
+		/// <summary><c>int32</c>. Networked in build 6779: a write is sent to clients.</summary>
 		public int m_nBodyGroup { get => Get<int>(__m_nBodyGroup); set => Set(__m_nBodyGroup, value); }
 
 		private static readonly SchemaField __m_nBrokenBodygroupIndex = new("WeakPoint_t", "m_nBrokenBodygroupIndex");
-		/// <summary><c>int32</c>.</summary>
+		/// <summary><c>int32</c>. Networked in build 6779: a write is sent to clients.</summary>
 		public int m_nBrokenBodygroupIndex { get => Get<int>(__m_nBrokenBodygroupIndex); set => Set(__m_nBrokenBodygroupIndex, value); }
 
 		private static readonly SchemaField __m_nCritHitGroup = new("WeakPoint_t", "m_nCritHitGroup");
-		/// <summary><c>HitGroup_t</c>.</summary>
+		/// <summary><c>HitGroup_t</c>. Networked in build 6779: a write is sent to clients.</summary>
 		public HitGroup_t m_nCritHitGroup { get => Get<HitGroup_t>(__m_nCritHitGroup); set => Set(__m_nCritHitGroup, value); }
 	}
 }

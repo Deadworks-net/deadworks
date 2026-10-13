@@ -15,10 +15,10 @@ public static partial class Schema {
 
 		private static readonly SchemaField __m_vecNeutrals = new("CTriggerNeutralShield", "m_vecNeutrals");
 		/// <summary><c>CUtlVector&lt;CHandle&lt;CBaseEntity&gt;&gt;</c>.</summary>
-		public SchemaHandleList<CBaseEntity> m_vecNeutrals => new(this, __m_vecNeutrals, -1);
+		public SchemaHandleList<CBaseEntity> m_vecNeutrals => new(this, __m_vecNeutrals, ListStorage.Vector);
 
 		private static readonly SchemaField __m_vecPlayers = new("CTriggerNeutralShield", "m_vecPlayers");
 		/// <summary><c>CUtlVector&lt;CHandle&lt;CBaseEntity&gt;&gt;</c>.</summary>
-		public SchemaHandleList<CBaseEntity> m_vecPlayers => new(this, __m_vecPlayers, -1);
+		public SchemaHandleList<CBaseEntity> m_vecPlayers => new(this, __m_vecPlayers, ListStorage.Vector);
 	}
 }

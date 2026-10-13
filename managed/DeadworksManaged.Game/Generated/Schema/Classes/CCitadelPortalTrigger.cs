@@ -14,7 +14,7 @@ public static partial class Schema {
 		static string ISchemaClass<CCitadelPortalTrigger>.NativeName => "CCitadelPortalTrigger";
 
 		private static readonly SchemaField __m_hOtherPortal = new("CCitadelPortalTrigger", "m_hOtherPortal");
-		/// <summary><c>CHandle&lt;CCitadelPortalTrigger&gt;</c>.</summary>
+		/// <summary><c>CHandle&lt;CCitadelPortalTrigger&gt;</c>. Networked in build 6779: a write is sent to clients.</summary>
 		public CCitadelPortalTrigger? m_hOtherPortal { get => GetHandle<CCitadelPortalTrigger>(__m_hOtherPortal); set => SetHandle(__m_hOtherPortal, value); }
 	}
 }

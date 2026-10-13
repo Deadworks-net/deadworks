@@ -27,11 +27,11 @@ public static partial class Schema {
 
 		private static readonly SchemaField __m_flLastDamageWaveTime = new("CCitadel_Modifier_StormCloud", "m_flLastDamageWaveTime");
 		/// <summary><c>GameTime_t</c>.</summary>
-		public float m_flLastDamageWaveTime { get => Get<float>(__m_flLastDamageWaveTime); set => Set(__m_flLastDamageWaveTime, value); }
+		public GameTime m_flLastDamageWaveTime { get => Get<GameTime>(__m_flLastDamageWaveTime); set => Set(__m_flLastDamageWaveTime, value); }
 
 		private static readonly SchemaField __m_flNextRandomLightningStrike = new("CCitadel_Modifier_StormCloud", "m_flNextRandomLightningStrike");
 		/// <summary><c>GameTime_t</c>.</summary>
-		public float m_flNextRandomLightningStrike { get => Get<float>(__m_flNextRandomLightningStrike); set => Set(__m_flNextRandomLightningStrike, value); }
+		public GameTime m_flNextRandomLightningStrike { get => Get<GameTime>(__m_flNextRandomLightningStrike); set => Set(__m_flNextRandomLightningStrike, value); }
 
 		private static readonly SchemaField __m_flRadiusIncrementPerSecond = new("CCitadel_Modifier_StormCloud", "m_flRadiusIncrementPerSecond");
 		/// <summary><c>float32</c>.</summary>
@@ -39,7 +39,7 @@ public static partial class Schema {
 
 		private static readonly SchemaField __m_flStartTime = new("CCitadel_Modifier_StormCloud", "m_flStartTime");
 		/// <summary><c>GameTime_t</c>.</summary>
-		public float m_flStartTime { get => Get<float>(__m_flStartTime); set => Set(__m_flStartTime, value); }
+		public GameTime m_flStartTime { get => Get<GameTime>(__m_flStartTime); set => Set(__m_flStartTime, value); }
 
 		private static readonly SchemaField __m_nLastTickForLightningCenterCalc = new("CCitadel_Modifier_StormCloud", "m_nLastTickForLightningCenterCalc");
 		/// <summary><c>int32</c>.</summary>

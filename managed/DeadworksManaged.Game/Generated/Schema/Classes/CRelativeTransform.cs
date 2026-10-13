@@ -22,11 +22,11 @@ public static partial class Schema {
 		public CBaseEntity? m_hEntity { get => GetHandle<CBaseEntity>(__m_hEntity); set => SetHandle(__m_hEntity, value); }
 
 		private static readonly SchemaField __m_transform = new("CRelativeTransform", "m_transform");
-		/// <summary><c>CTransform</c>. No typed mapping yet: read it through its address.</summary>
-		public RawField m_transform => Raw(__m_transform, "CTransform");
+		/// <summary><c>CTransform</c>.</summary>
+		public Transform m_transform { get => Get<Transform>(__m_transform); set => Set(__m_transform, value); }
 
 		private static readonly SchemaField __m_transformWS = new("CRelativeTransform", "m_transformWS");
-		/// <summary><c>CTransformWS</c>. No typed mapping yet: read it through its address.</summary>
-		public RawField m_transformWS => Raw(__m_transformWS, "CTransformWS");
+		/// <summary><c>CTransformWS</c>.</summary>
+		public Transform m_transformWS { get => Get<Transform>(__m_transformWS); set => Set(__m_transformWS, value); }
 	}
 }

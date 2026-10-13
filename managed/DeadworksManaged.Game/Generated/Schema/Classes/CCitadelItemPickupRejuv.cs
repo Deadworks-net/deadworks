@@ -14,11 +14,11 @@ public static partial class Schema {
 		static string ISchemaClass<CCitadelItemPickupRejuv>.NativeName => "CCitadelItemPickupRejuv";
 
 		private static readonly SchemaField __m_CCitadelAbilityComponent = new("CCitadelItemPickupRejuv", "m_CCitadelAbilityComponent");
-		/// <summary><c>CCitadelAbilityComponent</c>.</summary>
+		/// <summary><c>CCitadelAbilityComponent</c>. Networked in build 6779: a write is sent to clients.</summary>
 		public CCitadelAbilityComponent m_CCitadelAbilityComponent => Embedded<CCitadelAbilityComponent>(__m_CCitadelAbilityComponent);
 
 		private static readonly SchemaField __m_bPickedUp = new("CCitadelItemPickupRejuv", "m_bPickedUp");
-		/// <summary><c>bool</c>.</summary>
+		/// <summary><c>bool</c>. Networked in build 6779: a write is sent to clients.</summary>
 		public bool m_bPickedUp { get => Get<bool>(__m_bPickedUp); set => Set(__m_bPickedUp, value); }
 
 		/// <summary>The data entry this was created from, as <see cref="CCitadelItemPickupRejuvVData"/>, or null if it has none.</summary>

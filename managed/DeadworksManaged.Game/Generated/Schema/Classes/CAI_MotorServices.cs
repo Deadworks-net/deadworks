@@ -22,7 +22,7 @@ public static partial class Schema {
 		public int m_nActiveMotorIndex { get => Get<int>(__m_nActiveMotorIndex); set => Set(__m_nActiveMotorIndex, value); }
 
 		private static readonly SchemaField __m_nCurrentStance = new("CAI_MotorServices", "m_nCurrentStance");
-		/// <summary><c>StanceType_t</c>.</summary>
+		/// <summary><c>StanceType_t</c>. Networked in build 6779: a write is sent to clients.</summary>
 		public StanceType_t m_nCurrentStance { get => Get<StanceType_t>(__m_nCurrentStance); set => Set(__m_nCurrentStance, value); }
 
 		private static readonly SchemaField __m_nullMotor = new("CAI_MotorServices", "m_nullMotor");
@@ -42,7 +42,7 @@ public static partial class Schema {
 		public SchemaObjectList<CAI_MotorServices__StanceRequest_t> m_pStanceRequests => new(this, __m_pStanceRequests, 6);
 
 		private static readonly SchemaField __m_sSharedPoseSlotID = new("CAI_MotorServices", "m_sSharedPoseSlotID");
-		/// <summary><c>CGlobalSymbol</c>.</summary>
+		/// <summary><c>CGlobalSymbol</c>. Networked in build 6779: a write is sent to clients.</summary>
 		public string m_sSharedPoseSlotID => GetString(__m_sSharedPoseSlotID);
 
 		private static readonly SchemaField __m_vMotorVelocity = new("CAI_MotorServices", "m_vMotorVelocity");
@@ -51,10 +51,10 @@ public static partial class Schema {
 
 		private static readonly SchemaField __m_vecMotors = new("CAI_MotorServices", "m_vecMotors");
 		/// <summary><c>CUtlVector&lt;CAI_MotorServices::MotorRegistration_t&gt;</c>.</summary>
-		public SchemaObjectList<CAI_MotorServices__MotorRegistration_t> m_vecMotors => new(this, __m_vecMotors, -1);
+		public SchemaObjectList<CAI_MotorServices__MotorRegistration_t> m_vecMotors => new(this, __m_vecMotors, ListStorage.Vector);
 
 		private static readonly SchemaField __m_vecSharedPoseParentSpace = new("CAI_MotorServices", "m_vecSharedPoseParentSpace");
-		/// <summary><c>CNetworkUtlVectorBase&lt;CTransform&gt;</c>. No typed mapping yet: read it through its address.</summary>
-		public RawField m_vecSharedPoseParentSpace => Raw(__m_vecSharedPoseParentSpace, "CNetworkUtlVectorBase<CTransform>");
+		/// <summary><c>CNetworkUtlVectorBase&lt;CTransform&gt;</c>. Networked in build 6779: a write is sent to clients.</summary>
+		public SchemaValueList<Transform> m_vecSharedPoseParentSpace => new(this, __m_vecSharedPoseParentSpace, ListStorage.Vector);
 	}
 }

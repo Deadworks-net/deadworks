@@ -15,7 +15,7 @@ public static partial class Schema {
 
 		private static readonly SchemaField __m_ProceduralRelaySources = new("CPointPrefab", "m_ProceduralRelaySources");
 		/// <summary><c>CUtlVector&lt;CHandle&lt;CBaseEntity&gt;&gt;</c>.</summary>
-		public SchemaHandleList<CBaseEntity> m_ProceduralRelaySources => new(this, __m_ProceduralRelaySources, -1);
+		public SchemaHandleList<CBaseEntity> m_ProceduralRelaySources => new(this, __m_ProceduralRelaySources, ListStorage.Vector);
 
 		private static readonly SchemaField __m_associatedRelayEntity = new("CPointPrefab", "m_associatedRelayEntity");
 		/// <summary><c>CHandle&lt;CPointPrefab&gt;</c>.</summary>

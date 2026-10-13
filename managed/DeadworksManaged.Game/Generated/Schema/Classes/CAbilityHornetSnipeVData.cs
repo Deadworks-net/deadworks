@@ -39,7 +39,7 @@ public static partial class Schema {
 
 		private static readonly SchemaField __m_ScopeFoV = new("CAbilityHornetSnipeVData", "m_ScopeFoV");
 		/// <summary><c>CUtlVector&lt;float32&gt;</c>.</summary>
-		public SchemaValueList<float> m_ScopeFoV => new(this, __m_ScopeFoV, -1);
+		public SchemaValueList<float> m_ScopeFoV => new(this, __m_ScopeFoV, ListStorage.Vector);
 
 		private static readonly SchemaField __m_SnipeModifier = new("CAbilityHornetSnipeVData", "m_SnipeModifier");
 		/// <summary><c>CEmbeddedSubclass&lt;CCitadelModifier&gt;</c>.</summary>

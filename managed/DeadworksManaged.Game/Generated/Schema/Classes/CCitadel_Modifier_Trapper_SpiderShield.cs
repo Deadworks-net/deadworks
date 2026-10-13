@@ -15,6 +15,6 @@ public static partial class Schema {
 
 		private static readonly SchemaField __m_flNextPulseTime = new("CCitadel_Modifier_Trapper_SpiderShield", "m_flNextPulseTime");
 		/// <summary><c>GameTime_t</c>.</summary>
-		public float m_flNextPulseTime { get => Get<float>(__m_flNextPulseTime); set => Set(__m_flNextPulseTime, value); }
+		public GameTime m_flNextPulseTime { get => Get<GameTime>(__m_flNextPulseTime); set => Set(__m_flNextPulseTime, value); }
 	}
 }

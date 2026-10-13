@@ -18,11 +18,11 @@ public static partial class Schema {
 		public CountdownTimer m_transitionTimer => Embedded<CountdownTimer>(__m_transitionTimer);
 
 		private static readonly SchemaField __m_xTransitionOrigin = new("CNavLinkMotor_NonZUp_Transition", "m_xTransitionOrigin");
-		/// <summary><c>CTransformWS</c>. No typed mapping yet: read it through its address.</summary>
-		public RawField m_xTransitionOrigin => Raw(__m_xTransitionOrigin, "CTransformWS");
+		/// <summary><c>CTransformWS</c>.</summary>
+		public Transform m_xTransitionOrigin { get => Get<Transform>(__m_xTransitionOrigin); set => Set(__m_xTransitionOrigin, value); }
 
 		private static readonly SchemaField __m_xTransitionTarget = new("CNavLinkMotor_NonZUp_Transition", "m_xTransitionTarget");
-		/// <summary><c>CTransformWS</c>. No typed mapping yet: read it through its address.</summary>
-		public RawField m_xTransitionTarget => Raw(__m_xTransitionTarget, "CTransformWS");
+		/// <summary><c>CTransformWS</c>.</summary>
+		public Transform m_xTransitionTarget { get => Get<Transform>(__m_xTransitionTarget); set => Set(__m_xTransitionTarget, value); }
 	}
 }

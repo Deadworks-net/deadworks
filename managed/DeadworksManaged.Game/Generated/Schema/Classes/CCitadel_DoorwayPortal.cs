@@ -14,11 +14,11 @@ public static partial class Schema {
 		static string ISchemaClass<CCitadel_DoorwayPortal>.NativeName => "CCitadel_DoorwayPortal";
 
 		private static readonly SchemaField __m_CCitadelMinimapComponent = new("CCitadel_DoorwayPortal", "m_CCitadelMinimapComponent");
-		/// <summary><c>CCitadelMinimapComponent</c>.</summary>
+		/// <summary><c>CCitadelMinimapComponent</c>. Networked in build 6779: a write is sent to clients.</summary>
 		public CCitadelMinimapComponent m_CCitadelMinimapComponent => Embedded<CCitadelMinimapComponent>(__m_CCitadelMinimapComponent);
 
 		private static readonly SchemaField __m_hLinkedDoorway = new("CCitadel_DoorwayPortal", "m_hLinkedDoorway");
-		/// <summary><c>CHandle&lt;CCitadel_DoorwayPortal&gt;</c>.</summary>
+		/// <summary><c>CHandle&lt;CCitadel_DoorwayPortal&gt;</c>. Networked in build 6779: a write is sent to clients.</summary>
 		public CCitadel_DoorwayPortal? m_hLinkedDoorway { get => GetHandle<CCitadel_DoorwayPortal>(__m_hLinkedDoorway); set => SetHandle(__m_hLinkedDoorway, value); }
 
 		/// <summary>Fires the <c>Close</c> input. Close the door.</summary>

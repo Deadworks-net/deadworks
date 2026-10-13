@@ -14,8 +14,8 @@ public static partial class Schema {
 		static string ISchemaClass<CPathQueryUtil>.NativeName => "CPathQueryUtil";
 
 		private static readonly SchemaField __m_PathToEntityTransform = new("CPathQueryUtil", "m_PathToEntityTransform");
-		/// <summary><c>CTransform</c>. No typed mapping yet: read it through its address.</summary>
-		public RawField m_PathToEntityTransform => Raw(__m_PathToEntityTransform, "CTransform");
+		/// <summary><c>CTransform</c>.</summary>
+		public Transform m_PathToEntityTransform { get => Get<Transform>(__m_PathToEntityTransform); set => Set(__m_PathToEntityTransform, value); }
 
 		private static readonly SchemaField __m_bIsClosedLoop = new("CPathQueryUtil", "m_bIsClosedLoop");
 		/// <summary><c>bool</c>.</summary>
@@ -23,14 +23,14 @@ public static partial class Schema {
 
 		private static readonly SchemaField __m_vecPathSampleDistances = new("CPathQueryUtil", "m_vecPathSampleDistances");
 		/// <summary><c>CUtlVector&lt;float32&gt;</c>.</summary>
-		public SchemaValueList<float> m_vecPathSampleDistances => new(this, __m_vecPathSampleDistances, -1);
+		public SchemaValueList<float> m_vecPathSampleDistances => new(this, __m_vecPathSampleDistances, ListStorage.Vector);
 
 		private static readonly SchemaField __m_vecPathSampleParameters = new("CPathQueryUtil", "m_vecPathSampleParameters");
 		/// <summary><c>CUtlVector&lt;float32&gt;</c>.</summary>
-		public SchemaValueList<float> m_vecPathSampleParameters => new(this, __m_vecPathSampleParameters, -1);
+		public SchemaValueList<float> m_vecPathSampleParameters => new(this, __m_vecPathSampleParameters, ListStorage.Vector);
 
 		private static readonly SchemaField __m_vecPathSamplePositions = new("CPathQueryUtil", "m_vecPathSamplePositions");
 		/// <summary><c>CUtlVector&lt;Vector&gt;</c>.</summary>
-		public SchemaValueList<Vector3> m_vecPathSamplePositions => new(this, __m_vecPathSamplePositions, -1);
+		public SchemaValueList<Vector3> m_vecPathSamplePositions => new(this, __m_vecPathSamplePositions, ListStorage.Vector);
 	}
 }

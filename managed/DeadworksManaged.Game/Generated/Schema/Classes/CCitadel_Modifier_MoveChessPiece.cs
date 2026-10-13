@@ -23,7 +23,7 @@ public static partial class Schema {
 
 		private static readonly SchemaField __m_vecHitUnits = new("CCitadel_Modifier_MoveChessPiece", "m_vecHitUnits");
 		/// <summary><c>CUtlVector&lt;CHandle&lt;CBaseEntity&gt;&gt;</c>.</summary>
-		public SchemaHandleList<CBaseEntity> m_vecHitUnits => new(this, __m_vecHitUnits, -1);
+		public SchemaHandleList<CBaseEntity> m_vecHitUnits => new(this, __m_vecHitUnits, ListStorage.Vector);
 
 		private static readonly SchemaField __m_vecStartLocation = new("CCitadel_Modifier_MoveChessPiece", "m_vecStartLocation");
 		/// <summary><c>VectorWS</c>.</summary>

@@ -14,7 +14,7 @@ public static partial class Schema {
 		static string ISchemaClass<CCitadel_Modifier_HeldItemPickupAuraVData>.NativeName => "CCitadel_Modifier_HeldItemPickupAuraVData";
 
 		private static readonly SchemaField __m_strFilterAbilityName = new("CCitadel_Modifier_HeldItemPickupAuraVData", "m_strFilterAbilityName");
-		/// <summary><c>CSubclassName</c>. No typed mapping yet: read it through its address.</summary>
-		public RawField m_strFilterAbilityName => Raw(__m_strFilterAbilityName, "CSubclassName");
+		/// <summary><c>CSubclassName</c>.</summary>
+		public string m_strFilterAbilityName => GetString(__m_strFilterAbilityName);
 	}
 }

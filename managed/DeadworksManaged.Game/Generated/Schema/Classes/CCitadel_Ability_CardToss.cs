@@ -14,7 +14,7 @@ public static partial class Schema {
 		static string ISchemaClass<CCitadel_Ability_CardToss>.NativeName => "CCitadel_Ability_CardToss";
 
 		private static readonly SchemaField __m_bCardIsFlying = new("CCitadel_Ability_CardToss", "m_bCardIsFlying");
-		/// <summary><c>bool</c>.</summary>
+		/// <summary><c>bool</c>. Networked in build 6779: a write is sent to clients.</summary>
 		public bool m_bCardIsFlying { get => Get<bool>(__m_bCardIsFlying); set => Set(__m_bCardIsFlying, value); }
 
 		private static readonly SchemaField __m_nPreviousMaxCharges = new("CCitadel_Ability_CardToss", "m_nPreviousMaxCharges");
@@ -23,14 +23,14 @@ public static partial class Schema {
 
 		private static readonly SchemaField __m_vCardList = new("CCitadel_Ability_CardToss", "m_vCardList");
 		/// <summary><c>CUtlVector&lt;EWraithCardType&gt;</c>.</summary>
-		public SchemaValueList<EWraithCardType> m_vCardList => new(this, __m_vCardList, -1);
+		public SchemaValueList<EWraithCardType> m_vCardList => new(this, __m_vCardList, ListStorage.Vector);
 
 		private static readonly SchemaField __m_vecCards = new("CCitadel_Ability_CardToss", "m_vecCards");
 		/// <summary><c>CUtlVector&lt;CCitadel_Ability_CardToss::Card_t&gt;</c>.</summary>
-		public SchemaObjectList<CCitadel_Ability_CardToss__Card_t> m_vecCards => new(this, __m_vecCards, -1);
+		public SchemaObjectList<CCitadel_Ability_CardToss__Card_t> m_vecCards => new(this, __m_vecCards, ListStorage.Vector);
 
 		private static readonly SchemaField __m_vecFlyingCards = new("CCitadel_Ability_CardToss", "m_vecFlyingCards");
 		/// <summary><c>CUtlVector&lt;CCitadel_Ability_CardToss::Card_t&gt;</c>.</summary>
-		public SchemaObjectList<CCitadel_Ability_CardToss__Card_t> m_vecFlyingCards => new(this, __m_vecFlyingCards, -1);
+		public SchemaObjectList<CCitadel_Ability_CardToss__Card_t> m_vecFlyingCards => new(this, __m_vecFlyingCards, ListStorage.Vector);
 	}
 }

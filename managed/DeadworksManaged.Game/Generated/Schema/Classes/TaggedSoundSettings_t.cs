@@ -14,7 +14,7 @@ public static partial class Schema {
 		static string ISchemaClass<TaggedSoundSettings_t>.NativeName => "TaggedSoundSettings_t";
 
 		private static readonly SchemaField __m_taggedSounds = new("TaggedSoundSettings_t", "m_taggedSounds");
-		/// <summary><c>CUtlVector&lt;CStrongHandle&lt;InfoForResourceTypeCVDataResource&gt;&gt;</c>. No typed mapping yet: read it through its address.</summary>
-		public RawField m_taggedSounds => Raw(__m_taggedSounds, "CUtlVector<CStrongHandle<InfoForResourceTypeCVDataResource>>");
+		/// <summary><c>CUtlVector&lt;CStrongHandle&lt;InfoForResourceTypeCVDataResource&gt;&gt;</c>.</summary>
+		public SchemaValueList<ResourceHandle> m_taggedSounds => new(this, __m_taggedSounds, ListStorage.Vector);
 	}
 }

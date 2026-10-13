@@ -23,7 +23,7 @@ public static partial class Schema {
 
 		private static readonly SchemaField __m_BreakableSpawnTimeDesc = new("CitadelGenericData_t", "m_BreakableSpawnTimeDesc");
 		/// <summary><c>CUtlVector&lt;BreakableSpawnTimeDesc_t&gt;</c>.</summary>
-		public SchemaObjectList<BreakableSpawnTimeDesc_t> m_BreakableSpawnTimeDesc => new(this, __m_BreakableSpawnTimeDesc, -1);
+		public SchemaObjectList<BreakableSpawnTimeDesc_t> m_BreakableSpawnTimeDesc => new(this, __m_BreakableSpawnTimeDesc, ListStorage.Vector);
 
 		private static readonly SchemaField __m_ColorEnemy = new("CitadelGenericData_t", "m_ColorEnemy");
 		/// <summary><c>Color</c>.</summary>
@@ -83,7 +83,7 @@ public static partial class Schema {
 
 		private static readonly SchemaField __m_MapDistrictLocalization = new("CitadelGenericData_t", "m_MapDistrictLocalization");
 		/// <summary><c>CUtlVector&lt;MapDistrictDesc_t&gt;</c>.</summary>
-		public SchemaObjectList<MapDistrictDesc_t> m_MapDistrictLocalization => new(this, __m_MapDistrictLocalization, -1);
+		public SchemaObjectList<MapDistrictDesc_t> m_MapDistrictLocalization => new(this, __m_MapDistrictLocalization, ListStorage.Vector);
 
 		private static readonly SchemaField __m_MidbossIndicatorRespawningParticle = new("CitadelGenericData_t", "m_MidbossIndicatorRespawningParticle");
 		/// <summary><c>CResourceNameTyped&lt;CWeakHandle&lt;InfoForResourceTypeIParticleSystemDefinition&gt;&gt;</c>.</summary>
@@ -95,7 +95,7 @@ public static partial class Schema {
 
 		private static readonly SchemaField __m_MiniMapOffsets = new("CitadelGenericData_t", "m_MiniMapOffsets");
 		/// <summary><c>CUtlVector&lt;MinimapOffsetDesc_t&gt;</c>.</summary>
-		public SchemaObjectList<MinimapOffsetDesc_t> m_MiniMapOffsets => new(this, __m_MiniMapOffsets, -1);
+		public SchemaObjectList<MinimapOffsetDesc_t> m_MiniMapOffsets => new(this, __m_MiniMapOffsets, ListStorage.Vector);
 
 		private static readonly SchemaField __m_NewPlayerMetrics = new("CitadelGenericData_t", "m_NewPlayerMetrics");
 		/// <summary><c>NewPlayerMetrics_t[4]</c>.</summary>
@@ -215,18 +215,18 @@ public static partial class Schema {
 
 		private static readonly SchemaField __m_vecArmorGroups = new("CitadelGenericData_t", "m_vecArmorGroups");
 		/// <summary><c>CUtlVector&lt;ShopGroups_t&gt;</c>.</summary>
-		public SchemaObjectList<ShopGroups_t> m_vecArmorGroups => new(this, __m_vecArmorGroups, -1);
+		public SchemaObjectList<ShopGroups_t> m_vecArmorGroups => new(this, __m_vecArmorGroups, ListStorage.Vector);
 
 		private static readonly SchemaField __m_vecCorruptedPenaltyDefs = new("CitadelGenericData_t", "m_vecCorruptedPenaltyDefs");
 		/// <summary><c>CUtlVector&lt;CorruptedPenaltyDef_t&gt;</c>. Downsides rolled onto every corruptible item at match start. The networked id is the index into this list, so only ever append.</summary>
-		public SchemaObjectList<CorruptedPenaltyDef_t> m_vecCorruptedPenaltyDefs => new(this, __m_vecCorruptedPenaltyDefs, -1);
+		public SchemaObjectList<CorruptedPenaltyDef_t> m_vecCorruptedPenaltyDefs => new(this, __m_vecCorruptedPenaltyDefs, ListStorage.Vector);
 
 		private static readonly SchemaField __m_vecSpiritGroups = new("CitadelGenericData_t", "m_vecSpiritGroups");
 		/// <summary><c>CUtlVector&lt;ShopGroups_t&gt;</c>.</summary>
-		public SchemaObjectList<ShopGroups_t> m_vecSpiritGroups => new(this, __m_vecSpiritGroups, -1);
+		public SchemaObjectList<ShopGroups_t> m_vecSpiritGroups => new(this, __m_vecSpiritGroups, ListStorage.Vector);
 
 		private static readonly SchemaField __m_vecWeaponGroups = new("CitadelGenericData_t", "m_vecWeaponGroups");
 		/// <summary><c>CUtlVector&lt;ShopGroups_t&gt;</c>.</summary>
-		public SchemaObjectList<ShopGroups_t> m_vecWeaponGroups => new(this, __m_vecWeaponGroups, -1);
+		public SchemaObjectList<ShopGroups_t> m_vecWeaponGroups => new(this, __m_vecWeaponGroups, ListStorage.Vector);
 	}
 }

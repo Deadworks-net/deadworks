@@ -39,6 +39,6 @@ public static partial class Schema {
 
 		private static readonly SchemaField __m_vecEntityClasses = new("PingConditions_t", "m_vecEntityClasses");
 		/// <summary><c>CUtlVector&lt;Class_T&gt;</c>. Optional. Only fires for these entity classes. Useful on a shared row that covers a family.</summary>
-		public SchemaValueList<Class_T> m_vecEntityClasses => new(this, __m_vecEntityClasses, -1);
+		public SchemaValueList<Class_T> m_vecEntityClasses => new(this, __m_vecEntityClasses, ListStorage.Vector);
 	}
 }

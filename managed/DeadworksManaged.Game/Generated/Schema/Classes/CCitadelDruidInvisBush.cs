@@ -15,11 +15,11 @@ public static partial class Schema {
 
 		private static readonly SchemaField __m_flEndGrowTime = new("CCitadelDruidInvisBush", "m_flEndGrowTime");
 		/// <summary><c>GameTime_t</c>.</summary>
-		public float m_flEndGrowTime { get => Get<float>(__m_flEndGrowTime); set => Set(__m_flEndGrowTime, value); }
+		public GameTime m_flEndGrowTime { get => Get<GameTime>(__m_flEndGrowTime); set => Set(__m_flEndGrowTime, value); }
 
 		private static readonly SchemaField __m_flStartGrowTime = new("CCitadelDruidInvisBush", "m_flStartGrowTime");
 		/// <summary><c>GameTime_t</c>.</summary>
-		public float m_flStartGrowTime { get => Get<float>(__m_flStartGrowTime); set => Set(__m_flStartGrowTime, value); }
+		public GameTime m_flStartGrowTime { get => Get<GameTime>(__m_flStartGrowTime); set => Set(__m_flStartGrowTime, value); }
 
 		private static readonly SchemaField __m_vEndPos = new("CCitadelDruidInvisBush", "m_vEndPos");
 		/// <summary><c>VectorWS</c>.</summary>

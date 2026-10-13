@@ -15,7 +15,7 @@ public static partial class Schema {
 
 		private static readonly SchemaField __m_flLastTimeShouldKeepTrained = new("LingeringCopiedAbility_t", "m_flLastTimeShouldKeepTrained");
 		/// <summary><c>GameTime_t</c>.</summary>
-		public float m_flLastTimeShouldKeepTrained { get => Get<float>(__m_flLastTimeShouldKeepTrained); set => Set(__m_flLastTimeShouldKeepTrained, value); }
+		public GameTime m_flLastTimeShouldKeepTrained { get => Get<GameTime>(__m_flLastTimeShouldKeepTrained); set => Set(__m_flLastTimeShouldKeepTrained, value); }
 
 		private static readonly SchemaField __m_hAbility = new("LingeringCopiedAbility_t", "m_hAbility");
 		/// <summary><c>CHandle&lt;CCitadelBaseAbility&gt;</c>.</summary>
@@ -35,6 +35,6 @@ public static partial class Schema {
 
 		private static readonly SchemaField __m_vecSpawnedEntities = new("LingeringCopiedAbility_t", "m_vecSpawnedEntities");
 		/// <summary><c>CUtlVector&lt;CHandle&lt;CBaseEntity&gt;&gt;</c>.</summary>
-		public SchemaHandleList<CBaseEntity> m_vecSpawnedEntities => new(this, __m_vecSpawnedEntities, -1);
+		public SchemaHandleList<CBaseEntity> m_vecSpawnedEntities => new(this, __m_vecSpawnedEntities, ListStorage.Vector);
 	}
 }

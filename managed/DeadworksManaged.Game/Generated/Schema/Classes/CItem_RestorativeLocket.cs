@@ -14,7 +14,7 @@ public static partial class Schema {
 		static string ISchemaClass<CItem_RestorativeLocket>.NativeName => "CItem_RestorativeLocket";
 
 		private static readonly SchemaField __m_nNumStacks = new("CItem_RestorativeLocket", "m_nNumStacks");
-		/// <summary><c>int32</c>.</summary>
+		/// <summary><c>int32</c>. Networked in build 6779: a write is sent to clients.</summary>
 		public int m_nNumStacks { get => Get<int>(__m_nNumStacks); set => Set(__m_nNumStacks, value); }
 	}
 }

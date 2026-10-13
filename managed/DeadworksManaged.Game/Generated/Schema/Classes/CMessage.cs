@@ -34,8 +34,8 @@ public static partial class Schema {
 		public string m_iszMessage { get => GetString(__m_iszMessage); set => SetString(__m_iszMessage, value); }
 
 		private static readonly SchemaField __m_sNoise = new("CMessage", "m_sNoise");
-		/// <summary><c>CGameSoundEventName</c>. No typed mapping yet: read it through its address.</summary>
-		public RawField m_sNoise => Raw(__m_sNoise, "CGameSoundEventName");
+		/// <summary><c>CGameSoundEventName</c>.</summary>
+		public string m_sNoise => GetString(__m_sNoise);
 
 		/// <summary>Fires the <c>ShowMessage</c> input.</summary>
 		public void InputShowMessage() => FireInput("ShowMessage");

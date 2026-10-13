@@ -14,7 +14,7 @@ public static partial class Schema {
 		static string ISchemaClass<CCitadel_Item_GooseEgg>.NativeName => "CCitadel_Item_GooseEgg";
 
 		private static readonly SchemaField __m_iAccruedGold = new("CCitadel_Item_GooseEgg", "m_iAccruedGold");
-		/// <summary><c>int32</c>.</summary>
+		/// <summary><c>int32</c>. Networked in build 6779: a write is sent to clients.</summary>
 		public int m_iAccruedGold { get => Get<int>(__m_iAccruedGold); set => Set(__m_iAccruedGold, value); }
 	}
 }

@@ -27,6 +27,6 @@ public static partial class Schema {
 
 		private static readonly SchemaField __m_vecClawSwipeInfos = new("CCitadel_Ability_Werewolf_ClawWeaponVData", "m_vecClawSwipeInfos");
 		/// <summary><c>CUtlVector&lt;ClawSwipeInfo_t&gt;</c>.</summary>
-		public SchemaObjectList<ClawSwipeInfo_t> m_vecClawSwipeInfos => new(this, __m_vecClawSwipeInfos, -1);
+		public SchemaObjectList<ClawSwipeInfo_t> m_vecClawSwipeInfos => new(this, __m_vecClawSwipeInfos, ListStorage.Vector);
 	}
 }

@@ -46,7 +46,7 @@ public static partial class Schema {
 		public CEntityIOOutput m_OnTouchingEachEntity => Embedded<CEntityIOOutput>(__m_OnTouchingEachEntity);
 
 		private static readonly SchemaField __m_bDisabled = new("CBaseTrigger", "m_bDisabled");
-		/// <summary><c>bool</c>.</summary>
+		/// <summary><c>bool</c>. Networked in build 6779: a write is sent to clients.</summary>
 		public bool m_bDisabled { get => Get<bool>(__m_bDisabled); set => Set(__m_bDisabled, value); }
 
 		private static readonly SchemaField __m_bUseAsyncQueries = new("CBaseTrigger", "m_bUseAsyncQueries");
@@ -59,7 +59,7 @@ public static partial class Schema {
 
 		private static readonly SchemaField __m_hTouchingEntities = new("CBaseTrigger", "m_hTouchingEntities");
 		/// <summary><c>CUtlVector&lt;CHandle&lt;CBaseEntity&gt;&gt;</c>.</summary>
-		public SchemaHandleList<CBaseEntity> m_hTouchingEntities => new(this, __m_hTouchingEntities, -1);
+		public SchemaHandleList<CBaseEntity> m_hTouchingEntities => new(this, __m_hTouchingEntities, ListStorage.Vector);
 
 		private static readonly SchemaField __m_iFilterName = new("CBaseTrigger", "m_iFilterName");
 		/// <summary><c>CUtlSymbolLarge</c>.</summary>

@@ -15,6 +15,6 @@ public static partial class Schema {
 
 		private static readonly SchemaField __m_vecTargets = new("CUnreachableTargetList", "m_vecTargets");
 		/// <summary><c>CUtlVector&lt;UnreachableTarget_t&gt;</c>.</summary>
-		public SchemaObjectList<UnreachableTarget_t> m_vecTargets => new(this, __m_vecTargets, -1);
+		public SchemaObjectList<UnreachableTarget_t> m_vecTargets => new(this, __m_vecTargets, ListStorage.Vector);
 	}
 }

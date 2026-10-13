@@ -23,6 +23,6 @@ public static partial class Schema {
 
 		private static readonly SchemaField __m_vecPushers = new("CNpcFootSweep", "m_vecPushers");
 		/// <summary><c>CUtlVector&lt;FootSweepPusher_t&gt;</c>.</summary>
-		public SchemaObjectList<FootSweepPusher_t> m_vecPushers => new(this, __m_vecPushers, -1);
+		public SchemaObjectList<FootSweepPusher_t> m_vecPushers => new(this, __m_vecPushers, ListStorage.Vector);
 	}
 }

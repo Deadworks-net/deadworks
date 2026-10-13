@@ -535,10 +535,10 @@ public static partial class Schema {
 
 		private static readonly SchemaField __m_vecOriginOffsets = new("CCitadelWeaponInfo", "m_vecOriginOffsets");
 		/// <summary><c>CUtlVector&lt;Vector2D&gt;</c>. Shotgun Pellet Spawn Origin Offsets. Allows you to manually define where pellets can be created.</summary>
-		public SchemaValueList<Vector2> m_vecOriginOffsets => new(this, __m_vecOriginOffsets, -1);
+		public SchemaValueList<Vector2> m_vecOriginOffsets => new(this, __m_vecOriginOffsets, ListStorage.Vector);
 
 		private static readonly SchemaField __m_vecScatterOffsets = new("CCitadelWeaponInfo", "m_vecScatterOffsets");
 		/// <summary><c>CUtlVector&lt;Vector2D&gt;</c>. Shotgun Scatter offsets. Allows you to manually define where pellets from shotguns go..</summary>
-		public SchemaValueList<Vector2> m_vecScatterOffsets => new(this, __m_vecScatterOffsets, -1);
+		public SchemaValueList<Vector2> m_vecScatterOffsets => new(this, __m_vecScatterOffsets, ListStorage.Vector);
 	}
 }

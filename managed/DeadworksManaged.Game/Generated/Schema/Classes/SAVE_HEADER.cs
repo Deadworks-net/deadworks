@@ -34,8 +34,8 @@ public static partial class Schema {
 		public int m_saveId { get => Get<int>(__m_saveId); set => Set(__m_saveId, value); }
 
 		private static readonly SchemaField __m_vecWorldOffset = new("SAVE_HEADER", "m_vecWorldOffset");
-		/// <summary><c>matrix3x4a_t</c>. No typed mapping yet: read it through its address.</summary>
-		public RawField m_vecWorldOffset => Raw(__m_vecWorldOffset, "matrix3x4a_t");
+		/// <summary><c>matrix3x4a_t</c>.</summary>
+		public Matrix3x4 m_vecWorldOffset { get => Get<Matrix3x4>(__m_vecWorldOffset); set => Set(__m_vecWorldOffset, value); }
 
 		private static readonly SchemaField __m_version = new("SAVE_HEADER", "m_version");
 		/// <summary><c>int32</c>.</summary>

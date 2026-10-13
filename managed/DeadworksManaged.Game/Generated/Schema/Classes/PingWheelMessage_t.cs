@@ -79,18 +79,18 @@ public static partial class Schema {
 
 		private static readonly SchemaField __m_vecChatTextTriggers = new("PingWheelMessage_t", "m_vecChatTextTriggers");
 		/// <summary><c>CUtlVector&lt;CUtlString&gt;</c>. Chat text messages that trigger the concept associated with this message.</summary>
-		public SchemaStringList m_vecChatTextTriggers => new(this, __m_vecChatTextTriggers, -1);
+		public SchemaStringList m_vecChatTextTriggers => new(this, __m_vecChatTextTriggers, ListStorage.Vector);
 
 		private static readonly SchemaField __m_vecRespondsToConcepts = new("PingWheelMessage_t", "m_vecRespondsToConcepts");
 		/// <summary><c>CUtlVector&lt;CitadelPingWheelConcept_t&gt;</c>. Is this message a response to other concepts? i.e. Yes, No, and On My Way are all responses to other messages. This message will appear in the Contextual Ping Wheel Slot if one of these concepts is used by another player.</summary>
-		public SchemaValueList<CitadelPingWheelConcept_t> m_vecRespondsToConcepts => new(this, __m_vecRespondsToConcepts, -1);
+		public SchemaValueList<CitadelPingWheelConcept_t> m_vecRespondsToConcepts => new(this, __m_vecRespondsToConcepts, ListStorage.Vector);
 
 		private static readonly SchemaField __m_vecSubnavMessageIDs = new("PingWheelMessage_t", "m_vecSubnavMessageIDs");
 		/// <summary><c>CUtlVector&lt;PingWheelOptionID_t&gt;</c>.</summary>
-		public SchemaValueList<uint> m_vecSubnavMessageIDs => new(this, __m_vecSubnavMessageIDs, -1);
+		public SchemaValueList<uint> m_vecSubnavMessageIDs => new(this, __m_vecSubnavMessageIDs, ListStorage.Vector);
 
 		private static readonly SchemaField __m_vecSubnavMessageNames = new("PingWheelMessage_t", "m_vecSubnavMessageNames");
 		/// <summary><c>CUtlVector&lt;CUtlString&gt;</c>. Is this a parent message that has subnav messages? i.e. Heading to Lane has subnav messages Heading to Yellow, Heading to Blue, etc.</summary>
-		public SchemaStringList m_vecSubnavMessageNames => new(this, __m_vecSubnavMessageNames, -1);
+		public SchemaStringList m_vecSubnavMessageNames => new(this, __m_vecSubnavMessageNames, ListStorage.Vector);
 	}
 }

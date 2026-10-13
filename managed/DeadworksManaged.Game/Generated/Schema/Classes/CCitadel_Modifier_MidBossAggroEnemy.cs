@@ -15,6 +15,6 @@ public static partial class Schema {
 
 		private static readonly SchemaField __m_flLastActiveTime = new("CCitadel_Modifier_MidBossAggroEnemy", "m_flLastActiveTime");
 		/// <summary><c>GameTime_t</c>.</summary>
-		public float m_flLastActiveTime { get => Get<float>(__m_flLastActiveTime); set => Set(__m_flLastActiveTime, value); }
+		public GameTime m_flLastActiveTime { get => Get<GameTime>(__m_flLastActiveTime); set => Set(__m_flLastActiveTime, value); }
 	}
 }

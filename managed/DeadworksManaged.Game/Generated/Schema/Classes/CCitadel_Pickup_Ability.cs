@@ -14,23 +14,23 @@ public static partial class Schema {
 		static string ISchemaClass<CCitadel_Pickup_Ability>.NativeName => "CCitadel_Pickup_Ability";
 
 		private static readonly SchemaField __m_bShowGoldCostInUI = new("CCitadel_Pickup_Ability", "m_bShowGoldCostInUI");
-		/// <summary><c>bool</c>.</summary>
+		/// <summary><c>bool</c>. Networked in build 6779: a write is sent to clients.</summary>
 		public bool m_bShowGoldCostInUI { get => Get<bool>(__m_bShowGoldCostInUI); set => Set(__m_bShowGoldCostInUI, value); }
 
 		private static readonly SchemaField __m_nGoldCost = new("CCitadel_Pickup_Ability", "m_nGoldCost");
-		/// <summary><c>int32</c>.</summary>
+		/// <summary><c>int32</c>. Networked in build 6779: a write is sent to clients.</summary>
 		public int m_nGoldCost { get => Get<int>(__m_nGoldCost); set => Set(__m_nGoldCost, value); }
 
 		private static readonly SchemaField __m_nUpgradeBits = new("CCitadel_Pickup_Ability", "m_nUpgradeBits");
-		/// <summary><c>AbilityUpgradeBits_t</c>.</summary>
+		/// <summary><c>AbilityUpgradeBits_t</c>. Networked in build 6779: a write is sent to clients.</summary>
 		public AbilityUpgradeBits_t m_nUpgradeBits { get => Get<AbilityUpgradeBits_t>(__m_nUpgradeBits); set => Set(__m_nUpgradeBits, value); }
 
 		private static readonly SchemaField __m_nUpgradeLevel = new("CCitadel_Pickup_Ability", "m_nUpgradeLevel");
-		/// <summary><c>int32</c>.</summary>
+		/// <summary><c>int32</c>. Networked in build 6779: a write is sent to clients.</summary>
 		public int m_nUpgradeLevel { get => Get<int>(__m_nUpgradeLevel); set => Set(__m_nUpgradeLevel, value); }
 
 		private static readonly SchemaField __m_unAbilityID = new("CCitadel_Pickup_Ability", "m_unAbilityID");
-		/// <summary><c>CUtlStringToken</c>.</summary>
+		/// <summary><c>CUtlStringToken</c>. Networked in build 6779: a write is sent to clients.</summary>
 		public uint m_unAbilityID { get => Get<uint>(__m_unAbilityID); set => Set(__m_unAbilityID, value); }
 	}
 }

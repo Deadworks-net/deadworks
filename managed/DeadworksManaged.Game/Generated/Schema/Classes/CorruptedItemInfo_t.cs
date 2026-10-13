@@ -23,10 +23,10 @@ public static partial class Schema {
 
 		private static readonly SchemaField __m_vecExcludedPenalties = new("CorruptedItemInfo_t", "m_vecExcludedPenalties");
 		/// <summary><c>CUtlVector&lt;CUtlString&gt;</c>. Names of corrupted penalties from generic_data's m_vecCorruptedPenaltyDefs that this item can never roll.</summary>
-		public SchemaStringList m_vecExcludedPenalties => new(this, __m_vecExcludedPenalties, -1);
+		public SchemaStringList m_vecExcludedPenalties => new(this, __m_vecExcludedPenalties, ListStorage.Vector);
 
 		private static readonly SchemaField __m_vecIntrinsicModifiers = new("CorruptedItemInfo_t", "m_vecIntrinsicModifiers");
 		/// <summary><c>CUtlVector&lt;CEmbeddedSubclass&lt;CBaseModifier&gt;&gt;</c>. Extra intrinsic modifiers granted only while the item is corrupted.</summary>
-		public SchemaPointerList<CModifierVData> m_vecIntrinsicModifiers => new(this, __m_vecIntrinsicModifiers, -1, 16, 8);
+		public SchemaPointerList<CModifierVData> m_vecIntrinsicModifiers => new(this, __m_vecIntrinsicModifiers, ListStorage.Vector, 16, 8);
 	}
 }

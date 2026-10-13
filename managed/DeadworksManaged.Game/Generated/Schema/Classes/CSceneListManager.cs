@@ -15,7 +15,7 @@ public static partial class Schema {
 
 		private static readonly SchemaField __m_hListManagers = new("CSceneListManager", "m_hListManagers");
 		/// <summary><c>CUtlVector&lt;CHandle&lt;CSceneListManager&gt;&gt;</c>.</summary>
-		public SchemaHandleList<CSceneListManager> m_hListManagers => new(this, __m_hListManagers, -1);
+		public SchemaHandleList<CSceneListManager> m_hListManagers => new(this, __m_hListManagers, ListStorage.Vector);
 
 		private static readonly SchemaField __m_hScenes = new("CSceneListManager", "m_hScenes");
 		/// <summary><c>CHandle&lt;CBaseEntity&gt;[16]</c>.</summary>

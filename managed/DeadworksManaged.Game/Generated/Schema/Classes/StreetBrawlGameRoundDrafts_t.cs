@@ -23,6 +23,6 @@ public static partial class Schema {
 
 		private static readonly SchemaField __m_vecItemDraftRounds = new("StreetBrawlGameRoundDrafts_t", "m_vecItemDraftRounds");
 		/// <summary><c>CUtlVector&lt;StreetBrawlItemDraftRoundParams_t&gt;</c>.</summary>
-		public SchemaObjectList<StreetBrawlItemDraftRoundParams_t> m_vecItemDraftRounds => new(this, __m_vecItemDraftRounds, -1);
+		public SchemaObjectList<StreetBrawlItemDraftRoundParams_t> m_vecItemDraftRounds => new(this, __m_vecItemDraftRounds, ListStorage.Vector);
 	}
 }

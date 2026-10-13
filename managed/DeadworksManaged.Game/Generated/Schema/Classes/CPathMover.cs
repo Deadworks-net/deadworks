@@ -31,10 +31,10 @@ public static partial class Schema {
 
 		private static readonly SchemaField __m_vecMovers = new("CPathMover", "m_vecMovers");
 		/// <summary><c>CUtlVector&lt;CHandle&lt;CFuncMover&gt;&gt;</c>.</summary>
-		public SchemaHandleList<CFuncMover> m_vecMovers => new(this, __m_vecMovers, -1);
+		public SchemaHandleList<CFuncMover> m_vecMovers => new(this, __m_vecMovers, ListStorage.Vector);
 
 		private static readonly SchemaField __m_vecSpawners = new("CPathMover", "m_vecSpawners");
 		/// <summary><c>CUtlVector&lt;CHandle&lt;CPathMoverEntitySpawner&gt;&gt;</c>.</summary>
-		public SchemaHandleList<CPathMoverEntitySpawner> m_vecSpawners => new(this, __m_vecSpawners, -1);
+		public SchemaHandleList<CPathMoverEntitySpawner> m_vecSpawners => new(this, __m_vecSpawners, ListStorage.Vector);
 	}
 }

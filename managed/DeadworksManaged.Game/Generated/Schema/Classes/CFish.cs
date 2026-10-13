@@ -14,7 +14,7 @@ public static partial class Schema {
 		static string ISchemaClass<CFish>.NativeName => "CFish";
 
 		private static readonly SchemaField __m_angle = new("CFish", "m_angle");
-		/// <summary><c>float32</c>.</summary>
+		/// <summary><c>float32</c>. Networked in build 6779: a write is sent to clients.</summary>
 		public float m_angle { get => Get<float>(__m_angle); set => Set(__m_angle, value); }
 
 		private static readonly SchemaField __m_angleChange = new("CFish", "m_angleChange");
@@ -70,7 +70,7 @@ public static partial class Schema {
 		public CFishPool? m_pool { get => GetHandle<CFishPool>(__m_pool); set => SetHandle(__m_pool, value); }
 
 		private static readonly SchemaField __m_poolOrigin = new("CFish", "m_poolOrigin");
-		/// <summary><c>VectorWS</c>.</summary>
+		/// <summary><c>VectorWS</c>. Networked in build 6779: a write is sent to clients.</summary>
 		public Vector3 m_poolOrigin { get => Get<Vector3>(__m_poolOrigin); set => Set(__m_poolOrigin, value); }
 
 		private static readonly SchemaField __m_proximityTimer = new("CFish", "m_proximityTimer");
@@ -94,19 +94,19 @@ public static partial class Schema {
 		public RawField m_visible => Raw(__m_visible, "CUtlVector<CFish*>");
 
 		private static readonly SchemaField __m_waterLevel = new("CFish", "m_waterLevel");
-		/// <summary><c>float32</c>.</summary>
+		/// <summary><c>float32</c>. Networked in build 6779: a write is sent to clients.</summary>
 		public float m_waterLevel { get => Get<float>(__m_waterLevel); set => Set(__m_waterLevel, value); }
 
 		private static readonly SchemaField __m_x = new("CFish", "m_x");
-		/// <summary><c>float32</c>.</summary>
+		/// <summary><c>float32</c>. Networked in build 6779: a write is sent to clients.</summary>
 		public float m_x { get => Get<float>(__m_x); set => Set(__m_x, value); }
 
 		private static readonly SchemaField __m_y = new("CFish", "m_y");
-		/// <summary><c>float32</c>.</summary>
+		/// <summary><c>float32</c>. Networked in build 6779: a write is sent to clients.</summary>
 		public float m_y { get => Get<float>(__m_y); set => Set(__m_y, value); }
 
 		private static readonly SchemaField __m_z = new("CFish", "m_z");
-		/// <summary><c>float32</c>.</summary>
+		/// <summary><c>float32</c>. Networked in build 6779: a write is sent to clients.</summary>
 		public float m_z { get => Get<float>(__m_z); set => Set(__m_z, value); }
 	}
 }

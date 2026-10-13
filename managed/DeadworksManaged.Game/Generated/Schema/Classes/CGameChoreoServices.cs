@@ -19,7 +19,7 @@ public static partial class Schema {
 
 		private static readonly SchemaField __m_flTimeStartedState = new("CGameChoreoServices", "m_flTimeStartedState");
 		/// <summary><c>GameTime_t</c>.</summary>
-		public float m_flTimeStartedState { get => Get<float>(__m_flTimeStartedState); set => Set(__m_flTimeStartedState, value); }
+		public GameTime m_flTimeStartedState { get => Get<GameTime>(__m_flTimeStartedState); set => Set(__m_flTimeStartedState, value); }
 
 		private static readonly SchemaField __m_hOwner = new("CGameChoreoServices", "m_hOwner");
 		/// <summary><c>CHandle&lt;CBaseModelEntity&gt;</c>.</summary>

@@ -27,7 +27,7 @@ public static partial class Schema {
 
 		private static readonly SchemaField __m_flTrackingStartTime = new("CCitadelConfigurableTrackedProjectile", "m_flTrackingStartTime");
 		/// <summary><c>GameTime_t</c>.</summary>
-		public float m_flTrackingStartTime { get => Get<float>(__m_flTrackingStartTime); set => Set(__m_flTrackingStartTime, value); }
+		public GameTime m_flTrackingStartTime { get => Get<GameTime>(__m_flTrackingStartTime); set => Set(__m_flTrackingStartTime, value); }
 
 		private static readonly SchemaField __m_hTarget = new("CCitadelConfigurableTrackedProjectile", "m_hTarget");
 		/// <summary><c>CHandle&lt;CBaseEntity&gt;</c>.</summary>

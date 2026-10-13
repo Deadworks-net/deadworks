@@ -14,7 +14,7 @@ public static partial class Schema {
 		static string ISchemaClass<CTriggerTier3Phase2Shield>.NativeName => "CTriggerTier3Phase2Shield";
 
 		private static readonly SchemaField __m_nNumEnemyPlayers = new("CTriggerTier3Phase2Shield", "m_nNumEnemyPlayers");
-		/// <summary><c>int8</c>.</summary>
+		/// <summary><c>int8</c>. Networked in build 6779: a write is sent to clients.</summary>
 		public sbyte m_nNumEnemyPlayers { get => Get<sbyte>(__m_nNumEnemyPlayers); set => Set(__m_nNumEnemyPlayers, value); }
 	}
 }

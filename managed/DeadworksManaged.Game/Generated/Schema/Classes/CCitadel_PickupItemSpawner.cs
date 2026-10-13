@@ -18,16 +18,16 @@ public static partial class Schema {
 		public bool m_bPingedPowerup { get => Get<bool>(__m_bPingedPowerup); set => Set(__m_bPingedPowerup, value); }
 
 		private static readonly SchemaField __m_bPowerupActive = new("CCitadel_PickupItemSpawner", "m_bPowerupActive");
-		/// <summary><c>bool</c>.</summary>
+		/// <summary><c>bool</c>. Networked in build 6779: a write is sent to clients.</summary>
 		public bool m_bPowerupActive { get => Get<bool>(__m_bPowerupActive); set => Set(__m_bPowerupActive, value); }
 
 		private static readonly SchemaField __m_tNextDropTime = new("CCitadel_PickupItemSpawner", "m_tNextDropTime");
-		/// <summary><c>GameTime_t</c>.</summary>
-		public float m_tNextDropTime { get => Get<float>(__m_tNextDropTime); set => Set(__m_tNextDropTime, value); }
+		/// <summary><c>GameTime_t</c>. Networked in build 6779: a write is sent to clients.</summary>
+		public GameTime m_tNextDropTime { get => Get<GameTime>(__m_tNextDropTime); set => Set(__m_tNextDropTime, value); }
 
 		private static readonly SchemaField __m_tNextPingTime = new("CCitadel_PickupItemSpawner", "m_tNextPingTime");
 		/// <summary><c>GameTime_t</c>.</summary>
-		public float m_tNextPingTime { get => Get<float>(__m_tNextPingTime); set => Set(__m_tNextPingTime, value); }
+		public GameTime m_tNextPingTime { get => Get<GameTime>(__m_tNextPingTime); set => Set(__m_tNextPingTime, value); }
 
 		/// <summary>The data entry this was created from, as <see cref="CCitadel_PickupItemSpawnerVData"/>, or null if it has none.</summary>
 		public CCitadel_PickupItemSpawnerVData? VData => SubclassVData<CCitadel_PickupItemSpawnerVData>();

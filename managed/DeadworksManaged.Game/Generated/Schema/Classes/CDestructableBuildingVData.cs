@@ -87,6 +87,6 @@ public static partial class Schema {
 
 		private static readonly SchemaField __m_vecIntrinsicModifiers = new("CDestructableBuildingVData", "m_vecIntrinsicModifiers");
 		/// <summary><c>CUtlVector&lt;CEmbeddedSubclass&lt;CCitadelModifier&gt;&gt;</c>.</summary>
-		public SchemaPointerList<CCitadelModifierVData> m_vecIntrinsicModifiers => new(this, __m_vecIntrinsicModifiers, -1, 16, 8);
+		public SchemaPointerList<CCitadelModifierVData> m_vecIntrinsicModifiers => new(this, __m_vecIntrinsicModifiers, ListStorage.Vector, 16, 8);
 	}
 }

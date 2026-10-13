@@ -14,11 +14,11 @@ public static partial class Schema {
 		static string ISchemaClass<CCitadel_Ability_FlyingStrike>.NativeName => "CCitadel_Ability_FlyingStrike";
 
 		private static readonly SchemaField __flDistFlown = new("CCitadel_Ability_FlyingStrike", "flDistFlown");
-		/// <summary><c>float32</c>.</summary>
+		/// <summary><c>float32</c>. Networked in build 6779: a write is sent to clients.</summary>
 		public float flDistFlown { get => Get<float>(__flDistFlown); set => Set(__flDistFlown, value); }
 
 		private static readonly SchemaField __m_bIsTargetAlly = new("CCitadel_Ability_FlyingStrike", "m_bIsTargetAlly");
-		/// <summary><c>bool</c>.</summary>
+		/// <summary><c>bool</c>. Networked in build 6779: a write is sent to clients.</summary>
 		public bool m_bIsTargetAlly { get => Get<bool>(__m_bIsTargetAlly); set => Set(__m_bIsTargetAlly, value); }
 
 		private static readonly SchemaField __m_bJumpSoundPlayed = new("CCitadel_Ability_FlyingStrike", "m_bJumpSoundPlayed");
@@ -30,35 +30,35 @@ public static partial class Schema {
 		public bool m_bPathDirty { get => Get<bool>(__m_bPathDirty); set => Set(__m_bPathDirty, value); }
 
 		private static readonly SchemaField __m_bShadowFormCast = new("CCitadel_Ability_FlyingStrike", "m_bShadowFormCast");
-		/// <summary><c>bool</c>.</summary>
+		/// <summary><c>bool</c>. Networked in build 6779: a write is sent to clients.</summary>
 		public bool m_bShadowFormCast { get => Get<bool>(__m_bShadowFormCast); set => Set(__m_bShadowFormCast, value); }
 
 		private static readonly SchemaField __m_flAttackLatchTime = new("CCitadel_Ability_FlyingStrike", "m_flAttackLatchTime");
-		/// <summary><c>GameTime_t</c>.</summary>
-		public float m_flAttackLatchTime { get => Get<float>(__m_flAttackLatchTime); set => Set(__m_flAttackLatchTime, value); }
+		/// <summary><c>GameTime_t</c>. Networked in build 6779: a write is sent to clients.</summary>
+		public GameTime m_flAttackLatchTime { get => Get<GameTime>(__m_flAttackLatchTime); set => Set(__m_flAttackLatchTime, value); }
 
 		private static readonly SchemaField __m_flEndAttackTime = new("CCitadel_Ability_FlyingStrike", "m_flEndAttackTime");
-		/// <summary><c>GameTime_t</c>.</summary>
-		public float m_flEndAttackTime { get => Get<float>(__m_flEndAttackTime); set => Set(__m_flEndAttackTime, value); }
+		/// <summary><c>GameTime_t</c>. Networked in build 6779: a write is sent to clients.</summary>
+		public GameTime m_flEndAttackTime { get => Get<GameTime>(__m_flEndAttackTime); set => Set(__m_flEndAttackTime, value); }
 
 		private static readonly SchemaField __m_flFlyingToTargetStartTime = new("CCitadel_Ability_FlyingStrike", "m_flFlyingToTargetStartTime");
-		/// <summary><c>GameTime_t</c>.</summary>
-		public float m_flFlyingToTargetStartTime { get => Get<float>(__m_flFlyingToTargetStartTime); set => Set(__m_flFlyingToTargetStartTime, value); }
+		/// <summary><c>GameTime_t</c>. Networked in build 6779: a write is sent to clients.</summary>
+		public GameTime m_flFlyingToTargetStartTime { get => Get<GameTime>(__m_flFlyingToTargetStartTime); set => Set(__m_flFlyingToTargetStartTime, value); }
 
 		private static readonly SchemaField __m_flGrappleArriveTime = new("CCitadel_Ability_FlyingStrike", "m_flGrappleArriveTime");
-		/// <summary><c>GameTime_t</c>.</summary>
-		public float m_flGrappleArriveTime { get => Get<float>(__m_flGrappleArriveTime); set => Set(__m_flGrappleArriveTime, value); }
+		/// <summary><c>GameTime_t</c>. Networked in build 6779: a write is sent to clients.</summary>
+		public GameTime m_flGrappleArriveTime { get => Get<GameTime>(__m_flGrappleArriveTime); set => Set(__m_flGrappleArriveTime, value); }
 
 		private static readonly SchemaField __m_flGrappleShotAttackTime = new("CCitadel_Ability_FlyingStrike", "m_flGrappleShotAttackTime");
-		/// <summary><c>GameTime_t</c>.</summary>
-		public float m_flGrappleShotAttackTime { get => Get<float>(__m_flGrappleShotAttackTime); set => Set(__m_flGrappleShotAttackTime, value); }
+		/// <summary><c>GameTime_t</c>. Networked in build 6779: a write is sent to clients.</summary>
+		public GameTime m_flGrappleShotAttackTime { get => Get<GameTime>(__m_flGrappleShotAttackTime); set => Set(__m_flGrappleShotAttackTime, value); }
 
 		private static readonly SchemaField __m_flGrappleStartTime = new("CCitadel_Ability_FlyingStrike", "m_flGrappleStartTime");
-		/// <summary><c>GameTime_t</c>.</summary>
-		public float m_flGrappleStartTime { get => Get<float>(__m_flGrappleStartTime); set => Set(__m_flGrappleStartTime, value); }
+		/// <summary><c>GameTime_t</c>. Networked in build 6779: a write is sent to clients.</summary>
+		public GameTime m_flGrappleStartTime { get => Get<GameTime>(__m_flGrappleStartTime); set => Set(__m_flGrappleStartTime, value); }
 
 		private static readonly SchemaField __m_flPathLength = new("CCitadel_Ability_FlyingStrike", "m_flPathLength");
-		/// <summary><c>float32</c>.</summary>
+		/// <summary><c>float32</c>. Networked in build 6779: a write is sent to clients.</summary>
 		public float m_flPathLength { get => Get<float>(__m_flPathLength); set => Set(__m_flPathLength, value); }
 
 		private static readonly SchemaField __m_hAttackTarget = new("CCitadel_Ability_FlyingStrike", "m_hAttackTarget");
@@ -66,7 +66,7 @@ public static partial class Schema {
 		public CBaseEntity? m_hAttackTarget { get => GetHandle<CBaseEntity>(__m_hAttackTarget); set => SetHandle(__m_hAttackTarget, value); }
 
 		private static readonly SchemaField __m_hTarget = new("CCitadel_Ability_FlyingStrike", "m_hTarget");
-		/// <summary><c>CHandle&lt;CBaseEntity&gt;</c>.</summary>
+		/// <summary><c>CHandle&lt;CBaseEntity&gt;</c>. Networked in build 6779: a write is sent to clients.</summary>
 		public CBaseEntity? m_hTarget { get => GetHandle<CBaseEntity>(__m_hTarget); set => SetHandle(__m_hTarget, value); }
 
 		private static readonly SchemaField __m_iTargetPosIndex = new("CCitadel_Ability_FlyingStrike", "m_iTargetPosIndex");
@@ -78,23 +78,23 @@ public static partial class Schema {
 		public int m_nGrappleTravelEffect { get => Get<int>(__m_nGrappleTravelEffect); set => Set(__m_nGrappleTravelEffect, value); }
 
 		private static readonly SchemaField __m_nPathIdx = new("CCitadel_Ability_FlyingStrike", "m_nPathIdx");
-		/// <summary><c>int32</c>.</summary>
+		/// <summary><c>int32</c>. Networked in build 6779: a write is sent to clients.</summary>
 		public int m_nPathIdx { get => Get<int>(__m_nPathIdx); set => Set(__m_nPathIdx, value); }
 
 		private static readonly SchemaField __m_nPathSize = new("CCitadel_Ability_FlyingStrike", "m_nPathSize");
-		/// <summary><c>int32</c>.</summary>
+		/// <summary><c>int32</c>. Networked in build 6779: a write is sent to clients.</summary>
 		public int m_nPathSize { get => Get<int>(__m_nPathSize); set => Set(__m_nPathSize, value); }
 
 		private static readonly SchemaField __m_rgPath = new("CCitadel_Ability_FlyingStrike", "m_rgPath");
-		/// <summary><c>VectorWS[20]</c>.</summary>
+		/// <summary><c>VectorWS[20]</c>. Networked in build 6779: a write is sent to clients.</summary>
 		public SchemaValueList<Vector3> m_rgPath => new(this, __m_rgPath, 20);
 
 		private static readonly SchemaField __m_vAttackLatchPos = new("CCitadel_Ability_FlyingStrike", "m_vAttackLatchPos");
-		/// <summary><c>VectorWS</c>.</summary>
+		/// <summary><c>VectorWS</c>. Networked in build 6779: a write is sent to clients.</summary>
 		public Vector3 m_vAttackLatchPos { get => Get<Vector3>(__m_vAttackLatchPos); set => Set(__m_vAttackLatchPos, value); }
 
 		private static readonly SchemaField __m_vFlyingInitialOffsetToPath = new("CCitadel_Ability_FlyingStrike", "m_vFlyingInitialOffsetToPath");
-		/// <summary><c>Vector</c>.</summary>
+		/// <summary><c>Vector</c>. Networked in build 6779: a write is sent to clients.</summary>
 		public Vector3 m_vFlyingInitialOffsetToPath { get => Get<Vector3>(__m_vFlyingInitialOffsetToPath); set => Set(__m_vFlyingInitialOffsetToPath, value); }
 
 		private static readonly SchemaField __m_vLastSafePos = new("CCitadel_Ability_FlyingStrike", "m_vLastSafePos");
@@ -102,11 +102,11 @@ public static partial class Schema {
 		public Vector3 m_vLastSafePos { get => Get<Vector3>(__m_vLastSafePos); set => Set(__m_vLastSafePos, value); }
 
 		private static readonly SchemaField __m_vTargetCastPos = new("CCitadel_Ability_FlyingStrike", "m_vTargetCastPos");
-		/// <summary><c>VectorWS</c>.</summary>
+		/// <summary><c>VectorWS</c>. Networked in build 6779: a write is sent to clients.</summary>
 		public Vector3 m_vTargetCastPos { get => Get<Vector3>(__m_vTargetCastPos); set => Set(__m_vTargetCastPos, value); }
 
 		private static readonly SchemaField __m_vYamatoCastPos = new("CCitadel_Ability_FlyingStrike", "m_vYamatoCastPos");
-		/// <summary><c>VectorWS</c>.</summary>
+		/// <summary><c>VectorWS</c>. Networked in build 6779: a write is sent to clients.</summary>
 		public Vector3 m_vYamatoCastPos { get => Get<Vector3>(__m_vYamatoCastPos); set => Set(__m_vYamatoCastPos, value); }
 	}
 }

@@ -18,19 +18,19 @@ public static partial class Schema {
 		public bool m_bPreventWeaponPickup { get => Get<bool>(__m_bPreventWeaponPickup); set => Set(__m_bPreventWeaponPickup, value); }
 
 		private static readonly SchemaField __m_hActiveWeapon = new("CPlayer_WeaponServices", "m_hActiveWeapon");
-		/// <summary><c>CHandle&lt;CBasePlayerWeapon&gt;</c>.</summary>
+		/// <summary><c>CHandle&lt;CBasePlayerWeapon&gt;</c>. Networked in build 6779: a write is sent to clients.</summary>
 		public CBasePlayerWeapon? m_hActiveWeapon { get => GetHandle<CBasePlayerWeapon>(__m_hActiveWeapon); set => SetHandle(__m_hActiveWeapon, value); }
 
 		private static readonly SchemaField __m_hLastWeapon = new("CPlayer_WeaponServices", "m_hLastWeapon");
-		/// <summary><c>CHandle&lt;CBasePlayerWeapon&gt;</c>.</summary>
+		/// <summary><c>CHandle&lt;CBasePlayerWeapon&gt;</c>. Networked in build 6779: a write is sent to clients.</summary>
 		public CBasePlayerWeapon? m_hLastWeapon { get => GetHandle<CBasePlayerWeapon>(__m_hLastWeapon); set => SetHandle(__m_hLastWeapon, value); }
 
 		private static readonly SchemaField __m_hMyWeapons = new("CPlayer_WeaponServices", "m_hMyWeapons");
-		/// <summary><c>CNetworkUtlVectorBase&lt;CHandle&lt;CBasePlayerWeapon&gt;&gt;</c>.</summary>
-		public SchemaHandleList<CBasePlayerWeapon> m_hMyWeapons => new(this, __m_hMyWeapons, -1);
+		/// <summary><c>CNetworkUtlVectorBase&lt;CHandle&lt;CBasePlayerWeapon&gt;&gt;</c>. Networked in build 6779: a write is sent to clients.</summary>
+		public SchemaHandleList<CBasePlayerWeapon> m_hMyWeapons => new(this, __m_hMyWeapons, ListStorage.Vector);
 
 		private static readonly SchemaField __m_iAmmo = new("CPlayer_WeaponServices", "m_iAmmo");
-		/// <summary><c>uint16[32]</c>.</summary>
+		/// <summary><c>uint16[32]</c>. Networked in build 6779: a write is sent to clients.</summary>
 		public SchemaValueList<ushort> m_iAmmo => new(this, __m_iAmmo, 32);
 	}
 }

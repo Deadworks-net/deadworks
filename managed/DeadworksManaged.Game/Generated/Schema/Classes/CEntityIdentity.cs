@@ -34,7 +34,7 @@ public static partial class Schema {
 		public string m_name { get => GetString(__m_name); set => SetString(__m_name, value); }
 
 		private static readonly SchemaField __m_nameStringTableIndex = new("CEntityIdentity", "m_nameStringTableIndex");
-		/// <summary><c>int32</c>.</summary>
+		/// <summary><c>int32</c>. Networked in build 6779: a write is sent to clients.</summary>
 		public int m_nameStringTableIndex { get => Get<int>(__m_nameStringTableIndex); set => Set(__m_nameStringTableIndex, value); }
 
 		private static readonly SchemaField __m_pAttributes = new("CEntityIdentity", "m_pAttributes");

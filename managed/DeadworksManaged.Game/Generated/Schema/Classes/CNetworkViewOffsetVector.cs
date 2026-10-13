@@ -14,15 +14,15 @@ public static partial class Schema {
 		static string ISchemaClass<CNetworkViewOffsetVector>.NativeName => "CNetworkViewOffsetVector";
 
 		private static readonly SchemaField __m_vecX = new("CNetworkViewOffsetVector", "m_vecX");
-		/// <summary><c>CNetworkedQuantizedFloat</c>.</summary>
+		/// <summary><c>CNetworkedQuantizedFloat</c>. Networked in build 6779: a write is sent to clients.</summary>
 		public float m_vecX { get => Get<float>(__m_vecX); set => Set(__m_vecX, value); }
 
 		private static readonly SchemaField __m_vecY = new("CNetworkViewOffsetVector", "m_vecY");
-		/// <summary><c>CNetworkedQuantizedFloat</c>.</summary>
+		/// <summary><c>CNetworkedQuantizedFloat</c>. Networked in build 6779: a write is sent to clients.</summary>
 		public float m_vecY { get => Get<float>(__m_vecY); set => Set(__m_vecY, value); }
 
 		private static readonly SchemaField __m_vecZ = new("CNetworkViewOffsetVector", "m_vecZ");
-		/// <summary><c>CNetworkedQuantizedFloat</c>.</summary>
+		/// <summary><c>CNetworkedQuantizedFloat</c>. Networked in build 6779: a write is sent to clients.</summary>
 		public float m_vecZ { get => Get<float>(__m_vecZ); set => Set(__m_vecZ, value); }
 	}
 }

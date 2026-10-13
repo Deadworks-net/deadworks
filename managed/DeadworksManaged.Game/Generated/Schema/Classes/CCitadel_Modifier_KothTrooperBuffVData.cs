@@ -15,22 +15,22 @@ public static partial class Schema {
 
 		private static readonly SchemaField __m_vecDamagePercents = new("CCitadel_Modifier_KothTrooperBuffVData", "m_vecDamagePercents");
 		/// <summary><c>CUtlVector&lt;float32&gt;</c>.</summary>
-		public SchemaValueList<float> m_vecDamagePercents => new(this, __m_vecDamagePercents, -1);
+		public SchemaValueList<float> m_vecDamagePercents => new(this, __m_vecDamagePercents, ListStorage.Vector);
 
 		private static readonly SchemaField __m_vecHealthPercents = new("CCitadel_Modifier_KothTrooperBuffVData", "m_vecHealthPercents");
 		/// <summary><c>CUtlVector&lt;float32&gt;</c>.</summary>
-		public SchemaValueList<float> m_vecHealthPercents => new(this, __m_vecHealthPercents, -1);
+		public SchemaValueList<float> m_vecHealthPercents => new(this, __m_vecHealthPercents, ListStorage.Vector);
 
 		private static readonly SchemaField __m_vecModelScaleFractions = new("CCitadel_Modifier_KothTrooperBuffVData", "m_vecModelScaleFractions");
 		/// <summary><c>CUtlVector&lt;float32&gt;</c>.</summary>
-		public SchemaValueList<float> m_vecModelScaleFractions => new(this, __m_vecModelScaleFractions, -1);
+		public SchemaValueList<float> m_vecModelScaleFractions => new(this, __m_vecModelScaleFractions, ListStorage.Vector);
 
 		private static readonly SchemaField __vecMeleeResistPercents = new("CCitadel_Modifier_KothTrooperBuffVData", "vecMeleeResistPercents");
 		/// <summary><c>CUtlVector&lt;float32&gt;</c>.</summary>
-		public SchemaValueList<float> vecMeleeResistPercents => new(this, __vecMeleeResistPercents, -1);
+		public SchemaValueList<float> vecMeleeResistPercents => new(this, __vecMeleeResistPercents, ListStorage.Vector);
 
 		private static readonly SchemaField __vecSpiritResistPercents = new("CCitadel_Modifier_KothTrooperBuffVData", "vecSpiritResistPercents");
 		/// <summary><c>CUtlVector&lt;float32&gt;</c>.</summary>
-		public SchemaValueList<float> vecSpiritResistPercents => new(this, __vecSpiritResistPercents, -1);
+		public SchemaValueList<float> vecSpiritResistPercents => new(this, __vecSpiritResistPercents, ListStorage.Vector);
 	}
 }

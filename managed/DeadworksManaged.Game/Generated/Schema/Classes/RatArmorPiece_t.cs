@@ -15,7 +15,7 @@ public static partial class Schema {
 
 		private static readonly SchemaField __m_sBodyGroupNames = new("RatArmorPiece_t", "m_sBodyGroupNames");
 		/// <summary><c>CUtlVector&lt;CUtlStringToken&gt;</c>.</summary>
-		public SchemaValueList<uint> m_sBodyGroupNames => new(this, __m_sBodyGroupNames, -1);
+		public SchemaValueList<uint> m_sBodyGroupNames => new(this, __m_sBodyGroupNames, ListStorage.Vector);
 
 		private static readonly SchemaField __m_strKnockoffAttachment = new("RatArmorPiece_t", "m_strKnockoffAttachment");
 		/// <summary><c>CUtlString</c>.</summary>

@@ -14,7 +14,7 @@ public static partial class Schema {
 		static string ISchemaClass<CCitadel_Ability_Wrecker_Ultimate>.NativeName => "CCitadel_Ability_Wrecker_Ultimate";
 
 		private static readonly SchemaField __m_angBeamAngles = new("CCitadel_Ability_Wrecker_Ultimate", "m_angBeamAngles");
-		/// <summary><c>QAngle</c>.</summary>
+		/// <summary><c>QAngle</c>. Networked in build 6779: a write is sent to clients.</summary>
 		public Vector3 m_angBeamAngles { get => Get<Vector3>(__m_angBeamAngles); set => Set(__m_angBeamAngles, value); }
 	}
 }

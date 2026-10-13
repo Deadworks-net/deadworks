@@ -39,6 +39,6 @@ public static partial class Schema {
 
 		private static readonly SchemaField __m_vecConnections = new("CDynamicNavConnectionsVolume", "m_vecConnections");
 		/// <summary><c>CUtlVector&lt;DynamicVolumeDef_t&gt;</c>.</summary>
-		public SchemaObjectList<DynamicVolumeDef_t> m_vecConnections => new(this, __m_vecConnections, -1);
+		public SchemaObjectList<DynamicVolumeDef_t> m_vecConnections => new(this, __m_vecConnections, ListStorage.Vector);
 	}
 }

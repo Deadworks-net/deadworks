@@ -15,7 +15,7 @@ public static partial class Schema {
 
 		private static readonly SchemaField __m_vHitEnts = new("CCitadel_Ability_ThrowSand", "m_vHitEnts");
 		/// <summary><c>CUtlVector&lt;CHandle&lt;CBaseEntity&gt;&gt;</c>.</summary>
-		public SchemaHandleList<CBaseEntity> m_vHitEnts => new(this, __m_vHitEnts, -1);
+		public SchemaHandleList<CBaseEntity> m_vHitEnts => new(this, __m_vHitEnts, ListStorage.Vector);
 
 		/// <summary>The data entry this was created from, as <see cref="CCitadel_Ability_ThrowSandVData"/>, or null if it has none.</summary>
 		public new CCitadel_Ability_ThrowSandVData? VData => SubclassVData<CCitadel_Ability_ThrowSandVData>();

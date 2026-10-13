@@ -18,7 +18,7 @@ public static partial class Schema {
 		public CNetworkVarChainer __m_pChainEntity => Embedded<CNetworkVarChainer>(____m_pChainEntity);
 
 		private static readonly SchemaField __m_bTriggerStarted = new("CCitadelPlayOfTheGame", "m_bTriggerStarted");
-		/// <summary><c>bool</c>.</summary>
+		/// <summary><c>bool</c>. Networked in build 6779: a write is sent to clients.</summary>
 		public bool m_bTriggerStarted { get => Get<bool>(__m_bTriggerStarted); set => Set(__m_bTriggerStarted, value); }
 
 		private static readonly SchemaField __m_eState = new("CCitadelPlayOfTheGame", "m_eState");
@@ -26,7 +26,7 @@ public static partial class Schema {
 		public EPlayOfTheGameState m_eState { get => Get<EPlayOfTheGameState>(__m_eState); set => Set(__m_eState, value); }
 
 		private static readonly SchemaField __m_playOfTheGameDataServer = new("CCitadelPlayOfTheGame", "m_playOfTheGameDataServer");
-		/// <summary><c>PlayOfTheGamePlaybackData_t</c>.</summary>
+		/// <summary><c>PlayOfTheGamePlaybackData_t</c>. Networked in build 6779: a write is sent to clients.</summary>
 		public PlayOfTheGamePlaybackData_t m_playOfTheGameDataServer => Embedded<PlayOfTheGamePlaybackData_t>(__m_playOfTheGameDataServer);
 	}
 }

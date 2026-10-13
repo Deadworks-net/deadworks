@@ -31,6 +31,6 @@ public static partial class Schema {
 
 		private static readonly SchemaField __m_vecDamageTypes = new("CModifierApplyModifierOnDamageTakenVData", "m_vecDamageTypes");
 		/// <summary><c>CUtlVector&lt;ECitadelDamageType&gt;</c>. What types of damage do we apply modifiers for?.</summary>
-		public SchemaValueList<ECitadelDamageType> m_vecDamageTypes => new(this, __m_vecDamageTypes, -1);
+		public SchemaValueList<ECitadelDamageType> m_vecDamageTypes => new(this, __m_vecDamageTypes, ListStorage.Vector);
 	}
 }

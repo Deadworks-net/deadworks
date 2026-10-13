@@ -19,6 +19,6 @@ public static partial class Schema {
 
 		private static readonly SchemaField __m_vecGrabbed = new("CCitadel_Modifier_Wrecker_Ultimate", "m_vecGrabbed");
 		/// <summary><c>CUtlVector&lt;CHandle&lt;CBaseEntity&gt;&gt;</c>.</summary>
-		public SchemaHandleList<CBaseEntity> m_vecGrabbed => new(this, __m_vecGrabbed, -1);
+		public SchemaHandleList<CBaseEntity> m_vecGrabbed => new(this, __m_vecGrabbed, ListStorage.Vector);
 	}
 }

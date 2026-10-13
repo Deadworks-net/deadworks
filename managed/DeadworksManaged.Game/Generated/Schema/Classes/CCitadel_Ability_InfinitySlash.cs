@@ -14,12 +14,12 @@ public static partial class Schema {
 		static string ISchemaClass<CCitadel_Ability_InfinitySlash>.NativeName => "CCitadel_Ability_InfinitySlash";
 
 		private static readonly SchemaField __m_flBuffEndTime = new("CCitadel_Ability_InfinitySlash", "m_flBuffEndTime");
-		/// <summary><c>GameTime_t</c>.</summary>
-		public float m_flBuffEndTime { get => Get<float>(__m_flBuffEndTime); set => Set(__m_flBuffEndTime, value); }
+		/// <summary><c>GameTime_t</c>. Networked in build 6779: a write is sent to clients.</summary>
+		public GameTime m_flBuffEndTime { get => Get<GameTime>(__m_flBuffEndTime); set => Set(__m_flBuffEndTime, value); }
 
 		private static readonly SchemaField __m_flExplodeEndTime = new("CCitadel_Ability_InfinitySlash", "m_flExplodeEndTime");
-		/// <summary><c>GameTime_t</c>.</summary>
-		public float m_flExplodeEndTime { get => Get<float>(__m_flExplodeEndTime); set => Set(__m_flExplodeEndTime, value); }
+		/// <summary><c>GameTime_t</c>. Networked in build 6779: a write is sent to clients.</summary>
+		public GameTime m_flExplodeEndTime { get => Get<GameTime>(__m_flExplodeEndTime); set => Set(__m_flExplodeEndTime, value); }
 
 		private static readonly SchemaField __m_nCastEffect = new("CCitadel_Ability_InfinitySlash", "m_nCastEffect");
 		/// <summary><c>ParticleIndex_t</c>.</summary>

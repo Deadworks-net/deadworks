@@ -43,7 +43,7 @@ public static partial class Schema {
 
 		private static readonly SchemaField __m_hSensedEvents = new("CAI_VolumetricEventSensor", "m_hSensedEvents");
 		/// <summary><c>CUtlVector&lt;AI_VolumetricEventHandle_t&gt;</c>.</summary>
-		public SchemaValueList<ulong> m_hSensedEvents => new(this, __m_hSensedEvents, -1);
+		public SchemaValueList<ulong> m_hSensedEvents => new(this, __m_hSensedEvents, ListStorage.Vector);
 
 		private static readonly SchemaField __m_iszListenFilter = new("CAI_VolumetricEventSensor", "m_iszListenFilter");
 		/// <summary><c>CUtlSymbolLarge</c>.</summary>

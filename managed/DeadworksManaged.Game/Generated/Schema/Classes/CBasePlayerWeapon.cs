@@ -18,31 +18,31 @@ public static partial class Schema {
 		public CEntityIOOutput m_OnPlayerUse => Embedded<CEntityIOOutput>(__m_OnPlayerUse);
 
 		private static readonly SchemaField __m_flNextPrimaryAttackTickRatio = new("CBasePlayerWeapon", "m_flNextPrimaryAttackTickRatio");
-		/// <summary><c>float32</c>.</summary>
+		/// <summary><c>float32</c>. Networked in build 6779: a write is sent to clients.</summary>
 		public float m_flNextPrimaryAttackTickRatio { get => Get<float>(__m_flNextPrimaryAttackTickRatio); set => Set(__m_flNextPrimaryAttackTickRatio, value); }
 
 		private static readonly SchemaField __m_flNextSecondaryAttackTickRatio = new("CBasePlayerWeapon", "m_flNextSecondaryAttackTickRatio");
-		/// <summary><c>float32</c>.</summary>
+		/// <summary><c>float32</c>. Networked in build 6779: a write is sent to clients.</summary>
 		public float m_flNextSecondaryAttackTickRatio { get => Get<float>(__m_flNextSecondaryAttackTickRatio); set => Set(__m_flNextSecondaryAttackTickRatio, value); }
 
 		private static readonly SchemaField __m_iClip1 = new("CBasePlayerWeapon", "m_iClip1");
-		/// <summary><c>int32</c>.</summary>
+		/// <summary><c>int32</c>. Networked in build 6779: a write is sent to clients.</summary>
 		public int m_iClip1 { get => Get<int>(__m_iClip1); set => Set(__m_iClip1, value); }
 
 		private static readonly SchemaField __m_iClip2 = new("CBasePlayerWeapon", "m_iClip2");
-		/// <summary><c>int32</c>.</summary>
+		/// <summary><c>int32</c>. Networked in build 6779: a write is sent to clients.</summary>
 		public int m_iClip2 { get => Get<int>(__m_iClip2); set => Set(__m_iClip2, value); }
 
 		private static readonly SchemaField __m_nNextPrimaryAttackTick = new("CBasePlayerWeapon", "m_nNextPrimaryAttackTick");
-		/// <summary><c>GameTick_t</c>.</summary>
+		/// <summary><c>GameTick_t</c>. Networked in build 6779: a write is sent to clients.</summary>
 		public int m_nNextPrimaryAttackTick { get => Get<int>(__m_nNextPrimaryAttackTick); set => Set(__m_nNextPrimaryAttackTick, value); }
 
 		private static readonly SchemaField __m_nNextSecondaryAttackTick = new("CBasePlayerWeapon", "m_nNextSecondaryAttackTick");
-		/// <summary><c>GameTick_t</c>.</summary>
+		/// <summary><c>GameTick_t</c>. Networked in build 6779: a write is sent to clients.</summary>
 		public int m_nNextSecondaryAttackTick { get => Get<int>(__m_nNextSecondaryAttackTick); set => Set(__m_nNextSecondaryAttackTick, value); }
 
 		private static readonly SchemaField __m_pReserveAmmo = new("CBasePlayerWeapon", "m_pReserveAmmo");
-		/// <summary><c>int32[2]</c>.</summary>
+		/// <summary><c>int32[2]</c>. Networked in build 6779: a write is sent to clients.</summary>
 		public SchemaValueList<int> m_pReserveAmmo => new(this, __m_pReserveAmmo, 2);
 
 		/// <summary>Fires the <c>SetClipPrimary</c> input.</summary>

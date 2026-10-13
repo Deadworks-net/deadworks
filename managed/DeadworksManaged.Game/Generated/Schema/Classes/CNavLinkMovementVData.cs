@@ -23,10 +23,10 @@ public static partial class Schema {
 
 		private static readonly SchemaField __m_vecAnimgraphVars = new("CNavLinkMovementVData", "m_vecAnimgraphVars");
 		/// <summary><c>CUtlVector&lt;CNavLinkAnimgraphVar&gt;</c>. List of animgraph variables to use when moving through this navlink. Can include multiple, with different amounts of angular slack. The most permissive animgraph variable that exists on the entity's animgraph will be used,.</summary>
-		public SchemaObjectList<CNavLinkAnimgraphVar> m_vecAnimgraphVars => new(this, __m_vecAnimgraphVars, -1);
+		public SchemaObjectList<CNavLinkAnimgraphVar> m_vecAnimgraphVars => new(this, __m_vecAnimgraphVars, ListStorage.Vector);
 
 		private static readonly SchemaField __m_vecVariants = new("CNavLinkMovementVData", "m_vecVariants");
 		/// <summary><c>CUtlVector&lt;CNavLinkMovementVariantDefinition&gt;</c>.</summary>
-		public SchemaObjectList<CNavLinkMovementVariantDefinition> m_vecVariants => new(this, __m_vecVariants, -1);
+		public SchemaObjectList<CNavLinkMovementVariantDefinition> m_vecVariants => new(this, __m_vecVariants, ListStorage.Vector);
 	}
 }

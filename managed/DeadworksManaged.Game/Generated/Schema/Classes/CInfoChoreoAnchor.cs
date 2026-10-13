@@ -15,14 +15,14 @@ public static partial class Schema {
 
 		private static readonly SchemaField __m_vecTargetEntries = new("CInfoChoreoAnchor", "m_vecTargetEntries");
 		/// <summary><c>CUtlVector&lt;CInfoChoreoAnchorPosition&gt;</c>.</summary>
-		public SchemaObjectList<CInfoChoreoAnchorPosition> m_vecTargetEntries => new(this, __m_vecTargetEntries, -1);
+		public SchemaObjectList<CInfoChoreoAnchorPosition> m_vecTargetEntries => new(this, __m_vecTargetEntries, ListStorage.Vector);
 
 		private static readonly SchemaField __m_vecTargetExits = new("CInfoChoreoAnchor", "m_vecTargetExits");
 		/// <summary><c>CUtlVector&lt;CInfoChoreoAnchorPosition&gt;</c>.</summary>
-		public SchemaObjectList<CInfoChoreoAnchorPosition> m_vecTargetExits => new(this, __m_vecTargetExits, -1);
+		public SchemaObjectList<CInfoChoreoAnchorPosition> m_vecTargetExits => new(this, __m_vecTargetExits, ListStorage.Vector);
 
 		private static readonly SchemaField __m_vecTargetWarps = new("CInfoChoreoAnchor", "m_vecTargetWarps");
 		/// <summary><c>CUtlVector&lt;CInfoChoreoAnchorPosition&gt;</c>.</summary>
-		public SchemaObjectList<CInfoChoreoAnchorPosition> m_vecTargetWarps => new(this, __m_vecTargetWarps, -1);
+		public SchemaObjectList<CInfoChoreoAnchorPosition> m_vecTargetWarps => new(this, __m_vecTargetWarps, ListStorage.Vector);
 	}
 }

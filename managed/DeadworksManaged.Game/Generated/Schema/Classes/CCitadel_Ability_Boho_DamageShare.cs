@@ -15,7 +15,7 @@ public static partial class Schema {
 
 		private static readonly SchemaField __m_vecLinkedEnemies = new("CCitadel_Ability_Boho_DamageShare", "m_vecLinkedEnemies");
 		/// <summary><c>CUtlVector&lt;CHandle&lt;CBaseEntity&gt;&gt;</c>.</summary>
-		public SchemaHandleList<CBaseEntity> m_vecLinkedEnemies => new(this, __m_vecLinkedEnemies, -1);
+		public SchemaHandleList<CBaseEntity> m_vecLinkedEnemies => new(this, __m_vecLinkedEnemies, ListStorage.Vector);
 
 		/// <summary>The data entry this was created from, as <see cref="CCitadel_Ability_Boho_DamageShareVData"/>, or null if it has none.</summary>
 		public new CCitadel_Ability_Boho_DamageShareVData? VData => SubclassVData<CCitadel_Ability_Boho_DamageShareVData>();

@@ -22,27 +22,27 @@ public static partial class Schema {
 		public bool m_bNeedsExplosion { get => Get<bool>(__m_bNeedsExplosion); set => Set(__m_bNeedsExplosion, value); }
 
 		private static readonly SchemaField __m_flArrowSpeed = new("CCitadel_Ability_WreckerTeleport", "m_flArrowSpeed");
-		/// <summary><c>float32</c>.</summary>
+		/// <summary><c>float32</c>. Networked in build 6779: a write is sent to clients.</summary>
 		public float m_flArrowSpeed { get => Get<float>(__m_flArrowSpeed); set => Set(__m_flArrowSpeed, value); }
 
 		private static readonly SchemaField __m_flCastTime = new("CCitadel_Ability_WreckerTeleport", "m_flCastTime");
 		/// <summary><c>GameTime_t</c>.</summary>
-		public float m_flCastTime { get => Get<float>(__m_flCastTime); set => Set(__m_flCastTime, value); }
+		public GameTime m_flCastTime { get => Get<GameTime>(__m_flCastTime); set => Set(__m_flCastTime, value); }
 
 		private static readonly SchemaField __m_flCastTimeDamage = new("CCitadel_Ability_WreckerTeleport", "m_flCastTimeDamage");
 		/// <summary><c>float32</c>.</summary>
 		public float m_flCastTimeDamage { get => Get<float>(__m_flCastTimeDamage); set => Set(__m_flCastTimeDamage, value); }
 
 		private static readonly SchemaField __m_flSnapAnglesBackTime = new("CCitadel_Ability_WreckerTeleport", "m_flSnapAnglesBackTime");
-		/// <summary><c>GameTime_t</c>.</summary>
-		public float m_flSnapAnglesBackTime { get => Get<float>(__m_flSnapAnglesBackTime); set => Set(__m_flSnapAnglesBackTime, value); }
+		/// <summary><c>GameTime_t</c>. Networked in build 6779: a write is sent to clients.</summary>
+		public GameTime m_flSnapAnglesBackTime { get => Get<GameTime>(__m_flSnapAnglesBackTime); set => Set(__m_flSnapAnglesBackTime, value); }
 
 		private static readonly SchemaField __m_flTravelDistance = new("CCitadel_Ability_WreckerTeleport", "m_flTravelDistance");
 		/// <summary><c>float32</c>.</summary>
 		public float m_flTravelDistance { get => Get<float>(__m_flTravelDistance); set => Set(__m_flTravelDistance, value); }
 
 		private static readonly SchemaField __m_hProjectile = new("CCitadel_Ability_WreckerTeleport", "m_hProjectile");
-		/// <summary><c>CHandle&lt;CBaseEntity&gt;</c>.</summary>
+		/// <summary><c>CHandle&lt;CBaseEntity&gt;</c>. Networked in build 6779: a write is sent to clients.</summary>
 		public CBaseEntity? m_hProjectile { get => GetHandle<CBaseEntity>(__m_hProjectile); set => SetHandle(__m_hProjectile, value); }
 
 		private static readonly SchemaField __m_vProjectileRemovedOrigin = new("CCitadel_Ability_WreckerTeleport", "m_vProjectileRemovedOrigin");

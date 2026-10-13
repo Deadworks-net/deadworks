@@ -14,11 +14,11 @@ public static partial class Schema {
 		static string ISchemaClass<FullSellPriceAbilityUpgrades_t>.NativeName => "FullSellPriceAbilityUpgrades_t";
 
 		private static readonly SchemaField __m_strAbilityUpgrade = new("FullSellPriceAbilityUpgrades_t", "m_strAbilityUpgrade");
-		/// <summary><c>CUtlString</c>.</summary>
+		/// <summary><c>CUtlString</c>. Networked in build 6779: a write is sent to clients.</summary>
 		public string m_strAbilityUpgrade => GetString(__m_strAbilityUpgrade);
 
 		private static readonly SchemaField __m_unGameTimePurchased = new("FullSellPriceAbilityUpgrades_t", "m_unGameTimePurchased");
-		/// <summary><c>GameTime_t</c>.</summary>
-		public float m_unGameTimePurchased { get => Get<float>(__m_unGameTimePurchased); set => Set(__m_unGameTimePurchased, value); }
+		/// <summary><c>GameTime_t</c>. Networked in build 6779: a write is sent to clients.</summary>
+		public GameTime m_unGameTimePurchased { get => Get<GameTime>(__m_unGameTimePurchased); set => Set(__m_unGameTimePurchased, value); }
 	}
 }

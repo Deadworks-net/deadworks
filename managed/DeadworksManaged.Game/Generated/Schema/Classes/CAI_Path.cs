@@ -47,7 +47,7 @@ public static partial class Schema {
 
 		private static readonly SchemaField __m_flPathCreationTime = new("CAI_Path", "m_flPathCreationTime");
 		/// <summary><c>GameTime_t</c>.</summary>
-		public float m_flPathCreationTime { get => Get<float>(__m_flPathCreationTime); set => Set(__m_flPathCreationTime, value); }
+		public GameTime m_flPathCreationTime { get => Get<GameTime>(__m_flPathCreationTime); set => Set(__m_flPathCreationTime, value); }
 
 		private static readonly SchemaField __m_goal = new("CAI_Path", "m_goal");
 		/// <summary><c>AI_PathGoal_t</c>.</summary>

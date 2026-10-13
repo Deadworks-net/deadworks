@@ -14,7 +14,7 @@ public static partial class Schema {
 		static string ISchemaClass<CCitadelProjectile>.NativeName => "CCitadelProjectile";
 
 		private static readonly SchemaField __m_abilityID = new("CCitadelProjectile", "m_abilityID");
-		/// <summary><c>CUtlStringToken</c>.</summary>
+		/// <summary><c>CUtlStringToken</c>. Networked in build 6779: a write is sent to clients.</summary>
 		public uint m_abilityID { get => Get<uint>(__m_abilityID); set => Set(__m_abilityID, value); }
 
 		private static readonly SchemaField __m_bCollideWithThrower = new("CCitadelProjectile", "m_bCollideWithThrower");
@@ -54,15 +54,15 @@ public static partial class Schema {
 		public float m_flMaxDistance { get => Get<float>(__m_flMaxDistance); set => Set(__m_flMaxDistance, value); }
 
 		private static readonly SchemaField __m_flMaxLifetime = new("CCitadelProjectile", "m_flMaxLifetime");
-		/// <summary><c>float32</c>.</summary>
+		/// <summary><c>float32</c>. Networked in build 6779: a write is sent to clients.</summary>
 		public float m_flMaxLifetime { get => Get<float>(__m_flMaxLifetime); set => Set(__m_flMaxLifetime, value); }
 
 		private static readonly SchemaField __m_flParticleRadius = new("CCitadelProjectile", "m_flParticleRadius");
-		/// <summary><c>float32</c>.</summary>
+		/// <summary><c>float32</c>. Networked in build 6779: a write is sent to clients.</summary>
 		public float m_flParticleRadius { get => Get<float>(__m_flParticleRadius); set => Set(__m_flParticleRadius, value); }
 
 		private static readonly SchemaField __m_flProjectileSpeed = new("CCitadelProjectile", "m_flProjectileSpeed");
-		/// <summary><c>float32</c>.</summary>
+		/// <summary><c>float32</c>. Networked in build 6779: a write is sent to clients.</summary>
 		public float m_flProjectileSpeed { get => Get<float>(__m_flProjectileSpeed); set => Set(__m_flProjectileSpeed, value); }
 
 		private static readonly SchemaField __m_flTickSoundInterval = new("CCitadelProjectile", "m_flTickSoundInterval");
@@ -70,8 +70,8 @@ public static partial class Schema {
 		public float m_flTickSoundInterval { get => Get<float>(__m_flTickSoundInterval); set => Set(__m_flTickSoundInterval, value); }
 
 		private static readonly SchemaField __m_hParticleDef = new("CCitadelProjectile", "m_hParticleDef");
-		/// <summary><c>CStrongHandle&lt;InfoForResourceTypeIParticleSystemDefinition&gt;</c>. No typed mapping yet: read it through its address.</summary>
-		public RawField m_hParticleDef => Raw(__m_hParticleDef, "CStrongHandle<InfoForResourceTypeIParticleSystemDefinition>");
+		/// <summary><c>CStrongHandle&lt;InfoForResourceTypeIParticleSystemDefinition&gt;</c>. Networked in build 6779: a write is sent to clients.</summary>
+		public ResourceHandle m_hParticleDef { get => Get<ResourceHandle>(__m_hParticleDef); set => Set(__m_hParticleDef, value); }
 
 		private static readonly SchemaField __m_nCachedExcludeFlags = new("CCitadelProjectile", "m_nCachedExcludeFlags");
 		/// <summary><c>uint64</c>.</summary>
@@ -86,11 +86,11 @@ public static partial class Schema {
 		public int m_nNumDetonations { get => Get<int>(__m_nNumDetonations); set => Set(__m_nNumDetonations, value); }
 
 		private static readonly SchemaField __m_vInitialPosition = new("CCitadelProjectile", "m_vInitialPosition");
-		/// <summary><c>VectorWS</c>.</summary>
+		/// <summary><c>VectorWS</c>. Networked in build 6779: a write is sent to clients.</summary>
 		public Vector3 m_vInitialPosition { get => Get<Vector3>(__m_vInitialPosition); set => Set(__m_vInitialPosition, value); }
 
 		private static readonly SchemaField __m_vInitialVelocity = new("CCitadelProjectile", "m_vInitialVelocity");
-		/// <summary><c>Vector</c>.</summary>
+		/// <summary><c>Vector</c>. Networked in build 6779: a write is sent to clients.</summary>
 		public Vector3 m_vInitialVelocity { get => Get<Vector3>(__m_vInitialVelocity); set => Set(__m_vInitialVelocity, value); }
 
 		private static readonly SchemaField __m_vLastAbsOrigin = new("CCitadelProjectile", "m_vLastAbsOrigin");
@@ -102,11 +102,11 @@ public static partial class Schema {
 		public Vector3 m_vLastAbsVelocity { get => Get<Vector3>(__m_vLastAbsVelocity); set => Set(__m_vLastAbsVelocity, value); }
 
 		private static readonly SchemaField __m_vecSpawnPosition = new("CCitadelProjectile", "m_vecSpawnPosition");
-		/// <summary><c>VectorWS</c>.</summary>
+		/// <summary><c>VectorWS</c>. Networked in build 6779: a write is sent to clients.</summary>
 		public Vector3 m_vecSpawnPosition { get => Get<Vector3>(__m_vecSpawnPosition); set => Set(__m_vecSpawnPosition, value); }
 
 		private static readonly SchemaField __m_vecTargetToIgnore = new("CCitadelProjectile", "m_vecTargetToIgnore");
 		/// <summary><c>CUtlVector&lt;CHandle&lt;CBaseEntity&gt;&gt;</c>.</summary>
-		public SchemaHandleList<CBaseEntity> m_vecTargetToIgnore => new(this, __m_vecTargetToIgnore, -1);
+		public SchemaHandleList<CBaseEntity> m_vecTargetToIgnore => new(this, __m_vecTargetToIgnore, ListStorage.Vector);
 	}
 }

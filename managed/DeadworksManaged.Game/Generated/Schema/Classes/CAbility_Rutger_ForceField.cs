@@ -19,7 +19,7 @@ public static partial class Schema {
 
 		private static readonly SchemaField __m_fTimeToDestroyForceField = new("CAbility_Rutger_ForceField", "m_fTimeToDestroyForceField");
 		/// <summary><c>GameTime_t</c>.</summary>
-		public float m_fTimeToDestroyForceField { get => Get<float>(__m_fTimeToDestroyForceField); set => Set(__m_fTimeToDestroyForceField, value); }
+		public GameTime m_fTimeToDestroyForceField { get => Get<GameTime>(__m_fTimeToDestroyForceField); set => Set(__m_fTimeToDestroyForceField, value); }
 
 		private static readonly SchemaField __m_hChargingParticle = new("CAbility_Rutger_ForceField", "m_hChargingParticle");
 		/// <summary><c>ParticleIndex_t</c>.</summary>

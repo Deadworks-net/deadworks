@@ -14,19 +14,19 @@ public static partial class Schema {
 		static string ISchemaClass<CCitadel_Ability_StickyBomb>.NativeName => "CCitadel_Ability_StickyBomb";
 
 		private static readonly SchemaField __m_flBombBonusHits = new("CCitadel_Ability_StickyBomb", "m_flBombBonusHits");
-		/// <summary><c>float32</c>.</summary>
+		/// <summary><c>float32</c>. Networked in build 6779: a write is sent to clients.</summary>
 		public float m_flBombBonusHits { get => Get<float>(__m_flBombBonusHits); set => Set(__m_flBombBonusHits, value); }
 
 		private static readonly SchemaField __m_flBombBonusKills = new("CCitadel_Ability_StickyBomb", "m_flBombBonusKills");
-		/// <summary><c>float32</c>.</summary>
+		/// <summary><c>float32</c>. Networked in build 6779: a write is sent to clients.</summary>
 		public float m_flBombBonusKills { get => Get<float>(__m_flBombBonusKills); set => Set(__m_flBombBonusKills, value); }
 
 		private static readonly SchemaField __m_flHookEndTime = new("CCitadel_Ability_StickyBomb", "m_flHookEndTime");
-		/// <summary><c>GameTime_t</c>.</summary>
-		public float m_flHookEndTime { get => Get<float>(__m_flHookEndTime); set => Set(__m_flHookEndTime, value); }
+		/// <summary><c>GameTime_t</c>. Networked in build 6779: a write is sent to clients.</summary>
+		public GameTime m_flHookEndTime { get => Get<GameTime>(__m_flHookEndTime); set => Set(__m_flHookEndTime, value); }
 
 		private static readonly SchemaField __m_hAutoTarget = new("CCitadel_Ability_StickyBomb", "m_hAutoTarget");
-		/// <summary><c>CHandle&lt;CBaseEntity&gt;</c>.</summary>
+		/// <summary><c>CHandle&lt;CBaseEntity&gt;</c>. Networked in build 6779: a write is sent to clients.</summary>
 		public CBaseEntity? m_hAutoTarget { get => GetHandle<CBaseEntity>(__m_hAutoTarget); set => SetHandle(__m_hAutoTarget, value); }
 	}
 }

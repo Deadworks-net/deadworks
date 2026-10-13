@@ -15,6 +15,6 @@ public static partial class Schema {
 
 		private static readonly SchemaField __m_vecDamagedTargets = new("CCitadel_Ability_Ghost_BloodShards", "m_vecDamagedTargets");
 		/// <summary><c>CUtlVector&lt;CHandle&lt;CBaseEntity&gt;&gt;</c>.</summary>
-		public SchemaHandleList<CBaseEntity> m_vecDamagedTargets => new(this, __m_vecDamagedTargets, -1);
+		public SchemaHandleList<CBaseEntity> m_vecDamagedTargets => new(this, __m_vecDamagedTargets, ListStorage.Vector);
 	}
 }

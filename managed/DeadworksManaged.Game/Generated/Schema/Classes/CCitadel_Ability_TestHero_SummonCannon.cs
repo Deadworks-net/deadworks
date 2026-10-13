@@ -14,7 +14,7 @@ public static partial class Schema {
 		static string ISchemaClass<CCitadel_Ability_TestHero_SummonCannon>.NativeName => "CCitadel_Ability_TestHero_SummonCannon";
 
 		private static readonly SchemaField __m_bCannonPending = new("CCitadel_Ability_TestHero_SummonCannon", "m_bCannonPending");
-		/// <summary><c>bool</c>.</summary>
+		/// <summary><c>bool</c>. Networked in build 6779: a write is sent to clients.</summary>
 		public bool m_bCannonPending { get => Get<bool>(__m_bCannonPending); set => Set(__m_bCannonPending, value); }
 
 		private static readonly SchemaField __m_qLaunchAngle = new("CCitadel_Ability_TestHero_SummonCannon", "m_qLaunchAngle");

@@ -14,15 +14,15 @@ public static partial class Schema {
 		static string ISchemaClass<CCitadelHeroComponent>.NativeName => "CCitadelHeroComponent";
 
 		private static readonly SchemaField __m_loadingHero = new("CCitadelHeroComponent", "m_loadingHero");
-		/// <summary><c>CitadelHeroSpawnData_t</c>.</summary>
+		/// <summary><c>CitadelHeroSpawnData_t</c>. Networked in build 6779: a write is sent to clients.</summary>
 		public CitadelHeroSpawnData_t m_loadingHero => Embedded<CitadelHeroSpawnData_t>(__m_loadingHero);
 
 		private static readonly SchemaField __m_nNoSpawnHeroID = new("CCitadelHeroComponent", "m_nNoSpawnHeroID");
-		/// <summary><c>HeroID_t</c>.</summary>
+		/// <summary><c>HeroID_t</c>. Networked in build 6779: a write is sent to clients.</summary>
 		public uint m_nNoSpawnHeroID { get => Get<uint>(__m_nNoSpawnHeroID); set => Set(__m_nNoSpawnHeroID, value); }
 
 		private static readonly SchemaField __m_spawnedHero = new("CCitadelHeroComponent", "m_spawnedHero");
-		/// <summary><c>CitadelHeroSpawnData_t</c>. Wrapped by <c>CCitadelHeroComponent.SpawnedHero</c> in DeadworksManaged.Api.</summary>
+		/// <summary><c>CitadelHeroSpawnData_t</c>. Networked in build 6779: a write is sent to clients. Wrapped by <c>CCitadelHeroComponent.SpawnedHero</c> in DeadworksManaged.Api.</summary>
 		public CitadelHeroSpawnData_t m_spawnedHero => Embedded<CitadelHeroSpawnData_t>(__m_spawnedHero);
 	}
 }

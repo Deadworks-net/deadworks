@@ -14,7 +14,7 @@ public static partial class Schema {
 		static string ISchemaClass<CCitadel_Ability_Priest_StackingDefense>.NativeName => "CCitadel_Ability_Priest_StackingDefense";
 
 		private static readonly SchemaField __m_flMaxStacksBonusDamage = new("CCitadel_Ability_Priest_StackingDefense", "m_flMaxStacksBonusDamage");
-		/// <summary><c>float32</c>.</summary>
+		/// <summary><c>float32</c>. Networked in build 6779: a write is sent to clients.</summary>
 		public float m_flMaxStacksBonusDamage { get => Get<float>(__m_flMaxStacksBonusDamage); set => Set(__m_flMaxStacksBonusDamage, value); }
 
 		/// <summary>The data entry this was created from, as <see cref="CCitadel_Ability_Priest_StackingDefenseVData"/>, or null if it has none.</summary>

@@ -14,27 +14,27 @@ public static partial class Schema {
 		static string ISchemaClass<CModifierGangActivityAbilitySwapVData>.NativeName => "CModifierGangActivityAbilitySwapVData";
 
 		private static readonly SchemaField __m_Cancel = new("CModifierGangActivityAbilitySwapVData", "m_Cancel");
-		/// <summary><c>CSubclassName</c>. No typed mapping yet: read it through its address.</summary>
-		public RawField m_Cancel => Raw(__m_Cancel, "CSubclassName");
+		/// <summary><c>CSubclassName</c>.</summary>
+		public string m_Cancel => GetString(__m_Cancel);
 
 		private static readonly SchemaField __m_ReplaceWithCancel = new("CModifierGangActivityAbilitySwapVData", "m_ReplaceWithCancel");
-		/// <summary><c>CSubclassName</c>. No typed mapping yet: read it through its address.</summary>
-		public RawField m_ReplaceWithCancel => Raw(__m_ReplaceWithCancel, "CSubclassName");
+		/// <summary><c>CSubclassName</c>.</summary>
+		public string m_ReplaceWithCancel => GetString(__m_ReplaceWithCancel);
 
 		private static readonly SchemaField __m_ReplaceWithSummonGangster = new("CModifierGangActivityAbilitySwapVData", "m_ReplaceWithSummonGangster");
-		/// <summary><c>CSubclassName</c>. No typed mapping yet: read it through its address.</summary>
-		public RawField m_ReplaceWithSummonGangster => Raw(__m_ReplaceWithSummonGangster, "CSubclassName");
+		/// <summary><c>CSubclassName</c>.</summary>
+		public string m_ReplaceWithSummonGangster => GetString(__m_ReplaceWithSummonGangster);
 
 		private static readonly SchemaField __m_ReplaceWithTeleportToGangster = new("CModifierGangActivityAbilitySwapVData", "m_ReplaceWithTeleportToGangster");
-		/// <summary><c>CSubclassName</c>. No typed mapping yet: read it through its address.</summary>
-		public RawField m_ReplaceWithTeleportToGangster => Raw(__m_ReplaceWithTeleportToGangster, "CSubclassName");
+		/// <summary><c>CSubclassName</c>.</summary>
+		public string m_ReplaceWithTeleportToGangster => GetString(__m_ReplaceWithTeleportToGangster);
 
 		private static readonly SchemaField __m_SummonGangster = new("CModifierGangActivityAbilitySwapVData", "m_SummonGangster");
-		/// <summary><c>CSubclassName</c>. No typed mapping yet: read it through its address.</summary>
-		public RawField m_SummonGangster => Raw(__m_SummonGangster, "CSubclassName");
+		/// <summary><c>CSubclassName</c>.</summary>
+		public string m_SummonGangster => GetString(__m_SummonGangster);
 
 		private static readonly SchemaField __m_TeleportToGangster = new("CModifierGangActivityAbilitySwapVData", "m_TeleportToGangster");
-		/// <summary><c>CSubclassName</c>. No typed mapping yet: read it through its address.</summary>
-		public RawField m_TeleportToGangster => Raw(__m_TeleportToGangster, "CSubclassName");
+		/// <summary><c>CSubclassName</c>.</summary>
+		public string m_TeleportToGangster => GetString(__m_TeleportToGangster);
 	}
 }

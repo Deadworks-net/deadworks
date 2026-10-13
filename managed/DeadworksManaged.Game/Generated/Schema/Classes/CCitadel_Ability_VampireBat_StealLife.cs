@@ -14,7 +14,7 @@ public static partial class Schema {
 		static string ISchemaClass<CCitadel_Ability_VampireBat_StealLife>.NativeName => "CCitadel_Ability_VampireBat_StealLife";
 
 		private static readonly SchemaField __m_bFloating = new("CCitadel_Ability_VampireBat_StealLife", "m_bFloating");
-		/// <summary><c>bool</c>.</summary>
+		/// <summary><c>bool</c>. Networked in build 6779: a write is sent to clients.</summary>
 		public bool m_bFloating { get => Get<bool>(__m_bFloating); set => Set(__m_bFloating, value); }
 
 		private static readonly SchemaField __m_flFloatElapsedTime = new("CCitadel_Ability_VampireBat_StealLife", "m_flFloatElapsedTime");

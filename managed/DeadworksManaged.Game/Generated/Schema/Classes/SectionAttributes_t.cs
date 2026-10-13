@@ -23,14 +23,14 @@ public static partial class Schema {
 
 		private static readonly SchemaField __m_vecAbilityProperties = new("SectionAttributes_t", "m_vecAbilityProperties");
 		/// <summary><c>CUtlVector&lt;CUtlString&gt;</c>. Additional Ability Properties that we put to the right of the Important Box (if we have one).</summary>
-		public SchemaStringList m_vecAbilityProperties => new(this, __m_vecAbilityProperties, -1);
+		public SchemaStringList m_vecAbilityProperties => new(this, __m_vecAbilityProperties, ListStorage.Vector);
 
 		private static readonly SchemaField __m_vecElevatedAbilityProperties = new("SectionAttributes_t", "m_vecElevatedAbilityProperties");
 		/// <summary><c>CUtlVector&lt;CUtlString&gt;</c>. Same as Ability Properties but these have a Elevated Class added to them. These also appear before the other Ability Properties.</summary>
-		public SchemaStringList m_vecElevatedAbilityProperties => new(this, __m_vecElevatedAbilityProperties, -1);
+		public SchemaStringList m_vecElevatedAbilityProperties => new(this, __m_vecElevatedAbilityProperties, ListStorage.Vector);
 
 		private static readonly SchemaField __m_vecImportantAbilityProperties = new("SectionAttributes_t", "m_vecImportantAbilityProperties");
 		/// <summary><c>CUtlVector&lt;AbilityPropertyInfo_t&gt;</c>. What Ability Property do we put in the Important Box? If empty, the Important box is hidden.</summary>
-		public SchemaObjectList<AbilityPropertyInfo_t> m_vecImportantAbilityProperties => new(this, __m_vecImportantAbilityProperties, -1);
+		public SchemaObjectList<AbilityPropertyInfo_t> m_vecImportantAbilityProperties => new(this, __m_vecImportantAbilityProperties, ListStorage.Vector);
 	}
 }

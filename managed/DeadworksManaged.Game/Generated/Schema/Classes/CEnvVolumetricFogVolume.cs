@@ -14,75 +14,75 @@ public static partial class Schema {
 		static string ISchemaClass<CEnvVolumetricFogVolume>.NativeName => "CEnvVolumetricFogVolume";
 
 		private static readonly SchemaField __m_TintColor = new("CEnvVolumetricFogVolume", "m_TintColor");
-		/// <summary><c>Color</c>.</summary>
+		/// <summary><c>Color</c>. Networked in build 6779: a write is sent to clients.</summary>
 		public Color32 m_TintColor { get => Get<Color32>(__m_TintColor); set => Set(__m_TintColor, value); }
 
 		private static readonly SchemaField __m_bActive = new("CEnvVolumetricFogVolume", "m_bActive");
-		/// <summary><c>bool</c>.</summary>
+		/// <summary><c>bool</c>. Networked in build 6779: a write is sent to clients.</summary>
 		public bool m_bActive { get => Get<bool>(__m_bActive); set => Set(__m_bActive, value); }
 
 		private static readonly SchemaField __m_bIndirectUseLPVs = new("CEnvVolumetricFogVolume", "m_bIndirectUseLPVs");
-		/// <summary><c>bool</c>.</summary>
+		/// <summary><c>bool</c>. Networked in build 6779: a write is sent to clients.</summary>
 		public bool m_bIndirectUseLPVs { get => Get<bool>(__m_bIndirectUseLPVs); set => Set(__m_bIndirectUseLPVs, value); }
 
 		private static readonly SchemaField __m_bOverrideIndirectLightStrength = new("CEnvVolumetricFogVolume", "m_bOverrideIndirectLightStrength");
-		/// <summary><c>bool</c>.</summary>
+		/// <summary><c>bool</c>. Networked in build 6779: a write is sent to clients.</summary>
 		public bool m_bOverrideIndirectLightStrength { get => Get<bool>(__m_bOverrideIndirectLightStrength); set => Set(__m_bOverrideIndirectLightStrength, value); }
 
 		private static readonly SchemaField __m_bOverrideNoiseStrength = new("CEnvVolumetricFogVolume", "m_bOverrideNoiseStrength");
-		/// <summary><c>bool</c>.</summary>
+		/// <summary><c>bool</c>. Networked in build 6779: a write is sent to clients.</summary>
 		public bool m_bOverrideNoiseStrength { get => Get<bool>(__m_bOverrideNoiseStrength); set => Set(__m_bOverrideNoiseStrength, value); }
 
 		private static readonly SchemaField __m_bOverrideSunLightStrength = new("CEnvVolumetricFogVolume", "m_bOverrideSunLightStrength");
-		/// <summary><c>bool</c>.</summary>
+		/// <summary><c>bool</c>. Networked in build 6779: a write is sent to clients.</summary>
 		public bool m_bOverrideSunLightStrength { get => Get<bool>(__m_bOverrideSunLightStrength); set => Set(__m_bOverrideSunLightStrength, value); }
 
 		private static readonly SchemaField __m_bOverrideTintColor = new("CEnvVolumetricFogVolume", "m_bOverrideTintColor");
-		/// <summary><c>bool</c>.</summary>
+		/// <summary><c>bool</c>. Networked in build 6779: a write is sent to clients.</summary>
 		public bool m_bOverrideTintColor { get => Get<bool>(__m_bOverrideTintColor); set => Set(__m_bOverrideTintColor, value); }
 
 		private static readonly SchemaField __m_bStartDisabled = new("CEnvVolumetricFogVolume", "m_bStartDisabled");
-		/// <summary><c>bool</c>.</summary>
+		/// <summary><c>bool</c>. Networked in build 6779: a write is sent to clients.</summary>
 		public bool m_bStartDisabled { get => Get<bool>(__m_bStartDisabled); set => Set(__m_bStartDisabled, value); }
 
 		private static readonly SchemaField __m_fHeightFogEdgeWidth = new("CEnvVolumetricFogVolume", "m_fHeightFogEdgeWidth");
-		/// <summary><c>float32</c>.</summary>
+		/// <summary><c>float32</c>. Networked in build 6779: a write is sent to clients.</summary>
 		public float m_fHeightFogEdgeWidth { get => Get<float>(__m_fHeightFogEdgeWidth); set => Set(__m_fHeightFogEdgeWidth, value); }
 
 		private static readonly SchemaField __m_fIndirectLightStrength = new("CEnvVolumetricFogVolume", "m_fIndirectLightStrength");
-		/// <summary><c>float32</c>.</summary>
+		/// <summary><c>float32</c>. Networked in build 6779: a write is sent to clients.</summary>
 		public float m_fIndirectLightStrength { get => Get<float>(__m_fIndirectLightStrength); set => Set(__m_fIndirectLightStrength, value); }
 
 		private static readonly SchemaField __m_fNoiseStrength = new("CEnvVolumetricFogVolume", "m_fNoiseStrength");
-		/// <summary><c>float32</c>.</summary>
+		/// <summary><c>float32</c>. Networked in build 6779: a write is sent to clients.</summary>
 		public float m_fNoiseStrength { get => Get<float>(__m_fNoiseStrength); set => Set(__m_fNoiseStrength, value); }
 
 		private static readonly SchemaField __m_fSunLightStrength = new("CEnvVolumetricFogVolume", "m_fSunLightStrength");
-		/// <summary><c>float32</c>.</summary>
+		/// <summary><c>float32</c>. Networked in build 6779: a write is sent to clients.</summary>
 		public float m_fSunLightStrength { get => Get<float>(__m_fSunLightStrength); set => Set(__m_fSunLightStrength, value); }
 
 		private static readonly SchemaField __m_flFalloffExponent = new("CEnvVolumetricFogVolume", "m_flFalloffExponent");
-		/// <summary><c>float32</c>.</summary>
+		/// <summary><c>float32</c>. Networked in build 6779: a write is sent to clients.</summary>
 		public float m_flFalloffExponent { get => Get<float>(__m_flFalloffExponent); set => Set(__m_flFalloffExponent, value); }
 
 		private static readonly SchemaField __m_flHeightFogDepth = new("CEnvVolumetricFogVolume", "m_flHeightFogDepth");
-		/// <summary><c>float32</c>.</summary>
+		/// <summary><c>float32</c>. Networked in build 6779: a write is sent to clients.</summary>
 		public float m_flHeightFogDepth { get => Get<float>(__m_flHeightFogDepth); set => Set(__m_flHeightFogDepth, value); }
 
 		private static readonly SchemaField __m_flStrength = new("CEnvVolumetricFogVolume", "m_flStrength");
-		/// <summary><c>float32</c>.</summary>
+		/// <summary><c>float32</c>. Networked in build 6779: a write is sent to clients.</summary>
 		public float m_flStrength { get => Get<float>(__m_flStrength); set => Set(__m_flStrength, value); }
 
 		private static readonly SchemaField __m_nFalloffShape = new("CEnvVolumetricFogVolume", "m_nFalloffShape");
-		/// <summary><c>int32</c>.</summary>
+		/// <summary><c>int32</c>. Networked in build 6779: a write is sent to clients.</summary>
 		public int m_nFalloffShape { get => Get<int>(__m_nFalloffShape); set => Set(__m_nFalloffShape, value); }
 
 		private static readonly SchemaField __m_vBoxMaxs = new("CEnvVolumetricFogVolume", "m_vBoxMaxs");
-		/// <summary><c>Vector</c>.</summary>
+		/// <summary><c>Vector</c>. Networked in build 6779: a write is sent to clients.</summary>
 		public Vector3 m_vBoxMaxs { get => Get<Vector3>(__m_vBoxMaxs); set => Set(__m_vBoxMaxs, value); }
 
 		private static readonly SchemaField __m_vBoxMins = new("CEnvVolumetricFogVolume", "m_vBoxMins");
-		/// <summary><c>Vector</c>.</summary>
+		/// <summary><c>Vector</c>. Networked in build 6779: a write is sent to clients.</summary>
 		public Vector3 m_vBoxMins { get => Get<Vector3>(__m_vBoxMins); set => Set(__m_vBoxMins, value); }
 
 		/// <summary>Fires the <c>Disable</c> input.</summary>

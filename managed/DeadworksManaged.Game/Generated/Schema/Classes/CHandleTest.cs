@@ -14,11 +14,11 @@ public static partial class Schema {
 		static string ISchemaClass<CHandleTest>.NativeName => "CHandleTest";
 
 		private static readonly SchemaField __m_Handle = new("CHandleTest", "m_Handle");
-		/// <summary><c>CHandle&lt;CBaseEntity&gt;</c>.</summary>
+		/// <summary><c>CHandle&lt;CBaseEntity&gt;</c>. Networked in build 6779: a write is sent to clients.</summary>
 		public CBaseEntity? m_Handle { get => GetHandle<CBaseEntity>(__m_Handle); set => SetHandle(__m_Handle, value); }
 
 		private static readonly SchemaField __m_bSendHandle = new("CHandleTest", "m_bSendHandle");
-		/// <summary><c>bool</c>.</summary>
+		/// <summary><c>bool</c>. Networked in build 6779: a write is sent to clients.</summary>
 		public bool m_bSendHandle { get => Get<bool>(__m_bSendHandle); set => Set(__m_bSendHandle, value); }
 	}
 }

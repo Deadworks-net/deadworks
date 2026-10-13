@@ -14,24 +14,24 @@ public static partial class Schema {
 		static string ISchemaClass<CCitadel_Ability_Chessmaster_Queen>.NativeName => "CCitadel_Ability_Chessmaster_Queen";
 
 		private static readonly SchemaField __m_bActive = new("CCitadel_Ability_Chessmaster_Queen", "m_bActive");
-		/// <summary><c>bool</c>.</summary>
+		/// <summary><c>bool</c>. Networked in build 6779: a write is sent to clients.</summary>
 		public bool m_bActive { get => Get<bool>(__m_bActive); set => Set(__m_bActive, value); }
 
 		private static readonly SchemaField __m_iRemainingMoves = new("CCitadel_Ability_Chessmaster_Queen", "m_iRemainingMoves");
-		/// <summary><c>int32</c>.</summary>
+		/// <summary><c>int32</c>. Networked in build 6779: a write is sent to clients.</summary>
 		public int m_iRemainingMoves { get => Get<int>(__m_iRemainingMoves); set => Set(__m_iRemainingMoves, value); }
 
 		private static readonly SchemaField __m_pDeployedQueen = new("CCitadel_Ability_Chessmaster_Queen", "m_pDeployedQueen");
-		/// <summary><c>CHandle&lt;CBaseEntity&gt;</c>.</summary>
+		/// <summary><c>CHandle&lt;CBaseEntity&gt;</c>. Networked in build 6779: a write is sent to clients.</summary>
 		public CBaseEntity? m_pDeployedQueen { get => GetHandle<CBaseEntity>(__m_pDeployedQueen); set => SetHandle(__m_pDeployedQueen, value); }
 
 		private static readonly SchemaField __m_vecHitUnits = new("CCitadel_Ability_Chessmaster_Queen", "m_vecHitUnits");
 		/// <summary><c>CUtlVector&lt;CHandle&lt;CBaseEntity&gt;&gt;</c>.</summary>
-		public SchemaHandleList<CBaseEntity> m_vecHitUnits => new(this, __m_vecHitUnits, -1);
+		public SchemaHandleList<CBaseEntity> m_vecHitUnits => new(this, __m_vecHitUnits, ListStorage.Vector);
 
 		private static readonly SchemaField __m_vecStunnedUnits = new("CCitadel_Ability_Chessmaster_Queen", "m_vecStunnedUnits");
 		/// <summary><c>CUtlVector&lt;CHandle&lt;CBaseEntity&gt;&gt;</c>.</summary>
-		public SchemaHandleList<CBaseEntity> m_vecStunnedUnits => new(this, __m_vecStunnedUnits, -1);
+		public SchemaHandleList<CBaseEntity> m_vecStunnedUnits => new(this, __m_vecStunnedUnits, ListStorage.Vector);
 
 		/// <summary>The data entry this was created from, as <see cref="CCitadel_Ability_Chessmaster_QueenVData"/>, or null if it has none.</summary>
 		public new CCitadel_Ability_Chessmaster_QueenVData? VData => SubclassVData<CCitadel_Ability_Chessmaster_QueenVData>();

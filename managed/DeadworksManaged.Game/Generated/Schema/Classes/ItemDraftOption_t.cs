@@ -14,23 +14,23 @@ public static partial class Schema {
 		static string ISchemaClass<ItemDraftOption_t>.NativeName => "ItemDraftOption_t";
 
 		private static readonly SchemaField __m_BonusItem1 = new("ItemDraftOption_t", "m_BonusItem1");
-		/// <summary><c>ItemDraftItem_t</c>.</summary>
+		/// <summary><c>ItemDraftItem_t</c>. Networked in build 6779: a write is sent to clients.</summary>
 		public ItemDraftItem_t m_BonusItem1 => Embedded<ItemDraftItem_t>(__m_BonusItem1);
 
 		private static readonly SchemaField __m_BonusItem2 = new("ItemDraftOption_t", "m_BonusItem2");
-		/// <summary><c>ItemDraftItem_t</c>.</summary>
+		/// <summary><c>ItemDraftItem_t</c>. Networked in build 6779: a write is sent to clients.</summary>
 		public ItemDraftItem_t m_BonusItem2 => Embedded<ItemDraftItem_t>(__m_BonusItem2);
 
 		private static readonly SchemaField __m_Item = new("ItemDraftOption_t", "m_Item");
-		/// <summary><c>ItemDraftItem_t</c>.</summary>
+		/// <summary><c>ItemDraftItem_t</c>. Networked in build 6779: a write is sent to clients.</summary>
 		public ItemDraftItem_t m_Item => Embedded<ItemDraftItem_t>(__m_Item);
 
 		private static readonly SchemaField __m_bHasBeenDrafted = new("ItemDraftOption_t", "m_bHasBeenDrafted");
-		/// <summary><c>bool</c>.</summary>
+		/// <summary><c>bool</c>. Networked in build 6779: a write is sent to clients.</summary>
 		public bool m_bHasBeenDrafted { get => Get<bool>(__m_bHasBeenDrafted); set => Set(__m_bHasBeenDrafted, value); }
 
 		private static readonly SchemaField __m_bRare = new("ItemDraftOption_t", "m_bRare");
-		/// <summary><c>bool</c>.</summary>
+		/// <summary><c>bool</c>. Networked in build 6779: a write is sent to clients.</summary>
 		public bool m_bRare { get => Get<bool>(__m_bRare); set => Set(__m_bRare, value); }
 	}
 }

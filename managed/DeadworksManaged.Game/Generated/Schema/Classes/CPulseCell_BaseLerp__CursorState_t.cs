@@ -15,10 +15,10 @@ public static partial class Schema {
 
 		private static readonly SchemaField __m_EndTime = new("CPulseCell_BaseLerp::CursorState_t", "m_EndTime");
 		/// <summary><c>GameTime_t</c>.</summary>
-		public float m_EndTime { get => Get<float>(__m_EndTime); set => Set(__m_EndTime, value); }
+		public GameTime m_EndTime { get => Get<GameTime>(__m_EndTime); set => Set(__m_EndTime, value); }
 
 		private static readonly SchemaField __m_StartTime = new("CPulseCell_BaseLerp::CursorState_t", "m_StartTime");
 		/// <summary><c>GameTime_t</c>.</summary>
-		public float m_StartTime { get => Get<float>(__m_StartTime); set => Set(__m_StartTime, value); }
+		public GameTime m_StartTime { get => Get<GameTime>(__m_StartTime); set => Set(__m_StartTime, value); }
 	}
 }

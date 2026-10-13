@@ -14,27 +14,27 @@ public static partial class Schema {
 		static string ISchemaClass<CCitadel_Ability_VampireBat_BatSwarm>.NativeName => "CCitadel_Ability_VampireBat_BatSwarm";
 
 		private static readonly SchemaField __m_bPauseChannel = new("CCitadel_Ability_VampireBat_BatSwarm", "m_bPauseChannel");
-		/// <summary><c>bool</c>.</summary>
+		/// <summary><c>bool</c>. Networked in build 6779: a write is sent to clients.</summary>
 		public bool m_bPauseChannel { get => Get<bool>(__m_bPauseChannel); set => Set(__m_bPauseChannel, value); }
 
 		private static readonly SchemaField __m_flChannelTime = new("CCitadel_Ability_VampireBat_BatSwarm", "m_flChannelTime");
-		/// <summary><c>float32</c>.</summary>
+		/// <summary><c>float32</c>. Networked in build 6779: a write is sent to clients.</summary>
 		public float m_flChannelTime { get => Get<float>(__m_flChannelTime); set => Set(__m_flChannelTime, value); }
 
 		private static readonly SchemaField __m_flLastRemainingChannelTime = new("CCitadel_Ability_VampireBat_BatSwarm", "m_flLastRemainingChannelTime");
-		/// <summary><c>float32</c>.</summary>
+		/// <summary><c>float32</c>. Networked in build 6779: a write is sent to clients.</summary>
 		public float m_flLastRemainingChannelTime { get => Get<float>(__m_flLastRemainingChannelTime); set => Set(__m_flLastRemainingChannelTime, value); }
 
 		private static readonly SchemaField __m_flNextBatTime = new("CCitadel_Ability_VampireBat_BatSwarm", "m_flNextBatTime");
 		/// <summary><c>GameTime_t</c>.</summary>
-		public float m_flNextBatTime { get => Get<float>(__m_flNextBatTime); set => Set(__m_flNextBatTime, value); }
+		public GameTime m_flNextBatTime { get => Get<GameTime>(__m_flNextBatTime); set => Set(__m_flNextBatTime, value); }
 
 		private static readonly SchemaField __m_iBatCountOnCast = new("CCitadel_Ability_VampireBat_BatSwarm", "m_iBatCountOnCast");
-		/// <summary><c>int32</c>.</summary>
+		/// <summary><c>int32</c>. Networked in build 6779: a write is sent to clients.</summary>
 		public int m_iBatCountOnCast { get => Get<int>(__m_iBatCountOnCast); set => Set(__m_iBatCountOnCast, value); }
 
 		private static readonly SchemaField __m_iBonusBats = new("CCitadel_Ability_VampireBat_BatSwarm", "m_iBonusBats");
-		/// <summary><c>int32</c>.</summary>
+		/// <summary><c>int32</c>. Networked in build 6779: a write is sent to clients.</summary>
 		public int m_iBonusBats { get => Get<int>(__m_iBonusBats); set => Set(__m_iBonusBats, value); }
 
 		/// <summary>The data entry this was created from, as <see cref="CCitadel_Ability_VampireBat_BatSwarmVData"/>, or null if it has none.</summary>

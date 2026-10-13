@@ -19,7 +19,7 @@ public static partial class Schema {
 
 		private static readonly SchemaField __m_fishes = new("CFishPool", "m_fishes");
 		/// <summary><c>CUtlVector&lt;CHandle&lt;CFish&gt;&gt;</c>.</summary>
-		public SchemaHandleList<CFish> m_fishes => new(this, __m_fishes, -1);
+		public SchemaHandleList<CFish> m_fishes => new(this, __m_fishes, ListStorage.Vector);
 
 		private static readonly SchemaField __m_isDormant = new("CFishPool", "m_isDormant");
 		/// <summary><c>bool</c>.</summary>

@@ -31,7 +31,7 @@ public static partial class Schema {
 
 		private static readonly SchemaField __m_flGetUpAnimTime = new("CCitadel_Modifier_Knockdown", "m_flGetUpAnimTime");
 		/// <summary><c>GameTime_t</c>.</summary>
-		public float m_flGetUpAnimTime { get => Get<float>(__m_flGetUpAnimTime); set => Set(__m_flGetUpAnimTime, value); }
+		public GameTime m_flGetUpAnimTime { get => Get<GameTime>(__m_flGetUpAnimTime); set => Set(__m_flGetUpAnimTime, value); }
 
 		private static readonly SchemaField __m_flOnGroundDuration = new("CCitadel_Modifier_Knockdown", "m_flOnGroundDuration");
 		/// <summary><c>float32</c>.</summary>

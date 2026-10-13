@@ -14,15 +14,15 @@ public static partial class Schema {
 		static string ISchemaClass<CNPC_FamiliarHelper>.NativeName => "CNPC_FamiliarHelper";
 
 		private static readonly SchemaField __m_bIsHelperAvailableNet = new("CNPC_FamiliarHelper", "m_bIsHelperAvailableNet");
-		/// <summary><c>bool</c>.</summary>
+		/// <summary><c>bool</c>. Networked in build 6779: a write is sent to clients.</summary>
 		public bool m_bIsHelperAvailableNet { get => Get<bool>(__m_bIsHelperAvailableNet); set => Set(__m_bIsHelperAvailableNet, value); }
 
 		private static readonly SchemaField __m_tCooldownEndTime = new("CNPC_FamiliarHelper", "m_tCooldownEndTime");
-		/// <summary><c>GameTime_t</c>.</summary>
-		public float m_tCooldownEndTime { get => Get<float>(__m_tCooldownEndTime); set => Set(__m_tCooldownEndTime, value); }
+		/// <summary><c>GameTime_t</c>. Networked in build 6779: a write is sent to clients.</summary>
+		public GameTime m_tCooldownEndTime { get => Get<GameTime>(__m_tCooldownEndTime); set => Set(__m_tCooldownEndTime, value); }
 
 		private static readonly SchemaField __m_tCooldownStartTime = new("CNPC_FamiliarHelper", "m_tCooldownStartTime");
-		/// <summary><c>GameTime_t</c>.</summary>
-		public float m_tCooldownStartTime { get => Get<float>(__m_tCooldownStartTime); set => Set(__m_tCooldownStartTime, value); }
+		/// <summary><c>GameTime_t</c>. Networked in build 6779: a write is sent to clients.</summary>
+		public GameTime m_tCooldownStartTime { get => Get<GameTime>(__m_tCooldownStartTime); set => Set(__m_tCooldownStartTime, value); }
 	}
 }

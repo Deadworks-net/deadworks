@@ -23,7 +23,7 @@ public static partial class Schema {
 
 		private static readonly SchemaField __m_flTimeNextAvailable = new("CAI_LookTarget", "m_flTimeNextAvailable");
 		/// <summary><c>GameTime_t</c>.</summary>
-		public float m_flTimeNextAvailable { get => Get<float>(__m_flTimeNextAvailable); set => Set(__m_flTimeNextAvailable, value); }
+		public GameTime m_flTimeNextAvailable { get => Get<GameTime>(__m_flTimeNextAvailable); set => Set(__m_flTimeNextAvailable, value); }
 
 		private static readonly SchemaField __m_iContext = new("CAI_LookTarget", "m_iContext");
 		/// <summary><c>int32</c>.</summary>

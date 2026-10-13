@@ -19,7 +19,7 @@ public static partial class Schema {
 
 		private static readonly SchemaField __m_vecHitUnits = new("CCitadel_Ability_Bookworm_KnightCharge", "m_vecHitUnits");
 		/// <summary><c>CUtlVector&lt;CHandle&lt;CBaseEntity&gt;&gt;</c>.</summary>
-		public SchemaHandleList<CBaseEntity> m_vecHitUnits => new(this, __m_vecHitUnits, -1);
+		public SchemaHandleList<CBaseEntity> m_vecHitUnits => new(this, __m_vecHitUnits, ListStorage.Vector);
 
 		/// <summary>The data entry this was created from, as <see cref="CCitadel_Ability_Bookworm_KnightChargeVData"/>, or null if it has none.</summary>
 		public new CCitadel_Ability_Bookworm_KnightChargeVData? VData => SubclassVData<CCitadel_Ability_Bookworm_KnightChargeVData>();

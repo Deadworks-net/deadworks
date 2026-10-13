@@ -15,7 +15,7 @@ public static partial class Schema {
 
 		private static readonly SchemaField __m_FadeStartTime = new("CCitadelModifierInvisBush", "m_FadeStartTime");
 		/// <summary><c>GameTime_t</c>.</summary>
-		public float m_FadeStartTime { get => Get<float>(__m_FadeStartTime); set => Set(__m_FadeStartTime, value); }
+		public GameTime m_FadeStartTime { get => Get<GameTime>(__m_FadeStartTime); set => Set(__m_FadeStartTime, value); }
 
 		private static readonly SchemaField __m_bRevealing = new("CCitadelModifierInvisBush", "m_bRevealing");
 		/// <summary><c>bool</c>.</summary>

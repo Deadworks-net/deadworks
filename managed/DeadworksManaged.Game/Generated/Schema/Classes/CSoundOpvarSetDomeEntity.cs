@@ -15,31 +15,31 @@ public static partial class Schema {
 
 		private static readonly SchemaField __m_arClusterDirSum = new("CSoundOpvarSetDomeEntity", "m_arClusterDirSum");
 		/// <summary><c>CUtlVector&lt;Vector&gt;</c>.</summary>
-		public SchemaValueList<Vector3> m_arClusterDirSum => new(this, __m_arClusterDirSum, -1);
+		public SchemaValueList<Vector3> m_arClusterDirSum => new(this, __m_arClusterDirSum, ListStorage.Vector);
 
 		private static readonly SchemaField __m_arClusterParent = new("CSoundOpvarSetDomeEntity", "m_arClusterParent");
 		/// <summary><c>CUtlVector&lt;int32&gt;</c>.</summary>
-		public SchemaValueList<int> m_arClusterParent => new(this, __m_arClusterParent, -1);
+		public SchemaValueList<int> m_arClusterParent => new(this, __m_arClusterParent, ListStorage.Vector);
 
 		private static readonly SchemaField __m_arClusterSize = new("CSoundOpvarSetDomeEntity", "m_arClusterSize");
 		/// <summary><c>CUtlVector&lt;int32&gt;</c>.</summary>
-		public SchemaValueList<int> m_arClusterSize => new(this, __m_arClusterSize, -1);
+		public SchemaValueList<int> m_arClusterSize => new(this, __m_arClusterSize, ListStorage.Vector);
 
 		private static readonly SchemaField __m_arClusterWeight = new("CSoundOpvarSetDomeEntity", "m_arClusterWeight");
 		/// <summary><c>CUtlVector&lt;float32&gt;</c>.</summary>
-		public SchemaValueList<float> m_arClusterWeight => new(this, __m_arClusterWeight, -1);
+		public SchemaValueList<float> m_arClusterWeight => new(this, __m_arClusterWeight, ListStorage.Vector);
 
 		private static readonly SchemaField __m_arDirections = new("CSoundOpvarSetDomeEntity", "m_arDirections");
 		/// <summary><c>CUtlVector&lt;Vector&gt;</c>.</summary>
-		public SchemaValueList<Vector3> m_arDirections => new(this, __m_arDirections, -1);
+		public SchemaValueList<Vector3> m_arDirections => new(this, __m_arDirections, ListStorage.Vector);
 
 		private static readonly SchemaField __m_arNeighbors = new("CSoundOpvarSetDomeEntity", "m_arNeighbors");
 		/// <summary><c>CUtlVector&lt;int32&gt;</c>.</summary>
-		public SchemaValueList<int> m_arNeighbors => new(this, __m_arNeighbors, -1);
+		public SchemaValueList<int> m_arNeighbors => new(this, __m_arNeighbors, ListStorage.Vector);
 
 		private static readonly SchemaField __m_arOpenness = new("CSoundOpvarSetDomeEntity", "m_arOpenness");
 		/// <summary><c>CUtlVector&lt;float32&gt;</c>.</summary>
-		public SchemaValueList<float> m_arOpenness => new(this, __m_arOpenness, -1);
+		public SchemaValueList<float> m_arOpenness => new(this, __m_arOpenness, ListStorage.Vector);
 
 		private static readonly SchemaField __m_bDiscontinuityPending = new("CSoundOpvarSetDomeEntity", "m_bDiscontinuityPending");
 		/// <summary><c>bool</c>.</summary>
@@ -71,7 +71,7 @@ public static partial class Schema {
 
 		private static readonly SchemaField __m_flLastSmoothTime = new("CSoundOpvarSetDomeEntity", "m_flLastSmoothTime");
 		/// <summary><c>GameTime_t</c>.</summary>
-		public float m_flLastSmoothTime { get => Get<float>(__m_flLastSmoothTime); set => Set(__m_flLastSmoothTime, value); }
+		public GameTime m_flLastSmoothTime { get => Get<GameTime>(__m_flLastSmoothTime); set => Set(__m_flLastSmoothTime, value); }
 
 		private static readonly SchemaField __m_flOpennessExponent = new("CSoundOpvarSetDomeEntity", "m_flOpennessExponent");
 		/// <summary><c>float32</c>.</summary>

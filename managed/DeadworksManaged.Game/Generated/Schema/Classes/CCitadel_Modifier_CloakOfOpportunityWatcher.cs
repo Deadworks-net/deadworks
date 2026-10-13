@@ -19,7 +19,7 @@ public static partial class Schema {
 
 		private static readonly SchemaField __m_nAbilityBlockTime = new("CCitadel_Modifier_CloakOfOpportunityWatcher", "m_nAbilityBlockTime");
 		/// <summary><c>GameTime_t</c>.</summary>
-		public float m_nAbilityBlockTime { get => Get<float>(__m_nAbilityBlockTime); set => Set(__m_nAbilityBlockTime, value); }
+		public GameTime m_nAbilityBlockTime { get => Get<GameTime>(__m_nAbilityBlockTime); set => Set(__m_nAbilityBlockTime, value); }
 
 		private static readonly SchemaField __m_nAbilityBlocking = new("CCitadel_Modifier_CloakOfOpportunityWatcher", "m_nAbilityBlocking");
 		/// <summary><c>CUtlStringToken</c>.</summary>

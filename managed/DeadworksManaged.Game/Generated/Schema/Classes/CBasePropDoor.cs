@@ -58,40 +58,40 @@ public static partial class Schema {
 		public string m_SlaveName { get => GetString(__m_SlaveName); set => SetString(__m_SlaveName, value); }
 
 		private static readonly SchemaField __m_SoundClose = new("CBasePropDoor", "m_SoundClose");
-		/// <summary><c>CGameSoundEventName</c>. No typed mapping yet: read it through its address.</summary>
-		public RawField m_SoundClose => Raw(__m_SoundClose, "CGameSoundEventName");
+		/// <summary><c>CGameSoundEventName</c>.</summary>
+		public string m_SoundClose => GetString(__m_SoundClose);
 
 		private static readonly SchemaField __m_SoundJiggle = new("CBasePropDoor", "m_SoundJiggle");
-		/// <summary><c>CGameSoundEventName</c>. No typed mapping yet: read it through its address.</summary>
-		public RawField m_SoundJiggle => Raw(__m_SoundJiggle, "CGameSoundEventName");
+		/// <summary><c>CGameSoundEventName</c>.</summary>
+		public string m_SoundJiggle => GetString(__m_SoundJiggle);
 
 		private static readonly SchemaField __m_SoundLatch = new("CBasePropDoor", "m_SoundLatch");
-		/// <summary><c>CGameSoundEventName</c>. No typed mapping yet: read it through its address.</summary>
-		public RawField m_SoundLatch => Raw(__m_SoundLatch, "CGameSoundEventName");
+		/// <summary><c>CGameSoundEventName</c>.</summary>
+		public string m_SoundLatch => GetString(__m_SoundLatch);
 
 		private static readonly SchemaField __m_SoundLock = new("CBasePropDoor", "m_SoundLock");
-		/// <summary><c>CGameSoundEventName</c>. No typed mapping yet: read it through its address.</summary>
-		public RawField m_SoundLock => Raw(__m_SoundLock, "CGameSoundEventName");
+		/// <summary><c>CGameSoundEventName</c>.</summary>
+		public string m_SoundLock => GetString(__m_SoundLock);
 
 		private static readonly SchemaField __m_SoundLockedAnim = new("CBasePropDoor", "m_SoundLockedAnim");
-		/// <summary><c>CGameSoundEventName</c>. No typed mapping yet: read it through its address.</summary>
-		public RawField m_SoundLockedAnim => Raw(__m_SoundLockedAnim, "CGameSoundEventName");
+		/// <summary><c>CGameSoundEventName</c>.</summary>
+		public string m_SoundLockedAnim => GetString(__m_SoundLockedAnim);
 
 		private static readonly SchemaField __m_SoundMoving = new("CBasePropDoor", "m_SoundMoving");
-		/// <summary><c>CGameSoundEventName</c>. No typed mapping yet: read it through its address.</summary>
-		public RawField m_SoundMoving => Raw(__m_SoundMoving, "CGameSoundEventName");
+		/// <summary><c>CGameSoundEventName</c>.</summary>
+		public string m_SoundMoving => GetString(__m_SoundMoving);
 
 		private static readonly SchemaField __m_SoundOpen = new("CBasePropDoor", "m_SoundOpen");
-		/// <summary><c>CGameSoundEventName</c>. No typed mapping yet: read it through its address.</summary>
-		public RawField m_SoundOpen => Raw(__m_SoundOpen, "CGameSoundEventName");
+		/// <summary><c>CGameSoundEventName</c>.</summary>
+		public string m_SoundOpen => GetString(__m_SoundOpen);
 
 		private static readonly SchemaField __m_SoundPound = new("CBasePropDoor", "m_SoundPound");
-		/// <summary><c>CGameSoundEventName</c>. No typed mapping yet: read it through its address.</summary>
-		public RawField m_SoundPound => Raw(__m_SoundPound, "CGameSoundEventName");
+		/// <summary><c>CGameSoundEventName</c>.</summary>
+		public string m_SoundPound => GetString(__m_SoundPound);
 
 		private static readonly SchemaField __m_SoundUnlock = new("CBasePropDoor", "m_SoundUnlock");
-		/// <summary><c>CGameSoundEventName</c>. No typed mapping yet: read it through its address.</summary>
-		public RawField m_SoundUnlock => Raw(__m_SoundUnlock, "CGameSoundEventName");
+		/// <summary><c>CGameSoundEventName</c>.</summary>
+		public string m_SoundUnlock => GetString(__m_SoundUnlock);
 
 		private static readonly SchemaField __m_bFirstBlocked = new("CBasePropDoor", "m_bFirstBlocked");
 		/// <summary><c>bool</c>.</summary>
@@ -102,7 +102,7 @@ public static partial class Schema {
 		public bool m_bForceClosed { get => Get<bool>(__m_bForceClosed); set => Set(__m_bForceClosed, value); }
 
 		private static readonly SchemaField __m_bLocked = new("CBasePropDoor", "m_bLocked");
-		/// <summary><c>bool</c>.</summary>
+		/// <summary><c>bool</c>. Networked in build 6779: a write is sent to clients.</summary>
 		public bool m_bLocked { get => Get<bool>(__m_bLocked); set => Set(__m_bLocked, value); }
 
 		private static readonly SchemaField __m_bNeedsHardware = new("CBasePropDoor", "m_bNeedsHardware");
@@ -110,19 +110,19 @@ public static partial class Schema {
 		public bool m_bNeedsHardware { get => Get<bool>(__m_bNeedsHardware); set => Set(__m_bNeedsHardware, value); }
 
 		private static readonly SchemaField __m_bNoNPCs = new("CBasePropDoor", "m_bNoNPCs");
-		/// <summary><c>bool</c>.</summary>
+		/// <summary><c>bool</c>. Networked in build 6779: a write is sent to clients.</summary>
 		public bool m_bNoNPCs { get => Get<bool>(__m_bNoNPCs); set => Set(__m_bNoNPCs, value); }
 
 		private static readonly SchemaField __m_closedAngles = new("CBasePropDoor", "m_closedAngles");
-		/// <summary><c>QAngle</c>.</summary>
+		/// <summary><c>QAngle</c>. Networked in build 6779: a write is sent to clients.</summary>
 		public Vector3 m_closedAngles { get => Get<Vector3>(__m_closedAngles); set => Set(__m_closedAngles, value); }
 
 		private static readonly SchemaField __m_closedPosition = new("CBasePropDoor", "m_closedPosition");
-		/// <summary><c>VectorWS</c>.</summary>
+		/// <summary><c>VectorWS</c>. Networked in build 6779: a write is sent to clients.</summary>
 		public Vector3 m_closedPosition { get => Get<Vector3>(__m_closedPosition); set => Set(__m_closedPosition, value); }
 
 		private static readonly SchemaField __m_eDoorState = new("CBasePropDoor", "m_eDoorState");
-		/// <summary><c>DoorState_t</c>.</summary>
+		/// <summary><c>DoorState_t</c>. Networked in build 6779: a write is sent to clients.</summary>
 		public DoorState_t m_eDoorState { get => Get<DoorState_t>(__m_eDoorState); set => Set(__m_eDoorState, value); }
 
 		private static readonly SchemaField __m_flAutoReturnDelay = new("CBasePropDoor", "m_flAutoReturnDelay");
@@ -143,10 +143,10 @@ public static partial class Schema {
 
 		private static readonly SchemaField __m_hDoorList = new("CBasePropDoor", "m_hDoorList");
 		/// <summary><c>CUtlVector&lt;CHandle&lt;CBasePropDoor&gt;&gt;</c>.</summary>
-		public SchemaHandleList<CBasePropDoor> m_hDoorList => new(this, __m_hDoorList, -1);
+		public SchemaHandleList<CBasePropDoor> m_hDoorList => new(this, __m_hDoorList, ListStorage.Vector);
 
 		private static readonly SchemaField __m_hMaster = new("CBasePropDoor", "m_hMaster");
-		/// <summary><c>CHandle&lt;CBasePropDoor&gt;</c>.</summary>
+		/// <summary><c>CHandle&lt;CBasePropDoor&gt;</c>. Networked in build 6779: a write is sent to clients.</summary>
 		public CBasePropDoor? m_hMaster { get => GetHandle<CBasePropDoor>(__m_hMaster); set => SetHandle(__m_hMaster, value); }
 
 		private static readonly SchemaField __m_ls = new("CBasePropDoor", "m_ls");

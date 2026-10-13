@@ -51,7 +51,7 @@ public static partial class Schema {
 
 		private static readonly SchemaField __m_flPhysicsEntitySpawnedAtTime = new("CShatterGlassShard", "m_flPhysicsEntitySpawnedAtTime");
 		/// <summary><c>GameTime_t</c>.</summary>
-		public float m_flPhysicsEntitySpawnedAtTime { get => Get<float>(__m_flPhysicsEntitySpawnedAtTime); set => Set(__m_flPhysicsEntitySpawnedAtTime, value); }
+		public GameTime m_flPhysicsEntitySpawnedAtTime { get => Get<GameTime>(__m_flPhysicsEntitySpawnedAtTime); set => Set(__m_flPhysicsEntitySpawnedAtTime, value); }
 
 		private static readonly SchemaField __m_flShortestAcross = new("CShatterGlassShard", "m_flShortestAcross");
 		/// <summary><c>float32</c>.</summary>
@@ -70,8 +70,8 @@ public static partial class Schema {
 		public CBaseEntity? m_hEntityHittingMe { get => GetHandle<CBaseEntity>(__m_hEntityHittingMe); set => SetHandle(__m_hEntityHittingMe, value); }
 
 		private static readonly SchemaField __m_hModel = new("CShatterGlassShard", "m_hModel");
-		/// <summary><c>CStrongHandle&lt;InfoForResourceTypeCModel&gt;</c>. No typed mapping yet: read it through its address.</summary>
-		public RawField m_hModel => Raw(__m_hModel, "CStrongHandle<InfoForResourceTypeCModel>");
+		/// <summary><c>CStrongHandle&lt;InfoForResourceTypeCModel&gt;</c>.</summary>
+		public ResourceHandle m_hModel { get => Get<ResourceHandle>(__m_hModel); set => Set(__m_hModel, value); }
 
 		private static readonly SchemaField __m_hParentPanel = new("CShatterGlassShard", "m_hParentPanel");
 		/// <summary><c>CHandle&lt;CFuncShatterglass&gt;</c>.</summary>
@@ -107,7 +107,7 @@ public static partial class Schema {
 
 		private static readonly SchemaField __m_vecNeighbors = new("CShatterGlassShard", "m_vecNeighbors");
 		/// <summary><c>CUtlVector&lt;uint32&gt;</c>.</summary>
-		public SchemaValueList<uint> m_vecNeighbors => new(this, __m_vecNeighbors, -1);
+		public SchemaValueList<uint> m_vecNeighbors => new(this, __m_vecNeighbors, ListStorage.Vector);
 
 		private static readonly SchemaField __m_vecPanelSpaceStressPositionA = new("CShatterGlassShard", "m_vecPanelSpaceStressPositionA");
 		/// <summary><c>Vector2D</c>.</summary>
@@ -119,7 +119,7 @@ public static partial class Schema {
 
 		private static readonly SchemaField __m_vecPanelVertices = new("CShatterGlassShard", "m_vecPanelVertices");
 		/// <summary><c>CUtlVector&lt;Vector2D&gt;</c>.</summary>
-		public SchemaValueList<Vector2> m_vecPanelVertices => new(this, __m_vecPanelVertices, -1);
+		public SchemaValueList<Vector2> m_vecPanelVertices => new(this, __m_vecPanelVertices, ListStorage.Vector);
 
 		private static readonly SchemaField __m_vecStressVelocity = new("CShatterGlassShard", "m_vecStressVelocity");
 		/// <summary><c>Vector</c>.</summary>

@@ -15,7 +15,7 @@ public static partial class Schema {
 
 		private static readonly SchemaField __anim_events = new("AI_BaseNPC_DebugSnapshotData_t", "anim_events");
 		/// <summary><c>CUtlVector&lt;CGlobalSymbol&gt;</c>.</summary>
-		public SchemaStringList anim_events => new(this, __anim_events, -1);
+		public SchemaStringList anim_events => new(this, __anim_events, ListStorage.Vector);
 
 		private static readonly SchemaField __animgraph = new("AI_BaseNPC_DebugSnapshotData_t", "animgraph");
 		/// <summary><c>AI_BaseNPCAnimGraph_DebugSnapshotData_t</c>.</summary>
@@ -23,7 +23,7 @@ public static partial class Schema {
 
 		private static readonly SchemaField __conditions = new("AI_BaseNPC_DebugSnapshotData_t", "conditions");
 		/// <summary><c>CUtlVector&lt;CGlobalSymbol&gt;</c>.</summary>
-		public SchemaStringList conditions => new(this, __conditions, -1);
+		public SchemaStringList conditions => new(this, __conditions, ListStorage.Vector);
 
 		private static readonly SchemaField __current_enemy = new("AI_BaseNPC_DebugSnapshotData_t", "current_enemy");
 		/// <summary><c>CHandle&lt;CBaseEntity&gt;</c>.</summary>

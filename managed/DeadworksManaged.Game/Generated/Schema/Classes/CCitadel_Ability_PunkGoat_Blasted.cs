@@ -14,7 +14,7 @@ public static partial class Schema {
 		static string ISchemaClass<CCitadel_Ability_PunkGoat_Blasted>.NativeName => "CCitadel_Ability_PunkGoat_Blasted";
 
 		private static readonly SchemaField __m_flBlastedCurrentDuration = new("CCitadel_Ability_PunkGoat_Blasted", "m_flBlastedCurrentDuration");
-		/// <summary><c>float32</c>.</summary>
+		/// <summary><c>float32</c>. Networked in build 6779: a write is sent to clients.</summary>
 		public float m_flBlastedCurrentDuration { get => Get<float>(__m_flBlastedCurrentDuration); set => Set(__m_flBlastedCurrentDuration, value); }
 
 		private static readonly SchemaField __m_flDeferredHealingFromBlasted = new("CCitadel_Ability_PunkGoat_Blasted", "m_flDeferredHealingFromBlasted");
@@ -27,6 +27,6 @@ public static partial class Schema {
 
 		private static readonly SchemaField __m_tTimeOfLastBulletHit = new("CCitadel_Ability_PunkGoat_Blasted", "m_tTimeOfLastBulletHit");
 		/// <summary><c>GameTime_t</c>.</summary>
-		public float m_tTimeOfLastBulletHit { get => Get<float>(__m_tTimeOfLastBulletHit); set => Set(__m_tTimeOfLastBulletHit, value); }
+		public GameTime m_tTimeOfLastBulletHit { get => Get<GameTime>(__m_tTimeOfLastBulletHit); set => Set(__m_tTimeOfLastBulletHit, value); }
 	}
 }

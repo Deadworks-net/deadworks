@@ -19,7 +19,7 @@ public static partial class Schema {
 
 		private static readonly SchemaField __m_flStartTime = new("CCitadel_Modifier_LashGrappleEnemy_Debuff", "m_flStartTime");
 		/// <summary><c>GameTime_t</c>.</summary>
-		public float m_flStartTime { get => Get<float>(__m_flStartTime); set => Set(__m_flStartTime, value); }
+		public GameTime m_flStartTime { get => Get<GameTime>(__m_flStartTime); set => Set(__m_flStartTime, value); }
 
 		private static readonly SchemaField __m_vCrashDir = new("CCitadel_Modifier_LashGrappleEnemy_Debuff", "m_vCrashDir");
 		/// <summary><c>Vector</c>.</summary>

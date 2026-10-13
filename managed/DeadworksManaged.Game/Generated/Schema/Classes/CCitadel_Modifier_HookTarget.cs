@@ -35,7 +35,7 @@ public static partial class Schema {
 
 		private static readonly SchemaField __m_flStuckStartTime = new("CCitadel_Modifier_HookTarget", "m_flStuckStartTime");
 		/// <summary><c>GameTime_t</c>.</summary>
-		public float m_flStuckStartTime { get => Get<float>(__m_flStuckStartTime); set => Set(__m_flStuckStartTime, value); }
+		public GameTime m_flStuckStartTime { get => Get<GameTime>(__m_flStuckStartTime); set => Set(__m_flStuckStartTime, value); }
 
 		private static readonly SchemaField __m_vLastPos = new("CCitadel_Modifier_HookTarget", "m_vLastPos");
 		/// <summary><c>VectorWS</c>.</summary>

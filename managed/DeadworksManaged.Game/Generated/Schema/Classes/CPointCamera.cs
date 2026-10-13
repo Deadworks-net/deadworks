@@ -18,15 +18,15 @@ public static partial class Schema {
 		public float m_DegreesPerSecond { get => Get<float>(__m_DegreesPerSecond); set => Set(__m_DegreesPerSecond, value); }
 
 		private static readonly SchemaField __m_FOV = new("CPointCamera", "m_FOV");
-		/// <summary><c>float32</c>.</summary>
+		/// <summary><c>float32</c>. Networked in build 6779: a write is sent to clients.</summary>
 		public float m_FOV { get => Get<float>(__m_FOV); set => Set(__m_FOV, value); }
 
 		private static readonly SchemaField __m_FogColor = new("CPointCamera", "m_FogColor");
-		/// <summary><c>Color</c>.</summary>
+		/// <summary><c>Color</c>. Networked in build 6779: a write is sent to clients.</summary>
 		public Color32 m_FogColor { get => Get<Color32>(__m_FogColor); set => Set(__m_FogColor, value); }
 
 		private static readonly SchemaField __m_Resolution = new("CPointCamera", "m_Resolution");
-		/// <summary><c>float32</c>.</summary>
+		/// <summary><c>float32</c>. Networked in build 6779: a write is sent to clients.</summary>
 		public float m_Resolution { get => Get<float>(__m_Resolution); set => Set(__m_Resolution, value); }
 
 		private static readonly SchemaField __m_TargetFOV = new("CPointCamera", "m_TargetFOV");
@@ -34,23 +34,23 @@ public static partial class Schema {
 		public float m_TargetFOV { get => Get<float>(__m_TargetFOV); set => Set(__m_TargetFOV, value); }
 
 		private static readonly SchemaField __m_bActive = new("CPointCamera", "m_bActive");
-		/// <summary><c>bool</c>.</summary>
+		/// <summary><c>bool</c>. Networked in build 6779: a write is sent to clients.</summary>
 		public bool m_bActive { get => Get<bool>(__m_bActive); set => Set(__m_bActive, value); }
 
 		private static readonly SchemaField __m_bAlignWithParent = new("CPointCamera", "m_bAlignWithParent");
-		/// <summary><c>bool</c>.</summary>
+		/// <summary><c>bool</c>. Networked in build 6779: a write is sent to clients.</summary>
 		public bool m_bAlignWithParent { get => Get<bool>(__m_bAlignWithParent); set => Set(__m_bAlignWithParent, value); }
 
 		private static readonly SchemaField __m_bCanHLTVUse = new("CPointCamera", "m_bCanHLTVUse");
-		/// <summary><c>bool</c>.</summary>
+		/// <summary><c>bool</c>. Networked in build 6779: a write is sent to clients.</summary>
 		public bool m_bCanHLTVUse { get => Get<bool>(__m_bCanHLTVUse); set => Set(__m_bCanHLTVUse, value); }
 
 		private static readonly SchemaField __m_bDofEnabled = new("CPointCamera", "m_bDofEnabled");
-		/// <summary><c>bool</c>.</summary>
+		/// <summary><c>bool</c>. Networked in build 6779: a write is sent to clients.</summary>
 		public bool m_bDofEnabled { get => Get<bool>(__m_bDofEnabled); set => Set(__m_bDofEnabled, value); }
 
 		private static readonly SchemaField __m_bFogEnable = new("CPointCamera", "m_bFogEnable");
-		/// <summary><c>bool</c>.</summary>
+		/// <summary><c>bool</c>. Networked in build 6779: a write is sent to clients.</summary>
 		public bool m_bFogEnable { get => Get<bool>(__m_bFogEnable); set => Set(__m_bFogEnable, value); }
 
 		private static readonly SchemaField __m_bIsOn = new("CPointCamera", "m_bIsOn");
@@ -58,59 +58,59 @@ public static partial class Schema {
 		public bool m_bIsOn { get => Get<bool>(__m_bIsOn); set => Set(__m_bIsOn, value); }
 
 		private static readonly SchemaField __m_bNoSky = new("CPointCamera", "m_bNoSky");
-		/// <summary><c>bool</c>.</summary>
+		/// <summary><c>bool</c>. Networked in build 6779: a write is sent to clients.</summary>
 		public bool m_bNoSky { get => Get<bool>(__m_bNoSky); set => Set(__m_bNoSky, value); }
 
 		private static readonly SchemaField __m_bUseScreenAspectRatio = new("CPointCamera", "m_bUseScreenAspectRatio");
-		/// <summary><c>bool</c>.</summary>
+		/// <summary><c>bool</c>. Networked in build 6779: a write is sent to clients.</summary>
 		public bool m_bUseScreenAspectRatio { get => Get<bool>(__m_bUseScreenAspectRatio); set => Set(__m_bUseScreenAspectRatio, value); }
 
 		private static readonly SchemaField __m_fBrightness = new("CPointCamera", "m_fBrightness");
-		/// <summary><c>float32</c>.</summary>
+		/// <summary><c>float32</c>. Networked in build 6779: a write is sent to clients.</summary>
 		public float m_fBrightness { get => Get<float>(__m_fBrightness); set => Set(__m_fBrightness, value); }
 
 		private static readonly SchemaField __m_flAspectRatio = new("CPointCamera", "m_flAspectRatio");
-		/// <summary><c>float32</c>.</summary>
+		/// <summary><c>float32</c>. Networked in build 6779: a write is sent to clients.</summary>
 		public float m_flAspectRatio { get => Get<float>(__m_flAspectRatio); set => Set(__m_flAspectRatio, value); }
 
 		private static readonly SchemaField __m_flDofFarBlurry = new("CPointCamera", "m_flDofFarBlurry");
-		/// <summary><c>float32</c>.</summary>
+		/// <summary><c>float32</c>. Networked in build 6779: a write is sent to clients.</summary>
 		public float m_flDofFarBlurry { get => Get<float>(__m_flDofFarBlurry); set => Set(__m_flDofFarBlurry, value); }
 
 		private static readonly SchemaField __m_flDofFarCrisp = new("CPointCamera", "m_flDofFarCrisp");
-		/// <summary><c>float32</c>.</summary>
+		/// <summary><c>float32</c>. Networked in build 6779: a write is sent to clients.</summary>
 		public float m_flDofFarCrisp { get => Get<float>(__m_flDofFarCrisp); set => Set(__m_flDofFarCrisp, value); }
 
 		private static readonly SchemaField __m_flDofNearBlurry = new("CPointCamera", "m_flDofNearBlurry");
-		/// <summary><c>float32</c>.</summary>
+		/// <summary><c>float32</c>. Networked in build 6779: a write is sent to clients.</summary>
 		public float m_flDofNearBlurry { get => Get<float>(__m_flDofNearBlurry); set => Set(__m_flDofNearBlurry, value); }
 
 		private static readonly SchemaField __m_flDofNearCrisp = new("CPointCamera", "m_flDofNearCrisp");
-		/// <summary><c>float32</c>.</summary>
+		/// <summary><c>float32</c>. Networked in build 6779: a write is sent to clients.</summary>
 		public float m_flDofNearCrisp { get => Get<float>(__m_flDofNearCrisp); set => Set(__m_flDofNearCrisp, value); }
 
 		private static readonly SchemaField __m_flDofTiltToGround = new("CPointCamera", "m_flDofTiltToGround");
-		/// <summary><c>float32</c>.</summary>
+		/// <summary><c>float32</c>. Networked in build 6779: a write is sent to clients.</summary>
 		public float m_flDofTiltToGround { get => Get<float>(__m_flDofTiltToGround); set => Set(__m_flDofTiltToGround, value); }
 
 		private static readonly SchemaField __m_flFogEnd = new("CPointCamera", "m_flFogEnd");
-		/// <summary><c>float32</c>.</summary>
+		/// <summary><c>float32</c>. Networked in build 6779: a write is sent to clients.</summary>
 		public float m_flFogEnd { get => Get<float>(__m_flFogEnd); set => Set(__m_flFogEnd, value); }
 
 		private static readonly SchemaField __m_flFogMaxDensity = new("CPointCamera", "m_flFogMaxDensity");
-		/// <summary><c>float32</c>.</summary>
+		/// <summary><c>float32</c>. Networked in build 6779: a write is sent to clients.</summary>
 		public float m_flFogMaxDensity { get => Get<float>(__m_flFogMaxDensity); set => Set(__m_flFogMaxDensity, value); }
 
 		private static readonly SchemaField __m_flFogStart = new("CPointCamera", "m_flFogStart");
-		/// <summary><c>float32</c>.</summary>
+		/// <summary><c>float32</c>. Networked in build 6779: a write is sent to clients.</summary>
 		public float m_flFogStart { get => Get<float>(__m_flFogStart); set => Set(__m_flFogStart, value); }
 
 		private static readonly SchemaField __m_flZFar = new("CPointCamera", "m_flZFar");
-		/// <summary><c>float32</c>.</summary>
+		/// <summary><c>float32</c>. Networked in build 6779: a write is sent to clients.</summary>
 		public float m_flZFar { get => Get<float>(__m_flZFar); set => Set(__m_flZFar, value); }
 
 		private static readonly SchemaField __m_flZNear = new("CPointCamera", "m_flZNear");
-		/// <summary><c>float32</c>.</summary>
+		/// <summary><c>float32</c>. Networked in build 6779: a write is sent to clients.</summary>
 		public float m_flZNear { get => Get<float>(__m_flZNear); set => Set(__m_flZNear, value); }
 
 		private static readonly SchemaField __m_pNext = new("CPointCamera", "m_pNext");

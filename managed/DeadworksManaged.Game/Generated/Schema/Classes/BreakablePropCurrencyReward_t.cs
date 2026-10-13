@@ -18,7 +18,7 @@ public static partial class Schema {
 		public int m_nAmount { get => Get<int>(__m_nAmount); set => Set(__m_nAmount, value); }
 
 		private static readonly SchemaField __m_sCurrencyPickup = new("BreakablePropCurrencyReward_t", "m_sCurrencyPickup");
-		/// <summary><c>CSubclassName</c>. If set, one of these citadel_pickup_currency pickups is dropped for players to collect instead of the currency being granted the instant the prop breaks. No typed mapping yet: read it through its address.</summary>
-		public RawField m_sCurrencyPickup => Raw(__m_sCurrencyPickup, "CSubclassName");
+		/// <summary><c>CSubclassName</c>. If set, one of these citadel_pickup_currency pickups is dropped for players to collect instead of the currency being granted the instant the prop breaks.</summary>
+		public string m_sCurrencyPickup => GetString(__m_sCurrencyPickup);
 	}
 }

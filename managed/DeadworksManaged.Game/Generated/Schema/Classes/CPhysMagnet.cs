@@ -15,7 +15,7 @@ public static partial class Schema {
 
 		private static readonly SchemaField __m_MagnettedEntities = new("CPhysMagnet", "m_MagnettedEntities");
 		/// <summary><c>CUtlVector&lt;magnetted_objects_t&gt;</c>.</summary>
-		public SchemaObjectList<magnetted_objects_t> m_MagnettedEntities => new(this, __m_MagnettedEntities, -1);
+		public SchemaObjectList<magnetted_objects_t> m_MagnettedEntities => new(this, __m_MagnettedEntities, ListStorage.Vector);
 
 		private static readonly SchemaField __m_OnMagnetAttach = new("CPhysMagnet", "m_OnMagnetAttach");
 		/// <summary><c>CEntityIOOutput</c>.</summary>
@@ -35,7 +35,7 @@ public static partial class Schema {
 
 		private static readonly SchemaField __m_flNextSuckTime = new("CPhysMagnet", "m_flNextSuckTime");
 		/// <summary><c>GameTime_t</c>.</summary>
-		public float m_flNextSuckTime { get => Get<float>(__m_flNextSuckTime); set => Set(__m_flNextSuckTime, value); }
+		public GameTime m_flNextSuckTime { get => Get<GameTime>(__m_flNextSuckTime); set => Set(__m_flNextSuckTime, value); }
 
 		private static readonly SchemaField __m_flRadius = new("CPhysMagnet", "m_flRadius");
 		/// <summary><c>float32</c>.</summary>

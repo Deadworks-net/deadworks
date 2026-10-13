@@ -58,12 +58,12 @@ public static partial class Schema {
 		public float m_flStartPosition { get => Get<float>(__m_flStartPosition); set => Set(__m_flStartPosition, value); }
 
 		private static readonly SchemaField __m_soundStart = new("CFuncMoveLinear", "m_soundStart");
-		/// <summary><c>CGameSoundEventName</c>. No typed mapping yet: read it through its address.</summary>
-		public RawField m_soundStart => Raw(__m_soundStart, "CGameSoundEventName");
+		/// <summary><c>CGameSoundEventName</c>.</summary>
+		public string m_soundStart => GetString(__m_soundStart);
 
 		private static readonly SchemaField __m_soundStop = new("CFuncMoveLinear", "m_soundStop");
-		/// <summary><c>CGameSoundEventName</c>. No typed mapping yet: read it through its address.</summary>
-		public RawField m_soundStop => Raw(__m_soundStop, "CGameSoundEventName");
+		/// <summary><c>CGameSoundEventName</c>.</summary>
+		public string m_soundStop => GetString(__m_soundStop);
 
 		private static readonly SchemaField __m_vecMoveDirParentSpace = new("CFuncMoveLinear", "m_vecMoveDirParentSpace");
 		/// <summary><c>Vector</c>.</summary>

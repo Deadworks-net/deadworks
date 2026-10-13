@@ -14,7 +14,7 @@ public static partial class Schema {
 		static string ISchemaClass<CSoundAreaEntitySphere>.NativeName => "CSoundAreaEntitySphere";
 
 		private static readonly SchemaField __m_flRadius = new("CSoundAreaEntitySphere", "m_flRadius");
-		/// <summary><c>float32</c>.</summary>
+		/// <summary><c>float32</c>. Networked in build 6779: a write is sent to clients.</summary>
 		public float m_flRadius { get => Get<float>(__m_flRadius); set => Set(__m_flRadius, value); }
 	}
 }

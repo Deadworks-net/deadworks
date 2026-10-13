@@ -15,7 +15,7 @@ public static partial class Schema {
 
 		private static readonly SchemaField __m_doorwayPairs = new("CSoundOpvarSetAutoRoomEntity", "m_doorwayPairs");
 		/// <summary><c>CUtlVector&lt;AutoRoomDoorwayPairs_t&gt;</c>.</summary>
-		public SchemaObjectList<AutoRoomDoorwayPairs_t> m_doorwayPairs => new(this, __m_doorwayPairs, -1);
+		public SchemaObjectList<AutoRoomDoorwayPairs_t> m_doorwayPairs => new(this, __m_doorwayPairs, ListStorage.Vector);
 
 		private static readonly SchemaField __m_flHeightTolerance = new("CSoundOpvarSetAutoRoomEntity", "m_flHeightTolerance");
 		/// <summary><c>float32</c>.</summary>
@@ -31,6 +31,6 @@ public static partial class Schema {
 
 		private static readonly SchemaField __m_traceResults = new("CSoundOpvarSetAutoRoomEntity", "m_traceResults");
 		/// <summary><c>CUtlVector&lt;SoundOpvarTraceResult_t&gt;</c>.</summary>
-		public SchemaObjectList<SoundOpvarTraceResult_t> m_traceResults => new(this, __m_traceResults, -1);
+		public SchemaObjectList<SoundOpvarTraceResult_t> m_traceResults => new(this, __m_traceResults, ListStorage.Vector);
 	}
 }

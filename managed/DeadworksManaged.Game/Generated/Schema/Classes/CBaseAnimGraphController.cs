@@ -14,12 +14,12 @@ public static partial class Schema {
 		static string ISchemaClass<CBaseAnimGraphController>.NativeName => "CBaseAnimGraphController";
 
 		private static readonly SchemaField __m_SerializePoseRecipeAG2Dynamic = new("CBaseAnimGraphController", "m_SerializePoseRecipeAG2Dynamic");
-		/// <summary><c>CNetworkUtlVectorBase&lt;uint8&gt;</c>.</summary>
-		public SchemaValueList<byte> m_SerializePoseRecipeAG2Dynamic => new(this, __m_SerializePoseRecipeAG2Dynamic, -1);
+		/// <summary><c>CNetworkUtlVectorBase&lt;uint8&gt;</c>. Networked in build 6779: a write is sent to clients.</summary>
+		public SchemaValueList<byte> m_SerializePoseRecipeAG2Dynamic => new(this, __m_SerializePoseRecipeAG2Dynamic, ListStorage.Vector);
 
 		private static readonly SchemaField __m_SerializePoseRecipeAG2Slots = new("CBaseAnimGraphController", "m_SerializePoseRecipeAG2Slots");
-		/// <summary><c>CUtlVectorEmbeddedNetworkVar&lt;AnimGraph2SerializedPoseRecipeSlot_t&gt;</c>.</summary>
-		public SchemaObjectList<AnimGraph2SerializedPoseRecipeSlot_t> m_SerializePoseRecipeAG2Slots => new(this, __m_SerializePoseRecipeAG2Slots, -1);
+		/// <summary><c>CUtlVectorEmbeddedNetworkVar&lt;AnimGraph2SerializedPoseRecipeSlot_t&gt;</c>. Networked in build 6779: a write is sent to clients.</summary>
+		public SchemaObjectList<AnimGraph2SerializedPoseRecipeSlot_t> m_SerializePoseRecipeAG2Slots => new(this, __m_SerializePoseRecipeAG2Slots, ListStorage.Vector);
 
 		private static readonly SchemaField __m_bLastUpdateSkipped = new("CBaseAnimGraphController", "m_bLastUpdateSkipped");
 		/// <summary><c>bool</c>.</summary>
@@ -38,27 +38,27 @@ public static partial class Schema {
 		public bool m_bSequenceFinished { get => Get<bool>(__m_bSequenceFinished); set => Set(__m_bSequenceFinished, value); }
 
 		private static readonly SchemaField __m_flPlaybackRate = new("CBaseAnimGraphController", "m_flPlaybackRate");
-		/// <summary><c>CNetworkedQuantizedFloat</c>.</summary>
+		/// <summary><c>CNetworkedQuantizedFloat</c>. Networked in build 6779: a write is sent to clients.</summary>
 		public float m_flPlaybackRate { get => Get<float>(__m_flPlaybackRate); set => Set(__m_flPlaybackRate, value); }
 
 		private static readonly SchemaField __m_flSeqFixedCycle = new("CBaseAnimGraphController", "m_flSeqFixedCycle");
-		/// <summary><c>float32</c>.</summary>
+		/// <summary><c>float32</c>. Networked in build 6779: a write is sent to clients.</summary>
 		public float m_flSeqFixedCycle { get => Get<float>(__m_flSeqFixedCycle); set => Set(__m_flSeqFixedCycle, value); }
 
 		private static readonly SchemaField __m_flSeqStartTime = new("CBaseAnimGraphController", "m_flSeqStartTime");
-		/// <summary><c>GameTime_t</c>.</summary>
-		public float m_flSeqStartTime { get => Get<float>(__m_flSeqStartTime); set => Set(__m_flSeqStartTime, value); }
+		/// <summary><c>GameTime_t</c>. Networked in build 6779: a write is sent to clients.</summary>
+		public GameTime m_flSeqStartTime { get => Get<GameTime>(__m_flSeqStartTime); set => Set(__m_flSeqStartTime, value); }
 
 		private static readonly SchemaField __m_flSoundSyncTime = new("CBaseAnimGraphController", "m_flSoundSyncTime");
 		/// <summary><c>float32</c>.</summary>
 		public float m_flSoundSyncTime { get => Get<float>(__m_flSoundSyncTime); set => Set(__m_flSoundSyncTime, value); }
 
 		private static readonly SchemaField __m_hGraphDefinitionAG2 = new("CBaseAnimGraphController", "m_hGraphDefinitionAG2");
-		/// <summary><c>CStrongHandle&lt;InfoForResourceTypeCNmGraphDefinition&gt;</c>. No typed mapping yet: read it through its address.</summary>
-		public RawField m_hGraphDefinitionAG2 => Raw(__m_hGraphDefinitionAG2, "CStrongHandle<InfoForResourceTypeCNmGraphDefinition>");
+		/// <summary><c>CStrongHandle&lt;InfoForResourceTypeCNmGraphDefinition&gt;</c>. Networked in build 6779: a write is sent to clients.</summary>
+		public ResourceHandle m_hGraphDefinitionAG2 { get => Get<ResourceHandle>(__m_hGraphDefinitionAG2); set => Set(__m_hGraphDefinitionAG2, value); }
 
 		private static readonly SchemaField __m_hSequence = new("CBaseAnimGraphController", "m_hSequence");
-		/// <summary><c>HSequence</c>.</summary>
+		/// <summary><c>HSequence</c>. Networked in build 6779: a write is sent to clients.</summary>
 		public int m_hSequence { get => Get<int>(__m_hSequence); set => Set(__m_hSequence, value); }
 
 		private static readonly SchemaField __m_nActiveIKChainMask = new("CBaseAnimGraphController", "m_nActiveIKChainMask");
@@ -66,11 +66,11 @@ public static partial class Schema {
 		public uint m_nActiveIKChainMask { get => Get<uint>(__m_nActiveIKChainMask); set => Set(__m_nActiveIKChainMask, value); }
 
 		private static readonly SchemaField __m_nAnimLoopMode = new("CBaseAnimGraphController", "m_nAnimLoopMode");
-		/// <summary><c>AnimLoopMode_t</c>.</summary>
+		/// <summary><c>AnimLoopMode_t</c>. Networked in build 6779: a write is sent to clients.</summary>
 		public AnimLoopMode_t m_nAnimLoopMode { get => Get<AnimLoopMode_t>(__m_nAnimLoopMode); set => Set(__m_nAnimLoopMode, value); }
 
 		private static readonly SchemaField __m_nAnimationAlgorithm = new("CBaseAnimGraphController", "m_nAnimationAlgorithm");
-		/// <summary><c>AnimationAlgorithm_t</c>.</summary>
+		/// <summary><c>AnimationAlgorithm_t</c>. Networked in build 6779: a write is sent to clients.</summary>
 		public AnimationAlgorithm_t m_nAnimationAlgorithm { get => Get<AnimationAlgorithm_t>(__m_nAnimationAlgorithm); set => Set(__m_nAnimationAlgorithm, value); }
 
 		private static readonly SchemaField __m_nNextExternalGraphHandle = new("CBaseAnimGraphController", "m_nNextExternalGraphHandle");
@@ -86,23 +86,23 @@ public static partial class Schema {
 		public int m_nPrevAnimUpdateTick { get => Get<int>(__m_nPrevAnimUpdateTick); set => Set(__m_nPrevAnimUpdateTick, value); }
 
 		private static readonly SchemaField __m_nSecondarySkeletonMasterCount = new("CBaseAnimGraphController", "m_nSecondarySkeletonMasterCount");
-		/// <summary><c>int32</c>.</summary>
+		/// <summary><c>int32</c>. Networked in build 6779: a write is sent to clients.</summary>
 		public int m_nSecondarySkeletonMasterCount { get => Get<int>(__m_nSecondarySkeletonMasterCount); set => Set(__m_nSecondarySkeletonMasterCount, value); }
 
 		private static readonly SchemaField __m_nSerializePoseRecipeAG2ActiveSlot = new("CBaseAnimGraphController", "m_nSerializePoseRecipeAG2ActiveSlot");
-		/// <summary><c>uint32</c>.</summary>
+		/// <summary><c>uint32</c>. Networked in build 6779: a write is sent to clients.</summary>
 		public uint m_nSerializePoseRecipeAG2ActiveSlot { get => Get<uint>(__m_nSerializePoseRecipeAG2ActiveSlot); set => Set(__m_nSerializePoseRecipeAG2ActiveSlot, value); }
 
 		private static readonly SchemaField __m_nSerializePoseRecipeVersionAG2 = new("CBaseAnimGraphController", "m_nSerializePoseRecipeVersionAG2");
-		/// <summary><c>int32</c>.</summary>
+		/// <summary><c>int32</c>. Networked in build 6779: a write is sent to clients.</summary>
 		public int m_nSerializePoseRecipeVersionAG2 { get => Get<int>(__m_nSerializePoseRecipeVersionAG2); set => Set(__m_nSerializePoseRecipeVersionAG2, value); }
 
 		private static readonly SchemaField __m_nServerGraphInstanceIteration = new("CBaseAnimGraphController", "m_nServerGraphInstanceIteration");
-		/// <summary><c>int32</c>.</summary>
+		/// <summary><c>int32</c>. Networked in build 6779: a write is sent to clients.</summary>
 		public int m_nServerGraphInstanceIteration { get => Get<int>(__m_nServerGraphInstanceIteration); set => Set(__m_nServerGraphInstanceIteration, value); }
 
 		private static readonly SchemaField __m_nServerSerializationContextIteration = new("CBaseAnimGraphController", "m_nServerSerializationContextIteration");
-		/// <summary><c>int32</c>.</summary>
+		/// <summary><c>int32</c>. Networked in build 6779: a write is sent to clients.</summary>
 		public int m_nServerSerializationContextIteration { get => Get<int>(__m_nServerSerializationContextIteration); set => Set(__m_nServerSerializationContextIteration, value); }
 
 		private static readonly SchemaField __m_pGraphInstanceAG2 = new("CBaseAnimGraphController", "m_pGraphInstanceAG2");
@@ -110,7 +110,7 @@ public static partial class Schema {
 		public CAnimGraph2InstancePtr m_pGraphInstanceAG2 => Embedded<CAnimGraph2InstancePtr>(__m_pGraphInstanceAG2);
 
 		private static readonly SchemaField __m_primaryGraphId = new("CBaseAnimGraphController", "m_primaryGraphId");
-		/// <summary><c>ResourceId_t</c>.</summary>
+		/// <summary><c>ResourceId_t</c>. Networked in build 6779: a write is sent to clients.</summary>
 		public ulong m_primaryGraphId { get => Get<ulong>(__m_primaryGraphId); set => Set(__m_primaryGraphId, value); }
 
 		private static readonly SchemaField __m_sAnimGraph2Identifier = new("CBaseAnimGraphController", "m_sAnimGraph2Identifier");
@@ -118,23 +118,23 @@ public static partial class Schema {
 		public string m_sAnimGraph2Identifier => GetString(__m_sAnimGraph2Identifier);
 
 		private static readonly SchemaField __m_vecExternalClipIds = new("CBaseAnimGraphController", "m_vecExternalClipIds");
-		/// <summary><c>CNetworkUtlVectorBase&lt;ResourceId_t&gt;</c>.</summary>
-		public SchemaValueList<ulong> m_vecExternalClipIds => new(this, __m_vecExternalClipIds, -1);
+		/// <summary><c>CNetworkUtlVectorBase&lt;ResourceId_t&gt;</c>. Networked in build 6779: a write is sent to clients.</summary>
+		public SchemaValueList<ulong> m_vecExternalClipIds => new(this, __m_vecExternalClipIds, ListStorage.Vector);
 
 		private static readonly SchemaField __m_vecExternalGraphIds = new("CBaseAnimGraphController", "m_vecExternalGraphIds");
-		/// <summary><c>CNetworkUtlVectorBase&lt;ResourceId_t&gt;</c>.</summary>
-		public SchemaValueList<ulong> m_vecExternalGraphIds => new(this, __m_vecExternalGraphIds, -1);
+		/// <summary><c>CNetworkUtlVectorBase&lt;ResourceId_t&gt;</c>. Networked in build 6779: a write is sent to clients.</summary>
+		public SchemaValueList<ulong> m_vecExternalGraphIds => new(this, __m_vecExternalGraphIds, ListStorage.Vector);
 
 		private static readonly SchemaField __m_vecExternalGraphs = new("CBaseAnimGraphController", "m_vecExternalGraphs");
 		/// <summary><c>CExternalAnimGraphList</c>.</summary>
 		public CExternalAnimGraphList m_vecExternalGraphs => Embedded<CExternalAnimGraphList>(__m_vecExternalGraphs);
 
 		private static readonly SchemaField __m_vecSecondarySkeletonSlotIDs = new("CBaseAnimGraphController", "m_vecSecondarySkeletonSlotIDs");
-		/// <summary><c>CNetworkUtlVectorBase&lt;CGlobalSymbol&gt;</c>.</summary>
-		public SchemaStringList m_vecSecondarySkeletonSlotIDs => new(this, __m_vecSecondarySkeletonSlotIDs, -1);
+		/// <summary><c>CNetworkUtlVectorBase&lt;CGlobalSymbol&gt;</c>. Networked in build 6779: a write is sent to clients.</summary>
+		public SchemaStringList m_vecSecondarySkeletonSlotIDs => new(this, __m_vecSecondarySkeletonSlotIDs, ListStorage.Vector);
 
 		private static readonly SchemaField __m_vecSecondarySkeletons = new("CBaseAnimGraphController", "m_vecSecondarySkeletons");
-		/// <summary><c>CNetworkUtlVectorBase&lt;CHandle&lt;CBaseAnimGraph&gt;&gt;</c>.</summary>
-		public SchemaHandleList<CBaseAnimGraph> m_vecSecondarySkeletons => new(this, __m_vecSecondarySkeletons, -1);
+		/// <summary><c>CNetworkUtlVectorBase&lt;CHandle&lt;CBaseAnimGraph&gt;&gt;</c>. Networked in build 6779: a write is sent to clients.</summary>
+		public SchemaHandleList<CBaseAnimGraph> m_vecSecondarySkeletons => new(this, __m_vecSecondarySkeletons, ListStorage.Vector);
 	}
 }

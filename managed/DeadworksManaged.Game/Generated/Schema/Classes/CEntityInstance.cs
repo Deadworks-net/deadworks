@@ -22,7 +22,7 @@ public static partial class Schema {
 		public string m_iszPrivateVScripts { get => GetString(__m_iszPrivateVScripts); set => SetString(__m_iszPrivateVScripts, value); }
 
 		private static readonly SchemaField __m_pEntity = new("CEntityInstance", "m_pEntity");
-		/// <summary><c>CEntityIdentity*</c>. Wrapped by <c>CBaseEntity.Name</c> in DeadworksManaged.Api.</summary>
+		/// <summary><c>CEntityIdentity*</c>. Networked in build 6779: a write is sent to clients. Wrapped by <c>CBaseEntity.Name</c> in DeadworksManaged.Api.</summary>
 		public CEntityIdentity? m_pEntity => Pointer<CEntityIdentity>(__m_pEntity);
 	}
 }

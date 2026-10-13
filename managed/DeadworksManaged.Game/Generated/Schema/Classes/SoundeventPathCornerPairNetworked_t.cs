@@ -14,23 +14,23 @@ public static partial class Schema {
 		static string ISchemaClass<SoundeventPathCornerPairNetworked_t>.NativeName => "SoundeventPathCornerPairNetworked_t";
 
 		private static readonly SchemaField __flP1Pct = new("SoundeventPathCornerPairNetworked_t", "flP1Pct");
-		/// <summary><c>float32</c>.</summary>
+		/// <summary><c>float32</c>. Networked in build 6779: a write is sent to clients.</summary>
 		public float flP1Pct { get => Get<float>(__flP1Pct); set => Set(__flP1Pct, value); }
 
 		private static readonly SchemaField __flP2Pct = new("SoundeventPathCornerPairNetworked_t", "flP2Pct");
-		/// <summary><c>float32</c>.</summary>
+		/// <summary><c>float32</c>. Networked in build 6779: a write is sent to clients.</summary>
 		public float flP2Pct { get => Get<float>(__flP2Pct); set => Set(__flP2Pct, value); }
 
 		private static readonly SchemaField __flPathLengthSqr = new("SoundeventPathCornerPairNetworked_t", "flPathLengthSqr");
-		/// <summary><c>float32</c>.</summary>
+		/// <summary><c>float32</c>. Networked in build 6779: a write is sent to clients.</summary>
 		public float flPathLengthSqr { get => Get<float>(__flPathLengthSqr); set => Set(__flPathLengthSqr, value); }
 
 		private static readonly SchemaField __vP1 = new("SoundeventPathCornerPairNetworked_t", "vP1");
-		/// <summary><c>VectorWS</c>.</summary>
+		/// <summary><c>VectorWS</c>. Networked in build 6779: a write is sent to clients.</summary>
 		public Vector3 vP1 { get => Get<Vector3>(__vP1); set => Set(__vP1, value); }
 
 		private static readonly SchemaField __vP2 = new("SoundeventPathCornerPairNetworked_t", "vP2");
-		/// <summary><c>VectorWS</c>.</summary>
+		/// <summary><c>VectorWS</c>. Networked in build 6779: a write is sent to clients.</summary>
 		public Vector3 vP2 { get => Get<Vector3>(__vP2); set => Set(__vP2, value); }
 	}
 }

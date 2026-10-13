@@ -14,11 +14,11 @@ public static partial class Schema {
 		static string ISchemaClass<CCitadel_Ability_Necro_KillSummon>.NativeName => "CCitadel_Ability_Necro_KillSummon";
 
 		private static readonly SchemaField __m_RecastEndTime = new("CCitadel_Ability_Necro_KillSummon", "m_RecastEndTime");
-		/// <summary><c>GameTime_t</c>.</summary>
-		public float m_RecastEndTime { get => Get<float>(__m_RecastEndTime); set => Set(__m_RecastEndTime, value); }
+		/// <summary><c>GameTime_t</c>. Networked in build 6779: a write is sent to clients.</summary>
+		public GameTime m_RecastEndTime { get => Get<GameTime>(__m_RecastEndTime); set => Set(__m_RecastEndTime, value); }
 
 		private static readonly SchemaField __m_bIsInRecast = new("CCitadel_Ability_Necro_KillSummon", "m_bIsInRecast");
-		/// <summary><c>bool</c>.</summary>
+		/// <summary><c>bool</c>. Networked in build 6779: a write is sent to clients.</summary>
 		public bool m_bIsInRecast { get => Get<bool>(__m_bIsInRecast); set => Set(__m_bIsInRecast, value); }
 
 		/// <summary>The data entry this was created from, as <see cref="CCitadel_Ability_Necro_KillSummonVData"/>, or null if it has none.</summary>

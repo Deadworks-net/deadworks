@@ -15,10 +15,10 @@ public static partial class Schema {
 
 		private static readonly SchemaField __m_flLastHealTime = new("CCitadel_Ability_PassiveBeefy", "m_flLastHealTime");
 		/// <summary><c>GameTime_t</c>.</summary>
-		public float m_flLastHealTime { get => Get<float>(__m_flLastHealTime); set => Set(__m_flLastHealTime, value); }
+		public GameTime m_flLastHealTime { get => Get<GameTime>(__m_flLastHealTime); set => Set(__m_flLastHealTime, value); }
 
 		private static readonly SchemaField __m_flTotalPendingHeal = new("CCitadel_Ability_PassiveBeefy", "m_flTotalPendingHeal");
-		/// <summary><c>float32</c>.</summary>
+		/// <summary><c>float32</c>. Networked in build 6779: a write is sent to clients.</summary>
 		public float m_flTotalPendingHeal { get => Get<float>(__m_flTotalPendingHeal); set => Set(__m_flTotalPendingHeal, value); }
 
 		/// <summary>The data entry this was created from, as <see cref="CCitadel_Ability_PassiveBeefyVData"/>, or null if it has none.</summary>

@@ -27,22 +27,22 @@ public static partial class Schema {
 
 		private static readonly SchemaField __m_vecDistanceOperations = new("CitadelCameraOperationsSequence_t", "m_vecDistanceOperations");
 		/// <summary><c>CUtlVector&lt;CitadelCameraDistanceOperationDef_t&gt;</c>.</summary>
-		public SchemaObjectList<CitadelCameraDistanceOperationDef_t> m_vecDistanceOperations => new(this, __m_vecDistanceOperations, -1);
+		public SchemaObjectList<CitadelCameraDistanceOperationDef_t> m_vecDistanceOperations => new(this, __m_vecDistanceOperations, ListStorage.Vector);
 
 		private static readonly SchemaField __m_vecFOVOperations = new("CitadelCameraOperationsSequence_t", "m_vecFOVOperations");
 		/// <summary><c>CUtlVector&lt;CitadelCameraFOVOperationDef_t&gt;</c>.</summary>
-		public SchemaObjectList<CitadelCameraFOVOperationDef_t> m_vecFOVOperations => new(this, __m_vecFOVOperations, -1);
+		public SchemaObjectList<CitadelCameraFOVOperationDef_t> m_vecFOVOperations => new(this, __m_vecFOVOperations, ListStorage.Vector);
 
 		private static readonly SchemaField __m_vecHorizOffsetOperations = new("CitadelCameraOperationsSequence_t", "m_vecHorizOffsetOperations");
 		/// <summary><c>CUtlVector&lt;CitadelCameraHorizOffsetOperationDef_t&gt;</c>.</summary>
-		public SchemaObjectList<CitadelCameraHorizOffsetOperationDef_t> m_vecHorizOffsetOperations => new(this, __m_vecHorizOffsetOperations, -1);
+		public SchemaObjectList<CitadelCameraHorizOffsetOperationDef_t> m_vecHorizOffsetOperations => new(this, __m_vecHorizOffsetOperations, ListStorage.Vector);
 
 		private static readonly SchemaField __m_vecTargetPosOperations = new("CitadelCameraOperationsSequence_t", "m_vecTargetPosOperations");
 		/// <summary><c>CUtlVector&lt;CitadelCameraTargetPosOperationDef_t&gt;</c>.</summary>
-		public SchemaObjectList<CitadelCameraTargetPosOperationDef_t> m_vecTargetPosOperations => new(this, __m_vecTargetPosOperations, -1);
+		public SchemaObjectList<CitadelCameraTargetPosOperationDef_t> m_vecTargetPosOperations => new(this, __m_vecTargetPosOperations, ListStorage.Vector);
 
 		private static readonly SchemaField __m_vecVertOffsetOperations = new("CitadelCameraOperationsSequence_t", "m_vecVertOffsetOperations");
 		/// <summary><c>CUtlVector&lt;CitadelCameraVertOffsetOperationDef_t&gt;</c>.</summary>
-		public SchemaObjectList<CitadelCameraVertOffsetOperationDef_t> m_vecVertOffsetOperations => new(this, __m_vecVertOffsetOperations, -1);
+		public SchemaObjectList<CitadelCameraVertOffsetOperationDef_t> m_vecVertOffsetOperations => new(this, __m_vecVertOffsetOperations, ListStorage.Vector);
 	}
 }

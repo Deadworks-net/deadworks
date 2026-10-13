@@ -18,7 +18,7 @@ public static partial class Schema {
 		public SchemaStringList m_iszBoxEntities => new(this, __m_iszBoxEntities, 16);
 
 		private static readonly SchemaField __m_vecBoxHelpersNetworked = new("CSoundEventBoxEntity", "m_vecBoxHelpersNetworked");
-		/// <summary><c>CNetworkUtlVectorBase&lt;SoundeventBoxHelperNetworked_t&gt;</c>.</summary>
-		public SchemaObjectList<SoundeventBoxHelperNetworked_t> m_vecBoxHelpersNetworked => new(this, __m_vecBoxHelpersNetworked, -1);
+		/// <summary><c>CNetworkUtlVectorBase&lt;SoundeventBoxHelperNetworked_t&gt;</c>. Networked in build 6779: a write is sent to clients.</summary>
+		public SchemaObjectList<SoundeventBoxHelperNetworked_t> m_vecBoxHelpersNetworked => new(this, __m_vecBoxHelpersNetworked, ListStorage.Vector);
 	}
 }

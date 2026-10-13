@@ -14,19 +14,19 @@ public static partial class Schema {
 		static string ISchemaClass<CCitadelGaffer>.NativeName => "CCitadelGaffer";
 
 		private static readonly SchemaField __m_LerpTimes = new("CCitadelGaffer", "m_LerpTimes");
-		/// <summary><c>GameTime_t[2]</c>.</summary>
-		public SchemaValueList<float> m_LerpTimes => new(this, __m_LerpTimes, 2);
+		/// <summary><c>GameTime_t[2]</c>. Networked in build 6779: a write is sent to clients.</summary>
+		public SchemaValueList<GameTime> m_LerpTimes => new(this, __m_LerpTimes, 2);
 
 		private static readonly SchemaField __m_vCubemapFogScale = new("CCitadelGaffer", "m_vCubemapFogScale");
-		/// <summary><c>Vector[2]</c>.</summary>
+		/// <summary><c>Vector[2]</c>. Networked in build 6779: a write is sent to clients.</summary>
 		public SchemaValueList<Vector3> m_vCubemapFogScale => new(this, __m_vCubemapFogScale, 2);
 
 		private static readonly SchemaField __m_vSkyboxScale = new("CCitadelGaffer", "m_vSkyboxScale");
-		/// <summary><c>Vector[2]</c>.</summary>
+		/// <summary><c>Vector[2]</c>. Networked in build 6779: a write is sent to clients.</summary>
 		public SchemaValueList<Vector3> m_vSkyboxScale => new(this, __m_vSkyboxScale, 2);
 
 		private static readonly SchemaField __m_vSunlightScale = new("CCitadelGaffer", "m_vSunlightScale");
-		/// <summary><c>Vector[2]</c>.</summary>
+		/// <summary><c>Vector[2]</c>. Networked in build 6779: a write is sent to clients.</summary>
 		public SchemaValueList<Vector3> m_vSunlightScale => new(this, __m_vSunlightScale, 2);
 
 		/// <summary>Fires the <c>BlendTo</c> input.</summary>

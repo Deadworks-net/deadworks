@@ -15,6 +15,6 @@ public static partial class Schema {
 
 		private static readonly SchemaField __m_flLastProcTime = new("CCitadel_Modifier_Mirage_SandPhantom_Passive_Victim", "m_flLastProcTime");
 		/// <summary><c>GameTime_t</c>.</summary>
-		public float m_flLastProcTime { get => Get<float>(__m_flLastProcTime); set => Set(__m_flLastProcTime, value); }
+		public GameTime m_flLastProcTime { get => Get<GameTime>(__m_flLastProcTime); set => Set(__m_flLastProcTime, value); }
 	}
 }

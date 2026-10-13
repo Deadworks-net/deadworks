@@ -23,7 +23,7 @@ public static partial class Schema {
 
 		private static readonly SchemaField __m_flLastStackTime = new("CCitadel_Modifier_Fathom_ScaldingSpray_Aura", "m_flLastStackTime");
 		/// <summary><c>GameTime_t</c>.</summary>
-		public float m_flLastStackTime { get => Get<float>(__m_flLastStackTime); set => Set(__m_flLastStackTime, value); }
+		public GameTime m_flLastStackTime { get => Get<GameTime>(__m_flLastStackTime); set => Set(__m_flLastStackTime, value); }
 
 		private static readonly SchemaField __m_playerAngles = new("CCitadel_Modifier_Fathom_ScaldingSpray_Aura", "m_playerAngles");
 		/// <summary><c>QAngle</c>.</summary>

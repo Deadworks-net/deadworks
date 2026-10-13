@@ -15,7 +15,7 @@ public static partial class Schema {
 
 		private static readonly SchemaField __m_TimeDestroy = new("CCitadel_Modifier_Push", "m_TimeDestroy");
 		/// <summary><c>GameTime_t</c>.</summary>
-		public float m_TimeDestroy { get => Get<float>(__m_TimeDestroy); set => Set(__m_TimeDestroy, value); }
+		public GameTime m_TimeDestroy { get => Get<GameTime>(__m_TimeDestroy); set => Set(__m_TimeDestroy, value); }
 
 		private static readonly SchemaField __m_flDecayRate = new("CCitadel_Modifier_Push", "m_flDecayRate");
 		/// <summary><c>float32</c>.</summary>

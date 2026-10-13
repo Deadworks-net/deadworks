@@ -34,8 +34,8 @@ public static partial class Schema {
 		public Vector3 m_qCastAngles { get => Get<Vector3>(__m_qCastAngles); set => Set(__m_qCastAngles, value); }
 
 		private static readonly SchemaField __m_tRecastEndTime = new("CCitadel_Ability_Fencer_ThrowBlade", "m_tRecastEndTime");
-		/// <summary><c>GameTime_t</c>.</summary>
-		public float m_tRecastEndTime { get => Get<float>(__m_tRecastEndTime); set => Set(__m_tRecastEndTime, value); }
+		/// <summary><c>GameTime_t</c>. Networked in build 6779: a write is sent to clients.</summary>
+		public GameTime m_tRecastEndTime { get => Get<GameTime>(__m_tRecastEndTime); set => Set(__m_tRecastEndTime, value); }
 
 		private static readonly SchemaField __m_vCastPosition = new("CCitadel_Ability_Fencer_ThrowBlade", "m_vCastPosition");
 		/// <summary><c>VectorWS</c>.</summary>

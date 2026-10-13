@@ -39,6 +39,6 @@ public static partial class Schema {
 
 		private static readonly SchemaField __waypoints = new("AI_Navigator_DebugSnapshotData_t", "waypoints");
 		/// <summary><c>CUtlVector&lt;AI_Navigator_DebugSnapshotData_t::Waypoint_t&gt;</c>.</summary>
-		public SchemaObjectList<AI_Navigator_DebugSnapshotData_t__Waypoint_t> waypoints => new(this, __waypoints, -1);
+		public SchemaObjectList<AI_Navigator_DebugSnapshotData_t__Waypoint_t> waypoints => new(this, __waypoints, ListStorage.Vector);
 	}
 }

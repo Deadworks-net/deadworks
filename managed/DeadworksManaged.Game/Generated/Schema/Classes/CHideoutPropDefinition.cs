@@ -31,6 +31,6 @@ public static partial class Schema {
 
 		private static readonly SchemaField __m_vecPropModifiers = new("CHideoutPropDefinition", "m_vecPropModifiers");
 		/// <summary><c>CUtlVector&lt;CEmbeddedSubclass&lt;CCitadelModifier&gt;&gt;</c>.</summary>
-		public SchemaPointerList<CCitadelModifierVData> m_vecPropModifiers => new(this, __m_vecPropModifiers, -1, 16, 8);
+		public SchemaPointerList<CCitadelModifierVData> m_vecPropModifiers => new(this, __m_vecPropModifiers, ListStorage.Vector, 16, 8);
 	}
 }

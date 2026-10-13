@@ -19,6 +19,6 @@ public static partial class Schema {
 
 		private static readonly SchemaField __m_timeEnemyDisappeared = new("CCitadel_Modifier_NeutralShield", "m_timeEnemyDisappeared");
 		/// <summary><c>GameTime_t</c>.</summary>
-		public float m_timeEnemyDisappeared { get => Get<float>(__m_timeEnemyDisappeared); set => Set(__m_timeEnemyDisappeared, value); }
+		public GameTime m_timeEnemyDisappeared { get => Get<GameTime>(__m_timeEnemyDisappeared); set => Set(__m_timeEnemyDisappeared, value); }
 	}
 }

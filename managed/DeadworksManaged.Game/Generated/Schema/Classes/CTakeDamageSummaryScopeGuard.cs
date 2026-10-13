@@ -15,6 +15,6 @@ public static partial class Schema {
 
 		private static readonly SchemaField __m_vecSummaries = new("CTakeDamageSummaryScopeGuard", "m_vecSummaries");
 		/// <summary><c>CUtlVector&lt;SummaryTakeDamageInfo_t*&gt;</c>.</summary>
-		public SchemaPointerList<SummaryTakeDamageInfo_t> m_vecSummaries => new(this, __m_vecSummaries, -1);
+		public SchemaPointerList<SummaryTakeDamageInfo_t> m_vecSummaries => new(this, __m_vecSummaries, ListStorage.Vector);
 	}
 }

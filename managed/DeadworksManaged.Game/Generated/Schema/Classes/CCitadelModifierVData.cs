@@ -159,10 +159,10 @@ public static partial class Schema {
 
 		private static readonly SchemaField __m_vecAlwaysShowInStatModifierUI = new("CCitadelModifierVData", "m_vecAlwaysShowInStatModifierUI");
 		/// <summary><c>CUtlVector&lt;EModifierValue&gt;</c>. A list of modifier value stats to show in the UI (if empty, will show everything).</summary>
-		public SchemaValueList<EModifierValue> m_vecAlwaysShowInStatModifierUI => new(this, __m_vecAlwaysShowInStatModifierUI, -1);
+		public SchemaValueList<EModifierValue> m_vecAlwaysShowInStatModifierUI => new(this, __m_vecAlwaysShowInStatModifierUI, ListStorage.Vector);
 
 		private static readonly SchemaField __m_vecAutoRegisterModifierValueFromAbilityPropertyName = new("CCitadelModifierVData", "m_vecAutoRegisterModifierValueFromAbilityPropertyName");
 		/// <summary><c>CUtlVector&lt;CUtlString&gt;</c>.</summary>
-		public SchemaStringList m_vecAutoRegisterModifierValueFromAbilityPropertyName => new(this, __m_vecAutoRegisterModifierValueFromAbilityPropertyName, -1);
+		public SchemaStringList m_vecAutoRegisterModifierValueFromAbilityPropertyName => new(this, __m_vecAutoRegisterModifierValueFromAbilityPropertyName, ListStorage.Vector);
 	}
 }

@@ -43,6 +43,6 @@ public static partial class Schema {
 
 		private static readonly SchemaField __m_vecTargettingTiers = new("CAI_NPC_NecroSkeleVData", "m_vecTargettingTiers");
 		/// <summary><c>CUtlVector&lt;NecroSkeleTargetTier_t&gt;</c>.</summary>
-		public SchemaObjectList<NecroSkeleTargetTier_t> m_vecTargettingTiers => new(this, __m_vecTargettingTiers, -1);
+		public SchemaObjectList<NecroSkeleTargetTier_t> m_vecTargettingTiers => new(this, __m_vecTargettingTiers, ListStorage.Vector);
 	}
 }

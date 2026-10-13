@@ -14,8 +14,8 @@ public static partial class Schema {
 		static string ISchemaClass<CCitadel_Werewolf_UnloadGun2>.NativeName => "CCitadel_Werewolf_UnloadGun2";
 
 		private static readonly SchemaField __m_tActiveEndTime = new("CCitadel_Werewolf_UnloadGun2", "m_tActiveEndTime");
-		/// <summary><c>GameTime_t</c>.</summary>
-		public float m_tActiveEndTime { get => Get<float>(__m_tActiveEndTime); set => Set(__m_tActiveEndTime, value); }
+		/// <summary><c>GameTime_t</c>. Networked in build 6779: a write is sent to clients.</summary>
+		public GameTime m_tActiveEndTime { get => Get<GameTime>(__m_tActiveEndTime); set => Set(__m_tActiveEndTime, value); }
 
 		/// <summary>The data entry this was created from, as <see cref="CCitadel_Werewolf_UnloadGun2VData"/>, or null if it has none.</summary>
 		public new CCitadel_Werewolf_UnloadGun2VData? VData => SubclassVData<CCitadel_Werewolf_UnloadGun2VData>();

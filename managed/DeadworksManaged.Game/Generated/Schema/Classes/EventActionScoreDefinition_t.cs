@@ -51,10 +51,10 @@ public static partial class Schema {
 
 		private static readonly SchemaField __vecRelatedActions = new("EventActionScoreDefinition_t", "vecRelatedActions");
 		/// <summary><c>CUtlVector&lt;EventActionScoreDefinition_t::RelatedAction_t&gt;</c>.</summary>
-		public SchemaObjectList<EventActionScoreDefinition_t__RelatedAction_t> vecRelatedActions => new(this, __vecRelatedActions, -1);
+		public SchemaObjectList<EventActionScoreDefinition_t__RelatedAction_t> vecRelatedActions => new(this, __vecRelatedActions, ListStorage.Vector);
 
 		private static readonly SchemaField __vecRewards = new("EventActionScoreDefinition_t", "vecRewards");
 		/// <summary><c>CUtlVector&lt;EventGrantDefinition_t*&gt;</c>.</summary>
-		public SchemaPointerList<EventGrantDefinition_t> vecRewards => new(this, __vecRewards, -1);
+		public SchemaPointerList<EventGrantDefinition_t> vecRewards => new(this, __vecRewards, ListStorage.Vector);
 	}
 }

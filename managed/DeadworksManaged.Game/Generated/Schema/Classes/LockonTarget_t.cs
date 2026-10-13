@@ -14,31 +14,31 @@ public static partial class Schema {
 		static string ISchemaClass<LockonTarget_t>.NativeName => "LockonTarget_t";
 
 		private static readonly SchemaField __m_eLockonState = new("LockonTarget_t", "m_eLockonState");
-		/// <summary><c>ELockonState</c>.</summary>
+		/// <summary><c>ELockonState</c>. Networked in build 6779: a write is sent to clients.</summary>
 		public ELockonState m_eLockonState { get => Get<ELockonState>(__m_eLockonState); set => Set(__m_eLockonState, value); }
 
 		private static readonly SchemaField __m_flDrainRate = new("LockonTarget_t", "m_flDrainRate");
-		/// <summary><c>float32</c>.</summary>
+		/// <summary><c>float32</c>. Networked in build 6779: a write is sent to clients.</summary>
 		public float m_flDrainRate { get => Get<float>(__m_flDrainRate); set => Set(__m_flDrainRate, value); }
 
 		private static readonly SchemaField __m_flGainRate = new("LockonTarget_t", "m_flGainRate");
-		/// <summary><c>float32</c>.</summary>
+		/// <summary><c>float32</c>. Networked in build 6779: a write is sent to clients.</summary>
 		public float m_flGainRate { get => Get<float>(__m_flGainRate); set => Set(__m_flGainRate, value); }
 
 		private static readonly SchemaField __m_flLatchedTime = new("LockonTarget_t", "m_flLatchedTime");
-		/// <summary><c>GameTime_t</c>.</summary>
-		public float m_flLatchedTime { get => Get<float>(__m_flLatchedTime); set => Set(__m_flLatchedTime, value); }
+		/// <summary><c>GameTime_t</c>. Networked in build 6779: a write is sent to clients.</summary>
+		public GameTime m_flLatchedTime { get => Get<GameTime>(__m_flLatchedTime); set => Set(__m_flLatchedTime, value); }
 
 		private static readonly SchemaField __m_flLatchedValue = new("LockonTarget_t", "m_flLatchedValue");
-		/// <summary><c>float32</c>.</summary>
+		/// <summary><c>float32</c>. Networked in build 6779: a write is sent to clients.</summary>
 		public float m_flLatchedValue { get => Get<float>(__m_flLatchedValue); set => Set(__m_flLatchedValue, value); }
 
 		private static readonly SchemaField __m_flMaxValue = new("LockonTarget_t", "m_flMaxValue");
-		/// <summary><c>float32</c>.</summary>
+		/// <summary><c>float32</c>. Networked in build 6779: a write is sent to clients.</summary>
 		public float m_flMaxValue { get => Get<float>(__m_flMaxValue); set => Set(__m_flMaxValue, value); }
 
 		private static readonly SchemaField __m_hTarget = new("LockonTarget_t", "m_hTarget");
-		/// <summary><c>CHandle&lt;CBaseEntity&gt;</c>.</summary>
+		/// <summary><c>CHandle&lt;CBaseEntity&gt;</c>. Networked in build 6779: a write is sent to clients.</summary>
 		public CBaseEntity? m_hTarget { get => GetHandle<CBaseEntity>(__m_hTarget); set => SetHandle(__m_hTarget, value); }
 
 		private static readonly SchemaField __m_nPrevFullStacks = new("LockonTarget_t", "m_nPrevFullStacks");

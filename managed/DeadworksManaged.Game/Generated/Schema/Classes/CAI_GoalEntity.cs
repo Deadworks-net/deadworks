@@ -19,7 +19,7 @@ public static partial class Schema {
 
 		private static readonly SchemaField __m_actors = new("CAI_GoalEntity", "m_actors");
 		/// <summary><c>CUtlVector&lt;CHandle&lt;CAI_BaseNPC&gt;&gt;</c>.</summary>
-		public SchemaHandleList<CAI_BaseNPC> m_actors => new(this, __m_actors, -1);
+		public SchemaHandleList<CAI_BaseNPC> m_actors => new(this, __m_actors, ListStorage.Vector);
 
 		private static readonly SchemaField __m_fStartActive = new("CAI_GoalEntity", "m_fStartActive");
 		/// <summary><c>bool</c>.</summary>

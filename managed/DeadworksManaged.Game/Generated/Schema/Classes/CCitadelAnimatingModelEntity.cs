@@ -14,7 +14,7 @@ public static partial class Schema {
 		static string ISchemaClass<CCitadelAnimatingModelEntity>.NativeName => "CCitadelAnimatingModelEntity";
 
 		private static readonly SchemaField __m_CCitadelRegenComponent = new("CCitadelAnimatingModelEntity", "m_CCitadelRegenComponent");
-		/// <summary><c>CCitadelRegenComponent</c>.</summary>
+		/// <summary><c>CCitadelRegenComponent</c>. Networked in build 6779: a write is sent to clients.</summary>
 		public CCitadelRegenComponent m_CCitadelRegenComponent => Embedded<CCitadelRegenComponent>(__m_CCitadelRegenComponent);
 	}
 }

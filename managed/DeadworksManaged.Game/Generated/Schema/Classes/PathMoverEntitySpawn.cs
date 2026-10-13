@@ -23,6 +23,6 @@ public static partial class Schema {
 
 		private static readonly SchemaField __vecOtherEntities = new("PathMoverEntitySpawn", "vecOtherEntities");
 		/// <summary><c>CUtlVector&lt;CHandle&lt;CBaseEntity&gt;&gt;</c>.</summary>
-		public SchemaHandleList<CBaseEntity> vecOtherEntities => new(this, __vecOtherEntities, -1);
+		public SchemaHandleList<CBaseEntity> vecOtherEntities => new(this, __vecOtherEntities, ListStorage.Vector);
 	}
 }

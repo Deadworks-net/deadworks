@@ -14,11 +14,11 @@ public static partial class Schema {
 		static string ISchemaClass<AbilityUpgradeState_t>.NativeName => "AbilityUpgradeState_t";
 
 		private static readonly SchemaField __m_ItemID = new("AbilityUpgradeState_t", "m_ItemID");
-		/// <summary><c>CUtlStringToken</c>.</summary>
+		/// <summary><c>CUtlStringToken</c>. Networked in build 6779: a write is sent to clients.</summary>
 		public uint m_ItemID { get => Get<uint>(__m_ItemID); set => Set(__m_ItemID, value); }
 
 		private static readonly SchemaField __m_nUpgradeInfo = new("AbilityUpgradeState_t", "m_nUpgradeInfo");
-		/// <summary><c>CitadelAbilityUpgradeInfoPacked_t</c>.</summary>
+		/// <summary><c>CitadelAbilityUpgradeInfoPacked_t</c>. Networked in build 6779: a write is sent to clients.</summary>
 		public uint m_nUpgradeInfo { get => Get<uint>(__m_nUpgradeInfo); set => Set(__m_nUpgradeInfo, value); }
 	}
 }

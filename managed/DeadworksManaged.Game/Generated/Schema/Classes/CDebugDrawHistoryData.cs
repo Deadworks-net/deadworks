@@ -15,15 +15,15 @@ public static partial class Schema {
 
 		private static readonly SchemaField __m_bools = new("CDebugDrawHistoryData", "m_bools");
 		/// <summary><c>CUtlLeanVector&lt;bool&gt;</c>.</summary>
-		public SchemaValueList<bool> m_bools => new(this, __m_bools, -1);
+		public SchemaValueList<bool> m_bools => new(this, __m_bools, ListStorage.UnresizableVector);
 
 		private static readonly SchemaField __m_colors = new("CDebugDrawHistoryData", "m_colors");
 		/// <summary><c>CUtlLeanVector&lt;Color&gt;</c>.</summary>
-		public SchemaValueList<Color32> m_colors => new(this, __m_colors, -1);
+		public SchemaValueList<Color32> m_colors => new(this, __m_colors, ListStorage.UnresizableVector);
 
 		private static readonly SchemaField __m_dimensions = new("CDebugDrawHistoryData", "m_dimensions");
 		/// <summary><c>CUtlLeanVector&lt;float32&gt;</c>.</summary>
-		public SchemaValueList<float> m_dimensions => new(this, __m_dimensions, -1);
+		public SchemaValueList<float> m_dimensions => new(this, __m_dimensions, ListStorage.UnresizableVector);
 
 		private static readonly SchemaField __m_etype = new("CDebugDrawHistoryData", "m_etype");
 		/// <summary><c>ESceneViewDebugOverlaysListenerDataType_t</c>.</summary>
@@ -35,18 +35,18 @@ public static partial class Schema {
 
 		private static readonly SchemaField __m_strings = new("CDebugDrawHistoryData", "m_strings");
 		/// <summary><c>CUtlLeanVector&lt;CUtlString&gt;</c>.</summary>
-		public SchemaStringList m_strings => new(this, __m_strings, -1);
+		public SchemaStringList m_strings => new(this, __m_strings, ListStorage.UnresizableVector);
 
 		private static readonly SchemaField __m_times = new("CDebugDrawHistoryData", "m_times");
 		/// <summary><c>CUtlLeanVector&lt;float64&gt;</c>.</summary>
-		public SchemaValueList<double> m_times => new(this, __m_times, -1);
+		public SchemaValueList<double> m_times => new(this, __m_times, ListStorage.UnresizableVector);
 
 		private static readonly SchemaField __m_uint64s = new("CDebugDrawHistoryData", "m_uint64s");
 		/// <summary><c>CUtlLeanVector&lt;uint64&gt;</c>.</summary>
-		public SchemaValueList<ulong> m_uint64s => new(this, __m_uint64s, -1);
+		public SchemaValueList<ulong> m_uint64s => new(this, __m_uint64s, ListStorage.UnresizableVector);
 
 		private static readonly SchemaField __m_vectors = new("CDebugDrawHistoryData", "m_vectors");
 		/// <summary><c>CUtlLeanVector&lt;Vector4D&gt;</c>.</summary>
-		public SchemaValueList<Vector4> m_vectors => new(this, __m_vectors, -1);
+		public SchemaValueList<Vector4> m_vectors => new(this, __m_vectors, ListStorage.UnresizableVector);
 	}
 }

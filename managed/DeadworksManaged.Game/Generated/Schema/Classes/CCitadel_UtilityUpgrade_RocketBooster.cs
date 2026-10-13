@@ -18,31 +18,31 @@ public static partial class Schema {
 		public RawField m_InAirLoopSound => Raw(__m_InAirLoopSound, "SndOpEventGuid_t");
 
 		private static readonly SchemaField __m_bCanCrash = new("CCitadel_UtilityUpgrade_RocketBooster", "m_bCanCrash");
-		/// <summary><c>bool</c>.</summary>
+		/// <summary><c>bool</c>. Networked in build 6779: a write is sent to clients.</summary>
 		public bool m_bCanCrash { get => Get<bool>(__m_bCanCrash); set => Set(__m_bCanCrash, value); }
 
 		private static readonly SchemaField __m_bCrashingDown = new("CCitadel_UtilityUpgrade_RocketBooster", "m_bCrashingDown");
-		/// <summary><c>bool</c>.</summary>
+		/// <summary><c>bool</c>. Networked in build 6779: a write is sent to clients.</summary>
 		public bool m_bCrashingDown { get => Get<bool>(__m_bCrashingDown); set => Set(__m_bCrashingDown, value); }
 
 		private static readonly SchemaField __m_bImpulseApplied = new("CCitadel_UtilityUpgrade_RocketBooster", "m_bImpulseApplied");
-		/// <summary><c>bool</c>.</summary>
+		/// <summary><c>bool</c>. Networked in build 6779: a write is sent to clients.</summary>
 		public bool m_bImpulseApplied { get => Get<bool>(__m_bImpulseApplied); set => Set(__m_bImpulseApplied, value); }
 
 		private static readonly SchemaField __m_flCastTime = new("CCitadel_UtilityUpgrade_RocketBooster", "m_flCastTime");
-		/// <summary><c>GameTime_t</c>.</summary>
-		public float m_flCastTime { get => Get<float>(__m_flCastTime); set => Set(__m_flCastTime, value); }
+		/// <summary><c>GameTime_t</c>. Networked in build 6779: a write is sent to clients.</summary>
+		public GameTime m_flCastTime { get => Get<GameTime>(__m_flCastTime); set => Set(__m_flCastTime, value); }
 
 		private static readonly SchemaField __m_nTargetingParticleIndex = new("CCitadel_UtilityUpgrade_RocketBooster", "m_nTargetingParticleIndex");
 		/// <summary><c>ParticleIndex_t</c>.</summary>
 		public int m_nTargetingParticleIndex { get => Get<int>(__m_nTargetingParticleIndex); set => Set(__m_nTargetingParticleIndex, value); }
 
 		private static readonly SchemaField __m_vecCrashDirection = new("CCitadel_UtilityUpgrade_RocketBooster", "m_vecCrashDirection");
-		/// <summary><c>Vector</c>.</summary>
+		/// <summary><c>Vector</c>. Networked in build 6779: a write is sent to clients.</summary>
 		public Vector3 m_vecCrashDirection { get => Get<Vector3>(__m_vecCrashDirection); set => Set(__m_vecCrashDirection, value); }
 
 		private static readonly SchemaField __m_vecCrashPosition = new("CCitadel_UtilityUpgrade_RocketBooster", "m_vecCrashPosition");
-		/// <summary><c>VectorWS</c>.</summary>
+		/// <summary><c>VectorWS</c>. Networked in build 6779: a write is sent to clients.</summary>
 		public Vector3 m_vecCrashPosition { get => Get<Vector3>(__m_vecCrashPosition); set => Set(__m_vecCrashPosition, value); }
 
 		/// <summary>The data entry this was created from, as <see cref="CCitadel_UtilityUpgrade_RocketBoosterVData"/>, or null if it has none.</summary>

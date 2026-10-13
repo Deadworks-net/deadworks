@@ -14,15 +14,15 @@ public static partial class Schema {
 		static string ISchemaClass<ItemDraftItem_t>.NativeName => "ItemDraftItem_t";
 
 		private static readonly SchemaField __m_nAbilityLevel = new("ItemDraftItem_t", "m_nAbilityLevel");
-		/// <summary><c>int32</c>.</summary>
+		/// <summary><c>int32</c>. Networked in build 6779: a write is sent to clients.</summary>
 		public int m_nAbilityLevel { get => Get<int>(__m_nAbilityLevel); set => Set(__m_nAbilityLevel, value); }
 
 		private static readonly SchemaField __m_nUpgradeBits = new("ItemDraftItem_t", "m_nUpgradeBits");
-		/// <summary><c>AbilityUpgradeBits_t</c>.</summary>
+		/// <summary><c>AbilityUpgradeBits_t</c>. Networked in build 6779: a write is sent to clients.</summary>
 		public AbilityUpgradeBits_t m_nUpgradeBits { get => Get<AbilityUpgradeBits_t>(__m_nUpgradeBits); set => Set(__m_nUpgradeBits, value); }
 
 		private static readonly SchemaField __m_unItemID = new("ItemDraftItem_t", "m_unItemID");
-		/// <summary><c>CUtlStringToken</c>.</summary>
+		/// <summary><c>CUtlStringToken</c>. Networked in build 6779: a write is sent to clients.</summary>
 		public uint m_unItemID { get => Get<uint>(__m_unItemID); set => Set(__m_unItemID, value); }
 	}
 }

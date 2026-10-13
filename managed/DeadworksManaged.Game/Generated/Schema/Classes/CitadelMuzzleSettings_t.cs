@@ -31,10 +31,10 @@ public static partial class Schema {
 
 		private static readonly SchemaField __m_vecPrimaryMuzzles = new("CitadelMuzzleSettings_t", "m_vecPrimaryMuzzles");
 		/// <summary><c>CUtlVector&lt;CitadelMuzzle_t&gt;</c>.</summary>
-		public SchemaObjectList<CitadelMuzzle_t> m_vecPrimaryMuzzles => new(this, __m_vecPrimaryMuzzles, -1);
+		public SchemaObjectList<CitadelMuzzle_t> m_vecPrimaryMuzzles => new(this, __m_vecPrimaryMuzzles, ListStorage.Vector);
 
 		private static readonly SchemaField __m_vecSecondaryMuzzles = new("CitadelMuzzleSettings_t", "m_vecSecondaryMuzzles");
 		/// <summary><c>CUtlVector&lt;CitadelMuzzle_t&gt;</c>.</summary>
-		public SchemaObjectList<CitadelMuzzle_t> m_vecSecondaryMuzzles => new(this, __m_vecSecondaryMuzzles, -1);
+		public SchemaObjectList<CitadelMuzzle_t> m_vecSecondaryMuzzles => new(this, __m_vecSecondaryMuzzles, ListStorage.Vector);
 	}
 }

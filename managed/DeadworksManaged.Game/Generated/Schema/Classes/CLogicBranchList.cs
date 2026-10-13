@@ -15,7 +15,7 @@ public static partial class Schema {
 
 		private static readonly SchemaField __m_LogicBranchList = new("CLogicBranchList", "m_LogicBranchList");
 		/// <summary><c>CUtlVector&lt;CHandle&lt;CBaseEntity&gt;&gt;</c>.</summary>
-		public SchemaHandleList<CBaseEntity> m_LogicBranchList => new(this, __m_LogicBranchList, -1);
+		public SchemaHandleList<CBaseEntity> m_LogicBranchList => new(this, __m_LogicBranchList, ListStorage.Vector);
 
 		private static readonly SchemaField __m_OnAllFalse = new("CLogicBranchList", "m_OnAllFalse");
 		/// <summary><c>CEntityIOOutput</c>.</summary>

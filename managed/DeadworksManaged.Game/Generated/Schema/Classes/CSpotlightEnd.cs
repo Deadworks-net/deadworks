@@ -14,11 +14,11 @@ public static partial class Schema {
 		static string ISchemaClass<CSpotlightEnd>.NativeName => "CSpotlightEnd";
 
 		private static readonly SchemaField __m_Radius = new("CSpotlightEnd", "m_Radius");
-		/// <summary><c>float32</c>.</summary>
+		/// <summary><c>float32</c>. Networked in build 6779: a write is sent to clients.</summary>
 		public float m_Radius { get => Get<float>(__m_Radius); set => Set(__m_Radius, value); }
 
 		private static readonly SchemaField __m_flLightScale = new("CSpotlightEnd", "m_flLightScale");
-		/// <summary><c>float32</c>.</summary>
+		/// <summary><c>float32</c>. Networked in build 6779: a write is sent to clients.</summary>
 		public float m_flLightScale { get => Get<float>(__m_flLightScale); set => Set(__m_flLightScale, value); }
 
 		private static readonly SchemaField __m_vSpotlightDir = new("CSpotlightEnd", "m_vSpotlightDir");

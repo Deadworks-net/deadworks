@@ -18,7 +18,7 @@ public static partial class Schema {
 		public string m_EffectInterpenetrateName { get => GetString(__m_EffectInterpenetrateName); set => SetString(__m_EffectInterpenetrateName, value); }
 
 		private static readonly SchemaField __m_EffectName = new("CFuncElectrifiedVolume", "m_EffectName");
-		/// <summary><c>CUtlSymbolLarge</c>.</summary>
+		/// <summary><c>CUtlSymbolLarge</c>. Networked in build 6779: a write is sent to clients.</summary>
 		public string m_EffectName { get => GetString(__m_EffectName); set => SetString(__m_EffectName, value); }
 
 		private static readonly SchemaField __m_EffectZapName = new("CFuncElectrifiedVolume", "m_EffectZapName");

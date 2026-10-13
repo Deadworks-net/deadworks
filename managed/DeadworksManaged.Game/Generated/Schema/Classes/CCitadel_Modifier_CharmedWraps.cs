@@ -15,6 +15,6 @@ public static partial class Schema {
 
 		private static readonly SchemaField __m_fLastPrimingLightAttackTime = new("CCitadel_Modifier_CharmedWraps", "m_fLastPrimingLightAttackTime");
 		/// <summary><c>GameTime_t</c>.</summary>
-		public float m_fLastPrimingLightAttackTime { get => Get<float>(__m_fLastPrimingLightAttackTime); set => Set(__m_fLastPrimingLightAttackTime, value); }
+		public GameTime m_fLastPrimingLightAttackTime { get => Get<GameTime>(__m_fLastPrimingLightAttackTime); set => Set(__m_fLastPrimingLightAttackTime, value); }
 	}
 }

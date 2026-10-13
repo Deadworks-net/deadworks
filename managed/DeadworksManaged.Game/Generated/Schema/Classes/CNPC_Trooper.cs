@@ -14,7 +14,7 @@ public static partial class Schema {
 		static string ISchemaClass<CNPC_Trooper>.NativeName => "CNPC_Trooper";
 
 		private static readonly SchemaField __m_bUsingBossWeapon = new("CNPC_Trooper", "m_bUsingBossWeapon");
-		/// <summary><c>bool</c>.</summary>
+		/// <summary><c>bool</c>. Networked in build 6779: a write is sent to clients.</summary>
 		public bool m_bUsingBossWeapon { get => Get<bool>(__m_bUsingBossWeapon); set => Set(__m_bUsingBossWeapon, value); }
 
 		private static readonly SchemaField __m_hSpawnWaveController = new("CNPC_Trooper", "m_hSpawnWaveController");
@@ -22,7 +22,7 @@ public static partial class Schema {
 		public CInfoTrooperBossSpawn? m_hSpawnWaveController { get => GetHandle<CInfoTrooperBossSpawn>(__m_hSpawnWaveController); set => SetHandle(__m_hSpawnWaveController, value); }
 
 		private static readonly SchemaField __m_hTargetedEnemy = new("CNPC_Trooper", "m_hTargetedEnemy");
-		/// <summary><c>CHandle&lt;CBaseEntity&gt;</c>.</summary>
+		/// <summary><c>CHandle&lt;CBaseEntity&gt;</c>. Networked in build 6779: a write is sent to clients.</summary>
 		public CBaseEntity? m_hTargetedEnemy { get => GetHandle<CBaseEntity>(__m_hTargetedEnemy); set => SetHandle(__m_hTargetedEnemy, value); }
 
 		private static readonly SchemaField __m_hTrooperSpawnPoint = new("CNPC_Trooper", "m_hTrooperSpawnPoint");
@@ -30,7 +30,7 @@ public static partial class Schema {
 		public CInfoTrooperSpawn? m_hTrooperSpawnPoint { get => GetHandle<CInfoTrooperSpawn>(__m_hTrooperSpawnPoint); set => SetHandle(__m_hTrooperSpawnPoint, value); }
 
 		private static readonly SchemaField __m_iLane = new("CNPC_Trooper", "m_iLane");
-		/// <summary><c>int32</c>.</summary>
+		/// <summary><c>int32</c>. Networked in build 6779: a write is sent to clients.</summary>
 		public int m_iLane { get => Get<int>(__m_iLane); set => Set(__m_iLane, value); }
 	}
 }

@@ -31,6 +31,6 @@ public static partial class Schema {
 
 		private static readonly SchemaField __m_vecSlashInfos = new("CCitadel_Ability_Fencer_PrimaryWeapon_VData", "m_vecSlashInfos");
 		/// <summary><c>CUtlVector&lt;SlashInfo_t&gt;</c>.</summary>
-		public SchemaObjectList<SlashInfo_t> m_vecSlashInfos => new(this, __m_vecSlashInfos, -1);
+		public SchemaObjectList<SlashInfo_t> m_vecSlashInfos => new(this, __m_vecSlashInfos, ListStorage.Vector);
 	}
 }

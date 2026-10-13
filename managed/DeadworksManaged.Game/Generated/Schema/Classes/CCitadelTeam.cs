@@ -14,47 +14,47 @@ public static partial class Schema {
 		static string ISchemaClass<CCitadelTeam>.NativeName => "CCitadelTeam";
 
 		private static readonly SchemaField __m_bHasValidBaseLocation = new("CCitadelTeam", "m_bHasValidBaseLocation");
-		/// <summary><c>bool</c>.</summary>
+		/// <summary><c>bool</c>. Networked in build 6779: a write is sent to clients.</summary>
 		public bool m_bHasValidBaseLocation { get => Get<bool>(__m_bHasValidBaseLocation); set => Set(__m_bHasValidBaseLocation, value); }
 
 		private static readonly SchemaField __m_flBaseObjectiveHealth = new("CCitadelTeam", "m_flBaseObjectiveHealth");
-		/// <summary><c>float32</c>.</summary>
+		/// <summary><c>float32</c>. Networked in build 6779: a write is sent to clients.</summary>
 		public float m_flBaseObjectiveHealth { get => Get<float>(__m_flBaseObjectiveHealth); set => Set(__m_flBaseObjectiveHealth, value); }
 
 		private static readonly SchemaField __m_nBaseGuardianLanesCleared = new("CCitadelTeam", "m_nBaseGuardianLanesCleared");
-		/// <summary><c>int32</c>.</summary>
+		/// <summary><c>int32</c>. Networked in build 6779: a write is sent to clients.</summary>
 		public int m_nBaseGuardianLanesCleared { get => Get<int>(__m_nBaseGuardianLanesCleared); set => Set(__m_nBaseGuardianLanesCleared, value); }
 
 		private static readonly SchemaField __m_nBossesAlive = new("CCitadelTeam", "m_nBossesAlive");
-		/// <summary><c>int32</c>.</summary>
+		/// <summary><c>int32</c>. Networked in build 6779: a write is sent to clients.</summary>
 		public int m_nBossesAlive { get => Get<int>(__m_nBossesAlive); set => Set(__m_nBossesAlive, value); }
 
 		private static readonly SchemaField __m_nBossesMax = new("CCitadelTeam", "m_nBossesMax");
-		/// <summary><c>int32</c>.</summary>
+		/// <summary><c>int32</c>. Networked in build 6779: a write is sent to clients.</summary>
 		public int m_nBossesMax { get => Get<int>(__m_nBossesMax); set => Set(__m_nBossesMax, value); }
 
 		private static readonly SchemaField __m_nFlexSlotsUnlocked = new("CCitadelTeam", "m_nFlexSlotsUnlocked");
-		/// <summary><c>EFlexSlotTypes_t</c>.</summary>
+		/// <summary><c>EFlexSlotTypes_t</c>. Networked in build 6779: a write is sent to clients.</summary>
 		public EFlexSlotTypes_t m_nFlexSlotsUnlocked { get => Get<EFlexSlotTypes_t>(__m_nFlexSlotsUnlocked); set => Set(__m_nFlexSlotsUnlocked, value); }
 
 		private static readonly SchemaField __m_nStreetBrawlScore = new("CCitadelTeam", "m_nStreetBrawlScore");
-		/// <summary><c>int32</c>.</summary>
+		/// <summary><c>int32</c>. Networked in build 6779: a write is sent to clients.</summary>
 		public int m_nStreetBrawlScore { get => Get<int>(__m_nStreetBrawlScore); set => Set(__m_nStreetBrawlScore, value); }
 
 		private static readonly SchemaField __m_nStreetBrawlScoreLastRound = new("CCitadelTeam", "m_nStreetBrawlScoreLastRound");
-		/// <summary><c>int32</c>.</summary>
+		/// <summary><c>int32</c>. Networked in build 6779: a write is sent to clients.</summary>
 		public int m_nStreetBrawlScoreLastRound { get => Get<int>(__m_nStreetBrawlScoreLastRound); set => Set(__m_nStreetBrawlScoreLastRound, value); }
 
 		private static readonly SchemaField __m_vecBaseLocationX = new("CCitadelTeam", "m_vecBaseLocationX");
-		/// <summary><c>int32</c>.</summary>
+		/// <summary><c>int32</c>. Networked in build 6779: a write is sent to clients.</summary>
 		public int m_vecBaseLocationX { get => Get<int>(__m_vecBaseLocationX); set => Set(__m_vecBaseLocationX, value); }
 
 		private static readonly SchemaField __m_vecBaseLocationY = new("CCitadelTeam", "m_vecBaseLocationY");
-		/// <summary><c>int32</c>.</summary>
+		/// <summary><c>int32</c>. Networked in build 6779: a write is sent to clients.</summary>
 		public int m_vecBaseLocationY { get => Get<int>(__m_vecBaseLocationY); set => Set(__m_vecBaseLocationY, value); }
 
 		private static readonly SchemaField __m_vecFOWEntities = new("CCitadelTeam", "m_vecFOWEntities");
-		/// <summary><c>CUtlVectorEmbeddedNetworkVar&lt;STeamFOWEntity&gt;</c>.</summary>
-		public SchemaObjectList<STeamFOWEntity> m_vecFOWEntities => new(this, __m_vecFOWEntities, -1);
+		/// <summary><c>CUtlVectorEmbeddedNetworkVar&lt;STeamFOWEntity&gt;</c>. Networked in build 6779: a write is sent to clients.</summary>
+		public SchemaObjectList<STeamFOWEntity> m_vecFOWEntities => new(this, __m_vecFOWEntities, ListStorage.Vector);
 	}
 }

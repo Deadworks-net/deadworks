@@ -18,12 +18,12 @@ public static partial class Schema {
 		public float m_flRadius { get => Get<float>(__m_flRadius); set => Set(__m_flRadius, value); }
 
 		private static readonly SchemaField __m_hBaseModel = new("CIcePathShardGenerator", "m_hBaseModel");
-		/// <summary><c>CStrongHandle&lt;InfoForResourceTypeCModel&gt;</c>. No typed mapping yet: read it through its address.</summary>
-		public RawField m_hBaseModel => Raw(__m_hBaseModel, "CStrongHandle<InfoForResourceTypeCModel>");
+		/// <summary><c>CStrongHandle&lt;InfoForResourceTypeCModel&gt;</c>.</summary>
+		public ResourceHandle m_hBaseModel { get => Get<ResourceHandle>(__m_hBaseModel); set => Set(__m_hBaseModel, value); }
 
 		private static readonly SchemaField __m_hSurfModel = new("CIcePathShardGenerator", "m_hSurfModel");
-		/// <summary><c>CStrongHandle&lt;InfoForResourceTypeCModel&gt;</c>. No typed mapping yet: read it through its address.</summary>
-		public RawField m_hSurfModel => Raw(__m_hSurfModel, "CStrongHandle<InfoForResourceTypeCModel>");
+		/// <summary><c>CStrongHandle&lt;InfoForResourceTypeCModel&gt;</c>.</summary>
+		public ResourceHandle m_hSurfModel { get => Get<ResourceHandle>(__m_hSurfModel); set => Set(__m_hSurfModel, value); }
 
 		private static readonly SchemaField __m_icePathModelDesc = new("CIcePathShardGenerator", "m_icePathModelDesc");
 		/// <summary><c>ice_path_shard_model_desc_t</c>.</summary>
@@ -35,7 +35,7 @@ public static partial class Schema {
 
 		private static readonly SchemaField __m_vPrevFrontEdgeVerts = new("CIcePathShardGenerator", "m_vPrevFrontEdgeVerts");
 		/// <summary><c>CUtlVector&lt;VectorWS&gt;</c>.</summary>
-		public SchemaValueList<Vector3> m_vPrevFrontEdgeVerts => new(this, __m_vPrevFrontEdgeVerts, -1);
+		public SchemaValueList<Vector3> m_vPrevFrontEdgeVerts => new(this, __m_vPrevFrontEdgeVerts, ListStorage.Vector);
 
 		private static readonly SchemaField __m_vecPreviousPreviousShardOrigin = new("CIcePathShardGenerator", "m_vecPreviousPreviousShardOrigin");
 		/// <summary><c>VectorWS</c>.</summary>
@@ -43,7 +43,7 @@ public static partial class Schema {
 
 		private static readonly SchemaField __m_vecPreviousShard = new("CIcePathShardGenerator", "m_vecPreviousShard");
 		/// <summary><c>CUtlVector&lt;VectorWS&gt;</c>.</summary>
-		public SchemaValueList<Vector3> m_vecPreviousShard => new(this, __m_vecPreviousShard, -1);
+		public SchemaValueList<Vector3> m_vecPreviousShard => new(this, __m_vecPreviousShard, ListStorage.Vector);
 
 		private static readonly SchemaField __m_vecPreviousShardOrigin = new("CIcePathShardGenerator", "m_vecPreviousShardOrigin");
 		/// <summary><c>VectorWS</c>.</summary>
@@ -51,6 +51,6 @@ public static partial class Schema {
 
 		private static readonly SchemaField __m_vecUnitCirclePoints = new("CIcePathShardGenerator", "m_vecUnitCirclePoints");
 		/// <summary><c>CUtlVector&lt;Vector&gt;</c>.</summary>
-		public SchemaValueList<Vector3> m_vecUnitCirclePoints => new(this, __m_vecUnitCirclePoints, -1);
+		public SchemaValueList<Vector3> m_vecUnitCirclePoints => new(this, __m_vecUnitCirclePoints, ListStorage.Vector);
 	}
 }

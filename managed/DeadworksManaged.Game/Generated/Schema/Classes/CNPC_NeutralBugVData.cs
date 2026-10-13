@@ -122,16 +122,16 @@ public static partial class Schema {
 		public int m_nDeathSwarmCount { get => Get<int>(__m_nDeathSwarmCount); set => Set(__m_nDeathSwarmCount, value); }
 
 		private static readonly SchemaField __m_sDeathSwarmSubclass = new("CNPC_NeutralBugVData", "m_sDeathSwarmSubclass");
-		/// <summary><c>CSubclassName</c>. No typed mapping yet: read it through its address.</summary>
-		public RawField m_sDeathSwarmSubclass => Raw(__m_sDeathSwarmSubclass, "CSubclassName");
+		/// <summary><c>CSubclassName</c>.</summary>
+		public string m_sDeathSwarmSubclass => GetString(__m_sDeathSwarmSubclass);
 
 		private static readonly SchemaField __m_sModelName = new("CNPC_NeutralBugVData", "m_sModelName");
 		/// <summary><c>CResourceNameTyped&lt;CWeakHandle&lt;InfoForResourceTypeCModel&gt;&gt;</c>.</summary>
 		public string m_sModelName => GetBufferString(__m_sModelName);
 
 		private static readonly SchemaField __m_sReplacementSubclass = new("CNPC_NeutralBugVData", "m_sReplacementSubclass");
-		/// <summary><c>CSubclassName</c>. No typed mapping yet: read it through its address.</summary>
-		public RawField m_sReplacementSubclass => Raw(__m_sReplacementSubclass, "CSubclassName");
+		/// <summary><c>CSubclassName</c>.</summary>
+		public string m_sReplacementSubclass => GetString(__m_sReplacementSubclass);
 
 		private static readonly SchemaField __m_strLastHitSound = new("CNPC_NeutralBugVData", "m_strLastHitSound");
 		/// <summary><c>CSoundEventName</c>.</summary>
@@ -143,6 +143,6 @@ public static partial class Schema {
 
 		private static readonly SchemaField __m_vecRunSequences = new("CNPC_NeutralBugVData", "m_vecRunSequences");
 		/// <summary><c>CUtlVector&lt;CUtlString&gt;</c>.</summary>
-		public SchemaStringList m_vecRunSequences => new(this, __m_vecRunSequences, -1);
+		public SchemaStringList m_vecRunSequences => new(this, __m_vecRunSequences, ListStorage.Vector);
 	}
 }

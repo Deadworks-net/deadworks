@@ -15,7 +15,7 @@ public static partial class Schema {
 
 		private static readonly SchemaField __m_SpawnTime = new("CCitadel_Projectile_BatSwarmProjectile", "m_SpawnTime");
 		/// <summary><c>GameTime_t</c>.</summary>
-		public float m_SpawnTime { get => Get<float>(__m_SpawnTime); set => Set(__m_SpawnTime, value); }
+		public GameTime m_SpawnTime { get => Get<GameTime>(__m_SpawnTime); set => Set(__m_SpawnTime, value); }
 
 		private static readonly SchemaField __m_vecLastVelocity = new("CCitadel_Projectile_BatSwarmProjectile", "m_vecLastVelocity");
 		/// <summary><c>Vector</c>.</summary>

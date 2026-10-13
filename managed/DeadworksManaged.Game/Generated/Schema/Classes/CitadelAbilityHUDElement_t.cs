@@ -43,6 +43,6 @@ public static partial class Schema {
 
 		private static readonly SchemaField __m_vecLockOnSegmentArcs = new("CitadelAbilityHUDElement_t", "m_vecLockOnSegmentArcs");
 		/// <summary><c>CUtlVector&lt;Vector2D&gt;</c>. Optional [start, end] degrees, clockwise from 12 o'clock, for each lock-on stack's ring segment.</summary>
-		public SchemaValueList<Vector2> m_vecLockOnSegmentArcs => new(this, __m_vecLockOnSegmentArcs, -1);
+		public SchemaValueList<Vector2> m_vecLockOnSegmentArcs => new(this, __m_vecLockOnSegmentArcs, ListStorage.Vector);
 	}
 }

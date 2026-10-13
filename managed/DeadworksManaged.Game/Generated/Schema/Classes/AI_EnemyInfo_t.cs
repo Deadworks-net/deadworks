@@ -23,11 +23,11 @@ public static partial class Schema {
 
 		private static readonly SchemaField __m_flLastKnownTime = new("AI_EnemyInfo_t", "m_flLastKnownTime");
 		/// <summary><c>GameTime_t</c>.</summary>
-		public float m_flLastKnownTime { get => Get<float>(__m_flLastKnownTime); set => Set(__m_flLastKnownTime, value); }
+		public GameTime m_flLastKnownTime { get => Get<GameTime>(__m_flLastKnownTime); set => Set(__m_flLastKnownTime, value); }
 
 		private static readonly SchemaField __m_flTimeValidEnemy = new("AI_EnemyInfo_t", "m_flTimeValidEnemy");
 		/// <summary><c>GameTime_t</c>.</summary>
-		public float m_flTimeValidEnemy { get => Get<float>(__m_flTimeValidEnemy); set => Set(__m_flTimeValidEnemy, value); }
+		public GameTime m_flTimeValidEnemy { get => Get<GameTime>(__m_flTimeValidEnemy); set => Set(__m_flTimeValidEnemy, value); }
 
 		private static readonly SchemaField __m_lastKnownLocation = new("AI_EnemyInfo_t", "m_lastKnownLocation");
 		/// <summary><c>CRelativeLocation</c>.</summary>

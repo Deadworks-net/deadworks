@@ -14,11 +14,11 @@ public static partial class Schema {
 		static string ISchemaClass<AABB_t>.NativeName => "AABB_t";
 
 		private static readonly SchemaField __m_vMaxBounds = new("AABB_t", "m_vMaxBounds");
-		/// <summary><c>Vector</c>.</summary>
+		/// <summary><c>Vector</c>. Networked in build 6779: a write is sent to clients.</summary>
 		public Vector3 m_vMaxBounds { get => Get<Vector3>(__m_vMaxBounds); set => Set(__m_vMaxBounds, value); }
 
 		private static readonly SchemaField __m_vMinBounds = new("AABB_t", "m_vMinBounds");
-		/// <summary><c>Vector</c>.</summary>
+		/// <summary><c>Vector</c>. Networked in build 6779: a write is sent to clients.</summary>
 		public Vector3 m_vMinBounds { get => Get<Vector3>(__m_vMinBounds); set => Set(__m_vMinBounds, value); }
 	}
 }

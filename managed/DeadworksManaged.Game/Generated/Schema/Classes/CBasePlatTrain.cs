@@ -14,12 +14,12 @@ public static partial class Schema {
 		static string ISchemaClass<CBasePlatTrain>.NativeName => "CBasePlatTrain";
 
 		private static readonly SchemaField __m_NoiseArrived = new("CBasePlatTrain", "m_NoiseArrived");
-		/// <summary><c>CGameSoundEventName</c>. No typed mapping yet: read it through its address.</summary>
-		public RawField m_NoiseArrived => Raw(__m_NoiseArrived, "CGameSoundEventName");
+		/// <summary><c>CGameSoundEventName</c>.</summary>
+		public string m_NoiseArrived => GetString(__m_NoiseArrived);
 
 		private static readonly SchemaField __m_NoiseMoving = new("CBasePlatTrain", "m_NoiseMoving");
-		/// <summary><c>CGameSoundEventName</c>. No typed mapping yet: read it through its address.</summary>
-		public RawField m_NoiseMoving => Raw(__m_NoiseMoving, "CGameSoundEventName");
+		/// <summary><c>CGameSoundEventName</c>.</summary>
+		public string m_NoiseMoving => GetString(__m_NoiseMoving);
 
 		private static readonly SchemaField __m_flTLength = new("CBasePlatTrain", "m_flTLength");
 		/// <summary><c>float32</c>.</summary>

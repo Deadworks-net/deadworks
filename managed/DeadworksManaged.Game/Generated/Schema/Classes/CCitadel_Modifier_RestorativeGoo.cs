@@ -19,7 +19,7 @@ public static partial class Schema {
 
 		private static readonly SchemaField __m_flEarliestBreakoutTime = new("CCitadel_Modifier_RestorativeGoo", "m_flEarliestBreakoutTime");
 		/// <summary><c>GameTime_t</c>.</summary>
-		public float m_flEarliestBreakoutTime { get => Get<float>(__m_flEarliestBreakoutTime); set => Set(__m_flEarliestBreakoutTime, value); }
+		public GameTime m_flEarliestBreakoutTime { get => Get<GameTime>(__m_flEarliestBreakoutTime); set => Set(__m_flEarliestBreakoutTime, value); }
 
 		private static readonly SchemaField __m_flTotalPendingHeal = new("CCitadel_Modifier_RestorativeGoo", "m_flTotalPendingHeal");
 		/// <summary><c>float32</c>.</summary>

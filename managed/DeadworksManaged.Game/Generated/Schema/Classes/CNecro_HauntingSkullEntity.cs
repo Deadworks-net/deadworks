@@ -14,11 +14,11 @@ public static partial class Schema {
 		static string ISchemaClass<CNecro_HauntingSkullEntity>.NativeName => "CNecro_HauntingSkullEntity";
 
 		private static readonly SchemaField __m_eSkullState = new("CNecro_HauntingSkullEntity", "m_eSkullState");
-		/// <summary><c>int32</c>.</summary>
+		/// <summary><c>int32</c>. Networked in build 6779: a write is sent to clients.</summary>
 		public int m_eSkullState { get => Get<int>(__m_eSkullState); set => Set(__m_eSkullState, value); }
 
 		private static readonly SchemaField __m_hAbility = new("CNecro_HauntingSkullEntity", "m_hAbility");
-		/// <summary><c>CHandle&lt;CCitadelBaseAbility&gt;</c>.</summary>
+		/// <summary><c>CHandle&lt;CCitadelBaseAbility&gt;</c>. Networked in build 6779: a write is sent to clients.</summary>
 		public CCitadelBaseAbility? m_hAbility { get => GetHandle<CCitadelBaseAbility>(__m_hAbility); set => SetHandle(__m_hAbility, value); }
 	}
 }

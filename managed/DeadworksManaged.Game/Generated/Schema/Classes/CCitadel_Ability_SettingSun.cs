@@ -15,7 +15,7 @@ public static partial class Schema {
 
 		private static readonly SchemaField __m_TargetPreviews = new("CCitadel_Ability_SettingSun", "m_TargetPreviews");
 		/// <summary><c>CUtlVector&lt;ParticleIndex_t&gt;</c>.</summary>
-		public SchemaValueList<int> m_TargetPreviews => new(this, __m_TargetPreviews, -1);
+		public SchemaValueList<int> m_TargetPreviews => new(this, __m_TargetPreviews, ListStorage.Vector);
 
 		private static readonly SchemaField __m_bProjectileActive = new("CCitadel_Ability_SettingSun", "m_bProjectileActive");
 		/// <summary><c>bool</c>.</summary>

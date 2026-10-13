@@ -14,20 +14,20 @@ public static partial class Schema {
 		static string ISchemaClass<CCitadel_Ability_Familiar_HelpingHands>.NativeName => "CCitadel_Ability_Familiar_HelpingHands";
 
 		private static readonly SchemaField __m_nAvailableHelperCount = new("CCitadel_Ability_Familiar_HelpingHands", "m_nAvailableHelperCount");
-		/// <summary><c>char</c>.</summary>
+		/// <summary><c>char</c>. Networked in build 6779: a write is sent to clients.</summary>
 		public byte m_nAvailableHelperCount { get => Get<byte>(__m_nAvailableHelperCount); set => Set(__m_nAvailableHelperCount, value); }
 
 		private static readonly SchemaField __m_tChoreUseCooldownEndTime = new("CCitadel_Ability_Familiar_HelpingHands", "m_tChoreUseCooldownEndTime");
-		/// <summary><c>GameTime_t</c>.</summary>
-		public float m_tChoreUseCooldownEndTime { get => Get<float>(__m_tChoreUseCooldownEndTime); set => Set(__m_tChoreUseCooldownEndTime, value); }
+		/// <summary><c>GameTime_t</c>. Networked in build 6779: a write is sent to clients.</summary>
+		public GameTime m_tChoreUseCooldownEndTime { get => Get<GameTime>(__m_tChoreUseCooldownEndTime); set => Set(__m_tChoreUseCooldownEndTime, value); }
 
 		private static readonly SchemaField __m_tSoonestHelperCooldownEndTime = new("CCitadel_Ability_Familiar_HelpingHands", "m_tSoonestHelperCooldownEndTime");
-		/// <summary><c>GameTime_t</c>.</summary>
-		public float m_tSoonestHelperCooldownEndTime { get => Get<float>(__m_tSoonestHelperCooldownEndTime); set => Set(__m_tSoonestHelperCooldownEndTime, value); }
+		/// <summary><c>GameTime_t</c>. Networked in build 6779: a write is sent to clients.</summary>
+		public GameTime m_tSoonestHelperCooldownEndTime { get => Get<GameTime>(__m_tSoonestHelperCooldownEndTime); set => Set(__m_tSoonestHelperCooldownEndTime, value); }
 
 		private static readonly SchemaField __m_vecHelpers = new("CCitadel_Ability_Familiar_HelpingHands", "m_vecHelpers");
-		/// <summary><c>CNetworkUtlVectorBase&lt;CHandle&lt;CBaseEntity&gt;&gt;</c>.</summary>
-		public SchemaHandleList<CBaseEntity> m_vecHelpers => new(this, __m_vecHelpers, -1);
+		/// <summary><c>CNetworkUtlVectorBase&lt;CHandle&lt;CBaseEntity&gt;&gt;</c>. Networked in build 6779: a write is sent to clients.</summary>
+		public SchemaHandleList<CBaseEntity> m_vecHelpers => new(this, __m_vecHelpers, ListStorage.Vector);
 
 		/// <summary>The data entry this was created from, as <see cref="CCitadel_Ability_Familiar_HelpingHandsVData"/>, or null if it has none.</summary>
 		public new CCitadel_Ability_Familiar_HelpingHandsVData? VData => SubclassVData<CCitadel_Ability_Familiar_HelpingHandsVData>();

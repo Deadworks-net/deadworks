@@ -23,10 +23,10 @@ public static partial class Schema {
 
 		private static readonly SchemaField __m_vecHunterAbilitySlots = new("CCitadel_Modifier_Werewolf_TransformationWatcherVData", "m_vecHunterAbilitySlots");
 		/// <summary><c>CUtlVector&lt;EAbilitySlots_t&gt;</c>.</summary>
-		public SchemaValueList<EAbilitySlots_t> m_vecHunterAbilitySlots => new(this, __m_vecHunterAbilitySlots, -1);
+		public SchemaValueList<EAbilitySlots_t> m_vecHunterAbilitySlots => new(this, __m_vecHunterAbilitySlots, ListStorage.Vector);
 
 		private static readonly SchemaField __m_vecWerewolfAbilitySlots = new("CCitadel_Modifier_Werewolf_TransformationWatcherVData", "m_vecWerewolfAbilitySlots");
 		/// <summary><c>CUtlVector&lt;EAbilitySlots_t&gt;</c>.</summary>
-		public SchemaValueList<EAbilitySlots_t> m_vecWerewolfAbilitySlots => new(this, __m_vecWerewolfAbilitySlots, -1);
+		public SchemaValueList<EAbilitySlots_t> m_vecWerewolfAbilitySlots => new(this, __m_vecWerewolfAbilitySlots, ListStorage.Vector);
 	}
 }

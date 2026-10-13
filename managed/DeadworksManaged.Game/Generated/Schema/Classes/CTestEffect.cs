@@ -15,11 +15,11 @@ public static partial class Schema {
 
 		private static readonly SchemaField __m_flBeamTime = new("CTestEffect", "m_flBeamTime");
 		/// <summary><c>GameTime_t[24]</c>.</summary>
-		public SchemaValueList<float> m_flBeamTime => new(this, __m_flBeamTime, 24);
+		public SchemaValueList<GameTime> m_flBeamTime => new(this, __m_flBeamTime, 24);
 
 		private static readonly SchemaField __m_flStartTime = new("CTestEffect", "m_flStartTime");
 		/// <summary><c>GameTime_t</c>.</summary>
-		public float m_flStartTime { get => Get<float>(__m_flStartTime); set => Set(__m_flStartTime, value); }
+		public GameTime m_flStartTime { get => Get<GameTime>(__m_flStartTime); set => Set(__m_flStartTime, value); }
 
 		private static readonly SchemaField __m_iBeam = new("CTestEffect", "m_iBeam");
 		/// <summary><c>int32</c>.</summary>

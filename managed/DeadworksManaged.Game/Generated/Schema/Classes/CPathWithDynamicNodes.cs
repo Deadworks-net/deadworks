@@ -22,11 +22,11 @@ public static partial class Schema {
 		public DirectionAlongSimplePath_t m_eDesiredDirection { get => Get<DirectionAlongSimplePath_t>(__m_eDesiredDirection); set => Set(__m_eDesiredDirection, value); }
 
 		private static readonly SchemaField __m_vecPathNodes = new("CPathWithDynamicNodes", "m_vecPathNodes");
-		/// <summary><c>CNetworkUtlVectorBase&lt;CHandle&lt;CPathNode&gt;&gt;</c>.</summary>
-		public SchemaHandleList<CPathNode> m_vecPathNodes => new(this, __m_vecPathNodes, -1);
+		/// <summary><c>CNetworkUtlVectorBase&lt;CHandle&lt;CPathNode&gt;&gt;</c>. Networked in build 6779: a write is sent to clients.</summary>
+		public SchemaHandleList<CPathNode> m_vecPathNodes => new(this, __m_vecPathNodes, ListStorage.Vector);
 
 		private static readonly SchemaField __m_xInitialPathWorldToLocal = new("CPathWithDynamicNodes", "m_xInitialPathWorldToLocal");
-		/// <summary><c>CTransform</c>. No typed mapping yet: read it through its address.</summary>
-		public RawField m_xInitialPathWorldToLocal => Raw(__m_xInitialPathWorldToLocal, "CTransform");
+		/// <summary><c>CTransform</c>. Networked in build 6779: a write is sent to clients.</summary>
+		public Transform m_xInitialPathWorldToLocal { get => Get<Transform>(__m_xInitialPathWorldToLocal); set => Set(__m_xInitialPathWorldToLocal, value); }
 	}
 }

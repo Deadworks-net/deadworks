@@ -15,7 +15,7 @@ public static partial class Schema {
 
 		private static readonly SchemaField __m_Listeners = new("CLogicBranch", "m_Listeners");
 		/// <summary><c>CUtlVector&lt;CHandle&lt;CBaseEntity&gt;&gt;</c>.</summary>
-		public SchemaHandleList<CBaseEntity> m_Listeners => new(this, __m_Listeners, -1);
+		public SchemaHandleList<CBaseEntity> m_Listeners => new(this, __m_Listeners, ListStorage.Vector);
 
 		private static readonly SchemaField __m_OnFalse = new("CLogicBranch", "m_OnFalse");
 		/// <summary><c>CEntityIOOutput</c>.</summary>

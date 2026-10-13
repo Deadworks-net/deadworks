@@ -51,23 +51,23 @@ public static partial class Schema {
 
 		private static readonly SchemaField __m_flInitAtTime = new("CFuncShatterglass", "m_flInitAtTime");
 		/// <summary><c>GameTime_t</c>.</summary>
-		public float m_flInitAtTime { get => Get<float>(__m_flInitAtTime); set => Set(__m_flInitAtTime, value); }
+		public GameTime m_flInitAtTime { get => Get<GameTime>(__m_flInitAtTime); set => Set(__m_flInitAtTime, value); }
 
 		private static readonly SchemaField __m_flLastCleanupTime = new("CFuncShatterglass", "m_flLastCleanupTime");
 		/// <summary><c>GameTime_t</c>.</summary>
-		public float m_flLastCleanupTime { get => Get<float>(__m_flLastCleanupTime); set => Set(__m_flLastCleanupTime, value); }
+		public GameTime m_flLastCleanupTime { get => Get<GameTime>(__m_flLastCleanupTime); set => Set(__m_flLastCleanupTime, value); }
 
 		private static readonly SchemaField __m_flLastShatterSoundEmitTime = new("CFuncShatterglass", "m_flLastShatterSoundEmitTime");
 		/// <summary><c>GameTime_t</c>.</summary>
-		public float m_flLastShatterSoundEmitTime { get => Get<float>(__m_flLastShatterSoundEmitTime); set => Set(__m_flLastShatterSoundEmitTime, value); }
+		public GameTime m_flLastShatterSoundEmitTime { get => Get<GameTime>(__m_flLastShatterSoundEmitTime); set => Set(__m_flLastShatterSoundEmitTime, value); }
 
 		private static readonly SchemaField __m_flSpawnInvulnerability = new("CFuncShatterglass", "m_flSpawnInvulnerability");
 		/// <summary><c>float32</c>.</summary>
 		public float m_flSpawnInvulnerability { get => Get<float>(__m_flSpawnInvulnerability); set => Set(__m_flSpawnInvulnerability, value); }
 
 		private static readonly SchemaField __m_hMaterialDamageBase = new("CFuncShatterglass", "m_hMaterialDamageBase");
-		/// <summary><c>CStrongHandle&lt;InfoForResourceTypeIMaterial2&gt;</c>. No typed mapping yet: read it through its address.</summary>
-		public RawField m_hMaterialDamageBase => Raw(__m_hMaterialDamageBase, "CStrongHandle<InfoForResourceTypeIMaterial2>");
+		/// <summary><c>CStrongHandle&lt;InfoForResourceTypeIMaterial2&gt;</c>.</summary>
+		public ResourceHandle m_hMaterialDamageBase { get => Get<ResourceHandle>(__m_hMaterialDamageBase); set => Set(__m_hMaterialDamageBase, value); }
 
 		private static readonly SchemaField __m_iInitialDamageType = new("CFuncShatterglass", "m_iInitialDamageType");
 		/// <summary><c>uint8</c>.</summary>
@@ -78,12 +78,12 @@ public static partial class Schema {
 		public byte m_iSurfaceType { get => Get<byte>(__m_iSurfaceType); set => Set(__m_iSurfaceType, value); }
 
 		private static readonly SchemaField __m_matPanelTransform = new("CFuncShatterglass", "m_matPanelTransform");
-		/// <summary><c>matrix3x4_t</c>. No typed mapping yet: read it through its address.</summary>
-		public RawField m_matPanelTransform => Raw(__m_matPanelTransform, "matrix3x4_t");
+		/// <summary><c>matrix3x4_t</c>.</summary>
+		public Matrix3x4 m_matPanelTransform { get => Get<Matrix3x4>(__m_matPanelTransform); set => Set(__m_matPanelTransform, value); }
 
 		private static readonly SchemaField __m_matPanelTransformWsTemp = new("CFuncShatterglass", "m_matPanelTransformWsTemp");
-		/// <summary><c>matrix3x4_t</c>. No typed mapping yet: read it through its address.</summary>
-		public RawField m_matPanelTransformWsTemp => Raw(__m_matPanelTransformWsTemp, "matrix3x4_t");
+		/// <summary><c>matrix3x4_t</c>.</summary>
+		public Matrix3x4 m_matPanelTransformWsTemp { get => Get<Matrix3x4>(__m_matPanelTransformWsTemp); set => Set(__m_matPanelTransformWsTemp, value); }
 
 		private static readonly SchemaField __m_szDamagePositioningEntityName01 = new("CFuncShatterglass", "m_szDamagePositioningEntityName01");
 		/// <summary><c>CUtlSymbolLarge</c>.</summary>
@@ -103,19 +103,19 @@ public static partial class Schema {
 
 		private static readonly SchemaField __m_vExtraDamagePositions = new("CFuncShatterglass", "m_vExtraDamagePositions");
 		/// <summary><c>CUtlVector&lt;VectorWS&gt;</c>.</summary>
-		public SchemaValueList<Vector3> m_vExtraDamagePositions => new(this, __m_vExtraDamagePositions, -1);
+		public SchemaValueList<Vector3> m_vExtraDamagePositions => new(this, __m_vExtraDamagePositions, ListStorage.Vector);
 
 		private static readonly SchemaField __m_vInitialDamagePositions = new("CFuncShatterglass", "m_vInitialDamagePositions");
 		/// <summary><c>CUtlVector&lt;VectorWS&gt;</c>.</summary>
-		public SchemaValueList<Vector3> m_vInitialDamagePositions => new(this, __m_vInitialDamagePositions, -1);
+		public SchemaValueList<Vector3> m_vInitialDamagePositions => new(this, __m_vInitialDamagePositions, ListStorage.Vector);
 
 		private static readonly SchemaField __m_vInitialPanelVertices = new("CFuncShatterglass", "m_vInitialPanelVertices");
 		/// <summary><c>CUtlVector&lt;Vector4D&gt;</c>.</summary>
-		public SchemaValueList<Vector4> m_vInitialPanelVertices => new(this, __m_vInitialPanelVertices, -1);
+		public SchemaValueList<Vector4> m_vInitialPanelVertices => new(this, __m_vInitialPanelVertices, ListStorage.Vector);
 
 		private static readonly SchemaField __m_vecShatterGlassShards = new("CFuncShatterglass", "m_vecShatterGlassShards");
 		/// <summary><c>CUtlVector&lt;uint32&gt;</c>.</summary>
-		public SchemaValueList<uint> m_vecShatterGlassShards => new(this, __m_vecShatterGlassShards, -1);
+		public SchemaValueList<uint> m_vecShatterGlassShards => new(this, __m_vecShatterGlassShards, ListStorage.Vector);
 
 		/// <summary>Fires the <c>Hit</c> input.</summary>
 		public void InputHit() => FireInput("Hit");

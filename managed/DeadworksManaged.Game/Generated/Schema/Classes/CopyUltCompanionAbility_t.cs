@@ -14,11 +14,11 @@ public static partial class Schema {
 		static string ISchemaClass<CopyUltCompanionAbility_t>.NativeName => "CopyUltCompanionAbility_t";
 
 		private static readonly SchemaField __m_Companion = new("CopyUltCompanionAbility_t", "m_Companion");
-		/// <summary><c>CSubclassName</c>. Granted (no slot) alongside the copied ult, for ults that rely on another ability from the source hero. No typed mapping yet: read it through its address.</summary>
-		public RawField m_Companion => Raw(__m_Companion, "CSubclassName");
+		/// <summary><c>CSubclassName</c>. Granted (no slot) alongside the copied ult, for ults that rely on another ability from the source hero.</summary>
+		public string m_Companion => GetString(__m_Companion);
 
 		private static readonly SchemaField __m_Ultimate = new("CopyUltCompanionAbility_t", "m_Ultimate");
-		/// <summary><c>CSubclassName</c>. No typed mapping yet: read it through its address.</summary>
-		public RawField m_Ultimate => Raw(__m_Ultimate, "CSubclassName");
+		/// <summary><c>CSubclassName</c>.</summary>
+		public string m_Ultimate => GetString(__m_Ultimate);
 	}
 }

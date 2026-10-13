@@ -43,19 +43,19 @@ public static partial class Schema {
 
 		private static readonly SchemaField __m_flLastBeamUpdateTime = new("CCitadel_Modifier_Tier2Boss_LaserBeam", "m_flLastBeamUpdateTime");
 		/// <summary><c>GameTime_t</c>.</summary>
-		public float m_flLastBeamUpdateTime { get => Get<float>(__m_flLastBeamUpdateTime); set => Set(__m_flLastBeamUpdateTime, value); }
+		public GameTime m_flLastBeamUpdateTime { get => Get<GameTime>(__m_flLastBeamUpdateTime); set => Set(__m_flLastBeamUpdateTime, value); }
 
 		private static readonly SchemaField __m_flLastShakeTime = new("CCitadel_Modifier_Tier2Boss_LaserBeam", "m_flLastShakeTime");
 		/// <summary><c>GameTime_t</c>.</summary>
-		public float m_flLastShakeTime { get => Get<float>(__m_flLastShakeTime); set => Set(__m_flLastShakeTime, value); }
+		public GameTime m_flLastShakeTime { get => Get<GameTime>(__m_flLastShakeTime); set => Set(__m_flLastShakeTime, value); }
 
 		private static readonly SchemaField __m_flNextDamageTick = new("CCitadel_Modifier_Tier2Boss_LaserBeam", "m_flNextDamageTick");
 		/// <summary><c>GameTime_t</c>.</summary>
-		public float m_flNextDamageTick { get => Get<float>(__m_flNextDamageTick); set => Set(__m_flNextDamageTick, value); }
+		public GameTime m_flNextDamageTick { get => Get<GameTime>(__m_flNextDamageTick); set => Set(__m_flNextDamageTick, value); }
 
 		private static readonly SchemaField __m_flTargetingTaskStartTime = new("CCitadel_Modifier_Tier2Boss_LaserBeam", "m_flTargetingTaskStartTime");
 		/// <summary><c>GameTime_t</c>.</summary>
-		public float m_flTargetingTaskStartTime { get => Get<float>(__m_flTargetingTaskStartTime); set => Set(__m_flTargetingTaskStartTime, value); }
+		public GameTime m_flTargetingTaskStartTime { get => Get<GameTime>(__m_flTargetingTaskStartTime); set => Set(__m_flTargetingTaskStartTime, value); }
 
 		private static readonly SchemaField __m_flTrackVel = new("CCitadel_Modifier_Tier2Boss_LaserBeam", "m_flTrackVel");
 		/// <summary><c>float32</c>.</summary>
@@ -103,6 +103,6 @@ public static partial class Schema {
 
 		private static readonly SchemaField __m_vecEntitiesHit = new("CCitadel_Modifier_Tier2Boss_LaserBeam", "m_vecEntitiesHit");
 		/// <summary><c>CUtlVector&lt;CHandle&lt;CBaseEntity&gt;&gt;</c>.</summary>
-		public SchemaHandleList<CBaseEntity> m_vecEntitiesHit => new(this, __m_vecEntitiesHit, -1);
+		public SchemaHandleList<CBaseEntity> m_vecEntitiesHit => new(this, __m_vecEntitiesHit, ListStorage.Vector);
 	}
 }

@@ -15,6 +15,6 @@ public static partial class Schema {
 
 		private static readonly SchemaField __m_tLastHeadshot = new("CCitadel_Modifier_Upgrade_SpellslingerHeadshots_Debuff", "m_tLastHeadshot");
 		/// <summary><c>GameTime_t</c>.</summary>
-		public float m_tLastHeadshot { get => Get<float>(__m_tLastHeadshot); set => Set(__m_tLastHeadshot, value); }
+		public GameTime m_tLastHeadshot { get => Get<GameTime>(__m_tLastHeadshot); set => Set(__m_tLastHeadshot, value); }
 	}
 }

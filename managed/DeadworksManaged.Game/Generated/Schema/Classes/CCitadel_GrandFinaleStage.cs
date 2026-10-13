@@ -15,11 +15,11 @@ public static partial class Schema {
 
 		private static readonly SchemaField __m_flEndEmitTime = new("CCitadel_GrandFinaleStage", "m_flEndEmitTime");
 		/// <summary><c>GameTime_t</c>.</summary>
-		public float m_flEndEmitTime { get => Get<float>(__m_flEndEmitTime); set => Set(__m_flEndEmitTime, value); }
+		public GameTime m_flEndEmitTime { get => Get<GameTime>(__m_flEndEmitTime); set => Set(__m_flEndEmitTime, value); }
 
 		private static readonly SchemaField __m_flStartEmitTime = new("CCitadel_GrandFinaleStage", "m_flStartEmitTime");
 		/// <summary><c>GameTime_t</c>.</summary>
-		public float m_flStartEmitTime { get => Get<float>(__m_flStartEmitTime); set => Set(__m_flStartEmitTime, value); }
+		public GameTime m_flStartEmitTime { get => Get<GameTime>(__m_flStartEmitTime); set => Set(__m_flStartEmitTime, value); }
 
 		private static readonly SchemaField __m_nTouchCount = new("CCitadel_GrandFinaleStage", "m_nTouchCount");
 		/// <summary><c>int32</c>.</summary>

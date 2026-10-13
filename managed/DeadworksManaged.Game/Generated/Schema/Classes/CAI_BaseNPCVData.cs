@@ -63,7 +63,7 @@ public static partial class Schema {
 
 		private static readonly SchemaField __m_mappedMovementSettings = new("CAI_BaseNPCVData", "m_mappedMovementSettings");
 		/// <summary><c>CUtlVector&lt;AI_MappedMovementSettingsItem_t&gt;</c>. Mapped Movement Settings.</summary>
-		public SchemaObjectList<AI_MappedMovementSettingsItem_t> m_mappedMovementSettings => new(this, __m_mappedMovementSettings, -1);
+		public SchemaObjectList<AI_MappedMovementSettingsItem_t> m_mappedMovementSettings => new(this, __m_mappedMovementSettings, ListStorage.Vector);
 
 		private static readonly SchemaField __m_nMaxHealth = new("CAI_BaseNPCVData", "m_nMaxHealth");
 		/// <summary><c>int32</c>.</summary>
@@ -95,15 +95,15 @@ public static partial class Schema {
 
 		private static readonly SchemaField __m_vecActionDesiredShared = new("CAI_BaseNPCVData", "m_vecActionDesiredShared");
 		/// <summary><c>CUtlVector&lt;CGlobalSymbol&gt;</c>. List of the shared BaseNPC actions this NPC supports.</summary>
-		public SchemaStringList m_vecActionDesiredShared => new(this, __m_vecActionDesiredShared, -1);
+		public SchemaStringList m_vecActionDesiredShared => new(this, __m_vecActionDesiredShared, ListStorage.Vector);
 
 		private static readonly SchemaField __m_vecAttachments = new("CAI_BaseNPCVData", "m_vecAttachments");
 		/// <summary><c>CUtlVector&lt;NPCAttachmentDesc_t&gt;</c>.</summary>
-		public SchemaObjectList<NPCAttachmentDesc_t> m_vecAttachments => new(this, __m_vecAttachments, -1);
+		public SchemaObjectList<NPCAttachmentDesc_t> m_vecAttachments => new(this, __m_vecAttachments, ListStorage.Vector);
 
 		private static readonly SchemaField __m_vecIntrinsicModifiers = new("CAI_BaseNPCVData", "m_vecIntrinsicModifiers");
 		/// <summary><c>CUtlVector&lt;CEmbeddedSubclass&lt;CCitadelModifier&gt;&gt;</c>.</summary>
-		public SchemaPointerList<CCitadelModifierVData> m_vecIntrinsicModifiers => new(this, __m_vecIntrinsicModifiers, -1, 16, 8);
+		public SchemaPointerList<CCitadelModifierVData> m_vecIntrinsicModifiers => new(this, __m_vecIntrinsicModifiers, ListStorage.Vector, 16, 8);
 
 		private static readonly SchemaField __m_vecIntrinsicModifiersByName = new("CAI_BaseNPCVData", "m_vecIntrinsicModifiersByName");
 		/// <summary><c>CUtlVector&lt;CSubclassName&gt;</c>. No typed mapping yet: read it through its address.</summary>
@@ -111,10 +111,10 @@ public static partial class Schema {
 
 		private static readonly SchemaField __m_vecNavLinkMovementNames = new("CAI_BaseNPCVData", "m_vecNavLinkMovementNames");
 		/// <summary><c>CUtlVector&lt;CGlobalSymbol&gt;</c>. List of the kind of nav links movement this unit is capable of.</summary>
-		public SchemaStringList m_vecNavLinkMovementNames => new(this, __m_vecNavLinkMovementNames, -1);
+		public SchemaStringList m_vecNavLinkMovementNames => new(this, __m_vecNavLinkMovementNames, ListStorage.Vector);
 
 		private static readonly SchemaField __m_vecObstacleNavLinks = new("CAI_BaseNPCVData", "m_vecObstacleNavLinks");
 		/// <summary><c>CUtlVector&lt;CAI_NavLinkObstacleSettings*&gt;</c>. Ways this NPC can traverse a local obstacle island with a navlink instead of pathing around it. The first entry that accepts the obstacles wins, so order them most to least specific.</summary>
-		public SchemaPointerList<CAI_NavLinkObstacleSettings> m_vecObstacleNavLinks => new(this, __m_vecObstacleNavLinks, -1);
+		public SchemaPointerList<CAI_NavLinkObstacleSettings> m_vecObstacleNavLinks => new(this, __m_vecObstacleNavLinks, ListStorage.Vector);
 	}
 }

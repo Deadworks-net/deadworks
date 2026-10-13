@@ -15,7 +15,7 @@ public static partial class Schema {
 
 		private static readonly SchemaField __m_DamageLevels = new("CDestructiblePart", "m_DamageLevels");
 		/// <summary><c>CUtlVector&lt;CDestructiblePart_DamageLevel&gt;</c>. The various damage levels for this hitgroup.</summary>
-		public SchemaObjectList<CDestructiblePart_DamageLevel> m_DamageLevels => new(this, __m_DamageLevels, -1);
+		public SchemaObjectList<CDestructiblePart_DamageLevel> m_DamageLevels => new(this, __m_DamageLevels, ListStorage.Vector);
 
 		private static readonly SchemaField __m_DebugName = new("CDestructiblePart", "m_DebugName");
 		/// <summary><c>CGlobalSymbol</c>.</summary>
@@ -35,7 +35,7 @@ public static partial class Schema {
 
 		private static readonly SchemaField __m_nOtherHitgroupsToDestroyWhenFullyDestructed = new("CDestructiblePart", "m_nOtherHitgroupsToDestroyWhenFullyDestructed");
 		/// <summary><c>CUtlVector&lt;HitGroup_t&gt;</c>. Other hitgroups to destroy when this one is fully destroyed. Useful for chaining destructibles like blowing up the lower arm when the upper arm dies.</summary>
-		public SchemaValueList<HitGroup_t> m_nOtherHitgroupsToDestroyWhenFullyDestructed => new(this, __m_nOtherHitgroupsToDestroyWhenFullyDestructed, -1);
+		public SchemaValueList<HitGroup_t> m_nOtherHitgroupsToDestroyWhenFullyDestructed => new(this, __m_nOtherHitgroupsToDestroyWhenFullyDestructed, ListStorage.Vector);
 
 		private static readonly SchemaField __m_sBodyGroupName = new("CDestructiblePart", "m_sBodyGroupName");
 		/// <summary><c>CGlobalSymbol</c>. Body group to set when this damage level is broken.</summary>

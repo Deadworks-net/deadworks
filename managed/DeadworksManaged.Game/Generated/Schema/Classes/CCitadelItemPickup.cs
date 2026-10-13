@@ -14,7 +14,7 @@ public static partial class Schema {
 		static string ISchemaClass<CCitadelItemPickup>.NativeName => "CCitadelItemPickup";
 
 		private static readonly SchemaField __m_CCitadelMinimapComponent = new("CCitadelItemPickup", "m_CCitadelMinimapComponent");
-		/// <summary><c>CCitadelMinimapComponent</c>.</summary>
+		/// <summary><c>CCitadelMinimapComponent</c>. Networked in build 6779: a write is sent to clients.</summary>
 		public CCitadelMinimapComponent m_CCitadelMinimapComponent => Embedded<CCitadelMinimapComponent>(__m_CCitadelMinimapComponent);
 
 		private static readonly SchemaField __m_bOnGround = new("CCitadelItemPickup", "m_bOnGround");
@@ -30,7 +30,7 @@ public static partial class Schema {
 		public bool m_bRequireGroundForPickup { get => Get<bool>(__m_bRequireGroundForPickup); set => Set(__m_bRequireGroundForPickup, value); }
 
 		private static readonly SchemaField __m_eLootType = new("CCitadelItemPickup", "m_eLootType");
-		/// <summary><c>int32</c>.</summary>
+		/// <summary><c>int32</c>. Networked in build 6779: a write is sent to clients.</summary>
 		public int m_eLootType { get => Get<int>(__m_eLootType); set => Set(__m_eLootType, value); }
 
 		private static readonly SchemaField __m_eObjectivePosition = new("CCitadelItemPickup", "m_eObjectivePosition");
@@ -38,23 +38,23 @@ public static partial class Schema {
 		public EObjectivePositions_t m_eObjectivePosition { get => Get<EObjectivePositions_t>(__m_eObjectivePosition); set => Set(__m_eObjectivePosition, value); }
 
 		private static readonly SchemaField __m_flFallRate = new("CCitadelItemPickup", "m_flFallRate");
-		/// <summary><c>float32</c>.</summary>
+		/// <summary><c>float32</c>. Networked in build 6779: a write is sent to clients.</summary>
 		public float m_flFallRate { get => Get<float>(__m_flFallRate); set => Set(__m_flFallRate, value); }
 
 		private static readonly SchemaField __m_flModelScale = new("CCitadelItemPickup", "m_flModelScale");
-		/// <summary><c>float32</c>.</summary>
+		/// <summary><c>float32</c>. Networked in build 6779: a write is sent to clients.</summary>
 		public float m_flModelScale { get => Get<float>(__m_flModelScale); set => Set(__m_flModelScale, value); }
 
 		private static readonly SchemaField __m_hTargetPlayer = new("CCitadelItemPickup", "m_hTargetPlayer");
-		/// <summary><c>CHandle&lt;CBaseEntity&gt;</c>.</summary>
+		/// <summary><c>CHandle&lt;CBaseEntity&gt;</c>. Networked in build 6779: a write is sent to clients.</summary>
 		public CBaseEntity? m_hTargetPlayer { get => GetHandle<CBaseEntity>(__m_hTargetPlayer); set => SetHandle(__m_hTargetPlayer, value); }
 
 		private static readonly SchemaField __m_iszModelName = new("CCitadelItemPickup", "m_iszModelName");
-		/// <summary><c>CUtlSymbolLarge</c>.</summary>
+		/// <summary><c>CUtlSymbolLarge</c>. Networked in build 6779: a write is sent to clients.</summary>
 		public string m_iszModelName { get => GetString(__m_iszModelName); set => SetString(__m_iszModelName, value); }
 
 		private static readonly SchemaField __m_nCurrencyValue = new("CCitadelItemPickup", "m_nCurrencyValue");
-		/// <summary><c>int32</c>.</summary>
+		/// <summary><c>int32</c>. Networked in build 6779: a write is sent to clients.</summary>
 		public int m_nCurrencyValue { get => Get<int>(__m_nCurrencyValue); set => Set(__m_nCurrencyValue, value); }
 
 		private static readonly SchemaField __m_nKillingTeamNumber = new("CCitadelItemPickup", "m_nKillingTeamNumber");
@@ -63,7 +63,7 @@ public static partial class Schema {
 
 		private static readonly SchemaField __m_tFirstPickupTime = new("CCitadelItemPickup", "m_tFirstPickupTime");
 		/// <summary><c>GameTime_t</c>.</summary>
-		public float m_tFirstPickupTime { get => Get<float>(__m_tFirstPickupTime); set => Set(__m_tFirstPickupTime, value); }
+		public GameTime m_tFirstPickupTime { get => Get<GameTime>(__m_tFirstPickupTime); set => Set(__m_tFirstPickupTime, value); }
 
 		private static readonly SchemaField __m_vDropPosition = new("CCitadelItemPickup", "m_vDropPosition");
 		/// <summary><c>VectorWS</c>.</summary>

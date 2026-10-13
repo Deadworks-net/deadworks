@@ -55,6 +55,6 @@ public static partial class Schema {
 
 		private static readonly SchemaField __m_vecProcDamageTypes = new("CCitadel_Modifier_BaseEventProcVData", "m_vecProcDamageTypes");
 		/// <summary><c>CUtlVector&lt;ECitadelDamageType&gt;</c>.</summary>
-		public SchemaValueList<ECitadelDamageType> m_vecProcDamageTypes => new(this, __m_vecProcDamageTypes, -1);
+		public SchemaValueList<ECitadelDamageType> m_vecProcDamageTypes => new(this, __m_vecProcDamageTypes, ListStorage.Vector);
 	}
 }

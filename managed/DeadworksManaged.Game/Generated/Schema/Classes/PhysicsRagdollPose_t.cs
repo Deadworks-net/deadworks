@@ -14,15 +14,15 @@ public static partial class Schema {
 		static string ISchemaClass<PhysicsRagdollPose_t>.NativeName => "PhysicsRagdollPose_t";
 
 		private static readonly SchemaField __m_RelativeTransforms = new("PhysicsRagdollPose_t", "m_RelativeTransforms");
-		/// <summary><c>CNetworkUtlVectorBase&lt;CTransform&gt;</c>. No typed mapping yet: read it through its address.</summary>
-		public RawField m_RelativeTransforms => Raw(__m_RelativeTransforms, "CNetworkUtlVectorBase<CTransform>");
+		/// <summary><c>CNetworkUtlVectorBase&lt;CTransform&gt;</c>. Networked in build 6779: a write is sent to clients.</summary>
+		public SchemaValueList<Transform> m_RelativeTransforms => new(this, __m_RelativeTransforms, ListStorage.Vector);
 
 		private static readonly SchemaField __m_bSetFromDebugHistory = new("PhysicsRagdollPose_t", "m_bSetFromDebugHistory");
 		/// <summary><c>bool</c>.</summary>
 		public bool m_bSetFromDebugHistory { get => Get<bool>(__m_bSetFromDebugHistory); set => Set(__m_bSetFromDebugHistory, value); }
 
 		private static readonly SchemaField __m_hOwner = new("PhysicsRagdollPose_t", "m_hOwner");
-		/// <summary><c>CHandle&lt;CBaseEntity&gt;</c>.</summary>
+		/// <summary><c>CHandle&lt;CBaseEntity&gt;</c>. Networked in build 6779: a write is sent to clients.</summary>
 		public CBaseEntity? m_hOwner { get => GetHandle<CBaseEntity>(__m_hOwner); set => SetHandle(__m_hOwner, value); }
 	}
 }

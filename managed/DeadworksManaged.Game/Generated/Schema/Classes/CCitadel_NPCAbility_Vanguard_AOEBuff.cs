@@ -15,6 +15,6 @@ public static partial class Schema {
 
 		private static readonly SchemaField __m_timeNextCast = new("CCitadel_NPCAbility_Vanguard_AOEBuff", "m_timeNextCast");
 		/// <summary><c>GameTime_t</c>.</summary>
-		public float m_timeNextCast { get => Get<float>(__m_timeNextCast); set => Set(__m_timeNextCast, value); }
+		public GameTime m_timeNextCast { get => Get<GameTime>(__m_timeNextCast); set => Set(__m_timeNextCast, value); }
 	}
 }

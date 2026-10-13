@@ -14,19 +14,19 @@ public static partial class Schema {
 		static string ISchemaClass<CCitadel_Ability_SkyRunner_SwingLine>.NativeName => "CCitadel_Ability_SkyRunner_SwingLine";
 
 		private static readonly SchemaField __m_SwingEndTime = new("CCitadel_Ability_SkyRunner_SwingLine", "m_SwingEndTime");
-		/// <summary><c>GameTime_t</c>.</summary>
-		public float m_SwingEndTime { get => Get<float>(__m_SwingEndTime); set => Set(__m_SwingEndTime, value); }
+		/// <summary><c>GameTime_t</c>. Networked in build 6779: a write is sent to clients.</summary>
+		public GameTime m_SwingEndTime { get => Get<GameTime>(__m_SwingEndTime); set => Set(__m_SwingEndTime, value); }
 
 		private static readonly SchemaField __m_SwingStartTime = new("CCitadel_Ability_SkyRunner_SwingLine", "m_SwingStartTime");
-		/// <summary><c>GameTime_t</c>.</summary>
-		public float m_SwingStartTime { get => Get<float>(__m_SwingStartTime); set => Set(__m_SwingStartTime, value); }
+		/// <summary><c>GameTime_t</c>. Networked in build 6779: a write is sent to clients.</summary>
+		public GameTime m_SwingStartTime { get => Get<GameTime>(__m_SwingStartTime); set => Set(__m_SwingStartTime, value); }
 
 		private static readonly SchemaField __m_eSwingState = new("CCitadel_Ability_SkyRunner_SwingLine", "m_eSwingState");
-		/// <summary><c>ESwingState_t</c>.</summary>
+		/// <summary><c>ESwingState_t</c>. Networked in build 6779: a write is sent to clients.</summary>
 		public ESwingState_t m_eSwingState { get => Get<ESwingState_t>(__m_eSwingState); set => Set(__m_eSwingState, value); }
 
 		private static readonly SchemaField __m_flIdealSpringLength = new("CCitadel_Ability_SkyRunner_SwingLine", "m_flIdealSpringLength");
-		/// <summary><c>float32</c>.</summary>
+		/// <summary><c>float32</c>. Networked in build 6779: a write is sent to clients.</summary>
 		public float m_flIdealSpringLength { get => Get<float>(__m_flIdealSpringLength); set => Set(__m_flIdealSpringLength, value); }
 
 		private static readonly SchemaField __m_vecCurrentPosition = new("CCitadel_Ability_SkyRunner_SwingLine", "m_vecCurrentPosition");
@@ -34,7 +34,7 @@ public static partial class Schema {
 		public Vector3 m_vecCurrentPosition { get => Get<Vector3>(__m_vecCurrentPosition); set => Set(__m_vecCurrentPosition, value); }
 
 		private static readonly SchemaField __m_vecSwingPoint = new("CCitadel_Ability_SkyRunner_SwingLine", "m_vecSwingPoint");
-		/// <summary><c>VectorWS</c>.</summary>
+		/// <summary><c>VectorWS</c>. Networked in build 6779: a write is sent to clients.</summary>
 		public Vector3 m_vecSwingPoint { get => Get<Vector3>(__m_vecSwingPoint); set => Set(__m_vecSwingPoint, value); }
 	}
 }

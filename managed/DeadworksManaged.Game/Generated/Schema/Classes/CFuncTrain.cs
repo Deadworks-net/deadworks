@@ -23,7 +23,7 @@ public static partial class Schema {
 
 		private static readonly SchemaField __m_flNextBlockTime = new("CFuncTrain", "m_flNextBlockTime");
 		/// <summary><c>GameTime_t</c>.</summary>
-		public float m_flNextBlockTime { get => Get<float>(__m_flNextBlockTime); set => Set(__m_flNextBlockTime, value); }
+		public GameTime m_flNextBlockTime { get => Get<GameTime>(__m_flNextBlockTime); set => Set(__m_flNextBlockTime, value); }
 
 		private static readonly SchemaField __m_flSpeed = new("CFuncTrain", "m_flSpeed");
 		/// <summary><c>float32</c>.</summary>

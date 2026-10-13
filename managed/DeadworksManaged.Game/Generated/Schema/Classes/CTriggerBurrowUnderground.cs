@@ -15,6 +15,6 @@ public static partial class Schema {
 
 		private static readonly SchemaField __m_pTouchedEntities = new("CTriggerBurrowUnderground", "m_pTouchedEntities");
 		/// <summary><c>CUtlVector&lt;CHandle&lt;CBaseEntity&gt;&gt;</c>.</summary>
-		public SchemaHandleList<CBaseEntity> m_pTouchedEntities => new(this, __m_pTouchedEntities, -1);
+		public SchemaHandleList<CBaseEntity> m_pTouchedEntities => new(this, __m_pTouchedEntities, ListStorage.Vector);
 	}
 }

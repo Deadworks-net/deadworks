@@ -23,18 +23,18 @@ public static partial class Schema {
 
 		private static readonly SchemaField __m_vecIntroCameraSequence = new("CCitadel_Modifier_CinematicIntro_Player_VData", "m_vecIntroCameraSequence");
 		/// <summary><c>CUtlVector&lt;IntroCamera_t&gt;</c>.</summary>
-		public SchemaObjectList<IntroCamera_t> m_vecIntroCameraSequence => new(this, __m_vecIntroCameraSequence, -1);
+		public SchemaObjectList<IntroCamera_t> m_vecIntroCameraSequence => new(this, __m_vecIntroCameraSequence, ListStorage.Vector);
 
 		private static readonly SchemaField __m_vecIntroCameraSequenceAmber = new("CCitadel_Modifier_CinematicIntro_Player_VData", "m_vecIntroCameraSequenceAmber");
 		/// <summary><c>CUtlVector&lt;IntroCamera_t&gt;</c>.</summary>
-		public SchemaObjectList<IntroCamera_t> m_vecIntroCameraSequenceAmber => new(this, __m_vecIntroCameraSequenceAmber, -1);
+		public SchemaObjectList<IntroCamera_t> m_vecIntroCameraSequenceAmber => new(this, __m_vecIntroCameraSequenceAmber, ListStorage.Vector);
 
 		private static readonly SchemaField __m_vecIntroCameraSequenceSapphire = new("CCitadel_Modifier_CinematicIntro_Player_VData", "m_vecIntroCameraSequenceSapphire");
 		/// <summary><c>CUtlVector&lt;IntroCamera_t&gt;</c>.</summary>
-		public SchemaObjectList<IntroCamera_t> m_vecIntroCameraSequenceSapphire => new(this, __m_vecIntroCameraSequenceSapphire, -1);
+		public SchemaObjectList<IntroCamera_t> m_vecIntroCameraSequenceSapphire => new(this, __m_vecIntroCameraSequenceSapphire, ListStorage.Vector);
 
 		private static readonly SchemaField __m_vecPostProcessEffects = new("CCitadel_Modifier_CinematicIntro_Player_VData", "m_vecPostProcessEffects");
 		/// <summary><c>CUtlVector&lt;PostProcessEffectDef_t&gt;</c>.</summary>
-		public SchemaObjectList<PostProcessEffectDef_t> m_vecPostProcessEffects => new(this, __m_vecPostProcessEffects, -1);
+		public SchemaObjectList<PostProcessEffectDef_t> m_vecPostProcessEffects => new(this, __m_vecPostProcessEffects, ListStorage.Vector);
 	}
 }

@@ -14,20 +14,20 @@ public static partial class Schema {
 		static string ISchemaClass<CCitadel_Ability_IceBeam>.NativeName => "CCitadel_Ability_IceBeam";
 
 		private static readonly SchemaField __m_bIceBeaming = new("CCitadel_Ability_IceBeam", "m_bIceBeaming");
-		/// <summary><c>bool</c>.</summary>
+		/// <summary><c>bool</c>. Networked in build 6779: a write is sent to clients.</summary>
 		public bool m_bIceBeaming { get => Get<bool>(__m_bIceBeaming); set => Set(__m_bIceBeaming, value); }
 
 		private static readonly SchemaField __m_beam = new("CCitadel_Ability_IceBeam", "m_beam");
-		/// <summary><c>CCitadelAbilityBeam_t</c>.</summary>
+		/// <summary><c>CCitadelAbilityBeam_t</c>. Networked in build 6779: a write is sent to clients.</summary>
 		public CCitadelAbilityBeam_t m_beam => Embedded<CCitadelAbilityBeam_t>(__m_beam);
 
 		private static readonly SchemaField __m_flNextDamageTick = new("CCitadel_Ability_IceBeam", "m_flNextDamageTick");
 		/// <summary><c>GameTime_t</c>.</summary>
-		public float m_flNextDamageTick { get => Get<float>(__m_flNextDamageTick); set => Set(__m_flNextDamageTick, value); }
+		public GameTime m_flNextDamageTick { get => Get<GameTime>(__m_flNextDamageTick); set => Set(__m_flNextDamageTick, value); }
 
 		private static readonly SchemaField __m_vecEntitiesHit = new("CCitadel_Ability_IceBeam", "m_vecEntitiesHit");
 		/// <summary><c>CUtlVector&lt;CHandle&lt;CBaseEntity&gt;&gt;</c>.</summary>
-		public SchemaHandleList<CBaseEntity> m_vecEntitiesHit => new(this, __m_vecEntitiesHit, -1);
+		public SchemaHandleList<CBaseEntity> m_vecEntitiesHit => new(this, __m_vecEntitiesHit, ListStorage.Vector);
 
 		/// <summary>The data entry this was created from, as <see cref="CCitadel_Ability_IceBeamVData"/>, or null if it has none.</summary>
 		public new CCitadel_Ability_IceBeamVData? VData => SubclassVData<CCitadel_Ability_IceBeamVData>();

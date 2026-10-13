@@ -78,8 +78,8 @@ public static partial class Schema {
 		public int m_speed { get => Get<int>(__m_speed); set => Set(__m_speed, value); }
 
 		private static readonly SchemaField __m_spriteTexture = new("CEnvBeam", "m_spriteTexture");
-		/// <summary><c>CStrongHandle&lt;InfoForResourceTypeIMaterial2&gt;</c>. No typed mapping yet: read it through its address.</summary>
-		public RawField m_spriteTexture => Raw(__m_spriteTexture, "CStrongHandle<InfoForResourceTypeIMaterial2>");
+		/// <summary><c>CStrongHandle&lt;InfoForResourceTypeIMaterial2&gt;</c>.</summary>
+		public ResourceHandle m_spriteTexture { get => Get<ResourceHandle>(__m_spriteTexture); set => Set(__m_spriteTexture, value); }
 
 		private static readonly SchemaField __m_vEndPointRelative = new("CEnvBeam", "m_vEndPointRelative");
 		/// <summary><c>Vector</c>.</summary>

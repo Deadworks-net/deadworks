@@ -15,11 +15,11 @@ public static partial class Schema {
 
 		private static readonly SchemaField __m_GroupNames = new("CMarkupVolumeTagged", "m_GroupNames");
 		/// <summary><c>CUtlVector&lt;CGlobalSymbol&gt;</c>.</summary>
-		public SchemaStringList m_GroupNames => new(this, __m_GroupNames, -1);
+		public SchemaStringList m_GroupNames => new(this, __m_GroupNames, ListStorage.Vector);
 
 		private static readonly SchemaField __m_Tags = new("CMarkupVolumeTagged", "m_Tags");
 		/// <summary><c>CUtlVector&lt;CGlobalSymbol&gt;</c>.</summary>
-		public SchemaStringList m_Tags => new(this, __m_Tags, -1);
+		public SchemaStringList m_Tags => new(this, __m_Tags, ListStorage.Vector);
 
 		private static readonly SchemaField __m_bGroupByPrefab = new("CMarkupVolumeTagged", "m_bGroupByPrefab");
 		/// <summary><c>bool</c>.</summary>

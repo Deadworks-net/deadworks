@@ -387,10 +387,10 @@ public static partial class Schema {
 
 		private static readonly SchemaField __m_vecAnimGraphDefaultValueOverrides = new("CitadelHeroData_t", "m_vecAnimGraphDefaultValueOverrides");
 		/// <summary><c>CUtlVector&lt;HeroAnimGraphDefaultValueOverride_t&gt;</c>.</summary>
-		public SchemaObjectList<HeroAnimGraphDefaultValueOverride_t> m_vecAnimGraphDefaultValueOverrides => new(this, __m_vecAnimGraphDefaultValueOverrides, -1);
+		public SchemaObjectList<HeroAnimGraphDefaultValueOverride_t> m_vecAnimGraphDefaultValueOverrides => new(this, __m_vecAnimGraphDefaultValueOverrides, ListStorage.Vector);
 
 		private static readonly SchemaField __m_vecHeroTags = new("CitadelHeroData_t", "m_vecHeroTags");
 		/// <summary><c>CUtlVector&lt;CUtlString&gt;</c>.</summary>
-		public SchemaStringList m_vecHeroTags => new(this, __m_vecHeroTags, -1);
+		public SchemaStringList m_vecHeroTags => new(this, __m_vecHeroTags, ListStorage.Vector);
 	}
 }

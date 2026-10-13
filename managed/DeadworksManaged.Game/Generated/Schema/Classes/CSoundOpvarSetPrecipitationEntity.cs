@@ -15,11 +15,11 @@ public static partial class Schema {
 
 		private static readonly SchemaField __m_arDirections = new("CSoundOpvarSetPrecipitationEntity", "m_arDirections");
 		/// <summary><c>CUtlVector&lt;Vector&gt;</c>.</summary>
-		public SchemaValueList<Vector3> m_arDirections => new(this, __m_arDirections, -1);
+		public SchemaValueList<Vector3> m_arDirections => new(this, __m_arDirections, ListStorage.Vector);
 
 		private static readonly SchemaField __m_arSky = new("CSoundOpvarSetPrecipitationEntity", "m_arSky");
 		/// <summary><c>CUtlVector&lt;float32&gt;</c>.</summary>
-		public SchemaValueList<float> m_arSky => new(this, __m_arSky, -1);
+		public SchemaValueList<float> m_arSky => new(this, __m_arSky, ListStorage.Vector);
 
 		private static readonly SchemaField __m_flConeAngle = new("CSoundOpvarSetPrecipitationEntity", "m_flConeAngle");
 		/// <summary><c>float32</c>.</summary>
@@ -43,7 +43,7 @@ public static partial class Schema {
 
 		private static readonly SchemaField __m_flLastSmoothTime = new("CSoundOpvarSetPrecipitationEntity", "m_flLastSmoothTime");
 		/// <summary><c>GameTime_t</c>.</summary>
-		public float m_flLastSmoothTime { get => Get<float>(__m_flLastSmoothTime); set => Set(__m_flLastSmoothTime, value); }
+		public GameTime m_flLastSmoothTime { get => Get<GameTime>(__m_flLastSmoothTime); set => Set(__m_flLastSmoothTime, value); }
 
 		private static readonly SchemaField __m_flSmoothHalfLife = new("CSoundOpvarSetPrecipitationEntity", "m_flSmoothHalfLife");
 		/// <summary><c>float32</c>.</summary>

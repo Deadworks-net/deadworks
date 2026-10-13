@@ -14,11 +14,11 @@ public static partial class Schema {
 		static string ISchemaClass<CEnvDetailController>.NativeName => "CEnvDetailController";
 
 		private static readonly SchemaField __m_flFadeEndDist = new("CEnvDetailController", "m_flFadeEndDist");
-		/// <summary><c>float32</c>.</summary>
+		/// <summary><c>float32</c>. Networked in build 6779: a write is sent to clients.</summary>
 		public float m_flFadeEndDist { get => Get<float>(__m_flFadeEndDist); set => Set(__m_flFadeEndDist, value); }
 
 		private static readonly SchemaField __m_flFadeStartDist = new("CEnvDetailController", "m_flFadeStartDist");
-		/// <summary><c>float32</c>.</summary>
+		/// <summary><c>float32</c>. Networked in build 6779: a write is sent to clients.</summary>
 		public float m_flFadeStartDist { get => Get<float>(__m_flFadeStartDist); set => Set(__m_flFadeStartDist, value); }
 	}
 }

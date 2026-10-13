@@ -43,7 +43,7 @@ public static partial class Schema {
 
 		private static readonly SchemaField __m_flLastSpawnTime = new("CPathMoverEntitySpawner", "m_flLastSpawnTime");
 		/// <summary><c>GameTime_t</c>.</summary>
-		public float m_flLastSpawnTime { get => Get<float>(__m_flLastSpawnTime); set => Set(__m_flLastSpawnTime, value); }
+		public GameTime m_flLastSpawnTime { get => Get<GameTime>(__m_flLastSpawnTime); set => Set(__m_flLastSpawnTime, value); }
 
 		private static readonly SchemaField __m_flSpawnFrequencyDistToNearestMover = new("CPathMoverEntitySpawner", "m_flSpawnFrequencyDistToNearestMover");
 		/// <summary><c>float32</c>.</summary>
@@ -103,7 +103,7 @@ public static partial class Schema {
 
 		private static readonly SchemaField __m_vecQueuedRemovals = new("CPathMoverEntitySpawner", "m_vecQueuedRemovals");
 		/// <summary><c>CUtlVector&lt;CHandle&lt;CFuncMover&gt;&gt;</c>.</summary>
-		public SchemaHandleList<CFuncMover> m_vecQueuedRemovals => new(this, __m_vecQueuedRemovals, -1);
+		public SchemaHandleList<CFuncMover> m_vecQueuedRemovals => new(this, __m_vecQueuedRemovals, ListStorage.Vector);
 
 		/// <summary>Fires the <c>Disable</c> input.</summary>
 		public void InputDisable() => FireInput("Disable");

@@ -31,6 +31,6 @@ public static partial class Schema {
 
 		private static readonly SchemaField __m_vecDisplayStats = new("HeroStatsUI_t", "m_vecDisplayStats");
 		/// <summary><c>CUtlVector&lt;StatWithCategory_t&gt;</c>. What stats do we want to show?.</summary>
-		public SchemaObjectList<StatWithCategory_t> m_vecDisplayStats => new(this, __m_vecDisplayStats, -1);
+		public SchemaObjectList<StatWithCategory_t> m_vecDisplayStats => new(this, __m_vecDisplayStats, ListStorage.Vector);
 	}
 }

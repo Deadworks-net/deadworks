@@ -19,7 +19,7 @@ public static partial class Schema {
 
 		private static readonly SchemaField __m_flAllowResponsesEndTime = new("CChoreoComponent", "m_flAllowResponsesEndTime");
 		/// <summary><c>GameTime_t</c>.</summary>
-		public float m_flAllowResponsesEndTime { get => Get<float>(__m_flAllowResponsesEndTime); set => Set(__m_flAllowResponsesEndTime, value); }
+		public GameTime m_flAllowResponsesEndTime { get => Get<GameTime>(__m_flAllowResponsesEndTime); set => Set(__m_flAllowResponsesEndTime, value); }
 
 		private static readonly SchemaField __m_hOwner = new("CChoreoComponent", "m_hOwner");
 		/// <summary><c>CHandle&lt;CBaseModelEntity&gt;</c>.</summary>

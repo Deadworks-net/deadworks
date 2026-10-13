@@ -14,8 +14,8 @@ public static partial class Schema {
 		static string ISchemaClass<CBaseDashCastAbilityVData>.NativeName => "CBaseDashCastAbilityVData";
 
 		private static readonly SchemaField __m_AbilityToTrigger = new("CBaseDashCastAbilityVData", "m_AbilityToTrigger");
-		/// <summary><c>CSubclassName</c>. No typed mapping yet: read it through its address.</summary>
-		public RawField m_AbilityToTrigger => Raw(__m_AbilityToTrigger, "CSubclassName");
+		/// <summary><c>CSubclassName</c>.</summary>
+		public string m_AbilityToTrigger => GetString(__m_AbilityToTrigger);
 
 		private static readonly SchemaField __m_MovementSpeedCurve = new("CBaseDashCastAbilityVData", "m_MovementSpeedCurve");
 		/// <summary><c>CPiecewiseCurve</c>. No typed mapping yet: read it through its address.</summary>

@@ -27,27 +27,27 @@ public static partial class Schema {
 
 		private static readonly SchemaField __m_conceptCooldowns = new("CAI_Expresser", "m_conceptCooldowns");
 		/// <summary><c>CUtlDict&lt;GameTime_t&gt;</c>.</summary>
-		public SchemaValueDict<float> m_conceptCooldowns => new(this, __m_conceptCooldowns);
+		public SchemaValueDict<GameTime> m_conceptCooldowns => new(this, __m_conceptCooldowns);
 
 		private static readonly SchemaField __m_flBlockedTalkTime = new("CAI_Expresser", "m_flBlockedTalkTime");
 		/// <summary><c>GameTime_t</c>.</summary>
-		public float m_flBlockedTalkTime { get => Get<float>(__m_flBlockedTalkTime); set => Set(__m_flBlockedTalkTime, value); }
+		public GameTime m_flBlockedTalkTime { get => Get<GameTime>(__m_flBlockedTalkTime); set => Set(__m_flBlockedTalkTime, value); }
 
 		private static readonly SchemaField __m_flLastTimeAcceptedSpeak = new("CAI_Expresser", "m_flLastTimeAcceptedSpeak");
 		/// <summary><c>GameTime_t</c>.</summary>
-		public float m_flLastTimeAcceptedSpeak { get => Get<float>(__m_flLastTimeAcceptedSpeak); set => Set(__m_flLastTimeAcceptedSpeak, value); }
+		public GameTime m_flLastTimeAcceptedSpeak { get => Get<GameTime>(__m_flLastTimeAcceptedSpeak); set => Set(__m_flLastTimeAcceptedSpeak, value); }
 
 		private static readonly SchemaField __m_flQueuedSpeechTime = new("CAI_Expresser", "m_flQueuedSpeechTime");
 		/// <summary><c>GameTime_t</c>.</summary>
-		public float m_flQueuedSpeechTime { get => Get<float>(__m_flQueuedSpeechTime); set => Set(__m_flQueuedSpeechTime, value); }
+		public GameTime m_flQueuedSpeechTime { get => Get<GameTime>(__m_flQueuedSpeechTime); set => Set(__m_flQueuedSpeechTime, value); }
 
 		private static readonly SchemaField __m_flStopTalkTime = new("CAI_Expresser", "m_flStopTalkTime");
 		/// <summary><c>GameTime_t</c>.</summary>
-		public float m_flStopTalkTime { get => Get<float>(__m_flStopTalkTime); set => Set(__m_flStopTalkTime, value); }
+		public GameTime m_flStopTalkTime { get => Get<GameTime>(__m_flStopTalkTime); set => Set(__m_flStopTalkTime, value); }
 
 		private static readonly SchemaField __m_flStopTalkTimeWithoutDelay = new("CAI_Expresser", "m_flStopTalkTimeWithoutDelay");
 		/// <summary><c>GameTime_t</c>.</summary>
-		public float m_flStopTalkTimeWithoutDelay { get => Get<float>(__m_flStopTalkTimeWithoutDelay); set => Set(__m_flStopTalkTimeWithoutDelay, value); }
+		public GameTime m_flStopTalkTimeWithoutDelay { get => Get<GameTime>(__m_flStopTalkTimeWithoutDelay); set => Set(__m_flStopTalkTimeWithoutDelay, value); }
 
 		private static readonly SchemaField __m_nLastSpokenPriority = new("CAI_Expresser", "m_nLastSpokenPriority");
 		/// <summary><c>int32</c>.</summary>
@@ -59,7 +59,7 @@ public static partial class Schema {
 
 		private static readonly SchemaField __m_ruleCooldowns = new("CAI_Expresser", "m_ruleCooldowns");
 		/// <summary><c>CUtlDict&lt;GameTime_t&gt;</c>.</summary>
-		public SchemaValueDict<float> m_ruleCooldowns => new(this, __m_ruleCooldowns);
+		public SchemaValueDict<GameTime> m_ruleCooldowns => new(this, __m_ruleCooldowns);
 
 		private static readonly SchemaField __m_voicePitch = new("CAI_Expresser", "m_voicePitch");
 		/// <summary><c>int32</c>.</summary>

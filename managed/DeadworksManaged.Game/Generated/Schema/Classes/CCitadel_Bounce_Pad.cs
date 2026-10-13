@@ -30,11 +30,11 @@ public static partial class Schema {
 		public float m_flBarrelUpFactor { get => Get<float>(__m_flBarrelUpFactor); set => Set(__m_flBarrelUpFactor, value); }
 
 		private static readonly SchemaField __m_flBounceVelocity = new("CCitadel_Bounce_Pad", "m_flBounceVelocity");
-		/// <summary><c>float32</c>.</summary>
+		/// <summary><c>float32</c>. Networked in build 6779: a write is sent to clients.</summary>
 		public float m_flBounceVelocity { get => Get<float>(__m_flBounceVelocity); set => Set(__m_flBounceVelocity, value); }
 
 		private static readonly SchemaField __m_flUpFactor = new("CCitadel_Bounce_Pad", "m_flUpFactor");
-		/// <summary><c>float32</c>.</summary>
+		/// <summary><c>float32</c>. Networked in build 6779: a write is sent to clients.</summary>
 		public float m_flUpFactor { get => Get<float>(__m_flUpFactor); set => Set(__m_flUpFactor, value); }
 
 		private static readonly SchemaField __m_hAbility = new("CCitadel_Bounce_Pad", "m_hAbility");
@@ -42,12 +42,12 @@ public static partial class Schema {
 		public CCitadelBaseAbility? m_hAbility { get => GetHandle<CCitadelBaseAbility>(__m_hAbility); set => SetHandle(__m_hAbility, value); }
 
 		private static readonly SchemaField __m_tDeactivationTime = new("CCitadel_Bounce_Pad", "m_tDeactivationTime");
-		/// <summary><c>GameTime_t</c>.</summary>
-		public float m_tDeactivationTime { get => Get<float>(__m_tDeactivationTime); set => Set(__m_tDeactivationTime, value); }
+		/// <summary><c>GameTime_t</c>. Networked in build 6779: a write is sent to clients.</summary>
+		public GameTime m_tDeactivationTime { get => Get<GameTime>(__m_tDeactivationTime); set => Set(__m_tDeactivationTime, value); }
 
 		private static readonly SchemaField __m_vBouncedPlayerBefore = new("CCitadel_Bounce_Pad", "m_vBouncedPlayerBefore");
 		/// <summary><c>CUtlVector&lt;CHandle&lt;CBaseEntity&gt;&gt;</c>.</summary>
-		public SchemaHandleList<CBaseEntity> m_vBouncedPlayerBefore => new(this, __m_vBouncedPlayerBefore, -1);
+		public SchemaHandleList<CBaseEntity> m_vBouncedPlayerBefore => new(this, __m_vBouncedPlayerBefore, ListStorage.Vector);
 
 		/// <summary>The data entry this was created from, as <see cref="CCitadel_Bounce_PadVData"/>, or null if it has none.</summary>
 		public CCitadel_Bounce_PadVData? VData => SubclassVData<CCitadel_Bounce_PadVData>();

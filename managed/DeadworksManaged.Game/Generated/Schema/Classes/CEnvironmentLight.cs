@@ -14,19 +14,19 @@ public static partial class Schema {
 		static string ISchemaClass<CEnvironmentLight>.NativeName => "CEnvironmentLight";
 
 		private static readonly SchemaField __m_SkyAmbientBounce = new("CEnvironmentLight", "m_SkyAmbientBounce");
-		/// <summary><c>Color</c>.</summary>
+		/// <summary><c>Color</c>. Networked in build 6779: a write is sent to clients.</summary>
 		public Color32 m_SkyAmbientBounce { get => Get<Color32>(__m_SkyAmbientBounce); set => Set(__m_SkyAmbientBounce, value); }
 
 		private static readonly SchemaField __m_SkyColor = new("CEnvironmentLight", "m_SkyColor");
-		/// <summary><c>Color</c>.</summary>
+		/// <summary><c>Color</c>. Networked in build 6779: a write is sent to clients.</summary>
 		public Color32 m_SkyColor { get => Get<Color32>(__m_SkyColor); set => Set(__m_SkyColor, value); }
 
 		private static readonly SchemaField __m_flAngularDiameter = new("CEnvironmentLight", "m_flAngularDiameter");
-		/// <summary><c>float32</c>.</summary>
+		/// <summary><c>float32</c>. Networked in build 6779: a write is sent to clients.</summary>
 		public float m_flAngularDiameter { get => Get<float>(__m_flAngularDiameter); set => Set(__m_flAngularDiameter, value); }
 
 		private static readonly SchemaField __m_flSkyIntensity = new("CEnvironmentLight", "m_flSkyIntensity");
-		/// <summary><c>float32</c>.</summary>
+		/// <summary><c>float32</c>. Networked in build 6779: a write is sent to clients.</summary>
 		public float m_flSkyIntensity { get => Get<float>(__m_flSkyIntensity); set => Set(__m_flSkyIntensity, value); }
 	}
 }

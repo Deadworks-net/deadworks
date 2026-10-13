@@ -15,7 +15,7 @@ public static partial class Schema {
 
 		private static readonly SchemaField __m_StartTime = new("CCitadel_Modifier_PriestKnockback", "m_StartTime");
 		/// <summary><c>GameTime_t</c>.</summary>
-		public float m_StartTime { get => Get<float>(__m_StartTime); set => Set(__m_StartTime, value); }
+		public GameTime m_StartTime { get => Get<GameTime>(__m_StartTime); set => Set(__m_StartTime, value); }
 
 		private static readonly SchemaField __m_vecFinalPosition = new("CCitadel_Modifier_PriestKnockback", "m_vecFinalPosition");
 		/// <summary><c>Vector</c>.</summary>

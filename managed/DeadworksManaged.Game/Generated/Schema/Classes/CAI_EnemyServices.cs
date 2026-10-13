@@ -15,7 +15,7 @@ public static partial class Schema {
 
 		private static readonly SchemaField __m_flTimeEnemyChanged = new("CAI_EnemyServices", "m_flTimeEnemyChanged");
 		/// <summary><c>GameTime_t</c>.</summary>
-		public float m_flTimeEnemyChanged { get => Get<float>(__m_flTimeEnemyChanged); set => Set(__m_flTimeEnemyChanged, value); }
+		public GameTime m_flTimeEnemyChanged { get => Get<GameTime>(__m_flTimeEnemyChanged); set => Set(__m_flTimeEnemyChanged, value); }
 
 		private static readonly SchemaField __m_hEnemy = new("CAI_EnemyServices", "m_hEnemy");
 		/// <summary><c>CHandle&lt;CBaseEntity&gt;</c>.</summary>

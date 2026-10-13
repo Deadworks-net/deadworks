@@ -14,15 +14,15 @@ public static partial class Schema {
 		static string ISchemaClass<CCitadel_Ability_TurretClone>.NativeName => "CCitadel_Ability_TurretClone";
 
 		private static readonly SchemaField __m_bHasTurretReady = new("CCitadel_Ability_TurretClone", "m_bHasTurretReady");
-		/// <summary><c>bool</c>.</summary>
+		/// <summary><c>bool</c>. Networked in build 6779: a write is sent to clients.</summary>
 		public bool m_bHasTurretReady { get => Get<bool>(__m_bHasTurretReady); set => Set(__m_bHasTurretReady, value); }
 
 		private static readonly SchemaField __m_flTurretExpireTime = new("CCitadel_Ability_TurretClone", "m_flTurretExpireTime");
-		/// <summary><c>GameTime_t</c>.</summary>
-		public float m_flTurretExpireTime { get => Get<float>(__m_flTurretExpireTime); set => Set(__m_flTurretExpireTime, value); }
+		/// <summary><c>GameTime_t</c>. Networked in build 6779: a write is sent to clients.</summary>
+		public GameTime m_flTurretExpireTime { get => Get<GameTime>(__m_flTurretExpireTime); set => Set(__m_flTurretExpireTime, value); }
 
 		private static readonly SchemaField __m_iCurrentSwapCount = new("CCitadel_Ability_TurretClone", "m_iCurrentSwapCount");
-		/// <summary><c>int32</c>.</summary>
+		/// <summary><c>int32</c>. Networked in build 6779: a write is sent to clients.</summary>
 		public int m_iCurrentSwapCount { get => Get<int>(__m_iCurrentSwapCount); set => Set(__m_iCurrentSwapCount, value); }
 
 		private static readonly SchemaField __m_nTurretFXIndex = new("CCitadel_Ability_TurretClone", "m_nTurretFXIndex");
@@ -30,7 +30,7 @@ public static partial class Schema {
 		public int m_nTurretFXIndex { get => Get<int>(__m_nTurretFXIndex); set => Set(__m_nTurretFXIndex, value); }
 
 		private static readonly SchemaField __m_pActiveTurret = new("CCitadel_Ability_TurretClone", "m_pActiveTurret");
-		/// <summary><c>CHandle&lt;CCitadel_MagicianTurret&gt;</c>.</summary>
+		/// <summary><c>CHandle&lt;CCitadel_MagicianTurret&gt;</c>. Networked in build 6779: a write is sent to clients.</summary>
 		public CCitadel_MagicianTurret? m_pActiveTurret { get => GetHandle<CCitadel_MagicianTurret>(__m_pActiveTurret); set => SetHandle(__m_pActiveTurret, value); }
 	}
 }

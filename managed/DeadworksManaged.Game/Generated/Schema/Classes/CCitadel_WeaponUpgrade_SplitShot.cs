@@ -14,7 +14,7 @@ public static partial class Schema {
 		static string ISchemaClass<CCitadel_WeaponUpgrade_SplitShot>.NativeName => "CCitadel_WeaponUpgrade_SplitShot";
 
 		private static readonly SchemaField __m_bSplitShotActive = new("CCitadel_WeaponUpgrade_SplitShot", "m_bSplitShotActive");
-		/// <summary><c>bool</c>.</summary>
+		/// <summary><c>bool</c>. Networked in build 6779: a write is sent to clients.</summary>
 		public bool m_bSplitShotActive { get => Get<bool>(__m_bSplitShotActive); set => Set(__m_bSplitShotActive, value); }
 
 		private static readonly SchemaField __m_eLastBulletHitEnt = new("CCitadel_WeaponUpgrade_SplitShot", "m_eLastBulletHitEnt");

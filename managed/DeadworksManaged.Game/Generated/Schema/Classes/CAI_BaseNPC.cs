@@ -26,7 +26,7 @@ public static partial class Schema {
 		public NPC_STATE m_IdealNPCState { get => Get<NPC_STATE>(__m_IdealNPCState); set => Set(__m_IdealNPCState, value); }
 
 		private static readonly SchemaField __m_NPCState = new("CAI_BaseNPC", "m_NPCState");
-		/// <summary><c>NPC_STATE</c>.</summary>
+		/// <summary><c>NPC_STATE</c>. Networked in build 6779: a write is sent to clients.</summary>
 		public NPC_STATE m_NPCState { get => Get<NPC_STATE>(__m_NPCState); set => Set(__m_NPCState, value); }
 
 		private static readonly SchemaField __m_NonGatherConditions = new("CAI_BaseNPC", "m_NonGatherConditions");
@@ -195,15 +195,15 @@ public static partial class Schema {
 
 		private static readonly SchemaField __m_flLastStateChangeTime = new("CAI_BaseNPC", "m_flLastStateChangeTime");
 		/// <summary><c>GameTime_t</c>.</summary>
-		public float m_flLastStateChangeTime { get => Get<float>(__m_flLastStateChangeTime); set => Set(__m_flLastStateChangeTime, value); }
+		public GameTime m_flLastStateChangeTime { get => Get<GameTime>(__m_flLastStateChangeTime); set => Set(__m_flLastStateChangeTime, value); }
 
 		private static readonly SchemaField __m_flLastTookDamageFromPlayerTime = new("CAI_BaseNPC", "m_flLastTookDamageFromPlayerTime");
 		/// <summary><c>GameTime_t</c>.</summary>
-		public float m_flLastTookDamageFromPlayerTime { get => Get<float>(__m_flLastTookDamageFromPlayerTime); set => Set(__m_flLastTookDamageFromPlayerTime, value); }
+		public GameTime m_flLastTookDamageFromPlayerTime { get => Get<GameTime>(__m_flLastTookDamageFromPlayerTime); set => Set(__m_flLastTookDamageFromPlayerTime, value); }
 
 		private static readonly SchemaField __m_flLastTookDamageTime = new("CAI_BaseNPC", "m_flLastTookDamageTime");
 		/// <summary><c>GameTime_t</c>.</summary>
-		public float m_flLastTookDamageTime { get => Get<float>(__m_flLastTookDamageTime); set => Set(__m_flLastTookDamageTime, value); }
+		public GameTime m_flLastTookDamageTime { get => Get<GameTime>(__m_flLastTookDamageTime); set => Set(__m_flLastTookDamageTime, value); }
 
 		private static readonly SchemaField __m_flThinkTime = new("CAI_BaseNPC", "m_flThinkTime");
 		/// <summary><c>float32</c>.</summary>
@@ -211,11 +211,11 @@ public static partial class Schema {
 
 		private static readonly SchemaField __m_flTimeLastMovement = new("CAI_BaseNPC", "m_flTimeLastMovement");
 		/// <summary><c>GameTime_t</c>.</summary>
-		public float m_flTimeLastMovement { get => Get<float>(__m_flTimeLastMovement); set => Set(__m_flTimeLastMovement, value); }
+		public GameTime m_flTimeLastMovement { get => Get<GameTime>(__m_flTimeLastMovement); set => Set(__m_flTimeLastMovement, value); }
 
 		private static readonly SchemaField __m_flWaitFinished = new("CAI_BaseNPC", "m_flWaitFinished");
 		/// <summary><c>GameTime_t</c>.</summary>
-		public float m_flWaitFinished { get => Get<float>(__m_flWaitFinished); set => Set(__m_flWaitFinished, value); }
+		public GameTime m_flWaitFinished { get => Get<GameTime>(__m_flWaitFinished); set => Set(__m_flWaitFinished, value); }
 
 		private static readonly SchemaField __m_hPathObstructor = new("CAI_BaseNPC", "m_hPathObstructor");
 		/// <summary><c>CHandle&lt;CBaseEntity&gt;</c>.</summary>
@@ -231,7 +231,7 @@ public static partial class Schema {
 
 		private static readonly SchemaField __m_lastTimeBashedObstacle = new("CAI_BaseNPC", "m_lastTimeBashedObstacle");
 		/// <summary><c>GameTime_t</c>.</summary>
-		public float m_lastTimeBashedObstacle { get => Get<float>(__m_lastTimeBashedObstacle); set => Set(__m_lastTimeBashedObstacle, value); }
+		public GameTime m_lastTimeBashedObstacle { get => Get<GameTime>(__m_lastTimeBashedObstacle); set => Set(__m_lastTimeBashedObstacle, value); }
 
 		private static readonly SchemaField __m_nAITraceMask = new("CAI_BaseNPC", "m_nAITraceMask");
 		/// <summary><c>uint64</c>.</summary>
@@ -275,7 +275,7 @@ public static partial class Schema {
 
 		private static readonly SchemaField __m_nextMantleTime = new("CAI_BaseNPC", "m_nextMantleTime");
 		/// <summary><c>GameTime_t</c>.</summary>
-		public float m_nextMantleTime { get => Get<float>(__m_nextMantleTime); set => Set(__m_nextMantleTime, value); }
+		public GameTime m_nextMantleTime { get => Get<GameTime>(__m_nextMantleTime); set => Set(__m_nextMantleTime, value); }
 
 		private static readonly SchemaField __m_pAnimGraphServices = new("CAI_BaseNPC", "m_pAnimGraphServices");
 		/// <summary><c>CAI_AnimGraphServices*</c>.</summary>
@@ -290,7 +290,7 @@ public static partial class Schema {
 		public CAI_FacingServices? m_pFacingServices => Pointer<CAI_FacingServices>(__m_pFacingServices);
 
 		private static readonly SchemaField __m_pMotorServices = new("CAI_BaseNPC", "m_pMotorServices");
-		/// <summary><c>CAI_MotorServices*</c>.</summary>
+		/// <summary><c>CAI_MotorServices*</c>. Networked in build 6779: a write is sent to clients.</summary>
 		public CAI_MotorServices? m_pMotorServices => Pointer<CAI_MotorServices>(__m_pMotorServices);
 
 		private static readonly SchemaField __m_pNavigator = new("CAI_BaseNPC", "m_pNavigator");
@@ -319,11 +319,11 @@ public static partial class Schema {
 
 		private static readonly SchemaField __m_vecAttachments = new("CAI_BaseNPC", "m_vecAttachments");
 		/// <summary><c>CUtlVector&lt;CHandle&lt;CBaseEntity&gt;&gt;</c>.</summary>
-		public SchemaHandleList<CBaseEntity> m_vecAttachments => new(this, __m_vecAttachments, -1);
+		public SchemaHandleList<CBaseEntity> m_vecAttachments => new(this, __m_vecAttachments, ListStorage.Vector);
 
 		private static readonly SchemaField __m_vecSynchronizedSecondaryNPCs = new("CAI_BaseNPC", "m_vecSynchronizedSecondaryNPCs");
 		/// <summary><c>CUtlVector&lt;CHandle&lt;CAI_BaseNPC&gt;&gt;</c>.</summary>
-		public SchemaHandleList<CAI_BaseNPC> m_vecSynchronizedSecondaryNPCs => new(this, __m_vecSynchronizedSecondaryNPCs, -1);
+		public SchemaHandleList<CAI_BaseNPC> m_vecSynchronizedSecondaryNPCs => new(this, __m_vecSynchronizedSecondaryNPCs, ListStorage.Vector);
 
 		/// <summary>The data entry this was created from, as <see cref="CAI_BaseNPCVData"/>, or null if it has none.</summary>
 		public CAI_BaseNPCVData? VData => SubclassVData<CAI_BaseNPCVData>();

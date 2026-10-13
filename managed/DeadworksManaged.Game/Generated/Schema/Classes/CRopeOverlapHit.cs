@@ -19,6 +19,6 @@ public static partial class Schema {
 
 		private static readonly SchemaField __m_vecOverlappingLinks = new("CRopeOverlapHit", "m_vecOverlappingLinks");
 		/// <summary><c>CUtlVector&lt;int32&gt;</c>.</summary>
-		public SchemaValueList<int> m_vecOverlappingLinks => new(this, __m_vecOverlappingLinks, -1);
+		public SchemaValueList<int> m_vecOverlappingLinks => new(this, __m_vecOverlappingLinks, ListStorage.Vector);
 	}
 }

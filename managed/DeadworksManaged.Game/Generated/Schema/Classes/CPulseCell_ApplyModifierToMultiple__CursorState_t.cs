@@ -15,6 +15,6 @@ public static partial class Schema {
 
 		private static readonly SchemaField __m_hVecModifierTracking = new("CPulseCell_ApplyModifierToMultiple::CursorState_t", "m_hVecModifierTracking");
 		/// <summary><c>CUtlVector&lt;CPulseCell_ApplyModifierToMultiple::ModifierTracking_t&gt;</c>.</summary>
-		public SchemaObjectList<CPulseCell_ApplyModifierToMultiple__ModifierTracking_t> m_hVecModifierTracking => new(this, __m_hVecModifierTracking, -1);
+		public SchemaObjectList<CPulseCell_ApplyModifierToMultiple__ModifierTracking_t> m_hVecModifierTracking => new(this, __m_hVecModifierTracking, ListStorage.Vector);
 	}
 }

@@ -23,10 +23,10 @@ public static partial class Schema {
 
 		private static readonly SchemaField __m_OutRequirements = new("CPulseCell_Outflow_PlayVCD", "m_OutRequirements");
 		/// <summary><c>CUtlVector&lt;CPulseCell_Outflow_PlayVCD::VCDEventCursorInfo_t&gt;</c>.</summary>
-		public SchemaObjectList<CPulseCell_Outflow_PlayVCD__VCDEventCursorInfo_t> m_OutRequirements => new(this, __m_OutRequirements, -1);
+		public SchemaObjectList<CPulseCell_Outflow_PlayVCD__VCDEventCursorInfo_t> m_OutRequirements => new(this, __m_OutRequirements, ListStorage.Vector);
 
 		private static readonly SchemaField __m_hChoreoScene = new("CPulseCell_Outflow_PlayVCD", "m_hChoreoScene");
-		/// <summary><c>CStrongHandle&lt;InfoForResourceTypeCChoreoSceneResource&gt;</c>. No typed mapping yet: read it through its address.</summary>
-		public RawField m_hChoreoScene => Raw(__m_hChoreoScene, "CStrongHandle<InfoForResourceTypeCChoreoSceneResource>");
+		/// <summary><c>CStrongHandle&lt;InfoForResourceTypeCChoreoSceneResource&gt;</c>.</summary>
+		public ResourceHandle m_hChoreoScene { get => Get<ResourceHandle>(__m_hChoreoScene); set => Set(__m_hChoreoScene, value); }
 	}
 }

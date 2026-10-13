@@ -43,7 +43,7 @@ public static partial class Schema {
 
 		private static readonly SchemaField __m_vecLights = new("CMultiLightProxy", "m_vecLights");
 		/// <summary><c>CUtlVector&lt;CHandle&lt;CLightEntity&gt;&gt;</c>.</summary>
-		public SchemaHandleList<CLightEntity> m_vecLights => new(this, __m_vecLights, -1);
+		public SchemaHandleList<CLightEntity> m_vecLights => new(this, __m_vecLights, ListStorage.Vector);
 
 		/// <summary>Fires the <c>DisableLights</c> input.</summary>
 		public void InputDisableLights(float value) => FireInput("DisableLights", Spawner.InputText(value));

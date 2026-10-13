@@ -14,16 +14,16 @@ public static partial class Schema {
 		static string ISchemaClass<CCitadel_Ability_FlameDash>.NativeName => "CCitadel_Ability_FlameDash";
 
 		private static readonly SchemaField __m_bIsSpeedBursting = new("CCitadel_Ability_FlameDash", "m_bIsSpeedBursting");
-		/// <summary><c>bool</c>.</summary>
+		/// <summary><c>bool</c>. Networked in build 6779: a write is sent to clients.</summary>
 		public bool m_bIsSpeedBursting { get => Get<bool>(__m_bIsSpeedBursting); set => Set(__m_bIsSpeedBursting, value); }
 
 		private static readonly SchemaField __m_flDashEndTime = new("CCitadel_Ability_FlameDash", "m_flDashEndTime");
-		/// <summary><c>CCitadelAutoScaledTime</c>.</summary>
+		/// <summary><c>CCitadelAutoScaledTime</c>. Networked in build 6779: a write is sent to clients.</summary>
 		public CCitadelAutoScaledTime m_flDashEndTime => Embedded<CCitadelAutoScaledTime>(__m_flDashEndTime);
 
 		private static readonly SchemaField __m_vecHitEntities = new("CCitadel_Ability_FlameDash", "m_vecHitEntities");
 		/// <summary><c>CUtlVector&lt;CHandle&lt;CBaseEntity&gt;&gt;</c>.</summary>
-		public SchemaHandleList<CBaseEntity> m_vecHitEntities => new(this, __m_vecHitEntities, -1);
+		public SchemaHandleList<CBaseEntity> m_vecHitEntities => new(this, __m_vecHitEntities, ListStorage.Vector);
 
 		/// <summary>The data entry this was created from, as <see cref="CCitadel_Ability_FlameDashVData"/>, or null if it has none.</summary>
 		public new CCitadel_Ability_FlameDashVData? VData => SubclassVData<CCitadel_Ability_FlameDashVData>();

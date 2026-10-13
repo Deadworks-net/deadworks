@@ -54,12 +54,12 @@ public static partial class Schema {
 		public CRelativeTransform m_source => Embedded<CRelativeTransform>(__m_source);
 
 		private static readonly SchemaField __m_tSourcePrevious = new("CNavLinkSubMotor_DefaultNavLink", "m_tSourcePrevious");
-		/// <summary><c>CTransformWS</c>. No typed mapping yet: read it through its address.</summary>
-		public RawField m_tSourcePrevious => Raw(__m_tSourcePrevious, "CTransformWS");
+		/// <summary><c>CTransformWS</c>.</summary>
+		public Transform m_tSourcePrevious { get => Get<Transform>(__m_tSourcePrevious); set => Set(__m_tSourcePrevious, value); }
 
 		private static readonly SchemaField __m_tTargetPrevious = new("CNavLinkSubMotor_DefaultNavLink", "m_tTargetPrevious");
-		/// <summary><c>CTransformWS</c>. No typed mapping yet: read it through its address.</summary>
-		public RawField m_tTargetPrevious => Raw(__m_tTargetPrevious, "CTransformWS");
+		/// <summary><c>CTransformWS</c>.</summary>
+		public Transform m_tTargetPrevious { get => Get<Transform>(__m_tTargetPrevious); set => Set(__m_tTargetPrevious, value); }
 
 		private static readonly SchemaField __m_target = new("CNavLinkSubMotor_DefaultNavLink", "m_target");
 		/// <summary><c>CRelativeTransform</c>.</summary>

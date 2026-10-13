@@ -15,7 +15,7 @@ public static partial class Schema {
 
 		private static readonly SchemaField __m_hHitTroopers = new("CCitadel_Ability_Wrecker_BoulderGrenade", "m_hHitTroopers");
 		/// <summary><c>CUtlVector&lt;CHandle&lt;CBaseEntity&gt;&gt;</c>.</summary>
-		public SchemaHandleList<CBaseEntity> m_hHitTroopers => new(this, __m_hHitTroopers, -1);
+		public SchemaHandleList<CBaseEntity> m_hHitTroopers => new(this, __m_hHitTroopers, ListStorage.Vector);
 
 		private static readonly SchemaField __m_nBallParticle = new("CCitadel_Ability_Wrecker_BoulderGrenade", "m_nBallParticle");
 		/// <summary><c>ParticleIndex_t</c>.</summary>

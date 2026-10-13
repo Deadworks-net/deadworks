@@ -23,7 +23,7 @@ public static partial class Schema {
 
 		private static readonly SchemaField __m_flLastAlertSound = new("CNPC_BaseDefenseSentry", "m_flLastAlertSound");
 		/// <summary><c>GameTime_t</c>.</summary>
-		public float m_flLastAlertSound { get => Get<float>(__m_flLastAlertSound); set => Set(__m_flLastAlertSound, value); }
+		public GameTime m_flLastAlertSound { get => Get<GameTime>(__m_flLastAlertSound); set => Set(__m_flLastAlertSound, value); }
 
 		private static readonly SchemaField __m_nSentryLevel = new("CNPC_BaseDefenseSentry", "m_nSentryLevel");
 		/// <summary><c>int16</c>.</summary>

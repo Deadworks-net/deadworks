@@ -14,16 +14,16 @@ public static partial class Schema {
 		static string ISchemaClass<CCitadel_Ability_MeleeParry>.NativeName => "CCitadel_Ability_MeleeParry";
 
 		private static readonly SchemaField __m_bAttackParried = new("CCitadel_Ability_MeleeParry", "m_bAttackParried");
-		/// <summary><c>bool</c>.</summary>
+		/// <summary><c>bool</c>. Networked in build 6779: a write is sent to clients.</summary>
 		public bool m_bAttackParried { get => Get<bool>(__m_bAttackParried); set => Set(__m_bAttackParried, value); }
 
 		private static readonly SchemaField __m_flParryStartTime = new("CCitadel_Ability_MeleeParry", "m_flParryStartTime");
-		/// <summary><c>GameTime_t</c>.</summary>
-		public float m_flParryStartTime { get => Get<float>(__m_flParryStartTime); set => Set(__m_flParryStartTime, value); }
+		/// <summary><c>GameTime_t</c>. Networked in build 6779: a write is sent to clients.</summary>
+		public GameTime m_flParryStartTime { get => Get<GameTime>(__m_flParryStartTime); set => Set(__m_flParryStartTime, value); }
 
 		private static readonly SchemaField __m_flParrySuccessEndTime = new("CCitadel_Ability_MeleeParry", "m_flParrySuccessEndTime");
-		/// <summary><c>GameTime_t</c>.</summary>
-		public float m_flParrySuccessEndTime { get => Get<float>(__m_flParrySuccessEndTime); set => Set(__m_flParrySuccessEndTime, value); }
+		/// <summary><c>GameTime_t</c>. Networked in build 6779: a write is sent to clients.</summary>
+		public GameTime m_flParrySuccessEndTime { get => Get<GameTime>(__m_flParrySuccessEndTime); set => Set(__m_flParrySuccessEndTime, value); }
 
 		private static readonly SchemaField __m_nActiveFX = new("CCitadel_Ability_MeleeParry", "m_nActiveFX");
 		/// <summary><c>ParticleIndex_t</c>.</summary>

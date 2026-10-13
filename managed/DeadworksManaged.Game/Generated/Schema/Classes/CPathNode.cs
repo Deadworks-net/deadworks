@@ -18,23 +18,23 @@ public static partial class Schema {
 		public CPathWithDynamicNodes? m_hPath { get => GetHandle<CPathWithDynamicNodes>(__m_hPath); set => SetHandle(__m_hPath, value); }
 
 		private static readonly SchemaField __m_strParentPathUniqueID = new("CPathNode", "m_strParentPathUniqueID");
-		/// <summary><c>CUtlString</c>.</summary>
+		/// <summary><c>CUtlString</c>. Networked in build 6779: a write is sent to clients.</summary>
 		public string m_strParentPathUniqueID => GetString(__m_strParentPathUniqueID);
 
 		private static readonly SchemaField __m_strPathNodeParameter = new("CPathNode", "m_strPathNodeParameter");
-		/// <summary><c>CUtlString</c>.</summary>
+		/// <summary><c>CUtlString</c>. Networked in build 6779: a write is sent to clients.</summary>
 		public string m_strPathNodeParameter => GetString(__m_strPathNodeParameter);
 
 		private static readonly SchemaField __m_vInTangentLocal = new("CPathNode", "m_vInTangentLocal");
-		/// <summary><c>Vector</c>.</summary>
+		/// <summary><c>Vector</c>. Networked in build 6779: a write is sent to clients.</summary>
 		public Vector3 m_vInTangentLocal { get => Get<Vector3>(__m_vInTangentLocal); set => Set(__m_vInTangentLocal, value); }
 
 		private static readonly SchemaField __m_vOutTangentLocal = new("CPathNode", "m_vOutTangentLocal");
-		/// <summary><c>Vector</c>.</summary>
+		/// <summary><c>Vector</c>. Networked in build 6779: a write is sent to clients.</summary>
 		public Vector3 m_vOutTangentLocal { get => Get<Vector3>(__m_vOutTangentLocal); set => Set(__m_vOutTangentLocal, value); }
 
 		private static readonly SchemaField __m_xWSPrevParent = new("CPathNode", "m_xWSPrevParent");
-		/// <summary><c>CTransformWS</c>. No typed mapping yet: read it through its address.</summary>
-		public RawField m_xWSPrevParent => Raw(__m_xWSPrevParent, "CTransformWS");
+		/// <summary><c>CTransformWS</c>.</summary>
+		public Transform m_xWSPrevParent { get => Get<Transform>(__m_xWSPrevParent); set => Set(__m_xWSPrevParent, value); }
 	}
 }

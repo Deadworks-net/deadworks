@@ -99,11 +99,11 @@ public static partial class Schema {
 
 		private static readonly SchemaField __m_vecNpcUsersByNavLink = new("CNavLinkAreaEntity", "m_vecNpcUsersByNavLink");
 		/// <summary><c>CUtlVector&lt;CNavLinkAreaEntity::NpcUserList_t&gt;</c>.</summary>
-		public SchemaObjectList<CNavLinkAreaEntity__NpcUserList_t> m_vecNpcUsersByNavLink => new(this, __m_vecNpcUsersByNavLink, -1);
+		public SchemaObjectList<CNavLinkAreaEntity__NpcUserList_t> m_vecNpcUsersByNavLink => new(this, __m_vecNpcUsersByNavLink, ListStorage.Vector);
 
 		private static readonly SchemaField __m_vecSavedConnections = new("CNavLinkAreaEntity", "m_vecSavedConnections");
 		/// <summary><c>CUtlVector&lt;CNavLinkConnectionSave&gt;</c>.</summary>
-		public SchemaObjectList<CNavLinkConnectionSave> m_vecSavedConnections => new(this, __m_vecSavedConnections, -1);
+		public SchemaObjectList<CNavLinkConnectionSave> m_vecSavedConnections => new(this, __m_vecSavedConnections, ListStorage.Vector);
 
 		/// <summary>Fires the <c>Disable</c> input.</summary>
 		public void InputDisable() => FireInput("Disable");

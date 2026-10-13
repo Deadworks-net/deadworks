@@ -14,8 +14,8 @@ public static partial class Schema {
 		static string ISchemaClass<CCitadelItemPickupRejuvVData>.NativeName => "CCitadelItemPickupRejuvVData";
 
 		private static readonly SchemaField __m_AbilityProjectile = new("CCitadelItemPickupRejuvVData", "m_AbilityProjectile");
-		/// <summary><c>CSubclassName</c>. No typed mapping yet: read it through its address.</summary>
-		public RawField m_AbilityProjectile => Raw(__m_AbilityProjectile, "CSubclassName");
+		/// <summary><c>CSubclassName</c>.</summary>
+		public string m_AbilityProjectile => GetString(__m_AbilityProjectile);
 
 		private static readonly SchemaField __m_IsFrozenParticle = new("CCitadelItemPickupRejuvVData", "m_IsFrozenParticle");
 		/// <summary><c>CResourceNameTyped&lt;CWeakHandle&lt;InfoForResourceTypeIParticleSystemDefinition&gt;&gt;</c>.</summary>

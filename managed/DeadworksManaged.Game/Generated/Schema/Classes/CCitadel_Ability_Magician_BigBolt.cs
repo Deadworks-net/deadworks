@@ -19,7 +19,7 @@ public static partial class Schema {
 
 		private static readonly SchemaField __m_flNextShootTime = new("CCitadel_Ability_Magician_BigBolt", "m_flNextShootTime");
 		/// <summary><c>GameTime_t</c>.</summary>
-		public float m_flNextShootTime { get => Get<float>(__m_flNextShootTime); set => Set(__m_flNextShootTime, value); }
+		public GameTime m_flNextShootTime { get => Get<GameTime>(__m_flNextShootTime); set => Set(__m_flNextShootTime, value); }
 
 		private static readonly SchemaField __m_iBoltsFired = new("CCitadel_Ability_Magician_BigBolt", "m_iBoltsFired");
 		/// <summary><c>int32</c>.</summary>

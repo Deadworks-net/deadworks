@@ -14,8 +14,8 @@ public static partial class Schema {
 		static string ISchemaClass<CCitadel_Ability_Frank_PainAura>.NativeName => "CCitadel_Ability_Frank_PainAura";
 
 		private static readonly SchemaField __m_ToggleOnTime = new("CCitadel_Ability_Frank_PainAura", "m_ToggleOnTime");
-		/// <summary><c>GameTime_t</c>.</summary>
-		public float m_ToggleOnTime { get => Get<float>(__m_ToggleOnTime); set => Set(__m_ToggleOnTime, value); }
+		/// <summary><c>GameTime_t</c>. Networked in build 6779: a write is sent to clients.</summary>
+		public GameTime m_ToggleOnTime { get => Get<GameTime>(__m_ToggleOnTime); set => Set(__m_ToggleOnTime, value); }
 
 		/// <summary>The data entry this was created from, as <see cref="CCitadel_Ability_Frank_PainAuraVData"/>, or null if it has none.</summary>
 		public new CCitadel_Ability_Frank_PainAuraVData? VData => SubclassVData<CCitadel_Ability_Frank_PainAuraVData>();

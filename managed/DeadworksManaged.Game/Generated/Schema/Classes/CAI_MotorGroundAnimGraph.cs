@@ -71,7 +71,7 @@ public static partial class Schema {
 
 		private static readonly SchemaField __m_flStartWaitingForFacingTime = new("CAI_MotorGroundAnimGraph", "m_flStartWaitingForFacingTime");
 		/// <summary><c>GameTime_t</c>.</summary>
-		public float m_flStartWaitingForFacingTime { get => Get<float>(__m_flStartWaitingForFacingTime); set => Set(__m_flStartWaitingForFacingTime, value); }
+		public GameTime m_flStartWaitingForFacingTime { get => Get<GameTime>(__m_flStartWaitingForFacingTime); set => Set(__m_flStartWaitingForFacingTime, value); }
 
 		private static readonly SchemaField __m_nCurrentStance = new("CAI_MotorGroundAnimGraph", "m_nCurrentStance");
 		/// <summary><c>StanceType_t</c>.</summary>

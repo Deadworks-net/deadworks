@@ -23,23 +23,23 @@ public static partial class Schema {
 
 		private static readonly SchemaField __m_flGoalChangeTime = new("CAI_Navigator", "m_flGoalChangeTime");
 		/// <summary><c>GameTime_t</c>.</summary>
-		public float m_flGoalChangeTime { get => Get<float>(__m_flGoalChangeTime); set => Set(__m_flGoalChangeTime, value); }
+		public GameTime m_flGoalChangeTime { get => Get<GameTime>(__m_flGoalChangeTime); set => Set(__m_flGoalChangeTime, value); }
 
 		private static readonly SchemaField __m_flLastNpcOverlapTime = new("CAI_Navigator", "m_flLastNpcOverlapTime");
 		/// <summary><c>GameTime_t</c>.</summary>
-		public float m_flLastNpcOverlapTime { get => Get<float>(__m_flLastNpcOverlapTime); set => Set(__m_flLastNpcOverlapTime, value); }
+		public GameTime m_flLastNpcOverlapTime { get => Get<GameTime>(__m_flLastNpcOverlapTime); set => Set(__m_flLastNpcOverlapTime, value); }
 
 		private static readonly SchemaField __m_flStartWaitingForFacingTime = new("CAI_Navigator", "m_flStartWaitingForFacingTime");
 		/// <summary><c>GameTime_t</c>.</summary>
-		public float m_flStartWaitingForFacingTime { get => Get<float>(__m_flStartWaitingForFacingTime); set => Set(__m_flStartWaitingForFacingTime, value); }
+		public GameTime m_flStartWaitingForFacingTime { get => Get<GameTime>(__m_flStartWaitingForFacingTime); set => Set(__m_flStartWaitingForFacingTime, value); }
 
 		private static readonly SchemaField __m_flTimeLastAvoidanceTriangulate = new("CAI_Navigator", "m_flTimeLastAvoidanceTriangulate");
 		/// <summary><c>GameTime_t</c>.</summary>
-		public float m_flTimeLastAvoidanceTriangulate { get => Get<float>(__m_flTimeLastAvoidanceTriangulate); set => Set(__m_flTimeLastAvoidanceTriangulate, value); }
+		public GameTime m_flTimeLastAvoidanceTriangulate { get => Get<GameTime>(__m_flTimeLastAvoidanceTriangulate); set => Set(__m_flTimeLastAvoidanceTriangulate, value); }
 
 		private static readonly SchemaField __m_gtSpeedAvoidanceTimer = new("CAI_Navigator", "m_gtSpeedAvoidanceTimer");
 		/// <summary><c>GameTime_t</c>.</summary>
-		public float m_gtSpeedAvoidanceTimer { get => Get<float>(__m_gtSpeedAvoidanceTimer); set => Set(__m_gtSpeedAvoidanceTimer, value); }
+		public GameTime m_gtSpeedAvoidanceTimer { get => Get<GameTime>(__m_gtSpeedAvoidanceTimer); set => Set(__m_gtSpeedAvoidanceTimer, value); }
 
 		private static readonly SchemaField __m_hBigStepGroundEnt = new("CAI_Navigator", "m_hBigStepGroundEnt");
 		/// <summary><c>CHandle&lt;CBaseEntity&gt;</c>.</summary>
@@ -99,6 +99,6 @@ public static partial class Schema {
 
 		private static readonly SchemaField __m_vecSpeculativeGoals = new("CAI_Navigator", "m_vecSpeculativeGoals");
 		/// <summary><c>CUtlVector&lt;CAI_Navigator::QueuedGoal_t*&gt;</c>.</summary>
-		public SchemaPointerList<CAI_Navigator__QueuedGoal_t> m_vecSpeculativeGoals => new(this, __m_vecSpeculativeGoals, -1);
+		public SchemaPointerList<CAI_Navigator__QueuedGoal_t> m_vecSpeculativeGoals => new(this, __m_vecSpeculativeGoals, ListStorage.Vector);
 	}
 }

@@ -27,7 +27,7 @@ public static partial class Schema {
 
 		private static readonly SchemaField __m_flNavLinkFaceStartTime = new("CNavLinkSubMotor_Legacy_Transition", "m_flNavLinkFaceStartTime");
 		/// <summary><c>GameTime_t</c>.</summary>
-		public float m_flNavLinkFaceStartTime { get => Get<float>(__m_flNavLinkFaceStartTime); set => Set(__m_flNavLinkFaceStartTime, value); }
+		public GameTime m_flNavLinkFaceStartTime { get => Get<GameTime>(__m_flNavLinkFaceStartTime); set => Set(__m_flNavLinkFaceStartTime, value); }
 
 		private static readonly SchemaField __m_hNPC = new("CNavLinkSubMotor_Legacy_Transition", "m_hNPC");
 		/// <summary><c>CHandle&lt;CAI_BaseNPC&gt;</c>.</summary>

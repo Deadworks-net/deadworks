@@ -39,6 +39,6 @@ public static partial class Schema {
 
 		private static readonly SchemaField __m_vecChoreoEntityFacings = new("CAI_FacingServices", "m_vecChoreoEntityFacings");
 		/// <summary><c>CUtlVector&lt;ChoreoEntityFacing_t&gt;</c>.</summary>
-		public SchemaObjectList<ChoreoEntityFacing_t> m_vecChoreoEntityFacings => new(this, __m_vecChoreoEntityFacings, -1);
+		public SchemaObjectList<ChoreoEntityFacing_t> m_vecChoreoEntityFacings => new(this, __m_vecChoreoEntityFacings, ListStorage.Vector);
 	}
 }

@@ -14,12 +14,12 @@ public static partial class Schema {
 		static string ISchemaClass<CAbility_TestHero_SpookyHide>.NativeName => "CAbility_TestHero_SpookyHide";
 
 		private static readonly SchemaField __m_bIsVisibleOnMinimap = new("CAbility_TestHero_SpookyHide", "m_bIsVisibleOnMinimap");
-		/// <summary><c>bool</c>.</summary>
+		/// <summary><c>bool</c>. Networked in build 6779: a write is sent to clients.</summary>
 		public bool m_bIsVisibleOnMinimap { get => Get<bool>(__m_bIsVisibleOnMinimap); set => Set(__m_bIsVisibleOnMinimap, value); }
 
 		private static readonly SchemaField __m_flStoppedMovingStartTime = new("CAbility_TestHero_SpookyHide", "m_flStoppedMovingStartTime");
-		/// <summary><c>GameTime_t</c>.</summary>
-		public float m_flStoppedMovingStartTime { get => Get<float>(__m_flStoppedMovingStartTime); set => Set(__m_flStoppedMovingStartTime, value); }
+		/// <summary><c>GameTime_t</c>. Networked in build 6779: a write is sent to clients.</summary>
+		public GameTime m_flStoppedMovingStartTime { get => Get<GameTime>(__m_flStoppedMovingStartTime); set => Set(__m_flStoppedMovingStartTime, value); }
 
 		private static readonly SchemaField __m_hInvisModifier = new("CAbility_TestHero_SpookyHide", "m_hInvisModifier");
 		/// <summary><c>CModifierHandleTyped&lt;CCitadelModifier&gt;</c>. No typed mapping yet: read it through its address.</summary>

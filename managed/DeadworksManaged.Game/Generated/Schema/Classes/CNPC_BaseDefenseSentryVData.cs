@@ -14,8 +14,8 @@ public static partial class Schema {
 		static string ISchemaClass<CNPC_BaseDefenseSentryVData>.NativeName => "CNPC_BaseDefenseSentryVData";
 
 		private static readonly SchemaField __m_AbilityWeapon = new("CNPC_BaseDefenseSentryVData", "m_AbilityWeapon");
-		/// <summary><c>CSubclassName</c>. No typed mapping yet: read it through its address.</summary>
-		public RawField m_AbilityWeapon => Raw(__m_AbilityWeapon, "CSubclassName");
+		/// <summary><c>CSubclassName</c>.</summary>
+		public string m_AbilityWeapon => GetString(__m_AbilityWeapon);
 
 		private static readonly SchemaField __m_SentryExplosionParticle = new("CNPC_BaseDefenseSentryVData", "m_SentryExplosionParticle");
 		/// <summary><c>CResourceNameTyped&lt;CWeakHandle&lt;InfoForResourceTypeIParticleSystemDefinition&gt;&gt;</c>.</summary>

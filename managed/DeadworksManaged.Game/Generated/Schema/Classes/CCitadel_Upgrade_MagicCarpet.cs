@@ -14,16 +14,16 @@ public static partial class Schema {
 		static string ISchemaClass<CCitadel_Upgrade_MagicCarpet>.NativeName => "CCitadel_Upgrade_MagicCarpet";
 
 		private static readonly SchemaField __m_bFlying = new("CCitadel_Upgrade_MagicCarpet", "m_bFlying");
-		/// <summary><c>bool</c>.</summary>
+		/// <summary><c>bool</c>. Networked in build 6779: a write is sent to clients.</summary>
 		public bool m_bFlying { get => Get<bool>(__m_bFlying); set => Set(__m_bFlying, value); }
 
 		private static readonly SchemaField __m_bSummoning = new("CCitadel_Upgrade_MagicCarpet", "m_bSummoning");
-		/// <summary><c>bool</c>.</summary>
+		/// <summary><c>bool</c>. Networked in build 6779: a write is sent to clients.</summary>
 		public bool m_bSummoning { get => Get<bool>(__m_bSummoning); set => Set(__m_bSummoning, value); }
 
 		private static readonly SchemaField __m_flFlyingStartTime = new("CCitadel_Upgrade_MagicCarpet", "m_flFlyingStartTime");
 		/// <summary><c>GameTime_t</c>.</summary>
-		public float m_flFlyingStartTime { get => Get<float>(__m_flFlyingStartTime); set => Set(__m_flFlyingStartTime, value); }
+		public GameTime m_flFlyingStartTime { get => Get<GameTime>(__m_flFlyingStartTime); set => Set(__m_flFlyingStartTime, value); }
 
 		/// <summary>The data entry this was created from, as <see cref="CCitadel_Upgrade_MagicCarpetVData"/>, or null if it has none.</summary>
 		public new CCitadel_Upgrade_MagicCarpetVData? VData => SubclassVData<CCitadel_Upgrade_MagicCarpetVData>();

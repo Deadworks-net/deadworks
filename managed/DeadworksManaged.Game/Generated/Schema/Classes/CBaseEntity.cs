@@ -14,15 +14,15 @@ public static partial class Schema {
 		static string ISchemaClass<CBaseEntity>.NativeName => "CBaseEntity";
 
 		private static readonly SchemaField __m_CBodyComponent = new("CBaseEntity", "m_CBodyComponent");
-		/// <summary><c>CBodyComponent*</c>. Wrapped by <c>CBaseEntity.BodyComponent</c> in DeadworksManaged.Api.</summary>
+		/// <summary><c>CBodyComponent*</c>. Networked in build 6779: a write is sent to clients. Wrapped by <c>CBaseEntity.BodyComponent</c> in DeadworksManaged.Api.</summary>
 		public CBodyComponent? m_CBodyComponent => Pointer<CBodyComponent>(__m_CBodyComponent);
 
 		private static readonly SchemaField __m_MoveCollide = new("CBaseEntity", "m_MoveCollide");
-		/// <summary><c>MoveCollide_t</c>.</summary>
+		/// <summary><c>MoveCollide_t</c>. Networked in build 6779: a write is sent to clients.</summary>
 		public MoveCollide_t m_MoveCollide { get => Get<MoveCollide_t>(__m_MoveCollide); set => Set(__m_MoveCollide, value); }
 
 		private static readonly SchemaField __m_MoveType = new("CBaseEntity", "m_MoveType");
-		/// <summary><c>MoveType_t</c>.</summary>
+		/// <summary><c>MoveType_t</c>. Networked in build 6779: a write is sent to clients.</summary>
 		public MoveType_t m_MoveType { get => Get<MoveType_t>(__m_MoveType); [Obsolete("A raw write skips the engine's move type change; use CBaseEntity.SetMoveType on the curated wrapper (entity.Entity).")] set => Set(__m_MoveType, value); }
 
 		private static readonly SchemaField __m_NetworkTransmitComponent = new("CBaseEntity", "m_NetworkTransmitComponent");
@@ -51,18 +51,18 @@ public static partial class Schema {
 
 		private static readonly SchemaField __m_ResponseContexts = new("CBaseEntity", "m_ResponseContexts");
 		/// <summary><c>CUtlVector&lt;ResponseContext_t&gt;</c>.</summary>
-		public SchemaObjectList<ResponseContext_t> m_ResponseContexts => new(this, __m_ResponseContexts, -1);
+		public SchemaObjectList<ResponseContext_t> m_ResponseContexts => new(this, __m_ResponseContexts, ListStorage.Vector);
 
 		private static readonly SchemaField __m_aThinkFunctions = new("CBaseEntity", "m_aThinkFunctions");
 		/// <summary><c>CUtlVector&lt;thinkfunc_t&gt;</c>.</summary>
-		public SchemaObjectList<thinkfunc_t> m_aThinkFunctions => new(this, __m_aThinkFunctions, -1);
+		public SchemaObjectList<thinkfunc_t> m_aThinkFunctions => new(this, __m_aThinkFunctions, ListStorage.Vector);
 
 		private static readonly SchemaField __m_bAnimatedEveryTick = new("CBaseEntity", "m_bAnimatedEveryTick");
-		/// <summary><c>bool</c>.</summary>
+		/// <summary><c>bool</c>. Networked in build 6779: a write is sent to clients.</summary>
 		public bool m_bAnimatedEveryTick { get => Get<bool>(__m_bAnimatedEveryTick); set => Set(__m_bAnimatedEveryTick, value); }
 
 		private static readonly SchemaField __m_bClientSideRagdoll = new("CBaseEntity", "m_bClientSideRagdoll");
-		/// <summary><c>bool</c>.</summary>
+		/// <summary><c>bool</c>. Networked in build 6779: a write is sent to clients.</summary>
 		public bool m_bClientSideRagdoll { get => Get<bool>(__m_bClientSideRagdoll); set => Set(__m_bClientSideRagdoll, value); }
 
 		private static readonly SchemaField __m_bDisableLowViolence = new("CBaseEntity", "m_bDisableLowViolence");
@@ -78,7 +78,7 @@ public static partial class Schema {
 		public bool m_bGravityActuallyDisabled { get => Get<bool>(__m_bGravityActuallyDisabled); set => Set(__m_bGravityActuallyDisabled, value); }
 
 		private static readonly SchemaField __m_bGravityDisabled = new("CBaseEntity", "m_bGravityDisabled");
-		/// <summary><c>bool</c>.</summary>
+		/// <summary><c>bool</c>. Networked in build 6779: a write is sent to clients.</summary>
 		public bool m_bGravityDisabled { get => Get<bool>(__m_bGravityDisabled); set => Set(__m_bGravityDisabled, value); }
 
 		private static readonly SchemaField __m_bLagCompensate = new("CBaseEntity", "m_bLagCompensate");
@@ -94,15 +94,15 @@ public static partial class Schema {
 		public bool m_bRestoreInHierarchy { get => Get<bool>(__m_bRestoreInHierarchy); set => Set(__m_bRestoreInHierarchy, value); }
 
 		private static readonly SchemaField __m_bTakesDamage = new("CBaseEntity", "m_bTakesDamage");
-		/// <summary><c>bool</c>.</summary>
+		/// <summary><c>bool</c>. Networked in build 6779: a write is sent to clients.</summary>
 		public bool m_bTakesDamage { get => Get<bool>(__m_bTakesDamage); set => Set(__m_bTakesDamage, value); }
 
 		private static readonly SchemaField __m_fEffects = new("CBaseEntity", "m_fEffects");
-		/// <summary><c>uint32</c>.</summary>
+		/// <summary><c>uint32</c>. Networked in build 6779: a write is sent to clients.</summary>
 		public uint m_fEffects { get => Get<uint>(__m_fEffects); set => Set(__m_fEffects, value); }
 
 		private static readonly SchemaField __m_fFlags = new("CBaseEntity", "m_fFlags");
-		/// <summary><c>uint32</c>. Wrapped by <c>CBaseEntity.Flags</c> in DeadworksManaged.Api.</summary>
+		/// <summary><c>uint32</c>. Networked in build 6779: a write is sent to clients. Wrapped by <c>CBaseEntity.Flags</c> in DeadworksManaged.Api.</summary>
 		public uint m_fFlags { get => Get<uint>(__m_fFlags); set => Set(__m_fFlags, value); }
 
 		private static readonly SchemaField __m_flActualGravityScale = new("CBaseEntity", "m_flActualGravityScale");
@@ -110,27 +110,27 @@ public static partial class Schema {
 		public float m_flActualGravityScale { get => Get<float>(__m_flActualGravityScale); set => Set(__m_flActualGravityScale, value); }
 
 		private static readonly SchemaField __m_flAnimTime = new("CBaseEntity", "m_flAnimTime");
-		/// <summary><c>float32</c>.</summary>
+		/// <summary><c>float32</c>. Networked in build 6779: a write is sent to clients.</summary>
 		public float m_flAnimTime { get => Get<float>(__m_flAnimTime); set => Set(__m_flAnimTime, value); }
 
 		private static readonly SchemaField __m_flCreateTime = new("CBaseEntity", "m_flCreateTime");
-		/// <summary><c>GameTime_t</c>.</summary>
-		public float m_flCreateTime { get => Get<float>(__m_flCreateTime); set => Set(__m_flCreateTime, value); }
+		/// <summary><c>GameTime_t</c>. Networked in build 6779: a write is sent to clients.</summary>
+		public GameTime m_flCreateTime { get => Get<GameTime>(__m_flCreateTime); set => Set(__m_flCreateTime, value); }
 
 		private static readonly SchemaField __m_flDamageAccumulator = new("CBaseEntity", "m_flDamageAccumulator");
 		/// <summary><c>float32</c>.</summary>
 		public float m_flDamageAccumulator { get => Get<float>(__m_flDamageAccumulator); set => Set(__m_flDamageAccumulator, value); }
 
 		private static readonly SchemaField __m_flElasticity = new("CBaseEntity", "m_flElasticity");
-		/// <summary><c>float32</c>.</summary>
+		/// <summary><c>float32</c>. Networked in build 6779: a write is sent to clients.</summary>
 		public float m_flElasticity { get => Get<float>(__m_flElasticity); set => Set(__m_flElasticity, value); }
 
 		private static readonly SchemaField __m_flFriction = new("CBaseEntity", "m_flFriction");
-		/// <summary><c>float32</c>. Wrapped by <c>CBaseEntity.Friction</c> in DeadworksManaged.Api.</summary>
+		/// <summary><c>float32</c>. Networked in build 6779: a write is sent to clients. Wrapped by <c>CBaseEntity.Friction</c> in DeadworksManaged.Api.</summary>
 		public float m_flFriction { get => Get<float>(__m_flFriction); set => Set(__m_flFriction, value); }
 
 		private static readonly SchemaField __m_flGravityScale = new("CBaseEntity", "m_flGravityScale");
-		/// <summary><c>float32</c>. Wrapped by <c>CBaseEntity.GravityScale</c> in DeadworksManaged.Api.</summary>
+		/// <summary><c>float32</c>. Networked in build 6779: a write is sent to clients. Wrapped by <c>CBaseEntity.GravityScale</c> in DeadworksManaged.Api.</summary>
 		public float m_flGravityScale { get => Get<float>(__m_flGravityScale); [Obsolete("A raw write skips what CBaseEntity.SetGravityScale does; call that on the curated wrapper instead.")] set => Set(__m_flGravityScale, value); }
 
 		private static readonly SchemaField __m_flLocalTime = new("CBaseEntity", "m_flLocalTime");
@@ -142,15 +142,15 @@ public static partial class Schema {
 		public float m_flMoveDoneTime { get => Get<float>(__m_flMoveDoneTime); set => Set(__m_flMoveDoneTime, value); }
 
 		private static readonly SchemaField __m_flNavIgnoreUntilTime = new("CBaseEntity", "m_flNavIgnoreUntilTime");
-		/// <summary><c>GameTime_t</c>.</summary>
-		public float m_flNavIgnoreUntilTime { get => Get<float>(__m_flNavIgnoreUntilTime); set => Set(__m_flNavIgnoreUntilTime, value); }
+		/// <summary><c>GameTime_t</c>. Networked in build 6779: a write is sent to clients.</summary>
+		public GameTime m_flNavIgnoreUntilTime { get => Get<GameTime>(__m_flNavIgnoreUntilTime); set => Set(__m_flNavIgnoreUntilTime, value); }
 
 		private static readonly SchemaField __m_flSimulationTime = new("CBaseEntity", "m_flSimulationTime");
 		/// <summary><c>float32</c>.</summary>
 		public float m_flSimulationTime { get => Get<float>(__m_flSimulationTime); set => Set(__m_flSimulationTime, value); }
 
 		private static readonly SchemaField __m_flTimeScale = new("CBaseEntity", "m_flTimeScale");
-		/// <summary><c>float32</c>.</summary>
+		/// <summary><c>float32</c>. Networked in build 6779: a write is sent to clients.</summary>
 		public float m_flTimeScale { get => Get<float>(__m_flTimeScale); set => Set(__m_flTimeScale, value); }
 
 		private static readonly SchemaField __m_flVPhysicsUpdateLocalTime = new("CBaseEntity", "m_flVPhysicsUpdateLocalTime");
@@ -158,7 +158,7 @@ public static partial class Schema {
 		public float m_flVPhysicsUpdateLocalTime { get => Get<float>(__m_flVPhysicsUpdateLocalTime); set => Set(__m_flVPhysicsUpdateLocalTime, value); }
 
 		private static readonly SchemaField __m_flWaterLevel = new("CBaseEntity", "m_flWaterLevel");
-		/// <summary><c>float32</c>.</summary>
+		/// <summary><c>float32</c>. Networked in build 6779: a write is sent to clients.</summary>
 		public float m_flWaterLevel { get => Get<float>(__m_flWaterLevel); set => Set(__m_flWaterLevel, value); }
 
 		private static readonly SchemaField __m_hDamageFilter = new("CBaseEntity", "m_hDamageFilter");
@@ -166,11 +166,11 @@ public static partial class Schema {
 		public CBaseFilter? m_hDamageFilter { get => GetHandle<CBaseFilter>(__m_hDamageFilter); set => SetHandle(__m_hDamageFilter, value); }
 
 		private static readonly SchemaField __m_hEffectEntity = new("CBaseEntity", "m_hEffectEntity");
-		/// <summary><c>CHandle&lt;CBaseEntity&gt;</c>.</summary>
+		/// <summary><c>CHandle&lt;CBaseEntity&gt;</c>. Networked in build 6779: a write is sent to clients.</summary>
 		public CBaseEntity? m_hEffectEntity { get => GetHandle<CBaseEntity>(__m_hEffectEntity); set => SetHandle(__m_hEffectEntity, value); }
 
 		private static readonly SchemaField __m_hGroundEntity = new("CBaseEntity", "m_hGroundEntity");
-		/// <summary><c>CHandle&lt;CBaseEntity&gt;</c>. Wrapped by <c>CBaseEntity.GroundEntity</c>, <c>CBaseEntity.IsOnGround</c> in DeadworksManaged.Api.</summary>
+		/// <summary><c>CHandle&lt;CBaseEntity&gt;</c>. Networked in build 6779: a write is sent to clients. Wrapped by <c>CBaseEntity.GroundEntity</c>, <c>CBaseEntity.IsOnGround</c> in DeadworksManaged.Api.</summary>
 		public CBaseEntity? m_hGroundEntity { get => GetHandle<CBaseEntity>(__m_hGroundEntity); set => SetHandle(__m_hGroundEntity, value); }
 
 		private static readonly SchemaField __m_hNPCSensingHandle = new("CBaseEntity", "m_hNPCSensingHandle");
@@ -178,7 +178,7 @@ public static partial class Schema {
 		public uint m_hNPCSensingHandle { get => Get<uint>(__m_hNPCSensingHandle); set => Set(__m_hNPCSensingHandle, value); }
 
 		private static readonly SchemaField __m_hOwnerEntity = new("CBaseEntity", "m_hOwnerEntity");
-		/// <summary><c>CHandle&lt;CBaseEntity&gt;</c>.</summary>
+		/// <summary><c>CHandle&lt;CBaseEntity&gt;</c>. Networked in build 6779: a write is sent to clients.</summary>
 		public CBaseEntity? m_hOwnerEntity { get => GetHandle<CBaseEntity>(__m_hOwnerEntity); set => SetHandle(__m_hOwnerEntity, value); }
 
 		private static readonly SchemaField __m_iCurrentThinkContext = new("CBaseEntity", "m_iCurrentThinkContext");
@@ -194,7 +194,7 @@ public static partial class Schema {
 		public string m_iGlobalname { get => GetString(__m_iGlobalname); set => SetString(__m_iGlobalname, value); }
 
 		private static readonly SchemaField __m_iHealth = new("CBaseEntity", "m_iHealth");
-		/// <summary><c>int32</c>. Wrapped by <c>CBaseEntity.Health</c> in DeadworksManaged.Api.</summary>
+		/// <summary><c>int32</c>. Networked in build 6779: a write is sent to clients. Wrapped by <c>CBaseEntity.Health</c> in DeadworksManaged.Api.</summary>
 		public int m_iHealth { get => Get<int>(__m_iHealth); set => Set(__m_iHealth, value); }
 
 		private static readonly SchemaField __m_iInitialTeamNum = new("CBaseEntity", "m_iInitialTeamNum");
@@ -202,7 +202,7 @@ public static partial class Schema {
 		public int m_iInitialTeamNum { get => Get<int>(__m_iInitialTeamNum); set => Set(__m_iInitialTeamNum, value); }
 
 		private static readonly SchemaField __m_iMaxHealth = new("CBaseEntity", "m_iMaxHealth");
-		/// <summary><c>int32</c>. Wrapped by <c>CBaseEntity.MaxHealth</c> in DeadworksManaged.Api.</summary>
+		/// <summary><c>int32</c>. Networked in build 6779: a write is sent to clients. Wrapped by <c>CBaseEntity.MaxHealth</c> in DeadworksManaged.Api.</summary>
 		public int m_iMaxHealth { get => Get<int>(__m_iMaxHealth); set => Set(__m_iMaxHealth, value); }
 
 		private static readonly SchemaField __m_iSentToClients = new("CBaseEntity", "m_iSentToClients");
@@ -210,7 +210,7 @@ public static partial class Schema {
 		public int m_iSentToClients { get => Get<int>(__m_iSentToClients); set => Set(__m_iSentToClients, value); }
 
 		private static readonly SchemaField __m_iTeamNum = new("CBaseEntity", "m_iTeamNum");
-		/// <summary><c>uint8</c>. Wrapped by <c>CBaseEntity.TeamNum</c> in DeadworksManaged.Api.</summary>
+		/// <summary><c>uint8</c>. Networked in build 6779: a write is sent to clients. Wrapped by <c>CBaseEntity.TeamNum</c> in DeadworksManaged.Api.</summary>
 		public byte m_iTeamNum { get => Get<byte>(__m_iTeamNum); set => Set(__m_iTeamNum, value); }
 
 		private static readonly SchemaField __m_isSteadyState = new("CBaseEntity", "m_isSteadyState");
@@ -230,7 +230,7 @@ public static partial class Schema {
 		public float m_lastNetworkChange { get => Get<float>(__m_lastNetworkChange); set => Set(__m_lastNetworkChange, value); }
 
 		private static readonly SchemaField __m_lifeState = new("CBaseEntity", "m_lifeState");
-		/// <summary><c>uint8</c>. Wrapped by <c>CBaseEntity.LifeState</c> in DeadworksManaged.Api.</summary>
+		/// <summary><c>uint8</c>. Networked in build 6779: a write is sent to clients. Wrapped by <c>CBaseEntity.LifeState</c> in DeadworksManaged.Api.</summary>
 		public byte m_lifeState { get => Get<byte>(__m_lifeState); set => Set(__m_lifeState, value); }
 
 		private static readonly SchemaField __m_nActualMoveType = new("CBaseEntity", "m_nActualMoveType");
@@ -238,7 +238,7 @@ public static partial class Schema {
 		public MoveType_t m_nActualMoveType { get => Get<MoveType_t>(__m_nActualMoveType); [Obsolete("A raw write skips the engine's move type change; use CBaseEntity.SetMoveType on the curated wrapper (entity.Entity).")] set => Set(__m_nActualMoveType, value); }
 
 		private static readonly SchemaField __m_nGroundBodyIndex = new("CBaseEntity", "m_nGroundBodyIndex");
-		/// <summary><c>int32</c>.</summary>
+		/// <summary><c>int32</c>. Networked in build 6779: a write is sent to clients.</summary>
 		public int m_nGroundBodyIndex { get => Get<int>(__m_nGroundBodyIndex); set => Set(__m_nGroundBodyIndex, value); }
 
 		private static readonly SchemaField __m_nLastThinkTick = new("CBaseEntity", "m_nLastThinkTick");
@@ -246,11 +246,11 @@ public static partial class Schema {
 		public int m_nLastThinkTick { get => Get<int>(__m_nLastThinkTick); set => Set(__m_nLastThinkTick, value); }
 
 		private static readonly SchemaField __m_nNextThinkTick = new("CBaseEntity", "m_nNextThinkTick");
-		/// <summary><c>GameTick_t</c>.</summary>
+		/// <summary><c>GameTick_t</c>. Networked in build 6779: a write is sent to clients.</summary>
 		public int m_nNextThinkTick { get => Get<int>(__m_nNextThinkTick); set => Set(__m_nNextThinkTick, value); }
 
 		private static readonly SchemaField __m_nPlatformType = new("CBaseEntity", "m_nPlatformType");
-		/// <summary><c>EntityPlatformTypes_t</c>.</summary>
+		/// <summary><c>EntityPlatformTypes_t</c>. Networked in build 6779: a write is sent to clients.</summary>
 		public EntityPlatformTypes_t m_nPlatformType { get => Get<EntityPlatformTypes_t>(__m_nPlatformType); set => Set(__m_nPlatformType, value); }
 
 		private static readonly SchemaField __m_nPreviouslySetMoveType = new("CBaseEntity", "m_nPreviouslySetMoveType");
@@ -270,11 +270,11 @@ public static partial class Schema {
 		public byte m_nSlimeTouch { get => Get<byte>(__m_nSlimeTouch); set => Set(__m_nSlimeTouch, value); }
 
 		private static readonly SchemaField __m_nSubclassID = new("CBaseEntity", "m_nSubclassID");
-		/// <summary><c>CUtlStringToken</c>. Wrapped by <c>CBaseEntity.CreateByDesignerName</c>, <c>CBaseEntity.SubclassVData</c> in DeadworksManaged.Api.</summary>
+		/// <summary><c>CUtlStringToken</c>. Networked in build 6779: a write is sent to clients. Wrapped by <c>CBaseEntity.CreateByDesignerName</c>, <c>CBaseEntity.SubclassVData</c> in DeadworksManaged.Api.</summary>
 		public uint m_nSubclassID { get => Get<uint>(__m_nSubclassID); set => Set(__m_nSubclassID, value); }
 
 		private static readonly SchemaField __m_nTakeDamageFlags = new("CBaseEntity", "m_nTakeDamageFlags");
-		/// <summary><c>TakeDamageFlags_t</c>.</summary>
+		/// <summary><c>TakeDamageFlags_t</c>. Networked in build 6779: a write is sent to clients.</summary>
 		public TakeDamageFlags_t m_nTakeDamageFlags { get => Get<TakeDamageFlags_t>(__m_nTakeDamageFlags); set => Set(__m_nTakeDamageFlags, value); }
 
 		private static readonly SchemaField __m_nWaterTouch = new("CBaseEntity", "m_nWaterTouch");
@@ -294,7 +294,7 @@ public static partial class Schema {
 		public CCollisionProperty? m_pCollision => Pointer<CCollisionProperty>(__m_pCollision);
 
 		private static readonly SchemaField __m_pModifierProp = new("CBaseEntity", "m_pModifierProp");
-		/// <summary><c>CModifierProperty*</c>. Wrapped by <c>CBaseEntity.ModifierProp</c> in DeadworksManaged.Api.</summary>
+		/// <summary><c>CModifierProperty*</c>. Networked in build 6779: a write is sent to clients. Wrapped by <c>CBaseEntity.ModifierProp</c> in DeadworksManaged.Api.</summary>
 		public CModifierProperty? m_pModifierProp => Pointer<CModifierProperty>(__m_pModifierProp);
 
 		private static readonly SchemaField __m_pPulseGraphInstance = new("CBaseEntity", "m_pPulseGraphInstance");
@@ -322,7 +322,7 @@ public static partial class Schema {
 		public string m_sUniqueHammerID => GetString(__m_sUniqueHammerID);
 
 		private static readonly SchemaField __m_spawnflags = new("CBaseEntity", "m_spawnflags");
-		/// <summary><c>uint32</c>.</summary>
+		/// <summary><c>uint32</c>. Networked in build 6779: a write is sent to clients.</summary>
 		public uint m_spawnflags { get => Get<uint>(__m_spawnflags); set => Set(__m_spawnflags, value); }
 
 		private static readonly SchemaField __m_target = new("CBaseEntity", "m_target");
@@ -334,7 +334,7 @@ public static partial class Schema {
 		public RawField m_think => Raw(__m_think, "BASEPTR");
 
 		private static readonly SchemaField __m_ubInterpolationFrame = new("CBaseEntity", "m_ubInterpolationFrame");
-		/// <summary><c>uint8</c>.</summary>
+		/// <summary><c>uint8</c>. Networked in build 6779: a write is sent to clients.</summary>
 		public byte m_ubInterpolationFrame { get => Get<byte>(__m_ubInterpolationFrame); set => Set(__m_ubInterpolationFrame, value); }
 
 		private static readonly SchemaField __m_vPrevVPhysicsUpdatePos = new("CBaseEntity", "m_vPrevVPhysicsUpdatePos");
@@ -350,7 +350,7 @@ public static partial class Schema {
 		public Vector3 m_vecAngVelocity { get => Get<Vector3>(__m_vecAngVelocity); set => Set(__m_vecAngVelocity, value); }
 
 		private static readonly SchemaField __m_vecVelocity = new("CBaseEntity", "m_vecVelocity");
-		/// <summary><c>CNetworkVelocityVector</c>.</summary>
+		/// <summary><c>CNetworkVelocityVector</c>. Networked in build 6779: a write is sent to clients.</summary>
 		public CNetworkVelocityVector m_vecVelocity => Embedded<CNetworkVelocityVector>(__m_vecVelocity);
 
 		/// <summary>Fires the <c>AddAttribute</c> input.</summary>

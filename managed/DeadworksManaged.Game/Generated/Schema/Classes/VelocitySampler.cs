@@ -19,7 +19,7 @@ public static partial class Schema {
 
 		private static readonly SchemaField __m_fPrevSampleTime = new("VelocitySampler", "m_fPrevSampleTime");
 		/// <summary><c>GameTime_t</c>.</summary>
-		public float m_fPrevSampleTime { get => Get<float>(__m_fPrevSampleTime); set => Set(__m_fPrevSampleTime, value); }
+		public GameTime m_fPrevSampleTime { get => Get<GameTime>(__m_fPrevSampleTime); set => Set(__m_fPrevSampleTime, value); }
 
 		private static readonly SchemaField __m_prevSample = new("VelocitySampler", "m_prevSample");
 		/// <summary><c>Vector</c>.</summary>

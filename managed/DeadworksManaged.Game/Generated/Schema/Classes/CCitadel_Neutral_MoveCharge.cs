@@ -15,7 +15,7 @@ public static partial class Schema {
 
 		private static readonly SchemaField __m_vHitEntities = new("CCitadel_Neutral_MoveCharge", "m_vHitEntities");
 		/// <summary><c>CUtlVector&lt;CHandle&lt;CBaseEntity&gt;&gt;</c>.</summary>
-		public SchemaHandleList<CBaseEntity> m_vHitEntities => new(this, __m_vHitEntities, -1);
+		public SchemaHandleList<CBaseEntity> m_vHitEntities => new(this, __m_vHitEntities, ListStorage.Vector);
 
 		private static readonly SchemaField __m_vMoveDirection = new("CCitadel_Neutral_MoveCharge", "m_vMoveDirection");
 		/// <summary><c>Vector</c>.</summary>

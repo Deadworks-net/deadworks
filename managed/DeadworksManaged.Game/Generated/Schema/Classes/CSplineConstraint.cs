@@ -15,7 +15,7 @@ public static partial class Schema {
 
 		private static readonly SchemaField __m_StartTransitionTime = new("CSplineConstraint", "m_StartTransitionTime");
 		/// <summary><c>GameTime_t</c>.</summary>
-		public float m_StartTransitionTime { get => Get<float>(__m_StartTransitionTime); set => Set(__m_StartTransitionTime, value); }
+		public GameTime m_StartTransitionTime { get => Get<GameTime>(__m_StartTransitionTime); set => Set(__m_StartTransitionTime, value); }
 
 		private static readonly SchemaField __m_bEnableAngularConstraint = new("CSplineConstraint", "m_bEnableAngularConstraint");
 		/// <summary><c>bool</c>.</summary>

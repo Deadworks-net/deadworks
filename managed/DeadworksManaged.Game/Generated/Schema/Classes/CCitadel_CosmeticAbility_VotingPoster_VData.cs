@@ -19,6 +19,6 @@ public static partial class Schema {
 
 		private static readonly SchemaField __m_vecVotingPosters = new("CCitadel_CosmeticAbility_VotingPoster_VData", "m_vecVotingPosters");
 		/// <summary><c>CUtlVector&lt;CitadelVotingPosterHeroData_t&gt;</c>.</summary>
-		public SchemaObjectList<CitadelVotingPosterHeroData_t> m_vecVotingPosters => new(this, __m_vecVotingPosters, -1);
+		public SchemaObjectList<CitadelVotingPosterHeroData_t> m_vecVotingPosters => new(this, __m_vecVotingPosters, ListStorage.Vector);
 	}
 }

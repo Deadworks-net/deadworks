@@ -14,11 +14,11 @@ public static partial class Schema {
 		static string ISchemaClass<CMiniMapMarker>.NativeName => "CMiniMapMarker";
 
 		private static readonly SchemaField __m_CCitadelMinimapComponent = new("CMiniMapMarker", "m_CCitadelMinimapComponent");
-		/// <summary><c>CCitadelMinimapComponent</c>.</summary>
+		/// <summary><c>CCitadelMinimapComponent</c>. Networked in build 6779: a write is sent to clients.</summary>
 		public CCitadelMinimapComponent m_CCitadelMinimapComponent => Embedded<CCitadelMinimapComponent>(__m_CCitadelMinimapComponent);
 
 		private static readonly SchemaField __m_eType = new("CMiniMapMarker", "m_eType");
-		/// <summary><c>EMiniMapMarkerType_t</c>.</summary>
+		/// <summary><c>EMiniMapMarkerType_t</c>. Networked in build 6779: a write is sent to clients.</summary>
 		public EMiniMapMarkerType_t m_eType { get => Get<EMiniMapMarkerType_t>(__m_eType); set => Set(__m_eType, value); }
 	}
 }

@@ -15,6 +15,6 @@ public static partial class Schema {
 
 		private static readonly SchemaField __m_flLastBurnTime = new("CCitadel_Modifier_Spiritburn_DOT", "m_flLastBurnTime");
 		/// <summary><c>GameTime_t</c>.</summary>
-		public float m_flLastBurnTime { get => Get<float>(__m_flLastBurnTime); set => Set(__m_flLastBurnTime, value); }
+		public GameTime m_flLastBurnTime { get => Get<GameTime>(__m_flLastBurnTime); set => Set(__m_flLastBurnTime, value); }
 	}
 }

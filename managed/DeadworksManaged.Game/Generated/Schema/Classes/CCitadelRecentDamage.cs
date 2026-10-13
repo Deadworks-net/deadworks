@@ -14,19 +14,19 @@ public static partial class Schema {
 		static string ISchemaClass<CCitadelRecentDamage>.NativeName => "CCitadelRecentDamage";
 
 		private static readonly SchemaField __m_flEndTime = new("CCitadelRecentDamage", "m_flEndTime");
-		/// <summary><c>GameTime_t</c>.</summary>
-		public float m_flEndTime { get => Get<float>(__m_flEndTime); set => Set(__m_flEndTime, value); }
+		/// <summary><c>GameTime_t</c>. Networked in build 6779: a write is sent to clients.</summary>
+		public GameTime m_flEndTime { get => Get<GameTime>(__m_flEndTime); set => Set(__m_flEndTime, value); }
 
 		private static readonly SchemaField __m_flLastDamageTime = new("CCitadelRecentDamage", "m_flLastDamageTime");
-		/// <summary><c>GameTime_t</c>.</summary>
-		public float m_flLastDamageTime { get => Get<float>(__m_flLastDamageTime); set => Set(__m_flLastDamageTime, value); }
+		/// <summary><c>GameTime_t</c>. Networked in build 6779: a write is sent to clients.</summary>
+		public GameTime m_flLastDamageTime { get => Get<GameTime>(__m_flLastDamageTime); set => Set(__m_flLastDamageTime, value); }
 
 		private static readonly SchemaField __m_flStartTime = new("CCitadelRecentDamage", "m_flStartTime");
-		/// <summary><c>GameTime_t</c>.</summary>
-		public float m_flStartTime { get => Get<float>(__m_flStartTime); set => Set(__m_flStartTime, value); }
+		/// <summary><c>GameTime_t</c>. Networked in build 6779: a write is sent to clients.</summary>
+		public GameTime m_flStartTime { get => Get<GameTime>(__m_flStartTime); set => Set(__m_flStartTime, value); }
 
 		private static readonly SchemaField __m_hPlayerEntToStore = new("CCitadelRecentDamage", "m_hPlayerEntToStore");
-		/// <summary><c>CHandle&lt;CBaseEntity&gt;</c>.</summary>
+		/// <summary><c>CHandle&lt;CBaseEntity&gt;</c>. Networked in build 6779: a write is sent to clients.</summary>
 		public CBaseEntity? m_hPlayerEntToStore { get => GetHandle<CBaseEntity>(__m_hPlayerEntToStore); set => SetHandle(__m_hPlayerEntToStore, value); }
 	}
 }

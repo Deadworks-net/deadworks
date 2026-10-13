@@ -43,7 +43,7 @@ public static partial class Schema {
 
 		private static readonly SchemaField __m_nextShake = new("CEnvShake", "m_nextShake");
 		/// <summary><c>GameTime_t</c>.</summary>
-		public float m_nextShake { get => Get<float>(__m_nextShake); set => Set(__m_nextShake, value); }
+		public GameTime m_nextShake { get => Get<GameTime>(__m_nextShake); set => Set(__m_nextShake, value); }
 
 		private static readonly SchemaField __m_pShakeController = new("CEnvShake", "m_pShakeController");
 		/// <summary><c>IPhysicsMotionController*</c>.</summary>
@@ -55,7 +55,7 @@ public static partial class Schema {
 
 		private static readonly SchemaField __m_stopTime = new("CEnvShake", "m_stopTime");
 		/// <summary><c>GameTime_t</c>.</summary>
-		public float m_stopTime { get => Get<float>(__m_stopTime); set => Set(__m_stopTime, value); }
+		public GameTime m_stopTime { get => Get<GameTime>(__m_stopTime); set => Set(__m_stopTime, value); }
 
 		/// <summary>Fires the <c>Amplitude</c> input.</summary>
 		public void InputAmplitude(float value) => FireInput("Amplitude", Spawner.InputText(value));

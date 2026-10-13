@@ -15,7 +15,7 @@ public static partial class Schema {
 
 		private static readonly SchemaField __m_DestructibleHitGroupRequests = new("CTakeDamageResult", "m_DestructibleHitGroupRequests");
 		/// <summary><c>CUtlLeanVector&lt;DestructiblePartDamageRequest_t&gt;</c>.</summary>
-		public SchemaObjectList<DestructiblePartDamageRequest_t> m_DestructibleHitGroupRequests => new(this, __m_DestructibleHitGroupRequests, -1);
+		public SchemaObjectList<DestructiblePartDamageRequest_t> m_DestructibleHitGroupRequests => new(this, __m_DestructibleHitGroupRequests, ListStorage.UnresizableVector);
 
 		private static readonly SchemaField __m_bSuppressFlinch = new("CTakeDamageResult", "m_bSuppressFlinch");
 		/// <summary><c>bool</c>.</summary>

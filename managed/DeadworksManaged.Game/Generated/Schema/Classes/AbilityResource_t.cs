@@ -18,11 +18,11 @@ public static partial class Schema {
 		public float m_flCurrentValue { get => Get<float>(__m_flCurrentValue); set => Set(__m_flCurrentValue, value); }
 
 		private static readonly SchemaField __m_flLatchTime = new("AbilityResource_t", "m_flLatchTime");
-		/// <summary><c>GameTime_t</c>. Wrapped by <c>AbilityResource.LatchTime</c> in DeadworksManaged.Api.</summary>
-		public float m_flLatchTime { get => Get<float>(__m_flLatchTime); set => Set(__m_flLatchTime, value); }
+		/// <summary><c>GameTime_t</c>. Networked in build 6779: a write is sent to clients. Wrapped by <c>AbilityResource.LatchTime</c> in DeadworksManaged.Api.</summary>
+		public GameTime m_flLatchTime { get => Get<GameTime>(__m_flLatchTime); set => Set(__m_flLatchTime, value); }
 
 		private static readonly SchemaField __m_flLatchValue = new("AbilityResource_t", "m_flLatchValue");
-		/// <summary><c>float32</c>. Wrapped by <c>AbilityResource.LatchValue</c> in DeadworksManaged.Api.</summary>
+		/// <summary><c>float32</c>. Networked in build 6779: a write is sent to clients. Wrapped by <c>AbilityResource.LatchValue</c> in DeadworksManaged.Api.</summary>
 		public float m_flLatchValue { get => Get<float>(__m_flLatchValue); set => Set(__m_flLatchValue, value); }
 
 		private static readonly SchemaField __m_flMaxValue = new("AbilityResource_t", "m_flMaxValue");

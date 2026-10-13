@@ -19,11 +19,11 @@ public static partial class Schema {
 
 		private static readonly SchemaField __m_tFirstPickupTime = new("CCitadel_Ability_BaseHeldItem", "m_tFirstPickupTime");
 		/// <summary><c>GameTime_t</c>.</summary>
-		public float m_tFirstPickupTime { get => Get<float>(__m_tFirstPickupTime); set => Set(__m_tFirstPickupTime, value); }
+		public GameTime m_tFirstPickupTime { get => Get<GameTime>(__m_tFirstPickupTime); set => Set(__m_tFirstPickupTime, value); }
 
 		private static readonly SchemaField __m_tLastPickupTime = new("CCitadel_Ability_BaseHeldItem", "m_tLastPickupTime");
 		/// <summary><c>GameTime_t</c>.</summary>
-		public float m_tLastPickupTime { get => Get<float>(__m_tLastPickupTime); set => Set(__m_tLastPickupTime, value); }
+		public GameTime m_tLastPickupTime { get => Get<GameTime>(__m_tLastPickupTime); set => Set(__m_tLastPickupTime, value); }
 
 		/// <summary>The data entry this was created from, as <see cref="CCitadel_Ability_BaseHeldItemVData"/>, or null if it has none.</summary>
 		public new CCitadel_Ability_BaseHeldItemVData? VData => SubclassVData<CCitadel_Ability_BaseHeldItemVData>();

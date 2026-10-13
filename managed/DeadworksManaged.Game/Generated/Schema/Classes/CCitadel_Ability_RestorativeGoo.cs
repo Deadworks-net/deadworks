@@ -14,7 +14,7 @@ public static partial class Schema {
 		static string ISchemaClass<CCitadel_Ability_RestorativeGoo>.NativeName => "CCitadel_Ability_RestorativeGoo";
 
 		private static readonly SchemaField __m_flSelfCastEndTime = new("CCitadel_Ability_RestorativeGoo", "m_flSelfCastEndTime");
-		/// <summary><c>GameTime_t</c>.</summary>
-		public float m_flSelfCastEndTime { get => Get<float>(__m_flSelfCastEndTime); set => Set(__m_flSelfCastEndTime, value); }
+		/// <summary><c>GameTime_t</c>. Networked in build 6779: a write is sent to clients.</summary>
+		public GameTime m_flSelfCastEndTime { get => Get<GameTime>(__m_flSelfCastEndTime); set => Set(__m_flSelfCastEndTime, value); }
 	}
 }

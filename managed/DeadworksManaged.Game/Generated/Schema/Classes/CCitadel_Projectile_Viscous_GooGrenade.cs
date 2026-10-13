@@ -19,14 +19,14 @@ public static partial class Schema {
 
 		private static readonly SchemaField __m_tNextDetonateTime = new("CCitadel_Projectile_Viscous_GooGrenade", "m_tNextDetonateTime");
 		/// <summary><c>GameTime_t</c>.</summary>
-		public float m_tNextDetonateTime { get => Get<float>(__m_tNextDetonateTime); set => Set(__m_tNextDetonateTime, value); }
+		public GameTime m_tNextDetonateTime { get => Get<GameTime>(__m_tNextDetonateTime); set => Set(__m_tNextDetonateTime, value); }
 
 		private static readonly SchemaField __m_vecLastHitTargets = new("CCitadel_Projectile_Viscous_GooGrenade", "m_vecLastHitTargets");
 		/// <summary><c>CUtlVector&lt;CHandle&lt;CBaseEntity&gt;&gt;</c>.</summary>
-		public SchemaHandleList<CBaseEntity> m_vecLastHitTargets => new(this, __m_vecLastHitTargets, -1);
+		public SchemaHandleList<CBaseEntity> m_vecLastHitTargets => new(this, __m_vecLastHitTargets, ListStorage.Vector);
 
 		private static readonly SchemaField __m_vecProjectileHitTargets = new("CCitadel_Projectile_Viscous_GooGrenade", "m_vecProjectileHitTargets");
 		/// <summary><c>CUtlVector&lt;CHandle&lt;CBaseEntity&gt;&gt;</c>.</summary>
-		public SchemaHandleList<CBaseEntity> m_vecProjectileHitTargets => new(this, __m_vecProjectileHitTargets, -1);
+		public SchemaHandleList<CBaseEntity> m_vecProjectileHitTargets => new(this, __m_vecProjectileHitTargets, ListStorage.Vector);
 	}
 }

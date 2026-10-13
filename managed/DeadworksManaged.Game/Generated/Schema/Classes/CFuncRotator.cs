@@ -111,11 +111,11 @@ public static partial class Schema {
 
 		private static readonly SchemaField __m_flTimeRotationStart = new("CFuncRotator", "m_flTimeRotationStart");
 		/// <summary><c>GameTime_t</c>.</summary>
-		public float m_flTimeRotationStart { get => Get<float>(__m_flTimeRotationStart); set => Set(__m_flTimeRotationStart, value); }
+		public GameTime m_flTimeRotationStart { get => Get<GameTime>(__m_flTimeRotationStart); set => Set(__m_flTimeRotationStart, value); }
 
 		private static readonly SchemaField __m_flTimeRotationStop = new("CFuncRotator", "m_flTimeRotationStop");
 		/// <summary><c>GameTime_t</c>.</summary>
-		public float m_flTimeRotationStop { get => Get<float>(__m_flTimeRotationStop); set => Set(__m_flTimeRotationStop, value); }
+		public GameTime m_flTimeRotationStop { get => Get<GameTime>(__m_flTimeRotationStop); set => Set(__m_flTimeRotationStop, value); }
 
 		private static readonly SchemaField __m_flTimeToCompleteRotation = new("CFuncRotator", "m_flTimeToCompleteRotation");
 		/// <summary><c>float32</c>.</summary>
@@ -134,16 +134,16 @@ public static partial class Schema {
 		public CBaseEntity? m_hRotatorTarget { get => GetHandle<CBaseEntity>(__m_hRotatorTarget); set => SetHandle(__m_hRotatorTarget, value); }
 
 		private static readonly SchemaField __m_iszLoopSound = new("CFuncRotator", "m_iszLoopSound");
-		/// <summary><c>CGameSoundEventName</c>. No typed mapping yet: read it through its address.</summary>
-		public RawField m_iszLoopSound => Raw(__m_iszLoopSound, "CGameSoundEventName");
+		/// <summary><c>CGameSoundEventName</c>.</summary>
+		public string m_iszLoopSound => GetString(__m_iszLoopSound);
 
 		private static readonly SchemaField __m_iszStartSound = new("CFuncRotator", "m_iszStartSound");
-		/// <summary><c>CGameSoundEventName</c>. No typed mapping yet: read it through its address.</summary>
-		public RawField m_iszStartSound => Raw(__m_iszStartSound, "CGameSoundEventName");
+		/// <summary><c>CGameSoundEventName</c>.</summary>
+		public string m_iszStartSound => GetString(__m_iszStartSound);
 
 		private static readonly SchemaField __m_iszStopSound = new("CFuncRotator", "m_iszStopSound");
-		/// <summary><c>CGameSoundEventName</c>. No typed mapping yet: read it through its address.</summary>
-		public RawField m_iszStopSound => Raw(__m_iszStopSound, "CGameSoundEventName");
+		/// <summary><c>CGameSoundEventName</c>.</summary>
+		public string m_iszStopSound => GetString(__m_iszStopSound);
 
 		private static readonly SchemaField __m_nTickRotateRan = new("CFuncRotator", "m_nTickRotateRan");
 		/// <summary><c>GameTick_t</c>.</summary>

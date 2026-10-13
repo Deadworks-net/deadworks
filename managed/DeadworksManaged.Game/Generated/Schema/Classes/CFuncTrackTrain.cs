@@ -95,11 +95,11 @@ public static partial class Schema {
 
 		private static readonly SchemaField __m_flNextMPSoundTime = new("CFuncTrackTrain", "m_flNextMPSoundTime");
 		/// <summary><c>GameTime_t</c>.</summary>
-		public float m_flNextMPSoundTime { get => Get<float>(__m_flNextMPSoundTime); set => Set(__m_flNextMPSoundTime, value); }
+		public GameTime m_flNextMPSoundTime { get => Get<GameTime>(__m_flNextMPSoundTime); set => Set(__m_flNextMPSoundTime, value); }
 
 		private static readonly SchemaField __m_flNextMoveSoundTime = new("CFuncTrackTrain", "m_flNextMoveSoundTime");
 		/// <summary><c>GameTime_t</c>.</summary>
-		public float m_flNextMoveSoundTime { get => Get<float>(__m_flNextMoveSoundTime); set => Set(__m_flNextMoveSoundTime, value); }
+		public GameTime m_flNextMoveSoundTime { get => Get<GameTime>(__m_flNextMoveSoundTime); set => Set(__m_flNextMoveSoundTime, value); }
 
 		private static readonly SchemaField __m_flSpeed = new("CFuncTrackTrain", "m_flSpeed");
 		/// <summary><c>float32</c>.</summary>
@@ -107,7 +107,7 @@ public static partial class Schema {
 
 		private static readonly SchemaField __m_flSpeedChangeTime = new("CFuncTrackTrain", "m_flSpeedChangeTime");
 		/// <summary><c>GameTime_t</c>.</summary>
-		public float m_flSpeedChangeTime { get => Get<float>(__m_flSpeedChangeTime); set => Set(__m_flSpeedChangeTime, value); }
+		public GameTime m_flSpeedChangeTime { get => Get<GameTime>(__m_flSpeedChangeTime); set => Set(__m_flSpeedChangeTime, value); }
 
 		private static readonly SchemaField __m_flVolume = new("CFuncTrackTrain", "m_flVolume");
 		/// <summary><c>float32</c>.</summary>
@@ -118,20 +118,20 @@ public static partial class Schema {
 		public float m_height { get => Get<float>(__m_height); set => Set(__m_height, value); }
 
 		private static readonly SchemaField __m_iszSoundMove = new("CFuncTrackTrain", "m_iszSoundMove");
-		/// <summary><c>CGameSoundEventName</c>. No typed mapping yet: read it through its address.</summary>
-		public RawField m_iszSoundMove => Raw(__m_iszSoundMove, "CGameSoundEventName");
+		/// <summary><c>CGameSoundEventName</c>.</summary>
+		public string m_iszSoundMove => GetString(__m_iszSoundMove);
 
 		private static readonly SchemaField __m_iszSoundMovePing = new("CFuncTrackTrain", "m_iszSoundMovePing");
-		/// <summary><c>CGameSoundEventName</c>. No typed mapping yet: read it through its address.</summary>
-		public RawField m_iszSoundMovePing => Raw(__m_iszSoundMovePing, "CGameSoundEventName");
+		/// <summary><c>CGameSoundEventName</c>.</summary>
+		public string m_iszSoundMovePing => GetString(__m_iszSoundMovePing);
 
 		private static readonly SchemaField __m_iszSoundStart = new("CFuncTrackTrain", "m_iszSoundStart");
-		/// <summary><c>CGameSoundEventName</c>. No typed mapping yet: read it through its address.</summary>
-		public RawField m_iszSoundStart => Raw(__m_iszSoundStart, "CGameSoundEventName");
+		/// <summary><c>CGameSoundEventName</c>.</summary>
+		public string m_iszSoundStart => GetString(__m_iszSoundStart);
 
 		private static readonly SchemaField __m_iszSoundStop = new("CFuncTrackTrain", "m_iszSoundStop");
-		/// <summary><c>CGameSoundEventName</c>. No typed mapping yet: read it through its address.</summary>
-		public RawField m_iszSoundStop => Raw(__m_iszSoundStop, "CGameSoundEventName");
+		/// <summary><c>CGameSoundEventName</c>.</summary>
+		public string m_iszSoundStop => GetString(__m_iszSoundStop);
 
 		private static readonly SchemaField __m_lastBlockPos = new("CFuncTrackTrain", "m_lastBlockPos");
 		/// <summary><c>VectorWS</c>.</summary>
@@ -158,8 +158,8 @@ public static partial class Schema {
 		public CPathTrack? m_ppath { get => GetHandle<CPathTrack>(__m_ppath); set => SetHandle(__m_ppath, value); }
 
 		private static readonly SchemaField __m_strPathTarget = new("CFuncTrackTrain", "m_strPathTarget");
-		/// <summary><c>CGameSoundEventName</c>. No typed mapping yet: read it through its address.</summary>
-		public RawField m_strPathTarget => Raw(__m_strPathTarget, "CGameSoundEventName");
+		/// <summary><c>CGameSoundEventName</c>.</summary>
+		public string m_strPathTarget => GetString(__m_strPathTarget);
 
 		private static readonly SchemaField __m_vPosPrev = new("CFuncTrackTrain", "m_vPosPrev");
 		/// <summary><c>Vector</c>.</summary>

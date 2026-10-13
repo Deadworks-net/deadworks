@@ -43,7 +43,7 @@ public static partial class Schema {
 
 		private static readonly SchemaField __m_hTouchingPlayers = new("CTriggerSndSosOpvar", "m_hTouchingPlayers");
 		/// <summary><c>CUtlVector&lt;CHandle&lt;CBaseEntity&gt;&gt;</c>.</summary>
-		public SchemaHandleList<CBaseEntity> m_hTouchingPlayers => new(this, __m_hTouchingPlayers, -1);
+		public SchemaHandleList<CBaseEntity> m_hTouchingPlayers => new(this, __m_hTouchingPlayers, ListStorage.Vector);
 
 		private static readonly SchemaField __m_operatorName = new("CTriggerSndSosOpvar", "m_operatorName");
 		/// <summary><c>CUtlSymbolLarge</c>.</summary>

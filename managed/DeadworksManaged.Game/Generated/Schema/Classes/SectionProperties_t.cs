@@ -19,6 +19,6 @@ public static partial class Schema {
 
 		private static readonly SchemaField __m_vecAbilityProperties = new("SectionProperties_t", "m_vecAbilityProperties");
 		/// <summary><c>CUtlVector&lt;AbilityPropertyInfo_t&gt;</c>. Which ability properties do we want to show in this section?.</summary>
-		public SchemaObjectList<AbilityPropertyInfo_t> m_vecAbilityProperties => new(this, __m_vecAbilityProperties, -1);
+		public SchemaObjectList<AbilityPropertyInfo_t> m_vecAbilityProperties => new(this, __m_vecAbilityProperties, ListStorage.Vector);
 	}
 }

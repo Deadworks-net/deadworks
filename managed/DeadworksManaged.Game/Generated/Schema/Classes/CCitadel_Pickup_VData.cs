@@ -206,8 +206,8 @@ public static partial class Schema {
 		public string m_sBuffTypeLocString => GetString(__m_sBuffTypeLocString);
 
 		private static readonly SchemaField __m_sDefaultMaterialGroupName = new("CCitadel_Pickup_VData", "m_sDefaultMaterialGroupName");
-		/// <summary><c>CModelMaterialGroupName</c>. Which material group of the model should be used?. No typed mapping yet: read it through its address.</summary>
-		public RawField m_sDefaultMaterialGroupName => Raw(__m_sDefaultMaterialGroupName, "CModelMaterialGroupName");
+		/// <summary><c>CModelMaterialGroupName</c>. Which material group of the model should be used?.</summary>
+		public string m_sDefaultMaterialGroupName => GetString(__m_sDefaultMaterialGroupName);
 
 		private static readonly SchemaField __m_sHitSound = new("CCitadel_Pickup_VData", "m_sHitSound");
 		/// <summary><c>CSoundEventName</c>. On Punched Sound.</summary>

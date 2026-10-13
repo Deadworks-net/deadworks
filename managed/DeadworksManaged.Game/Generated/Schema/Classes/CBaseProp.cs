@@ -26,7 +26,7 @@ public static partial class Schema {
 		public int m_iShapeType { get => Get<int>(__m_iShapeType); set => Set(__m_iShapeType, value); }
 
 		private static readonly SchemaField __m_mPreferredCatchTransform = new("CBaseProp", "m_mPreferredCatchTransform");
-		/// <summary><c>CTransform</c>. No typed mapping yet: read it through its address.</summary>
-		public RawField m_mPreferredCatchTransform => Raw(__m_mPreferredCatchTransform, "CTransform");
+		/// <summary><c>CTransform</c>.</summary>
+		public Transform m_mPreferredCatchTransform { get => Get<Transform>(__m_mPreferredCatchTransform); set => Set(__m_mPreferredCatchTransform, value); }
 	}
 }

@@ -14,27 +14,27 @@ public static partial class Schema {
 		static string ISchemaClass<CPlayerVisibility>.NativeName => "CPlayerVisibility";
 
 		private static readonly SchemaField __m_bIsEnabled = new("CPlayerVisibility", "m_bIsEnabled");
-		/// <summary><c>bool</c>.</summary>
+		/// <summary><c>bool</c>. Networked in build 6779: a write is sent to clients.</summary>
 		public bool m_bIsEnabled { get => Get<bool>(__m_bIsEnabled); set => Set(__m_bIsEnabled, value); }
 
 		private static readonly SchemaField __m_bStartDisabled = new("CPlayerVisibility", "m_bStartDisabled");
-		/// <summary><c>bool</c>.</summary>
+		/// <summary><c>bool</c>. Networked in build 6779: a write is sent to clients.</summary>
 		public bool m_bStartDisabled { get => Get<bool>(__m_bStartDisabled); set => Set(__m_bStartDisabled, value); }
 
 		private static readonly SchemaField __m_flFadeTime = new("CPlayerVisibility", "m_flFadeTime");
-		/// <summary><c>float32</c>.</summary>
+		/// <summary><c>float32</c>. Networked in build 6779: a write is sent to clients.</summary>
 		public float m_flFadeTime { get => Get<float>(__m_flFadeTime); set => Set(__m_flFadeTime, value); }
 
 		private static readonly SchemaField __m_flFogDistanceMultiplier = new("CPlayerVisibility", "m_flFogDistanceMultiplier");
-		/// <summary><c>float32</c>.</summary>
+		/// <summary><c>float32</c>. Networked in build 6779: a write is sent to clients.</summary>
 		public float m_flFogDistanceMultiplier { get => Get<float>(__m_flFogDistanceMultiplier); set => Set(__m_flFogDistanceMultiplier, value); }
 
 		private static readonly SchemaField __m_flFogMaxDensityMultiplier = new("CPlayerVisibility", "m_flFogMaxDensityMultiplier");
-		/// <summary><c>float32</c>.</summary>
+		/// <summary><c>float32</c>. Networked in build 6779: a write is sent to clients.</summary>
 		public float m_flFogMaxDensityMultiplier { get => Get<float>(__m_flFogMaxDensityMultiplier); set => Set(__m_flFogMaxDensityMultiplier, value); }
 
 		private static readonly SchemaField __m_flVisibilityStrength = new("CPlayerVisibility", "m_flVisibilityStrength");
-		/// <summary><c>float32</c>.</summary>
+		/// <summary><c>float32</c>. Networked in build 6779: a write is sent to clients.</summary>
 		public float m_flVisibilityStrength { get => Get<float>(__m_flVisibilityStrength); set => Set(__m_flVisibilityStrength, value); }
 
 		/// <summary>Fires the <c>Disable</c> input.</summary>

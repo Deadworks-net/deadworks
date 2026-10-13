@@ -27,7 +27,7 @@ public static partial class Schema {
 
 		private static readonly SchemaField __m_stopTime = new("CEnvTilt", "m_stopTime");
 		/// <summary><c>GameTime_t</c>.</summary>
-		public float m_stopTime { get => Get<float>(__m_stopTime); set => Set(__m_stopTime, value); }
+		public GameTime m_stopTime { get => Get<GameTime>(__m_stopTime); set => Set(__m_stopTime, value); }
 
 		/// <summary>Fires the <c>StartTilt</c> input.</summary>
 		public void InputStartTilt() => FireInput("StartTilt");

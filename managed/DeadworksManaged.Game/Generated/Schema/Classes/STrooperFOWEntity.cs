@@ -14,15 +14,15 @@ public static partial class Schema {
 		static string ISchemaClass<STrooperFOWEntity>.NativeName => "STrooperFOWEntity";
 
 		private static readonly SchemaField __m_nFlags = new("STrooperFOWEntity", "m_nFlags");
-		/// <summary><c>uint8</c>.</summary>
+		/// <summary><c>uint8</c>. Networked in build 6779: a write is sent to clients.</summary>
 		public byte m_nFlags { get => Get<byte>(__m_nFlags); set => Set(__m_nFlags, value); }
 
 		private static readonly SchemaField __m_nPosX = new("STrooperFOWEntity", "m_nPosX");
-		/// <summary><c>uint8</c>.</summary>
+		/// <summary><c>uint8</c>. Networked in build 6779: a write is sent to clients.</summary>
 		public byte m_nPosX { get => Get<byte>(__m_nPosX); set => Set(__m_nPosX, value); }
 
 		private static readonly SchemaField __m_nPosY = new("STrooperFOWEntity", "m_nPosY");
-		/// <summary><c>uint8</c>.</summary>
+		/// <summary><c>uint8</c>. Networked in build 6779: a write is sent to clients.</summary>
 		public byte m_nPosY { get => Get<byte>(__m_nPosY); set => Set(__m_nPosY, value); }
 	}
 }

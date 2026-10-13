@@ -14,19 +14,19 @@ public static partial class Schema {
 		static string ISchemaClass<CCitadel_Ability_Frank_Revive>.NativeName => "CCitadel_Ability_Frank_Revive";
 
 		private static readonly SchemaField __m_TimeOfDeath = new("CCitadel_Ability_Frank_Revive", "m_TimeOfDeath");
-		/// <summary><c>GameTime_t</c>.</summary>
-		public float m_TimeOfDeath { get => Get<float>(__m_TimeOfDeath); set => Set(__m_TimeOfDeath, value); }
+		/// <summary><c>GameTime_t</c>. Networked in build 6779: a write is sent to clients.</summary>
+		public GameTime m_TimeOfDeath { get => Get<GameTime>(__m_TimeOfDeath); set => Set(__m_TimeOfDeath, value); }
 
 		private static readonly SchemaField __m_TimeOfRevive = new("CCitadel_Ability_Frank_Revive", "m_TimeOfRevive");
-		/// <summary><c>GameTime_t</c>.</summary>
-		public float m_TimeOfRevive { get => Get<float>(__m_TimeOfRevive); set => Set(__m_TimeOfRevive, value); }
+		/// <summary><c>GameTime_t</c>. Networked in build 6779: a write is sent to clients.</summary>
+		public GameTime m_TimeOfRevive { get => Get<GameTime>(__m_TimeOfRevive); set => Set(__m_TimeOfRevive, value); }
 
 		private static readonly SchemaField __m_bReviveIsActive = new("CCitadel_Ability_Frank_Revive", "m_bReviveIsActive");
-		/// <summary><c>bool</c>.</summary>
+		/// <summary><c>bool</c>. Networked in build 6779: a write is sent to clients.</summary>
 		public bool m_bReviveIsActive { get => Get<bool>(__m_bReviveIsActive); set => Set(__m_bReviveIsActive, value); }
 
 		private static readonly SchemaField __m_flTotalPendingHeal = new("CCitadel_Ability_Frank_Revive", "m_flTotalPendingHeal");
-		/// <summary><c>float32</c>.</summary>
+		/// <summary><c>float32</c>. Networked in build 6779: a write is sent to clients.</summary>
 		public float m_flTotalPendingHeal { get => Get<float>(__m_flTotalPendingHeal); set => Set(__m_flTotalPendingHeal, value); }
 
 		/// <summary>The data entry this was created from, as <see cref="CCitadel_Ability_Frank_ReviveVData"/>, or null if it has none.</summary>

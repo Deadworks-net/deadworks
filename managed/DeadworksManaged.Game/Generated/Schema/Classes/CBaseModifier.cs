@@ -39,11 +39,11 @@ public static partial class Schema {
 
 		private static readonly SchemaField __m_flAsyncThinkIntervalStartTime = new("CBaseModifier", "m_flAsyncThinkIntervalStartTime");
 		/// <summary><c>GameTime_t</c>.</summary>
-		public float m_flAsyncThinkIntervalStartTime { get => Get<float>(__m_flAsyncThinkIntervalStartTime); set => Set(__m_flAsyncThinkIntervalStartTime, value); }
+		public GameTime m_flAsyncThinkIntervalStartTime { get => Get<GameTime>(__m_flAsyncThinkIntervalStartTime); set => Set(__m_flAsyncThinkIntervalStartTime, value); }
 
 		private static readonly SchemaField __m_flCreationTime = new("CBaseModifier", "m_flCreationTime");
 		/// <summary><c>GameTime_t</c>.</summary>
-		public float m_flCreationTime { get => Get<float>(__m_flCreationTime); set => Set(__m_flCreationTime, value); }
+		public GameTime m_flCreationTime { get => Get<GameTime>(__m_flCreationTime); set => Set(__m_flCreationTime, value); }
 
 		private static readonly SchemaField __m_flDuration = new("CBaseModifier", "m_flDuration");
 		/// <summary><c>float32</c>.</summary>
@@ -51,11 +51,11 @@ public static partial class Schema {
 
 		private static readonly SchemaField __m_flLastAppliedTime = new("CBaseModifier", "m_flLastAppliedTime");
 		/// <summary><c>GameTime_t</c>.</summary>
-		public float m_flLastAppliedTime { get => Get<float>(__m_flLastAppliedTime); set => Set(__m_flLastAppliedTime, value); }
+		public GameTime m_flLastAppliedTime { get => Get<GameTime>(__m_flLastAppliedTime); set => Set(__m_flLastAppliedTime, value); }
 
 		private static readonly SchemaField __m_flLastThinkTime = new("CBaseModifier", "m_flLastThinkTime");
 		/// <summary><c>GameTime_t</c>.</summary>
-		public float m_flLastThinkTime { get => Get<float>(__m_flLastThinkTime); set => Set(__m_flLastThinkTime, value); }
+		public GameTime m_flLastThinkTime { get => Get<GameTime>(__m_flLastThinkTime); set => Set(__m_flLastThinkTime, value); }
 
 		private static readonly SchemaField __m_flThinkInterval = new("CBaseModifier", "m_flThinkInterval");
 		/// <summary><c>float32</c>.</summary>
@@ -63,7 +63,7 @@ public static partial class Schema {
 
 		private static readonly SchemaField __m_flThinkIntervalStartTime = new("CBaseModifier", "m_flThinkIntervalStartTime");
 		/// <summary><c>GameTime_t</c>.</summary>
-		public float m_flThinkIntervalStartTime { get => Get<float>(__m_flThinkIntervalStartTime); set => Set(__m_flThinkIntervalStartTime, value); }
+		public GameTime m_flThinkIntervalStartTime { get => Get<GameTime>(__m_flThinkIntervalStartTime); set => Set(__m_flThinkIntervalStartTime, value); }
 
 		private static readonly SchemaField __m_flTimeScale = new("CBaseModifier", "m_flTimeScale");
 		/// <summary><c>float32</c>.</summary>

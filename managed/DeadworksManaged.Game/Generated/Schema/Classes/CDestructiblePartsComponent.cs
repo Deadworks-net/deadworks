@@ -18,7 +18,7 @@ public static partial class Schema {
 		public CNetworkVarChainer __m_pChainEntity => Embedded<CNetworkVarChainer>(____m_pChainEntity);
 
 		private static readonly SchemaField __m_hOwner = new("CDestructiblePartsComponent", "m_hOwner");
-		/// <summary><c>CHandle&lt;CBaseModelEntity&gt;</c>.</summary>
+		/// <summary><c>CHandle&lt;CBaseModelEntity&gt;</c>. Networked in build 6779: a write is sent to clients.</summary>
 		public CBaseModelEntity? m_hOwner { get => GetHandle<CBaseModelEntity>(__m_hOwner); set => SetHandle(__m_hOwner, value); }
 
 		private static readonly SchemaField __m_pAnimGraphDestructibleGraphController = new("CDestructiblePartsComponent", "m_pAnimGraphDestructibleGraphController");
@@ -27,6 +27,6 @@ public static partial class Schema {
 
 		private static readonly SchemaField __m_vecDamageTakenByHitGroup = new("CDestructiblePartsComponent", "m_vecDamageTakenByHitGroup");
 		/// <summary><c>CUtlVector&lt;uint16&gt;</c>.</summary>
-		public SchemaValueList<ushort> m_vecDamageTakenByHitGroup => new(this, __m_vecDamageTakenByHitGroup, -1);
+		public SchemaValueList<ushort> m_vecDamageTakenByHitGroup => new(this, __m_vecDamageTakenByHitGroup, ListStorage.Vector);
 	}
 }

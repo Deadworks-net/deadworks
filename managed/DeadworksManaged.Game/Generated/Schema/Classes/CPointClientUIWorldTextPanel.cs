@@ -14,7 +14,7 @@ public static partial class Schema {
 		static string ISchemaClass<CPointClientUIWorldTextPanel>.NativeName => "CPointClientUIWorldTextPanel";
 
 		private static readonly SchemaField __m_messageText = new("CPointClientUIWorldTextPanel", "m_messageText");
-		/// <summary><c>char[512]</c>.</summary>
+		/// <summary><c>char[512]</c>. Networked in build 6779: a write is sent to clients.</summary>
 		public string m_messageText => GetChars(__m_messageText, 512);
 
 		/// <summary>Fires the <c>SetIntMessage</c> input.</summary>

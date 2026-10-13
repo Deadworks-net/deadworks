@@ -18,64 +18,64 @@ public static partial class Schema {
 		public bool m_bGradientFogNeedsTextures { get => Get<bool>(__m_bGradientFogNeedsTextures); set => Set(__m_bGradientFogNeedsTextures, value); }
 
 		private static readonly SchemaField __m_bHeightFogEnabled = new("CGradientFog", "m_bHeightFogEnabled");
-		/// <summary><c>bool</c>.</summary>
+		/// <summary><c>bool</c>. Networked in build 6779: a write is sent to clients.</summary>
 		public bool m_bHeightFogEnabled { get => Get<bool>(__m_bHeightFogEnabled); set => Set(__m_bHeightFogEnabled, value); }
 
 		private static readonly SchemaField __m_bIsEnabled = new("CGradientFog", "m_bIsEnabled");
-		/// <summary><c>bool</c>.</summary>
+		/// <summary><c>bool</c>. Networked in build 6779: a write is sent to clients.</summary>
 		public bool m_bIsEnabled { get => Get<bool>(__m_bIsEnabled); set => Set(__m_bIsEnabled, value); }
 
 		private static readonly SchemaField __m_bStartDisabled = new("CGradientFog", "m_bStartDisabled");
-		/// <summary><c>bool</c>.</summary>
+		/// <summary><c>bool</c>. Networked in build 6779: a write is sent to clients.</summary>
 		public bool m_bStartDisabled { get => Get<bool>(__m_bStartDisabled); set => Set(__m_bStartDisabled, value); }
 
 		private static readonly SchemaField __m_flFadeTime = new("CGradientFog", "m_flFadeTime");
-		/// <summary><c>float32</c>.</summary>
+		/// <summary><c>float32</c>. Networked in build 6779: a write is sent to clients.</summary>
 		public float m_flFadeTime { get => Get<float>(__m_flFadeTime); set => Set(__m_flFadeTime, value); }
 
 		private static readonly SchemaField __m_flFarZ = new("CGradientFog", "m_flFarZ");
-		/// <summary><c>float32</c>.</summary>
+		/// <summary><c>float32</c>. Networked in build 6779: a write is sent to clients.</summary>
 		public float m_flFarZ { get => Get<float>(__m_flFarZ); set => Set(__m_flFarZ, value); }
 
 		private static readonly SchemaField __m_flFogEndDistance = new("CGradientFog", "m_flFogEndDistance");
-		/// <summary><c>float32</c>.</summary>
+		/// <summary><c>float32</c>. Networked in build 6779: a write is sent to clients.</summary>
 		public float m_flFogEndDistance { get => Get<float>(__m_flFogEndDistance); set => Set(__m_flFogEndDistance, value); }
 
 		private static readonly SchemaField __m_flFogEndHeight = new("CGradientFog", "m_flFogEndHeight");
-		/// <summary><c>float32</c>.</summary>
+		/// <summary><c>float32</c>. Networked in build 6779: a write is sent to clients.</summary>
 		public float m_flFogEndHeight { get => Get<float>(__m_flFogEndHeight); set => Set(__m_flFogEndHeight, value); }
 
 		private static readonly SchemaField __m_flFogFalloffExponent = new("CGradientFog", "m_flFogFalloffExponent");
-		/// <summary><c>float32</c>.</summary>
+		/// <summary><c>float32</c>. Networked in build 6779: a write is sent to clients.</summary>
 		public float m_flFogFalloffExponent { get => Get<float>(__m_flFogFalloffExponent); set => Set(__m_flFogFalloffExponent, value); }
 
 		private static readonly SchemaField __m_flFogMaxOpacity = new("CGradientFog", "m_flFogMaxOpacity");
-		/// <summary><c>float32</c>.</summary>
+		/// <summary><c>float32</c>. Networked in build 6779: a write is sent to clients.</summary>
 		public float m_flFogMaxOpacity { get => Get<float>(__m_flFogMaxOpacity); set => Set(__m_flFogMaxOpacity, value); }
 
 		private static readonly SchemaField __m_flFogStartDistance = new("CGradientFog", "m_flFogStartDistance");
-		/// <summary><c>float32</c>.</summary>
+		/// <summary><c>float32</c>. Networked in build 6779: a write is sent to clients.</summary>
 		public float m_flFogStartDistance { get => Get<float>(__m_flFogStartDistance); set => Set(__m_flFogStartDistance, value); }
 
 		private static readonly SchemaField __m_flFogStartHeight = new("CGradientFog", "m_flFogStartHeight");
-		/// <summary><c>float32</c>.</summary>
+		/// <summary><c>float32</c>. Networked in build 6779: a write is sent to clients.</summary>
 		public float m_flFogStartHeight { get => Get<float>(__m_flFogStartHeight); set => Set(__m_flFogStartHeight, value); }
 
 		private static readonly SchemaField __m_flFogStrength = new("CGradientFog", "m_flFogStrength");
-		/// <summary><c>float32</c>.</summary>
+		/// <summary><c>float32</c>. Networked in build 6779: a write is sent to clients.</summary>
 		public float m_flFogStrength { get => Get<float>(__m_flFogStrength); set => Set(__m_flFogStrength, value); }
 
 		private static readonly SchemaField __m_flFogVerticalExponent = new("CGradientFog", "m_flFogVerticalExponent");
-		/// <summary><c>float32</c>.</summary>
+		/// <summary><c>float32</c>. Networked in build 6779: a write is sent to clients.</summary>
 		public float m_flFogVerticalExponent { get => Get<float>(__m_flFogVerticalExponent); set => Set(__m_flFogVerticalExponent, value); }
 
 		private static readonly SchemaField __m_fogColor = new("CGradientFog", "m_fogColor");
-		/// <summary><c>Color</c>.</summary>
+		/// <summary><c>Color</c>. Networked in build 6779: a write is sent to clients.</summary>
 		public Color32 m_fogColor { get => Get<Color32>(__m_fogColor); set => Set(__m_fogColor, value); }
 
 		private static readonly SchemaField __m_hGradientFogTexture = new("CGradientFog", "m_hGradientFogTexture");
-		/// <summary><c>CStrongHandle&lt;InfoForResourceTypeCTextureBase&gt;</c>. No typed mapping yet: read it through its address.</summary>
-		public RawField m_hGradientFogTexture => Raw(__m_hGradientFogTexture, "CStrongHandle<InfoForResourceTypeCTextureBase>");
+		/// <summary><c>CStrongHandle&lt;InfoForResourceTypeCTextureBase&gt;</c>. Networked in build 6779: a write is sent to clients.</summary>
+		public ResourceHandle m_hGradientFogTexture { get => Get<ResourceHandle>(__m_hGradientFogTexture); set => Set(__m_hGradientFogTexture, value); }
 
 		/// <summary>Fires the <c>Disable</c> input.</summary>
 		public void InputDisable(bool value) => FireInput("Disable", Spawner.InputText(value));

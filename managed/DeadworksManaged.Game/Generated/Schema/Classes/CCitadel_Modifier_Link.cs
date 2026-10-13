@@ -15,11 +15,11 @@ public static partial class Schema {
 
 		private static readonly SchemaField __m_flPortalEndTime = new("CCitadel_Modifier_Link", "m_flPortalEndTime");
 		/// <summary><c>GameTime_t</c>.</summary>
-		public float m_flPortalEndTime { get => Get<float>(__m_flPortalEndTime); set => Set(__m_flPortalEndTime, value); }
+		public GameTime m_flPortalEndTime { get => Get<GameTime>(__m_flPortalEndTime); set => Set(__m_flPortalEndTime, value); }
 
 		private static readonly SchemaField __m_flPortalStartTime = new("CCitadel_Modifier_Link", "m_flPortalStartTime");
 		/// <summary><c>GameTime_t</c>.</summary>
-		public float m_flPortalStartTime { get => Get<float>(__m_flPortalStartTime); set => Set(__m_flPortalStartTime, value); }
+		public GameTime m_flPortalStartTime { get => Get<GameTime>(__m_flPortalStartTime); set => Set(__m_flPortalStartTime, value); }
 
 		private static readonly SchemaField __m_hPortalToSource = new("CCitadel_Modifier_Link", "m_hPortalToSource");
 		/// <summary><c>CHandle&lt;CCitadelPortalTrigger&gt;</c>.</summary>

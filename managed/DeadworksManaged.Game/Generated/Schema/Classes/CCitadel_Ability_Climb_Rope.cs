@@ -22,35 +22,35 @@ public static partial class Schema {
 		public bool m_bNoDelayNeeded { get => Get<bool>(__m_bNoDelayNeeded); set => Set(__m_bNoDelayNeeded, value); }
 
 		private static readonly SchemaField __m_bRequestJumpToRoof = new("CCitadel_Ability_Climb_Rope", "m_bRequestJumpToRoof");
-		/// <summary><c>bool</c>.</summary>
+		/// <summary><c>bool</c>. Networked in build 6779: a write is sent to clients.</summary>
 		public bool m_bRequestJumpToRoof { get => Get<bool>(__m_bRequestJumpToRoof); set => Set(__m_bRequestJumpToRoof, value); }
 
 		private static readonly SchemaField __m_bRequestStopClimbing = new("CCitadel_Ability_Climb_Rope", "m_bRequestStopClimbing");
-		/// <summary><c>bool</c>.</summary>
+		/// <summary><c>bool</c>. Networked in build 6779: a write is sent to clients.</summary>
 		public bool m_bRequestStopClimbing { get => Get<bool>(__m_bRequestStopClimbing); set => Set(__m_bRequestStopClimbing, value); }
 
 		private static readonly SchemaField __m_eClimbState = new("CCitadel_Ability_Climb_Rope", "m_eClimbState");
-		/// <summary><c>EClimbRopeState_t</c>.</summary>
+		/// <summary><c>EClimbRopeState_t</c>. Networked in build 6779: a write is sent to clients.</summary>
 		public EClimbRopeState_t m_eClimbState { get => Get<EClimbRopeState_t>(__m_eClimbState); set => Set(__m_eClimbState, value); }
 
 		private static readonly SchemaField __m_flActivatePressTime = new("CCitadel_Ability_Climb_Rope", "m_flActivatePressTime");
 		/// <summary><c>GameTime_t</c>.</summary>
-		public float m_flActivatePressTime { get => Get<float>(__m_flActivatePressTime); set => Set(__m_flActivatePressTime, value); }
+		public GameTime m_flActivatePressTime { get => Get<GameTime>(__m_flActivatePressTime); set => Set(__m_flActivatePressTime, value); }
 
 		private static readonly SchemaField __m_flClimbStartTime = new("CCitadel_Ability_Climb_Rope", "m_flClimbStartTime");
 		/// <summary><c>GameTime_t</c>.</summary>
-		public float m_flClimbStartTime { get => Get<float>(__m_flClimbStartTime); set => Set(__m_flClimbStartTime, value); }
+		public GameTime m_flClimbStartTime { get => Get<GameTime>(__m_flClimbStartTime); set => Set(__m_flClimbStartTime, value); }
 
 		private static readonly SchemaField __m_flDisconnectTime = new("CCitadel_Ability_Climb_Rope", "m_flDisconnectTime");
 		/// <summary><c>GameTime_t</c>.</summary>
-		public float m_flDisconnectTime { get => Get<float>(__m_flDisconnectTime); set => Set(__m_flDisconnectTime, value); }
+		public GameTime m_flDisconnectTime { get => Get<GameTime>(__m_flDisconnectTime); set => Set(__m_flDisconnectTime, value); }
 
 		private static readonly SchemaField __m_flMoveDownStartTime = new("CCitadel_Ability_Climb_Rope", "m_flMoveDownStartTime");
-		/// <summary><c>GameTime_t</c>.</summary>
-		public float m_flMoveDownStartTime { get => Get<float>(__m_flMoveDownStartTime); set => Set(__m_flMoveDownStartTime, value); }
+		/// <summary><c>GameTime_t</c>. Networked in build 6779: a write is sent to clients.</summary>
+		public GameTime m_flMoveDownStartTime { get => Get<GameTime>(__m_flMoveDownStartTime); set => Set(__m_flMoveDownStartTime, value); }
 
 		private static readonly SchemaField __m_vBottom = new("CCitadel_Ability_Climb_Rope", "m_vBottom");
-		/// <summary><c>CNetworkOriginQuantizedVectorWS</c>.</summary>
+		/// <summary><c>CNetworkOriginQuantizedVectorWS</c>. Networked in build 6779: a write is sent to clients.</summary>
 		public CNetworkOriginQuantizedVectorWS m_vBottom => Embedded<CNetworkOriginQuantizedVectorWS>(__m_vBottom);
 
 		private static readonly SchemaField __m_vLastPos = new("CCitadel_Ability_Climb_Rope", "m_vLastPos");
@@ -58,7 +58,7 @@ public static partial class Schema {
 		public Vector3 m_vLastPos { get => Get<Vector3>(__m_vLastPos); set => Set(__m_vLastPos, value); }
 
 		private static readonly SchemaField __m_vTop = new("CCitadel_Ability_Climb_Rope", "m_vTop");
-		/// <summary><c>CNetworkOriginQuantizedVectorWS</c>.</summary>
+		/// <summary><c>CNetworkOriginQuantizedVectorWS</c>. Networked in build 6779: a write is sent to clients.</summary>
 		public CNetworkOriginQuantizedVectorWS m_vTop => Embedded<CNetworkOriginQuantizedVectorWS>(__m_vTop);
 
 		/// <summary>The data entry this was created from, as <see cref="CCitadel_Ability_Climb_RopeVData"/>, or null if it has none.</summary>

@@ -15,7 +15,7 @@ public static partial class Schema {
 
 		private static readonly SchemaField __m_Arpeggiators = new("CitadelMusicCueData_t", "m_Arpeggiators");
 		/// <summary><c>CUtlVector&lt;CUtlString&gt;</c>.</summary>
-		public SchemaStringList m_Arpeggiators => new(this, __m_Arpeggiators, -1);
+		public SchemaStringList m_Arpeggiators => new(this, __m_Arpeggiators, ListStorage.Vector);
 
 		private static readonly SchemaField __m_Chords = new("CitadelMusicCueData_t", "m_Chords");
 		/// <summary><c>CUtlOrderedMap&lt;CUtlString, CitadelMusicChord_t&gt;</c>.</summary>
@@ -23,7 +23,7 @@ public static partial class Schema {
 
 		private static readonly SchemaField __m_SyncTimes = new("CitadelMusicCueData_t", "m_SyncTimes");
 		/// <summary><c>CUtlVector&lt;float32&gt;</c>.</summary>
-		public SchemaValueList<float> m_SyncTimes => new(this, __m_SyncTimes, -1);
+		public SchemaValueList<float> m_SyncTimes => new(this, __m_SyncTimes, ListStorage.Vector);
 
 		private static readonly SchemaField __m_bInterruptStop = new("CitadelMusicCueData_t", "m_bInterruptStop");
 		/// <summary><c>bool</c>.</summary>

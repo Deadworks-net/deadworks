@@ -19,7 +19,7 @@ public static partial class Schema {
 
 		private static readonly SchemaField __m_flEndTime = new("CAI_MotorServices::MovementGaitRequest_t", "m_flEndTime");
 		/// <summary><c>GameTime_t</c>.</summary>
-		public float m_flEndTime { get => Get<float>(__m_flEndTime); set => Set(__m_flEndTime, value); }
+		public GameTime m_flEndTime { get => Get<GameTime>(__m_flEndTime); set => Set(__m_flEndTime, value); }
 
 		private static readonly SchemaField __m_flSpeed = new("CAI_MotorServices::MovementGaitRequest_t", "m_flSpeed");
 		/// <summary><c>float32</c>.</summary>

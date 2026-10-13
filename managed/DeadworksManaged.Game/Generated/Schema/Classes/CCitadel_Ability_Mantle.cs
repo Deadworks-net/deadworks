@@ -14,43 +14,43 @@ public static partial class Schema {
 		static string ISchemaClass<CCitadel_Ability_Mantle>.NativeName => "CCitadel_Ability_Mantle";
 
 		private static readonly SchemaField __m_angFacing = new("CCitadel_Ability_Mantle", "m_angFacing");
-		/// <summary><c>QAngle</c>.</summary>
+		/// <summary><c>QAngle</c>. Networked in build 6779: a write is sent to clients.</summary>
 		public Vector3 m_angFacing { get => Get<Vector3>(__m_angFacing); set => Set(__m_angFacing, value); }
 
 		private static readonly SchemaField __m_flAutoMantleLastPushTime = new("CCitadel_Ability_Mantle", "m_flAutoMantleLastPushTime");
-		/// <summary><c>GameTime_t</c>.</summary>
-		public float m_flAutoMantleLastPushTime { get => Get<float>(__m_flAutoMantleLastPushTime); set => Set(__m_flAutoMantleLastPushTime, value); }
+		/// <summary><c>GameTime_t</c>. Networked in build 6779: a write is sent to clients.</summary>
+		public GameTime m_flAutoMantleLastPushTime { get => Get<GameTime>(__m_flAutoMantleLastPushTime); set => Set(__m_flAutoMantleLastPushTime, value); }
 
 		private static readonly SchemaField __m_flAutoMantlePushStartTime = new("CCitadel_Ability_Mantle", "m_flAutoMantlePushStartTime");
-		/// <summary><c>GameTime_t</c>.</summary>
-		public float m_flAutoMantlePushStartTime { get => Get<float>(__m_flAutoMantlePushStartTime); set => Set(__m_flAutoMantlePushStartTime, value); }
+		/// <summary><c>GameTime_t</c>. Networked in build 6779: a write is sent to clients.</summary>
+		public GameTime m_flAutoMantlePushStartTime { get => Get<GameTime>(__m_flAutoMantlePushStartTime); set => Set(__m_flAutoMantlePushStartTime, value); }
 
 		private static readonly SchemaField __m_flHorizGap = new("CCitadel_Ability_Mantle", "m_flHorizGap");
-		/// <summary><c>float32</c>.</summary>
+		/// <summary><c>float32</c>. Networked in build 6779: a write is sent to clients.</summary>
 		public float m_flHorizGap { get => Get<float>(__m_flHorizGap); set => Set(__m_flHorizGap, value); }
 
 		private static readonly SchemaField __m_flStartTime = new("CCitadel_Ability_Mantle", "m_flStartTime");
-		/// <summary><c>GameTime_t</c>.</summary>
-		public float m_flStartTime { get => Get<float>(__m_flStartTime); set => Set(__m_flStartTime, value); }
+		/// <summary><c>GameTime_t</c>. Networked in build 6779: a write is sent to clients.</summary>
+		public GameTime m_flStartTime { get => Get<GameTime>(__m_flStartTime); set => Set(__m_flStartTime, value); }
 
 		private static readonly SchemaField __m_flVertOffset = new("CCitadel_Ability_Mantle", "m_flVertOffset");
-		/// <summary><c>float32</c>.</summary>
+		/// <summary><c>float32</c>. Networked in build 6779: a write is sent to clients.</summary>
 		public float m_flVertOffset { get => Get<float>(__m_flVertOffset); set => Set(__m_flVertOffset, value); }
 
 		private static readonly SchemaField __m_nMantleTypeIndex = new("CCitadel_Ability_Mantle", "m_nMantleTypeIndex");
-		/// <summary><c>int32</c>.</summary>
+		/// <summary><c>int32</c>. Networked in build 6779: a write is sent to clients.</summary>
 		public int m_nMantleTypeIndex { get => Get<int>(__m_nMantleTypeIndex); set => Set(__m_nMantleTypeIndex, value); }
 
 		private static readonly SchemaField __m_vAutoMantleLastPushPos = new("CCitadel_Ability_Mantle", "m_vAutoMantleLastPushPos");
-		/// <summary><c>VectorWS</c>.</summary>
+		/// <summary><c>VectorWS</c>. Networked in build 6779: a write is sent to clients.</summary>
 		public Vector3 m_vAutoMantleLastPushPos { get => Get<Vector3>(__m_vAutoMantleLastPushPos); set => Set(__m_vAutoMantleLastPushPos, value); }
 
 		private static readonly SchemaField __m_vStartPos = new("CCitadel_Ability_Mantle", "m_vStartPos");
-		/// <summary><c>VectorWS</c>.</summary>
+		/// <summary><c>VectorWS</c>. Networked in build 6779: a write is sent to clients.</summary>
 		public Vector3 m_vStartPos { get => Get<Vector3>(__m_vStartPos); set => Set(__m_vStartPos, value); }
 
 		private static readonly SchemaField __m_vTargetPos = new("CCitadel_Ability_Mantle", "m_vTargetPos");
-		/// <summary><c>VectorWS</c>.</summary>
+		/// <summary><c>VectorWS</c>. Networked in build 6779: a write is sent to clients.</summary>
 		public Vector3 m_vTargetPos { get => Get<Vector3>(__m_vTargetPos); set => Set(__m_vTargetPos, value); }
 	}
 }

@@ -14,8 +14,8 @@ public static partial class Schema {
 		static string ISchemaClass<CBasePlayerPawn>.NativeName => "CBasePlayerPawn";
 
 		private static readonly SchemaField __m_ServerViewAngleChanges = new("CBasePlayerPawn", "m_ServerViewAngleChanges");
-		/// <summary><c>CUtlVectorEmbeddedNetworkVar&lt;ViewAngleServerChange_t&gt;</c>.</summary>
-		public SchemaObjectList<ViewAngleServerChange_t> m_ServerViewAngleChanges => new(this, __m_ServerViewAngleChanges, -1);
+		/// <summary><c>CUtlVectorEmbeddedNetworkVar&lt;ViewAngleServerChange_t&gt;</c>. Networked in build 6779: a write is sent to clients.</summary>
+		public SchemaObjectList<ViewAngleServerChange_t> m_ServerViewAngleChanges => new(this, __m_ServerViewAngleChanges, ListStorage.Vector);
 
 		private static readonly SchemaField __m_fHltvReplayDelay = new("CBasePlayerPawn", "m_fHltvReplayDelay");
 		/// <summary><c>float32</c>.</summary>
@@ -31,26 +31,26 @@ public static partial class Schema {
 
 		private static readonly SchemaField __m_fNextSuicideTime = new("CBasePlayerPawn", "m_fNextSuicideTime");
 		/// <summary><c>GameTime_t</c>.</summary>
-		public float m_fNextSuicideTime { get => Get<float>(__m_fNextSuicideTime); set => Set(__m_fNextSuicideTime, value); }
+		public GameTime m_fNextSuicideTime { get => Get<GameTime>(__m_fNextSuicideTime); set => Set(__m_fNextSuicideTime, value); }
 
 		private static readonly SchemaField __m_fTimeLastHurt = new("CBasePlayerPawn", "m_fTimeLastHurt");
 		/// <summary><c>GameTime_t</c>.</summary>
-		public float m_fTimeLastHurt { get => Get<float>(__m_fTimeLastHurt); set => Set(__m_fTimeLastHurt, value); }
+		public GameTime m_fTimeLastHurt { get => Get<GameTime>(__m_fTimeLastHurt); set => Set(__m_fTimeLastHurt, value); }
 
 		private static readonly SchemaField __m_flDeathTime = new("CBasePlayerPawn", "m_flDeathTime");
-		/// <summary><c>GameTime_t</c>.</summary>
-		public float m_flDeathTime { get => Get<float>(__m_flDeathTime); set => Set(__m_flDeathTime, value); }
+		/// <summary><c>GameTime_t</c>. Networked in build 6779: a write is sent to clients.</summary>
+		public GameTime m_flDeathTime { get => Get<GameTime>(__m_flDeathTime); set => Set(__m_flDeathTime, value); }
 
 		private static readonly SchemaField __m_hController = new("CBasePlayerPawn", "m_hController");
-		/// <summary><c>CHandle&lt;CBasePlayerController&gt;</c>. Wrapped by <c>CBasePlayerPawn.Controller</c>, <c>CCitadelPlayerPawn.Controller</c> in DeadworksManaged.Api.</summary>
+		/// <summary><c>CHandle&lt;CBasePlayerController&gt;</c>. Networked in build 6779: a write is sent to clients. Wrapped by <c>CBasePlayerPawn.Controller</c>, <c>CCitadelPlayerPawn.Controller</c> in DeadworksManaged.Api.</summary>
 		public CBasePlayerController? m_hController { get => GetHandle<CBasePlayerController>(__m_hController); set => SetHandle(__m_hController, value); }
 
 		private static readonly SchemaField __m_hDefaultController = new("CBasePlayerPawn", "m_hDefaultController");
-		/// <summary><c>CHandle&lt;CBasePlayerController&gt;</c>.</summary>
+		/// <summary><c>CHandle&lt;CBasePlayerController&gt;</c>. Networked in build 6779: a write is sent to clients.</summary>
 		public CBasePlayerController? m_hDefaultController { get => GetHandle<CBasePlayerController>(__m_hDefaultController); set => SetHandle(__m_hDefaultController, value); }
 
 		private static readonly SchemaField __m_iHideHUD = new("CBasePlayerPawn", "m_iHideHUD");
-		/// <summary><c>uint32</c>.</summary>
+		/// <summary><c>uint32</c>. Networked in build 6779: a write is sent to clients.</summary>
 		public uint m_iHideHUD { get => Get<uint>(__m_iHideHUD); set => Set(__m_iHideHUD, value); }
 
 		private static readonly SchemaField __m_iHltvReplayEntity = new("CBasePlayerPawn", "m_iHltvReplayEntity");
@@ -58,11 +58,11 @@ public static partial class Schema {
 		public int m_iHltvReplayEntity { get => Get<int>(__m_iHltvReplayEntity); set => Set(__m_iHltvReplayEntity, value); }
 
 		private static readonly SchemaField __m_pAutoaimServices = new("CBasePlayerPawn", "m_pAutoaimServices");
-		/// <summary><c>CPlayer_AutoaimServices*</c>.</summary>
+		/// <summary><c>CPlayer_AutoaimServices*</c>. Networked in build 6779: a write is sent to clients.</summary>
 		public CPlayer_AutoaimServices? m_pAutoaimServices => Pointer<CPlayer_AutoaimServices>(__m_pAutoaimServices);
 
 		private static readonly SchemaField __m_pCameraServices = new("CBasePlayerPawn", "m_pCameraServices");
-		/// <summary><c>CPlayer_CameraServices*</c>.</summary>
+		/// <summary><c>CPlayer_CameraServices*</c>. Networked in build 6779: a write is sent to clients.</summary>
 		public CPlayer_CameraServices? m_pCameraServices => Pointer<CPlayer_CameraServices>(__m_pCameraServices);
 
 		private static readonly SchemaField __m_pExpresser = new("CBasePlayerPawn", "m_pExpresser");
@@ -70,40 +70,40 @@ public static partial class Schema {
 		public CAI_Expresser? m_pExpresser => Pointer<CAI_Expresser>(__m_pExpresser);
 
 		private static readonly SchemaField __m_pFlashlightServices = new("CBasePlayerPawn", "m_pFlashlightServices");
-		/// <summary><c>CPlayer_FlashlightServices*</c>.</summary>
+		/// <summary><c>CPlayer_FlashlightServices*</c>. Networked in build 6779: a write is sent to clients.</summary>
 		public CPlayer_FlashlightServices? m_pFlashlightServices => Pointer<CPlayer_FlashlightServices>(__m_pFlashlightServices);
 
 		private static readonly SchemaField __m_pItemServices = new("CBasePlayerPawn", "m_pItemServices");
-		/// <summary><c>CPlayer_ItemServices*</c>.</summary>
+		/// <summary><c>CPlayer_ItemServices*</c>. Networked in build 6779: a write is sent to clients.</summary>
 		public CPlayer_ItemServices? m_pItemServices => Pointer<CPlayer_ItemServices>(__m_pItemServices);
 
 		private static readonly SchemaField __m_pMovementServices = new("CBasePlayerPawn", "m_pMovementServices");
-		/// <summary><c>CPlayer_MovementServices*</c>.</summary>
+		/// <summary><c>CPlayer_MovementServices*</c>. Networked in build 6779: a write is sent to clients.</summary>
 		public CPlayer_MovementServices? m_pMovementServices => Pointer<CPlayer_MovementServices>(__m_pMovementServices);
 
 		private static readonly SchemaField __m_pObserverServices = new("CBasePlayerPawn", "m_pObserverServices");
-		/// <summary><c>CPlayer_ObserverServices*</c>. Wrapped by <c>CBasePlayerPawn.ObserverServices</c> in DeadworksManaged.Api.</summary>
+		/// <summary><c>CPlayer_ObserverServices*</c>. Networked in build 6779: a write is sent to clients. Wrapped by <c>CBasePlayerPawn.ObserverServices</c> in DeadworksManaged.Api.</summary>
 		public CPlayer_ObserverServices? m_pObserverServices => Pointer<CPlayer_ObserverServices>(__m_pObserverServices);
 
 		private static readonly SchemaField __m_pUseServices = new("CBasePlayerPawn", "m_pUseServices");
-		/// <summary><c>CPlayer_UseServices*</c>.</summary>
+		/// <summary><c>CPlayer_UseServices*</c>. Networked in build 6779: a write is sent to clients.</summary>
 		public CPlayer_UseServices? m_pUseServices => Pointer<CPlayer_UseServices>(__m_pUseServices);
 
 		private static readonly SchemaField __m_pWaterServices = new("CBasePlayerPawn", "m_pWaterServices");
-		/// <summary><c>CPlayer_WaterServices*</c>.</summary>
+		/// <summary><c>CPlayer_WaterServices*</c>. Networked in build 6779: a write is sent to clients.</summary>
 		public CPlayer_WaterServices? m_pWaterServices => Pointer<CPlayer_WaterServices>(__m_pWaterServices);
 
 		private static readonly SchemaField __m_pWeaponServices = new("CBasePlayerPawn", "m_pWeaponServices");
-		/// <summary><c>CPlayer_WeaponServices*</c>.</summary>
+		/// <summary><c>CPlayer_WeaponServices*</c>. Networked in build 6779: a write is sent to clients.</summary>
 		public CPlayer_WeaponServices? m_pWeaponServices => Pointer<CPlayer_WeaponServices>(__m_pWeaponServices);
 
 		private static readonly SchemaField __m_skybox3d = new("CBasePlayerPawn", "m_skybox3d");
-		/// <summary><c>sky3dparams_t</c>.</summary>
+		/// <summary><c>sky3dparams_t</c>. Networked in build 6779: a write is sent to clients.</summary>
 		public sky3dparams_t m_skybox3d => Embedded<sky3dparams_t>(__m_skybox3d);
 
 		private static readonly SchemaField __m_sndOpvarLatchData = new("CBasePlayerPawn", "m_sndOpvarLatchData");
 		/// <summary><c>CUtlVector&lt;sndopvarlatchdata_t&gt;</c>.</summary>
-		public SchemaObjectList<sndopvarlatchdata_t> m_sndOpvarLatchData => new(this, __m_sndOpvarLatchData, -1);
+		public SchemaObjectList<sndopvarlatchdata_t> m_sndOpvarLatchData => new(this, __m_sndOpvarLatchData, ListStorage.Vector);
 
 		private static readonly SchemaField __v_angle = new("CBasePlayerPawn", "v_angle");
 		/// <summary><c>QAngle</c>.</summary>

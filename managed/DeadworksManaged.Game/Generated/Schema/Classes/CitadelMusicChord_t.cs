@@ -19,7 +19,7 @@ public static partial class Schema {
 
 		private static readonly SchemaField __m_ChordVoicing = new("CitadelMusicChord_t", "m_ChordVoicing");
 		/// <summary><c>CUtlVector&lt;CitadelMidiNotePitch_t&gt;</c>.</summary>
-		public SchemaValueList<CitadelMidiNotePitch_t> m_ChordVoicing => new(this, __m_ChordVoicing, -1);
+		public SchemaValueList<CitadelMidiNotePitch_t> m_ChordVoicing => new(this, __m_ChordVoicing, ListStorage.Vector);
 
 		private static readonly SchemaField __m_flStartTime = new("CitadelMusicChord_t", "m_flStartTime");
 		/// <summary><c>float32</c>.</summary>

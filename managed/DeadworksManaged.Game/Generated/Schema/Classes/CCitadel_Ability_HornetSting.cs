@@ -23,6 +23,6 @@ public static partial class Schema {
 
 		private static readonly SchemaField __m_vecValidBounceTargets = new("CCitadel_Ability_HornetSting", "m_vecValidBounceTargets");
 		/// <summary><c>CUtlVector&lt;CHandle&lt;CBaseEntity&gt;&gt;</c>.</summary>
-		public SchemaHandleList<CBaseEntity> m_vecValidBounceTargets => new(this, __m_vecValidBounceTargets, -1);
+		public SchemaHandleList<CBaseEntity> m_vecValidBounceTargets => new(this, __m_vecValidBounceTargets, ListStorage.Vector);
 	}
 }

@@ -14,19 +14,19 @@ public static partial class Schema {
 		static string ISchemaClass<CCitadel_CosmeticAbility_Snowball>.NativeName => "CCitadel_CosmeticAbility_Snowball";
 
 		private static readonly SchemaField __m_flNextShotTime = new("CCitadel_CosmeticAbility_Snowball", "m_flNextShotTime");
-		/// <summary><c>GameTime_t</c>.</summary>
-		public float m_flNextShotTime { get => Get<float>(__m_flNextShotTime); set => Set(__m_flNextShotTime, value); }
+		/// <summary><c>GameTime_t</c>. Networked in build 6779: a write is sent to clients.</summary>
+		public GameTime m_flNextShotTime { get => Get<GameTime>(__m_flNextShotTime); set => Set(__m_flNextShotTime, value); }
 
 		private static readonly SchemaField __m_flSeasonal2025LevelFrac = new("CCitadel_CosmeticAbility_Snowball", "m_flSeasonal2025LevelFrac");
-		/// <summary><c>float32</c>.</summary>
+		/// <summary><c>float32</c>. Networked in build 6779: a write is sent to clients.</summary>
 		public float m_flSeasonal2025LevelFrac { get => Get<float>(__m_flSeasonal2025LevelFrac); set => Set(__m_flSeasonal2025LevelFrac, value); }
 
 		private static readonly SchemaField __m_nSeasonal2025Level = new("CCitadel_CosmeticAbility_Snowball", "m_nSeasonal2025Level");
-		/// <summary><c>int32</c>.</summary>
+		/// <summary><c>int32</c>. Networked in build 6779: a write is sent to clients.</summary>
 		public int m_nSeasonal2025Level { get => Get<int>(__m_nSeasonal2025Level); set => Set(__m_nSeasonal2025Level, value); }
 
 		private static readonly SchemaField __m_nShotsRemaining = new("CCitadel_CosmeticAbility_Snowball", "m_nShotsRemaining");
-		/// <summary><c>int32</c>.</summary>
+		/// <summary><c>int32</c>. Networked in build 6779: a write is sent to clients.</summary>
 		public int m_nShotsRemaining { get => Get<int>(__m_nShotsRemaining); set => Set(__m_nShotsRemaining, value); }
 	}
 }

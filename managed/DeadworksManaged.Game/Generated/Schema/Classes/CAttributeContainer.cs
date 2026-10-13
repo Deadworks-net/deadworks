@@ -14,7 +14,7 @@ public static partial class Schema {
 		static string ISchemaClass<CAttributeContainer>.NativeName => "CAttributeContainer";
 
 		private static readonly SchemaField __m_Item = new("CAttributeContainer", "m_Item");
-		/// <summary><c>CEconItemView</c>.</summary>
+		/// <summary><c>CEconItemView</c>. Networked in build 6779: a write is sent to clients.</summary>
 		public CEconItemView m_Item => Embedded<CEconItemView>(__m_Item);
 	}
 }

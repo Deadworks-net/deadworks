@@ -23,7 +23,7 @@ public static partial class Schema {
 
 		private static readonly SchemaField __m_damageStates = new("CPropDoorRotatingBreakable", "m_damageStates");
 		/// <summary><c>CUtlVector&lt;CUtlSymbolLarge&gt;</c>.</summary>
-		public SchemaStringList m_damageStates => new(this, __m_damageStates, -1);
+		public SchemaStringList m_damageStates => new(this, __m_damageStates, ListStorage.Vector);
 
 		private static readonly SchemaField __m_isAbleToCloseAreaPortals = new("CPropDoorRotatingBreakable", "m_isAbleToCloseAreaPortals");
 		/// <summary><c>bool</c>.</summary>

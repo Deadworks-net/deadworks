@@ -15,11 +15,11 @@ public static partial class Schema {
 
 		private static readonly SchemaField __m_flProjectileLandTime = new("CCitadelProjectile_ImmobilizeTrap", "m_flProjectileLandTime");
 		/// <summary><c>GameTime_t</c>.</summary>
-		public float m_flProjectileLandTime { get => Get<float>(__m_flProjectileLandTime); set => Set(__m_flProjectileLandTime, value); }
+		public GameTime m_flProjectileLandTime { get => Get<GameTime>(__m_flProjectileLandTime); set => Set(__m_flProjectileLandTime, value); }
 
 		private static readonly SchemaField __m_flStartTime = new("CCitadelProjectile_ImmobilizeTrap", "m_flStartTime");
 		/// <summary><c>GameTime_t</c>.</summary>
-		public float m_flStartTime { get => Get<float>(__m_flStartTime); set => Set(__m_flStartTime, value); }
+		public GameTime m_flStartTime { get => Get<GameTime>(__m_flStartTime); set => Set(__m_flStartTime, value); }
 
 		private static readonly SchemaField __m_vecEndPos = new("CCitadelProjectile_ImmobilizeTrap", "m_vecEndPos");
 		/// <summary><c>Vector</c>.</summary>

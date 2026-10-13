@@ -19,10 +19,10 @@ public static partial class Schema {
 
 		private static readonly SchemaField __m_vecButtonHints = new("CitadelAbilityHUDPanel_t", "m_vecButtonHints");
 		/// <summary><c>CUtlVector&lt;CitadelAbilityHUDElementButtonHint_t&gt;</c>.</summary>
-		public SchemaObjectList<CitadelAbilityHUDElementButtonHint_t> m_vecButtonHints => new(this, __m_vecButtonHints, -1);
+		public SchemaObjectList<CitadelAbilityHUDElementButtonHint_t> m_vecButtonHints => new(this, __m_vecButtonHints, ListStorage.Vector);
 
 		private static readonly SchemaField __m_vecHUDElements = new("CitadelAbilityHUDPanel_t", "m_vecHUDElements");
 		/// <summary><c>CUtlVector&lt;CitadelAbilityHUDElement_t&gt;</c>.</summary>
-		public SchemaObjectList<CitadelAbilityHUDElement_t> m_vecHUDElements => new(this, __m_vecHUDElements, -1);
+		public SchemaObjectList<CitadelAbilityHUDElement_t> m_vecHUDElements => new(this, __m_vecHUDElements, ListStorage.Vector);
 	}
 }

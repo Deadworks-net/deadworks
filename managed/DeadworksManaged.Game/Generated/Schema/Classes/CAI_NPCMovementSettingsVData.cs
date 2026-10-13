@@ -39,7 +39,7 @@ public static partial class Schema {
 
 		private static readonly SchemaField __m_vecPoseTransitions = new("CAI_NPCMovementSettingsVData", "m_vecPoseTransitions");
 		/// <summary><c>CUtlVector&lt;AI_MovementPoseTransition_t&gt;</c>.</summary>
-		public SchemaObjectList<AI_MovementPoseTransition_t> m_vecPoseTransitions => new(this, __m_vecPoseTransitions, -1);
+		public SchemaObjectList<AI_MovementPoseTransition_t> m_vecPoseTransitions => new(this, __m_vecPoseTransitions, ListStorage.Vector);
 
 		private static readonly SchemaField __m_veryFast = new("CAI_NPCMovementSettingsVData", "m_veryFast");
 		/// <summary><c>CAI_OptionalMovementGaitSettings</c>.</summary>

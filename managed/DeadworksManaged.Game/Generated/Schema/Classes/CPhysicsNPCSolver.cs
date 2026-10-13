@@ -19,7 +19,7 @@ public static partial class Schema {
 
 		private static readonly SchemaField __m_cancelTime = new("CPhysicsNPCSolver", "m_cancelTime");
 		/// <summary><c>GameTime_t</c>.</summary>
-		public float m_cancelTime { get => Get<float>(__m_cancelTime); set => Set(__m_cancelTime, value); }
+		public GameTime m_cancelTime { get => Get<GameTime>(__m_cancelTime); set => Set(__m_cancelTime, value); }
 
 		private static readonly SchemaField __m_hEntity = new("CPhysicsNPCSolver", "m_hEntity");
 		/// <summary><c>CHandle&lt;CBaseEntity&gt;</c>.</summary>

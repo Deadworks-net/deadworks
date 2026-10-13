@@ -67,15 +67,15 @@ public static partial class Schema {
 
 		private static readonly SchemaField __m_flBreakAfterTimeStartTimeX = new("CGenericConstraint", "m_flBreakAfterTimeStartTimeX");
 		/// <summary><c>GameTime_t</c>.</summary>
-		public float m_flBreakAfterTimeStartTimeX { get => Get<float>(__m_flBreakAfterTimeStartTimeX); set => Set(__m_flBreakAfterTimeStartTimeX, value); }
+		public GameTime m_flBreakAfterTimeStartTimeX { get => Get<GameTime>(__m_flBreakAfterTimeStartTimeX); set => Set(__m_flBreakAfterTimeStartTimeX, value); }
 
 		private static readonly SchemaField __m_flBreakAfterTimeStartTimeY = new("CGenericConstraint", "m_flBreakAfterTimeStartTimeY");
 		/// <summary><c>GameTime_t</c>.</summary>
-		public float m_flBreakAfterTimeStartTimeY { get => Get<float>(__m_flBreakAfterTimeStartTimeY); set => Set(__m_flBreakAfterTimeStartTimeY, value); }
+		public GameTime m_flBreakAfterTimeStartTimeY { get => Get<GameTime>(__m_flBreakAfterTimeStartTimeY); set => Set(__m_flBreakAfterTimeStartTimeY, value); }
 
 		private static readonly SchemaField __m_flBreakAfterTimeStartTimeZ = new("CGenericConstraint", "m_flBreakAfterTimeStartTimeZ");
 		/// <summary><c>GameTime_t</c>.</summary>
-		public float m_flBreakAfterTimeStartTimeZ { get => Get<float>(__m_flBreakAfterTimeStartTimeZ); set => Set(__m_flBreakAfterTimeStartTimeZ, value); }
+		public GameTime m_flBreakAfterTimeStartTimeZ { get => Get<GameTime>(__m_flBreakAfterTimeStartTimeZ); set => Set(__m_flBreakAfterTimeStartTimeZ, value); }
 
 		private static readonly SchemaField __m_flBreakAfterTimeThresholdX = new("CGenericConstraint", "m_flBreakAfterTimeThresholdX");
 		/// <summary><c>float32</c>.</summary>
@@ -151,15 +151,15 @@ public static partial class Schema {
 
 		private static readonly SchemaField __m_flNotifyForceLastTimeX = new("CGenericConstraint", "m_flNotifyForceLastTimeX");
 		/// <summary><c>GameTime_t</c>.</summary>
-		public float m_flNotifyForceLastTimeX { get => Get<float>(__m_flNotifyForceLastTimeX); set => Set(__m_flNotifyForceLastTimeX, value); }
+		public GameTime m_flNotifyForceLastTimeX { get => Get<GameTime>(__m_flNotifyForceLastTimeX); set => Set(__m_flNotifyForceLastTimeX, value); }
 
 		private static readonly SchemaField __m_flNotifyForceLastTimeY = new("CGenericConstraint", "m_flNotifyForceLastTimeY");
 		/// <summary><c>GameTime_t</c>.</summary>
-		public float m_flNotifyForceLastTimeY { get => Get<float>(__m_flNotifyForceLastTimeY); set => Set(__m_flNotifyForceLastTimeY, value); }
+		public GameTime m_flNotifyForceLastTimeY { get => Get<GameTime>(__m_flNotifyForceLastTimeY); set => Set(__m_flNotifyForceLastTimeY, value); }
 
 		private static readonly SchemaField __m_flNotifyForceLastTimeZ = new("CGenericConstraint", "m_flNotifyForceLastTimeZ");
 		/// <summary><c>GameTime_t</c>.</summary>
-		public float m_flNotifyForceLastTimeZ { get => Get<float>(__m_flNotifyForceLastTimeZ); set => Set(__m_flNotifyForceLastTimeZ, value); }
+		public GameTime m_flNotifyForceLastTimeZ { get => Get<GameTime>(__m_flNotifyForceLastTimeZ); set => Set(__m_flNotifyForceLastTimeZ, value); }
 
 		private static readonly SchemaField __m_flNotifyForceMinTimeX = new("CGenericConstraint", "m_flNotifyForceMinTimeX");
 		/// <summary><c>float32</c>.</summary>

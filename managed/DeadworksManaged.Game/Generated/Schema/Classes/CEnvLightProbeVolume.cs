@@ -14,83 +14,83 @@ public static partial class Schema {
 		static string ISchemaClass<CEnvLightProbeVolume>.NativeName => "CEnvLightProbeVolume";
 
 		private static readonly SchemaField __m_Entity_bEnabled = new("CEnvLightProbeVolume", "m_Entity_bEnabled");
-		/// <summary><c>bool</c>.</summary>
+		/// <summary><c>bool</c>. Networked in build 6779: a write is sent to clients.</summary>
 		public bool m_Entity_bEnabled { get => Get<bool>(__m_Entity_bEnabled); set => Set(__m_Entity_bEnabled, value); }
 
 		private static readonly SchemaField __m_Entity_bMoveable = new("CEnvLightProbeVolume", "m_Entity_bMoveable");
-		/// <summary><c>bool</c>.</summary>
+		/// <summary><c>bool</c>. Networked in build 6779: a write is sent to clients.</summary>
 		public bool m_Entity_bMoveable { get => Get<bool>(__m_Entity_bMoveable); set => Set(__m_Entity_bMoveable, value); }
 
 		private static readonly SchemaField __m_Entity_bStartDisabled = new("CEnvLightProbeVolume", "m_Entity_bStartDisabled");
-		/// <summary><c>bool</c>.</summary>
+		/// <summary><c>bool</c>. Networked in build 6779: a write is sent to clients.</summary>
 		public bool m_Entity_bStartDisabled { get => Get<bool>(__m_Entity_bStartDisabled); set => Set(__m_Entity_bStartDisabled, value); }
 
 		private static readonly SchemaField __m_Entity_hLightProbeDirectLightIndicesTexture = new("CEnvLightProbeVolume", "m_Entity_hLightProbeDirectLightIndicesTexture");
-		/// <summary><c>CStrongHandle&lt;InfoForResourceTypeCTextureBase&gt;</c>. No typed mapping yet: read it through its address.</summary>
-		public RawField m_Entity_hLightProbeDirectLightIndicesTexture => Raw(__m_Entity_hLightProbeDirectLightIndicesTexture, "CStrongHandle<InfoForResourceTypeCTextureBase>");
+		/// <summary><c>CStrongHandle&lt;InfoForResourceTypeCTextureBase&gt;</c>. Networked in build 6779: a write is sent to clients.</summary>
+		public ResourceHandle m_Entity_hLightProbeDirectLightIndicesTexture { get => Get<ResourceHandle>(__m_Entity_hLightProbeDirectLightIndicesTexture); set => Set(__m_Entity_hLightProbeDirectLightIndicesTexture, value); }
 
 		private static readonly SchemaField __m_Entity_hLightProbeDirectLightScalarsTexture = new("CEnvLightProbeVolume", "m_Entity_hLightProbeDirectLightScalarsTexture");
-		/// <summary><c>CStrongHandle&lt;InfoForResourceTypeCTextureBase&gt;</c>. No typed mapping yet: read it through its address.</summary>
-		public RawField m_Entity_hLightProbeDirectLightScalarsTexture => Raw(__m_Entity_hLightProbeDirectLightScalarsTexture, "CStrongHandle<InfoForResourceTypeCTextureBase>");
+		/// <summary><c>CStrongHandle&lt;InfoForResourceTypeCTextureBase&gt;</c>. Networked in build 6779: a write is sent to clients.</summary>
+		public ResourceHandle m_Entity_hLightProbeDirectLightScalarsTexture { get => Get<ResourceHandle>(__m_Entity_hLightProbeDirectLightScalarsTexture); set => Set(__m_Entity_hLightProbeDirectLightScalarsTexture, value); }
 
 		private static readonly SchemaField __m_Entity_hLightProbeDirectLightShadowsTexture = new("CEnvLightProbeVolume", "m_Entity_hLightProbeDirectLightShadowsTexture");
-		/// <summary><c>CStrongHandle&lt;InfoForResourceTypeCTextureBase&gt;</c>. No typed mapping yet: read it through its address.</summary>
-		public RawField m_Entity_hLightProbeDirectLightShadowsTexture => Raw(__m_Entity_hLightProbeDirectLightShadowsTexture, "CStrongHandle<InfoForResourceTypeCTextureBase>");
+		/// <summary><c>CStrongHandle&lt;InfoForResourceTypeCTextureBase&gt;</c>. Networked in build 6779: a write is sent to clients.</summary>
+		public ResourceHandle m_Entity_hLightProbeDirectLightShadowsTexture { get => Get<ResourceHandle>(__m_Entity_hLightProbeDirectLightShadowsTexture); set => Set(__m_Entity_hLightProbeDirectLightShadowsTexture, value); }
 
 		private static readonly SchemaField __m_Entity_hLightProbeTexture_AmbientCube = new("CEnvLightProbeVolume", "m_Entity_hLightProbeTexture_AmbientCube");
-		/// <summary><c>CStrongHandle&lt;InfoForResourceTypeCTextureBase&gt;</c>. No typed mapping yet: read it through its address.</summary>
-		public RawField m_Entity_hLightProbeTexture_AmbientCube => Raw(__m_Entity_hLightProbeTexture_AmbientCube, "CStrongHandle<InfoForResourceTypeCTextureBase>");
+		/// <summary><c>CStrongHandle&lt;InfoForResourceTypeCTextureBase&gt;</c>. Networked in build 6779: a write is sent to clients.</summary>
+		public ResourceHandle m_Entity_hLightProbeTexture_AmbientCube { get => Get<ResourceHandle>(__m_Entity_hLightProbeTexture_AmbientCube); set => Set(__m_Entity_hLightProbeTexture_AmbientCube, value); }
 
 		private static readonly SchemaField __m_Entity_hLightProbeTexture_SDF = new("CEnvLightProbeVolume", "m_Entity_hLightProbeTexture_SDF");
-		/// <summary><c>CStrongHandle&lt;InfoForResourceTypeCTextureBase&gt;</c>. No typed mapping yet: read it through its address.</summary>
-		public RawField m_Entity_hLightProbeTexture_SDF => Raw(__m_Entity_hLightProbeTexture_SDF, "CStrongHandle<InfoForResourceTypeCTextureBase>");
+		/// <summary><c>CStrongHandle&lt;InfoForResourceTypeCTextureBase&gt;</c>. Networked in build 6779: a write is sent to clients.</summary>
+		public ResourceHandle m_Entity_hLightProbeTexture_SDF { get => Get<ResourceHandle>(__m_Entity_hLightProbeTexture_SDF); set => Set(__m_Entity_hLightProbeTexture_SDF, value); }
 
 		private static readonly SchemaField __m_Entity_hLightProbeTexture_SH2_DC = new("CEnvLightProbeVolume", "m_Entity_hLightProbeTexture_SH2_DC");
-		/// <summary><c>CStrongHandle&lt;InfoForResourceTypeCTextureBase&gt;</c>. No typed mapping yet: read it through its address.</summary>
-		public RawField m_Entity_hLightProbeTexture_SH2_DC => Raw(__m_Entity_hLightProbeTexture_SH2_DC, "CStrongHandle<InfoForResourceTypeCTextureBase>");
+		/// <summary><c>CStrongHandle&lt;InfoForResourceTypeCTextureBase&gt;</c>. Networked in build 6779: a write is sent to clients.</summary>
+		public ResourceHandle m_Entity_hLightProbeTexture_SH2_DC { get => Get<ResourceHandle>(__m_Entity_hLightProbeTexture_SH2_DC); set => Set(__m_Entity_hLightProbeTexture_SH2_DC, value); }
 
 		private static readonly SchemaField __m_Entity_hLightProbeTexture_SH2_L1 = new("CEnvLightProbeVolume", "m_Entity_hLightProbeTexture_SH2_L1");
-		/// <summary><c>CStrongHandle&lt;InfoForResourceTypeCTextureBase&gt;</c>. No typed mapping yet: read it through its address.</summary>
-		public RawField m_Entity_hLightProbeTexture_SH2_L1 => Raw(__m_Entity_hLightProbeTexture_SH2_L1, "CStrongHandle<InfoForResourceTypeCTextureBase>");
+		/// <summary><c>CStrongHandle&lt;InfoForResourceTypeCTextureBase&gt;</c>. Networked in build 6779: a write is sent to clients.</summary>
+		public ResourceHandle m_Entity_hLightProbeTexture_SH2_L1 { get => Get<ResourceHandle>(__m_Entity_hLightProbeTexture_SH2_L1); set => Set(__m_Entity_hLightProbeTexture_SH2_L1, value); }
 
 		private static readonly SchemaField __m_Entity_nHandshake = new("CEnvLightProbeVolume", "m_Entity_nHandshake");
-		/// <summary><c>int32</c>.</summary>
+		/// <summary><c>int32</c>. Networked in build 6779: a write is sent to clients.</summary>
 		public int m_Entity_nHandshake { get => Get<int>(__m_Entity_nHandshake); set => Set(__m_Entity_nHandshake, value); }
 
 		private static readonly SchemaField __m_Entity_nLightProbeAtlasX = new("CEnvLightProbeVolume", "m_Entity_nLightProbeAtlasX");
-		/// <summary><c>int32</c>.</summary>
+		/// <summary><c>int32</c>. Networked in build 6779: a write is sent to clients.</summary>
 		public int m_Entity_nLightProbeAtlasX { get => Get<int>(__m_Entity_nLightProbeAtlasX); set => Set(__m_Entity_nLightProbeAtlasX, value); }
 
 		private static readonly SchemaField __m_Entity_nLightProbeAtlasY = new("CEnvLightProbeVolume", "m_Entity_nLightProbeAtlasY");
-		/// <summary><c>int32</c>.</summary>
+		/// <summary><c>int32</c>. Networked in build 6779: a write is sent to clients.</summary>
 		public int m_Entity_nLightProbeAtlasY { get => Get<int>(__m_Entity_nLightProbeAtlasY); set => Set(__m_Entity_nLightProbeAtlasY, value); }
 
 		private static readonly SchemaField __m_Entity_nLightProbeAtlasZ = new("CEnvLightProbeVolume", "m_Entity_nLightProbeAtlasZ");
-		/// <summary><c>int32</c>.</summary>
+		/// <summary><c>int32</c>. Networked in build 6779: a write is sent to clients.</summary>
 		public int m_Entity_nLightProbeAtlasZ { get => Get<int>(__m_Entity_nLightProbeAtlasZ); set => Set(__m_Entity_nLightProbeAtlasZ, value); }
 
 		private static readonly SchemaField __m_Entity_nLightProbeSizeX = new("CEnvLightProbeVolume", "m_Entity_nLightProbeSizeX");
-		/// <summary><c>int32</c>.</summary>
+		/// <summary><c>int32</c>. Networked in build 6779: a write is sent to clients.</summary>
 		public int m_Entity_nLightProbeSizeX { get => Get<int>(__m_Entity_nLightProbeSizeX); set => Set(__m_Entity_nLightProbeSizeX, value); }
 
 		private static readonly SchemaField __m_Entity_nLightProbeSizeY = new("CEnvLightProbeVolume", "m_Entity_nLightProbeSizeY");
-		/// <summary><c>int32</c>.</summary>
+		/// <summary><c>int32</c>. Networked in build 6779: a write is sent to clients.</summary>
 		public int m_Entity_nLightProbeSizeY { get => Get<int>(__m_Entity_nLightProbeSizeY); set => Set(__m_Entity_nLightProbeSizeY, value); }
 
 		private static readonly SchemaField __m_Entity_nLightProbeSizeZ = new("CEnvLightProbeVolume", "m_Entity_nLightProbeSizeZ");
-		/// <summary><c>int32</c>.</summary>
+		/// <summary><c>int32</c>. Networked in build 6779: a write is sent to clients.</summary>
 		public int m_Entity_nLightProbeSizeZ { get => Get<int>(__m_Entity_nLightProbeSizeZ); set => Set(__m_Entity_nLightProbeSizeZ, value); }
 
 		private static readonly SchemaField __m_Entity_nPriority = new("CEnvLightProbeVolume", "m_Entity_nPriority");
-		/// <summary><c>int32</c>.</summary>
+		/// <summary><c>int32</c>. Networked in build 6779: a write is sent to clients.</summary>
 		public int m_Entity_nPriority { get => Get<int>(__m_Entity_nPriority); set => Set(__m_Entity_nPriority, value); }
 
 		private static readonly SchemaField __m_Entity_vBoxMaxs = new("CEnvLightProbeVolume", "m_Entity_vBoxMaxs");
-		/// <summary><c>Vector</c>.</summary>
+		/// <summary><c>Vector</c>. Networked in build 6779: a write is sent to clients.</summary>
 		public Vector3 m_Entity_vBoxMaxs { get => Get<Vector3>(__m_Entity_vBoxMaxs); set => Set(__m_Entity_vBoxMaxs, value); }
 
 		private static readonly SchemaField __m_Entity_vBoxMins = new("CEnvLightProbeVolume", "m_Entity_vBoxMins");
-		/// <summary><c>Vector</c>.</summary>
+		/// <summary><c>Vector</c>. Networked in build 6779: a write is sent to clients.</summary>
 		public Vector3 m_Entity_vBoxMins { get => Get<Vector3>(__m_Entity_vBoxMins); set => Set(__m_Entity_vBoxMins, value); }
 
 		/// <summary>Fires the <c>Disable</c> input.</summary>

@@ -279,15 +279,15 @@ public static partial class Schema {
 
 		private static readonly SchemaField __m_flTimeMovementStart = new("CFuncMover", "m_flTimeMovementStart");
 		/// <summary><c>GameTime_t</c>.</summary>
-		public float m_flTimeMovementStart { get => Get<float>(__m_flTimeMovementStart); set => Set(__m_flTimeMovementStart, value); }
+		public GameTime m_flTimeMovementStart { get => Get<GameTime>(__m_flTimeMovementStart); set => Set(__m_flTimeMovementStart, value); }
 
 		private static readonly SchemaField __m_flTimeMovementStop = new("CFuncMover", "m_flTimeMovementStop");
 		/// <summary><c>GameTime_t</c>.</summary>
-		public float m_flTimeMovementStop { get => Get<float>(__m_flTimeMovementStop); set => Set(__m_flTimeMovementStop, value); }
+		public GameTime m_flTimeMovementStop { get => Get<GameTime>(__m_flTimeMovementStop); set => Set(__m_flTimeMovementStop, value); }
 
 		private static readonly SchemaField __m_flTimeStartOrientationChange = new("CFuncMover", "m_flTimeStartOrientationChange");
 		/// <summary><c>GameTime_t</c>.</summary>
-		public float m_flTimeStartOrientationChange { get => Get<float>(__m_flTimeStartOrientationChange); set => Set(__m_flTimeStartOrientationChange, value); }
+		public GameTime m_flTimeStartOrientationChange { get => Get<GameTime>(__m_flTimeStartOrientationChange); set => Set(__m_flTimeStartOrientationChange, value); }
 
 		private static readonly SchemaField __m_flTimeToBlendToNewOrientation = new("CFuncMover", "m_flTimeToBlendToNewOrientation");
 		/// <summary><c>float32</c>.</summary>
@@ -346,8 +346,8 @@ public static partial class Schema {
 		public CPathMover? m_hTransitionSourcePath { get => GetHandle<CPathMover>(__m_hTransitionSourcePath); set => SetHandle(__m_hTransitionSourcePath, value); }
 
 		private static readonly SchemaField __m_iszArriveAtDestinationSound = new("CFuncMover", "m_iszArriveAtDestinationSound");
-		/// <summary><c>CGameSoundEventName</c>. No typed mapping yet: read it through its address.</summary>
-		public RawField m_iszArriveAtDestinationSound => Raw(__m_iszArriveAtDestinationSound, "CGameSoundEventName");
+		/// <summary><c>CGameSoundEventName</c>.</summary>
+		public string m_iszArriveAtDestinationSound => GetString(__m_iszArriveAtDestinationSound);
 
 		private static readonly SchemaField __m_iszFollowEntityName = new("CFuncMover", "m_iszFollowEntityName");
 		/// <summary><c>CUtlSymbolLarge</c>.</summary>
@@ -358,12 +358,12 @@ public static partial class Schema {
 		public string m_iszFollowMoverEntityName { get => GetString(__m_iszFollowMoverEntityName); set => SetString(__m_iszFollowMoverEntityName, value); }
 
 		private static readonly SchemaField __m_iszLoopForwardSound = new("CFuncMover", "m_iszLoopForwardSound");
-		/// <summary><c>CGameSoundEventName</c>. No typed mapping yet: read it through its address.</summary>
-		public RawField m_iszLoopForwardSound => Raw(__m_iszLoopForwardSound, "CGameSoundEventName");
+		/// <summary><c>CGameSoundEventName</c>.</summary>
+		public string m_iszLoopForwardSound => GetString(__m_iszLoopForwardSound);
 
 		private static readonly SchemaField __m_iszLoopReverseSound = new("CFuncMover", "m_iszLoopReverseSound");
-		/// <summary><c>CGameSoundEventName</c>. No typed mapping yet: read it through its address.</summary>
-		public RawField m_iszLoopReverseSound => Raw(__m_iszLoopReverseSound, "CGameSoundEventName");
+		/// <summary><c>CGameSoundEventName</c>.</summary>
+		public string m_iszLoopReverseSound => GetString(__m_iszLoopReverseSound);
 
 		private static readonly SchemaField __m_iszOrientationMatchEntityName = new("CFuncMover", "m_iszOrientationMatchEntityName");
 		/// <summary><c>CUtlSymbolLarge</c>.</summary>
@@ -382,20 +382,20 @@ public static partial class Schema {
 		public string m_iszPathNodeStart { get => GetString(__m_iszPathNodeStart); set => SetString(__m_iszPathNodeStart, value); }
 
 		private static readonly SchemaField __m_iszStartForwardSound = new("CFuncMover", "m_iszStartForwardSound");
-		/// <summary><c>CGameSoundEventName</c>. No typed mapping yet: read it through its address.</summary>
-		public RawField m_iszStartForwardSound => Raw(__m_iszStartForwardSound, "CGameSoundEventName");
+		/// <summary><c>CGameSoundEventName</c>.</summary>
+		public string m_iszStartForwardSound => GetString(__m_iszStartForwardSound);
 
 		private static readonly SchemaField __m_iszStartReverseSound = new("CFuncMover", "m_iszStartReverseSound");
-		/// <summary><c>CGameSoundEventName</c>. No typed mapping yet: read it through its address.</summary>
-		public RawField m_iszStartReverseSound => Raw(__m_iszStartReverseSound, "CGameSoundEventName");
+		/// <summary><c>CGameSoundEventName</c>.</summary>
+		public string m_iszStartReverseSound => GetString(__m_iszStartReverseSound);
 
 		private static readonly SchemaField __m_iszStopForwardSound = new("CFuncMover", "m_iszStopForwardSound");
-		/// <summary><c>CGameSoundEventName</c>. No typed mapping yet: read it through its address.</summary>
-		public RawField m_iszStopForwardSound => Raw(__m_iszStopForwardSound, "CGameSoundEventName");
+		/// <summary><c>CGameSoundEventName</c>.</summary>
+		public string m_iszStopForwardSound => GetString(__m_iszStopForwardSound);
 
 		private static readonly SchemaField __m_iszStopReverseSound = new("CFuncMover", "m_iszStopReverseSound");
-		/// <summary><c>CGameSoundEventName</c>. No typed mapping yet: read it through its address.</summary>
-		public RawField m_iszStopReverseSound => Raw(__m_iszStopReverseSound, "CGameSoundEventName");
+		/// <summary><c>CGameSoundEventName</c>.</summary>
+		public string m_iszStopReverseSound => GetString(__m_iszStopReverseSound);
 
 		private static readonly SchemaField __m_iszTransitionSourcePathNodeStart = new("CFuncMover", "m_iszTransitionSourcePathNodeStart");
 		/// <summary><c>CUtlSymbolLarge</c>.</summary>
@@ -463,7 +463,7 @@ public static partial class Schema {
 
 		private static readonly SchemaField __m_vecTransitionHistory = new("CFuncMover", "m_vecTransitionHistory");
 		/// <summary><c>CUtlVector&lt;FuncMoverTransitionRecord_t&gt;</c>.</summary>
-		public SchemaObjectList<FuncMoverTransitionRecord_t> m_vecTransitionHistory => new(this, __m_vecTransitionHistory, -1);
+		public SchemaObjectList<FuncMoverTransitionRecord_t> m_vecTransitionHistory => new(this, __m_vecTransitionHistory, ListStorage.Vector);
 
 		/// <summary>Fires the <c>ClearFollowMoverEntity</c> input.</summary>
 		public void InputClearFollowMoverEntity() => FireInput("ClearFollowMoverEntity");

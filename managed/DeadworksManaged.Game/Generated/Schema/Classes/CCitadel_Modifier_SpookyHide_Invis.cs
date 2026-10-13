@@ -15,7 +15,7 @@ public static partial class Schema {
 
 		private static readonly SchemaField __m_flStartSpotted = new("CCitadel_Modifier_SpookyHide_Invis", "m_flStartSpotted");
 		/// <summary><c>GameTime_t</c>.</summary>
-		public float m_flStartSpotted { get => Get<float>(__m_flStartSpotted); set => Set(__m_flStartSpotted, value); }
+		public GameTime m_flStartSpotted { get => Get<GameTime>(__m_flStartSpotted); set => Set(__m_flStartSpotted, value); }
 
 		private static readonly SchemaField __m_mapStartLookTime = new("CCitadel_Modifier_SpookyHide_Invis", "m_mapStartLookTime");
 		/// <summary><c>CUtlOrderedMap&lt;CCitadelPlayerPawn*, GameTime_t&gt;</c>. No typed mapping yet: read it through its address.</summary>

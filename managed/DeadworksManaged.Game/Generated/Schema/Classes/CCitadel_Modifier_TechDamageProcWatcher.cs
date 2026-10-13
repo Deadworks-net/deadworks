@@ -15,7 +15,7 @@ public static partial class Schema {
 
 		private static readonly SchemaField __m_flNextProcTime = new("CCitadel_Modifier_TechDamageProcWatcher", "m_flNextProcTime");
 		/// <summary><c>GameTime_t</c>.</summary>
-		public float m_flNextProcTime { get => Get<float>(__m_flNextProcTime); set => Set(__m_flNextProcTime, value); }
+		public GameTime m_flNextProcTime { get => Get<GameTime>(__m_flNextProcTime); set => Set(__m_flNextProcTime, value); }
 
 		private static readonly SchemaField __m_shotProced = new("CCitadel_Modifier_TechDamageProcWatcher", "m_shotProced");
 		/// <summary><c>ShotID_t</c>.</summary>

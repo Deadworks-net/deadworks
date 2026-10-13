@@ -14,7 +14,7 @@ public static partial class Schema {
 		static string ISchemaClass<CPlayer_MovementServices_Humanoid>.NativeName => "CPlayer_MovementServices_Humanoid";
 
 		private static readonly SchemaField __m_flFallVelocity = new("CPlayer_MovementServices_Humanoid", "m_flFallVelocity");
-		/// <summary><c>float32</c>.</summary>
+		/// <summary><c>float32</c>. Networked in build 6779: a write is sent to clients.</summary>
 		public float m_flFallVelocity { get => Get<float>(__m_flFallVelocity); set => Set(__m_flFallVelocity, value); }
 
 		private static readonly SchemaField __m_flStepSoundTime = new("CPlayer_MovementServices_Humanoid", "m_flStepSoundTime");

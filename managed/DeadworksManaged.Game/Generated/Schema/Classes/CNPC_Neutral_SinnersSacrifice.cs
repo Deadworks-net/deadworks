@@ -14,19 +14,19 @@ public static partial class Schema {
 		static string ISchemaClass<CNPC_Neutral_SinnersSacrifice>.NativeName => "CNPC_Neutral_SinnersSacrifice";
 
 		private static readonly SchemaField __m_flMiniGameTimeScale = new("CNPC_Neutral_SinnersSacrifice", "m_flMiniGameTimeScale");
-		/// <summary><c>float32</c>.</summary>
+		/// <summary><c>float32</c>. Networked in build 6779: a write is sent to clients.</summary>
 		public float m_flMiniGameTimeScale { get => Get<float>(__m_flMiniGameTimeScale); set => Set(__m_flMiniGameTimeScale, value); }
 
 		private static readonly SchemaField __m_flRandomTimePhase = new("CNPC_Neutral_SinnersSacrifice", "m_flRandomTimePhase");
-		/// <summary><c>float32</c>.</summary>
+		/// <summary><c>float32</c>. Networked in build 6779: a write is sent to clients.</summary>
 		public float m_flRandomTimePhase { get => Get<float>(__m_flRandomTimePhase); set => Set(__m_flRandomTimePhase, value); }
 
 		private static readonly SchemaField __m_iVaultState = new("CNPC_Neutral_SinnersSacrifice", "m_iVaultState");
-		/// <summary><c>int32</c>.</summary>
+		/// <summary><c>int32</c>. Networked in build 6779: a write is sent to clients.</summary>
 		public int m_iVaultState { get => Get<int>(__m_iVaultState); set => Set(__m_iVaultState, value); }
 
 		private static readonly SchemaField __m_nGoldToGiveOnDamage = new("CNPC_Neutral_SinnersSacrifice", "m_nGoldToGiveOnDamage");
-		/// <summary><c>int32</c>.</summary>
+		/// <summary><c>int32</c>. Networked in build 6779: a write is sent to clients.</summary>
 		public int m_nGoldToGiveOnDamage { get => Get<int>(__m_nGoldToGiveOnDamage); set => Set(__m_nGoldToGiveOnDamage, value); }
 	}
 }

@@ -15,6 +15,6 @@ public static partial class Schema {
 
 		private static readonly SchemaField __m_flStackDecayDelayTime = new("CCitadel_Modifier_HollowPoint_Stack", "m_flStackDecayDelayTime");
 		/// <summary><c>GameTime_t</c>.</summary>
-		public float m_flStackDecayDelayTime { get => Get<float>(__m_flStackDecayDelayTime); set => Set(__m_flStackDecayDelayTime, value); }
+		public GameTime m_flStackDecayDelayTime { get => Get<GameTime>(__m_flStackDecayDelayTime); set => Set(__m_flStackDecayDelayTime, value); }
 	}
 }

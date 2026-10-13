@@ -15,7 +15,7 @@ public static partial class Schema {
 
 		private static readonly SchemaField __m_hHitTargets = new("CCitadel_Modifier_UltimateBurst_Proc", "m_hHitTargets");
 		/// <summary><c>CUtlVector&lt;CHandle&lt;CBaseEntity&gt;&gt;</c>.</summary>
-		public SchemaHandleList<CBaseEntity> m_hHitTargets => new(this, __m_hHitTargets, -1);
+		public SchemaHandleList<CBaseEntity> m_hHitTargets => new(this, __m_hHitTargets, ListStorage.Vector);
 
 		/// <summary>The data entry this was created from, as <see cref="CCitadel_Modifier_UltimateBurst_ProcVData"/>, or null if it has none.</summary>
 		public new CCitadel_Modifier_UltimateBurst_ProcVData? VData => ModifierData<CCitadel_Modifier_UltimateBurst_ProcVData>();

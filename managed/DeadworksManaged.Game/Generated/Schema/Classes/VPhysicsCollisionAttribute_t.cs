@@ -14,47 +14,47 @@ public static partial class Schema {
 		static string ISchemaClass<VPhysicsCollisionAttribute_t>.NativeName => "VPhysicsCollisionAttribute_t";
 
 		private static readonly SchemaField __m_nCollisionFunctionMask = new("VPhysicsCollisionAttribute_t", "m_nCollisionFunctionMask");
-		/// <summary><c>uint8</c>.</summary>
+		/// <summary><c>uint8</c>. Networked in build 6779: a write is sent to clients.</summary>
 		public byte m_nCollisionFunctionMask { get => Get<byte>(__m_nCollisionFunctionMask); set => Set(__m_nCollisionFunctionMask, value); }
 
 		private static readonly SchemaField __m_nCollisionGroup = new("VPhysicsCollisionAttribute_t", "m_nCollisionGroup");
-		/// <summary><c>uint8</c>.</summary>
+		/// <summary><c>uint8</c>. Networked in build 6779: a write is sent to clients.</summary>
 		public byte m_nCollisionGroup { get => Get<byte>(__m_nCollisionGroup); set => Set(__m_nCollisionGroup, value); }
 
 		private static readonly SchemaField __m_nDetailLayerMask = new("VPhysicsCollisionAttribute_t", "m_nDetailLayerMask");
-		/// <summary><c>uint16</c>.</summary>
+		/// <summary><c>uint16</c>. Networked in build 6779: a write is sent to clients.</summary>
 		public ushort m_nDetailLayerMask { get => Get<ushort>(__m_nDetailLayerMask); set => Set(__m_nDetailLayerMask, value); }
 
 		private static readonly SchemaField __m_nDetailLayerMaskType = new("VPhysicsCollisionAttribute_t", "m_nDetailLayerMaskType");
-		/// <summary><c>uint8</c>.</summary>
+		/// <summary><c>uint8</c>. Networked in build 6779: a write is sent to clients.</summary>
 		public byte m_nDetailLayerMaskType { get => Get<byte>(__m_nDetailLayerMaskType); set => Set(__m_nDetailLayerMaskType, value); }
 
 		private static readonly SchemaField __m_nEntityId = new("VPhysicsCollisionAttribute_t", "m_nEntityId");
-		/// <summary><c>uint32</c>.</summary>
+		/// <summary><c>uint32</c>. Networked in build 6779: a write is sent to clients.</summary>
 		public uint m_nEntityId { get => Get<uint>(__m_nEntityId); set => Set(__m_nEntityId, value); }
 
 		private static readonly SchemaField __m_nHierarchyId = new("VPhysicsCollisionAttribute_t", "m_nHierarchyId");
-		/// <summary><c>uint16</c>.</summary>
+		/// <summary><c>uint16</c>. Networked in build 6779: a write is sent to clients.</summary>
 		public ushort m_nHierarchyId { get => Get<ushort>(__m_nHierarchyId); set => Set(__m_nHierarchyId, value); }
 
 		private static readonly SchemaField __m_nInteractsAs = new("VPhysicsCollisionAttribute_t", "m_nInteractsAs");
-		/// <summary><c>uint64</c>. Wrapped by <c>CCollisionProperty.Attribute</c> in DeadworksManaged.Api.</summary>
+		/// <summary><c>uint64</c>. Networked in build 6779: a write is sent to clients. Wrapped by <c>CCollisionProperty.Attribute</c> in DeadworksManaged.Api.</summary>
 		public ulong m_nInteractsAs { get => Get<ulong>(__m_nInteractsAs); set => Set(__m_nInteractsAs, value); }
 
 		private static readonly SchemaField __m_nInteractsExclude = new("VPhysicsCollisionAttribute_t", "m_nInteractsExclude");
-		/// <summary><c>uint64</c>.</summary>
+		/// <summary><c>uint64</c>. Networked in build 6779: a write is sent to clients.</summary>
 		public ulong m_nInteractsExclude { get => Get<ulong>(__m_nInteractsExclude); set => Set(__m_nInteractsExclude, value); }
 
 		private static readonly SchemaField __m_nInteractsWith = new("VPhysicsCollisionAttribute_t", "m_nInteractsWith");
-		/// <summary><c>uint64</c>.</summary>
+		/// <summary><c>uint64</c>. Networked in build 6779: a write is sent to clients.</summary>
 		public ulong m_nInteractsWith { get => Get<ulong>(__m_nInteractsWith); set => Set(__m_nInteractsWith, value); }
 
 		private static readonly SchemaField __m_nOwnerId = new("VPhysicsCollisionAttribute_t", "m_nOwnerId");
-		/// <summary><c>uint32</c>.</summary>
+		/// <summary><c>uint32</c>. Networked in build 6779: a write is sent to clients.</summary>
 		public uint m_nOwnerId { get => Get<uint>(__m_nOwnerId); set => Set(__m_nOwnerId, value); }
 
 		private static readonly SchemaField __m_nTargetDetailLayer = new("VPhysicsCollisionAttribute_t", "m_nTargetDetailLayer");
-		/// <summary><c>uint8</c>.</summary>
+		/// <summary><c>uint8</c>. Networked in build 6779: a write is sent to clients.</summary>
 		public byte m_nTargetDetailLayer { get => Get<byte>(__m_nTargetDetailLayer); set => Set(__m_nTargetDetailLayer, value); }
 	}
 }

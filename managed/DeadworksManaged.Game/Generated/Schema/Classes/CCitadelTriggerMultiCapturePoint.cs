@@ -14,7 +14,7 @@ public static partial class Schema {
 		static string ISchemaClass<CCitadelTriggerMultiCapturePoint>.NativeName => "CCitadelTriggerMultiCapturePoint";
 
 		private static readonly SchemaField __m_CCitadelMinimapComponent = new("CCitadelTriggerMultiCapturePoint", "m_CCitadelMinimapComponent");
-		/// <summary><c>CCitadelMinimapComponent</c>.</summary>
+		/// <summary><c>CCitadelMinimapComponent</c>. Networked in build 6779: a write is sent to clients.</summary>
 		public CCitadelMinimapComponent m_CCitadelMinimapComponent => Embedded<CCitadelMinimapComponent>(__m_CCitadelMinimapComponent);
 
 		private static readonly SchemaField __m_OnBecomeCapturable = new("CCitadelTriggerMultiCapturePoint", "m_OnBecomeCapturable");
@@ -30,7 +30,7 @@ public static partial class Schema {
 		public string m_iszGroupName { get => GetString(__m_iszGroupName); set => SetString(__m_iszGroupName, value); }
 
 		private static readonly SchemaField __m_nEnableState = new("CCitadelTriggerMultiCapturePoint", "m_nEnableState");
-		/// <summary><c>uint8</c>.</summary>
+		/// <summary><c>uint8</c>. Networked in build 6779: a write is sent to clients.</summary>
 		public byte m_nEnableState { get => Get<byte>(__m_nEnableState); set => Set(__m_nEnableState, value); }
 
 		private static readonly SchemaField __m_nEnabledParticle = new("CCitadelTriggerMultiCapturePoint", "m_nEnabledParticle");

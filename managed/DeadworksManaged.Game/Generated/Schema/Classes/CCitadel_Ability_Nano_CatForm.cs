@@ -14,24 +14,24 @@ public static partial class Schema {
 		static string ISchemaClass<CCitadel_Ability_Nano_CatForm>.NativeName => "CCitadel_Ability_Nano_CatForm";
 
 		private static readonly SchemaField __m_bIsInCatform = new("CCitadel_Ability_Nano_CatForm", "m_bIsInCatform");
-		/// <summary><c>bool</c>.</summary>
+		/// <summary><c>bool</c>. Networked in build 6779: a write is sent to clients.</summary>
 		public bool m_bIsInCatform { get => Get<bool>(__m_bIsInCatform); set => Set(__m_bIsInCatform, value); }
 
 		private static readonly SchemaField __m_flLastDamageTime = new("CCitadel_Ability_Nano_CatForm", "m_flLastDamageTime");
-		/// <summary><c>GameTime_t</c>.</summary>
-		public float m_flLastDamageTime { get => Get<float>(__m_flLastDamageTime); set => Set(__m_flLastDamageTime, value); }
+		/// <summary><c>GameTime_t</c>. Networked in build 6779: a write is sent to clients.</summary>
+		public GameTime m_flLastDamageTime { get => Get<GameTime>(__m_flLastDamageTime); set => Set(__m_flLastDamageTime, value); }
 
 		private static readonly SchemaField __m_flStoredDamageAmp = new("CCitadel_Ability_Nano_CatForm", "m_flStoredDamageAmp");
-		/// <summary><c>float32</c>.</summary>
+		/// <summary><c>float32</c>. Networked in build 6779: a write is sent to clients.</summary>
 		public float m_flStoredDamageAmp { get => Get<float>(__m_flStoredDamageAmp); set => Set(__m_flStoredDamageAmp, value); }
 
 		private static readonly SchemaField __m_flTransformEndTime = new("CCitadel_Ability_Nano_CatForm", "m_flTransformEndTime");
-		/// <summary><c>GameTime_t</c>.</summary>
-		public float m_flTransformEndTime { get => Get<float>(__m_flTransformEndTime); set => Set(__m_flTransformEndTime, value); }
+		/// <summary><c>GameTime_t</c>. Networked in build 6779: a write is sent to clients.</summary>
+		public GameTime m_flTransformEndTime { get => Get<GameTime>(__m_flTransformEndTime); set => Set(__m_flTransformEndTime, value); }
 
 		private static readonly SchemaField __m_flTransformStartTime = new("CCitadel_Ability_Nano_CatForm", "m_flTransformStartTime");
-		/// <summary><c>GameTime_t</c>.</summary>
-		public float m_flTransformStartTime { get => Get<float>(__m_flTransformStartTime); set => Set(__m_flTransformStartTime, value); }
+		/// <summary><c>GameTime_t</c>. Networked in build 6779: a write is sent to clients.</summary>
+		public GameTime m_flTransformStartTime { get => Get<GameTime>(__m_flTransformStartTime); set => Set(__m_flTransformStartTime, value); }
 
 		/// <summary>The data entry this was created from, as <see cref="CCitadel_Ability_Nano_CatFormVData"/>, or null if it has none.</summary>
 		public new CCitadel_Ability_Nano_CatFormVData? VData => SubclassVData<CCitadel_Ability_Nano_CatFormVData>();

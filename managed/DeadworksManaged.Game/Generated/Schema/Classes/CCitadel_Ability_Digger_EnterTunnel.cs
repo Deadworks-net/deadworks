@@ -14,11 +14,11 @@ public static partial class Schema {
 		static string ISchemaClass<CCitadel_Ability_Digger_EnterTunnel>.NativeName => "CCitadel_Ability_Digger_EnterTunnel";
 
 		private static readonly SchemaField __m_hPushedFakeWall = new("CCitadel_Ability_Digger_EnterTunnel", "m_hPushedFakeWall");
-		/// <summary><c>CHandle&lt;CCitadelPassthroughFakeWall&gt;</c>.</summary>
+		/// <summary><c>CHandle&lt;CCitadelPassthroughFakeWall&gt;</c>. Networked in build 6779: a write is sent to clients.</summary>
 		public CCitadelPassthroughFakeWall? m_hPushedFakeWall { get => GetHandle<CCitadelPassthroughFakeWall>(__m_hPushedFakeWall); set => SetHandle(__m_hPushedFakeWall, value); }
 
 		private static readonly SchemaField __m_hPushedFakeWallLastThink = new("CCitadel_Ability_Digger_EnterTunnel", "m_hPushedFakeWallLastThink");
-		/// <summary><c>CHandle&lt;CCitadelPassthroughFakeWall&gt;</c>.</summary>
+		/// <summary><c>CHandle&lt;CCitadelPassthroughFakeWall&gt;</c>. Networked in build 6779: a write is sent to clients.</summary>
 		public CCitadelPassthroughFakeWall? m_hPushedFakeWallLastThink { get => GetHandle<CCitadelPassthroughFakeWall>(__m_hPushedFakeWallLastThink); set => SetHandle(__m_hPushedFakeWallLastThink, value); }
 
 		/// <summary>The data entry this was created from, as <see cref="CCitadel_Ability_Digger_EnterTunnelVData"/>, or null if it has none.</summary>

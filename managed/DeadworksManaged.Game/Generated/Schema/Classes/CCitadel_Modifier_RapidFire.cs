@@ -15,6 +15,6 @@ public static partial class Schema {
 
 		private static readonly SchemaField __m_flNextAttackTime = new("CCitadel_Modifier_RapidFire", "m_flNextAttackTime");
 		/// <summary><c>GameTime_t</c>.</summary>
-		public float m_flNextAttackTime { get => Get<float>(__m_flNextAttackTime); set => Set(__m_flNextAttackTime, value); }
+		public GameTime m_flNextAttackTime { get => Get<GameTime>(__m_flNextAttackTime); set => Set(__m_flNextAttackTime, value); }
 	}
 }

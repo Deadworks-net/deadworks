@@ -47,6 +47,6 @@ public static partial class Schema {
 
 		private static readonly SchemaField __m_vecDefaultOverrides = new("PingTargetDef_t", "m_vecDefaultOverrides");
 		/// <summary><c>CUtlVector&lt;PingDefaultOverride_t&gt;</c>. Situational replacements for what a tap does, first match wins. What lets a scoreboard tap and a world tap say different things about the same hero. Leave empty and a tap keeps placing a plain marker.</summary>
-		public SchemaObjectList<PingDefaultOverride_t> m_vecDefaultOverrides => new(this, __m_vecDefaultOverrides, -1);
+		public SchemaObjectList<PingDefaultOverride_t> m_vecDefaultOverrides => new(this, __m_vecDefaultOverrides, ListStorage.Vector);
 	}
 }

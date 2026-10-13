@@ -19,6 +19,6 @@ public static partial class Schema {
 
 		private static readonly SchemaField __m_strAttachmentPoints = new("CCitadelModifierTier2BossLaserChargeVData", "m_strAttachmentPoints");
 		/// <summary><c>CUtlVector&lt;CUtlString&gt;</c>.</summary>
-		public SchemaStringList m_strAttachmentPoints => new(this, __m_strAttachmentPoints, -1);
+		public SchemaStringList m_strAttachmentPoints => new(this, __m_strAttachmentPoints, ListStorage.Vector);
 	}
 }

@@ -14,11 +14,11 @@ public static partial class Schema {
 		static string ISchemaClass<CRagdollPropAttached>.NativeName => "CRagdollPropAttached";
 
 		private static readonly SchemaField __m_attachmentPointBoneSpace = new("CRagdollPropAttached", "m_attachmentPointBoneSpace");
-		/// <summary><c>Vector</c>.</summary>
+		/// <summary><c>Vector</c>. Networked in build 6779: a write is sent to clients.</summary>
 		public Vector3 m_attachmentPointBoneSpace { get => Get<Vector3>(__m_attachmentPointBoneSpace); set => Set(__m_attachmentPointBoneSpace, value); }
 
 		private static readonly SchemaField __m_attachmentPointRagdollSpace = new("CRagdollPropAttached", "m_attachmentPointRagdollSpace");
-		/// <summary><c>Vector</c>.</summary>
+		/// <summary><c>Vector</c>. Networked in build 6779: a write is sent to clients.</summary>
 		public Vector3 m_attachmentPointRagdollSpace { get => Get<Vector3>(__m_attachmentPointRagdollSpace); set => Set(__m_attachmentPointRagdollSpace, value); }
 
 		private static readonly SchemaField __m_bShouldDeleteAttachedActivationRecord = new("CRagdollPropAttached", "m_bShouldDeleteAttachedActivationRecord");
@@ -30,11 +30,11 @@ public static partial class Schema {
 		public bool m_bShouldDetach { get => Get<bool>(__m_bShouldDetach); set => Set(__m_bShouldDetach, value); }
 
 		private static readonly SchemaField __m_boneIndexAttached = new("CRagdollPropAttached", "m_boneIndexAttached");
-		/// <summary><c>uint32</c>.</summary>
+		/// <summary><c>uint32</c>. Networked in build 6779: a write is sent to clients.</summary>
 		public uint m_boneIndexAttached { get => Get<uint>(__m_boneIndexAttached); set => Set(__m_boneIndexAttached, value); }
 
 		private static readonly SchemaField __m_ragdollAttachedObjectIndex = new("CRagdollPropAttached", "m_ragdollAttachedObjectIndex");
-		/// <summary><c>uint32</c>.</summary>
+		/// <summary><c>uint32</c>. Networked in build 6779: a write is sent to clients.</summary>
 		public uint m_ragdollAttachedObjectIndex { get => Get<uint>(__m_ragdollAttachedObjectIndex); set => Set(__m_ragdollAttachedObjectIndex, value); }
 	}
 }
