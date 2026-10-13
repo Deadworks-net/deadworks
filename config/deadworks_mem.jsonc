@@ -28,6 +28,12 @@
 			"library": "server.dll",
 			"windows": "48 89 5C 24 ?? 57 48 83 EC ?? 48 8B 05 ?? ?? ?? ?? 8B FA"
 		},
+		// Guessed name. The game system's Init (vtable slot 0): the function that picks the maximum-uptime shutdown time
+		// with RandomInt(172800, 259200).
+		"CCitadelServerGCSystem::Init": {
+			"library": "server.dll",
+			"windows": "40 53 48 83 EC ?? 48 8B D9 E8 ?? ?? ?? ?? 84 C0 75 ?? 48 83 C4 ?? 5B C3 E8"
+		},
 		"CCitadelPlayerPawn::ModifyCurrency": {
 			"library": "server.dll",
 			"windows": "48 89 5C 24 ?? 48 89 7C 24 ?? 55 41 54 41 55 41 56 41 57 48 8D 6C 24"

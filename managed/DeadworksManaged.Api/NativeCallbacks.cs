@@ -157,6 +157,8 @@ internal struct NativeCallbacks
 	public nint KickClient;
 	public nint IsMapValid;
 	public nint SetConnectRejectReason;
+	public nint ClearServerKeyValues;
+	public nint SetServerKeyValue;
 	public nint GetSchemaClassSize;
 	public nint GetSchemaClassAlignment;
 }

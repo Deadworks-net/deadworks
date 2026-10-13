@@ -6,10 +6,12 @@ import { open } from "@tauri-apps/plugin-dialog";
 import { useSettings } from "@/hooks/use-settings";
 import { getStore } from "@/lib/tauri";
 import { cn } from "@/lib/utils";
+import HostingSettingsSection from "@/components/hosting/HostingSettingsSection";
 import styles from "./SettingsWindow.module.css";
 
 const NAV_ITEMS = [
   { id: "general", label: "General" },
+  { id: "hosting", label: "Hosting" },
   ...(import.meta.env.DEV ? [{ id: "developer", label: "Developer" }] : []),
 ];
 
@@ -236,6 +238,8 @@ export default function SettingsWindow() {
               />
             </>
           )}
+
+          {activeSection === "hosting" && <HostingSettingsSection />}
 
           {activeSection === "developer" && (
             <>

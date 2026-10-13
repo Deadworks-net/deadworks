@@ -265,7 +265,7 @@ fn render_patch(content: &str) -> Result<String, String> {
     Ok(lines.concat())
 }
 
-fn render_stripped(content: &str) -> Result<String, String> {
+pub(crate) fn render_stripped(content: &str) -> Result<String, String> {
     let (lines, _, _) = clean(content)?;
     Ok(lines.concat())
 }
@@ -350,9 +350,9 @@ fn entry(indent: &str, key: &str, value: &str, nl: &str) -> String {
 
 // ── gameinfo.gi lexing ──
 
-struct Located {
-    open: usize,
-    close: usize,
+pub(crate) struct Located {
+    pub(crate) open: usize,
+    pub(crate) close: usize,
 }
 
 /// Byte offsets of the braces delimiting `FileSystem/SearchPaths`, found by
@@ -363,7 +363,7 @@ fn locate_search_paths(content: &str) -> Option<Located> {
         .or_else(|| locate_block(content, &["SearchPaths"]))
 }
 
-fn locate_block(content: &str, path: &[&str]) -> Option<Located> {
+pub(crate) fn locate_block(content: &str, path: &[&str]) -> Option<Located> {
     let b = content.as_bytes();
     let mut i = 0usize;
     let mut stack: Vec<String> = Vec::new();
@@ -435,7 +435,7 @@ fn ends_with_path(stack: &[String], path: &[&str]) -> bool {
             .all(|(a, b)| a.eq_ignore_ascii_case(b))
 }
 
-fn line_of_offset(lines: &[&str], offset: usize) -> usize {
+pub(crate) fn line_of_offset(lines: &[&str], offset: usize) -> usize {
     let mut acc = 0usize;
     for (i, line) in lines.iter().enumerate() {
         acc += line.len();
@@ -462,7 +462,7 @@ fn code_part(line: &str) -> &str {
     line
 }
 
-fn first_token(line: &str) -> Option<&str> {
+pub(crate) fn first_token(line: &str) -> Option<&str> {
     let s = code_part(line).trim();
     if s.is_empty() {
         return None;
@@ -473,7 +473,7 @@ fn first_token(line: &str) -> Option<&str> {
     }
 }
 
-fn value_token(line: &str) -> Option<&str> {
+pub(crate) fn value_token(line: &str) -> Option<&str> {
     let s = code_part(line).trim();
     let rest = match s.strip_prefix('"') {
         Some(r) => &r[r.find('"')? + 1..],
@@ -489,7 +489,7 @@ fn value_token(line: &str) -> Option<&str> {
     }
 }
 
-fn indent_of(line: &str) -> Option<String> {
+pub(crate) fn indent_of(line: &str) -> Option<String> {
     let stripped = line.trim_start();
     if stripped.is_empty() {
         return None;
@@ -497,7 +497,7 @@ fn indent_of(line: &str) -> Option<String> {
     Some(line[..line.len() - stripped.len()].to_string())
 }
 
-fn newline_for(line: &str, content: &str) -> &'static str {
+pub(crate) fn newline_for(line: &str, content: &str) -> &'static str {
     if line.ends_with("\r\n") || (!line.ends_with('\n') && content.contains("\r\n")) {
         "\r\n"
     } else {

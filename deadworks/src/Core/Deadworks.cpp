@@ -161,6 +161,9 @@ void Deadworks::PostInit() {
     HookInline(hooks::g_CGCClientSystem_OnServerVersionCheck,
                "CGCClientSystem::OnServerVersionCheck",
                &hooks::Hook_CGCClientSystem_OnServerVersionCheck);
+    HookInline(hooks::g_CCitadelServerGCSystem_Init,
+               "CCitadelServerGCSystem::Init",
+               &hooks::Hook_CCitadelServerGCSystem_Init);
 
     // VMT hooks - these use virtual indices, not signatures
     auto &mem = MemoryDataLoader::Get();

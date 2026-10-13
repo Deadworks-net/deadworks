@@ -17,6 +17,12 @@ internal class ServerBrowserConfig
     [JsonPropertyName("extra_maps")]
     public List<string> ExtraMaps { get; set; } = [];
 
+    // Optional base URL clients can download content from instead of the Deadworks-hosted service,
+    // like Source 1's sv_downloadurl. Advertised in A2S_RULES as dw_fastdl; the file layout it must
+    // serve is described on ContentManifest.
+    [JsonPropertyName("fastdl_url")]
+    public string FastDlUrl { get; set; } = "";
+
     [JsonPropertyName("unlisted")]
     public bool Unlisted { get; set; } = false;
 }
