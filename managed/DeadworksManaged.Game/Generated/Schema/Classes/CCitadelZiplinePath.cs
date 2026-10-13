@@ -14,7 +14,10 @@ public static partial class Schema {
 		static string ISchemaClass<CCitadelZiplinePath>.NativeName => "CCitadelZiplinePath";
 
 		private static readonly SchemaField __m_iLaneNumber = new("CCitadelZiplinePath", "m_iLaneNumber");
-		/// <summary><c>int32</c>.</summary>
+		/// <summary><c>int32</c>. Wrapped by <c>CCitadelZiplinePath.Lane</c> in DeadworksManaged.Api.</summary>
 		public int m_iLaneNumber { get => Get<int>(__m_iLaneNumber); set => Set(__m_iLaneNumber, value); }
+
+		/// <summary>The curated <see cref="global::DeadworksManaged.Api.CCitadelZiplinePath"/> for this entity, or null if it is gone.</summary>
+		public new global::DeadworksManaged.Api.CCitadelZiplinePath? Entity => SchemaRegistry.Wrapper<global::DeadworksManaged.Api.CCitadelZiplinePath>(EntityHandle);
 	}
 }

@@ -220,6 +220,12 @@ public static partial class SchemaRegistry {
 		classes["CCitadel_Ability_ChargedShot"] = static () => new Schema.CCitadel_Ability_ChargedShot();
 		classes["CCitadel_Ability_ChargedTackle"] = static () => new Schema.CCitadel_Ability_ChargedTackle();
 		classes["CCitadel_Ability_Charged_Bomb"] = static () => new Schema.CCitadel_Ability_Charged_Bomb();
+		classes["CCitadel_Ability_ChessMaster_PrimaryWeapon"] = static () => new Schema.CCitadel_Ability_ChessMaster_PrimaryWeapon();
+		classes["CCitadel_Ability_Chessmaster_ForkPiece"] = static () => new Schema.CCitadel_Ability_Chessmaster_ForkPiece();
+		classes["CCitadel_Ability_Chessmaster_KnightBuff"] = static () => new Schema.CCitadel_Ability_Chessmaster_KnightBuff();
+		classes["CCitadel_Ability_Chessmaster_MoveChessPiece"] = static () => new Schema.CCitadel_Ability_Chessmaster_MoveChessPiece();
+		classes["CCitadel_Ability_Chessmaster_Queen"] = static () => new Schema.CCitadel_Ability_Chessmaster_Queen();
+		classes["CCitadel_Ability_Chessmaster_ThrowBishop"] = static () => new Schema.CCitadel_Ability_Chessmaster_ThrowBishop();
 		classes["CCitadel_Ability_ChronoSwap"] = static () => new Schema.CCitadel_Ability_ChronoSwap();
 		classes["CCitadel_Ability_Chrono_KineticCarbine"] = static () => new Schema.CCitadel_Ability_Chrono_KineticCarbine();
 		classes["CCitadel_Ability_Chrono_PulseGrenade"] = static () => new Schema.CCitadel_Ability_Chrono_PulseGrenade();
@@ -228,6 +234,11 @@ public static partial class SchemaRegistry {
 		classes["CCitadel_Ability_Crackshot"] = static () => new Schema.CCitadel_Ability_Crackshot();
 		classes["CCitadel_Ability_CrowdControl"] = static () => new Schema.CCitadel_Ability_CrowdControl();
 		classes["CCitadel_Ability_Dash"] = static () => new Schema.CCitadel_Ability_Dash();
+		classes["CCitadel_Ability_Deadpack_ChargeBlast"] = static () => new Schema.CCitadel_Ability_Deadpack_ChargeBlast();
+		classes["CCitadel_Ability_Deadpack_Flamethrower"] = static () => new Schema.CCitadel_Ability_Deadpack_Flamethrower();
+		classes["CCitadel_Ability_Deadpack_PrimaryWeapon_Charge"] = static () => new Schema.CCitadel_Ability_Deadpack_PrimaryWeapon_Charge();
+		classes["CCitadel_Ability_Deadpack_Rocketeer"] = static () => new Schema.CCitadel_Ability_Deadpack_Rocketeer();
+		classes["CCitadel_Ability_Deadpack_Ultimate"] = static () => new Schema.CCitadel_Ability_Deadpack_Ultimate();
 		classes["CCitadel_Ability_DeathTax"] = static () => new Schema.CCitadel_Ability_DeathTax();
 		classes["CCitadel_Ability_Digger_EnterTunnel"] = static () => new Schema.CCitadel_Ability_Digger_EnterTunnel();
 		classes["CCitadel_Ability_Disruptive_Charge"] = static () => new Schema.CCitadel_Ability_Disruptive_Charge();
@@ -669,6 +680,7 @@ public static partial class SchemaRegistry {
 		classes["CCitadel_Projectile_BookwormGun"] = static () => new Schema.CCitadel_Projectile_BookwormGun();
 		classes["CCitadel_Projectile_BubblingBrew"] = static () => new Schema.CCitadel_Projectile_BubblingBrew();
 		classes["CCitadel_Projectile_Cyclone"] = static () => new Schema.CCitadel_Projectile_Cyclone();
+		classes["CCitadel_Projectile_DeadpackMissile"] = static () => new Schema.CCitadel_Projectile_DeadpackMissile();
 		classes["CCitadel_Projectile_DustStorm"] = static () => new Schema.CCitadel_Projectile_DustStorm();
 		classes["CCitadel_Projectile_FeatherBoomerang"] = static () => new Schema.CCitadel_Projectile_FeatherBoomerang();
 		classes["CCitadel_Projectile_FortunaWeapon"] = static () => new Schema.CCitadel_Projectile_FortunaWeapon();
@@ -957,6 +969,7 @@ public static partial class SchemaRegistry {
 		classes["CNPC_Boss_Tier2"] = static () => new Schema.CNPC_Boss_Tier2();
 		classes["CNPC_Boss_Tier3"] = static () => new Schema.CNPC_Boss_Tier3();
 		classes["CNPC_Boss_Tier3Core"] = static () => new Schema.CNPC_Boss_Tier3Core();
+		classes["CNPC_ChessPiece"] = static () => new Schema.CNPC_ChessPiece();
 		classes["CNPC_Escort"] = static () => new Schema.CNPC_Escort();
 		classes["CNPC_FamiliarHelper"] = static () => new Schema.CNPC_FamiliarHelper();
 		classes["CNPC_MidBoss"] = static () => new Schema.CNPC_MidBoss();
@@ -1062,6 +1075,7 @@ public static partial class SchemaRegistry {
 		classes["CProjectile_Boho_BouncyProjectile"] = static () => new Schema.CProjectile_Boho_BouncyProjectile();
 		classes["CProjectile_Boho_SkipGrenade"] = static () => new Schema.CProjectile_Boho_SkipGrenade();
 		classes["CProjectile_BookwormDragon_Projectile"] = static () => new Schema.CProjectile_BookwormDragon_Projectile();
+		classes["CProjectile_ChessMaster_Fork_Projectile"] = static () => new Schema.CProjectile_ChessMaster_Fork_Projectile();
 		classes["CProjectile_Doorman_Cart_Projectile"] = static () => new Schema.CProjectile_Doorman_Cart_Projectile();
 		classes["CProjectile_Familiar_MovingToAttach"] = static () => new Schema.CProjectile_Familiar_MovingToAttach();
 		classes["CProjectile_GraveStone_Projectile"] = static () => new Schema.CProjectile_GraveStone_Projectile();
@@ -1244,7 +1258,17 @@ public static partial class SchemaRegistry {
 		designerNames["ability_burrow"] = static () => new Schema.CCitadel_Ability_Burrow();
 		designerNames["ability_charged_bomb"] = static () => new Schema.CCitadel_Ability_Charged_Bomb();
 		designerNames["ability_charged_shot"] = static () => new Schema.CCitadel_Ability_ChargedShot();
+		designerNames["ability_chessmaster_forkpiece"] = static () => new Schema.CCitadel_Ability_Chessmaster_ForkPiece();
+		designerNames["ability_chessmaster_knightbuff"] = static () => new Schema.CCitadel_Ability_Chessmaster_KnightBuff();
+		designerNames["ability_chessmaster_movechesspiece"] = static () => new Schema.CCitadel_Ability_Chessmaster_MoveChessPiece();
+		designerNames["ability_chessmaster_queen"] = static () => new Schema.CCitadel_Ability_Chessmaster_Queen();
+		designerNames["ability_chessmaster_throwbishop"] = static () => new Schema.CCitadel_Ability_Chessmaster_ThrowBishop();
 		designerNames["ability_crackshot"] = static () => new Schema.CCitadel_Ability_Crackshot();
+		designerNames["ability_deadpack_chargeblast"] = static () => new Schema.CCitadel_Ability_Deadpack_ChargeBlast();
+		designerNames["ability_deadpack_flamethrower"] = static () => new Schema.CCitadel_Ability_Deadpack_Flamethrower();
+		designerNames["ability_deadpack_primary_weapon_charge"] = static () => new Schema.CCitadel_Ability_Deadpack_PrimaryWeapon_Charge();
+		designerNames["ability_deadpack_rocketeer"] = static () => new Schema.CCitadel_Ability_Deadpack_Rocketeer();
+		designerNames["ability_deadpack_ultimate"] = static () => new Schema.CCitadel_Ability_Deadpack_Ultimate();
 		designerNames["ability_death_tax"] = static () => new Schema.CCitadel_Ability_DeathTax();
 		designerNames["ability_demonmark"] = static () => new Schema.CCitadel_Gunslinger_DemonMark();
 		designerNames["ability_digger_entertunnel"] = static () => new Schema.CCitadel_Ability_Digger_EnterTunnel();
@@ -1487,6 +1511,7 @@ public static partial class SchemaRegistry {
 		designerNames["citadel_ability_bull_leap"] = static () => new Schema.CCitadel_Ability_Bull_Leap();
 		designerNames["citadel_ability_card_toss"] = static () => new Schema.CCitadel_Ability_CardToss();
 		designerNames["citadel_ability_charged_tackle"] = static () => new Schema.CCitadel_Ability_ChargedTackle();
+		designerNames["citadel_ability_chessmaster_primaryweapon"] = static () => new Schema.CCitadel_Ability_ChessMaster_PrimaryWeapon();
 		designerNames["citadel_ability_chrono_kinetic_carbine"] = static () => new Schema.CCitadel_Ability_Chrono_KineticCarbine();
 		designerNames["citadel_ability_chrono_pulse_grenade"] = static () => new Schema.CCitadel_Ability_Chrono_PulseGrenade();
 		designerNames["citadel_ability_chrono_swap"] = static () => new Schema.CCitadel_Ability_ChronoSwap();
@@ -1599,6 +1624,7 @@ public static partial class SchemaRegistry {
 		designerNames["citadel_capture_point"] = static () => new Schema.CCitadelTriggerCapturePoint();
 		designerNames["citadel_capture_point_escort"] = static () => new Schema.CCitadelTriggerCapturePoint_Escort();
 		designerNames["citadel_cat_animating"] = static () => new Schema.CCitadel_CatAnimating();
+		designerNames["citadel_chesspiece_entity"] = static () => new Schema.CNPC_ChessPiece();
 		designerNames["citadel_configurable_tracked_projectile"] = static () => new Schema.CCitadelConfigurableTrackedProjectile();
 		designerNames["citadel_control_point"] = static () => new Schema.CCitadelControlPointTrigger();
 		designerNames["citadel_dash_cast_ability"] = static () => new Schema.CCitadelBaseDashCastAbility();
@@ -1718,6 +1744,7 @@ public static partial class SchemaRegistry {
 		designerNames["cosmetic_emote"] = static () => new Schema.CCitadel_CosmeticAbility_Emote();
 		designerNames["cosmetic_snowball"] = static () => new Schema.CCitadel_CosmeticAbility_Snowball();
 		designerNames["cosmetic_voting_poster"] = static () => new Schema.CCitadel_CosmeticAbility_VotingPoster();
+		designerNames["deadpack_projectile_missile"] = static () => new Schema.CCitadel_Projectile_DeadpackMissile();
 		designerNames["destroyable_building"] = static () => new Schema.CCitadel_Destroyable_Building();
 		designerNames["doorman_bomb_projectile"] = static () => new Schema.CDoormanBombProjectile();
 		designerNames["drifter_blood_blast"] = static () => new Schema.CAbility_Drifter_BloodBlast();
@@ -2107,6 +2134,7 @@ public static partial class SchemaRegistry {
 		designerNames["priest_beartrap"] = static () => new Schema.CCitadel_Ability_Priest_BearTrap();
 		designerNames["priest_flashbang"] = static () => new Schema.CCitadel_Ability_Priest_Flashbang();
 		designerNames["projectile_boho_skipgrenade"] = static () => new Schema.CProjectile_Boho_SkipGrenade();
+		designerNames["projectile_chessmaster_forkpiece"] = static () => new Schema.CProjectile_ChessMaster_Fork_Projectile();
 		designerNames["projectile_cyclone"] = static () => new Schema.CCitadel_Projectile_Cyclone();
 		designerNames["projectile_doorman_cart_projectile"] = static () => new Schema.CProjectile_Doorman_Cart_Projectile();
 		designerNames["projectile_dust_storm"] = static () => new Schema.CCitadel_Projectile_DustStorm();

@@ -20,5 +20,9 @@ public static partial class Schema {
 		private static readonly SchemaField __m_TracerParticle = new("CModifier_Baba_BubblingBrew_GunDamage_VData", "m_TracerParticle");
 		/// <summary><c>CResourceNameTyped&lt;CWeakHandle&lt;InfoForResourceTypeIParticleSystemDefinition&gt;&gt;</c>.</summary>
 		public string m_TracerParticle => GetBufferString(__m_TracerParticle);
+
+		private static readonly SchemaField __m_strWeaponShootSound = new("CModifier_Baba_BubblingBrew_GunDamage_VData", "m_strWeaponShootSound");
+		/// <summary><c>CSoundEventName</c>.</summary>
+		public string m_strWeaponShootSound => GetBufferString(__m_strWeaponShootSound);
 	}
 }

@@ -17,6 +17,14 @@ public static partial class Schema {
 		/// <summary><c>CResourceNameTyped&lt;CWeakHandle&lt;InfoForResourceTypeIParticleSystemDefinition&gt;&gt;</c>.</summary>
 		public string m_AmbientParticle => GetBufferString(__m_AmbientParticle);
 
+		private static readonly SchemaField __m_OutlineColor = new("CCitadelItemPickupVData", "m_OutlineColor");
+		/// <summary><c>Color</c>.</summary>
+		public Color32 m_OutlineColor { get => Get<Color32>(__m_OutlineColor); set => Set(__m_OutlineColor, value); }
+
+		private static readonly SchemaField __m_bPanelShowThruWalls = new("CCitadelItemPickupVData", "m_bPanelShowThruWalls");
+		/// <summary><c>bool</c>.</summary>
+		public bool m_bPanelShowThruWalls { get => Get<bool>(__m_bPanelShowThruWalls); set => Set(__m_bPanelShowThruWalls, value); }
+
 		private static readonly SchemaField __m_flPhysicsRadius = new("CCitadelItemPickupVData", "m_flPhysicsRadius");
 		/// <summary><c>float32</c>.</summary>
 		public float m_flPhysicsRadius { get => Get<float>(__m_flPhysicsRadius); set => Set(__m_flPhysicsRadius, value); }

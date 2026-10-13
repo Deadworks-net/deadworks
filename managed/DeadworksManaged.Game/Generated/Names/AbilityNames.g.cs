@@ -71,8 +71,36 @@ public static class AbilityNames {
 	public const string ability_charged_bomb_throw = "ability_charged_bomb_throw";
 	/// <summary>Charged Shot. Signature.</summary>
 	public const string ability_charged_shot = "ability_charged_shot";
+	/// <summary>Rook Battery. Signature.</summary>
+	public const string ability_chessmaster_forkpiece = "ability_chessmaster_forkpiece";
+	/// <summary>Rook Battery. Innate.</summary>
+	public const string ability_chessmaster_forkpiece_trigger = "ability_chessmaster_forkpiece_trigger";
+	/// <summary>Kingside Knight. Signature.</summary>
+	public const string ability_chessmaster_knightbuff = "ability_chessmaster_knightbuff";
+	/// <summary>Move Piece. Weapon.</summary>
+	public const string ability_chessmaster_movechesspiece = "ability_chessmaster_movechesspiece";
+	/// <summary>Develop Queen. Ultimate.</summary>
+	public const string ability_chessmaster_queen = "ability_chessmaster_queen";
+	/// <summary>Develop Queen. Innate.</summary>
+	public const string ability_chessmaster_queen_trigger = "ability_chessmaster_queen_trigger";
+	/// <summary>Setup Bishop. Signature.</summary>
+	public const string ability_chessmaster_throwbishop = "ability_chessmaster_throwbishop";
+	/// <summary>Setup Bishop. Innate.</summary>
+	public const string ability_chessmaster_throwbishop_trigger = "ability_chessmaster_throwbishop_trigger";
 	/// <summary>Crackshot. Signature.</summary>
 	public const string ability_crackshot = "ability_crackshot";
+	/// <summary>Strix Salvo. Signature.</summary>
+	public const string ability_deadpack_chargeblast = "ability_deadpack_chargeblast";
+	/// <summary>Jettison Fuel. Signature.</summary>
+	public const string ability_deadpack_flamethrower = "ability_deadpack_flamethrower";
+	/// <summary>Weapon.</summary>
+	public const string ability_deadpack_primary_weapon_charge = "ability_deadpack_primary_weapon_charge";
+	/// <summary>Chimera Mk1. Signature.</summary>
+	public const string ability_deadpack_rocketeer = "ability_deadpack_rocketeer";
+	/// <summary>Close The Deal. Ultimate.</summary>
+	public const string ability_deadpack_ultimate = "ability_deadpack_ultimate";
+	/// <summary>Innate.</summary>
+	public const string ability_deadpack_zip_line = "ability_deadpack_zip_line";
 	/// <summary>Signature.</summary>
 	public const string ability_death_tax = "ability_death_tax";
 	/// <summary>Digging. Innate.</summary>
@@ -241,6 +269,10 @@ public static class AbilityNames {
 	public const string ability_melee_bookworm = "ability_melee_bookworm";
 	/// <summary>Melee.</summary>
 	public const string ability_melee_butcher = "ability_melee_butcher";
+	/// <summary>Melee. Melee.</summary>
+	public const string ability_melee_chessmaster = "ability_melee_chessmaster";
+	/// <summary>Melee. Melee.</summary>
+	public const string ability_melee_deadpack = "ability_melee_deadpack";
 	/// <summary>Melee. Melee.</summary>
 	public const string ability_melee_digger = "ability_melee_digger";
 	/// <summary>Melee. Melee.</summary>
@@ -779,6 +811,10 @@ public static class AbilityNames {
 	public const string citadel_weapon_bull_set = "citadel_weapon_bull_set";
 	/// <summary>Weapon.</summary>
 	public const string citadel_weapon_cadence_set = "citadel_weapon_cadence_set";
+	/// <summary>Alekhine's Gun. Weapon.</summary>
+	public const string citadel_weapon_chessmaster_set = "citadel_weapon_chessmaster_set";
+	/// <summary>Weapon.</summary>
+	public const string citadel_weapon_chessmaster_shotgun = "citadel_weapon_chessmaster_shotgun";
 	/// <summary>Trade Secret. Weapon.</summary>
 	public const string citadel_weapon_chrono_set = "citadel_weapon_chrono_set";
 	/// <summary>Weapon.</summary>

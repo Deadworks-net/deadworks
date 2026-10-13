@@ -63,8 +63,28 @@ public static class EntityNames {
 	public const string ability_charged_bomb = "ability_charged_bomb";
 	/// <summary><c>CCitadel_Ability_ChargedShot</c>.</summary>
 	public const string ability_charged_shot = "ability_charged_shot";
+	/// <summary><c>CCitadel_Ability_Chessmaster_ForkPiece</c>.</summary>
+	public const string ability_chessmaster_forkpiece = "ability_chessmaster_forkpiece";
+	/// <summary><c>CCitadel_Ability_Chessmaster_KnightBuff</c>.</summary>
+	public const string ability_chessmaster_knightbuff = "ability_chessmaster_knightbuff";
+	/// <summary><c>CCitadel_Ability_Chessmaster_MoveChessPiece</c>.</summary>
+	public const string ability_chessmaster_movechesspiece = "ability_chessmaster_movechesspiece";
+	/// <summary><c>CCitadel_Ability_Chessmaster_Queen</c>.</summary>
+	public const string ability_chessmaster_queen = "ability_chessmaster_queen";
+	/// <summary><c>CCitadel_Ability_Chessmaster_ThrowBishop</c>.</summary>
+	public const string ability_chessmaster_throwbishop = "ability_chessmaster_throwbishop";
 	/// <summary><c>CCitadel_Ability_Crackshot</c>.</summary>
 	public const string ability_crackshot = "ability_crackshot";
+	/// <summary><c>CCitadel_Ability_Deadpack_ChargeBlast</c>.</summary>
+	public const string ability_deadpack_chargeblast = "ability_deadpack_chargeblast";
+	/// <summary><c>CCitadel_Ability_Deadpack_Flamethrower</c>.</summary>
+	public const string ability_deadpack_flamethrower = "ability_deadpack_flamethrower";
+	/// <summary><c>CCitadel_Ability_Deadpack_PrimaryWeapon_Charge</c>.</summary>
+	public const string ability_deadpack_primary_weapon_charge = "ability_deadpack_primary_weapon_charge";
+	/// <summary><c>CCitadel_Ability_Deadpack_Rocketeer</c>.</summary>
+	public const string ability_deadpack_rocketeer = "ability_deadpack_rocketeer";
+	/// <summary><c>CCitadel_Ability_Deadpack_Ultimate</c>.</summary>
+	public const string ability_deadpack_ultimate = "ability_deadpack_ultimate";
 	/// <summary><c>CCitadel_Ability_DeathTax</c>.</summary>
 	public const string ability_death_tax = "ability_death_tax";
 	/// <summary><c>CCitadel_Gunslinger_DemonMark</c>.</summary>
@@ -549,6 +569,8 @@ public static class EntityNames {
 	public const string citadel_ability_card_toss = "citadel_ability_card_toss";
 	/// <summary><c>CCitadel_Ability_ChargedTackle</c>.</summary>
 	public const string citadel_ability_charged_tackle = "citadel_ability_charged_tackle";
+	/// <summary><c>CCitadel_Ability_ChessMaster_PrimaryWeapon</c>.</summary>
+	public const string citadel_ability_chessmaster_primaryweapon = "citadel_ability_chessmaster_primaryweapon";
 	/// <summary><c>CCitadel_Ability_Chrono_KineticCarbine</c>.</summary>
 	public const string citadel_ability_chrono_kinetic_carbine = "citadel_ability_chrono_kinetic_carbine";
 	/// <summary><c>CCitadel_Ability_Chrono_PulseGrenade</c>.</summary>
@@ -773,6 +795,8 @@ public static class EntityNames {
 	public const string citadel_capture_point_escort = "citadel_capture_point_escort";
 	/// <summary><c>CCitadel_CatAnimating</c>.</summary>
 	public const string citadel_cat_animating = "citadel_cat_animating";
+	/// <summary><c>CNPC_ChessPiece</c>.</summary>
+	public const string citadel_chesspiece_entity = "citadel_chesspiece_entity";
 	/// <summary><c>CCitadelConfigurableTrackedProjectile</c>.</summary>
 	public const string citadel_configurable_tracked_projectile = "citadel_configurable_tracked_projectile";
 	/// <summary><c>CCitadelControlPointTrigger</c>.</summary>
@@ -1011,6 +1035,8 @@ public static class EntityNames {
 	public const string cosmetic_snowball = "cosmetic_snowball";
 	/// <summary><c>CCitadel_CosmeticAbility_VotingPoster</c>.</summary>
 	public const string cosmetic_voting_poster = "cosmetic_voting_poster";
+	/// <summary><c>CCitadel_Projectile_DeadpackMissile</c>.</summary>
+	public const string deadpack_projectile_missile = "deadpack_projectile_missile";
 	/// <summary><c>CCitadel_Destroyable_Building</c>.</summary>
 	public const string destroyable_building = "destroyable_building";
 	/// <summary><c>CDoormanBombProjectile</c>.</summary>
@@ -1789,6 +1815,8 @@ public static class EntityNames {
 	public const string priest_flashbang = "priest_flashbang";
 	/// <summary><c>CProjectile_Boho_SkipGrenade</c>.</summary>
 	public const string projectile_boho_skipgrenade = "projectile_boho_skipgrenade";
+	/// <summary><c>CProjectile_ChessMaster_Fork_Projectile</c>.</summary>
+	public const string projectile_chessmaster_forkpiece = "projectile_chessmaster_forkpiece";
 	/// <summary><c>CCitadel_Projectile_Cyclone</c>.</summary>
 	public const string projectile_cyclone = "projectile_cyclone";
 	/// <summary><c>CProjectile_Doorman_Cart_Projectile</c>.</summary>

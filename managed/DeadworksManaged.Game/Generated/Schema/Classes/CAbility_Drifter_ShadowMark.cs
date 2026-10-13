@@ -32,9 +32,5 @@ public static partial class Schema {
 		private static readonly SchemaField __m_qPostTeleportAngles = new("CAbility_Drifter_ShadowMark", "m_qPostTeleportAngles");
 		/// <summary><c>QAngle</c>.</summary>
 		public Vector3 m_qPostTeleportAngles { get => Get<Vector3>(__m_qPostTeleportAngles); set => Set(__m_qPostTeleportAngles, value); }
-
-		private static readonly SchemaField __m_vLastValidTeleportPosition = new("CAbility_Drifter_ShadowMark", "m_vLastValidTeleportPosition");
-		/// <summary><c>VectorWS</c>.</summary>
-		public Vector3 m_vLastValidTeleportPosition { get => Get<Vector3>(__m_vLastValidTeleportPosition); set => Set(__m_vLastValidTeleportPosition, value); }
 	}
 }

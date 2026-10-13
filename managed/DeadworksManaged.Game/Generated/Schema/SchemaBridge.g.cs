@@ -56,6 +56,10 @@ public static class SchemaBridge {
 		/// <summary>This object as <see cref="Schema.CCitadelPlayerPawn"/>: every schema field the game declares for it, under the game's own names. Each use looks the object up again, so keep the view in a local when you read several fields.</summary>
 		public Schema.CCitadelPlayerPawn Schema => SchemaRegistry.Bridge<Schema.CCitadelPlayerPawn>(self.EntityHandle);
 	}
+	extension(CCitadelZiplinePath self) {
+		/// <summary>This object as <see cref="Schema.CCitadelZiplinePath"/>: every schema field the game declares for it, under the game's own names. Each use looks the object up again, so keep the view in a local when you read several fields.</summary>
+		public Schema.CCitadelZiplinePath Schema => SchemaRegistry.Bridge<Schema.CCitadelZiplinePath>(self.EntityHandle);
+	}
 	extension(CCitadel_Ability_Dash self) {
 		/// <summary>This object as <see cref="Schema.CCitadel_Ability_Dash"/>: every schema field the game declares for it, under the game's own names. Each use looks the object up again, so keep the view in a local when you read several fields.</summary>
 		public Schema.CCitadel_Ability_Dash Schema => SchemaRegistry.Bridge<Schema.CCitadel_Ability_Dash>(self.EntityHandle);

@@ -95,6 +95,10 @@ public static class SubclassNames {
 	public const string citadel_cat_animating = "citadel_cat_animating";
 	/// <summary>A <c>citadel_item_powerup_spawner</c>, from <c>scripts/misc.vdata</c>.</summary>
 	public const string citadel_change_team_spawner = "citadel_change_team_spawner";
+	/// <summary>A <c>citadel_chesspiece_entity</c>, from <c>scripts/npc_units.vdata</c>.</summary>
+	public const string citadel_chesspiece_bishop = "citadel_chesspiece_bishop";
+	/// <summary>A <c>citadel_chesspiece_entity</c>, from <c>scripts/npc_units.vdata</c>.</summary>
+	public const string citadel_chesspiece_queen = "citadel_chesspiece_queen";
 	/// <summary>A <c>citadel_fissure_wall</c>, from <c>scripts/npc_units.vdata</c>.</summary>
 	public const string citadel_fissure_wall = "citadel_fissure_wall";
 	/// <summary>A <c>citadel_hideout_ball</c>, from <c>scripts/npc_units.vdata</c>.</summary>

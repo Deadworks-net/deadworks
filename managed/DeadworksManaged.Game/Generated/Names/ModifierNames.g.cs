@@ -108,9 +108,119 @@ public static class ModifierNames {
 	/// <summary>Class <c>modifier_intrinsic_base</c>.</summary>
 	public const string ability_charged_shot__modifier_intrinsic_base = "ability_charged_shot/modifier_intrinsic_base";
 	/// <summary>Class <c>modifier_base</c>.</summary>
+	public const string ability_chessmaster_forkpiece__buff = "ability_chessmaster_forkpiece/buff";
+	/// <summary>Class <c>modifier_base</c>.</summary>
+	public const string ability_chessmaster_forkpiece__debuff = "ability_chessmaster_forkpiece/debuff";
+	/// <summary>Class <c>modifier_citadel_root</c>.</summary>
+	public const string ability_chessmaster_forkpiece__hex = "ability_chessmaster_forkpiece/hex";
+	/// <summary>Class <c>modifier_base</c>.</summary>
+	public const string ability_chessmaster_forkpiece__immune = "ability_chessmaster_forkpiece/immune";
+	/// <summary>Class <c>modifier_slow_base</c>.</summary>
+	public const string ability_chessmaster_forkpiece__slow = "ability_chessmaster_forkpiece/slow";
+	/// <summary>Class <c>modifier_base</c>.</summary>
+	public const string ability_chessmaster_knightbuff__buff = "ability_chessmaster_knightbuff/buff";
+	/// <summary>Class <c>modifier_diminishing_slow</c>.</summary>
+	public const string ability_chessmaster_knightbuff__dimslow = "ability_chessmaster_knightbuff/dimslow";
+	/// <summary>Class <c>modifier_chessmaster_buffally_buff</c>.</summary>
+	public const string ability_chessmaster_knightbuff__rookbuff = "ability_chessmaster_knightbuff/rookbuff";
+	/// <summary>Class <c>modifier_movechesspiececooldown</c>.</summary>
+	public const string ability_chessmaster_movechesspiece__cooldown = "ability_chessmaster_movechesspiece/cooldown";
+	/// <summary>Class <c>modifier_movechesspiececooldown</c>.</summary>
+	public const string ability_chessmaster_movechesspiece__cooldownplayer = "ability_chessmaster_movechesspiece/cooldownplayer";
+	/// <summary>Class <c>modifier_movechesspiece</c>.</summary>
+	public const string ability_chessmaster_movechesspiece__move = "ability_chessmaster_movechesspiece/move";
+	/// <summary>Class <c>modifier_movechesspiece</c>.</summary>
+	public const string ability_chessmaster_movechesspiece__moveally = "ability_chessmaster_movechesspiece/moveally";
+	/// <summary>Class <c>modifier_movechesspiece</c>.</summary>
+	public const string ability_chessmaster_movechesspiece__moveking = "ability_chessmaster_movechesspiece/moveking";
+	/// <summary>Class <c>modifier_movechesspiece</c>.</summary>
+	public const string ability_chessmaster_movechesspiece__movequeen = "ability_chessmaster_movechesspiece/movequeen";
+	/// <summary>Class <c>modifier_chessmaster_queen_holdinplace</c>.</summary>
+	public const string ability_chessmaster_queen__lift = "ability_chessmaster_queen/lift";
+	/// <summary>Class <c>modifier_slow_base</c>.</summary>
+	public const string ability_chessmaster_queen__slow = "ability_chessmaster_queen/slow";
+	/// <summary>Class <c>modifier_chessmaster_groundtile</c>.</summary>
+	public const string ability_chessmaster_queen__tile = "ability_chessmaster_queen/tile";
+	/// <summary>Class <c>modifier_chessmaster_damageaura</c>.</summary>
+	public const string ability_chessmaster_throwbishop__aura = "ability_chessmaster_throwbishop/aura";
+	/// <summary>Class <c>modifier_base</c>.</summary>
+	public const string ability_chessmaster_throwbishop__base = "ability_chessmaster_throwbishop/base";
+	/// <summary>Class <c>modifier_base</c>.</summary>
+	public const string ability_chessmaster_throwbishop__black = "ability_chessmaster_throwbishop/black";
+	/// <summary>Class <c>modifier_diminishing_slow</c>.</summary>
+	public const string ability_chessmaster_throwbishop__dimslow = "ability_chessmaster_throwbishop/dimslow";
+	/// <summary>Class <c>modifier_chessmaster_groundtile</c>.</summary>
+	public const string ability_chessmaster_throwbishop__groundaura = "ability_chessmaster_throwbishop/groundaura";
+	/// <summary>Class <c>modifier_chessmaster_movingpiecedamage</c>.</summary>
+	public const string ability_chessmaster_throwbishop__movingpiecedamage = "ability_chessmaster_throwbishop/movingpiecedamage";
+	/// <summary>Class <c>modifier_base</c>.</summary>
+	public const string ability_chessmaster_throwbishop__slow = "ability_chessmaster_throwbishop/slow";
+	/// <summary>Class <c>modifier_chessmaster_stackingspiritresistreduction</c>.</summary>
+	public const string ability_chessmaster_throwbishop__stack = "ability_chessmaster_throwbishop/stack";
+	/// <summary>Class <c>modifier_base</c>.</summary>
+	public const string ability_chessmaster_throwbishop__target = "ability_chessmaster_throwbishop/target";
+	/// <summary>Class <c>modifier_base</c>.</summary>
 	public const string ability_crackshot__bullet_resist_reduction = "ability_crackshot/bullet_resist_reduction";
 	/// <summary>Class <c>modifier_diminishing_slow</c>.</summary>
 	public const string ability_crackshot__slow = "ability_crackshot/slow";
+	/// <summary>Class <c>modifier_deadpack_coated</c>.</summary>
+	public const string ability_deadpack_chargeblast__coated = "ability_deadpack_chargeblast/coated";
+	/// <summary>Class <c>modifier_base</c>.</summary>
+	public const string ability_deadpack_chargeblast__coated_buff = "ability_deadpack_chargeblast/coated_buff";
+	/// <summary>Class <c>modifier_diminishing_slow</c>.</summary>
+	public const string ability_deadpack_chargeblast__coated_slow = "ability_deadpack_chargeblast/coated_slow";
+	/// <summary>Class <c>modifier_deadpack_chargeblast_mine_aura</c>.</summary>
+	public const string ability_deadpack_chargeblast__mine_aura = "ability_deadpack_chargeblast/mine_aura";
+	/// <summary>Class <c>modifier_base</c>.</summary>
+	public const string ability_deadpack_chargeblast__mine_trigger_marker = "ability_deadpack_chargeblast/mine_trigger_marker";
+	/// <summary>Class <c>modifier_deadpack_forcedtoairmovement</c>.</summary>
+	public const string ability_deadpack_flamethrower__backblast_backflip = "ability_deadpack_flamethrower/backblast_backflip";
+	/// <summary>Class <c>modifier_slow_base</c>.</summary>
+	public const string ability_deadpack_flamethrower__debuff = "ability_deadpack_flamethrower/debuff";
+	/// <summary>Class <c>modifier_deadpack_flamethrower_fire_rate</c>.</summary>
+	public const string ability_deadpack_flamethrower__firerate_buff = "ability_deadpack_flamethrower/firerate_buff";
+	/// <summary>Class <c>modifier_deadpack_flamethrower_resist_reduction</c>.</summary>
+	public const string ability_deadpack_flamethrower__resist_reduction = "ability_deadpack_flamethrower/resist_reduction";
+	/// <summary>Class <c>modifier_hero_gravity</c>.</summary>
+	public const string ability_deadpack_primary_weapon_charge__modifier_hero_gravity = "ability_deadpack_primary_weapon_charge/modifier_hero_gravity";
+	/// <summary>Class <c>modifier_deadpack_rocketselfjump</c>.</summary>
+	public const string ability_deadpack_primary_weapon_charge__selflaunch = "ability_deadpack_primary_weapon_charge/selflaunch";
+	/// <summary>Class <c>modifier_deadpack_forcedtoairmovement</c>.</summary>
+	public const string ability_deadpack_rocketeer__backflip = "ability_deadpack_rocketeer/backflip";
+	/// <summary>Class <c>modifier_deadpack_overloadedlaunch</c>.</summary>
+	public const string ability_deadpack_rocketeer__bounceback = "ability_deadpack_rocketeer/bounceback";
+	/// <summary>Class <c>modifier_base</c>.</summary>
+	public const string ability_deadpack_rocketeer__jetpacking = "ability_deadpack_rocketeer/jetpacking";
+	/// <summary>Class <c>modifier_base</c>.</summary>
+	public const string ability_deadpack_rocketeer__jetpackingvtol = "ability_deadpack_rocketeer/jetpackingvtol";
+	/// <summary>Class <c>citadel_modifier_deadpack_jetpacklockout</c>.</summary>
+	public const string ability_deadpack_rocketeer__lockout = "ability_deadpack_rocketeer/lockout";
+	/// <summary>Class <c>citadel_modifier_deadpack_maxheat</c>.</summary>
+	public const string ability_deadpack_rocketeer__maxheat = "ability_deadpack_rocketeer/maxheat";
+	/// <summary>Class <c>modifier_deadpack_heat_pool</c>.</summary>
+	public const string ability_deadpack_rocketeer__modifier_deadpack_heat_pool = "ability_deadpack_rocketeer/modifier_deadpack_heat_pool";
+	/// <summary>Class <c>modifier_deadpack_overloadedlaunch</c>.</summary>
+	public const string ability_deadpack_rocketeer__overloaded = "ability_deadpack_rocketeer/overloaded";
+	/// <summary>Class <c>modifier_base</c>.</summary>
+	public const string ability_deadpack_ultimate__castdelay = "ability_deadpack_ultimate/castdelay";
+	/// <summary>Class <c>modifier_base</c>.</summary>
+	public const string ability_deadpack_ultimate__charging = "ability_deadpack_ultimate/charging";
+	/// <summary>Class <c>modifier_deadpack_ultimate_target</c>.</summary>
+	public const string ability_deadpack_ultimate__deadpack_ult_grabbed = "ability_deadpack_ultimate/deadpack_ult_grabbed";
+	/// <summary>Class <c>modifier_deadpack_ultimate_goingdown</c>.</summary>
+	public const string ability_deadpack_ultimate__goingdown = "ability_deadpack_ultimate/goingdown";
+	/// <summary>Class <c>modifier_base</c>.</summary>
+	public const string ability_deadpack_ultimate__goingup = "ability_deadpack_ultimate/goingup";
+	/// <summary>Class <c>modifier_diminishing_slow</c>.</summary>
+	public const string ability_deadpack_zip_line__modifier_knocked_off_zipline_slow = "ability_deadpack_zip_line/modifier_knocked_off_zipline_slow";
+	/// <summary>Class <c>modifier_base</c>.</summary>
+	public const string ability_deadpack_zip_line__modifier_riding_zipline = "ability_deadpack_zip_line/modifier_riding_zipline";
+	/// <summary>Class <c>modifier_base</c>.</summary>
+	public const string ability_deadpack_zip_line__modifier_zipline_intro = "ability_deadpack_zip_line/modifier_zipline_intro";
+	/// <summary>Class <c>modifier_zipline_knockdown_immune</c>.</summary>
+	public const string ability_deadpack_zip_line__modifier_zipline_knockdown_immune = "ability_deadpack_zip_line/modifier_zipline_knockdown_immune";
+	/// <summary>Class <c>modifier_zipline_speed</c>.</summary>
+	public const string ability_deadpack_zip_line__zipline_protection_slow = "ability_deadpack_zip_line/zipline_protection_slow";
 	/// <summary>Class <c>modifier_dooman_bomb_debuff</c>.</summary>
 	public const string ability_doorman_bomb__debuff = "ability_doorman_bomb/debuff";
 	/// <summary>Class <c>modifier_doorman_bell_aura</c>.</summary>
@@ -1510,6 +1620,8 @@ public static class ModifierNames {
 	public const string citadel_neutral_self_bomb_metal__citadel_modifier_neutral_self_bomb = "citadel_neutral_self_bomb_metal/citadel_modifier_neutral_self_bomb";
 	/// <summary>Class <c>modifier_cadence_gun_spikes</c>.</summary>
 	public const string citadel_weapon_cadence_set__modifier_cadence_gun_spikes = "citadel_weapon_cadence_set/modifier_cadence_gun_spikes";
+	/// <summary>Class <c>modifier_hero_gravity</c>.</summary>
+	public const string citadel_weapon_chessmaster_shotgun__gravity = "citadel_weapon_chessmaster_shotgun/gravity";
 	/// <summary>Class <c>modifier_base</c>.</summary>
 	public const string citadel_weapon_drifter_set__vampire = "citadel_weapon_drifter_set/vampire";
 	/// <summary>Class <c>modifier_base</c>.</summary>

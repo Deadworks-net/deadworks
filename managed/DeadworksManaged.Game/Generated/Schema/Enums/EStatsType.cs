@@ -115,7 +115,8 @@ public static partial class Schema {
 		EGameplayTimeScale = 104,
 		EAnimationTimeScale = 105,
 		EParticleTimeScale = 106,
-		EStatsCount = 107,
-		EStatsInvalid = 107,
+		ETechPowerStolen = 107,
+		EStatsCount = 108,
+		EStatsInvalid = 108,
 	}
 }

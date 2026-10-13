@@ -29,6 +29,14 @@ public static partial class Schema {
 		/// <summary><c>CResourceNameTyped&lt;CWeakHandle&lt;InfoForResourceTypeIParticleSystemDefinition&gt;&gt;</c>.</summary>
 		public string m_ChargingJumpParticle => GetBufferString(__m_ChargingJumpParticle);
 
+		private static readonly SchemaField __m_WeaponOffsetCrouch = new("CCitadel_Ability_Baba_BenchRun_VData", "m_WeaponOffsetCrouch");
+		/// <summary><c>Vector</c>.</summary>
+		public Vector3 m_WeaponOffsetCrouch { get => Get<Vector3>(__m_WeaponOffsetCrouch); set => Set(__m_WeaponOffsetCrouch, value); }
+
+		private static readonly SchemaField __m_WeaponOffsetStand = new("CCitadel_Ability_Baba_BenchRun_VData", "m_WeaponOffsetStand");
+		/// <summary><c>Vector</c>.</summary>
+		public Vector3 m_WeaponOffsetStand { get => Get<Vector3>(__m_WeaponOffsetStand); set => Set(__m_WeaponOffsetStand, value); }
+
 		private static readonly SchemaField __m_flChargeJumpAnimSpeedScale = new("CCitadel_Ability_Baba_BenchRun_VData", "m_flChargeJumpAnimSpeedScale");
 		/// <summary><c>float32</c>.</summary>
 		public float m_flChargeJumpAnimSpeedScale { get => Get<float>(__m_flChargeJumpAnimSpeedScale); set => Set(__m_flChargeJumpAnimSpeedScale, value); }

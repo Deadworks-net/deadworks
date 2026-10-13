@@ -900,6 +900,8 @@ public static class ConVars {
 	public static readonly GameConVar<float> citadel_crate_spawn_initial_delay = new("citadel_crate_spawn_initial_delay");
 	/// <summary>Default <c>50</c>. Flags: developmentonly, gamedll, clientdll, replicated.</summary>
 	public static readonly GameConVar<float> citadel_crosshair_out_of_range_dist = new("citadel_crosshair_out_of_range_dist");
+	/// <summary>Default <c>False</c>. Flags: gamedll, clientdll, replicated, cheat, release.</summary>
+	public static readonly GameConVar<bool> citadel_deadpack_instant_shot = new("citadel_deadpack_instant_shot");
 	/// <summary>How logn does the player icon linger on the minimap after they die. Default <c>3</c>. Flags: developmentonly, gamedll.</summary>
 	public static readonly GameConVar<float> citadel_death_linger_time = new("citadel_death_linger_time");
 	/// <summary>Default <c>False</c>. Flags: gamedll, clientdll, replicated, release.</summary>
@@ -3088,7 +3090,7 @@ public static class ConVars {
 	public static readonly GameConVar<bool> lb_enable_stationary_lights = new("lb_enable_stationary_lights");
 	/// <summary>SceneSystem/LightBinner/Enable Sunlight. Default <c>True</c>. Flags: developmentonly, cheat, menubar_item.</summary>
 	public static readonly GameConVar<bool> lb_enable_sunlight = new("lb_enable_sunlight");
-	/// <summary>For envmaps in low quality shader mode, how much of the fade region to scale the envmap box by. Default <c>0</c>. Flags: developmentonly, cheat.</summary>
+	/// <summary>For envmaps in low quality shader mode, how much of the fade region to scale the envmap box by. Default <c>0</c>, range 0 to 1. Flags: developmentonly.</summary>
 	public static readonly GameConVar<float> lb_low_quality_shader_fade_region_rescale = new("lb_low_quality_shader_fade_region_rescale");
 	/// <summary>Override maximum visible barn lights. Default <c>-1</c>. Flags: developmentonly, cheat.</summary>
 	public static readonly GameConVar<int> lb_max_visible_barn_lights_override = new("lb_max_visible_barn_lights_override");
@@ -4580,7 +4582,7 @@ public static class ConVars {
 	public static readonly GameConVar<bool> sc_clutter_desity_override = new("sc_clutter_desity_override");
 	/// <summary>SceneSystem/Clutter/Draw Clutter. Default <c>True</c>. Flags: developmentonly, menubar_item.</summary>
 	public static readonly GameConVar<bool> sc_clutter_enable = new("sc_clutter_enable");
-	/// <summary>Default <c>False</c>. Flags: cheat.</summary>
+	/// <summary>Default <c>False</c>. Flags: developmentonly, defensive.</summary>
 	public static readonly GameConVar<bool> sc_disableThreading = new("sc_disableThreading");
 	/// <summary>Default <c>False</c>. Flags: developmentonly, defensive.</summary>
 	public static readonly GameConVar<bool> sc_disable_baked_lighting = new("sc_disable_baked_lighting");
@@ -4588,7 +4590,7 @@ public static class ConVars {
 	public static readonly GameConVar<bool> sc_disable_culling_boxes = new("sc_disable_culling_boxes");
 	/// <summary>Default <c>False</c>. Flags: cheat.</summary>
 	public static readonly GameConVar<bool> sc_disable_procedural_layer_rendering = new("sc_disable_procedural_layer_rendering");
-	/// <summary>Default <c>False</c>. Flags: cheat.</summary>
+	/// <summary>Default <c>False</c>. Flags: developmentonly, defensive.</summary>
 	public static readonly GameConVar<bool> sc_disable_shadow_fastpath = new("sc_disable_shadow_fastpath");
 	/// <summary>Default <c>False</c>. Flags: cheat.</summary>
 	public static readonly GameConVar<bool> sc_disable_spotlight_shadows = new("sc_disable_spotlight_shadows");
@@ -4688,11 +4690,11 @@ public static class ConVars {
 	public static readonly GameConVar<bool> sc_only_render_opaque = new("sc_only_render_opaque");
 	/// <summary>Default <c>False</c>. Flags: cheat.</summary>
 	public static readonly GameConVar<bool> sc_only_render_shadowcasters = new("sc_only_render_shadowcasters");
-	/// <summary>Default <c>False</c>. Flags: cheat.</summary>
+	/// <summary>Default <c>False</c>. Flags: developmentonly, defensive.</summary>
 	public static readonly GameConVar<bool> sc_reject_all_objects = new("sc_reject_all_objects");
 	/// <summary>SceneSystem/RenderGraph Visualizer. Default <c>False</c>. Flags: developmentonly, menubar_item.</summary>
 	public static readonly GameConVar<bool> sc_rendergraph_debug_visualizer = new("sc_rendergraph_debug_visualizer");
-	/// <summary>Default <c>-1</c>. Flags: cheat.</summary>
+	/// <summary>Default <c>-1</c>. Flags: developmentonly, defensive.</summary>
 	public static readonly GameConVar<float> sc_screen_size_lod_scale_override = new("sc_screen_size_lod_scale_override");
 	/// <summary>Default <c>256</c>. Flags: developmentonly, defensive.</summary>
 	public static readonly GameConVar<int> sc_shadow_depth_bias = new("sc_shadow_depth_bias");
@@ -4716,7 +4718,7 @@ public static class ConVars {
 	public static readonly GameConVar<bool> sc_show_view_profiler = new("sc_show_view_profiler");
 	/// <summary>SceneSystem/Virtual Texturing. Default <c>False</c>. Flags: developmentonly, cheat.</summary>
 	public static readonly GameConVar<bool> sc_show_vt_stats = new("sc_show_vt_stats");
-	/// <summary>Default <c>False</c>. Flags: cheat.</summary>
+	/// <summary>Default <c>False</c>. Flags: developmentonly, defensive.</summary>
 	public static readonly GameConVar<bool> sc_skip_traversal = new("sc_skip_traversal");
 	/// <summary>Default <c>False</c>. Flags: developmentonly, defensive.</summary>
 	public static readonly GameConVar<bool> sc_spew_cmt_usage = new("sc_spew_cmt_usage");
