@@ -104,6 +104,12 @@ pub fn argv(c: &ServerConfig, usercon: bool) -> Vec<String> {
     if usercon {
         a.push("-usercon".into());
     }
+    // A relay or LAN server can't be reached at the public address Steam would list it under, so
+    // it stays off Steam's list. That also stops it answering queries, which is how a forwarded
+    // server's content is found: that one keeps answering whether it is listed or not.
+    if c.network != NetworkMode::PortForward {
+        a.push("-nomaster".into());
+    }
     for (k, v) in [
         ("+hostport", c.port.to_string()),
         ("+tv_citadel_auto_record", "0".into()),
@@ -296,6 +302,19 @@ mod tests {
         assert!(a.windows(2).any(|w| w == ["-maxplayers", "12"]));
         assert!(a.windows(2).any(|w| w == ["+hostport", "27020"]));
         assert!(!a.contains(&"+sv_cheats".to_string()));
+    }
+
+    #[test]
+    fn only_a_forwarded_server_is_advertised_to_steam() {
+        let mut c = sample();
+        let nomaster = |c: &ServerConfig| argv(c, false).contains(&"-nomaster".to_string());
+        assert!(!nomaster(&c), "an unlisted forwarded server still answers queries");
+        c.listed = true;
+        assert!(!nomaster(&c));
+        c.network = NetworkMode::Sdr;
+        assert!(nomaster(&c));
+        c.network = NetworkMode::Lan;
+        assert!(nomaster(&c));
     }
 
     #[test]
