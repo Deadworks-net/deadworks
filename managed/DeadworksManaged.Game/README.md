@@ -153,7 +153,8 @@ python tools/spawn-survey/survey.py --server-dir "<server>/game/bin/win64" --wor
 dotnet run --project managed/DeadworksManaged.GameGen
 ```
 
-It takes about half an hour for 800 names on three servers. The servers run on a Windows
+It takes about half an hour for 800 names on three servers. `--new-only` tries only the names
+the result has no verdict for and adds them to it, each marked with its build. The servers run on a Windows
 desktop of their own, so their console windows and anything else they open stay off your
 screen, and the plugin ends a server silently when it faults. A few crashes cannot be
 intercepted that way and make Windows raise an error box; the runner closes it at once and

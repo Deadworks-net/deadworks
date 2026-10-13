@@ -355,6 +355,21 @@
    "result": "lived",
    "class": "CCitadel_PickupItemSpawner"
   },
+  "citadel_chesspiece_bishop": {
+   "result": "lived",
+   "class": "CNPC_ChessPiece",
+   "build": 6779
+  },
+  "citadel_chesspiece_entity": {
+   "result": "crashed",
+   "at": "server.dll+0x5FA85E",
+   "build": 6779
+  },
+  "citadel_chesspiece_queen": {
+   "result": "lived",
+   "class": "CNPC_ChessPiece",
+   "build": 6779
+  },
   "citadel_configurable_tracked_projectile": {
    "result": "lived",
    "class": "CCitadelConfigurableTrackedProjectile"
@@ -815,6 +830,11 @@
   "commentary_auto": {
    "result": "lived",
    "class": "CCommentaryAuto"
+  },
+  "deadpack_projectile_missile": {
+   "result": "lived",
+   "class": "CCitadel_Projectile_DeadpackMissile",
+   "build": 6779
   },
   "destroyable_building": {
    "result": "lived",
@@ -2539,6 +2559,11 @@
   "projectile_boho_skipgrenade": {
    "result": "lived",
    "class": "CProjectile_Boho_SkipGrenade"
+  },
+  "projectile_chessmaster_forkpiece": {
+   "result": "lived",
+   "class": "CProjectile_ChessMaster_Fork_Projectile",
+   "build": 6779
   },
   "projectile_cyclone": {
    "result": "lived",

@@ -278,10 +278,15 @@ def main():
     parser.add_argument("--map", default="dl_midtown")
     parser.add_argument("--shards", type=int, default=3, help="servers to run at once")
     parser.add_argument("--port", type=int, default=27080, help="first server's port; each shard takes the next")
+    parser.add_argument("--new-only", action="store_true", help="try only the names --out has no verdict for and add them to it")
     parser.add_argument("--summarize-only", action="store_true", help="write the result from existing logs without running servers")
     args = parser.parse_args()
 
     names = [line.split("\t")[0] for line in (args.work / "names.tsv").read_text(encoding="utf-8").splitlines() if line.strip()]
+    earlier = json.loads(args.out.read_text(encoding="utf-8")) if args.new_only else None
+    if earlier:
+        names = [name for name in names if name not in earlier["results"]]
+        print(f"{len(names)} names without a verdict in {args.out}", flush=True)
     if not args.summarize_only:
         kernel32.SetErrorMode(QUIET_ERROR_MODE)
         watcher = args.watcher = WindowWatcher()
@@ -314,6 +319,10 @@ def main():
     inf = (args.server_dir / ".." / ".." / "citadel" / "steam.inf").resolve().read_text(encoding="utf-8", errors="replace")
     build = int(next(line.split("=")[1] for line in inf.splitlines() if line.startswith("ClientVersion=")))
     absent_path = args.work / "absent-convars.json"
+    if earlier:
+        # The file keeps the build of its full run; a verdict added later says which build it is from.
+        results = earlier["results"] | {name: result | {"build": build} for name, result in results.items()}
+        build = earlier["build"]
     survey = {
         "build": build,
         "map": args.map,
@@ -325,7 +334,7 @@ def main():
     counts = {}
     for result in results.values():
         counts[result["result"]] = counts.get(result["result"], 0) + 1
-    print(f"Wrote {args.out}: {len(results)} of {len(names)} names; " + ", ".join(f"{count} {kind}" for kind, count in sorted(counts.items())))
+    print(f"Wrote {args.out}: {len(results)} names; " + ", ".join(f"{count} {kind}" for kind, count in sorted(counts.items())))
     print(f"{len(survey['absentConVars'])} console variables are not registered on a dedicated server")
     missing = [name for name in names if name not in results]
     if missing:

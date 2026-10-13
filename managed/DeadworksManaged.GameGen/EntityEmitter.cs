@@ -160,8 +160,8 @@ sealed class EntityEmitter(EntityModel entities, SchemaModel schema, Dictionary<
 				: $"the <c>{Naming.Doc(name)}</c> entry of <c>{Naming.Doc(subclass.File)}</c>, which is a <c>{Naming.Doc(entity.Name)}</c>,";
 			string surveyed = tried switch {
 				null when survey != null => " Not in the spawn survey.",
-				{ Result: "vanished" } => $" Spawned alone with no key values on {survey!.Map} in build {survey.Build}, it removed itself at once: it may need key values or another entity.",
-				{ Result: "lived" } => $" Lived when spawned alone on {survey!.Map} in build {survey.Build}.",
+				{ Result: "vanished" } result => $" Spawned alone with no key values on {survey!.Map} in build {result.Build}, it removed itself at once: it may need key values or another entity.",
+				{ Result: "lived" } result => $" Lived when spawned alone on {survey!.Map} in build {result.Build}.",
 				_ => "",
 			};
 			if (tried?.Model != null)

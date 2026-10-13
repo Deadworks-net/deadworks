@@ -9,7 +9,8 @@ namespace DeadworksManaged.GameGen;
 /// fresh server).
 /// </param>
 /// <param name="Model">A model the engine reported as not loaded when the entity spawned, or null.</param>
-sealed record SurveyResult(string Result, string? Model) {
+/// <param name="Build">The build it was tried in.</param>
+sealed record SurveyResult(string Result, string? Model, int Build) {
 	/// <summary>True if spawning this takes the server down or does nothing, so it gets no function.</summary>
 	public bool Unusable => Result is "crashed" or "hung" or "refused" or "threw";
 }
@@ -35,7 +36,9 @@ sealed class SpawnSurvey {
 			foreach (var entry in results.EnumerateObject())
 				survey.Results[entry.Name] = new(
 					entry.Value.GetProperty("result").GetString() ?? "",
-					entry.Value.TryGetProperty("model", out var model) && model.ValueKind == JsonValueKind.String ? model.GetString() : null);
+					entry.Value.TryGetProperty("model", out var model) && model.ValueKind == JsonValueKind.String ? model.GetString() : null,
+					// A name added by a later, partial run says which build that was.
+					entry.Value.TryGetProperty("build", out var triedIn) ? triedIn.GetInt32() : survey.Build);
 		if (root.TryGetProperty("absentConVars", out var absent))
 			foreach (var name in absent.EnumerateArray()) survey.AbsentConVars.Add(name.GetString() ?? "");
 		return survey;
