@@ -99,6 +99,17 @@ pub fn write_if_changed(dst: &Path, data: &[u8]) -> std::io::Result<bool> {
     Ok(true)
 }
 
+/// Like `write_if_changed`, but rewrites an existing file in place instead of replacing it.
+/// Deadworks' plugin watcher (up to v0.6.1) only reacts to a DLL being written or created,
+/// and never sees one renamed over the old file.
+pub fn overwrite_if_changed(dst: &Path, data: &[u8]) -> std::io::Result<bool> {
+    match std::fs::read(dst) {
+        Ok(cur) if cur == data => Ok(false),
+        Ok(_) => std::fs::write(dst, data).or_else(|_| write_real(dst, data)).map(|_| true),
+        Err(_) => write_real(dst, data).map(|_| true),
+    }
+}
+
 /// Stream `src` into `dst` (via a temp file, then rename) while hashing it.
 /// `progress` is advanced by every chunk. Returns the SHA1 of what was copied.
 pub fn copy_hashing(

@@ -153,10 +153,12 @@ pub fn sync_plugins(layout: &Layout, config: &ServerConfig, placed_before: &[Str
             let _ = fsutil::remove_file_force(&dest_dir.join(old));
         }
     }
+    // Symbols and manifests first: a running server reloads a plugin when its DLL changes.
+    wanted.sort_by_key(|(_, name)| name.to_ascii_lowercase().ends_with(".dll"));
     let mut placed = Vec::new();
     for (src, name) in wanted {
         let data = std::fs::read(&src).map_err(|e| format!("Couldn't read plugin file {name}: {e}"))?;
-        fsutil::write_if_changed(&dest_dir.join(&name), &data).map_err(|e| format!("Couldn't install plugin file {name}: {e}"))?;
+        fsutil::overwrite_if_changed(&dest_dir.join(&name), &data).map_err(|e| format!("Couldn't install plugin file {name}: {e}"))?;
         placed.push(name);
     }
     Ok(placed)

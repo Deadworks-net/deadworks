@@ -385,12 +385,18 @@ internal static partial class PluginLoader
 
         _watcher = new FileSystemWatcher(pluginsDir, "*.dll")
         {
-            NotifyFilter = NotifyFilters.LastWrite | NotifyFilters.CreationTime,
+            // FileName: a DLL written atomically (temp file renamed over it) only shows up as a rename.
+            NotifyFilter = NotifyFilters.LastWrite | NotifyFilters.CreationTime | NotifyFilters.FileName,
             EnableRaisingEvents = true
         };
 
         _watcher.Changed += OnDllChanged;
         _watcher.Created += OnDllChanged;
+        _watcher.Renamed += (sender, e) =>
+        {
+            if (e.FullPath.EndsWith(".dll", StringComparison.OrdinalIgnoreCase))
+                OnDllChanged(sender, e);
+        };
 
         Console.WriteLine($"[PluginLoader] Watching for plugin changes in: {pluginsDir}");
     }
