@@ -408,6 +408,26 @@
 			"library": "server.dll",
 			"windows": "48 8B 05 ?? ?? ?? ?? 80 78 ?? ?? 75 ?? 80 B9 ?? ?? ?? ?? ?? 75"
 		},
+		// CCitadelPlayerPawn *(CCitadelGameRules *, const char *heroName, int team, const Vector *position): what
+		// citadel_create_unit runs. Makes a fake client named BotN, gives it the hero (or a random allowed one for
+		// "none") and teleports it to position, which must not be null. Null if the hero is unknown or not allowed
+		// for bots, or the server is full.
+		"CCitadelGameRules::CreateBotByHeroName": {
+			"library": "server.dll",
+			"windows": "48 89 5C 24 ?? 48 89 74 24 ?? 57 41 56 41 57 48 81 EC ?? ?? ?? ?? 48 8B CA"
+		},
+		// void (CCitadelGameRules *, int team, CCitadelPlayerPawn *): picks a lane for a new bot the way practice
+		// and lobby bots get one (lobby lanes, then a per-team deck, then a lane no teammate is on) and sets it.
+		"CCitadelGameRules::AssignBotLane": {
+			"library": "server.dll",
+			"windows": "4C 89 44 24 ?? 48 89 4C 24 ?? 55 53 56 57 41 54 41 56 41 57 48 8B EC"
+		},
+		// void (CCitadelPlayerBot *, int lane): the lane the bot pushes; also sets the controller's
+		// m_nAssignedLane and m_nOriginalLaneAssignment (networked).
+		"CCitadelPlayerBot::SetLane": {
+			"library": "server.dll",
+			"windows": "48 89 5C 24 ?? 48 89 6C 24 ?? 48 89 74 24 ?? 57 48 83 EC ?? 33 DB 89 91"
+		},
 		// (CNavPath *) -> CNavPath *. A path is 0x4880 bytes; vtable slot 0 is its destructor.
 		"CNavPath::CNavPath": {
 			"library": "server.dll",

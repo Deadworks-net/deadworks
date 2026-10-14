@@ -180,4 +180,8 @@ internal struct NativeCallbacks
 	public nint BotGetPawn;
 	public nint BotGetMoveInput;
 	public nint BotGetMatchFlagOffset;
+	public nint BotCreate;
+	public nint BotSetLane;
+	public nint BotGetLane;
+	public nint BotGetDifficulty;
 }
