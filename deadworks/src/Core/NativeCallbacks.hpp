@@ -216,8 +216,18 @@ struct NativeCallbacks {
     void(__cdecl *NpcSetSummoner)(void *npc, uint32_t handle);
     // Navmesh queries — see NativeNav.cpp.
     uint8_t(__cdecl *NavGetNearestPoint)(const float *pos, float maxDistance, int32_t hull, float *out);
-    int32_t(__cdecl *NavFindPath)(const float *start, const float *goal, int32_t hull, uint8_t allowPartial,
-                                  float *outPoints, int32_t maxPoints);
+    // flags: 1 = allow a partial path, 2 = optimize. outTypes gets each waypoint's segment type.
+    int32_t(__cdecl *NavFindPath)(const float *start, const float *goal, int32_t hull, uint32_t flags,
+                                  float *outPoints, int32_t *outTypes, int32_t maxPoints);
+    uint8_t(__cdecl *NavGetArea)(const float *pos, float maxDistance, int32_t hull, void *outInfo);
+    uint8_t(__cdecl *NavGetGroundHeight)(const float *pos, float maxDistance, int32_t hull, float *outZ);
+    uint8_t(__cdecl *NavRaycast)(const float *start, const float *end, int32_t hull, float *outEnd, float *outNormal);
+    uint8_t(__cdecl *NavGetRandomPoint)(const float *origin, float minDistance, float maxDistance, int32_t hull, float *out);
+    // Bot heroes — see NativeBot.cpp.
+    void *(__cdecl *BotGetBrain)(void *pawn);
+    void *(__cdecl *BotGetPawn)(void *brain);
+    uint8_t(__cdecl *BotGetMoveInput)(void *brain, const float *viewAngles, void *outInput);
+    int32_t(__cdecl *BotGetMatchFlagOffset)();
 };
 
 void PopulateNativeCallbacks(NativeCallbacks &callbacks);

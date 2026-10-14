@@ -135,6 +135,9 @@
     <ClCompile Include="src\Core\NativeHero.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="src\Core\NativeBot.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
     <ClCompile Include="src\Core\NativeNav.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
@@ -366,6 +369,9 @@
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="src\Core\NativeHero.hpp">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="src\Core\NativeBot.hpp">
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="src\Core\NativeNav.hpp">

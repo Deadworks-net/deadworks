@@ -19,6 +19,17 @@ public sealed unsafe class CCitadelPlayerPawn : CBasePlayerPawn {
 
 	public PlayerDataGlobal? PlayerData => Controller?.PlayerDataGlobal;
 
+	/// <summary>
+	/// The brain driving this hero if it is a bot's, otherwise null. Order the bot around through it, for
+	/// example <c>pawn.BotBrain?.MoveTo(goal)</c>.
+	/// </summary>
+	public CCitadelPlayerBotNPCBrain? BotBrain {
+		get {
+			void* brain = NativeInterop.BotGetBrain((void*)Handle);
+			return brain != null ? new CCitadelPlayerBotNPCBrain((nint)brain) : null;
+		}
+	}
+
 	private static readonly SchemaAccessor<byte> _abilityComp = new("CCitadelPlayerPawn"u8, "m_CCitadelAbilityComponent"u8);
 	public CCitadelAbilityComponent AbilityComponent => new(_abilityComp.GetAddress(Handle));
 

@@ -11,6 +11,7 @@ class CCitadelPlayerPawn : public CBasePlayerPawn {
 public:
     DECLARE_SCHEMA_CLASS(CCitadelPlayerPawn);
     SCHEMA_FIELD_POINTER(CCitadelAbilityComponent, m_CCitadelAbilityComponent);
+    SCHEMA_FIELD(void *, m_pBot); // CCitadelPlayerBot, null for a hero without bot AI
 
     void ModifyCurrency(ECurrencyType nCurrencyType, int32_t nAmount, ECurrencySource nSource, bool bSilent, bool bForceGain, bool bSpendOnly, void *pSourceAbility, void *pSourceEntity) {
         static const auto fn = reinterpret_cast<void(__fastcall *)(void *, ECurrencyType, int32_t, ECurrencySource, int32_t, int32_t, int32_t, void *, void *)>(
