@@ -761,7 +761,7 @@ dependencies = [
 
 [[package]]
 name = "deadworks-launcher"
-version = "0.6.1"
+version = "0.6.2"
 dependencies = [
  "bzip2",
  "crc32fast",
