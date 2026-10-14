@@ -14,7 +14,7 @@ public static partial class Schema {
 		static string ISchemaClass<CAI_CitadelNPC>.NativeName => "CAI_CitadelNPC";
 
 		private static readonly SchemaField __m_CCitadelAbilityComponent = new("CAI_CitadelNPC", "m_CCitadelAbilityComponent");
-		/// <summary><c>CCitadelAbilityComponent</c>. Networked: a write is sent to clients.</summary>
+		/// <summary><c>CCitadelAbilityComponent</c>. Networked: a write is sent to clients. Wrapped by <c>CAI_CitadelNPC.AbilityComponent</c> in DeadworksManaged.Api.</summary>
 		public CCitadelAbilityComponent m_CCitadelAbilityComponent => Embedded<CCitadelAbilityComponent>(__m_CCitadelAbilityComponent);
 
 		private static readonly SchemaField __m_CCitadelMinimapComponent = new("CAI_CitadelNPC", "m_CCitadelMinimapComponent");
@@ -30,11 +30,11 @@ public static partial class Schema {
 		public bool m_bBeamActive { get => Get<bool>(__m_bBeamActive); set => Set(__m_bBeamActive, value); }
 
 		private static readonly SchemaField __m_bMinion = new("CAI_CitadelNPC", "m_bMinion");
-		/// <summary><c>bool</c>. Networked: a write is sent to clients.</summary>
+		/// <summary><c>bool</c>. Networked: a write is sent to clients. Wrapped by <c>CAI_CitadelNPC.IsMinion</c> in DeadworksManaged.Api.</summary>
 		public bool m_bMinion { get => Get<bool>(__m_bMinion); set => Set(__m_bMinion, value); }
 
 		private static readonly SchemaField __m_hAbilityOwner = new("CAI_CitadelNPC", "m_hAbilityOwner");
-		/// <summary><c>CHandle&lt;CCitadelBaseAbility&gt;</c>.</summary>
+		/// <summary><c>CHandle&lt;CCitadelBaseAbility&gt;</c>. Wrapped by <c>CAI_CitadelNPC.OwningAbility</c> in DeadworksManaged.Api.</summary>
 		public CCitadelBaseAbility? m_hAbilityOwner { get => GetHandle<CCitadelBaseAbility>(__m_hAbilityOwner); set => SetHandle(__m_hAbilityOwner, value); }
 
 		private static readonly SchemaField __m_hLookTarget = new("CAI_CitadelNPC", "m_hLookTarget");
@@ -48,6 +48,9 @@ public static partial class Schema {
 		private static readonly SchemaField __m_vecWeakPoints = new("CAI_CitadelNPC", "m_vecWeakPoints");
 		/// <summary><c>CUtlVectorEmbeddedNetworkVar&lt;WeakPoint_t&gt;</c>. Networked: a write is sent to clients.</summary>
 		public SchemaObjectList<WeakPoint_t> m_vecWeakPoints => new(this, __m_vecWeakPoints, ListStorage.Vector);
+
+		/// <summary>The curated <see cref="global::DeadworksManaged.Api.CAI_CitadelNPC"/> for this entity, or null if it is gone.</summary>
+		public new global::DeadworksManaged.Api.CAI_CitadelNPC? Entity => SchemaRegistry.Wrapper<global::DeadworksManaged.Api.CAI_CitadelNPC>(EntityHandle);
 
 		/// <summary>The data entry this was created from, as <see cref="CAI_CitadelNPCVData"/>, or null if it has none.</summary>
 		public new CAI_CitadelNPCVData? VData => SubclassVData<CAI_CitadelNPCVData>();

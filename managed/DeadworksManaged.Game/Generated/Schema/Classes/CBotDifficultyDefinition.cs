@@ -98,7 +98,7 @@ public static partial class Schema {
 		public float choose_lane_on_interval { get => Get<float>(__choose_lane_on_interval); set => Set(__choose_lane_on_interval, value); }
 
 		private static readonly SchemaField __difficulty = new("CBotDifficultyDefinition", "difficulty");
-		/// <summary><c>ECitadelBotDifficulty</c>. Difficulty Enum.</summary>
+		/// <summary><c>ECitadelBotDifficulty</c>. Difficulty Enum. Wrapped by <c>CCitadelPlayerPawn.BotDifficulty</c> in DeadworksManaged.Api.</summary>
 		public ECitadelBotDifficulty difficulty { get => Get<ECitadelBotDifficulty>(__difficulty); set => Set(__difficulty, value); }
 
 		private static readonly SchemaField __enemy_hero_engage_distance = new("CBotDifficultyDefinition", "enemy_hero_engage_distance");

@@ -14,7 +14,7 @@ public static partial class Schema {
 		static string ISchemaClass<CNPC_Trooper>.NativeName => "CNPC_Trooper";
 
 		private static readonly SchemaField __m_bUsingBossWeapon = new("CNPC_Trooper", "m_bUsingBossWeapon");
-		/// <summary><c>bool</c>. Networked: a write is sent to clients.</summary>
+		/// <summary><c>bool</c>. Networked: a write is sent to clients. Wrapped by <c>CNPC_Trooper.UsingBossWeapon</c> in DeadworksManaged.Api.</summary>
 		public bool m_bUsingBossWeapon { get => Get<bool>(__m_bUsingBossWeapon); set => Set(__m_bUsingBossWeapon, value); }
 
 		private static readonly SchemaField __m_hSpawnWaveController = new("CNPC_Trooper", "m_hSpawnWaveController");
@@ -30,7 +30,10 @@ public static partial class Schema {
 		public CInfoTrooperSpawn? m_hTrooperSpawnPoint { get => GetHandle<CInfoTrooperSpawn>(__m_hTrooperSpawnPoint); set => SetHandle(__m_hTrooperSpawnPoint, value); }
 
 		private static readonly SchemaField __m_iLane = new("CNPC_Trooper", "m_iLane");
-		/// <summary><c>int32</c>. Networked: a write is sent to clients.</summary>
+		/// <summary><c>int32</c>. Networked: a write is sent to clients. Wrapped by <c>CNPC_Trooper.Lane</c> in DeadworksManaged.Api.</summary>
 		public int m_iLane { get => Get<int>(__m_iLane); set => Set(__m_iLane, value); }
+
+		/// <summary>The curated <see cref="global::DeadworksManaged.Api.CNPC_Trooper"/> for this entity, or null if it is gone.</summary>
+		public new global::DeadworksManaged.Api.CNPC_Trooper? Entity => SchemaRegistry.Wrapper<global::DeadworksManaged.Api.CNPC_Trooper>(EntityHandle);
 	}
 }

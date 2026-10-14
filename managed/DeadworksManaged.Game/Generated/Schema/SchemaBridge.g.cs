@@ -8,6 +8,14 @@ namespace DeadworksManaged.Api;
 
 /// <summary>Adds <c>.Schema</c> to the curated wrappers: every schema field of the object, typed as its generated class.</summary>
 public static class SchemaBridge {
+	extension(CAI_BaseNPC self) {
+		/// <summary>This object as <see cref="Schema.CAI_BaseNPC"/>: every schema field the game declares for it, under the game's own names. Each use looks the object up again, so keep the view in a local when you read several fields.</summary>
+		public Schema.CAI_BaseNPC Schema => SchemaRegistry.Bridge<Schema.CAI_BaseNPC>(self.EntityHandle);
+	}
+	extension(CAI_CitadelNPC self) {
+		/// <summary>This object as <see cref="Schema.CAI_CitadelNPC"/>: every schema field the game declares for it, under the game's own names. Each use looks the object up again, so keep the view in a local when you read several fields.</summary>
+		public Schema.CAI_CitadelNPC Schema => SchemaRegistry.Bridge<Schema.CAI_CitadelNPC>(self.EntityHandle);
+	}
 	extension(CBaseEntity self) {
 		/// <summary>This object as <see cref="Schema.CBaseEntity"/>: every schema field the game declares for it, under the game's own names. Each use looks the object up again, so keep the view in a local when you read several fields.</summary>
 		public Schema.CBaseEntity Schema => SchemaRegistry.Bridge<Schema.CBaseEntity>(self.EntityHandle);
@@ -48,6 +56,10 @@ public static class SchemaBridge {
 		/// <summary>This object as <see cref="Schema.CCitadelModifierVData"/>: every schema field the game declares for it, under the game's own names. Each use looks the object up again, so keep the view in a local when you read several fields.</summary>
 		public Schema.CCitadelModifierVData Schema => SchemaObject.At<Schema.CCitadelModifierVData>(self.Handle);
 	}
+	extension(CCitadelPlayerBotNPCBrain self) {
+		/// <summary>This object as <see cref="Schema.CCitadelPlayerBotNPCBrain"/>: every schema field the game declares for it, under the game's own names. Each use looks the object up again, so keep the view in a local when you read several fields.</summary>
+		public Schema.CCitadelPlayerBotNPCBrain Schema => SchemaRegistry.Bridge<Schema.CCitadelPlayerBotNPCBrain>(self.EntityHandle);
+	}
 	extension(CCitadelPlayerController self) {
 		/// <summary>This object as <see cref="Schema.CCitadelPlayerController"/>: every schema field the game declares for it, under the game's own names. Each use looks the object up again, so keep the view in a local when you read several fields.</summary>
 		public Schema.CCitadelPlayerController Schema => SchemaRegistry.Bridge<Schema.CCitadelPlayerController>(self.EntityHandle);
@@ -87,6 +99,10 @@ public static class SchemaBridge {
 	extension(CModifierVData self) {
 		/// <summary>This object as <see cref="Schema.CModifierVData"/>: every schema field the game declares for it, under the game's own names. Each use looks the object up again, so keep the view in a local when you read several fields.</summary>
 		public Schema.CModifierVData Schema => SchemaObject.At<Schema.CModifierVData>(self.Handle);
+	}
+	extension(CNPC_Trooper self) {
+		/// <summary>This object as <see cref="Schema.CNPC_Trooper"/>: every schema field the game declares for it, under the game's own names. Each use looks the object up again, so keep the view in a local when you read several fields.</summary>
+		public Schema.CNPC_Trooper Schema => SchemaRegistry.Bridge<Schema.CNPC_Trooper>(self.EntityHandle);
 	}
 	extension(CParticleSystem self) {
 		/// <summary>This object as <see cref="Schema.CParticleSystem"/>: every schema field the game declares for it, under the game's own names. Each use looks the object up again, so keep the view in a local when you read several fields.</summary>

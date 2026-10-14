@@ -26,7 +26,7 @@ public static partial class Schema {
 		public string m_sInterruptText => GetString(__m_sInterruptText);
 
 		private static readonly SchemaField __m_translatedSchedule = new("CAI_Scheduler", "m_translatedSchedule");
-		/// <summary><c>ScheduleId_t</c>.</summary>
+		/// <summary><c>ScheduleId_t</c>. Wrapped by <c>CAI_BaseNPC.Schedule</c> in DeadworksManaged.Api.</summary>
 		public ScheduleId_t m_translatedSchedule => Embedded<ScheduleId_t>(__m_translatedSchedule);
 
 		private static readonly SchemaField __m_untranslatedSchedule = new("CAI_Scheduler", "m_untranslatedSchedule");
