@@ -30,6 +30,35 @@ public sealed unsafe class CCitadelPlayerPawn : CBasePlayerPawn {
 		}
 	}
 
+	/// <summary>
+	/// The lane this bot hero was sent down, or <see cref="LaneColor.Invalid"/> for none or a hero that isn't a
+	/// bot's. Change it with <see cref="SetBotLane"/>.
+	/// </summary>
+	public LaneColor BotLane => (LaneColor)NativeInterop.BotGetLane((void*)Handle);
+
+	/// <summary>
+	/// Sends this bot hero down a lane: it walks there and pushes it while <see cref="Bots.AiEnabled"/> is on.
+	/// Returns false for a hero that isn't a bot's.
+	/// </summary>
+	/// <remarks>
+	/// The game usually updates the controller's <see cref="CCitadelPlayerController.AssignedLane"/> to match,
+	/// but not always; <see cref="BotLane"/> is the lane the bot follows.
+	/// </remarks>
+	public bool SetBotLane(LaneColor lane) => NativeInterop.BotSetLane((void*)Handle, (int)lane) != 0;
+
+	private static readonly SchemaAccessor<uint> _difficulty = new("CBotDifficultyDefinition"u8, "difficulty"u8);
+
+	/// <summary>
+	/// How well this bot hero plays, or null for a hero that isn't a bot's. Chosen when the bot is created
+	/// (<see cref="Bots.Add"/>).
+	/// </summary>
+	public BotDifficulty? BotDifficulty {
+		get {
+			void* definition = NativeInterop.BotGetDifficulty((void*)Handle);
+			return definition != null ? (BotDifficulty)_difficulty.Get((nint)definition) : null;
+		}
+	}
+
 	private static readonly SchemaAccessor<byte> _abilityComp = new("CCitadelPlayerPawn"u8, "m_CCitadelAbilityComponent"u8);
 	public CCitadelAbilityComponent AbilityComponent => new(_abilityComp.GetAddress(Handle));
 

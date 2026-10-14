@@ -228,6 +228,10 @@ struct NativeCallbacks {
     void *(__cdecl *BotGetPawn)(void *brain);
     uint8_t(__cdecl *BotGetMoveInput)(void *brain, const float *viewAngles, void *outInput);
     int32_t(__cdecl *BotGetMatchFlagOffset)();
+    void *(__cdecl *BotCreate)(void *gameRules, const char *heroName, int32_t team, const float *position, uint8_t assignLane);
+    uint8_t(__cdecl *BotSetLane)(void *pawn, int32_t lane);
+    int32_t(__cdecl *BotGetLane)(void *pawn);
+    void *(__cdecl *BotGetDifficulty)(void *pawn);
 };
 
 void PopulateNativeCallbacks(NativeCallbacks &callbacks);

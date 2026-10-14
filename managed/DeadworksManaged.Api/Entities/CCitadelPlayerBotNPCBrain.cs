@@ -38,8 +38,6 @@ public sealed unsafe class CCitadelPlayerBotNPCBrain : CAI_CitadelNPC {
 		public float Yaw;
 	}
 
-	private const ulong InForward = 0x8, InBack = 0x10, InMoveLeft = 0x200, InMoveRight = 0x400;
-
 	/// <summary>The hero this brain drives.</summary>
 	public CCitadelPlayerPawn? Pawn {
 		get {
@@ -80,19 +78,7 @@ public sealed unsafe class CCitadelPlayerBotNPCBrain : CAI_CitadelNPC {
 		if (moving == 0)
 			return false;
 
-		var cmd = usercmd.Base ??= new CBaseUserCmdPB();
-		cmd.Forwardmove = input.Forward;
-		cmd.Leftmove = input.Side;
-		cmd.Viewangles = new CMsgQAngle { X = input.Pitch, Y = input.Yaw, Z = 0f };
-		// Buttonstate1 is what is held down, Buttonstate2 what changed this command. A bot's usercmd starts
-		// blank every tick, so everything down counts as changed, as it does when the game builds one.
-		var buttons = cmd.ButtonsPb ??= new CInButtonStatePB();
-		ulong down = input.HeldButtons | input.PressedButtons;
-		// The direction keys that go with the analog move, set the way the game does for a bot's usercmd.
-		if (input.Forward != 0f) down |= input.Forward > 0f ? InForward : InBack;
-		if (input.Side != 0f) down |= input.Side > 0f ? InMoveLeft : InMoveRight;
-		buttons.Buttonstate1 |= down;
-		buttons.Buttonstate2 |= down;
+		Bots.WriteMove(usercmd, input.Forward, input.Side, input.Pitch, input.Yaw, input.HeldButtons | input.PressedButtons);
 		return true;
 	}
 }

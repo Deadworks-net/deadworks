@@ -39,6 +39,89 @@ public sealed class NavPath {
 	public Vector3 End => Waypoints[^1].Position;
 }
 
+/// <summary>
+/// Walks something along a <see cref="NavPath"/>: call <see cref="Update"/> with the current position every
+/// tick and steer towards what it returns. For a bot hero, pass that to <see cref="Bots.SetMoveInput"/>.
+/// </summary>
+/// <remarks>
+/// A waypoint counts as reached once the walker is within <see cref="ArriveRadius"/> of it on the ground plane,
+/// or has gone past it towards the next one. The follower doesn't re-path: when the walker is pushed far off the
+/// route (<see cref="DistanceFromPath"/>), find a new path.
+/// </remarks>
+public sealed class NavPathFollower {
+	/// <param name="path">The path to follow, usually a simplified one from <see cref="Nav.FindPath(Vector3, Vector3, int, bool, bool)"/>.</param>
+	/// <param name="arriveRadius">How close counts as reaching a waypoint, in units.</param>
+	public NavPathFollower(NavPath path, float arriveRadius = 40f) {
+		Path = path;
+		ArriveRadius = arriveRadius;
+		Index = path.Waypoints.Count > 1 ? 1 : path.Waypoints.Count;
+	}
+
+	/// <summary>The path being followed.</summary>
+	public NavPath Path { get; }
+
+	/// <summary>How close counts as reaching a waypoint, in units.</summary>
+	public float ArriveRadius { get; set; }
+
+	/// <summary>The index in <see cref="NavPath.Waypoints"/> of the waypoint being headed for.</summary>
+	public int Index { get; private set; }
+
+	/// <summary>Whether the last waypoint has been reached.</summary>
+	public bool IsFinished => Index >= Path.Waypoints.Count;
+
+	/// <summary>The waypoint being headed for, or null once finished.</summary>
+	public NavWaypoint? Target => IsFinished ? null : Path.Waypoints[Index];
+
+	/// <summary>
+	/// Moves on past every waypoint <paramref name="position"/> has reached and returns where to head next,
+	/// or null once the end is reached.
+	/// </summary>
+	public Vector3? Update(Vector3 position) {
+		var waypoints = Path.Waypoints;
+		while (Index < waypoints.Count) {
+			var target = waypoints[Index].Position;
+			if (Flat(target - position).Length() <= ArriveRadius) {
+				Index++;
+				continue;
+			}
+			// Gone past it: closer to the next waypoint than it is.
+			if (Index + 1 < waypoints.Count && waypoints[Index + 1].Traverse == NavTraverse.Ground) {
+				var leg = Flat(waypoints[Index + 1].Position - target);
+				if (leg.LengthSquared() > 0f && Vector2.Dot(Flat(position - target), leg) > 0f) {
+					Index++;
+					continue;
+				}
+			}
+			return target;
+		}
+		return null;
+	}
+
+	/// <summary>
+	/// Whether to jump now: the waypoint ahead is reached by jumping or climbing, is more than a step above
+	/// <paramref name="position"/>, and is close.
+	/// </summary>
+	public bool ShouldJump(Vector3 position, float within = 160f) {
+		if (Target is not { } target || target.Traverse is not (NavTraverse.Jump or NavTraverse.Climb))
+			return false;
+		return target.Position.Z - position.Z > 18f && Flat(target.Position - position).Length() <= within;
+	}
+
+	/// <summary>How far <paramref name="position"/> is from the leg being walked, on the ground plane.</summary>
+	public float DistanceFromPath(Vector3 position) {
+		if (IsFinished || Index == 0)
+			return Flat(Path.End - position).Length();
+		var a = Flat(Path.Waypoints[Index - 1].Position);
+		var b = Flat(Path.Waypoints[Index].Position);
+		var p = Flat(position);
+		var ab = b - a;
+		float t = ab.LengthSquared() > 0f ? Math.Clamp(Vector2.Dot(p - a, ab) / ab.LengthSquared(), 0f, 1f) : 0f;
+		return Vector2.Distance(p, a + ab * t);
+	}
+
+	private static Vector2 Flat(Vector3 v) => new(v.X, v.Y);
+}
+
 /// <summary>What a nav area allows or asks of whatever walks it (<c>NavAttributeEnum</c>).</summary>
 [Flags]
 public enum NavAreaAttributes : ulong {

@@ -21,9 +21,15 @@ using namespace deadworks::offsets;
 
 using BrainUpdateMovementFn = void(__fastcall *)(void *brain);
 using BrainGetDesiredMoveDirFn = void *(__fastcall *)(void *brain, Vector *out);
+using CreateBotByHeroNameFn = void *(__fastcall *)(void *gameRules, const char *heroName, int32_t team, const Vector *position);
+using AssignBotLaneFn = void(__fastcall *)(void *gameRules, int32_t team, void *pawn);
+using BotSetLaneFn = void(__fastcall *)(void *bot, int32_t lane);
 
 static BrainUpdateMovementFn g_pBrainUpdateMovement = nullptr;
 static BrainGetDesiredMoveDirFn g_pBrainGetDesiredMoveDir = nullptr;
+static CreateBotByHeroNameFn g_pCreateBotByHeroName = nullptr;
+static AssignBotLaneFn g_pAssignBotLane = nullptr;
+static BotSetLaneFn g_pBotSetLane = nullptr;
 static int32_t g_botMatchFlagOffset = 0; // on CCitadelGameRules; not in the schema, and it moves between builds
 
 // What NativeBotGetMoveInput hands to managed code. Must match BotMoveInput in CCitadelPlayerBotNPCBrain.cs.
@@ -98,6 +104,42 @@ static uint8_t __cdecl NativeBotGetMoveInput(void *brainEntity, const float *vie
     return out->forward != 0.0f || out->side != 0.0f || out->heldButtons || out->pressedButtons;
 }
 
+static uint8_t *BotOf(void *pawn) {
+    return pawn ? static_cast<uint8_t *>(static_cast<CCitadelPlayerPawn *>(pawn)->m_pBot.Get()) : nullptr;
+}
+
+// Adds a bot hero the way citadel_create_unit does, so the bot gets its hero loaded and its AI attached by the
+// game itself. heroName is a hero_* name or "none" for a random hero bots may play. With assignLane the game
+// also picks it a lane, as it does for practice bots. Returns the pawn, or null (the game logs why).
+static void *__cdecl NativeBotCreate(void *gameRules, const char *heroName, int32_t team, const float *position, uint8_t assignLane) {
+    if (!gameRules || !heroName || !position || !g_pCreateBotByHeroName) return nullptr;
+    const Vector pos(position[0], position[1], position[2]);
+    void *pawn = g_pCreateBotByHeroName(gameRules, heroName, team, &pos);
+    if (pawn && assignLane && g_pAssignBotLane && BotOf(pawn))
+        g_pAssignBotLane(gameRules, team, pawn);
+    return pawn;
+}
+
+// Sends a bot hero down a lane. Returns 0 for a pawn with no bot AI.
+static uint8_t __cdecl NativeBotSetLane(void *pawn, int32_t lane) {
+    auto *bot = BotOf(pawn);
+    if (!bot || !g_pBotSetLane) return 0;
+    g_pBotSetLane(bot, lane);
+    return 1;
+}
+
+// The lane a bot hero was sent down, or 0 for none / no bot AI.
+static int32_t __cdecl NativeBotGetLane(void *pawn) {
+    auto *bot = BotOf(pawn);
+    return bot ? *reinterpret_cast<int32_t *>(bot + kBotAssignedLane) : 0;
+}
+
+// The CBotDifficultyDefinition (bot_difficulty.vdata entry) a bot hero plays with, or null.
+static void *__cdecl NativeBotGetDifficulty(void *pawn) {
+    auto *bot = BotOf(pawn);
+    return bot ? *reinterpret_cast<void **>(bot + kBotDifficulty) : nullptr;
+}
+
 // Where CCitadelGameRules keeps its "this is a bot match" byte, or 0 if it could not be resolved. Bots only
 // leave simple mode (think, path, fight, buy) while it or citadel_solo_bot_match is set.
 static int32_t __cdecl NativeBotGetMatchFlagOffset() {
@@ -114,6 +156,9 @@ void deadworks::ResolveBotStatics() {
 
     g_pBrainUpdateMovement = reinterpret_cast<BrainUpdateMovementFn>(resolve("CCitadelPlayerBotNPCBrain::UpdateMovement"));
     g_pBrainGetDesiredMoveDir = reinterpret_cast<BrainGetDesiredMoveDirFn>(resolve("CCitadelPlayerBotNPCBrain::GetDesiredMoveDir"));
+    g_pCreateBotByHeroName = reinterpret_cast<CreateBotByHeroNameFn>(resolve("CCitadelGameRules::CreateBotByHeroName"));
+    g_pAssignBotLane = reinterpret_cast<AssignBotLaneFn>(resolve("CCitadelGameRules::AssignBotLane"));
+    g_pBotSetLane = reinterpret_cast<BotSetLaneFn>(resolve("CCitadelPlayerBot::SetLane"));
 
     // IsBotMatch: mov rax, [convar]; cmp byte [rax+58h], 0; jnz; cmp byte [rcx+disp32], 0. The disp32 is
     // the flag's offset on the game rules (0x458 in 6722, 0x460 in 6762).
@@ -127,4 +172,8 @@ void deadworks::PopulateBotNatives(NativeCallbacks &cb) {
     cb.BotGetPawn = &NativeBotGetPawn;
     cb.BotGetMoveInput = &NativeBotGetMoveInput;
     cb.BotGetMatchFlagOffset = &NativeBotGetMatchFlagOffset;
+    cb.BotCreate = &NativeBotCreate;
+    cb.BotSetLane = &NativeBotSetLane;
+    cb.BotGetLane = &NativeBotGetLane;
+    cb.BotGetDifficulty = &NativeBotGetDifficulty;
 }
