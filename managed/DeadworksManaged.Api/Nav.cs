@@ -362,7 +362,6 @@ public static unsafe class Nav {
 	/// entity to open the area again. Returns null if the entity could not be created.
 	/// </summary>
 	/// <remarks>
-	/// The blocker has no model and no collision: it only cuts the navmesh, so players still walk through.
 	/// The navmesh updates a moment after the spawn, not within the same call.
 	/// </remarks>
 	/// <param name="center">The middle of the box.</param>

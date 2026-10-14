@@ -108,13 +108,12 @@ public static unsafe class Bots {
 	}
 
 	/// <summary>
-	/// Whether bot heroes play on their own: walk their lane, fight, cast, buy. Off by default on a server
+	/// Whether bot heroes play on their own: take ziplines, push their lane, fight. Off by default on a server
 	/// with no matchmaking lobby, where the game treats bots as inert dummies and sends them blank input.
 	/// </summary>
 	/// <remarks>
 	/// This is the game rules' "bot match" flag, the same thing the <c>citadel_solo_bot_match</c> convar turns
-	/// on, without touching a replicated convar. Bots also need the match to be in progress
-	/// (<see cref="EGameState.GameInProgress"/>): in pre-game they only turn on the spot.
+	/// on, without touching a replicated convar.
 	/// </remarks>
 	public static bool AiEnabled {
 		get {
@@ -127,12 +126,6 @@ public static unsafe class Bots {
 	/// Turns <see cref="AiEnabled"/> on or off for every bot. Returns false when there are no game rules yet
 	/// (no map loaded) or the flag could not be located in this game build.
 	/// </summary>
-	/// <remarks>
-	/// The flag belongs to the map's game rules, so it resets on a map change. To take one bot over while the
-	/// rest keep playing, leave this on and replace what that bot's brain picks in
-	/// <see cref="IDeadworksPlugin.OnNpcSelectSchedule"/>, or rewrite its input in
-	/// <see cref="IDeadworksPlugin.OnProcessUsercmds"/>.
-	/// </remarks>
 	public static bool SetAiEnabled(bool enabled) {
 		byte* flag = AiFlag;
 		if (flag == null)
