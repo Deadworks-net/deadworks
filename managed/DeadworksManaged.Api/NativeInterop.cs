@@ -196,4 +196,8 @@ internal static unsafe class NativeInterop
 	public static delegate* unmanaged[Cdecl]<void*, void*> BotGetPawn => (delegate* unmanaged[Cdecl]<void*, void*>)_cb.BotGetPawn;
 	public static delegate* unmanaged[Cdecl]<void*, float*, void*, byte> BotGetMoveInput => (delegate* unmanaged[Cdecl]<void*, float*, void*, byte>)_cb.BotGetMoveInput;
 	public static delegate* unmanaged[Cdecl]<int> BotGetMatchFlagOffset => (delegate* unmanaged[Cdecl]<int>)_cb.BotGetMatchFlagOffset;
+	public static delegate* unmanaged[Cdecl]<void*, byte*, int, float*, byte, void*> BotCreate => (delegate* unmanaged[Cdecl]<void*, byte*, int, float*, byte, void*>)_cb.BotCreate;
+	public static delegate* unmanaged[Cdecl]<void*, int, byte> BotSetLane => (delegate* unmanaged[Cdecl]<void*, int, byte>)_cb.BotSetLane;
+	public static delegate* unmanaged[Cdecl]<void*, int> BotGetLane => (delegate* unmanaged[Cdecl]<void*, int>)_cb.BotGetLane;
+	public static delegate* unmanaged[Cdecl]<void*, void*> BotGetDifficulty => (delegate* unmanaged[Cdecl]<void*, void*>)_cb.BotGetDifficulty;
 }

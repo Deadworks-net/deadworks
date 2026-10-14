@@ -16,6 +16,8 @@ constexpr uintptr_t kBrainMoveSide = 0x1728;       // float
 constexpr uintptr_t kBrainHeldButtons = 0x1730;    // uint64
 constexpr uintptr_t kBrainPressedButtons = 0x1738; // uint64
 constexpr uintptr_t kBrainViewAngles = 0x17A8;     // QAngle the brain aims with
+constexpr uintptr_t kBotAssignedLane = 0x4994;     // CCitadelPlayerBot: int, the lane SetLane gave it
+constexpr uintptr_t kBotDifficulty = 0x4B98;       // CCitadelPlayerBot: CBotDifficultyDefinition *
 
 // CCitadelGameRules::IsBotMatch: the disp32 of its cmp byte [rcx+disp32], 0
 constexpr uintptr_t kIsBotMatch_FlagDisp = 15;
