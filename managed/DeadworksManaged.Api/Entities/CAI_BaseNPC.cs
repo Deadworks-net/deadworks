@@ -33,7 +33,7 @@ public unsafe class CAI_BaseNPC : CBaseEntity {
 	/// returns null: such an NPC crashes the server when it spawns. For lane troopers use
 	/// <see cref="CNPC_Trooper.Create"/>, which also gives them a lane.
 	/// </remarks>
-	/// <param name="designerName">The subclass name.</param>
+	/// <param name="designerName">The subclass name. <c>SubclassNames</c> in DeadworksManaged.Game lists them.</param>
 	/// <param name="position">Where the NPC appears.</param>
 	/// <param name="team">The team number. 0 leaves the NPC's default.</param>
 	/// <param name="angles">The way it faces (pitch, yaw, roll). Null faces along +X.</param>
