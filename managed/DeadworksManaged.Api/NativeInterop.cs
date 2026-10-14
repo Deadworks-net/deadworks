@@ -187,5 +187,13 @@ internal static unsafe class NativeInterop
 	public static delegate* unmanaged[Cdecl]<void*, void*> NpcGetSummoner => (delegate* unmanaged[Cdecl]<void*, void*>)_cb.NpcGetSummoner;
 	public static delegate* unmanaged[Cdecl]<void*, uint, void> NpcSetSummoner => (delegate* unmanaged[Cdecl]<void*, uint, void>)_cb.NpcSetSummoner;
 	public static delegate* unmanaged[Cdecl]<float*, float, int, float*, byte> NavGetNearestPoint => (delegate* unmanaged[Cdecl]<float*, float, int, float*, byte>)_cb.NavGetNearestPoint;
-	public static delegate* unmanaged[Cdecl]<float*, float*, int, byte, float*, int, int> NavFindPath => (delegate* unmanaged[Cdecl]<float*, float*, int, byte, float*, int, int>)_cb.NavFindPath;
+	public static delegate* unmanaged[Cdecl]<float*, float*, int, uint, float*, int*, int, int> NavFindPath => (delegate* unmanaged[Cdecl]<float*, float*, int, uint, float*, int*, int, int>)_cb.NavFindPath;
+	public static delegate* unmanaged[Cdecl]<float*, float, int, void*, byte> NavGetArea => (delegate* unmanaged[Cdecl]<float*, float, int, void*, byte>)_cb.NavGetArea;
+	public static delegate* unmanaged[Cdecl]<float*, float, int, float*, byte> NavGetGroundHeight => (delegate* unmanaged[Cdecl]<float*, float, int, float*, byte>)_cb.NavGetGroundHeight;
+	public static delegate* unmanaged[Cdecl]<float*, float*, int, float*, float*, byte> NavRaycast => (delegate* unmanaged[Cdecl]<float*, float*, int, float*, float*, byte>)_cb.NavRaycast;
+	public static delegate* unmanaged[Cdecl]<float*, float, float, int, float*, byte> NavGetRandomPoint => (delegate* unmanaged[Cdecl]<float*, float, float, int, float*, byte>)_cb.NavGetRandomPoint;
+	public static delegate* unmanaged[Cdecl]<void*, void*> BotGetBrain => (delegate* unmanaged[Cdecl]<void*, void*>)_cb.BotGetBrain;
+	public static delegate* unmanaged[Cdecl]<void*, void*> BotGetPawn => (delegate* unmanaged[Cdecl]<void*, void*>)_cb.BotGetPawn;
+	public static delegate* unmanaged[Cdecl]<void*, float*, void*, byte> BotGetMoveInput => (delegate* unmanaged[Cdecl]<void*, float*, void*, byte>)_cb.BotGetMoveInput;
+	public static delegate* unmanaged[Cdecl]<int> BotGetMatchFlagOffset => (delegate* unmanaged[Cdecl]<int>)_cb.BotGetMatchFlagOffset;
 }

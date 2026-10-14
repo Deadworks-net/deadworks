@@ -468,7 +468,8 @@ public static class EntryPoint
             int len = BitConverter.ToInt32(span.Slice(offset, 4));
             offset += 4;
 
-            if (len <= 0 || offset + len > batchLen)
+            // Zero-length entries are blank usercmds (a bot in simple bot mode); they parse to an empty message.
+            if (len < 0 || offset + len > batchLen)
                 break;
 
             var cmd = CCitadelUserCmdPB.Parser.ParseFrom(span.Slice(offset, len));
@@ -495,9 +496,8 @@ public static class EntryPoint
 
         foreach (var cmd in args.Usercmds)
         {
+            // Written even when empty: native matches entries to usercmds by position.
             var bytes = cmd.ToByteArray();
-            if (bytes.Length == 0)
-                continue;
 
             if (writeOffset + 4 + bytes.Length > 65536)
                 break;
