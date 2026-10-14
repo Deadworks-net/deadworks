@@ -374,6 +374,20 @@
 			"library": "server.dll",
 			"windows": "48 89 5C 24 ?? 48 89 74 24 ?? 57 41 56 41 57 48 83 EC ?? 4C 8B F2"
 		},
+		// CNPC_Trooper *(const Vector *origin, const QAngle *angles, int team, int variant, int type): what
+		// citadel_spawn_trooper runs. Reuses a dormant pooled trooper of the type if one is free, else spawns a new
+		// one from its VData (type 1 trooper_normal, 2 trooper_medic, 3 trooper_melee, 4
+		// trooper_zipline_container). Picks the lane nearest to origin. variant (0-3) is the look.
+		"Trooper_SpawnAt": {
+			"library": "server.dll",
+			"windows": "48 8B C4 44 89 40 ?? 48 89 50 ?? 48 89 48"
+		},
+		// bool (CNPC_Trooper *): drops a trooper onto the ground below it and its nav area. citadel_spawn_trooper
+		// runs it when the player who spawned the trooper is on the ground.
+		"CNPC_Trooper::SnapToNavGround": {
+			"library": "server.dll",
+			"windows": "40 57 48 81 EC ?? ?? ?? ?? ?? ?? ?? 48 8B F9 FF 90 ?? ?? ?? ?? 48 85 C0 74"
+		},
 		// (npc, bool). Networks m_bMinion and widens what the NPC senses; Necro's skeletons are the only caller.
 		"CAI_CitadelNPC::SetMinion": {
 			"library": "server.dll",

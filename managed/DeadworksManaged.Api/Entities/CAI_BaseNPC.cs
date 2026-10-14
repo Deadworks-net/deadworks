@@ -24,6 +24,47 @@ public unsafe class CAI_BaseNPC : CBaseEntity {
 	private static readonly SchemaAccessor<byte> _scheduler = new(Class, "m_Scheduler"u8);
 	private static readonly SchemaAccessor<nint> _translatedSchedule = new("CAI_Scheduler"u8, "m_translatedSchedule"u8);
 
+	/// <summary>
+	/// Creates and spawns an NPC by its VData subclass name, such as <c>neutral_trooper_strong</c> or
+	/// <c>npc_boss_tier1</c>. Returns null if the name is not an NPC subclass.
+	/// </summary>
+	/// <remarks>
+	/// Deadlock's NPCs take their stats from VData, so a class name without one (<c>npc_trooper_neutral</c>)
+	/// returns null: such an NPC crashes the server when it spawns. For lane troopers use
+	/// <see cref="CNPC_Trooper.Create"/>, which also gives them a lane.
+	/// </remarks>
+	/// <param name="designerName">The subclass name.</param>
+	/// <param name="position">Where the NPC appears.</param>
+	/// <param name="team">The team number. 0 leaves the NPC's default.</param>
+	/// <param name="angles">The way it faces (pitch, yaw, roll). Null faces along +X.</param>
+	public static CAI_BaseNPC? Create(string designerName, Vector3 position, int team = 0, Vector3? angles = null) {
+		// Checked before anything is created: removing an entity that was never spawned can crash as well.
+		uint subclassId = 0;
+		string? baseClass;
+		Span<byte> utf8 = Utf8.Encode(designerName, stackalloc byte[Utf8.Size(designerName)]);
+		fixed (byte* name = utf8)
+			baseClass = System.Runtime.InteropServices.Marshal.PtrToStringUTF8((nint)NativeInterop.ResolveDesignerName(name, &subclassId));
+		if (subclassId == 0 || baseClass == null || !baseClass.StartsWith("npc_"))
+			return null;
+
+		var entity = CreateByDesignerName(designerName);
+		if (entity == null)
+			return null;
+		var npc = entity.As<CAI_BaseNPC>();
+		if (npc == null) {
+			entity.Remove();
+			return null;
+		}
+		var kv = new CEntityKeyValues();
+		kv.SetVector("origin", position);
+		if (angles is { } a)
+			kv.SetVector("angles", a);
+		if (team != 0)
+			kv.SetInt("teamnumber", team);
+		npc.Spawn(kv);
+		return npc;
+	}
+
 	/// <summary>The NPC's current AI state.</summary>
 	public NpcState State => (NpcState)_npcState.Get(Handle);
 
