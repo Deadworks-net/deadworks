@@ -13,6 +13,9 @@ public static partial class Schema {
 		static CCitadelPlayerBotNPCBrain ISchemaClass<CCitadelPlayerBotNPCBrain>.New() => new();
 		static string ISchemaClass<CCitadelPlayerBotNPCBrain>.NativeName => "CCitadelPlayerBotNPCBrain";
 
+		/// <summary>The curated <see cref="global::DeadworksManaged.Api.CCitadelPlayerBotNPCBrain"/> for this entity, or null if it is gone.</summary>
+		public new global::DeadworksManaged.Api.CCitadelPlayerBotNPCBrain? Entity => SchemaRegistry.Wrapper<global::DeadworksManaged.Api.CCitadelPlayerBotNPCBrain>(EntityHandle);
+
 		/// <summary>The data entry this was created from, as <see cref="CCitadelPlayerBotNPCBrainVData"/>, or null if it has none.</summary>
 		public new CCitadelPlayerBotNPCBrainVData? VData => SubclassVData<CCitadelPlayerBotNPCBrainVData>();
 	}

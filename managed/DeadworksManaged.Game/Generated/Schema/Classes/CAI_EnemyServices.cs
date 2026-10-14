@@ -18,7 +18,7 @@ public static partial class Schema {
 		public GameTime m_flTimeEnemyChanged { get => Get<GameTime>(__m_flTimeEnemyChanged); set => Set(__m_flTimeEnemyChanged, value); }
 
 		private static readonly SchemaField __m_hEnemy = new("CAI_EnemyServices", "m_hEnemy");
-		/// <summary><c>CHandle&lt;CBaseEntity&gt;</c>.</summary>
+		/// <summary><c>CHandle&lt;CBaseEntity&gt;</c>. Wrapped by <c>CAI_BaseNPC.Enemy</c> in DeadworksManaged.Api.</summary>
 		public CBaseEntity? m_hEnemy { get => GetHandle<CBaseEntity>(__m_hEnemy); set => SetHandle(__m_hEnemy, value); }
 	}
 }
