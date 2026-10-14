@@ -5,8 +5,15 @@ mod deep_link;
 mod gameinfo;
 mod hosting;
 mod local_api;
+mod mcp;
 mod ping;
 mod telemetry;
+
+pub use mcp::run as run_mcp;
+
+/// Started by `deadworks-launcher mcp` (or a script) to serve hosting without
+/// putting a window in front of the user.
+const BACKGROUND_ARG: &str = "--background";
 
 /// Try to patch gameinfo.gi at startup. If the game is running the file is
 /// locked; `reassert_quiet` stashes the error and the frontend puts it in a
@@ -37,6 +44,20 @@ pub(crate) async fn prepare_for_launch(app: &tauri::AppHandle) {
     if let Err(e) = bootstrap::ensure(app, &game_dir, false).await {
         println!("[launch] bootstrap check failed: {}", e);
     }
+}
+
+/// The agent tools (control API) are on when `DEADWORKS_AGENT_TOOLS=1` or settings.json has
+/// `"agent_tools": true`.
+fn agent_tools_enabled(app: &tauri::AppHandle) -> bool {
+    if std::env::var("DEADWORKS_AGENT_TOOLS").is_ok_and(|v| v == "1") {
+        return true;
+    }
+    tauri_plugin_store::StoreBuilder::new(app, "settings.json")
+        .build()
+        .ok()
+        .and_then(|store| store.get("agent_tools"))
+        .and_then(|v| v.as_bool())
+        .unwrap_or(false)
 }
 
 /// Quit from the tray. Running servers are stopped cleanly first, after the
@@ -74,7 +95,9 @@ pub fn run() {
                     deep_link::dispatch(app, deep_link::parse_url(arg));
                 }
             }
-            deep_link::surface_main_window(app);
+            if !args.iter().any(|a| a == BACKGROUND_ARG) {
+                deep_link::surface_main_window(app);
+            }
         }))
         .plugin(tauri_plugin_deep_link::init())
         .plugin(tauri_plugin_updater::Builder::new().build())
@@ -188,6 +211,20 @@ pub fn run() {
             // Local server hosting: loads saved servers and starts the
             // console/metrics ticker and the update checker.
             hosting::init(app.handle());
+            // Lets `deadworks-launcher mcp` and scripts drive hosting (src/hosting/control.rs).
+            // Off unless asked for; it isn't part of the launcher's UI.
+            if let Ok(dir) = app.path().app_config_dir() {
+                if agent_tools_enabled(app.handle()) {
+                    hosting::start_control(dir);
+                } else {
+                    hosting::stop_control(&dir);
+                }
+            }
+            if std::env::args().any(|a| a == BACKGROUND_ARG) {
+                if let Some(window) = app.get_webview_window("main") {
+                    let _ = window.hide();
+                }
+            }
 
             let app_handle = app.handle().clone();
             tauri::async_runtime::spawn(async move {

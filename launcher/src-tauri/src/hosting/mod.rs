@@ -8,6 +8,8 @@ mod base;
 mod cfg;
 mod console;
 mod content;
+mod control;
+mod crash;
 mod disk;
 mod dotnet;
 mod download;
@@ -33,6 +35,7 @@ mod wine;
 
 use types::*;
 
+pub use control::{start as start_control, stop as stop_control};
 pub use manager::init;
 
 /// Number of servers that are starting, running or stopping.

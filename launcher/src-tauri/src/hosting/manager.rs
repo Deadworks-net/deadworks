@@ -23,6 +23,8 @@ const METRICS_EVERY: Duration = Duration::from_secs(2);
 const STOP_GRACE: Duration = Duration::from_secs(20);
 /// How long a typed console command may take to be echoed before the next one goes in anyway.
 const ECHO_WAIT: Duration = Duration::from_millis(1500);
+/// After .NET reports a fatal error the process can hang instead of exiting; it is stopped after this.
+const FATAL_GRACE: Duration = Duration::from_secs(10);
 /// Runs this long on a build before that build counts as known-good.
 const GOOD_AFTER: u64 = 300;
 /// Starting with no Steam logon line (e.g. Steam unreachable) still counts as up after this.
@@ -166,6 +168,8 @@ struct Runtime {
     unsupported_build: bool,
     recorded_good: bool,
     last_poll: Option<Instant>,
+    /// When the .NET runtime printed "Fatal error." (a fail-fast); the process is dead in all but name.
+    fatal_at: Option<Instant>,
 }
 
 impl Server {
@@ -1032,6 +1036,9 @@ impl Manager {
         if s.awaiting_echo.as_deref() == Some(line.trim()) {
             s.awaiting_echo = None;
         }
+        if line.trim() == "Fatal error." && s.rt.fatal_at.is_none() {
+            s.rt.fatal_at = Some(Instant::now());
+        }
         let (show, events) = s.monitor.feed(&line);
         if show {
             let _ = stream;
@@ -1239,6 +1246,40 @@ impl Manager {
 
     pub fn console_history(&self, id: &str) -> Result<Vec<ConsoleLine>, String> {
         Ok(self.lock().server(id)?.console.history())
+    }
+
+    /// Scrollback lines after `after` (a line's `seq`), and the `seq` the next line will get.
+    pub fn console_after(&self, id: &str, after: u64) -> Result<(Vec<ConsoleLine>, u64), String> {
+        let mut inner = self.lock();
+        let console = &inner.server(id)?.console;
+        let lines = console.history().into_iter().filter(|l| l.seq > after).collect();
+        Ok((lines, console.next_seq()))
+    }
+
+    pub fn summary(&self, id: &str) -> Result<ServerSummary, String> {
+        let mut inner = self.lock();
+        let s = inner.server(id)?;
+        Ok(ServerSummary { config: s.file.config.clone(), runtime: s.runtime() })
+    }
+
+    /// The installed Deadworks release's `game/bin/win64/managed` folder, and the release's tag.
+    pub fn release_managed(&self) -> Option<(PathBuf, String)> {
+        let inner = self.lock();
+        let tag = inner.state.deadworks_tag.clone()?;
+        let dir = release::release_dir(inner.layout.as_ref()?, &tag).join("game/bin/win64/managed");
+        dir.is_dir().then_some((dir, tag))
+    }
+
+    pub fn root(&self) -> Option<PathBuf> {
+        self.lock().layout.as_ref().map(|l| l.root.clone())
+    }
+
+    /// Where a server's console logs and `game` tree are.
+    pub fn server_paths(&self, id: &str) -> Result<(PathBuf, PathBuf), String> {
+        let mut inner = self.lock();
+        let layout = inner.layout()?;
+        inner.server(id)?;
+        Ok((layout.server_logs(id), layout.server_bin(id)))
     }
 
     /// Run a console command on a running server. Where its output comes back out of band (RCON
@@ -1830,6 +1871,12 @@ fn ticker(mgr: Arc<Manager>) {
                     let _ = mgr.app.emit("hosting://console", ConsoleBatch { id: s.file.config.id.clone(), lines });
                 }
                 let Some(proc) = s.proc.clone() else { continue };
+                if s.rt.fatal_at.is_some_and(|t| t.elapsed() >= FATAL_GRACE) {
+                    s.rt.fatal_at = None;
+                    s.console.push(LineKind::Sys, "The .NET runtime reported a fatal error and the server stopped responding; ending it.");
+                    proc.terminate();
+                    continue;
+                }
                 let uptime = s.rt.started_at.map(|t| now_secs().saturating_sub(t)).unwrap_or(0);
                 if s.rt.state == Some(ServerState::Starting) && uptime > READY_FALLBACK {
                     s.rt.state = Some(ServerState::Running);
