@@ -185,4 +185,5 @@ internal struct NativeCallbacks
 	public nint BotSetLane;
 	public nint BotGetLane;
 	public nint BotGetDifficulty;
+	public nint NpcCreateTrooper;
 }

@@ -200,4 +200,5 @@ internal static unsafe class NativeInterop
 	public static delegate* unmanaged[Cdecl]<void*, int, byte> BotSetLane => (delegate* unmanaged[Cdecl]<void*, int, byte>)_cb.BotSetLane;
 	public static delegate* unmanaged[Cdecl]<void*, int> BotGetLane => (delegate* unmanaged[Cdecl]<void*, int>)_cb.BotGetLane;
 	public static delegate* unmanaged[Cdecl]<void*, void*> BotGetDifficulty => (delegate* unmanaged[Cdecl]<void*, void*>)_cb.BotGetDifficulty;
+	public static delegate* unmanaged[Cdecl]<float*, float*, int, int, int, byte, void*> NpcCreateTrooper => (delegate* unmanaged[Cdecl]<float*, float*, int, int, int, byte, void*>)_cb.NpcCreateTrooper;
 }
