@@ -172,4 +172,12 @@ internal struct NativeCallbacks
 	public nint NpcSetSummoner;
 	public nint NavGetNearestPoint;
 	public nint NavFindPath;
+	public nint NavGetArea;
+	public nint NavGetGroundHeight;
+	public nint NavRaycast;
+	public nint NavGetRandomPoint;
+	public nint BotGetBrain;
+	public nint BotGetPawn;
+	public nint BotGetMoveInput;
+	public nint BotGetMatchFlagOffset;
 }

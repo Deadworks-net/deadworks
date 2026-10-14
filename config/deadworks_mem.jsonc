@@ -391,6 +391,23 @@
 			"library": "server.dll",
 			"windows": "48 89 5C 24 ?? 44 89 4C 24 ?? 48 89 54 24 ?? 48 89 4C 24 ?? 55 56 57 41 54 41 55 41 56 41 57 48 8D AC 24"
 		},
+		// (brain). The bot brain's "movement to input" step: projects the navigator's direction onto the brain's view
+		// angles as forward/side move and presses jump for a waypoint above step height.
+		"CCitadelPlayerBotNPCBrain::UpdateMovement": {
+			"library": "server.dll",
+			"windows": "40 55 41 56 48 8D 6C 24 ?? 48 81 EC 18 01 00 00 48 8B 05"
+		},
+		// (brain, Vector *out) -> out. The normalised direction to the navigator's next waypoint, or zero.
+		"CCitadelPlayerBotNPCBrain::GetDesiredMoveDir": {
+			"library": "server.dll",
+			"windows": "48 89 5C 24 ?? 55 41 56 41 57 48 83 EC 50 48 8B EA"
+		},
+		// bool (CCitadelGameRules *): citadel_solo_bot_match, or the game rules' own bot-match byte. Bots only think
+		// while this, a tutorial or a one-on-one match is on. The byte's offset is the disp32 at +15.
+		"CCitadelGameRules::IsBotMatch": {
+			"library": "server.dll",
+			"windows": "48 8B 05 ?? ?? ?? ?? 80 78 ?? ?? 75 ?? 80 B9 ?? ?? ?? ?? ?? 75"
+		},
 		// (CNavPath *) -> CNavPath *. A path is 0x4880 bytes; vtable slot 0 is its destructor.
 		"CNavPath::CNavPath": {
 			"library": "server.dll",
@@ -407,6 +424,23 @@
 		"CAI_PathCost::CAI_PathCost": {
 			"library": "server.dll",
 			"windows": "48 89 5C 24 ?? 48 89 74 24 ?? 57 48 83 EC ?? 89 51"
+		},
+		// float (CNavArea *, float x, float y): the area's height at that point. x and y arrive in xmm1 and xmm2.
+		"CNavArea::GetZ": {
+			"library": "server.dll",
+			"windows": "48 8B C4 48 89 58 ?? 55 56 57 41 54 41 55 41 56 41 57 48 8D 68 ?? 48 81 EC ?? ?? ?? ?? 4C 63 79"
+		},
+		// bool (CNavMesh *, const Vector *start, CNavArea *startArea, const Vector *end, int hull, NavTraceResult_t *,
+		// const CNavTestRayParams *, const std::function *edgeCallback). What nav_test_rays runs; null params = defaults.
+		"NavSearch::TestRayToNavMesh": {
+			"library": "server.dll",
+			"windows": "4C 8B DC 53 48 81 EC ?? ?? ?? ?? 48 8B 84 24 ?? ?? ?? ?? 4D 8D 53"
+		},
+		// Vector *(Vector *out, const Vector *start, CNavArea *startArea, int hull, float maxDist, float minDist).
+		// What nav_test_find_random_connected runs; out is (FLT_MAX, FLT_MAX, FLT_MAX) when nothing was found.
+		"CNavQuery::FindRandomConnectedPoint": {
+			"library": "server.dll",
+			"windows": "48 89 54 24 ?? 55 53 56 57 41 55 41 57"
 		},
 		// A small CNavMesh helper whose first instruction, mov rax, [rip + disp32], loads the CNavMesh global.
 		// (It returns navmesh+0x2BC != 0, which is not a "loaded" flag: it reads false with a working navmesh.)
