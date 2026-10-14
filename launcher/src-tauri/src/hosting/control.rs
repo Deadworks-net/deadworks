@@ -201,6 +201,25 @@ pub fn dispatch(method: &str, p: &Value) -> Result<Value, String> {
             Ok(json!({ "lines": lines, "next": next }))
         }
 
+        // A built map or addon VPK into the server's content, switched on, and optionally made its map.
+        "content.install" => {
+            let id = resolve(mgr, p)?;
+            let kind: ContentKind = serde_json::from_value(p.get("kind").cloned().unwrap_or(json!("map"))).map_err(|e| format!("kind: {e}"))?;
+            let files = mgr.import_content(&id, vec![str_param(p, "path")?], kind)?;
+            let mut config = mgr.summary(&id)?.config;
+            for f in &files {
+                let list = if kind == ContentKind::Map { &mut config.extra_maps } else { &mut config.content_addons };
+                if !list.contains(&f.file_name) {
+                    list.push(f.file_name.clone());
+                }
+                if kind == ContentKind::Map && bool_param(p, "set_map", false) {
+                    config.map = f.file_name.trim_end_matches(".vpk").to_string();
+                }
+            }
+            let config = mgr.update_server(config)?;
+            let running = live(mgr.runtime(&id)?.state);
+            Ok(json!({ "installed": files, "config": config, "restartNeeded": running }))
+        }
         "plugin.list" => to_value(mgr.plugin_library()),
         "plugin.deploy" => deploy_plugin(mgr, p),
         "plugin.remove" => {

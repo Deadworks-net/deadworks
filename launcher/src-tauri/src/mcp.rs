@@ -210,6 +210,17 @@ release has it) for the hosted version: types, methods, properties and fields wh
             &["query"],
         ),
         tool("sdk_info","Where the Deadworks API assemblies of the hosted release are, for project references.", json!({}), &[]),
+        tool(
+            "install_content",
+            "Install a map or addon VPK (for example one the modkit built) on a server and switch it on; with set_map, the map becomes the server's map. Takes effect on the next start.",
+            json!({
+                "server": server,
+                "path": { "type": "string" },
+                "kind": { "type": "string", "enum": ["map", "addon"], "default": "map" },
+                "set_map": { "type": "boolean" },
+            }),
+            &["server", "path"],
+        ),
         tool("list_plugins", "Plugins in the launcher's plugin library.", json!({}), &[]),
         tool(
             "remove_plugin",
@@ -422,6 +433,16 @@ fn call_tool(client: &Client, name: &str, a: &Value) -> Result<String, String> {
             let dir = PathBuf::from(a["directory"].as_str().ok_or("directory is required.")?);
             let name = a["name"].as_str().ok_or("name is required.")?;
             scaffold(&dir, name, &sdk)
+        }
+        "install_content" => {
+            let r = client.call("content.install", with(json!({})))?;
+            let names: Vec<&str> = r["installed"].as_array().into_iter().flatten().filter_map(|f| f["fileName"].as_str()).collect();
+            Ok(format!(
+                "Installed {} on the server; map is {}.{}",
+                names.join(", "),
+                r["config"]["map"].as_str().unwrap_or("?"),
+                if r["restartNeeded"].as_bool() == Some(true) { " restart_server to load it." } else { " It loads on the next start." }
+            ))
         }
         "list_plugins" => Ok(pretty(&client.call("plugin.list", json!({}))?)),
         "remove_plugin" => client.call("plugin.remove", a.clone()).map(|_| "Removed.".into()),
