@@ -32,6 +32,8 @@ using SchedulerSetScheduleFn = void(__fastcall *)(void *scheduler, void *schedul
 using VetoScheduleFn = bool(__fastcall *)(void *npc, const char *const *id);
 using SetMinionFn = void(__fastcall *)(void *npc, bool minion);
 using GetSummonerFn = void *(__fastcall *)(void *npc);
+using TrooperSpawnAtFn = void *(__fastcall *)(const Vector *origin, const QAngle *angles, int32_t team, int32_t variant, int32_t type);
+using SnapToNavGroundFn = bool(__fastcall *)(void *trooper);
 
 static ForceNpcGoFn g_pForceNpcGo = nullptr;
 static SetEnemyFn g_pSetEnemy = nullptr;
@@ -41,6 +43,8 @@ static GetScheduleOfTypeFn g_pGetScheduleOfType = nullptr;
 static SchedulerSetScheduleFn g_pSchedulerSetSchedule = nullptr;
 static SetMinionFn g_pSetMinion = nullptr;
 static GetSummonerFn g_pGetSummoner = nullptr;
+static TrooperSpawnAtFn g_pTrooperSpawnAt = nullptr;
+static SnapToNavGroundFn g_pSnapToNavGround = nullptr;
 static int32_t g_summonerHandleOffset = 0; // CAI_CitadelNPC::m_hCaster, read from GetSummoner's first instruction
 
 // AI_NavStopMovingMode_t, as npc_stop_moving picks them ("asap" = instant).
@@ -114,6 +118,17 @@ static void __cdecl NativeNpcSetSummoner(void *npc, uint32_t handle) {
     *reinterpret_cast<uint32_t *>(reinterpret_cast<uint8_t *>(npc) + g_summonerHandleOffset) = handle;
 }
 
+// citadel_spawn_trooper without the cheat flag or the player: a trooper of the type at origin, on team, in the
+// lane nearest to origin. Null angles face east. Returns the trooper, or null if it could not be spawned.
+static void *__cdecl NativeNpcCreateTrooper(const float *origin, const float *angles, int32_t team, int32_t type,
+                                            int32_t variant, uint8_t snapToGround) {
+    if (!origin || !g_pTrooperSpawnAt) return nullptr;
+    const QAngle facing = angles ? QAngle(angles[0], angles[1], angles[2]) : QAngle(0, 0, 0);
+    void *trooper = g_pTrooperSpawnAt(reinterpret_cast<const Vector *>(origin), &facing, team, variant, type);
+    if (trooper && snapToGround && g_pSnapToNavGround) g_pSnapToNavGround(trooper);
+    return trooper;
+}
+
 const char *deadworks::npc::MakeScheduleId(const char *name) {
     return g_pMakeGlobalSymbol ? g_pMakeGlobalSymbol(name) : nullptr;
 }
@@ -136,6 +151,8 @@ void deadworks::ResolveNpcStatics() {
     g_pGetScheduleOfType = reinterpret_cast<GetScheduleOfTypeFn>(resolve("CAI_BaseNPC::GetScheduleOfType"));
     g_pSchedulerSetSchedule = reinterpret_cast<SchedulerSetScheduleFn>(resolve("CAI_Scheduler::SetSchedule"));
     g_pSetMinion = reinterpret_cast<SetMinionFn>(resolve("CAI_CitadelNPC::SetMinion"));
+    g_pTrooperSpawnAt = reinterpret_cast<TrooperSpawnAtFn>(resolve("Trooper_SpawnAt"));
+    g_pSnapToNavGround = reinterpret_cast<SnapToNavGroundFn>(resolve("CNPC_Trooper::SnapToNavGround"));
 
     // GetSummoner starts with mov edx, [rcx + disp32] (8B 91): the disp32 is m_hCaster's offset.
     auto getSummoner = resolve("CAI_CitadelNPC::GetSummoner");
@@ -156,4 +173,5 @@ void deadworks::PopulateNpcNatives(NativeCallbacks &cb) {
     cb.NpcSetMinion = &NativeNpcSetMinion;
     cb.NpcGetSummoner = &NativeNpcGetSummoner;
     cb.NpcSetSummoner = &NativeNpcSetSummoner;
+    cb.NpcCreateTrooper = &NativeNpcCreateTrooper;
 }

@@ -230,6 +230,7 @@ struct NativeCallbacks {
     uint8_t(__cdecl *BotSetLane)(void *pawn, int32_t lane);
     int32_t(__cdecl *BotGetLane)(void *pawn);
     void *(__cdecl *BotGetDifficulty)(void *pawn);
+    void *(__cdecl *NpcCreateTrooper)(const float *origin, const float *angles, int32_t team, int32_t type, int32_t variant, uint8_t snapToGround);
 };
 
 void PopulateNativeCallbacks(NativeCallbacks &callbacks);
