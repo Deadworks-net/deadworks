@@ -181,6 +181,28 @@ static void *__cdecl NativeGetUtlVectorData(void *vec) {
     return reinterpret_cast<CUtlVectorBase<uint8_t> *>(vec)->Base();
 }
 
+static uint8_t __cdecl NativeGrowUtlVector(void *vec, int32_t elementSize, int32_t count) {
+    struct Layout {
+        int32_t size;
+        void *pMemory;
+        int32_t allocationCount;
+        int32_t growSize;
+    };
+    auto *pVector = static_cast<Layout *>(vec);
+    if (!pVector || elementSize <= 0 || count < 0 || pVector->growSize != 0)
+        return 0;
+    if (count <= pVector->allocationCount)
+        return 1;
+
+    int32_t allocationCount = (std::max)({count, pVector->allocationCount * 2, 4});
+    void *pMemory = g_pMemAlloc->Realloc(pVector->pMemory, static_cast<size_t>(allocationCount) * elementSize);
+    if (!pMemory)
+        return 0;
+    pVector->pMemory = pMemory;
+    pVector->allocationCount = allocationCount;
+    return 1;
+}
+
 static void *__cdecl NativeGetEntityFromHandle(uint32_t handle) {
     CEntityHandle eh(handle);
     if (!eh.IsValid())
@@ -228,7 +250,15 @@ static void __cdecl NativeGetSchemaField(const char *className, const char *fiel
     result->offset = key.Offset;
     result->chainOffset = schema::FindChainOffset(className, classHash);
     result->networked = static_cast<uint8_t>(schema::FieldNetworked(className, classHash, memberHash));
-    result->_pad = 0;
+    result->found = schema::HasField(className, classHash, memberHash) ? 1 : 2;
+}
+
+static int32_t __cdecl NativeGetSchemaClassSize(const char *className) {
+    return className ? schema::GetClassSize(className) : 0;
+}
+
+static int32_t __cdecl NativeGetSchemaClassAlignment(const char *className) {
+    return className ? schema::GetClassAlignment(className) : 0;
 }
 
 static uint64_t __cdecl NativeFindConVar(const char *name) {
@@ -1265,6 +1295,9 @@ void deadworks::PopulateNativeCallbacks(NativeCallbacks &callbacks) {
     callbacks.GetSchemaField = &NativeGetSchemaField;
     callbacks.NotifyStateChanged = &NativeNotifyStateChanged;
     callbacks.SetSchemaString = &NativeSetSchemaString;
+    callbacks.GetSchemaClassSize = &NativeGetSchemaClassSize;
+    callbacks.GetSchemaClassAlignment = &NativeGetSchemaClassAlignment;
+    callbacks.GrowUtlVector = &NativeGrowUtlVector;
 
     // ConVar
     callbacks.FindConVar = &NativeFindConVar;

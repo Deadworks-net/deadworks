@@ -1,0 +1,7 @@
+{
+  "setterWarnings": {
+    "CCitadelPlayerPawn.m_nLevel": "A raw write to m_nLevel desyncs the hero's stat block and leaves a dead pawn with 0 max health.",
+    "CBaseEntity.m_MoveType": "A raw write skips the engine's move type change; use CBaseEntity.SetMoveType on the curated wrapper (entity.Entity).",
+    "CBaseEntity.m_nActualMoveType": "A raw write skips the engine's move type change; use CBaseEntity.SetMoveType on the curated wrapper (entity.Entity)."
+  }
+}

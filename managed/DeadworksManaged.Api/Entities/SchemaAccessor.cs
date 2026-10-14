@@ -5,6 +5,10 @@ namespace DeadworksManaged.Api;
 /// Resolves the field offset once on first access and caches it.
 /// Use UTF-8 string literals (<c>"ClassName"u8</c>) for <paramref name="className"/> and <paramref name="fieldName"/>.
 /// </summary>
+/// <remarks>
+/// DeadworksManaged.Game has a generated, typed member for every schema field of every class,
+/// so most plugins do not need to declare one of these: <c>pawn.Schema.m_flRespawnTime</c>.
+/// </remarks>
 public sealed unsafe class SchemaAccessor<T> where T : unmanaged {
 	private volatile int _offset = -1;
 	private short _chainOffset;

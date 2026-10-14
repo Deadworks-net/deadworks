@@ -174,6 +174,15 @@ static SchemaTableMap_t &TableMap() {
     return schemaTableMap;
 }
 
+bool HasField(const char *className, uint32_t classKey, uint32_t memberKey) {
+    auto &schemaTableMap = TableMap();
+
+    if (!schemaTableMap.contains(classKey) && !InitSchemaFieldsForClass(schemaTableMap, className, classKey))
+        return false;
+
+    return schemaTableMap[classKey].contains(memberKey);
+}
+
 SchemaKey GetOffset(const char *className, uint32_t classKey, const char *memberName, uint32_t memberKey) {
     auto &schemaTableMap = TableMap();
 
@@ -220,6 +229,16 @@ int GetClassSize(const char *className) {
     if (!pClassInfo) return 0;
 
     return pClassInfo->m_nSize;
+}
+
+int GetClassAlignment(const char *className) {
+    auto *pType = g_pSchemaSystem->FindTypeScopeForModule("server.dll");
+    if (!pType) return 0;
+
+    auto *pClassInfo = pType->FindDeclaredClass(className).Get();
+    if (!pClassInfo) return 0;
+
+    return pClassInfo->m_nAlignment;
 }
 
 static bool ClassInfoDerivesFrom(SchemaClassInfoData_t *pClassInfo, std::string_view baseClassName) {

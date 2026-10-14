@@ -1,0 +1,104 @@
+name: Update Game API
+
+# Regenerates managed/DeadworksManaged.Game/Generated from the newest build in the Deadworks
+# modding database (https://deadworks.net/db) and opens a pull request with what the game
+# changed. The database has a build a few minutes after Valve ships it. The schedule picks it
+# up within half an hour; the database's watcher can send a `game-build` repository_dispatch
+# to skip the wait.
+on:
+  schedule:
+    - cron: "*/30 * * * *"
+  repository_dispatch:
+    types: [game-build]
+  workflow_dispatch:
+    inputs:
+      build:
+        description: Build to generate from. Empty means the newest.
+        required: false
+      force:
+        description: Regenerate even if the repository is already on that build (after a generator or dumper fix).
+        type: boolean
+        default: false
+
+permissions:
+  contents: write
+  pull-requests: write
+
+concurrency:
+  group: update-game
+  cancel-in-progress: false
+
+jobs:
+  update-game:
+    runs-on: ubuntu-latest
+
+    steps:
+      - uses: actions/checkout@v6
+
+      # Most runs end here: one request, no toolchain.
+      - name: Compare builds
+        id: builds
+        env:
+          # A manual run names its build; the database's watcher sends the one it just ingested, which
+          # the build list may not show yet (it is cached for half a minute).
+          REQUESTED: ${{ inputs.build || github.event.client_payload.build }}
+          FORCE: ${{ inputs.force }}
+        run: |
+          current=$(grep -oP 'const int Version = \K[0-9]+' managed/DeadworksManaged.Game/Generated/GameBuild.g.cs)
+          target=${REQUESTED:-$(curl -sSf https://deadworks.net/api/moddb/builds | jq '[.builds[].version] | max')}
+          echo "Repository is on build $current, generating from $target"
+          echo "target=$target" >> "$GITHUB_OUTPUT"
+          if [ "$FORCE" = "true" ] || [ "$target" != "$current" ]; then echo "changed=true" >> "$GITHUB_OUTPUT"; fi
+
+      - name: Setup .NET 10
+        if: steps.builds.outputs.changed == 'true'
+        uses: actions/setup-dotnet@v5
+        with:
+          dotnet-version: "10.0.x"
+
+      - name: Generate
+        if: steps.builds.outputs.changed == 'true'
+        run: dotnet run --project managed/DeadworksManaged.GameGen -c Release -- --build "${{ steps.builds.outputs.target }}" --report "$RUNNER_TEMP/game.md"
+
+      # A pull request this workflow opens does not start the Build workflow, so the compile
+      # check happens here. What no longer compiles is what the game renamed or removed under
+      # the curated API, the built-in plugins or the examples; the pull request says so
+      # rather than failing to open.
+      - name: Build against the new build
+        if: steps.builds.outputs.changed == 'true'
+        id: compile
+        continue-on-error: true
+        run: |
+          set -o pipefail
+          {
+            dotnet build managed/DeadworksManaged.csproj -c Release --nologo -v q -clp:ErrorsOnly
+            dotnet build managed/plugins/AdminPlugin/AdminPlugin.csproj -c Release --nologo -v q -clp:ErrorsOnly
+            for project in examples/plugins/*/*.csproj; do dotnet build "$project" -c Release --nologo -v q -clp:ErrorsOnly; done
+          } 2>&1 | tee "$RUNNER_TEMP/build.log"
+
+      - name: Add the build result to the report
+        if: steps.builds.outputs.changed == 'true'
+        run: |
+          {
+            echo
+            if [ "${{ steps.compile.outcome }}" = "success" ]; then
+              echo "The host, the built-in plugins and the examples compile against this build."
+            else
+              echo "### This build breaks the compile"
+              echo
+              echo '```'
+              grep -E 'error ' "$RUNNER_TEMP/build.log" | sed -E 's/ \[[^]]*\]$//' | sort -u | head -n 60
+              echo '```'
+            fi
+          } >> "$RUNNER_TEMP/game.md"
+
+      - name: Create Pull Request
+        if: steps.builds.outputs.changed == 'true'
+        uses: peter-evans/create-pull-request@v8
+        with:
+          commit-message: "chore: regenerate the game API from build ${{ steps.builds.outputs.target }}"
+          title: "chore: regenerate the game API from build ${{ steps.builds.outputs.target }}"
+          body-path: ${{ runner.temp }}/game.md
+          branch: chore/update-game
+          delete-branch: true
+          add-paths: managed/DeadworksManaged.Game/Generated
