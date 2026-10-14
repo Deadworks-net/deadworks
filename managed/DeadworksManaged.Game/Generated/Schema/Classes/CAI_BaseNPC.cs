@@ -22,12 +22,12 @@ public static partial class Schema {
 		public CAI_ScheduleBits m_CustomInterruptConditions => Embedded<CAI_ScheduleBits>(__m_CustomInterruptConditions);
 
 		private static readonly SchemaField __m_IdealNPCState = new("CAI_BaseNPC", "m_IdealNPCState");
-		/// <summary><c>NPC_STATE</c>.</summary>
+		/// <summary><c>NPC_STATE</c>. Wrapped by <c>CAI_BaseNPC.IdealState</c> in DeadworksManaged.Api.</summary>
 		public NPC_STATE m_IdealNPCState { get => Get<NPC_STATE>(__m_IdealNPCState); set => Set(__m_IdealNPCState, value); }
 
 		private static readonly SchemaField __m_NPCState = new("CAI_BaseNPC", "m_NPCState");
-		/// <summary><c>NPC_STATE</c>. Networked: a write is sent to clients.</summary>
-		public NPC_STATE m_NPCState { get => Get<NPC_STATE>(__m_NPCState); set => Set(__m_NPCState, value); }
+		/// <summary><c>NPC_STATE</c>. Networked: a write is sent to clients. Wrapped by <c>CAI_BaseNPC.State</c> in DeadworksManaged.Api.</summary>
+		public NPC_STATE m_NPCState { get => Get<NPC_STATE>(__m_NPCState); [Obsolete("A raw write skips what CAI_BaseNPC.SetState does; call that on the curated wrapper instead.")] set => Set(__m_NPCState, value); }
 
 		private static readonly SchemaField __m_NonGatherConditions = new("CAI_BaseNPC", "m_NonGatherConditions");
 		/// <summary><c>CAI_ScheduleBits</c>.</summary>
@@ -102,7 +102,7 @@ public static partial class Schema {
 		public CAI_ScheduleBits m_ScheduleRelatedRemovalConditions => Embedded<CAI_ScheduleBits>(__m_ScheduleRelatedRemovalConditions);
 
 		private static readonly SchemaField __m_Scheduler = new("CAI_BaseNPC", "m_Scheduler");
-		/// <summary><c>CAI_Scheduler</c>.</summary>
+		/// <summary><c>CAI_Scheduler</c>. Wrapped by <c>CAI_BaseNPC.Schedule</c> in DeadworksManaged.Api.</summary>
 		public CAI_Scheduler m_Scheduler => Embedded<CAI_Scheduler>(__m_Scheduler);
 
 		private static readonly SchemaField __m_UnreachableTargets = new("CAI_BaseNPC", "m_UnreachableTargets");
@@ -282,7 +282,7 @@ public static partial class Schema {
 		public CAI_AnimGraphServices? m_pAnimGraphServices => Pointer<CAI_AnimGraphServices>(__m_pAnimGraphServices);
 
 		private static readonly SchemaField __m_pEnemyServices = new("CAI_BaseNPC", "m_pEnemyServices");
-		/// <summary><c>CAI_EnemyServices*</c>.</summary>
+		/// <summary><c>CAI_EnemyServices*</c>. Wrapped by <c>CAI_BaseNPC.Enemy</c> in DeadworksManaged.Api.</summary>
 		public CAI_EnemyServices? m_pEnemyServices => Pointer<CAI_EnemyServices>(__m_pEnemyServices);
 
 		private static readonly SchemaField __m_pFacingServices = new("CAI_BaseNPC", "m_pFacingServices");
@@ -324,6 +324,9 @@ public static partial class Schema {
 		private static readonly SchemaField __m_vecSynchronizedSecondaryNPCs = new("CAI_BaseNPC", "m_vecSynchronizedSecondaryNPCs");
 		/// <summary><c>CUtlVector&lt;CHandle&lt;CAI_BaseNPC&gt;&gt;</c>.</summary>
 		public SchemaHandleList<CAI_BaseNPC> m_vecSynchronizedSecondaryNPCs => new(this, __m_vecSynchronizedSecondaryNPCs, ListStorage.Vector);
+
+		/// <summary>The curated <see cref="global::DeadworksManaged.Api.CAI_BaseNPC"/> for this entity, or null if it is gone.</summary>
+		public new global::DeadworksManaged.Api.CAI_BaseNPC? Entity => SchemaRegistry.Wrapper<global::DeadworksManaged.Api.CAI_BaseNPC>(EntityHandle);
 
 		/// <summary>The data entry this was created from, as <see cref="CAI_BaseNPCVData"/>, or null if it has none.</summary>
 		public CAI_BaseNPCVData? VData => SubclassVData<CAI_BaseNPCVData>();
