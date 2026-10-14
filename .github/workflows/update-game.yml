@@ -63,18 +63,19 @@ jobs:
       # A pull request this workflow opens does not start the Build workflow, so the compile
       # check happens here. What no longer compiles is what the game renamed or removed under
       # the curated API, the built-in plugins or the examples; the pull request says so
-      # rather than failing to open.
+      # rather than failing to open. Every project is built even after one fails, so the
+      # report lists all of them.
       - name: Build against the new build
         if: steps.builds.outputs.changed == 'true'
         id: compile
         continue-on-error: true
         run: |
           set -o pipefail
-          {
-            dotnet build managed/DeadworksManaged.csproj -c Release --nologo -v q -clp:ErrorsOnly
-            dotnet build managed/plugins/AdminPlugin/AdminPlugin.csproj -c Release --nologo -v q -clp:ErrorsOnly
-            for project in examples/plugins/*/*.csproj; do dotnet build "$project" -c Release --nologo -v q -clp:ErrorsOnly; done
-          } 2>&1 | tee "$RUNNER_TEMP/build.log"
+          failed=0
+          for project in managed/DeadworksManaged.csproj managed/plugins/AdminPlugin/AdminPlugin.csproj examples/plugins/*/*.csproj; do
+            dotnet build "$project" -c Release --nologo -v q -clp:ErrorsOnly 2>&1 | tee -a "$RUNNER_TEMP/build.log" || failed=1
+          done
+          exit $failed
 
       - name: Add the build result to the report
         if: steps.builds.outputs.changed == 'true'

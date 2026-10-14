@@ -13,10 +13,10 @@
     </ProjectReference>
   </ItemGroup>
 
-  <Target Name="DeployToGame" AfterTargets="Build">
+  <Target Name="DeployToGame" AfterTargets="Build" Condition="'$(DeadlockManagedDir)' != ''">
     <ItemGroup>
       <DeployFiles Include="$(OutputPath)ItemRotationPlugin.dll;$(OutputPath)ItemRotationPlugin.pdb" />
     </ItemGroup>
-    <Copy SourceFiles="@(DeployFiles)" DestinationFolder="$(DeadlockManagedDir)\plugins" />
+    <Copy SourceFiles="@(DeployFiles)" DestinationFolder="$(DeadlockManagedDir)\plugins" SkipUnchangedFiles="false" Retries="0" ContinueOnError="WarnAndContinue" />
   </Target>
 </Project>
