@@ -9,19 +9,17 @@ namespace DeadworksManaged.Api;
 /// </summary>
 /// <remarks>
 /// <para>
-/// Everything a <see cref="CAI_BaseNPC"/> can do works on it: <see cref="CAI_BaseNPC.MoveTo"/> paths the bot
-/// to a point with the game's own pathfinder, <see cref="CAI_BaseNPC.SetEnemy"/> picks what it fights,
-/// <see cref="CAI_BaseNPC.Schedule"/> shows what it is doing, and
-/// <see cref="IDeadworksPlugin.OnNpcSelectSchedule"/> can replace what it does next.
+/// <see cref="CAI_BaseNPC.MoveTo"/> paths the bot to a point with the game's own pathfinder, and
+/// <see cref="CAI_BaseNPC.Schedule"/> shows what it is doing.
 /// </para>
 /// <para>
 /// Whether the brain's decisions reach the hero depends on <see cref="Bots.AiEnabled"/>. While it is on, the
-/// brain turns its navigation into the bot's input itself, and also aims, shoots, casts and buys. It also keeps
-/// making its own decisions, so a <see cref="CAI_BaseNPC.MoveTo"/> order may be dropped for a zipline or a lane
-/// push a moment later; hold it with <see cref="IDeadworksPlugin.OnNpcSelectSchedule"/>. While it is off (the
-/// default on a community server) the game sends the bot blank input and ignores the brain: the brain still
-/// plans a <see cref="CAI_BaseNPC.MoveTo"/> path, and <see cref="ApplyMovement"/> is what walks the hero along
-/// it, running at the hero's normal speed and stopping within about 50 units of the goal.
+/// brain turns its navigation into the bot's input itself and also fights. It keeps making its own decisions,
+/// so a <see cref="CAI_BaseNPC.MoveTo"/> order may be dropped for a zipline or a lane push a moment later.
+/// While it is off (the default on a community server) the game sends the bot blank input and ignores the
+/// brain: the brain still plans a <see cref="CAI_BaseNPC.MoveTo"/> path, and <see cref="ApplyMovement"/> is
+/// what walks the hero along it, running at the hero's normal speed and stopping within about 50 units of the
+/// goal.
 /// </para>
 /// </remarks>
 [NativeClass("CCitadelPlayerBotNPCBrain")]
@@ -54,10 +52,10 @@ public sealed unsafe class CCitadelPlayerBotNPCBrain : CAI_CitadelNPC {
 	/// </summary>
 	/// <remarks>
 	/// Give the brain somewhere to go first with <see cref="CAI_BaseNPC.MoveTo"/>; once it arrives this
-	/// returns false again. The bot runs towards each waypoint and jumps where the path goes up a ledge.
+	/// returns false again. The bot runs towards each waypoint.
 	/// Don't call it while <see cref="Bots.AiEnabled"/> is on: the brain already sends its own input then.
 	/// </remarks>
-	/// <param name="usercmd">The usercmd to fill in: movement, view angles, and the jump button when needed.</param>
+	/// <param name="usercmd">The usercmd to fill in: movement, view angles and buttons.</param>
 	/// <param name="lookAt">
 	/// A point for the bot to look at while it moves, so it strafes or backpedals to keep facing it. Null
 	/// looks where it is going.
