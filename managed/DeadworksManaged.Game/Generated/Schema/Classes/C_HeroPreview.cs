@@ -14,7 +14,7 @@ public static partial class Schema {
 		static string ISchemaClass<C_HeroPreview>.NativeName => "C_HeroPreview";
 
 		private static readonly SchemaField __m_CCitadelHeroComponent = new("C_HeroPreview", "m_CCitadelHeroComponent");
-		/// <summary><c>CCitadelHeroComponent</c>. Networked in build 6779: a write is sent to clients.</summary>
+		/// <summary><c>CCitadelHeroComponent</c>. Networked: a write is sent to clients.</summary>
 		public CCitadelHeroComponent m_CCitadelHeroComponent => Embedded<CCitadelHeroComponent>(__m_CCitadelHeroComponent);
 	}
 }

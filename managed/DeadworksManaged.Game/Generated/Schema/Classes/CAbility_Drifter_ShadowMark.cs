@@ -14,7 +14,7 @@ public static partial class Schema {
 		static string ISchemaClass<CAbility_Drifter_ShadowMark>.NativeName => "CAbility_Drifter_ShadowMark";
 
 		private static readonly SchemaField __m_bTeleported = new("CAbility_Drifter_ShadowMark", "m_bTeleported");
-		/// <summary><c>bool</c>. Networked in build 6779: a write is sent to clients.</summary>
+		/// <summary><c>bool</c>. Networked: a write is sent to clients.</summary>
 		public bool m_bTeleported { get => Get<bool>(__m_bTeleported); set => Set(__m_bTeleported, value); }
 
 		private static readonly SchemaField __m_flExpireTime = new("CAbility_Drifter_ShadowMark", "m_flExpireTime");
@@ -26,11 +26,11 @@ public static partial class Schema {
 		public GameTime m_flTeleportedTime { get => Get<GameTime>(__m_flTeleportedTime); set => Set(__m_flTeleportedTime, value); }
 
 		private static readonly SchemaField __m_hTeleportTarget = new("CAbility_Drifter_ShadowMark", "m_hTeleportTarget");
-		/// <summary><c>CHandle&lt;CBaseEntity&gt;</c>. Networked in build 6779: a write is sent to clients.</summary>
+		/// <summary><c>CHandle&lt;CBaseEntity&gt;</c>. Networked: a write is sent to clients.</summary>
 		public CBaseEntity? m_hTeleportTarget { get => GetHandle<CBaseEntity>(__m_hTeleportTarget); set => SetHandle(__m_hTeleportTarget, value); }
 
 		private static readonly SchemaField __m_qPostTeleportAngles = new("CAbility_Drifter_ShadowMark", "m_qPostTeleportAngles");
-		/// <summary><c>QAngle</c>. Networked in build 6779: a write is sent to clients.</summary>
+		/// <summary><c>QAngle</c>. Networked: a write is sent to clients.</summary>
 		public Vector3 m_qPostTeleportAngles { get => Get<Vector3>(__m_qPostTeleportAngles); set => Set(__m_qPostTeleportAngles, value); }
 	}
 }

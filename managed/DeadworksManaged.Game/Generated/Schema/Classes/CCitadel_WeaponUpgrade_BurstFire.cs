@@ -14,7 +14,7 @@ public static partial class Schema {
 		static string ISchemaClass<CCitadel_WeaponUpgrade_BurstFire>.NativeName => "CCitadel_WeaponUpgrade_BurstFire";
 
 		private static readonly SchemaField __m_nFastFireEndTime = new("CCitadel_WeaponUpgrade_BurstFire", "m_nFastFireEndTime");
-		/// <summary><c>GameTime_t</c>. Networked in build 6779: a write is sent to clients.</summary>
+		/// <summary><c>GameTime_t</c>. Networked: a write is sent to clients.</summary>
 		public GameTime m_nFastFireEndTime { get => Get<GameTime>(__m_nFastFireEndTime); set => Set(__m_nFastFireEndTime, value); }
 
 		/// <summary>The data entry this was created from, as <see cref="CCitadel_WeaponUpgrade_BurstFireVData"/>, or null if it has none.</summary>

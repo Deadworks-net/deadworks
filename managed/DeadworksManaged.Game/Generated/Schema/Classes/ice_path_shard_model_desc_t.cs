@@ -14,23 +14,23 @@ public static partial class Schema {
 		static string ISchemaClass<ice_path_shard_model_desc_t>.NativeName => "ice_path_shard_model_desc_t";
 
 		private static readonly SchemaField __m_SurfacePropStringToken = new("ice_path_shard_model_desc_t", "m_SurfacePropStringToken");
-		/// <summary><c>CUtlStringToken</c>. Networked in build 6779: a write is sent to clients.</summary>
+		/// <summary><c>CUtlStringToken</c>. Networked: a write is sent to clients.</summary>
 		public uint m_SurfacePropStringToken { get => Get<uint>(__m_SurfacePropStringToken); set => Set(__m_SurfacePropStringToken, value); }
 
 		private static readonly SchemaField __m_flThickness = new("ice_path_shard_model_desc_t", "m_flThickness");
-		/// <summary><c>float32</c>. Networked in build 6779: a write is sent to clients.</summary>
+		/// <summary><c>float32</c>. Networked: a write is sent to clients.</summary>
 		public float m_flThickness { get => Get<float>(__m_flThickness); set => Set(__m_flThickness, value); }
 
 		private static readonly SchemaField __m_nModelID = new("ice_path_shard_model_desc_t", "m_nModelID");
-		/// <summary><c>int32</c>. Networked in build 6779: a write is sent to clients.</summary>
+		/// <summary><c>int32</c>. Networked: a write is sent to clients.</summary>
 		public int m_nModelID { get => Get<int>(__m_nModelID); set => Set(__m_nModelID, value); }
 
 		private static readonly SchemaField __m_vecPanelSize = new("ice_path_shard_model_desc_t", "m_vecPanelSize");
-		/// <summary><c>Vector2D</c>. Networked in build 6779: a write is sent to clients.</summary>
+		/// <summary><c>Vector2D</c>. Networked: a write is sent to clients.</summary>
 		public Vector2 m_vecPanelSize { get => Get<Vector2>(__m_vecPanelSize); set => Set(__m_vecPanelSize, value); }
 
 		private static readonly SchemaField __m_vecPanelVertices = new("ice_path_shard_model_desc_t", "m_vecPanelVertices");
-		/// <summary><c>CNetworkUtlVectorBase&lt;VectorWS&gt;</c>. Networked in build 6779: a write is sent to clients.</summary>
+		/// <summary><c>CNetworkUtlVectorBase&lt;VectorWS&gt;</c>. Networked: a write is sent to clients.</summary>
 		public SchemaValueList<Vector3> m_vecPanelVertices => new(this, __m_vecPanelVertices, ListStorage.Vector);
 	}
 }

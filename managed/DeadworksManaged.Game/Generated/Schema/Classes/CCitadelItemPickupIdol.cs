@@ -14,7 +14,7 @@ public static partial class Schema {
 		static string ISchemaClass<CCitadelItemPickupIdol>.NativeName => "CCitadelItemPickupIdol";
 
 		private static readonly SchemaField __m_nTeamBias = new("CCitadelItemPickupIdol", "m_nTeamBias");
-		/// <summary><c>int32</c>. Networked in build 6779: a write is sent to clients.</summary>
+		/// <summary><c>int32</c>. Networked: a write is sent to clients.</summary>
 		public int m_nTeamBias { get => Get<int>(__m_nTeamBias); set => Set(__m_nTeamBias, value); }
 
 		/// <summary>The data entry this was created from, as <see cref="CCitadelItemPickupIdolVData"/>, or null if it has none.</summary>

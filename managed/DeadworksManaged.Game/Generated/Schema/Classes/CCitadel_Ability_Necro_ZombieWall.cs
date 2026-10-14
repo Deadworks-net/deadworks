@@ -14,7 +14,7 @@ public static partial class Schema {
 		static string ISchemaClass<CCitadel_Ability_Necro_ZombieWall>.NativeName => "CCitadel_Ability_Necro_ZombieWall";
 
 		private static readonly SchemaField __m_tWallDeployFinishTime = new("CCitadel_Ability_Necro_ZombieWall", "m_tWallDeployFinishTime");
-		/// <summary><c>GameTime_t</c>. Networked in build 6779: a write is sent to clients.</summary>
+		/// <summary><c>GameTime_t</c>. Networked: a write is sent to clients.</summary>
 		public GameTime m_tWallDeployFinishTime { get => Get<GameTime>(__m_tWallDeployFinishTime); set => Set(__m_tWallDeployFinishTime, value); }
 
 		private static readonly SchemaField __m_vecHitUnits = new("CCitadel_Ability_Necro_ZombieWall", "m_vecHitUnits");

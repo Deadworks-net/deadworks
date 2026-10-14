@@ -18,7 +18,7 @@ public static partial class Schema {
 		public int m_ChannelParticle { get => Get<int>(__m_ChannelParticle); set => Set(__m_ChannelParticle, value); }
 
 		private static readonly SchemaField __m_flNextShootTime = new("CAbility_Synth_Barrage", "m_flNextShootTime");
-		/// <summary><c>GameTime_t</c>. Networked in build 6779: a write is sent to clients.</summary>
+		/// <summary><c>GameTime_t</c>. Networked: a write is sent to clients.</summary>
 		public GameTime m_flNextShootTime { get => Get<GameTime>(__m_flNextShootTime); set => Set(__m_flNextShootTime, value); }
 
 		private static readonly SchemaField __m_nProjectilesScheduled = new("CAbility_Synth_Barrage", "m_nProjectilesScheduled");

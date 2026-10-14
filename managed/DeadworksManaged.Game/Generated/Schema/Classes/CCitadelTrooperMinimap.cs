@@ -14,11 +14,11 @@ public static partial class Schema {
 		static string ISchemaClass<CCitadelTrooperMinimap>.NativeName => "CCitadelTrooperMinimap";
 
 		private static readonly SchemaField __m_flUpdateInterval = new("CCitadelTrooperMinimap", "m_flUpdateInterval");
-		/// <summary><c>float32</c>. Networked in build 6779: a write is sent to clients.</summary>
+		/// <summary><c>float32</c>. Networked: a write is sent to clients.</summary>
 		public float m_flUpdateInterval { get => Get<float>(__m_flUpdateInterval); set => Set(__m_flUpdateInterval, value); }
 
 		private static readonly SchemaField __m_vecFOWEntities = new("CCitadelTrooperMinimap", "m_vecFOWEntities");
-		/// <summary><c>CUtlVectorEmbeddedNetworkVar&lt;STrooperFOWEntity&gt;</c>. Networked in build 6779: a write is sent to clients.</summary>
+		/// <summary><c>CUtlVectorEmbeddedNetworkVar&lt;STrooperFOWEntity&gt;</c>. Networked: a write is sent to clients.</summary>
 		public SchemaObjectList<STrooperFOWEntity> m_vecFOWEntities => new(this, __m_vecFOWEntities, ListStorage.Vector);
 	}
 }

@@ -18,7 +18,7 @@ public static partial class Schema {
 		public CEntityIOOutput m_OnEventFired => Embedded<CEntityIOOutput>(__m_OnEventFired);
 
 		private static readonly SchemaField __m_bEnabled = new("CLogicGameEventListener", "m_bEnabled");
-		/// <summary><c>bool</c>. Networked in build 6779: a write is sent to clients.</summary>
+		/// <summary><c>bool</c>. Networked: a write is sent to clients.</summary>
 		public bool m_bEnabled { get => Get<bool>(__m_bEnabled); set => Set(__m_bEnabled, value); }
 
 		private static readonly SchemaField __m_bStartDisabled = new("CLogicGameEventListener", "m_bStartDisabled");

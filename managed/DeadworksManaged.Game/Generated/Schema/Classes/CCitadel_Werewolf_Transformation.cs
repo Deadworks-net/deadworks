@@ -14,7 +14,7 @@ public static partial class Schema {
 		static string ISchemaClass<CCitadel_Werewolf_Transformation>.NativeName => "CCitadel_Werewolf_Transformation";
 
 		private static readonly SchemaField __m_bIsTransformed = new("CCitadel_Werewolf_Transformation", "m_bIsTransformed");
-		/// <summary><c>bool</c>. Networked in build 6779: a write is sent to clients.</summary>
+		/// <summary><c>bool</c>. Networked: a write is sent to clients.</summary>
 		public bool m_bIsTransformed { get => Get<bool>(__m_bIsTransformed); set => Set(__m_bIsTransformed, value); }
 
 		private static readonly SchemaField __m_bIsTransformingBack = new("CCitadel_Werewolf_Transformation", "m_bIsTransformingBack");
@@ -22,7 +22,7 @@ public static partial class Schema {
 		public bool m_bIsTransformingBack { get => Get<bool>(__m_bIsTransformingBack); set => Set(__m_bIsTransformingBack, value); }
 
 		private static readonly SchemaField __m_flWerewolfStartTime = new("CCitadel_Werewolf_Transformation", "m_flWerewolfStartTime");
-		/// <summary><c>GameTime_t</c>. Networked in build 6779: a write is sent to clients.</summary>
+		/// <summary><c>GameTime_t</c>. Networked: a write is sent to clients.</summary>
 		public GameTime m_flWerewolfStartTime { get => Get<GameTime>(__m_flWerewolfStartTime); set => Set(__m_flWerewolfStartTime, value); }
 
 		private static readonly SchemaField __m_pWerewolfModifier = new("CCitadel_Werewolf_Transformation", "m_pWerewolfModifier");

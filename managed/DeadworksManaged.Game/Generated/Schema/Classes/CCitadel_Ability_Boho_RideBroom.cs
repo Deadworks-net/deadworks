@@ -18,11 +18,11 @@ public static partial class Schema {
 		public int m_TrailFX { get => Get<int>(__m_TrailFX); set => Set(__m_TrailFX, value); }
 
 		private static readonly SchemaField __m_bLeaping = new("CCitadel_Ability_Boho_RideBroom", "m_bLeaping");
-		/// <summary><c>bool</c>. Networked in build 6779: a write is sent to clients.</summary>
+		/// <summary><c>bool</c>. Networked: a write is sent to clients.</summary>
 		public bool m_bLeaping { get => Get<bool>(__m_bLeaping); set => Set(__m_bLeaping, value); }
 
 		private static readonly SchemaField __m_flLeapStartTime = new("CCitadel_Ability_Boho_RideBroom", "m_flLeapStartTime");
-		/// <summary><c>GameTime_t</c>. Networked in build 6779: a write is sent to clients.</summary>
+		/// <summary><c>GameTime_t</c>. Networked: a write is sent to clients.</summary>
 		public GameTime m_flLeapStartTime { get => Get<GameTime>(__m_flLeapStartTime); set => Set(__m_flLeapStartTime, value); }
 
 		private static readonly SchemaField __m_nFXIndex = new("CCitadel_Ability_Boho_RideBroom", "m_nFXIndex");

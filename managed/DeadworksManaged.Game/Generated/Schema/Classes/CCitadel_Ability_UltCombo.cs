@@ -18,7 +18,7 @@ public static partial class Schema {
 		public GameTime m_flLastAttackTime { get => Get<GameTime>(__m_flLastAttackTime); set => Set(__m_flLastAttackTime, value); }
 
 		private static readonly SchemaField __m_hTarget = new("CCitadel_Ability_UltCombo", "m_hTarget");
-		/// <summary><c>CHandle&lt;CBaseEntity&gt;</c>. Networked in build 6779: a write is sent to clients.</summary>
+		/// <summary><c>CHandle&lt;CBaseEntity&gt;</c>. Networked: a write is sent to clients.</summary>
 		public CBaseEntity? m_hTarget { get => GetHandle<CBaseEntity>(__m_hTarget); set => SetHandle(__m_hTarget, value); }
 
 		private static readonly SchemaField __m_hTargetComboModifier = new("CCitadel_Ability_UltCombo", "m_hTargetComboModifier");
@@ -26,7 +26,7 @@ public static partial class Schema {
 		public RawField m_hTargetComboModifier => Raw(__m_hTargetComboModifier, "CModifierHandleTyped<CCitadelModifier>");
 
 		private static readonly SchemaField __m_iBonusHealth = new("CCitadel_Ability_UltCombo", "m_iBonusHealth");
-		/// <summary><c>int32</c>. Networked in build 6779: a write is sent to clients.</summary>
+		/// <summary><c>int32</c>. Networked: a write is sent to clients.</summary>
 		public int m_iBonusHealth { get => Get<int>(__m_iBonusHealth); set => Set(__m_iBonusHealth, value); }
 
 		private static readonly SchemaField __m_nAttackNum = new("CCitadel_Ability_UltCombo", "m_nAttackNum");

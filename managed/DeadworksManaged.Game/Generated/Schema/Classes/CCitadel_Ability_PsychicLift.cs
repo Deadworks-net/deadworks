@@ -14,11 +14,11 @@ public static partial class Schema {
 		static string ISchemaClass<CCitadel_Ability_PsychicLift>.NativeName => "CCitadel_Ability_PsychicLift";
 
 		private static readonly SchemaField __m_vCrashPosition = new("CCitadel_Ability_PsychicLift", "m_vCrashPosition");
-		/// <summary><c>VectorWS</c>. Networked in build 6779: a write is sent to clients.</summary>
+		/// <summary><c>VectorWS</c>. Networked: a write is sent to clients.</summary>
 		public Vector3 m_vCrashPosition { get => Get<Vector3>(__m_vCrashPosition); set => Set(__m_vCrashPosition, value); }
 
 		private static readonly SchemaField __m_vLiftPosition = new("CCitadel_Ability_PsychicLift", "m_vLiftPosition");
-		/// <summary><c>VectorWS</c>. Networked in build 6779: a write is sent to clients.</summary>
+		/// <summary><c>VectorWS</c>. Networked: a write is sent to clients.</summary>
 		public Vector3 m_vLiftPosition { get => Get<Vector3>(__m_vLiftPosition); set => Set(__m_vLiftPosition, value); }
 
 		private static readonly SchemaField __m_vecLiftTargets = new("CCitadel_Ability_PsychicLift", "m_vecLiftTargets");

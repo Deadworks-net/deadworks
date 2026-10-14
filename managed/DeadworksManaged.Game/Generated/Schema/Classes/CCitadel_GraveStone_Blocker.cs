@@ -14,7 +14,7 @@ public static partial class Schema {
 		static string ISchemaClass<CCitadel_GraveStone_Blocker>.NativeName => "CCitadel_GraveStone_Blocker";
 
 		private static readonly SchemaField __m_CCitadelMinimapComponent = new("CCitadel_GraveStone_Blocker", "m_CCitadelMinimapComponent");
-		/// <summary><c>CCitadelMinimapComponent</c>. Networked in build 6779: a write is sent to clients.</summary>
+		/// <summary><c>CCitadelMinimapComponent</c>. Networked: a write is sent to clients.</summary>
 		public CCitadelMinimapComponent m_CCitadelMinimapComponent => Embedded<CCitadelMinimapComponent>(__m_CCitadelMinimapComponent);
 
 		private static readonly SchemaField __m_flLifetime = new("CCitadel_GraveStone_Blocker", "m_flLifetime");
@@ -22,11 +22,11 @@ public static partial class Schema {
 		public float m_flLifetime { get => Get<float>(__m_flLifetime); set => Set(__m_flLifetime, value); }
 
 		private static readonly SchemaField __m_hAbility = new("CCitadel_GraveStone_Blocker", "m_hAbility");
-		/// <summary><c>CHandle&lt;CCitadelBaseAbility&gt;</c>. Networked in build 6779: a write is sent to clients.</summary>
+		/// <summary><c>CHandle&lt;CCitadelBaseAbility&gt;</c>. Networked: a write is sent to clients.</summary>
 		public CCitadelBaseAbility? m_hAbility { get => GetHandle<CCitadelBaseAbility>(__m_hAbility); set => SetHandle(__m_hAbility, value); }
 
 		private static readonly SchemaField __m_iGravestoneState = new("CCitadel_GraveStone_Blocker", "m_iGravestoneState");
-		/// <summary><c>int32</c>. Networked in build 6779: a write is sent to clients.</summary>
+		/// <summary><c>int32</c>. Networked: a write is sent to clients.</summary>
 		public int m_iGravestoneState { get => Get<int>(__m_iGravestoneState); set => Set(__m_iGravestoneState, value); }
 	}
 }

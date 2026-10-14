@@ -115,7 +115,7 @@ if (File.Exists(surveyPath)) {
 }
 
 var files = new OutputSet(output);
-var schemaEmitter = new SchemaEmitter(schema, entities, api, setterWarnings, survey);
+var schemaEmitter = new SchemaEmitter(schema, entities, api, setterWarnings);
 schemaEmitter.Emit(files);
 var entityEmitter = new EntityEmitter(entities, schema, schemaEmitter.Ids, survey);
 if (surveyDirectory != null) {
@@ -162,8 +162,7 @@ summary.AppendLine($"| Inputs, outputs | {e.Inputs}, {e.Outputs} ({s.InputMethod
 summary.AppendLine($"| Console variables, commands | {k.ConVars}, {k.Commands} |");
 summary.AppendLine($"| Heroes, abilities, items, modifiers | {k.Heroes}, {k.Abilities}, {k.Items}, {k.Modifiers} |");
 summary.AppendLine($"| Ability property names | {k.AbilityProperties} |");
-if (survey is { NetworkedFields.Count: > 0 })
-	summary.AppendLine($"| Fields marked networked (asked of build {survey.NetworkedBuild}) | {survey.NetworkedFields.Count} |");
+summary.AppendLine($"| Networked fields | {schemaEmitter.Stats.NetworkedFields} |");
 summary.AppendLine();
 summary.AppendLine($"{files.Count} files: {written} written, {deleted} deleted.");
 if (stale.Count > 0) {

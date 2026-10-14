@@ -18,27 +18,27 @@ public static partial class Schema {
 		public GameTime m_flCompletedTime { get => Get<GameTime>(__m_flCompletedTime); set => Set(__m_flCompletedTime, value); }
 
 		private static readonly SchemaField __m_nDraftsRemaining = new("ItemDraftRoundState_t", "m_nDraftsRemaining");
-		/// <summary><c>int32</c>. Networked in build 6779: a write is sent to clients.</summary>
+		/// <summary><c>int32</c>. Networked: a write is sent to clients.</summary>
 		public int m_nDraftsRemaining { get => Get<int>(__m_nDraftsRemaining); set => Set(__m_nDraftsRemaining, value); }
 
 		private static readonly SchemaField __m_nDraftsTotal = new("ItemDraftRoundState_t", "m_nDraftsTotal");
-		/// <summary><c>int32</c>. Networked in build 6779: a write is sent to clients.</summary>
+		/// <summary><c>int32</c>. Networked: a write is sent to clients.</summary>
 		public int m_nDraftsTotal { get => Get<int>(__m_nDraftsTotal); set => Set(__m_nDraftsTotal, value); }
 
 		private static readonly SchemaField __m_nID = new("ItemDraftRoundState_t", "m_nID");
-		/// <summary><c>ItemDraftRoundID_t</c>. Networked in build 6779: a write is sent to clients.</summary>
+		/// <summary><c>ItemDraftRoundID_t</c>. Networked: a write is sent to clients.</summary>
 		public uint m_nID { get => Get<uint>(__m_nID); set => Set(__m_nID, value); }
 
 		private static readonly SchemaField __m_nRoundsRemaining = new("ItemDraftRoundState_t", "m_nRoundsRemaining");
-		/// <summary><c>int32</c>. Networked in build 6779: a write is sent to clients.</summary>
+		/// <summary><c>int32</c>. Networked: a write is sent to clients.</summary>
 		public int m_nRoundsRemaining { get => Get<int>(__m_nRoundsRemaining); set => Set(__m_nRoundsRemaining, value); }
 
 		private static readonly SchemaField __m_nRoundsTotal = new("ItemDraftRoundState_t", "m_nRoundsTotal");
-		/// <summary><c>int32</c>. Networked in build 6779: a write is sent to clients.</summary>
+		/// <summary><c>int32</c>. Networked: a write is sent to clients.</summary>
 		public int m_nRoundsTotal { get => Get<int>(__m_nRoundsTotal); set => Set(__m_nRoundsTotal, value); }
 
 		private static readonly SchemaField __m_vecOptions = new("ItemDraftRoundState_t", "m_vecOptions");
-		/// <summary><c>CUtlVectorEmbeddedNetworkVar&lt;ItemDraftOption_t&gt;</c>. Networked in build 6779: a write is sent to clients.</summary>
+		/// <summary><c>CUtlVectorEmbeddedNetworkVar&lt;ItemDraftOption_t&gt;</c>. Networked: a write is sent to clients.</summary>
 		public SchemaObjectList<ItemDraftOption_t> m_vecOptions => new(this, __m_vecOptions, ListStorage.Vector);
 	}
 }

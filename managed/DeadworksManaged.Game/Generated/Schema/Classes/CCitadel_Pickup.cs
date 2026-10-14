@@ -14,15 +14,15 @@ public static partial class Schema {
 		static string ISchemaClass<CCitadel_Pickup>.NativeName => "CCitadel_Pickup";
 
 		private static readonly SchemaField __m_CCitadelMinimapComponent = new("CCitadel_Pickup", "m_CCitadelMinimapComponent");
-		/// <summary><c>CCitadelMinimapComponent</c>. Networked in build 6779: a write is sent to clients.</summary>
+		/// <summary><c>CCitadelMinimapComponent</c>. Networked: a write is sent to clients.</summary>
 		public CCitadelMinimapComponent m_CCitadelMinimapComponent => Embedded<CCitadelMinimapComponent>(__m_CCitadelMinimapComponent);
 
 		private static readonly SchemaField __m_bActive = new("CCitadel_Pickup", "m_bActive");
-		/// <summary><c>bool</c>. Networked in build 6779: a write is sent to clients.</summary>
+		/// <summary><c>bool</c>. Networked: a write is sent to clients.</summary>
 		public bool m_bActive { get => Get<bool>(__m_bActive); set => Set(__m_bActive, value); }
 
 		private static readonly SchemaField __m_bInteractive = new("CCitadel_Pickup", "m_bInteractive");
-		/// <summary><c>bool</c>. Networked in build 6779: a write is sent to clients.</summary>
+		/// <summary><c>bool</c>. Networked: a write is sent to clients.</summary>
 		public bool m_bInteractive { get => Get<bool>(__m_bInteractive); set => Set(__m_bInteractive, value); }
 
 		private static readonly SchemaField __m_flImpactTime = new("CCitadel_Pickup", "m_flImpactTime");
@@ -34,11 +34,11 @@ public static partial class Schema {
 		public GameTime m_flVacuumStartTime { get => Get<GameTime>(__m_flVacuumStartTime); set => Set(__m_flVacuumStartTime, value); }
 
 		private static readonly SchemaField __m_hAssignedClaimer = new("CCitadel_Pickup", "m_hAssignedClaimer");
-		/// <summary><c>CHandle&lt;CBaseEntity&gt;</c>. Networked in build 6779: a write is sent to clients.</summary>
+		/// <summary><c>CHandle&lt;CBaseEntity&gt;</c>. Networked: a write is sent to clients.</summary>
 		public CBaseEntity? m_hAssignedClaimer { get => GetHandle<CBaseEntity>(__m_hAssignedClaimer); set => SetHandle(__m_hAssignedClaimer, value); }
 
 		private static readonly SchemaField __m_hVacuumTarget = new("CCitadel_Pickup", "m_hVacuumTarget");
-		/// <summary><c>CHandle&lt;CBaseEntity&gt;</c>. Networked in build 6779: a write is sent to clients.</summary>
+		/// <summary><c>CHandle&lt;CBaseEntity&gt;</c>. Networked: a write is sent to clients.</summary>
 		public CBaseEntity? m_hVacuumTarget { get => GetHandle<CBaseEntity>(__m_hVacuumTarget); set => SetHandle(__m_hVacuumTarget, value); }
 
 		private static readonly SchemaField __m_vImpactPos = new("CCitadel_Pickup", "m_vImpactPos");
@@ -50,7 +50,7 @@ public static partial class Schema {
 		public Vector3 m_vImpactVel { get => Get<Vector3>(__m_vImpactVel); set => Set(__m_vImpactVel, value); }
 
 		private static readonly SchemaField __m_vInitialVacuumVel = new("CCitadel_Pickup", "m_vInitialVacuumVel");
-		/// <summary><c>Vector</c>. Networked in build 6779: a write is sent to clients.</summary>
+		/// <summary><c>Vector</c>. Networked: a write is sent to clients.</summary>
 		public Vector3 m_vInitialVacuumVel { get => Get<Vector3>(__m_vInitialVacuumVel); set => Set(__m_vInitialVacuumVel, value); }
 
 		private static readonly SchemaField __m_vVacuumPos = new("CCitadel_Pickup", "m_vVacuumPos");
@@ -58,7 +58,7 @@ public static partial class Schema {
 		public Vector3 m_vVacuumPos { get => Get<Vector3>(__m_vVacuumPos); set => Set(__m_vVacuumPos, value); }
 
 		private static readonly SchemaField __m_vVacuumStartPos = new("CCitadel_Pickup", "m_vVacuumStartPos");
-		/// <summary><c>VectorWS</c>. Networked in build 6779: a write is sent to clients.</summary>
+		/// <summary><c>VectorWS</c>. Networked: a write is sent to clients.</summary>
 		public Vector3 m_vVacuumStartPos { get => Get<Vector3>(__m_vVacuumStartPos); set => Set(__m_vVacuumStartPos, value); }
 	}
 }

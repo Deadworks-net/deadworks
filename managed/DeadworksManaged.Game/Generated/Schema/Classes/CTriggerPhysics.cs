@@ -14,47 +14,47 @@ public static partial class Schema {
 		static string ISchemaClass<CTriggerPhysics>.NativeName => "CTriggerPhysics";
 
 		private static readonly SchemaField __m_angularDamping = new("CTriggerPhysics", "m_angularDamping");
-		/// <summary><c>float32</c>. Networked in build 6779: a write is sent to clients.</summary>
+		/// <summary><c>float32</c>. Networked: a write is sent to clients.</summary>
 		public float m_angularDamping { get => Get<float>(__m_angularDamping); set => Set(__m_angularDamping, value); }
 
 		private static readonly SchemaField __m_angularLimit = new("CTriggerPhysics", "m_angularLimit");
-		/// <summary><c>float32</c>. Networked in build 6779: a write is sent to clients.</summary>
+		/// <summary><c>float32</c>. Networked: a write is sent to clients.</summary>
 		public float m_angularLimit { get => Get<float>(__m_angularLimit); set => Set(__m_angularLimit, value); }
 
 		private static readonly SchemaField __m_bCollapseToForcePoint = new("CTriggerPhysics", "m_bCollapseToForcePoint");
-		/// <summary><c>bool</c>. Networked in build 6779: a write is sent to clients.</summary>
+		/// <summary><c>bool</c>. Networked: a write is sent to clients.</summary>
 		public bool m_bCollapseToForcePoint { get => Get<bool>(__m_bCollapseToForcePoint); set => Set(__m_bCollapseToForcePoint, value); }
 
 		private static readonly SchemaField __m_bConvertToDebrisWhenPossible = new("CTriggerPhysics", "m_bConvertToDebrisWhenPossible");
-		/// <summary><c>bool</c>. Networked in build 6779: a write is sent to clients.</summary>
+		/// <summary><c>bool</c>. Networked: a write is sent to clients.</summary>
 		public bool m_bConvertToDebrisWhenPossible { get => Get<bool>(__m_bConvertToDebrisWhenPossible); set => Set(__m_bConvertToDebrisWhenPossible, value); }
 
 		private static readonly SchemaField __m_bForceDirectionIsInLocalSpace = new("CTriggerPhysics", "m_bForceDirectionIsInLocalSpace");
-		/// <summary><c>bool</c>. Networked in build 6779: a write is sent to clients.</summary>
+		/// <summary><c>bool</c>. Networked: a write is sent to clients.</summary>
 		public bool m_bForceDirectionIsInLocalSpace { get => Get<bool>(__m_bForceDirectionIsInLocalSpace); set => Set(__m_bForceDirectionIsInLocalSpace, value); }
 
 		private static readonly SchemaField __m_flDampingRatio = new("CTriggerPhysics", "m_flDampingRatio");
-		/// <summary><c>float32</c>. Networked in build 6779: a write is sent to clients.</summary>
+		/// <summary><c>float32</c>. Networked: a write is sent to clients.</summary>
 		public float m_flDampingRatio { get => Get<float>(__m_flDampingRatio); set => Set(__m_flDampingRatio, value); }
 
 		private static readonly SchemaField __m_flFrequency = new("CTriggerPhysics", "m_flFrequency");
-		/// <summary><c>float32</c>. Networked in build 6779: a write is sent to clients.</summary>
+		/// <summary><c>float32</c>. Networked: a write is sent to clients.</summary>
 		public float m_flFrequency { get => Get<float>(__m_flFrequency); set => Set(__m_flFrequency, value); }
 
 		private static readonly SchemaField __m_gravityScale = new("CTriggerPhysics", "m_gravityScale");
-		/// <summary><c>float32</c>. Networked in build 6779: a write is sent to clients.</summary>
+		/// <summary><c>float32</c>. Networked: a write is sent to clients.</summary>
 		public float m_gravityScale { get => Get<float>(__m_gravityScale); set => Set(__m_gravityScale, value); }
 
 		private static readonly SchemaField __m_linearDamping = new("CTriggerPhysics", "m_linearDamping");
-		/// <summary><c>float32</c>. Networked in build 6779: a write is sent to clients.</summary>
+		/// <summary><c>float32</c>. Networked: a write is sent to clients.</summary>
 		public float m_linearDamping { get => Get<float>(__m_linearDamping); set => Set(__m_linearDamping, value); }
 
 		private static readonly SchemaField __m_linearForce = new("CTriggerPhysics", "m_linearForce");
-		/// <summary><c>float32</c>. Networked in build 6779: a write is sent to clients.</summary>
+		/// <summary><c>float32</c>. Networked: a write is sent to clients.</summary>
 		public float m_linearForce { get => Get<float>(__m_linearForce); set => Set(__m_linearForce, value); }
 
 		private static readonly SchemaField __m_linearLimit = new("CTriggerPhysics", "m_linearLimit");
-		/// <summary><c>float32</c>. Networked in build 6779: a write is sent to clients.</summary>
+		/// <summary><c>float32</c>. Networked: a write is sent to clients.</summary>
 		public float m_linearLimit { get => Get<float>(__m_linearLimit); set => Set(__m_linearLimit, value); }
 
 		private static readonly SchemaField __m_pController = new("CTriggerPhysics", "m_pController");
@@ -62,15 +62,15 @@ public static partial class Schema {
 		public IPhysicsMotionController? m_pController => Pointer<IPhysicsMotionController>(__m_pController);
 
 		private static readonly SchemaField __m_vecLinearForceDirection = new("CTriggerPhysics", "m_vecLinearForceDirection");
-		/// <summary><c>Vector</c>. Networked in build 6779: a write is sent to clients.</summary>
+		/// <summary><c>Vector</c>. Networked: a write is sent to clients.</summary>
 		public Vector3 m_vecLinearForceDirection { get => Get<Vector3>(__m_vecLinearForceDirection); set => Set(__m_vecLinearForceDirection, value); }
 
 		private static readonly SchemaField __m_vecLinearForcePointAt = new("CTriggerPhysics", "m_vecLinearForcePointAt");
-		/// <summary><c>Vector</c>. Networked in build 6779: a write is sent to clients.</summary>
+		/// <summary><c>Vector</c>. Networked: a write is sent to clients.</summary>
 		public Vector3 m_vecLinearForcePointAt { get => Get<Vector3>(__m_vecLinearForcePointAt); set => Set(__m_vecLinearForcePointAt, value); }
 
 		private static readonly SchemaField __m_vecLinearForcePointAtWorld = new("CTriggerPhysics", "m_vecLinearForcePointAtWorld");
-		/// <summary><c>VectorWS</c>. Networked in build 6779: a write is sent to clients.</summary>
+		/// <summary><c>VectorWS</c>. Networked: a write is sent to clients.</summary>
 		public Vector3 m_vecLinearForcePointAtWorld { get => Get<Vector3>(__m_vecLinearForcePointAtWorld); set => Set(__m_vecLinearForcePointAtWorld, value); }
 
 		/// <summary>Fires the <c>CollapseToForcePoint</c> input.</summary>

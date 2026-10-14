@@ -14,11 +14,11 @@ public static partial class Schema {
 		static string ISchemaClass<CSprite>.NativeName => "CSprite";
 
 		private static readonly SchemaField __m_bWorldSpaceScale = new("CSprite", "m_bWorldSpaceScale");
-		/// <summary><c>bool</c>. Networked in build 6779: a write is sent to clients.</summary>
+		/// <summary><c>bool</c>. Networked: a write is sent to clients.</summary>
 		public bool m_bWorldSpaceScale { get => Get<bool>(__m_bWorldSpaceScale); set => Set(__m_bWorldSpaceScale, value); }
 
 		private static readonly SchemaField __m_flBrightnessDuration = new("CSprite", "m_flBrightnessDuration");
-		/// <summary><c>float32</c>. Networked in build 6779: a write is sent to clients.</summary>
+		/// <summary><c>float32</c>. Networked: a write is sent to clients.</summary>
 		public float m_flBrightnessDuration { get => Get<float>(__m_flBrightnessDuration); set => Set(__m_flBrightnessDuration, value); }
 
 		private static readonly SchemaField __m_flBrightnessTimeStart = new("CSprite", "m_flBrightnessTimeStart");
@@ -34,15 +34,15 @@ public static partial class Schema {
 		public GameTime m_flDieTime { get => Get<GameTime>(__m_flDieTime); set => Set(__m_flDieTime, value); }
 
 		private static readonly SchemaField __m_flFrame = new("CSprite", "m_flFrame");
-		/// <summary><c>float32</c>. Networked in build 6779: a write is sent to clients.</summary>
+		/// <summary><c>float32</c>. Networked: a write is sent to clients.</summary>
 		public float m_flFrame { get => Get<float>(__m_flFrame); set => Set(__m_flFrame, value); }
 
 		private static readonly SchemaField __m_flGlowProxySize = new("CSprite", "m_flGlowProxySize");
-		/// <summary><c>float32</c>. Networked in build 6779: a write is sent to clients.</summary>
+		/// <summary><c>float32</c>. Networked: a write is sent to clients.</summary>
 		public float m_flGlowProxySize { get => Get<float>(__m_flGlowProxySize); set => Set(__m_flGlowProxySize, value); }
 
 		private static readonly SchemaField __m_flHDRColorScale = new("CSprite", "m_flHDRColorScale");
-		/// <summary><c>float32</c>. Networked in build 6779: a write is sent to clients.</summary>
+		/// <summary><c>float32</c>. Networked: a write is sent to clients.</summary>
 		public float m_flHDRColorScale { get => Get<float>(__m_flHDRColorScale); set => Set(__m_flHDRColorScale, value); }
 
 		private static readonly SchemaField __m_flLastTime = new("CSprite", "m_flLastTime");
@@ -54,7 +54,7 @@ public static partial class Schema {
 		public float m_flMaxFrame { get => Get<float>(__m_flMaxFrame); set => Set(__m_flMaxFrame, value); }
 
 		private static readonly SchemaField __m_flScaleDuration = new("CSprite", "m_flScaleDuration");
-		/// <summary><c>float32</c>. Networked in build 6779: a write is sent to clients.</summary>
+		/// <summary><c>float32</c>. Networked: a write is sent to clients.</summary>
 		public float m_flScaleDuration { get => Get<float>(__m_flScaleDuration); set => Set(__m_flScaleDuration, value); }
 
 		private static readonly SchemaField __m_flScaleTimeStart = new("CSprite", "m_flScaleTimeStart");
@@ -66,11 +66,11 @@ public static partial class Schema {
 		public float m_flSpeed { get => Get<float>(__m_flSpeed); set => Set(__m_flSpeed, value); }
 
 		private static readonly SchemaField __m_flSpriteFramerate = new("CSprite", "m_flSpriteFramerate");
-		/// <summary><c>float32</c>. Networked in build 6779: a write is sent to clients.</summary>
+		/// <summary><c>float32</c>. Networked: a write is sent to clients.</summary>
 		public float m_flSpriteFramerate { get => Get<float>(__m_flSpriteFramerate); set => Set(__m_flSpriteFramerate, value); }
 
 		private static readonly SchemaField __m_flSpriteScale = new("CSprite", "m_flSpriteScale");
-		/// <summary><c>float32</c>. Networked in build 6779: a write is sent to clients.</summary>
+		/// <summary><c>float32</c>. Networked: a write is sent to clients.</summary>
 		public float m_flSpriteScale { get => Get<float>(__m_flSpriteScale); set => Set(__m_flSpriteScale, value); }
 
 		private static readonly SchemaField __m_flStartScale = new("CSprite", "m_flStartScale");
@@ -78,19 +78,19 @@ public static partial class Schema {
 		public float m_flStartScale { get => Get<float>(__m_flStartScale); set => Set(__m_flStartScale, value); }
 
 		private static readonly SchemaField __m_hAttachedToEntity = new("CSprite", "m_hAttachedToEntity");
-		/// <summary><c>CHandle&lt;CBaseEntity&gt;</c>. Networked in build 6779: a write is sent to clients.</summary>
+		/// <summary><c>CHandle&lt;CBaseEntity&gt;</c>. Networked: a write is sent to clients.</summary>
 		public CBaseEntity? m_hAttachedToEntity { get => GetHandle<CBaseEntity>(__m_hAttachedToEntity); set => SetHandle(__m_hAttachedToEntity, value); }
 
 		private static readonly SchemaField __m_hSpriteMaterial = new("CSprite", "m_hSpriteMaterial");
-		/// <summary><c>CStrongHandle&lt;InfoForResourceTypeIMaterial2&gt;</c>. Networked in build 6779: a write is sent to clients.</summary>
+		/// <summary><c>CStrongHandle&lt;InfoForResourceTypeIMaterial2&gt;</c>. Networked: a write is sent to clients.</summary>
 		public ResourceHandle m_hSpriteMaterial { get => Get<ResourceHandle>(__m_hSpriteMaterial); set => Set(__m_hSpriteMaterial, value); }
 
 		private static readonly SchemaField __m_nAttachment = new("CSprite", "m_nAttachment");
-		/// <summary><c>AttachmentHandle_t</c>. Networked in build 6779: a write is sent to clients.</summary>
+		/// <summary><c>AttachmentHandle_t</c>. Networked: a write is sent to clients.</summary>
 		public byte m_nAttachment { get => Get<byte>(__m_nAttachment); set => Set(__m_nAttachment, value); }
 
 		private static readonly SchemaField __m_nBrightness = new("CSprite", "m_nBrightness");
-		/// <summary><c>uint32</c>. Networked in build 6779: a write is sent to clients.</summary>
+		/// <summary><c>uint32</c>. Networked: a write is sent to clients.</summary>
 		public uint m_nBrightness { get => Get<uint>(__m_nBrightness); set => Set(__m_nBrightness, value); }
 
 		private static readonly SchemaField __m_nDestBrightness = new("CSprite", "m_nDestBrightness");

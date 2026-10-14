@@ -14,7 +14,7 @@ public static partial class Schema {
 		static string ISchemaClass<CGlowProperty>.NativeName => "CGlowProperty";
 
 		private static readonly SchemaField __m_bFlashing = new("CGlowProperty", "m_bFlashing");
-		/// <summary><c>bool</c>. Networked in build 6779: a write is sent to clients.</summary>
+		/// <summary><c>bool</c>. Networked: a write is sent to clients.</summary>
 		public bool m_bFlashing { get => Get<bool>(__m_bFlashing); set => Set(__m_bFlashing, value); }
 
 		private static readonly SchemaField __m_bGlowing = new("CGlowProperty", "m_bGlowing");
@@ -26,31 +26,31 @@ public static partial class Schema {
 		public Vector3 m_fGlowColor { get => Get<Vector3>(__m_fGlowColor); set => Set(__m_fGlowColor, value); }
 
 		private static readonly SchemaField __m_flGlowStartTime = new("CGlowProperty", "m_flGlowStartTime");
-		/// <summary><c>float32</c>. Networked in build 6779: a write is sent to clients.</summary>
+		/// <summary><c>float32</c>. Networked: a write is sent to clients.</summary>
 		public float m_flGlowStartTime { get => Get<float>(__m_flGlowStartTime); set => Set(__m_flGlowStartTime, value); }
 
 		private static readonly SchemaField __m_flGlowTime = new("CGlowProperty", "m_flGlowTime");
-		/// <summary><c>float32</c>. Networked in build 6779: a write is sent to clients.</summary>
+		/// <summary><c>float32</c>. Networked: a write is sent to clients.</summary>
 		public float m_flGlowTime { get => Get<float>(__m_flGlowTime); set => Set(__m_flGlowTime, value); }
 
 		private static readonly SchemaField __m_glowColorOverride = new("CGlowProperty", "m_glowColorOverride");
-		/// <summary><c>Color</c>. Networked in build 6779: a write is sent to clients.</summary>
+		/// <summary><c>Color</c>. Networked: a write is sent to clients.</summary>
 		public Color32 m_glowColorOverride { get => Get<Color32>(__m_glowColorOverride); set => Set(__m_glowColorOverride, value); }
 
 		private static readonly SchemaField __m_iGlowTeam = new("CGlowProperty", "m_iGlowTeam");
-		/// <summary><c>int32</c>. Networked in build 6779: a write is sent to clients.</summary>
+		/// <summary><c>int32</c>. Networked: a write is sent to clients.</summary>
 		public int m_iGlowTeam { get => Get<int>(__m_iGlowTeam); set => Set(__m_iGlowTeam, value); }
 
 		private static readonly SchemaField __m_iGlowType = new("CGlowProperty", "m_iGlowType");
-		/// <summary><c>int32</c>. Networked in build 6779: a write is sent to clients.</summary>
+		/// <summary><c>int32</c>. Networked: a write is sent to clients.</summary>
 		public int m_iGlowType { get => Get<int>(__m_iGlowType); set => Set(__m_iGlowType, value); }
 
 		private static readonly SchemaField __m_nGlowRange = new("CGlowProperty", "m_nGlowRange");
-		/// <summary><c>int32</c>. Networked in build 6779: a write is sent to clients.</summary>
+		/// <summary><c>int32</c>. Networked: a write is sent to clients.</summary>
 		public int m_nGlowRange { get => Get<int>(__m_nGlowRange); set => Set(__m_nGlowRange, value); }
 
 		private static readonly SchemaField __m_nGlowRangeMin = new("CGlowProperty", "m_nGlowRangeMin");
-		/// <summary><c>int32</c>. Networked in build 6779: a write is sent to clients.</summary>
+		/// <summary><c>int32</c>. Networked: a write is sent to clients.</summary>
 		public int m_nGlowRangeMin { get => Get<int>(__m_nGlowRangeMin); set => Set(__m_nGlowRangeMin, value); }
 	}
 }

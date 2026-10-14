@@ -14,23 +14,23 @@ public static partial class Schema {
 		static string ISchemaClass<CCitadelTunnelNode>.NativeName => "CCitadelTunnelNode";
 
 		private static readonly SchemaField __m_bIsExit = new("CCitadelTunnelNode", "m_bIsExit");
-		/// <summary><c>bool</c>. Networked in build 6779: a write is sent to clients.</summary>
+		/// <summary><c>bool</c>. Networked: a write is sent to clients.</summary>
 		public bool m_bIsExit { get => Get<bool>(__m_bIsExit); set => Set(__m_bIsExit, value); }
 
 		private static readonly SchemaField __m_hConnection1 = new("CCitadelTunnelNode", "m_hConnection1");
-		/// <summary><c>CHandle&lt;CCitadelTunnelNode&gt;</c>. Networked in build 6779: a write is sent to clients.</summary>
+		/// <summary><c>CHandle&lt;CCitadelTunnelNode&gt;</c>. Networked: a write is sent to clients.</summary>
 		public CCitadelTunnelNode? m_hConnection1 { get => GetHandle<CCitadelTunnelNode>(__m_hConnection1); set => SetHandle(__m_hConnection1, value); }
 
 		private static readonly SchemaField __m_hConnection2 = new("CCitadelTunnelNode", "m_hConnection2");
-		/// <summary><c>CHandle&lt;CCitadelTunnelNode&gt;</c>. Networked in build 6779: a write is sent to clients.</summary>
+		/// <summary><c>CHandle&lt;CCitadelTunnelNode&gt;</c>. Networked: a write is sent to clients.</summary>
 		public CCitadelTunnelNode? m_hConnection2 { get => GetHandle<CCitadelTunnelNode>(__m_hConnection2); set => SetHandle(__m_hConnection2, value); }
 
 		private static readonly SchemaField __m_hConnection3 = new("CCitadelTunnelNode", "m_hConnection3");
-		/// <summary><c>CHandle&lt;CCitadelTunnelNode&gt;</c>. Networked in build 6779: a write is sent to clients.</summary>
+		/// <summary><c>CHandle&lt;CCitadelTunnelNode&gt;</c>. Networked: a write is sent to clients.</summary>
 		public CCitadelTunnelNode? m_hConnection3 { get => GetHandle<CCitadelTunnelNode>(__m_hConnection3); set => SetHandle(__m_hConnection3, value); }
 
 		private static readonly SchemaField __m_nTunnelID = new("CCitadelTunnelNode", "m_nTunnelID");
-		/// <summary><c>int32</c>. Networked in build 6779: a write is sent to clients.</summary>
+		/// <summary><c>int32</c>. Networked: a write is sent to clients.</summary>
 		public int m_nTunnelID { get => Get<int>(__m_nTunnelID); set => Set(__m_nTunnelID, value); }
 
 		private static readonly SchemaField __m_strNode01 = new("CCitadelTunnelNode", "m_strNode01");

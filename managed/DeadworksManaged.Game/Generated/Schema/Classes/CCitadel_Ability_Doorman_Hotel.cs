@@ -26,7 +26,7 @@ public static partial class Schema {
 		public CBaseEntity? m_hStartRelay { get => GetHandle<CBaseEntity>(__m_hStartRelay); set => SetHandle(__m_hStartRelay, value); }
 
 		private static readonly SchemaField __m_vLookTarget = new("CCitadel_Ability_Doorman_Hotel", "m_vLookTarget");
-		/// <summary><c>VectorWS</c>. Networked in build 6779: a write is sent to clients.</summary>
+		/// <summary><c>VectorWS</c>. Networked: a write is sent to clients.</summary>
 		public Vector3 m_vLookTarget { get => Get<Vector3>(__m_vLookTarget); set => Set(__m_vLookTarget, value); }
 	}
 }

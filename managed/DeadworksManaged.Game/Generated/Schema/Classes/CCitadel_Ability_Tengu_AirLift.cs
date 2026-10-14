@@ -14,23 +14,23 @@ public static partial class Schema {
 		static string ISchemaClass<CCitadel_Ability_Tengu_AirLift>.NativeName => "CCitadel_Ability_Tengu_AirLift";
 
 		private static readonly SchemaField __m_bIsGrabbing = new("CCitadel_Ability_Tengu_AirLift", "m_bIsGrabbing");
-		/// <summary><c>bool</c>. Networked in build 6779: a write is sent to clients.</summary>
+		/// <summary><c>bool</c>. Networked: a write is sent to clients.</summary>
 		public bool m_bIsGrabbing { get => Get<bool>(__m_bIsGrabbing); set => Set(__m_bIsGrabbing, value); }
 
 		private static readonly SchemaField __m_bIsHoldingBomb = new("CCitadel_Ability_Tengu_AirLift", "m_bIsHoldingBomb");
-		/// <summary><c>bool</c>. Networked in build 6779: a write is sent to clients.</summary>
+		/// <summary><c>bool</c>. Networked: a write is sent to clients.</summary>
 		public bool m_bIsHoldingBomb { get => Get<bool>(__m_bIsHoldingBomb); set => Set(__m_bIsHoldingBomb, value); }
 
 		private static readonly SchemaField __m_eFlightState = new("CCitadel_Ability_Tengu_AirLift", "m_eFlightState");
-		/// <summary><c>EFlightState</c>. Networked in build 6779: a write is sent to clients.</summary>
+		/// <summary><c>EFlightState</c>. Networked: a write is sent to clients.</summary>
 		public EFlightState m_eFlightState { get => Get<EFlightState>(__m_eFlightState); set => Set(__m_eFlightState, value); }
 
 		private static readonly SchemaField __m_flCurrentSpeed = new("CCitadel_Ability_Tengu_AirLift", "m_flCurrentSpeed");
-		/// <summary><c>float32</c>. Networked in build 6779: a write is sent to clients.</summary>
+		/// <summary><c>float32</c>. Networked: a write is sent to clients.</summary>
 		public float m_flCurrentSpeed { get => Get<float>(__m_flCurrentSpeed); set => Set(__m_flCurrentSpeed, value); }
 
 		private static readonly SchemaField __m_hGrabTarget = new("CCitadel_Ability_Tengu_AirLift", "m_hGrabTarget");
-		/// <summary><c>CHandle&lt;CBaseEntity&gt;</c>. Networked in build 6779: a write is sent to clients.</summary>
+		/// <summary><c>CHandle&lt;CBaseEntity&gt;</c>. Networked: a write is sent to clients.</summary>
 		public CBaseEntity? m_hGrabTarget { get => GetHandle<CBaseEntity>(__m_hGrabTarget); set => SetHandle(__m_hGrabTarget, value); }
 
 		private static readonly SchemaField __m_nHoldBombEffect = new("CCitadel_Ability_Tengu_AirLift", "m_nHoldBombEffect");

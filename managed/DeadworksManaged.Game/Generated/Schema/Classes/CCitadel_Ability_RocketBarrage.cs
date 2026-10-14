@@ -14,7 +14,7 @@ public static partial class Schema {
 		static string ISchemaClass<CCitadel_Ability_RocketBarrage>.NativeName => "CCitadel_Ability_RocketBarrage";
 
 		private static readonly SchemaField __m_flBarrageEndTime = new("CCitadel_Ability_RocketBarrage", "m_flBarrageEndTime");
-		/// <summary><c>CCitadelAutoScaledTime</c>. Networked in build 6779: a write is sent to clients.</summary>
+		/// <summary><c>CCitadelAutoScaledTime</c>. Networked: a write is sent to clients.</summary>
 		public CCitadelAutoScaledTime m_flBarrageEndTime => Embedded<CCitadelAutoScaledTime>(__m_flBarrageEndTime);
 
 		private static readonly SchemaField __m_flCurrentTimeScale = new("CCitadel_Ability_RocketBarrage", "m_flCurrentTimeScale");

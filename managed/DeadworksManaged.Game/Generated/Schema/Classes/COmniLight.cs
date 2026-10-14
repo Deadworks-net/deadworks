@@ -14,15 +14,15 @@ public static partial class Schema {
 		static string ISchemaClass<COmniLight>.NativeName => "COmniLight";
 
 		private static readonly SchemaField __m_bShowLight = new("COmniLight", "m_bShowLight");
-		/// <summary><c>bool</c>. Networked in build 6779: a write is sent to clients.</summary>
+		/// <summary><c>bool</c>. Networked: a write is sent to clients.</summary>
 		public bool m_bShowLight { get => Get<bool>(__m_bShowLight); set => Set(__m_bShowLight, value); }
 
 		private static readonly SchemaField __m_flInnerAngle = new("COmniLight", "m_flInnerAngle");
-		/// <summary><c>float32</c>. Networked in build 6779: a write is sent to clients.</summary>
+		/// <summary><c>float32</c>. Networked: a write is sent to clients.</summary>
 		public float m_flInnerAngle { get => Get<float>(__m_flInnerAngle); set => Set(__m_flInnerAngle, value); }
 
 		private static readonly SchemaField __m_flOuterAngle = new("COmniLight", "m_flOuterAngle");
-		/// <summary><c>float32</c>. Networked in build 6779: a write is sent to clients.</summary>
+		/// <summary><c>float32</c>. Networked: a write is sent to clients.</summary>
 		public float m_flOuterAngle { get => Get<float>(__m_flOuterAngle); set => Set(__m_flOuterAngle, value); }
 	}
 }

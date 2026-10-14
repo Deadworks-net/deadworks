@@ -14,7 +14,7 @@ public static partial class Schema {
 		static string ISchemaClass<CCitadel_WeaponUpgrade_WeaponEater>.NativeName => "CCitadel_WeaponUpgrade_WeaponEater";
 
 		private static readonly SchemaField __m_nWeaponPower = new("CCitadel_WeaponUpgrade_WeaponEater", "m_nWeaponPower");
-		/// <summary><c>int32</c>. Networked in build 6779: a write is sent to clients.</summary>
+		/// <summary><c>int32</c>. Networked: a write is sent to clients.</summary>
 		public int m_nWeaponPower { get => Get<int>(__m_nWeaponPower); set => Set(__m_nWeaponPower, value); }
 
 		/// <summary>The data entry this was created from, as <see cref="CCitadel_WeaponUpgrade_WeaponEaterVData"/>, or null if it has none.</summary>

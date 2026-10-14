@@ -14,11 +14,11 @@ public static partial class Schema {
 		static string ISchemaClass<TrackedStatNetworkData_t>.NativeName => "TrackedStatNetworkData_t";
 
 		private static readonly SchemaField __unStatID = new("TrackedStatNetworkData_t", "unStatID");
-		/// <summary><c>TrackedStatID_t</c>. Networked in build 6779: a write is sent to clients.</summary>
+		/// <summary><c>TrackedStatID_t</c>. Networked: a write is sent to clients.</summary>
 		public uint unStatID { get => Get<uint>(__unStatID); set => Set(__unStatID, value); }
 
 		private static readonly SchemaField __unStatValue = new("TrackedStatNetworkData_t", "unStatValue");
-		/// <summary><c>TrackedStatValue_t</c>. Networked in build 6779: a write is sent to clients.</summary>
+		/// <summary><c>TrackedStatValue_t</c>. Networked: a write is sent to clients.</summary>
 		public int unStatValue { get => Get<int>(__unStatValue); set => Set(__unStatValue, value); }
 	}
 }

@@ -14,7 +14,7 @@ public static partial class Schema {
 		static string ISchemaClass<CCitadel_Ability_Bull_Leap>.NativeName => "CCitadel_Ability_Bull_Leap";
 
 		private static readonly SchemaField __m_bBraceParamTriggered = new("CCitadel_Ability_Bull_Leap", "m_bBraceParamTriggered");
-		/// <summary><c>bool</c>. Networked in build 6779: a write is sent to clients.</summary>
+		/// <summary><c>bool</c>. Networked: a write is sent to clients.</summary>
 		public bool m_bBraceParamTriggered { get => Get<bool>(__m_bBraceParamTriggered); set => Set(__m_bBraceParamTriggered, value); }
 
 		private static readonly SchemaField __m_bInputBufferCrash = new("CCitadel_Ability_Bull_Leap", "m_bInputBufferCrash");
@@ -22,23 +22,23 @@ public static partial class Schema {
 		public bool m_bInputBufferCrash { get => Get<bool>(__m_bInputBufferCrash); set => Set(__m_bInputBufferCrash, value); }
 
 		private static readonly SchemaField __m_eLeapState = new("CCitadel_Ability_Bull_Leap", "m_eLeapState");
-		/// <summary><c>ELeapState_t</c>. Networked in build 6779: a write is sent to clients.</summary>
+		/// <summary><c>ELeapState_t</c>. Networked: a write is sent to clients.</summary>
 		public ELeapState_t m_eLeapState { get => Get<ELeapState_t>(__m_eLeapState); set => Set(__m_eLeapState, value); }
 
 		private static readonly SchemaField __m_flBoostEndTime = new("CCitadel_Ability_Bull_Leap", "m_flBoostEndTime");
-		/// <summary><c>CCitadelAutoScaledTime</c>. Networked in build 6779: a write is sent to clients.</summary>
+		/// <summary><c>CCitadelAutoScaledTime</c>. Networked: a write is sent to clients.</summary>
 		public CCitadelAutoScaledTime m_flBoostEndTime => Embedded<CCitadelAutoScaledTime>(__m_flBoostEndTime);
 
 		private static readonly SchemaField __m_flBoostYaw = new("CCitadel_Ability_Bull_Leap", "m_flBoostYaw");
-		/// <summary><c>float32</c>. Networked in build 6779: a write is sent to clients.</summary>
+		/// <summary><c>float32</c>. Networked: a write is sent to clients.</summary>
 		public float m_flBoostYaw { get => Get<float>(__m_flBoostYaw); set => Set(__m_flBoostYaw, value); }
 
 		private static readonly SchemaField __m_flNextStateTime = new("CCitadel_Ability_Bull_Leap", "m_flNextStateTime");
-		/// <summary><c>CCitadelAutoScaledTime</c>. Networked in build 6779: a write is sent to clients.</summary>
+		/// <summary><c>CCitadelAutoScaledTime</c>. Networked: a write is sent to clients.</summary>
 		public CCitadelAutoScaledTime m_flNextStateTime => Embedded<CCitadelAutoScaledTime>(__m_flNextStateTime);
 
 		private static readonly SchemaField __m_flStateEnterTime = new("CCitadel_Ability_Bull_Leap", "m_flStateEnterTime");
-		/// <summary><c>GameTime_t</c>. Networked in build 6779: a write is sent to clients.</summary>
+		/// <summary><c>GameTime_t</c>. Networked: a write is sent to clients.</summary>
 		public GameTime m_flStateEnterTime { get => Get<GameTime>(__m_flStateEnterTime); set => Set(__m_flStateEnterTime, value); }
 
 		private static readonly SchemaField __m_vPrevPos = new("CCitadel_Ability_Bull_Leap", "m_vPrevPos");
@@ -46,7 +46,7 @@ public static partial class Schema {
 		public Vector3 m_vPrevPos { get => Get<Vector3>(__m_vPrevPos); set => Set(__m_vPrevPos, value); }
 
 		private static readonly SchemaField __m_vecCrashDirection = new("CCitadel_Ability_Bull_Leap", "m_vecCrashDirection");
-		/// <summary><c>Vector</c>. Networked in build 6779: a write is sent to clients.</summary>
+		/// <summary><c>Vector</c>. Networked: a write is sent to clients.</summary>
 		public Vector3 m_vecCrashDirection { get => Get<Vector3>(__m_vecCrashDirection); set => Set(__m_vecCrashDirection, value); }
 
 		private static readonly SchemaField __m_vecCrashDownLastPos = new("CCitadel_Ability_Bull_Leap", "m_vecCrashDownLastPos");
@@ -54,7 +54,7 @@ public static partial class Schema {
 		public Vector3 m_vecCrashDownLastPos { get => Get<Vector3>(__m_vecCrashDownLastPos); set => Set(__m_vecCrashDownLastPos, value); }
 
 		private static readonly SchemaField __m_vecCrashPosition = new("CCitadel_Ability_Bull_Leap", "m_vecCrashPosition");
-		/// <summary><c>VectorWS</c>. Networked in build 6779: a write is sent to clients.</summary>
+		/// <summary><c>VectorWS</c>. Networked: a write is sent to clients.</summary>
 		public Vector3 m_vecCrashPosition { get => Get<Vector3>(__m_vecCrashPosition); set => Set(__m_vecCrashPosition, value); }
 
 		private static readonly SchemaField __m_vecDraggedEntities = new("CCitadel_Ability_Bull_Leap", "m_vecDraggedEntities");

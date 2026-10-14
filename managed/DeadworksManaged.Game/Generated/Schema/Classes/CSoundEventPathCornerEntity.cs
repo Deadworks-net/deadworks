@@ -18,7 +18,7 @@ public static partial class Schema {
 		public string m_iszPathCorner { get => GetString(__m_iszPathCorner); set => SetString(__m_iszPathCorner, value); }
 
 		private static readonly SchemaField __m_vecCornerPairsNetworked = new("CSoundEventPathCornerEntity", "m_vecCornerPairsNetworked");
-		/// <summary><c>CNetworkUtlVectorBase&lt;SoundeventPathCornerPairNetworked_t&gt;</c>. Networked in build 6779: a write is sent to clients.</summary>
+		/// <summary><c>CNetworkUtlVectorBase&lt;SoundeventPathCornerPairNetworked_t&gt;</c>. Networked: a write is sent to clients.</summary>
 		public SchemaObjectList<SoundeventPathCornerPairNetworked_t> m_vecCornerPairsNetworked => new(this, __m_vecCornerPairsNetworked, ListStorage.Vector);
 	}
 }

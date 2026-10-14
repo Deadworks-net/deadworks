@@ -14,19 +14,19 @@ public static partial class Schema {
 		static string ISchemaClass<CCitadel_Ability_ChargedTackle>.NativeName => "CCitadel_Ability_ChargedTackle";
 
 		private static readonly SchemaField __m_bPreparing = new("CCitadel_Ability_ChargedTackle", "m_bPreparing");
-		/// <summary><c>bool</c>. Networked in build 6779: a write is sent to clients.</summary>
+		/// <summary><c>bool</c>. Networked: a write is sent to clients.</summary>
 		public bool m_bPreparing { get => Get<bool>(__m_bPreparing); set => Set(__m_bPreparing, value); }
 
 		private static readonly SchemaField __m_bTackling = new("CCitadel_Ability_ChargedTackle", "m_bTackling");
-		/// <summary><c>bool</c>. Networked in build 6779: a write is sent to clients.</summary>
+		/// <summary><c>bool</c>. Networked: a write is sent to clients.</summary>
 		public bool m_bTackling { get => Get<bool>(__m_bTackling); set => Set(__m_bTackling, value); }
 
 		private static readonly SchemaField __m_flPrepareStartTime = new("CCitadel_Ability_ChargedTackle", "m_flPrepareStartTime");
-		/// <summary><c>GameTime_t</c>. Networked in build 6779: a write is sent to clients.</summary>
+		/// <summary><c>GameTime_t</c>. Networked: a write is sent to clients.</summary>
 		public GameTime m_flPrepareStartTime { get => Get<GameTime>(__m_flPrepareStartTime); set => Set(__m_flPrepareStartTime, value); }
 
 		private static readonly SchemaField __m_flTackleStartTime = new("CCitadel_Ability_ChargedTackle", "m_flTackleStartTime");
-		/// <summary><c>GameTime_t</c>. Networked in build 6779: a write is sent to clients.</summary>
+		/// <summary><c>GameTime_t</c>. Networked: a write is sent to clients.</summary>
 		public GameTime m_flTackleStartTime { get => Get<GameTime>(__m_flTackleStartTime); set => Set(__m_flTackleStartTime, value); }
 
 		private static readonly SchemaField __m_nDistancePreview = new("CCitadel_Ability_ChargedTackle", "m_nDistancePreview");
@@ -46,7 +46,7 @@ public static partial class Schema {
 		public Vector3 m_vecLastPosition { get => Get<Vector3>(__m_vecLastPosition); set => Set(__m_vecLastPosition, value); }
 
 		private static readonly SchemaField __m_vecTackleDir = new("CCitadel_Ability_ChargedTackle", "m_vecTackleDir");
-		/// <summary><c>Vector</c>. Networked in build 6779: a write is sent to clients.</summary>
+		/// <summary><c>Vector</c>. Networked: a write is sent to clients.</summary>
 		public Vector3 m_vecTackleDir { get => Get<Vector3>(__m_vecTackleDir); set => Set(__m_vecTackleDir, value); }
 	}
 }

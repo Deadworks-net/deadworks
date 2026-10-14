@@ -18,11 +18,11 @@ public static partial class Schema {
 		public bool m_bCreateAsChildSpawnGroup { get => Get<bool>(__m_bCreateAsChildSpawnGroup); set => Set(__m_bCreateAsChildSpawnGroup, value); }
 
 		private static readonly SchemaField __m_bEntitiesSpawned = new("CInfoWorldLayer", "m_bEntitiesSpawned");
-		/// <summary><c>bool</c>. Networked in build 6779: a write is sent to clients.</summary>
+		/// <summary><c>bool</c>. Networked: a write is sent to clients.</summary>
 		public bool m_bEntitiesSpawned { get => Get<bool>(__m_bEntitiesSpawned); set => Set(__m_bEntitiesSpawned, value); }
 
 		private static readonly SchemaField __m_bWorldLayerVisible = new("CInfoWorldLayer", "m_bWorldLayerVisible");
-		/// <summary><c>bool</c>. Networked in build 6779: a write is sent to clients.</summary>
+		/// <summary><c>bool</c>. Networked: a write is sent to clients.</summary>
 		public bool m_bWorldLayerVisible { get => Get<bool>(__m_bWorldLayerVisible); set => Set(__m_bWorldLayerVisible, value); }
 
 		private static readonly SchemaField __m_hLayerSpawnGroup = new("CInfoWorldLayer", "m_hLayerSpawnGroup");
@@ -30,7 +30,7 @@ public static partial class Schema {
 		public uint m_hLayerSpawnGroup { get => Get<uint>(__m_hLayerSpawnGroup); set => Set(__m_hLayerSpawnGroup, value); }
 
 		private static readonly SchemaField __m_layerName = new("CInfoWorldLayer", "m_layerName");
-		/// <summary><c>CUtlSymbolLarge</c>. Networked in build 6779: a write is sent to clients.</summary>
+		/// <summary><c>CUtlSymbolLarge</c>. Networked: a write is sent to clients.</summary>
 		public string m_layerName { get => GetString(__m_layerName); set => SetString(__m_layerName, value); }
 
 		private static readonly SchemaField __m_pOutputOnEntitiesSpawned = new("CInfoWorldLayer", "m_pOutputOnEntitiesSpawned");
@@ -38,7 +38,7 @@ public static partial class Schema {
 		public CEntityIOOutput m_pOutputOnEntitiesSpawned => Embedded<CEntityIOOutput>(__m_pOutputOnEntitiesSpawned);
 
 		private static readonly SchemaField __m_worldName = new("CInfoWorldLayer", "m_worldName");
-		/// <summary><c>CUtlSymbolLarge</c>. Networked in build 6779: a write is sent to clients.</summary>
+		/// <summary><c>CUtlSymbolLarge</c>. Networked: a write is sent to clients.</summary>
 		public string m_worldName { get => GetString(__m_worldName); set => SetString(__m_worldName, value); }
 
 		/// <summary>Fires the <c>DestroyEntities</c> input.</summary>

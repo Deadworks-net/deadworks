@@ -14,7 +14,7 @@ public static partial class Schema {
 		static string ISchemaClass<CCitadelAbilityBeam_t>.NativeName => "CCitadelAbilityBeam_t";
 
 		private static readonly SchemaField __m_angBeamAngles = new("CCitadelAbilityBeam_t", "m_angBeamAngles");
-		/// <summary><c>QAngle</c>. Networked in build 6779: a write is sent to clients.</summary>
+		/// <summary><c>QAngle</c>. Networked: a write is sent to clients.</summary>
 		public Vector3 m_angBeamAngles { get => Get<Vector3>(__m_angBeamAngles); set => Set(__m_angBeamAngles, value); }
 
 		private static readonly SchemaField __m_bEnforceLOSToShootPosition = new("CCitadelAbilityBeam_t", "m_bEnforceLOSToShootPosition");
@@ -38,11 +38,11 @@ public static partial class Schema {
 		public CBaseEntity? m_hShooter { get => GetHandle<CBaseEntity>(__m_hShooter); set => SetHandle(__m_hShooter, value); }
 
 		private static readonly SchemaField __m_nActivateTime = new("CCitadelAbilityBeam_t", "m_nActivateTime");
-		/// <summary><c>GameTime_t</c>. Networked in build 6779: a write is sent to clients.</summary>
+		/// <summary><c>GameTime_t</c>. Networked: a write is sent to clients.</summary>
 		public GameTime m_nActivateTime { get => Get<GameTime>(__m_nActivateTime); set => Set(__m_nActivateTime, value); }
 
 		private static readonly SchemaField __m_vBeamAimPos = new("CCitadelAbilityBeam_t", "m_vBeamAimPos");
-		/// <summary><c>VectorWS</c>. Networked in build 6779: a write is sent to clients.</summary>
+		/// <summary><c>VectorWS</c>. Networked: a write is sent to clients.</summary>
 		public Vector3 m_vBeamAimPos { get => Get<Vector3>(__m_vBeamAimPos); set => Set(__m_vBeamAimPos, value); }
 	}
 }

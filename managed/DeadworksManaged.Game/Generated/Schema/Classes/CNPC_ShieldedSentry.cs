@@ -14,15 +14,15 @@ public static partial class Schema {
 		static string ISchemaClass<CNPC_ShieldedSentry>.NativeName => "CNPC_ShieldedSentry";
 
 		private static readonly SchemaField __m_CCitadelMinimapComponent = new("CNPC_ShieldedSentry", "m_CCitadelMinimapComponent");
-		/// <summary><c>CCitadelMinimapComponent</c>. Networked in build 6779: a write is sent to clients.</summary>
+		/// <summary><c>CCitadelMinimapComponent</c>. Networked: a write is sent to clients.</summary>
 		public CCitadelMinimapComponent m_CCitadelMinimapComponent => Embedded<CCitadelMinimapComponent>(__m_CCitadelMinimapComponent);
 
 		private static readonly SchemaField __m_bHasRecentlyAttacked = new("CNPC_ShieldedSentry", "m_bHasRecentlyAttacked");
-		/// <summary><c>bool</c>. Networked in build 6779: a write is sent to clients.</summary>
+		/// <summary><c>bool</c>. Networked: a write is sent to clients.</summary>
 		public bool m_bHasRecentlyAttacked { get => Get<bool>(__m_bHasRecentlyAttacked); set => Set(__m_bHasRecentlyAttacked, value); }
 
 		private static readonly SchemaField __m_flAimPitch = new("CNPC_ShieldedSentry", "m_flAimPitch");
-		/// <summary><c>float32</c>. Networked in build 6779: a write is sent to clients.</summary>
+		/// <summary><c>float32</c>. Networked: a write is sent to clients.</summary>
 		public float m_flAimPitch { get => Get<float>(__m_flAimPitch); set => Set(__m_flAimPitch, value); }
 
 		private static readonly SchemaField __m_flAttackCone = new("CNPC_ShieldedSentry", "m_flAttackCone");
@@ -34,7 +34,7 @@ public static partial class Schema {
 		public float m_flAttackDelay { get => Get<float>(__m_flAttackDelay); set => Set(__m_flAttackDelay, value); }
 
 		private static readonly SchemaField __m_flAttackRange = new("CNPC_ShieldedSentry", "m_flAttackRange");
-		/// <summary><c>float32</c>. Networked in build 6779: a write is sent to clients.</summary>
+		/// <summary><c>float32</c>. Networked: a write is sent to clients.</summary>
 		public float m_flAttackRange { get => Get<float>(__m_flAttackRange); set => Set(__m_flAttackRange, value); }
 
 		private static readonly SchemaField __m_flDeployTime = new("CNPC_ShieldedSentry", "m_flDeployTime");
@@ -42,11 +42,11 @@ public static partial class Schema {
 		public float m_flDeployTime { get => Get<float>(__m_flDeployTime); set => Set(__m_flDeployTime, value); }
 
 		private static readonly SchemaField __m_flLifeTime = new("CNPC_ShieldedSentry", "m_flLifeTime");
-		/// <summary><c>float32</c>. Networked in build 6779: a write is sent to clients.</summary>
+		/// <summary><c>float32</c>. Networked: a write is sent to clients.</summary>
 		public float m_flLifeTime { get => Get<float>(__m_flLifeTime); set => Set(__m_flLifeTime, value); }
 
 		private static readonly SchemaField __m_flSpawnTime = new("CNPC_ShieldedSentry", "m_flSpawnTime");
-		/// <summary><c>GameTime_t</c>. Networked in build 6779: a write is sent to clients.</summary>
+		/// <summary><c>GameTime_t</c>. Networked: a write is sent to clients.</summary>
 		public GameTime m_flSpawnTime { get => Get<GameTime>(__m_flSpawnTime); set => Set(__m_flSpawnTime, value); }
 
 		private static readonly SchemaField __m_flTrackingSpeed = new("CNPC_ShieldedSentry", "m_flTrackingSpeed");

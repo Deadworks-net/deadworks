@@ -14,11 +14,11 @@ public static partial class Schema {
 		static string ISchemaClass<CCitadel_CosmeticAbility_VotingPoster>.NativeName => "CCitadel_CosmeticAbility_VotingPoster";
 
 		private static readonly SchemaField __m_bPreview = new("CCitadel_CosmeticAbility_VotingPoster", "m_bPreview");
-		/// <summary><c>bool</c>. Networked in build 6779: a write is sent to clients.</summary>
+		/// <summary><c>bool</c>. Networked: a write is sent to clients.</summary>
 		public bool m_bPreview { get => Get<bool>(__m_bPreview); set => Set(__m_bPreview, value); }
 
 		private static readonly SchemaField __m_nActiveHero = new("CCitadel_CosmeticAbility_VotingPoster", "m_nActiveHero");
-		/// <summary><c>HeroID_t</c>. Networked in build 6779: a write is sent to clients.</summary>
+		/// <summary><c>HeroID_t</c>. Networked: a write is sent to clients.</summary>
 		public uint m_nActiveHero { get => Get<uint>(__m_nActiveHero); set => Set(__m_nActiveHero, value); }
 	}
 }

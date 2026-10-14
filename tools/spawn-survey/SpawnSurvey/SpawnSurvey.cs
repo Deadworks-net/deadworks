@@ -28,7 +28,7 @@ namespace SpawnSurvey;
 /// <para>
 /// Does nothing unless DW_SURVEY_LIST and DW_SURVEY_OUT are set. With DW_SURVEY_CONVARS and
 /// DW_SURVEY_CONVARS_OUT it also writes, once, which of the listed console variables this
-/// server does not have, and with DW_SURVEY_NETWORKED_OUT which generated fields the game networks.
+/// server does not have.
 /// </para>
 /// </summary>
 public unsafe class SpawnSurvey : DeadworksPluginBase {
@@ -188,7 +188,6 @@ public unsafe class SpawnSurvey : DeadworksPluginBase {
 		switch (_stage) {
 			case Stage.Waiting:
 				if (!_clock.IsRunning || _clock.Elapsed.TotalSeconds < WarmUpSeconds) break;
-				WriteNetworkedFields();
 				// From here on a fault is the survey's doing, or the doing of something it spawned.
 				_armed = this;
 				_stage = Stage.Idle;
@@ -252,21 +251,6 @@ public unsafe class SpawnSurvey : DeadworksPluginBase {
 		_armed = null;   // shutting down is the engine's business again
 		_stage = Stage.Finished;
 		Server.ExecuteCommand("quit");
-	}
-
-	// Once per survey: which generated fields the running game networks. The game can only say once entities exist.
-	private static void WriteNetworkedFields() {
-		string? output = Environment.GetEnvironmentVariable("DW_SURVEY_NETWORKED_OUT");
-		if (string.IsNullOrEmpty(output) || File.Exists(output)) return;
-		var networked = new SortedDictionary<string, SortedSet<string>>(StringComparer.Ordinal);
-		foreach (var type in typeof(Schema).GetNestedTypes()) {
-			foreach (var member in type.GetFields(System.Reflection.BindingFlags.NonPublic | System.Reflection.BindingFlags.Static | System.Reflection.BindingFlags.DeclaredOnly)) {
-				if (member.GetValue(null) is not SchemaField field || !field.TryResolve() || !field.Networked) continue;
-				if (!networked.TryGetValue(field.ClassName, out var fields)) networked[field.ClassName] = fields = new(StringComparer.Ordinal);
-				fields.Add(field.FieldName);
-			}
-		}
-		File.WriteAllText(output, JsonSerializer.Serialize(networked));
 	}
 
 	// Once per survey: which of the console variables the game declares this dedicated server never registered.

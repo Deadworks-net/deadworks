@@ -14,7 +14,7 @@ public static partial class Schema {
 		static string ISchemaClass<CCitadel_Ability_Chrono_TimeWall>.NativeName => "CCitadel_Ability_Chrono_TimeWall";
 
 		private static readonly SchemaField __m_bAirCast = new("CCitadel_Ability_Chrono_TimeWall", "m_bAirCast");
-		/// <summary><c>bool</c>. Networked in build 6779: a write is sent to clients.</summary>
+		/// <summary><c>bool</c>. Networked: a write is sent to clients.</summary>
 		public bool m_bAirCast { get => Get<bool>(__m_bAirCast); set => Set(__m_bAirCast, value); }
 
 		private static readonly SchemaField __m_hChargingParticle = new("CCitadel_Ability_Chrono_TimeWall", "m_hChargingParticle");

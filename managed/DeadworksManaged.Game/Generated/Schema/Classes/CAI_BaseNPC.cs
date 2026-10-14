@@ -26,7 +26,7 @@ public static partial class Schema {
 		public NPC_STATE m_IdealNPCState { get => Get<NPC_STATE>(__m_IdealNPCState); set => Set(__m_IdealNPCState, value); }
 
 		private static readonly SchemaField __m_NPCState = new("CAI_BaseNPC", "m_NPCState");
-		/// <summary><c>NPC_STATE</c>. Networked in build 6779: a write is sent to clients.</summary>
+		/// <summary><c>NPC_STATE</c>. Networked: a write is sent to clients.</summary>
 		public NPC_STATE m_NPCState { get => Get<NPC_STATE>(__m_NPCState); set => Set(__m_NPCState, value); }
 
 		private static readonly SchemaField __m_NonGatherConditions = new("CAI_BaseNPC", "m_NonGatherConditions");
@@ -290,7 +290,7 @@ public static partial class Schema {
 		public CAI_FacingServices? m_pFacingServices => Pointer<CAI_FacingServices>(__m_pFacingServices);
 
 		private static readonly SchemaField __m_pMotorServices = new("CAI_BaseNPC", "m_pMotorServices");
-		/// <summary><c>CAI_MotorServices*</c>. Networked in build 6779: a write is sent to clients.</summary>
+		/// <summary><c>CAI_MotorServices*</c>. Networked: a write is sent to clients.</summary>
 		public CAI_MotorServices? m_pMotorServices => Pointer<CAI_MotorServices>(__m_pMotorServices);
 
 		private static readonly SchemaField __m_pNavigator = new("CAI_BaseNPC", "m_pNavigator");

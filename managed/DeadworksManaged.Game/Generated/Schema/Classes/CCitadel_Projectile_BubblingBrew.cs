@@ -14,7 +14,7 @@ public static partial class Schema {
 		static string ISchemaClass<CCitadel_Projectile_BubblingBrew>.NativeName => "CCitadel_Projectile_BubblingBrew";
 
 		private static readonly SchemaField __m_bIsReturningProjectile = new("CCitadel_Projectile_BubblingBrew", "m_bIsReturningProjectile");
-		/// <summary><c>bool</c>. Networked in build 6779: a write is sent to clients.</summary>
+		/// <summary><c>bool</c>. Networked: a write is sent to clients.</summary>
 		public bool m_bIsReturningProjectile { get => Get<bool>(__m_bIsReturningProjectile); set => Set(__m_bIsReturningProjectile, value); }
 	}
 }

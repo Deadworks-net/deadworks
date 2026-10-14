@@ -14,11 +14,11 @@ public static partial class Schema {
 		static string ISchemaClass<CCitadel_Ability_Familiar_AltWeapon>.NativeName => "CCitadel_Ability_Familiar_AltWeapon";
 
 		private static readonly SchemaField __m_bForceFiring = new("CCitadel_Ability_Familiar_AltWeapon", "m_bForceFiring");
-		/// <summary><c>bool</c>. Networked in build 6779: a write is sent to clients.</summary>
+		/// <summary><c>bool</c>. Networked: a write is sent to clients.</summary>
 		public bool m_bForceFiring { get => Get<bool>(__m_bForceFiring); set => Set(__m_bForceFiring, value); }
 
 		private static readonly SchemaField __m_nAmmoToBeConsumedForChannel = new("CCitadel_Ability_Familiar_AltWeapon", "m_nAmmoToBeConsumedForChannel");
-		/// <summary><c>int16</c>. Networked in build 6779: a write is sent to clients.</summary>
+		/// <summary><c>int16</c>. Networked: a write is sent to clients.</summary>
 		public short m_nAmmoToBeConsumedForChannel { get => Get<short>(__m_nAmmoToBeConsumedForChannel); set => Set(__m_nAmmoToBeConsumedForChannel, value); }
 	}
 }

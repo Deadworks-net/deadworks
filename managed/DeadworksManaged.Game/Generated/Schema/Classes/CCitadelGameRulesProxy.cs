@@ -14,7 +14,7 @@ public static partial class Schema {
 		static string ISchemaClass<CCitadelGameRulesProxy>.NativeName => "CCitadelGameRulesProxy";
 
 		private static readonly SchemaField __m_pGameRules = new("CCitadelGameRulesProxy", "m_pGameRules");
-		/// <summary><c>CCitadelGameRules*</c>. Networked in build 6779: a write is sent to clients.</summary>
+		/// <summary><c>CCitadelGameRules*</c>. Networked: a write is sent to clients.</summary>
 		public CCitadelGameRules? m_pGameRules => Pointer<CCitadelGameRules>(__m_pGameRules);
 	}
 }

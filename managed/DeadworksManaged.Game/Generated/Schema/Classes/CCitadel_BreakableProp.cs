@@ -14,7 +14,7 @@ public static partial class Schema {
 		static string ISchemaClass<CCitadel_BreakableProp>.NativeName => "CCitadel_BreakableProp";
 
 		private static readonly SchemaField __m_CCitadelMinimapComponent = new("CCitadel_BreakableProp", "m_CCitadelMinimapComponent");
-		/// <summary><c>CCitadelMinimapComponent</c>. Networked in build 6779: a write is sent to clients.</summary>
+		/// <summary><c>CCitadelMinimapComponent</c>. Networked: a write is sent to clients.</summary>
 		public CCitadelMinimapComponent m_CCitadelMinimapComponent => Embedded<CCitadelMinimapComponent>(__m_CCitadelMinimapComponent);
 
 		private static readonly SchemaField __m_flOverrideInitialSpawnTime = new("CCitadel_BreakableProp", "m_flOverrideInitialSpawnTime");
@@ -34,11 +34,11 @@ public static partial class Schema {
 		public SchemaMap<ECurrencyType, BreakablePropCurrencyReward_t> m_mapCurrencyRewards => new(this, __m_mapCurrencyRewards);
 
 		private static readonly SchemaField __m_nGoldCost = new("CCitadel_BreakableProp", "m_nGoldCost");
-		/// <summary><c>int32</c>. Networked in build 6779: a write is sent to clients.</summary>
+		/// <summary><c>int32</c>. Networked: a write is sent to clients.</summary>
 		public int m_nGoldCost { get => Get<int>(__m_nGoldCost); set => Set(__m_nGoldCost, value); }
 
 		private static readonly SchemaField __m_nMeleeHitsTaken = new("CCitadel_BreakableProp", "m_nMeleeHitsTaken");
-		/// <summary><c>int32</c>. Networked in build 6779: a write is sent to clients.</summary>
+		/// <summary><c>int32</c>. Networked: a write is sent to clients.</summary>
 		public int m_nMeleeHitsTaken { get => Get<int>(__m_nMeleeHitsTaken); set => Set(__m_nMeleeHitsTaken, value); }
 
 		private static readonly SchemaField __m_unAbilityIDToSpawn = new("CCitadel_BreakableProp", "m_unAbilityIDToSpawn");

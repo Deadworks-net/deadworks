@@ -26,15 +26,15 @@ public static partial class Schema {
 		public int m_PreviewEffect { get => Get<int>(__m_PreviewEffect); set => Set(__m_PreviewEffect, value); }
 
 		private static readonly SchemaField __m_bIsCrashingDown = new("CCitadel_Ability_LashDownStrike", "m_bIsCrashingDown");
-		/// <summary><c>bool</c>. Networked in build 6779: a write is sent to clients.</summary>
+		/// <summary><c>bool</c>. Networked: a write is sent to clients.</summary>
 		public bool m_bIsCrashingDown { get => Get<bool>(__m_bIsCrashingDown); set => Set(__m_bIsCrashingDown, value); }
 
 		private static readonly SchemaField __m_flInitialYaw = new("CCitadel_Ability_LashDownStrike", "m_flInitialYaw");
-		/// <summary><c>float32</c>. Networked in build 6779: a write is sent to clients.</summary>
+		/// <summary><c>float32</c>. Networked: a write is sent to clients.</summary>
 		public float m_flInitialYaw { get => Get<float>(__m_flInitialYaw); set => Set(__m_flInitialYaw, value); }
 
 		private static readonly SchemaField __m_flStartHeight = new("CCitadel_Ability_LashDownStrike", "m_flStartHeight");
-		/// <summary><c>float32</c>. Networked in build 6779: a write is sent to clients.</summary>
+		/// <summary><c>float32</c>. Networked: a write is sent to clients.</summary>
 		public float m_flStartHeight { get => Get<float>(__m_flStartHeight); set => Set(__m_flStartHeight, value); }
 
 		private static readonly SchemaField __m_vDamageDir = new("CCitadel_Ability_LashDownStrike", "m_vDamageDir");
@@ -50,7 +50,7 @@ public static partial class Schema {
 		public SchemaHandleList<CBaseEntity> m_vHitEnemies => new(this, __m_vHitEnemies, ListStorage.Vector);
 
 		private static readonly SchemaField __m_vStrikeVel = new("CCitadel_Ability_LashDownStrike", "m_vStrikeVel");
-		/// <summary><c>Vector</c>. Networked in build 6779: a write is sent to clients.</summary>
+		/// <summary><c>Vector</c>. Networked: a write is sent to clients.</summary>
 		public Vector3 m_vStrikeVel { get => Get<Vector3>(__m_vStrikeVel); set => Set(__m_vStrikeVel, value); }
 
 		private static readonly SchemaField __m_vecHitEntities = new("CCitadel_Ability_LashDownStrike", "m_vecHitEntities");

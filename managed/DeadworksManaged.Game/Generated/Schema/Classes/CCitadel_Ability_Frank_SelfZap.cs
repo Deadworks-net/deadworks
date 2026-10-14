@@ -14,7 +14,7 @@ public static partial class Schema {
 		static string ISchemaClass<CCitadel_Ability_Frank_SelfZap>.NativeName => "CCitadel_Ability_Frank_SelfZap";
 
 		private static readonly SchemaField __m_flTotalPendingHeal = new("CCitadel_Ability_Frank_SelfZap", "m_flTotalPendingHeal");
-		/// <summary><c>float32</c>. Networked in build 6779: a write is sent to clients.</summary>
+		/// <summary><c>float32</c>. Networked: a write is sent to clients.</summary>
 		public float m_flTotalPendingHeal { get => Get<float>(__m_flTotalPendingHeal); set => Set(__m_flTotalPendingHeal, value); }
 
 		/// <summary>The data entry this was created from, as <see cref="CCitadel_Ability_Frank_SelfZapVData"/>, or null if it has none.</summary>

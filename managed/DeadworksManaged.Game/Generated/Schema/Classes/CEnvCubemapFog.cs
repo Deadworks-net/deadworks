@@ -14,15 +14,15 @@ public static partial class Schema {
 		static string ISchemaClass<CEnvCubemapFog>.NativeName => "CEnvCubemapFog";
 
 		private static readonly SchemaField __m_DistanceFogCurveString = new("CEnvCubemapFog", "m_DistanceFogCurveString");
-		/// <summary><c>CUtlSymbolLarge</c>. Networked in build 6779: a write is sent to clients.</summary>
+		/// <summary><c>CUtlSymbolLarge</c>. Networked: a write is sent to clients.</summary>
 		public string m_DistanceFogCurveString { get => GetString(__m_DistanceFogCurveString); set => SetString(__m_DistanceFogCurveString, value); }
 
 		private static readonly SchemaField __m_HeightFogCurveString = new("CEnvCubemapFog", "m_HeightFogCurveString");
-		/// <summary><c>CUtlSymbolLarge</c>. Networked in build 6779: a write is sent to clients.</summary>
+		/// <summary><c>CUtlSymbolLarge</c>. Networked: a write is sent to clients.</summary>
 		public string m_HeightFogCurveString { get => GetString(__m_HeightFogCurveString); set => SetString(__m_HeightFogCurveString, value); }
 
 		private static readonly SchemaField __m_bActive = new("CEnvCubemapFog", "m_bActive");
-		/// <summary><c>bool</c>. Networked in build 6779: a write is sent to clients.</summary>
+		/// <summary><c>bool</c>. Networked: a write is sent to clients.</summary>
 		public bool m_bActive { get => Get<bool>(__m_bActive); set => Set(__m_bActive, value); }
 
 		private static readonly SchemaField __m_bFirstTime = new("CEnvCubemapFog", "m_bFirstTime");
@@ -30,83 +30,83 @@ public static partial class Schema {
 		public bool m_bFirstTime { get => Get<bool>(__m_bFirstTime); set => Set(__m_bFirstTime, value); }
 
 		private static readonly SchemaField __m_bHasHeightFogEnd = new("CEnvCubemapFog", "m_bHasHeightFogEnd");
-		/// <summary><c>bool</c>. Networked in build 6779: a write is sent to clients.</summary>
+		/// <summary><c>bool</c>. Networked: a write is sent to clients.</summary>
 		public bool m_bHasHeightFogEnd { get => Get<bool>(__m_bHasHeightFogEnd); set => Set(__m_bHasHeightFogEnd, value); }
 
 		private static readonly SchemaField __m_bHeightFogEnabled = new("CEnvCubemapFog", "m_bHeightFogEnabled");
-		/// <summary><c>bool</c>. Networked in build 6779: a write is sent to clients.</summary>
+		/// <summary><c>bool</c>. Networked: a write is sent to clients.</summary>
 		public bool m_bHeightFogEnabled { get => Get<bool>(__m_bHeightFogEnabled); set => Set(__m_bHeightFogEnabled, value); }
 
 		private static readonly SchemaField __m_bStartDisabled = new("CEnvCubemapFog", "m_bStartDisabled");
-		/// <summary><c>bool</c>. Networked in build 6779: a write is sent to clients.</summary>
+		/// <summary><c>bool</c>. Networked: a write is sent to clients.</summary>
 		public bool m_bStartDisabled { get => Get<bool>(__m_bStartDisabled); set => Set(__m_bStartDisabled, value); }
 
 		private static readonly SchemaField __m_flEndDistance = new("CEnvCubemapFog", "m_flEndDistance");
-		/// <summary><c>float32</c>. Networked in build 6779: a write is sent to clients.</summary>
+		/// <summary><c>float32</c>. Networked: a write is sent to clients.</summary>
 		public float m_flEndDistance { get => Get<float>(__m_flEndDistance); set => Set(__m_flEndDistance, value); }
 
 		private static readonly SchemaField __m_flFogFalloffExponent = new("CEnvCubemapFog", "m_flFogFalloffExponent");
-		/// <summary><c>float32</c>. Networked in build 6779: a write is sent to clients.</summary>
+		/// <summary><c>float32</c>. Networked: a write is sent to clients.</summary>
 		public float m_flFogFalloffExponent { get => Get<float>(__m_flFogFalloffExponent); set => Set(__m_flFogFalloffExponent, value); }
 
 		private static readonly SchemaField __m_flFogHeightEnd = new("CEnvCubemapFog", "m_flFogHeightEnd");
-		/// <summary><c>float32</c>. Networked in build 6779: a write is sent to clients.</summary>
+		/// <summary><c>float32</c>. Networked: a write is sent to clients.</summary>
 		public float m_flFogHeightEnd { get => Get<float>(__m_flFogHeightEnd); set => Set(__m_flFogHeightEnd, value); }
 
 		private static readonly SchemaField __m_flFogHeightExponent = new("CEnvCubemapFog", "m_flFogHeightExponent");
-		/// <summary><c>float32</c>. Networked in build 6779: a write is sent to clients.</summary>
+		/// <summary><c>float32</c>. Networked: a write is sent to clients.</summary>
 		public float m_flFogHeightExponent { get => Get<float>(__m_flFogHeightExponent); set => Set(__m_flFogHeightExponent, value); }
 
 		private static readonly SchemaField __m_flFogHeightStart = new("CEnvCubemapFog", "m_flFogHeightStart");
-		/// <summary><c>float32</c>. Networked in build 6779: a write is sent to clients.</summary>
+		/// <summary><c>float32</c>. Networked: a write is sent to clients.</summary>
 		public float m_flFogHeightStart { get => Get<float>(__m_flFogHeightStart); set => Set(__m_flFogHeightStart, value); }
 
 		private static readonly SchemaField __m_flFogHeightWidth = new("CEnvCubemapFog", "m_flFogHeightWidth");
-		/// <summary><c>float32</c>. Networked in build 6779: a write is sent to clients.</summary>
+		/// <summary><c>float32</c>. Networked: a write is sent to clients.</summary>
 		public float m_flFogHeightWidth { get => Get<float>(__m_flFogHeightWidth); set => Set(__m_flFogHeightWidth, value); }
 
 		private static readonly SchemaField __m_flFogMaxOpacity = new("CEnvCubemapFog", "m_flFogMaxOpacity");
-		/// <summary><c>float32</c>. Networked in build 6779: a write is sent to clients.</summary>
+		/// <summary><c>float32</c>. Networked: a write is sent to clients.</summary>
 		public float m_flFogMaxOpacity { get => Get<float>(__m_flFogMaxOpacity); set => Set(__m_flFogMaxOpacity, value); }
 
 		private static readonly SchemaField __m_flLODBias = new("CEnvCubemapFog", "m_flLODBias");
-		/// <summary><c>float32</c>. Networked in build 6779: a write is sent to clients.</summary>
+		/// <summary><c>float32</c>. Networked: a write is sent to clients.</summary>
 		public float m_flLODBias { get => Get<float>(__m_flLODBias); set => Set(__m_flLODBias, value); }
 
 		private static readonly SchemaField __m_flStartDistance = new("CEnvCubemapFog", "m_flStartDistance");
-		/// <summary><c>float32</c>. Networked in build 6779: a write is sent to clients.</summary>
+		/// <summary><c>float32</c>. Networked: a write is sent to clients.</summary>
 		public float m_flStartDistance { get => Get<float>(__m_flStartDistance); set => Set(__m_flStartDistance, value); }
 
 		private static readonly SchemaField __m_hFogCubemapTexture = new("CEnvCubemapFog", "m_hFogCubemapTexture");
-		/// <summary><c>CStrongHandle&lt;InfoForResourceTypeCTextureBase&gt;</c>. Networked in build 6779: a write is sent to clients.</summary>
+		/// <summary><c>CStrongHandle&lt;InfoForResourceTypeCTextureBase&gt;</c>. Networked: a write is sent to clients.</summary>
 		public ResourceHandle m_hFogCubemapTexture { get => Get<ResourceHandle>(__m_hFogCubemapTexture); set => Set(__m_hFogCubemapTexture, value); }
 
 		private static readonly SchemaField __m_hSkyMaterial = new("CEnvCubemapFog", "m_hSkyMaterial");
-		/// <summary><c>CStrongHandle&lt;InfoForResourceTypeIMaterial2&gt;</c>. Networked in build 6779: a write is sent to clients.</summary>
+		/// <summary><c>CStrongHandle&lt;InfoForResourceTypeIMaterial2&gt;</c>. Networked: a write is sent to clients.</summary>
 		public ResourceHandle m_hSkyMaterial { get => Get<ResourceHandle>(__m_hSkyMaterial); set => Set(__m_hSkyMaterial, value); }
 
 		private static readonly SchemaField __m_iszSkyEntity = new("CEnvCubemapFog", "m_iszSkyEntity");
-		/// <summary><c>CUtlSymbolLarge</c>. Networked in build 6779: a write is sent to clients.</summary>
+		/// <summary><c>CUtlSymbolLarge</c>. Networked: a write is sent to clients.</summary>
 		public string m_iszSkyEntity { get => GetString(__m_iszSkyEntity); set => SetString(__m_iszSkyEntity, value); }
 
 		private static readonly SchemaField __m_nCubemapSourceType = new("CEnvCubemapFog", "m_nCubemapSourceType");
-		/// <summary><c>int32</c>. Networked in build 6779: a write is sent to clients.</summary>
+		/// <summary><c>int32</c>. Networked: a write is sent to clients.</summary>
 		public int m_nCubemapSourceType { get => Get<int>(__m_nCubemapSourceType); set => Set(__m_nCubemapSourceType, value); }
 
 		private static readonly SchemaField __m_nDistanceFogType = new("CEnvCubemapFog", "m_nDistanceFogType");
-		/// <summary><c>int32</c>. Networked in build 6779: a write is sent to clients.</summary>
+		/// <summary><c>int32</c>. Networked: a write is sent to clients.</summary>
 		public int m_nDistanceFogType { get => Get<int>(__m_nDistanceFogType); set => Set(__m_nDistanceFogType, value); }
 
 		private static readonly SchemaField __m_nFogHeightBlendMode = new("CEnvCubemapFog", "m_nFogHeightBlendMode");
-		/// <summary><c>int32</c>. Networked in build 6779: a write is sent to clients.</summary>
+		/// <summary><c>int32</c>. Networked: a write is sent to clients.</summary>
 		public int m_nFogHeightBlendMode { get => Get<int>(__m_nFogHeightBlendMode); set => Set(__m_nFogHeightBlendMode, value); }
 
 		private static readonly SchemaField __m_nFogHeightCoordinateSpace = new("CEnvCubemapFog", "m_nFogHeightCoordinateSpace");
-		/// <summary><c>int32</c>. Networked in build 6779: a write is sent to clients.</summary>
+		/// <summary><c>int32</c>. Networked: a write is sent to clients.</summary>
 		public int m_nFogHeightCoordinateSpace { get => Get<int>(__m_nFogHeightCoordinateSpace); set => Set(__m_nFogHeightCoordinateSpace, value); }
 
 		private static readonly SchemaField __m_nHeightFogType = new("CEnvCubemapFog", "m_nHeightFogType");
-		/// <summary><c>int32</c>. Networked in build 6779: a write is sent to clients.</summary>
+		/// <summary><c>int32</c>. Networked: a write is sent to clients.</summary>
 		public int m_nHeightFogType { get => Get<int>(__m_nHeightFogType); set => Set(__m_nHeightFogType, value); }
 
 		/// <summary>Fires the <c>Disable</c> input.</summary>

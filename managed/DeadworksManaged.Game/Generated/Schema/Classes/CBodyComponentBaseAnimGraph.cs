@@ -14,7 +14,7 @@ public static partial class Schema {
 		static string ISchemaClass<CBodyComponentBaseAnimGraph>.NativeName => "CBodyComponentBaseAnimGraph";
 
 		private static readonly SchemaField __m_animationController = new("CBodyComponentBaseAnimGraph", "m_animationController");
-		/// <summary><c>CBaseAnimGraphController</c>. Networked in build 6779: a write is sent to clients.</summary>
+		/// <summary><c>CBaseAnimGraphController</c>. Networked: a write is sent to clients.</summary>
 		public CBaseAnimGraphController m_animationController => Embedded<CBaseAnimGraphController>(__m_animationController);
 	}
 }

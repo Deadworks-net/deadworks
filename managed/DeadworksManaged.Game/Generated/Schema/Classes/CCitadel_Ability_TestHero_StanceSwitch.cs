@@ -14,7 +14,7 @@ public static partial class Schema {
 		static string ISchemaClass<CCitadel_Ability_TestHero_StanceSwitch>.NativeName => "CCitadel_Ability_TestHero_StanceSwitch";
 
 		private static readonly SchemaField __m_bStanceActive = new("CCitadel_Ability_TestHero_StanceSwitch", "m_bStanceActive");
-		/// <summary><c>bool</c>. Networked in build 6779: a write is sent to clients.</summary>
+		/// <summary><c>bool</c>. Networked: a write is sent to clients.</summary>
 		public bool m_bStanceActive { get => Get<bool>(__m_bStanceActive); set => Set(__m_bStanceActive, value); }
 
 		/// <summary>The data entry this was created from, as <see cref="CCitadel_Ability_TestHero_StanceSwitchVData"/>, or null if it has none.</summary>

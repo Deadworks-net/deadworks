@@ -14,7 +14,7 @@ public static partial class Schema {
 		static string ISchemaClass<CCitadelPlayer_ObserverServices>.NativeName => "CCitadelPlayer_ObserverServices";
 
 		private static readonly SchemaField __m_angTargetCamera = new("CCitadelPlayer_ObserverServices", "m_angTargetCamera");
-		/// <summary><c>QAngle</c>. Networked in build 6779: a write is sent to clients.</summary>
+		/// <summary><c>QAngle</c>. Networked: a write is sent to clients.</summary>
 		public Vector3 m_angTargetCamera { get => Get<Vector3>(__m_angTargetCamera); set => Set(__m_angTargetCamera, value); }
 
 		private static readonly SchemaField __m_hLastObserverTarget = new("CCitadelPlayer_ObserverServices", "m_hLastObserverTarget");
@@ -30,7 +30,7 @@ public static partial class Schema {
 		public int m_nCurrentObservedTeam { get => Get<int>(__m_nCurrentObservedTeam); set => Set(__m_nCurrentObservedTeam, value); }
 
 		private static readonly SchemaField __m_vTargetCameraPos = new("CCitadelPlayer_ObserverServices", "m_vTargetCameraPos");
-		/// <summary><c>VectorWS</c>. Networked in build 6779: a write is sent to clients.</summary>
+		/// <summary><c>VectorWS</c>. Networked: a write is sent to clients.</summary>
 		public Vector3 m_vTargetCameraPos { get => Get<Vector3>(__m_vTargetCameraPos); set => Set(__m_vTargetCameraPos, value); }
 	}
 }

@@ -14,7 +14,7 @@ public static partial class Schema {
 		static string ISchemaClass<CAssignedLaneParticle>.NativeName => "CAssignedLaneParticle";
 
 		private static readonly SchemaField __m_iLane = new("CAssignedLaneParticle", "m_iLane");
-		/// <summary><c>int32</c>. Networked in build 6779: a write is sent to clients.</summary>
+		/// <summary><c>int32</c>. Networked: a write is sent to clients.</summary>
 		public int m_iLane { get => Get<int>(__m_iLane); set => Set(__m_iLane, value); }
 	}
 }

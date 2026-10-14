@@ -14,23 +14,23 @@ public static partial class Schema {
 		static string ISchemaClass<CCitadel_Ability_TangoTether>.NativeName => "CCitadel_Ability_TangoTether";
 
 		private static readonly SchemaField __m_angDashStartAng = new("CCitadel_Ability_TangoTether", "m_angDashStartAng");
-		/// <summary><c>QAngle</c>. Networked in build 6779: a write is sent to clients.</summary>
+		/// <summary><c>QAngle</c>. Networked: a write is sent to clients.</summary>
 		public Vector3 m_angDashStartAng { get => Get<Vector3>(__m_angDashStartAng); set => Set(__m_angDashStartAng, value); }
 
 		private static readonly SchemaField __m_flDashStartTime = new("CCitadel_Ability_TangoTether", "m_flDashStartTime");
-		/// <summary><c>GameTime_t</c>. Networked in build 6779: a write is sent to clients.</summary>
+		/// <summary><c>GameTime_t</c>. Networked: a write is sent to clients.</summary>
 		public GameTime m_flDashStartTime { get => Get<GameTime>(__m_flDashStartTime); set => Set(__m_flDashStartTime, value); }
 
 		private static readonly SchemaField __m_flGrappleArriveTime = new("CCitadel_Ability_TangoTether", "m_flGrappleArriveTime");
-		/// <summary><c>GameTime_t</c>. Networked in build 6779: a write is sent to clients.</summary>
+		/// <summary><c>GameTime_t</c>. Networked: a write is sent to clients.</summary>
 		public GameTime m_flGrappleArriveTime { get => Get<GameTime>(__m_flGrappleArriveTime); set => Set(__m_flGrappleArriveTime, value); }
 
 		private static readonly SchemaField __m_flGrappleShotAttackTime = new("CCitadel_Ability_TangoTether", "m_flGrappleShotAttackTime");
-		/// <summary><c>GameTime_t</c>. Networked in build 6779: a write is sent to clients.</summary>
+		/// <summary><c>GameTime_t</c>. Networked: a write is sent to clients.</summary>
 		public GameTime m_flGrappleShotAttackTime { get => Get<GameTime>(__m_flGrappleShotAttackTime); set => Set(__m_flGrappleShotAttackTime, value); }
 
 		private static readonly SchemaField __m_flGrappleStartTime = new("CCitadel_Ability_TangoTether", "m_flGrappleStartTime");
-		/// <summary><c>GameTime_t</c>. Networked in build 6779: a write is sent to clients.</summary>
+		/// <summary><c>GameTime_t</c>. Networked: a write is sent to clients.</summary>
 		public GameTime m_flGrappleStartTime { get => Get<GameTime>(__m_flGrappleStartTime); set => Set(__m_flGrappleStartTime, value); }
 
 		private static readonly SchemaField __m_flVelSpring = new("CCitadel_Ability_TangoTether", "m_flVelSpring");
@@ -42,7 +42,7 @@ public static partial class Schema {
 		public CBaseEntity? m_hLockOnTarget { get => GetHandle<CBaseEntity>(__m_hLockOnTarget); set => SetHandle(__m_hLockOnTarget, value); }
 
 		private static readonly SchemaField __m_hTarget = new("CCitadel_Ability_TangoTether", "m_hTarget");
-		/// <summary><c>CHandle&lt;CBaseEntity&gt;</c>. Networked in build 6779: a write is sent to clients.</summary>
+		/// <summary><c>CHandle&lt;CBaseEntity&gt;</c>. Networked: a write is sent to clients.</summary>
 		public CBaseEntity? m_hTarget { get => GetHandle<CBaseEntity>(__m_hTarget); set => SetHandle(__m_hTarget, value); }
 
 		private static readonly SchemaField __m_iTargetPosIndex = new("CCitadel_Ability_TangoTether", "m_iTargetPosIndex");
@@ -58,23 +58,23 @@ public static partial class Schema {
 		public int m_nTicksNotMoving { get => Get<int>(__m_nTicksNotMoving); set => Set(__m_nTicksNotMoving, value); }
 
 		private static readonly SchemaField __m_rgTargetPos = new("CCitadel_Ability_TangoTether", "m_rgTargetPos");
-		/// <summary><c>Vector[20]</c>. Networked in build 6779: a write is sent to clients.</summary>
+		/// <summary><c>Vector[20]</c>. Networked: a write is sent to clients.</summary>
 		public SchemaValueList<Vector3> m_rgTargetPos => new(this, __m_rgTargetPos, 20);
 
 		private static readonly SchemaField __m_rgTargetPosTime = new("CCitadel_Ability_TangoTether", "m_rgTargetPosTime");
-		/// <summary><c>GameTime_t[20]</c>. Networked in build 6779: a write is sent to clients.</summary>
+		/// <summary><c>GameTime_t[20]</c>. Networked: a write is sent to clients.</summary>
 		public SchemaValueList<GameTime> m_rgTargetPosTime => new(this, __m_rgTargetPosTime, 20);
 
 		private static readonly SchemaField __m_vecCastStartPos = new("CCitadel_Ability_TangoTether", "m_vecCastStartPos");
-		/// <summary><c>Vector</c>. Networked in build 6779: a write is sent to clients.</summary>
+		/// <summary><c>Vector</c>. Networked: a write is sent to clients.</summary>
 		public Vector3 m_vecCastStartPos { get => Get<Vector3>(__m_vecCastStartPos); set => Set(__m_vecCastStartPos, value); }
 
 		private static readonly SchemaField __m_vecDashEndPos = new("CCitadel_Ability_TangoTether", "m_vecDashEndPos");
-		/// <summary><c>Vector</c>. Networked in build 6779: a write is sent to clients.</summary>
+		/// <summary><c>Vector</c>. Networked: a write is sent to clients.</summary>
 		public Vector3 m_vecDashEndPos { get => Get<Vector3>(__m_vecDashEndPos); set => Set(__m_vecDashEndPos, value); }
 
 		private static readonly SchemaField __m_vecDashStartPos = new("CCitadel_Ability_TangoTether", "m_vecDashStartPos");
-		/// <summary><c>Vector</c>. Networked in build 6779: a write is sent to clients.</summary>
+		/// <summary><c>Vector</c>. Networked: a write is sent to clients.</summary>
 		public Vector3 m_vecDashStartPos { get => Get<Vector3>(__m_vecDashStartPos); set => Set(__m_vecDashStartPos, value); }
 
 		private static readonly SchemaField __m_vecPrevPos = new("CCitadel_Ability_TangoTether", "m_vecPrevPos");

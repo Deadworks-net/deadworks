@@ -14,7 +14,7 @@ public static partial class Schema {
 		static string ISchemaClass<CCitadel_Item_RescueBeam>.NativeName => "CCitadel_Item_RescueBeam";
 
 		private static readonly SchemaField __m_bCanPull = new("CCitadel_Item_RescueBeam", "m_bCanPull");
-		/// <summary><c>bool</c>. Networked in build 6779: a write is sent to clients.</summary>
+		/// <summary><c>bool</c>. Networked: a write is sent to clients.</summary>
 		public bool m_bCanPull { get => Get<bool>(__m_bCanPull); set => Set(__m_bCanPull, value); }
 
 		/// <summary>The data entry this was created from, as <see cref="CCitadel_Item_RescueBeamVData"/>, or null if it has none.</summary>

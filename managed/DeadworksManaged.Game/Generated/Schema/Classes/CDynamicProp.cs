@@ -66,11 +66,11 @@ public static partial class Schema {
 		public bool m_bStartDisabled { get => Get<bool>(__m_bStartDisabled); set => Set(__m_bStartDisabled, value); }
 
 		private static readonly SchemaField __m_bUseAnimGraph = new("CDynamicProp", "m_bUseAnimGraph");
-		/// <summary><c>bool</c>. Networked in build 6779: a write is sent to clients.</summary>
+		/// <summary><c>bool</c>. Networked: a write is sent to clients.</summary>
 		public bool m_bUseAnimGraph { get => Get<bool>(__m_bUseAnimGraph); set => Set(__m_bUseAnimGraph, value); }
 
 		private static readonly SchemaField __m_bUseHitboxesForRenderBox = new("CDynamicProp", "m_bUseHitboxesForRenderBox");
-		/// <summary><c>bool</c>. Networked in build 6779: a write is sent to clients.</summary>
+		/// <summary><c>bool</c>. Networked: a write is sent to clients.</summary>
 		public bool m_bUseHitboxesForRenderBox { get => Get<bool>(__m_bUseHitboxesForRenderBox); set => Set(__m_bUseHitboxesForRenderBox, value); }
 
 		private static readonly SchemaField __m_glowColor = new("CDynamicProp", "m_glowColor");

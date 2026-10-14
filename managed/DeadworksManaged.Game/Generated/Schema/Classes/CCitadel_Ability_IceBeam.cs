@@ -14,11 +14,11 @@ public static partial class Schema {
 		static string ISchemaClass<CCitadel_Ability_IceBeam>.NativeName => "CCitadel_Ability_IceBeam";
 
 		private static readonly SchemaField __m_bIceBeaming = new("CCitadel_Ability_IceBeam", "m_bIceBeaming");
-		/// <summary><c>bool</c>. Networked in build 6779: a write is sent to clients.</summary>
+		/// <summary><c>bool</c>. Networked: a write is sent to clients.</summary>
 		public bool m_bIceBeaming { get => Get<bool>(__m_bIceBeaming); set => Set(__m_bIceBeaming, value); }
 
 		private static readonly SchemaField __m_beam = new("CCitadel_Ability_IceBeam", "m_beam");
-		/// <summary><c>CCitadelAbilityBeam_t</c>. Networked in build 6779: a write is sent to clients.</summary>
+		/// <summary><c>CCitadelAbilityBeam_t</c>. Networked: a write is sent to clients.</summary>
 		public CCitadelAbilityBeam_t m_beam => Embedded<CCitadelAbilityBeam_t>(__m_beam);
 
 		private static readonly SchemaField __m_flNextDamageTick = new("CCitadel_Ability_IceBeam", "m_flNextDamageTick");

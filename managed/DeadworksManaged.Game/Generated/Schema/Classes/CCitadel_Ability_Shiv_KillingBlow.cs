@@ -30,15 +30,15 @@ public static partial class Schema {
 		public RawField m_RecastWindowModifierHandle => Raw(__m_RecastWindowModifierHandle, "CModifierHandleTyped<CCitadelModifier>");
 
 		private static readonly SchemaField __m_bActive = new("CCitadel_Ability_Shiv_KillingBlow", "m_bActive");
-		/// <summary><c>bool</c>. Networked in build 6779: a write is sent to clients.</summary>
+		/// <summary><c>bool</c>. Networked: a write is sent to clients.</summary>
 		public bool m_bActive { get => Get<bool>(__m_bActive); set => Set(__m_bActive, value); }
 
 		private static readonly SchemaField __m_bDamagedAnyHero = new("CCitadel_Ability_Shiv_KillingBlow", "m_bDamagedAnyHero");
-		/// <summary><c>bool</c>. Networked in build 6779: a write is sent to clients.</summary>
+		/// <summary><c>bool</c>. Networked: a write is sent to clients.</summary>
 		public bool m_bDamagedAnyHero { get => Get<bool>(__m_bDamagedAnyHero); set => Set(__m_bDamagedAnyHero, value); }
 
 		private static readonly SchemaField __m_bIsBonusCast = new("CCitadel_Ability_Shiv_KillingBlow", "m_bIsBonusCast");
-		/// <summary><c>bool</c>. Networked in build 6779: a write is sent to clients.</summary>
+		/// <summary><c>bool</c>. Networked: a write is sent to clients.</summary>
 		public bool m_bIsBonusCast { get => Get<bool>(__m_bIsBonusCast); set => Set(__m_bIsBonusCast, value); }
 
 		private static readonly SchemaField __m_bMadeSlashParticle = new("CCitadel_Ability_Shiv_KillingBlow", "m_bMadeSlashParticle");
@@ -46,23 +46,23 @@ public static partial class Schema {
 		public bool m_bMadeSlashParticle { get => Get<bool>(__m_bMadeSlashParticle); set => Set(__m_bMadeSlashParticle, value); }
 
 		private static readonly SchemaField __m_bStartedOnGround = new("CCitadel_Ability_Shiv_KillingBlow", "m_bStartedOnGround");
-		/// <summary><c>bool</c>. Networked in build 6779: a write is sent to clients.</summary>
+		/// <summary><c>bool</c>. Networked: a write is sent to clients.</summary>
 		public bool m_bStartedOnGround { get => Get<bool>(__m_bStartedOnGround); set => Set(__m_bStartedOnGround, value); }
 
 		private static readonly SchemaField __m_flArrivalTime = new("CCitadel_Ability_Shiv_KillingBlow", "m_flArrivalTime");
-		/// <summary><c>CCitadelAutoScaledTime</c>. Networked in build 6779: a write is sent to clients.</summary>
+		/// <summary><c>CCitadelAutoScaledTime</c>. Networked: a write is sent to clients.</summary>
 		public CCitadelAutoScaledTime m_flArrivalTime => Embedded<CCitadelAutoScaledTime>(__m_flArrivalTime);
 
 		private static readonly SchemaField __m_flDepartureTime = new("CCitadel_Ability_Shiv_KillingBlow", "m_flDepartureTime");
-		/// <summary><c>CCitadelAutoScaledTime</c>. Networked in build 6779: a write is sent to clients.</summary>
+		/// <summary><c>CCitadelAutoScaledTime</c>. Networked: a write is sent to clients.</summary>
 		public CCitadelAutoScaledTime m_flDepartureTime => Embedded<CCitadelAutoScaledTime>(__m_flDepartureTime);
 
 		private static readonly SchemaField __m_flRecastWindowEnd = new("CCitadel_Ability_Shiv_KillingBlow", "m_flRecastWindowEnd");
-		/// <summary><c>GameTime_t</c>. Networked in build 6779: a write is sent to clients.</summary>
+		/// <summary><c>GameTime_t</c>. Networked: a write is sent to clients.</summary>
 		public GameTime m_flRecastWindowEnd { get => Get<GameTime>(__m_flRecastWindowEnd); set => Set(__m_flRecastWindowEnd, value); }
 
 		private static readonly SchemaField __m_qCurrentAngles = new("CCitadel_Ability_Shiv_KillingBlow", "m_qCurrentAngles");
-		/// <summary><c>QAngle</c>. Networked in build 6779: a write is sent to clients.</summary>
+		/// <summary><c>QAngle</c>. Networked: a write is sent to clients.</summary>
 		public Vector3 m_qCurrentAngles { get => Get<Vector3>(__m_qCurrentAngles); set => Set(__m_qCurrentAngles, value); }
 
 		private static readonly SchemaField __m_vHitEnts = new("CCitadel_Ability_Shiv_KillingBlow", "m_vHitEnts");
@@ -74,7 +74,7 @@ public static partial class Schema {
 		public Vector3 m_vLastKnownSafePos { get => Get<Vector3>(__m_vLastKnownSafePos); set => Set(__m_vLastKnownSafePos, value); }
 
 		private static readonly SchemaField __m_vStartPosition = new("CCitadel_Ability_Shiv_KillingBlow", "m_vStartPosition");
-		/// <summary><c>VectorWS</c>. Networked in build 6779: a write is sent to clients.</summary>
+		/// <summary><c>VectorWS</c>. Networked: a write is sent to clients.</summary>
 		public Vector3 m_vStartPosition { get => Get<Vector3>(__m_vStartPosition); set => Set(__m_vStartPosition, value); }
 
 		/// <summary>The data entry this was created from, as <see cref="CCitadel_Ability_Shiv_KillingBlowVData"/>, or null if it has none.</summary>

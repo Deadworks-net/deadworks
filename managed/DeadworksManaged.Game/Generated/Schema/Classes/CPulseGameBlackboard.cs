@@ -14,11 +14,11 @@ public static partial class Schema {
 		static string ISchemaClass<CPulseGameBlackboard>.NativeName => "CPulseGameBlackboard";
 
 		private static readonly SchemaField __m_strGraphName = new("CPulseGameBlackboard", "m_strGraphName");
-		/// <summary><c>CUtlString</c>. Networked in build 6779: a write is sent to clients.</summary>
+		/// <summary><c>CUtlString</c>. Networked: a write is sent to clients.</summary>
 		public string m_strGraphName => GetString(__m_strGraphName);
 
 		private static readonly SchemaField __m_strStateBlob = new("CPulseGameBlackboard", "m_strStateBlob");
-		/// <summary><c>CUtlString</c>. Networked in build 6779: a write is sent to clients.</summary>
+		/// <summary><c>CUtlString</c>. Networked: a write is sent to clients.</summary>
 		public string m_strStateBlob => GetString(__m_strStateBlob);
 	}
 }

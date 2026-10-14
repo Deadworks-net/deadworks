@@ -14,15 +14,15 @@ public static partial class Schema {
 		static string ISchemaClass<CInfoVisibilityBox>.NativeName => "CInfoVisibilityBox";
 
 		private static readonly SchemaField __m_bEnabled = new("CInfoVisibilityBox", "m_bEnabled");
-		/// <summary><c>bool</c>. Networked in build 6779: a write is sent to clients.</summary>
+		/// <summary><c>bool</c>. Networked: a write is sent to clients.</summary>
 		public bool m_bEnabled { get => Get<bool>(__m_bEnabled); set => Set(__m_bEnabled, value); }
 
 		private static readonly SchemaField __m_nMode = new("CInfoVisibilityBox", "m_nMode");
-		/// <summary><c>int32</c>. Networked in build 6779: a write is sent to clients.</summary>
+		/// <summary><c>int32</c>. Networked: a write is sent to clients.</summary>
 		public int m_nMode { get => Get<int>(__m_nMode); set => Set(__m_nMode, value); }
 
 		private static readonly SchemaField __m_vBoxSize = new("CInfoVisibilityBox", "m_vBoxSize");
-		/// <summary><c>Vector</c>. Networked in build 6779: a write is sent to clients.</summary>
+		/// <summary><c>Vector</c>. Networked: a write is sent to clients.</summary>
 		public Vector3 m_vBoxSize { get => Get<Vector3>(__m_vBoxSize); set => Set(__m_vBoxSize, value); }
 
 		/// <summary>Fires the <c>Disable</c> input.</summary>

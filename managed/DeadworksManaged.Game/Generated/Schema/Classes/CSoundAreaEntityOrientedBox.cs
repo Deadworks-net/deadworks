@@ -14,11 +14,11 @@ public static partial class Schema {
 		static string ISchemaClass<CSoundAreaEntityOrientedBox>.NativeName => "CSoundAreaEntityOrientedBox";
 
 		private static readonly SchemaField __m_vMax = new("CSoundAreaEntityOrientedBox", "m_vMax");
-		/// <summary><c>Vector</c>. Networked in build 6779: a write is sent to clients.</summary>
+		/// <summary><c>Vector</c>. Networked: a write is sent to clients.</summary>
 		public Vector3 m_vMax { get => Get<Vector3>(__m_vMax); set => Set(__m_vMax, value); }
 
 		private static readonly SchemaField __m_vMin = new("CSoundAreaEntityOrientedBox", "m_vMin");
-		/// <summary><c>Vector</c>. Networked in build 6779: a write is sent to clients.</summary>
+		/// <summary><c>Vector</c>. Networked: a write is sent to clients.</summary>
 		public Vector3 m_vMin { get => Get<Vector3>(__m_vMin); set => Set(__m_vMin, value); }
 	}
 }

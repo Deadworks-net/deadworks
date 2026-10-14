@@ -14,19 +14,19 @@ public static partial class Schema {
 		static string ISchemaClass<ItemTradeOption_t>.NativeName => "ItemTradeOption_t";
 
 		private static readonly SchemaField __m_ReceiveItem = new("ItemTradeOption_t", "m_ReceiveItem");
-		/// <summary><c>ItemDraftItem_t</c>. Networked in build 6779: a write is sent to clients.</summary>
+		/// <summary><c>ItemDraftItem_t</c>. Networked: a write is sent to clients.</summary>
 		public ItemDraftItem_t m_ReceiveItem => Embedded<ItemDraftItem_t>(__m_ReceiveItem);
 
 		private static readonly SchemaField __m_TradeInItem = new("ItemTradeOption_t", "m_TradeInItem");
-		/// <summary><c>CUtlStringToken</c>. Networked in build 6779: a write is sent to clients.</summary>
+		/// <summary><c>CUtlStringToken</c>. Networked: a write is sent to clients.</summary>
 		public uint m_TradeInItem { get => Get<uint>(__m_TradeInItem); set => Set(__m_TradeInItem, value); }
 
 		private static readonly SchemaField __m_bHasBeenDrafted = new("ItemTradeOption_t", "m_bHasBeenDrafted");
-		/// <summary><c>bool</c>. Networked in build 6779: a write is sent to clients.</summary>
+		/// <summary><c>bool</c>. Networked: a write is sent to clients.</summary>
 		public bool m_bHasBeenDrafted { get => Get<bool>(__m_bHasBeenDrafted); set => Set(__m_bHasBeenDrafted, value); }
 
 		private static readonly SchemaField __m_nID = new("ItemTradeOption_t", "m_nID");
-		/// <summary><c>ItemTradeOptionID_t</c>. Networked in build 6779: a write is sent to clients.</summary>
+		/// <summary><c>ItemTradeOptionID_t</c>. Networked: a write is sent to clients.</summary>
 		public uint m_nID { get => Get<uint>(__m_nID); set => Set(__m_nID, value); }
 	}
 }

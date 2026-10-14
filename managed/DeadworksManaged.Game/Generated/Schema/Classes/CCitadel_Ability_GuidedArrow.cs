@@ -26,7 +26,7 @@ public static partial class Schema {
 		public bool m_bNeedsExplosion { get => Get<bool>(__m_bNeedsExplosion); set => Set(__m_bNeedsExplosion, value); }
 
 		private static readonly SchemaField __m_flArrowSpeed = new("CCitadel_Ability_GuidedArrow", "m_flArrowSpeed");
-		/// <summary><c>float32</c>. Networked in build 6779: a write is sent to clients.</summary>
+		/// <summary><c>float32</c>. Networked: a write is sent to clients.</summary>
 		public float m_flArrowSpeed { get => Get<float>(__m_flArrowSpeed); set => Set(__m_flArrowSpeed, value); }
 
 		private static readonly SchemaField __m_flCastTime = new("CCitadel_Ability_GuidedArrow", "m_flCastTime");
@@ -38,7 +38,7 @@ public static partial class Schema {
 		public float m_flProjectileTurnVel { get => Get<float>(__m_flProjectileTurnVel); set => Set(__m_flProjectileTurnVel, value); }
 
 		private static readonly SchemaField __m_flSnapAnglesBackTime = new("CCitadel_Ability_GuidedArrow", "m_flSnapAnglesBackTime");
-		/// <summary><c>GameTime_t</c>. Networked in build 6779: a write is sent to clients.</summary>
+		/// <summary><c>GameTime_t</c>. Networked: a write is sent to clients.</summary>
 		public GameTime m_flSnapAnglesBackTime { get => Get<GameTime>(__m_flSnapAnglesBackTime); set => Set(__m_flSnapAnglesBackTime, value); }
 
 		private static readonly SchemaField __m_flTravelDistance = new("CCitadel_Ability_GuidedArrow", "m_flTravelDistance");
@@ -46,7 +46,7 @@ public static partial class Schema {
 		public float m_flTravelDistance { get => Get<float>(__m_flTravelDistance); set => Set(__m_flTravelDistance, value); }
 
 		private static readonly SchemaField __m_hCameraTarget = new("CCitadel_Ability_GuidedArrow", "m_hCameraTarget");
-		/// <summary><c>CHandle&lt;CBaseEntity&gt;</c>. Networked in build 6779: a write is sent to clients.</summary>
+		/// <summary><c>CHandle&lt;CBaseEntity&gt;</c>. Networked: a write is sent to clients.</summary>
 		public CBaseEntity? m_hCameraTarget { get => GetHandle<CBaseEntity>(__m_hCameraTarget); set => SetHandle(__m_hCameraTarget, value); }
 
 		private static readonly SchemaField __m_hOwl = new("CCitadel_Ability_GuidedArrow", "m_hOwl");
@@ -54,7 +54,7 @@ public static partial class Schema {
 		public CCitadel_GuidedArrow_OwlModel? m_hOwl { get => GetHandle<CCitadel_GuidedArrow_OwlModel>(__m_hOwl); set => SetHandle(__m_hOwl, value); }
 
 		private static readonly SchemaField __m_hProjectile = new("CCitadel_Ability_GuidedArrow", "m_hProjectile");
-		/// <summary><c>CHandle&lt;CBaseEntity&gt;</c>. Networked in build 6779: a write is sent to clients.</summary>
+		/// <summary><c>CHandle&lt;CBaseEntity&gt;</c>. Networked: a write is sent to clients.</summary>
 		public CBaseEntity? m_hProjectile { get => GetHandle<CBaseEntity>(__m_hProjectile); set => SetHandle(__m_hProjectile, value); }
 
 		private static readonly SchemaField __m_vProjectileRemovedOrigin = new("CCitadel_Ability_GuidedArrow", "m_vProjectileRemovedOrigin");

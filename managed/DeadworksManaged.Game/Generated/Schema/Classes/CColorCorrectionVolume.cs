@@ -14,7 +14,7 @@ public static partial class Schema {
 		static string ISchemaClass<CColorCorrectionVolume>.NativeName => "CColorCorrectionVolume";
 
 		private static readonly SchemaField __m_FadeDuration = new("CColorCorrectionVolume", "m_FadeDuration");
-		/// <summary><c>float32</c>. Networked in build 6779: a write is sent to clients.</summary>
+		/// <summary><c>float32</c>. Networked: a write is sent to clients.</summary>
 		public float m_FadeDuration { get => Get<float>(__m_FadeDuration); set => Set(__m_FadeDuration, value); }
 
 		private static readonly SchemaField __m_LastEnterTime = new("CColorCorrectionVolume", "m_LastEnterTime");
@@ -34,15 +34,15 @@ public static partial class Schema {
 		public float m_LastExitWeight { get => Get<float>(__m_LastExitWeight); set => Set(__m_LastExitWeight, value); }
 
 		private static readonly SchemaField __m_MaxWeight = new("CColorCorrectionVolume", "m_MaxWeight");
-		/// <summary><c>float32</c>. Networked in build 6779: a write is sent to clients.</summary>
+		/// <summary><c>float32</c>. Networked: a write is sent to clients.</summary>
 		public float m_MaxWeight { get => Get<float>(__m_MaxWeight); set => Set(__m_MaxWeight, value); }
 
 		private static readonly SchemaField __m_Weight = new("CColorCorrectionVolume", "m_Weight");
-		/// <summary><c>float32</c>. Networked in build 6779: a write is sent to clients.</summary>
+		/// <summary><c>float32</c>. Networked: a write is sent to clients.</summary>
 		public float m_Weight { get => Get<float>(__m_Weight); set => Set(__m_Weight, value); }
 
 		private static readonly SchemaField __m_lookupFilename = new("CColorCorrectionVolume", "m_lookupFilename");
-		/// <summary><c>char[512]</c>. Networked in build 6779: a write is sent to clients.</summary>
+		/// <summary><c>char[512]</c>. Networked: a write is sent to clients.</summary>
 		public string m_lookupFilename => GetChars(__m_lookupFilename, 512);
 	}
 }

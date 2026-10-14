@@ -22,7 +22,7 @@ public static partial class Schema {
 		public Vector3 m_vCastPosition { get => Get<Vector3>(__m_vCastPosition); set => Set(__m_vCastPosition, value); }
 
 		private static readonly SchemaField __m_vecDeployedGravestones = new("CCitadel_Ability_Necro_GraveStone", "m_vecDeployedGravestones");
-		/// <summary><c>CNetworkUtlVectorBase&lt;CHandle&lt;CBaseEntity&gt;&gt;</c>. Networked in build 6779: a write is sent to clients.</summary>
+		/// <summary><c>CNetworkUtlVectorBase&lt;CHandle&lt;CBaseEntity&gt;&gt;</c>. Networked: a write is sent to clients.</summary>
 		public SchemaHandleList<CBaseEntity> m_vecDeployedGravestones => new(this, __m_vecDeployedGravestones, ListStorage.Vector);
 
 		/// <summary>The data entry this was created from, as <see cref="CCitadel_Ability_Necro_GraveStoneVData"/>, or null if it has none.</summary>

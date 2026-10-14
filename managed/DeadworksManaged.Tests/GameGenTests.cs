@@ -11,7 +11,7 @@ public class GameGenTests {
 		{ "version": 1, "classes": [
 		  { "name": "CEntityInstance", "module": "entity2", "fields": [] },
 		  { "name": "CBaseEntity", "module": "server", "parents": [{ "name": "CEntityInstance", "module": "entity2" }], "fields": [
-		    { "name": "m_iHealth", "offset": 8, "type": { "category": "builtin", "name": "int32" } },
+		    { "name": "m_iHealth", "offset": 8, "type": { "category": "builtin", "name": "int32" }, "network": { "type": "int32" } },
 		    { "name": "m_flSpawnTime", "offset": 12, "type": { "category": "declared_class", "name": "GameTime_t" } },
 		    { "name": "m_hOwner", "offset": 16, "type": { "category": "atomic", "name": "CHandle", "inner": { "category": "declared_class", "name": "CBaseEntity" } } },
 		    { "name": "m_Glow", "offset": 24, "type": { "category": "declared_class", "name": "CGlowProperty" } },
@@ -114,7 +114,7 @@ public class GameGenTests {
 				using var surveyJson = JsonDocument.Parse(survey);
 				tried = SpawnSurvey.Load(surveyJson.RootElement);
 			}
-			var emitter = new SchemaEmitter(model, entityModel, api ?? new ApiScanner(), warnings ?? [], tried);
+			var emitter = new SchemaEmitter(model, entityModel, api ?? new ApiScanner(), warnings ?? []);
 			emitter.Emit(output);
 			new EntityEmitter(entityModel, model, emitter.Ids, tried).Emit(output);
 			output.Flush();
@@ -351,13 +351,11 @@ public class GameGenTests {
 	}
 
 	[Fact]
-	public void A_field_the_running_game_networks_says_so_and_names_the_build() {
-		string code = Generate(survey: """{ "build": 100, "results": {}, "networked": { "build": 104, "fields": { "CBaseEntity": ["m_iHealth"] } } }""")
-			.Files["Schema/Classes/CBaseEntity.cs"];
+	public void A_field_the_dump_has_network_data_for_says_it_is_networked() {
+		string code = Generate().Files["Schema/Classes/CBaseEntity.cs"];
 
-		Assert.Contains("/// <summary><c>int32</c>. Networked in build 104: a write is sent to clients.</summary>", code);
-		Assert.Contains("/// <summary><c>CHandle&lt;CBaseEntity&gt;</c>.</summary>", code);   // not listed: nothing is claimed
-		Assert.DoesNotContain("Networked in", Generate().Files["Schema/Classes/CBaseEntity.cs"]);
+		Assert.Contains("/// <summary><c>int32</c>. Networked: a write is sent to clients.</summary>", code);
+		Assert.Contains("/// <summary><c>CHandle&lt;CBaseEntity&gt;</c>.</summary>", code);   // no network data: nothing is claimed
 	}
 
 	[Fact]

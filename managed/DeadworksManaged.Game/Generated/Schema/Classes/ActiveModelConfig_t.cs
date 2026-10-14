@@ -14,19 +14,19 @@ public static partial class Schema {
 		static string ISchemaClass<ActiveModelConfig_t>.NativeName => "ActiveModelConfig_t";
 
 		private static readonly SchemaField __m_AssociatedEntities = new("ActiveModelConfig_t", "m_AssociatedEntities");
-		/// <summary><c>CNetworkUtlVectorBase&lt;CHandle&lt;CBaseModelEntity&gt;&gt;</c>. Networked in build 6779: a write is sent to clients.</summary>
+		/// <summary><c>CNetworkUtlVectorBase&lt;CHandle&lt;CBaseModelEntity&gt;&gt;</c>. Networked: a write is sent to clients.</summary>
 		public SchemaHandleList<CBaseModelEntity> m_AssociatedEntities => new(this, __m_AssociatedEntities, ListStorage.Vector);
 
 		private static readonly SchemaField __m_AssociatedEntityNames = new("ActiveModelConfig_t", "m_AssociatedEntityNames");
-		/// <summary><c>CNetworkUtlVectorBase&lt;CUtlSymbolLarge&gt;</c>. Networked in build 6779: a write is sent to clients.</summary>
+		/// <summary><c>CNetworkUtlVectorBase&lt;CUtlSymbolLarge&gt;</c>. Networked: a write is sent to clients.</summary>
 		public SchemaStringList m_AssociatedEntityNames => new(this, __m_AssociatedEntityNames, ListStorage.Vector);
 
 		private static readonly SchemaField __m_Handle = new("ActiveModelConfig_t", "m_Handle");
-		/// <summary><c>ModelConfigHandle_t</c>. Networked in build 6779: a write is sent to clients.</summary>
+		/// <summary><c>ModelConfigHandle_t</c>. Networked: a write is sent to clients.</summary>
 		public uint m_Handle { get => Get<uint>(__m_Handle); set => Set(__m_Handle, value); }
 
 		private static readonly SchemaField __m_Name = new("ActiveModelConfig_t", "m_Name");
-		/// <summary><c>CUtlSymbolLarge</c>. Networked in build 6779: a write is sent to clients.</summary>
+		/// <summary><c>CUtlSymbolLarge</c>. Networked: a write is sent to clients.</summary>
 		public string m_Name { get => GetString(__m_Name); set => SetString(__m_Name, value); }
 
 		private static readonly SchemaField __m_vecAssociatedEntityCollidesOutsideHierarchy = new("ActiveModelConfig_t", "m_vecAssociatedEntityCollidesOutsideHierarchy");

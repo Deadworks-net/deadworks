@@ -14,7 +14,7 @@ public static partial class Schema {
 		static string ISchemaClass<CCitadel_Ability_ZipLine>.NativeName => "CCitadel_Ability_ZipLine";
 
 		private static readonly SchemaField __m_bDroppedFromZipline = new("CCitadel_Ability_ZipLine", "m_bDroppedFromZipline");
-		/// <summary><c>bool</c>. Networked in build 6779: a write is sent to clients.</summary>
+		/// <summary><c>bool</c>. Networked: a write is sent to clients.</summary>
 		public bool m_bDroppedFromZipline { get => Get<bool>(__m_bDroppedFromZipline); set => Set(__m_bDroppedFromZipline, value); }
 
 		private static readonly SchemaField __m_bMouseWheelBind = new("CCitadel_Ability_ZipLine", "m_bMouseWheelBind");
@@ -34,7 +34,7 @@ public static partial class Schema {
 		public bool m_bThinking { get => Get<bool>(__m_bThinking); set => Set(__m_bThinking, value); }
 
 		private static readonly SchemaField __m_eAttachState = new("CCitadel_Ability_ZipLine", "m_eAttachState");
-		/// <summary><c>EAttachState_t</c>. Networked in build 6779: a write is sent to clients.</summary>
+		/// <summary><c>EAttachState_t</c>. Networked: a write is sent to clients.</summary>
 		public EAttachState_t m_eAttachState { get => Get<EAttachState_t>(__m_eAttachState); set => Set(__m_eAttachState, value); }
 
 		private static readonly SchemaField __m_eCommittedAttachState = new("CCitadel_Ability_ZipLine", "m_eCommittedAttachState");
@@ -46,35 +46,35 @@ public static partial class Schema {
 		public GameTime m_flActivatePressTime { get => Get<GameTime>(__m_flActivatePressTime); set => Set(__m_flActivatePressTime, value); }
 
 		private static readonly SchemaField __m_flCasterSpeed = new("CCitadel_Ability_ZipLine", "m_flCasterSpeed");
-		/// <summary><c>float32</c>. Networked in build 6779: a write is sent to clients.</summary>
+		/// <summary><c>float32</c>. Networked: a write is sent to clients.</summary>
 		public float m_flCasterSpeed { get => Get<float>(__m_flCasterSpeed); set => Set(__m_flCasterSpeed, value); }
 
 		private static readonly SchemaField __m_flDamagedTime = new("CCitadel_Ability_ZipLine", "m_flDamagedTime");
-		/// <summary><c>GameTime_t</c>. Networked in build 6779: a write is sent to clients.</summary>
+		/// <summary><c>GameTime_t</c>. Networked: a write is sent to clients.</summary>
 		public GameTime m_flDamagedTime { get => Get<GameTime>(__m_flDamagedTime); set => Set(__m_flDamagedTime, value); }
 
 		private static readonly SchemaField __m_flLatchTime = new("CCitadel_Ability_ZipLine", "m_flLatchTime");
-		/// <summary><c>GameTime_t</c>. Networked in build 6779: a write is sent to clients.</summary>
+		/// <summary><c>GameTime_t</c>. Networked: a write is sent to clients.</summary>
 		public GameTime m_flLatchTime { get => Get<GameTime>(__m_flLatchTime); set => Set(__m_flLatchTime, value); }
 
 		private static readonly SchemaField __m_flTimeEnterState = new("CCitadel_Ability_ZipLine", "m_flTimeEnterState");
-		/// <summary><c>GameTime_t</c>. Networked in build 6779: a write is sent to clients.</summary>
+		/// <summary><c>GameTime_t</c>. Networked: a write is sent to clients.</summary>
 		public GameTime m_flTimeEnterState { get => Get<GameTime>(__m_flTimeEnterState); set => Set(__m_flTimeEnterState, value); }
 
 		private static readonly SchemaField __m_flTimeForKnockdownProtection = new("CCitadel_Ability_ZipLine", "m_flTimeForKnockdownProtection");
-		/// <summary><c>GameTime_t</c>. Networked in build 6779: a write is sent to clients.</summary>
+		/// <summary><c>GameTime_t</c>. Networked: a write is sent to clients.</summary>
 		public GameTime m_flTimeForKnockdownProtection { get => Get<GameTime>(__m_flTimeForKnockdownProtection); set => Set(__m_flTimeForKnockdownProtection, value); }
 
 		private static readonly SchemaField __m_flTimeStartZipping = new("CCitadel_Ability_ZipLine", "m_flTimeStartZipping");
-		/// <summary><c>GameTime_t</c>. Networked in build 6779: a write is sent to clients.</summary>
+		/// <summary><c>GameTime_t</c>. Networked: a write is sent to clients.</summary>
 		public GameTime m_flTimeStartZipping { get => Get<GameTime>(__m_flTimeStartZipping); set => Set(__m_flTimeStartZipping, value); }
 
 		private static readonly SchemaField __m_flTimeStopZipping = new("CCitadel_Ability_ZipLine", "m_flTimeStopZipping");
-		/// <summary><c>GameTime_t</c>. Networked in build 6779: a write is sent to clients.</summary>
+		/// <summary><c>GameTime_t</c>. Networked: a write is sent to clients.</summary>
 		public GameTime m_flTimeStopZipping { get => Get<GameTime>(__m_flTimeStopZipping); set => Set(__m_flTimeStopZipping, value); }
 
 		private static readonly SchemaField __m_flZiplineAirDrag = new("CCitadel_Ability_ZipLine", "m_flZiplineAirDrag");
-		/// <summary><c>float32</c>. Networked in build 6779: a write is sent to clients.</summary>
+		/// <summary><c>float32</c>. Networked: a write is sent to clients.</summary>
 		public float m_flZiplineAirDrag { get => Get<float>(__m_flZiplineAirDrag); set => Set(__m_flZiplineAirDrag, value); }
 
 		private static readonly SchemaField __m_hAttachZipLine = new("CCitadel_Ability_ZipLine", "m_hAttachZipLine");
@@ -86,47 +86,47 @@ public static partial class Schema {
 		public byte m_hZiplineLatchEffectHandle { get => Get<byte>(__m_hZiplineLatchEffectHandle); set => Set(__m_hZiplineLatchEffectHandle, value); }
 
 		private static readonly SchemaField __m_iAttachedZipLineLane = new("CCitadel_Ability_ZipLine", "m_iAttachedZipLineLane");
-		/// <summary><c>int32</c>. Networked in build 6779: a write is sent to clients.</summary>
+		/// <summary><c>int32</c>. Networked: a write is sent to clients.</summary>
 		public int m_iAttachedZipLineLane { get => Get<int>(__m_iAttachedZipLineLane); set => Set(__m_iAttachedZipLineLane, value); }
 
 		private static readonly SchemaField __m_iDesiredLane = new("CCitadel_Ability_ZipLine", "m_iDesiredLane");
-		/// <summary><c>int32</c>. Networked in build 6779: a write is sent to clients.</summary>
+		/// <summary><c>int32</c>. Networked: a write is sent to clients.</summary>
 		public int m_iDesiredLane { get => Get<int>(__m_iDesiredLane); set => Set(__m_iDesiredLane, value); }
 
 		private static readonly SchemaField __m_pNextNode = new("CCitadel_Ability_ZipLine", "m_pNextNode");
-		/// <summary><c>CHandle&lt;CBaseEntity&gt;</c>. Networked in build 6779: a write is sent to clients.</summary>
+		/// <summary><c>CHandle&lt;CBaseEntity&gt;</c>. Networked: a write is sent to clients.</summary>
 		public CBaseEntity? m_pNextNode { get => GetHandle<CBaseEntity>(__m_pNextNode); set => SetHandle(__m_pNextNode, value); }
 
 		private static readonly SchemaField __m_pPrevNode = new("CCitadel_Ability_ZipLine", "m_pPrevNode");
-		/// <summary><c>CHandle&lt;CBaseEntity&gt;</c>. Networked in build 6779: a write is sent to clients.</summary>
+		/// <summary><c>CHandle&lt;CBaseEntity&gt;</c>. Networked: a write is sent to clients.</summary>
 		public CBaseEntity? m_pPrevNode { get => GetHandle<CBaseEntity>(__m_pPrevNode); set => SetHandle(__m_pPrevNode, value); }
 
 		private static readonly SchemaField __m_vAttachZipLineOffset = new("CCitadel_Ability_ZipLine", "m_vAttachZipLineOffset");
-		/// <summary><c>Vector</c>. Networked in build 6779: a write is sent to clients.</summary>
+		/// <summary><c>Vector</c>. Networked: a write is sent to clients.</summary>
 		public Vector3 m_vAttachZipLineOffset { get => Get<Vector3>(__m_vAttachZipLineOffset); set => Set(__m_vAttachZipLineOffset, value); }
 
 		private static readonly SchemaField __m_vPendulumPosition = new("CCitadel_Ability_ZipLine", "m_vPendulumPosition");
-		/// <summary><c>Vector</c>. Networked in build 6779: a write is sent to clients.</summary>
+		/// <summary><c>Vector</c>. Networked: a write is sent to clients.</summary>
 		public Vector3 m_vPendulumPosition { get => Get<Vector3>(__m_vPendulumPosition); set => Set(__m_vPendulumPosition, value); }
 
 		private static readonly SchemaField __m_vPendulumVelocity = new("CCitadel_Ability_ZipLine", "m_vPendulumVelocity");
-		/// <summary><c>Vector</c>. Networked in build 6779: a write is sent to clients.</summary>
+		/// <summary><c>Vector</c>. Networked: a write is sent to clients.</summary>
 		public Vector3 m_vPendulumVelocity { get => Get<Vector3>(__m_vPendulumVelocity); set => Set(__m_vPendulumVelocity, value); }
 
 		private static readonly SchemaField __m_vVelocityHistory1 = new("CCitadel_Ability_ZipLine", "m_vVelocityHistory1");
-		/// <summary><c>Vector</c>. Networked in build 6779: a write is sent to clients.</summary>
+		/// <summary><c>Vector</c>. Networked: a write is sent to clients.</summary>
 		public Vector3 m_vVelocityHistory1 { get => Get<Vector3>(__m_vVelocityHistory1); set => Set(__m_vVelocityHistory1, value); }
 
 		private static readonly SchemaField __m_vVelocityHistory2 = new("CCitadel_Ability_ZipLine", "m_vVelocityHistory2");
-		/// <summary><c>Vector</c>. Networked in build 6779: a write is sent to clients.</summary>
+		/// <summary><c>Vector</c>. Networked: a write is sent to clients.</summary>
 		public Vector3 m_vVelocityHistory2 { get => Get<Vector3>(__m_vVelocityHistory2); set => Set(__m_vVelocityHistory2, value); }
 
 		private static readonly SchemaField __m_vecAttachPoint = new("CCitadel_Ability_ZipLine", "m_vecAttachPoint");
-		/// <summary><c>VectorWS</c>. Networked in build 6779: a write is sent to clients.</summary>
+		/// <summary><c>VectorWS</c>. Networked: a write is sent to clients.</summary>
 		public Vector3 m_vecAttachPoint { get => Get<Vector3>(__m_vecAttachPoint); set => Set(__m_vecAttachPoint, value); }
 
 		private static readonly SchemaField __m_vecInitialVel = new("CCitadel_Ability_ZipLine", "m_vecInitialVel");
-		/// <summary><c>CNetworkVelocityVector</c>. Networked in build 6779: a write is sent to clients.</summary>
+		/// <summary><c>CNetworkVelocityVector</c>. Networked: a write is sent to clients.</summary>
 		public CNetworkVelocityVector m_vecInitialVel => Embedded<CNetworkVelocityVector>(__m_vecInitialVel);
 	}
 }

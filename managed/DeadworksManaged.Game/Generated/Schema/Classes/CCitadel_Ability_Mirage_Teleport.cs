@@ -14,19 +14,19 @@ public static partial class Schema {
 		static string ISchemaClass<CCitadel_Ability_Mirage_Teleport>.NativeName => "CCitadel_Ability_Mirage_Teleport";
 
 		private static readonly SchemaField __m_hTarget = new("CCitadel_Ability_Mirage_Teleport", "m_hTarget");
-		/// <summary><c>CHandle&lt;CBaseEntity&gt;</c>. Networked in build 6779: a write is sent to clients.</summary>
+		/// <summary><c>CHandle&lt;CBaseEntity&gt;</c>. Networked: a write is sent to clients.</summary>
 		public CBaseEntity? m_hTarget { get => GetHandle<CBaseEntity>(__m_hTarget); set => SetHandle(__m_hTarget, value); }
 
 		private static readonly SchemaField __m_tTeleportCompletedTime = new("CCitadel_Ability_Mirage_Teleport", "m_tTeleportCompletedTime");
-		/// <summary><c>GameTime_t</c>. Networked in build 6779: a write is sent to clients.</summary>
+		/// <summary><c>GameTime_t</c>. Networked: a write is sent to clients.</summary>
 		public GameTime m_tTeleportCompletedTime { get => Get<GameTime>(__m_tTeleportCompletedTime); set => Set(__m_tTeleportCompletedTime, value); }
 
 		private static readonly SchemaField __m_vTargetAngles = new("CCitadel_Ability_Mirage_Teleport", "m_vTargetAngles");
-		/// <summary><c>QAngle</c>. Networked in build 6779: a write is sent to clients.</summary>
+		/// <summary><c>QAngle</c>. Networked: a write is sent to clients.</summary>
 		public Vector3 m_vTargetAngles { get => Get<Vector3>(__m_vTargetAngles); set => Set(__m_vTargetAngles, value); }
 
 		private static readonly SchemaField __m_vTargetPosition = new("CCitadel_Ability_Mirage_Teleport", "m_vTargetPosition");
-		/// <summary><c>VectorWS</c>. Networked in build 6779: a write is sent to clients.</summary>
+		/// <summary><c>VectorWS</c>. Networked: a write is sent to clients.</summary>
 		public Vector3 m_vTargetPosition { get => Get<Vector3>(__m_vTargetPosition); set => Set(__m_vTargetPosition, value); }
 	}
 }

@@ -14,11 +14,11 @@ public static partial class Schema {
 		static string ISchemaClass<CCitadel_Ability_Werewolf_Leap>.NativeName => "CCitadel_Ability_Werewolf_Leap";
 
 		private static readonly SchemaField __m_bIsLeaping = new("CCitadel_Ability_Werewolf_Leap", "m_bIsLeaping");
-		/// <summary><c>bool</c>. Networked in build 6779: a write is sent to clients.</summary>
+		/// <summary><c>bool</c>. Networked: a write is sent to clients.</summary>
 		public bool m_bIsLeaping { get => Get<bool>(__m_bIsLeaping); set => Set(__m_bIsLeaping, value); }
 
 		private static readonly SchemaField __m_bWillLeapOff = new("CCitadel_Ability_Werewolf_Leap", "m_bWillLeapOff");
-		/// <summary><c>bool</c>. Networked in build 6779: a write is sent to clients.</summary>
+		/// <summary><c>bool</c>. Networked: a write is sent to clients.</summary>
 		public bool m_bWillLeapOff { get => Get<bool>(__m_bWillLeapOff); set => Set(__m_bWillLeapOff, value); }
 
 		private static readonly SchemaField __m_qLaunchAngle = new("CCitadel_Ability_Werewolf_Leap", "m_qLaunchAngle");
@@ -26,11 +26,11 @@ public static partial class Schema {
 		public Vector3 m_qLaunchAngle { get => Get<Vector3>(__m_qLaunchAngle); set => Set(__m_qLaunchAngle, value); }
 
 		private static readonly SchemaField __m_tLeapOffTime = new("CCitadel_Ability_Werewolf_Leap", "m_tLeapOffTime");
-		/// <summary><c>GameTime_t</c>. Networked in build 6779: a write is sent to clients.</summary>
+		/// <summary><c>GameTime_t</c>. Networked: a write is sent to clients.</summary>
 		public GameTime m_tLeapOffTime { get => Get<GameTime>(__m_tLeapOffTime); set => Set(__m_tLeapOffTime, value); }
 
 		private static readonly SchemaField __m_tLeapStartTime = new("CCitadel_Ability_Werewolf_Leap", "m_tLeapStartTime");
-		/// <summary><c>GameTime_t</c>. Networked in build 6779: a write is sent to clients.</summary>
+		/// <summary><c>GameTime_t</c>. Networked: a write is sent to clients.</summary>
 		public GameTime m_tLeapStartTime { get => Get<GameTime>(__m_tLeapStartTime); set => Set(__m_tLeapStartTime, value); }
 
 		private static readonly SchemaField __m_vLaunchPosition = new("CCitadel_Ability_Werewolf_Leap", "m_vLaunchPosition");

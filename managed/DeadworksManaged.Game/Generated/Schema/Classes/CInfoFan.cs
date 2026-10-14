@@ -14,19 +14,19 @@ public static partial class Schema {
 		static string ISchemaClass<CInfoFan>.NativeName => "CInfoFan";
 
 		private static readonly SchemaField __m_FanForceCurveString = new("CInfoFan", "m_FanForceCurveString");
-		/// <summary><c>CUtlSymbolLarge</c>. Networked in build 6779: a write is sent to clients.</summary>
+		/// <summary><c>CUtlSymbolLarge</c>. Networked: a write is sent to clients.</summary>
 		public string m_FanForceCurveString { get => GetString(__m_FanForceCurveString); set => SetString(__m_FanForceCurveString, value); }
 
 		private static readonly SchemaField __m_fFanForceMaxRadius = new("CInfoFan", "m_fFanForceMaxRadius");
-		/// <summary><c>float32</c>. Networked in build 6779: a write is sent to clients.</summary>
+		/// <summary><c>float32</c>. Networked: a write is sent to clients.</summary>
 		public float m_fFanForceMaxRadius { get => Get<float>(__m_fFanForceMaxRadius); set => Set(__m_fFanForceMaxRadius, value); }
 
 		private static readonly SchemaField __m_fFanForceMinRadius = new("CInfoFan", "m_fFanForceMinRadius");
-		/// <summary><c>float32</c>. Networked in build 6779: a write is sent to clients.</summary>
+		/// <summary><c>float32</c>. Networked: a write is sent to clients.</summary>
 		public float m_fFanForceMinRadius { get => Get<float>(__m_fFanForceMinRadius); set => Set(__m_fFanForceMinRadius, value); }
 
 		private static readonly SchemaField __m_flCurveDistRange = new("CInfoFan", "m_flCurveDistRange");
-		/// <summary><c>float32</c>. Networked in build 6779: a write is sent to clients.</summary>
+		/// <summary><c>float32</c>. Networked: a write is sent to clients.</summary>
 		public float m_flCurveDistRange { get => Get<float>(__m_flCurveDistRange); set => Set(__m_flCurveDistRange, value); }
 	}
 }

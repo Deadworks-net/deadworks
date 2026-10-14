@@ -34,11 +34,11 @@ public static partial class Schema {
 		public bool m_bIsLooking { get => Get<bool>(__m_bIsLooking); set => Set(__m_bIsLooking, value); }
 
 		private static readonly SchemaField __m_bTestAllVisibleOcclusion = new("CTriggerLook", "m_bTestAllVisibleOcclusion");
-		/// <summary><c>bool</c>. Networked in build 6779: a write is sent to clients.</summary>
+		/// <summary><c>bool</c>. Networked: a write is sent to clients.</summary>
 		public bool m_bTestAllVisibleOcclusion { get => Get<bool>(__m_bTestAllVisibleOcclusion); set => Set(__m_bTestAllVisibleOcclusion, value); }
 
 		private static readonly SchemaField __m_bTestOcclusion = new("CTriggerLook", "m_bTestOcclusion");
-		/// <summary><c>bool</c>. Networked in build 6779: a write is sent to clients.</summary>
+		/// <summary><c>bool</c>. Networked: a write is sent to clients.</summary>
 		public bool m_bTestOcclusion { get => Get<bool>(__m_bTestOcclusion); set => Set(__m_bTestOcclusion, value); }
 
 		private static readonly SchemaField __m_bTimeoutFired = new("CTriggerLook", "m_bTimeoutFired");

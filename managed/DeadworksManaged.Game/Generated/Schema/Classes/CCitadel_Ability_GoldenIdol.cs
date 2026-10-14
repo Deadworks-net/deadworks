@@ -14,7 +14,7 @@ public static partial class Schema {
 		static string ISchemaClass<CCitadel_Ability_GoldenIdol>.NativeName => "CCitadel_Ability_GoldenIdol";
 
 		private static readonly SchemaField __m_flHeldTime = new("CCitadel_Ability_GoldenIdol", "m_flHeldTime");
-		/// <summary><c>float32</c>. Networked in build 6779: a write is sent to clients.</summary>
+		/// <summary><c>float32</c>. Networked: a write is sent to clients.</summary>
 		public float m_flHeldTime { get => Get<float>(__m_flHeldTime); set => Set(__m_flHeldTime, value); }
 
 		private static readonly SchemaField __m_nGold = new("CCitadel_Ability_GoldenIdol", "m_nGold");

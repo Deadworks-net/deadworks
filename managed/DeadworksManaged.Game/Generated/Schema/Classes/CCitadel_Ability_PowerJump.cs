@@ -14,7 +14,7 @@ public static partial class Schema {
 		static string ISchemaClass<CCitadel_Ability_PowerJump>.NativeName => "CCitadel_Ability_PowerJump";
 
 		private static readonly SchemaField __m_bAirRaiding = new("CCitadel_Ability_PowerJump", "m_bAirRaiding");
-		/// <summary><c>bool</c>. Networked in build 6779: a write is sent to clients.</summary>
+		/// <summary><c>bool</c>. Networked: a write is sent to clients.</summary>
 		public bool m_bAirRaiding { get => Get<bool>(__m_bAirRaiding); set => Set(__m_bAirRaiding, value); }
 
 		private static readonly SchemaField __m_nTargetingParticleIndex = new("CCitadel_Ability_PowerJump", "m_nTargetingParticleIndex");

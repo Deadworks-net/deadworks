@@ -14,19 +14,19 @@ public static partial class Schema {
 		static string ISchemaClass<CCitadel_Ability_Viscous_Telepunch>.NativeName => "CCitadel_Ability_Viscous_Telepunch";
 
 		private static readonly SchemaField __m_eTelepunchState = new("CCitadel_Ability_Viscous_Telepunch", "m_eTelepunchState");
-		/// <summary><c>ETelepunchState_t</c>. Networked in build 6779: a write is sent to clients.</summary>
+		/// <summary><c>ETelepunchState_t</c>. Networked: a write is sent to clients.</summary>
 		public ETelepunchState_t m_eTelepunchState { get => Get<ETelepunchState_t>(__m_eTelepunchState); set => Set(__m_eTelepunchState, value); }
 
 		private static readonly SchemaField __m_flNextStateTime = new("CCitadel_Ability_Viscous_Telepunch", "m_flNextStateTime");
-		/// <summary><c>GameTime_t</c>. Networked in build 6779: a write is sent to clients.</summary>
+		/// <summary><c>GameTime_t</c>. Networked: a write is sent to clients.</summary>
 		public GameTime m_flNextStateTime { get => Get<GameTime>(__m_flNextStateTime); set => Set(__m_flNextStateTime, value); }
 
 		private static readonly SchemaField __m_vecTeleportPosition = new("CCitadel_Ability_Viscous_Telepunch", "m_vecTeleportPosition");
-		/// <summary><c>VectorWS</c>. Networked in build 6779: a write is sent to clients.</summary>
+		/// <summary><c>VectorWS</c>. Networked: a write is sent to clients.</summary>
 		public Vector3 m_vecTeleportPosition { get => Get<Vector3>(__m_vecTeleportPosition); set => Set(__m_vecTeleportPosition, value); }
 
 		private static readonly SchemaField __m_vecTeleportPositionNormal = new("CCitadel_Ability_Viscous_Telepunch", "m_vecTeleportPositionNormal");
-		/// <summary><c>Vector</c>. Networked in build 6779: a write is sent to clients.</summary>
+		/// <summary><c>Vector</c>. Networked: a write is sent to clients.</summary>
 		public Vector3 m_vecTeleportPositionNormal { get => Get<Vector3>(__m_vecTeleportPositionNormal); set => Set(__m_vecTeleportPositionNormal, value); }
 
 		/// <summary>The data entry this was created from, as <see cref="CCitadel_Ability_Viscous_TelepunchVData"/>, or null if it has none.</summary>

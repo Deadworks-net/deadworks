@@ -14,7 +14,7 @@ public static partial class Schema {
 		static string ISchemaClass<CCitadel_Ability_Necro_Fear>.NativeName => "CCitadel_Ability_Necro_Fear";
 
 		private static readonly SchemaField __m_flTotalBuildup = new("CCitadel_Ability_Necro_Fear", "m_flTotalBuildup");
-		/// <summary><c>float32</c>. Networked in build 6779: a write is sent to clients.</summary>
+		/// <summary><c>float32</c>. Networked: a write is sent to clients.</summary>
 		public float m_flTotalBuildup { get => Get<float>(__m_flTotalBuildup); set => Set(__m_flTotalBuildup, value); }
 
 		/// <summary>The data entry this was created from, as <see cref="CCitadel_Ability_Necro_FearVData"/>, or null if it has none.</summary>

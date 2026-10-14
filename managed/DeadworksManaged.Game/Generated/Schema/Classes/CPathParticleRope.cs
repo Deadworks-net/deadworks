@@ -14,11 +14,11 @@ public static partial class Schema {
 		static string ISchemaClass<CPathParticleRope>.NativeName => "CPathParticleRope";
 
 		private static readonly SchemaField __m_ColorTint = new("CPathParticleRope", "m_ColorTint");
-		/// <summary><c>Color</c>. Networked in build 6779: a write is sent to clients.</summary>
+		/// <summary><c>Color</c>. Networked: a write is sent to clients.</summary>
 		public Color32 m_ColorTint { get => Get<Color32>(__m_ColorTint); set => Set(__m_ColorTint, value); }
 
 		private static readonly SchemaField __m_PathNodes_Color = new("CPathParticleRope", "m_PathNodes_Color");
-		/// <summary><c>CNetworkUtlVectorBase&lt;Vector&gt;</c>. Networked in build 6779: a write is sent to clients.</summary>
+		/// <summary><c>CNetworkUtlVectorBase&lt;Vector&gt;</c>. Networked: a write is sent to clients.</summary>
 		public SchemaValueList<Vector3> m_PathNodes_Color => new(this, __m_PathNodes_Color, ListStorage.Vector);
 
 		private static readonly SchemaField __m_PathNodes_Name = new("CPathParticleRope", "m_PathNodes_Name");
@@ -26,23 +26,23 @@ public static partial class Schema {
 		public SchemaStringList m_PathNodes_Name => new(this, __m_PathNodes_Name, ListStorage.Vector);
 
 		private static readonly SchemaField __m_PathNodes_PinEnabled = new("CPathParticleRope", "m_PathNodes_PinEnabled");
-		/// <summary><c>CNetworkUtlVectorBase&lt;bool&gt;</c>. Networked in build 6779: a write is sent to clients.</summary>
+		/// <summary><c>CNetworkUtlVectorBase&lt;bool&gt;</c>. Networked: a write is sent to clients.</summary>
 		public SchemaValueList<bool> m_PathNodes_PinEnabled => new(this, __m_PathNodes_PinEnabled, ListStorage.Vector);
 
 		private static readonly SchemaField __m_PathNodes_Position = new("CPathParticleRope", "m_PathNodes_Position");
-		/// <summary><c>CNetworkUtlVectorBase&lt;Vector&gt;</c>. Networked in build 6779: a write is sent to clients.</summary>
+		/// <summary><c>CNetworkUtlVectorBase&lt;Vector&gt;</c>. Networked: a write is sent to clients.</summary>
 		public SchemaValueList<Vector3> m_PathNodes_Position => new(this, __m_PathNodes_Position, ListStorage.Vector);
 
 		private static readonly SchemaField __m_PathNodes_RadiusScale = new("CPathParticleRope", "m_PathNodes_RadiusScale");
-		/// <summary><c>CNetworkUtlVectorBase&lt;float32&gt;</c>. Networked in build 6779: a write is sent to clients.</summary>
+		/// <summary><c>CNetworkUtlVectorBase&lt;float32&gt;</c>. Networked: a write is sent to clients.</summary>
 		public SchemaValueList<float> m_PathNodes_RadiusScale => new(this, __m_PathNodes_RadiusScale, ListStorage.Vector);
 
 		private static readonly SchemaField __m_PathNodes_TangentIn = new("CPathParticleRope", "m_PathNodes_TangentIn");
-		/// <summary><c>CNetworkUtlVectorBase&lt;Vector&gt;</c>. Networked in build 6779: a write is sent to clients.</summary>
+		/// <summary><c>CNetworkUtlVectorBase&lt;Vector&gt;</c>. Networked: a write is sent to clients.</summary>
 		public SchemaValueList<Vector3> m_PathNodes_TangentIn => new(this, __m_PathNodes_TangentIn, ListStorage.Vector);
 
 		private static readonly SchemaField __m_PathNodes_TangentOut = new("CPathParticleRope", "m_PathNodes_TangentOut");
-		/// <summary><c>CNetworkUtlVectorBase&lt;Vector&gt;</c>. Networked in build 6779: a write is sent to clients.</summary>
+		/// <summary><c>CNetworkUtlVectorBase&lt;Vector&gt;</c>. Networked: a write is sent to clients.</summary>
 		public SchemaValueList<Vector3> m_PathNodes_TangentOut => new(this, __m_PathNodes_TangentOut, ListStorage.Vector);
 
 		private static readonly SchemaField __m_bStartActive = new("CPathParticleRope", "m_bStartActive");
@@ -54,19 +54,19 @@ public static partial class Schema {
 		public float m_flMaxSimulationTime { get => Get<float>(__m_flMaxSimulationTime); set => Set(__m_flMaxSimulationTime, value); }
 
 		private static readonly SchemaField __m_flParticleSpacing = new("CPathParticleRope", "m_flParticleSpacing");
-		/// <summary><c>float32</c>. Networked in build 6779: a write is sent to clients.</summary>
+		/// <summary><c>float32</c>. Networked: a write is sent to clients.</summary>
 		public float m_flParticleSpacing { get => Get<float>(__m_flParticleSpacing); set => Set(__m_flParticleSpacing, value); }
 
 		private static readonly SchemaField __m_flRadius = new("CPathParticleRope", "m_flRadius");
-		/// <summary><c>float32</c>. Networked in build 6779: a write is sent to clients.</summary>
+		/// <summary><c>float32</c>. Networked: a write is sent to clients.</summary>
 		public float m_flRadius { get => Get<float>(__m_flRadius); set => Set(__m_flRadius, value); }
 
 		private static readonly SchemaField __m_flSlack = new("CPathParticleRope", "m_flSlack");
-		/// <summary><c>float32</c>. Networked in build 6779: a write is sent to clients.</summary>
+		/// <summary><c>float32</c>. Networked: a write is sent to clients.</summary>
 		public float m_flSlack { get => Get<float>(__m_flSlack); set => Set(__m_flSlack, value); }
 
 		private static readonly SchemaField __m_iEffectIndex = new("CPathParticleRope", "m_iEffectIndex");
-		/// <summary><c>CStrongHandle&lt;InfoForResourceTypeIParticleSystemDefinition&gt;</c>. Networked in build 6779: a write is sent to clients.</summary>
+		/// <summary><c>CStrongHandle&lt;InfoForResourceTypeIParticleSystemDefinition&gt;</c>. Networked: a write is sent to clients.</summary>
 		public ResourceHandle m_iEffectIndex { get => Get<ResourceHandle>(__m_iEffectIndex); set => Set(__m_iEffectIndex, value); }
 
 		private static readonly SchemaField __m_iszEffectName = new("CPathParticleRope", "m_iszEffectName");
@@ -74,7 +74,7 @@ public static partial class Schema {
 		public string m_iszEffectName { get => GetString(__m_iszEffectName); set => SetString(__m_iszEffectName, value); }
 
 		private static readonly SchemaField __m_nEffectState = new("CPathParticleRope", "m_nEffectState");
-		/// <summary><c>int32</c>. Networked in build 6779: a write is sent to clients.</summary>
+		/// <summary><c>int32</c>. Networked: a write is sent to clients.</summary>
 		public int m_nEffectState { get => Get<int>(__m_nEffectState); set => Set(__m_nEffectState, value); }
 
 		/// <summary>Fires the <c>DestroyImmediately</c> input.</summary>

@@ -14,31 +14,31 @@ public static partial class Schema {
 		static string ISchemaClass<CCitadel_Ability_GooBowlingBall>.NativeName => "CCitadel_Ability_GooBowlingBall";
 
 		private static readonly SchemaField __m_bIsRolling = new("CCitadel_Ability_GooBowlingBall", "m_bIsRolling");
-		/// <summary><c>bool</c>. Networked in build 6779: a write is sent to clients.</summary>
+		/// <summary><c>bool</c>. Networked: a write is sent to clients.</summary>
 		public bool m_bIsRolling { get => Get<bool>(__m_bIsRolling); set => Set(__m_bIsRolling, value); }
 
 		private static readonly SchemaField __m_eRollingState = new("CCitadel_Ability_GooBowlingBall", "m_eRollingState");
-		/// <summary><c>EViscousBowlingBallState_t</c>. Networked in build 6779: a write is sent to clients.</summary>
+		/// <summary><c>EViscousBowlingBallState_t</c>. Networked: a write is sent to clients.</summary>
 		public EViscousBowlingBallState_t m_eRollingState { get => Get<EViscousBowlingBallState_t>(__m_eRollingState); set => Set(__m_eRollingState, value); }
 
 		private static readonly SchemaField __m_flNextStateTime = new("CCitadel_Ability_GooBowlingBall", "m_flNextStateTime");
-		/// <summary><c>GameTime_t</c>. Networked in build 6779: a write is sent to clients.</summary>
+		/// <summary><c>GameTime_t</c>. Networked: a write is sent to clients.</summary>
 		public GameTime m_flNextStateTime { get => Get<GameTime>(__m_flNextStateTime); set => Set(__m_flNextStateTime, value); }
 
 		private static readonly SchemaField __m_flNextWallCheck = new("CCitadel_Ability_GooBowlingBall", "m_flNextWallCheck");
-		/// <summary><c>GameTime_t</c>. Networked in build 6779: a write is sent to clients.</summary>
+		/// <summary><c>GameTime_t</c>. Networked: a write is sent to clients.</summary>
 		public GameTime m_flNextWallCheck { get => Get<GameTime>(__m_flNextWallCheck); set => Set(__m_flNextWallCheck, value); }
 
 		private static readonly SchemaField __m_flRollStartTime = new("CCitadel_Ability_GooBowlingBall", "m_flRollStartTime");
-		/// <summary><c>GameTime_t</c>. Networked in build 6779: a write is sent to clients.</summary>
+		/// <summary><c>GameTime_t</c>. Networked: a write is sent to clients.</summary>
 		public GameTime m_flRollStartTime { get => Get<GameTime>(__m_flRollStartTime); set => Set(__m_flRollStartTime, value); }
 
 		private static readonly SchemaField __m_flWallExitTime = new("CCitadel_Ability_GooBowlingBall", "m_flWallExitTime");
-		/// <summary><c>GameTime_t</c>. Networked in build 6779: a write is sent to clients.</summary>
+		/// <summary><c>GameTime_t</c>. Networked: a write is sent to clients.</summary>
 		public GameTime m_flWallExitTime { get => Get<GameTime>(__m_flWallExitTime); set => Set(__m_flWallExitTime, value); }
 
 		private static readonly SchemaField __m_hBall = new("CCitadel_Ability_GooBowlingBall", "m_hBall");
-		/// <summary><c>CHandle&lt;CCitadelViscousBall&gt;</c>. Networked in build 6779: a write is sent to clients.</summary>
+		/// <summary><c>CHandle&lt;CCitadelViscousBall&gt;</c>. Networked: a write is sent to clients.</summary>
 		public CCitadelViscousBall? m_hBall { get => GetHandle<CCitadelViscousBall>(__m_hBall); set => SetHandle(__m_hBall, value); }
 
 		private static readonly SchemaField __m_nAirJumpsLeft = new("CCitadel_Ability_GooBowlingBall", "m_nAirJumpsLeft");
@@ -46,7 +46,7 @@ public static partial class Schema {
 		public int m_nAirJumpsLeft { get => Get<int>(__m_nAirJumpsLeft); set => Set(__m_nAirJumpsLeft, value); }
 
 		private static readonly SchemaField __m_vecWallExitVelocity = new("CCitadel_Ability_GooBowlingBall", "m_vecWallExitVelocity");
-		/// <summary><c>Vector</c>. Networked in build 6779: a write is sent to clients.</summary>
+		/// <summary><c>Vector</c>. Networked: a write is sent to clients.</summary>
 		public Vector3 m_vecWallExitVelocity { get => Get<Vector3>(__m_vecWallExitVelocity); set => Set(__m_vecWallExitVelocity, value); }
 	}
 }

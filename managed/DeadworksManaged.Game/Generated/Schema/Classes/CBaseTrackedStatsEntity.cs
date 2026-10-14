@@ -14,7 +14,7 @@ public static partial class Schema {
 		static string ISchemaClass<CBaseTrackedStatsEntity>.NativeName => "CBaseTrackedStatsEntity";
 
 		private static readonly SchemaField __m_vecTrackedStats = new("CBaseTrackedStatsEntity", "m_vecTrackedStats");
-		/// <summary><c>CUtlVectorEmbeddedNetworkVar&lt;TrackedStatNetworkData_t&gt;</c>. Networked in build 6779: a write is sent to clients.</summary>
+		/// <summary><c>CUtlVectorEmbeddedNetworkVar&lt;TrackedStatNetworkData_t&gt;</c>. Networked: a write is sent to clients.</summary>
 		public SchemaObjectList<TrackedStatNetworkData_t> m_vecTrackedStats => new(this, __m_vecTrackedStats, ListStorage.Vector);
 	}
 }

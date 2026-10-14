@@ -14,11 +14,11 @@ public static partial class Schema {
 		static string ISchemaClass<CSoundEventAABBEntity>.NativeName => "CSoundEventAABBEntity";
 
 		private static readonly SchemaField __m_vMaxs = new("CSoundEventAABBEntity", "m_vMaxs");
-		/// <summary><c>Vector</c>. Networked in build 6779: a write is sent to clients.</summary>
+		/// <summary><c>Vector</c>. Networked: a write is sent to clients.</summary>
 		public Vector3 m_vMaxs { get => Get<Vector3>(__m_vMaxs); set => Set(__m_vMaxs, value); }
 
 		private static readonly SchemaField __m_vMins = new("CSoundEventAABBEntity", "m_vMins");
-		/// <summary><c>Vector</c>. Networked in build 6779: a write is sent to clients.</summary>
+		/// <summary><c>Vector</c>. Networked: a write is sent to clients.</summary>
 		public Vector3 m_vMins { get => Get<Vector3>(__m_vMins); set => Set(__m_vMins, value); }
 	}
 }

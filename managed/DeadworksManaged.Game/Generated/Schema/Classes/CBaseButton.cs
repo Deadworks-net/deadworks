@@ -70,7 +70,7 @@ public static partial class Schema {
 		public GameTime m_flUseLockedTime { get => Get<GameTime>(__m_flUseLockedTime); set => Set(__m_flUseLockedTime, value); }
 
 		private static readonly SchemaField __m_glowEntity = new("CBaseButton", "m_glowEntity");
-		/// <summary><c>CHandle&lt;CBaseModelEntity&gt;</c>. Networked in build 6779: a write is sent to clients.</summary>
+		/// <summary><c>CHandle&lt;CBaseModelEntity&gt;</c>. Networked: a write is sent to clients.</summary>
 		public CBaseModelEntity? m_glowEntity { get => GetHandle<CBaseModelEntity>(__m_glowEntity); set => SetHandle(__m_glowEntity, value); }
 
 		private static readonly SchemaField __m_hConstraint = new("CBaseButton", "m_hConstraint");
@@ -110,11 +110,11 @@ public static partial class Schema {
 		public string m_sUseSound => GetString(__m_sUseSound);
 
 		private static readonly SchemaField __m_szDisplayText = new("CBaseButton", "m_szDisplayText");
-		/// <summary><c>CUtlSymbolLarge</c>. Networked in build 6779: a write is sent to clients.</summary>
+		/// <summary><c>CUtlSymbolLarge</c>. Networked: a write is sent to clients.</summary>
 		public string m_szDisplayText { get => GetString(__m_szDisplayText); set => SetString(__m_szDisplayText, value); }
 
 		private static readonly SchemaField __m_usable = new("CBaseButton", "m_usable");
-		/// <summary><c>bool</c>. Networked in build 6779: a write is sent to clients.</summary>
+		/// <summary><c>bool</c>. Networked: a write is sent to clients.</summary>
 		public bool m_usable { get => Get<bool>(__m_usable); set => Set(__m_usable, value); }
 
 		/// <summary>Fires the <c>Disable</c> input.</summary>

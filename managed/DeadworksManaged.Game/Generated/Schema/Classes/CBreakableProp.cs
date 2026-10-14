@@ -18,7 +18,7 @@ public static partial class Schema {
 		public BreakableContentsType_t m_BreakableContentsType { get => Get<BreakableContentsType_t>(__m_BreakableContentsType); set => Set(__m_BreakableContentsType, value); }
 
 		private static readonly SchemaField __m_CPropDataComponent = new("CBreakableProp", "m_CPropDataComponent");
-		/// <summary><c>CPropDataComponent</c>. Networked in build 6779: a write is sent to clients.</summary>
+		/// <summary><c>CPropDataComponent</c>. Networked: a write is sent to clients.</summary>
 		public CPropDataComponent m_CPropDataComponent => Embedded<CPropDataComponent>(__m_CPropDataComponent);
 
 		private static readonly SchemaField __m_OnBreak = new("CBreakableProp", "m_OnBreak");

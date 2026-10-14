@@ -14,11 +14,11 @@ public static partial class Schema {
 		static string ISchemaClass<CCitadel_Ability_FlameDash>.NativeName => "CCitadel_Ability_FlameDash";
 
 		private static readonly SchemaField __m_bIsSpeedBursting = new("CCitadel_Ability_FlameDash", "m_bIsSpeedBursting");
-		/// <summary><c>bool</c>. Networked in build 6779: a write is sent to clients.</summary>
+		/// <summary><c>bool</c>. Networked: a write is sent to clients.</summary>
 		public bool m_bIsSpeedBursting { get => Get<bool>(__m_bIsSpeedBursting); set => Set(__m_bIsSpeedBursting, value); }
 
 		private static readonly SchemaField __m_flDashEndTime = new("CCitadel_Ability_FlameDash", "m_flDashEndTime");
-		/// <summary><c>CCitadelAutoScaledTime</c>. Networked in build 6779: a write is sent to clients.</summary>
+		/// <summary><c>CCitadelAutoScaledTime</c>. Networked: a write is sent to clients.</summary>
 		public CCitadelAutoScaledTime m_flDashEndTime => Embedded<CCitadelAutoScaledTime>(__m_flDashEndTime);
 
 		private static readonly SchemaField __m_vecHitEntities = new("CCitadel_Ability_FlameDash", "m_vecHitEntities");

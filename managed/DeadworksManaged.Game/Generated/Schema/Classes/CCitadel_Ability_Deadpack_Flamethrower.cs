@@ -14,11 +14,11 @@ public static partial class Schema {
 		static string ISchemaClass<CCitadel_Ability_Deadpack_Flamethrower>.NativeName => "CCitadel_Ability_Deadpack_Flamethrower";
 
 		private static readonly SchemaField __m_bBeaming = new("CCitadel_Ability_Deadpack_Flamethrower", "m_bBeaming");
-		/// <summary><c>bool</c>. Networked in build 6779: a write is sent to clients.</summary>
+		/// <summary><c>bool</c>. Networked: a write is sent to clients.</summary>
 		public bool m_bBeaming { get => Get<bool>(__m_bBeaming); set => Set(__m_bBeaming, value); }
 
 		private static readonly SchemaField __m_beam = new("CCitadel_Ability_Deadpack_Flamethrower", "m_beam");
-		/// <summary><c>CCitadelAbilityBeam_t</c>. Networked in build 6779: a write is sent to clients.</summary>
+		/// <summary><c>CCitadelAbilityBeam_t</c>. Networked: a write is sent to clients.</summary>
 		public CCitadelAbilityBeam_t m_beam => Embedded<CCitadelAbilityBeam_t>(__m_beam);
 
 		private static readonly SchemaField __m_flNextDamageTick = new("CCitadel_Ability_Deadpack_Flamethrower", "m_flNextDamageTick");
@@ -26,15 +26,15 @@ public static partial class Schema {
 		public GameTime m_flNextDamageTick { get => Get<GameTime>(__m_flNextDamageTick); set => Set(__m_flNextDamageTick, value); }
 
 		private static readonly SchemaField __m_tActivationTime = new("CCitadel_Ability_Deadpack_Flamethrower", "m_tActivationTime");
-		/// <summary><c>GameTime_t</c>. Networked in build 6779: a write is sent to clients.</summary>
+		/// <summary><c>GameTime_t</c>. Networked: a write is sent to clients.</summary>
 		public GameTime m_tActivationTime { get => Get<GameTime>(__m_tActivationTime); set => Set(__m_tActivationTime, value); }
 
 		private static readonly SchemaField __m_tLastDamageDealTime = new("CCitadel_Ability_Deadpack_Flamethrower", "m_tLastDamageDealTime");
-		/// <summary><c>GameTime_t</c>. Networked in build 6779: a write is sent to clients.</summary>
+		/// <summary><c>GameTime_t</c>. Networked: a write is sent to clients.</summary>
 		public GameTime m_tLastDamageDealTime { get => Get<GameTime>(__m_tLastDamageDealTime); set => Set(__m_tLastDamageDealTime, value); }
 
 		private static readonly SchemaField __m_tPauseBeginTime = new("CCitadel_Ability_Deadpack_Flamethrower", "m_tPauseBeginTime");
-		/// <summary><c>GameTime_t</c>. Networked in build 6779: a write is sent to clients.</summary>
+		/// <summary><c>GameTime_t</c>. Networked: a write is sent to clients.</summary>
 		public GameTime m_tPauseBeginTime { get => Get<GameTime>(__m_tPauseBeginTime); set => Set(__m_tPauseBeginTime, value); }
 
 		private static readonly SchemaField __m_vecEntitiesHit = new("CCitadel_Ability_Deadpack_Flamethrower", "m_vecEntitiesHit");

@@ -87,8 +87,7 @@ ConCommands.changelevel("dl_midtown");
   several fields.
 - **Writes are networked.** Setting a networked field tells the game, through the struct's
   own network chain if it has one and otherwise through the entity it is stored in. A field's
-  documentation says when the game networks it. The schema stopped saying in build 6711, so
-  that comes from asking a running server (the survey below) and names the build asked.
+  documentation says when the game networks it, from the network data in the modding database.
 - **A `GameTime_t` is a `GameTime`.** It converts to and from `float`, and has `Remaining`,
   `Elapsed` and `HasPassed` against the server's clock: `pawn.m_flRespawnTime = GameTime.FromNow(5)`.
 - **An ability property is text in the data** (`"25"`, `"8m"`). `Number` is the number as

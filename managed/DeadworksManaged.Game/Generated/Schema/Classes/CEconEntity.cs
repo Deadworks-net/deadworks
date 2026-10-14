@@ -15,7 +15,7 @@ public static partial class Schema {
 		static string ISchemaClass<CEconEntity>.NativeName => "CEconEntity";
 
 		private static readonly SchemaField __m_AttributeManager = new("CEconEntity", "m_AttributeManager");
-		/// <summary><c>CAttributeContainer</c>. Networked in build 6779: a write is sent to clients.</summary>
+		/// <summary><c>CAttributeContainer</c>. Networked: a write is sent to clients.</summary>
 		public CAttributeContainer m_AttributeManager => Embedded<CAttributeContainer>(__m_AttributeManager);
 
 		private static readonly SchemaField __m_hOldProvidee = new("CEconEntity", "m_hOldProvidee");

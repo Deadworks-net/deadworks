@@ -14,7 +14,7 @@ public static partial class Schema {
 		static string ISchemaClass<CPlayerTrackedStatsEntity>.NativeName => "CPlayerTrackedStatsEntity";
 
 		private static readonly SchemaField __m_nPlayerSlot = new("CPlayerTrackedStatsEntity", "m_nPlayerSlot");
-		/// <summary><c>CPlayerSlot</c>. Networked in build 6779: a write is sent to clients.</summary>
+		/// <summary><c>CPlayerSlot</c>. Networked: a write is sent to clients.</summary>
 		public int m_nPlayerSlot { get => Get<int>(__m_nPlayerSlot); set => Set(__m_nPlayerSlot, value); }
 
 		private static readonly SchemaField __m_nTeam = new("CPlayerTrackedStatsEntity", "m_nTeam");

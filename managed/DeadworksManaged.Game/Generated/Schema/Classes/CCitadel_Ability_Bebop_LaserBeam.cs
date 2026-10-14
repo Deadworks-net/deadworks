@@ -14,7 +14,7 @@ public static partial class Schema {
 		static string ISchemaClass<CCitadel_Ability_Bebop_LaserBeam>.NativeName => "CCitadel_Ability_Bebop_LaserBeam";
 
 		private static readonly SchemaField __m_bAirCast = new("CCitadel_Ability_Bebop_LaserBeam", "m_bAirCast");
-		/// <summary><c>bool</c>. Networked in build 6779: a write is sent to clients.</summary>
+		/// <summary><c>bool</c>. Networked: a write is sent to clients.</summary>
 		public bool m_bAirCast { get => Get<bool>(__m_bAirCast); set => Set(__m_bAirCast, value); }
 
 		private static readonly SchemaField __m_bZoomed = new("CCitadel_Ability_Bebop_LaserBeam", "m_bZoomed");
@@ -22,7 +22,7 @@ public static partial class Schema {
 		public bool m_bZoomed { get => Get<bool>(__m_bZoomed); set => Set(__m_bZoomed, value); }
 
 		private static readonly SchemaField __m_beam = new("CCitadel_Ability_Bebop_LaserBeam", "m_beam");
-		/// <summary><c>CCitadelAbilityBeam_t</c>. Networked in build 6779: a write is sent to clients.</summary>
+		/// <summary><c>CCitadelAbilityBeam_t</c>. Networked: a write is sent to clients.</summary>
 		public CCitadelAbilityBeam_t m_beam => Embedded<CCitadelAbilityBeam_t>(__m_beam);
 
 		private static readonly SchemaField __m_flAngleBetweenTrace = new("CCitadel_Ability_Bebop_LaserBeam", "m_flAngleBetweenTrace");

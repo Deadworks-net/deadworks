@@ -14,7 +14,7 @@ public static partial class Schema {
 		static string ISchemaClass<CCitadelClimbRopeTrigger>.NativeName => "CCitadelClimbRopeTrigger";
 
 		private static readonly SchemaField __m_bAlignCameraOnAutoDismount = new("CCitadelClimbRopeTrigger", "m_bAlignCameraOnAutoDismount");
-		/// <summary><c>bool</c>. Networked in build 6779: a write is sent to clients.</summary>
+		/// <summary><c>bool</c>. Networked: a write is sent to clients.</summary>
 		public bool m_bAlignCameraOnAutoDismount { get => Get<bool>(__m_bAlignCameraOnAutoDismount); set => Set(__m_bAlignCameraOnAutoDismount, value); }
 
 		private static readonly SchemaField __m_tModifier = new("CCitadelClimbRopeTrigger", "m_tModifier");

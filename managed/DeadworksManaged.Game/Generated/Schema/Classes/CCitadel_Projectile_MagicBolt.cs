@@ -14,7 +14,7 @@ public static partial class Schema {
 		static string ISchemaClass<CCitadel_Projectile_MagicBolt>.NativeName => "CCitadel_Projectile_MagicBolt";
 
 		private static readonly SchemaField __bIsCloneProjectile = new("CCitadel_Projectile_MagicBolt", "bIsCloneProjectile");
-		/// <summary><c>bool</c>. Networked in build 6779: a write is sent to clients.</summary>
+		/// <summary><c>bool</c>. Networked: a write is sent to clients.</summary>
 		public bool bIsCloneProjectile { get => Get<bool>(__bIsCloneProjectile); set => Set(__bIsCloneProjectile, value); }
 	}
 }

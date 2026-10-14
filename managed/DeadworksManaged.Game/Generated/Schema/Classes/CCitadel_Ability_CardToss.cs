@@ -14,7 +14,7 @@ public static partial class Schema {
 		static string ISchemaClass<CCitadel_Ability_CardToss>.NativeName => "CCitadel_Ability_CardToss";
 
 		private static readonly SchemaField __m_bCardIsFlying = new("CCitadel_Ability_CardToss", "m_bCardIsFlying");
-		/// <summary><c>bool</c>. Networked in build 6779: a write is sent to clients.</summary>
+		/// <summary><c>bool</c>. Networked: a write is sent to clients.</summary>
 		public bool m_bCardIsFlying { get => Get<bool>(__m_bCardIsFlying); set => Set(__m_bCardIsFlying, value); }
 
 		private static readonly SchemaField __m_nPreviousMaxCharges = new("CCitadel_Ability_CardToss", "m_nPreviousMaxCharges");

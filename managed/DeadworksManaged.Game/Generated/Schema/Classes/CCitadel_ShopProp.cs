@@ -14,11 +14,11 @@ public static partial class Schema {
 		static string ISchemaClass<CCitadel_ShopProp>.NativeName => "CCitadel_ShopProp";
 
 		private static readonly SchemaField __m_bIsShopOpen = new("CCitadel_ShopProp", "m_bIsShopOpen");
-		/// <summary><c>bool</c>. Networked in build 6779: a write is sent to clients.</summary>
+		/// <summary><c>bool</c>. Networked: a write is sent to clients.</summary>
 		public bool m_bIsShopOpen { get => Get<bool>(__m_bIsShopOpen); set => Set(__m_bIsShopOpen, value); }
 
 		private static readonly SchemaField __m_iLane = new("CCitadel_ShopProp", "m_iLane");
-		/// <summary><c>int32</c>. Networked in build 6779: a write is sent to clients.</summary>
+		/// <summary><c>int32</c>. Networked: a write is sent to clients.</summary>
 		public int m_iLane { get => Get<int>(__m_iLane); set => Set(__m_iLane, value); }
 
 		/// <summary>Fires the <c>SetShopOpen</c> input. Open or close this shop. Keep in sync with its trigger_item_shop.</summary>

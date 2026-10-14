@@ -18,7 +18,7 @@ public static partial class Schema {
 		public Vector3 m_angForced { get => Get<Vector3>(__m_angForced); set => Set(__m_angForced, value); }
 
 		private static readonly SchemaField __m_bAttackStartedWhileSliding = new("CCitadel_Ability_HoldMelee", "m_bAttackStartedWhileSliding");
-		/// <summary><c>bool</c>. Networked in build 6779: a write is sent to clients.</summary>
+		/// <summary><c>bool</c>. Networked: a write is sent to clients.</summary>
 		public bool m_bAttackStartedWhileSliding { get => Get<bool>(__m_bAttackStartedWhileSliding); set => Set(__m_bAttackStartedWhileSliding, value); }
 
 		private static readonly SchemaField __m_bCreatedChargeEffects = new("CCitadel_Ability_HoldMelee", "m_bCreatedChargeEffects");
@@ -26,31 +26,31 @@ public static partial class Schema {
 		public bool m_bCreatedChargeEffects { get => Get<bool>(__m_bCreatedChargeEffects); set => Set(__m_bCreatedChargeEffects, value); }
 
 		private static readonly SchemaField __m_eCurrentAttackState = new("CCitadel_Ability_HoldMelee", "m_eCurrentAttackState");
-		/// <summary><c>EMeleeHold_AttackState</c>. Networked in build 6779: a write is sent to clients.</summary>
+		/// <summary><c>EMeleeHold_AttackState</c>. Networked: a write is sent to clients.</summary>
 		public EMeleeHold_AttackState m_eCurrentAttackState { get => Get<EMeleeHold_AttackState>(__m_eCurrentAttackState); set => Set(__m_eCurrentAttackState, value); }
 
 		private static readonly SchemaField __m_eCurrentAttackType = new("CCitadel_Ability_HoldMelee", "m_eCurrentAttackType");
-		/// <summary><c>EMeleeHold_AttackType</c>. Networked in build 6779: a write is sent to clients.</summary>
+		/// <summary><c>EMeleeHold_AttackType</c>. Networked: a write is sent to clients.</summary>
 		public EMeleeHold_AttackType m_eCurrentAttackType { get => Get<EMeleeHold_AttackType>(__m_eCurrentAttackType); set => Set(__m_eCurrentAttackType, value); }
 
 		private static readonly SchemaField __m_flDashStartTime = new("CCitadel_Ability_HoldMelee", "m_flDashStartTime");
-		/// <summary><c>GameTime_t</c>. Networked in build 6779: a write is sent to clients.</summary>
+		/// <summary><c>GameTime_t</c>. Networked: a write is sent to clients.</summary>
 		public GameTime m_flDashStartTime { get => Get<GameTime>(__m_flDashStartTime); set => Set(__m_flDashStartTime, value); }
 
 		private static readonly SchemaField __m_flLightChainEndTime = new("CCitadel_Ability_HoldMelee", "m_flLightChainEndTime");
-		/// <summary><c>GameTime_t</c>. Networked in build 6779: a write is sent to clients.</summary>
+		/// <summary><c>GameTime_t</c>. Networked: a write is sent to clients.</summary>
 		public GameTime m_flLightChainEndTime { get => Get<GameTime>(__m_flLightChainEndTime); set => Set(__m_flLightChainEndTime, value); }
 
 		private static readonly SchemaField __m_flStateStartTime = new("CCitadel_Ability_HoldMelee", "m_flStateStartTime");
-		/// <summary><c>GameTime_t</c>. Networked in build 6779: a write is sent to clients.</summary>
+		/// <summary><c>GameTime_t</c>. Networked: a write is sent to clients.</summary>
 		public GameTime m_flStateStartTime { get => Get<GameTime>(__m_flStateStartTime); set => Set(__m_flStateStartTime, value); }
 
 		private static readonly SchemaField __m_nLightChainCount = new("CCitadel_Ability_HoldMelee", "m_nLightChainCount");
-		/// <summary><c>int32</c>. Networked in build 6779: a write is sent to clients.</summary>
+		/// <summary><c>int32</c>. Networked: a write is sent to clients.</summary>
 		public int m_nLightChainCount { get => Get<int>(__m_nLightChainCount); set => Set(__m_nLightChainCount, value); }
 
 		private static readonly SchemaField __m_vAirDashDir = new("CCitadel_Ability_HoldMelee", "m_vAirDashDir");
-		/// <summary><c>Vector</c>. Networked in build 6779: a write is sent to clients.</summary>
+		/// <summary><c>Vector</c>. Networked: a write is sent to clients.</summary>
 		public Vector3 m_vAirDashDir { get => Get<Vector3>(__m_vAirDashDir); set => Set(__m_vAirDashDir, value); }
 
 		private static readonly SchemaField __m_vGoalDir = new("CCitadel_Ability_HoldMelee", "m_vGoalDir");

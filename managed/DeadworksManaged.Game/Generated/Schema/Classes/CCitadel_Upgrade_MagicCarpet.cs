@@ -14,11 +14,11 @@ public static partial class Schema {
 		static string ISchemaClass<CCitadel_Upgrade_MagicCarpet>.NativeName => "CCitadel_Upgrade_MagicCarpet";
 
 		private static readonly SchemaField __m_bFlying = new("CCitadel_Upgrade_MagicCarpet", "m_bFlying");
-		/// <summary><c>bool</c>. Networked in build 6779: a write is sent to clients.</summary>
+		/// <summary><c>bool</c>. Networked: a write is sent to clients.</summary>
 		public bool m_bFlying { get => Get<bool>(__m_bFlying); set => Set(__m_bFlying, value); }
 
 		private static readonly SchemaField __m_bSummoning = new("CCitadel_Upgrade_MagicCarpet", "m_bSummoning");
-		/// <summary><c>bool</c>. Networked in build 6779: a write is sent to clients.</summary>
+		/// <summary><c>bool</c>. Networked: a write is sent to clients.</summary>
 		public bool m_bSummoning { get => Get<bool>(__m_bSummoning); set => Set(__m_bSummoning, value); }
 
 		private static readonly SchemaField __m_flFlyingStartTime = new("CCitadel_Upgrade_MagicCarpet", "m_flFlyingStartTime");

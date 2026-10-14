@@ -14,35 +14,35 @@ public static partial class Schema {
 		static string ISchemaClass<CCitadelSoundOpvarSetOBB>.NativeName => "CCitadelSoundOpvarSetOBB";
 
 		private static readonly SchemaField __m_iszOperatorName = new("CCitadelSoundOpvarSetOBB", "m_iszOperatorName");
-		/// <summary><c>CUtlSymbolLarge</c>. Networked in build 6779: a write is sent to clients.</summary>
+		/// <summary><c>CUtlSymbolLarge</c>. Networked: a write is sent to clients.</summary>
 		public string m_iszOperatorName { get => GetString(__m_iszOperatorName); set => SetString(__m_iszOperatorName, value); }
 
 		private static readonly SchemaField __m_iszOpvarName = new("CCitadelSoundOpvarSetOBB", "m_iszOpvarName");
-		/// <summary><c>CUtlSymbolLarge</c>. Networked in build 6779: a write is sent to clients.</summary>
+		/// <summary><c>CUtlSymbolLarge</c>. Networked: a write is sent to clients.</summary>
 		public string m_iszOpvarName { get => GetString(__m_iszOpvarName); set => SetString(__m_iszOpvarName, value); }
 
 		private static readonly SchemaField __m_iszStackName = new("CCitadelSoundOpvarSetOBB", "m_iszStackName");
-		/// <summary><c>CUtlSymbolLarge</c>. Networked in build 6779: a write is sent to clients.</summary>
+		/// <summary><c>CUtlSymbolLarge</c>. Networked: a write is sent to clients.</summary>
 		public string m_iszStackName { get => GetString(__m_iszStackName); set => SetString(__m_iszStackName, value); }
 
 		private static readonly SchemaField __m_nAABBDirection = new("CCitadelSoundOpvarSetOBB", "m_nAABBDirection");
-		/// <summary><c>int32</c>. Networked in build 6779: a write is sent to clients.</summary>
+		/// <summary><c>int32</c>. Networked: a write is sent to clients.</summary>
 		public int m_nAABBDirection { get => Get<int>(__m_nAABBDirection); set => Set(__m_nAABBDirection, value); }
 
 		private static readonly SchemaField __m_vDistanceInnerMaxs = new("CCitadelSoundOpvarSetOBB", "m_vDistanceInnerMaxs");
-		/// <summary><c>Vector</c>. Networked in build 6779: a write is sent to clients.</summary>
+		/// <summary><c>Vector</c>. Networked: a write is sent to clients.</summary>
 		public Vector3 m_vDistanceInnerMaxs { get => Get<Vector3>(__m_vDistanceInnerMaxs); set => Set(__m_vDistanceInnerMaxs, value); }
 
 		private static readonly SchemaField __m_vDistanceInnerMins = new("CCitadelSoundOpvarSetOBB", "m_vDistanceInnerMins");
-		/// <summary><c>Vector</c>. Networked in build 6779: a write is sent to clients.</summary>
+		/// <summary><c>Vector</c>. Networked: a write is sent to clients.</summary>
 		public Vector3 m_vDistanceInnerMins { get => Get<Vector3>(__m_vDistanceInnerMins); set => Set(__m_vDistanceInnerMins, value); }
 
 		private static readonly SchemaField __m_vDistanceOuterMaxs = new("CCitadelSoundOpvarSetOBB", "m_vDistanceOuterMaxs");
-		/// <summary><c>Vector</c>. Networked in build 6779: a write is sent to clients.</summary>
+		/// <summary><c>Vector</c>. Networked: a write is sent to clients.</summary>
 		public Vector3 m_vDistanceOuterMaxs { get => Get<Vector3>(__m_vDistanceOuterMaxs); set => Set(__m_vDistanceOuterMaxs, value); }
 
 		private static readonly SchemaField __m_vDistanceOuterMins = new("CCitadelSoundOpvarSetOBB", "m_vDistanceOuterMins");
-		/// <summary><c>Vector</c>. Networked in build 6779: a write is sent to clients.</summary>
+		/// <summary><c>Vector</c>. Networked: a write is sent to clients.</summary>
 		public Vector3 m_vDistanceOuterMins { get => Get<Vector3>(__m_vDistanceOuterMins); set => Set(__m_vDistanceOuterMins, value); }
 	}
 }

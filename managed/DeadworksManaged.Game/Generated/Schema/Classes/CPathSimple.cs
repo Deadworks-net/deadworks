@@ -14,7 +14,7 @@ public static partial class Schema {
 		static string ISchemaClass<CPathSimple>.NativeName => "CPathSimple";
 
 		private static readonly SchemaField __m_CPathQueryComponent = new("CPathSimple", "m_CPathQueryComponent");
-		/// <summary><c>CPathQueryComponent</c>. Networked in build 6779: a write is sent to clients.</summary>
+		/// <summary><c>CPathQueryComponent</c>. Networked: a write is sent to clients.</summary>
 		public CPathQueryComponent m_CPathQueryComponent => Embedded<CPathQueryComponent>(__m_CPathQueryComponent);
 
 		private static readonly SchemaField __m_bClosedLoop = new("CPathSimple", "m_bClosedLoop");
@@ -22,7 +22,7 @@ public static partial class Schema {
 		public bool m_bClosedLoop { get => Get<bool>(__m_bClosedLoop); set => Set(__m_bClosedLoop, value); }
 
 		private static readonly SchemaField __m_pathString = new("CPathSimple", "m_pathString");
-		/// <summary><c>CUtlString</c>. Networked in build 6779: a write is sent to clients.</summary>
+		/// <summary><c>CUtlString</c>. Networked: a write is sent to clients.</summary>
 		public string m_pathString => GetString(__m_pathString);
 	}
 }

@@ -18,11 +18,11 @@ public static partial class Schema {
 		public bool m_bInCombat { get => Get<bool>(__m_bInCombat); set => Set(__m_bInCombat, value); }
 
 		private static readonly SchemaField __m_bSprinting = new("CCitadel_Ability_Sprint", "m_bSprinting");
-		/// <summary><c>bool</c>. Networked in build 6779: a write is sent to clients.</summary>
+		/// <summary><c>bool</c>. Networked: a write is sent to clients.</summary>
 		public bool m_bSprinting { get => Get<bool>(__m_bSprinting); set => Set(__m_bSprinting, value); }
 
 		private static readonly SchemaField __m_flSprintStartTime = new("CCitadel_Ability_Sprint", "m_flSprintStartTime");
-		/// <summary><c>GameTime_t</c>. Networked in build 6779: a write is sent to clients.</summary>
+		/// <summary><c>GameTime_t</c>. Networked: a write is sent to clients.</summary>
 		public GameTime m_flSprintStartTime { get => Get<GameTime>(__m_flSprintStartTime); set => Set(__m_flSprintStartTime, value); }
 
 		private static readonly SchemaField __m_nSprintParticle = new("CCitadel_Ability_Sprint", "m_nSprintParticle");

@@ -14,7 +14,7 @@ public static partial class Schema {
 		static string ISchemaClass<CProjectile_KnightCharge_Projectile>.NativeName => "CProjectile_KnightCharge_Projectile";
 
 		private static readonly SchemaField __m_CCitadelMinimapComponent = new("CProjectile_KnightCharge_Projectile", "m_CCitadelMinimapComponent");
-		/// <summary><c>CCitadelMinimapComponent</c>. Networked in build 6779: a write is sent to clients.</summary>
+		/// <summary><c>CCitadelMinimapComponent</c>. Networked: a write is sent to clients.</summary>
 		public CCitadelMinimapComponent m_CCitadelMinimapComponent => Embedded<CCitadelMinimapComponent>(__m_CCitadelMinimapComponent);
 	}
 }

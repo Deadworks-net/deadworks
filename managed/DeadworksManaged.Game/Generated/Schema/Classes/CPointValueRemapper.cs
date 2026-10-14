@@ -42,7 +42,7 @@ public static partial class Schema {
 		public RawField m_PositionDelta => Raw(__m_PositionDelta, "CEntityOutputTemplate<float32>");
 
 		private static readonly SchemaField __m_bDisabled = new("CPointValueRemapper", "m_bDisabled");
-		/// <summary><c>bool</c>. Networked in build 6779: a write is sent to clients.</summary>
+		/// <summary><c>bool</c>. Networked: a write is sent to clients.</summary>
 		public bool m_bDisabled { get => Get<bool>(__m_bDisabled); set => Set(__m_bDisabled, value); }
 
 		private static readonly SchemaField __m_bEngaged = new("CPointValueRemapper", "m_bEngaged");
@@ -54,11 +54,11 @@ public static partial class Schema {
 		public bool m_bFirstUpdate { get => Get<bool>(__m_bFirstUpdate); set => Set(__m_bFirstUpdate, value); }
 
 		private static readonly SchemaField __m_bRequiresUseKey = new("CPointValueRemapper", "m_bRequiresUseKey");
-		/// <summary><c>bool</c>. Networked in build 6779: a write is sent to clients.</summary>
+		/// <summary><c>bool</c>. Networked: a write is sent to clients.</summary>
 		public bool m_bRequiresUseKey { get => Get<bool>(__m_bRequiresUseKey); set => Set(__m_bRequiresUseKey, value); }
 
 		private static readonly SchemaField __m_bUpdateOnClient = new("CPointValueRemapper", "m_bUpdateOnClient");
-		/// <summary><c>bool</c>. Networked in build 6779: a write is sent to clients.</summary>
+		/// <summary><c>bool</c>. Networked: a write is sent to clients.</summary>
 		public bool m_bUpdateOnClient { get => Get<bool>(__m_bUpdateOnClient); set => Set(__m_bUpdateOnClient, value); }
 
 		private static readonly SchemaField __m_flCurrentMomentum = new("CPointValueRemapper", "m_flCurrentMomentum");
@@ -70,23 +70,23 @@ public static partial class Schema {
 		public float m_flCustomOutputValue { get => Get<float>(__m_flCustomOutputValue); set => Set(__m_flCustomOutputValue, value); }
 
 		private static readonly SchemaField __m_flDisengageDistance = new("CPointValueRemapper", "m_flDisengageDistance");
-		/// <summary><c>float32</c>. Networked in build 6779: a write is sent to clients.</summary>
+		/// <summary><c>float32</c>. Networked: a write is sent to clients.</summary>
 		public float m_flDisengageDistance { get => Get<float>(__m_flDisengageDistance); set => Set(__m_flDisengageDistance, value); }
 
 		private static readonly SchemaField __m_flEngageDistance = new("CPointValueRemapper", "m_flEngageDistance");
-		/// <summary><c>float32</c>. Networked in build 6779: a write is sent to clients.</summary>
+		/// <summary><c>float32</c>. Networked: a write is sent to clients.</summary>
 		public float m_flEngageDistance { get => Get<float>(__m_flEngageDistance); set => Set(__m_flEngageDistance, value); }
 
 		private static readonly SchemaField __m_flInputOffset = new("CPointValueRemapper", "m_flInputOffset");
-		/// <summary><c>float32</c>. Networked in build 6779: a write is sent to clients.</summary>
+		/// <summary><c>float32</c>. Networked: a write is sent to clients.</summary>
 		public float m_flInputOffset { get => Get<float>(__m_flInputOffset); set => Set(__m_flInputOffset, value); }
 
 		private static readonly SchemaField __m_flMaximumChangePerSecond = new("CPointValueRemapper", "m_flMaximumChangePerSecond");
-		/// <summary><c>float32</c>. Networked in build 6779: a write is sent to clients.</summary>
+		/// <summary><c>float32</c>. Networked: a write is sent to clients.</summary>
 		public float m_flMaximumChangePerSecond { get => Get<float>(__m_flMaximumChangePerSecond); set => Set(__m_flMaximumChangePerSecond, value); }
 
 		private static readonly SchemaField __m_flMomentumModifier = new("CPointValueRemapper", "m_flMomentumModifier");
-		/// <summary><c>float32</c>. Networked in build 6779: a write is sent to clients.</summary>
+		/// <summary><c>float32</c>. Networked: a write is sent to clients.</summary>
 		public float m_flMomentumModifier { get => Get<float>(__m_flMomentumModifier); set => Set(__m_flMomentumModifier, value); }
 
 		private static readonly SchemaField __m_flPreviousUpdateTickTime = new("CPointValueRemapper", "m_flPreviousUpdateTickTime");
@@ -102,19 +102,19 @@ public static partial class Schema {
 		public float m_flRatchetOffset { get => Get<float>(__m_flRatchetOffset); set => Set(__m_flRatchetOffset, value); }
 
 		private static readonly SchemaField __m_flSnapValue = new("CPointValueRemapper", "m_flSnapValue");
-		/// <summary><c>float32</c>. Networked in build 6779: a write is sent to clients.</summary>
+		/// <summary><c>float32</c>. Networked: a write is sent to clients.</summary>
 		public float m_flSnapValue { get => Get<float>(__m_flSnapValue); set => Set(__m_flSnapValue, value); }
 
 		private static readonly SchemaField __m_hOutputEntities = new("CPointValueRemapper", "m_hOutputEntities");
-		/// <summary><c>CNetworkUtlVectorBase&lt;CHandle&lt;CBaseEntity&gt;&gt;</c>. Networked in build 6779: a write is sent to clients.</summary>
+		/// <summary><c>CNetworkUtlVectorBase&lt;CHandle&lt;CBaseEntity&gt;&gt;</c>. Networked: a write is sent to clients.</summary>
 		public SchemaHandleList<CBaseEntity> m_hOutputEntities => new(this, __m_hOutputEntities, ListStorage.Vector);
 
 		private static readonly SchemaField __m_hRemapLineEnd = new("CPointValueRemapper", "m_hRemapLineEnd");
-		/// <summary><c>CHandle&lt;CBaseEntity&gt;</c>. Networked in build 6779: a write is sent to clients.</summary>
+		/// <summary><c>CHandle&lt;CBaseEntity&gt;</c>. Networked: a write is sent to clients.</summary>
 		public CBaseEntity? m_hRemapLineEnd { get => GetHandle<CBaseEntity>(__m_hRemapLineEnd); set => SetHandle(__m_hRemapLineEnd, value); }
 
 		private static readonly SchemaField __m_hRemapLineStart = new("CPointValueRemapper", "m_hRemapLineStart");
-		/// <summary><c>CHandle&lt;CBaseEntity&gt;</c>. Networked in build 6779: a write is sent to clients.</summary>
+		/// <summary><c>CHandle&lt;CBaseEntity&gt;</c>. Networked: a write is sent to clients.</summary>
 		public CBaseEntity? m_hRemapLineStart { get => GetHandle<CBaseEntity>(__m_hRemapLineStart); set => SetHandle(__m_hRemapLineStart, value); }
 
 		private static readonly SchemaField __m_hUsingPlayer = new("CPointValueRemapper", "m_hUsingPlayer");
@@ -166,23 +166,23 @@ public static partial class Schema {
 		public string m_iszSoundReachedValueZero { get => GetString(__m_iszSoundReachedValueZero); set => SetString(__m_iszSoundReachedValueZero, value); }
 
 		private static readonly SchemaField __m_nHapticsType = new("CPointValueRemapper", "m_nHapticsType");
-		/// <summary><c>ValueRemapperHapticsType_t</c>. Networked in build 6779: a write is sent to clients.</summary>
+		/// <summary><c>ValueRemapperHapticsType_t</c>. Networked: a write is sent to clients.</summary>
 		public ValueRemapperHapticsType_t m_nHapticsType { get => Get<ValueRemapperHapticsType_t>(__m_nHapticsType); set => Set(__m_nHapticsType, value); }
 
 		private static readonly SchemaField __m_nInputType = new("CPointValueRemapper", "m_nInputType");
-		/// <summary><c>ValueRemapperInputType_t</c>. Networked in build 6779: a write is sent to clients.</summary>
+		/// <summary><c>ValueRemapperInputType_t</c>. Networked: a write is sent to clients.</summary>
 		public ValueRemapperInputType_t m_nInputType { get => Get<ValueRemapperInputType_t>(__m_nInputType); set => Set(__m_nInputType, value); }
 
 		private static readonly SchemaField __m_nMomentumType = new("CPointValueRemapper", "m_nMomentumType");
-		/// <summary><c>ValueRemapperMomentumType_t</c>. Networked in build 6779: a write is sent to clients.</summary>
+		/// <summary><c>ValueRemapperMomentumType_t</c>. Networked: a write is sent to clients.</summary>
 		public ValueRemapperMomentumType_t m_nMomentumType { get => Get<ValueRemapperMomentumType_t>(__m_nMomentumType); set => Set(__m_nMomentumType, value); }
 
 		private static readonly SchemaField __m_nOutputType = new("CPointValueRemapper", "m_nOutputType");
-		/// <summary><c>ValueRemapperOutputType_t</c>. Networked in build 6779: a write is sent to clients.</summary>
+		/// <summary><c>ValueRemapperOutputType_t</c>. Networked: a write is sent to clients.</summary>
 		public ValueRemapperOutputType_t m_nOutputType { get => Get<ValueRemapperOutputType_t>(__m_nOutputType); set => Set(__m_nOutputType, value); }
 
 		private static readonly SchemaField __m_nRatchetType = new("CPointValueRemapper", "m_nRatchetType");
-		/// <summary><c>ValueRemapperRatchetType_t</c>. Networked in build 6779: a write is sent to clients.</summary>
+		/// <summary><c>ValueRemapperRatchetType_t</c>. Networked: a write is sent to clients.</summary>
 		public ValueRemapperRatchetType_t m_nRatchetType { get => Get<ValueRemapperRatchetType_t>(__m_nRatchetType); set => Set(__m_nRatchetType, value); }
 
 		private static readonly SchemaField __m_vecPreviousTestPoint = new("CPointValueRemapper", "m_vecPreviousTestPoint");

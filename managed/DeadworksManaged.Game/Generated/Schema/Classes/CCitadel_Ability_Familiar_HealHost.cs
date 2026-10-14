@@ -14,7 +14,7 @@ public static partial class Schema {
 		static string ISchemaClass<CCitadel_Ability_Familiar_HealHost>.NativeName => "CCitadel_Ability_Familiar_HealHost";
 
 		private static readonly SchemaField __m_flOverrideCooldown = new("CCitadel_Ability_Familiar_HealHost", "m_flOverrideCooldown");
-		/// <summary><c>float32</c>. Networked in build 6779: a write is sent to clients.</summary>
+		/// <summary><c>float32</c>. Networked: a write is sent to clients.</summary>
 		public float m_flOverrideCooldown { get => Get<float>(__m_flOverrideCooldown); set => Set(__m_flOverrideCooldown, value); }
 
 		/// <summary>The data entry this was created from, as <see cref="CCitadel_Ability_Familiar_HealHostVData"/>, or null if it has none.</summary>

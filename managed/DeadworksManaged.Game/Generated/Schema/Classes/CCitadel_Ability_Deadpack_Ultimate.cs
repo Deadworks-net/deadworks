@@ -14,35 +14,35 @@ public static partial class Schema {
 		static string ISchemaClass<CCitadel_Ability_Deadpack_Ultimate>.NativeName => "CCitadel_Ability_Deadpack_Ultimate";
 
 		private static readonly SchemaField __m_bIsApproachingApex = new("CCitadel_Ability_Deadpack_Ultimate", "m_bIsApproachingApex");
-		/// <summary><c>bool</c>. Networked in build 6779: a write is sent to clients.</summary>
+		/// <summary><c>bool</c>. Networked: a write is sent to clients.</summary>
 		public bool m_bIsApproachingApex { get => Get<bool>(__m_bIsApproachingApex); set => Set(__m_bIsApproachingApex, value); }
 
 		private static readonly SchemaField __m_eState = new("CCitadel_Ability_Deadpack_Ultimate", "m_eState");
-		/// <summary><c>EUltimateState_t</c>. Networked in build 6779: a write is sent to clients.</summary>
+		/// <summary><c>EUltimateState_t</c>. Networked: a write is sent to clients.</summary>
 		public EUltimateState_t m_eState { get => Get<EUltimateState_t>(__m_eState); set => Set(__m_eState, value); }
 
 		private static readonly SchemaField __m_flGoingUpTargetElevation = new("CCitadel_Ability_Deadpack_Ultimate", "m_flGoingUpTargetElevation");
-		/// <summary><c>float32</c>. Networked in build 6779: a write is sent to clients.</summary>
+		/// <summary><c>float32</c>. Networked: a write is sent to clients.</summary>
 		public float m_flGoingUpTargetElevation { get => Get<float>(__m_flGoingUpTargetElevation); set => Set(__m_flGoingUpTargetElevation, value); }
 
 		private static readonly SchemaField __m_hTarget = new("CCitadel_Ability_Deadpack_Ultimate", "m_hTarget");
-		/// <summary><c>CHandle&lt;CBaseEntity&gt;</c>. Networked in build 6779: a write is sent to clients.</summary>
+		/// <summary><c>CHandle&lt;CBaseEntity&gt;</c>. Networked: a write is sent to clients.</summary>
 		public CBaseEntity? m_hTarget { get => GetHandle<CBaseEntity>(__m_hTarget); set => SetHandle(__m_hTarget, value); }
 
 		private static readonly SchemaField __m_qStateAnglesBegin = new("CCitadel_Ability_Deadpack_Ultimate", "m_qStateAnglesBegin");
-		/// <summary><c>QAngle</c>. Networked in build 6779: a write is sent to clients.</summary>
+		/// <summary><c>QAngle</c>. Networked: a write is sent to clients.</summary>
 		public Vector3 m_qStateAnglesBegin { get => Get<Vector3>(__m_qStateAnglesBegin); set => Set(__m_qStateAnglesBegin, value); }
 
 		private static readonly SchemaField __m_tLastUpwardVelocityTime = new("CCitadel_Ability_Deadpack_Ultimate", "m_tLastUpwardVelocityTime");
-		/// <summary><c>GameTime_t</c>. Networked in build 6779: a write is sent to clients.</summary>
+		/// <summary><c>GameTime_t</c>. Networked: a write is sent to clients.</summary>
 		public GameTime m_tLastUpwardVelocityTime { get => Get<GameTime>(__m_tLastUpwardVelocityTime); set => Set(__m_tLastUpwardVelocityTime, value); }
 
 		private static readonly SchemaField __m_tStateTimeBegin = new("CCitadel_Ability_Deadpack_Ultimate", "m_tStateTimeBegin");
-		/// <summary><c>GameTime_t</c>. Networked in build 6779: a write is sent to clients.</summary>
+		/// <summary><c>GameTime_t</c>. Networked: a write is sent to clients.</summary>
 		public GameTime m_tStateTimeBegin { get => Get<GameTime>(__m_tStateTimeBegin); set => Set(__m_tStateTimeBegin, value); }
 
 		private static readonly SchemaField __m_vStateOriginBegin = new("CCitadel_Ability_Deadpack_Ultimate", "m_vStateOriginBegin");
-		/// <summary><c>VectorWS</c>. Networked in build 6779: a write is sent to clients.</summary>
+		/// <summary><c>VectorWS</c>. Networked: a write is sent to clients.</summary>
 		public Vector3 m_vStateOriginBegin { get => Get<Vector3>(__m_vStateOriginBegin); set => Set(__m_vStateOriginBegin, value); }
 
 		/// <summary>The data entry this was created from, as <see cref="CCitadel_Ability_Deadpack_UltimateVData"/>, or null if it has none.</summary>

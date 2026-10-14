@@ -18,7 +18,7 @@ public static partial class Schema {
 		public bool m_bStartEnabled { get => Get<bool>(__m_bStartEnabled); set => Set(__m_bStartEnabled, value); }
 
 		private static readonly SchemaField __m_hActivator = new("CPointClientUIDialog", "m_hActivator");
-		/// <summary><c>CHandle&lt;CBaseEntity&gt;</c>. Networked in build 6779: a write is sent to clients.</summary>
+		/// <summary><c>CHandle&lt;CBaseEntity&gt;</c>. Networked: a write is sent to clients.</summary>
 		public CBaseEntity? m_hActivator { get => GetHandle<CBaseEntity>(__m_hActivator); set => SetHandle(__m_hActivator, value); }
 	}
 }

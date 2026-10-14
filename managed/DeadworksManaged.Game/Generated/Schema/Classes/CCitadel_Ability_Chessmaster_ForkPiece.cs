@@ -14,7 +14,7 @@ public static partial class Schema {
 		static string ISchemaClass<CCitadel_Ability_Chessmaster_ForkPiece>.NativeName => "CCitadel_Ability_Chessmaster_ForkPiece";
 
 		private static readonly SchemaField __m_bActive = new("CCitadel_Ability_Chessmaster_ForkPiece", "m_bActive");
-		/// <summary><c>bool</c>. Networked in build 6779: a write is sent to clients.</summary>
+		/// <summary><c>bool</c>. Networked: a write is sent to clients.</summary>
 		public bool m_bActive { get => Get<bool>(__m_bActive); set => Set(__m_bActive, value); }
 
 		private static readonly SchemaField __m_cProjectileLeft = new("CCitadel_Ability_Chessmaster_ForkPiece", "m_cProjectileLeft");
@@ -26,7 +26,7 @@ public static partial class Schema {
 		public CCitadelProjectile? m_cProjectileRight { get => GetHandle<CCitadelProjectile>(__m_cProjectileRight); set => SetHandle(__m_cProjectileRight, value); }
 
 		private static readonly SchemaField __m_hCameraTarget = new("CCitadel_Ability_Chessmaster_ForkPiece", "m_hCameraTarget");
-		/// <summary><c>CHandle&lt;CBaseEntity&gt;</c>. Networked in build 6779: a write is sent to clients.</summary>
+		/// <summary><c>CHandle&lt;CBaseEntity&gt;</c>. Networked: a write is sent to clients.</summary>
 		public CBaseEntity? m_hCameraTarget { get => GetHandle<CBaseEntity>(__m_hCameraTarget); set => SetHandle(__m_hCameraTarget, value); }
 
 		/// <summary>The data entry this was created from, as <see cref="CCitadel_Ability_Chessmaster_ForkPieceVData"/>, or null if it has none.</summary>

@@ -14,7 +14,7 @@ public static partial class Schema {
 		static string ISchemaClass<CCitadel_Ability_Bounce_Pad>.NativeName => "CCitadel_Ability_Bounce_Pad";
 
 		private static readonly SchemaField __m_angFacing = new("CCitadel_Ability_Bounce_Pad", "m_angFacing");
-		/// <summary><c>QAngle</c>. Networked in build 6779: a write is sent to clients.</summary>
+		/// <summary><c>QAngle</c>. Networked: a write is sent to clients.</summary>
 		public Vector3 m_angFacing { get => Get<Vector3>(__m_angFacing); set => Set(__m_angFacing, value); }
 
 		private static readonly SchemaField __m_bAnglesSet = new("CCitadel_Ability_Bounce_Pad", "m_bAnglesSet");

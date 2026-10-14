@@ -14,15 +14,15 @@ public static partial class Schema {
 		static string ISchemaClass<CCitadel_Ability_TestHero_WallCling>.NativeName => "CCitadel_Ability_TestHero_WallCling";
 
 		private static readonly SchemaField __m_vecLastVelocity = new("CCitadel_Ability_TestHero_WallCling", "m_vecLastVelocity");
-		/// <summary><c>Vector</c>. Networked in build 6779: a write is sent to clients.</summary>
+		/// <summary><c>Vector</c>. Networked: a write is sent to clients.</summary>
 		public Vector3 m_vecLastVelocity { get => Get<Vector3>(__m_vecLastVelocity); set => Set(__m_vecLastVelocity, value); }
 
 		private static readonly SchemaField __m_vecWallClingNormal = new("CCitadel_Ability_TestHero_WallCling", "m_vecWallClingNormal");
-		/// <summary><c>Vector</c>. Networked in build 6779: a write is sent to clients.</summary>
+		/// <summary><c>Vector</c>. Networked: a write is sent to clients.</summary>
 		public Vector3 m_vecWallClingNormal { get => Get<Vector3>(__m_vecWallClingNormal); set => Set(__m_vecWallClingNormal, value); }
 
 		private static readonly SchemaField __m_vecWallPosition = new("CCitadel_Ability_TestHero_WallCling", "m_vecWallPosition");
-		/// <summary><c>VectorWS</c>. Networked in build 6779: a write is sent to clients.</summary>
+		/// <summary><c>VectorWS</c>. Networked: a write is sent to clients.</summary>
 		public Vector3 m_vecWallPosition { get => Get<Vector3>(__m_vecWallPosition); set => Set(__m_vecWallPosition, value); }
 
 		/// <summary>The data entry this was created from, as <see cref="CCitadel_Ability_TestHero_WallClingVData"/>, or null if it has none.</summary>

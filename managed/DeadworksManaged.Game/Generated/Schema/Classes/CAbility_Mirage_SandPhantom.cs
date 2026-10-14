@@ -14,7 +14,7 @@ public static partial class Schema {
 		static string ISchemaClass<CAbility_Mirage_SandPhantom>.NativeName => "CAbility_Mirage_SandPhantom";
 
 		private static readonly SchemaField __m_bHasVictims = new("CAbility_Mirage_SandPhantom", "m_bHasVictims");
-		/// <summary><c>bool</c>. Networked in build 6779: a write is sent to clients.</summary>
+		/// <summary><c>bool</c>. Networked: a write is sent to clients.</summary>
 		public bool m_bHasVictims { get => Get<bool>(__m_bHasVictims); set => Set(__m_bHasVictims, value); }
 
 		private static readonly SchemaField __m_vecVictimModifiers = new("CAbility_Mirage_SandPhantom", "m_vecVictimModifiers");

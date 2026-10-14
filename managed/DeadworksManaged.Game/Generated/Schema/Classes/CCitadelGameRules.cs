@@ -22,15 +22,15 @@ public static partial class Schema {
 		public CountdownTimer m_CheckIdleTimer => Embedded<CountdownTimer>(__m_CheckIdleTimer);
 
 		private static readonly SchemaField __m_ExperimentTokenHashCode = new("CCitadelGameRules", "m_ExperimentTokenHashCode");
-		/// <summary><c>uint32</c>. Networked in build 6779: a write is sent to clients.</summary>
+		/// <summary><c>uint32</c>. Networked: a write is sent to clients.</summary>
 		public uint m_ExperimentTokenHashCode { get => Get<uint>(__m_ExperimentTokenHashCode); set => Set(__m_ExperimentTokenHashCode, value); }
 
 		private static readonly SchemaField __m_bAbandonTriggerAmber = new("CCitadelGameRules", "m_bAbandonTriggerAmber");
-		/// <summary><c>bool</c>. Networked in build 6779: a write is sent to clients.</summary>
+		/// <summary><c>bool</c>. Networked: a write is sent to clients.</summary>
 		public bool m_bAbandonTriggerAmber { get => Get<bool>(__m_bAbandonTriggerAmber); set => Set(__m_bAbandonTriggerAmber, value); }
 
 		private static readonly SchemaField __m_bAbandonTriggerSapphire = new("CCitadelGameRules", "m_bAbandonTriggerSapphire");
-		/// <summary><c>bool</c>. Networked in build 6779: a write is sent to clients.</summary>
+		/// <summary><c>bool</c>. Networked: a write is sent to clients.</summary>
 		public bool m_bAbandonTriggerSapphire { get => Get<bool>(__m_bAbandonTriggerSapphire); set => Set(__m_bAbandonTriggerSapphire, value); }
 
 		private static readonly SchemaField __m_bDontUploadStats = new("CCitadelGameRules", "m_bDontUploadStats");
@@ -42,23 +42,23 @@ public static partial class Schema {
 		public bool m_bEarlyCratesSpawned { get => Get<bool>(__m_bEarlyCratesSpawned); set => Set(__m_bEarlyCratesSpawned, value); }
 
 		private static readonly SchemaField __m_bEnemyInAmberBase = new("CCitadelGameRules", "m_bEnemyInAmberBase");
-		/// <summary><c>bool</c>. Networked in build 6779: a write is sent to clients.</summary>
+		/// <summary><c>bool</c>. Networked: a write is sent to clients.</summary>
 		public bool m_bEnemyInAmberBase { get => Get<bool>(__m_bEnemyInAmberBase); set => Set(__m_bEnemyInAmberBase, value); }
 
 		private static readonly SchemaField __m_bEnemyInSapphireBase = new("CCitadelGameRules", "m_bEnemyInSapphireBase");
-		/// <summary><c>bool</c>. Networked in build 6779: a write is sent to clients.</summary>
+		/// <summary><c>bool</c>. Networked: a write is sent to clients.</summary>
 		public bool m_bEnemyInSapphireBase { get => Get<bool>(__m_bEnemyInSapphireBase); set => Set(__m_bEnemyInSapphireBase, value); }
 
 		private static readonly SchemaField __m_bEnemyPlayersInAmberBase = new("CCitadelGameRules", "m_bEnemyPlayersInAmberBase");
-		/// <summary><c>bool</c>. Networked in build 6779: a write is sent to clients.</summary>
+		/// <summary><c>bool</c>. Networked: a write is sent to clients.</summary>
 		public bool m_bEnemyPlayersInAmberBase { get => Get<bool>(__m_bEnemyPlayersInAmberBase); set => Set(__m_bEnemyPlayersInAmberBase, value); }
 
 		private static readonly SchemaField __m_bEnemyPlayersInSapphireBase = new("CCitadelGameRules", "m_bEnemyPlayersInSapphireBase");
-		/// <summary><c>bool</c>. Networked in build 6779: a write is sent to clients.</summary>
+		/// <summary><c>bool</c>. Networked: a write is sent to clients.</summary>
 		public bool m_bEnemyPlayersInSapphireBase { get => Get<bool>(__m_bEnemyPlayersInSapphireBase); set => Set(__m_bEnemyPlayersInSapphireBase, value); }
 
 		private static readonly SchemaField __m_bFreezePeriod = new("CCitadelGameRules", "m_bFreezePeriod");
-		/// <summary><c>bool</c>. Networked in build 6779: a write is sent to clients.</summary>
+		/// <summary><c>bool</c>. Networked: a write is sent to clients.</summary>
 		public bool m_bFreezePeriod { get => Get<bool>(__m_bFreezePeriod); set => Set(__m_bFreezePeriod, value); }
 
 		private static readonly SchemaField __m_bGGMarkAsNotScored = new("CCitadelGameRules", "m_bGGMarkAsNotScored");
@@ -78,11 +78,11 @@ public static partial class Schema {
 		public bool m_bIsEndGameTest { get => Get<bool>(__m_bIsEndGameTest); set => Set(__m_bIsEndGameTest, value); }
 
 		private static readonly SchemaField __m_bMatchNotScored = new("CCitadelGameRules", "m_bMatchNotScored");
-		/// <summary><c>bool</c>. Networked in build 6779: a write is sent to clients.</summary>
+		/// <summary><c>bool</c>. Networked: a write is sent to clients.</summary>
 		public bool m_bMatchNotScored { get => Get<bool>(__m_bMatchNotScored); set => Set(__m_bMatchNotScored, value); }
 
 		private static readonly SchemaField __m_bMatchSafeToAbandon = new("CCitadelGameRules", "m_bMatchSafeToAbandon");
-		/// <summary><c>bool</c>. Networked in build 6779: a write is sent to clients.</summary>
+		/// <summary><c>bool</c>. Networked: a write is sent to clients.</summary>
 		public bool m_bMatchSafeToAbandon { get => Get<bool>(__m_bMatchSafeToAbandon); set => Set(__m_bMatchSafeToAbandon, value); }
 
 		private static readonly SchemaField __m_bNotifiedClientsOfNextCrateSpawn = new("CCitadelGameRules", "m_bNotifiedClientsOfNextCrateSpawn");
@@ -90,7 +90,7 @@ public static partial class Schema {
 		public bool m_bNotifiedClientsOfNextCrateSpawn { get => Get<bool>(__m_bNotifiedClientsOfNextCrateSpawn); set => Set(__m_bNotifiedClientsOfNextCrateSpawn, value); }
 
 		private static readonly SchemaField __m_bServerPaused = new("CCitadelGameRules", "m_bServerPaused");
-		/// <summary><c>bool</c>. Networked in build 6779: a write is sent to clients.</summary>
+		/// <summary><c>bool</c>. Networked: a write is sent to clients.</summary>
 		public bool m_bServerPaused { get => Get<bool>(__m_bServerPaused); set => Set(__m_bServerPaused, value); }
 
 		private static readonly SchemaField __m_bSpawnedBots = new("CCitadelGameRules", "m_bSpawnedBots");
@@ -102,23 +102,23 @@ public static partial class Schema {
 		public bool m_bTimeScaleActive { get => Get<bool>(__m_bTimeScaleActive); set => Set(__m_bTimeScaleActive, value); }
 
 		private static readonly SchemaField __m_eGGTeam = new("CCitadelGameRules", "m_eGGTeam");
-		/// <summary><c>int32</c>. Networked in build 6779: a write is sent to clients.</summary>
+		/// <summary><c>int32</c>. Networked: a write is sent to clients.</summary>
 		public int m_eGGTeam { get => Get<int>(__m_eGGTeam); set => Set(__m_eGGTeam, value); }
 
 		private static readonly SchemaField __m_eGameMode = new("CCitadelGameRules", "m_eGameMode");
-		/// <summary><c>ECitadelGameMode</c>. Networked in build 6779: a write is sent to clients.</summary>
+		/// <summary><c>ECitadelGameMode</c>. Networked: a write is sent to clients.</summary>
 		public ECitadelGameMode m_eGameMode { get => Get<ECitadelGameMode>(__m_eGameMode); set => Set(__m_eGameMode, value); }
 
 		private static readonly SchemaField __m_eGameState = new("CCitadelGameRules", "m_eGameState");
-		/// <summary><c>EGameState</c>. Networked in build 6779: a write is sent to clients.</summary>
+		/// <summary><c>EGameState</c>. Networked: a write is sent to clients.</summary>
 		public EGameState m_eGameState { get => Get<EGameState>(__m_eGameState); set => Set(__m_eGameState, value); }
 
 		private static readonly SchemaField __m_eMatchMode = new("CCitadelGameRules", "m_eMatchMode");
-		/// <summary><c>ECitadelMatchMode</c>. Networked in build 6779: a write is sent to clients.</summary>
+		/// <summary><c>ECitadelMatchMode</c>. Networked: a write is sent to clients.</summary>
 		public ECitadelMatchMode m_eMatchMode { get => Get<ECitadelMatchMode>(__m_eMatchMode); set => Set(__m_eMatchMode, value); }
 
 		private static readonly SchemaField __m_fLevelStartTime = new("CCitadelGameRules", "m_fLevelStartTime");
-		/// <summary><c>GameTime_t</c>. Networked in build 6779: a write is sent to clients.</summary>
+		/// <summary><c>GameTime_t</c>. Networked: a write is sent to clients.</summary>
 		public GameTime m_fLevelStartTime { get => Get<GameTime>(__m_fLevelStartTime); set => Set(__m_fLevelStartTime, value); }
 
 		private static readonly SchemaField __m_fPauseCurTime = new("CCitadelGameRules", "m_fPauseCurTime");
@@ -134,23 +134,23 @@ public static partial class Schema {
 		public float m_fUnpauseCurTime { get => Get<float>(__m_fUnpauseCurTime); set => Set(__m_fUnpauseCurTime, value); }
 
 		private static readonly SchemaField __m_fUnpauseRawTime = new("CCitadelGameRules", "m_fUnpauseRawTime");
-		/// <summary><c>float32</c>. Networked in build 6779: a write is sent to clients.</summary>
+		/// <summary><c>float32</c>. Networked: a write is sent to clients.</summary>
 		public float m_fUnpauseRawTime { get => Get<float>(__m_fUnpauseRawTime); set => Set(__m_fUnpauseRawTime, value); }
 
 		private static readonly SchemaField __m_flGGEndsAtTime = new("CCitadelGameRules", "m_flGGEndsAtTime");
-		/// <summary><c>GameTime_t</c>. Networked in build 6779: a write is sent to clients.</summary>
+		/// <summary><c>GameTime_t</c>. Networked: a write is sent to clients.</summary>
 		public GameTime m_flGGEndsAtTime { get => Get<GameTime>(__m_flGGEndsAtTime); set => Set(__m_flGGEndsAtTime, value); }
 
 		private static readonly SchemaField __m_flGameStartTime = new("CCitadelGameRules", "m_flGameStartTime");
-		/// <summary><c>GameTime_t</c>. Networked in build 6779: a write is sent to clients.</summary>
+		/// <summary><c>GameTime_t</c>. Networked: a write is sent to clients.</summary>
 		public GameTime m_flGameStartTime { get => Get<GameTime>(__m_flGameStartTime); set => Set(__m_flGameStartTime, value); }
 
 		private static readonly SchemaField __m_flGameStateEndTime = new("CCitadelGameRules", "m_flGameStateEndTime");
-		/// <summary><c>GameTime_t</c>. Networked in build 6779: a write is sent to clients.</summary>
+		/// <summary><c>GameTime_t</c>. Networked: a write is sent to clients.</summary>
 		public GameTime m_flGameStateEndTime { get => Get<GameTime>(__m_flGameStateEndTime); set => Set(__m_flGameStateEndTime, value); }
 
 		private static readonly SchemaField __m_flGameStateStartTime = new("CCitadelGameRules", "m_flGameStateStartTime");
-		/// <summary><c>GameTime_t</c>. Networked in build 6779: a write is sent to clients.</summary>
+		/// <summary><c>GameTime_t</c>. Networked: a write is sent to clients.</summary>
 		public GameTime m_flGameStateStartTime { get => Get<GameTime>(__m_flGameStateStartTime); set => Set(__m_flGameStateStartTime, value); }
 
 		private static readonly SchemaField __m_flGameTimeAllPlayersDisconnected = new("CCitadelGameRules", "m_flGameTimeAllPlayersDisconnected");
@@ -158,11 +158,11 @@ public static partial class Schema {
 		public GameTime m_flGameTimeAllPlayersDisconnected { get => Get<GameTime>(__m_flGameTimeAllPlayersDisconnected); set => Set(__m_flGameTimeAllPlayersDisconnected, value); }
 
 		private static readonly SchemaField __m_flHeroDiedTime = new("CCitadelGameRules", "m_flHeroDiedTime");
-		/// <summary><c>GameTime_t</c>. Networked in build 6779: a write is sent to clients.</summary>
+		/// <summary><c>GameTime_t</c>. Networked: a write is sent to clients.</summary>
 		public GameTime m_flHeroDiedTime { get => Get<GameTime>(__m_flHeroDiedTime); set => Set(__m_flHeroDiedTime, value); }
 
 		private static readonly SchemaField __m_flMatchClockAtLastUpdate = new("CCitadelGameRules", "m_flMatchClockAtLastUpdate");
-		/// <summary><c>float32</c>. Networked in build 6779: a write is sent to clients.</summary>
+		/// <summary><c>float32</c>. Networked: a write is sent to clients.</summary>
 		public float m_flMatchClockAtLastUpdate { get => Get<float>(__m_flMatchClockAtLastUpdate); set => Set(__m_flMatchClockAtLastUpdate, value); }
 
 		private static readonly SchemaField __m_flOriginalTimeScale = new("CCitadelGameRules", "m_flOriginalTimeScale");
@@ -178,7 +178,7 @@ public static partial class Schema {
 		public float m_flPlayOfTheGameStateEndTime { get => Get<float>(__m_flPlayOfTheGameStateEndTime); set => Set(__m_flPlayOfTheGameStateEndTime, value); }
 
 		private static readonly SchemaField __m_flRoundStartTime = new("CCitadelGameRules", "m_flRoundStartTime");
-		/// <summary><c>GameTime_t</c>. Networked in build 6779: a write is sent to clients.</summary>
+		/// <summary><c>GameTime_t</c>. Networked: a write is sent to clients.</summary>
 		public GameTime m_flRoundStartTime { get => Get<GameTime>(__m_flRoundStartTime); set => Set(__m_flRoundStartTime, value); }
 
 		private static readonly SchemaField __m_flTimeScale = new("CCitadelGameRules", "m_flTimeScale");
@@ -214,51 +214,51 @@ public static partial class Schema {
 		public GameTime m_flTimeScaleStart { get => Get<GameTime>(__m_flTimeScaleStart); set => Set(__m_flTimeScaleStart, value); }
 
 		private static readonly SchemaField __m_hCurrentHeroDrafterCombine = new("CCitadelGameRules", "m_hCurrentHeroDrafterCombine");
-		/// <summary><c>CHandle&lt;CBaseEntity&gt;</c>. Networked in build 6779: a write is sent to clients.</summary>
+		/// <summary><c>CHandle&lt;CBaseEntity&gt;</c>. Networked: a write is sent to clients.</summary>
 		public CBaseEntity? m_hCurrentHeroDrafterCombine { get => GetHandle<CBaseEntity>(__m_hCurrentHeroDrafterCombine); set => SetHandle(__m_hCurrentHeroDrafterCombine, value); }
 
 		private static readonly SchemaField __m_hCurrentHeroDrafterRebels = new("CCitadelGameRules", "m_hCurrentHeroDrafterRebels");
-		/// <summary><c>CHandle&lt;CBaseEntity&gt;</c>. Networked in build 6779: a write is sent to clients.</summary>
+		/// <summary><c>CHandle&lt;CBaseEntity&gt;</c>. Networked: a write is sent to clients.</summary>
 		public CBaseEntity? m_hCurrentHeroDrafterRebels { get => GetHandle<CBaseEntity>(__m_hCurrentHeroDrafterRebels); set => SetHandle(__m_hCurrentHeroDrafterRebels, value); }
 
 		private static readonly SchemaField __m_hTowerAmber = new("CCitadelGameRules", "m_hTowerAmber");
-		/// <summary><c>CHandle&lt;CBaseEntity&gt;</c>. Networked in build 6779: a write is sent to clients.</summary>
+		/// <summary><c>CHandle&lt;CBaseEntity&gt;</c>. Networked: a write is sent to clients.</summary>
 		public CBaseEntity? m_hTowerAmber { get => GetHandle<CBaseEntity>(__m_hTowerAmber); set => SetHandle(__m_hTowerAmber, value); }
 
 		private static readonly SchemaField __m_hTowerSapphire = new("CCitadelGameRules", "m_hTowerSapphire");
-		/// <summary><c>CHandle&lt;CBaseEntity&gt;</c>. Networked in build 6779: a write is sent to clients.</summary>
+		/// <summary><c>CHandle&lt;CBaseEntity&gt;</c>. Networked: a write is sent to clients.</summary>
 		public CBaseEntity? m_hTowerSapphire { get => GetHandle<CBaseEntity>(__m_hTowerSapphire); set => SetHandle(__m_hTowerSapphire, value); }
 
 		private static readonly SchemaField __m_hTrooperMinimap = new("CCitadelGameRules", "m_hTrooperMinimap");
-		/// <summary><c>CHandle&lt;CCitadelTrooperMinimap&gt;</c>. Networked in build 6779: a write is sent to clients.</summary>
+		/// <summary><c>CHandle&lt;CCitadelTrooperMinimap&gt;</c>. Networked: a write is sent to clients.</summary>
 		public CCitadelTrooperMinimap? m_hTrooperMinimap { get => GetHandle<CCitadelTrooperMinimap>(__m_hTrooperMinimap); set => SetHandle(__m_hTrooperMinimap, value); }
 
 		private static readonly SchemaField __m_iAmberRejuvCount = new("CCitadelGameRules", "m_iAmberRejuvCount");
-		/// <summary><c>int32</c>. Networked in build 6779: a write is sent to clients.</summary>
+		/// <summary><c>int32</c>. Networked: a write is sent to clients.</summary>
 		public int m_iAmberRejuvCount { get => Get<int>(__m_iAmberRejuvCount); set => Set(__m_iAmberRejuvCount, value); }
 
 		private static readonly SchemaField __m_iMidbossKillCount = new("CCitadelGameRules", "m_iMidbossKillCount");
-		/// <summary><c>int32</c>. Networked in build 6779: a write is sent to clients.</summary>
+		/// <summary><c>int32</c>. Networked: a write is sent to clients.</summary>
 		public int m_iMidbossKillCount { get => Get<int>(__m_iMidbossKillCount); set => Set(__m_iMidbossKillCount, value); }
 
 		private static readonly SchemaField __m_iPauseTeam = new("CCitadelGameRules", "m_iPauseTeam");
-		/// <summary><c>int32</c>. Networked in build 6779: a write is sent to clients.</summary>
+		/// <summary><c>int32</c>. Networked: a write is sent to clients.</summary>
 		public int m_iPauseTeam { get => Get<int>(__m_iPauseTeam); set => Set(__m_iPauseTeam, value); }
 
 		private static readonly SchemaField __m_iSapphireRejuvCount = new("CCitadelGameRules", "m_iSapphireRejuvCount");
-		/// <summary><c>int32</c>. Networked in build 6779: a write is sent to clients.</summary>
+		/// <summary><c>int32</c>. Networked: a write is sent to clients.</summary>
 		public int m_iSapphireRejuvCount { get => Get<int>(__m_iSapphireRejuvCount); set => Set(__m_iSapphireRejuvCount, value); }
 
 		private static readonly SchemaField __m_iWinningTeam = new("CCitadelGameRules", "m_iWinningTeam");
-		/// <summary><c>int32</c>. Networked in build 6779: a write is sent to clients.</summary>
+		/// <summary><c>int32</c>. Networked: a write is sent to clients.</summary>
 		public int m_iWinningTeam { get => Get<int>(__m_iWinningTeam); set => Set(__m_iWinningTeam, value); }
 
 		private static readonly SchemaField __m_nAmberGold = new("CCitadelGameRules", "m_nAmberGold");
-		/// <summary><c>int32</c>. Networked in build 6779: a write is sent to clients.</summary>
+		/// <summary><c>int32</c>. Networked: a write is sent to clients.</summary>
 		public int m_nAmberGold { get => Get<int>(__m_nAmberGold); set => Set(__m_nAmberGold, value); }
 
 		private static readonly SchemaField __m_nCorruptedPenaltySeed = new("CCitadelGameRules", "m_nCorruptedPenaltySeed");
-		/// <summary><c>uint32</c>. Networked in build 6779: a write is sent to clients.</summary>
+		/// <summary><c>uint32</c>. Networked: a write is sent to clients.</summary>
 		public uint m_nCorruptedPenaltySeed { get => Get<uint>(__m_nCorruptedPenaltySeed); set => Set(__m_nCorruptedPenaltySeed, value); }
 
 		private static readonly SchemaField __m_nGameOverEvent = new("CCitadelGameRules", "m_nGameOverEvent");
@@ -266,11 +266,11 @@ public static partial class Schema {
 		public int m_nGameOverEvent { get => Get<int>(__m_nGameOverEvent); set => Set(__m_nGameOverEvent, value); }
 
 		private static readonly SchemaField __m_nHideoutOwner = new("CCitadelGameRules", "m_nHideoutOwner");
-		/// <summary><c>uint32</c>. Networked in build 6779: a write is sent to clients.</summary>
+		/// <summary><c>uint32</c>. Networked: a write is sent to clients.</summary>
 		public uint m_nHideoutOwner { get => Get<uint>(__m_nHideoutOwner); set => Set(__m_nHideoutOwner, value); }
 
 		private static readonly SchemaField __m_nKothScoringTeam = new("CCitadelGameRules", "m_nKothScoringTeam");
-		/// <summary><c>int32</c>. Networked in build 6779: a write is sent to clients.</summary>
+		/// <summary><c>int32</c>. Networked: a write is sent to clients.</summary>
 		public int m_nKothScoringTeam { get => Get<int>(__m_nKothScoringTeam); set => Set(__m_nKothScoringTeam, value); }
 
 		private static readonly SchemaField __m_nKothSpawnWarnings = new("CCitadelGameRules", "m_nKothSpawnWarnings");
@@ -282,7 +282,7 @@ public static partial class Schema {
 		public int m_nLastPreGameCount { get => Get<int>(__m_nLastPreGameCount); set => Set(__m_nLastPreGameCount, value); }
 
 		private static readonly SchemaField __m_nMatchClockUpdateTick = new("CCitadelGameRules", "m_nMatchClockUpdateTick");
-		/// <summary><c>int32</c>. Networked in build 6779: a write is sent to clients.</summary>
+		/// <summary><c>int32</c>. Networked: a write is sent to clients.</summary>
 		public int m_nMatchClockUpdateTick { get => Get<int>(__m_nMatchClockUpdateTick); set => Set(__m_nMatchClockUpdateTick, value); }
 
 		private static readonly SchemaField __m_nNextHeroDraftPosition = new("CCitadelGameRules", "m_nNextHeroDraftPosition");
@@ -294,7 +294,7 @@ public static partial class Schema {
 		public int m_nNumCorruptedItemShopSpawns { get => Get<int>(__m_nNumCorruptedItemShopSpawns); set => Set(__m_nNumCorruptedItemShopSpawns, value); }
 
 		private static readonly SchemaField __m_nNumCorruptedItemsLimit = new("CCitadelGameRules", "m_nNumCorruptedItemsLimit");
-		/// <summary><c>int32</c>. Networked in build 6779: a write is sent to clients.</summary>
+		/// <summary><c>int32</c>. Networked: a write is sent to clients.</summary>
 		public int m_nNumCorruptedItemsLimit { get => Get<int>(__m_nNumCorruptedItemsLimit); set => Set(__m_nNumCorruptedItemsLimit, value); }
 
 		private static readonly SchemaField __m_nPlayerDeathEventID = new("CCitadelGameRules", "m_nPlayerDeathEventID");
@@ -306,11 +306,11 @@ public static partial class Schema {
 		public int m_nReplayChangedEvent { get => Get<int>(__m_nReplayChangedEvent); set => Set(__m_nReplayChangedEvent, value); }
 
 		private static readonly SchemaField __m_nSapphireGold = new("CCitadelGameRules", "m_nSapphireGold");
-		/// <summary><c>int32</c>. Networked in build 6779: a write is sent to clients.</summary>
+		/// <summary><c>int32</c>. Networked: a write is sent to clients.</summary>
 		public int m_nSapphireGold { get => Get<int>(__m_nSapphireGold); set => Set(__m_nSapphireGold, value); }
 
 		private static readonly SchemaField __m_pPlayOfTheGame = new("CCitadelGameRules", "m_pPlayOfTheGame");
-		/// <summary><c>CCitadelPlayOfTheGame*</c>. Networked in build 6779: a write is sent to clients.</summary>
+		/// <summary><c>CCitadelPlayOfTheGame*</c>. Networked: a write is sent to clients.</summary>
 		public CCitadelPlayOfTheGame? m_pPlayOfTheGame => Pointer<CCitadelPlayOfTheGame>(__m_pPlayOfTheGame);
 
 		private static readonly SchemaField __m_pausingPlayerId = new("CCitadelGameRules", "m_pausingPlayerId");
@@ -318,31 +318,31 @@ public static partial class Schema {
 		public int m_pausingPlayerId { get => Get<int>(__m_pausingPlayerId); set => Set(__m_pausingPlayerId, value); }
 
 		private static readonly SchemaField __m_sGameplayExperiment = new("CCitadelGameRules", "m_sGameplayExperiment");
-		/// <summary><c>CUtlString</c>. Networked in build 6779: a write is sent to clients.</summary>
+		/// <summary><c>CUtlString</c>. Networked: a write is sent to clients.</summary>
 		public string m_sGameplayExperiment => GetString(__m_sGameplayExperiment);
 
 		private static readonly SchemaField __m_tAbandonTriggerEarlyTime = new("CCitadelGameRules", "m_tAbandonTriggerEarlyTime");
-		/// <summary><c>GameTime_t</c>. Networked in build 6779: a write is sent to clients.</summary>
+		/// <summary><c>GameTime_t</c>. Networked: a write is sent to clients.</summary>
 		public GameTime m_tAbandonTriggerEarlyTime { get => Get<GameTime>(__m_tAbandonTriggerEarlyTime); set => Set(__m_tAbandonTriggerEarlyTime, value); }
 
 		private static readonly SchemaField __m_tNextMidBossSpawnTime = new("CCitadelGameRules", "m_tNextMidBossSpawnTime");
-		/// <summary><c>float32</c>. Networked in build 6779: a write is sent to clients.</summary>
+		/// <summary><c>float32</c>. Networked: a write is sent to clients.</summary>
 		public float m_tNextMidBossSpawnTime { get => Get<float>(__m_tNextMidBossSpawnTime); set => Set(__m_tNextMidBossSpawnTime, value); }
 
 		private static readonly SchemaField __m_tStreetBrawl = new("CCitadelGameRules", "m_tStreetBrawl");
-		/// <summary><c>CStreetBrawlController</c>. Networked in build 6779: a write is sent to clients.</summary>
+		/// <summary><c>CStreetBrawlController</c>. Networked: a write is sent to clients.</summary>
 		public CStreetBrawlController m_tStreetBrawl => Embedded<CStreetBrawlController>(__m_tStreetBrawl);
 
 		private static readonly SchemaField __m_timeKothCashInStarted = new("CCitadelGameRules", "m_timeKothCashInStarted");
-		/// <summary><c>GameTime_t</c>. Networked in build 6779: a write is sent to clients.</summary>
+		/// <summary><c>GameTime_t</c>. Networked: a write is sent to clients.</summary>
 		public GameTime m_timeKothCashInStarted { get => Get<GameTime>(__m_timeKothCashInStarted); set => Set(__m_timeKothCashInStarted, value); }
 
 		private static readonly SchemaField __m_timeKothGiveUp = new("CCitadelGameRules", "m_timeKothGiveUp");
-		/// <summary><c>GameTime_t</c>. Networked in build 6779: a write is sent to clients.</summary>
+		/// <summary><c>GameTime_t</c>. Networked: a write is sent to clients.</summary>
 		public GameTime m_timeKothGiveUp { get => Get<GameTime>(__m_timeKothGiveUp); set => Set(__m_timeKothGiveUp, value); }
 
 		private static readonly SchemaField __m_timeKothScoring = new("CCitadelGameRules", "m_timeKothScoring");
-		/// <summary><c>GameTime_t</c>. Networked in build 6779: a write is sent to clients.</summary>
+		/// <summary><c>GameTime_t</c>. Networked: a write is sent to clients.</summary>
 		public GameTime m_timeKothScoring { get => Get<GameTime>(__m_timeKothScoring); set => Set(__m_timeKothScoring, value); }
 
 		private static readonly SchemaField __m_timeLastSpawnCrates = new("CCitadelGameRules", "m_timeLastSpawnCrates");
@@ -358,15 +358,15 @@ public static partial class Schema {
 		public float m_timeNextKothSpawnWindowTime { get => Get<float>(__m_timeNextKothSpawnWindowTime); set => Set(__m_timeNextKothSpawnWindowTime, value); }
 
 		private static readonly SchemaField __m_unExpectedPlayerCount = new("CCitadelGameRules", "m_unExpectedPlayerCount");
-		/// <summary><c>uint32</c>. Networked in build 6779: a write is sent to clients.</summary>
+		/// <summary><c>uint32</c>. Networked: a write is sent to clients.</summary>
 		public uint m_unExpectedPlayerCount { get => Get<uint>(__m_unExpectedPlayerCount); set => Set(__m_unExpectedPlayerCount, value); }
 
 		private static readonly SchemaField __m_unMatchID = new("CCitadelGameRules", "m_unMatchID");
-		/// <summary><c>MatchID_t</c>. Networked in build 6779: a write is sent to clients.</summary>
+		/// <summary><c>MatchID_t</c>. Networked: a write is sent to clients.</summary>
 		public ulong m_unMatchID { get => Get<ulong>(__m_unMatchID); set => Set(__m_unMatchID, value); }
 
 		private static readonly SchemaField __m_unSpectatorCount = new("CCitadelGameRules", "m_unSpectatorCount");
-		/// <summary><c>uint32</c>. Networked in build 6779: a write is sent to clients.</summary>
+		/// <summary><c>uint32</c>. Networked: a write is sent to clients.</summary>
 		public uint m_unSpectatorCount { get => Get<uint>(__m_unSpectatorCount); set => Set(__m_unSpectatorCount, value); }
 
 		private static readonly SchemaField __m_unpausingPlayerId = new("CCitadelGameRules", "m_unpausingPlayerId");
@@ -374,7 +374,7 @@ public static partial class Schema {
 		public int m_unpausingPlayerId { get => Get<int>(__m_unpausingPlayerId); set => Set(__m_unpausingPlayerId, value); }
 
 		private static readonly SchemaField __m_vKothCashInCurrentLocation = new("CCitadelGameRules", "m_vKothCashInCurrentLocation");
-		/// <summary><c>VectorWS</c>. Networked in build 6779: a write is sent to clients.</summary>
+		/// <summary><c>VectorWS</c>. Networked: a write is sent to clients.</summary>
 		public Vector3 m_vKothCashInCurrentLocation { get => Get<Vector3>(__m_vKothCashInCurrentLocation); set => Set(__m_vKothCashInCurrentLocation, value); }
 
 		private static readonly SchemaField __m_vKothSpawnLocationDeck = new("CCitadelGameRules", "m_vKothSpawnLocationDeck");
@@ -382,11 +382,11 @@ public static partial class Schema {
 		public SchemaValueList<Vector3> m_vKothSpawnLocationDeck => new(this, __m_vKothSpawnLocationDeck, ListStorage.Vector);
 
 		private static readonly SchemaField __m_vMinimapMaxs = new("CCitadelGameRules", "m_vMinimapMaxs");
-		/// <summary><c>VectorWS</c>. Networked in build 6779: a write is sent to clients.</summary>
+		/// <summary><c>VectorWS</c>. Networked: a write is sent to clients.</summary>
 		public Vector3 m_vMinimapMaxs { get => Get<Vector3>(__m_vMinimapMaxs); set => Set(__m_vMinimapMaxs, value); }
 
 		private static readonly SchemaField __m_vMinimapMins = new("CCitadelGameRules", "m_vMinimapMins");
-		/// <summary><c>VectorWS</c>. Networked in build 6779: a write is sent to clients.</summary>
+		/// <summary><c>VectorWS</c>. Networked: a write is sent to clients.</summary>
 		public Vector3 m_vMinimapMins { get => Get<Vector3>(__m_vMinimapMins); set => Set(__m_vMinimapMins, value); }
 
 		private static readonly SchemaField __m_vNextKothLocation = new("CCitadelGameRules", "m_vNextKothLocation");
@@ -394,23 +394,23 @@ public static partial class Schema {
 		public Vector3 m_vNextKothLocation { get => Get<Vector3>(__m_vNextKothLocation); set => Set(__m_vNextKothLocation, value); }
 
 		private static readonly SchemaField __m_vecBannedHeroes = new("CCitadelGameRules", "m_vecBannedHeroes");
-		/// <summary><c>CNetworkUtlVectorBase&lt;HeroID_t&gt;</c>. Networked in build 6779: a write is sent to clients.</summary>
+		/// <summary><c>CNetworkUtlVectorBase&lt;HeroID_t&gt;</c>. Networked: a write is sent to clients.</summary>
 		public SchemaValueList<uint> m_vecBannedHeroes => new(this, __m_vecBannedHeroes, ListStorage.Vector);
 
 		private static readonly SchemaField __m_vecNeutralCampNextSpawnTimes = new("CCitadelGameRules", "m_vecNeutralCampNextSpawnTimes");
-		/// <summary><c>CNetworkUtlVectorBase&lt;float32&gt;</c>. Networked in build 6779: a write is sent to clients.</summary>
+		/// <summary><c>CNetworkUtlVectorBase&lt;float32&gt;</c>. Networked: a write is sent to clients.</summary>
 		public SchemaValueList<float> m_vecNeutralCampNextSpawnTimes => new(this, __m_vecNeutralCampNextSpawnTimes, ListStorage.Vector);
 
 		private static readonly SchemaField __m_vecNeutralCampTimerIsMidBoss = new("CCitadelGameRules", "m_vecNeutralCampTimerIsMidBoss");
-		/// <summary><c>CNetworkUtlVectorBase&lt;bool&gt;</c>. Networked in build 6779: a write is sent to clients.</summary>
+		/// <summary><c>CNetworkUtlVectorBase&lt;bool&gt;</c>. Networked: a write is sent to clients.</summary>
 		public SchemaValueList<bool> m_vecNeutralCampTimerIsMidBoss => new(this, __m_vecNeutralCampTimerIsMidBoss, ListStorage.Vector);
 
 		private static readonly SchemaField __m_vecNeutralCampTimerOrigins = new("CCitadelGameRules", "m_vecNeutralCampTimerOrigins");
-		/// <summary><c>CNetworkUtlVectorBase&lt;VectorWS&gt;</c>. Networked in build 6779: a write is sent to clients.</summary>
+		/// <summary><c>CNetworkUtlVectorBase&lt;VectorWS&gt;</c>. Networked: a write is sent to clients.</summary>
 		public SchemaValueList<Vector3> m_vecNeutralCampTimerOrigins => new(this, __m_vecNeutralCampTimerOrigins, ListStorage.Vector);
 
 		private static readonly SchemaField __m_vecTeamKothStates = new("CCitadelGameRules", "m_vecTeamKothStates");
-		/// <summary><c>CUtlVectorEmbeddedNetworkVar&lt;TeamKothState_t&gt;</c>. Networked in build 6779: a write is sent to clients.</summary>
+		/// <summary><c>CUtlVectorEmbeddedNetworkVar&lt;TeamKothState_t&gt;</c>. Networked: a write is sent to clients.</summary>
 		public SchemaObjectList<TeamKothState_t> m_vecTeamKothStates => new(this, __m_vecTeamKothStates, ListStorage.Vector);
 	}
 }

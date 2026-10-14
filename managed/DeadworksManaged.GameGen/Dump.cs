@@ -28,6 +28,9 @@ sealed class FieldDef {
 	public required TypeRef Type { get; init; }
 	public required int Offset { get; init; }
 	public required Dictionary<string, string?> Metadata { get; init; }
+
+	/// <summary>True if the game networks the field: the dump has what its network serializer says about it.</summary>
+	public bool Networked { get; init; }
 }
 
 sealed class ClassDef {
@@ -85,7 +88,7 @@ sealed class SchemaModel {
 				def = new ClassDef {
 					Name = def.Name, Module = def.Module, Metadata = def.Metadata,
 					Parents = [.. def.Parents.Select(ServerName)],
-					Fields = [.. def.Fields.Select(f => new FieldDef { Name = f.Name, Offset = f.Offset, Metadata = f.Metadata, Type = ServerType(f.Type)! })],
+					Fields = [.. def.Fields.Select(f => new FieldDef { Name = f.Name, Offset = f.Offset, Metadata = f.Metadata, Networked = f.Networked, Type = ServerType(f.Type)! })],
 				};
 			}
 			model.Classes[name] = def;
@@ -128,6 +131,7 @@ sealed class SchemaModel {
 				Type = TypeRef.Parse(f.GetProperty("type")),
 				Offset = f.GetProperty("offset").GetInt32(),
 				Metadata = ParseMetadata(f),
+				Networked = f.TryGetProperty("network", out _),
 			}).ToList()
 			: [],
 		Metadata = ParseMetadata(c),

@@ -14,15 +14,15 @@ public static partial class Schema {
 		static string ISchemaClass<CCitadel_Ability_Chessmaster_MoveChessPiece>.NativeName => "CCitadel_Ability_Chessmaster_MoveChessPiece";
 
 		private static readonly SchemaField __m_flCachedMoveDistance = new("CCitadel_Ability_Chessmaster_MoveChessPiece", "m_flCachedMoveDistance");
-		/// <summary><c>float32</c>. Networked in build 6779: a write is sent to clients.</summary>
+		/// <summary><c>float32</c>. Networked: a write is sent to clients.</summary>
 		public float m_flCachedMoveDistance { get => Get<float>(__m_flCachedMoveDistance); set => Set(__m_flCachedMoveDistance, value); }
 
 		private static readonly SchemaField __m_pSelectedPiece = new("CCitadel_Ability_Chessmaster_MoveChessPiece", "m_pSelectedPiece");
-		/// <summary><c>CHandle&lt;CBaseEntity&gt;</c>. Networked in build 6779: a write is sent to clients.</summary>
+		/// <summary><c>CHandle&lt;CBaseEntity&gt;</c>. Networked: a write is sent to clients.</summary>
 		public CBaseEntity? m_pSelectedPiece { get => GetHandle<CBaseEntity>(__m_pSelectedPiece); set => SetHandle(__m_pSelectedPiece, value); }
 
 		private static readonly SchemaField __m_tCancelHoverTime = new("CCitadel_Ability_Chessmaster_MoveChessPiece", "m_tCancelHoverTime");
-		/// <summary><c>GameTime_t</c>. Networked in build 6779: a write is sent to clients.</summary>
+		/// <summary><c>GameTime_t</c>. Networked: a write is sent to clients.</summary>
 		public GameTime m_tCancelHoverTime { get => Get<GameTime>(__m_tCancelHoverTime); set => Set(__m_tCancelHoverTime, value); }
 
 		/// <summary>The data entry this was created from, as <see cref="CCitadel_Ability_Chessmaster_MoveChessPieceVData"/>, or null if it has none.</summary>

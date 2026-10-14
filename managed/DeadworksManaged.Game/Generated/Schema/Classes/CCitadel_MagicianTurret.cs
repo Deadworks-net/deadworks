@@ -14,7 +14,7 @@ public static partial class Schema {
 		static string ISchemaClass<CCitadel_MagicianTurret>.NativeName => "CCitadel_MagicianTurret";
 
 		private static readonly SchemaField __m_hAbility = new("CCitadel_MagicianTurret", "m_hAbility");
-		/// <summary><c>CHandle&lt;CCitadelBaseAbility&gt;</c>. Networked in build 6779: a write is sent to clients.</summary>
+		/// <summary><c>CHandle&lt;CCitadelBaseAbility&gt;</c>. Networked: a write is sent to clients.</summary>
 		public CCitadelBaseAbility? m_hAbility { get => GetHandle<CCitadelBaseAbility>(__m_hAbility); set => SetHandle(__m_hAbility, value); }
 	}
 }

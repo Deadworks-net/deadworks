@@ -14,23 +14,23 @@ public static partial class Schema {
 		static string ISchemaClass<CCitadel_Item_PrismBlast>.NativeName => "CCitadel_Item_PrismBlast";
 
 		private static readonly SchemaField __m_beam00 = new("CCitadel_Item_PrismBlast", "m_beam00");
-		/// <summary><c>CCitadelAbilityBeam_t</c>. Networked in build 6779: a write is sent to clients.</summary>
+		/// <summary><c>CCitadelAbilityBeam_t</c>. Networked: a write is sent to clients.</summary>
 		public CCitadelAbilityBeam_t m_beam00 => Embedded<CCitadelAbilityBeam_t>(__m_beam00);
 
 		private static readonly SchemaField __m_beam01 = new("CCitadel_Item_PrismBlast", "m_beam01");
-		/// <summary><c>CCitadelAbilityBeam_t</c>. Networked in build 6779: a write is sent to clients.</summary>
+		/// <summary><c>CCitadelAbilityBeam_t</c>. Networked: a write is sent to clients.</summary>
 		public CCitadelAbilityBeam_t m_beam01 => Embedded<CCitadelAbilityBeam_t>(__m_beam01);
 
 		private static readonly SchemaField __m_beam02 = new("CCitadel_Item_PrismBlast", "m_beam02");
-		/// <summary><c>CCitadelAbilityBeam_t</c>. Networked in build 6779: a write is sent to clients.</summary>
+		/// <summary><c>CCitadelAbilityBeam_t</c>. Networked: a write is sent to clients.</summary>
 		public CCitadelAbilityBeam_t m_beam02 => Embedded<CCitadelAbilityBeam_t>(__m_beam02);
 
 		private static readonly SchemaField __m_beam03 = new("CCitadel_Item_PrismBlast", "m_beam03");
-		/// <summary><c>CCitadelAbilityBeam_t</c>. Networked in build 6779: a write is sent to clients.</summary>
+		/// <summary><c>CCitadelAbilityBeam_t</c>. Networked: a write is sent to clients.</summary>
 		public CCitadelAbilityBeam_t m_beam03 => Embedded<CCitadelAbilityBeam_t>(__m_beam03);
 
 		private static readonly SchemaField __m_beam04 = new("CCitadel_Item_PrismBlast", "m_beam04");
-		/// <summary><c>CCitadelAbilityBeam_t</c>. Networked in build 6779: a write is sent to clients.</summary>
+		/// <summary><c>CCitadelAbilityBeam_t</c>. Networked: a write is sent to clients.</summary>
 		public CCitadelAbilityBeam_t m_beam04 => Embedded<CCitadelAbilityBeam_t>(__m_beam04);
 
 		/// <summary>The data entry this was created from, as <see cref="CCitadel_Item_PrismBlastVData"/>, or null if it has none.</summary>

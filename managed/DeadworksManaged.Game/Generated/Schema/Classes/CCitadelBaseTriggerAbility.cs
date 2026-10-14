@@ -14,11 +14,11 @@ public static partial class Schema {
 		static string ISchemaClass<CCitadelBaseTriggerAbility>.NativeName => "CCitadelBaseTriggerAbility";
 
 		private static readonly SchemaField __m_SwappedToTime = new("CCitadelBaseTriggerAbility", "m_SwappedToTime");
-		/// <summary><c>GameTime_t</c>. Networked in build 6779: a write is sent to clients.</summary>
+		/// <summary><c>GameTime_t</c>. Networked: a write is sent to clients.</summary>
 		public GameTime m_SwappedToTime { get => Get<GameTime>(__m_SwappedToTime); set => Set(__m_SwappedToTime, value); }
 
 		private static readonly SchemaField __m_hAbilityToTrigger = new("CCitadelBaseTriggerAbility", "m_hAbilityToTrigger");
-		/// <summary><c>CHandle&lt;CCitadelBaseAbility&gt;</c>. Networked in build 6779: a write is sent to clients.</summary>
+		/// <summary><c>CHandle&lt;CCitadelBaseAbility&gt;</c>. Networked: a write is sent to clients.</summary>
 		public CCitadelBaseAbility? m_hAbilityToTrigger { get => GetHandle<CCitadelBaseAbility>(__m_hAbilityToTrigger); set => SetHandle(__m_hAbilityToTrigger, value); }
 	}
 }

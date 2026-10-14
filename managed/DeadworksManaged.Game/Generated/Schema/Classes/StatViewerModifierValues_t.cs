@@ -14,19 +14,19 @@ public static partial class Schema {
 		static string ISchemaClass<StatViewerModifierValues_t>.NativeName => "StatViewerModifierValues_t";
 
 		private static readonly SchemaField __m_SourceAbilityID = new("StatViewerModifierValues_t", "m_SourceAbilityID");
-		/// <summary><c>CUtlStringToken</c>. Networked in build 6779: a write is sent to clients.</summary>
+		/// <summary><c>CUtlStringToken</c>. Networked: a write is sent to clients.</summary>
 		public uint m_SourceAbilityID { get => Get<uint>(__m_SourceAbilityID); set => Set(__m_SourceAbilityID, value); }
 
 		private static readonly SchemaField __m_SourceModifierID = new("StatViewerModifierValues_t", "m_SourceModifierID");
-		/// <summary><c>CUtlStringToken</c>. Networked in build 6779: a write is sent to clients.</summary>
+		/// <summary><c>CUtlStringToken</c>. Networked: a write is sent to clients.</summary>
 		public uint m_SourceModifierID { get => Get<uint>(__m_SourceModifierID); set => Set(__m_SourceModifierID, value); }
 
 		private static readonly SchemaField __m_eValType = new("StatViewerModifierValues_t", "m_eValType");
-		/// <summary><c>EModifierValue</c>. Networked in build 6779: a write is sent to clients.</summary>
+		/// <summary><c>EModifierValue</c>. Networked: a write is sent to clients.</summary>
 		public EModifierValue m_eValType { get => Get<EModifierValue>(__m_eValType); set => Set(__m_eValType, value); }
 
 		private static readonly SchemaField __m_flValue = new("StatViewerModifierValues_t", "m_flValue");
-		/// <summary><c>float32</c>. Networked in build 6779: a write is sent to clients.</summary>
+		/// <summary><c>float32</c>. Networked: a write is sent to clients.</summary>
 		public float m_flValue { get => Get<float>(__m_flValue); set => Set(__m_flValue, value); }
 	}
 }

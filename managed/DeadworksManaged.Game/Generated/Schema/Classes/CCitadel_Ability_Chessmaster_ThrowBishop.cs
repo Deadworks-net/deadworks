@@ -14,11 +14,11 @@ public static partial class Schema {
 		static string ISchemaClass<CCitadel_Ability_Chessmaster_ThrowBishop>.NativeName => "CCitadel_Ability_Chessmaster_ThrowBishop";
 
 		private static readonly SchemaField __m_bActive = new("CCitadel_Ability_Chessmaster_ThrowBishop", "m_bActive");
-		/// <summary><c>bool</c>. Networked in build 6779: a write is sent to clients.</summary>
+		/// <summary><c>bool</c>. Networked: a write is sent to clients.</summary>
 		public bool m_bActive { get => Get<bool>(__m_bActive); set => Set(__m_bActive, value); }
 
 		private static readonly SchemaField __m_iBishopIndex = new("CCitadel_Ability_Chessmaster_ThrowBishop", "m_iBishopIndex");
-		/// <summary><c>int32</c>. Networked in build 6779: a write is sent to clients.</summary>
+		/// <summary><c>int32</c>. Networked: a write is sent to clients.</summary>
 		public int m_iBishopIndex { get => Get<int>(__m_iBishopIndex); set => Set(__m_iBishopIndex, value); }
 
 		private static readonly SchemaField __m_qLaunchAngle = new("CCitadel_Ability_Chessmaster_ThrowBishop", "m_qLaunchAngle");
@@ -26,11 +26,11 @@ public static partial class Schema {
 		public Vector3 m_qLaunchAngle { get => Get<Vector3>(__m_qLaunchAngle); set => Set(__m_qLaunchAngle, value); }
 
 		private static readonly SchemaField __m_tRecastEndTime = new("CCitadel_Ability_Chessmaster_ThrowBishop", "m_tRecastEndTime");
-		/// <summary><c>GameTime_t</c>. Networked in build 6779: a write is sent to clients.</summary>
+		/// <summary><c>GameTime_t</c>. Networked: a write is sent to clients.</summary>
 		public GameTime m_tRecastEndTime { get => Get<GameTime>(__m_tRecastEndTime); set => Set(__m_tRecastEndTime, value); }
 
 		private static readonly SchemaField __m_vecDeployedPieces = new("CCitadel_Ability_Chessmaster_ThrowBishop", "m_vecDeployedPieces");
-		/// <summary><c>CNetworkUtlVectorBase&lt;CHandle&lt;CBaseEntity&gt;&gt;</c>. Networked in build 6779: a write is sent to clients.</summary>
+		/// <summary><c>CNetworkUtlVectorBase&lt;CHandle&lt;CBaseEntity&gt;&gt;</c>. Networked: a write is sent to clients.</summary>
 		public SchemaHandleList<CBaseEntity> m_vecDeployedPieces => new(this, __m_vecDeployedPieces, ListStorage.Vector);
 
 		private static readonly SchemaField __m_vecHitTargets = new("CCitadel_Ability_Chessmaster_ThrowBishop", "m_vecHitTargets");

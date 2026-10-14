@@ -14,19 +14,19 @@ public static partial class Schema {
 		static string ISchemaClass<SoundeventBoxHelperNetworked_t>.NativeName => "SoundeventBoxHelperNetworked_t";
 
 		private static readonly SchemaField __qAngles = new("SoundeventBoxHelperNetworked_t", "qAngles");
-		/// <summary><c>QAngle</c>. Networked in build 6779: a write is sent to clients.</summary>
+		/// <summary><c>QAngle</c>. Networked: a write is sent to clients.</summary>
 		public Vector3 qAngles { get => Get<Vector3>(__qAngles); set => Set(__qAngles, value); }
 
 		private static readonly SchemaField __vMaxs = new("SoundeventBoxHelperNetworked_t", "vMaxs");
-		/// <summary><c>Vector</c>. Networked in build 6779: a write is sent to clients.</summary>
+		/// <summary><c>Vector</c>. Networked: a write is sent to clients.</summary>
 		public Vector3 vMaxs { get => Get<Vector3>(__vMaxs); set => Set(__vMaxs, value); }
 
 		private static readonly SchemaField __vMins = new("SoundeventBoxHelperNetworked_t", "vMins");
-		/// <summary><c>Vector</c>. Networked in build 6779: a write is sent to clients.</summary>
+		/// <summary><c>Vector</c>. Networked: a write is sent to clients.</summary>
 		public Vector3 vMins { get => Get<Vector3>(__vMins); set => Set(__vMins, value); }
 
 		private static readonly SchemaField __vOrigin = new("SoundeventBoxHelperNetworked_t", "vOrigin");
-		/// <summary><c>VectorWS</c>. Networked in build 6779: a write is sent to clients.</summary>
+		/// <summary><c>VectorWS</c>. Networked: a write is sent to clients.</summary>
 		public Vector3 vOrigin { get => Get<Vector3>(__vOrigin); set => Set(__vOrigin, value); }
 	}
 }

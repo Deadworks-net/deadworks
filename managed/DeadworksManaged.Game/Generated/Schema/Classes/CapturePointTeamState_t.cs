@@ -14,15 +14,15 @@ public static partial class Schema {
 		static string ISchemaClass<CapturePointTeamState_t>.NativeName => "CapturePointTeamState_t";
 
 		private static readonly SchemaField __m_bIsBlocked = new("CapturePointTeamState_t", "m_bIsBlocked");
-		/// <summary><c>bool</c>. Networked in build 6779: a write is sent to clients.</summary>
+		/// <summary><c>bool</c>. Networked: a write is sent to clients.</summary>
 		public bool m_bIsBlocked { get => Get<bool>(__m_bIsBlocked); set => Set(__m_bIsBlocked, value); }
 
 		private static readonly SchemaField __m_flCaptureProgress = new("CapturePointTeamState_t", "m_flCaptureProgress");
-		/// <summary><c>float32</c>. Networked in build 6779: a write is sent to clients.</summary>
+		/// <summary><c>float32</c>. Networked: a write is sent to clients.</summary>
 		public float m_flCaptureProgress { get => Get<float>(__m_flCaptureProgress); set => Set(__m_flCaptureProgress, value); }
 
 		private static readonly SchemaField __m_nCapturerCount = new("CapturePointTeamState_t", "m_nCapturerCount");
-		/// <summary><c>int32</c>. Networked in build 6779: a write is sent to clients.</summary>
+		/// <summary><c>int32</c>. Networked: a write is sent to clients.</summary>
 		public int m_nCapturerCount { get => Get<int>(__m_nCapturerCount); set => Set(__m_nCapturerCount, value); }
 	}
 }

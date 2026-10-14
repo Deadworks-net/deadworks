@@ -14,7 +14,7 @@ public static partial class Schema {
 		static string ISchemaClass<CCitadel_Ability_Frank_ShockTarget2>.NativeName => "CCitadel_Ability_Frank_ShockTarget2";
 
 		private static readonly SchemaField __m_bIsFullyCharged = new("CCitadel_Ability_Frank_ShockTarget2", "m_bIsFullyCharged");
-		/// <summary><c>bool</c>. Networked in build 6779: a write is sent to clients.</summary>
+		/// <summary><c>bool</c>. Networked: a write is sent to clients.</summary>
 		public bool m_bIsFullyCharged { get => Get<bool>(__m_bIsFullyCharged); set => Set(__m_bIsFullyCharged, value); }
 
 		private static readonly SchemaField __m_hFullyChargedFXModifier = new("CCitadel_Ability_Frank_ShockTarget2", "m_hFullyChargedFXModifier");

@@ -14,11 +14,11 @@ public static partial class Schema {
 		static string ISchemaClass<CCitadelBaseLockonAbility>.NativeName => "CCitadelBaseLockonAbility";
 
 		private static readonly SchemaField __m_LockOnStartTime = new("CCitadelBaseLockonAbility", "m_LockOnStartTime");
-		/// <summary><c>GameTime_t</c>. Networked in build 6779: a write is sent to clients.</summary>
+		/// <summary><c>GameTime_t</c>. Networked: a write is sent to clients.</summary>
 		public GameTime m_LockOnStartTime { get => Get<GameTime>(__m_LockOnStartTime); set => Set(__m_LockOnStartTime, value); }
 
 		private static readonly SchemaField __m_vecLockonTargets = new("CCitadelBaseLockonAbility", "m_vecLockonTargets");
-		/// <summary><c>CUtlVectorEmbeddedNetworkVar&lt;LockonTarget_t&gt;</c>. Networked in build 6779: a write is sent to clients.</summary>
+		/// <summary><c>CUtlVectorEmbeddedNetworkVar&lt;LockonTarget_t&gt;</c>. Networked: a write is sent to clients.</summary>
 		public SchemaObjectList<LockonTarget_t> m_vecLockonTargets => new(this, __m_vecLockonTargets, ListStorage.Vector);
 	}
 }

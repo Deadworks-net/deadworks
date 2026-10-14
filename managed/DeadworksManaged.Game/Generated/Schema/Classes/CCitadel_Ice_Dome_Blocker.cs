@@ -14,7 +14,7 @@ public static partial class Schema {
 		static string ISchemaClass<CCitadel_Ice_Dome_Blocker>.NativeName => "CCitadel_Ice_Dome_Blocker";
 
 		private static readonly SchemaField __m_flTurnSolidTime = new("CCitadel_Ice_Dome_Blocker", "m_flTurnSolidTime");
-		/// <summary><c>GameTime_t</c>. Networked in build 6779: a write is sent to clients.</summary>
+		/// <summary><c>GameTime_t</c>. Networked: a write is sent to clients.</summary>
 		public GameTime m_flTurnSolidTime { get => Get<GameTime>(__m_flTurnSolidTime); set => Set(__m_flTurnSolidTime, value); }
 	}
 }

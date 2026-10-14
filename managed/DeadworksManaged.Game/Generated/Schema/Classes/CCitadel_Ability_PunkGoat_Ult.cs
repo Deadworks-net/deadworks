@@ -18,11 +18,11 @@ public static partial class Schema {
 		public bool m_bFirstFrameGoingDown { get => Get<bool>(__m_bFirstFrameGoingDown); set => Set(__m_bFirstFrameGoingDown, value); }
 
 		private static readonly SchemaField __m_bHoldingAbilityButton = new("CCitadel_Ability_PunkGoat_Ult", "m_bHoldingAbilityButton");
-		/// <summary><c>bool</c>. Networked in build 6779: a write is sent to clients.</summary>
+		/// <summary><c>bool</c>. Networked: a write is sent to clients.</summary>
 		public bool m_bHoldingAbilityButton { get => Get<bool>(__m_bHoldingAbilityButton); set => Set(__m_bHoldingAbilityButton, value); }
 
 		private static readonly SchemaField __m_flDistanceToTravel = new("CCitadel_Ability_PunkGoat_Ult", "m_flDistanceToTravel");
-		/// <summary><c>float32</c>. Networked in build 6779: a write is sent to clients.</summary>
+		/// <summary><c>float32</c>. Networked: a write is sent to clients.</summary>
 		public float m_flDistanceToTravel { get => Get<float>(__m_flDistanceToTravel); set => Set(__m_flDistanceToTravel, value); }
 
 		private static readonly SchemaField __m_nBatChargingFX = new("CCitadel_Ability_PunkGoat_Ult", "m_nBatChargingFX");
@@ -30,7 +30,7 @@ public static partial class Schema {
 		public int m_nBatChargingFX { get => Get<int>(__m_nBatChargingFX); set => Set(__m_nBatChargingFX, value); }
 
 		private static readonly SchemaField __m_nSlamTravelType = new("CCitadel_Ability_PunkGoat_Ult", "m_nSlamTravelType");
-		/// <summary><c>uint8</c>. Networked in build 6779: a write is sent to clients.</summary>
+		/// <summary><c>uint8</c>. Networked: a write is sent to clients.</summary>
 		public byte m_nSlamTravelType { get => Get<byte>(__m_nSlamTravelType); set => Set(__m_nSlamTravelType, value); }
 	}
 }

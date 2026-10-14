@@ -14,7 +14,7 @@ public static partial class Schema {
 		static string ISchemaClass<CRagdollProp>.NativeName => "CRagdollProp";
 
 		private static readonly SchemaField __m_CPropDataComponent = new("CRagdollProp", "m_CPropDataComponent");
-		/// <summary><c>CPropDataComponent</c>. Networked in build 6779: a write is sent to clients.</summary>
+		/// <summary><c>CPropDataComponent</c>. Networked: a write is sent to clients.</summary>
 		public CPropDataComponent m_CPropDataComponent => Embedded<CPropDataComponent>(__m_CPropDataComponent);
 
 		private static readonly SchemaField __m_allAsleep = new("CRagdollProp", "m_allAsleep");
@@ -62,7 +62,7 @@ public static partial class Schema {
 		public GameTime m_flAwakeTime { get => Get<GameTime>(__m_flAwakeTime); set => Set(__m_flAwakeTime, value); }
 
 		private static readonly SchemaField __m_flBlendWeight = new("CRagdollProp", "m_flBlendWeight");
-		/// <summary><c>float32</c>. Networked in build 6779: a write is sent to clients.</summary>
+		/// <summary><c>float32</c>. Networked: a write is sent to clients.</summary>
 		public float m_flBlendWeight { get => Get<float>(__m_flBlendWeight); set => Set(__m_flBlendWeight, value); }
 
 		private static readonly SchemaField __m_flDefaultFadeScale = new("CRagdollProp", "m_flDefaultFadeScale");
@@ -110,15 +110,15 @@ public static partial class Schema {
 		public INavObstacle__NavObstacleType_t m_nNavObstacleType { get => Get<INavObstacle__NavObstacleType_t>(__m_nNavObstacleType); set => Set(__m_nNavObstacleType, value); }
 
 		private static readonly SchemaField __m_ragAngles = new("CRagdollProp", "m_ragAngles");
-		/// <summary><c>CNetworkUtlVectorBase&lt;QAngle&gt;</c>. Networked in build 6779: a write is sent to clients.</summary>
+		/// <summary><c>CNetworkUtlVectorBase&lt;QAngle&gt;</c>. Networked: a write is sent to clients.</summary>
 		public SchemaValueList<Vector3> m_ragAngles => new(this, __m_ragAngles, ListStorage.Vector);
 
 		private static readonly SchemaField __m_ragEnabled = new("CRagdollProp", "m_ragEnabled");
-		/// <summary><c>CNetworkUtlVectorBase&lt;bool&gt;</c>. Networked in build 6779: a write is sent to clients.</summary>
+		/// <summary><c>CNetworkUtlVectorBase&lt;bool&gt;</c>. Networked: a write is sent to clients.</summary>
 		public SchemaValueList<bool> m_ragEnabled => new(this, __m_ragEnabled, ListStorage.Vector);
 
 		private static readonly SchemaField __m_ragPos = new("CRagdollProp", "m_ragPos");
-		/// <summary><c>CNetworkUtlVectorBase&lt;Vector&gt;</c>. Networked in build 6779: a write is sent to clients.</summary>
+		/// <summary><c>CNetworkUtlVectorBase&lt;Vector&gt;</c>. Networked: a write is sent to clients.</summary>
 		public SchemaValueList<Vector3> m_ragPos => new(this, __m_ragPos, ListStorage.Vector);
 
 		private static readonly SchemaField __m_ragdoll = new("CRagdollProp", "m_ragdoll");

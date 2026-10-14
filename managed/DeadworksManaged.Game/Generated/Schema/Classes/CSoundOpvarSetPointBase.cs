@@ -18,11 +18,11 @@ public static partial class Schema {
 		public bool m_bDisabled { get => Get<bool>(__m_bDisabled); set => Set(__m_bDisabled, value); }
 
 		private static readonly SchemaField __m_bFastRefresh = new("CSoundOpvarSetPointBase", "m_bFastRefresh");
-		/// <summary><c>bool</c>. Networked in build 6779: a write is sent to clients.</summary>
+		/// <summary><c>bool</c>. Networked: a write is sent to clients.</summary>
 		public bool m_bFastRefresh { get => Get<bool>(__m_bFastRefresh); set => Set(__m_bFastRefresh, value); }
 
 		private static readonly SchemaField __m_bUseAutoCompare = new("CSoundOpvarSetPointBase", "m_bUseAutoCompare");
-		/// <summary><c>bool</c>. Networked in build 6779: a write is sent to clients.</summary>
+		/// <summary><c>bool</c>. Networked: a write is sent to clients.</summary>
 		public bool m_bUseAutoCompare { get => Get<bool>(__m_bUseAutoCompare); set => Set(__m_bUseAutoCompare, value); }
 
 		private static readonly SchemaField __m_flRefreshTime = new("CSoundOpvarSetPointBase", "m_flRefreshTime");
@@ -34,15 +34,15 @@ public static partial class Schema {
 		public CEntityInstance? m_hSource { get => GetHandle<CEntityInstance>(__m_hSource); set => SetHandle(__m_hSource, value); }
 
 		private static readonly SchemaField __m_iOpvarIndex = new("CSoundOpvarSetPointBase", "m_iOpvarIndex");
-		/// <summary><c>int32</c>. Networked in build 6779: a write is sent to clients.</summary>
+		/// <summary><c>int32</c>. Networked: a write is sent to clients.</summary>
 		public int m_iOpvarIndex { get => Get<int>(__m_iOpvarIndex); set => Set(__m_iOpvarIndex, value); }
 
 		private static readonly SchemaField __m_iszOperatorName = new("CSoundOpvarSetPointBase", "m_iszOperatorName");
-		/// <summary><c>CUtlSymbolLarge</c>. Networked in build 6779: a write is sent to clients.</summary>
+		/// <summary><c>CUtlSymbolLarge</c>. Networked: a write is sent to clients.</summary>
 		public string m_iszOperatorName { get => GetString(__m_iszOperatorName); set => SetString(__m_iszOperatorName, value); }
 
 		private static readonly SchemaField __m_iszOpvarName = new("CSoundOpvarSetPointBase", "m_iszOpvarName");
-		/// <summary><c>CUtlSymbolLarge</c>. Networked in build 6779: a write is sent to clients.</summary>
+		/// <summary><c>CUtlSymbolLarge</c>. Networked: a write is sent to clients.</summary>
 		public string m_iszOpvarName { get => GetString(__m_iszOpvarName); set => SetString(__m_iszOpvarName, value); }
 
 		private static readonly SchemaField __m_iszSourceEntityName = new("CSoundOpvarSetPointBase", "m_iszSourceEntityName");
@@ -50,7 +50,7 @@ public static partial class Schema {
 		public string m_iszSourceEntityName { get => GetString(__m_iszSourceEntityName); set => SetString(__m_iszSourceEntityName, value); }
 
 		private static readonly SchemaField __m_iszStackName = new("CSoundOpvarSetPointBase", "m_iszStackName");
-		/// <summary><c>CUtlSymbolLarge</c>. Networked in build 6779: a write is sent to clients.</summary>
+		/// <summary><c>CUtlSymbolLarge</c>. Networked: a write is sent to clients.</summary>
 		public string m_iszStackName { get => GetString(__m_iszStackName); set => SetString(__m_iszStackName, value); }
 
 		private static readonly SchemaField __m_vLastPosition = new("CSoundOpvarSetPointBase", "m_vLastPosition");

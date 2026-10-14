@@ -18,7 +18,7 @@ public static partial class Schema {
 		public bool m_bForcedObserverMode { get => Get<bool>(__m_bForcedObserverMode); set => Set(__m_bForcedObserverMode, value); }
 
 		private static readonly SchemaField __m_hObserverTarget = new("CPlayer_ObserverServices", "m_hObserverTarget");
-		/// <summary><c>CHandle&lt;CBaseEntity&gt;</c>. Networked in build 6779: a write is sent to clients. Wrapped by <c>CPlayer_ObserverServices.ObserverTarget</c> in DeadworksManaged.Api.</summary>
+		/// <summary><c>CHandle&lt;CBaseEntity&gt;</c>. Networked: a write is sent to clients. Wrapped by <c>CPlayer_ObserverServices.ObserverTarget</c> in DeadworksManaged.Api.</summary>
 		public CBaseEntity? m_hObserverTarget { get => GetHandle<CBaseEntity>(__m_hObserverTarget); set => SetHandle(__m_hObserverTarget, value); }
 
 		private static readonly SchemaField __m_iObserverLastMode = new("CPlayer_ObserverServices", "m_iObserverLastMode");
@@ -26,7 +26,7 @@ public static partial class Schema {
 		public ObserverMode_t m_iObserverLastMode { get => Get<ObserverMode_t>(__m_iObserverLastMode); set => Set(__m_iObserverLastMode, value); }
 
 		private static readonly SchemaField __m_iObserverMode = new("CPlayer_ObserverServices", "m_iObserverMode");
-		/// <summary><c>uint8</c>. Networked in build 6779: a write is sent to clients. Wrapped by <c>CPlayer_ObserverServices.ObserverMode</c> in DeadworksManaged.Api.</summary>
+		/// <summary><c>uint8</c>. Networked: a write is sent to clients. Wrapped by <c>CPlayer_ObserverServices.ObserverMode</c> in DeadworksManaged.Api.</summary>
 		public byte m_iObserverMode { get => Get<byte>(__m_iObserverMode); [Obsolete("A raw write skips what CPlayer_ObserverServices.SetObserverMode does; call that on the curated wrapper instead.")] set => Set(__m_iObserverMode, value); }
 	}
 }

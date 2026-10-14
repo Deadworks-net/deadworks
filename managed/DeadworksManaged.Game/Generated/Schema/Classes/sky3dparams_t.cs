@@ -14,27 +14,27 @@ public static partial class Schema {
 		static string ISchemaClass<sky3dparams_t>.NativeName => "sky3dparams_t";
 
 		private static readonly SchemaField __bClip3DSkyBoxNearToWorldFar = new("sky3dparams_t", "bClip3DSkyBoxNearToWorldFar");
-		/// <summary><c>bool</c>. Networked in build 6779: a write is sent to clients.</summary>
+		/// <summary><c>bool</c>. Networked: a write is sent to clients.</summary>
 		public bool bClip3DSkyBoxNearToWorldFar { get => Get<bool>(__bClip3DSkyBoxNearToWorldFar); set => Set(__bClip3DSkyBoxNearToWorldFar, value); }
 
 		private static readonly SchemaField __flClip3DSkyBoxNearToWorldFarOffset = new("sky3dparams_t", "flClip3DSkyBoxNearToWorldFarOffset");
-		/// <summary><c>float32</c>. Networked in build 6779: a write is sent to clients.</summary>
+		/// <summary><c>float32</c>. Networked: a write is sent to clients.</summary>
 		public float flClip3DSkyBoxNearToWorldFarOffset { get => Get<float>(__flClip3DSkyBoxNearToWorldFarOffset); set => Set(__flClip3DSkyBoxNearToWorldFarOffset, value); }
 
 		private static readonly SchemaField __fog = new("sky3dparams_t", "fog");
-		/// <summary><c>fogparams_t</c>. Networked in build 6779: a write is sent to clients.</summary>
+		/// <summary><c>fogparams_t</c>. Networked: a write is sent to clients.</summary>
 		public fogparams_t fog => Embedded<fogparams_t>(__fog);
 
 		private static readonly SchemaField __m_nWorldGroupID = new("sky3dparams_t", "m_nWorldGroupID");
-		/// <summary><c>WorldGroupId_t</c>. Networked in build 6779: a write is sent to clients.</summary>
+		/// <summary><c>WorldGroupId_t</c>. Networked: a write is sent to clients.</summary>
 		public uint m_nWorldGroupID { get => Get<uint>(__m_nWorldGroupID); set => Set(__m_nWorldGroupID, value); }
 
 		private static readonly SchemaField __origin = new("sky3dparams_t", "origin");
-		/// <summary><c>VectorWS</c>. Networked in build 6779: a write is sent to clients.</summary>
+		/// <summary><c>VectorWS</c>. Networked: a write is sent to clients.</summary>
 		public Vector3 origin { get => Get<Vector3>(__origin); set => Set(__origin, value); }
 
 		private static readonly SchemaField __scale = new("sky3dparams_t", "scale");
-		/// <summary><c>int16</c>. Networked in build 6779: a write is sent to clients.</summary>
+		/// <summary><c>int16</c>. Networked: a write is sent to clients.</summary>
 		public short scale { get => Get<short>(__scale); set => Set(__scale, value); }
 	}
 }

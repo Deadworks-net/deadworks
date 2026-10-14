@@ -46,7 +46,7 @@ public static partial class Schema {
 		public CEntityIOOutput m_OnTouchingEachEntity => Embedded<CEntityIOOutput>(__m_OnTouchingEachEntity);
 
 		private static readonly SchemaField __m_bDisabled = new("CBaseTrigger", "m_bDisabled");
-		/// <summary><c>bool</c>. Networked in build 6779: a write is sent to clients.</summary>
+		/// <summary><c>bool</c>. Networked: a write is sent to clients.</summary>
 		public bool m_bDisabled { get => Get<bool>(__m_bDisabled); set => Set(__m_bDisabled, value); }
 
 		private static readonly SchemaField __m_bUseAsyncQueries = new("CBaseTrigger", "m_bUseAsyncQueries");

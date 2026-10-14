@@ -14,7 +14,7 @@ public static partial class Schema {
 		static string ISchemaClass<CCitadel_Ability_ShieldedSentry>.NativeName => "CCitadel_Ability_ShieldedSentry";
 
 		private static readonly SchemaField __m_vecDeployedSentries = new("CCitadel_Ability_ShieldedSentry", "m_vecDeployedSentries");
-		/// <summary><c>CNetworkUtlVectorBase&lt;CHandle&lt;CNPC_ShieldedSentry&gt;&gt;</c>. Networked in build 6779: a write is sent to clients.</summary>
+		/// <summary><c>CNetworkUtlVectorBase&lt;CHandle&lt;CNPC_ShieldedSentry&gt;&gt;</c>. Networked: a write is sent to clients.</summary>
 		public SchemaHandleList<CNPC_ShieldedSentry> m_vecDeployedSentries => new(this, __m_vecDeployedSentries, ListStorage.Vector);
 	}
 }

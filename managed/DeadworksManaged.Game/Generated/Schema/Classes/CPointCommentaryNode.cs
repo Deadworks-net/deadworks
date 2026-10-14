@@ -14,7 +14,7 @@ public static partial class Schema {
 		static string ISchemaClass<CPointCommentaryNode>.NativeName => "CPointCommentaryNode";
 
 		private static readonly SchemaField __m_bActive = new("CPointCommentaryNode", "m_bActive");
-		/// <summary><c>bool</c>. Networked in build 6779: a write is sent to clients.</summary>
+		/// <summary><c>bool</c>. Networked: a write is sent to clients.</summary>
 		public bool m_bActive { get => Get<bool>(__m_bActive); set => Set(__m_bActive, value); }
 
 		private static readonly SchemaField __m_bDisabled = new("CPointCommentaryNode", "m_bDisabled");
@@ -22,7 +22,7 @@ public static partial class Schema {
 		public bool m_bDisabled { get => Get<bool>(__m_bDisabled); set => Set(__m_bDisabled, value); }
 
 		private static readonly SchemaField __m_bListenedTo = new("CPointCommentaryNode", "m_bListenedTo");
-		/// <summary><c>bool</c>. Networked in build 6779: a write is sent to clients.</summary>
+		/// <summary><c>bool</c>. Networked: a write is sent to clients.</summary>
 		public bool m_bListenedTo { get => Get<bool>(__m_bListenedTo); set => Set(__m_bListenedTo, value); }
 
 		private static readonly SchemaField __m_bPreventChangesWhileMoving = new("CPointCommentaryNode", "m_bPreventChangesWhileMoving");
@@ -50,15 +50,15 @@ public static partial class Schema {
 		public GameTime m_flFinishedTime { get => Get<GameTime>(__m_flFinishedTime); set => Set(__m_flFinishedTime, value); }
 
 		private static readonly SchemaField __m_flStartTime = new("CPointCommentaryNode", "m_flStartTime");
-		/// <summary><c>GameTime_t</c>. Networked in build 6779: a write is sent to clients.</summary>
+		/// <summary><c>GameTime_t</c>. Networked: a write is sent to clients.</summary>
 		public GameTime m_flStartTime { get => Get<GameTime>(__m_flStartTime); set => Set(__m_flStartTime, value); }
 
 		private static readonly SchemaField __m_flStartTimeInCommentary = new("CPointCommentaryNode", "m_flStartTimeInCommentary");
-		/// <summary><c>float32</c>. Networked in build 6779: a write is sent to clients.</summary>
+		/// <summary><c>float32</c>. Networked: a write is sent to clients.</summary>
 		public float m_flStartTimeInCommentary { get => Get<float>(__m_flStartTimeInCommentary); set => Set(__m_flStartTimeInCommentary, value); }
 
 		private static readonly SchemaField __m_hViewPosition = new("CPointCommentaryNode", "m_hViewPosition");
-		/// <summary><c>CHandle&lt;CBaseEntity&gt;</c>. Networked in build 6779: a write is sent to clients.</summary>
+		/// <summary><c>CHandle&lt;CBaseEntity&gt;</c>. Networked: a write is sent to clients.</summary>
 		public CBaseEntity? m_hViewPosition { get => GetHandle<CBaseEntity>(__m_hViewPosition); set => SetHandle(__m_hViewPosition, value); }
 
 		private static readonly SchemaField __m_hViewPositionMover = new("CPointCommentaryNode", "m_hViewPositionMover");
@@ -74,15 +74,15 @@ public static partial class Schema {
 		public CBaseEntity? m_hViewTargetAngles { get => GetHandle<CBaseEntity>(__m_hViewTargetAngles); set => SetHandle(__m_hViewTargetAngles, value); }
 
 		private static readonly SchemaField __m_iNodeNumber = new("CPointCommentaryNode", "m_iNodeNumber");
-		/// <summary><c>int32</c>. Networked in build 6779: a write is sent to clients.</summary>
+		/// <summary><c>int32</c>. Networked: a write is sent to clients.</summary>
 		public int m_iNodeNumber { get => Get<int>(__m_iNodeNumber); set => Set(__m_iNodeNumber, value); }
 
 		private static readonly SchemaField __m_iNodeNumberMax = new("CPointCommentaryNode", "m_iNodeNumberMax");
-		/// <summary><c>int32</c>. Networked in build 6779: a write is sent to clients.</summary>
+		/// <summary><c>int32</c>. Networked: a write is sent to clients.</summary>
 		public int m_iNodeNumberMax { get => Get<int>(__m_iNodeNumberMax); set => Set(__m_iNodeNumberMax, value); }
 
 		private static readonly SchemaField __m_iszCommentaryFile = new("CPointCommentaryNode", "m_iszCommentaryFile");
-		/// <summary><c>CUtlSymbolLarge</c>. Networked in build 6779: a write is sent to clients.</summary>
+		/// <summary><c>CUtlSymbolLarge</c>. Networked: a write is sent to clients.</summary>
 		public string m_iszCommentaryFile { get => GetString(__m_iszCommentaryFile); set => SetString(__m_iszCommentaryFile, value); }
 
 		private static readonly SchemaField __m_iszPostCommands = new("CPointCommentaryNode", "m_iszPostCommands");
@@ -94,11 +94,11 @@ public static partial class Schema {
 		public string m_iszPreCommands { get => GetString(__m_iszPreCommands); set => SetString(__m_iszPreCommands, value); }
 
 		private static readonly SchemaField __m_iszSpeakers = new("CPointCommentaryNode", "m_iszSpeakers");
-		/// <summary><c>CUtlSymbolLarge</c>. Networked in build 6779: a write is sent to clients.</summary>
+		/// <summary><c>CUtlSymbolLarge</c>. Networked: a write is sent to clients.</summary>
 		public string m_iszSpeakers { get => GetString(__m_iszSpeakers); set => SetString(__m_iszSpeakers, value); }
 
 		private static readonly SchemaField __m_iszTitle = new("CPointCommentaryNode", "m_iszTitle");
-		/// <summary><c>CUtlSymbolLarge</c>. Networked in build 6779: a write is sent to clients.</summary>
+		/// <summary><c>CUtlSymbolLarge</c>. Networked: a write is sent to clients.</summary>
 		public string m_iszTitle { get => GetString(__m_iszTitle); set => SetString(__m_iszTitle, value); }
 
 		private static readonly SchemaField __m_iszViewPosition = new("CPointCommentaryNode", "m_iszViewPosition");

@@ -30,7 +30,7 @@ public static partial class Schema {
 		public bool m_bIsLowViolence { get => Get<bool>(__m_bIsLowViolence); set => Set(__m_bIsLowViolence, value); }
 
 		private static readonly SchemaField __m_bKnownTeamMismatch = new("CBasePlayerController", "m_bKnownTeamMismatch");
-		/// <summary><c>bool</c>. Networked in build 6779: a write is sent to clients.</summary>
+		/// <summary><c>bool</c>. Networked: a write is sent to clients.</summary>
 		public bool m_bKnownTeamMismatch { get => Get<bool>(__m_bKnownTeamMismatch); set => Set(__m_bKnownTeamMismatch, value); }
 
 		private static readonly SchemaField __m_bLagCompensation = new("CBasePlayerController", "m_bLagCompensation");
@@ -38,7 +38,7 @@ public static partial class Schema {
 		public bool m_bLagCompensation { get => Get<bool>(__m_bLagCompensation); set => Set(__m_bLagCompensation, value); }
 
 		private static readonly SchemaField __m_bNoClipEnabled = new("CBasePlayerController", "m_bNoClipEnabled");
-		/// <summary><c>bool</c>. Networked in build 6779: a write is sent to clients.</summary>
+		/// <summary><c>bool</c>. Networked: a write is sent to clients.</summary>
 		public bool m_bNoClipEnabled { get => Get<bool>(__m_bNoClipEnabled); set => Set(__m_bNoClipEnabled, value); }
 
 		private static readonly SchemaField __m_bPredict = new("CBasePlayerController", "m_bPredict");
@@ -58,7 +58,7 @@ public static partial class Schema {
 		public float m_flLastPlayerTalkTime { get => Get<float>(__m_flLastPlayerTalkTime); set => Set(__m_flLastPlayerTalkTime, value); }
 
 		private static readonly SchemaField __m_hPawn = new("CBasePlayerController", "m_hPawn");
-		/// <summary><c>CHandle&lt;CBasePlayerPawn&gt;</c>. Networked in build 6779: a write is sent to clients. Wrapped by <c>CBasePlayerController.Pawn</c> in DeadworksManaged.Api.</summary>
+		/// <summary><c>CHandle&lt;CBasePlayerPawn&gt;</c>. Networked: a write is sent to clients. Wrapped by <c>CBasePlayerController.Pawn</c> in DeadworksManaged.Api.</summary>
 		public CBasePlayerPawn? m_hPawn { get => GetHandle<CBasePlayerPawn>(__m_hPawn); set => SetHandle(__m_hPawn, value); }
 
 		private static readonly SchemaField __m_hSplitOwner = new("CBasePlayerController", "m_hSplitOwner");
@@ -70,11 +70,11 @@ public static partial class Schema {
 		public SchemaHandleList<CBasePlayerController> m_hSplitScreenPlayers => new(this, __m_hSplitScreenPlayers, ListStorage.Vector);
 
 		private static readonly SchemaField __m_iConnected = new("CBasePlayerController", "m_iConnected");
-		/// <summary><c>PlayerConnectedState</c>. Networked in build 6779: a write is sent to clients.</summary>
+		/// <summary><c>PlayerConnectedState</c>. Networked: a write is sent to clients.</summary>
 		public PlayerConnectedState m_iConnected { get => Get<PlayerConnectedState>(__m_iConnected); set => Set(__m_iConnected, value); }
 
 		private static readonly SchemaField __m_iDesiredFOV = new("CBasePlayerController", "m_iDesiredFOV");
-		/// <summary><c>uint32</c>. Networked in build 6779: a write is sent to clients.</summary>
+		/// <summary><c>uint32</c>. Networked: a write is sent to clients.</summary>
 		public uint m_iDesiredFOV { get => Get<uint>(__m_iDesiredFOV); set => Set(__m_iDesiredFOV, value); }
 
 		private static readonly SchemaField __m_iIgnoreGlobalChat = new("CBasePlayerController", "m_iIgnoreGlobalChat");
@@ -82,11 +82,11 @@ public static partial class Schema {
 		public ChatIgnoreType_t m_iIgnoreGlobalChat { get => Get<ChatIgnoreType_t>(__m_iIgnoreGlobalChat); set => Set(__m_iIgnoreGlobalChat, value); }
 
 		private static readonly SchemaField __m_iMostConnected = new("CBasePlayerController", "m_iMostConnected");
-		/// <summary><c>PlayerConnectedState</c>. Networked in build 6779: a write is sent to clients.</summary>
+		/// <summary><c>PlayerConnectedState</c>. Networked: a write is sent to clients.</summary>
 		public PlayerConnectedState m_iMostConnected { get => Get<PlayerConnectedState>(__m_iMostConnected); set => Set(__m_iMostConnected, value); }
 
 		private static readonly SchemaField __m_iszPlayerName = new("CBasePlayerController", "m_iszPlayerName");
-		/// <summary><c>char[128]</c>. Networked in build 6779: a write is sent to clients. Wrapped by <c>CBasePlayerController.PlayerName</c> in DeadworksManaged.Api.</summary>
+		/// <summary><c>char[128]</c>. Networked: a write is sent to clients. Wrapped by <c>CBasePlayerController.PlayerName</c> in DeadworksManaged.Api.</summary>
 		public string m_iszPlayerName => GetChars(__m_iszPlayerName, 128);
 
 		private static readonly SchemaField __m_nAvailableEntitySteadyState = new("CBasePlayerController", "m_nAvailableEntitySteadyState");
@@ -102,11 +102,11 @@ public static partial class Schema {
 		public int m_nSplitScreenSlot { get => Get<int>(__m_nSplitScreenSlot); set => Set(__m_nSplitScreenSlot, value); }
 
 		private static readonly SchemaField __m_nTickBase = new("CBasePlayerController", "m_nTickBase");
-		/// <summary><c>uint32</c>. Networked in build 6779: a write is sent to clients.</summary>
+		/// <summary><c>uint32</c>. Networked: a write is sent to clients.</summary>
 		public uint m_nTickBase { get => Get<uint>(__m_nTickBase); set => Set(__m_nTickBase, value); }
 
 		private static readonly SchemaField __m_steamID = new("CBasePlayerController", "m_steamID");
-		/// <summary><c>uint64</c>. Networked in build 6779: a write is sent to clients. Wrapped by <c>CBasePlayerController.PlayerSteamId</c> in DeadworksManaged.Api.</summary>
+		/// <summary><c>uint64</c>. Networked: a write is sent to clients. Wrapped by <c>CBasePlayerController.PlayerSteamId</c> in DeadworksManaged.Api.</summary>
 		public ulong m_steamID { get => Get<ulong>(__m_steamID); set => Set(__m_steamID, value); }
 
 		private static readonly SchemaField __m_szNetworkIDString = new("CBasePlayerController", "m_szNetworkIDString");

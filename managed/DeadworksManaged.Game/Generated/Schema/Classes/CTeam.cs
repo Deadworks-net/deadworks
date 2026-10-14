@@ -14,19 +14,19 @@ public static partial class Schema {
 		static string ISchemaClass<CTeam>.NativeName => "CTeam";
 
 		private static readonly SchemaField __m_aPlayerControllers = new("CTeam", "m_aPlayerControllers");
-		/// <summary><c>CNetworkUtlVectorBase&lt;CHandle&lt;CBasePlayerController&gt;&gt;</c>. Networked in build 6779: a write is sent to clients.</summary>
+		/// <summary><c>CNetworkUtlVectorBase&lt;CHandle&lt;CBasePlayerController&gt;&gt;</c>. Networked: a write is sent to clients.</summary>
 		public SchemaHandleList<CBasePlayerController> m_aPlayerControllers => new(this, __m_aPlayerControllers, ListStorage.Vector);
 
 		private static readonly SchemaField __m_aPlayers = new("CTeam", "m_aPlayers");
-		/// <summary><c>CNetworkUtlVectorBase&lt;CHandle&lt;CBasePlayerPawn&gt;&gt;</c>. Networked in build 6779: a write is sent to clients.</summary>
+		/// <summary><c>CNetworkUtlVectorBase&lt;CHandle&lt;CBasePlayerPawn&gt;&gt;</c>. Networked: a write is sent to clients.</summary>
 		public SchemaHandleList<CBasePlayerPawn> m_aPlayers => new(this, __m_aPlayers, ListStorage.Vector);
 
 		private static readonly SchemaField __m_iScore = new("CTeam", "m_iScore");
-		/// <summary><c>int32</c>. Networked in build 6779: a write is sent to clients.</summary>
+		/// <summary><c>int32</c>. Networked: a write is sent to clients.</summary>
 		public int m_iScore { get => Get<int>(__m_iScore); set => Set(__m_iScore, value); }
 
 		private static readonly SchemaField __m_szTeamname = new("CTeam", "m_szTeamname");
-		/// <summary><c>char[129]</c>. Networked in build 6779: a write is sent to clients.</summary>
+		/// <summary><c>char[129]</c>. Networked: a write is sent to clients.</summary>
 		public string m_szTeamname => GetChars(__m_szTeamname, 129);
 	}
 }

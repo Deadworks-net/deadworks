@@ -14,11 +14,11 @@ public static partial class Schema {
 		static string ISchemaClass<CCitadel_Ability_StormCloud>.NativeName => "CCitadel_Ability_StormCloud";
 
 		private static readonly SchemaField __m_flFloat = new("CCitadel_Ability_StormCloud", "m_flFloat");
-		/// <summary><c>float32</c>. Networked in build 6779: a write is sent to clients.</summary>
+		/// <summary><c>float32</c>. Networked: a write is sent to clients.</summary>
 		public float m_flFloat { get => Get<float>(__m_flFloat); set => Set(__m_flFloat, value); }
 
 		private static readonly SchemaField __m_nLightningStrikesRemaining = new("CCitadel_Ability_StormCloud", "m_nLightningStrikesRemaining");
-		/// <summary><c>int32</c>. Networked in build 6779: a write is sent to clients.</summary>
+		/// <summary><c>int32</c>. Networked: a write is sent to clients.</summary>
 		public int m_nLightningStrikesRemaining { get => Get<int>(__m_nLightningStrikesRemaining); set => Set(__m_nLightningStrikesRemaining, value); }
 
 		private static readonly SchemaField __m_nTargetingParticleIndex = new("CCitadel_Ability_StormCloud", "m_nTargetingParticleIndex");

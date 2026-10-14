@@ -14,11 +14,11 @@ public static partial class Schema {
 		static string ISchemaClass<CCitadel_Destroyable_Building>.NativeName => "CCitadel_Destroyable_Building";
 
 		private static readonly SchemaField __m_CCitadelAbilityComponent = new("CCitadel_Destroyable_Building", "m_CCitadelAbilityComponent");
-		/// <summary><c>CCitadelAbilityComponent</c>. Networked in build 6779: a write is sent to clients.</summary>
+		/// <summary><c>CCitadelAbilityComponent</c>. Networked: a write is sent to clients.</summary>
 		public CCitadelAbilityComponent m_CCitadelAbilityComponent => Embedded<CCitadelAbilityComponent>(__m_CCitadelAbilityComponent);
 
 		private static readonly SchemaField __m_CCitadelMinimapComponent = new("CCitadel_Destroyable_Building", "m_CCitadelMinimapComponent");
-		/// <summary><c>CCitadelMinimapComponent</c>. Networked in build 6779: a write is sent to clients.</summary>
+		/// <summary><c>CCitadelMinimapComponent</c>. Networked: a write is sent to clients.</summary>
 		public CCitadelMinimapComponent m_CCitadelMinimapComponent => Embedded<CCitadelMinimapComponent>(__m_CCitadelMinimapComponent);
 
 		private static readonly SchemaField __m_OnAttackSubsided = new("CCitadel_Destroyable_Building", "m_OnAttackSubsided");
@@ -62,15 +62,15 @@ public static partial class Schema {
 		public Vector3 m_angOriginal { get => Get<Vector3>(__m_angOriginal); set => Set(__m_angOriginal, value); }
 
 		private static readonly SchemaField __m_bActive = new("CCitadel_Destroyable_Building", "m_bActive");
-		/// <summary><c>bool</c>. Networked in build 6779: a write is sent to clients.</summary>
+		/// <summary><c>bool</c>. Networked: a write is sent to clients.</summary>
 		public bool m_bActive { get => Get<bool>(__m_bActive); set => Set(__m_bActive, value); }
 
 		private static readonly SchemaField __m_bDestroyed = new("CCitadel_Destroyable_Building", "m_bDestroyed");
-		/// <summary><c>bool</c>. Networked in build 6779: a write is sent to clients.</summary>
+		/// <summary><c>bool</c>. Networked: a write is sent to clients.</summary>
 		public bool m_bDestroyed { get => Get<bool>(__m_bDestroyed); set => Set(__m_bDestroyed, value); }
 
 		private static readonly SchemaField __m_bFinal = new("CCitadel_Destroyable_Building", "m_bFinal");
-		/// <summary><c>bool</c>. Networked in build 6779: a write is sent to clients.</summary>
+		/// <summary><c>bool</c>. Networked: a write is sent to clients.</summary>
 		public bool m_bFinal { get => Get<bool>(__m_bFinal); set => Set(__m_bFinal, value); }
 
 		private static readonly SchemaField __m_backdoorProtectionTrigger = new("CCitadel_Destroyable_Building", "m_backdoorProtectionTrigger");
@@ -98,7 +98,7 @@ public static partial class Schema {
 		public string m_strTrooperApproach { get => GetString(__m_strTrooperApproach); set => SetString(__m_strTrooperApproach, value); }
 
 		private static readonly SchemaField __m_vecWeakPoints = new("CCitadel_Destroyable_Building", "m_vecWeakPoints");
-		/// <summary><c>CUtlVectorEmbeddedNetworkVar&lt;WeakPoint_t&gt;</c>. Networked in build 6779: a write is sent to clients.</summary>
+		/// <summary><c>CUtlVectorEmbeddedNetworkVar&lt;WeakPoint_t&gt;</c>. Networked: a write is sent to clients.</summary>
 		public SchemaObjectList<WeakPoint_t> m_vecWeakPoints => new(this, __m_vecWeakPoints, ListStorage.Vector);
 	}
 }

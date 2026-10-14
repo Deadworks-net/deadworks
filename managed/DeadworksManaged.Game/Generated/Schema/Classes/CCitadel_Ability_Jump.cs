@@ -18,15 +18,15 @@ public static partial class Schema {
 		public EJumpType_t m_LastJumpType { get => Get<EJumpType_t>(__m_LastJumpType); set => Set(__m_LastJumpType, value); }
 
 		private static readonly SchemaField __m_bCanDashJump = new("CCitadel_Ability_Jump", "m_bCanDashJump");
-		/// <summary><c>bool</c>. Networked in build 6779: a write is sent to clients.</summary>
+		/// <summary><c>bool</c>. Networked: a write is sent to clients.</summary>
 		public bool m_bCanDashJump { get => Get<bool>(__m_bCanDashJump); set => Set(__m_bCanDashJump, value); }
 
 		private static readonly SchemaField __m_bInSlideJump = new("CCitadel_Ability_Jump", "m_bInSlideJump");
-		/// <summary><c>bool</c>. Networked in build 6779: a write is sent to clients.</summary>
+		/// <summary><c>bool</c>. Networked: a write is sent to clients.</summary>
 		public bool m_bInSlideJump { get => Get<bool>(__m_bInSlideJump); set => Set(__m_bInSlideJump, value); }
 
 		private static readonly SchemaField __m_bJumped = new("CCitadel_Ability_Jump", "m_bJumped");
-		/// <summary><c>bool</c>. Networked in build 6779: a write is sent to clients.</summary>
+		/// <summary><c>bool</c>. Networked: a write is sent to clients.</summary>
 		public bool m_bJumped { get => Get<bool>(__m_bJumped); set => Set(__m_bJumped, value); }
 
 		private static readonly SchemaField __m_bResolvingAirJump = new("CCitadel_Ability_Jump", "m_bResolvingAirJump");
@@ -46,11 +46,11 @@ public static partial class Schema {
 		public EWallJumpFacing m_eWallJumpFacing { get => Get<EWallJumpFacing>(__m_eWallJumpFacing); set => Set(__m_eWallJumpFacing, value); }
 
 		private static readonly SchemaField __m_flDashJumpEndTime = new("CCitadel_Ability_Jump", "m_flDashJumpEndTime");
-		/// <summary><c>CCitadelAutoScaledTime</c>. Networked in build 6779: a write is sent to clients.</summary>
+		/// <summary><c>CCitadelAutoScaledTime</c>. Networked: a write is sent to clients.</summary>
 		public CCitadelAutoScaledTime m_flDashJumpEndTime => Embedded<CCitadelAutoScaledTime>(__m_flDashJumpEndTime);
 
 		private static readonly SchemaField __m_flDashJumpStartTime = new("CCitadel_Ability_Jump", "m_flDashJumpStartTime");
-		/// <summary><c>CCitadelAutoScaledTime</c>. Networked in build 6779: a write is sent to clients.</summary>
+		/// <summary><c>CCitadelAutoScaledTime</c>. Networked: a write is sent to clients.</summary>
 		public CCitadelAutoScaledTime m_flDashJumpStartTime => Embedded<CCitadelAutoScaledTime>(__m_flDashJumpStartTime);
 
 		private static readonly SchemaField __m_flDoubleJumpFailTime = new("CCitadel_Ability_Jump", "m_flDoubleJumpFailTime");
@@ -82,7 +82,7 @@ public static partial class Schema {
 		public GameTime m_flLastWallJumpTime { get => Get<GameTime>(__m_flLastWallJumpTime); set => Set(__m_flLastWallJumpTime, value); }
 
 		private static readonly SchemaField __m_flLateralInputSuppressEndTime = new("CCitadel_Ability_Jump", "m_flLateralInputSuppressEndTime");
-		/// <summary><c>GameTime_t</c>. Networked in build 6779: a write is sent to clients.</summary>
+		/// <summary><c>GameTime_t</c>. Networked: a write is sent to clients.</summary>
 		public GameTime m_flLateralInputSuppressEndTime { get => Get<GameTime>(__m_flLateralInputSuppressEndTime); set => Set(__m_flLateralInputSuppressEndTime, value); }
 
 		private static readonly SchemaField __m_flPhaseStartTime = new("CCitadel_Ability_Jump", "m_flPhaseStartTime");
@@ -94,19 +94,19 @@ public static partial class Schema {
 		public GameTime m_flWallJumpFatigueStartTime { get => Get<GameTime>(__m_flWallJumpFatigueStartTime); set => Set(__m_flWallJumpFatigueStartTime, value); }
 
 		private static readonly SchemaField __m_nConsecutiveAirJumps = new("CCitadel_Ability_Jump", "m_nConsecutiveAirJumps");
-		/// <summary><c>int8</c>. Networked in build 6779: a write is sent to clients. Wrapped by <c>CCitadel_Ability_Jump.ConsecutiveAirJumps</c> in DeadworksManaged.Api.</summary>
+		/// <summary><c>int8</c>. Networked: a write is sent to clients. Wrapped by <c>CCitadel_Ability_Jump.ConsecutiveAirJumps</c> in DeadworksManaged.Api.</summary>
 		public sbyte m_nConsecutiveAirJumps { get => Get<sbyte>(__m_nConsecutiveAirJumps); set => Set(__m_nConsecutiveAirJumps, value); }
 
 		private static readonly SchemaField __m_nConsecutiveWallJumps = new("CCitadel_Ability_Jump", "m_nConsecutiveWallJumps");
-		/// <summary><c>int8</c>. Networked in build 6779: a write is sent to clients. Wrapped by <c>CCitadel_Ability_Jump.ConsecutiveWallJumps</c> in DeadworksManaged.Api.</summary>
+		/// <summary><c>int8</c>. Networked: a write is sent to clients. Wrapped by <c>CCitadel_Ability_Jump.ConsecutiveWallJumps</c> in DeadworksManaged.Api.</summary>
 		public sbyte m_nConsecutiveWallJumps { get => Get<sbyte>(__m_nConsecutiveWallJumps); set => Set(__m_nConsecutiveWallJumps, value); }
 
 		private static readonly SchemaField __m_nDesiredAirJumpCount = new("CCitadel_Ability_Jump", "m_nDesiredAirJumpCount");
-		/// <summary><c>int32</c>. Networked in build 6779: a write is sent to clients. Wrapped by <c>CCitadel_Ability_Jump.DesiredAirJumpCount</c> in DeadworksManaged.Api.</summary>
+		/// <summary><c>int32</c>. Networked: a write is sent to clients. Wrapped by <c>CCitadel_Ability_Jump.DesiredAirJumpCount</c> in DeadworksManaged.Api.</summary>
 		public int m_nDesiredAirJumpCount { get => Get<int>(__m_nDesiredAirJumpCount); set => Set(__m_nDesiredAirJumpCount, value); }
 
 		private static readonly SchemaField __m_nExecutedAirJumpCount = new("CCitadel_Ability_Jump", "m_nExecutedAirJumpCount");
-		/// <summary><c>int32</c>. Networked in build 6779: a write is sent to clients. Wrapped by <c>CCitadel_Ability_Jump.ExecutedAirJumpCount</c> in DeadworksManaged.Api.</summary>
+		/// <summary><c>int32</c>. Networked: a write is sent to clients. Wrapped by <c>CCitadel_Ability_Jump.ExecutedAirJumpCount</c> in DeadworksManaged.Api.</summary>
 		public int m_nExecutedAirJumpCount { get => Get<int>(__m_nExecutedAirJumpCount); set => Set(__m_nExecutedAirJumpCount, value); }
 
 		private static readonly SchemaField __m_vCurrentWallNormal = new("CCitadel_Ability_Jump", "m_vCurrentWallNormal");

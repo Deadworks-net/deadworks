@@ -14,7 +14,7 @@ public static partial class Schema {
 		static string ISchemaClass<CCitadelTriggerCapturePoint>.NativeName => "CCitadelTriggerCapturePoint";
 
 		private static readonly SchemaField __m_CCitadelMinimapComponent = new("CCitadelTriggerCapturePoint", "m_CCitadelMinimapComponent");
-		/// <summary><c>CCitadelMinimapComponent</c>. Networked in build 6779: a write is sent to clients.</summary>
+		/// <summary><c>CCitadelMinimapComponent</c>. Networked: a write is sent to clients.</summary>
 		public CCitadelMinimapComponent m_CCitadelMinimapComponent => Embedded<CCitadelMinimapComponent>(__m_CCitadelMinimapComponent);
 
 		private static readonly SchemaField __m_OnBecomeCapturable = new("CCitadelTriggerCapturePoint", "m_OnBecomeCapturable");
@@ -26,7 +26,7 @@ public static partial class Schema {
 		public RawField m_OnFullyCaptured => Raw(__m_OnFullyCaptured, "CEntityOutputTemplate<int32>");
 
 		private static readonly SchemaField __m_flCaptureProgress = new("CCitadelTriggerCapturePoint", "m_flCaptureProgress");
-		/// <summary><c>float32</c>. Networked in build 6779: a write is sent to clients.</summary>
+		/// <summary><c>float32</c>. Networked: a write is sent to clients.</summary>
 		public float m_flCaptureProgress { get => Get<float>(__m_flCaptureProgress); set => Set(__m_flCaptureProgress, value); }
 
 		private static readonly SchemaField __m_iszGroupName = new("CCitadelTriggerCapturePoint", "m_iszGroupName");
@@ -34,19 +34,19 @@ public static partial class Schema {
 		public string m_iszGroupName { get => GetString(__m_iszGroupName); set => SetString(__m_iszGroupName, value); }
 
 		private static readonly SchemaField __m_nActiveCapturers = new("CCitadelTriggerCapturePoint", "m_nActiveCapturers");
-		/// <summary><c>int32</c>. Networked in build 6779: a write is sent to clients.</summary>
+		/// <summary><c>int32</c>. Networked: a write is sent to clients.</summary>
 		public int m_nActiveCapturers { get => Get<int>(__m_nActiveCapturers); set => Set(__m_nActiveCapturers, value); }
 
 		private static readonly SchemaField __m_nActivelyCapturingTeam = new("CCitadelTriggerCapturePoint", "m_nActivelyCapturingTeam");
-		/// <summary><c>int32</c>. Networked in build 6779: a write is sent to clients.</summary>
+		/// <summary><c>int32</c>. Networked: a write is sent to clients.</summary>
 		public int m_nActivelyCapturingTeam { get => Get<int>(__m_nActivelyCapturingTeam); set => Set(__m_nActivelyCapturingTeam, value); }
 
 		private static readonly SchemaField __m_nCaptureProgressOwner = new("CCitadelTriggerCapturePoint", "m_nCaptureProgressOwner");
-		/// <summary><c>int32</c>. Networked in build 6779: a write is sent to clients.</summary>
+		/// <summary><c>int32</c>. Networked: a write is sent to clients.</summary>
 		public int m_nCaptureProgressOwner { get => Get<int>(__m_nCaptureProgressOwner); set => Set(__m_nCaptureProgressOwner, value); }
 
 		private static readonly SchemaField __m_nEnableState = new("CCitadelTriggerCapturePoint", "m_nEnableState");
-		/// <summary><c>uint8</c>. Networked in build 6779: a write is sent to clients.</summary>
+		/// <summary><c>uint8</c>. Networked: a write is sent to clients.</summary>
 		public byte m_nEnableState { get => Get<byte>(__m_nEnableState); set => Set(__m_nEnableState, value); }
 
 		private static readonly SchemaField __m_nEnabledParticle = new("CCitadelTriggerCapturePoint", "m_nEnabledParticle");
@@ -58,7 +58,7 @@ public static partial class Schema {
 		public int m_nPreEnableFX { get => Get<int>(__m_nPreEnableFX); set => Set(__m_nPreEnableFX, value); }
 
 		private static readonly SchemaField __m_tQueuedEnableTime = new("CCitadelTriggerCapturePoint", "m_tQueuedEnableTime");
-		/// <summary><c>GameTime_t</c>. Networked in build 6779: a write is sent to clients.</summary>
+		/// <summary><c>GameTime_t</c>. Networked: a write is sent to clients.</summary>
 		public GameTime m_tQueuedEnableTime { get => Get<GameTime>(__m_tQueuedEnableTime); set => Set(__m_tQueuedEnableTime, value); }
 	}
 }

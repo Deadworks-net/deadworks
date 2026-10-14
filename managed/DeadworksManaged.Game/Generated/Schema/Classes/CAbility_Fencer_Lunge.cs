@@ -14,15 +14,15 @@ public static partial class Schema {
 		static string ISchemaClass<CAbility_Fencer_Lunge>.NativeName => "CAbility_Fencer_Lunge";
 
 		private static readonly SchemaField __m_RecastEndTime = new("CAbility_Fencer_Lunge", "m_RecastEndTime");
-		/// <summary><c>GameTime_t</c>. Networked in build 6779: a write is sent to clients.</summary>
+		/// <summary><c>GameTime_t</c>. Networked: a write is sent to clients.</summary>
 		public GameTime m_RecastEndTime { get => Get<GameTime>(__m_RecastEndTime); set => Set(__m_RecastEndTime, value); }
 
 		private static readonly SchemaField __m_bStartedInAir = new("CAbility_Fencer_Lunge", "m_bStartedInAir");
-		/// <summary><c>bool</c>. Networked in build 6779: a write is sent to clients.</summary>
+		/// <summary><c>bool</c>. Networked: a write is sent to clients.</summary>
 		public bool m_bStartedInAir { get => Get<bool>(__m_bStartedInAir); set => Set(__m_bStartedInAir, value); }
 
 		private static readonly SchemaField __m_eLungeDirection = new("CAbility_Fencer_Lunge", "m_eLungeDirection");
-		/// <summary><c>uint8</c>. Networked in build 6779: a write is sent to clients.</summary>
+		/// <summary><c>uint8</c>. Networked: a write is sent to clients.</summary>
 		public byte m_eLungeDirection { get => Get<byte>(__m_eLungeDirection); set => Set(__m_eLungeDirection, value); }
 
 		private static readonly SchemaField __m_flHeldTime = new("CAbility_Fencer_Lunge", "m_flHeldTime");
@@ -34,7 +34,7 @@ public static partial class Schema {
 		public float m_flLastOuterCircleProgress { get => Get<float>(__m_flLastOuterCircleProgress); set => Set(__m_flLastOuterCircleProgress, value); }
 
 		private static readonly SchemaField __m_flStateStartTime = new("CAbility_Fencer_Lunge", "m_flStateStartTime");
-		/// <summary><c>GameTime_t</c>. Networked in build 6779: a write is sent to clients.</summary>
+		/// <summary><c>GameTime_t</c>. Networked: a write is sent to clients.</summary>
 		public GameTime m_flStateStartTime { get => Get<GameTime>(__m_flStateStartTime); set => Set(__m_flStateStartTime, value); }
 
 		private static readonly SchemaField __m_flStuckTime = new("CAbility_Fencer_Lunge", "m_flStuckTime");
@@ -42,11 +42,11 @@ public static partial class Schema {
 		public GameTime m_flStuckTime { get => Get<GameTime>(__m_flStuckTime); set => Set(__m_flStuckTime, value); }
 
 		private static readonly SchemaField __m_iRemainingCasts = new("CAbility_Fencer_Lunge", "m_iRemainingCasts");
-		/// <summary><c>uint8</c>. Networked in build 6779: a write is sent to clients.</summary>
+		/// <summary><c>uint8</c>. Networked: a write is sent to clients.</summary>
 		public byte m_iRemainingCasts { get => Get<byte>(__m_iRemainingCasts); set => Set(__m_iRemainingCasts, value); }
 
 		private static readonly SchemaField __m_nCurrentLungeState = new("CAbility_Fencer_Lunge", "m_nCurrentLungeState");
-		/// <summary><c>uint8</c>. Networked in build 6779: a write is sent to clients.</summary>
+		/// <summary><c>uint8</c>. Networked: a write is sent to clients.</summary>
 		public byte m_nCurrentLungeState { get => Get<byte>(__m_nCurrentLungeState); set => Set(__m_nCurrentLungeState, value); }
 
 		private static readonly SchemaField __m_nGlintParticleIndex = new("CAbility_Fencer_Lunge", "m_nGlintParticleIndex");
@@ -54,15 +54,15 @@ public static partial class Schema {
 		public int m_nGlintParticleIndex { get => Get<int>(__m_nGlintParticleIndex); set => Set(__m_nGlintParticleIndex, value); }
 
 		private static readonly SchemaField __m_nPowerLevel = new("CAbility_Fencer_Lunge", "m_nPowerLevel");
-		/// <summary><c>int32</c>. Networked in build 6779: a write is sent to clients.</summary>
+		/// <summary><c>int32</c>. Networked: a write is sent to clients.</summary>
 		public int m_nPowerLevel { get => Get<int>(__m_nPowerLevel); set => Set(__m_nPowerLevel, value); }
 
 		private static readonly SchemaField __m_vDashDirection = new("CAbility_Fencer_Lunge", "m_vDashDirection");
-		/// <summary><c>Vector</c>. Networked in build 6779: a write is sent to clients.</summary>
+		/// <summary><c>Vector</c>. Networked: a write is sent to clients.</summary>
 		public Vector3 m_vDashDirection { get => Get<Vector3>(__m_vDashDirection); set => Set(__m_vDashDirection, value); }
 
 		private static readonly SchemaField __m_vDashStartPos = new("CAbility_Fencer_Lunge", "m_vDashStartPos");
-		/// <summary><c>VectorWS</c>. Networked in build 6779: a write is sent to clients.</summary>
+		/// <summary><c>VectorWS</c>. Networked: a write is sent to clients.</summary>
 		public Vector3 m_vDashStartPos { get => Get<Vector3>(__m_vDashStartPos); set => Set(__m_vDashStartPos, value); }
 
 		private static readonly SchemaField __m_vLastPosition = new("CAbility_Fencer_Lunge", "m_vLastPosition");
@@ -70,11 +70,11 @@ public static partial class Schema {
 		public Vector3 m_vLastPosition { get => Get<Vector3>(__m_vLastPosition); set => Set(__m_vLastPosition, value); }
 
 		private static readonly SchemaField __m_vLookDirection = new("CAbility_Fencer_Lunge", "m_vLookDirection");
-		/// <summary><c>Vector</c>. Networked in build 6779: a write is sent to clients.</summary>
+		/// <summary><c>Vector</c>. Networked: a write is sent to clients.</summary>
 		public Vector3 m_vLookDirection { get => Get<Vector3>(__m_vLookDirection); set => Set(__m_vLookDirection, value); }
 
 		private static readonly SchemaField __m_vStrikeDirection = new("CAbility_Fencer_Lunge", "m_vStrikeDirection");
-		/// <summary><c>Vector</c>. Networked in build 6779: a write is sent to clients.</summary>
+		/// <summary><c>Vector</c>. Networked: a write is sent to clients.</summary>
 		public Vector3 m_vStrikeDirection { get => Get<Vector3>(__m_vStrikeDirection); set => Set(__m_vStrikeDirection, value); }
 
 		private static readonly SchemaField __m_vecHitEnemies = new("CAbility_Fencer_Lunge", "m_vecHitEnemies");

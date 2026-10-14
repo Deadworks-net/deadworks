@@ -30,19 +30,19 @@ public static partial class Schema {
 		public bool m_bIsGeneratingLatchedParentSpaceState { get => Get<bool>(__m_bIsGeneratingLatchedParentSpaceState); set => Set(__m_bIsGeneratingLatchedParentSpaceState, value); }
 
 		private static readonly SchemaField __m_bUseParentRenderBounds = new("CSkeletonInstance", "m_bUseParentRenderBounds");
-		/// <summary><c>bool</c>. Networked in build 6779: a write is sent to clients.</summary>
+		/// <summary><c>bool</c>. Networked: a write is sent to clients.</summary>
 		public bool m_bUseParentRenderBounds { get => Get<bool>(__m_bUseParentRenderBounds); set => Set(__m_bUseParentRenderBounds, value); }
 
 		private static readonly SchemaField __m_materialGroup = new("CSkeletonInstance", "m_materialGroup");
-		/// <summary><c>CUtlStringToken</c>. Networked in build 6779: a write is sent to clients.</summary>
+		/// <summary><c>CUtlStringToken</c>. Networked: a write is sent to clients.</summary>
 		public uint m_materialGroup { get => Get<uint>(__m_materialGroup); set => Set(__m_materialGroup, value); }
 
 		private static readonly SchemaField __m_modelState = new("CSkeletonInstance", "m_modelState");
-		/// <summary><c>CModelState</c>. Networked in build 6779: a write is sent to clients.</summary>
+		/// <summary><c>CModelState</c>. Networked: a write is sent to clients.</summary>
 		public CModelState m_modelState => Embedded<CModelState>(__m_modelState);
 
 		private static readonly SchemaField __m_nHitboxSet = new("CSkeletonInstance", "m_nHitboxSet");
-		/// <summary><c>uint8</c>. Networked in build 6779: a write is sent to clients.</summary>
+		/// <summary><c>uint8</c>. Networked: a write is sent to clients.</summary>
 		public byte m_nHitboxSet { get => Get<byte>(__m_nHitboxSet); set => Set(__m_nHitboxSet, value); }
 	}
 }

@@ -14,11 +14,11 @@ public static partial class Schema {
 		static string ISchemaClass<ItemImbuementPair_t>.NativeName => "ItemImbuementPair_t";
 
 		private static readonly SchemaField __m_SourceItemID = new("ItemImbuementPair_t", "m_SourceItemID");
-		/// <summary><c>CUtlStringToken</c>. Networked in build 6779: a write is sent to clients.</summary>
+		/// <summary><c>CUtlStringToken</c>. Networked: a write is sent to clients.</summary>
 		public uint m_SourceItemID { get => Get<uint>(__m_SourceItemID); set => Set(__m_SourceItemID, value); }
 
 		private static readonly SchemaField __m_vecImbuedAbilities = new("ItemImbuementPair_t", "m_vecImbuedAbilities");
-		/// <summary><c>CNetworkUtlVectorBase&lt;CUtlStringToken&gt;</c>. Networked in build 6779: a write is sent to clients.</summary>
+		/// <summary><c>CNetworkUtlVectorBase&lt;CUtlStringToken&gt;</c>. Networked: a write is sent to clients.</summary>
 		public SchemaValueList<uint> m_vecImbuedAbilities => new(this, __m_vecImbuedAbilities, ListStorage.Vector);
 	}
 }

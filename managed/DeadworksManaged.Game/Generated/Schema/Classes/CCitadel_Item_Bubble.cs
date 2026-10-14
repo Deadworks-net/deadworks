@@ -14,7 +14,7 @@ public static partial class Schema {
 		static string ISchemaClass<CCitadel_Item_Bubble>.NativeName => "CCitadel_Item_Bubble";
 
 		private static readonly SchemaField __m_flEndTime = new("CCitadel_Item_Bubble", "m_flEndTime");
-		/// <summary><c>GameTime_t</c>. Networked in build 6779: a write is sent to clients.</summary>
+		/// <summary><c>GameTime_t</c>. Networked: a write is sent to clients.</summary>
 		public GameTime m_flEndTime { get => Get<GameTime>(__m_flEndTime); set => Set(__m_flEndTime, value); }
 
 		/// <summary>The data entry this was created from, as <see cref="CCitadel_Item_BubbleVData"/>, or null if it has none.</summary>

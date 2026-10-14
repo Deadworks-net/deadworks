@@ -18,7 +18,7 @@ public static partial class Schema {
 		public GameTime m_LastDetonateTime { get => Get<GameTime>(__m_LastDetonateTime); set => Set(__m_LastDetonateTime, value); }
 
 		private static readonly SchemaField __m_vecPuddleModifiers = new("CCitadel_Ability_GooGrenade", "m_vecPuddleModifiers");
-		/// <summary><c>CNetworkUtlVectorBase&lt;CHandle&lt;CBaseEntity&gt;&gt;</c>. Networked in build 6779: a write is sent to clients.</summary>
+		/// <summary><c>CNetworkUtlVectorBase&lt;CHandle&lt;CBaseEntity&gt;&gt;</c>. Networked: a write is sent to clients.</summary>
 		public SchemaHandleList<CBaseEntity> m_vecPuddleModifiers => new(this, __m_vecPuddleModifiers, ListStorage.Vector);
 	}
 }

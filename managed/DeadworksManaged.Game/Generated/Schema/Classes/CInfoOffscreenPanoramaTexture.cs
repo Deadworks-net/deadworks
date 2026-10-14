@@ -18,39 +18,39 @@ public static partial class Schema {
 		public SchemaHandleList<CBaseModelEntity> m_AdditionalTargetEntities => new(this, __m_AdditionalTargetEntities, ListStorage.Vector);
 
 		private static readonly SchemaField __m_RenderAttrName = new("CInfoOffscreenPanoramaTexture", "m_RenderAttrName");
-		/// <summary><c>CUtlSymbolLarge</c>. Networked in build 6779: a write is sent to clients.</summary>
+		/// <summary><c>CUtlSymbolLarge</c>. Networked: a write is sent to clients.</summary>
 		public string m_RenderAttrName { get => GetString(__m_RenderAttrName); set => SetString(__m_RenderAttrName, value); }
 
 		private static readonly SchemaField __m_TargetEntities = new("CInfoOffscreenPanoramaTexture", "m_TargetEntities");
-		/// <summary><c>CNetworkUtlVectorBase&lt;CHandle&lt;CBaseModelEntity&gt;&gt;</c>. Networked in build 6779: a write is sent to clients.</summary>
+		/// <summary><c>CNetworkUtlVectorBase&lt;CHandle&lt;CBaseModelEntity&gt;&gt;</c>. Networked: a write is sent to clients.</summary>
 		public SchemaHandleList<CBaseModelEntity> m_TargetEntities => new(this, __m_TargetEntities, ListStorage.Vector);
 
 		private static readonly SchemaField __m_bDisabled = new("CInfoOffscreenPanoramaTexture", "m_bDisabled");
-		/// <summary><c>bool</c>. Networked in build 6779: a write is sent to clients.</summary>
+		/// <summary><c>bool</c>. Networked: a write is sent to clients.</summary>
 		public bool m_bDisabled { get => Get<bool>(__m_bDisabled); set => Set(__m_bDisabled, value); }
 
 		private static readonly SchemaField __m_bEnableMipGen = new("CInfoOffscreenPanoramaTexture", "m_bEnableMipGen");
-		/// <summary><c>bool</c>. Networked in build 6779: a write is sent to clients.</summary>
+		/// <summary><c>bool</c>. Networked: a write is sent to clients.</summary>
 		public bool m_bEnableMipGen { get => Get<bool>(__m_bEnableMipGen); set => Set(__m_bEnableMipGen, value); }
 
 		private static readonly SchemaField __m_nResolutionX = new("CInfoOffscreenPanoramaTexture", "m_nResolutionX");
-		/// <summary><c>int32</c>. Networked in build 6779: a write is sent to clients.</summary>
+		/// <summary><c>int32</c>. Networked: a write is sent to clients.</summary>
 		public int m_nResolutionX { get => Get<int>(__m_nResolutionX); set => Set(__m_nResolutionX, value); }
 
 		private static readonly SchemaField __m_nResolutionY = new("CInfoOffscreenPanoramaTexture", "m_nResolutionY");
-		/// <summary><c>int32</c>. Networked in build 6779: a write is sent to clients.</summary>
+		/// <summary><c>int32</c>. Networked: a write is sent to clients.</summary>
 		public int m_nResolutionY { get => Get<int>(__m_nResolutionY); set => Set(__m_nResolutionY, value); }
 
 		private static readonly SchemaField __m_nTargetChangeCount = new("CInfoOffscreenPanoramaTexture", "m_nTargetChangeCount");
-		/// <summary><c>int32</c>. Networked in build 6779: a write is sent to clients.</summary>
+		/// <summary><c>int32</c>. Networked: a write is sent to clients.</summary>
 		public int m_nTargetChangeCount { get => Get<int>(__m_nTargetChangeCount); set => Set(__m_nTargetChangeCount, value); }
 
 		private static readonly SchemaField __m_szLayoutFileName = new("CInfoOffscreenPanoramaTexture", "m_szLayoutFileName");
-		/// <summary><c>CUtlSymbolLarge</c>. Networked in build 6779: a write is sent to clients.</summary>
+		/// <summary><c>CUtlSymbolLarge</c>. Networked: a write is sent to clients.</summary>
 		public string m_szLayoutFileName { get => GetString(__m_szLayoutFileName); set => SetString(__m_szLayoutFileName, value); }
 
 		private static readonly SchemaField __m_szPanelType = new("CInfoOffscreenPanoramaTexture", "m_szPanelType");
-		/// <summary><c>CUtlSymbolLarge</c>. Networked in build 6779: a write is sent to clients.</summary>
+		/// <summary><c>CUtlSymbolLarge</c>. Networked: a write is sent to clients.</summary>
 		public string m_szPanelType { get => GetString(__m_szPanelType); set => SetString(__m_szPanelType, value); }
 
 		private static readonly SchemaField __m_szTargetsName = new("CInfoOffscreenPanoramaTexture", "m_szTargetsName");
@@ -58,7 +58,7 @@ public static partial class Schema {
 		public string m_szTargetsName { get => GetString(__m_szTargetsName); set => SetString(__m_szTargetsName, value); }
 
 		private static readonly SchemaField __m_vecCSSClasses = new("CInfoOffscreenPanoramaTexture", "m_vecCSSClasses");
-		/// <summary><c>CNetworkUtlVectorBase&lt;CUtlSymbolLarge&gt;</c>. Networked in build 6779: a write is sent to clients.</summary>
+		/// <summary><c>CNetworkUtlVectorBase&lt;CUtlSymbolLarge&gt;</c>. Networked: a write is sent to clients.</summary>
 		public SchemaStringList m_vecCSSClasses => new(this, __m_vecCSSClasses, ListStorage.Vector);
 
 		/// <summary>Fires the <c>AddCSSClass</c> input.</summary>

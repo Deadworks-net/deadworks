@@ -14,15 +14,15 @@ public static partial class Schema {
 		static string ISchemaClass<CCitadel_Ability_Burrow>.NativeName => "CCitadel_Ability_Burrow";
 
 		private static readonly SchemaField __m_SpinEndTime = new("CCitadel_Ability_Burrow", "m_SpinEndTime");
-		/// <summary><c>GameTime_t</c>. Networked in build 6779: a write is sent to clients.</summary>
+		/// <summary><c>GameTime_t</c>. Networked: a write is sent to clients.</summary>
 		public GameTime m_SpinEndTime { get => Get<GameTime>(__m_SpinEndTime); set => Set(__m_SpinEndTime, value); }
 
 		private static readonly SchemaField __m_bInGround = new("CCitadel_Ability_Burrow", "m_bInGround");
-		/// <summary><c>bool</c>. Networked in build 6779: a write is sent to clients.</summary>
+		/// <summary><c>bool</c>. Networked: a write is sent to clients.</summary>
 		public bool m_bInGround { get => Get<bool>(__m_bInGround); set => Set(__m_bInGround, value); }
 
 		private static readonly SchemaField __m_flLastDamageTime = new("CCitadel_Ability_Burrow", "m_flLastDamageTime");
-		/// <summary><c>GameTime_t</c>. Networked in build 6779: a write is sent to clients.</summary>
+		/// <summary><c>GameTime_t</c>. Networked: a write is sent to clients.</summary>
 		public GameTime m_flLastDamageTime { get => Get<GameTime>(__m_flLastDamageTime); set => Set(__m_flLastDamageTime, value); }
 
 		/// <summary>The data entry this was created from, as <see cref="CCitadel_Ability_BurrowVData"/>, or null if it has none.</summary>

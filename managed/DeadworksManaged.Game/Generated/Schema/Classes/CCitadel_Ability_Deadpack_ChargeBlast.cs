@@ -14,23 +14,23 @@ public static partial class Schema {
 		static string ISchemaClass<CCitadel_Ability_Deadpack_ChargeBlast>.NativeName => "CCitadel_Ability_Deadpack_ChargeBlast";
 
 		private static readonly SchemaField __m_bTargetingActive = new("CCitadel_Ability_Deadpack_ChargeBlast", "m_bTargetingActive");
-		/// <summary><c>bool</c>. Networked in build 6779: a write is sent to clients.</summary>
+		/// <summary><c>bool</c>. Networked: a write is sent to clients.</summary>
 		public bool m_bTargetingActive { get => Get<bool>(__m_bTargetingActive); set => Set(__m_bTargetingActive, value); }
 
 		private static readonly SchemaField __m_tLaunchHeldBeginTime = new("CCitadel_Ability_Deadpack_ChargeBlast", "m_tLaunchHeldBeginTime");
-		/// <summary><c>GameTime_t</c>. Networked in build 6779: a write is sent to clients.</summary>
+		/// <summary><c>GameTime_t</c>. Networked: a write is sent to clients.</summary>
 		public GameTime m_tLaunchHeldBeginTime { get => Get<GameTime>(__m_tLaunchHeldBeginTime); set => Set(__m_tLaunchHeldBeginTime, value); }
 
 		private static readonly SchemaField __m_vAimOffset = new("CCitadel_Ability_Deadpack_ChargeBlast", "m_vAimOffset");
-		/// <summary><c>Vector</c>. Networked in build 6779: a write is sent to clients.</summary>
+		/// <summary><c>Vector</c>. Networked: a write is sent to clients.</summary>
 		public Vector3 m_vAimOffset { get => Get<Vector3>(__m_vAimOffset); set => Set(__m_vAimOffset, value); }
 
 		private static readonly SchemaField __m_vEndPoint = new("CCitadel_Ability_Deadpack_ChargeBlast", "m_vEndPoint");
-		/// <summary><c>VectorWS</c>. Networked in build 6779: a write is sent to clients.</summary>
+		/// <summary><c>VectorWS</c>. Networked: a write is sent to clients.</summary>
 		public Vector3 m_vEndPoint { get => Get<Vector3>(__m_vEndPoint); set => Set(__m_vEndPoint, value); }
 
 		private static readonly SchemaField __m_vStartPoint = new("CCitadel_Ability_Deadpack_ChargeBlast", "m_vStartPoint");
-		/// <summary><c>VectorWS</c>. Networked in build 6779: a write is sent to clients.</summary>
+		/// <summary><c>VectorWS</c>. Networked: a write is sent to clients.</summary>
 		public Vector3 m_vStartPoint { get => Get<Vector3>(__m_vStartPoint); set => Set(__m_vStartPoint, value); }
 	}
 }

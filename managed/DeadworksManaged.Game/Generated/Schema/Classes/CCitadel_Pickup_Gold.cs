@@ -14,7 +14,7 @@ public static partial class Schema {
 		static string ISchemaClass<CCitadel_Pickup_Gold>.NativeName => "CCitadel_Pickup_Gold";
 
 		private static readonly SchemaField __m_iGoldReward = new("CCitadel_Pickup_Gold", "m_iGoldReward");
-		/// <summary><c>int32</c>. Networked in build 6779: a write is sent to clients.</summary>
+		/// <summary><c>int32</c>. Networked: a write is sent to clients.</summary>
 		public int m_iGoldReward { get => Get<int>(__m_iGoldReward); set => Set(__m_iGoldReward, value); }
 	}
 }

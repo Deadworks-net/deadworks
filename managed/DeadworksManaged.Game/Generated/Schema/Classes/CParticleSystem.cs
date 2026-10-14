@@ -14,31 +14,31 @@ public static partial class Schema {
 		static string ISchemaClass<CParticleSystem>.NativeName => "CParticleSystem";
 
 		private static readonly SchemaField __m_bActive = new("CParticleSystem", "m_bActive");
-		/// <summary><c>bool</c>. Networked in build 6779: a write is sent to clients.</summary>
+		/// <summary><c>bool</c>. Networked: a write is sent to clients.</summary>
 		public bool m_bActive { get => Get<bool>(__m_bActive); set => Set(__m_bActive, value); }
 
 		private static readonly SchemaField __m_bAnimateDuringGameplayPause = new("CParticleSystem", "m_bAnimateDuringGameplayPause");
-		/// <summary><c>bool</c>. Networked in build 6779: a write is sent to clients.</summary>
+		/// <summary><c>bool</c>. Networked: a write is sent to clients.</summary>
 		public bool m_bAnimateDuringGameplayPause { get => Get<bool>(__m_bAnimateDuringGameplayPause); set => Set(__m_bAnimateDuringGameplayPause, value); }
 
 		private static readonly SchemaField __m_bDataStringLocalized = new("CParticleSystem", "m_bDataStringLocalized");
-		/// <summary><c>bool</c>. Networked in build 6779: a write is sent to clients.</summary>
+		/// <summary><c>bool</c>. Networked: a write is sent to clients.</summary>
 		public bool m_bDataStringLocalized { get => Get<bool>(__m_bDataStringLocalized); set => Set(__m_bDataStringLocalized, value); }
 
 		private static readonly SchemaField __m_bFrozen = new("CParticleSystem", "m_bFrozen");
-		/// <summary><c>bool</c>. Networked in build 6779: a write is sent to clients.</summary>
+		/// <summary><c>bool</c>. Networked: a write is sent to clients.</summary>
 		public bool m_bFrozen { get => Get<bool>(__m_bFrozen); set => Set(__m_bFrozen, value); }
 
 		private static readonly SchemaField __m_bNoFreeze = new("CParticleSystem", "m_bNoFreeze");
-		/// <summary><c>bool</c>. Networked in build 6779: a write is sent to clients.</summary>
+		/// <summary><c>bool</c>. Networked: a write is sent to clients.</summary>
 		public bool m_bNoFreeze { get => Get<bool>(__m_bNoFreeze); set => Set(__m_bNoFreeze, value); }
 
 		private static readonly SchemaField __m_bNoRamp = new("CParticleSystem", "m_bNoRamp");
-		/// <summary><c>bool</c>. Networked in build 6779: a write is sent to clients.</summary>
+		/// <summary><c>bool</c>. Networked: a write is sent to clients.</summary>
 		public bool m_bNoRamp { get => Get<bool>(__m_bNoRamp); set => Set(__m_bNoRamp, value); }
 
 		private static readonly SchemaField __m_bNoSave = new("CParticleSystem", "m_bNoSave");
-		/// <summary><c>bool</c>. Networked in build 6779: a write is sent to clients.</summary>
+		/// <summary><c>bool</c>. Networked: a write is sent to clients.</summary>
 		public bool m_bNoSave { get => Get<bool>(__m_bNoSave); set => Set(__m_bNoSave, value); }
 
 		private static readonly SchemaField __m_bStartActive = new("CParticleSystem", "m_bStartActive");
@@ -50,27 +50,27 @@ public static partial class Schema {
 		public Color32 m_clrTint { get => Get<Color32>(__m_clrTint); set => Set(__m_clrTint, value); }
 
 		private static readonly SchemaField __m_flFreezeTransitionDuration = new("CParticleSystem", "m_flFreezeTransitionDuration");
-		/// <summary><c>float32</c>. Networked in build 6779: a write is sent to clients.</summary>
+		/// <summary><c>float32</c>. Networked: a write is sent to clients.</summary>
 		public float m_flFreezeTransitionDuration { get => Get<float>(__m_flFreezeTransitionDuration); set => Set(__m_flFreezeTransitionDuration, value); }
 
 		private static readonly SchemaField __m_flPreSimTime = new("CParticleSystem", "m_flPreSimTime");
-		/// <summary><c>float32</c>. Networked in build 6779: a write is sent to clients.</summary>
+		/// <summary><c>float32</c>. Networked: a write is sent to clients.</summary>
 		public float m_flPreSimTime { get => Get<float>(__m_flPreSimTime); set => Set(__m_flPreSimTime, value); }
 
 		private static readonly SchemaField __m_flStartTime = new("CParticleSystem", "m_flStartTime");
-		/// <summary><c>GameTime_t</c>. Networked in build 6779: a write is sent to clients.</summary>
+		/// <summary><c>GameTime_t</c>. Networked: a write is sent to clients.</summary>
 		public GameTime m_flStartTime { get => Get<GameTime>(__m_flStartTime); set => Set(__m_flStartTime, value); }
 
 		private static readonly SchemaField __m_hControlPointEnts = new("CParticleSystem", "m_hControlPointEnts");
-		/// <summary><c>CHandle&lt;CBaseEntity&gt;[64]</c>. Networked in build 6779: a write is sent to clients.</summary>
+		/// <summary><c>CHandle&lt;CBaseEntity&gt;[64]</c>. Networked: a write is sent to clients.</summary>
 		public SchemaHandleList<CBaseEntity> m_hControlPointEnts => new(this, __m_hControlPointEnts, 64);
 
 		private static readonly SchemaField __m_iEffectIndex = new("CParticleSystem", "m_iEffectIndex");
-		/// <summary><c>CStrongHandle&lt;InfoForResourceTypeIParticleSystemDefinition&gt;</c>. Networked in build 6779: a write is sent to clients.</summary>
+		/// <summary><c>CStrongHandle&lt;InfoForResourceTypeIParticleSystemDefinition&gt;</c>. Networked: a write is sent to clients.</summary>
 		public ResourceHandle m_iEffectIndex { get => Get<ResourceHandle>(__m_iEffectIndex); set => Set(__m_iEffectIndex, value); }
 
 		private static readonly SchemaField __m_iServerControlPointAssignments = new("CParticleSystem", "m_iServerControlPointAssignments");
-		/// <summary><c>uint8[4]</c>. Networked in build 6779: a write is sent to clients.</summary>
+		/// <summary><c>uint8[4]</c>. Networked: a write is sent to clients.</summary>
 		public SchemaValueList<byte> m_iServerControlPointAssignments => new(this, __m_iServerControlPointAssignments, 4);
 
 		private static readonly SchemaField __m_iszControlPointNames = new("CParticleSystem", "m_iszControlPointNames");
@@ -86,7 +86,7 @@ public static partial class Schema {
 		public int m_nDataCP { get => Get<int>(__m_nDataCP); set => Set(__m_nDataCP, value); }
 
 		private static readonly SchemaField __m_nStopType = new("CParticleSystem", "m_nStopType");
-		/// <summary><c>int32</c>. Networked in build 6779: a write is sent to clients.</summary>
+		/// <summary><c>int32</c>. Networked: a write is sent to clients.</summary>
 		public int m_nStopType { get => Get<int>(__m_nStopType); set => Set(__m_nStopType, value); }
 
 		private static readonly SchemaField __m_nTintCP = new("CParticleSystem", "m_nTintCP");
@@ -94,15 +94,15 @@ public static partial class Schema {
 		public int m_nTintCP { get => Get<int>(__m_nTintCP); set => Set(__m_nTintCP, value); }
 
 		private static readonly SchemaField __m_strDataString = new("CParticleSystem", "m_strDataString");
-		/// <summary><c>CUtlString</c>. Networked in build 6779: a write is sent to clients.</summary>
+		/// <summary><c>CUtlString</c>. Networked: a write is sent to clients.</summary>
 		public string m_strDataString => GetString(__m_strDataString);
 
 		private static readonly SchemaField __m_szSnapshotFileName = new("CParticleSystem", "m_szSnapshotFileName");
-		/// <summary><c>char[512]</c>. Networked in build 6779: a write is sent to clients.</summary>
+		/// <summary><c>char[512]</c>. Networked: a write is sent to clients.</summary>
 		public string m_szSnapshotFileName => GetChars(__m_szSnapshotFileName, 512);
 
 		private static readonly SchemaField __m_vServerControlPoints = new("CParticleSystem", "m_vServerControlPoints");
-		/// <summary><c>Vector[4]</c>. Networked in build 6779: a write is sent to clients.</summary>
+		/// <summary><c>Vector[4]</c>. Networked: a write is sent to clients.</summary>
 		public SchemaValueList<Vector3> m_vServerControlPoints => new(this, __m_vServerControlPoints, 4);
 
 		private static readonly SchemaField __m_vecDataCPValue = new("CParticleSystem", "m_vecDataCPValue");

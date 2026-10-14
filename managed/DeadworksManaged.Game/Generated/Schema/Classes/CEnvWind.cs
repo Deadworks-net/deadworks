@@ -14,7 +14,7 @@ public static partial class Schema {
 		static string ISchemaClass<CEnvWind>.NativeName => "CEnvWind";
 
 		private static readonly SchemaField __m_EnvWindShared = new("CEnvWind", "m_EnvWindShared");
-		/// <summary><c>CEnvWindShared</c>. Networked in build 6779: a write is sent to clients.</summary>
+		/// <summary><c>CEnvWindShared</c>. Networked: a write is sent to clients.</summary>
 		public CEnvWindShared m_EnvWindShared => Embedded<CEnvWindShared>(__m_EnvWindShared);
 	}
 }

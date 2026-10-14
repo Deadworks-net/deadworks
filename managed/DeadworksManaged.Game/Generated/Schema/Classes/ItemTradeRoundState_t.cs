@@ -14,15 +14,15 @@ public static partial class Schema {
 		static string ISchemaClass<ItemTradeRoundState_t>.NativeName => "ItemTradeRoundState_t";
 
 		private static readonly SchemaField __m_nID = new("ItemTradeRoundState_t", "m_nID");
-		/// <summary><c>ItemTradeRoundID_t</c>. Networked in build 6779: a write is sent to clients.</summary>
+		/// <summary><c>ItemTradeRoundID_t</c>. Networked: a write is sent to clients.</summary>
 		public uint m_nID { get => Get<uint>(__m_nID); set => Set(__m_nID, value); }
 
 		private static readonly SchemaField __m_nRerolls = new("ItemTradeRoundState_t", "m_nRerolls");
-		/// <summary><c>int32</c>. Networked in build 6779: a write is sent to clients.</summary>
+		/// <summary><c>int32</c>. Networked: a write is sent to clients.</summary>
 		public int m_nRerolls { get => Get<int>(__m_nRerolls); set => Set(__m_nRerolls, value); }
 
 		private static readonly SchemaField __m_vecOptions = new("ItemTradeRoundState_t", "m_vecOptions");
-		/// <summary><c>CUtlVectorEmbeddedNetworkVar&lt;ItemTradeOption_t&gt;</c>. Networked in build 6779: a write is sent to clients.</summary>
+		/// <summary><c>CUtlVectorEmbeddedNetworkVar&lt;ItemTradeOption_t&gt;</c>. Networked: a write is sent to clients.</summary>
 		public SchemaObjectList<ItemTradeOption_t> m_vecOptions => new(this, __m_vecOptions, ListStorage.Vector);
 	}
 }

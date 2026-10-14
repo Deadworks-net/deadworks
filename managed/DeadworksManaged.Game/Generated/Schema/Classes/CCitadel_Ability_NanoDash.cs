@@ -14,7 +14,7 @@ public static partial class Schema {
 		static string ISchemaClass<CCitadel_Ability_NanoDash>.NativeName => "CCitadel_Ability_NanoDash";
 
 		private static readonly SchemaField __m_bIsDashing = new("CCitadel_Ability_NanoDash", "m_bIsDashing");
-		/// <summary><c>bool</c>. Networked in build 6779: a write is sent to clients.</summary>
+		/// <summary><c>bool</c>. Networked: a write is sent to clients.</summary>
 		public bool m_bIsDashing { get => Get<bool>(__m_bIsDashing); set => Set(__m_bIsDashing, value); }
 
 		private static readonly SchemaField __m_flStuckTime = new("CCitadel_Ability_NanoDash", "m_flStuckTime");
@@ -22,11 +22,11 @@ public static partial class Schema {
 		public GameTime m_flStuckTime { get => Get<GameTime>(__m_flStuckTime); set => Set(__m_flStuckTime, value); }
 
 		private static readonly SchemaField __m_vEndPosition = new("CCitadel_Ability_NanoDash", "m_vEndPosition");
-		/// <summary><c>VectorWS</c>. Networked in build 6779: a write is sent to clients.</summary>
+		/// <summary><c>VectorWS</c>. Networked: a write is sent to clients.</summary>
 		public Vector3 m_vEndPosition { get => Get<Vector3>(__m_vEndPosition); set => Set(__m_vEndPosition, value); }
 
 		private static readonly SchemaField __m_vStartPosition = new("CCitadel_Ability_NanoDash", "m_vStartPosition");
-		/// <summary><c>VectorWS</c>. Networked in build 6779: a write is sent to clients.</summary>
+		/// <summary><c>VectorWS</c>. Networked: a write is sent to clients.</summary>
 		public Vector3 m_vStartPosition { get => Get<Vector3>(__m_vStartPosition); set => Set(__m_vStartPosition, value); }
 
 		private static readonly SchemaField __m_vecHitEnemies = new("CCitadel_Ability_NanoDash", "m_vecHitEnemies");

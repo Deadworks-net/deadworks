@@ -18,7 +18,7 @@ public static partial class Schema {
 		public SchemaObjectList<CAttributeManager__cached_attribute_float_t> m_CachedResults => new(this, __m_CachedResults, ListStorage.Vector);
 
 		private static readonly SchemaField __m_ProviderType = new("CAttributeManager", "m_ProviderType");
-		/// <summary><c>attributeprovidertypes_t</c>. Networked in build 6779: a write is sent to clients.</summary>
+		/// <summary><c>attributeprovidertypes_t</c>. Networked: a write is sent to clients.</summary>
 		public attributeprovidertypes_t m_ProviderType { get => Get<attributeprovidertypes_t>(__m_ProviderType); set => Set(__m_ProviderType, value); }
 
 		private static readonly SchemaField __m_Providers = new("CAttributeManager", "m_Providers");
@@ -34,11 +34,11 @@ public static partial class Schema {
 		public bool m_bPreventLoopback { get => Get<bool>(__m_bPreventLoopback); set => Set(__m_bPreventLoopback, value); }
 
 		private static readonly SchemaField __m_hOuter = new("CAttributeManager", "m_hOuter");
-		/// <summary><c>CHandle&lt;CBaseEntity&gt;</c>. Networked in build 6779: a write is sent to clients.</summary>
+		/// <summary><c>CHandle&lt;CBaseEntity&gt;</c>. Networked: a write is sent to clients.</summary>
 		public CBaseEntity? m_hOuter { get => GetHandle<CBaseEntity>(__m_hOuter); set => SetHandle(__m_hOuter, value); }
 
 		private static readonly SchemaField __m_iReapplyProvisionParity = new("CAttributeManager", "m_iReapplyProvisionParity");
-		/// <summary><c>int32</c>. Networked in build 6779: a write is sent to clients.</summary>
+		/// <summary><c>int32</c>. Networked: a write is sent to clients.</summary>
 		public int m_iReapplyProvisionParity { get => Get<int>(__m_iReapplyProvisionParity); set => Set(__m_iReapplyProvisionParity, value); }
 	}
 }

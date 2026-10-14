@@ -14,11 +14,11 @@ public static partial class Schema {
 		static string ISchemaClass<CCitadel_Ability_Familiar_Attach>.NativeName => "CCitadel_Ability_Familiar_Attach";
 
 		private static readonly SchemaField __m_hLastAttachedTo = new("CCitadel_Ability_Familiar_Attach", "m_hLastAttachedTo");
-		/// <summary><c>CHandle&lt;CBaseEntity&gt;</c>. Networked in build 6779: a write is sent to clients.</summary>
+		/// <summary><c>CHandle&lt;CBaseEntity&gt;</c>. Networked: a write is sent to clients.</summary>
 		public CBaseEntity? m_hLastAttachedTo { get => GetHandle<CBaseEntity>(__m_hLastAttachedTo); set => SetHandle(__m_hLastAttachedTo, value); }
 
 		private static readonly SchemaField __m_vecTagAlongVisitedAllies = new("CCitadel_Ability_Familiar_Attach", "m_vecTagAlongVisitedAllies");
-		/// <summary><c>CNetworkUtlVectorBase&lt;CHandle&lt;CBaseEntity&gt;&gt;</c>. Networked in build 6779: a write is sent to clients.</summary>
+		/// <summary><c>CNetworkUtlVectorBase&lt;CHandle&lt;CBaseEntity&gt;&gt;</c>. Networked: a write is sent to clients.</summary>
 		public SchemaHandleList<CBaseEntity> m_vecTagAlongVisitedAllies => new(this, __m_vecTagAlongVisitedAllies, ListStorage.Vector);
 
 		/// <summary>The data entry this was created from, as <see cref="CCitadel_Ability_Familiar_AttachVData"/>, or null if it has none.</summary>

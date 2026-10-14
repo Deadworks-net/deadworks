@@ -14,11 +14,11 @@ public static partial class Schema {
 		static string ISchemaClass<CCitadel_MobileResupply>.NativeName => "CCitadel_MobileResupply";
 
 		private static readonly SchemaField __m_bFloating = new("CCitadel_MobileResupply", "m_bFloating");
-		/// <summary><c>bool</c>. Networked in build 6779: a write is sent to clients.</summary>
+		/// <summary><c>bool</c>. Networked: a write is sent to clients.</summary>
 		public bool m_bFloating { get => Get<bool>(__m_bFloating); set => Set(__m_bFloating, value); }
 
 		private static readonly SchemaField __m_hAbility = new("CCitadel_MobileResupply", "m_hAbility");
-		/// <summary><c>CHandle&lt;CCitadelBaseAbility&gt;</c>. Networked in build 6779: a write is sent to clients.</summary>
+		/// <summary><c>CHandle&lt;CCitadelBaseAbility&gt;</c>. Networked: a write is sent to clients.</summary>
 		public CCitadelBaseAbility? m_hAbility { get => GetHandle<CCitadelBaseAbility>(__m_hAbility); set => SetHandle(__m_hAbility, value); }
 	}
 }

@@ -66,7 +66,7 @@ public static partial class Schema {
 		public float m_flTransitionTime { get => Get<float>(__m_flTransitionTime); set => Set(__m_flTransitionTime, value); }
 
 		private static readonly SchemaField __m_hCtrl = new("fogplayerparams_t", "m_hCtrl");
-		/// <summary><c>CHandle&lt;CFogController&gt;</c>. Networked in build 6779: a write is sent to clients.</summary>
+		/// <summary><c>CHandle&lt;CFogController&gt;</c>. Networked: a write is sent to clients.</summary>
 		public CFogController? m_hCtrl { get => GetHandle<CFogController>(__m_hCtrl); set => SetHandle(__m_hCtrl, value); }
 	}
 }

@@ -18,7 +18,7 @@ public static partial class Schema {
 		public CNetworkVarChainer __m_pChainEntity => Embedded<CNetworkVarChainer>(____m_pChainEntity);
 
 		private static readonly SchemaField __m_bAllowModifiersOnDeadEntities = new("CModifierProperty", "m_bAllowModifiersOnDeadEntities");
-		/// <summary><c>bool</c>. Networked in build 6779: a write is sent to clients.</summary>
+		/// <summary><c>bool</c>. Networked: a write is sent to clients.</summary>
 		public bool m_bAllowModifiersOnDeadEntities { get => Get<bool>(__m_bAllowModifiersOnDeadEntities); set => Set(__m_bAllowModifiersOnDeadEntities, value); }
 
 		private static readonly SchemaField __m_bParentWantsModifierStateChangeCallback = new("CModifierProperty", "m_bParentWantsModifierStateChangeCallback");
@@ -30,15 +30,15 @@ public static partial class Schema {
 		public bool m_bPredictedOwner { get => Get<bool>(__m_bPredictedOwner); set => Set(__m_bPredictedOwner, value); }
 
 		private static readonly SchemaField __m_bvDisabledStateMask = new("CModifierProperty", "m_bvDisabledStateMask");
-		/// <summary><c>uint32[11]</c>. Networked in build 6779: a write is sent to clients.</summary>
+		/// <summary><c>uint32[11]</c>. Networked: a write is sent to clients.</summary>
 		public SchemaValueList<uint> m_bvDisabledStateMask => new(this, __m_bvDisabledStateMask, 11);
 
 		private static readonly SchemaField __m_bvEnabledPredictedStateMask = new("CModifierProperty", "m_bvEnabledPredictedStateMask");
-		/// <summary><c>uint32[11]</c>. Networked in build 6779: a write is sent to clients.</summary>
+		/// <summary><c>uint32[11]</c>. Networked: a write is sent to clients.</summary>
 		public SchemaValueList<uint> m_bvEnabledPredictedStateMask => new(this, __m_bvEnabledPredictedStateMask, 11);
 
 		private static readonly SchemaField __m_bvEnabledStateMask = new("CModifierProperty", "m_bvEnabledStateMask");
-		/// <summary><c>uint32[11]</c>. Networked in build 6779: a write is sent to clients. Wrapped by <c>CModifierProperty.SetModifierState</c>, <c>CModifierProperty.HasModifierState</c> in DeadworksManaged.Api.</summary>
+		/// <summary><c>uint32[11]</c>. Networked: a write is sent to clients. Wrapped by <c>CModifierProperty.SetModifierState</c>, <c>CModifierProperty.HasModifierState</c> in DeadworksManaged.Api.</summary>
 		public SchemaValueList<uint> m_bvEnabledStateMask => new(this, __m_bvEnabledStateMask, 11);
 
 		private static readonly SchemaField __m_hHandle = new("CModifierProperty", "m_hHandle");
@@ -62,7 +62,7 @@ public static partial class Schema {
 		public int m_nCachedHighestParticleIndex { get => Get<int>(__m_nCachedHighestParticleIndex); set => Set(__m_nCachedHighestParticleIndex, value); }
 
 		private static readonly SchemaField __m_nDisabledGroups = new("CModifierProperty", "m_nDisabledGroups");
-		/// <summary><c>uint32</c>. Networked in build 6779: a write is sent to clients.</summary>
+		/// <summary><c>uint32</c>. Networked: a write is sent to clients.</summary>
 		public uint m_nDisabledGroups { get => Get<uint>(__m_nDisabledGroups); set => Set(__m_nDisabledGroups, value); }
 
 		private static readonly SchemaField __m_pNotifyOwnerEvents = new("CModifierProperty", "m_pNotifyOwnerEvents");

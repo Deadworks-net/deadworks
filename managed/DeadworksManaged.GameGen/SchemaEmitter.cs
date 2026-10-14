@@ -4,12 +4,12 @@ namespace DeadworksManaged.GameGen;
 
 /// <summary>Counts for the run's report.</summary>
 sealed class SchemaStats {
-	public int Classes, EntityClasses, Enums, Fields, RawFields, InputMethods, Bridges, CuratedSetterWarnings, DataProperties;
+	public int Classes, EntityClasses, Enums, Fields, RawFields, NetworkedFields, InputMethods, Bridges, CuratedSetterWarnings, DataProperties;
 	public SortedDictionary<string, int> RawTypes { get; } = new(StringComparer.Ordinal);
 }
 
 /// <summary>Writes <c>Schema.*</c>: a class per schema class, an enum per schema enum, the entity registry and the bridge from curated wrappers.</summary>
-sealed class SchemaEmitter(SchemaModel model, EntityModel entities, ApiScanner api, Dictionary<string, string> setterWarnings, SpawnSurvey? survey) {
+sealed class SchemaEmitter(SchemaModel model, EntityModel entities, ApiScanner api, Dictionary<string, string> setterWarnings) {
 	public SchemaStats Stats { get; } = new();
 
 	/// <summary>The C# identifier of each class and enum inside <c>Schema</c>.</summary>
@@ -325,8 +325,10 @@ sealed class SchemaEmitter(SchemaModel model, EntityModel entities, ApiScanner a
 			.Where(a => a.SchemaClass == c.Name && a.Field == field.Name)
 			.SelectMany(a => a.Members.Select(member => $"<c>{a.Wrapper}.{member}</c>"))
 			.Distinct().ToList();
-		if (survey != null && survey.NetworkedFields.Contains($"{c.Name}.{field.Name}"))
-			summary += $" Networked in build {survey.NetworkedBuild}: a write is sent to clients.";
+		if (field.Networked) {
+			summary += " Networked: a write is sent to clients.";
+			Stats.NetworkedFields++;
+		}
 		if (curated.Count > 0) summary += $" Wrapped by {string.Join(", ", curated)} in DeadworksManaged.Api.";
 		if (raw) summary += " No typed mapping yet: read it through its address.";
 		return summary;

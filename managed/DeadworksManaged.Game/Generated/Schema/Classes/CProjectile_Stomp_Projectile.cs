@@ -18,11 +18,11 @@ public static partial class Schema {
 		public bool m_bFinished { get => Get<bool>(__m_bFinished); set => Set(__m_bFinished, value); }
 
 		private static readonly SchemaField __m_flWidth = new("CProjectile_Stomp_Projectile", "m_flWidth");
-		/// <summary><c>float32</c>. Networked in build 6779: a write is sent to clients.</summary>
+		/// <summary><c>float32</c>. Networked: a write is sent to clients.</summary>
 		public float m_flWidth { get => Get<float>(__m_flWidth); set => Set(__m_flWidth, value); }
 
 		private static readonly SchemaField __m_tDieTime = new("CProjectile_Stomp_Projectile", "m_tDieTime");
-		/// <summary><c>GameTime_t</c>. Networked in build 6779: a write is sent to clients.</summary>
+		/// <summary><c>GameTime_t</c>. Networked: a write is sent to clients.</summary>
 		public GameTime m_tDieTime { get => Get<GameTime>(__m_tDieTime); set => Set(__m_tDieTime, value); }
 
 		private static readonly SchemaField __m_vLastStompPos = new("CProjectile_Stomp_Projectile", "m_vLastStompPos");

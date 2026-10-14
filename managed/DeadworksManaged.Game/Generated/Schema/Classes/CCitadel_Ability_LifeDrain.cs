@@ -14,15 +14,15 @@ public static partial class Schema {
 		static string ISchemaClass<CCitadel_Ability_LifeDrain>.NativeName => "CCitadel_Ability_LifeDrain";
 
 		private static readonly SchemaField __m_tDrainLifeStopTime = new("CCitadel_Ability_LifeDrain", "m_tDrainLifeStopTime");
-		/// <summary><c>GameTime_t</c>. Networked in build 6779: a write is sent to clients.</summary>
+		/// <summary><c>GameTime_t</c>. Networked: a write is sent to clients.</summary>
 		public GameTime m_tDrainLifeStopTime { get => Get<GameTime>(__m_tDrainLifeStopTime); set => Set(__m_tDrainLifeStopTime, value); }
 
 		private static readonly SchemaField __m_tSlowStartTime = new("CCitadel_Ability_LifeDrain", "m_tSlowStartTime");
-		/// <summary><c>GameTime_t</c>. Networked in build 6779: a write is sent to clients.</summary>
+		/// <summary><c>GameTime_t</c>. Networked: a write is sent to clients.</summary>
 		public GameTime m_tSlowStartTime { get => Get<GameTime>(__m_tSlowStartTime); set => Set(__m_tSlowStartTime, value); }
 
 		private static readonly SchemaField __m_tSlowStopTime = new("CCitadel_Ability_LifeDrain", "m_tSlowStopTime");
-		/// <summary><c>GameTime_t</c>. Networked in build 6779: a write is sent to clients.</summary>
+		/// <summary><c>GameTime_t</c>. Networked: a write is sent to clients.</summary>
 		public GameTime m_tSlowStopTime { get => Get<GameTime>(__m_tSlowStopTime); set => Set(__m_tSlowStopTime, value); }
 
 		private static readonly SchemaField __m_vecModifiers = new("CCitadel_Ability_LifeDrain", "m_vecModifiers");

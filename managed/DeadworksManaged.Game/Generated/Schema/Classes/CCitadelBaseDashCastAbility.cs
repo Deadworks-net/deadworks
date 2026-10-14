@@ -14,7 +14,7 @@ public static partial class Schema {
 		static string ISchemaClass<CCitadelBaseDashCastAbility>.NativeName => "CCitadelBaseDashCastAbility";
 
 		private static readonly SchemaField __m_flDashCastStartTime = new("CCitadelBaseDashCastAbility", "m_flDashCastStartTime");
-		/// <summary><c>GameTime_t</c>. Networked in build 6779: a write is sent to clients.</summary>
+		/// <summary><c>GameTime_t</c>. Networked: a write is sent to clients.</summary>
 		public GameTime m_flDashCastStartTime { get => Get<GameTime>(__m_flDashCastStartTime); set => Set(__m_flDashCastStartTime, value); }
 
 		private static readonly SchemaField __m_hAbilityToTrigger = new("CCitadelBaseDashCastAbility", "m_hAbilityToTrigger");
@@ -22,7 +22,7 @@ public static partial class Schema {
 		public CCitadelBaseAbility? m_hAbilityToTrigger { get => GetHandle<CCitadelBaseAbility>(__m_hAbilityToTrigger); set => SetHandle(__m_hAbilityToTrigger, value); }
 
 		private static readonly SchemaField __m_vDashCastDir = new("CCitadelBaseDashCastAbility", "m_vDashCastDir");
-		/// <summary><c>Vector</c>. Networked in build 6779: a write is sent to clients.</summary>
+		/// <summary><c>Vector</c>. Networked: a write is sent to clients.</summary>
 		public Vector3 m_vDashCastDir { get => Get<Vector3>(__m_vDashCastDir); set => Set(__m_vDashCastDir, value); }
 	}
 }

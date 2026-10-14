@@ -14,15 +14,15 @@ public static partial class Schema {
 		static string ISchemaClass<ViewAngleServerChange_t>.NativeName => "ViewAngleServerChange_t";
 
 		private static readonly SchemaField __nIndex = new("ViewAngleServerChange_t", "nIndex");
-		/// <summary><c>uint32</c>. Networked in build 6779: a write is sent to clients.</summary>
+		/// <summary><c>uint32</c>. Networked: a write is sent to clients.</summary>
 		public uint nIndex { get => Get<uint>(__nIndex); set => Set(__nIndex, value); }
 
 		private static readonly SchemaField __nType = new("ViewAngleServerChange_t", "nType");
-		/// <summary><c>FixAngleSet_t</c>. Networked in build 6779: a write is sent to clients.</summary>
+		/// <summary><c>FixAngleSet_t</c>. Networked: a write is sent to clients.</summary>
 		public FixAngleSet_t nType { get => Get<FixAngleSet_t>(__nType); set => Set(__nType, value); }
 
 		private static readonly SchemaField __qAngle = new("ViewAngleServerChange_t", "qAngle");
-		/// <summary><c>QAngle</c>. Networked in build 6779: a write is sent to clients.</summary>
+		/// <summary><c>QAngle</c>. Networked: a write is sent to clients.</summary>
 		public Vector3 qAngle { get => Get<Vector3>(__qAngle); set => Set(__qAngle, value); }
 	}
 }

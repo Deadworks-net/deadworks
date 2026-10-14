@@ -22,7 +22,7 @@ public static partial class Schema {
 		public bool m_bDiscontinuityInEcho { get => Get<bool>(__m_bDiscontinuityInEcho); set => Set(__m_bDiscontinuityInEcho, value); }
 
 		private static readonly SchemaField __m_bIsDashing = new("CCitadel_Ability_ShivDash", "m_bIsDashing");
-		/// <summary><c>bool</c>. Networked in build 6779: a write is sent to clients.</summary>
+		/// <summary><c>bool</c>. Networked: a write is sent to clients.</summary>
 		public bool m_bIsDashing { get => Get<bool>(__m_bIsDashing); set => Set(__m_bIsDashing, value); }
 
 		private static readonly SchemaField __m_bLetEchoPlay = new("CCitadel_Ability_ShivDash", "m_bLetEchoPlay");
@@ -42,11 +42,11 @@ public static partial class Schema {
 		public int m_nReductionsLeft { get => Get<int>(__m_nReductionsLeft); set => Set(__m_nReductionsLeft, value); }
 
 		private static readonly SchemaField __m_vDashDirection = new("CCitadel_Ability_ShivDash", "m_vDashDirection");
-		/// <summary><c>Vector</c>. Networked in build 6779: a write is sent to clients.</summary>
+		/// <summary><c>Vector</c>. Networked: a write is sent to clients.</summary>
 		public Vector3 m_vDashDirection { get => Get<Vector3>(__m_vDashDirection); set => Set(__m_vDashDirection, value); }
 
 		private static readonly SchemaField __m_vStartPosition = new("CCitadel_Ability_ShivDash", "m_vStartPosition");
-		/// <summary><c>VectorWS</c>. Networked in build 6779: a write is sent to clients.</summary>
+		/// <summary><c>VectorWS</c>. Networked: a write is sent to clients.</summary>
 		public Vector3 m_vStartPosition { get => Get<Vector3>(__m_vStartPosition); set => Set(__m_vStartPosition, value); }
 
 		private static readonly SchemaField __m_vecHitEnemies = new("CCitadel_Ability_ShivDash", "m_vecHitEnemies");

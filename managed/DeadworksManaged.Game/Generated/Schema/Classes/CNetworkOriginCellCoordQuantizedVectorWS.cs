@@ -14,31 +14,31 @@ public static partial class Schema {
 		static string ISchemaClass<CNetworkOriginCellCoordQuantizedVectorWS>.NativeName => "CNetworkOriginCellCoordQuantizedVectorWS";
 
 		private static readonly SchemaField __m_cellX = new("CNetworkOriginCellCoordQuantizedVectorWS", "m_cellX");
-		/// <summary><c>uint16</c>. Networked in build 6779: a write is sent to clients.</summary>
+		/// <summary><c>uint16</c>. Networked: a write is sent to clients.</summary>
 		public ushort m_cellX { get => Get<ushort>(__m_cellX); set => Set(__m_cellX, value); }
 
 		private static readonly SchemaField __m_cellY = new("CNetworkOriginCellCoordQuantizedVectorWS", "m_cellY");
-		/// <summary><c>uint16</c>. Networked in build 6779: a write is sent to clients.</summary>
+		/// <summary><c>uint16</c>. Networked: a write is sent to clients.</summary>
 		public ushort m_cellY { get => Get<ushort>(__m_cellY); set => Set(__m_cellY, value); }
 
 		private static readonly SchemaField __m_cellZ = new("CNetworkOriginCellCoordQuantizedVectorWS", "m_cellZ");
-		/// <summary><c>uint16</c>. Networked in build 6779: a write is sent to clients.</summary>
+		/// <summary><c>uint16</c>. Networked: a write is sent to clients.</summary>
 		public ushort m_cellZ { get => Get<ushort>(__m_cellZ); set => Set(__m_cellZ, value); }
 
 		private static readonly SchemaField __m_nOutsideWorld = new("CNetworkOriginCellCoordQuantizedVectorWS", "m_nOutsideWorld");
-		/// <summary><c>uint16</c>. Networked in build 6779: a write is sent to clients.</summary>
+		/// <summary><c>uint16</c>. Networked: a write is sent to clients.</summary>
 		public ushort m_nOutsideWorld { get => Get<ushort>(__m_nOutsideWorld); set => Set(__m_nOutsideWorld, value); }
 
 		private static readonly SchemaField __m_vecX = new("CNetworkOriginCellCoordQuantizedVectorWS", "m_vecX");
-		/// <summary><c>CNetworkedQuantizedFloat</c>. Networked in build 6779: a write is sent to clients.</summary>
+		/// <summary><c>CNetworkedQuantizedFloat</c>. Networked: a write is sent to clients.</summary>
 		public float m_vecX { get => Get<float>(__m_vecX); set => Set(__m_vecX, value); }
 
 		private static readonly SchemaField __m_vecY = new("CNetworkOriginCellCoordQuantizedVectorWS", "m_vecY");
-		/// <summary><c>CNetworkedQuantizedFloat</c>. Networked in build 6779: a write is sent to clients.</summary>
+		/// <summary><c>CNetworkedQuantizedFloat</c>. Networked: a write is sent to clients.</summary>
 		public float m_vecY { get => Get<float>(__m_vecY); set => Set(__m_vecY, value); }
 
 		private static readonly SchemaField __m_vecZ = new("CNetworkOriginCellCoordQuantizedVectorWS", "m_vecZ");
-		/// <summary><c>CNetworkedQuantizedFloat</c>. Networked in build 6779: a write is sent to clients.</summary>
+		/// <summary><c>CNetworkedQuantizedFloat</c>. Networked: a write is sent to clients.</summary>
 		public float m_vecZ { get => Get<float>(__m_vecZ); set => Set(__m_vecZ, value); }
 	}
 }

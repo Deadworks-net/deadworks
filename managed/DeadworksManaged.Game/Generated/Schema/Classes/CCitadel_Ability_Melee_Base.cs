@@ -14,27 +14,27 @@ public static partial class Schema {
 		static string ISchemaClass<CCitadel_Ability_Melee_Base>.NativeName => "CCitadel_Ability_Melee_Base";
 
 		private static readonly SchemaField __m_bHitWithThisAttack = new("CCitadel_Ability_Melee_Base", "m_bHitWithThisAttack");
-		/// <summary><c>bool</c>. Networked in build 6779: a write is sent to clients.</summary>
+		/// <summary><c>bool</c>. Networked: a write is sent to clients.</summary>
 		public bool m_bHitWithThisAttack { get => Get<bool>(__m_bHitWithThisAttack); set => Set(__m_bHitWithThisAttack, value); }
 
 		private static readonly SchemaField __m_bUsingMeleeTagActive = new("CCitadel_Ability_Melee_Base", "m_bUsingMeleeTagActive");
-		/// <summary><c>bool</c>. Networked in build 6779: a write is sent to clients.</summary>
+		/// <summary><c>bool</c>. Networked: a write is sent to clients.</summary>
 		public bool m_bUsingMeleeTagActive { get => Get<bool>(__m_bUsingMeleeTagActive); set => Set(__m_bUsingMeleeTagActive, value); }
 
 		private static readonly SchemaField __m_bUsingThisMelee = new("CCitadel_Ability_Melee_Base", "m_bUsingThisMelee");
-		/// <summary><c>bool</c>. Networked in build 6779: a write is sent to clients.</summary>
+		/// <summary><c>bool</c>. Networked: a write is sent to clients.</summary>
 		public bool m_bUsingThisMelee { get => Get<bool>(__m_bUsingThisMelee); set => Set(__m_bUsingThisMelee, value); }
 
 		private static readonly SchemaField __m_flAttackTriggeredTime = new("CCitadel_Ability_Melee_Base", "m_flAttackTriggeredTime");
-		/// <summary><c>GameTime_t</c>. Networked in build 6779: a write is sent to clients.</summary>
+		/// <summary><c>GameTime_t</c>. Networked: a write is sent to clients.</summary>
 		public GameTime m_flAttackTriggeredTime { get => Get<GameTime>(__m_flAttackTriggeredTime); set => Set(__m_flAttackTriggeredTime, value); }
 
 		private static readonly SchemaField __m_flLastActivateTime = new("CCitadel_Ability_Melee_Base", "m_flLastActivateTime");
-		/// <summary><c>GameTime_t</c>. Networked in build 6779: a write is sent to clients.</summary>
+		/// <summary><c>GameTime_t</c>. Networked: a write is sent to clients.</summary>
 		public GameTime m_flLastActivateTime { get => Get<GameTime>(__m_flLastActivateTime); set => Set(__m_flLastActivateTime, value); }
 
 		private static readonly SchemaField __m_flNextAttackAllowedTime = new("CCitadel_Ability_Melee_Base", "m_flNextAttackAllowedTime");
-		/// <summary><c>GameTime_t</c>. Networked in build 6779: a write is sent to clients.</summary>
+		/// <summary><c>GameTime_t</c>. Networked: a write is sent to clients.</summary>
 		public GameTime m_flNextAttackAllowedTime { get => Get<GameTime>(__m_flNextAttackAllowedTime); set => Set(__m_flNextAttackAllowedTime, value); }
 
 		private static readonly SchemaField __m_nHitNumber = new("CCitadel_Ability_Melee_Base", "m_nHitNumber");

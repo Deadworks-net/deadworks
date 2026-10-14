@@ -14,7 +14,7 @@ public static partial class Schema {
 		static string ISchemaClass<CCitadel_WeaponUpgrade_ExpressShot>.NativeName => "CCitadel_WeaponUpgrade_ExpressShot";
 
 		private static readonly SchemaField __m_bIsInExpressShot = new("CCitadel_WeaponUpgrade_ExpressShot", "m_bIsInExpressShot");
-		/// <summary><c>bool</c>. Networked in build 6779: a write is sent to clients.</summary>
+		/// <summary><c>bool</c>. Networked: a write is sent to clients.</summary>
 		public bool m_bIsInExpressShot { get => Get<bool>(__m_bIsInExpressShot); set => Set(__m_bIsInExpressShot, value); }
 
 		private static readonly SchemaField __m_bIsPrimaryProc = new("CCitadel_WeaponUpgrade_ExpressShot", "m_bIsPrimaryProc");
@@ -22,15 +22,15 @@ public static partial class Schema {
 		public bool m_bIsPrimaryProc { get => Get<bool>(__m_bIsPrimaryProc); set => Set(__m_bIsPrimaryProc, value); }
 
 		private static readonly SchemaField __m_bProcShotCharged = new("CCitadel_WeaponUpgrade_ExpressShot", "m_bProcShotCharged");
-		/// <summary><c>bool</c>. Networked in build 6779: a write is sent to clients.</summary>
+		/// <summary><c>bool</c>. Networked: a write is sent to clients.</summary>
 		public bool m_bProcShotCharged { get => Get<bool>(__m_bProcShotCharged); set => Set(__m_bProcShotCharged, value); }
 
 		private static readonly SchemaField __m_flProcChargeBonusDamage = new("CCitadel_WeaponUpgrade_ExpressShot", "m_flProcChargeBonusDamage");
-		/// <summary><c>float32</c>. Networked in build 6779: a write is sent to clients.</summary>
+		/// <summary><c>float32</c>. Networked: a write is sent to clients.</summary>
 		public float m_flProcChargeBonusDamage { get => Get<float>(__m_flProcChargeBonusDamage); set => Set(__m_flProcChargeBonusDamage, value); }
 
 		private static readonly SchemaField __m_iShotsToCreate = new("CCitadel_WeaponUpgrade_ExpressShot", "m_iShotsToCreate");
-		/// <summary><c>int32</c>. Networked in build 6779: a write is sent to clients.</summary>
+		/// <summary><c>int32</c>. Networked: a write is sent to clients.</summary>
 		public int m_iShotsToCreate { get => Get<int>(__m_iShotsToCreate); set => Set(__m_iShotsToCreate, value); }
 
 		private static readonly SchemaField __m_tNextShotTime = new("CCitadel_WeaponUpgrade_ExpressShot", "m_tNextShotTime");

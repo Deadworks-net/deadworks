@@ -18,7 +18,7 @@ public static partial class Schema {
 		public bool m_bUseAngles { get => Get<bool>(__m_bUseAngles); set => Set(__m_bUseAngles, value); }
 
 		private static readonly SchemaField __m_fog = new("CFogController", "m_fog");
-		/// <summary><c>fogparams_t</c>. Networked in build 6779: a write is sent to clients.</summary>
+		/// <summary><c>fogparams_t</c>. Networked: a write is sent to clients.</summary>
 		public fogparams_t m_fog => Embedded<fogparams_t>(__m_fog);
 
 		private static readonly SchemaField __m_iChangedVariables = new("CFogController", "m_iChangedVariables");

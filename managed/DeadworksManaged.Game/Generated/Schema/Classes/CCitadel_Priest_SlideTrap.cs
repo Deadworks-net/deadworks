@@ -14,7 +14,7 @@ public static partial class Schema {
 		static string ISchemaClass<CCitadel_Priest_SlideTrap>.NativeName => "CCitadel_Priest_SlideTrap";
 
 		private static readonly SchemaField __m_bArmed = new("CCitadel_Priest_SlideTrap", "m_bArmed");
-		/// <summary><c>bool</c>. Networked in build 6779: a write is sent to clients.</summary>
+		/// <summary><c>bool</c>. Networked: a write is sent to clients.</summary>
 		public bool m_bArmed { get => Get<bool>(__m_bArmed); set => Set(__m_bArmed, value); }
 
 		private static readonly SchemaField __m_bFinished = new("CCitadel_Priest_SlideTrap", "m_bFinished");
@@ -22,11 +22,11 @@ public static partial class Schema {
 		public bool m_bFinished { get => Get<bool>(__m_bFinished); set => Set(__m_bFinished, value); }
 
 		private static readonly SchemaField __m_bMoving = new("CCitadel_Priest_SlideTrap", "m_bMoving");
-		/// <summary><c>bool</c>. Networked in build 6779: a write is sent to clients.</summary>
+		/// <summary><c>bool</c>. Networked: a write is sent to clients.</summary>
 		public bool m_bMoving { get => Get<bool>(__m_bMoving); set => Set(__m_bMoving, value); }
 
 		private static readonly SchemaField __m_flRangeAtCast = new("CCitadel_Priest_SlideTrap", "m_flRangeAtCast");
-		/// <summary><c>float32</c>. Networked in build 6779: a write is sent to clients.</summary>
+		/// <summary><c>float32</c>. Networked: a write is sent to clients.</summary>
 		public float m_flRangeAtCast { get => Get<float>(__m_flRangeAtCast); set => Set(__m_flRangeAtCast, value); }
 	}
 }

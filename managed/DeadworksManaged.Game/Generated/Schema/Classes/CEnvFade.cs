@@ -26,7 +26,7 @@ public static partial class Schema {
 		public CEntityIOOutput m_OnBeginFade => Embedded<CEntityIOOutput>(__m_OnBeginFade);
 
 		private static readonly SchemaField __m_fadeColor = new("CEnvFade", "m_fadeColor");
-		/// <summary><c>Color</c>. Networked in build 6779: a write is sent to clients.</summary>
+		/// <summary><c>Color</c>. Networked: a write is sent to clients.</summary>
 		public Color32 m_fadeColor { get => Get<Color32>(__m_fadeColor); set => Set(__m_fadeColor, value); }
 
 		/// <summary>Fires the <c>Fade</c> input.</summary>

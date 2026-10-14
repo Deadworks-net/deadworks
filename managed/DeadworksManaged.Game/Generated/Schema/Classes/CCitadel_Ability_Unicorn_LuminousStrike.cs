@@ -30,11 +30,11 @@ public static partial class Schema {
 		public int m_nStackCount { get => Get<int>(__m_nStackCount); set => Set(__m_nStackCount, value); }
 
 		private static readonly SchemaField __m_vecNextExplosionLocation = new("CCitadel_Ability_Unicorn_LuminousStrike", "m_vecNextExplosionLocation");
-		/// <summary><c>CNetworkUtlVectorBase&lt;VectorWS&gt;</c>. Networked in build 6779: a write is sent to clients.</summary>
+		/// <summary><c>CNetworkUtlVectorBase&lt;VectorWS&gt;</c>. Networked: a write is sent to clients.</summary>
 		public SchemaValueList<Vector3> m_vecNextExplosionLocation => new(this, __m_vecNextExplosionLocation, ListStorage.Vector);
 
 		private static readonly SchemaField __m_vecNextExplosionTime = new("CCitadel_Ability_Unicorn_LuminousStrike", "m_vecNextExplosionTime");
-		/// <summary><c>CNetworkUtlVectorBase&lt;GameTime_t&gt;</c>. Networked in build 6779: a write is sent to clients.</summary>
+		/// <summary><c>CNetworkUtlVectorBase&lt;GameTime_t&gt;</c>. Networked: a write is sent to clients.</summary>
 		public SchemaValueList<GameTime> m_vecNextExplosionTime => new(this, __m_vecNextExplosionTime, ListStorage.Vector);
 
 		/// <summary>The data entry this was created from, as <see cref="CCitadel_Ability_Unicorn_LuminousStrikeVData"/>, or null if it has none.</summary>

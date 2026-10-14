@@ -14,27 +14,27 @@ public static partial class Schema {
 		static string ISchemaClass<CCitadelBulletTimeWarp>.NativeName => "CCitadelBulletTimeWarp";
 
 		private static readonly SchemaField __m_flBonusBulletBaseDamageFriendly = new("CCitadelBulletTimeWarp", "m_flBonusBulletBaseDamageFriendly");
-		/// <summary><c>float32</c>. Networked in build 6779: a write is sent to clients.</summary>
+		/// <summary><c>float32</c>. Networked: a write is sent to clients.</summary>
 		public float m_flBonusBulletBaseDamageFriendly { get => Get<float>(__m_flBonusBulletBaseDamageFriendly); set => Set(__m_flBonusBulletBaseDamageFriendly, value); }
 
 		private static readonly SchemaField __m_flBulletTimeScale = new("CCitadelBulletTimeWarp", "m_flBulletTimeScale");
-		/// <summary><c>float32</c>. Networked in build 6779: a write is sent to clients.</summary>
+		/// <summary><c>float32</c>. Networked: a write is sent to clients.</summary>
 		public float m_flBulletTimeScale { get => Get<float>(__m_flBulletTimeScale); set => Set(__m_flBulletTimeScale, value); }
 
 		private static readonly SchemaField __m_flBulletTimeScaleFriendly = new("CCitadelBulletTimeWarp", "m_flBulletTimeScaleFriendly");
-		/// <summary><c>float32</c>. Networked in build 6779: a write is sent to clients.</summary>
+		/// <summary><c>float32</c>. Networked: a write is sent to clients.</summary>
 		public float m_flBulletTimeScaleFriendly { get => Get<float>(__m_flBulletTimeScaleFriendly); set => Set(__m_flBulletTimeScaleFriendly, value); }
 
 		private static readonly SchemaField __m_flExpireTime = new("CCitadelBulletTimeWarp", "m_flExpireTime");
-		/// <summary><c>GameTime_t</c>. Networked in build 6779: a write is sent to clients.</summary>
+		/// <summary><c>GameTime_t</c>. Networked: a write is sent to clients.</summary>
 		public GameTime m_flExpireTime { get => Get<GameTime>(__m_flExpireTime); set => Set(__m_flExpireTime, value); }
 
 		private static readonly SchemaField __m_flProjectileTimeScale = new("CCitadelBulletTimeWarp", "m_flProjectileTimeScale");
-		/// <summary><c>float32</c>. Networked in build 6779: a write is sent to clients.</summary>
+		/// <summary><c>float32</c>. Networked: a write is sent to clients.</summary>
 		public float m_flProjectileTimeScale { get => Get<float>(__m_flProjectileTimeScale); set => Set(__m_flProjectileTimeScale, value); }
 
 		private static readonly SchemaField __m_flStopDuration = new("CCitadelBulletTimeWarp", "m_flStopDuration");
-		/// <summary><c>float32</c>. Networked in build 6779: a write is sent to clients.</summary>
+		/// <summary><c>float32</c>. Networked: a write is sent to clients.</summary>
 		public float m_flStopDuration { get => Get<float>(__m_flStopDuration); set => Set(__m_flStopDuration, value); }
 
 		/// <summary>The data entry this was created from, as <see cref="CCitadelBulletTimeWarpVData"/>, or null if it has none.</summary>

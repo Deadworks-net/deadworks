@@ -183,7 +183,6 @@ class Shard:
         if self.index == 0:
             env["DW_SURVEY_CONVARS"] = str(self.args.work / "convars.txt")
             env["DW_SURVEY_CONVARS_OUT"] = str(self.args.work / "absent-convars.json")
-            env["DW_SURVEY_NETWORKED_OUT"] = str(self.args.work / "networked.json")
         command = [
             str(exe), "-dedicated", "-console", "-insecure", "-allow_no_lobby_connect", "-no_assert_dialog",
             "-maxplayers", "4", "+hostport", str(self.args.port + self.index), "+sv_hibernate_when_empty", "0", "+map", self.args.map,
@@ -320,7 +319,6 @@ def main():
     inf = (args.server_dir / ".." / ".." / "citadel" / "steam.inf").resolve().read_text(encoding="utf-8", errors="replace")
     build = int(next(line.split("=")[1] for line in inf.splitlines() if line.startswith("ClientVersion=")))
     absent_path = args.work / "absent-convars.json"
-    server_build = build
     if earlier:
         # The file keeps the build of its full run; a verdict added later says which build it is from.
         results = earlier["results"] | {name: result | {"build": build} for name, result in results.items()}
@@ -331,12 +329,6 @@ def main():
         "results": dict(sorted(results.items())),
         "absentConVars": json.loads(absent_path.read_text(encoding="utf-8")) if absent_path.exists() else [],
     }
-    # Which fields the game networks, asked of the running game: its schema stopped saying in build 6711.
-    networked_path = args.work / "networked.json"
-    if networked_path.exists():
-        survey["networked"] = {"build": server_build, "fields": json.loads(networked_path.read_text(encoding="utf-8"))}
-    elif earlier and "networked" in earlier:
-        survey["networked"] = earlier["networked"]
     args.out.write_text(json.dumps(survey, indent=1) + "\n", encoding="utf-8")
 
     counts = {}

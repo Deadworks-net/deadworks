@@ -18,11 +18,11 @@ public static partial class Schema {
 		public bool m_bHasCameraOverride { get => Get<bool>(__m_bHasCameraOverride); set => Set(__m_bHasCameraOverride, value); }
 
 		private static readonly SchemaField __m_flFlurryEndTime = new("CCitadel_Ability_BulletFlurry", "m_flFlurryEndTime");
-		/// <summary><c>CCitadelAutoScaledTime</c>. Networked in build 6779: a write is sent to clients.</summary>
+		/// <summary><c>CCitadelAutoScaledTime</c>. Networked: a write is sent to clients.</summary>
 		public CCitadelAutoScaledTime m_flFlurryEndTime => Embedded<CCitadelAutoScaledTime>(__m_flFlurryEndTime);
 
 		private static readonly SchemaField __m_flNextAttackTime = new("CCitadel_Ability_BulletFlurry", "m_flNextAttackTime");
-		/// <summary><c>GameTime_t</c>. Networked in build 6779: a write is sent to clients.</summary>
+		/// <summary><c>GameTime_t</c>. Networked: a write is sent to clients.</summary>
 		public GameTime m_flNextAttackTime { get => Get<GameTime>(__m_flNextAttackTime); set => Set(__m_flNextAttackTime, value); }
 
 		private static readonly SchemaField __m_nBurstShots = new("CCitadel_Ability_BulletFlurry", "m_nBurstShots");

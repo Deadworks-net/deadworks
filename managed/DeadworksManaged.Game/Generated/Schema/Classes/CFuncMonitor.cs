@@ -14,15 +14,15 @@ public static partial class Schema {
 		static string ISchemaClass<CFuncMonitor>.NativeName => "CFuncMonitor";
 
 		private static readonly SchemaField __m_bDraw3DSkybox = new("CFuncMonitor", "m_bDraw3DSkybox");
-		/// <summary><c>bool</c>. Networked in build 6779: a write is sent to clients.</summary>
+		/// <summary><c>bool</c>. Networked: a write is sent to clients.</summary>
 		public bool m_bDraw3DSkybox { get => Get<bool>(__m_bDraw3DSkybox); set => Set(__m_bDraw3DSkybox, value); }
 
 		private static readonly SchemaField __m_bEnabled = new("CFuncMonitor", "m_bEnabled");
-		/// <summary><c>bool</c>. Networked in build 6779: a write is sent to clients.</summary>
+		/// <summary><c>bool</c>. Networked: a write is sent to clients.</summary>
 		public bool m_bEnabled { get => Get<bool>(__m_bEnabled); set => Set(__m_bEnabled, value); }
 
 		private static readonly SchemaField __m_bRenderShadows = new("CFuncMonitor", "m_bRenderShadows");
-		/// <summary><c>bool</c>. Networked in build 6779: a write is sent to clients.</summary>
+		/// <summary><c>bool</c>. Networked: a write is sent to clients.</summary>
 		public bool m_bRenderShadows { get => Get<bool>(__m_bRenderShadows); set => Set(__m_bRenderShadows, value); }
 
 		private static readonly SchemaField __m_bStartEnabled = new("CFuncMonitor", "m_bStartEnabled");
@@ -30,23 +30,23 @@ public static partial class Schema {
 		public bool m_bStartEnabled { get => Get<bool>(__m_bStartEnabled); set => Set(__m_bStartEnabled, value); }
 
 		private static readonly SchemaField __m_bUseUniqueColorTarget = new("CFuncMonitor", "m_bUseUniqueColorTarget");
-		/// <summary><c>bool</c>. Networked in build 6779: a write is sent to clients.</summary>
+		/// <summary><c>bool</c>. Networked: a write is sent to clients.</summary>
 		public bool m_bUseUniqueColorTarget { get => Get<bool>(__m_bUseUniqueColorTarget); set => Set(__m_bUseUniqueColorTarget, value); }
 
 		private static readonly SchemaField __m_brushModelName = new("CFuncMonitor", "m_brushModelName");
-		/// <summary><c>CUtlString</c>. Networked in build 6779: a write is sent to clients.</summary>
+		/// <summary><c>CUtlString</c>. Networked: a write is sent to clients.</summary>
 		public string m_brushModelName => GetString(__m_brushModelName);
 
 		private static readonly SchemaField __m_hTargetCamera = new("CFuncMonitor", "m_hTargetCamera");
-		/// <summary><c>CHandle&lt;CBaseEntity&gt;</c>. Networked in build 6779: a write is sent to clients.</summary>
+		/// <summary><c>CHandle&lt;CBaseEntity&gt;</c>. Networked: a write is sent to clients.</summary>
 		public CBaseEntity? m_hTargetCamera { get => GetHandle<CBaseEntity>(__m_hTargetCamera); set => SetHandle(__m_hTargetCamera, value); }
 
 		private static readonly SchemaField __m_nResolutionEnum = new("CFuncMonitor", "m_nResolutionEnum");
-		/// <summary><c>int32</c>. Networked in build 6779: a write is sent to clients.</summary>
+		/// <summary><c>int32</c>. Networked: a write is sent to clients.</summary>
 		public int m_nResolutionEnum { get => Get<int>(__m_nResolutionEnum); set => Set(__m_nResolutionEnum, value); }
 
 		private static readonly SchemaField __m_targetCamera = new("CFuncMonitor", "m_targetCamera");
-		/// <summary><c>CUtlString</c>. Networked in build 6779: a write is sent to clients.</summary>
+		/// <summary><c>CUtlString</c>. Networked: a write is sent to clients.</summary>
 		public string m_targetCamera => GetString(__m_targetCamera);
 
 		/// <summary>Fires the <c>SetCamera</c> input.</summary>

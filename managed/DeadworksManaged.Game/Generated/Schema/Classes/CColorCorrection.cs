@@ -14,27 +14,27 @@ public static partial class Schema {
 		static string ISchemaClass<CColorCorrection>.NativeName => "CColorCorrection";
 
 		private static readonly SchemaField __m_MaxFalloff = new("CColorCorrection", "m_MaxFalloff");
-		/// <summary><c>float32</c>. Networked in build 6779: a write is sent to clients.</summary>
+		/// <summary><c>float32</c>. Networked: a write is sent to clients.</summary>
 		public float m_MaxFalloff { get => Get<float>(__m_MaxFalloff); set => Set(__m_MaxFalloff, value); }
 
 		private static readonly SchemaField __m_MinFalloff = new("CColorCorrection", "m_MinFalloff");
-		/// <summary><c>float32</c>. Networked in build 6779: a write is sent to clients.</summary>
+		/// <summary><c>float32</c>. Networked: a write is sent to clients.</summary>
 		public float m_MinFalloff { get => Get<float>(__m_MinFalloff); set => Set(__m_MinFalloff, value); }
 
 		private static readonly SchemaField __m_bClientSide = new("CColorCorrection", "m_bClientSide");
-		/// <summary><c>bool</c>. Networked in build 6779: a write is sent to clients.</summary>
+		/// <summary><c>bool</c>. Networked: a write is sent to clients.</summary>
 		public bool m_bClientSide { get => Get<bool>(__m_bClientSide); set => Set(__m_bClientSide, value); }
 
 		private static readonly SchemaField __m_bEnabled = new("CColorCorrection", "m_bEnabled");
-		/// <summary><c>bool</c>. Networked in build 6779: a write is sent to clients.</summary>
+		/// <summary><c>bool</c>. Networked: a write is sent to clients.</summary>
 		public bool m_bEnabled { get => Get<bool>(__m_bEnabled); set => Set(__m_bEnabled, value); }
 
 		private static readonly SchemaField __m_bExclusive = new("CColorCorrection", "m_bExclusive");
-		/// <summary><c>bool</c>. Networked in build 6779: a write is sent to clients.</summary>
+		/// <summary><c>bool</c>. Networked: a write is sent to clients.</summary>
 		public bool m_bExclusive { get => Get<bool>(__m_bExclusive); set => Set(__m_bExclusive, value); }
 
 		private static readonly SchemaField __m_bMaster = new("CColorCorrection", "m_bMaster");
-		/// <summary><c>bool</c>. Networked in build 6779: a write is sent to clients.</summary>
+		/// <summary><c>bool</c>. Networked: a write is sent to clients.</summary>
 		public bool m_bMaster { get => Get<bool>(__m_bMaster); set => Set(__m_bMaster, value); }
 
 		private static readonly SchemaField __m_bStartDisabled = new("CColorCorrection", "m_bStartDisabled");
@@ -42,19 +42,19 @@ public static partial class Schema {
 		public bool m_bStartDisabled { get => Get<bool>(__m_bStartDisabled); set => Set(__m_bStartDisabled, value); }
 
 		private static readonly SchemaField __m_flCurWeight = new("CColorCorrection", "m_flCurWeight");
-		/// <summary><c>float32</c>. Networked in build 6779: a write is sent to clients.</summary>
+		/// <summary><c>float32</c>. Networked: a write is sent to clients.</summary>
 		public float m_flCurWeight { get => Get<float>(__m_flCurWeight); set => Set(__m_flCurWeight, value); }
 
 		private static readonly SchemaField __m_flFadeInDuration = new("CColorCorrection", "m_flFadeInDuration");
-		/// <summary><c>float32</c>. Networked in build 6779: a write is sent to clients.</summary>
+		/// <summary><c>float32</c>. Networked: a write is sent to clients.</summary>
 		public float m_flFadeInDuration { get => Get<float>(__m_flFadeInDuration); set => Set(__m_flFadeInDuration, value); }
 
 		private static readonly SchemaField __m_flFadeOutDuration = new("CColorCorrection", "m_flFadeOutDuration");
-		/// <summary><c>float32</c>. Networked in build 6779: a write is sent to clients.</summary>
+		/// <summary><c>float32</c>. Networked: a write is sent to clients.</summary>
 		public float m_flFadeOutDuration { get => Get<float>(__m_flFadeOutDuration); set => Set(__m_flFadeOutDuration, value); }
 
 		private static readonly SchemaField __m_flMaxWeight = new("CColorCorrection", "m_flMaxWeight");
-		/// <summary><c>float32</c>. Networked in build 6779: a write is sent to clients.</summary>
+		/// <summary><c>float32</c>. Networked: a write is sent to clients.</summary>
 		public float m_flMaxWeight { get => Get<float>(__m_flMaxWeight); set => Set(__m_flMaxWeight, value); }
 
 		private static readonly SchemaField __m_flStartFadeInWeight = new("CColorCorrection", "m_flStartFadeInWeight");
@@ -78,7 +78,7 @@ public static partial class Schema {
 		public string m_lookupFilename { get => GetString(__m_lookupFilename); set => SetString(__m_lookupFilename, value); }
 
 		private static readonly SchemaField __m_netlookupFilename = new("CColorCorrection", "m_netlookupFilename");
-		/// <summary><c>char[512]</c>. Networked in build 6779: a write is sent to clients.</summary>
+		/// <summary><c>char[512]</c>. Networked: a write is sent to clients.</summary>
 		public string m_netlookupFilename => GetChars(__m_netlookupFilename, 512);
 
 		/// <summary>Fires the <c>Disable</c> input.</summary>

@@ -14,7 +14,7 @@ public static partial class Schema {
 		static string ISchemaClass<CCitadel_Ability_HealthSwap>.NativeName => "CCitadel_Ability_HealthSwap";
 
 		private static readonly SchemaField __m_flPostCastHoldEndTime = new("CCitadel_Ability_HealthSwap", "m_flPostCastHoldEndTime");
-		/// <summary><c>GameTime_t</c>. Networked in build 6779: a write is sent to clients.</summary>
+		/// <summary><c>GameTime_t</c>. Networked: a write is sent to clients.</summary>
 		public GameTime m_flPostCastHoldEndTime { get => Get<GameTime>(__m_flPostCastHoldEndTime); set => Set(__m_flPostCastHoldEndTime, value); }
 
 		private static readonly SchemaField __m_nFXIndex = new("CCitadel_Ability_HealthSwap", "m_nFXIndex");

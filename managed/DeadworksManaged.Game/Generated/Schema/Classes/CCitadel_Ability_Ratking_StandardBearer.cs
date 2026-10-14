@@ -22,11 +22,11 @@ public static partial class Schema {
 		public bool m_bLeapLanded { get => Get<bool>(__m_bLeapLanded); set => Set(__m_bLeapLanded, value); }
 
 		private static readonly SchemaField __m_ePlantLeapPhase = new("CCitadel_Ability_Ratking_StandardBearer", "m_ePlantLeapPhase");
-		/// <summary><c>EPlantLeapPhase_t</c>. Networked in build 6779: a write is sent to clients.</summary>
+		/// <summary><c>EPlantLeapPhase_t</c>. Networked: a write is sent to clients.</summary>
 		public EPlantLeapPhase_t m_ePlantLeapPhase { get => Get<EPlantLeapPhase_t>(__m_ePlantLeapPhase); set => Set(__m_ePlantLeapPhase, value); }
 
 		private static readonly SchemaField __m_flChargeResumeTime = new("CCitadel_Ability_Ratking_StandardBearer", "m_flChargeResumeTime");
-		/// <summary><c>GameTime_t</c>. Networked in build 6779: a write is sent to clients.</summary>
+		/// <summary><c>GameTime_t</c>. Networked: a write is sent to clients.</summary>
 		public GameTime m_flChargeResumeTime { get => Get<GameTime>(__m_flChargeResumeTime); set => Set(__m_flChargeResumeTime, value); }
 
 		private static readonly SchemaField __m_flChargeStartSpeed = new("CCitadel_Ability_Ratking_StandardBearer", "m_flChargeStartSpeed");
@@ -34,7 +34,7 @@ public static partial class Schema {
 		public float m_flChargeStartSpeed { get => Get<float>(__m_flChargeStartSpeed); set => Set(__m_flChargeStartSpeed, value); }
 
 		private static readonly SchemaField __m_flChargeStartTime = new("CCitadel_Ability_Ratking_StandardBearer", "m_flChargeStartTime");
-		/// <summary><c>GameTime_t</c>. Networked in build 6779: a write is sent to clients.</summary>
+		/// <summary><c>GameTime_t</c>. Networked: a write is sent to clients.</summary>
 		public GameTime m_flChargeStartTime { get => Get<GameTime>(__m_flChargeStartTime); set => Set(__m_flChargeStartTime, value); }
 
 		private static readonly SchemaField __m_flCurrentChargeSpeed = new("CCitadel_Ability_Ratking_StandardBearer", "m_flCurrentChargeSpeed");
@@ -42,7 +42,7 @@ public static partial class Schema {
 		public float m_flCurrentChargeSpeed { get => Get<float>(__m_flCurrentChargeSpeed); set => Set(__m_flCurrentChargeSpeed, value); }
 
 		private static readonly SchemaField __m_flForcedPlantTime = new("CCitadel_Ability_Ratking_StandardBearer", "m_flForcedPlantTime");
-		/// <summary><c>GameTime_t</c>. Networked in build 6779: a write is sent to clients.</summary>
+		/// <summary><c>GameTime_t</c>. Networked: a write is sent to clients.</summary>
 		public GameTime m_flForcedPlantTime { get => Get<GameTime>(__m_flForcedPlantTime); set => Set(__m_flForcedPlantTime, value); }
 
 		private static readonly SchemaField __m_flPlantLeapPhaseElapsedAtPause = new("CCitadel_Ability_Ratking_StandardBearer", "m_flPlantLeapPhaseElapsedAtPause");
@@ -50,7 +50,7 @@ public static partial class Schema {
 		public float m_flPlantLeapPhaseElapsedAtPause { get => Get<float>(__m_flPlantLeapPhaseElapsedAtPause); set => Set(__m_flPlantLeapPhaseElapsedAtPause, value); }
 
 		private static readonly SchemaField __m_flPlantLeapPhaseStartTime = new("CCitadel_Ability_Ratking_StandardBearer", "m_flPlantLeapPhaseStartTime");
-		/// <summary><c>GameTime_t</c>. Networked in build 6779: a write is sent to clients.</summary>
+		/// <summary><c>GameTime_t</c>. Networked: a write is sent to clients.</summary>
 		public GameTime m_flPlantLeapPhaseStartTime { get => Get<GameTime>(__m_flPlantLeapPhaseStartTime); set => Set(__m_flPlantLeapPhaseStartTime, value); }
 
 		private static readonly SchemaField __m_vGoalDir = new("CCitadel_Ability_Ratking_StandardBearer", "m_vGoalDir");

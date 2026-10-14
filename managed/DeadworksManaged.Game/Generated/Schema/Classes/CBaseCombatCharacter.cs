@@ -30,7 +30,7 @@ public static partial class Schema {
 		public Hull_t m_eHull { get => Get<Hull_t>(__m_eHull); set => Set(__m_eHull, value); }
 
 		private static readonly SchemaField __m_hMyWearables = new("CBaseCombatCharacter", "m_hMyWearables");
-		/// <summary><c>CNetworkUtlVectorBase&lt;CHandle&lt;CEconWearable&gt;&gt;</c>. Networked in build 6779: a write is sent to clients.</summary>
+		/// <summary><c>CNetworkUtlVectorBase&lt;CHandle&lt;CEconWearable&gt;&gt;</c>. Networked: a write is sent to clients.</summary>
 		public SchemaHandleList<CEconWearable> m_hMyWearables => new(this, __m_hMyWearables, ListStorage.Vector);
 
 		private static readonly SchemaField __m_impactEnergyScale = new("CBaseCombatCharacter", "m_impactEnergyScale");

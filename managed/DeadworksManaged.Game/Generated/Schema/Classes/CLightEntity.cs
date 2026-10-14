@@ -14,7 +14,7 @@ public static partial class Schema {
 		static string ISchemaClass<CLightEntity>.NativeName => "CLightEntity";
 
 		private static readonly SchemaField __m_CLightComponent = new("CLightEntity", "m_CLightComponent");
-		/// <summary><c>CLightComponent*</c>. Networked in build 6779: a write is sent to clients.</summary>
+		/// <summary><c>CLightComponent*</c>. Networked: a write is sent to clients.</summary>
 		public CLightComponent? m_CLightComponent => Pointer<CLightComponent>(__m_CLightComponent);
 
 		/// <summary>Fires the <c>SetAppearance</c> input.</summary>

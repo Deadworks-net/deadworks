@@ -14,15 +14,15 @@ public static partial class Schema {
 		static string ISchemaClass<CTriggerGameEvent>.NativeName => "CTriggerGameEvent";
 
 		private static readonly SchemaField __m_strEndTouchEventName = new("CTriggerGameEvent", "m_strEndTouchEventName");
-		/// <summary><c>CUtlString</c>. Networked in build 6779: a write is sent to clients.</summary>
+		/// <summary><c>CUtlString</c>. Networked: a write is sent to clients.</summary>
 		public string m_strEndTouchEventName => GetString(__m_strEndTouchEventName);
 
 		private static readonly SchemaField __m_strStartTouchEventName = new("CTriggerGameEvent", "m_strStartTouchEventName");
-		/// <summary><c>CUtlString</c>. Networked in build 6779: a write is sent to clients.</summary>
+		/// <summary><c>CUtlString</c>. Networked: a write is sent to clients.</summary>
 		public string m_strStartTouchEventName => GetString(__m_strStartTouchEventName);
 
 		private static readonly SchemaField __m_strTriggerID = new("CTriggerGameEvent", "m_strTriggerID");
-		/// <summary><c>CUtlString</c>. Networked in build 6779: a write is sent to clients.</summary>
+		/// <summary><c>CUtlString</c>. Networked: a write is sent to clients.</summary>
 		public string m_strTriggerID => GetString(__m_strTriggerID);
 
 		/// <summary>Fires the <c>SetEndTouchEvent</c> input.</summary>

@@ -18,7 +18,7 @@ public static partial class Schema {
 		public bool m_bColliding { get => Get<bool>(__m_bColliding); set => Set(__m_bColliding, value); }
 
 		private static readonly SchemaField __m_bDucked = new("CCitadelPlayer_MovementServices", "m_bDucked");
-		/// <summary><c>bool</c>. Networked in build 6779: a write is sent to clients.</summary>
+		/// <summary><c>bool</c>. Networked: a write is sent to clients.</summary>
 		public bool m_bDucked { get => Get<bool>(__m_bDucked); set => Set(__m_bDucked, value); }
 
 		private static readonly SchemaField __m_bHasFreeCursor = new("CCitadelPlayer_MovementServices", "m_bHasFreeCursor");
@@ -26,7 +26,7 @@ public static partial class Schema {
 		public bool m_bHasFreeCursor { get => Get<bool>(__m_bHasFreeCursor); set => Set(__m_bHasFreeCursor, value); }
 
 		private static readonly SchemaField __m_bInPortalEnvironment = new("CCitadelPlayer_MovementServices", "m_bInPortalEnvironment");
-		/// <summary><c>bool</c>. Networked in build 6779: a write is sent to clients.</summary>
+		/// <summary><c>bool</c>. Networked: a write is sent to clients.</summary>
 		public bool m_bInPortalEnvironment { get => Get<bool>(__m_bInPortalEnvironment); set => Set(__m_bInPortalEnvironment, value); }
 
 		private static readonly SchemaField __m_bLandedOnGround = new("CCitadelPlayer_MovementServices", "m_bLandedOnGround");
@@ -34,7 +34,7 @@ public static partial class Schema {
 		public bool m_bLandedOnGround { get => Get<bool>(__m_bLandedOnGround); set => Set(__m_bLandedOnGround, value); }
 
 		private static readonly SchemaField __m_bToggleDuckActive = new("CCitadelPlayer_MovementServices", "m_bToggleDuckActive");
-		/// <summary><c>bool</c>. Networked in build 6779: a write is sent to clients.</summary>
+		/// <summary><c>bool</c>. Networked: a write is sent to clients.</summary>
 		public bool m_bToggleDuckActive { get => Get<bool>(__m_bToggleDuckActive); set => Set(__m_bToggleDuckActive, value); }
 
 		private static readonly SchemaField __m_flAG2TurnSpeed = new("CCitadelPlayer_MovementServices", "m_flAG2TurnSpeed");
@@ -70,7 +70,7 @@ public static partial class Schema {
 		public Vector2 m_vLastWishDir { get => Get<Vector2>(__m_vLastWishDir); set => Set(__m_vLastWishDir, value); }
 
 		private static readonly SchemaField __m_vPositionDeltaVelocity = new("CCitadelPlayer_MovementServices", "m_vPositionDeltaVelocity");
-		/// <summary><c>CNetworkVelocityVector</c>. Networked in build 6779: a write is sent to clients.</summary>
+		/// <summary><c>CNetworkVelocityVector</c>. Networked: a write is sent to clients.</summary>
 		public CNetworkVelocityVector m_vPositionDeltaVelocity => Embedded<CNetworkVelocityVector>(__m_vPositionDeltaVelocity);
 
 		private static readonly SchemaField __m_vecPogoVelocity = new("CCitadelPlayer_MovementServices", "m_vecPogoVelocity");

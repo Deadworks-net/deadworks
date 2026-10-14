@@ -14,23 +14,23 @@ public static partial class Schema {
 		static string ISchemaClass<audioparams_t>.NativeName => "audioparams_t";
 
 		private static readonly SchemaField __localBits = new("audioparams_t", "localBits");
-		/// <summary><c>uint8</c>. Networked in build 6779: a write is sent to clients.</summary>
+		/// <summary><c>uint8</c>. Networked: a write is sent to clients.</summary>
 		public byte localBits { get => Get<byte>(__localBits); set => Set(__localBits, value); }
 
 		private static readonly SchemaField __localSound = new("audioparams_t", "localSound");
-		/// <summary><c>VectorWS[8]</c>. Networked in build 6779: a write is sent to clients.</summary>
+		/// <summary><c>VectorWS[8]</c>. Networked: a write is sent to clients.</summary>
 		public SchemaValueList<Vector3> localSound => new(this, __localSound, 8);
 
 		private static readonly SchemaField __soundEventHash = new("audioparams_t", "soundEventHash");
-		/// <summary><c>uint32</c>. Networked in build 6779: a write is sent to clients.</summary>
+		/// <summary><c>uint32</c>. Networked: a write is sent to clients.</summary>
 		public uint soundEventHash { get => Get<uint>(__soundEventHash); set => Set(__soundEventHash, value); }
 
 		private static readonly SchemaField __soundscapeEntityListIndex = new("audioparams_t", "soundscapeEntityListIndex");
-		/// <summary><c>int32</c>. Networked in build 6779: a write is sent to clients.</summary>
+		/// <summary><c>int32</c>. Networked: a write is sent to clients.</summary>
 		public int soundscapeEntityListIndex { get => Get<int>(__soundscapeEntityListIndex); set => Set(__soundscapeEntityListIndex, value); }
 
 		private static readonly SchemaField __soundscapeIndex = new("audioparams_t", "soundscapeIndex");
-		/// <summary><c>int32</c>. Networked in build 6779: a write is sent to clients.</summary>
+		/// <summary><c>int32</c>. Networked: a write is sent to clients.</summary>
 		public int soundscapeIndex { get => Get<int>(__soundscapeIndex); set => Set(__soundscapeIndex, value); }
 	}
 }

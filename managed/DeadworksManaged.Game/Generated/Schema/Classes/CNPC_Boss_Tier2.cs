@@ -18,31 +18,31 @@ public static partial class Schema {
 		public CEntityIOOutput m_eventOnBossKilled => Embedded<CEntityIOOutput>(__m_eventOnBossKilled);
 
 		private static readonly SchemaField __m_flFadeOutEnd = new("CNPC_Boss_Tier2", "m_flFadeOutEnd");
-		/// <summary><c>GameTime_t</c>. Networked in build 6779: a write is sent to clients.</summary>
+		/// <summary><c>GameTime_t</c>. Networked: a write is sent to clients.</summary>
 		public GameTime m_flFadeOutEnd { get => Get<GameTime>(__m_flFadeOutEnd); set => Set(__m_flFadeOutEnd, value); }
 
 		private static readonly SchemaField __m_flFadeOutStart = new("CNPC_Boss_Tier2", "m_flFadeOutStart");
-		/// <summary><c>GameTime_t</c>. Networked in build 6779: a write is sent to clients.</summary>
+		/// <summary><c>GameTime_t</c>. Networked: a write is sent to clients.</summary>
 		public GameTime m_flFadeOutStart { get => Get<GameTime>(__m_flFadeOutStart); set => Set(__m_flFadeOutStart, value); }
 
 		private static readonly SchemaField __m_flLastWeakpointHitTime = new("CNPC_Boss_Tier2", "m_flLastWeakpointHitTime");
-		/// <summary><c>GameTime_t</c>. Networked in build 6779: a write is sent to clients.</summary>
+		/// <summary><c>GameTime_t</c>. Networked: a write is sent to clients.</summary>
 		public GameTime m_flLastWeakpointHitTime { get => Get<GameTime>(__m_flLastWeakpointHitTime); set => Set(__m_flLastWeakpointHitTime, value); }
 
 		private static readonly SchemaField __m_hTargetedEnemy = new("CNPC_Boss_Tier2", "m_hTargetedEnemy");
-		/// <summary><c>CHandle&lt;CBaseEntity&gt;</c>. Networked in build 6779: a write is sent to clients.</summary>
+		/// <summary><c>CHandle&lt;CBaseEntity&gt;</c>. Networked: a write is sent to clients.</summary>
 		public CBaseEntity? m_hTargetedEnemy { get => GetHandle<CBaseEntity>(__m_hTargetedEnemy); set => SetHandle(__m_hTargetedEnemy, value); }
 
 		private static readonly SchemaField __m_iLane = new("CNPC_Boss_Tier2", "m_iLane");
-		/// <summary><c>int32</c>. Networked in build 6779: a write is sent to clients.</summary>
+		/// <summary><c>int32</c>. Networked: a write is sent to clients.</summary>
 		public int m_iLane { get => Get<int>(__m_iLane); set => Set(__m_iLane, value); }
 
 		private static readonly SchemaField __m_nElectricBeamCasts = new("CNPC_Boss_Tier2", "m_nElectricBeamCasts");
-		/// <summary><c>int32</c>. Networked in build 6779: a write is sent to clients.</summary>
+		/// <summary><c>int32</c>. Networked: a write is sent to clients.</summary>
 		public int m_nElectricBeamCasts { get => Get<int>(__m_nElectricBeamCasts); set => Set(__m_nElectricBeamCasts, value); }
 
 		private static readonly SchemaField __m_vecElectricBeamLookTarget = new("CNPC_Boss_Tier2", "m_vecElectricBeamLookTarget");
-		/// <summary><c>VectorWS</c>. Networked in build 6779: a write is sent to clients.</summary>
+		/// <summary><c>VectorWS</c>. Networked: a write is sent to clients.</summary>
 		public Vector3 m_vecElectricBeamLookTarget { get => Get<Vector3>(__m_vecElectricBeamLookTarget); set => Set(__m_vecElectricBeamLookTarget, value); }
 
 		/// <summary>The data entry this was created from, as <see cref="CNPC_Boss_Tier2VData"/>, or null if it has none.</summary>

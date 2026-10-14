@@ -27,10 +27,6 @@ sealed class SpawnSurvey {
 	public Dictionary<string, SurveyResult> Results { get; } = new(StringComparer.Ordinal);
 	public HashSet<string> AbsentConVars { get; } = new(StringComparer.Ordinal);
 
-	/// <summary>The fields the running game said it networks, as <c>Class.field</c>, and the build that was.</summary>
-	public HashSet<string> NetworkedFields { get; } = new(StringComparer.Ordinal);
-	public int NetworkedBuild { get; private set; }
-
 	public static SpawnSurvey Load(JsonElement root) {
 		var survey = new SpawnSurvey {
 			Build = root.TryGetProperty("build", out var build) ? build.GetInt32() : 0,
@@ -45,11 +41,6 @@ sealed class SpawnSurvey {
 					entry.Value.TryGetProperty("build", out var triedIn) ? triedIn.GetInt32() : survey.Build);
 		if (root.TryGetProperty("absentConVars", out var absent))
 			foreach (var name in absent.EnumerateArray()) survey.AbsentConVars.Add(name.GetString() ?? "");
-		if (root.TryGetProperty("networked", out var networked)) {
-			survey.NetworkedBuild = networked.GetProperty("build").GetInt32();
-			foreach (var owner in networked.GetProperty("fields").EnumerateObject())
-				foreach (var field in owner.Value.EnumerateArray()) survey.NetworkedFields.Add($"{owner.Name}.{field.GetString()}");
-		}
 		return survey;
 	}
 }

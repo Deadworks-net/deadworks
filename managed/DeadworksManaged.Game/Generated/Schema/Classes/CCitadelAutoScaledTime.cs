@@ -14,7 +14,7 @@ public static partial class Schema {
 		static string ISchemaClass<CCitadelAutoScaledTime>.NativeName => "CCitadelAutoScaledTime";
 
 		private static readonly SchemaField __m_flTime = new("CCitadelAutoScaledTime", "m_flTime");
-		/// <summary><c>GameTime_t</c>. Networked in build 6779: a write is sent to clients.</summary>
+		/// <summary><c>GameTime_t</c>. Networked: a write is sent to clients.</summary>
 		public GameTime m_flTime { get => Get<GameTime>(__m_flTime); set => Set(__m_flTime, value); }
 	}
 }

@@ -18,7 +18,7 @@ public static partial class Schema {
 		public CPointModifierThinker? m_hAuraThinker { get => GetHandle<CPointModifierThinker>(__m_hAuraThinker); set => SetHandle(__m_hAuraThinker, value); }
 
 		private static readonly SchemaField __m_hWasAttachedTo = new("CCitadel_Ability_Familiar_Spotlight", "m_hWasAttachedTo");
-		/// <summary><c>CHandle&lt;CBaseEntity&gt;</c>. Networked in build 6779: a write is sent to clients.</summary>
+		/// <summary><c>CHandle&lt;CBaseEntity&gt;</c>. Networked: a write is sent to clients.</summary>
 		public CBaseEntity? m_hWasAttachedTo { get => GetHandle<CBaseEntity>(__m_hWasAttachedTo); set => SetHandle(__m_hWasAttachedTo, value); }
 
 		private static readonly SchemaField __m_nEyeGlowFX = new("CCitadel_Ability_Familiar_Spotlight", "m_nEyeGlowFX");
@@ -26,7 +26,7 @@ public static partial class Schema {
 		public int m_nEyeGlowFX { get => Get<int>(__m_nEyeGlowFX); set => Set(__m_nEyeGlowFX, value); }
 
 		private static readonly SchemaField __m_vAuraPosition = new("CCitadel_Ability_Familiar_Spotlight", "m_vAuraPosition");
-		/// <summary><c>VectorWS</c>. Networked in build 6779: a write is sent to clients.</summary>
+		/// <summary><c>VectorWS</c>. Networked: a write is sent to clients.</summary>
 		public Vector3 m_vAuraPosition { get => Get<Vector3>(__m_vAuraPosition); set => Set(__m_vAuraPosition, value); }
 
 		private static readonly SchemaField __m_vLastValidAuraPosition = new("CCitadel_Ability_Familiar_Spotlight", "m_vLastValidAuraPosition");

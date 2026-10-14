@@ -19,11 +19,11 @@ public static partial class Schema {
 		public CEntityIOOutput m_OnInteracted => Embedded<CEntityIOOutput>(__m_OnInteracted);
 
 		private static readonly SchemaField __m_eHideoutAction = new("CCitadelHideoutInteractableTrigger", "m_eHideoutAction");
-		/// <summary><c>EHideoutButtonAction</c>. Networked in build 6779: a write is sent to clients.</summary>
+		/// <summary><c>EHideoutButtonAction</c>. Networked: a write is sent to clients.</summary>
 		public EHideoutButtonAction m_eHideoutAction { get => Get<EHideoutButtonAction>(__m_eHideoutAction); set => Set(__m_eHideoutAction, value); }
 
 		private static readonly SchemaField __m_strInteractLocString = new("CCitadelHideoutInteractableTrigger", "m_strInteractLocString");
-		/// <summary><c>CUtlString</c>. Networked in build 6779: a write is sent to clients.</summary>
+		/// <summary><c>CUtlString</c>. Networked: a write is sent to clients.</summary>
 		public string m_strInteractLocString => GetString(__m_strInteractLocString);
 	}
 }

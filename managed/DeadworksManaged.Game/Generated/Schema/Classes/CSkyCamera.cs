@@ -22,11 +22,11 @@ public static partial class Schema {
 		public CSkyCamera? m_pNext => EntityPointer<CSkyCamera>(__m_pNext);
 
 		private static readonly SchemaField __m_skyboxData = new("CSkyCamera", "m_skyboxData");
-		/// <summary><c>sky3dparams_t</c>. Networked in build 6779: a write is sent to clients.</summary>
+		/// <summary><c>sky3dparams_t</c>. Networked: a write is sent to clients.</summary>
 		public sky3dparams_t m_skyboxData => Embedded<sky3dparams_t>(__m_skyboxData);
 
 		private static readonly SchemaField __m_skyboxSlotToken = new("CSkyCamera", "m_skyboxSlotToken");
-		/// <summary><c>CUtlStringToken</c>. Networked in build 6779: a write is sent to clients.</summary>
+		/// <summary><c>CUtlStringToken</c>. Networked: a write is sent to clients.</summary>
 		public uint m_skyboxSlotToken { get => Get<uint>(__m_skyboxSlotToken); set => Set(__m_skyboxSlotToken, value); }
 
 		/// <summary>Fires the <c>ActivateSkybox</c> input.</summary>

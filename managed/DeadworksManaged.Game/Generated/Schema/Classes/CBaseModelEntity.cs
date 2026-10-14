@@ -14,7 +14,7 @@ public static partial class Schema {
 		static string ISchemaClass<CBaseModelEntity>.NativeName => "CBaseModelEntity";
 
 		private static readonly SchemaField __m_CHitboxComponent = new("CBaseModelEntity", "m_CHitboxComponent");
-		/// <summary><c>CHitboxComponent</c>. Networked in build 6779: a write is sent to clients.</summary>
+		/// <summary><c>CHitboxComponent</c>. Networked: a write is sent to clients.</summary>
 		public CHitboxComponent m_CHitboxComponent => Embedded<CHitboxComponent>(__m_CHitboxComponent);
 
 		private static readonly SchemaField __m_CRenderComponent = new("CBaseModelEntity", "m_CRenderComponent");
@@ -22,11 +22,11 @@ public static partial class Schema {
 		public CRenderComponent? m_CRenderComponent => Pointer<CRenderComponent>(__m_CRenderComponent);
 
 		private static readonly SchemaField __m_Collision = new("CBaseModelEntity", "m_Collision");
-		/// <summary><c>CCollisionProperty</c>. Networked in build 6779: a write is sent to clients.</summary>
+		/// <summary><c>CCollisionProperty</c>. Networked: a write is sent to clients.</summary>
 		public CCollisionProperty m_Collision => Embedded<CCollisionProperty>(__m_Collision);
 
 		private static readonly SchemaField __m_Glow = new("CBaseModelEntity", "m_Glow");
-		/// <summary><c>CGlowProperty</c>. Networked in build 6779: a write is sent to clients.</summary>
+		/// <summary><c>CGlowProperty</c>. Networked: a write is sent to clients.</summary>
 		public CGlowProperty m_Glow => Embedded<CGlowProperty>(__m_Glow);
 
 		private static readonly SchemaField __m_OnDestructibleHitGroupDamageLevelChanged = new("CBaseModelEntity", "m_OnDestructibleHitGroupDamageLevelChanged");
@@ -62,7 +62,7 @@ public static partial class Schema {
 		public bool m_bDestructiblePartInitialStateDestructed4_GenerateBreakpieces { get => Get<bool>(__m_bDestructiblePartInitialStateDestructed4_GenerateBreakpieces); set => Set(__m_bDestructiblePartInitialStateDestructed4_GenerateBreakpieces, value); }
 
 		private static readonly SchemaField __m_bExpandRenderBoundsToIncludeCloth = new("CBaseModelEntity", "m_bExpandRenderBoundsToIncludeCloth");
-		/// <summary><c>bool</c>. Networked in build 6779: a write is sent to clients.</summary>
+		/// <summary><c>bool</c>. Networked: a write is sent to clients.</summary>
 		public bool m_bExpandRenderBoundsToIncludeCloth { get => Get<bool>(__m_bExpandRenderBoundsToIncludeCloth); set => Set(__m_bExpandRenderBoundsToIncludeCloth, value); }
 
 		private static readonly SchemaField __m_bHasCollision = new("CBaseModelEntity", "m_bHasCollision");
@@ -70,11 +70,11 @@ public static partial class Schema {
 		public bool m_bHasCollision { get => Get<bool>(__m_bHasCollision); set => Set(__m_bHasCollision, value); }
 
 		private static readonly SchemaField __m_bNoInterpolate = new("CBaseModelEntity", "m_bNoInterpolate");
-		/// <summary><c>bool</c>. Networked in build 6779: a write is sent to clients.</summary>
+		/// <summary><c>bool</c>. Networked: a write is sent to clients.</summary>
 		public bool m_bNoInterpolate { get => Get<bool>(__m_bNoInterpolate); set => Set(__m_bNoInterpolate, value); }
 
 		private static readonly SchemaField __m_bRenderToCubemaps = new("CBaseModelEntity", "m_bRenderToCubemaps");
-		/// <summary><c>bool</c>. Networked in build 6779: a write is sent to clients.</summary>
+		/// <summary><c>bool</c>. Networked: a write is sent to clients.</summary>
 		public bool m_bRenderToCubemaps { get => Get<bool>(__m_bRenderToCubemaps); set => Set(__m_bRenderToCubemaps, value); }
 
 		private static readonly SchemaField __m_bodyGroupChoices = new("CBaseModelEntity", "m_bodyGroupChoices");
@@ -90,19 +90,19 @@ public static partial class Schema {
 		public uint m_bodyGroupTotalRequestCount { get => Get<uint>(__m_bodyGroupTotalRequestCount); set => Set(__m_bodyGroupTotalRequestCount, value); }
 
 		private static readonly SchemaField __m_bvDisabledHitGroups = new("CBaseModelEntity", "m_bvDisabledHitGroups");
-		/// <summary><c>uint32[1]</c>. Networked in build 6779: a write is sent to clients.</summary>
+		/// <summary><c>uint32[1]</c>. Networked: a write is sent to clients.</summary>
 		public SchemaValueList<uint> m_bvDisabledHitGroups => new(this, __m_bvDisabledHitGroups, 1);
 
 		private static readonly SchemaField __m_clrRender = new("CBaseModelEntity", "m_clrRender");
-		/// <summary><c>Color</c>. Networked in build 6779: a write is sent to clients. Wrapped by <c>CBaseEntity.RenderColor</c> in DeadworksManaged.Api.</summary>
+		/// <summary><c>Color</c>. Networked: a write is sent to clients. Wrapped by <c>CBaseEntity.RenderColor</c> in DeadworksManaged.Api.</summary>
 		public Color32 m_clrRender { get => Get<Color32>(__m_clrRender); set => Set(__m_clrRender, value); }
 
 		private static readonly SchemaField __m_fadeMaxDist = new("CBaseModelEntity", "m_fadeMaxDist");
-		/// <summary><c>float32</c>. Networked in build 6779: a write is sent to clients.</summary>
+		/// <summary><c>float32</c>. Networked: a write is sent to clients.</summary>
 		public float m_fadeMaxDist { get => Get<float>(__m_fadeMaxDist); set => Set(__m_fadeMaxDist, value); }
 
 		private static readonly SchemaField __m_fadeMinDist = new("CBaseModelEntity", "m_fadeMinDist");
-		/// <summary><c>float32</c>. Networked in build 6779: a write is sent to clients.</summary>
+		/// <summary><c>float32</c>. Networked: a write is sent to clients.</summary>
 		public float m_fadeMinDist { get => Get<float>(__m_fadeMinDist); set => Set(__m_fadeMinDist, value); }
 
 		private static readonly SchemaField __m_flDissolveStartTime = new("CBaseModelEntity", "m_flDissolveStartTime");
@@ -110,15 +110,15 @@ public static partial class Schema {
 		public GameTime m_flDissolveStartTime { get => Get<GameTime>(__m_flDissolveStartTime); set => Set(__m_flDissolveStartTime, value); }
 
 		private static readonly SchemaField __m_flFadeScale = new("CBaseModelEntity", "m_flFadeScale");
-		/// <summary><c>float32</c>. Networked in build 6779: a write is sent to clients.</summary>
+		/// <summary><c>float32</c>. Networked: a write is sent to clients.</summary>
 		public float m_flFadeScale { get => Get<float>(__m_flFadeScale); set => Set(__m_flFadeScale, value); }
 
 		private static readonly SchemaField __m_flGlowBackfaceMult = new("CBaseModelEntity", "m_flGlowBackfaceMult");
-		/// <summary><c>float32</c>. Networked in build 6779: a write is sent to clients.</summary>
+		/// <summary><c>float32</c>. Networked: a write is sent to clients.</summary>
 		public float m_flGlowBackfaceMult { get => Get<float>(__m_flGlowBackfaceMult); set => Set(__m_flGlowBackfaceMult, value); }
 
 		private static readonly SchemaField __m_flShadowStrength = new("CBaseModelEntity", "m_flShadowStrength");
-		/// <summary><c>float32</c>. Networked in build 6779: a write is sent to clients.</summary>
+		/// <summary><c>float32</c>. Networked: a write is sent to clients.</summary>
 		public float m_flShadowStrength { get => Get<float>(__m_flShadowStrength); set => Set(__m_flShadowStrength, value); }
 
 		private static readonly SchemaField __m_nDestructiblePartInitialStateDestructed0 = new("CBaseModelEntity", "m_nDestructiblePartInitialStateDestructed0");
@@ -162,23 +162,23 @@ public static partial class Schema {
 		public int m_nDestructiblePartInitialStateDestructed4_PartIndex { get => Get<int>(__m_nDestructiblePartInitialStateDestructed4_PartIndex); set => Set(__m_nDestructiblePartInitialStateDestructed4_PartIndex, value); }
 
 		private static readonly SchemaField __m_nObjectCulling = new("CBaseModelEntity", "m_nObjectCulling");
-		/// <summary><c>uint8</c>. Networked in build 6779: a write is sent to clients.</summary>
+		/// <summary><c>uint8</c>. Networked: a write is sent to clients.</summary>
 		public byte m_nObjectCulling { get => Get<byte>(__m_nObjectCulling); set => Set(__m_nObjectCulling, value); }
 
 		private static readonly SchemaField __m_nRenderFX = new("CBaseModelEntity", "m_nRenderFX");
-		/// <summary><c>RenderFx_t</c>. Networked in build 6779: a write is sent to clients.</summary>
+		/// <summary><c>RenderFx_t</c>. Networked: a write is sent to clients.</summary>
 		public RenderFx_t m_nRenderFX { get => Get<RenderFx_t>(__m_nRenderFX); set => Set(__m_nRenderFX, value); }
 
 		private static readonly SchemaField __m_nRenderMode = new("CBaseModelEntity", "m_nRenderMode");
-		/// <summary><c>RenderMode_t</c>. Networked in build 6779: a write is sent to clients.</summary>
+		/// <summary><c>RenderMode_t</c>. Networked: a write is sent to clients.</summary>
 		public RenderMode_t m_nRenderMode { get => Get<RenderMode_t>(__m_nRenderMode); set => Set(__m_nRenderMode, value); }
 
 		private static readonly SchemaField __m_pChoreoComponent = new("CBaseModelEntity", "m_pChoreoComponent");
-		/// <summary><c>CChoreoComponent*</c>. Networked in build 6779: a write is sent to clients.</summary>
+		/// <summary><c>CChoreoComponent*</c>. Networked: a write is sent to clients.</summary>
 		public CChoreoComponent? m_pChoreoComponent => Pointer<CChoreoComponent>(__m_pChoreoComponent);
 
 		private static readonly SchemaField __m_pDestructiblePartsSystemComponent = new("CBaseModelEntity", "m_pDestructiblePartsSystemComponent");
-		/// <summary><c>CDestructiblePartsComponent*</c>. Networked in build 6779: a write is sent to clients.</summary>
+		/// <summary><c>CDestructiblePartsComponent*</c>. Networked: a write is sent to clients.</summary>
 		public CDestructiblePartsComponent? m_pDestructiblePartsSystemComponent => Pointer<CDestructiblePartsComponent>(__m_pDestructiblePartsSystemComponent);
 
 		private static readonly SchemaField __m_szAddModifier = new("CBaseModelEntity", "m_szAddModifier");
@@ -190,11 +190,11 @@ public static partial class Schema {
 		public Vector3 m_vSupport { get => Get<Vector3>(__m_vSupport); set => Set(__m_vSupport, value); }
 
 		private static readonly SchemaField __m_vecRenderAttributes = new("CBaseModelEntity", "m_vecRenderAttributes");
-		/// <summary><c>CUtlVectorEmbeddedNetworkVar&lt;EntityRenderAttribute_t&gt;</c>. Networked in build 6779: a write is sent to clients.</summary>
+		/// <summary><c>CUtlVectorEmbeddedNetworkVar&lt;EntityRenderAttribute_t&gt;</c>. Networked: a write is sent to clients.</summary>
 		public SchemaObjectList<EntityRenderAttribute_t> m_vecRenderAttributes => new(this, __m_vecRenderAttributes, ListStorage.Vector);
 
 		private static readonly SchemaField __m_vecViewOffset = new("CBaseModelEntity", "m_vecViewOffset");
-		/// <summary><c>CNetworkViewOffsetVector</c>. Networked in build 6779: a write is sent to clients. Wrapped by <c>CCitadelPlayerPawn.EyePosition</c> in DeadworksManaged.Api.</summary>
+		/// <summary><c>CNetworkViewOffsetVector</c>. Networked: a write is sent to clients. Wrapped by <c>CCitadelPlayerPawn.EyePosition</c> in DeadworksManaged.Api.</summary>
 		public CNetworkViewOffsetVector m_vecViewOffset => Embedded<CNetworkViewOffsetVector>(__m_vecViewOffset);
 
 		/// <summary>Fires the <c>Alpha</c> input.</summary>

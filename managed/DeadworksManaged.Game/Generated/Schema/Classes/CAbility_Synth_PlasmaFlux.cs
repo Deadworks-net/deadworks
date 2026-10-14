@@ -26,7 +26,7 @@ public static partial class Schema {
 		public GameTime m_flProjectileLaunchTime { get => Get<GameTime>(__m_flProjectileLaunchTime); set => Set(__m_flProjectileLaunchTime, value); }
 
 		private static readonly SchemaField __m_hActiveProjectile = new("CAbility_Synth_PlasmaFlux", "m_hActiveProjectile");
-		/// <summary><c>CHandle&lt;CBaseEntity&gt;</c>. Networked in build 6779: a write is sent to clients.</summary>
+		/// <summary><c>CHandle&lt;CBaseEntity&gt;</c>. Networked: a write is sent to clients.</summary>
 		public CBaseEntity? m_hActiveProjectile { get => GetHandle<CBaseEntity>(__m_hActiveProjectile); set => SetHandle(__m_hActiveProjectile, value); }
 
 		private static readonly SchemaField __m_vLastValidTeleportPosition = new("CAbility_Synth_PlasmaFlux", "m_vLastValidTeleportPosition");

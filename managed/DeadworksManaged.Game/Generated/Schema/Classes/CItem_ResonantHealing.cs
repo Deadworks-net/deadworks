@@ -18,7 +18,7 @@ public static partial class Schema {
 		public bool m_bForceModUpdate { get => Get<bool>(__m_bForceModUpdate); set => Set(__m_bForceModUpdate, value); }
 
 		private static readonly SchemaField __m_iResonantHealingRegenStacks = new("CItem_ResonantHealing", "m_iResonantHealingRegenStacks");
-		/// <summary><c>int32</c>. Networked in build 6779: a write is sent to clients.</summary>
+		/// <summary><c>int32</c>. Networked: a write is sent to clients.</summary>
 		public int m_iResonantHealingRegenStacks { get => Get<int>(__m_iResonantHealingRegenStacks); set => Set(__m_iResonantHealingRegenStacks, value); }
 	}
 }

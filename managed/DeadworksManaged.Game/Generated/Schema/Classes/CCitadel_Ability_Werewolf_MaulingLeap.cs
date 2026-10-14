@@ -14,7 +14,7 @@ public static partial class Schema {
 		static string ISchemaClass<CCitadel_Ability_Werewolf_MaulingLeap>.NativeName => "CCitadel_Ability_Werewolf_MaulingLeap";
 
 		private static readonly SchemaField __m_tLeapStartTime = new("CCitadel_Ability_Werewolf_MaulingLeap", "m_tLeapStartTime");
-		/// <summary><c>GameTime_t</c>. Networked in build 6779: a write is sent to clients.</summary>
+		/// <summary><c>GameTime_t</c>. Networked: a write is sent to clients.</summary>
 		public GameTime m_tLeapStartTime { get => Get<GameTime>(__m_tLeapStartTime); set => Set(__m_tLeapStartTime, value); }
 
 		/// <summary>The data entry this was created from, as <see cref="CCitadel_Ability_Werewolf_MaulingLeapVData"/>, or null if it has none.</summary>

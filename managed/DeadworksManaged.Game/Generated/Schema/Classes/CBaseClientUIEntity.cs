@@ -54,19 +54,19 @@ public static partial class Schema {
 		public RawField m_CustomOutput9 => Raw(__m_CustomOutput9, "CEntityOutputTemplate<CUtlString>");
 
 		private static readonly SchemaField __m_DialogXMLName = new("CBaseClientUIEntity", "m_DialogXMLName");
-		/// <summary><c>CUtlSymbolLarge</c>. Networked in build 6779: a write is sent to clients.</summary>
+		/// <summary><c>CUtlSymbolLarge</c>. Networked: a write is sent to clients.</summary>
 		public string m_DialogXMLName { get => GetString(__m_DialogXMLName); set => SetString(__m_DialogXMLName, value); }
 
 		private static readonly SchemaField __m_PanelClassName = new("CBaseClientUIEntity", "m_PanelClassName");
-		/// <summary><c>CUtlSymbolLarge</c>. Networked in build 6779: a write is sent to clients.</summary>
+		/// <summary><c>CUtlSymbolLarge</c>. Networked: a write is sent to clients.</summary>
 		public string m_PanelClassName { get => GetString(__m_PanelClassName); set => SetString(__m_PanelClassName, value); }
 
 		private static readonly SchemaField __m_PanelID = new("CBaseClientUIEntity", "m_PanelID");
-		/// <summary><c>CUtlSymbolLarge</c>. Networked in build 6779: a write is sent to clients.</summary>
+		/// <summary><c>CUtlSymbolLarge</c>. Networked: a write is sent to clients.</summary>
 		public string m_PanelID { get => GetString(__m_PanelID); set => SetString(__m_PanelID, value); }
 
 		private static readonly SchemaField __m_bEnabled = new("CBaseClientUIEntity", "m_bEnabled");
-		/// <summary><c>bool</c>. Networked in build 6779: a write is sent to clients.</summary>
+		/// <summary><c>bool</c>. Networked: a write is sent to clients.</summary>
 		public bool m_bEnabled { get => Get<bool>(__m_bEnabled); set => Set(__m_bEnabled, value); }
 
 		/// <summary>Fires the <c>Disable</c> input.</summary>

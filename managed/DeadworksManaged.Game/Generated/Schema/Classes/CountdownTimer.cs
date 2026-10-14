@@ -14,19 +14,19 @@ public static partial class Schema {
 		static string ISchemaClass<CountdownTimer>.NativeName => "CountdownTimer";
 
 		private static readonly SchemaField __m_duration = new("CountdownTimer", "m_duration");
-		/// <summary><c>float32</c>. Networked in build 6779: a write is sent to clients.</summary>
+		/// <summary><c>float32</c>. Networked: a write is sent to clients.</summary>
 		public float m_duration { get => Get<float>(__m_duration); set => Set(__m_duration, value); }
 
 		private static readonly SchemaField __m_nWorldGroupId = new("CountdownTimer", "m_nWorldGroupId");
-		/// <summary><c>WorldGroupId_t</c>. Networked in build 6779: a write is sent to clients.</summary>
+		/// <summary><c>WorldGroupId_t</c>. Networked: a write is sent to clients.</summary>
 		public uint m_nWorldGroupId { get => Get<uint>(__m_nWorldGroupId); set => Set(__m_nWorldGroupId, value); }
 
 		private static readonly SchemaField __m_timescale = new("CountdownTimer", "m_timescale");
-		/// <summary><c>float32</c>. Networked in build 6779: a write is sent to clients.</summary>
+		/// <summary><c>float32</c>. Networked: a write is sent to clients.</summary>
 		public float m_timescale { get => Get<float>(__m_timescale); set => Set(__m_timescale, value); }
 
 		private static readonly SchemaField __m_timestamp = new("CountdownTimer", "m_timestamp");
-		/// <summary><c>GameTime_t</c>. Networked in build 6779: a write is sent to clients.</summary>
+		/// <summary><c>GameTime_t</c>. Networked: a write is sent to clients.</summary>
 		public GameTime m_timestamp { get => Get<GameTime>(__m_timestamp); set => Set(__m_timestamp, value); }
 	}
 }

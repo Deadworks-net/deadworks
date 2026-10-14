@@ -14,11 +14,11 @@ public static partial class Schema {
 		static string ISchemaClass<CCitadelAudioProcessingVolumeBase>.NativeName => "CCitadelAudioProcessingVolumeBase";
 
 		private static readonly SchemaField __m_nVolumeID = new("CCitadelAudioProcessingVolumeBase", "m_nVolumeID");
-		/// <summary><c>int32</c>. Networked in build 6779: a write is sent to clients.</summary>
+		/// <summary><c>int32</c>. Networked: a write is sent to clients.</summary>
 		public int m_nVolumeID { get => Get<int>(__m_nVolumeID); set => Set(__m_nVolumeID, value); }
 
 		private static readonly SchemaField __m_strEffectName = new("CCitadelAudioProcessingVolumeBase", "m_strEffectName");
-		/// <summary><c>CUtlString</c>. Networked in build 6779: a write is sent to clients.</summary>
+		/// <summary><c>CUtlString</c>. Networked: a write is sent to clients.</summary>
 		public string m_strEffectName => GetString(__m_strEffectName);
 	}
 }

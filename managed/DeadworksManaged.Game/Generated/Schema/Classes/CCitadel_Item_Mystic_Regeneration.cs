@@ -18,11 +18,11 @@ public static partial class Schema {
 		public bool m_bForceModUpdate { get => Get<bool>(__m_bForceModUpdate); set => Set(__m_bForceModUpdate, value); }
 
 		private static readonly SchemaField __m_flPendingIncomingHeal = new("CCitadel_Item_Mystic_Regeneration", "m_flPendingIncomingHeal");
-		/// <summary><c>float32</c>. Networked in build 6779: a write is sent to clients.</summary>
+		/// <summary><c>float32</c>. Networked: a write is sent to clients.</summary>
 		public float m_flPendingIncomingHeal { get => Get<float>(__m_flPendingIncomingHeal); set => Set(__m_flPendingIncomingHeal, value); }
 
 		private static readonly SchemaField __m_iRegenStacks = new("CCitadel_Item_Mystic_Regeneration", "m_iRegenStacks");
-		/// <summary><c>int32</c>. Networked in build 6779: a write is sent to clients.</summary>
+		/// <summary><c>int32</c>. Networked: a write is sent to clients.</summary>
 		public int m_iRegenStacks { get => Get<int>(__m_iRegenStacks); set => Set(__m_iRegenStacks, value); }
 
 		/// <summary>The data entry this was created from, as <see cref="CCitadel_Item_Mystic_RegenerationVData"/>, or null if it has none.</summary>

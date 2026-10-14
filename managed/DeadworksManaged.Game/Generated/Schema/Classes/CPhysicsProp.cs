@@ -54,7 +54,7 @@ public static partial class Schema {
 		public bool m_bAttachedToReferenceFrame { get => Get<bool>(__m_bAttachedToReferenceFrame); set => Set(__m_bAttachedToReferenceFrame, value); }
 
 		private static readonly SchemaField __m_bAwake = new("CPhysicsProp", "m_bAwake");
-		/// <summary><c>bool</c>. Networked in build 6779: a write is sent to clients.</summary>
+		/// <summary><c>bool</c>. Networked: a write is sent to clients.</summary>
 		public bool m_bAwake { get => Get<bool>(__m_bAwake); set => Set(__m_bAwake, value); }
 
 		private static readonly SchemaField __m_bDroppedByPlayer = new("CPhysicsProp", "m_bDroppedByPlayer");

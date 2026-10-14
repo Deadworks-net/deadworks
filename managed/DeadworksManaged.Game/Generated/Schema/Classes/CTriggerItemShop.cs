@@ -14,15 +14,15 @@ public static partial class Schema {
 		static string ISchemaClass<CTriggerItemShop>.NativeName => "CTriggerItemShop";
 
 		private static readonly SchemaField __m_CCitadelMinimapComponent = new("CTriggerItemShop", "m_CCitadelMinimapComponent");
-		/// <summary><c>CCitadelMinimapComponent</c>. Networked in build 6779: a write is sent to clients.</summary>
+		/// <summary><c>CCitadelMinimapComponent</c>. Networked: a write is sent to clients.</summary>
 		public CCitadelMinimapComponent m_CCitadelMinimapComponent => Embedded<CCitadelMinimapComponent>(__m_CCitadelMinimapComponent);
 
 		private static readonly SchemaField __m_iLane = new("CTriggerItemShop", "m_iLane");
-		/// <summary><c>int32</c>. Networked in build 6779: a write is sent to clients.</summary>
+		/// <summary><c>int32</c>. Networked: a write is sent to clients.</summary>
 		public int m_iLane { get => Get<int>(__m_iLane); set => Set(__m_iLane, value); }
 
 		private static readonly SchemaField __m_iszSoundName = new("CTriggerItemShop", "m_iszSoundName");
-		/// <summary><c>CUtlSymbolLarge</c>. Networked in build 6779: a write is sent to clients.</summary>
+		/// <summary><c>CUtlSymbolLarge</c>. Networked: a write is sent to clients.</summary>
 		public string m_iszSoundName { get => GetString(__m_iszSoundName); set => SetString(__m_iszSoundName, value); }
 
 		private static readonly SchemaField __m_vAudioOffset = new("CTriggerItemShop", "m_vAudioOffset");

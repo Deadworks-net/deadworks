@@ -14,15 +14,15 @@ public static partial class Schema {
 		static string ISchemaClass<CCitadel_Ability_Hook>.NativeName => "CCitadel_Ability_Hook";
 
 		private static readonly SchemaField __m_flBeginReelHookTime = new("CCitadel_Ability_Hook", "m_flBeginReelHookTime");
-		/// <summary><c>GameTime_t</c>. Networked in build 6779: a write is sent to clients.</summary>
+		/// <summary><c>GameTime_t</c>. Networked: a write is sent to clients.</summary>
 		public GameTime m_flBeginReelHookTime { get => Get<GameTime>(__m_flBeginReelHookTime); set => Set(__m_flBeginReelHookTime, value); }
 
 		private static readonly SchemaField __m_flBulletShouldExpireTime = new("CCitadel_Ability_Hook", "m_flBulletShouldExpireTime");
-		/// <summary><c>GameTime_t</c>. Networked in build 6779: a write is sent to clients.</summary>
+		/// <summary><c>GameTime_t</c>. Networked: a write is sent to clients.</summary>
 		public GameTime m_flBulletShouldExpireTime { get => Get<GameTime>(__m_flBulletShouldExpireTime); set => Set(__m_flBulletShouldExpireTime, value); }
 
 		private static readonly SchemaField __m_flCancelHookTime = new("CCitadel_Ability_Hook", "m_flCancelHookTime");
-		/// <summary><c>GameTime_t</c>. Networked in build 6779: a write is sent to clients.</summary>
+		/// <summary><c>GameTime_t</c>. Networked: a write is sent to clients.</summary>
 		public GameTime m_flCancelHookTime { get => Get<GameTime>(__m_flCancelHookTime); set => Set(__m_flCancelHookTime, value); }
 
 		private static readonly SchemaField __m_flLastUppercutRestoreTime = new("CCitadel_Ability_Hook", "m_flLastUppercutRestoreTime");
@@ -34,11 +34,11 @@ public static partial class Schema {
 		public float m_flMaxHookTravelTime { get => Get<float>(__m_flMaxHookTravelTime); set => Set(__m_flMaxHookTravelTime, value); }
 
 		private static readonly SchemaField __m_hHookVictim = new("CCitadel_Ability_Hook", "m_hHookVictim");
-		/// <summary><c>CHandle&lt;CBaseEntity&gt;</c>. Networked in build 6779: a write is sent to clients.</summary>
+		/// <summary><c>CHandle&lt;CBaseEntity&gt;</c>. Networked: a write is sent to clients.</summary>
 		public CBaseEntity? m_hHookVictim { get => GetHandle<CBaseEntity>(__m_hHookVictim); set => SetHandle(__m_hHookVictim, value); }
 
 		private static readonly SchemaField __m_vecHookTargetStartPos = new("CCitadel_Ability_Hook", "m_vecHookTargetStartPos");
-		/// <summary><c>VectorWS</c>. Networked in build 6779: a write is sent to clients.</summary>
+		/// <summary><c>VectorWS</c>. Networked: a write is sent to clients.</summary>
 		public Vector3 m_vecHookTargetStartPos { get => Get<Vector3>(__m_vecHookTargetStartPos); set => Set(__m_vecHookTargetStartPos, value); }
 	}
 }

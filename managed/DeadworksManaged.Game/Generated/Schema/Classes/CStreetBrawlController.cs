@@ -18,35 +18,35 @@ public static partial class Schema {
 		public bool m_bOvertime { get => Get<bool>(__m_bOvertime); set => Set(__m_bOvertime, value); }
 
 		private static readonly SchemaField __m_eStreetBrawlState = new("CStreetBrawlController", "m_eStreetBrawlState");
-		/// <summary><c>EStreetBrawlGameState</c>. Networked in build 6779: a write is sent to clients.</summary>
+		/// <summary><c>EStreetBrawlGameState</c>. Networked: a write is sent to clients.</summary>
 		public EStreetBrawlGameState m_eStreetBrawlState { get => Get<EStreetBrawlGameState>(__m_eStreetBrawlState); set => Set(__m_eStreetBrawlState, value); }
 
 		private static readonly SchemaField __m_flNextStateTime = new("CStreetBrawlController", "m_flNextStateTime");
-		/// <summary><c>GameTime_t</c>. Networked in build 6779: a write is sent to clients.</summary>
+		/// <summary><c>GameTime_t</c>. Networked: a write is sent to clients.</summary>
 		public GameTime m_flNextStateTime { get => Get<GameTime>(__m_flNextStateTime); set => Set(__m_flNextStateTime, value); }
 
 		private static readonly SchemaField __m_flStreetBrawlStateStartTime = new("CStreetBrawlController", "m_flStreetBrawlStateStartTime");
-		/// <summary><c>GameTime_t</c>. Networked in build 6779: a write is sent to clients.</summary>
+		/// <summary><c>GameTime_t</c>. Networked: a write is sent to clients.</summary>
 		public GameTime m_flStreetBrawlStateStartTime { get => Get<GameTime>(__m_flStreetBrawlStateStartTime); set => Set(__m_flStreetBrawlStateStartTime, value); }
 
 		private static readonly SchemaField __m_flStreetBrawlTotalNonCombatTime = new("CStreetBrawlController", "m_flStreetBrawlTotalNonCombatTime");
-		/// <summary><c>float32</c>. Networked in build 6779: a write is sent to clients.</summary>
+		/// <summary><c>float32</c>. Networked: a write is sent to clients.</summary>
 		public float m_flStreetBrawlTotalNonCombatTime { get => Get<float>(__m_flStreetBrawlTotalNonCombatTime); set => Set(__m_flStreetBrawlTotalNonCombatTime, value); }
 
 		private static readonly SchemaField __m_iLastBuyCountDown = new("CStreetBrawlController", "m_iLastBuyCountDown");
-		/// <summary><c>int32</c>. Networked in build 6779: a write is sent to clients.</summary>
+		/// <summary><c>int32</c>. Networked: a write is sent to clients.</summary>
 		public int m_iLastBuyCountDown { get => Get<int>(__m_iLastBuyCountDown); set => Set(__m_iLastBuyCountDown, value); }
 
 		private static readonly SchemaField __m_iRound = new("CStreetBrawlController", "m_iRound");
-		/// <summary><c>int32</c>. Networked in build 6779: a write is sent to clients.</summary>
+		/// <summary><c>int32</c>. Networked: a write is sent to clients.</summary>
 		public int m_iRound { get => Get<int>(__m_iRound); set => Set(__m_iRound, value); }
 
 		private static readonly SchemaField __m_iTeamAmberScore = new("CStreetBrawlController", "m_iTeamAmberScore");
-		/// <summary><c>int32</c>. Networked in build 6779: a write is sent to clients.</summary>
+		/// <summary><c>int32</c>. Networked: a write is sent to clients.</summary>
 		public int m_iTeamAmberScore { get => Get<int>(__m_iTeamAmberScore); set => Set(__m_iTeamAmberScore, value); }
 
 		private static readonly SchemaField __m_iTeamSapphireScore = new("CStreetBrawlController", "m_iTeamSapphireScore");
-		/// <summary><c>int32</c>. Networked in build 6779: a write is sent to clients.</summary>
+		/// <summary><c>int32</c>. Networked: a write is sent to clients.</summary>
 		public int m_iTeamSapphireScore { get => Get<int>(__m_iTeamSapphireScore); set => Set(__m_iTeamSapphireScore, value); }
 
 		private static readonly SchemaField __m_mapOriginalConVarVals = new("CStreetBrawlController", "m_mapOriginalConVarVals");

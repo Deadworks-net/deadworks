@@ -14,15 +14,15 @@ public static partial class Schema {
 		static string ISchemaClass<CCitadel_Ability_PrimaryWeapon_Bebop>.NativeName => "CCitadel_Ability_PrimaryWeapon_Bebop";
 
 		private static readonly SchemaField __m_bFiring = new("CCitadel_Ability_PrimaryWeapon_Bebop", "m_bFiring");
-		/// <summary><c>bool</c>. Networked in build 6779: a write is sent to clients.</summary>
+		/// <summary><c>bool</c>. Networked: a write is sent to clients.</summary>
 		public bool m_bFiring { get => Get<bool>(__m_bFiring); set => Set(__m_bFiring, value); }
 
 		private static readonly SchemaField __m_flStartFiringTime = new("CCitadel_Ability_PrimaryWeapon_Bebop", "m_flStartFiringTime");
-		/// <summary><c>GameTime_t</c>. Networked in build 6779: a write is sent to clients.</summary>
+		/// <summary><c>GameTime_t</c>. Networked: a write is sent to clients.</summary>
 		public GameTime m_flStartFiringTime { get => Get<GameTime>(__m_flStartFiringTime); set => Set(__m_flStartFiringTime, value); }
 
 		private static readonly SchemaField __m_flStartWindUpTime = new("CCitadel_Ability_PrimaryWeapon_Bebop", "m_flStartWindUpTime");
-		/// <summary><c>GameTime_t</c>. Networked in build 6779: a write is sent to clients.</summary>
+		/// <summary><c>GameTime_t</c>. Networked: a write is sent to clients.</summary>
 		public GameTime m_flStartWindUpTime { get => Get<GameTime>(__m_flStartWindUpTime); set => Set(__m_flStartWindUpTime, value); }
 
 		/// <summary>The data entry this was created from, as <see cref="CCitadel_Ability_PrimaryWeapon_BebopVData"/>, or null if it has none.</summary>

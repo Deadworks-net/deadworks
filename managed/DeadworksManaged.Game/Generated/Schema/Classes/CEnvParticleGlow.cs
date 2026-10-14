@@ -14,23 +14,23 @@ public static partial class Schema {
 		static string ISchemaClass<CEnvParticleGlow>.NativeName => "CEnvParticleGlow";
 
 		private static readonly SchemaField __m_ColorTint = new("CEnvParticleGlow", "m_ColorTint");
-		/// <summary><c>Color</c>. Networked in build 6779: a write is sent to clients.</summary>
+		/// <summary><c>Color</c>. Networked: a write is sent to clients.</summary>
 		public Color32 m_ColorTint { get => Get<Color32>(__m_ColorTint); set => Set(__m_ColorTint, value); }
 
 		private static readonly SchemaField __m_flAlphaScale = new("CEnvParticleGlow", "m_flAlphaScale");
-		/// <summary><c>float32</c>. Networked in build 6779: a write is sent to clients.</summary>
+		/// <summary><c>float32</c>. Networked: a write is sent to clients.</summary>
 		public float m_flAlphaScale { get => Get<float>(__m_flAlphaScale); set => Set(__m_flAlphaScale, value); }
 
 		private static readonly SchemaField __m_flRadiusScale = new("CEnvParticleGlow", "m_flRadiusScale");
-		/// <summary><c>float32</c>. Networked in build 6779: a write is sent to clients.</summary>
+		/// <summary><c>float32</c>. Networked: a write is sent to clients.</summary>
 		public float m_flRadiusScale { get => Get<float>(__m_flRadiusScale); set => Set(__m_flRadiusScale, value); }
 
 		private static readonly SchemaField __m_flSelfIllumScale = new("CEnvParticleGlow", "m_flSelfIllumScale");
-		/// <summary><c>float32</c>. Networked in build 6779: a write is sent to clients.</summary>
+		/// <summary><c>float32</c>. Networked: a write is sent to clients.</summary>
 		public float m_flSelfIllumScale { get => Get<float>(__m_flSelfIllumScale); set => Set(__m_flSelfIllumScale, value); }
 
 		private static readonly SchemaField __m_hTextureOverride = new("CEnvParticleGlow", "m_hTextureOverride");
-		/// <summary><c>CStrongHandle&lt;InfoForResourceTypeCTextureBase&gt;</c>. Networked in build 6779: a write is sent to clients.</summary>
+		/// <summary><c>CStrongHandle&lt;InfoForResourceTypeCTextureBase&gt;</c>. Networked: a write is sent to clients.</summary>
 		public ResourceHandle m_hTextureOverride { get => Get<ResourceHandle>(__m_hTextureOverride); set => Set(__m_hTextureOverride, value); }
 
 		/// <summary>Fires the <c>setalphascale</c> input.</summary>

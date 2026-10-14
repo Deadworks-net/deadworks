@@ -102,7 +102,7 @@ public static partial class Schema {
 		public bool m_bForceClosed { get => Get<bool>(__m_bForceClosed); set => Set(__m_bForceClosed, value); }
 
 		private static readonly SchemaField __m_bLocked = new("CBasePropDoor", "m_bLocked");
-		/// <summary><c>bool</c>. Networked in build 6779: a write is sent to clients.</summary>
+		/// <summary><c>bool</c>. Networked: a write is sent to clients.</summary>
 		public bool m_bLocked { get => Get<bool>(__m_bLocked); set => Set(__m_bLocked, value); }
 
 		private static readonly SchemaField __m_bNeedsHardware = new("CBasePropDoor", "m_bNeedsHardware");
@@ -110,19 +110,19 @@ public static partial class Schema {
 		public bool m_bNeedsHardware { get => Get<bool>(__m_bNeedsHardware); set => Set(__m_bNeedsHardware, value); }
 
 		private static readonly SchemaField __m_bNoNPCs = new("CBasePropDoor", "m_bNoNPCs");
-		/// <summary><c>bool</c>. Networked in build 6779: a write is sent to clients.</summary>
+		/// <summary><c>bool</c>. Networked: a write is sent to clients.</summary>
 		public bool m_bNoNPCs { get => Get<bool>(__m_bNoNPCs); set => Set(__m_bNoNPCs, value); }
 
 		private static readonly SchemaField __m_closedAngles = new("CBasePropDoor", "m_closedAngles");
-		/// <summary><c>QAngle</c>. Networked in build 6779: a write is sent to clients.</summary>
+		/// <summary><c>QAngle</c>. Networked: a write is sent to clients.</summary>
 		public Vector3 m_closedAngles { get => Get<Vector3>(__m_closedAngles); set => Set(__m_closedAngles, value); }
 
 		private static readonly SchemaField __m_closedPosition = new("CBasePropDoor", "m_closedPosition");
-		/// <summary><c>VectorWS</c>. Networked in build 6779: a write is sent to clients.</summary>
+		/// <summary><c>VectorWS</c>. Networked: a write is sent to clients.</summary>
 		public Vector3 m_closedPosition { get => Get<Vector3>(__m_closedPosition); set => Set(__m_closedPosition, value); }
 
 		private static readonly SchemaField __m_eDoorState = new("CBasePropDoor", "m_eDoorState");
-		/// <summary><c>DoorState_t</c>. Networked in build 6779: a write is sent to clients.</summary>
+		/// <summary><c>DoorState_t</c>. Networked: a write is sent to clients.</summary>
 		public DoorState_t m_eDoorState { get => Get<DoorState_t>(__m_eDoorState); set => Set(__m_eDoorState, value); }
 
 		private static readonly SchemaField __m_flAutoReturnDelay = new("CBasePropDoor", "m_flAutoReturnDelay");
@@ -146,7 +146,7 @@ public static partial class Schema {
 		public SchemaHandleList<CBasePropDoor> m_hDoorList => new(this, __m_hDoorList, ListStorage.Vector);
 
 		private static readonly SchemaField __m_hMaster = new("CBasePropDoor", "m_hMaster");
-		/// <summary><c>CHandle&lt;CBasePropDoor&gt;</c>. Networked in build 6779: a write is sent to clients.</summary>
+		/// <summary><c>CHandle&lt;CBasePropDoor&gt;</c>. Networked: a write is sent to clients.</summary>
 		public CBasePropDoor? m_hMaster { get => GetHandle<CBasePropDoor>(__m_hMaster); set => SetHandle(__m_hMaster, value); }
 
 		private static readonly SchemaField __m_ls = new("CBasePropDoor", "m_ls");

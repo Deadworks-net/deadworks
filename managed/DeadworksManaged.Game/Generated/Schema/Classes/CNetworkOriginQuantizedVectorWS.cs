@@ -14,15 +14,15 @@ public static partial class Schema {
 		static string ISchemaClass<CNetworkOriginQuantizedVectorWS>.NativeName => "CNetworkOriginQuantizedVectorWS";
 
 		private static readonly SchemaField __m_vecX = new("CNetworkOriginQuantizedVectorWS", "m_vecX");
-		/// <summary><c>CNetworkedQuantizedFloat</c>. Networked in build 6779: a write is sent to clients.</summary>
+		/// <summary><c>CNetworkedQuantizedFloat</c>. Networked: a write is sent to clients.</summary>
 		public float m_vecX { get => Get<float>(__m_vecX); set => Set(__m_vecX, value); }
 
 		private static readonly SchemaField __m_vecY = new("CNetworkOriginQuantizedVectorWS", "m_vecY");
-		/// <summary><c>CNetworkedQuantizedFloat</c>. Networked in build 6779: a write is sent to clients.</summary>
+		/// <summary><c>CNetworkedQuantizedFloat</c>. Networked: a write is sent to clients.</summary>
 		public float m_vecY { get => Get<float>(__m_vecY); set => Set(__m_vecY, value); }
 
 		private static readonly SchemaField __m_vecZ = new("CNetworkOriginQuantizedVectorWS", "m_vecZ");
-		/// <summary><c>CNetworkedQuantizedFloat</c>. Networked in build 6779: a write is sent to clients.</summary>
+		/// <summary><c>CNetworkedQuantizedFloat</c>. Networked: a write is sent to clients.</summary>
 		public float m_vecZ { get => Get<float>(__m_vecZ); set => Set(__m_vecZ, value); }
 	}
 }

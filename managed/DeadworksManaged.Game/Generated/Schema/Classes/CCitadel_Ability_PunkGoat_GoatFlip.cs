@@ -14,19 +14,19 @@ public static partial class Schema {
 		static string ISchemaClass<CCitadel_Ability_PunkGoat_GoatFlip>.NativeName => "CCitadel_Ability_PunkGoat_GoatFlip";
 
 		private static readonly SchemaField __m_eState = new("CCitadel_Ability_PunkGoat_GoatFlip", "m_eState");
-		/// <summary><c>PG_RisingRamState</c>. Networked in build 6779: a write is sent to clients.</summary>
+		/// <summary><c>PG_RisingRamState</c>. Networked: a write is sent to clients.</summary>
 		public PG_RisingRamState m_eState { get => Get<PG_RisingRamState>(__m_eState); set => Set(__m_eState, value); }
 
 		private static readonly SchemaField __m_flGoingUpStartElevation = new("CCitadel_Ability_PunkGoat_GoatFlip", "m_flGoingUpStartElevation");
-		/// <summary><c>float32</c>. Networked in build 6779: a write is sent to clients.</summary>
+		/// <summary><c>float32</c>. Networked: a write is sent to clients.</summary>
 		public float m_flGoingUpStartElevation { get => Get<float>(__m_flGoingUpStartElevation); set => Set(__m_flGoingUpStartElevation, value); }
 
 		private static readonly SchemaField __m_flGoingUpTargetElevation = new("CCitadel_Ability_PunkGoat_GoatFlip", "m_flGoingUpTargetElevation");
-		/// <summary><c>float32</c>. Networked in build 6779: a write is sent to clients.</summary>
+		/// <summary><c>float32</c>. Networked: a write is sent to clients.</summary>
 		public float m_flGoingUpTargetElevation { get => Get<float>(__m_flGoingUpTargetElevation); set => Set(__m_flGoingUpTargetElevation, value); }
 
 		private static readonly SchemaField __m_tStateStartTime = new("CCitadel_Ability_PunkGoat_GoatFlip", "m_tStateStartTime");
-		/// <summary><c>GameTime_t</c>. Networked in build 6779: a write is sent to clients.</summary>
+		/// <summary><c>GameTime_t</c>. Networked: a write is sent to clients.</summary>
 		public GameTime m_tStateStartTime { get => Get<GameTime>(__m_tStateStartTime); set => Set(__m_tStateStartTime, value); }
 	}
 }

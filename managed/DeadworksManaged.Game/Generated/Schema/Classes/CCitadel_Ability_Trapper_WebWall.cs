@@ -14,19 +14,19 @@ public static partial class Schema {
 		static string ISchemaClass<CCitadel_Ability_Trapper_WebWall>.NativeName => "CCitadel_Ability_Trapper_WebWall";
 
 		private static readonly SchemaField __m_vecCastPosition = new("CCitadel_Ability_Trapper_WebWall", "m_vecCastPosition");
-		/// <summary><c>VectorWS</c>. Networked in build 6779: a write is sent to clients.</summary>
+		/// <summary><c>VectorWS</c>. Networked: a write is sent to clients.</summary>
 		public Vector3 m_vecCastPosition { get => Get<Vector3>(__m_vecCastPosition); set => Set(__m_vecCastPosition, value); }
 
 		private static readonly SchemaField __m_vecCastPositionNormal = new("CCitadel_Ability_Trapper_WebWall", "m_vecCastPositionNormal");
-		/// <summary><c>Vector</c>. Networked in build 6779: a write is sent to clients.</summary>
+		/// <summary><c>Vector</c>. Networked: a write is sent to clients.</summary>
 		public Vector3 m_vecCastPositionNormal { get => Get<Vector3>(__m_vecCastPositionNormal); set => Set(__m_vecCastPositionNormal, value); }
 
 		private static readonly SchemaField __m_vecEndPosition = new("CCitadel_Ability_Trapper_WebWall", "m_vecEndPosition");
-		/// <summary><c>VectorWS</c>. Networked in build 6779: a write is sent to clients.</summary>
+		/// <summary><c>VectorWS</c>. Networked: a write is sent to clients.</summary>
 		public Vector3 m_vecEndPosition { get => Get<Vector3>(__m_vecEndPosition); set => Set(__m_vecEndPosition, value); }
 
 		private static readonly SchemaField __m_vecEndPositionNormal = new("CCitadel_Ability_Trapper_WebWall", "m_vecEndPositionNormal");
-		/// <summary><c>Vector</c>. Networked in build 6779: a write is sent to clients.</summary>
+		/// <summary><c>Vector</c>. Networked: a write is sent to clients.</summary>
 		public Vector3 m_vecEndPositionNormal { get => Get<Vector3>(__m_vecEndPositionNormal); set => Set(__m_vecEndPositionNormal, value); }
 
 		/// <summary>The data entry this was created from, as <see cref="CCitadel_Ability_Trapper_WebWallVData"/>, or null if it has none.</summary>

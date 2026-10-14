@@ -14,11 +14,11 @@ public static partial class Schema {
 		static string ISchemaClass<CitadelHeroSpawnData_t>.NativeName => "CitadelHeroSpawnData_t";
 
 		private static readonly SchemaField __m_nHeroID = new("CitadelHeroSpawnData_t", "m_nHeroID");
-		/// <summary><c>HeroID_t</c>. Networked in build 6779: a write is sent to clients. Wrapped by <c>CitadelHeroSpawnData.HeroID</c> in DeadworksManaged.Api.</summary>
+		/// <summary><c>HeroID_t</c>. Networked: a write is sent to clients. Wrapped by <c>CitadelHeroSpawnData.HeroID</c> in DeadworksManaged.Api.</summary>
 		public uint m_nHeroID { get => Get<uint>(__m_nHeroID); set => Set(__m_nHeroID, value); }
 
 		private static readonly SchemaField __m_unHeroBadgeXP = new("CitadelHeroSpawnData_t", "m_unHeroBadgeXP");
-		/// <summary><c>HeroBadgeXP_t</c>. Networked in build 6779: a write is sent to clients.</summary>
+		/// <summary><c>HeroBadgeXP_t</c>. Networked: a write is sent to clients.</summary>
 		public uint m_unHeroBadgeXP { get => Get<uint>(__m_unHeroBadgeXP); set => Set(__m_unHeroBadgeXP, value); }
 	}
 }

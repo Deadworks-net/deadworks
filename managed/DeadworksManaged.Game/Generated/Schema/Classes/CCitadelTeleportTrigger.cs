@@ -14,7 +14,7 @@ public static partial class Schema {
 		static string ISchemaClass<CCitadelTeleportTrigger>.NativeName => "CCitadelTeleportTrigger";
 
 		private static readonly SchemaField __m_CCitadelMinimapComponent = new("CCitadelTeleportTrigger", "m_CCitadelMinimapComponent");
-		/// <summary><c>CCitadelMinimapComponent</c>. Networked in build 6779: a write is sent to clients.</summary>
+		/// <summary><c>CCitadelMinimapComponent</c>. Networked: a write is sent to clients.</summary>
 		public CCitadelMinimapComponent m_CCitadelMinimapComponent => Embedded<CCitadelMinimapComponent>(__m_CCitadelMinimapComponent);
 
 		private static readonly SchemaField __m_OnTeleport = new("CCitadelTeleportTrigger", "m_OnTeleport");
@@ -34,7 +34,7 @@ public static partial class Schema {
 		public string m_strPropModel { get => GetString(__m_strPropModel); set => SetString(__m_strPropModel, value); }
 
 		private static readonly SchemaField __m_vExitOrigin = new("CCitadelTeleportTrigger", "m_vExitOrigin");
-		/// <summary><c>VectorWS</c>. Networked in build 6779: a write is sent to clients.</summary>
+		/// <summary><c>VectorWS</c>. Networked: a write is sent to clients.</summary>
 		public Vector3 m_vExitOrigin { get => Get<Vector3>(__m_vExitOrigin); set => Set(__m_vExitOrigin, value); }
 	}
 }

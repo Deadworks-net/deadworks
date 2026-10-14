@@ -14,35 +14,35 @@ public static partial class Schema {
 		static string ISchemaClass<CTextureBasedAnimatable>.NativeName => "CTextureBasedAnimatable";
 
 		private static readonly SchemaField __m_bLoop = new("CTextureBasedAnimatable", "m_bLoop");
-		/// <summary><c>bool</c>. Networked in build 6779: a write is sent to clients.</summary>
+		/// <summary><c>bool</c>. Networked: a write is sent to clients.</summary>
 		public bool m_bLoop { get => Get<bool>(__m_bLoop); set => Set(__m_bLoop, value); }
 
 		private static readonly SchemaField __m_flFPS = new("CTextureBasedAnimatable", "m_flFPS");
-		/// <summary><c>float32</c>. Networked in build 6779: a write is sent to clients.</summary>
+		/// <summary><c>float32</c>. Networked: a write is sent to clients.</summary>
 		public float m_flFPS { get => Get<float>(__m_flFPS); set => Set(__m_flFPS, value); }
 
 		private static readonly SchemaField __m_flStartFrame = new("CTextureBasedAnimatable", "m_flStartFrame");
-		/// <summary><c>float32</c>. Networked in build 6779: a write is sent to clients.</summary>
+		/// <summary><c>float32</c>. Networked: a write is sent to clients.</summary>
 		public float m_flStartFrame { get => Get<float>(__m_flStartFrame); set => Set(__m_flStartFrame, value); }
 
 		private static readonly SchemaField __m_flStartTime = new("CTextureBasedAnimatable", "m_flStartTime");
-		/// <summary><c>float32</c>. Networked in build 6779: a write is sent to clients.</summary>
+		/// <summary><c>float32</c>. Networked: a write is sent to clients.</summary>
 		public float m_flStartTime { get => Get<float>(__m_flStartTime); set => Set(__m_flStartTime, value); }
 
 		private static readonly SchemaField __m_hPositionKeys = new("CTextureBasedAnimatable", "m_hPositionKeys");
-		/// <summary><c>CStrongHandle&lt;InfoForResourceTypeCTextureBase&gt;</c>. Networked in build 6779: a write is sent to clients.</summary>
+		/// <summary><c>CStrongHandle&lt;InfoForResourceTypeCTextureBase&gt;</c>. Networked: a write is sent to clients.</summary>
 		public ResourceHandle m_hPositionKeys { get => Get<ResourceHandle>(__m_hPositionKeys); set => Set(__m_hPositionKeys, value); }
 
 		private static readonly SchemaField __m_hRotationKeys = new("CTextureBasedAnimatable", "m_hRotationKeys");
-		/// <summary><c>CStrongHandle&lt;InfoForResourceTypeCTextureBase&gt;</c>. Networked in build 6779: a write is sent to clients.</summary>
+		/// <summary><c>CStrongHandle&lt;InfoForResourceTypeCTextureBase&gt;</c>. Networked: a write is sent to clients.</summary>
 		public ResourceHandle m_hRotationKeys { get => Get<ResourceHandle>(__m_hRotationKeys); set => Set(__m_hRotationKeys, value); }
 
 		private static readonly SchemaField __m_vAnimationBoundsMax = new("CTextureBasedAnimatable", "m_vAnimationBoundsMax");
-		/// <summary><c>Vector</c>. Networked in build 6779: a write is sent to clients.</summary>
+		/// <summary><c>Vector</c>. Networked: a write is sent to clients.</summary>
 		public Vector3 m_vAnimationBoundsMax { get => Get<Vector3>(__m_vAnimationBoundsMax); set => Set(__m_vAnimationBoundsMax, value); }
 
 		private static readonly SchemaField __m_vAnimationBoundsMin = new("CTextureBasedAnimatable", "m_vAnimationBoundsMin");
-		/// <summary><c>Vector</c>. Networked in build 6779: a write is sent to clients.</summary>
+		/// <summary><c>Vector</c>. Networked: a write is sent to clients.</summary>
 		public Vector3 m_vAnimationBoundsMin { get => Get<Vector3>(__m_vAnimationBoundsMin); set => Set(__m_vAnimationBoundsMin, value); }
 
 		/// <summary>Fires the <c>Disable</c> input.</summary>

@@ -35,27 +35,27 @@ public static partial class Schema {
 		public CEntityIOOutput m_OnStartTouchAll => Embedded<CEntityIOOutput>(__m_OnStartTouchAll);
 
 		private static readonly SchemaField __m_eHideoutAction = new("CCitadelHideoutInteractableProp", "m_eHideoutAction");
-		/// <summary><c>EHideoutButtonAction</c>. Networked in build 6779: a write is sent to clients.</summary>
+		/// <summary><c>EHideoutButtonAction</c>. Networked: a write is sent to clients.</summary>
 		public EHideoutButtonAction m_eHideoutAction { get => Get<EHideoutButtonAction>(__m_eHideoutAction); set => Set(__m_eHideoutAction, value); }
 
 		private static readonly SchemaField __m_eInteractStyle = new("CCitadelHideoutInteractableProp", "m_eInteractStyle");
-		/// <summary><c>EHideoutButtonInteractStyle</c>. Networked in build 6779: a write is sent to clients.</summary>
+		/// <summary><c>EHideoutButtonInteractStyle</c>. Networked: a write is sent to clients.</summary>
 		public EHideoutButtonInteractStyle m_eInteractStyle { get => Get<EHideoutButtonInteractStyle>(__m_eInteractStyle); set => Set(__m_eInteractStyle, value); }
 
 		private static readonly SchemaField __m_flInteractDistance = new("CCitadelHideoutInteractableProp", "m_flInteractDistance");
-		/// <summary><c>float32</c>. Networked in build 6779: a write is sent to clients.</summary>
+		/// <summary><c>float32</c>. Networked: a write is sent to clients.</summary>
 		public float m_flInteractDistance { get => Get<float>(__m_flInteractDistance); set => Set(__m_flInteractDistance, value); }
 
 		private static readonly SchemaField __m_strInteractLocString = new("CCitadelHideoutInteractableProp", "m_strInteractLocString");
-		/// <summary><c>CUtlString</c>. Networked in build 6779: a write is sent to clients.</summary>
+		/// <summary><c>CUtlString</c>. Networked: a write is sent to clients.</summary>
 		public string m_strInteractLocString => GetString(__m_strInteractLocString);
 
 		private static readonly SchemaField __m_strOpacityCurveString = new("CCitadelHideoutInteractableProp", "m_strOpacityCurveString");
-		/// <summary><c>CUtlString</c>. Networked in build 6779: a write is sent to clients.</summary>
+		/// <summary><c>CUtlString</c>. Networked: a write is sent to clients.</summary>
 		public string m_strOpacityCurveString => GetString(__m_strOpacityCurveString);
 
 		private static readonly SchemaField __m_strWorldPanelEntity = new("CCitadelHideoutInteractableProp", "m_strWorldPanelEntity");
-		/// <summary><c>CUtlString</c>. Networked in build 6779: a write is sent to clients.</summary>
+		/// <summary><c>CUtlString</c>. Networked: a write is sent to clients.</summary>
 		public string m_strWorldPanelEntity => GetString(__m_strWorldPanelEntity);
 	}
 }
