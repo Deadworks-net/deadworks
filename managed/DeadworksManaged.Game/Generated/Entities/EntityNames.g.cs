@@ -13,6 +13,44 @@ public static class EntityNames {
 	public const string abiilty_boho_doublehit = "abiilty_boho_doublehit";
 	/// <summary><c>CCitadel_Ability_Afterburn</c>.</summary>
 	public const string ability_afterburn = "ability_afterburn";
+	/// <summary><c>CCitadel_Ability_Artist_BouncingPot</c>.</summary>
+	public const string ability_artist_bouncingpot = "ability_artist_bouncingpot";
+	/// <summary><c>CCitadel_Ability_Artist_Cloudburst</c>.</summary>
+	public const string ability_artist_cloudburst = "ability_artist_cloudburst";
+	/// <summary><c>CCitadel_Ability_Artist_DamageZone</c>.</summary>
+	public const string ability_artist_damagezone = "ability_artist_damagezone";
+	/// <summary><c>CCitadel_Ability_Artist_EmpowerAbilities</c>.</summary>
+	public const string ability_artist_empowerabilities = "ability_artist_empowerabilities";
+	/// <summary><c>CCitadel_Ability_Artist_HealingBarrier</c>.</summary>
+	public const string ability_artist_healingbarrier = "ability_artist_healingbarrier";
+	/// <summary><c>CCitadel_Ability_Artist_HomingProjectile</c>.</summary>
+	public const string ability_artist_homingbrush = "ability_artist_homingbrush";
+	/// <summary><c>CCitadel_Ability_Artist_InkActive</c>.</summary>
+	public const string ability_artist_inkactive = "ability_artist_inkactive";
+	/// <summary><c>CCitadel_Ability_Artist_InkBrush</c>.</summary>
+	public const string ability_artist_inkbrush = "ability_artist_inkbrush";
+	/// <summary><c>CCitadel_Ability_Artist_LionDance</c>.</summary>
+	public const string ability_artist_liondance = "ability_artist_liondance";
+	/// <summary><c>CCitadel_Ability_Artist_MultiHit</c>.</summary>
+	public const string ability_artist_multihit = "ability_artist_multihit";
+	/// <summary><c>CCitadel_Ability_Artist_Pillar</c>.</summary>
+	public const string ability_artist_pillar = "ability_artist_pillar";
+	/// <summary><c>CCitadel_Ability_Artist_ProjectileWeapon</c>.</summary>
+	public const string ability_artist_projectileweapon = "ability_artist_projectileweapon";
+	/// <summary><c>CCitadel_Ability_Artist_PullBrush</c>.</summary>
+	public const string ability_artist_pullbrush = "ability_artist_pullbrush";
+	/// <summary><c>CCitadel_Ability_Artist_RideTiger</c>.</summary>
+	public const string ability_artist_ridetiger = "ability_artist_ridetiger";
+	/// <summary><c>CCitadel_Ability_Artist_RollingProjectile</c>.</summary>
+	public const string ability_artist_rollingprojectile = "ability_artist_rollingprojectile";
+	/// <summary><c>CCitadel_Ability_Artist_RootingProjectile</c>.</summary>
+	public const string ability_artist_rootingprojectile = "ability_artist_rootingprojectile";
+	/// <summary><c>CCitadel_Ability_Artist_ShieldProjectile</c>.</summary>
+	public const string ability_artist_shieldprojectile = "ability_artist_shieldprojectile";
+	/// <summary><c>CCitadel_Ability_Artist_Tether</c>.</summary>
+	public const string ability_artist_tether = "ability_artist_tether";
+	/// <summary><c>CCitadel_Ability_Artist_TransformingProjectile</c>.</summary>
+	public const string ability_artist_transforming_projectile = "ability_artist_transforming_projectile";
 	/// <summary><c>CCitadel_Ability_Baba_BenchMelee</c>.</summary>
 	public const string ability_baba_bench_melee = "ability_baba_bench_melee";
 	/// <summary><c>CCitadel_Ability_Baba_BenchRun</c>.</summary>
@@ -487,6 +525,8 @@ public static class EntityNames {
 	public const string ambient_generic = "ambient_generic";
 	/// <summary><c>CCitadel_Projectile_Archer_ChargedShot</c>.</summary>
 	public const string archer_charged_shot_projectile = "archer_charged_shot_projectile";
+	/// <summary><c>CCitadel_Projectile_ArtistGun</c>.</summary>
+	public const string artistgun_projectile = "artistgun_projectile";
 	/// <summary><c>CCitadel_Projectile_BubblingBrew</c>.</summary>
 	public const string baba_bubblingbrew_projectile = "baba_bubblingbrew_projectile";
 	/// <summary><c>CBaseClientUIEntity</c>.</summary>
@@ -549,6 +589,16 @@ public static class EntityNames {
 	public const string cadence_ability_lullaby = "cadence_ability_lullaby";
 	/// <summary><c>CCitadel_Ability_Cadence_SilenceContraptions</c>.</summary>
 	public const string cadence_ability_silencecontraptions = "cadence_ability_silencecontraptions";
+	/// <summary><c>CCitadel_Ability_Artist_BambooGrove</c>.</summary>
+	public const string citadel_ability_artist_bamboogrove = "citadel_ability_artist_bamboogrove";
+	/// <summary><c>CCitadel_Ability_Artist_FlyingLion</c>.</summary>
+	public const string citadel_ability_artist_flyinglion = "citadel_ability_artist_flyinglion";
+	/// <summary><c>CCitadel_Ability_Artist_PrimaryWeapon</c>.</summary>
+	public const string citadel_ability_artist_primaryweapon = "citadel_ability_artist_primaryweapon";
+	/// <summary><c>CCitadel_Ability_Artist_PrimaryWeapon2</c>.</summary>
+	public const string citadel_ability_artist_primaryweapon2 = "citadel_ability_artist_primaryweapon2";
+	/// <summary><c>CCitadel_Ability_Artist_StoneTurtle</c>.</summary>
+	public const string citadel_ability_artist_stoneturtle = "citadel_ability_artist_stoneturtle";
 	/// <summary><c>CCitadel_Ability_Bebop_LaserBeam</c>.</summary>
 	public const string citadel_ability_bebop_laser_beam = "citadel_ability_bebop_laser_beam";
 	/// <summary><c>CCitadel_Ability_Boho_PrimaryWeapon</c>.</summary>
@@ -769,6 +819,12 @@ public static class EntityNames {
 	public const string citadel_animating_model_entity = "citadel_animating_model_entity";
 	/// <summary><c>CCitadel_Announcer</c>.</summary>
 	public const string citadel_announcer = "citadel_announcer";
+	/// <summary><c>CCitadel_Artist_SolidBlocker</c>.</summary>
+	public const string citadel_artist_solidblocker = "citadel_artist_solidblocker";
+	/// <summary><c>CCitadel_Artist_StrokeBlocker</c>.</summary>
+	public const string citadel_artist_strokeblocker = "citadel_artist_strokeblocker";
+	/// <summary><c>CCitadel_Artist_VisionBlocker</c>.</summary>
+	public const string citadel_artist_visionblocker = "citadel_artist_visionblocker";
 	/// <summary><c>CCitadelBaseAbility</c>.</summary>
 	public const string citadel_base_ability = "citadel_base_ability";
 	/// <summary><c>CCitadelHeroLoader</c>.</summary>
@@ -789,6 +845,8 @@ public static class EntityNames {
 	public const string citadel_bounce_pad = "citadel_bounce_pad";
 	/// <summary><c>CCitadel_BreakableProp</c>.</summary>
 	public const string citadel_breakable_prop = "citadel_breakable_prop";
+	/// <summary><c>CCitadel_BreakableProp_Hideout</c>.</summary>
+	public const string citadel_breakable_prop_hideout = "citadel_breakable_prop_hideout";
 	/// <summary><c>CCitadelTriggerCapturePoint</c>.</summary>
 	public const string citadel_capture_point = "citadel_capture_point";
 	/// <summary><c>CCitadelTriggerCapturePoint_Escort</c>.</summary>
@@ -903,6 +961,8 @@ public static class EntityNames {
 	public const string citadel_pickup = "citadel_pickup";
 	/// <summary><c>CCitadel_Pickup_Ability</c>.</summary>
 	public const string citadel_pickup_ability = "citadel_pickup_ability";
+	/// <summary><c>CCitadel_Pickup_ArtistDrawing</c>.</summary>
+	public const string citadel_pickup_artist_drawing = "citadel_pickup_artist_drawing";
 	/// <summary><c>CCitadel_Pickup_AssignedGold</c>.</summary>
 	public const string citadel_pickup_assigned_gold = "citadel_pickup_assigned_gold";
 	/// <summary><c>CCitadel_Pickup_Currency</c>.</summary>
@@ -1813,6 +1873,10 @@ public static class EntityNames {
 	public const string priest_beartrap = "priest_beartrap";
 	/// <summary><c>CCitadel_Ability_Priest_Flashbang</c>.</summary>
 	public const string priest_flashbang = "priest_flashbang";
+	/// <summary><c>CProjectile_Artist_BouncingPot</c>.</summary>
+	public const string projectile_artist_bouncingpot = "projectile_artist_bouncingpot";
+	/// <summary><c>CProjectile_Artist_RollingProjectile</c>.</summary>
+	public const string projectile_artist_rollingprojectile = "projectile_artist_rollingprojectile";
 	/// <summary><c>CProjectile_Boho_SkipGrenade</c>.</summary>
 	public const string projectile_boho_skipgrenade = "projectile_boho_skipgrenade";
 	/// <summary><c>CProjectile_ChessMaster_Fork_Projectile</c>.</summary>

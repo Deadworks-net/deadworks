@@ -7,45 +7,45 @@ namespace DeadworksManaged.Game;
 
 /// <summary>The name of every property an ability or item gives a value for, as <c>m_mapAbilityProperties</c> and <c>VData.Property</c> take it.</summary>
 public static class AbilityProperties {
-	/// <summary>On 819 abilities and items.</summary>
+	/// <summary>On 830 abilities and items.</summary>
 	public const string AbilityCastDelay = "AbilityCastDelay";
-	/// <summary>On 819 abilities and items.</summary>
+	/// <summary>On 830 abilities and items.</summary>
 	public const string AbilityCastRange = "AbilityCastRange";
-	/// <summary>On 819 abilities and items.</summary>
+	/// <summary>On 830 abilities and items.</summary>
 	public const string AbilityChannelTime = "AbilityChannelTime";
 	/// <summary>On <c>yakuza_shakedown_target</c>.</summary>
 	public const string AbilityChannelTimeDisplay = "AbilityChannelTimeDisplay";
 	/// <summary>On 4 abilities and items.</summary>
 	public const string AbilityChargeUpTime = "AbilityChargeUpTime";
-	/// <summary>On 819 abilities and items.</summary>
+	/// <summary>On 830 abilities and items.</summary>
 	public const string AbilityCharges = "AbilityCharges";
 	/// <summary>On 5 abilities and items.</summary>
 	public const string AbilityChargesConditionally = "AbilityChargesConditionally";
-	/// <summary>On 820 abilities and items.</summary>
+	/// <summary>On 831 abilities and items.</summary>
 	public const string AbilityCooldown = "AbilityCooldown";
-	/// <summary>On 819 abilities and items.</summary>
+	/// <summary>On 830 abilities and items.</summary>
 	public const string AbilityCooldownBetweenCharge = "AbilityCooldownBetweenCharge";
 	/// <summary>On <c>ability_crackshot</c>, <c>ability_empowerbullet</c>.</summary>
 	public const string AbilityCooldownPerHeadshot = "AbilityCooldownPerHeadshot";
 	/// <summary>On <c>ability_crackshot</c>.</summary>
 	public const string AbilityCooldownPerHeadshotNPC = "AbilityCooldownPerHeadshotNPC";
-	/// <summary>On 819 abilities and items.</summary>
+	/// <summary>On 830 abilities and items.</summary>
 	public const string AbilityDuration = "AbilityDuration";
 	/// <summary>On <c>ability_werewolf_onthehunt</c>, <c>citadel_ability_wraith_rapidfire</c>.</summary>
 	public const string AbilityLifestealPercent = "AbilityLifestealPercent";
-	/// <summary>On 10 abilities and items.</summary>
+	/// <summary>On 11 abilities and items.</summary>
 	public const string AbilityLifestealPercentHero = "AbilityLifestealPercentHero";
 	/// <summary>On <c>upgrade_infuser</c>.</summary>
 	public const string AbilityLifestealPercentHeroPassive = "AbilityLifestealPercentHeroPassive";
-	/// <summary>On 819 abilities and items.</summary>
+	/// <summary>On 830 abilities and items.</summary>
 	public const string AbilityPostCastDuration = "AbilityPostCastDuration";
-	/// <summary>On 819 abilities and items.</summary>
+	/// <summary>On 830 abilities and items.</summary>
 	public const string AbilityResourceCost = "AbilityResourceCost";
 	/// <summary>On <c>citadel_ability_infinity_slash</c>.</summary>
 	public const string AbilitySpeedPct = "AbilitySpeedPct";
 	/// <summary>On <c>ability_power_jump</c>.</summary>
 	public const string AbilitySplitShot = "AbilitySplitShot";
-	/// <summary>On 819 abilities and items.</summary>
+	/// <summary>On 830 abilities and items.</summary>
 	public const string AbilityUnitTargetLimit = "AbilityUnitTargetLimit";
 	/// <summary>On <c>ability_wrecker_ultimate</c>.</summary>
 	public const string AccelSpeed = "AccelSpeed";
@@ -103,7 +103,7 @@ public static class AbilityProperties {
 	public const string AirDampingDuration = "AirDampingDuration";
 	/// <summary>On <c>ability_baba_bench_run</c>.</summary>
 	public const string AirDashDistancePercent = "AirDashDistancePercent";
-	/// <summary>On 13 abilities and items.</summary>
+	/// <summary>On 14 abilities and items.</summary>
 	public const string AirDrag = "AirDrag";
 	/// <summary>On <c>citadel_ability_tengu_airlift</c>.</summary>
 	public const string AirDropBulletShield = "AirDropBulletShield";
@@ -121,7 +121,7 @@ public static class AbilityProperties {
 	public const string AirSideMoveSpeedPercentage = "AirSideMoveSpeedPercentage";
 	/// <summary>On <c>ability_boho_ridebroom</c>, <c>citadel_ability_hornet_leap</c>.</summary>
 	public const string AirSpeedBonus = "AirSpeedBonus";
-	/// <summary>On 15 abilities and items.</summary>
+	/// <summary>On 16 abilities and items.</summary>
 	public const string AirSpeedMax = "AirSpeedMax";
 	/// <summary>On <c>ability_priest_weaponswap</c>.</summary>
 	public const string AllStakesBlessed = "AllStakesBlessed";
@@ -199,6 +199,8 @@ public static class AbilityProperties {
 	public const string AttackConeAngle = "AttackConeAngle";
 	/// <summary>On <c>ability_fencer_lunge</c>.</summary>
 	public const string AttackDashRange = "AttackDashRange";
+	/// <summary>On <c>ability_artist_bamboogrove</c>.</summary>
+	public const string AttackFrequency = "AttackFrequency";
 	/// <summary>On <c>ability_nano_proximity_ritual</c>.</summary>
 	public const string AttackRadius = "AttackRadius";
 	/// <summary>On <c>citadel_ability_shieldedsentry</c>.</summary>
@@ -217,7 +219,7 @@ public static class AbilityProperties {
 	public const string AuraHPS = "AuraHPS";
 	/// <summary>On <c>ability_chessmaster_queen</c>, <c>ability_chessmaster_throwbishop</c>.</summary>
 	public const string AuraHeight = "AuraHeight";
-	/// <summary>On 5 abilities and items.</summary>
+	/// <summary>On 7 abilities and items.</summary>
 	public const string AuraLingerDuration = "AuraLingerDuration";
 	/// <summary>On 8 abilities and items.</summary>
 	public const string AuraRadius = "AuraRadius";
@@ -285,7 +287,7 @@ public static class AbilityProperties {
 	public const string BarrelUpFactor = "BarrelUpFactor";
 	/// <summary>On <c>ability_unicorn_prismaticguard</c>.</summary>
 	public const string BarrierDamagePercentage = "BarrierDamagePercentage";
-	/// <summary>On 8 abilities and items.</summary>
+	/// <summary>On 9 abilities and items.</summary>
 	public const string BarrierDuration = "BarrierDuration";
 	/// <summary>On <c>ability_baba_hexing_brew</c>.</summary>
 	public const string BarrierLockTime = "BarrierLockTime";
@@ -413,6 +415,8 @@ public static class AbilityProperties {
 	public const string BombFriction = "BombFriction";
 	/// <summary>On <c>ability_bebop_stickybomb2</c>, <c>ability_priest_smokegrenade</c>.</summary>
 	public const string BombRestitution = "BombRestitution";
+	/// <summary>On <c>ability_artist_tether</c>.</summary>
+	public const string BonusAbility1Charge = "BonusAbility1Charge";
 	/// <summary>On 6 abilities and items.</summary>
 	public const string BonusAbilityCharges = "BonusAbilityCharges";
 	/// <summary>On <c>upgrade_omnicharge_pendant</c>.</summary>
@@ -487,12 +491,14 @@ public static class AbilityProperties {
 	public const string BonusDurationOnLightMelee = "BonusDurationOnLightMelee";
 	/// <summary>On <c>ability_werewolf_transformation</c>.</summary>
 	public const string BonusDurationPerHealthPercentLost = "BonusDurationPerHealthPercentLost";
-	/// <summary>On 68 abilities and items.</summary>
+	/// <summary>On 69 abilities and items.</summary>
 	public const string BonusFireRate = "BonusFireRate";
 	/// <summary>On <c>upgrade_fire_rate_aura</c>.</summary>
 	public const string BonusFireRateNPC = "BonusFireRateNPC";
 	/// <summary>On <c>citadel_ability_bull_leap</c>.</summary>
 	public const string BonusFireRatePerHero = "BonusFireRatePerHero";
+	/// <summary>On <c>ability_artist_homingbrush</c>.</summary>
+	public const string BonusFireRatePerStack = "BonusFireRatePerStack";
 	/// <summary>On <c>ability_nano_dash</c>, <c>citadel_ability_hornet_snipe</c>.</summary>
 	public const string BonusGoldOnKill = "BonusGoldOnKill";
 	/// <summary>On <c>upgrade_goose_egg</c>.</summary>
@@ -523,14 +529,16 @@ public static class AbilityProperties {
 	public const string BonusMeleeDamagePercent = "BonusMeleeDamagePercent";
 	/// <summary>On <c>ability_baba_bench_run</c>.</summary>
 	public const string BonusMeleeRange = "BonusMeleeRange";
-	/// <summary>On 58 abilities and items.</summary>
+	/// <summary>On 60 abilities and items.</summary>
 	public const string BonusMoveSpeed = "BonusMoveSpeed";
-	/// <summary>On 4 abilities and items.</summary>
+	/// <summary>On 6 abilities and items.</summary>
 	public const string BonusMoveSpeedPercent = "BonusMoveSpeedPercent";
 	/// <summary>On <c>upgrade_magic_clarity</c>.</summary>
 	public const string BonusMovespeed = "BonusMovespeed";
 	/// <summary>On 4 abilities and items.</summary>
 	public const string BonusPerChain = "BonusPerChain";
+	/// <summary>On <c>ability_artist_rollingprojectile</c>.</summary>
+	public const string BonusProjectiles = "BonusProjectiles";
 	/// <summary>On <c>upgrade_weapon_overdrive_clip</c>.</summary>
 	public const string BonusReloadSpeed = "BonusReloadSpeed";
 	/// <summary>On <c>upgrade_belt_fed_magazine</c>.</summary>
@@ -649,7 +657,7 @@ public static class AbilityProperties {
 	public const string BuffDamageMult = "BuffDamageMult";
 	/// <summary>On <c>ability_unicorn_luminousstrike</c>.</summary>
 	public const string BuffDelay = "BuffDelay";
-	/// <summary>On 45 abilities and items.</summary>
+	/// <summary>On 47 abilities and items.</summary>
 	public const string BuffDuration = "BuffDuration";
 	/// <summary>On <c>upgrade_eternal_gift</c>.</summary>
 	public const string BuffFrequency = "BuffFrequency";
@@ -675,11 +683,15 @@ public static class AbilityProperties {
 	public const string BuildUpMaxDamage = "BuildUpMaxDamage";
 	/// <summary>On <c>cadence_ability_grandfinale</c>.</summary>
 	public const string BuildUpMaxDamageNonHero = "BuildUpMaxDamageNonHero";
+	/// <summary>On <c>ability_artist_tether</c>.</summary>
+	public const string BuildUpPerAbility = "BuildUpPerAbility";
 	/// <summary>On <c>ability_vampirebat_lovebites</c>.</summary>
 	public const string BuildUpPerBat = "BuildUpPerBat";
 	/// <summary>On <c>ability_vampirebat_lovebites</c>.</summary>
 	public const string BuildUpPerDagger = "BuildUpPerDagger";
-	/// <summary>On 12 abilities and items.</summary>
+	/// <summary>On <c>ability_artist_tether</c>.</summary>
+	public const string BuildUpPerSecond = "BuildUpPerSecond";
+	/// <summary>On 13 abilities and items.</summary>
 	public const string BuildUpPerShot = "BuildUpPerShot";
 	/// <summary>On <c>ability_trapper_fear</c>, <c>ability_trapper_fear1</c>.</summary>
 	public const string BuildupProcDamage = "BuildupProcDamage";
@@ -707,6 +719,8 @@ public static class AbilityProperties {
 	public const string BulletDamageAmp = "BulletDamageAmp";
 	/// <summary>On <c>ability_punkgoat_blasted</c>.</summary>
 	public const string BulletDamageAmpDuration = "BulletDamageAmpDuration";
+	/// <summary>On <c>ability_artist_homingbrush</c>.</summary>
+	public const string BulletDamageMultiplier = "BulletDamageMultiplier";
 	/// <summary>On <c>ability_ratking_ratarmor</c>, <c>upgrade_return_fire</c>.</summary>
 	public const string BulletDamageReflectedPct = "BulletDamageReflectedPct";
 	/// <summary>On <c>ability_werewolf_unloadgun</c>.</summary>
@@ -867,7 +881,7 @@ public static class AbilityProperties {
 	public const string ChainTickRate = "ChainTickRate";
 	/// <summary>On <c>citadel_ability_static_charge</c>.</summary>
 	public const string ChainToEnemies = "ChainToEnemies";
-	/// <summary>On 819 abilities and items.</summary>
+	/// <summary>On 830 abilities and items.</summary>
 	public const string ChannelMoveSpeed = "ChannelMoveSpeed";
 	/// <summary>On <c>ability_icebeam</c>.</summary>
 	public const string ChannelSlowPercent = "ChannelSlowPercent";
@@ -947,7 +961,7 @@ public static class AbilityProperties {
 	public const string CoatedSlowPercent = "CoatedSlowPercent";
 	/// <summary>On <c>citadel_ability_bull_charge</c>.</summary>
 	public const string CollidePlayersStopTime = "CollidePlayersStopTime";
-	/// <summary>On 30 abilities and items.</summary>
+	/// <summary>On 31 abilities and items.</summary>
 	public const string CombatBarrier = "CombatBarrier";
 	/// <summary>On <c>ability_boho_doublehit</c>.</summary>
 	public const string CombatBarrierPerStack = "CombatBarrierPerStack";
@@ -993,7 +1007,7 @@ public static class AbilityProperties {
 	public const string CooldownReductionPctOnNonHeroes = "CooldownReductionPctOnNonHeroes";
 	/// <summary>On <c>citadel_ability_tengu_airlift</c>, <c>upgrade_divine_barrier</c>, <c>upgrade_guardian_ward</c>.</summary>
 	public const string CooldownReductionPctOnOthers = "CooldownReductionPctOnOthers";
-	/// <summary>On <c>upgrade_absorbing_armor</c>.</summary>
+	/// <summary>On <c>ability_artist_homingbrush</c>, <c>upgrade_absorbing_armor</c>.</summary>
 	public const string CooldownReductionPerHit = "CooldownReductionPerHit";
 	/// <summary>On <c>ability_boho_bouncyprojectile</c>.</summary>
 	public const string CooldownReductionPercentagePerHit = "CooldownReductionPercentagePerHit";
@@ -1049,7 +1063,7 @@ public static class AbilityProperties {
 	public const string CycleTimePct = "CycleTimePct";
 	/// <summary>On <c>mirage_sand_phantom</c>.</summary>
 	public const string DMarkMultiplierPerStack = "DMarkMultiplierPerStack";
-	/// <summary>On 47 abilities and items.</summary>
+	/// <summary>On 48 abilities and items.</summary>
 	public const string DPS = "DPS";
 	/// <summary>On <c>upgrade_mod_disruptor</c>, <c>upgrade_thermal_detonator</c>.</summary>
 	public const string DPSIncrease = "DPSIncrease";
@@ -1061,11 +1075,11 @@ public static class AbilityProperties {
 	public const string DPSPercentHealth = "DPSPercentHealth";
 	/// <summary>On <c>ability_chessmaster_queen</c>, <c>ability_chessmaster_throwbishop</c>.</summary>
 	public const string DPSTickInterval = "DPSTickInterval";
-	/// <summary>On 153 abilities and items.</summary>
+	/// <summary>On 156 abilities and items.</summary>
 	public const string Damage = "Damage";
-	/// <summary>On <c>ability_nano_catform</c>.</summary>
+	/// <summary>On <c>ability_artist_rollingprojectile</c>, <c>ability_nano_catform</c>.</summary>
 	public const string DamageAmpBuildDuration = "DamageAmpBuildDuration";
-	/// <summary>On <c>ability_nano_catform</c>.</summary>
+	/// <summary>On <c>ability_artist_rollingprojectile</c>, <c>ability_nano_catform</c>.</summary>
 	public const string DamageAmpDuration = "DamageAmpDuration";
 	/// <summary>On <c>ability_magician_animalcurse</c>, <c>ability_magician_animalhexarea</c>.</summary>
 	public const string DamageAmpPercentage = "DamageAmpPercentage";
@@ -1175,7 +1189,7 @@ public static class AbilityProperties {
 	public const string DampingFactor = "DampingFactor";
 	/// <summary>On <c>drifter_darkness</c>.</summary>
 	public const string DarkFactor = "DarkFactor";
-	/// <summary>On <c>ability_flame_dash</c>.</summary>
+	/// <summary>On <c>ability_artist_rollingprojectile</c>, <c>ability_flame_dash</c>.</summary>
 	public const string DashAirSpeed = "DashAirSpeed";
 	/// <summary>On 4 abilities and items.</summary>
 	public const string DashAngleThreshold = "DashAngleThreshold";
@@ -1187,13 +1201,15 @@ public static class AbilityProperties {
 	public const string DashDistancePercent = "DashDistancePercent";
 	/// <summary>On <c>ability_fencer_riposte</c>.</summary>
 	public const string DashGraceWindow = "DashGraceWindow";
+	/// <summary>On <c>ability_artist_rollingprojectile</c>.</summary>
+	public const string DashIncrease = "DashIncrease";
 	/// <summary>On 5 abilities and items.</summary>
 	public const string DashRadius = "DashRadius";
 	/// <summary>On 4 abilities and items.</summary>
 	public const string DashRange = "DashRange";
 	/// <summary>On <c>ability_chessmaster_throwbishop</c>, <c>ability_ratking_standard_bearer</c>.</summary>
 	public const string DashSlowPercent = "DashSlowPercent";
-	/// <summary>On 6 abilities and items.</summary>
+	/// <summary>On 7 abilities and items.</summary>
 	public const string DashSpeed = "DashSpeed";
 	/// <summary>On <c>upgrade_mystical_piano</c>.</summary>
 	public const string DazeDuration = "DazeDuration";
@@ -1211,7 +1227,7 @@ public static class AbilityProperties {
 	public const string DebuffAccuracy = "DebuffAccuracy";
 	/// <summary>On <c>ability_kali_trappers_bolo</c>.</summary>
 	public const string DebuffDelay = "DebuffDelay";
-	/// <summary>On 78 abilities and items.</summary>
+	/// <summary>On 80 abilities and items.</summary>
 	public const string DebuffDuration = "DebuffDuration";
 	/// <summary>On <c>fathom_lurkers_ambush</c>.</summary>
 	public const string DebuffMaxDuration = "DebuffMaxDuration";
@@ -1249,6 +1265,8 @@ public static class AbilityProperties {
 	public const string DelayedDamage = "DelayedDamage";
 	/// <summary>On <c>ability_gunslinger_demon_carbine</c>.</summary>
 	public const string DemonShotCount = "DemonShotCount";
+	/// <summary>On <c>ability_artist_bamboogrove</c>.</summary>
+	public const string DestroyOnDamage = "DestroyOnDamage";
 	/// <summary>On <c>fathom_reefdweller_harpoon</c>.</summary>
 	public const string DetachBuffDuration = "DetachBuffDuration";
 	/// <summary>On <c>viscous_goo_grenade</c>.</summary>
@@ -1317,6 +1335,8 @@ public static class AbilityProperties {
 	public const string DragonTravelRange = "DragonTravelRange";
 	/// <summary>On <c>ability_bookworm_dragonfire</c>.</summary>
 	public const string DragonUpwardSpeed = "DragonUpwardSpeed";
+	/// <summary>On <c>ability_artist_homingbrush</c>.</summary>
+	public const string DrawDuration = "DrawDuration";
 	/// <summary>On <c>drifter_darkness</c>.</summary>
 	public const string DrifterNearbyRangeCheck = "DrifterNearbyRangeCheck";
 	/// <summary>On 4 abilities and items.</summary>
@@ -1341,6 +1361,8 @@ public static class AbilityProperties {
 	public const string EdgePushDuration = "EdgePushDuration";
 	/// <summary>On <c>ability_familiar_ability02</c>.</summary>
 	public const string EffectDuration = "EffectDuration";
+	/// <summary>On <c>ability_artist_tether</c>.</summary>
+	public const string EffectivenessPerHit = "EffectivenessPerHit";
 	/// <summary>On <c>ability_vampirebat_lovebites</c>.</summary>
 	public const string EffectivenessVolumeScaleMax = "EffectivenessVolumeScaleMax";
 	/// <summary>On <c>ability_vampirebat_lovebites</c>.</summary>
@@ -1433,6 +1455,8 @@ public static class AbilityProperties {
 	public const string ExplodeTimeInterval = "ExplodeTimeInterval";
 	/// <summary>On <c>ability_deadpack_rocketeer</c>.</summary>
 	public const string ExplosionBulletDamage = "ExplosionBulletDamage";
+	/// <summary>On <c>ability_artist_rollingprojectile</c>.</summary>
+	public const string ExplosionCone = "ExplosionCone";
 	/// <summary>On 6 abilities and items.</summary>
 	public const string ExplosionDamage = "ExplosionDamage";
 	/// <summary>On <c>citadel_ability_rocket_barrage</c>, <c>citadel_ability_tier2boss_rocket_barrage</c>, <c>citadel_ability_tier3boss_rocket_barrage</c>.</summary>
@@ -1441,7 +1465,7 @@ public static class AbilityProperties {
 	public const string ExplosionInterval = "ExplosionInterval";
 	/// <summary>On <c>ability_nano_clustergrenade</c>, <c>citadel_ability_wrecker_bouldergrenade</c>.</summary>
 	public const string ExplosionPushForce = "ExplosionPushForce";
-	/// <summary>On 14 abilities and items.</summary>
+	/// <summary>On 15 abilities and items.</summary>
 	public const string ExplosionRadius = "ExplosionRadius";
 	/// <summary>On <c>cadence_ability_grandfinale</c>.</summary>
 	public const string ExplosiveDamage = "ExplosiveDamage";
@@ -1461,7 +1485,7 @@ public static class AbilityProperties {
 	public const string ExtraTargetConeAngle = "ExtraTargetConeAngle";
 	/// <summary>On <c>ability_gravity_lasso</c>.</summary>
 	public const string ExtraTargetHorizontalOffset = "ExtraTargetHorizontalOffset";
-	/// <summary>On <c>ability_chessmaster_throwbishop</c>, <c>ability_crackshot</c>, <c>ability_familiar_ability02</c>.</summary>
+	/// <summary>On 4 abilities and items.</summary>
 	public const string FadingSlowPercent = "FadingSlowPercent";
 	/// <summary>On <c>ability_baba_hexing_brew</c>.</summary>
 	public const string FailLockTime = "FailLockTime";
@@ -1469,7 +1493,7 @@ public static class AbilityProperties {
 	public const string FailedExecuteCooldownPenalty = "FailedExecuteCooldownPenalty";
 	/// <summary>On <c>citadel_weapon_necro_set</c>.</summary>
 	public const string FakeCritDamageVsNPC = "FakeCritDamageVsNPC";
-	/// <summary>On 23 abilities and items.</summary>
+	/// <summary>On 24 abilities and items.</summary>
 	public const string FallSpeedMax = "FallSpeedMax";
 	/// <summary>On <c>ability_vampirebat_steallife</c>.</summary>
 	public const string FallingDrag = "FallingDrag";
@@ -1511,7 +1535,7 @@ public static class AbilityProperties {
 	public const string FireRatePerKill = "FireRatePerKill";
 	/// <summary>On <c>ability_swan_acrobat</c>, <c>ability_unicorn_luminousstrike</c>.</summary>
 	public const string FireRatePerStack = "FireRatePerStack";
-	/// <summary>On 34 abilities and items.</summary>
+	/// <summary>On 36 abilities and items.</summary>
 	public const string FireRateSlow = "FireRateSlow";
 	/// <summary>On <c>ability_punkgoat_tether</c>, <c>ability_punkgoat_ult</c>, <c>upgrade_juggernaut</c>.</summary>
 	public const string FireRateSlowDuration = "FireRateSlowDuration";
@@ -1639,17 +1663,17 @@ public static class AbilityProperties {
 	public const string GrenadesPerSecondMult = "GrenadesPerSecondMult";
 	/// <summary>On <c>ability_vampirebat_batswarm</c>.</summary>
 	public const string GroundAccelerationPercentage = "GroundAccelerationPercentage";
-	/// <summary>On <c>ability_chessmaster_forkpiece</c>, <c>ability_chessmaster_queen</c>.</summary>
+	/// <summary>On <c>ability_artist_rollingprojectile</c>, <c>ability_chessmaster_forkpiece</c>, <c>ability_chessmaster_queen</c>.</summary>
 	public const string GroundAuraDuration = "GroundAuraDuration";
-	/// <summary>On <c>ability_chessmaster_forkpiece</c>, <c>ability_chessmaster_queen</c>, <c>ability_chessmaster_throwbishop</c>.</summary>
+	/// <summary>On 5 abilities and items.</summary>
 	public const string GroundAuraHeight = "GroundAuraHeight";
 	/// <summary>On <c>ability_chessmaster_forkpiece</c>, <c>ability_chessmaster_throwbishop</c>.</summary>
 	public const string GroundAuraLingerDuration = "GroundAuraLingerDuration";
 	/// <summary>On <c>ability_necro_zombiewall</c>.</summary>
 	public const string GroundAuraPopDelay = "GroundAuraPopDelay";
-	/// <summary>On <c>ability_chessmaster_forkpiece</c>.</summary>
+	/// <summary>On <c>ability_artist_bamboogrove</c>, <c>ability_artist_rollingprojectile</c>, <c>ability_chessmaster_forkpiece</c>.</summary>
 	public const string GroundAuraRadius = "GroundAuraRadius";
-	/// <summary>On 4 abilities and items.</summary>
+	/// <summary>On 6 abilities and items.</summary>
 	public const string GroundAuraSpacing = "GroundAuraSpacing";
 	/// <summary>On 17 abilities and items.</summary>
 	public const string GroundDashReductionPercent = "GroundDashReductionPercent";
@@ -1667,6 +1691,8 @@ public static class AbilityProperties {
 	public const string GroundPoundKnockUpHeight = "GroundPoundKnockUpHeight";
 	/// <summary>On <c>ability_bookworm_knightcharge</c>.</summary>
 	public const string GroundStickHeight = "GroundStickHeight";
+	/// <summary>On <c>ability_artist_bamboogrove</c>.</summary>
+	public const string GroveRadius = "GroveRadius";
 	/// <summary>On 5 abilities and items.</summary>
 	public const string GrowTime = "GrowTime";
 	/// <summary>On 4 abilities and items.</summary>
@@ -1693,7 +1719,7 @@ public static class AbilityProperties {
 	public const string HeadshotResist = "HeadshotResist";
 	/// <summary>On <c>ability_stacking_damage</c>.</summary>
 	public const string HeadshotStacks = "HeadshotStacks";
-	/// <summary>On 10 abilities and items.</summary>
+	/// <summary>On 11 abilities and items.</summary>
 	public const string HealAmount = "HealAmount";
 	/// <summary>On <c>upgrade_healbuff</c>, <c>upgrade_healing_booster</c>.</summary>
 	public const string HealAmpCastPercent = "HealAmpCastPercent";
@@ -1773,7 +1799,7 @@ public static class AbilityProperties {
 	public const string HealthDrainedPerSecond = "HealthDrainedPerSecond";
 	/// <summary>On <c>upgrade_eldritch_shot</c>.</summary>
 	public const string HealthPctDamage = "HealthPctDamage";
-	/// <summary>On <c>ability_nano_catform</c>.</summary>
+	/// <summary>On <c>ability_artist_tether</c>, <c>ability_nano_catform</c>.</summary>
 	public const string HealthRegen = "HealthRegen";
 	/// <summary>On <c>ability_familiar_attach</c>.</summary>
 	public const string HealthRegenDuration = "HealthRegenDuration";
@@ -1803,8 +1829,6 @@ public static class AbilityProperties {
 	public const string HeatGainRate = "HeatGainRate";
 	/// <summary>On <c>ability_deadpack_flamethrower</c>.</summary>
 	public const string HeatGainRateHittingEnemy = "HeatGainRateHittingEnemy";
-	/// <summary>On <c>ability_deadpack_rocketeer</c>.</summary>
-	public const string HeatGainRateSlowPercentEffectiveness = "HeatGainRateSlowPercentEffectiveness";
 	/// <summary>On <c>ability_deadpack_rocketeer</c>.</summary>
 	public const string HeatGainRateVTOL = "HeatGainRateVTOL";
 	/// <summary>On <c>ability_deadpack_chargeblast</c>.</summary>
@@ -1851,7 +1875,7 @@ public static class AbilityProperties {
 	public const string HexDuration = "HexDuration";
 	/// <summary>On <c>ability_magician_animalcurse</c>, <c>ability_magician_animalhexarea</c>.</summary>
 	public const string HexMoveSpeedLimit = "HexMoveSpeedLimit";
-	/// <summary>On <c>ability_chessmaster_forkpiece_trigger</c>, <c>ability_chessmaster_movechesspiece</c>.</summary>
+	/// <summary>On <c>ability_chessmaster_forkpiece_trigger</c>.</summary>
 	public const string HitboxActiveDuration = "HitboxActiveDuration";
 	/// <summary>On <c>citadel_weapon_necro_set</c>.</summary>
 	public const string HitsToHeadshot = "HitsToHeadshot";
@@ -1937,10 +1961,12 @@ public static class AbilityProperties {
 	public const string IncomingBulletDamagePercentFromCaster = "IncomingBulletDamagePercentFromCaster";
 	/// <summary>On <c>ability_frank_painaura</c>, <c>ability_priest_selfheal</c>.</summary>
 	public const string IncomingDamagePercent = "IncomingDamagePercent";
-	/// <summary>On <c>ability_incendiary_projectile</c>, <c>ability_priest_beartrap</c>.</summary>
+	/// <summary>On <c>ability_artist_rollingprojectile</c>, <c>ability_incendiary_projectile</c>, <c>ability_priest_beartrap</c>.</summary>
 	public const string IncomingDamagePercentFromCaster = "IncomingDamagePercentFromCaster";
 	/// <summary>On <c>ability_necro_gravestone</c>, <c>ability_necro_wither</c>.</summary>
 	public const string IncomingDamagePercentFromCasterPerStack = "IncomingDamagePercentFromCasterPerStack";
+	/// <summary>On <c>ability_artist_tether</c>.</summary>
+	public const string IncomingDamagePercentReductionPerPickup = "IncomingDamagePercentReductionPerPickup";
 	/// <summary>On <c>ability_fencer_ultimate</c>.</summary>
 	public const string IncomingDamageReductionPercent = "IncomingDamageReductionPercent";
 	/// <summary>On <c>ability_familiar_helpinghands</c>.</summary>
@@ -2307,16 +2333,18 @@ public static class AbilityProperties {
 	public const string MaxCooldownReductionsFromHits = "MaxCooldownReductionsFromHits";
 	/// <summary>On <c>ability_frank_painaura</c>.</summary>
 	public const string MaxDPS = "MaxDPS";
-	/// <summary>On <c>ability_charged_bomb</c>, <c>ability_magician_magicbolt</c>.</summary>
+	/// <summary>On <c>ability_artist_rollingprojectile</c>, <c>ability_charged_bomb</c>, <c>ability_magician_magicbolt</c>.</summary>
 	public const string MaxDamage = "MaxDamage";
 	/// <summary>On <c>ability_fencer_lunge</c>.</summary>
 	public const string MaxDamageBeforePerfect = "MaxDamageBeforePerfect";
 	/// <summary>On <c>ability_ratking_ratarmor</c>.</summary>
 	public const string MaxDamagePerHit = "MaxDamagePerHit";
-	/// <summary>On <c>ability_magician_magicbolt</c>.</summary>
+	/// <summary>On <c>ability_artist_rollingprojectile</c>, <c>ability_magician_magicbolt</c>.</summary>
 	public const string MaxDamageTime = "MaxDamageTime";
 	/// <summary>On <c>mirage_tornado</c>.</summary>
 	public const string MaxDeltaMovementControl = "MaxDeltaMovementControl";
+	/// <summary>On <c>ability_artist_homingbrush</c>.</summary>
+	public const string MaxDrawDistance = "MaxDrawDistance";
 	/// <summary>On <c>ability_punkgoat_blasted</c>.</summary>
 	public const string MaxDuration = "MaxDuration";
 	/// <summary>On 4 abilities and items.</summary>
@@ -2411,7 +2439,7 @@ public static class AbilityProperties {
 	public const string MaxReflectCount = "MaxReflectCount";
 	/// <summary>On <c>citadel_weapon_chessmaster_shotgun</c>, <c>citadel_weapon_drifter_set</c>, <c>citadel_weapon_yamato_set</c>.</summary>
 	public const string MaxRotation = "MaxRotation";
-	/// <summary>On <c>ability_werewolf_unloadgun</c>.</summary>
+	/// <summary>On <c>ability_artist_homingbrush</c>, <c>ability_werewolf_unloadgun</c>.</summary>
 	public const string MaxShots = "MaxShots";
 	/// <summary>On <c>citadel_ability_tier2boss_rocket_barrage</c>, <c>citadel_ability_tier3boss_rocket_barrage</c>.</summary>
 	public const string MaxSimultaneousVolley = "MaxSimultaneousVolley";
@@ -2419,7 +2447,7 @@ public static class AbilityProperties {
 	public const string MaxSlow = "MaxSlow";
 	/// <summary>On <c>citadel_ability_chrono_kinetic_carbine</c>.</summary>
 	public const string MaxSlowDuration = "MaxSlowDuration";
-	/// <summary>On <c>ability_icebeam</c>, <c>upgrade_capacitor</c>.</summary>
+	/// <summary>On <c>ability_artist_tether</c>, <c>ability_icebeam</c>, <c>upgrade_capacitor</c>.</summary>
 	public const string MaxSlowPercent = "MaxSlowPercent";
 	/// <summary>On <c>ability_icebeam</c>.</summary>
 	public const string MaxSlowTime = "MaxSlowTime";
@@ -2429,7 +2457,7 @@ public static class AbilityProperties {
 	public const string MaxSpread = "MaxSpread";
 	/// <summary>On <c>ability_fencer_lunge</c>.</summary>
 	public const string MaxStabs = "MaxStabs";
-	/// <summary>On 32 abilities and items.</summary>
+	/// <summary>On 33 abilities and items.</summary>
 	public const string MaxStacks = "MaxStacks";
 	/// <summary>On <c>upgrade_restorative_locket</c>.</summary>
 	public const string MaxStaminaRestore = "MaxStaminaRestore";
@@ -2453,7 +2481,7 @@ public static class AbilityProperties {
 	public const string MaxWeaponPower = "MaxWeaponPower";
 	/// <summary>On <c>citadel_ability_power_slash</c>.</summary>
 	public const string MediumChargeDamagePct = "MediumChargeDamagePct";
-	/// <summary>On 67 abilities and items.</summary>
+	/// <summary>On 68 abilities and items.</summary>
 	public const string MeleeAttackLength = "MeleeAttackLength";
 	/// <summary>On <c>ability_nano_shadow_step</c>.</summary>
 	public const string MeleeAttackSpeedBonus = "MeleeAttackSpeedBonus";
@@ -2465,7 +2493,7 @@ public static class AbilityProperties {
 	public const string MeleeDistanceScale = "MeleeDistanceScale";
 	/// <summary>On <c>cadence_ability_silencecontraptions</c>.</summary>
 	public const string MeleeEMP = "MeleeEMP";
-	/// <summary>On 67 abilities and items.</summary>
+	/// <summary>On 68 abilities and items.</summary>
 	public const string MeleeHalfAngle = "MeleeHalfAngle";
 	/// <summary>On <c>ability_ratking_scrap_grenade</c>.</summary>
 	public const string MeleeImpulseHeavy = "MeleeImpulseHeavy";
@@ -2505,7 +2533,7 @@ public static class AbilityProperties {
 	public const string MinChargeDamagePercent = "MinChargeDamagePercent";
 	/// <summary>On <c>ability_frank_painaura</c>.</summary>
 	public const string MinDPS = "MinDPS";
-	/// <summary>On <c>ability_magician_magicbolt</c>.</summary>
+	/// <summary>On <c>ability_artist_rollingprojectile</c>, <c>ability_magician_magicbolt</c>.</summary>
 	public const string MinDamage = "MinDamage";
 	/// <summary>On <c>ability_health_swap</c>.</summary>
 	public const string MinDiffToCast = "MinDiffToCast";
@@ -2523,7 +2551,7 @@ public static class AbilityProperties {
 	public const string MinHeight = "MinHeight";
 	/// <summary>On <c>ability_baba_bench_run</c>.</summary>
 	public const string MinJumpHeight = "MinJumpHeight";
-	/// <summary>On <c>ability_chessmaster_movechesspiece</c>.</summary>
+	/// <summary>On <c>ability_chessmaster_knightbuff_trigger</c>, <c>ability_chessmaster_movechesspiece</c>.</summary>
 	public const string MinKingMoveDuration = "MinKingMoveDuration";
 	/// <summary>On <c>ability_chessmaster_forkpiece_trigger</c>.</summary>
 	public const string MinMoveDuration = "MinMoveDuration";
@@ -2547,7 +2575,7 @@ public static class AbilityProperties {
 	public const string MinSlowAmount = "MinSlowAmount";
 	/// <summary>On <c>citadel_ability_chrono_kinetic_carbine</c>.</summary>
 	public const string MinSlowDuration = "MinSlowDuration";
-	/// <summary>On <c>ability_icebeam</c>.</summary>
+	/// <summary>On <c>ability_artist_tether</c>, <c>ability_icebeam</c>.</summary>
 	public const string MinSlowPercent = "MinSlowPercent";
 	/// <summary>On <c>ability_wrecking_ball</c>.</summary>
 	public const string MinSpeed = "MinSpeed";
@@ -2559,6 +2587,8 @@ public static class AbilityProperties {
 	public const string MinTargetsRequired = "MinTargetsRequired";
 	/// <summary>On <c>ability_explosive_barrel</c>.</summary>
 	public const string MinTimeBeforeDestroy = "MinTimeBeforeDestroy";
+	/// <summary>On <c>ability_artist_rollingprojectile</c>.</summary>
+	public const string MinTimeForBarrier = "MinTimeForBarrier";
 	/// <summary>On <c>ability_nano_pounce</c>, <c>ability_nano_pounce_instant</c>, <c>citadel_ability_shiv_killing_blow</c>.</summary>
 	public const string MinTimeToTarget = "MinTimeToTarget";
 	/// <summary>On <c>ability_boho_ridebroom</c>, <c>citadel_ability_hornet_leap</c>.</summary>
@@ -2753,8 +2783,10 @@ public static class AbilityProperties {
 	public const string OutgoingDamage = "OutgoingDamage";
 	/// <summary>On 5 abilities and items.</summary>
 	public const string OutgoingDamagePenaltyPercent = "OutgoingDamagePenaltyPercent";
-	/// <summary>On 7 abilities and items.</summary>
+	/// <summary>On 9 abilities and items.</summary>
 	public const string OutgoingDamagePercent = "OutgoingDamagePercent";
+	/// <summary>On <c>ability_artist_tether</c>.</summary>
+	public const string OutgoingDamagePercentPerPickup = "OutgoingDamagePercentPerPickup";
 	/// <summary>On <c>ability_necro_gravestone</c>, <c>ability_necro_wither</c>.</summary>
 	public const string OutgoingDamagePercentPerStack = "OutgoingDamagePercentPerStack";
 	/// <summary>On <c>ability_viper_hookdagger</c>.</summary>
@@ -2785,6 +2817,8 @@ public static class AbilityProperties {
 	public const string ParrySuccessHealPercentage = "ParrySuccessHealPercentage";
 	/// <summary>On <c>ability_fencer_riposte</c>.</summary>
 	public const string ParryWindow = "ParryWindow";
+	/// <summary>On <c>ability_artist_pullbrush</c>.</summary>
+	public const string PartialChargeCost = "PartialChargeCost";
 	/// <summary>On <c>upgrade_siphon_bullets</c>.</summary>
 	public const string ParticleRadius = "ParticleRadius";
 	/// <summary>On <c>ability_incendiary_projectile</c>, <c>viscous_goo_bowling_ball</c>.</summary>
@@ -2937,9 +2971,9 @@ public static class AbilityProperties {
 	public const string ProjectileFuse = "ProjectileFuse";
 	/// <summary>On <c>citadel_ability_rocket_barrage</c>.</summary>
 	public const string ProjectileIgnoreCollisionTime = "ProjectileIgnoreCollisionTime";
-	/// <summary>On 9 abilities and items.</summary>
+	/// <summary>On 10 abilities and items.</summary>
 	public const string ProjectileLifetime = "ProjectileLifetime";
-	/// <summary>On <c>citadel_weapon_bookworm_set</c>, <c>citadel_weapon_fortuna_set</c>.</summary>
+	/// <summary>On <c>citadel_weapon_artist_projectile</c>, <c>citadel_weapon_bookworm_set</c>, <c>citadel_weapon_fortuna_set</c>.</summary>
 	public const string ProjectileLifetimeRandomness = "ProjectileLifetimeRandomness";
 	/// <summary>On <c>citadel_weapon_bookworm_set</c>, <c>citadel_weapon_fortuna_set</c>.</summary>
 	public const string ProjectileNoiseAmount = "ProjectileNoiseAmount";
@@ -2987,7 +3021,7 @@ public static class AbilityProperties {
 	public const string PuddleDuration = "PuddleDuration";
 	/// <summary>On <c>viscous_goo_grenade</c>.</summary>
 	public const string PuddleSlideBuff = "PuddleSlideBuff";
-	/// <summary>On <c>ability_baba_bubbling_brew</c>, <c>ability_punkgoat_tether</c>.</summary>
+	/// <summary>On <c>ability_artist_tether</c>, <c>ability_baba_bubbling_brew</c>, <c>ability_punkgoat_tether</c>.</summary>
 	public const string PullDistance = "PullDistance";
 	/// <summary>On <c>ability_punkgoat_ult</c>.</summary>
 	public const string PullDownDuration = "PullDownDuration";
@@ -3043,7 +3077,7 @@ public static class AbilityProperties {
 	public const string QueenBonusMoves = "QueenBonusMoves";
 	/// <summary>On <c>ability_chessmaster_movechesspiece</c>.</summary>
 	public const string QueenMoveDuration = "QueenMoveDuration";
-	/// <summary>On 122 abilities and items.</summary>
+	/// <summary>On 124 abilities and items.</summary>
 	public const string Radius = "Radius";
 	/// <summary>On <c>citadel_ability_chrono_pulse_grenade</c>.</summary>
 	public const string RadiusIncreasePerPulse = "RadiusIncreasePerPulse";
@@ -3347,7 +3381,7 @@ public static class AbilityProperties {
 	public const string ShrinkDuration = "ShrinkDuration";
 	/// <summary>On <c>ability_fencer_riposte</c>.</summary>
 	public const string SideMoveSpeed = "SideMoveSpeed";
-	/// <summary>On 5 abilities and items.</summary>
+	/// <summary>On 6 abilities and items.</summary>
 	public const string SideMoveSpeedReduction = "SideMoveSpeedReduction";
 	/// <summary>On <c>ability_fencer_throwblade</c>.</summary>
 	public const string SigilRadius = "SigilRadius";
@@ -3357,7 +3391,7 @@ public static class AbilityProperties {
 	public const string SilenceBombSpeed = "SilenceBombSpeed";
 	/// <summary>On <c>ability_warden_lock_down</c>.</summary>
 	public const string SilenceDebuff = "SilenceDebuff";
-	/// <summary>On 5 abilities and items.</summary>
+	/// <summary>On 6 abilities and items.</summary>
 	public const string SilenceDuration = "SilenceDuration";
 	/// <summary>On <c>ability_baba_hexing_brew</c>.</summary>
 	public const string SilenceLockTime = "SilenceLockTime";
@@ -3441,13 +3475,13 @@ public static class AbilityProperties {
 	public const string SlideLeapSpeedPenaltyTime = "SlideLeapSpeedPenaltyTime";
 	/// <summary>On <c>ability_viper_snakedash</c>.</summary>
 	public const string SlideResist = "SlideResist";
-	/// <summary>On 6 abilities and items.</summary>
+	/// <summary>On 7 abilities and items.</summary>
 	public const string SlideScale = "SlideScale";
-	/// <summary>On <c>upgrade_electric_slippers</c>.</summary>
+	/// <summary>On <c>ability_artist_rollingprojectile</c>, <c>upgrade_electric_slippers</c>.</summary>
 	public const string SlideTurnScale = "SlideTurnScale";
-	/// <summary>On 72 abilities and items.</summary>
+	/// <summary>On 74 abilities and items.</summary>
 	public const string SlowDuration = "SlowDuration";
-	/// <summary>On 101 abilities and items.</summary>
+	/// <summary>On 103 abilities and items.</summary>
 	public const string SlowPercent = "SlowPercent";
 	/// <summary>On <c>ability_necro_gravestone</c>, <c>ability_necro_wither</c>, <c>ability_viper_debuffdagger</c>.</summary>
 	public const string SlowPercentPerStack = "SlowPercentPerStack";
@@ -3549,6 +3583,8 @@ public static class AbilityProperties {
 	public const string SpiritDamageReductionProc = "SpiritDamageReductionProc";
 	/// <summary>On <c>upgrade_return_fire</c>.</summary>
 	public const string SpiritDamageReflectedPct = "SpiritDamageReflectedPct";
+	/// <summary>On <c>ability_artist_tether</c>.</summary>
+	public const string SpiritPerPickup = "SpiritPerPickup";
 	/// <summary>On <c>ability_necro_gravestone</c>, <c>ability_necro_wither</c>.</summary>
 	public const string SpiritPerStack = "SpiritPerStack";
 	/// <summary>On 7 abilities and items.</summary>
@@ -3607,7 +3643,7 @@ public static class AbilityProperties {
 	public const string SpreadTargets = "SpreadTargets";
 	/// <summary>On <c>ability_icepath</c>.</summary>
 	public const string SprintSpeedBonus = "SprintSpeedBonus";
-	/// <summary>On 8 abilities and items.</summary>
+	/// <summary>On 9 abilities and items.</summary>
 	public const string StackDuration = "StackDuration";
 	/// <summary>On <c>upgrade_siphon_bullets</c>.</summary>
 	public const string StackLostPerDeath = "StackLostPerDeath";
@@ -3639,7 +3675,7 @@ public static class AbilityProperties {
 	public const string Stamina = "Stamina";
 	/// <summary>On <c>ability_chessmaster_knightbuff</c>.</summary>
 	public const string StaminaCooldown = "StaminaCooldown";
-	/// <summary>On 12 abilities and items.</summary>
+	/// <summary>On 13 abilities and items.</summary>
 	public const string StaminaCooldownReduction = "StaminaCooldownReduction";
 	/// <summary>On <c>ability_doorman_hotel</c>, <c>ability_priest_silencebomb</c>, <c>ability_priest_smokegrenade</c>.</summary>
 	public const string StaminaDrain = "StaminaDrain";
@@ -3677,7 +3713,7 @@ public static class AbilityProperties {
 	public const string StatueHealth = "StatueHealth";
 	/// <summary>On <c>upgrade_cloak_of_opportunity</c>.</summary>
 	public const string StatusImmuneDuration = "StatusImmuneDuration";
-	/// <summary>On 16 abilities and items.</summary>
+	/// <summary>On 17 abilities and items.</summary>
 	public const string StatusResistancePercent = "StatusResistancePercent";
 	/// <summary>On 4 abilities and items.</summary>
 	public const string StealDuration = "StealDuration";
@@ -3713,7 +3749,7 @@ public static class AbilityProperties {
 	public const string StrikeVelocity = "StrikeVelocity";
 	/// <summary>On <c>upgrade_mystical_piano</c>, <c>upgrade_target_stun</c>.</summary>
 	public const string StunDelay = "StunDelay";
-	/// <summary>On 37 abilities and items.</summary>
+	/// <summary>On 38 abilities and items.</summary>
 	public const string StunDuration = "StunDuration";
 	/// <summary>On <c>ability_deadpack_ultimate</c>.</summary>
 	public const string StunDurationSelf = "StunDurationSelf";
@@ -3723,6 +3759,8 @@ public static class AbilityProperties {
 	public const string StunTargetOnExplode = "StunTargetOnExplode";
 	/// <summary>On <c>ability_kali_trappers_bolo</c>.</summary>
 	public const string StunsTargets = "StunsTargets";
+	/// <summary>On <c>ability_artist_tether</c>.</summary>
+	public const string SuccessDuration = "SuccessDuration";
 	/// <summary>On <c>ability_werewolf_kickflip</c>.</summary>
 	public const string SuccessInputWindow = "SuccessInputWindow";
 	/// <summary>On <c>ability_necro_hauntingskull</c>, <c>ability_necro_wither</c>.</summary>
@@ -3815,7 +3853,7 @@ public static class AbilityProperties {
 	public const string TargetSearchRadiusVsHeroes = "TargetSearchRadiusVsHeroes";
 	/// <summary>On <c>ability_necro_haunt</c>.</summary>
 	public const string TargetSearchTick = "TargetSearchTick";
-	/// <summary>On 11 abilities and items.</summary>
+	/// <summary>On 12 abilities and items.</summary>
 	public const string TargetingConeAngle = "TargetingConeAngle";
 	/// <summary>On <c>citadel_weapon_necro_set</c>.</summary>
 	public const string TargetingConeAngleDuringSplitshot = "TargetingConeAngleDuringSplitshot";
@@ -3845,7 +3883,7 @@ public static class AbilityProperties {
 	public const string TechDamageReduction = "TechDamageReduction";
 	/// <summary>On <c>ability_power_jump</c>, <c>ability_punkgoat_blasted</c>.</summary>
 	public const string TechLifestealPercent = "TechLifestealPercent";
-	/// <summary>On 819 abilities and items.</summary>
+	/// <summary>On 830 abilities and items.</summary>
 	public const string TechPower = "TechPower";
 	/// <summary>On <c>ability_death_tax</c>.</summary>
 	public const string TechPowerAmpBonus = "TechPowerAmpBonus";
@@ -3873,6 +3911,8 @@ public static class AbilityProperties {
 	public const string TechResistBelowThreshold = "TechResistBelowThreshold";
 	/// <summary>On <c>ability_power_surge</c>.</summary>
 	public const string TechResistDebuff = "TechResistDebuff";
+	/// <summary>On <c>ability_artist_rollingprojectile</c>.</summary>
+	public const string TechResistReduction = "TechResistReduction";
 	/// <summary>On <c>citadel_ability_charged_tackle</c>.</summary>
 	public const string TechShield = "TechShield";
 	/// <summary>On <c>citadel_ability_charged_tackle</c>.</summary>
@@ -3889,6 +3929,8 @@ public static class AbilityProperties {
 	public const string TeleportHeightOffsetFromTarget = "TeleportHeightOffsetFromTarget";
 	/// <summary>On <c>upgrade_aoe_tech_shield</c>.</summary>
 	public const string TempTechShieldHealth = "TempTechShieldHealth";
+	/// <summary>On <c>ability_artist_tether</c>.</summary>
+	public const string TetherBreakRange = "TetherBreakRange";
 	/// <summary>On 5 abilities and items.</summary>
 	public const string TetherDuration = "TetherDuration";
 	/// <summary>On <c>ability_boho_channeltether</c>.</summary>
@@ -3921,9 +3963,9 @@ public static class AbilityProperties {
 	public const string ThrownObjectRadius = "ThrownObjectRadius";
 	/// <summary>On <c>ability_baba_ultimate_2</c>.</summary>
 	public const string TickDamageIncreasePerHit = "TickDamageIncreasePerHit";
-	/// <summary>On 6 abilities and items.</summary>
+	/// <summary>On 7 abilities and items.</summary>
 	public const string TickInterval = "TickInterval";
-	/// <summary>On 64 abilities and items.</summary>
+	/// <summary>On 65 abilities and items.</summary>
 	public const string TickRate = "TickRate";
 	/// <summary>On <c>yakuza_shakedown_target</c>.</summary>
 	public const string TickTime = "TickTime";
@@ -3987,7 +4029,7 @@ public static class AbilityProperties {
 	public const string TornadoSpeed = "TornadoSpeed";
 	/// <summary>On <c>citadel_ability_self_vacuum</c>, <c>citadel_ability_wrecker_garbage_suck</c>.</summary>
 	public const string TossAngle = "TossAngle";
-	/// <summary>On 4 abilities and items.</summary>
+	/// <summary>On <c>ability_bookworm_knightcharge</c>, <c>ability_chessmaster_forkpiece</c>, <c>ability_chessmaster_forkpiece_trigger</c>.</summary>
 	public const string TossBackSpeed = "TossBackSpeed";
 	/// <summary>On <c>citadel_ability_psychic_lift</c>.</summary>
 	public const string TossDistance = "TossDistance";
@@ -4005,11 +4047,9 @@ public static class AbilityProperties {
 	public const string TossSpeedUpWall = "TossSpeedUpWall";
 	/// <summary>On <c>viscous_telepunch</c>.</summary>
 	public const string TossSpeedWall = "TossSpeedWall";
-	/// <summary>On <c>ability_chessmaster_movechesspiece</c>.</summary>
-	public const string TossUpDuration = "TossUpDuration";
 	/// <summary>On <c>citadel_ability_bull_charge</c>.</summary>
 	public const string TossUpMagnitude = "TossUpMagnitude";
-	/// <summary>On 6 abilities and items.</summary>
+	/// <summary>On 5 abilities and items.</summary>
 	public const string TossUpSpeed = "TossUpSpeed";
 	/// <summary>On <c>citadel_ability_psychic_lift</c>.</summary>
 	public const string TossUpStrength = "TossUpStrength";
@@ -4241,7 +4281,7 @@ public static class AbilityProperties {
 	public const string WeaponDmgPerIsolationKill = "WeaponDmgPerIsolationKill";
 	/// <summary>On <c>citadel_ability_lash</c>.</summary>
 	public const string WeaponFireRateBonus = "WeaponFireRateBonus";
-	/// <summary>On 819 abilities and items.</summary>
+	/// <summary>On 830 abilities and items.</summary>
 	public const string WeaponPower = "WeaponPower";
 	/// <summary>On <c>citadel_ability_charged_tackle</c>, <c>thumper_ability_2</c>.</summary>
 	public const string WeaponPowerBuffDuration = "WeaponPowerBuffDuration";

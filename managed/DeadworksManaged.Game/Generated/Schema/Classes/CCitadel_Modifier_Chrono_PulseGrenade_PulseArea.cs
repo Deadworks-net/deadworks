@@ -20,5 +20,9 @@ public static partial class Schema {
 		private static readonly SchemaField __m_iPulseCount = new("CCitadel_Modifier_Chrono_PulseGrenade_PulseArea", "m_iPulseCount");
 		/// <summary><c>int32</c>.</summary>
 		public int m_iPulseCount { get => Get<int>(__m_iPulseCount); set => Set(__m_iPulseCount, value); }
+
+		private static readonly SchemaField __m_iTotalPulseCount = new("CCitadel_Modifier_Chrono_PulseGrenade_PulseArea", "m_iTotalPulseCount");
+		/// <summary><c>int32</c>.</summary>
+		public int m_iTotalPulseCount { get => Get<int>(__m_iTotalPulseCount); set => Set(__m_iTotalPulseCount, value); }
 	}
 }

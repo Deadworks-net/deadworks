@@ -20,5 +20,9 @@ public static partial class Schema {
 		private static readonly SchemaField __m_flAllyGrabCancelTime = new("CModifierAirLiftGrabVData", "m_flAllyGrabCancelTime");
 		/// <summary><c>float32</c>.</summary>
 		public float m_flAllyGrabCancelTime { get => Get<float>(__m_flAllyGrabCancelTime); set => Set(__m_flAllyGrabCancelTime, value); }
+
+		private static readonly SchemaField __m_strBombLaunchSound = new("CModifierAirLiftGrabVData", "m_strBombLaunchSound");
+		/// <summary><c>CSoundEventName</c>.</summary>
+		public string m_strBombLaunchSound => GetBufferString(__m_strBombLaunchSound);
 	}
 }

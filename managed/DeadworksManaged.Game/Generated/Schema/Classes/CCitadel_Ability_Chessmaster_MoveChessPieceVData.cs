@@ -25,13 +25,13 @@ public static partial class Schema {
 		/// <summary><c>CEmbeddedSubclass&lt;CCitadelModifier&gt;</c>.</summary>
 		public CCitadelModifierVData? m_MoveAllyModifier => EmbeddedSubclass<CCitadelModifierVData>(__m_MoveAllyModifier);
 
+		private static readonly SchemaField __m_MoveBishopModifier = new("CCitadel_Ability_Chessmaster_MoveChessPieceVData", "m_MoveBishopModifier");
+		/// <summary><c>CEmbeddedSubclass&lt;CCitadelModifier&gt;</c>.</summary>
+		public CCitadelModifierVData? m_MoveBishopModifier => EmbeddedSubclass<CCitadelModifierVData>(__m_MoveBishopModifier);
+
 		private static readonly SchemaField __m_MoveKingModifier = new("CCitadel_Ability_Chessmaster_MoveChessPieceVData", "m_MoveKingModifier");
 		/// <summary><c>CEmbeddedSubclass&lt;CCitadelModifier&gt;</c>.</summary>
 		public CCitadelModifierVData? m_MoveKingModifier => EmbeddedSubclass<CCitadelModifierVData>(__m_MoveKingModifier);
-
-		private static readonly SchemaField __m_MoveModifier = new("CCitadel_Ability_Chessmaster_MoveChessPieceVData", "m_MoveModifier");
-		/// <summary><c>CEmbeddedSubclass&lt;CCitadelModifier&gt;</c>.</summary>
-		public CCitadelModifierVData? m_MoveModifier => EmbeddedSubclass<CCitadelModifierVData>(__m_MoveModifier);
 
 		private static readonly SchemaField __m_MoveQueenModifier = new("CCitadel_Ability_Chessmaster_MoveChessPieceVData", "m_MoveQueenModifier");
 		/// <summary><c>CEmbeddedSubclass&lt;CCitadelModifier&gt;</c>.</summary>
@@ -57,6 +57,18 @@ public static partial class Schema {
 		/// <summary><c>CResourceNameTyped&lt;CWeakHandle&lt;InfoForResourceTypeIParticleSystemDefinition&gt;&gt;</c>.</summary>
 		public string m_TargetPreviewQueenParticle => GetBufferString(__m_TargetPreviewQueenParticle);
 
+		private static readonly SchemaField __m_bAllowNonSelfTarget = new("CCitadel_Ability_Chessmaster_MoveChessPieceVData", "m_bAllowNonSelfTarget");
+		/// <summary><c>bool</c>.</summary>
+		public bool m_bAllowNonSelfTarget { get => Get<bool>(__m_bAllowNonSelfTarget); set => Set(__m_bAllowNonSelfTarget, value); }
+
+		private static readonly SchemaField __m_bAllowSelfTarget = new("CCitadel_Ability_Chessmaster_MoveChessPieceVData", "m_bAllowSelfTarget");
+		/// <summary><c>bool</c>.</summary>
+		public bool m_bAllowSelfTarget { get => Get<bool>(__m_bAllowSelfTarget); set => Set(__m_bAllowSelfTarget, value); }
+
+		private static readonly SchemaField __m_bApplyMoveCooldown = new("CCitadel_Ability_Chessmaster_MoveChessPieceVData", "m_bApplyMoveCooldown");
+		/// <summary><c>bool</c>.</summary>
+		public bool m_bApplyMoveCooldown { get => Get<bool>(__m_bApplyMoveCooldown); set => Set(__m_bApplyMoveCooldown, value); }
+
 		private static readonly SchemaField __m_bCreateSatVolume = new("CCitadel_Ability_Chessmaster_MoveChessPieceVData", "m_bCreateSatVolume");
 		/// <summary><c>bool</c>.</summary>
 		public bool m_bCreateSatVolume { get => Get<bool>(__m_bCreateSatVolume); set => Set(__m_bCreateSatVolume, value); }
@@ -65,9 +77,9 @@ public static partial class Schema {
 		/// <summary><c>bool</c>.</summary>
 		public bool m_bDebug { get => Get<bool>(__m_bDebug); set => Set(__m_bDebug, value); }
 
-		private static readonly SchemaField __m_bMoveAllFixedDistance = new("CCitadel_Ability_Chessmaster_MoveChessPieceVData", "m_bMoveAllFixedDistance");
+		private static readonly SchemaField __m_bDrawUIElements = new("CCitadel_Ability_Chessmaster_MoveChessPieceVData", "m_bDrawUIElements");
 		/// <summary><c>bool</c>.</summary>
-		public bool m_bMoveAllFixedDistance { get => Get<bool>(__m_bMoveAllFixedDistance); set => Set(__m_bMoveAllFixedDistance, value); }
+		public bool m_bDrawUIElements { get => Get<bool>(__m_bDrawUIElements); set => Set(__m_bDrawUIElements, value); }
 
 		private static readonly SchemaField __m_bSweepToDestination = new("CCitadel_Ability_Chessmaster_MoveChessPieceVData", "m_bSweepToDestination");
 		/// <summary><c>bool</c>.</summary>
@@ -108,10 +120,6 @@ public static partial class Schema {
 		private static readonly SchemaField __m_mapChessAbilities = new("CCitadel_Ability_Chessmaster_MoveChessPieceVData", "m_mapChessAbilities");
 		/// <summary><c>CUtlOrderedMap&lt;EChessPieceType, CSubclassName&gt;</c>. No typed mapping yet: read it through its address.</summary>
 		public RawField m_mapChessAbilities => Raw(__m_mapChessAbilities, "CUtlOrderedMap<EChessPieceType, CSubclassName>");
-
-		private static readonly SchemaField __m_strHitConfirmSound = new("CCitadel_Ability_Chessmaster_MoveChessPieceVData", "m_strHitConfirmSound");
-		/// <summary><c>CSoundEventName</c>.</summary>
-		public string m_strHitConfirmSound => GetBufferString(__m_strHitConfirmSound);
 
 		private static readonly SchemaField __m_strMoveBishopSound = new("CCitadel_Ability_Chessmaster_MoveChessPieceVData", "m_strMoveBishopSound");
 		/// <summary><c>CSoundEventName</c>.</summary>

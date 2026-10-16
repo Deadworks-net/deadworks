@@ -13,6 +13,10 @@ public static partial class Schema {
 		static CNPC_TrooperNeutralVData ISchemaClass<CNPC_TrooperNeutralVData>.New() => new();
 		static string ISchemaClass<CNPC_TrooperNeutralVData>.NativeName => "CNPC_TrooperNeutralVData";
 
+		private static readonly SchemaField __m_AggroSound = new("CNPC_TrooperNeutralVData", "m_AggroSound");
+		/// <summary><c>CSoundEventName</c>.</summary>
+		public string m_AggroSound => GetBufferString(__m_AggroSound);
+
 		private static readonly SchemaField __m_NeutralDamageGrowth = new("CNPC_TrooperNeutralVData", "m_NeutralDamageGrowth");
 		/// <summary><c>CEmbeddedSubclass&lt;CCitadelModifier&gt;</c>.</summary>
 		public CCitadelModifierVData? m_NeutralDamageGrowth => EmbeddedSubclass<CCitadelModifierVData>(__m_NeutralDamageGrowth);
