@@ -25,10 +25,6 @@ public static partial class Schema {
 		/// <summary><c>CResourceNameTyped&lt;CWeakHandle&lt;InfoForResourceTypeIParticleSystemDefinition&gt;&gt;</c>.</summary>
 		public string m_HoverParticle => GetBufferString(__m_HoverParticle);
 
-		private static readonly SchemaField __m_LeanCurve = new("CCitadel_Modifier_MoveChessPieceVData", "m_LeanCurve");
-		/// <summary><c>CPiecewiseCurve</c>. No typed mapping yet: read it through its address.</summary>
-		public RawField m_LeanCurve => Raw(__m_LeanCurve, "CPiecewiseCurve");
-
 		private static readonly SchemaField __m_MovementCurve = new("CCitadel_Modifier_MoveChessPieceVData", "m_MovementCurve");
 		/// <summary><c>CPiecewiseCurve</c>. No typed mapping yet: read it through its address.</summary>
 		public RawField m_MovementCurve => Raw(__m_MovementCurve, "CPiecewiseCurve");

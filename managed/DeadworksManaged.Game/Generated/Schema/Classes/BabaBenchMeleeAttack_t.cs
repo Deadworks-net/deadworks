@@ -65,6 +65,10 @@ public static partial class Schema {
 		/// <summary><c>float32</c>.</summary>
 		public float m_flAttackImpulse { get => Get<float>(__m_flAttackImpulse); set => Set(__m_flAttackImpulse, value); }
 
+		private static readonly SchemaField __m_flAttackImpulseMaxUpward = new("BabaBenchMeleeAttack_t", "m_flAttackImpulseMaxUpward");
+		/// <summary><c>float32</c>.</summary>
+		public float m_flAttackImpulseMaxUpward { get => Get<float>(__m_flAttackImpulseMaxUpward); set => Set(__m_flAttackImpulseMaxUpward, value); }
+
 		private static readonly SchemaField __m_flAttackStateTime = new("BabaBenchMeleeAttack_t", "m_flAttackStateTime");
 		/// <summary><c>float32</c>.</summary>
 		public float m_flAttackStateTime { get => Get<float>(__m_flAttackStateTime); set => Set(__m_flAttackStateTime, value); }

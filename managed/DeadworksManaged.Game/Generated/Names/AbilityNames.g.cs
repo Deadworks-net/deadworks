@@ -9,6 +9,20 @@ namespace DeadworksManaged.Game;
 public static class AbilityNames {
 	/// <summary>Afterburn. Signature.</summary>
 	public const string ability_afterburn = "ability_afterburn";
+	/// <summary>Abstract Landscape. Ultimate.</summary>
+	public const string ability_artist_bamboogrove = "ability_artist_bamboogrove";
+	/// <summary>Innate.</summary>
+	public const string ability_artist_bamboogrove_trigger = "ability_artist_bamboogrove_trigger";
+	/// <summary>Living Ink. Signature.</summary>
+	public const string ability_artist_homingbrush = "ability_artist_homingbrush";
+	/// <summary>Living Ink. Weapon.</summary>
+	public const string ability_artist_pullbrush = "ability_artist_pullbrush";
+	/// <summary>Flow State. Signature.</summary>
+	public const string ability_artist_rollingprojectile = "ability_artist_rollingprojectile";
+	/// <summary>Innate.</summary>
+	public const string ability_artist_rollingprojectile_trigger = "ability_artist_rollingprojectile_trigger";
+	/// <summary>Still Life. Signature.</summary>
+	public const string ability_artist_tether = "ability_artist_tether";
 	/// <summary>Melee. Innate.</summary>
 	public const string ability_baba_bench_melee = "ability_baba_bench_melee";
 	/// <summary>Granny Long Legs. Signature.</summary>
@@ -77,6 +91,8 @@ public static class AbilityNames {
 	public const string ability_chessmaster_forkpiece_trigger = "ability_chessmaster_forkpiece_trigger";
 	/// <summary>Kingside Knight. Signature.</summary>
 	public const string ability_chessmaster_knightbuff = "ability_chessmaster_knightbuff";
+	/// <summary>Move King. Weapon.</summary>
+	public const string ability_chessmaster_knightbuff_trigger = "ability_chessmaster_knightbuff_trigger";
 	/// <summary>Move Piece. Weapon.</summary>
 	public const string ability_chessmaster_movechesspiece = "ability_chessmaster_movechesspiece";
 	/// <summary>Develop Queen. Ultimate.</summary>
@@ -257,6 +273,8 @@ public static class AbilityNames {
 	public const string ability_medic_trooper_heal = "ability_medic_trooper_heal";
 	/// <summary>Melee. Melee.</summary>
 	public const string ability_melee_archer = "ability_melee_archer";
+	/// <summary>Melee. Melee.</summary>
+	public const string ability_melee_artist = "ability_melee_artist";
 	/// <summary>Melee. Melee.</summary>
 	public const string ability_melee_astro = "ability_melee_astro";
 	/// <summary>Melee. Melee.</summary>
@@ -787,6 +805,10 @@ public static class AbilityNames {
 	public const string citadel_weapon_archer_set = "citadel_weapon_archer_set";
 	/// <summary>Weapon.</summary>
 	public const string citadel_weapon_architect_set = "citadel_weapon_architect_set";
+	/// <summary>Weapon.</summary>
+	public const string citadel_weapon_artist_projectile = "citadel_weapon_artist_projectile";
+	/// <summary>Creative Solutions. Weapon.</summary>
+	public const string citadel_weapon_artist_set = "citadel_weapon_artist_set";
 	/// <summary>Doc's Orders. Weapon.</summary>
 	public const string citadel_weapon_astro_set = "citadel_weapon_astro_set";
 	/// <summary>Bunko-Night Special. Weapon.</summary>

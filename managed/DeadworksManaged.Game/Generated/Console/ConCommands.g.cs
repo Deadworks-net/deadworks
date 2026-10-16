@@ -13,46 +13,46 @@ public static class ConCommands {
 	/// <summary>Dump a named stackstats structure to disk. Usage: stackstats_dump "structname" ["filename"]. Flags: developmentonly.</summary>
 	public static void StackStats_Dump(string arguments = "") => Run("StackStats_Dump", arguments);
 
-	/// <summary>Indicate to a test script that a checkpoint has been reached. Flags: developmentonly, defensive.</summary>
+	/// <summary>Indicate to a test script that a checkpoint has been reached. Flags: defensive, developmentonly.</summary>
 	public static void Test_Checkpoint(string arguments = "") => Run("Test_Checkpoint", arguments);
 
-	/// <summary>Flags: gamedll, cheat.</summary>
+	/// <summary>Flags: cheat, gamedll.</summary>
 	public static void Test_CreateEntity(string arguments = "") => Run("Test_CreateEntity", arguments);
 
-	/// <summary>Flags: gamedll, cheat.</summary>
+	/// <summary>Flags: cheat, gamedll.</summary>
 	public static void Test_EHandle(string arguments = "") => Run("Test_EHandle", arguments);
 
 	/// <summary>Test_ExitProcess &lt;exit code&gt; - immediately kill the process. Flags: cheat.</summary>
 	public static void Test_ExitProcess(string arguments = "") => Run("Test_ExitProcess", arguments);
 
-	/// <summary>Test_Loop &lt;loop name&gt; - loop back to the specified loop start point unconditionally. Flags: developmentonly, defensive.</summary>
+	/// <summary>Test_Loop &lt;loop name&gt; - loop back to the specified loop start point unconditionally. Flags: defensive, developmentonly.</summary>
 	public static void Test_Loop(string arguments = "") => Run("Test_Loop", arguments);
 
-	/// <summary>Test_LoopCount &lt;loop name&gt; &lt;count&gt; - loop back to the specified loop start point the specified # of times. Flags: developmentonly, defensive.</summary>
+	/// <summary>Test_LoopCount &lt;loop name&gt; &lt;count&gt; - loop back to the specified loop start point the specified # of times. Flags: defensive, developmentonly.</summary>
 	public static void Test_LoopCount(string arguments = "") => Run("Test_LoopCount", arguments);
 
-	/// <summary>Test_LoopForNumSeconds &lt;loop name&gt; &lt;time&gt; - loop back to the specified start point for the specified # of seconds. Flags: developmentonly, defensive.</summary>
+	/// <summary>Test_LoopForNumSeconds &lt;loop name&gt; &lt;time&gt; - loop back to the specified start point for the specified # of seconds. Flags: defensive, developmentonly.</summary>
 	public static void Test_LoopForNumSeconds(string arguments = "") => Run("Test_LoopForNumSeconds", arguments);
 
-	/// <summary>Test_RandomChance &lt;percent chance, 0-100&gt; &lt;token1&gt; &lt;token2...&gt; - Roll the dice and maybe run the command following the percentage chance. Flags: developmentonly, defensive.</summary>
+	/// <summary>Test_RandomChance &lt;percent chance, 0-100&gt; &lt;token1&gt; &lt;token2...&gt; - Roll the dice and maybe run the command following the percentage chance. Flags: defensive, developmentonly.</summary>
 	public static void Test_RandomChance(string arguments = "") => Run("Test_RandomChance", arguments);
 
-	/// <summary>Flags: gamedll, cheat.</summary>
+	/// <summary>Flags: cheat, gamedll.</summary>
 	public static void Test_RandomPlayerPosition(string arguments = "") => Run("Test_RandomPlayerPosition", arguments);
 
-	/// <summary>Test_StartLoop &lt;loop name&gt; - Denote the start of a loop. Really just defines a named point you can jump to. Flags: developmentonly, defensive.</summary>
+	/// <summary>Test_StartLoop &lt;loop name&gt; - Denote the start of a loop. Really just defines a named point you can jump to. Flags: defensive, developmentonly.</summary>
 	public static void Test_StartLoop(string arguments = "") => Run("Test_StartLoop", arguments);
 
-	/// <summary>Start a test script running. Flags: developmentonly, defensive.</summary>
+	/// <summary>Start a test script running. Flags: defensive, developmentonly.</summary>
 	public static void Test_StartScript(string arguments = "") => Run("Test_StartScript", arguments);
 
 	/// <summary>Record a demo incrementally. Flags: cheat, dontrecord, release.</summary>
 	public static void _record(string arguments = "") => Run("_record", arguments);
 
-	/// <summary>Add an IP address to the ban list. Flags: developmentonly, defensive.</summary>
+	/// <summary>Add an IP address to the ban list. Flags: defensive, developmentonly.</summary>
 	public static void addip(string arguments = "") => Run("addip", arguments);
 
-	/// <summary>list current addon info. Flags: developmentonly, defensive.</summary>
+	/// <summary>list current addon info. Flags: defensive, developmentonly.</summary>
 	public static void addons(string arguments = "") => Run("addons", arguments);
 
 	/// <summary>List adjacent levels. Flags: developmentonly, gamedll.</summary>
@@ -61,37 +61,37 @@ public static class ConCommands {
 	/// <summary>Preload adjacennt level data - will override regular changelevel code -- PROTOTYPE/WIP. Flags: developmentonly, gamedll.</summary>
 	public static void adjacent_preload(string arguments = "") => Run("adjacent_preload", arguments);
 
-	/// <summary>Bi-passes all AI logic routines and puts all NPCs into their idle animations. Can be used to get NPCs out of your way and to test effect of AI logic routines on frame rate. Flags: gamedll, cheat.</summary>
+	/// <summary>Bi-passes all AI logic routines and puts all NPCs into their idle animations. Can be used to get NPCs out of your way and to test effect of AI logic routines on frame rate. Flags: cheat, gamedll.</summary>
 	public static void ai_disable(string arguments = "") => Run("ai_disable", arguments);
 
-	/// <summary>Drop an ai_hint at the player's current eye position. Flags: gamedll, cheat.</summary>
+	/// <summary>Drop an ai_hint at the player's current eye position. Flags: cheat, gamedll.</summary>
 	public static void ai_drop_hint(string arguments = "") => Run("ai_drop_hint", arguments);
 
-	/// <summary>Flags: developmentonly, gamedll, defensive.</summary>
+	/// <summary>Flags: defensive, developmentonly, gamedll.</summary>
 	public static void ai_dump_hints(string arguments = "") => Run("ai_dump_hints", arguments);
 
-	/// <summary>If NPC is stepping through tasks (see ai_step ) will resume normal processing. Flags: gamedll, cheat.</summary>
+	/// <summary>If NPC is stepping through tasks (see ai_step ) will resume normal processing. Flags: cheat, gamedll.</summary>
 	public static void ai_resume(string arguments = "") => Run("ai_resume", arguments);
 
-	/// <summary>Set how high AI bumps up ground walkers when checking steps. Flags: developmentonly, gamedll, defensive.</summary>
+	/// <summary>Set how high AI bumps up ground walkers when checking steps. Flags: defensive, developmentonly, gamedll.</summary>
 	public static void ai_set_move_height_epsilon(string arguments = "") => Run("ai_set_move_height_epsilon", arguments);
 
-	/// <summary>Like ai_disable but you manually specify the state (with a 0 or 1) instead of toggling it. Flags: gamedll, cheat.</summary>
+	/// <summary>Like ai_disable but you manually specify the state (with a 0 or 1) instead of toggling it. Flags: cheat, gamedll.</summary>
 	public static void ai_setenabled(string arguments = "") => Run("ai_setenabled", arguments);
 
-	/// <summary>Displays all hints as small boxes Blue - hint is available for use Red - hint is currently being used by an NPC Orange - hint not being used by timed out Grey - hint has been disabled. Flags: gamedll, cheat.</summary>
+	/// <summary>Displays all hints as small boxes Blue - hint is available for use Red - hint is currently being used by an NPC Orange - hint not being used by timed out Grey - hint has been disabled. Flags: cheat, gamedll.</summary>
 	public static void ai_show_hints(string arguments = "") => Run("ai_show_hints", arguments);
 
-	/// <summary>NPCs will freeze after completing their current task. To complete the next task, use 'ai_step' again. To resume processing normally use 'ai_resume'. Flags: gamedll, cheat.</summary>
+	/// <summary>NPCs will freeze after completing their current task. To complete the next task, use 'ai_step' again. To resume processing normally use 'ai_resume'. Flags: cheat, gamedll.</summary>
 	public static void ai_step(string arguments = "") => Run("ai_step", arguments);
 
-	/// <summary>Test AI LOS from the player's POV. Flags: developmentonly, gamedll, defensive.</summary>
+	/// <summary>Test AI LOS from the player's POV. Flags: defensive, developmentonly, gamedll.</summary>
 	public static void ai_test_los_from_player_pov(string arguments = "") => Run("ai_test_los_from_player_pov", arguments);
 
-	/// <summary>Generate a report to the console. Flags: developmentonly, gamedll, defensive.</summary>
+	/// <summary>Generate a report to the console. Flags: defensive, developmentonly, gamedll.</summary>
 	public static void ainet_generate_report(string arguments = "") => Run("ainet_generate_report", arguments);
 
-	/// <summary>Generate a report to the console. Flags: developmentonly, gamedll, defensive.</summary>
+	/// <summary>Generate a report to the console. Flags: defensive, developmentonly, gamedll.</summary>
 	public static void ainet_generate_report_only(string arguments = "") => Run("ainet_generate_report_only", arguments);
 
 	/// <summary>Alias a command. Flags: release.</summary>
@@ -100,31 +100,34 @@ public static class ConCommands {
 	/// <summary>Displays stats about how many EvaluatePose calls are unused. Flags: developmentonly, gamedll.</summary>
 	public static void anim_eval_stats(string arguments = "") => Run("anim_eval_stats", arguments);
 
-	/// <summary>List all the currently registered anim events.. Flags: gamedll, cheat.</summary>
+	/// <summary>List all the currently registered anim events. Flags: cheat, gamedll.</summary>
 	public static void animevents_dump(string arguments = "") => Run("animevents_dump", arguments);
 
 	/// <summary>Displays stats about which animations are updating. Flags: developmentonly, gamedll.</summary>
 	public static void animgraph_dump_update_list(string arguments = "") => Run("animgraph_dump_update_list", arguments);
 
-	/// <summary>auto_bug : create non-interactive bug report. Flags: developmentonly, dontrecord, defensive.</summary>
+	/// <summary>Clear thumbnail cache. Flags: defensive, developmentonly.</summary>
+	public static void assetsystem_clear_thumbnail_cache(string arguments = "") => Run("assetsystem_clear_thumbnail_cache", arguments);
+
+	/// <summary>auto_bug : create non-interactive bug report. Flags: defensive, developmentonly, dontrecord.</summary>
 	public static void auto_bug(string arguments = "") => Run("auto_bug", arguments);
 
-	/// <summary>Autosave. Flags: developmentonly, gamedll, defensive.</summary>
+	/// <summary>Autosave. Flags: defensive, developmentonly, gamedll.</summary>
 	public static void autosave(string arguments = "") => Run("autosave", arguments);
 
-	/// <summary>AutoSaveDangerous. Flags: developmentonly, gamedll, defensive.</summary>
+	/// <summary>AutoSaveDangerous. Flags: defensive, developmentonly, gamedll.</summary>
 	public static void autosavedangerous(string arguments = "") => Run("autosavedangerous", arguments);
 
-	/// <summary>Flags: developmentonly, gamedll, defensive.</summary>
+	/// <summary>Flags: defensive, developmentonly, gamedll.</summary>
 	public static void autosavedangerousissafe(string arguments = "") => Run("autosavedangerousissafe", arguments);
 
-	/// <summary>Draw an axis Arguments: x y z pitch yaw roll &lt;lifetime = 10.0&gt; &lt;r g b a&gt;. Flags: gamedll, cheat.</summary>
+	/// <summary>Draw an axis Arguments: x y z pitch yaw roll &lt;lifetime = 10.0&gt; &lt;r g b a&gt;. Flags: cheat, gamedll.</summary>
 	public static void axis(string arguments = "") => Run("axis", arguments);
 
-	/// <summary>Add a user ID to the ban list. Flags: developmentonly, defensive.</summary>
+	/// <summary>Add a user ID to the ban list. Flags: defensive, developmentonly.</summary>
 	public static void banid(string arguments = "") => Run("banid", arguments);
 
-	/// <summary>Add an IP address to the ban list. Flags: developmentonly, defensive.</summary>
+	/// <summary>Add an IP address to the ban list. Flags: defensive, developmentonly.</summary>
 	public static void banip(string arguments = "") => Run("banip", arguments);
 
 	/// <summary>Takes a snapshot of a particular frame in a time demo. Flags: release.</summary>
@@ -139,145 +142,145 @@ public static class ConCommands {
 	/// <summary>Bind a key for a particular splitscreen player. Flags: release.</summary>
 	public static void bindss(string arguments = "") => Run("bindss", arguments);
 
-	/// <summary>Performs a bind &lt;key&gt; "increment var &lt;cvar&gt; 0 1 1". Flags: developmentonly, defensive.</summary>
+	/// <summary>Performs a bind &lt;key&gt; "increment var &lt;cvar&gt; 0 1 1". Flags: defensive, developmentonly.</summary>
 	public static void bindtoggle(string arguments = "") => Run("bindtoggle", arguments);
 
-	/// <summary>Blink specified convar value between two values at the specified duration. Flags: developmentonly, dontrecord, defensive.</summary>
+	/// <summary>Blink specified convar value between two values at the specified duration. Flags: defensive, developmentonly, dontrecord.</summary>
 	public static void blink(string arguments = "") => Run("blink", arguments);
 
-	/// <summary>&lt;bot name&gt; &lt;command string...&gt;. Sends specified command to one or more player bots: [all], [east/west], [bot name]. Flags: developmentonly, gamedll, defensive.</summary>
+	/// <summary>&lt;bot name&gt; &lt;command string...&gt;. Sends specified command to one or more player bots: [all], [east/west], [bot name]. Flags: defensive, developmentonly, gamedll.</summary>
 	public static void bot_command(string arguments = "") => Run("bot_command", arguments);
 
-	/// <summary>Sends specified command to target bot under reticle. Flags: gamedll, cheat, release.</summary>
+	/// <summary>Sends specified command to target bot under reticle. Flags: cheat, release, gamedll.</summary>
 	public static void bot_command_target(string arguments = "") => Run("bot_command_target", arguments);
 
-	/// <summary>Make all the bots get on nearby ziplines. Flags: developmentonly, gamedll, defensive.</summary>
+	/// <summary>Make all the bots get on nearby ziplines. Flags: defensive, developmentonly, gamedll.</summary>
 	public static void bot_force_zipline(string arguments = "") => Run("bot_force_zipline", arguments);
 
-	/// <summary>Kick all the bots. Flags: gamedll, cheat, client_can_execute.</summary>
+	/// <summary>Kick all the bots. Flags: cheat, client_can_execute, gamedll.</summary>
 	public static void bot_kick_all(string arguments = "") => Run("bot_kick_all", arguments);
 
-	/// <summary>Selects the targeted bot for mimicking. Flags: gamedll, cheat, client_can_execute.</summary>
+	/// <summary>Selects the targeted bot for mimicking. Flags: cheat, client_can_execute, gamedll.</summary>
 	public static void bot_mimic_target(string arguments = "") => Run("bot_mimic_target", arguments);
 
-	/// <summary>Selects the targeted bot for puppeteering. Flags: gamedll, cheat, client_can_execute.</summary>
+	/// <summary>Selects the targeted bot for puppeteering. Flags: cheat, client_can_execute, gamedll.</summary>
 	public static void bot_puppet_target(string arguments = "") => Run("bot_puppet_target", arguments);
 
-	/// <summary>Selects the targeted bot for puppeteering. Flags: gamedll, cheat, client_can_execute.</summary>
+	/// <summary>Selects the targeted bot for puppeteering. Flags: cheat, client_can_execute, gamedll.</summary>
 	public static void bot_record_target(string arguments = "") => Run("bot_record_target", arguments);
 
-	/// <summary>Draw a bbox Arguments: minx miny miny maxx maxy maxz &lt;lifetime = 10.0&gt; &lt;r g b a&gt;. Flags: gamedll, cheat.</summary>
+	/// <summary>Draw a bbox Arguments: minx miny miny maxx maxy maxz &lt;lifetime = 10.0&gt; &lt;r g b a&gt;. Flags: cheat, gamedll.</summary>
 	public static void box(string arguments = "") => Run("box", arguments);
 
-	/// <summary>Force a breakable to break. Flags: developmentonly, gamedll, defensive.</summary>
+	/// <summary>Force a breakable to break. Flags: defensive, developmentonly, gamedll.</summary>
 	public static void breakable_force_break(string arguments = "") => Run("breakable_force_break", arguments);
 
-	/// <summary>bug [auto_fill_tokens] [-title &lt;text&gt;] [-noscreenshot] : Activate the bug reporter. Flags: developmentonly, dontrecord, defensive.</summary>
+	/// <summary>bug [auto_fill_tokens] [-title &lt;text&gt;] [-noscreenshot] : Activate the bug reporter. Flags: defensive, developmentonly, dontrecord.</summary>
 	public static void bug(string arguments = "") => Run("bug", arguments);
 
-	/// <summary>Clear voice attachment data. Flags: developmentonly, dontrecord, defensive.</summary>
+	/// <summary>Clear voice attachment data. Flags: defensive, developmentonly, dontrecord.</summary>
 	public static void bugvoice_clear(string arguments = "") => Run("bugvoice_clear", arguments);
 
-	/// <summary>Write buffered voice attachment data to file. Flags: developmentonly, dontrecord, defensive.</summary>
+	/// <summary>Write buffered voice attachment data to file. Flags: defensive, developmentonly, dontrecord.</summary>
 	public static void bugvoice_save(string arguments = "") => Run("bugvoice_save", arguments);
 
 	/// <summary>Display information about the specified key or button. Flags: release.</summary>
 	public static void button_info(string arguments = "") => Run("button_info", arguments);
 
-	/// <summary>Tests box collision detection. Flags: gamedll, cheat.</summary>
+	/// <summary>Tests box collision detection. Flags: cheat, gamedll.</summary>
 	public static void cast_aabb(string arguments = "") => Run("cast_aabb", arguments);
 
-	/// <summary>Tests capsule collision detection. Flags: gamedll, cheat.</summary>
+	/// <summary>Tests capsule collision detection. Flags: cheat, gamedll.</summary>
 	public static void cast_capsule(string arguments = "") => Run("cast_capsule", arguments);
 
-	/// <summary>Tests convex hull collision detection. Flags: gamedll, cheat.</summary>
+	/// <summary>Tests convex hull collision detection. Flags: cheat, gamedll.</summary>
 	public static void cast_convex(string arguments = "") => Run("cast_convex", arguments);
 
-	/// <summary>Tests cylinder collision detection. Flags: gamedll, cheat.</summary>
+	/// <summary>Tests cylinder collision detection. Flags: cheat, gamedll.</summary>
 	public static void cast_cylinder(string arguments = "") => Run("cast_cylinder", arguments);
 
-	/// <summary>Tests interval ray cast. Flags: gamedll, cheat.</summary>
+	/// <summary>Tests interval ray cast. Flags: cheat, gamedll.</summary>
 	public static void cast_intervals(string arguments = "") => Run("cast_intervals", arguments);
 
-	/// <summary>Tests cylinder collision detection. Flags: gamedll, cheat.</summary>
+	/// <summary>Tests cylinder collision detection. Flags: cheat, gamedll.</summary>
 	public static void cast_obb(string arguments = "") => Run("cast_obb", arguments);
 
-	/// <summary>Tests physics shape collision detection. Flags: gamedll, cheat.</summary>
+	/// <summary>Tests physics shape collision detection. Flags: cheat, gamedll.</summary>
 	public static void cast_physics(string arguments = "") => Run("cast_physics", arguments);
 
-	/// <summary>Tests ray cast. Flags: gamedll, cheat.</summary>
+	/// <summary>Tests ray cast. Flags: cheat, gamedll.</summary>
 	public static void cast_ray(string arguments = "") => Run("cast_ray", arguments);
 
-	/// <summary>Tests sphere cast. Flags: gamedll, cheat.</summary>
+	/// <summary>Tests sphere cast. Flags: cheat, gamedll.</summary>
 	public static void cast_sphere(string arguments = "") => Run("cast_sphere", arguments);
 
 	/// <summary>changelevel &lt;mapname&gt; :Multiplayer change level. Flags: release.</summary>
 	public static void changelevel(string arguments = "") => Run("changelevel", arguments);
 
-	/// <summary>Print the current number of FDs reported by getrlimit. Flags: developmentonly, defensive.</summary>
+	/// <summary>Print the current number of FDs reported by getrlimit. Flags: defensive, developmentonly.</summary>
 	public static void check_nofilefd(string arguments = "") => Run("check_nofilefd", arguments);
 
 	/// <summary>Run UTIL_FindUnitsInRadius centered around. Flags: developmentonly, gamedll.</summary>
 	public static void citadel_FindUnitsInRadius(string arguments = "") => Run("citadel_FindUnitsInRadius", arguments);
 
-	/// <summary>Print per-ability active window transition counts and dwell times. Use citadel_ability_active_reset_stats to clear. Flags: developmentonly, gamedll, cheat.</summary>
+	/// <summary>Print per-ability active window transition counts and dwell times. Use citadel_ability_active_reset_stats to clear. Flags: cheat, developmentonly, gamedll.</summary>
 	public static void citadel_ability_active_report(string arguments = "") => Run("citadel_ability_active_report", arguments);
 
-	/// <summary>Clear the counters printed by citadel_ability_active_report. Flags: developmentonly, gamedll, cheat.</summary>
+	/// <summary>Clear the counters printed by citadel_ability_active_report. Flags: cheat, developmentonly, gamedll.</summary>
 	public static void citadel_ability_active_reset_stats(string arguments = "") => Run("citadel_ability_active_reset_stats", arguments);
 
-	/// <summary>Print ability MODIFIER_VALUE contributions recorded while the ability was untrained or inactive. Use citadel_ability_activeness_reset_stats to clear. Flags: developmentonly, gamedll, defensive.</summary>
+	/// <summary>Print ability MODIFIER_VALUE contributions recorded while the ability was untrained or inactive. Use citadel_ability_activeness_reset_stats to clear. Flags: defensive, developmentonly, gamedll.</summary>
 	public static void citadel_ability_activeness_report(string arguments = "") => Run("citadel_ability_activeness_report", arguments);
 
-	/// <summary>Clear the counters printed by citadel_ability_activeness_report. Flags: developmentonly, gamedll, defensive.</summary>
+	/// <summary>Clear the counters printed by citadel_ability_activeness_report. Flags: defensive, developmentonly, gamedll.</summary>
 	public static void citadel_ability_activeness_reset_stats(string arguments = "") => Run("citadel_ability_activeness_reset_stats", arguments);
 
-	/// <summary>Makes the CPs for a team available to capture. Flags: gamedll, cheat.</summary>
+	/// <summary>Makes the CPs for a team available to capture. Flags: cheat, gamedll.</summary>
 	public static void citadel_activate_cps_for_team(string arguments = "") => Run("citadel_activate_cps_for_team", arguments);
 
-	/// <summary>Take control of the pawn under the crosshair, or by name if specified. Flags: gamedll, cheat, client_can_execute.</summary>
+	/// <summary>Take control of the pawn under the crosshair, or by name if specified. Flags: cheat, client_can_execute, gamedll.</summary>
 	public static void citadel_assume_pawn_control(string arguments = "") => Run("citadel_assume_pawn_control", arguments);
 
-	/// <summary>Respawns the boss. Flags: gamedll, cheat.</summary>
+	/// <summary>Respawns the boss. Flags: cheat, gamedll.</summary>
 	public static void citadel_boss_tier_3_testing_reset(string arguments = "") => Run("citadel_boss_tier_3_testing_reset", arguments);
 
-	/// <summary>Copy a bot's recorded commands to the clipboard as a share code (aim at the bot, or the first bot with a recording). Flags: gamedll, cheat, client_can_execute.</summary>
+	/// <summary>Copy a bot's recorded commands to the clipboard as a share code (aim at the bot, or the first bot with a recording). Flags: cheat, client_can_execute, gamedll.</summary>
 	public static void citadel_bot_copyrecording(string arguments = "") => Run("citadel_bot_copyrecording", arguments);
 
-	/// <summary>Force bot into the abandon state. Flags: developmentonly, gamedll, defensive.</summary>
+	/// <summary>Force bot into the abandon state. Flags: defensive, developmentonly, gamedll.</summary>
 	public static void citadel_bot_force_abandon(string arguments = "") => Run("citadel_bot_force_abandon", arguments);
 
-	/// <summary>Gives all bots all abilities. Use with citadel_bot_use_ability 1-4. Flags: gamedll, cheat, release.</summary>
+	/// <summary>Gives all bots all abilities. Use with citadel_bot_use_ability 1-4. Flags: cheat, release, gamedll.</summary>
 	public static void citadel_bot_give_all_abilities(string arguments = "") => Run("citadel_bot_give_all_abilities", arguments);
 
-	/// <summary>Gives all bots all abilities without perks. Use with citadel_bot_use_ability 1-4. Flags: developmentonly, gamedll, defensive.</summary>
+	/// <summary>Gives all bots all abilities without perks. Use with citadel_bot_use_ability 1-4. Flags: defensive, developmentonly, gamedll.</summary>
 	public static void citadel_bot_give_all_abilities_base(string arguments = "") => Run("citadel_bot_give_all_abilities_base", arguments);
 
-	/// <summary>Gives all bots all items. Not limited by slot count (last I checked, this resulted in ~200 items being added to every bot). Flags: developmentonly, gamedll, defensive.</summary>
+	/// <summary>Gives all bots all items. Not limited by slot count (last I checked, this resulted in ~200 items being added to every bot). Flags: defensive, developmentonly, gamedll.</summary>
 	public static void citadel_bot_give_all_bots_all_items(string arguments = "") => Run("citadel_bot_give_all_bots_all_items", arguments);
 
-	/// <summary>Give all bots on a particular team gold. Flags: gamedll, cheat.</summary>
+	/// <summary>Give all bots on a particular team gold. Flags: cheat, gamedll.</summary>
 	public static void citadel_bot_give_team_gold(string arguments = "") => Run("citadel_bot_give_team_gold", arguments);
 
-	/// <summary>Kick bot &lt;name&gt;. Flags: developmentonly, gamedll, defensive.</summary>
+	/// <summary>Kick bot &lt;name&gt;. Flags: defensive, developmentonly, gamedll.</summary>
 	public static void citadel_bot_kick(string arguments = "") => Run("citadel_bot_kick", arguments);
 
-	/// <summary>List ent id of all players that are bots in this game. Flags: gamedll, cheat.</summary>
+	/// <summary>List ent id of all players that are bots in this game. Flags: cheat, gamedll.</summary>
 	public static void citadel_bot_list_ents(string arguments = "") => Run("citadel_bot_list_ents", arguments);
 
-	/// <summary>List all entities that are associated with a Citadel Game Objective. Flags: gamedll, cheat.</summary>
+	/// <summary>List all entities that are associated with a Citadel Game Objective. Flags: cheat, gamedll.</summary>
 	public static void citadel_bot_list_objectives_ent(string arguments = "") => Run("citadel_bot_list_objectives_ent", arguments);
 
-	/// <summary>Load a bot recording share code from the clipboard. Aim at a bot to load it into that bot as the recorded hero, otherwise a new bot of that hero is spawned. Flags: gamedll, cheat, client_can_execute.</summary>
+	/// <summary>Load a bot recording share code from the clipboard. Aim at a bot to load it into that bot as the recorded hero, otherwise a new bot of that hero is spawned. Flags: cheat, client_can_execute, gamedll.</summary>
 	public static void citadel_bot_pasterecording(string arguments = "") => Run("citadel_bot_pasterecording", arguments);
 
-	/// <summary>Play back commands recorded via 'citadel_bot_record'. Flags: gamedll, cheat, client_can_execute.</summary>
+	/// <summary>Play back commands recorded via 'citadel_bot_record'. Flags: cheat, client_can_execute, gamedll.</summary>
 	public static void citadel_bot_playrecording(string arguments = "") => Run("citadel_bot_playrecording", arguments);
 
-	/// <summary>Makes the bots purchase a random draft option. Flags: developmentonly, gamedll, defensive.</summary>
+	/// <summary>Makes the bots purchase a random draft option. Flags: defensive, developmentonly, gamedll.</summary>
 	public static void citadel_bot_purchase_random_draft_option(string arguments = "") => Run("citadel_bot_purchase_random_draft_option", arguments);
 
-	/// <summary>Stop bot recording and any bot recording playback. Flags: gamedll, cheat, client_can_execute.</summary>
+	/// <summary>Stop bot recording and any bot recording playback. Flags: cheat, client_can_execute, gamedll.</summary>
 	public static void citadel_bot_recordstop(string arguments = "") => Run("citadel_bot_recordstop", arguments);
 
 	/// <summary>Run a gun DPS test and record the results usage: &lt;hero_target&gt;. Flags: developmentonly, gamedll.</summary>
@@ -289,250 +292,250 @@ public static class ConCommands {
 	/// <summary>Causes bots to teleport to bot test nodes and shoot at an assigned target usage: &lt;hero_shooter&gt; &lt;hero_target&gt;. Flags: developmentonly, gamedll.</summary>
 	public static void citadel_bot_run_shooting_test(string arguments = "") => Run("citadel_bot_run_shooting_test", arguments);
 
-	/// <summary>Ends hero draft mode and goes straight to playing the game. Flags: developmentonly, gamedll, defensive.</summary>
+	/// <summary>Ends hero draft mode and goes straight to playing the game. Flags: defensive, developmentonly, gamedll.</summary>
 	public static void citadel_cancel_hero_draft(string arguments = "") => Run("citadel_cancel_hero_draft", arguments);
 
-	/// <summary>Re-lays the pickup trail on every catapult that has one, clearing the old pickups first. Flags: gamedll, cheat, release.</summary>
+	/// <summary>Re-lays the pickup trail on every catapult that has one, clearing the old pickups first. Flags: cheat, release, gamedll.</summary>
 	public static void citadel_catapult_respawn_pickup_trails(string arguments = "") => Run("citadel_catapult_respawn_pickup_trails", arguments);
 
-	/// <summary>citadel_clear_killstreak [player_slot]. Flags: developmentonly, gamedll, defensive.</summary>
+	/// <summary>citadel_clear_killstreak [player_slot]. Flags: defensive, developmentonly, gamedll.</summary>
 	public static void citadel_clear_killstreak(string arguments = "") => Run("citadel_clear_killstreak", arguments);
 
-	/// <summary>Flags: developmentonly, gamedll, defensive.</summary>
+	/// <summary>Flags: defensive, developmentonly, gamedll.</summary>
 	public static void citadel_combatlog_size_server(string arguments = "") => Run("citadel_combatlog_size_server", arguments);
 
-	/// <summary>Send combat log to a client. Flags: gamedll, client_can_execute.</summary>
+	/// <summary>Send combat log to a client. Flags: client_can_execute, gamedll.</summary>
 	public static void citadel_combatlog_update(string arguments = "") => Run("citadel_combatlog_update", arguments);
 
-	/// <summary>[hero_name | none] [team] - Creates an unit. Pass 'my_hero' as hero_name to use your current hero. Flags: gamedll, vconsole_fuzzy_matching, client_can_execute.</summary>
+	/// <summary>[hero_name | none] [team] - Creates an unit. Pass 'my_hero' as hero_name to use your current hero. Flags: client_can_execute, vconsole_fuzzy_matching, gamedll.</summary>
 	public static void citadel_create_unit(string arguments = "") => Run("citadel_create_unit", arguments);
 
-	/// <summary>Kills all the guardians. Flags: developmentonly, gamedll, defensive.</summary>
+	/// <summary>Kills all the guardians. Flags: defensive, developmentonly, gamedll.</summary>
 	public static void citadel_destroy_all_bosses(string arguments = "") => Run("citadel_destroy_all_bosses", arguments);
 
-	/// <summary>Kills all bosses and troopers in the map. Flags: developmentonly, gamedll, defensive.</summary>
+	/// <summary>Kills all bosses and troopers in the map. Flags: defensive, developmentonly, gamedll.</summary>
 	public static void citadel_destroy_all_npcs(string arguments = "") => Run("citadel_destroy_all_npcs", arguments);
 
-	/// <summary>Set the Map to test End game content. Flags: gamedll, cheat, release, client_can_execute.</summary>
+	/// <summary>Set the Map to test End game content. Flags: cheat, client_can_execute, release, gamedll.</summary>
 	public static void citadel_dev_test_endgame_server_cmd(string arguments = "") => Run("citadel_dev_test_endgame_server_cmd", arguments);
 
-	/// <summary>Disable usage of Duplicate Heroes. Flags: gamedll, cheat, release, client_can_execute.</summary>
+	/// <summary>Disable usage of Duplicate Heroes. Flags: cheat, client_can_execute, release, gamedll.</summary>
 	public static void citadel_disable_duplicate_heroes(string arguments = "") => Run("citadel_disable_duplicate_heroes", arguments);
 
-	/// <summary>Draws a path between two coordinates. Flags: developmentonly, gamedll, defensive.</summary>
+	/// <summary>Draws a path between two coordinates. Flags: defensive, developmentonly, gamedll.</summary>
 	public static void citadel_draw_trooper_path(string arguments = "") => Run("citadel_draw_trooper_path", arguments);
 
-	/// <summary>dump all bullet info to the console. Flags: developmentonly, gamedll, client_can_execute.</summary>
+	/// <summary>dump all bullet info to the console. Flags: client_can_execute, developmentonly, gamedll.</summary>
 	public static void citadel_dump_bullets(string arguments = "") => Run("citadel_dump_bullets", arguments);
 
-	/// <summary>Dumps every corrupted item's penalty exclusions, fixed bonuses and integer-rounded bonuses. Flags: gamedll, release.</summary>
+	/// <summary>Dumps every corrupted item's penalty exclusions, fixed bonuses and integer-rounded bonuses. Flags: release, gamedll.</summary>
 	public static void citadel_dump_corrupted_overrides(string arguments = "") => Run("citadel_dump_corrupted_overrides", arguments);
 
-	/// <summary>Dumps the corrupted item penalty rolled for every corruptible item this match. Flags: developmentonly, gamedll, defensive.</summary>
+	/// <summary>Dumps the corrupted item penalty rolled for every corruptible item this match. Flags: defensive, developmentonly, gamedll.</summary>
 	public static void citadel_dump_corrupted_penalties(string arguments = "") => Run("citadel_dump_corrupted_penalties", arguments);
 
-	/// <summary>Dumps current state of the game and all players. Flags: developmentonly, gamedll, defensive.</summary>
+	/// <summary>Dumps current state of the game and all players. Flags: defensive, developmentonly, gamedll.</summary>
 	public static void citadel_dump_game_state(string arguments = "") => Run("citadel_dump_game_state", arguments);
 
-	/// <summary>Enable usage of Duplicate Heroes. Flags: gamedll, cheat, release, client_can_execute.</summary>
+	/// <summary>Enable usage of Duplicate Heroes. Flags: cheat, client_can_execute, release, gamedll.</summary>
 	public static void citadel_enable_duplicate_heroes(string arguments = "") => Run("citadel_enable_duplicate_heroes", arguments);
 
-	/// <summary>Enables the first capture point found within 20m. Flags: gamedll, cheat, release.</summary>
+	/// <summary>Enables the first capture point found within 20m. Flags: cheat, release, gamedll.</summary>
 	public static void citadel_enable_nearby_capture_point(string arguments = "") => Run("citadel_enable_nearby_capture_point", arguments);
 
-	/// <summary>Draws the LOS check generated by our fibonacci sphere trace algorithm. Flags: gamedll, cheat.</summary>
+	/// <summary>Draws the LOS check generated by our fibonacci sphere trace algorithm. Flags: cheat, gamedll.</summary>
 	public static void citadel_fibonacci_sphere_trace(string arguments = "") => Run("citadel_fibonacci_sphere_trace", arguments);
 
-	/// <summary>Request a flame graph dump. Flags: gamedll, cheat, release, client_can_execute.</summary>
+	/// <summary>Request a flame graph dump. Flags: cheat, client_can_execute, release, gamedll.</summary>
 	public static void citadel_flame_graph_request(string arguments = "") => Run("citadel_flame_graph_request", arguments);
 
-	/// <summary>Kill every unit of one type: troopers, neutrals, breakables, healing_snacks, guardians, walkers, base_guardians, shrines. Flags: gamedll, cheat, release.</summary>
+	/// <summary>Kill every unit of one type: troopers, neutrals, breakables, healing_snacks, guardians, walkers, base_guardians, shrines. Flags: cheat, release, gamedll.</summary>
 	public static void citadel_force_kill(string arguments = "") => Run("citadel_force_kill", arguments);
 
-	/// <summary>Force Spawning Koth Capture point with Warning. Flags: gamedll, cheat, release, client_can_execute.</summary>
+	/// <summary>Force Spawning Koth Capture point with Warning. Flags: cheat, client_can_execute, release, gamedll.</summary>
 	public static void citadel_force_koth_spawn(string arguments = "") => Run("citadel_force_koth_spawn", arguments);
 
-	/// <summary>Force all abilities to call OnUpgrade(). Flags: developmentonly, gamedll, defensive.</summary>
+	/// <summary>Force all abilities to call OnUpgrade(). Flags: defensive, developmentonly, gamedll.</summary>
 	public static void citadel_force_on_upgrade_for_all_abilities(string arguments = "") => Run("citadel_force_on_upgrade_for_all_abilities", arguments);
 
 	/// <summary>Force begin play of the game. Flags: developmentonly, gamedll.</summary>
 	public static void citadel_force_playofthegame(string arguments = "") => Run("citadel_force_playofthegame", arguments);
 
-	/// <summary>Force idol spawn. Flags: gamedll, cheat, release, client_can_execute.</summary>
+	/// <summary>Force idol spawn. Flags: cheat, client_can_execute, release, gamedll.</summary>
 	public static void citadel_force_spawn_idol(string arguments = "") => Run("citadel_force_spawn_idol", arguments);
 
-	/// <summary>&lt;gold&gt; [unsecure=0|1] Give gold value to all players. Flags: gamedll, cheat, client_can_execute.</summary>
+	/// <summary>&lt;gold&gt; [unsecure=0|1] Give gold value to all players. Flags: cheat, client_can_execute, gamedll.</summary>
 	public static void citadel_give_gold(string arguments = "") => Run("citadel_give_gold", arguments);
 
-	/// <summary>Gives you N random breakable permanent buffs at once, the same way a Sinner's Sacrifice jackpot does. Usage: citadel_give_permanent_buffs &lt;count&gt;. Flags: gamedll, cheat, release.</summary>
+	/// <summary>Gives you N random breakable permanent buffs at once, the same way a Sinner's Sacrifice jackpot does. Usage: citadel_give_permanent_buffs &lt;count&gt;. Flags: cheat, release, gamedll.</summary>
 	public static void citadel_give_permanent_buffs(string arguments = "") => Run("citadel_give_permanent_buffs", arguments);
 
-	/// <summary>&lt;player name&gt; &lt;gold&gt; Gives the specified player gold. Flags: gamedll, cheat, client_can_execute.</summary>
+	/// <summary>&lt;player name&gt; &lt;gold&gt; Gives the specified player gold. Flags: cheat, client_can_execute, gamedll.</summary>
 	public static void citadel_give_player_gold(string arguments = "") => Run("citadel_give_player_gold", arguments);
 
-	/// <summary>&lt;line&gt; makes the guide bot say the specified line. Flags: developmentonly, gamedll, defensive.</summary>
+	/// <summary>&lt;line&gt; makes the guide bot say the specified line. Flags: defensive, developmentonly, gamedll.</summary>
 	public static void citadel_guide_bot_say(string arguments = "") => Run("citadel_guide_bot_say", arguments);
 
-	/// <summary>Restore the unit under your crosshair to full health. Flags: gamedll, cheat, release.</summary>
+	/// <summary>Restore the unit under your crosshair to full health. Flags: cheat, release, gamedll.</summary>
 	public static void citadel_heal_target(string arguments = "") => Run("citadel_heal_target", arguments);
 
-	/// <summary>citadel_increment_killstreak [player_slot] [first_blood]. Flags: developmentonly, gamedll, defensive.</summary>
+	/// <summary>citadel_increment_killstreak [player_slot] [first_blood]. Flags: defensive, developmentonly, gamedll.</summary>
 	public static void citadel_increment_killstreak(string arguments = "") => Run("citadel_increment_killstreak", arguments);
 
-	/// <summary>Clear out all players who aren't connected, removing them from any teams. Flags: developmentonly, gamedll, defensive.</summary>
+	/// <summary>Clear out all players who aren't connected, removing them from any teams. Flags: defensive, developmentonly, gamedll.</summary>
 	public static void citadel_kick_disconnected_players(string arguments = "") => Run("citadel_kick_disconnected_players", arguments);
 
-	/// <summary>Start the Early Warning of Koth and Teleport the active player there. Flags: gamedll, cheat, release, client_can_execute.</summary>
+	/// <summary>Start the Early Warning of Koth and Teleport the active player there. Flags: cheat, client_can_execute, release, gamedll.</summary>
 	public static void citadel_koth_dev_test_spawn(string arguments = "") => Run("citadel_koth_dev_test_spawn", arguments);
 
-	/// <summary>&lt;team number&gt; - Lock the flex slots for a team (or both teams if you omit the team number). Flags: gamedll, cheat, client_can_execute.</summary>
+	/// <summary>&lt;team number&gt; - Lock the flex slots for a team (or both teams if you omit the team number). Flags: cheat, client_can_execute, gamedll.</summary>
 	public static void citadel_lock_flex_slots(string arguments = "") => Run("citadel_lock_flex_slots", arguments);
 
-	/// <summary>Ends the current match as if players all abandoned. Flags: developmentonly, gamedll, defensive.</summary>
+	/// <summary>Ends the current match as if players all abandoned. Flags: defensive, developmentonly, gamedll.</summary>
 	public static void citadel_match_abandoned(string arguments = "") => Run("citadel_match_abandoned", arguments);
 
-	/// <summary>Ends the current match. Flags: developmentonly, gamedll, defensive.</summary>
+	/// <summary>Ends the current match. Flags: defensive, developmentonly, gamedll.</summary>
 	public static void citadel_match_end(string arguments = "") => Run("citadel_match_end", arguments);
 
-	/// <summary>Prints information about the current match status. Flags: developmentonly, gamedll, defensive.</summary>
+	/// <summary>Prints information about the current match status. Flags: defensive, developmentonly, gamedll.</summary>
 	public static void citadel_match_status(string arguments = "") => Run("citadel_match_status", arguments);
 
 	/// <summary>Run the MVP calculation right now. Flags: developmentonly, gamedll.</summary>
 	public static void citadel_mvp_calculate_now(string arguments = "") => Run("citadel_mvp_calculate_now", arguments);
 
-	/// <summary>Sets fireworks start time to be N seconds in the future. Flags: gamedll, release.</summary>
+	/// <summary>Sets fireworks start time to be N seconds in the future. Flags: release, gamedll.</summary>
 	public static void citadel_new_years_fireworks_test(string arguments = "") => Run("citadel_new_years_fireworks_test", arguments);
 
 	/// <summary>Run evaluation and display results, but don't stop game. Flags: developmentonly, gamedll.</summary>
 	public static void citadel_playofthegame_test_eval(string arguments = "") => Run("citadel_playofthegame_test_eval", arguments);
 
-	/// <summary>[seed] Rerolls the random penalty and stat variance of every corrupted item. Omit the seed or pass 0 for a random one. Flags: gamedll, cheat, client_can_execute.</summary>
+	/// <summary>[seed] Rerolls the random penalty and stat variance of every corrupted item. Omit the seed or pass 0 for a random one. Flags: cheat, client_can_execute, gamedll.</summary>
 	public static void citadel_reroll_corrupted_items(string arguments = "") => Run("citadel_reroll_corrupted_items", arguments);
 
-	/// <summary>Reset gold for all players. Flags: gamedll, cheat, client_can_execute.</summary>
+	/// <summary>Reset gold for all players. Flags: cheat, client_can_execute, gamedll.</summary>
 	public static void citadel_reset_gold(string arguments = "") => Run("citadel_reset_gold", arguments);
 
-	/// <summary>Force Spawns every breakable on the map. Flags: gamedll, cheat, release.</summary>
+	/// <summary>Force Spawns every breakable on the map. Flags: cheat, release, gamedll.</summary>
 	public static void citadel_respawn_all_breakables(string arguments = "") => Run("citadel_respawn_all_breakables", arguments);
 
-	/// <summary>Flags: gamedll, cheat, release.</summary>
+	/// <summary>Flags: cheat, release, gamedll.</summary>
 	public static void citadel_respawn_boss_barracks(string arguments = "") => Run("citadel_respawn_boss_barracks", arguments);
 
-	/// <summary>Flags: gamedll, cheat, release.</summary>
+	/// <summary>Flags: cheat, release, gamedll.</summary>
 	public static void citadel_respawn_boss_shrines(string arguments = "") => Run("citadel_respawn_boss_shrines", arguments);
 
-	/// <summary>Flags: gamedll, cheat, release.</summary>
+	/// <summary>Flags: cheat, release, gamedll.</summary>
 	public static void citadel_respawn_boss_t1(string arguments = "") => Run("citadel_respawn_boss_t1", arguments);
 
-	/// <summary>Flags: gamedll, cheat, release.</summary>
+	/// <summary>Flags: cheat, release, gamedll.</summary>
 	public static void citadel_respawn_boss_t2(string arguments = "") => Run("citadel_respawn_boss_t2", arguments);
 
-	/// <summary>Force Spawns any nearby breakables. Flags: gamedll, cheat, release.</summary>
+	/// <summary>Force Spawns any nearby breakables. Flags: cheat, release, gamedll.</summary>
 	public static void citadel_respawn_nearby_breakables(string arguments = "") => Run("citadel_respawn_nearby_breakables", arguments);
 
-	/// <summary>Root the local player. Flags: developmentonly, gamedll, defensive.</summary>
+	/// <summary>Root the local player. Flags: defensive, developmentonly, gamedll.</summary>
 	public static void citadel_rootme(string arguments = "") => Run("citadel_rootme", arguments);
 
-	/// <summary>Shuffles the order in which players are drafting heroes. Flags: developmentonly, gamedll, defensive.</summary>
+	/// <summary>Shuffles the order in which players are drafting heroes. Flags: defensive, developmentonly, gamedll.</summary>
 	public static void citadel_shuffle_draft_order(string arguments = "") => Run("citadel_shuffle_draft_order", arguments);
 
-	/// <summary>Silence the local player. Flags: developmentonly, gamedll, defensive.</summary>
+	/// <summary>Silence the local player. Flags: defensive, developmentonly, gamedll.</summary>
 	public static void citadel_silenceme(string arguments = "") => Run("citadel_silenceme", arguments);
 
-	/// <summary>Sleep the local player. Flags: developmentonly, gamedll, defensive.</summary>
+	/// <summary>Sleep the local player. Flags: defensive, developmentonly, gamedll.</summary>
 	public static void citadel_sleepme(string arguments = "") => Run("citadel_sleepme", arguments);
 
-	/// <summary>Spawn all of the heroes as bots in a line in front of you. Flags: gamedll, cheat.</summary>
+	/// <summary>Spawn all of the heroes as bots in a line in front of you. Flags: cheat, gamedll.</summary>
 	public static void citadel_spawn_all_heroes_in_a_line(string arguments = "") => Run("citadel_spawn_all_heroes_in_a_line", arguments);
 
-	/// <summary>Spawns every neutral camp on the map. Flags: gamedll, cheat, release.</summary>
+	/// <summary>Spawns every neutral camp on the map. Flags: cheat, release, gamedll.</summary>
 	public static void citadel_spawn_all_neutrals(string arguments = "") => Run("citadel_spawn_all_neutrals", arguments);
 
-	/// <summary>Spawns the pickup of every citadel_pickup_spawner (healing snacks) now. Flags: gamedll, cheat, release.</summary>
+	/// <summary>Spawns the pickup of every citadel_pickup_spawner (healing snacks) now. Flags: cheat, release, gamedll.</summary>
 	public static void citadel_spawn_all_pickup_spawners(string arguments = "") => Run("citadel_spawn_all_pickup_spawners", arguments);
 
-	/// <summary>Spawns the escort with an optional delay. Flags: gamedll, cheat, release.</summary>
+	/// <summary>Spawns the escort with an optional delay. Flags: cheat, release, gamedll.</summary>
 	public static void citadel_spawn_escort(string arguments = "") => Run("citadel_spawn_escort", arguments);
 
-	/// <summary>Force spawns the breakables above the mid boss that normally first appear at 10 minutes. Flags: gamedll, cheat, release.</summary>
+	/// <summary>Force spawns the breakables above the mid boss that normally first appear at 10 minutes. Flags: cheat, release, gamedll.</summary>
 	public static void citadel_spawn_midboss_breakables(string arguments = "") => Run("citadel_spawn_midboss_breakables", arguments);
 
-	/// <summary>Spawns any neutral camps within 800 units (~20m). Flags: gamedll, cheat, release.</summary>
+	/// <summary>Spawns any neutral camps within 800 units (~20m). Flags: cheat, release, gamedll.</summary>
 	public static void citadel_spawn_nearby_neutrals(string arguments = "") => Run("citadel_spawn_nearby_neutrals", arguments);
 
-	/// <summary>Spawns a pickup using a pickup subclass. Flags: developmentonly, gamedll, defensive.</summary>
+	/// <summary>Spawns a pickup using a pickup subclass. Flags: defensive, developmentonly, gamedll.</summary>
 	public static void citadel_spawn_pickup(string arguments = "") => Run("citadel_spawn_pickup", arguments);
 
-	/// <summary>Spawns an item pickup for a specific item. You can specify the item, or else you'll get a random one. Flags: developmentonly, gamedll, defensive.</summary>
+	/// <summary>Spawns an item pickup for a specific item. You can specify the item, or else you'll get a random one. Flags: defensive, developmentonly, gamedll.</summary>
 	public static void citadel_spawn_pickup_item(string arguments = "") => Run("citadel_spawn_pickup_item", arguments);
 
-	/// <summary>Creates a new trooper NPC and spawn them in front of the player. Flags: gamedll, cheat, release.</summary>
+	/// <summary>Creates a new trooper NPC and spawn them in front of the player. Flags: cheat, release, gamedll.</summary>
 	public static void citadel_spawn_trooper(string arguments = "") => Run("citadel_spawn_trooper", arguments);
 
-	/// <summary>Creates a NxN trooper grid in front of the player. Supports same trooper types as citadel_spawn_trooper. Flags: developmentonly, gamedll, defensive.</summary>
+	/// <summary>Creates a NxN trooper grid in front of the player. Supports same trooper types as citadel_spawn_trooper. Flags: defensive, developmentonly, gamedll.</summary>
 	public static void citadel_spawn_trooper_grid(string arguments = "") => Run("citadel_spawn_trooper_grid", arguments);
 
-	/// <summary>Spawns one trooper wave in every lane, even while trooper spawning is off. Flags: gamedll, cheat, release.</summary>
+	/// <summary>Spawns one trooper wave in every lane, even while trooper spawning is off. Flags: cheat, release, gamedll.</summary>
 	public static void citadel_spawn_trooper_wave(string arguments = "") => Run("citadel_spawn_trooper_wave", arguments);
 
-	/// <summary>Spawn a trooper on a zipline. Flags: developmentonly, gamedll, defensive.</summary>
+	/// <summary>Spawn a trooper on a zipline. Flags: defensive, developmentonly, gamedll.</summary>
 	public static void citadel_spawn_trooper_zipline(string arguments = "") => Run("citadel_spawn_trooper_zipline", arguments);
 
-	/// <summary>Spawn an urn for testing. Flags: gamedll, cheat.</summary>
+	/// <summary>Spawn an urn for testing. Flags: cheat, gamedll.</summary>
 	public static void citadel_spawn_urn(string arguments = "") => Run("citadel_spawn_urn", arguments);
 
-	/// <summary>&lt;hex setup&gt; Hosts a client provided bot match on this listen server. Flags: gamedll, release, client_can_execute.</summary>
+	/// <summary>&lt;hex setup&gt; Hosts a client provided bot match on this listen server. Flags: client_can_execute, release, gamedll.</summary>
 	public static void citadel_start_local_bot_match(string arguments = "") => Run("citadel_start_local_bot_match", arguments);
 
-	/// <summary>Dump the full stat dependency graph for an entity. Usage: citadel_stat_cache_dump_deps [entindex/name]. Flags: developmentonly, gamedll, cheat.</summary>
+	/// <summary>Dump the full stat dependency graph for an entity. Usage: citadel_stat_cache_dump_deps [entindex/name]. Flags: cheat, developmentonly, gamedll.</summary>
 	public static void citadel_stat_cache_dump_deps(string arguments = "") => Run("citadel_stat_cache_dump_deps", arguments);
 
-	/// <summary>Print per-EStatsType cache statistics sorted by query volume. Use stat_cache_reset_stats to clear. Flags: developmentonly, gamedll, cheat.</summary>
+	/// <summary>Print per-EStatsType cache statistics sorted by query volume. Use stat_cache_reset_stats to clear. Flags: cheat, developmentonly, gamedll.</summary>
 	public static void citadel_stat_cache_report(string arguments = "") => Run("citadel_stat_cache_report", arguments);
 
-	/// <summary>Advance the state of a street brawl game. Flags: developmentonly, gamedll, defensive.</summary>
+	/// <summary>Advance the state of a street brawl game. Flags: defensive, developmentonly, gamedll.</summary>
 	public static void citadel_street_brawl_advance_state(string arguments = "") => Run("citadel_street_brawl_advance_state", arguments);
 
-	/// <summary>Resets a street brawl match. Flags: developmentonly, gamedll, defensive.</summary>
+	/// <summary>Resets a street brawl match. Flags: defensive, developmentonly, gamedll.</summary>
 	public static void citadel_street_brawl_reset(string arguments = "") => Run("citadel_street_brawl_reset", arguments);
 
-	/// <summary>Simulates and spews the results of all draft rounds in street brawl. Flags: developmentonly, gamedll, defensive.</summary>
+	/// <summary>Simulates and spews the results of all draft rounds in street brawl. Flags: defensive, developmentonly, gamedll.</summary>
 	public static void citadel_street_brawl_test_drafts(string arguments = "") => Run("citadel_street_brawl_test_drafts", arguments);
 
-	/// <summary>Stun the local player. Flags: developmentonly, gamedll, defensive.</summary>
+	/// <summary>Stun the local player. Flags: defensive, developmentonly, gamedll.</summary>
 	public static void citadel_stunme(string arguments = "") => Run("citadel_stunme", arguments);
 
 	/// <summary>Print a crude recommended required bullets to claim an orb for every hero. Flags: developmentonly, gamedll.</summary>
 	public static void citadel_suggest_claim_reqs(string arguments = "") => Run("citadel_suggest_claim_reqs", arguments);
 
-	/// <summary>Test new abandon feature. Flags: developmentonly, gamedll, defensive.</summary>
+	/// <summary>Test new abandon feature. Flags: defensive, developmentonly, gamedll.</summary>
 	public static void citadel_test_abandon(string arguments = "") => Run("citadel_test_abandon", arguments);
 
-	/// <summary>Restart the cinematic intro sequence. Flags: developmentonly, gamedll, defensive.</summary>
+	/// <summary>Restart the cinematic intro sequence. Flags: defensive, developmentonly, gamedll.</summary>
 	public static void citadel_test_cinematic_intro(string arguments = "") => Run("citadel_test_cinematic_intro", arguments);
 
 	/// <summary>Trace a sphere through portals and draw the results. Flags: developmentonly, gamedll.</summary>
 	public static void citadel_test_portal_trace(string arguments = "") => Run("citadel_test_portal_trace", arguments);
 
-	/// <summary>Toggle a server side pause. Flags: developmentonly, gamedll, defensive.</summary>
+	/// <summary>Toggle a server side pause. Flags: defensive, developmentonly, gamedll.</summary>
 	public static void citadel_toggle_server_pause(string arguments = "") => Run("citadel_toggle_server_pause", arguments);
 
 	/// <summary>[all|player|team|match] Dump currently tracked stats. Flags: developmentonly, gamedll.</summary>
 	public static void citadel_tracked_stats_dump(string arguments = "") => Run("citadel_tracked_stats_dump", arguments);
 
-	/// <summary>Sets you to a specific spot in the tutorial. Flags: gamedll, release, client_can_execute.</summary>
+	/// <summary>Sets you to a specific spot in the tutorial. Flags: client_can_execute, release, gamedll.</summary>
 	public static void citadel_tutorial_test(string arguments = "") => Run("citadel_tutorial_test", arguments);
 
-	/// <summary>Runs UnitQueries and physics queries and prints time spent: citadel_unit_query_benchmark [queries] [repetitions]. Flags: developmentonly, gamedll, cheat.</summary>
+	/// <summary>Runs UnitQueries and physics queries and prints time spent: citadel_unit_query_benchmark [queries] [repetitions]. Flags: cheat, developmentonly, gamedll.</summary>
 	public static void citadel_unit_query_benchmark(string arguments = "") => Run("citadel_unit_query_benchmark", arguments);
 
-	/// <summary>Print a per-bucket classname list of the unit query registry. Flags: developmentonly, gamedll, cheat.</summary>
+	/// <summary>Print a per-bucket classname list of the unit query registry. Flags: cheat, developmentonly, gamedll.</summary>
 	public static void citadel_unit_query_registry_report(string arguments = "") => Run("citadel_unit_query_registry_report", arguments);
 
-	/// <summary>Fire randomized unit queries through the cached and physics paths and compare results. Flags: developmentonly, gamedll, cheat.</summary>
+	/// <summary>Fire randomized unit queries through the cached and physics paths and compare results. Flags: cheat, developmentonly, gamedll.</summary>
 	public static void citadel_unit_query_test_randomized(string arguments = "") => Run("citadel_unit_query_test_randomized", arguments);
 
-	/// <summary>&lt;team number&gt; - Unlock the flex slots for a team (or both teams if you omit the team number). Flags: gamedll, cheat, client_can_execute.</summary>
+	/// <summary>&lt;team number&gt; - Unlock the flex slots for a team (or both teams if you omit the team number). Flags: cheat, client_can_execute, gamedll.</summary>
 	public static void citadel_unlock_flex_slots(string arguments = "") => Run("citadel_unlock_flex_slots", arguments);
 
 	/// <summary>Prints debug info about the closest zip line node. Flags: developmentonly, gamedll.</summary>
@@ -547,7 +550,7 @@ public static class ConCommands {
 	/// <summary>Rebuilds all zipline splines. Flags: developmentonly, gamedll.</summary>
 	public static void citadel_zipline_rebuildpaths(string arguments = "") => Run("citadel_zipline_rebuildpaths", arguments);
 
-	/// <summary>Break in debugger when missing resource match is found. Format: cl_break_on_missing_resource &lt;substring&gt; /(empty to break on all) / 0 to turn off.. Flags: developmentonly.</summary>
+	/// <summary>Break in debugger when missing resource match is found. Format: cl_break_on_missing_resource &lt;substring&gt; /(empty to break on all) / 0 to turn off. Flags: developmentonly.</summary>
 	public static void cl_break_on_missing_resource(string arguments = "") => Run("cl_break_on_missing_resource", arguments);
 
 	/// <summary>Check game code serializers. Flags: cheat.</summary>
@@ -559,7 +562,7 @@ public static class ConCommands {
 	/// <summary>Print a summary report of Source2 engine networking statistics. (Ticks, netchan messages, etc.). Flags: dontrecord, release.</summary>
 	public static void cl_net_printsummary(string arguments = "") => Run("cl_net_printsummary", arguments);
 
-	/// <summary>Show precache info (client). Flags: developmentonly, defensive.</summary>
+	/// <summary>Show precache info (client). Flags: defensive, developmentonly.</summary>
 	public static void cl_precacheinfo(string arguments = "") => Run("cl_precacheinfo", arguments);
 
 	/// <summary>Spew serializers. Flags: cheat.</summary>
@@ -577,19 +580,19 @@ public static class ConCommands {
 	/// <summary>Clear console output from all views. Flags: dontrecord, release.</summary>
 	public static void clearall(string arguments = "") => Run("clearall", arguments);
 
-	/// <summary>Clears all lines drawn by drawline and drawcross. Flags: gamedll, cheat.</summary>
+	/// <summary>Clears all lines drawn by drawline and drawcross. Flags: cheat, gamedll.</summary>
 	public static void cleardraw(string arguments = "") => Run("cleardraw", arguments);
 
-	/// <summary>Forward command to server. Flags: developmentonly, defensive.</summary>
+	/// <summary>Forward command to server. Flags: defensive, developmentonly.</summary>
 	public static void cmd(string arguments = "") => Run("cmd", arguments);
 
-	/// <summary>Collect model names of the entities you're pointing at. Flags: gamedll, cheat.</summary>
+	/// <summary>Collect model names of the entities you're pointing at. Flags: cheat, gamedll.</summary>
 	public static void collect_entity_model_name(string arguments = "") => Run("collect_entity_model_name", arguments);
 
-	/// <summary>Flags: developmentonly, gamedll, defensive.</summary>
+	/// <summary>Flags: defensive, developmentonly, gamedll.</summary>
 	public static void commentary_cvarsnotchanging(string arguments = "") => Run("commentary_cvarsnotchanging", arguments);
 
-	/// <summary>Flags: gamedll, client_can_execute.</summary>
+	/// <summary>Flags: client_can_execute, gamedll.</summary>
 	public static void commentary_finishnode(string arguments = "") => Run("commentary_finishnode", arguments);
 
 	/// <summary>dump the text currently in the console to condumpXX.log. Flags: release.</summary>
@@ -607,7 +610,7 @@ public static class ConCommands {
 	/// <summary>Open a VConsole subtool. Flags: dontrecord, release.</summary>
 	public static void consoletool(string arguments = "") => Run("consoletool", arguments);
 
-	/// <summary>Print CPU configuration information. Flags: developmentonly, defensive.</summary>
+	/// <summary>Print CPU configuration information. Flags: defensive, developmentonly.</summary>
 	public static void cpuinfo(string arguments = "") => Run("cpuinfo", arguments);
 
 	/// <summary>Crash the client. Optional parameter -- type of crash: 0: read from NULL 1: write to NULL 2: force an Assert 3: infinite loop 4: stack buffer overrun 5: multiple asserts across multiple threads. Optional number of threads (default 5) 6: looping memory leak until we're out of memory. Optional allocation size in bytes (default 1048576/1MB). Flags: cheat.</summary>
@@ -628,19 +631,19 @@ public static class ConCommands {
 	/// <summary>Cause the engine to crash in a brand new non-main thread (Debug!!). Flags: cheat.</summary>
 	public static void crash_thread(string arguments = "") => Run("crash_thread", arguments);
 
-	/// <summary>Explosion where you're looking, or at x y z, with a real explosion's physics force (unlike create_radius_damage). Flags: gamedll, cheat.</summary>
+	/// <summary>Explosion where you're looking, or at x y z, with a real explosion's physics force (unlike create_radius_damage). Flags: cheat, gamedll.</summary>
 	public static void create_explosion_damage(string arguments = "") => Run("create_explosion_damage", arguments);
 
-	/// <summary>Create an orb on the local player's team. Flags: developmentonly, gamedll, defensive.</summary>
+	/// <summary>Create an orb on the local player's team. Flags: defensive, developmentonly, gamedll.</summary>
 	public static void create_orb(string arguments = "") => Run("create_orb", arguments);
 
-	/// <summary>Causes radius damage where you're looking, at the passed in radius. Flags: gamedll, cheat.</summary>
+	/// <summary>Causes radius damage where you're looking, at the passed in radius. Flags: cheat, gamedll.</summary>
 	public static void create_radius_damage(string arguments = "") => Run("create_radius_damage", arguments);
 
 	/// <summary>creates a portal. Flags: developmentonly, gamedll.</summary>
 	public static void create_test_portal(string arguments = "") => Run("create_test_portal", arguments);
 
-	/// <summary>Flags: developmentonly, gamedll, defensive.</summary>
+	/// <summary>Flags: defensive, developmentonly, gamedll.</summary>
 	public static void creditsdone(string arguments = "") => Run("creditsdone", arguments);
 
 	/// <summary>Show the list of convars/concommands. Flags: release.</summary>
@@ -649,25 +652,25 @@ public static class ConCommands {
 	/// <summary>Cycle through specified convar values. Flags: dontrecord, release.</summary>
 	public static void cyclevar(string arguments = "") => Run("cyclevar", arguments);
 
-	/// <summary>Add a line to the debug history. Format: &lt;category id&gt; &lt;line&gt;. Flags: developmentonly, gamedll, defensive.</summary>
+	/// <summary>Add a line to the debug history. Format: &lt;category id&gt; &lt;line&gt;. Flags: defensive, developmentonly, gamedll.</summary>
 	public static void dbghist_addline(string arguments = "") => Run("dbghist_addline", arguments);
 
-	/// <summary>Dump the debug history to the console. Format: &lt;category id&gt; Categories: 0: Entity I/O 1: AI Decisions 2: Scene Print 3: Alyx Blind 4: Log of damage done to player 5: Player Teleport 6: Blind Zombie Sounds 7: Player Continuous. Flags: developmentonly, gamedll, defensive.</summary>
+	/// <summary>Dump the debug history to the console. Format: &lt;category id&gt; Categories: 0: Entity I/O 1: AI Decisions 2: Scene Print 3: Alyx Blind 4: Log of damage done to player 5: Player Teleport 6: Blind Zombie Sounds 7: Player Continuous. Flags: defensive, developmentonly, gamedll.</summary>
 	public static void dbghist_dump(string arguments = "") => Run("dbghist_dump", arguments);
 
-	/// <summary>Toggles visibility of the debug overlay system. Flags: gamedll, cheat.</summary>
+	/// <summary>Toggles visibility of the debug overlay system. Flags: cheat, gamedll.</summary>
 	public static void debugoverlay_cycle_domain(string arguments = "") => Run("debugoverlay_cycle_domain", arguments);
 
-	/// <summary>Toggles visibility of the debug overlay system. Flags: gamedll, cheat.</summary>
+	/// <summary>Toggles visibility of the debug overlay system. Flags: cheat, gamedll.</summary>
 	public static void debugoverlay_cycle_state(string arguments = "") => Run("debugoverlay_cycle_state", arguments);
 
-	/// <summary>Makes the debug overlay dashboard visible. Flags: gamedll, cheat.</summary>
+	/// <summary>Makes the debug overlay dashboard visible. Flags: cheat, gamedll.</summary>
 	public static void debugoverlay_dashboard(string arguments = "") => Run("debugoverlay_dashboard", arguments);
 
-	/// <summary>Hides the overlay. Flags: gamedll, cheat.</summary>
+	/// <summary>Hides the overlay. Flags: cheat, gamedll.</summary>
 	public static void debugoverlay_hide_imgui(string arguments = "") => Run("debugoverlay_hide_imgui", arguments);
 
-	/// <summary>Toggles visibility of the debug overlay system. Flags: gamedll, cheat.</summary>
+	/// <summary>Toggles visibility of the debug overlay system. Flags: cheat, gamedll.</summary>
 	public static void debugoverlay_toggle(string arguments = "") => Run("debugoverlay_toggle", arguments);
 
 	/// <summary>Skips to location in demo. Flags: release.</summary>
@@ -703,34 +706,40 @@ public static class ConCommands {
 	/// <summary>Toggles demo playback. Flags: release.</summary>
 	public static void demo_togglepause(string arguments = "") => Run("demo_togglepause", arguments);
 
-	/// <summary>save current meta file demo_&lt;version&gt;.meta file for use in demo upconversion. Flags: developmentonly, dontrecord, defensive.</summary>
+	/// <summary>save current meta file demo_&lt;version&gt;.meta file for use in demo upconversion. Flags: defensive, developmentonly, dontrecord.</summary>
 	public static void demo_writemetafile(string arguments = "") => Run("demo_writemetafile", arguments);
 
 	/// <summary>Print demo sequence list. Flags: release.</summary>
 	public static void demolist(string arguments = "") => Run("demolist", arguments);
 
-	/// <summary>&lt;msgid&gt; Send a blank body message with a given ID to gc for routing tests. Flags: developmentonly, gamedll, defensive.</summary>
+	/// <summary>&lt;msgid&gt; Send a blank body message with a given ID to gc for routing tests. Flags: defensive, developmentonly, gamedll.</summary>
 	public static void dev_send_gc_message_server(string arguments = "") => Run("dev_send_gc_message_server", arguments);
 
 	/// <summary>Show all convars which are not at their default values (optional restricted to specific flags). Flags: release.</summary>
 	public static void differences(string arguments = "") => Run("differences", arguments);
 
-	/// <summary>Disable focus based priority boost. Flags: developmentonly, defensive.</summary>
+	/// <summary>Disable focus based priority boost. Flags: defensive, developmentonly.</summary>
 	public static void disable_priority_boost(string arguments = "") => Run("disable_priority_boost", arguments);
 
 	/// <summary>Disconnect from server. Flags: release.</summary>
 	public static void disconnect(string arguments = "") => Run("disconnect", arguments);
 
-	/// <summary>Draws a cross at the given location Arguments: x y z. Flags: gamedll, cheat.</summary>
+	/// <summary>Draws a cross at the given location Arguments: x y z. Flags: cheat, gamedll.</summary>
 	public static void drawcross(string arguments = "") => Run("drawcross", arguments);
 
-	/// <summary>Draws line between two 3D Points. Green if no collision Red is collides with something Arguments: x1 y1 z1 x2 y2 z2. Flags: gamedll, cheat.</summary>
+	/// <summary>Draws line between two 3D Points. Green if no collision Red is collides with something Arguments: x1 y1 z1 x2 y2 z2. Flags: cheat, gamedll.</summary>
 	public static void drawline(string arguments = "") => Run("drawline", arguments);
 
-	/// <summary>Dump all global entities/states. Flags: developmentonly, gamedll, defensive.</summary>
+	/// <summary>Dump all global entities/states. Flags: defensive, developmentonly, gamedll.</summary>
 	public static void dump_globals(string arguments = "") => Run("dump_globals", arguments);
 
-	/// <summary>dump_modifier_message_count. Flags: developmentonly, gamedll, defensive.</summary>
+	/// <summary>List information on the given token. Flags: defensive, developmentonly.</summary>
+	public static void dump_loc_token(string arguments = "") => Run("dump_loc_token", arguments);
+
+	/// <summary>List all loaded localization files. Flags: defensive, developmentonly.</summary>
+	public static void dump_localization_files(string arguments = "") => Run("dump_localization_files", arguments);
+
+	/// <summary>dump_modifier_message_count. Flags: defensive, developmentonly, gamedll.</summary>
 	public static void dump_modifier_message_count(string arguments = "") => Run("dump_modifier_message_count", arguments);
 
 	/// <summary>Prints out all valid panorama CSS properties and their documentation. Flags: release.</summary>
@@ -739,16 +748,19 @@ public static class ConCommands {
 	/// <summary>print panorama event types and their documentation. Flags: release.</summary>
 	public static void dump_panorama_events(string arguments = "") => Run("dump_panorama_events", arguments);
 
-	/// <summary>Flags: developmentonly, defensive.</summary>
+	/// <summary>Flags: defensive, developmentonly.</summary>
 	public static void dump_panorama_render_command_stats(string arguments = "") => Run("dump_panorama_render_command_stats", arguments);
 
-	/// <summary>Flags: gamedll, cheat.</summary>
+	/// <summary>Flags: cheat, gamedll.</summary>
 	public static void dump_play_stats(string arguments = "") => Run("dump_play_stats", arguments);
 
-	/// <summary>print all response symbols to the console. Flags: developmentonly, gamedll, defensive.</summary>
+	/// <summary>print all response symbols to the console. Flags: defensive, developmentonly, gamedll.</summary>
 	public static void dump_response_symbols(string arguments = "") => Run("dump_response_symbols", arguments);
 
-	/// <summary>Usage: dumpstringtable &lt;tablename |all&gt; &lt;sv | cl&gt; &lt;verbose | simple&gt; &lt;element&gt; Print string tables to console, verbose to dump data, simple to show name and count only, can specifiy a single numeric element index to restrict spew. Flags: developmentonly, defensive.</summary>
+	/// <summary>Print out information on existing particle systems. Flags: cheat.</summary>
+	public static void dumpparticlelist(string arguments = "") => Run("dumpparticlelist", arguments);
+
+	/// <summary>Usage: dumpstringtable &lt;tablename |all&gt; &lt;sv | cl&gt; &lt;verbose | simple&gt; &lt;element&gt; Print string tables to console, verbose to dump data, simple to show name and count only, can specifiy a single numeric element index to restrict spew. Flags: defensive, developmentonly.</summary>
 	public static void dumpstringtable(string arguments = "") => Run("dumpstringtable", arguments);
 
 	/// <summary>Echo text to console. Flags: server_can_execute.</summary>
@@ -757,241 +769,241 @@ public static class ConCommands {
 	/// <summary>Echo the command arguments on the console. Flags: release.</summary>
 	public static void echoln(string arguments = "") => Run("echoln", arguments);
 
-	/// <summary>Disable focus based priority boost. Flags: developmentonly, defensive.</summary>
+	/// <summary>Disable focus based priority boost. Flags: defensive, developmentonly.</summary>
 	public static void enable_priority_boost(string arguments = "") => Run("enable_priority_boost", arguments);
 
-	/// <summary>Stop recording movie frames. Flags: developmentonly, dontrecord, defensive.</summary>
+	/// <summary>Stop recording movie frames. Flags: defensive, developmentonly, dontrecord.</summary>
 	public static void endmovie(string arguments = "") => Run("endmovie", arguments);
 
-	/// <summary>Print a performance report from the current data in the vprof 'lite' profiler. Flags: developmentonly, defensive.</summary>
+	/// <summary>Print a performance report from the current data in the vprof 'lite' profiler. Flags: defensive, developmentonly.</summary>
 	public static void engine_frametime_print_report(string arguments = "") => Run("engine_frametime_print_report", arguments);
 
-	/// <summary>Displays the total bounding box for the given entity(s) in green. Some entites will also display entity specific overlays. Arguments: {entity_name} / {class_name} / {entity_index} / {no argument = pick what player is looking at}. Flags: gamedll, cheat.</summary>
+	/// <summary>Displays the total bounding box for the given entity(s) in green. Some entites will also display entity specific overlays. Arguments: {entity_name} / {class_name} / {entity_index} / {no argument = pick what player is looking at}. Flags: cheat, gamedll.</summary>
 	public static void ent_absbox(string arguments = "") => Run("ent_absbox", arguments);
 
-	/// <summary>Displays the entity name for all entities that have ShouldDisplayInActorNames true in code. Flags: gamedll, cheat.</summary>
+	/// <summary>Displays the entity name for all entities that have ShouldDisplayInActorNames true in code. Flags: cheat, gamedll.</summary>
 	public static void ent_actornames(string arguments = "") => Run("ent_actornames", arguments);
 
-	/// <summary>Opens the graph and starts live debugging the AG2 graph for a given entity Arguments: entityName Arguments: {entity_name} / {class_name} / {entity_index} / {no argument = pick what player is looking at}. Flags: gamedll, cheat.</summary>
+	/// <summary>Opens the graph and starts live debugging the AG2 graph for a given entity Arguments: entityName Arguments: {entity_name} / {class_name} / {entity_index} / {no argument = pick what player is looking at}. Flags: cheat, gamedll.</summary>
 	public static void ent_animgraph2_open_graph(string arguments = "") => Run("ent_animgraph2_open_graph", arguments);
 
-	/// <summary>Starts live debugging &amp; recording the AG2 graph for a given entity Arguments: entityName Arguments: {entity_name} / {class_name} / {entity_index} / {no argument = pick what player is looking at}. Flags: gamedll, cheat.</summary>
+	/// <summary>Starts live debugging &amp; recording the AG2 graph for a given entity Arguments: entityName Arguments: {entity_name} / {class_name} / {entity_index} / {no argument = pick what player is looking at}. Flags: cheat, gamedll.</summary>
 	public static void ent_animgraph2_record(string arguments = "") => Run("ent_animgraph2_record", arguments);
 
-	/// <summary>Displays debug draws about the given entity(ies) animgraph Arguments: {entity_name} / {class_name} / {entity_index} / {no argument = pick what player is looking at}. Flags: gamedll, cheat.</summary>
+	/// <summary>Displays debug draws about the given entity(ies) animgraph Arguments: {entity_name} / {class_name} / {entity_index} / {no argument = pick what player is looking at}. Flags: cheat, gamedll.</summary>
 	public static void ent_animgraph_debug(string arguments = "") => Run("ent_animgraph_debug", arguments);
 
-	/// <summary>Displays the attachment points on an entity. Arguments: {entity_name} / {class_name} / {entity_index} / {no argument = pick what player is looking at}. Flags: gamedll, cheat.</summary>
+	/// <summary>Displays the attachment points on an entity. Arguments: {entity_name} / {class_name} / {entity_index} / {no argument = pick what player is looking at}. Flags: cheat, gamedll.</summary>
 	public static void ent_attachments(string arguments = "") => Run("ent_attachments", arguments);
 
-	/// <summary>Displays the entity's autoaim radius. Arguments: {entity_name} / {class_name} / {entity_index} / {no argument = pick what player is looking at}. Flags: gamedll, cheat.</summary>
+	/// <summary>Displays the entity's autoaim radius. Arguments: {entity_name} / {class_name} / {entity_index} / {no argument = pick what player is looking at}. Flags: cheat, gamedll.</summary>
 	public static void ent_autoaim(string arguments = "") => Run("ent_autoaim", arguments);
 
-	/// <summary>Displays the movement bounding box for the given entity(ies) in orange. Some entites will also display entity specific overlays. Arguments: {entity_name} / {class_name} / {entity_index} / {no argument = pick what player is looking at}. Flags: gamedll, cheat.</summary>
+	/// <summary>Displays the movement bounding box for the given entity(ies) in orange. Some entites will also display entity specific overlays. Arguments: {entity_name} / {class_name} / {entity_index} / {no argument = pick what player is looking at}. Flags: cheat, gamedll.</summary>
 	public static void ent_bbox(string arguments = "") => Run("ent_bbox", arguments);
 
-	/// <summary>Bonemerge the player onto the entity under the crosshairs. Flags: gamedll, cheat.</summary>
+	/// <summary>Bonemerge the player onto the entity under the crosshairs. Flags: cheat, gamedll.</summary>
 	public static void ent_bonemergeplayer(string arguments = "") => Run("ent_bonemergeplayer", arguments);
 
-	/// <summary>ent_call &lt;funcname&gt; &lt;option:entname&gt; calls function on current look target or filtername, checks on ent, then root, then mode, then map scope. Flags: gamedll, cheat.</summary>
+	/// <summary>ent_call &lt;funcname&gt; &lt;option:entname&gt; calls function on current look target or filtername, checks on ent, then root, then mode, then map scope. Flags: cheat, gamedll.</summary>
 	public static void ent_call(string arguments = "") => Run("ent_call", arguments);
 
-	/// <summary>Cancels all ent_fire created outputs that are currently waiting for their delay to expire. Flags: developmentonly, gamedll, defensive.</summary>
+	/// <summary>Cancels all ent_fire created outputs that are currently waiting for their delay to expire. Flags: defensive, developmentonly, gamedll.</summary>
 	public static void ent_cancelpendingentfires(string arguments = "") => Run("ent_cancelpendingentfires", arguments);
 
-	/// <summary>Spew PVS debug info for entity. Flags: developmentonly, gamedll, defensive.</summary>
+	/// <summary>Spew PVS debug info for entity. Flags: defensive, developmentonly, gamedll.</summary>
 	public static void ent_characterize(string arguments = "") => Run("ent_characterize", arguments);
 
-	/// <summary>Clears all debug overlays. Flags: gamedll, cheat.</summary>
+	/// <summary>Clears all debug overlays. Flags: cheat, gamedll.</summary>
 	public static void ent_clear_debug_overlays(string arguments = "") => Run("ent_clear_debug_overlays", arguments);
 
-	/// <summary>Creates an entity of the given designer or subclass name where the player is looking. Flags: gamedll, cheat, vconsole_fuzzy_matching.</summary>
+	/// <summary>Creates an entity of the given designer or subclass name where the player is looking. Flags: cheat, vconsole_fuzzy_matching, gamedll.</summary>
 	public static void ent_create(string arguments = "") => Run("ent_create", arguments);
 
 	/// <summary>turn on, off, or toggle origin changes on server for entity by index. Flags: developmentonly, gamedll.</summary>
 	public static void ent_debug_origin_changes(string arguments = "") => Run("ent_debug_origin_changes", arguments);
 
-	/// <summary>Find and list all entities with classnames or targetnames that contain the specified substrings. Format: find_ent &lt;substring&gt;. Flags: gamedll, cheat.</summary>
+	/// <summary>Find and list all entities with classnames or targetnames that contain the specified substrings. Format: find_ent &lt;substring&gt;. Flags: cheat, gamedll.</summary>
 	public static void ent_find(string arguments = "") => Run("ent_find", arguments);
 
-	/// <summary>Display data for entity matching specified index. Format: find_ent_index &lt;index&gt;. Flags: gamedll, cheat.</summary>
+	/// <summary>Display data for entity matching specified index. Format: find_ent_index &lt;index&gt;. Flags: cheat, gamedll.</summary>
 	public static void ent_find_index(string arguments = "") => Run("ent_find_index", arguments);
 
-	/// <summary>Usage: ent_fire &lt;target&gt; [action] [value0] [value1] ... [valueN]. Flags: gamedll, cheat, vconsole_fuzzy_matching.</summary>
+	/// <summary>Usage: ent_fire &lt;target&gt; [action] [value0] [value1] ... [valueN]. Flags: cheat, vconsole_fuzzy_matching, gamedll.</summary>
 	public static void ent_fire(string arguments = "") => Run("ent_fire", arguments);
 
-	/// <summary>Usage: ent_fire_delay &lt;target&gt; [action] [value0] [value1] ... [valueN] [delay]. Flags: gamedll, cheat, vconsole_fuzzy_matching.</summary>
+	/// <summary>Usage: ent_fire_delay &lt;target&gt; [action] [value0] [value1] ... [valueN] [delay]. Flags: cheat, vconsole_fuzzy_matching, gamedll.</summary>
 	public static void ent_fire_delay(string arguments = "") => Run("ent_fire_delay", arguments);
 
-	/// <summary>Usage: ent_fire_output &lt;target&gt; [output name] [value0] [value1] ... [valueN]. Flags: gamedll, cheat, vconsole_fuzzy_matching.</summary>
+	/// <summary>Usage: ent_fire_output &lt;target&gt; [output name] [value0] [value1] ... [valueN]. Flags: cheat, vconsole_fuzzy_matching, gamedll.</summary>
 	public static void ent_fire_output(string arguments = "") => Run("ent_fire_output", arguments);
 
-	/// <summary>Usage: ent_fire_output_delay &lt;target&gt; [output name] [value0] [value1] ... [valueN] [delay]. Flags: gamedll, cheat, vconsole_fuzzy_matching.</summary>
+	/// <summary>Usage: ent_fire_output_delay &lt;target&gt; [output name] [value0] [value1] ... [valueN] [delay]. Flags: cheat, vconsole_fuzzy_matching, gamedll.</summary>
 	public static void ent_fire_output_delay(string arguments = "") => Run("ent_fire_output_delay", arguments);
 
-	/// <summary>Gibs the given entity(s) Arguments: {entity_name} / {class_name} / {entity_index} / {no argument = pick what player is looking at}. Flags: gamedll, cheat.</summary>
+	/// <summary>Gibs the given entity(s) Arguments: {entity_name} / {class_name} / {entity_index} / {no argument = pick what player is looking at}. Flags: cheat, gamedll.</summary>
 	public static void ent_gib(string arguments = "") => Run("ent_gib", arguments);
 
-	/// <summary>grabs the object in front of the player. Options: -loose -multiple -toggle. Flags: gamedll, cheat.</summary>
+	/// <summary>grabs the object in front of the player. Options: -loose -multiple -toggle. Flags: cheat, gamedll.</summary>
 	public static void ent_grab(string arguments = "") => Run("ent_grab", arguments);
 
-	/// <summary>Prints the entity hierarchy tree rooted at the specified ent(s). Flags: gamedll, cheat.</summary>
+	/// <summary>Prints the entity hierarchy tree rooted at the specified ent(s). Flags: cheat, gamedll.</summary>
 	public static void ent_hierarchy(string arguments = "") => Run("ent_hierarchy", arguments);
 
-	/// <summary>Displays the hitboxes for the given entity(ies). Arguments: {entity_name} / {class_name} / {entity_index} / {no argument = pick what player is looking at}. Flags: gamedll, cheat.</summary>
+	/// <summary>Displays the hitboxes for the given entity(ies). Arguments: {entity_name} / {class_name} / {entity_index} / {no argument = pick what player is looking at}. Flags: cheat, gamedll.</summary>
 	public static void ent_hitbox(string arguments = "") => Run("ent_hitbox", arguments);
 
-	/// <summary>Usage: ent_info &lt;class name&gt;. Flags: gamedll, cheat.</summary>
+	/// <summary>Usage: ent_info &lt;class name&gt;. Flags: cheat, gamedll.</summary>
 	public static void ent_info(string arguments = "") => Run("ent_info", arguments);
 
-	/// <summary>Displays the joint names + axes an entity. Arguments: {entity_name} / {class_name} / {entity_index} / {no argument = pick what player is looking at}. Flags: gamedll, cheat.</summary>
+	/// <summary>Displays the joint names + axes an entity. Arguments: {entity_name} / {class_name} / {entity_index} / {no argument = pick what player is looking at}. Flags: cheat, gamedll.</summary>
 	public static void ent_joints(string arguments = "") => Run("ent_joints", arguments);
 
-	/// <summary>Kills the given entity(s) Arguments: {entity_name} / {class_name} / {entity_index} / {no argument = pick what player is looking at}. Flags: gamedll, cheat.</summary>
+	/// <summary>Kills the given entity(s) Arguments: {entity_name} / {class_name} / {entity_index} / {no argument = pick what player is looking at}. Flags: cheat, gamedll.</summary>
 	public static void ent_kill(string arguments = "") => Run("ent_kill", arguments);
 
-	/// <summary>Toggles input/output message display for the selected entity(ies). The name of the entity will be displayed as well as any messages that it sends or receives. Arguments: {entity_name} / {class_name} / {entity_index} / {no argument = pick what player is looking at}. Flags: gamedll, cheat.</summary>
+	/// <summary>Toggles input/output message display for the selected entity(ies). The name of the entity will be displayed as well as any messages that it sends or receives. Arguments: {entity_name} / {class_name} / {entity_index} / {no argument = pick what player is looking at}. Flags: cheat, gamedll.</summary>
 	public static void ent_messages(string arguments = "") => Run("ent_messages", arguments);
 
-	/// <summary>Displays the entity name. Flags: gamedll, cheat.</summary>
+	/// <summary>Displays the entity name. Flags: cheat, gamedll.</summary>
 	public static void ent_name(string arguments = "") => Run("ent_name", arguments);
 
-	/// <summary>Orient the specified entity to match the player's angles. By default, only orients target entity's YAW. Use the 'allangles' option to orient on all axis. Format: ent_orient &lt;entity name&gt; &lt;optional: allangles&gt;. Flags: gamedll, cheat.</summary>
+	/// <summary>Orient the specified entity to match the player's angles. By default, only orients target entity's YAW. Use the 'allangles' option to orient on all axis. Format: ent_orient &lt;entity name&gt; &lt;optional: allangles&gt;. Flags: cheat, gamedll.</summary>
 	public static void ent_orient(string arguments = "") => Run("ent_orient", arguments);
 
-	/// <summary>Toggles 'picker' mode. When picker is on, the bounding box, pivot and debugging text is displayed for whatever entity the player is looking at. Arguments: full - enables all debug information. Flags: gamedll, cheat.</summary>
+	/// <summary>Toggles 'picker' mode. When picker is on, the bounding box, pivot and debugging text is displayed for whatever entity the player is looking at. Arguments: full - enables all debug information. Flags: cheat, gamedll.</summary>
 	public static void ent_picker(string arguments = "") => Run("ent_picker", arguments);
 
-	/// <summary>Displays the pivot for the given entity(ies). (y=up=green, z=forward=blue, x=left=red). Arguments: {entity_name} / {class_name} / {entity_index} / {no argument = pick what player is looking at}. Flags: gamedll, cheat.</summary>
+	/// <summary>Displays the pivot for the given entity(ies). (y=up=green, z=forward=blue, x=left=red). Arguments: {entity_name} / {class_name} / {entity_index} / {no argument = pick what player is looking at}. Flags: cheat, gamedll.</summary>
 	public static void ent_pivot(string arguments = "") => Run("ent_pivot", arguments);
 
-	/// <summary>Removes the given entity(s) Arguments: {entity_name} / {class_name} / {entity_index} / {no argument = pick what player is looking at}. Flags: gamedll, cheat.</summary>
+	/// <summary>Removes the given entity(s) Arguments: {entity_name} / {class_name} / {entity_index} / {no argument = pick what player is looking at}. Flags: cheat, gamedll.</summary>
 	public static void ent_remove(string arguments = "") => Run("ent_remove", arguments);
 
-	/// <summary>Removes all entities of the specified type Arguments: {entity_name} / {class_name}. Flags: gamedll, cheat.</summary>
+	/// <summary>Removes all entities of the specified type Arguments: {entity_name} / {class_name}. Flags: cheat, gamedll.</summary>
 	public static void ent_remove_all(string arguments = "") => Run("ent_remove_all", arguments);
 
 	/// <summary>Given a mapname and hammer uniqueid, reveal it in Hammer. Flags: developmentonly, gamedll.</summary>
 	public static void ent_reveal_in_hammer(string arguments = "") => Run("ent_reveal_in_hammer", arguments);
 
-	/// <summary>Rotates an entity by a specified # of degrees. Flags: gamedll, cheat.</summary>
+	/// <summary>Rotates an entity by a specified # of degrees. Flags: cheat, gamedll.</summary>
 	public static void ent_rotate(string arguments = "") => Run("ent_rotate", arguments);
 
-	/// <summary>Scales entities. Arguments: &lt;scale factor&gt; &lt;{entity_name} / {class_name} / {entity_index} / {no argument = pick what player is looking at}&gt;. Flags: gamedll, cheat.</summary>
+	/// <summary>Scales entities. Arguments: &lt;scale factor&gt; &lt;{entity_name} / {class_name} / {entity_index} / {no argument = pick what player is looking at}&gt;. Flags: cheat, gamedll.</summary>
 	public static void ent_scale(string arguments = "") => Run("ent_scale", arguments);
 
-	/// <summary>Prints the entity scenenode hierarchy tree rooted at the specified ent(s). Flags: gamedll, cheat.</summary>
+	/// <summary>Prints the entity scenenode hierarchy tree rooted at the specified ent(s). Flags: cheat, gamedll.</summary>
 	public static void ent_scenehierarchy(string arguments = "") => Run("ent_scenehierarchy", arguments);
 
-	/// <summary>Dumps the names and values of this entity's script scope to the console Arguments: {entity_name} / {class_name} / {entity_index} / {no argument = pick what player is looking at}. Flags: gamedll, cheat.</summary>
+	/// <summary>Dumps the names and values of this entity's script scope to the console Arguments: {entity_name} / {class_name} / {entity_index} / {no argument = pick what player is looking at}. Flags: cheat, gamedll.</summary>
 	public static void ent_script_dump(string arguments = "") => Run("ent_script_dump", arguments);
 
-	/// <summary>Select or deselects the given entities(s) for later manipulation Arguments: {entity_name} / {class_name} / {entity_index} / {no argument = pick what player is looking at}. Flags: gamedll, cheat.</summary>
+	/// <summary>Select or deselects the given entities(s) for later manipulation Arguments: {entity_name} / {class_name} / {entity_index} / {no argument = pick what player is looking at}. Flags: cheat, gamedll.</summary>
 	public static void ent_select(string arguments = "") => Run("ent_select", arguments);
 
-	/// <summary>Set entity angles. Flags: gamedll, cheat, client_can_execute.</summary>
+	/// <summary>Set entity angles. Flags: cheat, client_can_execute, gamedll.</summary>
 	public static void ent_setang(string arguments = "") => Run("ent_setang", arguments);
 
-	/// <summary>Sets the targetname of the given entity(s) Arguments: &lt;new entity name&gt; &lt;{entity_name} / {class_name} / {entity_index} / {no argument = pick what player is looking at}&gt;. Flags: gamedll, cheat.</summary>
+	/// <summary>Sets the targetname of the given entity(s) Arguments: &lt;new entity name&gt; &lt;{entity_name} / {class_name} / {entity_index} / {no argument = pick what player is looking at}&gt;. Flags: cheat, gamedll.</summary>
 	public static void ent_setname(string arguments = "") => Run("ent_setname", arguments);
 
-	/// <summary>Move entity to position. Flags: gamedll, cheat, client_can_execute.</summary>
+	/// <summary>Move entity to position. Flags: cheat, client_can_execute, gamedll.</summary>
 	public static void ent_setpos(string arguments = "") => Run("ent_setpos", arguments);
 
-	/// <summary>Sets damage display mode. When on, you will see the amount of damage dealt over the target's head. Flags: gamedll, cheat.</summary>
+	/// <summary>Sets damage display mode. When on, you will see the amount of damage dealt over the target's head. Flags: cheat, gamedll.</summary>
 	public static void ent_show_damage(string arguments = "") => Run("ent_show_damage", arguments);
 
-	/// <summary>Print, to the console, an entity's current criteria set used to select responses. Arguments: {entity_name} / {class_name} / {entity_index} / {no argument = pick what player is looking at}. Flags: gamedll, cheat.</summary>
+	/// <summary>Print, to the console, an entity's current criteria set used to select responses. Arguments: {entity_name} / {class_name} / {entity_index} / {no argument = pick what player is looking at}. Flags: cheat, gamedll.</summary>
 	public static void ent_show_response_criteria(string arguments = "") => Run("ent_show_response_criteria", arguments);
 
-	/// <summary>Displays the skeleton for the given entity(ies). Arguments: {entity_name} / {class_name} / {entity_index} / {no argument = pick what player is looking at}. Flags: gamedll, cheat.</summary>
+	/// <summary>Displays the skeleton for the given entity(ies). Arguments: {entity_name} / {class_name} / {entity_index} / {no argument = pick what player is looking at}. Flags: cheat, gamedll.</summary>
 	public static void ent_skeleton(string arguments = "") => Run("ent_skeleton", arguments);
 
 	/// <summary>Prints out all entity classes which inherit from a specified base class. Flags: developmentonly, gamedll.</summary>
 	public static void ent_spew_derived_classes(string arguments = "") => Run("ent_spew_derived_classes", arguments);
 
-	/// <summary>Teleport the specified entity to where the player is looking. Format: ent_teleport &lt;entity name&gt;. Flags: gamedll, cheat.</summary>
+	/// <summary>Teleport the specified entity to where the player is looking. Format: ent_teleport &lt;entity name&gt;. Flags: cheat, gamedll.</summary>
 	public static void ent_teleport(string arguments = "") => Run("ent_teleport", arguments);
 
-	/// <summary>Displays text debugging information about the given entity(ies) on top of the entity (See Overlay Text) Arguments: {entity_name} / {class_name} / {entity_index} / {no argument = pick what player is looking at}. Flags: gamedll, cheat, vconsole_fuzzy_matching.</summary>
+	/// <summary>Displays text debugging information about the given entity(ies) on top of the entity (See Overlay Text) Arguments: {entity_name} / {class_name} / {entity_index} / {no argument = pick what player is looking at}. Flags: cheat, vconsole_fuzzy_matching, gamedll.</summary>
 	public static void ent_text(string arguments = "") => Run("ent_text", arguments);
 
-	/// <summary>Displays text debugging information about the given entity(ies) [within 256 units of the player] on top of the entity (See Overlay Text) Arguments: {entity_name} / {class_name} / {entity_index} / {no argument = pick what player is looking at}. Flags: gamedll, cheat.</summary>
+	/// <summary>Displays text debugging information about the given entity(ies) [within 256 units of the player] on top of the entity (See Overlay Text) Arguments: {entity_name} / {class_name} / {entity_index} / {no argument = pick what player is looking at}. Flags: cheat, gamedll.</summary>
 	public static void ent_text256(string arguments = "") => Run("ent_text256", arguments);
 
-	/// <summary>Hide text debugging information about the given entity(ies) on top of the entity (See Overlay Text) Arguments: {entity_name} / {class_name} / {entity_index} / {no argument = pick what player is looking at}. Flags: gamedll, cheat.</summary>
+	/// <summary>Hide text debugging information about the given entity(ies) on top of the entity (See Overlay Text) Arguments: {entity_name} / {class_name} / {entity_index} / {no argument = pick what player is looking at}. Flags: cheat, gamedll.</summary>
 	public static void ent_text_clear(string arguments = "") => Run("ent_text_clear", arguments);
 
-	/// <summary>Set which ent_text filters you want:. Flags: gamedll, cheat.</summary>
+	/// <summary>Set which ent_text filters you want:. Flags: cheat, gamedll.</summary>
 	public static void ent_text_filter(string arguments = "") => Run("ent_text_filter", arguments);
 
-	/// <summary>Displays text debugging information about the given entity(ies) [near the player] on top of the entity (See Overlay Text) 2 Arguments: &lt;Radius&gt; &lt;{entity_name} / {class_name} / {entity_index} / {no argument = pick what player is looking at}&gt;. Flags: gamedll, cheat.</summary>
+	/// <summary>Displays text debugging information about the given entity(ies) [near the player] on top of the entity (See Overlay Text) 2 Arguments: &lt;Radius&gt; &lt;{entity_name} / {class_name} / {entity_index} / {no argument = pick what player is looking at}&gt;. Flags: cheat, gamedll.</summary>
 	public static void ent_text_radius(string arguments = "") => Run("ent_text_radius", arguments);
 
-	/// <summary>Adds to list of names to display text debugging information about the given entity(ies) on top of the entity (See Overlay Text) Arguments: {entity_name} / {class_name} / {entity_index} / {no argument = pick what player is looking at}. Flags: gamedll, cheat.</summary>
+	/// <summary>Adds to list of names to display text debugging information about the given entity(ies) on top of the entity (See Overlay Text) Arguments: {entity_name} / {class_name} / {entity_index} / {no argument = pick what player is looking at}. Flags: cheat, gamedll.</summary>
 	public static void ent_text_sticky_add(string arguments = "") => Run("ent_text_sticky_add", arguments);
 
-	/// <summary>Clears the list of names to display text debugging information about the given entity(ies) on top of the entity (See Overlay Text) Arguments: {entity_name} / {class_name} / {entity_index} / {no argument = pick what player is looking at}. Flags: gamedll, cheat.</summary>
+	/// <summary>Clears the list of names to display text debugging information about the given entity(ies) on top of the entity (See Overlay Text) Arguments: {entity_name} / {class_name} / {entity_index} / {no argument = pick what player is looking at}. Flags: cheat, gamedll.</summary>
 	public static void ent_text_sticky_clear(string arguments = "") => Run("ent_text_sticky_clear", arguments);
 
-	/// <summary>Spews the list of names to display text debugging information about the given entity(ies) on top of the entity (See Overlay Text) Arguments: {entity_name} / {class_name} / {entity_index} / {no argument = pick what player is looking at}. Flags: gamedll, cheat.</summary>
+	/// <summary>Spews the list of names to display text debugging information about the given entity(ies) on top of the entity (See Overlay Text) Arguments: {entity_name} / {class_name} / {entity_index} / {no argument = pick what player is looking at}. Flags: cheat, gamedll.</summary>
 	public static void ent_text_sticky_dump(string arguments = "") => Run("ent_text_sticky_dump", arguments);
 
-	/// <summary>Removes from the list of names to display text debugging information about the given entity(ies) on top of the entity (See Overlay Text) Arguments: {entity_name} / {class_name} / {entity_index} / {no argument = pick what player is looking at}. Flags: gamedll, cheat.</summary>
+	/// <summary>Removes from the list of names to display text debugging information about the given entity(ies) on top of the entity (See Overlay Text) Arguments: {entity_name} / {class_name} / {entity_index} / {no argument = pick what player is looking at}. Flags: cheat, gamedll.</summary>
 	public static void ent_text_sticky_remove(string arguments = "") => Run("ent_text_sticky_remove", arguments);
 
-	/// <summary>un-grabs all objects. Flags: gamedll, cheat.</summary>
+	/// <summary>un-grabs all objects. Flags: cheat, gamedll.</summary>
 	public static void ent_ungrab(string arguments = "") => Run("ent_ungrab", arguments);
 
-	/// <summary>Displays the interpolated vcollide wireframe pm am entity. Arguments: {entity_name} / {class_name} / {entity_index} / {no argument = pick what player is looking at}. Flags: gamedll, cheat.</summary>
+	/// <summary>Displays the interpolated vcollide wireframe pm am entity. Arguments: {entity_name} / {class_name} / {entity_index} / {no argument = pick what player is looking at}. Flags: cheat, gamedll.</summary>
 	public static void ent_vcollide_wireframe(string arguments = "") => Run("ent_vcollide_wireframe", arguments);
 
 	/// <summary>Selects the picked entity as the view entity. Flags: developmentonly, gamedll.</summary>
 	public static void ent_viewentity(string arguments = "") => Run("ent_viewentity", arguments);
 
-	/// <summary>Displays the eye position for the given entity(ies) in red. Arguments: {entity_name} / {class_name} / {entity_index} / {no argument = pick what player is looking at}. Flags: gamedll, cheat.</summary>
+	/// <summary>Displays the eye position for the given entity(ies) in red. Arguments: {entity_name} / {class_name} / {entity_index} / {no argument = pick what player is looking at}. Flags: cheat, gamedll.</summary>
 	public static void ent_viewoffset(string arguments = "") => Run("ent_viewoffset", arguments);
 
 	/// <summary>Used to debug ViewPunch. Flags: developmentonly, gamedll.</summary>
 	public static void ent_viewpunch(string arguments = "") => Run("ent_viewpunch", arguments);
 
-	/// <summary>Displays visibility traces for the given entity Arguments: {entity_name} / {class_name} / {entity_index} / {no argument = pick what player is looking at}. Flags: gamedll, cheat, vconsole_fuzzy_matching.</summary>
+	/// <summary>Displays visibility traces for the given entity Arguments: {entity_name} / {class_name} / {entity_index} / {no argument = pick what player is looking at}. Flags: cheat, vconsole_fuzzy_matching, gamedll.</summary>
 	public static void ent_visibility_traces(string arguments = "") => Run("ent_visibility_traces", arguments);
 
-	/// <summary>List all known entity lumps. Flags: developmentonly, defensive.</summary>
+	/// <summary>List all known entity lumps. Flags: defensive, developmentonly.</summary>
 	public static void entity_lump_list(string arguments = "") => Run("entity_lump_list", arguments);
 
-	/// <summary>Dump the contents of an entity lump. Flags: developmentonly, defensive.</summary>
+	/// <summary>Dump the contents of an entity lump. Flags: defensive, developmentonly.</summary>
 	public static void entity_lump_spew(string arguments = "") => Run("entity_lump_spew", arguments);
 
-	/// <summary>List server entities, sorted by spawn group. Flags: developmentonly, gamedll, defensive.</summary>
+	/// <summary>List server entities, sorted by spawn group. Flags: defensive, developmentonly, gamedll.</summary>
 	public static void ents(string arguments = "") => Run("ents", arguments);
 
-	/// <summary>Escape key pressed. Flags: release, clientcmd_can_execute.</summary>
+	/// <summary>Escape key pressed. Flags: clientcmd_can_execute, release.</summary>
 	public static void escape(string arguments = "") => Run("escape", arguments);
 
-	/// <summary>Flags: linked_concommand, developmentonly, gamedll, clientdll, defensive.</summary>
+	/// <summary>Flags: defensive, developmentonly, linked_concommand, gamedll, clientdll.</summary>
 	public static void event_reload_schema(string arguments = "") => Run("event_reload_schema", arguments);
 
-	/// <summary>Execute a cfg file. Flags: dontrecord, release.</summary>
+	/// <summary>Execute a cfg file. Flags: dontrecord, execute_immediately, release.</summary>
 	public static void exec(string arguments = "") => Run("exec", arguments);
 
 	/// <summary>Execute a cfg file over time. Flags: cheat, dontrecord.</summary>
 	public static void exec_async(string arguments = "") => Run("exec_async", arguments);
 
-	/// <summary>Execute a cfg file if file exists. Flags: dontrecord, release.</summary>
+	/// <summary>Execute a cfg file if file exists. Flags: dontrecord, execute_immediately, release.</summary>
 	public static void execifexists(string arguments = "") => Run("execifexists", arguments);
 
-	/// <summary>Kills the player with explosive damage. Flags: gamedll, cheat, client_can_execute.</summary>
+	/// <summary>Kills the player with explosive damage. Flags: cheat, client_can_execute, gamedll.</summary>
 	public static void explode(string arguments = "") => Run("explode", arguments);
 
-	/// <summary>Kills a player applying an explosive force. Usage: explodevector &lt;player&gt; &lt;x value&gt; &lt;y value&gt; &lt;z value&gt;. Flags: gamedll, cheat, client_can_execute.</summary>
+	/// <summary>Kills a player applying an explosive force. Usage: explodevector &lt;player&gt; &lt;x value&gt; &lt;y value&gt; &lt;z value&gt;. Flags: cheat, client_can_execute, gamedll.</summary>
 	public static void explodevector(string arguments = "") => Run("explodevector", arguments);
 
-	/// <summary>fadein {time r g b}: Fades the screen in from black or from the specified color over the given number of seconds. Flags: gamedll, cheat.</summary>
+	/// <summary>fadein {time r g b}: Fades the screen in from black or from the specified color over the given number of seconds. Flags: cheat, gamedll.</summary>
 	public static void fadein(string arguments = "") => Run("fadein", arguments);
 
-	/// <summary>fadeout {time r g b}: Fades the screen to black or to the specified color over the given number of seconds. Flags: gamedll, cheat.</summary>
+	/// <summary>fadeout {time r g b}: Fades the screen to black or to the specified color over the given number of seconds. Flags: cheat, gamedll.</summary>
 	public static void fadeout(string arguments = "") => Run("fadeout", arguments);
 
 	/// <summary>Find concommands with the specified string in their name/help text. Flags: release.</summary>
@@ -1000,7 +1012,7 @@ public static class ConCommands {
 	/// <summary>Find concommands by flags. Flags: release.</summary>
 	public static void findflags(string arguments = "") => Run("findflags", arguments);
 
-	/// <summary>Flags: gamedll, cheat.</summary>
+	/// <summary>Flags: cheat, gamedll.</summary>
 	public static void firetarget(string arguments = "") => Run("firetarget", arguments);
 
 	/// <summary>Sets the fog color override. Flags: cheat.</summary>
@@ -1015,19 +1027,25 @@ public static class ConCommands {
 	/// <summary>Enable floating point exceptions to find bugs. Flags: developmentonly.</summary>
 	public static void force_floating_point_exceptions(string arguments = "") => Run("force_floating_point_exceptions", arguments);
 
-	/// <summary>Clear the list of files that have been opened. Flags: developmentonly, defensive.</summary>
+	/// <summary>Toggle field path tracing to file. Flags: defensive, developmentonly.</summary>
+	public static void fp_trace(string arguments = "") => Run("fp_trace", arguments);
+
+	/// <summary>Clear the list of files that have been opened. Flags: defensive, developmentonly.</summary>
 	public static void fs_clear_open_duplicate_times(string arguments = "") => Run("fs_clear_open_duplicate_times", arguments);
 
-	/// <summary>Set fs_report_long_reads 1 before loading to use this. Prints a list of files that were opened more than once and ~how long was spent reading from them. Flags: developmentonly, defensive.</summary>
+	/// <summary>Set fs_report_long_reads 1 before loading to use this. Prints a list of files that were opened more than once and ~how long was spent reading from them. Flags: defensive, developmentonly.</summary>
 	public static void fs_dump_open_duplicate_times(string arguments = "") => Run("fs_dump_open_duplicate_times", arguments);
 
-	/// <summary>Flags: gamedll, cheat.</summary>
+	/// <summary>index &lt;threshold bytes&gt;: spew changes to ent index, optionally only spewing if update is &gt; than threshold bytes. Flags: cheat.</summary>
+	public static void fs_spew_readfieldlist(string arguments = "") => Run("fs_spew_readfieldlist", arguments);
+
+	/// <summary>Flags: cheat, gamedll.</summary>
 	public static void func_mover_count(string arguments = "") => Run("func_mover_count", arguments);
 
-	/// <summary>Flags: gamedll, cheat.</summary>
+	/// <summary>Flags: cheat, gamedll.</summary>
 	public static void func_mover_enable_debug_all(string arguments = "") => Run("func_mover_enable_debug_all", arguments);
 
-	/// <summary>Flags: gamedll, cheat.</summary>
+	/// <summary>Flags: cheat, gamedll.</summary>
 	public static void func_mover_step_movement(string arguments = "") => Run("func_mover_step_movement", arguments);
 
 	/// <summary>compare game events across all mods. Flags: developmentonly, gamedll.</summary>
@@ -1057,25 +1075,106 @@ public static class ConCommands {
 	/// <summary>Generate a minidump comment and spew the results to the console. Flags: developmentonly.</summary>
 	public static void generate_minidump_comment(string arguments = "") => Run("generate_minidump_comment", arguments);
 
-	/// <summary>Generated a nulled out container. Flags: linked_concommand, developmentonly, defensive.</summary>
+	/// <summary>Generated a nulled out container. Flags: defensive, developmentonly, linked_concommand.</summary>
 	public static void generate_null_container(string arguments = "") => Run("generate_null_container", arguments);
 
-	/// <summary>Args: [Asset directory Path]. Flags: linked_concommand, developmentonly, defensive.</summary>
+	/// <summary>Args: [Asset directory Path]. Flags: defensive, developmentonly, linked_concommand.</summary>
 	public static void generate_trash_synth(string arguments = "") => Run("generate_trash_synth", arguments);
 
-	/// <summary>Give item to player. Arguments: &lt;item_name&gt;. Flags: gamedll, vconsole_fuzzy_matching, client_can_execute.</summary>
+	/// <summary>Calculate a skin diffusion profile using scattering constants. Flags: defensive, developmentonly.</summary>
+	public static void gfx_calculate_skin_diffusion_profile_dipole(string arguments = "") => Run("gfx_calculate_skin_diffusion_profile_dipole", arguments);
+
+	/// <summary>Generates a reference 6-point lighting ball. Flags: defensive, developmentonly.</summary>
+	public static void gfx_generate_6point_ball(string arguments = "") => Run("gfx_generate_6point_ball", arguments);
+
+	/// <summary>Generates a LUT for AO cone vs. sphere. Flags: defensive, developmentonly.</summary>
+	public static void gfx_generate_ao_cone_response(string arguments = "") => Run("gfx_generate_ao_cone_response", arguments);
+
+	/// <summary>Generates a LUT for AO proxy calculations. Flags: defensive, developmentonly.</summary>
+	public static void gfx_generate_ao_sphere_response(string arguments = "") => Run("gfx_generate_ao_sphere_response", arguments);
+
+	/// <summary>Generate solar radiance image. Flags: defensive, developmentonly.</summary>
+	public static void gfx_generate_arhosek_solar_radiance_image(string arguments = "") => Run("gfx_generate_arhosek_solar_radiance_image", arguments);
+
+	/// <summary>Computes a table of color temperatures. Flags: defensive, developmentonly.</summary>
+	public static void gfx_generate_color_temperature_table(string arguments = "") => Run("gfx_generate_color_temperature_table", arguments);
+
+	/// <summary>Generates a LUT for cone-cone union. Flags: defensive, developmentonly.</summary>
+	public static void gfx_generate_cone_cone_union_LUT(string arguments = "") => Run("gfx_generate_cone_cone_union_LUT", arguments);
+
+	/// <summary>Generates a LUT for cone-cone union. Flags: defensive, developmentonly.</summary>
+	public static void gfx_generate_cone_cone_union_slice(string arguments = "") => Run("gfx_generate_cone_cone_union_slice", arguments);
+
+	/// <summary>Generates a LUT to give a cone angle from parameterized ellipse. Flags: defensive, developmentonly.</summary>
+	public static void gfx_generate_ellipse_coneangle_LUT(string arguments = "") => Run("gfx_generate_ellipse_coneangle_LUT", arguments);
+
+	/// <summary>Generate LUTs for modified GGX. Flags: defensive, developmentonly.</summary>
+	public static void gfx_generate_ggx_luts(string arguments = "") => Run("gfx_generate_ggx_luts", arguments);
+
+	/// <summary>EXR containing sky model limb darkening datasets. Flags: defensive, developmentonly.</summary>
+	public static void gfx_generate_limb_darkening_datasets(string arguments = "") => Run("gfx_generate_limb_darkening_datasets", arguments);
+
+	/// <summary>Generate a poisson disk of N samples using best-candidate sampling. Flags: defensive, developmentonly.</summary>
+	public static void gfx_generate_poisson_disk(string arguments = "") => Run("gfx_generate_poisson_disk", arguments);
+
+	/// <summary>Generate a pre-integrated BRDF LUT. Flags: defensive, developmentonly.</summary>
+	public static void gfx_generate_preintegrated_brdf(string arguments = "") => Run("gfx_generate_preintegrated_brdf", arguments);
+
+	/// <summary>Generates a reference spherical harmonics lighting ball. Flags: defensive, developmentonly.</summary>
+	public static void gfx_generate_sh_ball(string arguments = "") => Run("gfx_generate_sh_ball", arguments);
+
+	/// <summary>Generates SH skyboxes. Flags: defensive, developmentonly.</summary>
+	public static void gfx_generate_sh_skyboxes(string arguments = "") => Run("gfx_generate_sh_skyboxes", arguments);
+
+	/// <summary>Generate a sine pulse texture. Flags: defensive, developmentonly.</summary>
+	public static void gfx_generate_sin_pulse_texture(string arguments = "") => Run("gfx_generate_sin_pulse_texture", arguments);
+
+	/// <summary>Generate the diffuse warp lookup texture used for pre-integrated skin shading. Flags: defensive, developmentonly.</summary>
+	public static void gfx_generate_skin_diffuse_warp(string arguments = "") => Run("gfx_generate_skin_diffuse_warp", arguments);
+
+	/// <summary>Generate the shadow warp lookup texture used for pre-integrated skin shading. Flags: defensive, developmentonly.</summary>
+	public static void gfx_generate_skin_shadow_warp(string arguments = "") => Run("gfx_generate_skin_shadow_warp", arguments);
+
+	/// <summary>EXR containing sky model solar datasets. Flags: defensive, developmentonly.</summary>
+	public static void gfx_generate_solar_datasets(string arguments = "") => Run("gfx_generate_solar_datasets", arguments);
+
+	/// <summary>Test generate mips 32 bits. Flags: defensive, developmentonly.</summary>
+	public static void gfx_generatemips_test(string arguments = "") => Run("gfx_generatemips_test", arguments);
+
+	/// <summary>Graphs CIE1931 functions to make sure they look right. Flags: defensive, developmentonly.</summary>
+	public static void gfx_graph_cie_color_matching_approx_funcs(string arguments = "") => Run("gfx_graph_cie_color_matching_approx_funcs", arguments);
+
+	/// <summary>Graphs the old broken filter kernel and candidates for new ones. Flags: defensive, developmentonly.</summary>
+	public static void gfx_graph_lightmap_filter_kernels(string arguments = "") => Run("gfx_graph_lightmap_filter_kernels", arguments);
+
+	/// <summary>Determine which constant(s) to use to preserve flat normals under HemiOctohedron normal map encoding. Flags: defensive, developmentonly.</summary>
+	public static void gfx_hemioct_flat_normal_test(string arguments = "") => Run("gfx_hemioct_flat_normal_test", arguments);
+
+	/// <summary>Load a measured diffusion profile. Flags: defensive, developmentonly.</summary>
+	public static void gfx_load_skin_diffusion_profile(string arguments = "") => Run("gfx_load_skin_diffusion_profile", arguments);
+
+	/// <summary>Load a custom skin diffusion profile. Flags: defensive, developmentonly.</summary>
+	public static void gfx_load_skin_diffusion_profile_image(string arguments = "") => Run("gfx_load_skin_diffusion_profile_image", arguments);
+
+	/// <summary>Load sum-of-gaussians skin diffusion profile. Flags: defensive, developmentonly.</summary>
+	public static void gfx_load_skin_diffusion_profile_sum_of_gaussians(string arguments = "") => Run("gfx_load_skin_diffusion_profile_sum_of_gaussians", arguments);
+
+	/// <summary>Make some code for me. Flags: defensive, developmentonly.</summary>
+	public static void gfx_make_gpu_scrambled_halton_code(string arguments = "") => Run("gfx_make_gpu_scrambled_halton_code", arguments);
+
+	/// <summary>Give item to player. Arguments: &lt;item_name&gt;. Flags: client_can_execute, vconsole_fuzzy_matching, gamedll.</summary>
 	public static void give(string arguments = "") => Run("give", arguments);
 
-	/// <summary>Give item oriented to player angles. Arguments: &lt;item_name&gt;. Flags: gamedll, vconsole_fuzzy_matching, client_can_execute.</summary>
+	/// <summary>Give item oriented to player angles. Arguments: &lt;item_name&gt;. Flags: client_can_execute, vconsole_fuzzy_matching, gamedll.</summary>
 	public static void give_oriented(string arguments = "") => Run("give_oriented", arguments);
 
-	/// <summary>Give a supply of ammo for current weapon... Flags: gamedll, cheat.</summary>
+	/// <summary>Give a supply of ammo for current weapon. Flags: cheat, gamedll.</summary>
 	public static void givecurrentammo(string arguments = "") => Run("givecurrentammo", arguments);
 
-	/// <summary>global_set &lt;globalname&gt; &lt;state&gt;: Sets the state of the given env_global (0 = OFF, 1 = ON, 2 = DEAD). Flags: gamedll, cheat.</summary>
+	/// <summary>global_set &lt;globalname&gt; &lt;state&gt;: Sets the state of the given env_global (0 = OFF, 1 = ON, 2 = DEAD). Flags: cheat, gamedll.</summary>
 	public static void global_set(string arguments = "") => Run("global_set", arguments);
 
-	/// <summary>Toggle by default, or 0 to disable and 1 to enable. Player becomes invulnerable. Flags: gamedll, cheat, client_can_execute.</summary>
+	/// <summary>Toggle by default, or 0 to disable and 1 to enable. Player becomes invulnerable. Flags: cheat, client_can_execute, gamedll.</summary>
 	public static void god(string arguments = "") => Run("god", arguments);
 
 	/// <summary>Print all anim graph parameters for the specified entity. Arguments: {entity_name} / {class_name} / {entity_index} / {no argument = pick what player is looking at}. Flags: developmentonly, gamedll.</summary>
@@ -1084,10 +1183,10 @@ public static class ConCommands {
 	/// <summary>grep line for pattern, print out matching lines only. Flags: release.</summary>
 	public static void grep(string arguments = "") => Run("grep", arguments);
 
-	/// <summary>Display ground entity list &lt;index&gt;. Flags: developmentonly, gamedll, cheat.</summary>
+	/// <summary>Display ground entity list &lt;index&gt;. Flags: cheat, developmentonly, gamedll.</summary>
 	public static void groundlist(string arguments = "") => Run("groundlist", arguments);
 
-	/// <summary>Heals the player. Arguments: &lt;health to gain&gt;. Flags: gamedll, cheat, client_can_execute.</summary>
+	/// <summary>Heals the player. Arguments: &lt;health to gain&gt;. Flags: cheat, client_can_execute, gamedll.</summary>
 	public static void healme(string arguments = "") => Run("healme", arguments);
 
 	/// <summary>Find help about a convar/concommand. Flags: release.</summary>
@@ -1108,31 +1207,37 @@ public static class ConCommands {
 	/// <summary>Saves out the user config values. Flags: release.</summary>
 	public static void host_writeconfig(string arguments = "") => Run("host_writeconfig", arguments);
 
-	/// <summary>Hurts the player. Arguments: &lt;health to lose&gt;. Flags: gamedll, cheat, client_can_execute.</summary>
+	/// <summary>Hurts the player. Arguments: &lt;health to lose&gt;. Flags: cheat, client_can_execute, gamedll.</summary>
 	public static void hurtme(string arguments = "") => Run("hurtme", arguments);
 
-	/// <summary>Hurts the enemy in front of you. Arguments: &lt;health to lose&gt;. Flags: gamedll, cheat, client_can_execute.</summary>
+	/// <summary>Hurts the enemy in front of you. Arguments: &lt;health to lose&gt;. Flags: cheat, client_can_execute, gamedll.</summary>
 	public static void hurtthem(string arguments = "") => Run("hurtthem", arguments);
 
-	/// <summary>Flags: linked_concommand, developmentonly, defensive.</summary>
+	/// <summary>Flags: defensive, developmentonly, linked_concommand.</summary>
 	public static void ik_debug_fabrik_backwards_iteration_toggle(string arguments = "") => Run("ik_debug_fabrik_backwards_iteration_toggle", arguments);
 
-	/// <summary>Flags: linked_concommand, developmentonly, defensive.</summary>
+	/// <summary>Flags: defensive, developmentonly, linked_concommand.</summary>
 	public static void ik_debug_fabrik_forwards_iteration_toggle(string arguments = "") => Run("ik_debug_fabrik_forwards_iteration_toggle", arguments);
 
-	/// <summary>Cycles focus between the game window and undocked imgui windows. Flags: developmentonly, defensive.</summary>
+	/// <summary>Spew IME info. Flags: defensive, developmentonly, dontrecord.</summary>
+	public static void ime_info(string arguments = "") => Run("ime_info", arguments);
+
+	/// <summary>Spew list of installed IMEs. Flags: dontrecord, hidden, release.</summary>
+	public static void ime_installed_names(string arguments = "") => Run("ime_installed_names", arguments);
+
+	/// <summary>Cycles focus between the game window and undocked imgui windows. Flags: defensive, developmentonly.</summary>
 	public static void imgui_cycle_undocked_window_focus(string arguments = "") => Run("imgui_cycle_undocked_window_focus", arguments);
 
-	/// <summary>Shows the entity browser, focused on the entity you specify. Arguments: {entity_name} / {class_name} / {entity_index} / {no argument = pick what player is looking at}. Flags: gamedll, cheat.</summary>
+	/// <summary>Shows the entity browser, focused on the entity you specify. Arguments: {entity_name} / {class_name} / {entity_index} / {no argument = pick what player is looking at}. Flags: cheat, gamedll.</summary>
 	public static void imgui_debug_entity(string arguments = "") => Run("imgui_debug_entity", arguments);
 
-	/// <summary>Sets ImGui selection. Flags: gamedll, cheat.</summary>
+	/// <summary>Sets ImGui selection. Flags: cheat, gamedll.</summary>
 	public static void imgui_set_selection(string arguments = "") => Run("imgui_set_selection", arguments);
 
-	/// <summary>Sets ImGui header status text. Flags: gamedll, cheat.</summary>
+	/// <summary>Sets ImGui header status text. Flags: cheat, gamedll.</summary>
 	public static void imgui_set_status_text(string arguments = "") => Run("imgui_set_status_text", arguments);
 
-	/// <summary>Forces a button to be a particular state - WHEN PROCESSING USERCOMMANDS. Flags: developmentonly, gamedll, vconsole_fuzzy_matching.</summary>
+	/// <summary>Forces a button to be a particular state - WHEN PROCESSING USERCOMMANDS. Flags: developmentonly, vconsole_fuzzy_matching, gamedll.</summary>
 	public static void in_forcebuttonstate(string arguments = "") => Run("in_forcebuttonstate", arguments);
 
 	/// <summary>Increment specified convar value. Flags: dontrecord, release.</summary>
@@ -1141,34 +1246,34 @@ public static class ConCommands {
 	/// <summary>input_state. Flags: developmentonly.</summary>
 	public static void input_state(string arguments = "") => Run("input_state", arguments);
 
-	/// <summary>Goto a direct timestamp of the replay. Flags: developmentonly, defensive.</summary>
+	/// <summary>Goto a direct timestamp of the replay. Flags: defensive, developmentonly.</summary>
 	public static void instant_replay_goto_tick(string arguments = "") => Run("instant_replay_goto_tick", arguments);
 
-	/// <summary>Goto a direct timestamp of the replay. Flags: developmentonly, defensive.</summary>
+	/// <summary>Goto a direct timestamp of the replay. Flags: defensive, developmentonly.</summary>
 	public static void instant_replay_goto_tick_relative(string arguments = "") => Run("instant_replay_goto_tick_relative", arguments);
 
-	/// <summary>If in replay, jumps back to live. Flags: developmentonly, defensive.</summary>
+	/// <summary>If in replay, jumps back to live. Flags: defensive, developmentonly.</summary>
 	public static void instant_replay_live(string arguments = "") => Run("instant_replay_live", arguments);
 
-	/// <summary>Pauses instant replay. Flags: developmentonly, defensive.</summary>
+	/// <summary>Pauses instant replay. Flags: defensive, developmentonly.</summary>
 	public static void instant_replay_pause(string arguments = "") => Run("instant_replay_pause", arguments);
 
-	/// <summary>Resumes instant replay. Flags: developmentonly, defensive.</summary>
+	/// <summary>Resumes instant replay. Flags: defensive, developmentonly.</summary>
 	public static void instant_replay_resume(string arguments = "") => Run("instant_replay_resume", arguments);
 
-	/// <summary>Number of seconds to skip back to instant replay from current position. Flags: developmentonly, defensive.</summary>
+	/// <summary>Number of seconds to skip back to instant replay from current position. Flags: defensive, developmentonly.</summary>
 	public static void instant_replay_skip(string arguments = "") => Run("instant_replay_skip", arguments);
 
-	/// <summary>Number of seconds to skip back to instant replay from live. Flags: developmentonly, defensive.</summary>
+	/// <summary>Number of seconds to skip back to instant replay from live. Flags: defensive, developmentonly.</summary>
 	public static void instant_replay_skip_live(string arguments = "") => Run("instant_replay_skip_live", arguments);
 
-	/// <summary>Sets instant replay speed. Flags: developmentonly, defensive.</summary>
+	/// <summary>Sets instant replay speed. Flags: defensive, developmentonly.</summary>
 	public static void instant_replay_timescale(string arguments = "") => Run("instant_replay_timescale", arguments);
 
-	/// <summary>Toggles instant replay. Flags: developmentonly, defensive.</summary>
+	/// <summary>Toggles instant replay. Flags: defensive, developmentonly.</summary>
 	public static void instant_replay_togglepause(string arguments = "") => Run("instant_replay_togglepause", arguments);
 
-	/// <summary>Take a jpeg screenshot: jpeg_screenshot [filename] [quality 1-100]. Flags: developmentonly, defensive.</summary>
+	/// <summary>Take a jpeg screenshot: jpeg_screenshot [filename] [quality 1-100]. Flags: defensive, developmentonly.</summary>
 	public static void jpeg_screenshot(string arguments = "") => Run("jpeg_screenshot", arguments);
 
 	/// <summary>Find key bound to specified command string. Flags: release.</summary>
@@ -1176,6 +1281,9 @@ public static class ConCommands {
 
 	/// <summary>List bound keys with bindings. Flags: release.</summary>
 	public static void key_listboundkeys(string arguments = "") => Run("key_listboundkeys", arguments);
+
+	/// <summary>Updates game keyboard layout to current windows keyboard setting. Flags: defensive, developmentonly.</summary>
+	public static void key_updatelayout(string arguments = "") => Run("key_updatelayout", arguments);
 
 	/// <summary>Kick a player by name. Flags: dontrecord, release.</summary>
 	public static void kick(string arguments = "") => Run("kick", arguments);
@@ -1186,40 +1294,40 @@ public static class ConCommands {
 	/// <summary>Kick a player by userid or uniqueid, with a message. Flags: dontrecord, release.</summary>
 	public static void kickid_hltv(string arguments = "") => Run("kickid_hltv", arguments);
 
-	/// <summary>Kills the player with generic damage. Flags: gamedll, cheat, client_can_execute.</summary>
+	/// <summary>Kills the player with generic damage. Flags: cheat, client_can_execute, gamedll.</summary>
 	public static void kill(string arguments = "") => Run("kill", arguments);
 
-	/// <summary>Kills all shrines. Flags: gamedll, cheat, release.</summary>
+	/// <summary>Kills all shrines. Flags: cheat, release, gamedll.</summary>
 	public static void kill_all_shrines(string arguments = "") => Run("kill_all_shrines", arguments);
 
-	/// <summary>Kills a player applying force. Usage: killvector &lt;player&gt; &lt;x value&gt; &lt;y value&gt; &lt;z value&gt;. Flags: gamedll, cheat, client_can_execute.</summary>
+	/// <summary>Kills a player applying force. Usage: killvector &lt;player&gt; &lt;x value&gt; &lt;y value&gt; &lt;z value&gt;. Flags: cheat, client_can_execute, gamedll.</summary>
 	public static void killvector(string arguments = "") => Run("killvector", arguments);
 
-	/// <summary>Flags: developmentonly, defensive.</summary>
+	/// <summary>Flags: defensive, developmentonly.</summary>
 	public static void lightbinner_precompute(string arguments = "") => Run("lightbinner_precompute", arguments);
 
-	/// <summary>Flags: developmentonly, defensive.</summary>
+	/// <summary>Flags: defensive, developmentonly.</summary>
 	public static void lightbinner_test_computespheresilhouette(string arguments = "") => Run("lightbinner_test_computespheresilhouette", arguments);
 
-	/// <summary>Flags: developmentonly, defensive.</summary>
+	/// <summary>Flags: defensive, developmentonly.</summary>
 	public static void lightbinner_test_computesumsilhouette(string arguments = "") => Run("lightbinner_test_computesumsilhouette", arguments);
 
-	/// <summary>Displays a list of the last 5 lines of speech from NPCs. Flags: developmentonly, gamedll, dontrecord, defensive.</summary>
+	/// <summary>Displays a list of the last 5 lines of speech from NPCs. Flags: defensive, developmentonly, dontrecord, gamedll.</summary>
 	public static void listRecentNPCSpeech(string arguments = "") => Run("listRecentNPCSpeech", arguments);
 
 	/// <summary>List demo file contents. Flags: release.</summary>
 	public static void listdemo(string arguments = "") => Run("listdemo", arguments);
 
-	/// <summary>Lists banned users. Flags: developmentonly, defensive.</summary>
+	/// <summary>Lists banned users. Flags: defensive, developmentonly.</summary>
 	public static void listid(string arguments = "") => Run("listid", arguments);
 
-	/// <summary>List IP addresses on the ban list. Flags: developmentonly, defensive.</summary>
+	/// <summary>List IP addresses on the ban list. Flags: defensive, developmentonly.</summary>
 	public static void listip(string arguments = "") => Run("listip", arguments);
 
-	/// <summary>Usage: load [save file name]. Flags: developmentonly, dontrecord, vconsole_fuzzy_matching, defensive.</summary>
+	/// <summary>Usage: load [save file name]. Flags: defensive, developmentonly, dontrecord, vconsole_fuzzy_matching.</summary>
 	public static void load(string arguments = "") => Run("load", arguments);
 
-	/// <summary>Reloads the item master schema. Flags: developmentonly, gamedll, hidden, cheat.</summary>
+	/// <summary>Reloads the item master schema. Flags: cheat, developmentonly, hidden, gamedll.</summary>
 	public static void load_master_item_schema(string arguments = "") => Run("load_master_item_schema", arguments);
 
 	/// <summary>Enables logging to file, console, and udp &lt; on | off &gt;. Flags: release.</summary>
@@ -1240,439 +1348,505 @@ public static class ConCommands {
 	/// <summary>Set the verbosity of a logging channel. Flags: dontrecord, release.</summary>
 	public static void log_verbosity(string arguments = "") => Run("log_verbosity", arguments);
 
-	/// <summary>Print the listeners of the current loop mode. Flags: developmentonly, defensive.</summary>
+	/// <summary>Print the listeners of the current loop mode. Flags: defensive, developmentonly.</summary>
 	public static void loop_dump(string arguments = "") => Run("loop_dump", arguments);
 
-	/// <summary>Flushes the specified cache. Flags: developmentonly, defensive.</summary>
+	/// <summary>Flushes the specified cache. Flags: defensive, developmentonly.</summary>
 	public static void lrucache_flush(string arguments = "") => Run("lrucache_flush", arguments);
 
-	/// <summary>Resets stats for the specified CUtlLRUCaches (or all if none specified). Flags: developmentonly, defensive.</summary>
+	/// <summary>Resets stats for the specified CUtlLRUCaches (or all if none specified). Flags: defensive, developmentonly.</summary>
 	public static void lrucache_reset_stats(string arguments = "") => Run("lrucache_reset_stats", arguments);
 
-	/// <summary>Sets the specified cache to the specified size. Flags: developmentonly, defensive.</summary>
+	/// <summary>Sets the specified cache to the specified size. Flags: defensive, developmentonly.</summary>
 	public static void lrucache_set_size(string arguments = "") => Run("lrucache_set_size", arguments);
 
-	/// <summary>Spews information about all CUtlLRUCaches. Flags: developmentonly, defensive.</summary>
+	/// <summary>Spews information about all CUtlLRUCaches. Flags: defensive, developmentonly.</summary>
 	public static void lrucache_stats(string arguments = "") => Run("lrucache_stats", arguments);
+
+	/// <summary>Flags: defensive, developmentonly.</summary>
+	public static void lua_report_memory(string arguments = "") => Run("lua_report_memory", arguments);
 
 	/// <summary>map &lt;mapname&gt; :Load a new map. Flags: release, vconsole_fuzzy_matching, vconsole_set_focus.</summary>
 	public static void map(string arguments = "") => Run("map", arguments);
 
-	/// <summary>Shows player spawn points (red=invalid). Flags: developmentonly, gamedll, defensive.</summary>
+	/// <summary>Shows player spawn points (red=invalid). Flags: defensive, developmentonly, gamedll.</summary>
 	public static void map_showspawnpoints(string arguments = "") => Run("map_showspawnpoints", arguments);
 
 	/// <summary>Displays list of maps. Flags: release.</summary>
 	public static void maps(string arguments = "") => Run("maps", arguments);
 
-	/// <summary>markup_group_ent_bbox &lt;markup_group name&gt; -&gt; toggle ent_bbox for all members of the named markup group. Flags: gamedll, cheat.</summary>
+	/// <summary>markup_group_ent_bbox &lt;markup_group name&gt; -&gt; toggle ent_bbox for all members of the named markup group. Flags: cheat, gamedll.</summary>
 	public static void markup_group_ent_bbox(string arguments = "") => Run("markup_group_ent_bbox", arguments);
 
-	/// <summary>markup_group_ent_text &lt;markup_group name&gt; -&gt; toggle ent_text for all members of the named markup group. Flags: gamedll, cheat.</summary>
+	/// <summary>markup_group_ent_text &lt;markup_group name&gt; -&gt; toggle ent_text for all members of the named markup group. Flags: cheat, gamedll.</summary>
 	public static void markup_group_ent_text(string arguments = "") => Run("markup_group_ent_text", arguments);
 
-	/// <summary>Spew all current markup groups and their members. Flags: gamedll, cheat.</summary>
+	/// <summary>Spew all current markup groups and their members. Flags: cheat, gamedll.</summary>
 	public static void markup_group_spew(string arguments = "") => Run("markup_group_spew", arguments);
 
 	/// <summary>Assert on shader used based on substring of shader name. Flags: developmentonly.</summary>
 	public static void mat_assert_on_shader_use(string arguments = "") => Run("mat_assert_on_shader_use", arguments);
 
-	/// <summary>Clears the shader cache used for dynamic shader compile. Flags: developmentonly, defensive.</summary>
+	/// <summary>Clears the shader cache used for dynamic shader compile. Flags: defensive, developmentonly.</summary>
 	public static void mat_clearshadercache(string arguments = "") => Run("mat_clearshadercache", arguments);
 
-	/// <summary>Reloads all shaders from vcs files until the next time mat_reloadshaders is called. Flags: developmentonly, defensive.</summary>
+	/// <summary>Reloads all shaders from vcs files until the next time mat_reloadshaders is called. Flags: defensive, developmentonly.</summary>
 	public static void mat_disable_dynamic_shader_compile(string arguments = "") => Run("mat_disable_dynamic_shader_compile", arguments);
 
-	/// <summary>Force reloads all shaders (skips MD5 check). Takes optional substrings of shader names to recompile as arguments. Flags: developmentonly, defensive.</summary>
+	/// <summary>Force reloads all shaders (skips MD5 check). Takes optional substrings of shader names to recompile as arguments. Flags: defensive, developmentonly.</summary>
 	public static void mat_forcereloadshaders(string arguments = "") => Run("mat_forcereloadshaders", arguments);
 
-	/// <summary>Print loaded materials that have no valid layers due to not supporting any of the modes in gameinfo.gi. Flags: developmentonly, defensive.</summary>
+	/// <summary>Print loaded materials that have no valid layers due to not supporting any of the modes in gameinfo.gi. Flags: defensive, developmentonly.</summary>
 	public static void mat_print_dead_materials(string arguments = "") => Run("mat_print_dead_materials", arguments);
 
-	/// <summary>Print loaded materials that are using the error shader or material. Flags: developmentonly, defensive.</summary>
+	/// <summary>Print loaded materials that are using the error shader or material. Flags: defensive, developmentonly.</summary>
 	public static void mat_print_error_materials(string arguments = "") => Run("mat_print_error_materials", arguments);
 
-	/// <summary>Print materials sorted by cost heuristic. Flags: developmentonly, defensive.</summary>
+	/// <summary>Print materials sorted by cost heuristic. Flags: defensive, developmentonly.</summary>
 	public static void mat_print_expensive_materials(string arguments = "") => Run("mat_print_expensive_materials", arguments);
 
-	/// <summary>Print info about a specific material. Flags: developmentonly, defensive.</summary>
+	/// <summary>Print info about a specific material. Flags: defensive, developmentonly.</summary>
 	public static void mat_print_material_info(string arguments = "") => Run("mat_print_material_info", arguments);
 
-	/// <summary>Print loaded materials. Takes an optional substring as an argument. Flags: developmentonly, defensive.</summary>
+	/// <summary>Print loaded materials. Takes an optional substring as an argument. Flags: defensive, developmentonly.</summary>
 	public static void mat_print_materials(string arguments = "") => Run("mat_print_materials", arguments);
 
-	/// <summary>Print materials used last frame. Flags: developmentonly, defensive.</summary>
+	/// <summary>Print materials used last frame. Flags: defensive, developmentonly.</summary>
 	public static void mat_print_materials_last_frame(string arguments = "") => Run("mat_print_materials_last_frame", arguments);
 
-	/// <summary>Print materials that have never been used. Flags: developmentonly, defensive.</summary>
+	/// <summary>Print materials that have never been used. Flags: defensive, developmentonly.</summary>
 	public static void mat_print_materials_unused(string arguments = "") => Run("mat_print_materials_unused", arguments);
 
-	/// <summary>Print supported rendering modes. Flags: developmentonly, defensive.</summary>
+	/// <summary>Print supported rendering modes. Flags: defensive, developmentonly.</summary>
 	public static void mat_print_modes(string arguments = "") => Run("mat_print_modes", arguments);
 
-	/// <summary>Print textures that are neither procedural nor virtual, i.e. the ones the mip streaming system manages, in alphabetical order. Takes an optional substring as an argument. Flags: developmentonly, defensive.</summary>
+	/// <summary>Print textures that are neither procedural nor virtual, i.e. the ones the mip streaming system manages, in alphabetical order. Takes an optional substring as an argument. Flags: defensive, developmentonly.</summary>
 	public static void mat_print_non_virtual_textures(string arguments = "") => Run("mat_print_non_virtual_textures", arguments);
 
-	/// <summary>Print procedural textures ( render targets, UAVs, atlases and other textures created by code ) in ascending in memory size order. Takes an optional substring as an argument. Flags: developmentonly, defensive.</summary>
+	/// <summary>Print procedural textures ( render targets, UAVs, atlases and other textures created by code ) in ascending in memory size order. Takes an optional substring as an argument. Flags: defensive, developmentonly.</summary>
 	public static void mat_print_procedural_textures(string arguments = "") => Run("mat_print_procedural_textures", arguments);
 
-	/// <summary>Print detailed info about a single shader. Takes a shader name (hero.vfx) as an argument. Flags: developmentonly, defensive.</summary>
+	/// <summary>Print detailed info about a single shader. Takes a shader name (hero.vfx) as an argument. Flags: defensive, developmentonly.</summary>
 	public static void mat_print_shader_info(string arguments = "") => Run("mat_print_shader_info", arguments);
 
-	/// <summary>Print current shader quality setting. Flags: developmentonly, defensive.</summary>
+	/// <summary>Print current shader quality setting. Flags: defensive, developmentonly.</summary>
 	public static void mat_print_shader_quality(string arguments = "") => Run("mat_print_shader_quality", arguments);
 
-	/// <summary>Print loaded shaders. Takes a substring as an argument. Flags: developmentonly, defensive.</summary>
+	/// <summary>Print loaded shaders. Takes a substring as an argument. Flags: defensive, developmentonly.</summary>
 	public static void mat_print_shaders(string arguments = "") => Run("mat_print_shaders", arguments);
 
-	/// <summary>Print loaded textures in alphabetical order. Takes an optional substring as an argument. Flags: developmentonly, defensive.</summary>
+	/// <summary>Print loaded textures in alphabetical order. Takes an optional substring as an argument. Flags: defensive, developmentonly.</summary>
 	public static void mat_print_textures(string arguments = "") => Run("mat_print_textures", arguments);
 
-	/// <summary>Print loaded textures in ascending size order. Takes an optional substring as an argument. Flags: developmentonly, defensive.</summary>
+	/// <summary>Print loaded textures in ascending size order. Takes an optional substring as an argument. Flags: defensive, developmentonly.</summary>
 	public static void mat_print_textures_size(string arguments = "") => Run("mat_print_textures_size", arguments);
 
-	/// <summary>Print loaded textures in ascending size order as they are in memory. Takes an optional substring as an argument. Flags: developmentonly, defensive.</summary>
+	/// <summary>Print loaded textures in ascending size order as they are in memory. Takes an optional substring as an argument. Flags: defensive, developmentonly.</summary>
 	public static void mat_print_textures_size_in_memory(string arguments = "") => Run("mat_print_textures_size_in_memory", arguments);
 
-	/// <summary>Reinitializes all loaded materials, reloading their shaders. Flags: developmentonly, defensive.</summary>
+	/// <summary>Reinitializes all loaded materials, reloading their shaders. Flags: defensive, developmentonly.</summary>
 	public static void mat_reinitmaterials(string arguments = "") => Run("mat_reinitmaterials", arguments);
 
-	/// <summary>Reloads all shaders. Takes optional substrings of shader names to recompile as arguments. Flags: developmentonly, defensive.</summary>
+	/// <summary>Reloads all shaders. Takes optional substrings of shader names to recompile as arguments. Flags: defensive, developmentonly.</summary>
 	public static void mat_reloadshaders(string arguments = "") => Run("mat_reloadshaders", arguments);
 
-	/// <summary>Reset material cost heuristic. Flags: developmentonly, defensive.</summary>
+	/// <summary>Reset material cost heuristic. Flags: defensive, developmentonly.</summary>
 	public static void mat_reset_material_costs(string arguments = "") => Run("mat_reset_material_costs", arguments);
 
-	/// <summary>Force shader quality setting (valid values are 0 or 1). Flags: developmentonly, defensive.</summary>
+	/// <summary>Force shader quality setting (valid values are 0 or 1). Flags: defensive, developmentonly.</summary>
 	public static void mat_set_shader_quality(string arguments = "") => Run("mat_set_shader_quality", arguments);
 
-	/// <summary>Compacts the heap. Flags: developmentonly, defensive.</summary>
+	/// <summary>Compacts the heap. Flags: defensive, developmentonly.</summary>
 	public static void mem_compact(string arguments = "") => Run("mem_compact", arguments);
 
-	/// <summary>Dump memory stats to text file or &lt;stdout&gt;. Flags: developmentonly, defensive.</summary>
+	/// <summary>Dump memory stats to text file or &lt;stdout&gt;. Flags: defensive, developmentonly.</summary>
 	public static void mem_dump(string arguments = "") => Run("mem_dump", arguments);
 
-	/// <summary>Flags: developmentonly, defensive.</summary>
+	/// <summary>Flags: defensive, developmentonly.</summary>
 	public static void mem_test(string arguments = "") => Run("mem_test", arguments);
 
-	/// <summary>Print memory stats. Flags: developmentonly, defensive.</summary>
+	/// <summary>Print memory stats. Flags: defensive, developmentonly.</summary>
 	public static void memory(string arguments = "") => Run("memory", arguments);
 
 	/// <summary>Assert if peak memory use is over the limit. Flags: developmentonly.</summary>
 	public static void memory_check_limit(string arguments = "") => Run("memory_check_limit", arguments);
 
-	/// <summary>Print model load-time conversion info. Flags: linked_concommand, developmentonly, gamedll, clientdll, defensive.</summary>
+	/// <summary>Logs information about memory consumption by TraceDataForDraw_t/ToolsTraceData. Flags: defensive, developmentonly.</summary>
+	public static void mesh_trace_data_memory_report(string arguments = "") => Run("mesh_trace_data_memory_report", arguments);
+
+	/// <summary>Print model load-time conversion info. Flags: defensive, developmentonly, linked_concommand, gamedll, clientdll.</summary>
 	public static void model_dump_convert_info(string arguments = "") => Run("model_dump_convert_info", arguments);
 
 	/// <summary>Debug broadcasts an event will all empty fields. Flags: developmentonly, gamedll.</summary>
 	public static void modifier_broadcast_event(string arguments = "") => Run("modifier_broadcast_event", arguments);
 
-	/// <summary>Print per-EModifierValue cache statistics sorted by query volume. Use modifier_cache_reset_stats to clear. Flags: developmentonly, gamedll, defensive.</summary>
+	/// <summary>Print per-EModifierValue cache statistics sorted by query volume. Use modifier_cache_reset_stats to clear. Flags: defensive, developmentonly, gamedll.</summary>
 	public static void modifier_cache_report(string arguments = "") => Run("modifier_cache_report", arguments);
 
-	/// <summary>Reset modifier value cache statistics. Flags: developmentonly, gamedll, defensive.</summary>
+	/// <summary>Reset modifier value cache statistics. Flags: defensive, developmentonly, gamedll.</summary>
 	public static void modifier_cache_reset_stats(string arguments = "") => Run("modifier_cache_reset_stats", arguments);
 
-	/// <summary>Creates a test modifier on unit: modifier_create &lt;entityindex&gt; &lt;modifiername&gt; &lt;duration&gt;. Flags: gamedll, cheat, vconsole_fuzzy_matching.</summary>
+	/// <summary>Creates a test modifier on unit: modifier_create &lt;entityindex&gt; &lt;modifiername&gt; &lt;duration&gt;. Flags: cheat, vconsole_fuzzy_matching, gamedll.</summary>
 	public static void modifier_create(string arguments = "") => Run("modifier_create", arguments);
 
-	/// <summary>Display all modifiers for the unit: &lt;entityindex/name&gt;. Flags: gamedll, cheat.</summary>
+	/// <summary>Display all modifiers for the unit: &lt;entityindex/name&gt;. Flags: cheat, gamedll.</summary>
 	public static void modifier_dump(string arguments = "") => Run("modifier_dump", arguments);
 
-	/// <summary>Dumps all modifiers that exist in the game. Flags: gamedll, cheat.</summary>
+	/// <summary>Dumps all modifiers that exist in the game. Flags: cheat, gamedll.</summary>
 	public static void modifier_dump_list(string arguments = "") => Run("modifier_dump_list", arguments);
 
-	/// <summary>Print out non-hidden modifiers. Flags: gamedll, cheat.</summary>
+	/// <summary>Print out non-hidden modifiers. Flags: cheat, gamedll.</summary>
 	public static void modifier_dump_visible(string arguments = "") => Run("modifier_dump_visible", arguments);
 
-	/// <summary>Removes the first modifier that matches the name from a unit: modifier_remove &lt;entityindex&gt; &lt;modifiername&gt;. Flags: gamedll, cheat, vconsole_fuzzy_matching.</summary>
+	/// <summary>Removes the first modifier that matches the name from a unit: modifier_remove &lt;entityindex&gt; &lt;modifiername&gt;. Flags: cheat, vconsole_fuzzy_matching, gamedll.</summary>
 	public static void modifier_remove(string arguments = "") => Run("modifier_remove", arguments);
 
-	/// <summary>Call to have the client spew their unit states affecting them,. Flags: gamedll, cheat.</summary>
+	/// <summary>Call to have the client spew their unit states affecting them,. Flags: cheat, gamedll.</summary>
 	public static void modifier_spew_states(string arguments = "") => Run("modifier_spew_states", arguments);
 
-	/// <summary>Displays the contents of the modifier string table. Flags: gamedll, cheat.</summary>
+	/// <summary>Displays the contents of the modifier string table. Flags: cheat, gamedll.</summary>
 	public static void modifier_stringtable_dump(string arguments = "") => Run("modifier_stringtable_dump", arguments);
 
-	/// <summary>Tests firing a scripted event. Flags: gamedll, cheat.</summary>
+	/// <summary>Tests firing a scripted event. Flags: cheat, gamedll.</summary>
 	public static void modifier_test_scripted_event(string arguments = "") => Run("modifier_test_scripted_event", arguments);
 
-	/// <summary>Tests firing ending a scripted event. Flags: gamedll, cheat.</summary>
+	/// <summary>Tests firing ending a scripted event. Flags: cheat, gamedll.</summary>
 	public static void modifier_test_scripted_event_end(string arguments = "") => Run("modifier_test_scripted_event_end", arguments);
 
-	/// <summary>Fixup corrupted .wav file if engine crashed during startmovie/endmovie, etc. Flags: developmentonly, defensive.</summary>
+	/// <summary>Fixup corrupted .wav file if engine crashed during startmovie/endmovie, etc. Flags: defensive, developmentonly.</summary>
 	public static void movie_fixwave(string arguments = "") => Run("movie_fixwave", arguments);
 
-	/// <summary>Prevents a userid from being auto-kicked. Flags: gamedll, release.</summary>
+	/// <summary>Prevents a userid from being auto-kicked. Flags: release, gamedll.</summary>
 	public static void mp_disable_autokick(string arguments = "") => Run("mp_disable_autokick", arguments);
 
 	/// <summary>Multiply specified convar value. Flags: dontrecord, release.</summary>
 	public static void multvar(string arguments = "") => Run("multvar", arguments);
 
-	/// <summary>Add current area to the selected set. Flags: gamedll, cheat.</summary>
+	/// <summary>Add current area to the selected set. Flags: cheat, gamedll.</summary>
 	public static void nav_add_to_selected_set(string arguments = "") => Run("nav_add_to_selected_set", arguments);
 
-	/// <summary>Add specified area id to the selected set. Flags: gamedll, cheat.</summary>
+	/// <summary>Add specified area id to the selected set. Flags: cheat, gamedll.</summary>
 	public static void nav_add_to_selected_set_by_id(string arguments = "") => Run("nav_add_to_selected_set_by_id", arguments);
 
-	/// <summary>Start continuously removing from the selected set. Flags: gamedll, cheat.</summary>
+	/// <summary>Start continuously removing from the selected set. Flags: cheat, gamedll.</summary>
 	public static void nav_begin_deselecting(string arguments = "") => Run("nav_begin_deselecting", arguments);
 
-	/// <summary>Start dragging a selection area. Flags: gamedll, cheat.</summary>
+	/// <summary>Start dragging a selection area. Flags: cheat, gamedll.</summary>
 	public static void nav_begin_drag_deselecting(string arguments = "") => Run("nav_begin_drag_deselecting", arguments);
 
-	/// <summary>Start dragging a selection area. Flags: gamedll, cheat.</summary>
+	/// <summary>Start dragging a selection area. Flags: cheat, gamedll.</summary>
 	public static void nav_begin_drag_selecting(string arguments = "") => Run("nav_begin_drag_selecting", arguments);
 
-	/// <summary>Start continuously adding to the selected set. Flags: gamedll, cheat.</summary>
+	/// <summary>Start continuously adding to the selected set. Flags: cheat, gamedll.</summary>
 	public static void nav_begin_selecting(string arguments = "") => Run("nav_begin_selecting", arguments);
 
-	/// <summary>Remove given nav attribute from all areas in the selected set. Flags: gamedll, cheat.</summary>
+	/// <summary>Remove given nav attribute from all areas in the selected set. Flags: cheat, gamedll.</summary>
 	public static void nav_clear_attribute(string arguments = "") => Run("nav_clear_attribute", arguments);
 
-	/// <summary>Clear all nav attributes of selected area. Flags: gamedll, cheat.</summary>
+	/// <summary>Clear all nav attributes of selected area. Flags: cheat, gamedll.</summary>
 	public static void nav_clear_attributes(string arguments = "") => Run("nav_clear_attributes", arguments);
 
-	/// <summary>Clear the selected set. Flags: gamedll, cheat.</summary>
+	/// <summary>Clear the selected set. Flags: cheat, gamedll.</summary>
 	public static void nav_clear_selected_set(string arguments = "") => Run("nav_clear_selected_set", arguments);
 
-	/// <summary>Create a connection between the selected area and the area pointed at by the crosshair. Flags: gamedll, cheat.</summary>
+	/// <summary>Create a connection between the selected area and the area pointed at by the crosshair. Flags: cheat, gamedll.</summary>
 	public static void nav_create_indirect_connection(string arguments = "") => Run("nav_create_indirect_connection", arguments);
 
-	/// <summary>Create a connection between the current 'from' and 'to' locations. Flags: gamedll, cheat.</summary>
+	/// <summary>Create a connection between the current 'from' and 'to' locations. Flags: cheat, gamedll.</summary>
 	public static void nav_create_indirect_connection_from_to(string arguments = "") => Run("nav_create_indirect_connection_from_to", arguments);
 
-	/// <summary>Set the 'from' location of an indirect connection to be the current edit pos of nav_edit. Flags: gamedll, cheat.</summary>
+	/// <summary>Set the 'from' location of an indirect connection to be the current edit pos of nav_edit. Flags: cheat, gamedll.</summary>
 	public static void nav_create_indirect_connection_set_from_using_editpos(string arguments = "") => Run("nav_create_indirect_connection_set_from_using_editpos", arguments);
 
-	/// <summary>Set the 'to' location of an indirect connection to be the current edit pos of nav_edit. Flags: gamedll, cheat.</summary>
+	/// <summary>Set the 'to' location of an indirect connection to be the current edit pos of nav_edit. Flags: cheat, gamedll.</summary>
 	public static void nav_create_indirect_connection_set_to_using_editpos(string arguments = "") => Run("nav_create_indirect_connection_set_to_using_editpos", arguments);
 
-	/// <summary>Deletes the currently highlighted Area. Flags: gamedll, cheat.</summary>
+	/// <summary>Deletes the currently highlighted Area. Flags: cheat, gamedll.</summary>
 	public static void nav_delete(string arguments = "") => Run("nav_delete", arguments);
 
-	/// <summary>Stop continuously removing from the selected set. Flags: gamedll, cheat.</summary>
+	/// <summary>Stop continuously removing from the selected set. Flags: cheat, gamedll.</summary>
 	public static void nav_end_deselecting(string arguments = "") => Run("nav_end_deselecting", arguments);
 
-	/// <summary>Stop dragging a selection area. Flags: gamedll, cheat.</summary>
+	/// <summary>Stop dragging a selection area. Flags: cheat, gamedll.</summary>
 	public static void nav_end_drag_deselecting(string arguments = "") => Run("nav_end_drag_deselecting", arguments);
 
-	/// <summary>Stop dragging a selection area. Flags: gamedll, cheat.</summary>
+	/// <summary>Stop dragging a selection area. Flags: cheat, gamedll.</summary>
 	public static void nav_end_drag_selecting(string arguments = "") => Run("nav_end_drag_selecting", arguments);
 
-	/// <summary>Stop continuously adding to the selected set. Flags: gamedll, cheat.</summary>
+	/// <summary>Stop continuously adding to the selected set. Flags: cheat, gamedll.</summary>
 	public static void nav_end_selecting(string arguments = "") => Run("nav_end_selecting", arguments);
 
-	/// <summary>List the movable meshes registered with the movable meshes manager. Flags: gamedll, cheat.</summary>
+	/// <summary>List the movable meshes registered with the movable meshes manager. Flags: cheat, gamedll.</summary>
 	public static void nav_list_movable_meshes(string arguments = "") => Run("nav_list_movable_meshes", arguments);
 
-	/// <summary>Lower the top of the drag select volume. Flags: gamedll, cheat.</summary>
+	/// <summary>Lower the top of the drag select volume. Flags: cheat, gamedll.</summary>
 	public static void nav_lower_drag_volume_max(string arguments = "") => Run("nav_lower_drag_volume_max", arguments);
 
-	/// <summary>Lower the bottom of the drag select volume. Flags: gamedll, cheat.</summary>
+	/// <summary>Lower the bottom of the drag select volume. Flags: cheat, gamedll.</summary>
 	public static void nav_lower_drag_volume_min(string arguments = "") => Run("nav_lower_drag_volume_min", arguments);
 
-	/// <summary>Marks the Area or Ladder under the cursor for manipulation by subsequent editing commands. Flags: gamedll, cheat.</summary>
+	/// <summary>Marks the Area or Ladder under the cursor for manipulation by subsequent editing commands. Flags: cheat, gamedll.</summary>
 	public static void nav_mark(string arguments = "") => Run("nav_mark", arguments);
 
-	/// <summary>Set nav attribute for all areas in the selected set. Flags: gamedll, cheat.</summary>
+	/// <summary>Set nav attribute for all areas in the selected set. Flags: cheat, gamedll.</summary>
 	public static void nav_mark_attribute(string arguments = "") => Run("nav_mark_attribute", arguments);
 
-	/// <summary>Raise the top of the drag select volume. Flags: gamedll, cheat.</summary>
+	/// <summary>Raise the top of the drag select volume. Flags: cheat, gamedll.</summary>
 	public static void nav_raise_drag_volume_max(string arguments = "") => Run("nav_raise_drag_volume_max", arguments);
 
-	/// <summary>Raise the bottom of the drag select volume. Flags: gamedll, cheat.</summary>
+	/// <summary>Raise the bottom of the drag select volume. Flags: cheat, gamedll.</summary>
 	public static void nav_raise_drag_volume_min(string arguments = "") => Run("nav_raise_drag_volume_min", arguments);
 
-	/// <summary>Re-selects the stored selected set. Flags: gamedll, cheat.</summary>
+	/// <summary>Re-selects the stored selected set. Flags: cheat, gamedll.</summary>
 	public static void nav_recall_selected_set(string arguments = "") => Run("nav_recall_selected_set", arguments);
 
-	/// <summary>Remove current area from the selected set. Flags: gamedll, cheat.</summary>
+	/// <summary>Remove current area from the selected set. Flags: cheat, gamedll.</summary>
 	public static void nav_remove_from_selected_set(string arguments = "") => Run("nav_remove_from_selected_set", arguments);
 
-	/// <summary>Adds all areas in a radius to the selection set. Flags: gamedll, cheat.</summary>
+	/// <summary>Adds all areas in a radius to the selection set. Flags: cheat, gamedll.</summary>
 	public static void nav_select_radius(string arguments = "") => Run("nav_select_radius", arguments);
 
-	/// <summary>Selects areas with the given attribute. Flags: gamedll, cheat.</summary>
+	/// <summary>Selects areas with the given attribute. Flags: cheat, gamedll.</summary>
 	public static void nav_select_with_attribute(string arguments = "") => Run("nav_select_with_attribute", arguments);
 
-	/// <summary>Set the movable mesh dormant flag (0=active, 1=dormant). Flags: gamedll, cheat.</summary>
+	/// <summary>Set the movable mesh dormant flag (0=active, 1=dormant). Flags: cheat, gamedll.</summary>
 	public static void nav_set_movable_mesh_dormant_flag(string arguments = "") => Run("nav_set_movable_mesh_dormant_flag", arguments);
 
-	/// <summary>To split an Area into two, align the split line using your cursor and invoke the split command. Flags: gamedll, cheat.</summary>
+	/// <summary>To split an Area into two, align the split line using your cursor and invoke the split command. Flags: cheat, gamedll.</summary>
 	public static void nav_split(string arguments = "") => Run("nav_split", arguments);
 
-	/// <summary>Stores the current selected set for later retrieval. Flags: gamedll, cheat.</summary>
+	/// <summary>Stores the current selected set for later retrieval. Flags: cheat, gamedll.</summary>
 	public static void nav_store_selected_set(string arguments = "") => Run("nav_store_selected_set", arguments);
 
-	/// <summary>Switches to navmesh for the specified spawngroup. Flags: developmentonly, gamedll, defensive.</summary>
+	/// <summary>Switches to navmesh for the specified spawngroup. Flags: defensive, developmentonly, gamedll.</summary>
 	public static void nav_switch(string arguments = "") => Run("nav_switch", arguments);
 
-	/// <summary>Find entities that intrude into the nav mesh. List those entities in console output, and display bounding boxes around them for a while. Flags: gamedll, cheat.</summary>
+	/// <summary>Find entities that intrude into the nav mesh. List those entities in console output, and display bounding boxes around them for a while. Flags: cheat, gamedll.</summary>
 	public static void nav_test_level_hull(string arguments = "") => Run("nav_test_level_hull", arguments);
 
-	/// <summary>Start or stop continuously removing from the selected set. Flags: gamedll, cheat.</summary>
+	/// <summary>Start or stop continuously removing from the selected set. Flags: cheat, gamedll.</summary>
 	public static void nav_toggle_deselecting(string arguments = "") => Run("nav_toggle_deselecting", arguments);
 
-	/// <summary>Remove current area from the selected set. Flags: gamedll, cheat.</summary>
+	/// <summary>Remove current area from the selected set. Flags: cheat, gamedll.</summary>
 	public static void nav_toggle_in_selected_set(string arguments = "") => Run("nav_toggle_in_selected_set", arguments);
 
-	/// <summary>Toggles all areas into/out of the selected set. Flags: gamedll, cheat.</summary>
+	/// <summary>Toggles all areas into/out of the selected set. Flags: cheat, gamedll.</summary>
 	public static void nav_toggle_selected_set(string arguments = "") => Run("nav_toggle_selected_set", arguments);
 
-	/// <summary>Start or stop continuously adding to the selected set. Flags: gamedll, cheat.</summary>
+	/// <summary>Start or stop continuously adding to the selected set. Flags: cheat, gamedll.</summary>
 	public static void nav_toggle_selecting(string arguments = "") => Run("nav_toggle_selecting", arguments);
 
-	/// <summary>Clears the marked Area or Ladder. Flags: gamedll, cheat.</summary>
+	/// <summary>Clears the marked Area or Ladder. Flags: cheat, gamedll.</summary>
 	public static void nav_unmark(string arguments = "") => Run("nav_unmark", arguments);
+
+	/// <summary>Captures low-level data to replay path culling algorithm behavior in controlled unit test environment. Flags: defensive, developmentonly.</summary>
+	public static void net_captureculldata(string arguments = "") => Run("net_captureculldata", arguments);
+
+	/// <summary>Shows net channel info. Flags: release.</summary>
+	public static void net_channels(string arguments = "") => Run("net_channels", arguments);
+
+	/// <summary>Print detailed network statistics for each network connection. Flags: release.</summary>
+	public static void net_connections_stats(string arguments = "") => Run("net_connections_stats", arguments);
+
+	/// <summary>Clear all simulated network conditions. Flags: release.</summary>
+	public static void net_fakeclear(string arguments = "") => Run("net_fakeclear", arguments);
+
+	/// <summary>Shortcut to set jitter net options. Run with no arguments for usage. Flags: release.</summary>
+	public static void net_fakejitter(string arguments = "") => Run("net_fakejitter", arguments);
+
+	/// <summary>Shortcut to set both FakePacketLag_Recv and FakePacketLag_Send net options. Flags: release.</summary>
+	public static void net_fakelag(string arguments = "") => Run("net_fakelag", arguments);
+
+	/// <summary>Shortcut to set both FakePacketLoss_Recv and FakePacketLoss_Send net options. Flags: release.</summary>
+	public static void net_fakeloss(string arguments = "") => Run("net_fakeloss", arguments);
+
+	/// <summary>Print current simulated network condifions. Flags: release.</summary>
+	public static void net_fakestatus(string arguments = "") => Run("net_fakestatus", arguments);
+
+	/// <summary>List all registered net messages. Flags: cheat.</summary>
+	public static void net_listallmessages(string arguments = "") => Run("net_listallmessages", arguments);
+
+	/// <summary>Display info about a message (by classname or id). Flags: cheat.</summary>
+	public static void net_messageinfo(string arguments = "") => Run("net_messageinfo", arguments);
+
+	/// <summary>Get or set SteamNetworkingSockets options such as fake packet lag and loss. Flags: release.</summary>
+	public static void net_option(string arguments = "") => Run("net_option", arguments);
+
+	/// <summary>show permutation information for serializer. Flags: cheat, vconsole_fuzzy_matching.</summary>
+	public static void net_permutation_info(string arguments = "") => Run("net_permutation_info", arguments);
+
+	/// <summary>Print current ping times to SDR points of presence, and selected route. Flags: release.</summary>
+	public static void net_print_sdr_ping_times(string arguments = "") => Run("net_print_sdr_ping_times", arguments);
 
 	/// <summary>Reload the game events. Flags: developmentonly, gamedll.</summary>
 	public static void net_reloadgameevents(string arguments = "") => Run("net_reloadgameevents", arguments);
 
-	/// <summary>Output server networking statistics in json format. Flags: developmentonly, defensive.</summary>
+	/// <summary>Spew CSerializedEntity memory. Flags: defensive, developmentonly.</summary>
+	public static void net_serializedentitymemory(string arguments = "") => Run("net_serializedentitymemory", arguments);
+
+	/// <summary>Spew CSerializedEntity metadata information. Flags: defensive, developmentonly.</summary>
+	public static void net_serializedentitymetadatainfo(string arguments = "") => Run("net_serializedentitymetadatainfo", arguments);
+
+	/// <summary>Spew serializer counts, client only by default, specify server to spew server counts. Flags: defensive, developmentonly.</summary>
+	public static void net_spewcounts(string arguments = "") => Run("net_spewcounts", arguments);
+
+	/// <summary>Spew serializer info. Flags: developmentonly.</summary>
+	public static void net_spewserializer(string arguments = "") => Run("net_spewserializer", arguments);
+
+	/// <summary>Output server networking statistics in json format. Flags: defensive, developmentonly.</summary>
 	public static void net_stats_json(string arguments = "") => Run("net_stats_json", arguments);
+
+	/// <summary>Shows current network status. Flags: release.</summary>
+	public static void net_status(string arguments = "") => Run("net_status", arguments);
+
+	/// <summary>Activates/deactivates net message validation. Flags: cheat.</summary>
+	public static void net_validatemessages(string arguments = "") => Run("net_validatemessages", arguments);
+
+	/// <summary>&lt;classname&gt; &lt;fieldname&gt;: spew why field was excluded from networking for classname. Flags: developmentonly.</summary>
+	public static void net_why_field_excluded(string arguments = "") => Run("net_why_field_excluded", arguments);
 
 	/// <summary>Play next demo in sequence. Flags: release.</summary>
 	public static void nextdemo(string arguments = "") => Run("nextdemo", arguments);
 
-	/// <summary>Toggle. Player becomes non-solid and flies. Optional argument of 0 or 1 to force enable/disable. Flags: gamedll, cheat, client_can_execute.</summary>
+	/// <summary>Toggle. Player becomes non-solid and flies. Optional argument of 0 or 1 to force enable/disable. Flags: cheat, client_can_execute, gamedll.</summary>
 	public static void noclip(string arguments = "") => Run("noclip", arguments);
 
-	/// <summary>Toggle. Player becomes hidden to NPCs. Flags: gamedll, cheat, client_can_execute.</summary>
+	/// <summary>Toggle. Player becomes hidden to NPCs. Flags: cheat, client_can_execute, gamedll.</summary>
 	public static void notarget(string arguments = "") => Run("notarget", arguments);
 
-	/// <summary>Draws range indicators for abilities for the given NPC(s). Uses the NPCs enemy for range drawing. Arguments: {entity_name} / {class_name} / {entity_index} / {no argument = pick what player is looking at}. Flags: gamedll, cheat, vconsole_fuzzy_matching.</summary>
+	/// <summary>Draws range indicators for abilities for the given NPC(s). Uses the NPCs enemy for range drawing. Arguments: {entity_name} / {class_name} / {entity_index} / {no argument = pick what player is looking at}. Flags: cheat, vconsole_fuzzy_matching, gamedll.</summary>
 	public static void npc_ability_range_debug(string arguments = "") => Run("npc_ability_range_debug", arguments);
 
-	/// <summary>Displays labelled body locations of NPCs. Arguments: {entity_name} / {class_name} / {entity_index} / {no argument = pick what player is looking at}. Flags: gamedll, cheat, vconsole_fuzzy_matching.</summary>
+	/// <summary>Displays labelled body locations of NPCs. Arguments: {entity_name} / {class_name} / {entity_index} / {no argument = pick what player is looking at}. Flags: cheat, vconsole_fuzzy_matching, gamedll.</summary>
 	public static void npc_bodylocations(string arguments = "") => Run("npc_bodylocations", arguments);
 
-	/// <summary>Tag an NPC so they don't die or become incapacitated Arguments: {entity_name} / {class_name} / {entity_index} / {no argument = pick what player is looking at}. Flags: gamedll, cheat.</summary>
+	/// <summary>Tag an NPC so they don't die or become incapacitated Arguments: {entity_name} / {class_name} / {entity_index} / {no argument = pick what player is looking at}. Flags: cheat, gamedll.</summary>
 	public static void npc_buddha(string arguments = "") => Run("npc_buddha", arguments);
 
-	/// <summary>Flags: developmentonly, gamedll, vconsole_fuzzy_matching.</summary>
+	/// <summary>Flags: developmentonly, vconsole_fuzzy_matching, gamedll.</summary>
 	public static void npc_cancel_handshake(string arguments = "") => Run("npc_cancel_handshake", arguments);
 
-	/// <summary>Displays text debugging information about the squad and enemy of the selected NPC (See Overlay Text) Arguments: {entity_name} / {class_name} / {entity_index} / {no argument = pick what player is looking at}. Flags: gamedll, cheat.</summary>
+	/// <summary>Displays text debugging information about the squad and enemy of the selected NPC (See Overlay Text) Arguments: {entity_name} / {class_name} / {entity_index} / {no argument = pick what player is looking at}. Flags: cheat, gamedll.</summary>
 	public static void npc_combat(string arguments = "") => Run("npc_combat", arguments);
 
-	/// <summary>Displays all the current AI conditions that an NPC has in the overlay text. Arguments: {entity_name} / {class_name} / {entity_index} / {no argument = pick what player is looking at}. Flags: gamedll, cheat, vconsole_fuzzy_matching.</summary>
+	/// <summary>Displays all the current AI conditions that an NPC has in the overlay text. Arguments: {entity_name} / {class_name} / {entity_index} / {no argument = pick what player is looking at}. Flags: cheat, vconsole_fuzzy_matching, gamedll.</summary>
 	public static void npc_conditions(string arguments = "") => Run("npc_conditions", arguments);
 
-	/// <summary>Outputs text debugging information to the console about the all condition gathering for the selected NPC current schedule Arguments: {entity_name} / {class_name} / {entity_index} / {no argument = pick what player is looking at}. Flags: gamedll, cheat, vconsole_fuzzy_matching.</summary>
+	/// <summary>Outputs text debugging information to the console about the all condition gathering for the selected NPC current schedule Arguments: {entity_name} / {class_name} / {entity_index} / {no argument = pick what player is looking at}. Flags: cheat, vconsole_fuzzy_matching, gamedll.</summary>
 	public static void npc_conditions_text(string arguments = "") => Run("npc_conditions_text", arguments);
 
-	/// <summary>Creates an NPC of the given type where the player is looking (if the given NPC can actually stand at that location). Arguments: [npc_class_name] [name of npc (optional) ] [addon type (optional) ] [name of addon (optional) ]. Flags: gamedll, cheat, vconsole_fuzzy_matching.</summary>
+	/// <summary>Creates an NPC of the given type where the player is looking (if the given NPC can actually stand at that location). Arguments: [npc_class_name] [name of npc (optional) ] [addon type (optional) ] [name of addon (optional) ]. Flags: cheat, vconsole_fuzzy_matching, gamedll.</summary>
 	public static void npc_create(string arguments = "") => Run("npc_create", arguments);
 
-	/// <summary>Creates an NPC aimed away from the player of the given type where the player is looking (if the given NPC can actually stand at that location). Note that this only works for npc classes that are already in the world. You can not create an entity that doesn't have an instance in the level. Arguments: {npc_class_name}. Flags: gamedll, cheat, vconsole_fuzzy_matching.</summary>
+	/// <summary>Creates an NPC aimed away from the player of the given type where the player is looking (if the given NPC can actually stand at that location). Note that this only works for npc classes that are already in the world. You can not create an entity that doesn't have an instance in the level. Arguments: {npc_class_name}. Flags: cheat, vconsole_fuzzy_matching, gamedll.</summary>
 	public static void npc_create_aimed(string arguments = "") => Run("npc_create_aimed", arguments);
 
-	/// <summary>Deals the target damage by the given amount. Flags: gamedll, cheat.</summary>
+	/// <summary>Deals the target damage by the given amount. Flags: cheat, gamedll.</summary>
 	public static void npc_damage(string arguments = "") => Run("npc_damage", arguments);
 
-	/// <summary>Removes the given NPC(s) from the universe Arguments: {entity_name} / {class_name} / {entity_index} / {no argument = pick what player is looking at}. Flags: gamedll, cheat, vconsole_fuzzy_matching.</summary>
+	/// <summary>Removes the given NPC(s) from the universe Arguments: {entity_name} / {class_name} / {entity_index} / {no argument = pick what player is looking at}. Flags: cheat, vconsole_fuzzy_matching, gamedll.</summary>
 	public static void npc_destroy(string arguments = "") => Run("npc_destroy", arguments);
 
-	/// <summary>Removes all NPCs from the universe that aren't currently selected. Flags: gamedll, cheat.</summary>
+	/// <summary>Removes all NPCs from the universe that aren't currently selected. Flags: cheat, gamedll.</summary>
 	public static void npc_destroy_unselected(string arguments = "") => Run("npc_destroy_unselected", arguments);
 
-	/// <summary>Shows memory of NPC. Draws an X on top of each memory. Eluded entities drawn in blue (don't know where it went) Unreachable entities drawn in green (can't get to it) Current enemy drawn in red Current target entity drawn in magenta All other entities drawn in pink Arguments: {entity_name} / {class_name} / {entity_index} / {no argument = pick what player is looking at}. Flags: gamedll, cheat, vconsole_fuzzy_matching.</summary>
+	/// <summary>Shows memory of NPC. Draws an X on top of each memory. Eluded entities drawn in blue (don't know where it went) Unreachable entities drawn in green (can't get to it) Current enemy drawn in red Current target entity drawn in magenta All other entities drawn in pink Arguments: {entity_name} / {class_name} / {entity_index} / {no argument = pick what player is looking at}. Flags: cheat, vconsole_fuzzy_matching, gamedll.</summary>
 	public static void npc_enemies(string arguments = "") => Run("npc_enemies", arguments);
 
-	/// <summary>Selected NPC(s) will go to the location that the player is looking (shown with a purple box) Arguments: &lt;start x y z&gt; &lt;goal x y z&gt;. Flags: gamedll, cheat.</summary>
+	/// <summary>Selected NPC(s) will go to the location that the player is looking (shown with a purple box) Arguments: &lt;start x y z&gt; &lt;goal x y z&gt;. Flags: cheat, gamedll.</summary>
 	public static void npc_go(string arguments = "") => Run("npc_go", arguments);
 
-	/// <summary>Go to the last position you told an NPC to go. Flags: gamedll, cheat.</summary>
+	/// <summary>Go to the last position you told an NPC to go. Flags: cheat, gamedll.</summary>
 	public static void npc_go_last(string arguments = "") => Run("npc_go_last", arguments);
 
-	/// <summary>Toggles whether the selected NPC(s) will loop between the last set of waypoints you used 'npc go' on. Flags: gamedll, cheat.</summary>
+	/// <summary>Toggles whether the selected NPC(s) will loop between the last set of waypoints you used 'npc go' on. Flags: cheat, gamedll.</summary>
 	public static void npc_go_loop(string arguments = "") => Run("npc_go_loop", arguments);
 
-	/// <summary>Clear waypoints for npc_go_loop. Flags: gamedll, cheat.</summary>
+	/// <summary>Clear waypoints for npc_go_loop. Flags: cheat, gamedll.</summary>
 	public static void npc_go_loop_clear_waypoints(string arguments = "") => Run("npc_go_loop_clear_waypoints", arguments);
 
-	/// <summary>Sends all selected NPC(s) to a random node. Arguments: -none-. Flags: gamedll, cheat.</summary>
+	/// <summary>Sends all selected NPC(s) to a random node. Arguments: -none-. Flags: cheat, gamedll.</summary>
 	public static void npc_go_random(string arguments = "") => Run("npc_go_random", arguments);
 
-	/// <summary>Selected NPC(s) will go to the location that the player is looking (shown with a purple box), WITHOUT CHANGING SCHEDULE! Arguments: [dest_fly]. Flags: gamedll, cheat.</summary>
+	/// <summary>Selected NPC(s) will go to the location that the player is looking (shown with a purple box), WITHOUT CHANGING SCHEDULE! Arguments: [dest_fly]. Flags: cheat, gamedll.</summary>
 	public static void npc_go_update_path(string arguments = "") => Run("npc_go_update_path", arguments);
 
-	/// <summary>Tag an NPC so they don't take damage Arguments: {entity_name} / {class_name} / {entity_index} / {no argument = pick what player is looking at}. Flags: gamedll, cheat.</summary>
+	/// <summary>Tag an NPC so they don't take damage Arguments: {entity_name} / {class_name} / {entity_index} / {no argument = pick what player is looking at}. Flags: cheat, gamedll.</summary>
 	public static void npc_god(string arguments = "") => Run("npc_god", arguments);
 
-	/// <summary>Outputs text debugging information to the console about the Animation handshaking in the NPC's AI Arguments: {entity_name} / {class_name} / {entity_index} / {no argument = pick what player is looking at}. Flags: gamedll, cheat, vconsole_fuzzy_matching.</summary>
+	/// <summary>Outputs text debugging information to the console about the Animation handshaking in the NPC's AI Arguments: {entity_name} / {class_name} / {entity_index} / {no argument = pick what player is looking at}. Flags: cheat, vconsole_fuzzy_matching, gamedll.</summary>
 	public static void npc_handshakes_text(string arguments = "") => Run("npc_handshakes_text", arguments);
 
-	/// <summary>Heals the target back to full health. Flags: developmentonly, gamedll, defensive.</summary>
+	/// <summary>Heals the target back to full health. Flags: defensive, developmentonly, gamedll.</summary>
 	public static void npc_heal(string arguments = "") => Run("npc_heal", arguments);
 
-	/// <summary>Dump the NPC history to the console.. Flags: developmentonly, gamedll, defensive.</summary>
+	/// <summary>Dump the NPC history to the console. Flags: defensive, developmentonly, gamedll.</summary>
 	public static void npc_hist_dump(string arguments = "") => Run("npc_hist_dump", arguments);
 
-	/// <summary>Kills the given NPC(s) Arguments: {entity_name} / {class_name} / {entity_index} / {no argument = pick what player is looking at}. Flags: gamedll, cheat, vconsole_fuzzy_matching.</summary>
+	/// <summary>Kills the given NPC(s) Arguments: {entity_name} / {class_name} / {entity_index} / {no argument = pick what player is looking at}. Flags: cheat, vconsole_fuzzy_matching, gamedll.</summary>
 	public static void npc_kill(string arguments = "") => Run("npc_kill", arguments);
 
-	/// <summary>Properly kills all NPCs from the universe that aren't currently selected. Flags: gamedll, cheat.</summary>
+	/// <summary>Properly kills all NPCs from the universe that aren't currently selected. Flags: cheat, gamedll.</summary>
 	public static void npc_kill_unselected(string arguments = "") => Run("npc_kill_unselected", arguments);
 
-	/// <summary>Outputs text debugging information to the console about the NPC's path query processing Arguments: {entity_name} / {class_name} / {entity_index} / {no argument = pick what player is looking at}. Flags: gamedll, cheat, vconsole_fuzzy_matching.</summary>
+	/// <summary>Outputs text debugging information to the console about the NPC's path query processing Arguments: {entity_name} / {class_name} / {entity_index} / {no argument = pick what player is looking at}. Flags: cheat, vconsole_fuzzy_matching, gamedll.</summary>
 	public static void npc_pathquery_text(string arguments = "") => Run("npc_pathquery_text", arguments);
 
-	/// <summary>Displays the relationships between this NPC and all others. Arguments: {entity_name} / {class_name} / {entity_index} / {no argument = pick what player is looking at}. Flags: gamedll, cheat, vconsole_fuzzy_matching.</summary>
+	/// <summary>Displays the relationships between this NPC and all others. Arguments: {entity_name} / {class_name} / {entity_index} / {no argument = pick what player is looking at}. Flags: cheat, vconsole_fuzzy_matching, gamedll.</summary>
 	public static void npc_relationships(string arguments = "") => Run("npc_relationships", arguments);
 
-	/// <summary>Outputs the current state of the NPC. Flags: gamedll, cheat.</summary>
+	/// <summary>Outputs the current state of the NPC. Flags: cheat, gamedll.</summary>
 	public static void npc_reportstate(string arguments = "") => Run("npc_reportstate", arguments);
 
-	/// <summary>Reloads schedules for all NPC's from their script files Arguments: -none-. Flags: gamedll, cheat.</summary>
+	/// <summary>Reloads schedules for all NPC's from their script files Arguments: -none-. Flags: cheat, gamedll.</summary>
 	public static void npc_reset(string arguments = "") => Run("npc_reset", arguments);
 
-	/// <summary>Displays the current route of the given NPC as a line on the screen. Waypoints along the route are drawn as small cyan rectangles. Line is color coded in the following manner: Blue - path to a node Cyan - detour around an object (triangulation) Red - jump Maroon - path to final target position Arguments: {entity_name} / {class_name} / {entity_index} / {no argument = pick what player is looking at}. Flags: gamedll, cheat, vconsole_fuzzy_matching.</summary>
+	/// <summary>Displays the current route of the given NPC as a line on the screen. Waypoints along the route are drawn as small cyan rectangles. Line is color coded in the following manner: Blue - path to a node Cyan - detour around an object (triangulation) Red - jump Maroon - path to final target position Arguments: {entity_name} / {class_name} / {entity_index} / {no argument = pick what player is looking at}. Flags: cheat, vconsole_fuzzy_matching, gamedll.</summary>
 	public static void npc_route(string arguments = "") => Run("npc_route", arguments);
 
-	/// <summary>Displays the state of scripted commands on the NPC Arguments: {entity_name} / {class_name} / {entity_index} / {no argument = pick what player is looking at}. Flags: gamedll, cheat, vconsole_fuzzy_matching.</summary>
+	/// <summary>Displays the state of scripted commands on the NPC Arguments: {entity_name} / {class_name} / {entity_index} / {no argument = pick what player is looking at}. Flags: cheat, vconsole_fuzzy_matching, gamedll.</summary>
 	public static void npc_scripted_commands(string arguments = "") => Run("npc_scripted_commands", arguments);
 
-	/// <summary>Select or deselects the given NPC(s) for later manipulation. Selected NPC's are shown surrounded by a red translucent box Arguments: {entity_name} / {class_name} / {entity_index} / {no argument = pick what player is looking at}. Flags: gamedll, cheat, vconsole_fuzzy_matching.</summary>
+	/// <summary>Select or deselects the given NPC(s) for later manipulation. Selected NPC's are shown surrounded by a red translucent box Arguments: {entity_name} / {class_name} / {entity_index} / {no argument = pick what player is looking at}. Flags: cheat, vconsole_fuzzy_matching, gamedll.</summary>
 	public static void npc_select(string arguments = "") => Run("npc_select", arguments);
 
-	/// <summary>Sets the target's health, even above max. Optionally matches based on npc name to set multiple npc's health. Args: [npc] &lt;amount&gt;. Flags: developmentonly, gamedll, defensive.</summary>
+	/// <summary>Sets the target's health, even above max. Optionally matches based on npc name to set multiple npc's health. Args: [npc] &lt;amount&gt;. Flags: defensive, developmentonly, gamedll.</summary>
 	public static void npc_sethealth(string arguments = "") => Run("npc_sethealth", arguments);
 
-	/// <summary>Obsolete. Replaced by npc_combat. Flags: gamedll, cheat.</summary>
+	/// <summary>Obsolete. Replaced by npc_combat. Flags: cheat, gamedll.</summary>
 	public static void npc_squads(string arguments = "") => Run("npc_squads", arguments);
 
-	/// <summary>Flags: developmentonly, gamedll, vconsole_fuzzy_matching.</summary>
+	/// <summary>Flags: developmentonly, vconsole_fuzzy_matching, gamedll.</summary>
 	public static void npc_start_handshake_full_body(string arguments = "") => Run("npc_start_handshake_full_body", arguments);
 
-	/// <summary>Flags: developmentonly, gamedll, vconsole_fuzzy_matching.</summary>
+	/// <summary>Flags: developmentonly, vconsole_fuzzy_matching, gamedll.</summary>
 	public static void npc_start_handshake_upper_body(string arguments = "") => Run("npc_start_handshake_upper_body", arguments);
 
-	/// <summary>Displays the steering obstructions of the NPC (used to perform local avoidance) Arguments: {entity_name} / {class_name} / {entity_index} / {no argument = pick what player is looking at}. Flags: gamedll, cheat, vconsole_fuzzy_matching.</summary>
+	/// <summary>Displays the steering obstructions of the NPC (used to perform local avoidance) Arguments: {entity_name} / {class_name} / {entity_index} / {no argument = pick what player is looking at}. Flags: cheat, vconsole_fuzzy_matching, gamedll.</summary>
 	public static void npc_steering(string arguments = "") => Run("npc_steering", arguments);
 
-	/// <summary>Displays the steering obstructions of all NPCs (used to perform local avoidance). Flags: gamedll, cheat.</summary>
+	/// <summary>Displays the steering obstructions of all NPCs (used to perform local avoidance). Flags: cheat, gamedll.</summary>
 	public static void npc_steering_all(string arguments = "") => Run("npc_steering_all", arguments);
 
-	/// <summary>Selected NPC(s) will stop moving. Arguments: [asap]. Flags: gamedll, cheat.</summary>
+	/// <summary>Selected NPC(s) will stop moving. Arguments: [asap]. Flags: cheat, gamedll.</summary>
 	public static void npc_stop_moving(string arguments = "") => Run("npc_stop_moving", arguments);
 
-	/// <summary>Outputs text debugging information to the console about the all the tasks + break conditions of the selected NPC current schedule Arguments: {entity_name} / {class_name} / {entity_index} / {no argument = pick what player is looking at}. Flags: gamedll, cheat, vconsole_fuzzy_matching.</summary>
+	/// <summary>Outputs text debugging information to the console about the all the tasks + break conditions of the selected NPC current schedule Arguments: {entity_name} / {class_name} / {entity_index} / {no argument = pick what player is looking at}. Flags: cheat, vconsole_fuzzy_matching, gamedll.</summary>
 	public static void npc_task_text(string arguments = "") => Run("npc_task_text", arguments);
 
-	/// <summary>Displays detailed text debugging information about the all the tasks of the selected NPC current schedule (See Overlay Text) Arguments: {entity_name} / {class_name} / {entity_index} / {no argument = pick what player is looking at}. Flags: gamedll, cheat, vconsole_fuzzy_matching.</summary>
+	/// <summary>Displays detailed text debugging information about the all the tasks of the selected NPC current schedule (See Overlay Text) Arguments: {entity_name} / {class_name} / {entity_index} / {no argument = pick what player is looking at}. Flags: cheat, vconsole_fuzzy_matching, gamedll.</summary>
 	public static void npc_tasks(string arguments = "") => Run("npc_tasks", arguments);
 
-	/// <summary>Selected NPC will teleport to the location that the player is looking (shown with a purple box) Arguments: -none-. Flags: gamedll, cheat.</summary>
+	/// <summary>Selected NPC will teleport to the location that the player is looking (shown with a purple box) Arguments: -none-. Flags: cheat, gamedll.</summary>
 	public static void npc_teleport(string arguments = "") => Run("npc_teleport", arguments);
 
-	/// <summary>Trigger NPC to think. Flags: developmentonly, gamedll, defensive.</summary>
+	/// <summary>Trigger NPC to think. Flags: defensive, developmentonly, gamedll.</summary>
 	public static void npc_thinknow(string arguments = "") => Run("npc_thinknow", arguments);
 
-	/// <summary>Displays the viewcone of the NPC (where they are currently looking and what the extents of there vision is) Arguments: {entity_name} / {class_name} / {entity_index} / {no argument = pick what player is looking at}. Flags: gamedll, cheat, vconsole_fuzzy_matching.</summary>
+	/// <summary>Displays the viewcone of the NPC (where they are currently looking and what the extents of there vision is) Arguments: {entity_name} / {class_name} / {entity_index} / {no argument = pick what player is looking at}. Flags: cheat, vconsole_fuzzy_matching, gamedll.</summary>
 	public static void npc_viewcone(string arguments = "") => Run("npc_viewcone", arguments);
 
-	/// <summary>Opens an asset in it's primary editor of choice. Specify the full path to the asset from the mod directory. Flags: developmentonly, defensive.</summary>
+	/// <summary>Opens an asset in it's primary editor of choice. Specify the full path to the asset from the mod directory. Flags: defensive, developmentonly.</summary>
 	public static void open_asset(string arguments = "") => Run("open_asset", arguments);
 
 	/// <summary>opens the current map in hammer. Flags: developmentonly.</summary>
@@ -1681,37 +1855,46 @@ public static class ConCommands {
 	/// <summary>Opens the specified pulse used in this map in the editor. Arguments: &lt;pulse_file&gt;. Flags: developmentonly, vconsole_fuzzy_matching.</summary>
 	public static void open_current_map_pulse_in_tool(string arguments = "") => Run("open_current_map_pulse_in_tool", arguments);
 
-	/// <summary>List currently known peers. Flags: developmentonly, defensive.</summary>
+	/// <summary>List currently known peers. Flags: defensive, developmentonly.</summary>
 	public static void p2p_listpeers(string arguments = "") => Run("p2p_listpeers", arguments);
 
-	/// <summary>Dispatch the event defined by the argument string. No creating panel is specified. Flags: developmentonly, defensive.</summary>
+	/// <summary>Dispatch the event defined by the argument string. No creating panel is specified. Flags: defensive, developmentonly.</summary>
 	public static void panorama_dispatch_event(string arguments = "") => Run("panorama_dispatch_event", arguments);
 
-	/// <summary>&lt;ESymbolType&gt; Dump all of the symbols in the Panorama symbol table. Flags: developmentonly, defensive.</summary>
+	/// <summary>&lt;ESymbolType&gt; Dump all of the symbols in the Panorama symbol table. Flags: defensive, developmentonly.</summary>
 	public static void panorama_dump_symbols(string arguments = "") => Run("panorama_dump_symbols", arguments);
 
-	/// <summary>Generate the Layout XML Schema Definition for the current run-time (types are dependent on which game DLL is running). Flags: developmentonly, defensive.</summary>
+	/// <summary>Generate the Layout XML Schema Definition for the current run-time (types are dependent on which game DLL is running). Flags: defensive, developmentonly.</summary>
 	public static void panorama_generate_layout_xsd(string arguments = "") => Run("panorama_generate_layout_xsd", arguments);
 
-	/// <summary>Print internal panorama refcounts for every file. Flags: developmentonly, defensive.</summary>
+	/// <summary>Print internal panorama refcounts for every file. Flags: defensive, developmentonly.</summary>
 	public static void panorama_print_cache_status(string arguments = "") => Run("panorama_print_cache_status", arguments);
 
 	/// <summary>Flags: developmentonly.</summary>
 	public static void panorama_print_svg_stats(string arguments = "") => Run("panorama_print_svg_stats", arguments);
 
-	/// <summary>Creates the named particle system where the player is looking. Can be used on an entity if pointed at the entity. Optionally takes a particle config name. Arguments: {entity_name} / {class_name} / {entity_index} / {no argument = pick what player is looking at}. Flags: gamedll, cheat.</summary>
+	/// <summary>Profile particle. Flags: defensive, developmentonly.</summary>
+	public static void particle_profile(string arguments = "") => Run("particle_profile", arguments);
+
+	/// <summary>Profile particle spike. Flags: defensive, developmentonly.</summary>
+	public static void particle_profile_spike(string arguments = "") => Run("particle_profile_spike", arguments);
+
+	/// <summary>Causes all single-fire particle assertions to trigger once more. Flags: developmentonly.</summary>
+	public static void particle_reset_assertions(string arguments = "") => Run("particle_reset_assertions", arguments);
+
+	/// <summary>Creates the named particle system where the player is looking. Can be used on an entity if pointed at the entity. Optionally takes a particle config name. Arguments: {entity_name} / {class_name} / {entity_index} / {no argument = pick what player is looking at}. Flags: cheat, gamedll.</summary>
 	public static void particle_test_create(string arguments = "") => Run("particle_test_create", arguments);
 
-	/// <summary>Destroys all particle systems matching the specified name. Arguments: {entity_name} / {class_name} / {entity_index} / {no argument = pick what player is looking at}. Flags: gamedll, cheat.</summary>
+	/// <summary>Destroys all particle systems matching the specified name. Arguments: {entity_name} / {class_name} / {entity_index} / {no argument = pick what player is looking at}. Flags: cheat, gamedll.</summary>
 	public static void particle_test_destroy(string arguments = "") => Run("particle_test_destroy", arguments);
 
-	/// <summary>Dispatches the test particle system with the parameters specified in particle_test_file, particle_test_attach_mode and particle_test_attach_param on the entity the player is looking at. Arguments: {entity_name} / {class_name} / {entity_index} / {no argument = pick what player is looking at}. Flags: gamedll, cheat.</summary>
+	/// <summary>Dispatches the test particle system with the parameters specified in particle_test_file, particle_test_attach_mode and particle_test_attach_param on the entity the player is looking at. Arguments: {entity_name} / {class_name} / {entity_index} / {no argument = pick what player is looking at}. Flags: cheat, gamedll.</summary>
 	public static void particle_test_start(string arguments = "") => Run("particle_test_start", arguments);
 
-	/// <summary>Stops all particle systems on the selected entities. Arguments: {entity_name} / {class_name} / {entity_index} / {no argument = pick what player is looking at}. Flags: gamedll, cheat.</summary>
+	/// <summary>Stops all particle systems on the selected entities. Arguments: {entity_name} / {class_name} / {entity_index} / {no argument = pick what player is looking at}. Flags: cheat, gamedll.</summary>
 	public static void particle_test_stop(string arguments = "") => Run("particle_test_stop", arguments);
 
-	/// <summary>Show the filesystem path. Flags: developmentonly, defensive.</summary>
+	/// <summary>Show the filesystem path. Flags: defensive, developmentonly.</summary>
 	public static void path(string arguments = "") => Run("path", arguments);
 
 	/// <summary>Toggle the server pause state. Flags: release.</summary>
@@ -1720,7 +1903,7 @@ public static class ConCommands {
 	/// <summary>Create test character proxy. Flags: developmentonly, gamedll.</summary>
 	public static void phys_create_test_character_proxy(string arguments = "") => Run("phys_create_test_character_proxy", arguments);
 
-	/// <summary>Set up debug-draw of physics internal state. Flags: developmentonly, defensive.</summary>
+	/// <summary>Set up debug-draw of physics internal state. Flags: defensive, developmentonly.</summary>
 	public static void phys_debug_draw(string arguments = "") => Run("phys_debug_draw", arguments);
 
 	/// <summary>Dump intersection controller status. Flags: developmentonly, gamedll.</summary>
@@ -1735,7 +1918,7 @@ public static class ConCommands {
 	/// <summary>List all physics component contents of every entity in the game; -stream [1|0] initiate|terminate streaming to physics debugger -allents include non-physical entities -classes print class names -sdk Rubikon-wide memory short status -sdk -struct Rubikon-wide memory use per struct -sdk -rebuildsvms Rubikon-wide SVM force rebuild and status -world current state of the world -world -touch list body pairs (bodies in contact) -world -save &lt;name&gt; save world to a file -world -mem memory dump (separately per game dll) -world -snapshots Start/Stop dumping snapshots of the world into the current directory -world -agg current aggregate data registry (loaded resources). Flags: developmentonly, gamedll.</summary>
 	public static void phys_list(string arguments = "") => Run("phys_list", arguments);
 
-	/// <summary>Shoots a phys object. Flags: gamedll, cheat.</summary>
+	/// <summary>Shoots a phys object. Flags: cheat, gamedll.</summary>
 	public static void phys_shoot(string arguments = "") => Run("phys_shoot", arguments);
 
 	/// <summary>Put all physics in all the worlds to sleep. Flags: developmentonly, gamedll.</summary>
@@ -1747,10 +1930,10 @@ public static class ConCommands {
 	/// <summary>add test object. Flags: developmentonly, gamedll.</summary>
 	public static void physics_add_test(string arguments = "") => Run("physics_add_test", arguments);
 
-	/// <summary>Dumps debug info for an entity. Flags: developmentonly, gamedll, defensive.</summary>
+	/// <summary>Dumps debug info for an entity. Flags: defensive, developmentonly, gamedll.</summary>
 	public static void physics_debug_entity(string arguments = "") => Run("physics_debug_entity", arguments);
 
-	/// <summary>Turns on the absbox for all active physics objects. 0 : un-highlight.. Flags: developmentonly, gamedll.</summary>
+	/// <summary>Turns on the absbox for all active physics objects. 0 : un-highlight. Flags: developmentonly, gamedll.</summary>
 	public static void physics_highlight_active(string arguments = "") => Run("physics_highlight_active", arguments);
 
 	/// <summary>remove test object. Flags: developmentonly, gamedll.</summary>
@@ -1771,43 +1954,46 @@ public static class ConCommands {
 	/// <summary>Play a recorded demo file (.dem ). Flags: release.</summary>
 	public static void playdemo(string arguments = "") => Run("playdemo", arguments);
 
-	/// <summary>Teleport the player on the server, use with cl_smooth_root_infiniteteleporttolerance. Flags: gamedll, cheat.</summary>
+	/// <summary>Teleport the player on the server, use with cl_smooth_root_infiniteteleporttolerance. Flags: cheat, gamedll.</summary>
 	public static void player_test_prediction_smoothing(string arguments = "") => Run("player_test_prediction_smoothing", arguments);
 
-	/// <summary>playsound &lt;soundname&gt;. Flags: developmentonly, defensive.</summary>
+	/// <summary>playsound &lt;soundname&gt;. Flags: defensive, developmentonly.</summary>
 	public static void playsound(string arguments = "") => Run("playsound", arguments);
 
-	/// <summary>Play a sound at a specified volume. Flags: developmentonly, defensive.</summary>
+	/// <summary>Play a sound at a specified volume. Flags: defensive, developmentonly.</summary>
 	public static void playvol(string arguments = "") => Run("playvol", arguments);
 
-	/// <summary>Take a .png screenshot: png_screenshot [filename]. Flags: developmentonly, defensive.</summary>
+	/// <summary>Take a .png screenshot: png_screenshot [filename]. Flags: defensive, developmentonly.</summary>
 	public static void png_screenshot(string arguments = "") => Run("png_screenshot", arguments);
 
-	/// <summary>Restore previously pushed convars and config values. Flags: developmentonly, defensive.</summary>
+	/// <summary>Restore previously pushed convars and config values. Flags: defensive, developmentonly.</summary>
 	public static void pop_var_values(string arguments = "") => Run("pop_var_values", arguments);
 
 	/// <summary>Prints all convars that have changed from their default value. Flags: release.</summary>
 	public static void print_changed_convars(string arguments = "") => Run("print_changed_convars", arguments);
 
-	/// <summary>Flags: developmentonly, defensive.</summary>
+	/// <summary>Prints the bind pose of the specified model. Optionally limits to a particular bone and its parent chain, otherwise prints the entire skeleton. Flags: defensive, developmentonly.</summary>
+	public static void print_model_bind_pose(string arguments = "") => Run("print_model_bind_pose", arguments);
+
+	/// <summary>Flags: defensive, developmentonly.</summary>
 	public static void progress_enable(string arguments = "") => Run("progress_enable", arguments);
 
-	/// <summary>Toggle prop debug mode. If on, props will show colorcoded bounding boxes. Red means ignore all damage. White means respond physically to damage but never break. Green maps health in the range of 100 down to 1. Flags: gamedll, cheat.</summary>
+	/// <summary>Toggle prop debug mode. If on, props will show colorcoded bounding boxes. Red means ignore all damage. White means respond physically to damage but never break. Green maps health in the range of 100 down to 1. Flags: cheat, gamedll.</summary>
 	public static void prop_debug(string arguments = "") => Run("prop_debug", arguments);
 
-	/// <summary>Creates a dynamic prop with a specific .vmdl aimed away from where the player is looking. Arguments: {.vmdl name}. Flags: gamedll, cheat.</summary>
+	/// <summary>Creates a dynamic prop with a specific .vmdl aimed away from where the player is looking. Arguments: {.vmdl name}. Flags: cheat, gamedll.</summary>
 	public static void prop_dynamic_create(string arguments = "") => Run("prop_dynamic_create", arguments);
 
-	/// <summary>Creates a physics prop with a specific .vmdl aimed away from where the player is looking. Arguments: {.vmdl name}. Flags: gamedll, cheat.</summary>
+	/// <summary>Creates a physics prop with a specific .vmdl aimed away from where the player is looking. Arguments: {.vmdl name}. Flags: cheat, gamedll.</summary>
 	public static void prop_physics_create(string arguments = "") => Run("prop_physics_create", arguments);
 
-	/// <summary>Opens a graph referencing the selected entity. If it is referenced by more than 1 graph, list all the active pulse graph instances referring to that entity so you can pick which one you want. Flags: gamedll, cheat, vconsole_fuzzy_matching.</summary>
+	/// <summary>Opens a graph referencing the selected entity. If it is referenced by more than 1 graph, list all the active pulse graph instances referring to that entity so you can pick which one you want. Flags: cheat, vconsole_fuzzy_matching, gamedll.</summary>
 	public static void pulse_debug_entity(string arguments = "") => Run("pulse_debug_entity", arguments);
 
 	/// <summary>Usage: pulse_debug_print &lt;vpulse_resource&gt;. Flags: developmentonly.</summary>
 	public static void pulse_debug_print(string arguments = "") => Run("pulse_debug_print", arguments);
 
-	/// <summary>List all the active pulse graph instances. Flags: gamedll, cheat.</summary>
+	/// <summary>List all the active pulse graph instances. Flags: cheat, gamedll.</summary>
 	public static void pulse_list_game_blackboards(string arguments = "") => Run("pulse_list_game_blackboards", arguments);
 
 	/// <summary>List all the active pulse graph instances. Flags: cheat.</summary>
@@ -1819,55 +2005,61 @@ public static class ConCommands {
 	/// <summary>Prints the execution history of a graph by filename or instanceid. Flags: cheat.</summary>
 	public static void pulse_print_graph_execution_history(string arguments = "") => Run("pulse_print_graph_execution_history", arguments);
 
-	/// <summary>Save convars and config values. Flags: developmentonly, defensive.</summary>
+	/// <summary>Save convars and config values. Flags: defensive, developmentonly.</summary>
 	public static void push_var_values(string arguments = "") => Run("push_var_values", arguments);
 
 	/// <summary>Quit the game. Flags: release, vconsole_set_focus.</summary>
 	public static void quit(string arguments = "") => Run("quit", arguments);
 
-	/// <summary>Prints out live D3D11 objects (requires -dx11debug). Flags: developmentonly, defensive.</summary>
+	/// <summary>Prints out live D3D11 objects (requires -dx11debug). Flags: defensive, developmentonly.</summary>
 	public static void r_dx11_report_live_objects(string arguments = "") => Run("r_dx11_report_live_objects", arguments);
 
-	/// <summary>Force a single render of the engine viewport. Flags: developmentonly, defensive.</summary>
+	/// <summary>Force a single render of the engine viewport. Flags: defensive, developmentonly.</summary>
 	public static void r_force_engine_render_frame(string arguments = "") => Run("r_force_engine_render_frame", arguments);
 
-	/// <summary>Display GPU memory usage. Flags: linked_concommand, developmentonly, defensive.</summary>
+	/// <summary>Display GPU memory usage. Flags: defensive, developmentonly, linked_concommand.</summary>
 	public static void r_gpu_mem_stats(string arguments = "") => Run("r_gpu_mem_stats", arguments);
 
-	/// <summary>Print Vertex/Index/GPU buffers. Flags: linked_concommand, developmentonly, defensive.</summary>
+	/// <summary>Print Vertex/Index/GPU buffers. Flags: defensive, developmentonly, linked_concommand.</summary>
 	public static void r_print_buffers(string arguments = "") => Run("r_print_buffers", arguments);
 
-	/// <summary>Texture stats. Flags: developmentonly, defensive.</summary>
+	/// <summary>Texture stats. Flags: defensive, developmentonly.</summary>
 	public static void r_print_texture_stats(string arguments = "") => Run("r_print_texture_stats", arguments);
 
-	/// <summary>Prints out the current render coordination state. Flags: developmentonly, defensive.</summary>
+	/// <summary>Prints out the current render coordination state. Flags: defensive, developmentonly.</summary>
 	public static void r_render_coordination_state(string arguments = "") => Run("r_render_coordination_state", arguments);
 
-	/// <summary>Triggers a RenderDoc capture. Flags: linked_concommand, developmentonly, defensive.</summary>
+	/// <summary>Triggers a RenderDoc capture. Flags: defensive, developmentonly, linked_concommand.</summary>
 	public static void r_renderdoc_capture_frame(string arguments = "") => Run("r_renderdoc_capture_frame", arguments);
 
 	/// <summary>Triggers a RenderDoc capture of a specific Window. Flags: developmentonly.</summary>
 	public static void r_renderdoc_capture_window_dx11(string arguments = "") => Run("r_renderdoc_capture_window_dx11", arguments);
 
-	/// <summary>Evict all resident texture. Flags: linked_concommand, developmentonly, defensive.</summary>
+	/// <summary>Triggers a RenderDoc capture of a specific Window. Flags: developmentonly.</summary>
+	public static void r_renderdoc_capture_window_vulkan(string arguments = "") => Run("r_renderdoc_capture_window_vulkan", arguments);
+
+	/// <summary>Evict all resident texture. Flags: defensive, developmentonly, linked_concommand.</summary>
 	public static void r_textures_evict_all(string arguments = "") => Run("r_textures_evict_all", arguments);
 
-	/// <summary>Toggles viewport size between small + full window. Flags: developmentonly, defensive.</summary>
+	/// <summary>Toggles viewport size between small + full window. Flags: defensive, developmentonly.</summary>
 	public static void r_toggleviewportsize(string arguments = "") => Run("r_toggleviewportsize", arguments);
 
-	/// <summary>Slams viewport size to a specified value. Flags: developmentonly, defensive.</summary>
+	/// <summary>Slams viewport size to a specified value. Flags: defensive, developmentonly.</summary>
 	public static void r_viewport(string arguments = "") => Run("r_viewport", arguments);
 
-	/// <summary>Cleans up all ragdolls. Flags: linked_concommand, gamedll, clientdll, cheat.</summary>
+	/// <summary>Prints out information on pipeline compile times. Flags: defensive, developmentonly.</summary>
+	public static void r_vulkan_print_pipeline_compile_times(string arguments = "") => Run("r_vulkan_print_pipeline_compile_times", arguments);
+
+	/// <summary>Cleans up all ragdolls. Flags: cheat, linked_concommand, gamedll, clientdll.</summary>
 	public static void ragdoll_cleanup_all(string arguments = "") => Run("ragdoll_cleanup_all", arguments);
 
-	/// <summary>Measures distance along a ray. Flags: gamedll, cheat.</summary>
+	/// <summary>Measures distance along a ray. Flags: cheat, gamedll.</summary>
 	public static void rangefinder(string arguments = "") => Run("rangefinder", arguments);
 
-	/// <summary>Measures distance along a ray, only measuring along XY plane. Flags: gamedll, cheat.</summary>
+	/// <summary>Measures distance along a ray, only measuring along XY plane. Flags: cheat, gamedll.</summary>
 	public static void rangefinder2d(string arguments = "") => Run("rangefinder2d", arguments);
 
-	/// <summary>Load the rays and run the benchmark. Flags: developmentonly, gamedll, defensive.</summary>
+	/// <summary>Load the rays and run the benchmark. Flags: defensive, developmentonly, gamedll.</summary>
 	public static void ray_bench(string arguments = "") => Run("ray_bench", arguments);
 
 	/// <summary>Issue an rcon command. Flags: dontrecord, release.</summary>
@@ -1882,70 +2074,76 @@ public static class ConCommands {
 	/// <summary>Redirect server console output. Flags: hidden, release.</summary>
 	public static void redirectstart(string arguments = "") => Run("redirectstart", arguments);
 
+	/// <summary>Force a reload of a vmdl resource. Flags: defensive, developmentonly.</summary>
+	public static void reload_model(string arguments = "") => Run("reload_model", arguments);
+
 	/// <summary>Reload the most recent saved game. Flags: cheat, vconsole_set_focus.</summary>
 	public static void reloadgame(string arguments = "") => Run("reloadgame", arguments);
 
-	/// <summary>Remove a weapon held by the player. Arguments: &lt;weapon subclass name&gt;. Flags: gamedll, cheat, client_can_execute.</summary>
+	/// <summary>Remove a weapon held by the player. Arguments: &lt;weapon subclass name&gt;. Flags: cheat, client_can_execute, gamedll.</summary>
 	public static void remove_weapon(string arguments = "") => Run("remove_weapon", arguments);
 
-	/// <summary>Remove a user ID from the ban list. Flags: developmentonly, defensive.</summary>
+	/// <summary>Remove a user ID from the ban list. Flags: defensive, developmentonly.</summary>
 	public static void removeid(string arguments = "") => Run("removeid", arguments);
 
-	/// <summary>Remove an IP address from the ban list. Flags: developmentonly, defensive.</summary>
+	/// <summary>Remove an IP address from the ban list. Flags: defensive, developmentonly.</summary>
 	public static void removeip(string arguments = "") => Run("removeip", arguments);
 
 	/// <summary>Repeat last console command. Flags: release.</summary>
 	public static void repeat_last_console_command(string arguments = "") => Run("repeat_last_console_command", arguments);
 
-	/// <summary>start hltv replay of last death. Flags: gamedll, cheat.</summary>
+	/// <summary>start hltv replay of last death. Flags: cheat, gamedll.</summary>
 	public static void replay_death(string arguments = "") => Run("replay_death", arguments);
 
-	/// <summary>Start Source2 TV replay: replay_start &lt;delay&gt;|stash [&lt;player name or index&gt;]. Flags: gamedll, cheat, client_can_execute.</summary>
+	/// <summary>Start Source2 TV replay: replay_start &lt;delay&gt;|stash [&lt;player name or index&gt;]. Flags: cheat, client_can_execute, gamedll.</summary>
 	public static void replay_start(string arguments = "") => Run("replay_start", arguments);
 
-	/// <summary>stop hltv replay. Flags: gamedll, client_can_execute.</summary>
+	/// <summary>stop hltv replay. Flags: client_can_execute, gamedll.</summary>
 	public static void replay_stop(string arguments = "") => Run("replay_stop", arguments);
 
-	/// <summary>Lists all entities. Flags: developmentonly, gamedll, cheat.</summary>
+	/// <summary>Lists all entities. Flags: cheat, developmentonly, gamedll.</summary>
 	public static void report_entities(string arguments = "") => Run("report_entities", arguments);
 
 	/// <summary>Lists all simulating/thinking entities. Flags: developmentonly, gamedll.</summary>
 	public static void report_simthinklist(string arguments = "") => Run("report_simthinklist", arguments);
 
-	/// <summary>reports sound patch count. Flags: developmentonly, gamedll, defensive.</summary>
+	/// <summary>reports sound patch count. Flags: defensive, developmentonly, gamedll.</summary>
 	public static void report_soundpatch(string arguments = "") => Run("report_soundpatch", arguments);
 
 	/// <summary>Reset game convars to default values. Flags: cheat.</summary>
 	public static void reset_gameconvars(string arguments = "") => Run("reset_gameconvars", arguments);
 
-	/// <summary>resource_leaks &lt;resource_name&gt;: Show resource leaks for the named resource. Flags: developmentonly, defensive.</summary>
+	/// <summary>resource_leaks &lt;resource_name&gt;: Show resource leaks for the named resource. Flags: defensive, developmentonly.</summary>
 	public static void resource_leaks(string arguments = "") => Run("resource_leaks", arguments);
 
-	/// <summary>List loaded resources matching a substring. Flags: developmentonly, defensive.</summary>
+	/// <summary>List loaded resources matching a substring. Flags: defensive, developmentonly.</summary>
 	public static void resource_list(string arguments = "") => Run("resource_list", arguments);
 
-	/// <summary>Log time spent in Allocate for all resource types. Flags: developmentonly, defensive.</summary>
+	/// <summary>Log time spent in Allocate for all resource types. Flags: defensive, developmentonly.</summary>
 	public static void resource_log_allocate_timing(string arguments = "") => Run("resource_log_allocate_timing", arguments);
 
-	/// <summary>Scan all of the loaded modules and validate any resource manifests found. Flags: developmentonly, defensive.</summary>
+	/// <summary>Scan all of the loaded modules and validate any resource manifests found. Flags: defensive, developmentonly.</summary>
 	public static void resource_manifest_validate_modules(string arguments = "") => Run("resource_manifest_validate_modules", arguments);
 
-	/// <summary>resource_repeated_reload &lt;count&gt; &lt;resource_name&gt; (&lt;resource name&gt; ...): Load and unload the specified resource(s). Flags: developmentonly, defensive.</summary>
+	/// <summary>resource_repeated_reload &lt;count&gt; &lt;resource_name&gt; (&lt;resource name&gt; ...): Load and unload the specified resource(s). Flags: defensive, developmentonly.</summary>
 	public static void resource_repeated_reload(string arguments = "") => Run("resource_repeated_reload", arguments);
 
-	/// <summary>Reset tracked time spent in Allocate (see resource_log_allocate_timing). Flags: developmentonly, defensive.</summary>
+	/// <summary>Reset tracked time spent in Allocate (see resource_log_allocate_timing). Flags: defensive, developmentonly.</summary>
 	public static void resource_reset_allocate_timing(string arguments = "") => Run("resource_reset_allocate_timing", arguments);
 
-	/// <summary>Respawns the player from death!. Flags: gamedll, cheat.</summary>
+	/// <summary>Respawns the player from death!. Flags: cheat, gamedll.</summary>
 	public static void respawn_player(string arguments = "") => Run("respawn_player", arguments);
 
 	/// <summary>Poor man's restart: reload the current map from disk. Flags: cheat, vconsole_set_focus.</summary>
 	public static void restart(string arguments = "") => Run("restart", arguments);
 
-	/// <summary>Print all response rules. Flags: gamedll, cheat.</summary>
+	/// <summary>Return back to the last active tool from the engine. Flags: developmentonly.</summary>
+	public static void return_to_tools_from_engine(string arguments = "") => Run("return_to_tools_from_engine", arguments);
+
+	/// <summary>Print all response rules. Flags: cheat, gamedll.</summary>
 	public static void rr_dump_rules(string arguments = "") => Run("rr_dump_rules", arguments);
 
-	/// <summary>fire a response concept directly at a given character. USAGE: rr_forceconcept &lt;target name or index&gt; &lt;concept&gt; "criteria1:value1,criteria2:value2,..." criteria values are optional.. Flags: gamedll, cheat.</summary>
+	/// <summary>fire a response concept directly at a given character. USAGE: rr_forceconcept &lt;target name or index&gt; &lt;concept&gt; "criteria1:value1,criteria2:value2,..." criteria values are optional. Flags: cheat, gamedll.</summary>
 	public static void rr_forceconcept(string arguments = "") => Run("rr_forceconcept", arguments);
 
 	/// <summary>rs_dump_stats - Dump resourcesystem stats. Flags: developmentonly.</summary>
@@ -1954,31 +2152,31 @@ public static class ConCommands {
 	/// <summary>Execute perftest.cfg. Flags: cheat, dontrecord.</summary>
 	public static void run_perftest(string arguments = "") => Run("run_perftest", arguments);
 
-	/// <summary>Save Game. Flags: developmentonly, gamedll, dontrecord, defensive.</summary>
+	/// <summary>Save Game. Flags: defensive, developmentonly, dontrecord, gamedll.</summary>
 	public static void save(string arguments = "") => Run("save", arguments);
 
-	/// <summary>Flags: developmentonly, gamedll, replicated, defensive.</summary>
+	/// <summary>Flags: defensive, developmentonly, replicated, gamedll.</summary>
 	public static void save_clear_subdirectory(string arguments = "") => Run("save_clear_subdirectory", arguments);
 
-	/// <summary>Flags: developmentonly, gamedll, defensive.</summary>
+	/// <summary>Flags: defensive, developmentonly, gamedll.</summary>
 	public static void save_finish_async(string arguments = "") => Run("save_finish_async", arguments);
 
-	/// <summary>Flags: developmentonly, gamedll, replicated, defensive.</summary>
+	/// <summary>Flags: defensive, developmentonly, replicated, gamedll.</summary>
 	public static void save_set_subdirectory(string arguments = "") => Run("save_set_subdirectory", arguments);
 
-	/// <summary>display up-to-date elapsed play time. Flags: developmentonly, gamedll, defensive.</summary>
+	/// <summary>display up-to-date elapsed play time. Flags: defensive, developmentonly, gamedll.</summary>
 	public static void save_showelapsedtime(string arguments = "") => Run("save_showelapsedtime", arguments);
 
-	/// <summary>Restrict spew to entities with matching classname. Flags: developmentonly, gamedll, defensive.</summary>
+	/// <summary>Restrict spew to entities with matching classname. Flags: defensive, developmentonly, gamedll.</summary>
 	public static void save_watchclass(string arguments = "") => Run("save_watchclass", arguments);
 
-	/// <summary>Restrict spew to entity index. Flags: developmentonly, gamedll, defensive.</summary>
+	/// <summary>Restrict spew to entity index. Flags: defensive, developmentonly, gamedll.</summary>
 	public static void save_watchentity(string arguments = "") => Run("save_watchentity", arguments);
 
-	/// <summary>Display player message. Flags: gamedll, client_can_execute.</summary>
+	/// <summary>Display player message. Flags: client_can_execute, gamedll.</summary>
 	public static void say(string arguments = "") => Run("say", arguments);
 
-	/// <summary>Display player message to team. Flags: gamedll, client_can_execute.</summary>
+	/// <summary>Display player message to team. Flags: client_can_execute, gamedll.</summary>
 	public static void say_team(string arguments = "") => Run("say_team", arguments);
 
 	/// <summary>Increment the debug level associated with an object class. sc_CycleClassDebugLevel &lt;classname&gt; &lt;optional: max level&gt;. Flags: cheat.</summary>
@@ -1990,7 +2188,7 @@ public static class ConCommands {
 	/// <summary>Dump the objects in a sceneworld into a 3d geoview buffer (Usage: sc_dumpworld3d &lt;world_index&gt;). Flags: cheat.</summary>
 	public static void sc_dumpworld3d(string arguments = "") => Run("sc_dumpworld3d", arguments);
 
-	/// <summary>Prints out the overall extra data allocation counts. Flags: developmentonly, defensive.</summary>
+	/// <summary>Prints out the overall extra data allocation counts. Flags: defensive, developmentonly.</summary>
 	public static void sc_list_extradata_allocations(string arguments = "") => Run("sc_list_extradata_allocations", arguments);
 
 	/// <summary>List all the active sceneworlds. Flags: cheat.</summary>
@@ -2002,10 +2200,10 @@ public static class ConCommands {
 	/// <summary>List the object class names known by scenesystem. Flags: cheat.</summary>
 	public static void sc_showclasses(string arguments = "") => Run("sc_showclasses", arguments);
 
-	/// <summary>Print out all scale functions. Flags: gamedll, cheat.</summary>
+	/// <summary>Print out all scale functions. Flags: cheat, gamedll.</summary>
 	public static void scale_function_dump(string arguments = "") => Run("scale_function_dump", arguments);
 
-	/// <summary>Play the given VCD as an instanced scripted scene. Flags: gamedll, cheat.</summary>
+	/// <summary>Play the given VCD as an instanced scripted scene. Flags: cheat, gamedll.</summary>
 	public static void scene_playvcd(string arguments = "") => Run("scene_playvcd", arguments);
 
 	/// <summary>schema_all_list_bindings &lt;substring&gt; - List all scopes registered schema bindings (classes &amp; enums). If no substring, list them all. Flags: developmentonly.</summary>
@@ -2026,157 +2224,163 @@ public static class ConCommands {
 	/// <summary>schema_stats - Print a summary of various schemasystem statistics. Flags: developmentonly.</summary>
 	public static void schema_stats(string arguments = "") => Run("schema_stats", arguments);
 
-	/// <summary>Take a screenshot: screenshot [filename]. Flags: developmentonly, defensive.</summary>
+	/// <summary>Take a screenshot: screenshot [filename]. Flags: defensive, developmentonly.</summary>
 	public static void screenshot(string arguments = "") => Run("screenshot", arguments);
 
-	/// <summary>Add a filter to the game debug overlay. Flags: gamedll, cheat.</summary>
+	/// <summary>Add a filter to the game debug overlay. Flags: cheat, gamedll.</summary>
 	public static void script_add_debug_filter(string arguments = "") => Run("script_add_debug_filter", arguments);
 
-	/// <summary>Add a watch to the game debug overlay. Flags: gamedll, cheat.</summary>
+	/// <summary>Add a watch to the game debug overlay. Flags: cheat, gamedll.</summary>
 	public static void script_add_watch(string arguments = "") => Run("script_add_watch", arguments);
 
-	/// <summary>Add a watch to the game debug overlay. Flags: gamedll, cheat.</summary>
+	/// <summary>Add a watch to the game debug overlay. Flags: cheat, gamedll.</summary>
 	public static void script_add_watch_pattern(string arguments = "") => Run("script_add_watch_pattern", arguments);
 
-	/// <summary>Connect the vscript VM to the script debugger. Flags: gamedll, cheat.</summary>
+	/// <summary>Connect the vscript VM to the script debugger. Flags: cheat, gamedll.</summary>
 	public static void script_attach_debugger(string arguments = "") => Run("script_attach_debugger", arguments);
 
-	/// <summary>Clear all watches from the game debug overlay. Flags: gamedll, cheat.</summary>
+	/// <summary>Clear all watches from the game debug overlay. Flags: cheat, gamedll.</summary>
 	public static void script_clear_watches(string arguments = "") => Run("script_clear_watches", arguments);
 
-	/// <summary>Toggle the in-game script debug features. Flags: gamedll, cheat.</summary>
+	/// <summary>Toggle the in-game script debug features. Flags: cheat, gamedll.</summary>
 	public static void script_debug(string arguments = "") => Run("script_debug", arguments);
 
-	/// <summary>Dump the state of the VM to the console. Flags: gamedll, cheat.</summary>
+	/// <summary>Dump the state of the VM to the console. Flags: cheat, gamedll.</summary>
 	public static void script_dump_all(string arguments = "") => Run("script_dump_all", arguments);
 
-	/// <summary>Find a key in the VM. Flags: gamedll, cheat.</summary>
+	/// <summary>Find a key in the VM. Flags: cheat, gamedll.</summary>
 	public static void script_find(string arguments = "") => Run("script_find", arguments);
 
-	/// <summary>Output help for script functions. Flags: gamedll, cheat.</summary>
+	/// <summary>Output help for script functions. Flags: cheat, gamedll.</summary>
 	public static void script_help(string arguments = "") => Run("script_help", arguments);
 
-	/// <summary>Output help for script functions suitable for auto-completion. Flags: developmentonly, gamedll, defensive.</summary>
+	/// <summary>Output help for script functions suitable for auto-completion. Flags: defensive, developmentonly, gamedll.</summary>
 	public static void script_help2(string arguments = "") => Run("script_help2", arguments);
 
-	/// <summary>Reload scripts. Flags: gamedll, cheat.</summary>
+	/// <summary>Reload scripts. Flags: cheat, gamedll.</summary>
 	public static void script_reload(string arguments = "") => Run("script_reload", arguments);
 
-	/// <summary>Execute a vscript file, replacing existing functions with the functions in the run script. Flags: gamedll, cheat.</summary>
+	/// <summary>Execute a vscript file, replacing existing functions with the functions in the run script. Flags: cheat, gamedll.</summary>
 	public static void script_reload_code(string arguments = "") => Run("script_reload_code", arguments);
 
-	/// <summary>Execute all of this entity's VScripts, replacing existing functions with the functions in the run scripts. Flags: gamedll, cheat.</summary>
+	/// <summary>Execute all of this entity's VScripts, replacing existing functions with the functions in the run scripts. Flags: cheat, gamedll.</summary>
 	public static void script_reload_entity_code(string arguments = "") => Run("script_reload_entity_code", arguments);
 
-	/// <summary>Remove a filter from the game debug overlay. Flags: gamedll, cheat.</summary>
+	/// <summary>Remove a filter from the game debug overlay. Flags: cheat, gamedll.</summary>
 	public static void script_remove_debug_filter(string arguments = "") => Run("script_remove_debug_filter", arguments);
 
-	/// <summary>Remove a watch from the game debug overlay. Flags: gamedll, cheat.</summary>
+	/// <summary>Remove a watch from the game debug overlay. Flags: cheat, gamedll.</summary>
 	public static void script_remove_watch(string arguments = "") => Run("script_remove_watch", arguments);
 
-	/// <summary>Remove a watch from the game debug overlay. Flags: gamedll, cheat.</summary>
+	/// <summary>Remove a watch from the game debug overlay. Flags: cheat, gamedll.</summary>
 	public static void script_remove_watch_pattern(string arguments = "") => Run("script_remove_watch_pattern", arguments);
 
-	/// <summary>Use the garbage collector to track down reference cycles. Flags: gamedll, cheat.</summary>
+	/// <summary>Use the garbage collector to track down reference cycles. Flags: cheat, gamedll.</summary>
 	public static void script_resurrect_unreachable(string arguments = "") => Run("script_resurrect_unreachable", arguments);
 
-	/// <summary>Turn off a particular trace output by file or function name. Flags: gamedll, cheat.</summary>
+	/// <summary>Turn off a particular trace output by file or function name. Flags: cheat, gamedll.</summary>
 	public static void script_trace_disable(string arguments = "") => Run("script_trace_disable", arguments);
 
-	/// <summary>Turn off all trace output. Flags: gamedll, cheat.</summary>
+	/// <summary>Turn off all trace output. Flags: cheat, gamedll.</summary>
 	public static void script_trace_disable_all(string arguments = "") => Run("script_trace_disable_all", arguments);
 
-	/// <summary>Turn off a particular trace output by table/instance. Flags: gamedll, cheat.</summary>
+	/// <summary>Turn off a particular trace output by table/instance. Flags: cheat, gamedll.</summary>
 	public static void script_trace_disable_key(string arguments = "") => Run("script_trace_disable_key", arguments);
 
-	/// <summary>Turn on a particular trace output by file or function name. Flags: gamedll, cheat.</summary>
+	/// <summary>Turn on a particular trace output by file or function name. Flags: cheat, gamedll.</summary>
 	public static void script_trace_enable(string arguments = "") => Run("script_trace_enable", arguments);
 
-	/// <summary>Turn on all trace output. Flags: gamedll, cheat.</summary>
+	/// <summary>Turn on all trace output. Flags: cheat, gamedll.</summary>
 	public static void script_trace_enable_all(string arguments = "") => Run("script_trace_enable_all", arguments);
 
-	/// <summary>Turn on a particular trace output by table/instance. Flags: gamedll, cheat.</summary>
+	/// <summary>Turn on a particular trace output by table/instance. Flags: cheat, gamedll.</summary>
 	public static void script_trace_enable_key(string arguments = "") => Run("script_trace_enable_key", arguments);
 
-	/// <summary>Scrub system off - not a dev build. Flags: developmentonly, defensive.</summary>
+	/// <summary>Scrub system off - not a dev build. Flags: defensive, developmentonly.</summary>
 	public static void scrubber(string arguments = "") => Run("scrubber", arguments);
 
-	/// <summary>Prints server lobby object. Flags: developmentonly, gamedll, defensive.</summary>
+	/// <summary>An old command that has been renamed to 'net_option'. Flags: release.</summary>
+	public static void sdr(string arguments = "") => Run("sdr", arguments);
+
+	/// <summary>Prints server lobby object. Flags: defensive, developmentonly, gamedll.</summary>
 	public static void server_dump_lobby(string arguments = "") => Run("server_dump_lobby", arguments);
 
-	/// <summary>Dumps informaiton about the current signout system. Flags: developmentonly, gamedll, defensive.</summary>
+	/// <summary>Dumps informaiton about the current signout system. Flags: defensive, developmentonly, gamedll.</summary>
 	public static void server_dump_signout(string arguments = "") => Run("server_dump_signout", arguments);
 
-	/// <summary>Prints current server state. Flags: developmentonly, gamedll, defensive.</summary>
+	/// <summary>Prints current server state. Flags: defensive, developmentonly, gamedll.</summary>
 	public static void server_dump_state(string arguments = "") => Run("server_dump_state", arguments);
 
-	/// <summary>Gives the game time in seconds (server's curtime). Flags: developmentonly, gamedll, defensive.</summary>
+	/// <summary>Gives the game time in seconds (server's curtime). Flags: defensive, developmentonly, gamedll.</summary>
 	public static void server_game_time(string arguments = "") => Run("server_game_time", arguments);
 
-	/// <summary>Check status of connection to the GC. Flags: developmentonly, gamedll, defensive.</summary>
+	/// <summary>Check status of connection to the GC. Flags: defensive, developmentonly, gamedll.</summary>
 	public static void server_gc_status(string arguments = "") => Run("server_gc_status", arguments);
 
-	/// <summary>Crashes the server to test crash detection and minidumps. Flags: developmentonly, gamedll, defensive.</summary>
+	/// <summary>Crashes the server to test crash detection and minidumps. Flags: defensive, developmentonly, gamedll.</summary>
 	public static void server_test_crash(string arguments = "") => Run("server_test_crash", arguments);
 
-	/// <summary>Snap player eyes to specified pitch yaw &lt;roll:optional&gt; (must have sv_cheats). Flags: gamedll, cheat, client_can_execute.</summary>
+	/// <summary>Snap player eyes to specified pitch yaw &lt;roll:optional&gt; (must have sv_cheats). Flags: cheat, client_can_execute, gamedll.</summary>
 	public static void setang(string arguments = "") => Run("setang", arguments);
 
-	/// <summary>Snap player eyes and orientation to specified pitch yaw &lt;roll:optional&gt; (must have sv_cheats). Flags: gamedll, cheat, client_can_execute.</summary>
+	/// <summary>Snap player eyes and orientation to specified pitch yaw &lt;roll:optional&gt; (must have sv_cheats). Flags: cheat, client_can_execute, gamedll.</summary>
 	public static void setang_exact(string arguments = "") => Run("setang_exact", arguments);
 
 	/// <summary>Adds a new user info value. Flags: clientcmd_can_execute.</summary>
 	public static void setinfo(string arguments = "") => Run("setinfo", arguments);
 
-	/// <summary>Changes's player's model. Flags: gamedll, cheat.</summary>
+	/// <summary>Changes's player's model. Flags: cheat, gamedll.</summary>
 	public static void setmodel(string arguments = "") => Run("setmodel", arguments);
 
 	/// <summary>Set the pause state of the server. Flags: release.</summary>
 	public static void setpause(string arguments = "") => Run("setpause", arguments);
 
-	/// <summary>Move player to specified origin (must have sv_cheats). Flags: gamedll, cheat, client_can_execute.</summary>
+	/// <summary>Move player to specified origin (must have sv_cheats). Flags: cheat, client_can_execute, gamedll.</summary>
 	public static void setpos(string arguments = "") => Run("setpos", arguments);
 
-	/// <summary>Move player to an exact specified origin (must have sv_cheats). Flags: gamedll, cheat, client_can_execute.</summary>
+	/// <summary>Move player to an exact specified origin (must have sv_cheats). Flags: cheat, client_can_execute, gamedll.</summary>
 	public static void setpos_exact(string arguments = "") => Run("setpos_exact", arguments);
 
-	/// <summary>Move specified player to specified origin (must have sv_cheats). Flags: gamedll, cheat, client_can_execute.</summary>
+	/// <summary>Move specified player to specified origin (must have sv_cheats). Flags: cheat, client_can_execute, gamedll.</summary>
 	public static void setpos_player(string arguments = "") => Run("setpos_player", arguments);
 
-	/// <summary>Shake the screen. Flags: gamedll, cheat.</summary>
+	/// <summary>Shake the screen. Flags: cheat, gamedll.</summary>
 	public static void shake(string arguments = "") => Run("shake", arguments);
 
-	/// <summary>Flags: gamedll, cheat.</summary>
+	/// <summary>Flags: cheat, gamedll.</summary>
 	public static void shatterglass_break(string arguments = "") => Run("shatterglass_break", arguments);
 
-	/// <summary>Flags: gamedll, cheat.</summary>
+	/// <summary>Flags: cheat, gamedll.</summary>
 	public static void shatterglass_restore(string arguments = "") => Run("shatterglass_restore", arguments);
+
+	/// <summary>Show or launch the specified engine tool. Flags: defensive, developmentonly.</summary>
+	public static void show_tool(string arguments = "") => Run("show_tool", arguments);
 
 	/// <summary>Show the console. Flags: dontrecord, release.</summary>
 	public static void showconsole(string arguments = "") => Run("showconsole", arguments);
 
-	/// <summary>Dump entity list to console. Flags: gamedll, cheat.</summary>
+	/// <summary>Dump entity list to console. Flags: cheat, gamedll.</summary>
 	public static void showents(string arguments = "") => Run("showents", arguments);
 
-	/// <summary>Enable or Disable showing trigger entities. Flags: gamedll, cheat.</summary>
+	/// <summary>Enable or Disable showing trigger entities. Flags: cheat, gamedll.</summary>
 	public static void showtriggers(string arguments = "") => Run("showtriggers", arguments);
 
-	/// <summary>Displays the movement bounding box for the triggers in orange. Some entites will also display entity specific overlays. Arguments: {entity_name} / {class_name} / {entity_index} / {no argument = pick what player is looking at}. Flags: gamedll, cheat.</summary>
+	/// <summary>Displays the movement bounding box for the triggers in orange. Some entites will also display entity specific overlays. Arguments: {entity_name} / {class_name} / {entity_index} / {no argument = pick what player is looking at}. Flags: cheat, gamedll.</summary>
 	public static void showtriggers_toggle(string arguments = "") => Run("showtriggers_toggle", arguments);
 
 	/// <summary>Stops the specified track. Flags: cheat.</summary>
 	public static void snd__beatpattern_stop_track(string arguments = "") => Run("snd__beatpattern_stop_track", arguments);
 
-	/// <summary>Flush all unlocked async audio data. Flags: developmentonly, defensive.</summary>
+	/// <summary>Flush all unlocked async audio data. Flags: defensive, developmentonly.</summary>
 	public static void snd_async_flush(string arguments = "") => Run("snd_async_flush", arguments);
 
-	/// <summary>Show async memory stats. Flags: developmentonly, defensive.</summary>
+	/// <summary>Show async memory stats. Flags: defensive, developmentonly.</summary>
 	public static void snd_async_showmem(string arguments = "") => Run("snd_async_showmem", arguments);
 
-	/// <summary>Show async memory stats for just non-streamed music. Flags: developmentonly, defensive.</summary>
+	/// <summary>Show async memory stats for just non-streamed music. Flags: defensive, developmentonly.</summary>
 	public static void snd_async_showmem_music(string arguments = "") => Run("snd_async_showmem_music", arguments);
 
-	/// <summary>Show brief async memory stats. Flags: developmentonly, defensive.</summary>
+	/// <summary>Show brief async memory stats. Flags: defensive, developmentonly.</summary>
 	public static void snd_async_showmem_summary(string arguments = "") => Run("snd_async_showmem_summary", arguments);
 
 	/// <summary>Purge and reload all beat pattern data and files. Flags: cheat.</summary>
@@ -2200,37 +2404,37 @@ public static class ConCommands {
 	/// <summary>Casts a ray and starts a sound event where the ray hits. The sound event will retrigger periodically if cl_snd_cast_retrigger is set. The sound event will clear previous snd_cast events if cl_snd_cast_clear is set. Usage: snd_cast &lt;eventname&gt; [&lt;retrigger time&gt;] [&lt;max distance&gt;]. Arguments that are specified will become defaults for the remainder of the session. Flags: cheat.</summary>
 	public static void snd_cast(string arguments = "") => Run("snd_cast", arguments);
 
-	/// <summary>Compare the compiled and loaded contents of 2 soundevents. Flags: developmentonly, cheat.</summary>
+	/// <summary>Compare the compiled and loaded contents of 2 soundevents. Flags: cheat, developmentonly.</summary>
 	public static void snd_compare_soundevents(string arguments = "") => Run("snd_compare_soundevents", arguments);
 
-	/// <summary>Specifies the position (in degrees) of the virtual front left/right headphones. Flags: developmentonly, defensive.</summary>
+	/// <summary>Specifies the position (in degrees) of the virtual front left/right headphones. Flags: defensive, developmentonly.</summary>
 	public static void snd_front_headphone_position(string arguments = "") => Run("snd_front_headphone_position", arguments);
 
-	/// <summary>Specifies the position (in degrees) of the virtual front left/right speakers. Flags: developmentonly, defensive.</summary>
+	/// <summary>Specifies the position (in degrees) of the virtual front left/right speakers. Flags: defensive, developmentonly.</summary>
 	public static void snd_front_stereo_speaker_position(string arguments = "") => Run("snd_front_stereo_speaker_position", arguments);
 
-	/// <summary>Specifies the position (in degrees) of the virtual front left/right speakers. Flags: developmentonly, defensive.</summary>
+	/// <summary>Specifies the position (in degrees) of the virtual front left/right speakers. Flags: defensive, developmentonly.</summary>
 	public static void snd_front_surround_speaker_position(string arguments = "") => Run("snd_front_surround_speaker_position", arguments);
 
 	/// <summary>Get physics surface properties for all the materials. Flags: cheat.</summary>
 	public static void snd_get_physics_surface_properties(string arguments = "") => Run("snd_get_physics_surface_properties", arguments);
 
-	/// <summary>Specifies the exponent for the pan xfade from phone to phone if the "exp" pan law is being used. Flags: developmentonly, defensive.</summary>
+	/// <summary>Specifies the exponent for the pan xfade from phone to phone if the "exp" pan law is being used. Flags: defensive, developmentonly.</summary>
 	public static void snd_headphone_pan_exponent(string arguments = "") => Run("snd_headphone_pan_exponent", arguments);
 
-	/// <summary>Apply cos(angle) * weight before pan law. Flags: developmentonly, defensive.</summary>
+	/// <summary>Apply cos(angle) * weight before pan law. Flags: defensive, developmentonly.</summary>
 	public static void snd_headphone_pan_radial_weight(string arguments = "") => Run("snd_headphone_pan_radial_weight", arguments);
 
-	/// <summary>List all current deferred load soundevents. Flags: developmentonly, cheat.</summary>
+	/// <summary>List all current deferred load soundevents. Flags: cheat, developmentonly.</summary>
 	public static void snd_list_deferred_soundevents(string arguments = "") => Run("snd_list_deferred_soundevents", arguments);
 
-	/// <summary>List all available soundevents. Flags: developmentonly, cheat.</summary>
+	/// <summary>List all available soundevents. Flags: cheat, developmentonly.</summary>
 	public static void snd_list_soundevents(string arguments = "") => Run("snd_list_soundevents", arguments);
 
-	/// <summary>List all available soundevents using specified stack name. Flags: developmentonly, cheat.</summary>
+	/// <summary>List all available soundevents using specified stack name. Flags: cheat, developmentonly.</summary>
 	public static void snd_list_soundevents_by_stack(string arguments = "") => Run("snd_list_soundevents_by_stack", arguments);
 
-	/// <summary>Get data related to mix group matching string. Flags: developmentonly, defensive.</summary>
+	/// <summary>Get data related to mix group matching string. Flags: defensive, developmentonly.</summary>
 	public static void snd_print_current_mixer_mixgroup(string arguments = "") => Run("snd_print_current_mixer_mixgroup", arguments);
 
 	/// <summary>List all available samplers. Flags: cheat.</summary>
@@ -2245,19 +2449,19 @@ public static class ConCommands {
 	/// <summary>Purges the VSnd table. Flags: developmentonly.</summary>
 	public static void snd_purge_vsnd_table(string arguments = "") => Run("snd_purge_vsnd_table", arguments);
 
-	/// <summary>Specifies the position (in degrees) of the virtual rear left/right headphones. Flags: developmentonly, defensive.</summary>
+	/// <summary>Specifies the position (in degrees) of the virtual rear left/right headphones. Flags: defensive, developmentonly.</summary>
 	public static void snd_rear_headphone_position(string arguments = "") => Run("snd_rear_headphone_position", arguments);
 
-	/// <summary>Specifies the position (in degrees) of the virtual rear left/right speakers. Flags: developmentonly, defensive.</summary>
+	/// <summary>Specifies the position (in degrees) of the virtual rear left/right speakers. Flags: defensive, developmentonly.</summary>
 	public static void snd_rear_stereo_speaker_position(string arguments = "") => Run("snd_rear_stereo_speaker_position", arguments);
 
-	/// <summary>Specifies the position (in degrees) of the virtual rear left/right speakers. Flags: developmentonly, defensive.</summary>
+	/// <summary>Specifies the position (in degrees) of the virtual rear left/right speakers. Flags: defensive, developmentonly.</summary>
 	public static void snd_rear_surround_speaker_position(string arguments = "") => Run("snd_rear_surround_speaker_position", arguments);
 
-	/// <summary>Remove all soundevents. Flags: developmentonly, cheat.</summary>
+	/// <summary>Remove all soundevents. Flags: cheat, developmentonly.</summary>
 	public static void snd_remove_all_soundevents(string arguments = "") => Run("snd_remove_all_soundevents", arguments);
 
-	/// <summary>Remove the specified soundevent. Flags: developmentonly, cheat.</summary>
+	/// <summary>Remove the specified soundevent. Flags: cheat, developmentonly.</summary>
 	public static void snd_remove_soundevent(string arguments = "") => Run("snd_remove_soundevent", arguments);
 
 	/// <summary>Play a note from a specified sampler. Flags: cheat.</summary>
@@ -2275,7 +2479,7 @@ public static class ConCommands {
 	/// <summary>Set named Mixgroup of named mix layer to mix vol, mute, solo. Flags: developmentonly.</summary>
 	public static void snd_setmixlayer(string arguments = "") => Run("snd_setmixlayer", arguments);
 
-	/// <summary>Specifies the position (in degrees) of the virtual rear left/right speakers. Flags: developmentonly, defensive.</summary>
+	/// <summary>Specifies the position (in degrees) of the virtual rear left/right speakers. Flags: defensive, developmentonly.</summary>
 	public static void snd_side_surround_speaker_position(string arguments = "") => Run("snd_side_surround_speaker_position", arguments);
 
 	/// <summary>Compares 2 operator stacks and spews any errors. Flags: cheat.</summary>
@@ -2353,19 +2557,19 @@ public static class ConCommands {
 	/// <summary>Stop the specified track and it's queue. Flags: cheat.</summary>
 	public static void snd_sos_stop_track(string arguments = "") => Run("snd_sos_stop_track", arguments);
 
-	/// <summary>Test. Flags: developmentonly, gamedll, defensive.</summary>
+	/// <summary>Test. Flags: defensive, developmentonly, gamedll.</summary>
 	public static void snd_sos_sv_soundevent_pause_last(string arguments = "") => Run("snd_sos_sv_soundevent_pause_last", arguments);
 
-	/// <summary>Test. Flags: developmentonly, gamedll, defensive.</summary>
+	/// <summary>Test. Flags: defensive, developmentonly, gamedll.</summary>
 	public static void snd_sos_sv_soundevent_start(string arguments = "") => Run("snd_sos_sv_soundevent_start", arguments);
 
-	/// <summary>Test. Flags: developmentonly, gamedll, defensive.</summary>
+	/// <summary>Test. Flags: defensive, developmentonly, gamedll.</summary>
 	public static void snd_sos_sv_soundevent_stop_last(string arguments = "") => Run("snd_sos_sv_soundevent_stop_last", arguments);
 
-	/// <summary>Test. Flags: developmentonly, gamedll, defensive.</summary>
+	/// <summary>Test. Flags: defensive, developmentonly, gamedll.</summary>
 	public static void snd_sos_sv_soundevent_unpause_last(string arguments = "") => Run("snd_sos_sv_soundevent_unpause_last", arguments);
 
-	/// <summary>Test. Flags: developmentonly, gamedll, defensive.</summary>
+	/// <summary>Test. Flags: defensive, developmentonly, gamedll.</summary>
 	public static void snd_sos_sv_test_gender(string arguments = "") => Run("snd_sos_sv_test_gender", arguments);
 
 	/// <summary>test. Flags: cheat.</summary>
@@ -2374,19 +2578,19 @@ public static class ConCommands {
 	/// <summary>UnPause the first soundevent in the list. Flags: cheat.</summary>
 	public static void snd_sos_unpause_soundevent(string arguments = "") => Run("snd_sos_unpause_soundevent", arguments);
 
-	/// <summary>Clear the list of deferred soundevents for loading. Flags: developmentonly, cheat.</summary>
+	/// <summary>Clear the list of deferred soundevents for loading. Flags: cheat, developmentonly.</summary>
 	public static void snd_soundevent_clear_deferred(string arguments = "") => Run("snd_soundevent_clear_deferred", arguments);
 
-	/// <summary>Reload soundmixers.txt file. Flags: developmentonly, defensive.</summary>
+	/// <summary>Reload soundmixers.txt file. Flags: defensive, developmentonly.</summary>
 	public static void snd_soundmixer_flush(string arguments = "") => Run("snd_soundmixer_flush", arguments);
 
-	/// <summary>List all mix groups to dev console. Flags: developmentonly, defensive.</summary>
+	/// <summary>List all mix groups to dev console. Flags: defensive, developmentonly.</summary>
 	public static void snd_soundmixer_list_mix_groups(string arguments = "") => Run("snd_soundmixer_list_mix_groups", arguments);
 
-	/// <summary>List all mix layers to dev console. Flags: developmentonly, defensive.</summary>
+	/// <summary>List all mix layers to dev console. Flags: defensive, developmentonly.</summary>
 	public static void snd_soundmixer_list_mix_layers(string arguments = "") => Run("snd_soundmixer_list_mix_layers", arguments);
 
-	/// <summary>List all mixers to dev console. Flags: developmentonly, defensive.</summary>
+	/// <summary>List all mixers to dev console. Flags: defensive, developmentonly.</summary>
 	public static void snd_soundmixer_list_mixers(string arguments = "") => Run("snd_soundmixer_list_mixers", arguments);
 
 	/// <summary>Set named mix layer / mix group, trigger amount. Flags: developmentonly.</summary>
@@ -2395,76 +2599,88 @@ public static class ConCommands {
 	/// <summary>Set named mix layer mix amount. Flags: developmentonly.</summary>
 	public static void snd_soundmixer_setmixlayer_amount(string arguments = "") => Run("snd_soundmixer_setmixlayer_amount", arguments);
 
-	/// <summary>Load all the probes from a file and display probes based on the passed on arguments. Flags: developmentonly, defensive.</summary>
+	/// <summary>Display baked data stats for the current mod. Flags: cheat.</summary>
+	public static void snd_steamaudio_baked_data_stats(string arguments = "") => Run("snd_steamaudio_baked_data_stats", arguments);
+
+	/// <summary>Load all the probes from a file and display probes based on the passed on arguments. Flags: defensive, developmentonly.</summary>
 	public static void snd_steamaudio_display_probes(string arguments = "") => Run("snd_steamaudio_display_probes", arguments);
 
-	/// <summary>Specifies the exponent for the pan xfade from speaker to speaker if the "exp" pan law is being used. Flags: developmentonly, defensive.</summary>
+	/// <summary>Toggles the speculative fix for low-frequency issues when using spatial blend. Flags: cheat.</summary>
+	public static void snd_steamaudio_enable_spatial_blend_fix(string arguments = "") => Run("snd_steamaudio_enable_spatial_blend_fix", arguments);
+
+	/// <summary>Generate Halton Sequence for a given order and number of samples. Flags: cheat.</summary>
+	public static void snd_steamaudio_halton_sequence(string arguments = "") => Run("snd_steamaudio_halton_sequence", arguments);
+
+	/// <summary>Specifies the exponent for the pan xfade from speaker to speaker if the "exp" pan law is being used. Flags: defensive, developmentonly.</summary>
 	public static void snd_stereo_speaker_pan_exponent(string arguments = "") => Run("snd_stereo_speaker_pan_exponent", arguments);
 
-	/// <summary>Apply cos(angle) * weight before pan law. Flags: developmentonly, defensive.</summary>
+	/// <summary>Apply cos(angle) * weight before pan law. Flags: defensive, developmentonly.</summary>
 	public static void snd_stereo_speaker_pan_radial_weight(string arguments = "") => Run("snd_stereo_speaker_pan_radial_weight", arguments);
 
-	/// <summary>Specifies the exponent for the pan xfade from speaker to speaker if the "exp" pan law is being used. Flags: developmentonly, defensive.</summary>
+	/// <summary>Specifies the exponent for the pan xfade from speaker to speaker if the "exp" pan law is being used. Flags: defensive, developmentonly.</summary>
 	public static void snd_surround_speaker_pan_exponent(string arguments = "") => Run("snd_surround_speaker_pan_exponent", arguments);
 
-	/// <summary>Apply cos(angle) * weight before pan law. Flags: developmentonly, defensive.</summary>
+	/// <summary>Apply cos(angle) * weight before pan law. Flags: defensive, developmentonly.</summary>
 	public static void snd_surround_speaker_pan_radial_weight(string arguments = "") => Run("snd_surround_speaker_pan_radial_weight", arguments);
 
-	/// <summary>Flags: developmentonly, defensive.</summary>
+	/// <summary>Flags: defensive, developmentonly.</summary>
 	public static void sndplaydelay(string arguments = "") => Run("sndplaydelay", arguments);
 
 	/// <summary>Describe the current sound device with an active voice list. Flags: release.</summary>
 	public static void soundinfo(string arguments = "") => Run("soundinfo", arguments);
 
-	/// <summary>List all known sounds. Flags: developmentonly, defensive.</summary>
+	/// <summary>List all known sounds. Flags: defensive, developmentonly.</summary>
 	public static void soundlist(string arguments = "") => Run("soundlist", arguments);
 
-	/// <summary>Flushes the server &amp; client side soundscapes. Flags: developmentonly, gamedll, defensive.</summary>
+	/// <summary>Flushes the server &amp; client side soundscapes. Flags: defensive, developmentonly, gamedll.</summary>
 	public static void soundscape_flush(string arguments = "") => Run("soundscape_flush", arguments);
 
-	/// <summary>Describe the current sound device without an active voice list. Flags: developmentonly, defensive.</summary>
+	/// <summary>Describe the current sound device without an active voice list. Flags: defensive, developmentonly.</summary>
 	public static void soundsysteminfo(string arguments = "") => Run("soundsysteminfo", arguments);
 
-	/// <summary>Spawns an entity that activates tutorial mode controls. Flags: gamedll, release, client_can_execute.</summary>
+	/// <summary>Spawns an entity that activates tutorial mode controls. Flags: client_can_execute, release, gamedll.</summary>
 	public static void spawn_citadel_tutorial_controller(string arguments = "") => Run("spawn_citadel_tutorial_controller", arguments);
 
-	/// <summary>Spawns an entity that activates sandbox mode controls. Flags: gamedll, release, client_can_execute.</summary>
+	/// <summary>Spawns an entity that activates sandbox mode controls. Flags: client_can_execute, release, gamedll.</summary>
 	public static void spawn_hero_testing_controller(string arguments = "") => Run("spawn_hero_testing_controller", arguments);
 
-	/// <summary>Spew information about font manager fonts. Flags: developmentonly, defensive.</summary>
+	/// <summary>Spew information about font manager fonts. Flags: defensive, developmentonly.</summary>
 	public static void spew_fonts(string arguments = "") => Run("spew_fonts", arguments);
 
-	/// <summary>Flags: developmentonly, gamedll, defensive.</summary>
+	/// <summary>Flags: defensive, developmentonly, gamedll.</summary>
 	public static void spew_gold_sources(string arguments = "") => Run("spew_gold_sources", arguments);
 
-	/// <summary>Flags: developmentonly, defensive.</summary>
+	/// <summary>Flags: defensive, developmentonly.</summary>
 	public static void splitscreen_testreadconfigconflict(string arguments = "") => Run("splitscreen_testreadconfigconflict", arguments);
 
-	/// <summary>Adds a splitscreen user. Flags: developmentonly, defensive.</summary>
+	/// <summary>sRGB to CIEXYZ conversion. Flags: defensive, developmentonly.</summary>
+	public static void srgb_to_xyz(string arguments = "") => Run("srgb_to_xyz", arguments);
+
+	/// <summary>Adds a splitscreen user. Flags: defensive, developmentonly.</summary>
 	public static void ss_add(string arguments = "") => Run("ss_add", arguments);
 
-	/// <summary>Removes a splitscreen user. Flags: developmentonly, defensive.</summary>
+	/// <summary>Removes a splitscreen user. Flags: defensive, developmentonly.</summary>
 	public static void ss_remove(string arguments = "") => Run("ss_remove", arguments);
 
-	/// <summary>Start recording to a desired wav. Flags: linked_concommand, developmentonly, defensive.</summary>
+	/// <summary>Start recording to a desired wav. Flags: defensive, developmentonly, linked_concommand.</summary>
 	public static void start_rec_mic(string arguments = "") => Run("start_rec_mic", arguments);
 
 	/// <summary>Play demos in demo sequence. Flags: release.</summary>
 	public static void startdemos(string arguments = "") => Run("startdemos", arguments);
 
-	/// <summary>Start recording movie frames. Flags: developmentonly, dontrecord, defensive.</summary>
+	/// <summary>Start recording movie frames. Flags: defensive, developmentonly, dontrecord.</summary>
 	public static void startmovie(string arguments = "") => Run("startmovie", arguments);
 
-	/// <summary>Reset stat value cache statistics. Flags: developmentonly, gamedll, cheat.</summary>
+	/// <summary>Reset stat value cache statistics. Flags: cheat, developmentonly, gamedll.</summary>
 	public static void stat_cache_reset_stats(string arguments = "") => Run("stat_cache_reset_stats", arguments);
 
-	/// <summary>Prints server performance variables. Flags: developmentonly, defensive.</summary>
+	/// <summary>Prints server performance variables. Flags: defensive, developmentonly.</summary>
 	public static void stats(string arguments = "") => Run("stats", arguments);
 
-	/// <summary>Prints out perf statistics to the console, clears perf history. Flags: developmentonly, defensive.</summary>
+	/// <summary>Prints out perf statistics to the console, clears perf history. Flags: defensive, developmentonly.</summary>
 	public static void stats_print(string arguments = "") => Run("stats_print", arguments);
 
-	/// <summary>Prints out GPU perf statistics to the console. Requires stats_display &gt; 0, and stats_collect_gpu = true. Optional argument of CSV filename. Flags: developmentonly, defensive.</summary>
+	/// <summary>Prints out GPU perf statistics to the console. Requires stats_display &gt; 0, and stats_collect_gpu = true. Optional argument of CSV filename. Flags: defensive, developmentonly.</summary>
 	public static void stats_print_gpu(string arguments = "") => Run("stats_print_gpu", arguments);
 
 	/// <summary>Print connection status. Flags: release.</summary>
@@ -2473,16 +2689,16 @@ public static class ConCommands {
 	/// <summary>Print status in JSON format. Flags: release.</summary>
 	public static void status_json(string arguments = "") => Run("status_json", arguments);
 
-	/// <summary>steamvrevent_quit. Flags: developmentonly, gamedll, hidden, defensive.</summary>
+	/// <summary>steamvrevent_quit. Flags: defensive, developmentonly, hidden, gamedll.</summary>
 	public static void steamvrevent_quit(string arguments = "") => Run("steamvrevent_quit", arguments);
 
 	/// <summary>Finish recording demo. Flags: release.</summary>
 	public static void stop(string arguments = "") => Run("stop", arguments);
 
-	/// <summary>Stop recording to a desired wav. Flags: linked_concommand, developmentonly, defensive.</summary>
+	/// <summary>Stop recording to a desired wav. Flags: defensive, developmentonly, linked_concommand.</summary>
 	public static void stop_rec_mic(string arguments = "") => Run("stop_rec_mic", arguments);
 
-	/// <summary>Stop recording all mic streams. Flags: linked_concommand, developmentonly, defensive.</summary>
+	/// <summary>Stop recording all mic streams. Flags: defensive, developmentonly, linked_concommand.</summary>
 	public static void stop_rec_mic_all(string arguments = "") => Run("stop_rec_mic_all", arguments);
 
 	/// <summary>Stop looping demos (current demo will complete). Flags: release.</summary>
@@ -2491,25 +2707,25 @@ public static class ConCommands {
 	/// <summary>Flags: cheat.</summary>
 	public static void stopsound(string arguments = "") => Run("stopsound", arguments);
 
-	/// <summary>Changes the subclass of the given entity. Arguments: &lt;new_subclass&gt; {entity_name} / {class_name} / {entity_index} / {no argument = pick what player is looking at}. Flags: gamedll, cheat, vconsole_fuzzy_matching.</summary>
+	/// <summary>Changes the subclass of the given entity. Arguments: &lt;new_subclass&gt; {entity_name} / {class_name} / {entity_index} / {no argument = pick what player is looking at}. Flags: cheat, vconsole_fuzzy_matching, gamedll.</summary>
 	public static void subclass_change(string arguments = "") => Run("subclass_change", arguments);
 
-	/// <summary>Creates an entity of the given subclass where the player is looking. Flags: gamedll, cheat, vconsole_fuzzy_matching.</summary>
+	/// <summary>Creates an entity of the given subclass where the player is looking. Flags: cheat, vconsole_fuzzy_matching, gamedll.</summary>
 	public static void subclass_create(string arguments = "") => Run("subclass_create", arguments);
 
-	/// <summary>Reports the surface properties at the cursor. Flags: gamedll, cheat.</summary>
+	/// <summary>Reports the surface properties at the cursor. Flags: cheat, gamedll.</summary>
 	public static void surfaceprop(string arguments = "") => Run("surfaceprop", arguments);
 
-	/// <summary>Show client rates. Flags: developmentonly, defensive.</summary>
+	/// <summary>Show client rates. Flags: defensive, developmentonly.</summary>
 	public static void sv_clientrates(string arguments = "") => Run("sv_clientrates", arguments);
 
-	/// <summary>&lt;state&gt; Turn on/off simulated GC communications failure (GC is down in a way that we know it is down). Flags: developmentonly, gamedll, defensive.</summary>
+	/// <summary>&lt;state&gt; Turn on/off simulated GC communications failure (GC is down in a way that we know it is down). Flags: defensive, developmentonly, gamedll.</summary>
 	public static void sv_dev_simulate_gcdown(string arguments = "") => Run("sv_dev_simulate_gcdown", arguments);
 
-	/// <summary>Force a full update for all clients. Flags: developmentonly, defensive.</summary>
+	/// <summary>Force a full update for all clients. Flags: defensive, developmentonly.</summary>
 	public static void sv_fullupdate(string arguments = "") => Run("sv_fullupdate", arguments);
 
-	/// <summary>var change info histogram. Flags: developmentonly, defensive.</summary>
+	/// <summary>var change info histogram. Flags: defensive, developmentonly.</summary>
 	public static void sv_histogram(string arguments = "") => Run("sv_histogram", arguments);
 
 	/// <summary>Check serializer meta for duplication, add verbose to command for full spew. Flags: cheat.</summary>
@@ -2518,19 +2734,19 @@ public static class ConCommands {
 	/// <summary>Show entity packing stats, pass 'clear' as argument to reset counts. Flags: release.</summary>
 	public static void sv_packstats(string arguments = "") => Run("sv_packstats", arguments);
 
-	/// <summary>Display status of the query cache (client only). Flags: developmentonly, gamedll, defensive.</summary>
+	/// <summary>Display status of the query cache (client only). Flags: defensive, developmentonly, gamedll.</summary>
 	public static void sv_querycache_stats(string arguments = "") => Run("sv_querycache_stats", arguments);
 
 	/// <summary>token Set game server account token to use for logging in to a persistent game server account. Flags: release.</summary>
 	public static void sv_setsteamaccount(string arguments = "") => Run("sv_setsteamaccount", arguments);
 
-	/// <summary>Describe current gametags. Flags: developmentonly, defensive.</summary>
+	/// <summary>Describe current gametags. Flags: defensive, developmentonly.</summary>
 	public static void sv_showtags(string arguments = "") => Run("sv_showtags", arguments);
 
 	/// <summary>Sets the server to shutdown when all games have completed. Flags: release.</summary>
 	public static void sv_shutdown(string arguments = "") => Run("sv_shutdown", arguments);
 
-	/// <summary>print soundscapes. Flags: gamedll, cheat.</summary>
+	/// <summary>print soundscapes. Flags: cheat, gamedll.</summary>
 	public static void sv_soundscape_printdebuginfo(string arguments = "") => Run("sv_soundscape_printdebuginfo", arguments);
 
 	/// <summary>Spew serializer meta. Flags: cheat.</summary>
@@ -2542,32 +2758,35 @@ public static class ConCommands {
 	/// <summary>Print system information to the console. Flags: release.</summary>
 	public static void sys_info(string arguments = "") => Run("sys_info", arguments);
 
-	/// <summary>Place a message in the telemetry timeline. Flags: gamedll, cheat.</summary>
+	/// <summary>Place a message in the telemetry timeline. Flags: cheat, gamedll.</summary>
 	public static void telemetry_message(string arguments = "") => Run("telemetry_message", arguments);
 
-	/// <summary>Starts/stops a timespan with an ever increasing name. Flags: gamedll, cheat.</summary>
+	/// <summary>Starts/stops a timespan with an ever increasing name. Flags: cheat, gamedll.</summary>
 	public static void telemetry_toggle_timespan(string arguments = "") => Run("telemetry_toggle_timespan", arguments);
 
-	/// <summary>Test a clientside dispatch effect. Usage: test_dispatcheffect &lt;effect name&gt; &lt;distance away&gt; &lt;flags&gt; &lt;magnitude&gt; &lt;scale&gt; Defaults are: &lt;distance 1024&gt; &lt;flags 0&gt; &lt;magnitude 0&gt; &lt;scale 0&gt;. Flags: gamedll, cheat.</summary>
+	/// <summary>Test a clientside dispatch effect. Usage: test_dispatcheffect &lt;effect name&gt; &lt;distance away&gt; &lt;flags&gt; &lt;magnitude&gt; &lt;scale&gt; Defaults are: &lt;distance 1024&gt; &lt;flags 0&gt; &lt;magnitude 0&gt; &lt;scale 0&gt;. Flags: cheat, gamedll.</summary>
 	public static void test_dispatcheffect(string arguments = "") => Run("test_dispatcheffect", arguments);
 
-	/// <summary>Test command that drops an entity blocker out in front of the player. Flags: gamedll, cheat.</summary>
+	/// <summary>Test command that drops an entity blocker out in front of the player. Flags: cheat, gamedll.</summary>
 	public static void test_entity_blocker(string arguments = "") => Run("test_entity_blocker", arguments);
 
-	/// <summary>test-list entities. Flags: gamedll, cheat.</summary>
+	/// <summary>test-list entities. Flags: cheat, gamedll.</summary>
 	public static void test_list_entities(string arguments = "") => Run("test_list_entities", arguments);
 
-	/// <summary>Flags: gamedll, cheat.</summary>
+	/// <summary>Flags: cheat, gamedll.</summary>
 	public static void test_play_stats_send(string arguments = "") => Run("test_play_stats_send", arguments);
 
 	/// <summary>Generate an assert to test shipping assertion code. Flags: release.</summary>
 	public static void test_shipping_assert(string arguments = "") => Run("test_shipping_assert", arguments);
 
-	/// <summary>Test nesting voice containers. Flags: linked_concommand, developmentonly, defensive.</summary>
+	/// <summary>Test nesting voice containers. Flags: defensive, developmentonly, linked_concommand.</summary>
 	public static void test_voice_container_nesting(string arguments = "") => Run("test_voice_container_nesting", arguments);
 
-	/// <summary>Quick example for how we'd derive traits from voice containers. Flags: linked_concommand, developmentonly, defensive.</summary>
+	/// <summary>Quick example for how we'd derive traits from voice containers. Flags: defensive, developmentonly, linked_concommand.</summary>
 	public static void test_voice_containers(string arguments = "") => Run("test_voice_containers", arguments);
+
+	/// <summary>Usage: test_vqlayout tools/layout/examples/simple.vqlayout. Flags: developmentonly.</summary>
+	public static void test_vqlayout(string arguments = "") => Run("test_vqlayout", arguments);
 
 	/// <summary>Play a demo and report performance info. Flags: release.</summary>
 	public static void timedemo(string arguments = "") => Run("timedemo", arguments);
@@ -2581,13 +2800,16 @@ public static class ConCommands {
 	/// <summary>Show/hide the console. Flags: dontrecord, release.</summary>
 	public static void toggleconsole(string arguments = "") => Run("toggleconsole", arguments);
 
-	/// <summary>Kills all living troopers. Flags: gamedll, cheat.</summary>
+	/// <summary>Usage: tool_request &lt;tool_name&gt; { request_kv3_data }. Flags: defensive, developmentonly.</summary>
+	public static void tool_request(string arguments = "") => Run("tool_request", arguments);
+
+	/// <summary>Kills all living troopers. Flags: cheat, gamedll.</summary>
 	public static void trooper_kill_all(string arguments = "") => Run("trooper_kill_all", arguments);
 
-	/// <summary>Kills all non-boss living troopers. Flags: gamedll, cheat.</summary>
+	/// <summary>Kills all non-boss living troopers. Flags: cheat, gamedll.</summary>
 	public static void trooper_kill_non_bosses(string arguments = "") => Run("trooper_kill_non_bosses", arguments);
 
-	/// <summary>resend broadcast data to broadcast relay. Flags: developmentonly, defensive.</summary>
+	/// <summary>resend broadcast data to broadcast relay. Flags: defensive, developmentonly.</summary>
 	public static void tv_broadcast_resend(string arguments = "") => Run("tv_broadcast_resend", arguments);
 
 	/// <summary>Print out broadcast status. Flags: release.</summary>
@@ -2599,7 +2821,7 @@ public static class ConCommands {
 	/// <summary>hltv memory statistics. Use with "ent 10" (dump entity 10 memory usage) or "top 8" (dump top 8 memory users) or "class" CWorld (dump CWorld class). Flags: release.</summary>
 	public static void tv_mem(string arguments = "") => Run("tv_mem", arguments);
 
-	/// <summary>Send a screen message to all clients. Flags: developmentonly, gamedll, defensive.</summary>
+	/// <summary>Send a screen message to all clients. Flags: defensive, developmentonly, gamedll.</summary>
 	public static void tv_msg(string arguments = "") => Run("tv_msg", arguments);
 
 	/// <summary>Starts SourceTV demo recording. Flags: release.</summary>
@@ -2626,46 +2848,61 @@ public static class ConCommands {
 	/// <summary>Unbind all keys. Flags: release.</summary>
 	public static void unbindall(string arguments = "") => Run("unbindall", arguments);
 
+	/// <summary>unload the specified tool. Flags: defensive, developmentonly.</summary>
+	public static void unloadTool(string arguments = "") => Run("unloadTool", arguments);
+
 	/// <summary>Clear the pause state of the server. Flags: release.</summary>
 	public static void unpause(string arguments = "") => Run("unpause", arguments);
 
-	/// <summary>Show user info for players on server. Flags: developmentonly, defensive.</summary>
+	/// <summary>Show user info for players on server. Flags: defensive, developmentonly.</summary>
 	public static void users(string arguments = "") => Run("users", arguments);
 
-	/// <summary>Show the current cluster number. Flags: developmentonly, defensive.</summary>
+	/// <summary>Flags: developmentonly.</summary>
+	public static void v8_dump_heap_snapshot(string arguments = "") => Run("v8_dump_heap_snapshot", arguments);
+
+	/// <summary>Dump output of v8::Isolate::GetHeapStatistics. Flags: developmentonly.</summary>
+	public static void v8_write_heap_stats(string arguments = "") => Run("v8_write_heap_stats", arguments);
+
+	/// <summary>Clear buffered logging. Flags: defensive, developmentonly, dontrecord.</summary>
+	public static void vcon_clear_buffered_log(string arguments = "") => Run("vcon_clear_buffered_log", arguments);
+
+	/// <summary>List connections. Flags: defensive, developmentonly, dontrecord.</summary>
+	public static void vcon_clients(string arguments = "") => Run("vcon_clients", arguments);
+
+	/// <summary>Show the current cluster number. Flags: defensive, developmentonly.</summary>
 	public static void vis_debug_currentcluster(string arguments = "") => Run("vis_debug_currentcluster", arguments);
 
-	/// <summary>Add cluster # to visualization, (-1) to clear. Flags: developmentonly, defensive.</summary>
+	/// <summary>Add cluster # to visualization, (-1) to clear. Flags: defensive, developmentonly.</summary>
 	public static void vis_debug_drawcluster(string arguments = "") => Run("vis_debug_drawcluster", arguments);
 
-	/// <summary>Show the list of visible clusters. Flags: developmentonly, defensive.</summary>
+	/// <summary>Show the list of visible clusters. Flags: defensive, developmentonly.</summary>
 	public static void vis_debug_dumpvisibleclusters(string arguments = "") => Run("vis_debug_dumpvisibleclusters", arguments);
 
-	/// <summary>Find or clear the vis LOS to here. Flags: developmentonly, defensive.</summary>
+	/// <summary>Find or clear the vis LOS to here. Flags: defensive, developmentonly.</summary>
 	public static void vis_debug_find_los(string arguments = "") => Run("vis_debug_find_los", arguments);
 
-	/// <summary>Lock vis LOS origin to current. Flags: developmentonly, defensive.</summary>
+	/// <summary>Lock vis LOS origin to current. Flags: defensive, developmentonly.</summary>
 	public static void vis_debug_lock(string arguments = "") => Run("vis_debug_lock", arguments);
 
-	/// <summary>Record a path to debug vis. Flags: developmentonly, defensive.</summary>
+	/// <summary>Record a path to debug vis. Flags: defensive, developmentonly.</summary>
 	public static void vis_debug_record_start(string arguments = "") => Run("vis_debug_record_start", arguments);
 
-	/// <summary>Record a path to debug vis. Flags: developmentonly, defensive.</summary>
+	/// <summary>Record a path to debug vis. Flags: defensive, developmentonly.</summary>
 	public static void vis_debug_record_stop(string arguments = "") => Run("vis_debug_record_stop", arguments);
 
-	/// <summary>Show/hide the vis debug visualization. Flags: developmentonly, defensive.</summary>
+	/// <summary>Show/hide the vis debug visualization. Flags: defensive, developmentonly.</summary>
 	public static void vis_debug_show(string arguments = "") => Run("vis_debug_show", arguments);
 
-	/// <summary>Showing clusters for sun/csm rendering. Red (full sun csm &amp; lighting), Orange (no viewmodel sun or csm), Green (no sun at all). Flags: developmentonly, defensive.</summary>
+	/// <summary>Showing clusters for sun/csm rendering. Red (full sun csm &amp; lighting), Orange (no viewmodel sun or csm), Green (no sun at all). Flags: defensive, developmentonly.</summary>
 	public static void vis_debug_sunclusters(string arguments = "") => Run("vis_debug_sunclusters", arguments);
 
-	/// <summary>Trace rays and check vis from the current camera. Flags: developmentonly, defensive.</summary>
+	/// <summary>Trace rays and check vis from the current camera. Flags: defensive, developmentonly.</summary>
 	public static void vis_debug_tracelos(string arguments = "") => Run("vis_debug_tracelos", arguments);
 
-	/// <summary>Dump memory stats to log. Flags: developmentonly, defensive.</summary>
+	/// <summary>Dump memory stats to log. Flags: defensive, developmentonly.</summary>
 	public static void vmem_dump(string arguments = "") => Run("vmem_dump", arguments);
 
-	/// <summary>Debug dump the list of available vmix graphs. Flags: developmentonly, defensive.</summary>
+	/// <summary>Debug dump the list of available vmix graphs. Flags: defensive, developmentonly.</summary>
 	public static void vmix_debug_list(string arguments = "") => Run("vmix_debug_list", arguments);
 
 	/// <summary>Set an input mix value. Flags: cheat.</summary>
@@ -2674,70 +2911,91 @@ public static class ConCommands {
 	/// <summary>Dump main graph control output values. Flags: cheat.</summary>
 	public static void vmix_output(string arguments = "") => Run("vmix_output", arguments);
 
-	/// <summary>Args: [Voice Container Path]. Flags: linked_concommand, developmentonly, defensive.</summary>
+	/// <summary>Args: [Voice Container Path]. Flags: defensive, developmentonly, linked_concommand.</summary>
 	public static void voice_containers_get_instance_args(string arguments = "") => Run("voice_containers_get_instance_args", arguments);
 
-	/// <summary>Args: [Voice Container Path]. Flags: linked_concommand, developmentonly, defensive.</summary>
+	/// <summary>Args: [Voice Container Path]. Flags: defensive, developmentonly, linked_concommand.</summary>
 	public static void voice_containers_get_instance_params(string arguments = "") => Run("voice_containers_get_instance_params", arguments);
 
-	/// <summary>Dump vprof counters to the console. Flags: developmentonly, defensive.</summary>
+	/// <summary>Dump vprof counters to the console. Flags: defensive, developmentonly.</summary>
 	public static void vprof_dump_counters(string arguments = "") => Run("vprof_dump_counters", arguments);
 
-	/// <summary>Generate a report to the console. Flags: developmentonly, defensive.</summary>
+	/// <summary>Generate a report to the console. Flags: defensive, developmentonly.</summary>
 	public static void vprof_generate_report(string arguments = "") => Run("vprof_generate_report", arguments);
 
-	/// <summary>Generate a report to the console based on budget group. Flags: developmentonly, defensive.</summary>
+	/// <summary>Generate a report to the console based on budget group. Flags: defensive, developmentonly.</summary>
 	public static void vprof_generate_report_budget(string arguments = "") => Run("vprof_generate_report_budget", arguments);
 
-	/// <summary>Generate a report to the console. Flags: developmentonly, defensive.</summary>
+	/// <summary>Generate a report to the console. Flags: defensive, developmentonly.</summary>
 	public static void vprof_generate_report_hierarchy(string arguments = "") => Run("vprof_generate_report_hierarchy", arguments);
 
 	/// <summary>Scale used when displaying load-hit-stores (0 = use default). Flags: developmentonly, hidden.</summary>
 	public static void vprof_loadhitstore_scale(string arguments = "") => Run("vprof_loadhitstore_scale", arguments);
 
-	/// <summary>Disable vprof. Flags: developmentonly, defensive.</summary>
+	/// <summary>Disable vprof. Flags: defensive, developmentonly.</summary>
 	public static void vprof_off(string arguments = "") => Run("vprof_off", arguments);
 
-	/// <summary>Enable vprof. Flags: developmentonly, defensive.</summary>
+	/// <summary>Enable vprof. Flags: defensive, developmentonly.</summary>
 	public static void vprof_on(string arguments = "") => Run("vprof_on", arguments);
 
-	/// <summary>Request a VProf data stream from the remote server (requires authentication). Flags: developmentonly, defensive.</summary>
+	/// <summary>Request a VProf data stream from the remote server (requires authentication). Flags: defensive, developmentonly.</summary>
 	public static void vprof_remote_start(string arguments = "") => Run("vprof_remote_start", arguments);
 
-	/// <summary>Stop an existing remote VProf data request. Flags: developmentonly, defensive.</summary>
+	/// <summary>Stop an existing remote VProf data request. Flags: defensive, developmentonly.</summary>
 	public static void vprof_remote_stop(string arguments = "") => Run("vprof_remote_stop", arguments);
 
-	/// <summary>Reset the stats in VProf profiler. Flags: developmentonly, defensive.</summary>
+	/// <summary>Reset the stats in VProf profiler. Flags: defensive, developmentonly.</summary>
 	public static void vprof_reset(string arguments = "") => Run("vprof_reset", arguments);
 
-	/// <summary>Reset just the peak time in VProf profiler. Flags: developmentonly, defensive.</summary>
+	/// <summary>Reset just the peak time in VProf profiler. Flags: defensive, developmentonly.</summary>
 	public static void vprof_reset_peaks(string arguments = "") => Run("vprof_reset_peaks", arguments);
 
 	/// <summary>Scale used when displaying time (0 = use default). Flags: developmentonly, hidden.</summary>
 	public static void vprof_time_scale(string arguments = "") => Run("vprof_time_scale", arguments);
 
-	/// <summary>Controls VTune's sampling. Flags: developmentonly, defensive.</summary>
+	/// <summary>Controls VTune's sampling. Flags: defensive, developmentonly.</summary>
 	public static void vtune(string arguments = "") => Run("vtune", arguments);
 
-	/// <summary>warp onto the nearest point of the zipline lane passed in. provides the zipline intro modifier as well. Flags: gamedll, cheat.</summary>
+	/// <summary>Prints out stats for the Vulkan Framebuffer manager. Flags: defensive, developmentonly.</summary>
+	public static void vulkan_framebuffermgr_print(string arguments = "") => Run("vulkan_framebuffermgr_print", arguments);
+
+	/// <summary>Prints out detailed memory fragmentation stats for the Vulkan memory manager. Flags: defensive, developmentonly.</summary>
+	public static void vulkan_memgr_fragmentation_print(string arguments = "") => Run("vulkan_memgr_fragmentation_print", arguments);
+
+	/// <summary>Prints out stats for the Vulkan memory manager. Flags: defensive, developmentonly.</summary>
+	public static void vulkan_memgr_print(string arguments = "") => Run("vulkan_memgr_print", arguments);
+
+	/// <summary>Prints out stats for the Vulkan Pipeline manager. Flags: defensive, developmentonly.</summary>
+	public static void vulkan_pipelinemgr_print(string arguments = "") => Run("vulkan_pipelinemgr_print", arguments);
+
+	/// <summary>Prints out stats for the Vulkan shader table. Flags: defensive, developmentonly.</summary>
+	public static void vulkan_shader_table_print(string arguments = "") => Run("vulkan_shader_table_print", arguments);
+
+	/// <summary>Force defragmenting memory with VMA. Flags: defensive, developmentonly.</summary>
+	public static void vulkan_vma_defrag(string arguments = "") => Run("vulkan_vma_defrag", arguments);
+
+	/// <summary>Dump .json file for use by GpuMemDumpVis.py. Flags: defensive, developmentonly.</summary>
+	public static void vulkan_vma_gpu_mem_dump(string arguments = "") => Run("vulkan_vma_gpu_mem_dump", arguments);
+
+	/// <summary>warp onto the nearest point of the zipline lane passed in. provides the zipline intro modifier as well. Flags: cheat, gamedll.</summary>
 	public static void warp_onto_zipline(string arguments = "") => Run("warp_onto_zipline", arguments);
 
 	/// <summary>Use a particular weapon Arguments: &lt;weapon_name&gt;. Flags: developmentonly, gamedll.</summary>
 	public static void weapon_switch(string arguments = "") => Run("weapon_switch", arguments);
 
-	/// <summary>Dump all of the worlds that we know about. Flags: developmentonly, defensive.</summary>
+	/// <summary>Dump all of the worlds that we know about. Flags: defensive, developmentonly.</summary>
 	public static void world_dump_loaded_worlds(string arguments = "") => Run("world_dump_loaded_worlds", arguments);
 
-	/// <summary>List all world layers. Flags: developmentonly, defensive.</summary>
+	/// <summary>List all world layers. Flags: defensive, developmentonly.</summary>
 	public static void world_layer_list(string arguments = "") => Run("world_layer_list", arguments);
 
-	/// <summary>Show or hide the specified world layer. Flags: developmentonly, defensive.</summary>
+	/// <summary>Show or hide the specified world layer. Flags: defensive, developmentonly.</summary>
 	public static void world_layer_set_visible(string arguments = "") => Run("world_layer_set_visible", arguments);
 
-	/// <summary>Writes a list of permanently-banned user IDs to file. Flags: developmentonly, defensive.</summary>
+	/// <summary>Writes a list of permanently-banned user IDs to file. Flags: defensive, developmentonly.</summary>
 	public static void writeid(string arguments = "") => Run("writeid", arguments);
 
-	/// <summary>Save the ban list to file. Flags: developmentonly, defensive.</summary>
+	/// <summary>Save the ban list to file. Flags: defensive, developmentonly.</summary>
 	public static void writeip(string arguments = "") => Run("writeip", arguments);
 
 	/// <summary>Saves current key bindings to disk. Flags: release.</summary>

@@ -41,9 +41,17 @@ public static partial class Schema {
 		/// <summary><c>CEmbeddedSubclass&lt;CCitadelModifier&gt;</c>.</summary>
 		public CCitadelModifierVData? m_SlowModifier => EmbeddedSubclass<CCitadelModifierVData>(__m_SlowModifier);
 
+		private static readonly SchemaField __m_flAdditionalBounceDetonateTimer = new("CCitadel_Ability_Ratking_ScrapGrenadeVData", "m_flAdditionalBounceDetonateTimer");
+		/// <summary><c>float32</c>.</summary>
+		public float m_flAdditionalBounceDetonateTimer { get => Get<float>(__m_flAdditionalBounceDetonateTimer); set => Set(__m_flAdditionalBounceDetonateTimer, value); }
+
 		private static readonly SchemaField __m_flBounceDirectionalDampening = new("CCitadel_Ability_Ratking_ScrapGrenadeVData", "m_flBounceDirectionalDampening");
 		/// <summary><c>float32</c>.</summary>
 		public float m_flBounceDirectionalDampening { get => Get<float>(__m_flBounceDirectionalDampening); set => Set(__m_flBounceDirectionalDampening, value); }
+
+		private static readonly SchemaField __m_flBounceGrenadeSpeed = new("CCitadel_Ability_Ratking_ScrapGrenadeVData", "m_flBounceGrenadeSpeed");
+		/// <summary><c>float32</c>.</summary>
+		public float m_flBounceGrenadeSpeed { get => Get<float>(__m_flBounceGrenadeSpeed); set => Set(__m_flBounceGrenadeSpeed, value); }
 
 		private static readonly SchemaField __m_flBounceMaxHorizontalSpeed = new("CCitadel_Ability_Ratking_ScrapGrenadeVData", "m_flBounceMaxHorizontalSpeed");
 		/// <summary><c>float32</c>.</summary>
@@ -69,9 +77,29 @@ public static partial class Schema {
 		/// <summary><c>float32</c>.</summary>
 		public float m_flBounceVerticalDampening { get => Get<float>(__m_flBounceVerticalDampening); set => Set(__m_flBounceVerticalDampening, value); }
 
+		private static readonly SchemaField __m_flFinalBounceDetonateTimer = new("CCitadel_Ability_Ratking_ScrapGrenadeVData", "m_flFinalBounceDetonateTimer");
+		/// <summary><c>float32</c>.</summary>
+		public float m_flFinalBounceDetonateTimer { get => Get<float>(__m_flFinalBounceDetonateTimer); set => Set(__m_flFinalBounceDetonateTimer, value); }
+
+		private static readonly SchemaField __m_flFirstBounceDetonateTimer = new("CCitadel_Ability_Ratking_ScrapGrenadeVData", "m_flFirstBounceDetonateTimer");
+		/// <summary><c>float32</c>.</summary>
+		public float m_flFirstBounceDetonateTimer { get => Get<float>(__m_flFirstBounceDetonateTimer); set => Set(__m_flFirstBounceDetonateTimer, value); }
+
 		private static readonly SchemaField __m_flMaxSurfaceDotToBounce = new("CCitadel_Ability_Ratking_ScrapGrenadeVData", "m_flMaxSurfaceDotToBounce");
 		/// <summary><c>float32</c>.</summary>
 		public float m_flMaxSurfaceDotToBounce { get => Get<float>(__m_flMaxSurfaceDotToBounce); set => Set(__m_flMaxSurfaceDotToBounce, value); }
+
+		private static readonly SchemaField __m_flMeleeImpulseHeavy = new("CCitadel_Ability_Ratking_ScrapGrenadeVData", "m_flMeleeImpulseHeavy");
+		/// <summary><c>float32</c>.</summary>
+		public float m_flMeleeImpulseHeavy { get => Get<float>(__m_flMeleeImpulseHeavy); set => Set(__m_flMeleeImpulseHeavy, value); }
+
+		private static readonly SchemaField __m_flMeleeImpulseLight = new("CCitadel_Ability_Ratking_ScrapGrenadeVData", "m_flMeleeImpulseLight");
+		/// <summary><c>float32</c>.</summary>
+		public float m_flMeleeImpulseLight { get => Get<float>(__m_flMeleeImpulseLight); set => Set(__m_flMeleeImpulseLight, value); }
+
+		private static readonly SchemaField __m_flMeleeImpulseUpScale = new("CCitadel_Ability_Ratking_ScrapGrenadeVData", "m_flMeleeImpulseUpScale");
+		/// <summary><c>float32</c>.</summary>
+		public float m_flMeleeImpulseUpScale { get => Get<float>(__m_flMeleeImpulseUpScale); set => Set(__m_flMeleeImpulseUpScale, value); }
 
 		private static readonly SchemaField __m_flMinBounceSpeed = new("CCitadel_Ability_Ratking_ScrapGrenadeVData", "m_flMinBounceSpeed");
 		/// <summary><c>float32</c>.</summary>
