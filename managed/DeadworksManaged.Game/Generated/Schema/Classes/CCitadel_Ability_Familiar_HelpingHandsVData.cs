@@ -109,6 +109,10 @@ public static partial class Schema {
 		/// <summary><c>CEmbeddedSubclass&lt;CCitadelModifier&gt;</c>.</summary>
 		public CCitadelModifierVData? m_InfestModifier => EmbeddedSubclass<CCitadelModifierVData>(__m_InfestModifier);
 
+		private static readonly SchemaField __m_InfestOwnerWatcherModifier = new("CCitadel_Ability_Familiar_HelpingHandsVData", "m_InfestOwnerWatcherModifier");
+		/// <summary><c>CEmbeddedSubclass&lt;CCitadelModifier&gt;</c>.</summary>
+		public CCitadelModifierVData? m_InfestOwnerWatcherModifier => EmbeddedSubclass<CCitadelModifierVData>(__m_InfestOwnerWatcherModifier);
+
 		private static readonly SchemaField __m_InfestWaitingModifier = new("CCitadel_Ability_Familiar_HelpingHandsVData", "m_InfestWaitingModifier");
 		/// <summary><c>CEmbeddedSubclass&lt;CCitadelModifier&gt;</c>.</summary>
 		public CCitadelModifierVData? m_InfestWaitingModifier => EmbeddedSubclass<CCitadelModifierVData>(__m_InfestWaitingModifier);

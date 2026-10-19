@@ -45,6 +45,8 @@ public static class SubclassNames {
 	public const string cd_permanent_pickup_lv3 = "cd_permanent_pickup_lv3";
 	/// <summary>A <c>citadel_pickup_modifier</c>, from <c>scripts/misc.vdata</c>.</summary>
 	public const string change_team_powerup_pickup = "change_team_powerup_pickup";
+	/// <summary>A <c>citadel_artist_strokeblocker</c>, from <c>scripts/npc_units.vdata</c>.</summary>
+	public const string citadel_artist_strokeblocker = "citadel_artist_strokeblocker";
 	/// <summary>A <c>citadel_hideout_ball</c>, from <c>scripts/npc_units.vdata</c>.</summary>
 	public const string citadel_basketball = "citadel_basketball";
 	/// <summary>A <c>citadel_bounce_pad</c>, from <c>scripts/npc_units.vdata</c>.</summary>
@@ -75,6 +77,8 @@ public static class SubclassNames {
 	public const string citadel_breakable_prop_pumpkin04 = "citadel_breakable_prop_pumpkin04";
 	/// <summary>A <c>citadel_breakable_prop</c>, from <c>scripts/misc.vdata</c>.</summary>
 	public const string citadel_breakable_prop_tough_crate = "citadel_breakable_prop_tough_crate";
+	/// <summary>A <c>citadel_breakable_prop_hideout</c>, from <c>scripts/misc.vdata</c>.</summary>
+	public const string citadel_breakable_prop_tough_crate_hideout = "citadel_breakable_prop_tough_crate_hideout";
 	/// <summary>A <c>citadel_breakable_prop</c>, from <c>scripts/misc.vdata</c>.</summary>
 	public const string citadel_breakable_prop_vase = "citadel_breakable_prop_vase";
 	/// <summary>A <c>citadel_breakable_prop</c>, from <c>scripts/misc.vdata</c>.</summary>
@@ -337,6 +341,16 @@ public static class SubclassNames {
 	public const string npc_yakuza_gangster = "npc_yakuza_gangster";
 	/// <summary>A <c>citadel_pickup</c>, from <c>scripts/misc.vdata</c>.</summary>
 	public const string permanent_pickup_base = "permanent_pickup_base";
+	/// <summary>A <c>citadel_pickup_artist_drawing</c>, from <c>scripts/misc.vdata</c>.</summary>
+	public const string pickup_artist_drawing_assassin = "pickup_artist_drawing_assassin";
+	/// <summary>A <c>citadel_pickup_artist_drawing</c>, from <c>scripts/misc.vdata</c>.</summary>
+	public const string pickup_artist_drawing_base = "pickup_artist_drawing_base";
+	/// <summary>A <c>citadel_pickup_artist_drawing</c>, from <c>scripts/misc.vdata</c>.</summary>
+	public const string pickup_artist_drawing_brawler = "pickup_artist_drawing_brawler";
+	/// <summary>A <c>citadel_pickup_artist_drawing</c>, from <c>scripts/misc.vdata</c>.</summary>
+	public const string pickup_artist_drawing_marksman = "pickup_artist_drawing_marksman";
+	/// <summary>A <c>citadel_pickup_artist_drawing</c>, from <c>scripts/misc.vdata</c>.</summary>
+	public const string pickup_artist_drawing_mystic = "pickup_artist_drawing_mystic";
 	/// <summary>A <c>projectile_touch_volume</c>, from <c>scripts/npc_units.vdata</c>.</summary>
 	public const string projectile_touch_volume = "projectile_touch_volume";
 	/// <summary>A <c>citadel_pickup_modifier</c>, from <c>scripts/misc.vdata</c>.</summary>

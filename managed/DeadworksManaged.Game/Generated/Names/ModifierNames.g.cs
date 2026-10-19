@@ -13,6 +13,54 @@ public static class ModifierNames {
 	public const string ability_afterburn__modifier_afterburn_watcher = "ability_afterburn/modifier_afterburn_watcher";
 	/// <summary>Class <c>modifier_citadel_base_buildup</c>.</summary>
 	public const string ability_afterburn__modifier_citadel_base_buildup = "ability_afterburn/modifier_citadel_base_buildup";
+	/// <summary>Class <c>modifier_base</c>.</summary>
+	public const string ability_artist_bamboogrove__buff = "ability_artist_bamboogrove/buff";
+	/// <summary>Class <c>modifier_artist_grove_aura</c>.</summary>
+	public const string ability_artist_bamboogrove__center = "ability_artist_bamboogrove/center";
+	/// <summary>Class <c>modifier_artist_silence_aura</c>.</summary>
+	public const string ability_artist_bamboogrove__groundaura = "ability_artist_bamboogrove/groundaura";
+	/// <summary>Class <c>modifier_artist_grove_aura</c>.</summary>
+	public const string ability_artist_bamboogrove__groveally = "ability_artist_bamboogrove/groveally";
+	/// <summary>Class <c>modifier_base</c>.</summary>
+	public const string ability_artist_bamboogrove__immune = "ability_artist_bamboogrove/immune";
+	/// <summary>Class <c>modifier_citadel_silenced</c>.</summary>
+	public const string ability_artist_bamboogrove__silence = "ability_artist_bamboogrove/silence";
+	/// <summary>Class <c>modifier_base</c>.</summary>
+	public const string ability_artist_homingbrush__buff = "ability_artist_homingbrush/buff";
+	/// <summary>Class <c>modifier_diminishing_slow</c>.</summary>
+	public const string ability_artist_homingbrush__slow = "ability_artist_homingbrush/slow";
+	/// <summary>Class <c>modifier_base</c>.</summary>
+	public const string ability_artist_homingbrush__stack = "ability_artist_homingbrush/stack";
+	/// <summary>Class <c>modifier_artist_stackingbuff</c>.</summary>
+	public const string ability_artist_homingbrush__stackingbuff = "ability_artist_homingbrush/stackingbuff";
+	/// <summary>Class <c>modifier_artist_wall</c>.</summary>
+	public const string ability_artist_pullbrush__collision = "ability_artist_pullbrush/collision";
+	/// <summary>Class <c>modifier_artist_pullbrush_range</c>.</summary>
+	public const string ability_artist_pullbrush__range = "ability_artist_pullbrush/range";
+	/// <summary>Class <c>modifier_base_aura</c>.</summary>
+	public const string ability_artist_rollingprojectile__aura = "ability_artist_rollingprojectile/aura";
+	/// <summary>Class <c>modifier_base</c>.</summary>
+	public const string ability_artist_rollingprojectile__barrier = "ability_artist_rollingprojectile/barrier";
+	/// <summary>Class <c>modifier_artist_enhancedslide</c>.</summary>
+	public const string ability_artist_rollingprojectile__buff = "ability_artist_rollingprojectile/buff";
+	/// <summary>Class <c>modifier_base</c>.</summary>
+	public const string ability_artist_rollingprojectile__dash = "ability_artist_rollingprojectile/dash";
+	/// <summary>Class <c>modifier_artist_rollingprojectile_debuff</c>.</summary>
+	public const string ability_artist_rollingprojectile__debuff = "ability_artist_rollingprojectile/debuff";
+	/// <summary>Class <c>modifier_diminishing_slow</c>.</summary>
+	public const string ability_artist_rollingprojectile__slow = "ability_artist_rollingprojectile/slow";
+	/// <summary>Class <c>modifier_artist_stackingdamageamp</c>.</summary>
+	public const string ability_artist_rollingprojectile__stackingdamageamp = "ability_artist_rollingprojectile/stackingdamageamp";
+	/// <summary>Class <c>modifier_base</c>.</summary>
+	public const string ability_artist_tether__buff = "ability_artist_tether/buff";
+	/// <summary>Class <c>modifier_citadel_artist_buildup</c>.</summary>
+	public const string ability_artist_tether__buildup = "ability_artist_tether/buildup";
+	/// <summary>Class <c>modifier_base</c>.</summary>
+	public const string ability_artist_tether__self = "ability_artist_tether/self";
+	/// <summary>Class <c>modifier_slow_base</c>.</summary>
+	public const string ability_artist_tether__slow = "ability_artist_tether/slow";
+	/// <summary>Class <c>modifier_artist_stun</c>.</summary>
+	public const string ability_artist_tether__stunned = "ability_artist_tether/stunned";
 	/// <summary>Class <c>modifier_slow_base</c>.</summary>
 	public const string ability_baba_bench_run__modifier_baba_bench_heavy_kick_slow = "ability_baba_bench_run/modifier_baba_bench_heavy_kick_slow";
 	/// <summary>Class <c>modifier_baba_thread_pull</c>.</summary>
@@ -124,6 +172,12 @@ public static class ModifierNames {
 	/// <summary>Class <c>modifier_chessmaster_buffally_buff</c>.</summary>
 	public const string ability_chessmaster_knightbuff__rookbuff = "ability_chessmaster_knightbuff/rookbuff";
 	/// <summary>Class <c>modifier_movechesspiececooldown</c>.</summary>
+	public const string ability_chessmaster_knightbuff_trigger__cooldown = "ability_chessmaster_knightbuff_trigger/cooldown";
+	/// <summary>Class <c>modifier_movechesspiececooldown</c>.</summary>
+	public const string ability_chessmaster_knightbuff_trigger__cooldownplayer = "ability_chessmaster_knightbuff_trigger/cooldownplayer";
+	/// <summary>Class <c>modifier_movechesspiece</c>.</summary>
+	public const string ability_chessmaster_knightbuff_trigger__moveking = "ability_chessmaster_knightbuff_trigger/moveking";
+	/// <summary>Class <c>modifier_movechesspiececooldown</c>.</summary>
 	public const string ability_chessmaster_movechesspiece__cooldown = "ability_chessmaster_movechesspiece/cooldown";
 	/// <summary>Class <c>modifier_movechesspiececooldown</c>.</summary>
 	public const string ability_chessmaster_movechesspiece__cooldownplayer = "ability_chessmaster_movechesspiece/cooldownplayer";
@@ -131,8 +185,6 @@ public static class ModifierNames {
 	public const string ability_chessmaster_movechesspiece__move = "ability_chessmaster_movechesspiece/move";
 	/// <summary>Class <c>modifier_movechesspiece</c>.</summary>
 	public const string ability_chessmaster_movechesspiece__moveally = "ability_chessmaster_movechesspiece/moveally";
-	/// <summary>Class <c>modifier_movechesspiece</c>.</summary>
-	public const string ability_chessmaster_movechesspiece__moveking = "ability_chessmaster_movechesspiece/moveking";
 	/// <summary>Class <c>modifier_movechesspiece</c>.</summary>
 	public const string ability_chessmaster_movechesspiece__movequeen = "ability_chessmaster_movechesspiece/movequeen";
 	/// <summary>Class <c>modifier_chessmaster_queen_holdinplace</c>.</summary>
@@ -333,6 +385,8 @@ public static class ModifierNames {
 	public const string ability_familiar_helpinghands__aiphysics = "ability_familiar_helpinghands/aiphysics";
 	/// <summary>Class <c>modifier_familiar_helper_invis_watcher</c>.</summary>
 	public const string ability_familiar_helpinghands__familiar_helper_invis_watcher = "ability_familiar_helpinghands/familiar_helper_invis_watcher";
+	/// <summary>Class <c>modifier_familiar_infest_owner_watcher</c>.</summary>
+	public const string ability_familiar_helpinghands__familiar_infest_owner_watcher = "ability_familiar_helpinghands/familiar_infest_owner_watcher";
 	/// <summary>Class <c>citadel_modifier_familiar_infested</c>.</summary>
 	public const string ability_familiar_helpinghands__infest = "ability_familiar_helpinghands/infest";
 	/// <summary>Class <c>modifier_base</c>.</summary>
