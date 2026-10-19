@@ -203,6 +203,9 @@ struct NativeCallbacks {
     // Makes room for count elements of elementSize bytes in a CUtlVector, keeping what it holds. Returns 0 if
     // the vector does not own its memory.
     uint8_t(__cdecl *GrowUtlVector)(void *vec, int32_t elementSize, int32_t count);
+    // Dispatches a registered ConCommand directly on the server, with the given player slot as its command context,
+    // the way it runs when that client types it. Returns 1 if the command was found and dispatched, 0 otherwise.
+    uint8_t(__cdecl *ExecuteCommandAsPlayer)(int32_t slot, const char *command);
 };
 
 void PopulateNativeCallbacks(NativeCallbacks &callbacks);

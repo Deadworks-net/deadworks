@@ -467,6 +467,25 @@ static void __cdecl NativeExecuteServerCommand(const char *command) {
     g_pEngineServer->ServerCommand(command);
 }
 
+// Unlike ServerCommand, which runs with no player, and ClientCommand, which sends the line to the client to run, this
+// calls the command's callback here with the slot in its CCommandContext. It runs one command, not a ';' chain.
+static uint8_t __cdecl NativeExecuteCommandAsPlayer(int32_t slot, const char *command) {
+    if (!g_pCVar || slot < 0 || !command || !command[0])
+        return 0;
+
+    CCommand args;
+    if (!args.Tokenize(command) || args.ArgC() == 0)
+        return 0;
+
+    ConCommandRef cmd = g_pCVar->FindConCommand(args[0]);
+    if (!cmd.IsValidRef())
+        return 0;
+
+    CCommandContext context(CT_NO_TARGET, CPlayerSlot(slot));
+    g_pCVar->DispatchConCommand(cmd, context, args);
+    return 1;
+}
+
 // Runs the normal client-connect path for a client that has no netchannel, allocating a player
 // slot and a controller. Returns the slot, or -1 when the engine had none to give - which is the
 // usual answer on a Deadlock server that was never handed a match, since an unreserved server
@@ -1383,6 +1402,7 @@ void deadworks::PopulateNativeCallbacks(NativeCallbacks &callbacks) {
 
     // Server command execution
     callbacks.ExecuteServerCommand = &NativeExecuteServerCommand;
+    callbacks.ExecuteCommandAsPlayer = &NativeExecuteCommandAsPlayer;
 
     // SetModel
     callbacks.SetModel = &NativeSetModel;

@@ -72,6 +72,24 @@ public static unsafe class Server {
 		}
 	}
 
+	/// <summary>
+	/// Runs a server ConCommand as if the player in <paramref name="slot"/> had typed it: the command's handler runs
+	/// on the server, now, and sees that player as the caller. Use this for commands that act on the calling player,
+	/// such as <c>bot_record_target</c>, which <see cref="ExecuteCommand"/> runs with no player and
+	/// <see cref="ClientCommand"/> sends to the client to run. It runs a single command, so a line with
+	/// <c>;</c> doesn't chain, and it can't set a ConVar such as <c>citadel_bot_record</c>; use
+	/// <see cref="ConVar.Find"/> for that.
+	/// </summary>
+	/// <param name="slot">The player's controller slot, <see cref="CBasePlayerController.Slot"/>, not an entity index or userid.</param>
+	/// <param name="command">The command and its arguments, such as <c>bot_record_target</c>.</param>
+	/// <returns>True if the command is registered and was run. This doesn't say whether the command did anything.</returns>
+	public static bool ExecuteCommandAsPlayer(int slot, string command) {
+		Span<byte> utf8 = Utf8.Encode(command, stackalloc byte[Utf8.Size(command)]);
+		fixed (byte* ptr = utf8) {
+			return NativeInterop.ExecuteCommandAsPlayer(slot, ptr) != 0;
+		}
+	}
+
 	/// <summary>Sets the server's addons string. Clients receive this in SignonState/connection messages.</summary>
 	public static void SetAddons(string addons) {
 		Span<byte> utf8 = Utf8.Encode(addons, stackalloc byte[Utf8.Size(addons)]);

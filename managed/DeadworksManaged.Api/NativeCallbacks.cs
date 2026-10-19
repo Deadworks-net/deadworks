@@ -162,4 +162,5 @@ internal struct NativeCallbacks
 	public nint GetSchemaClassSize;
 	public nint GetSchemaClassAlignment;
 	public nint GrowUtlVector;
+	public nint ExecuteCommandAsPlayer;
 }
