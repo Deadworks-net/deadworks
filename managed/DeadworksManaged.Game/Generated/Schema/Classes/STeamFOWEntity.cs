@@ -41,6 +41,10 @@ public static partial class Schema {
 		/// <summary><c>uint8</c>. Networked: a write is sent to clients.</summary>
 		public byte m_nHealthPercent { get => Get<byte>(__m_nHealthPercent); set => Set(__m_nHealthPercent, value); }
 
+		private static readonly SchemaField __m_nOwnerOnlyEntIndex = new("STeamFOWEntity", "m_nOwnerOnlyEntIndex");
+		/// <summary><c>CEntityIndex</c>. Networked: a write is sent to clients.</summary>
+		public int m_nOwnerOnlyEntIndex { get => Get<int>(__m_nOwnerOnlyEntIndex); set => Set(__m_nOwnerOnlyEntIndex, value); }
+
 		private static readonly SchemaField __m_nPositionX = new("STeamFOWEntity", "m_nPositionX");
 		/// <summary><c>uint8</c>. Networked: a write is sent to clients.</summary>
 		public byte m_nPositionX { get => Get<byte>(__m_nPositionX); set => Set(__m_nPositionX, value); }

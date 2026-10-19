@@ -53,6 +53,10 @@ public static partial class Schema {
 		/// <summary><c>GameTime_t</c>. Networked: a write is sent to clients.</summary>
 		public GameTime m_flStateStartTime { get => Get<GameTime>(__m_flStateStartTime); set => Set(__m_flStateStartTime, value); }
 
+		private static readonly SchemaField __m_nAirborneAttackImpulses = new("CCitadel_Ability_Baba_BenchMelee", "m_nAirborneAttackImpulses");
+		/// <summary><c>int32</c>. Networked: a write is sent to clients.</summary>
+		public int m_nAirborneAttackImpulses { get => Get<int>(__m_nAirborneAttackImpulses); set => Set(__m_nAirborneAttackImpulses, value); }
+
 		private static readonly SchemaField __m_vDashDir = new("CCitadel_Ability_Baba_BenchMelee", "m_vDashDir");
 		/// <summary><c>Vector</c>. Networked: a write is sent to clients.</summary>
 		public Vector3 m_vDashDir { get => Get<Vector3>(__m_vDashDir); set => Set(__m_vDashDir, value); }
