@@ -73,16 +73,12 @@ public static unsafe class Server {
 	}
 
 	/// <summary>
-	/// Runs a server ConCommand as if the player in <paramref name="slot"/> had typed it: the command's handler runs
-	/// on the server, now, and sees that player as the caller. Use this for commands that act on the calling player,
-	/// such as <c>bot_record_target</c>, which <see cref="ExecuteCommand"/> runs with no player and
-	/// <see cref="ClientCommand"/> sends to the client to run. It runs a single command, so a line with
-	/// <c>;</c> doesn't chain, and it can't set a ConVar such as <c>citadel_bot_record</c>; use
-	/// <see cref="ConVar.Find"/> for that.
+	/// Runs a server command as if the player in <paramref name="slot"/> sent it. Cheat commands run even with
+	/// <c>sv_cheats</c> off, and plugin commands still check the player's permissions.
 	/// </summary>
-	/// <param name="slot">The player's controller slot, <see cref="CBasePlayerController.Slot"/>, not an entity index or userid.</param>
-	/// <param name="command">The command and its arguments, such as <c>bot_record_target</c>.</param>
-	/// <returns>True if the command is registered and was run. This doesn't say whether the command did anything.</returns>
+	/// <param name="slot">The player's <see cref="CBasePlayerController.Slot"/>.</param>
+	/// <param name="command">The command and its arguments.</param>
+	/// <returns>False if there is no such command or the slot is invalid.</returns>
 	public static bool ExecuteCommandAsPlayer(int slot, string command) {
 		Span<byte> utf8 = Utf8.Encode(command, stackalloc byte[Utf8.Size(command)]);
 		fixed (byte* ptr = utf8) {

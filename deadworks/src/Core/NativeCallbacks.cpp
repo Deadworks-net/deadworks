@@ -467,10 +467,9 @@ static void __cdecl NativeExecuteServerCommand(const char *command) {
     g_pEngineServer->ServerCommand(command);
 }
 
-// Unlike ServerCommand, which runs with no player, and ClientCommand, which sends the line to the client to run, this
-// calls the command's callback here with the slot in its CCommandContext. It runs one command, not a ';' chain.
+// Same dispatch the engine uses for a command a player sends, minus its checks such as sv_cheats.
 static uint8_t __cdecl NativeExecuteCommandAsPlayer(int32_t slot, const char *command) {
-    if (!g_pCVar || slot < 0 || !command || !command[0])
+    if (!g_pCVar || slot < 0 || slot >= ABSOLUTE_PLAYER_LIMIT || !command || !command[0])
         return 0;
 
     CCommand args;
