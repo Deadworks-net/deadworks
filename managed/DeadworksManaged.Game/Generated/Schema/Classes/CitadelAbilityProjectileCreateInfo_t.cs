@@ -49,10 +49,6 @@ public static partial class Schema {
 		/// <summary><c>CUtlString</c>.</summary>
 		public string m_sModelOverrideName => GetString(__m_sModelOverrideName);
 
-		private static readonly SchemaField __m_sOverrideClassName = new("CitadelAbilityProjectileCreateInfo_t", "m_sOverrideClassName");
-		/// <summary><c>CUtlString</c>.</summary>
-		public string m_sOverrideClassName => GetString(__m_sOverrideClassName);
-
 		private static readonly SchemaField __m_sTrailParticleOverrideName = new("CitadelAbilityProjectileCreateInfo_t", "m_sTrailParticleOverrideName");
 		/// <summary><c>CResourceNameTyped&lt;CWeakHandle&lt;InfoForResourceTypeIParticleSystemDefinition&gt;&gt;</c>.</summary>
 		public string m_sTrailParticleOverrideName => GetBufferString(__m_sTrailParticleOverrideName);

@@ -73,6 +73,18 @@ public static partial class Keys {
 		public float? luminaire_size { get => GetValue<float>("luminaire_size"); set => SetKey("luminaire_size", value); }
 		/// <summary><c>float32</c> key <c>minroughness</c>, read into <c>CBarnLight.m_flMinRoughness</c>.</summary>
 		public float? minroughness { get => GetValue<float>("minroughness"); set => SetKey("minroughness", value); }
+		/// <summary><c>vector4d</c> key <c>precomputed_shadowmap_atlas_rect_0</c>, read into <c>CBarnLight.m_vPrecomputedShadowmapAtlasRect0</c>.</summary>
+		public string? precomputed_shadowmap_atlas_rect_0 { get => GetText("precomputed_shadowmap_atlas_rect_0"); set => SetKey("precomputed_shadowmap_atlas_rect_0", value); }
+		/// <summary><c>vector4d</c> key <c>precomputed_shadowmap_atlas_rect_1</c>, read into <c>CBarnLight.m_vPrecomputedShadowmapAtlasRect1</c>.</summary>
+		public string? precomputed_shadowmap_atlas_rect_1 { get => GetText("precomputed_shadowmap_atlas_rect_1"); set => SetKey("precomputed_shadowmap_atlas_rect_1", value); }
+		/// <summary><c>vector4d</c> key <c>precomputed_shadowmap_atlas_rect_2</c>, read into <c>CBarnLight.m_vPrecomputedShadowmapAtlasRect2</c>.</summary>
+		public string? precomputed_shadowmap_atlas_rect_2 { get => GetText("precomputed_shadowmap_atlas_rect_2"); set => SetKey("precomputed_shadowmap_atlas_rect_2", value); }
+		/// <summary><c>vector4d</c> key <c>precomputed_shadowmap_atlas_rect_3</c>, read into <c>CBarnLight.m_vPrecomputedShadowmapAtlasRect3</c>.</summary>
+		public string? precomputed_shadowmap_atlas_rect_3 { get => GetText("precomputed_shadowmap_atlas_rect_3"); set => SetKey("precomputed_shadowmap_atlas_rect_3", value); }
+		/// <summary><c>vector4d</c> key <c>precomputed_shadowmap_atlas_rect_4</c>, read into <c>CBarnLight.m_vPrecomputedShadowmapAtlasRect4</c>.</summary>
+		public string? precomputed_shadowmap_atlas_rect_4 { get => GetText("precomputed_shadowmap_atlas_rect_4"); set => SetKey("precomputed_shadowmap_atlas_rect_4", value); }
+		/// <summary><c>vector4d</c> key <c>precomputed_shadowmap_atlas_rect_5</c>, read into <c>CBarnLight.m_vPrecomputedShadowmapAtlasRect5</c>.</summary>
+		public string? precomputed_shadowmap_atlas_rect_5 { get => GetText("precomputed_shadowmap_atlas_rect_5"); set => SetKey("precomputed_shadowmap_atlas_rect_5", value); }
 		/// <summary><c>position_vector</c> key <c>precomputedboundsmaxs</c>, read into <c>CBarnLight.m_vPrecomputedBoundsMaxs</c>.</summary>
 		public Vector3? precomputedboundsmaxs { get => GetValue<Vector3>("precomputedboundsmaxs"); set => SetKey("precomputedboundsmaxs", value); }
 		/// <summary><c>position_vector</c> key <c>precomputedboundsmins</c>, read into <c>CBarnLight.m_vPrecomputedBoundsMins</c>.</summary>

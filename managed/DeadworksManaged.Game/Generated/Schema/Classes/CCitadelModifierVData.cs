@@ -57,6 +57,10 @@ public static partial class Schema {
 		/// <summary><c>bool</c>. When set, the duration will get scaled depending on the owner's timescale. Wrapped by <c>CCitadelModifierVData.DurationCanBeTimeScaled</c> in DeadworksManaged.Api.</summary>
 		public bool m_bDurationCanBeTimeScaled { get => Get<bool>(__m_bDurationCanBeTimeScaled); set => Set(__m_bDurationCanBeTimeScaled, value); }
 
+		private static readonly SchemaField __m_bDurationExtendible = new("CCitadelModifierVData", "m_bDurationExtendible");
+		/// <summary><c>bool</c>.</summary>
+		public bool m_bDurationExtendible { get => Get<bool>(__m_bDurationExtendible); set => Set(__m_bDurationExtendible, value); }
+
 		private static readonly SchemaField __m_bDurationReducible = new("CCitadelModifierVData", "m_bDurationReducible");
 		/// <summary><c>bool</c>. Wrapped by <c>CCitadelModifierVData.DurationReducible</c> in DeadworksManaged.Api.</summary>
 		public bool m_bDurationReducible { get => Get<bool>(__m_bDurationReducible); set => Set(__m_bDurationReducible, value); }

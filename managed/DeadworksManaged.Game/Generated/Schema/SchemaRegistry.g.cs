@@ -390,6 +390,11 @@ public static partial class SchemaRegistry {
 		classes["CCitadel_Ability_Necro_PrimaryWeapon"] = static () => new Schema.CCitadel_Ability_Necro_PrimaryWeapon();
 		classes["CCitadel_Ability_Necro_ZombieWall"] = static () => new Schema.CCitadel_Ability_Necro_ZombieWall();
 		classes["CCitadel_Ability_Nikuman"] = static () => new Schema.CCitadel_Ability_Nikuman();
+		classes["CCitadel_Ability_Nurse_AdrenalineRush"] = static () => new Schema.CCitadel_Ability_Nurse_AdrenalineRush();
+		classes["CCitadel_Ability_Nurse_Fear"] = static () => new Schema.CCitadel_Ability_Nurse_Fear();
+		classes["CCitadel_Ability_Nurse_HealingNeedleWeapon"] = static () => new Schema.CCitadel_Ability_Nurse_HealingNeedleWeapon();
+		classes["CCitadel_Ability_Nurse_HealingNeedles"] = static () => new Schema.CCitadel_Ability_Nurse_HealingNeedles();
+		classes["CCitadel_Ability_Nurse_LeechTherapy"] = static () => new Schema.CCitadel_Ability_Nurse_LeechTherapy();
 		classes["CCitadel_Ability_Opera_Ability01"] = static () => new Schema.CCitadel_Ability_Opera_Ability01();
 		classes["CCitadel_Ability_Opera_Ability02"] = static () => new Schema.CCitadel_Ability_Opera_Ability02();
 		classes["CCitadel_Ability_Opera_Ability03"] = static () => new Schema.CCitadel_Ability_Opera_Ability03();
@@ -1010,6 +1015,7 @@ public static partial class SchemaRegistry {
 		classes["CNPC_Neutral_Hideout_Rabbit"] = static () => new Schema.CNPC_Neutral_Hideout_Rabbit();
 		classes["CNPC_Neutral_SinnersSacrifice"] = static () => new Schema.CNPC_Neutral_SinnersSacrifice();
 		classes["CNPC_Neutral_SinnersSacrifice_Hideout"] = static () => new Schema.CNPC_Neutral_SinnersSacrifice_Hideout();
+		classes["CNPC_NurseLeech"] = static () => new Schema.CNPC_NurseLeech();
 		classes["CNPC_Ratking_Rat"] = static () => new Schema.CNPC_Ratking_Rat();
 		classes["CNPC_ShieldedSentry"] = static () => new Schema.CNPC_ShieldedSentry();
 		classes["CNPC_SimpleAnimatingAI"] = static () => new Schema.CNPC_SimpleAnimatingAI();
@@ -1414,6 +1420,11 @@ public static partial class SchemaRegistry {
 		designerNames["ability_necro_nukemap"] = static () => new Schema.CCitadel_Ability_Necro_NukeMap();
 		designerNames["ability_necro_zombiewall"] = static () => new Schema.CCitadel_Ability_Necro_ZombieWall();
 		designerNames["ability_npc_shield"] = static () => new Schema.CCitadel_NPCAbility_Shield();
+		designerNames["ability_nurse_adrenaline_rush"] = static () => new Schema.CCitadel_Ability_Nurse_AdrenalineRush();
+		designerNames["ability_nurse_fear"] = static () => new Schema.CCitadel_Ability_Nurse_Fear();
+		designerNames["ability_nurse_healing_needles"] = static () => new Schema.CCitadel_Ability_Nurse_HealingNeedles();
+		designerNames["ability_nurse_healing_needles_weapon"] = static () => new Schema.CCitadel_Ability_Nurse_HealingNeedleWeapon();
+		designerNames["ability_nurse_leech_therapy"] = static () => new Schema.CCitadel_Ability_Nurse_LeechTherapy();
 		designerNames["ability_opera_ability01"] = static () => new Schema.CCitadel_Ability_Opera_Ability01();
 		designerNames["ability_opera_ability02"] = static () => new Schema.CCitadel_Ability_Opera_Ability02();
 		designerNames["ability_opera_ability03"] = static () => new Schema.CCitadel_Ability_Opera_Ability03();
@@ -2105,6 +2116,7 @@ public static partial class SchemaRegistry {
 		designerNames["npc_neutral_hideout_rabbit"] = static () => new Schema.CNPC_Neutral_Hideout_Rabbit();
 		designerNames["npc_neutral_sinners_sacrifice"] = static () => new Schema.CNPC_Neutral_SinnersSacrifice();
 		designerNames["npc_neutral_sinners_sacrifice_hideout"] = static () => new Schema.CNPC_Neutral_SinnersSacrifice_Hideout();
+		designerNames["npc_nurse_leech"] = static () => new Schema.CNPC_NurseLeech();
 		designerNames["npc_player_bot_brain"] = static () => new Schema.CCitadelPlayerBotNPCBrain();
 		designerNames["npc_ratking_rat"] = static () => new Schema.CNPC_Ratking_Rat();
 		designerNames["npc_shielded_sentry"] = static () => new Schema.CNPC_ShieldedSentry();

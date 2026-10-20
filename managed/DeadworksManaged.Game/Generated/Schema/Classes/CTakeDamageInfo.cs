@@ -17,9 +17,17 @@ public static partial class Schema {
 		/// <summary><c>CUtlLeanVector&lt;DestructiblePartDamageRequest_t&gt;</c>.</summary>
 		public SchemaObjectList<DestructiblePartDamageRequest_t> m_DestructibleHitGroupRequests => new(this, __m_DestructibleHitGroupRequests, ListStorage.UnresizableVector);
 
+		private static readonly SchemaField __m_bCannotBeDeferred = new("CTakeDamageInfo", "m_bCannotBeDeferred");
+		/// <summary><c>bool</c>.</summary>
+		public bool m_bCannotBeDeferred { get => Get<bool>(__m_bCannotBeDeferred); set => Set(__m_bCannotBeDeferred, value); }
+
 		private static readonly SchemaField __m_bEvaded = new("CTakeDamageInfo", "m_bEvaded");
 		/// <summary><c>bool</c>.</summary>
 		public bool m_bEvaded { get => Get<bool>(__m_bEvaded); set => Set(__m_bEvaded, value); }
+
+		private static readonly SchemaField __m_bIgnoresSelfBubble = new("CTakeDamageInfo", "m_bIgnoresSelfBubble");
+		/// <summary><c>bool</c>.</summary>
+		public bool m_bIgnoresSelfBubble { get => Get<bool>(__m_bIgnoresSelfBubble); set => Set(__m_bIgnoresSelfBubble, value); }
 
 		private static readonly SchemaField __m_bInTakeDamageFlow = new("CTakeDamageInfo", "m_bInTakeDamageFlow");
 		/// <summary><c>bool</c>.</summary>
@@ -60,6 +68,10 @@ public static partial class Schema {
 		private static readonly SchemaField __m_flDamageAbsorbed = new("CTakeDamageInfo", "m_flDamageAbsorbed");
 		/// <summary><c>float32</c>.</summary>
 		public float m_flDamageAbsorbed { get => Get<float>(__m_flDamageAbsorbed); set => Set(__m_flDamageAbsorbed, value); }
+
+		private static readonly SchemaField __m_flDeferredHealthLossFraction = new("CTakeDamageInfo", "m_flDeferredHealthLossFraction");
+		/// <summary><c>float32</c>.</summary>
+		public float m_flDeferredHealthLossFraction { get => Get<float>(__m_flDeferredHealthLossFraction); set => Set(__m_flDeferredHealthLossFraction, value); }
 
 		private static readonly SchemaField __m_flEffectiveness = new("CTakeDamageInfo", "m_flEffectiveness");
 		/// <summary><c>float32</c>.</summary>

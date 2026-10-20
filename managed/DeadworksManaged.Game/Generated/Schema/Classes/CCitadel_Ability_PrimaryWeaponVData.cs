@@ -25,6 +25,10 @@ public static partial class Schema {
 		/// <summary><c>CResourceNameTyped&lt;CWeakHandle&lt;InfoForResourceTypeIParticleSystemDefinition&gt;&gt;</c>. Effect to parent to the gun.CP.0 = muzzle attachment source below, CP.1 = muzzle_fx. CP2.X = ammo frac, CP2.Y = is reloading (1/0), CP2.Z = shot recently (1/0).</summary>
 		public string m_PassiveWeaponParticle => GetBufferString(__m_PassiveWeaponParticle);
 
+		private static readonly SchemaField __m_bCustomCrossIgnoreThemedReticleSetting = new("CCitadel_Ability_PrimaryWeaponVData", "m_bCustomCrossIgnoreThemedReticleSetting");
+		/// <summary><c>bool</c>.</summary>
+		public bool m_bCustomCrossIgnoreThemedReticleSetting { get => Get<bool>(__m_bCustomCrossIgnoreThemedReticleSetting); set => Set(__m_bCustomCrossIgnoreThemedReticleSetting, value); }
+
 		private static readonly SchemaField __m_bDOFFarSettingsAreOffsetByGunRange = new("CCitadel_Ability_PrimaryWeaponVData", "m_bDOFFarSettingsAreOffsetByGunRange");
 		/// <summary><c>bool</c>. When true, the 'Far Crisp' and 'Far Blurry' are added on top of the gun's range. When false, use the values directly.</summary>
 		public bool m_bDOFFarSettingsAreOffsetByGunRange { get => Get<bool>(__m_bDOFFarSettingsAreOffsetByGunRange); set => Set(__m_bDOFFarSettingsAreOffsetByGunRange, value); }

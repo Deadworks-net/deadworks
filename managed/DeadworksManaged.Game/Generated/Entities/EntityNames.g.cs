@@ -311,6 +311,16 @@ public static class EntityNames {
 	public const string ability_necro_zombiewall = "ability_necro_zombiewall";
 	/// <summary><c>CCitadel_NPCAbility_Shield</c>.</summary>
 	public const string ability_npc_shield = "ability_npc_shield";
+	/// <summary><c>CCitadel_Ability_Nurse_AdrenalineRush</c>.</summary>
+	public const string ability_nurse_adrenaline_rush = "ability_nurse_adrenaline_rush";
+	/// <summary><c>CCitadel_Ability_Nurse_Fear</c>.</summary>
+	public const string ability_nurse_fear = "ability_nurse_fear";
+	/// <summary><c>CCitadel_Ability_Nurse_HealingNeedles</c>.</summary>
+	public const string ability_nurse_healing_needles = "ability_nurse_healing_needles";
+	/// <summary><c>CCitadel_Ability_Nurse_HealingNeedleWeapon</c>.</summary>
+	public const string ability_nurse_healing_needles_weapon = "ability_nurse_healing_needles_weapon";
+	/// <summary><c>CCitadel_Ability_Nurse_LeechTherapy</c>.</summary>
+	public const string ability_nurse_leech_therapy = "ability_nurse_leech_therapy";
 	/// <summary><c>CCitadel_Ability_Opera_Ability01</c>.</summary>
 	public const string ability_opera_ability01 = "ability_opera_ability01";
 	/// <summary><c>CCitadel_Ability_Opera_Ability02</c>.</summary>
@@ -1693,6 +1703,8 @@ public static class EntityNames {
 	public const string npc_neutral_sinners_sacrifice = "npc_neutral_sinners_sacrifice";
 	/// <summary><c>CNPC_Neutral_SinnersSacrifice_Hideout</c>.</summary>
 	public const string npc_neutral_sinners_sacrifice_hideout = "npc_neutral_sinners_sacrifice_hideout";
+	/// <summary><c>CNPC_NurseLeech</c>.</summary>
+	public const string npc_nurse_leech = "npc_nurse_leech";
 	/// <summary><c>CCitadelPlayerBotNPCBrain</c>.</summary>
 	public const string npc_player_bot_brain = "npc_player_bot_brain";
 	/// <summary><c>CNPC_Ratking_Rat</c>.</summary>

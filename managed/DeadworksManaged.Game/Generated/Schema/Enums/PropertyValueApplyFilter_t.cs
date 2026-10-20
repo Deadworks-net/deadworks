@@ -14,5 +14,6 @@ public static partial class Schema {
 		EApplyFilter_OnlyIfHasCharges = 3,
 		EApplyFilter_OnlyIfUltimate = 4,
 		EApplyFilter_OnlyIfSignature = 5,
+		EApplyFilter_OnlyIfNonUltimateSignature = 6,
 	}
 }

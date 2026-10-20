@@ -81,6 +81,10 @@ public static partial class Schema {
 		/// <summary><c>GameTime_t</c>. Networked: a write is sent to clients.</summary>
 		public GameTime m_flCastCompletedTime { get => Get<GameTime>(__m_flCastCompletedTime); set => Set(__m_flCastCompletedTime, value); }
 
+		private static readonly SchemaField __m_flCastDelaySpeedScale = new("CCitadelBaseAbility", "m_flCastDelaySpeedScale");
+		/// <summary><c>float32</c>. Networked: a write is sent to clients.</summary>
+		public float m_flCastDelaySpeedScale { get => Get<float>(__m_flCastDelaySpeedScale); set => Set(__m_flCastDelaySpeedScale, value); }
+
 		private static readonly SchemaField __m_flCastDelayStartTime = new("CCitadelBaseAbility", "m_flCastDelayStartTime");
 		/// <summary><c>GameTime_t</c>. Networked: a write is sent to clients.</summary>
 		public GameTime m_flCastDelayStartTime { get => Get<GameTime>(__m_flCastDelayStartTime); set => Set(__m_flCastDelayStartTime, value); }
@@ -120,6 +124,10 @@ public static partial class Schema {
 		private static readonly SchemaField __m_flSelectedChangedTime = new("CCitadelBaseAbility", "m_flSelectedChangedTime");
 		/// <summary><c>GameTime_t</c>. Networked: a write is sent to clients.</summary>
 		public GameTime m_flSelectedChangedTime { get => Get<GameTime>(__m_flSelectedChangedTime); set => Set(__m_flSelectedChangedTime, value); }
+
+		private static readonly SchemaField __m_flStoppedCooldownRemaining = new("CCitadelBaseAbility", "m_flStoppedCooldownRemaining");
+		/// <summary><c>float32</c>. Networked: a write is sent to clients.</summary>
+		public float m_flStoppedCooldownRemaining { get => Get<float>(__m_flStoppedCooldownRemaining); set => Set(__m_flStoppedCooldownRemaining, value); }
 
 		private static readonly SchemaField __m_iRemainingCharges = new("CCitadelBaseAbility", "m_iRemainingCharges");
 		/// <summary><c>int32</c>. Networked: a write is sent to clients. Wrapped by <c>CCitadelBaseAbility.RemainingCharges</c> in DeadworksManaged.Api.</summary>
