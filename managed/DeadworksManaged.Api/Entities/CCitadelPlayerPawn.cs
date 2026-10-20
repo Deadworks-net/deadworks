@@ -217,11 +217,11 @@ public sealed unsafe class CCitadelPlayerPawn : CBasePlayerPawn {
 	/// this overload and do nothing until imbued - use
 	/// <see cref="AddItem(string, EAbilitySlot, bool, bool)"/> for those.
 	/// </para>
+	/// </summary>
 	/// <param name="itemName">Internal item name.</param>
 	/// <param name="enhanced">Should the enhanced version of the item be given</param>
-	/// <param name="corrupted">Should the corrupted version of the item be given</param>
-	/// Returns the new item entity, or null on failure.
-	/// </summary>
+	/// <param name="corrupted">Should the corrupted version of the item be given. Items without a corrupted version are unaffected.</param>
+	/// <returns>The new item entity, or null on failure.</returns>
 	public CCitadelBaseAbility? AddItem(string itemName, bool enhanced = false, bool corrupted = false) {
 		Span<byte> utf8 = Utf8.Encode(itemName, stackalloc byte[Utf8.Size(itemName)]);
 		fixed (byte* ptr = utf8) {
@@ -232,6 +232,10 @@ public sealed unsafe class CCitadelPlayerPawn : CBasePlayerPawn {
 			return result != null ? new CCitadelBaseAbility((nint)result) : null;
 		}
 	}
+
+	// Kept so plugins built before the corrupted parameter still load.
+	[System.ComponentModel.EditorBrowsable(System.ComponentModel.EditorBrowsableState.Never)]
+	public CCitadelBaseAbility? AddItem(string itemName, bool enhanced) => AddItem(itemName, enhanced, false);
 
 	/// <summary>
 	/// Gives an imbuable item to this pawn and imbues it into the ability in
@@ -248,13 +252,16 @@ public sealed unsafe class CCitadelPlayerPawn : CBasePlayerPawn {
 	/// through <see cref="EAbilitySlot.Signature4"/> (indices 0-3).
 	/// </param>
 	/// <param name="enhanced">Should the enhanced version of the item be given</param>
-	/// <param name="corrupted">Should the corrupted version of the item be given</param>
-	/// Returns the new item entity, or null on failure.
-	/// </summary>
+	/// <param name="corrupted">Should the corrupted version of the item be given. Items without a corrupted version are unaffected.</param>
+	/// <returns>The new item entity, or null on failure.</returns>
 	public CCitadelBaseAbility? AddItem(string itemName, EAbilitySlot imbueSlot, bool enhanced = false, bool corrupted = false) {
 		TryAddItem(itemName, imbueSlot, out var item, enhanced, corrupted);
 		return item;
 	}
+
+	// Kept so plugins built before the corrupted parameter still load.
+	[System.ComponentModel.EditorBrowsable(System.ComponentModel.EditorBrowsableState.Never)]
+	public CCitadelBaseAbility? AddItem(string itemName, EAbilitySlot imbueSlot, bool enhanced) => AddItem(itemName, imbueSlot, enhanced, false);
 
 	/// <summary>
 	/// <see cref="AddItem(string, EAbilitySlot, bool, bool)"/> with a reason on failure.
@@ -284,6 +291,11 @@ public sealed unsafe class CCitadelPlayerPawn : CBasePlayerPawn {
 		item = granted;
 		return ImbueResult.Success;
 	}
+
+	// Kept so plugins built before the corrupted parameter still load.
+	[System.ComponentModel.EditorBrowsable(System.ComponentModel.EditorBrowsableState.Never)]
+	public ImbueResult TryAddItem(string itemName, EAbilitySlot imbueSlot, out CCitadelBaseAbility? item, bool enhanced)
+		=> TryAddItem(itemName, imbueSlot, out item, enhanced, false);
 
 	/// <summary>
 	/// Imbues an item this pawn already owns into the ability in <paramref name="slot"/>.
