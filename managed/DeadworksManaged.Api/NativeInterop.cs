@@ -163,6 +163,7 @@ internal static unsafe class NativeInterop
 	public static delegate* unmanaged[Cdecl]<byte*, int> GetSchemaClassSize => (delegate* unmanaged[Cdecl]<byte*, int>)_cb.GetSchemaClassSize;
 	public static delegate* unmanaged[Cdecl]<byte*, int> GetSchemaClassAlignment => (delegate* unmanaged[Cdecl]<byte*, int>)_cb.GetSchemaClassAlignment;
 	public static delegate* unmanaged[Cdecl]<void*, int, int, byte> GrowUtlVector => (delegate* unmanaged[Cdecl]<void*, int, int, byte>)_cb.GrowUtlVector;
+	public static delegate* unmanaged[Cdecl]<int, byte*, byte> ExecuteCommandAsPlayer => (delegate* unmanaged[Cdecl]<int, byte*, byte>)_cb.ExecuteCommandAsPlayer;
 
 	// Entity movement and class checks
 	public static delegate* unmanaged[Cdecl]<void*, byte, void> SetMoveType => (delegate* unmanaged[Cdecl]<void*, byte, void>)_cb.SetMoveType;

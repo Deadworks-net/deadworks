@@ -72,6 +72,20 @@ public static unsafe class Server {
 		}
 	}
 
+	/// <summary>
+	/// Runs a server command as if the player in <paramref name="slot"/> sent it. Cheat commands run even with
+	/// <c>sv_cheats</c> off, and plugin commands still check the player's permissions.
+	/// </summary>
+	/// <param name="slot">The player's <see cref="CBasePlayerController.Slot"/>.</param>
+	/// <param name="command">The command and its arguments.</param>
+	/// <returns>False if there is no such command or the slot is invalid.</returns>
+	public static bool ExecuteCommandAsPlayer(int slot, string command) {
+		Span<byte> utf8 = Utf8.Encode(command, stackalloc byte[Utf8.Size(command)]);
+		fixed (byte* ptr = utf8) {
+			return NativeInterop.ExecuteCommandAsPlayer(slot, ptr) != 0;
+		}
+	}
+
 	/// <summary>Sets the server's addons string. Clients receive this in SignonState/connection messages.</summary>
 	public static void SetAddons(string addons) {
 		Span<byte> utf8 = Utf8.Encode(addons, stackalloc byte[Utf8.Size(addons)]);
