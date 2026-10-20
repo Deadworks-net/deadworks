@@ -13,10 +13,6 @@ public static partial class Schema {
 		static CCitadel_UtilityUpgrade_RocketBooster ISchemaClass<CCitadel_UtilityUpgrade_RocketBooster>.New() => new();
 		static string ISchemaClass<CCitadel_UtilityUpgrade_RocketBooster>.NativeName => "CCitadel_UtilityUpgrade_RocketBooster";
 
-		private static readonly SchemaField __m_InAirLoopSound = new("CCitadel_UtilityUpgrade_RocketBooster", "m_InAirLoopSound");
-		/// <summary><c>SndOpEventGuid_t</c>. No typed mapping yet: read it through its address.</summary>
-		public RawField m_InAirLoopSound => Raw(__m_InAirLoopSound, "SndOpEventGuid_t");
-
 		private static readonly SchemaField __m_bCanCrash = new("CCitadel_UtilityUpgrade_RocketBooster", "m_bCanCrash");
 		/// <summary><c>bool</c>. Networked: a write is sent to clients.</summary>
 		public bool m_bCanCrash { get => Get<bool>(__m_bCanCrash); set => Set(__m_bCanCrash, value); }
@@ -28,6 +24,10 @@ public static partial class Schema {
 		private static readonly SchemaField __m_bImpulseApplied = new("CCitadel_UtilityUpgrade_RocketBooster", "m_bImpulseApplied");
 		/// <summary><c>bool</c>. Networked: a write is sent to clients.</summary>
 		public bool m_bImpulseApplied { get => Get<bool>(__m_bImpulseApplied); set => Set(__m_bImpulseApplied, value); }
+
+		private static readonly SchemaField __m_bPlayLandingSound = new("CCitadel_UtilityUpgrade_RocketBooster", "m_bPlayLandingSound");
+		/// <summary><c>bool</c>. Networked: a write is sent to clients.</summary>
+		public bool m_bPlayLandingSound { get => Get<bool>(__m_bPlayLandingSound); set => Set(__m_bPlayLandingSound, value); }
 
 		private static readonly SchemaField __m_flCastTime = new("CCitadel_UtilityUpgrade_RocketBooster", "m_flCastTime");
 		/// <summary><c>GameTime_t</c>. Networked: a write is sent to clients.</summary>

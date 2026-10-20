@@ -108,5 +108,8 @@ public static partial class Schema {
 		private static readonly SchemaField __m_vecTargetToIgnore = new("CCitadelProjectile", "m_vecTargetToIgnore");
 		/// <summary><c>CUtlVector&lt;CHandle&lt;CBaseEntity&gt;&gt;</c>.</summary>
 		public SchemaHandleList<CBaseEntity> m_vecTargetToIgnore => new(this, __m_vecTargetToIgnore, ListStorage.Vector);
+
+		/// <summary>The data entry this was created from, as <see cref="CCitadelProjectileVData"/>, or null if it has none.</summary>
+		public CCitadelProjectileVData? VData => SubclassVData<CCitadelProjectileVData>();
 	}
 }

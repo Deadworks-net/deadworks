@@ -313,6 +313,30 @@ public static partial class Schema {
 		/// <summary><c>Vector</c>. Networked: a write is sent to clients.</summary>
 		public Vector3 m_vPrecomputedOBBOrigin5 { get => Get<Vector3>(__m_vPrecomputedOBBOrigin5); set => Set(__m_vPrecomputedOBBOrigin5, value); }
 
+		private static readonly SchemaField __m_vPrecomputedShadowmapAtlasRect0 = new("CBarnLight", "m_vPrecomputedShadowmapAtlasRect0");
+		/// <summary><c>Vector4D</c>. Networked: a write is sent to clients.</summary>
+		public Vector4 m_vPrecomputedShadowmapAtlasRect0 { get => Get<Vector4>(__m_vPrecomputedShadowmapAtlasRect0); set => Set(__m_vPrecomputedShadowmapAtlasRect0, value); }
+
+		private static readonly SchemaField __m_vPrecomputedShadowmapAtlasRect1 = new("CBarnLight", "m_vPrecomputedShadowmapAtlasRect1");
+		/// <summary><c>Vector4D</c>. Networked: a write is sent to clients.</summary>
+		public Vector4 m_vPrecomputedShadowmapAtlasRect1 { get => Get<Vector4>(__m_vPrecomputedShadowmapAtlasRect1); set => Set(__m_vPrecomputedShadowmapAtlasRect1, value); }
+
+		private static readonly SchemaField __m_vPrecomputedShadowmapAtlasRect2 = new("CBarnLight", "m_vPrecomputedShadowmapAtlasRect2");
+		/// <summary><c>Vector4D</c>. Networked: a write is sent to clients.</summary>
+		public Vector4 m_vPrecomputedShadowmapAtlasRect2 { get => Get<Vector4>(__m_vPrecomputedShadowmapAtlasRect2); set => Set(__m_vPrecomputedShadowmapAtlasRect2, value); }
+
+		private static readonly SchemaField __m_vPrecomputedShadowmapAtlasRect3 = new("CBarnLight", "m_vPrecomputedShadowmapAtlasRect3");
+		/// <summary><c>Vector4D</c>. Networked: a write is sent to clients.</summary>
+		public Vector4 m_vPrecomputedShadowmapAtlasRect3 { get => Get<Vector4>(__m_vPrecomputedShadowmapAtlasRect3); set => Set(__m_vPrecomputedShadowmapAtlasRect3, value); }
+
+		private static readonly SchemaField __m_vPrecomputedShadowmapAtlasRect4 = new("CBarnLight", "m_vPrecomputedShadowmapAtlasRect4");
+		/// <summary><c>Vector4D</c>. Networked: a write is sent to clients.</summary>
+		public Vector4 m_vPrecomputedShadowmapAtlasRect4 { get => Get<Vector4>(__m_vPrecomputedShadowmapAtlasRect4); set => Set(__m_vPrecomputedShadowmapAtlasRect4, value); }
+
+		private static readonly SchemaField __m_vPrecomputedShadowmapAtlasRect5 = new("CBarnLight", "m_vPrecomputedShadowmapAtlasRect5");
+		/// <summary><c>Vector4D</c>. Networked: a write is sent to clients.</summary>
+		public Vector4 m_vPrecomputedShadowmapAtlasRect5 { get => Get<Vector4>(__m_vPrecomputedShadowmapAtlasRect5); set => Set(__m_vPrecomputedShadowmapAtlasRect5, value); }
+
 		private static readonly SchemaField __m_vShear = new("CBarnLight", "m_vShear");
 		/// <summary><c>Vector</c>. Networked: a write is sent to clients.</summary>
 		public Vector3 m_vShear { get => Get<Vector3>(__m_vShear); set => Set(__m_vShear, value); }

@@ -81,6 +81,10 @@ public static partial class Schema {
 		/// <summary><c>AdditionalAbilities_t</c>. Additional Abilities.</summary>
 		public AdditionalAbilities_t m_additionalAbilities => Embedded<AdditionalAbilities_t>(__m_additionalAbilities);
 
+		private static readonly SchemaField __m_bAffectedByRushMovementTimeScale = new("CitadelAbilityVData", "m_bAffectedByRushMovementTimeScale");
+		/// <summary><c>bool</c>.</summary>
+		public bool m_bAffectedByRushMovementTimeScale { get => Get<bool>(__m_bAffectedByRushMovementTimeScale); set => Set(__m_bAffectedByRushMovementTimeScale, value); }
+
 		private static readonly SchemaField __m_bCollectNearbyTargetsWithCone = new("CitadelAbilityVData", "m_bCollectNearbyTargetsWithCone");
 		/// <summary><c>bool</c>. When true, the cone collects nearby targets as well, helpful for melee attacks.</summary>
 		public bool m_bCollectNearbyTargetsWithCone { get => Get<bool>(__m_bCollectNearbyTargetsWithCone); set => Set(__m_bCollectNearbyTargetsWithCone, value); }
@@ -273,6 +277,10 @@ public static partial class Schema {
 		/// <summary><c>CUtlOrderedMap&lt;CSubclassName, AbilityDependencyDescription_t&gt;</c>. No typed mapping yet: read it through its address.</summary>
 		public RawField m_mapDependentAbilities => Raw(__m_mapDependentAbilities, "CUtlOrderedMap<CSubclassName, AbilityDependencyDescription_t>");
 
+		private static readonly SchemaField __m_mapProjectileInfos = new("CitadelAbilityVData", "m_mapProjectileInfos");
+		/// <summary><c>CUtlOrderedMap&lt;CGlobalSymbol, CEmbeddedSubclassGeneric&gt;</c>. Projectile infos keyed by context. The "primary" context is what GetProjectileInfoVData() returns by default. No typed mapping yet: read it through its address.</summary>
+		public RawField m_mapProjectileInfos => Raw(__m_mapProjectileInfos, "CUtlOrderedMap<CGlobalSymbol, CEmbeddedSubclassGeneric>");
+
 		private static readonly SchemaField __m_mapWeaponInfos = new("CitadelAbilityVData", "m_mapWeaponInfos");
 		/// <summary><c>CUtlOrderedMap&lt;CGlobalSymbol, CCitadelWeaponInfo&gt;</c>. Weapon infos keyed by context. The "primary" context is what GetWeaponInfoVData() returns by default.</summary>
 		public SchemaDict<CCitadelWeaponInfo> m_mapWeaponInfos => new(this, __m_mapWeaponInfos);
@@ -296,10 +304,6 @@ public static partial class Schema {
 		private static readonly SchemaField __m_previewParticle = new("CitadelAbilityVData", "m_previewParticle");
 		/// <summary><c>CResourceNameTyped&lt;CWeakHandle&lt;InfoForResourceTypeIParticleSystemDefinition&gt;&gt;</c>. Preview particle attaching to the caster before cast.</summary>
 		public string m_previewParticle => GetBufferString(__m_previewParticle);
-
-		private static readonly SchemaField __m_projectileInfo = new("CitadelAbilityVData", "m_projectileInfo");
-		/// <summary><c>ProjectileInfo_t</c>. Projectile Info.</summary>
-		public ProjectileInfo_t m_projectileInfo => Embedded<ProjectileInfo_t>(__m_projectileInfo);
 
 		private static readonly SchemaField __m_sCustomStackLabel = new("CitadelAbilityVData", "m_sCustomStackLabel");
 		/// <summary><c>CUtlString</c>. Custom Stacks Label.</summary>

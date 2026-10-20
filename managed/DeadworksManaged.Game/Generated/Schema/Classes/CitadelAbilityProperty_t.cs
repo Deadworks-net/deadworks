@@ -61,6 +61,10 @@ public static partial class Schema {
 		/// <summary><c>StatsUsageFlags_t</c>.</summary>
 		public StatsUsageFlags_t m_eStatsUsageFlags { get => Get<StatsUsageFlags_t>(__m_eStatsUsageFlags); set => Set(__m_eStatsUsageFlags, value); }
 
+		private static readonly SchemaField __m_nMaxDecimalsDisplayed = new("CitadelAbilityProperty_t", "m_nMaxDecimalsDisplayed");
+		/// <summary><c>int32</c>. Overrides the max decimal places shown for this property. -1 uses the display type's precision.</summary>
+		public int m_nMaxDecimalsDisplayed { get => Get<int>(__m_nMaxDecimalsDisplayed); set => Set(__m_nMaxDecimalsDisplayed, value); }
+
 		private static readonly SchemaField __m_nRequiredUpgradeBits = new("CitadelAbilityProperty_t", "m_nRequiredUpgradeBits");
 		/// <summary><c>AbilityUpgradeBits_t</c>. If we don't have these bits always return 0. Otherwise, returns a real value.</summary>
 		public AbilityUpgradeBits_t m_nRequiredUpgradeBits { get => Get<AbilityUpgradeBits_t>(__m_nRequiredUpgradeBits); set => Set(__m_nRequiredUpgradeBits, value); }

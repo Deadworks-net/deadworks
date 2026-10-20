@@ -329,6 +329,8 @@ public static class SubclassNames {
 	public const string npc_neutral_hideout_rabbit = "npc_neutral_hideout_rabbit";
 	/// <summary>A <c>npc_neutral_sinners_sacrifice_hideout</c>, from <c>scripts/npc_units.vdata</c>.</summary>
 	public const string npc_neutral_sinners_sacrifice_hideout = "npc_neutral_sinners_sacrifice_hideout";
+	/// <summary>A <c>npc_nurse_leech</c>, from <c>scripts/npc_units.vdata</c>.</summary>
+	public const string npc_nurse_leech = "npc_nurse_leech";
 	/// <summary>A <c>npc_player_bot_brain</c>, from <c>scripts/npc_units.vdata</c>.</summary>
 	public const string npc_player_bot_brain = "npc_player_bot_brain";
 	/// <summary>A <c>npc_ratking_rat</c>, from <c>scripts/npc_units.vdata</c>.</summary>

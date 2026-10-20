@@ -13,10 +13,6 @@ public static partial class Schema {
 		static CitadelAbilityProjectileVolumeTouchInfo_t ISchemaClass<CitadelAbilityProjectileVolumeTouchInfo_t>.New() => new();
 		static string ISchemaClass<CitadelAbilityProjectileVolumeTouchInfo_t>.NativeName => "CitadelAbilityProjectileVolumeTouchInfo_t";
 
-		private static readonly SchemaField __m_bIsProjectileAsBullet = new("CitadelAbilityProjectileVolumeTouchInfo_t", "m_bIsProjectileAsBullet");
-		/// <summary><c>bool</c>.</summary>
-		public bool m_bIsProjectileAsBullet { get => Get<bool>(__m_bIsProjectileAsBullet); set => Set(__m_bIsProjectileAsBullet, value); }
-
 		private static readonly SchemaField __m_pBullet = new("CitadelAbilityProjectileVolumeTouchInfo_t", "m_pBullet");
 		/// <summary><c>CCitadel_Bullet_Base*</c>. No typed mapping yet: read it through its address.</summary>
 		public RawField m_pBullet => Raw(__m_pBullet, "CCitadel_Bullet_Base*");

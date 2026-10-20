@@ -17,6 +17,14 @@ public static partial class Schema {
 		/// <summary><c>bool</c>.</summary>
 		public bool m_bInCheckState { get => Get<bool>(__m_bInCheckState); set => Set(__m_bInCheckState, value); }
 
+		private static readonly SchemaField __m_nPlayerShieldFXIndex = new("CCitadel_Modifier_Unstoppable", "m_nPlayerShieldFXIndex");
+		/// <summary><c>ParticleIndex_t</c>.</summary>
+		public int m_nPlayerShieldFXIndex { get => Get<int>(__m_nPlayerShieldFXIndex); set => Set(__m_nPlayerShieldFXIndex, value); }
+
+		private static readonly SchemaField __m_nShieldFXIndex = new("CCitadel_Modifier_Unstoppable", "m_nShieldFXIndex");
+		/// <summary><c>ParticleIndex_t</c>.</summary>
+		public int m_nShieldFXIndex { get => Get<int>(__m_nShieldFXIndex); set => Set(__m_nShieldFXIndex, value); }
+
 		/// <summary>The data entry this was created from, as <see cref="CCitadel_Modifier_UnstoppableVData"/>, or null if it has none.</summary>
 		public new CCitadel_Modifier_UnstoppableVData? VData => ModifierData<CCitadel_Modifier_UnstoppableVData>();
 	}

@@ -49,6 +49,10 @@ public static partial class Schema {
 		/// <summary><c>float32</c>.</summary>
 		public float m_flAdditionalTraceDistance { get => Get<float>(__m_flAdditionalTraceDistance); set => Set(__m_flAdditionalTraceDistance, value); }
 
+		private static readonly SchemaField __m_flBlockerExtent = new("CCitadel_Ability_Artist_PullBrushVData", "m_flBlockerExtent");
+		/// <summary><c>float32</c>.</summary>
+		public float m_flBlockerExtent { get => Get<float>(__m_flBlockerExtent); set => Set(__m_flBlockerExtent, value); }
+
 		private static readonly SchemaField __m_flDragDamp = new("CCitadel_Ability_Artist_PullBrushVData", "m_flDragDamp");
 		/// <summary><c>float32</c>.</summary>
 		public float m_flDragDamp { get => Get<float>(__m_flDragDamp); set => Set(__m_flDragDamp, value); }

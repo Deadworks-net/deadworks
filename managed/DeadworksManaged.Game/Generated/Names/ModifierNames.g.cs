@@ -739,6 +739,40 @@ public static class ModifierNames {
 	public const string ability_necro_zombiewall__tether = "ability_necro_zombiewall/tether";
 	/// <summary>Class <c>modifier_zombiewall_ground_aura</c>.</summary>
 	public const string ability_necro_zombiewall__zombiewall = "ability_necro_zombiewall/zombiewall";
+	/// <summary>Class <c>modifier_nurse_adrenaline_rush_buff</c>.</summary>
+	public const string ability_nurse_adrenaline_rush__modifier_nurse_adrenaline_rush_buff = "ability_nurse_adrenaline_rush/modifier_nurse_adrenaline_rush_buff";
+	/// <summary>Class <c>modifier_nurse_adrenaline_rush_crash</c>.</summary>
+	public const string ability_nurse_adrenaline_rush__modifier_nurse_adrenaline_rush_crash = "ability_nurse_adrenaline_rush/modifier_nurse_adrenaline_rush_crash";
+	/// <summary>Class <c>modifier_base</c>.</summary>
+	public const string ability_nurse_fear__castdelay = "ability_nurse_fear/castdelay";
+	/// <summary>Class <c>modifier_citadel_nurse_fear_debuff</c>.</summary>
+	public const string ability_nurse_fear__modifier_citadel_nurse_fear_debuff = "ability_nurse_fear/modifier_citadel_nurse_fear_debuff";
+	/// <summary>Class <c>modifier_cone_wave_projectile</c>.</summary>
+	public const string ability_nurse_fear__modifier_cone_wave_projectile = "ability_nurse_fear/modifier_cone_wave_projectile";
+	/// <summary>Class <c>modifier_nurse_fear_buildup</c>.</summary>
+	public const string ability_nurse_fear__modifier_nurse_fear_buildup = "ability_nurse_fear/modifier_nurse_fear_buildup";
+	/// <summary>Class <c>modifier_citadel_nurse_gaze</c>.</summary>
+	public const string ability_nurse_fear__modifier_nurse_fear_gaze = "ability_nurse_fear/modifier_nurse_fear_gaze";
+	/// <summary>Class <c>modifier_slow_base</c>.</summary>
+	public const string ability_nurse_fear__modifier_nurse_fear_slow = "ability_nurse_fear/modifier_nurse_fear_slow";
+	/// <summary>Class <c>modifier_base</c>.</summary>
+	public const string ability_nurse_fear__nurse_fear_immunity = "ability_nurse_fear/nurse_fear_immunity";
+	/// <summary>Class <c>modifier_nurse_healing_needles_buff</c>.</summary>
+	public const string ability_nurse_healing_needles__modifier_nurse_healing_needles_buff = "ability_nurse_healing_needles/modifier_nurse_healing_needles_buff";
+	/// <summary>Class <c>modifier_nurse_healing_needles_equipped</c>.</summary>
+	public const string ability_nurse_healing_needles__modifier_nurse_healing_needles_equipped = "ability_nurse_healing_needles/modifier_nurse_healing_needles_equipped";
+	/// <summary>Class <c>modifier_citadel_base_buildup</c>.</summary>
+	public const string ability_nurse_healing_needles__modifier_nurse_lifeforce_buildup = "ability_nurse_healing_needles/modifier_nurse_lifeforce_buildup";
+	/// <summary>Class <c>modifier_base</c>.</summary>
+	public const string ability_nurse_healing_needles__modifier_nurse_lifeforce_proc = "ability_nurse_healing_needles/modifier_nurse_lifeforce_proc";
+	/// <summary>Class <c>modifier_nurse_leech_therapy_ally</c>.</summary>
+	public const string ability_nurse_leech_therapy__modifier_nurse_leech_therapy_ally = "ability_nurse_leech_therapy/modifier_nurse_leech_therapy_ally";
+	/// <summary>Class <c>modifier_base</c>.</summary>
+	public const string ability_nurse_leech_therapy__modifier_nurse_leech_therapy_eating_buffs = "ability_nurse_leech_therapy/modifier_nurse_leech_therapy_eating_buffs";
+	/// <summary>Class <c>modifier_nurse_leech_therapy_stack_bonus</c>.</summary>
+	public const string ability_nurse_leech_therapy__modifier_nurse_leech_therapy_stack_bonus = "ability_nurse_leech_therapy/modifier_nurse_leech_therapy_stack_bonus";
+	/// <summary>Class <c>modifier_nurse_leech_therapy_target</c>.</summary>
+	public const string ability_nurse_leech_therapy__modifier_nurse_leech_therapy_target = "ability_nurse_leech_therapy/modifier_nurse_leech_therapy_target";
 	/// <summary>Class <c>modifier_perched_predator_drag</c>.</summary>
 	public const string ability_perched_predator__modifier_perched_predator_drag = "ability_perched_predator/modifier_perched_predator_drag";
 	/// <summary>Class <c>modifier_air_raid</c>.</summary>

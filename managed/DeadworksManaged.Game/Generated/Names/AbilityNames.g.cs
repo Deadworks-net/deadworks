@@ -328,6 +328,8 @@ public static class AbilityNames {
 	/// <summary>Melee. Melee.</summary>
 	public const string ability_melee_necro = "ability_melee_necro";
 	/// <summary>Melee. Melee.</summary>
+	public const string ability_melee_nurse = "ability_melee_nurse";
+	/// <summary>Melee. Melee.</summary>
 	public const string ability_melee_opera = "ability_melee_opera";
 	/// <summary>Melee. Melee.</summary>
 	public const string ability_melee_priest = "ability_melee_priest";
@@ -401,6 +403,14 @@ public static class AbilityNames {
 	public const string ability_necro_zombiewall = "ability_necro_zombiewall";
 	/// <summary>Signature.</summary>
 	public const string ability_npc_shield = "ability_npc_shield";
+	/// <summary>Wretched Vapors. Signature.</summary>
+	public const string ability_nurse_adrenaline_rush = "ability_nurse_adrenaline_rush";
+	/// <summary>Lurking Terrors. Ultimate.</summary>
+	public const string ability_nurse_fear = "ability_nurse_fear";
+	/// <summary>Healing Needles. Signature.</summary>
+	public const string ability_nurse_healing_needles = "ability_nurse_healing_needles";
+	/// <summary>Leech Therapy. Signature.</summary>
+	public const string ability_nurse_leech_therapy = "ability_nurse_leech_therapy";
 	/// <summary>Signature.</summary>
 	public const string ability_opera_ability01 = "ability_opera_ability01";
 	/// <summary>Signature.</summary>
@@ -897,6 +907,10 @@ public static class AbilityNames {
 	public const string citadel_weapon_nano_set = "citadel_weapon_nano_set";
 	/// <summary>The Teacher. Weapon.</summary>
 	public const string citadel_weapon_necro_set = "citadel_weapon_necro_set";
+	/// <summary>Weapon.</summary>
+	public const string citadel_weapon_nurse_healing_needles = "citadel_weapon_nurse_healing_needles";
+	/// <summary>Code Blue. Weapon.</summary>
+	public const string citadel_weapon_nurse_set = "citadel_weapon_nurse_set";
 	/// <summary>Opera Gun. Weapon.</summary>
 	public const string citadel_weapon_opera_set = "citadel_weapon_opera_set";
 	/// <summary>Umbrella Gun. Weapon.</summary>

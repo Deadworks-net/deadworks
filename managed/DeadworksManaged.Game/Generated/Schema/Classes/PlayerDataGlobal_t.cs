@@ -53,6 +53,10 @@ public static partial class Schema {
 		/// <summary><c>GameTime_t</c>. Networked: a write is sent to clients.</summary>
 		public GameTime m_flUltimateCooldownStart { get => Get<GameTime>(__m_flUltimateCooldownStart); set => Set(__m_flUltimateCooldownStart, value); }
 
+		private static readonly SchemaField __m_flUltimateStoppedCooldownRemaining = new("PlayerDataGlobal_t", "m_flUltimateStoppedCooldownRemaining");
+		/// <summary><c>float32</c>. Networked: a write is sent to clients.</summary>
+		public float m_flUltimateStoppedCooldownRemaining { get => Get<float>(__m_flUltimateStoppedCooldownRemaining); set => Set(__m_flUltimateStoppedCooldownRemaining, value); }
+
 		private static readonly SchemaField __m_iAPNetWorth = new("PlayerDataGlobal_t", "m_iAPNetWorth");
 		/// <summary><c>int32</c>. Networked: a write is sent to clients. Wrapped by <c>PlayerDataGlobal.APNetWorth</c> in DeadworksManaged.Api.</summary>
 		public int m_iAPNetWorth { get => Get<int>(__m_iAPNetWorth); set => Set(__m_iAPNetWorth, value); }

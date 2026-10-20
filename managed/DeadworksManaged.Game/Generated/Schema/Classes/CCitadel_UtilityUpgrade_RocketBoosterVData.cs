@@ -41,6 +41,22 @@ public static partial class Schema {
 		/// <summary><c>CSoundEventName</c>.</summary>
 		public string m_LandingSound => GetBufferString(__m_LandingSound);
 
+		private static readonly SchemaField __m_VelocityPitchScaleMax = new("CCitadel_UtilityUpgrade_RocketBoosterVData", "m_VelocityPitchScaleMax");
+		/// <summary><c>float32</c>.</summary>
+		public float m_VelocityPitchScaleMax { get => Get<float>(__m_VelocityPitchScaleMax); set => Set(__m_VelocityPitchScaleMax, value); }
+
+		private static readonly SchemaField __m_VelocityPitchScaleMin = new("CCitadel_UtilityUpgrade_RocketBoosterVData", "m_VelocityPitchScaleMin");
+		/// <summary><c>float32</c>.</summary>
+		public float m_VelocityPitchScaleMin { get => Get<float>(__m_VelocityPitchScaleMin); set => Set(__m_VelocityPitchScaleMin, value); }
+
+		private static readonly SchemaField __m_VelocityVolScaleMax = new("CCitadel_UtilityUpgrade_RocketBoosterVData", "m_VelocityVolScaleMax");
+		/// <summary><c>float32</c>.</summary>
+		public float m_VelocityVolScaleMax { get => Get<float>(__m_VelocityVolScaleMax); set => Set(__m_VelocityVolScaleMax, value); }
+
+		private static readonly SchemaField __m_VelocityVolScaleMin = new("CCitadel_UtilityUpgrade_RocketBoosterVData", "m_VelocityVolScaleMin");
+		/// <summary><c>float32</c>.</summary>
+		public float m_VelocityVolScaleMin { get => Get<float>(__m_VelocityVolScaleMin); set => Set(__m_VelocityVolScaleMin, value); }
+
 		private static readonly SchemaField __m_flSlamEnabledTime = new("CCitadel_UtilityUpgrade_RocketBoosterVData", "m_flSlamEnabledTime");
 		/// <summary><c>float32</c>.</summary>
 		public float m_flSlamEnabledTime { get => Get<float>(__m_flSlamEnabledTime); set => Set(__m_flSlamEnabledTime, value); }

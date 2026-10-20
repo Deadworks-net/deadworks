@@ -926,6 +926,8 @@ public static class ConVars {
 	public static readonly GameConVar<float> citadel_crosshair_out_of_range_dist = new("citadel_crosshair_out_of_range_dist");
 	/// <summary>Default <c>False</c>. Flags: cheat, release, replicated, gamedll, clientdll.</summary>
 	public static readonly GameConVar<bool> citadel_deadpack_instant_shot = new("citadel_deadpack_instant_shot");
+	/// <summary>Experimental: the ultimate charge follows a server-side NavSpace path to its target, and the client stops predicting it. Default <c>True</c>. Flags: cheat, release, replicated, gamedll, clientdll.</summary>
+	public static readonly GameConVar<bool> citadel_deadpack_ult_charge_navpath = new("citadel_deadpack_ult_charge_navpath");
 	/// <summary>How logn does the player icon linger on the minimap after they die. Default <c>3</c>. Flags: developmentonly, gamedll.</summary>
 	public static readonly GameConVar<float> citadel_death_linger_time = new("citadel_death_linger_time");
 	/// <summary>Default <c>False</c>. Flags: release, replicated, gamedll, clientdll.</summary>
@@ -3184,6 +3186,8 @@ public static class ConVars {
 	public static readonly GameConVar<int> lb_debug_visualize_fog_shadowed_lights = new("lb_debug_visualize_fog_shadowed_lights");
 	/// <summary>SceneSystem/LightBinner/Debug Visualize Lights. Default <c>0</c>. Flags: cheat, developmentonly, gameinfo_cannot_override, menubar_item.</summary>
 	public static readonly GameConVar<int> lb_debug_visualize_lights = new("lb_debug_visualize_lights");
+	/// <summary>SceneSystem/LightBinner/Debug Visualize Precomputed Shadow Atlas Lights. Default <c>False</c>. Flags: cheat, developmentonly, gameinfo_cannot_override, menubar_item.</summary>
+	public static readonly GameConVar<bool> lb_debug_visualize_precomputed_shadow_atlas_lights = new("lb_debug_visualize_precomputed_shadow_atlas_lights");
 	/// <summary>Default <c>False</c>. Flags: cheat, developmentonly, gameinfo_cannot_override.</summary>
 	public static readonly GameConVar<bool> lb_debug_visualize_shadowed_light_details = new("lb_debug_visualize_shadowed_light_details");
 	/// <summary>SceneSystem/LightBinner/Debug Visualize Shadowed Lights. Default <c>0</c>. Flags: cheat, developmentonly, gameinfo_cannot_override, menubar_item.</summary>
