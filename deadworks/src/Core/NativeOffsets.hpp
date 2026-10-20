@@ -31,8 +31,8 @@ constexpr uintptr_t kHeroDefMgrAnchor_GetManagerCall = 0xE;
 constexpr uintptr_t kServerGCSystem_MaxUptimeShutdownTime = 0x430;
 
 // CCitadelGameRules::BuildGameSessionManifest
-constexpr uintptr_t kBGSM_PrecacheGlobalLea = 0x389;
-constexpr uintptr_t kBGSM_PrecacheCall = 0x394;
+constexpr uintptr_t kBGSM_PrecacheGlobalLea = 0x377;
+constexpr uintptr_t kBGSM_PrecacheCall = 0x382;
 
 } // namespace deadworks::offsets
 
