@@ -3,7 +3,7 @@ using System.Runtime.InteropServices;
 
 namespace DeadworksManaged.Api;
 
-/// <summary>How a path gets to a waypoint, so something steering along it knows when walking isn't enough.</summary>
+/// <summary>How a path reaches a waypoint.</summary>
 public enum NavTraverse {
 	/// <summary>Walk.</summary>
 	Ground,
@@ -40,16 +40,15 @@ public sealed class NavPath {
 }
 
 /// <summary>
-/// Walks something along a <see cref="NavPath"/>: call <see cref="Update"/> with the current position every
-/// tick and steer towards what it returns. For a bot hero, pass that to <see cref="Bots.SetMoveInput"/>.
+/// Tracks progress along a <see cref="NavPath"/>. Call <see cref="Update"/> with the current position each tick
+/// and steer towards the result, for a bot hero with <see cref="Bots.SetMoveInput"/>.
 /// </summary>
 /// <remarks>
-/// A waypoint counts as reached once the walker is within <see cref="ArriveRadius"/> of it on the ground plane,
-/// or has gone past it towards the next one. The follower doesn't re-path: when the walker is pushed far off the
-/// route (<see cref="DistanceFromPath"/>), find a new path.
+/// A waypoint is reached within <see cref="ArriveRadius"/> on the ground plane, or once passed. The follower does
+/// not re-path; find a new path when <see cref="DistanceFromPath"/> grows large.
 /// </remarks>
 public sealed class NavPathFollower {
-	/// <param name="path">The path to follow, usually a simplified one from <see cref="Nav.FindPath(Vector3, Vector3, int, bool, bool)"/>.</param>
+	/// <param name="path">The path to follow.</param>
 	/// <param name="arriveRadius">How close counts as reaching a waypoint, in units.</param>
 	public NavPathFollower(NavPath path, float arriveRadius = 40f) {
 		Path = path;
@@ -72,10 +71,7 @@ public sealed class NavPathFollower {
 	/// <summary>The waypoint being headed for, or null once finished.</summary>
 	public NavWaypoint? Target => IsFinished ? null : Path.Waypoints[Index];
 
-	/// <summary>
-	/// Moves on past every waypoint <paramref name="position"/> has reached and returns where to head next,
-	/// or null once the end is reached.
-	/// </summary>
+	/// <summary>Advances past reached waypoints and returns the next one, or null at the end.</summary>
 	public Vector3? Update(Vector3 position) {
 		var waypoints = Path.Waypoints;
 		while (Index < waypoints.Count) {
@@ -97,10 +93,7 @@ public sealed class NavPathFollower {
 		return null;
 	}
 
-	/// <summary>
-	/// Whether to jump now: the waypoint ahead is reached by jumping or climbing, is more than a step above
-	/// <paramref name="position"/>, and is close.
-	/// </summary>
+	/// <summary>True when the next waypoint is close, more than a step up, and reached by jumping or climbing.</summary>
 	public bool ShouldJump(Vector3 position, float within = 160f) {
 		if (Target is not { } target || target.Traverse is not (NavTraverse.Jump or NavTraverse.Climb))
 			return false;
@@ -172,14 +165,11 @@ public enum NavAreaFlags : uint {
 public readonly record struct NavArea(int Id, Vector3 Center, Vector3 NearestPoint, NavAreaAttributes Attributes,
 	NavAreaFlags Flags, int Hull, bool IsBlocked);
 
-/// <summary>
-/// Queries on the map's navigation mesh, the walkable surface NPCs path over. Everything here runs the game's
-/// own navmesh code and needs no NPC.
-/// </summary>
+/// <summary>Queries on the navmesh, the walkable surface NPCs path over. No NPC is needed.</summary>
 /// <remarks>
-/// The navmesh is generated per <i>hull</i>, a size class: an area a small hull can cross may not exist for
-/// a larger one. Heroes and bots use hull 0 and lane troopers hull 1; <see cref="GetHull"/> reads it from an
-/// entity. Out-of-range hulls are treated as hull 0. A map without a navmesh answers every query with null.
+/// The navmesh is generated per hull, a body size: an area one hull crosses may not exist for another. Heroes use
+/// hull 0, lane troopers hull 1. Out-of-range hulls are treated as hull 0. Without a navmesh every query returns
+/// null.
 /// </remarks>
 public static unsafe class Nav {
 	private static readonly SchemaAccessor<uint> _navHullIdx = new("CBaseCombatCharacter"u8, "m_nNavHullIdx"u8);
@@ -201,16 +191,11 @@ public static unsafe class Nav {
 	}
 
 	/// <summary>
-	/// Finds the closest point on the navmesh to <paramref name="position"/>, the same way NPCs snap a goal onto
-	/// the navmesh before they path to it. Returns null when nothing is in range.
+	/// Returns the closest point on the navmesh to <paramref name="position"/>, or null if none is in range. NPCs
+	/// snap their goals the same way.
 	/// </summary>
-	/// <remarks>
-	/// Use it before <see cref="CAI_BaseNPC.MoveTo"/> or <see cref="FindPath(Vector3, Vector3, int, bool, bool)"/>
-	/// when a point might not be walkable, for example one offset from a player, which can land inside a wall
-	/// or off a ledge. A query costs a few microseconds.
-	/// </remarks>
 	/// <param name="position">The point to snap.</param>
-	/// <param name="maxDistance">How far to search, in units. 10000 is what the game's NPCs use.</param>
+	/// <param name="maxDistance">How far to search. NPCs use 10000.</param>
 	/// <param name="hull">The navmesh hull to search.</param>
 	public static Vector3? GetNearestPoint(Vector3 position, float maxDistance = 10000f, int hull = 0) {
 		float* pos = stackalloc float[3] { position.X, position.Y, position.Z };
@@ -220,17 +205,11 @@ public static unsafe class Nav {
 		return new Vector3(result[0], result[1], result[2]);
 	}
 
-	/// <summary>
-	/// <see cref="GetNearestPoint(Vector3, float, int)"/> on the hull <paramref name="walker"/> paths with, so the
-	/// point is one that NPC or hero fits through.
-	/// </summary>
+	/// <summary><see cref="GetNearestPoint(Vector3, float, int)"/> on <paramref name="walker"/>'s hull.</summary>
 	public static Vector3? GetNearestPoint(Vector3 position, CBaseEntity walker, float maxDistance = 10000f) =>
 		GetNearestPoint(position, maxDistance, GetHull(walker));
 
-	/// <summary>
-	/// The nav area nearest to <paramref name="position"/>: what it allows (jumping, crouch height...), whether
-	/// it is blocked, and where it is. Returns null when nothing is in range.
-	/// </summary>
+	/// <summary>Returns the nav area nearest <paramref name="position"/>, or null if none is in range.</summary>
 	public static NavArea? GetArea(Vector3 position, float maxDistance = 200f, int hull = 0) {
 		float* pos = stackalloc float[3] { position.X, position.Y, position.Z };
 		NavAreaInfo info;
@@ -241,13 +220,10 @@ public static unsafe class Nav {
 	}
 
 	/// <summary>
-	/// The height of the navmesh at <paramref name="position"/>'s x and y, on the nav area nearest to it.
-	/// Returns null when no area is in range.
+	/// Returns the navmesh height at <paramref name="position"/>'s x and y, on the nearest area, or null if none is
+	/// in range.
 	/// </summary>
-	/// <remarks>
-	/// "Nearest" is measured in 3D, so pass a position close to the floor you mean: under a bridge, a point at
-	/// bridge height gives the bridge.
-	/// </remarks>
+	/// <remarks>The nearest area is measured in 3D: under a bridge, a point at bridge height gives the bridge.</remarks>
 	public static float? GetGroundHeight(Vector3 position, float maxDistance = 1000f, int hull = 0) {
 		float* pos = stackalloc float[3] { position.X, position.Y, position.Z };
 		float z;
@@ -255,19 +231,16 @@ public static unsafe class Nav {
 	}
 
 	/// <summary>
-	/// Walks a straight line across the navmesh from <paramref name="start"/> towards <paramref name="end"/>.
-	/// Returns true if it gets there without leaving the walkable surface, so something of that hull can
-	/// walk the line directly.
+	/// Traces a straight line along the navmesh from <paramref name="start"/> to <paramref name="end"/>. Returns true
+	/// if it stays on the walkable surface.
 	/// </summary>
 	/// <remarks>
-	/// It follows the mesh, not the air above it, and steps or drops of more than 20 units stop it; it does
-	/// not see nav blockers. A start more than 200 units from the navmesh fails. Cheaper than
-	/// <see cref="FindPath(Vector3, Vector3, int, bool, bool)"/>, so it is the way to check whether a path is
-	/// needed at all.
+	/// Steps or drops of more than 20 units stop it. Nav blockers do not. A start more than 200 units from the
+	/// navmesh fails. Cheaper than <see cref="FindPath(Vector3, Vector3, int, bool, bool)"/>.
 	/// </remarks>
 	/// <param name="start">Where the line starts. Moved onto the navmesh first.</param>
 	/// <param name="end">Where it should reach.</param>
-	/// <param name="stoppedAt">Where the line stopped: <paramref name="end"/> on the mesh, or the edge it ran into.</param>
+	/// <param name="stoppedAt"><paramref name="end"/> on the mesh, or the edge the line ran into.</param>
 	/// <param name="hull">The navmesh hull to test.</param>
 	public static bool Raycast(Vector3 start, Vector3 end, out Vector3 stoppedAt, int hull = 0) {
 		float* from = stackalloc float[3] { start.X, start.Y, start.Z };
@@ -280,14 +253,10 @@ public static unsafe class Nav {
 	}
 
 	/// <summary>
-	/// Picks a random point that can be walked to from <paramref name="origin"/>, between
-	/// <paramref name="minDistance"/> and <paramref name="maxDistance"/> units away. Returns null when there is
-	/// none. For wandering, patrols and spawn points.
+	/// Returns a random point reachable from <paramref name="origin"/>, between <paramref name="minDistance"/> and
+	/// <paramref name="maxDistance"/> away, or null if there is none.
 	/// </summary>
-	/// <remarks>
-	/// The search floods the navmesh out to <paramref name="maxDistance"/>, so its cost grows with it; values
-	/// above 6000 are treated as 6000.
-	/// </remarks>
+	/// <remarks>Cost grows with <paramref name="maxDistance"/>, which is capped at 6000.</remarks>
 	public static Vector3? GetRandomPoint(Vector3 origin, float minDistance, float maxDistance, int hull = 0) {
 		float* from = stackalloc float[3] { origin.X, origin.Y, origin.Z };
 		float* result = stackalloc float[3];
@@ -297,37 +266,19 @@ public static unsafe class Nav {
 	}
 
 	/// <summary>
-	/// Finds a walkable path from <paramref name="start"/> to <paramref name="goal"/> with the game's own
-	/// navmesh pathfinder. Returns null when there is no path.
+	/// Finds a path from <paramref name="start"/> to <paramref name="goal"/> with the game's pathfinder. Returns null
+	/// if there is none.
 	/// </summary>
 	/// <remarks>
-	/// <para>
-	/// Both ends must be on the navmesh: a start in the air, for example, finds no path. Snap a point that
-	/// might be off it with <see cref="GetNearestPoint(Vector3, float, int)"/> first. Hulls differ in where they
-	/// can go: a point the trooper hull can't reach may be reachable on hull 0.
-	/// </para>
-	/// <para>
-	/// A query takes about a millisecond for a path across half the map and about three when it searches the
-	/// whole map and fails, so don't run one per bot every tick; path once and re-path when the goal moves.
-	/// A path has at most <see cref="MaxPathPoints"/> waypoints.
-	/// </para>
-	/// <para>
-	/// The path uses the default path cost for the hull, so it ignores things only a particular NPC cares
-	/// about, such as a trooper's lane. Use it to steer something yourself or to measure walking distance; to
-	/// move an NPC or a bot, <see cref="CAI_BaseNPC.MoveTo"/> already paths for it.
-	/// </para>
+	/// Both ends must be on the navmesh; snap them with <see cref="GetNearestPoint(Vector3, float, int)"/>. A path
+	/// across half the map takes about 1 ms, a failed search of the whole map about 3 ms. The path uses the hull's
+	/// default cost, so it ignores NPC-specific rules such as a trooper's lane.
 	/// </remarks>
 	/// <param name="start">Where the path starts.</param>
 	/// <param name="goal">Where it should end.</param>
 	/// <param name="hull">The navmesh hull to path for.</param>
-	/// <param name="allowPartial">
-	/// Also accept a path that stops short of the goal, as far as the pathfinder got towards it. Compare
-	/// <see cref="NavPath.End"/> with the goal to tell.
-	/// </param>
-	/// <param name="simplify">
-	/// Run the game's path optimizer, which keeps only the corners: each waypoint can be walked to in a
-	/// straight line from the one before. Without it there is a waypoint for every nav area the path crosses.
-	/// </param>
+	/// <param name="allowPartial">Accept a path that stops short of the goal. Compare <see cref="NavPath.End"/> with the goal.</param>
+	/// <param name="simplify">Keep only the corners. Otherwise there is a waypoint per area crossed.</param>
 	public static NavPath? FindPath(Vector3 start, Vector3 goal, int hull = 0, bool allowPartial = false, bool simplify = true) {
 		float* from = stackalloc float[3] { start.X, start.Y, start.Z };
 		float* to = stackalloc float[3] { goal.X, goal.Y, goal.Z };
@@ -349,24 +300,19 @@ public static unsafe class Nav {
 		return new NavPath(waypoints.ToArray());
 	}
 
-	/// <summary>
-	/// <see cref="FindPath(Vector3, Vector3, int, bool, bool)"/> on the hull <paramref name="walker"/> paths
-	/// with, so the path is one that NPC or hero fits through.
-	/// </summary>
+	/// <summary><see cref="FindPath(Vector3, Vector3, int, bool, bool)"/> on <paramref name="walker"/>'s hull.</summary>
 	public static NavPath? FindPath(Vector3 start, Vector3 goal, CBaseEntity walker, bool allowPartial = false, bool simplify = true) =>
 		FindPath(start, goal, GetHull(walker), allowPartial, simplify);
 
 	/// <summary>
-	/// Blocks a box of the navmesh by spawning the game's own <c>script_nav_blocker</c> entity: NPCs path around
-	/// it and <see cref="FindPath(Vector3, Vector3, int, bool, bool)"/> routes around it. Remove the returned
-	/// entity to open the area again. Returns null if the entity could not be created.
+	/// Blocks a box of the navmesh with a <c>script_nav_blocker</c>. NPCs and
+	/// <see cref="FindPath(Vector3, Vector3, int, bool, bool)"/> route around it. Remove the returned entity to
+	/// unblock. Returns null if it could not be created.
 	/// </summary>
-	/// <remarks>
-	/// The navmesh updates a moment after the spawn, not within the same call.
-	/// </remarks>
+	/// <remarks>The navmesh updates a moment after the call.</remarks>
 	/// <param name="center">The middle of the box.</param>
 	/// <param name="halfExtents">Half the box's size along each axis, before <paramref name="angles"/>.</param>
-	/// <param name="angles">The box's rotation (pitch, yaw, roll). Null leaves it axis-aligned.</param>
+	/// <param name="angles">Pitch, yaw, roll. Null is axis-aligned.</param>
 	/// <param name="team">The only team to block, or 0 to block everyone.</param>
 	public static CBaseEntity? CreateBlocker(Vector3 center, Vector3 halfExtents, Vector3? angles = null, int team = 0) {
 		var blocker = CBaseEntity.CreateByDesignerName("script_nav_blocker");
@@ -383,9 +329,7 @@ public static unsafe class Nav {
 		return blocker;
 	}
 
-	/// <summary>
-	/// The navmesh hull an NPC or hero paths with (<c>m_nNavHullIdx</c>), or 0 for other entities.
-	/// </summary>
+	/// <summary>Returns the hull an NPC or hero paths with, or 0 for other entities.</summary>
 	public static int GetHull(CBaseEntity entity) =>
 		entity.Is<CAI_BaseNPC>() || entity.Is<CCitadelPlayerPawn>() || entity.Is<CBasePlayerPawn>()
 			? (int)_navHullIdx.Get(entity.Handle) : 0;

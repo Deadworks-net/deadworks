@@ -2,38 +2,25 @@ using System.Numerics;
 
 namespace DeadworksManaged.Api;
 
-/// <summary>
-/// Bot heroes: fake clients with a hero, a bot object and a brain (<see cref="CCitadelPlayerBotNPCBrain"/>).
-/// </summary>
+/// <summary>Bot heroes: fake clients with a hero and a brain (<see cref="CCitadelPlayerBotNPCBrain"/>).</summary>
 /// <remarks>
-/// Add one with <see cref="Add"/>, which goes through the game's own bot creation: the hero is loaded, the bot
-/// AI attached and a lane picked the way practice bots get theirs. A fake client from
-/// <see cref="Server.CreateFakeClient"/> also gets bot AI attached, but no hero until a plugin gives it one.
+/// A fake client from <see cref="Server.CreateFakeClient"/> also gets a brain, but no hero until a plugin gives it one.
 /// </remarks>
 public static unsafe class Bots {
 	/// <summary>
-	/// Adds a bot hero, the way <c>citadel_create_unit</c> does. Returns its pawn, or null when the hero is not
-	/// allowed for bots in this build, the server is full, or no map is loaded (the game logs which).
+	/// Adds a bot hero, as <c>citadel_create_unit</c> does. Returns its pawn, or null if bots cannot play the hero,
+	/// the server is full or no map is loaded.
 	/// </summary>
 	/// <remarks>
-	/// <para>
-	/// The bot is a fake client named <c>BotN</c>. It joins <paramref name="team"/> at
-	/// <paramref name="position"/>; the hero finishes loading a moment later, so wait before reading its
-	/// abilities. Remove it with <see cref="Server.Kick(int, ENetworkDisconnectionReason)"/>.
-	/// </para>
-	/// <para>
-	/// Whether it then plays on its own depends on <see cref="AiEnabled"/>, off by default on a community
-	/// server.
-	/// </para>
+	/// The bot is a fake client named <c>BotN</c>. Its hero finishes loading a moment later; wait before reading its
+	/// abilities. Remove it with <see cref="Server.Kick(int, ENetworkDisconnectionReason)"/>. It plays on its own only
+	/// while <see cref="AiEnabled"/> is on.
 	/// </remarks>
-	/// <param name="hero">The hero to play, or null for a random one bots are allowed to play.</param>
-	/// <param name="team">The team number (2 Amber, 3 Sapphire).</param>
-	/// <param name="position">Where the hero appears. Use a point on the navmesh, such as one from
-	/// <see cref="Nav.GetNearestPoint(Vector3, float, int)"/>, and not in the enemy base, which kills it within
-	/// seconds.</param>
-	/// <param name="difficulty">How well it plays. Null uses <c>citadel_default_bot_difficulty</c>.</param>
-	/// <param name="assignLane">Let the game pick its lane, as for practice bots. Set one yourself with
-	/// <see cref="CCitadelPlayerPawn.SetBotLane"/>.</param>
+	/// <param name="hero">The hero. Null picks a random one.</param>
+	/// <param name="team">2 Amber, 3 Sapphire.</param>
+	/// <param name="position">Where the hero appears. Use a point on the navmesh, not in the enemy base.</param>
+	/// <param name="difficulty">Null uses <c>citadel_default_bot_difficulty</c>.</param>
+	/// <param name="assignLane">Let the game pick a lane, as for practice bots.</param>
 	public static CCitadelPlayerPawn? Add(Heroes? hero, int team, Vector3 position, BotDifficulty? difficulty = null, bool assignLane = true) {
 		nint gameRules = GameRules.Pointer;
 		if (gameRules == 0)
@@ -57,18 +44,14 @@ public static unsafe class Bots {
 	}
 
 	/// <summary>
-	/// Fills in a usercmd so a bot hero moves towards <paramref name="moveTo"/>: forwardmove and leftmove,
-	/// view angles and the matching movement keys. Use it from <see cref="IDeadworksPlugin.OnProcessUsercmds"/>
-	/// to drive a bot with your own steering, for example along a <see cref="NavPathFollower"/>, while
-	/// <see cref="AiEnabled"/> is off. To follow the brain's own path instead, use
-	/// <see cref="CCitadelPlayerBotNPCBrain.ApplyMovement"/>.
+	/// Fills in a usercmd to move a bot hero towards <paramref name="moveTo"/>: move values, view angles and movement
+	/// keys. Call from <see cref="IDeadworksPlugin.OnProcessUsercmds"/> while <see cref="AiEnabled"/> is off.
 	/// </summary>
 	/// <param name="usercmd">The bot's usercmd.</param>
 	/// <param name="pawn">The bot hero.</param>
 	/// <param name="moveTo">The point to move towards. Height is ignored.</param>
-	/// <param name="lookAt">A point to keep looking at while moving (it strafes or backpedals). Null looks
-	/// where it is going.</param>
-	/// <param name="jump">Press jump this command, for example when <see cref="NavPathFollower.ShouldJump"/>.</param>
+	/// <param name="lookAt">A point to aim at while moving. Null aims where it is going.</param>
+	/// <param name="jump">Press jump.</param>
 	public static void SetMoveInput(CCitadelUserCmdPB usercmd, CCitadelPlayerPawn pawn, Vector3 moveTo, Vector3? lookAt = null, bool jump = false) {
 		var from = pawn.Position;
 		var move = new Vector2(moveTo.X - from.X, moveTo.Y - from.Y);
@@ -108,13 +91,9 @@ public static unsafe class Bots {
 	}
 
 	/// <summary>
-	/// Whether bot heroes play on their own: take ziplines, push their lane, fight. Off by default on a server
-	/// with no matchmaking lobby, where the game treats bots as inert dummies and sends them blank input.
+	/// Whether bot heroes play on their own. Off by default without a matchmaking lobby, where bots get blank input.
+	/// Same as <c>citadel_solo_bot_match</c>.
 	/// </summary>
-	/// <remarks>
-	/// This is the game rules' "bot match" flag, the same thing the <c>citadel_solo_bot_match</c> convar turns
-	/// on, without touching a replicated convar.
-	/// </remarks>
 	public static bool AiEnabled {
 		get {
 			byte* flag = AiFlag;
@@ -122,10 +101,7 @@ public static unsafe class Bots {
 		}
 	}
 
-	/// <summary>
-	/// Turns <see cref="AiEnabled"/> on or off for every bot. Returns false when there are no game rules yet
-	/// (no map loaded) or the flag could not be located in this game build.
-	/// </summary>
+	/// <summary>Sets <see cref="AiEnabled"/> for every bot. Returns false if no map is loaded.</summary>
 	public static bool SetAiEnabled(bool enabled) {
 		byte* flag = AiFlag;
 		if (flag == null)
