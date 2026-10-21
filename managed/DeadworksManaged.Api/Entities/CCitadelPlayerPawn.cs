@@ -19,10 +19,7 @@ public sealed unsafe class CCitadelPlayerPawn : CBasePlayerPawn {
 
 	public PlayerDataGlobal? PlayerData => Controller?.PlayerDataGlobal;
 
-	/// <summary>
-	/// The brain driving this hero if it is a bot's, otherwise null. Order the bot around through it, for
-	/// example <c>pawn.BotBrain?.MoveTo(goal)</c>.
-	/// </summary>
+	/// <summary>The brain of a bot's hero, or null if this is not a bot's.</summary>
 	public CCitadelPlayerBotNPCBrain? BotBrain {
 		get {
 			void* brain = NativeInterop.BotGetBrain((void*)Handle);
@@ -30,28 +27,21 @@ public sealed unsafe class CCitadelPlayerPawn : CBasePlayerPawn {
 		}
 	}
 
-	/// <summary>
-	/// The lane this bot hero was sent down, or <see cref="LaneColor.Invalid"/> for none or a hero that isn't a
-	/// bot's. Change it with <see cref="SetBotLane"/>.
-	/// </summary>
+	/// <summary>The lane a bot's hero follows, or <see cref="LaneColor.Invalid"/> for none.</summary>
 	public LaneColor BotLane => (LaneColor)NativeInterop.BotGetLane((void*)Handle);
 
 	/// <summary>
-	/// Sends this bot hero down a lane: it walks there and pushes it while <see cref="Bots.AiEnabled"/> is on.
-	/// Returns false for a hero that isn't a bot's.
+	/// Sets the lane a bot's hero pushes while <see cref="Bots.AiEnabled"/> is on. Returns false if this is not a
+	/// bot's hero.
 	/// </summary>
 	/// <remarks>
-	/// The game usually updates the controller's <see cref="CCitadelPlayerController.AssignedLane"/> to match,
-	/// but not always; <see cref="BotLane"/> is the lane the bot follows.
+	/// <see cref="CCitadelPlayerController.AssignedLane"/> does not always follow; <see cref="BotLane"/> does.
 	/// </remarks>
 	public bool SetBotLane(LaneColor lane) => NativeInterop.BotSetLane((void*)Handle, (int)lane) != 0;
 
 	private static readonly SchemaAccessor<uint> _difficulty = new("CBotDifficultyDefinition"u8, "difficulty"u8);
 
-	/// <summary>
-	/// How well this bot hero plays, or null for a hero that isn't a bot's. Chosen when the bot is created
-	/// (<see cref="Bots.Add"/>).
-	/// </summary>
+	/// <summary>The difficulty a bot's hero was created with, or null if this is not a bot's.</summary>
 	public BotDifficulty? BotDifficulty {
 		get {
 			void* definition = NativeInterop.BotGetDifficulty((void*)Handle);

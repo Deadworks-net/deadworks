@@ -130,8 +130,7 @@ public interface IDeadworksPlugin {
 	void OnAbilityAttempt(AbilityAttemptEvent args) { }
 
 	/// <summary>
-	/// Called each time an NPC picks its next schedule. Set <see cref="NpcSelectScheduleEvent.Override"/> to run
-	/// another one, for example to keep a trooper from walking back down its lane.
+	/// Called when an NPC picks its next schedule. Set <see cref="NpcSelectScheduleEvent.Override"/> to run another.
 	/// </summary>
 	void OnNpcSelectSchedule(NpcSelectScheduleEvent args) { }
 
