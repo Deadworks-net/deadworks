@@ -6,6 +6,7 @@
   <Project Path="plugins/ExampleTimerPlugin/ExampleTimerPlugin.csproj" />
   <Project Path="plugins/ItemRotationPlugin/ItemRotationPlugin.csproj" />
   <Project Path="plugins/ItemTestPlugin/ItemTestPlugin.csproj" />
+  <Project Path="plugins/NpcDemoPlugin/NpcDemoPlugin.csproj" />
   <Project Path="plugins/RollTheDicePlugin/RollTheDicePlugin.csproj" />
   <Project Path="plugins/ScourgePlugin/ScourgePlugin.csproj" />
   <Project Path="plugins/SetModelPlugin/SetModelPlugin.csproj" />
