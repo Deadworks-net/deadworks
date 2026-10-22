@@ -45,6 +45,10 @@ public static partial class Schema {
 		/// <summary><c>float32</c>.</summary>
 		public float m_flMoveSpeed { get => Get<float>(__m_flMoveSpeed); set => Set(__m_flMoveSpeed, value); }
 
+		private static readonly SchemaField __m_flPathHeightPenaltyScale = new("CCitadel_Modifier_ItemWalkBackVData", "m_flPathHeightPenaltyScale");
+		/// <summary><c>float32</c>.</summary>
+		public float m_flPathHeightPenaltyScale { get => Get<float>(__m_flPathHeightPenaltyScale); set => Set(__m_flPathHeightPenaltyScale, value); }
+
 		private static readonly SchemaField __m_flRepathTime = new("CCitadel_Modifier_ItemWalkBackVData", "m_flRepathTime");
 		/// <summary><c>float32</c>.</summary>
 		public float m_flRepathTime { get => Get<float>(__m_flRepathTime); set => Set(__m_flRepathTime, value); }
