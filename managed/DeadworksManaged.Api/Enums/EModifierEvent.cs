@@ -110,6 +110,7 @@ public enum EModifierEvent : uint {
 	Stunned = 0x68,
 	PreUnitHealed = 0x69,
 	RatkingArmorAdjustment = 0x6a,
-	Count = 0x6b,
+	OverrideCurrencyChange = 0x6b,
+	Count = 0x6c,
 	Invalid = 0xff,
 }
