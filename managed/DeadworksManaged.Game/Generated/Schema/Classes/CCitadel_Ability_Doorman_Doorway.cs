@@ -13,6 +13,10 @@ public static partial class Schema {
 		static CCitadel_Ability_Doorman_Doorway ISchemaClass<CCitadel_Ability_Doorman_Doorway>.New() => new();
 		static string ISchemaClass<CCitadel_Ability_Doorman_Doorway>.NativeName => "CCitadel_Ability_Doorman_Doorway";
 
+		private static readonly SchemaField __m_flDebugDrawDuration = new("CCitadel_Ability_Doorman_Doorway", "m_flDebugDrawDuration");
+		/// <summary><c>float32</c>.</summary>
+		public float m_flDebugDrawDuration { get => Get<float>(__m_flDebugDrawDuration); set => Set(__m_flDebugDrawDuration, value); }
+
 		private static readonly SchemaField __m_flDoorBreakableRadius = new("CCitadel_Ability_Doorman_Doorway", "m_flDoorBreakableRadius");
 		/// <summary><c>float32</c>.</summary>
 		public float m_flDoorBreakableRadius { get => Get<float>(__m_flDoorBreakableRadius); set => Set(__m_flDoorBreakableRadius, value); }

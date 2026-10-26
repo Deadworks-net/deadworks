@@ -4632,7 +4632,7 @@ public static class ConVars {
 	public static readonly GameConVar<bool> r_particle_gpu_implicit_debug_wireframe = new("r_particle_gpu_implicit_debug_wireframe");
 	/// <summary>Default <c>False</c>. Flags: developmentonly.</summary>
 	public static readonly GameConVar<bool> r_particle_gpu_implicit_lds_cache = new("r_particle_gpu_implicit_lds_cache");
-	/// <summary>The maximum detail level of particle to create. Default <c>3</c>. Flags: defensive, developmentonly, gameinfo_cannot_override.</summary>
+	/// <summary>The maximum detail level of particle to create. Default <c>3</c>, range 0 to 3. Flags: defensive, developmentonly.</summary>
 	public static readonly GameConVar<int> r_particle_max_detail_level = new("r_particle_max_detail_level");
 	/// <summary>The maximum distance that particles will render. Default <c>1000000</c>. Flags: cheat.</summary>
 	public static readonly GameConVar<float> r_particle_max_draw_distance = new("r_particle_max_draw_distance");
