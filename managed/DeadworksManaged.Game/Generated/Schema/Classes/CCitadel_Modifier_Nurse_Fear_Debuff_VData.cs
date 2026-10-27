@@ -17,6 +17,10 @@ public static partial class Schema {
 		/// <summary><c>CResourceNameTyped&lt;CWeakHandle&lt;InfoForResourceTypeIParticleSystemDefinition&gt;&gt;</c>.</summary>
 		public string m_DebuffParticle => GetBufferString(__m_DebuffParticle);
 
+		private static readonly SchemaField __m_strFearAppliedNPCSound = new("CCitadel_Modifier_Nurse_Fear_Debuff_VData", "m_strFearAppliedNPCSound");
+		/// <summary><c>CSoundEventName</c>.</summary>
+		public string m_strFearAppliedNPCSound => GetBufferString(__m_strFearAppliedNPCSound);
+
 		private static readonly SchemaField __m_strFearAppliedSound = new("CCitadel_Modifier_Nurse_Fear_Debuff_VData", "m_strFearAppliedSound");
 		/// <summary><c>CSoundEventName</c>.</summary>
 		public string m_strFearAppliedSound => GetBufferString(__m_strFearAppliedSound);

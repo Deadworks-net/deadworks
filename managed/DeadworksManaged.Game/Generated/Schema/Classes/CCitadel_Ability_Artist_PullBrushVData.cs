@@ -65,6 +65,10 @@ public static partial class Schema {
 		/// <summary><c>float32</c>.</summary>
 		public float m_flDrawingLingerTime { get => Get<float>(__m_flDrawingLingerTime); set => Set(__m_flDrawingLingerTime, value); }
 
+		private static readonly SchemaField __m_flMinStrokeDistance = new("CCitadel_Ability_Artist_PullBrushVData", "m_flMinStrokeDistance");
+		/// <summary><c>float32</c>.</summary>
+		public float m_flMinStrokeDistance { get => Get<float>(__m_flMinStrokeDistance); set => Set(__m_flMinStrokeDistance, value); }
+
 		private static readonly SchemaField __m_flSpacingBetweenBlockers = new("CCitadel_Ability_Artist_PullBrushVData", "m_flSpacingBetweenBlockers");
 		/// <summary><c>float32</c>.</summary>
 		public float m_flSpacingBetweenBlockers { get => Get<float>(__m_flSpacingBetweenBlockers); set => Set(__m_flSpacingBetweenBlockers, value); }
