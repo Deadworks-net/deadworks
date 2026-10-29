@@ -4,13 +4,12 @@ using System.Runtime.InteropServices;
 namespace DeadworksManaged.Api;
 
 /// <summary>
-/// The brain of a bot hero (<c>npc_player_bot_brain</c>): a hidden NPC that plans the hero's movement and
-/// schedules. Get it from <see cref="CCitadelPlayerPawn.BotBrain"/>.
+/// AI of a bot hero (<c>npc_player_bot_brain</c>), a hidden NPC. Get it from <see cref="CCitadelPlayerPawn.BotBrain"/>.
 /// </summary>
 /// <remarks>
-/// While <see cref="Bots.AiEnabled"/> is on, the brain drives the hero itself and may drop a
-/// <see cref="CAI_BaseNPC.MoveTo"/> order for its own plans, such as a zipline. While it is off, the brain still
-/// plans the path; <see cref="ApplyMovement"/> walks the hero along it.
+/// With <see cref="Bots.AiEnabled"/> on, the brain moves the hero itself and may drop a
+/// <see cref="CAI_BaseNPC.MoveTo"/> order for its own plans, such as a zipline. With it off, call
+/// <see cref="ApplyMovement"/> to walk the hero along the brain's path.
 /// </remarks>
 [NativeClass("CCitadelPlayerBotNPCBrain")]
 public sealed unsafe class CCitadelPlayerBotNPCBrain : CAI_CitadelNPC {
@@ -26,7 +25,7 @@ public sealed unsafe class CCitadelPlayerBotNPCBrain : CAI_CitadelNPC {
 		public float Yaw;
 	}
 
-	/// <summary>The hero this brain drives.</summary>
+	/// <summary>Hero this brain drives.</summary>
 	public CCitadelPlayerPawn? Pawn {
 		get {
 			void* pawn = NativeInterop.BotGetPawn((void*)Handle);
@@ -35,17 +34,17 @@ public sealed unsafe class CCitadelPlayerBotNPCBrain : CAI_CitadelNPC {
 	}
 
 	/// <summary>
-	/// Fills in a usercmd to walk the bot along its brain's path. Returns false, leaving the usercmd alone, if
-	/// the brain has nowhere to go.
+	/// Fills in a usercmd that walks the bot along its brain's path. Returns false, leaving the usercmd alone, if the
+	/// brain has nowhere to go.
 	/// </summary>
 	/// <remarks>
-	/// Call from <see cref="IDeadworksPlugin.OnProcessUsercmds"/> on each of the bot's usercmds while
-	/// <see cref="Bots.AiEnabled"/> is off, after <see cref="CAI_BaseNPC.MoveTo"/>. The brain starts moving on its
-	/// next think, so the first usercmd after the order returns false; only a run of false results means the bot
-	/// has arrived or given up. The bot stops about 50 units from the goal.
+	/// Call on each of the bot's usercmds in <see cref="IDeadworksPlugin.OnProcessUsercmds"/>, with
+	/// <see cref="Bots.AiEnabled"/> off, after <see cref="CAI_BaseNPC.MoveTo"/>. The first usercmd after
+	/// <c>MoveTo</c> also returns false: treat only several false results in a row as arrival. The bot stops about
+	/// 50 units from the goal.
 	/// </remarks>
-	/// <param name="usercmd">The usercmd to fill in.</param>
-	/// <param name="lookAt">A point to aim at while moving. Null aims where it is going.</param>
+	/// <param name="usercmd">Usercmd to fill in.</param>
+	/// <param name="lookAt">Point to aim at while moving. Null faces the direction of travel.</param>
 	public bool ApplyMovement(CCitadelUserCmdPB usercmd, Vector3? lookAt = null) {
 		BotMoveInput input;
 		byte moving;

@@ -19,7 +19,7 @@ public sealed unsafe class CCitadelPlayerPawn : CBasePlayerPawn {
 
 	public PlayerDataGlobal? PlayerData => Controller?.PlayerDataGlobal;
 
-	/// <summary>The brain of a bot's hero, or null if this is not a bot's.</summary>
+	/// <summary>The bot's brain, or null if this hero isn't a bot's.</summary>
 	public CCitadelPlayerBotNPCBrain? BotBrain {
 		get {
 			void* brain = NativeInterop.BotGetBrain((void*)Handle);
@@ -27,21 +27,18 @@ public sealed unsafe class CCitadelPlayerPawn : CBasePlayerPawn {
 		}
 	}
 
-	/// <summary>The lane a bot's hero follows, or <see cref="LaneColor.Invalid"/> for none.</summary>
+	/// <summary>Lane the bot pushes, or <see cref="LaneColor.Invalid"/> for none.</summary>
 	public LaneColor BotLane => (LaneColor)NativeInterop.BotGetLane((void*)Handle);
 
 	/// <summary>
-	/// Sets the lane a bot's hero pushes while <see cref="Bots.AiEnabled"/> is on. Returns false if this is not a
-	/// bot's hero.
+	/// Sets the lane the bot pushes while <see cref="Bots.AiEnabled"/> is on. Returns false if this hero isn't a bot's.
 	/// </summary>
-	/// <remarks>
-	/// <see cref="CCitadelPlayerController.AssignedLane"/> does not always follow; <see cref="BotLane"/> does.
-	/// </remarks>
+	/// <remarks><see cref="CCitadelPlayerController.AssignedLane"/> may not update; read <see cref="BotLane"/>.</remarks>
 	public bool SetBotLane(LaneColor lane) => NativeInterop.BotSetLane((void*)Handle, (int)lane) != 0;
 
 	private static readonly SchemaAccessor<uint> _difficulty = new("CBotDifficultyDefinition"u8, "difficulty"u8);
 
-	/// <summary>The difficulty a bot's hero was created with, or null if this is not a bot's.</summary>
+	/// <summary>The bot's difficulty, or null if this hero isn't a bot's.</summary>
 	public BotDifficulty? BotDifficulty {
 		get {
 			void* definition = NativeInterop.BotGetDifficulty((void*)Handle);

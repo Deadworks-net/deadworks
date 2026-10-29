@@ -8,9 +8,9 @@ namespace NpcDemoPlugin;
 /// route. Call <see cref="Update"/> every <see cref="Interval"/> seconds.
 /// </summary>
 /// <remarks>
-/// A single <see cref="CAI_BaseNPC.MoveTo"/> to a far goal often fails partway (<c>SCHED_FAIL</c>), or at once when
-/// the route is a long detour. Each order here goes at most <see cref="LegLength"/> units along the route, and an
-/// NPC whose order failed or ended is ordered again. An NPC that arrives is released to its own AI.
+/// One <see cref="CAI_BaseNPC.MoveTo"/> to a far goal often fails partway (<c>SCHED_FAIL</c>), or at once on a long
+/// detour. Each order here covers at most <see cref="LegLength"/> units of the route, and failed or finished orders
+/// are re-issued. NPCs that arrive go back to their own AI.
 /// </remarks>
 internal sealed class Walk {
 	public const double Interval = 0.5;

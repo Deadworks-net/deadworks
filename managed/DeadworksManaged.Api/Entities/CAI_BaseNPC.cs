@@ -3,8 +3,7 @@ using System.Numerics;
 namespace DeadworksManaged.Api;
 
 /// <summary>
-/// Base class of every AI-controlled NPC: lane troopers, neutral creeps, the mid boss, guardians, walkers, the
-/// Patron, hero summons and bot brains.
+/// Base class of every NPC: troopers, neutral creeps, bosses, the Patron, hero summons and bot brains.
 /// </summary>
 /// <remarks>Hero pawns are not NPCs, even a bot's. A bot's AI is its <see cref="CCitadelPlayerBotNPCBrain"/>.</remarks>
 [NativeClass("CAI_BaseNPC", "CAI_CitadelNPC", "CCitadelPlayerBotNPCBrain",
@@ -23,16 +22,16 @@ public unsafe class CAI_BaseNPC : CBaseEntity {
 	private static readonly SchemaAccessor<nint> _translatedSchedule = new("CAI_Scheduler"u8, "m_translatedSchedule"u8);
 
 	/// <summary>
-	/// Creates and spawns an NPC by its VData subclass name, such as <c>neutral_trooper_strong</c> or
-	/// <c>npc_boss_tier1</c>. Returns null if the name is not an NPC subclass.
+	/// Spawns an NPC by VData subclass name, such as <c>neutral_trooper_strong</c> or <c>npc_boss_tier1</c>. Returns
+	/// null if the name is not an NPC subclass.
 	/// </summary>
 	/// <remarks>
-	/// A class name such as <c>npc_trooper_neutral</c> returns null: an NPC without VData crashes the server. For
-	/// lane troopers use <see cref="CNPC_Trooper.Create"/>, which also assigns a lane.
+	/// Class names such as <c>npc_trooper_neutral</c> return null. For lane troopers use
+	/// <see cref="CNPC_Trooper.Create"/>, which also assigns a lane.
 	/// </remarks>
-	/// <param name="designerName">The subclass name. <c>SubclassNames</c> in DeadworksManaged.Game lists them.</param>
-	/// <param name="position">Where the NPC appears.</param>
-	/// <param name="team">0 keeps the NPC's default team.</param>
+	/// <param name="designerName">Subclass name. <c>SubclassNames</c> in DeadworksManaged.Game lists them.</param>
+	/// <param name="position">Spawn position.</param>
+	/// <param name="team">Team. 0 keeps the NPC's default.</param>
 	/// <param name="angles">Pitch, yaw, roll. Null faces +X.</param>
 	public static CAI_BaseNPC? Create(string designerName, Vector3 position, int team = 0, Vector3? angles = null) {
 		// Checked before anything is created: removing an entity that was never spawned can crash as well.
@@ -62,19 +61,16 @@ public unsafe class CAI_BaseNPC : CBaseEntity {
 		return npc;
 	}
 
-	/// <summary>The NPC's current AI state.</summary>
+	/// <summary>Current AI state.</summary>
 	public NpcState State => (NpcState)_npcState.Get(Handle);
 
-	/// <summary>The state the AI is moving towards. It becomes <see cref="State"/> on the NPC's next think.</summary>
+	/// <summary>AI state the NPC switches to on its next think.</summary>
 	public NpcState IdealState => (NpcState)_idealNpcState.Get(Handle);
 
-	/// <summary>
-	/// True while the NPC is <see cref="NpcState.Inert"/>, such as a hidden trooper the game keeps for reuse. Skip
-	/// these when giving orders.
-	/// </summary>
+	/// <summary>True for a hidden trooper the game keeps for reuse (<see cref="NpcState.Inert"/>). Skip these.</summary>
 	public bool IsDormant => State == NpcState.Inert;
 
-	/// <summary>The running schedule, such as <c>SCHED_TROOPER_RUN_DOWN_LANE</c>, or null between schedules.</summary>
+	/// <summary>Running schedule, such as <c>SCHED_TROOPER_RUN_DOWN_LANE</c>. Null between schedules.</summary>
 	public string? Schedule {
 		get {
 			// ScheduleId_t is a CGlobalSymbol: a pointer to the interned name.
@@ -83,7 +79,7 @@ public unsafe class CAI_BaseNPC : CBaseEntity {
 		}
 	}
 
-	/// <summary>The entity the NPC is currently fighting, or null.</summary>
+	/// <summary>Entity the NPC is fighting, or null.</summary>
 	public CBaseEntity? Enemy {
 		get {
 			nint services = _enemyServices.Get(Handle);
@@ -91,39 +87,34 @@ public unsafe class CAI_BaseNPC : CBaseEntity {
 		}
 	}
 
-	/// <summary>Sends the NPC to <paramref name="goal"/>, as <c>npc_go</c> does, without cheats.</summary>
+	/// <summary>Sends the NPC to a point, like <c>npc_go</c>.</summary>
 	/// <remarks>
-	/// The NPC ignores enemies and damage until it arrives or the path fails, unless
-	/// <c>npc_go_allow_interrupt_by_ai_conditions</c> is on. It then resumes its own behaviour. Most orders more
-	/// than 3000 units of path away fail, and nearer ones can fail partway: the NPC stops and runs
-	/// <c>SCHED_FAIL</c>. Order a long trip in legs along <see cref="Nav.FindPath(Vector3, Vector3, CBaseEntity, bool, bool)"/>,
-	/// and order again after a failure. To follow a moving target, call this again every half second. The goal
-	/// need not be on the navmesh.
+	/// The NPC ignores enemies and damage until it arrives or the path fails, then resumes its own AI. Orders more
+	/// than 3000 units of path away mostly fail; nearer ones can stop partway in <c>SCHED_FAIL</c>. Send long trips
+	/// in legs along <see cref="Nav.FindPath(Vector3, Vector3, CBaseEntity, bool, bool)"/> and re-order after a
+	/// failure. To follow a moving target, call again every 0.5 s.
 	/// </remarks>
-	/// <param name="goal">Where to go.</param>
+	/// <param name="goal">Destination. Need not be on the navmesh.</param>
 	/// <param name="run">Run instead of walking.</param>
-	/// <param name="tolerance">How close counts as arrived. 0 matches <c>npc_go</c>.</param>
+	/// <param name="tolerance">Arrival distance. 0 uses the <c>npc_go</c> default.</param>
 	public void MoveTo(Vector3 goal, bool run = true, float tolerance = 0f) {
 		float* g = stackalloc float[3] { goal.X, goal.Y, goal.Z };
 		NativeInterop.NpcMoveTo((void*)Handle, g, run ? (byte)1 : (byte)0, tolerance);
 	}
 
-	/// <summary>Drops the current movement goal, as <c>npc_stop_moving</c> does. The AI picks a new schedule on its next think.</summary>
+	/// <summary>Drops the current move order, like <c>npc_stop_moving</c>.</summary>
 	/// <param name="instant">Stop on the spot instead of slowing down.</param>
 	public void Stop(bool instant = false) => NativeInterop.NpcStopMoving((void*)Handle, instant ? (byte)1 : (byte)0);
 
-	/// <summary>Sets the NPC's enemy, or clears it with null.</summary>
-	/// <remarks>
-	/// The AI re-chooses its enemy every think and may replace this one, for example with a closer target. It never
-	/// keeps an enemy on its own team.
-	/// </remarks>
+	/// <summary>Sets the NPC's enemy. Null clears it.</summary>
+	/// <remarks>The AI re-picks its enemy every think and may switch to a closer one. An enemy on the NPC's own team is dropped.</remarks>
 	public void SetEnemy(CBaseEntity? enemy) => NativeInterop.NpcSetEnemy((void*)Handle, enemy != null ? (void*)enemy.Handle : null);
 
-	/// <summary>Starts the named schedule, such as <c>SCHED_IDLE_STAND</c>. Returns false if the NPC refuses it.</summary>
+	/// <summary>Starts a schedule, such as <c>SCHED_IDLE_STAND</c>. Returns false if the NPC refuses it.</summary>
 	/// <remarks>
-	/// The schedule runs until it finishes or is interrupted, then the NPC picks its next one;
-	/// <see cref="IDeadworksPlugin.OnNpcSelectSchedule"/> can replace that choice. A schedule the NPC's class does
-	/// not have runs <c>SCHED_IDLE_STAND</c> and logs "No CASE for Schedule Type".
+	/// Runs until it finishes or is interrupted. A schedule the NPC's class lacks runs <c>SCHED_IDLE_STAND</c>
+	/// instead and logs "No CASE for Schedule Type". To replace the NPC's next pick, use
+	/// <see cref="IDeadworksPlugin.OnNpcSelectSchedule"/>.
 	/// </remarks>
 	public bool SetSchedule(string name) {
 		Span<byte> utf8 = Utf8.Encode(name, stackalloc byte[Utf8.Size(name)]);
@@ -131,9 +122,6 @@ public unsafe class CAI_BaseNPC : CBaseEntity {
 			return NativeInterop.NpcSetSchedule((void*)Handle, p) != 0;
 	}
 
-	/// <summary>
-	/// Changes the NPC's AI state. <see cref="NpcState.Idle"/> also clears the enemy, and the game sometimes turns it
-	/// into <see cref="NpcState.Alert"/>.
-	/// </summary>
+	/// <summary>Sets the AI state. <see cref="NpcState.Idle"/> also clears the enemy; the game may turn it into <see cref="NpcState.Alert"/>.</summary>
 	public void SetState(NpcState state) => NativeInterop.NpcSetState((void*)Handle, (int)state);
 }

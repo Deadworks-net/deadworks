@@ -7,9 +7,9 @@ namespace NpcDemoPlugin;
 /// Keeps a group of NPCs running at a moving target. Call <see cref="Update"/> every <see cref="Interval"/> seconds.
 /// </summary>
 /// <remarks>
-/// Each NPC gets its own spot on a ring around the target, so they spread out instead of piling onto one point.
-/// An NPC already running an order keeps it until the target has moved far compared with how far the NPC still
-/// has to go: every new order restarts its path. NPCs that have arrived are left to fight.
+/// Each NPC gets its own spot on a ring around the target, so the group spreads out. A running order is replaced
+/// only once the target has moved far compared with the NPC's remaining distance, since each new order restarts the
+/// path. NPCs that arrive are left to fight.
 /// </remarks>
 internal sealed class Chase {
 	public const double Interval = 0.1;

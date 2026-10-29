@@ -491,8 +491,8 @@ public class NpcDemoPlugin : DeadworksPluginBase {
 		if (hero == null)
 			return;
 		if (follower == null) {
-			// botgo: the brain plans the path, ApplyMovement turns it into input. The brain only starts moving on
-			// its next think after MoveTo, so the bot counts as done after a run of usercmds with nowhere to go.
+			// botgo: ApplyMovement walks the bot along the brain's path. It also returns false for the first usercmd
+			// after MoveTo, so only a run of falses counts as done.
 			var brain = hero.BotBrain;
 			if (brain == null || _botComeTimer != null)
 				return;
@@ -634,10 +634,7 @@ public class NpcDemoPlugin : DeadworksPluginBase {
 		return true;
 	}
 
-	/// <summary>
-	/// The navmesh point under the pawn: straight down from it when it is in the air, then onto the navmesh.
-	/// Nav queries from the pawn's own position fail while it is airborne.
-	/// </summary>
+	/// <summary>The navmesh point under the pawn, even while it is in the air, where nav queries from its position fail.</summary>
 	private static Vector3 Feet(CCitadelPlayerPawn pawn) {
 		var from = pawn.Position + new Vector3(0, 0, 8);
 		var down = new Vector3(0, 0, -4000f);
@@ -648,8 +645,8 @@ public class NpcDemoPlugin : DeadworksPluginBase {
 	}
 
 	private static CGameTrace TraceLine(Vector3 start, Vector3 end, RnQueryObjectSet objects, CCitadelPlayerPawn pawn) {
-		// Leave out trigger and post-processing volumes: the trace starts inside a map-wide one and would stop at once.
-		// A bot's brain stands inside its hero, so it is ignored with the hero.
+		// Skip trigger and post-processing volumes: a map-wide one stops the trace at once. A bot's brain sits inside
+		// its hero, so ignore it too.
 		var trace = CGameTrace.Create();
 		Trace.SimpleTrace(start, end, RayType_t.Line, objects, InteractionLayer.Solid | InteractionLayer.Hitbox,
 			InteractionLayer.Trigger | InteractionLayer.PostProcessingVolume, InteractionLayer.None, CollisionGroup.Always,

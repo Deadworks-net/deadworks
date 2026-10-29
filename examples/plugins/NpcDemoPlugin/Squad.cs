@@ -4,8 +4,8 @@ using DeadworksManaged.Api;
 namespace NpcDemoPlugin;
 
 /// <summary>
-/// Troopers that work for a hero: credited to it (SetMinion + SetSummoner), holding spots around it that turn with
-/// its facing, and fighting whatever comes in range. Call <see cref="Update"/> every <see cref="Interval"/> seconds.
+/// Troopers that work for a hero (SetMinion + SetSummoner). They hold spots around it that turn with its facing and
+/// fight whatever comes in range. Call <see cref="Update"/> every <see cref="Interval"/> seconds.
 /// </summary>
 internal sealed class Squad {
 	public const double Interval = 0.25;
