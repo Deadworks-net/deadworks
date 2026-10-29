@@ -337,147 +337,98 @@
 			"library": "server.dll",
 			"windows": "48 8B 0D ?? ?? ?? ?? 4C 8B C3 BA FF FF FF FF E8"
 		},
-		// (npc, const Vector *goal, bool run, float tolerance, const Vector *teleportFirst, bool log). What npc_go
-		// runs, minus the cheat flag and the NPC selection. Stores the goal, tolerance and gait (run = Fast), then
-		// sets SCHED_FORCED_GO, which AI conditions don't interrupt unless npc_go_allow_interrupt_by_ai_conditions is on.
 		"CAI_BaseNPC::ForceNpcGo": {
 			"library": "server.dll",
 			"windows": "48 8B C4 55 53 56 57 48 8D A8 ?? ?? ?? ?? 48 81 EC ?? ?? ?? ?? 4C 89 60"
 		},
-		// (npc, CBaseEntity *enemy). Hands the enemy to CAI_EnemyServices, then calls OnEnemyChanged. Vfunc 435 (433 before 6762),
-		// which no NPC class overrides. The next ChooseEnemy can replace it.
 		"CAI_BaseNPC::SetEnemy": {
 			"library": "server.dll",
 			"windows": "48 89 5C 24 ?? 48 89 74 24 ?? 57 48 83 EC ?? 4C 8B 0D ?? ?? ?? ?? 48 8B F9"
 		},
-		// (npc, NPC_STATE). Setting NPC_STATE_IDLE also clears the enemy.
 		"CAI_BaseNPC::SetState": {
 			"library": "server.dll",
 			"windows": "48 89 5C 24 ?? 57 48 83 EC ?? 89 91 ?? ?? ?? ?? 8B DA"
 		},
-		// (npc, CAI_Schedule **outSchedule, const char **outName, CGlobalSymbol *outId) -> CAI_Schedule *. Where an NPC
-		// picks its next schedule: SelectSchedule (vfunc 391), or SelectFailSchedule (403) after a failure, then
-		// GetScheduleOfType. Hooked so plugins can replace the choice.
 		"CAI_BaseNPC::GetNewSchedule": {
 			"library": "server.dll",
 			"windows": "48 89 5C 24 ?? 56 57 41 56 48 83 EC ?? 83 B9"
 		},
-		// (npc, const CGlobalSymbol *id, const char **outName) -> CAI_Schedule *. Translates the id for the NPC's
-		// class, then looks it up. Unknown ids log "No CASE for Schedule Type" and fall back to SCHED_IDLE_STAND.
 		"CAI_BaseNPC::GetScheduleOfType": {
 			"library": "server.dll",
 			"windows": "48 89 74 24 ?? 57 48 83 EC ?? ?? ?? ?? 49 8B F0 4C 8D 44 24"
 		},
-		// (CAI_Scheduler *, CAI_Schedule *, const char *const *name, const CGlobalSymbol *id). What the SetSchedule
-		// task and ForceNpcGo use to switch the running schedule.
 		"CAI_Scheduler::SetSchedule": {
 			"library": "server.dll",
 			"windows": "48 89 5C 24 ?? 48 89 74 24 ?? 57 41 56 41 57 48 83 EC ?? 4C 8B F2"
 		},
-		// CNPC_Trooper *(const Vector *origin, const QAngle *angles, int team, int variant, int type): what
-		// citadel_spawn_trooper runs. Reuses a dormant pooled trooper of the type if one is free, else spawns a new
-		// one from its VData (type 1 trooper_normal, 2 trooper_medic, 3 trooper_melee, 4
-		// trooper_zipline_container). Picks the lane nearest to origin. variant (0-3) is the look.
 		"Trooper_SpawnAt": {
 			"library": "server.dll",
 			"windows": "48 8B C4 44 89 40 ?? 48 89 50 ?? 48 89 48"
 		},
-		// bool (CNPC_Trooper *): drops a trooper onto the ground below it and its nav area. citadel_spawn_trooper
-		// runs it when the player who spawned the trooper is on the ground.
 		"CNPC_Trooper::SnapToNavGround": {
 			"library": "server.dll",
 			"windows": "40 57 48 81 EC ?? ?? ?? ?? ?? ?? ?? 48 8B F9 FF 90 ?? ?? ?? ?? 48 85 C0 74"
 		},
-		// (npc, bool). Networks m_bMinion and widens what the NPC senses; Necro's skeletons are the only caller.
 		"CAI_CitadelNPC::SetMinion": {
 			"library": "server.dll",
 			"windows": "48 89 5C 24 ?? 48 89 74 24 ?? 57 48 83 EC ?? 0F B6 DA 48 8B F1 38 91 ?? ?? ?? ?? 74"
 		},
-		// (npc) -> CBaseEntity *: m_hCaster, else the owner of m_hAbilityOwner. Damage and kill credit for minions go
-		// to it. Starts with mov edx, [rcx + disp32]: the offset of m_hCaster, which isn't in the schema.
 		"CAI_CitadelNPC::GetSummoner": {
 			"library": "server.dll",
 			"windows": "8B 91 ?? ?? ?? ?? 4C 8B D1 4C 8B 05"
 		},
-		// (CNavMesh *, const Vector *pos, const int *hull, uint flags, Vector *outPos, float maxDist, const params *).
-		// Returns the nav area it snapped to, or null. NPCs call it to put a goal on the navmesh before pathing.
 		"CNavMesh::GetNearestNav": {
 			"library": "server.dll",
 			"windows": "48 89 5C 24 ?? 44 89 4C 24 ?? 48 89 54 24 ?? 48 89 4C 24 ?? 55 56 57 41 54 41 55 41 56 41 57 48 8D AC 24"
 		},
-		// (brain). The bot brain's "movement to input" step: projects the navigator's direction onto the brain's view
-		// angles as forward/side move and presses jump for a waypoint above step height.
 		"CCitadelPlayerBotNPCBrain::UpdateMovement": {
 			"library": "server.dll",
 			"windows": "40 55 41 56 48 8D 6C 24 ?? 48 81 EC 18 01 00 00 48 8B 05"
 		},
-		// (brain, Vector *out) -> out. The normalised direction to the navigator's next waypoint, or zero.
 		"CCitadelPlayerBotNPCBrain::GetDesiredMoveDir": {
 			"library": "server.dll",
 			"windows": "48 89 5C 24 ?? 55 41 56 41 57 48 83 EC 50 48 8B EA"
 		},
-		// bool (CCitadelGameRules *): citadel_solo_bot_match, or the game rules' own bot-match byte. Bots only think
-		// while this, a tutorial or a one-on-one match is on. The byte's offset is the disp32 at +15.
 		"CCitadelGameRules::IsBotMatch": {
 			"library": "server.dll",
 			"windows": "48 8B 05 ?? ?? ?? ?? 80 78 ?? ?? 75 ?? 80 B9 ?? ?? ?? ?? ?? 75"
 		},
-		// CCitadelPlayerPawn *(CCitadelGameRules *, const char *heroName, int team, const Vector *position): what
-		// citadel_create_unit runs. Makes a fake client named BotN, gives it the hero (or a random allowed one for
-		// "none") and teleports it to position, which must not be null. Null if the hero is unknown or not allowed
-		// for bots, or the server is full.
 		"CCitadelGameRules::CreateBotByHeroName": {
 			"library": "server.dll",
 			"windows": "48 89 5C 24 ?? 48 89 74 24 ?? 57 41 56 41 57 48 81 EC ?? ?? ?? ?? 48 8B CA"
 		},
-		// void (CCitadelGameRules *, int team, CCitadelPlayerPawn *): picks a lane for a new bot the way practice
-		// and lobby bots get one (lobby lanes, then a per-team deck, then a lane no teammate is on) and sets it.
 		"CCitadelGameRules::AssignBotLane": {
 			"library": "server.dll",
 			"windows": "4C 89 44 24 ?? 48 89 4C 24 ?? 55 53 56 57 41 54 41 56 41 57 48 8B EC"
 		},
-		// void (CCitadelPlayerBot *, int lane): the lane the bot pushes; also sets the controller's
-		// m_nAssignedLane and m_nOriginalLaneAssignment (networked).
 		"CCitadelPlayerBot::SetLane": {
 			"library": "server.dll",
 			"windows": "48 89 5C 24 ?? 48 89 6C 24 ?? 48 89 74 24 ?? 57 48 83 EC ?? 33 DB 89 91"
 		},
-		// (CNavPath *) -> CNavPath *. A path is 0x4880 bytes; vtable slot 0 is its destructor.
 		"CNavPath::CNavPath": {
 			"library": "server.dll",
 			"windows": "40 53 48 83 EC ?? 48 8B D9 E8 ?? ?? ?? ?? 48 8D 05 ?? ?? ?? ?? C6 83 ?? ?? ?? ?? ?? ?? ?? ?? 33 C0 48 89 83 ?? ?? ?? ?? 48 89 83 ?? ?? ?? ?? 88 83"
 		},
-		// bool (CNavPath *, const query *, const Vector *start, CNavArea *startArea, const Vector *goal, CNavArea *goalArea,
-		// const void *extra). The overload nav_test_path uses: null areas are looked up from the positions.
 		"CNavPath::ComputePathPosToPos": {
 			"library": "server.dll",
 			"windows": "48 89 5C 24 ?? 48 89 7C 24 ?? 55 48 8D 6C 24 ?? 48 81 EC ?? ?? ?? ?? 48 8B 42"
 		},
-		// (CAI_PathCost *, int hull) -> CAI_PathCost *. The default path cost (208 bytes), what nav_test_path
-		// allocates when no NPC is selected.
 		"CAI_PathCost::CAI_PathCost": {
 			"library": "server.dll",
 			"windows": "48 89 5C 24 ?? 48 89 74 24 ?? 57 48 83 EC ?? 89 51"
 		},
-		// float (CNavArea *, float x, float y): the area's height at that point. x and y arrive in xmm1 and xmm2.
 		"CNavArea::GetZ": {
 			"library": "server.dll",
 			"windows": "48 8B C4 48 89 58 ?? 55 56 57 41 54 41 55 41 56 41 57 48 8D 68 ?? 48 81 EC ?? ?? ?? ?? 4C 63 79"
 		},
-		// bool (CNavMesh *, const Vector *start, CNavArea *startArea, const Vector *end, int hull, NavTraceResult_t *,
-		// const CNavTestRayParams *, const std::function *edgeCallback). What nav_test_rays runs; null params = defaults.
 		"NavSearch::TestRayToNavMesh": {
 			"library": "server.dll",
 			"windows": "4C 8B DC 53 48 81 EC ?? ?? ?? ?? 48 8B 84 24 ?? ?? ?? ?? 4D 8D 53"
 		},
-		// Vector *(Vector *out, const Vector *start, CNavArea *startArea, int hull, float maxDist, float minDist).
-		// What nav_test_find_random_connected runs; out is (FLT_MAX, FLT_MAX, FLT_MAX) when nothing was found.
 		"CNavQuery::FindRandomConnectedPoint": {
 			"library": "server.dll",
 			"windows": "48 89 54 24 ?? 55 53 56 57 41 55 41 57"
 		},
-		// A small CNavMesh helper whose first instruction, mov rax, [rip + disp32], loads the CNavMesh global.
-		// (It returns navmesh+0x2BC != 0, which is not a "loaded" flag: it reads false with a working navmesh.)
 		"CNavMesh::GlobalRef": {
 			"library": "server.dll",
 			"windows": "48 8B 05 ?? ?? ?? ?? 83 B8 BC 02 00 00 ?? 0F 95 C0"
@@ -515,10 +466,7 @@
 		"CCitadelBaseAbility::UsesCharges": 282,
 		"CCitadelBaseAbility::AddCharges": 284,
 		"CCitadelBaseAbility::GetMaxCharges": 307,
-		// On the navigator's movement interface (CAI_BaseNPC::m_pNavigator + 0x48), not its primary vtable:
-		// StopMoving(AI_NavStopMovingMode_t, facing, const CUtlSourceLocation *), what npc_stop_moving calls.
 		"CAI_Navigator::StopMoving": 13,
-		// bool (const CGlobalSymbol *id): true refuses a schedule set from outside, as the SetSchedule task checks.
 		"CAI_BaseNPC::VetoSchedule": 430
 	}
 }
