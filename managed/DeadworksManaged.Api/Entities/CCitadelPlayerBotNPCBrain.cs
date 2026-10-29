@@ -40,8 +40,9 @@ public sealed unsafe class CCitadelPlayerBotNPCBrain : CAI_CitadelNPC {
 	/// </summary>
 	/// <remarks>
 	/// Call from <see cref="IDeadworksPlugin.OnProcessUsercmds"/> on each of the bot's usercmds while
-	/// <see cref="Bots.AiEnabled"/> is off, after <see cref="CAI_BaseNPC.MoveTo"/>. The bot stops about 50 units
-	/// from the goal.
+	/// <see cref="Bots.AiEnabled"/> is off, after <see cref="CAI_BaseNPC.MoveTo"/>. The brain starts moving on its
+	/// next think, so the first usercmd after the order returns false; only a run of false results means the bot
+	/// has arrived or given up. The bot stops about 50 units from the goal.
 	/// </remarks>
 	/// <param name="usercmd">The usercmd to fill in.</param>
 	/// <param name="lookAt">A point to aim at while moving. Null aims where it is going.</param>

@@ -95,7 +95,9 @@ public unsafe class CAI_BaseNPC : CBaseEntity {
 	/// <remarks>
 	/// The NPC ignores enemies and damage until it arrives or the path fails, unless
 	/// <c>npc_go_allow_interrupt_by_ai_conditions</c> is on. It then resumes its own behaviour. Most orders more
-	/// than 3000 units of path away fail. To follow a moving target, call this again every half second. The goal
+	/// than 3000 units of path away fail, and nearer ones can fail partway: the NPC stops and runs
+	/// <c>SCHED_FAIL</c>. Order a long trip in legs along <see cref="Nav.FindPath(Vector3, Vector3, CBaseEntity, bool, bool)"/>,
+	/// and order again after a failure. To follow a moving target, call this again every half second. The goal
 	/// need not be on the navmesh.
 	/// </remarks>
 	/// <param name="goal">Where to go.</param>
