@@ -163,4 +163,27 @@ internal struct NativeCallbacks
 	public nint GetSchemaClassAlignment;
 	public nint GrowUtlVector;
 	public nint ExecuteCommandAsPlayer;
+	public nint NpcMoveTo;
+	public nint NpcStopMoving;
+	public nint NpcSetEnemy;
+	public nint NpcSetState;
+	public nint NpcSetSchedule;
+	public nint NpcSetMinion;
+	public nint NpcGetSummoner;
+	public nint NpcSetSummoner;
+	public nint NavGetNearestPoint;
+	public nint NavFindPath;
+	public nint NavGetArea;
+	public nint NavGetGroundHeight;
+	public nint NavRaycast;
+	public nint NavGetRandomPoint;
+	public nint BotGetBrain;
+	public nint BotGetPawn;
+	public nint BotGetMoveInput;
+	public nint BotGetMatchFlagOffset;
+	public nint BotCreate;
+	public nint BotSetLane;
+	public nint BotGetLane;
+	public nint BotGetDifficulty;
+	public nint NpcCreateTrooper;
 }

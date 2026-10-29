@@ -56,6 +56,8 @@ public:
     bool OnPre_CCitadelPlayerPawn_ModifyCurrency(void *pawn, ECurrencyType nCurrencyType, int32_t nAmount,
                                                   ECurrencySource nSource, int32_t bSilent, int32_t bForceGain, int32_t bSpendOnly,
                                                   void *pSourceAbility, void *pSourceEntity);
+    // CAI_BaseNPC: the schedule a plugin wants instead of chosenId, or nullptr to keep it
+    const char *OnPost_NpcSelectSchedule(void *npc, const char *chosenId);
     // Game Events
     int OnPre_GameEvent(const char *eventName, void *eventPtr);
     // Net Messages (outgoing - broadcast via game event system)

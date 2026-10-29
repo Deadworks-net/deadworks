@@ -205,6 +205,34 @@ struct NativeCallbacks {
     uint8_t(__cdecl *GrowUtlVector)(void *vec, int32_t elementSize, int32_t count);
     // Runs a ConCommand on the server with the player in slot as the caller. Returns 0 if there is no such command.
     uint8_t(__cdecl *ExecuteCommandAsPlayer)(int32_t slot, const char *command);
+    // NPC orders and state — see NativeNpc.cpp. npc is always a CAI_BaseNPC.
+    void(__cdecl *NpcMoveTo)(void *npc, const float *goal, uint8_t run, float tolerance);
+    void(__cdecl *NpcStopMoving)(void *npc, uint8_t instant);
+    void(__cdecl *NpcSetEnemy)(void *npc, void *enemy);
+    void(__cdecl *NpcSetState)(void *npc, int32_t state);
+    uint8_t(__cdecl *NpcSetSchedule)(void *npc, const char *name);
+    void(__cdecl *NpcSetMinion)(void *npc, uint8_t minion);
+    void *(__cdecl *NpcGetSummoner)(void *npc);
+    void(__cdecl *NpcSetSummoner)(void *npc, uint32_t handle);
+    // Navmesh queries — see NativeNav.cpp.
+    uint8_t(__cdecl *NavGetNearestPoint)(const float *pos, float maxDistance, int32_t hull, float *out);
+    // flags: 1 = allow a partial path, 2 = optimize. outTypes gets each waypoint's segment type.
+    int32_t(__cdecl *NavFindPath)(const float *start, const float *goal, int32_t hull, uint32_t flags,
+                                  float *outPoints, int32_t *outTypes, int32_t maxPoints);
+    uint8_t(__cdecl *NavGetArea)(const float *pos, float maxDistance, int32_t hull, void *outInfo);
+    uint8_t(__cdecl *NavGetGroundHeight)(const float *pos, float maxDistance, int32_t hull, float *outZ);
+    uint8_t(__cdecl *NavRaycast)(const float *start, const float *end, int32_t hull, float *outEnd, float *outNormal);
+    uint8_t(__cdecl *NavGetRandomPoint)(const float *origin, float minDistance, float maxDistance, int32_t hull, float *out);
+    // Bot heroes — see NativeBot.cpp.
+    void *(__cdecl *BotGetBrain)(void *pawn);
+    void *(__cdecl *BotGetPawn)(void *brain);
+    uint8_t(__cdecl *BotGetMoveInput)(void *brain, const float *viewAngles, void *outInput);
+    int32_t(__cdecl *BotGetMatchFlagOffset)();
+    void *(__cdecl *BotCreate)(void *gameRules, const char *heroName, int32_t team, const float *position, uint8_t assignLane);
+    uint8_t(__cdecl *BotSetLane)(void *pawn, int32_t lane);
+    int32_t(__cdecl *BotGetLane)(void *pawn);
+    void *(__cdecl *BotGetDifficulty)(void *pawn);
+    void *(__cdecl *NpcCreateTrooper)(const float *origin, const float *angles, int32_t team, int32_t type, int32_t variant, uint8_t snapToGround);
 };
 
 void PopulateNativeCallbacks(NativeCallbacks &callbacks);

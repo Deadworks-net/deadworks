@@ -135,6 +135,15 @@
     <ClCompile Include="src\Core\NativeHero.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="src\Core\NativeBot.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="src\Core\NativeNav.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="src\Core\NativeNpc.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
     <ClCompile Include="src\Core\ManagedCallbacks.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
@@ -151,6 +160,9 @@
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="src\Core\Hooks\MatchMapOverride.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="src\Core\Hooks\NpcSchedule.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="src\Core\Hooks\ReplayComplete.cpp">
@@ -320,6 +332,9 @@
     <ClInclude Include="src\Core\Hooks\MatchMapOverride.hpp">
       <Filter>Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="src\Core\Hooks\NpcSchedule.hpp">
+      <Filter>Header Files</Filter>
+    </ClInclude>
     <ClInclude Include="src\Core\Hooks\ReplayComplete.hpp">
       <Filter>Header Files</Filter>
     </ClInclude>
@@ -356,6 +371,15 @@
     <ClInclude Include="src\Core\NativeHero.hpp">
       <Filter>Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="src\Core\NativeBot.hpp">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="src\Core\NativeNav.hpp">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="src\Core\NativeNpc.hpp">
+      <Filter>Header Files</Filter>
+    </ClInclude>
     <ClInclude Include="src\Core\ManagedCallbacks.hpp">
       <Filter>Header Files</Filter>
     </ClInclude>
@@ -381,6 +405,9 @@
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="src\SDK\CitadelAbilityVData.hpp">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="src\SDK\CAI_BaseNPC.hpp">
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="src\SDK\CGameSceneNode.hpp">

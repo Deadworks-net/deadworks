@@ -4,6 +4,9 @@
 #include "NativeCollision.hpp"
 #include "NativeDamage.hpp"
 #include "NativeHero.hpp"
+#include "NativeBot.hpp"
+#include "NativeNav.hpp"
+#include "NativeNpc.hpp"
 #include "Deadworks.hpp"
 
 #include "Hooks/CCitadelPlayerPawn.hpp"
@@ -1288,6 +1291,9 @@ void deadworks::ResolveNativeStatics() {
     ResolveDamageStatics();
     ResolveHeroStatics();
     ResolveSubclassStatics();
+    ResolveNpcStatics();
+    ResolveNavStatics();
+    ResolveBotStatics();
 
     g_pSetMoveType = reinterpret_cast<SetMoveTypeFn>(
         MemoryDataLoader::Get().GetOffset("CBaseEntity::SetMoveType").value());
@@ -1398,6 +1404,9 @@ void deadworks::PopulateNativeCallbacks(NativeCallbacks &callbacks) {
     PopulateCollisionNatives(callbacks);
     PopulateDamageNatives(callbacks);
     PopulateHeroNatives(callbacks);
+    PopulateNpcNatives(callbacks);
+    PopulateNavNatives(callbacks);
+    PopulateBotNatives(callbacks);
 
     // Server command execution
     callbacks.ExecuteServerCommand = &NativeExecuteServerCommand;

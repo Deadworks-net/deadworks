@@ -336,6 +336,102 @@
 		"SubclassRegistry::GlobalRef": {
 			"library": "server.dll",
 			"windows": "48 8B 0D ?? ?? ?? ?? 4C 8B C3 BA FF FF FF FF E8"
+		},
+		"CAI_BaseNPC::ForceNpcGo": {
+			"library": "server.dll",
+			"windows": "48 8B C4 55 53 56 57 48 8D A8 ?? ?? ?? ?? 48 81 EC ?? ?? ?? ?? 4C 89 60"
+		},
+		"CAI_BaseNPC::SetEnemy": {
+			"library": "server.dll",
+			"windows": "48 89 5C 24 ?? 48 89 74 24 ?? 57 48 83 EC ?? 4C 8B 0D ?? ?? ?? ?? 48 8B F9"
+		},
+		"CAI_BaseNPC::SetState": {
+			"library": "server.dll",
+			"windows": "48 89 5C 24 ?? 57 48 83 EC ?? 89 91 ?? ?? ?? ?? 8B DA"
+		},
+		"CAI_BaseNPC::GetNewSchedule": {
+			"library": "server.dll",
+			"windows": "48 89 5C 24 ?? 56 57 41 56 48 83 EC ?? 83 B9"
+		},
+		"CAI_BaseNPC::GetScheduleOfType": {
+			"library": "server.dll",
+			"windows": "48 89 74 24 ?? 57 48 83 EC ?? ?? ?? ?? 49 8B F0 4C 8D 44 24"
+		},
+		"CAI_Scheduler::SetSchedule": {
+			"library": "server.dll",
+			"windows": "48 89 5C 24 ?? 48 89 74 24 ?? 57 41 56 41 57 48 83 EC ?? 4C 8B F2"
+		},
+		"Trooper_SpawnAt": {
+			"library": "server.dll",
+			"windows": "48 8B C4 44 89 40 ?? 48 89 50 ?? 48 89 48"
+		},
+		"CNPC_Trooper::SnapToNavGround": {
+			"library": "server.dll",
+			"windows": "40 57 48 81 EC ?? ?? ?? ?? ?? ?? ?? 48 8B F9 FF 90 ?? ?? ?? ?? 48 85 C0 74"
+		},
+		"CAI_CitadelNPC::SetMinion": {
+			"library": "server.dll",
+			"windows": "48 89 5C 24 ?? 48 89 74 24 ?? 57 48 83 EC ?? 0F B6 DA 48 8B F1 38 91 ?? ?? ?? ?? 74"
+		},
+		"CAI_CitadelNPC::GetSummoner": {
+			"library": "server.dll",
+			"windows": "8B 91 ?? ?? ?? ?? 4C 8B D1 4C 8B 05"
+		},
+		"CNavMesh::GetNearestNav": {
+			"library": "server.dll",
+			"windows": "48 89 5C 24 ?? 44 89 4C 24 ?? 48 89 54 24 ?? 48 89 4C 24 ?? 55 56 57 41 54 41 55 41 56 41 57 48 8D AC 24"
+		},
+		"CCitadelPlayerBotNPCBrain::UpdateMovement": {
+			"library": "server.dll",
+			"windows": "40 55 41 56 48 8D 6C 24 ?? 48 81 EC 18 01 00 00 48 8B 05"
+		},
+		"CCitadelPlayerBotNPCBrain::GetDesiredMoveDir": {
+			"library": "server.dll",
+			"windows": "48 89 5C 24 ?? 55 41 56 41 57 48 83 EC 50 48 8B EA"
+		},
+		"CCitadelGameRules::IsBotMatch": {
+			"library": "server.dll",
+			"windows": "48 8B 05 ?? ?? ?? ?? 80 78 ?? ?? 75 ?? 80 B9 ?? ?? ?? ?? ?? 75"
+		},
+		"CCitadelGameRules::CreateBotByHeroName": {
+			"library": "server.dll",
+			"windows": "48 89 5C 24 ?? 48 89 74 24 ?? 57 41 56 41 57 48 81 EC ?? ?? ?? ?? 48 8B CA"
+		},
+		"CCitadelGameRules::AssignBotLane": {
+			"library": "server.dll",
+			"windows": "4C 89 44 24 ?? 48 89 4C 24 ?? 55 53 56 57 41 54 41 56 41 57 48 8B EC"
+		},
+		"CCitadelPlayerBot::SetLane": {
+			"library": "server.dll",
+			"windows": "48 89 5C 24 ?? 48 89 6C 24 ?? 48 89 74 24 ?? 57 48 83 EC ?? 33 DB 89 91"
+		},
+		"CNavPath::CNavPath": {
+			"library": "server.dll",
+			"windows": "40 53 48 83 EC ?? 48 8B D9 E8 ?? ?? ?? ?? 48 8D 05 ?? ?? ?? ?? C6 83 ?? ?? ?? ?? ?? ?? ?? ?? 33 C0 48 89 83 ?? ?? ?? ?? 48 89 83 ?? ?? ?? ?? 88 83"
+		},
+		"CNavPath::ComputePathPosToPos": {
+			"library": "server.dll",
+			"windows": "48 89 5C 24 ?? 48 89 7C 24 ?? 55 48 8D 6C 24 ?? 48 81 EC ?? ?? ?? ?? 48 8B 42"
+		},
+		"CAI_PathCost::CAI_PathCost": {
+			"library": "server.dll",
+			"windows": "48 89 5C 24 ?? 48 89 74 24 ?? 57 48 83 EC ?? 89 51"
+		},
+		"CNavArea::GetZ": {
+			"library": "server.dll",
+			"windows": "48 8B C4 48 89 58 ?? 55 56 57 41 54 41 55 41 56 41 57 48 8D 68 ?? 48 81 EC ?? ?? ?? ?? 4C 63 79"
+		},
+		"NavSearch::TestRayToNavMesh": {
+			"library": "server.dll",
+			"windows": "4C 8B DC 53 48 81 EC ?? ?? ?? ?? 48 8B 84 24 ?? ?? ?? ?? 4D 8D 53"
+		},
+		"CNavQuery::FindRandomConnectedPoint": {
+			"library": "server.dll",
+			"windows": "48 89 54 24 ?? 55 53 56 57 41 55 41 57"
+		},
+		"CNavMesh::GlobalRef": {
+			"library": "server.dll",
+			"windows": "48 8B 05 ?? ?? ?? ?? 83 B8 BC 02 00 00 ?? 0F 95 C0"
 		}
 	},
 	"patches": {
@@ -369,6 +465,8 @@
 		"CCitadelBaseAbility::EndCooldown": 271,
 		"CCitadelBaseAbility::UsesCharges": 282,
 		"CCitadelBaseAbility::AddCharges": 284,
-		"CCitadelBaseAbility::GetMaxCharges": 307
+		"CCitadelBaseAbility::GetMaxCharges": 307,
+		"CAI_Navigator::StopMoving": 13,
+		"CAI_BaseNPC::VetoSchedule": 430
 	}
 }

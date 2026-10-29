@@ -178,4 +178,27 @@ internal static unsafe class NativeInterop
 	public static delegate* unmanaged[Cdecl]<void*, byte, void> SetSolidFlags => (delegate* unmanaged[Cdecl]<void*, byte, void>)_cb.SetSolidFlags;
 	public static delegate* unmanaged[Cdecl]<void*, byte, void> SetCollisionEnabled => (delegate* unmanaged[Cdecl]<void*, byte, void>)_cb.SetCollisionEnabled;
 	public static delegate* unmanaged[Cdecl]<void*, void*, byte, void> SetEntityCollisionsWith => (delegate* unmanaged[Cdecl]<void*, void*, byte, void>)_cb.SetEntityCollisionsWith;
+	public static delegate* unmanaged[Cdecl]<void*, float*, byte, float, void> NpcMoveTo => (delegate* unmanaged[Cdecl]<void*, float*, byte, float, void>)_cb.NpcMoveTo;
+	public static delegate* unmanaged[Cdecl]<void*, byte, void> NpcStopMoving => (delegate* unmanaged[Cdecl]<void*, byte, void>)_cb.NpcStopMoving;
+	public static delegate* unmanaged[Cdecl]<void*, void*, void> NpcSetEnemy => (delegate* unmanaged[Cdecl]<void*, void*, void>)_cb.NpcSetEnemy;
+	public static delegate* unmanaged[Cdecl]<void*, int, void> NpcSetState => (delegate* unmanaged[Cdecl]<void*, int, void>)_cb.NpcSetState;
+	public static delegate* unmanaged[Cdecl]<void*, byte*, byte> NpcSetSchedule => (delegate* unmanaged[Cdecl]<void*, byte*, byte>)_cb.NpcSetSchedule;
+	public static delegate* unmanaged[Cdecl]<void*, byte, void> NpcSetMinion => (delegate* unmanaged[Cdecl]<void*, byte, void>)_cb.NpcSetMinion;
+	public static delegate* unmanaged[Cdecl]<void*, void*> NpcGetSummoner => (delegate* unmanaged[Cdecl]<void*, void*>)_cb.NpcGetSummoner;
+	public static delegate* unmanaged[Cdecl]<void*, uint, void> NpcSetSummoner => (delegate* unmanaged[Cdecl]<void*, uint, void>)_cb.NpcSetSummoner;
+	public static delegate* unmanaged[Cdecl]<float*, float, int, float*, byte> NavGetNearestPoint => (delegate* unmanaged[Cdecl]<float*, float, int, float*, byte>)_cb.NavGetNearestPoint;
+	public static delegate* unmanaged[Cdecl]<float*, float*, int, uint, float*, int*, int, int> NavFindPath => (delegate* unmanaged[Cdecl]<float*, float*, int, uint, float*, int*, int, int>)_cb.NavFindPath;
+	public static delegate* unmanaged[Cdecl]<float*, float, int, void*, byte> NavGetArea => (delegate* unmanaged[Cdecl]<float*, float, int, void*, byte>)_cb.NavGetArea;
+	public static delegate* unmanaged[Cdecl]<float*, float, int, float*, byte> NavGetGroundHeight => (delegate* unmanaged[Cdecl]<float*, float, int, float*, byte>)_cb.NavGetGroundHeight;
+	public static delegate* unmanaged[Cdecl]<float*, float*, int, float*, float*, byte> NavRaycast => (delegate* unmanaged[Cdecl]<float*, float*, int, float*, float*, byte>)_cb.NavRaycast;
+	public static delegate* unmanaged[Cdecl]<float*, float, float, int, float*, byte> NavGetRandomPoint => (delegate* unmanaged[Cdecl]<float*, float, float, int, float*, byte>)_cb.NavGetRandomPoint;
+	public static delegate* unmanaged[Cdecl]<void*, void*> BotGetBrain => (delegate* unmanaged[Cdecl]<void*, void*>)_cb.BotGetBrain;
+	public static delegate* unmanaged[Cdecl]<void*, void*> BotGetPawn => (delegate* unmanaged[Cdecl]<void*, void*>)_cb.BotGetPawn;
+	public static delegate* unmanaged[Cdecl]<void*, float*, void*, byte> BotGetMoveInput => (delegate* unmanaged[Cdecl]<void*, float*, void*, byte>)_cb.BotGetMoveInput;
+	public static delegate* unmanaged[Cdecl]<int> BotGetMatchFlagOffset => (delegate* unmanaged[Cdecl]<int>)_cb.BotGetMatchFlagOffset;
+	public static delegate* unmanaged[Cdecl]<void*, byte*, int, float*, byte, void*> BotCreate => (delegate* unmanaged[Cdecl]<void*, byte*, int, float*, byte, void*>)_cb.BotCreate;
+	public static delegate* unmanaged[Cdecl]<void*, int, byte> BotSetLane => (delegate* unmanaged[Cdecl]<void*, int, byte>)_cb.BotSetLane;
+	public static delegate* unmanaged[Cdecl]<void*, int> BotGetLane => (delegate* unmanaged[Cdecl]<void*, int>)_cb.BotGetLane;
+	public static delegate* unmanaged[Cdecl]<void*, void*> BotGetDifficulty => (delegate* unmanaged[Cdecl]<void*, void*>)_cb.BotGetDifficulty;
+	public static delegate* unmanaged[Cdecl]<float*, float*, int, int, int, byte, void*> NpcCreateTrooper => (delegate* unmanaged[Cdecl]<float*, float*, int, int, int, byte, void*>)_cb.NpcCreateTrooper;
 }

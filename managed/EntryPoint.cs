@@ -413,6 +413,24 @@ public static class EntryPoint
         };
         PluginLoader.DispatchEntityFireOutputPost(callerClass, evt);
     }
+    // UTF-8 copies of the schedule names plugins return; native reads them right away, and there are only a
+    // few hundred distinct names, so each is allocated once and kept.
+    private static readonly Dictionary<string, nint> _scheduleNames = new();
+
+    [UnmanagedCallersOnly]
+    public static unsafe byte* OnNpcSelectSchedule(void* npc, byte* chosenId)
+    {
+        var requested = PluginLoader.DispatchNpcSelectSchedule((nint)npc, chosenId);
+        if (requested == null)
+            return null;
+        if (!_scheduleNames.TryGetValue(requested, out var utf8))
+        {
+            utf8 = Marshal.StringToCoTaskMemUTF8(requested);
+            _scheduleNames[requested] = utf8;
+        }
+        return (byte*)utf8;
+    }
+
     [UnmanagedCallersOnly]
     public static unsafe ulong OnAbilityAttempt(int playerSlot, void* pawnEntity, ulong heldButtons, ulong changedButtons, ulong scrollButtons, ulong* outForcedButtons)
     {
@@ -450,7 +468,8 @@ public static class EntryPoint
             int len = BitConverter.ToInt32(span.Slice(offset, 4));
             offset += 4;
 
-            if (len <= 0 || offset + len > batchLen)
+            // Zero-length entries are blank usercmds (a bot in simple bot mode); they parse to an empty message.
+            if (len < 0 || offset + len > batchLen)
                 break;
 
             var cmd = CCitadelUserCmdPB.Parser.ParseFrom(span.Slice(offset, len));
@@ -477,9 +496,8 @@ public static class EntryPoint
 
         foreach (var cmd in args.Usercmds)
         {
+            // Written even when empty: native matches entries to usercmds by position.
             var bytes = cmd.ToByteArray();
-            if (bytes.Length == 0)
-                continue;
 
             if (writeOffset + 4 + bytes.Length > 65536)
                 break;
