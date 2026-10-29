@@ -2,7 +2,7 @@
 
 Chat commands that exercise the NPC, navigation and bot API. Most act on the point under your crosshair. Type `/npcdemo` in game for the list.
 
-No cheats are needed. Every reply also goes to the server console, prefixed `[NpcDemo]`.
+No cheats are needed. Every reply also goes to the server console, prefixed `[NpcDemo]`. Commands work in the air: anything that starts from you starts from the navmesh point below you.
 
 ## Spawning
 
@@ -15,7 +15,7 @@ No cheats are needed. Every reply also goes to the server console, prefixed `[Np
 
 | Command | Description |
 |---------|-------------|
-| `/goto` | NPCs within 3000 units walk to the crosshair (`MoveTo`). |
+| `/goto` | NPCs within 3000 units walk to the crosshair in legs along a `Nav.FindPath` route (`MoveTo`, see `Walk.cs`), and the demo reports how many got there. Neutral camp creeps stay at their camps. |
 | `/attack` | NPCs within 3000 units attack what you aim at (`SetEnemy`). |
 | `/stop` | NPCs within 3000 units drop their orders (`Stop`). Also ends `/horde`, `/chaseme` and bot walking. |
 | `/hold` | Toggles troopers standing still instead of walking their lanes (`SetSchedule`, `OnNpcSelectSchedule`). |
@@ -51,7 +51,7 @@ No cheats are needed. Every reply also goes to the server console, prefixed `[Np
 | `/bot [hero] [enemy\|ally]` | Adds a bot hero at the crosshair (`Bots.Add`). |
 | `/botai [on\|off]` | Turns the bot AI on or off (`Bots.SetAiEnabled`). |
 | `/botcome` | Bots walk to you along a navmesh path (`NavPathFollower`, `Bots.SetMoveInput`). Turns the bot AI off. Again to stop. |
-| `/botgo` | Bots walk to the crosshair on their brain's own path (`MoveTo`, `ApplyMovement`). Turns the bot AI off. |
+| `/botgo` | Bots walk to the crosshair on their brain's own path (`MoveTo`, `ApplyMovement`), and the demo reports how many got there. Turns the bot AI off. |
 
 `/cleanup` removes every NPC, block and bot the demo made.
 

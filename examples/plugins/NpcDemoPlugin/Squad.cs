@@ -61,10 +61,10 @@ internal sealed class Squad {
 			e.Override = "SCHED_IDLE_STAND";
 	}
 
-	public void Update() {
+	/// <param name="origin">Where the owner stands on the navmesh, even while it is in the air.</param>
+	public void Update(Vector3 origin) {
 		if (!Owner.IsValid)
 			return;
-		var origin = Owner.Position;
 		float yaw = Owner.EyeAngles.Y * MathF.PI / 180f;
 		var forward = new Vector3(MathF.Cos(yaw), MathF.Sin(yaw), 0f);
 		var right = new Vector3(MathF.Sin(yaw), -MathF.Cos(yaw), 0f);

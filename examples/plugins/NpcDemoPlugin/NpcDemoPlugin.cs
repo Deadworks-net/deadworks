@@ -13,6 +13,7 @@ public class NpcDemoPlugin : DeadworksPluginBase {
 	public override string Name => "NPC Demo";
 
 	private const float NearbyRadius = 3000f;
+	private const int CampTeam = 4; // the map's neutral camps
 
 	private readonly List<CAI_BaseNPC> _spawned = [];
 	private readonly List<CBaseEntity> _blockers = [];
@@ -27,17 +28,23 @@ public class NpcDemoPlugin : DeadworksPluginBase {
 	private IHandle? _chaseTimer;
 	private Squad? _squad;
 	private IHandle? _squadTimer;
+	private Walk? _walk;
+	private IHandle? _walkTimer;
 	private bool _hold;
 
 	// Bots walked by this plugin: slot -> path follower (botcome) or null (botgo, the brain's own path).
 	private readonly Dictionary<int, NavPathFollower?> _drivenBots = [];
+	// botgo: usercmds in a row the brain has had nowhere to go, per slot.
+	private readonly Dictionary<int, int> _botGoIdle = [];
+	private const int BotGoIdleLimit = 32;
+	private (CCitadelPlayerController Caller, Vector3 Goal, int Total, int Arrived)? _botGo;
 	private IHandle? _botComeTimer;
 
 	public override void OnLoad(bool isReload) { }
 
 	// A hot reload unloads off the game thread, so only cancel timers here; /cleanup removes what the demo made.
 	public override void OnUnload() {
-		foreach (var handle in new[] { _hordeTimer, _chaseTimer, _squadTimer, _botComeTimer })
+		foreach (var handle in new[] { _hordeTimer, _chaseTimer, _squadTimer, _walkTimer, _botComeTimer })
 			handle?.Cancel();
 	}
 
@@ -118,12 +125,36 @@ public class NpcDemoPlugin : DeadworksPluginBase {
 			return;
 		StopGroups();
 		var goal = Nav.GetNearestPoint(aim, 600f, 1) ?? aim;
-		int n = 0;
+		var walk = new Walk(goal);
+		int n = 0, noRoute = 0, camp = 0;
 		foreach (var npc in Nearby(pawn)) {
-			npc.MoveTo(goal, run: true);
-			n++;
+			// The map's neutral creeps keep to their camps; ones made with /npc follow orders.
+			if (npc.TeamNum == CampTeam && !_spawned.Any(s => s.EntityHandle == npc.EntityHandle)) {
+				camp++;
+				continue;
+			}
+			if (walk.Add(npc))
+				n++;
+			else
+				noRoute++;
 		}
-		Reply(caller, $"{n} NPC(s) heading to the crosshair.");
+		if (n == 0) {
+			Reply(caller, noRoute > 0 ? $"None of the {noRoute} nearby NPC(s) has a route there." : "No NPCs nearby.");
+			return;
+		}
+		_walk = walk;
+		_walkTimer = Timer.Every(TimeSpan.FromSeconds(Walk.Interval), () => {
+			walk.Update();
+			if (!walk.IsDone)
+				return;
+			EndWalk();
+			if (caller.IsValid)
+				Reply(caller, $"/goto: {walk.Arrived} of {n} NPC(s) reached the crosshair in {walk.Elapsed.TotalSeconds:F0} s" +
+				              (walk.Died > 0 ? $", {walk.Died} died on the way" : "") +
+				              (walk.GaveUp.Count > 0 ? $"; gave up: {string.Join(", ", walk.GaveUp.Select(g => $"{g.Key} {g.Value}"))}." : "."));
+		}).CancelOnMapChange();
+		Reply(caller, $"{n} NPC(s) heading to the crosshair along a navmesh route" + (noRoute > 0 ? $" ({noRoute} have no route there)." : ".") +
+		              (camp > 0 ? $" {camp} neutral camp NPC(s) stay at their camps." : ""));
 	}
 
 	[Command("attack", Description = "Nearby NPCs attack what you aim at")]
@@ -194,8 +225,9 @@ public class NpcDemoPlugin : DeadworksPluginBase {
 			return;
 		count = Math.Clamp(count, 1, 60);
 		var sw = Stopwatch.StartNew();
+		var feet = Feet(pawn);
 		for (int i = 0; i < count * 3 && _hordeMembers.Count < count; i++) {
-			if (Nav.GetRandomPoint(pawn.Position, 700f, 1400f, 1) is not { } point)
+			if (Nav.GetRandomPoint(feet, 700f, 1400f, 1) is not { } point)
 				continue;
 			if (CNPC_Trooper.Create(point + new Vector3(0, 0, 40), Team(pawn, "enemy"), TrooperType.Melee) is { } trooper)
 				_hordeMembers.Add(trooper);
@@ -205,7 +237,7 @@ public class NpcDemoPlugin : DeadworksPluginBase {
 		_hordeTimer = Timer.Every(TimeSpan.FromSeconds(Chase.Interval), () => {
 			if (!pawn.IsValid || pawn.Health <= 0)
 				return;
-			_horde?.Update(pawn.Position);
+			_horde?.Update(Feet(pawn));
 		}).CancelOnMapChange();
 		Reply(caller, $"{_hordeMembers.Count} enemies spawned in {spawnMs:F1} ms, 700-1400 units away. Run! /horde again to end it.");
 	}
@@ -223,7 +255,7 @@ public class NpcDemoPlugin : DeadworksPluginBase {
 		_chase = new Chase(() => NearbyTroopers(pawn).Where(t => _squad?.Contains(t) != true));
 		_chaseTimer = Timer.Every(TimeSpan.FromSeconds(Chase.Interval), () => {
 			if (pawn.IsValid && pawn.Health > 0)
-				_chase?.Update(pawn.Position);
+				_chase?.Update(Feet(pawn));
 		}).CancelOnMapChange();
 		Reply(caller, $"Troopers within {NearbyRadius:F0} units are after you. /chaseme again to stop.");
 	}
@@ -240,10 +272,13 @@ public class NpcDemoPlugin : DeadworksPluginBase {
 			return;
 		_squad = new Squad(pawn);
 		count = Math.Clamp(count, 1, Squad.MaxSize);
-		foreach (var point in PointsAround(pawn.Position, count, 1))
+		foreach (var point in PointsAround(Feet(pawn), count, 1))
 			if (CNPC_Trooper.Create(point + new Vector3(0, 0, 40), pawn.TeamNum, TrooperType.Normal) is { } trooper)
 				_squad.Add(trooper);
-		_squadTimer = Timer.Every(TimeSpan.FromSeconds(Squad.Interval), () => _squad?.Update()).CancelOnMapChange();
+		_squadTimer = Timer.Every(TimeSpan.FromSeconds(Squad.Interval), () => {
+			if (pawn.IsValid)
+				_squad?.Update(Feet(pawn));
+		}).CancelOnMapChange();
 		Reply(caller, $"{_squad.Count} minion(s) follow you and fight for you; their kills are yours. /squad again to dismiss.");
 	}
 
@@ -285,14 +320,14 @@ public class NpcDemoPlugin : DeadworksPluginBase {
 	public void CmdPath(CCitadelPlayerController caller) {
 		if (!TryAim(caller, out var pawn, out var aim, out _))
 			return;
-		var start = Nav.GetNearestPoint(pawn.Position, pawn, 400f);
+		var start = Feet(pawn);
 		var goal = Nav.GetNearestPoint(aim, pawn, 600f);
-		if (start == null || goal == null) {
-			Reply(caller, "You or the crosshair are off the navmesh.");
+		if (goal == null) {
+			Reply(caller, "The crosshair is off the navmesh.");
 			return;
 		}
 		var sw = Stopwatch.StartNew();
-		var path = Nav.FindPath(start.Value, goal.Value, pawn);
+		var path = Nav.FindPath(start, goal.Value, pawn);
 		double ms = sw.Elapsed.TotalMilliseconds;
 		if (path == null) {
 			Reply(caller, $"No path ({ms:F2} ms).");
@@ -302,7 +337,7 @@ public class NpcDemoPlugin : DeadworksPluginBase {
 		for (int i = 1; i < points.Count; i++)
 			DrawLine(points[i - 1].Position, points[i].Position, TraverseColor(points[i].Traverse), seconds: 15);
 		var kinds = string.Join(", ", points.Skip(1).GroupBy(w => w.Traverse).Select(g => $"{g.Key} {g.Count()}"));
-		Reply(caller, $"Path: {points.Count} waypoints, {path.Length:F0} units walked ({Vector3.Distance(start.Value, goal.Value):F0} straight), {ms:F2} ms. {kinds}.");
+		Reply(caller, $"Path: {points.Count} waypoints, {path.Length:F0} units walked ({Vector3.Distance(start, goal.Value):F0} straight), {ms:F2} ms. {kinds}.");
 		Reply(caller, "  Green walk, yellow jump, orange climb, cyan ladder or link. Shown for 15 s.");
 	}
 
@@ -318,9 +353,10 @@ public class NpcDemoPlugin : DeadworksPluginBase {
 		}
 		Reply(caller, $"Area {area.Value.Id} (hull {hull}): centre {Fmt(area.Value.Center)}, attributes [{area.Value.Attributes}], flags [{area.Value.Flags}], blocked {area.Value.IsBlocked}");
 		Reply(caller, $"  ground height {Nav.GetGroundHeight(aim, hull: hull):F1} at the crosshair (z {aim.Z:F1})");
-		bool clear = Nav.Raycast(pawn.Position, aim, out var stoppedAt, hull);
-		DrawLine(pawn.Position, clear ? aim : stoppedAt, clear ? Color.Lime : Color.Red, seconds: 10);
-		Reply(caller, clear ? "  You can walk there in a straight line (green)." : $"  A straight walk leaves the navmesh after {Vector3.Distance(pawn.Position, stoppedAt):F0} units (red).");
+		var feet = Feet(pawn);
+		bool clear = Nav.Raycast(feet, aim, out var stoppedAt, hull);
+		DrawLine(feet, clear ? aim : stoppedAt, clear ? Color.Lime : Color.Red, seconds: 10);
+		Reply(caller, clear ? "  You can walk there in a straight line (green)." : $"  A straight walk leaves the navmesh after {Vector3.Distance(feet, stoppedAt):F0} units (red).");
 	}
 
 	[Command("randompoints", Description = "Show 10 random points you can walk to, 300-1500 units away")]
@@ -329,9 +365,10 @@ public class NpcDemoPlugin : DeadworksPluginBase {
 		if (pawn == null)
 			return;
 		var sw = Stopwatch.StartNew();
+		var feet = Feet(pawn);
 		int n = 0;
 		for (int i = 0; i < 10; i++) {
-			if (Nav.GetRandomPoint(pawn.Position, 300f, 1500f, Nav.GetHull(pawn)) is not { } p)
+			if (Nav.GetRandomPoint(feet, 300f, 1500f, Nav.GetHull(pawn)) is not { } p)
 				continue;
 			DrawLine(p, p + new Vector3(0, 0, 300), Color.Magenta, seconds: 15);
 			n++;
@@ -408,18 +445,19 @@ public class NpcDemoPlugin : DeadworksPluginBase {
 		if (pawn == null)
 			return;
 		Bots.SetAiEnabled(false);
-		var bots = BotHeroes().ToList();
+		int callerSlot = caller.Slot;
+		var bots = BotHeroes(except: callerSlot).ToList();
 		// Re-path every second towards where you are now.
 		_botComeTimer = Timer.Every(TimeSpan.FromSeconds(1), () => {
 			if (!pawn.IsValid)
 				return;
-			foreach (var (slot, hero) in BotHeroes()) {
+			var goal = Feet(pawn);
+			foreach (var (slot, hero) in BotHeroes(except: callerSlot)) {
 				var current = _drivenBots.GetValueOrDefault(slot);
-				if (current != null && !current.IsFinished && Vector3.Distance(current.Path.End, pawn.Position) < 300f)
+				if (current != null && !current.IsFinished && Vector3.Distance(current.Path.End, goal) < 300f)
 					continue;
-				var start = Nav.GetNearestPoint(hero.Position, hero, 400f);
-				var goal = Nav.GetNearestPoint(pawn.Position, hero, 400f);
-				var path = start != null && goal != null ? Nav.FindPath(start.Value, goal.Value, hero) : null;
+				var start = Feet(hero);
+				var path = Nav.FindPath(start, goal, hero);
 				_drivenBots[slot] = path != null ? new NavPathFollower(path) : null;
 			}
 		}).CancelOnMapChange();
@@ -432,14 +470,17 @@ public class NpcDemoPlugin : DeadworksPluginBase {
 			return;
 		StopBotWalking();
 		Bots.SetAiEnabled(false);
+		var goal = Nav.GetNearestPoint(aim, 600f) ?? aim;
 		int n = 0;
-		foreach (var (slot, hero) in BotHeroes()) {
+		foreach (var (slot, hero) in BotHeroes(except: caller.Slot)) {
 			if (hero.BotBrain is not { } brain)
 				continue;
-			brain.MoveTo(aim, run: true);
+			brain.MoveTo(goal, run: true);
 			_drivenBots[slot] = null;
+			_botGoIdle[slot] = 0;
 			n++;
 		}
+		_botGo = (caller, goal, n, 0);
 		Reply(caller, $"{n} bot(s) heading to the crosshair: brain MoveTo + ApplyMovement (bot AI turned off).");
 	}
 
@@ -450,15 +491,19 @@ public class NpcDemoPlugin : DeadworksPluginBase {
 		if (hero == null)
 			return;
 		if (follower == null) {
-			// botgo: the brain plans the path, ApplyMovement turns it into input. Stops once it arrives.
+			// botgo: the brain plans the path, ApplyMovement turns it into input. The brain only starts moving on
+			// its next think after MoveTo, so the bot counts as done after a run of usercmds with nowhere to go.
 			var brain = hero.BotBrain;
 			if (brain == null || _botComeTimer != null)
 				return;
-			foreach (var cmd in e.Usercmds)
-				if (!brain.ApplyMovement(cmd)) {
-					_drivenBots.Remove(e.PlayerSlot);
+			foreach (var cmd in e.Usercmds) {
+				if (brain.ApplyMovement(cmd)) {
+					_botGoIdle[e.PlayerSlot] = 0;
+				} else if ((_botGoIdle[e.PlayerSlot] = _botGoIdle.GetValueOrDefault(e.PlayerSlot) + 1) > BotGoIdleLimit) {
+					BotGoDone(e.PlayerSlot, hero);
 					return;
 				}
+			}
 			return;
 		}
 		if (follower.Update(hero.Position) is not { } next)
@@ -466,6 +511,22 @@ public class NpcDemoPlugin : DeadworksPluginBase {
 		bool jump = follower.ShouldJump(hero.Position);
 		foreach (var cmd in e.Usercmds)
 			Bots.SetMoveInput(cmd, hero, next, jump: jump);
+	}
+
+	private void BotGoDone(int slot, CCitadelPlayerPawn hero) {
+		_drivenBots.Remove(slot);
+		_botGoIdle.Remove(slot);
+		if (_botGo is not { } go)
+			return;
+		var flat = hero.Position - go.Goal;
+		if (new Vector2(flat.X, flat.Y).Length() <= 150f)
+			go.Arrived++;
+		_botGo = go;
+		if (_drivenBots.ContainsValue(null))
+			return;
+		_botGo = null;
+		if (go.Caller.IsValid)
+			Reply(go.Caller, $"/botgo: {go.Arrived} of {go.Total} bot(s) reached the crosshair.");
 	}
 
 	// --- Cleanup ---
@@ -501,6 +562,7 @@ public class NpcDemoPlugin : DeadworksPluginBase {
 	/// <summary>Ends /chaseme and the horde's chase; the horde itself stays.</summary>
 	private void StopGroups() {
 		EndChase();
+		EndWalk();
 		_hordeTimer?.Cancel();
 		_hordeTimer = null;
 		_horde?.Release();
@@ -524,6 +586,13 @@ public class NpcDemoPlugin : DeadworksPluginBase {
 		_chase = null;
 	}
 
+	private void EndWalk() {
+		_walkTimer?.Cancel();
+		_walkTimer = null;
+		_walk?.Release();
+		_walk = null;
+	}
+
 	private void EndSquad() {
 		_squadTimer?.Cancel();
 		_squadTimer = null;
@@ -535,6 +604,8 @@ public class NpcDemoPlugin : DeadworksPluginBase {
 		_botComeTimer?.Cancel();
 		_botComeTimer = null;
 		_drivenBots.Clear();
+		_botGoIdle.Clear();
+		_botGo = null;
 	}
 
 	// --- Helpers ---
@@ -551,23 +622,44 @@ public class NpcDemoPlugin : DeadworksPluginBase {
 		float pitch = pawn.EyeAngles.X * MathF.PI / 180f, yaw = pawn.EyeAngles.Y * MathF.PI / 180f;
 		var forward = new Vector3(MathF.Cos(pitch) * MathF.Cos(yaw), MathF.Cos(pitch) * MathF.Sin(yaw), -MathF.Sin(pitch));
 		var start = pawn.EyePosition;
-		var end = start + forward * 8000f;
-		// Leave out trigger and post-processing volumes: the trace starts inside a map-wide one and would stop at once.
-		// A bot's brain stands inside its hero, so it is ignored with the hero.
-		var trace = CGameTrace.Create();
-		Trace.SimpleTrace(start, end, RayType_t.Line, RnQueryObjectSet.All, InteractionLayer.Solid | InteractionLayer.Hitbox,
-			InteractionLayer.Trigger | InteractionLayer.PostProcessingVolume, InteractionLayer.None, CollisionGroup.Always,
-			ref trace, pawn, pawn.BotBrain);
-		point = start + (end - start) * trace.Fraction;
-		hit = trace.DidHit ? trace.HitEntity : null;
+		var trace = TraceLine(start, start + forward * 8000f, RnQueryObjectSet.All, pawn);
+		if (!trace.DidHit) {
+			Reply(caller, "Aim at the ground or something nearer.");
+			return false;
+		}
+		point = start + forward * 8000f * trace.Fraction;
+		hit = trace.HitEntity;
 		if (hit != null && hit.Health <= 0)
 			hit = null;
 		return true;
 	}
 
+	/// <summary>
+	/// The navmesh point under the pawn: straight down from it when it is in the air, then onto the navmesh.
+	/// Nav queries from the pawn's own position fail while it is airborne.
+	/// </summary>
+	private static Vector3 Feet(CCitadelPlayerPawn pawn) {
+		var from = pawn.Position + new Vector3(0, 0, 8);
+		var down = new Vector3(0, 0, -4000f);
+		var trace = TraceLine(from, from + down, RnQueryObjectSet.Static | RnQueryObjectSet.Keyframed, pawn);
+		var ground = trace.DidHit ? from + down * trace.Fraction : pawn.Position;
+		// Standing on something the navmesh leaves out, such as a roof: the nearest walkable point instead.
+		return Nav.GetNearestPoint(ground, pawn, 400f) ?? Nav.GetNearestPoint(ground, pawn, 1500f) ?? ground;
+	}
+
+	private static CGameTrace TraceLine(Vector3 start, Vector3 end, RnQueryObjectSet objects, CCitadelPlayerPawn pawn) {
+		// Leave out trigger and post-processing volumes: the trace starts inside a map-wide one and would stop at once.
+		// A bot's brain stands inside its hero, so it is ignored with the hero.
+		var trace = CGameTrace.Create();
+		Trace.SimpleTrace(start, end, RayType_t.Line, objects, InteractionLayer.Solid | InteractionLayer.Hitbox,
+			InteractionLayer.Trigger | InteractionLayer.PostProcessingVolume, InteractionLayer.None, CollisionGroup.Always,
+			ref trace, pawn, pawn.BotBrain);
+		return trace;
+	}
+
 	/// <summary>Live NPCs within <see cref="NearbyRadius"/> of the pawn, bot brains left out.</summary>
 	private static IEnumerable<CAI_BaseNPC> Nearby(CCitadelPlayerPawn pawn) {
-		var origin = pawn.Position;
+		var origin = Feet(pawn);
 		return Entities.ByClass<CAI_BaseNPC>().Where(n => !n.IsDormant && n.Health > 0 && !n.Is<CCitadelPlayerBotNPCBrain>()
 		                                                  && Vector3.DistanceSquared(n.Position, origin) < NearbyRadius * NearbyRadius);
 	}
@@ -575,10 +667,10 @@ public class NpcDemoPlugin : DeadworksPluginBase {
 	private static IEnumerable<CNPC_Trooper> NearbyTroopers(CCitadelPlayerPawn pawn) =>
 		Nearby(pawn).Select(n => n.As<CNPC_Trooper>()).OfType<CNPC_Trooper>();
 
-	/// <summary>The bot heroes on the server, by slot.</summary>
-	private static IEnumerable<(int Slot, CCitadelPlayerPawn Hero)> BotHeroes() {
+	/// <summary>The bot heroes on the server, by slot, leaving out the one in slot <paramref name="except"/>.</summary>
+	private static IEnumerable<(int Slot, CCitadelPlayerPawn Hero)> BotHeroes(int except = -1) {
 		foreach (var controller in Players.GetAll())
-			if (controller.IsBot && controller.GetHeroPawn() is { IsValid: true } hero && hero.BotBrain != null)
+			if (controller.IsBot && controller.Slot != except && controller.GetHeroPawn() is { IsValid: true } hero && hero.BotBrain != null)
 				yield return (controller.Slot, hero);
 	}
 
