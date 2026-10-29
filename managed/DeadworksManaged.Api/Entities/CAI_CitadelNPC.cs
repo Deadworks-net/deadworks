@@ -28,7 +28,7 @@ public unsafe class CAI_CitadelNPC : CAI_BaseNPC {
 	/// <summary>True for a hero's minion. See <see cref="SetMinion"/>.</summary>
 	public bool IsMinion => _minion.Get(Handle);
 
-	/// <summary>Makes the NPC a hero's minion, like Necro's skeletons, or a normal NPC again.</summary>
+	/// <summary>Makes the NPC a hero's minion, like Graves's skeletons, or a normal NPC again.</summary>
 	/// <remarks>A minion's damage and kills count for its living <see cref="Summoner"/>. Minions also attack neutral creeps.</remarks>
 	public void SetMinion(bool minion) => NativeInterop.NpcSetMinion((void*)Handle, minion ? (byte)1 : (byte)0);
 
