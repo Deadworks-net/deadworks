@@ -54,5 +54,3 @@ No cheats are needed. Every reply also goes to the server console, prefixed `[Np
 | `/botgo` | Bots walk to the crosshair on their brain's own path (`MoveTo`, `ApplyMovement`), and the demo reports how many got there. Turns the bot AI off. |
 
 `/cleanup` removes every NPC, block and bot the demo made.
-
-> **Note:** troopers spawned near the enemy base die within seconds, and a horde kills a hero that stands still.

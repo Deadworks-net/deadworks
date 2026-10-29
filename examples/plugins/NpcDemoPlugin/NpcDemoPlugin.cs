@@ -239,7 +239,7 @@ public class NpcDemoPlugin : DeadworksPluginBase {
 				return;
 			_horde?.Update(Feet(pawn));
 		}).CancelOnMapChange();
-		Reply(caller, $"{_hordeMembers.Count} enemies spawned in {spawnMs:F1} ms, 700-1400 units away. Run! /horde again to end it.");
+		Reply(caller, $"{_hordeMembers.Count} enemies spawned in {spawnMs:F1} ms, 700-1400 units away. /horde again to end it.");
 	}
 
 	[Command("chaseme", Description = "Nearby lane troopers chase you; again to stop")]
@@ -257,7 +257,7 @@ public class NpcDemoPlugin : DeadworksPluginBase {
 			if (pawn.IsValid && pawn.Health > 0)
 				_chase?.Update(Feet(pawn));
 		}).CancelOnMapChange();
-		Reply(caller, $"Troopers within {NearbyRadius:F0} units are after you. /chaseme again to stop.");
+		Reply(caller, $"Troopers within {NearbyRadius:F0} units chase you. /chaseme again to stop.");
 	}
 
 	[Command("squad", Description = "Spawn allied troopers that follow you as minions; again to dismiss")]
@@ -279,7 +279,7 @@ public class NpcDemoPlugin : DeadworksPluginBase {
 			if (pawn.IsValid)
 				_squad?.Update(Feet(pawn));
 		}).CancelOnMapChange();
-		Reply(caller, $"{_squad.Count} minion(s) follow you and fight for you; their kills are yours. /squad again to dismiss.");
+		Reply(caller, $"{_squad.Count} minion(s) follow you; their kills count for you. /squad again to dismiss.");
 	}
 
 	// --- Info ---
@@ -431,7 +431,7 @@ public class NpcDemoPlugin : DeadworksPluginBase {
 		if (enable)
 			StopBotWalking();
 		Bots.SetAiEnabled(enable);
-		Reply(caller, enable ? "Bot AI on: bots push lanes, take ziplines and fight." : "Bot AI off: bots stand still unless a plugin moves them.");
+		Reply(caller, enable ? "Bot AI on." : "Bot AI off: bots only move when a plugin moves them.");
 	}
 
 	[Command("botcome", Description = "Bots walk to you along a navmesh path (bot AI off); again to stop")]

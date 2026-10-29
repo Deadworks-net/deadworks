@@ -16,7 +16,7 @@ public static unsafe class Bots {
 	/// </remarks>
 	/// <param name="hero">Hero. Null picks a random one.</param>
 	/// <param name="team">2 Amber, 3 Sapphire.</param>
-	/// <param name="position">Spawn position. Use a navmesh point outside the enemy base.</param>
+	/// <param name="position">Spawn position, on the navmesh.</param>
 	/// <param name="difficulty">Null uses <c>citadel_default_bot_difficulty</c>.</param>
 	/// <param name="assignLane">Let the game pick a lane.</param>
 	public static CCitadelPlayerPawn? Add(Heroes? hero, int team, Vector3 position, BotDifficulty? difficulty = null, bool assignLane = true) {
