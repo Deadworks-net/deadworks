@@ -33,7 +33,7 @@ public sealed unsafe class CCitadelPlayerPawn : CBasePlayerPawn {
 	/// <summary>
 	/// Sets the lane the bot pushes while <see cref="Bots.AiEnabled"/> is on. Returns false if this hero isn't a bot's.
 	/// </summary>
-	/// <remarks><see cref="CCitadelPlayerController.AssignedLane"/> may not update; read <see cref="BotLane"/>.</remarks>
+	/// <remarks><see cref="CCitadelPlayerController.AssignedLane"/> may not update. Read <see cref="BotLane"/> instead.</remarks>
 	public bool SetBotLane(LaneColor lane) => NativeInterop.BotSetLane((void*)Handle, (int)lane) != 0;
 
 	private static readonly SchemaAccessor<uint> _difficulty = new("CBotDifficultyDefinition"u8, "difficulty"u8);

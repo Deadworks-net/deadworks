@@ -10,7 +10,7 @@ public static unsafe class Bots {
 	/// server is full or no map is loaded.
 	/// </summary>
 	/// <remarks>
-	/// The bot joins as a fake client named <c>BotN</c>. Its hero finishes loading shortly after; wait before reading
+	/// The bot joins as a fake client named <c>BotN</c>. Its hero finishes loading shortly after. Wait before reading
 	/// its abilities. Remove it with <see cref="Server.Kick(int, ENetworkDisconnectionReason)"/>. It only plays while
 	/// <see cref="AiEnabled"/> is on.
 	/// </remarks>

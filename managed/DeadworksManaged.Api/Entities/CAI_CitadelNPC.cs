@@ -13,7 +13,7 @@ public unsafe class CAI_CitadelNPC : CAI_BaseNPC {
 	private static readonly SchemaAccessor<uint> _hAbilityOwner = new(Class, "m_hAbilityOwner"u8);
 	private static readonly SchemaAccessor<bool> _minion = new(Class, "m_bMinion"u8);
 
-	/// <summary>The NPC's abilities, such as a boss's attacks or a trooper's grenade.</summary>
+	/// <summary>The NPC's abilities.</summary>
 	public CCitadelAbilityComponent AbilityComponent => new(_abilityComp.GetAddress(Handle));
 
 	/// <summary>Ability that spawned this summon. Null for map NPCs.</summary>
@@ -44,7 +44,7 @@ public unsafe class CAI_CitadelNPC : CAI_BaseNPC {
 	}
 
 	/// <summary>Sets the entity the NPC works for, usually a hero pawn. Null clears it.</summary>
-	/// <remarks>Minions are removed with the summoner's pawn, such as on a hero swap. They survive the hero's death.</remarks>
+	/// <remarks>Minions are removed with the summoner's pawn, for example on a hero swap. They survive the hero's death.</remarks>
 	public void SetSummoner(CBaseEntity? summoner) =>
 		NativeInterop.NpcSetSummoner((void*)Handle, summoner?.EntityHandle ?? InvalidEntityHandle);
 }

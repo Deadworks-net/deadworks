@@ -41,11 +41,11 @@ public sealed class NavPath {
 
 /// <summary>
 /// Tracks progress along a <see cref="NavPath"/>. Call <see cref="Update"/> each tick and steer towards the point it
-/// returns, such as with <see cref="Bots.SetMoveInput"/>.
+/// returns with <see cref="Bots.SetMoveInput"/>.
 /// </summary>
 /// <remarks>
 /// A waypoint counts as reached within <see cref="ArriveRadius"/> on the ground plane, or once passed. The follower
-/// doesn't re-path; find a new path when <see cref="DistanceFromPath"/> grows.
+/// doesn't re-path. Find a new path when <see cref="DistanceFromPath"/> grows.
 /// </remarks>
 public sealed class NavPathFollower {
 	/// <param name="path">Path to follow.</param>
@@ -228,7 +228,7 @@ public static unsafe class Nav {
 	/// walkable surface.
 	/// </summary>
 	/// <remarks>
-	/// Steps or drops over 20 units stop it; nav blockers don't. Fails if <paramref name="start"/> is more than 200
+	/// Steps or drops over 20 units stop it. Nav blockers don't. Fails if <paramref name="start"/> is more than 200
 	/// units from the navmesh. Cheaper than <see cref="FindPath(Vector3, Vector3, int, bool, bool)"/>.
 	/// </remarks>
 	/// <param name="start">Start point. Snapped onto the navmesh first.</param>
@@ -260,7 +260,7 @@ public static unsafe class Nav {
 
 	/// <summary>Finds a path with the game's pathfinder. Returns null if there is none.</summary>
 	/// <remarks>
-	/// Both ends must be on the navmesh; snap them with <see cref="GetNearestPoint(Vector3, float, int)"/>. Takes
+	/// Both ends must be on the navmesh. Snap them with <see cref="GetNearestPoint(Vector3, float, int)"/>. Takes
 	/// about 1 ms across half the map, 3 ms for a failed search. Uses the hull's default costs, so it ignores
 	/// per-NPC rules such as a trooper's lane.
 	/// </remarks>
@@ -297,7 +297,7 @@ public static unsafe class Nav {
 	/// <summary>
 	/// Blocks a box of the navmesh with a <c>script_nav_blocker</c>. NPCs and
 	/// <see cref="FindPath(Vector3, Vector3, int, bool, bool)"/> route around it. Returns the blocker, or null on
-	/// failure; remove it to unblock.
+	/// failure. Remove the blocker to unblock.
 	/// </summary>
 	/// <remarks>Takes effect shortly after the call.</remarks>
 	/// <param name="center">Box centre.</param>

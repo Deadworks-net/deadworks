@@ -89,10 +89,10 @@ public unsafe class CAI_BaseNPC : CBaseEntity {
 
 	/// <summary>Sends the NPC to a point, like <c>npc_go</c>.</summary>
 	/// <remarks>
-	/// The NPC ignores enemies and damage until it arrives or the path fails, then resumes its own AI. Orders more
-	/// than 3000 units of path away mostly fail; nearer ones can stop partway in <c>SCHED_FAIL</c>. Send long trips
-	/// in legs along <see cref="Nav.FindPath(Vector3, Vector3, CBaseEntity, bool, bool)"/> and re-order after a
-	/// failure. To follow a moving target, call again every 0.5 s.
+	/// The NPC ignores enemies and damage until it arrives or the path fails, then resumes its own AI. Most orders
+	/// over 3000 units of path fail. Shorter ones can stop partway in <c>SCHED_FAIL</c>. Send long trips in legs along
+	/// <see cref="Nav.FindPath(Vector3, Vector3, CBaseEntity, bool, bool)"/>, and order again after a failure. To
+	/// follow a moving target, call again every 0.5 s.
 	/// </remarks>
 	/// <param name="goal">Destination. Need not be on the navmesh.</param>
 	/// <param name="run">Run instead of walking.</param>
@@ -122,6 +122,7 @@ public unsafe class CAI_BaseNPC : CBaseEntity {
 			return NativeInterop.NpcSetSchedule((void*)Handle, p) != 0;
 	}
 
-	/// <summary>Sets the AI state. <see cref="NpcState.Idle"/> also clears the enemy; the game may turn it into <see cref="NpcState.Alert"/>.</summary>
+	/// <summary>Sets the AI state. <see cref="NpcState.Idle"/> also clears the enemy.</summary>
+	/// <remarks>The game may turn <see cref="NpcState.Idle"/> into <see cref="NpcState.Alert"/>.</remarks>
 	public void SetState(NpcState state) => NativeInterop.NpcSetState((void*)Handle, (int)state);
 }
