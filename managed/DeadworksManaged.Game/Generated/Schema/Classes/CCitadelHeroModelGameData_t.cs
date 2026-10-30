@@ -77,6 +77,14 @@ public static partial class Schema {
 		/// <summary><c>CResourceNameTyped&lt;CWeakHandle&lt;InfoForResourceTypeIParticleSystemDefinition&gt;&gt;</c>.</summary>
 		public string m_hAmbientParticle => GetBufferString(__m_hAmbientParticle);
 
+		private static readonly SchemaField __m_runToStopCrouchSpeedRange = new("CCitadelHeroModelGameData_t", "m_runToStopCrouchSpeedRange");
+		/// <summary><c>CRangeFloat</c>. 'run_to_stop' will not trigger while crouching until we've gone over the bigger speed then fall under the smaller speed.</summary>
+		public CRangeFloat m_runToStopCrouchSpeedRange => Embedded<CRangeFloat>(__m_runToStopCrouchSpeedRange);
+
+		private static readonly SchemaField __m_runToStopSpeedRange = new("CCitadelHeroModelGameData_t", "m_runToStopSpeedRange");
+		/// <summary><c>CRangeFloat</c>. 'run_to_stop' will not trigger until we've gone over the bigger speed then fall under the smaller speed.</summary>
+		public CRangeFloat m_runToStopSpeedRange => Embedded<CRangeFloat>(__m_runToStopSpeedRange);
+
 		private static readonly SchemaField __m_strZiplineAttachFX_AttachmentName = new("CCitadelHeroModelGameData_t", "m_strZiplineAttachFX_AttachmentName");
 		/// <summary><c>CUtlString</c>. Which attachment handle to use from the hero when creating the "zip_line_path_universal_attach" FX.</summary>
 		public string m_strZiplineAttachFX_AttachmentName => GetString(__m_strZiplineAttachFX_AttachmentName);

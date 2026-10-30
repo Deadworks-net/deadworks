@@ -17,10 +17,6 @@ public static partial class Schema {
 		/// <summary><c>bool</c>.</summary>
 		public bool m_bRequireEventOwnership { get => Get<bool>(__m_bRequireEventOwnership); set => Set(__m_bRequireEventOwnership, value); }
 
-		private static readonly SchemaField __m_bRewardSeasonalPoints = new("EventGrantDefinition_Points_t", "m_bRewardSeasonalPoints");
-		/// <summary><c>bool</c>.</summary>
-		public bool m_bRewardSeasonalPoints { get => Get<bool>(__m_bRewardSeasonalPoints); set => Set(__m_bRewardSeasonalPoints, value); }
-
 		private static readonly SchemaField __m_eEventID = new("EventGrantDefinition_Points_t", "m_eEventID");
 		/// <summary><c>EEvent</c>.</summary>
 		public EEvent m_eEventID { get => Get<EEvent>(__m_eEventID); set => Set(__m_eEventID, value); }

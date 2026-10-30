@@ -33,6 +33,14 @@ public static partial class Schema {
 		/// <summary><c>float32</c>.</summary>
 		public float m_flRejuvinatorDropHeight { get => Get<float>(__m_flRejuvinatorDropHeight); set => Set(__m_flRejuvinatorDropHeight, value); }
 
+		private static readonly SchemaField __m_flRejuvinatorDropSpreadRadius = new("RejuvinatorParams_t", "m_flRejuvinatorDropSpreadRadius");
+		/// <summary><c>float32</c>.</summary>
+		public float m_flRejuvinatorDropSpreadRadius { get => Get<float>(__m_flRejuvinatorDropSpreadRadius); set => Set(__m_flRejuvinatorDropSpreadRadius, value); }
+
+		private static readonly SchemaField __m_flRejuvinatorDropWallClearance = new("RejuvinatorParams_t", "m_flRejuvinatorDropWallClearance");
+		/// <summary><c>float32</c>.</summary>
+		public float m_flRejuvinatorDropWallClearance { get => Get<float>(__m_flRejuvinatorDropWallClearance); set => Set(__m_flRejuvinatorDropWallClearance, value); }
+
 		private static readonly SchemaField __m_flRejuvinatorExpirationWarningTiming = new("RejuvinatorParams_t", "m_flRejuvinatorExpirationWarningTiming");
 		/// <summary><c>float32</c>.</summary>
 		public float m_flRejuvinatorExpirationWarningTiming { get => Get<float>(__m_flRejuvinatorExpirationWarningTiming); set => Set(__m_flRejuvinatorExpirationWarningTiming, value); }
@@ -40,6 +48,18 @@ public static partial class Schema {
 		private static readonly SchemaField __m_flRejuvinatorRebirthDuration = new("RejuvinatorParams_t", "m_flRejuvinatorRebirthDuration");
 		/// <summary><c>float32[3]</c>.</summary>
 		public SchemaValueList<float> m_flRejuvinatorRebirthDuration => new(this, __m_flRejuvinatorRebirthDuration, 3);
+
+		private static readonly SchemaField __m_nRejuvinatorBreakGold = new("RejuvinatorParams_t", "m_nRejuvinatorBreakGold");
+		/// <summary><c>int32</c>.</summary>
+		public int m_nRejuvinatorBreakGold { get => Get<int>(__m_nRejuvinatorBreakGold); set => Set(__m_nRejuvinatorBreakGold, value); }
+
+		private static readonly SchemaField __m_nRejuvinatorBreakGoldPerMinute = new("RejuvinatorParams_t", "m_nRejuvinatorBreakGoldPerMinute");
+		/// <summary><c>int32</c>.</summary>
+		public int m_nRejuvinatorBreakGoldPerMinute { get => Get<int>(__m_nRejuvinatorBreakGoldPerMinute); set => Set(__m_nRejuvinatorBreakGoldPerMinute, value); }
+
+		private static readonly SchemaField __m_nRejuvinatorDropCount = new("RejuvinatorParams_t", "m_nRejuvinatorDropCount");
+		/// <summary><c>int32</c>.</summary>
+		public int m_nRejuvinatorDropCount { get => Get<int>(__m_nRejuvinatorDropCount); set => Set(__m_nRejuvinatorDropCount, value); }
 
 		private static readonly SchemaField __m_strRejuvPickupSound = new("RejuvinatorParams_t", "m_strRejuvPickupSound");
 		/// <summary><c>CSoundEventName</c>.</summary>

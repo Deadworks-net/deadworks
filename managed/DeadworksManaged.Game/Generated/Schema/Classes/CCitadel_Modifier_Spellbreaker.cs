@@ -12,5 +12,9 @@ public static partial class Schema {
 		internal CCitadel_Modifier_Spellbreaker() { }
 		static CCitadel_Modifier_Spellbreaker ISchemaClass<CCitadel_Modifier_Spellbreaker>.New() => new();
 		static string ISchemaClass<CCitadel_Modifier_Spellbreaker>.NativeName => "CCitadel_Modifier_Spellbreaker";
+
+		private static readonly SchemaField __m_hDamageOriginator = new("CCitadel_Modifier_Spellbreaker", "m_hDamageOriginator");
+		/// <summary><c>CHandle&lt;CBaseEntity&gt;</c>.</summary>
+		public CBaseEntity? m_hDamageOriginator { get => GetHandle<CBaseEntity>(__m_hDamageOriginator); set => SetHandle(__m_hDamageOriginator, value); }
 	}
 }

@@ -13,25 +13,21 @@ public static partial class Schema {
 		static CCitadel_Neutral_Attack_LobBook ISchemaClass<CCitadel_Neutral_Attack_LobBook>.New() => new();
 		static string ISchemaClass<CCitadel_Neutral_Attack_LobBook>.NativeName => "CCitadel_Neutral_Attack_LobBook";
 
-		private static readonly SchemaField __m_bFirstBullet = new("CCitadel_Neutral_Attack_LobBook", "m_bFirstBullet");
+		private static readonly SchemaField __m_bFieldOpened = new("CCitadel_Neutral_Attack_LobBook", "m_bFieldOpened");
 		/// <summary><c>bool</c>.</summary>
-		public bool m_bFirstBullet { get => Get<bool>(__m_bFirstBullet); set => Set(__m_bFirstBullet, value); }
+		public bool m_bFieldOpened { get => Get<bool>(__m_bFieldOpened); set => Set(__m_bFieldOpened, value); }
 
-		private static readonly SchemaField __m_hPointThinker = new("CCitadel_Neutral_Attack_LobBook", "m_hPointThinker");
+		private static readonly SchemaField __m_hSleepField = new("CCitadel_Neutral_Attack_LobBook", "m_hSleepField");
 		/// <summary><c>CHandle&lt;CPointModifierThinker&gt;</c>.</summary>
-		public CPointModifierThinker? m_hPointThinker { get => GetHandle<CPointModifierThinker>(__m_hPointThinker); set => SetHandle(__m_hPointThinker, value); }
-
-		private static readonly SchemaField __m_nBooksExpected = new("CCitadel_Neutral_Attack_LobBook", "m_nBooksExpected");
-		/// <summary><c>int32</c>.</summary>
-		public int m_nBooksExpected { get => Get<int>(__m_nBooksExpected); set => Set(__m_nBooksExpected, value); }
-
-		private static readonly SchemaField __m_nBooksLanded = new("CCitadel_Neutral_Attack_LobBook", "m_nBooksLanded");
-		/// <summary><c>int32</c>.</summary>
-		public int m_nBooksLanded { get => Get<int>(__m_nBooksLanded); set => Set(__m_nBooksLanded, value); }
+		public CPointModifierThinker? m_hSleepField { get => GetHandle<CPointModifierThinker>(__m_hSleepField); set => SetHandle(__m_hSleepField, value); }
 
 		private static readonly SchemaField __m_pShotCounterAutoModifier = new("CCitadel_Neutral_Attack_LobBook", "m_pShotCounterAutoModifier");
 		/// <summary><c>CModifierHandleTyped&lt;CCitadelModifier&gt;</c>. No typed mapping yet: read it through its address.</summary>
 		public RawField m_pShotCounterAutoModifier => Raw(__m_pShotCounterAutoModifier, "CModifierHandleTyped<CCitadelModifier>");
+
+		private static readonly SchemaField __m_tChannelStartTime = new("CCitadel_Neutral_Attack_LobBook", "m_tChannelStartTime");
+		/// <summary><c>GameTime_t</c>.</summary>
+		public GameTime m_tChannelStartTime { get => Get<GameTime>(__m_tChannelStartTime); set => Set(__m_tChannelStartTime, value); }
 
 		private static readonly SchemaField __m_vTargetLocation = new("CCitadel_Neutral_Attack_LobBook", "m_vTargetLocation");
 		/// <summary><c>VectorWS</c>.</summary>

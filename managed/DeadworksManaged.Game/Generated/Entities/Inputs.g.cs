@@ -1401,8 +1401,12 @@ public static class Inputs {
 	/// <summary>Inputs of <c>CInfoTrooperNeutralCamp</c>.</summary>
 	public abstract class CInfoTrooperNeutralCamp : CPointEntity {
 		private protected CInfoTrooperNeutralCamp() { }
+		/// <summary>Remove every neutral currently spawned by the camp.</summary>
+		public const string RemoveNeutrals = "RemoveNeutrals";
 		/// <summary>Takes <c>bool</c>.</summary>
 		public const string SetDisabled = "SetDisabled";
+		/// <summary>Fill every spawn point in the camp now.</summary>
+		public const string SpawnNeutrals = "SpawnNeutrals";
 	}
 	/// <summary>Inputs of <c>CInfoTrooperSpawn</c>.</summary>
 	public abstract class CInfoTrooperSpawn : CBaseEntity {

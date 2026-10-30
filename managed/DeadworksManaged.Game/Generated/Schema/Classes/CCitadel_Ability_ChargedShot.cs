@@ -16,5 +16,9 @@ public static partial class Schema {
 		private static readonly SchemaField __m_ChannelParticle = new("CCitadel_Ability_ChargedShot", "m_ChannelParticle");
 		/// <summary><c>ParticleIndex_t</c>.</summary>
 		public int m_ChannelParticle { get => Get<int>(__m_ChannelParticle); set => Set(__m_ChannelParticle, value); }
+
+		private static readonly SchemaField __m_LastWallRicochetShotID = new("CCitadel_Ability_ChargedShot", "m_LastWallRicochetShotID");
+		/// <summary><c>ShotID_t</c>.</summary>
+		public uint m_LastWallRicochetShotID { get => Get<uint>(__m_LastWallRicochetShotID); set => Set(__m_LastWallRicochetShotID, value); }
 	}
 }

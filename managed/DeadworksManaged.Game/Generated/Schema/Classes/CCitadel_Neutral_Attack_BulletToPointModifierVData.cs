@@ -37,6 +37,10 @@ public static partial class Schema {
 		/// <summary><c>CResourceNameTyped&lt;CWeakHandle&lt;InfoForResourceTypeIParticleSystemDefinition&gt;&gt;</c>.</summary>
 		public string m_TracerParticle => GetBufferString(__m_TracerParticle);
 
+		private static readonly SchemaField __m_bAG2UseActionShootForAttack = new("CCitadel_Neutral_Attack_BulletToPointModifierVData", "m_bAG2UseActionShootForAttack");
+		/// <summary><c>bool</c>. If set - Trigger the 'action_shoot' for each ability bulllet used.</summary>
+		public bool m_bAG2UseActionShootForAttack { get => Get<bool>(__m_bAG2UseActionShootForAttack); set => Set(__m_bAG2UseActionShootForAttack, value); }
+
 		private static readonly SchemaField __m_flBulletSpeed = new("CCitadel_Neutral_Attack_BulletToPointModifierVData", "m_flBulletSpeed");
 		/// <summary><c>float32</c>.</summary>
 		public float m_flBulletSpeed { get => Get<float>(__m_flBulletSpeed); set => Set(__m_flBulletSpeed, value); }

@@ -29,7 +29,13 @@ public static partial class Schema {
 		/// <summary><c>CUtlSymbolLarge</c>.</summary>
 		public string m_iszCampName { get => GetString(__m_iszCampName); set => SetString(__m_iszCampName, value); }
 
+		/// <summary>Fires the <c>RemoveNeutrals</c> input. Remove every neutral currently spawned by the camp.</summary>
+		public void InputRemoveNeutrals() => FireInput("RemoveNeutrals");
+
 		/// <summary>Fires the <c>SetDisabled</c> input.</summary>
 		public void InputSetDisabled(bool value) => FireInput("SetDisabled", Spawner.InputText(value));
+
+		/// <summary>Fires the <c>SpawnNeutrals</c> input. Fill every spawn point in the camp now.</summary>
+		public void InputSpawnNeutrals() => FireInput("SpawnNeutrals");
 	}
 }

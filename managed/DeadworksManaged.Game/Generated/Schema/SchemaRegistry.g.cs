@@ -107,6 +107,7 @@ public static partial class SchemaRegistry {
 		classes["CCitadelDruidPlantShield"] = static () => new Schema.CCitadelDruidPlantShield();
 		classes["CCitadelEconItemContainer"] = static () => new Schema.CCitadelEconItemContainer();
 		classes["CCitadelEnergyTower"] = static () => new Schema.CCitadelEnergyTower();
+		classes["CCitadelEventState"] = static () => new Schema.CCitadelEventState();
 		classes["CCitadelFamiliarClonePlayerPawn"] = static () => new Schema.CCitadelFamiliarClonePlayerPawn();
 		classes["CCitadelFilterModifier"] = static () => new Schema.CCitadelFilterModifier();
 		classes["CCitadelGaffer"] = static () => new Schema.CCitadelGaffer();
@@ -610,6 +611,7 @@ public static partial class SchemaRegistry {
 		classes["CCitadel_Bounce_Pad"] = static () => new Schema.CCitadel_Bounce_Pad();
 		classes["CCitadel_BreakableProp"] = static () => new Schema.CCitadel_BreakableProp();
 		classes["CCitadel_BreakableProp_Hideout"] = static () => new Schema.CCitadel_BreakableProp_Hideout();
+		classes["CCitadel_BreakableProp_PunchableTroll"] = static () => new Schema.CCitadel_BreakableProp_PunchableTroll();
 		classes["CCitadel_CatAnimating"] = static () => new Schema.CCitadel_CatAnimating();
 		classes["CCitadel_CosmeticAbility"] = static () => new Schema.CCitadel_CosmeticAbility();
 		classes["CCitadel_CosmeticAbility_Emote"] = static () => new Schema.CCitadel_CosmeticAbility_Emote();
@@ -695,9 +697,10 @@ public static partial class SchemaRegistry {
 		classes["CCitadel_PickupSpawner"] = static () => new Schema.CCitadel_PickupSpawner();
 		classes["CCitadel_Pickup_Ability"] = static () => new Schema.CCitadel_Pickup_Ability();
 		classes["CCitadel_Pickup_ArtistDrawing"] = static () => new Schema.CCitadel_Pickup_ArtistDrawing();
-		classes["CCitadel_Pickup_AssignedGold"] = static () => new Schema.CCitadel_Pickup_AssignedGold();
+		classes["CCitadel_Pickup_AssignedCurrencies"] = static () => new Schema.CCitadel_Pickup_AssignedCurrencies();
 		classes["CCitadel_Pickup_Currency"] = static () => new Schema.CCitadel_Pickup_Currency();
 		classes["CCitadel_Pickup_Gold"] = static () => new Schema.CCitadel_Pickup_Gold();
+		classes["CCitadel_Pickup_HalloweenCandy"] = static () => new Schema.CCitadel_Pickup_HalloweenCandy();
 		classes["CCitadel_Pickup_Health"] = static () => new Schema.CCitadel_Pickup_Health();
 		classes["CCitadel_Pickup_Item"] = static () => new Schema.CCitadel_Pickup_Item();
 		classes["CCitadel_Pickup_Modifier"] = static () => new Schema.CCitadel_Pickup_Modifier();
@@ -734,6 +737,7 @@ public static partial class SchemaRegistry {
 		classes["CCitadel_Prop_MidBossIndicator"] = static () => new Schema.CCitadel_Prop_MidBossIndicator();
 		classes["CCitadel_Ratking_Standard"] = static () => new Schema.CCitadel_Ratking_Standard();
 		classes["CCitadel_RestorativeGooCube"] = static () => new Schema.CCitadel_RestorativeGooCube();
+		classes["CCitadel_SeasonalAbility_EatHalloweenCandy"] = static () => new Schema.CCitadel_SeasonalAbility_EatHalloweenCandy();
 		classes["CCitadel_Shield"] = static () => new Schema.CCitadel_Shield();
 		classes["CCitadel_ShopProp"] = static () => new Schema.CCitadel_ShopProp();
 		classes["CCitadel_SmokeGrenade_Blocker"] = static () => new Schema.CCitadel_SmokeGrenade_Blocker();
@@ -907,7 +911,6 @@ public static partial class SchemaRegistry {
 		classes["CInfoKOTHSpawnLocation"] = static () => new Schema.CInfoKOTHSpawnLocation();
 		classes["CInfoLadderDismount"] = static () => new Schema.CInfoLadderDismount();
 		classes["CInfoLandmark"] = static () => new Schema.CInfoLandmark();
-		classes["CInfoMidBossSpawn"] = static () => new Schema.CInfoMidBossSpawn();
 		classes["CInfoOffscreenPanoramaTexture"] = static () => new Schema.CInfoOffscreenPanoramaTexture();
 		classes["CInfoParticleTarget"] = static () => new Schema.CInfoParticleTarget();
 		classes["CInfoPlayerStart"] = static () => new Schema.CInfoPlayerStart();
@@ -1693,6 +1696,7 @@ public static partial class SchemaRegistry {
 		designerNames["citadel_bounce_pad"] = static () => new Schema.CCitadel_Bounce_Pad();
 		designerNames["citadel_breakable_prop"] = static () => new Schema.CCitadel_BreakableProp();
 		designerNames["citadel_breakable_prop_hideout"] = static () => new Schema.CCitadel_BreakableProp_Hideout();
+		designerNames["citadel_breakable_prop_punchable_troll"] = static () => new Schema.CCitadel_BreakableProp_PunchableTroll();
 		designerNames["citadel_capture_point"] = static () => new Schema.CCitadelTriggerCapturePoint();
 		designerNames["citadel_capture_point_escort"] = static () => new Schema.CCitadelTriggerCapturePoint_Escort();
 		designerNames["citadel_cat_animating"] = static () => new Schema.CCitadel_CatAnimating();
@@ -1709,6 +1713,7 @@ public static partial class SchemaRegistry {
 		designerNames["citadel_druid_plant_shield"] = static () => new Schema.CCitadelDruidPlantShield();
 		designerNames["citadel_econ_item_container"] = static () => new Schema.CCitadelEconItemContainer();
 		designerNames["citadel_energy_tower"] = static () => new Schema.CCitadelEnergyTower();
+		designerNames["citadel_event_state"] = static () => new Schema.CCitadelEventState();
 		designerNames["citadel_fissure_wall"] = static () => new Schema.CCitadel_FissureWall();
 		designerNames["citadel_gaffer"] = static () => new Schema.CCitadelGaffer();
 		designerNames["citadel_gamerules"] = static () => new Schema.CCitadelGameRulesProxy();
@@ -1751,9 +1756,10 @@ public static partial class SchemaRegistry {
 		designerNames["citadel_pickup"] = static () => new Schema.CCitadel_Pickup();
 		designerNames["citadel_pickup_ability"] = static () => new Schema.CCitadel_Pickup_Ability();
 		designerNames["citadel_pickup_artist_drawing"] = static () => new Schema.CCitadel_Pickup_ArtistDrawing();
-		designerNames["citadel_pickup_assigned_gold"] = static () => new Schema.CCitadel_Pickup_AssignedGold();
+		designerNames["citadel_pickup_assigned_currencies"] = static () => new Schema.CCitadel_Pickup_AssignedCurrencies();
 		designerNames["citadel_pickup_currency"] = static () => new Schema.CCitadel_Pickup_Currency();
 		designerNames["citadel_pickup_gold"] = static () => new Schema.CCitadel_Pickup_Gold();
+		designerNames["citadel_pickup_halloween_candy"] = static () => new Schema.CCitadel_Pickup_HalloweenCandy();
 		designerNames["citadel_pickup_health"] = static () => new Schema.CCitadel_Pickup_Health();
 		designerNames["citadel_pickup_item"] = static () => new Schema.CCitadel_Pickup_Item();
 		designerNames["citadel_pickup_modifier"] = static () => new Schema.CCitadel_Pickup_Modifier();
@@ -1987,7 +1993,6 @@ public static partial class SchemaRegistry {
 		designerNames["info_koth_spawn_location"] = static () => new Schema.CInfoKOTHSpawnLocation();
 		designerNames["info_ladder_dismount"] = static () => new Schema.CInfoLadderDismount();
 		designerNames["info_landmark"] = static () => new Schema.CInfoLandmark();
-		designerNames["info_mid_boss_spawn"] = static () => new Schema.CInfoMidBossSpawn();
 		designerNames["info_mini_map_marker"] = static () => new Schema.CMiniMapMarker();
 		designerNames["info_nav_space"] = static () => new Schema.CNavSpaceInfo();
 		designerNames["info_neutral_trooper_camp"] = static () => new Schema.CInfoTrooperNeutralCamp();
@@ -2254,6 +2259,7 @@ public static partial class SchemaRegistry {
 		designerNames["scripted_item_drop"] = static () => new Schema.CScriptItem();
 		designerNames["scripted_scene"] = static () => new Schema.CSceneEntity();
 		designerNames["scripted_sequence"] = static () => new Schema.CScriptedSequence();
+		designerNames["seasonal_eat_halloween_candy"] = static () => new Schema.CCitadel_SeasonalAbility_EatHalloweenCandy();
 		designerNames["setting_sun_projectile"] = static () => new Schema.CCitadel_Projectile_SettingSun();
 		designerNames["shadow_pulse"] = static () => new Schema.CCitadel_Ability_ShadowPulse();
 		designerNames["shatterglass_shard"] = static () => new Schema.CShatterGlassShardPhysics();

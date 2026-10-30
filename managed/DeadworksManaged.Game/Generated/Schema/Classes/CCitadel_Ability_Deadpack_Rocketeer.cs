@@ -17,6 +17,10 @@ public static partial class Schema {
 		/// <summary><c>bool</c>. Networked: a write is sent to clients.</summary>
 		public bool m_bDiveStraightDown { get => Get<bool>(__m_bDiveStraightDown); set => Set(__m_bDiveStraightDown, value); }
 
+		private static readonly SchemaField __m_bJetpackDisabledUntilGrounded = new("CCitadel_Ability_Deadpack_Rocketeer", "m_bJetpackDisabledUntilGrounded");
+		/// <summary><c>bool</c>. Networked: a write is sent to clients.</summary>
+		public bool m_bJetpackDisabledUntilGrounded { get => Get<bool>(__m_bJetpackDisabledUntilGrounded); set => Set(__m_bJetpackDisabledUntilGrounded, value); }
+
 		private static readonly SchemaField __m_eState = new("CCitadel_Ability_Deadpack_Rocketeer", "m_eState");
 		/// <summary><c>ERocketeerState</c>. Networked: a write is sent to clients.</summary>
 		public ERocketeerState m_eState { get => Get<ERocketeerState>(__m_eState); set => Set(__m_eState, value); }

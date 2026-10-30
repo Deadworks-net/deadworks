@@ -857,6 +857,8 @@ public static class EntityNames {
 	public const string citadel_breakable_prop = "citadel_breakable_prop";
 	/// <summary><c>CCitadel_BreakableProp_Hideout</c>.</summary>
 	public const string citadel_breakable_prop_hideout = "citadel_breakable_prop_hideout";
+	/// <summary><c>CCitadel_BreakableProp_PunchableTroll</c>.</summary>
+	public const string citadel_breakable_prop_punchable_troll = "citadel_breakable_prop_punchable_troll";
 	/// <summary><c>CCitadelTriggerCapturePoint</c>.</summary>
 	public const string citadel_capture_point = "citadel_capture_point";
 	/// <summary><c>CCitadelTriggerCapturePoint_Escort</c>.</summary>
@@ -889,6 +891,8 @@ public static class EntityNames {
 	public const string citadel_econ_item_container = "citadel_econ_item_container";
 	/// <summary><c>CCitadelEnergyTower</c>.</summary>
 	public const string citadel_energy_tower = "citadel_energy_tower";
+	/// <summary><c>CCitadelEventState</c>.</summary>
+	public const string citadel_event_state = "citadel_event_state";
 	/// <summary><c>CCitadel_FissureWall</c>.</summary>
 	public const string citadel_fissure_wall = "citadel_fissure_wall";
 	/// <summary><c>CCitadelGaffer</c>.</summary>
@@ -973,12 +977,14 @@ public static class EntityNames {
 	public const string citadel_pickup_ability = "citadel_pickup_ability";
 	/// <summary><c>CCitadel_Pickup_ArtistDrawing</c>.</summary>
 	public const string citadel_pickup_artist_drawing = "citadel_pickup_artist_drawing";
-	/// <summary><c>CCitadel_Pickup_AssignedGold</c>.</summary>
-	public const string citadel_pickup_assigned_gold = "citadel_pickup_assigned_gold";
+	/// <summary><c>CCitadel_Pickup_AssignedCurrencies</c>.</summary>
+	public const string citadel_pickup_assigned_currencies = "citadel_pickup_assigned_currencies";
 	/// <summary><c>CCitadel_Pickup_Currency</c>.</summary>
 	public const string citadel_pickup_currency = "citadel_pickup_currency";
 	/// <summary><c>CCitadel_Pickup_Gold</c>.</summary>
 	public const string citadel_pickup_gold = "citadel_pickup_gold";
+	/// <summary><c>CCitadel_Pickup_HalloweenCandy</c>.</summary>
+	public const string citadel_pickup_halloween_candy = "citadel_pickup_halloween_candy";
 	/// <summary><c>CCitadel_Pickup_Health</c>.</summary>
 	public const string citadel_pickup_health = "citadel_pickup_health";
 	/// <summary><c>CCitadel_Pickup_Item</c>.</summary>
@@ -1445,8 +1451,6 @@ public static class EntityNames {
 	public const string info_ladder_dismount = "info_ladder_dismount";
 	/// <summary><c>CInfoLandmark</c>.</summary>
 	public const string info_landmark = "info_landmark";
-	/// <summary><c>CInfoMidBossSpawn</c>.</summary>
-	public const string info_mid_boss_spawn = "info_mid_boss_spawn";
 	/// <summary><c>CMiniMapMarker</c>.</summary>
 	public const string info_mini_map_marker = "info_mini_map_marker";
 	/// <summary><c>CNavSpaceInfo</c>.</summary>
@@ -1979,6 +1983,8 @@ public static class EntityNames {
 	public const string scripted_scene = "scripted_scene";
 	/// <summary><c>CScriptedSequence</c>.</summary>
 	public const string scripted_sequence = "scripted_sequence";
+	/// <summary><c>CCitadel_SeasonalAbility_EatHalloweenCandy</c>.</summary>
+	public const string seasonal_eat_halloween_candy = "seasonal_eat_halloween_candy";
 	/// <summary><c>CCitadel_Projectile_SettingSun</c>.</summary>
 	public const string setting_sun_projectile = "setting_sun_projectile";
 	/// <summary><c>CCitadel_Ability_ShadowPulse</c>.</summary>

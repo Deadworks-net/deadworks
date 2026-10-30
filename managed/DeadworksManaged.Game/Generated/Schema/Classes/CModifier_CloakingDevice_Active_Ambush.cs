@@ -13,6 +13,14 @@ public static partial class Schema {
 		static CModifier_CloakingDevice_Active_Ambush ISchemaClass<CModifier_CloakingDevice_Active_Ambush>.New() => new();
 		static string ISchemaClass<CModifier_CloakingDevice_Active_Ambush>.NativeName => "CModifier_CloakingDevice_Active_Ambush";
 
+		private static readonly SchemaField __m_flBonusTechPower = new("CModifier_CloakingDevice_Active_Ambush", "m_flBonusTechPower");
+		/// <summary><c>float32</c>.</summary>
+		public float m_flBonusTechPower { get => Get<float>(__m_flBonusTechPower); set => Set(__m_flBonusTechPower, value); }
+
+		private static readonly SchemaField __m_flBonusWeaponDamage = new("CModifier_CloakingDevice_Active_Ambush", "m_flBonusWeaponDamage");
+		/// <summary><c>float32</c>.</summary>
+		public float m_flBonusWeaponDamage { get => Get<float>(__m_flBonusWeaponDamage); set => Set(__m_flBonusWeaponDamage, value); }
+
 		private static readonly SchemaField __m_nAmbushParticle = new("CModifier_CloakingDevice_Active_Ambush", "m_nAmbushParticle");
 		/// <summary><c>ParticleIndex_t</c>.</summary>
 		public int m_nAmbushParticle { get => Get<int>(__m_nAmbushParticle); set => Set(__m_nAmbushParticle, value); }

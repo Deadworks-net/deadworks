@@ -189,6 +189,10 @@ public static partial class Schema {
 		/// <summary><c>float32</c>.</summary>
 		public float m_flSlowEffectivenessLateral { get => Get<float>(__m_flSlowEffectivenessLateral); set => Set(__m_flSlowEffectivenessLateral, value); }
 
+		private static readonly SchemaField __m_flSlowEffectivenessMovementAbilitySilenceFrac = new("CCitadel_Ability_DeadpackRocketeerVData", "m_flSlowEffectivenessMovementAbilitySilenceFrac");
+		/// <summary><c>float32</c>.</summary>
+		public float m_flSlowEffectivenessMovementAbilitySilenceFrac { get => Get<float>(__m_flSlowEffectivenessMovementAbilitySilenceFrac); set => Set(__m_flSlowEffectivenessMovementAbilitySilenceFrac, value); }
+
 		private static readonly SchemaField __m_flSlowEffectivenessVertical = new("CCitadel_Ability_DeadpackRocketeerVData", "m_flSlowEffectivenessVertical");
 		/// <summary><c>float32</c>.</summary>
 		public float m_flSlowEffectivenessVertical { get => Get<float>(__m_flSlowEffectivenessVertical); set => Set(__m_flSlowEffectivenessVertical, value); }

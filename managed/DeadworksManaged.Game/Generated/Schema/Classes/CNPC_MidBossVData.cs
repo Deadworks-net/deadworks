@@ -29,6 +29,10 @@ public static partial class Schema {
 		/// <summary><c>float32</c>.</summary>
 		public float m_flDyingDuration { get => Get<float>(__m_flDyingDuration); set => Set(__m_flDyingDuration, value); }
 
+		private static readonly SchemaField __m_flLowHealthSoundHealthFraction = new("CNPC_MidBossVData", "m_flLowHealthSoundHealthFraction");
+		/// <summary><c>float32</c>.</summary>
+		public float m_flLowHealthSoundHealthFraction { get => Get<float>(__m_flLowHealthSoundHealthFraction); set => Set(__m_flLowHealthSoundHealthFraction, value); }
+
 		private static readonly SchemaField __m_iHealthGainPerMinute = new("CNPC_MidBossVData", "m_iHealthGainPerMinute");
 		/// <summary><c>int32</c>.</summary>
 		public int m_iHealthGainPerMinute { get => Get<int>(__m_iHealthGainPerMinute); set => Set(__m_iHealthGainPerMinute, value); }

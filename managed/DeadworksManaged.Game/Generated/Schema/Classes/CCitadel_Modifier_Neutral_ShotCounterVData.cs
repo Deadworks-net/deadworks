@@ -16,5 +16,9 @@ public static partial class Schema {
 		private static readonly SchemaField __m_CoreParticle = new("CCitadel_Modifier_Neutral_ShotCounterVData", "m_CoreParticle");
 		/// <summary><c>CResourceNameTyped&lt;CWeakHandle&lt;InfoForResourceTypeIParticleSystemDefinition&gt;&gt;</c>. Follows core. CP1.x counts shots fired.</summary>
 		public string m_CoreParticle => GetBufferString(__m_CoreParticle);
+
+		private static readonly SchemaField __m_nStartingBookCount = new("CCitadel_Modifier_Neutral_ShotCounterVData", "m_nStartingBookCount");
+		/// <summary><c>int32</c>. How many books the bandolier starts with. Drives CP2.y, the ring's emitter count.</summary>
+		public int m_nStartingBookCount { get => Get<int>(__m_nStartingBookCount); set => Set(__m_nStartingBookCount, value); }
 	}
 }

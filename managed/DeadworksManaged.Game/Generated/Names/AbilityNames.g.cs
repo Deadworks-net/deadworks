@@ -984,7 +984,7 @@ public static class AbilityNames {
 	public const string common_properties = "common_properties";
 	/// <summary>Cosmetic.</summary>
 	public const string cosmetic_ability_emote = "cosmetic_ability_emote";
-	/// <summary>Snowball. Cosmetic.</summary>
+	/// <summary>Cosmetic.</summary>
 	public const string cosmetic_ability_snowball = "cosmetic_ability_snowball";
 	/// <summary>Cosmetic.</summary>
 	public const string cosmetic_ability_voting_poster = "cosmetic_ability_voting_poster";
@@ -1065,6 +1065,8 @@ public static class AbilityNames {
 	public const string rutger_pulse = "rutger_pulse";
 	/// <summary>Signature.</summary>
 	public const string rutger_rocket = "rutger_rocket";
+	/// <summary>Cosmetic.</summary>
+	public const string seasonal_ability_eat_halloween_candy = "seasonal_ability_eat_halloween_candy";
 	/// <summary>Signature.</summary>
 	public const string signature_base = "signature_base";
 	/// <summary>Mid Boss Charge. Signature.</summary>

@@ -30,16 +30,16 @@ public static partial class Schema {
 		public bool m_bPredictedOwner { get => Get<bool>(__m_bPredictedOwner); set => Set(__m_bPredictedOwner, value); }
 
 		private static readonly SchemaField __m_bvDisabledStateMask = new("CModifierProperty", "m_bvDisabledStateMask");
-		/// <summary><c>uint32[11]</c>. Networked: a write is sent to clients.</summary>
-		public SchemaValueList<uint> m_bvDisabledStateMask => new(this, __m_bvDisabledStateMask, 11);
+		/// <summary><c>uint32[12]</c>. Networked: a write is sent to clients.</summary>
+		public SchemaValueList<uint> m_bvDisabledStateMask => new(this, __m_bvDisabledStateMask, 12);
 
 		private static readonly SchemaField __m_bvEnabledPredictedStateMask = new("CModifierProperty", "m_bvEnabledPredictedStateMask");
-		/// <summary><c>uint32[11]</c>. Networked: a write is sent to clients.</summary>
-		public SchemaValueList<uint> m_bvEnabledPredictedStateMask => new(this, __m_bvEnabledPredictedStateMask, 11);
+		/// <summary><c>uint32[12]</c>. Networked: a write is sent to clients.</summary>
+		public SchemaValueList<uint> m_bvEnabledPredictedStateMask => new(this, __m_bvEnabledPredictedStateMask, 12);
 
 		private static readonly SchemaField __m_bvEnabledStateMask = new("CModifierProperty", "m_bvEnabledStateMask");
-		/// <summary><c>uint32[11]</c>. Networked: a write is sent to clients. Wrapped by <c>CModifierProperty.SetModifierState</c>, <c>CModifierProperty.HasModifierState</c> in DeadworksManaged.Api.</summary>
-		public SchemaValueList<uint> m_bvEnabledStateMask => new(this, __m_bvEnabledStateMask, 11);
+		/// <summary><c>uint32[12]</c>. Networked: a write is sent to clients. Wrapped by <c>CModifierProperty.SetModifierState</c>, <c>CModifierProperty.HasModifierState</c> in DeadworksManaged.Api.</summary>
+		public SchemaValueList<uint> m_bvEnabledStateMask => new(this, __m_bvEnabledStateMask, 12);
 
 		private static readonly SchemaField __m_hHandle = new("CModifierProperty", "m_hHandle");
 		/// <summary><c>ModifierPropRuntimeHandle_t</c>.</summary>

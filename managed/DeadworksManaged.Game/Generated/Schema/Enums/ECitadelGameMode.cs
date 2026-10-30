@@ -15,5 +15,6 @@ public static partial class Schema {
 		k_ECitadelGameMode_StreetBrawl = 4,
 		k_ECitadelGameMode_ExploreNYC = 5,
 		k_ECitadelGameMode_Internal = 6,
+		k_ECitadelGameMode_Internal02 = 7,
 	}
 }

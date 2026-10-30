@@ -399,6 +399,8 @@ public static class ModifierNames {
 	public const string ability_fencer_lunge__uirecast = "ability_fencer_lunge/uirecast";
 	/// <summary>Class <c>modifier_base</c>.</summary>
 	public const string ability_fencer_riposte__modifier_fencer_riposte_attack_debuff = "ability_fencer_riposte/modifier_fencer_riposte_attack_debuff";
+	/// <summary>Class <c>modifier_citadel_root</c>.</summary>
+	public const string ability_fencer_riposte__modifier_fencer_riposte_immobilize = "ability_fencer_riposte/modifier_fencer_riposte_immobilize";
 	/// <summary>Class <c>modifier_fencer_riposte_target_lifesteal</c>.</summary>
 	public const string ability_fencer_riposte__modifier_fencer_riposte_target_lifesteal = "ability_fencer_riposte/modifier_fencer_riposte_target_lifesteal";
 	/// <summary>Class <c>modifier_base</c>.</summary>
@@ -1267,6 +1269,8 @@ public static class ModifierNames {
 	public const string citadel_ability_fissure_wall__modifier_fissure_wall = "citadel_ability_fissure_wall/modifier_fissure_wall";
 	/// <summary>Class <c>modifier_slow_base</c>.</summary>
 	public const string citadel_ability_fissure_wall__slow = "citadel_ability_fissure_wall/slow";
+	/// <summary>Class <c>modifier_base</c>.</summary>
+	public const string citadel_ability_flying_strike__homing = "citadel_ability_flying_strike/homing";
 	/// <summary>Class <c>modifier_slow_base</c>.</summary>
 	public const string citadel_ability_flying_strike__slow = "citadel_ability_flying_strike/slow";
 	/// <summary>Class <c>modifier_base</c>.</summary>
@@ -1577,6 +1581,8 @@ public static class ModifierNames {
 	public const string citadel_neutral_attack_bullet_to_pointmodifier = "citadel_neutral_attack_bullet_to_pointmodifier";
 	/// <summary>Class <c>citadel_neutral_attack_lob_book</c>.</summary>
 	public const string citadel_neutral_attack_lob_book = "citadel_neutral_attack_lob_book";
+	/// <summary>Class <c>modifier_citadel_base_buildup</c>.</summary>
+	public const string citadel_neutral_attack_lob_book__lobbook_sleep_buildup = "citadel_neutral_attack_lob_book/lobbook_sleep_buildup";
 	/// <summary>Class <c>modifier_citadel_sleep</c>.</summary>
 	public const string citadel_neutral_attack_lob_book__modifier_citadel_sleep = "citadel_neutral_attack_lob_book/modifier_citadel_sleep";
 	/// <summary>Class <c>modifier_neutral_dot_debuff</c>.</summary>
@@ -1690,19 +1696,19 @@ public static class ModifierNames {
 	public const string citadel_neutral_light_melee_weak = "citadel_neutral_light_melee_weak";
 	/// <summary>Class <c>modifier_base</c>.</summary>
 	public const string citadel_neutral_light_melee_weak__castdelay = "citadel_neutral_light_melee_weak/castdelay";
-	/// <summary>Class <c>citadel_neutral_self_cast_aoe</c>.</summary>
+	/// <summary>Class <c>citadel_neutral_self_cast_modifier</c>.</summary>
 	public const string citadel_neutral_plant_self_cast_melee_aoe = "citadel_neutral_plant_self_cast_melee_aoe";
 	/// <summary>Class <c>citadel_modifier_neutral_self_aoe</c>.</summary>
 	public const string citadel_neutral_plant_self_cast_melee_aoe__citadel_modifier_neutral_self_aoe = "citadel_neutral_plant_self_cast_melee_aoe/citadel_modifier_neutral_self_aoe";
-	/// <summary>Class <c>citadel_neutral_self_cast_aoe</c>.</summary>
+	/// <summary>Class <c>citadel_neutral_self_cast_modifier</c>.</summary>
 	public const string citadel_neutral_plant_self_cast_melee_aoe_strong = "citadel_neutral_plant_self_cast_melee_aoe_strong";
 	/// <summary>Class <c>citadel_modifier_neutral_self_aoe</c>.</summary>
 	public const string citadel_neutral_plant_self_cast_melee_aoe_strong__citadel_modifier_neutral_self_aoe = "citadel_neutral_plant_self_cast_melee_aoe_strong/citadel_modifier_neutral_self_aoe";
-	/// <summary>Class <c>citadel_neutral_self_cast_bomb</c>.</summary>
+	/// <summary>Class <c>citadel_neutral_self_cast_modifier</c>.</summary>
 	public const string citadel_neutral_self_bomb = "citadel_neutral_self_bomb";
 	/// <summary>Class <c>citadel_modifier_neutral_self_bomb</c>.</summary>
 	public const string citadel_neutral_self_bomb__citadel_modifier_neutral_self_bomb = "citadel_neutral_self_bomb/citadel_modifier_neutral_self_bomb";
-	/// <summary>Class <c>citadel_neutral_self_cast_bomb</c>.</summary>
+	/// <summary>Class <c>citadel_neutral_self_cast_modifier</c>.</summary>
 	public const string citadel_neutral_self_bomb_metal = "citadel_neutral_self_bomb_metal";
 	/// <summary>Class <c>citadel_modifier_neutral_self_bomb</c>.</summary>
 	public const string citadel_neutral_self_bomb_metal__citadel_modifier_neutral_self_bomb = "citadel_neutral_self_bomb_metal/citadel_modifier_neutral_self_bomb";
@@ -2072,6 +2078,10 @@ public static class ModifierNames {
 	public const string rutger_pulse__modifier_rutger_pulse_target_subclass = "rutger_pulse/modifier_rutger_pulse_target_subclass";
 	/// <summary>Class <c>modifier_intrinsic_base</c>.</summary>
 	public const string rutger_rocket__modifier_intrinsic_base = "rutger_rocket/modifier_intrinsic_base";
+	/// <summary>Class <c>modifier_halloween_candy_buff</c>.</summary>
+	public const string seasonal_ability_eat_halloween_candy__halloween_candy_sugar_rush = "seasonal_ability_eat_halloween_candy/halloween_candy_sugar_rush";
+	/// <summary>Class <c>modifier_eat_halloween_candy_intrinsic</c>.</summary>
+	public const string seasonal_ability_eat_halloween_candy__modifier_eat_halloween_candy_intrinsic = "seasonal_ability_eat_halloween_candy/modifier_eat_halloween_candy_intrinsic";
 	/// <summary>Class <c>modifier_synth_affliction_debuff</c>.</summary>
 	public const string synth_affliction__modifier_synth_affliction_debuff = "synth_affliction/modifier_synth_affliction_debuff";
 	/// <summary>Class <c>modifier_intrinsic_base</c>.</summary>
@@ -2292,7 +2302,7 @@ public static class ModifierNames {
 	public const string upgrade_cloaking_device_active__modifier_cloaking_device_active_ambush = "upgrade_cloaking_device_active/modifier_cloaking_device_active_ambush";
 	/// <summary>Class <c>modifier_intrinsic_base</c>.</summary>
 	public const string upgrade_cloaking_device_active__modifier_intrinsic_base = "upgrade_cloaking_device_active/modifier_intrinsic_base";
-	/// <summary>Class <c>modifier_invis</c>.</summary>
+	/// <summary>Class <c>modifier_cloaking_device_active_invis</c>.</summary>
 	public const string upgrade_cloaking_device_active__modifier_invis = "upgrade_cloaking_device_active/modifier_invis";
 	/// <summary>Class <c>modifier_close_range_proc</c>.</summary>
 	public const string upgrade_close_quarter_combat__modifier_close_range_proc = "upgrade_close_quarter_combat/modifier_close_range_proc";
@@ -2518,7 +2528,7 @@ public static class ModifierNames {
 	public const string upgrade_heal_on_level__heal_on_level = "upgrade_heal_on_level/heal_on_level";
 	/// <summary>Class <c>modifier_healbane_debuff</c>.</summary>
 	public const string upgrade_healbane__modifier_healbane_debuff = "upgrade_healbane/modifier_healbane_debuff";
-	/// <summary>Class <c>modifier_apply_debuff_proc</c>.</summary>
+	/// <summary>Class <c>modifier_healbane_proc</c>.</summary>
 	public const string upgrade_healbane__modifier_healbane_debuff_proc = "upgrade_healbane/modifier_healbane_debuff_proc";
 	/// <summary>Class <c>modifier_intrinsic_base</c>.</summary>
 	public const string upgrade_healbane__modifier_intrinsic_decay = "upgrade_healbane/modifier_intrinsic_decay";

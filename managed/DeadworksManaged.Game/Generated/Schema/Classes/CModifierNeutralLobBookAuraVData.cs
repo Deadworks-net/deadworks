@@ -13,17 +13,9 @@ public static partial class Schema {
 		static CModifierNeutralLobBookAuraVData ISchemaClass<CModifierNeutralLobBookAuraVData>.New() => new();
 		static string ISchemaClass<CModifierNeutralLobBookAuraVData>.NativeName => "CModifierNeutralLobBookAuraVData";
 
-		private static readonly SchemaField __m_ExplodeDebuffModifier = new("CModifierNeutralLobBookAuraVData", "m_ExplodeDebuffModifier");
-		/// <summary><c>CEmbeddedSubclass&lt;CCitadelModifier&gt;</c>.</summary>
-		public CCitadelModifierVData? m_ExplodeDebuffModifier => EmbeddedSubclass<CCitadelModifierVData>(__m_ExplodeDebuffModifier);
-
-		private static readonly SchemaField __m_ExplodeParticle = new("CModifierNeutralLobBookAuraVData", "m_ExplodeParticle");
-		/// <summary><c>CResourceNameTyped&lt;CWeakHandle&lt;InfoForResourceTypeIParticleSystemDefinition&gt;&gt;</c>.</summary>
-		public string m_ExplodeParticle => GetBufferString(__m_ExplodeParticle);
-
-		private static readonly SchemaField __m_ExplodeSound = new("CModifierNeutralLobBookAuraVData", "m_ExplodeSound");
-		/// <summary><c>CSoundEventName</c>.</summary>
-		public string m_ExplodeSound => GetBufferString(__m_ExplodeSound);
+		private static readonly SchemaField __m_BuildupModifier = new("CModifierNeutralLobBookAuraVData", "m_BuildupModifier");
+		/// <summary><c>CEmbeddedSubclass&lt;CCitadel_Modifier_Base_Buildup&gt;</c>. The buildup meter applied to players standing in the field.</summary>
+		public CCitadel_Modifier_Base_BuildupVData? m_BuildupModifier => EmbeddedSubclass<CCitadel_Modifier_Base_BuildupVData>(__m_BuildupModifier);
 
 		private static readonly SchemaField __m_FloorBurstParticle = new("CModifierNeutralLobBookAuraVData", "m_FloorBurstParticle");
 		/// <summary><c>CResourceNameTyped&lt;CWeakHandle&lt;InfoForResourceTypeIParticleSystemDefinition&gt;&gt;</c>.</summary>
@@ -33,12 +25,40 @@ public static partial class Schema {
 		/// <summary><c>CResourceNameTyped&lt;CWeakHandle&lt;InfoForResourceTypeIParticleSystemDefinition&gt;&gt;</c>.</summary>
 		public string m_RadiusParticle => GetBufferString(__m_RadiusParticle);
 
+		private static readonly SchemaField __m_SleepModifier = new("CModifierNeutralLobBookAuraVData", "m_SleepModifier");
+		/// <summary><c>CEmbeddedSubclass&lt;CCitadelModifier&gt;</c>. Applied when the buildup meter fills.</summary>
+		public CCitadelModifierVData? m_SleepModifier => EmbeddedSubclass<CCitadelModifierVData>(__m_SleepModifier);
+
+		private static readonly SchemaField __m_SleepSound = new("CModifierNeutralLobBookAuraVData", "m_SleepSound");
+		/// <summary><c>CSoundEventName</c>. Played on a player at the moment their meter fills.</summary>
+		public string m_SleepSound => GetBufferString(__m_SleepSound);
+
 		private static readonly SchemaField __m_SwirlParticle = new("CModifierNeutralLobBookAuraVData", "m_SwirlParticle");
 		/// <summary><c>CResourceNameTyped&lt;CWeakHandle&lt;InfoForResourceTypeIParticleSystemDefinition&gt;&gt;</c>.</summary>
 		public string m_SwirlParticle => GetBufferString(__m_SwirlParticle);
 
-		private static readonly SchemaField __m_flExplodeDamage = new("CModifierNeutralLobBookAuraVData", "m_flExplodeDamage");
-		/// <summary><c>float32</c>.</summary>
-		public float m_flExplodeDamage { get => Get<float>(__m_flExplodeDamage); set => Set(__m_flExplodeDamage, value); }
+		private static readonly SchemaField __m_flBuildupTickInterval = new("CModifierNeutralLobBookAuraVData", "m_flBuildupTickInterval");
+		/// <summary><c>float32</c>. Seconds between buildup applications to players inside the field.</summary>
+		public float m_flBuildupTickInterval { get => Get<float>(__m_flBuildupTickInterval); set => Set(__m_flBuildupTickInterval, value); }
+
+		private static readonly SchemaField __m_flDrainTime = new("CModifierNeutralLobBookAuraVData", "m_flDrainTime");
+		/// <summary><c>float32</c>. Seconds for a full meter to drain back to empty after a player leaves. The grace period before draining starts is the buildup modifier's own m_flBuildUpDecayDelay.</summary>
+		public float m_flDrainTime { get => Get<float>(__m_flDrainTime); set => Set(__m_flDrainTime, value); }
+
+		private static readonly SchemaField __m_flFillTime = new("CModifierNeutralLobBookAuraVData", "m_flFillTime");
+		/// <summary><c>float32</c>. Seconds of standing inside the field, from empty, before a player falls asleep.</summary>
+		public float m_flFillTime { get => Get<float>(__m_flFillTime); set => Set(__m_flFillTime, value); }
+
+		private static readonly SchemaField __m_flMinSleepTime = new("CModifierNeutralLobBookAuraVData", "m_flMinSleepTime");
+		/// <summary><c>float32</c>. Minimum seconds asleep before damage is allowed to wake the player.</summary>
+		public float m_flMinSleepTime { get => Get<float>(__m_flMinSleepTime); set => Set(__m_flMinSleepTime, value); }
+
+		private static readonly SchemaField __m_flSleepDuration = new("CModifierNeutralLobBookAuraVData", "m_flSleepDuration");
+		/// <summary><c>float32</c>. Duration of the sleep applied when a player's meter fills.</summary>
+		public float m_flSleepDuration { get => Get<float>(__m_flSleepDuration); set => Set(__m_flSleepDuration, value); }
+
+		private static readonly SchemaField __m_flSleepWakeUpDelay = new("CModifierNeutralLobBookAuraVData", "m_flSleepWakeUpDelay");
+		/// <summary><c>float32</c>. Delay between being woken and actually waking.</summary>
+		public float m_flSleepWakeUpDelay { get => Get<float>(__m_flSleepWakeUpDelay); set => Set(__m_flSleepWakeUpDelay, value); }
 	}
 }
