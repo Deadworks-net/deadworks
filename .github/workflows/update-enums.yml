@@ -3,6 +3,8 @@ name: Update Enums
 on:
   schedule:
     - cron: "0 6 * * *" # Daily at 06:00 UTC
+  repository_dispatch:
+    types: [game-build]
   workflow_dispatch:
 
 permissions:
