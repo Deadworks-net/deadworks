@@ -15,7 +15,7 @@ public static partial class Schema {
 		k_eUnitBucket_Prop = 4,
 		k_eUnitBucket_Minion = 5,
 		k_eUnitBucket_GoldOrb = 6,
-		k_eUnitBucket_Trophy = 7,
+		k_eUnitBucket_Pickup = 7,
 		k_eUnitBucket_Neutral = 8,
 		k_eUnitBucket_Zipline = 9,
 		k_eUnitBucket_BreakableProp = 10,

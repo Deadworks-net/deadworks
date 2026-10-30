@@ -69,6 +69,18 @@ public static partial class Schema {
 		/// <summary><c>CEmbeddedSubclass&lt;CCitadelModifier&gt;</c>.</summary>
 		public CCitadelModifierVData? m_SilenceModifier => EmbeddedSubclass<CCitadelModifierVData>(__m_SilenceModifier);
 
+		private static readonly SchemaField __m_TargetingBarrierColor = new("CCitadel_Ability_Baba_HexingBrew_VData", "m_TargetingBarrierColor");
+		/// <summary><c>Color</c>.</summary>
+		public Color32 m_TargetingBarrierColor { get => Get<Color32>(__m_TargetingBarrierColor); set => Set(__m_TargetingBarrierColor, value); }
+
+		private static readonly SchemaField __m_TargetingFireColor = new("CCitadel_Ability_Baba_HexingBrew_VData", "m_TargetingFireColor");
+		/// <summary><c>Color</c>.</summary>
+		public Color32 m_TargetingFireColor { get => Get<Color32>(__m_TargetingFireColor); set => Set(__m_TargetingFireColor, value); }
+
+		private static readonly SchemaField __m_TargetingSilenceColor = new("CCitadel_Ability_Baba_HexingBrew_VData", "m_TargetingSilenceColor");
+		/// <summary><c>Color</c>.</summary>
+		public Color32 m_TargetingSilenceColor { get => Get<Color32>(__m_TargetingSilenceColor); set => Set(__m_TargetingSilenceColor, value); }
+
 		private static readonly SchemaField __m_strBarrierAppliedSound = new("CCitadel_Ability_Baba_HexingBrew_VData", "m_strBarrierAppliedSound");
 		/// <summary><c>CSoundEventName</c>.</summary>
 		public string m_strBarrierAppliedSound => GetBufferString(__m_strBarrierAppliedSound);

@@ -64,6 +64,10 @@ public static class SubclassNames {
 	/// <summary>A <c>citadel_breakable_prop</c>, from <c>scripts/misc.vdata</c>.</summary>
 	public const string citadel_breakable_prop_box_multi = "citadel_breakable_prop_box_multi";
 	/// <summary>A <c>citadel_breakable_prop</c>, from <c>scripts/misc.vdata</c>.</summary>
+	public const string citadel_breakable_prop_candy_cauldron = "citadel_breakable_prop_candy_cauldron";
+	/// <summary>A <c>citadel_breakable_prop_hideout</c>, from <c>scripts/misc.vdata</c>.</summary>
+	public const string citadel_breakable_prop_candy_cauldron_hideout = "citadel_breakable_prop_candy_cauldron_hideout";
+	/// <summary>A <c>citadel_breakable_prop</c>, from <c>scripts/misc.vdata</c>.</summary>
 	public const string citadel_breakable_prop_drop_gold = "citadel_breakable_prop_drop_gold";
 	/// <summary>A <c>citadel_breakable_prop</c>, from <c>scripts/misc.vdata</c>.</summary>
 	public const string citadel_breakable_prop_drop_powerups = "citadel_breakable_prop_drop_powerups";
@@ -75,6 +79,8 @@ public static class SubclassNames {
 	public const string citadel_breakable_prop_pumpkin03 = "citadel_breakable_prop_pumpkin03";
 	/// <summary>A <c>citadel_breakable_prop</c>, from <c>scripts/misc.vdata</c>.</summary>
 	public const string citadel_breakable_prop_pumpkin04 = "citadel_breakable_prop_pumpkin04";
+	/// <summary>A <c>citadel_breakable_prop_punchable_troll</c>, from <c>scripts/misc.vdata</c>.</summary>
+	public const string citadel_breakable_prop_punchable_troll = "citadel_breakable_prop_punchable_troll";
 	/// <summary>A <c>citadel_breakable_prop</c>, from <c>scripts/misc.vdata</c>.</summary>
 	public const string citadel_breakable_prop_tough_crate = "citadel_breakable_prop_tough_crate";
 	/// <summary>A <c>citadel_breakable_prop_hideout</c>, from <c>scripts/misc.vdata</c>.</summary>
@@ -147,7 +153,7 @@ public static class SubclassNames {
 	public const string destroyable_building = "destroyable_building";
 	/// <summary>A <c>citadel_pickup_necro_death</c>, from <c>scripts/misc.vdata</c>.</summary>
 	public const string dropped_necro_pickup = "dropped_necro_pickup";
-	/// <summary>A <c>citadel_pickup_assigned_gold</c>, from <c>scripts/misc.vdata</c>.</summary>
+	/// <summary>A <c>citadel_pickup_assigned_currencies</c>, from <c>scripts/misc.vdata</c>.</summary>
 	public const string dropped_soul_orb = "dropped_soul_orb";
 	/// <summary>A <c>citadel_pickup_modifier</c>, from <c>scripts/misc.vdata</c>.</summary>
 	public const string firerate_permanent_pickup = "firerate_permanent_pickup";
@@ -159,6 +165,8 @@ public static class SubclassNames {
 	public const string floating_apple_pickup = "floating_apple_pickup";
 	/// <summary>A <c>citadel_pickup_modifier</c>, from <c>scripts/misc.vdata</c>.</summary>
 	public const string gun_powerup_pickup = "gun_powerup_pickup";
+	/// <summary>A <c>citadel_pickup_halloween_candy</c>, from <c>scripts/misc.vdata</c>.</summary>
+	public const string halloween_candy_pickup = "halloween_candy_pickup";
 	/// <summary>A <c>citadel_pickup_modifier</c>, from <c>scripts/misc.vdata</c>.</summary>
 	public const string hp_permanent_pickup = "hp_permanent_pickup";
 	/// <summary>A <c>citadel_pickup_modifier</c>, from <c>scripts/misc.vdata</c>.</summary>
@@ -349,6 +357,8 @@ public static class SubclassNames {
 	public const string pickup_artist_drawing_base = "pickup_artist_drawing_base";
 	/// <summary>A <c>citadel_pickup_artist_drawing</c>, from <c>scripts/misc.vdata</c>.</summary>
 	public const string pickup_artist_drawing_brawler = "pickup_artist_drawing_brawler";
+	/// <summary>A <c>citadel_pickup_artist_drawing</c>, from <c>scripts/misc.vdata</c>.</summary>
+	public const string pickup_artist_drawing_healer = "pickup_artist_drawing_healer";
 	/// <summary>A <c>citadel_pickup_artist_drawing</c>, from <c>scripts/misc.vdata</c>.</summary>
 	public const string pickup_artist_drawing_marksman = "pickup_artist_drawing_marksman";
 	/// <summary>A <c>citadel_pickup_artist_drawing</c>, from <c>scripts/misc.vdata</c>.</summary>

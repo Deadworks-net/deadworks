@@ -48,9 +48,5 @@ public static partial class Schema {
 		private static readonly SchemaField __m_strScene = new("EventGrantDefinition_LootList_t", "m_strScene");
 		/// <summary><c>CUtlString</c>.</summary>
 		public string m_strScene => GetString(__m_strScene);
-
-		private static readonly SchemaField __m_unQuantity = new("EventGrantDefinition_LootList_t", "m_unQuantity");
-		/// <summary><c>uint32</c>.</summary>
-		public uint m_unQuantity { get => Get<uint>(__m_unQuantity); set => Set(__m_unQuantity, value); }
 	}
 }

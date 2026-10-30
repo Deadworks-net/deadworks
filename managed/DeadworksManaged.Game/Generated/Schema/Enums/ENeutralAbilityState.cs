@@ -8,9 +8,9 @@ namespace DeadworksManaged.Game;
 public static partial class Schema {
 	/// <summary>Schema enum <c>ENeutralAbilityState</c>. <see href="https://deadworks.net/db/schema/server/ENeutralAbilityState">Modding database</see>.</summary>
 	public enum ENeutralAbilityState : uint {
-		EIdle = 0,
-		ECastDelay = 1,
-		EChanneling = 2,
-		EPostCast = 3,
+		ENASIdle = 0,
+		ENASCastDelay = 1,
+		ENASChanneling = 2,
+		ENASPostCast = 3,
 	}
 }

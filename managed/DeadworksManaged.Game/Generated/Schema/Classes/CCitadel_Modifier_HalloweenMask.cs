@@ -13,10 +13,6 @@ public static partial class Schema {
 		static CCitadel_Modifier_HalloweenMask ISchemaClass<CCitadel_Modifier_HalloweenMask>.New() => new();
 		static string ISchemaClass<CCitadel_Modifier_HalloweenMask>.NativeName => "CCitadel_Modifier_HalloweenMask";
 
-		private static readonly SchemaField __m_nMaskFX = new("CCitadel_Modifier_HalloweenMask", "m_nMaskFX");
-		/// <summary><c>ParticleIndex_t</c>.</summary>
-		public int m_nMaskFX { get => Get<int>(__m_nMaskFX); set => Set(__m_nMaskFX, value); }
-
 		private static readonly SchemaField __m_nMaskToUse = new("CCitadel_Modifier_HalloweenMask", "m_nMaskToUse");
 		/// <summary><c>int32</c>.</summary>
 		public int m_nMaskToUse { get => Get<int>(__m_nMaskToUse); set => Set(__m_nMaskToUse, value); }

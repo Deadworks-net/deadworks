@@ -49,14 +49,6 @@ public static partial class Schema {
 		/// <summary><c>float32</c>.</summary>
 		public float m_flPhysicsRadius { get => Get<float>(__m_flPhysicsRadius); set => Set(__m_flPhysicsRadius, value); }
 
-		private static readonly SchemaField __m_iRejuvBossKill01 = new("CCitadel_Modifier_ItemPunchable_RejuvVData", "m_iRejuvBossKill01");
-		/// <summary><c>int32</c>.</summary>
-		public int m_iRejuvBossKill01 { get => Get<int>(__m_iRejuvBossKill01); set => Set(__m_iRejuvBossKill01, value); }
-
-		private static readonly SchemaField __m_iRejuvBossKill02 = new("CCitadel_Modifier_ItemPunchable_RejuvVData", "m_iRejuvBossKill02");
-		/// <summary><c>int32</c>.</summary>
-		public int m_iRejuvBossKill02 { get => Get<int>(__m_iRejuvBossKill02); set => Set(__m_iRejuvBossKill02, value); }
-
 		private static readonly SchemaField __m_sHitSound = new("CCitadel_Modifier_ItemPunchable_RejuvVData", "m_sHitSound");
 		/// <summary><c>CSoundEventName</c>.</summary>
 		public string m_sHitSound => GetBufferString(__m_sHitSound);

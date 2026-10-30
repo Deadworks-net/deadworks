@@ -21,6 +21,10 @@ public static partial class Schema {
 		/// <summary><c>CEmbeddedSubclass&lt;CCitadelModifier&gt;</c>.</summary>
 		public CCitadelModifierVData? m_DebuffModifier => EmbeddedSubclass<CCitadelModifierVData>(__m_DebuffModifier);
 
+		private static readonly SchemaField __m_ImmobilizeModifier = new("CCitadel_Ability_Fencer_RiposteVData", "m_ImmobilizeModifier");
+		/// <summary><c>CEmbeddedSubclass&lt;CCitadelModifier&gt;</c>.</summary>
+		public CCitadelModifierVData? m_ImmobilizeModifier => EmbeddedSubclass<CCitadelModifierVData>(__m_ImmobilizeModifier);
+
 		private static readonly SchemaField __m_RiposteDashParticle = new("CCitadel_Ability_Fencer_RiposteVData", "m_RiposteDashParticle");
 		/// <summary><c>CResourceNameTyped&lt;CWeakHandle&lt;InfoForResourceTypeIParticleSystemDefinition&gt;&gt;</c>.</summary>
 		public string m_RiposteDashParticle => GetBufferString(__m_RiposteDashParticle);

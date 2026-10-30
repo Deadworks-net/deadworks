@@ -53,6 +53,10 @@ public static partial class Schema {
 		/// <summary><c>CEmbeddedSubclass&lt;CCitadelModifier&gt;</c>.</summary>
 		public CCitadelModifierVData? m_TileModifier => EmbeddedSubclass<CCitadelModifierVData>(__m_TileModifier);
 
+		private static readonly SchemaField __m_TilePreviewParticle = new("CCitadel_Ability_Chessmaster_QueenVData", "m_TilePreviewParticle");
+		/// <summary><c>CResourceNameTyped&lt;CWeakHandle&lt;InfoForResourceTypeIParticleSystemDefinition&gt;&gt;</c>.</summary>
+		public string m_TilePreviewParticle => GetBufferString(__m_TilePreviewParticle);
+
 		private static readonly SchemaField __m_bDamageBeforeLift = new("CCitadel_Ability_Chessmaster_QueenVData", "m_bDamageBeforeLift");
 		/// <summary><c>bool</c>.</summary>
 		public bool m_bDamageBeforeLift { get => Get<bool>(__m_bDamageBeforeLift); set => Set(__m_bDamageBeforeLift, value); }

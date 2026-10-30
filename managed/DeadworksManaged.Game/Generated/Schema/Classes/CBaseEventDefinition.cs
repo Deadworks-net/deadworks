@@ -13,28 +13,44 @@ public static partial class Schema {
 		static CBaseEventDefinition ISchemaClass<CBaseEventDefinition>.New() => new();
 		static string ISchemaClass<CBaseEventDefinition>.NativeName => "CBaseEventDefinition";
 
+		private static readonly SchemaField __m_bExperimentalUsesDevTiming = new("CBaseEventDefinition", "m_bExperimentalUsesDevTiming");
+		/// <summary><c>bool</c>.</summary>
+		public bool m_bExperimentalUsesDevTiming { get => Get<bool>(__m_bExperimentalUsesDevTiming); set => Set(__m_bExperimentalUsesDevTiming, value); }
+
 		private static readonly SchemaField __m_bMustBeOwned = new("CBaseEventDefinition", "m_bMustBeOwned");
 		/// <summary><c>bool</c>.</summary>
 		public bool m_bMustBeOwned { get => Get<bool>(__m_bMustBeOwned); set => Set(__m_bMustBeOwned, value); }
+
+		private static readonly SchemaField __m_rtEventEndTime = new("CBaseEventDefinition", "m_rtEventEndTime");
+		/// <summary><c>EventEndTimestamp_t</c>.</summary>
+		public EventEndTimestamp_t m_rtEventEndTime => Embedded<EventEndTimestamp_t>(__m_rtEventEndTime);
+
+		private static readonly SchemaField __m_rtEventEndTimeDev = new("CBaseEventDefinition", "m_rtEventEndTimeDev");
+		/// <summary><c>EventEndTimestamp_t</c>.</summary>
+		public EventEndTimestamp_t m_rtEventEndTimeDev => Embedded<EventEndTimestamp_t>(__m_rtEventEndTimeDev);
+
+		private static readonly SchemaField __m_rtEventExpireTime = new("CBaseEventDefinition", "m_rtEventExpireTime");
+		/// <summary><c>EventEndTimestamp_t</c>.</summary>
+		public EventEndTimestamp_t m_rtEventExpireTime => Embedded<EventEndTimestamp_t>(__m_rtEventExpireTime);
+
+		private static readonly SchemaField __m_rtEventExpireTimeDev = new("CBaseEventDefinition", "m_rtEventExpireTimeDev");
+		/// <summary><c>EventEndTimestamp_t</c>.</summary>
+		public EventEndTimestamp_t m_rtEventExpireTimeDev => Embedded<EventEndTimestamp_t>(__m_rtEventExpireTimeDev);
+
+		private static readonly SchemaField __m_rtEventStartTime = new("CBaseEventDefinition", "m_rtEventStartTime");
+		/// <summary><c>EventStartTimestamp_t</c>.</summary>
+		public EventStartTimestamp_t m_rtEventStartTime => Embedded<EventStartTimestamp_t>(__m_rtEventStartTime);
+
+		private static readonly SchemaField __m_rtEventStartTimeDev = new("CBaseEventDefinition", "m_rtEventStartTimeDev");
+		/// <summary><c>EventStartTimestamp_t</c>.</summary>
+		public EventStartTimestamp_t m_rtEventStartTimeDev => Embedded<EventStartTimestamp_t>(__m_rtEventStartTimeDev);
 
 		private static readonly SchemaField __m_unDefaultEventPoints = new("CBaseEventDefinition", "m_unDefaultEventPoints");
 		/// <summary><c>uint32</c>.</summary>
 		public uint m_unDefaultEventPoints { get => Get<uint>(__m_unDefaultEventPoints); set => Set(__m_unDefaultEventPoints, value); }
 
-		private static readonly SchemaField __m_unEventEndTime = new("CBaseEventDefinition", "m_unEventEndTime");
-		/// <summary><c>uint32</c>.</summary>
-		public uint m_unEventEndTime { get => Get<uint>(__m_unEventEndTime); set => Set(__m_unEventEndTime, value); }
-
 		private static readonly SchemaField __m_unEventPointsPerLevel = new("CBaseEventDefinition", "m_unEventPointsPerLevel");
 		/// <summary><c>uint32</c>.</summary>
 		public uint m_unEventPointsPerLevel { get => Get<uint>(__m_unEventPointsPerLevel); set => Set(__m_unEventPointsPerLevel, value); }
-
-		private static readonly SchemaField __m_unEventStartTime = new("CBaseEventDefinition", "m_unEventStartTime");
-		/// <summary><c>uint32</c>.</summary>
-		public uint m_unEventStartTime { get => Get<uint>(__m_unEventStartTime); set => Set(__m_unEventStartTime, value); }
-
-		private static readonly SchemaField __m_unExpirationDate = new("CBaseEventDefinition", "m_unExpirationDate");
-		/// <summary><c>uint32</c>.</summary>
-		public uint m_unExpirationDate { get => Get<uint>(__m_unExpirationDate); set => Set(__m_unExpirationDate, value); }
 	}
 }

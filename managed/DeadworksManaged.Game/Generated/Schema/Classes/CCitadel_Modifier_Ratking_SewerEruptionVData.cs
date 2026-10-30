@@ -41,6 +41,10 @@ public static partial class Schema {
 		/// <summary><c>float32</c>. Half height of the cylinder the eruption checks for victims, in meters.</summary>
 		public float m_flExplosionHalfHeightMeters { get => Get<float>(__m_flExplosionHalfHeightMeters); set => Set(__m_flExplosionHalfHeightMeters, value); }
 
+		private static readonly SchemaField __m_flTossGravityScale = new("CCitadel_Modifier_Ratking_SewerEruptionVData", "m_flTossGravityScale");
+		/// <summary><c>float32</c>. Gravity multiplier on anyone caught in the eruption until they land.</summary>
+		public float m_flTossGravityScale { get => Get<float>(__m_flTossGravityScale); set => Set(__m_flTossGravityScale, value); }
+
 		private static readonly SchemaField __m_flTossSpeed = new("CCitadel_Modifier_Ratking_SewerEruptionVData", "m_flTossSpeed");
 		/// <summary><c>float32</c>. Upward launch speed of anyone caught in the eruption.</summary>
 		public float m_flTossSpeed { get => Get<float>(__m_flTossSpeed); set => Set(__m_flTossSpeed, value); }

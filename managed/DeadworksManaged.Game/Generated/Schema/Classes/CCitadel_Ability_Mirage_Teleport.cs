@@ -17,6 +17,10 @@ public static partial class Schema {
 		/// <summary><c>CHandle&lt;CBaseEntity&gt;</c>. Networked: a write is sent to clients.</summary>
 		public CBaseEntity? m_hTarget { get => GetHandle<CBaseEntity>(__m_hTarget); set => SetHandle(__m_hTarget, value); }
 
+		private static readonly SchemaField __m_tLastLandedTime = new("CCitadel_Ability_Mirage_Teleport", "m_tLastLandedTime");
+		/// <summary><c>GameTime_t</c>. Networked: a write is sent to clients.</summary>
+		public GameTime m_tLastLandedTime { get => Get<GameTime>(__m_tLastLandedTime); set => Set(__m_tLastLandedTime, value); }
+
 		private static readonly SchemaField __m_tTeleportCompletedTime = new("CCitadel_Ability_Mirage_Teleport", "m_tTeleportCompletedTime");
 		/// <summary><c>GameTime_t</c>. Networked: a write is sent to clients.</summary>
 		public GameTime m_tTeleportCompletedTime { get => Get<GameTime>(__m_tTeleportCompletedTime); set => Set(__m_tTeleportCompletedTime, value); }

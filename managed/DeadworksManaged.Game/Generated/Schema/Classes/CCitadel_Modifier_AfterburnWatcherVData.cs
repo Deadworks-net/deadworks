@@ -36,9 +36,5 @@ public static partial class Schema {
 		private static readonly SchemaField __m_flLightMeleeRefresh = new("CCitadel_Modifier_AfterburnWatcherVData", "m_flLightMeleeRefresh");
 		/// <summary><c>float32</c>.</summary>
 		public float m_flLightMeleeRefresh { get => Get<float>(__m_flLightMeleeRefresh); set => Set(__m_flLightMeleeRefresh, value); }
-
-		private static readonly SchemaField __m_strAfterburnHitSound = new("CCitadel_Modifier_AfterburnWatcherVData", "m_strAfterburnHitSound");
-		/// <summary><c>CSoundEventName</c>.</summary>
-		public string m_strAfterburnHitSound => GetBufferString(__m_strAfterburnHitSound);
 	}
 }
