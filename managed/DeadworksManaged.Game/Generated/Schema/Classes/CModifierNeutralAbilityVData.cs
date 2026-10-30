@@ -25,6 +25,18 @@ public static partial class Schema {
 		/// <summary><c>CCitadelWeaponInfo</c>.</summary>
 		public CCitadelWeaponInfo m_WeaponInfo => Embedded<CCitadelWeaponInfo>(__m_WeaponInfo);
 
+		private static readonly SchemaField __m_eAG2CastCompleteAction = new("CModifierNeutralAbilityVData", "m_eAG2CastCompleteAction");
+		/// <summary><c>ENeutralNPCAction</c>.</summary>
+		public ENeutralNPCAction m_eAG2CastCompleteAction { get => Get<ENeutralNPCAction>(__m_eAG2CastCompleteAction); set => Set(__m_eAG2CastCompleteAction, value); }
+
+		private static readonly SchemaField __m_eAG2ChannelAction = new("CModifierNeutralAbilityVData", "m_eAG2ChannelAction");
+		/// <summary><c>ENeutralNPCAction</c>.</summary>
+		public ENeutralNPCAction m_eAG2ChannelAction { get => Get<ENeutralNPCAction>(__m_eAG2ChannelAction); set => Set(__m_eAG2ChannelAction, value); }
+
+		private static readonly SchemaField __m_eAG2PreCastAction = new("CModifierNeutralAbilityVData", "m_eAG2PreCastAction");
+		/// <summary><c>ENeutralNPCAction</c>.</summary>
+		public ENeutralNPCAction m_eAG2PreCastAction { get => Get<ENeutralNPCAction>(__m_eAG2PreCastAction); set => Set(__m_eAG2PreCastAction, value); }
+
 		private static readonly SchemaField __m_eDamageType = new("CModifierNeutralAbilityVData", "m_eDamageType");
 		/// <summary><c>ECitadelDamageType</c>.</summary>
 		public ECitadelDamageType m_eDamageType { get => Get<ECitadelDamageType>(__m_eDamageType); set => Set(__m_eDamageType, value); }

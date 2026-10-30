@@ -35,5 +35,6 @@ public static partial class Schema {
 		CITADEL_CM_PlayerTyping = 1026,
 		CITADEL_CM_HideoutInteract = 1027,
 		CITADEL_CM_HeroReleaseVote = 1028,
+		CITADEL_CM_MapTargetingCursor = 1029,
 	}
 }

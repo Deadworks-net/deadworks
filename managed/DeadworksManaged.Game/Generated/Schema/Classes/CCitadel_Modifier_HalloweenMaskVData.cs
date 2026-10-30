@@ -17,6 +17,10 @@ public static partial class Schema {
 		/// <summary><c>CResourceNameTyped&lt;CWeakHandle&lt;InfoForResourceTypeIParticleSystemDefinition&gt;&gt;</c>.</summary>
 		public string m_HalloweenMask => GetBufferString(__m_HalloweenMask);
 
+		private static readonly SchemaField __m_HeroOffsets = new("CCitadel_Modifier_HalloweenMaskVData", "m_HeroOffsets");
+		/// <summary><c>CUtlOrderedMap&lt;CUtlString, Vector&gt;</c>.</summary>
+		public SchemaValueDict<Vector3> m_HeroOffsets => new(this, __m_HeroOffsets);
+
 		private static readonly SchemaField __m_nNumMasks = new("CCitadel_Modifier_HalloweenMaskVData", "m_nNumMasks");
 		/// <summary><c>int32</c>.</summary>
 		public int m_nNumMasks { get => Get<int>(__m_nNumMasks); set => Set(__m_nNumMasks, value); }

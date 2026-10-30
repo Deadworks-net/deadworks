@@ -101,6 +101,10 @@ public static partial class Schema {
 		/// <summary><c>float32</c>.</summary>
 		public float m_flMeleeImpulseUpScale { get => Get<float>(__m_flMeleeImpulseUpScale); set => Set(__m_flMeleeImpulseUpScale, value); }
 
+		private static readonly SchemaField __m_flMeleeMinFuseRemaining = new("CCitadel_Ability_Ratking_ScrapGrenadeVData", "m_flMeleeMinFuseRemaining");
+		/// <summary><c>float32</c>. Meleeing a grenade with a running fuse pushes the detonation out to at least this many seconds from the hit.</summary>
+		public float m_flMeleeMinFuseRemaining { get => Get<float>(__m_flMeleeMinFuseRemaining); set => Set(__m_flMeleeMinFuseRemaining, value); }
+
 		private static readonly SchemaField __m_flMinBounceSpeed = new("CCitadel_Ability_Ratking_ScrapGrenadeVData", "m_flMinBounceSpeed");
 		/// <summary><c>float32</c>.</summary>
 		public float m_flMinBounceSpeed { get => Get<float>(__m_flMinBounceSpeed); set => Set(__m_flMinBounceSpeed, value); }

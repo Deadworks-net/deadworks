@@ -105,6 +105,10 @@ public static partial class Schema {
 		/// <summary><c>CSoundEventName</c>.</summary>
 		public string m_strGoalSoundName => GetBufferString(__m_strGoalSoundName);
 
+		private static readonly SchemaField __m_strHeavyKickSoundName = new("CCitadel_Hideout_BallVData", "m_strHeavyKickSoundName");
+		/// <summary><c>CSoundEventName</c>.</summary>
+		public string m_strHeavyKickSoundName => GetBufferString(__m_strHeavyKickSoundName);
+
 		private static readonly SchemaField __m_strJuggleRunEnded = new("CCitadel_Hideout_BallVData", "m_strJuggleRunEnded");
 		/// <summary><c>CSoundEventName</c>.</summary>
 		public string m_strJuggleRunEnded => GetBufferString(__m_strJuggleRunEnded);

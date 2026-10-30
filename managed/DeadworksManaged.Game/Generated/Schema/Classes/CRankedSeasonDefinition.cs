@@ -33,6 +33,14 @@ public static partial class Schema {
 		/// <summary><c>uint32</c>.</summary>
 		public uint m_unCalibrationMatches { get => Get<uint>(__m_unCalibrationMatches); set => Set(__m_unCalibrationMatches, value); }
 
+		private static readonly SchemaField __m_unLeaderboardXPPoolSize = new("CRankedSeasonDefinition", "m_unLeaderboardXPPoolSize");
+		/// <summary><c>uint32</c>.</summary>
+		public uint m_unLeaderboardXPPoolSize { get => Get<uint>(__m_unLeaderboardXPPoolSize); set => Set(__m_unLeaderboardXPPoolSize, value); }
+
+		private static readonly SchemaField __m_unMinHeroUnlockPoints = new("CRankedSeasonDefinition", "m_unMinHeroUnlockPoints");
+		/// <summary><c>uint32</c>.</summary>
+		public uint m_unMinHeroUnlockPoints { get => Get<uint>(__m_unMinHeroUnlockPoints); set => Set(__m_unMinHeroUnlockPoints, value); }
+
 		private static readonly SchemaField __m_unMinHeroUnlocks = new("CRankedSeasonDefinition", "m_unMinHeroUnlocks");
 		/// <summary><c>uint32</c>.</summary>
 		public uint m_unMinHeroUnlocks { get => Get<uint>(__m_unMinHeroUnlocks); set => Set(__m_unMinHeroUnlocks, value); }
@@ -48,6 +56,10 @@ public static partial class Schema {
 		private static readonly SchemaField __m_vecIntervals = new("CRankedSeasonDefinition", "m_vecIntervals");
 		/// <summary><c>CUtlVector&lt;CRankedSeasonIntervalDefinition&gt;</c>.</summary>
 		public SchemaObjectList<CRankedSeasonIntervalDefinition> m_vecIntervals => new(this, __m_vecIntervals, ListStorage.Vector);
+
+		private static readonly SchemaField __m_vecRankInfo = new("CRankedSeasonDefinition", "m_vecRankInfo");
+		/// <summary><c>CUtlVector&lt;CRankInformation&gt;</c>.</summary>
+		public SchemaObjectList<CRankInformation> m_vecRankInfo => new(this, __m_vecRankInfo, ListStorage.Vector);
 
 		private static readonly SchemaField __m_vecValidPartySizes = new("CRankedSeasonDefinition", "m_vecValidPartySizes");
 		/// <summary><c>CUtlVector&lt;uint8&gt;</c>.</summary>

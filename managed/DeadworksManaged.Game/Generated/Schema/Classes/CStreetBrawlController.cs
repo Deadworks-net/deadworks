@@ -49,10 +49,6 @@ public static partial class Schema {
 		/// <summary><c>int32</c>. Networked: a write is sent to clients.</summary>
 		public int m_iTeamSapphireScore { get => Get<int>(__m_iTeamSapphireScore); set => Set(__m_iTeamSapphireScore, value); }
 
-		private static readonly SchemaField __m_mapOriginalConVarVals = new("CStreetBrawlController", "m_mapOriginalConVarVals");
-		/// <summary><c>CUtlOrderedMap&lt;CUtlString, CUtlString&gt;</c>. No typed mapping yet: read it through its address.</summary>
-		public RawField m_mapOriginalConVarVals => Raw(__m_mapOriginalConVarVals, "CUtlOrderedMap<CUtlString, CUtlString>");
-
 		private static readonly SchemaField __m_nScoringTeam = new("CStreetBrawlController", "m_nScoringTeam");
 		/// <summary><c>int32</c>.</summary>
 		public int m_nScoringTeam { get => Get<int>(__m_nScoringTeam); set => Set(__m_nScoringTeam, value); }

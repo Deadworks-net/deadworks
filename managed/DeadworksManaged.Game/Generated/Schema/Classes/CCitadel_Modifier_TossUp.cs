@@ -25,6 +25,10 @@ public static partial class Schema {
 		/// <summary><c>float32</c>.</summary>
 		public float m_flCurrentVelocityScale { get => Get<float>(__m_flCurrentVelocityScale); set => Set(__m_flCurrentVelocityScale, value); }
 
+		private static readonly SchemaField __m_flGravityScale = new("CCitadel_Modifier_TossUp", "m_flGravityScale");
+		/// <summary><c>float32</c>.</summary>
+		public float m_flGravityScale { get => Get<float>(__m_flGravityScale); set => Set(__m_flGravityScale, value); }
+
 		private static readonly SchemaField __m_vTossUpForce = new("CCitadel_Modifier_TossUp", "m_vTossUpForce");
 		/// <summary><c>Vector</c>.</summary>
 		public Vector3 m_vTossUpForce { get => Get<Vector3>(__m_vTossUpForce); set => Set(__m_vTossUpForce, value); }

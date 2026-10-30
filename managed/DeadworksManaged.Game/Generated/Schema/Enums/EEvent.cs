@@ -10,5 +10,6 @@ public static partial class Schema {
 	public enum EEvent : uint {
 		EVENT_ID_NONE = 0,
 		EVENT_ID_NYC_CATALOG = 1,
+		EVENT_ID_HALLOWEEN_2026 = 2,
 	}
 }

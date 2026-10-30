@@ -12,5 +12,17 @@ public static partial class Schema {
 		internal CCitadelEventDefinition() { }
 		static CCitadelEventDefinition ISchemaClass<CCitadelEventDefinition>.New() => new();
 		static string ISchemaClass<CCitadelEventDefinition>.NativeName => "CCitadelEventDefinition";
+
+		private static readonly SchemaField __m_mapBreakablePropVDataOverride = new("CCitadelEventDefinition", "m_mapBreakablePropVDataOverride");
+		/// <summary><c>CUtlOrderedMap&lt;CUtlString, CUtlOrderedMap&lt;CUtlString, float32&gt;&gt;</c>. No typed mapping yet: read it through its address.</summary>
+		public RawField m_mapBreakablePropVDataOverride => Raw(__m_mapBreakablePropVDataOverride, "CUtlOrderedMap<CUtlString, CUtlOrderedMap<CUtlString, float32>>");
+
+		private static readonly SchemaField __m_mapMapOverrides = new("CCitadelEventDefinition", "m_mapMapOverrides");
+		/// <summary><c>CUtlOrderedMap&lt;CUtlString, CitadelEventMapOverrides_t&gt;</c>.</summary>
+		public SchemaDict<CitadelEventMapOverrides_t> m_mapMapOverrides => new(this, __m_mapMapOverrides);
+
+		private static readonly SchemaField __m_vecPlayerPawnModifiers = new("CCitadelEventDefinition", "m_vecPlayerPawnModifiers");
+		/// <summary><c>CUtlVector&lt;CitadelEventPawnModifier_t&gt;</c>.</summary>
+		public SchemaObjectList<CitadelEventPawnModifier_t> m_vecPlayerPawnModifiers => new(this, __m_vecPlayerPawnModifiers, ListStorage.Vector);
 	}
 }

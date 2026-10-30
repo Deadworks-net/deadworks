@@ -68,17 +68,5 @@ public static partial class Schema {
 		private static readonly SchemaField __m_strFullyChargedSound = new("CAbilityHornetSnipeVData", "m_strFullyChargedSound");
 		/// <summary><c>CSoundEventName</c>.</summary>
 		public string m_strFullyChargedSound => GetBufferString(__m_strFullyChargedSound);
-
-		private static readonly SchemaField __m_strSnipeImpactSound = new("CAbilityHornetSnipeVData", "m_strSnipeImpactSound");
-		/// <summary><c>CSoundEventName</c>.</summary>
-		public string m_strSnipeImpactSound => GetBufferString(__m_strSnipeImpactSound);
-
-		private static readonly SchemaField __m_strZoomIn = new("CAbilityHornetSnipeVData", "m_strZoomIn");
-		/// <summary><c>CSoundEventName</c>.</summary>
-		public string m_strZoomIn => GetBufferString(__m_strZoomIn);
-
-		private static readonly SchemaField __m_strZoomOut = new("CAbilityHornetSnipeVData", "m_strZoomOut");
-		/// <summary><c>CSoundEventName</c>.</summary>
-		public string m_strZoomOut => GetBufferString(__m_strZoomOut);
 	}
 }

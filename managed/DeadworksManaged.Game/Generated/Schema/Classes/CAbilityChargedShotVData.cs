@@ -24,5 +24,13 @@ public static partial class Schema {
 		private static readonly SchemaField __m_ShootParticle = new("CAbilityChargedShotVData", "m_ShootParticle");
 		/// <summary><c>CResourceNameTyped&lt;CWeakHandle&lt;InfoForResourceTypeIParticleSystemDefinition&gt;&gt;</c>.</summary>
 		public string m_ShootParticle => GetBufferString(__m_ShootParticle);
+
+		private static readonly SchemaField __m_flWallRicochetMaxNormalZ = new("CAbilityChargedShotVData", "m_flWallRicochetMaxNormalZ");
+		/// <summary><c>float32</c>. Wall ricochet only happens off surfaces whose normal Z is at or below this (0 = vertical wall, 1 = flat floor).</summary>
+		public float m_flWallRicochetMaxNormalZ { get => Get<float>(__m_flWallRicochetMaxNormalZ); set => Set(__m_flWallRicochetMaxNormalZ, value); }
+
+		private static readonly SchemaField __m_flWallRicochetSpeedScale = new("CAbilityChargedShotVData", "m_flWallRicochetSpeedScale");
+		/// <summary><c>float32</c>. Ricochet arrow speed as a multiple of the arrow's base bullet speed.</summary>
+		public float m_flWallRicochetSpeedScale { get => Get<float>(__m_flWallRicochetSpeedScale); set => Set(__m_flWallRicochetSpeedScale, value); }
 	}
 }

@@ -29,6 +29,10 @@ public static partial class Schema {
 		/// <summary><c>CEmbeddedSubclass&lt;CBaseModifier&gt;</c>.</summary>
 		public CModifierVData? m_GrappleTargetModifier => EmbeddedSubclass<CModifierVData>(__m_GrappleTargetModifier);
 
+		private static readonly SchemaField __m_HomingTargetModifier = new("CCitadelAbilityFlyingStrikeVData", "m_HomingTargetModifier");
+		/// <summary><c>CEmbeddedSubclass&lt;CBaseModifier&gt;</c>.</summary>
+		public CModifierVData? m_HomingTargetModifier => EmbeddedSubclass<CModifierVData>(__m_HomingTargetModifier);
+
 		private static readonly SchemaField __m_ImpactParticle = new("CCitadelAbilityFlyingStrikeVData", "m_ImpactParticle");
 		/// <summary><c>CResourceNameTyped&lt;CWeakHandle&lt;InfoForResourceTypeIParticleSystemDefinition&gt;&gt;</c>.</summary>
 		public string m_ImpactParticle => GetBufferString(__m_ImpactParticle);

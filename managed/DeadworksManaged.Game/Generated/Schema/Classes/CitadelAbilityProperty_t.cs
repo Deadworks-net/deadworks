@@ -65,6 +65,10 @@ public static partial class Schema {
 		/// <summary><c>int32</c>. Overrides the max decimal places shown for this property. -1 uses the display type's precision.</summary>
 		public int m_nMaxDecimalsDisplayed { get => Get<int>(__m_nMaxDecimalsDisplayed); set => Set(__m_nMaxDecimalsDisplayed, value); }
 
+		private static readonly SchemaField __m_nMaxScaleDecimalsDisplayed = new("CitadelAbilityProperty_t", "m_nMaxScaleDecimalsDisplayed");
+		/// <summary><c>int32</c>. Overrides the max decimal places shown for this property's stat scaling multipliers. -1 picks based on the multiplier's size.</summary>
+		public int m_nMaxScaleDecimalsDisplayed { get => Get<int>(__m_nMaxScaleDecimalsDisplayed); set => Set(__m_nMaxScaleDecimalsDisplayed, value); }
+
 		private static readonly SchemaField __m_nRequiredUpgradeBits = new("CitadelAbilityProperty_t", "m_nRequiredUpgradeBits");
 		/// <summary><c>AbilityUpgradeBits_t</c>. If we don't have these bits always return 0. Otherwise, returns a real value.</summary>
 		public AbilityUpgradeBits_t m_nRequiredUpgradeBits { get => Get<AbilityUpgradeBits_t>(__m_nRequiredUpgradeBits); set => Set(__m_nRequiredUpgradeBits, value); }

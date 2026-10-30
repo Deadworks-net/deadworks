@@ -16,5 +16,9 @@ public static partial class Schema {
 		private static readonly SchemaField __m_sAfterburnParticle = new("CCitadel_Modifier_Afterburn_DOT_VData", "m_sAfterburnParticle");
 		/// <summary><c>CResourceNameTyped&lt;CWeakHandle&lt;InfoForResourceTypeIParticleSystemDefinition&gt;&gt;</c>.</summary>
 		public string m_sAfterburnParticle => GetBufferString(__m_sAfterburnParticle);
+
+		private static readonly SchemaField __m_strAfterburnHitSound = new("CCitadel_Modifier_Afterburn_DOT_VData", "m_strAfterburnHitSound");
+		/// <summary><c>CSoundEventName</c>.</summary>
+		public string m_strAfterburnHitSound => GetBufferString(__m_strAfterburnHitSound);
 	}
 }

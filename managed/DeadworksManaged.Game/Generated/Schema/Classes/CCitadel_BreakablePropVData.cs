@@ -13,6 +13,10 @@ public static partial class Schema {
 		static CCitadel_BreakablePropVData ISchemaClass<CCitadel_BreakablePropVData>.New() => new();
 		static string ISchemaClass<CCitadel_BreakablePropVData>.NativeName => "CCitadel_BreakablePropVData";
 
+		private static readonly SchemaField __m_NearbyAuraModifier = new("CCitadel_BreakablePropVData", "m_NearbyAuraModifier");
+		/// <summary><c>CEmbeddedSubclass&lt;CCitadelModifier&gt;</c>. Added an aura that gives nearby heroes a melee hint state.</summary>
+		public CCitadelModifierVData? m_NearbyAuraModifier => EmbeddedSubclass<CCitadelModifierVData>(__m_NearbyAuraModifier);
+
 		private static readonly SchemaField __m_OtherRejectSound = new("CCitadel_BreakablePropVData", "m_OtherRejectSound");
 		/// <summary><c>CSoundEventName</c>.</summary>
 		public string m_OtherRejectSound => GetBufferString(__m_OtherRejectSound);
@@ -20,6 +24,10 @@ public static partial class Schema {
 		private static readonly SchemaField __m_ambientParticle = new("CCitadel_BreakablePropVData", "m_ambientParticle");
 		/// <summary><c>CResourceNameTyped&lt;CWeakHandle&lt;InfoForResourceTypeIParticleSystemDefinition&gt;&gt;</c>.</summary>
 		public string m_ambientParticle => GetBufferString(__m_ambientParticle);
+
+		private static readonly SchemaField __m_angLocalRotation = new("CCitadel_BreakablePropVData", "m_angLocalRotation");
+		/// <summary><c>QAngle</c>. Rotation relative to the map-placed angles, as Pitch / Yaw / Roll.</summary>
+		public Vector3 m_angLocalRotation { get => Get<Vector3>(__m_angLocalRotation); set => Set(__m_angLocalRotation, value); }
 
 		private static readonly SchemaField __m_bBreakOnDodgeTouch = new("CCitadel_BreakablePropVData", "m_bBreakOnDodgeTouch");
 		/// <summary><c>bool</c>. Should this breakable break if a player rolls or dodges into it?.</summary>
@@ -77,6 +85,14 @@ public static partial class Schema {
 		/// <summary><c>bool</c>. If checked, this breakble will stay solid after death. (useful for animating breakables that might want to stay in a final pose.</summary>
 		public bool m_bSolidAfterDeath { get => Get<bool>(__m_bSolidAfterDeath); set => Set(__m_bSolidAfterDeath, value); }
 
+		private static readonly SchemaField __m_bSpawnInStreetBrawl = new("CCitadel_BreakablePropVData", "m_bSpawnInStreetBrawl");
+		/// <summary><c>bool</c>. Spawn this breakable in Street Brawl, initially at 0s.</summary>
+		public bool m_bSpawnInStreetBrawl { get => Get<bool>(__m_bSpawnInStreetBrawl); set => Set(__m_bSpawnInStreetBrawl, value); }
+
+		private static readonly SchemaField __m_bUseVDataSpawnTimes = new("CCitadel_BreakablePropVData", "m_bUseVDataSpawnTimes");
+		/// <summary><c>bool</c>. Use our initial spawn and respawn times instead of the ones from our spawn group in generic data.</summary>
+		public bool m_bUseVDataSpawnTimes { get => Get<bool>(__m_bUseVDataSpawnTimes); set => Set(__m_bUseVDataSpawnTimes, value); }
+
 		private static readonly SchemaField __m_breakParticle = new("CCitadel_BreakablePropVData", "m_breakParticle");
 		/// <summary><c>CResourceNameTyped&lt;CWeakHandle&lt;InfoForResourceTypeIParticleSystemDefinition&gt;&gt;</c>.</summary>
 		public string m_breakParticle => GetBufferString(__m_breakParticle);
@@ -88,6 +104,10 @@ public static partial class Schema {
 		private static readonly SchemaField __m_colorOutline = new("CCitadel_BreakablePropVData", "m_colorOutline");
 		/// <summary><c>Color</c>. What color to glow.</summary>
 		public Color32 m_colorOutline { get => Get<Color32>(__m_colorOutline); set => Set(__m_colorOutline, value); }
+
+		private static readonly SchemaField __m_damageParticle = new("CCitadel_BreakablePropVData", "m_damageParticle");
+		/// <summary><c>CResourceNameTyped&lt;CWeakHandle&lt;InfoForResourceTypeIParticleSystemDefinition&gt;&gt;</c>.</summary>
+		public string m_damageParticle => GetBufferString(__m_damageParticle);
 
 		private static readonly SchemaField __m_eRollType = new("CCitadel_BreakablePropVData", "m_eRollType");
 		/// <summary><c>ECitadelRandomRollTypes</c>. Category for the random roller.</summary>
@@ -228,5 +248,9 @@ public static partial class Schema {
 		private static readonly SchemaField __m_strMinimapCSSClassDead = new("CCitadel_BreakablePropVData", "m_strMinimapCSSClassDead");
 		/// <summary><c>CUtlString</c>. CSS class to apply to this breakable's minimap icon while dead.</summary>
 		public string m_strMinimapCSSClassDead => GetString(__m_strMinimapCSSClassDead);
+
+		private static readonly SchemaField __m_vecLocalOffset = new("CCitadel_BreakablePropVData", "m_vecLocalOffset");
+		/// <summary><c>Vector</c>. Offset from the map-placed position, in the prop's local space.</summary>
+		public Vector3 m_vecLocalOffset { get => Get<Vector3>(__m_vecLocalOffset); set => Set(__m_vecLocalOffset, value); }
 	}
 }

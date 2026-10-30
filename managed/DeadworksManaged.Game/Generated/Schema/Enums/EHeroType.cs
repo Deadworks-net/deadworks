@@ -13,6 +13,7 @@ public static partial class Schema {
 		ECitadelHeroType_Assassin = 2,
 		ECitadelHeroType_Brawler = 3,
 		ECitadelHeroType_Mystic = 4,
-		ECitadelHeroType_LastEnum = 5,
+		ECitadelHeroType_Healer = 5,
+		ECitadelHeroType_LastEnum = 6,
 	}
 }
