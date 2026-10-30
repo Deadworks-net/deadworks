@@ -8,7 +8,7 @@ namespace DeadworksManaged.Game;
 /// <summary>The Deadlock build this assembly was generated from. Field offsets are still looked up in the running game, so a newer build only breaks what it renamed or removed.</summary>
 public static class GameBuild {
 	/// <summary>The build's <c>ClientVersion</c>.</summary>
-	public const int Version = 6826;
+	public const int Version = 6827;
 	/// <summary>The build's date, as the game reports it.</summary>
 	public const string Date = "Oct 30 2026";
 }

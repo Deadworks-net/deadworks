@@ -2302,7 +2302,7 @@ public static class ModifierNames {
 	public const string upgrade_cloaking_device_active__modifier_cloaking_device_active_ambush = "upgrade_cloaking_device_active/modifier_cloaking_device_active_ambush";
 	/// <summary>Class <c>modifier_intrinsic_base</c>.</summary>
 	public const string upgrade_cloaking_device_active__modifier_intrinsic_base = "upgrade_cloaking_device_active/modifier_intrinsic_base";
-	/// <summary>Class <c>modifier_invis</c>.</summary>
+	/// <summary>Class <c>modifier_cloaking_device_active_invis</c>.</summary>
 	public const string upgrade_cloaking_device_active__modifier_invis = "upgrade_cloaking_device_active/modifier_invis";
 	/// <summary>Class <c>modifier_close_range_proc</c>.</summary>
 	public const string upgrade_close_quarter_combat__modifier_close_range_proc = "upgrade_close_quarter_combat/modifier_close_range_proc";
