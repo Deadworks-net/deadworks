@@ -8,4 +8,5 @@ public enum ECitadelGameMode : uint {
 	StreetBrawl = 0x4,
 	ExploreNYC = 0x5,
 	Internal = 0x6,
+	Internal02 = 0x7,
 }
