@@ -3801,6 +3801,8 @@ public static class AbilityProperties {
 	public const string StackingDebuffTickRate = "StackingDebuffTickRate";
 	/// <summary>On <c>upgrade_trophy_collector</c>.</summary>
 	public const string StackingGoldPerMinute = "StackingGoldPerMinute";
+	/// <summary>On <c>upgrade_healbane</c>.</summary>
+	public const string StackingPenaltyAnchorPercent = "StackingPenaltyAnchorPercent";
 	/// <summary>On <c>upgrade_trophy_collector</c>.</summary>
 	public const string StackingTechRadiusMultiplier = "StackingTechRadiusMultiplier";
 	/// <summary>On <c>upgrade_trophy_collector</c>.</summary>
