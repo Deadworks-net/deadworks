@@ -33,6 +33,10 @@ public static partial class Schema {
 		/// <summary><c>uint32</c>.</summary>
 		public uint m_unCalibrationMatches { get => Get<uint>(__m_unCalibrationMatches); set => Set(__m_unCalibrationMatches, value); }
 
+		private static readonly SchemaField __m_unCalibrationMaxRank = new("CRankedSeasonDefinition", "m_unCalibrationMaxRank");
+		/// <summary><c>uint32</c>.</summary>
+		public uint m_unCalibrationMaxRank { get => Get<uint>(__m_unCalibrationMaxRank); set => Set(__m_unCalibrationMaxRank, value); }
+
 		private static readonly SchemaField __m_unLeaderboardXPPoolSize = new("CRankedSeasonDefinition", "m_unLeaderboardXPPoolSize");
 		/// <summary><c>uint32</c>.</summary>
 		public uint m_unLeaderboardXPPoolSize { get => Get<uint>(__m_unLeaderboardXPPoolSize); set => Set(__m_unLeaderboardXPPoolSize, value); }

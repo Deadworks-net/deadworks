@@ -69,6 +69,10 @@ public static partial class Schema {
 		/// <summary><c>float32</c>.</summary>
 		public float m_flSlamAcc { get => Get<float>(__m_flSlamAcc); set => Set(__m_flSlamAcc, value); }
 
+		private static readonly SchemaField __m_flSlamFailSafeTime = new("CModifierPsychicLiftVData", "m_flSlamFailSafeTime");
+		/// <summary><c>float32</c>.</summary>
+		public float m_flSlamFailSafeTime { get => Get<float>(__m_flSlamFailSafeTime); set => Set(__m_flSlamFailSafeTime, value); }
+
 		private static readonly SchemaField __m_flSlamImpactRadius = new("CModifierPsychicLiftVData", "m_flSlamImpactRadius");
 		/// <summary><c>float32</c>.</summary>
 		public float m_flSlamImpactRadius { get => Get<float>(__m_flSlamImpactRadius); set => Set(__m_flSlamImpactRadius, value); }
