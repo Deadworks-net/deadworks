@@ -1039,20 +1039,13 @@ static uint8_t __cdecl NativeGetConVarAt(uint16_t index, ConVarInfoResult *resul
     if (!cvRef.IsValidRef() || !cvRef.IsConVarDataValid())
         return 0;
 
-    static const char *s_TypeNames[] = {
-        "bool", "int16", "uint16", "int32", "uint32",
-        "int64", "uint64", "float32", "float64",
-        "string", "color", "vector2", "vector3", "vector4", "qangle"
-    };
-
     // Stable pointers - live in engine memory
     result->name = cvRef.GetName();
     result->description = cvRef.HasHelpText() ? cvRef.GetHelpText() : "";
     result->flags = cvRef.GetFlags();
 
-    int16_t typeIdx = static_cast<int16_t>(cvRef.GetType());
-    result->typeName = (typeIdx >= 0 && typeIdx < static_cast<int16_t>(std::size(s_TypeNames)))
-        ? s_TypeNames[typeIdx] : "unknown";
+    EConVarType type = cvRef.GetType();
+    result->typeName = (type >= 0 && type < EConVarType_MAX) ? cvRef.TypeTraits()->m_TypeName : "unknown";
 
     // Stringified values - use static buffers (game thread only)
     static CBufferStringGrowable<256> s_valueBuf, s_defaultBuf;

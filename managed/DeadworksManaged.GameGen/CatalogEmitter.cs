@@ -13,7 +13,7 @@ sealed class CatalogEmitter {
 	private static readonly string[] ObjectMembers = ["Equals", "ReferenceEquals", "GetHashCode", "ToString", "GetType", "MemberwiseClone"];
 
 	private static readonly Dictionary<string, string> ConVarTypes = new() {
-		["bool"] = "bool", ["int16"] = "int", ["int32"] = "int", ["uint16"] = "ushort", ["uint32"] = "uint", ["int64"] = "long", ["uint64"] = "ulong",
+		["bool"] = "bool", ["int8"] = "int", ["uint8"] = "int", ["int16"] = "int", ["int32"] = "int", ["uint16"] = "ushort", ["uint32"] = "uint", ["int64"] = "long", ["uint64"] = "ulong",
 		["float32"] = "float", ["float64"] = "double", ["string"] = "string",
 		["vector2"] = "Vector2", ["vector3"] = "Vector3", ["vector4"] = "Vector4", ["color"] = "Color32",
 	};
