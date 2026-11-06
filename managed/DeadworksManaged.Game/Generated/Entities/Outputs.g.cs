@@ -236,6 +236,12 @@ public static class Outputs {
 		public const string OnStartTouch = "OnStartTouch";
 		public const string OnStartTouchAll = "OnStartTouchAll";
 	}
+	/// <summary>Outputs of <c>CCitadelHideoutOwnerRankedSeasonRewardProp</c>.</summary>
+	public abstract class CCitadelHideoutOwnerRankedSeasonRewardProp : CBaseEntity {
+		private protected CCitadelHideoutOwnerRankedSeasonRewardProp() { }
+		public const string OnPropDisabled = "OnPropDisabled";
+		public const string OnPropEnabled = "OnPropEnabled";
+	}
 	/// <summary>Outputs of <c>CCitadelHideoutTeleportTrigger</c>.</summary>
 	public abstract class CCitadelHideoutTeleportTrigger : CBaseTrigger {
 		private protected CCitadelHideoutTeleportTrigger() { }

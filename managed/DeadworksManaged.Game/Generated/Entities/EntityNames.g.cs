@@ -915,6 +915,8 @@ public static class EntityNames {
 	public const string citadel_hideout_clock = "citadel_hideout_clock";
 	/// <summary><c>CCitadelHideoutInteractableTrigger</c>.</summary>
 	public const string citadel_hideout_interactable_trigger = "citadel_hideout_interactable_trigger";
+	/// <summary><c>CCitadelHideoutOwnerRankedSeasonRewardProp</c>.</summary>
+	public const string citadel_hideout_owner_ranked_season_reward_prop = "citadel_hideout_owner_ranked_season_reward_prop";
 	/// <summary><c>CCitadelHideoutPropBase</c>.</summary>
 	public const string citadel_hideout_prop_base = "citadel_hideout_prop_base";
 	/// <summary><c>CCitadelHideoutPropSlot</c>.</summary>
@@ -1013,6 +1015,8 @@ public static class EntityNames {
 	public const string citadel_prop_dynamic = "citadel_prop_dynamic";
 	/// <summary><c>CCitadelRankedBadgeProp</c>.</summary>
 	public const string citadel_ranked_badge_prop = "citadel_ranked_badge_prop";
+	/// <summary><c>CCitadelRankedSeasonRewardProp</c>.</summary>
+	public const string citadel_ranked_season_reward_prop = "citadel_ranked_season_reward_prop";
 	/// <summary><c>CCitadel_Ratking_Standard</c>.</summary>
 	public const string citadel_ratking_standard = "citadel_ratking_standard";
 	/// <summary><c>CCitadel_RestorativeGooCube</c>.</summary>

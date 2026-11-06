@@ -53,6 +53,10 @@ public static partial class Schema {
 		/// <summary><c>bool</c>.</summary>
 		public bool m_bFireFakeBullets { get => Get<bool>(__m_bFireFakeBullets); set => Set(__m_bFireFakeBullets, value); }
 
+		private static readonly SchemaField __m_flCastRangeVisualFixup = new("CCitadel_Ability_Nurse_Fear_VData", "m_flCastRangeVisualFixup");
+		/// <summary><c>float32</c>.</summary>
+		public float m_flCastRangeVisualFixup { get => Get<float>(__m_flCastRangeVisualFixup); set => Set(__m_flCastRangeVisualFixup, value); }
+
 		private static readonly SchemaField __m_flFakeBulletSpread = new("CCitadel_Ability_Nurse_Fear_VData", "m_flFakeBulletSpread");
 		/// <summary><c>float32</c>.</summary>
 		public float m_flFakeBulletSpread { get => Get<float>(__m_flFakeBulletSpread); set => Set(__m_flFakeBulletSpread, value); }
