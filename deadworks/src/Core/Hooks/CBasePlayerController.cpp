@@ -37,13 +37,33 @@ static void ForceFullUpdate(CServerSideClientBase *client) {
 // swaps a connected player's pawn, but changeteam from team select does (and so can plugins), and on maps where joining
 // a team reveals little (no vis, sparse layouts) the join snapshot is small enough to lose that race nearly every time.
 // Sending the full update from the same frame as the swap means the new pawn never arrives as a delta at all.
+//
+// Only for a team change, though. The game itself swaps pawns within a team in normal play (Street Brawl respawns every
+// dead player with a new pawn at the end of a round), and a full update there leaves that client's HUD broken for the
+// rest of the match: the next round's item draft never appears and the screen stays blurred behind it, until the
+// player restarts the game. Matchmaking runs those swaps without any forced update, so they are left alone.
+static int PawnTeam(CEntityHandle pawn) {
+    if (!pawn.IsValid())
+        return -1;
+    auto *entity = g_Deadworks.GetEntity<CBaseEntity>(pawn.GetEntryIndex());
+    if (!entity || entity->GetRefEHandle().ToInt() != pawn.ToInt())
+        return -1;
+    return entity->m_iTeamNum.Get();
+}
+
 void __fastcall Hook_CBasePlayerController_SetPawn(CBasePlayerController *thisptr, CBasePlayerPawn *pPawn, bool bRetainOldPawnTeam, bool bCopyMovementState, bool bAllowTeamMismatch, bool bPreserveMovementState) {
-    const int oldPawn = thisptr->m_hPawn.Get().ToInt();
+    const CEntityHandle oldPawnHandle = thisptr->m_hPawn.Get();
+    const int oldPawn = oldPawnHandle.ToInt();
+    const int oldTeam = PawnTeam(oldPawnHandle); // read now: the old pawn may not outlive the swap
 
     g_CBasePlayerController_SetPawn.call<void>(thisptr, pPawn, bRetainOldPawnTeam, bCopyMovementState, bAllowTeamMismatch, bPreserveMovementState);
 
     const CEntityHandle newPawn = thisptr->m_hPawn.Get();
     if (!newPawn.IsValid() || newPawn.ToInt() == oldPawn || !g_pNetworkServerService)
+        return;
+
+    // A same-team swap (oldTeam -1: no old pawn to compare, keep forcing as before).
+    if (oldTeam != -1 && oldTeam == PawnTeam(newPawn))
         return;
 
     auto *server = g_pNetworkServerService->GetIGameServer();
