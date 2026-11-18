@@ -117,6 +117,7 @@ public static partial class SchemaRegistry {
 		classes["CCitadelHideoutInteractableProp"] = static () => new Schema.CCitadelHideoutInteractableProp();
 		classes["CCitadelHideoutInteractableTrigger"] = static () => new Schema.CCitadelHideoutInteractableTrigger();
 		classes["CCitadelHideoutInterestPoint"] = static () => new Schema.CCitadelHideoutInterestPoint();
+		classes["CCitadelHideoutOwnerRankedSeasonRewardProp"] = static () => new Schema.CCitadelHideoutOwnerRankedSeasonRewardProp();
 		classes["CCitadelHideoutPropBase"] = static () => new Schema.CCitadelHideoutPropBase();
 		classes["CCitadelHideoutPropSlot"] = static () => new Schema.CCitadelHideoutPropSlot();
 		classes["CCitadelHideoutTeleportTrigger"] = static () => new Schema.CCitadelHideoutTeleportTrigger();
@@ -149,6 +150,7 @@ public static partial class SchemaRegistry {
 		classes["CCitadelProjectile_ImmobilizeTrap"] = static () => new Schema.CCitadelProjectile_ImmobilizeTrap();
 		classes["CCitadelPushTrigger"] = static () => new Schema.CCitadelPushTrigger();
 		classes["CCitadelRankedBadgeProp"] = static () => new Schema.CCitadelRankedBadgeProp();
+		classes["CCitadelRankedSeasonRewardProp"] = static () => new Schema.CCitadelRankedSeasonRewardProp();
 		classes["CCitadelShopTunnelTrigger"] = static () => new Schema.CCitadelShopTunnelTrigger();
 		classes["CCitadelSoundEntityOBB"] = static () => new Schema.CCitadelSoundEntityOBB();
 		classes["CCitadelSoundOpvarSetOBB"] = static () => new Schema.CCitadelSoundOpvarSetOBB();
@@ -1725,6 +1727,7 @@ public static partial class SchemaRegistry {
 		designerNames["citadel_hideout_button"] = static () => new Schema.CCitadelHideoutInteractableProp();
 		designerNames["citadel_hideout_clock"] = static () => new Schema.CCitadel_Hideout_Clock();
 		designerNames["citadel_hideout_interactable_trigger"] = static () => new Schema.CCitadelHideoutInteractableTrigger();
+		designerNames["citadel_hideout_owner_ranked_season_reward_prop"] = static () => new Schema.CCitadelHideoutOwnerRankedSeasonRewardProp();
 		designerNames["citadel_hideout_prop_base"] = static () => new Schema.CCitadelHideoutPropBase();
 		designerNames["citadel_hideout_prop_slot"] = static () => new Schema.CCitadelHideoutPropSlot();
 		designerNames["citadel_hideout_shootable_target_spawner"] = static () => new Schema.CCitadel_HideOutTargetSpawner();
@@ -1774,6 +1777,7 @@ public static partial class SchemaRegistry {
 		designerNames["citadel_projectile"] = static () => new Schema.CCitadelProjectile();
 		designerNames["citadel_prop_dynamic"] = static () => new Schema.CCitadel_DynamicProp();
 		designerNames["citadel_ranked_badge_prop"] = static () => new Schema.CCitadelRankedBadgeProp();
+		designerNames["citadel_ranked_season_reward_prop"] = static () => new Schema.CCitadelRankedSeasonRewardProp();
 		designerNames["citadel_ratking_standard"] = static () => new Schema.CCitadel_Ratking_Standard();
 		designerNames["citadel_restorative_goo_cube"] = static () => new Schema.CCitadel_RestorativeGooCube();
 		designerNames["citadel_shield"] = static () => new Schema.CCitadel_Shield();

@@ -33,6 +33,10 @@ public static partial class Schema {
 		/// <summary><c>CSoundEventName</c>.</summary>
 		public string m_WallTravelSoundLoop => GetBufferString(__m_WallTravelSoundLoop);
 
+		private static readonly SchemaField __m_flWallBackTraceDistance = new("CCitadel_Ability_FissureWallVData", "m_flWallBackTraceDistance");
+		/// <summary><c>float32</c>.</summary>
+		public float m_flWallBackTraceDistance { get => Get<float>(__m_flWallBackTraceDistance); set => Set(__m_flWallBackTraceDistance, value); }
+
 		private static readonly SchemaField __m_flWallPreviewDropdownRate = new("CCitadel_Ability_FissureWallVData", "m_flWallPreviewDropdownRate");
 		/// <summary><c>float32</c>.</summary>
 		public float m_flWallPreviewDropdownRate { get => Get<float>(__m_flWallPreviewDropdownRate); set => Set(__m_flWallPreviewDropdownRate, value); }
