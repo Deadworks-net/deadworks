@@ -441,8 +441,8 @@
 		}
 	},
 	"virtuals": {
-		"ISource2Server::ApplyGameSettings": 18,
-		"ISource2Server::GameFrame": 19,
+		"ISource2Server::ApplyGameSettings": 19,
+		"ISource2Server::GameFrame": 20,
 		"ISource2GameClients::ClientConnect": 12,
 		"ISource2GameClients::ClientPutInServer": 13,
 		"ISource2GameClients::ClientDisconnect": 16,
