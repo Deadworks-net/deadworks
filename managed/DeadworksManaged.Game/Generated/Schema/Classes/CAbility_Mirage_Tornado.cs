@@ -13,6 +13,10 @@ public static partial class Schema {
 		static CAbility_Mirage_Tornado ISchemaClass<CAbility_Mirage_Tornado>.New() => new();
 		static string ISchemaClass<CAbility_Mirage_Tornado>.NativeName => "CAbility_Mirage_Tornado";
 
+		private static readonly SchemaField __m_FirstCastTime = new("CAbility_Mirage_Tornado", "m_FirstCastTime");
+		/// <summary><c>GameTime_t</c>.</summary>
+		public GameTime m_FirstCastTime { get => Get<GameTime>(__m_FirstCastTime); set => Set(__m_FirstCastTime, value); }
+
 		private static readonly SchemaField __m_RecastWindowEnd = new("CAbility_Mirage_Tornado", "m_RecastWindowEnd");
 		/// <summary><c>GameTime_t</c>.</summary>
 		public GameTime m_RecastWindowEnd { get => Get<GameTime>(__m_RecastWindowEnd); set => Set(__m_RecastWindowEnd, value); }

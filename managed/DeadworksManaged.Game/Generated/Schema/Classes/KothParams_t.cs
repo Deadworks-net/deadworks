@@ -33,6 +33,10 @@ public static partial class Schema {
 		/// <summary><c>float32</c>.</summary>
 		public float m_flKothWarningDropHeight { get => Get<float>(__m_flKothWarningDropHeight); set => Set(__m_flKothWarningDropHeight, value); }
 
+		private static readonly SchemaField __m_flTrailingBonusFullDeficitPercent = new("KothParams_t", "m_flTrailingBonusFullDeficitPercent");
+		/// <summary><c>float32</c>.</summary>
+		public float m_flTrailingBonusFullDeficitPercent { get => Get<float>(__m_flTrailingBonusFullDeficitPercent); set => Set(__m_flTrailingBonusFullDeficitPercent, value); }
+
 		private static readonly SchemaField __m_strKothPreSpawnLoopSound = new("KothParams_t", "m_strKothPreSpawnLoopSound");
 		/// <summary><c>CSoundEventName</c>.</summary>
 		public string m_strKothPreSpawnLoopSound => GetBufferString(__m_strKothPreSpawnLoopSound);

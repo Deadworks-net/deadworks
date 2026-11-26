@@ -109,6 +109,10 @@ public static partial class Schema {
 		/// <summary><c>bool</c>. If true, bullet will use this curve to determine its gravity instead of m_flBulletGravityScale.</summary>
 		public bool m_bUseBulletGravityScaleCurve { get => Get<bool>(__m_bUseBulletGravityScaleCurve); set => Set(__m_bUseBulletGravityScaleCurve, value); }
 
+		private static readonly SchemaField __m_bUseBulletSpeedScaleCurve = new("CCitadelWeaponInfo", "m_bUseBulletSpeedScaleCurve");
+		/// <summary><c>bool</c>.</summary>
+		public bool m_bUseBulletSpeedScaleCurve { get => Get<bool>(__m_bUseBulletSpeedScaleCurve); set => Set(__m_bUseBulletSpeedScaleCurve, value); }
+
 		private static readonly SchemaField __m_bUseDesatForFriendlyNonHeroTracer = new("CCitadelWeaponInfo", "m_bUseDesatForFriendlyNonHeroTracer");
 		/// <summary><c>bool</c>.</summary>
 		public bool m_bUseDesatForFriendlyNonHeroTracer { get => Get<bool>(__m_bUseDesatForFriendlyNonHeroTracer); set => Set(__m_bUseDesatForFriendlyNonHeroTracer, value); }
@@ -188,6 +192,10 @@ public static partial class Schema {
 		private static readonly SchemaField __m_flBulletSpeedRandomFactor = new("CCitadelWeaponInfo", "m_flBulletSpeedRandomFactor");
 		/// <summary><c>float32</c>.</summary>
 		public float m_flBulletSpeedRandomFactor { get => Get<float>(__m_flBulletSpeedRandomFactor); set => Set(__m_flBulletSpeedRandomFactor, value); }
+
+		private static readonly SchemaField __m_flBulletSpeedScaleOverDistance = new("CCitadelWeaponInfo", "m_flBulletSpeedScaleOverDistance");
+		/// <summary><c>CPiecewiseCurve</c>. No typed mapping yet: read it through its address.</summary>
+		public RawField m_flBulletSpeedScaleOverDistance => Raw(__m_flBulletSpeedScaleOverDistance, "CPiecewiseCurve");
 
 		private static readonly SchemaField __m_flBulletWhizDistance = new("CCitadelWeaponInfo", "m_flBulletWhizDistance");
 		/// <summary><c>float32</c>.</summary>

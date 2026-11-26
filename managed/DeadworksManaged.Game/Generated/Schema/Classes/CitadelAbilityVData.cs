@@ -157,6 +157,18 @@ public static partial class Schema {
 		/// <summary><c>bool</c>. When false, the targeting preview draws its shape but leaves the rest of the screen alone.</summary>
 		public bool m_bTargetingPreviewDesaturatesScreen { get => Get<bool>(__m_bTargetingPreviewDesaturatesScreen); set => Set(__m_bTargetingPreviewDesaturatesScreen, value); }
 
+		private static readonly SchemaField __m_bTooltipShowAsMovementAbility = new("CitadelAbilityVData", "m_bTooltipShowAsMovementAbility");
+		/// <summary><c>bool</c>.</summary>
+		public bool m_bTooltipShowAsMovementAbility { get => Get<bool>(__m_bTooltipShowAsMovementAbility); set => Set(__m_bTooltipShowAsMovementAbility, value); }
+
+		private static readonly SchemaField __m_bTooltipShowEnemyFlyingAbilities = new("CitadelAbilityVData", "m_bTooltipShowEnemyFlyingAbilities");
+		/// <summary><c>bool</c>.</summary>
+		public bool m_bTooltipShowEnemyFlyingAbilities { get => Get<bool>(__m_bTooltipShowEnemyFlyingAbilities); set => Set(__m_bTooltipShowEnemyFlyingAbilities, value); }
+
+		private static readonly SchemaField __m_bTooltipShowEnemyMovementAbilities = new("CitadelAbilityVData", "m_bTooltipShowEnemyMovementAbilities");
+		/// <summary><c>bool</c>.</summary>
+		public bool m_bTooltipShowEnemyMovementAbilities { get => Get<bool>(__m_bTooltipShowEnemyMovementAbilities); set => Set(__m_bTooltipShowEnemyMovementAbilities, value); }
+
 		private static readonly SchemaField __m_bUseCameraOffsetsForCone = new("CitadelAbilityVData", "m_bUseCameraOffsetsForCone");
 		/// <summary><c>bool</c>. When true, the cone is cast from the center of the screen, rather than from the center of the character.</summary>
 		public bool m_bUseCameraOffsetsForCone { get => Get<bool>(__m_bUseCameraOffsetsForCone); set => Set(__m_bUseCameraOffsetsForCone, value); }

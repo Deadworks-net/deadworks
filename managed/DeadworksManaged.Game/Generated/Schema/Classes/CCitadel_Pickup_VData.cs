@@ -161,6 +161,10 @@ public static partial class Schema {
 		/// <summary><c>float32</c>.</summary>
 		public float m_flVacuumCloseEnoughToPickup { get => Get<float>(__m_flVacuumCloseEnoughToPickup); set => Set(__m_flVacuumCloseEnoughToPickup, value); }
 
+		private static readonly SchemaField __m_flYawSpin = new("CCitadel_Pickup_VData", "m_flYawSpin");
+		/// <summary><c>float32</c>.</summary>
+		public float m_flYawSpin { get => Get<float>(__m_flYawSpin); set => Set(__m_flYawSpin, value); }
+
 		private static readonly SchemaField __m_friendlyInteractiveParticle = new("CCitadel_Pickup_VData", "m_friendlyInteractiveParticle");
 		/// <summary><c>CResourceNameTyped&lt;CWeakHandle&lt;InfoForResourceTypeIParticleSystemDefinition&gt;&gt;</c>.</summary>
 		public string m_friendlyInteractiveParticle => GetBufferString(__m_friendlyInteractiveParticle);

@@ -97,6 +97,10 @@ public static partial class Schema {
 		/// <summary><c>float32</c>.</summary>
 		public float m_flMinTimeToRoofCheck { get => Get<float>(__m_flMinTimeToRoofCheck); set => Set(__m_flMinTimeToRoofCheck, value); }
 
+		private static readonly SchemaField __m_flMinTimeToRoofCheckLatchDist = new("CCitadel_Ability_Climb_RopeVData", "m_flMinTimeToRoofCheckLatchDist");
+		/// <summary><c>float32</c>.</summary>
+		public float m_flMinTimeToRoofCheckLatchDist { get => Get<float>(__m_flMinTimeToRoofCheckLatchDist); set => Set(__m_flMinTimeToRoofCheckLatchDist, value); }
+
 		private static readonly SchemaField __m_flSideMoveReduction = new("CCitadel_Ability_Climb_RopeVData", "m_flSideMoveReduction");
 		/// <summary><c>float32</c>.</summary>
 		public float m_flSideMoveReduction { get => Get<float>(__m_flSideMoveReduction); set => Set(__m_flSideMoveReduction, value); }

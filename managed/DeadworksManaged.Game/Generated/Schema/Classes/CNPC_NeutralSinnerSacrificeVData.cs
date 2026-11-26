@@ -117,6 +117,10 @@ public static partial class Schema {
 		/// <summary><c>float32</c>. How much damage to deal on retaliate the attacker when this is hit.</summary>
 		public float m_flRetaliateDamage { get => Get<float>(__m_flRetaliateDamage); set => Set(__m_flRetaliateDamage, value); }
 
+		private static readonly SchemaField __m_flRetaliateDamageMaxHealthPercent = new("CNPC_NeutralSinnerSacrificeVData", "m_flRetaliateDamageMaxHealthPercent");
+		/// <summary><c>float32</c>. Extra retaliate damage, as a percent of the attacker's max health.</summary>
+		public float m_flRetaliateDamageMaxHealthPercent { get => Get<float>(__m_flRetaliateDamageMaxHealthPercent); set => Set(__m_flRetaliateDamageMaxHealthPercent, value); }
+
 		private static readonly SchemaField __m_flVaultLightFastFlashTime = new("CNPC_NeutralSinnerSacrificeVData", "m_flVaultLightFastFlashTime");
 		/// <summary><c>float32</c>.</summary>
 		public float m_flVaultLightFastFlashTime { get => Get<float>(__m_flVaultLightFastFlashTime); set => Set(__m_flVaultLightFastFlashTime, value); }

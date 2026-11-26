@@ -33,6 +33,14 @@ public static partial class Schema {
 		/// <summary><c>bool</c>.</summary>
 		public bool m_bInTakeDamageFlow { get => Get<bool>(__m_bInTakeDamageFlow); set => Set(__m_bInTakeDamageFlow, value); }
 
+		private static readonly SchemaField __m_bOutgoingDamageScaleApplied = new("CTakeDamageInfo", "m_bOutgoingDamageScaleApplied");
+		/// <summary><c>bool</c>.</summary>
+		public bool m_bOutgoingDamageScaleApplied { get => Get<bool>(__m_bOutgoingDamageScaleApplied); set => Set(__m_bOutgoingDamageScaleApplied, value); }
+
+		private static readonly SchemaField __m_bPureDamageUsesDamageAmps = new("CTakeDamageInfo", "m_bPureDamageUsesDamageAmps");
+		/// <summary><c>bool</c>.</summary>
+		public bool m_bPureDamageUsesDamageAmps { get => Get<bool>(__m_bPureDamageUsesDamageAmps); set => Set(__m_bPureDamageUsesDamageAmps, value); }
+
 		private static readonly SchemaField __m_bShouldBleed = new("CTakeDamageInfo", "m_bShouldBleed");
 		/// <summary><c>bool</c>.</summary>
 		public bool m_bShouldBleed { get => Get<bool>(__m_bShouldBleed); set => Set(__m_bShouldBleed, value); }
@@ -80,6 +88,10 @@ public static partial class Schema {
 		private static readonly SchemaField __m_flOriginalDamage = new("CTakeDamageInfo", "m_flOriginalDamage");
 		/// <summary><c>float32</c>.</summary>
 		public float m_flOriginalDamage { get => Get<float>(__m_flOriginalDamage); set => Set(__m_flOriginalDamage, value); }
+
+		private static readonly SchemaField __m_flOwnerEventMitigationScale = new("CTakeDamageInfo", "m_flOwnerEventMitigationScale");
+		/// <summary><c>float32</c>.</summary>
+		public float m_flOwnerEventMitigationScale { get => Get<float>(__m_flOwnerEventMitigationScale); set => Set(__m_flOwnerEventMitigationScale, value); }
 
 		private static readonly SchemaField __m_flPreResistDamage = new("CTakeDamageInfo", "m_flPreResistDamage");
 		/// <summary><c>float32</c>.</summary>

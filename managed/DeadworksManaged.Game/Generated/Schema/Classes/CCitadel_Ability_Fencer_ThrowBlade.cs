@@ -33,6 +33,10 @@ public static partial class Schema {
 		/// <summary><c>QAngle</c>.</summary>
 		public Vector3 m_qCastAngles { get => Get<Vector3>(__m_qCastAngles); set => Set(__m_qCastAngles, value); }
 
+		private static readonly SchemaField __m_tFirstCastTime = new("CCitadel_Ability_Fencer_ThrowBlade", "m_tFirstCastTime");
+		/// <summary><c>GameTime_t</c>.</summary>
+		public GameTime m_tFirstCastTime { get => Get<GameTime>(__m_tFirstCastTime); set => Set(__m_tFirstCastTime, value); }
+
 		private static readonly SchemaField __m_tRecastEndTime = new("CCitadel_Ability_Fencer_ThrowBlade", "m_tRecastEndTime");
 		/// <summary><c>GameTime_t</c>. Networked: a write is sent to clients.</summary>
 		public GameTime m_tRecastEndTime { get => Get<GameTime>(__m_tRecastEndTime); set => Set(__m_tRecastEndTime, value); }

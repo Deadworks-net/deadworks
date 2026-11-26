@@ -590,6 +590,8 @@ public static class ConVars {
 	public static readonly GameConVar<bool> citadel_allow_team_change_when_assigned = new("citadel_allow_team_change_when_assigned");
 	/// <summary>Enable to always force transmit ability entities. Default <c>False</c>. Flags: developmentonly, gamedll.</summary>
 	public static readonly GameConVar<bool> citadel_always_transmit_abilities = new("citadel_always_transmit_abilities");
+	/// <summary>Seconds to draw the Charged Shot ricochet aim cone (yellow), natural reflection (white) and biased shot (green). 0 disables. Default <c>0</c>. Flags: cheat, replicated, gamedll, clientdll.</summary>
+	public static readonly GameConVar<float> citadel_archer_charged_shot_ricochet_aim_debug = new("citadel_archer_charged_shot_ricochet_aim_debug");
 	/// <summary>Time Allowed for a full refund when buy anywhere (Auto/Quick Buy) is enabled. Default <c>12</c>. Flags: developmentonly, replicated, gamedll, clientdll.</summary>
 	public static readonly GameConVar<float> citadel_autobuy_refund_time = new("citadel_autobuy_refund_time");
 	/// <summary>Default <c>0</c>. Flags: developmentonly, replicated, gamedll, clientdll.</summary>
@@ -722,6 +724,34 @@ public static class ConVars {
 	public static readonly GameConVar<float> citadel_bot_director_zipline_stable = new("citadel_bot_director_zipline_stable");
 	/// <summary>Default <c>False</c>. Flags: defensive, developmentonly, replicated, gamedll, clientdll.</summary>
 	public static readonly GameConVar<bool> citadel_bot_disconnect_takeover_enabled = new("citadel_bot_disconnect_takeover_enabled");
+	/// <summary>Sandbox bot drill. 1: diving Danny, 2: flying Vindicta, 3: Abrams Shoulder Charge and melee, 4: Grey Talon Rain of Arrows and Charged Shot, 5: Paradox Kinetic Carbine and Paradoxical Swap, 6: Viscous Goo Ball, 7: Viscous Puddle Punch, 8: Bebop Grapple Arm, 9: Graves Borrowed Decree parry, 10: Baba Threadsap, 11: Billy combo, 12: Baba Granny Long Legs, 13: Lash Death Slam and Ground Strike, 14: Silver wolf form, 15: Holliday Bounce Pad and Powder Keg, 16: McGinnis Spectral Wall and Heavy Barrage. Default <c>0</c>. Flags: release, replicated, gamedll.</summary>
+	public static readonly GameConVar<int> citadel_bot_drill = new("citadel_bot_drill");
+	/// <summary>Air jumps the Lash bot drill target makes after Grapple to gain height. Default <c>2</c>. Flags: release, replicated, gamedll.</summary>
+	public static readonly GameConVar<int> citadel_bot_drill_air_jumps = new("citadel_bot_drill_air_jumps");
+	/// <summary>Longest wait in seconds between a bot drill target's attacks. Default <c>4</c>. Flags: release, replicated, gamedll.</summary>
+	public static readonly GameConVar<float> citadel_bot_drill_attack_delay_max = new("citadel_bot_drill_attack_delay_max");
+	/// <summary>Shortest wait in seconds between a bot drill target's attacks. Default <c>2</c>. Flags: release, replicated, gamedll.</summary>
+	public static readonly GameConVar<float> citadel_bot_drill_attack_delay_min = new("citadel_bot_drill_attack_delay_min");
+	/// <summary>Chance per flight that the Grey Talon bot drill target fires a Charged Shot. Default <c>0.5</c>. Flags: release, replicated, gamedll.</summary>
+	public static readonly GameConVar<float> citadel_bot_drill_charged_shot_chance = new("citadel_bot_drill_charged_shot_chance");
+	/// <summary>Distance in meters from its start the bot drill target stops chasing the player at. Default <c>30</c>. Flags: release, replicated, gamedll.</summary>
+	public static readonly GameConVar<float> citadel_bot_drill_chase_distance = new("citadel_bot_drill_chase_distance");
+	/// <summary>Melee attacks the Abrams and Billy bot drill targets finish their combos with. Default <c>2</c>. Flags: release, replicated, gamedll.</summary>
+	public static readonly GameConVar<int> citadel_bot_drill_combo_swings = new("citadel_bot_drill_combo_swings");
+	/// <summary>Distance in meters from the player the bot drill target starts at. Default <c>15</c>. Flags: release, replicated, gamedll.</summary>
+	public static readonly GameConVar<float> citadel_bot_drill_distance = new("citadel_bot_drill_distance");
+	/// <summary>Height in meters the bot drill target flies at. Default <c>8</c>. Flags: release, replicated, gamedll.</summary>
+	public static readonly GameConVar<float> citadel_bot_drill_height = new("citadel_bot_drill_height");
+	/// <summary>Heavy melee charge percent at which the Graves bot drill target parries. Default <c>25</c>. Flags: release, replicated, gamedll.</summary>
+	public static readonly GameConVar<float> citadel_bot_drill_parry_charge_percent = new("citadel_bot_drill_parry_charge_percent");
+	/// <summary>Seconds after landing or finishing an attack before the bot drill target returns to its start. Default <c>2</c>. Flags: release, replicated, gamedll.</summary>
+	public static readonly GameConVar<float> citadel_bot_drill_reset_delay = new("citadel_bot_drill_reset_delay");
+	/// <summary>Distance in meters from the player the McGinnis bot drill target dashes away at. Default <c>10</c>. Flags: release, replicated, gamedll.</summary>
+	public static readonly GameConVar<float> citadel_bot_drill_retreat_distance = new("citadel_bot_drill_retreat_distance");
+	/// <summary>Distance in meters from its start a roaming bot drill target moves around in. Default <c>4</c>. Flags: release, replicated, gamedll.</summary>
+	public static readonly GameConVar<float> citadel_bot_drill_roam_distance = new("citadel_bot_drill_roam_distance");
+	/// <summary>Distance in meters behind the player the McGinnis bot drill target deploys Spectral Wall at. Default <c>3</c>. Flags: release, replicated, gamedll.</summary>
+	public static readonly GameConVar<float> citadel_bot_drill_wall_distance = new("citadel_bot_drill_wall_distance");
 	/// <summary>Forces citadel bots to move back and forth. Default <c>False</c>. Flags: release, replicated, gamedll.</summary>
 	public static readonly GameConVar<bool> citadel_bot_forward_back = new("citadel_bot_forward_back");
 	/// <summary>Aim Pitch in Hero Testing. Default <c>5</c>. Flags: release, replicated, gamedll.</summary>
@@ -792,7 +822,7 @@ public static class ConVars {
 	public static readonly GameConVar<float> citadel_bounty_aoe_deny_radius = new("citadel_bounty_aoe_deny_radius");
 	/// <summary>The radius in which teammates gain a portion of bounties. Default <c>2165.35</c>. Flags: cheat, replicated, gamedll, clientdll.</summary>
 	public static readonly GameConVar<float> citadel_bounty_aoe_radius = new("citadel_bounty_aoe_radius");
-	/// <summary>The radius in which a trooper death is automatically assigned to a nearby player. Default <c>1771.65</c>. Flags: cheat, replicated, gamedll, clientdll.</summary>
+	/// <summary>The radius in which a trooper death is automatically assigned to a nearby player. Default <c>1653.54</c>. Flags: cheat, replicated, gamedll, clientdll.</summary>
 	public static readonly GameConVar<float> citadel_bounty_aoe_radius_autoscore = new("citadel_bounty_aoe_radius_autoscore");
 	/// <summary>The radius in which teammates gain a portion of Neutral. Default <c>800</c>. Flags: cheat, replicated, gamedll, clientdll.</summary>
 	public static readonly GameConVar<float> citadel_bounty_aoe_radius_neutrals = new("citadel_bounty_aoe_radius_neutrals");
@@ -864,8 +894,10 @@ public static class ConVars {
 	public static readonly GameConVar<bool> citadel_combat_log_enabled_in_lobbies = new("citadel_combat_log_enabled_in_lobbies");
 	/// <summary>The amount of time needed to determine a fight is over (no one involved in a fight did anything to anyone else involved in the fight). Default <c>5</c>. Flags: defensive, developmentonly, replicated, gamedll, clientdll.</summary>
 	public static readonly GameConVar<float> citadel_combatlog_fight_idle_time = new("citadel_combatlog_fight_idle_time");
-	/// <summary>Fraction of the comeback souls earned by a player above the enemy team's average net worth that is redirected to the tick gold pool for the two lowest net worth teammates. Default <c>0.7</c>. Flags: defensive, developmentonly, gamedll.</summary>
+	/// <summary>Max fraction of the comeback souls earned by a player above their own team's average net worth that is redirected to the tick gold pool for the two lowest net worth teammates. Ramps from 0 at the team average. Default <c>0.8</c>. Flags: defensive, developmentonly, gamedll.</summary>
 	public static readonly GameConVar<float> citadel_comeback_redirect_fraction = new("citadel_comeback_redirect_fraction");
+	/// <summary>Player net worth / own team average net worth at which citadel_comeback_redirect_fraction is reached. Default <c>1.2</c>, range 1.01 to …. Flags: defensive, developmentonly, gamedll.</summary>
+	public static readonly GameConVar<float> citadel_comeback_redirect_max_ratio = new("citadel_comeback_redirect_max_ratio");
 	/// <summary>Default <c>1</c>. Flags: developmentonly, replicated, gamedll, clientdll.</summary>
 	public static readonly GameConVar<float> citadel_control_point_capture_rate_scale = new("citadel_control_point_capture_rate_scale");
 	/// <summary>Default <c>60</c>. Flags: developmentonly, replicated, gamedll, clientdll.</summary>
@@ -1328,8 +1360,10 @@ public static class ConVars {
 	public static readonly GameConVar<float> citadel_melee_heavymelee_push_force_vs_tiny = new("citadel_melee_heavymelee_push_force_vs_tiny");
 	/// <summary>Default <c>250</c>. Flags: developmentonly, gamedll.</summary>
 	public static readonly GameConVar<float> citadel_melee_heavymelee_toss_force_vs_tiny_min = new("citadel_melee_heavymelee_toss_force_vs_tiny_min");
-	/// <summary>Default <c>0.1</c>. Flags: defensive, developmentonly, gamedll.</summary>
+	/// <summary>Default <c>0.16</c>. Flags: defensive, developmentonly, gamedll.</summary>
 	public static readonly GameConVar<float> citadel_melee_hit_delay_max_time = new("citadel_melee_hit_delay_max_time");
+	/// <summary>Default <c>False</c>. Flags: defensive, developmentonly, gamedll.</summary>
+	public static readonly GameConVar<bool> citadel_melee_lagcomp_debug = new("citadel_melee_lagcomp_debug");
 	/// <summary>Default <c>0.55</c>. Flags: defensive, developmentonly, gamedll.</summary>
 	public static readonly GameConVar<float> citadel_melee_shake_amplitude = new("citadel_melee_shake_amplitude");
 	/// <summary>Default <c>0.1</c>. Flags: defensive, developmentonly, gamedll.</summary>
@@ -1568,19 +1602,19 @@ public static class ConVars {
 	public static readonly GameConVar<float> citadel_player_gold_comeback_assister_ratio = new("citadel_player_gold_comeback_assister_ratio");
 	/// <summary>Default <c>0.3</c>. Flags: defensive, developmentonly, replicated, gamedll, clientdll.</summary>
 	public static readonly GameConVar<float> citadel_player_gold_comeback_killer_fraction = new("citadel_player_gold_comeback_killer_fraction");
-	/// <summary>Default <c>2.268</c>. Flags: defensive, developmentonly, replicated, gamedll, clientdll.</summary>
+	/// <summary>Default <c>0.92</c>. Flags: defensive, developmentonly, replicated, gamedll, clientdll.</summary>
 	public static readonly GameConVar<float> citadel_player_gold_comeback_multiplier = new("citadel_player_gold_comeback_multiplier");
 	/// <summary>Default <c>1.2</c>. Flags: defensive, developmentonly, replicated, gamedll, clientdll.</summary>
 	public static readonly GameConVar<float> citadel_player_gold_comeback_npc_max_mutliplier_delta = new("citadel_player_gold_comeback_npc_max_mutliplier_delta");
-	/// <summary>Default <c>1.3</c>. Flags: defensive, developmentonly, replicated, gamedll, clientdll.</summary>
+	/// <summary>Default <c>1.285</c>. Flags: defensive, developmentonly, replicated, gamedll, clientdll.</summary>
 	public static readonly GameConVar<float> citadel_player_gold_comeback_npc_max_mutliplier_value = new("citadel_player_gold_comeback_npc_max_mutliplier_value");
-	/// <summary>Default <c>2.484</c>. Flags: defensive, developmentonly, replicated, gamedll, clientdll.</summary>
+	/// <summary>Default <c>1</c>. Flags: defensive, developmentonly, replicated, gamedll, clientdll.</summary>
 	public static readonly GameConVar<float> citadel_player_gold_difficulty_multiplier = new("citadel_player_gold_difficulty_multiplier");
 	/// <summary>Default <c>2.2</c>. Flags: defensive, developmentonly, gamedll.</summary>
 	public static readonly GameConVar<float> citadel_player_gold_killer_to_assist_ratio = new("citadel_player_gold_killer_to_assist_ratio");
 	/// <summary>Gold per 'level' after maxing out rewards. Default <c>2000</c>. Flags: defensive, developmentonly, replicated, gamedll, clientdll.</summary>
 	public static readonly GameConVar<int> citadel_player_gold_per_level_postmax = new("citadel_player_gold_per_level_postmax");
-	/// <summary>Default <c>125</c>. Flags: defensive, developmentonly, replicated, gamedll, clientdll.</summary>
+	/// <summary>Default <c>175</c>. Flags: defensive, developmentonly, replicated, gamedll, clientdll.</summary>
 	public static readonly GameConVar<int> citadel_player_gold_reward_first_kill_bonus = new("citadel_player_gold_reward_first_kill_bonus");
 	/// <summary>Default <c>2200</c>. Flags: defensive, developmentonly, replicated, gamedll, clientdll.</summary>
 	public static readonly GameConVar<int> citadel_player_gold_reward_max = new("citadel_player_gold_reward_max");
@@ -1600,10 +1634,6 @@ public static class ConVars {
 	public static readonly GameConVar<int> citadel_player_neutral_gold_drop_min = new("citadel_player_neutral_gold_drop_min");
 	/// <summary>Default <c>5</c>. Flags: defensive, developmentonly, gamedll.</summary>
 	public static readonly GameConVar<int> citadel_player_neutral_gold_drop_min_increase_per_minute = new("citadel_player_neutral_gold_drop_min_increase_per_minute");
-	/// <summary>Default <c>180</c>. Flags: defensive, developmentonly, gamedll.</summary>
-	public static readonly GameConVar<float> citadel_player_neutral_gold_duration = new("citadel_player_neutral_gold_duration");
-	/// <summary>Default <c>300</c>. Flags: defensive, developmentonly, gamedll.</summary>
-	public static readonly GameConVar<float> citadel_player_neutral_gold_fallrate = new("citadel_player_neutral_gold_fallrate");
 	/// <summary>Default <c>-1</c>. Flags: developmentonly, gamedll.</summary>
 	public static readonly GameConVar<float> citadel_player_override_spawn_time = new("citadel_player_override_spawn_time");
 	/// <summary>Default <c>6</c>. Flags: cheat, gamedll.</summary>
@@ -1718,7 +1748,7 @@ public static class ConVars {
 	public static readonly GameConVar<uint> citadel_popular_items_midgame_endtime = new("citadel_popular_items_midgame_endtime");
 	/// <summary>Default <c>10</c>. Flags: developmentonly, replicated, gamedll, clientdll.</summary>
 	public static readonly GameConVar<float> citadel_popular_items_min_pick_pct_early_game = new("citadel_popular_items_min_pick_pct_early_game");
-	/// <summary>Default <c>10</c>. Flags: developmentonly, replicated, gamedll, clientdll.</summary>
+	/// <summary>Default <c>7.5</c>. Flags: developmentonly, replicated, gamedll, clientdll.</summary>
 	public static readonly GameConVar<float> citadel_popular_items_min_pick_pct_late_game = new("citadel_popular_items_min_pick_pct_late_game");
 	/// <summary>Default <c>10</c>. Flags: developmentonly, replicated, gamedll, clientdll.</summary>
 	public static readonly GameConVar<float> citadel_popular_items_min_pick_pct_mid_game = new("citadel_popular_items_min_pick_pct_mid_game");
@@ -1796,7 +1826,21 @@ public static class ConVars {
 	public static readonly GameConVar<Color32> citadel_sat_volume_outline_color = new("citadel_sat_volume_outline_color");
 	/// <summary>Default <c>[255,255,255,255]</c>. Flags: developmentonly, replicated, gamedll, clientdll.</summary>
 	public static readonly GameConVar<Color32> citadel_sat_volume_sat_color = new("citadel_sat_volume_sat_color");
-	/// <summary>Max extra secure rate (fraction of baseline) for a player behind the enemy team's average net worth. Default <c>0.5</c>. Flags: developmentonly, gamedll.</summary>
+	/// <summary>If enabled, the Thanksgiving parade floats spawn when the match starts. Default <c>True</c>. Flags: release, replicated, gamedll, clientdll.</summary>
+	public static readonly GameConVar<bool> citadel_seasonal_thanksgiving = new("citadel_seasonal_thanksgiving");
+	/// <summary>Seconds after a parade float's box is broken before a new one appears on the float. Negative never respawns it. Default <c>180</c>. Flags: developmentonly, replicated, gamedll.</summary>
+	public static readonly GameConVar<float> citadel_seasonal_thanksgiving_float_box_respawn_time = new("citadel_seasonal_thanksgiving_float_box_respawn_time");
+	/// <summary>Seconds of match time before a parade float gets its first box. Until then it has none, and rides at its raised height. 0 gives it one as soon as it spawns. Default <c>180</c>. Flags: developmentonly, replicated, gamedll.</summary>
+	public static readonly GameConVar<float> citadel_seasonal_thanksgiving_float_first_box_match_time = new("citadel_seasonal_thanksgiving_float_first_box_match_time");
+	/// <summary>How far down the lane 4 zipline, in units along its path, from the first node inside the move range the first parade float spawns. The rest are spaced on from there. Default <c>0</c>. Flags: developmentonly, replicated, gamedll.</summary>
+	public static readonly GameConVar<float> citadel_seasonal_thanksgiving_float_initial_distance = new("citadel_seasonal_thanksgiving_float_initial_distance");
+	/// <summary>World Y of the +Y end of the parade floats' path. A float driving toward +Y that passes this teleports back to the -Y end. Default <c>5000</c>. Flags: developmentonly, replicated, gamedll.</summary>
+	public static readonly GameConVar<float> citadel_seasonal_thanksgiving_float_move_range_max_y = new("citadel_seasonal_thanksgiving_float_move_range_max_y");
+	/// <summary>World Y of the -Y end of the parade floats' path. No path limit unless this is below citadel_seasonal_thanksgiving_float_move_range_max_y. Default <c>-5000</c>. Flags: developmentonly, replicated, gamedll.</summary>
+	public static readonly GameConVar<float> citadel_seasonal_thanksgiving_float_move_range_min_y = new("citadel_seasonal_thanksgiving_float_move_range_min_y");
+	/// <summary>Default <c>1500</c>. Flags: developmentonly, replicated, gamedll.</summary>
+	public static readonly GameConVar<float> citadel_seasonal_thanksgiving_float_spacing = new("citadel_seasonal_thanksgiving_float_spacing");
+	/// <summary>Max extra secure rate (fraction of baseline) for a player behind the enemy team's average net worth. Default <c>0.75</c>. Flags: developmentonly, gamedll.</summary>
 	public static readonly GameConVar<float> citadel_secure_gold_behind_max_bonus = new("citadel_secure_gold_behind_max_bonus");
 	/// <summary>Net worth deficit vs the enemy team's average (fraction of that average) at which the secure rate bonus is maxed. Default <c>0.2</c>. Flags: developmentonly, gamedll.</summary>
 	public static readonly GameConVar<float> citadel_secure_gold_behind_max_delta = new("citadel_secure_gold_behind_max_delta");
@@ -1848,6 +1892,16 @@ public static class ConVars {
 	public static readonly GameConVar<int> citadel_snowball_level_override = new("citadel_snowball_level_override");
 	/// <summary>Default <c>False</c>. Flags: release, replicated, gamedll, clientdll.</summary>
 	public static readonly GameConVar<bool> citadel_solo_bot_match = new("citadel_solo_bot_match");
+	/// <summary>Default <c>2</c>. Flags: defensive, developmentonly, gamedll.</summary>
+	public static readonly GameConVar<float> citadel_soul_bag_extra_spawn_min_value_multiplier = new("citadel_soul_bag_extra_spawn_min_value_multiplier");
+	/// <summary>Default <c>8.5</c>. Flags: defensive, developmentonly, gamedll.</summary>
+	public static readonly GameConVar<float> citadel_soul_bag_scale_max = new("citadel_soul_bag_scale_max");
+	/// <summary>Default <c>2000</c>. Flags: defensive, developmentonly, gamedll.</summary>
+	public static readonly GameConVar<float> citadel_soul_bag_scale_max_value = new("citadel_soul_bag_scale_max_value");
+	/// <summary>Default <c>1</c>. Flags: defensive, developmentonly, gamedll.</summary>
+	public static readonly GameConVar<float> citadel_soul_bag_scale_min = new("citadel_soul_bag_scale_min");
+	/// <summary>Default <c>5</c>. Flags: defensive, developmentonly, gamedll.</summary>
+	public static readonly GameConVar<int> citadel_soul_bag_spawn_max = new("citadel_soul_bag_spawn_max");
 	/// <summary>Forces all players down the mid lane. Default <c>False</c>. Flags: developmentonly, replicated, gamedll, clientdll.</summary>
 	public static readonly GameConVar<bool> citadel_soul_rune_lane_experiment = new("citadel_soul_rune_lane_experiment");
 	/// <summary>Only spawn creeps on one team. Default <c>False</c>. Flags: developmentonly, gamedll.</summary>
@@ -1984,7 +2038,7 @@ public static class ConVars {
 	public static readonly GameConVar<float> citadel_time_scale = new("citadel_time_scale");
 	/// <summary>Default <c>True</c>. Flags: cheat, replicated, gamedll, clientdll.</summary>
 	public static readonly GameConVar<bool> citadel_track_player_vs_player_accuracy = new("citadel_track_player_vs_player_accuracy");
-	/// <summary>Max Difference between teams to get full trailing bonuses for Koth/Urn. Default <c>0.15</c>. Flags: developmentonly, replicated, gamedll, clientdll.</summary>
+	/// <summary>Max Difference between teams to get full trailing bonuses for Urn. Default <c>0.15</c>. Flags: developmentonly, replicated, gamedll, clientdll.</summary>
 	public static readonly GameConVar<float> citadel_trailingteam_bias_threshold_max = new("citadel_trailingteam_bias_threshold_max");
 	/// <summary>Min Difference between teams to start getting trailing bonuses for Koth/Urn. Default <c>0</c>. Flags: developmentonly, replicated, gamedll, clientdll.</summary>
 	public static readonly GameConVar<float> citadel_trailingteam_bias_threshold_min = new("citadel_trailingteam_bias_threshold_min");

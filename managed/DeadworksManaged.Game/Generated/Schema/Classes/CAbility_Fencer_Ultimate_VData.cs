@@ -37,6 +37,10 @@ public static partial class Schema {
 		/// <summary><c>CResourceNameTyped&lt;CWeakHandle&lt;InfoForResourceTypeIParticleSystemDefinition&gt;&gt;</c>.</summary>
 		public string m_DirPreviewEffect => GetBufferString(__m_DirPreviewEffect);
 
+		private static readonly SchemaField __m_LowHealthGlowModifier = new("CAbility_Fencer_Ultimate_VData", "m_LowHealthGlowModifier");
+		/// <summary><c>CEmbeddedSubclass&lt;CCitadelModifier&gt;</c>.</summary>
+		public CCitadelModifierVData? m_LowHealthGlowModifier => EmbeddedSubclass<CCitadelModifierVData>(__m_LowHealthGlowModifier);
+
 		private static readonly SchemaField __m_TargetModifier = new("CAbility_Fencer_Ultimate_VData", "m_TargetModifier");
 		/// <summary><c>CEmbeddedSubclass&lt;CCitadelModifier&gt;</c>.</summary>
 		public CCitadelModifierVData? m_TargetModifier => EmbeddedSubclass<CCitadelModifierVData>(__m_TargetModifier);

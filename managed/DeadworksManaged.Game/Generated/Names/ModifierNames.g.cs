@@ -263,6 +263,8 @@ public static class ModifierNames {
 	public const string ability_deadpack_ultimate__goingdown = "ability_deadpack_ultimate/goingdown";
 	/// <summary>Class <c>modifier_base</c>.</summary>
 	public const string ability_deadpack_ultimate__goingup = "ability_deadpack_ultimate/goingup";
+	/// <summary>Class <c>modifier_low_health_glow</c>.</summary>
+	public const string ability_deadpack_ultimate__modifier_deadpack_ultimate_low_health_glow = "ability_deadpack_ultimate/modifier_deadpack_ultimate_low_health_glow";
 	/// <summary>Class <c>modifier_diminishing_slow</c>.</summary>
 	public const string ability_deadpack_zip_line__modifier_knocked_off_zipline_slow = "ability_deadpack_zip_line/modifier_knocked_off_zipline_slow";
 	/// <summary>Class <c>modifier_base</c>.</summary>
@@ -397,10 +399,8 @@ public static class ModifierNames {
 	public const string ability_fencer_lunge__dashmodifier = "ability_fencer_lunge/dashmodifier";
 	/// <summary>Class <c>modifier_base</c>.</summary>
 	public const string ability_fencer_lunge__uirecast = "ability_fencer_lunge/uirecast";
-	/// <summary>Class <c>modifier_base</c>.</summary>
-	public const string ability_fencer_riposte__modifier_fencer_riposte_attack_debuff = "ability_fencer_riposte/modifier_fencer_riposte_attack_debuff";
-	/// <summary>Class <c>modifier_citadel_root</c>.</summary>
-	public const string ability_fencer_riposte__modifier_fencer_riposte_immobilize = "ability_fencer_riposte/modifier_fencer_riposte_immobilize";
+	/// <summary>Class <c>modifier_slow_base</c>.</summary>
+	public const string ability_fencer_riposte__modifier_fencer_riposte_pommel_debuff = "ability_fencer_riposte/modifier_fencer_riposte_pommel_debuff";
 	/// <summary>Class <c>modifier_fencer_riposte_target_lifesteal</c>.</summary>
 	public const string ability_fencer_riposte__modifier_fencer_riposte_target_lifesteal = "ability_fencer_riposte/modifier_fencer_riposte_target_lifesteal";
 	/// <summary>Class <c>modifier_base</c>.</summary>
@@ -423,6 +423,8 @@ public static class ModifierNames {
 	public const string ability_fencer_ultimate__modifier_fencer_ultimate_caster = "ability_fencer_ultimate/modifier_fencer_ultimate_caster";
 	/// <summary>Class <c>modifier_base</c>.</summary>
 	public const string ability_fencer_ultimate__modifier_fencer_ultimate_caster_arrival = "ability_fencer_ultimate/modifier_fencer_ultimate_caster_arrival";
+	/// <summary>Class <c>modifier_low_health_glow</c>.</summary>
+	public const string ability_fencer_ultimate__modifier_fencer_ultimate_low_health_glow = "ability_fencer_ultimate/modifier_fencer_ultimate_low_health_glow";
 	/// <summary>Class <c>modifier_firebomb_buff</c>.</summary>
 	public const string ability_fire_bomb__buff = "ability_fire_bomb/buff";
 	/// <summary>Class <c>modifier_firebomb</c>.</summary>
@@ -1948,12 +1950,6 @@ public static class ModifierNames {
 	public const string modifier_debug_slow = "modifier_debug_slow";
 	/// <summary>Class <c>modifier_delayed_apply</c>.</summary>
 	public const string modifier_delayed_apply = "modifier_delayed_apply";
-	/// <summary>Class <c>modifier_item_pickup_aura</c>.</summary>
-	public const string modifier_early_gold_pickup_aura = "modifier_early_gold_pickup_aura";
-	/// <summary>Class <c>modifier_item_pickup_aura_target</c>.</summary>
-	public const string modifier_early_gold_pickup_aura__aura_target = "modifier_early_gold_pickup_aura/aura_target";
-	/// <summary>Class <c>modifier_item_pickup_timer</c>.</summary>
-	public const string modifier_early_gold_pickup_aura__timer = "modifier_early_gold_pickup_aura/timer";
 	/// <summary>Class <c>modifier_base</c>.</summary>
 	public const string modifier_escalating_exposure_tech_armor_debuff = "modifier_escalating_exposure_tech_armor_debuff";
 	/// <summary>Class <c>modifier_base</c>.</summary>
@@ -1998,12 +1994,6 @@ public static class ModifierNames {
 	public const string modifier_neutral_attack_explode_on_death_strong = "modifier_neutral_attack_explode_on_death_strong";
 	/// <summary>Class <c>modifier_base</c>.</summary>
 	public const string modifier_neutral_attack_explode_on_death_strong__explode_debuff = "modifier_neutral_attack_explode_on_death_strong/explode_debuff";
-	/// <summary>Class <c>modifier_item_pickup_aura</c>.</summary>
-	public const string modifier_neutral_gold_pickup_aura = "modifier_neutral_gold_pickup_aura";
-	/// <summary>Class <c>modifier_item_pickup_aura_target</c>.</summary>
-	public const string modifier_neutral_gold_pickup_aura__aura_target = "modifier_neutral_gold_pickup_aura/aura_target";
-	/// <summary>Class <c>modifier_item_pickup_timer</c>.</summary>
-	public const string modifier_neutral_gold_pickup_aura__timer = "modifier_neutral_gold_pickup_aura/timer";
 	/// <summary>Class <c>modifier_base</c>.</summary>
 	public const string modifier_no_teleport = "modifier_no_teleport";
 	/// <summary>Class <c>modifier_obscured</c>.</summary>

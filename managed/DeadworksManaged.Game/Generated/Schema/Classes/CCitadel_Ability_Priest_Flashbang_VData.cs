@@ -41,6 +41,10 @@ public static partial class Schema {
 		/// <summary><c>float32</c>.</summary>
 		public float m_flBounceVerticalReductionRatio { get => Get<float>(__m_flBounceVerticalReductionRatio); set => Set(__m_flBounceVerticalReductionRatio, value); }
 
+		private static readonly SchemaField __m_flClimbHeight = new("CCitadel_Ability_Priest_Flashbang_VData", "m_flClimbHeight");
+		/// <summary><c>float32</c>.</summary>
+		public float m_flClimbHeight { get => Get<float>(__m_flClimbHeight); set => Set(__m_flClimbHeight, value); }
+
 		private static readonly SchemaField __m_flMaxSurfaceDotToBounce = new("CCitadel_Ability_Priest_Flashbang_VData", "m_flMaxSurfaceDotToBounce");
 		/// <summary><c>float32</c>.</summary>
 		public float m_flMaxSurfaceDotToBounce { get => Get<float>(__m_flMaxSurfaceDotToBounce); set => Set(__m_flMaxSurfaceDotToBounce, value); }

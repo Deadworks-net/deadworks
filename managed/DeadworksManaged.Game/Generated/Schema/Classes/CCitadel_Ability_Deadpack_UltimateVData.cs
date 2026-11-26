@@ -29,6 +29,10 @@ public static partial class Schema {
 		/// <summary><c>CResourceNameTyped&lt;CWeakHandle&lt;InfoForResourceTypeIParticleSystemDefinition&gt;&gt;</c>.</summary>
 		public string m_GroundImpactParticle => GetBufferString(__m_GroundImpactParticle);
 
+		private static readonly SchemaField __m_LowHealthGlowModifier = new("CCitadel_Ability_Deadpack_UltimateVData", "m_LowHealthGlowModifier");
+		/// <summary><c>CEmbeddedSubclass&lt;CCitadelModifier&gt;</c>.</summary>
+		public CCitadelModifierVData? m_LowHealthGlowModifier => EmbeddedSubclass<CCitadelModifierVData>(__m_LowHealthGlowModifier);
+
 		private static readonly SchemaField __m_TargetModifier = new("CCitadel_Ability_Deadpack_UltimateVData", "m_TargetModifier");
 		/// <summary><c>CEmbeddedSubclass&lt;CCitadelModifier&gt;</c>.</summary>
 		public CCitadelModifierVData? m_TargetModifier => EmbeddedSubclass<CCitadelModifierVData>(__m_TargetModifier);

@@ -13,17 +13,21 @@ public static partial class Schema {
 		static CCitadel_Ability_Fencer_RiposteVData ISchemaClass<CCitadel_Ability_Fencer_RiposteVData>.New() => new();
 		static string ISchemaClass<CCitadel_Ability_Fencer_RiposteVData>.NativeName => "CCitadel_Ability_Fencer_RiposteVData";
 
+		private static readonly SchemaField __m_BulletReflectAttackerHitFx = new("CCitadel_Ability_Fencer_RiposteVData", "m_BulletReflectAttackerHitFx");
+		/// <summary><c>CResourceNameTyped&lt;CWeakHandle&lt;InfoForResourceTypeIParticleSystemDefinition&gt;&gt;</c>.</summary>
+		public string m_BulletReflectAttackerHitFx => GetBufferString(__m_BulletReflectAttackerHitFx);
+
+		private static readonly SchemaField __m_BulletReflectImpactParticle = new("CCitadel_Ability_Fencer_RiposteVData", "m_BulletReflectImpactParticle");
+		/// <summary><c>CResourceNameTyped&lt;CWeakHandle&lt;InfoForResourceTypeIParticleSystemDefinition&gt;&gt;</c>.</summary>
+		public string m_BulletReflectImpactParticle => GetBufferString(__m_BulletReflectImpactParticle);
+
 		private static readonly SchemaField __m_DashLineEffect = new("CCitadel_Ability_Fencer_RiposteVData", "m_DashLineEffect");
 		/// <summary><c>CResourceNameTyped&lt;CWeakHandle&lt;InfoForResourceTypeIParticleSystemDefinition&gt;&gt;</c>.</summary>
 		public string m_DashLineEffect => GetBufferString(__m_DashLineEffect);
 
-		private static readonly SchemaField __m_DebuffModifier = new("CCitadel_Ability_Fencer_RiposteVData", "m_DebuffModifier");
+		private static readonly SchemaField __m_PommelDebuffModifier = new("CCitadel_Ability_Fencer_RiposteVData", "m_PommelDebuffModifier");
 		/// <summary><c>CEmbeddedSubclass&lt;CCitadelModifier&gt;</c>.</summary>
-		public CCitadelModifierVData? m_DebuffModifier => EmbeddedSubclass<CCitadelModifierVData>(__m_DebuffModifier);
-
-		private static readonly SchemaField __m_ImmobilizeModifier = new("CCitadel_Ability_Fencer_RiposteVData", "m_ImmobilizeModifier");
-		/// <summary><c>CEmbeddedSubclass&lt;CCitadelModifier&gt;</c>.</summary>
-		public CCitadelModifierVData? m_ImmobilizeModifier => EmbeddedSubclass<CCitadelModifierVData>(__m_ImmobilizeModifier);
+		public CCitadelModifierVData? m_PommelDebuffModifier => EmbeddedSubclass<CCitadelModifierVData>(__m_PommelDebuffModifier);
 
 		private static readonly SchemaField __m_RiposteDashParticle = new("CCitadel_Ability_Fencer_RiposteVData", "m_RiposteDashParticle");
 		/// <summary><c>CResourceNameTyped&lt;CWeakHandle&lt;InfoForResourceTypeIParticleSystemDefinition&gt;&gt;</c>.</summary>
@@ -57,9 +61,21 @@ public static partial class Schema {
 		/// <summary><c>float32</c>.</summary>
 		public float m_flParryMoveSpeed { get => Get<float>(__m_flParryMoveSpeed); set => Set(__m_flParryMoveSpeed, value); }
 
+		private static readonly SchemaField __m_flPommelKnockBackSpeed = new("CCitadel_Ability_Fencer_RiposteVData", "m_flPommelKnockBackSpeed");
+		/// <summary><c>float32</c>.</summary>
+		public float m_flPommelKnockBackSpeed { get => Get<float>(__m_flPommelKnockBackSpeed); set => Set(__m_flPommelKnockBackSpeed, value); }
+
+		private static readonly SchemaField __m_flPommelKnockUpSpeed = new("CCitadel_Ability_Fencer_RiposteVData", "m_flPommelKnockUpSpeed");
+		/// <summary><c>float32</c>.</summary>
+		public float m_flPommelKnockUpSpeed { get => Get<float>(__m_flPommelKnockUpSpeed); set => Set(__m_flPommelKnockUpSpeed, value); }
+
 		private static readonly SchemaField __m_strAvoidDamage = new("CCitadel_Ability_Fencer_RiposteVData", "m_strAvoidDamage");
 		/// <summary><c>CSoundEventName</c>.</summary>
 		public string m_strAvoidDamage => GetBufferString(__m_strAvoidDamage);
+
+		private static readonly SchemaField __m_strBulletReflectSound = new("CCitadel_Ability_Fencer_RiposteVData", "m_strBulletReflectSound");
+		/// <summary><c>CSoundEventName</c>.</summary>
+		public string m_strBulletReflectSound => GetBufferString(__m_strBulletReflectSound);
 
 		private static readonly SchemaField __m_strDashStart = new("CCitadel_Ability_Fencer_RiposteVData", "m_strDashStart");
 		/// <summary><c>CSoundEventName</c>.</summary>

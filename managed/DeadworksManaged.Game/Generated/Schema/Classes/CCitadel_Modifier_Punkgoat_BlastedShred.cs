@@ -12,9 +12,5 @@ public static partial class Schema {
 		internal CCitadel_Modifier_Punkgoat_BlastedShred() { }
 		static CCitadel_Modifier_Punkgoat_BlastedShred ISchemaClass<CCitadel_Modifier_Punkgoat_BlastedShred>.New() => new();
 		static string ISchemaClass<CCitadel_Modifier_Punkgoat_BlastedShred>.NativeName => "CCitadel_Modifier_Punkgoat_BlastedShred";
-
-		private static readonly SchemaField __m_flBulletDamageAccum = new("CCitadel_Modifier_Punkgoat_BlastedShred", "m_flBulletDamageAccum");
-		/// <summary><c>float32</c>.</summary>
-		public float m_flBulletDamageAccum { get => Get<float>(__m_flBulletDamageAccum); set => Set(__m_flBulletDamageAccum, value); }
 	}
 }

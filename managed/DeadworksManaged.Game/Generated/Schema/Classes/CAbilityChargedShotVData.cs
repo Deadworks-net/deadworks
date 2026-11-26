@@ -25,6 +25,14 @@ public static partial class Schema {
 		/// <summary><c>CResourceNameTyped&lt;CWeakHandle&lt;InfoForResourceTypeIParticleSystemDefinition&gt;&gt;</c>.</summary>
 		public string m_ShootParticle => GetBufferString(__m_ShootParticle);
 
+		private static readonly SchemaField __m_flWallRicochetAimMagnetismConeLength = new("CAbilityChargedShotVData", "m_flWallRicochetAimMagnetismConeLength");
+		/// <summary><c>float32</c>. Distance limit on the magnetism cone. 4000 units is roughly one second of projectile flight time.</summary>
+		public float m_flWallRicochetAimMagnetismConeLength { get => Get<float>(__m_flWallRicochetAimMagnetismConeLength); set => Set(__m_flWallRicochetAimMagnetismConeLength, value); }
+
+		private static readonly SchemaField __m_flWallRicochetAimMagnetismHalfAngleCone = new("CAbilityChargedShotVData", "m_flWallRicochetAimMagnetismHalfAngleCone");
+		/// <summary><c>float32</c>. Pick a player target within this cone, from the ricochet point, along the natural reflection angle. Bias (but do not snap) the ricochet angle based on how close it already is to a direct shot.</summary>
+		public float m_flWallRicochetAimMagnetismHalfAngleCone { get => Get<float>(__m_flWallRicochetAimMagnetismHalfAngleCone); set => Set(__m_flWallRicochetAimMagnetismHalfAngleCone, value); }
+
 		private static readonly SchemaField __m_flWallRicochetMaxNormalZ = new("CAbilityChargedShotVData", "m_flWallRicochetMaxNormalZ");
 		/// <summary><c>float32</c>. Wall ricochet only happens off surfaces whose normal Z is at or below this (0 = vertical wall, 1 = flat floor).</summary>
 		public float m_flWallRicochetMaxNormalZ { get => Get<float>(__m_flWallRicochetMaxNormalZ); set => Set(__m_flWallRicochetMaxNormalZ, value); }

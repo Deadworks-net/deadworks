@@ -25,9 +25,9 @@ public static partial class Schema {
 		/// <summary><c>GameTime_t</c>. Networked: a write is sent to clients.</summary>
 		public GameTime m_flSuccessfulRiposteTime { get => Get<GameTime>(__m_flSuccessfulRiposteTime); set => Set(__m_flSuccessfulRiposteTime, value); }
 
-		private static readonly SchemaField __m_hTarget = new("CCitadel_Ability_Fencer_Riposte", "m_hTarget");
+		private static readonly SchemaField __m_hDashTarget = new("CCitadel_Ability_Fencer_Riposte", "m_hDashTarget");
 		/// <summary><c>CHandle&lt;CBaseEntity&gt;</c>. Networked: a write is sent to clients.</summary>
-		public CBaseEntity? m_hTarget { get => GetHandle<CBaseEntity>(__m_hTarget); set => SetHandle(__m_hTarget, value); }
+		public CBaseEntity? m_hDashTarget { get => GetHandle<CBaseEntity>(__m_hDashTarget); set => SetHandle(__m_hDashTarget, value); }
 
 		private static readonly SchemaField __m_nCurrentRiposteState = new("CCitadel_Ability_Fencer_Riposte", "m_nCurrentRiposteState");
 		/// <summary><c>uint8</c>. Networked: a write is sent to clients.</summary>
@@ -45,9 +45,9 @@ public static partial class Schema {
 		/// <summary><c>VectorWS</c>. Networked: a write is sent to clients.</summary>
 		public Vector3 m_vRiposteStartPosition { get => Get<Vector3>(__m_vRiposteStartPosition); set => Set(__m_vRiposteStartPosition, value); }
 
-		private static readonly SchemaField __m_vecHitEnemies = new("CCitadel_Ability_Fencer_Riposte", "m_vecHitEnemies");
-		/// <summary><c>CUtlVector&lt;CHandle&lt;CBaseEntity&gt;&gt;</c>.</summary>
-		public SchemaHandleList<CBaseEntity> m_vecHitEnemies => new(this, __m_vecHitEnemies, ListStorage.Vector);
+		private static readonly SchemaField __m_vecDeflectedTargets = new("CCitadel_Ability_Fencer_Riposte", "m_vecDeflectedTargets");
+		/// <summary><c>CNetworkUtlVectorBase&lt;CHandle&lt;CBaseEntity&gt;&gt;</c>. Networked: a write is sent to clients.</summary>
+		public SchemaHandleList<CBaseEntity> m_vecDeflectedTargets => new(this, __m_vecDeflectedTargets, ListStorage.Vector);
 
 		private static readonly SchemaField __m_vecLastPosition = new("CCitadel_Ability_Fencer_Riposte", "m_vecLastPosition");
 		/// <summary><c>VectorWS</c>.</summary>

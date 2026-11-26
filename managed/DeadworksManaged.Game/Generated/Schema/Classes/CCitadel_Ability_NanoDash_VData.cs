@@ -41,6 +41,10 @@ public static partial class Schema {
 		/// <summary><c>CitadelCameraOperationsSequence_t</c>.</summary>
 		public CitadelCameraOperationsSequence_t m_cameraSequenceSlash => Embedded<CitadelCameraOperationsSequence_t>(__m_cameraSequenceSlash);
 
+		private static readonly SchemaField __m_flEnemyStopCheckRadius = new("CCitadel_Ability_NanoDash_VData", "m_flEnemyStopCheckRadius");
+		/// <summary><c>float32</c>.</summary>
+		public float m_flEnemyStopCheckRadius { get => Get<float>(__m_flEnemyStopCheckRadius); set => Set(__m_flEnemyStopCheckRadius, value); }
+
 		private static readonly SchemaField __m_flGroundBreakOffAngle = new("CCitadel_Ability_NanoDash_VData", "m_flGroundBreakOffAngle");
 		/// <summary><c>float32</c>.</summary>
 		public float m_flGroundBreakOffAngle { get => Get<float>(__m_flGroundBreakOffAngle); set => Set(__m_flGroundBreakOffAngle, value); }

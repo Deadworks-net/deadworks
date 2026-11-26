@@ -21,6 +21,14 @@ public static partial class Schema {
 		/// <summary><c>bool</c>. Networked: a write is sent to clients.</summary>
 		public bool m_bCanDashJump { get => Get<bool>(__m_bCanDashJump); set => Set(__m_bCanDashJump, value); }
 
+		private static readonly SchemaField __m_bFailedAirJump = new("CCitadel_Ability_Jump", "m_bFailedAirJump");
+		/// <summary><c>bool</c>. Networked: a write is sent to clients.</summary>
+		public bool m_bFailedAirJump { get => Get<bool>(__m_bFailedAirJump); set => Set(__m_bFailedAirJump, value); }
+
+		private static readonly SchemaField __m_bGroundJumpAirDragPenalty = new("CCitadel_Ability_Jump", "m_bGroundJumpAirDragPenalty");
+		/// <summary><c>bool</c>. Networked: a write is sent to clients.</summary>
+		public bool m_bGroundJumpAirDragPenalty { get => Get<bool>(__m_bGroundJumpAirDragPenalty); set => Set(__m_bGroundJumpAirDragPenalty, value); }
+
 		private static readonly SchemaField __m_bInSlideJump = new("CCitadel_Ability_Jump", "m_bInSlideJump");
 		/// <summary><c>bool</c>. Networked: a write is sent to clients.</summary>
 		public bool m_bInSlideJump { get => Get<bool>(__m_bInSlideJump); set => Set(__m_bInSlideJump, value); }
@@ -56,6 +64,10 @@ public static partial class Schema {
 		private static readonly SchemaField __m_flDoubleJumpFailTime = new("CCitadel_Ability_Jump", "m_flDoubleJumpFailTime");
 		/// <summary><c>GameTime_t</c>.</summary>
 		public GameTime m_flDoubleJumpFailTime { get => Get<GameTime>(__m_flDoubleJumpFailTime); set => Set(__m_flDoubleJumpFailTime, value); }
+
+		private static readonly SchemaField __m_flFailedAirJumpPenaltyEndTime = new("CCitadel_Ability_Jump", "m_flFailedAirJumpPenaltyEndTime");
+		/// <summary><c>GameTime_t</c>. Networked: a write is sent to clients.</summary>
+		public GameTime m_flFailedAirJumpPenaltyEndTime { get => Get<GameTime>(__m_flFailedAirJumpPenaltyEndTime); set => Set(__m_flFailedAirJumpPenaltyEndTime, value); }
 
 		private static readonly SchemaField __m_flJumpTime = new("CCitadel_Ability_Jump", "m_flJumpTime");
 		/// <summary><c>GameTime_t</c>.</summary>
@@ -108,6 +120,10 @@ public static partial class Schema {
 		private static readonly SchemaField __m_nExecutedAirJumpCount = new("CCitadel_Ability_Jump", "m_nExecutedAirJumpCount");
 		/// <summary><c>int32</c>. Networked: a write is sent to clients. Wrapped by <c>CCitadel_Ability_Jump.ExecutedAirJumpCount</c> in DeadworksManaged.Api.</summary>
 		public int m_nExecutedAirJumpCount { get => Get<int>(__m_nExecutedAirJumpCount); set => Set(__m_nExecutedAirJumpCount, value); }
+
+		private static readonly SchemaField __m_nFailedAirJumpPenaltyStacks = new("CCitadel_Ability_Jump", "m_nFailedAirJumpPenaltyStacks");
+		/// <summary><c>int8</c>. Networked: a write is sent to clients.</summary>
+		public sbyte m_nFailedAirJumpPenaltyStacks { get => Get<sbyte>(__m_nFailedAirJumpPenaltyStacks); set => Set(__m_nFailedAirJumpPenaltyStacks, value); }
 
 		private static readonly SchemaField __m_vCurrentWallNormal = new("CCitadel_Ability_Jump", "m_vCurrentWallNormal");
 		/// <summary><c>Vector</c>.</summary>

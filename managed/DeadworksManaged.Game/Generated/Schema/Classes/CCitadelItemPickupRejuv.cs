@@ -21,6 +21,10 @@ public static partial class Schema {
 		/// <summary><c>bool</c>. Networked: a write is sent to clients.</summary>
 		public bool m_bPickedUp { get => Get<bool>(__m_bPickedUp); set => Set(__m_bPickedUp, value); }
 
+		private static readonly SchemaField __m_nDropNumber = new("CCitadelItemPickupRejuv", "m_nDropNumber");
+		/// <summary><c>int32</c>. Networked: a write is sent to clients.</summary>
+		public int m_nDropNumber { get => Get<int>(__m_nDropNumber); set => Set(__m_nDropNumber, value); }
+
 		/// <summary>The data entry this was created from, as <see cref="CCitadelItemPickupRejuvVData"/>, or null if it has none.</summary>
 		public new CCitadelItemPickupRejuvVData? VData => SubclassVData<CCitadelItemPickupRejuvVData>();
 	}

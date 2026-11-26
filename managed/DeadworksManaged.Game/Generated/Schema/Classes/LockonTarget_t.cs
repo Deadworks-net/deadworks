@@ -13,6 +13,10 @@ public static partial class Schema {
 		static LockonTarget_t ISchemaClass<LockonTarget_t>.New() => new();
 		static string ISchemaClass<LockonTarget_t>.NativeName => "LockonTarget_t";
 
+		private static readonly SchemaField __m_bHasLOS = new("LockonTarget_t", "m_bHasLOS");
+		/// <summary><c>bool</c>. Networked: a write is sent to clients.</summary>
+		public bool m_bHasLOS { get => Get<bool>(__m_bHasLOS); set => Set(__m_bHasLOS, value); }
+
 		private static readonly SchemaField __m_eLockonState = new("LockonTarget_t", "m_eLockonState");
 		/// <summary><c>ELockonState</c>. Networked: a write is sent to clients.</summary>
 		public ELockonState m_eLockonState { get => Get<ELockonState>(__m_eLockonState); set => Set(__m_eLockonState, value); }

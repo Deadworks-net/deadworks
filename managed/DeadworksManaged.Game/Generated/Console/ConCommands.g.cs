@@ -262,6 +262,9 @@ public static class ConCommands {
 	/// <summary>Give all bots on a particular team gold. Flags: cheat, gamedll.</summary>
 	public static void citadel_bot_give_team_gold(string arguments = "") => Run("citadel_bot_give_team_gold", arguments);
 
+	/// <summary>&lt;amount&gt; Gives all bots unsecured souls. Flags: cheat, release, gamedll.</summary>
+	public static void citadel_bot_give_unsecured_souls(string arguments = "") => Run("citadel_bot_give_unsecured_souls", arguments);
+
 	/// <summary>Kick bot &lt;name&gt;. Flags: defensive, developmentonly, gamedll.</summary>
 	public static void citadel_bot_kick(string arguments = "") => Run("citadel_bot_kick", arguments);
 
@@ -379,6 +382,9 @@ public static class ConCommands {
 	/// <summary>&lt;player name&gt; &lt;gold&gt; Gives the specified player gold. Flags: cheat, client_can_execute, gamedll.</summary>
 	public static void citadel_give_player_gold(string arguments = "") => Run("citadel_give_player_gold", arguments);
 
+	/// <summary>&lt;amount&gt; Gives your hero unsecured souls. Flags: cheat, release, gamedll.</summary>
+	public static void citadel_give_unsecured_souls(string arguments = "") => Run("citadel_give_unsecured_souls", arguments);
+
 	/// <summary>&lt;line&gt; makes the guide bot say the specified line. Flags: defensive, developmentonly, gamedll.</summary>
 	public static void citadel_guide_bot_say(string arguments = "") => Run("citadel_guide_bot_say", arguments);
 
@@ -468,6 +474,9 @@ public static class ConCommands {
 
 	/// <summary>Spawns any neutral camps within 800 units (~20m). Flags: cheat, release, gamedll.</summary>
 	public static void citadel_spawn_nearby_neutrals(string arguments = "") => Run("citadel_spawn_nearby_neutrals", arguments);
+
+	/// <summary>Spawns one of each parade float type in a line starting at the given position. Usage: citadel_spawn_parade_floats &lt;x&gt; &lt;y&gt; &lt;z&gt;. Flags: cheat, release, gamedll.</summary>
+	public static void citadel_spawn_parade_floats(string arguments = "") => Run("citadel_spawn_parade_floats", arguments);
 
 	/// <summary>Spawns a pickup using a pickup subclass. Flags: defensive, developmentonly, gamedll.</summary>
 	public static void citadel_spawn_pickup(string arguments = "") => Run("citadel_spawn_pickup", arguments);

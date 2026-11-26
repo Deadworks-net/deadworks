@@ -145,6 +145,14 @@ public static partial class Schema {
 		/// <summary><c>float32</c>.</summary>
 		public float m_flInSlideThrustMultiplier { get => Get<float>(__m_flInSlideThrustMultiplier); set => Set(__m_flInSlideThrustMultiplier, value); }
 
+		private static readonly SchemaField __m_flIntentSpaceLateralSpringStrengthScale = new("CCitadel_Ability_DeadpackRocketeerVData", "m_flIntentSpaceLateralSpringStrengthScale");
+		/// <summary><c>float32</c>.</summary>
+		public float m_flIntentSpaceLateralSpringStrengthScale { get => Get<float>(__m_flIntentSpaceLateralSpringStrengthScale); set => Set(__m_flIntentSpaceLateralSpringStrengthScale, value); }
+
+		private static readonly SchemaField __m_flIntentSpaceOpposingSpringStrength = new("CCitadel_Ability_DeadpackRocketeerVData", "m_flIntentSpaceOpposingSpringStrength");
+		/// <summary><c>float32</c>.</summary>
+		public float m_flIntentSpaceOpposingSpringStrength { get => Get<float>(__m_flIntentSpaceOpposingSpringStrength); set => Set(__m_flIntentSpaceOpposingSpringStrength, value); }
+
 		private static readonly SchemaField __m_flIntentSpaceStringStrengthFwd = new("CCitadel_Ability_DeadpackRocketeerVData", "m_flIntentSpaceStringStrengthFwd");
 		/// <summary><c>float32</c>.</summary>
 		public float m_flIntentSpaceStringStrengthFwd { get => Get<float>(__m_flIntentSpaceStringStrengthFwd); set => Set(__m_flIntentSpaceStringStrengthFwd, value); }

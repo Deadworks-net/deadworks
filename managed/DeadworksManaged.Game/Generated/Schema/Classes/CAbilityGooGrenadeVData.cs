@@ -37,6 +37,26 @@ public static partial class Schema {
 		/// <summary><c>CSoundEventName</c>.</summary>
 		public string m_GrenadeHitSound => GetBufferString(__m_GrenadeHitSound);
 
+		private static readonly SchemaField __m_bDebug = new("CAbilityGooGrenadeVData", "m_bDebug");
+		/// <summary><c>bool</c>.</summary>
+		public bool m_bDebug { get => Get<bool>(__m_bDebug); set => Set(__m_bDebug, value); }
+
+		private static readonly SchemaField __m_flClimbHeight = new("CAbilityGooGrenadeVData", "m_flClimbHeight");
+		/// <summary><c>float32</c>.</summary>
+		public float m_flClimbHeight { get => Get<float>(__m_flClimbHeight); set => Set(__m_flClimbHeight, value); }
+
+		private static readonly SchemaField __m_flEdgeBounceMaxNormalDot = new("CAbilityGooGrenadeVData", "m_flEdgeBounceMaxNormalDot");
+		/// <summary><c>float32</c>.</summary>
+		public float m_flEdgeBounceMaxNormalDot { get => Get<float>(__m_flEdgeBounceMaxNormalDot); set => Set(__m_flEdgeBounceMaxNormalDot, value); }
+
+		private static readonly SchemaField __m_flLedgeExtraDropHeight = new("CAbilityGooGrenadeVData", "m_flLedgeExtraDropHeight");
+		/// <summary><c>float32</c>.</summary>
+		public float m_flLedgeExtraDropHeight { get => Get<float>(__m_flLedgeExtraDropHeight); set => Set(__m_flLedgeExtraDropHeight, value); }
+
+		private static readonly SchemaField __m_flLedgeForwardClearance = new("CAbilityGooGrenadeVData", "m_flLedgeForwardClearance");
+		/// <summary><c>float32</c>.</summary>
+		public float m_flLedgeForwardClearance { get => Get<float>(__m_flLedgeForwardClearance); set => Set(__m_flLedgeForwardClearance, value); }
+
 		private static readonly SchemaField __m_flMaxRestitution = new("CAbilityGooGrenadeVData", "m_flMaxRestitution");
 		/// <summary><c>float32</c>.</summary>
 		public float m_flMaxRestitution { get => Get<float>(__m_flMaxRestitution); set => Set(__m_flMaxRestitution, value); }

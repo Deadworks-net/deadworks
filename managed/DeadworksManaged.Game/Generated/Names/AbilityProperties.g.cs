@@ -1119,7 +1119,7 @@ public static class AbilityProperties {
 	public const string DPSPercentHealth = "DPSPercentHealth";
 	/// <summary>On <c>ability_chessmaster_queen</c>, <c>ability_chessmaster_throwbishop</c>.</summary>
 	public const string DPSTickInterval = "DPSTickInterval";
-	/// <summary>On 156 abilities and items.</summary>
+	/// <summary>On 157 abilities and items.</summary>
 	public const string Damage = "Damage";
 	/// <summary>On <c>ability_artist_rollingprojectile</c>, <c>ability_nano_catform</c>.</summary>
 	public const string DamageAmpBuildDuration = "DamageAmpBuildDuration";
@@ -1251,7 +1251,7 @@ public static class AbilityProperties {
 	public const string DashIncrease = "DashIncrease";
 	/// <summary>On 5 abilities and items.</summary>
 	public const string DashRadius = "DashRadius";
-	/// <summary>On 4 abilities and items.</summary>
+	/// <summary>On <c>ability_fencer_lunge</c>, <c>ability_fencer_ultimate</c>, <c>citadel_ability_shiv_dash</c>.</summary>
 	public const string DashRange = "DashRange";
 	/// <summary>On <c>ability_chessmaster_throwbishop</c>, <c>ability_ratking_standard_bearer</c>.</summary>
 	public const string DashSlowPercent = "DashSlowPercent";
@@ -2639,9 +2639,9 @@ public static class AbilityProperties {
 	public const string MeleeResist = "MeleeResist";
 	/// <summary>On 8 abilities and items.</summary>
 	public const string MeleeResistPercent = "MeleeResistPercent";
-	/// <summary>On <c>ability_fencer_riposte</c>, <c>ability_nano_clustergrenade</c>.</summary>
+	/// <summary>On <c>ability_nano_clustergrenade</c>.</summary>
 	public const string MeleeResistReduction = "MeleeResistReduction";
-	/// <summary>On <c>ability_fencer_riposte</c>, <c>ability_nano_clustergrenade</c>.</summary>
+	/// <summary>On <c>ability_nano_clustergrenade</c>.</summary>
 	public const string MeleeResistReductionDuration = "MeleeResistReductionDuration";
 	/// <summary>On <c>ability_baba_bench_run</c>.</summary>
 	public const string MeleeSpiritDamage = "MeleeSpiritDamage";
@@ -3899,7 +3899,7 @@ public static class AbilityProperties {
 	public const string StrikeVelocity = "StrikeVelocity";
 	/// <summary>On <c>upgrade_mystical_piano</c>, <c>upgrade_target_stun</c>.</summary>
 	public const string StunDelay = "StunDelay";
-	/// <summary>On 38 abilities and items.</summary>
+	/// <summary>On 37 abilities and items.</summary>
 	public const string StunDuration = "StunDuration";
 	/// <summary>On <c>ability_deadpack_ultimate</c>.</summary>
 	public const string StunDurationSelf = "StunDurationSelf";
