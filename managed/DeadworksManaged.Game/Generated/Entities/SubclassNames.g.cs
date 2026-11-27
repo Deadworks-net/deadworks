@@ -71,6 +71,8 @@ public static class SubclassNames {
 	public const string citadel_breakable_prop_drop_gold = "citadel_breakable_prop_drop_gold";
 	/// <summary>A <c>citadel_breakable_prop</c>, from <c>scripts/misc.vdata</c>.</summary>
 	public const string citadel_breakable_prop_drop_powerups = "citadel_breakable_prop_drop_powerups";
+	/// <summary>A <c>citadel_breakable_prop_parade_float_box</c>, from <c>scripts/misc.vdata</c>.</summary>
+	public const string citadel_breakable_prop_parade_float_box = "citadel_breakable_prop_parade_float_box";
 	/// <summary>A <c>citadel_breakable_prop</c>, from <c>scripts/misc.vdata</c>.</summary>
 	public const string citadel_breakable_prop_pumpkin01 = "citadel_breakable_prop_pumpkin01";
 	/// <summary>A <c>citadel_breakable_prop</c>, from <c>scripts/misc.vdata</c>.</summary>
@@ -127,8 +129,6 @@ public static class SubclassNames {
 	public const string citadel_item_pickup_rejuv_herotest = "citadel_item_pickup_rejuv_herotest";
 	/// <summary>A <c>citadel_item_powerup_spawner</c>, from <c>scripts/misc.vdata</c>.</summary>
 	public const string citadel_item_powerup_spawner_bounty_runes = "citadel_item_powerup_spawner_bounty_runes";
-	/// <summary>A <c>citadel_item_punchable_gold</c>, from <c>scripts/misc.vdata</c>.</summary>
-	public const string citadel_item_punchable_gold = "citadel_item_punchable_gold";
 	/// <summary>A <c>citadel_koth_cashin</c>, from <c>scripts/misc.vdata</c>.</summary>
 	public const string citadel_koth_cashin = "citadel_koth_cashin";
 	/// <summary>A <c>citadel_pickup</c>, from <c>scripts/misc.vdata</c>.</summary>
@@ -139,6 +139,8 @@ public static class SubclassNames {
 	public const string citadel_pickup_floating_health = "citadel_pickup_floating_health";
 	/// <summary>A <c>citadel_pickup_health</c>, from <c>scripts/misc.vdata</c>.</summary>
 	public const string citadel_pickup_health_float_in_world = "citadel_pickup_health_float_in_world";
+	/// <summary>A <c>citadel_pickup_soulbag</c>, from <c>scripts/misc.vdata</c>.</summary>
+	public const string citadel_pickup_soulbag = "citadel_pickup_soulbag";
 	/// <summary>A <c>citadel_pickup_modifier</c>, from <c>scripts/misc.vdata</c>.</summary>
 	public const string citadel_punchable_powerup_base = "citadel_punchable_powerup_base";
 	/// <summary>A <c>citadel_item_powerup_spawner</c>, from <c>scripts/misc.vdata</c>.</summary>
@@ -365,6 +367,20 @@ public static class SubclassNames {
 	public const string pickup_artist_drawing_mystic = "pickup_artist_drawing_mystic";
 	/// <summary>A <c>projectile_touch_volume</c>, from <c>scripts/npc_units.vdata</c>.</summary>
 	public const string projectile_touch_volume = "projectile_touch_volume";
+	/// <summary>A <c>prop_parade_float</c>, from <c>scripts/misc.vdata</c>.</summary>
+	public const string prop_parade_float_base = "prop_parade_float_base";
+	/// <summary>A <c>prop_parade_float</c>, from <c>scripts/misc.vdata</c>.</summary>
+	public const string prop_parade_float_manticat = "prop_parade_float_manticat";
+	/// <summary>A <c>prop_parade_float</c>, from <c>scripts/misc.vdata</c>.</summary>
+	public const string prop_parade_float_owl = "prop_parade_float_owl";
+	/// <summary>A <c>prop_parade_float</c>, from <c>scripts/misc.vdata</c>.</summary>
+	public const string prop_parade_float_pizza = "prop_parade_float_pizza";
+	/// <summary>A <c>prop_parade_float</c>, from <c>scripts/misc.vdata</c>.</summary>
+	public const string prop_parade_float_porky = "prop_parade_float_porky";
+	/// <summary>A <c>prop_parade_float</c>, from <c>scripts/misc.vdata</c>.</summary>
+	public const string prop_parade_float_raccoon = "prop_parade_float_raccoon";
+	/// <summary>A <c>prop_parade_float</c>, from <c>scripts/misc.vdata</c>.</summary>
+	public const string prop_parade_float_undead = "prop_parade_float_undead";
 	/// <summary>A <c>citadel_pickup_modifier</c>, from <c>scripts/misc.vdata</c>.</summary>
 	public const string range_permanent_pickup = "range_permanent_pickup";
 	/// <summary>A <c>citadel_pickup_modifier</c>, from <c>scripts/misc.vdata</c>.</summary>
@@ -403,6 +419,8 @@ public static class SubclassNames {
 	public const string trooper_normal = "trooper_normal";
 	/// <summary>A <c>npc_trooper</c>, from <c>scripts/npc_units.vdata</c>.</summary>
 	public const string trooper_zipline_container = "trooper_zipline_container";
+	/// <summary>A <c>citadel_pickup_turkey</c>, from <c>scripts/misc.vdata</c>.</summary>
+	public const string turkey_pickup = "turkey_pickup";
 	/// <summary>A <c>citadel_pickup_modifier</c>, from <c>scripts/misc.vdata</c>.</summary>
 	public const string wp_permanent_pickup = "wp_permanent_pickup";
 	/// <summary>A <c>citadel_pickup_modifier</c>, from <c>scripts/misc.vdata</c>.</summary>

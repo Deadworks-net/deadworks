@@ -857,6 +857,8 @@ public static class EntityNames {
 	public const string citadel_breakable_prop = "citadel_breakable_prop";
 	/// <summary><c>CCitadel_BreakableProp_Hideout</c>.</summary>
 	public const string citadel_breakable_prop_hideout = "citadel_breakable_prop_hideout";
+	/// <summary><c>CCitadel_BreakableProp_ParadeFloatBox</c>.</summary>
+	public const string citadel_breakable_prop_parade_float_box = "citadel_breakable_prop_parade_float_box";
 	/// <summary><c>CCitadel_BreakableProp_PunchableTroll</c>.</summary>
 	public const string citadel_breakable_prop_punchable_troll = "citadel_breakable_prop_punchable_troll";
 	/// <summary><c>CCitadelTriggerCapturePoint</c>.</summary>
@@ -945,8 +947,6 @@ public static class EntityNames {
 	public const string citadel_item_pickup_rejuv_herotest_infospawn = "citadel_item_pickup_rejuv_herotest_infospawn";
 	/// <summary><c>CCitadel_PickupItemSpawner</c>.</summary>
 	public const string citadel_item_powerup_spawner = "citadel_item_powerup_spawner";
-	/// <summary><c>CCitadelItemPunchableNeutralGold</c>.</summary>
-	public const string citadel_item_punchable_gold = "citadel_item_punchable_gold";
 	/// <summary><c>CCitadel_KothCashIn</c>.</summary>
 	public const string citadel_koth_cashin = "citadel_koth_cashin";
 	/// <summary><c>CCitadelLocalPlayerRankedBadgeProp</c>.</summary>
@@ -995,8 +995,12 @@ public static class EntityNames {
 	public const string citadel_pickup_modifier = "citadel_pickup_modifier";
 	/// <summary><c>CCitadel_Pickup_NecroDeath</c>.</summary>
 	public const string citadel_pickup_necro_death = "citadel_pickup_necro_death";
+	/// <summary><c>CCitadel_Pickup_SoulBag</c>.</summary>
+	public const string citadel_pickup_soulbag = "citadel_pickup_soulbag";
 	/// <summary><c>CCitadel_PickupSpawner</c>.</summary>
 	public const string citadel_pickup_spawner = "citadel_pickup_spawner";
+	/// <summary><c>CCitadel_Pickup_Turkey</c>.</summary>
+	public const string citadel_pickup_turkey = "citadel_pickup_turkey";
 	/// <summary><c>CCitadelPlayerController</c>.</summary>
 	public const string citadel_player_controller = "citadel_player_controller";
 	/// <summary><c>CCitadel_PointTalker</c>.</summary>
@@ -1931,6 +1935,8 @@ public static class EntityNames {
 	public const string prop_dynamic_ornament = "prop_dynamic_ornament";
 	/// <summary><c>CDynamicPropAlias_prop_dynamic_override</c>.</summary>
 	public const string prop_dynamic_override = "prop_dynamic_override";
+	/// <summary><c>CPropParadeFloat</c>.</summary>
+	public const string prop_parade_float = "prop_parade_float";
 	/// <summary><c>CPhysicsProp</c>.</summary>
 	public const string prop_physics = "prop_physics";
 	/// <summary><c>CPhysicsPropOverride</c>.</summary>

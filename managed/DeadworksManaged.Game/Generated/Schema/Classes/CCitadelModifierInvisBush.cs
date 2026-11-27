@@ -17,6 +17,10 @@ public static partial class Schema {
 		/// <summary><c>GameTime_t</c>.</summary>
 		public GameTime m_FadeStartTime { get => Get<GameTime>(__m_FadeStartTime); set => Set(__m_FadeStartTime, value); }
 
+		private static readonly SchemaField __m_bFullyInvis = new("CCitadelModifierInvisBush", "m_bFullyInvis");
+		/// <summary><c>bool</c>.</summary>
+		public bool m_bFullyInvis { get => Get<bool>(__m_bFullyInvis); set => Set(__m_bFullyInvis, value); }
+
 		private static readonly SchemaField __m_bRevealing = new("CCitadelModifierInvisBush", "m_bRevealing");
 		/// <summary><c>bool</c>.</summary>
 		public bool m_bRevealing { get => Get<bool>(__m_bRevealing); set => Set(__m_bRevealing, value); }

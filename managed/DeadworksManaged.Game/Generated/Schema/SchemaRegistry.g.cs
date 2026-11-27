@@ -131,7 +131,6 @@ public static partial class SchemaRegistry {
 		classes["CCitadelItemPickupRejuv"] = static () => new Schema.CCitadelItemPickupRejuv();
 		classes["CCitadelItemPickupRejuvHeroTest"] = static () => new Schema.CCitadelItemPickupRejuvHeroTest();
 		classes["CCitadelItemPickupRejuvHeroTestInfoSpawn"] = static () => new Schema.CCitadelItemPickupRejuvHeroTestInfoSpawn();
-		classes["CCitadelItemPunchableNeutralGold"] = static () => new Schema.CCitadelItemPunchableNeutralGold();
 		classes["CCitadelLocalPlayerRankedBadgeProp"] = static () => new Schema.CCitadelLocalPlayerRankedBadgeProp();
 		classes["CCitadelMapDistrictTrigger"] = static () => new Schema.CCitadelMapDistrictTrigger();
 		classes["CCitadelMatchmakingStatusInfo"] = static () => new Schema.CCitadelMatchmakingStatusInfo();
@@ -613,6 +612,7 @@ public static partial class SchemaRegistry {
 		classes["CCitadel_Bounce_Pad"] = static () => new Schema.CCitadel_Bounce_Pad();
 		classes["CCitadel_BreakableProp"] = static () => new Schema.CCitadel_BreakableProp();
 		classes["CCitadel_BreakableProp_Hideout"] = static () => new Schema.CCitadel_BreakableProp_Hideout();
+		classes["CCitadel_BreakableProp_ParadeFloatBox"] = static () => new Schema.CCitadel_BreakableProp_ParadeFloatBox();
 		classes["CCitadel_BreakableProp_PunchableTroll"] = static () => new Schema.CCitadel_BreakableProp_PunchableTroll();
 		classes["CCitadel_CatAnimating"] = static () => new Schema.CCitadel_CatAnimating();
 		classes["CCitadel_CosmeticAbility"] = static () => new Schema.CCitadel_CosmeticAbility();
@@ -707,6 +707,8 @@ public static partial class SchemaRegistry {
 		classes["CCitadel_Pickup_Item"] = static () => new Schema.CCitadel_Pickup_Item();
 		classes["CCitadel_Pickup_Modifier"] = static () => new Schema.CCitadel_Pickup_Modifier();
 		classes["CCitadel_Pickup_NecroDeath"] = static () => new Schema.CCitadel_Pickup_NecroDeath();
+		classes["CCitadel_Pickup_SoulBag"] = static () => new Schema.CCitadel_Pickup_SoulBag();
+		classes["CCitadel_Pickup_Turkey"] = static () => new Schema.CCitadel_Pickup_Turkey();
 		classes["CCitadel_PointTalker"] = static () => new Schema.CCitadel_PointTalker();
 		classes["CCitadel_PointTalker_Base"] = static () => new Schema.CCitadel_PointTalker_Base();
 		classes["CCitadel_PointTalker_Idol"] = static () => new Schema.CCitadel_PointTalker_Idol();
@@ -1136,6 +1138,7 @@ public static partial class SchemaRegistry {
 		classes["CPropAnimatingBreakable"] = static () => new Schema.CPropAnimatingBreakable();
 		classes["CPropDoorRotating"] = static () => new Schema.CPropDoorRotating();
 		classes["CPropDoorRotatingBreakable"] = static () => new Schema.CPropDoorRotatingBreakable();
+		classes["CPropParadeFloat"] = static () => new Schema.CPropParadeFloat();
 		classes["CPulseGameBlackboard"] = static () => new Schema.CPulseGameBlackboard();
 		classes["CPushable"] = static () => new Schema.CPushable();
 		classes["CRagdollConstraint"] = static () => new Schema.CRagdollConstraint();
@@ -1698,6 +1701,7 @@ public static partial class SchemaRegistry {
 		designerNames["citadel_bounce_pad"] = static () => new Schema.CCitadel_Bounce_Pad();
 		designerNames["citadel_breakable_prop"] = static () => new Schema.CCitadel_BreakableProp();
 		designerNames["citadel_breakable_prop_hideout"] = static () => new Schema.CCitadel_BreakableProp_Hideout();
+		designerNames["citadel_breakable_prop_parade_float_box"] = static () => new Schema.CCitadel_BreakableProp_ParadeFloatBox();
 		designerNames["citadel_breakable_prop_punchable_troll"] = static () => new Schema.CCitadel_BreakableProp_PunchableTroll();
 		designerNames["citadel_capture_point"] = static () => new Schema.CCitadelTriggerCapturePoint();
 		designerNames["citadel_capture_point_escort"] = static () => new Schema.CCitadelTriggerCapturePoint_Escort();
@@ -1742,7 +1746,6 @@ public static partial class SchemaRegistry {
 		designerNames["citadel_item_pickup_rejuv_herotest"] = static () => new Schema.CCitadelItemPickupRejuvHeroTest();
 		designerNames["citadel_item_pickup_rejuv_herotest_infospawn"] = static () => new Schema.CCitadelItemPickupRejuvHeroTestInfoSpawn();
 		designerNames["citadel_item_powerup_spawner"] = static () => new Schema.CCitadel_PickupItemSpawner();
-		designerNames["citadel_item_punchable_gold"] = static () => new Schema.CCitadelItemPunchableNeutralGold();
 		designerNames["citadel_koth_cashin"] = static () => new Schema.CCitadel_KothCashIn();
 		designerNames["citadel_local_player_ranked_badge_prop"] = static () => new Schema.CCitadelLocalPlayerRankedBadgeProp();
 		designerNames["citadel_magic_beam_blocker"] = static () => new Schema.CCitadel_Magic_Beam_Blocker();
@@ -1767,7 +1770,9 @@ public static partial class SchemaRegistry {
 		designerNames["citadel_pickup_item"] = static () => new Schema.CCitadel_Pickup_Item();
 		designerNames["citadel_pickup_modifier"] = static () => new Schema.CCitadel_Pickup_Modifier();
 		designerNames["citadel_pickup_necro_death"] = static () => new Schema.CCitadel_Pickup_NecroDeath();
+		designerNames["citadel_pickup_soulbag"] = static () => new Schema.CCitadel_Pickup_SoulBag();
 		designerNames["citadel_pickup_spawner"] = static () => new Schema.CCitadel_PickupSpawner();
+		designerNames["citadel_pickup_turkey"] = static () => new Schema.CCitadel_Pickup_Turkey();
 		designerNames["citadel_player_controller"] = static () => new Schema.CCitadelPlayerController();
 		designerNames["citadel_point_talker"] = static () => new Schema.CCitadel_PointTalker();
 		designerNames["citadel_point_talker_base"] = static () => new Schema.CCitadel_PointTalker_Base();
@@ -2235,6 +2240,7 @@ public static partial class SchemaRegistry {
 		designerNames["prop_dynamic"] = static () => new Schema.CDynamicProp();
 		designerNames["prop_dynamic_ornament"] = static () => new Schema.COrnamentProp();
 		designerNames["prop_dynamic_override"] = static () => new Schema.CDynamicPropAlias_prop_dynamic_override();
+		designerNames["prop_parade_float"] = static () => new Schema.CPropParadeFloat();
 		designerNames["prop_physics"] = static () => new Schema.CPhysicsProp();
 		designerNames["prop_physics_override"] = static () => new Schema.CPhysicsPropOverride();
 		designerNames["prop_physics_respawnable"] = static () => new Schema.CPhysicsPropRespawnable();

@@ -85,6 +85,14 @@ public static partial class Schema {
 		/// <summary><c>float32</c>.</summary>
 		public float m_flDashJumpVerticalSpeed { get => Get<float>(__m_flDashJumpVerticalSpeed); set => Set(__m_flDashJumpVerticalSpeed, value); }
 
+		private static readonly SchemaField __m_flFailedAirJumpGroundJumpAirDrag = new("CAbilityJumpVData", "m_flFailedAirJumpGroundJumpAirDrag");
+		/// <summary><c>float32</c>.</summary>
+		public float m_flFailedAirJumpGroundJumpAirDrag { get => Get<float>(__m_flFailedAirJumpGroundJumpAirDrag); set => Set(__m_flFailedAirJumpGroundJumpAirDrag, value); }
+
+		private static readonly SchemaField __m_flFailedAirJumpPenaltyGroundTime = new("CAbilityJumpVData", "m_flFailedAirJumpPenaltyGroundTime");
+		/// <summary><c>float32</c>.</summary>
+		public float m_flFailedAirJumpPenaltyGroundTime { get => Get<float>(__m_flFailedAirJumpPenaltyGroundTime); set => Set(__m_flFailedAirJumpPenaltyGroundTime, value); }
+
 		private static readonly SchemaField __m_flLateJumpGraceWindow = new("CAbilityJumpVData", "m_flLateJumpGraceWindow");
 		/// <summary><c>float32</c>.</summary>
 		public float m_flLateJumpGraceWindow { get => Get<float>(__m_flLateJumpGraceWindow); set => Set(__m_flLateJumpGraceWindow, value); }
@@ -156,6 +164,10 @@ public static partial class Schema {
 		private static readonly SchemaField __m_flZiplineRefundWindow = new("CAbilityJumpVData", "m_flZiplineRefundWindow");
 		/// <summary><c>float32</c>.</summary>
 		public float m_flZiplineRefundWindow { get => Get<float>(__m_flZiplineRefundWindow); set => Set(__m_flZiplineRefundWindow, value); }
+
+		private static readonly SchemaField __m_nFailedAirJumpPenaltyJumpsToMaxAirDrag = new("CAbilityJumpVData", "m_nFailedAirJumpPenaltyJumpsToMaxAirDrag");
+		/// <summary><c>int32</c>.</summary>
+		public int m_nFailedAirJumpPenaltyJumpsToMaxAirDrag { get => Get<int>(__m_nFailedAirJumpPenaltyJumpsToMaxAirDrag); set => Set(__m_nFailedAirJumpPenaltyJumpsToMaxAirDrag, value); }
 
 		private static readonly SchemaField __m_strDashJumpSound = new("CAbilityJumpVData", "m_strDashJumpSound");
 		/// <summary><c>CSoundEventName</c>.</summary>

@@ -13,6 +13,10 @@ public static partial class Schema {
 		static CCitadel_Ability_Climb_Rope ISchemaClass<CCitadel_Ability_Climb_Rope>.New() => new();
 		static string ISchemaClass<CCitadel_Ability_Climb_Rope>.NativeName => "CCitadel_Ability_Climb_Rope";
 
+		private static readonly SchemaField __m_bLatchedNearTop = new("CCitadel_Ability_Climb_Rope", "m_bLatchedNearTop");
+		/// <summary><c>bool</c>. Networked: a write is sent to clients.</summary>
+		public bool m_bLatchedNearTop { get => Get<bool>(__m_bLatchedNearTop); set => Set(__m_bLatchedNearTop, value); }
+
 		private static readonly SchemaField __m_bMouseWheelBind = new("CCitadel_Ability_Climb_Rope", "m_bMouseWheelBind");
 		/// <summary><c>bool</c>.</summary>
 		public bool m_bMouseWheelBind { get => Get<bool>(__m_bMouseWheelBind); set => Set(__m_bMouseWheelBind, value); }

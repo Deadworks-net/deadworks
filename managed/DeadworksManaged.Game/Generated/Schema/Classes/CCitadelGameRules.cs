@@ -277,6 +277,18 @@ public static partial class Schema {
 		/// <summary><c>int32</c>.</summary>
 		public int m_nKothSpawnWarnings { get => Get<int>(__m_nKothSpawnWarnings); set => Set(__m_nKothSpawnWarnings, value); }
 
+		private static readonly SchemaField __m_nKothTrailingBonusGold = new("CCitadelGameRules", "m_nKothTrailingBonusGold");
+		/// <summary><c>int32</c>. Networked: a write is sent to clients.</summary>
+		public int m_nKothTrailingBonusGold { get => Get<int>(__m_nKothTrailingBonusGold); set => Set(__m_nKothTrailingBonusGold, value); }
+
+		private static readonly SchemaField __m_nKothTrailingBonusResist = new("CCitadelGameRules", "m_nKothTrailingBonusResist");
+		/// <summary><c>int32</c>. Networked: a write is sent to clients.</summary>
+		public int m_nKothTrailingBonusResist { get => Get<int>(__m_nKothTrailingBonusResist); set => Set(__m_nKothTrailingBonusResist, value); }
+
+		private static readonly SchemaField __m_nKothTrailingTeam = new("CCitadelGameRules", "m_nKothTrailingTeam");
+		/// <summary><c>int32</c>. Networked: a write is sent to clients.</summary>
+		public int m_nKothTrailingTeam { get => Get<int>(__m_nKothTrailingTeam); set => Set(__m_nKothTrailingTeam, value); }
+
 		private static readonly SchemaField __m_nLastPreGameCount = new("CCitadelGameRules", "m_nLastPreGameCount");
 		/// <summary><c>int32</c>.</summary>
 		public int m_nLastPreGameCount { get => Get<int>(__m_nLastPreGameCount); set => Set(__m_nLastPreGameCount, value); }
@@ -325,9 +337,17 @@ public static partial class Schema {
 		/// <summary><c>GameTime_t</c>. Networked: a write is sent to clients.</summary>
 		public GameTime m_tAbandonTriggerEarlyTime { get => Get<GameTime>(__m_tAbandonTriggerEarlyTime); set => Set(__m_tAbandonTriggerEarlyTime, value); }
 
+		private static readonly SchemaField __m_tAmberRejuvExpireTime = new("CCitadelGameRules", "m_tAmberRejuvExpireTime");
+		/// <summary><c>GameTime_t</c>. Networked: a write is sent to clients.</summary>
+		public GameTime m_tAmberRejuvExpireTime { get => Get<GameTime>(__m_tAmberRejuvExpireTime); set => Set(__m_tAmberRejuvExpireTime, value); }
+
 		private static readonly SchemaField __m_tNextMidBossSpawnTime = new("CCitadelGameRules", "m_tNextMidBossSpawnTime");
 		/// <summary><c>float32</c>. Networked: a write is sent to clients.</summary>
 		public float m_tNextMidBossSpawnTime { get => Get<float>(__m_tNextMidBossSpawnTime); set => Set(__m_tNextMidBossSpawnTime, value); }
+
+		private static readonly SchemaField __m_tSapphireRejuvExpireTime = new("CCitadelGameRules", "m_tSapphireRejuvExpireTime");
+		/// <summary><c>GameTime_t</c>. Networked: a write is sent to clients.</summary>
+		public GameTime m_tSapphireRejuvExpireTime { get => Get<GameTime>(__m_tSapphireRejuvExpireTime); set => Set(__m_tSapphireRejuvExpireTime, value); }
 
 		private static readonly SchemaField __m_tStreetBrawl = new("CCitadelGameRules", "m_tStreetBrawl");
 		/// <summary><c>CStreetBrawlController</c>. Networked: a write is sent to clients.</summary>

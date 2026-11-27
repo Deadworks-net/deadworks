@@ -13,6 +13,10 @@ public static partial class Schema {
 		static ItemDraftBucketing_t ISchemaClass<ItemDraftBucketing_t>.New() => new();
 		static string ISchemaClass<ItemDraftBucketing_t>.NativeName => "ItemDraftBucketing_t";
 
+		private static readonly SchemaField __m_flGoodItemPickRateThreshold = new("ItemDraftBucketing_t", "m_flGoodItemPickRateThreshold");
+		/// <summary><c>float32</c>. Items of this tier without an explicit bucket go in "Good" if their best popular item pick percentage across game phases is at least this.</summary>
+		public float m_flGoodItemPickRateThreshold { get => Get<float>(__m_flGoodItemPickRateThreshold); set => Set(__m_flGoodItemPickRateThreshold, value); }
+
 		private static readonly SchemaField __m_mapBuckets = new("ItemDraftBucketing_t", "m_mapBuckets");
 		/// <summary><c>CUtlOrderedMap&lt;CUtlString, float32&gt;</c>.</summary>
 		public SchemaValueDict<float> m_mapBuckets => new(this, __m_mapBuckets);

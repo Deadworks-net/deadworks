@@ -13,6 +13,10 @@ public static partial class Schema {
 		static CAbility_Fencer_Lunge ISchemaClass<CAbility_Fencer_Lunge>.New() => new();
 		static string ISchemaClass<CAbility_Fencer_Lunge>.NativeName => "CAbility_Fencer_Lunge";
 
+		private static readonly SchemaField __m_FirstCastTime = new("CAbility_Fencer_Lunge", "m_FirstCastTime");
+		/// <summary><c>GameTime_t</c>.</summary>
+		public GameTime m_FirstCastTime { get => Get<GameTime>(__m_FirstCastTime); set => Set(__m_FirstCastTime, value); }
+
 		private static readonly SchemaField __m_RecastEndTime = new("CAbility_Fencer_Lunge", "m_RecastEndTime");
 		/// <summary><c>GameTime_t</c>. Networked: a write is sent to clients.</summary>
 		public GameTime m_RecastEndTime { get => Get<GameTime>(__m_RecastEndTime); set => Set(__m_RecastEndTime, value); }

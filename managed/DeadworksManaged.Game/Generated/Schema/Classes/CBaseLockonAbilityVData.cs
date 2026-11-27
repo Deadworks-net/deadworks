@@ -17,6 +17,10 @@ public static partial class Schema {
 		/// <summary><c>CEmbeddedSubclass&lt;CBaseModifier&gt;</c>.</summary>
 		public CModifierVData? m_TargetModifier => EmbeddedSubclass<CModifierVData>(__m_TargetModifier);
 
+		private static readonly SchemaField __m_bShowLostLOSOnHUD = new("CBaseLockonAbilityVData", "m_bShowLostLOSOnHUD");
+		/// <summary><c>bool</c>.</summary>
+		public bool m_bShowLostLOSOnHUD { get => Get<bool>(__m_bShowLostLOSOnHUD); set => Set(__m_bShowLostLOSOnHUD, value); }
+
 		private static readonly SchemaField __m_strApplyLockonStack = new("CBaseLockonAbilityVData", "m_strApplyLockonStack");
 		/// <summary><c>CSoundEventName</c>.</summary>
 		public string m_strApplyLockonStack => GetBufferString(__m_strApplyLockonStack);

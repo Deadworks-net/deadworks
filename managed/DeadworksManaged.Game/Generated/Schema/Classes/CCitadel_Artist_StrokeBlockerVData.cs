@@ -29,6 +29,10 @@ public static partial class Schema {
 		/// <summary><c>int32</c>.</summary>
 		public int m_nMeleeHits { get => Get<int>(__m_nMeleeHits); set => Set(__m_nMeleeHits, value); }
 
+		private static readonly SchemaField __m_nTrooperMeleeHits = new("CCitadel_Artist_StrokeBlockerVData", "m_nTrooperMeleeHits");
+		/// <summary><c>int32</c>.</summary>
+		public int m_nTrooperMeleeHits { get => Get<int>(__m_nTrooperMeleeHits); set => Set(__m_nTrooperMeleeHits, value); }
+
 		private static readonly SchemaField __m_strDestroySound = new("CCitadel_Artist_StrokeBlockerVData", "m_strDestroySound");
 		/// <summary><c>CSoundEventName</c>.</summary>
 		public string m_strDestroySound => GetBufferString(__m_strDestroySound);

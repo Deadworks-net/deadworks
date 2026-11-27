@@ -11,8 +11,7 @@ public static partial class Schema {
 		ELoot_Invalid = -1,
 		ELoot_GoldIdol = 0,
 		ELoot_RespawnCredit = 1,
-		ELoot_NeutralGold = 2,
-		ELoot_KothCapturePoint = 3,
-		ELoot_LootTypeCount = 4,
+		ELoot_KothCapturePoint = 2,
+		ELoot_LootTypeCount = 3,
 	}
 }

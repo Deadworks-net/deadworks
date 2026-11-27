@@ -12,9 +12,5 @@ public static partial class Schema {
 		internal CCitadel_Ability_RiposteTargetSelect() { }
 		static CCitadel_Ability_RiposteTargetSelect ISchemaClass<CCitadel_Ability_RiposteTargetSelect>.New() => new();
 		static string ISchemaClass<CCitadel_Ability_RiposteTargetSelect>.NativeName => "CCitadel_Ability_RiposteTargetSelect";
-
-		private static readonly SchemaField __pRiposteAbility = new("CCitadel_Ability_RiposteTargetSelect", "pRiposteAbility");
-		/// <summary><c>CCitadel_Ability_Fencer_Riposte*</c>.</summary>
-		public CCitadel_Ability_Fencer_Riposte? pRiposteAbility => EntityPointer<CCitadel_Ability_Fencer_Riposte>(__pRiposteAbility);
 	}
 }

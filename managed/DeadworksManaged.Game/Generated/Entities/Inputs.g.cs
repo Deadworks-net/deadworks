@@ -2164,6 +2164,12 @@ public static class Inputs {
 		public const string SetBreakable = "SetBreakable";
 		public const string SetUnbreakable = "SetUnbreakable";
 	}
+	/// <summary>Inputs of <c>CPropParadeFloat</c>.</summary>
+	public abstract class CPropParadeFloat : CBaseAnimGraph {
+		private protected CPropParadeFloat() { }
+		/// <summary>Spawn a new box on the attachment, replacing the current one.</summary>
+		public const string SpawnBox = "SpawnBox";
+	}
 	/// <summary>Inputs of <c>CRagdollMagnet</c>.</summary>
 	public abstract class CRagdollMagnet : CPointEntity {
 		private protected CRagdollMagnet() { }

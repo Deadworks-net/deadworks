@@ -16,5 +16,9 @@ public static partial class Schema {
 		private static readonly SchemaField __m_GlowParticle = new("CCitadel_Modifier_Low_Health_GlowVData", "m_GlowParticle");
 		/// <summary><c>CResourceNameTyped&lt;CWeakHandle&lt;InfoForResourceTypeIParticleSystemDefinition&gt;&gt;</c>.</summary>
 		public string m_GlowParticle => GetBufferString(__m_GlowParticle);
+
+		private static readonly SchemaField __m_bShowAsLowHealth = new("CCitadel_Modifier_Low_Health_GlowVData", "m_bShowAsLowHealth");
+		/// <summary><c>bool</c>.</summary>
+		public bool m_bShowAsLowHealth { get => Get<bool>(__m_bShowAsLowHealth); set => Set(__m_bShowAsLowHealth, value); }
 	}
 }
