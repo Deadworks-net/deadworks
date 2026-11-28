@@ -742,7 +742,7 @@ public static class ConVars {
 	public static readonly GameConVar<float> citadel_bot_drill_distance = new("citadel_bot_drill_distance");
 	/// <summary>Height in meters the bot drill target flies at. Default <c>8</c>. Flags: release, replicated, gamedll.</summary>
 	public static readonly GameConVar<float> citadel_bot_drill_height = new("citadel_bot_drill_height");
-	/// <summary>Heavy melee charge percent at which the Graves bot drill target parries. Default <c>25</c>. Flags: release, replicated, gamedll.</summary>
+	/// <summary>Heavy melee charge percent at which the Graves bot drill target parries. Default <c>50</c>. Flags: release, replicated, gamedll.</summary>
 	public static readonly GameConVar<float> citadel_bot_drill_parry_charge_percent = new("citadel_bot_drill_parry_charge_percent");
 	/// <summary>Seconds after landing or finishing an attack before the bot drill target returns to its start. Default <c>2</c>. Flags: release, replicated, gamedll.</summary>
 	public static readonly GameConVar<float> citadel_bot_drill_reset_delay = new("citadel_bot_drill_reset_delay");
@@ -1826,7 +1826,7 @@ public static class ConVars {
 	public static readonly GameConVar<Color32> citadel_sat_volume_outline_color = new("citadel_sat_volume_outline_color");
 	/// <summary>Default <c>[255,255,255,255]</c>. Flags: developmentonly, replicated, gamedll, clientdll.</summary>
 	public static readonly GameConVar<Color32> citadel_sat_volume_sat_color = new("citadel_sat_volume_sat_color");
-	/// <summary>If enabled, the Thanksgiving parade floats spawn when the match starts. Default <c>True</c>. Flags: release, replicated, gamedll, clientdll.</summary>
+	/// <summary>If enabled, the Thanksgiving parade floats spawn when the match starts. Default <c>False</c>. Flags: release, replicated, gamedll, clientdll.</summary>
 	public static readonly GameConVar<bool> citadel_seasonal_thanksgiving = new("citadel_seasonal_thanksgiving");
 	/// <summary>Seconds after a parade float's box is broken before a new one appears on the float. Negative never respawns it. Default <c>180</c>. Flags: developmentonly, replicated, gamedll.</summary>
 	public static readonly GameConVar<float> citadel_seasonal_thanksgiving_float_box_respawn_time = new("citadel_seasonal_thanksgiving_float_box_respawn_time");
